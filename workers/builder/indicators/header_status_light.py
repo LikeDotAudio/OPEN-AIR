@@ -6,11 +6,19 @@ class HeaderStatusLightMixin:
     """
     Adds a status indicator circle to the top-right of the GUI.
     """
-    def _build_header_status_light(self):
+    def _build_header_status_light(self, parent_widget, widget_config):
         # 1. Create a Header Frame if it doesn't exist
         if not hasattr(self, 'header_frame'):
-            self.header_frame = ttk.Frame(self)
-            self.header_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
+            self.header_frame = ttk.Frame(parent_widget)
+            
+            # Apply layout from widget_config
+            layout_config = widget_config.get('layout', {})
+            side = getattr(tk, layout_config.get('side', 'top').upper())
+            fill = getattr(tk, layout_config.get('fill', 'none').upper())
+            padx = layout_config.get('padx', 0)
+            pady = layout_config.get('pady', 0)
+            
+            self.header_frame.pack(side=side, fill=fill, padx=padx, pady=pady)
 
         # 2. Create the Canvas for the Dot (Top Right)
         self.status_canvas = tk.Canvas(self.header_frame, width=20, height=20, bg="#F0F0F0", highlightthickness=0)

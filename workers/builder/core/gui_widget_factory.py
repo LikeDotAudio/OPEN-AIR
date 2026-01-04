@@ -30,9 +30,15 @@ class GuiWidgetFactoryMixin:
             "_Panner": self._create_panner,
             "_TrapezoidButton": self._create_trapezoid_button,
             "_TrapezoidButtonToggler": self._create_trapezoid_button_toggler,
+            "_HeaderStatusLight": self._create_header_status_light,
             
             # Complex Adapters (Methods inherited from Adapter Mixins)
             "plot_widget": self._create_plot_widget,
             "_HorizontalMeterWithText": self._create_horizontal_meter,
             "_VerticalMeter": self._create_vertical_meter
         }
+
+    def _create_header_status_light(self, parent_widget, widget_config):
+        self._build_header_status_light(parent_widget, widget_config)
+        return self.header_frame # Assuming _build_header_status_light creates and sets self.header_frame
+

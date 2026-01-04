@@ -38,6 +38,8 @@ class VisaFleetManager:
         
         # Initialize the JSON builder
         self.json_builder = VisaJsonBuilder()
+        # NEW: Initialize the CSV builder
+        self.csv_builder = VisaCsvBuilder()
         # Initialize the MQTT bridge
         self.mqtt_bridge = None
         self.mqtt_bridge = MqttFleetBridge()
@@ -126,6 +128,9 @@ class VisaFleetManager:
 
         self._current_inventory = augmented_inventory
         self.json_builder.save_inventory_to_json(augmented_inventory)
+        
+        # NEW: Trigger CSV regeneration after JSON is saved
+        self.csv_builder.build_csvs_from_json()
         
         # Load the newly saved (and grouped) inventory to ensure MQTT reflects the file structure
         grouped_inventory = self.json_builder.load_grouped_inventory_from_json()

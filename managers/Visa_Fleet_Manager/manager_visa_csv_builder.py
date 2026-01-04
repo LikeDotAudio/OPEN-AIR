@@ -38,6 +38,17 @@ class VisaCsvBuilder:
 
         os.makedirs(self.csv_dir, exist_ok=True)
         
+        # --- NEW: Clear existing CSV files ---
+        debug_logger(message=f"Clearing existing CSV files from {self.csv_dir}...", **_get_log_args())
+        for filename in os.listdir(self.csv_dir):
+            if filename.endswith(".csv"):
+                file_path = os.path.join(self.csv_dir, filename)
+                try:
+                    os.remove(file_path)
+                    debug_logger(message=f"  Removed old file: {filename}", **_get_log_args())
+                except Exception as e:
+                    debug_logger(message=f"  Error removing file {file_path}: {e}", level="ERROR", **_get_log_args())
+        
         with open(self.json_path, 'r') as f:
             try:
                 data = json.load(f)

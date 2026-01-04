@@ -60,7 +60,7 @@ class SplashScreen:
             self.parent.protocol("WM_DELETE_WINDOW", self.hide) # Add this line
             
             # --- Dimensions & Centering (TIGHTENED) ---
-            win_width, win_height = 600, 420
+            win_width, win_height = 600, 470
             screen_width = self.parent.winfo_screenwidth()
             screen_height = self.parent.winfo_screenheight()
             x = (screen_width // 2) - (win_width // 2)
@@ -81,7 +81,7 @@ class SplashScreen:
             tk.Label(self.main_content_frame, text="Zone Awareness Processor", font=("Helvetica", 14), fg="white", bg="black").pack(side=tk.TOP, pady=(0, 5))
             
             # --- 3. Animation Area (TIGHTENED) ---
-            vis_frame = tk.Frame(self.main_content_frame, bg="black", height=200)
+            vis_frame = tk.Frame(self.main_content_frame, bg="black", height=250)
             vis_frame.pack(side=tk.TOP, fill=tk.X, expand=False, pady=5)
             vis_frame.pack_propagate(False)
 

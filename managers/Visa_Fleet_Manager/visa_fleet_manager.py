@@ -53,6 +53,7 @@ class VisaFleetManager:
         # Initialize Supervisor (Headless)
         self.fleet_supervisor = VisaFleetSupervisor(manager_ref=self)
         self._running = False
+        self.initial_scan_complete_event = threading.Event()
         
         debug_logger(message=f"💳 ✅ VisaFleetManager initialized. Supervisor ready.", **_get_log_args())
 
@@ -78,10 +79,25 @@ class VisaFleetManager:
 
     def trigger_scan(self):
         """Public API to start a scan."""
+        self.initial_scan_complete_event.clear()
         debug_logger("💳 Core: Scan Triggered via API.", **_get_log_args())
         self._publish_scan_status("Start", {"status": "scanning"})
         num_devices_found = self.fleet_supervisor.scan_and_manage_fleet()
         self._publish_scan_status("Complete", {"status": "ready", "num_devices": num_devices_found})
+        self.initial_scan_complete_event.set()
+
+    def wait_for_initial_scan(self, timeout=None):
+        """
+        Blocks the calling thread until the initial device scan is complete.
+        Returns True if the scan completed, False if it timed out.
+        """
+        debug_logger("⏳ Waiting for initial VISA fleet scan to complete...", **_get_log_args())
+        completed = self.initial_scan_complete_event.wait(timeout=timeout)
+        if completed:
+            debug_logger("✅ Initial VISA fleet scan complete.", **_get_log_args())
+        else:
+            debug_logger("⚠️ Timed out waiting for initial VISA fleet scan.", **_get_log_args())
+        return completed
 
     def _publish_scan_status(self, status, payload):
         """Publishes the current scan status to MQTT."""

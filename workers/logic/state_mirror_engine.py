@@ -107,10 +107,17 @@ class StateMirrorEngine:
             
             cached_data = {}
             if self.state_cache_manager:
-                prefix = data_topic + '/'
+                # Look for the '/data/' sub-topic created by the new JSON structure
+                prefix = data_topic + '/data/'
                 for topic, payload in self.state_cache_manager.cache.items():
-                    if topic.startswith(prefix) and topic != data_topic: # Exclude the base topic itself
+                    if topic.startswith(prefix):
                         item_key = topic[len(prefix):]
+                        
+                        # We only want direct children of /data/, e.g. .../Table/data/23
+                        # not .../Table/data/23/some_other_field
+                        if '/' in item_key:
+                            continue
+
                         try:
                             # The cache stores the raw payload dict, not JSON string
                             cached_data[item_key] = payload

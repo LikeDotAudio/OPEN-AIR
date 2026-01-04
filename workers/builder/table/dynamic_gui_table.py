@@ -23,6 +23,15 @@ class GuiTableCreatorMixin:
         table_height = config.get("height", 10)
         tree = ttk.Treeview(container, show='headings', height=table_height, style="Custom.Treeview")
 
+        # Immediately set headers from config if they exist
+        initial_headers = config.get("headers", [])
+        if initial_headers:
+            tree['columns'] = initial_headers
+            for col in initial_headers:
+                tree.heading(col, text=col)
+                tree.column(col, width=120, minwidth=60, stretch=tk.YES, anchor='w')
+            debug_logger(message=f"--- Table '{label}' initialized with headers from config.", **_get_log_args())
+
         vsb = ttk.Scrollbar(container, orient="vertical", command=tree.yview)
         hsb = ttk.Scrollbar(container, orient="horizontal", command=tree.xview)
         tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
@@ -57,20 +66,20 @@ class GuiTableCreatorMixin:
                 device_key_map.clear()
 
                 if not data:
-                    tree['columns'] = []
-                    debug_logger(message=f"--- Table '{label}' cleared (no data).", **_get_log_args())
+                    debug_logger(message=f"--- Table '{label}' cleared (no data), but headers preserved.", **_get_log_args())
                     return
 
-                debug_logger(message="--- Getting columns.", **_get_log_args())
-                first_item_key = next(iter(data))
-                first_item = data[first_item_key]
-                columns = list(first_item.keys())
-                
-                debug_logger(message=f"--- Columns: {columns}", **_get_log_args())
-                tree['columns'] = columns
-                for col in columns:
-                    tree.heading(col, text=col)
-                    tree.column(col, width=120, minwidth=60, stretch=tk.YES, anchor='w')
+                columns = tree['columns']
+                # If columns aren't set for some reason, derive from data as a fallback.
+                if not columns and data:
+                    debug_logger(message="--- Columns not pre-configured. Deriving from data as fallback.", **_get_log_args())
+                    first_item_key = next(iter(data))
+                    first_item = data[first_item_key]
+                    columns = list(first_item.keys())
+                    tree['columns'] = columns
+                    for col in columns:
+                        tree.heading(col, text=col)
+                        tree.column(col, width=120, minwidth=60, stretch=tk.YES, anchor='w')
 
                 debug_logger(message="--- Populating rows and publishing static data if data_topic is present.", **_get_log_args())
                 for item_key, item_value in data.items():
@@ -93,11 +102,17 @@ class GuiTableCreatorMixin:
                 if topic.endswith("/selected"):
                     return
                     
-                if not topic.startswith(data_topic):
-                    debug_logger(message="--- Topic does not match, ignoring.", **_get_log_args())
+                # Handle new topics like .../Table/data/23
+                data_prefix = data_topic + '/data/'
+                if not topic.startswith(data_prefix):
+                    debug_logger(message=f"--- Topic '{topic}' does not match data prefix '{data_prefix}', ignoring.", **_get_log_args())
                     return
                 
-                device_key = topic[len(data_topic)+1:]
+                device_key = topic[len(data_prefix):]
+                # Ignore deeper nested topics
+                if '/' in device_key:
+                    debug_logger(message=f"--- Topic '{topic}' has extra segments, ignoring.", **_get_log_args())
+                    return
                 debug_logger(message=f"--- Device key: {device_key}", **_get_log_args())
 
                 if not payload:

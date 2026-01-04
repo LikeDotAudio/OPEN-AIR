@@ -204,12 +204,17 @@ class VisaJsonBuilder:
             if "Connection" not in grouped_data[device_type]["YAK"][model]:
                 grouped_data[device_type]["YAK"][model]["Connection"] = {}
             if "Table" not in grouped_data[device_type]["YAK"][model]["Connection"]:
-                grouped_data[device_type]["YAK"][model]["Connection"]["Table"] = {}
+                grouped_data[device_type]["YAK"][model]["Connection"]["Table"] = {
+                    "type": "OcaTable",
+                    "description": "Discovered Devices",
+                    "headers": ["type", "resource_string", "ip_address", "interface_port", "gpib_address", "status", "manufacturer", "model", "serial_number", "firmware", "idn_string", "device_type", "notes", "allocated", "connection_timestamp"],
+                    "data": {}
+                }
             
             # The innermost level now directly contains the device details (BLOB)
             # We use gpib_address as the final key to avoid lists.
             # Assuming gpib_address is unique within an interface_port for a given model/type.
-            grouped_data[device_type]["YAK"][model]["Connection"]["Table"][gpib_address] = device
+            grouped_data[device_type]["YAK"][model]["Connection"]["Table"]["data"][gpib_address] = device
         return grouped_data
 
     def _flatten_grouped_inventory(self, grouped_data):
@@ -227,7 +232,9 @@ class VisaJsonBuilder:
                             # Iterate through the "Connection" level
                             if "Connection" in model_group and isinstance(model_group["Connection"], dict):
                                 if "Table" in model_group["Connection"] and isinstance(model_group["Connection"]["Table"], dict):
-                                    for device_blob in model_group["Connection"]["Table"].values(): # Directly access device_blob here
-                                        if isinstance(device_blob, dict):
-                                            flat_devices.append(device_blob)
+                                    table_wrapper = model_group["Connection"]["Table"]
+                                    if "data" in table_wrapper and isinstance(table_wrapper["data"], dict):
+                                        for device_blob in table_wrapper["data"].values():
+                                            if isinstance(device_blob, dict):
+                                                flat_devices.append(device_blob)
         return flat_devices

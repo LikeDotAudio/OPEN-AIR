@@ -31,33 +31,8 @@ def generate_topic_path_from_filepath(file_path: Path, project_root: Path) -> st
                part.startswith("bottom_"):
                 continue
 
-            # --- REVISED LOGIC FOR CONSISTENCY AND ROBUSTNESS ---
-            # The function applies specific rules for certain components based on previous requirements:
-            # - "8_experiments" is preserved as is.
-            # - "5_Control_Elements" is transformed to "5_control_elements".
-            # - "2_Graphing" has its prefix removed, but casing is preserved.
-            #
-            # For all other components, a general rule is applied: remove numerical prefixes,
-            # clean spaces, and convert to lowercase. This addresses the user's query about
-            # differing treatments and ensures robustness against unusual characters like spaces.
-
-            processed_part = part # Default to original part
-
-            if part == "8_experiments":
-                processed_part = part # Preserve "8_experiments" exactly.
-            elif part == "5_Control_Elements":
-                # Specific transformation for control elements to "5_control_elements".
-                processed_part = "5_control_elements"
-            elif part == "2_Graphing":
-                # Specific handling for graphing: remove numerical prefix, preserve casing.
-                processed_part = re.sub(r'^\d+_', '', part)
-            else:
-                # General rule for all other parts:
-                # 1. Remove numerical prefix (e.g., "1_", "3_").
-                # 2. Replace spaces with underscores for better topic structure.
-                # 3. Convert to lowercase.
-                cleaned_part = re.sub(r'^\d+_', '', part)
-                processed_part = cleaned_part.replace(" ", "_") # Removed .lower()
+            # General rule: remove numerical prefix, preserve case
+            processed_part = re.sub(r'^\d+_', '', part).replace(" ", "_")
 
             # Ensure the processed part is not empty after transformations
             if processed_part:
@@ -72,3 +47,17 @@ def generate_topic_path_from_filepath(file_path: Path, project_root: Path) -> st
         # Log any other unexpected errors during path processing
         print(f"Error generating topic path from filepath {file_path}: {e}")
         return ""
+
+def generate_base_topic(module_name: str) -> str:
+    """
+    Generates a standardized base topic string.
+    e.g., OPEN-AIR/yak/bandwidth
+    """
+    # module_name could be something like "yak/bandwidth", so we just prepend OPEN-AIR
+    return f"OPEN-AIR/{module_name}"
+
+def generate_widget_topic(base_topic: str, widget_id: str) -> str:
+    """
+    Generates a standardized widget topic string from a base topic and a widget ID.
+    """
+    return f"{base_topic}/{widget_id}"

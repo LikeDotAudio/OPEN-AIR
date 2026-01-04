@@ -17,7 +17,7 @@ class HiddenVisibilityManagerMixin:
         self.visibility_topic = get_topic(
             self.state_mirror_engine.base_topic, 
             self.base_mqtt_topic_from_path, 
-            "Visibility"
+            "visibility/visible"
         )
 
         # Bind to Tkinter Map (Show) and Unmap (Hide) events
@@ -28,6 +28,8 @@ class HiddenVisibilityManagerMixin:
     def _on_gui_visible(self, event):
         """User can see this tab."""
         self._publish_visibility(True)
+        if hasattr(self, '_on_geometry_change'):
+            self._on_geometry_change(event)
 
     def _on_gui_hidden(self, event):
         """User switched tabs or minimized."""

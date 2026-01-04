@@ -319,6 +319,7 @@ class Application(ttk.Frame):
                 
                 notebook.bind('<Control-Button-1>', self.window_manager.tear_off_tab)
                 notebook.bind('<<NotebookTabChanged>>', self._on_tab_change)
+                notebook.bind('<<NotebookTabChanged>>', self._handle_tab_visibility, add='+')
                 
                 for tab_info in layout_data['tabs']:
                     tab_dir_path = tab_info['path']
@@ -495,3 +496,18 @@ class Application(ttk.Frame):
                     message=f"❌ Error in _on_tab_change: {e}",
                     **_get_log_args()
                 )
+
+    def _handle_tab_visibility(self, event):
+        notebook = event.widget
+        selected_tab_id = notebook.select()
+        
+        for tab_id in notebook.tabs():
+            tab_frame = notebook.nametowidget(tab_id)
+            if tab_frame.winfo_children():
+                content_widget = tab_frame.winfo_children()[0]
+                if tab_id == selected_tab_id:
+                    if hasattr(content_widget, '_on_gui_visible'):
+                        content_widget._on_gui_visible(event)
+                else:
+                    if hasattr(content_widget, '_on_gui_hidden'):
+                        content_widget._on_gui_hidden(event)

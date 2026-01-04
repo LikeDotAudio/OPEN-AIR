@@ -15,7 +15,7 @@ class HiddenGeometryManagerMixin:
         self.geometry_topic = get_topic(
             self.state_mirror_engine.base_topic,
             self.base_mqtt_topic_from_path,
-            "geometry"
+            "visibility/geometry"
         )
         
         self.bind("<Configure>", self._on_geometry_change)

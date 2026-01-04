@@ -20,7 +20,7 @@ class HiddenBreakoffManagerMixin:
         self.breakoff_topic = get_topic(
             self.state_mirror_engine.base_topic,
             self.base_mqtt_topic_from_path,
-            "breakoff"
+            "visibility/breakoff"
         )
         
         # Check the state when the widget is mapped
@@ -66,6 +66,7 @@ class HiddenBreakoffManagerMixin:
             if event.widget == self.toplevel_window:
                 self.is_broken_off = False
                 self.toplevel_window = None
+                self._publish_breakoff_state()
                 # Don't publish here, as the visibility snitch will handle the destroy event of the widget itself.
                 # and we might not be connected to the broker anymore
                 

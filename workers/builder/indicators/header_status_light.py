@@ -26,6 +26,7 @@ class HeaderStatusLightMixin:
         # 4. Subscribe to the Monitor Worker
         if self.state_mirror_engine:
                     self.state_mirror_engine.subscriber_router.subscribe_to_topic("OPEN-AIR/GUI/Global/Header/StatusLight", self._update_status_light)
+                    self.state_mirror_engine.subscriber_router.subscribe_to_topic("OPENAIR/GUI/Global/Header/StatusLight", self._update_status_light)
 
     def _update_status_light(self, topic, payload):
         try:

@@ -11,8 +11,6 @@ class GuiRebuilderMixin:
 
     def _rebuild_gui(self):
         try:
-            self.pack_forget()
-
             # Destroy all children in the scroll frame
             for child in self.scroll_frame.winfo_children():
                 child.destroy()
@@ -26,4 +24,3 @@ class GuiRebuilderMixin:
 
         except Exception as e:
             debug_logger(message=f"❌ Error in _rebuild_gui: {e}", **_get_log_args())
-            self.pack(fill=tk.BOTH, expand=True)

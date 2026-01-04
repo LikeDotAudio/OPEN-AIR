@@ -47,7 +47,17 @@ class FluxPlotter(tk.Frame):
         self._process_dataset_config()
         self._load_all_initial_data()
         
-        debug_logger(message=f"🧪 FluxPlotter '{self.widget_id}' initialized!", **_get_log_args())
+        self.bind("<Configure>", self._on_resize)
+
+    def _on_resize(self, event):
+        if hasattr(self, 'fig'):
+            w_pixels = event.width
+            h_pixels = event.height
+            dpi = self.fig.get_dpi()
+            
+            if dpi > 0 and w_pixels > 1 and h_pixels > 1:
+                self.fig.set_size_inches(w_pixels / dpi, h_pixels / dpi)
+                graph_updater.autoscale_and_redraw(self.ax, self.canvas)
 
     def _initialize_plot_elements(self):
         """Initializes plot elements like lines, styles, and interactions."""

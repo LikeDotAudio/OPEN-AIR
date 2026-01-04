@@ -39,7 +39,7 @@
                                 "device_type": "Spectrum",
                                 "notes": "Handheld (100 kHz - 3 GHz)",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-04T14:56:16.871711"
+                                "connection_timestamp": "2026-01-04T15:01:39.913808"
                             }
                         }
                     }
@@ -87,7 +87,7 @@
                                 "device_type": "DMM",
                                 "notes": "6.5 Digit Benchtop Standard",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-04T14:56:16.871713"
+                                "connection_timestamp": "2026-01-04T15:01:39.913810"
                             }
                         }
                     }

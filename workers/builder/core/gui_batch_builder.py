@@ -81,7 +81,6 @@ class GuiBatchBuilderMixin:
                 self.after(5, lambda: self._create_widgets_in_batches(parent_frame, widget_configs, path_prefix, override_cols, index, row))
             else:
                 self._on_frame_configure()
-                self.pack(fill=tk.BOTH, expand=True)
 
                 app_constants.PERFORMANCE_MODE = False
 
@@ -91,7 +90,6 @@ class GuiBatchBuilderMixin:
         except Exception as e:
             tb = traceback.format_exc()
             debug_logger(message=f"❌🔥 CRITICAL BATCH PROCESSOR FAILURE! {e}\n{tb}", **_get_log_args())
-            self.pack(fill=tk.BOTH, expand=True)
         
     def _create_dynamic_widgets(self, parent_frame, data, path_prefix="", override_cols=None):
         try:

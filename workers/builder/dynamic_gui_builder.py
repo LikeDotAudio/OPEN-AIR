@@ -136,6 +136,8 @@ class DynamicGuiBuilder(
         
         self.main_content_frame = ttk.Frame(self)
         self.main_content_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+        self.main_content_frame.grid_rowconfigure(0, weight=1)
+        self.main_content_frame.grid_columnconfigure(0, weight=1)
         
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         self.canvas = tk.Canvas(self.main_content_frame, background=colors["bg"], bd=0, highlightthickness=0)
@@ -148,8 +150,8 @@ class DynamicGuiBuilder(
         self.scroll_frame.bind("<Configure>", self._on_frame_configure)
         self.canvas.bind("<Configure>", self._on_canvas_configure)
         
-        self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-        self.scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        self.canvas.grid(row=0, column=0, sticky="nsew")
+        self.scrollbar.grid(row=0, column=1, sticky="ns")
 
         # 3. Reload Button
         self.button_frame = ttk.Frame(self)
@@ -167,4 +169,4 @@ class DynamicGuiBuilder(
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 
     def _on_canvas_configure(self, event=None):
-        self.canvas.itemconfig(self.canvas.find_withtag("all")[0], width=event.width)
+        self.canvas.itemconfig(self.canvas.find_withtag("all")[0], width=event.width, height=event.height)

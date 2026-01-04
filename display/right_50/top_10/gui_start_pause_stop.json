@@ -1,4 +1,14 @@
 {
+  "HeaderStatus": {
+    "type": "_HeaderStatusLight",
+    "description": "Global Status Indicator for the Header",
+    "layout": {
+      "side": "top",
+      "fill": "x",
+      "padx": 5,
+      "pady": 2
+    }
+  },
   "Buttons": {
     "type": "_GuiButtonToggler",
     "AES70": "OcaTransportActuator",

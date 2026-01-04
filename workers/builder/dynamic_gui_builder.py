@@ -54,7 +54,6 @@ from .audio.dynamic_gui_create_needle_vu_meter import NeedleVUMeterCreatorMixin
 from .audio.dynamic_gui_create_panner import PannerCreatorMixin
 from .audio.dynamic_gui_create_custom_horizontal_fader import CustomHorizontalFaderCreatorMixin
 from .audio.dynamic_gui_create_trapezoid_toggler import TrapezoidButtonTogglerCreatorMixin
-from .indicators.header_status_light import HeaderStatusLightMixin
 
 class DynamicGuiBuilder(
     ttk.Frame,
@@ -73,7 +72,6 @@ class DynamicGuiBuilder(
     HiddenGeometryManagerMixin,
     HiddenBreakoffManagerMixin,
     # Indicators
-    HeaderStatusLightMixin,
     # Utilities & Standard Widgets
     MousewheelScrollMixin,
     LabelFromConfigCreatorMixin,
@@ -131,8 +129,6 @@ class DynamicGuiBuilder(
         # 2. GUI Scaffolding
         self._apply_styles(theme_name=DEFAULT_THEME)
         self.pack(fill=tk.BOTH, expand=True)
-
-        self._build_header_status_light()
         
         self.main_content_frame = ttk.Frame(self)
         self.main_content_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)

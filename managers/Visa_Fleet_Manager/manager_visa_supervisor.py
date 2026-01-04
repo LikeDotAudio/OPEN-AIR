@@ -55,37 +55,53 @@ class VisaFleetSupervisor:
     def scan_and_manage_fleet(self):
         """
         Performs a full scan of VISA resources, fingerprints them, and manages proxies.
+        This scan is now controlled by settings in config.ini.
         """
         if not self.scan_lock.acquire(blocking=False):
             debug_logger("💳 ℹ️ FleetSupervisor: Scan already in progress. Skipping new scan.", **_get_log_args())
             return
         
         try:
+            from workers.setup.config_reader import Config
+            app_constants = Config.get_instance()
+
             debug_logger("💳 🔍 FleetSupervisor: Starting comprehensive fleet scan...", **_get_log_args())
             
             potential_targets = []
             
-            # 1. Discover USB/Local devices
-            debug_logger("💳 🔍 Discovering USB/Local devices...", **_get_log_args())
-            usb_resources = manager_visa_USB.discover_usb_devices(self.resource_manager)
-            debug_logger(f"💳 🔍 USB/Local resources found: {usb_resources}", **_get_log_args())
-            for res_str in usb_resources:
-                potential_targets.append({"Type": "LOCAL", "Resource": res_str})
+            # 1. Discover USB/Local devices (conditional)
+            if app_constants.SCAN_USB:
+                debug_logger("💳 🔍 Discovering USB/Local devices...", **_get_log_args())
+                usb_resources = manager_visa_USB.discover_usb_devices(self.resource_manager)
+                debug_logger(f"💳 🔍 USB/Local resources found: {usb_resources}", **_get_log_args())
+                for res_str in usb_resources:
+                    potential_targets.append({"Type": "LOCAL", "Resource": res_str})
+            else:
+                debug_logger("💳 ⏩ Skipping USB device scan as per config.", **_get_log_args())
             
             # 2. Discover IP devices (Dedicated and Gateways)
-            debug_logger("💳 🔍 Discovering IP devices...", **_get_log_args())
+            # We discover both, then conditionally add them to the target list.
+            debug_logger("💳 🔍 Discovering potential IP devices...", **_get_log_args())
             dedicated_ips, gateway_ips = manager_visa_IP.discover_ip_devices()
-            debug_logger(f"💳 🔍 Dedicated IPs found: {dedicated_ips}", **_get_log_args())
-            debug_logger(f"💳 🔍 Gateway IPs found: {gateway_ips}", **_get_log_args())
-            for ip in dedicated_ips:
-                potential_targets.append({"Type": "DEDICATED", "Resource": f"TCPIP::{ip}::INSTR"})
-            
-            # 3. Discover Gateway devices
-            debug_logger("💳 🔍 Discovering Gateway devices...", **_get_log_args())
-            gateway_resources = manager_visa_Gateway.discover_gateway_devices(gateway_ips)
-            debug_logger(f"💳 🔍 Gateway resources found: {gateway_resources}", **_get_log_args())
-            for res_str in gateway_resources:
-                potential_targets.append({"Type": "GATEWAY", "Resource": res_str})
+
+            # Conditionally add DEDICATED (Direct IP) devices
+            if app_constants.SCAN_IP_DIRECT:
+                debug_logger(f"💳 🔍 Processing {len(dedicated_ips)} potential Dedicated IPs...", **_get_log_args())
+                for ip in dedicated_ips:
+                    potential_targets.append({"Type": "DEDICATED", "Resource": f"TCPIP::{ip}::INSTR"})
+            else:
+                debug_logger("💳 ⏩ Skipping Direct IP device scan as per config.", **_get_log_args())
+
+            # 3. Discover Gateway devices (conditional)
+            if app_constants.SCAN_GATEWAYS:
+                debug_logger(f"💳 🔍 Processing {len(gateway_ips)} potential Gateway IPs...", **_get_log_args())
+                gateway_resources = manager_visa_Gateway.discover_gateway_devices(gateway_ips)
+                debug_logger(f"💳 🔍 Gateway resources found: {gateway_resources}", **_get_log_args())
+                for res_str in gateway_resources:
+                    potential_targets.append({"Type": "GATEWAY", "Resource": res_str})
+            else:
+                debug_logger("💳 ⏩ Skipping Gateway device scan as per config.", **_get_log_args())
+
 
             debug_logger(f"💳 🔍 Final list of potential targets ({len(potential_targets)}): {potential_targets}", **_get_log_args())
             debug_logger(f"   ⏳ Pausing 2s for settling after discovery phases...", **_get_log_args())

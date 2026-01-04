@@ -30,6 +30,16 @@ class Config:
     MQTT_RETAIN_BEHAVIOR = False # New default value
     MQTT_BASE_TOPIC = "OPEN-AIR" # New default value
 
+    # --- Scan Settings Defaults ---
+    SCAN_GATEWAYS = True
+    SCAN_USB = True
+    SCAN_IP_DIRECT = True
+
+    # --- Scan Settings Defaults ---
+    SCAN_GATEWAYS = True
+    SCAN_USB = True
+    SCAN_IP_DIRECT = True
+
     def __init__(self):
         # This __init__ will only be called once due to the singleton pattern
         if hasattr(self, '_initialized') and self._initialized:
@@ -115,6 +125,16 @@ class Config:
         
         if 'Protocols' in config:
             pass
+        
+        if 'ScanSettings' in config:
+            self.SCAN_GATEWAYS = config['ScanSettings'].getboolean('scan_gateways', self.SCAN_GATEWAYS)
+            self.SCAN_USB = config['ScanSettings'].getboolean('scan_usb', self.SCAN_USB)
+            self.SCAN_IP_DIRECT = config['ScanSettings'].getboolean('scan_ip_direct', self.SCAN_IP_DIRECT)
+        
+        if 'ScanSettings' in config:
+            self.SCAN_GATEWAYS = config['ScanSettings'].getboolean('scan_gateways', self.SCAN_GATEWAYS)
+            self.SCAN_USB = config['ScanSettings'].getboolean('scan_usb', self.SCAN_USB)
+            self.SCAN_IP_DIRECT = config['ScanSettings'].getboolean('scan_ip_direct', self.SCAN_IP_DIRECT)
         
         debug_logger(message="--- Loaded Debug Settings ---", **_get_log_args())
         debug_logger(message=f"ENABLE_DEBUG_MODE: {self.ENABLE_DEBUG_MODE}", **_get_log_args())

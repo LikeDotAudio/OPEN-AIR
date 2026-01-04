@@ -3,6 +3,25 @@
         "type": "OcaTable",
         "description": "Discovered Devices",
         "headers": ["type", "resource_string", "ip_address", "interface_port", "gpib_address", "status", "manufacturer", "model", "serial_number", "firmware", "idn_string", "device_type", "notes", "allocated", "connection_timestamp"],
-        "data": {}
+        "data": {
+    
+
+                            "TESTING_SHOULDBE_DISPLAYED": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,4::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "4",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "34401A",
+                                "serial_number": "0",
+                                "firmware": "11-5-3",
+                                "idn_string": "HEWLETT-PACKARD,34401A,0,11-5-3",
+                                "device_type": "DMM",
+                                "notes": "6.5 Digit Benchtop Standard",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-03T23:07:41.029231"
+                            }}
     }
 }

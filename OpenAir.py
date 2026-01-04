@@ -76,7 +76,17 @@ def _initialize_application(root, splash):
             return
         # Debug: Inspect managers dictionary
         debug_logger(message=f"✅ Managers launched: {managers}", **_get_log_args())
-        # Now that the splash screen is visible, proceed with building the main display.
+
+        # --- WAIT FOR INITIAL SCAN ---
+        # The splash screen will remain visible until the initial device discovery is complete.
+        visa_fleet_manager = managers.get("visa_fleet_manager")
+        if visa_fleet_manager:
+            # Wait for the scan to finish, with a timeout of 60 seconds.
+            visa_fleet_manager.wait_for_initial_scan(timeout=60)
+        else:
+            debug_logger(message="⚠️ Visa_fleet_manager not found in managers dict, cannot wait for scan.", **_get_log_args())
+
+        # Now that the scan is complete, proceed with building the main display.
         app = action_open_display(root, splash,
                                   mqtt_connection_manager=managers["mqtt_connection_manager"],
                                   subscriber_router=managers["subscriber_router"],

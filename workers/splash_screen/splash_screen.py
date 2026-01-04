@@ -59,8 +59,8 @@ class SplashScreen:
             self.splash_window.configure(bg='black')
             self.parent.protocol("WM_DELETE_WINDOW", self.hide) # Add this line
             
-            # --- Dimensions & Centering ---
-            win_width, win_height = 600, 500
+            # --- Dimensions & Centering (TIGHTENED) ---
+            win_width, win_height = 600, 420
             screen_width = self.parent.winfo_screenwidth()
             screen_height = self.parent.winfo_screenheight()
             x = (screen_width // 2) - (win_width // 2)
@@ -68,24 +68,21 @@ class SplashScreen:
             self.splash_window.geometry(f'{win_width}x{win_height}+{x}+{y}')
             
             self.main_content_frame = tk.Frame(self.splash_window, bg="black")
-            self.main_content_frame.pack(expand=True, fill=tk.BOTH, padx=20, pady=20)
+            self.main_content_frame.pack(expand=True, fill=tk.BOTH, padx=20, pady=10)
 
-            # --- 1. Header ---
+            # --- 1. Header (TIGHTENED) ---
             header_frame = tk.Frame(self.main_content_frame, bg="black")
-            header_frame.pack(side=tk.TOP, pady=(10, 5)) 
+            header_frame.pack(side=tk.TOP, pady=(0, 5)) 
 
             tk.Label(header_frame, text="Open ", font=("Helvetica", 36, "normal"), fg="#FF6B35", bg="black").pack(side=tk.LEFT)
             tk.Label(header_frame, text="Air", font=("Helvetica", 36, "bold"), fg="#33A1FD", bg="black").pack(side=tk.LEFT)
 
-            # --- 2. Sub-header ---
-            tk.Label(self.main_content_frame, text="Zone Awareness Processor", font=("Helvetica", 14), fg="white", bg="black").pack(side=tk.TOP, pady=(5, 10))
+            # --- 2. Sub-header (TIGHTENED) ---
+            tk.Label(self.main_content_frame, text="Zone Awareness Processor", font=("Helvetica", 14), fg="white", bg="black").pack(side=tk.TOP, pady=(0, 5))
             
-            # self.status_label = tk.Label(self.main_content_frame, text="Initializing...", fg="white", bg="black", font=("Helvetica", 10)) # Eliminated status label
-            # self.status_label.pack(side=tk.TOP, pady=5)
-
-            # --- 3. Animation Area (Now a GIF) ---
-            vis_frame = tk.Frame(self.main_content_frame, bg="black", height=250)
-            vis_frame.pack(side=tk.TOP, fill=tk.X, expand=False, pady=10)
+            # --- 3. Animation Area (TIGHTENED) ---
+            vis_frame = tk.Frame(self.main_content_frame, bg="black", height=200)
+            vis_frame.pack(side=tk.TOP, fill=tk.X, expand=False, pady=5)
             vis_frame.pack_propagate(False)
 
             if PIL_AVAILABLE:
@@ -99,9 +96,9 @@ class SplashScreen:
             else:
                 tk.Label(vis_frame, text="[Image Libraries Missing]", fg="#333", bg="black").pack(expand=True)
 
-            # --- 4. Lyrics ---
+            # --- 4. Lyrics (TIGHTENED) ---
             self.lyrics_label = tk.Label(self.main_content_frame, text="", fg="gray", bg="black", font=("Helvetica", 10, "italic"))
-            self.lyrics_label.pack(side=tk.BOTTOM, pady=(10, 0))
+            self.lyrics_label.pack(side=tk.BOTTOM, pady=(5, 0))
 
             # --- Data & Logic ---
             self.lyrics = []
@@ -163,6 +160,11 @@ class SplashScreen:
         self.gif_label.config(image=frame)
         
         self.gif_frame_index = (self.gif_frame_index + 1) % len(self.photo_images)
+
+        # When the GIF loops back to the first frame, cycle the lyrics.
+        if self.gif_frame_index == 0 and self.lyrics:
+            self.lyric_index = (self.lyric_index + 1) % len(self.lyrics)
+            self.lyrics_label.config(text=self.lyrics[self.lyric_index])
         
         self.gif_animation_job = self.splash_window.after(self.gif_frame_duration, self._update_gif_frame)
 

@@ -1,0 +1,333 @@
+{
+    "Spectrum": {
+        "YAK": {
+            "N9340B": {
+                "Connection": {
+                    "Table": {
+                        "type": "OcaTable",
+                        "description": "Discovered Devices",
+                        "headers": [
+                            "type",
+                            "resource_string",
+                            "ip_address",
+                            "interface_port",
+                            "gpib_address",
+                            "status",
+                            "manufacturer",
+                            "model",
+                            "serial_number",
+                            "firmware",
+                            "idn_string",
+                            "device_type",
+                            "notes",
+                            "allocated",
+                            "connection_timestamp"
+                        ],
+                        "data": {
+                            "Direct": {
+                                "type": "DEDICATED",
+                                "resource_string": "TCPIP::44.44.44.66::INSTR",
+                                "ip_address": "44.44.44.66",
+                                "interface_port": "Ethernet",
+                                "gpib_address": "Direct",
+                                "status": "CONNECTED",
+                                "manufacturer": "Keysight Technologies",
+                                "model": "N9340B",
+                                "serial_number": "CN03480580",
+                                "firmware": "A.02.07",
+                                "idn_string": "Keysight Technologies,N9340B,CN03480580,A.02.07",
+                                "device_type": "Spectrum",
+                                "notes": "Handheld (100 kHz - 3 GHz)",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:01:46.876805"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Generator": {
+        "YAK": {
+            "33220A": {
+                "Connection": {
+                    "Table": {
+                        "type": "OcaTable",
+                        "description": "Discovered Devices",
+                        "headers": [
+                            "type",
+                            "resource_string",
+                            "ip_address",
+                            "interface_port",
+                            "gpib_address",
+                            "status",
+                            "manufacturer",
+                            "model",
+                            "serial_number",
+                            "firmware",
+                            "idn_string",
+                            "device_type",
+                            "notes",
+                            "allocated",
+                            "connection_timestamp"
+                        ],
+                        "data": {
+                            "Direct": {
+                                "type": "DEDICATED",
+                                "resource_string": "TCPIP::44.44.44.33::INSTR",
+                                "ip_address": "44.44.44.33",
+                                "interface_port": "Ethernet",
+                                "gpib_address": "Direct",
+                                "status": "CONNECTED",
+                                "manufacturer": "Agilent Technologies",
+                                "model": "33220A",
+                                "serial_number": "MY44044028",
+                                "firmware": "2.07-2.06-22-2",
+                                "idn_string": "Agilent Technologies,33220A,MY44044028,2.07-2.06-22-2",
+                                "device_type": "Generator",
+                                "notes": "20 MHz Arbitrary Waveform",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:01:46.876803"
+                            }
+                        }
+                    }
+                }
+            },
+            "33210A": {
+                "Connection": {
+                    "Table": {
+                        "type": "OcaTable",
+                        "description": "Discovered Devices",
+                        "headers": [
+                            "type",
+                            "resource_string",
+                            "ip_address",
+                            "interface_port",
+                            "gpib_address",
+                            "status",
+                            "manufacturer",
+                            "model",
+                            "serial_number",
+                            "firmware",
+                            "idn_string",
+                            "device_type",
+                            "notes",
+                            "allocated",
+                            "connection_timestamp"
+                        ],
+                        "data": {
+                            "Direct": {
+                                "type": "DEDICATED",
+                                "resource_string": "TCPIP::44.44.44.156::INSTR",
+                                "ip_address": "44.44.44.156",
+                                "interface_port": "Ethernet",
+                                "gpib_address": "Direct",
+                                "status": "CONNECTED",
+                                "manufacturer": "Agilent Technologies",
+                                "model": "33210A",
+                                "serial_number": "MY48000299",
+                                "firmware": "1.04-1.02-22-2",
+                                "idn_string": "Agilent Technologies,33210A,MY48000299,1.04-1.02-22-2",
+                                "device_type": "Generator",
+                                "notes": "10 MHz Arbitrary Waveform",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:01:46.876806"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Oscilloscope": {
+        "YAK": {
+            "DS1104Z": {
+                "Connection": {
+                    "Table": {
+                        "type": "OcaTable",
+                        "description": "Discovered Devices",
+                        "headers": [
+                            "type",
+                            "resource_string",
+                            "ip_address",
+                            "interface_port",
+                            "gpib_address",
+                            "status",
+                            "manufacturer",
+                            "model",
+                            "serial_number",
+                            "firmware",
+                            "idn_string",
+                            "device_type",
+                            "notes",
+                            "allocated",
+                            "connection_timestamp"
+                        ],
+                        "data": {
+                            "Direct": {
+                                "type": "DEDICATED",
+                                "resource_string": "TCPIP::44.44.44.163::INSTR",
+                                "ip_address": "44.44.44.163",
+                                "interface_port": "Ethernet",
+                                "gpib_address": "Direct",
+                                "status": "CONNECTED",
+                                "manufacturer": "RIGOL TECHNOLOGIES",
+                                "model": "DS1104Z",
+                                "serial_number": "DS1ZA171509511",
+                                "firmware": "00.04.03",
+                                "idn_string": "RIGOL TECHNOLOGIES,DS1104Z,DS1ZA171509511,00.04.03",
+                                "device_type": "Oscilloscope",
+                                "notes": "100 MHz, 4 Channel Digital",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:01:46.876808"
+                            }
+                        }
+                    }
+                }
+            },
+            "54641D": {
+                "Connection": {
+                    "Table": {
+                        "type": "OcaTable",
+                        "description": "Discovered Devices",
+                        "headers": [
+                            "type",
+                            "resource_string",
+                            "ip_address",
+                            "interface_port",
+                            "gpib_address",
+                            "status",
+                            "manufacturer",
+                            "model",
+                            "serial_number",
+                            "firmware",
+                            "idn_string",
+                            "device_type",
+                            "notes",
+                            "allocated",
+                            "connection_timestamp"
+                        ],
+                        "data": {
+                            "6": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,6::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "6",
+                                "status": "CONNECTED",
+                                "manufacturer": "AGILENT TECHNOLOGIES",
+                                "model": "54641D",
+                                "serial_number": "MY42000747",
+                                "firmware": "A.02.20",
+                                "idn_string": "AGILENT TECHNOLOGIES,54641D,MY42000747,A.02.20",
+                                "device_type": "Oscilloscope",
+                                "notes": "Mixed Signal (2 Ana + 16 Dig)",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:01:46.876811"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "DMM": {
+        "YAK": {
+            "34401A": {
+                "Connection": {
+                    "Table": {
+                        "type": "OcaTable",
+                        "description": "Discovered Devices",
+                        "headers": [
+                            "type",
+                            "resource_string",
+                            "ip_address",
+                            "interface_port",
+                            "gpib_address",
+                            "status",
+                            "manufacturer",
+                            "model",
+                            "serial_number",
+                            "firmware",
+                            "idn_string",
+                            "device_type",
+                            "notes",
+                            "allocated",
+                            "connection_timestamp"
+                        ],
+                        "data": {
+                            "4": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,4::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "4",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "34401A",
+                                "serial_number": "0",
+                                "firmware": "11-5-3",
+                                "idn_string": "HEWLETT-PACKARD,34401A,0,11-5-3",
+                                "device_type": "DMM",
+                                "notes": "6.5 Digit Benchtop Standard",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:01:46.876810"
+                            },
+                            "11": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,11::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "11",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "34401A",
+                                "serial_number": "0",
+                                "firmware": "11-5-3",
+                                "idn_string": "HEWLETT-PACKARD,34401A,0,11-5-3",
+                                "device_type": "DMM",
+                                "notes": "6.5 Digit Benchtop Standard",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:01:46.876812"
+                            },
+                            "12": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,12::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "12",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "34401A",
+                                "serial_number": "0",
+                                "firmware": "11-5-3",
+                                "idn_string": "HEWLETT-PACKARD,34401A,0,11-5-3",
+                                "device_type": "DMM",
+                                "notes": "6.5 Digit Benchtop Standard",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:01:46.876814"
+                            },
+                            "13": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,13::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "13",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "34401A",
+                                "serial_number": "0",
+                                "firmware": "11-5-3",
+                                "idn_string": "HEWLETT-PACKARD,34401A,0,11-5-3",
+                                "device_type": "DMM",
+                                "notes": "6.5 Digit Benchtop Standard",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:01:46.876815"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

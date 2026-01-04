@@ -26,6 +26,7 @@ except ModuleNotFoundError:
 from managers.Visa_Fleet_Manager.manager_visa_supervisor import VisaFleetSupervisor
 from managers.Visa_Fleet_Manager.manager_visa_json_builder import VisaJsonBuilder # Import new builder
 from managers.Visa_Fleet_Manager.manager_fleet_mqtt_bridge import MqttFleetBridge # Import MQTT bridge
+from managers.Visa_Fleet_Manager.manager_visa_csv_builder import VisaCsvBuilder # NEW IMPORT
 
 class VisaFleetManager:
     def __init__(self):

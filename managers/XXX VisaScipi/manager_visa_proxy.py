@@ -15,7 +15,7 @@ import queue
 import threading
 import _queue
 
-from workers.setup.config_reader import Config
+from managers.configini.config_reader import Config
 app_constants = Config.get_instance()
 
 from workers.logger.logger import  debug_logger

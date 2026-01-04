@@ -28,7 +28,7 @@ def _get_config_instance():
     global _config_instance_cache
     if _config_instance_cache is None:
         try:
-            from workers.setup.config_reader import Config
+            from managers.configini.config_reader import Config
             # If Config._instance is still None, it means Config is not yet fully initialized.
             # Use sensible defaults in this very early stage.
             if Config._instance is None:
@@ -51,7 +51,7 @@ def _get_config_instance():
             
     # Ensure that if the real config has been initialized later, we return that.
     try:
-        from workers.setup.config_reader import Config
+        from managers.configini.config_reader import Config
         if Config._instance is not None:
             return Config._instance
     except ImportError:

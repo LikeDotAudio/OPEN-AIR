@@ -21,7 +21,7 @@ from datetime import datetime
 
 # --- Imports for logging and workers ---
 from workers.logger.logger import debug_logger
-from workers.setup.config_reader import Config # Import the Config class                                                                          
+from managers.configini.config_reader import Config                                                                          
 
 app_constants = Config.get_instance() # Get the singleton instance      
 from workers.logger.log_utils import _get_log_args 

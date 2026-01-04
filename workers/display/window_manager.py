@@ -6,7 +6,7 @@ import inspect
 import os
 import sys
 import pathlib
-from workers.setup.config_reader import Config # Import the Config class                                                                          
+from managers.configini.config_reader import Config                                                                          
 
 app_constants = Config.get_instance() # Get the singleton instance      
 from workers.logger.logger import  debug_logger # Import the global debug_log

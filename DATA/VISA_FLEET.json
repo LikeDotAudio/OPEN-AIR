@@ -39,99 +39,7 @@
                                 "device_type": "Spectrum",
                                 "notes": "Handheld (100 kHz - 3 GHz)",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-04T00:01:46.876805"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "Generator": {
-        "YAK": {
-            "33220A": {
-                "Connection": {
-                    "Table": {
-                        "type": "OcaTable",
-                        "description": "Discovered Devices",
-                        "headers": [
-                            "type",
-                            "resource_string",
-                            "ip_address",
-                            "interface_port",
-                            "gpib_address",
-                            "status",
-                            "manufacturer",
-                            "model",
-                            "serial_number",
-                            "firmware",
-                            "idn_string",
-                            "device_type",
-                            "notes",
-                            "allocated",
-                            "connection_timestamp"
-                        ],
-                        "data": {
-                            "Direct": {
-                                "type": "DEDICATED",
-                                "resource_string": "TCPIP::44.44.44.33::INSTR",
-                                "ip_address": "44.44.44.33",
-                                "interface_port": "Ethernet",
-                                "gpib_address": "Direct",
-                                "status": "CONNECTED",
-                                "manufacturer": "Agilent Technologies",
-                                "model": "33220A",
-                                "serial_number": "MY44044028",
-                                "firmware": "2.07-2.06-22-2",
-                                "idn_string": "Agilent Technologies,33220A,MY44044028,2.07-2.06-22-2",
-                                "device_type": "Generator",
-                                "notes": "20 MHz Arbitrary Waveform",
-                                "allocated": false,
-                                "connection_timestamp": "2026-01-04T00:01:46.876803"
-                            }
-                        }
-                    }
-                }
-            },
-            "33210A": {
-                "Connection": {
-                    "Table": {
-                        "type": "OcaTable",
-                        "description": "Discovered Devices",
-                        "headers": [
-                            "type",
-                            "resource_string",
-                            "ip_address",
-                            "interface_port",
-                            "gpib_address",
-                            "status",
-                            "manufacturer",
-                            "model",
-                            "serial_number",
-                            "firmware",
-                            "idn_string",
-                            "device_type",
-                            "notes",
-                            "allocated",
-                            "connection_timestamp"
-                        ],
-                        "data": {
-                            "Direct": {
-                                "type": "DEDICATED",
-                                "resource_string": "TCPIP::44.44.44.156::INSTR",
-                                "ip_address": "44.44.44.156",
-                                "interface_port": "Ethernet",
-                                "gpib_address": "Direct",
-                                "status": "CONNECTED",
-                                "manufacturer": "Agilent Technologies",
-                                "model": "33210A",
-                                "serial_number": "MY48000299",
-                                "firmware": "1.04-1.02-22-2",
-                                "idn_string": "Agilent Technologies,33210A,MY48000299,1.04-1.02-22-2",
-                                "device_type": "Generator",
-                                "notes": "10 MHz Arbitrary Waveform",
-                                "allocated": false,
-                                "connection_timestamp": "2026-01-04T00:01:46.876806"
+                                "connection_timestamp": "2026-01-04T00:12:46.689174"
                             }
                         }
                     }
@@ -179,7 +87,7 @@
                                 "device_type": "Oscilloscope",
                                 "notes": "100 MHz, 4 Channel Digital",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-04T00:01:46.876808"
+                                "connection_timestamp": "2026-01-04T00:12:46.689175"
                             }
                         }
                     }
@@ -223,7 +131,7 @@
                                 "device_type": "Oscilloscope",
                                 "notes": "Mixed Signal (2 Ana + 16 Dig)",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-04T00:01:46.876811"
+                                "connection_timestamp": "2026-01-04T00:12:46.689178"
                             }
                         }
                     }
@@ -271,7 +179,7 @@
                                 "device_type": "DMM",
                                 "notes": "6.5 Digit Benchtop Standard",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-04T00:01:46.876810"
+                                "connection_timestamp": "2026-01-04T00:12:46.689176"
                             },
                             "11": {
                                 "type": "GATEWAY",
@@ -288,7 +196,7 @@
                                 "device_type": "DMM",
                                 "notes": "6.5 Digit Benchtop Standard",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-04T00:01:46.876812"
+                                "connection_timestamp": "2026-01-04T00:12:46.689179"
                             },
                             "12": {
                                 "type": "GATEWAY",
@@ -305,7 +213,7 @@
                                 "device_type": "DMM",
                                 "notes": "6.5 Digit Benchtop Standard",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-04T00:01:46.876814"
+                                "connection_timestamp": "2026-01-04T00:12:46.689180"
                             },
                             "13": {
                                 "type": "GATEWAY",
@@ -322,7 +230,320 @@
                                 "device_type": "DMM",
                                 "notes": "6.5 Digit Benchtop Standard",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-04T00:01:46.876815"
+                                "connection_timestamp": "2026-01-04T00:12:46.689181"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Load": {
+        "YAK": {
+            "6060B": {
+                "Connection": {
+                    "Table": {
+                        "type": "OcaTable",
+                        "description": "Discovered Devices",
+                        "headers": [
+                            "type",
+                            "resource_string",
+                            "ip_address",
+                            "interface_port",
+                            "gpib_address",
+                            "status",
+                            "manufacturer",
+                            "model",
+                            "serial_number",
+                            "firmware",
+                            "idn_string",
+                            "device_type",
+                            "notes",
+                            "allocated",
+                            "connection_timestamp"
+                        ],
+                        "data": {
+                            "22": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,22::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "22",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "6060B",
+                                "serial_number": "0",
+                                "firmware": "A.04.00",
+                                "idn_string": "HEWLETT-PACKARD,6060B,0,A.04.00",
+                                "device_type": "Load",
+                                "notes": "DC Load (300 Watt)",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:12:46.689182"
+                            },
+                            "23": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,23::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "23",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "6060B",
+                                "serial_number": "0",
+                                "firmware": "A.02.01",
+                                "idn_string": "HEWLETT-PACKARD,6060B,0,A.02.01",
+                                "device_type": "Load",
+                                "notes": "DC Load (300 Watt)",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:12:46.689184"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Power": {
+        "YAK": {
+            "66101A": {
+                "Connection": {
+                    "Table": {
+                        "type": "OcaTable",
+                        "description": "Discovered Devices",
+                        "headers": [
+                            "type",
+                            "resource_string",
+                            "ip_address",
+                            "interface_port",
+                            "gpib_address",
+                            "status",
+                            "manufacturer",
+                            "model",
+                            "serial_number",
+                            "firmware",
+                            "idn_string",
+                            "device_type",
+                            "notes",
+                            "allocated",
+                            "connection_timestamp"
+                        ],
+                        "data": {
+                            "30,0": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,30,0::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "30,0",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "66101A",
+                                "serial_number": "0",
+                                "firmware": "A.00.07",
+                                "idn_string": "HEWLETT-PACKARD,66101A,0,A.00.07",
+                                "device_type": "Power",
+                                "notes": "8V / 16A (128W)",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:12:46.689185"
+                            }
+                        }
+                    }
+                }
+            },
+            "66102A": {
+                "Connection": {
+                    "Table": {
+                        "type": "OcaTable",
+                        "description": "Discovered Devices",
+                        "headers": [
+                            "type",
+                            "resource_string",
+                            "ip_address",
+                            "interface_port",
+                            "gpib_address",
+                            "status",
+                            "manufacturer",
+                            "model",
+                            "serial_number",
+                            "firmware",
+                            "idn_string",
+                            "device_type",
+                            "notes",
+                            "allocated",
+                            "connection_timestamp"
+                        ],
+                        "data": {
+                            "30,1": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,30,1::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "30,1",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "66102A",
+                                "serial_number": "0",
+                                "firmware": "A.00.07",
+                                "idn_string": "HEWLETT-PACKARD,66102A,0,A.00.07",
+                                "device_type": "Power",
+                                "notes": "20V / 7.5A (150W)",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:12:46.689186"
+                            },
+                            "30,2": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,30,2::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "30,2",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "66102A",
+                                "serial_number": "0",
+                                "firmware": "A.00.07",
+                                "idn_string": "HEWLETT-PACKARD,66102A,0,A.00.07",
+                                "device_type": "Power",
+                                "notes": "20V / 7.5A (150W)",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:12:46.689187"
+                            }
+                        }
+                    }
+                }
+            },
+            "66103A": {
+                "Connection": {
+                    "Table": {
+                        "type": "OcaTable",
+                        "description": "Discovered Devices",
+                        "headers": [
+                            "type",
+                            "resource_string",
+                            "ip_address",
+                            "interface_port",
+                            "gpib_address",
+                            "status",
+                            "manufacturer",
+                            "model",
+                            "serial_number",
+                            "firmware",
+                            "idn_string",
+                            "device_type",
+                            "notes",
+                            "allocated",
+                            "connection_timestamp"
+                        ],
+                        "data": {
+                            "30,3": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,30,3::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "30,3",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "66103A",
+                                "serial_number": "0",
+                                "firmware": "A.00.07",
+                                "idn_string": "HEWLETT-PACKARD,66103A,0,A.00.07",
+                                "device_type": "Power",
+                                "notes": "35V / 4.5A (150W)",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:12:46.689188"
+                            }
+                        }
+                    }
+                }
+            },
+            "66104A": {
+                "Connection": {
+                    "Table": {
+                        "type": "OcaTable",
+                        "description": "Discovered Devices",
+                        "headers": [
+                            "type",
+                            "resource_string",
+                            "ip_address",
+                            "interface_port",
+                            "gpib_address",
+                            "status",
+                            "manufacturer",
+                            "model",
+                            "serial_number",
+                            "firmware",
+                            "idn_string",
+                            "device_type",
+                            "notes",
+                            "allocated",
+                            "connection_timestamp"
+                        ],
+                        "data": {
+                            "30,4": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,30,4::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "30,4",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "66104A",
+                                "serial_number": "0",
+                                "firmware": "A.00.03",
+                                "idn_string": "HEWLETT-PACKARD,66104A,0,A.00.03",
+                                "device_type": "Power",
+                                "notes": "60V / 2.5A (150W)",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:12:46.689189"
+                            },
+                            "30,5": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,30,5::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "30,5",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "66104A",
+                                "serial_number": "0",
+                                "firmware": "A.00.07",
+                                "idn_string": "HEWLETT-PACKARD,66104A,0,A.00.07",
+                                "device_type": "Power",
+                                "notes": "60V / 2.5A (150W)",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:12:46.689190"
+                            },
+                            "30,6": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,30,6::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "30,6",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "66104A",
+                                "serial_number": "0",
+                                "firmware": "A.00.07",
+                                "idn_string": "HEWLETT-PACKARD,66104A,0,A.00.07",
+                                "device_type": "Power",
+                                "notes": "60V / 2.5A (150W)",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:12:46.689191"
+                            },
+                            "30,7": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.111::gpib7,30,7::INSTR",
+                                "ip_address": "44.44.44.111",
+                                "interface_port": "gpib7",
+                                "gpib_address": "30,7",
+                                "status": "CONNECTED",
+                                "manufacturer": "HEWLETT-PACKARD",
+                                "model": "66104A",
+                                "serial_number": "0",
+                                "firmware": "A.00.07",
+                                "idn_string": "HEWLETT-PACKARD,66104A,0,A.00.07",
+                                "device_type": "Power",
+                                "notes": "60V / 2.5A (150W)",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T00:12:46.689192"
                             }
                         }
                     }

@@ -15,7 +15,7 @@
 #
 # Version 20251229.1725.1
 
-from workers.setup.config_reader import Config # Import the Config class
+from managers.configini.config_reader import Config
 app_constants = Config.get_instance() # Get the singleton instance
 
 # 📚 Python's standard library modules are our trusty sidekicks!

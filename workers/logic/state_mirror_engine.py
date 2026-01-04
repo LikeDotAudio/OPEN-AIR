@@ -15,7 +15,7 @@ import queue
 import tkinter as tk
 from workers.logger.logger import  debug_logger
 from workers.logger.log_utils import _get_log_args
-from workers.setup.config_reader import Config # Import the Config class                                                                          
+from managers.configini.config_reader import Config                                                                          
 from workers.mqtt import mqtt_publisher_service
 
 app_constants = Config.get_instance() # Get the singleton instance      

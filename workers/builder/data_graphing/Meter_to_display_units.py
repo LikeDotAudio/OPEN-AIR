@@ -11,7 +11,7 @@ import inspect
 import orjson # Ensure orjson is imported
 
 from workers.logger.logger import debug_logger
-from workers.setup.config_reader import Config
+from managers.configini.config_reader import Config
 from workers.logger.log_utils import _get_log_args
 from workers.mqtt.mqtt_publisher_service import publish_payload
 from workers.mqtt.mqtt_topic_utils import get_topic

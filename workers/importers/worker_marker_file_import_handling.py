@@ -40,7 +40,7 @@ import pathlib
 import pandas as pd
 import numpy as np
 from tkinter import filedialog, messagebox
-from workers.setup.config_reader import Config # Import the Config class
+from managers.configini.config_reader import Config
 app_constants = Config.get_instance() # Get the singleton instance
 
 # --- Module Imports ---

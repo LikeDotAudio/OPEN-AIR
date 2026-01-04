@@ -1,4 +1,4 @@
-# workers/setup/logger_config.py
+# managers/configini/logger_config.py
 
 import pathlib
 from workers.logger.logger import  set_log_directory 

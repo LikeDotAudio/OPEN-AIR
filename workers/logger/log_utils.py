@@ -9,7 +9,7 @@
 import inspect
 import os
 
-# Removed: from workers.setup.config_reader import Config (This import caused the circular dependency)
+# Removed: from managers.configini.config_reader import Config (This import caused the circular dependency)
 
 def _get_log_args():
     """

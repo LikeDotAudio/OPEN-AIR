@@ -1,15 +1,15 @@
-# workers/setup/application_initializer.py
+# managers/configini/application_initializer.py
 
 import os
 import sys
 import pathlib
 
 import workers.logger.logger
-from workers.setup.config_reader import Config # Import the Config class
+from managers.configini.config_reader import Config
 app_constants = Config.get_instance() # Get the singleton instance
 import workers.setup.path_initializer as path_initializer
 import workers.logger.logger_config as logger_config
-import workers.setup.console_encoder as console_encoder
+import managers.configini.console_encoder as console_encoder
 import workers.setup.debug_cleaner as debug_cleaner
 from workers.logger.log_utils import _get_log_args
 from workers.logger.logger import  debug_logger # import  debug_logger

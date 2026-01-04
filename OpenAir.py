@@ -15,7 +15,7 @@ import tkinter as tk
 import importlib   
 
 # --- Custom Module Imports (Config MUST be read first) ---
-from workers.setup.config_reader import Config # Import the Config class
+from managers.configini.config_reader import Config
 app_constants = Config.get_instance() # Get the singleton instance and ensure config is read
 
 # --- Core Application Imports ---
@@ -30,7 +30,7 @@ from workers.logger.logger import  debug_logger
 
 import workers.setup.path_initializer as path_initializer
 import workers.logger.logger_config as logger_config
-import workers.setup.console_encoder as console_encoder
+import managers.configini.console_encoder as console_encoder
 import workers.setup.debug_cleaner as debug_cleaner
 from workers.setup.application_initializer import initialize_app
 from workers.logger.log_utils import _get_log_args
@@ -155,7 +155,7 @@ def main():
     from workers.setup.path_initializer import initialize_paths
     from workers.logger.logger import set_log_directory
     from workers.setup.debug_cleaner import clear_debug_directory
-    from workers.setup.console_encoder import configure_console_encoding
+    from managers.configini.console_encoder import configure_console_encoding
     import pathlib
     import workers.watchdog.watchdog as watchdog # Import watchdog
 

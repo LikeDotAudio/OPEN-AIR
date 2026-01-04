@@ -3,7 +3,7 @@
 import tkinter as tk
 from tkinter import ttk
 from .dynamic_gui_create_trapezoid_button import TrapezoidButtonCreatorMixin
-from workers.setup.config_reader import Config
+from managers.configini.config_reader import Config
 
 app_constants = Config.get_instance()
 from workers.logger.logger import debug_logger

@@ -13,7 +13,7 @@ import tempfile
 import inspect
 from typing import Dict, Any
 
-from workers.setup import worker_project_paths as app_constants
+import workers.setup.worker_project_paths as app_constants
 from workers.logger.logger import debug_logger
 from workers.logger.log_utils import _get_log_args
 

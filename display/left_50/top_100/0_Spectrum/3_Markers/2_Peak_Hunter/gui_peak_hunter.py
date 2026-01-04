@@ -25,7 +25,7 @@ from tkinter import filedialog
 import pandas as pd # Explicit import for data handling
 
 # --- Module Imports ---
-from workers.setup.config_reader import Config # Import the Config class
+from managers.configini.config_reader import Config
 from workers.logger.logger import  debug_logger
 from workers.logger.log_utils import _get_log_args 
 # Import CSV export utility - Wrapping in try/except in case it's missing during refactor

@@ -41,7 +41,7 @@ import inspect
 import numpy as np
 import zipfile
 import io
-from workers.setup.config_reader import Config # Import the Config class
+from managers.configini.config_reader import Config
 app_constants = Config.get_instance() # Get the singleton instance
 
 current_file = os.path.basename(__file__) # Get current file name for debug_log
@@ -85,7 +85,7 @@ def Marker_convert_IAShtml_report_to_csv(html_content):
 )
 
     soup = BeautifulSoup(html_content, 'html.parser')
-    from workers.setup.config_reader import Config # Import the Config class
+    from managers.configini.config_reader import Config
     app_constants = Config.get_instance() # Get the singleton instance
 
     

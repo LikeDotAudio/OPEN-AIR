@@ -62,7 +62,7 @@ class VisaFleetSupervisor:
             return
         
         try:
-            from workers.setup.config_reader import Config
+            from managers.configini.config_reader import Config
             app_constants = Config.get_instance()
 
             debug_logger("💳 🔍 FleetSupervisor: Starting comprehensive fleet scan...", **_get_log_args())

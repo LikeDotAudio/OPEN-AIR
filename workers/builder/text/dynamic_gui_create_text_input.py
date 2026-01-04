@@ -2,7 +2,7 @@
 
 import tkinter as tk
 from tkinter import ttk
-from workers.setup.config_reader import Config # Import the Config class                                                                          
+from managers.configini.config_reader import Config                                                                          
 from workers.mqtt.mqtt_topic_utils import get_topic # Import get_topic
 
 app_constants = Config.get_instance() # Get the singleton instance      

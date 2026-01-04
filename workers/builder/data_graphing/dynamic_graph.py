@@ -6,7 +6,7 @@ from typing import Dict, Any, List
 import inspect
 
 from workers.logger.logger import debug_logger
-from workers.setup.config_reader import Config
+from managers.configini.config_reader import Config
 from workers.logger.log_utils import _get_log_args
 
 from . import graph_builder

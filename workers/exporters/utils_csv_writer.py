@@ -34,7 +34,7 @@ LOCAL_DEBUG_ENABLE = False
 import csv
 import os
 import inspect # Import inspect module
-from workers.setup.config_reader import Config # Import the Config class                                                                          
+from managers.configini.config_reader import Config                                                                          
 
 app_constants = Config.get_instance() # Get the singleton instance      
 # Updated imports for new logging functions

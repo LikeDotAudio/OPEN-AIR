@@ -1,4 +1,4 @@
-# workers/setup/debug_cleaner.py
+# workers.setup.debug_cleaner.py
 
 import os
 import sys

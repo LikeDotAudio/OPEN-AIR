@@ -1,7 +1,7 @@
 # OPEN-AIR/dependancy_checker.py
 #
-# from workers.setup.config_reader import Config # REMOVED: Circular dependency or side effects
-from workers.setup.config_builder import create_default_config_ini # Import to rewrite config
+# from managers.configini.config_reader import Config # REMOVED: Circular dependency or side effects
+from managers.configini.config_builder import create_default_config_ini # Import to rewrite config
 import os
 import sys
 import inspect

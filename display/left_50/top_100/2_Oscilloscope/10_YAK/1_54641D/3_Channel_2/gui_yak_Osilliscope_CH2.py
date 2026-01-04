@@ -26,7 +26,7 @@ from typing import Dict, Any # Added for type hinting
 # --- Protocol: Integration Layer ---
 from workers.builder.dynamic_gui_builder import DynamicGuiBuilder
 from workers.logger.logger import debug_logger
-from workers.setup.config_reader import Config # Import the Config class
+from managers.configini.config_reader import Config
 from workers.logger.log_utils import _get_log_args 
 
 # Globals

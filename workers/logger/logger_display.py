@@ -10,9 +10,9 @@ import inspect # Needed for context
 
 def _get_config_instance():
     """Placeholder for getting the global config instance."""
-    # In a real scenario, this would be imported from workers.setup.config_reader
+    # In a real scenario, this would be imported from managers.configini.config_reader
     # and managed by the main logger.py
-    from workers.setup.config_reader import Config
+    from managers.configini.config_reader import Config
     if Config._instance is None:
         class DummyConfig:
             PERFORMANCE_MODE = False

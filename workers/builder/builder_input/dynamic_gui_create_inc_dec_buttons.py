@@ -11,17 +11,19 @@ from workers.logger.log_utils import _get_log_args
 import os
 
 class IncDecButtonsCreatorMixin:
-        def _create_inc_dec_buttons(self, parent_widget, config_data): # Updated signature
+        def _create_inc_dec_buttons(self, parent_widget, config_data, **kwargs): # Updated signature
             """Creates increment/decrement buttons."""
             current_function_name = "_create_inc_dec_buttons"
             
-            # Extract arguments from config_data
+            # Extract only widget-specific config from config_data
             label = config_data.get("label_active")
             config = config_data # config_data is the config
             path = config_data.get("path")
-            base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-            state_mirror_engine = config_data.get("state_mirror_engine")
-            subscriber_router = config_data.get("subscriber_router")
+            
+            # Access global context directly from self
+            state_mirror_engine = self.state_mirror_engine
+            subscriber_router = self.subscriber_router
+            base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
             if app_constants.global_settings['debug_enabled']:
                 debug_logger(
@@ -67,17 +69,17 @@ class IncDecButtonsCreatorMixin:
                 state_mirror_engine.register_widget(widget_id, current_value, base_mqtt_topic_from_path, config)
 
                 # 2. Subscribe to this widget's topic to receive updates
-                topic = state_mirror_engine.get_widget_topic(widget_id)
+                topic = self.state_mirror_engine.get_widget_topic(widget_id)
                 if topic:
-                    subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
+                    self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
     
                 # 3. Bind variable trace for outgoing messages
                 # Use a lambda that calls broadcast_gui_change_to_mqtt
-                callback = lambda *args: state_mirror_engine.broadcast_gui_change_to_mqtt(widget_id)
+                callback = lambda *args: self.state_mirror_engine.broadcast_gui_change_to_mqtt(widget_id)
                 current_value.trace_add("write", callback)
 
                 # 4. Initialize state from cache or broadcast
-                state_mirror_engine.initialize_widget_state(widget_id)
+                self.state_mirror_engine.initialize_widget_state(widget_id)
     
             if app_constants.global_settings['debug_enabled']:
                 debug_logger(

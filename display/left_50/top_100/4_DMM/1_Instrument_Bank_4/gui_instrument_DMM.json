@@ -1,0 +1,296 @@
+{
+  "Quad_DMM_Station": {
+    "type": "OcaBlock",
+    "description": "4-Point Universal Measurement Matrix",
+    "fields": {
+      "Row_1_Top_Deck": {
+        "type": "OcaBlock",
+        "description": "--- UPPER QUADRANT ---",
+        "fields": {
+          "DMM_Unit_1_Alpha": {
+            "type": "OcaBlock",
+            "description": "UNIT 1 (Alpha) - Top Left",
+            "fields": {
+              "Display_1": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Readout_1": {
+                    "type": "_GuiLabel",
+                    "label_active": "UNIT 1 VALUE",
+                    "value_default": "---",
+                    "message_details": {
+                      "DMM_MODEL": {
+                        "type": "_GuiActuator",
+                        "trigger": false,
+                        "command_value": "INST:SEL 1;READ?"
+                      }
+                    }
+                  },
+                  "Graph_1": {
+                    "type": "_GuiGraph",
+                    "label_active": "Trend 1",
+                    "height": 150,
+                    "message_details": {
+                      "DMM_MODEL": {
+                        "type": "_GuiActuator",
+                        "trigger": false,
+                        "command_value": "INST:SEL 1;DATA:POIN?"
+                      }
+                    }
+                  }
+                }
+              },
+              "Controls_1": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Mode_1_VDC": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "VDC",
+                    "label_inactive": "VDC",
+                    "state_default": true,
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;CONF:VOLT:DC" } }
+                  },
+                  "Mode_1_VAC": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "VAC",
+                    "label_inactive": "VAC",
+                    "state_default": false,
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;CONF:VOLT:AC" } }
+                  },
+                  "Mode_1_OHMS": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "Ω",
+                    "label_inactive": "Ω",
+                    "state_default": false,
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;CONF:RES" } }
+                  },
+                  "Range_1": {
+                    "type": "_GuiHorizontalKnob",
+                    "label_active": "Range",
+                    "value_default": "10",
+                    "unit": "",
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;RANG <value>" } }
+                  }
+                }
+              }
+            }
+          },
+          "DMM_Unit_2_Beta": {
+            "type": "OcaBlock",
+            "description": "UNIT 2 (Beta) - Top Right",
+            "fields": {
+              "Display_2": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Readout_2": {
+                    "type": "_GuiLabel",
+                    "label_active": "UNIT 2 VALUE",
+                    "value_default": "---",
+                    "message_details": {
+                      "DMM_MODEL": {
+                        "type": "_GuiActuator",
+                        "trigger": false,
+                        "command_value": "INST:SEL 2;READ?"
+                      }
+                    }
+                  },
+                  "Graph_2": {
+                    "type": "_GuiGraph",
+                    "label_active": "Trend 2",
+                    "height": 150,
+                    "message_details": {
+                      "DMM_MODEL": {
+                        "type": "_GuiActuator",
+                        "trigger": false,
+                        "command_value": "INST:SEL 2;DATA:POIN?"
+                      }
+                    }
+                  }
+                }
+              },
+              "Controls_2": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Mode_2_VDC": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "VDC",
+                    "label_inactive": "VDC",
+                    "state_default": true,
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;CONF:VOLT:DC" } }
+                  },
+                  "Mode_2_VAC": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "VAC",
+                    "label_inactive": "VAC",
+                    "state_default": false,
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;CONF:VOLT:AC" } }
+                  },
+                  "Mode_2_OHMS": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "Ω",
+                    "label_inactive": "Ω",
+                    "state_default": false,
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;CONF:RES" } }
+                  },
+                  "Range_2": {
+                    "type": "_GuiHorizontalKnob",
+                    "label_active": "Range",
+                    "value_default": "10",
+                    "unit": "",
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;RANG <value>" } }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Row_Separator": {
+        "type": "OcaSeparator",
+        "description": "================================================"
+      },
+      "Row_2_Bottom_Deck": {
+        "type": "OcaBlock",
+        "description": "--- LOWER QUADRANT ---",
+        "fields": {
+          "DMM_Unit_3_Gamma": {
+            "type": "OcaBlock",
+            "description": "UNIT 3 (Gamma) - Bottom Left",
+            "fields": {
+              "Display_3": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Readout_3": {
+                    "type": "_GuiLabel",
+                    "label_active": "UNIT 3 VALUE",
+                    "value_default": "---",
+                    "message_details": {
+                      "DMM_MODEL": {
+                        "type": "_GuiActuator",
+                        "trigger": false,
+                        "command_value": "INST:SEL 3;READ?"
+                      }
+                    }
+                  },
+                  "Graph_3": {
+                    "type": "_GuiGraph",
+                    "label_active": "Trend 3",
+                    "height": 150,
+                    "message_details": {
+                      "DMM_MODEL": {
+                        "type": "_GuiActuator",
+                        "trigger": false,
+                        "command_value": "INST:SEL 3;DATA:POIN?"
+                      }
+                    }
+                  }
+                }
+              },
+              "Controls_3": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Mode_3_VDC": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "VDC",
+                    "label_inactive": "VDC",
+                    "state_default": true,
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;CONF:VOLT:DC" } }
+                  },
+                  "Mode_3_VAC": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "VAC",
+                    "label_inactive": "VAC",
+                    "state_default": false,
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;CONF:VOLT:AC" } }
+                  },
+                  "Mode_3_OHMS": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "Ω",
+                    "label_inactive": "Ω",
+                    "state_default": false,
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;CONF:RES" } }
+                  },
+                  "Range_3": {
+                    "type": "_GuiHorizontalKnob",
+                    "label_active": "Range",
+                    "value_default": "10",
+                    "unit": "",
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;RANG <value>" } }
+                  }
+                }
+              }
+            }
+          },
+          "DMM_Unit_4_Delta": {
+            "type": "OcaBlock",
+            "description": "UNIT 4 (Delta) - Bottom Right",
+            "fields": {
+              "Display_4": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Readout_4": {
+                    "type": "_GuiLabel",
+                    "label_active": "UNIT 4 VALUE",
+                    "value_default": "---",
+                    "message_details": {
+                      "DMM_MODEL": {
+                        "type": "_GuiActuator",
+                        "trigger": false,
+                        "command_value": "INST:SEL 4;READ?"
+                      }
+                    }
+                  },
+                  "Graph_4": {
+                    "type": "_GuiGraph",
+                    "label_active": "Trend 4",
+                    "height": 150,
+                    "message_details": {
+                      "DMM_MODEL": {
+                        "type": "_GuiActuator",
+                        "trigger": false,
+                        "command_value": "INST:SEL 4;DATA:POIN?"
+                      }
+                    }
+                  }
+                }
+              },
+              "Controls_4": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Mode_4_VDC": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "VDC",
+                    "label_inactive": "VDC",
+                    "state_default": true,
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;CONF:VOLT:DC" } }
+                  },
+                  "Mode_4_VAC": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "VAC",
+                    "label_inactive": "VAC",
+                    "state_default": false,
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;CONF:VOLT:AC" } }
+                  },
+                  "Mode_4_OHMS": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "Ω",
+                    "label_inactive": "Ω",
+                    "state_default": false,
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;CONF:RES" } }
+                  },
+                  "Range_4": {
+                    "type": "_GuiHorizontalKnob",
+                    "label_active": "Range",
+                    "value_default": "10",
+                    "unit": "",
+                    "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;RANG <value>" } }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

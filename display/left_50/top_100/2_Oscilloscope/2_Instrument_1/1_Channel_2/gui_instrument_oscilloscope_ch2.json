@@ -1,0 +1,251 @@
+{
+  "Oscilloscope_Main_Station": {
+    "type": "OcaBlock",
+    "description": "Primary Oscilloscope Interface",
+    "fields": {
+      "Display_Sector": {
+        "type": "OcaBlock",
+        "description": "Visual Data Stream",
+        "fields": {
+          "Device_Identity": {
+            "type": "_TextInput",
+            "label_active": "Device Name",
+            "value_default": "Flux_Scope_88",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "SYST:NAME <value>"
+              }
+            }
+          },
+          "Main_Graph_Display": {
+            "type": "_GuiGraph",
+            "label_active": "Signal Visualization",
+            "description": "Real-time waveform rendering",
+            "height": 400,
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "DISP:DATA?"
+              }
+            }
+          }
+        }
+      },
+      "Control_Deck_Break": {
+        "type": "OcaSeparator",
+        "description": "------------------------------------------------"
+      },
+      "Vertical_Control_Deck": {
+        "type": "OcaBlock",
+        "description": "Vertical (Amplitude)",
+        "fields": {
+          "Ch1_Volts_Div": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Volts / Div",
+            "value_default": "1.0",
+            "min": "0.01",
+            "max": "100",
+            "unit": "V",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CHAN1:SCAL <value>"
+              }
+            }
+          },
+          "Ch1_Offset": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Offset",
+            "value_default": "0.0",
+            "unit": "V",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CHAN1:OFFS <value>"
+              }
+            }
+          },
+          "Coupling_Mode": {
+            "type": "_GuiDropDownOption",
+            "label_active": "Coupling",
+            "options": ["AC", "DC", "GND", "50Ω"],
+            "default_option": "DC",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CHAN1:COUP <value>"
+              }
+            }
+          }
+        }
+      },
+      "Horizontal_Control_Deck": {
+        "type": "OcaBlock",
+        "description": "Horizontal (Timebase)",
+        "fields": {
+          "Time_Div": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Time / Div",
+            "value_default": "1e-3",
+            "min": "1e-9",
+            "max": "10",
+            "unit": "s",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "TIM:SCAL <value>"
+              }
+            }
+          },
+          "Time_Offset": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Delay",
+            "value_default": "0.0",
+            "unit": "s",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "TIM:OFFS <value>"
+              }
+            }
+          }
+        }
+      },
+      "Trigger_Systems": {
+        "type": "OcaBlock",
+        "description": "Trigger Logic",
+        "fields": {
+          "Trigger_Level": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Trig Level",
+            "value_default": "0.5",
+            "unit": "V",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "TRIG:LEV <value>"
+              }
+            }
+          },
+          "Trigger_Edge_Toggle": {
+            "type": "_GuiButtonToggle",
+            "label_active": "RISING",
+            "label_inactive": "FALLING",
+            "state_default": true,
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "TRIG:SLOP <value>"
+              }
+            }
+          },
+          "Force_Trigger": {
+            "type": "_TrapezoidButton",
+            "label_active": "FORCE",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": true,
+                "command_value": "TRIG:FORC"
+              }
+            }
+          }
+        }
+      },
+      "Acquisition_Main": {
+        "type": "OcaBlock",
+        "description": "Acquisition State",
+        "fields": {
+          "Run_Stop_Toggle": {
+            "type": "_GuiButtonToggle",
+            "label_active": "RUNNING 🟢",
+            "label_inactive": "STOPPED 🔴",
+            "state_default": true,
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "ACQ:STATE <value>"
+              }
+            }
+          },
+          "Single_Shot": {
+            "type": "_GuiButton",
+            "label_active": "SINGLE SEQ",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": true,
+                "command_value": "ACQ:MOD SING;RUN"
+              }
+            }
+          }
+        }
+      },
+      "Telemetry_Readout": {
+        "type": "OcaBlock",
+        "description": "Live Measurements",
+        "fields": {
+          "Read_Vpp": {
+            "type": "_GuiLabel",
+            "label_active": "Vpp",
+            "value_default": "--- V",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "MEAS:VPP?"
+              }
+            }
+          },
+          "Read_Vrms": {
+            "type": "_GuiLabel",
+            "label_active": "Vrms",
+            "value_default": "--- V",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "MEAS:VRMS?"
+              }
+            }
+          },
+          "Read_Freq": {
+            "type": "_GuiLabel",
+            "label_active": "Freq",
+            "value_default": "--- Hz",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "MEAS:FREQ?"
+              }
+            }
+          },
+          "Read_dB": {
+            "type": "_GuiLabel",
+            "label_active": "dB",
+            "value_default": "--- dB",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "MEAS:DB?"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

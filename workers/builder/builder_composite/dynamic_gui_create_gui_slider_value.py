@@ -54,18 +54,19 @@ class SliderValueCreatorMixin:
     A mixin class that provides the functionality for creating a
     slider widget combined with a text entry box.
     """
-    def _create_slider_value(self, parent_widget, config_data):
+    def _create_slider_value(self, parent_widget, config_data, **kwargs):
         # Creates a slider and an entry box for a numerical value.
         current_function_name = inspect.currentframe().f_code.co_name
 
-        # Extract arguments from config_data
-        label = config_data.get("label_active") # Assuming label comes from config_data
-        config = config_data # config_data is the config
+        # Extract only widget-specific config from config_data
+        label = config_data.get("label_active", "") # Assuming label comes from config_data
         path = config_data.get("path") # Path needs to be passed in config_data
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
-
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
+        
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
                 message=f"🔬⚡️ Entering '{current_function_name}' to assemble a slider for '{label}'.",

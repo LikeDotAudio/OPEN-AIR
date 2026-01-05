@@ -34,7 +34,6 @@ from workers.builder.builder_table.dynamic_gui_table import GuiTableCreatorMixin
 try:
     from workers.importers.worker_importer_loader import (
         maker_file_check_for_markers_file,
-    from workers.importers.worker_importer_loader import (
         load_markers_file_action,
         load_ias_html_action,
         load_wwb_shw_action,

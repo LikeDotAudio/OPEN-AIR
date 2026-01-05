@@ -1,34 +1,16 @@
 {
-  "DMM_Panel": {
+  "DMM_Main_Station": {
     "type": "OcaBlock",
-    "description": "Digital Multimeter Control Panel",
+    "description": "Universal Parameter Analyzer",
     "fields": {
-      "Measurement_Type": {
+      "Visual_Telemetry_Sector": {
         "type": "OcaBlock",
-        "description": "Measurement Type",
+        "description": "The Data Continuum",
         "fields": {
-          "measure_func": {
-            "type": "_GuiDropDownOption",
-            "label_active": "Function",
-            "options": ["VOLT:DC", "VOLT:AC", "CURR:DC", "CURR:AC", "RES", "CONT", "DIOD"],
-            "default_option": "VOLT:DC",
-            "message_details": {
-              "DMM_MODEL": {
-                "type": "_GuiActuator",
-                "trigger": false,
-                "command_value": "FUNC '<value>'"
-              }
-            }
-          }
-        }
-      },
-      "Read_Value": {
-        "type": "OcaBlock",
-        "description": "Read Measurement",
-        "fields": {
-          "read_button": {
-            "type": "_GuiActuator",
-            "description": "Read Now",
+          "Primary_Readout": {
+            "type": "_GuiLabel",
+            "label_active": "LIVE READING",
+            "value_default": "---",
             "message_details": {
               "DMM_MODEL": {
                 "type": "_GuiActuator",
@@ -37,9 +19,223 @@
               }
             }
           },
-          "display_value": {
-            "type": "_Value",
-            "value": "---"
+          "Trend_Graph": {
+            "type": "_GuiGraph",
+            "label_active": "Temporal Drift Log",
+            "description": "Historical Data Plot",
+            "height": 350,
+            "message_details": {
+              "DMM_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "DATA:POINts? ALL"
+              }
+            }
+          }
+        }
+      },
+      "Control_Deck_Break": {
+        "type": "OcaSeparator",
+        "description": "------------------------------------------------"
+      },
+      "Mode_Matrix_Voltage": {
+        "type": "OcaBlock",
+        "description": "Potential Difference (Voltage)",
+        "fields": {
+          "Mode_VDC": {
+            "type": "_GuiButtonToggle",
+            "label_active": "VDC (ACTIVE)",
+            "label_inactive": "VDC",
+            "state_default": true,
+            "message_details": {
+              "DMM_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CONF:VOLT:DC"
+              }
+            }
+          },
+          "Mode_VAC": {
+            "type": "_GuiButtonToggle",
+            "label_active": "VAC (ACTIVE)",
+            "label_inactive": "VAC",
+            "state_default": false,
+            "message_details": {
+              "DMM_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CONF:VOLT:AC"
+              }
+            }
+          }
+        }
+      },
+      "Mode_Matrix_Current": {
+        "type": "OcaBlock",
+        "description": "Electron Flow (Current)",
+        "fields": {
+          "Mode_ADC": {
+            "type": "_GuiButtonToggle",
+            "label_active": "ADC (ACTIVE)",
+            "label_inactive": "ADC",
+            "state_default": false,
+            "message_details": {
+              "DMM_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CONF:CURR:DC"
+              }
+            }
+          },
+          "Mode_AAC": {
+            "type": "_GuiButtonToggle",
+            "label_active": "AAC (ACTIVE)",
+            "label_inactive": "AAC",
+            "state_default": false,
+            "message_details": {
+              "DMM_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CONF:CURR:AC"
+              }
+            }
+          }
+        }
+      },
+      "Mode_Matrix_Impedance": {
+        "type": "OcaBlock",
+        "description": "Resistance & Continuity",
+        "fields": {
+          "Mode_RES": {
+            "type": "_GuiButtonToggle",
+            "label_active": "OHMS (2W)",
+            "label_inactive": "OHMS (2W)",
+            "state_default": false,
+            "message_details": {
+              "DMM_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CONF:RES"
+              }
+            }
+          },
+          "Mode_FRES": {
+            "type": "_GuiButtonToggle",
+            "label_active": "OHMS (4W)",
+            "label_inactive": "OHMS (4W)",
+            "state_default": false,
+            "message_details": {
+              "DMM_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CONF:FRES"
+              }
+            }
+          },
+          "Mode_CONT": {
+            "type": "_GuiButtonToggle",
+            "label_active": "CONT (Beep)",
+            "label_inactive": "CONT",
+            "state_default": false,
+            "message_details": {
+              "DMM_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CONF:CONT"
+              }
+            }
+          },
+          "Mode_DIODE": {
+            "type": "_GuiButtonToggle",
+            "label_active": "DIODE",
+            "label_inactive": "DIODE",
+            "state_default": false,
+            "message_details": {
+              "DMM_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CONF:DIOD"
+              }
+            }
+          }
+        }
+      },
+      "Precision_Dynamics": {
+        "type": "OcaBlock",
+        "description": "Range & Speed",
+        "fields": {
+          "Auto_Range_Toggle": {
+            "type": "_GuiButtonToggle",
+            "label_active": "AUTO RANGE",
+            "label_inactive": "MANUAL",
+            "state_default": true,
+            "message_details": {
+              "DMM_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "RANG:AUTO <value>"
+              }
+            }
+          },
+          "Manual_Range_Knob": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Manual Range",
+            "value_default": "10",
+            "min": "0.1",
+            "max": "1000",
+            "unit": "U",
+            "message_details": {
+              "DMM_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "RANG <value>"
+              }
+            }
+          },
+          "Integration_Time": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "NPLC (Speed)",
+            "value_default": "1.0",
+            "min": "0.02",
+            "max": "100",
+            "unit": "cyc",
+            "message_details": {
+              "DMM_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "SENS:VOLT:NPLC <value>"
+              }
+            }
+          }
+        }
+      },
+      "Data_Acquisition": {
+        "type": "OcaBlock",
+        "description": "Start / Stop",
+        "fields": {
+          "Trigger_Read": {
+            "type": "_TrapezoidButton",
+            "label_active": "ACQUIRE SINGLE",
+            "message_details": {
+              "DMM_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": true,
+                "command_value": "READ?"
+              }
+            }
+          },
+          "Run_Monitoring": {
+             "type": "_GuiButtonToggle",
+             "label_active": "LOGGING ON 🟢",
+             "label_inactive": "LOGGING OFF 🔴",
+             "state_default": false,
+             "message_details": {
+               "DMM_MODEL": {
+                 "type": "_GuiActuator",
+                 "trigger": false,
+                 "command_value": "INIT"
+               }
+             }
           }
         }
       }

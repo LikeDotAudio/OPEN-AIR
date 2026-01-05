@@ -109,6 +109,8 @@ class DynamicGuiBuilder(
         self.tab_name = tab_name
         self.state_mirror_engine = config.get('state_mirror_engine')
         self.subscriber_router = config.get('subscriber_router')
+        if not self.state_mirror_engine:
+            print("CRITICAL WARNING: DynamicGuiBuilder initialized without StateMirrorEngine! Widgets will be zombies.")
         self.json_filepath = Path(json_path) if json_path else None
         self.config_data = {}
         self.tk_vars = {}

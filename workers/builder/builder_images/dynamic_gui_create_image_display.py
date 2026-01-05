@@ -14,7 +14,7 @@ from workers.setup.path_initializer import GLOBAL_PROJECT_ROOT
 from workers.mqtt.mqtt_topic_utils import get_topic # Import get_topic
 
 class ImageDisplayCreatorMixin:
-    def _create_image_display(self, parent_widget, config_data): # Updated signature
+    def _create_image_display(self, parent_widget, config_data, **kwargs): # Updated signature
         """Creates an image display widget that is state-aware."""
         current_function_name = "_create_image_display"
         
@@ -22,9 +22,11 @@ class ImageDisplayCreatorMixin:
         label = config_data.get("label_active")
         config = config_data # config_data is the config
         path = config_data.get("path")
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
@@ -75,9 +77,8 @@ class ImageDisplayCreatorMixin:
             state_mirror_engine.register_widget(widget_id, image_path_var, base_mqtt_topic_from_path, config)
             
             # Subscribe to the topic for incoming messages
-            topic = get_topic("OPEN-AIR", base_mqtt_topic_from_path, widget_id)
-            subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
-
+            topic = get_topic("OPEN-AIR", self.state_mirror_engine.base_topic, widget_id)
+            self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
             if app_constants.global_settings['debug_enabled']:
                 debug_logger(
                     message=f"🔬 Widget '{label}' ({path}) registered with StateMirrorEngine.",

@@ -91,6 +91,7 @@ class FluxPlotter(tk.Frame):
             return
             
         csv_data = self.dataset_vars[dataset_id].get()
+        debug_logger(f"Processing CSV data for dataset '{dataset_id}':\n{csv_data}", **_get_log_args())
         try:
             x_values, y_values = [], []
             lines = csv_data.strip().split('\n')
@@ -103,6 +104,8 @@ class FluxPlotter(tk.Frame):
                     x_values.append(float(parts[0]))
                     y_values.append(float(parts[1]))
             
+            debug_logger(f"Extracted x_values: {x_values}", **_get_log_args())
+            debug_logger(f"Extracted y_values: {y_values}", **_get_log_args())
             self.load_initial_data(dataset_id, x_values, y_values)
         except Exception as e:
             debug_logger(f"❌ Error processing CSV data for dataset '{dataset_id}': {e}", **_get_log_args())
@@ -136,6 +139,7 @@ class FluxPlotter(tk.Frame):
 
     def load_initial_data(self, dataset_id: str, x_values: List[float], y_values: List[float]):
         """Loads a complete set of initial data points."""
+        debug_logger(f"Loading initial data for dataset '{dataset_id}'", **_get_log_args())
         if dataset_id not in self.lines: return
         graph_updater.load_initial_data(self.lines[dataset_id], self.x_data[dataset_id], self.y_data[dataset_id], x_values, y_values)
         graph_updater.autoscale_and_redraw(self.ax, self.canvas)

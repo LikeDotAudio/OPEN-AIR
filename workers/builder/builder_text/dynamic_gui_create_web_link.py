@@ -11,7 +11,7 @@ from workers.logger.log_utils import _get_log_args
 import os
 
 class WebLinkCreatorMixin:
-    def _create_web_link(self, parent_widget, config_data): # Updated signature
+    def _create_web_link(self, parent_widget, config_data, **kwargs): # Updated signature
         """Creates a web link widget."""
         current_function_name = "_create_web_link"
         

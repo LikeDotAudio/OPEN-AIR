@@ -53,17 +53,19 @@ class ValueBoxCreatorMixin:
     A mixin class that provides the functionality for creating an
     editable text box widget.
     """
-    def _create_value_box(self, parent_widget, config_data): # Updated signature
+    def _create_value_box(self, parent_widget, config_data, **kwargs): # Updated signature
         # Creates an editable text box (_Value).
         current_function_name = inspect.currentframe().f_code.co_name
 
-        # Extract arguments from config_data
+        # Extract only widget-specific config from config_data
         label = config_data.get("label_active")
         config = config_data # config_data is the config
         path = config_data.get("path")
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
@@ -100,11 +102,11 @@ class ValueBoxCreatorMixin:
                     bind_variable_trace(entry_value, callback)
 
                     # 3. Subscribe to topic for incoming messages
-                    topic = get_topic("OPEN-AIR", base_mqtt_topic_from_path, widget_id)
-                    subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
+                    topic = get_topic("OPEN-AIR", self.state_mirror_engine.base_topic, widget_id)
+                    self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
                     
                     # 4. Initialize state from cache or broadcast
-                    state_mirror_engine.initialize_widget_state(widget_id)
+                    self.state_mirror_engine.initialize_widget_state(widget_id)
 
 
             if app_constants.global_settings['debug_enabled']:

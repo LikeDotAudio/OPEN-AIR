@@ -11,17 +11,19 @@ import os
 from workers.mqtt.mqtt_topic_utils import get_topic
 
 class FaderCreatorMixin:
-    def _create_fader(self, parent_widget, config_data): # Updated signature
+    def _create_fader(self, parent_widget, config_data, **kwargs): # Updated signature
         """Creates a fader widget."""
         current_function_name = "_create_fader"
         
-        # Extract arguments from config_data
+        # Extract only widget-specific config from config_data
         label = config_data.get("label_active")
         config = config_data # config_data is the config
         path = config_data.get("path")
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
@@ -78,19 +80,19 @@ class FaderCreatorMixin:
                 # The _silent_update flag in StateMirrorEngine handles the suppression
                 
                 # Publish the value via MQTT
-                state_mirror_engine.broadcast_gui_change_to_mqtt(path)
+                self.state_mirror_engine.broadcast_gui_change_to_mqtt(path)
 
             scale.config(command=_on_scale_change) # Bind command to the trace
 
             if path:
                 widget_id = path
                 # Register the widget with the StateMirrorEngine for MQTT updates
-                state_mirror_engine.register_widget(widget_id, fader_value_var, base_mqtt_topic_from_path, config)
+                self.state_mirror_engine.register_widget(widget_id, fader_value_var, base_mqtt_topic_from_path, config)
 
                 # Subscribe to this widget's topic to receive updates
-                topic = state_mirror_engine.get_widget_topic(widget_id)
+                topic = self.state_mirror_engine.get_widget_topic(widget_id)
                 if topic:
-                    subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
+                    self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
 
                 if app_constants.global_settings['debug_enabled']:
                     debug_logger(

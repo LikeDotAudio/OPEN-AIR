@@ -23,15 +23,17 @@ class HorizontalKnobValueCreatorMixin(CustomHorizontalFaderCreatorMixin, KnobCre
     A mixin class that provides the functionality for creating a
     fader-knob composite widget combined with a text entry box and a knob for fine-tuning.
     """
-    def _create_horizontal_knob_value(self, parent_widget, config_data):
+    def _create_horizontal_knob_value(self, parent_widget, config_data, **kwargs):
         current_function_name = inspect.currentframe().f_code.co_name
         
-        # Extract arguments from config_data
+        # Extract only widget-specific config from config_data
         label = config_data.get("label_active", "") # Use label from config_data
-        path = config_data.get("path") # Path needs to be passed in config_data
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path") # Extract from config_data
-        state_mirror_engine = config_data.get("state_mirror_engine") # Extract from config_data
-        subscriber_router = config_data.get("subscriber_router") # Extract from config_data
+        path = config_data.get("path", "") # Path for this widget
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(message=f"🔬⚡️ Entering '{current_function_name}' to assemble a fader-knob combo for '{label}'.", **_get_log_args())
@@ -99,6 +101,7 @@ class HorizontalKnobValueCreatorMixin(CustomHorizontalFaderCreatorMixin, KnobCre
             fader_config['value_min'] = str(math.floor(min_val))
             fader_config['value_max'] = str(math.ceil(max_val))
             fader_config['value_default'] = str(math.floor(main_value_var.get()))
+            fader_config['path'] = path + "/fader"
 
             # The fader needs to update the main_value_var, but only its integer part
             fader_widget = self._create_custom_horizontal_fader(
@@ -111,10 +114,10 @@ class HorizontalKnobValueCreatorMixin(CustomHorizontalFaderCreatorMixin, KnobCre
             knob_config['min'] = '0'
             knob_config['max'] = str(1 / resolution - 1) # e.g., if res=0.01, max is 99
             knob_config['value_default'] = str(round((main_value_var.get() % 1) / resolution)) # Initial decimal value
-            knob_config['path'] = path + "_knob"
+            knob_config['path'] = path + "/knob"
             knob_config['base_mqtt_topic_from_path'] = base_mqtt_topic_from_path
-            knob_config['state_mirror_engine'] = state_mirror_engine
-            knob_config['subscriber_router'] = subscriber_router
+            knob_config['state_mirror_engine'] = self.state_mirror_engine
+            knob_config['subscriber_router'] = self.subscriber_router
             knob_config['label_active'] = label + " Knob" # Label for knob
 
             knob_widget = self._create_knob(

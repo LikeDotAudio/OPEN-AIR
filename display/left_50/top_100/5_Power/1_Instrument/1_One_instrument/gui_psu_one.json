@@ -1,0 +1,136 @@
+{
+  "PSU_Reactor_Interface": {
+    "type": "OcaBlock",
+    "description": "High-Voltage Analog Injection System",
+    "fields": {
+      "Top_Level_Interlock": {
+        "type": "OcaBlock",
+        "description": "MAIN POWER BUS",
+        "fields": {
+          "Master_Output_Switch": {
+            "type": "_TrapezoidButton",
+            "label_active": "☢️ MAIN BUS: ACTIVE ☢️",
+            "label_inactive": "MAIN BUS: DISENGAGED",
+            "state_default": false,
+            "message_details": {
+              "PSU_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "OUTP <state>"
+              }
+            }
+          }
+        }
+      },
+      "Analog_Telemetry_Deck": {
+        "type": "OcaBlock",
+        "description": "Galvanometer Array",
+        "fields": {
+          "Meter_Voltage": {
+            "type": "_GuiAnalogGauge",
+            "label_active": "VOLTAGE",
+            "value_default": "0",
+            "min": "0",
+            "max": "100",
+            "unit": "V",
+            "description": "Potential Difference",
+            "message_details": {
+              "PSU_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "MEAS:VOLT?"
+              }
+            }
+          },
+          "Meter_Current": {
+            "type": "_GuiAnalogGauge",
+            "label_active": "CURRENT",
+            "value_default": "0",
+            "min": "0",
+            "max": "10",
+            "unit": "A",
+            "description": "Electron Flow",
+            "message_details": {
+              "PSU_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "MEAS:CURR?"
+              }
+            }
+          },
+          "Meter_Power": {
+            "type": "_GuiAnalogGauge",
+            "label_active": "TOTAL POWER",
+            "value_default": "0",
+            "min": "0",
+            "max": "1000",
+            "unit": "W",
+            "description": "Energy Consumption",
+            "message_details": {
+              "PSU_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "MEAS:POW?"
+              }
+            }
+          }
+        }
+      },
+      "Visual_History_Sector": {
+        "type": "OcaBlock",
+        "description": "Temporal Log",
+        "fields": {
+          "Power_History": {
+            "type": "_GuiGraph",
+            "label_active": "Stability Matrix",
+            "description": "Voltage & Current over Time",
+            "height": 200,
+            "message_details": {
+              "PSU_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "MEAS:SCAL:ALL?"
+              }
+            }
+          }
+        }
+      },
+      "Reactor_Control_Rods": {
+        "type": "OcaBlock",
+        "description": "Manual Regulation",
+        "fields": {
+          "Voltage_Fader": {
+            "type": "_GuiVerticalFader",
+            "label_active": "SET VOLTS (V)",
+            "value_default": "5.0",
+            "min": "0.0",
+            "max": "100.0",
+            "unit": "V",
+            "message_details": {
+              "PSU_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "VOLT <value>"
+              }
+            }
+          },
+          "Current_Fader": {
+            "type": "_GuiVerticalFader",
+            "label_active": "LIMIT AMPS (A)",
+            "value_default": "0.1",
+            "min": "0.0",
+            "max": "10.0",
+            "unit": "A",
+            "message_details": {
+              "PSU_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CURR <value>"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

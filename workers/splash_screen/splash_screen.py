@@ -152,7 +152,7 @@ class SplashScreen:
             self._safe_log(f"🔴 Failed to load GIF frames: {e}", is_error=True)
 
     def _update_gif_frame(self):
-        self._safe_log(f"🎞️ Updating GIF frame to index {self.gif_frame_index}")
+        # self._safe_log(f"🎞️ Updating GIF frame to index {self.gif_frame_index}")
         if not self.splash_window.winfo_exists():
             return
             

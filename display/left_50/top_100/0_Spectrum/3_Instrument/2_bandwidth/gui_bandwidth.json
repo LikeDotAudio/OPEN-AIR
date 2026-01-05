@@ -134,9 +134,9 @@
         "default_locked": false,
         "default_value": "0.5",
         "min": "0",
-        "max": "1",
-        "step": "0.01",
-        "units": "MHz",
+        "max": "1000",
+        "step": "1",
+        "units": "kHz",
         "layout": { "sticky": "ew" }
       },
       "Video Band Width ": {
@@ -149,112 +149,112 @@
           "sub_path": "Bandwidth",
           "command": "Set_VBW",
           "input_name": "hz_value",
-          "converter": "mhz_to_hz"
+          "converter": "khz_to_hz"
         },
         "layout": { "height": 30, "max_cols": 5, "sticky": "ew" },
         "options": {
           "1": {
-            "value": "1",
+            "value": "1000",
             "label_active": "Ultra Fast",
             "label_inactive": "Ultra Fast",
             "description": "A lightning-fast sweep. Filters are wide open, letting everything through.",
-            "units": "MHz",
+            "units": "kHz",
             "selected": false
           },
           "2": {
-            "value": "0.3",
+            "value": "300",
             "label_active": "Very Fast",
             "label_inactive": "Very Fast",
             "description": "A quick pass through the spectrum, ideal for fast-changing signals.",
-            "units": "MHz",
+            "units": "kHz",
             "selected": false
           },
           "3": {
-            "value": "0.1",
+            "value": "100",
             "label_active": "Fast",
             "label_inactive": "Fast",
             "description": "A balanced speed for general purpose monitoring and signal capture.",
-            "units": "MHz",
+            "units": "kHz",
             "selected": false
           },
           "4": {
-            "value": "0.03",
+            "value": "30",
             "label_active": "Normal",
             "label_inactive": "Normal",
             "description": "The standard filter setting for most common analysis tasks. Not too much, not too little.",
-            "units": "MHz",
+            "units": "kHz",
             "selected": false
           },
           "5": {
-            "value": "0.01",
+            "value": "10",
             "label_active": "Slow",
             "label_inactive": "Slow",
             "description": "A gentle filter, giving you more time to appreciate the finer details of a waveform.",
-            "units": "MHz",
+            "units": "kHz",
             "selected": false
           },
           "6": {
-            "value": "0.003",
+            "value": "3",
             "label_active": "Very Slow",
             "label_inactive": "Very Slow",
             "description": "For the meticulous scientist. You'll filter out fast noise and jitter, but at the cost of speed.",
-            "units": "MHz",
+            "units": "kHz",
             "selected": false
           },
           "7": {
-            "value": "0.001",
+            "value": "1",
             "label_active": "Ultra Slow",
             "label_inactive": "Ultra Slow",
             "description": "A meditative pace. So slow you can practically see the electrons move, offering maximum stability and noise reduction.",
-            "units": "MHz",
+            "units": "kHz",
             "selected": false
           },
           "8": {
-            "value": "0.0003",
+            "value": "0.3",
             "label_active": "Glacial",
             "label_inactive": "Glacial",
             "description": "A slow crawl. Good for very detailed analysis of continuous signals and filtering out transient noise.",
-            "units": "MHz",
+            "units": "kHz",
             "selected": false
           },
           "9": {
-            "value": "0.0001",
+            "value": "0.1",
             "label_active": "Glacial",
             "label_inactive": "Glacial",
             "description": "A slow crawl. Good for very detailed analysis of continuous signals and filtering out transient noise.",
-            "units": "MHz",
+            "units": "kHz",
             "selected": false
           },
           "10": {
-            "value": "0.00003",
+            "value": "0.03",
             "label_active": "Sub-Glacial",
             "label_inactive": "Sub-Glacial",
             "description": "The scanner cries, but it's worth it. Filters out almost all random noise, giving you a crystal-clear, steady line.",
-            "units": "MHz",
+            "units": "kHz",
             "selected": false
           },
           "11": {
-            "value": "0.00001",
+            "value": "0.01",
             "label_active": "Sub-Glacial",
             "label_inactive": "Sub-Glacial",
             "description": "The scanner cries, but it's worth it. Filters out almost all random noise, giving you a crystal-clear, steady line.",
-            "units": "MHz",
+            "units": "kHz",
             "selected": false
           },
           "12": {
-            "value": "0.000003",
+            "value": "0.003",
             "label_active": "Crazy Slow",
             "label_inactive": "Crazy Slow",
             "description": "Time seems to stop. For the most patient scientists and signals with incredible stability. The ultimate low-pass filter.",
-            "units": "MHz",
+            "units": "kHz",
             "selected": false
           },
           "13": {
-            "value": "0.000001",
+            "value": "0.001",
             "label_active": "Crazy Slow",
             "label_inactive": "Crazy Slow",
             "description": "Time seems to stop. For the most patient scientists and signals with incredible stability. The ultimate low-pass filter.",
-            "units": "MHz",
+            "units": "kHz",
             "selected": false
           },
           "UNSELECTED": {
@@ -299,28 +299,30 @@
   },
   "Sweep Time": {
     "type": "OcaBlock",
-    "description": "Video Bandwidth (VBW) settings.",
+    "description": "Sweep Time settings.",
     "layout": { "sticky": "ew" },
     "fields": {
-      "label_active": "Sweep Time",
-      "label_inactive": "Sweep Time",
-        "type": "_Horizontal_knob_Value",
-      "handler": "set_sweep_time",
-      "yak_handler": {
-        "enable": true,
-        "yak_type": "set",
-        "sub_path": "Bandwidth",
-        "command": "Set_Sweep_time",
-        "input_name": "s_value",
-        "converter": "float"
-      },
+      "sweep_time_setting": {
+        "label_active": "Sweep Time",
+        "label_inactive": "Sweep Time",
+          "type": "_Horizontal_knob_Value",
+        "handler": "set_sweep_time",
+        "yak_handler": {
+          "enable": true,
+          "yak_type": "set",
+          "sub_path": "Bandwidth",
+          "command": "Set_Sweep_time",
+          "input_name": "s_value",
+          "converter": "float"
+        },
 
-      "default_value": "0",
-      "min": "1",
-      "max": "50",
-      "step": "0.5",
-      "units": "s",
-      "layout": { "sticky": "ew" }
+        "default_value": "0",
+        "min": "0",
+        "max": "50",
+        "step": "0.5",
+        "units": "s",
+        "layout": { "sticky": "ew" }
+      }
     }
   }
 }

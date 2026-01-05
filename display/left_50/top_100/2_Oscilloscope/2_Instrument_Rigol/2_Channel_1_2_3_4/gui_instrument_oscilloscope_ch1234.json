@@ -1,0 +1,335 @@
+{
+  "Oscilloscope_Main_Station": {
+    "type": "OcaBlock",
+    "description": "Quad-Channel Flux Analyzer",
+    "fields": {
+      "Display_Sector": {
+        "type": "OcaBlock",
+        "description": "Visual Data Stream",
+        "fields": {
+          "Device_Identity": {
+            "type": "_TextInput",
+            "label_active": "Device Name",
+            "value_default": "Flux_Quad_Scope_88",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "SYST:NAME <value>"
+              }
+            }
+          },
+          "Main_Graph_Display": {
+            "type": "_GuiGraph",
+            "label_active": "4-Channel Visualization",
+            "description": "Rendering CH1, CH2, CH3, CH4",
+            "height": 450,
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "DISP:DATA?"
+              }
+            }
+          }
+        }
+      },
+      "Control_Deck_Break": {
+        "type": "OcaSeparator",
+        "description": "------------------------------------------------"
+      },
+      "Vertical_Bank_A": {
+        "type": "OcaBlock",
+        "description": "CH1 & CH2 Controls",
+        "fields": {
+          "Ch1_Volts_Div": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "CH1 Scale",
+            "value_default": "1.0",
+            "unit": "V",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CHAN1:SCAL <value>"
+              }
+            }
+          },
+          "Ch1_Offset": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "CH1 Offs",
+            "value_default": "0.0",
+            "unit": "V",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CHAN1:OFFS <value>"
+              }
+            }
+          },
+          "Ch2_Volts_Div": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "CH2 Scale",
+            "value_default": "1.0",
+            "unit": "V",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CHAN2:SCAL <value>"
+              }
+            }
+          },
+          "Ch2_Offset": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "CH2 Offs",
+            "value_default": "0.0",
+            "unit": "V",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CHAN2:OFFS <value>"
+              }
+            }
+          }
+        }
+      },
+      "Vertical_Bank_B": {
+        "type": "OcaBlock",
+        "description": "CH3 & CH4 Controls",
+        "fields": {
+          "Ch3_Volts_Div": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "CH3 Scale",
+            "value_default": "1.0",
+            "unit": "V",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CHAN3:SCAL <value>"
+              }
+            }
+          },
+          "Ch3_Offset": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "CH3 Offs",
+            "value_default": "0.0",
+            "unit": "V",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CHAN3:OFFS <value>"
+              }
+            }
+          },
+          "Ch4_Volts_Div": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "CH4 Scale",
+            "value_default": "1.0",
+            "unit": "V",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CHAN4:SCAL <value>"
+              }
+            }
+          },
+          "Ch4_Offset": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "CH4 Offs",
+            "value_default": "0.0",
+            "unit": "V",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CHAN4:OFFS <value>"
+              }
+            }
+          }
+        }
+      },
+      "Channel_State_Matrix": {
+        "type": "OcaBlock",
+        "description": "Active Channel Matrix",
+        "fields": {
+          "Ch1_Enable": {
+            "type": "_GuiButtonToggle",
+            "label_active": "CH1 ON",
+            "label_inactive": "CH1 OFF",
+            "state_default": true,
+            "message_details": { "OSCILLOSCOPE_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CHAN1:STAT <value>" } }
+          },
+          "Ch2_Enable": {
+            "type": "_GuiButtonToggle",
+            "label_active": "CH2 ON",
+            "label_inactive": "CH2 OFF",
+            "state_default": true,
+            "message_details": { "OSCILLOSCOPE_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CHAN2:STAT <value>" } }
+          },
+          "Ch3_Enable": {
+            "type": "_GuiButtonToggle",
+            "label_active": "CH3 ON",
+            "label_inactive": "CH3 OFF",
+            "state_default": false,
+            "message_details": { "OSCILLOSCOPE_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CHAN3:STAT <value>" } }
+          },
+          "Ch4_Enable": {
+            "type": "_GuiButtonToggle",
+            "label_active": "CH4 ON",
+            "label_inactive": "CH4 OFF",
+            "state_default": false,
+            "message_details": { "OSCILLOSCOPE_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CHAN4:STAT <value>" } }
+          }
+        }
+      },
+      "Horizontal_System": {
+        "type": "OcaBlock",
+        "description": "Global Timebase",
+        "fields": {
+          "Time_Div": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Time / Div",
+            "value_default": "1e-3",
+            "min": "1e-9",
+            "max": "10",
+            "unit": "s",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "TIM:SCAL <value>"
+              }
+            }
+          },
+          "Time_Offset": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Delay",
+            "value_default": "0.0",
+            "unit": "s",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "TIM:OFFS <value>"
+              }
+            }
+          }
+        }
+      },
+      "Trigger_Systems": {
+        "type": "OcaBlock",
+        "description": "Trigger Logic",
+        "fields": {
+          "Trigger_Source": {
+             "type": "_GuiDropDownOption",
+             "label_active": "Source",
+             "options": ["CH1", "CH2", "CH3", "CH4", "EXT", "LINE"],
+             "default_option": "CH1",
+             "message_details": {
+               "OSCILLOSCOPE_MODEL": {
+                 "type": "_GuiActuator",
+                 "trigger": false,
+                 "command_value": "TRIG:SOUR <value>"
+               }
+             }
+          },
+          "Trigger_Level": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Level",
+            "value_default": "0.5",
+            "unit": "V",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "TRIG:LEV <value>"
+              }
+            }
+          },
+          "Run_Stop": {
+            "type": "_GuiButtonToggle",
+            "label_active": "RUN",
+            "label_inactive": "STOP",
+            "state_default": true,
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "ACQ:STATE <value>"
+              }
+            }
+          }
+        }
+      },
+      "Math_Module": {
+        "type": "OcaBlock",
+        "description": "Calculations",
+        "fields": {
+          "Math_Op": {
+            "type": "_GuiDropDownOption",
+            "label_active": "Math",
+            "options": ["OFF", "A+B", "A-B", "FFT"],
+            "default_option": "OFF",
+            "message_details": {
+              "OSCILLOSCOPE_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "MATH:OPER <value>"
+              }
+            }
+          },
+          "Math_Source_A": {
+             "type": "_GuiDropDownOption",
+             "label_active": "Src A",
+             "options": ["CH1", "CH2", "CH3", "CH4"],
+             "default_option": "CH1",
+             "message_details": { "OSCILLOSCOPE_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "MATH:SRC1 <value>" } }
+          },
+          "Math_Source_B": {
+             "type": "_GuiDropDownOption",
+             "label_active": "Src B",
+             "options": ["CH1", "CH2", "CH3", "CH4"],
+             "default_option": "CH2",
+             "message_details": { "OSCILLOSCOPE_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "MATH:SRC2 <value>" } }
+          }
+        }
+      },
+      "Telemetry_Quad_Bank": {
+        "type": "OcaBlock",
+        "description": "Live Measurements",
+        "fields": {
+          "Read_Ch1": {
+            "type": "_GuiLabel",
+            "label_active": "CH1 Vpp",
+            "value_default": "-- V",
+            "message_details": { "OSCILLOSCOPE_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "MEAS:VPP? CHAN1" } }
+          },
+          "Read_Ch2": {
+            "type": "_GuiLabel",
+            "label_active": "CH2 Vpp",
+            "value_default": "-- V",
+            "message_details": { "OSCILLOSCOPE_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "MEAS:VPP? CHAN2" } }
+          },
+          "Read_Ch3": {
+            "type": "_GuiLabel",
+            "label_active": "CH3 Vpp",
+            "value_default": "-- V",
+            "message_details": { "OSCILLOSCOPE_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "MEAS:VPP? CHAN3" } }
+          },
+          "Read_Ch4": {
+            "type": "_GuiLabel",
+            "label_active": "CH4 Vpp",
+            "value_default": "-- V",
+            "message_details": { "OSCILLOSCOPE_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "MEAS:VPP? CHAN4" } }
+          }
+        }
+      }
+    }
+  }
+}

@@ -105,17 +105,19 @@ class CustomPannerFrame(ttk.Frame):
             self.temp_entry = None # Clean up the attribute
 
 class PannerCreatorMixin:
-    def _create_panner(self, parent_widget, config_data): # Updated signature
+    def _create_panner(self, parent_widget, config_data, **kwargs): # Updated signature
         """Creates a rotary panner widget."""
         current_function_name = "_create_panner"
         
-        # Extract arguments from config_data
+        # Extract only widget-specific config from config_data
         label = config_data.get("label_active")
         config = config_data # config_data is the config
         path = config_data.get("path")
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
@@ -159,7 +161,7 @@ class PannerCreatorMixin:
 
             if panner_value_var.get() != new_val:
                 panner_value_var.set(new_val)
-                state_mirror_engine.broadcast_gui_change_to_mqtt(path)
+                self.state_mirror_engine.broadcast_gui_change_to_mqtt(path)
 
         def on_panner_release(event):
             """Clears the drag state when the mouse button is released."""
@@ -173,10 +175,9 @@ class PannerCreatorMixin:
             max_val=max_val,
             reff_point=reff_point,
             path=path,
-            state_mirror_engine=state_mirror_engine,
+            state_mirror_engine=self.state_mirror_engine,
             command=None # Command is handled by the press/drag/release events now
         )
-
         if label:
             ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
 
@@ -219,12 +220,12 @@ class PannerCreatorMixin:
             # Register the StringVar with the StateMirrorEngine for MQTT updates
             if path:
                 widget_id = path
-                state_mirror_engine.register_widget(widget_id, panner_value_var, base_mqtt_topic_from_path, config)
+                self.state_mirror_engine.register_widget(widget_id, panner_value_var, base_mqtt_topic_from_path, config)
 
                 # Subscribe to the topic for incoming messages
                 from workers.mqtt.mqtt_topic_utils import get_topic
                 topic = get_topic("OPEN-AIR", base_mqtt_topic_from_path, widget_id)
-                subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
+                self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
 
                 if app_constants.global_settings['debug_enabled']:
                     debug_logger(

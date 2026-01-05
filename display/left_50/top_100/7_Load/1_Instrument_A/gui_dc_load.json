@@ -1,17 +1,30 @@
 {
-  "DC_Load_Panel": {
+  "Battery_Stress_Chamber": {
     "type": "OcaBlock",
-    "description": "DC Electronic Load Control Panel",
+    "description": "Advanced Energy Depletion System",
     "fields": {
-      "Mode_Control": {
+      "Master_Activation_Deck": {
         "type": "OcaBlock",
-        "description": "Operating Mode",
+        "description": "PRIMARY CONTACTORS",
         "fields": {
-          "mode_set": {
-            "type": "_GuiDropDownOption",
-            "label_active": "Mode",
-            "options": ["CC", "CV", "CR", "CP"],
-            "default_option": "CC",
+          "Master_Switch": {
+            "type": "_TrapezoidButton",
+            "label_active": "🩸 DRAINING ACTIVE 🩸",
+            "label_inactive": "ENGAGE LOAD",
+            "state_default": false,
+            "message_details": {
+              "DC_LOAD_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "INP <state>"
+              }
+            }
+          },
+          "Mode_Toggle": {
+            "type": "_GuiButtonToggle",
+            "label_active": "CONSTANT CURRENT",
+            "label_inactive": "CONSTANT POWER",
+            "state_default": true,
             "message_details": {
               "DC_LOAD_MODEL": {
                 "type": "_GuiActuator",
@@ -22,38 +35,122 @@
           }
         }
       },
-      "Value_Control": {
+      "Mixing_Desk_Deck": {
         "type": "OcaBlock",
-        "description": "Set Value",
+        "description": "Load Mixing Console",
         "fields": {
-          "set_value": {
-            "type": "_TextInput",
-            "label_active": "Set Value",
-            "value_default": "1.0",
-            "message_details": {
-              "DC_LOAD_MODEL": {
-                "type": "_GuiActuator",
-                "trigger": false,
-                "command_value": "<current_mode_command> <value>"
+          "Base_Load_Col": {
+            "type": "OcaBlock",
+            "description": "Steady State",
+            "fields": {
+              "Base_Current_Fader": {
+                "type": "_GuiVerticalFader",
+                "label_active": "BASE LOAD (A)",
+                "value_default": "0.0",
+                "min": "0.0",
+                "max": "50.0",
+                "unit": "A",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CURR <value>" } }
+              }
+            }
+          },
+          "Transient_Load_Col": {
+            "type": "OcaBlock",
+            "description": "Dynamic Peaks",
+            "fields": {
+              "Transient_Fader": {
+                "type": "_GuiVerticalFader",
+                "label_active": "PULSE PEAK (A)",
+                "value_default": "0.0",
+                "min": "0.0",
+                "max": "50.0",
+                "unit": "A",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CURR:TLEV <value>" } }
+              },
+              "Pulse_Enable": {
+                "type": "_GuiButtonToggle",
+                "label_active": "PULSE ON",
+                "label_inactive": "PULSE OFF",
+                "state_default": false,
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "TRAN:STAT <value>" } }
               }
             }
           }
         }
       },
-      "Input_Control": {
+      "Safety_Cutoff_Deck": {
         "type": "OcaBlock",
-        "description": "Input State",
+        "description": "Battery Protection",
         "fields": {
-          "input_enable": {
-            "type": "_GuiButtonToggle",
-            "label_active": "ON",
-            "label_inactive": "OFF",
-            "state_default": false,
+          "Cutoff_Voltage": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Stop Voltage (UVLO)",
+            "value_default": "3.0",
+            "min": "0.0",
+            "max": "48.0",
+            "unit": "V",
             "message_details": {
               "DC_LOAD_MODEL": {
                 "type": "_GuiActuator",
                 "trigger": false,
-                "command_value": "INPUT <state>"
+                "command_value": "VOLT:PROT:LOW <value>"
+              }
+            }
+          },
+          "Slew_Throttle": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Attack Speed (Slew)",
+            "value_default": "500",
+            "min": "10",
+            "max": "2500",
+            "unit": "A/ms",
+            "message_details": {
+              "DC_LOAD_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "CURR:SLEW <value>"
+              }
+            }
+          }
+        }
+      },
+      "Telemetry_Dashboard": {
+        "type": "OcaBlock",
+        "description": "Drain Statistics",
+        "fields": {
+          "Capacity_Readout": {
+            "type": "OcaBlock",
+            "fields": {
+              "Ah_Counter": {
+                "type": "_GuiLabel",
+                "label_active": "CAPACITY DRAINED",
+                "value_default": "0.000 Ah",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "MEAS:AH?" } }
+              },
+              "Wh_Counter": {
+                "type": "_GuiLabel",
+                "label_active": "ENERGY DISSIPATED",
+                "value_default": "0.000 Wh",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "MEAS:WH?" } }
+              },
+              "Timer_Readout": {
+                "type": "_GuiLabel",
+                "label_active": "ELAPSED TIME",
+                "value_default": "00:00:00",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "FETC:TIME?" } }
+              }
+            }
+          },
+          "Discharge_Curve": {
+            "type": "_GuiGraph",
+            "label_active": "Discharge Curve (V)",
+            "description": "Battery Voltage Sag",
+            "height": 180,
+            "message_details": {
+              "DC_LOAD_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "MEAS:VOLT?;MEAS:CURR?"
               }
             }
           }

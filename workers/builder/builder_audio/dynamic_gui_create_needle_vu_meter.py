@@ -16,17 +16,19 @@ import os
 from workers.mqtt.mqtt_topic_utils import get_topic # <--- ADD THIS LINE
 
 class NeedleVUMeterCreatorMixin:
-    def _create_needle_vu_meter(self, parent_widget, config_data): # Updated signature
+    def _create_needle_vu_meter(self, parent_widget, config_data, **kwargs): # Updated signature
         """Creates a needle-style VU meter widget."""
         current_function_name = "_create_needle_vu_meter"
         
-        # Extract arguments from config_data
+        # Extract only widget-specific config from config_data
         label = config_data.get("label_active")
         config = config_data # config_data is the config
         path = config_data.get("path")
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
@@ -77,7 +79,7 @@ class NeedleVUMeterCreatorMixin:
                 # Subscribe to the topic for incoming messages
                 from workers.mqtt.mqtt_topic_utils import get_topic
                 topic = get_topic("OPEN-AIR", base_mqtt_topic_from_path, widget_id)
-                subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
+                self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
 
                 if app_constants.global_settings['debug_enabled']:
                     debug_logger(

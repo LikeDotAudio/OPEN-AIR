@@ -1,0 +1,287 @@
+{
+  "Quad_PSU_Station": {
+    "type": "OcaBlock",
+    "description": "4-Channel High-Voltage Injection Matrix",
+    "fields": {
+      "Master_Override_Deck": {
+        "type": "OcaBlock",
+        "description": "GLOBAL SAFETY INTERLOCK",
+        "fields": {
+          "Global_Kill_Switch": {
+            "type": "_TrapezoidButton",
+            "label_active": "☢️ MASTER POWER: ACTIVE ☢️",
+            "label_inactive": "MASTER POWER: OFF",
+            "state_default": false,
+            "message_details": {
+              "PSU_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "OUTP:ALL <state>"
+              }
+            }
+          }
+        }
+      },
+      "Reactor_Grid_Row_1": {
+        "type": "OcaBlock",
+        "description": "--- UPPER DECK (Units 1 & 2) ---",
+        "fields": {
+          "Unit_1_Alpha": {
+            "type": "OcaBlock",
+            "description": "CORE 1",
+            "fields": {
+              "Meters_1": {
+                "type": "OcaBlock",
+                "fields": {
+                  "V_Meter_1": {
+                    "type": "_GuiAnalogGauge",
+                    "label_active": "V1",
+                    "min": "0",
+                    "max": "100",
+                    "unit": "V",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;MEAS:VOLT?" } }
+                  },
+                  "I_Meter_1": {
+                    "type": "_GuiAnalogGauge",
+                    "label_active": "A1",
+                    "min": "0",
+                    "max": "10",
+                    "unit": "A",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;MEAS:CURR?" } }
+                  },
+                  "P_Meter_1": {
+                    "type": "_GuiAnalogGauge",
+                    "label_active": "W1",
+                    "min": "0",
+                    "max": "1000",
+                    "unit": "W",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;MEAS:POW?" } }
+                  }
+                }
+              },
+              "Controls_1": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Volts_Set_1": {
+                    "type": "_GuiVerticalFader",
+                    "label_active": "SET V",
+                    "min": "0",
+                    "max": "100",
+                    "unit": "V",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;VOLT <value>" } }
+                  },
+                  "Amps_Set_1": {
+                    "type": "_GuiVerticalFader",
+                    "label_active": "LIM A",
+                    "min": "0",
+                    "max": "10",
+                    "unit": "A",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;CURR <value>" } }
+                  },
+                  "Enable_1": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "CH1 ON",
+                    "label_inactive": "CH1 OFF",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;OUTP <state>" } }
+                  }
+                }
+              }
+            }
+          },
+          "Unit_2_Beta": {
+            "type": "OcaBlock",
+            "description": "CORE 2",
+            "fields": {
+              "Meters_2": {
+                "type": "OcaBlock",
+                "fields": {
+                  "V_Meter_2": {
+                    "type": "_GuiAnalogGauge",
+                    "label_active": "V2",
+                    "min": "0",
+                    "max": "100",
+                    "unit": "V",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;MEAS:VOLT?" } }
+                  },
+                  "I_Meter_2": {
+                    "type": "_GuiAnalogGauge",
+                    "label_active": "A2",
+                    "min": "0",
+                    "max": "10",
+                    "unit": "A",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;MEAS:CURR?" } }
+                  },
+                  "P_Meter_2": {
+                    "type": "_GuiAnalogGauge",
+                    "label_active": "W2",
+                    "min": "0",
+                    "max": "1000",
+                    "unit": "W",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;MEAS:POW?" } }
+                  }
+                }
+              },
+              "Controls_2": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Volts_Set_2": {
+                    "type": "_GuiVerticalFader",
+                    "label_active": "SET V",
+                    "min": "0",
+                    "max": "100",
+                    "unit": "V",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;VOLT <value>" } }
+                  },
+                  "Amps_Set_2": {
+                    "type": "_GuiVerticalFader",
+                    "label_active": "LIM A",
+                    "min": "0",
+                    "max": "10",
+                    "unit": "A",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;CURR <value>" } }
+                  },
+                  "Enable_2": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "CH2 ON",
+                    "label_inactive": "CH2 OFF",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;OUTP <state>" } }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Reactor_Grid_Row_2": {
+        "type": "OcaBlock",
+        "description": "--- LOWER DECK (Units 3 & 4) ---",
+        "fields": {
+          "Unit_3_Gamma": {
+            "type": "OcaBlock",
+            "description": "CORE 3",
+            "fields": {
+              "Meters_3": {
+                "type": "OcaBlock",
+                "fields": {
+                  "V_Meter_3": {
+                    "type": "_GuiAnalogGauge",
+                    "label_active": "V3",
+                    "min": "0",
+                    "max": "100",
+                    "unit": "V",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;MEAS:VOLT?" } }
+                  },
+                  "I_Meter_3": {
+                    "type": "_GuiAnalogGauge",
+                    "label_active": "A3",
+                    "min": "0",
+                    "max": "10",
+                    "unit": "A",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;MEAS:CURR?" } }
+                  },
+                  "P_Meter_3": {
+                    "type": "_GuiAnalogGauge",
+                    "label_active": "W3",
+                    "min": "0",
+                    "max": "1000",
+                    "unit": "W",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;MEAS:POW?" } }
+                  }
+                }
+              },
+              "Controls_3": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Volts_Set_3": {
+                    "type": "_GuiVerticalFader",
+                    "label_active": "SET V",
+                    "min": "0",
+                    "max": "100",
+                    "unit": "V",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;VOLT <value>" } }
+                  },
+                  "Amps_Set_3": {
+                    "type": "_GuiVerticalFader",
+                    "label_active": "LIM A",
+                    "min": "0",
+                    "max": "10",
+                    "unit": "A",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;CURR <value>" } }
+                  },
+                  "Enable_3": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "CH3 ON",
+                    "label_inactive": "CH3 OFF",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;OUTP <state>" } }
+                  }
+                }
+              }
+            }
+          },
+          "Unit_4_Delta": {
+            "type": "OcaBlock",
+            "description": "CORE 4",
+            "fields": {
+              "Meters_4": {
+                "type": "OcaBlock",
+                "fields": {
+                  "V_Meter_4": {
+                    "type": "_GuiAnalogGauge",
+                    "label_active": "V4",
+                    "min": "0",
+                    "max": "100",
+                    "unit": "V",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;MEAS:VOLT?" } }
+                  },
+                  "I_Meter_4": {
+                    "type": "_GuiAnalogGauge",
+                    "label_active": "A4",
+                    "min": "0",
+                    "max": "10",
+                    "unit": "A",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;MEAS:CURR?" } }
+                  },
+                  "P_Meter_4": {
+                    "type": "_GuiAnalogGauge",
+                    "label_active": "W4",
+                    "min": "0",
+                    "max": "1000",
+                    "unit": "W",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;MEAS:POW?" } }
+                  }
+                }
+              },
+              "Controls_4": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Volts_Set_4": {
+                    "type": "_GuiVerticalFader",
+                    "label_active": "SET V",
+                    "min": "0",
+                    "max": "100",
+                    "unit": "V",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;VOLT <value>" } }
+                  },
+                  "Amps_Set_4": {
+                    "type": "_GuiVerticalFader",
+                    "label_active": "LIM A",
+                    "min": "0",
+                    "max": "10",
+                    "unit": "A",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;CURR <value>" } }
+                  },
+                  "Enable_4": {
+                    "type": "_GuiButtonToggle",
+                    "label_active": "CH4 ON",
+                    "label_inactive": "CH4 OFF",
+                    "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;OUTP <state>" } }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "Octo_Monitor_Station": {
+    "type": "OcaBlock",
+    "description": "8-Channel Passive Telemetry Array",
+    "fields": {
+      "Left_Bank_1_4": {
+        "type": "OcaBlock",
+        "description": "--- BANK ALPHA (Units 1-4) ---",
+        "fields": {
+          "Unit_1_Monitor": {
+            "type": "OcaBlock",
+            "description": "UNIT 1",
+            "fields": {
+              "Val_1": {
+                "type": "_GuiLabel",
+                "label_active": "UNIT 1",
+                "value_default": "---",
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;READ?" } }
+              },
+              "Graph_1": {
+                "type": "_GuiGraph",
+                "label_active": "Trend 1",
+                "height": 80,
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;DATA:POIN?" } }
+              }
+            }
+          },
+          "Unit_2_Monitor": {
+            "type": "OcaBlock",
+            "description": "UNIT 2",
+            "fields": {
+              "Val_2": {
+                "type": "_GuiLabel",
+                "label_active": "UNIT 2",
+                "value_default": "---",
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;READ?" } }
+              },
+              "Graph_2": {
+                "type": "_GuiGraph",
+                "label_active": "Trend 2",
+                "height": 80,
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;DATA:POIN?" } }
+              }
+            }
+          },
+          "Unit_3_Monitor": {
+            "type": "OcaBlock",
+            "description": "UNIT 3",
+            "fields": {
+              "Val_3": {
+                "type": "_GuiLabel",
+                "label_active": "UNIT 3",
+                "value_default": "---",
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;READ?" } }
+              },
+              "Graph_3": {
+                "type": "_GuiGraph",
+                "label_active": "Trend 3",
+                "height": 80,
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;DATA:POIN?" } }
+              }
+            }
+          },
+          "Unit_4_Monitor": {
+            "type": "OcaBlock",
+            "description": "UNIT 4",
+            "fields": {
+              "Val_4": {
+                "type": "_GuiLabel",
+                "label_active": "UNIT 4",
+                "value_default": "---",
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;READ?" } }
+              },
+              "Graph_4": {
+                "type": "_GuiGraph",
+                "label_active": "Trend 4",
+                "height": 80,
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;DATA:POIN?" } }
+              }
+            }
+          }
+        }
+      },
+      "Center_Divide": {
+        "type": "OcaSeparator",
+        "description": " | "
+      },
+      "Right_Bank_5_8": {
+        "type": "OcaBlock",
+        "description": "--- BANK BETA (Units 5-8) ---",
+        "fields": {
+          "Unit_5_Monitor": {
+            "type": "OcaBlock",
+            "description": "UNIT 5",
+            "fields": {
+              "Val_5": {
+                "type": "_GuiLabel",
+                "label_active": "UNIT 5",
+                "value_default": "---",
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 5;READ?" } }
+              },
+              "Graph_5": {
+                "type": "_GuiGraph",
+                "label_active": "Trend 5",
+                "height": 80,
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 5;DATA:POIN?" } }
+              }
+            }
+          },
+          "Unit_6_Monitor": {
+            "type": "OcaBlock",
+            "description": "UNIT 6",
+            "fields": {
+              "Val_6": {
+                "type": "_GuiLabel",
+                "label_active": "UNIT 6",
+                "value_default": "---",
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 6;READ?" } }
+              },
+              "Graph_6": {
+                "type": "_GuiGraph",
+                "label_active": "Trend 6",
+                "height": 80,
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 6;DATA:POIN?" } }
+              }
+            }
+          },
+          "Unit_7_Monitor": {
+            "type": "OcaBlock",
+            "description": "UNIT 7",
+            "fields": {
+              "Val_7": {
+                "type": "_GuiLabel",
+                "label_active": "UNIT 7",
+                "value_default": "---",
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 7;READ?" } }
+              },
+              "Graph_7": {
+                "type": "_GuiGraph",
+                "label_active": "Trend 7",
+                "height": 80,
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 7;DATA:POIN?" } }
+              }
+            }
+          },
+          "Unit_8_Monitor": {
+            "type": "OcaBlock",
+            "description": "UNIT 8",
+            "fields": {
+              "Val_8": {
+                "type": "_GuiLabel",
+                "label_active": "UNIT 8",
+                "value_default": "---",
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 8;READ?" } }
+              },
+              "Graph_8": {
+                "type": "_GuiGraph",
+                "label_active": "Trend 8",
+                "height": 80,
+                "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 8;DATA:POIN?" } }
+              }
+            }
+          }
+        }
+      },
+      "Master_Control": {
+        "type": "OcaBlock",
+        "description": "Global Commands",
+        "fields": {
+          "Global_Refresh": {
+             "type": "_TrapezoidButton",
+             "label_active": "REFRESH ALL SENSORS",
+             "message_details": {
+               "DMM_MODEL": {
+                 "type": "_GuiActuator",
+                 "trigger": true,
+                 "command_value": "READ:ALL?"
+               }
+             }
+          }
+        }
+      }
+    }
+  }
+}

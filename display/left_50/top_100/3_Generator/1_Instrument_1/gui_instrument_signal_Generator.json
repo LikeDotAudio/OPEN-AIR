@@ -1,60 +1,386 @@
 {
-  "Signal_Generator_Panel": {
+  "nab": {
     "type": "OcaBlock",
-    "description": "Signal Generator Control Panel",
+    "description": "SigGen Readbacks",
     "fields": {
-      "Frequency_Control": {
+      "Read_Current_Setup": {
         "type": "OcaBlock",
-        "description": "Frequency",
+        "description": "Query active configuration",
         "fields": {
-          "frequency_value": {
-            "type": "_TextInput",
-            "label_active": "Frequency (Hz)",
-            "value_default": "1e6",
-            "message_details": {
-              "SIGNAL_GENERATOR_MODEL": {
+          "Get_Apply_String": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
                 "type": "_GuiActuator",
-                "trigger": false,
-                "command_value": "FREQ <value>"
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "message": "APPLy?",
+                "layout": { "height": 30, "sticky": "" }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "config_string": { "value": "\"SIN 1000, 3.0, 0.0\"", "type": "_Value" }
+                }
+              }
+            }
+          },
+          "Get_Output_State": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "message": "OUTPut?",
+                "layout": { "height": 30, "sticky": "" }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "is_on": { "value": "0 or 1", "type": "_Value" }
+                }
+              }
+            }
+          },
+          "Get_Error_Queue": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "message": "SYSTem:ERRor?",
+                "layout": { "height": 30, "sticky": "" }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "error_msg": { "value": "Error Code, Message", "type": "_Value" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "rig": {
+    "type": "OcaBlock",
+    "description": "Waveform Configuration",
+    "fields": {
+      "Quick_Setup_Apply": {
+        "type": "OcaBlock",
+        "description": "APPLy Macro Commands",
+        "fields": {
+          "Apply_Sine": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "message": "APPLy:SINusoid <freq>, <amp>, <offset>",
+                "layout": { "height": 30, "sticky": "" }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "freq": { "value": "1000", "type": "_Value" },
+                  "amp": { "value": "1.0", "type": "_Value", "description": "Amplitude in Vpp" },
+                  "offset": { "value": "0.0", "type": "_Value", "description": "Offset in Volts" }
+                }
+              }
+            }
+          },
+          "Apply_Square": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "message": "APPLy:SQUare <freq>, <amp>, <offset>",
+                "layout": { "height": 30, "sticky": "" }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "freq": { "value": "1000", "type": "_Value" },
+                  "amp": { "value": "1.0", "type": "_Value" },
+                  "offset": { "value": "0.0", "type": "_Value" }
+                }
+              }
+            }
+          },
+          "Apply_Pulse": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "message": "APPLy:PULSe <freq>, <amp>, <offset>",
+                "layout": { "height": 30, "sticky": "" }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "freq": { "value": "1000", "type": "_Value" },
+                  "amp": { "value": "1.0", "type": "_Value" },
+                  "offset": { "value": "0.0", "type": "_Value" }
+                }
               }
             }
           }
         }
       },
-      "Amplitude_Control": {
+      "Modulation_Setup": {
         "type": "OcaBlock",
-        "description": "Amplitude",
+        "description": "AM/FM/Pulse Config",
         "fields": {
-          "amplitude_value": {
-            "type": "_TextInput",
-            "label_active": "Amplitude (dBm)",
-            "value_default": "0",
-            "message_details": {
-              "SIGNAL_GENERATOR_MODEL": {
+          "Setup_AM": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
                 "type": "_GuiActuator",
-                "trigger": false,
-                "command_value": "POWER <value>"
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "message": "AM:INTernal:FUNCtion <shape>;AM:INTernal:FREQuency <freq>;AM:DEPTh <depth>",
+                "layout": { "height": 30, "sticky": "" }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "shape": { "value": "SIN", "type": "_Value", "description": "SIN, SQU, TRI, RAMP" },
+                  "freq": { "value": "100", "type": "_Value", "description": "Modulating Freq Hz" },
+                  "depth": { "value": "50", "type": "_Value", "description": "Depth %" }
+                }
+              }
+            }
+          },
+          "Setup_Pulse_Width": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "message": "FUNCtion:PULSe:WIDTh <width_sec>",
+                "layout": { "height": 30, "sticky": "" }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "width_sec": { "value": "0.0001", "type": "_Value" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "set": {
+    "type": "OcaBlock",
+    "description": "Individual Parameters",
+    "fields": {
+      "Set_Main_Parameters": {
+        "type": "OcaBlock",
+        "fields": {
+          "Set_Frequency": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "message": "FREQuency <freq>",
+                "layout": { "height": 30, "sticky": "" }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": { "freq": { "value": "1000", "type": "_Value" } }
+              }
+            }
+          },
+          "Set_Amplitude": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "message": "VOLTage <amp>",
+                "layout": { "height": 30, "sticky": "" }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": { "amp": { "value": "1.0", "type": "_Value", "description": "Default unit is Vpp" } }
+              }
+            }
+          },
+          "Set_Offset": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "message": "VOLTage:OFFSet <offset>",
+                "layout": { "height": 30, "sticky": "" }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": { "offset": { "value": "0.0", "type": "_Value" } }
+              }
+            }
+          },
+          "Set_Function_Shape": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "message": "FUNCtion <shape>",
+                "layout": { "height": 30, "sticky": "" }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "shape": { "value": "SIN", "type": "_Value", "description": "SIN, SQU, RAMP, PULS, NOIS, DC, USER" }
+                }
               }
             }
           }
         }
       },
+      "Set_Units_Load": {
+        "type": "OcaBlock",
+        "fields": {
+          "Set_Output_Load": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "message": "OUTPut:LOAD <ohms>",
+                "layout": { "height": 30, "sticky": "" }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": { "ohms": { "value": "50", "type": "_Value", "description": "Ohms or INFinity" } }
+              }
+            }
+          },
+          "Set_Voltage_Unit": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "message": "VOLTage:UNIT <unit>",
+                "layout": { "height": 30, "sticky": "" }
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": { "unit": { "value": "VPP", "type": "_Value", "description": "VPP, VRMS, DBM" } }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "Do": {
+    "type": "OcaBlock",
+    "description": "Actions and Toggles",
+    "fields": {
       "Output_Control": {
         "type": "OcaBlock",
-        "description": "Output",
         "fields": {
-          "output_state": {
-            "type": "_GuiButtonToggle",
-            "label_active": "ON",
-            "label_inactive": "OFF",
-            "state_default": false,
-            "message_details": {
-              "SIGNAL_GENERATOR_MODEL": {
-                "type": "_GuiActuator",
-                "trigger": false,
-                "command_value": "OUTPUT:STATE <state>"
-              }
-            }
+          "Output_ON": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "label_inactive": "Output ON",
+            "Execute Command": { "message": "OUTPut ON" }
+          },
+          "Output_OFF": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "label_inactive": "Output OFF",
+            "Execute Command": { "message": "OUTPut OFF" }
+          },
+          "Sync_ON": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "label_inactive": "Sync ON",
+            "Execute Command": { "message": "OUTPut:SYNC ON" }
+          },
+          "Sync_OFF": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "label_inactive": "Sync OFF",
+            "Execute Command": { "message": "OUTPut:SYNC OFF" }
+          }
+        }
+      },
+      "Modulation_Control": {
+        "type": "OcaBlock",
+        "fields": {
+          "AM_State_ON": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label_inactive": "AM ON",
+            "Execute Command": { "message": "AM:STATe ON" }
+          },
+          "AM_State_OFF": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label_inactive": "AM OFF",
+            "Execute Command": { "message": "AM:STATe OFF" }
+          },
+          "FM_State_ON": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label_inactive": "FM ON",
+            "Execute Command": { "message": "FM:STATe ON" }
+          },
+          "FM_State_OFF": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label_inactive": "FM OFF",
+            "Execute Command": { "message": "FM:STATe OFF" }
+          }
+        }
+      },
+      "System_Actions": {
+        "type": "OcaBlock",
+        "fields": {
+          "Trigger_Immediate": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label_inactive": "Trigger (*TRG)",
+            "Execute Command": { "message": "*TRG" }
+          },
+          "Reset_Device": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label_inactive": "Reset (*RST)",
+            "Execute Command": { "message": "*RST" }
+          },
+          "Clear_Text": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label_inactive": "Clear Display",
+            "Execute Command": { "message": "DISPlay:TEXT:CLEar" }
           }
         }
       }

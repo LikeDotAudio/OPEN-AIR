@@ -35,19 +35,21 @@ class LabelFromConfigCreatorMixin:
     A mixin class that provides a wrapper for creating a label widget
     from a configuration dictionary.
     """
-    def _create_label_from_config(self, parent_widget, config_data): # Updated signature
+    def _create_label_from_config(self, parent_widget, config_data, **kwargs): # Updated signature
         # A wrapper for _create_label to match the factory function signature.
         # It calls the _create_label method (provided by LabelCreatorMixin).
         current_function_name = inspect.currentframe().f_code.co_name
         
-        # Extract arguments from config_data
+        # Extract only widget-specific config from config_data
         label = config_data.get("label_active") # Use label from config_data
         config = config_data # config_data is the config
         path = config_data.get("path")
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
-
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
+        
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
                 message=f"🟢️️️🟢 ➡️➡️ '{current_function_name}' to create label from config for '{label}'.",
@@ -59,13 +61,20 @@ class LabelFromConfigCreatorMixin:
             label_config["parent_widget"] = parent_widget # Pass parent_widget through config for _create_label
             label_config["label_active"] = label # Ensure label is in config
             label_config["path"] = path
-            label_config["base_mqtt_topic_from_path"] = base_mqtt_topic_from_path
-            label_config["state_mirror_engine"] = state_mirror_engine
-            label_config["subscriber_router"] = subscriber_router
+            label_config["base_mqtt_topic_from_path"] = base_mqtt_topic_from_path # Pass the derived base_mqtt_topic_from_path
+            label_config["state_mirror_engine"] = state_mirror_engine # Pass the derived state_mirror_engine
+            label_config["subscriber_router"] = subscriber_router # Pass the derived subscriber_router
 
             result = self._create_label(
-                parent_widget=parent_widget, # Pass parent_widget
-                config_data=label_config # Pass the full config_data for _create_label to parse
+                parent_frame=parent_widget,
+                label=label,
+                value=config_data.get("value", ""),
+                units=config_data.get("units"),
+                path=path,
+                base_mqtt_topic_from_path=base_mqtt_topic_from_path,
+                state_mirror_engine=state_mirror_engine,
+                subscriber_router=subscriber_router,
+                config=config_data
             )
             if app_constants.global_settings['debug_enabled']:
                 debug_logger(

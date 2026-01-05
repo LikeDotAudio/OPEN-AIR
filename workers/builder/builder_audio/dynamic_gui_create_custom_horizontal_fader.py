@@ -93,18 +93,20 @@ class CustomHorizontalFaderFrame(tk.Frame):
             self.temp_entry = None
 
 class CustomHorizontalFaderCreatorMixin:
-    def _create_custom_horizontal_fader(self, parent_widget, config_data): # Updated signature
+    def _create_custom_horizontal_fader(self, parent_widget, config_data, **kwargs): # Updated signature
         """Creates a custom horizontal fader widget."""
         current_function_name = "_create_custom_horizontal_fader"
         
-        # Extract arguments from config_data
+        # Extract only widget-specific config from config_data
         label = config_data.get("label_active")
         config = config_data # config_data is the config
         path = config_data.get("path")
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
         tick_interval = config_data.get("tick_interval") # Extract tick_interval from config_data
+
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         bg_color = colors.get("bg", "#2b2b2b")
@@ -135,11 +137,10 @@ class CustomHorizontalFaderCreatorMixin:
             variable=fader_value_var,
             config=config,
             path=path,
-            state_mirror_engine=state_mirror_engine,
+            state_mirror_engine=self.state_mirror_engine,
             command=on_drag_or_click_callback,
             tick_interval=tick_interval # Pass the tick_interval
         )
-
         if label:
             ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
 
@@ -169,12 +170,11 @@ class CustomHorizontalFaderCreatorMixin:
 
         if path:
             widget_id = path
-            state_mirror_engine.register_widget(widget_id, fader_value_var, base_mqtt_topic_from_path, config)
+            self.state_mirror_engine.register_widget(widget_id, fader_value_var, base_mqtt_topic_from_path, config)
 
             # Subscribe to the topic for incoming messages
             topic = get_topic("OPEN-AIR", base_mqtt_topic_from_path, widget_id)
-            subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
-
+            self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
             state_mirror_engine.initialize_widget_state(path)
 
         return frame

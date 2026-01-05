@@ -11,17 +11,19 @@ from workers.logger.log_utils import _get_log_args
 import os
 
 class TextInputCreatorMixin:
-    def _create_text_input(self, parent_widget, config_data): # Updated signature
+    def _create_text_input(self, parent_widget, config_data, **kwargs): # Updated signature
         """Creates a text input widget."""
         current_function_name = "_create_text_input"
         
-        # Extract arguments from config_data
+        # Extract only widget-specific config from config_data
         label = config_data.get("label_active")
         config = config_data # config_data is the config
         path = config_data.get("path")
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
@@ -60,8 +62,8 @@ class TextInputCreatorMixin:
                 state_mirror_engine.register_widget(widget_id, text_var, base_mqtt_topic_from_path, config)
                 
                 # Subscribe to this widget's topic to receive updates
-                topic = get_topic("OPEN-AIR", base_mqtt_topic_from_path, widget_id)
-                subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
+                topic = get_topic("OPEN-AIR", self.state_mirror_engine.base_topic, widget_id)
+                self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
 
                 if app_constants.global_settings['debug_enabled']:
                     debug_logger(

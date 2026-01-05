@@ -122,7 +122,9 @@ class GenericInstrumentGui(ttk.Frame):
 
             # 1. Validate File Existence
             if not self.json_path.exists():
-                raise FileNotFoundError(f"The Blueprint is missing! Cannot find JSON at: {self.json_path}")
+                with open(self.json_path, 'w') as f:
+                    f.write('{}')
+                debug_logger(message=f"Created missing JSON file: {self.json_path}", **_get_log_args())
 
             processed_path = str(self.json_path)
             

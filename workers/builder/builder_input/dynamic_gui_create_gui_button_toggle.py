@@ -46,17 +46,19 @@ current_file = f"{os.path.basename(__file__)}"
 TOPIC_DELIMITER = "/"
 
 class GuiButtonToggleCreatorMixin:
-    def _create_gui_button_toggle(self, parent_widget, config_data): # Updated signature
+    def _create_gui_button_toggle(self, parent_widget, config_data, **kwargs): # Updated signature
         # Creates a single button that toggles between two states (e.g., ON/OFF).
         current_function_name = inspect.currentframe().f_code.co_name
 
-        # Extract arguments from config_data
+        # Extract only widget-specific config from config_data
         label = config_data.get("label_active")
         config = config_data # config_data is the config
-        path = config_data.get("path")
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
+        path = config_data.get("path") # Path for this widget
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
@@ -88,11 +90,19 @@ class GuiButtonToggleCreatorMixin:
                 else: # The button is OFF, so use the default 'TButton' style.
                     button.config(text=off_text, style='Custom.TButton')
 
-            def toggle_state():
-                # Flips the state of the state_var. The trace will handle the rest.
-                state_var.set(not state_var.get())
+            def on_button_click(event):
+                # Shift key is bit 1 of the state mask
+                is_shift_pressed = (event.state & 0x0001) != 0
 
-            button.config(command=toggle_state)
+                if is_shift_pressed:
+                    # Latching behavior: if it's already on, do nothing. If it's off, turn it on and keep it on.
+                    if not state_var.get():
+                        state_var.set(True)
+                else:
+                    # Normal toggle behavior
+                    state_var.set(not state_var.get())
+
+            button.bind("<Button-1>", on_button_click)
             update_button_state() # Set initial text and style
             
             if path:

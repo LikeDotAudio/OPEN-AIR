@@ -13,17 +13,19 @@ from workers.setup.path_initializer import GLOBAL_PROJECT_ROOT # Import GLOBAL_P
 from workers.mqtt.mqtt_topic_utils import get_topic # Import get_topic
 
 class AnimationDisplayCreatorMixin:
-    def _create_animation_display(self, parent_widget, config_data): # Updated signature
+    def _create_animation_display(self, parent_widget, config_data, **kwargs): # Updated signature
         """Creates an animation display widget."""
         current_function_name = "_create_animation_display"
         
-        # Extract arguments from config_data
+        # Extract widget-specific config from config_data
         label = config_data.get("label_active")
         config = config_data # config_data is the config
         path = config_data.get("path")
-        self.base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path") # Store as instance variable
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
@@ -95,15 +97,14 @@ class AnimationDisplayCreatorMixin:
         if path:
             widget_id = path
             # Register the IntVar with the StateMirrorEngine
-            state_mirror_engine.register_widget(widget_id, frame_index_var, base_mqtt_topic_from_path, config)
+            self.state_mirror_engine.register_widget(widget_id, frame_index_var, base_mqtt_topic_from_path, config)
             
             # Subscribe to the topic for incoming messages
             topic = get_topic("OPEN-AIR", base_mqtt_topic_from_path, widget_id)
-            subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
+            self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
 
             # Initialize state from cache or broadcast
-            state_mirror_engine.initialize_widget_state(path)
-
+            self.state_mirror_engine.initialize_widget_state(path)
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
                 message=f"✅ SUCCESS! The animation for '{label}' is ready to roll!",
@@ -118,7 +119,7 @@ class AnimationDisplayCreatorMixin:
             value = payload_data.get('val')
             
             # Extract widget path from topic
-            expected_prefix = get_topic("OPEN-AIR", self.base_mqtt_topic_from_path, "") # Construct expected prefix with new base topic
+            expected_prefix = get_topic("OPEN-AIR", self.state_mirror_engine.base_topic, "") # Construct expected prefix with new base topic
             if topic.startswith(expected_prefix):
                 widget_path = topic[len(expected_prefix):].strip(TOPIC_DELIMITER)
             else:
@@ -128,7 +129,7 @@ class AnimationDisplayCreatorMixin:
             
             # Instead of calling update_func directly, find the registered tk_var and set its value
             # This will trigger the trace and the _update_frame function
-            full_topic = get_topic("OPEN-AIR", self.base_mqtt_topic_from_path, widget_path)
+            full_topic = get_topic("OPEN-AIR", self.state_mirror_engine.base_topic, widget_path)
             if full_topic in self.state_mirror_engine.registered_widgets:
                 tk_var = self.state_mirror_engine.registered_widgets[full_topic]["var"]
                 tk_var.set(value) # Set the tk.Variable, which triggers its trace

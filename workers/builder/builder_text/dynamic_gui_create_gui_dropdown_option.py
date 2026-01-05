@@ -52,23 +52,19 @@ class GuiDropdownOptionCreatorMixin:
     A mixin class that provides the functionality for creating a
     dropdown (Combobox) widget.
     """
-    def _create_gui_dropdown_option(self, parent_widget, config_data): # Updated signature
+    def _create_gui_dropdown_option(self, parent_widget, config_data, **kwargs): # Updated signature
         # Creates a dropdown menu for multiple choice options.
         current_function_name = inspect.currentframe().f_code.co_name
 
-        # Extract arguments from config_data
+        # Extract only widget-specific config from config_data
         label = config_data.get("label_active")
         config = config_data # config_data is the config
         path = config_data.get("path")
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
-
-        if app_constants.global_settings['debug_enabled']:
-            debug_logger(
-                message=f"🔬⚡️ Entering '{current_function_name}' to devise a dropdown selector for '{label}'.",
-              **_get_log_args()
-            )
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         try:
             sub_frame = ttk.Frame(parent_widget) # Use parent_widget here
@@ -167,7 +163,7 @@ class GuiDropdownOptionCreatorMixin:
                                 **_get_log_args()
                             )
                         # Instead of self._transmit_command, directly broadcast the change
-                        state_mirror_engine.broadcast_gui_change_to_mqtt(path)
+                        self.state_mirror_engine.broadcast_gui_change_to_mqtt(path)
                         self._current_selected_key_for_path = selected_key # Update for consistency
 
                 except ValueError:
@@ -186,8 +182,9 @@ class GuiDropdownOptionCreatorMixin:
                 state_mirror_engine.register_widget(widget_id, selected_value_var, base_mqtt_topic_from_path, config)
                 
                 # Subscribe to this widget's topic to receive updates
-                topic = get_topic("OPEN-AIR", base_mqtt_topic_from_path, widget_id)
-                subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
+                topic = get_topic("OPEN-AIR", self.state_mirror_engine.base_topic, widget_id)
+                if topic:
+                    self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
 
                 if app_constants.global_settings['debug_enabled']:
                     debug_logger(

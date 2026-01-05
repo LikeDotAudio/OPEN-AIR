@@ -32,6 +32,7 @@ from tkinter import ttk
 import os
 import inspect
 from decimal import Decimal, InvalidOperation
+import time
 from workers.mqtt.mqtt_subscriber_router import MqttSubscriberRouter # Import MqttSubscriberRouter
 from workers.mqtt.mqtt_topic_utils import get_topic, TOPIC_DELIMITER # Import get_topic and TOPIC_DELIMITER
 
@@ -54,21 +55,23 @@ class GuiListboxCreatorMixin:
     A mixin class that provides the functionality for creating a
     Listbox widget.
     """
-    def _create_gui_listbox(self, parent_widget, config_data): # Updated signature
+    def _create_gui_listbox(self, parent_widget, config_data, **kwargs): # Updated signature
         # Creates a listbox menu for multiple choice options.
         current_function_name = inspect.currentframe().f_code.co_name
         
-        # Extract arguments from config_data
-        self.label = config_data.get("label_active") # Store label for use in instance methods
+        # Extract widget-specific config from config_data
+        label = config_data.get("label_active") # Use label for this widget
         config = config_data # config_data is the config
-        self.path = config_data.get("path") # Store path for use in instance methods
-        self.base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path") # Store for use in instance methods
-        self.state_mirror_engine = config_data.get("state_mirror_engine") # Store for use in instance methods
-        self.subscriber_router = config_data.get("subscriber_router") # Store for use in instance methods
+        path = config_data.get("path") # Path for this widget
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
-                message=f"🔬⚡️ Entering '{current_function_name}' to materialize a listbox for '{self.label}'.",
+                message=f"🔬⚡️ Entering '{current_function_name}' to materialize a listbox for '{label}'.",
               **_get_log_args()
             )
 
@@ -79,7 +82,7 @@ class GuiListboxCreatorMixin:
             sub_frame.grid_rowconfigure(1, weight=1)
             sub_frame.grid_columnconfigure(0, weight=1)
 
-            label_widget = ttk.Label(sub_frame, text=self.label)
+            label_widget = ttk.Label(sub_frame, text=label)
             label_widget.grid(row=0, column=0, sticky='w', padx=DEFAULT_PAD_X, pady=2)
 
             listbox_frame = ttk.Frame(sub_frame)
@@ -98,23 +101,24 @@ class GuiListboxCreatorMixin:
             self.options_map = config.get('options', {}) # Stored as instance variable
             self.listbox = listbox # Stored as instance variable
             self.selected_option_var = tk.StringVar(sub_frame) # Stored as instance variable
-            self.listbox_path = path # Store the base path for subscriptions
+            # self.listbox_path = path # Removed as it's not needed as a self attribute
 
             # Store widget instance for debugging/reference
             self._listbox_widget_instance = listbox 
             
             # --- MQTT Subscription for dynamic updates ---
-            if self.subscriber_router:
-                wildcard_option_topic = get_topic("OPEN-AIR", base_mqtt_topic_from_path, path, "options", "#")
+            if self.subscriber_router and self.state_mirror_engine:
+                wildcard_option_topic = get_topic("OPEN-AIR", self.state_mirror_engine.base_topic, path, "options", "#")
+                # Pass necessary context to the instance method
                 self.subscriber_router.subscribe_to_topic(
                     topic_filter=wildcard_option_topic, 
-                    callback_func=self._on_option_mqtt_update_instance # Use instance method as callback
+                    callback_func=lambda t, p, wp=path, bmt=base_mqtt_topic_from_path: self._on_option_mqtt_update_instance(t, p, wp, bmt) # Use instance method as callback
                 )
                 if app_constants.global_settings['debug_enabled']:
                     debug_logger(message=f"🔬 Subscribed listbox '{label}' to MQTT topic: {wildcard_option_topic}", **_get_log_args())
 
             # Initial display build
-            self._rebuild_listbox_display_instance()
+            self._rebuild_listbox_display_instance(label)
 
             def update_listbox_from_var(*args):
                 new_selection_label = self.selected_option_var.get()
@@ -161,8 +165,9 @@ class GuiListboxCreatorMixin:
                         # Iterate over all options to enforce single selection
                         for key, opt in self.options_map.items():
                             is_selected = (key == selected_key)
-                            topic_path = get_topic("OPEN-AIR", base_mqtt_topic_from_path, path, "options", key, "selected")
-                            self._transmit_command(widget_name=topic_path, value=str(is_selected).lower())
+                            topic_path = get_topic("OPEN-AIR", self.state_mirror_engine.base_topic, path, "options", key, "selected")
+                            payload = orjson.dumps({"val": is_selected, "ts": time.time()})
+                            self.state_mirror_engine.publish_command(topic_path, payload)
                         
                         self.selected_option_var.set(selected_label) # Update the GUI
 
@@ -179,11 +184,11 @@ class GuiListboxCreatorMixin:
             if path:
                 widget_id = path
                 # Register the StringVar with the StateMirrorEngine for MQTT updates
-                state_mirror_engine.register_widget(widget_id, self.selected_option_var, base_mqtt_topic_from_path, config)
+                state_mirror_engine.register_widget(widget_id, self.selected_option_var, self.state_mirror_engine.base_topic, config)
                 
                 # Subscribe to this widget's topic to receive updates for its selected value
-                topic = get_topic("OPEN-AIR", base_mqtt_topic_from_path, widget_id)
-                subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
+                topic = get_topic("OPEN-AIR", self.state_mirror_engine.base_topic, widget_id)
+                self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
 
                 if app_constants.global_settings['debug_enabled']:
                     debug_logger(
@@ -214,7 +219,7 @@ class GuiListboxCreatorMixin:
                 )
             return None
 
-    def _rebuild_listbox_display_instance(self):
+    def _rebuild_listbox_display_instance(self, label):
         lb = self.listbox
         cfg = {"options": self.options_map} # Create a dummy config for rebuild function
         current_selection_label = self.selected_option_var.get()
@@ -241,9 +246,9 @@ class GuiListboxCreatorMixin:
             self.selected_option_var.set("")
         
         if app_constants.global_settings['debug_enabled']:
-            debug_logger(message=f"⚡ Listbox '{self.label}' display rebuilt.", **_get_log_args())
+            debug_logger(message=f"⚡ Listbox '{label}' display rebuilt.", **_get_log_args())
 
-    def _on_option_mqtt_update_instance(self, topic, payload):
+    def _on_option_mqtt_update_instance(self, topic, payload, widget_path, base_mqtt_topic):
         import orjson # Imported here to avoid circular dependency or top-level import issues
         try:
             payload_data = orjson.loads(payload)
@@ -253,7 +258,7 @@ class GuiListboxCreatorMixin:
             parts = topic.split(TOPIC_DELIMITER)
             
             # Construct the expected prefix for this listbox
-            expected_prefix_parts = ["OPEN-AIR", self.base_mqtt_topic_from_path, self.path, "options"]
+            expected_prefix_parts = ["OPEN-AIR", base_mqtt_topic, widget_path, "options"]
             expected_prefix = TOPIC_DELIMITER.join(p for p in expected_prefix_parts if p)
 
             # Check if the topic starts with the expected prefix

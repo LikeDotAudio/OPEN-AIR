@@ -1,17 +1,85 @@
 {
-  "DC_Load_Panel": {
+  "DC_Load_Station": {
     "type": "OcaBlock",
-    "description": "DC Electronic Load Control Panel",
+    "description": "Energy Dissipation Interface",
     "fields": {
-      "Mode_Control": {
+      "Activation_Sector": {
         "type": "OcaBlock",
-        "description": "Operating Mode",
+        "description": "MAIN INPUT CONTROL",
         "fields": {
-          "mode_set": {
+          "Master_Input_Switch": {
+            "type": "_TrapezoidButton",
+            "label_active": "🔥 LOAD ACTIVE (SINKING) 🔥",
+            "label_inactive": "LOAD DISENGAGED",
+            "state_default": false,
+            "message_details": {
+              "DC_LOAD_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "INP <state>"
+              }
+            }
+          }
+        }
+      },
+      "Telemetry_Deck": {
+        "type": "OcaBlock",
+        "description": "Real-Time Drain Analysis",
+        "fields": {
+          "Meter_Volts": {
+            "type": "_GuiAnalogGauge",
+            "label_active": "INPUT VOLTS",
+            "min": "0",
+            "max": "100",
+            "unit": "V",
+            "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "MEAS:VOLT?" } }
+          },
+          "Meter_Amps": {
+            "type": "_GuiAnalogGauge",
+            "label_active": "SINK CURRENT",
+            "min": "0",
+            "max": "60",
+            "unit": "A",
+            "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "MEAS:CURR?" } }
+          },
+          "Meter_Watts": {
+            "type": "_GuiAnalogGauge",
+            "label_active": "DISSIPATION",
+            "min": "0",
+            "max": "300",
+            "unit": "W",
+            "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "MEAS:POW?" } }
+          }
+        }
+      },
+      "History_Sector": {
+        "type": "OcaBlock",
+        "description": "Visual Log",
+        "fields": {
+          "Load_Graph": {
+            "type": "_GuiGraph",
+            "label_active": "Drain Timeline",
+            "description": "Voltage/Current Drop over Time",
+            "height": 200,
+            "message_details": {
+              "DC_LOAD_MODEL": {
+                "type": "_GuiActuator",
+                "trigger": false,
+                "command_value": "MEAS:ALL?"
+              }
+            }
+          }
+        }
+      },
+      "Mode_Logic_Sector": {
+        "type": "OcaBlock",
+        "description": "Physics Configuration",
+        "fields": {
+          "Mode_Selector": {
             "type": "_GuiDropDownOption",
-            "label_active": "Mode",
-            "options": ["CC", "CV", "CR", "CP"],
-            "default_option": "CC",
+            "label_active": "Operating Mode",
+            "options": ["CC (Const Current)", "CV (Const Volt)", "CR (Const Res)", "CP (Const Power)"],
+            "default_option": "CC (Const Current)",
             "message_details": {
               "DC_LOAD_MODEL": {
                 "type": "_GuiActuator",
@@ -22,40 +90,102 @@
           }
         }
       },
-      "Value_Control": {
+      "Control_Banks": {
         "type": "OcaBlock",
-        "description": "Set Value",
+        "description": "Parameter Adjustment",
         "fields": {
-          "set_value": {
-            "type": "_TextInput",
-            "label_active": "Set Value",
-            "value_default": "1.0",
-            "message_details": {
-              "DC_LOAD_MODEL": {
-                "type": "_GuiActuator",
-                "trigger": false,
-                "command_value": "<current_mode_command> <value>"
+          "CC_Controls": {
+            "type": "OcaBlock",
+            "description": "Constant Current (CC)",
+            "fields": {
+              "Set_Current": {
+                "type": "_GuiHorizontalKnob",
+                "label_active": "Current Set",
+                "value_default": "0.0",
+                "min": "0.0",
+                "max": "60.0",
+                "unit": "A",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CURR <value>" } }
+              },
+              "Set_Slew": {
+                "type": "_GuiHorizontalKnob",
+                "label_active": "Slew Rate",
+                "value_default": "1000",
+                "min": "10",
+                "max": "5000",
+                "unit": "A/s",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CURR:SLEW <value>" } }
+              }
+            }
+          },
+          "CV_CR_Controls": {
+            "type": "OcaBlock",
+            "description": "CV / CR Parameters",
+            "fields": {
+              "Set_Voltage": {
+                "type": "_GuiHorizontalKnob",
+                "label_active": "Voltage Set",
+                "value_default": "12.0",
+                "min": "0.1",
+                "max": "100.0",
+                "unit": "V",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "VOLT <value>" } }
+              },
+              "Set_Resistance": {
+                "type": "_GuiHorizontalKnob",
+                "label_active": "Resistance Set",
+                "value_default": "100",
+                "min": "0.1",
+                "max": "10000",
+                "unit": "Ω",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "RES <value>" } }
               }
             }
           }
         }
       },
-      "Input_Control": {
+      "Transient_Lab": {
         "type": "OcaBlock",
-        "description": "Input State",
+        "description": "Dynamic Pulse Testing",
         "fields": {
-          "input_enable": {
+          "Trans_Enable": {
             "type": "_GuiButtonToggle",
-            "label_active": "ON",
-            "label_inactive": "OFF",
+            "label_active": "PULSE MODE ON",
+            "label_inactive": "PULSE MODE OFF",
             "state_default": false,
-            "message_details": {
-              "DC_LOAD_MODEL": {
-                "type": "_GuiActuator",
-                "trigger": false,
-                "command_value": "INPUT <state>"
-              }
-            }
+            "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "TRAN:STAT <value>" } }
+          },
+          "Level_A": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Level A (Base)",
+            "value_default": "1.0",
+            "unit": "A",
+            "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CURR:LEV <value>" } }
+          },
+          "Level_B": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Level B (Peak)",
+            "value_default": "5.0",
+            "unit": "A",
+            "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CURR:TLEV <value>" } }
+          },
+          "Pulse_Freq": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Frequency",
+            "value_default": "100",
+            "min": "0.1",
+            "max": "10000",
+            "unit": "Hz",
+            "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "TRAN:FREQ <value>" } }
+          },
+          "Pulse_Duty": {
+            "type": "_GuiHorizontalKnob",
+            "label_active": "Duty Cycle",
+            "value_default": "50",
+            "min": "1",
+            "max": "99",
+            "unit": "%",
+            "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "TRAN:DCYC <value>" } }
           }
         }
       }

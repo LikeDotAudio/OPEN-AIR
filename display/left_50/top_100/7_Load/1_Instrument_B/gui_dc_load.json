@@ -1,59 +1,198 @@
 {
-  "DC_Load_Panel": {
+  "Dual_Entropy_Matrix": {
     "type": "OcaBlock",
-    "description": "DC Electronic Load Control Panel",
+    "description": "Parallel Energy Depletion System",
     "fields": {
-      "Mode_Control": {
+      "Global_Safety_Interlock": {
         "type": "OcaBlock",
-        "description": "Operating Mode",
+        "description": "MASTER DISCONNECT",
         "fields": {
-          "mode_set": {
-            "type": "_GuiDropDownOption",
-            "label_active": "Mode",
-            "options": ["CC", "CV", "CR", "CP"],
-            "default_option": "CC",
-            "message_details": {
-              "DC_LOAD_MODEL": {
-                "type": "_GuiActuator",
-                "trigger": false,
-                "command_value": "MODE <value>"
-              }
-            }
-          }
-        }
-      },
-      "Value_Control": {
-        "type": "OcaBlock",
-        "description": "Set Value",
-        "fields": {
-          "set_value": {
-            "type": "_TextInput",
-            "label_active": "Set Value",
-            "value_default": "1.0",
-            "message_details": {
-              "DC_LOAD_MODEL": {
-                "type": "_GuiActuator",
-                "trigger": false,
-                "command_value": "<current_mode_command> <value>"
-              }
-            }
-          }
-        }
-      },
-      "Input_Control": {
-        "type": "OcaBlock",
-        "description": "Input State",
-        "fields": {
-          "input_enable": {
-            "type": "_GuiButtonToggle",
-            "label_active": "ON",
-            "label_inactive": "OFF",
+          "Global_Kill_Switch": {
+            "type": "_TrapezoidButton",
+            "label_active": "☢️ DUAL SIPHON ACTIVE ☢️",
+            "label_inactive": "ENGAGE TWIN LOADS",
             "state_default": false,
             "message_details": {
               "DC_LOAD_MODEL": {
                 "type": "_GuiActuator",
                 "trigger": false,
-                "command_value": "INPUT <state>"
+                "command_value": "INP:ALL <state>"
+              }
+            }
+          }
+        }
+      },
+      "Chamber_Alpha_Left": {
+        "type": "OcaBlock",
+        "description": "--- CHAMBER ALPHA (Unit 1) ---",
+        "fields": {
+          "Header_A": {
+            "type": "OcaBlock",
+            "fields": {
+              "Label_A": {
+                "type": "_TextInput",
+                "label_active": "DUT 1 ID",
+                "value_default": "Batt_LiPo_Cell_1",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "SYST:LAB:1 <value>" } }
+              },
+              "Activate_A": {
+                "type": "_GuiButtonToggle",
+                "label_active": "A: SINKING 🔥",
+                "label_inactive": "A: STANDBY",
+                "state_default": false,
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;INP <state>" } }
+              }
+            }
+          },
+          "Fader_Deck_A": {
+            "type": "OcaBlock",
+            "description": "Load Mixing A",
+            "fields": {
+              "Base_Fader_A": {
+                "type": "_GuiVerticalFader",
+                "label_active": "BASE (A)",
+                "min": "0",
+                "max": "60",
+                "unit": "A",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;CURR <value>" } }
+              },
+              "Pulse_Fader_A": {
+                "type": "_GuiVerticalFader",
+                "label_active": "PEAK (A)",
+                "min": "0",
+                "max": "60",
+                "unit": "A",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;CURR:TLEV <value>" } }
+              }
+            }
+          },
+          "Dynamics_A": {
+            "type": "OcaBlock",
+            "description": "Pulse & Protect A",
+            "fields": {
+              "Pulse_Enable_A": {
+                "type": "_GuiButtonToggle",
+                "label_active": "PULSE ON",
+                "label_inactive": "PULSE OFF",
+                "state_default": false,
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;TRAN:STAT <value>" } }
+              },
+              "Cutoff_Knob_A": {
+                "type": "_GuiHorizontalKnob",
+                "label_active": "Stop Volts",
+                "value_default": "3.0",
+                "min": "0",
+                "max": "20",
+                "unit": "V",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;VOLT:PROT:LOW <value>" } }
+              }
+            }
+          },
+          "Telemetry_A": {
+            "type": "OcaBlock",
+            "description": "Stats A",
+            "fields": {
+              "Ah_A": {
+                "type": "_GuiLabel",
+                "label_active": "Ah Drained",
+                "value_default": "0.00 Ah",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;MEAS:AH?" } }
+              },
+              "Graph_A": {
+                "type": "_GuiGraph",
+                "label_active": "Discharge A",
+                "height": 120,
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;MEAS:VOLT?" } }
+              }
+            }
+          }
+        }
+      },
+      "Chamber_Separator": {
+        "type": "OcaSeparator",
+        "description": " | "
+      },
+      "Chamber_Beta_Right": {
+        "type": "OcaBlock",
+        "description": "--- CHAMBER BETA (Unit 2) ---",
+        "fields": {
+          "Header_B": {
+            "type": "OcaBlock",
+            "fields": {
+              "Label_B": {
+                "type": "_TextInput",
+                "label_active": "DUT 2 ID",
+                "value_default": "Batt_Lead_Acid_Old",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "SYST:LAB:2 <value>" } }
+              },
+              "Activate_B": {
+                "type": "_GuiButtonToggle",
+                "label_active": "B: SINKING 🔥",
+                "label_inactive": "B: STANDBY",
+                "state_default": false,
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;INP <state>" } }
+              }
+            }
+          },
+          "Fader_Deck_B": {
+            "type": "OcaBlock",
+            "description": "Load Mixing B",
+            "fields": {
+              "Base_Fader_B": {
+                "type": "_GuiVerticalFader",
+                "label_active": "BASE (A)",
+                "min": "0",
+                "max": "60",
+                "unit": "A",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;CURR <value>" } }
+              },
+              "Pulse_Fader_B": {
+                "type": "_GuiVerticalFader",
+                "label_active": "PEAK (A)",
+                "min": "0",
+                "max": "60",
+                "unit": "A",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;CURR:TLEV <value>" } }
+              }
+            }
+          },
+          "Dynamics_B": {
+            "type": "OcaBlock",
+            "description": "Pulse & Protect B",
+            "fields": {
+              "Pulse_Enable_B": {
+                "type": "_GuiButtonToggle",
+                "label_active": "PULSE ON",
+                "label_inactive": "PULSE OFF",
+                "state_default": false,
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;TRAN:STAT <value>" } }
+              },
+              "Cutoff_Knob_B": {
+                "type": "_GuiHorizontalKnob",
+                "label_active": "Stop Volts",
+                "value_default": "10.5",
+                "min": "0",
+                "max": "24",
+                "unit": "V",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;VOLT:PROT:LOW <value>" } }
+              }
+            }
+          },
+          "Telemetry_B": {
+            "type": "OcaBlock",
+            "description": "Stats B",
+            "fields": {
+              "Ah_B": {
+                "type": "_GuiLabel",
+                "label_active": "Ah Drained",
+                "value_default": "0.00 Ah",
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;MEAS:AH?" } }
+              },
+              "Graph_B": {
+                "type": "_GuiGraph",
+                "label_active": "Discharge B",
+                "height": 120,
+                "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;MEAS:VOLT?" } }
               }
             }
           }

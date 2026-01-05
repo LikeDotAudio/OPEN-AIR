@@ -22,16 +22,18 @@ CSV_SAVE_DIR = os.path.join(os.path.expanduser("~"), "Documents", "OPEN-AIR", "D
 class GuiTableCreatorMixin:
     """Mixin class for creating an editable table widget with CSV functionality."""
 
-    def _create_gui_table(self, parent_widget, config_data): # Updated signature
+    def _create_gui_table(self, parent_widget, config_data, **kwargs): # Updated signature
         current_function_name = inspect.currentframe().f_code.co_name
         
-        # Extract arguments from config_data
+        # Extract widget-specific config from config_data
         label = config_data.get("label_active") # Use label_active from config_data
         config = config_data # config_data is the config
         path = config_data.get("path")
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         debug_logger(message=f"Creating editable table widget: {label}", **_get_log_args())
 
@@ -39,7 +41,7 @@ class GuiTableCreatorMixin:
         container.grid_rowconfigure(0, weight=1) # Row for the treeview
         container.grid_columnconfigure(0, weight=1)
 
-        data_topic = get_topic(state_mirror_engine.base_topic, base_mqtt_topic_from_path, path)
+        data_topic = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, path)
 
         table_height = config.get("height", 10)
         tree = ttk.Treeview(container, show='headings', height=table_height, style="Custom.Treeview")
@@ -53,10 +55,10 @@ class GuiTableCreatorMixin:
         hsb.grid(row=1, column=0, columnspan=2, sticky='ew')
 
         # ⚡ ATTACH THE FLUX CAPACITOR (Editor) ⚡
-        data_topic_for_editor = get_topic(state_mirror_engine.base_topic, base_mqtt_topic_from_path, path)
+        data_topic_for_editor = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, path)
         
         # Store the editor instance on the tree so it doesn't get garbage collected
-        tree.editor = TableEditingManager(tree, state_mirror_engine, data_topic_for_editor)
+        tree.editor = TableEditingManager(tree, self.state_mirror_engine, data_topic_for_editor)
 
         item_map = {}  # Maps treeview item ID to device data dict
         device_key_map = {} # Maps device key to treeview item ID
@@ -190,7 +192,7 @@ class GuiTableCreatorMixin:
 
                     if data_topic and not self._is_reading_csv:
                         field_topic = get_topic(data_topic, "data", item_key)
-                        mqtt_publisher_service.publish_payload(field_topic, orjson.dumps(item_value))
+                        self.state_mirror_engine.publish_command(field_topic, orjson.dumps(item_value))
                 
                 debug_logger(message=f"--- Table '{label}' updated with {len(data)} rows.", **_get_log_args())
                 _handle_write_csv() # Auto-save
@@ -267,9 +269,9 @@ class GuiTableCreatorMixin:
                 selected_item_id = selection[0]
                 selected_data = item_map.get(selected_item_id)
                 if selected_data and path:
-                    selected_topic = get_topic(state_mirror_engine.base_topic, base_mqtt_topic_from_path, path, "selected")
+                    selected_topic = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, path, "selected")
                     payload = {"val": selected_data}
-                    mqtt_publisher_service.publish_payload(selected_topic, orjson.dumps(payload))
+                    self.state_mirror_engine.publish_command(selected_topic, orjson.dumps(payload))
 
 
 
@@ -277,9 +279,9 @@ class GuiTableCreatorMixin:
             widget_id = path
             dummy_var = tk.StringVar()
             
-            state_mirror_engine.register_widget(widget_id, dummy_var, base_mqtt_topic_from_path, config, update_callback=update_table_full)
+            self.state_mirror_engine.register_widget(widget_id, dummy_var, base_mqtt_topic_from_path, config, update_callback=update_table_full)
             
-            subscriber_router.subscribe_to_topic(data_topic + "/#", update_table_incremental)
+            self.subscriber_router.subscribe_to_topic(data_topic + "/#", update_table_incremental)
             debug_logger(message=f"Table '{label}' subscribed to data topic '{data_topic}/#'", **_get_log_args())
 
             # If static data exists in the config, publish it as the default state.
@@ -288,10 +290,10 @@ class GuiTableCreatorMixin:
                 debug_logger(message=f"--- Found static data for '{label}'. Publishing as default state.", **_get_log_args())
                 for item_key, item_value in static_data.items():
                     field_topic = get_topic(data_topic, "data", item_key)
-                    mqtt_publisher_service.publish_payload(field_topic, orjson.dumps(item_value))
+                    self.state_mirror_engine.publish_command(field_topic, orjson.dumps(item_value))
 
             # Let the state mirror engine handle initialization
-            if not state_mirror_engine.initialize_widget_state(widget_id):
+            if not self.state_mirror_engine.initialize_widget_state(widget_id):
                 # if initialize_widget_state returns false (meaning no cached data was loaded)
                 # then load static data from config. This will also auto-save.
                 static_data = config.get("data")
@@ -305,7 +307,7 @@ class GuiTableCreatorMixin:
             selected_topic_path = path + "/selected"
             selected_var = tk.StringVar() # This will hold a JSON string
             selected_config = {"type": "_Value"} 
-            state_mirror_engine.register_widget(selected_topic_path, selected_var, base_mqtt_topic_from_path, selected_config)
-            state_mirror_engine.initialize_widget_state(selected_topic_path)
+            self.state_mirror_engine.register_widget(selected_topic_path, selected_var, base_mqtt_topic_from_path, selected_config)
+            self.state_mirror_engine.initialize_widget_state(selected_topic_path)
 
         return container

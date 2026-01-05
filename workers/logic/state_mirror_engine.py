@@ -33,8 +33,10 @@ class StateMirrorEngine:
         self.root = root
         self.state_cache_manager = state_cache_manager
         self.registered_widgets = {}
+        self.topic_to_widget_id = {}
         self.GUID = str(uuid.uuid4())
         self._silent_update = False
+        self._suppress_broadcast = False
         self.update_queue = queue.Queue()
         self.root.after(100, self._process_queue)
 
@@ -63,16 +65,32 @@ class StateMirrorEngine:
     def register_widget(self, widget_id, tk_variable, tab_name, config, update_callback=None):
         """
         Registers a widget to be tracked by the engine.
-        Now also stores the full config dictionary and an optional update callback.
+        Sanitizes topics to prevent 'OPEN-AIR/OPEN-AIR//fader' errors.
         """
-        full_topic = mqtt_topic_utils.get_topic(self.base_topic, tab_name, widget_id)
-        self.registered_widgets[full_topic] = {
+        # 1. Sanitize the Tab Name (Remove redundant Root)
+        clean_tab = tab_name
+        if self.base_topic and clean_tab and clean_tab.startswith(self.base_topic):
+            # If tab_name is just "OPEN-AIR", it becomes empty.
+            # If it is "OPEN-AIR/oscilloscope", it becomes "oscilloscope"
+            clean_tab = clean_tab[len(self.base_topic):].strip("/")
+            
+        # 2. Sanitize the Widget ID (Remove leading slash)
+        clean_id = widget_id.lstrip("/")
+
+        # 3. Construct Clean Topic
+        # Uses standard join, filtering out empty parts
+        parts = [self.base_topic, clean_tab, clean_id]
+        full_topic = "/".join([p for p in parts if p])
+
+        self.registered_widgets[widget_id] = {
             "var": tk_variable,
-            "tab": tab_name,
+            "tab": clean_tab, # Store the clean version
             "id": widget_id,
             "config": config,
-            "update_callback": update_callback
+            "update_callback": update_callback,
+            "topic": full_topic
         }
+        self.topic_to_widget_id[full_topic] = widget_id
 
     def initialize_widget_state(self, widget_id):
         """
@@ -81,16 +99,7 @@ class StateMirrorEngine:
         initial state.
         Returns True if state was loaded from cache, False otherwise.
         """
-        found_widget_info = None
-        found_full_topic = None
-
-        for full_topic, widget_info in self.registered_widgets.items():
-            if widget_info["id"] == widget_id:
-                found_widget_info = widget_info
-                found_full_topic = full_topic
-                break
-        
-        if not (found_widget_info and found_full_topic):
+        if widget_id not in self.registered_widgets:
             if app_constants.global_settings['debug_enabled']:
                 debug_logger(
                     message=f"⚠️ Attempted to initialize state for unregistered widget_id: {widget_id}",
@@ -98,12 +107,15 @@ class StateMirrorEngine:
                 )
             return False
 
-        widget_config = found_widget_info.get("config", {})
+        widget_info = self.registered_widgets[widget_id]
+        full_topic = widget_info["topic"]
+
+        widget_config = widget_info.get("config", {})
         widget_type = widget_config.get("type")
-        update_callback = found_widget_info.get("update_callback")
+        update_callback = widget_info.get("update_callback")
 
         if widget_type == "OcaTable" and update_callback:
-            data_topic = found_full_topic
+            data_topic = full_topic
             
             cached_data = {}
             if self.state_cache_manager:
@@ -136,9 +148,9 @@ class StateMirrorEngine:
                 return False
 
 
-        if self.state_cache_manager and found_full_topic in self.state_cache_manager.cache:
+        if self.state_cache_manager and full_topic in self.state_cache_manager.cache:
             # State exists in cache, so update the GUI widget
-            cached_payload = self.state_cache_manager.cache[found_full_topic]
+            cached_payload = self.state_cache_manager.cache[full_topic]
             if app_constants.global_settings['debug_enabled']:
                 debug_logger(
                     message=f"🧠 Found cached state for {widget_id}. Applying from snapshot.",
@@ -148,13 +160,13 @@ class StateMirrorEngine:
             # Re-using logic from sync_incoming_mqtt_to_gui
             try:
                 data = cached_payload # The cache stores a dict, not a JSON string
-                tk_var = found_widget_info["var"]
+                tk_var = widget_info["var"]
                 new_value = data.get("val", None)
                 
                 current_val = tk_var.get()
                 
                 if str(current_val) != str(new_value):
-                    widget_config = found_widget_info["config"]
+                    widget_config = widget_info["config"]
                     widget_type = widget_config.get("type")
                     
                     final_value = None
@@ -205,22 +217,22 @@ class StateMirrorEngine:
         Called when the GUI changes (User Input).
         It broadcasts the change to the MQTT broker, including the GUID.
         """
+        if self._suppress_broadcast:
+            return
+
         if self._silent_update:
             return
 
-        found_widget_info = None
-        found_full_topic = None
-
-        for full_topic, widget_info in self.registered_widgets.items():
-            if widget_info["id"] == widget_id:
-                found_widget_info = widget_info
-                found_full_topic = full_topic
-                break
-        
-        if found_widget_info and found_full_topic:
-            tk_var = found_widget_info["var"]
+        if widget_id in self.registered_widgets:
+            widget_info = self.registered_widgets[widget_id]
+            full_topic = widget_info["topic"]
+            tk_var = widget_info["var"]
             current_tk_var_value = tk_var.get()
-            widget_config = found_widget_info["config"]
+            widget_config = widget_info["config"]
+
+            serializable_config = widget_config.copy()
+            serializable_config.pop('state_mirror_engine', None)
+            serializable_config.pop('subscriber_router', None)
 
             payload_data = {
                 "val": current_tk_var_value,
@@ -228,7 +240,7 @@ class StateMirrorEngine:
                 "GUID": self.GUID
             }
 
-            for key, value in widget_config.items():
+            for key, value in serializable_config.items():
                 if key == "layout":
                     continue
                 elif key == "value":
@@ -238,7 +250,7 @@ class StateMirrorEngine:
             
             payload_json = orjson.dumps(payload_data)
             
-            mqtt_publisher_service.publish_payload(found_full_topic, payload_json)
+            mqtt_publisher_service.publish_payload(full_topic, payload_json)
         else:
             if app_constants.global_settings['debug_enabled']:
                 debug_logger(
@@ -248,18 +260,14 @@ class StateMirrorEngine:
 
     def is_widget_registered(self, widget_id: str) -> bool:
         """Checks if a widget is registered by its widget_id."""
-        for widget_info in self.registered_widgets.values():
-            if widget_info["id"] == widget_id:
-                return True
-        return False
+        return widget_id in self.registered_widgets
 
     def get_widget_topic(self, widget_id):
         """
         Returns the full topic for a registered widget.
         """
-        for full_topic, widget_info in self.registered_widgets.items():
-            if widget_info["id"] == widget_id:
-                return full_topic
+        if widget_id in self.registered_widgets:
+            return self.registered_widgets[widget_id]["topic"]
         return None
 
     def publish_command(self, topic: str, payload: str):
@@ -301,8 +309,9 @@ class StateMirrorEngine:
             if sender_GUID == self.GUID:
                 return # It's an echo of our own message, ignore.
 
-            if topic in self.registered_widgets:
-                widget_info = self.registered_widgets[topic]
+            if topic in self.topic_to_widget_id:
+                widget_id = self.topic_to_widget_id[topic]
+                widget_info = self.registered_widgets[widget_id]
                 tk_var = widget_info["var"]
                 new_value = data.get("val", None)
                 
@@ -335,10 +344,12 @@ class StateMirrorEngine:
                         final_value = new_value
 
                     if final_value is not None:
-                        if not isinstance(final_value, str):
-                            final_value = orjson.dumps(final_value).decode('utf-8')
-                        # Put the update task into the queue instead of calling .set() directly
-                        self.update_queue.put((tk_var, final_value, widget_info['id']))
+                        try:
+                            self._suppress_broadcast = True
+                            # Put the update task into the queue instead of calling .set() directly
+                            self.update_queue.put((tk_var, final_value, widget_info['id']))
+                        finally:
+                            self._suppress_broadcast = False
             else:
                 pass
 

@@ -3,7 +3,7 @@ from workers.builder.builder_data_graphing.dynamic_graph import FluxPlotter
 class PlotWidgetAdapterMixin:
     """Mixin to handle the creation of Plot/Graph widgets."""
     
-    def _create_plot_widget(self, parent_widget, config_data): # Updated signature
+    def _create_plot_widget(self, parent_widget, config_data, **kwargs): # Updated signature
         # Extract arguments from config_data
         config = config_data # config_data is the config
         base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")

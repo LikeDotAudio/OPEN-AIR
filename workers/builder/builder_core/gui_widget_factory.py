@@ -39,7 +39,7 @@ class GuiWidgetFactoryMixin:
             "_VerticalMeter": self._create_vertical_meter
         }
 
-    def _create_header_status_light(self, parent_widget, config_data):
+    def _create_header_status_light(self, parent_widget, config_data, **kwargs):
         # label = config_data.get("label_active", "") # Label is not directly used here
         self._build_header_status_light(parent_widget, config_data)
         return self.header_frame # Assuming _build_header_status_light creates and sets self.header_frame

@@ -35,6 +35,7 @@ import tkinter as tk
 from tkinter import ttk
 import inspect
 import orjson
+import time
 
 # --- Module Imports ---
 from workers.logger.logger import  debug_logger
@@ -55,17 +56,19 @@ class GuiActuatorCreatorMixin:
     A mixin class that provides the functionality for creating a simple
     actuator button widget that triggers an action.
     """
-    def _create_gui_actuator(self, parent_widget, config_data): # Updated signature
+    def _create_gui_actuator(self, parent_widget, config_data, **kwargs): # Updated signature
         # Creates a button that acts as a simple actuator.
         current_function_name = inspect.currentframe().f_code.co_name
         
-        # Extract arguments from config_data
+        # Extract only widget-specific config from config_data
         label = config_data.get("label_active") # Use label_active from config_data
         config = config_data # config_data is the config
         path = config_data.get("path")
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
@@ -98,6 +101,8 @@ class GuiActuatorCreatorMixin:
 
             def on_press(event):
                 action_path = f"{path}/trigger"
+                topic = get_topic("OPEN-AIR", base_mqtt_topic_from_path, action_path)
+                payload = orjson.dumps({"val": True, "ts": time.time()})
                 
                 if app_constants.global_settings['debug_enabled']:
                     debug_logger(
@@ -106,10 +111,12 @@ class GuiActuatorCreatorMixin:
                         version=current_version,
                         function=f"{self.__class__.__name__}.{current_function_name}"
                     )
-                self._transmit_command(widget_name=action_path, value=True)
+                self.state_mirror_engine.publish_command(topic, payload)
 
             def on_release(event):
                 action_path = f"{path}/trigger"
+                topic = get_topic("OPEN-AIR", base_mqtt_topic_from_path, action_path)
+                payload = orjson.dumps({"val": False, "ts": time.time()})
 
                 if app_constants.global_settings['debug_enabled']:
                     debug_logger(
@@ -118,7 +125,7 @@ class GuiActuatorCreatorMixin:
                         version=current_version,
                         function=f"{self.__class__.__name__}.{current_function_name}"
                     )
-                self._transmit_command(widget_name=action_path, value=False)
+                self.state_mirror_engine.publish_command(topic, payload)
 
             button.bind("<ButtonPress-1>", on_press)
             button.bind("<ButtonRelease-1>", on_release)
@@ -144,7 +151,7 @@ class GuiActuatorCreatorMixin:
                 # 3. Subscribe to topic for incoming messages (to activate/deactivate button)
                 #    The topic for status is usually 'path/active' or 'path/label_active'
                 status_topic = f"{get_topic('OPEN-AIR', base_mqtt_topic_from_path, widget_id)}/active"
-                subscriber_router.subscribe_to_topic(status_topic, self._on_actuator_state_update)
+                self.subscriber_router.subscribe_to_topic(status_topic, self._on_actuator_state_update)
 
             if app_constants.global_settings['debug_enabled']:
                 debug_logger(
@@ -177,8 +184,8 @@ class GuiActuatorCreatorMixin:
             topic_without_active = topic.rsplit(TOPIC_DELIMITER, 1)[0]
             
             # And remove the 'OPEN-AIR/BASE_MQTT_TOPIC_FROM_PATH/' prefix if it exists
-            # We assume self.base_mqtt_topic_from_path is available from the builder instance
-            expected_prefix = f"OPEN-AIR{TOPIC_DELIMITER}{self.base_mqtt_topic_from_path}{TOPIC_DELIMITER}"
+            # We assume self.state_mirror_engine.base_topic is available from the builder instance
+            expected_prefix = f"OPEN-AIR{TOPIC_DELIMITER}{self.state_mirror_engine.base_topic}{TOPIC_DELIMITER}"
             if topic_without_active.startswith(expected_prefix):
                 key_in_topic_widgets = topic_without_active.replace(expected_prefix, "", 1)
             else:

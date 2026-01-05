@@ -12,16 +12,18 @@ from workers.logger.log_utils import _get_log_args
 class TrapezoidButtonTogglerCreatorMixin(TrapezoidButtonCreatorMixin):
     """A mixin to create a radio-group of trapezoid buttons."""
 
-    def _create_trapezoid_button_toggler(self, parent_widget, config_data): # Updated signature
+    def _create_trapezoid_button_toggler(self, parent_widget, config_data, **kwargs): # Updated signature
         """Creates a group of trapezoid buttons where only one can be active."""
         
-        # Extract arguments from config_data
+        # Extract widget-specific config from config_data
         label = config_data.get("label_active")
         config = config_data # config_data is the config
         path = config_data.get("path")
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
+        
+        # Access global context directly from self
+        state_mirror_engine = self.state_mirror_engine
+        subscriber_router = self.subscriber_router
+        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(message=f"Creating trapezoid button toggler group: {label}", **_get_log_args())
@@ -49,19 +51,19 @@ class TrapezoidButtonTogglerCreatorMixin(TrapezoidButtonCreatorMixin):
                 button_info["state"]["lit"] = is_lit
                 self._draw_trapezoid_button(button_info["canvas"], button_info["config"], button_info["state"])
             
-            if state_mirror_engine:
-                state_mirror_engine.broadcast_gui_change_to_mqtt(path)
+            if self.state_mirror_engine:
+                self.state_mirror_engine.broadcast_gui_change_to_mqtt(path)
         
         selected_var.trace_add("write", on_state_change)
         
-        if path and state_mirror_engine:
+        if path and self.state_mirror_engine:
             widget_id = path
-            state_mirror_engine.register_widget(widget_id, selected_var, base_mqtt_topic_from_path, config)
+            self.state_mirror_engine.register_widget(widget_id, selected_var, base_mqtt_topic_from_path, config)
             
             # Subscribe to the topic for incoming messages
             from workers.mqtt.mqtt_topic_utils import get_topic
             topic = get_topic("OPEN-AIR", base_mqtt_topic_from_path, widget_id)
-            subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
+            self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
 
         # Theme Resolution
         from workers.styling.style import THEMES, DEFAULT_THEME
@@ -120,7 +122,7 @@ class TrapezoidButtonTogglerCreatorMixin(TrapezoidButtonCreatorMixin):
                 row += 1
 
         # Initialize state from cache or broadcast the initial state
-        if path and state_mirror_engine:
-            state_mirror_engine.initialize_widget_state(path)
+        if path and self.state_mirror_engine:
+            self.state_mirror_engine.initialize_widget_state(path)
 
         return container

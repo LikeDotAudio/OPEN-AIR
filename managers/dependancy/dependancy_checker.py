@@ -17,15 +17,7 @@ current_file = f"{os.path.basename(__file__)}"
 current_version = "20251226.000000.1" # Explicitly define at module level
 
 
-def initialize_flags(app_constants_instance):
-    """Sets global_settings based on values loaded from config.ini via app_constants."""
-    # These flags are already loaded from config.ini by app_constants.read_config()
-    # No command-line parsing is performed for debug flags, adhering to config.ini-only setting.
 
-    # Update global_settings for compatibility with older code if necessary
-    app_constants_instance.global_settings["general_debug_enabled"] = app_constants_instance.ENABLE_DEBUG_MODE
-    app_constants_instance.global_settings["debug_enabled"] = app_constants_instance.ENABLE_DEBUG_SCREEN
-    app_constants_instance.global_settings["debug_to_file"] = app_constants_instance.ENABLE_DEBUG_FILE
 
 # --- REMOVED: Call initialize_flags immediately to ensure global_settings are set ---
 

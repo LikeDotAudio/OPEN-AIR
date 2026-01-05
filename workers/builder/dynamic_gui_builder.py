@@ -27,11 +27,12 @@ from .hidden.hidden_geometry_manager import HiddenGeometryManagerMixin
 from .hidden.hidden_breakoff_manager import HiddenBreakoffManagerMixin
 
 # --- 4. EXISTING SIMPLE WIDGET MIXINS ---
-from workers.builder.input.dynamic_gui_mousewheel_mixin import MousewheelScrollMixin
+from workers.builder.builder_input.dynamic_gui_mousewheel_mixin import MousewheelScrollMixin
 from .text.dynamic_gui_create_label_from_config import LabelFromConfigCreatorMixin
 from .text.dynamic_gui_create_label import LabelCreatorMixin
 from .text.dynamic_gui_create_value_box import ValueBoxCreatorMixin
-from .input.dynamic_gui_create_gui_slider_value import SliderValueCreatorMixin
+from workers.builder.builder_composite.dynamic_gui_create_gui_slider_value import SliderValueCreatorMixin
+from workers.builder.builder_composite._Horizontal_knob_Value import HorizontalKnobValueCreatorMixin
 from .input.dynamic_gui_create_gui_button_toggle import GuiButtonToggleCreatorMixin
 from .input.dynamic_gui_create_gui_button_toggler import GuiButtonTogglerCreatorMixin
 from .text.dynamic_gui_create_gui_dropdown_option import GuiDropdownOptionCreatorMixin
@@ -46,13 +47,11 @@ from .images.dynamic_gui_create_image_display import ImageDisplayCreatorMixin
 from .images.dynamic_gui_create_animation_display import AnimationDisplayCreatorMixin
 from .audio.dynamic_gui_create_vu_meter import VUMeterCreatorMixin
 from .input.dynamic_gui_create_fader import FaderCreatorMixin
-from .audio.dynamic_gui_create_knob import KnobCreatorMixin
 from .input.dynamic_gui_create_inc_dec_buttons import IncDecButtonsCreatorMixin
 from .input.dynamic_gui_create_directional_buttons import DirectionalButtonsCreatorMixin
 from .audio.dynamic_gui_create_custom_fader import CustomFaderCreatorMixin
 from .audio.dynamic_gui_create_needle_vu_meter import NeedleVUMeterCreatorMixin
 from .audio.dynamic_gui_create_panner import PannerCreatorMixin
-from .audio.dynamic_gui_create_custom_horizontal_fader import CustomHorizontalFaderCreatorMixin
 from .audio.dynamic_gui_create_trapezoid_toggler import TrapezoidButtonTogglerCreatorMixin
 
 class DynamicGuiBuilder(
@@ -78,6 +77,7 @@ class DynamicGuiBuilder(
     LabelCreatorMixin,
     ValueBoxCreatorMixin,
     SliderValueCreatorMixin,
+    HorizontalKnobValueCreatorMixin,
     GuiButtonToggleCreatorMixin,
     GuiButtonTogglerCreatorMixin,
     GuiDropdownOptionCreatorMixin,
@@ -92,13 +92,11 @@ class DynamicGuiBuilder(
     AnimationDisplayCreatorMixin,
     VUMeterCreatorMixin,
     FaderCreatorMixin,
-    KnobCreatorMixin,
     IncDecButtonsCreatorMixin,
     DirectionalButtonsCreatorMixin,
     CustomFaderCreatorMixin,
     NeedleVUMeterCreatorMixin,
     PannerCreatorMixin,
-    CustomHorizontalFaderCreatorMixin,
     TrapezoidButtonTogglerCreatorMixin
 ):
     def __init__(self, parent, json_path=None, tab_name=None, *args, **kwargs):
@@ -150,9 +148,12 @@ class DynamicGuiBuilder(
         self.scrollbar.grid(row=0, column=1, sticky="ns")
 
         # 3. Reload Button
-        self.button_frame = ttk.Frame(self)
-        self.button_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=(5, 10), padx=10)
-        ttk.Button(self.button_frame, text="Reload Config", command=self._force_rebuild_gui).pack(side=tk.LEFT, pady=10)
+        if app_constants.RELOAD_CONFIG_DISPLAYED:
+            self.button_frame = ttk.Frame(self)
+            self.button_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=(5, 10), padx=10)
+            ttk.Button(self.button_frame, text="Reload Config", command=self._force_rebuild_gui).pack(side=tk.LEFT, pady=10)
+        else:
+            self.button_frame = None
 
         # 4. Trigger Build
         if self.json_filepath:

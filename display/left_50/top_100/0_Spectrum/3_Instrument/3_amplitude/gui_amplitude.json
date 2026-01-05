@@ -13,18 +13,15 @@
           "ref_level_dBm": {
             "label_active": "Reference Level",
             "label_inactive": "Reference Level",
-            "type": "_sliderValue",
+            "type": "_Horizontal_knob_Value",
             "handler": "set_ref_level",
             "yak_handler": {
               "enable": true,
               "yak_type": "set",
               "sub_path": "Amplitude",
               "command": "Set_Reference_Level",
-              "input_name": "dbm_value",
-              "converter": "float"
-            },
-            "locked": false,
-            "value": "-30",
+        "converter": "float",
+            "default_value": "-30",
             "units": "dBm",
             "min": "-100",
             "max": "0",
@@ -290,7 +287,7 @@
           "power_attenuation_dB": {
             "label_active": "Power Attenuation",
             "label_inactive": "Power Attenuation",
-            "type": "_sliderValue",
+            "type": "_Horizontal_knob_Value",
             "handler": "set_power_attenuation",
             "yak_handler": {
               "enable": true,
@@ -298,10 +295,8 @@
               "sub_path": "Amplitude",
               "command": "Set_Power_Attenuation",
               "input_name": "db_value",
-              "converter": "float"
-            },
-            "locked": false,
-            "value": "10",
+              "converter": "float",
+            "default_value": "10",
             "units": "dBm",
             "min": "-100",
             "max": "0",

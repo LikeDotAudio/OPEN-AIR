@@ -8,7 +8,7 @@
       "center_freq_MHz": {
         "label_active": "Center Frequency",
         "label_inactive": "Center Frequency",
-        "type": "_sliderValue",
+        "type": "_Horizontal_knob_Value",
         "handler": "set_center_frequency",
         "yak_handler": {
           "enable": true,
@@ -19,17 +19,16 @@
           "converter": "mhz_to_hz"
         },
         "locked": false,
-        "value": "500",
+        "default_value": "500",
         "min": "0",
         "max": "6000",
-        "step": "0.005",
         "units": "MHz",
         "layout": { "sticky": "ew" }
       },
       "span_freq_MHz": {
         "label_active": "Frequency Span",
         "label_inactive": "Frequency Span",
-        "type": "_sliderValue",
+        "type": "_Horizontal_knob_Value",
         "handler": "set_span_frequency",
         "yak_handler": {
           "enable": true,
@@ -40,17 +39,16 @@
           "converter": "mhz_to_hz"
         },
         "locked": false,
-        "value": "200",
+        "default_value": "200",
         "min": "0",
         "max": "1000",
-        "step": "0.005",
         "units": "MHz",
         "layout": { "sticky": "ew" }
       },
       "start_freq_MHz": {
         "label_active": "Start Frequency",
         "label_inactive": "Start Frequency",
-        "type": "_sliderValue",
+        "type": "_Horizontal_knob_Value",
         "handler": "set_start_frequency",
         "yak_handler": {
           "enable": true,
@@ -61,17 +59,16 @@
           "converter": "mhz_to_hz"
         },
         "locked": false,
-        "value": "400",
+        "default_value": "400",
         "min": "0",
         "max": "5999",
-        "step": "0.005",
         "units": "MHz",
         "layout": { "sticky": "ew" }
       },
       "stop_freq_MHz": {
         "label_active": "Stop Frequency",
         "label_inactive": "Stop Frequency",
-        "type": "_sliderValue",
+        "type": "_Horizontal_knob_Value",
         "handler": "set_stop_frequency",
         "yak_handler": {
           "enable": true,
@@ -82,10 +79,9 @@
           "converter": "mhz_to_hz"
         },
         "locked": false,
-        "value": "600",
+        "default_value": "600",
         "min": "1",
         "max": "6000",
-        "step": "0.005",
         "units": "MHz",
         "layout": { "sticky": "ew" }
       }

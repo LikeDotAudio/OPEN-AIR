@@ -6,23 +6,22 @@ import threading # Import threading for thread-safe singleton
 from .config_builder import create_default_config_ini
 from workers.logger.log_utils import _get_log_args # Import _get_log_args
 
+
+
 class Config:
+
     _instance = None
     _lock = threading.Lock() # Class-level lock for thread-safe singleton initialization
-
     # --- Default values ---
     CURRENT_VERSION = "unknown"
-    PERFORMANCE_MODE = True
     SKIP_DEP_CHECK = True
     CLEAN_INSTALL_MODE = False
     ENABLE_DEBUG_MODE = False
-    ENABLE_DEBUG_FILE = False
     ENABLE_DEBUG_SCREEN = False
-    LOG_TRUNCATION_ENABLED = False
-    DEBUG_TO_TERMINAL = True # New default value
     UI_LAYOUT_SPLIT_EQUAL = 50
     UI_LAYOUT_FULL_WEIGHT = 100
-    SHOW_RELOAD_BUTTON = True
+    SHOW_RELOAD_BUTTON = True # This might be redundant, but keeping for now if used elsewhere
+    RELOAD_CONFIG_DISPLAYED = False # New setting
     MQTT_BROKER_ADDRESS = "localhost"
     MQTT_BROKER_PORT = 1883
     MQTT_USERNAME = None
@@ -30,12 +29,9 @@ class Config:
     MQTT_RETAIN_BEHAVIOR = False # New default value
     MQTT_BASE_TOPIC = "OPEN-AIR" # New default value
 
-    # --- Scan Settings Defaults ---
-    SCAN_GATEWAYS = True
-    SCAN_USB = True
-    SCAN_IP_DIRECT = True
 
     # --- Scan Settings Defaults ---
+
     SCAN_GATEWAYS = True
     SCAN_USB = True
     SCAN_IP_DIRECT = True
@@ -62,12 +58,13 @@ class Config:
 
     @property
     def global_settings(self):
+        debug_screen_enabled = self.ENABLE_DEBUG_MODE and self.ENABLE_DEBUG_SCREEN
         return {
             "general_debug_enabled": self.ENABLE_DEBUG_MODE,
-            "debug_enabled": self.ENABLE_DEBUG_SCREEN,
-            "debug_to_file": self.ENABLE_DEBUG_FILE,
-            "log_truncation_enabled": self.LOG_TRUNCATION_ENABLED,
-            "debug_to_terminal": self.DEBUG_TO_TERMINAL, # Include in global settings
+            "debug_enabled": debug_screen_enabled,
+            "debug_to_file": self.ENABLE_DEBUG_MODE,
+            "log_truncation_enabled": False, # Obsolete
+            "debug_to_terminal": debug_screen_enabled,
         }
     
     def get_mqtt_base_topic(self):
@@ -99,21 +96,19 @@ class Config:
             self.CURRENT_VERSION = config['Version'].get('CURRENT_VERSION', self.CURRENT_VERSION)
         
         if 'Mode' in config:
-            self.PERFORMANCE_MODE = config['Mode'].getboolean('PERFORMANCE_MODE', self.PERFORMANCE_MODE)
             self.SKIP_DEP_CHECK = config['Mode'].getboolean('SKIP_DEP_CHECK', self.SKIP_DEP_CHECK)
             self.CLEAN_INSTALL_MODE = config['Mode'].getboolean('CLEAN_INSTALL_MODE', self.CLEAN_INSTALL_MODE)
 
         if 'Debug' in config:
             self.ENABLE_DEBUG_MODE = config['Debug'].getboolean('ENABLE_DEBUG_MODE', self.ENABLE_DEBUG_MODE)
-            self.ENABLE_DEBUG_FILE = config['Debug'].getboolean('ENABLE_DEBUG_FILE', self.ENABLE_DEBUG_FILE)
             self.ENABLE_DEBUG_SCREEN = config['Debug'].getboolean('ENABLE_DEBUG_SCREEN', self.ENABLE_DEBUG_SCREEN)
-            self.LOG_TRUNCATION_ENABLED = config['Debug'].getboolean('LOG_TRUNCATION_ENABLED', self.LOG_TRUNCATION_ENABLED)
-            self.DEBUG_TO_TERMINAL = config['Debug'].getboolean('DEBUG_TO_TERMINAL', self.DEBUG_TO_TERMINAL) # Load new setting
 
-        if 'UI' in config:
-            self.UI_LAYOUT_SPLIT_EQUAL = int(config['UI'].get('LAYOUT_SPLIT_EQUAL', self.UI_LAYOUT_SPLIT_EQUAL))
-            self.UI_LAYOUT_FULL_WEIGHT = int(config['UI'].get('LAYOUT_FULL_WEIGHT', self.UI_LAYOUT_FULL_WEIGHT))
-            self.SHOW_RELOAD_BUTTON = config['UI'].getboolean('SHOW_RELOAD_BUTTON', self.SHOW_RELOAD_BUTTON)
+            if 'UI' in config:
+
+                    self.UI_LAYOUT_SPLIT_EQUAL = int(config['UI'].get('LAYOUT_SPLIT_EQUAL', self.UI_LAYOUT_SPLIT_EQUAL))
+                    self.UI_LAYOUT_FULL_WEIGHT = int(config['UI'].get('LAYOUT_FULL_WEIGHT', self.UI_LAYOUT_FULL_WEIGHT))
+                    self.SHOW_RELOAD_BUTTON = config['UI'].getboolean('SHOW_RELOAD_BUTTON', self.SHOW_RELOAD_BUTTON)
+                    self.RELOAD_CONFIG_DISPLAYED = config['UI'].getboolean('RELOAD_CONFIG_DISPLAYED', self.RELOAD_CONFIG_DISPLAYED)
 
         if 'MQTT' in config:
             self.MQTT_BROKER_ADDRESS = config['MQTT'].get('BROKER_ADDRESS', self.MQTT_BROKER_ADDRESS)
@@ -131,14 +126,7 @@ class Config:
             self.SCAN_USB = config['ScanSettings'].getboolean('scan_usb', self.SCAN_USB)
             self.SCAN_IP_DIRECT = config['ScanSettings'].getboolean('scan_ip_direct', self.SCAN_IP_DIRECT)
         
-        if 'ScanSettings' in config:
-            self.SCAN_GATEWAYS = config['ScanSettings'].getboolean('scan_gateways', self.SCAN_GATEWAYS)
-            self.SCAN_USB = config['ScanSettings'].getboolean('scan_usb', self.SCAN_USB)
-            self.SCAN_IP_DIRECT = config['ScanSettings'].getboolean('scan_ip_direct', self.SCAN_IP_DIRECT)
-        
         debug_logger(message="--- Loaded Debug Settings ---", **_get_log_args())
         debug_logger(message=f"ENABLE_DEBUG_MODE: {self.ENABLE_DEBUG_MODE}", **_get_log_args())
-        debug_logger(message=f"ENABLE_DEBUG_FILE: {self.ENABLE_DEBUG_FILE}", **_get_log_args())
         debug_logger(message=f"ENABLE_DEBUG_SCREEN: {self.ENABLE_DEBUG_SCREEN}", **_get_log_args())
-        debug_logger(message=f"DEBUG_TO_TERMINAL: {self.DEBUG_TO_TERMINAL}", **_get_log_args()) # Add this line
         debug_logger(message="-----------------------------", **_get_log_args())

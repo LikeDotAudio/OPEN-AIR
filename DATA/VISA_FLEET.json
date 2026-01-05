@@ -39,7 +39,7 @@
                                 "device_type": "Spectrum",
                                 "notes": "Handheld (100 kHz - 3 GHz)",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-04T15:01:39.913808"
+                                "connection_timestamp": "2026-01-04T21:52:26.584677"
                             }
                         }
                     }
@@ -87,7 +87,54 @@
                                 "device_type": "DMM",
                                 "notes": "6.5 Digit Benchtop Standard",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-04T15:01:39.913810"
+                                "connection_timestamp": "2026-01-04T21:52:26.584684"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "Unknown Instrument": {
+        "YAK": {
+            "Unknown": {
+                "Connection": {
+                    "Table": {
+                        "type": "OcaTable",
+                        "description": "Discovered Devices",
+                        "headers": [
+                            "type",
+                            "resource_string",
+                            "ip_address",
+                            "interface_port",
+                            "gpib_address",
+                            "status",
+                            "manufacturer",
+                            "model",
+                            "serial_number",
+                            "firmware",
+                            "idn_string",
+                            "device_type",
+                            "notes",
+                            "allocated",
+                            "connection_timestamp"
+                        ],
+                        "data": {
+                            "5": {
+                                "type": "GATEWAY",
+                                "resource_string": "TCPIP::44.44.44.222::gpib7,5::INSTR",
+                                "ip_address": "44.44.44.222",
+                                "interface_port": "gpib7",
+                                "gpib_address": "5",
+                                "status": "Unresponsive",
+                                "manufacturer": "Unknown",
+                                "model": "Unknown",
+                                "serial_number": "Unknown",
+                                "firmware": "Unknown",
+                                "device_type": "Unknown Instrument",
+                                "notes": "Not in Knowledge Base",
+                                "allocated": false,
+                                "connection_timestamp": "2026-01-04T21:52:26.584685"
                             }
                         }
                     }

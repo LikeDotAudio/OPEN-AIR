@@ -14,22 +14,19 @@ def create_default_config_ini(config_path: pathlib.Path, silent: bool = False):
     }
 
     config['Mode'] = {
-        'PERFORMANCE_MODE': 'False',
         'SKIP_DEP_CHECK': 'False',
         'CLEAN_INSTALL_MODE': 'True'
     }
 
     config['Debug'] = {
         'ENABLE_DEBUG_MODE': 'True',
-        'ENABLE_DEBUG_FILE': 'True',
-        'ENABLE_DEBUG_SCREEN': 'True',
-        'LOG_TRUNCATION_ENABLED': 'True',
-        'DEBUG_TO_TERMINAL': 'True'
+        'ENABLE_DEBUG_SCREEN': 'True'
     }
 
     config['UI'] = {
         'LAYOUT_SPLIT_EQUAL': '50',
-        'LAYOUT_FULL_WEIGHT': '100'
+        'LAYOUT_FULL_WEIGHT': '100',
+        'RELOAD_CONFIG_DISPLAYED': 'False'
     }
 
     config['MQTT'] = {

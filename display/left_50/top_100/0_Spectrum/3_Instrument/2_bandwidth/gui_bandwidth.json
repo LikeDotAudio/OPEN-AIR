@@ -7,7 +7,7 @@
       "RBW": {
         "label_active": "Resolution Bandwidth",
         "label_inactive": "Resolution Bandwidth",
-        "type": "_sliderValue",
+          "type": "_Horizontal_knob_Value",
         "handler": "set_rbw",
         "yak_handler": {
           "enable": true,
@@ -17,10 +17,9 @@
           "input_name": "hz_value",
           "converter": "mhz_to_hz"
         },
-        "locked": false,
-        "value": "0",
-        "min": "1",
-        "max": "1",
+
+        "default_value": "0.5",
+
         "units": "MHz",
         "layout": { "sticky": "ew" }
       },
@@ -122,7 +121,7 @@
       "vbw_MHz": {
         "label_active": "Video Bandwidth",
         "label_inactive": "Video Bandwidth",
-        "type": "_sliderValue",
+          "type": "_Horizontal_knob_Value",
         "handler": "set_vbw",
         "yak_handler": {
           "enable": true,
@@ -132,10 +131,11 @@
           "input_name": "hz_value",
           "converter": "mhz_to_hz"
         },
-        "locked": false,
-        "value": "0",
+        "default_locked": false,
+        "default_value": "0.5",
         "min": "0",
         "max": "1",
+        "step": "0.01",
         "units": "MHz",
         "layout": { "sticky": "ew" }
       },
@@ -304,7 +304,7 @@
     "fields": {
       "label_active": "Sweep Time",
       "label_inactive": "Sweep Time",
-      "type": "_sliderValue",
+        "type": "_Horizontal_knob_Value",
       "handler": "set_sweep_time",
       "yak_handler": {
         "enable": true,
@@ -314,10 +314,11 @@
         "input_name": "s_value",
         "converter": "float"
       },
-      "locked": false,
-      "value": "0",
+
+      "default_value": "0",
       "min": "1",
       "max": "50",
+      "step": "0.5",
       "units": "s",
       "layout": { "sticky": "ew" }
     }

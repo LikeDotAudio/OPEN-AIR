@@ -20,7 +20,7 @@ app_constants = Config.get_instance() # Get the singleton instance and ensure co
 
 # --- Core Application Imports ---
 from managers.dependancy import dependancy_checker
-dependancy_checker.initialize_flags(app_constants) # Call early to set flags
+
 
 # Other essential modules
 from workers.splash_screen.splash_screen import SplashScreen

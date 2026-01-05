@@ -131,8 +131,8 @@ def debug_logger(message: str, **kwargs):
     config_instance = _get_config_instance()
 
     # SILENCE: If PERFORMANCE_MODE is enabled, completely stop debug logging.
-    if config_instance.PERFORMANCE_MODE:
-        return
+    #if config_instance.PERFORMANCE_MODE:
+    #    return
     
     # Generate timestamp immediately for consistency across handlers.
     current_ts = f"{time.time():.6f}"

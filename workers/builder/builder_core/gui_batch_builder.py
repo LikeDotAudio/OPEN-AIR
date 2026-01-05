@@ -48,17 +48,12 @@ class GuiBatchBuilderMixin:
                         self._create_dynamic_widgets(parent_frame=target_frame, data=value.get("fields", {}), path_prefix=current_path, override_cols=block_cols)
 
                     elif widget_type in self.widget_factory:
-                        # Inject global context into the widget's config_data
-                        value["path"] = current_path # Inject current widget's path
-                        if self.state_mirror_engine:
-                            value["state_mirror_engine"] = self.state_mirror_engine
-                            value["base_mqtt_topic_from_path"] = self.state_mirror_engine.base_topic
-                        if self.subscriber_router:
-                            value["subscriber_router"] = self.subscriber_router
-
                         factory_kwargs = {
                             "parent_widget": parent_frame,
-                            "config_data": value # Pass the modified config_data
+                            "config_data": value,
+                            "base_mqtt_topic_from_path": self.base_mqtt_topic_from_path,
+                            "state_mirror_engine": self.state_mirror_engine,
+                            "subscriber_router": self.subscriber_router
                         }
 
                         try:
@@ -66,8 +61,6 @@ class GuiBatchBuilderMixin:
                         except Exception as e:
                             debug_logger(message=f"❌ Error creating widget '{key}' of type '{widget_type}': {e}", **_get_log_args())
                             target_frame = None
-                    else:
-                        debug_logger(message=f"❓ Unknown or missing widget 'type' for widget '{key}'. Skipping.", **_get_log_args())
 
                     if target_frame:
                         tk_var = self.tk_vars.get(current_path)
@@ -128,26 +121,18 @@ class GuiBatchBuilderMixin:
                         self._create_dynamic_widgets(parent_frame=target_frame, data=value.get("fields", {}), path_prefix=current_path, override_cols=block_cols)
 
                     elif widget_type in self.widget_factory:
-                        # Inject global context into the widget's config_data
-                        value["path"] = current_path # Inject current widget's path
-                        if self.state_mirror_engine:
-                            value["state_mirror_engine"] = self.state_mirror_engine
-                            value["base_mqtt_topic_from_path"] = self.state_mirror_engine.base_topic
-                        if self.subscriber_router:
-                            value["subscriber_router"] = self.subscriber_router
-
                         factory_kwargs = {
                             "parent_widget": parent_frame,
-                            "config_data": value # Pass the modified config_data
+                            "config_data": value,
+                            "base_mqtt_topic_from_path": self.base_mqtt_topic_from_path,
+                            "state_mirror_engine": self.state_mirror_engine,
+                            "subscriber_router": self.subscriber_router
                         }
-
                         try:
                             target_frame = self.widget_factory[widget_type](**factory_kwargs)
                         except Exception as e:
                             debug_logger(message=f"❌ Error creating synchronous widget '{key}' of type '{widget_type}': {e}", **_get_log_args())
                             target_frame = None
-                    else:
-                        debug_logger(message=f"❓ Unknown or missing widget 'type' for widget '{key}' in synchronous builder. Skipping.", **_get_log_args())
 
                     if target_frame:
                         tk_var = self.tk_vars.get(current_path)

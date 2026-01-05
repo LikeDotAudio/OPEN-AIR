@@ -71,6 +71,7 @@ class ModuleLoader:
             # or relying on its presence as a dict or the builtins module itself.
             module.tk = tk
             module.ttk = ttk
+            module.os = os
             
             spec.loader.exec_module(module)
             

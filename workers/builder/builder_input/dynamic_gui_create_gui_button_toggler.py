@@ -52,9 +52,17 @@ class GuiButtonTogglerCreatorMixin:
     A mixin class that provides the functionality for creating a
     group of buttons that behave like radio buttons.
     """
-    def _create_gui_button_toggler(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_gui_button_toggler(self, parent_widget, config_data): # Updated signature
         # Creates a set of custom buttons that behave like radio buttons ("bucket of buttons").
         current_function_name = inspect.currentframe().f_code.co_name
+
+        # Extract arguments from config_data
+        label = config_data.get("label_active", "") # Use label_active from config_data
+        config = config_data # config_data is the config
+        path = config_data.get("path")
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
@@ -63,7 +71,7 @@ class GuiButtonTogglerCreatorMixin:
             )
 
         try:
-            group_frame = ttk.Frame(parent_frame)
+            group_frame = ttk.Frame(parent_widget) # Use parent_widget here
 
             label_widget = ttk.Label(group_frame, text=label)
             label_widget.pack(anchor='w', padx=DEFAULT_PAD_X, pady=2)

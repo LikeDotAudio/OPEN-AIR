@@ -11,19 +11,25 @@ from workers.logger.log_utils import _get_log_args
 import os
 
 class WebLinkCreatorMixin:
-    def _create_web_link(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_web_link(self, parent_widget, config_data): # Updated signature
         """Creates a web link widget."""
         current_function_name = "_create_web_link"
+        
+        # Extract arguments from config_data
+        label = config_data.get("label_active")
+        config = config_data # config_data is the config
+        # path = config_data.get("path") # Not directly used in this widget for MQTT
+        # base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        # state_mirror_engine = config_data.get("state_mirror_engine")
+        # subscriber_router = config_data.get("subscriber_router")
+
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
                 message=f"🔬⚡️ Entering '{current_function_name}' to open a portal (web link) for '{label}'.",
 **_get_log_args()
-                
-
-
             )
 
-        frame = ttk.Frame(parent_frame)
+        frame = ttk.Frame(parent_widget) # Use parent_widget here
 
         try:
             url = config.get("url", "#")

@@ -25,6 +25,7 @@ from .builder_data_graphing.meter_widget_adapter import MeterWidgetAdapterMixin
 from .builder_hidden.hidden_visibility_manager import HiddenVisibilityManagerMixin
 from .builder_hidden.hidden_geometry_manager import HiddenGeometryManagerMixin
 from .builder_hidden.hidden_breakoff_manager import HiddenBreakoffManagerMixin
+from .builder_indicators.header_status_light import HeaderStatusLightMixin # Add this import
 
 # --- 4. EXISTING SIMPLE WIDGET MIXINS ---
 from workers.builder.builder_input.dynamic_gui_mousewheel_mixin import MousewheelScrollMixin
@@ -38,7 +39,7 @@ from .builder_input.dynamic_gui_create_gui_button_toggler import GuiButtonToggle
 from .builder_text.dynamic_gui_create_gui_dropdown_option import GuiDropdownOptionCreatorMixin
 from .builder_input.dynamic_gui_create_gui_actuator import GuiActuatorCreatorMixin
 from .builder_input.dynamic_gui_create_gui_checkbox import GuiCheckboxCreatorMixin
-from .builder_input.dynamic_gui_create_gui_listbox import GuiListboxCreatorMixin
+from .builder_text.dynamic_gui_create_gui_listbox import GuiListboxCreatorMixin
 from .builder_images.dynamic_gui_create_progress_bar import ProgressBarCreatorMixin
 from .builder_table.dynamic_gui_table import GuiTableCreatorMixin
 from .builder_text.dynamic_gui_create_text_input import TextInputCreatorMixin
@@ -70,6 +71,7 @@ class DynamicGuiBuilder(
     HiddenVisibilityManagerMixin,
     HiddenGeometryManagerMixin,
     HiddenBreakoffManagerMixin,
+    HeaderStatusLightMixin, # Add HeaderStatusLightMixin here
     # Indicators
     # Utilities & Standard Widgets
     MousewheelScrollMixin,

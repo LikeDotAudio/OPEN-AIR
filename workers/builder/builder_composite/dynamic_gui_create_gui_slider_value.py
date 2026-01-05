@@ -54,21 +54,26 @@ class SliderValueCreatorMixin:
     A mixin class that provides the functionality for creating a
     slider widget combined with a text entry box.
     """
-    def _create_slider_value(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_slider_value(self, parent_widget, config_data):
         # Creates a slider and an entry box for a numerical value.
         current_function_name = inspect.currentframe().f_code.co_name
+
+        # Extract arguments from config_data
+        label = config_data.get("label_active") # Assuming label comes from config_data
+        config = config_data # config_data is the config
+        path = config_data.get("path") # Path needs to be passed in config_data
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
                 message=f"🔬⚡️ Entering '{current_function_name}' to assemble a slider for '{label}'.",
               **_get_log_args()
-                
-
-
             )
 
         try:
-            sub_frame = ttk.Frame(parent_frame)
+            sub_frame = ttk.Frame(parent_widget) # Use parent_widget here
 
             # --- Layout Refactor: Start ---
             # Line 1: Label
@@ -76,8 +81,8 @@ class SliderValueCreatorMixin:
             label_widget.pack(side=tk.TOP, fill=tk.X, padx=(DEFAULT_PAD_X, DEFAULT_PAD_Y), pady=(0, DEFAULT_PAD_Y))
 
             # Line 2: Slider
-            min_val = float(config.get('min', '0'))
-            max_val = float(config.get('max', '100'))
+            min_val = float(config_data.get('min', '0'))
+            max_val = float(config_data.get('max', '100'))
             
             # 🟢️️️ New fix: Create a custom style for a thicker slider
             style = ttk.Style(sub_frame)
@@ -91,10 +96,10 @@ class SliderValueCreatorMixin:
             value_unit_frame = ttk.Frame(sub_frame)
             value_unit_frame.pack(side=tk.TOP, fill=tk.X, expand=True)
 
-            units_label = ttk.Label(value_unit_frame, text=config.get('units', ''))
+            units_label = ttk.Label(value_unit_frame, text=config_data.get('units', ''))
             units_label.pack(side=tk.RIGHT, padx=(DEFAULT_PAD_X, DEFAULT_PAD_X))
 
-            entry_value = tk.StringVar(value=config.get('value', '0'))
+            entry_value = tk.StringVar(value=config_data.get('value', '0'))
             entry = ttk.Entry(value_unit_frame, width=7, style="Custom.TEntry", textvariable=entry_value, justify=tk.RIGHT)
             entry.pack(side=tk.RIGHT, padx=(DEFAULT_PAD_X, 0))
             
@@ -151,7 +156,7 @@ class SliderValueCreatorMixin:
                 widget_id = path
                 
                 # 1. Register widget
-                state_mirror_engine.register_widget(widget_id, entry_value, base_mqtt_topic_from_path, config)
+                state_mirror_engine.register_widget(widget_id, entry_value, base_mqtt_topic_from_path, config_data)
 
                 # 2. Bind variable trace for outgoing messages
                 callback = lambda: state_mirror_engine.broadcast_gui_change_to_mqtt(widget_id)

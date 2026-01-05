@@ -16,10 +16,18 @@ import os
 from workers.mqtt.mqtt_topic_utils import get_topic # <--- ADD THIS LINE
 
 class NeedleVUMeterCreatorMixin:
-    def _create_needle_vu_meter(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_needle_vu_meter(self, parent_widget, config_data): # Updated signature
         """Creates a needle-style VU meter widget."""
         current_function_name = "_create_needle_vu_meter"
         
+        # Extract arguments from config_data
+        label = config_data.get("label_active")
+        config = config_data # config_data is the config
+        path = config_data.get("path")
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
+
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
                 message=f"🔬⚡️ Entering '{current_function_name}' to calibrate a themed needle VU meter for '{label}'.",
@@ -34,7 +42,7 @@ class NeedleVUMeterCreatorMixin:
         secondary_color = colors.get("secondary", "#444444")
         danger_color = "#FF4500"  # Consistent Danger Red
 
-        frame = ttk.Frame(parent_frame)
+        frame = ttk.Frame(parent_widget) # Use parent_widget here
 
         if label:
             ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))

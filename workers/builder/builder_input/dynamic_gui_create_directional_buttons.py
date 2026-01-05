@@ -13,19 +13,25 @@ import orjson # Imported here for payload construction
 import time # Imported for timestamp
 
 class DirectionalButtonsCreatorMixin:
-    def _create_directional_buttons(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_directional_buttons(self, parent_widget, config_data): # Updated signature
         """Creates a set of directional buttons (up, down, left, right)."""
         current_function_name = "_create_directional_buttons"
+        
+        # Extract arguments from config_data
+        label = config_data.get("label_active")
+        config = config_data # config_data is the config
+        path = config_data.get("path")
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
+
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
                 message=f"🔬⚡️ Entering '{current_function_name}' to chart the course for directional buttons for '{label}'.",
 **_get_log_args()
-                
-
-
             )
 
-        frame = ttk.Frame(parent_frame)
+        frame = ttk.Frame(parent_widget) # Use parent_widget here
 
         if label:
             ttk.Label(frame, text=label).grid(row=0, column=1, pady=(0, 5))

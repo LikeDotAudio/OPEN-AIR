@@ -15,7 +15,7 @@ import os
 from workers.mqtt.mqtt_topic_utils import get_topic
 
 class CustomHorizontalFaderFrame(tk.Frame):
-    def __init__(self, master, variable, config, path, state_mirror_engine, command):
+    def __init__(self, master, variable, config, path, state_mirror_engine, command, tick_interval=None):
         # Extract parameters from config and provide defaults
         # Theme Resolution
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
@@ -40,6 +40,7 @@ class CustomHorizontalFaderFrame(tk.Frame):
         self.outline_col = "black" # Not configurable at the moment
         self.outline_width = 1 # Not configurable at the moment
         self.ticks = config.get("ticks", None)
+        self.tick_interval = tick_interval # Store the passed tick_interval
 
         super().__init__(master, bg=self.bg_color, bd=self.border_width, relief="solid", highlightbackground=self.border_color, highlightthickness=self.border_width)
         self.variable = variable
@@ -92,9 +93,19 @@ class CustomHorizontalFaderFrame(tk.Frame):
             self.temp_entry = None
 
 class CustomHorizontalFaderCreatorMixin:
-    def _create_custom_horizontal_fader(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_custom_horizontal_fader(self, parent_widget, config_data): # Updated signature
         """Creates a custom horizontal fader widget."""
         current_function_name = "_create_custom_horizontal_fader"
+        
+        # Extract arguments from config_data
+        label = config_data.get("label_active")
+        config = config_data # config_data is the config
+        path = config_data.get("path")
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
+        tick_interval = config_data.get("tick_interval") # Extract tick_interval from config_data
+
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         bg_color = colors.get("bg", "#2b2b2b")
 
@@ -120,12 +131,13 @@ class CustomHorizontalFaderCreatorMixin:
                 state_mirror_engine.broadcast_gui_change_to_mqtt(path)
 
         frame = CustomHorizontalFaderFrame(
-            parent_frame,
+            parent_widget, # Use parent_widget here
             variable=fader_value_var,
             config=config,
             path=path,
             state_mirror_engine=state_mirror_engine,
-            command=on_drag_or_click_callback
+            command=on_drag_or_click_callback,
+            tick_interval=tick_interval # Pass the tick_interval
         )
 
         if label:
@@ -209,8 +221,14 @@ class CustomHorizontalFaderCreatorMixin:
         if frame_instance.ticks is not None:
             # Use custom ticks if provided in config
             tick_values_to_draw = frame_instance.ticks
+        elif frame_instance.tick_interval is not None and frame_instance.tick_interval > 0:
+            # Use the passed tick_interval
+            current_tick = math.ceil(frame_instance.min_val / frame_instance.tick_interval) * frame_instance.tick_interval
+            while current_tick <= frame_instance.max_val:
+                tick_values_to_draw.append(current_tick)
+                current_tick += frame_instance.tick_interval
         else:
-            # Dynamic tick generation
+            # Fallback to internal dynamic tick generation if no tick_interval is provided
             value_range = frame_instance.max_val - frame_instance.min_val
             if value_range <= 10:
                 tick_interval = 2

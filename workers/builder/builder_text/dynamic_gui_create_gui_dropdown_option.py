@@ -52,21 +52,26 @@ class GuiDropdownOptionCreatorMixin:
     A mixin class that provides the functionality for creating a
     dropdown (Combobox) widget.
     """
-    def _create_gui_dropdown_option(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_gui_dropdown_option(self, parent_widget, config_data): # Updated signature
         # Creates a dropdown menu for multiple choice options.
         current_function_name = inspect.currentframe().f_code.co_name
+
+        # Extract arguments from config_data
+        label = config_data.get("label_active")
+        config = config_data # config_data is the config
+        path = config_data.get("path")
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
                 message=f"🔬⚡️ Entering '{current_function_name}' to devise a dropdown selector for '{label}'.",
               **_get_log_args()
-                
-
-
             )
 
         try:
-            sub_frame = ttk.Frame(parent_frame)
+            sub_frame = ttk.Frame(parent_widget) # Use parent_widget here
 
             # Label
             label_widget = ttk.Label(sub_frame, text=f"{label}:")

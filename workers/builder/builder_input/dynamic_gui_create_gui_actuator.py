@@ -55,10 +55,18 @@ class GuiActuatorCreatorMixin:
     A mixin class that provides the functionality for creating a simple
     actuator button widget that triggers an action.
     """
-    def _create_gui_actuator(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_gui_actuator(self, parent_widget, config_data): # Updated signature
         # Creates a button that acts as a simple actuator.
         current_function_name = inspect.currentframe().f_code.co_name
         
+        # Extract arguments from config_data
+        label = config_data.get("label_active") # Use label_active from config_data
+        config = config_data # config_data is the config
+        path = config_data.get("path")
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
+
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
                 message=f"🔬⚡️ Entering '{current_function_name}' to construct an actuator for '{label}'.",
@@ -67,7 +75,7 @@ class GuiActuatorCreatorMixin:
 
         try:
             # Create a frame to hold the label and button
-            sub_frame = ttk.Frame(parent_frame)
+            sub_frame = ttk.Frame(parent_widget) # Use parent_widget here
             sub_frame.grid_rowconfigure(0, weight=1)
             sub_frame.grid_columnconfigure(0, weight=1)
 

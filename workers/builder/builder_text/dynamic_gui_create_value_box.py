@@ -53,9 +53,17 @@ class ValueBoxCreatorMixin:
     A mixin class that provides the functionality for creating an
     editable text box widget.
     """
-    def _create_value_box(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_value_box(self, parent_widget, config_data): # Updated signature
         # Creates an editable text box (_Value).
         current_function_name = inspect.currentframe().f_code.co_name
+
+        # Extract arguments from config_data
+        label = config_data.get("label_active")
+        config = config_data # config_data is the config
+        path = config_data.get("path")
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
@@ -64,7 +72,7 @@ class ValueBoxCreatorMixin:
             )
 
         try:
-            sub_frame = ttk.Frame(parent_frame)
+            sub_frame = ttk.Frame(parent_widget) # Use parent_widget here
 
             label_widget = ttk.Label(sub_frame, text=f"{label}:")
             label_widget.pack(side=tk.LEFT, padx=(DEFAULT_PAD_X, DEFAULT_PAD_X))

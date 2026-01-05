@@ -23,41 +23,69 @@ class HorizontalKnobValueCreatorMixin(CustomHorizontalFaderCreatorMixin, KnobCre
     A mixin class that provides the functionality for creating a
     fader-knob composite widget combined with a text entry box and a knob for fine-tuning.
     """
-    def _create_horizontal_knob_value(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_horizontal_knob_value(self, parent_widget, config_data):
         current_function_name = inspect.currentframe().f_code.co_name
+        
+        # Extract arguments from config_data
+        label = config_data.get("label_active", "") # Use label from config_data
+        path = config_data.get("path") # Path needs to be passed in config_data
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path") # Extract from config_data
+        state_mirror_engine = config_data.get("state_mirror_engine") # Extract from config_data
+        subscriber_router = config_data.get("subscriber_router") # Extract from config_data
+
         if app_constants.global_settings['debug_enabled']:
             debug_logger(message=f"🔬⚡️ Entering '{current_function_name}' to assemble a fader-knob combo for '{label}'.", **_get_log_args())
 
         try:
-            sub_frame = ttk.Frame(parent_frame)
+            sub_frame = ttk.Frame(parent_widget) # Use parent_widget here
 
             label_widget = ttk.Label(sub_frame, text=f"{label}:")
             label_widget.pack(side=tk.TOP, fill=tk.X, padx=(DEFAULT_PAD_X, DEFAULT_PAD_Y), pady=(0, DEFAULT_PAD_Y))
 
-            min_val = float(config.get('min', '0'))
-            max_val = float(config.get('max', '100'))
+            min_val = float(config_data.get('min', '0'))
+            max_val = float(config_data.get('max', '100'))
             
-            # Determine step_value dynamically or from config
-            step_value = float(config.get('step', '0'))
-            if step_value == 0: # If step not provided or is 0, calculate dynamically
-                value_range = max_val - min_val
+            # Calculate value_range once, upfront
+            value_range = max_val - min_val
+
+            # Determine tick_mark_interval dynamically or from config_data
+            tick_mark_interval = float(config_data.get('step', '0')) # 'step' config_data now defines visual tick marks
+            if tick_mark_interval == 0: # If not provided or is 0, calculate dynamically for visual ticks
                 if value_range <= 1: # New rule: 1 or under
-                    step_value = 0.1
+                    tick_mark_interval = 0.1
                 elif value_range <= 10:
-                    step_value = 2
+                    tick_mark_interval = 2
                 elif value_range <= 50:
-                    step_value = 5
+                    tick_mark_interval = 5
                 elif value_range <= 100:
-                    step_value = 10
+                    tick_mark_interval = 10
                 elif value_range <= 1000:
-                    step_value = 50
+                    tick_mark_interval = 50
                 else: # value_range > 1000
-                    step_value = 500
+                    tick_mark_interval = 500
+            
+            # Define actual numerical step for value updates
+            numerical_step = float(config_data.get('numerical_step', '0'))
+            if numerical_step == 0: # If numerical_step not provided or is 0, calculate dynamically
+                # Use a sensible default based on the range or a fixed fine value
+                if value_range <= 1:
+                    numerical_step = 0.01 # For small ranges, allow very fine control
+                elif value_range <= 100:
+                    numerical_step = 0.1
+                elif value_range <= 1000:
+                    numerical_step = 1
+                else:
+                    numerical_step = 10
+            
+            # The 'resolution' for the knob itself might be different, typically finer
+            # Use 'resolution' from config_data, fallback to numerical_step if not provided, then a very fine default
+            resolution = float(config_data.get('resolution', numerical_step))
+            if resolution == 0: # Ensure resolution is never zero
+                resolution = 0.001 # A very fine default for the knob's smallest increment
+
             
             # Use 'default_value' preference, fallback to 'value', then '0'
-            main_value_var = tk.DoubleVar(value=float(config.get('default_value', config.get('value', '0'))))
-
-            resolution = float(config.get('resolution', step_value)) # Use step_value as default resolution if not specified
+            main_value_var = tk.DoubleVar(value=float(config_data.get('default_value', config_data.get('value', '0'))))
 
             # Frame to hold fader and knob side-by-side
             fader_knob_frame = ttk.Frame(sub_frame)
@@ -66,26 +94,31 @@ class HorizontalKnobValueCreatorMixin(CustomHorizontalFaderCreatorMixin, KnobCre
             fader_knob_frame.grid_columnconfigure(1, weight=1) # Knob 10%
 
             # Create Fader (Coarse Adjustment)
-            # Create a copy of config for the fader, potentially modifying its range to integer-like
-            fader_config = config.copy()
+            # Create a copy of config_data for the fader, potentially modifying its range to integer-like
+            fader_config = config_data.copy()
             fader_config['value_min'] = str(math.floor(min_val))
             fader_config['value_max'] = str(math.ceil(max_val))
             fader_config['value_default'] = str(math.floor(main_value_var.get()))
 
             # The fader needs to update the main_value_var, but only its integer part
             fader_widget = self._create_custom_horizontal_fader(
-                fader_knob_frame, None, fader_config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router
+                fader_knob_frame, fader_config
             )
             fader_widget.grid(row=0, column=0, sticky="nsew", padx=(DEFAULT_PAD_X, 0))
 
             # Create Knob (Fine Adjustment for Decimal Part)
-            knob_config = config.copy()
+            knob_config = config_data.copy()
             knob_config['min'] = '0'
             knob_config['max'] = str(1 / resolution - 1) # e.g., if res=0.01, max is 99
             knob_config['value_default'] = str(round((main_value_var.get() % 1) / resolution)) # Initial decimal value
-            
+            knob_config['path'] = path + "_knob"
+            knob_config['base_mqtt_topic_from_path'] = base_mqtt_topic_from_path
+            knob_config['state_mirror_engine'] = state_mirror_engine
+            knob_config['subscriber_router'] = subscriber_router
+            knob_config['label_active'] = label + " Knob" # Label for knob
+
             knob_widget = self._create_knob(
-                fader_knob_frame, None, knob_config, path + "_knob", base_mqtt_topic_from_path, state_mirror_engine, subscriber_router
+                fader_knob_frame, knob_config
             )
             knob_widget.grid(row=0, column=1, sticky="nsew", padx=(0, DEFAULT_PAD_X))
 
@@ -93,7 +126,7 @@ class HorizontalKnobValueCreatorMixin(CustomHorizontalFaderCreatorMixin, KnobCre
             value_unit_frame = ttk.Frame(sub_frame)
             value_unit_frame.pack(side=tk.TOP, fill=tk.X, expand=True)
 
-            units_label = ttk.Label(value_unit_frame, text=config.get('units', ''))
+            units_label = ttk.Label(value_unit_frame, text=config_data.get('units', ''))
             units_label.pack(side=tk.RIGHT, padx=(DEFAULT_PAD_X, DEFAULT_PAD_X))
 
             entry = ttk.Entry(value_unit_frame, width=10, style="Custom.TEntry", textvariable=main_value_var, justify=tk.RIGHT)
@@ -117,8 +150,8 @@ class HorizontalKnobValueCreatorMixin(CustomHorizontalFaderCreatorMixin, KnobCre
                     fader_val = fader_widget.variable.get()
                     decimal_val = (main_value_var.get() % 1)
                     new_main_val = fader_val + decimal_val
-                    # Round to nearest step_value
-                    new_main_val = round(new_main_val / step_value) * step_value
+                    # Round to nearest numerical_step
+                    new_main_val = round(new_main_val / numerical_step) * numerical_step
                     main_value_var.set(max(min_val, min(max_val, new_main_val)))
                 except (ValueError, tk.TclError) as e:
                     if app_constants.global_settings['debug_enabled']:
@@ -130,8 +163,8 @@ class HorizontalKnobValueCreatorMixin(CustomHorizontalFaderCreatorMixin, KnobCre
                     integer_part = math.floor(main_value_var.get())
                     new_decimal_part = knob_val * resolution
                     new_main_val = integer_part + new_decimal_part
-                    # Round to nearest step_value
-                    new_main_val = round(new_main_val / step_value) * step_value
+                    # Round to nearest numerical_step
+                    new_main_val = round(new_main_val / numerical_step) * numerical_step
                     main_value_var.set(max(min_val, min(max_val, new_main_val)))
                 except (ValueError, tk.TclError) as e:
                     if app_constants.global_settings['debug_enabled']:
@@ -140,8 +173,8 @@ class HorizontalKnobValueCreatorMixin(CustomHorizontalFaderCreatorMixin, KnobCre
             def on_entry_manual_change(event):
                 try:
                     new_val = float(entry.get())
-                    # Round to nearest step_value
-                    new_val = round(new_val / step_value) * step_value
+                    # Round to nearest numerical_step
+                    new_val = round(new_val / numerical_step) * numerical_step
                     main_value_var.set(max(min_val, min(max_val, new_val)))
                 except ValueError:
                     if app_constants.global_settings['debug_enabled']:
@@ -163,7 +196,7 @@ class HorizontalKnobValueCreatorMixin(CustomHorizontalFaderCreatorMixin, KnobCre
                 self.topic_widgets[path] = (main_value_var, fader_widget, knob_widget)
                 widget_id = path
                 
-                state_mirror_engine.register_widget(widget_id, main_value_var, base_mqtt_topic_from_path, config)
+                state_mirror_engine.register_widget(widget_id, main_value_var, base_mqtt_topic_from_path, config_data)
                 callback = lambda: state_mirror_engine.broadcast_gui_change_to_mqtt(widget_id)
                 bind_variable_trace(main_value_var, callback)
                 topic = state_mirror_engine.get_widget_topic(widget_id)

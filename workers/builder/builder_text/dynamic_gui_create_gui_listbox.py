@@ -54,29 +54,32 @@ class GuiListboxCreatorMixin:
     A mixin class that provides the functionality for creating a
     Listbox widget.
     """
-    def _create_gui_listbox(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_gui_listbox(self, parent_widget, config_data): # Updated signature
         # Creates a listbox menu for multiple choice options.
         current_function_name = inspect.currentframe().f_code.co_name
-        self.state_mirror_engine = state_mirror_engine # Store for use in instance methods
-        self.subscriber_router = subscriber_router
-        self.label = label # Store label for use in instance methods
-        self.path = path # Store path for use in instance methods
-        self.base_mqtt_topic_from_path = base_mqtt_topic_from_path # Store for use in instance methods
         
+        # Extract arguments from config_data
+        self.label = config_data.get("label_active") # Store label for use in instance methods
+        config = config_data # config_data is the config
+        self.path = config_data.get("path") # Store path for use in instance methods
+        self.base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path") # Store for use in instance methods
+        self.state_mirror_engine = config_data.get("state_mirror_engine") # Store for use in instance methods
+        self.subscriber_router = config_data.get("subscriber_router") # Store for use in instance methods
+
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
-                message=f"🔬⚡️ Entering '{current_function_name}' to materialize a listbox for '{label}'.",
+                message=f"🔬⚡️ Entering '{current_function_name}' to materialize a listbox for '{self.label}'.",
               **_get_log_args()
             )
 
         try:
-            sub_frame = ttk.Frame(parent_frame, width=200, height=150)
+            sub_frame = ttk.Frame(parent_widget, width=200, height=150) # Use parent_widget here
             sub_frame.pack_propagate(False)
 
             sub_frame.grid_rowconfigure(1, weight=1)
             sub_frame.grid_columnconfigure(0, weight=1)
 
-            label_widget = ttk.Label(sub_frame, text=label)
+            label_widget = ttk.Label(sub_frame, text=self.label)
             label_widget.grid(row=0, column=0, sticky='w', padx=DEFAULT_PAD_X, pady=2)
 
             listbox_frame = ttk.Frame(sub_frame)

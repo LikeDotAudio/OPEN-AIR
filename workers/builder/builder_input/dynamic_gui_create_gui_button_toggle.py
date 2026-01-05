@@ -46,9 +46,17 @@ current_file = f"{os.path.basename(__file__)}"
 TOPIC_DELIMITER = "/"
 
 class GuiButtonToggleCreatorMixin:
-    def _create_gui_button_toggle(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_gui_button_toggle(self, parent_widget, config_data): # Updated signature
         # Creates a single button that toggles between two states (e.g., ON/OFF).
         current_function_name = inspect.currentframe().f_code.co_name
+
+        # Extract arguments from config_data
+        label = config_data.get("label_active")
+        config = config_data # config_data is the config
+        path = config_data.get("path")
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
@@ -57,7 +65,7 @@ class GuiButtonToggleCreatorMixin:
             )
 
         try:
-            sub_frame = ttk.Frame(parent_frame)
+            sub_frame = ttk.Frame(parent_widget) # Use parent_widget here
             
             options_map = config.get('options', {})
             on_config = options_map.get('ON', {})

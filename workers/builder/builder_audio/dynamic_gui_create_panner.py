@@ -105,9 +105,18 @@ class CustomPannerFrame(ttk.Frame):
             self.temp_entry = None # Clean up the attribute
 
 class PannerCreatorMixin:
-    def _create_panner(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_panner(self, parent_widget, config_data): # Updated signature
         """Creates a rotary panner widget."""
         current_function_name = "_create_panner"
+        
+        # Extract arguments from config_data
+        label = config_data.get("label_active")
+        config = config_data # config_data is the config
+        path = config_data.get("path")
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
+
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
                 message=f"🔬⚡️ Entering '{current_function_name}' to forge a themed panner for '{label}'.",
@@ -158,7 +167,7 @@ class PannerCreatorMixin:
             drag_state['start_value'] = None
 
         frame = CustomPannerFrame(
-            parent_frame,
+            parent_widget, # Use parent_widget here
             variable=panner_value_var,
             min_val=min_val,
             max_val=max_val,

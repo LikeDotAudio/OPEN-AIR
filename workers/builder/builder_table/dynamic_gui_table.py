@@ -22,11 +22,20 @@ CSV_SAVE_DIR = os.path.join(os.path.expanduser("~"), "Documents", "OPEN-AIR", "D
 class GuiTableCreatorMixin:
     """Mixin class for creating an editable table widget with CSV functionality."""
 
-    def _create_gui_table(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_gui_table(self, parent_widget, config_data): # Updated signature
         current_function_name = inspect.currentframe().f_code.co_name
+        
+        # Extract arguments from config_data
+        label = config_data.get("label_active") # Use label_active from config_data
+        config = config_data # config_data is the config
+        path = config_data.get("path")
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
+
         debug_logger(message=f"Creating editable table widget: {label}", **_get_log_args())
 
-        container = ttk.Frame(parent_frame)
+        container = ttk.Frame(parent_widget) # Use parent_widget here
         container.grid_rowconfigure(0, weight=1) # Row for the treeview
         container.grid_columnconfigure(0, weight=1)
 

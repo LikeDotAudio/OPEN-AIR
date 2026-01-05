@@ -12,13 +12,21 @@ from workers.logger.log_utils import _get_log_args
 class TrapezoidButtonTogglerCreatorMixin(TrapezoidButtonCreatorMixin):
     """A mixin to create a radio-group of trapezoid buttons."""
 
-    def _create_trapezoid_button_toggler(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_trapezoid_button_toggler(self, parent_widget, config_data): # Updated signature
         """Creates a group of trapezoid buttons where only one can be active."""
         
+        # Extract arguments from config_data
+        label = config_data.get("label_active")
+        config = config_data # config_data is the config
+        path = config_data.get("path")
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
+
         if app_constants.global_settings['debug_enabled']:
             debug_logger(message=f"Creating trapezoid button toggler group: {label}", **_get_log_args())
 
-        container = ttk.Frame(parent_frame)
+        container = ttk.Frame(parent_widget) # Use parent_widget here
         
         if label:
             ttk.Label(container, text=label).pack(fill="x", expand=True, pady=(0, 5))

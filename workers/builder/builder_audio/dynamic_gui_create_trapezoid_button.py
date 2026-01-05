@@ -14,13 +14,23 @@ import os
 class TrapezoidButtonCreatorMixin:
     """A mixin to create a dynamic, theme-aware trapezoidal button."""
 
-    def _create_trapezoid_button(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_trapezoid_button(self, parent_widget, config_data): # Updated signature
         """Creates a trapezoidal button widget."""
         current_function_name = "_create_trapezoid_button"
+        
+        # Extract arguments from config_data
+        label = config_data.get("label_active")
+        config = config_data # config_data is the config
+        path = config_data.get("path")
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
+
         if app_constants.global_settings['debug_enabled']:
             debug_logger(message=f"Creating trapezoid button: {label}", **_get_log_args())
 
-        frame = ttk.Frame(parent_frame)
+        frame = ttk.Frame(parent_widget) # Use parent_widget here
+
         if label:
             ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
 

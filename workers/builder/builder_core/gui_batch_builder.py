@@ -48,14 +48,17 @@ class GuiBatchBuilderMixin:
                         self._create_dynamic_widgets(parent_frame=target_frame, data=value.get("fields", {}), path_prefix=current_path, override_cols=block_cols)
 
                     elif widget_type in self.widget_factory:
+                        # Inject global context into the widget's config_data
+                        value["path"] = current_path # Inject current widget's path
+                        if self.state_mirror_engine:
+                            value["state_mirror_engine"] = self.state_mirror_engine
+                            value["base_mqtt_topic_from_path"] = self.state_mirror_engine.base_topic
+                        if self.subscriber_router:
+                            value["subscriber_router"] = self.subscriber_router
+
                         factory_kwargs = {
-                            "parent_frame": parent_frame,
-                            "label": value.get("label_active", key),
-                            "config": value,
-                            "path": current_path,
-                            "base_mqtt_topic_from_path": self.base_mqtt_topic_from_path,
-                            "state_mirror_engine": self.state_mirror_engine,
-                            "subscriber_router": self.subscriber_router
+                            "parent_widget": parent_frame,
+                            "config_data": value # Pass the modified config_data
                         }
 
                         try:
@@ -125,14 +128,17 @@ class GuiBatchBuilderMixin:
                         self._create_dynamic_widgets(parent_frame=target_frame, data=value.get("fields", {}), path_prefix=current_path, override_cols=block_cols)
 
                     elif widget_type in self.widget_factory:
+                        # Inject global context into the widget's config_data
+                        value["path"] = current_path # Inject current widget's path
+                        if self.state_mirror_engine:
+                            value["state_mirror_engine"] = self.state_mirror_engine
+                            value["base_mqtt_topic_from_path"] = self.state_mirror_engine.base_topic
+                        if self.subscriber_router:
+                            value["subscriber_router"] = self.subscriber_router
+
                         factory_kwargs = {
-                            "parent_frame": parent_frame,
-                            "label": value.get("label_active", key),
-                            "config": value,
-                            "path": current_path,
-                            "base_mqtt_topic_from_path": self.base_mqtt_topic_from_path,
-                            "state_mirror_engine": self.state_mirror_engine,
-                            "subscriber_router": self.subscriber_router
+                            "parent_widget": parent_frame,
+                            "config_data": value # Pass the modified config_data
                         }
 
                         try:

@@ -125,9 +125,18 @@ class CustomFaderFrame(tk.Frame):
             self.temp_entry = None # Clean up the attribute
 
 class CustomFaderCreatorMixin:
-    def _create_custom_fader(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_custom_fader(self, parent_widget, config_data): # Updated signature
         """Creates a custom fader widget."""
         current_function_name = "_create_custom_fader"
+        
+        # Extract arguments from config_data
+        label = config_data.get("label_active")
+        config = config_data # config_data is the config
+        path = config_data.get("path")
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
+
         # Theme Resolution
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         bg_color = colors.get("bg", "#2b2b2b")
@@ -137,7 +146,7 @@ class CustomFaderCreatorMixin:
 
         # Create our custom frame type
         min_val = float(config.get("value_min", -100.0))
-        max_val = float(config.get("value_max", 100.0))
+        max_val = float(config.get("value_max", 0.0))
         log_exponent = float(config.get("log_exponent", 1.0)) # Default to 1.0 for linear
         reff_point = float(config.get("reff_point", (min_val + max_val) / 2.0)) # Default reff_point to midpoint
         value_default = float(config.get("value_default", 75.0)) # Ensure float
@@ -184,7 +193,7 @@ class CustomFaderCreatorMixin:
                     **_get_log_args()
                 )
         frame = CustomFaderFrame(
-            parent_frame,
+            parent_widget, # Use parent_widget here
             variable=fader_value_var,
             config=config, # Pass the entire config dictionary
             path=path,

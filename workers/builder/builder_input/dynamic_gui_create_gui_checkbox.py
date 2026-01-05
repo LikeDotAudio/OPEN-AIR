@@ -58,21 +58,26 @@ class GuiCheckboxCreatorMixin:
     A mixin class that provides the functionality for creating a
     checkbox widget.
     """
-    def _create_gui_checkbox(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+    def _create_gui_checkbox(self, parent_widget, config_data): # Updated signature
         # Creates a checkbox widget.
         current_function_name = inspect.currentframe().f_code.co_name
+
+        # Extract arguments from config_data
+        label = config_data.get("label_active") # Use label_active from config_data
+        config = config_data # config_data is the config
+        path = config_data.get("path")
+        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+        state_mirror_engine = config_data.get("state_mirror_engine")
+        subscriber_router = config_data.get("subscriber_router")
 
         if app_constants.global_settings['debug_enabled']:
             debug_logger(
                 message=f"🔬⚡️ Entering '{current_function_name}' to spawn a checkbox for '{label}'.",
               **_get_log_args()
-                
-
-
             )
         
         try:
-            sub_frame = ttk.Frame(parent_frame)
+            sub_frame = ttk.Frame(parent_widget) # Use parent_widget here
             # We use a BooleanVar to track the state of the checkbox.
             initial_value = bool(config.get('value', False))
             state_var = tk.BooleanVar(value=initial_value)

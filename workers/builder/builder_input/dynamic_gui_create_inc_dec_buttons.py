@@ -11,19 +11,25 @@ from workers.logger.log_utils import _get_log_args
 import os
 
 class IncDecButtonsCreatorMixin:
-        def _create_inc_dec_buttons(self, parent_frame, label, config, path, base_mqtt_topic_from_path, state_mirror_engine, subscriber_router):
+        def _create_inc_dec_buttons(self, parent_widget, config_data): # Updated signature
             """Creates increment/decrement buttons."""
             current_function_name = "_create_inc_dec_buttons"
+            
+            # Extract arguments from config_data
+            label = config_data.get("label_active")
+            config = config_data # config_data is the config
+            path = config_data.get("path")
+            base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
+            state_mirror_engine = config_data.get("state_mirror_engine")
+            subscriber_router = config_data.get("subscriber_router")
+
             if app_constants.global_settings['debug_enabled']:
                 debug_logger(
                     message=f"🔬⚡️ Entering '{current_function_name}' to forge increment/decrement buttons for '{label}'.",
     **_get_log_args()
-                    
-    
-    
                 )
     
-            frame = ttk.Frame(parent_frame)
+            frame = ttk.Frame(parent_widget) # Use parent_widget here
     
             if label:
                 ttk.Label(frame, text=label).pack(side=tk.LEFT, padx=(0, 10))

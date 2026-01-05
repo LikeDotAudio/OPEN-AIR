@@ -10,49 +10,49 @@ from managers.configini.config_reader import Config
 app_constants = Config.get_instance()
 
 # --- 1. CORE MIXINS ---
-from .core.gui_style_manager import GuiStyleMixin
-from .core.gui_widget_factory import GuiWidgetFactoryMixin
-from .core.gui_mqtt_manager import GuiMqttManagerMixin
-from .core.gui_file_loader import GuiFileLoaderMixin
-from .core.gui_rebuilder import GuiRebuilderMixin
-from .core.gui_batch_builder import GuiBatchBuilderMixin
+from .builder_core.gui_style_manager import GuiStyleMixin
+from .builder_core.gui_widget_factory import GuiWidgetFactoryMixin
+from .builder_core.gui_mqtt_manager import GuiMqttManagerMixin
+from .builder_core.gui_file_loader import GuiFileLoaderMixin
+from .builder_core.gui_rebuilder import GuiRebuilderMixin
+from .builder_core.gui_batch_builder import GuiBatchBuilderMixin
 
 # --- 2. ADAPTERS (ISOLATED WIDGETS) ---
-from .data_graphing.plot_widget_adapter import PlotWidgetAdapterMixin
-from .data_graphing.meter_widget_adapter import MeterWidgetAdapterMixin
+from .builder_data_graphing.plot_widget_adapter import PlotWidgetAdapterMixin
+from .builder_data_graphing.meter_widget_adapter import MeterWidgetAdapterMixin
 
 # --- 3. HIDDEN FEATURES ---
-from .hidden.hidden_visibility_manager import HiddenVisibilityManagerMixin
-from .hidden.hidden_geometry_manager import HiddenGeometryManagerMixin
-from .hidden.hidden_breakoff_manager import HiddenBreakoffManagerMixin
+from .builder_hidden.hidden_visibility_manager import HiddenVisibilityManagerMixin
+from .builder_hidden.hidden_geometry_manager import HiddenGeometryManagerMixin
+from .builder_hidden.hidden_breakoff_manager import HiddenBreakoffManagerMixin
 
 # --- 4. EXISTING SIMPLE WIDGET MIXINS ---
 from workers.builder.builder_input.dynamic_gui_mousewheel_mixin import MousewheelScrollMixin
-from .text.dynamic_gui_create_label_from_config import LabelFromConfigCreatorMixin
-from .text.dynamic_gui_create_label import LabelCreatorMixin
-from .text.dynamic_gui_create_value_box import ValueBoxCreatorMixin
+from .builder_text.dynamic_gui_create_label_from_config import LabelFromConfigCreatorMixin
+from .builder_text.dynamic_gui_create_label import LabelCreatorMixin
+from .builder_text.dynamic_gui_create_value_box import ValueBoxCreatorMixin
 from workers.builder.builder_composite.dynamic_gui_create_gui_slider_value import SliderValueCreatorMixin
 from workers.builder.builder_composite._Horizontal_knob_Value import HorizontalKnobValueCreatorMixin
-from .input.dynamic_gui_create_gui_button_toggle import GuiButtonToggleCreatorMixin
-from .input.dynamic_gui_create_gui_button_toggler import GuiButtonTogglerCreatorMixin
-from .text.dynamic_gui_create_gui_dropdown_option import GuiDropdownOptionCreatorMixin
-from .input.dynamic_gui_create_gui_actuator import GuiActuatorCreatorMixin
-from .input.dynamic_gui_create_gui_checkbox import GuiCheckboxCreatorMixin
-from .text.dynamic_gui_create_gui_listbox import GuiListboxCreatorMixin
-from .images.dynamic_gui_create_progress_bar import ProgressBarCreatorMixin
-from .table.dynamic_gui_table import GuiTableCreatorMixin
-from .text.dynamic_gui_create_text_input import TextInputCreatorMixin
-from .text.dynamic_gui_create_web_link import WebLinkCreatorMixin
-from .images.dynamic_gui_create_image_display import ImageDisplayCreatorMixin
-from .images.dynamic_gui_create_animation_display import AnimationDisplayCreatorMixin
-from .audio.dynamic_gui_create_vu_meter import VUMeterCreatorMixin
-from .input.dynamic_gui_create_fader import FaderCreatorMixin
-from .input.dynamic_gui_create_inc_dec_buttons import IncDecButtonsCreatorMixin
-from .input.dynamic_gui_create_directional_buttons import DirectionalButtonsCreatorMixin
-from .audio.dynamic_gui_create_custom_fader import CustomFaderCreatorMixin
-from .audio.dynamic_gui_create_needle_vu_meter import NeedleVUMeterCreatorMixin
-from .audio.dynamic_gui_create_panner import PannerCreatorMixin
-from .audio.dynamic_gui_create_trapezoid_toggler import TrapezoidButtonTogglerCreatorMixin
+from .builder_input.dynamic_gui_create_gui_button_toggle import GuiButtonToggleCreatorMixin
+from .builder_input.dynamic_gui_create_gui_button_toggler import GuiButtonTogglerCreatorMixin
+from .builder_text.dynamic_gui_create_gui_dropdown_option import GuiDropdownOptionCreatorMixin
+from .builder_input.dynamic_gui_create_gui_actuator import GuiActuatorCreatorMixin
+from .builder_input.dynamic_gui_create_gui_checkbox import GuiCheckboxCreatorMixin
+from .builder_input.dynamic_gui_create_gui_listbox import GuiListboxCreatorMixin
+from .builder_images.dynamic_gui_create_progress_bar import ProgressBarCreatorMixin
+from .builder_table.dynamic_gui_table import GuiTableCreatorMixin
+from .builder_text.dynamic_gui_create_text_input import TextInputCreatorMixin
+from .builder_text.dynamic_gui_create_web_link import WebLinkCreatorMixin
+from .builder_images.dynamic_gui_create_image_display import ImageDisplayCreatorMixin
+from .builder_images.dynamic_gui_create_animation_display import AnimationDisplayCreatorMixin
+from .builder_audio.dynamic_gui_create_vu_meter import VUMeterCreatorMixin
+from .builder_input.dynamic_gui_create_fader import FaderCreatorMixin
+from .builder_input.dynamic_gui_create_inc_dec_buttons import IncDecButtonsCreatorMixin
+from .builder_input.dynamic_gui_create_directional_buttons import DirectionalButtonsCreatorMixin
+from .builder_audio.dynamic_gui_create_custom_fader import CustomFaderCreatorMixin
+from .builder_audio.dynamic_gui_create_needle_vu_meter import NeedleVUMeterCreatorMixin
+from .builder_audio.dynamic_gui_create_panner import PannerCreatorMixin
+from .builder_audio.dynamic_gui_create_trapezoid_toggler import TrapezoidButtonTogglerCreatorMixin
 
 class DynamicGuiBuilder(
     ttk.Frame,

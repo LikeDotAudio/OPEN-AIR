@@ -9,11 +9,11 @@ class PlotWidgetAdapterMixin:
     ):  # Updated signature
         # Extract arguments from config_data
         config = config_data  # config_data is the config
-        base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
-        state_mirror_engine = config_data.get("state_mirror_engine")
-        subscriber_router = config_data.get("subscriber_router")
+        base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
+        state_mirror_engine = kwargs.get("state_mirror_engine")
+        subscriber_router = kwargs.get("subscriber_router")
 
-        widget_id = config.get("id", "plot_widget")
+        widget_id = config.get("path", "plot_widget")
         return FluxPlotter(
             parent=parent_widget,  # Use parent_widget here
             config=config,

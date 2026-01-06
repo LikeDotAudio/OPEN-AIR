@@ -79,12 +79,16 @@ class MarkerPeakHunterGUI(ttk.Frame):
 
         # Initialize helper classes
         if CSV_EXPORT_AVAILABLE:
-            self.csv_export_util = CsvExportUtility()
+            self.csv_export_util = CsvExportUtility(self.print_to_gui)
         else:
             self.csv_export_util = None
 
         # 4. Initialize UI
         self._init_ui()
+
+    def print_to_gui(self, message):
+        """Prints a message to the console."""
+        print(message)
 
     def _init_ui(self):
         current_function_name = inspect.currentframe().f_code.co_name

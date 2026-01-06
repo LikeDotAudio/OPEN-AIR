@@ -28,6 +28,8 @@ from workers.builder.dynamic_gui_builder import DynamicGuiBuilder
 from workers.logger.logger import debug_logger
 from managers.configini.config_reader import Config
 from workers.logger.log_utils import _get_log_args
+from workers.mqtt import mqtt_topic_utils
+from workers.setup.worker_project_paths import GLOBAL_PROJECT_ROOT # Import GLOBAL_PROJECT_ROOT
 
 # Globals
 app_constants = Config.get_instance()  # Get the singleton instance
@@ -72,6 +74,21 @@ class GenericInstrumentGui(ttk.Frame):
         # Ensure json_path is a Path object
         if isinstance(self.json_path, str):
             self.json_path = pathlib.Path(self.json_path)
+
+        # 6. Calculate Topic and 7. Update Config Dictionary
+        # Generate the base MQTT topic from the file path
+        base_mqtt_topic = mqtt_topic_utils.generate_topic_path_from_filepath(
+            self.json_path, GLOBAL_PROJECT_ROOT
+        )
+        if base_mqtt_topic:
+            self.config_data["base_mqtt_topic_from_path"] = base_mqtt_topic
+        else:
+            debug_logger(
+                message=f"🔴 [Error] GenericInstrumentGui - Failed to generate base MQTT topic for {self.json_path}",
+                **_get_log_args(),
+            )
+            # Fallback to a default or raise an error if a topic is strictly required
+            self.config_data["base_mqtt_topic_from_path"] = "OPEN-AIR/unknown/path" # Fallback
 
         # 3. Extract Core Dependencies
         self.state_mirror_engine = self.config_data.get("state_mirror_engine")
@@ -132,7 +149,7 @@ class GenericInstrumentGui(ttk.Frame):
 
             if app_constants.global_settings["debug_enabled"]:
                 debug_logger(
-                    message=f"🚀 [Liftoff] Validated path. Passing control to DynamicGuiBuilder...",
+                    message=f"🚀 [Liftoff] Validated path. Passing control to DynamicGuiBuilder with base MQTT topic: {self.config_data.get('base_mqtt_topic_from_path')}",
                     **_get_log_args(),
                 )
 

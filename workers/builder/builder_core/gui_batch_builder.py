@@ -75,6 +75,7 @@ class GuiBatchBuilderMixin:
                         )
 
                     elif widget_type in self.widget_factory:
+                        value['path'] = current_path
                         factory_kwargs = {
                             "parent_widget": parent_frame,
                             "config_data": value,
@@ -194,6 +195,7 @@ class GuiBatchBuilderMixin:
                         )
 
                     elif widget_type in self.widget_factory:
+                        value['path'] = current_path
                         factory_kwargs = {
                             "parent_widget": parent_frame,
                             "config_data": value,

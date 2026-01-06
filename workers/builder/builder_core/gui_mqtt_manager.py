@@ -9,8 +9,12 @@ from workers.setup.path_initializer import GLOBAL_PROJECT_ROOT
 class GuiMqttManagerMixin:
     """Handles MQTT Context and Command Transmission."""
 
-    def _initialize_mqtt_context(self, json_filepath, app_constants):
-        if json_filepath is None:
+    def _initialize_mqtt_context(
+        self, json_filepath, app_constants, base_mqtt_topic_from_path=None
+    ):
+        if base_mqtt_topic_from_path:
+            self.base_mqtt_topic_from_path = base_mqtt_topic_from_path
+        elif json_filepath is None:
             self.base_mqtt_topic_from_path = "GENERIC_GUI_TOPIC"
         elif GLOBAL_PROJECT_ROOT is None:
             self.base_mqtt_topic_from_path = "FALLBACK_TOPIC"

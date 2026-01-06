@@ -150,7 +150,11 @@ class DynamicGuiBuilder(
             )
 
         # 1. Initialize Core Components
-        self._initialize_mqtt_context(self.json_filepath, app_constants)
+        self._initialize_mqtt_context(
+            self.json_filepath,
+            app_constants,
+            config.get("base_mqtt_topic_from_path"),
+        )
         self._initialize_widget_factory()
         self._setup_visibility_snitch()  # <--- The Hidden Snitch
         self._setup_geometry_snitch()

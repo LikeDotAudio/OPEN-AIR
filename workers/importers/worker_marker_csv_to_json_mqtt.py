@@ -9,7 +9,7 @@ from collections import defaultdict
 
 # --- Module Imports ---
 from workers.logger.logger import  debug_logger
-from workers.utils.log_utils import _get_log_args 
+from workers.utils.log_utils import _get_log_args
 from workers.mqtt.worker_mqtt_controller_util import MqttControllerUtility
 from workers.utils.worker_project_paths import MARKERS_JSON_PATH, MARKERS_CSV_PATH # NEW: Import paths
 
@@ -40,7 +40,7 @@ def csv_to_json_and_publish(mqtt_util: MqttControllerUtility):
     """
     Reads MARKERS.csv, calculates summary data (total, min/max freq, span), converts
     to a flat device-centric JSON structure, saves it, and publishes to MQTT.
-    
+
     MODIFIED: Uses the new nested structure with an 'IDENTITY' blob.
     """
     current_function_name = inspect.currentframe().f_code.co_name
@@ -48,7 +48,7 @@ def csv_to_json_and_publish(mqtt_util: MqttControllerUtility):
         debug_logger(
             message=f"🟢️️️🟢 Initiating device-centric CSV to JSON conversion and MQTT publish. Applying new nested structure.",
 **_get_log_args()
-            
+
 
 
         )
@@ -63,7 +63,7 @@ def csv_to_json_and_publish(mqtt_util: MqttControllerUtility):
         with open(MARKERS_CSV_PATH, mode='r', newline='', encoding='utf-8') as csvfile:
             # Read all data into a list to process it multiple times
             reader = list(csv.DictReader(csvfile))
-            
+
             total_devices = len(reader)
             min_freq = float('inf')
             max_freq = float('-inf')
@@ -83,7 +83,7 @@ def csv_to_json_and_publish(mqtt_util: MqttControllerUtility):
                 except (ValueError, TypeError):
                     # Ignore rows with non-numeric frequencies for min/max calculation
                     continue
-            
+
             # Handle case where no valid frequencies were found
             if min_freq == float('inf'): min_freq = 0
             if max_freq == float('-inf'): max_freq = 0
@@ -96,11 +96,11 @@ def csv_to_json_and_publish(mqtt_util: MqttControllerUtility):
             json_state["min_frequency_mhz"] = round(min_freq, 6)
             json_state["max_frequency_mhz"] = round(max_freq, 6)
             json_state["span_mhz"] = round(span_mhz, 6)
-            
+
             # Second pass: build the device dictionaries
             for i, row in enumerate(reader, 1):
                 device_key = f"Device-{i:03d}"
-                
+
                 # --- NEW STRUCTURE IMPLEMENTATION ---
                 json_state[device_key] = {
                     "IDENTITY": {
@@ -140,7 +140,7 @@ def csv_to_json_and_publish(mqtt_util: MqttControllerUtility):
 
         # Now, publish the new, complete structure recursively.
         _publish_recursive(mqtt_util, MQTT_BASE_TOPIC, json_state)
-        
+
         debug_logger(message="✅ Successfully published the full marker set to MQTT.")
     except Exception as e:
         debug_logger(message=f"❌ Error publishing to MQTT: {e}")

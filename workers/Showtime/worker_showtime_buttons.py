@@ -17,15 +17,16 @@
 
 Current_Date = 20251129  ##Update on the day the change was made
 Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 1 ## a running version number - incriments by one each time 
+Current_iteration = 1  ## a running version number - incriments by one each time
 
 current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = (Current_Date * Current_Time * Current_iteration)
+current_version_hash = Current_Date * Current_Time * Current_iteration
 
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
 from workers.Showtime.worker_showtime_draw_bargraph import create_bar_graph_image
+
 
 def create_button_with_bar_graph(parent, value, text):
     """

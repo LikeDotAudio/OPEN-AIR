@@ -8,10 +8,10 @@
 
 Current_Date = 20251213  ##Update on the day the change was made
 Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 44 ## a running version number - incriments by one each time 
+Current_iteration = 44  ## a running version number - incriments by one each time
 
 current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = (Current_Date * Current_Time * Current_iteration)
+current_version_hash = Current_Date * Current_Time * Current_iteration
 
 
 # Author: Anthony Peter Kuzub
@@ -32,11 +32,11 @@ import datetime
 import pathlib
 import os
 
-from workers.logger.logger import  debug_logger
-from workers.logger.log_utils import _get_log_args 
-from managers.configini.config_reader import Config                                                                          
+from workers.logger.logger import debug_logger
+from workers.logger.log_utils import _get_log_args
+from managers.configini.config_reader import Config
 
-app_constants = Config.get_instance() # Get the singleton instance      
+app_constants = Config.get_instance()  # Get the singleton instance
 
 
 # --- Global Scope Variables ---
@@ -46,8 +46,8 @@ current_file = str(current_file_path.relative_to(project_root)).replace("\\", "/
 
 # Replace old print with debug_log
 debug_logger(
-    message=f"DEBUG: Loading dynamic_gui_mousewheel_mixin.py from: {current_file_path}",              **_get_log_args()
-    
+    message=f"DEBUG: Loading dynamic_gui_mousewheel_mixin.py from: {current_file_path}",
+    **_get_log_args(),
 )
 
 
@@ -56,43 +56,41 @@ class MousewheelScrollMixin:
     Mixin to add mousewheel scrolling functionality to a Tkinter Canvas.
     Assumes the presence of `self.canvas` and logging utilities.
     """
+
     def _on_mousewheel(self, event):
         current_function_name = inspect.currentframe().f_code.co_name
-        if app_constants.global_settings['debug_enabled']:
+        if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message=f"🖥️🔵 Mousewheel event detected: {event.num}. Scrolling canvas.",
-              **_get_log_args()
-                
+                **_get_log_args(),
             )
         # Platform-specific mouse wheel scrolling
         if sys.platform == "linux":
-            if event.num == 4: # Scroll up
+            if event.num == 4:  # Scroll up
                 self.canvas.yview_scroll(-1, "units")
-            elif event.num == 5: # Scroll down
+            elif event.num == 5:  # Scroll down
                 self.canvas.yview_scroll(1, "units")
-        else: # Windows and macOS
+        else:  # Windows and macOS
             self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
     def _bind_mousewheel(self, event):
         current_function_name = inspect.currentframe().f_code.co_name
-        if app_constants.global_settings['debug_enabled']:
+        if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message=f"🖥️🔵 Binding mousewheel scrolling for canvas.",
-              **_get_log_args()
-                
+                **_get_log_args(),
             )
         # Bind mousewheel scrolling when the mouse enters the scrollable area
         self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
-        self.canvas.bind_all("<Button-4>", self._on_mousewheel) # Linux scroll up
-        self.canvas.bind_all("<Button-5>", self._on_mousewheel) # Linux scroll down
+        self.canvas.bind_all("<Button-4>", self._on_mousewheel)  # Linux scroll up
+        self.canvas.bind_all("<Button-5>", self._on_mousewheel)  # Linux scroll down
 
     def _unbind_mousewheel(self, event):
         current_function_name = inspect.currentframe().f_code.co_name
-        if app_constants.global_settings['debug_enabled']:
+        if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message="🖥️🔵 Unbinding mousewheel scrolling for canvas.",
-              **_get_log_args()
-                
+                **_get_log_args(),
             )
         # Unbind mousewheel scrolling when the mouse leaves the scrollable area
         self.canvas.unbind_all("<MouseWheel>")

@@ -4,15 +4,17 @@ from workers.mqtt.mqtt_topic_utils import get_topic
 from workers.mqtt.mqtt_publisher_service import is_connected
 import tkinter as tk
 
+
 class HiddenBreakoffManagerMixin:
     """
     The 'Break-off Snitch'. Reports if the widget is in a separate window.
     """
+
     def _setup_breakoff_snitch(self):
         """Called during __init__ to bind events."""
         if not self.state_mirror_engine:
             return
-            
+
         self.main_root = self.state_mirror_engine.root
         self.is_broken_off = False
         self.toplevel_window = None
@@ -20,9 +22,9 @@ class HiddenBreakoffManagerMixin:
         self.breakoff_topic = get_topic(
             self.state_mirror_engine.base_topic,
             self.base_mqtt_topic_from_path,
-            "visibility/breakoff"
+            "visibility/breakoff",
         )
-        
+
         # Check the state when the widget is mapped
         self.bind("<Map>", self._check_breakoff_state)
 
@@ -41,7 +43,7 @@ class HiddenBreakoffManagerMixin:
                 self._publish_breakoff_state()
                 self.toplevel_window.bind("<Configure>", self._on_broken_off_configure)
                 self.toplevel_window.bind("<Destroy>", self._on_broken_off_destroy)
-        
+
         # State: Not Broken Off (or returned)
         else:
             if self.is_broken_off:
@@ -51,7 +53,7 @@ class HiddenBreakoffManagerMixin:
                         self.toplevel_window.unbind("<Configure>")
                         self.toplevel_window.unbind("<Destroy>")
                     except tk.TclError:
-                        pass # Window might already be destroyed
+                        pass  # Window might already be destroyed
                 self.toplevel_window = None
                 self._publish_breakoff_state()
 
@@ -62,18 +64,18 @@ class HiddenBreakoffManagerMixin:
     def _on_broken_off_destroy(self, event):
         """Handles the destruction of the broken-off window."""
         if self.is_broken_off:
-             # Make sure the event is for the toplevel window
+            # Make sure the event is for the toplevel window
             if event.widget == self.toplevel_window:
                 self.is_broken_off = False
                 self.toplevel_window = None
                 self._publish_breakoff_state()
                 # Don't publish here, as the visibility snitch will handle the destroy event of the widget itself.
                 # and we might not be connected to the broker anymore
-                
+
     def _publish_breakoff_state(self):
         if not is_connected():
             return
-            
+
         width = 0
         height = 0
         x = 0
@@ -81,7 +83,7 @@ class HiddenBreakoffManagerMixin:
 
         if self.is_broken_off and self.toplevel_window:
             try:
-                self.toplevel_window.update_idletasks() # Ensure geometry is up to date
+                self.toplevel_window.update_idletasks()  # Ensure geometry is up to date
                 width = self.toplevel_window.winfo_width()
                 height = self.toplevel_window.winfo_height()
                 x = self.toplevel_window.winfo_x()
@@ -97,10 +99,9 @@ class HiddenBreakoffManagerMixin:
             "x": x,
             "y": y,
             "ts": time.time(),
-            "tab_name": getattr(self, "tab_name", "Unknown")
+            "tab_name": getattr(self, "tab_name", "Unknown"),
         }
-        
+
         self.state_mirror_engine.publish_command(
-            self.breakoff_topic,
-            orjson.dumps(payload)
+            self.breakoff_topic, orjson.dumps(payload)
         )

@@ -2,6 +2,7 @@ import tkinter as tk
 from workers.logger.logger import debug_logger
 from workers.logger.log_utils import _get_log_args
 
+
 class GuiRebuilderMixin:
     """Handles the destruction and re-initialization of the GUI Frame."""
 
@@ -14,7 +15,7 @@ class GuiRebuilderMixin:
             # Destroy all children in the scroll frame
             for child in self.scroll_frame.winfo_children():
                 child.destroy()
-            
+
             self.topic_widgets.clear()
             self.update_idletasks()
 

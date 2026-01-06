@@ -7,7 +7,8 @@
 # 3. Text rendering, versioning, and status updates remain unchanged.
 
 from managers.configini.config_reader import Config
-app_constants = Config.get_instance() # Get the singleton instance
+
+app_constants = Config.get_instance()  # Get the singleton instance
 import tkinter as tk
 from tkinter import ttk
 import os
@@ -18,12 +19,13 @@ import traceback
 # --- Image Library Imports ---
 try:
     from PIL import Image, ImageTk
+
     PIL_AVAILABLE = True
 except ImportError:
     PIL_AVAILABLE = False
     print("Warning: Pillow (PIL) not found. GIF animation will be disabled.")
 
-from workers.logger.log_utils import _get_log_args 
+from workers.logger.log_utils import _get_log_args
 
 # --- Path Setup ---
 SPLASH_ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent.parent
@@ -31,55 +33,77 @@ SPLASH_ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent.parent
 # Import lyrics data
 try:
     from . import lyrics_data
+
     LYRICS_AVAILABLE = True
 except ImportError:
     lyrics_data = None
     LYRICS_AVAILABLE = False
+
 
 class SplashScreen:
     def __init__(self, parent, app_version, debug_enabled, _func, debug_log_func):
         self.debug_enabled = debug_enabled
         self._func = _func
         self.debug_log_func = debug_log_func
-        
-        self._safe_log(f"🖥️🟢 Entering SplashScreen.__init__") # Removed force_print=True
+
+        self._safe_log(
+            f"🖥️🟢 Entering SplashScreen.__init__"
+        )  # Removed force_print=True
 
         self.parent = parent
         self.app_version = app_version
-        
+
         self.gif_frames = []
         self.gif_frame_index = 0
         self.gif_animation_job = None
-        self.status_label = None # Initialize to None
+        self.status_label = None  # Initialize to None
 
         try:
             self.splash_window = tk.Toplevel(self.parent)
             self.splash_window.overrideredirect(True)
-            self.splash_window.attributes('-alpha', 1.0) # Always full opacity
-            self.splash_window.configure(bg='black')
-            self.parent.protocol("WM_DELETE_WINDOW", self.hide) # Add this line
-            
+            self.splash_window.attributes("-alpha", 1.0)  # Always full opacity
+            self.splash_window.configure(bg="black")
+            self.parent.protocol("WM_DELETE_WINDOW", self.hide)  # Add this line
+
             # --- Dimensions & Centering (TIGHTENED) ---
             win_width, win_height = 600, 470
             screen_width = self.parent.winfo_screenwidth()
             screen_height = self.parent.winfo_screenheight()
             x = (screen_width // 2) - (win_width // 2)
             y = (screen_height // 2) - (win_height // 2) + 200
-            self.splash_window.geometry(f'{win_width}x{win_height}+{x}+{y}')
-            
+            self.splash_window.geometry(f"{win_width}x{win_height}+{x}+{y}")
+
             self.main_content_frame = tk.Frame(self.splash_window, bg="black")
             self.main_content_frame.pack(expand=True, fill=tk.BOTH, padx=20, pady=10)
 
             # --- 1. Header (TIGHTENED) ---
             header_frame = tk.Frame(self.main_content_frame, bg="black")
-            header_frame.pack(side=tk.TOP, pady=(0, 5)) 
+            header_frame.pack(side=tk.TOP, pady=(0, 5))
 
-            tk.Label(header_frame, text="Open ", font=("Helvetica", 36, "normal"), fg="#FF6B35", bg="black").pack(side=tk.LEFT)
-            tk.Label(header_frame, text="Air", font=("Helvetica", 36, "bold"), fg="#33A1FD", bg="black").pack(side=tk.LEFT)
+            tk.Label(
+                header_frame,
+                text="Open ",
+                font=("Helvetica", 36, "normal"),
+                fg="#FF6B35",
+                bg="black",
+            ).pack(side=tk.LEFT)
+            tk.Label(
+                header_frame,
+                text="Air",
+                font=("Helvetica", 36, "bold"),
+                fg="#33A1FD",
+                bg="black",
+            ).pack(side=tk.LEFT)
 
             # --- 2. Sub-header (TIGHTENED) ---
-            tk.Label(self.main_content_frame, text="Zone Awareness Processor", font=("Helvetica", 14), fg="white", bg="black").pack(side=tk.TOP, pady=(0, 5))
-            
+            tk.Label(
+                self.main_content_frame,
+                text="Zone Awareness Processor",
+                font=("Helvetica", 14),
+                fg="white",
+                bg="black",
+            ).pack(side=tk.TOP, pady=(0, 5))
+
             # --- 3. Animation Area (TIGHTENED) ---
             vis_frame = tk.Frame(self.main_content_frame, bg="black", height=250)
             vis_frame.pack(side=tk.TOP, fill=tk.X, expand=False, pady=5)
@@ -92,28 +116,39 @@ class SplashScreen:
                 except Exception as e:
                     self._safe_log(f"🔴 GIF FAILED: {e}", is_error=True)
                     traceback.print_exc()
-                    tk.Label(vis_frame, text="[GIF Error]", fg="red", bg="black").pack(expand=True)
+                    tk.Label(vis_frame, text="[GIF Error]", fg="red", bg="black").pack(
+                        expand=True
+                    )
             else:
-                tk.Label(vis_frame, text="[Image Libraries Missing]", fg="#333", bg="black").pack(expand=True)
+                tk.Label(
+                    vis_frame, text="[Image Libraries Missing]", fg="#333", bg="black"
+                ).pack(expand=True)
 
             # --- 4. Lyrics (TIGHTENED) ---
-            self.lyrics_label = tk.Label(self.main_content_frame, text="", fg="gray", bg="black", font=("Helvetica", 10, "italic"))
+            self.lyrics_label = tk.Label(
+                self.main_content_frame,
+                text="",
+                fg="gray",
+                bg="black",
+                font=("Helvetica", 10, "italic"),
+            )
             self.lyrics_label.pack(side=tk.BOTTOM, pady=(5, 0))
 
             # --- Data & Logic ---
             self.lyrics = []
-            if LYRICS_AVAILABLE and hasattr(lyrics_data, 'lyrics'):
+            if LYRICS_AVAILABLE and hasattr(lyrics_data, "lyrics"):
                 self.lyrics = lyrics_data.lyrics
-            if not self.lyrics: self.lyrics = ["...Loading..."]
-            
+            if not self.lyrics:
+                self.lyrics = ["...Loading..."]
+
             self.lyric_index = 0
             self.current_lyric = self.lyrics[0]
             self.lyrics_label.config(text=self.current_lyric)
 
             # --- No fade-in, start animation directly ---
             if self.photo_images:
-                self._update_gif_frame() # Start GIF immediately
-            
+                self._update_gif_frame()  # Start GIF immediately
+
             self._safe_log("✅ SplashScreen Init Complete.")
 
         except Exception as e:
@@ -121,16 +156,17 @@ class SplashScreen:
             traceback.print_exc()
 
     def _safe_log(self, message, is_error=False, force_print=False):
-            if self.debug_enabled and self.debug_log_func:
-                self.debug_log_func(message=message, **_get_log_args())
-    
+        if self.debug_enabled and self.debug_log_func:
+            self.debug_log_func(message=message, **_get_log_args())
 
     def _init_gif_animation(self, parent_frame):
         self.photo_images = []
-        gif_path = pathlib.Path(__file__).parent / 'splash_logo.gif'
+        gif_path = pathlib.Path(__file__).parent / "splash_logo.gif"
         if not gif_path.exists():
             self._safe_log(f"🔴 GIF not found at {gif_path}", is_error=True)
-            tk.Label(parent_frame, text="[splash_logo.gif not found]", fg="red", bg="black").pack(expand=True)
+            tk.Label(
+                parent_frame, text="[splash_logo.gif not found]", fg="red", bg="black"
+            ).pack(expand=True)
             return
 
         self.gif_label = tk.Label(parent_frame, bg="black")
@@ -143,8 +179,8 @@ class SplashScreen:
                     frame_image = img.copy().convert("RGBA")
                     photo_image = ImageTk.PhotoImage(frame_image)
                     self.photo_images.append(photo_image)
-                
-                self.gif_frame_duration = img.info.get('duration', 50)
+
+                self.gif_frame_duration = img.info.get("duration", 50)
                 # FIX: Keep a reference to the images on the label itself
                 self.gif_label.photo_images = self.photo_images
 
@@ -155,33 +191,38 @@ class SplashScreen:
         # self._safe_log(f"🎞️ Updating GIF frame to index {self.gif_frame_index}")
         if not self.splash_window.winfo_exists():
             return
-            
+
         frame = self.photo_images[self.gif_frame_index]
         self.gif_label.config(image=frame)
-        
+
         self.gif_frame_index = (self.gif_frame_index + 1) % len(self.photo_images)
 
         # When the GIF loops back to the first frame, cycle the lyrics.
         if self.gif_frame_index == 0 and self.lyrics:
             self.lyric_index = (self.lyric_index + 1) % len(self.lyrics)
             self.lyrics_label.config(text=self.lyrics[self.lyric_index])
-        
-        self.gif_animation_job = self.splash_window.after(self.gif_frame_duration, self._update_gif_frame)
+
+        self.gif_animation_job = self.splash_window.after(
+            self.gif_frame_duration, self._update_gif_frame
+        )
 
     # _fade_in and _fade_out methods removed
-    
+
     def hide(self):
-        self._safe_log("DEBUG: splash.hide() called. Attempting to dismiss splash screen.")
+        self._safe_log(
+            "DEBUG: splash.hide() called. Attempting to dismiss splash screen."
+        )
         # Ensure splash_window still exists before trying to interact with it
         if self.splash_window and self.splash_window.winfo_exists():
             try:
                 if self.gif_animation_job:
                     self.splash_window.after_cancel(self.gif_animation_job)
                     self.gif_animation_job = None
-            except Exception: pass # Ignore errors if job already cancelled or window destroyed
-            
-            self.splash_window.destroy() # Destroy the splash window directly
-            self.splash_window = None # Clear the reference
+            except Exception:
+                pass  # Ignore errors if job already cancelled or window destroyed
+
+            self.splash_window.destroy()  # Destroy the splash window directly
+            self.splash_window = None  # Clear the reference
 
     def cycle_lyrics_async(self):
         # This method is no longer called in init, but kept for potential future use or direct invocation
@@ -191,17 +232,18 @@ class SplashScreen:
             self.lyrics_label.config(text=self.current_lyric)
             self.splash_window.after(1500, self.cycle_lyrics_async)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     root = tk.Tk()
     root.withdraw()
     print("Starting Standalone Test...")
-    
+
     def mock_debug_logger(message, **kwargs):
         print(f"[DEBUG] {message}")
 
     splash = SplashScreen(root, "TestVer", True, lambda: None, mock_debug_logger)
-    
+
     # Close after 10 seconds for testing
     root.after(10000, splash.hide)
-    
+
     root.mainloop()

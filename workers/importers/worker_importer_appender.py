@@ -11,7 +11,7 @@ Current_Time = 120000
 Current_iteration = 44
 
 current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = (Current_Date * Current_Time * Current_iteration)
+current_version_hash = Current_Date * Current_Time * Current_iteration
 
 
 # Author: Anthony Peter Kuzub
@@ -27,25 +27,34 @@ current_version_hash = (Current_Date * Current_Time * Current_iteration)
 
 import inspect
 from tkinter import filedialog
-from workers.logger.logger import  debug_logger
+from workers.logger.logger import debug_logger
 from workers.logger.log_utils import _get_log_args
-from workers.importers.formats.worker_importer_from_csv_unknown import Marker_convert_csv_unknow_report_to_csv
-from workers.importers.formats.worker_importer_from_ias_html import Marker_convert_IAShtml_report_to_csv
-from workers.importers.formats.worker_importer_from_shure_wwb_shw import Marker_convert_WWB_SHW_File_report_to_csv
-from workers.importers.formats.worker_importer_from_soundbase_pdf_v1 import Marker_convert_SB_PDF_File_report_to_csv
+from workers.importers.formats.worker_importer_from_csv_unknown import (
+    Marker_convert_csv_unknow_report_to_csv,
+)
+from workers.importers.formats.worker_importer_from_ias_html import (
+    Marker_convert_IAShtml_report_to_csv,
+)
+from workers.importers.formats.worker_importer_from_shure_wwb_shw import (
+    Marker_convert_WWB_SHW_File_report_to_csv,
+)
+from workers.importers.formats.worker_importer_from_soundbase_pdf_v1 import (
+    Marker_convert_SB_PDF_File_report_to_csv,
+)
 from workers.importers.worker_marker_file_import_converter import (
     Marker_convert_wwb_zip_report_to_csv,
-    Marker_convert_SB_v2_PDF_File_report_to_csv
+    Marker_convert_SB_v2_PDF_File_report_to_csv,
 )
 from workers.importers.worker_importer_saver import save_markers_file_internally
 
 LOCAL_DEBUG_ENABLE = False
 
+
 def append_markers_file_action(importer_tab_instance, editor_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
         defaultextension=".csv",
-        filetypes=[("CSV files", "*.csv"), ("All files", "*.*")]
+        filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
     )
     if not file_path:
         debug_logger(
@@ -61,11 +70,12 @@ def append_markers_file_action(importer_tab_instance, editor_instance):
         editor_instance.import_data(new_data)
         save_markers_file_internally(importer_tab_instance)
 
+
 def append_ias_html_action(importer_tab_instance, editor_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
         defaultextension=".html",
-        filetypes=[("HTML files", "*.html;*.htm"), ("All files", "*.*")]
+        filetypes=[("HTML files", "*.html;*.htm"), ("All files", "*.*")],
     )
     if not file_path:
         debug_logger(
@@ -76,7 +86,7 @@ def append_ias_html_action(importer_tab_instance, editor_instance):
         )
         return
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
+        with open(file_path, "r", encoding="utf-8") as f:
             html_content = f.read()
         headers, new_data = Marker_convert_IAShtml_report_to_csv(html_content)
         if headers and new_data:
@@ -91,11 +101,12 @@ def append_ias_html_action(importer_tab_instance, editor_instance):
         )
         return
 
+
 def append_wwb_shw_action(importer_tab_instance, editor_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
         defaultextension=".shw",
-        filetypes=[("Shure Wireless Workbench files", "*.shw"), ("All files", "*.*")]
+        filetypes=[("Shure Wireless Workbench files", "*.shw"), ("All files", "*.*")],
     )
     if not file_path:
         debug_logger(
@@ -105,16 +116,19 @@ def append_wwb_shw_action(importer_tab_instance, editor_instance):
             function=f"{current_function}",
         )
         return
-    headers, new_data = Marker_convert_WWB_SHW_File_report_to_csv(xml_file_path=file_path)
+    headers, new_data = Marker_convert_WWB_SHW_File_report_to_csv(
+        xml_file_path=file_path
+    )
     if headers and new_data:
         editor_instance.import_data(new_data)
         save_markers_file_internally(importer_tab_instance)
+
 
 def append_wwb_zip_action(importer_tab_instance, editor_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
         defaultextension=".zip",
-        filetypes=[("Shure Wireless Workbench files", "*.zip"), ("All files", "*.*")]
+        filetypes=[("Shure Wireless Workbench files", "*.zip"), ("All files", "*.*")],
     )
     if not file_path:
         debug_logger(
@@ -122,7 +136,6 @@ def append_wwb_zip_action(importer_tab_instance, editor_instance):
             file=importer_tab_instance.current_file,
             version=importer_tab_instance.current_version,
             function=f"{current_function}",
-            
         )
         return
     headers, new_data = Marker_convert_wwb_zip_report_to_csv(file_path=file_path)
@@ -130,11 +143,12 @@ def append_wwb_zip_action(importer_tab_instance, editor_instance):
         editor_instance.import_data(new_data)
         save_markers_file_internally(importer_tab_instance)
 
+
 def append_sb_pdf_action(importer_tab_instance, editor_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
         defaultextension=".pdf",
-        filetypes=[("PDF files", "*.pdf"), ("All files", "*.*")]
+        filetypes=[("PDF files", "*.pdf"), ("All files", "*.*")],
     )
     if not file_path:
         debug_logger(
@@ -144,16 +158,19 @@ def append_sb_pdf_action(importer_tab_instance, editor_instance):
             function=f"{current_function}",
         )
         return
-    headers, new_data = Marker_convert_SB_PDF_File_report_to_csv(pdf_file_path=file_path)
+    headers, new_data = Marker_convert_SB_PDF_File_report_to_csv(
+        pdf_file_path=file_path
+    )
     if headers and new_data:
         editor_instance.import_data(new_data)
         save_markers_file_internally(importer_tab_instance)
+
 
 def append_sb_v2_pdf_action(importer_tab_instance, editor_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
         defaultextension=".pdf",
-        filetypes=[("Sound Base V2 PDF files", "*.pdf"), ("All files", "*.*")]
+        filetypes=[("Sound Base V2 PDF files", "*.pdf"), ("All files", "*.*")],
     )
     if not file_path:
         debug_logger(
@@ -161,10 +178,11 @@ def append_sb_v2_pdf_action(importer_tab_instance, editor_instance):
             file=importer_tab_instance.current_file,
             version=importer_tab_instance.current_version,
             function=f"{current_function}",
-            
         )
         return
-    headers, new_data = Marker_convert_SB_v2_PDF_File_report_to_csv(pdf_file_path=file_path)
+    headers, new_data = Marker_convert_SB_v2_PDF_File_report_to_csv(
+        pdf_file_path=file_path
+    )
     if headers and new_data:
         editor_instance.import_data(new_data)
         save_markers_file_internally(importer_tab_instance)

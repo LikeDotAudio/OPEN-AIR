@@ -1,5 +1,6 @@
 # managers/yak/oscilloscope_yak.py
 
+
 class OscilloscopeYak:
     def __init__(self, visa_manager):
         self.visa_manager = visa_manager
@@ -20,4 +21,4 @@ class OscilloscopeYak:
         """
         print("Getting waveform data from oscilloscope.")
         # data = self.visa_manager.query("WAVEFORM:DATA?")
-        return [] # Placeholder
+        return []  # Placeholder

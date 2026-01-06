@@ -9,10 +9,10 @@
 
 Current_Date = 20251226  ##Update on the day the change was made
 Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 44 ## a running version number - incriments by one each time 
+Current_iteration = 44  ## a running version number - incriments by one each time
 
 current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = (Current_Date * Current_Time * Current_iteration)
+current_version_hash = Current_Date * Current_Time * Current_iteration
 
 
 # Author: Anthony Peter Kuzub
@@ -26,8 +26,8 @@ current_version_hash = (Current_Date * Current_Time * Current_iteration)
 # Feature Requests can be emailed to i @ like . audio
 #
 
-from workers.logger.logger import  debug_logger
-from workers.logger.log_utils import _get_log_args 
+from workers.logger.logger import debug_logger
+from workers.logger.log_utils import _get_log_args
 
 # The wrapper functions debug_log and _switch are removed
 # as the core debug_log and  now directly handle LOCAL_DEBUG_ENABLE.

@@ -11,7 +11,7 @@ Current_Time = 120000
 Current_iteration = 44
 
 current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = (Current_Date * Current_Time * Current_iteration)
+current_version_hash = Current_Date * Current_Time * Current_iteration
 
 
 # Author: Anthony Peter Kuzub
@@ -25,8 +25,8 @@ current_version_hash = (Current_Date * Current_Time * Current_iteration)
 # Feature Requests can be emailed to i @ like . audio
 #
 
-from workers.logger.logger import  debug_logger
-from workers.logger.log_utils import _get_log_args   
+from workers.logger.logger import debug_logger
+from workers.logger.log_utils import _get_log_args
 import inspect
 import os
 import csv
@@ -35,7 +35,7 @@ from tkinter import filedialog
 from managers.configini.config_reader import Config
 from workers.setup.worker_project_paths import GLOBAL_PROJECT_ROOT
 
-app_constants = Config.get_instance() # Get the singleton instance
+app_constants = Config.get_instance()  # Get the singleton instance
 
 # Define the canonical headers
 CANONICAL_HEADERS = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
@@ -44,37 +44,38 @@ CANONICAL_HEADERS = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
 def save_intermediate_file(tree_headers, tree_data):
     # Saves the current tree data to a file named 'MARKERS.csv' in the DATA directory at the project root level.
     current_function = inspect.currentframe().f_code.co_name
-    
+
     # ANCHOR FIX: Use the stable GLOBAL_PROJECT_ROOT now available.
-    target_path = GLOBAL_PROJECT_ROOT / 'DATA' / 'MARKERS.csv'
-    
-    if app_constants.global_settings['debug_enabled']:
+    target_path = GLOBAL_PROJECT_ROOT / "DATA" / "MARKERS.csv"
+
+    if app_constants.global_settings["debug_enabled"]:
         debug_logger(
             message=f"💾🟢 Saving data to intermediate file: {target_path}. Headers: {tree_headers}, first row: {tree_data[0] if tree_data else 'N/A'}",
             file=os.path.basename(__file__),
             version=current_version,
             function=f"{current_function}",
         )
-    
+
     try:
-        with open(target_path, 'w', newline='') as csvfile:
+        with open(target_path, "w", newline="") as csvfile:
             # Use DictWriter to ensure only rows that match the headers are written
-            writer = csv.DictWriter(csvfile, fieldnames=CANONICAL_HEADERS) 
-            
+            writer = csv.DictWriter(csvfile, fieldnames=CANONICAL_HEADERS)
+
             # Use CANONICAL_HEADERS to ensure consistent output file
             writer.writeheader()
             writer.writerows(tree_data)
-            
+
         debug_logger(message=f"💾 Intermediate file saved as {target_path}")
     except Exception as e:
         debug_logger(message=f"❌ Failed to save intermediate MARKERS.csv file. {e}")
-        
+
+
 def save_open_air_file(tree_headers, tree_data):
     # Saves the current tree data to a file named 'OpenAir.csv' in the DATA directory.
     current_function = inspect.currentframe().f_code.co_name
-    
+
     if not tree_headers or not tree_data:
-        if app_constants.global_settings['debug_enabled']:
+        if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message="🟢️️️🟡 'Save Open Air' action aborted: no data in treeview.",
                 file=os.path.basename(__file__),
@@ -87,10 +88,10 @@ def save_open_air_file(tree_headers, tree_data):
     file_path = filedialog.asksaveasfilename(
         defaultextension=".csv",
         initialfile="OpenAir.csv",
-        filetypes=[("CSV files", "*.csv"), ("All files", "*.*")]
+        filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
     )
     if not file_path:
-        if app_constants.global_settings['debug_enabled']:
+        if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message="🟢️️️🟡 'Save Open Air' action cancelled by user.",
                 file=os.path.basename(__file__),
@@ -99,23 +100,25 @@ def save_open_air_file(tree_headers, tree_data):
             )
         return
 
-    if app_constants.global_settings['debug_enabled']:
+    if app_constants.global_settings["debug_enabled"]:
         debug_logger(
             message=f"🟢️️️🟢 'Save Open Air' button clicked. Saving to: {file_path}",
             file=os.path.basename(__file__),
             version=current_version,
             function=f"{current_function}",
         )
-    debug_logger(message=f"▶️ Action: Saving Markers as Open Air.csv to {os.path.basename(file_path)}.")
-    
+    debug_logger(
+        message=f"▶️ Action: Saving Markers as Open Air.csv to {os.path.basename(file_path)}."
+    )
+
     try:
-        with open(file_path, 'w', newline='') as csvfile:
+        with open(file_path, "w", newline="") as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=tree_headers)
             writer.writeheader()
             writer.writerows(tree_data)
-        
+
         debug_logger(message=f"✅ File saved successfully to {file_path}")
-        if app_constants.global_settings['debug_enabled']:
+        if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message="✅ File saved successfully.",
                 file=os.path.basename(__file__),
@@ -123,7 +126,7 @@ def save_open_air_file(tree_headers, tree_data):
                 function=f"{current_function}",
             )
     except Exception as e:
-        if app_constants.global_settings['debug_enabled']:
+        if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message=f"❌ Error saving Open Air CSV file: {e}",
                 file=os.path.basename(__file__),
@@ -134,4 +137,6 @@ def save_open_air_file(tree_headers, tree_data):
 
 
 def save_markers_file_internally(importer_tab_instance):
-    save_intermediate_file(importer_tab_instance.tree_headers, importer_tab_instance.tree_data)
+    save_intermediate_file(
+        importer_tab_instance.tree_headers, importer_tab_instance.tree_data
+    )

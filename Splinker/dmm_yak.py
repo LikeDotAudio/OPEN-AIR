@@ -1,5 +1,6 @@
 # managers/yak/dmm_yak.py
 
+
 class DmmYak:
     def __init__(self, visa_manager):
         self.visa_manager = visa_manager
@@ -18,4 +19,4 @@ class DmmYak:
         #     return response
         # else:
         #     self.visa_manager.write(command_string)
-        return "N/A" # Placeholder for query
+        return "N/A"  # Placeholder for query

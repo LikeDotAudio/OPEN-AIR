@@ -1,5 +1,6 @@
 # managers/yak/dc_load_yak.py
 
+
 class DcLoadYak:
     def __init__(self, visa_manager):
         self.visa_manager = visa_manager
@@ -28,7 +29,6 @@ class DcLoadYak:
         #     "CP": "POWER"
         # }.get(mode, "CURR") # Default to Current if mode not found
         # self.visa_manager.write(f"{command_prefix} {value}")
-
 
     def set_input_state(self, state: bool):
         status = "ON" if state else "OFF"

@@ -21,10 +21,11 @@ from datetime import datetime
 
 # --- Imports for logging and workers ---
 from workers.logger.logger import debug_logger
-from managers.configini.config_reader import Config                                                                          
+from managers.configini.config_reader import Config
 
-app_constants = Config.get_instance() # Get the singleton instance      
-from workers.logger.log_utils import _get_log_args 
+app_constants = Config.get_instance()  # Get the singleton instance
+from workers.logger.log_utils import _get_log_args
+
 # from workers.active.worker_active_marker_tune_and_collect import MarkerGoGetterWorker
 ## from workers.active.worker_active_peak_publisher import ActivePeakPublisher
 
@@ -34,13 +35,15 @@ current_time = 120000
 current_iteration = 2
 
 current_version = f"{current_date}.{current_time}.{current_iteration}"
-current_version_hash = (current_date * current_time * current_iteration)
+current_version_hash = current_date * current_time * current_iteration
 current_file = f"{os.path.basename(__file__)}"
+
 
 class WorkerLauncher:
     """
     Manages the initialization and launching of all application workers.
     """
+
     def __init__(self, splash_screen, console_print_func):
         # Adhering to 'No Magic Numbers' principle
         self.splash = splash_screen
@@ -50,32 +53,40 @@ class WorkerLauncher:
     def launch_all_workers(self):
         # Initializes and starts all registered worker processes.
         current_function_name = inspect.currentframe().f_code.co_name
-        
-        if app_constants.global_settings['debug_enabled']:
+
+        if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message=f"🟢️️️🟢 Eureka! We are kicking off the worker engines from '{current_function_name}'!",
-                **_get_log_args()    
+                **_get_log_args(),
             )
 
         try:
             # These status updates will now be processed by root.update() in main.py
             # self.splash.set_status("Initializing workers...")
-            
+
             ## active_peak_publisher = ActivePeakPublisher()
             # self.splash.set_status("Active Peak Publisher initialized.")
-            if app_constants.global_settings['debug_enabled']:
-                debug_logger(message="🟢️️️🔵 Worker 'ActivePeakPublisher' initialized. The lab is buzzing with activity!", **_get_log_args())
+            if app_constants.global_settings["debug_enabled"]:
+                debug_logger(
+                    message="🟢️️️🔵 Worker 'ActivePeakPublisher' initialized. The lab is buzzing with activity!",
+                    **_get_log_args(),
+                )
 
             # --- Celebration of Success ---
-            debug_logger(message="✅ All workers have been successfully conjured and set to their tasks!", **_get_log_args())
+            debug_logger(
+                message="✅ All workers have been successfully conjured and set to their tasks!",
+                **_get_log_args(),
+            )
             return True
 
         except Exception as e:
-            debug_logger(message=f"❌ A dreadful error occurred in '{current_function_name}': {e}", **_get_log_args())
-            if app_constants.global_settings['debug_enabled']:
+            debug_logger(
+                message=f"❌ A dreadful error occurred in '{current_function_name}': {e}",
+                **_get_log_args(),
+            )
+            if app_constants.global_settings["debug_enabled"]:
                 debug_logger(
                     message=f"❌  The worker initialization has gone haywire in '{current_function_name}'! The error be: {e}",
-                    **_get_log_args()
-                    
+                    **_get_log_args(),
                 )
             return False

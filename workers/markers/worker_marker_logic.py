@@ -5,10 +5,10 @@
 
 Current_Date = 20251129  ##Update on the day the change was made
 Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 1 ## a running version number - incriments by one each time 
+Current_iteration = 1  ## a running version number - incriments by one each time
 
 current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = (Current_Date * Current_Time * Current_iteration)
+current_version_hash = Current_Date * Current_Time * Current_iteration
 
 
 # A utility module to contain core business logic functions related to marker data
@@ -29,26 +29,27 @@ current_version_hash = (Current_Date * Current_Time * Current_iteration)
 
 import os
 import inspect
-from managers.configini.config_reader import Config                                                                          
+from managers.configini.config_reader import Config
 
-app_constants = Config.get_instance() # Get the singleton instance      
+app_constants = Config.get_instance()  # Get the singleton instance
 
 # --- Graceful Dependency Importing ---
 try:
     import numpy as np
+
     NUMPY_AVAILABLE = True
 except ImportError:
     np = None
     NUMPY_AVAILABLE = False
-    
+
 # --- Module Imports ---
-from workers.logger.logger import  debug_logger
-from workers.logger.log_utils import _get_log_args 
+from workers.logger.logger import debug_logger
+from workers.logger.log_utils import _get_log_args
 
 # --- Global Scope Variables (as per Section 4.4) ---
 current_version = "20251005.230247.1"
 # The hash calculation drops the leading zero from the hour (23 -> 23)
-current_version_hash = (20251005 * 230247 * 1)
+current_version_hash = 20251005 * 230247 * 1
 current_file = f"{os.path.basename(__file__)}"
 LOCAL_DEBUG_ENABLE = False
 
@@ -56,53 +57,54 @@ LOCAL_DEBUG_ENABLE = False
 def calculate_frequency_range(marker_data_list):
     # Calculates the minimum and maximum frequencies from a list of marker dictionaries.
     current_function_name = inspect.currentframe().f_code.co_name
-    
+
     # [A brief, one-sentence description of the function's purpose.]
-    if app_constants.global_settings['debug_enabled']:
-        debug_logger(            message=f"🟢️️️🟢 ➡️➡️ {current_function_name} to divine the full spectral range from {len(marker_data_list)} markers.",**_get_log_args()                )
+    if app_constants.global_settings["debug_enabled"]:
+        debug_logger(
+            message=f"🟢️️️🟢 ➡️➡️ {current_function_name} to divine the full spectral range from {len(marker_data_list)} markers.",
+            **_get_log_args(),
+        )
 
     if not marker_data_list:
-        if app_constants.global_settings['debug_enabled']:
+        if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message="🟢️️️🟡 The marker list is an empty void! Returning null range.",
-**_get_log_args()
-                
-
-
+                **_get_log_args(),
             )
         return None, None
 
     if not NUMPY_AVAILABLE:
-        debug_logger(message="❌ Error: NumPy is required but not available. Cannot perform calculation.")
+        debug_logger(
+            message="❌ Error: NumPy is required but not available. Cannot perform calculation."
+        )
         return None, None
-        
+
     try:
         freqs = []
         for marker in marker_data_list:
             try:
                 # The canonical header for frequency is 'FREQ_MHZ'
-                freqs.append(float(marker.get('FREQ_MHZ', 0)))
+                freqs.append(float(marker.get("FREQ_MHZ", 0)))
             except (ValueError, TypeError):
                 continue
-        
+
         if freqs:
             min_freq = np.min(freqs)
             max_freq = np.max(freqs)
 
-            debug_logger(message=f"✅ Calculated range: {min_freq} MHz to {max_freq} MHz.")
+            debug_logger(
+                message=f"✅ Calculated range: {min_freq} MHz to {max_freq} MHz."
+            )
             return min_freq, max_freq
-        
+
         debug_logger(message="🟡 No valid frequencies found in marker data.")
         return None, None
 
     except Exception as e:
         debug_logger(message=f"❌ Error in {current_function_name}: {e}")
-        if app_constants.global_settings['debug_enabled']:
+        if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message=f"❌ Arrr, the code be capsized! Calculation failed: {e}",
-**_get_log_args()
-                
-
-
+                **_get_log_args(),
             )
         return None, None

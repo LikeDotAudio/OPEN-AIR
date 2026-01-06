@@ -6,6 +6,7 @@ class MqttControllerUtility:
     and managing MQTT connections or topics, likely by coordinating
     with mqtt_connection_manager, mqtt_publisher_service, and mqtt_subscriber_router.
     """
+
     def __init__(self):
         # Placeholder for initialization logic
         pass

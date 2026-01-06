@@ -1,9 +1,10 @@
 import inspect
 import re
-from tkinter import ttk # For ttk.Treeview interactions
+from tkinter import ttk  # For ttk.Treeview interactions
 
 from workers.logger.logger import debug_logger
 from workers.logger.log_utils import _get_log_args
+
 
 class TableEditingSortMixin:
     def __init__(self):
@@ -21,15 +22,21 @@ class TableEditingSortMixin:
 
         # Get all items in the Treeview
         data = []
-        for item_id in self.tree.get_children(''):
-            values = self.tree.item(item_id, 'values')
+        for item_id in self.tree.get_children(""):
+            values = self.tree.item(item_id, "values")
             # Ensure the number of values matches columns
             if len(values) == len(self.tree["columns"]):
                 # Create a dictionary for easier access by column name
-                row_dict = {self.tree["columns"][i]: values[i] for i in range(len(values))}
+                row_dict = {
+                    self.tree["columns"][i]: values[i] for i in range(len(values))
+                }
                 data.append((item_id, row_dict))
             else:
-                debug_logger(message=f"Skipping row {item_id} due to column mismatch. Values: {values}", level="WARNING", **_get_log_args())
+                debug_logger(
+                    message=f"Skipping row {item_id} due to column mismatch. Values: {values}",
+                    level="WARNING",
+                    **_get_log_args(),
+                )
 
         if not data:
             return
@@ -39,7 +46,7 @@ class TableEditingSortMixin:
             self._sort_reverse = not self._sort_reverse
         else:
             self._sort_column_name = col_name
-            self._sort_reverse = False # Default to ascending for new column
+            self._sort_reverse = False  # Default to ascending for new column
 
         # Sort the data
         # Use a more robust key function that handles mixed types (e.g., numbers vs strings)
@@ -57,7 +64,7 @@ class TableEditingSortMixin:
 
         # Rearrange items in the Treeview
         for index, (item_id, _) in enumerate(data):
-            self.tree.move(item_id, '', index)
+            self.tree.move(item_id, "", index)
 
         # Update header arrow to indicate sort order
         # For now, just use text indicators, as images require more setup
@@ -67,6 +74,9 @@ class TableEditingSortMixin:
             else:
                 # Remove arrow from other columns
                 original_text = self.tree.heading(c, "text")
-                self.tree.heading(c, text=re.sub(r' [▼▲]', '', original_text))
-        
-        debug_logger(message=f"Column '{col_name}' sorted {'descending' if self._sort_reverse else 'ascending'}.", **_get_log_args())
+                self.tree.heading(c, text=re.sub(r" [▼▲]", "", original_text))
+
+        debug_logger(
+            message=f"Column '{col_name}' sorted {'descending' if self._sort_reverse else 'ascending'}.",
+            **_get_log_args(),
+        )

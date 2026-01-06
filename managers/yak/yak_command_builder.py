@@ -21,14 +21,13 @@
 
 import os
 import inspect
-from workers.logger.logger import  debug_logger
-from workers.logger.log_utils import _get_log_args 
+from workers.logger.logger import debug_logger
+from workers.logger.log_utils import _get_log_args
 from managers.configini.config_reader import Config
 
-app_constants = Config.get_instance() # Get the singleton instance
+app_constants = Config.get_instance()  # Get the singleton instance
 
 LOCAL_DEBUG_ENABLE = False
-
 
 
 def fill_scpi_placeholders(scpi_command_template: str, Input: dict):
@@ -36,35 +35,38 @@ def fill_scpi_placeholders(scpi_command_template: str, Input: dict):
     Takes an SCPI command template and replaces placeholders with values from inputs.
     """
     current_function_name = inspect.currentframe().f_code.co_name
-    if app_constants.global_settings['debug_enabled']:
-        debug_logger(message=f"🔍🔵 Entering {current_function_name} to fill SCPI placeholders.",
-                  **_get_log_args())
-              
+    if app_constants.global_settings["debug_enabled"]:
+        debug_logger(
+            message=f"🔍🔵 Entering {current_function_name} to fill SCPI placeholders.",
+            **_get_log_args(),
+        )
+
     filled_command = scpi_command_template
-    
+
     if Input:
         for key, details in Input.items():
             placeholder = f"<{key}>"
             value_to_substitute = str(details.get("value", ""))
-            
+
             # --- NEW FIX: Replace the placeholder value with a single double quote for the path terminator ---
-            filled_command = filled_command.replace('\"', '"')
-            
+            filled_command = filled_command.replace('"', '"')
+
             if placeholder == "<path_terminator>" and placeholder in filled_command:
                 filled_command = filled_command.replace(placeholder, '"')
                 value_to_substitute = '"'
-            
+
             if placeholder == "<path_starter>" and placeholder in filled_command:
                 filled_command = filled_command.replace(placeholder, '"')
                 value_to_substitute = '"'
-            
+
             if placeholder in filled_command:
-                filled_command = filled_command.replace(placeholder, value_to_substitute)
-                if app_constants.global_settings['debug_enabled']:
-                                debug_logger(message=f"🔁 Replaced placeholder '{placeholder}' with value '{value_to_substitute}'.",
-                                              **_get_log_args()
-                                              
-                
+                filled_command = filled_command.replace(
+                    placeholder, value_to_substitute
                 )
+                if app_constants.global_settings["debug_enabled"]:
+                    debug_logger(
+                        message=f"🔁 Replaced placeholder '{placeholder}' with value '{value_to_substitute}'.",
+                        **_get_log_args(),
+                    )
     debug_logger(message=f"✅ Filled SCPI Command: {filled_command}", **_get_log_args())
     return filled_command

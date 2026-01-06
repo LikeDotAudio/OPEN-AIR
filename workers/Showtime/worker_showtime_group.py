@@ -16,40 +16,33 @@
 
 import inspect
 from collections import defaultdict
-from workers.logger.logger import  debug_logger
+from workers.logger.logger import debug_logger
 from workers.logger.log_utils import _get_log_args
-from managers.configini.config_reader import Config                                                                          
+from managers.configini.config_reader import Config
 
-app_constants = Config.get_instance() # Get the singleton instance      
+app_constants = Config.get_instance()  # Get the singleton instance
 
 
 def process_and_sort_markers(showtime_tab_instance):
     current_function = inspect.currentframe().f_code.co_name
-    if app_constants.global_settings['debug_enabled']:
+    if app_constants.global_settings["debug_enabled"]:
         debug_logger(
             message="🟢️️️🔵 Processing and sorting marker data by Zone, Group, and Device.",
             **_get_log_args()
-            
-
-
         )
 
     showtime_tab_instance.grouped_markers = defaultdict(lambda: defaultdict(list))
-    
+
     for row in showtime_tab_instance.marker_data:
-        zone = row.get('ZONE', 'N/A')
-        group = row.get('GROUP', 'N/A')
+        zone = row.get("ZONE", "N/A")
+        group = row.get("GROUP", "N/A")
         showtime_tab_instance.grouped_markers[zone][group].append(row)
-    
+
     for zone, groups in showtime_tab_instance.grouped_markers.items():
         for group, devices in groups.items():
-            devices.sort(key=lambda x: x.get('NAME', ''))
-    
-    if app_constants.global_settings['debug_enabled']:
+            devices.sort(key=lambda x: x.get("NAME", ""))
+
+    if app_constants.global_settings["debug_enabled"]:
         debug_logger(
-            message="✅ Markers grouped and sorted successfully.",
-            **_get_log_args()
-            
-
-
+            message="✅ Markers grouped and sorted successfully.", **_get_log_args()
         )

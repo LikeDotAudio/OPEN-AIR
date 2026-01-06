@@ -23,7 +23,7 @@ from tkinter import ttk
 
 # --- Global Scope Variables ---
 current_version = "20251127.000000.1"
-current_version_hash = (20251127 * 0 * 1)
+current_version_hash = 20251127 * 0 * 1
 current_file = f"{os.path.basename(__file__)}"
 
 # The default theme to use. This can be changed here to easily switch the entire application's style.
@@ -68,7 +68,7 @@ THEMES = {
             "Textbox_Font_size": 13,
             "Textbox_Font_colour": "#000000",
             "Textbox_border_colour": "#555555",
-            "Textbox_BG_colour": "#dcdcdc"
+            "Textbox_BG_colour": "#dcdcdc",
         },
         "button_base_style": {
             "borderwidth": 2,
@@ -138,7 +138,7 @@ THEMES = {
                 "Accent.TNotebook.Tab8",
                 "Accent.TNotebook.Tab9",
                 "Accent.TNotebook.Tab10",
-            ]
+            ],
         },
         "accent_colors": [
             "#996633",  # 1. Brown
@@ -151,7 +151,7 @@ THEMES = {
             "#ce9178",  # 8. Tan
             "#b5cea8",  # 9. Gray-Green
             "#7d7d7d",  # 10. Gray
-        ]
+        ],
     },
     # The "light" theme, providing a high-contrast alternative.
     "light": {
@@ -190,7 +190,7 @@ THEMES = {
             "Textbox_Font_size": 13,
             "Textbox_Font_colour": "#000000",
             "Textbox_border_colour": "#ababab",
-            "Textbox_BG_colour": "#ffffff"
+            "Textbox_BG_colour": "#ffffff",
         },
         "button_base_style": {
             "borderwidth": 2,
@@ -211,7 +211,7 @@ THEMES = {
             "Button_Selected_Bg": "#0078d7",
             "Button_Selected_Fg": "#ffffff",
             "Button_Disabled_Bg": "#ababab",
-            "Button_Disabled_Fg": "#555555"
+            "Button_Disabled_Fg": "#555555",
         },
         "button_style_actuator": {
             "background": "#e0e0e0",
@@ -272,7 +272,7 @@ THEMES = {
                 "Accent.TNotebook.Tab8",
                 "Accent.TNotebook.Tab9",
                 "Accent.TNotebook.Tab10",
-            ]
+            ],
         },
         "accent_colors": [
             "#A0522D",  # 1. Brown (Sienna)
@@ -285,6 +285,6 @@ THEMES = {
             "#D2691E",  # 8. Tan (Chocolate)
             "#556B2F",  # 9. Gray-Green (DarkOliveGreen)
             "#7d7d7d",  # 10. Gray
-        ]
-    }
+        ],
+    },
 }

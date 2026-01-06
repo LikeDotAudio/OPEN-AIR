@@ -1,5 +1,6 @@
 # managers/yak/psu_yak.py
 
+
 class PsuYak:
     def __init__(self, visa_manager):
         self.visa_manager = visa_manager

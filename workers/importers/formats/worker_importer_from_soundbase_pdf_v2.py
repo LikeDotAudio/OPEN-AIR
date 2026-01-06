@@ -31,7 +31,7 @@ Current_Time = 120000
 Current_iteration = 1
 
 current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = (Current_Date * Current_Time * Current_iteration)
+current_version_hash = Current_Date * Current_Time * Current_iteration
 
 current_file = os.path.basename(__file__)
 app_constants = Config.get_instance()
@@ -46,7 +46,7 @@ def Marker_convert_SB_v2_PDF_File_report_to_csv(pdf_file_path):
 
     Args:
         pdf_file_path (str): The full path to the PDF file.
-        
+
     Returns:
         tuple: A tuple containing:
                - headers (list): A list of strings representing the CSV header row.
@@ -54,92 +54,110 @@ def Marker_convert_SB_v2_PDF_File_report_to_csv(pdf_file_path):
                                   represents a row of data with keys matching the headers.
     """
     current_function = inspect.currentframe().f_code.co_name
-    
-    if app_constants.global_settings['debug_enabled']:
+
+    if app_constants.global_settings["debug_enabled"]:
         debug_logger(
             message=f"▶️ Starting PDF (Sound Base v2) report conversion for: {os.path.basename(pdf_file_path)}",
             file=current_file,
             version=current_version,
             function=f"{current_function}",
-            **_get_log_args()
+            **_get_log_args(),
         )
-    
+
     csv_data = []
 
     try:
         with pdfplumber.open(pdf_file_path) as pdf:
             text = pdf.pages[0].extract_text()
-            
+
             # Use regex to find the ZONE
-            zone_match = re.search(r'ZONE: (.+)', text)
-            zone = zone_match.group(1).strip() if zone_match else 'N/A'
-            if app_constants.global_settings['debug_enabled']:
-                debug_logger(message=f"🔍 Found ZONE: {zone}",  file=current_file, version=current_version, function=current_function, 
-                     **_get_log_args()
+            zone_match = re.search(r"ZONE: (.+)", text)
+            zone = zone_match.group(1).strip() if zone_match else "N/A"
+            if app_constants.global_settings["debug_enabled"]:
+                debug_logger(
+                    message=f"🔍 Found ZONE: {zone}",
+                    file=current_file,
+                    version=current_version,
+                    function=current_function,
+                    **_get_log_args(),
                 )
-            
+
             # The pattern to find all groups
-            group_pattern = re.compile(r'^\s*([A-Z\s&]+ IEM\'S|[A-Z\s&]+ MICS & BACKLINE)\s*$', re.MULTILINE)
-            
-            lines = text.split('\n')
+            group_pattern = re.compile(
+                r"^\s*([A-Z\s&]+ IEM\'S|[A-Z\s&]+ MICS & BACKLINE)\s*$", re.MULTILINE
+            )
+
+            lines = text.split("\n")
             current_group = None
-            
+
             for line in lines:
                 line = line.strip()
                 if not line:
                     continue
-                
+
                 # Check if the line is a new group header
                 group_match = group_pattern.search(line)
                 if group_match:
                     current_group = group_match.group(1).strip()
-                    if app_constants.global_settings['debug_enabled']:
-                        debug_logger(message=f"🔍 Found new GROUP: {current_group}",  file=current_file, version=current_version, function=current_function, 
-                             **_get_log_args()
+                    if app_constants.global_settings["debug_enabled"]:
+                        debug_logger(
+                            message=f"🔍 Found new GROUP: {current_group}",
+                            file=current_file,
+                            version=current_version,
+                            function=current_function,
+                            **_get_log_args(),
                         )
                     continue
-                
+
                 # Regex to find all frequency-device pairs on the current line
-                device_matches = re.findall(r'(\d+\.\d+)\s+([\w\s-]+?(?=\s*\d+\.\d+|$))', line)
-                
+                device_matches = re.findall(
+                    r"(\d+\.\d+)\s+([\w\s-]+?(?=\s*\d+\.\d+|$))", line
+                )
+
                 if device_matches:
                     for freq, device in device_matches:
                         device_clean = device.strip()
                         freq_clean = freq.strip()
-                        
+
                         if current_group:
-                            csv_data.append({
-                                'ZONE': zone,
-                                'GROUP': current_group,
-                                'DEVICE': device_clean,
-                                'NAME': device_clean,
-                                'FREQ_MHZ': freq_clean,
-                                'PEAK': np.nan 
-                            })
-                            
-            if app_constants.global_settings['debug_enabled']:
-                debug_logger(message=f"✅ Finished conversion. Extracted {len(csv_data)} rows.",  file=current_file, version=current_version, function=current_function, 
-                     **_get_log_args()
+                            csv_data.append(
+                                {
+                                    "ZONE": zone,
+                                    "GROUP": current_group,
+                                    "DEVICE": device_clean,
+                                    "NAME": device_clean,
+                                    "FREQ_MHZ": freq_clean,
+                                    "PEAK": np.nan,
+                                }
+                            )
+
+            if app_constants.global_settings["debug_enabled"]:
+                debug_logger(
+                    message=f"✅ Finished conversion. Extracted {len(csv_data)} rows.",
+                    file=current_file,
+                    version=current_version,
+                    function=current_function,
+                    **_get_log_args(),
                 )
             return headers, csv_data
 
     except FileNotFoundError:
-        if app_constants.global_settings['debug_enabled']:
+        if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message=f"❌ The file '{pdf_file_path}' was not found.",
                 file=current_file,
                 version=current_version,
                 function=current_function,
-                **_get_log_args()
+                **_get_log_args(),
             )
         return [], []
     except Exception as e:
-        if app_constants.global_settings['debug_enabled']:
+        if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message=f"❌ Error during PDF conversion: {e}",
                 file=current_file,
                 version=current_version,
                 function=current_function,
-                **_get_log_args()
+                **_get_log_args(),
             )
         return [], []

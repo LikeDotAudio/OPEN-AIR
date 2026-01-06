@@ -3,13 +3,14 @@ import serial.tools.list_ports
 import time
 import sys
 
+
 def select_serial_port():
     """
     Scans for available serial ports and asks the user to select one.
     Returns the selected port device name (e.g., '/dev/ttyUSB0' or 'COM3').
     """
     ports = list(serial.tools.list_ports.comports())
-    
+
     if not ports:
         print("\n[!] No serial devices found.")
         print("    Check your cable connection and drivers.")
@@ -20,7 +21,7 @@ def select_serial_port():
         # port.device = the system path (e.g., COM3, /dev/ttyUSB0)
         # port.description = human readable name (e.g., FTDI Serial)
         print(f"{index + 1}: {port.device} - {port.description}")
-    
+
     while True:
         try:
             selection = input("\nSelect a device number: ")
@@ -34,6 +35,7 @@ def select_serial_port():
         except ValueError:
             print("[!] Please enter a valid integer.")
 
+
 def main():
     # 1. Get the port from the user
     port_name = select_serial_port()
@@ -41,8 +43,8 @@ def main():
     # 2. Configure the connection for Fluke 43B
     # Note: Fluke optical cables are notoriously slow.
     # If 1200 baud fails, try 9600 or 19200.
-    BAUD_RATE = 1200 
-    
+    BAUD_RATE = 1200
+
     print(f"\n[*] Attempting to connect to {port_name} at {BAUD_RATE} baud...")
 
     try:
@@ -52,21 +54,21 @@ def main():
             bytesize=serial.EIGHTBITS,
             parity=serial.PARITY_NONE,
             stopbits=serial.STOPBITS_ONE,
-            timeout=2  # Longer timeout for older hardware
+            timeout=2,  # Longer timeout for older hardware
         )
 
         # 3. Send a "Wake Up" / ID Command
-        # The Fluke 43B protocol is binary. Sending 0x01 or 0x0F is a common 
+        # The Fluke 43B protocol is binary. Sending 0x01 or 0x0F is a common
         # way to trigger a response (Identity request).
         # Note: Without a specific command, the device sits silently.
-        command_byte = b'\x01' 
-        
+        command_byte = b"\x01"
+
         print(f"[*] Sending query byte: {command_byte.hex()}")
         ser.write(command_byte)
-        
+
         # 4. Wait for response
         time.sleep(1.0)
-        
+
         if ser.in_waiting > 0:
             raw_data = ser.read(ser.in_waiting)
             print(f"\n[SUCCESS] Received {len(raw_data)} bytes:")
@@ -86,6 +88,7 @@ def main():
         print(f"Reason: {e}")
     except KeyboardInterrupt:
         print("\n[*] Exiting...")
+
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,6 @@
 # managers/yak/signal_generator_yak.py
 
+
 class SignalGeneratorYak:
     def __init__(self, visa_manager):
         self.visa_manager = visa_manager

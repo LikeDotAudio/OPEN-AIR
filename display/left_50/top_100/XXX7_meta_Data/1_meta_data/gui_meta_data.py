@@ -24,17 +24,18 @@ from tkinter import ttk
 
 # --- Module Imports ---
 from workers.builder.dynamic_gui_builder import DynamicGuiBuilder
-from workers.logger.logger import  debug_logger
-from workers.logger.log_utils import _get_log_args 
+from workers.logger.logger import debug_logger
+from workers.logger.log_utils import _get_log_args
 import pathlib
 from managers.configini.config_reader import Config
-app_constants = Config.get_instance() # Get the singleton instance
+
+app_constants = Config.get_instance()  # Get the singleton instance
 
 # --- Global Scope Variables ---
 current_file_path = pathlib.Path(__file__).resolve()
 project_root = current_file_path.parent.parent.parent
 current_file = str(current_file_path.relative_to(project_root)).replace("\\", "/")
-JSON_CONFIG_FILE = current_file_path.with_suffix('.json')
+JSON_CONFIG_FILE = current_file_path.with_suffix(".json")
 
 current_version = "20251226.000000.1"
 
@@ -43,11 +44,12 @@ class MetaDataGui(ttk.Frame):
     """
     A container frame that instantiates the DynamicGuiBuilder for the Frequency configuration.
     """
+
     def __init__(self, parent, *args, **kwargs):
         """
         Initializes the Frequency frame and the dynamic GUI builder.
         """
-        config_data = kwargs.pop('config', None)
+        config_data = kwargs.pop("config", None)
         super().__init__(parent, *args, **kwargs)
         self.pack(fill=tk.BOTH, expand=True)
 
@@ -55,26 +57,24 @@ class MetaDataGui(ttk.Frame):
         current_function_name = "__init__"
         debug_logger(
             message=f"🟢️️️🟢 ➡️➡️ {current_function_name} to initialize the MetaDataGui.",
-            **_get_log_args()
+            **_get_log_args(),
         )
         try:
             config = {
                 ## "base_topic": MQTT_TOPIC_FILTER,
-                "log_to_gui_console": None, 
-                "log_to_gui_treeview": None  # Assuming no treeview for this component
+                "log_to_gui_console": None,
+                "log_to_gui_treeview": None,  # Assuming no treeview for this component
             }
 
             self.dynamic_gui = DynamicGuiBuilder(
-                parent=self,
-                json_path=JSON_CONFIG_FILE,
-                config=config
+                parent=self, json_path=JSON_CONFIG_FILE, config=config
             )
-            
+
         except Exception as e:
-            debug_logger(message=f"❌ Error in {current_function_name}: {e}",
-                        **_get_log_args()
-                        )
+            debug_logger(
+                message=f"❌ Error in {current_function_name}: {e}", **_get_log_args()
+            )
             debug_logger(
                 message=f"❌🔴 Arrr, the code be capsized! The error be: {e}",
-                **_get_log_args()
+                **_get_log_args(),
             )

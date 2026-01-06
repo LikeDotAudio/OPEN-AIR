@@ -14,5 +14,5 @@ lyrics = [
     "Long you live and high you fly",
     "But only if you ride the tide",
     "Balanced on the biggest wave",
-    "You race towards an early grave"
+    "You race towards an early grave",
 ]

@@ -27,16 +27,16 @@ import sys
 import orjson
 
 # --- Module Imports ---
-from workers.logger.logger import  debug_logger
-from workers.logger.log_utils import _get_log_args 
+from workers.logger.logger import debug_logger
+from workers.logger.log_utils import _get_log_args
 from workers.styling.style import THEMES, DEFAULT_THEME
 
 
 # --- Global Scope Variables (Protocol 4.4) ---
 current_version = "20251226.000000.1"
-current_version_hash = (20251127 * 0 * 1)
+current_version_hash = 20251127 * 0 * 1
 current_file_path = pathlib.Path(__file__).resolve()
-project_root = current_file_path.parents[4] 
+project_root = current_file_path.parents[4]
 current_file = str(current_file_path.relative_to(project_root)).replace("\\", "/")
 
 
@@ -44,12 +44,13 @@ class DebugTabGUIFrame(ttk.Frame):
     """
     A debug frame with logging and MQTT monitoring functionality.
     """
+
     def __init__(self, parent, *args, **kwargs):
         # A brief, one-sentence description of the function's purpose.
         current_function_name = inspect.currentframe().f_code.co_name
-        
-        if 'config' in kwargs:
-            kwargs.pop('config')
+
+        if "config" in kwargs:
+            kwargs.pop("config")
         super().__init__(parent, **kwargs)
 
         self.current_version = current_version
@@ -58,10 +59,7 @@ class DebugTabGUIFrame(ttk.Frame):
             message="🖥️🟢 Initializing the dedicated Debug Tab GUI. Time for deep inspection!",
             file=current_file,
             version=self.current_version,
-            function=f"{self.__class__.__name__}.{current_function_name}"
-            
-
-
+            function=f"{self.__class__.__name__}.{current_function_name}",
         )
-        
+
         debug_logger(message="✅ Debug Tab GUI initialized successfully!")

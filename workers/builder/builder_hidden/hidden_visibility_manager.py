@@ -3,6 +3,7 @@ import orjson
 from workers.mqtt.mqtt_topic_utils import get_topic
 from workers.mqtt.mqtt_publisher_service import is_connected
 
+
 class HiddenVisibilityManagerMixin:
     """
     The 'Snitch'. Reports to MQTT when this GUI is visible or hidden.
@@ -15,9 +16,9 @@ class HiddenVisibilityManagerMixin:
 
         # Create a specific topic: .../TabName/_META/visible
         self.visibility_topic = get_topic(
-            self.state_mirror_engine.base_topic, 
-            self.base_mqtt_topic_from_path, 
-            "visibility/visible"
+            self.state_mirror_engine.base_topic,
+            self.base_mqtt_topic_from_path,
+            "visibility/visible",
         )
 
         # Bind to Tkinter Map (Show) and Unmap (Hide) events
@@ -28,7 +29,7 @@ class HiddenVisibilityManagerMixin:
     def _on_gui_visible(self, event):
         """User can see this tab."""
         self._publish_visibility(True)
-        if hasattr(self, '_on_geometry_change'):
+        if hasattr(self, "_on_geometry_change"):
             self._on_geometry_change(event)
 
     def _on_gui_hidden(self, event):
@@ -44,14 +45,13 @@ class HiddenVisibilityManagerMixin:
     def _publish_visibility(self, is_visible: bool):
         if not is_connected():
             return
-            
+
         payload = {
             "visible": is_visible,
             "ts": time.time(),
-            "tab_name": getattr(self, "tab_name", "Unknown")
+            "tab_name": getattr(self, "tab_name", "Unknown"),
         }
         # Use the engine from the main class
         self.state_mirror_engine.publish_command(
-            self.visibility_topic, 
-            orjson.dumps(payload)
+            self.visibility_topic, orjson.dumps(payload)
         )

@@ -1,5 +1,6 @@
 # managers/yak/relay_driver_yak.py
 
+
 class RelayDriverYak:
     def __init__(self, visa_manager):
         self.visa_manager = visa_manager
@@ -49,4 +50,4 @@ class RelayDriverYak:
         print(f"Getting Relay {relay_id} state via YAK.")
         # state = self.visa_manager.query(f"RELAY{relay_id}:STATE?")
         # return bool(int(state))
-        return False # Placeholder
+        return False  # Placeholder

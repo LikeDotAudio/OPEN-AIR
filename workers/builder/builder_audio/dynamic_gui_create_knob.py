@@ -6,19 +6,33 @@
 import tkinter as tk
 from tkinter import ttk
 import math
-from managers.configini.config_reader import Config                                                                          
+from managers.configini.config_reader import Config
 
-app_constants = Config.get_instance()      
-from workers.logger.logger import  debug_logger
-from workers.logger.log_utils import _get_log_args 
+app_constants = Config.get_instance()
+from workers.logger.logger import debug_logger
+from workers.logger.log_utils import _get_log_args
 from workers.styling.style import THEMES, DEFAULT_THEME
 import os
+
 
 class CustomKnobFrame(ttk.Frame):
     """
     A custom Tkinter Frame that hosts the knob and provides the "Flux Control" methods.
     """
-    def __init__(self, parent, variable, min_val, max_val, reff_point, path, state_mirror_engine, command, *args, **kwargs):
+
+    def __init__(
+        self,
+        parent,
+        variable,
+        min_val,
+        max_val,
+        reff_point,
+        path,
+        state_mirror_engine,
+        command,
+        *args,
+        **kwargs,
+    ):
         super().__init__(parent, *args, **kwargs)
         self.variable = variable
         self.min_val = min_val
@@ -26,21 +40,28 @@ class CustomKnobFrame(ttk.Frame):
         self.reff_point = reff_point
         self.path = path
         self.state_mirror_engine = state_mirror_engine
-        self.command = command # The function to call when value changes (e.g., on_drag_or_click)
-        self.temp_entry = None # Initialize temp_entry
+        self.command = (
+            command  # The function to call when value changes (e.g., on_drag_or_click)
+        )
+        self.temp_entry = None  # Initialize temp_entry
 
     def _jump_to_reff_point(self, event):
         """
         ⚡  Jumping to the Reference Point immediately!
         """
-        if app_constants.global_settings['debug_enabled']: # Use global_settings for consistency
-            debug_logger(message=f"⚡ User invoked Quantum Jump! Resetting to {self.reff_point}", **_get_log_args())
+        if app_constants.global_settings[
+            "debug_enabled"
+        ]:  # Use global_settings for consistency
+            debug_logger(
+                message=f"⚡ User invoked Quantum Jump! Resetting to {self.reff_point}",
+                **_get_log_args(),
+            )
 
         self.variable.set(self.reff_point)
         # Directly trigger MQTT update
         if self.state_mirror_engine:
             self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
-        
+
     def _open_manual_entry(self, event):
         """
         📝 User requested manual coordinate entry.
@@ -49,19 +70,19 @@ class CustomKnobFrame(ttk.Frame):
         if self.temp_entry and self.temp_entry.winfo_exists():
             return
 
-        self.temp_entry = tk.Entry(self, width=8, justify='center')
-        
+        self.temp_entry = tk.Entry(self, width=8, justify="center")
+
         # Place it exactly where the user clicked (or centered)
-        self.temp_entry.place(x=event.x - 20, y=event.y - 10) 
-        
+        self.temp_entry.place(x=event.x - 20, y=event.y - 10)
+
         # 3. Insert current value
         current_val = self.variable.get()
         self.temp_entry.insert(0, str(current_val))
-        self.temp_entry.select_range(0, tk.END) # Select all text for easy overwriting
-        
+        self.temp_entry.select_range(0, tk.END)  # Select all text for easy overwriting
+
         # 4. Focus so user can type immediately
         self.temp_entry.focus_set()
-        
+
         # 5. Bind Exit Events (Enter key or Clicking away)
         self.temp_entry.bind("<Return>", self._submit_manual_entry)
         self.temp_entry.bind("<FocusOut>", self._submit_manual_entry)
@@ -72,11 +93,11 @@ class CustomKnobFrame(ttk.Frame):
         Validates the input and sets the new timeline.
         """
         raw_value = self.temp_entry.get()
-        
+
         try:
             # Validate Number
             new_value = float(raw_value)
-            
+
             # Check Limits (The laws of physics!)
             if self.min_val <= new_value <= self.max_val:
                 # Valid! Set it!
@@ -85,44 +106,54 @@ class CustomKnobFrame(ttk.Frame):
                 if self.state_mirror_engine:
                     self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
 
-                if app_constants.global_settings['debug_enabled']:
-                    debug_logger(message=f"✅ Manual entry successful: {new_value}", **_get_log_args())
+                if app_constants.global_settings["debug_enabled"]:
+                    debug_logger(
+                        message=f"✅ Manual entry successful: {new_value}",
+                        **_get_log_args(),
+                    )
             else:
-                if app_constants.global_settings['debug_enabled']:
-                    debug_logger(message=f"⚠️ Value {new_value} out of bounds! Ignoring.", **_get_log_args())
-                    
+                if app_constants.global_settings["debug_enabled"]:
+                    debug_logger(
+                        message=f"⚠️ Value {new_value} out of bounds! Ignoring.",
+                        **_get_log_args(),
+                    )
+
         except ValueError:
             # Not a number
-            if app_constants.global_settings['debug_enabled']:
-                debug_logger(message=f"❌ Invalid manual entry: '{raw_value}' is not a number.", **_get_log_args())
-        
+            if app_constants.global_settings["debug_enabled"]:
+                debug_logger(
+                    message=f"❌ Invalid manual entry: '{raw_value}' is not a number.",
+                    **_get_log_args(),
+                )
+
         # Cleanup
         self._destroy_manual_entry(event)
 
     def _destroy_manual_entry(self, event):
         if self.temp_entry and self.temp_entry.winfo_exists():
             self.temp_entry.destroy()
-            self.temp_entry = None # Clean up the attribute
+            self.temp_entry = None  # Clean up the attribute
+
 
 class KnobCreatorMixin:
-    def _create_knob(self, parent_widget, config_data, **kwargs): # Updated signature
+    def _create_knob(self, parent_widget, config_data, **kwargs):  # Updated signature
         """Creates a rotary knob widget."""
         current_function_name = "_create_knob"
-        
+
         # Extract only widget-specific config from config_data
         label = config_data.get("label_active")
-        config = config_data # config_data is the config
+        config = config_data  # config_data is the config
         path = config_data.get("path")
-        
+
         # Access global context directly from self
         state_mirror_engine = self.state_mirror_engine
         subscriber_router = self.subscriber_router
-        base_mqtt_topic_from_path = self.state_mirror_engine.base_topic if self.state_mirror_engine else ""
+        base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
 
-        if app_constants.global_settings['debug_enabled']:
+        if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message=f"🔬⚡️ Entering '{current_function_name}' to forge a themed knob for '{label}'.",
-                **_get_log_args()
+                **_get_log_args(),
             )
 
         # Resolve Theme Colors
@@ -139,26 +170,28 @@ class KnobCreatorMixin:
         # Create our custom frame type
         min_val = float(config.get("min", 0.0))
         max_val = float(config.get("max", 100.0))
-        reff_point = float(config.get("reff_point", (min_val + max_val) / 2.0)) # Default reff_point to midpoint
-        value_default = float(config.get("value_default", 0.0)) # Ensure float
+        reff_point = float(
+            config.get("reff_point", (min_val + max_val) / 2.0)
+        )  # Default reff_point to midpoint
+        value_default = float(config.get("value_default", 0.0))  # Ensure float
 
         knob_value_var = tk.DoubleVar(value=value_default)
 
-        drag_state = {'start_y': None, 'start_value': None}
+        drag_state = {"start_y": None, "start_value": None}
 
         def on_knob_press(event):
             """Stores the starting Y-position and value when the knob is clicked."""
-            drag_state['start_y'] = event.y
-            drag_state['start_value'] = knob_value_var.get()
+            drag_state["start_y"] = event.y
+            drag_state["start_value"] = knob_value_var.get()
 
         def on_knob_drag(event):
             """Calculates the new value based on the vertical distance dragged."""
-            if drag_state['start_y'] is None:
+            if drag_state["start_y"] is None:
                 return
 
-            dy = drag_state['start_y'] - event.y
+            dy = drag_state["start_y"] - event.y
             sensitivity = (max_val - min_val) / 100.0
-            new_val = drag_state['start_value'] + (dy * sensitivity)
+            new_val = drag_state["start_value"] + (dy * sensitivity)
             new_val = max(min_val, min(max_val, new_val))
 
             if knob_value_var.get() != new_val:
@@ -167,18 +200,18 @@ class KnobCreatorMixin:
 
         def on_knob_release(event):
             """Clears the drag state when the mouse button is released."""
-            drag_state['start_y'] = None
-            drag_state['start_value'] = None
+            drag_state["start_y"] = None
+            drag_state["start_value"] = None
 
         frame = CustomKnobFrame(
-            parent_widget, # Use parent_widget here
+            parent_widget,  # Use parent_widget here
             variable=knob_value_var,
             min_val=min_val,
             max_val=max_val,
             reff_point=reff_point,
             path=path,
             state_mirror_engine=self.state_mirror_engine,
-            command=None  # Command is handled by the press/drag/release events now
+            command=None,  # Command is handled by the press/drag/release events now
         )
 
         if label:
@@ -189,25 +222,47 @@ class KnobCreatorMixin:
             height = config.get("height", 50)
 
             # Canvas with Theme Background
-            canvas = tk.Canvas(frame, width=width, height=height, bg=bg_color, highlightthickness=0)
+            canvas = tk.Canvas(
+                frame, width=width, height=height, bg=bg_color, highlightthickness=0
+            )
             canvas.pack()
 
             # Value Label (initially based on default value var)
-            value_label = ttk.Label(frame, text=f"{int(knob_value_var.get())}", font=("Helvetica", 8))
+            value_label = ttk.Label(
+                frame, text=f"{int(knob_value_var.get())}", font=("Helvetica", 8)
+            )
             value_label.pack(side=tk.BOTTOM)
 
-            def update_knob_visuals(*args, neutral_color_val=fg_color, accent_for_arc_val=accent_color, indicator_color_val=indicator_color, secondary_val=secondary_color):
+            def update_knob_visuals(
+                *args,
+                neutral_color_val=fg_color,
+                accent_for_arc_val=accent_color,
+                indicator_color_val=indicator_color,
+                secondary_val=secondary_color,
+            ):
                 current_knob_val = knob_value_var.get()
                 value_label.config(text=f"{int(current_knob_val)}")
-                self._draw_knob(canvas, width, height, current_knob_val, frame.min_val, frame.max_val, value_label, neutral_color_val, accent_for_arc_val, indicator_color_val, secondary_val)
-                if app_constants.global_settings['debug_enabled']:
+                self._draw_knob(
+                    canvas,
+                    width,
+                    height,
+                    current_knob_val,
+                    frame.min_val,
+                    frame.max_val,
+                    value_label,
+                    neutral_color_val,
+                    accent_for_arc_val,
+                    indicator_color_val,
+                    secondary_val,
+                )
+                if app_constants.global_settings["debug_enabled"]:
                     debug_logger(
                         message=f"⚡ fluxing... Knob '{label}' updated visually to {current_knob_val} from MQTT.",
-                        **_get_log_args()
+                        **_get_log_args(),
                     )
 
             knob_value_var.trace_add("write", update_knob_visuals)
-            
+
             # Initial draw based on default value
             update_knob_visuals()
 
@@ -223,31 +278,39 @@ class KnobCreatorMixin:
             # Register the StringVar with the StateMirrorEngine for MQTT updates
             if path:
                 widget_id = path
-                
+
                 # Create a serializable version of the config
                 serializable_config = config.copy()
-                serializable_config.pop('state_mirror_engine', None)
-                serializable_config.pop('subscriber_router', None)
+                serializable_config.pop("state_mirror_engine", None)
+                serializable_config.pop("subscriber_router", None)
 
-                self.state_mirror_engine.register_widget(widget_id, knob_value_var, base_mqtt_topic_from_path, serializable_config)
+                self.state_mirror_engine.register_widget(
+                    widget_id,
+                    knob_value_var,
+                    base_mqtt_topic_from_path,
+                    serializable_config,
+                )
 
                 # Subscribe to the topic for incoming messages
                 from workers.mqtt.mqtt_topic_utils import get_topic
-                topic = get_topic("OPEN-AIR", base_mqtt_topic_from_path, widget_id)
-                self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
 
-                if app_constants.global_settings['debug_enabled']:
+                topic = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, widget_id)
+                self.subscriber_router.subscribe_to_topic(
+                    topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui
+                )
+
+                if app_constants.global_settings["debug_enabled"]:
                     debug_logger(
                         message=f"🔬 Widget '{label}' ({path}) registered with StateMirrorEngine (DoubleVar: {knob_value_var.get()}).",
-                        **_get_log_args()
+                        **_get_log_args(),
                     )
                 # Initialize state from cache or broadcast
                 state_mirror_engine.initialize_widget_state(path)
 
-            if app_constants.global_settings['debug_enabled']:
+            if app_constants.global_settings["debug_enabled"]:
                 debug_logger(
                     message=f"✅ SUCCESS! The themed knob '{label}' is calibrated!",
-                    **_get_log_args()
+                    **_get_log_args(),
                 )
             return frame
 
@@ -255,49 +318,96 @@ class KnobCreatorMixin:
             debug_logger(message=f"❌ The knob '{label}' shattered! Error: {e}")
             return None
 
-    def _draw_knob(self, canvas, width, height, value, min_val, max_val, value_label, neutral_color, accent_for_arc, indicator_color, secondary):
+    def _draw_knob(
+        self,
+        canvas,
+        width,
+        height,
+        value,
+        min_val,
+        max_val,
+        value_label,
+        neutral_color,
+        accent_for_arc,
+        indicator_color,
+        secondary,
+    ):
         canvas.delete("all")
         cx, cy = width / 2, height / 2
         radius = min(width, height) / 2 - 5
 
         # 1. Background Arc (The Track)
         start_angle_bg = 240
-        extent_bg = -300 # 300 degrees total travel
-        canvas.create_arc(5, 5, width-5, height-5, start=start_angle_bg, extent=extent_bg, style=tk.ARC, outline=secondary, width=4)
+        extent_bg = -300  # 300 degrees total travel
+        canvas.create_arc(
+            5,
+            5,
+            width - 5,
+            height - 5,
+            start=start_angle_bg,
+            extent=extent_bg,
+            style=tk.ARC,
+            outline=secondary,
+            width=4,
+        )
 
         # 2. Calculate Normalized Value (0.0 to 1.0)
-        norm_val_0_1 = (value - min_val) / (max_val - min_val) if max_val > min_val else 0
+        norm_val_0_1 = (
+            (value - min_val) / (max_val - min_val) if max_val > min_val else 0
+        )
 
         # Map to -1.0 to 1.0 for Polarity Pan-Pot logic if center is 0
-        norm_val = (norm_val_0_1 * 2) - 1 if (min_val < 0 and max_val >= 0) else norm_val_0_1
-        
+        norm_val = (
+            (norm_val_0_1 * 2) - 1 if (min_val < 0 and max_val >= 0) else norm_val_0_1
+        )
+
         # 3. Determine Dynamic Color & Arc Extent
-        start_angle_active = 240 # Same start as background for the active arc
-        extent_total_knob = -300 # Total travel for active arc
+        start_angle_active = 240  # Same start as background for the active arc
+        extent_total_knob = -300  # Total travel for active arc
 
         # Determine active_color based on norm_val, similar to Panner
-        # For the knob, the active color (arc and label) should always be the indicator_color unless at dead center 
-        if abs(norm_val) < 0.01 and (min_val <= 0 and max_val >= 0): # Check if center is 0
-            active_color = neutral_color # For the dead center tick mark, use neutral
-            val_extent = 0 # No active arc for dead center
+        # For the knob, the active color (arc and label) should always be the indicator_color unless at dead center
+        if abs(norm_val) < 0.01 and (
+            min_val <= 0 and max_val >= 0
+        ):  # Check if center is 0
+            active_color = neutral_color  # For the dead center tick mark, use neutral
+            val_extent = 0  # No active arc for dead center
             # The label should also be neutral when dead center and this is a center-0 knob
-            value_label.config(foreground=active_color) 
+            value_label.config(foreground=active_color)
         else:
-            active_color = indicator_color # Always use indicator_color for active knob state (arc and label)
-            val_extent = extent_total_knob * norm_val_0_1 # Use 0-1 norm_val for full range
-            value_label.config(foreground=active_color) # Apply indicator color to the label
+            active_color = indicator_color  # Always use indicator_color for active knob state (arc and label)
+            val_extent = (
+                extent_total_knob * norm_val_0_1
+            )  # Use 0-1 norm_val for full range
+            value_label.config(
+                foreground=active_color
+            )  # Apply indicator color to the label
 
-        canvas.create_arc(5, 5, width-5, height-5, start=start_angle_active, extent=val_extent, style=tk.ARC, outline=active_color, width=4)
+        canvas.create_arc(
+            5,
+            5,
+            width - 5,
+            height - 5,
+            start=start_angle_active,
+            extent=val_extent,
+            style=tk.ARC,
+            outline=active_color,
+            width=4,
+        )
 
         # 4. The Pointer Line
         angle_rad = math.radians(start_angle_bg + val_extent)
         px = cx + radius * math.cos(angle_rad)
-        py = cy - radius * math.sin(angle_rad) # Canvas Y is inverted
-        canvas.create_line(cx, cy, px, py, fill=indicator_color, width=2, capstyle=tk.ROUND)
-        
+        py = cy - radius * math.sin(angle_rad)  # Canvas Y is inverted
+        canvas.create_line(
+            cx, cy, px, py, fill=indicator_color, width=2, capstyle=tk.ROUND
+        )
+
         # Center circle
-        canvas.create_oval(cx-4, cy-4, cx+4, cy+4, fill=active_color, outline=active_color)
-        
+        canvas.create_oval(
+            cx - 4, cy - 4, cx + 4, cy + 4, fill=active_color, outline=active_color
+        )
+
         # Update the label's color
         # This line is now redundant as it's handled in the if/else block above
         # value_label.config(foreground=active_color)

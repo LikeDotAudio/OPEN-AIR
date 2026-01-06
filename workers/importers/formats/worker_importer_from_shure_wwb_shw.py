@@ -30,7 +30,7 @@ Current_Time = 120000
 Current_iteration = 1
 
 current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = (Current_Date * Current_Time * Current_iteration)
+current_version_hash = Current_Date * Current_Time * Current_iteration
 
 current_file = os.path.basename(__file__)
 app_constants = Config.get_instance()
@@ -59,112 +59,163 @@ def Marker_convert_WWB_SHW_File_report_to_csv(xml_file_path):
         xml.etree.ElementTree.ParseError: If the XML file is malformed.
         Exception: For other parsing or data extraction errors.
     """
-    
+
     current_function = inspect.currentframe().f_code.co_name
 
-    if app_constants.global_settings['debug_enabled']:
-        debug_logger(message=f"▶️ Starting SHW report conversion for '{os.path.basename(xml_file_path)}'.",  file=current_file, version=current_version, function=current_function, 
-                 **_get_log_args()
+    if app_constants.global_settings["debug_enabled"]:
+        debug_logger(
+            message=f"▶️ Starting SHW report conversion for '{os.path.basename(xml_file_path)}'.",
+            file=current_file,
+            version=current_version,
+            function=current_function,
+            **_get_log_args(),
         )
 
-    
     csv_data = []
 
     try:
-        with open(xml_file_path, 'r', encoding='utf-8') as f:
+        with open(xml_file_path, "r", encoding="utf-8") as f:
             tree = ET.parse(f)
         root = tree.getroot()
-        
-        if app_constants.global_settings['debug_enabled']:
-            debug_logger(message="✅ XML file parsed successfully.",  file=current_file, version=current_version, function=current_function, 
-                 **_get_log_args()
+
+        if app_constants.global_settings["debug_enabled"]:
+            debug_logger(
+                message="✅ XML file parsed successfully.",
+                file=current_file,
+                version=current_version,
+                function=current_function,
+                **_get_log_args(),
             )
 
         # Iterate through 'freq_entry' elements
-        for i, freq_entry in enumerate(root.findall('.//freq_entry')):
-            if i % 100 == 0: # Print progress every 100 entries
-                
-                if app_constants.global_settings['debug_enabled']:
-                    debug_logger(message=f"▶️ Processing SHW entry {i}...",  file=current_file, version=current_version, function=current_function, 
-                         **_get_log_args()
+        for i, freq_entry in enumerate(root.findall(".//freq_entry")):
+            if i % 100 == 0:  # Print progress every 100 entries
+
+                if app_constants.global_settings["debug_enabled"]:
+                    debug_logger(
+                        message=f"▶️ Processing SHW entry {i}...",
+                        file=current_file,
+                        version=current_version,
+                        function=current_function,
+                        **_get_log_args(),
                     )
 
             # Reverting ZONE and GROUP extraction to match SHOW to CSV.py prototype
-            zone_element = freq_entry.find('compat_key/zone')
+            zone_element = freq_entry.find("compat_key/zone")
             zone = zone_element.text if zone_element is not None else "N/A"
 
-            group = freq_entry.get('tag', "N/A") # Extract GROUP from the 'tag' attribute of freq_entry
-           
+            group = freq_entry.get(
+                "tag", "N/A"
+            )  # Extract GROUP from the 'tag' attribute of freq_entry
+
             # Extract DEVICE (manufacturer, model, band)
-            manufacturer = freq_entry.find('manufacturer').text if freq_entry.find('manufacturer') is not None else "N/A"
-            model = freq_entry.find('model').text if freq_entry.find('model') is not None else "N/A"
-            band_element = freq_entry.find('compat_key/band') 
+            manufacturer = (
+                freq_entry.find("manufacturer").text
+                if freq_entry.find("manufacturer") is not None
+                else "N/A"
+            )
+            model = (
+                freq_entry.find("model").text
+                if freq_entry.find("model") is not None
+                else "N/A"
+            )
+            band_element = freq_entry.find("compat_key/band")
             band = band_element.text if band_element is not None else "N/A"
             device = f"{manufacturer} - {model} - {band}"
 
             # Extract NAME
-            name_element = freq_entry.find('source_name')
+            name_element = freq_entry.find("source_name")
             name = name_element.text if name_element is not None else "N/A"
 
             # Extract FREQ from value. User states SHW files contain markers in KHZ.
-            freq_element = freq_entry.find('value')
+            freq_element = freq_entry.find("value")
             freq_MHz = "N/A"
             if freq_element is not None and freq_element.text is not None:
-                freq_str = freq_element.text 
-            
-                if app_constants.global_settings['debug_enabled']:
-                    debug_logger(message=f"🔍 DEBUG (SHW): Processing freq_str: '{freq_str}' for device '{name}'",  file=current_file, version=current_version, function=current_function, 
-                         **_get_log_args()
+                freq_str = freq_element.text
+
+                if app_constants.global_settings["debug_enabled"]:
+                    debug_logger(
+                        message=f"🔍 DEBUG (SHW): Processing freq_str: '{freq_str}' for device '{name}'",
+                        file=current_file,
+                        version=current_version,
+                        function=current_function,
+                        **_get_log_args(),
                     )
 
                 try:
                     # Convert kHz to MHz as per user's clarification
-                    freq_MHz = float(freq_str) / 1000.0 
-                    if app_constants.global_settings['debug_enabled']:
-                        debug_logger(message=f"↔️ SHW Freq conversion: '{freq_str}' kHz -> {freq_MHz} MHz",  file=current_file, version=current_version, function=current_function, 
-                             **_get_log_args()
+                    freq_MHz = float(freq_str) / 1000.0
+                    if app_constants.global_settings["debug_enabled"]:
+                        debug_logger(
+                            message=f"↔️ SHW Freq conversion: '{freq_str}' kHz -> {freq_MHz} MHz",
+                            file=current_file,
+                            version=current_version,
+                            function=current_function,
+                            **_get_log_args(),
                         )
                 except ValueError:
-    
-                    if app_constants.global_settings['debug_enabled']:
-                        debug_logger(message=f"❌ SHW Freq conversion error: '{freq_str}'",  file=current_file, version=current_version, function=current_function, 
-                             **_get_log_args()
+
+                    if app_constants.global_settings["debug_enabled"]:
+                        debug_logger(
+                            message=f"❌ SHW Freq conversion error: '{freq_str}'",
+                            file=current_file,
+                            version=current_version,
+                            function=current_function,
+                            **_get_log_args(),
                         )
                     freq_MHz = "Invalid Frequency"
 
-            csv_data.append({
-                "ZONE": zone,
-                "GROUP": group,
-                "DEVICE": device,
-                "NAME": name,
-                "FREQ_MHZ": freq_MHz, # Store in MHz
-                "PEAK": np.nan # NEW: Added Peak column
-            })
-    
-        if app_constants.global_settings['debug_enabled']:
-            debug_logger(message=f"✅ Finished SHW report conversion. Extracted {len(csv_data)} rows.",  file=current_file, version=current_version, function=current_function, 
-                 **_get_log_args()
+            csv_data.append(
+                {
+                    "ZONE": zone,
+                    "GROUP": group,
+                    "DEVICE": device,
+                    "NAME": name,
+                    "FREQ_MHZ": freq_MHz,  # Store in MHz
+                    "PEAK": np.nan,  # NEW: Added Peak column
+                }
+            )
+
+        if app_constants.global_settings["debug_enabled"]:
+            debug_logger(
+                message=f"✅ Finished SHW report conversion. Extracted {len(csv_data)} rows.",
+                file=current_file,
+                version=current_version,
+                function=current_function,
+                **_get_log_args(),
             )
         return headers, csv_data
 
     except FileNotFoundError:
-    
-        if app_constants.global_settings['debug_enabled']:
-            debug_logger(message=f"❌ The file '{xml_file_path}' was not found.",  file=current_file, version=current_version, function=current_function, 
-                 **_get_log_args()
+
+        if app_constants.global_settings["debug_enabled"]:
+            debug_logger(
+                message=f"❌ The file '{xml_file_path}' was not found.",
+                file=current_file,
+                version=current_version,
+                function=current_function,
+                **_get_log_args(),
             )
         raise FileNotFoundError(f"The file '{xml_file_path}' was not found.")
     except ET.ParseError as e:
-    
-        if app_constants.global_settings['debug_enabled']:
-            debug_logger(message=f"❌ Malformed XML (SHW) file '{xml_file_path}': {e}",  file=current_file, version=current_version, function=current_function, 
-                 **_get_log_args()
+
+        if app_constants.global_settings["debug_enabled"]:
+            debug_logger(
+                message=f"❌ Malformed XML (SHW) file '{xml_file_path}': {e}",
+                file=current_file,
+                version=current_version,
+                function=current_function,
+                **_get_log_args(),
             )
         raise ET.ParseError(f"🔴 ERROR parsing XML (SHW) file '{xml_file_path}': {e}")
     except Exception as e:
-    
-        if app_constants.global_settings['debug_enabled']:
-            debug_logger(message=f"❌ Error during SHW conversion data extraction: {e}",  file=current_file, version=current_version, function=current_function, 
-                 **_get_log_args()
+
+        if app_constants.global_settings["debug_enabled"]:
+            debug_logger(
+                message=f"❌ Error during SHW conversion data extraction: {e}",
+                file=current_file,
+                version=current_version,
+                function=current_function,
+                **_get_log_args(),
             )
         raise

@@ -11,6 +11,7 @@ import os
 
 # Removed: from managers.configini.config_reader import Config (This import caused the circular dependency)
 
+
 def _get_log_args():
     """
     Inspects the call stack to retrieve the filename, function name,
@@ -25,17 +26,21 @@ def _get_log_args():
         frame = inspect.currentframe().f_back
         if frame:
             # Safely get filename, defaulting to '?' if not available
-            filename = os.path.basename(frame.f_code.co_filename) if frame.f_code.co_filename else '?'
+            filename = (
+                os.path.basename(frame.f_code.co_filename)
+                if frame.f_code.co_filename
+                else "?"
+            )
             # Safely get function name, defaulting to '?' if not available
-            function_name = frame.f_code.co_name if frame.f_code.co_name else '?'
+            function_name = frame.f_code.co_name if frame.f_code.co_name else "?"
             # Safely get version from globals, defaulting if not available
-            version = frame.f_globals.get('current_version', 'Unknown_Ver') if frame.f_globals else 'Unknown_Ver'
-            
-            return {
-                "file": filename,
-                "version": version,
-                "function": function_name
-            }
+            version = (
+                frame.f_globals.get("current_version", "Unknown_Ver")
+                if frame.f_globals
+                else "Unknown_Ver"
+            )
+
+            return {"file": filename, "version": version, "function": function_name}
     except Exception as e:
         # In case of any error during frame inspection, return a safe error context.
         # Ideally, errors during logging setup should be handled robustly,
@@ -44,14 +49,11 @@ def _get_log_args():
             "file": "unknown_file",
             "version": "unknown_ver",
             "function": "unknown_func",
-            "error": str(e)
+            "error": str(e),
         }
     # Fallback return if no frame is found or other unexpected issue occurs
-    return {
-        "file": "unknown",
-        "version": "unknown",
-        "function": "unknown"
-    }
+    return {"file": "unknown", "version": "unknown", "function": "unknown"}
+
 
 # The 'debug_log' function present in the original log_utils.py also imported
 # Config and used app_constants. To prevent further circular issues and

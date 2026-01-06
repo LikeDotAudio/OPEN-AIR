@@ -14,25 +14,23 @@ from .manager_logic_mqtt_listen import VisaMqttListener
 from .manager_visa_reset import VisaResetManager
 from .manager_visa_reboot import VisaRebootManager
 
+
 class VisaManagerOrchestrator:
     def __init__(self, mqtt_connection_manager, subscriber_router):
-        
+
         # Instantiate the low-level and publishing managers first
         self.visa_proxy = VisaProxy(
-            mqtt_controller=mqtt_connection_manager,
-            subscriber_router=subscriber_router
+            mqtt_controller=mqtt_connection_manager, subscriber_router=subscriber_router
         )
         self.gui_publisher = VisaGuiPublisher(mqtt_controller=mqtt_connection_manager)
 
         # Instantiate the logic workers
         self.device_searcher = VisaDeviceSearcher()
         self.connector = VisaConnector(
-            visa_proxy=self.visa_proxy,
-            gui_publisher=self.gui_publisher
+            visa_proxy=self.visa_proxy, gui_publisher=self.gui_publisher
         )
         self.disconnector = VisaDisconnector(
-            visa_proxy=self.visa_proxy,
-            gui_publisher=self.gui_publisher
+            visa_proxy=self.visa_proxy, gui_publisher=self.gui_publisher
         )
 
         # Instantiate the main listener and inject dependencies
@@ -41,19 +39,19 @@ class VisaManagerOrchestrator:
             searcher=self.device_searcher,
             connector=self.connector,
             disconnector=self.disconnector,
-            gui_publisher=self.gui_publisher
+            gui_publisher=self.gui_publisher,
         )
 
         # Instantiate the reset/reboot managers
         self.reset_manager = VisaResetManager(
             mqtt_connection_manager=mqtt_connection_manager,
             subscriber_router=subscriber_router,
-            visa_proxy=self.visa_proxy
+            visa_proxy=self.visa_proxy,
         )
         self.reboot_manager = VisaRebootManager(
             mqtt_connection_manager=mqtt_connection_manager,
             subscriber_router=subscriber_router,
-            visa_proxy=self.visa_proxy
+            visa_proxy=self.visa_proxy,
         )
 
     def get_managers(self):
@@ -65,5 +63,5 @@ class VisaManagerOrchestrator:
             "visa_disconnector": self.disconnector,
             "visa_mqtt_listener": self.mqtt_listener,
             "visa_reset_manager": self.reset_manager,
-            "visa_reboot_manager": self.reboot_manager
+            "visa_reboot_manager": self.reboot_manager,
         }

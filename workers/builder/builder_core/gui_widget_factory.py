@@ -32,15 +32,15 @@ class GuiWidgetFactoryMixin:
             "_TrapezoidButton": self._create_trapezoid_button,
             "_TrapezoidButtonToggler": self._create_trapezoid_button_toggler,
             "_HeaderStatusLight": self._create_header_status_light,
-            
             # Complex Adapters (Methods inherited from Adapter Mixins)
             "plot_widget": self._create_plot_widget,
             "_HorizontalMeterWithText": self._create_horizontal_meter,
-            "_VerticalMeter": self._create_vertical_meter
+            "_VerticalMeter": self._create_vertical_meter,
         }
 
     def _create_header_status_light(self, parent_widget, config_data, **kwargs):
         # label = config_data.get("label_active", "") # Label is not directly used here
         self._build_header_status_light(parent_widget, config_data)
-        return self.header_frame # Assuming _build_header_status_light creates and sets self.header_frame
-
+        return (
+            self.header_frame
+        )  # Assuming _build_header_status_light creates and sets self.header_frame

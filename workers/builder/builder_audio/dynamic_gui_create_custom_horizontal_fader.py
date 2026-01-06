@@ -215,18 +215,18 @@ class CustomHorizontalFaderCreatorMixin:
         canvas.bind("<Alt-Button-1>", frame._open_manual_entry)
         canvas.bind("<Configure>", lambda e: on_fader_value_change())
 
-        if path:
-            widget_id = path
-            self.state_mirror_engine.register_widget(
-                widget_id, fader_value_var, base_mqtt_topic_from_path, config
-            )
+        # if path:
+        #     widget_id = path
+        #     self.state_mirror_engine.register_widget(
+        #         widget_id, fader_value_var, base_mqtt_topic_from_path, config
+        #     )
 
-            # Subscribe to the topic for incoming messages
-            topic = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, widget_id)
-            self.subscriber_router.subscribe_to_topic(
-                topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui
-            )
-            state_mirror_engine.initialize_widget_state(path)
+        #     # Subscribe to the topic for incoming messages
+        #     topic = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, widget_id)
+        #     self.subscriber_router.subscribe_to_topic(
+        #         topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui
+        #     )
+        #     state_mirror_engine.initialize_widget_state(path)
 
         return frame
 

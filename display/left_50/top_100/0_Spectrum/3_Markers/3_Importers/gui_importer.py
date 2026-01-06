@@ -13,6 +13,7 @@ import tkinter as tk
 from tkinter import filedialog, ttk
 import inspect
 import pathlib
+from workers.setup.worker_project_paths import GLOBAL_PROJECT_ROOT # Import GLOBAL_PROJECT_ROOT
 
 # --- Graceful Dependency Importing ---
 try:
@@ -84,12 +85,8 @@ app_constants = Config.get_instance()  # Get the singleton instance
 current_version = "20260104.200500.3"
 current_version_hash = 20260104 * 200500 * 3
 current_file_path = pathlib.Path(__file__).resolve()
-# Robust root detection
-try:
-    project_root = next(p for p in current_file_path.parents if p.name == "OPEN-AIR")
-except StopIteration:
-    project_root = current_file_path.parents[5]
-current_file = str(current_file_path.relative_to(project_root)).replace("\\", "/")
+# Use GLOBAL_PROJECT_ROOT for consistency
+current_file = str(current_file_path.relative_to(GLOBAL_PROJECT_ROOT)).replace("\\", "/")
 
 
 # --- Constants ---

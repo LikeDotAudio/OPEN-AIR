@@ -276,36 +276,36 @@ class KnobCreatorMixin:
             canvas.bind("<Alt-Button-1>", frame._open_manual_entry)
 
             # Register the StringVar with the StateMirrorEngine for MQTT updates
-            if path:
-                widget_id = path
+            # if path:
+            #     widget_id = path
 
-                # Create a serializable version of the config
-                serializable_config = config.copy()
-                serializable_config.pop("state_mirror_engine", None)
-                serializable_config.pop("subscriber_router", None)
+            #     # Create a serializable version of the config
+            #     serializable_config = config.copy()
+            #     serializable_config.pop("state_mirror_engine", None)
+            #     serializable_config.pop("subscriber_router", None)
 
-                self.state_mirror_engine.register_widget(
-                    widget_id,
-                    knob_value_var,
-                    base_mqtt_topic_from_path,
-                    serializable_config,
-                )
+            #     self.state_mirror_engine.register_widget(
+            #         widget_id,
+            #         knob_value_var,
+            #         base_mqtt_topic_from_path,
+            #         serializable_config,
+            #     )
 
-                # Subscribe to the topic for incoming messages
-                from workers.mqtt.mqtt_topic_utils import get_topic
+            #     # Subscribe to the topic for incoming messages
+            #     from workers.mqtt.mqtt_topic_utils import get_topic
 
-                topic = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, widget_id)
-                self.subscriber_router.subscribe_to_topic(
-                    topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui
-                )
+            #     topic = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, widget_id)
+            #     self.subscriber_router.subscribe_to_topic(
+            #         topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui
+            #     )
 
-                if app_constants.global_settings["debug_enabled"]:
-                    debug_logger(
-                        message=f"🔬 Widget '{label}' ({path}) registered with StateMirrorEngine (DoubleVar: {knob_value_var.get()}).",
-                        **_get_log_args(),
-                    )
-                # Initialize state from cache or broadcast
-                state_mirror_engine.initialize_widget_state(path)
+            #     if app_constants.global_settings["debug_enabled"]:
+            #         debug_logger(
+            #             message=f"🔬 Widget '{label}' ({path}) registered with StateMirrorEngine (DoubleVar: {knob_value_var.get()}).",
+            #             **_get_log_args(),
+            #         )
+            #     # Initialize state from cache or broadcast
+            #     state_mirror_engine.initialize_widget_state(path)
 
             if app_constants.global_settings["debug_enabled"]:
                 debug_logger(

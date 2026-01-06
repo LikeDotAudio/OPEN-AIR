@@ -1,19 +1,19 @@
-import os
 import inspect
 import datetime
 import tkinter as tk
 from tkinter import ttk
-import pathlib
+import pathlib # Keep pathlib for current_file_path usage
 from tkinter import filedialog
 from collections import defaultdict
 from managers.configini.config_reader import Config
+from workers.setup.worker_project_paths import GLOBAL_PROJECT_ROOT # Import GLOBAL_PROJECT_ROOT
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
 # --- Global Scope Variables ---
 current_file_path = pathlib.Path(__file__).resolve()
-project_root = current_file_path.parents[5]
-current_file = str(current_file_path.relative_to(project_root)).replace("\\", "/")
+# Use GLOBAL_PROJECT_ROOT for consistency
+current_file = str(current_file_path.relative_to(GLOBAL_PROJECT_ROOT)).replace("\\", "/")
 Current_Date = 20251226
 Current_Time = 120000
 Current_iteration = 44

@@ -349,9 +349,7 @@ class CustomHorizontalFaderCreatorMixin:
                 else 0
             )
             if 0.0 <= linear_tick_norm <= 1.0:
-                display_tick_norm = linear_tick_norm ** (
-                    1.0 / frame_instance.log_exponent
-                )
+                display_tick_norm = linear_tick_norm
                 tick_x_pos = (width - 20) * display_tick_norm + 10
                 canvas.create_line(
                     tick_x_pos,

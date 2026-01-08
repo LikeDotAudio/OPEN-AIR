@@ -1,4 +1,4 @@
-# workers/logger/logger.py
+# logger/logger.py
 #
 # This file is the main orchestrator for the logging system, handling buffering and delegation.
 #
@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260108.120500.1
+# Version 20250821.200641.1
 
 import os
 import time
@@ -41,6 +41,13 @@ _config_instance_cache = None
 _log_file_timestamp = None
 
 
+# Retrieves the application's global configuration instance.
+# This function uses a cached instance to avoid repeated lookups. If the configuration
+# is not yet initialized, it provides a dummy configuration to prevent errors during early startup.
+# Inputs:
+#     None.
+# Outputs:
+#     Config: The application's configuration instance.
 def _get_config_instance():
     """
     Retrieves the global configuration instance, using a cache to avoid repeated lookups.
@@ -102,6 +109,14 @@ def _get_config_instance():
     return _config_instance_cache
 
 
+# Cleans and formats file and function names for consistent log output.
+# This utility function standardizes the context string used in log messages by
+# removing file extensions and replacing underscores with spaces.
+# Inputs:
+#     c_file (str): The file name.
+#     c_func (str): The function name.
+# Outputs:
+#     str: A cleaned and formatted string for logging.
 def _clean_context_string(c_file: str, c_func: str) -> str:
     """
     Cleans up file and function names for logging.
@@ -127,6 +142,13 @@ def _clean_context_string(c_file: str, c_func: str) -> str:
     return f"{combined} "
 
 
+# Sets the directory for log files and flushes any buffered messages.
+# This function is called during application startup to initialize the logging directory.
+# It also ensures that any messages logged before this point are written to the newly configured log files.
+# Inputs:
+#     directory (str): The path to the log directory.
+# Outputs:
+#     None.
 def set_log_directory(directory: str):
     """
     Sets the global log directory and flushes any buffered messages.
@@ -176,6 +198,15 @@ def set_log_directory(directory: str):
                 write_log_to_error_file(timestamp, level, message, context_data)
 
 
+# Logs a debug message with contextual information.
+# This is the main logging function. It routes messages to the terminal and/or log files
+# based on the application's configuration. If called before the log directory is set,
+# it buffers messages for later processing.
+# Inputs:
+#     message (str): The log message to be written.
+#     **kwargs: Additional context for the log message, such as file, function, and version.
+# Outputs:
+#     None.
 def debug_logger(message: str, **kwargs):
     """
     Logs a debug message, buffering it if the log directory is not yet set.
@@ -249,6 +280,13 @@ def debug_logger(message: str, **kwargs):
             write_log_to_error_file(current_ts, level, message, context_data_for_log)
 
 
+# Logs a message exclusively to the system console or terminal.
+# This function is used for messages that should always be visible to the user running
+# the application, regardless of the file logging settings.
+# Inputs:
+#     message (str): The message to be logged to the console.
+# Outputs:
+#     None.
 def console_log(message: str):
     """
     Logs a message to the console.
@@ -280,7 +318,13 @@ try:
     # Attempt to import the utility function for automatic context gathering
     from workers.logger.log_utils import _get_log_args
 except ImportError:
-    # Define a fallback if log_utils is not found or not importable
+    # Provides a fallback mechanism to get logging arguments if the primary utility is not available.
+    # This ensures that the logger can still function with some level of context, even if the
+    # `log_utils` module cannot be imported.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     dict: A dictionary containing logging arguments like file and version.
     def _get_log_args():
         # This fallback might not capture as much context as the real one.
         # It tries to mimic the original structure by inspecting the call stack.

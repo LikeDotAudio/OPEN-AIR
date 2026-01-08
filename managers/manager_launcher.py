@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260108.120300.1
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -35,6 +35,18 @@ from workers.monitoring.fleet_status_monitor import (
 )  # Import FleetStatusMonitor
 
 
+# Initializes and launches all core application managers.
+# This function orchestrates the startup sequence for essential background services,
+# including MQTT communication, state management, VISA device discovery, and command translation.
+# It sets up the necessary inter-manager connections and triggers initial operations like a VISA scan.
+# Inputs:
+#     app: The main application object.
+#     splash (SplashScreen): The splash screen object for displaying startup status.
+#     root (tk.Tk): The root Tkinter window.
+#     state_cache_manager (StateCacheManager): The manager for caching application state.
+#     mqtt_connection_manager (MqttConnectionManager): The manager for handling MQTT connections.
+# Outputs:
+#     dict: A dictionary containing all the initialized manager instances, or None if an error occurs.
 def launch_managers(app, splash, root, state_cache_manager, mqtt_connection_manager):
     """
     Initializes and launches all the application's managers.

@@ -1,6 +1,18 @@
-# workers/builder/builder_audio/dynamic_gui_create_custom_horizontal_fader.py
+# builder_audio/dynamic_gui_create_custom_horizontal_fader.py
 #
 # A horizontal fader widget that adapts to the system theme.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -16,6 +28,19 @@ from workers.mqtt.mqtt_topic_utils import get_topic
 
 
 class CustomHorizontalFaderFrame(tk.Frame):
+    # Initializes the CustomHorizontalFaderFrame widget.
+    # This constructor sets up the horizontal fader with its visual properties and behavior
+    # based on the provided configuration, including theme colors, value ranges, and tick marks.
+    # Inputs:
+    #     master: The parent tkinter widget.
+    #     variable (tk.DoubleVar): The tkinter variable to bind to the fader's value.
+    #     config (dict): Configuration settings for the fader.
+    #     path (str): The widget's unique identifier path for state management.
+    #     state_mirror_engine: The engine for synchronizing state with the MQTT broker.
+    #     command (function): The callback for when the fader's value changes.
+    #     tick_interval (int, optional): The interval for displaying tick marks.
+    # Outputs:
+    #     None.
     def __init__(
         self,
         master,
@@ -70,6 +95,12 @@ class CustomHorizontalFaderFrame(tk.Frame):
         )
         self.temp_entry = None  # Initialize temp_entry
 
+    # Sets the fader's value to its predefined reference point.
+    # This provides a quick way to reset the fader to a default or common value.
+    # Inputs:
+    #     event: The tkinter event object that triggered the call.
+    # Outputs:
+    #     None.
     def _jump_to_reff_point(self, event):
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(
@@ -81,6 +112,12 @@ class CustomHorizontalFaderFrame(tk.Frame):
         if self.state_mirror_engine:
             self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
 
+    # Opens a temporary entry widget for manual value input.
+    # This allows for precise value entry, bypassing direct mouse interaction.
+    # Inputs:
+    #     event: The tkinter event object, used to position the entry widget.
+    # Outputs:
+    #     None.
     def _open_manual_entry(self, event):
         if self.temp_entry and self.temp_entry.winfo_exists():
             return
@@ -95,6 +132,12 @@ class CustomHorizontalFaderFrame(tk.Frame):
         self.temp_entry.bind("<FocusOut>", self._submit_manual_entry)
         self.temp_entry.bind("<Escape>", self._destroy_manual_entry)
 
+    # Submits the value from the manual entry widget.
+    # This validates the entered value and, if valid, updates the fader's state.
+    # Inputs:
+    #     event: The tkinter event object.
+    # Outputs:
+    #     None.
     def _submit_manual_entry(self, event):
         raw_value = self.temp_entry.get()
         try:
@@ -117,6 +160,11 @@ class CustomHorizontalFaderFrame(tk.Frame):
                 )
         self._destroy_manual_entry(event)
 
+    # Destroys the temporary manual entry widget.
+    # Inputs:
+    #     event: The tkinter event object.
+    # Outputs:
+    #     None.
     def _destroy_manual_entry(self, event):
         if self.temp_entry and self.temp_entry.winfo_exists():
             self.temp_entry.destroy()
@@ -124,6 +172,15 @@ class CustomHorizontalFaderFrame(tk.Frame):
 
 
 class CustomHorizontalFaderCreatorMixin:
+    # Creates a custom horizontal fader widget.
+    # This method handles the creation and configuration of the horizontal fader,
+    # including its tkinter variable, callbacks, and registration with the state engine.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): The configuration for the fader.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     CustomHorizontalFaderFrame: The created fader frame widget.
     def _create_custom_horizontal_fader(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
@@ -230,6 +287,15 @@ class CustomHorizontalFaderCreatorMixin:
 
         return frame
 
+    # Draws a rectangle with rounded corners on a canvas.
+    # This is a utility function for creating custom-shaped UI elements.
+    # Inputs:
+    #     canvas: The tkinter canvas to draw on.
+    #     x1, y1, x2, y2 (int): The coordinates of the bounding box.
+    #     radius (int): The corner radius.
+    #     **kwargs: Additional keyword arguments for the canvas item.
+    # Outputs:
+    #     int: The ID of the created canvas item.
     def _draw_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius, **kwargs):
         points = [
             x1 + radius,
@@ -275,6 +341,16 @@ class CustomHorizontalFaderCreatorMixin:
         ]
         return canvas.create_polygon(points, **kwargs, smooth=True)
 
+    # Draws the custom horizontal fader widget on its canvas.
+    # This method renders all visual elements of the fader, including the track, handle,
+    # and tick marks, based on its current value and configuration.
+    # Inputs:
+    #     frame_instance (CustomHorizontalFaderFrame): The fader frame instance.
+    #     canvas: The tkinter canvas to draw on.
+    #     width, height (int): The dimensions of the canvas.
+    #     value (float): The current value of the fader.
+    # Outputs:
+    #     None.
     def _draw_horizontal_fader(self, frame_instance, canvas, width, height, value):
         canvas.delete("all")
         cy = height / 2

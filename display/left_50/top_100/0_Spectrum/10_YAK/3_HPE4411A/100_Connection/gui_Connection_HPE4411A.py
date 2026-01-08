@@ -1,4 +1,4 @@
-# display/left_50/top_100/0_Spectrum/10_YAK/3_HPE4411A/100_Connection/gui_Connection_HPE4411A.py
+# 100_Connection/gui_Connection_HPE4411A.py
 #
 # This file provides a generic GUI wrapper for instrument control, loading its interface from a JSON configuration.
 #
@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260108.122800.1
+# Version 20250821.200641.1
 
 import os
 import pathlib
@@ -48,18 +48,42 @@ class GenericInstrumentGui(tk.ttk.Frame):
     Now safely handles arguments from ModuleLoader and fails gracefully.
     """
 
+    # Initializes the generic instrument GUI frame.
+    # This function sets up the main frame for a dynamically generated GUI based on a
+    # JSON configuration. It establishes the necessary links to core application
+    # services like state management and data subscription routing. The function is
+    # designed to be robust, with fallbacks for configuration paths.
+    # Inputs:
+    #     parent (tk.Widget): The parent tkinter widget that will contain this frame.
+    #     json_path (str, optional): The file path to the JSON file that defines the
+    #                                GUI layout and widgets.
+    #     config (dict, optional): A dictionary containing shared application resources.
+    #     **kwargs: Additional keyword arguments for the ttk.Frame constructor.
+    # Outputs:
+    #     None.
     def __init__(self, parent, json_path=None, config=None, **kwargs):
         """
-        Initializes the GenericInstrumentGui.
+        Initializes the generic instrument GUI frame.
 
-        Args:
-            parent (tk.Widget): The parent widget.
-            json_path (str, optional): Path to the JSON configuration file for this GUI. Defaults to None.
-            config (dict, optional): A dictionary containing configuration data, including state_mirror_engine and subscriber_router. Defaults to None.
-            **kwargs: Arbitrary keyword arguments to be passed to the ttk.Frame constructor.
+        This function sets up the main frame for a dynamically generated GUI based on a
+        JSON configuration. It establishes the necessary links to core application
+        services like state management and data subscription routing. The function is
+        designed to be robust, with fallbacks for configuration paths.
 
-        Returns:
-            None
+        Inputs:
+            parent (tk.Widget): The parent tkinter widget that will contain this frame.
+            json_path (str, optional): The file path to the JSON file that defines the
+                                       GUI layout and widgets. If not provided, it defaults
+                                       to a JSON file with the same name as this Python file.
+            config (dict, optional): A dictionary containing shared application resources,
+                                     primarily the 'state_mirror_engine' for managing
+                                     application state and the 'subscriber_router' for
+                                     handling data subscriptions.
+            **kwargs: Additional keyword arguments that are passed directly to the
+                      underlying ttk.Frame constructor.
+
+        Outputs:
+            None: This is a constructor and does not have a return value.
         """
         # 1. Initialize Parent Frame (Cleanly!)
         super().__init__(parent, **kwargs)
@@ -83,14 +107,27 @@ class GenericInstrumentGui(tk.ttk.Frame):
         # 4. Initialize UI
         self._init_ui()
 
+    # Initializes the user interface elements for the frame.
+    # This function sets up the initial state of the GUI, displaying a temporary
+    # status message and scheduling the dynamic GUI construction to run after a short delay.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _init_ui(self):
         """
-        Initializes the user interface by displaying a status label and scheduling the dynamic GUI construction.
-        
-        Args:
+        Initializes the user interface elements for the frame.
+
+        This function sets up the initial state of the GUI. It displays a temporary
+        status message to inform the user that the module is loading. To prevent the
+        main application from freezing, it schedules the more intensive task of
+        building the full dynamic GUI to run shortly after the initial frame is
+        rendered.
+
+        Inputs:
             None
-            
-        Returns:
+
+        Outputs:
             None
         """
         current_function_name = inspect.currentframe().f_code.co_name
@@ -105,8 +142,7 @@ class GenericInstrumentGui(tk.ttk.Frame):
         # Make it BIG and clear so we know it's trying to do something
         self.status_label = ttk.Label(
             self,
-            text=f"⏳ Initializing {module_name}...
-Stand by for temporal insertion...",
+            text=f"⏳ Initializing {module_name}...\nStand by for temporal insertion...",
             foreground="orange",
             justify="center",
             font=("Consolas", 10, "italic"),
@@ -127,15 +163,28 @@ Stand by for temporal insertion...",
 
         self.after(50, self._construct_dynamic_gui)
 
+    # Constructs the dynamic GUI from the JSON configuration.
+    # This function reads the JSON file and uses DynamicGuiBuilder to create the UI.
+    # It includes error handling for missing files or builder failures.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _construct_dynamic_gui(self):
         """
-        Constructs the dynamic GUI using the DynamicGuiBuilder based on the loaded JSON configuration.
-        Handles file not found errors and other exceptions gracefully.
-        
-        Args:
+        Constructs the dynamic GUI from the JSON configuration.
+
+        This function is responsible for the main logic of the GUI creation. It reads
+        the specified JSON file, which contains the blueprint for the interface, and
+        uses the DynamicGuiBuilder to instantiate and arrange all the widgets. It
+        includes robust error handling to catch issues like a missing JSON file or
+        errors during the building process, displaying a clear error message in the
+        GUI if a failure occurs.
+
+        Inputs:
             None
-            
-        Returns:
+
+        Outputs:
             None
         """
         try:
@@ -206,15 +255,29 @@ Stand by for temporal insertion...",
                     **_get_log_args(),
                 )
 
+    # Handles the event when the tab containing this frame is selected.
+    # This is a callback for tab selection and is a placeholder for future logic.
+    # Inputs:
+    #     *args: Variable positional arguments from the event.
+    #     **kwargs: Variable keyword arguments from the event.
+    # Outputs:
+    #     None.
     def _on_tab_selected(self, *args, **kwargs):
         """
-        Callback method invoked when this GUI's tab is selected.
+        Handles the event when the tab containing this frame is selected.
 
-        Args:
-            *args: Variable length argument list.
-            **kwargs: Arbitrary keyword arguments.
-            
-        Returns:
+        This function is a callback that gets triggered when the user clicks on the
+        tab for this specific GUI module. It is intended to be a placeholder for any
+        logic that needs to run upon tab selection, such as refreshing data or
+        updating the UI. Currently, it only logs a debug message.
+
+        Inputs:
+            *args: Accepts a variable number of positional arguments, which are
+                   passed by the event trigger.
+            **kwargs: Accepts a variable number of keyword arguments, which are
+                      passed by the event trigger.
+
+        Outputs:
             None
         """
         current_function_name = inspect.currentframe().f_code.co_name

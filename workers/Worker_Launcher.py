@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260108.120100.1
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -43,6 +43,14 @@ class WorkerLauncher:
     Manages the initialization and launching of all application workers.
     """
 
+    # Initializes the WorkerLauncher.
+    # This constructor sets up the launcher with references to the splash screen
+    # for displaying progress and a function for printing messages to the console.
+    # Inputs:
+    #     splash_screen (SplashScreen): The splash screen object to display progress.
+    #     console_print_func (function): A function to print messages to the GUI console.
+    # Outputs:
+    #     None.
     def __init__(self, splash_screen, console_print_func):
         """
         Initializes the WorkerLauncher.
@@ -59,6 +67,13 @@ class WorkerLauncher:
         self._print_to_gui_console = console_print_func
         self.current_class_name = self.__class__.__name__
 
+    # Initializes and starts all registered worker processes.
+    # This method is the main entry point for running the background tasks of the application.
+    # It logs the initialization process and handles any exceptions that occur during worker startup.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     bool: True if all workers were launched successfully, False otherwise.
     def launch_all_workers(self):
         """
         Initializes and starts all registered worker processes.

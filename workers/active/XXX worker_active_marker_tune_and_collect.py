@@ -1,13 +1,5 @@
-# workers/worker_active_marker_tune_and_collect.py
-
-Current_Date = 20251129  ##Update on the day the change was made
-Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 1  ## a running version number - incriments by one each time
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
+# active/XXX worker_active_marker_tune_and_collect.py
+#
 # This worker listens for a start command and then continuously loops through all
 # markers from the repository, gets their peak values from the instrument, and
 # updates the repository with the new peak data.
@@ -22,7 +14,7 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -90,8 +82,17 @@ class MarkerGoGetterWorker:
     A worker that, when started, continuously fetches peak values for all markers.
     """
 
+    # Initializes the MarkerGoGetterWorker.
+    # This sets up the worker's initial state, including its MQTT utility, threading events for
+    # controlling the processing loop, and data structures for storing marker information.
+    # Inputs:
+    #     mqtt_util (MqttControllerUtility): The MQTT utility for publishing and subscribing.
+    # Outputs:
+    #     None.
     def __init__(self, mqtt_util: MqttControllerUtility):
-        # Initializes the worker, sets up state variables, and subscribes to topics.
+        """
+        Initializes the worker, sets up state variables, and subscribes to topics.
+        """
         current_function_name = inspect.currentframe().f_code.co_name
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(
@@ -119,8 +120,17 @@ class MarkerGoGetterWorker:
 
         self._setup_subscriptions()
 
+    # Sets up all necessary MQTT subscriptions for the worker.
+    # This method subscribes to topics for starting and stopping the worker, as well as topics
+    # that provide data from the marker repository and instrument.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _setup_subscriptions(self):
-        # Subscribes to all topics required for operation.
+        """
+        Subscribes to all topics required for operation.
+        """
         self.mqtt_util.add_subscriber(TOPIC_START_STOP, self._handle_start_stop)
         self.mqtt_util.add_subscriber(TOPIC_TOTAL_DEVICES, self._on_marker_data_update)
         self.mqtt_util.add_subscriber(TOPIC_MIN_FREQ, self._on_marker_data_update)
@@ -140,6 +150,14 @@ class MarkerGoGetterWorker:
             message="✅ Go-Getter is now listening for commands and marker data."
         )
 
+    # Callback function triggered by peak value updates from the instrument.
+    # This method sets a threading event to signal that new peak data has been received,
+    # allowing the main processing loop to proceed.
+    # Inputs:
+    #     topic (str): The MQTT topic the message was received on.
+    #     payload (str): The message payload.
+    # Outputs:
+    #     None.
     def _on_peak_update_for_event_set(self, topic, payload):
         """
         A placeholder method to satisfy the subscription. In a non-mock setup,
@@ -147,8 +165,18 @@ class MarkerGoGetterWorker:
         """
         self.peaks_received_event.set()
 
+    # Updates the worker's internal state based on data from the marker repository.
+    # This callback processes incoming MQTT messages containing information about markers,
+    # such as the total number of devices and their frequencies.
+    # Inputs:
+    #     topic (str): The MQTT topic the message was received on.
+    #     payload (str): The message payload.
+    # Outputs:
+    #     None.
     def _on_marker_data_update(self, topic, payload):
-        # Callback to update internal state from the markers repository.
+        """
+        Callback to update internal state from the markers repository.
+        """
         try:
             # Safely attempt to extract value from a potential JSON payload
             try:
@@ -174,8 +202,18 @@ class MarkerGoGetterWorker:
                 message=f"🟡 Warning: Could not process marker data update from topic '{topic}': {e}"
             )
 
+    # Handles start and stop commands for the worker.
+    # This method starts or stops the main processing loop in a separate thread based on
+    # the received command.
+    # Inputs:
+    #     topic (str): The MQTT topic the command was received on.
+    #     payload (str): The command payload ('true' for start, 'false' for stop).
+    # Outputs:
+    #     None.
     def _handle_start_stop(self, topic, payload):
-        # Starts or stops the main processing loop in a separate thread.
+        """
+        Starts or stops the main processing loop in a separate thread.
+        """
         try:
             # Safely extract boolean value
             try:
@@ -211,6 +249,13 @@ class MarkerGoGetterWorker:
         except (orjson.JSONDecodeError, ValueError, TypeError) as e:
             debug_logger(message=f"❌ Error processing start/stop command: {e}")
 
+    # Places a batch of up to 6 markers on the instrument.
+    # This function publishes the frequencies of the markers in the batch to the appropriate
+    # MQTT topics and then triggers the command to place them on the instrument.
+    # Inputs:
+    #     batch_ids (list): A list of device IDs for the markers to be placed.
+    # Outputs:
+    #     None.
     def _place_markers_for_batch(self, batch_ids):
         """
         MODULAR FUNCTION: Sets the frequency of up to 6 markers and triggers the
@@ -252,6 +297,12 @@ class MarkerGoGetterWorker:
         )
         time.sleep(0.3)  # Allow 4 seconds for the internal exception/crash to resolve
 
+    # Queries the instrument for the peak values of a batch of markers.
+    # This function triggers the command to read the marker peak values from the instrument.
+    # Inputs:
+    #     batch_ids (list): A list of device IDs for the markers being queried.
+    # Outputs:
+    #     None.
     def _query_markers_for_batch(self, batch_ids):
         """
         NEW FUNCTION: Triggers the NAB query to read the marker peak values.
@@ -273,6 +324,14 @@ class MarkerGoGetterWorker:
             message=f"✅ Peak retrieval process initiated for batch: {', '.join(batch_ids)}."
         )
 
+    # Sets the instrument's frequency span to encompass all markers.
+    # This method calculates the required start and stop frequencies, including a buffer,
+    # and sets the instrument accordingly. It only performs the update if the frequency
+    # range has changed or on the first run.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _set_instrument_frequency_span(self):
         """
         Sets the instrument to the full frequency span of all markers,
@@ -321,8 +380,17 @@ class MarkerGoGetterWorker:
         self.first_run = False
         debug_logger(message="✅ Instrument span set successfully.")
 
+    # The main processing loop for the worker.
+    # This loop continuously sets the instrument's frequency span and then iterates through
+    # all markers in batches, placing them on the instrument and querying their peak values.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _processing_loop(self):
-        # The main logic loop that runs in a thread.
+        """
+        The main logic loop that runs in a thread.
+        """
         debug_logger(message="✅ Peak Hunter loop started.")
 
         # --- Loop Control: Check the stop event first ---
@@ -364,6 +432,14 @@ class MarkerGoGetterWorker:
 # --- TUNING HELPER FUNCTIONS (Moved from worker_marker_tune_to_marker.py) ---
 
 
+# Tunes the instrument to a marker's center frequency.
+# This function publishes MQTT messages to set the instrument's center frequency and span
+# based on a selected marker's data, then triggers the command to apply the settings.
+# Inputs:
+#     mqtt_controller (MqttControllerUtility): The MQTT utility for publishing messages.
+#     marker_data (dict): A dictionary containing the marker's data, including 'FREQ_MHZ'.
+# Outputs:
+#     None.
 def Push_Marker_to_Center_Freq(mqtt_controller, marker_data):
     """
     Publishes MQTT messages to set the instrument's center frequency and span
@@ -467,6 +543,15 @@ def Push_Marker_to_Center_Freq(mqtt_controller, marker_data):
         debug_logger(message=f"❌ An error occurred while tuning to the marker: {e}")
 
 
+# Tunes the instrument to a frequency range centered around a marker.
+# This function calculates start and stop frequencies based on a marker's frequency and a
+# specified buffer, then publishes these values and triggers the command to apply them.
+# Inputs:
+#     mqtt_controller (MqttControllerUtility): The MQTT utility for publishing messages.
+#     marker_data (dict): A dictionary containing the marker's data, including 'FREQ_MHZ'.
+#     buffer (float, optional): The frequency buffer in Hz to apply around the center frequency.
+# Outputs:
+#     None.
 def Push_Marker_to_Start_Stop_Freq(mqtt_controller, marker_data, buffer=1e6):
     """
     Calculates start and stop frequencies based on a marker frequency and a buffer,

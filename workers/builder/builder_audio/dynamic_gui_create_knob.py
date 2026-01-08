@@ -1,7 +1,18 @@
-# workers/builder/dynamic_gui_create_knob.py
+# builder_audio/dynamic_gui_create_knob.py
 #
 # A Tkinter Canvas-based Rotary Knob that respects the global theme.
-# Version 20251223.214500.ThemeFix
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -20,6 +31,19 @@ class CustomKnobFrame(ttk.Frame):
     A custom Tkinter Frame that hosts the knob and provides the "Flux Control" methods.
     """
 
+    # Initializes the CustomKnobFrame.
+    # This sets up the frame that contains the knob widget and binds it to a tkinter
+    # variable and state management engine.
+    # Inputs:
+    #     parent: The parent tkinter widget.
+    #     variable (tk.DoubleVar): The variable to store the knob's value.
+    #     min_val, max_val (float): The minimum and maximum values of the knob.
+    #     reff_point (float): A reference point for quick-jump functionality.
+    #     path (str): The widget's unique identifier path.
+    #     state_mirror_engine: The engine for MQTT state synchronization.
+    #     command (function): The callback for when the value changes.
+    # Outputs:
+    #     None.
     def __init__(
         self,
         parent,
@@ -45,6 +69,12 @@ class CustomKnobFrame(ttk.Frame):
         )
         self.temp_entry = None  # Initialize temp_entry
 
+    # Sets the knob's value to its predefined reference point.
+    # This provides a quick way to reset the knob to a default or common value.
+    # Inputs:
+    #     event: The tkinter event object.
+    # Outputs:
+    #     None.
     def _jump_to_reff_point(self, event):
         """
         ⚡  Jumping to the Reference Point immediately!
@@ -62,6 +92,12 @@ class CustomKnobFrame(ttk.Frame):
         if self.state_mirror_engine:
             self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
 
+    # Opens a temporary entry widget for manual value input.
+    # This allows for precise value entry, bypassing direct mouse interaction.
+    # Inputs:
+    #     event: The tkinter event object, used for positioning the entry widget.
+    # Outputs:
+    #     None.
     def _open_manual_entry(self, event):
         """
         📝 User requested manual coordinate entry.
@@ -88,6 +124,12 @@ class CustomKnobFrame(ttk.Frame):
         self.temp_entry.bind("<FocusOut>", self._submit_manual_entry)
         self.temp_entry.bind("<Escape>", self._destroy_manual_entry)
 
+    # Submits the value from the manual entry widget.
+    # This validates the entered value and updates the knob's state if it is within bounds.
+    # Inputs:
+    #     event: The tkinter event object.
+    # Outputs:
+    #     None.
     def _submit_manual_entry(self, event):
         """
         Validates the input and sets the new timeline.
@@ -129,6 +171,11 @@ class CustomKnobFrame(ttk.Frame):
         # Cleanup
         self._destroy_manual_entry(event)
 
+    # Destroys the temporary manual entry widget.
+    # Inputs:
+    #     event: The tkinter event object.
+    # Outputs:
+    #     None.
     def _destroy_manual_entry(self, event):
         if self.temp_entry and self.temp_entry.winfo_exists():
             self.temp_entry.destroy()
@@ -136,6 +183,15 @@ class CustomKnobFrame(ttk.Frame):
 
 
 class KnobCreatorMixin:
+    # Creates a custom rotary knob widget.
+    # This method handles the creation of the knob, including its visual appearance,
+    # user interaction (drag, click), and integration with the state management system.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): The configuration for the knob.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     CustomKnobFrame: The created knob frame widget, or None on failure.
     def _create_knob(self, parent_widget, config_data, **kwargs):  # Updated signature
         """Creates a rotary knob widget."""
         current_function_name = "_create_knob"
@@ -318,6 +374,18 @@ class KnobCreatorMixin:
             debug_logger(message=f"❌ The knob '{label}' shattered! Error: {e}")
             return None
 
+    # Draws the rotary knob widget on the canvas.
+    # This method is responsible for all the visual elements of the knob, including the
+    # background track, the active value arc, and the pointer line.
+    # Inputs:
+    #     canvas: The tkinter canvas to draw on.
+    #     width, height (int): The dimensions of the canvas.
+    #     value (float): The current value of the knob.
+    #     min_val, max_val (float): The min/max values of the knob.
+    #     value_label (ttk.Label): The label for displaying the current value.
+    #     neutral_color, accent_for_arc, indicator_color, secondary (str): Color values from the theme.
+    # Outputs:
+    #     None.
     def _draw_knob(
         self,
         canvas,

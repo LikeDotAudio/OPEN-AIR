@@ -1,4 +1,4 @@
-# workers/watchdog/watchdog.py
+# watchdog/watchdog.py
 #
 # This file implements a watchdog timer to detect if the main GUI thread has frozen.
 #
@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260108.120800.1
+# Version 20250821.200641.1
 
 import threading
 import time
@@ -23,6 +23,14 @@ from workers.logger.log_utils import _get_log_args
 WATCHDOG_RUNNING = True
 
 
+# Starts the watchdog heartbeat thread in the background.
+# This function creates and starts a daemon thread that runs the _heartbeat_loop,
+# which periodically checks if the main application thread is responsive.
+# Inputs:
+#     debug_logger_func (function, optional): The debug logger function to be used by the heartbeat.
+#     app_constants_instance (Config, optional): An instance of the application's configuration.
+# Outputs:
+#     None.
 def start_heartbeat(debug_logger_func=None, app_constants_instance=None):
     """
     Starts a background thread that prints a heartbeat to detect if the main thread has frozen.
@@ -50,6 +58,13 @@ def start_heartbeat(debug_logger_func=None, app_constants_instance=None):
         print("🐕 Watchdog: Heartbeat thread started.")
 
 
+# Stops the watchdog heartbeat thread.
+# This function sets a global flag to signal the heartbeat loop to terminate,
+# allowing for a graceful shutdown of the watchdog timer.
+# Inputs:
+#     None.
+# Outputs:
+#     None.
 def stop_heartbeat():
     """
     Stops the watchdog heartbeat thread.
@@ -64,6 +79,15 @@ def stop_heartbeat():
     WATCHDOG_RUNNING = False
 
 
+# The main loop for the watchdog heartbeat thread.
+# This function runs in a separate thread and periodically sends a "tick" message to the system
+# console and the GUI logger. If the GUI logger fails to respond, it indicates that the main
+# thread is frozen, and a message is printed to the system console.
+# Inputs:
+#     logger_func (function): The logger function to call for the heartbeat message.
+#     app_constants_instance (Config): The application's configuration instance.
+# Outputs:
+#     None.
 def _heartbeat_loop(logger_func, app_constants_instance):
     """
     The main loop for the watchdog heartbeat thread.

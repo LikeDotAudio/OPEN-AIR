@@ -1,7 +1,18 @@
-# workers/builder/dynamic_gui_create_panner.py
+# builder_audio/dynamic_gui_create_panner.py
 #
 # A Tkinter Canvas-based Panner that respects the global theme.
-# Version 20251223.214500.ThemeFix
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -20,6 +31,19 @@ class CustomPannerFrame(ttk.Frame):
     A custom Tkinter Frame that hosts the panner and provides the "Flux Control" methods.
     """
 
+    # Initializes the CustomPannerFrame.
+    # This sets up the frame containing the panner widget, binding it to a tkinter variable
+    # and the application's state management engine.
+    # Inputs:
+    #     parent: The parent tkinter widget.
+    #     variable (tk.DoubleVar): The variable to store the panner's value.
+    #     min_val, max_val (float): The min/max values of the panner.
+    #     reff_point (float): A reference point for quick-jump functionality.
+    #     path (str): The widget's unique identifier path.
+    #     state_mirror_engine: The engine for MQTT state synchronization.
+    #     command (function): The callback for when the value changes.
+    # Outputs:
+    #     None.
     def __init__(
         self,
         parent,
@@ -45,6 +69,12 @@ class CustomPannerFrame(ttk.Frame):
         )
         self.temp_entry = None  # Initialize temp_entry
 
+    # Sets the panner's value to its predefined reference point.
+    # This provides a quick way to reset the panner to a default or center value.
+    # Inputs:
+    #     event: The tkinter event object.
+    # Outputs:
+    #     None.
     def _jump_to_reff_point(self, event):
         """
         ⚡  Jumping to the Reference Point immediately!
@@ -62,6 +92,12 @@ class CustomPannerFrame(ttk.Frame):
         if self.state_mirror_engine:
             self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
 
+    # Opens a temporary entry widget for manual value input.
+    # This allows for precise value entry, bypassing direct mouse interaction.
+    # Inputs:
+    #     event: The tkinter event object, used for positioning.
+    # Outputs:
+    #     None.
     def _open_manual_entry(self, event):
         """
         📝 User requested manual coordinate entry.
@@ -88,6 +124,12 @@ class CustomPannerFrame(ttk.Frame):
         self.temp_entry.bind("<FocusOut>", self._submit_manual_entry)
         self.temp_entry.bind("<Escape>", self._destroy_manual_entry)
 
+    # Submits the value from the manual entry widget.
+    # This validates the entered value and updates the panner's state if it is within bounds.
+    # Inputs:
+    #     event: The tkinter event object.
+    # Outputs:
+    #     None.
     def _submit_manual_entry(self, event):
         """
         Validates the input and sets the new timeline.
@@ -129,6 +171,11 @@ class CustomPannerFrame(ttk.Frame):
         # Cleanup
         self._destroy_manual_entry(event)
 
+    # Destroys the temporary manual entry widget.
+    # Inputs:
+    #     event: The tkinter event object.
+    # Outputs:
+    #     None.
     def _destroy_manual_entry(self, event):
         if self.temp_entry and self.temp_entry.winfo_exists():
             self.temp_entry.destroy()
@@ -136,6 +183,15 @@ class CustomPannerFrame(ttk.Frame):
 
 
 class PannerCreatorMixin:
+    # Creates a rotary panner widget.
+    # This method sets up the panner, including its visual appearance, user interaction,
+    # and integration with the state management system.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): The configuration for the panner.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     CustomPannerFrame: The created panner frame widget, or None on failure.
     def _create_panner(self, parent_widget, config_data, **kwargs):  # Updated signature
         """Creates a rotary panner widget."""
         current_function_name = "_create_panner"
@@ -299,6 +355,18 @@ class PannerCreatorMixin:
             debug_logger(message=f"❌ The panner '{label}' shattered! Error: {e}")
             return None
 
+    # Draws the panner knob on the canvas with dynamic coloring.
+    # This method renders the panner's visual elements, including the background track
+    # and the active arc, which changes color based on the panner's position.
+    # Inputs:
+    #     canvas: The tkinter canvas to draw on.
+    #     width, height (int): The dimensions of the canvas.
+    #     value (float): The current value of the panner.
+    #     min_val, max_val (float): The min/max values of the panner.
+    #     value_label (ttk.Label): The label for displaying the current value.
+    #     neutral_color, accent, secondary (str): Color values from the theme.
+    # Outputs:
+    #     None.
     def _draw_panner_visuals(
         self,
         canvas,

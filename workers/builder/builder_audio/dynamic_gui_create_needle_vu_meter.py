@@ -1,7 +1,18 @@
-# workers/builder/dynamic_gui_create_needle_vu_meter.py
+# builder_audio/dynamic_gui_create_needle_vu_meter.py
 #
 # A needle-style VU Meter that respects the global theme configuration.
-# Version 20251223.220000.ThemeFix
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -17,6 +28,15 @@ from workers.mqtt.mqtt_topic_utils import get_topic  # <--- ADD THIS LINE
 
 
 class NeedleVUMeterCreatorMixin:
+    # Creates a needle-style VU meter widget.
+    # This method sets up the VU meter, including its visual appearance and its connection
+    # to the state management engine for real-time updates.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): The configuration for the VU meter.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created VU meter frame widget, or None on failure.
     def _create_needle_vu_meter(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
@@ -127,6 +147,18 @@ class NeedleVUMeterCreatorMixin:
                 )
             return None
 
+    # Draws the needle-style VU meter on the canvas.
+    # This method renders all the visual elements of the VU meter, including the background arc,
+    # tick marks, labels, and the needle that indicates the current value.
+    # Inputs:
+    #     canvas: The tkinter canvas to draw on.
+    #     size (int): The size of the meter.
+    #     value (float): The current value to display.
+    #     min_val, max_val (float): The min/max range of the meter.
+    #     red_zone_start (float): The value at which the red zone begins.
+    #     accent, secondary, fg, danger (str): Color values from the theme.
+    # Outputs:
+    #     None.
     def _draw_needle_vu_meter(
         self,
         canvas,

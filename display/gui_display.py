@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260108.120400.1
+# Version 20250821.200641.1
 
 from managers.configini.config_reader import Config
 
@@ -49,6 +49,18 @@ class Application(ttk.Frame):
     OPTIMIZED: Implements Layout Caching and Guarded Logging.
     """
 
+    # Initializes the main Application class, setting up the core components of the GUI.
+    # This constructor establishes the MQTT connection, state management, and utility classes
+    # required for the application to function. It then initiates the GUI build process.
+    # Inputs:
+    #     parent (tk.Widget): The parent tkinter widget.
+    #     root (tk.Tk, optional): The root tkinter window.
+    #     mqtt_connection_manager (MqttConnectionManager): Manages the MQTT connection.
+    #     subscriber_router (MqttSubscriberRouter): Routes incoming MQTT messages.
+    #     state_mirror_engine (StateMirrorEngine): Manages the application's state.
+    #     visa_proxy (VisaProxy): A proxy for VISA instrument communication.
+    # Outputs:
+    #     None.
     def __init__(
         self,
         parent,
@@ -147,6 +159,13 @@ class Application(ttk.Frame):
                     **_get_log_args(),
                 )
 
+    # Gracefully shuts down the application.
+    # This method disconnects the MQTT client and shuts down the VISA proxy to ensure
+    # a clean exit and release of all system resources.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def shutdown(self):
         """
         Gracefully shuts down the application by disconnecting from MQTT and shutting down the VISA proxy.
@@ -166,6 +185,13 @@ class Application(ttk.Frame):
         if self.visa_proxy:
             self.visa_proxy.shutdown()
 
+    # Triggers the initial tab selection event for all notebooks.
+    # This function simulates a tab change event for the default tab in each notebook,
+    # which is essential for triggering the lazy-loading mechanism for tabs that are visible on startup.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _trigger_initial_tab_selection(self):
         """
         Triggers the `_on_tab_change` event for the initially selected tab of each notebook to handle lazy loading.
@@ -202,6 +228,13 @@ class Application(ttk.Frame):
                 message="✅ All initial tab selections triggered.", **_get_log_args()
             )
 
+    # Applies a visual theme to the entire application.
+    # This function configures the styles for all standard and custom ttk widgets,
+    # using a color palette defined in the THEMES dictionary.
+    # Inputs:
+    #     theme_name (str): The name of the theme to apply (e.g., 'dark', 'light').
+    # Outputs:
+    #     dict: The color palette of the applied theme.
     def _apply_styles(self, theme_name: str):
         """
         Applies the specified theme to the entire application.
@@ -349,6 +382,13 @@ class Application(ttk.Frame):
 
         return colors
 
+    # Retrieves layout information for a directory path, utilizing a cache to improve performance.
+    # If the layout for the given path is not in the cache, it parses the directory,
+    # stores the result in the cache, and then returns it.
+    # Inputs:
+    #     path (pathlib.Path): The directory path to get layout info for.
+    # Outputs:
+    #     dict: The layout information for the directory.
     def _get_layout_info(self, path: pathlib.Path):
         """
         Retrieves layout information for a given path, using a cache to avoid redundant parsing.
@@ -369,6 +409,14 @@ class Application(ttk.Frame):
         self._layout_cache[path_str] = layout_info
         return layout_info
 
+    # Recursively builds the GUI by parsing a directory structure.
+    # This function reads layout information and constructs the corresponding GUI elements,
+    # such as paned windows and notebooks, and populates them with content.
+    # Inputs:
+    #     path (pathlib.Path): The directory path to build from.
+    #     parent_widget (tk.Widget): The parent widget to build the GUI into.
+    # Outputs:
+    #     None.
     def _build_from_directory(self, path: pathlib.Path, parent_widget):
         """
         Recursively builds the GUI from a directory structure.
@@ -569,6 +617,12 @@ class Application(ttk.Frame):
                     **_get_log_args(),
                 )
 
+    # Placeholder method for printing messages to a console widget in the GUI.
+    # Currently, it logs messages to the debug logger.
+    # Inputs:
+    #     message (str): The message to be printed.
+    # Outputs:
+    #     None.
     def print_to_console(self, message: str):
         """
         Placeholder method to print messages to a GUI console.
@@ -582,6 +636,13 @@ class Application(ttk.Frame):
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(message=f"🖥️💬 Observer's Log: {message}", **_get_log_args())
 
+    # Event handler for notebook tab changes, implementing lazy loading.
+    # When a tab is selected, this function checks if its content has already been populated.
+    # If not, it builds the content for that tab dynamically.
+    # Inputs:
+    #     event (tk.Event): The tab change event object.
+    # Outputs:
+    #     None.
     def _on_tab_change(self, event):
         """
         Event handler for when a notebook tab is changed. It handles lazy loading of tab content.
@@ -659,6 +720,13 @@ class Application(ttk.Frame):
                     message=f"❌ Error in _on_tab_change: {e}", **_get_log_args()
                 )
 
+    # Manages the visibility of tab content when tabs are switched.
+    # This function calls the `_on_gui_visible` method for the content of the selected tab
+    # and the `_on_gui_hidden` method for the content of all other tabs.
+    # Inputs:
+    #     event (tk.Event): The tab change event object.
+    # Outputs:
+    #     None.
     def _handle_tab_visibility(self, event):
         """
         Handles the visibility of tabs, calling `_on_gui_visible` and `_on_gui_hidden` methods on the content widgets.

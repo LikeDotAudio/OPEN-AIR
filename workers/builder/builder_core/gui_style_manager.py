@@ -1,4 +1,4 @@
-# workers/builder/builder_core/gui_style_manager.py
+# builder_core/gui_style_manager.py
 #
 # This file defines the GuiStyleMixin, responsible for applying and managing application-wide GUI themes and styles.
 #
@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260108.120900.1
+# Version 20250821.200641.1
 
 from tkinter import ttk
 from workers.styling.style import THEMES
@@ -21,6 +21,14 @@ from workers.styling.style import THEMES
 class GuiStyleMixin:
     """Handles Theming."""
 
+    # Applies a specified visual theme to the application's GUI.
+    # This method configures the styles for various ttk widgets, such as frames, labels,
+    # entries, and buttons, using a color palette and style properties defined in the THEMES dictionary.
+    # It sets colors, fonts, and other visual attributes to ensure a consistent look and feel.
+    # Inputs:
+    #     theme_name (str): The name of the theme to apply (e.g., 'dark', 'light').
+    # Outputs:
+    #     None.
     def _apply_styles(self, theme_name):
         """
         Applies the specified theme to the entire application, configuring various ttk widgets.

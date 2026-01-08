@@ -1,16 +1,5 @@
-# workers/worker_active_peak_publisher.py
+# active/XXX-worker_active_peak_publisher.py
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251129  ##Update on the day the change was made
-Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 1  ## a running version number - incriments by one each time
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
 # A worker module that listens for marker frequency and amplitude outputs from the
 # YAK repository and republishes the data to a new, deeply hierarchical topic
 # structure based on the frequency (GHz down to 1s of kHz).
@@ -25,8 +14,7 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-#
-# Version 20251006.223430.3
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -67,8 +55,17 @@ class ActivePeakPublisher:
     topic structure based on frequency (GHz -> 100MHz -> 10MHz -> 1MHz -> 100kHz -> 10kHz -> 1kHz).
     """
 
+    # Initializes the ActivePeakPublisher.
+    # This sets up the worker with an MQTT utility and a buffer for storing incomplete
+    # marker data. It also calls the method to establish MQTT subscriptions.
+    # Inputs:
+    #     mqtt_util (MqttControllerUtility): The MQTT utility for publishing and subscribing.
+    # Outputs:
+    #     None.
     def __init__(self, mqtt_util: MqttControllerUtility):
-        # Initializes the publisher and sets up subscriptions.
+        """
+        Initializes the publisher and sets up subscriptions.
+        """
         current_function_name = inspect.currentframe().f_code.co_name
 
         if app_constants.global_settings["debug_enabled"]:
@@ -88,8 +85,17 @@ class ActivePeakPublisher:
             **_get_log_args(),
         )
 
+    # Sets up the necessary MQTT subscriptions for the worker.
+    # This method subscribes to wildcard topics that capture all marker peak and frequency
+    # value updates from the instrument.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _setup_subscriptions(self):
-        # Subscribes to the wildcards for all marker peak and frequency values.
+        """
+        Subscribes to the wildcards for all marker peak and frequency values.
+        """
         self.mqtt_util.add_subscriber(
             TOPIC_MARKER_PEAK_WILDCARD, self._on_marker_message
         )
@@ -103,8 +109,18 @@ class ActivePeakPublisher:
                 **_get_log_args(),
             )
 
+    # Callback function for handling incoming marker data.
+    # This method receives both frequency and peak messages, buffers them, and when a
+    # complete pair for a marker is received, it triggers the republishing process.
+    # Inputs:
+    #     topic (str): The MQTT topic the message was received on.
+    #     payload (str): The message payload.
+    # Outputs:
+    #     None.
     def _on_marker_message(self, topic, payload):
-        # Primary callback to receive data, buffer it, and check for completeness.
+        """
+        Primary callback to receive data, buffer it, and check for completeness.
+        """
         current_function_name = inspect.currentframe().f_code.co_name
 
         # Determine if it's a frequency or peak message
@@ -167,8 +183,19 @@ class ActivePeakPublisher:
             # Clear the entry from the buffer
             del self.marker_data_buffer[marker_id]
 
+    # Republishes marker data to a hierarchical topic based on its frequency.
+    # This function takes complete marker data (ID, frequency, and peak), constructs a
+    # deeply nested topic structure from the frequency, and publishes the data to that topic.
+    # Inputs:
+    #     marker_id (str): The ID of the marker (e.g., 'Marker_1').
+    #     freq_hz (float): The frequency of the marker in Hz.
+    #     peak_dbm (float): The peak amplitude of the marker in dBm.
+    # Outputs:
+    #     None.
     def _republish_to_hierarchical_topic(self, marker_id, freq_hz, peak_dbm):
-        # Converts frequency in Hz to the required hierarchical topic structure and publishes.
+        """
+        Converts frequency in Hz to the required hierarchical topic structure and publishes.
+        """
         current_function_name = inspect.currentframe().f_code.co_name
 
         try:

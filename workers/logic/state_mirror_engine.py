@@ -1,4 +1,4 @@
-# workers/logic/state_mirror_engine.py
+# logic/state_mirror_engine.py
 #
 # This file defines the StateMirrorEngine class, which synchronizes GUI state with the MQTT broker.
 #
@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260108.120700.1
+# Version 20250821.200641.1
 
 import orjson
 import inspect
@@ -35,6 +35,17 @@ current_version_hash = 20251225 * 4500 * 1
 
 
 class StateMirrorEngine:
+    # Initializes the StateMirrorEngine.
+    # This engine is responsible for two-way synchronization between the GUI state
+    # (represented by tkinter variables) and the application's state as communicated
+    # over MQTT. It sets up the necessary components for this synchronization.
+    # Inputs:
+    #     base_topic (str): The root MQTT topic for the application.
+    #     subscriber_router (MqttSubscriberRouter): The router for incoming MQTT messages.
+    #     root (tk.Tk): The root tkinter window, used for scheduling GUI updates.
+    #     state_cache_manager (StateCacheManager): The manager for the application state cache.
+    # Outputs:
+    #     None.
     def __init__(self, base_topic, subscriber_router, root, state_cache_manager):
         """
         Initializes the StateMirrorEngine.
@@ -60,6 +71,13 @@ class StateMirrorEngine:
         self.update_queue = queue.Queue()
         self.root.after(100, self._process_queue)
 
+    # Processes the queue of pending GUI updates.
+    # This method is run on the main GUI thread and safely applies state changes
+    # from the MQTT broker to the corresponding tkinter variables, preventing race conditions.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _process_queue(self):
         """
         Processes the GUI update queue from the main thread.
@@ -88,6 +106,17 @@ class StateMirrorEngine:
         finally:
             self.root.after(100, self._process_queue)
 
+    # Registers a GUI widget with the state engine.
+    # This method creates a mapping between a widget, its tkinter variable, and its corresponding
+    # MQTT topic, enabling automatic state synchronization.
+    # Inputs:
+    #     widget_id (str): The unique identifier for the widget.
+    #     tk_variable (tk.Variable): The tkinter variable associated with the widget's state.
+    #     tab_name (str): The name of the tab the widget belongs to.
+    #     config (dict): The configuration dictionary for the widget.
+    #     update_callback (function, optional): A callback function for custom widget updates.
+    # Outputs:
+    #     None.
     def register_widget(
         self, widget_id, tk_variable, tab_name, config, update_callback=None
     ):
@@ -129,6 +158,14 @@ class StateMirrorEngine:
         }
         self.topic_to_widget_id[full_topic] = widget_id
 
+    # Initializes the state of a registered widget.
+    # This function checks if a state for the widget exists in the cache. If so, it updates
+    # the widget with the cached state. Otherwise, it broadcasts the widget's current state
+    # to the MQTT broker.
+    # Inputs:
+    #     widget_id (str): The unique identifier of the widget to initialize.
+    # Outputs:
+    #     bool: True if the state was loaded from the cache, False otherwise.
     def initialize_widget_state(self, widget_id):
         """
         Initializes a widget's state from the cache or broadcasts its initial state.
@@ -261,6 +298,14 @@ class StateMirrorEngine:
             self.broadcast_gui_change_to_mqtt(widget_id)
             return False
 
+    # Broadcasts a change in a widget's state to the MQTT broker.
+    # This function is called when a user interacts with a GUI widget. It constructs a JSON
+    # payload with the new value and other metadata and publishes it to the widget's
+    # corresponding MQTT topic.
+    # Inputs:
+    #     widget_id (str): The unique identifier of the widget that changed.
+    # Outputs:
+    #     None.
     def broadcast_gui_change_to_mqtt(self, widget_id):
         """
         Broadcasts a GUI change to the MQTT broker.
@@ -312,6 +357,11 @@ class StateMirrorEngine:
                     **_get_log_args(),
                 )
 
+    # Checks if a widget is registered with the state engine.
+    # Inputs:
+    #     widget_id (str): The unique identifier of the widget.
+    # Outputs:
+    #     bool: True if the widget is registered, False otherwise.
     def is_widget_registered(self, widget_id: str) -> bool:
         """
         Checks if a widget is registered.
@@ -324,6 +374,11 @@ class StateMirrorEngine:
         """
         return widget_id in self.registered_widgets
 
+    # Retrieves the full MQTT topic for a registered widget.
+    # Inputs:
+    #     widget_id (str): The unique identifier of the widget.
+    # Outputs:
+    #     str: The full MQTT topic for the widget, or None if not registered.
     def get_widget_topic(self, widget_id):
         """
         Returns the full MQTT topic for a registered widget.
@@ -338,6 +393,14 @@ class StateMirrorEngine:
             return self.registered_widgets[widget_id]["topic"]
         return None
 
+    # Publishes a command payload to a specified MQTT topic.
+    # This is a general-purpose method for sending commands that are not directly
+    # tied to a registered widget's state.
+    # Inputs:
+    #     topic (str): The MQTT topic to publish the command to.
+    #     payload (str): The command payload to be sent.
+    # Outputs:
+    #     None.
     def publish_command(self, topic: str, payload: str):
         """
         Publishes a command to the MQTT broker.
@@ -357,6 +420,14 @@ class StateMirrorEngine:
             message=f"📤 Published command to topic {topic}", **_get_log_args()
         )
 
+    # Handles incoming MQTT messages to synchronize the GUI.
+    # This function is the primary callback for the MQTT subscriber. It parses incoming
+    # messages, identifies the target widget, and queues a GUI update to reflect the new state.
+    # Inputs:
+    #     topic (str): The MQTT topic the message was received on.
+    #     payload (str or dict): The message payload.
+    # Outputs:
+    #     None.
     def sync_incoming_mqtt_to_gui(self, topic, payload):
         """
         Handles incoming MQTT messages and updates the GUI accordingly.

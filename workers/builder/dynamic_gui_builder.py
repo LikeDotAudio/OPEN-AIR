@@ -1,4 +1,4 @@
-# workers/builder/dynamic_gui_builder.py
+# builder/dynamic_gui_builder.py
 #
 # This file defines the main DynamicGuiBuilder class, which is responsible for constructing the application's GUI from a JSON configuration.
 #
@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260108.120200.1
+# Version 20250821.200641.1
 
 import os
 import tkinter as tk
@@ -140,6 +140,20 @@ class DynamicGuiBuilder(
     PannerCreatorMixin,
     TrapezoidButtonTogglerCreatorMixin,
 ):
+    # Initializes the DynamicGuiBuilder, a comprehensive class that constructs a GUI from a JSON configuration.
+    # It integrates various mixins for handling styling, widget creation, MQTT communication, and more.
+    # The builder sets up the main frame, canvas for scrolling, and optionally a reload button.
+    # It initializes all necessary components and triggers the GUI build process.
+    # Inputs:
+    #     parent (tk.Widget): The parent widget that will contain this builder frame.
+    #     json_path (str, optional): The file path to the JSON configuration that defines the GUI.
+    #     tab_name (str, optional): The name associated with the tab this GUI resides in.
+    #     config (dict, optional): A configuration dictionary containing shared application resources
+    #                              like 'state_mirror_engine' and 'subscriber_router'.
+    #     *args: Additional positional arguments.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     None.
     def __init__(self, parent, json_path=None, tab_name=None, *args, **kwargs):
         """
         Initializes the DynamicGuiBuilder.
@@ -233,6 +247,13 @@ class DynamicGuiBuilder(
             self._rebuild_gui()
             self.gui_built = True
 
+    # Event handler called when the scrollable frame's size or position changes.
+    # This function is crucial for ensuring the scrollable area of the canvas is
+    # updated to match the total size of the content within the frame.
+    # Inputs:
+    #     event (tk.Event, optional): The event object passed by the tkinter framework.
+    # Outputs:
+    #     None.
     def _on_frame_configure(self, event=None):
         """
         Event handler for when the scrollable frame is configured. It updates the scroll region of the canvas.
@@ -245,6 +266,13 @@ class DynamicGuiBuilder(
         """
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 
+    # Event handler called when the canvas widget itself is resized.
+    # This function adjusts the width of the frame window embedded within the canvas
+    # to match the new width of the canvas, ensuring content flows correctly on resize.
+    # Inputs:
+    #     event (tk.Event, optional): The event object containing the new dimensions.
+    # Outputs:
+    #     None.
     def _on_canvas_configure(self, event=None):
         """
         Event handler for when the canvas is configured. It resizes the window within the canvas.

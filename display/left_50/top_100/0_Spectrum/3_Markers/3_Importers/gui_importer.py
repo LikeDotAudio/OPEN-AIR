@@ -9,7 +9,6 @@
 # Build Log: https://like.audio/category/software/spectrum-scanner/
 # Version 20260104.200500.3 (Fixed Init Overload)
 
-import os
 import tkinter as tk
 from tkinter import filedialog, ttk
 import inspect

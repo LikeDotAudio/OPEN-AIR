@@ -20,4 +20,16 @@ This is a summary of the work done to address the issues:
     *   **Root Cause:** The fader tick marks in `_draw_horizontal_fader` were incorrectly applying `log_exponent` for their positioning, as indicated by the user.
     *   **Fix:** Modified `workers/builder/builder_audio/dynamic_gui_create_custom_horizontal_fader.py` to remove the `log_exponent` application from the `display_tick_norm` calculation, ensuring linear spacing for tick marks.
 
+5.  **Fixed CsvExportUtility Instantiation Error:**
+    *   **Root Cause:** The `CsvExportUtility` class in `gui_peak_hunter.py` was being instantiated without a required `print_to_gui_func` argument.
+    *   **Fix:** Added a simple `print_to_gui` method to the `MarkerPeakHunterGUI` class and passed it to the `CsvExportUtility` constructor.
+
+6.  **Fixed Plot Widget Parameter Passing:**
+    *   **Root Cause:** The `plot_widget_adapter.py` was not correctly passing the `path` from the config as the `widget_id` to the `FluxPlotter` resulting in incorrect topic construction.
+    *   **Fix:** Modified `plot_widget_adapter.py` to use the `path` from the config as the `widget_id` for `FluxPlotter`.
+
+7.  **Removed Redundant `import os` Statements:**
+    *   **Root Cause:** The `module_loader.py` injects `os` into the module's namespace after loading. However, `gui_importer.py` and `gui_showtime.py` had `import os` statements at the top level, causing a conflict and the `name 'os' is not defined` error during module loading.
+    *   **Fix:** Removed the `import os` statements from `gui_importer.py` and `gui_showtime.py`.
+
 The application's MQTT publishing and module loading mechanisms should now function as intended, without duplicate messages, import errors, or incorrect fader scaling.

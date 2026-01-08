@@ -1,4 +1,3 @@
-import os
 import inspect
 import datetime
 import tkinter as tk

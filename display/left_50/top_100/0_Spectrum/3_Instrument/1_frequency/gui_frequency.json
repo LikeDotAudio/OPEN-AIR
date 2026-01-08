@@ -23,6 +23,7 @@
         "min": "0",
         "max": "6000",
         "units": "MHz",
+                  "step": "11",
         "layout": { "sticky": "ew" }
       },
       "span_freq_MHz": {
@@ -43,6 +44,7 @@
         "min": "0",
         "max": "1000",
         "units": "MHz",
+        "step": "1",
         "layout": { "sticky": "ew" }
       },
       "start_freq_MHz": {

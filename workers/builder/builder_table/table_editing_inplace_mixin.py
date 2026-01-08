@@ -108,7 +108,7 @@ class TableEditingInplaceMixin:
 
         if self.data_topic and device_key:
             field_topic = get_topic(self.data_topic, "data", device_key)
-            self.state_mirror_engine.publish_payload(
+            self.state_mirror_engine.publish_command(
                 field_topic, orjson.dumps(row_data)
             )  # publish_payload from state_mirror_engine
             debug_logger(

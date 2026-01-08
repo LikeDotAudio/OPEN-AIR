@@ -1,4 +1,18 @@
-# workers/builder/builder_composite/_Horizontal_knob_Value.py
+# builder_composite/_Horizontal_knob_Value.py
+#
+# A mixin class that provides the functionality for creating a fader-knob composite widget combined with a text entry box and a knob for fine-tuning.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 import os
 import tkinter as tk
 from tkinter import ttk
@@ -29,6 +43,16 @@ class HorizontalKnobValueCreatorMixin(
     fader-knob composite widget combined with a text entry box and a knob for fine-tuning.
     """
 
+    # Creates a composite widget consisting of a horizontal fader for coarse adjustment,
+    # a knob for fine-tuning, and a text entry box for precise value input.
+    # This method orchestrates the creation and synchronization of these individual components
+    # and connects the main value to the state management engine.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): The configuration for the composite widget.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created frame containing the composite widget, or None on failure.
     def _create_horizontal_knob_value(self, parent_widget, config_data, **kwargs):
         current_function_name = inspect.currentframe().f_code.co_name
 

@@ -1,4 +1,18 @@
-# workers/builder/builder_audio/dynamic_gui_create_trapezoid_toggler.py
+# builder_audio/dynamic_gui_create_trapezoid_toggler.py
+#
+# A mixin to create a radio-group of trapezoid buttons.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -13,6 +27,15 @@ from workers.logger.log_utils import _get_log_args
 class TrapezoidButtonTogglerCreatorMixin(TrapezoidButtonCreatorMixin):
     """A mixin to create a radio-group of trapezoid buttons."""
 
+    # Creates a group of trapezoid buttons that function as a radio group.
+    # This method arranges multiple trapezoid buttons where only one can be active at a time.
+    # It manages the group's state and connects it to the state management engine.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): The configuration for the button group.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created container frame for the button group.
     def _create_trapezoid_button_toggler(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature

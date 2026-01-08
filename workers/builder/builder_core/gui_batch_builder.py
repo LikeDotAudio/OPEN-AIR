@@ -1,3 +1,18 @@
+# builder_core/gui_batch_builder.py
+#
+# Handles recursive JSON parsing and Grid layout.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 import tkinter as tk
 from tkinter import ttk
 import traceback
@@ -11,6 +26,18 @@ app_constants = Config.get_instance()
 class GuiBatchBuilderMixin:
     """Handles recursive JSON parsing and Grid layout."""
 
+    # Recursively creates widgets in batches to prevent freezing the GUI.
+    # This method processes a list of widget configurations, creating and placing them on the
+    # parent frame in small batches, yielding control back to the main loop between batches.
+    # Inputs:
+    #     parent_frame: The parent tkinter frame to place widgets in.
+    #     widget_configs (list): A list of widget configurations to process.
+    #     path_prefix (str): The base path for constructing widget IDs.
+    #     override_cols (int, optional): The number of columns to use for the layout.
+    #     start_index (int): The starting index for the current batch.
+    #     row_offset (int): The starting row for placing widgets in the grid.
+    # Outputs:
+    #     None.
     def _create_widgets_in_batches(
         self,
         parent_frame,
@@ -144,6 +171,16 @@ class GuiBatchBuilderMixin:
                 **_get_log_args(),
             )
 
+    # Synchronously creates and places all widgets defined in a data dictionary.
+    # This method iterates through a dictionary of widget configurations and uses the
+    # widget factory to create and place each widget on the parent frame.
+    # Inputs:
+    #     parent_frame: The parent tkinter frame.
+    #     data (dict): A dictionary of widget configurations.
+    #     path_prefix (str): The base path for widget IDs.
+    #     override_cols (int, optional): The number of columns for the layout.
+    # Outputs:
+    #     None.
     def _create_dynamic_widgets(
         self, parent_frame, data, path_prefix="", override_cols=None
     ):

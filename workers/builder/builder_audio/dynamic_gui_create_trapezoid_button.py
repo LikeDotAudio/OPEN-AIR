@@ -1,4 +1,18 @@
-# workers/builder/builder_audio/dynamic_gui_create_trapezoid_button.py
+# builder_audio/dynamic_gui_create_trapezoid_button.py
+#
+# A mixin to create a dynamic, theme-aware trapezoidal button.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -15,6 +29,15 @@ import os
 class TrapezoidButtonCreatorMixin:
     """A mixin to create a dynamic, theme-aware trapezoidal button."""
 
+    # Creates a custom trapezoidal button widget.
+    # This method sets up the button, including its visual style, state management (latching or momentary),
+    # and its connection to the state management engine for real-time updates.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): The configuration for the button.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created button frame widget.
     def _create_trapezoid_button(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
@@ -120,6 +143,15 @@ class TrapezoidButtonCreatorMixin:
 
         return frame
 
+    # Draws the trapezoidal button on the canvas.
+    # This method renders the button's 3D appearance, including bevels and an indicator light,
+    # based on its current state (pressed, lit).
+    # Inputs:
+    #     canvas: The tkinter canvas to draw on.
+    #     config (dict): The configuration for the button.
+    #     state (dict): The current state of the button (pressed, lit, colors).
+    # Outputs:
+    #     None.
     def _draw_trapezoid_button(self, canvas, config, state):
         """Draws the button in its current state."""
         canvas.delete("all")
@@ -192,6 +224,13 @@ class TrapezoidButtonCreatorMixin:
                 outline=self._adjust_color(led_color, 2.0),
             )
 
+    # Adjusts a hex color's brightness by a given factor.
+    # This utility function is used to create shading and highlight effects for the button's 3D appearance.
+    # Inputs:
+    #     hex_color (str): The hex color string (e.g., '#RRGGBB').
+    #     factor (float): The factor to multiply the color components by (e.g., 1.5 for lighter).
+    # Outputs:
+    #     str: The new hex color string.
     def _adjust_color(self, hex_color, factor):
         """Lightens or darkens a hex color by a factor."""
         if not hex_color or len(hex_color) != 7:

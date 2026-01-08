@@ -1,20 +1,7 @@
-# workers/builder/dynamic_gui_create_gui_slider_value.py
+# builder_composite/dynamic_gui_create_gui_slider_value.py
 #
-# This file (dynamic_gui_create_gui_slider_value.py) provides the SliderValueCreatorMixin class for creating slider widgets with text entry in the GUI.
-# A complete and comprehensive pre-amble that describes the file and the functions within.
-# The purpose is to provide clear documentation and versioning.
+# This file provides the SliderValueCreatorMixin class for creating slider widgets with text entry in the GUI.
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251213  ##Update on the day the change was made
-Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 44  ## a running version number - incriments by one each time
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
@@ -25,7 +12,7 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-
+# Version 20250821.200641.1
 
 import os
 import tkinter as tk
@@ -56,6 +43,15 @@ class SliderValueCreatorMixin:
     slider widget combined with a text entry box.
     """
 
+    # Creates a composite widget consisting of a slider and a text entry box.
+    # This method sets up a slider for adjusting a numerical value, along with a text entry
+    # field for precise input. The two are synchronized and connected to the state management engine.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): The configuration for the slider widget.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created frame containing the composite widget, or None on failure.
     def _create_slider_value(self, parent_widget, config_data, **kwargs):
         # Creates a slider and an entry box for a numerical value.
         current_function_name = inspect.currentframe().f_code.co_name

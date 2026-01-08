@@ -1,4 +1,18 @@
-# workers/mqtt/setup/config_reader.py
+# managers/configini/config_reader.py
+#
+# This file defines the Config class, a singleton for managing application configuration.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260108.120600.1
 
 import configparser
 import pathlib
@@ -39,6 +53,15 @@ class Config:
     SCAN_IP_DIRECT = True
 
     def __init__(self):
+        """
+        Initializes the Config object. This is only called once.
+        
+        Args:
+            None
+            
+        Returns:
+            None
+        """
         # This __init__ will only be called once due to the singleton pattern
         if hasattr(self, "_initialized") and self._initialized:
             return
@@ -50,7 +73,13 @@ class Config:
     @classmethod
     def get_instance(cls):
         """
-        Returns the singleton instance of Config, ensuring it's initialized once.
+        Returns the singleton instance of the Config class.
+
+        Args:
+            None
+
+        Returns:
+            Config: The singleton instance of the Config class.
         """
         if cls._instance is None:
             with cls._lock:
@@ -62,6 +91,15 @@ class Config:
 
     @property
     def global_settings(self):
+        """
+        Returns a dictionary of global debug settings.
+
+        Args:
+            None
+
+        Returns:
+            dict: A dictionary of global debug settings.
+        """
         debug_screen_enabled = self.ENABLE_DEBUG_MODE and self.ENABLE_DEBUG_SCREEN
         return {
             "general_debug_enabled": self.ENABLE_DEBUG_MODE,
@@ -74,13 +112,25 @@ class Config:
     def get_mqtt_base_topic(self):
         """
         Returns the base MQTT topic.
+
+        Args:
+            None
+
+        Returns:
+            str: The base MQTT topic.
         """
         return self.MQTT_BASE_TOPIC
 
     def read_config(self):
         """
-        Reads configuration from config.ini and updates instance attributes.
+        Reads the configuration from config.ini and updates the instance attributes.
         If config.ini is not found, a default one is created.
+
+        Args:
+            None
+            
+        Returns:
+            None
         """
         from workers.logger.logger import debug_logger  # Import debug_logger
 

@@ -1,9 +1,18 @@
-# workers/utils/watchdog.py
+# workers/watchdog/watchdog.py
 #
-# A temporal monitor to detect if the Main Thread has frozen.
+# This file implements a watchdog timer to detect if the main GUI thread has frozen.
 #
 # Author: Anthony Peter Kuzub
-# Version: 20250821.200641.1
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260108.120800.1
 
 import threading
 import time
@@ -16,9 +25,14 @@ WATCHDOG_RUNNING = True
 
 def start_heartbeat(debug_logger_func=None, app_constants_instance=None):
     """
-    Starts a background thread that prints a heartbeat.
-    If the GUI freezes, this thread SHOULD keep printing to the system console (terminal),
-    proving that the Python process is alive, but the GUI is stuck.
+    Starts a background thread that prints a heartbeat to detect if the main thread has frozen.
+
+    Args:
+        debug_logger_func (function, optional): The debug logger function. Defaults to None.
+        app_constants_instance (Config, optional): The application constants instance. Defaults to None.
+    
+    Returns:
+        None
     """
     global WATCHDOG_RUNNING
     WATCHDOG_RUNNING = True
@@ -37,13 +51,29 @@ def start_heartbeat(debug_logger_func=None, app_constants_instance=None):
 
 
 def stop_heartbeat():
+    """
+    Stops the watchdog heartbeat thread.
+    
+    Args:
+        None
+        
+    Returns:
+        None
+    """
     global WATCHDOG_RUNNING
     WATCHDOG_RUNNING = False
 
 
 def _heartbeat_loop(logger_func, app_constants_instance):
     """
-    The actual loop running in the background dimension.
+    The main loop for the watchdog heartbeat thread.
+
+    Args:
+        logger_func (function): The logger function to call.
+        app_constants_instance (Config): The application constants instance.
+        
+    Returns:
+        None
     """
     counter = 0
     while WATCHDOG_RUNNING:

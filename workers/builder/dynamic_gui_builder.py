@@ -1,3 +1,19 @@
+# workers/builder/dynamic_gui_builder.py
+#
+# This file defines the main DynamicGuiBuilder class, which is responsible for constructing the application's GUI from a JSON configuration.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260108.120200.1
+
 import os
 import tkinter as tk
 from tkinter import ttk
@@ -125,6 +141,19 @@ class DynamicGuiBuilder(
     TrapezoidButtonTogglerCreatorMixin,
 ):
     def __init__(self, parent, json_path=None, tab_name=None, *args, **kwargs):
+        """
+        Initializes the DynamicGuiBuilder.
+
+        Args:
+            parent (tk.Widget): The parent widget.
+            json_path (str, optional): The path to the JSON file defining the GUI. Defaults to None.
+            tab_name (str, optional): The name of the tab. Defaults to None.
+            *args: Variable length argument list.
+            **kwargs: Arbitrary keyword arguments.
+        
+        Returns:
+            None
+        """
         config = kwargs.pop("config", {})
         super().__init__(master=parent)
 
@@ -205,9 +234,27 @@ class DynamicGuiBuilder(
             self.gui_built = True
 
     def _on_frame_configure(self, event=None):
+        """
+        Event handler for when the scrollable frame is configured. It updates the scroll region of the canvas.
+
+        Args:
+            event (tk.Event, optional): The event object. Defaults to None.
+        
+        Returns:
+            None
+        """
         self.canvas.configure(scrollregion=self.canvas.bbox("all"))
 
     def _on_canvas_configure(self, event=None):
+        """
+        Event handler for when the canvas is configured. It resizes the window within the canvas.
+
+        Args:
+            event (tk.Event, optional): The event object. Defaults to None.
+
+        Returns:
+            None
+        """
         self.canvas.itemconfig(
             self.canvas.find_withtag("all")[0], width=event.width, height=event.height
         )

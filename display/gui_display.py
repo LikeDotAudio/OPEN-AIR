@@ -1,7 +1,6 @@
 # display/gui_display.py
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# Current time is 00:10, so the hash uses 10.
+# This file defines the main Application class, which orchestrates the GUI build process.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
@@ -13,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20251229.1725.1
+# Version 20260108.120400.1
 
 from managers.configini.config_reader import Config
 
@@ -59,6 +58,20 @@ class Application(ttk.Frame):
         state_mirror_engine=None,
         visa_proxy=None,
     ):
+        """
+        Initializes the main Application.
+
+        Args:
+            parent (tk.Widget): The parent widget.
+            root (tk.Tk, optional): The root Tkinter window. Defaults to None.
+            mqtt_connection_manager (MqttConnectionManager, optional): The MQTT connection manager. Defaults to None.
+            subscriber_router (MqttSubscriberRouter, optional): The MQTT subscriber router. Defaults to None.
+            state_mirror_engine (StateMirrorEngine, optional): The state mirror engine. Defaults to None.
+            visa_proxy (VisaProxy, optional): The VISA proxy object. Defaults to None.
+        
+        Returns:
+            None
+        """
         super().__init__(parent)
         self.root = root
         self.app_constants = app_constants
@@ -135,7 +148,15 @@ class Application(ttk.Frame):
                 )
 
     def shutdown(self):
-        """Gracefully shuts down the application."""
+        """
+        Gracefully shuts down the application by disconnecting from MQTT and shutting down the VISA proxy.
+        
+        Args:
+            None
+            
+        Returns:
+            None
+        """
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message="Initiating application shutdown...", **_get_log_args()
@@ -146,7 +167,15 @@ class Application(ttk.Frame):
             self.visa_proxy.shutdown()
 
     def _trigger_initial_tab_selection(self):
-        """Triggers the _on_tab_change event for the initially selected tab of each notebook."""
+        """
+        Triggers the `_on_tab_change` event for the initially selected tab of each notebook to handle lazy loading.
+        
+        Args:
+            None
+            
+        Returns:
+            None
+        """
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message="🔍🔵 Triggering initial tab selection for all notebooks.",
@@ -174,7 +203,15 @@ class Application(ttk.Frame):
             )
 
     def _apply_styles(self, theme_name: str):
-        """Applies the specified theme to the entire application."""
+        """
+        Applies the specified theme to the entire application.
+
+        Args:
+            theme_name (str): The name of the theme to apply.
+
+        Returns:
+            dict: The color palette of the applied theme.
+        """
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message=f"🔍🔵 Applying styles for theme: {theme_name}.",
@@ -302,19 +339,25 @@ class Application(ttk.Frame):
             ],
             foreground=[
                 ("selected", colors["accent_colors"][5]),
-                ("!selected", colors["fg"]),
-            ],  # Darker blue
+                ("!selected", colors["fg"]),  # Darker blue
+            ],
             font=[
                 ("selected", ("Helvetica", 15, "bold")),
                 ("!selected", ("Helvetica", 13)),
-            ],
-        )  # +2 points
+            ],  # +2 points
+        )
 
         return colors
 
     def _get_layout_info(self, path: pathlib.Path):
         """
-        ⚡ OPTIMIZATION HELPER: Checks cache before parsing directory.
+        Retrieves layout information for a given path, using a cache to avoid redundant parsing.
+
+        Args:
+            path (pathlib.Path): The path to the directory.
+
+        Returns:
+            dict: The layout information for the directory.
         """
         path_str = str(path)
         # 1. Check RAM Cache
@@ -328,7 +371,14 @@ class Application(ttk.Frame):
 
     def _build_from_directory(self, path: pathlib.Path, parent_widget):
         """
-        Recursively builds the GUI using Cached Layouts.
+        Recursively builds the GUI from a directory structure.
+
+        Args:
+            path (pathlib.Path): The path to the directory to build from.
+            parent_widget (tk.Widget): The parent widget to build into.
+            
+        Returns:
+            None
         """
         # ⚡ OPTIMIZATION: Guarded Log Call
         if app_constants.global_settings["debug_enabled"]:
@@ -520,12 +570,28 @@ class Application(ttk.Frame):
                 )
 
     def print_to_console(self, message: str):
-        """Placeholder method to print messages to a GUI console."""
+        """
+        Placeholder method to print messages to a GUI console.
+
+        Args:
+            message (str): The message to print.
+            
+        Returns:
+            None
+        """
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(message=f"🖥️💬 Observer's Log: {message}", **_get_log_args())
 
     def _on_tab_change(self, event):
-        """Logs a debug message, triggers lazy loading, and handles tab-specific actions."""
+        """
+        Event handler for when a notebook tab is changed. It handles lazy loading of tab content.
+
+        Args:
+            event (tk.Event): The event object.
+            
+        Returns:
+            None
+        """
         # ⚡ OPTIMIZATION: Guarded Logging - Major Performance Gain
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(message="▶️ _on_tab_change detected.", **_get_log_args())
@@ -594,6 +660,15 @@ class Application(ttk.Frame):
                 )
 
     def _handle_tab_visibility(self, event):
+        """
+        Handles the visibility of tabs, calling `_on_gui_visible` and `_on_gui_hidden` methods on the content widgets.
+
+        Args:
+            event (tk.Event): The event object.
+        
+        Returns:
+            None
+        """
         notebook = event.widget
         selected_tab_id = notebook.select()
 

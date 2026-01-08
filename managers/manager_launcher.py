@@ -1,4 +1,18 @@
 # managers/manager_launcher.py
+#
+# This file contains the function to launch and initialize all the application's managers.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260108.120300.1
 
 import os
 import inspect
@@ -22,6 +36,19 @@ from workers.monitoring.fleet_status_monitor import (
 
 
 def launch_managers(app, splash, root, state_cache_manager, mqtt_connection_manager):
+    """
+    Initializes and launches all the application's managers.
+
+    Args:
+        app: The main application object.
+        splash (SplashScreen): The splash screen object.
+        root (tk.Tk): The root Tkinter window.
+        state_cache_manager (StateCacheManager): The state cache manager.
+        mqtt_connection_manager (MqttConnectionManager): The MQTT connection manager.
+
+    Returns:
+        dict: A dictionary containing all the initialized managers, or None if an error occurs.
+    """
     current_function_name = inspect.currentframe().f_code.co_name
     debug_logger(
         message=f"🟢️️️🟢 Entering '{current_function_name}'. Preparing to launch a fleet of managers!",

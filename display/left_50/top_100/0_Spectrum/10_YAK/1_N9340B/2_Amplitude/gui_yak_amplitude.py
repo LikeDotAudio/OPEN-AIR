@@ -1,6 +1,6 @@
-# A plug-and-play GUI wrapper that dynamically resolves its config.
-# Decoupled from MQTT requirements for initial render to prevent stalling.
-# Includes robust error handling, forced rendering, and graceful failure modes.
+# display/left_50/top_100/0_Spectrum/10_YAK/1_N9340B/2_Amplitude/gui_yak_amplitude.py
+#
+# This file provides a generic GUI wrapper for instrument control, loading its interface from a JSON configuration.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20251229.1715.2
+# Version 20260108.121300.1
 
 import os
 import pathlib
@@ -50,13 +50,16 @@ class GenericInstrumentGui(ttk.Frame):
 
     def __init__(self, parent, json_path=None, config=None, **kwargs):
         """
-        Initialize the Generic Instrument GUI.
+        Initializes the GenericInstrumentGui.
 
         Args:
-            parent: The parent widget.
-            json_path (str, optional): Path to the JSON config file.
-            config (dict, optional): Configuration dictionary.
-            **kwargs: Additional arguments for the Frame.
+            parent (tk.Widget): The parent widget.
+            json_path (str, optional): Path to the JSON configuration file for this GUI. Defaults to None.
+            config (dict, optional): A dictionary containing configuration data, including state_mirror_engine and subscriber_router. Defaults to None.
+            **kwargs: Arbitrary keyword arguments to be passed to the ttk.Frame constructor.
+
+        Returns:
+            None
         """
         # 1. Initialize Parent Frame (Cleanly!)
         super().__init__(parent, **kwargs)
@@ -81,6 +84,15 @@ class GenericInstrumentGui(ttk.Frame):
         self._init_ui()
 
     def _init_ui(self):
+        """
+        Initializes the user interface by displaying a status label and scheduling the dynamic GUI construction.
+        
+        Args:
+            None
+            
+        Returns:
+            None
+        """
         current_function_name = inspect.currentframe().f_code.co_name
 
         if app_constants.global_settings["debug_enabled"]:
@@ -115,6 +127,16 @@ class GenericInstrumentGui(ttk.Frame):
         self.after(50, self._construct_dynamic_gui)
 
     def _construct_dynamic_gui(self):
+        """
+        Constructs the dynamic GUI using the DynamicGuiBuilder based on the loaded JSON configuration.
+        Handles file not found errors and other exceptions gracefully.
+        
+        Args:
+            None
+            
+        Returns:
+            None
+        """
         try:
             if app_constants.global_settings["debug_enabled"]:
                 debug_logger(
@@ -185,8 +207,14 @@ class GenericInstrumentGui(ttk.Frame):
 
     def _on_tab_selected(self, *args, **kwargs):
         """
-        Called by the grand orchestrator (Application) when this tab is brought to focus.
-        Using *args to swallow any positional events or data passed by the orchestrator.
+        Callback method invoked when this GUI's tab is selected.
+
+        Args:
+            *args: Variable length argument list.
+            **kwargs: Arbitrary keyword arguments.
+            
+        Returns:
+            None
         """
         current_function_name = inspect.currentframe().f_code.co_name
 

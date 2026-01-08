@@ -1,11 +1,18 @@
 # workers/logic/state_mirror_engine.py
 #
-# Manages the synchronization between the GUI state and the MQTT Broker.
-# Acts as the "Flux Capacitor" of data flow—translating between visual widgets
-# and the invisible energy of MQTT topics.
+# This file defines the StateMirrorEngine class, which synchronizes GUI state with the MQTT broker.
 #
 # Author: Anthony Peter Kuzub
-# Version 20251225.004500.1
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260108.120700.1
 
 import orjson
 import inspect
@@ -29,6 +36,18 @@ current_version_hash = 20251225 * 4500 * 1
 
 class StateMirrorEngine:
     def __init__(self, base_topic, subscriber_router, root, state_cache_manager):
+        """
+        Initializes the StateMirrorEngine.
+
+        Args:
+            base_topic (str): The base MQTT topic for the application.
+            subscriber_router (MqttSubscriberRouter): The MQTT subscriber router.
+            root (tk.Tk): The root Tkinter window.
+            state_cache_manager (StateCacheManager): The state cache manager.
+            
+        Returns:
+            None
+        """
         self.base_topic = base_topic
         self.subscriber_router = subscriber_router
         self.root = root
@@ -43,7 +62,13 @@ class StateMirrorEngine:
 
     def _process_queue(self):
         """
-        Process the GUI update queue from the main thread.
+        Processes the GUI update queue from the main thread.
+        
+        Args:
+            None
+            
+        Returns:
+            None
         """
         try:
             while not self.update_queue.empty():
@@ -68,7 +93,16 @@ class StateMirrorEngine:
     ):
         """
         Registers a widget to be tracked by the engine.
-        Sanitizes topics to prevent 'OPEN-AIR/OPEN-AIR//fader' errors.
+
+        Args:
+            widget_id (str): The unique ID of the widget.
+            tk_variable (tk.Variable): The Tkinter variable associated with the widget.
+            tab_name (str): The name of the tab the widget belongs to.
+            config (dict): The configuration dictionary for the widget.
+            update_callback (function, optional): A callback function to update the widget. Defaults to None.
+
+        Returns:
+            None
         """
         # 1. Sanitize the Tab Name (Remove redundant Root)
         clean_tab = tab_name
@@ -97,10 +131,13 @@ class StateMirrorEngine:
 
     def initialize_widget_state(self, widget_id):
         """
-        Initializes a widget's state. If the state exists in the cache,
-        it updates the widget. Otherwise, it broadcasts the widget's
-        initial state.
-        Returns True if state was loaded from cache, False otherwise.
+        Initializes a widget's state from the cache or broadcasts its initial state.
+
+        Args:
+            widget_id (str): The unique ID of the widget.
+
+        Returns:
+            bool: True if the state was loaded from the cache, False otherwise.
         """
         if widget_id not in self.registered_widgets:
             if app_constants.global_settings["debug_enabled"]:
@@ -226,8 +263,13 @@ class StateMirrorEngine:
 
     def broadcast_gui_change_to_mqtt(self, widget_id):
         """
-        Called when the GUI changes (User Input).
-        It broadcasts the change to the MQTT broker, including the GUID.
+        Broadcasts a GUI change to the MQTT broker.
+
+        Args:
+            widget_id (str): The unique ID of the widget that changed.
+            
+        Returns:
+            None
         """
         if self._suppress_broadcast:
             return
@@ -271,19 +313,42 @@ class StateMirrorEngine:
                 )
 
     def is_widget_registered(self, widget_id: str) -> bool:
-        """Checks if a widget is registered by its widget_id."""
+        """
+        Checks if a widget is registered.
+
+        Args:
+            widget_id (str): The unique ID of the widget.
+
+        Returns:
+            bool: True if the widget is registered, False otherwise.
+        """
         return widget_id in self.registered_widgets
 
     def get_widget_topic(self, widget_id):
         """
-        Returns the full topic for a registered widget.
+        Returns the full MQTT topic for a registered widget.
+
+        Args:
+            widget_id (str): The unique ID of the widget.
+
+        Returns:
+            str: The full MQTT topic for the widget, or None if the widget is not registered.
         """
         if widget_id in self.registered_widgets:
             return self.registered_widgets[widget_id]["topic"]
         return None
 
     def publish_command(self, topic: str, payload: str):
-        """Publishes a command to the MQTT broker."""
+        """
+        Publishes a command to the MQTT broker.
+
+        Args:
+            topic (str): The MQTT topic to publish to.
+            payload (str): The payload to publish.
+            
+        Returns:
+            None
+        """
         if self._silent_update:
             return
 
@@ -294,8 +359,14 @@ class StateMirrorEngine:
 
     def sync_incoming_mqtt_to_gui(self, topic, payload):
         """
-        Handles incoming messages from the Broker. This runs in the MQTT thread.
-        It validates the message and puts the required GUI update into a thread-safe queue.
+        Handles incoming MQTT messages and updates the GUI accordingly.
+
+        Args:
+            topic (str): The MQTT topic the message was received on.
+            payload (str or dict): The payload of the message.
+            
+        Returns:
+            None
         """
         try:
             data = None

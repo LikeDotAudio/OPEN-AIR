@@ -1,8 +1,18 @@
 # workers/logger/logger.py
-# Main orchestrator for the logging system.
+#
+# This file is the main orchestrator for the logging system, handling buffering and delegation.
+#
 # Author: Anthony Peter Kuzub
-# Description: Handles logging with a temporal buffer for pre-initialization messages.
-# Version: 20251226.004000.8
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260108.120500.1
 
 import os
 import time
@@ -33,9 +43,14 @@ _log_file_timestamp = None
 
 def _get_config_instance():
     """
-    Retrieves the global configuration instance.
-    Uses a cache to avoid repeated lookups.
-    Handles cases where the Config object might not be fully initialized yet.
+    Retrieves the global configuration instance, using a cache to avoid repeated lookups.
+    Handles cases where the Config object might not be fully initialized yet by using a dummy config.
+
+    Args:
+        None
+
+    Returns:
+        Config: The configuration instance.
     """
     global _config_instance_cache
     if _config_instance_cache is None:
@@ -89,9 +104,14 @@ def _get_config_instance():
 
 def _clean_context_string(c_file: str, c_func: str) -> str:
     """
-    Helper to strip .py, remove underscores, and remove whitespace from file/function names.
-    Input: "my_script.py", "my_func"
-    Output: "myscript🪿 myfunc "
+    Cleans up file and function names for logging.
+
+    Args:
+        c_file (str): The file name.
+        c_func (str): The function name.
+
+    Returns:
+        str: A cleaned and formatted string for logging.
     """
     if c_file == "?" and c_func == "?":
         return ""
@@ -109,9 +129,13 @@ def _clean_context_string(c_file: str, c_func: str) -> str:
 
 def set_log_directory(directory: str):
     """
-    Sets the global log directory. This action also triggers flushing
-    any buffered messages to their destinations (terminal, file, error log)
-    based on current configuration.
+    Sets the global log directory and flushes any buffered messages.
+
+    Args:
+        directory (str): The path to the log directory.
+        
+    Returns:
+        None
     """
     global _log_directory, _log_file_timestamp
     _log_directory = directory
@@ -154,15 +178,14 @@ def set_log_directory(directory: str):
 
 def debug_logger(message: str, **kwargs):
     """
-    Public interface for logging debug messages.
-    Determines if messages should be buffered or processed immediately based on
-    whether the log directory has been set. Delegates to specialized modules
-    for display, file writing, and error logging.
+    Logs a debug message, buffering it if the log directory is not yet set.
 
     Args:
-        message (str): The log message content.
-        **kwargs: Optional keyword arguments, typically including caller context
-                  (e.g., file, function, version) passed from _get_log_args().
+        message (str): The log message.
+        **kwargs: Additional context for the log message.
+        
+    Returns:
+        None
     """
     config_instance = _get_config_instance()
 
@@ -228,8 +251,13 @@ def debug_logger(message: str, **kwargs):
 
 def console_log(message: str):
     """
-    Public interface for logging general console/user messages.
-    These messages are primarily intended for terminal display.
+    Logs a message to the console.
+
+    Args:
+        message (str): The message to log.
+        
+    Returns:
+        None
     """
     config_instance = _get_config_instance()
 

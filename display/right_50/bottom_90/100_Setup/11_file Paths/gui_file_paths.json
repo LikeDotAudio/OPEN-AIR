@@ -1,0 +1,92 @@
+{
+
+            "type": "_Label_Group",
+            "AES70": "OcaPathManager",
+            "description": "Displays the static file and directory paths used by the application. All fields are read-only sensors.",
+            "fields": {
+                "CONFIG_MAIN_PATH": {
+                    "label": "Main Configuration Path",
+                    "value": "config/program_config.ini",
+                    "type": "_Label",
+                    "AES70": "OcaStringSensor",
+                    "units": null
+                },
+                "CONFIG_INSTRUMENT_PATH": {
+                    "label": "Instrument Configuration Path",
+                    "value": "config/instrument_config.ini",
+                    "type": "_Label",
+                    "AES70": "OcaStringSensor",
+                    "units": null
+                },
+                "CONFIG_MARKER_PATH": {
+                    "label": "Marker Configuration Path",
+                    "value": "config/marker_config.ini",
+                    "type": "_Label",
+                    "AES70": "OcaStringSensor",
+                    "units": null
+                },
+                "CONFIG_LOG_FILES_PATH": {
+                    "label": "Log Files Path",
+                    "value": "logs/",
+                    "type": "_Label",
+                    "AES70": "OcaStringSensor",
+                    "units": null
+                },
+                "DATA_MAIN_PATH": {
+                    "label": "Main Data Path",
+                    "value": "DATA/",
+                    "type": "_Label",
+                    "AES70": "OcaStringSensor",
+                    "units": null
+                },
+                "DATA_SCANS_PATH": {
+                    "label": "Scans Data Path",
+                    "value": "DATA/Scans/",
+                    "type": "_Label",
+                    "AES70": "OcaStringSensor",
+                    "units": null
+                },
+                "DATA_PLOTS_PATH": {
+                    "label": "Plots Data Path",
+                    "value": "DATA/Plots/",
+                    "type": "_Label",
+                    "AES70": "OcaStringSensor",
+                    "units": null
+                },
+                "DATA_PRESETS_PATH": {
+                    "label": "Presets Data Path",
+                    "value": "DATA/Presets/",
+                    "type": "_Label",
+                    "AES70": "OcaStringSensor",
+                    "units": null
+                },
+                "DATA_PRESETS_CSV_PATH": {
+                    "label": "Presets CSV Path",
+                    "value": "DATA/Presets/presets.csv",
+                    "type": "_Label",
+                    "AES70": "OcaStringSensor",
+                    "units": null
+                },
+                "DATA_MARKERS_PATH": {
+                    "label": "Markers Data Path",
+                    "value": "DATA/Markers/",
+                    "type": "_Label",
+                    "AES70": "OcaStringSensor",
+                    "units": null
+                },
+                "DATA_IMD_LOG_PATH": {
+                    "label": "IMD Log Path",
+                    "value": "DATA/Imd/",
+                    "type": "_Label",
+                    "AES70": "OcaStringSensor",
+                    "units": null
+                },
+                "DATA_VISA_COMMANDS_PATH": {
+                    "label": "VISA Commands Path",
+                    "value": "DATA/Visa_Commands/",
+                    "type": "_Label",
+                    "AES70": "OcaStringSensor",
+                    "units": null
+                }
+            }
+        }

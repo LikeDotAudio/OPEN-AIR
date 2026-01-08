@@ -12,8 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-#
-# Version 20251215.120000.1
+# Version 20260108.120100.1
 
 import os
 import inspect
@@ -45,12 +44,31 @@ class WorkerLauncher:
     """
 
     def __init__(self, splash_screen, console_print_func):
+        """
+        Initializes the WorkerLauncher.
+
+        Args:
+            splash_screen (SplashScreen): The splash screen object to display progress.
+            console_print_func (function): A function to print messages to the GUI console.
+        
+        Returns:
+            None
+        """
         # Adhering to 'No Magic Numbers' principle
         self.splash = splash_screen
         self._print_to_gui_console = console_print_func
         self.current_class_name = self.__class__.__name__
 
     def launch_all_workers(self):
+        """
+        Initializes and starts all registered worker processes.
+
+        Args:
+            None
+
+        Returns:
+            bool: True if all workers were launched successfully, False otherwise.
+        """
         # Initializes and starts all registered worker processes.
         current_function_name = inspect.currentframe().f_code.co_name
 

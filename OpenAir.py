@@ -1,3 +1,19 @@
+# OpenAir.py
+#
+# The main entry point for the OPEN-AIR application.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260108.120000.1
+
 import sys
 import os
 import pathlib
@@ -43,6 +59,16 @@ current_version = "20251226.000000.1"
 
 
 def _reveal_main_window(root, splash):
+    """
+    Reveals the main application window and hides the splash screen.
+
+    Args:
+        root (tk.Tk): The root Tkinter window.
+        splash (SplashScreen): The splash screen object.
+    
+    Returns:
+        None
+    """
     debug_logger(message="DEBUG: Entering _reveal_main_window.", **_get_log_args())
     if app_constants.ENABLE_DEBUG_SCREEN:
         debug_logger(message="DEBUG: Revealing main window...", **_get_log_args())
@@ -54,6 +80,16 @@ def _reveal_main_window(root, splash):
 
 
 def _reveal_main_window(root, splash):
+    """
+    Reveals the main application window and hides the splash screen.
+
+    Args:
+        root (tk.Tk): The root Tkinter window.
+        splash (SplashScreen): The splash screen object.
+
+    Returns:
+        None
+    """
     debug_logger(message="DEBUG: Entering _reveal_main_window.", **_get_log_args())
     if app_constants.ENABLE_DEBUG_SCREEN:
         debug_logger(message="DEBUG: Revealing main window...", **_get_log_args())
@@ -65,6 +101,17 @@ def _reveal_main_window(root, splash):
 
 
 def _initialize_application(root, splash):
+    """
+    Initializes the application in a background thread, including MQTT,
+    state cache, and managers.
+
+    Args:
+        root (tk.Tk): The root Tkinter window.
+        splash (SplashScreen): The splash screen object.
+
+    Returns:
+        None
+    """
     debug_logger(
         message="DEBUG: Entering _initialize_application (background thread).",
         **_get_log_args(),
@@ -144,8 +191,17 @@ def action_open_display(
     root, splash, mqtt_connection_manager, subscriber_router, state_cache_manager
 ):
     """
-    Builds and displays the main application window, ensuring the splash
-    screen remains responsive by updating the event loop between heavy steps.
+    Builds and displays the main application window.
+
+    Args:
+        root (tk.Tk): The root Tkinter window.
+        splash (SplashScreen): The splash screen object.
+        mqtt_connection_manager (MqttConnectionManager): The MQTT connection manager.
+        subscriber_router (MqttSubscriberRouter): The MQTT subscriber router.
+        state_cache_manager (StateCacheManager): The state cache manager.
+
+    Returns:
+        Application: The main application object, or None if an error occurs.
     """
     current_function_name = inspect.currentframe().f_code.co_name
     debug_logger(message=f"▶️ Entering {current_function_name}", **_get_log_args())
@@ -193,7 +249,16 @@ def action_open_display(
 
 
 def main():
-    """The main execution function for the application."""
+    """
+    The main execution function for the application. It initializes paths, logging,
+    and the GUI.
+    
+    Args:
+        None
+        
+    Returns:
+        None
+    """
     GLOBAL_PROJECT_ROOT = None
     data_dir = None
 

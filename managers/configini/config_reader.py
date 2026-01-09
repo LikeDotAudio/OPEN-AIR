@@ -69,6 +69,10 @@ class Config:
         self._initialized = True
         self._local_debug_enable_state = self.ENABLE_DEBUG_SCREEN
         self.read_config()  # Read config immediately upon first instantiation
+        from workers.logger.logger import debug_logger, console_log, set_log_directory # Import logger here to avoid circular dependency
+        self.debug_logger = debug_logger
+        self.console_log = console_log
+        self.set_log_directory = set_log_directory
 
     @classmethod
     def get_instance(cls):

@@ -28,19 +28,6 @@ from workers.mqtt.mqtt_topic_utils import get_topic
 
 
 class CustomHorizontalFaderFrame(tk.Frame):
-    # Initializes the CustomHorizontalFaderFrame widget.
-    # This constructor sets up the horizontal fader with its visual properties and behavior
-    # based on the provided configuration, including theme colors, value ranges, and tick marks.
-    # Inputs:
-    #     master: The parent tkinter widget.
-    #     variable (tk.DoubleVar): The tkinter variable to bind to the fader's value.
-    #     config (dict): Configuration settings for the fader.
-    #     path (str): The widget's unique identifier path for state management.
-    #     state_mirror_engine: The engine for synchronizing state with the MQTT broker.
-    #     command (function): The callback for when the fader's value changes.
-    #     tick_interval (int, optional): The interval for displaying tick marks.
-    # Outputs:
-    #     None.
     def __init__(
         self,
         master,
@@ -51,8 +38,6 @@ class CustomHorizontalFaderFrame(tk.Frame):
         command,
         tick_interval=None,
     ):
-        # Extract parameters from config and provide defaults
-        # Theme Resolution
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         self.bg_color = colors.get("bg", "#2b2b2b")
         self.accent_color = colors.get("accent", "#33A1FD")
@@ -60,7 +45,6 @@ class CustomHorizontalFaderFrame(tk.Frame):
         self.track_col = colors.get("secondary", "#444444")
         self.handle_col = colors.get("fg", "#dcdcdc")
 
-        # Widget-specific config values
         self.min_val = float(config.get("value_min", 0.0))
         self.max_val = float(config.get("value_max", 100.0))
         self.log_exponent = float(config.get("log_exponent", 1.0))
@@ -74,10 +58,10 @@ class CustomHorizontalFaderFrame(tk.Frame):
         self.label_color = config.get("label_color", "white")
         self.value_color = config.get("value_color", "white")
         self.label_text = config.get("label_active", "")
-        self.outline_col = "black"  # Not configurable at the moment
-        self.outline_width = 1  # Not configurable at the moment
+        self.outline_col = "black"
+        self.outline_width = 1
         self.ticks = config.get("ticks", None)
-        self.tick_interval = tick_interval  # Store the passed tick_interval
+        self.tick_interval = tick_interval
 
         super().__init__(
             master,
@@ -90,17 +74,9 @@ class CustomHorizontalFaderFrame(tk.Frame):
         self.variable = variable
         self.path = path
         self.state_mirror_engine = state_mirror_engine
-        self.command = (
-            command  # The function to call when value changes (e.g., on_drag_or_click)
-        )
-        self.temp_entry = None  # Initialize temp_entry
+        self.command = command
+        self.temp_entry = None
 
-    # Sets the fader's value to its predefined reference point.
-    # This provides a quick way to reset the fader to a default or common value.
-    # Inputs:
-    #     event: The tkinter event object that triggered the call.
-    # Outputs:
-    #     None.
     def _jump_to_reff_point(self, event):
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(
@@ -112,12 +88,6 @@ class CustomHorizontalFaderFrame(tk.Frame):
         if self.state_mirror_engine:
             self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
 
-    # Opens a temporary entry widget for manual value input.
-    # This allows for precise value entry, bypassing direct mouse interaction.
-    # Inputs:
-    #     event: The tkinter event object, used to position the entry widget.
-    # Outputs:
-    #     None.
     def _open_manual_entry(self, event):
         if self.temp_entry and self.temp_entry.winfo_exists():
             return
@@ -132,12 +102,6 @@ class CustomHorizontalFaderFrame(tk.Frame):
         self.temp_entry.bind("<FocusOut>", self._submit_manual_entry)
         self.temp_entry.bind("<Escape>", self._destroy_manual_entry)
 
-    # Submits the value from the manual entry widget.
-    # This validates the entered value and, if valid, updates the fader's state.
-    # Inputs:
-    #     event: The tkinter event object.
-    # Outputs:
-    #     None.
     def _submit_manual_entry(self, event):
         raw_value = self.temp_entry.get()
         try:
@@ -160,11 +124,6 @@ class CustomHorizontalFaderFrame(tk.Frame):
                 )
         self._destroy_manual_entry(event)
 
-    # Destroys the temporary manual entry widget.
-    # Inputs:
-    #     event: The tkinter event object.
-    # Outputs:
-    #     None.
     def _destroy_manual_entry(self, event):
         if self.temp_entry and self.temp_entry.winfo_exists():
             self.temp_entry.destroy()
@@ -172,30 +131,13 @@ class CustomHorizontalFaderFrame(tk.Frame):
 
 
 class CustomHorizontalFaderCreatorMixin:
-    # Creates a custom horizontal fader widget.
-    # This method handles the creation and configuration of the horizontal fader,
-    # including its tkinter variable, callbacks, and registration with the state engine.
-    # Inputs:
-    #     parent_widget: The parent tkinter widget.
-    #     config_data (dict): The configuration for the fader.
-    #     **kwargs: Additional keyword arguments.
-    # Outputs:
-    #     CustomHorizontalFaderFrame: The created fader frame widget.
-    def _create_custom_horizontal_fader(
-        self, parent_widget, config_data, **kwargs
-    ):  # Updated signature
-        """Creates a custom horizontal fader widget."""
-        current_function_name = "_create_custom_horizontal_fader"
 
-        # Extract only widget-specific config from config_data
+    def _create_custom_horizontal_fader(self, parent_widget, config_data, **kwargs):
         label = config_data.get("label_active")
-        config = config_data  # config_data is the config
+        config = config_data
         path = config_data.get("path")
-        tick_interval = config_data.get(
-            "tick_interval"
-        )  # Extract tick_interval from config_data
+        tick_interval = config_data.get("tick_interval")
 
-        # Access global context directly from self
         state_mirror_engine = self.state_mirror_engine
         subscriber_router = self.subscriber_router
         base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
@@ -215,25 +157,23 @@ class CustomHorizontalFaderCreatorMixin:
             norm_x = (event.x - 10) / (width - 20)
             norm_x = max(0.0, min(1.0, norm_x))
 
-            # Apply logarithmic scaling if needed
             log_norm_pos = norm_x**frame.log_exponent
             current_value = frame.min_val + log_norm_pos * (
                 frame.max_val - frame.min_val
             )
             frame.variable.set(current_value)
 
-            # Broadcast the change from the user interaction
             if state_mirror_engine:
                 state_mirror_engine.broadcast_gui_change_to_mqtt(path)
 
         frame = CustomHorizontalFaderFrame(
-            parent_widget,  # Use parent_widget here
+            parent_widget,
             variable=fader_value_var,
             config=config,
             path=path,
             state_mirror_engine=self.state_mirror_engine,
             command=on_drag_or_click_callback,
-            tick_interval=tick_interval,  # Pass the tick_interval
+            tick_interval=tick_interval,
         )
         if label:
             ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
@@ -272,85 +212,18 @@ class CustomHorizontalFaderCreatorMixin:
         canvas.bind("<Alt-Button-1>", frame._open_manual_entry)
         canvas.bind("<Configure>", lambda e: on_fader_value_change())
 
-        # if path:
-        #     widget_id = path
-        #     self.state_mirror_engine.register_widget(
-        #         widget_id, fader_value_var, base_mqtt_topic_from_path, config
-        #     )
-
-        #     # Subscribe to the topic for incoming messages
-        #     topic = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, widget_id)
-        #     self.subscriber_router.subscribe_to_topic(
-        #         topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui
-        #     )
-        #     state_mirror_engine.initialize_widget_state(path)
-
         return frame
 
-    # Draws a rectangle with rounded corners on a canvas.
-    # This is a utility function for creating custom-shaped UI elements.
-    # Inputs:
-    #     canvas: The tkinter canvas to draw on.
-    #     x1, y1, x2, y2 (int): The coordinates of the bounding box.
-    #     radius (int): The corner radius.
-    #     **kwargs: Additional keyword arguments for the canvas item.
-    # Outputs:
-    #     int: The ID of the created canvas item.
     def _draw_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius, **kwargs):
         points = [
-            x1 + radius,
-            y1,
-            x1 + radius,
-            y1,
-            x2 - radius,
-            y1,
-            x2 - radius,
-            y1,
-            x2,
-            y1,
-            x2,
-            y1 + radius,
-            x2,
-            y1 + radius,
-            x2,
-            y2 - radius,
-            x2,
-            y2 - radius,
-            x2,
-            y2,
-            x2 - radius,
-            y2,
-            x2 - radius,
-            y2,
-            x1 + radius,
-            y2,
-            x1 + radius,
-            y2,
-            x1,
-            y2,
-            x1,
-            y2 - radius,
-            x1,
-            y2 - radius,
-            x1,
-            y1 + radius,
-            x1,
-            y1 + radius,
-            x1,
-            y1,
+            x1 + radius, y1, x1 + radius, y1, x2 - radius, y1, x2 - radius, y1,
+            x2, y1, x2, y1 + radius, x2, y1 + radius, x2, y2 - radius,
+            x2, y2 - radius, x2, y2, x2 - radius, y2, x2 - radius, y2,
+            x1 + radius, y2, x1 + radius, y2, x1, y2, x1, y2 - radius,
+            x1, y2 - radius, x1, y1 + radius, x1, y1 + radius, x1, y1,
         ]
         return canvas.create_polygon(points, **kwargs, smooth=True)
 
-    # Draws the custom horizontal fader widget on its canvas.
-    # This method renders all visual elements of the fader, including the track, handle,
-    # and tick marks, based on its current value and configuration.
-    # Inputs:
-    #     frame_instance (CustomHorizontalFaderFrame): The fader frame instance.
-    #     canvas: The tkinter canvas to draw on.
-    #     width, height (int): The dimensions of the canvas.
-    #     value (float): The current value of the fader.
-    # Outputs:
-    #     None.
     def _draw_horizontal_fader(self, frame_instance, canvas, width, height, value):
         canvas.delete("all")
         cy = height / 2
@@ -375,28 +248,13 @@ class CustomHorizontalFaderCreatorMixin:
         display_norm_pos = norm_value ** (1.0 / frame_instance.log_exponent)
         handle_x = (width - 20) * display_norm_pos + 10
 
-        # Draw Ticks
         tick_color = "light grey"
         tick_length_half = height * 0.1
 
         tick_values_to_draw = []
         if frame_instance.ticks is not None:
-            # Use custom ticks if provided in config
             tick_values_to_draw = frame_instance.ticks
-        elif (
-            frame_instance.tick_interval is not None
-            and frame_instance.tick_interval > 0
-        ):
-            # Use the passed tick_interval
-            current_tick = (
-                math.ceil(frame_instance.min_val / frame_instance.tick_interval)
-                * frame_instance.tick_interval
-            )
-            while current_tick <= frame_instance.max_val:
-                tick_values_to_draw.append(current_tick)
-                current_tick += frame_instance.tick_interval
         else:
-            # Fallback to internal dynamic tick generation if no tick_interval is provided
             value_range = frame_instance.max_val - frame_instance.min_val
             if value_range <= 10:
                 tick_interval = 2
@@ -406,16 +264,18 @@ class CustomHorizontalFaderCreatorMixin:
                 tick_interval = 10
             elif value_range <= 1000:
                 tick_interval = 50
-            else:  # value_range > 1000
-                tick_interval = 100
+            elif value_range <= 5000:
+                tick_interval = 250
+            else: 
+                tick_interval = 500
 
-            # Generate ticks
-            current_tick = (
-                math.ceil(frame_instance.min_val / tick_interval) * tick_interval
-            )
-            while current_tick <= frame_instance.max_val:
-                tick_values_to_draw.append(current_tick)
-                current_tick += tick_interval
+            if tick_interval > 0:
+                current_tick = (
+                    math.ceil(frame_instance.min_val / tick_interval) * tick_interval
+                )
+                while current_tick <= frame_instance.max_val:
+                    tick_values_to_draw.append(current_tick)
+                    current_tick += tick_interval
 
         for i, tick_value in enumerate(tick_values_to_draw):
             linear_tick_norm = (
@@ -444,7 +304,6 @@ class CustomHorizontalFaderCreatorMixin:
                         anchor="n",
                     )
 
-        # Handle
         cap_width = 30
         cap_height = height * 0.7
         self._draw_rounded_rectangle(
@@ -458,7 +317,6 @@ class CustomHorizontalFaderCreatorMixin:
             outline=frame_instance.track_col,
         )
 
-        # Center line
         center_line_length = cap_height * 0.9
         canvas.create_line(
             handle_x,
@@ -469,7 +327,6 @@ class CustomHorizontalFaderCreatorMixin:
             width=2,
         )
 
-        # 60% lines at 25% and 75% of width
         side_line_length = cap_height * 0.6
         x_offset = cap_width * 0.25
         canvas.create_line(

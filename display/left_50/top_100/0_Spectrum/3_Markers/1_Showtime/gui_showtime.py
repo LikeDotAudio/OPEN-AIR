@@ -29,7 +29,7 @@ app_constants = Config.get_instance()  # Get the singleton instance
 # --- Global Scope Variables ---
 current_file_path = pathlib.Path(__file__).resolve()
 # Use GLOBAL_PROJECT_ROOT for consistency
-current_file = str(current_file_path.relative_to(GLOBAL_PROJECT_ROOT)).replace("\", "/")
+current_file = str(current_file_path.relative_to(GLOBAL_PROJECT_ROOT)).replace("\\", "/")
 Current_Date = 20251226
 Current_Time = 120000
 Current_iteration = 44
@@ -127,7 +127,7 @@ class ShowtimeTab(ttk.Frame):
         self._create_widgets()
 
         if app_constants.global_settings["debug_enabled"]:
-            debug_logger(message=f"🟢️️️🟢 Initialized ShowtimeTab.", **_get_log_args())
+app_constants.debug_logger
 
     # Applies the specified theme to the Showtime tab's widgets.
     # This method configures the styles for various ttk widgets within the tab,

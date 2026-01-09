@@ -47,7 +47,7 @@ current_file_path = pathlib.Path(__file__).resolve()
 # Assuming structure: ProjectRoot/display/left_50/top_100/0_Spectrum Analizer/3_markers/2_peak_hunter/gui_peak_hunter.py
 # That is 7 levels deep.
 project_root = current_file_path.parents[6]
-current_file = str(current_file_path.relative_to(project_root)).replace("\", "/")
+current_file = str(current_file_path.relative_to(project_root)).replace("\\\\", "/")
 
 
 class MarkerPeakHunterGUI(ttk.Frame):

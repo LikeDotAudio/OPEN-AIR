@@ -13,7 +13,7 @@
           "ref_level_dBm": {
             "label_active": "Reference Level",
             "label_inactive": "Reference Level",
-            "type": "_Horizontal_knob_Value",
+            "type": "_CustomHorizontalFader",
             "handler": "set_ref_level",
             "yak_handler": {
               "enable": true,
@@ -289,7 +289,7 @@
       "power_attenuation_dB": {
         "label_active": "Power Attenuation",
         "label_inactive": "Power Attenuation",
-        "type": "_Horizontal_knob_Value",
+        "type": "_CustomHorizontalFader",
         "handler": "set_power_attenuation",
         "yak_handler": {
           "enable": true,

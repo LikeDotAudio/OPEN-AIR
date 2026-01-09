@@ -91,7 +91,7 @@ current_version = "20260104.200500.3"
 current_version_hash = 20260104 * 200500 * 3
 current_file_path = pathlib.Path(__file__).resolve()
 # Use GLOBAL_PROJECT_ROOT for consistency
-current_file = str(current_file_path.relative_to(GLOBAL_PROJECT_ROOT)).replace("\", "/")
+current_file = str(current_file_path.relative_to(GLOBAL_PROJECT_ROOT)).replace("\\\\", "/")
 
 
 # --- Constants ---
@@ -150,8 +150,7 @@ class MarkerImporterTab(ttk.Frame, GuiTableCreatorMixin):
         # Arguments for _create_gui_table
         self.table_label = "Marker Editor"  # A descriptive label
         self.table_path = "markers_importer"  # Unique path for this table instance
-        self.base_mqtt_topic_from_path =
-            self.app_instance.state_mirror_engine.base_topic
+        self.base_mqtt_topic_from_path =            self.app_instance.state_mirror_engine.base_topic
         self.state_mirror_engine = self.app_instance.state_mirror_engine
         self.subscriber_router = self.app_instance.subscriber_router
 

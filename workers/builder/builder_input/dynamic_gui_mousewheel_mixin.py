@@ -1,19 +1,7 @@
-# workers/builder/dynamic_gui_mousewheel_mixin.py
+# builder_input/dynamic_gui_mousewheel_mixin.py
 #
-# This file (dynamic_gui_mousewheel_mixin.py) provides the MousewheelScrollMixin class, adding mousewheel scrolling functionality to Tkinter Canvas widgets.
-# A complete and comprehensive pre-amble that describes the file and the functions within.
+# This file provides the MousewheelScrollMixin class, adding mousewheel scrolling functionality to Tkinter Canvas widgets.
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251213  ##Update on the day the change was made
-Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 44  ## a running version number - incriments by one each time
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
@@ -24,7 +12,7 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-
+# Version 20250821.200641.1
 
 import sys
 import inspect
@@ -57,6 +45,13 @@ class MousewheelScrollMixin:
     Assumes the presence of `self.canvas` and logging utilities.
     """
 
+    # Handles mousewheel scroll events for the canvas.
+    # This method interprets mousewheel input (platform-specific) and scrolls the
+    # canvas vertically, providing intuitive navigation for large content areas.
+    # Inputs:
+    #     event: The tkinter mousewheel event object.
+    # Outputs:
+    #     None.
     def _on_mousewheel(self, event):
         current_function_name = inspect.currentframe().f_code.co_name
         if app_constants.global_settings["debug_enabled"]:
@@ -73,6 +68,13 @@ class MousewheelScrollMixin:
         else:  # Windows and macOS
             self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
+    # Binds mousewheel scroll events to the canvas.
+    # This method attaches the _on_mousewheel handler to platform-specific mousewheel
+    # events when the mouse cursor enters the canvas area.
+    # Inputs:
+    #     event: The tkinter event object (e.g., <Enter> event).
+    # Outputs:
+    #     None.
     def _bind_mousewheel(self, event):
         current_function_name = inspect.currentframe().f_code.co_name
         if app_constants.global_settings["debug_enabled"]:
@@ -85,6 +87,13 @@ class MousewheelScrollMixin:
         self.canvas.bind_all("<Button-4>", self._on_mousewheel)  # Linux scroll up
         self.canvas.bind_all("<Button-5>", self._on_mousewheel)  # Linux scroll down
 
+    # Unbinds mousewheel scroll events from the canvas.
+    # This method removes the mousewheel event handlers when the mouse cursor leaves
+    # the canvas area, preventing unintended scrolling in other parts of the application.
+    # Inputs:
+    #     event: The tkinter event object (e.g., <Leave> event).
+    # Outputs:
+    #     None.
     def _unbind_mousewheel(self, event):
         current_function_name = inspect.currentframe().f_code.co_name
         if app_constants.global_settings["debug_enabled"]:

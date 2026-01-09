@@ -1,16 +1,5 @@
-# workers/worker_preset_from_device.py
+# presets/XXXworker_preset_from_device.py
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251129  ##Update on the day the change was made
-Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 1  ## a running version number - incriments by one each time
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
 # A worker module to handle the logic for querying, parsing, and presenting
 # presets stored on the connected instrument via MQTT.
 #
@@ -24,8 +13,7 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-#
-# Version 20251013.221814.3
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -67,6 +55,13 @@ class PresetFromDeviceWorker:
     A worker class that manages preset operations on the device via MQTT.
     """
 
+    # Initializes the PresetFromDeviceWorker.
+    # This constructor sets up the worker with an MQTT utility and subscribes
+    # to the master topic to capture incoming preset lists from the device.
+    # Inputs:
+    #     mqtt_util (MqttControllerUtility): An instance of the MQTT controller utility.
+    # Outputs:
+    #     None.
     def __init__(self, mqtt_util: MqttControllerUtility):
         """
         Initializes the worker and subscribes to the necessary topic.
@@ -87,6 +82,15 @@ class PresetFromDeviceWorker:
             topic_filter=f"{ROOT_TOPIC}/#", callback_func=self._on_mqtt_message
         )
 
+    # Callback function for incoming MQTT messages, specifically to capture the preset list.
+    # This private method processes messages received on the NAB_OUTPUT_TOPIC, stores
+    # the raw preset list, signals its arrival, parses it, and publishes valid presets
+    # to the repository.
+    # Inputs:
+    #     topic (str): The MQTT topic the message was received on.
+    #     payload: The raw payload of the message, expected to be a string of preset data.
+    # Outputs:
+    #     None.
     def _on_mqtt_message(self, topic, payload):
         """
         A private callback to capture the preset list when it arrives from the device.
@@ -103,6 +107,13 @@ class PresetFromDeviceWorker:
                 # Call the new function to publish the presets
                 self.publish_presets_to_repository(valid_presets)
 
+    # Triggers the connected instrument to send its preset catalog.
+    # This function publishes an MQTT command to the device to initiate the query for its
+    # stored presets. The actual preset list is received asynchronously via an MQTT callback.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     bool: True if the trigger command was sent successfully, False otherwise.
     def get_presets_from_device(self):
         """
         Triggers the device to query its presets. This function is non-blocking.
@@ -137,6 +148,13 @@ class PresetFromDeviceWorker:
             )
             return False
 
+    # Parses a raw, comma-separated string of preset data from the device.
+    # This function extracts valid preset filenames (ending in '.STA') from the raw string
+    # and returns them as a list.
+    # Inputs:
+    #     raw_preset_string (str): The raw comma-separated string of preset data from the device.
+    # Outputs:
+    #     list: A list of valid preset filenames.
     def parse_presets_from_device(self, raw_preset_string: str) -> list:
         """
         Parses a raw, comma-separated string of preset data and returns a list
@@ -168,6 +186,14 @@ class PresetFromDeviceWorker:
         debug_logger(message=f"✅ Found {len(valid_presets)} valid presets.")
         return valid_presets
 
+    # Publishes a list of preset filenames to the MQTT preset repository.
+    # This method iterates through a list of preset filenames, creates a dictionary
+    # for each preset with default empty values for instrument settings, and then
+    # publishes this entire dictionary as a JSON blob to a unique topic in the repository.
+    # Inputs:
+    #     preset_list (list): A list of preset filenames to publish.
+    # Outputs:
+    #     None.
     def publish_presets_to_repository(self, preset_list: list):
         """
         Takes a list of preset filenames and publishes the full preset data
@@ -223,6 +249,13 @@ class PresetFromDeviceWorker:
             message=f"✅ Successfully published {num_published} presets as monolithic nodes to the repository."
         )
 
+    # Pushes a specified preset filename to the device and triggers the device to store it.
+    # This function publishes an MQTT message containing the preset filename to the device
+    # and then triggers the device's save action to make the preset active.
+    # Inputs:
+    #     preset_filename (str): The filename of the preset to present to the device.
+    # Outputs:
+    #     bool: True if the operation was successful, False otherwise.
     def present_presets_from_device(self, preset_filename: str):
         """
         Sets the specified preset filename and triggers the device to store it.
@@ -280,7 +313,7 @@ if __name__ == "__main__":
 
     # Mock the MQTT utility and instantiate the worker
     mock_mqtt_util = MockMqttUtil()
-    worker = PresetFromDeviceWorker(mqtt_util=mock_mqtt_util)
+    worker = PresetFromDeviceWorker(mqtt_controller=mock_mqtt_util)
 
     # Example 1: Get presets from device
     print("\n--- Testing Get_presets_from_device ---")

@@ -1,10 +1,18 @@
-# workers/display/module_loader.py
+# display/module_loader.py
 #
 # Handles dynamic loading of Python modules and instantiation of GUI classes.
-# FIXED: Now correctly passes the JSON path (not the Python path) to the GUI classes.
 #
 # Author: Anthony Peter Kuzub
-# Version: 20251229.1755.1
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -44,11 +52,28 @@ class ModuleLoader:
     Handles dynamic loading of Python modules and instantiation of GUI classes.
     """
 
+    # Initializes the ModuleLoader.
+    # This constructor stores references to theme colors, the state mirror engine,
+    # and the subscriber router, which are necessary for dynamically loaded GUI components.
+    # Inputs:
+    #     theme_colors: A dictionary of theme-specific colors.
+    #     state_mirror_engine: The engine for MQTT state synchronization.
+    #     subscriber_router: The MQTT subscriber router.
+    # Outputs:
+    #     None.
     def __init__(self, theme_colors, state_mirror_engine=None, subscriber_router=None):
         self.theme_colors = theme_colors
         self.state_mirror_engine = state_mirror_engine
         self.subscriber_router = subscriber_router
 
+    # Dynamically loads a Python module from a given file path.
+    # This method uses `importlib.util` to load a module, ensuring that `tk` and `ttk`
+    # are available within the module's namespace for GUI construction.
+    # Inputs:
+    #     module_path (pathlib.Path): The file path to the Python module.
+    #     module_name (str): The name to assign to the loaded module.
+    # Outputs:
+    #     module: The loaded Python module object, or None on failure.
     def _load_module(self, module_path: pathlib.Path, module_name: str):
         """
         Dynamically loads a Python module from a given path.
@@ -96,6 +121,17 @@ class ModuleLoader:
                 )
             return None
 
+    # Finds and instantiates a suitable GUI class from a loaded module.
+    # This method inspects the loaded module to find classes that are subclasses
+    # of `ttk.Frame` or `tk.Frame` and instantiates the first suitable one,
+    # passing necessary configuration parameters.
+    # Inputs:
+    #     module: The loaded Python module object.
+    #     parent_widget: The parent tkinter widget for the new instance.
+    #     class_filter (str, optional): A specific class name to look for.
+    #     module_file_path (pathlib.Path, optional): The file path of the module, used to derive the JSON config path.
+    # Outputs:
+    #     tk.Frame: An instance of the GUI class, or None on failure.
     def instantiate_gui_class(
         self,
         module,
@@ -158,6 +194,17 @@ class ModuleLoader:
                 return None
         return None
 
+    # Loads a GUI module and instantiates its primary GUI class.
+    # This is the main entry point for dynamically loading GUI components.
+    # It first identifies the correct Python module based on the provided path
+    # (either a directory containing `gui_*.py` or a `gui_*.py` file itself),
+    # then loads the module and instantiates its GUI class.
+    # Inputs:
+    #     path (pathlib.Path): The path to the directory or Python file containing the GUI module.
+    #     parent_widget: The parent tkinter widget for the new GUI instance.
+    #     class_filter (str, optional): A specific class name to look for within the module.
+    # Outputs:
+    #     tk.Frame: An instance of the loaded GUI class, or None on failure.
     def load_and_instantiate_gui(
         self, path: pathlib.Path, parent_widget, class_filter=None
     ):

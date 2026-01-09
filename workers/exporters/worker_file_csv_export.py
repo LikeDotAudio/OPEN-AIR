@@ -1,16 +1,5 @@
-# workers/worker_file_csv_export.py
+# exporters/worker_file_csv_export.py
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251129  ##Update on the day the change was made
-Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 1  ## a running version number - incriments by one each time
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
 # A utility module to handle the logic for exporting data to a CSV file.
 #
 # Author: Anthony Peter Kuzub
@@ -23,8 +12,7 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-#
-# Version 20250824.120616.1
+# Version 20250821.200641.1
 
 import csv
 import inspect
@@ -52,9 +40,25 @@ class CsvExportUtility:
     A utility class to handle CSV file export logic.
     """
 
+    # Initializes the CsvExportUtility.
+    # This constructor takes a function for printing messages to the GUI console,
+    # allowing the utility to provide feedback to the user during export operations.
+    # Inputs:
+    #     print_to_gui_func (function): A function to print messages to the GUI console.
+    # Outputs:
+    #     None.
     def __init__(self, print_to_gui_func):
         self._print_to_gui_console = print_to_gui_func
 
+    # Exports a list of dictionaries to a CSV file.
+    # This method takes data in the form of a list of dictionaries (where each dictionary
+    # represents a row) and writes it to the specified CSV file. It automatically extracts
+    # headers from the first dictionary's keys and handles file creation.
+    # Inputs:
+    #     data (list of dict): The data to export, with each dictionary representing a row.
+    #     file_path (str): The full path to the output CSV file.
+    # Outputs:
+    #     None.
     def export_data_to_csv(self, data, file_path):
         """
         Exports a list of dictionaries to a CSV file.

@@ -1,6 +1,6 @@
-# workers/importers/worker_importer_wwb_zip.py
+# formats/worker_importer_from_shure_wwb_zip.py
 #
-# This file contains the logic for converting WWB .zip files
+# This module contains the logic for converting WWB .zip files
 # into a standardized CSV format.
 #
 # Author: Anthony Peter Kuzub
@@ -13,7 +13,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20251129.120000.1
+# Version 20250821.200641.1
 
 import csv
 import inspect
@@ -41,6 +41,14 @@ app_constants = Config.get_instance()
 headers = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
 
 
+# Parses a WWB .zip file, extracts relevant frequency data, and returns it in a standardized CSV format.
+# This function extracts zone and group information from the zip filename, then processes
+# any contained CSV files, assuming the first column represents frequency in MHz.
+# Inputs:
+#     file_path (str): The full path to the WWB .zip archive.
+# Outputs:
+#     tuple: A tuple containing the standardized headers and a list of dictionaries,
+#            where each dictionary represents a row of converted data.
 def Marker_convert_wwb_zip_report_to_csv(file_path):
     """
     Parses a WWB.zip file, extracts relevant information, and returns a standardized

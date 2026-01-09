@@ -1,3 +1,18 @@
+# builder_table/Table_CSV_check.py
+#
+# This module provides functionality to check for and initialize CSV files for table widgets, seeding MQTT with existing data or creating new files.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 import os
 from .Table_CSV_Reader import TableCsvReader
 from .Table_CSV_Writer import TableCsvWriter
@@ -9,6 +24,17 @@ import orjson
 
 
 class TableCsvCheck:
+    # Initializes the table data from a CSV file.
+    # This function checks for the existence of a CSV file at the given path.
+    # If the file exists, it reads its contents and publishes each row to MQTT
+    # to seed the application's state cache. If the file does not exist,
+    # it creates a new blank CSV file with the specified headers.
+    # Inputs:
+    #     csv_path (str): The full path to the CSV file.
+    #     headers (list): A list of column headers for the CSV file.
+    #     data_topic (str): The base MQTT topic for publishing data from the CSV.
+    # Outputs:
+    #     None.
     def initialize_from_csv(self, csv_path, headers, data_topic):
         """
         Checks for a CSV file. If it exists, reads it and publishes data to MQTT

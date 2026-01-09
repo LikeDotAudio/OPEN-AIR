@@ -1,4 +1,4 @@
-# display/builder/dynamic_gui_create_label.py
+# builder_text/dynamic_gui_create_label.py
 #
 # A mixin class for the DynamicGuiBuilder that handles the creation of a label widget.
 #
@@ -12,8 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-#
-# Version 20251127.000000.1
+# Version 20250821.200641.1
 
 import os
 import tkinter as tk
@@ -44,6 +43,22 @@ class LabelCreatorMixin:
     A mixin class that provides the functionality for creating a label widget.
     """
 
+    # Creates a Tkinter label widget and integrates it with the MQTT state synchronization.
+    # This method generates a label with customizable text and optional units.
+    # It registers the label's value with the state mirror engine, allowing its content
+    # to be updated via MQTT messages and broadcast its state.
+    # Inputs:
+    #     parent_frame: The parent tkinter frame.
+    #     label (str): The primary text for the label.
+    #     value: The initial value to display with the label.
+    #     units (str, optional): Units to append to the label's value.
+    #     path (str, optional): The MQTT path for the label's state.
+    #     base_mqtt_topic_from_path (str, optional): Base MQTT topic derived from the path.
+    #     state_mirror_engine: The engine for MQTT state synchronization.
+    #     subscriber_router: The MQTT subscriber router.
+    #     config (dict): The configuration data for the label.
+    # Outputs:
+    #     ttk.Frame: The created frame containing the label widget, or None on failure.
     def _create_label(
         self,
         parent_frame,
@@ -56,7 +71,7 @@ class LabelCreatorMixin:
         subscriber_router=None,
         config=None,
     ):
-
+        """Creates a Tkinter label widget."""
         current_function_name = inspect.currentframe().f_code.co_name
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(

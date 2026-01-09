@@ -1,10 +1,18 @@
-# workers/State_Cache/state_comparator.py
+# State_Cache/state_comparator.py
 #
-# Version 20251230.230100.1
+# Compares incoming MQTT payloads with cached state to determine if an update is necessary, prioritizing timestamp and falling back to value comparison.
 #
-# Author: Gemini
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
 #
-# The Judge: Pure logic comparison.
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import inspect
 from typing import Dict, Any, Optional
@@ -16,6 +24,16 @@ current_version = "20251230.230100.1"
 current_version_hash = 20251230 * 230100 * 1
 
 
+# Compares an incoming MQTT payload with a cached state to determine if an update is needed.
+# This function prioritizes comparison by timestamp (`ts`) if available, updating only
+# if the incoming message is newer. If timestamps are absent, it falls back to comparing
+# the value (`val`) of the payload.
+# Inputs:
+#     incoming_topic (str): The MQTT topic of the incoming message.
+#     incoming_payload (Dict): The dictionary payload of the incoming message.
+#     cached_state (Dict): The current cached state, a dictionary mapping topics to payloads.
+# Outputs:
+#     bool: True if the cache should be updated with the incoming payload, False otherwise.
 def should_update(
     incoming_topic: str, incoming_payload: Dict, cached_state: Dict
 ) -> bool:

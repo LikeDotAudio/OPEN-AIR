@@ -1,4 +1,4 @@
-# workers/worker_showtime_buttons.py
+# Showtime/worker_showtime_buttons.py
 #
 # A worker to create buttons with dynamically generated bar graph images.
 #
@@ -12,8 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
+# Version 20250821.200641.1
 
 Current_Date = 20251129  ##Update on the day the change was made
 Current_Time = 120000  ## update at the time it was edited and compiled
@@ -28,6 +27,15 @@ from PIL import Image, ImageTk
 from workers.Showtime.worker_showtime_draw_bargraph import create_bar_graph_image
 
 
+# Creates a Tkinter button with a dynamically generated bar graph image.
+# This function generates an image representing a bar graph based on a given value,
+# embeds this image into a Tkinter button, and returns the configured button widget.
+# Inputs:
+#     parent: The parent widget for the button.
+#     value (int): The numerical value to represent on the bar graph (typically -100 to 0).
+#     text (str): The text label to potentially display within the bar graph image.
+# Outputs:
+#     ttk.Button: The created Tkinter button widget with the bar graph image.
 def create_button_with_bar_graph(parent, value, text):
     """
     Creates a button with a bar graph image.

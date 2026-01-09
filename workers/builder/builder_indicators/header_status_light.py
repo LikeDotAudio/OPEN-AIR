@@ -1,3 +1,18 @@
+# builder_indicators/header_status_light.py
+#
+# Adds a status indicator circle to the top-right of the GUI.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 import tkinter as tk
 from tkinter import ttk
 import orjson
@@ -8,6 +23,14 @@ class HeaderStatusLightMixin:
     Adds a status indicator circle to the top-right of the GUI.
     """
 
+    # Builds the header status light widget.
+    # This method creates a canvas with a circular indicator and an optional label,
+    # then subscribes to MQTT topics to receive status updates for the light.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget where the status light will be placed.
+    #     config (dict): Configuration settings for the status light, including layout and label.
+    # Outputs:
+    #     None.
     def _build_header_status_light(
         self, parent_widget, config
     ):  # Changed widget_config to config
@@ -51,6 +74,14 @@ class HeaderStatusLightMixin:
                 "OPENAIR/GUI/Global/Header/StatusLight", self._update_status_light
             )
 
+    # Callback function to update the status light's color based on MQTT messages.
+    # This method parses an incoming MQTT payload, extracts a color (e.g., "green", "red"),
+    # and updates the fill color of the circular indicator on the canvas.
+    # Inputs:
+    #     topic (str): The MQTT topic the message was received on.
+    #     payload: The MQTT message payload containing the color information.
+    # Outputs:
+    #     None.
     def _update_status_light(self, topic, payload):
         try:
             data = orjson.loads(payload)

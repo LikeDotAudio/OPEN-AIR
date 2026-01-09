@@ -1,16 +1,5 @@
-# workers/worker_preset_pusher.py
+# presets/XXX worker_preset_pusher.py
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251129  ##Update on the day the change was made
-Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 1  ## a running version number - incriments by one each time
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
 # A worker module to process a selected preset and push the corresponding
 # SCPI commands via MQTT to configure the instrument.
 #
@@ -24,8 +13,7 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-#
-# Version 20250919.231000.1
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -84,6 +72,13 @@ class PresetPusherWorker:
     A worker class that takes a selected preset and pushes the settings to the instrument.
     """
 
+    # Initializes the PresetPusherWorker.
+    # This constructor takes an MQTT controller instance, which is used to publish
+    # SCPI commands to the instrument based on selected presets.
+    # Inputs:
+    #     mqtt_controller (MqttControllerUtility): An instance of the MQTT controller utility.
+    # Outputs:
+    #     None.
     def __init__(self, mqtt_controller: MqttControllerUtility):
         """
         Initializes the worker with a shared MQTT controller instance.
@@ -95,6 +90,14 @@ class PresetPusherWorker:
                 message=f"🟢️️️🟢 The preset pusher has been summoned!", **_get_log_args()
             )
 
+    # Configures the instrument based on a selected preset.
+    # This method takes a list of preset values, maps them to specific instrument
+    # settings (e.g., frequency, bandwidth, amplitude, trace modes), and then
+    # publishes the corresponding SCPI commands via MQTT to configure the instrument.
+    # Inputs:
+    #     preset_values (list): A list of values for the selected preset.
+    # Outputs:
+    #     None.
     def Tune_to_preset(self, preset_values):
         """
         Executes a sequence of commands to configure the instrument based on a preset.

@@ -1,17 +1,6 @@
-# workers/worker_project_paths.py
+# setup/worker_project_paths.py
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251129  ##Update on the day the change was made
-Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 1  ## a running version number - incriments by one each time
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
-# A utility module for defining all application file paths relative to the project root,
+# This module defines all application file paths relative to the project root,
 # ensuring consistent file access across all sub-modules.
 #
 # Author: Anthony Peter Kuzub
@@ -24,8 +13,7 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-#
-# Version 20251013.212800.2
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -66,6 +54,13 @@ YAKETY_YAK_REPO_PATH = GLOBAL_PROJECT_ROOT / "DATA" / "YAKETYYAK.json"
 PRESET_REPO_PATH = GLOBAL_PROJECT_ROOT / "DATA" / "PRESET.csv"
 
 
+# Returns an absolute `pathlib.Path` object for a path relative to the project root.
+# This utility function constructs a full absolute path by combining the global
+# project root with a given relative path string, ensuring consistent path resolution.
+# Inputs:
+#     relative_path (str): The path string relative to the project root.
+# Outputs:
+#     pathlib.Path: The absolute path object.
 def get_absolute_path(relative_path: str):
     """
     Utility function to return an absolute path for a string relative to the project root.

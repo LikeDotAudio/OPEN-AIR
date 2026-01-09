@@ -1,4 +1,18 @@
-# workers/builder/dynamic_gui_create_fader.py
+# builder_input/dynamic_gui_create_fader.py
+#
+# A mixin for creating a fader (scale) widget that displays its numerical value and is synchronized via MQTT.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -12,6 +26,16 @@ from workers.mqtt.mqtt_topic_utils import get_topic
 
 
 class FaderCreatorMixin:
+    # Creates a fader (scale) widget with an accompanying value display.
+    # This method sets up a horizontal or vertical scale widget, binds it to a tkinter DoubleVar
+    # for numerical input, displays its current value, and integrates it with the state management
+    # engine for MQTT communication.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): Configuration for the fader widget.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created frame containing the fader widget, or None on failure.
     def _create_fader(self, parent_widget, config_data, **kwargs):  # Updated signature
         """Creates a fader widget."""
         current_function_name = "_create_fader"

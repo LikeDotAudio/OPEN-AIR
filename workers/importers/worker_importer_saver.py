@@ -1,19 +1,7 @@
-# workers/importers/worker_importer_saver.py
+# importers/worker_importer_saver.py
 #
-# A complete and comprehensive pre-amble that describes the file and the functions within.
-# The purpose is to provide clear documentation and versioning.
+# This module provides functions for saving marker data to CSV files, including an intermediate file and a user-specified 'OpenAir.csv'.
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251226
-Current_Time = 120000
-Current_iteration = 44
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
@@ -24,8 +12,9 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
+# Version 20250821.200641.1
 
-from workers.logger.logger import debug_logger
+from workers.logger.debug_logger import debug_logger
 from workers.logger.log_utils import _get_log_args
 import inspect
 import os
@@ -41,6 +30,14 @@ app_constants = Config.get_instance()  # Get the singleton instance
 CANONICAL_HEADERS = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
 
 
+# Saves the current marker data to an intermediate CSV file named 'MARKERS.csv' in the project's DATA directory.
+# This function writes the provided headers and data to a CSV file, ensuring consistency
+# with canonical headers and handling any existing data.
+# Inputs:
+#     tree_headers (list): A list of strings representing the CSV header row.
+#     tree_data (list): A list of dictionaries, where each dictionary represents a row of data.
+# Outputs:
+#     None.
 def save_intermediate_file(tree_headers, tree_data):
     # Saves the current tree data to a file named 'MARKERS.csv' in the DATA directory at the project root level.
     current_function = inspect.currentframe().f_code.co_name
@@ -70,6 +67,14 @@ def save_intermediate_file(tree_headers, tree_data):
         debug_logger(message=f"❌ Failed to save intermediate MARKERS.csv file. {e}")
 
 
+# Saves the current marker data to a user-specified CSV file, defaulting to 'OpenAir.csv'.
+# This function prompts the user to select a save location and filename, then writes
+# the provided headers and data to a CSV file.
+# Inputs:
+#     tree_headers (list): A list of strings representing the CSV header row.
+#     tree_data (list): A list of dictionaries, where each dictionary represents a row of data.
+# Outputs:
+#     None.
 def save_open_air_file(tree_headers, tree_data):
     # Saves the current tree data to a file named 'OpenAir.csv' in the DATA directory.
     current_function = inspect.currentframe().f_code.co_name
@@ -136,6 +141,13 @@ def save_open_air_file(tree_headers, tree_data):
         debug_logger(message=f"❌ Failed to save file. {e}")
 
 
+# Saves the marker data from the importer tab instance to the intermediate 'MARKERS.csv' file.
+# This utility function acts as a wrapper to call `save_intermediate_file` using the
+# `tree_headers` and `tree_data` attributes of the provided importer tab instance.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+# Outputs:
+#     None.
 def save_markers_file_internally(importer_tab_instance):
     save_intermediate_file(
         importer_tab_instance.tree_headers, importer_tab_instance.tree_data

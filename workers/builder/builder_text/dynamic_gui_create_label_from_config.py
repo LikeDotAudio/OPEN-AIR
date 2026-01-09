@@ -1,4 +1,4 @@
-# display/builder/dynamic_gui_create_label_from_config.py
+# builder_text/dynamic_gui_create_label_from_config.py
 #
 # A mixin class for the DynamicGuiBuilder that handles creating a label from a config dictionary.
 #
@@ -12,8 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-#
-# Version 20251127.000000.1
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -37,11 +36,20 @@ class LabelFromConfigCreatorMixin:
     from a configuration dictionary.
     """
 
+    # Creates a label widget from a configuration dictionary.
+    # This method acts as a wrapper, preparing the configuration data and then
+    # delegating the actual label creation to the `_create_label` method.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): The configuration for the label widget.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Label: The created label widget, or None on failure.
     def _create_label_from_config(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
-        # A wrapper for _create_label to match the factory function signature.
-        # It calls the _create_label method (provided by LabelCreatorMixin).
+        """A wrapper for _create_label to match the factory function signature.
+        It calls the _create_label method (provided by LabelCreatorMixin)."""
         current_function_name = inspect.currentframe().f_code.co_name
 
         # Extract only widget-specific config from config_data

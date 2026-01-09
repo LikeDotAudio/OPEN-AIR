@@ -1,19 +1,6 @@
-# workers/utils_csv_writer.py
+# exporters/utils_csv_writer.py
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251129  ##Update on the day the change was made
-Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 1  ## a running version number - incriments by one each time
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
 # This module provides utility functions for writing spectrum scan data to CSV files.
-# It encapsulates the logic for handling file paths, directory creation, and data formatting
-# for CSV output, ensuring consistent data storage for analysis and historical tracking.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
@@ -25,7 +12,7 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20250810.134500.1 (FIXED: Added app_instance_ref parameter and wrapped console calls with after() to prevent GIL errors.)
+# Version 20250821.200641.1
 
 current_version = "20250810.134500.1"  # this variable should always be defined below the header to make the debugging better
 current_version_hash = 20250810 * 134500 * 1  # Example hash, adjust as needed
@@ -41,6 +28,19 @@ app_constants = Config.get_instance()  # Get the singleton instance
 from workers.logger.logger import debug_logger
 
 
+# Writes spectrum scan data (frequency and amplitude) to a CSV file.
+# This function handles creating necessary directory structures, writing a header row
+# (if provided), and appending or overwriting data to the CSV.
+# Inputs:
+#     file_path (str): The full path to the CSV file.
+#     header (list or None): A list of strings for the CSV header row.
+#     data (list): A list of lists/tuples, where each inner list/tuple is a row (e.g., [frequency_MHz, level_dBm]).
+#     app_instance_ref (object): A reference to the main application instance for GUI interaction.
+#     append_mode (bool): If True, data is appended; otherwise, the file is overwritten.
+# Outputs:
+#     None.
+# Raises:
+#     IOError: If there is an issue creating directories or writing to the file.
 def write_scan_data_to_csv(
     file_path,
     header,

@@ -1,6 +1,6 @@
-# workers/importers/worker_importer_csv_unknown.py
+# formats/worker_importer_from_csv_unknown.py
 #
-# This file contains the logic for a 'best-effort' conversion of CSV files
+# This module contains the logic for a 'best-effort' conversion of CSV files
 # with unknown headers into the standardized marker report format.
 #
 # Author: Anthony Peter Kuzub
@@ -13,7 +13,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20251129.120000.1
+# Version 20250821.200641.1
 
 import csv
 import inspect
@@ -38,6 +38,15 @@ app_constants = Config.get_instance()
 headers = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
 
 
+# Performs a 'best-effort' conversion of a CSV file with unknown headers to the standardized marker report format.
+# This function attempts to map column headers from the input CSV to a predefined set of
+# standard headers (ZONE, GROUP, DEVICE, NAME, FREQ_MHZ, PEAK) and converts frequency values
+# to MHz as needed.
+# Inputs:
+#     file_path (str): The path to the input CSV file.
+# Outputs:
+#     tuple: A tuple containing the standardized headers and a list of dictionaries
+#            with the matched data. Returns empty lists on error or file not found.
 def Marker_convert_csv_unknow_report_to_csv(file_path):
     """
     Performs a 'best-effort' conversion of a CSV file with unknown headers

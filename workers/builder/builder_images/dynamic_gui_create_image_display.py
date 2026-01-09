@@ -1,4 +1,18 @@
-# workers/builder/dynamic_gui_create_image_display.py
+# builder_images/dynamic_gui_create_image_display.py
+#
+# A mixin for creating an image display widget that dynamically loads and displays images based on a state-aware path.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -15,8 +29,20 @@ from workers.mqtt.mqtt_topic_utils import get_topic  # Import get_topic
 
 
 class ImageDisplayCreatorMixin:
+    # Creates an image display widget that loads and displays images dynamically.
+    # This method sets up a Tkinter label to display an image. The image path is managed
+    # by a tkinter StringVar and can be updated via MQTT, allowing for dynamic image changes.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): Configuration for the image display.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created frame containing the image display, or None on failure.
     def _create_image_display(
-        self, parent_widget, config_data, **kwargs
+        self,
+        parent_widget,
+        config_data,
+        **kwargs
     ):  # Updated signature
         """Creates an image display widget that is state-aware."""
         current_function_name = "_create_image_display"
@@ -78,15 +104,21 @@ class ImageDisplayCreatorMixin:
         if path:
             widget_id = path
             state_mirror_engine.register_widget(
-                widget_id, image_path_var, base_mqtt_topic_from_path, config
+                widget_id,
+                image_path_var,
+                base_mqtt_topic_from_path,
+                config,
             )
 
             # Subscribe to the topic for incoming messages
             topic = get_topic(
-                self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, widget_id
+                self.state_mirror_engine.base_topic,
+                base_mqtt_topic_from_path,
+                widget_id,
             )
             self.subscriber_router.subscribe_to_topic(
-                topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui
+                topic,
+                self.state_mirror_engine.sync_incoming_mqtt_to_gui,
             )
             if app_constants.global_settings["debug_enabled"]:
                 debug_logger(

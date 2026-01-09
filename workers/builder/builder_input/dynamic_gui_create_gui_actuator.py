@@ -1,23 +1,7 @@
-# workers/builder/dynamic_gui_create_gui_actuator.py
+# builder_input/dynamic_gui_create_gui_actuator.py
 #
-# This file (dynamic_gui_create_gui_actuator.py) provides the GuiActuatorCreatorMixin class for creating simple actuator buttons in the GUI.
-# A complete and comprehensive pre-amble that describes the file and the functions within.
-# The purpose is to provide clear documentation and versioning.
+# This file provides the GuiActuatorCreatorMixin class for creating simple actuator buttons in the GUI.
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-import os
-
-Current_Date = 20251213  ##Update on the day the change was made
-Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 44  ## a running version number - incriments by one each time
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-current_file = os.path.basename(__file__)
-
-
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
@@ -28,7 +12,7 @@ current_file = os.path.basename(__file__)
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-
+# Version 20250821.200641.1
 
 import os
 import tkinter as tk
@@ -58,10 +42,20 @@ class GuiActuatorCreatorMixin:
     actuator button widget that triggers an action.
     """
 
+    # Creates a button that acts as a simple actuator, triggering actions via MQTT.
+    # This method sets up a button that, when pressed and released, publishes MQTT
+    # commands to a specified topic. It also publishes the button's configuration
+    # and subscribes to status updates.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): Configuration for the actuator button.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created frame containing the actuator button, or None on failure.
     def _create_gui_actuator(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
-        # Creates a button that acts as a simple actuator.
+        """Creates a button that acts as a simple actuator."""
         current_function_name = inspect.currentframe().f_code.co_name
 
         # Extract only widget-specific config from config_data
@@ -187,6 +181,14 @@ class GuiActuatorCreatorMixin:
                 )
             return None
 
+    # Callback function to update the visual state of the actuator button based on MQTT messages.
+    # This method parses an incoming MQTT payload, extracts the active state (True/False),
+    # and updates the button's style accordingly to indicate its active or inactive status.
+    # Inputs:
+    #     topic (str): The MQTT topic the message was received on.
+    #     payload: The MQTT message payload containing the active state.
+    # Outputs:
+    #     None.
     def _on_actuator_state_update(self, topic, payload):
         import orjson
 

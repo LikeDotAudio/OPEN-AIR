@@ -1,3 +1,19 @@
+# builder_data_graphing/dynamic_graph.py
+#
+# A Tkinter-compatible Matplotlib graph widget that dynamically renders
+# plots with multiple datasets based on a JSON configuration.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 import tkinter as tk
 from tkinter import ttk
 from collections import deque
@@ -27,6 +43,17 @@ class FluxPlotter(tk.Frame):
     Refactored to use helper modules for building, styling, interaction, and updating.
     """
 
+    # Initializes the FluxPlotter widget.
+    # This constructor sets up the Matplotlib figure and axes, initializes data structures
+    # for plotting, processes dataset configurations, and loads any initial data.
+    # Inputs:
+    #     parent: The parent tkinter widget.
+    #     config (Dict[str, Any]): A dictionary containing the configuration for the plot.
+    #     base_mqtt_topic_from_path (str): The base MQTT topic for the widget.
+    #     widget_id (str): The unique identifier for the widget.
+    #     **kwargs: Additional keyword arguments including 'subscriber_router' and 'state_mirror_engine'.
+    # Outputs:
+    #     None.
     def __init__(
         self,
         parent,
@@ -57,6 +84,13 @@ class FluxPlotter(tk.Frame):
 
         self.bind("<Configure>", self._on_resize)
 
+    # Handles the resizing of the plot widget.
+    # This method adjusts the size of the Matplotlib figure to match the new dimensions
+    # of the Tkinter widget and triggers a redraw of the canvas.
+    # Inputs:
+    #     event: The tkinter Configure event object.
+    # Outputs:
+    #     None.
     def _on_resize(self, event):
         if hasattr(self, "fig"):
             w_pixels = event.width
@@ -67,6 +101,13 @@ class FluxPlotter(tk.Frame):
                 self.fig.set_size_inches(w_pixels / dpi, h_pixels / dpi)
                 graph_updater.autoscale_and_redraw(self.ax, self.canvas)
 
+    # Initializes core plot elements, including styling and interaction.
+    # This method applies themes, sets up interactive features for the plot, and
+    # creates the initial line objects for each dataset defined in the configuration.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _initialize_plot_elements(self):
         """Initializes plot elements like lines, styles, and interactions."""
         theme = graph_styler.get_theme_style(
@@ -98,6 +139,14 @@ class FluxPlotter(tk.Frame):
         if len(self.config.get("datasets", [])) > 1:
             self.ax.legend()
 
+    # Callback for when an individual dataset's StringVar changes.
+    # This method is triggered when new CSV data for a dataset is received. It parses
+    # the CSV, extracts x and y values, and loads this data into the plot.
+    # Inputs:
+    #     dataset_id (str): The ID of the dataset that changed.
+    #     *args: Additional arguments from the StringVar trace.
+    # Outputs:
+    #     None.
     def _on_dataset_var_change(self, dataset_id, *args):
         """Callback for when an individual dataset's StringVar changes."""
         if dataset_id not in self.dataset_vars:
@@ -130,6 +179,14 @@ class FluxPlotter(tk.Frame):
                 **_get_log_args(),
             )
 
+    # Processes the configuration for all datasets.
+    # This method iterates through the dataset definitions in the plot's configuration,
+    # creates tkinter StringVars for each, and registers them with the state management
+    # engine for MQTT communication.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _process_dataset_config(self):
         """Processes 'datasets', creates StringVars, and registers them for MQTT."""
         for ds_config in self.config.get("datasets", []):
@@ -160,6 +217,13 @@ class FluxPlotter(tk.Frame):
                     )
                     self.state_mirror_engine.initialize_widget_state(dataset_path)
 
+    # Loads initial data for all configured datasets.
+    # This method populates the plot with any initial CSV data specified in the
+    # configuration for each dataset by setting their corresponding StringVars.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _load_all_initial_data(self):
         """Loads initial data for all configured datasets by setting the StringVars."""
         for ds_id, ds_config in self.datasets_config.items():
@@ -167,8 +231,20 @@ class FluxPlotter(tk.Frame):
             if csv_data and ds_id in self.dataset_vars:
                 self.dataset_vars[ds_id].set(csv_data)
 
+    # Loads a complete set of initial data points for a specific dataset.
+    # This method takes lists of x and y values and loads them into the plot for
+    # the specified dataset, then triggers an autoscale and redraw.
+    # Inputs:
+    #     dataset_id (str): The ID of the dataset to load data into.
+    #     x_values (List[float]): A list of x-axis values.
+    #     y_values (List[float]): A list of y-axis values.
+    # Outputs:
+    #     None.
     def load_initial_data(
-        self, dataset_id: str, x_values: List[float], y_values: List[float]
+        self,
+        dataset_id: str,
+        x_values: List[float],
+        y_values: List[float],
     ):
         """Loads a complete set of initial data points."""
         debug_logger(
@@ -185,6 +261,15 @@ class FluxPlotter(tk.Frame):
         )
         graph_updater.autoscale_and_redraw(self.ax, self.canvas)
 
+    # Updates a specific dataset with a new data point.
+    # This method adds a single new (x, y) data point to the specified dataset
+    # and then triggers an autoscale and redraw of the plot.
+    # Inputs:
+    #     dataset_id (str): The ID of the dataset to update.
+    #     x_new (float): The new x-axis value.
+    #     y_new (float): The new y-axis value.
+    # Outputs:
+    #     None.
     def update_plot(self, dataset_id: str, x_new: float, y_new: float):
         """Updates a dataset with a new data point."""
         if dataset_id not in self.lines:
@@ -198,6 +283,13 @@ class FluxPlotter(tk.Frame):
         )
         graph_updater.autoscale_and_redraw(self.ax, self.canvas)
 
+    # Clears data from one or all datasets on the plot.
+    # This method can clear all data points from a specified dataset or from all
+    # datasets if no specific dataset ID is provided.
+    # Inputs:
+    #     dataset_id (str, optional): The ID of the dataset to clear. If None, all datasets are cleared.
+    # Outputs:
+    #     None.
     def clear_plot(self, dataset_id: str = None):
         """Clears data from a specific dataset or all datasets."""
         if dataset_id and dataset_id in self.lines:

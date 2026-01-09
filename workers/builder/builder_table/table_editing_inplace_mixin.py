@@ -1,3 +1,18 @@
+# builder_table/table_editing_inplace_mixin.py
+#
+# A mixin for in-place editing of cells within a Tkinter Treeview widget.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 import tkinter as tk
 from tkinter import ttk
 import inspect
@@ -11,12 +26,25 @@ from workers.mqtt import mqtt_publisher_service
 
 
 class TableEditingInplaceMixin:
+    # Initializes the in-place editing functionality for a Treeview widget.
+    # This sets up internal state variables to track the currently active editing session.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def __init__(self):
         # State for active editing
         self.editing_entry = None
         self.active_row = None
         self.active_col = None
 
+    # Handles a double-click event on the Treeview to initiate cell editing.
+    # This method identifies the cell that was double-clicked and spawns an Entry widget
+    # over it, allowing the user to modify the cell's content.
+    # Inputs:
+    #     event: The tkinter double-click event object.
+    # Outputs:
+    #     None.
     def on_double_click(self, event):
         """Identify cell and spawn Entry widget"""
         region = self.tree.identify("region", event.x, event.y)
@@ -29,6 +57,14 @@ class TableEditingInplaceMixin:
         # Logic to spawn Entry widget over the cell...
         self.start_edit(row_id, col)
 
+    # Starts an in-place editing session for a specified cell.
+    # This method creates and places an Entry widget over the target cell, pre-populates it
+    # with the cell's current value, and binds events for committing or canceling the edit.
+    # Inputs:
+    #     row_id: The ID of the Treeview row to edit.
+    #     col: The identifier of the Treeview column to edit.
+    # Outputs:
+    #     None.
     def start_edit(self, row_id, col):
         if self.editing_entry:
             self.destroy_entry()  # Destroy any existing entry before creating a new one
@@ -66,6 +102,13 @@ class TableEditingInplaceMixin:
             **_get_log_args(),
         )
 
+    # Commits the changes made in the in-place editor to the Treeview and MQTT.
+    # This method updates the Treeview cell with the new value, records the change
+    # in the undo stack, and publishes the updated row data via MQTT.
+    # Inputs:
+    #     new_value: The new value to set for the cell.
+    # Outputs:
+    #     None.
     def commit_edit(self, new_value):
         if not self.active_row or not self.active_col:
             self.destroy_entry()
@@ -122,6 +165,13 @@ class TableEditingInplaceMixin:
         )
         self.destroy_entry()
 
+    # Handles the commit of the in-place editor entry.
+    # This method retrieves the new value from the Entry widget and calls `commit_edit`.
+    # It also supports auto-incrementing the value if Shift+Return is pressed.
+    # Inputs:
+    #     event: The tkinter event object (optional).
+    # Outputs:
+    #     None.
     def _on_entry_commit(self, event=None):
         if not self.editing_entry:
             return
@@ -136,6 +186,13 @@ class TableEditingInplaceMixin:
 
         self.commit_edit(new_value)
 
+    # Destroys the active in-place editor Entry widget.
+    # This cleans up the temporary Entry widget and resets the internal state variables
+    # tracking the active editing session.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def destroy_entry(self):
         if self.editing_entry:
             self.editing_entry.destroy()
@@ -144,6 +201,13 @@ class TableEditingInplaceMixin:
             self.active_col = None
             debug_logger(message="📝 Editing entry destroyed.", **_get_log_args())
 
+    # Increments any trailing digits in a string.
+    # This helper function is used for auto-incrementing cell values. If the string
+    # ends with numbers, it increments them; otherwise, it appends '1'.
+    # Inputs:
+    #     text (str): The input string.
+    # Outputs:
+    #     str: The incremented string.
     def _increment_string_with_trailing_digits(self, text):
         """
         Increments any trailing digits in a string. If no trailing digits, appends '1'.

@@ -1,19 +1,7 @@
-# workers/importers/worker_importer_editor.py
+# importers/worker_importer_editor.py
 #
-# A complete and comprehensive pre-amble that describes the file and the functions within.
-# The purpose is to provide clear documentation and versioning.
+# This module provides functions for in-place editing, navigation, and deletion of rows in a Tkinter Treeview widget for marker data.
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251213
-Current_Time = 120000
-Current_iteration = 44
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
@@ -24,18 +12,27 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
+# Version 20250821.200641.1
 
 import inspect
 import os
 import re
 import tkinter as tk
 from tkinter import ttk
-from workers.logger.logger import debug_logger
+from workers.logger.debug_logger import debug_logger
 from workers.importers.worker_importer_saver import save_markers_file_internally
 
 LOCAL_DEBUG_ENABLE = False
 
 
+# Handles a double-click event on the Treeview to initiate cell editing.
+# This function identifies the cell that was double-clicked and calls `start_editing_cell`
+# to spawn an Entry widget over it, allowing the user to modify the cell's content.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab containing the Treeview.
+#     event: The tkinter double-click event object.
+# Outputs:
+#     None.
 def on_tree_double_click(importer_tab_instance, event):
     current_function = inspect.currentframe().f_code.co_name
     current_file = os.path.basename(__file__)
@@ -69,6 +66,17 @@ def on_tree_double_click(importer_tab_instance, event):
     )
 
 
+# Starts an in-place editing session for a specified cell in the Treeview.
+# This function creates and places an Entry widget over the target cell, pre-populates it
+# with the cell's current value, and binds events for committing or canceling the edit,
+# including navigation to other cells.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+#     item: The ID of the Treeview item (row).
+#     col_index (int): The index of the column to edit.
+#     initial_value (str): The initial value to display in the editor.
+# Outputs:
+#     None.
 def start_editing_cell(importer_tab_instance, item, col_index, initial_value=""):
     current_function = inspect.currentframe().f_code.co_name
     current_file = os.path.basename(__file__)
@@ -127,6 +135,16 @@ def start_editing_cell(importer_tab_instance, item, col_index, initial_value="")
     entry_editor.bind("<Right>", lambda e: on_edit_complete_and_navigate(e, "right"))
 
 
+# Navigates to an adjacent cell in the Treeview after an edit or a navigation command.
+# This function calculates the next row and column index based on the direction,
+# updates the Treeview selection, and initiates editing for the new cell.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+#     current_item: The ID of the currently active Treeview item.
+#     current_col_index (int): The index of the currently active column.
+#     direction (str): The navigation direction ('up', 'down', 'left', 'right', 'ctrl_down').
+# Outputs:
+#     None.
 def navigate_cells(importer_tab_instance, current_item, current_col_index, direction):
     current_function = inspect.currentframe().f_code.co_name
     current_file = os.path.basename(__file__)
@@ -253,6 +271,13 @@ def navigate_cells(importer_tab_instance, current_item, current_col_index, direc
         )
 
 
+# Increments any trailing digits found in a string.
+# This utility function is used for auto-incrementing cell values. If the string
+# ends with numbers, it increments them; otherwise, it returns the original string.
+# Inputs:
+#     text (str): The input string.
+# Outputs:
+#     str: The string with incremented trailing digits.
 def increment_string_with_trailing_digits(text):
     match = re.search(r"(\d+)$", text)
     if match:
@@ -264,6 +289,14 @@ def increment_string_with_trailing_digits(text):
     return text
 
 
+# Handles a click event on a Treeview column header to trigger sorting.
+# This function identifies the clicked column, updates the sort column and direction,
+# and then calls `sort_treeview` to reorder the table display.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+#     event: The tkinter event object (from a header click).
+# Outputs:
+#     None.
 def on_tree_header_click(importer_tab_instance, event):
     current_function = inspect.currentframe().f_code.co_name
     current_file = os.path.basename(__file__)
@@ -298,6 +331,15 @@ def on_tree_header_click(importer_tab_instance, event):
         )
 
 
+# Sorts the Treeview data based on the specified column and direction.
+# This function extracts data from the Treeview, sorts the internal data model,
+# and then re-populates the Treeview to reflect the sorted order.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+#     column_name (str): The name of the column to sort by.
+#     ascending (bool): True for ascending order, False for descending.
+# Outputs:
+#     None.
 def sort_treeview(importer_tab_instance, column_name, ascending):
     current_function = inspect.currentframe().f_code.co_name
     current_file = os.path.basename(__file__)
@@ -322,6 +364,13 @@ def sort_treeview(importer_tab_instance, column_name, ascending):
     )
 
 
+# Re-populates the Treeview from the internal data model.
+# This function clears all existing items in the Treeview, updates the column headers
+# (if necessary), and then inserts rows from the internal `tree_data` list.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+# Outputs:
+#     None.
 def populate_marker_tree(importer_tab_instance):
     """Re-populates the treeview from the internal data model."""
     importer_tab_instance.marker_tree.delete(
@@ -350,6 +399,14 @@ def populate_marker_tree(importer_tab_instance):
         importer_tab_instance.marker_tree.insert("", "end", values=values)
 
 
+# Deletes the currently selected rows from the Treeview and the internal data model.
+# This function removes the selected items from the Treeview widget and also
+# deletes the corresponding data entries from the `tree_data` list.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+#     event: The tkinter event object (e.g., from a Delete key press).
+# Outputs:
+#     None.
 def delete_selected_row(importer_tab_instance, event):
     current_function = inspect.currentframe().f_code.co_name
     debug_logger(

@@ -1,20 +1,7 @@
-# workers/builder/dynamic_gui_create_gui_checkbox.py
+# builder_input/dynamic_gui_create_gui_checkbox.py
 #
-# This file (dynamic_gui_create_gui_checkbox.py) provides the GuiCheckboxCreatorMixin class for creating checkbox widgets in the GUI.
-# A complete and comprehensive pre-amble that describes the file and the functions within.
-# The purpose is to provide clear documentation and versioning.
+# This file provides the GuiCheckboxCreatorMixin class for creating checkbox widgets in the GUI.
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251213  ##Update on the day the change was made
-Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 44  ## a running version number - incriments by one each time
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
@@ -25,7 +12,7 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-
+# Version 20250821.200641.1
 
 import os
 import tkinter as tk
@@ -60,10 +47,20 @@ class GuiCheckboxCreatorMixin:
     checkbox widget.
     """
 
+    # Creates a checkbox widget that manages a boolean state and synchronizes via MQTT.
+    # This method sets up a Tkinter Checkbutton, binds its state to a BooleanVar,
+    # and configures it to update its label dynamically based on its active/inactive state.
+    # It also integrates with the state management engine for MQTT communication.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): Configuration for the checkbox.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created frame containing the checkbox, or None on failure.
     def _create_gui_checkbox(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
-        # Creates a checkbox widget.
+        """Creates a checkbox widget."""
         current_function_name = inspect.currentframe().f_code.co_name
 
         # Extract only widget-specific config from config_data

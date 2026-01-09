@@ -1,10 +1,18 @@
-# workers/utils/log_utils.py
+# logger/log_utils.py
 #
 # Utility to capture the context (File, Function, Version) of a log call.
 #
 # Author: Anthony Peter Kuzub
-# Version: 20251226.002000.1
+# Blog: www.Like.audio (Contributor to this project)
 #
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import inspect
 import os
@@ -12,6 +20,14 @@ import os
 # Removed: from managers.configini.config_reader import Config (This import caused the circular dependency)
 
 
+# Inspects the call stack to retrieve contextual information for logging.
+# This function dynamically captures the filename, function name, and
+# 'current_version' from the caller's frame, providing valuable metadata for log entries.
+# Inputs:
+#     None.
+# Outputs:
+#     dict: A dictionary containing 'file', 'function', and 'version' of the caller,
+#           or fallback values if information cannot be retrieved.
 def _get_log_args():
     """
     Inspects the call stack to retrieve the filename, function name,

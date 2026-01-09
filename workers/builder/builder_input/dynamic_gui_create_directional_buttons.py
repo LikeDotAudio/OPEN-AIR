@@ -1,4 +1,18 @@
-# workers/builder/dynamic_gui_create_directional_buttons.py
+# builder_input/dynamic_gui_create_directional_buttons.py
+#
+# A mixin for creating a set of directional buttons (up, down, left, right) that publish MQTT commands.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -15,6 +29,15 @@ import time  # Imported for timestamp
 
 
 class DirectionalButtonsCreatorMixin:
+    # Creates a set of directional buttons (up, down, left, right) and binds them to MQTT commands.
+    # This method arranges four buttons in a cross pattern and configures each button
+    # to publish a specific MQTT command when pressed, allowing for remote control of movement.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): Configuration for the directional buttons.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created frame containing the directional buttons.
     def _create_directional_buttons(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature

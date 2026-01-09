@@ -1,12 +1,18 @@
-# workers/display/layout_parser.py
+# display/layout_parser.py
+#
+# This module provides the LayoutParser class, which analyzes directory structures to determine the GUI layout (e.g., PanedWindow, Notebook).
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
-# This file is part of the OPEN-AIR project.
-#
 # Professional services for customizing and tailoring this software to your specific
 # application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -26,12 +32,28 @@ class LayoutParser:
     This is a stateless utility class.
     """
 
+    # Initializes the LayoutParser.
+    # This constructor sets up the parser with the current application version and
+    # a debug logging function for internal logging.
+    # Inputs:
+    #     current_version (str): The current version string of the application.
+    #     debug_log_func (function): A function to use for debug logging.
+    # Outputs:
+    #     None.
     def __init__(self, current_version, debug_log_func):
         self.current_version = current_version
         self.debug_log = (
             debug_log_func if debug_log_func else (lambda message, **kwargs: None)
         )
 
+    # Recursively scans a directory for the presence of GUI Python files.
+    # This static method acts as a "Temporal Crawler" to determine if a directory
+    # or any of its subdirectories contain files named `gui_*.py`, indicating
+    # that it should be considered for GUI construction.
+    # Inputs:
+    #     path (pathlib.Path): The path to the directory to scan.
+    # Outputs:
+    #     bool: True if a `gui_*.py` file is found, False otherwise.
     @staticmethod
     def _scan_for_flux_capacitors(path: pathlib.Path) -> bool:
         """
@@ -53,6 +75,14 @@ class LayoutParser:
             return False
         return False
 
+    # Analyzes a directory structure to determine its intended GUI layout.
+    # This method examines subdirectories and file naming conventions within the
+    # given path to identify layout types such as horizontal/vertical splits, notebooks,
+    # or recursive builds, returning a structured dictionary describing the layout.
+    # Inputs:
+    #     path (pathlib.Path): The path to the directory to analyze.
+    # Outputs:
+    #     dict: A dictionary describing the layout structure and relevant data.
     def parse_directory(self, path: pathlib.Path) -> dict:
         """
         Analyzes a directory path to determine its intended GUI layout structure.

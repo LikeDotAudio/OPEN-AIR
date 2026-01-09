@@ -1,4 +1,4 @@
-# workers/worker_draw_bargraph.py
+# Showtime/worker_showtime_draw_bargraph.py
 #
 # A worker to generate a horizontal bar graph image.
 #
@@ -12,8 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
+# Version 20250821.200641.1
 
 Current_Date = 20251129  ##Update on the day the change was made
 Current_Time = 120000  ## update at the time it was edited and compiled
@@ -27,6 +26,21 @@ from PIL import Image, ImageDraw, ImageFont
 import workers.setup.worker_project_paths as project_paths
 
 
+# Creates a horizontal bar graph image with text, representing a value within a specified range.
+# This function generates a PNG image file containing a colored bar whose length corresponds
+# to the input `value`, along with overlayed text. The image is saved to the project's DATA directory.
+# Inputs:
+#     value (int): The value to represent on the bar graph (expected between -100 and 0).
+#     text (str): The text to display on the image.
+#     width (int): The width of the generated image.
+#     height (int): The height of the generated image.
+#     bg_color (tuple): RGB tuple for the background color.
+#     bar_color (tuple): RGB tuple for the bar color.
+#     text_color (tuple): RGB tuple for the text color.
+# Outputs:
+#     str: The file path to the saved bar graph image.
+# Raises:
+#     ValueError: If the input `value` is not within the range of -100 to 0.
 def create_bar_graph_image(
     value,
     text,
@@ -40,7 +54,7 @@ def create_bar_graph_image(
     Creates a horizontal bar graph image with text.
 
     Args:
-        value (int): The value to represent, from -100 to 0.
+        value (int): The value to represent on the bar graph, from -100 to 0.
         text (str): The text to display on the image.
         width (int): The width of the image.
         height (int): The height of the image.

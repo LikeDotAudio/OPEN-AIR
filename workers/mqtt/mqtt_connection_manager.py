@@ -1,9 +1,18 @@
-# workers/mqtt/mqtt_connection_manager.py
+# mqtt/mqtt_connection_manager.py
 #
-# Purpose: Singleton. Maintains the socket connection to the broker. Handles the heartbeat.
-# Key Function: get_client_instance() -> Returns the connected client.
-# Key Function: connect_to_broker(address, port) -> Initiates the handshake.
-# Logic: If the connection drops, IT handles the retry logic, not the GUI.
+# Manages the singleton MQTT client connection to the broker, handles connection lifecycle, and provides client instance access.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import paho.mqtt.client as mqtt
 import threading
@@ -18,6 +27,15 @@ class MqttConnectionManager:
     _instance = None
     _lock = threading.Lock()
 
+    # Implements the singleton pattern for MqttConnectionManager.
+    # This ensures that only one instance of the connection manager exists throughout
+    # the application, preventing multiple MQTT client connections.
+    # Inputs:
+    #     cls: The class itself.
+    #     *args: Positional arguments for the constructor.
+    #     **kwargs: Keyword arguments for the constructor.
+    # Outputs:
+    #     MqttConnectionManager: The singleton instance of the class.
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
             with cls._lock:
@@ -25,6 +43,13 @@ class MqttConnectionManager:
                     cls._instance = super().__new__(cls)
         return cls._instance
 
+    # Initializes the MqttConnectionManager instance.
+    # This constructor sets up the basic properties of the manager, but only
+    # performs initialization once due to the singleton pattern.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def __init__(self):
         if hasattr(self, "initialized"):
             return
@@ -34,10 +59,27 @@ class MqttConnectionManager:
         self.broker_port = None
         self.on_message_callback = None
 
+    # Returns the connected Paho MQTT client instance.
+    # This method provides access to the underlying MQTT client object, allowing
+    # other parts of the application to interact directly with the broker (e.g., publish messages).
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     mqtt.Client: The connected MQTT client instance.
     def get_client_instance(self):
         """Returns the connected client instance."""
         return self.client
 
+    # Callback function executed when the MQTT client successfully connects to the broker.
+    # If the connection is successful, it logs a success message and triggers the
+    # subscriber router to re-subscribe to all known topics.
+    # Inputs:
+    #     client: The Paho MQTT client instance.
+    #     userdata: User-defined data passed to the callback.
+    #     flags: Response flags sent by the broker.
+    #     rc (int): The connection result code (0 for success).
+    # Outputs:
+    #     None.
     def on_connect(self, client, userdata, flags, rc):
         """Callback for when the MQTT client connects to the broker."""
         if rc == 0:
@@ -53,6 +95,17 @@ class MqttConnectionManager:
                 **_get_log_args(),
             )
 
+    # Initiates a connection to the MQTT broker.
+    # This method configures the MQTT client with broker details, sets up callbacks
+    # for connection and message reception, and starts the network loop in a
+    # background thread to maintain the connection.
+    # Inputs:
+    #     address (str, optional): The broker's IP address or hostname.
+    #     port (int, optional): The broker's port number.
+    #     on_message_callback (function, optional): A callback function for incoming messages.
+    #     subscriber_router (object, optional): An instance of the subscriber router.
+    # Outputs:
+    #     None.
     def connect_to_broker(
         self, address=None, port=None, on_message_callback=None, subscriber_router=None
     ):
@@ -102,6 +155,13 @@ class MqttConnectionManager:
                 message=f"❌ Error connecting to MQTT broker: {e}", **_get_log_args()
             )
 
+    # Disconnects the MQTT client from the broker.
+    # This method stops the network loop and gracefully disconnects the client,
+    # terminating the MQTT session.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def disconnect(self):
         """Disconnects the MQTT client from the broker."""
         if self.client:

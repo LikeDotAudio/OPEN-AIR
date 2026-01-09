@@ -1,4 +1,18 @@
-# workers/builder/dynamic_gui_create_web_link.py
+# builder_text/dynamic_gui_create_web_link.py
+#
+# A mixin for creating a web link widget that opens a URL in a web browser.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -12,6 +26,15 @@ import os
 
 
 class WebLinkCreatorMixin:
+    # Creates a clickable web link widget that opens a URL in a web browser.
+    # This method sets up a Tkinter Label styled as a hyperlink. When clicked,
+    # it opens the configured URL in the system's default web browser.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): Configuration for the web link, including the URL and label.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created frame containing the web link widget, or None on failure.
     def _create_web_link(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature

@@ -1,4 +1,18 @@
-# workers/builder/dynamic_gui_create_text_input.py
+# builder_text/dynamic_gui_create_text_input.py
+#
+# A mixin for creating a text input widget that is synchronized via MQTT.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -12,6 +26,17 @@ import os
 
 
 class TextInputCreatorMixin:
+    # Creates a text input widget (Entry) that is synchronized via MQTT.
+    # This method sets up a Tkinter Entry widget for text input, binds its value
+    # to a StringVar, and integrates it with the state management engine.
+    # Changes to the text input are broadcast via MQTT, and incoming MQTT messages
+    # can update the text field.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): Configuration for the text input widget.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created frame containing the text input widget, or None on failure.
     def _create_text_input(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature

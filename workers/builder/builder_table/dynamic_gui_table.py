@@ -1,4 +1,18 @@
-# workers/builder/builder_table/dynamic_gui_table.py
+# builder_table/dynamic_gui_table.py
+#
+# A mixin for creating an editable table widget with CSV functionality, synchronized via MQTT.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 import tkinter as tk
 from tkinter import ttk
 import inspect
@@ -25,6 +39,17 @@ CSV_SAVE_DIR = os.path.join(
 class GuiTableCreatorMixin:
     """Mixin class for creating an editable table widget with CSV functionality."""
 
+    # Creates an editable table widget with integrated CSV import/export and MQTT synchronization.
+    # This method sets up a Tkinter Treeview widget for displaying tabular data, along with
+    # buttons for saving to/reading from CSV, adding/deleting rows, and undoing changes.
+    # It fully integrates with the state management engine to keep the table's data synchronized
+    # across the application via MQTT.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): Configuration for the table widget.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created container frame for the table widget.
     def _create_gui_table(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature

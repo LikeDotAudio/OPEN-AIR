@@ -1,7 +1,6 @@
-# display/left_50/top_100/0_Spectrum Analizer/3_markers/2_peak_hunter/gui_peak_hunter.py
+# 2_Peak_Hunter/gui_peak_hunter.py
 #
-# This file (gui_peak_hunter.py) provides the MarkerPeakHunterGUI component for the Peak Hunter tab.
-# Now patched to handle ModuleLoader arguments safely!
+# This module defines the MarkerPeakHunterGUI component for the Peak Hunter tab, displaying and managing peak marker data.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
@@ -13,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version: 20251229.1700.1
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -48,7 +47,7 @@ current_file_path = pathlib.Path(__file__).resolve()
 # Assuming structure: ProjectRoot/display/left_50/top_100/0_Spectrum Analizer/3_markers/2_peak_hunter/gui_peak_hunter.py
 # That is 7 levels deep.
 project_root = current_file_path.parents[6]
-current_file = str(current_file_path.relative_to(project_root)).replace("\\", "/")
+current_file = str(current_file_path.relative_to(project_root)).replace("\", "/")
 
 
 class MarkerPeakHunterGUI(ttk.Frame):
@@ -56,6 +55,17 @@ class MarkerPeakHunterGUI(ttk.Frame):
     The main GUI class for the Peak Hunter tab.
     """
 
+    # Initializes the MarkerPeakHunterGUI.
+    # This constructor sets up the basic properties of the GUI, extracts core dependencies
+    # like the state mirror engine, and initializes helper classes for CSV export.
+    # It then proceeds to build the user interface.
+    # Inputs:
+    #     parent: The parent widget.
+    #     json_path (str, optional): Path to the configuration file (from ModuleLoader).
+    #     config (dict, optional): Configuration dictionary (from ModuleLoader).
+    #     **kwargs: Additional keyword arguments for the Frame.
+    # Outputs:
+    #     None.
     def __init__(self, parent, json_path=None, config=None, **kwargs):
         """
         Initialize the Marker Peak Hunter GUI.
@@ -86,10 +96,24 @@ class MarkerPeakHunterGUI(ttk.Frame):
         # 4. Initialize UI
         self._init_ui()
 
+    # Prints a message to the GUI's console (placeholder for actual GUI integration).
+    # This method is designed to provide feedback to the user on the GUI.
+    # Inputs:
+    #     message (str): The message string to print.
+    # Outputs:
+    #     None.
     def print_to_gui(self, message):
         """Prints a message to the console."""
         print(message)
 
+    # Initializes the user interface of the Marker Peak Hunter tab.
+    # This method sets up the main layout, including control buttons (Refresh, Export CSV)
+    # and a Treeview widget to display peak marker data, along with scrollbars.
+    # It also configures column headings and binds events.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _init_ui(self):
         current_function_name = inspect.currentframe().f_code.co_name
 
@@ -167,6 +191,13 @@ class MarkerPeakHunterGUI(ttk.Frame):
             # Display error on GUI
             tk.Label(self, text=f"Initialization Error: {e}", fg="red").pack()
 
+    # Refreshes the data displayed in the peak hunter table.
+    # This method clears any existing data in the Treeview and populates it with
+    # new (mock) data. In a full implementation, this would fetch live data.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def refresh_data(self):
         """
         Placeholder: logic to fetch peak data from State Mirror or File.
@@ -193,6 +224,15 @@ class MarkerPeakHunterGUI(ttk.Frame):
         for item in mock_data:
             self.commands_table.insert("", "end", values=item)
 
+    # Sorts the Treeview table by the specified column.
+    # This method retrieves all items from the Treeview, sorts them based on the
+    # values in the target column (handling both numeric and string types), and
+    # then reorders the display.
+    # Inputs:
+    #     col: The identifier of the column to sort by.
+    #     reverse (bool): True for descending order, False for ascending.
+    # Outputs:
+    #     None.
     def sort_column(self, col, reverse):
         """Sorts the Treeview column."""
         l = [
@@ -211,6 +251,14 @@ class MarkerPeakHunterGUI(ttk.Frame):
             col, command=lambda: self.sort_column(col, not reverse)
         )
 
+    # Handles a double-click event on a row in the peak hunter table.
+    # This method identifies the double-clicked row, extracts its values, and
+    # logs them. In a full implementation, this would trigger an action like
+    # tuning an instrument to the selected peak's frequency.
+    # Inputs:
+    #     event: The Tkinter double-click event object.
+    # Outputs:
+    #     None.
     def on_item_double_click(self, event):
         """Handle double click on a row."""
         item_id = self.commands_table.identify_row(event.y)
@@ -220,6 +268,14 @@ class MarkerPeakHunterGUI(ttk.Frame):
                 debug_logger(message=f"🎯 Peak Selected: {values}", **_get_log_args())
             # Logic to tune radio to this frequency would go here
 
+    # Exports the current data from the peak hunter table to a CSV file.
+    # This method prompts the user to select a save location, extracts all data
+    # from the Treeview, and uses a CSV export utility to write the data to the
+    # chosen file.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def export_to_csv(self):
         """
         Opens a file dialog and exports the current data from the table to a CSV file.

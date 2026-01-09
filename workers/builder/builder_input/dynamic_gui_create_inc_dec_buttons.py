@@ -1,4 +1,18 @@
-# workers/builder/dynamic_gui_create_inc_dec_buttons.py
+# builder_input/dynamic_gui_create_inc_dec_buttons.py
+#
+# A mixin for creating increment and decrement buttons with a value display, synchronized via MQTT.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -12,6 +26,15 @@ import os
 
 
 class IncDecButtonsCreatorMixin:
+    # Creates a set of increment and decrement buttons along with a display for their current value.
+    # This method sets up two buttons (up/down arrows) that, when pressed, modify a numerical
+    # value. The current value is displayed, and the entire widget is synchronized via MQTT.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): Configuration for the increment/decrement buttons.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created frame containing the increment/decrement buttons and value display.
     def _create_inc_dec_buttons(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature

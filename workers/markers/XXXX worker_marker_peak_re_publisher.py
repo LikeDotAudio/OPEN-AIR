@@ -1,8 +1,7 @@
-# workers/markers/worker_marker_peak_re_publisher.py
+# markers/XXXX worker_marker_peak_re_publisher.py
 #
 # This worker listens to the immediate output of the NAB marker command (Marker_1/value, etc.)
 # and republishes the received peak value to the final markers repository location.
-# It is instantiated with the starting device ID of the current batch to correctly map outputs.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
@@ -14,8 +13,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-#
-# Version 20251213.120000.44
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -53,6 +51,15 @@ class MarkerPeakPublisher:
     to the correct final Device-ID/Peak topics based on a provided starting device ID.
     """
 
+    # Initializes the MarkerPeakPublisher.
+    # This sets up the publisher to listen for NAB marker outputs and remap them
+    # to the correct device-specific peak topics. It generates a mapping from
+    # generic marker IDs to specific device IDs.
+    # Inputs:
+    #     mqtt_util (MqttControllerUtility): The MQTT utility for publishing and subscribing.
+    #     starting_device_id (str): The ID of the first device in the current batch of markers.
+    # Outputs:
+    #     None.
     def __init__(self, mqtt_util: MqttControllerUtility, starting_device_id: str):
         current_function_name = inspect.currentframe().f_code.co_name
 
@@ -77,6 +84,13 @@ class MarkerPeakPublisher:
             message=f"✅ Peak Publisher for {starting_device_id} is active and ready to catch peak values."
         )
 
+    # Generates a mapping from generic marker IDs (Marker_1, Marker_2, etc.) to specific device IDs.
+    # This function assumes a 'Device-###' format for device IDs and creates a mapping for
+    # a batch of markers based on a starting device ID.
+    # Inputs:
+    #     start_id (str): The starting device ID (e.g., "Device-001").
+    # Outputs:
+    #     dict: A dictionary mapping marker IDs (e.g., "Marker_1") to device IDs (e.g., "Device-001").
     def _generate_device_map(self, start_id: str) -> dict:
         """
         Calculates the next 5 device IDs and maps Marker_1..Marker_6 to them.
@@ -102,6 +116,13 @@ class MarkerPeakPublisher:
 
         return device_map
 
+    # Subscribes to the specific NAB Marker output topics.
+    # This method configures the MQTT utility to listen for wildcard topics related
+    # to the output of the NAB marker command.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _setup_subscriptions(self):
         """
         Subscribes to the specific NAB Marker outputs.
@@ -111,6 +132,15 @@ class MarkerPeakPublisher:
             TOPIC_MARKER_NAB_OUTPUT_WILDCARD, self._on_nab_output_and_republish_peak
         )
 
+    # Callback function that processes incoming NAB marker output messages and republishes peak values.
+    # This method extracts the marker ID and peak value from the MQTT message,
+    # maps it to the correct device ID, and publishes the peak value to the final
+    # device-specific Peak topic in the markers repository.
+    # Inputs:
+    #     topic (str): The MQTT topic the message was received on.
+    #     payload: The MQTT message payload containing the peak value.
+    # Outputs:
+    #     None.
     def _on_nab_output_and_republish_peak(self, topic, payload):
         """
         Listens to the NAB query results (Marker_X/value), logs the result,
@@ -120,9 +150,7 @@ class MarkerPeakPublisher:
 
         debug_logger(
             message=f"🐐🟢 PUBLISHER HANDLER FIRED for topic: {topic}",
-            file=current_file,
-            version=current_version,
-            function=current_function_name,
+            **_get_log_args(),
         )
 
         try:
@@ -151,16 +179,12 @@ class MarkerPeakPublisher:
 
                     debug_logger(
                         message=f"🐐💾 REPUBLISH SUCCESS: {device_id} ({marker_id}) peak: {float_peak_value} dBm. Final Topic: {final_peak_topic}",
-                        file=current_file,
-                        version=current_version,
-                        function=current_function_name,
+                        **_get_log_args(),
                     )
                 else:
                     debug_logger(
                         message=f"🐐🟡 REPUBLISH WARNING: Peak received for {marker_id} but no Device-ID found in batch map.",
-                        file=current_file,
-                        version=current_version,
-                        function=current_function_name,
+                        **_get_log_args(),
                     )
 
             except ValueError:
@@ -172,9 +196,7 @@ class MarkerPeakPublisher:
 
                 debug_logger(
                     message=f"❌ REPUBLISH ERROR: Peak Value '{peak_value}' for {device_id} failed conversion. Published Error Status.",
-                    file=current_file,
-                    version=current_version,
-                    function=current_function_name,
+                    **_get_log_args(),
                 )
 
         except Exception as e:
@@ -193,7 +215,5 @@ class MarkerPeakPublisher:
             )
             debug_logger(
                 message=f"❌ CRITICAL FAILURE in Publisher Flow. Error: {e}",
-                file=current_file,
-                version=current_version,
-                function=current_function_name,
+                **_get_log_args(),
             )

@@ -1,7 +1,6 @@
-# workers/Showtime/worker_showtime_tune.py
+# Showtime/worker_showtime_tune.py
 #
-# A complete and comprehensive pre-amble that describes the file and the functions within.
-# The purpose is to provide clear documentation and versioning.
+# This module provides the logic for tuning an instrument based on marker selections (individual devices, groups, or zones) made in the Showtime tab.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
@@ -13,6 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
+# Version 20250821.200641.1
 
 import inspect
 from workers.logger.logger import debug_logger
@@ -27,6 +27,14 @@ app_constants = Config.get_instance()  # Get the singleton instance
 LOCAL_DEBUG_ENABLE = False
 
 
+# Tunes the instrument based on the current marker selections in the Showtime tab.
+# This function determines the tuning action based on whether a specific device,
+# a group, a zone, or no filter is selected. It calculates the appropriate
+# frequency range and sends tuning commands to the instrument via MQTT.
+# Inputs:
+#     showtime_tab_instance: An instance of the Showtime tab, containing current selections and marker data.
+# Outputs:
+#     None.
 def on_tune_request_from_selection(showtime_tab_instance):
     """
     Tunes the instrument based on the current selections.

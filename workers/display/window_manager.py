@@ -1,4 +1,18 @@
-# display/utils/window_manager.py
+# display/window_manager.py
+#
+# Manages Toplevel windows for tear-off tabs and handles window management protocols.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -18,6 +32,14 @@ class WindowManager:
     Manages Toplevel windows for tear-off tabs and handles window management protocols.
     """
 
+    # Initializes the WindowManager.
+    # This constructor takes a reference to the main application instance, allowing
+    # it to access necessary global settings and the root Tkinter window for managing
+    # torn-off windows.
+    # Inputs:
+    #     application_instance: A reference to the main Application class instance.
+    # Outputs:
+    #     None.
     def __init__(
         self, application_instance
     ):  # Removed current_version, LOCAL_DEBUG_ENABLE, debug_log_func
@@ -29,6 +51,14 @@ class WindowManager:
         # self.debug_log = debug_log # No longer needed
         self.torn_off_windows = {}  # To keep track of torn-off windows
 
+    # Handles the tear-off functionality for a notebook tab.
+    # When a Control+Left-Click event is detected on a notebook tab, this method
+    # detaches the tab's content into a new Toplevel window, allowing it to function
+    # as a separate, independent window.
+    # Inputs:
+    #     event: The tkinter event object (expected from a notebook tab click).
+    # Outputs:
+    #     None.
     def tear_off_tab(self, event):
         """
         Handles the tear-off functionality for a notebook tab.
@@ -114,6 +144,14 @@ class WindowManager:
                     message=f"❌ Error tearing off tab: {e}", **_get_log_args()
                 )
 
+    # Handles the event when a torn-off window is closed.
+    # This method re-attaches the content of the closed Toplevel window back into
+    # its original notebook, effectively returning the tab to its initial state
+    # within the main application window.
+    # Inputs:
+    #     top_level_window: The Toplevel window that was closed.
+    # Outputs:
+    #     None.
     def _on_tear_off_window_close(self, top_level_window):
         """
         Handles closing a torn-off window by re-inserting the original (empty)
@@ -143,6 +181,14 @@ class WindowManager:
             # Fallback for safety
             top_level_window.destroy()
 
+    # Re-attaches a torn-off tab back to its original or a new notebook.
+    # This method is a placeholder for future implementation of a more robust
+    # re-attachment mechanism, allowing users to explicitly re-integrate detached
+    # windows into the main application interface.
+    # Inputs:
+    #     torn_off_window_id: The identifier of the torn-off window to re-attach.
+    # Outputs:
+    #     None.
     def re_attach_tab(self, torn_off_window_id):
         """
         Re-attaches a torn-off tab back to its original notebook or a new one.

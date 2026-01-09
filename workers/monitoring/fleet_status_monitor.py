@@ -1,3 +1,18 @@
+# monitoring/fleet_status_monitor.py
+#
+# Monitors the status of the device fleet and controls a GUI status light (Traffic Light).
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 import time
 import orjson
 from workers.mqtt.mqtt_publisher_service import publish_payload
@@ -14,6 +29,15 @@ class FleetStatusMonitor:
     - Turns GREEN only when a valid Fleet JSON is published.
     """
 
+    # Initializes the FleetStatusMonitor.
+    # This constructor sets up the monitor to subscribe to scan start and complete events
+    # from the Visa Fleet Manager, defaulting the status to RED (scanning/uninitialized)
+    # and publishing this initial state to the GUI status light.
+    # Inputs:
+    #     state_mirror_engine: The state mirror engine for MQTT synchronization.
+    #     subscriber_router (MqttSubscriberRouter): The MQTT subscriber router.
+    # Outputs:
+    #     None.
     def __init__(self, state_mirror_engine, subscriber_router: MqttSubscriberRouter):
         self.state_mirror_engine = state_mirror_engine
         self.subscriber_router = subscriber_router  # Store subscriber_router
@@ -33,11 +57,27 @@ class FleetStatusMonitor:
         # 2. Publish initial state (RED) immediately on startup
         self._publish_color("red")
 
+    # Callback for when a device fleet scan starts.
+    # This method updates the internal state to "RED" and publishes this color
+    # to the GUI status light, indicating that a scan is in progress.
+    # Inputs:
+    #     topic (str): The MQTT topic the message was received on.
+    #     payload: The MQTT message payload (unused in this method).
+    # Outputs:
+    #     None.
     def _on_scan_start(self, topic, payload):
         self.current_state = "RED"
         self._publish_color("red")
         debug_logger("🔴 Fleet Scan Started - Status Red")
 
+    # Callback for when a device fleet scan completes.
+    # This method processes the scan completion payload, checks the number of devices found,
+    # and updates the GUI status light to GREEN if devices were found, or RED otherwise.
+    # Inputs:
+    #     topic (str): The MQTT topic the message was received on.
+    #     payload: The MQTT message payload containing scan results (e.g., number of devices).
+    # Outputs:
+    #     None.
     def _on_scan_complete(self, topic, payload):
         try:
             data = orjson.loads(payload)
@@ -57,6 +97,13 @@ class FleetStatusMonitor:
             self.current_state = "RED"
             self._publish_color("red")
 
+    # Publishes the specified color to the GUI Status Light via MQTT.
+    # This method constructs a JSON payload containing the color and a timestamp,
+    # then publishes it to a dedicated MQTT topic that controls the GUI status indicator.
+    # Inputs:
+    #     color (str): The color to set the status light to (e.g., "red", "green").
+    # Outputs:
+    #     None.
     def _publish_color(self, color):
         """Tells the GUI Status Light what color to be."""
         target_topic = "OPEN-AIR/GUI/Global/Header/StatusLight"

@@ -1,19 +1,7 @@
-# workers/importers/worker_importer_loader.py
+# importers/worker_importer_loader.py
 #
-# A complete and comprehensive pre-amble that describes the file and the functions within.
-# The purpose is to provide clear documentation and versioning.
+# This module provides functions for loading marker data from various file formats (CSV, HTML, SHW, ZIP, PDF) into the application's marker table.
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251226
-Current_Time = 120000
-Current_iteration = 44
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
@@ -24,10 +12,11 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
+# Version 20250821.200641.1
 
 import inspect
 from tkinter import filedialog
-from workers.logger.logger import debug_logger
+from workers.logger.debug_logger import debug_logger
 from workers.logger.log_utils import _get_log_args
 from workers.importers.formats.worker_importer_from_csv_unknown import (
     Marker_convert_csv_unknow_report_to_csv,
@@ -62,8 +51,17 @@ CANONICAL_HEADERS = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
 LOCAL_DEBUG_ENABLE = False
 
 
+# Checks for and loads an existing MARKERS.csv file from the DATA directory on startup.
+# If the file exists, it reads its contents and returns the headers and data.
+# Otherwise, it returns canonical headers and an empty data list.
+# Inputs:
+#     None.
+# Outputs:
+#     tuple: A tuple containing the headers and a list of dictionaries representing the marker data.
 def maker_file_check_for_markers_file():
-    # Checks for the MARKERS.csv file in the DATA directory and loads it if it exists.
+    """
+    Checks for the MARKERS.csv file in the DATA directory and loads it if it exists.
+    """
     current_function = inspect.currentframe().f_code.co_name
 
     # Use the stable GLOBAL_PROJECT_ROOT now available.
@@ -114,6 +112,14 @@ def maker_file_check_for_markers_file():
     return CANONICAL_HEADERS, []
 
 
+# Loads marker data from a selected CSV file into the importer tab's table.
+# This function prompts the user to select a CSV file, converts its content
+# to the standardized marker format, updates the importer tab's internal data model,
+# and refreshes the Treeview display.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+# Outputs:
+#     None.
 def load_markers_file_action(importer_tab_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
@@ -136,6 +142,14 @@ def load_markers_file_action(importer_tab_instance):
         save_markers_file_internally(importer_tab_instance)
 
 
+# Loads marker data from a selected IAS HTML report into the importer tab's table.
+# This function prompts the user to select an HTML file, extracts and converts its
+# content to the standardized marker format, updates the importer tab's internal data model,
+# and refreshes the Treeview display.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+# Outputs:
+#     None.
 def load_ias_html_action(importer_tab_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
@@ -169,6 +183,14 @@ def load_ias_html_action(importer_tab_instance):
         return
 
 
+# Loads marker data from a selected Shure Wireless Workbench (.shw) XML file into the importer tab's table.
+# This function prompts the user to select an SHW file, converts its content
+# to the standardized marker format, updates the importer tab's internal data model,
+# and refreshes the Treeview display.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+# Outputs:
+#     None.
 def load_wwb_shw_action(importer_tab_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
@@ -191,6 +213,14 @@ def load_wwb_shw_action(importer_tab_instance):
         save_markers_file_internally(importer_tab_instance)
 
 
+# Loads marker data from a selected Shure Wireless Workbench (.zip) archive into the importer tab's table.
+# This function prompts the user to select a ZIP file, extracts and converts its
+# content to the standardized marker format, updates the importer tab's internal data model,
+# and refreshes the Treeview display.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+# Outputs:
+#     None.
 def load_wwb_zip_action(importer_tab_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
@@ -213,6 +243,14 @@ def load_wwb_zip_action(importer_tab_instance):
         save_markers_file_internally(importer_tab_instance)
 
 
+# Loads marker data from a selected Sound Base PDF report (version 1) into the importer tab's table.
+# This function prompts the user to select a PDF file, converts its content
+# to the standardized marker format, updates the importer tab's internal data model,
+# and refreshes the Treeview display.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+# Outputs:
+#     None.
 def load_sb_pdf_action(importer_tab_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
@@ -235,6 +273,14 @@ def load_sb_pdf_action(importer_tab_instance):
         save_markers_file_internally(importer_tab_instance)
 
 
+# Loads marker data from a selected Sound Base PDF report (version 2) into the importer tab's table.
+# This function prompts the user to select a PDF file, converts its content
+# to the standardized marker format, updates the importer tab's internal data model,
+# and refreshes the Treeview display.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+# Outputs:
+#     None.
 def load_sb_v2_pdf_action(importer_tab_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(

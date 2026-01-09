@@ -1,13 +1,18 @@
-# display/left_50/top_100/3_markers/3_importers/gui_importer.py
+# 3_Importers/gui_importer.py
 #
-# This file provides a basic GUI component with buttons for importing marker data.
-# It has been reinforced to handle dynamic arguments from the Builder.
+# This module provides the MarkerImporterTab, a GUI component with buttons for importing and appending marker data from various file formats.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
 # Build Log: https://like.audio/category/software/spectrum-scanner/
-# Version 20260104.200500.3 (Fixed Init Overload)
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import filedialog, ttk
@@ -86,7 +91,7 @@ current_version = "20260104.200500.3"
 current_version_hash = 20260104 * 200500 * 3
 current_file_path = pathlib.Path(__file__).resolve()
 # Use GLOBAL_PROJECT_ROOT for consistency
-current_file = str(current_file_path.relative_to(GLOBAL_PROJECT_ROOT)).replace("\\", "/")
+current_file = str(current_file_path.relative_to(GLOBAL_PROJECT_ROOT)).replace("\", "/")
 
 
 # --- Constants ---
@@ -100,7 +105,18 @@ class MarkerImporterTab(ttk.Frame, GuiTableCreatorMixin):
     actions via a separate worker module.
     """
 
-    # 🛠️ FIXED: Added *args and config_data to handle the extra argument from the Builder!
+    # Initializes the MarkerImporterTab.
+    # This constructor sets up the internal state for marker data, headers, and sorting.
+    # It also initializes helper classes for CSV export/import, applies styling,
+    # and creates the GUI widgets for loading, appending, and saving marker data.
+    # Inputs:
+    #     master: The parent Tkinter widget.
+    #     app_instance: A reference to the main application instance.
+    #     config_data (dict, optional): Configuration data for the tab.
+    #     *args: Positional arguments for the Frame.
+    #     **kwargs: Keyword arguments for the Frame.
+    # Outputs:
+    #     None.
     def __init__(
         self, master=None, app_instance=None, config_data=None, *args, **kwargs
     ):
@@ -134,9 +150,8 @@ class MarkerImporterTab(ttk.Frame, GuiTableCreatorMixin):
         # Arguments for _create_gui_table
         self.table_label = "Marker Editor"  # A descriptive label
         self.table_path = "markers_importer"  # Unique path for this table instance
-        self.base_mqtt_topic_from_path = (
+        self.base_mqtt_topic_from_path =
             self.app_instance.state_mirror_engine.base_topic
-        )
         self.state_mirror_engine = self.app_instance.state_mirror_engine
         self.subscriber_router = self.app_instance.subscriber_router
 
@@ -170,6 +185,13 @@ class MarkerImporterTab(ttk.Frame, GuiTableCreatorMixin):
             **_get_log_args(),
         )
 
+    # Applies theme-specific styles to the widgets within the MarkerImporterTab.
+    # This method configures the appearance of various ttk widgets, ensuring
+    # consistent styling across the application.
+    # Inputs:
+    #     theme_name (str): The name of the theme to apply (e.g., "dark").
+    # Outputs:
+    #     None.
     def _apply_styles(self, theme_name: str):
         colors = THEMES.get(theme_name, THEMES["dark"])
         style = ttk.Style(self)
@@ -183,7 +205,8 @@ class MarkerImporterTab(ttk.Frame, GuiTableCreatorMixin):
         style.configure(
             "Action.TButton", background=colors["secondary"], foreground=colors["text"]
         )
-        style.map("Action.TButton", background=[("active", colors["hover_blue"])])
+        style.map("Action.TButton", background=[("active", colors["hover_blue"])]
+        )
 
         style.configure(
             "Treeview",
@@ -206,6 +229,14 @@ class MarkerImporterTab(ttk.Frame, GuiTableCreatorMixin):
             foreground="black",
         )
 
+    # Creates and arranges all the GUI widgets for the MarkerImporterTab.
+    # This method sets up sections for loading, appending, and saving marker data,
+    # including buttons for various file formats and the central Treeview table
+    # for displaying and editing markers.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _create_widgets(self):
         self.pack(fill=tk.BOTH, expand=True)
 

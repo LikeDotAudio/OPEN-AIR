@@ -1,10 +1,18 @@
-# display/splash/splash_screen.py
-# Version 20251223.GIF.Integration
+# splash_screen/splash_screen.py
 #
-# UPDATES:
-# 1. Removed Matplotlib/Numpy animation to reduce overhead and potential driver conflicts.
-# 2. Replaced dynamic animation with a pre-rendered GIF ('splash_logo.gif') using Pillow.
-# 3. Text rendering, versioning, and status updates remain unchanged.
+# This module defines the SplashScreen class, which displays an animated splash screen with version information and status updates during application startup.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 from managers.configini.config_reader import Config
 
@@ -41,6 +49,18 @@ except ImportError:
 
 
 class SplashScreen:
+    # Initializes the SplashScreen.
+    # This constructor sets up the top-level splash window, configures its appearance,
+    # dimensions, and position. It also initializes the GIF animation and lyric display,
+    # and includes mechanisms for safe logging.
+    # Inputs:
+    #     parent: The parent Tkinter widget (usually the main root window).
+    #     app_version (str): The current version string of the application.
+    #     debug_enabled (bool): A flag indicating if debug logging is enabled.
+    #     _func (function): A placeholder function (unused in this version).
+    #     debug_log_func (function): The debug logging function to use.
+    # Outputs:
+    #     None.
     def __init__(self, parent, app_version, debug_enabled, _func, debug_log_func):
         self.debug_enabled = debug_enabled
         self._func = _func
@@ -155,10 +175,27 @@ class SplashScreen:
             self._safe_log(f"🔴 CRITICAL SPLASH ERROR: {e}", is_error=True)
             traceback.print_exc()
 
+    # Provides a safe way to log messages from the splash screen.
+    # This method uses the provided `debug_log_func` to output messages,
+    # ensuring consistent logging behavior across the application.
+    # Inputs:
+    #     message (str): The message to log.
+    #     is_error (bool): Flag to indicate if the message is an error.
+    #     force_print (bool): Flag to force printing regardless of debug status (removed).
+    # Outputs:
+    #     None.
     def _safe_log(self, message, is_error=False, force_print=False):
         if self.debug_enabled and self.debug_log_func:
             self.debug_log_func(message=message, **_get_log_args())
 
+    # Initializes and loads the GIF animation frames for the splash screen.
+    # This method reads the `splash_logo.gif` file, extracts all its frames,
+    # and stores them as `ImageTk.PhotoImage` objects for display. It handles
+    # cases where the GIF file is not found or fails to load.
+    # Inputs:
+    #     parent_frame: The Tkinter frame where the GIF will be displayed.
+    # Outputs:
+    #     None.
     def _init_gif_animation(self, parent_frame):
         self.photo_images = []
         gif_path = pathlib.Path(__file__).parent / "splash_logo.gif"
@@ -187,6 +224,14 @@ class SplashScreen:
         except Exception as e:
             self._safe_log(f"🔴 Failed to load GIF frames: {e}", is_error=True)
 
+    # Updates the displayed GIF frame to create the animation effect.
+    # This method cycles through the loaded GIF frames, updates the `gif_label`
+    # with the next frame, and schedules itself to run again after a short delay
+    # to maintain the animation. It also cycles through lyrics when the GIF loops.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _update_gif_frame(self):
         # self._safe_log(f"🎞️ Updating GIF frame to index {self.gif_frame_index}")
         if not self.splash_window.winfo_exists():
@@ -206,8 +251,13 @@ class SplashScreen:
             self.gif_frame_duration, self._update_gif_frame
         )
 
-    # _fade_in and _fade_out methods removed
-
+    # Hides and destroys the splash screen window.
+    # This method cancels any ongoing GIF animation, destroys the `splash_window`,
+    # and clears its reference, effectively removing the splash screen from display.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def hide(self):
         self._safe_log(
             "DEBUG: splash.hide() called. Attempting to dismiss splash screen."
@@ -224,6 +274,13 @@ class SplashScreen:
             self.splash_window.destroy()  # Destroy the splash window directly
             self.splash_window = None  # Clear the reference
 
+    # Cycles through and displays a new line of lyrics asynchronously.
+    # This method updates the `lyrics_label` with the next lyric from the `lyrics` list
+    # and schedules itself to run again after a delay, creating a continuous lyric display.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def cycle_lyrics_async(self):
         # This method is no longer called in init, but kept for potential future use or direct invocation
         if self.splash_window.winfo_exists() and self.lyrics:

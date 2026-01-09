@@ -1,3 +1,19 @@
+# splash_screen/makegif.py
+#
+# This script generates a GIF animation of a dynamic wave pattern using Matplotlib, intended for splash screen display.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -33,7 +49,16 @@ cm = LinearSegmentedColormap.from_list("orange_blue", colors, N=num_bars)
 bar_colors = cm(np.linspace(0, 1, num_bars))
 
 
-# Helper to make a layer
+# Creates a set of bar and line objects for a single layer of the wave animation.
+# This helper function sets up the visual components for a layer, including a gradient
+# of bars and a line, with specified alpha, color, and width properties.
+# Inputs:
+#     alpha_bar (float): The transparency (alpha) for the bar graph.
+#     color_line (str): The color for the line plot.
+#     width_line (float): The line width for the line plot.
+#     alpha_line (float): The transparency (alpha) for the line plot.
+# Outputs:
+#     tuple: A tuple containing a list of bar objects and a line object.
 def create_layer(alpha_bar, color_line, width_line, alpha_line):
     # Always use the standard 'bar_colors' gradient
     bars = ax.bar(
@@ -62,11 +87,27 @@ bars5, line5 = create_layer(0.60, "#FFA600", 2.0, 0.9)
 envelope = np.exp(-0.025 * (np.linspace(-10, 10, num_bars)) ** 2)
 
 
-# --- 4. Animation Logic ---
+# Calculates the height of the wave pattern at a given time `t`.
+# This function generates a dynamic wave based on sine functions, x-coordinates,
+# and time-dependent offsets, contributing to the animation's movement.
+# Inputs:
+#     t (float): The current time in the animation cycle.
+#     offset_x (float): An x-axis offset for the wave.
+#     offset_t (float): A time-based offset for the wave.
+# Outputs:
+#     numpy.ndarray: An array of wave heights.
 def get_wave(t, offset_x, offset_t):
     return np.abs(np.sin(x_vals + offset_x - t) * np.sin(0.5 * x_vals + t + offset_t))
 
 
+# Updates the animation for each frame.
+# This function is the core of the animation logic. It calculates the wave heights
+# for multiple layers based on the current frame progress, and then updates the
+# heights of the bars and the data of the lines for each layer.
+# Inputs:
+#     frame (int): The current frame number in the animation sequence.
+# Outputs:
+#     list: A list of all updated Matplotlib artists (bars and lines) for the frame.
 def update(frame):
     progress = frame / FRAMES
     t = 2 * np.pi * progress  # Perfect Loop

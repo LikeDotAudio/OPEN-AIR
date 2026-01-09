@@ -1,10 +1,18 @@
-# workers/State_Cache/cache_io_handler.py
+# State_Cache/cache_io_handler.py
 #
-# Version 20251230.230000.1
+# Handles all disk I/O operations for the application's state cache, including loading and atomic saving of snapshots.
 #
-# Author: Gemini
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
 #
-# The Scribe: Handles all disk I/O for the state cache.
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import os
 import orjson
@@ -21,6 +29,14 @@ current_version = "20251230.230000.1"
 current_version_hash = 20251230 * 230000 * 1
 
 
+# Loads the application state cache from `device_state_snapshot.json` on disk.
+# This function attempts to read a JSON file containing the cached device state.
+# If the file exists and is readable, its contents are returned as a dictionary;
+# otherwise, an empty dictionary is returned, and any errors are logged.
+# Inputs:
+#     None.
+# Outputs:
+#     Dict[str, Any]: A dictionary representing the loaded cache data, or an empty dictionary on failure.
 def load_cache() -> Dict[str, Any]:
     """
     Reads device_state_snapshot.json from the DATA directory defined in app_constants.
@@ -53,6 +69,14 @@ def load_cache() -> Dict[str, Any]:
     return {}
 
 
+# Atomically saves the application state cache to `device_state_snapshot.json` on disk.
+# This function writes the provided dictionary to a temporary file and then
+# renames it to the target filename. This atomic operation prevents data corruption
+# in case of unexpected interruptions (e.g., power loss).
+# Inputs:
+#     data (Dict[str, Any]): The dictionary containing the state cache data to be saved.
+# Outputs:
+#     bool: True if the cache was saved successfully, False otherwise.
 def save_cache(data: Dict[str, Any]) -> bool:
     """
     Writes the dictionary to disk. Use a temp file + rename (atomic write)

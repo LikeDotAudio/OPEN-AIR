@@ -1,3 +1,18 @@
+# builder_table/table_editing_row_ops_mixin.py
+#
+# A mixin for providing row-level operations (add, delete, import) for a Tkinter Treeview widget.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 import tkinter as tk
 import inspect
 import orjson
@@ -10,9 +25,23 @@ from workers.mqtt import mqtt_publisher_service
 
 
 class TableEditingRowOpsMixin:
+    # Initializes the TableEditingRowOpsMixin.
+    # This mixin does not require any specific state initialization in its constructor.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def __init__(self):
         pass  # No specific state needed for this mixin's __init__
 
+    # Adds a new empty row to the Treeview table.
+    # This method generates a unique key for the new row, creates an empty row
+    # with default values based on headers, inserts it into the Treeview,
+    # adds the action to the undo stack, and publishes the new row via MQTT.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def add_row(self):
         current_function = inspect.currentframe().f_code.co_name
         debug_logger(message="➕ Adding new row.", **_get_log_args())
@@ -77,6 +106,14 @@ class TableEditingRowOpsMixin:
             # Assuming start_edit is available from InplaceMixin
             self.start_edit(new_item_id, "#1")
 
+    # Deletes the currently selected rows from the Treeview table.
+    # This method iterates through selected rows, stores their data for undo purposes,
+    # publishes a "clear" payload to MQTT for each deleted row, and then removes them
+    # from the Treeview.
+    # Inputs:
+    #     event: The tkinter event object (optional).
+    # Outputs:
+    #     None.
     def delete_selection(self, event=None):
         selected_items = self.tree.selection()
         if not selected_items:
@@ -122,6 +159,14 @@ class TableEditingRowOpsMixin:
 
         debug_logger(message="🗑️ Delete selection completed.", **_get_log_args())
 
+    # Imports data from a list of dictionaries into the Treeview table.
+    # This method processes a list of dictionaries (e.g., from a CSV import),
+    # generating unique keys for each row, inserting them into the Treeview,
+    # adding the import action to the undo stack, and publishing each row via MQTT.
+    # Inputs:
+    #     data_list (list): A list of dictionaries, where each dictionary is a row of data to import.
+    # Outputs:
+    #     None.
     def import_data(self, data_list):
         current_function = inspect.currentframe().f_code.co_name
         debug_logger(

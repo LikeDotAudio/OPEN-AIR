@@ -1,16 +1,5 @@
-# workers/utils_marker_logic.py
+# markers/worker_marker_logic.py
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251129  ##Update on the day the change was made
-Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 1  ## a running version number - incriments by one each time
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
 # A utility module to contain core business logic functions related to marker data
 # processing and calculation, ensuring separation of concerns (DOP 6.2).
 #
@@ -24,8 +13,7 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-#
-# Version 20251005.230247.1
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -54,6 +42,13 @@ current_file = f"{os.path.basename(__file__)}"
 LOCAL_DEBUG_ENABLE = False
 
 
+# Calculates the minimum and maximum frequencies from a list of marker dictionaries.
+# This function iterates through a list of marker data, extracts the 'FREQ_MHZ' value
+# from each, and determines the overall minimum and maximum frequencies.
+# Inputs:
+#     marker_data_list (list): A list of dictionaries, where each dictionary represents a marker.
+# Outputs:
+#     tuple: A tuple containing (min_frequency, max_frequency) in MHz, or (None, None) if no valid frequencies are found or an error occurs.
 def calculate_frequency_range(marker_data_list):
     # Calculates the minimum and maximum frequencies from a list of marker dictionaries.
     current_function_name = inspect.currentframe().f_code.co_name

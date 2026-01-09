@@ -1,4 +1,18 @@
-'''
+# importers/worker_marker_csv_to_json_mqtt.py
+#
+# This module contains the logic for converting marker data from a CSV file to a device-centric JSON structure and publishing it to MQTT.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -9,9 +23,9 @@ from collections import defaultdict
 
 # --- Module Imports ---
 from workers.logger.logger import  debug_logger
-from workers.utils.log_utils import _get_log_args
+from workers.logger.log_utils import _get_log_args
 from workers.mqtt.worker_mqtt_controller_util import MqttControllerUtility
-from workers.utils.worker_project_paths import MARKERS_JSON_PATH, MARKERS_CSV_PATH # NEW: Import paths
+from workers.setup.worker_project_paths import MARKERS_JSON_PATH, MARKERS_CSV_PATH # NEW: Import paths
 
 
 # --- Global Scope Variables ---
@@ -23,6 +37,15 @@ LOCAL_DEBUG_ENABLE = False
 MQTT_BASE_TOPIC = "OPEN-AIR/repository/markers"
 
 
+# Recursively publishes all key-value pairs of a nested dictionary to MQTT.
+# This function traverses a dictionary structure. For each non-dictionary value,
+# it constructs a full MQTT topic path by concatenating keys and publishes the value.
+# Inputs:
+#     mqtt_util (MqttControllerUtility): The MQTT utility for publishing messages.
+#     base_topic (str): The current base topic path for the recursion.
+#     data (dict or any): The data (dictionary or value) to be published.
+# Outputs:
+#     None.
 def _publish_recursive(mqtt_util, base_topic, data):
     """
     A simple recursive function to publish all parts of a nested dictionary.
@@ -36,6 +59,16 @@ def _publish_recursive(mqtt_util, base_topic, data):
         mqtt_util.publish_message(topic=base_topic, subtopic="", value=str(data), retain=True)
 
 
+# Reads marker data from MARKERS.csv, converts it to a device-centric JSON structure, saves it, and publishes to MQTT.
+# This function performs several steps:
+# 1. Reads the CSV file and calculates summary data (total devices, min/max frequency, span).
+# 2. Converts each CSV row into a nested JSON structure for individual devices.
+# 3. Saves the complete JSON structure to MARKERS.json.
+# 4. Publishes the entire JSON structure to MQTT, after purging old data.
+# Inputs:
+#     mqtt_util (MqttControllerUtility): The MQTT utility for publishing messages.
+# Outputs:
+#     None.
 def csv_to_json_and_publish(mqtt_util: MqttControllerUtility):
     """
     Reads MARKERS.csv, calculates summary data (total, min/max freq, span), converts
@@ -47,10 +80,7 @@ def csv_to_json_and_publish(mqtt_util: MqttControllerUtility):
     if app_constants.global_settings['debug_enabled']:
         debug_logger(
             message=f"🟢️️️🟢 Initiating device-centric CSV to JSON conversion and MQTT publish. Applying new nested structure.",
-**_get_log_args()
-
-
-
+            **_get_log_args()
         )
 
     if not MARKERS_CSV_PATH.is_file():
@@ -144,4 +174,3 @@ def csv_to_json_and_publish(mqtt_util: MqttControllerUtility):
         debug_logger(message="✅ Successfully published the full marker set to MQTT.")
     except Exception as e:
         debug_logger(message=f"❌ Error publishing to MQTT: {e}")
-'''

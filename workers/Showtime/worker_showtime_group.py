@@ -1,7 +1,6 @@
-# workers/Showtime/worker_showtime_group.py
+# Showtime/worker_showtime_group.py
 #
-# A complete and comprehensive pre-amble that describes the file and the functions within.
-# The purpose is to provide clear documentation and versioning.
+# This module processes and groups marker data by Zone, Group, and Device for display in the Showtime tab.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
@@ -13,6 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
+# Version 20250821.200641.1
 
 import inspect
 from collections import defaultdict
@@ -23,6 +23,14 @@ from managers.configini.config_reader import Config
 app_constants = Config.get_instance()  # Get the singleton instance
 
 
+# Processes and groups marker data by Zone, Group, and Device.
+# This function iterates through the raw marker data, organizes it into a nested
+# dictionary structure based on Zone and Group, and then sorts devices within each group
+# by their Name.
+# Inputs:
+#     showtime_tab_instance: An instance of the Showtime tab, containing `marker_data`.
+# Outputs:
+#     None.
 def process_and_sort_markers(showtime_tab_instance):
     current_function = inspect.currentframe().f_code.co_name
     if app_constants.global_settings["debug_enabled"]:

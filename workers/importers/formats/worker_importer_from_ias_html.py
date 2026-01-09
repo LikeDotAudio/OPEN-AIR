@@ -1,6 +1,6 @@
-# workers/importers/worker_importer_ias_html.py
+# formats/worker_importer_from_ias_html.py
 #
-# This file contains the logic for converting IAS HTML frequency coordination reports
+# This module contains the logic for converting IAS HTML frequency coordination reports
 # into a standardized CSV format.
 #
 # Author: Anthony Peter Kuzub
@@ -13,7 +13,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20251129.120000.1
+# Version 20250821.200641.1
 
 import inspect
 import os
@@ -39,6 +39,15 @@ app_constants = Config.get_instance()
 headers = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
 
 
+# Converts an IAS HTML frequency coordination report into a standardized list of dictionaries.
+# This function parses the HTML content, extracts relevant data such as zone, group,
+# device, name, and frequency, and standardizes it for CSV output. All frequencies
+# are converted to MHz for consistency.
+# Inputs:
+#     html_content (str): The full HTML content of the report.
+# Outputs:
+#     tuple: A tuple containing the standardized CSV headers and a list of dictionaries,
+#            where each dictionary represents a row of converted data.
 def Marker_convert_IAShtml_report_to_csv(html_content):
     """
     Converts the HTML frequency coordination report into a list of dictionaries
@@ -203,7 +212,7 @@ def Marker_convert_IAShtml_report_to_csv(html_content):
                             freq_MHz = "N/A"
                             try:
                                 freq_match = re.search(
-                                    r"(\d+(\.\d+)?)\s*(kHz|MHz|GHz)",
+                                    r"(\d+(?:\.\d+)?)\s*(?:(k|m|g)?hz)?",
                                     channel_frequency_str,
                                     re.IGNORECASE,
                                 )

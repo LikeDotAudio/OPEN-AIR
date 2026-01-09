@@ -1,19 +1,7 @@
-# workers/importers/worker_importer_appender.py
+# importers/worker_importer_appender.py
 #
-# A complete and comprehensive pre-amble that describes the file and the functions within.
-# The purpose is to provide clear documentation and versioning.
+# This module provides functions for appending data from various file formats (CSV, HTML, SHW, ZIP, PDF) to a marker table.
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251213
-Current_Time = 120000
-Current_iteration = 44
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
@@ -24,10 +12,11 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
+# Version 20250821.200641.1
 
 import inspect
 from tkinter import filedialog
-from workers.logger.logger import debug_logger
+from workers.logger.debug_logger import debug_logger
 from workers.logger.log_utils import _get_log_args
 from workers.importers.formats.worker_importer_from_csv_unknown import (
     Marker_convert_csv_unknow_report_to_csv,
@@ -50,6 +39,15 @@ from workers.importers.worker_importer_saver import save_markers_file_internally
 LOCAL_DEBUG_ENABLE = False
 
 
+# Appends data from an unknown CSV file to the marker table.
+# This function prompts the user to select a CSV file, converts its content
+# to the standardized marker format, and then imports this new data into the
+# active table editor.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+#     editor_instance: The instance of the table editor.
+# Outputs:
+#     None.
 def append_markers_file_action(importer_tab_instance, editor_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
@@ -71,6 +69,15 @@ def append_markers_file_action(importer_tab_instance, editor_instance):
         save_markers_file_internally(importer_tab_instance)
 
 
+# Appends data from an IAS HTML report to the marker table.
+# This function prompts the user to select an HTML file, extracts and converts its
+# content to the standardized marker format, and then imports this data into the
+# active table editor.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+#     editor_instance: The instance of the table editor.
+# Outputs:
+#     None.
 def append_ias_html_action(importer_tab_instance, editor_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
@@ -102,6 +109,15 @@ def append_ias_html_action(importer_tab_instance, editor_instance):
         return
 
 
+# Appends data from a Shure Wireless Workbench (.shw) XML file to the marker table.
+# This function prompts the user to select an SHW file, converts its content
+# to the standardized marker format, and then imports this new data into the
+# active table editor.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+#     editor_instance: The instance of the table editor.
+# Outputs:
+#     None.
 def append_wwb_shw_action(importer_tab_instance, editor_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
@@ -124,6 +140,15 @@ def append_wwb_shw_action(importer_tab_instance, editor_instance):
         save_markers_file_internally(importer_tab_instance)
 
 
+# Appends data from a Shure Wireless Workbench (.zip) archive to the marker table.
+# This function prompts the user to select a ZIP file, extracts and converts its
+# content to the standardized marker format, and then imports this data into the
+# active table editor.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+#     editor_instance: The instance of the table editor.
+# Outputs:
+#     None.
 def append_wwb_zip_action(importer_tab_instance, editor_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
@@ -144,6 +169,15 @@ def append_wwb_zip_action(importer_tab_instance, editor_instance):
         save_markers_file_internally(importer_tab_instance)
 
 
+# Appends data from a Sound Base PDF report (version 1) to the marker table.
+# This function prompts the user to select a PDF file, converts its content
+# to the standardized marker format, and then imports this new data into the
+# active table editor.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+#     editor_instance: The instance of the table editor.
+# Outputs:
+#     None.
 def append_sb_pdf_action(importer_tab_instance, editor_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(
@@ -166,6 +200,15 @@ def append_sb_pdf_action(importer_tab_instance, editor_instance):
         save_markers_file_internally(importer_tab_instance)
 
 
+# Appends data from a Sound Base PDF report (version 2) to the marker table.
+# This function prompts the user to select a PDF file, converts its content
+# to the standardized marker format, and then imports this new data into the
+# active table editor.
+# Inputs:
+#     importer_tab_instance: The instance of the importer tab.
+#     editor_instance: The instance of the table editor.
+# Outputs:
+#     None.
 def append_sb_v2_pdf_action(importer_tab_instance, editor_instance):
     current_function = inspect.currentframe().f_code.co_name
     file_path = filedialog.askopenfilename(

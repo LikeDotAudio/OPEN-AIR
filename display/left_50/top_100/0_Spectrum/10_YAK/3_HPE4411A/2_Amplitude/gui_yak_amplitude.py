@@ -1,4 +1,4 @@
-# display/left_50/top_100/0_Spectrum/10_YAK/3_HPE4411A/2_Amplitude/gui_yak_amplitude.py
+# 2_Amplitude/gui_yak_amplitude.py
 #
 # This file provides a generic GUI wrapper for instrument control, loading its interface from a JSON configuration.
 #
@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260108.150000.1
+# Version 20250821.200641.1
 
 import os
 import pathlib
@@ -48,6 +48,20 @@ class GenericInstrumentGui(ttk.Frame):
     Now safely handles arguments from ModuleLoader and fails gracefully.
     """
 
+    # Initializes the generic instrument GUI frame.
+    # This constructor sets up the main frame for a dynamically generated GUI based on a
+    # JSON configuration. It establishes the necessary links to core application
+    # services like state management and data subscription routing. The function is
+    # designed to be robust, with fallbacks for configuration paths.
+    # Inputs:
+    #     parent (tk.Widget): The parent tkinter widget that will contain this frame.
+    #     json_path (str, optional): The file path to the JSON file that defines the
+    #                                GUI layout and widgets.
+    #     config (dict, optional): A dictionary containing shared application resources.
+    #     **kwargs: Additional keyword arguments that are passed directly to the
+    #               underlying ttk.Frame constructor.
+    # Outputs:
+    #     None: This is a constructor and does not have a return value.
     def __init__(self, parent, json_path=None, config=None, **kwargs):
         """
         Initializes the generic instrument GUI frame.
@@ -94,6 +108,16 @@ class GenericInstrumentGui(ttk.Frame):
         # 4. Initialize UI
         self._init_ui()
 
+    # Initializes the user interface elements for the frame.
+    # This function sets up the initial state of the GUI. It displays a temporary
+    # status message to inform the user that the module is loading. To prevent the
+    # main application from freezing, it schedules the more intensive task of
+    # building the full dynamic GUI to run shortly after the initial frame is
+    # rendered.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _init_ui(self):
         """
         Initializes the user interface elements for the frame.
@@ -143,6 +167,17 @@ class GenericInstrumentGui(ttk.Frame):
 
         self.after(50, self._construct_dynamic_gui)
 
+    # Constructs the dynamic GUI from the JSON configuration.
+    # This function is responsible for the main logic of the GUI creation. It reads
+    # the specified JSON file, which contains the blueprint for the interface, and
+    # uses the DynamicGuiBuilder to instantiate and arrange all the widgets. It
+    # includes robust error handling to catch issues like a missing JSON file or
+    # errors during the building process, displaying a clear error message in the
+    # GUI if a failure occurs.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _construct_dynamic_gui(self):
         """
         Constructs the dynamic GUI from the JSON configuration.
@@ -228,6 +263,18 @@ class GenericInstrumentGui(ttk.Frame):
                     **_get_log_args(),
                 )
 
+    # Handles the event when the tab containing this frame is selected.
+    # This function is a callback that gets triggered when the user clicks on the
+    # tab for this specific GUI module. It is intended to be a placeholder for any
+    # logic that needs to run upon tab selection, such as refreshing data or
+    # updating the UI. Currently, it only logs a debug message.
+    # Inputs:
+    #     *args: Accepts a variable number of positional arguments, which are
+    #            passed by the event trigger.
+    #     **kwargs: Accepts a variable number of keyword arguments, which are
+    #               passed by the event trigger.
+    # Outputs:
+    #     None.
     def _on_tab_selected(self, *args, **kwargs):
         """
         Handles the event when the tab containing this frame is selected.

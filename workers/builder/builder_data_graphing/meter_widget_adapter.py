@@ -1,3 +1,18 @@
+# builder_data_graphing/meter_widget_adapter.py
+#
+# Mixin to handle the creation of Meter widgets.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 from workers.builder.builder_data_graphing.Meter_to_display_units import (
     HorizontalMeterWithText,
     VerticalMeter,
@@ -7,6 +22,15 @@ from workers.builder.builder_data_graphing.Meter_to_display_units import (
 class MeterWidgetAdapterMixin:
     """Mixin to handle the creation of Meter widgets."""
 
+    # Creates a HorizontalMeterWithText widget.
+    # This method instantiates and configures a horizontal meter, passing in the
+    # necessary configuration, MQTT topic information, and state management engines.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): Configuration for the horizontal meter.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     HorizontalMeterWithText: The created HorizontalMeterWithText widget.
     def _create_horizontal_meter(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
@@ -26,6 +50,15 @@ class MeterWidgetAdapterMixin:
             subscriber_router=subscriber_router,
         )
 
+    # Creates a VerticalMeter widget.
+    # This method instantiates and configures a vertical meter, providing it with
+    # configuration details, MQTT topic information, and state management engines.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): Configuration for the vertical meter.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     VerticalMeter: The created VerticalMeter widget.
     def _create_vertical_meter(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature

@@ -1,6 +1,6 @@
-# workers/importers/worker_importer_sb_pdf_v1.py
+# formats/worker_importer_from_soundbase_pdf_v1.py
 #
-# This file contains the logic for converting Sound Base PDF files (version 1)
+# This module contains the logic for converting Sound Base PDF files (version 1)
 # into a standardized CSV format.
 #
 # Author: Anthony Peter Kuzub
@@ -13,7 +13,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20251129.120000.1
+# Version 20250821.200641.1
 
 import inspect
 import os
@@ -39,6 +39,18 @@ app_constants = Config.get_instance()
 headers = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
 
 
+# Parses a Sound Base PDF file (Version 1) and extracts frequency data, converting it to a standardized CSV format.
+# This function extracts 'Group', 'Model', 'Name', and 'Frequency' fields from the PDF,
+# mapping them to 'ZONE', 'GROUP', 'NAME', and 'FREQ_MHZ' respectively in the CSV output.
+# It also constructs the 'DEVICE' field from 'Model', 'Band', and 'Preset'.
+# Inputs:
+#     pdf_file_path (str): The full path to the PDF file.
+# Outputs:
+#     tuple: A tuple containing the standardized headers and a list of dictionaries,
+#            where each dictionary represents a row of converted data.
+# Raises:
+#     FileNotFoundError: If the specified PDF file does not exist.
+#     Exception: For other parsing or data extraction errors.
 def Marker_convert_SB_PDF_File_report_to_csv(pdf_file_path):
     """
     Parses a PDF file (Sound Base format) and extracts frequency data, converting it

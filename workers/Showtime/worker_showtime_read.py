@@ -1,7 +1,6 @@
-# workers/Showtime/worker_showtime_read.py
+# Showtime/worker_showtime_read.py
 #
-# A complete and comprehensive pre-amble that describes the file and the functions within.
-# The purpose is to provide clear documentation and versioning.
+# This module provides the logic for loading marker data from a file into the Showtime tab, preparing it for display and interaction.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
@@ -13,6 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
+# Version 20250821.200641.1
 
 import inspect
 from workers.logger.logger import debug_logger
@@ -23,6 +23,14 @@ from managers.configini.config_reader import Config
 app_constants = Config.get_instance()  # Get the singleton instance
 
 
+# Loads marker data from the 'MARKERS.csv' file into the Showtime tab instance.
+# This function checks for the existence of `MARKERS.csv`, reads its content,
+# and converts it into a list of dictionaries. This processed data is then
+# stored in the `showtime_tab_instance` for further grouping, sorting, and display.
+# Inputs:
+#     showtime_tab_instance: An instance of the Showtime tab.
+# Outputs:
+#     None.
 def load_marker_data(showtime_tab_instance):
     current_function = inspect.currentframe().f_code.co_name
     if app_constants.global_settings["debug_enabled"]:

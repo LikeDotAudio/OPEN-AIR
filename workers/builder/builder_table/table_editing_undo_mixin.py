@@ -1,3 +1,18 @@
+# builder_table/table_editing_undo_mixin.py
+#
+# A mixin for implementing undo functionality for editing operations on a Tkinter Treeview widget.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 import tkinter as tk
 import inspect
 import orjson
@@ -9,9 +24,22 @@ from workers.mqtt import mqtt_publisher_service
 
 
 class TableEditingUndoMixin:
+    # Initializes the TableEditingUndoMixin.
+    # This sets up an empty list to serve as the undo stack, which stores a history of table modifications.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def __init__(self):
         self.undo_stack = []
 
+    # Undoes the last editing action performed on the Treeview table.
+    # This method pops the last action from the undo stack and reverts the Treeview
+    # and corresponding MQTT state to its previous condition, supporting edits, additions, and deletions.
+    # Inputs:
+    #     event: The tkinter event object (optional).
+    # Outputs:
+    #     None.
     def undo(self, event=None):
         if not self.undo_stack:
             return

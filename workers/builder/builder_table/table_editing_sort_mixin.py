@@ -1,3 +1,18 @@
+# builder_table/table_editing_sort_mixin.py
+#
+# A mixin for adding sorting functionality to column headers of a Tkinter Treeview widget.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 import inspect
 import re
 from tkinter import ttk  # For ttk.Treeview interactions
@@ -7,15 +22,36 @@ from workers.logger.log_utils import _get_log_args
 
 
 class TableEditingSortMixin:
+    # Initializes the TableEditingSortMixin.
+    # This sets up internal state variables to track the currently sorted column and its order.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def __init__(self):
         self._sort_column_name = None
         self._sort_reverse = False
 
+    # Binds the sort functionality to each column header of the Treeview.
+    # This method iterates through all defined columns in the Treeview and associates
+    # a click command with each header to trigger sorting for that column.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _bind_headers(self):
         for col_name in self.tree["columns"]:
             self.tree.heading(col_name, command=lambda c=col_name: self._sort_column(c))
         debug_logger(message="⬆️ Binding headers for sorting.", **_get_log_args())
 
+    # Sorts the Treeview data based on the specified column.
+    # This method retrieves all data from the Treeview, sorts it based on the values
+    # in the target column (handling both numeric and string types), and then
+    # rearranges the items in the Treeview to reflect the new order.
+    # Inputs:
+    #     col_name (str): The name of the column to sort by.
+    # Outputs:
+    #     None.
     def _sort_column(self, col_name):
         current_function = inspect.currentframe().f_code.co_name
         debug_logger(message=f"Sorting column: {col_name}", **_get_log_args())

@@ -1,4 +1,4 @@
-# workers/importers/worker_marker_file_import_converter.py
+# importers/worker_marker_file_import_converter.py
 #
 # This file previously contained utility functions for converting various spectrum analyzer
 # report formats into a standardized CSV format. These functions have been refactored
@@ -16,4 +16,4 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20251129.120000.1
+# Version 20250821.200641.1

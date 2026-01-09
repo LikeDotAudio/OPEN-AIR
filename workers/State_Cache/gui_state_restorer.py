@@ -1,10 +1,18 @@
-# workers/State_Cache/gui_state_restorer.py
+# State_Cache/gui_state_restorer.py
 #
-# Version 20251230.230200.1
+# Restores GUI state from cached data by replaying historical MQTT messages through the state mirror engine.
 #
-# Author: Gemini
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
 #
-# The Time Traveler: Run ONCE at startup to blast the cached data into the GUI.
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import inspect
 from typing import Dict, Any, Optional
@@ -16,6 +24,15 @@ current_version = "20251230.230200.1"
 current_version_hash = 20251230 * 230200 * 1
 
 
+# Restores the GUI state from cached data by replaying historical MQTT messages.
+# This function iterates through the provided `cache_data` (which represents
+# past MQTT messages) and passes each entry to the `state_mirror_engine` to
+# synchronize the GUI elements to their last known states.
+# Inputs:
+#     cache_data (Dict[str, Any]): A dictionary containing cached MQTT topics and their payloads.
+#     state_mirror_engine (Any): An instance of the state mirror engine to handle GUI updates.
+# Outputs:
+#     None.
 def restore_timeline(cache_data: Dict[str, Any], state_mirror_engine: Any) -> None:
     """
     Iterate through the cache_data.

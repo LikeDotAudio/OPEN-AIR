@@ -1,6 +1,29 @@
+# builder_core/gui_widget_factory.py
+#
+# The Registry that maps JSON keys to Creator Methods.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 class GuiWidgetFactoryMixin:
     """The Registry that maps JSON keys to Creator Methods."""
 
+    # Initializes the widget factory by mapping JSON widget types to their creator methods.
+    # This method sets up a dictionary where keys are the string identifiers for different
+    # GUI widget types (as found in JSON configuration) and values are the corresponding
+    # methods responsible for creating those widgets.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _initialize_widget_factory(self):
         self.widget_factory = {
             # Standard Widgets
@@ -38,6 +61,15 @@ class GuiWidgetFactoryMixin:
             "_VerticalMeter": self._create_vertical_meter,
         }
 
+    # Creates a header status light widget.
+    # This method is responsible for instantiating and configuring the header status light,
+    # which typically displays application status or indicators.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): The configuration for the status light.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     tk.Frame: The created header frame, or None if creation fails.
     def _create_header_status_light(self, parent_widget, config_data, **kwargs):
         # label = config_data.get("label_active", "") # Label is not directly used here
         self._build_header_status_light(parent_widget, config_data)

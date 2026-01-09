@@ -1,4 +1,4 @@
-# workers/worker_mqtt_data_flattening.py
+# mqtt/XXX worker_mqtt_data_flattening.py
 #
 # A utility module to process and flatten nested MQTT payloads into a format
 # suitable for display in a flat table or export to CSV. It buffers incoming
@@ -14,8 +14,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-#
-# Version 20250825.151032.21
+# Version 20250821.200641.1
 
 import os
 import inspect
@@ -35,6 +34,13 @@ class MqttDataFlattenerUtility:
     topic identifiers.
     """
 
+    # Initializes the MqttDataFlattenerUtility.
+    # This sets up an empty data buffer and state variables for tracking unique identifiers,
+    # which are used to manage incoming MQTT messages and trigger the flattening process.
+    # Inputs:
+    #     print_to_gui_func (function): A function to print messages to the GUI console.
+    # Outputs:
+    #     None.
     def __init__(self, print_to_gui_func):
         self._print_to_gui_console = print_to_gui_func
         self.data_buffer = {}
@@ -42,6 +48,13 @@ class MqttDataFlattenerUtility:
         self.last_unique_identifier = None
         self.FLUSH_COMMAND = "FLUSH_BUFFER"
 
+    # Clears the internal data buffer.
+    # This method empties the `data_buffer` and resets the `last_unique_identifier`,
+    # preparing the utility for processing a new set of incoming MQTT messages.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def clear_buffer(self):
         """
         Clears the internal data buffer.
@@ -54,6 +67,16 @@ class MqttDataFlattenerUtility:
         self.data_buffer = {}
         self.last_unique_identifier = None
 
+    # Processes an incoming MQTT message, buffering it and triggering data flattening when a new data set is detected.
+    # This method stores messages in an internal buffer, identifies unique data set identifiers
+    # from the topic, and, upon detecting a new data set or a manual flush command,
+    # flushes the buffer to produce flattened, pivoted data.
+    # Inputs:
+    #     topic (str): The MQTT topic of the incoming message.
+    #     payload (str): The JSON payload of the message.
+    #     topic_prefix (str): The root topic used for filtering.
+    # Outputs:
+    #     list: A list of dictionaries representing the flattened, pivoted data, or an empty list.
     def process_mqtt_message_and_pivot(
         self, topic: str, payload: str, topic_prefix: str
     ) -> list:
@@ -152,6 +175,16 @@ class MqttDataFlattenerUtility:
             self.clear_buffer()
             return []
 
+    # Processes and flattens the current data buffer.
+    # This method takes the buffered MQTT messages, extracts key-value pairs,
+    # and transforms them into a flattened, pivoted list of dictionaries,
+    # suitable for display in a table or export to CSV.
+    # Inputs:
+    #     new_topic (str, optional): The topic of the new message that triggered the flush.
+    #     new_data: The data from the new message.
+    #     new_identifier (str, optional): The unique identifier of the new data set.
+    # Outputs:
+    #     list: A list of dictionaries representing the flattened, pivoted data.
     def _flush_buffer(self, new_topic=None, new_data=None, new_identifier=None):
         """
         Processes and flattens the current buffer.

@@ -1,6 +1,6 @@
-# workers/importers/worker_importer_wwb_shw.py
+# formats/worker_importer_from_shure_wwb_shw.py
 #
-# This file contains the logic for converting WWB .shw (XML) files
+# This module contains the logic for converting WWB .shw (XML) files
 # into a standardized CSV format.
 #
 # Author: Anthony Peter Kuzub
@@ -13,7 +13,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20251129.120000.1
+# Version 20250821.200641.1
 
 import inspect
 import os
@@ -38,6 +38,18 @@ app_constants = Config.get_instance()
 headers = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
 
 
+# Parses an SHW (XML) file and extracts frequency data, converting it into a standardized CSV format.
+# This function extracts zone, group, device, name, and frequency from the XML structure,
+# converting all frequencies to MHz for consistency.
+# Inputs:
+#     xml_file_path (str): The full path to the SHW (XML) file.
+# Outputs:
+#     tuple: A tuple containing the standardized headers and a list of dictionaries,
+#            where each dictionary represents a row of converted data.
+# Raises:
+#     FileNotFoundError: If the specified XML file does not exist.
+#     xml.etree.ElementTree.ParseError: If the XML file is malformed.
+#     Exception: For other parsing or data extraction errors.
 def Marker_convert_WWB_SHW_File_report_to_csv(xml_file_path):
     """
     Parses an SHW (XML) file and extracts frequency data, converting it

@@ -1,4 +1,18 @@
-# workers/builder/dynamic_gui_create_animation_display.py
+# builder_images/dynamic_gui_create_animation_display.py
+#
+# A mixin for creating an animation display widget from a GIF file.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -16,6 +30,16 @@ from workers.mqtt.mqtt_topic_utils import get_topic  # Import get_topic
 
 
 class AnimationDisplayCreatorMixin:
+    # Creates an animation display widget from a GIF file.
+    # This method loads a GIF file, creates a sequence of frames, and displays them
+    # on a Tkinter label. It handles cases where the GIF is not found by creating a placeholder.
+    # The animation's frame index can be controlled via a tkinter IntVar and synchronized via MQTT.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): Configuration for the animation display.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created frame containing the animation display, or None on failure.
     def _create_animation_display(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
@@ -147,6 +171,14 @@ class AnimationDisplayCreatorMixin:
             )
         return frame
 
+    # Callback function for updating the animation frame via incoming MQTT messages.
+    # This method parses the MQTT payload to extract the desired frame index and updates
+    # the animation display accordingly. It also handles error conditions for invalid payloads.
+    # Inputs:
+    #     topic (str): The MQTT topic the message was received on.
+    #     payload: The MQTT message payload, expected to contain the new frame index.
+    # Outputs:
+    #     None.
     def _on_animation_frame_update_mqtt(self, topic, payload):
         import orjson  # Imported here to avoid circular dependency or top-level import issues
 

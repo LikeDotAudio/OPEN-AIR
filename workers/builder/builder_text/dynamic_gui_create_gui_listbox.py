@@ -1,20 +1,7 @@
-# workers/builder/dynamic_gui_create_gui_listbox.py
+# builder_text/dynamic_gui_create_gui_listbox.py
 #
-# This file (dynamic_gui_create_gui_listbox.py) provides the GuiListboxCreatorMixin class for dynamically creating Listbox widgets in the GUI.
-# A complete and comprehensive pre-amble that describes the file and the functions within.
-# The purpose is to provide clear documentation and versioning.
+# This file provides the GuiListboxCreatorMixin class for dynamically creating Listbox widgets in the GUI.
 #
-# The hash calculation drops the leading zero from the hour (e.g., 08 -> 8)
-# As the current hour is 20, no change is needed.
-
-Current_Date = 20251213  ##Update on the day the change was made
-Current_Time = 120000  ## update at the time it was edited and compiled
-Current_iteration = 44  ## a running version number - incriments by one each time
-
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
@@ -25,7 +12,7 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-
+# Version 20250821.200641.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -62,10 +49,20 @@ class GuiListboxCreatorMixin:
     Listbox widget.
     """
 
+    # Creates a Listbox widget for selecting from a list of options.
+    # This method sets up a Tkinter Listbox with a scrollbar, populates it with options
+    # from the configuration, handles selection events, and integrates with the state
+    # management engine for MQTT synchronization, including dynamic updates to options.
+    # Inputs:
+    #     parent_widget: The parent tkinter widget.
+    #     config_data (dict): Configuration for the listbox widget.
+    #     **kwargs: Additional keyword arguments.
+    # Outputs:
+    #     ttk.Frame: The created frame containing the listbox widget, or None on failure.
     def _create_gui_listbox(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
-        # Creates a listbox menu for multiple choice options.
+        """Creates a listbox menu for multiple choice options."""
         current_function_name = inspect.currentframe().f_code.co_name
 
         # Extract widget-specific config from config_data
@@ -248,9 +245,10 @@ class GuiListboxCreatorMixin:
                 topic = get_topic(
                     self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, widget_id
                 )
-                self.subscriber_router.subscribe_to_topic(
-                    topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui
-                )
+                if topic:
+                    self.subscriber_router.subscribe_to_topic(
+                        topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui
+                    )
 
                 if app_constants.global_settings["debug_enabled"]:
                     debug_logger(
@@ -285,6 +283,13 @@ class GuiListboxCreatorMixin:
                 )
             return None
 
+    # Rebuilds the visual display of the listbox based on the current options map.
+    # This method clears existing items in the listbox and repopulates it with active options,
+    # maintaining the current selection if it is still valid.
+    # Inputs:
+    #     label (str): The label associated with the listbox (for logging purposes).
+    # Outputs:
+    #     None.
     def _rebuild_listbox_display_instance(self, label):
         lb = self.listbox
         cfg = {
@@ -326,6 +331,17 @@ class GuiListboxCreatorMixin:
                 message=f"⚡ Listbox '{label}' display rebuilt.", **_get_log_args()
             )
 
+    # Callback function for updating listbox options via incoming MQTT messages.
+    # This method processes MQTT payloads that modify properties of individual listbox options
+    # (e.g., active status, labels, or selection state). It updates the internal options map
+    # and triggers a rebuild of the listbox display.
+    # Inputs:
+    #     topic (str): The MQTT topic the message was received on.
+    #     payload: The MQTT message payload containing the option update.
+    #     widget_path (str): The full path of the listbox widget.
+    #     base_mqtt_topic (str): The base MQTT topic for the application.
+    # Outputs:
+    #     None.
     def _on_option_mqtt_update_instance(
         self, topic, payload, widget_path, base_mqtt_topic
     ):

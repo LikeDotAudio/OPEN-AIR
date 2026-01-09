@@ -1,3 +1,19 @@
+# 1_Showtime/gui_showtime.py
+#
+# This module defines the ShowtimeTab class, which dynamically displays and manages marker data for instrument tuning.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
+
 import inspect
 import datetime
 import tkinter as tk
@@ -13,7 +29,7 @@ app_constants = Config.get_instance()  # Get the singleton instance
 # --- Global Scope Variables ---
 current_file_path = pathlib.Path(__file__).resolve()
 # Use GLOBAL_PROJECT_ROOT for consistency
-current_file = str(current_file_path.relative_to(GLOBAL_PROJECT_ROOT)).replace("\\", "/")
+current_file = str(current_file_path.relative_to(GLOBAL_PROJECT_ROOT)).replace("\", "/")
 Current_Date = 20251226
 Current_Time = 120000
 Current_iteration = 44
@@ -57,6 +73,16 @@ class ShowtimeTab(ttk.Frame):
     A Tkinter Frame that dynamically creates buttons for each marker in the MARKERS.csv file.
     """
 
+    # Initializes the ShowtimeTab.
+    # This constructor sets up the internal state variables for marker data,
+    # selection tracking, applies styling, and creates the initial widgets
+    # for displaying zones, groups, and devices.
+    # Inputs:
+    #     parent: The parent Tkinter widget.
+    #     *args: Positional arguments (expected to include module_file_path_str and config).
+    #     **kwargs: Keyword arguments.
+    # Outputs:
+    #     None.
     def __init__(self, parent, *args, **kwargs):
         current_function = inspect.currentframe().f_code.co_name
 
@@ -103,6 +129,13 @@ class ShowtimeTab(ttk.Frame):
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(message=f"🟢️️️🟢 Initialized ShowtimeTab.", **_get_log_args())
 
+    # Applies the specified theme to the Showtime tab's widgets.
+    # This method configures the styles for various ttk widgets within the tab,
+    # including frames, labels, and buttons, to ensure a consistent look and feel.
+    # Inputs:
+    #     theme_name (str): The name of the theme to apply.
+    # Outputs:
+    #     None.
     def _apply_styles(self, theme_name):
         colors = THEMES.get(theme_name, THEMES["dark"])
         style = ttk.Style(self)
@@ -190,6 +223,13 @@ class ShowtimeTab(ttk.Frame):
             foreground=[("active", hover_fg), ("!active", selected_fg)],
         )
 
+    # Creates the main layout and widgets for the Showtime tab.
+    # This method sets up frames for zones, groups, and devices, and includes a
+    # "Tune" button to trigger instrument tuning based on current selections.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _create_widgets(self):
         current_function = inspect.currentframe().f_code.co_name
 
@@ -225,6 +265,14 @@ class ShowtimeTab(ttk.Frame):
 
         debug_logger(message=f"✅ Widgets created for ShowtimeTab.", **_get_log_args())
 
+    # Callback method invoked when the Showtime tab is selected.
+    # This method reloads marker data from the file, processes and sorts it,
+    # and then regenerates all zone, group, and device buttons, ensuring the
+    # display is up-to-date.
+    # Inputs:
+    #     event: The Tkinter event object, typically a NotebookTabChanged event.
+    # Outputs:
+    #     None.
     def _on_tab_selected(self, event):
         current_function = inspect.currentframe().f_code.co_name
 
@@ -253,8 +301,14 @@ class ShowtimeTab(ttk.Frame):
                     function=f"{self.__class__.__name__}.{current_function}",
                 )
 
-    # --- BUTTON CREATION METHODS ---
-
+    # Creates and displays buttons for each available zone.
+    # This method clears any existing zone buttons and then dynamically generates
+    # a button for each unique zone found in the marker data. These buttons allow
+    # users to filter devices by zone.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _create_zone_buttons(self):
         current_function = inspect.currentframe().f_code.co_name
         if app_constants.global_settings["debug_enabled"]:
@@ -281,6 +335,14 @@ class ShowtimeTab(ttk.Frame):
                     **_get_log_args(),
                 )
 
+    # Creates and displays filter buttons for groups within the selected zone.
+    # This method clears existing group buttons and, if a zone is selected,
+    # generates buttons for each group within that zone. Each button displays
+    # the group name and its frequency range.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _create_group_buttons(self):
         current_function = inspect.currentframe().f_code.co_name
         if app_constants.global_settings["debug_enabled"]:
@@ -305,7 +367,7 @@ class ShowtimeTab(ttk.Frame):
 
                 freq_range_text = ""
                 if min_freq is not None and max_freq is not None:
-                    freq_range_text = f"\\n{min_freq} MHz - {max_freq} MHz"
+                    freq_range_text = f"\n{min_freq} MHz - {max_freq} MHz"
 
                 button_text = f"{group_name}{freq_range_text}"
 
@@ -331,6 +393,14 @@ class ShowtimeTab(ttk.Frame):
                 **_get_log_args(),
             )
 
+    # Creates and displays buttons for individual devices (markers).
+    # This method clears existing device buttons and dynamically generates buttons
+    # for devices filtered by the currently selected zone and group. Each button
+    # displays device information and is clickable to select a device.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
     def _create_device_buttons(self):
         current_function = inspect.currentframe().f_code.co_name
         if app_constants.global_settings["debug_enabled"]:
@@ -373,9 +443,9 @@ class ShowtimeTab(ttk.Frame):
 
         for i, row_data in enumerate(filtered_devices):
             button_text = (
-                f"{row_data.get('NAME', 'N/A')}\\n"
-                f"{row_data.get('DEVICE', 'N/A')}\\n"
-                f"{row_data.get('FREQ_MHZ', 'N/A')} MHz\\n"
+                f"{row_data.get('NAME', 'N/A')}\n"
+                f"{row_data.get('DEVICE', 'N/A')}\n"
+                f"{row_data.get('FREQ_MHZ', 'N/A')} MHz\n"
                 f"[********************]"
             )
 
@@ -396,16 +466,35 @@ class ShowtimeTab(ttk.Frame):
                 **_get_log_args(),
             )
 
-    # --- WRAPPER METHODS ---
-
+    # Wrapper method to handle zone toggle events.
+    # This method calls the external `on_zone_toggle` function, passing
+    # the current `ShowtimeTab` instance and the name of the toggled zone.
+    # Inputs:
+    #     zone_name (str): The name of the zone that was toggled.
+    # Outputs:
+    #     None.
     def _on_zone_toggle(self, zone_name):
         """Wrapper to call the imported on_zone_toggle function."""
         on_zone_toggle(self, zone_name)
 
+    # Wrapper method to handle group toggle events.
+    # This method calls the external `on_group_toggle` function, passing
+    # the current `ShowtimeTab` instance and the name of the toggled group.
+    # Inputs:
+    #     group_name (str): The name of the group that was toggled.
+    # Outputs:
+    #     None.
     def _on_group_toggle(self, group_name):
         """Wrapper to call the imported on_group_toggle function."""
         on_group_toggle(self, group_name)
 
+    # Wrapper method to handle marker (device) button click events.
+    # This method calls the external `on_marker_button_click` function, passing
+    # the current `ShowtimeTab` instance and the clicked button widget.
+    # Inputs:
+    #     button: The button widget that was clicked.
+    # Outputs:
+    #     None.
     def _on_marker_button_click(self, button):
         """Wrapper to call the imported on_marker_button_click function."""
         on_marker_button_click(self, button)

@@ -14,7 +14,7 @@
 #
 # Version 20250821.200641.1
 
-from workers.logger.debug_logger import debug_logger
+from workers.logger.logger import debug_logger
 from workers.logger.log_utils import _get_log_args
 import inspect
 import os

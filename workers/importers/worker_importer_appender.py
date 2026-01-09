@@ -16,7 +16,7 @@
 
 import inspect
 from tkinter import filedialog
-from workers.logger.debug_logger import debug_logger
+from workers.logger.logger import debug_logger
 from workers.logger.log_utils import _get_log_args
 from workers.importers.formats.worker_importer_from_csv_unknown import (
     Marker_convert_csv_unknow_report_to_csv,

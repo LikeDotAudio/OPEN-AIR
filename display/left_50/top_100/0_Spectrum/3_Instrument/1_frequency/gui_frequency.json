@@ -24,7 +24,10 @@
         "units": "MHz",
         "step": ".01",
         "layout": { "sticky": "ew" }
-      },,
+      },
+      "span_freq_MHz": {
+        "label_active": "Frequency Span",
+        "label_inactive": "Frequency Span",
         "type": "_Horizontal_with_dial_Value",
         "handler": "set_span_frequency",
         "yak_handler": {
@@ -43,6 +46,9 @@
         "step": ".01",
         "layout": { "sticky": "ew" }
       },
+      "start_freq_MHz": {
+        "label_active": "Start Frequency",
+        "label_inactive": "Start Frequency",
         "type": "_Horizontal_with_dial_Value",
         "handler": "set_start_frequency",
         "yak_handler": {
@@ -61,6 +67,9 @@
         "step": ".01",
         "layout": { "sticky": "ew" }
       },
+      "stop_freq_MHz": {
+        "label_active": "Stop Frequency",
+        "label_inactive": "Stop Frequency",
         "type": "_Horizontal_with_dial_Value",
         "handler": "set_stop_frequency",
         "yak_handler": {

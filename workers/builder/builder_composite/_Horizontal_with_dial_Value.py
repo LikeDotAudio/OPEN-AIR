@@ -53,8 +53,6 @@ class HorizontalDialValueCreatorMixin(
         decimal_places = 0
         if step < 1:
             decimal_places = len(str(step).split('.')[-1])
-            # Enforce a minimum of 3 decimal places if the step itself implies fewer
-            decimal_places = max(decimal_places, 3)
         
         return f"{{:.{decimal_places}f}}"
 
@@ -186,8 +184,6 @@ class HorizontalDialValueCreatorMixin(
                     decimal_part_from_main = main_value_var.get() % 1 if numerical_step < 1 else 0
                     new_main_val = fader_val + decimal_part_from_main
                     new_main_val = round(new_main_val / numerical_step) * numerical_step
-                    if numerical_step < 1:
-                        new_main_val = round(new_main_val, 3) # Ensure 3 decimal places
                     main_value_var.set(max(min_val, min(max_val, new_main_val)))
                 except (ValueError, tk.TclError) as e:
                     if app_constants.global_settings["debug_enabled"]:
@@ -201,11 +197,11 @@ class HorizontalDialValueCreatorMixin(
                         # Detect wrap-around and adjust fader
                         if hasattr(dial_widget, '_prev_dial_val_for_wrap_detection'):
                             if dial_widget._prev_dial_val_for_wrap_detection == 999 and current_dial_val == 0:
-                                # Wrapped from 999 to 0 (downwards)
-                                fader_widget.variable.set(fader_widget.variable.get() - 1) # Decrement fader
-                            elif dial_widget._prev_dial_val_for_wrap_detection == 0 and current_dial_val == 999:
-                                # Wrapped from 0 to 999 (upwards)
+                                # Wrapped from 999 to 0 (user: "going up", "carry")
                                 fader_widget.variable.set(fader_widget.variable.get() + 1) # Increment fader
+                            elif dial_widget._prev_dial_val_for_wrap_detection == 0 and current_dial_val == 999:
+                                # Wrapped from 0 to 999 (user: "turning down")
+                                fader_widget.variable.set(fader_widget.variable.get() - 1) # Decrement fader
                         
                         # Store current for next comparison, ensure it's within 0-999 for wrap detection
                         dial_widget._prev_dial_val_for_wrap_detection = current_dial_val
@@ -218,7 +214,7 @@ class HorizontalDialValueCreatorMixin(
                         new_decimal_part = round(scaled_decimal_from_dial / numerical_step) * numerical_step
                         
                         new_main_val = integer_part + new_decimal_part
-                        new_main_val = round(new_main_val, 3) # Ensure 3 decimal places
+                        new_main_val = round(new_main_val / numerical_step) * numerical_step
                         
                         main_value_var.set(max(min_val, min(max_val, new_main_val)))
                 except (ValueError, tk.TclError) as e:
@@ -229,8 +225,6 @@ class HorizontalDialValueCreatorMixin(
                 try:
                     new_val = float(entry_string_var.get())
                     new_val = round(new_val / numerical_step) * numerical_step
-                    if numerical_step < 1:
-                        new_val = round(new_val, 3) # Ensure 3 decimal places
                     main_value_var.set(max(min_val, min(max_val, new_val)))
                 except ValueError:
                     if app_constants.global_settings["debug_enabled"]:

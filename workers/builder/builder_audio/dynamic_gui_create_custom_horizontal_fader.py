@@ -25,6 +25,8 @@ from workers.logger.log_utils import _get_log_args
 from workers.styling.style import THEMES, DEFAULT_THEME
 import os
 from workers.mqtt.mqtt_topic_utils import get_topic
+from workers.handlers.widget_event_binder import bind_variable_trace
+from workers.handlers.widget_event_binder import bind_variable_trace
 
 
 class CustomHorizontalFaderFrame(tk.Frame):
@@ -212,6 +214,15 @@ class CustomHorizontalFaderCreatorMixin:
         canvas.bind("<Alt-Button-1>", frame._open_manual_entry)
         canvas.bind("<Configure>", lambda e: on_fader_value_change())
 
+        if path:
+            widget_id = path
+            state_mirror_engine.register_widget(widget_id, fader_value_var, base_mqtt_topic_from_path, config_data)
+            callback = lambda: state_mirror_engine.broadcast_gui_change_to_mqtt(widget_id)
+            bind_variable_trace(fader_value_var, callback)
+            topic = state_mirror_engine.get_widget_topic(widget_id)
+            if topic:
+                subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
+            state_mirror_engine.initialize_widget_state(widget_id)
         return frame
 
     def _draw_rounded_rectangle(self, canvas, x1, y1, x2, y2, radius, **kwargs):

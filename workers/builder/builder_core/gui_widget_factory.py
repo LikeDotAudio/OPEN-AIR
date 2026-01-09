@@ -28,7 +28,7 @@ class GuiWidgetFactoryMixin:
         self.widget_factory = {
             # Standard Widgets
             "_sliderValue": self._create_slider_value,
-            "_Horizontal_knob_Value": self._create_horizontal_knob_value,
+            "_Horizontal_with_dial_Value": self._create_horizontal_dial_value,
             "_GuiButtonToggle": self._create_gui_button_toggle,
             "_GuiButtonToggler": self._create_gui_button_toggler,
             "_GuiDropDownOption": self._create_gui_dropdown_option,
@@ -46,6 +46,7 @@ class GuiWidgetFactoryMixin:
             "_VUMeter": self._create_vu_meter,
             "_Fader": self._create_fader,
             "_Knob": self._create_knob,
+            "_Dial": self._create_dial,
             "_IncDecButtons": self._create_inc_dec_buttons,
             "_DirectionalButtons": self._create_directional_buttons,
             "_CustomFader": self._create_custom_fader,

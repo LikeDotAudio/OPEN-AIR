@@ -6,8 +6,7 @@
     "fields": {
       "RBW": {
         "label_active": "Resolution Bandwidth",
-        "label_inactive": "Resolution Bandwidth",
-          "type": "_Horizontal_knob_Value",
+          "type": "_Horizontal_with_dial_Value",
         "handler": "set_rbw",
         "yak_handler": {
           "enable": true,
@@ -120,8 +119,7 @@
     "fields": {
       "vbw_MHz": {
         "label_active": "Video Bandwidth",
-        "label_inactive": "Video Bandwidth",
-          "type": "_Horizontal_knob_Value",
+          "type": "_Horizontal_with_dial_Value",
         "handler": "set_vbw",
         "yak_handler": {
           "enable": true,
@@ -305,7 +303,7 @@
       "sweep_time_setting": {
         "label_active": "Sweep Time",
         "label_inactive": "Sweep Time",
-          "type": "_Horizontal_knob_Value",
+          "type": "_Horizontal_with_dial_Value",
         "handler": "set_sweep_time",
         "yak_handler": {
           "enable": true,

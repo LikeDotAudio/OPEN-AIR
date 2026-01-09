@@ -57,8 +57,8 @@ from .builder_text.dynamic_gui_create_value_box import ValueBoxCreatorMixin
 from workers.builder.builder_composite.dynamic_gui_create_gui_slider_value import (
     SliderValueCreatorMixin,
 )
-from workers.builder.builder_composite._Horizontal_knob_Value import (
-    HorizontalKnobValueCreatorMixin,
+from workers.builder.builder_composite._Horizontal_with_dial_Value import (
+    HorizontalDialValueCreatorMixin,
 )
 from .builder_input.dynamic_gui_create_gui_button_toggle import (
     GuiButtonToggleCreatorMixin,
@@ -92,6 +92,8 @@ from .builder_audio.dynamic_gui_create_panner import PannerCreatorMixin
 from .builder_audio.dynamic_gui_create_trapezoid_toggler import (
     TrapezoidButtonTogglerCreatorMixin,
 )
+from workers.builder.builder_audio.dynamic_gui_create_knob import KnobCreatorMixin
+from workers.builder.builder_audio.dynamic_gui_create_dial import DialCreatorMixin
 
 
 class DynamicGuiBuilder(
@@ -118,7 +120,7 @@ class DynamicGuiBuilder(
     LabelCreatorMixin,
     ValueBoxCreatorMixin,
     SliderValueCreatorMixin,
-    HorizontalKnobValueCreatorMixin,
+    HorizontalDialValueCreatorMixin,
     GuiButtonToggleCreatorMixin,
     GuiButtonTogglerCreatorMixin,
     GuiDropdownOptionCreatorMixin,
@@ -139,6 +141,8 @@ class DynamicGuiBuilder(
     NeedleVUMeterCreatorMixin,
     PannerCreatorMixin,
     TrapezoidButtonTogglerCreatorMixin,
+    KnobCreatorMixin,
+    DialCreatorMixin,
 ):
     # Initializes the DynamicGuiBuilder, a comprehensive class that constructs a GUI from a JSON configuration.
     # It integrates various mixins for handling styling, widget creation, MQTT communication, and more.

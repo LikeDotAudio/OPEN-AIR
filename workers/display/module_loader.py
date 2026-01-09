@@ -61,10 +61,11 @@ class ModuleLoader:
     #     subscriber_router: The MQTT subscriber router.
     # Outputs:
     #     None.
-    def __init__(self, theme_colors, state_mirror_engine=None, subscriber_router=None):
+    def __init__(self, theme_colors, state_mirror_engine=None, subscriber_router=None, app_instance=None):
         self.theme_colors = theme_colors
         self.state_mirror_engine = state_mirror_engine
         self.subscriber_router = subscriber_router
+        self.app_instance = app_instance
 
     # Dynamically loads a Python module from a given file path.
     # This method uses `importlib.util` to load a module, ensuring that `tk` and `ttk`
@@ -175,8 +176,12 @@ class ModuleLoader:
 
                 # Instantiate the class
                 # ✅ CRITICAL FIX: Pass 'json_config_path_str' as the second argument!
+                config_dict["app_instance"] = self.app_instance  # Add app_instance to config_dict
+
                 instance = target_class(
-                    parent_widget, json_config_path_str, config_dict
+                    parent=parent_widget,
+                    json_path=json_config_path,  # Use the pathlib.Path object directly
+                    config=config_dict,
                 )
 
                 if app_constants.global_settings["debug_enabled"]:

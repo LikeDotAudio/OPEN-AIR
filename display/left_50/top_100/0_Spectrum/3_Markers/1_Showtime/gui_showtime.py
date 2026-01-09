@@ -22,6 +22,7 @@ import pathlib # Keep pathlib for current_file_path usage
 from tkinter import filedialog
 from collections import defaultdict
 from managers.configini.config_reader import Config
+from workers.Showtime.worker_showtime_on_group_toggle import on_group_toggle
 from workers.setup.worker_project_paths import GLOBAL_PROJECT_ROOT # Import GLOBAL_PROJECT_ROOT
 
 app_constants = Config.get_instance()  # Get the singleton instance
@@ -126,8 +127,7 @@ class ShowtimeTab(ttk.Frame):
         self._apply_styles(theme_name=DEFAULT_THEME)
         self._create_widgets()
 
-        if app_constants.global_settings["debug_enabled"]:
-app_constants.debug_logger
+        if app_constants.global_settings["debug_enabled"]: app_constants.debug_logger
 
     # Applies the specified theme to the Showtime tab's widgets.
     # This method configures the styles for various ttk widgets within the tab,
@@ -484,9 +484,10 @@ app_constants.debug_logger
     #     group_name (str): The name of the group that was toggled.
     # Outputs:
     #     None.
-    def _on_group_toggle(self, group_name):
-        """Wrapper to call the imported on_group_toggle function."""
+    def _on_group_toggle(self, group_name): 
         on_group_toggle(self, group_name)
+        #"""Wrapper to call the imported on_group_toggle function."""
+        
 
     # Wrapper method to handle marker (device) button click events.
     # This method calls the external `on_marker_button_click` function, passing

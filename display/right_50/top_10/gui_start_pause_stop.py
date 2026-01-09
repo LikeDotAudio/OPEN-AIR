@@ -76,6 +76,7 @@ class GenericInstrumentGui(tk.ttk.Frame):
         # 3. Extract Core Dependencies
         self.state_mirror_engine = self.config_data.get("state_mirror_engine")
         self.subscriber_router = self.config_data.get("subscriber_router")
+        self.app = self.config_data.get("app_instance")
 
         # 4. Initialize UI
         self._init_ui()

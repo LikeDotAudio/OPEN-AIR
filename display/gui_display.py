@@ -120,6 +120,7 @@ class Application(ttk.Frame):
             self.theme_colors,
             state_mirror_engine=self.state_mirror_engine,
             subscriber_router=self.subscriber_router,
+            app_instance=self,
         )
 
         # Initialize storage

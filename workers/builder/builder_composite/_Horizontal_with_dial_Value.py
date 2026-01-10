@@ -108,7 +108,7 @@ class HorizontalDialValueCreatorMixin(
             fader_config["path"] = path + "/fader"
             
             fader_widget = self._create_custom_horizontal_fader(
-                fader_dial_frame, fader_config
+                fader_dial_frame, fader_config, base_mqtt_topic_from_path=base_mqtt_topic_from_path
             )
             fader_widget.grid(row=0, column=0, sticky="nsew", padx=(DEFAULT_PAD_X, 0))
 
@@ -127,12 +127,11 @@ class HorizontalDialValueCreatorMixin(
                 dial_config["value_default"] = "0" # No decimal control needed
             
             dial_config["path"] = path + "/dial"
-            dial_config["base_mqtt_topic_from_path"] = base_mqtt_topic_from_path
             dial_config["state_mirror_engine"] = self.state_mirror_engine
             dial_config["subscriber_router"] = self.subscriber_router
             dial_config["label_active"] = label + " Dial"
             
-            dial_widget = self._create_dial(fader_dial_frame, dial_config)
+            dial_widget = self._create_dial(fader_dial_frame, dial_config, base_mqtt_topic_from_path=base_mqtt_topic_from_path)
             dial_widget.grid(row=0, column=1, sticky="nsew", padx=(0, DEFAULT_PAD_X))
 
             # Initialize previous dial value for wrap-around detection

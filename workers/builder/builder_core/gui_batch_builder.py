@@ -76,10 +76,6 @@ class GuiBatchBuilderMixin:
                     col_idx, weight=weight, minsize=minwidth
                 )
 
-            while index < len(widget_configs) and index < start_index + batch_size:
-                key, value = widget_configs[index]
-                current_path = f"{path_prefix}/{key}".strip("/")
-
                 if isinstance(value, dict):
                     widget_type = value.get("type")
                     layout = value.get("layout", {})
@@ -90,9 +86,10 @@ class GuiBatchBuilderMixin:
                     target_frame = None
 
                     if widget_type == "OcaBlock":
+                        show_label = value.get("show_label", True)
                         block_cols = value.get("layout_columns", None)
                         target_frame = ttk.LabelFrame(
-                            parent_frame, text=key, borderwidth=0, relief="flat"
+                            parent_frame, text=key if show_label else "", borderwidth=0, relief="flat"
                         )
                         self._create_dynamic_widgets(
                             parent_frame=target_frame,
@@ -137,9 +134,8 @@ class GuiBatchBuilderMixin:
                         col += col_span
                         if col >= max_cols:
                             col = 0
-                            row += row_span
-
-                index += 1
+                            row += row_span              
+                        index += 1
 
             if index < len(widget_configs):
                 self.after(
@@ -181,9 +177,7 @@ class GuiBatchBuilderMixin:
     #     override_cols (int, optional): The number of columns for the layout.
     # Outputs:
     #     None.
-    def _create_dynamic_widgets(
-        self, parent_frame, data, path_prefix="", override_cols=None
-    ):
+    def _create_dynamic_widgets(         self, parent_frame, data, path_prefix="", override_cols=None   ):
         try:
             if not isinstance(data, dict):
                 return
@@ -210,65 +204,121 @@ class GuiBatchBuilderMixin:
             for key, value in data.items():
                 current_path = f"{path_prefix}/{key}".strip("/")
 
-                if isinstance(value, dict):
-                    widget_type = value.get("type")
-                    layout = value.get("layout", {})
-                    col_span = int(layout.get("col_span", 1))
-                    row_span = int(layout.get("row_span", 1))
-                    sticky = layout.get("sticky", "nsew")
+                                if isinstance(value, dict):
 
-                    target_frame = None
+                                    widget_type = value.get("type")
 
-                    if widget_type == "OcaBlock":
-                        block_cols = value.get("layout_columns", None)
-                        target_frame = ttk.LabelFrame(
-                            parent_frame, text=key, borderwidth=0, relief="flat"
-                        )
-                        self._create_dynamic_widgets(
-                            parent_frame=target_frame,
-                            data=value.get("fields", {}),
-                            path_prefix=current_path,
-                            override_cols=block_cols,
-                        )
+                                    layout = value.get("layout", {})
 
-                    elif widget_type in self.widget_factory:
-                        value['path'] = current_path
-                        factory_kwargs = {
-                            "parent_widget": parent_frame,
-                            "config_data": value,
-                            "base_mqtt_topic_from_path": self.base_mqtt_topic_from_path,
-                            "state_mirror_engine": self.state_mirror_engine,
-                            "subscriber_router": self.subscriber_router,
-                        }
-                        try:
-                            target_frame = self.widget_factory[widget_type](
-                                **factory_kwargs
-                            )
-                        except Exception as e:
-                            debug_logger(
-                                message=f"❌ Error creating synchronous widget '{key}' of type '{widget_type}': {e}",
-                                **_get_log_args(),
-                            )
-                            target_frame = None
+                                    col_span = int(layout.get("col_span", 1))
 
-                    if target_frame:
-                        tk_var = self.tk_vars.get(current_path)
-                        target_frame.grid(
-                            row=row,
-                            column=col,
-                            columnspan=col_span,
-                            rowspan=row_span,
-                            padx=5,
-                            pady=5,
-                            sticky=sticky,
-                        )
-                        parent_frame.grid_rowconfigure(row, weight=1)
-                        col += col_span
-                        if col >= max_cols:
-                            col = 0
-                            row += row_span
+                                    row_span = int(layout.get("row_span", 1))
 
-        except Exception as e:
+                                    sticky = layout.get("sticky", "nsew")
+
+                
+
+                                    target_frame = None
+
+                
+
+                                    if widget_type == "OcaBlock":
+
+                                        show_label = value.get("show_label", True)
+
+                                        block_cols = value.get("layout_columns", None)
+
+                                        target_frame = ttk.LabelFrame(
+
+                                            parent_frame, text=key if show_label else "", borderwidth=0, relief="flat"
+
+                                        )
+
+                                        self._create_dynamic_widgets(
+
+                                            parent_frame=target_frame,
+
+                                            data=value.get("fields", {}),
+
+                                            path_prefix=current_path,
+
+                                            override_cols=block_cols,
+
+                                        )
+
+                
+
+                                    elif widget_type in self.widget_factory:
+
+                                        value['path'] = current_path
+
+                                        factory_kwargs = {
+
+                                            "parent_widget": parent_frame,
+
+                                            "config_data": value,
+
+                                            "base_mqtt_topic_from_path": self.base_mqtt_topic_from_path,
+
+                                            "state_mirror_engine": self.state_mirror_engine,
+
+                                            "subscriber_router": self.subscriber_router,
+
+                                        }
+
+                                        try:
+
+                                            target_frame = self.widget_factory[widget_type](
+
+                                                **factory_kwargs
+
+                                            )
+
+                                        except Exception as e:
+
+                                            debug_logger(
+
+                                                message=f"❌ Error creating synchronous widget '{key}' of type '{widget_type}': {e}",
+
+                                                **_get_log_args(),
+
+                                            )
+
+                                            target_frame = None
+
+                
+
+                                    if target_frame:
+
+                                        tk_var = self.tk_vars.get(current_path)
+
+                                        target_frame.grid(
+
+                                            row=row,
+
+                                            column=col,
+
+                                            col_span=col_span,
+
+                                            rowspan=row_span,
+
+                                            padx=5,
+
+                                            pady=5,
+
+                                            sticky=sticky,
+
+                                        )
+
+                                        parent_frame.grid_rowconfigure(row, weight=1)
+
+                                        col += col_span
+
+                                        if col >= max_cols:
+
+                                            col = 0
+
+                                            row += row_span        except Exception as e:
             debug_logger(
                 message=f"❌ Error in synchronous _create_dynamic_widgets: {e}",
                 **_get_log_args(),

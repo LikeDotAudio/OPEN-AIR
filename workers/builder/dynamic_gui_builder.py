@@ -41,6 +41,7 @@ from .builder_data_graphing.meter_widget_adapter import MeterWidgetAdapterMixin
 from .builder_hidden.hidden_visibility_manager import HiddenVisibilityManagerMixin
 from .builder_hidden.hidden_geometry_manager import HiddenGeometryManagerMixin
 from .builder_hidden.hidden_breakoff_manager import HiddenBreakoffManagerMixin
+from .builder_hidden.hidden_BreakLine import BreakLineCreatorMixin
 from .builder_indicators.header_status_light import (
     HeaderStatusLightMixin,
 )  # Add this import
@@ -113,6 +114,7 @@ class DynamicGuiBuilder(
     HiddenGeometryManagerMixin,
     HiddenBreakoffManagerMixin,
     HeaderStatusLightMixin,  # Add HeaderStatusLightMixin here
+    BreakLineCreatorMixin,
     # Indicators
     # Utilities & Standard Widgets
     MousewheelScrollMixin,

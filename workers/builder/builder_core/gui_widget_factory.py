@@ -60,6 +60,7 @@ class GuiWidgetFactoryMixin:
             "plot_widget": self._create_plot_widget,
             "_HorizontalMeterWithText": self._create_horizontal_meter,
             "_VerticalMeter": self._create_vertical_meter,
+            "OcaBreakLine": self._create_break_line,
         }
 
     # Creates a header status light widget.

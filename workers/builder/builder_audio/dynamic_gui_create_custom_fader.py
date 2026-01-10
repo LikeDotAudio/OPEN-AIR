@@ -44,6 +44,7 @@ class CustomFaderFrame(tk.Frame):
         # Extract parameters from config and provide defaults
         # Theme Resolution
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
+        fader_style = colors.get("fader_style", {})
         self.bg_color = colors.get("bg", "#2b2b2b")
         self.accent_color = colors.get("accent", "#33A1FD")
         self.neutral_color = colors.get("neutral", "#dcdcdc")
@@ -67,6 +68,15 @@ class CustomFaderFrame(tk.Frame):
         self.outline_col = "black"  # Not configurable at the moment
         self.outline_width = 1  # Not configurable at the moment
         self.ticks = config.get("ticks", None)
+
+        # Custom styling
+        self.tick_size = config.get("tick_size", fader_style.get("tick_size", 0.1))
+        tick_font_family = config.get("tick_font_family", fader_style.get("tick_font_family", "Helvetica"))
+        tick_font_size = config.get("tick_font_size", fader_style.get("tick_font_size", 10))
+        self.tick_font = (tick_font_family, tick_font_size)
+        self.tick_color = config.get("tick_color", fader_style.get("tick_color", "light grey"))
+        self.value_follow = config.get("value_follow", fader_style.get("value_follow", True))
+        self.value_highlight_color = config.get("value_highlight_color", fader_style.get("value_highlight_color", "#f4902c"))
 
         super().__init__(
             master,
@@ -339,14 +349,9 @@ class CustomFaderCreatorMixin:
                 )
                 if abs(norm_val) < 0.01:
                     active_color = frame.neutral_color  # Neutral color from frame
-                elif norm_val > 0:
-                    active_color = (
-                        "red"  # Hardcoded for now, could be frame.accent_color
-                    )
                 else:
-                    active_color = (
-                        "white"  # Hardcoded for now, could be frame.handle_col
-                    )
+                    active_color = frame.value_highlight_color
+
                 value_label.config(
                     text=f"{int(current_fader_val)}", foreground=active_color
                 )
@@ -522,8 +527,7 @@ class CustomFaderCreatorMixin:
         handle_y = (height - 20) * handle_y_norm + 10
 
         # Draw Tick Marks
-        tick_color = "light grey"  # User requested light grey
-        tick_length_half = width * 0.1  # Small tick marks, 10% of width on each side
+        tick_length_half = width * frame_instance.tick_size
 
         tick_values = []
         if frame_instance.ticks is not None:
@@ -578,7 +582,7 @@ class CustomFaderCreatorMixin:
                 tick_y_pos,
                 cx + tick_length_half,
                 tick_y_pos,
-                fill=tick_color,
+                fill=frame_instance.tick_color,
                 width=1,
             )
 
@@ -588,17 +592,16 @@ class CustomFaderCreatorMixin:
                     cx + 15,
                     tick_y_pos,
                     text=str(int(tick_value)),
-                    fill=tick_color,
+                    fill=frame_instance.tick_color,
+                    font=frame_instance.tick_font,
                     anchor="w",
                 )
 
         # Determine active_color based on norm_value (using the actual norm_value, not display_norm_pos)
         if abs(norm_value) < 0.01:
             active_color = frame_instance.neutral_color  # Neutral color
-        elif norm_value > 0:
-            active_color = "red"
         else:
-            active_color = "white"
+            active_color = frame_instance.value_highlight_color
 
         # Handle (Fader Cap)
         cap_width = 40  # Set fixed cap width to 40 pixels
@@ -613,6 +616,16 @@ class CustomFaderCreatorMixin:
             fill=frame_instance.handle_col,
             outline=frame_instance.track_col,
         )
+
+        if frame_instance.value_follow:
+            canvas.create_text(
+                cx,
+                handle_y - cap_height / 2 - 5,
+                text=f"{value:.2f}",
+                fill=frame_instance.value_color,
+                anchor="s"
+            )
+
         # Center line
         center_line_length = cap_width * 0.9
         canvas.create_line(

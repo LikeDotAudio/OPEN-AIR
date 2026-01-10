@@ -66,6 +66,7 @@ THEMES = {
         "textbox_style": {
             "Textbox_Font": "Segoe UI",
             "Textbox_Font_size": 13,
+            "Textbox_Height": 1,
             "Textbox_Font_colour": "#000000",
             "Textbox_border_colour": "#555555",
             "Textbox_BG_colour": "#dcdcdc",
@@ -73,7 +74,6 @@ THEMES = {
         "button_base_style": {
             "borderwidth": 2,
             "relief": "raised",
-            "padding": [10, 5],
             "font": ("Helvetica", 13, "bold"),
             "highlightcolor": "#ffffff",
             "highlightbackground": "#555555",
@@ -82,6 +82,7 @@ THEMES = {
         "button_style_actuator": {
             "background": "#4e5254",
             "foreground": "#ffffff",
+            "font": ("Helvetica", 13, "bold"),
             "Button_Hover_Bg": "#4169E1",
             "Button_Pressed_Bg": "#f4902c",
             "Button_Disabled_Bg": "#888888",
@@ -90,6 +91,7 @@ THEMES = {
         "button_style_toggle": {
             "background": "#4e5254",
             "foreground": "#ffffff",
+            "font": ("Helvetica", 13, "bold"),
             "Button_Hover_Bg": "#dcdcdc",
             "Button_Hover_Fg": "#000000",
             "Button_Pressed_Bg": "#f4902c",
@@ -101,6 +103,7 @@ THEMES = {
         "button_style_toggler": {
             "background": "#4e5254",
             "foreground": "#ffffff",
+            "font": ("Helvetica", 13, "bold"),
             "Button_Hover_Bg": "#dcdcdc",
             "Button_Hover_Fg": "#000000",
             "Button_Pressed_Bg": "#f4902c",
@@ -114,6 +117,14 @@ THEMES = {
             "foreground": "#ffffff",
             "Button_Hover_Bg": "#dcdcdc",
             "Button_Hover_Fg": "#000000",
+        },
+        "fader_style": {
+            "tick_size": 0.1,
+            "tick_font_family": "Helvetica",
+            "tick_font_size": 10,
+            "tick_color": "light grey",
+            "value_follow": True,
+            "value_highlight_color": "#f4902c",
         },
         "tab_style": {
             "tab_base_style": {
@@ -188,6 +199,7 @@ THEMES = {
         "textbox_style": {
             "Textbox_Font": "Segoe UI",
             "Textbox_Font_size": 13,
+            "Textbox_Height": 1,
             "Textbox_Font_colour": "#000000",
             "Textbox_border_colour": "#ababab",
             "Textbox_BG_colour": "#ffffff",
@@ -216,6 +228,7 @@ THEMES = {
         "button_style_actuator": {
             "background": "#e0e0e0",
             "foreground": "#000000",
+            "font": ("Helvetica", 13, "bold"),
             "pressed_bg": "#0078d7",
             "hover_bg": "#4169E1",
             "disabled_bg": "#ababab",
@@ -224,6 +237,7 @@ THEMES = {
         "button_style_toggle": {
             "background": "#4e5254",
             "foreground": "#000000",
+            "font": ("Helvetica", 13, "bold"),
             "pressed_bg": "#0078d7",
             "hover_bg": "#dcdcdc",
             "hover_fg": "#000000",
@@ -235,6 +249,7 @@ THEMES = {
         "button_style_toggler": {
             "background": "#4e5254",
             "foreground": "#000000",
+            "font": ("Helvetica", 13, "bold"),
             "pressed_bg": "#0078d7",
             "hover_bg": "#dcdcdc",
             "hover_fg": "#000000",
@@ -248,6 +263,14 @@ THEMES = {
             "foreground": "#000000",
             "hover_bg": "#dcdcdc",
             "hover_fg": "#000000",
+        },
+        "fader_style": {
+            "tick_size": 0.1,
+            "tick_font_family": "Helvetica",
+            "tick_font_size": 10,
+            "tick_color": "dark grey",
+            "value_follow": True,
+            "value_highlight_color": "#0078d7",
         },
         "tab_style": {
             "tab_base_style": {

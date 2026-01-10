@@ -1,10 +1,13 @@
 {
   "Tuning": {
     "type": "OcaBlock",
-    "AES70": "OcaFrequencyActuator",
+    "show_label": false,
     "description": "A block for managing all frequency-related settings.",
     "layout": { "sticky": "ew" },
     "fields": {
+      "break_1": {
+        "type": "OcaBreakLine"
+      },
       "center_freq_MHz": {
         "label_active": "Center Frequency",
         "type": "_Horizontal_with_dial_Value",
@@ -22,7 +25,7 @@
         "min": "0",
         "max": "6000",
         "units": "MHz",
-        "step": ".01",
+        "step": ".001",
         "layout": { "sticky": "ew" }
       },
       "span_freq_MHz": {
@@ -43,7 +46,7 @@
         "min": "0",
         "max": "1000",
         "units": "MHz",
-        "step": ".01",
+        "step": ".001",
         "layout": { "sticky": "ew" }
       },
       "start_freq_MHz": {
@@ -64,7 +67,7 @@
         "min": "0",
         "max": "5999",
         "units": "MHz",
-        "step": ".01",
+        "step": ".001",
         "layout": { "sticky": "ew" }
       },
       "stop_freq_MHz": {
@@ -85,17 +88,19 @@
         "min": "1",
         "max": "6000",
         "units": "MHz",
-        "step": ".01",
+        "step": ".001",
         "layout": { "sticky": "ew" }
       }
     }
   },
   "Quick Span": {
     "type": "OcaBlock",
-    "AES70": "OcaFrequencyActuator",
     "description": "A block for managing all frequency-related presets.",
     "layout": { "sticky": "ew" },
     "fields": {
+      "break_2": {
+        "type": "OcaBreakLine"
+      },
       "SPAN": {
         "type": "_GuiButtonToggler",
         "AES70": "OcaSwitch",

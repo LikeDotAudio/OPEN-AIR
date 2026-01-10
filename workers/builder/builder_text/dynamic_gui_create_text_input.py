@@ -18,6 +18,7 @@ import tkinter as tk
 from tkinter import ttk
 from managers.configini.config_reader import Config
 from workers.mqtt.mqtt_topic_utils import get_topic  # Import get_topic
+from workers.styling.style import THEMES, DEFAULT_THEME
 
 app_constants = Config.get_instance()  # Get the singleton instance
 from workers.logger.logger import debug_logger
@@ -65,10 +66,16 @@ class TextInputCreatorMixin:
             ttk.Label(frame, text=label).pack(side=tk.LEFT, padx=(0, 10))
 
         try:
+            theme = THEMES[DEFAULT_THEME]
+            textbox_style = theme.get("textbox_style", {})
+            font_size = config.get("font_size", textbox_style.get("Textbox_Font_size", 13))
+            font_family = textbox_style.get("Textbox_Font", "Segoe UI")
+            font = (font_family, font_size)
+
             text_var = tk.StringVar()
             text_var.set(config.get("value_default", ""))
 
-            entry = ttk.Entry(frame, textvariable=text_var)
+            entry = ttk.Entry(frame, textvariable=text_var, font=font)
             entry.pack(side=tk.LEFT, fill=tk.X, expand=True)
 
             def _on_text_change(*args):

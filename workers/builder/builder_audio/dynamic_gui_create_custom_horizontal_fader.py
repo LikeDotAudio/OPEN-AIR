@@ -26,7 +26,6 @@ from workers.styling.style import THEMES, DEFAULT_THEME
 import os
 from workers.mqtt.mqtt_topic_utils import get_topic
 from workers.handlers.widget_event_binder import bind_variable_trace
-from workers.handlers.widget_event_binder import bind_variable_trace
 
 
 class CustomHorizontalFaderFrame(tk.Frame):
@@ -41,6 +40,8 @@ class CustomHorizontalFaderFrame(tk.Frame):
         tick_interval=None,
     ):
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
+        fader_style = colors.get("fader_style", {})
+
         self.bg_color = colors.get("bg", "#2b2b2b")
         self.accent_color = colors.get("accent", "#33A1FD")
         self.neutral_color = colors.get("neutral", "#dcdcdc")
@@ -64,6 +65,16 @@ class CustomHorizontalFaderFrame(tk.Frame):
         self.outline_width = 1
         self.ticks = config.get("ticks", None)
         self.tick_interval = tick_interval
+
+        # Custom styling
+        self.tick_size = config.get("tick_size", fader_style.get("tick_size", 0.1))
+        tick_font_family = config.get("tick_font_family", fader_style.get("tick_font_family", "Helvetica"))
+        tick_font_size = config.get("tick_font_size", fader_style.get("tick_font_size", 10))
+        self.tick_font = (tick_font_family, tick_font_size)
+        self.tick_color = config.get("tick_color", fader_style.get("tick_color", "light grey"))
+        self.value_follow = config.get("value_follow", fader_style.get("value_follow", True))
+        self.value_highlight_color = config.get("value_highlight_color", fader_style.get("value_highlight_color", "#f4902c"))
+
 
         super().__init__(
             master,
@@ -189,11 +200,6 @@ class CustomHorizontalFaderCreatorMixin:
         canvas.pack(fill=tk.BOTH, expand=True)
         canvas.update_idletasks()
 
-        value_label = ttk.Label(
-            frame, text=f"{int(fader_value_var.get())}", font=("Helvetica", 8)
-        )
-        value_label.pack(side=tk.BOTTOM)
-
         def on_fader_value_change(*args):
             current_fader_val = fader_value_var.get()
             self._draw_horizontal_fader(
@@ -203,7 +209,6 @@ class CustomHorizontalFaderCreatorMixin:
                 canvas.winfo_height(),
                 current_fader_val,
             )
-            value_label.config(text=f"{int(current_fader_val)}")
 
         fader_value_var.trace_add("write", on_fader_value_change)
         on_fader_value_change()
@@ -259,8 +264,18 @@ class CustomHorizontalFaderCreatorMixin:
         display_norm_pos = norm_value ** (1.0 / frame_instance.log_exponent)
         handle_x = (width - 20) * display_norm_pos + 10
 
-        tick_color = "light grey"
-        tick_length_half = height * 0.1
+        # Draw the fill line
+        canvas.create_line(
+            10,
+            cy,
+            handle_x,
+            cy,
+            fill=frame_instance.value_highlight_color,
+            width=10,
+            capstyle=tk.ROUND,
+        )
+
+        tick_length_half = height * frame_instance.tick_size
 
         tick_values_to_draw = []
         if frame_instance.ticks is not None:
@@ -303,7 +318,7 @@ class CustomHorizontalFaderCreatorMixin:
                     cy - tick_length_half,
                     tick_x_pos,
                     cy + tick_length_half,
-                    fill=tick_color,
+                    fill=frame_instance.tick_color,
                     width=1,
                 )
                 if i % 2 == 0:
@@ -311,7 +326,8 @@ class CustomHorizontalFaderCreatorMixin:
                         tick_x_pos,
                         cy + 15,
                         text=str(int(tick_value)),
-                        fill=tick_color,
+                        fill=frame_instance.tick_color,
+                        font=frame_instance.tick_font,
                         anchor="n",
                     )
 
@@ -327,6 +343,15 @@ class CustomHorizontalFaderCreatorMixin:
             fill=frame_instance.handle_col,
             outline=frame_instance.track_col,
         )
+
+        if frame_instance.value_follow:
+            canvas.create_text(
+                handle_x,
+                cy - cap_height / 2 - 5,
+                text=f"{value:.2f}",
+                fill=frame_instance.value_color,
+                anchor="s"
+            )
 
         center_line_length = cap_height * 0.9
         canvas.create_line(

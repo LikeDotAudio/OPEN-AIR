@@ -39,6 +39,7 @@ from managers.Visa_Fleet_Manager.manager_fleet_mqtt_bridge import (
 from managers.Visa_Fleet_Manager.manager_visa_csv_builder import (
     VisaCsvBuilder,
 )  # NEW IMPORT
+from managers.configini.config_reader import Config
 
 
 class VisaFleetManager:
@@ -55,7 +56,12 @@ class VisaFleetManager:
         self.csv_builder = VisaCsvBuilder()
         # Initialize the MQTT bridge
         self.mqtt_bridge = None
-        self.mqtt_bridge = MqttFleetBridge()
+        app_constants = Config.get_instance()
+        self.mqtt_bridge = MqttFleetBridge(
+            broker=app_constants.MQTT_BROKER_ADDRESS,
+            port=app_constants.MQTT_BROKER_PORT,
+            MQTT_TOPIC=app_constants.get_mqtt_base_topic(),
+        )
 
         # Callbacks are initially empty (No-op)
         self.cb_inventory = lambda x: None

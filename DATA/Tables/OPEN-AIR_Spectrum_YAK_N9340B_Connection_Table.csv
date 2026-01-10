@@ -1,2 +1,2 @@
 type,resource_string,ip_address,interface_port,gpib_address,status,manufacturer,model,serial_number,firmware,idn_string,device_type,notes,allocated,connection_timestamp
-DEDICATED,TCPIP::44.44.44.66::INSTR,44.44.44.66,Ethernet,Direct,CONNECTED,Keysight Technologies,N9340B,CN03480580,A.02.07,"Keysight Technologies,N9340B,CN03480580,A.02.07",Spectrum,Handheld (100 kHz - 3 GHz),False,2026-01-08T23:06:08.608381
+DEDICATED,TCPIP::44.44.44.66::INSTR,44.44.44.66,Ethernet,Direct,CONNECTED,Keysight Technologies,N9340B,CN03480580,A.02.07,"Keysight Technologies,N9340B,CN03480580,A.02.07",Spectrum,Handheld (100 kHz - 3 GHz),False,2026-01-09T22:53:40.839093

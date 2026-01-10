@@ -73,7 +73,10 @@ class GuiTableCreatorMixin:
         container.grid_rowconfigure(0, weight=1)  # Row for the treeview
         container.grid_columnconfigure(0, weight=1)
 
-        data_topic = get_topic(base_mqtt_topic_from_path, path)
+        relative_data_topic = get_topic(base_mqtt_topic_from_path, path)
+        absolute_data_topic = (
+            f"OPEN-AIR/{relative_data_topic}" if relative_data_topic else None
+        )
 
         table_height = config.get("height", 10)
         tree = ttk.Treeview(
@@ -89,11 +92,9 @@ class GuiTableCreatorMixin:
         hsb.grid(row=1, column=0, columnspan=2, sticky="ew")
 
         # ⚡ ATTACH THE FLUX CAPACITOR (Editor) ⚡
-        data_topic_for_editor = get_topic(base_mqtt_topic_from_path, path)
-
-        # Store the editor instance on the tree so it doesn't get garbage collected
+        # The editor and its mixins publish directly, so they need the absolute topic.
         tree.editor = TableEditingManager(
-            tree, self.state_mirror_engine, data_topic_for_editor
+            tree, self.state_mirror_engine, absolute_data_topic
         )
 
         item_map = {}  # Maps treeview item ID to device data dict
@@ -107,7 +108,7 @@ class GuiTableCreatorMixin:
         csv_checker = TableCsvCheck()
 
         # Sanitize the data_topic to create a valid filename
-        sanitized_topic = re.sub(r"[^a-zA-Z0-9_-]", "_", data_topic)
+        sanitized_topic = re.sub(r"[^a-zA-Z0-9_-]", "_", absolute_data_topic or "")
         csv_path = os.path.join(CSV_SAVE_DIR, f"{sanitized_topic}.csv")
 
         def _handle_write_csv():
@@ -189,7 +190,10 @@ class GuiTableCreatorMixin:
 
         # --- NEW INITIALIZATION LOGIC ---
         # 1. Check for CSV and publish its contents to seed the state cache
-        csv_checker.initialize_from_csv(csv_path, initial_headers, data_topic)
+        if absolute_data_topic:
+            csv_checker.initialize_from_csv(
+                csv_path, initial_headers, absolute_data_topic
+            )
 
         def update_table_full(payload):
             debug_logger(
@@ -259,9 +263,10 @@ class GuiTableCreatorMixin:
                     item_map[item_id] = item_value
                     device_key_map[item_key] = item_id
 
-                    if data_topic and not self._is_reading_csv:
-                        field_topic = get_topic(data_topic, "data", item_key)
-                        self.state_mirror_engine.publish_command(
+                    if absolute_data_topic and not self._is_reading_csv:
+                        field_topic = get_topic(absolute_data_topic, "data", item_key)
+                        # Use publish_payload directly since we have the absolute path
+                        mqtt_publisher_service.publish_payload(
                             field_topic, orjson.dumps(item_value)
                         )
 
@@ -287,7 +292,9 @@ class GuiTableCreatorMixin:
                     return
 
                 # Handle new topics like .../Table/data/23
-                data_prefix = data_topic + "/data/"
+                if not absolute_data_topic:
+                    return
+                data_prefix = absolute_data_topic + "/data/"
                 if not topic.startswith(data_prefix):
                     debug_logger(
                         message=f"--- Topic '{topic}' does not match data prefix '{data_prefix}', ignoring.",
@@ -376,14 +383,11 @@ class GuiTableCreatorMixin:
                 selected_item_id = selection[0]
                 selected_data = item_map.get(selected_item_id)
                 if selected_data and path:
-                    selected_topic = get_topic(
-                        base_mqtt_topic_from_path,
-                        path,
-                        "selected",
-                    )
+                    # Construct the absolute topic for publishing the selection
+                    absolute_selected_topic = f"OPEN-AIR/{get_topic(base_mqtt_topic_from_path, path, 'selected')}"
                     payload = {"val": selected_data}
-                    self.state_mirror_engine.publish_command(
-                        selected_topic, orjson.dumps(payload)
+                    mqtt_publisher_service.publish_payload(
+                        absolute_selected_topic, orjson.dumps(payload)
                     )
 
         if path:
@@ -398,24 +402,25 @@ class GuiTableCreatorMixin:
                 update_callback=update_table_full,
             )
 
-            self.subscriber_router.subscribe_to_topic(
-                data_topic + "/#", update_table_incremental
-            )
-            debug_logger(
-                message=f"Table '{label}' subscribed to data topic '{data_topic}/#'",
-                **_get_log_args(),
-            )
+            if absolute_data_topic:
+                self.subscriber_router.subscribe_to_topic(
+                    absolute_data_topic + "/#", update_table_incremental
+                )
+                debug_logger(
+                    message=f"Table '{label}' subscribed to data topic '{absolute_data_topic}/#'",
+                    **_get_log_args(),
+                )
 
             # If static data exists in the config, publish it as the default state.
             static_data = config.get("data")
-            if static_data:
+            if static_data and absolute_data_topic:
                 debug_logger(
                     message=f"--- Found static data for '{label}'. Publishing as default state.",
                     **_get_log_args(),
                 )
                 for item_key, item_value in static_data.items():
-                    field_topic = get_topic(data_topic, "data", item_key)
-                    self.state_mirror_engine.publish_command(
+                    field_topic = get_topic(absolute_data_topic, "data", item_key)
+                    mqtt_publisher_service.publish_payload(
                         field_topic, orjson.dumps(item_value)
                     )
 

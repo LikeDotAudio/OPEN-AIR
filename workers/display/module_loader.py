@@ -22,6 +22,8 @@ import pathlib
 import tkinter as tk  # Explicitly import tkinter as tk
 from tkinter import ttk, Frame
 from managers.configini.config_reader import Config
+from workers.mqtt.mqtt_topic_utils import generate_topic_path_from_filepath
+from workers.setup.path_initializer import GLOBAL_PROJECT_ROOT
 
 # Globals
 app_constants = Config.get_instance()  # Get the singleton instance

@@ -67,7 +67,7 @@ def generate_topic_path_from_filepath(file_path: Path, project_root: Path) -> st
                 continue
 
             # General rule: remove numerical prefix, preserve case
-            processed_part = re.sub(r"^\d+_", "", part).replace(" ", "_")
+            processed_part = re.sub(r"^\d+_", "", part)
 
             # Ensure the processed part is not empty after transformations
             if processed_part:

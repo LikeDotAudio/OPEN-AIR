@@ -20,11 +20,11 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "rbw_val": { "value": "RBW Hz", "type": "_Value" },
-                  "rbw_auto": { "value": "RBW Auto (0/1)", "type": "_Value" },
-                  "vbw_val": { "value": "VBW Hz", "type": "_Value" },
-                  "vbw_auto": { "value": "VBW Auto (0/1)", "type": "_Value" },
-                  "sweep_time": { "value": "Sweep Seconds", "type": "_Value" }
+                  "rbw_val": { "value": "RBW Hz", "type": "_GuiValue" },
+                  "rbw_auto": { "value": "RBW Auto (0/1)", "type": "_GuiValue" },
+                  "vbw_val": { "value": "VBW Hz", "type": "_GuiValue" },
+                  "vbw_auto": { "value": "VBW Auto (0/1)", "type": "_GuiValue" },
+                  "sweep_time": { "value": "Sweep Seconds", "type": "_GuiValue" }
                 }
               }
             }
@@ -53,7 +53,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "val": { "value": "100 kHz", "type": "_Value", "description": "1kHz, 3kHz, 10kHz..." } }
+                "fields": { "val": { "value": "100 kHz", "type": "_GuiValue", "description": "1kHz, 3kHz, 10kHz..." } }
               }
             }
           },
@@ -89,7 +89,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "val": { "value": "100 kHz", "type": "_Value" } }
+                "fields": { "val": { "value": "100 kHz", "type": "_GuiValue" } }
               }
             }
           },
@@ -125,7 +125,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "val": { "value": "1.0", "type": "_Value", "description": "Ratio (e.g. 0.1, 1.0)" } }
+                "fields": { "val": { "value": "1.0", "type": "_GuiValue", "description": "Ratio (e.g. 0.1, 1.0)" } }
               }
             }
           },

@@ -38,7 +38,7 @@
             }
           },
           "display_value": {
-            "type": "_Value",
+            "type": "_GuiValue",
             "value": "---"
           }
         }

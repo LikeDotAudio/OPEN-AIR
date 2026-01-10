@@ -20,10 +20,10 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "start_freq": { "value": "Start Hz", "type": "_Value" },
-                  "stop_freq": { "value": "Stop Hz", "type": "_Value" },
-                  "center_freq": { "value": "Center Hz", "type": "_Value" },
-                  "span_freq": { "value": "Span Hz", "type": "_Value" }
+                  "start_freq": { "value": "Start Hz", "type": "_GuiValue" },
+                  "stop_freq": { "value": "Stop Hz", "type": "_GuiValue" },
+                  "center_freq": { "value": "Center Hz", "type": "_GuiValue" },
+                  "span_freq": { "value": "Span Hz", "type": "_GuiValue" }
                 }
               }
             }
@@ -51,7 +51,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "freq": { "value": "750 MHZ", "type": "_Value" } }
+                "fields": { "freq": { "value": "750 MHZ", "type": "_GuiValue" } }
               }
             }
           },
@@ -67,7 +67,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "freq": { "value": "1.5 GHZ", "type": "_Value" } }
+                "fields": { "freq": { "value": "1.5 GHZ", "type": "_GuiValue" } }
               }
             }
           },
@@ -95,7 +95,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "freq": { "value": "0 Hz", "type": "_Value" } }
+                "fields": { "freq": { "value": "0 Hz", "type": "_GuiValue" } }
               }
             }
           },
@@ -111,7 +111,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "freq": { "value": "1.5 GHZ", "type": "_Value" } }
+                "fields": { "freq": { "value": "1.5 GHZ", "type": "_GuiValue" } }
               }
             }
           }

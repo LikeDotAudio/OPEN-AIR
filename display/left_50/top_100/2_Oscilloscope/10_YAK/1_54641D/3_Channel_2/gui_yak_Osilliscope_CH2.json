@@ -21,16 +21,16 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "source": { "value": "CHANnel2", "type": "_Value", "description": "CHAN1, CHAN2, MATH" }
+                  "source": { "value": "CHANnel2", "type": "_GuiValue", "description": "CHAN1, CHAN2, MATH" }
                 }
               },
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "vpp": { "value": "Vpp Value", "type": "_Value" },
-                  "vrms": { "value": "Vrms Value", "type": "_Value" },
-                  "vmax": { "value": "Vmax Value", "type": "_Value" },
-                  "vmin": { "value": "Vmin Value", "type": "_Value" }
+                  "vpp": { "value": "Vpp Value", "type": "_GuiValue" },
+                  "vrms": { "value": "Vrms Value", "type": "_GuiValue" },
+                  "vmax": { "value": "Vmax Value", "type": "_GuiValue" },
+                  "vmin": { "value": "Vmin Value", "type": "_GuiValue" }
                 }
               }
             }
@@ -48,16 +48,16 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "source": { "value": "CHANnel2", "type": "_Value" }
+                  "source": { "value": "CHANnel2", "type": "_GuiValue" }
                 }
               },
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "frequency": { "value": "Freq Value", "type": "_Value" },
-                  "period": { "value": "Period Value", "type": "_Value" },
-                  "duty_cycle": { "value": "Duty Cycle Value", "type": "_Value" },
-                  "rise_time": { "value": "Rise Time Value", "type": "_Value" }
+                  "frequency": { "value": "Freq Value", "type": "_GuiValue" },
+                  "period": { "value": "Period Value", "type": "_GuiValue" },
+                  "duty_cycle": { "value": "Duty Cycle Value", "type": "_GuiValue" },
+                  "rise_time": { "value": "Rise Time Value", "type": "_GuiValue" }
                 }
               }
             }
@@ -89,7 +89,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "scale": { "value": "1.0", "type": "_Value" } }
+                "fields": { "scale": { "value": "1.0", "type": "_GuiValue" } }
               }
             }
           },
@@ -105,7 +105,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "offset": { "value": "0.0", "type": "_Value" } }
+                "fields": { "offset": { "value": "0.0", "type": "_GuiValue" } }
               }
             }
           },
@@ -121,7 +121,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "coupling": { "value": "DC", "type": "_Value" } }
+                "fields": { "coupling": { "value": "DC", "type": "_GuiValue" } }
               }
             }
           },
@@ -137,7 +137,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "attenuation": { "value": "10", "type": "_Value" } }
+                "fields": { "attenuation": { "value": "10", "type": "_GuiValue" } }
               }
             }
           },
@@ -153,7 +153,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "string": { "value": "\"SIG2\"", "type": "_Value" } }
+                "fields": { "string": { "value": "\"SIG2\"", "type": "_GuiValue" } }
               }
             }
           },
@@ -169,7 +169,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "state": { "value": "ON", "type": "_Value" } }
+                "fields": { "state": { "value": "ON", "type": "_GuiValue" } }
               }
             }
           },
@@ -185,7 +185,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "state": { "value": "OFF", "type": "_Value" } }
+                "fields": { "state": { "value": "OFF", "type": "_GuiValue" } }
               }
             }
           }

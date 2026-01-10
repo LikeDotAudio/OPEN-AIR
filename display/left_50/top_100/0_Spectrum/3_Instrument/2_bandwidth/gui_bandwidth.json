@@ -3,7 +3,11 @@
     "type": "OcaBlock",
     "description": "Resolution Bandwidth (RBW) settings.",
     "layout": { "sticky": "ew" },
+        "show_label": false,    
     "fields": {
+      "break_1": {
+        "type": "OcaBreakLine"
+      },
       "RBW": {
         "label_active": "Resolution Bandwidth",
           "type": "_Horizontal_with_dial_Value",
@@ -115,8 +119,12 @@
   "Video Bandwidth": {
     "type": "OcaBlock",
     "description": "Video Bandwidth (VBW) settings.",
+    "show_label": false,
     "layout": { "sticky": "ew" },
     "fields": {
+      "break_1": {
+        "type": "OcaBreakLine"
+      },
       "vbw_MHz": {
         "label_active": "Video Bandwidth",
           "type": "_Horizontal_with_dial_Value",
@@ -298,8 +306,12 @@
   "Sweep Time": {
     "type": "OcaBlock",
     "description": "Sweep Time settings.",
+    "show_label": false,
     "layout": { "sticky": "ew" },
     "fields": {
+      "break_1": {
+        "type": "OcaBreakLine"
+      },
       "sweep_time_setting": {
         "label_active": "Sweep Time",
         "label_inactive": "Sweep Time",

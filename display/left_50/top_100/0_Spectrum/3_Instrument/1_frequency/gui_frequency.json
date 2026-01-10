@@ -28,6 +28,9 @@
         "step": ".001",
         "layout": { "sticky": "ew" }
       },
+        "break_2": {
+        "type": "OcaBreakLine"
+      },
       "span_freq_MHz": {
         "label_active": "Frequency Span",
         "label_inactive": "Frequency Span",
@@ -49,6 +52,9 @@
         "step": ".001",
         "layout": { "sticky": "ew" }
       },
+          "break_3": {
+        "type": "OcaBreakLine"
+      },
       "start_freq_MHz": {
         "label_active": "Start Frequency",
         "label_inactive": "Start Frequency",
@@ -69,6 +75,9 @@
         "units": "MHz",
         "step": ".001",
         "layout": { "sticky": "ew" }
+      },
+          "break_4": {
+        "type": "OcaBreakLine"
       },
       "stop_freq_MHz": {
         "label_active": "Stop Frequency",
@@ -97,13 +106,15 @@
     "type": "OcaBlock",
     "description": "A block for managing all frequency-related presets.",
     "layout": { "sticky": "ew" },
+    "show_label": false,    
     "fields": {
-      "break_2": {
+      "break_1": {
         "type": "OcaBreakLine"
       },
-      "SPAN": {
+      "Span": {
         "type": "_GuiButtonToggler",
         "AES70": "OcaSwitch",
+        "label_active": "Span",
         "handler": "set_span_frequency",
         "yak_handler": {
           "enable": true,

@@ -86,7 +86,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "val_a": { "value": "Ch A Value", "type": "_Value" }
+                  "val_a": { "value": "Ch A Value", "type": "_GuiValue" }
                 }
               }
             }
@@ -104,7 +104,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "val_b": { "value": "Ch B Value", "type": "_Value" }
+                  "val_b": { "value": "Ch B Value", "type": "_GuiValue" }
                 }
               }
             }
@@ -122,8 +122,8 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "val_a": { "value": "Ch A Value", "type": "_Value" },
-                  "val_b": { "value": "Ch B Value", "type": "_Value" }
+                  "val_a": { "value": "Ch A Value", "type": "_GuiValue" },
+                  "val_b": { "value": "Ch B Value", "type": "_GuiValue" }
                 }
               }
             }

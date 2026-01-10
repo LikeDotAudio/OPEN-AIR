@@ -57,7 +57,7 @@ class GuiDropdownOptionCreatorMixin:
         current_function_name = inspect.currentframe().f_code.co_name
 
         # Extract only widget-specific config from config_data
-        label = config_data.get("label_active")
+        label = config_data.get("label")
         config = config_data  # config_data is the config
         path = config_data.get("path")
 
@@ -94,7 +94,7 @@ class GuiDropdownOptionCreatorMixin:
 
             # Populate the dropdown with labels and map them to values
             option_labels = [
-                opt.get("label_active", key) for key, opt in sorted_options
+                opt.get("label", key) for key, opt in sorted_options
             ]
             option_values = [opt.get("value", key) for key, opt in sorted_options]
 
@@ -130,7 +130,7 @@ class GuiDropdownOptionCreatorMixin:
             if initial_selected_value is not None:
                 for key, opt in options_map.items():
                     if str(opt.get("value", key)) == str(initial_selected_value):
-                        initial_displayed_text = opt.get("label_active", key)
+                        initial_displayed_text = opt.get("label", key)
                         break
             displayed_text_var = tk.StringVar(value=initial_displayed_text)
 
@@ -154,7 +154,7 @@ class GuiDropdownOptionCreatorMixin:
                 found_label = ""
                 for key, opt in options_map.items():
                     if str(opt.get("value", key)) == str(new_value):
-                        found_label = opt.get("label_active", key)
+                        found_label = opt.get("label", key)
                         break
                 displayed_text_var.set(found_label)
                 if app_constants.global_settings["debug_enabled"]:
@@ -172,7 +172,7 @@ class GuiDropdownOptionCreatorMixin:
                         (
                             key
                             for key, opt in options_map.items()
-                            if opt.get("label_active", key) == selected_label
+                            if opt.get("label", key) == selected_label
                         ),
                         None,
                     )

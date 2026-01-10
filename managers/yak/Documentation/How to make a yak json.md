@@ -47,7 +47,7 @@ JSON
     "Input": {                 <-- MUST be named "Input" (Capitalized)
       "type": "OcaBlock",
       "fields": {
-        "scale": { "value": "1.0", "type": "_Value" }
+        "scale": { "value": "1.0", "type": "_GuiValue" }
       }
     }
   }
@@ -146,7 +146,7 @@ JSON
               "Input": {
                 "type": "OcaBlock",
                 "fields": { 
-                  "scale": { "value": "1.0", "type": "_Value" } 
+                  "scale": { "value": "1.0", "type": "_GuiValue" } 
                 }
               }
             }

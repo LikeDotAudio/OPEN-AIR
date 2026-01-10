@@ -21,15 +21,15 @@
             "fields": {
               "Ref_Level_dBm": {
                 "value": "The reference level in dBm.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Attenuation_dB": {
                 "value": "The attenuation in dB.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Preamp_On": {
                 "value": "Boolean for preamp state.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -58,17 +58,17 @@
             "fields": {
               "Ref_Level_dBm": {
                 "value": "-45",
-                "type": "_Value",
+                "type": "_GuiValue",
                 "description": "The SCPI input for reference level."
               },
               "Attenuation_dB": {
                 "value": "10",
-                "type": "_Value",
+                "type": "_GuiValue",
                 "description": "The SCPI input for power attenuation."
               },
               "Preamp_On": {
                 "value": "1",
-                "type": "_Value",
+                "type": "_GuiValue",
                 "description": "The SCPI input for power attenuation."
               }
             }
@@ -97,7 +97,7 @@
             "fields": {
               "ref_level": {
                 "value": "The reference level in dBm.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -119,7 +119,7 @@
             "fields": {
               "attenuation": {
                 "value": "The attenuation in dB.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -141,7 +141,7 @@
             "fields": {
               "preamp_state": {
                 "value": "Boolean for preamp state.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -168,7 +168,7 @@
             "type": "OcaBlock",
             "fields": {
               "Ref_Level_dBm": {
-                "type": "_Value",
+                "type": "_GuiValue",
                 "value": "-40"
               }
             }
@@ -190,7 +190,7 @@
             "type": "OcaBlock",
             "fields": {
               "Power_Attenuation": {
-                "type": "_Value",
+                "type": "_GuiValue",
                 "value": "20"
               }
             }

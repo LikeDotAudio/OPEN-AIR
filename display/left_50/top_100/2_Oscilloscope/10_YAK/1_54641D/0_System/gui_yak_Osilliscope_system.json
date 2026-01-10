@@ -24,7 +24,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "idn_string": { "value": "Device ID", "type": "_Value" }
+                  "idn_string": { "value": "Device ID", "type": "_GuiValue" }
                 }
               }
             }
@@ -42,7 +42,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "error_msg": { "value": "Error Message", "type": "_Value" }
+                  "error_msg": { "value": "Error Message", "type": "_GuiValue" }
                 }
               }
             }

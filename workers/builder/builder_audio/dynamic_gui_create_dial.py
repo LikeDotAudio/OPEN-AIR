@@ -246,12 +246,6 @@ class DialCreatorMixin:
             sensitivity = (max_val - min_val) / 100.0  # Full range over 100 pixels
             new_val = drag_state["start_value"] + (dy * sensitivity)
             
-            # Wrap around logic
-            if new_val > max_val:
-                new_val = new_val - (max_val - min_val)
-            elif new_val < min_val:
-                new_val = new_val + (max_val - min_val)
-
             new_val = max(min_val, min(max_val, new_val))
 
             if dial_value_var.get() != new_val:
@@ -272,8 +266,7 @@ class DialCreatorMixin:
             command=None,  # Command is handled by the press/drag/release events now
         )
 
-        if label:
-            ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
+
 
         try:
             width = config.get("width", 50)
@@ -403,7 +396,7 @@ class DialCreatorMixin:
             height - 5,
             start=start_angle,
             extent=val_extent,
-            style=tk.ARC,
+            style=tk.PIESLICE,
             outline=active_color,
             width=4,
         )
@@ -417,8 +410,8 @@ class DialCreatorMixin:
         )
 
         # Center circle
-        canvas.create_oval(
-            cx - 4, cy - 4, cx + 4, cy + 4, fill=active_color, outline=active_color
-        )
+        # canvas.create_oval(
+        #     cx - 4, cy - 4, cx + 4, cy + 4, fill=active_color, outline=active_color
+        # )
         
         value_label.config(foreground=active_color)

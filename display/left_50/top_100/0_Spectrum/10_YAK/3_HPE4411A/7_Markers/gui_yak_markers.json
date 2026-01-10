@@ -20,8 +20,8 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "freq": { "value": "Hz", "type": "_Value" },
-                  "ampl": { "value": "dBm", "type": "_Value" }
+                  "freq": { "value": "Hz", "type": "_GuiValue" },
+                  "ampl": { "value": "dBm", "type": "_GuiValue" }
                 }
               }
             }
@@ -39,8 +39,8 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "freq": { "value": "Hz", "type": "_Value" },
-                  "ampl": { "value": "dBm", "type": "_Value" }
+                  "freq": { "value": "Hz", "type": "_GuiValue" },
+                  "ampl": { "value": "dBm", "type": "_GuiValue" }
                 }
               }
             }
@@ -103,7 +103,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "freq": { "value": "100 MHZ", "type": "_Value" } }
+                "fields": { "freq": { "value": "100 MHZ", "type": "_GuiValue" } }
               }
             }
           }

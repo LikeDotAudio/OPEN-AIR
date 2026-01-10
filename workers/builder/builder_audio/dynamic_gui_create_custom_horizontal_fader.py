@@ -20,6 +20,33 @@ import math
 from managers.configini.config_reader import Config
 
 app_constants = Config.get_instance()
+
+# --- Default Fader Configuration Constants ---
+DEFAULT_FADER_HEIGHT = 80 # Default height for the fader canvas
+DEFAULT_MIN_VAL = 0.0
+DEFAULT_MAX_VAL = 100.0
+DEFAULT_LOG_EXPONENT = 1.0
+DEFAULT_REFF_POINT_RATIO = 0.5 # Percentage of range for default reff point
+DEFAULT_BORDER_WIDTH = 0
+DEFAULT_BORDER_COLOR = "black"
+DEFAULT_SHOW_VALUE = True
+DEFAULT_SHOW_UNITS = False
+DEFAULT_LABEL_COLOR = "white"
+DEFAULT_VALUE_COLOR = "white"
+DEFAULT_OUTLINE_COLOR = "black"
+DEFAULT_OUTLINE_WIDTH = 1
+DEFAULT_TICK_SIZE_RATIO = 0.2 # Relative to height
+DEFAULT_TICK_FONT_FAMILY = "Helvetica"
+DEFAULT_TICK_FONT_SIZE = 10
+DEFAULT_TICK_COLOR = "light grey"
+DEFAULT_VALUE_FOLLOW = True
+DEFAULT_VALUE_HIGHLIGHT_COLOR = "#f4902c"
+DEFAULT_CAP_WIDTH = 30
+DEFAULT_CAP_HEIGHT_RATIO = 0.5
+DEFAULT_CAP_RADIUS = 10
+DEFAULT_CAP_OUTLINE_COLOR = "black" # Using track_col by default
+# ---------------------------------------------
+
 from workers.logger.logger import debug_logger
 from workers.logger.log_utils import _get_log_args
 from workers.styling.style import THEMES, DEFAULT_THEME
@@ -48,32 +75,40 @@ class CustomHorizontalFaderFrame(tk.Frame):
         self.track_col = colors.get("secondary", "#444444")
         self.handle_col = colors.get("fg", "#dcdcdc")
 
-        self.min_val = float(config.get("value_min", 0.0))
-        self.max_val = float(config.get("value_max", 100.0))
-        self.log_exponent = float(config.get("log_exponent", 1.0))
+        self.min_val = float(config.get("value_min", DEFAULT_MIN_VAL))
+        self.max_val = float(config.get("value_max", DEFAULT_MAX_VAL))
+        self.log_exponent = float(config.get("log_exponent", DEFAULT_LOG_EXPONENT))
         self.reff_point = float(
             config.get("reff_point", (self.min_val + self.max_val) / 2.0)
         )
-        self.border_width = int(config.get("border_width", 0))
-        self.border_color = config.get("border_color", "black")
-        self.show_value = config.get("show_value", True)
-        self.show_units = config.get("show_units", False)
-        self.label_color = config.get("label_color", "white")
-        self.value_color = config.get("value_color", "white")
+        self.border_width = int(config.get("border_width", DEFAULT_BORDER_WIDTH))
+        self.border_color = config.get("border_color", DEFAULT_BORDER_COLOR)
+        self.show_value = config.get("show_value", DEFAULT_SHOW_VALUE)
+        self.show_units = config.get("show_units", DEFAULT_SHOW_UNITS)
+        self.label_color = config.get("label_color", DEFAULT_LABEL_COLOR)
+        self.value_color = config.get("value_color", DEFAULT_VALUE_COLOR)
         self.label_text = config.get("label_active", "")
-        self.outline_col = "black"
-        self.outline_width = 1
+        self.outline_col = DEFAULT_OUTLINE_COLOR
+        self.outline_width = DEFAULT_OUTLINE_WIDTH
         self.ticks = config.get("ticks", None)
         self.tick_interval = tick_interval
 
+        # Fader Cap Styling
+        self.cap_width = int(config.get("cap_width", DEFAULT_CAP_WIDTH))
+        self.cap_height_ratio = float(config.get("cap_height_ratio", DEFAULT_CAP_HEIGHT_RATIO))
+        self.cap_radius = int(config.get("cap_radius", DEFAULT_CAP_RADIUS))
+        self.cap_color = config.get("cap_color", self.handle_col) # Defaults to handle_col from theme
+        self.cap_outline_color = config.get("cap_outline_color", self.track_col) # Defaults to track_col from theme
+
+
         # Custom styling
-        self.tick_size = config.get("tick_size", fader_style.get("tick_size", 0.1))
-        tick_font_family = config.get("tick_font_family", fader_style.get("tick_font_family", "Helvetica"))
-        tick_font_size = config.get("tick_font_size", fader_style.get("tick_font_size", 10))
+        self.tick_size = config.get("tick_size", fader_style.get("tick_size", DEFAULT_TICK_SIZE_RATIO))
+        tick_font_family = config.get("tick_font_family", fader_style.get("tick_font_family", DEFAULT_TICK_FONT_FAMILY))
+        tick_font_size = config.get("tick_font_size", fader_style.get("tick_font_size", DEFAULT_TICK_FONT_SIZE))
         self.tick_font = (tick_font_family, tick_font_size)
-        self.tick_color = config.get("tick_color", fader_style.get("tick_color", "light grey"))
-        self.value_follow = config.get("value_follow", fader_style.get("value_follow", True))
-        self.value_highlight_color = config.get("value_highlight_color", fader_style.get("value_highlight_color", "#f4902c"))
+        self.tick_color = config.get("tick_color", fader_style.get("tick_color", DEFAULT_TICK_COLOR))
+        self.value_follow = config.get("value_follow", fader_style.get("value_follow", DEFAULT_VALUE_FOLLOW))
+        self.value_highlight_color = config.get("value_highlight_color", fader_style.get("value_highlight_color", DEFAULT_VALUE_HIGHLIGHT_COLOR))
 
 
         super().__init__(
@@ -192,7 +227,7 @@ class CustomHorizontalFaderCreatorMixin:
             ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
 
         width = config.get("layout", {}).get("width", 200)
-        height = config.get("layout", {}).get("height", 60)
+        height = config.get("layout", {}).get("height", DEFAULT_FADER_HEIGHT)
 
         canvas = tk.Canvas(
             frame, width=width, height=height, bg=bg_color, highlightthickness=0
@@ -267,11 +302,11 @@ class CustomHorizontalFaderCreatorMixin:
         # Draw the fill line
         canvas.create_line(
             10,
-            cy,
+            cy - 2.5,  # Adjust to be centered above cy with width 5
             handle_x,
-            cy,
+            cy - 2.5,  # Same y-coordinate for a straight line
             fill=frame_instance.value_highlight_color,
-            width=10,
+            width=5,
             capstyle=tk.ROUND,
         )
 
@@ -324,24 +359,24 @@ class CustomHorizontalFaderCreatorMixin:
                 if i % 2 == 0:
                     canvas.create_text(
                         tick_x_pos,
-                        cy + 15,
+                        cy + 25,
                         text=str(int(tick_value)),
                         fill=frame_instance.tick_color,
                         font=frame_instance.tick_font,
                         anchor="n",
                     )
 
-        cap_width = 30
-        cap_height = height * 0.7
+        cap_width = frame_instance.cap_width
+        cap_height = height * frame_instance.cap_height_ratio
         self._draw_rounded_rectangle(
             canvas,
             handle_x - cap_width / 2,
             cy - cap_height / 2,
             handle_x + cap_width / 2,
             cy + cap_height / 2,
-            radius=10,
-            fill=frame_instance.handle_col,
-            outline=frame_instance.track_col,
+            radius=frame_instance.cap_radius,
+            fill=frame_instance.cap_color,
+            outline=frame_instance.cap_outline_color,
         )
 
         if frame_instance.value_follow:

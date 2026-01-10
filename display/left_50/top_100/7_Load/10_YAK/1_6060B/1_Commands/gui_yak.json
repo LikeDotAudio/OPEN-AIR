@@ -20,9 +20,9 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volts": { "value": "V", "type": "_Value" },
-                  "amps": { "value": "A", "type": "_Value" },
-                  "watts": { "value": "W", "type": "_Value" }
+                  "volts": { "value": "V", "type": "_GuiValue" },
+                  "amps": { "value": "A", "type": "_GuiValue" },
+                  "watts": { "value": "W", "type": "_GuiValue" }
                 }
               }
             }
@@ -46,7 +46,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "status_byte": { "value": "Byte Value", "type": "_Value" }
+                  "status_byte": { "value": "Byte Value", "type": "_GuiValue" }
                 }
               }
             }
@@ -64,7 +64,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "error_msg": { "value": "Error Message", "type": "_Value" }
+                  "error_msg": { "value": "Error Message", "type": "_GuiValue" }
                 }
               }
             }
@@ -82,7 +82,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "idn_string": { "value": "Device ID", "type": "_Value" }
+                  "idn_string": { "value": "Device ID", "type": "_GuiValue" }
                 }
               }
             }
@@ -142,7 +142,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "1.0", "type": "_Value", "description": "Amps" }
+                  "value": { "value": "1.0", "type": "_GuiValue", "description": "Amps" }
                 }
               }
             }
@@ -160,7 +160,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "60", "type": "_Value", "description": "6 or 60 A" }
+                  "value": { "value": "60", "type": "_GuiValue", "description": "6 or 60 A" }
                 }
               }
             }
@@ -178,7 +178,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "1000", "type": "_Value", "description": "A/sec" }
+                  "value": { "value": "1000", "type": "_GuiValue", "description": "A/sec" }
                 }
               }
             }
@@ -202,7 +202,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "12.0", "type": "_Value", "description": "Volts" }
+                  "value": { "value": "12.0", "type": "_GuiValue", "description": "Volts" }
                 }
               }
             }
@@ -220,7 +220,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "60", "type": "_Value", "description": "6, 60, etc" }
+                  "value": { "value": "60", "type": "_GuiValue", "description": "6, 60, etc" }
                 }
               }
             }
@@ -244,7 +244,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "100", "type": "_Value", "description": "Ohms" }
+                  "value": { "value": "100", "type": "_GuiValue", "description": "Ohms" }
                 }
               }
             }
@@ -262,7 +262,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "1000", "type": "_Value", "description": "Range" }
+                  "value": { "value": "1000", "type": "_GuiValue", "description": "Range" }
                 }
               }
             }
@@ -292,7 +292,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "mode": { "value": "CONT", "type": "_Value", "description": "CONT, PULS, TOGG" }
+                  "mode": { "value": "CONT", "type": "_GuiValue", "description": "CONT, PULS, TOGG" }
                 }
               }
             }
@@ -310,7 +310,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "0.5", "type": "_Value", "description": "Main Level" }
+                  "value": { "value": "0.5", "type": "_GuiValue", "description": "Main Level" }
                 }
               }
             }
@@ -328,7 +328,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "5.0", "type": "_Value", "description": "Transient Level" }
+                  "value": { "value": "5.0", "type": "_GuiValue", "description": "Transient Level" }
                 }
               }
             }
@@ -346,7 +346,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "100", "type": "_Value", "description": "Hz" }
+                  "value": { "value": "100", "type": "_GuiValue", "description": "Hz" }
                 }
               }
             }
@@ -364,7 +364,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "50", "type": "_Value", "description": "Percent" }
+                  "value": { "value": "50", "type": "_GuiValue", "description": "Percent" }
                 }
               }
             }

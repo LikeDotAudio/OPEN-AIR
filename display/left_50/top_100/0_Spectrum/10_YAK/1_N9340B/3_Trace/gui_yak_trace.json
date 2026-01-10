@@ -22,35 +22,35 @@
             "fields": {
               "StartFreq": {
                 "value": "The starting frequency in Hz.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "StopFreq": {
                 "value": "The stopping frequency in Hz.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "TraceMode1": {
                 "value": "The trace modes for each trace.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "TraceMode2": {
                 "value": "The trace modes for each trace.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "TraceMode3": {
                 "value": "The trace modes for each trace.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "TraceData1": {
                 "value": "Processed trace data.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "TraceData2": {
                 "value": "Processed trace data.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "TraceData3": {
                 "value": "Processed trace data.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -74,35 +74,35 @@
             "fields": {
               "StartFreq": {
                 "value": "The starting frequency in Hz.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "StopFreq": {
                 "value": "The stopping frequency in Hz.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "TraceMode1": {
                 "value": "The trace modes for each trace.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "TraceMode2": {
                 "value": "The trace modes for each trace.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "TraceMode3": {
                 "value": "The trace modes for each trace.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "TraceData1": {
                 "value": "Processed trace data.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "TraceData2": {
                 "value": "Processed trace data.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "TraceData3": {
                 "value": "Processed trace data.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -130,7 +130,7 @@
             "fields": {
               "trace_number": {
                 "value": "1",
-                "type": "_Value",
+                "type": "_GuiValue",
                 "description": "The trace number."
               }
             }
@@ -140,7 +140,7 @@
             "fields": {
               "trace_data": {
                 "value": "Processed trace data or False.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -162,7 +162,7 @@
             "fields": {
               "trace_number": {
                 "value": "1",
-                "type": "_Value",
+                "type": "_GuiValue",
                 "description": "The trace number."
               }
             }
@@ -172,7 +172,7 @@
             "fields": {
               "trace_data": {
                 "value": "Processed trace data or False.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -194,7 +194,7 @@
             "fields": {
               "trace_number": {
                 "value": "2",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           },
@@ -203,7 +203,7 @@
             "fields": {
               "trace_data": {
                 "value": "Processed trace data.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -225,7 +225,7 @@
             "fields": {
               "trace_number": {
                 "value": "2",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           },
@@ -234,7 +234,7 @@
             "fields": {
               "trace_data": {
                 "value": "Processed trace data.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -256,7 +256,7 @@
             "fields": {
               "trace_number": {
                 "value": "3",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           },
@@ -265,7 +265,7 @@
             "fields": {
               "trace_data": {
                 "value": "Processed trace data.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -287,7 +287,7 @@
             "fields": {
               "trace_number": {
                 "value": "3",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           },
@@ -296,7 +296,7 @@
             "fields": {
               "trace_data": {
                 "value": "Processed trace data.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -318,7 +318,7 @@
             "fields": {
               "trace_number": {
                 "value": "4",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           },
@@ -327,7 +327,7 @@
             "fields": {
               "trace_data": {
                 "value": "Processed trace data.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -349,7 +349,7 @@
             "fields": {
               "trace_number": {
                 "value": "4",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           },
@@ -358,7 +358,7 @@
             "fields": {
               "trace_data": {
                 "value": "Processed trace data.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }

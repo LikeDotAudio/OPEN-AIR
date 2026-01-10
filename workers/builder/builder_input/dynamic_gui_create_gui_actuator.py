@@ -17,6 +17,7 @@
 import os
 import tkinter as tk
 from tkinter import ttk
+import tkinter.font as tkFont
 import inspect
 import orjson
 import time
@@ -81,23 +82,38 @@ class GuiActuatorCreatorMixin:
             sub_frame.grid_columnconfigure(0, weight=1)
 
             layout = config.get("layout", {})
-            button_height = layout.get("height", 30)
+            button_height_from_layout = layout.get("height") # Get height directly from layout
+            button_width_from_layout = layout.get("width") # Get width directly from layout
             button_sticky = layout.get("sticky", "ew")
-            ipady = (button_height - 20) // 2 if button_height > 20 else 5
+
+            # Calculate ipady based on height from layout
+            if button_height_from_layout is not None:
+                ipady_val = button_height_from_layout // 2
+            else:
+                # Fallback to a default ipady if height is not explicitly provided in layout
+                ipady_val = 5 # Default padding if no height is specified
 
             button_text = config.get(
                 "label", config.get("label_active", config.get("label_inactive", label))
             )
 
             button = ttk.Button(sub_frame, text=button_text, style="Custom.TButton")
-            button.grid(
-                row=0,
-                column=0,
-                sticky=button_sticky,
-                padx=DEFAULT_PAD_X,
-                pady=DEFAULT_PAD_Y,
-                ipady=ipady,
-            )
+
+            grid_kwargs = {
+                "row": 0,
+                "column": 0,
+                "sticky": button_sticky,
+                "padx": DEFAULT_PAD_X,
+                "pady": DEFAULT_PAD_Y,
+                "ipady": ipady_val,
+            }
+
+            if button_width_from_layout is not None:
+                grid_kwargs["ipadx"] = button_width_from_layout // 2
+            elif button_height_from_layout is not None: # Height is present, but width is not
+                grid_kwargs["ipadx"] = 20 # 20 pixels on each side for margin
+
+            button.grid(**grid_kwargs)
 
             # The sub_frame needs to be returned to be placed by the DynamicGuiBuilder's grid.
             # Its packing/gridding is handled by the caller.

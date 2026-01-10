@@ -1,38 +1,84 @@
-{
-  "Settings": {
-    "type": "OcaBlock",
-    "AES70": "OcaGain",
-    "description": "A block for managing all amplitude-related settings.",
-    "layout": { "sticky": "ew" },
-    "fields": {
+{ 
+
+
+      "Pre Amp": {
+        "type": "OcaBlock",
+        "description": "Settings for Attenuation",
+        "show_label": false,
+        "layout": { "sticky": "ew" },
+        "fields": {
+          
+      "preamp_on": {
+        "label_active": "Preamp",
+        "label_inactive": "Preamp",
+        "type": "_GuiButtonToggle",
+        "AES70": "OcaBooleanActuator",
+        "handler": "toggle_preamp",
+        "yak_handler": {
+          "enable": true,
+          "yak_type": "set",
+          "sub_path": "Amplitude",
+          "command": "Set_Power_Gain",
+          "input_name": "state_bool",
+          "converter": "bool_to_int"
+        },
+        "layout": { "height": 50, "width": 100, "sticky": "" },
+        "options": {
+          "ON": {
+            "label_active": "Preamp ON",
+            "label_inactive": "Preamp ON",
+            "selected": false
+          },
+          "OFF": {
+            "label_active": "Preamp OFF",
+            "label_inactive": "Preamp OFF",
+            "selected": true
+          }
+        }
+      },
+      "high_sensitivity_on": {
+        "type": "_GuiButtonToggle",
+        "AES70": "OcaBooleanActuator",
+        "handler": "toggle_high_sensitivity",
+        "yak_handler": {
+          "enable": true,
+          "yak_type": "set",
+          "sub_path": "Amplitude",
+          "command": "Set_High_Sensitivity",
+          "input_name": "state_bool",
+          "converter": "bool_to_int"
+        },
+        "layout": { "height": 150, "width": 200,"sticky": "" },
+        "options": {
+          "ON": {
+            "label_active": "High Sensitivity ON",
+            "label_inactive": "High Sensitivity ON",
+            "selected": false
+          },
+          "OFF": {
+            "label_active": "High Sensitivity OFF",
+            "label_inactive": "High Sensitivity OFF",
+            "selected": true
+          }
+        }
+      }
+    }
+  },
+  
       "Reference Level": {
         "type": "OcaBlock",
+        "label": "Reference Level",
+        "show_label": false,
         "description": "Settings for Reference Level",
         "layout": { "sticky": "ew" },
         "fields": {
-          "ref_level_dBm": {
-            "label_active": "Reference Level",
-            "label_inactive": "Reference Level",
-            "type": "_CustomHorizontalFader",
-            "handler": "set_ref_level",
-            "yak_handler": {
-              "enable": true,
-              "yak_type": "set",
-              "sub_path": "Amplitude",
-              "command": "Set_Reference_Level",
-              "input_name": "dbm_value",
-              "converter": "float"
-            },
-            "default_value": "-30",
-            "units": "dBm",
-            "min": "-100",
-            "max": "0",
-            "step": "10",
-            "layout": { "sticky": "ew" }
-          },
-          "REFERENCE_LEVEL": {
+            "break_reffLeve": {
+        "type": "OcaBreakLine"
+      },
+          "REFERENCE_LEVEL_dropdown": {
             "type": "_GuiDropDownOption",
             "AES70": "OcaSwitch",
+            "label" : "Reference Level",
             "handler": "set_reference_level",
             "yak_handler": {
               "enable": true,
@@ -220,18 +266,47 @@
                 "selected": false
               }
             }
-          }
+          },
+          "ref_level_dBm": {
+            "label": "Reference Level",
+            "type": "_CustomHorizontalFader",
+            "handler": "set_ref_level",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Amplitude",
+              "command": "Set_Reference_Level",
+              "input_name": "dbm_value",
+              "converter": "float"
+            },
+            "default_value": "-30",
+            "units": "dBm",
+            "min": "-100",
+            "max": "0",
+            "step": "10",
+            "layout": { "sticky": "ew" }
+          },
+            "break_ref fader": {
+        "type": "OcaBreakLine"
+      }
+         
         }
       },
+        
       "Attenuation": {
         "type": "OcaBlock",
         "description": "Settings for Attenuation",
+        "show_label": false,
         "layout": { "sticky": "ew" },
         "fields": {
+          "break_1": {
+        "type": "OcaBreakLine"
+      },
           "POWER_ATTENUATION": {
             "type": "_GuiDropDownOption",
             "AES70": "OcaSwitch",
             "handler": "set_power_attenuation",
+            "label" : "Power Attenuation",
             "yak_handler": {
               "enable": true,
               "yak_type": "set",
@@ -286,11 +361,12 @@
               }
             }
           },
+          
+      
       "power_attenuation_dB": {
-        "label_active": "Power Attenuation",
-        "label_inactive": "Power Attenuation",
         "type": "_CustomHorizontalFader",
         "handler": "set_power_attenuation",
+        
         "yak_handler": {
           "enable": true,
           "yak_type": "set",
@@ -307,62 +383,7 @@
         "layout": { "sticky": "ew" }
 
       },
-      "preamp_on": {
-        "label_active": "Preamp",
-        "label_inactive": "Preamp",
-        "type": "_GuiButtonToggle",
-        "AES70": "OcaBooleanActuator",
-        "handler": "toggle_preamp",
-        "yak_handler": {
-          "enable": true,
-          "yak_type": "set",
-          "sub_path": "Amplitude",
-          "command": "Set_Power_Gain",
-          "input_name": "state_bool",
-          "converter": "bool_to_int"
-        },
-        "layout": { "height": 30, "sticky": "" },
-        "options": {
-          "ON": {
-            "label_active": "Preamp ON",
-            "label_inactive": "Preamp ON",
-            "selected": false
-          },
-          "OFF": {
-            "label_active": "Preamp OFF",
-            "label_inactive": "Preamp OFF",
-            "selected": true
-          }
-        }
-      },
-      "high_sensitivity_on": {
-        "label_active": "High Sensitivity",
-        "label_inactive": "High Sensitivity",
-        "type": "_GuiButtonToggle",
-        "AES70": "OcaBooleanActuator",
-        "handler": "toggle_high_sensitivity",
-        "yak_handler": {
-          "enable": true,
-          "yak_type": "set",
-          "sub_path": "Amplitude",
-          "command": "Set_High_Sensitivity",
-          "input_name": "state_bool",
-          "converter": "bool_to_int"
-        },
-        "layout": { "height": 30, "sticky": "" },
-        "options": {
-          "ON": {
-            "label_active": "High Sensitivity ON",
-            "label_inactive": "High Sensitivity ON",
-            "selected": false
-          },
-          "OFF": {
-            "label_active": "High Sensitivity OFF",
-            "label_inactive": "High Sensitivity OFF",
-            "selected": true
-          }
-        }
+      "break_Pre_Amp": {
+        "type": "OcaBreakLine"
+      }}}
       }
-    }
-  }
-} }}

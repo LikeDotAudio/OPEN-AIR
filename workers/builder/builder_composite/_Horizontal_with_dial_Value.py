@@ -75,13 +75,13 @@ class HorizontalDialValueCreatorMixin(
         try:
             sub_frame = ttk.Frame(parent_widget)
 
-            label_widget = ttk.Label(sub_frame, text=f"{label}:")
-            label_widget.pack(
-                side=tk.TOP,
-                fill=tk.X,
-                padx=(DEFAULT_PAD_X, DEFAULT_PAD_Y),
-                pady=(0, DEFAULT_PAD_Y),
-            )
+            # label_widget = ttk.Label(sub_frame, text=f"{label}:")
+            # label_widget.pack(
+            #     side=tk.TOP,
+            #     fill=tk.X,
+            #     padx=(DEFAULT_PAD_X, DEFAULT_PAD_Y),
+            #     pady=(0, DEFAULT_PAD_Y),
+            # )
 
             min_val = float(config_data.get("min", "0"))
             max_val = float(config_data.get("max", "100"))
@@ -96,6 +96,26 @@ class HorizontalDialValueCreatorMixin(
             main_value_var = tk.DoubleVar(value=initial_value)
             entry_string_var = tk.StringVar(value=format_string.format(initial_value))
 
+            value_unit_frame = ttk.Frame(sub_frame)
+            value_unit_frame.pack(side=tk.TOP, fill=tk.X, expand=True)
+
+            # New label for label_active
+            inline_label_widget = ttk.Label(value_unit_frame, text=f"{label}:")
+            inline_label_widget.pack(side=tk.LEFT, padx=(DEFAULT_PAD_X, DEFAULT_PAD_X))
+
+            units_label = ttk.Label(value_unit_frame, text=config_data.get("units", ""), anchor=tk.E)
+            units_label.pack(side=tk.RIGHT, padx=(DEFAULT_PAD_X, DEFAULT_PAD_X))
+
+            entry = ttk.Entry(
+                value_unit_frame,
+                width=10,
+                style="Custom.TEntry",
+                textvariable=entry_string_var,
+                justify=tk.RIGHT,
+            )
+            entry.pack(side=tk.RIGHT, padx=(DEFAULT_PAD_X, 0))
+
+
             fader_dial_frame = ttk.Frame(sub_frame)
             fader_dial_frame.pack(side=tk.TOP, fill=tk.X, expand=True)
             fader_dial_frame.grid_columnconfigure(0, weight=9)
@@ -106,6 +126,7 @@ class HorizontalDialValueCreatorMixin(
             fader_config["value_max"] = str(math.ceil(max_val))
             fader_config["value_default"] = str(math.floor(initial_value))
             fader_config["path"] = path + "/fader"
+            fader_config["label_active"] = ""
             
             fader_widget = self._create_custom_horizontal_fader(
                 fader_dial_frame, fader_config, base_mqtt_topic_from_path=base_mqtt_topic_from_path
@@ -129,7 +150,6 @@ class HorizontalDialValueCreatorMixin(
             dial_config["path"] = path + "/dial"
             dial_config["state_mirror_engine"] = self.state_mirror_engine
             dial_config["subscriber_router"] = self.subscriber_router
-            dial_config["label_active"] = label + " Dial"
             
             dial_widget = self._create_dial(fader_dial_frame, dial_config, base_mqtt_topic_from_path=base_mqtt_topic_from_path)
             dial_widget.grid(row=0, column=1, sticky="nsew", padx=(0, DEFAULT_PAD_X))
@@ -139,22 +159,6 @@ class HorizontalDialValueCreatorMixin(
                 dial_widget._prev_dial_val_for_wrap_detection = round(scaled_initial_decimal)
             else:
                 dial_widget._prev_dial_val_for_wrap_detection = 0
-
-
-            value_unit_frame = ttk.Frame(sub_frame)
-            value_unit_frame.pack(side=tk.TOP, fill=tk.X, expand=True)
-
-            units_label = ttk.Label(value_unit_frame, text=config_data.get("units", ""))
-            units_label.pack(side=tk.RIGHT, padx=(DEFAULT_PAD_X, DEFAULT_PAD_X))
-
-            entry = ttk.Entry(
-                value_unit_frame,
-                width=10,
-                style="Custom.TEntry",
-                textvariable=entry_string_var,
-                justify=tk.RIGHT,
-            )
-            entry.pack(side=tk.RIGHT, padx=(DEFAULT_PAD_X, 0))
 
             def update_widgets_from_main_var(*args):
                 try:

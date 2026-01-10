@@ -19,7 +19,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "id_string": { "value": "ID String", "type": "_Value" }
+                  "id_string": { "value": "ID String", "type": "_GuiValue" }
                 }
               }
             }
@@ -37,7 +37,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "error_msg": { "value": "Error", "type": "_Value" }
+                  "error_msg": { "value": "Error", "type": "_GuiValue" }
                 }
               }
             }

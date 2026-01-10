@@ -21,14 +21,14 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "range": { "value": "AUTO", "type": "_Value" },
-                  "resolution": { "value": "DEF", "type": "_Value" }
+                  "range": { "value": "AUTO", "type": "_GuiValue" },
+                  "resolution": { "value": "DEF", "type": "_GuiValue" }
                 }
               },
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "reading": { "value": "Measured Value", "type": "_Value" }
+                  "reading": { "value": "Measured Value", "type": "_GuiValue" }
                 }
               }
             }
@@ -47,14 +47,14 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "range": { "value": "AUTO", "type": "_Value" },
-                  "resolution": { "value": "DEF", "type": "_Value" }
+                  "range": { "value": "AUTO", "type": "_GuiValue" },
+                  "resolution": { "value": "DEF", "type": "_GuiValue" }
                 }
               },
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "reading": { "value": "Measured Value", "type": "_Value" }
+                  "reading": { "value": "Measured Value", "type": "_GuiValue" }
                 }
               }
             }
@@ -73,14 +73,14 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "range": { "value": "AUTO", "type": "_Value" },
-                  "resolution": { "value": "DEF", "type": "_Value" }
+                  "range": { "value": "AUTO", "type": "_GuiValue" },
+                  "resolution": { "value": "DEF", "type": "_GuiValue" }
                 }
               },
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "reading": { "value": "Measured Value", "type": "_Value" }
+                  "reading": { "value": "Measured Value", "type": "_GuiValue" }
                 }
               }
             }
@@ -99,14 +99,14 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "range": { "value": "AUTO", "type": "_Value" },
-                  "resolution": { "value": "DEF", "type": "_Value" }
+                  "range": { "value": "AUTO", "type": "_GuiValue" },
+                  "resolution": { "value": "DEF", "type": "_GuiValue" }
                 }
               },
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "reading": { "value": "Measured Value", "type": "_Value" }
+                  "reading": { "value": "Measured Value", "type": "_GuiValue" }
                 }
               }
             }
@@ -125,14 +125,14 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "range": { "value": "AUTO", "type": "_Value" },
-                  "resolution": { "value": "DEF", "type": "_Value" }
+                  "range": { "value": "AUTO", "type": "_GuiValue" },
+                  "resolution": { "value": "DEF", "type": "_GuiValue" }
                 }
               },
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "reading": { "value": "Measured Value", "type": "_Value" }
+                  "reading": { "value": "Measured Value", "type": "_GuiValue" }
                 }
               }
             }
@@ -156,7 +156,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "reading": { "value": "Buffer Value", "type": "_Value" }
+                  "reading": { "value": "Buffer Value", "type": "_GuiValue" }
                 }
               }
             }
@@ -174,7 +174,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "reading": { "value": "Stored Value", "type": "_Value" }
+                  "reading": { "value": "Stored Value", "type": "_GuiValue" }
                 }
               }
             }
@@ -198,7 +198,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "result": { "value": "Average", "type": "_Value" }
+                  "result": { "value": "Average", "type": "_GuiValue" }
                 }
               }
             }
@@ -216,7 +216,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "result": { "value": "Max", "type": "_Value" }
+                  "result": { "value": "Max", "type": "_GuiValue" }
                 }
               }
             }
@@ -234,7 +234,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "result": { "value": "Min", "type": "_Value" }
+                  "result": { "value": "Min", "type": "_GuiValue" }
                 }
               }
             }
@@ -264,8 +264,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "range": { "value": "AUTO", "type": "_Value" },
-                  "resolution": { "value": "DEF", "type": "_Value" }
+                  "range": { "value": "AUTO", "type": "_GuiValue" },
+                  "resolution": { "value": "DEF", "type": "_GuiValue" }
                 }
               }
             }
@@ -283,8 +283,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "range": { "value": "AUTO", "type": "_Value" },
-                  "resolution": { "value": "DEF", "type": "_Value" }
+                  "range": { "value": "AUTO", "type": "_GuiValue" },
+                  "resolution": { "value": "DEF", "type": "_GuiValue" }
                 }
               }
             }
@@ -302,8 +302,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "range": { "value": "AUTO", "type": "_Value" },
-                  "resolution": { "value": "DEF", "type": "_Value" }
+                  "range": { "value": "AUTO", "type": "_GuiValue" },
+                  "resolution": { "value": "DEF", "type": "_GuiValue" }
                 }
               }
             }
@@ -321,8 +321,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "probe_type": { "value": "TCouple", "type": "_Value" },
-                  "sensor_type": { "value": "K", "type": "_Value" }
+                  "probe_type": { "value": "TCouple", "type": "_GuiValue" },
+                  "sensor_type": { "value": "K", "type": "_GuiValue" }
                 }
               }
             }
@@ -346,7 +346,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "function": { "value": "NULL", "type": "_Value" }
+                  "function": { "value": "NULL", "type": "_GuiValue" }
                 }
               }
             }
@@ -364,7 +364,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "state": { "value": "ON", "type": "_Value" }
+                  "state": { "value": "ON", "type": "_GuiValue" }
                 }
               }
             }
@@ -382,7 +382,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "0", "type": "_Value" }
+                  "value": { "value": "0", "type": "_GuiValue" }
                 }
               }
             }
@@ -400,7 +400,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "0", "type": "_Value" }
+                  "value": { "value": "0", "type": "_GuiValue" }
                 }
               }
             }
@@ -418,7 +418,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "600", "type": "_Value" }
+                  "value": { "value": "600", "type": "_GuiValue" }
                 }
               }
             }
@@ -442,7 +442,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "source": { "value": "IMMediate", "type": "_Value" }
+                  "source": { "value": "IMMediate", "type": "_GuiValue" }
                 }
               }
             }
@@ -460,7 +460,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "delay": { "value": "0", "type": "_Value" }
+                  "delay": { "value": "0", "type": "_GuiValue" }
                 }
               }
             }
@@ -478,7 +478,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "count": { "value": "1", "type": "_Value" }
+                  "count": { "value": "1", "type": "_GuiValue" }
                 }
               }
             }
@@ -496,7 +496,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "count": { "value": "1", "type": "_Value" }
+                  "count": { "value": "1", "type": "_GuiValue" }
                 }
               }
             }
@@ -525,7 +525,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "range": { "value": "10", "type": "_Value" }
+                  "range": { "value": "10", "type": "_GuiValue" }
                 }
               }
             }
@@ -543,7 +543,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "nplc": { "value": "10", "type": "_Value" }
+                  "nplc": { "value": "10", "type": "_GuiValue" }
                 }
               }
             }
@@ -566,7 +566,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "state": { "value": "ON", "type": "_Value" }
+                  "state": { "value": "ON", "type": "_GuiValue" }
                 }
               }
             }
@@ -584,7 +584,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "filter": { "value": "20", "type": "_Value" }
+                  "filter": { "value": "20", "type": "_GuiValue" }
                 }
               }
             }
@@ -660,7 +660,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "string": { "value": "\"HELLO\"", "type": "_Value" }
+                  "string": { "value": "\"HELLO\"", "type": "_GuiValue" }
                 }
               }
             }
@@ -691,7 +691,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "idn_string": { "value": "Device ID", "type": "_Value" }
+                  "idn_string": { "value": "Device ID", "type": "_GuiValue" }
                 }
               }
             }
@@ -709,7 +709,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "error_msg": { "value": "Error Message", "type": "_Value" }
+                  "error_msg": { "value": "Error Message", "type": "_GuiValue" }
                 }
               }
             }

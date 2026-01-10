@@ -20,10 +20,10 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "Vpp": { "value": "Vpp", "type": "_Value" },
-                  "Vrms": { "value": "Vrms", "type": "_Value" },
-                  "Freq": { "value": "Freq", "type": "_Value" },
-                  "Duty": { "value": "Duty %", "type": "_Value" }
+                  "Vpp": { "value": "Vpp", "type": "_GuiValue" },
+                  "Vrms": { "value": "Vrms", "type": "_GuiValue" },
+                  "Freq": { "value": "Freq", "type": "_GuiValue" },
+                  "Duty": { "value": "Duty %", "type": "_GuiValue" }
                 }
               }
             }
@@ -52,7 +52,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "scale": { "value": "1.0", "type": "_Value" } }
+                "fields": { "scale": { "value": "1.0", "type": "_GuiValue" } }
               }
             }
           },
@@ -68,7 +68,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "offset": { "value": "0.0", "type": "_Value" } }
+                "fields": { "offset": { "value": "0.0", "type": "_GuiValue" } }
               }
             }
           },
@@ -84,7 +84,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "coupling": { "value": "DC", "type": "_Value" } }
+                "fields": { "coupling": { "value": "DC", "type": "_GuiValue" } }
               }
             }
           },
@@ -100,7 +100,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "atten": { "value": "10", "type": "_Value" } }
+                "fields": { "atten": { "value": "10", "type": "_GuiValue" } }
               }
             }
           },
@@ -116,7 +116,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "limit": { "value": "20M", "type": "_Value", "description": "20M or OFF" } }
+                "fields": { "limit": { "value": "20M", "type": "_GuiValue", "description": "20M or OFF" } }
               }
             }
           }

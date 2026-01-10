@@ -21,10 +21,10 @@
                 "type": "OcaBlock",
                 "description": "Measured Math Statistics",
                 "fields": {
-                  "math_vpp": { "value": "Math Vpp", "type": "_Value" },
-                  "math_vmax": { "value": "Math Vmax", "type": "_Value" },
-                  "math_vmin": { "value": "Math Vmin", "type": "_Value" },
-                 "math_avg": { "value": "Math Avg", "type": "_Value" }
+                  "math_vpp": { "value": "Math Vpp", "type": "_GuiValue" },
+                  "math_vmax": { "value": "Math Vmax", "type": "_GuiValue" },
+                  "math_vmin": { "value": "Math Vmin", "type": "_GuiValue" },
+                 "math_avg": { "value": "Math Avg", "type": "_GuiValue" }
                 }
               }
             }
@@ -57,7 +57,7 @@
                 "fields": {
                   "operation": {
                     "value": "FFT",
-                    "type": "_Value",
+                    "type": "_GuiValue",
                     "description": "ADD, SUBTract, MULTiply, INTegrate, DIFFerentiate, FFT"
                   }
                 }
@@ -114,7 +114,7 @@
                 "type": "OcaBlock",
                 "description": "Math Range Input",
                 "fields": {
-                  "range": { "value": "10.0", "type": "_Value", "description": "Full scale value" }
+                  "range": { "value": "10.0", "type": "_GuiValue", "description": "Full scale value" }
                 }
               }
             }
@@ -133,7 +133,7 @@
                 "type": "OcaBlock",
                 "description": "Math Offset Input",
                 "fields": {
-                  "offset": { "value": "0.0", "type": "_Value", "description": "Offset value" }
+                  "offset": { "value": "0.0", "type": "_GuiValue", "description": "Offset value" }
                 }
               }
             }
@@ -160,7 +160,7 @@
                 "fields": {
                   "window": {
                     "value": "RECTangular",
-                    "type": "_Value",
+                    "type": "_GuiValue",
                     "description": "RECTangular"
                   }
                 }
@@ -183,7 +183,7 @@
                 "fields": {
                   "window": {
                     "value": "HANNing",
-                    "type": "_Value",
+                    "type": "_GuiValue",
                     "description": "HANNing"
                   }
                 }
@@ -206,7 +206,7 @@
                 "fields": {
                   "window": {
                     "value": "FLATtop",
-                    "type": "_Value",
+                    "type": "_GuiValue",
                     "description": "FLATtop"
                   }
                 }
@@ -227,7 +227,7 @@
                 "type": "OcaBlock",
                 "description": "FFT Center Frequency Input",
                 "fields": {
-                  "frequency": { "value": "100000", "type": "_Value", "description": "Center Freq in Hz" }
+                  "frequency": { "value": "100000", "type": "_GuiValue", "description": "Center Freq in Hz" }
                 }
               }
             }
@@ -246,7 +246,7 @@
                 "type": "OcaBlock",
                 "description": "FFT Span Input",
                 "fields": {
-                  "span": { "value": "50000", "type": "_Value", "description": "Span in Hz" }
+                  "span": { "value": "50000", "type": "_GuiValue", "description": "Span in Hz" }
                 }
               }
             }
@@ -265,7 +265,7 @@
                 "type": "OcaBlock",
                 "description": "FFT Scale Input",
                 "fields": {
-                  "scale": { "value": "10", "type": "_Value", "description": "dB per division" }
+                  "scale": { "value": "10", "type": "_GuiValue", "description": "dB per division" }
                 }
               }
             }

@@ -19,12 +19,12 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "dir": { "value": "STATE", "type": "_Value", "description": "STATE, TRACE, etc." } }
+                "fields": { "dir": { "value": "STATE", "type": "_GuiValue", "description": "STATE, TRACE, etc." } }
               },
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "file_list": { "value": "File List", "type": "_Value" }
+                  "file_list": { "value": "File List", "type": "_GuiValue" }
                 }
               }
             }
@@ -53,7 +53,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "reg": { "value": "1", "type": "_Value", "description": "Register 1-9" } }
+                "fields": { "reg": { "value": "1", "type": "_GuiValue", "description": "Register 1-9" } }
               }
             }
           },
@@ -69,7 +69,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "reg": { "value": "1", "type": "_Value", "description": "Register 1-9" } }
+                "fields": { "reg": { "value": "1", "type": "_GuiValue", "description": "Register 1-9" } }
               }
             }
           }

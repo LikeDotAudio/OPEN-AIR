@@ -20,12 +20,12 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "ref_level": { "value": "Ref Lvl", "type": "_Value" },
-                  "scale_div": { "value": "dB/Div", "type": "_Value" },
-                  "atten": { "value": "Atten dB", "type": "_Value" },
-                  "atten_auto": { "value": "Auto (0/1)", "type": "_Value" },
-                  "units": { "value": "Unit", "type": "_Value" },
-                  "preamp": { "value": "Preamp (0/1)", "type": "_Value" }
+                  "ref_level": { "value": "Ref Lvl", "type": "_GuiValue" },
+                  "scale_div": { "value": "dB/Div", "type": "_GuiValue" },
+                  "atten": { "value": "Atten dB", "type": "_GuiValue" },
+                  "atten_auto": { "value": "Auto (0/1)", "type": "_GuiValue" },
+                  "units": { "value": "Unit", "type": "_GuiValue" },
+                  "preamp": { "value": "Preamp (0/1)", "type": "_GuiValue" }
                 }
               }
             }
@@ -55,7 +55,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "val": { "value": "0", "type": "_Value", "description": "Value in current Unit (e.g. dBm)" }
+                  "val": { "value": "0", "type": "_GuiValue", "description": "Value in current Unit (e.g. dBm)" }
                 }
               }
             }
@@ -73,7 +73,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "val": { "value": "10", "type": "_Value", "description": "dB per division" }
+                  "val": { "value": "10", "type": "_GuiValue", "description": "dB per division" }
                 }
               }
             }
@@ -97,7 +97,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "val": { "value": "10", "type": "_Value", "description": "dB (0 to 60)" }
+                  "val": { "value": "10", "type": "_GuiValue", "description": "dB (0 to 60)" }
                 }
               }
             }
@@ -135,7 +135,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "unit": { "value": "DBM", "type": "_Value", "description": "DBM, DBMV, DBUV, V, W" }
+                  "unit": { "value": "DBM", "type": "_GuiValue", "description": "DBM, DBMV, DBUV, V, W" }
                 }
               }
             }

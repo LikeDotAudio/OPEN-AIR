@@ -437,7 +437,7 @@ class GuiTableCreatorMixin:
             # Register the 'selected' topic
             selected_topic_path = path + "/selected"
             selected_var = tk.StringVar()  # This will hold a JSON string
-            selected_config = {"type": "_Value"}
+            selected_config = {"type": "_GuiValue"}
             self.state_mirror_engine.register_widget(
                 selected_topic_path,
                 selected_var,

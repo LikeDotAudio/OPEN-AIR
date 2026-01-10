@@ -21,23 +21,23 @@
             "fields": {
               "RBW_Hz": {
                 "value": "The resolution bandwidth in Hz.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "VBW_Hz": {
                 "value": "The video bandwidth in Hz.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "VBW_Auto_On": {
                 "value": "Boolean for VBW auto state.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Continuous_Mode_On": {
                 "value": "Boolean for continuous mode state.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Sweep_Time_s": {
                 "value": "The sweep time in seconds.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -66,12 +66,12 @@
             "fields": {
               "rbw_hz_value": {
                 "value": "100000",
-                "type": "_Value",
+                "type": "_GuiValue",
                 "description": "The SCPI input for RBW."
               },
               "vbw_hz_value": {
                 "value": "100000",
-                "type": "_Value",
+                "type": "_GuiValue",
                 "description": "The SCPI input for VBW."
               }
             }
@@ -100,7 +100,7 @@
             "fields": {
               "sweep_time_s": {
                 "value": "4",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -122,7 +122,7 @@
             "fields": {
               "hz_value": {
                 "value": "3000000",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -144,7 +144,7 @@
             "fields": {
               "hz_value": {
                 "value": "3000000",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }

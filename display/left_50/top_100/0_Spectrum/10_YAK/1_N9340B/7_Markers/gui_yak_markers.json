@@ -21,51 +21,51 @@
             "fields": {
               "Marker_1": {
                 "value": "Marker 1 Value in dBm",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Marker_2": {
                 "value": "Marker 2 Value in dBm",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Marker_3": {
                 "value": "Marker 3 Value in dBm",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Marker_4": {
                 "value": "Marker 4 Value in dBm",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Marker_5": {
                 "value": "Marker 5 Value in dBm",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Marker_6": {
                 "value": "Marker 6 Value in dBm",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Marker_1_X": {
                 "value": "Marker 1 Frequency in Hz",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Marker_2_X": {
                 "value": "Marker 2 Frequency in Hz",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Marker_3_X": {
                 "value": "Marker 3 Frequency in Hz",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Marker_4_X": {
                 "value": "Marker 4 Frequency in Hz",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Marker_5_X": {
                 "value": "Marker 5 Frequency in Hz",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "Marker_6_X": {
                 "value": "Marker 6 Frequency in Hz",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -94,7 +94,7 @@
             "fields": {
               "marker_number": {
                 "value": "1",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -117,7 +117,7 @@
             "fields": {
               "marker_number": {
                 "value": "1",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -140,11 +140,11 @@
             "fields": {
               "marker_number": {
                 "value": "1",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "x_value": {
                 "value": "123456789",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }

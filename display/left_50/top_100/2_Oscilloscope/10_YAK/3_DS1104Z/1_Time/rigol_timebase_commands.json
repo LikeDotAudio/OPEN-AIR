@@ -19,7 +19,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "scale": { "value": "0.001", "type": "_Value" } }
+                "fields": { "scale": { "value": "0.001", "type": "_GuiValue" } }
               }
             }
           },
@@ -35,7 +35,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "offset": { "value": "0.0", "type": "_Value" } }
+                "fields": { "offset": { "value": "0.0", "type": "_GuiValue" } }
               }
             }
           }

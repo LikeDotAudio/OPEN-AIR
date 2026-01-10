@@ -20,19 +20,19 @@
             "fields": {
               "start_freq": {
                 "value": "The current start frequency in Hz.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "stop_freq": {
                 "value": "The current stop frequency in Hz.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "center_freq": {
                 "value": "The current center frequency in Hz.",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "span_freq": {
                 "value": "The current span frequency in Hz.",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -61,11 +61,11 @@
             "fields": {
               "start_freq": {
                 "value": "12345678",
-                "type": "_Value"
+                "type": "_GuiValue"
               },
               "stop_freq": {
                 "value": "12345678",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -87,7 +87,7 @@
             "fields": {
               "hz_value": {
                 "value": "12345678",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -109,7 +109,7 @@
             "fields": {
               "hz_value": {
                 "value": "12345678",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }
@@ -131,7 +131,7 @@
             "fields": {
               "hz_value": {
                 "value": "987654321",
-                "type": "_Value"
+                "type": "_GuiValue"
               }
             }
           }

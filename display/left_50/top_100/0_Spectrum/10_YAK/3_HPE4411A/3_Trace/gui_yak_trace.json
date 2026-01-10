@@ -20,7 +20,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "trace_data": { "value": "Comma Separated Values", "type": "_Value" }
+                  "trace_data": { "value": "Comma Separated Values", "type": "_GuiValue" }
                 }
               }
             }
@@ -38,7 +38,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "trace_data": { "value": "Comma Separated Values", "type": "_Value" }
+                  "trace_data": { "value": "Comma Separated Values", "type": "_GuiValue" }
                 }
               }
             }
@@ -56,7 +56,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "trace_data": { "value": "Comma Separated Values", "type": "_Value" }
+                  "trace_data": { "value": "Comma Separated Values", "type": "_GuiValue" }
                 }
               }
             }

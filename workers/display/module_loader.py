@@ -176,6 +176,12 @@ class ModuleLoader:
                     json_config_path_str = str(json_config_path)
                     config_dict["json_path"] = json_config_path_str
 
+                    # Generate and add the base MQTT topic from the module's path
+                    base_topic = generate_topic_path_from_filepath(
+                        module_file_path, GLOBAL_PROJECT_ROOT
+                    )
+                    config_dict["base_mqtt_topic_from_path"] = base_topic
+
                 # Instantiate the class
                 # ✅ CRITICAL FIX: Pass 'json_config_path_str' as the second argument!
                 config_dict["app_instance"] = self.app_instance  # Add app_instance to config_dict

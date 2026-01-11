@@ -1,0 +1,29 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Operating Mode",
+    "examples": {     "fields": {
+      "type": "GuiButtonToggler",
+      "label_active": "Operating Mode",
+      "options": {
+        "Manual": {
+          "label_active": "MANUAL"
+        },
+        "Auto": {
+          "label_active": "AUTO",
+          "selected": true
+        },
+        "Semi-Auto": {
+          "label_active": "SEMI-AUTO"
+        }
+      },
+      "layout": {
+        "max_cols": 3,
+        "height": 50,
+        "font": 14,
+        "sticky": "nsew"
+      },
+      "notes": "Three modes, 'AUTO' is the default selection."
+    }
+  }
+}}

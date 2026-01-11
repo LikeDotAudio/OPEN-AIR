@@ -1,0 +1,17 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Pan L/R",
+    "examples": {     "fields": {
+      "type": "Panner",
+      "label_active": "Pan L/R",
+      "min": -100.0,
+      "max": 100.0,
+      "value_default": 0.0,
+      "width": 50,
+      "height": 50,
+      "indicator_color": "#007acc",
+      "notes": "Standard stereo panner, initially centered."
+    }
+  }
+}}

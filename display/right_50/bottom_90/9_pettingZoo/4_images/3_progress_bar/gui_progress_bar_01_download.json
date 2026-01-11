@@ -1,0 +1,19 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Download Progress",
+    "examples": {     "fields": {
+      "download_progress_bar": {
+        "title": "File Download",
+        "description": "Indicates the progress of a file download.",
+        "progress_bar": {
+          "type": "_ProgressBar",
+          "label_active": "Progress",
+          "max": 100,
+          "value_default": 25,
+          "notes": "Shows the progress of a download."
+        }
+      }
+    }
+  }
+}}

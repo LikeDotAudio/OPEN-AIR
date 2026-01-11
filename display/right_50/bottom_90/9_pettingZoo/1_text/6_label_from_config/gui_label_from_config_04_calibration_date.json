@@ -1,0 +1,12 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Last Calibrated",
+    "examples": {     "fields": {
+      "type": "LabelFromConfig",
+      "label_active": "Last Calibrated",
+      "value": "2026-01-01",
+      "notes": "Displays the date of the last calibration."
+    }
+  }
+}}

@@ -1,0 +1,11 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Camera Movement",
+    "examples": {     "fields": {
+      "type": "DirectionalButtons",
+      "label_active": "Camera Movement",
+      "notes": "Controls for moving a camera (up, down, left, right)."
+    }
+  }
+}}

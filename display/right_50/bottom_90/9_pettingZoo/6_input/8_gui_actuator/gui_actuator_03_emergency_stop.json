@@ -1,0 +1,18 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "STOPPING!",
+    "examples": {     "fields": {
+      "type": "GuiActuator",
+      "label": "STOP",
+      "label_active": "STOPPING!",
+      "label_inactive": "STOP",
+      "layout": {
+        "width": 150,
+        "height": 70,
+        "font": 18
+      },
+      "notes": "Large emergency stop button."
+    }
+  }
+}}

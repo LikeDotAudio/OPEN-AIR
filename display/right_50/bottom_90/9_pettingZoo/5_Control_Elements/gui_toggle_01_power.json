@@ -1,0 +1,25 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Power",
+    "examples": {     "fields": {
+      "type": "GuiButtonToggle",
+      "label_active": "Power",
+      "options": {
+        "ON": {
+          "label_active": "ON",
+          "selected": false
+        },
+        "OFF": {
+          "label_inactive": "OFF"
+        }
+      },
+      "layout": {
+        "width": 80,
+        "height": 40,
+        "font": 12
+      },
+      "notes": "A simple ON/OFF power toggle button."
+    }
+  }
+}}

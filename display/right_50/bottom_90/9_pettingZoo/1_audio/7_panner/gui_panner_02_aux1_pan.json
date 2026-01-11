@@ -1,0 +1,17 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Aux 1 Pan",
+    "examples": {     "fields": {
+      "type": "Panner",
+      "label_active": "Aux 1 Pan",
+      "min": -64.0,
+      "max": 64.0,
+      "value_default": -32.0,
+      "width": 60,
+      "height": 60,
+      "indicator_color": "#6464a3",
+      "notes": "Panner with a default position to the left."
+    }
+  }
+}}

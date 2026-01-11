@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Auto-Save ON",
+    "examples": {     "fields": {
+      "type": "GuiCheckbox",
+      "label_active": "Auto-Save ON",
+      "label_inactive": "Auto-Save OFF",
+      "value": true,
+      "notes": "Checkbox for auto-save functionality, enabled by default."
+    }
+  }
+}}

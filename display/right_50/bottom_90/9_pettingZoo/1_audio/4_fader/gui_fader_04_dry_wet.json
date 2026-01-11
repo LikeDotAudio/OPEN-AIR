@@ -1,0 +1,15 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Dry/Wet Mix",
+    "examples": {     "fields": {
+      "type": "Fader",
+      "label_active": "Dry/Wet Mix",
+      "min": 0,
+      "max": 1,
+      "value_default": 0.5,
+      "orientation": "horizontal",
+      "notes": "Fader for controlling the balance between dry and wet signals."
+    }
+  }
+}}

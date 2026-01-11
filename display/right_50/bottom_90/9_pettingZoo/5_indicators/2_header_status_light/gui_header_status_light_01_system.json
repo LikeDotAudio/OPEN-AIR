@@ -1,0 +1,11 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "System Status:",
+    "examples": {     "fields": {
+      "type": "HeaderStatusLight",
+      "label_active": "System Status:",
+      "notes": "Standard header status light, default placement."
+    }
+  }
+}}

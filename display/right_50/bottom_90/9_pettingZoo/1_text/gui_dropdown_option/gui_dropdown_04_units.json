@@ -1,0 +1,22 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Dropdown 04 Units",
+    "examples": {     "fields": {
+      "type": "GuiDropdownOption",
+      "label": "Units",
+      "options": {
+        "Celsius": {
+          "label_active": "Celsius",
+          "value": "C"
+        },
+        "Fahrenheit": {
+          "label_active": "Fahrenheit",
+          "value": "F",
+          "selected": true
+        }
+      },
+      "notes": "Switches between different units of measurement."
+    }
+  }
+}}

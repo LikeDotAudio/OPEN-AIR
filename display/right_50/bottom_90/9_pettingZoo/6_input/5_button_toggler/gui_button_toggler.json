@@ -1,0 +1,22 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Button Toggler",
+    "examples": {     "fields": {
+      "gui_button_toggler_examples": {
+        "title": "GUI Button Toggler Examples",
+        "description": "Examples of the GuiButtonToggler element.",
+        "simple_toggler": {
+          "type": "_GuiButtonToggle",
+          "options": [
+            "Option 1",
+            "Option 2",
+            "Option 3"
+          ],
+          "default_option": "Option 1",
+          "notes": "A simple toggler button that cycles through a list of options."
+        }
+      }
+    }
+  }
+}}

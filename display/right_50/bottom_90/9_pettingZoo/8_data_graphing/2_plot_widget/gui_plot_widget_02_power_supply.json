@@ -1,0 +1,37 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Plot Widget 02 Power Supply",
+    "examples": {     "fields": {
+      "type": "PlotWidget",
+      "title": "Power Supply Output",
+      "xlabel": "Sample",
+      "ylabel": "Value",
+      "grid": true,
+      "buffer_size": 150,
+      "width": 500,
+      "height": 350,
+      "datasets": [
+        {
+          "id": "voltage",
+          "label": "Voltage (V)",
+          "style": {
+            "line_color": "#c75450",
+            "line_width": 1
+          },
+          "initial_csv_data": "0,5.0\n1,5.1\n2,4.9\n3,5.0"
+        },
+        {
+          "id": "current",
+          "label": "Current (A)",
+          "style": {
+            "line_color": "#d18616",
+            "line_width": 1
+          },
+          "initial_csv_data": "0,0.5\n1,0.52\n2,0.48\n3,0.51"
+        }
+      ],
+      "notes": "Plotting two related data series dynamically."
+    }
+  }
+}}

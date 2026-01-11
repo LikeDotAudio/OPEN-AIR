@@ -1,0 +1,10 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Break Line 01 Section Separator",
+    "fields": {
+      "type": "BreakLine",
+      "notes": "Used to separate major sections of the GUI."
+    }
+  }
+}

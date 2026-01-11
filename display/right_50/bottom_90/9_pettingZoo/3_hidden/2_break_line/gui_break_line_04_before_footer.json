@@ -1,0 +1,10 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Break Line 04 Before Footer",
+    "fields": {
+      "type": "BreakLine",
+      "notes": "Placed before a footer section."
+    }
+  }
+}

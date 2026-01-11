@@ -1,0 +1,18 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "RUNNING",
+    "examples": {     "fields": {
+      "type": "GuiActuator",
+      "label": "START",
+      "label_active": "RUNNING",
+      "label_inactive": "START",
+      "layout": {
+        "width": 120,
+        "height": 50,
+        "font": 14
+      },
+      "notes": "Button to initiate a process, showing 'RUNNING' when active."
+    }
+  }
+}}

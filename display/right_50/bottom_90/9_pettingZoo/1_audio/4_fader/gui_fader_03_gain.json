@@ -1,0 +1,15 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gain",
+    "examples": {     "fields": {
+      "type": "Fader",
+      "label_active": "Gain",
+      "min": -12,
+      "max": 12,
+      "value_default": 0,
+      "orientation": "vertical",
+      "notes": "Vertical gain fader with a +/- 12dB range."
+    }
+  }
+}}

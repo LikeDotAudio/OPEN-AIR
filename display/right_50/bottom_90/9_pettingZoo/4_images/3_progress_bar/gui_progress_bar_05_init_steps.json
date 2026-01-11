@@ -1,0 +1,15 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Initialization Steps",
+    "examples": {     "fields": {
+      "type": "ProgressBar",
+      "label_active": "Initialization Steps",
+      "min": 0,
+      "max": 50,
+      "value_default": 40,
+      "units": "Steps",
+      "notes": "Progress bar tracking steps in an initialization process."
+    }
+  }
+}}

@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Vertical Meter 02 Stereo",
+    "examples": {     "fields": {
+      "type": "VerticalMeter",
+      "num_channels": 2,
+      "value_default": -10.5,
+      "id": "stereo_meter",
+      "notes": "Vertical meter for stereo audio levels, initial negative values."
+    }
+  }
+}}

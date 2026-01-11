@@ -1,0 +1,18 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Header Status Light",
+    "examples": {     "fields": {
+      "header_status_light_example": {
+        "title": "Header Status Light Example",
+        "description": "Example of the HeaderStatusLight element.",
+        "status_light": {
+          "type": "_HeaderStatusLight",
+          "label_active": "System Status",
+          "status": "green",
+          "notes": "A status light with a label."
+        }
+      }
+    }
+  }
+}}

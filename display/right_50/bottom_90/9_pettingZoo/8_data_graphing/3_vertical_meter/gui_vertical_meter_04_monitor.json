@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Vertical Meter 04 Monitor",
+    "examples": {     "fields": {
+      "type": "VerticalMeter",
+      "num_channels": 8,
+      "value_default": 12.34,
+      "id": "monitor_meter",
+      "notes": "An 8-channel meter for comprehensive monitoring."
+    }
+  }
+}}

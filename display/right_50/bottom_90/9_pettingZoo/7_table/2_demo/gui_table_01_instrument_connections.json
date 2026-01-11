@@ -1,0 +1,32 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Instrument Connections",
+    "examples": {     "examples": {     "fields": {
+      "type": "GuiTable",
+      "label_active": "Instrument Connections",
+      "height": 8,
+      "headers": [
+        "Resource",
+        "Model",
+        "Serial",
+        "Status"
+      ],
+      "data": {
+        "USB0::0x0957::0x0607::MY44026369::0::INSTR": {
+          "Resource": "USB0::0x0957::0x0607::MY44026369::0::INSTR",
+          "Model": "34401A",
+          "Serial": "MY44026369",
+          "Status": "Connected"
+        },
+        "GPIB0::22::INSTR": {
+          "Resource": "GPIB0::22::INSTR",
+          "Model": "E3631A",
+          "Serial": "0N11111",
+          "Status": "Disconnected"
+        }
+      },
+      "notes": "A table showing basic instrument connection details."
+    }
+  }
+}}}

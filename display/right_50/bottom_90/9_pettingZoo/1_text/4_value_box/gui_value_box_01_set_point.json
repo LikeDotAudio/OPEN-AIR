@@ -1,0 +1,18 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Set Point",
+    "examples": {     "fields": {
+      "type": "ValueBox",
+      "label_active": "Set Point",
+      "value": "25.0",
+      "units": "\u00b0C",
+      "layout": {
+        "width": 150,
+        "height": 30,
+        "font": 12
+      },
+      "notes": "An editable box for setting a numerical value with units."
+    }
+  }
+}}

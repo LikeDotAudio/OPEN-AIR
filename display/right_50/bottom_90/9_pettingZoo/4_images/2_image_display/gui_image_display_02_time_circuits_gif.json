@@ -1,0 +1,12 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Time Circuits (GIF)",
+    "fields": {
+      "type": "_GuiImage",
+      "label_active": "Time Circuits (GIF)",
+      "path": "assets/images/time_circuits.gif",
+      "notes": "A GIF animation of the time circuits."
+    }
+  }
+}

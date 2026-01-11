@@ -1,0 +1,34 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Active Channels",
+    "examples": {     "fields": {
+      "type": "GuiListbox",
+      "label_active": "Active Channels",
+      "options": {
+        "ch1": {
+          "label_active": "Channel 1",
+          "value": "CH1",
+          "active": "true"
+        },
+        "ch2": {
+          "label_active": "Channel 2",
+          "value": "CH2",
+          "active": "true",
+          "selected": true
+        },
+        "ch3": {
+          "label_active": "Channel 3",
+          "value": "CH3",
+          "active": "false"
+        },
+        "ch4": {
+          "label_active": "Channel 4",
+          "value": "CH4",
+          "active": "true"
+        }
+      },
+      "notes": "Listbox where some channels are initially inactive."
+    }
+  }
+}}

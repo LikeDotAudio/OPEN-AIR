@@ -1,0 +1,43 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Plot Widget 05 Multi Channel",
+    "examples": {     "fields": {
+      "type": "PlotWidget",
+      "title": "Multi-Channel Data",
+      "xlabel": "Index",
+      "ylabel": "Value",
+      "grid": true,
+      "buffer_size": 80,
+      "width": 550,
+      "height": 380,
+      "datasets": [
+        {
+          "id": "ch1",
+          "label": "Channel 1",
+          "style": {
+            "line_color": "#007acc",
+            "line_width": 2
+          }
+        },
+        {
+          "id": "ch2",
+          "label": "Channel 2",
+          "style": {
+            "line_color": "#6464a3",
+            "line_width": 1
+          }
+        },
+        {
+          "id": "ch3",
+          "label": "Channel 3",
+          "style": {
+            "line_color": "#ce9178",
+            "line_width": 3
+          }
+        }
+      ],
+      "notes": "Demonstrates plotting several datasets with varied visual properties."
+    }
+  }
+}}

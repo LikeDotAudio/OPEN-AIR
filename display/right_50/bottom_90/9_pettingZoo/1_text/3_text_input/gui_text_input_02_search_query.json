@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Search",
+    "examples": {     "fields": {
+      "type": "TextInput",
+      "label_active": "Search",
+      "value_default": "",
+      "font_size": 14,
+      "notes": "Input field for entering search queries."
+    }
+  }
+}}

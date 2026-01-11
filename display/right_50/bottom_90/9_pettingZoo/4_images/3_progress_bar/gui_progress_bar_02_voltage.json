@@ -1,0 +1,20 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Voltage Indicator",
+    "examples": {     "fields": {
+      "voltage_progress_bar": {
+        "title": "Voltage Level",
+        "description": "Displays current voltage level.",
+        "progress_bar": {
+          "type": "_ProgressBar",
+          "label_active": "Voltage",
+          "max": 12.0,
+          "value_default": 7.5,
+          "unit": "V",
+          "notes": "Progress bar for voltage display."
+        }
+      }
+    }
+  }
+}}

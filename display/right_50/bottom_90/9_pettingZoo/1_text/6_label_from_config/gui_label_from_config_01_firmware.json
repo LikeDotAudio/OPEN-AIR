@@ -1,0 +1,12 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Firmware Version",
+    "examples": {     "fields": {
+      "type": "LabelFromConfig",
+      "label_active": "Firmware Version",
+      "value": "1.2.3",
+      "notes": "Displays firmware version from a config file."
+    }
+  }
+}}

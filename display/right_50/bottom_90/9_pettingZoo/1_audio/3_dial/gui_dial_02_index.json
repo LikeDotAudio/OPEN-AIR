@@ -1,0 +1,15 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Index",
+    "examples": {     "fields": {
+      "type": "Dial",
+      "label_active": "Index",
+      "value_default": 500.0,
+      "width": 60,
+      "height": 60,
+      "indicator_color": "#c75450",
+      "notes": "Dial representing a position or index value."
+    }
+  }
+}}

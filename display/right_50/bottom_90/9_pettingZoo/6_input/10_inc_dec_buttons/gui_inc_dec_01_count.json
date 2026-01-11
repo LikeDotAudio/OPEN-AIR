@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Count:",
+    "examples": {     "fields": {
+      "type": "IncDecButtons",
+      "label_active": "Count:",
+      "value_default": 0,
+      "increment": 1,
+      "notes": "Simple increment/decrement counter."
+    }
+  }
+}}

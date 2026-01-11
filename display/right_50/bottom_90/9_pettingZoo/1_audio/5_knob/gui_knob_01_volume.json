@@ -1,0 +1,17 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Vol",
+    "examples": {     "fields": {
+      "type": "Knob",
+      "label_active": "Vol",
+      "min": 0.0,
+      "max": 100.0,
+      "value_default": 70.0,
+      "width": 50,
+      "height": 50,
+      "indicator_color": "#996633",
+      "notes": "Standard volume knob."
+    }
+  }
+}}

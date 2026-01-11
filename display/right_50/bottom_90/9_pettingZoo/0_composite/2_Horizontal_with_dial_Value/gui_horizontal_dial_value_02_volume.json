@@ -1,0 +1,16 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Master Vol",
+    "examples": {     "fields": {
+      "type": "_Horizontal_with_dial_Value",
+      "label_active": "Master Vol",
+      "min": 0.0,
+      "max": 100.0,
+      "value": 75.3,
+      "step": 0.1,
+      "units": "%",
+      "notes": "Volume control with fader for coarse, dial for fine adjustment."
+    }
+  }
+}}

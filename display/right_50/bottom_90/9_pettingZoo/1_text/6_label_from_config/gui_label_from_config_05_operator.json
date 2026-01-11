@@ -1,0 +1,12 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Operator",
+    "examples": {     "fields": {
+      "type": "LabelFromConfig",
+      "label_active": "Operator",
+      "value": "John Doe",
+      "notes": "Shows the name of the current operator."
+    }
+  }
+}}

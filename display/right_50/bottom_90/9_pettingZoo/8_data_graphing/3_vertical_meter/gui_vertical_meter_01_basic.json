@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Vertical Meter 01 Basic",
+    "examples": {     "fields": {
+      "type": "VerticalMeter",
+      "num_channels": 4,
+      "value_default": 0.0,
+      "id": "basic_meter",
+      "notes": "A standard 4-channel vertical meter, all values initially zero."
+    }
+  }
+}}

@@ -1,0 +1,31 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Plot Widget 03 Audio Spectrum",
+    "examples": {     "fields": {
+      "type": "PlotWidget",
+      "title": "Audio Spectrum",
+      "xlabel": "Frequency (Hz)",
+      "ylabel": "Amplitude (dB)",
+      "xlim_min": 20,
+      "xlim_max": 20000,
+      "ylim_min": -100,
+      "ylim_max": 0,
+      "grid": true,
+      "buffer_size": 500,
+      "width": 600,
+      "height": 400,
+      "datasets": [
+        {
+          "id": "spectrum",
+          "label": "FFT Output",
+          "style": {
+            "line_color": "#dcdcaa",
+            "line_width": 1
+          }
+        }
+      ],
+      "notes": "Plot for displaying high-frequency data, wide axis range."
+    }
+  }
+}}

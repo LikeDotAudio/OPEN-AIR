@@ -1,0 +1,27 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Plot Widget 04 Realtime Sensor",
+    "examples": {     "fields": {
+      "type": "PlotWidget",
+      "title": "Real-time Sensor Data",
+      "xlabel": "Time",
+      "ylabel": "Sensor Reading",
+      "grid": true,
+      "buffer_size": 100,
+      "width": 450,
+      "height": 320,
+      "datasets": [
+        {
+          "id": "sensor_a",
+          "label": "Sensor A",
+          "style": {
+            "line_color": "#6a9955",
+            "line_width": 1
+          }
+        }
+      ],
+      "notes": "Plot designed for receiving data exclusively via MQTT updates."
+    }
+  }
+}}

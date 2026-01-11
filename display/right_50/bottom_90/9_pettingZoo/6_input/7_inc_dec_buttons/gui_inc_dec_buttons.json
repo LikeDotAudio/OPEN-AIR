@@ -1,0 +1,26 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Inc Dec Buttons",
+    "examples": {     "fields": {
+      "inc_dec_buttons_examples": {
+        "title": "Increment/Decrement Buttons Examples",
+        "description": "Examples of the IncDecButtons element.",
+        "simple_inc_dec": {
+          "type": "_IncDecButtons",
+          "label_active": "Counter",
+          "notes": "Simple increment and decrement buttons."
+        },
+        "inc_dec_with_range_and_increment": {
+          "type": "_IncDecButtons",
+          "label_active": "Fine control",
+          "min": 0,
+          "max": 1,
+          "value_default": 0.5,
+          "increment": 0.1,
+          "notes": "Increment and decrement buttons with a specified range and increment."
+        }
+      }
+    }
+  }
+}}

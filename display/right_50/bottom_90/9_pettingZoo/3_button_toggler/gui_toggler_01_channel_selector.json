@@ -1,0 +1,31 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Select Channel",
+    "examples": {     "fields": {
+      "type": "GuiButtonToggler",
+      "label_active": "Select Channel",
+      "options": {
+        "CH1": {
+          "label_active": "CH1",
+          "selected": true
+        },
+        "CH2": {
+          "label_active": "CH2"
+        },
+        "CH3": {
+          "label_active": "CH3"
+        },
+        "CH4": {
+          "label_active": "CH4"
+        }
+      },
+      "layout": {
+        "max_cols": 2,
+        "height": 40,
+        "font": 12
+      },
+      "notes": "A 4-channel selector, with CH1 initially active."
+    }
+  }
+}}

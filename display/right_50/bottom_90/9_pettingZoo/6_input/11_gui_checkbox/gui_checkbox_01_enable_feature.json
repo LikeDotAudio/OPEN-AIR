@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Feature Enabled",
+    "examples": {     "fields": {
+      "type": "GuiCheckbox",
+      "label_active": "Feature Enabled",
+      "label_inactive": "Feature Disabled",
+      "value": false,
+      "notes": "Checkbox to enable/disable a specific feature."
+    }
+  }
+}}

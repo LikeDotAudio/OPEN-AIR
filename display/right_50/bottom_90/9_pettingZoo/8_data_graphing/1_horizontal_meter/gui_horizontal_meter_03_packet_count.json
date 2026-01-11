@@ -1,0 +1,14 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Horizontal Meter 03 Packet Count",
+    "examples": {     "fields": {
+      "type": "HorizontalMeter",
+      "title": "Packet Count",
+      "max_integer_value": 1000,
+      "value_default": 876.12,
+      "id": "packet_meter",
+      "notes": "Meter for large integer values with decimal precision."
+    }
+  }
+}}

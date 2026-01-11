@@ -1,0 +1,10 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Break Line 05 After Header",
+    "fields": {
+      "type": "BreakLine",
+      "notes": "Placed after a header section."
+    }
+  }
+}

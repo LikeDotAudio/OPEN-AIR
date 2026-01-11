@@ -29,6 +29,7 @@ class GuiWidgetFactoryMixin:
             # Standard Widgets
             "_sliderValue": self._create_slider_value,
             "_Horizontal_with_dial_Value": self._create_horizontal_dial_value,
+            "HorizontalWithValue": self._create_horizontal_dial_value,
             "_GuiButtonToggle": self._create_gui_button_toggle,
             "_GuiButtonToggler": self._create_gui_button_toggler,
             "_GuiDropDownOption": self._create_gui_dropdown_option,

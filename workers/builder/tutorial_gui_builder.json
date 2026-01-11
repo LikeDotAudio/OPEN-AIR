@@ -12,244 +12,376 @@
   "gui_element_types": {
     "title": "GUI Element Types",
     "description": "Here are the available GUI element types and their configurations.",
-    "_OcaBlock": {
+    "notes": "The 'notes' field is available for every element. It is ignored by the builder but can be used for logging or leaving comments in the JSON file.",
+    "OcaBlock": {
       "description": "A container for other elements. It creates a labeled frame.",
       "example": {
         "my_block": {
           "type": "OcaBlock",
           "description": "This is a container for other elements.",
+          "notes": "OcaBlocks are the main way to group elements.",
           "fields": {
           }
         }
       }
     },
-    "_GuiActuator": {
+    "GuiActuator": {
       "description": "A button that triggers a message. The message is defined in the `message_details` of a parent `OcaBlock`.",
       "example": {
         "my_actuator_block": {
           "type": "OcaBlock",
           "message_details": {
             "MY_DEVICE_MODEL": {
-              "type": "_GuiActuator",
+              "type": "GuiActuator",
               "trigger": false,
               "command_value": "SYSTEM:PRESET"
             }
           },
+          "notes": "The message_details can be different for each device model.",
           "fields": {}
         }
       }
     },
-    "_Value": {
+    "Value": {
       "description": "A non-editable field to display a value. This can be a static text or a value updated from a device.",
       "example": {
         "my_value": {
-          "type": "_Value",
-
-          "value": "Initial Value"
+          "type": "Value",
+          "value": "Initial Value",
+          "notes": "This is a read-only field."
         }
       }
     },
-    "_sliderValue": {
+    "sliderValue": {
         "description": "A slider with a corresponding value display. It is used to set a numerical value within a range.",
         "example": {
             "my_slider": {
-                "type": "_sliderValue",
+                "type": "sliderValue",
                 "label_active": "My Slider",
                 "value_default": 50,
                 "value_min": 0,
                 "value_max": 100,
-                "value_increment": 1
+                "value_increment": 1,
+                "notes": "A composite control combining a slider and a value box."
             }
         }
     },
-    "_GuiButtonToggle": {
+    "GuiButtonToggle": {
         "description": "A button that can be toggled on and off, representing a boolean state.",
         "example": {
             "my_toggle_button": {
-                "type": "_GuiButtonToggle",
+                "type": "GuiButtonToggle",
                 "label_active": "Toggle Me",
                 "label_inactive": "Toggle Me",
-                "state_default": false
+                "state_default": false,
+                "notes": "Ideal for simple on/off states."
             }
         }
     },
-    "_GuiButtonToggler": {
+    "GuiButtonToggler": {
         "description": "A button that cycles through a list of options.",
         "example": {
             "my_toggler_button": {
-                "type": "_GuiButtonToggler",
+                "type": "GuiButtonToggler",
                 "options": ["Option 1", "Option 2", "Option 3"],
-                "default_option": "Option 1"
+                "default_option": "Option 1",
+                "notes": "Use this for a smaller number of mutually exclusive choices."
             }
         }
     },
-    "_GuiDropDownOption": {
+    "GuiDropDownOption": {
         "description": "A dropdown menu to select from a list of options.",
         "example": {
             "my_dropdown": {
-                "type": "_GuiDropDownOption",
+                "type": "GuiDropDownOption",
                 "options": ["Choice A", "Choice B", "Choice C"],
-                "default_option": "Choice A"
+                "default_option": "Choice A",
+                "notes": "Better for a longer list of choices."
             }
         }
     },
-    "_GuiCheckbox": {
+    "GuiCheckbox": {
         "description": "A standard checkbox to represent a boolean state.",
         "example": {
             "my_checkbox": {
-                "type": "_GuiCheckbox",
+                "type": "GuiCheckbox",
                 "label_active": "Enable Feature",
-                "state_default": true
+                "state_default": true,
+                "notes": "A classic way to represent a boolean choice."
             }
         }
     },
-    "_GuiListbox": {
+    "GuiListbox": {
         "description": "A listbox to display a list of items. Items can be selected.",
         "example": {
             "my_listbox": {
-                "type": "_GuiListbox",
+                "type": "GuiListbox",
                 "items": ["Item 1", "Item 2", "Item 3"],
-                "default_selection": 0
+                "default_selection": 0,
+                "notes": "Allows for single or multiple selections (not yet implemented)."
             }
         }
     },
-    "_Label": {
+    "Label": {
         "description": "A simple text label.",
         "example": {
             "my_label": {
-                "type": "_Label",
-                "label_active": "This is a label"
+                "type": "Label",
+                "label_active": "This is a label",
+                "notes": "Used for static text."
             }
         }
     },
-    "_ProgressBar": {
+    "LabelFromConfig": {
+      "description": "A label whose text is sourced from the config.ini file.",
+      "example": {
+        "my_config_label": {
+          "type": "LabelFromConfig",
+          "section": "MySection",
+          "option": "MyOption",
+          "notes": "The text will be the value of MyOption in the MySection section of config.ini."
+        }
+      }
+    },
+    "ProgressBar": {
         "description": "A progress bar to display the progress of a task. It can have units, min/max values, and a scale.",
         "example": {
             "my_progress_bar": {
-                "type": "_ProgressBar",
+                "type": "ProgressBar",
                 "label_active": "Download Progress",
                 "value_default": 0,
                 "min": 0,
                 "max": 100,
-                "units": "%"
+                "units": "%",
+                "notes": "Visually represents a value in a range."
             }
         }
     },
-    "_TextInput": {
+    "TextInput": {
         "description": "A single-line text input field for user-entered text.",
         "example": {
             "my_text_input": {
-                "type": "_TextInput",
+                "type": "TextInput",
                 "label_active": "Enter your name",
-                "value_default": ""
+                "value_default": "",
+                "notes": "For user-provided text."
             }
         }
     },
-    "_WebLink": {
+    "WebLink": {
         "description": "A clickable label that opens a URL in a web browser.",
         "example": {
             "my_web_link": {
-                "type": "_WebLink",
+                "type": "WebLink",
                 "label_active": "Visit our website",
-                "url": "https://www.example.com"
+                "url": "https://www.example.com",
+                "notes": "Opens a link in the default web browser."
             }
         }
     },
-    "_ImageDisplay": {
+    "ImageDisplay": {
         "description": "A widget to display a static image.",
         "example": {
             "my_image": {
-                "type": "_ImageDisplay",
+                "type": "ImageDisplay",
                 "label_active": "My Image",
-                "image_path": "path/to/your/image.png"
+                "image_path": "path/to/your/image.png",
+                "notes": "Supports various image formats."
             }
         }
     },
-    "_AnimationDisplay": {
+    "AnimationDisplay": {
         "description": "A widget to display a specific frame of a GIF animation based on an input value.",
         "example": {
             "my_animation": {
-                "type": "_AnimationDisplay",
+                "type": "AnimationDisplay",
                 "label_active": "My Animation",
-                "gif_path": "path/to/your/animation.gif"
+                "gif_path": "path/to/your/animation.gif",
+                "notes": "The frame of the GIF is controlled by an input value."
             }
         }
     },
-    "_VUMeter": {
+    "VUMeter": {
         "description": "A VU meter to display a value on a scale with a red zone.",
         "example": {
             "my_vu_meter": {
-                "type": "_VUMeter",
+                "type": "VUMeter",
                 "label_active": "Audio Level",
                 "min": -20,
                 "max": 3,
                 "upper_range": 0,
-                "value_default": -20
+                "value_default": -20,
+                "notes": "A simple bar-style VU meter."
             }
         }
     },
-    "_Fader": {
+    "Fader": {
         "description": "A vertical or horizontal slider for controlling a value, styled like a fader on a mixing console.",
         "example": {
             "my_fader": {
-                "type": "_Fader",
+                "type": "Fader",
                 "label_active": "Volume",
                 "min": 0,
                 "max": 100,
                 "value_default": 75,
-                "orientation": "vertical"
+                "orientation": "vertical",
+                "notes": "A standard slider widget."
             }
         }
     },
-    "_Knob": {
+    "Knob": {
         "description": "A circular knob for controlling a value, like on an audio mixer.",
         "example": {
             "my_knob": {
-                "type": "_Knob",
+                "type": "Knob",
                 "label_active": "Pan",
                 "min": -100,
                 "max": 100,
-                "value_default": 0
+                "value_default": 0,
+                "notes": "A rotary control for a numerical value."
             }
         }
     },
-    "_IncDecButtons": {
+    "IncDecButtons": {
         "description": "A set of buttons to increment or decrement a numerical value.",
         "example": {
             "my_counter": {
-                "type": "_IncDecButtons",
+                "type": "IncDecButtons",
                 "label_active": "Counter",
                 "value_default": 0,
-                "increment": 1
+                "increment": 1,
+                "notes": "Simple +/- buttons for a value."
             }
         }
     },
-    "_DirectionalButtons": {
+    "DirectionalButtons": {
         "description": "A set of four buttons for directional control (Up, Down, Left, Right).",
         "example": {
             "my_directional_pad": {
-                "type": "_DirectionalButtons",
-                "label_active": "Move"
+                "type": "DirectionalButtons",
+                "label_active": "Move",
+                "notes": "A D-pad style control."
             }
         }
     },
-    "_CustomFader": {
+    "CustomFader": {
         "description": "A custom-drawn fader for controlling a value.",
         "example": {
             "my_custom_fader": {
-                "type": "_CustomFader",
-                "label_active": "Custom Fader"
+                "type": "CustomFader",
+                "label_active": "Custom Fader",
+                "notes": "A fader with a custom look and feel."
             }
         }
     },
-    "_NeedleVUMeter": {
+    "CustomHorizontalFader": {
+      "description": "A custom-drawn horizontal fader.",
+      "example": {
+        "my_custom_horizontal_fader": {
+          "type": "CustomHorizontalFader",
+          "label_active": "Custom Horizontal Fader",
+          "notes": "A horizontal version of the CustomFader."
+        }
+      }
+    },
+    "Dial": {
+      "description": "A rotary dial control.",
+      "example": {
+        "my_dial": {
+          "type": "Dial",
+          "label_active": "Dial",
+          "notes": "Similar to a knob, but with a different visual style."
+        }
+      }
+    },
+    "NeedleVUMeter": {
         "description": "A classic analog-style VU meter with a needle.",
         "example": {
             "my_needle_vu": {
-                "type": "_NeedleVUMeter",
-                "label_active": "Classic VU"
+                "type": "NeedleVUMeter",
+                "label_active": "Classic VU",
+                "notes": "An analog-style meter for a more vintage look."
             }
         }
+    },
+    "Panner": {
+      "description": "A stereo panner control.",
+      "example": {
+        "my_panner": {
+          "type": "Panner",
+          "label_active": "Panner",
+          "notes": "Controls the left/right balance of an audio signal."
+        }
+      }
+    },
+    "TrapezoidButton": {
+      "description": "A button with a trapezoidal shape.",
+      "example": {
+        "my_trapezoid_button": {
+          "type": "TrapezoidButton",
+          "label_active": "Trapezoid",
+          "notes": "A button with a unique shape for visual distinction."
+        }
+      }
+    },
+    "TrapezoidToggler": {
+      "description": "A toggling button with a trapezoidal shape.",
+      "example": {
+        "my_trapezoid_toggler": {
+          "type": "TrapezoidToggler",
+          "label_active": "Trap Toggler",
+          "notes": "A toggle button with a trapezoidal shape."
+        }
+      }
+    },
+    "HorizontalWithValue": {
+      "description": "A composite control with a horizontal dial and a value display.",
+      "example": {
+        "my_horizontal_with_value": {
+          "type": "HorizontalWithValue",
+          "label_active": "Horizontal Control",
+          "notes": "A compact control for a single value."
+        }
+      }
+    },
+    "DynamicGraph": {
+      "description": "A widget for plotting dynamic data.",
+      "example": {
+        "my_dynamic_graph": {
+          "type": "DynamicGraph",
+          "label_active": "Live Data Feed",
+          "notes": "Used for real-time data visualization."
+        }
+      }
+    },
+    "BreakLine": {
+      "description": "A horizontal line to visually separate elements.",
+      "example": {
+        "my_break_line": {
+          "type": "BreakLine",
+          "notes": "A simple visual separator."
+        }
+      }
+    },
+    "HeaderStatusLight": {
+      "description": "A status light for display in the header.",
+      "example": {
+        "my_header_light": {
+          "type": "HeaderStatusLight",
+          "label_active": "Status",
+          "notes": "Indicates a status in the main header of the application."
+        }
+      }
+    },
+    "DynamicGuiTable": {
+      "description": "A table for displaying and editing data.",
+      "example": {
+        "my_dynamic_table": {
+          "type": "DynamicGuiTable",
+          "label_active": "My Data Table",
+          "notes": "A powerful widget for tabular data."
+        }
+      }
     }
   },
   "layout_guide": {
@@ -259,21 +391,24 @@
         "main_horizontal_layout": {
             "type": "OcaBlock",
             "description": "Main Layout",
+            "notes": "This block contains two columns.",
             "fields": {
                 "column_1": {
                     "type": "OcaBlock",
                     "description": "Column 1",
+                    "notes": "The first column.",
                     "fields": {
-                        "item_1_1": { "type": "_Label", "label_active": "Item 1.1" },
-                        "item_1_2": { "type": "_Label", "label_active": "Item 1.2" }
+                        "item_1_1": { "type": "Label", "label_active": "Item 1.1" },
+                        "item_1_2": { "type": "Label", "label_active": "Item 1.2" }
                     }
                 },
                 "column_2": {
                     "type": "OcaBlock",
                     "description": "Column 2",
+                    "notes": "The second column.",
                     "fields": {
-                        "item_2_1": { "type": "_Label", "label_active": "Item 2.1" },
-                        "item_2_2": { "type": "_Label", "label_active": "Item 2.2" }
+                        "item_2_1": { "type": "Label", "label_active": "Item 2.1" },
+                        "item_2_2": { "type": "Label", "label_active": "Item 2.2" }
                     }
                 }
             }
@@ -292,17 +427,19 @@
         "my_settings_panel": {
             "type": "OcaBlock",
             "description": "My Settings",
+            "notes": "A settings panel with user and application settings.",
             "fields": {
                 "user_settings": {
                     "type": "OcaBlock",
                     "description": "User",
+                    "notes": "A group for user-specific settings.",
                     "fields": {
                         "name": {
-                            "type": "_TextInput",
+                            "type": "TextInput",
                             "label_active": "Name"
                         },
                         "email": {
-                            "type": "_TextInput",
+                            "type": "TextInput",
                             "label_active": "Email"
                         }
                     }
@@ -310,9 +447,10 @@
                 "application_settings": {
                     "type": "OcaBlock",
                     "description": "Application",
+                    "notes": "A group for application-level settings.",
                     "fields": {
                         "theme": {
-                            "type": "_GuiDropDownOption",
+                            "type": "GuiDropDownOption",
                             "options": ["Light", "Dark"],
                             "label_active": "Theme"
                         }
@@ -331,224 +469,154 @@
         "description": "Trace Control for Multiple Devices",
         "message_details": {
           "MODEL-X1": {
-            "type": "_GuiActuator",
+            "type": "GuiActuator",
             "trigger": false,
             "command_value": "TRACE:MODE MAX"
           },
           "MODEL-X2": {
-            "type": "_GuiActuator",
+            "type": "GuiActuator",
             "trigger": false,
             "command_value": "TRAC:MODE MAXH"
           }
         },
+        "notes": "The correct command will be chosen based on the device model.",
         "fields": {}
       }
     }
   },
-      "message_messages_guide": {
-          "title": "How to Build an Array of Messages",
-          "description": "You can create complex commands with variable parts. Use `inputs` to define GUI elements that will provide values for the command string. Use `outputs` to display the data returned from the device.",
-          "example": {
-              "set_level": {
-                  "type": "OcaBlock",
-                  "message_details": {
-                      "MODEL-A": {
-                          "type": "_GuiActuator",
-                          "trigger": false,
-                          "command_value": "LEVEL:SET <level>"
-                      },
-                      "MODEL-B": {
-                          "type": "_GuiActuator",
-                          "trigger": false,
-                          "command_value": "SET LEVEL <level>"
-                      },
-                      "MODEL-C": {
-                          "type": "_GuiActuator",
-                          "trigger": false,
-                          "command_value": "LEVEL=<level>"
+  "message_messages_guide": {
+      "title": "How to Build an Array of Messages",
+      "description": "You can create complex commands with variable parts. Use `inputs` to define GUI elements that will provide values for the command string. Use `outputs` to display the data returned from the device.",
+      "example": {
+          "set_level": {
+              "type": "OcaBlock",
+              "message_details": {
+                  "MODEL-A": {
+                      "type": "GuiActuator",
+                      "trigger": false,
+                      "command_value": "LEVEL:SET <level>"
+                  },
+                  "MODEL-B": {
+                      "type": "GuiActuator",
+                      "trigger": false,
+                      "command_value": "SET LEVEL <level>"
+                  },
+                  "MODEL-C": {
+                      "type": "GuiActuator",
+                      "trigger": false,
+                      "command_value": "LEVEL=<level>"
+                  }
+              },
+              "notes": "The '<level>' part of the command will be replaced with the value from the slider.",
+              "fields": {
+                  "inputs": {
+                      "type": "OcaBlock",
+                      "fields": {
+                          "level": {
+                              "type": "sliderValue",
+                              "value_default": 5,
+                              "value_min": 0,
+                              "value_max": 10,
+                              "value_increment": 1
+                          }
                       }
                   },
-                  "fields": {
-                      "inputs": {
-                          "type": "OcaBlock",
-                          "fields": {
-                              "level": {
-                                  "type": "_sliderValue",
-                                  "value_default": 5,
-                                  "value_min": 0,
-                                  "value_max": 10,
-                                  "value_increment": 1
-                              }
-                          }
-                      },
-                      "outputs": {
-                          "type": "OcaBlock",
-                          "fields": {
-                              "status": {
-                                  "type": "_Value",
-
-                                  "value": "Command sent."
-                              }
+                  "outputs": {
+                      "type": "OcaBlock",
+                      "fields": {
+                          "status": {
+                              "type": "Value",
+                              "value": "Command sent."
                           }
                       }
                   }
               }
           }
-      },
-      "audio_console_example": {
-          "title": "8-Channel Audio Console Example",
-          "description": "This example demonstrates how to create an 8-channel audio console using faders, knobs, and VU meters.",
-          "example": {
-              "audio_console": {
-                  "type": "OcaBlock",
-                  "description": "8-Channel Audio Console",
-                  "fields": {
-                      "channel_1": {
-                          "type": "OcaBlock",
-                          "description": "Channel 1",
-                          "fields": {
-                              "vu_meter": {
-                                  "type": "_VUMeter",
-                                  "label_active": "Level"
-                              },
-                              "fader": {
-                                  "type": "_Fader",
-                                  "label_active": "Volume"
-                              },
-                              "pan": {
-                                  "type": "_Knob",
-                                  "label_active": "Pan"
-                              }
-                          }
-                      },
-                      "channel_2": {
-                          "type": "OcaBlock",
-                          "description": "Channel 2",
-                          "fields": {
-                              "vu_meter": {
-                                  "type": "_VUMeter",
-                                  "label_active": "Level"
-                              },
-                              "fader": {
-                                  "type": "_Fader",
-                                  "label_active": "Volume"
-                              },
-                              "pan": {
-                                  "type": "_Knob",
-                                  "label_active": "Pan"
-                              }
-                          }
-                      },
-                      "channel_3": {
-                          "type": "OcaBlock",
-                          "description": "Channel 3",
-                          "fields": {
-                              "vu_meter": {
-                                  "type": "_VUMeter",
-                                  "label_active": "Level"
-                              },
-                              "fader": {
-                                  "type": "_Fader",
-                                  "label_active": "Volume"
-                              },
-                              "pan": {
-                                  "type": "_Knob",
-                                  "label_active": "Pan"
-                              }
-                          }
-                      },
-                      "channel_4": {
-                          "type": "OcaBlock",
-                          "description": "Channel 4",
-                          "fields": {
-                              "vu_meter": {
-                                  "type": "_VUMeter",
-                                  "label_active": "Level"
-                              },
-                              "fader": {
-                                  "type": "_Fader",
-                                  "label_active": "Volume"
-                              },
-                              "pan": {
-                                  "type": "_Knob",
-                                  "label_active": "Pan"
-                              }
-                          }
-                      },
-                      "channel_5": {
-                          "type": "OcaBlock",
-                          "description": "Channel 5",
-                          "fields": {
-                              "vu_meter": {
-                                  "type": "_VUMeter",
-                                  "label_active": "Level"
-                              },
-                              "fader": {
-                                  "type": "_Fader",
-                                  "label_active": "Volume"
-                              },
-                              "pan": {
-                                  "type": "_Knob",
-                                  "label_active": "Pan"
-                              }
-                          }
-                      },
-                      "channel_6": {
-                          "type": "OcaBlock",
-                          "description": "Channel 6",
-                          "fields": {
-                              "vu_meter": {
-                                  "type": "_VUMeter",
-                                  "label_active": "Level"
-                              },
-                              "fader": {
-                                  "type": "_Fader",
-                                  "label_active": "Volume"
-                              },
-                              "pan": {
-                                  "type": "_Knob",
-                                  "label_active": "Pan"
-                              }
-                          }
-                      },
-                      "channel_7": {
-                          "type": "OcaBlock",
-                          "description": "Channel 7",
-                          "fields": {
-                              "vu_meter": {
-                                  "type": "_VUMeter",
-                                  "label_active": "Level"
-                              },
-                              "fader": {
-                                  "type": "_Fader",
-                                  "label_active": "Volume"
-                              },
-                              "pan": {
-                                  "type": "_Knob",
-                                  "label_active": "Pan"
-                              }
-                          }
-                      },
-                      "channel_8": {
-                          "type": "OcaBlock",
-                          "description": "Channel 8",
-                          "fields": {
-                              "vu_meter": {
-                                  "type": "_VUMeter",
-                                  "label_active": "Level"
-                              },
-                              "fader": {
-                                  "type": "_Fader",
-                                  "label_active": "Volume"
-                              },
-                              "pan": {
-                                  "type": "_Knob",
-                                  "label_active": "Pan"
-                              }
-                          }
+      }
+  },
+  "audio_console_example": {
+      "title": "8-Channel Audio Console Example",
+      "description": "This example demonstrates how to create an 8-channel audio console using faders, knobs, and VU meters.",
+      "example": {
+          "audio_console": {
+              "type": "OcaBlock",
+              "description": "8-Channel Audio Console",
+              "notes": "This is a complex example showing how to build a larger UI.",
+              "fields": {
+                  "channel_1": {
+                      "type": "OcaBlock",
+                      "description": "Channel 1",
+                      "fields": {
+                          "vu_meter": { "type": "VUMeter", "label_active": "Level" },
+                          "fader": { "type": "Fader", "label_active": "Volume" },
+                          "pan": { "type": "Knob", "label_active": "Pan" }
+                      }
+                  },
+                  "channel_2": {
+                      "type": "OcaBlock",
+                      "description": "Channel 2",
+                      "fields": {
+                          "vu_meter": { "type": "VUMeter", "label_active": "Level" },
+                          "fader": { "type": "Fader", "label_active": "Volume" },
+                          "pan": { "type": "Knob", "label_active": "Pan" }
+                      }
+                  },
+                  "channel_3": {
+                      "type": "OcaBlock",
+                      "description": "Channel 3",
+                      "fields": {
+                          "vu_meter": { "type": "VUMeter", "label_active": "Level" },
+                          "fader": { "type": "Fader", "label_active": "Volume" },
+                          "pan": { "type": "Knob", "label_active": "Pan" }
+                      }
+                  },
+                  "channel_4": {
+                      "type": "OcaBlock",
+                      "description": "Channel 4",
+                      "fields": {
+                          "vu_meter": { "type": "VUMeter", "label_active": "Level" },
+                          "fader": { "type": "Fader", "label_active": "Volume" },
+                          "pan": { "type": "Knob", "label_active": "Pan" }
+                      }
+                  },
+                  "channel_5": {
+                      "type": "OcaBlock",
+                      "description": "Channel 5",
+                      "fields": {
+                          "vu_meter": { "type": "VUMeter", "label_active": "Level" },
+                          "fader": { "type": "Fader", "label_active": "Volume" },
+                          "pan": { "type": "Knob", "label_active": "Pan" }
+                      }
+                  },
+                  "channel_6": {
+                      "type": "OcaBlock",
+                      "description": "Channel 6",
+                      "fields": {
+                          "vu_meter": { "type": "VUMeter", "label_active": "Level" },
+                          "fader": { "type": "Fader", "label_active": "Volume" },
+                          "pan": { "type": "Knob", "label_active": "Pan" }
+                      }
+                  },
+                  "channel_7": {
+                      "type": "OcaBlock",
+                      "description": "Channel 7",
+                      "fields": {
+                          "vu_meter": { "type": "VUMeter", "label_active": "Level" },
+                          "fader": { "type": "Fader", "label_active": "Volume" },
+                          "pan": { "type": "Knob", "label_active": "Pan" }
+                      }
+                  },
+                  "channel_8": {
+                      "type": "OcaBlock",
+                      "description": "Channel 8",
+                      "fields": {
+                          "vu_meter": { "type": "VUMeter", "label_active": "Level" },
+                          "fader": { "type": "Fader", "label_active": "Volume" },
+                          "pan": { "type": "Knob", "label_active": "Pan" }
                       }
                   }
               }
           }
       }
   }
+}

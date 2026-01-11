@@ -1,0 +1,17 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Mic Input Level",
+    "examples": {     "fields": {
+      "type": "_VUMeter",
+      "label_active": "Mic Input Level",
+      "min": -30.0,
+      "max": 0.0,
+      "value_default": -10.0,
+      "upper_range": -6.0,
+      "width": 150,
+      "height": 15,
+      "notes": "A smaller VU meter suitable for microphone input monitoring."
+    }
+  }
+}}

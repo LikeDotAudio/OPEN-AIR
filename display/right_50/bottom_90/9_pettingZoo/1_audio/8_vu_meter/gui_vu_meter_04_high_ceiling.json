@@ -1,0 +1,17 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "High Ceiling VU",
+    "examples": {     "fields": {
+      "type": "_VUMeter",
+      "label_active": "High Ceiling VU",
+      "min": -10.0,
+      "max": 10.0,
+      "value_default": 0.0,
+      "upper_range": 3.0,
+      "width": 250,
+      "height": 25,
+      "notes": "A VU meter with a higher ceiling, useful for tracking signals that go into positive gain."
+    }
+  }
+}}

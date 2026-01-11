@@ -1,0 +1,17 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Master Output VU",
+    "examples": {     "fields": {
+      "type": "_VUMeter",
+      "label_active": "Master Output VU",
+      "min": -20.0,
+      "max": 3.0,
+      "value_default": -5.0,
+      "upper_range": 0.0,
+      "width": 200,
+      "height": 20,
+      "notes": "A standard VU meter for audio output."
+    }
+  }
+}}

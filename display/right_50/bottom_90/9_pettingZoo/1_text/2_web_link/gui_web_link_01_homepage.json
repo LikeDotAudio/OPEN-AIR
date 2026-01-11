@@ -1,0 +1,12 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Visit Project Homepage",
+    "examples": {     "fields": {
+      "type": "WebLink",
+      "label_active": "Visit Project Homepage",
+      "url": "https://www.like.audio/project",
+      "notes": "Link to the main project website."
+    }
+  }
+}}

@@ -1,0 +1,16 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Decay",
+    "examples": {     "fields": {
+      "type": "_Horizontal_with_dial_Value",
+      "label_active": "Decay",
+      "min": 0.0,
+      "max": 10.0,
+      "value": 5.0,
+      "step": 1.0,
+      "units": "s",
+      "notes": "Reverb decay control, integer steps only (dial will be inactive)."
+    }
+  }
+}}

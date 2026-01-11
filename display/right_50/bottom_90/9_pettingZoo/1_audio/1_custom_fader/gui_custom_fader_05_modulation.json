@@ -1,0 +1,17 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Modulation Depth",
+    "examples": {     "fields": {
+      "type": "_CustomFader",
+      "label_active": "Modulation Depth",
+      "min": 0.0,
+      "max": 1.0,
+      "value_default": 0.5,
+      "log_exponent": 1.0,
+      "width": 80,
+      "height": 220,
+      "notes": "Custom fader for controlling modulation depth."
+    }
+  }
+}}

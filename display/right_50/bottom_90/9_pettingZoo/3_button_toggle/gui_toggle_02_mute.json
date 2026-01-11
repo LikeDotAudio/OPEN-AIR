@@ -1,0 +1,25 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Mute",
+    "examples": {     "fields": {
+      "type": "GuiButtonToggle",
+      "label_active": "Mute",
+      "options": {
+        "ON": {
+          "label_active": "MUTED",
+          "selected": true
+        },
+        "OFF": {
+          "label_inactive": "UNMUTED"
+        }
+      },
+      "layout": {
+        "width": 90,
+        "height": 45,
+        "font": 14
+      },
+      "notes": "Mute button, starts in the MUTED state."
+    }
+  }
+}}

@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20250821.200641.1
+# Version 20260110.2105.5
 
 import os
 import tkinter as tk
@@ -47,18 +47,20 @@ class GuiButtonToggleCreatorMixin:
     #     ttk.Frame: The created frame containing the toggle button, or None on failure.
     def _create_gui_button_toggle(
         self, parent_widget, config_data, **kwargs
-    ):  # Updated signature
-        print(f"--- DEBUG: _create_gui_button_toggle entered for label: {config_data.get('label_active')} ---")
+    ):  
+        current_function_name = inspect.currentframe().f_code.co_name
+        
+        # Extract label early for logging
+        label = config_data.get("label_active", "Unknown_Label")
+        
+        # 1. Debug Entry
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(
-                message=f"DEBUG (Toggle Button - Entry): app_constants.global_settings['debug_enabled'] is {app_constants.global_settings['debug_enabled']}",
+                message=f"🧪 Great Scott! Entering '{current_function_name}' for label: {label}",
                 **_get_log_args(),
             )
-        """Creates a single button that toggles between two states (e.g., ON/OFF)."""
-        current_function_name = inspect.currentframe().f_code.co_name
 
         # Extract only widget-specific config from config_data
-        label = config_data.get("label_active")
         config = config_data  # config_data is the config
         path = config_data.get("path")  # Path for this widget
 
@@ -69,13 +71,15 @@ class GuiButtonToggleCreatorMixin:
 
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(
-                message=f"🔬⚡️ Entering '{current_function_name}' to engineer a toggle button for '{label}'.",
+                message=f"🔬⚡️ Engineering toggle button mechanism for '{label}'...",
                 **_get_log_args(),
             )
 
         try:
-            sub_frame = ttk.Frame(parent_widget)  # Use parent_widget here
+            # Create the container frame
+            sub_frame = ttk.Frame(parent_widget)
 
+            # Parse Options
             options_map = config.get("options", {})
             on_config = options_map.get("ON", {})
             off_config = options_map.get("OFF", {})
@@ -83,164 +87,169 @@ class GuiButtonToggleCreatorMixin:
             off_text = off_config.get("label_inactive", "OFF")
 
             is_on = options_map.get("ON", {}).get("selected", False)
-
             state_var = tk.BooleanVar(value=is_on)
 
             # Get layout parameters
             layout = config.get("layout", {})
             button_height_from_layout = layout.get("height")
             button_width_from_layout = layout.get("width")
-            button_font_size_from_layout = layout.get("font") # New: Get font size from layout
-            button_sticky = layout.get("sticky", "nsew") # Default to nsew for fill
+            button_font_size_from_layout = layout.get("font", 10) # Default to 10 if missing
+            button_sticky = layout.get("sticky", "nsew") 
 
             if app_constants.global_settings["debug_enabled"]:
                 debug_logger(
-                    message=f"DEBUG (Toggle Button): Layout height: {button_height_from_layout}, width: {button_width_from_layout}, font: {button_font_size_from_layout}",
+                    message=f"🧐 Layout Analysis: H={button_height_from_layout}, W={button_width_from_layout}, Font={button_font_size_from_layout}",
                     **_get_log_args(),
                 )
 
-            # Configure sub_frame dimensions based on layout
+            # --- Frame Sizing Logic ---
             if button_width_from_layout is not None or button_height_from_layout is not None:
-                if app_constants.global_settings["debug_enabled"]:
-                    debug_logger(
-                        message=f"DEBUG (Toggle Button): Calling sub_frame.pack_propagate(False)",
-                        **_get_log_args(),
-                    )
                 sub_frame.pack_propagate(False) # Stop sub_frame from resizing to content
 
                 if button_height_from_layout is not None:
                     sub_frame.config(height=button_height_from_layout)
-                    if app_constants.global_settings["debug_enabled"]:
-                        debug_logger(
-                            message=f"DEBUG (Toggle Button): Configured sub_frame height: {button_height_from_layout}",
-                            **_get_log_args(),
-                        )
 
                 if button_width_from_layout is not None:
                     sub_frame.config(width=button_width_from_layout)
-                    if app_constants.global_settings["debug_enabled"]:
-                        debug_logger(
-                            message=f"DEBUG (Toggle Button): Configured sub_frame width: {button_width_from_layout}",
-                            **_get_log_args(),
-                        )
-                elif button_height_from_layout is not None: # Height is present, but width is not
-                    # Calculate width based on text + 40px margin
+                elif button_height_from_layout is not None: 
+                    # Height is present, but width is not. Calculate width.
                     current_button_text = on_text if is_on else off_text
                     try:
                         style = ttk.Style()
                         font_name = style.lookup('TButton', 'font')
                         if font_name:
-                            # Create a Font object to measure text
                             button_font = tkFont.Font(font=font_name)
                             text_pixel_width = button_font.measure(current_button_text)
-                            desired_sub_frame_width = text_pixel_width + 40 # text width + 20px on each side
+                            desired_sub_frame_width = text_pixel_width + 40 
                             sub_frame.config(width=desired_sub_frame_width)
-                            if app_constants.global_settings["debug_enabled"]:
-                                debug_logger(
-                                    message=f"DEBUG (Toggle Button): Calculated desired width for text '{current_button_text}': {desired_sub_frame_width}",
-                                    **_get_log_args(),
-                                )
                         else:
                             sub_frame.config(width=100) # Fallback
-                            if app_constants.global_settings["debug_enabled"]:
-                                debug_logger(
-                                    message=f"DEBUG (Toggle Button): Fallback width 100 (font_name not found)",
-                                    **_get_log_args(),
-                                )
                     except Exception as e:
                         sub_frame.config(width=100) # Fallback
-                        if app_constants.global_settings["debug_enabled"]:
-                            debug_logger(
-                                message=f"DEBUG (Toggle Button): Fallback width 100 (exception during font measure: {e})",
-                                **_get_log_args(),
-                            )
 
-    # Configure the style for the button, including font.
-    # Define a generic font family and fallback if style.lookup fails or is not available.
-    font_family = "TkDefaultFont"
-    font_slant = "roman"
-    font_weight_normal = "normal"
+            # --- Style & Font Configuration ---
+            if path:
+                safe_path = path.replace("/", "_").replace(".", "_").replace(" ", "_").replace(":", "_")
+            else:
+                safe_path = f"gen_{id(sub_frame)}"
+                
+            unique_style_name = f"{safe_path}.Custom.TButton"
+            unique_selected_style_name = f"{safe_path}.Selected.Custom.TButton"
 
-    try:
-        style = ttk.Style()
-        font_config = style.lookup('TButton', 'font')
-        if font_config:
-            temp_font = tkFont.Font(font=font_config)
-            font_family = temp_font.actual("family")
-            font_slant = temp_font.actual("slant")
-            # Attempt to get default weight, fallback to "normal"
-            font_weight_normal = temp_font.actual("weight") if "weight" in temp_font.actual() else "normal"
-    except Exception as e:
-        if app_constants.global_settings["debug_enabled"]:
-            debug_logger(
-                message=f"WARNING (Toggle Button): Could not lookup base TButton font: {e}. Using default.",
-                **_get_log_args(),
+            font_family = "TkDefaultFont"
+            font_slant = "roman"
+            font_weight_normal = "normal"
+
+            try:
+                style = ttk.Style()
+                # Lookup base font properties
+                font_config = style.lookup('TButton', 'font')
+                if font_config:
+                    temp_font = tkFont.Font(font=font_config)
+                    font_family = temp_font.actual("family")
+                    font_slant = temp_font.actual("slant")
+                    font_weight_normal = temp_font.actual("weight") if "weight" in temp_font.actual() else "normal"
+            except Exception as e:
+                if app_constants.global_settings["debug_enabled"]:
+                    debug_logger(
+                        message=f"⚠️ Warning: Could not lookup base TButton font: {e}. Using defaults.",
+                        **_get_log_args(),
+                    )
+
+            # Define fonts
+            inactive_font_tuple = (font_family, button_font_size_from_layout, font_weight_normal, font_slant)
+            active_font_tuple = (font_family, button_font_size_from_layout, "bold", font_slant)
+
+            # Configure Styles
+            
+            # 1. Normal (Inactive) Style
+            if not style.layout(unique_style_name):
+                 style.layout(unique_style_name, style.layout("TButton"))
+                 
+            style.configure(unique_style_name, font=inactive_font_tuple)
+            style.map(unique_style_name, font=[('active', active_font_tuple), ('!active', inactive_font_tuple)])
+
+            # 2. Selected (Active) Style - NOW WITH ORANGE!
+            if not style.layout(unique_selected_style_name):
+                 style.layout(unique_selected_style_name, style.layout("TButton"))
+
+            # Base configuration for Selected State
+            style.configure(unique_selected_style_name, 
+                font=active_font_tuple,
+                background="orange",
+                foreground="black"
             )
-        # Fallback to defaults if lookup fails
+            
+            # Map for hover/active states on the Selected button to keep it Orange-ish
+            style.map(unique_selected_style_name,
+                background=[('active', 'dark orange'), ('!active', 'orange')],
+                foreground=[('active', 'black'), ('!active', 'black')]
+            )
+            
+            if app_constants.global_settings["debug_enabled"]:
+                debug_logger(
+                    message=f"🎨 Styled '{unique_selected_style_name}' to be ORANGE when active!",
+                    **_get_log_args(),
+                )
 
-    # Define inactive font (normal weight)
-    inactive_font_tuple = (font_family, button_font_size_from_layout, font_weight_normal, font_slant)
+            # --- Create Button ---
+            # Initial style based on state
+            initial_style = unique_selected_style_name if is_on else unique_style_name
+            
+            button = ttk.Button(
+                sub_frame, 
+                text=on_text if is_on else off_text, 
+                style=initial_style
+            )
+            
+            # Packing the button
+            button.pack(expand=True, fill='both')
 
-    # Define active font (bold weight)
-    active_font_tuple = (font_family, button_font_size_from_layout, "bold", font_slant)
+            # Debug dimensions
+            if app_constants.global_settings["debug_enabled"]:
+                try:
+                    parent_widget.winfo_toplevel().update_idletasks() 
+                    debug_logger(
+                        message=f"📏 Sub_frame dimensions: W={sub_frame.winfo_width()}, H={sub_frame.winfo_height()}",
+                        **_get_log_args(),
+                    )
+                except Exception:
+                    pass 
 
-    # Configure the 'Custom.TButton' style for inactive state
-    style.configure("Custom.TButton", font=inactive_font_tuple)
-    if app_constants.global_settings["debug_enabled"]:
-        debug_logger(
-            message=f"DEBUG (Toggle Button): Configured 'Custom.TButton' inactive style font to: {inactive_font_tuple}",
-            **_get_log_args(),
-        )
-
-    # Map the font for 'active' state to be bold
-    style.map("Custom.TButton", font=[('active', active_font_tuple), ('!active', inactive_font_tuple)])
-    if app_constants.global_settings["debug_enabled"]:
-        debug_logger(
-            message=f"DEBUG (Toggle Button): Mapped 'Custom.TButton' active style font to: {active_font_tuple}",
-            **_get_log_args(),
-        )
-
-    # Create the ttk.Button. Explicitly set style to "Custom.TButton"
-    button = ttk.Button(sub_frame, text=on_text if is_on else off_text, style="Custom.TButton")
-
-    # Update the display of sub_frame's actual dimensions if debug is enabled
-    if app_constants.global_settings["debug_enabled"]:
-        app_root.update_idletasks()  # Process all pending events to ensure widgets are updated
-        debug_logger(
-            message=f"DEBUG (Toggle Button): Actual sub_frame dimensions after configuration: width={sub_frame.winfo_width()}, height={sub_frame.winfo_height()}",
-            **_get_log_args(),
-        )
+            # --- Internal Handlers ---
 
             def update_button_state(*args):
-
                 # Updates the button's appearance based on its current state.
                 current_state = state_var.get()
-                if (
-                    current_state
-                ):  # Correct logic: The button is ON, so use the 'Selected' style.
-                    button.config(text=on_text, style="Custom.Selected.TButton")
-                else:  # The button is OFF, so use the default 'TButton' style.
-                    button.config(text=off_text, style="Custom.TButton")
+                if current_state:  
+                    # Button is ON (Orange)
+                    button.config(text=on_text, style=unique_selected_style_name)
+                else:  
+                    # Button is OFF (Default)
+                    button.config(text=off_text, style=unique_style_name)
 
             def on_button_click(event):
-                # Shift key is bit 1 of the state mask
+                # Shift key is bit 1 of the state mask (0x0001)
                 is_shift_pressed = (event.state & 0x0001) != 0
 
                 if is_shift_pressed:
-                    # Latching behavior: if it's already on, do nothing. If it's off, turn it on and keep it on.
+                    # Latching behavior
                     if not state_var.get():
                         state_var.set(True)
                 else:
                     # Normal toggle behavior
                     state_var.set(not state_var.get())
 
+            # --- Binding & Wiring ---
             button.bind("<Button-1>", on_button_click)
-            update_button_state()  # Set initial text and style
+            
+            # Ensure visual state matches var immediately
+            update_button_state() 
 
             if path:
                 self.topic_widgets[path] = (state_var, update_button_state)
 
-                # --- New MQTT Wiring ---
+                # --- MQTT Wiring ---
                 widget_id = path
 
                 # 1. Register widget
@@ -254,7 +263,7 @@ class GuiButtonToggleCreatorMixin:
                 )
                 bind_variable_trace(state_var, callback)
 
-                # 3. Also trace changes to update the button state
+                # 3. Also trace changes to update the button state (Local GUI update)
                 state_var.trace_add("write", update_button_state)
 
                 # 4. Subscribe to topic for incoming messages
@@ -269,18 +278,16 @@ class GuiButtonToggleCreatorMixin:
 
             if app_constants.global_settings["debug_enabled"]:
                 debug_logger(
-                    message=f"✅ SUCCESS! The toggle button '{label}' is alive!",
+                    message=f"✅ SUCCESS! The toggle button '{label}' is alive, bound, and ORANGE-READY!",
                     **_get_log_args(),
                 )
+                
             return sub_frame
 
         except Exception as e:
-            debug_logger(
-                message=f"❌ Error in {current_function_name} for '{label}': {e}"
-            )
             if app_constants.global_settings["debug_enabled"]:
                 debug_logger(
-                    message=f"💥 KABOOM! The toggle button for '{label}' went into a paradoxical state! Error: {e}",
+                    message=f"❌💥 KABOOM! The toggle button for '{label}' went into a paradoxical state! Error: {e}",
                     **_get_log_args(),
                 )
             return None

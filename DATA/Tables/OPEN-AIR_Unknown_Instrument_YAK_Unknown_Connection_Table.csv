@@ -1,2 +1,2 @@
 type,resource_string,ip_address,interface_port,gpib_address,status,manufacturer,model,serial_number,firmware,idn_string,device_type,notes,allocated,connection_timestamp
-GATEWAY,"TCPIP::44.44.44.222::gpib7,5::INSTR",44.44.44.222,gpib7,5,Unresponsive,Unknown,Unknown,Unknown,Unknown,,Unknown Instrument,Not in Knowledge Base,False,2026-01-11T00:51:13.793420
+GATEWAY,"TCPIP::44.44.44.222::gpib7,5::INSTR",44.44.44.222,gpib7,5,Unresponsive,Unknown,Unknown,Unknown,Unknown,,Unknown Instrument,Not in Knowledge Base,False,2026-01-11T15:09:02.432548

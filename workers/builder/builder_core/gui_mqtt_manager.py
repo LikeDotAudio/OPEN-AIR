@@ -18,7 +18,7 @@ import orjson
 from workers.mqtt.mqtt_topic_utils import get_topic, generate_topic_path_from_filepath
 from workers.logger.logger import debug_logger
 from workers.logger.log_utils import _get_log_args
-from workers.setup.path_initializer import GLOBAL_PROJECT_ROOT
+from workers.setup.worker_project_paths import GLOBAL_PROJECT_ROOT
 
 
 class GuiMqttManagerMixin:

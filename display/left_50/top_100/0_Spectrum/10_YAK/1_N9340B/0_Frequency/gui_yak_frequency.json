@@ -2,6 +2,7 @@
   "NAB_Settings": {
     "type": "OcaBlock",
     "description": "NAB Frequency Monitoring",
+    "show_label": false,
     "fields": {
       "NAB_Frequency_settings": {
         "type": "OcaBlock",
@@ -10,6 +11,8 @@
           "Execute Command": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
+            "label_active": "Get Frequency Settings",
+            "label_inactive": "Get Frequency Settings",
             "active": true,
             "trigger": false,
             "message": ":FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?",
@@ -19,20 +22,29 @@
             "type": "OcaBlock",
             "fields": {
               "start_freq": {
+                "label": "Start Frequency (Hz)",
                 "value": "The current start frequency in Hz.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "unit": "Hz"
+                
               },
               "stop_freq": {
+                "label": "Stop Frequency (Hz)",
                 "value": "The current stop frequency in Hz.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "unit": "Hz"
               },
               "center_freq": {
+                "label": "Center Frequency (Hz)",
                 "value": "The current center frequency in Hz.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "unit": "Hz"
               },
               "span_freq": {
+                "label": "Span Frequency (Hz)",
                 "value": "The current span frequency in Hz.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "unit": "Hz"
               }
             }
           }
@@ -51,6 +63,8 @@
           "Execute Command": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
+            "label_active": "Set Start and Stop Frequency",
+            "label_inactive": "Set Start and Stop Frequency",
             "active": true,
             "trigger": false,
             "message": ":FREQuency:STARt <start_freq>;:FREQuency:STOP <stop_freq>",
@@ -60,12 +74,16 @@
             "type": "OcaBlock",
             "fields": {
               "start_freq": {
+                "label": "Start Frequency (Hz)",
                 "value": "12345678",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "unit": "Hz"
               },
               "stop_freq": {
+                "label": "Stop Frequency (Hz)",
                 "value": "12345678",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "unit": "Hz"
               }
             }
           }
@@ -86,8 +104,10 @@
             "type": "OcaBlock",
             "fields": {
               "hz_value": {
+                "label": "Span Frequency (Hz)",
                 "value": "12345678",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "unit": "Hz"
               }
             }
           }
@@ -99,6 +119,7 @@
           "Execute Command": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
+            "label": "Set Start Frequency",
             "active": true,
             "trigger": false,
             "message": ":FREQuency:STARt <hz_value>",
@@ -108,8 +129,10 @@
             "type": "OcaBlock",
             "fields": {
               "hz_value": {
+                "label": "Start Frequency (Hz)",
                 "value": "12345678",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "unit": "Hz"
               }
             }
           }
@@ -123,6 +146,8 @@
             "AES70": "OcaBooleanActuator",
             "active": true,
             "trigger": false,
+            "label_active": "Set Stop Frequency",
+            "label_inactive": "Set Stop Frequency",
             "message": ":FREQuency:STOP <hz_value>",
             "layout": { "height": 30, "sticky": "" }
           },
@@ -131,7 +156,8 @@
             "fields": {
               "hz_value": {
                 "value": "987654321",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "unit": "Hz"
               }
             }
           }

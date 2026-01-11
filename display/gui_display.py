@@ -464,7 +464,7 @@ class Application(ttk.Frame):
                     sub_dir_path = panel_info["path"]
 
                     # --- 🗺️ Objective 1: Temporal Crawler ---
-                    if not self.layout_parser._scan_for_flux_capacitors(sub_dir_path):
+                    if not self.layout_parser._scan_for_gui_files(sub_dir_path):
                         if app_constants.global_settings["debug_enabled"]:
                             debug_logger(
                                 message=f"⏩ Pruning empty branch: Skipping panel '{sub_dir_path.name}' as it contains no GUI files.",
@@ -583,7 +583,7 @@ class Application(ttk.Frame):
                         for f in path.iterdir()
                         if f.is_file()
                         and f.name.startswith("gui_")
-                        and f.suffix == ".py"
+                        and f.suffix == ".json"
                     ]
                 )
                 for py_file in py_files:

@@ -55,9 +55,9 @@ class LayoutParser:
     # Outputs:
     #     bool: True if a `gui_*.py` file is found, False otherwise.
     @staticmethod
-    def _scan_for_flux_capacitors(path: pathlib.Path) -> bool:
+    def _scan_for_gui_files(path: pathlib.Path) -> bool:
         """
-        Recursively checks if a folder or any of its sub-folders contain a 'gui_*.py' file.
+        Recursively checks if a folder or any of its sub-folders contain a 'gui_*.json' file.
         This is the "Temporal Crawler" to avoid building empty containers.
         """
         try:
@@ -65,11 +65,11 @@ class LayoutParser:
                 if (
                     item.is_file()
                     and item.name.startswith("gui_")
-                    and item.name.endswith(".py")
+                    and item.name.endswith(".json")
                 ):
                     return True
                 if item.is_dir() and not item.name.startswith("__"):
-                    if LayoutParser._scan_for_flux_capacitors(item):
+                    if LayoutParser._scan_for_gui_files(item):
                         return True
         except (FileNotFoundError, PermissionError):
             return False
@@ -191,7 +191,7 @@ class LayoutParser:
             valid_tab_dirs = [
                 d
                 for d in potential_tab_dirs
-                if LayoutParser._scan_for_flux_capacitors(d)
+                if LayoutParser._scan_for_gui_files(d)
             ]
 
             tab_dirs = sorted(valid_tab_dirs, key=lambda d: int(d.name.split("_")[0]))
@@ -224,7 +224,7 @@ class LayoutParser:
                 [
                     f
                     for f in path.iterdir()
-                    if f.is_file() and f.name.startswith("gui_") and f.suffix == ".py"
+                    if f.is_file() and f.name.startswith("gui_") and f.suffix == ".json"
                 ]
             )
 
@@ -237,7 +237,7 @@ class LayoutParser:
                 [
                     f
                     for f in path.iterdir()
-                    if f.is_file() and f.name.startswith("gui_") and f.suffix == ".py"
+                    if f.is_file() and f.name.startswith("gui_") and f.suffix == ".json"
                 ]
             )
 

@@ -1,5 +1,3 @@
 # *.log
 *.pyc
 /__pycache__/
-DATA/debug/ERRORS.log
-DATA/debug/

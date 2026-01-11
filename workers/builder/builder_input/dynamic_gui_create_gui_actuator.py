@@ -82,16 +82,77 @@ class GuiActuatorCreatorMixin:
             sub_frame.grid_columnconfigure(0, weight=1)
 
             layout = config.get("layout", {})
-            button_height_from_layout = layout.get("height") # Get height directly from layout
-            button_width_from_layout = layout.get("width") # Get width directly from layout
+            button_height_from_layout = layout.get("height")
+            button_width_from_layout = layout.get("width")
             button_sticky = layout.get("sticky", "ew")
 
-            # Calculate ipady based on height from layout
-            if button_height_from_layout is not None:
-                ipady_val = button_height_from_layout // 2
-            else:
-                # Fallback to a default ipady if height is not explicitly provided in layout
-                ipady_val = 5 # Default padding if no height is specified
+            if app_constants.global_settings["debug_enabled"]:
+                debug_logger(
+                    message=f"DEBUG: Layout height: {button_height_from_layout}, width: {button_width_from_layout}",
+                    **_get_log_args(),
+                )
+
+            # Control sub_frame dimensions based on layout
+            if button_width_from_layout is not None or button_height_from_layout is not None:
+                if app_constants.global_settings["debug_enabled"]:
+                    debug_logger(
+                        message=f"DEBUG: Calling sub_frame.grid_propagate(False)",
+                        **_get_log_args(),
+                    )
+                sub_frame.grid_propagate(False) # Stop sub_frame from resizing to content
+
+                if button_height_from_layout is not None:
+                    sub_frame.config(height=button_height_from_layout)
+                    if app_constants.global_settings["debug_enabled"]:
+                        debug_logger(
+                            message=f"DEBUG: Configured sub_frame height: {button_height_from_layout}",
+                            **_get_log_args(),
+                        )
+
+                if button_width_from_layout is not None:
+                    sub_frame.config(width=button_width_from_layout)
+                    if app_constants.global_settings["debug_enabled"]:
+                        debug_logger(
+                            message=f"DEBUG: Configured sub_frame width: {button_width_from_layout}",
+                            **_get_log_args(),
+                        )
+                elif button_height_from_layout is not None: # Height is present, but width is not
+                    # Calculate width based on text + 40px margin
+                    button_text = config.get(
+                        "label", config.get("label_active", config.get("label_inactive", label))
+                    )
+                    try:
+                        # Get the default font for ttk.Button
+                        style = ttk.Style()
+                        font_name = style.lookup('TButton', 'font')
+                        if font_name:
+                            # Create a Font object to measure text
+                            button_font = tkFont.Font(font=font_name)
+                            text_pixel_width = button_font.measure(button_text)
+                            desired_sub_frame_width = text_pixel_width + 40 # text width + 20px on each side
+                            sub_frame.config(width=desired_sub_frame_width)
+                            if app_constants.global_settings["debug_enabled"]:
+                                debug_logger(
+                                    message=f"DEBUG: Calculated desired width for text '{button_text}': {desired_sub_frame_width}",
+                                    **_get_log_args(),
+                                )
+                        else:
+                            # Fallback if font cannot be determined
+                            sub_frame.config(width=100) # Arbitrary default width
+                            if app_constants.global_settings["debug_enabled"]:
+                                debug_logger(
+                                    message=f"DEBUG: Fallback width 100 (font_name not found)",
+                                    **_get_log_args(),
+                                )
+                    except Exception as e:
+                        # Fallback for any error during font measurement
+                        sub_frame.config(width=100) # Arbitrary default width
+                        if app_constants.global_settings["debug_enabled"]:
+                            debug_logger(
+                                message=f"DEBUG: Fallback width 100 (exception during font measure: {e})",
+                                **_get_log_args(),
+                            )
+
 
             button_text = config.get(
                 "label", config.get("label_active", config.get("label_inactive", label))
@@ -99,21 +160,23 @@ class GuiActuatorCreatorMixin:
 
             button = ttk.Button(sub_frame, text=button_text, style="Custom.TButton")
 
-            grid_kwargs = {
-                "row": 0,
-                "column": 0,
-                "sticky": button_sticky,
-                "padx": DEFAULT_PAD_X,
-                "pady": DEFAULT_PAD_Y,
-                "ipady": ipady_val,
-            }
+            # Place the button in the grid, letting sub_frame control pixel dimensions.
+            # ipady and ipadx are no longer directly set here for overall sizing.
+            button.grid(
+                row=0,
+                column=0,
+                sticky=button_sticky,
+                padx=DEFAULT_PAD_X,
+                pady=DEFAULT_PAD_Y,
+            )
 
-            if button_width_from_layout is not None:
-                grid_kwargs["ipadx"] = button_width_from_layout // 2
-            elif button_height_from_layout is not None: # Height is present, but width is not
-                grid_kwargs["ipadx"] = 20 # 20 pixels on each side for margin
-
-            button.grid(**grid_kwargs)
+            # Update the Tkinter event queue to ensure widgets are drawn and dimensions are available
+            sub_frame.update_idletasks()
+            if app_constants.global_settings["debug_enabled"]:
+                debug_logger(
+                    message=f"DEBUG: Actual sub_frame dimensions after configuration: width={sub_frame.winfo_width()}, height={sub_frame.winfo_height()}",
+                    **_get_log_args(),
+                )
 
             # The sub_frame needs to be returned to be placed by the DynamicGuiBuilder's grid.
             # Its packing/gridding is handled by the caller.

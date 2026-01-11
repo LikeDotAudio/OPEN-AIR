@@ -17,6 +17,7 @@
 import os
 import tkinter as tk
 from tkinter import ttk
+import tkinter.font as tkFont
 from workers.logger.logger import debug_logger
 from workers.logger.log_utils import _get_log_args
 import inspect
@@ -47,6 +48,12 @@ class GuiButtonToggleCreatorMixin:
     def _create_gui_button_toggle(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
+        print(f"--- DEBUG: _create_gui_button_toggle entered for label: {config_data.get('label_active')} ---")
+        if app_constants.global_settings["debug_enabled"]:
+            debug_logger(
+                message=f"DEBUG (Toggle Button - Entry): app_constants.global_settings['debug_enabled'] is {app_constants.global_settings['debug_enabled']}",
+                **_get_log_args(),
+            )
         """Creates a single button that toggles between two states (e.g., ON/OFF)."""
         current_function_name = inspect.currentframe().f_code.co_name
 
@@ -79,10 +86,133 @@ class GuiButtonToggleCreatorMixin:
 
             state_var = tk.BooleanVar(value=is_on)
 
-            button = ttk.Button(sub_frame, text=on_text if is_on else off_text)
-            button.pack(side=tk.LEFT, padx=5, pady=2)
+            # Get layout parameters
+            layout = config.get("layout", {})
+            button_height_from_layout = layout.get("height")
+            button_width_from_layout = layout.get("width")
+            button_font_size_from_layout = layout.get("font") # New: Get font size from layout
+            button_sticky = layout.get("sticky", "nsew") # Default to nsew for fill
+
+            if app_constants.global_settings["debug_enabled"]:
+                debug_logger(
+                    message=f"DEBUG (Toggle Button): Layout height: {button_height_from_layout}, width: {button_width_from_layout}, font: {button_font_size_from_layout}",
+                    **_get_log_args(),
+                )
+
+            # Configure sub_frame dimensions based on layout
+            if button_width_from_layout is not None or button_height_from_layout is not None:
+                if app_constants.global_settings["debug_enabled"]:
+                    debug_logger(
+                        message=f"DEBUG (Toggle Button): Calling sub_frame.pack_propagate(False)",
+                        **_get_log_args(),
+                    )
+                sub_frame.pack_propagate(False) # Stop sub_frame from resizing to content
+
+                if button_height_from_layout is not None:
+                    sub_frame.config(height=button_height_from_layout)
+                    if app_constants.global_settings["debug_enabled"]:
+                        debug_logger(
+                            message=f"DEBUG (Toggle Button): Configured sub_frame height: {button_height_from_layout}",
+                            **_get_log_args(),
+                        )
+
+                if button_width_from_layout is not None:
+                    sub_frame.config(width=button_width_from_layout)
+                    if app_constants.global_settings["debug_enabled"]:
+                        debug_logger(
+                            message=f"DEBUG (Toggle Button): Configured sub_frame width: {button_width_from_layout}",
+                            **_get_log_args(),
+                        )
+                elif button_height_from_layout is not None: # Height is present, but width is not
+                    # Calculate width based on text + 40px margin
+                    current_button_text = on_text if is_on else off_text
+                    try:
+                        style = ttk.Style()
+                        font_name = style.lookup('TButton', 'font')
+                        if font_name:
+                            # Create a Font object to measure text
+                            button_font = tkFont.Font(font=font_name)
+                            text_pixel_width = button_font.measure(current_button_text)
+                            desired_sub_frame_width = text_pixel_width + 40 # text width + 20px on each side
+                            sub_frame.config(width=desired_sub_frame_width)
+                            if app_constants.global_settings["debug_enabled"]:
+                                debug_logger(
+                                    message=f"DEBUG (Toggle Button): Calculated desired width for text '{current_button_text}': {desired_sub_frame_width}",
+                                    **_get_log_args(),
+                                )
+                        else:
+                            sub_frame.config(width=100) # Fallback
+                            if app_constants.global_settings["debug_enabled"]:
+                                debug_logger(
+                                    message=f"DEBUG (Toggle Button): Fallback width 100 (font_name not found)",
+                                    **_get_log_args(),
+                                )
+                    except Exception as e:
+                        sub_frame.config(width=100) # Fallback
+                        if app_constants.global_settings["debug_enabled"]:
+                            debug_logger(
+                                message=f"DEBUG (Toggle Button): Fallback width 100 (exception during font measure: {e})",
+                                **_get_log_args(),
+                            )
+
+    # Configure the style for the button, including font.
+    # Define a generic font family and fallback if style.lookup fails or is not available.
+    font_family = "TkDefaultFont"
+    font_slant = "roman"
+    font_weight_normal = "normal"
+
+    try:
+        style = ttk.Style()
+        font_config = style.lookup('TButton', 'font')
+        if font_config:
+            temp_font = tkFont.Font(font=font_config)
+            font_family = temp_font.actual("family")
+            font_slant = temp_font.actual("slant")
+            # Attempt to get default weight, fallback to "normal"
+            font_weight_normal = temp_font.actual("weight") if "weight" in temp_font.actual() else "normal"
+    except Exception as e:
+        if app_constants.global_settings["debug_enabled"]:
+            debug_logger(
+                message=f"WARNING (Toggle Button): Could not lookup base TButton font: {e}. Using default.",
+                **_get_log_args(),
+            )
+        # Fallback to defaults if lookup fails
+
+    # Define inactive font (normal weight)
+    inactive_font_tuple = (font_family, button_font_size_from_layout, font_weight_normal, font_slant)
+
+    # Define active font (bold weight)
+    active_font_tuple = (font_family, button_font_size_from_layout, "bold", font_slant)
+
+    # Configure the 'Custom.TButton' style for inactive state
+    style.configure("Custom.TButton", font=inactive_font_tuple)
+    if app_constants.global_settings["debug_enabled"]:
+        debug_logger(
+            message=f"DEBUG (Toggle Button): Configured 'Custom.TButton' inactive style font to: {inactive_font_tuple}",
+            **_get_log_args(),
+        )
+
+    # Map the font for 'active' state to be bold
+    style.map("Custom.TButton", font=[('active', active_font_tuple), ('!active', inactive_font_tuple)])
+    if app_constants.global_settings["debug_enabled"]:
+        debug_logger(
+            message=f"DEBUG (Toggle Button): Mapped 'Custom.TButton' active style font to: {active_font_tuple}",
+            **_get_log_args(),
+        )
+
+    # Create the ttk.Button. Explicitly set style to "Custom.TButton"
+    button = ttk.Button(sub_frame, text=on_text if is_on else off_text, style="Custom.TButton")
+
+    # Update the display of sub_frame's actual dimensions if debug is enabled
+    if app_constants.global_settings["debug_enabled"]:
+        app_root.update_idletasks()  # Process all pending events to ensure widgets are updated
+        debug_logger(
+            message=f"DEBUG (Toggle Button): Actual sub_frame dimensions after configuration: width={sub_frame.winfo_width()}, height={sub_frame.winfo_height()}",
+            **_get_log_args(),
+        )
 
             def update_button_state(*args):
+
                 # Updates the button's appearance based on its current state.
                 current_state = state_var.get()
                 if (

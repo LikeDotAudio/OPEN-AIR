@@ -22,7 +22,7 @@
           "input_name": "state_bool",
           "converter": "bool_to_int"
         },
-        "layout": { "height": 50, "width": 100, "sticky": "" },
+        "layout": { "height": 100, "width": 200, "sticky": "ew", "font": 15 },
         "options": {
           "ON": {
             "label_active": "Preamp ON",
@@ -48,7 +48,7 @@
           "input_name": "state_bool",
           "converter": "bool_to_int"
         },
-        "layout": { "height": 150, "width": 200,"sticky": "" },
+        "layout": { "height": 100, "width": 200, "sticky": "ew","font":15 },
         "options": {
           "ON": {
             "label_active": "High Sensitivity ON",

@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Time Circuits (Start Frame 5)",
+    "examplefields": {
+      "type": "AnimationDisplay",
+      "label_active": "Time Circuits (Start Frame 5)",
+      "gif_path": "assets/images/time_circuits.gif",
+      "value_default": 5,
+      "notes": "Time circuits animation starting from a later frame."
+    }
+  }
+}

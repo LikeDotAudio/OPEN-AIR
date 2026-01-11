@@ -1,0 +1,33 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Effect Mode",
+    "fields": {     "examplefields": {
+      "type": "_TrapezoidButtonToggler",
+      "label_active": "Effect Mode",
+      "layout_columns": 3,
+      "value_default": "Reverb",
+      "width": 90,
+      "height": 55,
+      "slant": 15,
+      "options": {
+        "Delay": {
+          "label_active": "Delay",
+          "color": "#dcdcaa",
+          "led_color": "#FFD700"
+        },
+        "Reverb": {
+          "label_active": "Reverb",
+          "color": "#6a9955",
+          "led_color": "#32CD32"
+        },
+        "Chorus": {
+          "label_active": "Chorus",
+          "color": "#007acc",
+          "led_color": "#1E90FF"
+        }
+      },
+      "notes": "Wider toggler for selecting different effects modes."
+    }
+  }
+}}

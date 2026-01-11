@@ -1,0 +1,12 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Label 04 Connection",
+    "fields": {     "examplefields": {
+      "type": "_Label",
+      "label": "Connection",
+      "value": "Active",
+      "notes": "Indicates connection status."
+    }
+  }
+}}

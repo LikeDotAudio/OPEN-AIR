@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "ID",
+    "fields": {     "examplefields": {
+      "type": "_TextInput",
+      "label_active": "ID",
+      "value_default": "001",
+      "font_size": 11,
+      "notes": "Compact input field for a short identifier."
+    }
+  }
+}}

@@ -1,0 +1,12 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Label 03 Count",
+    "fields": {     "examplefields": {
+      "type": "_Label",
+      "label": "Count",
+      "value": 100,
+      "notes": "A label displaying a numerical count."
+    }
+  }
+}}

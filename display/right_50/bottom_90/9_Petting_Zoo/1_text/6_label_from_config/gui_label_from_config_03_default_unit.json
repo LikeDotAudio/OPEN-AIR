@@ -1,0 +1,12 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Default Unit",
+    "fields": {     "examplefields": {
+      "type": "LabelFromConfig",
+      "label_active": "Default Unit",
+      "value": "Volts",
+      "notes": "Indicates the default measurement unit."
+    }
+  }
+}}

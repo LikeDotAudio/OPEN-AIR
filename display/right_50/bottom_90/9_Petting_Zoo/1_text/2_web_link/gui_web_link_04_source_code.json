@@ -1,0 +1,12 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "View Source Code",
+    "fields": {     "examplefields": {
+      "type": "_WebLink",
+      "label_active": "View Source Code",
+      "url": "https://github.com/APKaudio/OPEN-AIR",
+      "notes": "Link to the GitHub repository."
+    }
+  }
+}}

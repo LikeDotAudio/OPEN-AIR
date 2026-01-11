@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Label 02 Temperature",
+    "fields": {     "examplefields": {
+      "type": "_Label",
+      "label": "Temperature",
+      "value": 23.5,
+      "units": "\u00b0C",
+      "notes": "Displays a temperature reading with units."
+    }
+  }
+}}

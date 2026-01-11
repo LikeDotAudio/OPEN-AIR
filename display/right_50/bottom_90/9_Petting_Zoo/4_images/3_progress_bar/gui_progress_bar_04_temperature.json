@@ -1,0 +1,15 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Temperature Sensor",
+    "fields": {     "examplefields": {
+      "type": "ProgressBar",
+      "label_active": "Temperature Sensor",
+      "min": -20,
+      "max": 50,
+      "value_default": 18.2,
+      "units": "\u00b0C",
+      "notes": "Displays temperature within a specific range."
+    }
+  }
+}}

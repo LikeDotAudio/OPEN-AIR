@@ -1,0 +1,15 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Server Connection:",
+    "fields": {     "examplefields": {
+      "type": "HeaderStatusLight",
+      "label_active": "Server Connection:",
+      "layout": {
+        "side": "bottom",
+        "fill": "x"
+      },
+      "notes": "Status light for server connection, spanning the bottom."
+    }
+  }
+}}

@@ -1,0 +1,11 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Focus Adjust",
+    "fields": {     "examplefields": {
+      "type": "_DirectionalButtons",
+      "label_active": "Focus Adjust",
+      "notes": "Buttons for adjusting focus in optical systems."
+    }
+  }
+}}

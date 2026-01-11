@@ -1,0 +1,12 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Checkbox 04 Dark Mode",
+    "fields": {     "examplefields": {
+      "type": "_GuiCheckbox",
+      "label": "Dark Mode",
+      "value": true,
+      "notes": "Simple checkbox for dark mode, using only 'label'."
+    }
+  }
+}}

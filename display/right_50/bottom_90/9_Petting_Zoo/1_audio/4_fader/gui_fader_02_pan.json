@@ -1,0 +1,15 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Pan",
+    "fields": {     "examplefields": {
+      "type": "_Fader",
+      "label_active": "Pan",
+      "min": -100,
+      "max": 100,
+      "value_default": 0,
+      "orientation": "horizontal",
+      "notes": "Horizontal fader for stereo panning, centered at 0."
+    }
+  }
+}}

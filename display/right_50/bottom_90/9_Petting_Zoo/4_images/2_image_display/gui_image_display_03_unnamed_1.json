@@ -1,0 +1,12 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Unnamed Image (JPG)",
+    "examplefields": {
+      "type": "_GuiImage",
+      "label_active": "Unnamed Image (JPG)",
+      "path": "assets/images/unnamed (1).jpg",
+      "notes": "A generic JPG image."
+    }
+  }
+}

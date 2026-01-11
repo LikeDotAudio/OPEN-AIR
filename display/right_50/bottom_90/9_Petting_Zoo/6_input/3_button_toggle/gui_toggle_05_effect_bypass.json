@@ -1,0 +1,25 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Effect",
+    "fields": {     "examplefields": {
+      "type": "_GuiButtonToggle",
+      "label_active": "Effect",
+      "options": {
+        "ON": {
+          "label_active": "ACTIVE",
+          "selected": false
+        },
+        "OFF": {
+          "label_inactive": "BYPASS"
+        }
+      },
+      "layout": {
+        "width": 70,
+        "height": 30,
+        "font": 9
+      },
+      "notes": "Compact toggle button for bypassing an effect."
+    }
+  }
+}}

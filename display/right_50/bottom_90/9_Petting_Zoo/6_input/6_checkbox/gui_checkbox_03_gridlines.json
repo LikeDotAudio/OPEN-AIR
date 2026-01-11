@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Show Gridlines",
+    "fields": {     "examplefields": {
+      "type": "_GuiCheckbox",
+      "label_active": "Show Gridlines",
+      "label_inactive": "Hide Gridlines",
+      "value": false,
+      "notes": "Checkbox to toggle visibility of gridlines."
+    }
+  }
+}}

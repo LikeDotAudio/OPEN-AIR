@@ -1,0 +1,18 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "BYPASS",
+    "fields": {     "examplefields": {
+      "type": "_TrapezoidButton",
+      "label_active": "BYPASS",
+      "width": 75,
+      "height": 48,
+      "color": "#d18616",
+      "led_color": "#FFA500",
+      "latching": true,
+      "value_default": true,
+      "slant": 12,
+      "notes": "Latching bypass button, active by default."
+    }
+  }
+}}

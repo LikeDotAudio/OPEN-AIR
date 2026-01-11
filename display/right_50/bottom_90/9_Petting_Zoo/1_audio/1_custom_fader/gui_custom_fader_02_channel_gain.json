@@ -1,0 +1,18 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Channel Gain",
+    "fields": {     "examplefields": {
+      "type": "_CustomFader",
+      "label_active": "Channel Gain",
+      "value_min": -90.0,
+      "value_max": 0.0,
+      "value_default": -45.0,
+      "log_exponent": 0.5,
+      "width": 60,
+      "height": 200,
+      "value_highlight_color": "#c75450",
+      "notes": "Logarithmic fader suitable for audio gain control, emphasizing lower values."
+    }
+  }
+}}

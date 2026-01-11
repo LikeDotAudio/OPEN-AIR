@@ -1,0 +1,15 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Filter Cutoff",
+    "fields": {     "examplefields": {
+      "type": "_Fader",
+      "label_active": "Filter Cutoff",
+      "min": 20.0,
+      "max": 20000.0,
+      "value_default": 500.0,
+      "unit": "Hz",
+      "notes": "A custom fader for adjusting filter cutoff frequency."
+    }
+  }
+}}

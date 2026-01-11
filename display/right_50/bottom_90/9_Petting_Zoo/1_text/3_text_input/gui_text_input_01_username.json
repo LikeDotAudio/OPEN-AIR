@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Username",
+    "fields": {     "examplefields": {
+      "type": "_TextInput",
+      "label_active": "Username",
+      "value_default": "user123",
+      "font_size": 12,
+      "notes": "Standard input field for a username."
+    }
+  }
+}}

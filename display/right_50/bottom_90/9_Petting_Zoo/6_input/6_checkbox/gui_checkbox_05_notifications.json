@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Notifications ON",
+    "fields": {     "fields": {     "examplefields": {
+      "type": "_GuiCheckbox",
+      "label_active": "Notifications ON",
+      "label_inactive": "Notifications OFF",
+      "value": false,
+      "notes": "Checkbox to control system notifications."
+    }
+  }
+}}}

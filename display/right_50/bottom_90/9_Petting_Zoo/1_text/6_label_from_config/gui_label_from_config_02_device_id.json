@@ -1,0 +1,12 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Device ID",
+    "fields": {     "examplefields": {
+      "type": "LabelFromConfig",
+      "label_active": "Device ID",
+      "value": "DEV-ABCD-1234",
+      "notes": "Displays a unique device identifier."
+    }
+  }
+}}

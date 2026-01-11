@@ -1,0 +1,30 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Input Source",
+    "fields": {     "examplefields": {
+      "type": "_TrapezoidButtonToggler",
+      "label_active": "Input Source",
+      "layout_columns": 2,
+      "value_default": "Mic",
+      "options": {
+        "Mic": {
+          "label_active": "Mic",
+          "color": "#996633",
+          "led_color": "#FFA500"
+        },
+        "Line": {
+          "label_active": "Line",
+          "color": "#c75450",
+          "led_color": "#ADD8E6"
+        },
+        "USB": {
+          "label_active": "USB",
+          "color": "#d18616",
+          "led_color": "#90EE90"
+        }
+      },
+      "notes": "A basic toggler for selecting an audio input source."
+    }
+  }
+}}

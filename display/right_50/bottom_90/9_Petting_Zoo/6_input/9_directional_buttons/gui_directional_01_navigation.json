@@ -1,0 +1,11 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Navigation",
+    "fields": {     "examplefields": {
+      "type": "_DirectionalButtons",
+      "label_active": "Navigation",
+      "notes": "Standard directional buttons for navigation."
+    }
+  }
+}}

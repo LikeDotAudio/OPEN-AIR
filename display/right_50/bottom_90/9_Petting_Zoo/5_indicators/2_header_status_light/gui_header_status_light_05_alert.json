@@ -1,0 +1,11 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Alert Status:",
+    "fields": {     "examplefields": {
+      "type": "HeaderStatusLight",
+      "label_active": "Alert Status:",
+      "notes": "Status light signaling critical alerts."
+    }
+  }
+}}

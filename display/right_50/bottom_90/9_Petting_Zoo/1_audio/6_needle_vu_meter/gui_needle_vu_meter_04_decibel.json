@@ -1,0 +1,16 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Decibel Meter",
+    "fields": {     "examplefields": {
+      "type": "_NeedleVUMeter",
+      "label_active": "Decibel Meter",
+      "size": 175,
+      "min": -40.0,
+      "max": 10.0,
+      "upper_range": 5.0,
+      "value_default": -15.0,
+      "notes": "Needle meter configured for a wider decibel range."
+    }
+  }
+}}

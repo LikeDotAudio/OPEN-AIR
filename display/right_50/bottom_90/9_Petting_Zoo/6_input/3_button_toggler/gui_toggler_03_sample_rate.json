@@ -1,0 +1,34 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Sample Rate",
+    "fields": {     "examplefields": {
+      "type": "_GuiButtonToggler",
+      "label_active": "Sample Rate",
+      "options": {
+        "44.1k": {
+          "label_active": "44.1k",
+          "value": 44100,
+          "units": "Hz"
+        },
+        "48k": {
+          "label_active": "48k",
+          "value": 48000,
+          "units": "Hz",
+          "selected": true
+        },
+        "96k": {
+          "label_active": "96k",
+          "value": 96000,
+          "units": "Hz"
+        }
+      },
+      "layout": {
+        "max_cols": 3,
+        "height": 45,
+        "font": 11
+      },
+      "notes": "Sample rate selector, showing value and units."
+    }
+  }
+}}

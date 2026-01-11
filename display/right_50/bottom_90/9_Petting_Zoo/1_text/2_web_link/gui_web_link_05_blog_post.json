@@ -1,0 +1,12 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Latest Blog Post",
+    "fields": {     "examplefields": {
+      "type": "_WebLink",
+      "label_active": "Latest Blog Post",
+      "url": "https://www.like.audio/blog/latest",
+      "notes": "Link to a relevant blog post."
+    }
+  }
+}}

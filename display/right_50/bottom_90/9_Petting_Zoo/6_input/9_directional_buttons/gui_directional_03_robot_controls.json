@@ -1,0 +1,11 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Robot Controls",
+    "fields": {     "examplefields": {
+      "type": "_DirectionalButtons",
+      "label_active": "Robot Controls",
+      "notes": "Used to control the movement of a robot."
+    }
+  }
+}}

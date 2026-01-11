@@ -1,0 +1,26 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Dropdown 05 Device Mode",
+    "fields": {     "examplefields": {
+      "type": "_GuiDropDownOption",
+      "label": "Mode",
+      "options": {
+        "Standard": {
+          "label_active": "Standard Mode",
+          "value": "STANDARD"
+        },
+        "Performance": {
+          "label_active": "Performance Mode",
+          "value": "PERF_MODE"
+        },
+        "Eco": {
+          "label_active": "Eco Mode",
+          "value": "ECO_MODE",
+          "selected": true
+        }
+      },
+      "notes": "Selects an operating mode for a device."
+    }
+  }
+}}

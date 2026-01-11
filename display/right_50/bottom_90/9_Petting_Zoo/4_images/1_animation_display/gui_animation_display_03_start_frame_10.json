@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Animation Start Frame 10",
+    "examplefields": {
+      "type": "_GuiAnimation",
+      "label_active": "Start Frame 10",
+      "path": "assets/animations/start_frame_10.gif",
+      "start_frame": 10,
+      "notes": "An animation that starts playing from frame 10."
+    }
+  }
+}

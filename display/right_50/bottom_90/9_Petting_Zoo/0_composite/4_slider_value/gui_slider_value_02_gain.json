@@ -1,0 +1,15 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gain",
+    "examplefields": {
+      "type": "_sliderValue",
+      "label_active": "Gain",
+      "min": -12.0,
+      "max": 12.0,
+      "value": 0.0,
+      "units": "dB",
+      "notes": "Slider for fine-tuning gain, bipolar range with dB units."
+    }
+  }
+}

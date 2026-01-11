@@ -1,0 +1,18 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Name",
+    "fields": {     "examplefields": {
+      "type": "_Value",
+      "label_active": "Name",
+      "value": "Guest",
+      "units": "",
+      "layout": {
+        "width": 200,
+        "height": 35,
+        "font": 14
+      },
+      "notes": "An editable box for entering text, no units."
+    }
+  }
+}}

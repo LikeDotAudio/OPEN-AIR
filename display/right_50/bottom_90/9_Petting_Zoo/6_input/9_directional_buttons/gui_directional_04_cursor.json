@@ -1,0 +1,11 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Cursor",
+    "fields": {     "examplefields": {
+      "type": "_DirectionalButtons",
+      "label_active": "Cursor",
+      "notes": "Generic directional buttons for cursor movement."
+    }
+  }
+}}

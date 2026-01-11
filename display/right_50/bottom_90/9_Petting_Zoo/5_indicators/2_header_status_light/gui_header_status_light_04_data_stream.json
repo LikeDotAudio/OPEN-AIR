@@ -1,0 +1,14 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Header Status Light 04 Data Stream",
+    "fields": {     "examplefields": {
+      "type": "HeaderStatusLight",
+      "label_active": "",
+      "layout": {
+        "side": "top"
+      },
+      "notes": "Status light without a label, indicating data stream."
+    }
+  }
+}}

@@ -1,0 +1,17 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Pitch",
+    "fields": {     "examplefields": {
+      "type": "_Knob",
+      "label_active": "Pitch",
+      "min": -12.0,
+      "max": 12.0,
+      "value_default": 0.0,
+      "width": 60,
+      "height": 60,
+      "indicator_color": "#c75450",
+      "notes": "Knob for fine-tuning pitch, bipolar range."
+    }
+  }
+}}

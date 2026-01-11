@@ -1,0 +1,34 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Load Preset",
+    "fields": {     "examplefields": {
+      "type": "GuiListbox",
+      "label_active": "Load Preset",
+      "options": {
+        "preset1": {
+          "label_active": "Clean Guitar",
+          "value": "preset_clean",
+          "active": "true"
+        },
+        "preset2": {
+          "label_active": "Crunch Lead",
+          "value": "preset_crunch",
+          "active": "true"
+        },
+        "preset3": {
+          "label_active": "Heavy Metal",
+          "value": "preset_metal",
+          "active": "true",
+          "selected": true
+        },
+        "preset4": {
+          "label_active": "Ambient Pad",
+          "value": "preset_pad",
+          "active": "true"
+        }
+      },
+      "notes": "Listbox for selecting audio effect presets."
+    }
+  }
+}}

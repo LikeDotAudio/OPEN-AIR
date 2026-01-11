@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "File Path",
+    "fields": {     "examplefields": {
+      "type": "_TextInput",
+      "label_active": "File Path",
+      "value_default": "/home/data/config.txt",
+      "font_size": 10,
+      "notes": "Input field for specifying a file path."
+    }
+  }
+}}

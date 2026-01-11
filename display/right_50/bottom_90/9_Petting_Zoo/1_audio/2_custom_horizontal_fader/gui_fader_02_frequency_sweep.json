@@ -1,0 +1,18 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Frequency Sweep",
+    "fields": {     "examplefields": {
+      "type": "_CustomHorizontalFader",
+      "label_active": "Frequency Sweep",
+      "value_min": 20.0,
+      "value_max": 20000.0,
+      "value_default": 1000.0,
+      "log_exponent": 0.3,
+      "width": 300,
+      "height": 90,
+      "value_highlight_color": "#6464a3",
+      "notes": "Logarithmic horizontal fader for wide frequency ranges."
+    }
+  }
+}}

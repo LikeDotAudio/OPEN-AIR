@@ -1,0 +1,17 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Process Level VU",
+    "fields": {     "examplefields": {
+      "type": "_VUMeter",
+      "label_active": "Process Level VU",
+      "min": -30.0,
+      "max": 6.0,
+      "value_default": -18.0,
+      "upper_range": 0.0,
+      "width": 200,
+      "height": 20,
+      "notes": "VU meter tailored for monitoring process levels."
+    }
+  }
+}}

@@ -1,0 +1,17 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "IP Address",
+    "fields": {     "examplefields": {
+      "type": "_Value",
+      "label_active": "IP Address",
+      "value": "192.168.1.1",
+      "layout": {
+        "width": 180,
+        "height": 30,
+        "font": 11
+      },
+      "notes": "Input field specifically for IP addresses."
+    }
+  }
+}}

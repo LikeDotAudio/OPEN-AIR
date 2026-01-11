@@ -1,0 +1,25 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Loop",
+    "fields": {     "examplefields": {
+      "type": "_GuiButtonToggle",
+      "label_active": "Loop",
+      "options": {
+        "ON": {
+          "label_active": "LOOP ON",
+          "selected": false
+        },
+        "OFF": {
+          "label_inactive": "LOOP OFF"
+        }
+      },
+      "layout": {
+        "width": 110,
+        "height": 35,
+        "font": 11
+      },
+      "notes": "Toggle for enabling/disabling loop playback."
+    }
+  }
+}}

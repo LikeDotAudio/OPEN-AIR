@@ -1,0 +1,33 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Channel Group",
+    "fields": {     "examplefields": {
+      "type": "_TrapezoidButtonToggler",
+      "label_active": "Channel Group",
+      "layout_columns": 3,
+      "value_default": "Group B",
+      "width": 85,
+      "height": 50,
+      "slant": 12,
+      "options": {
+        "Group A": {
+          "label_active": "Group A",
+          "color": "#1abc9c",
+          "led_color": "#2ecc71"
+        },
+        "Group B": {
+          "label_active": "Group B",
+          "color": "#3498db",
+          "led_color": "#2980b9"
+        },
+        "Group C": {
+          "label_active": "Group C",
+          "color": "#9b59b6",
+          "led_color": "#8e44ad"
+        }
+      },
+      "notes": "Toggler for selecting different channel groups with custom colors."
+    }
+  }
+}}

@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Volume:",
+    "fields": {     "examplefields": {
+      "type": "_IncDecButtons",
+      "label_active": "Volume:",
+      "value_default": 50,
+      "increment": 5,
+      "notes": "Adjusts volume level in steps of 5."
+    }
+  }
+}}

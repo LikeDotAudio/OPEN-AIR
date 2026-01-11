@@ -1,0 +1,18 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Delay",
+    "fields": {     "examplefields": {
+      "type": "_Value",
+      "label_active": "Delay",
+      "value": "0.5",
+      "units": "s",
+      "layout": {
+        "width": 120,
+        "height": 25,
+        "font": 10
+      },
+      "notes": "Compact input for a small numerical value."
+    }
+  }
+}}

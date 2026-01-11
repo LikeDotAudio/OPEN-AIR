@@ -1,0 +1,16 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Network Health:",
+    "fields": {     "examplefields": {
+      "type": "HeaderStatusLight",
+      "label_active": "Network Health:",
+      "layout": {
+        "side": "left",
+        "padx": 10,
+        "pady": 5
+      },
+      "notes": "Status light for network health, placed on the left."
+    }
+  }
+}}

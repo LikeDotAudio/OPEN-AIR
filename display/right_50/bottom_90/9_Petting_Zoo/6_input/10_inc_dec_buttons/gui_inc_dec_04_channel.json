@@ -1,0 +1,13 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Channel:",
+    "fields": {     "examplefields": {
+      "type": "_IncDecButtons",
+      "label_active": "Channel:",
+      "value_default": 1,
+      "increment": 1,
+      "notes": "Selects channels (integer values)."
+    }
+  }
+}}

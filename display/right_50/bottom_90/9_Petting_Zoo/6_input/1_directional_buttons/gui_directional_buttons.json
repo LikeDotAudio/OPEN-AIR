@@ -1,0 +1,21 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Gui Directional Buttons",
+    "fields": {     "examplefields": {
+      "directional_buttons_examples": {
+        "title": "Directional Buttons Examples",
+        "description": "Examples of the DirectionalButtons element.",
+        "simple_d_pad": {
+          "type": "_DirectionalButtons",
+          "notes": "A simple D-Pad with up, down, left, and right buttons."
+        },
+        "d_pad_with_center_button": {
+          "type": "_DirectionalButtons",
+          "enable_center_button": true,
+          "notes": "A D-Pad including a center button."
+        }
+      }
+    }
+  }
+}}

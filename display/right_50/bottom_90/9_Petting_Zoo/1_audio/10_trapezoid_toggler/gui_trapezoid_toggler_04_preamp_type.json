@@ -1,0 +1,26 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Preamp Type",
+    "fields": {     "examplefields": {
+      "type": "_TrapezoidButtonToggler",
+      "label_active": "Preamp Type",
+      "layout_columns": 2,
+      "value_default": "Tube",
+      "width": 50,
+      "height": 35,
+      "slant": 5,
+      "options": {
+        "Solid": {
+          "label_active": "Solid State",
+          "color": "#c75450"
+        },
+        "Tube": {
+          "label_active": "Tube",
+          "color": "#d18616"
+        }
+      },
+      "notes": "Small toggler for selecting preamp types."
+    }
+  }
+}}

@@ -1,0 +1,29 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Select User",
+    "fields": {     "examplefields": {
+      "type": "GuiListbox",
+      "label_active": "Select User",
+      "options": {
+        "userA": {
+          "label_active": "Alice",
+          "value": "alice_id",
+          "active": "true"
+        },
+        "userB": {
+          "label_active": "Bob",
+          "value": "bob_id",
+          "active": "true",
+          "selected": true
+        },
+        "userC": {
+          "label_active": "Charlie",
+          "value": "charlie_id",
+          "active": "true"
+        }
+      },
+      "notes": "Listbox for selecting from a list of users."
+    }
+  }
+}}

@@ -1,0 +1,16 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Channel 1 Peak",
+    "fields": {     "examplefields": {
+      "type": "_NeedleVUMeter",
+      "label_active": "Channel 1 Peak",
+      "size": 100,
+      "min": -15.0,
+      "max": 0.0,
+      "upper_range": -3.0,
+      "value_default": -5.0,
+      "notes": "A compact needle VU meter for individual channel monitoring."
+    }
+  }
+}}

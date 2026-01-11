@@ -1,0 +1,12 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Flux Capacitor (PNG)",
+    "examplefields": {
+      "type": "_GuiImage",
+      "label_active": "Flux Capacitor",
+      "path": "assets/images/flux_capacitor.png",
+      "notes": "Static display of the Flux Capacitor."
+    }
+  }
+}

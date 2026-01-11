@@ -1,0 +1,34 @@
+{
+  "elements": {
+    "type": "OcaBlock",
+    "label_active": "Effect Type",
+    "fields": {     "examplefields": {
+      "type": "_GuiButtonToggler",
+      "label_active": "Effect Type",
+      "options": {
+        "Reverb": {
+          "label_active": "REVERB"
+        },
+        "Delay": {
+          "label_active": "DELAY",
+          "selected": true
+        },
+        "Chorus": {
+          "label_active": "CHORUS"
+        },
+        "Flanger": {
+          "label_active": "FLANGER"
+        },
+        "Distortion": {
+          "label_active": "DISTORTION"
+        }
+      },
+      "layout": {
+        "max_cols": 4,
+        "height": 35,
+        "font": 10
+      },
+      "notes": "Selector for various effects, 'DELAY' initially active."
+    }
+  }
+}}

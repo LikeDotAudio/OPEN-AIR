@@ -20,7 +20,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "source": { "value": "CHANnel1", "type": "_GuiValue", "description": "CHAN1, CHAN2, MATH" }
+                  "source": { "value": "CHANnel1", "type": "_Value",
+ "description": "CHAN1, CHAN2, MATH" }
                 }
               },
               "Outputs": {
@@ -86,7 +87,8 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "scale": { "value": "1.0", "type": "_GuiValue", "description": "Volts/Div" } }
+                "fields": { "scale": { "value": "1.0", "type": "_Value",
+ "description": "Volts/Div" } }
               }
             }
           },
@@ -102,7 +104,8 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "offset": { "value": "0.0", "type": "_GuiValue", "description": "Volts" } }
+                "fields": { "offset": { "value": "0.0", "type": "_Value",
+ "description": "Volts" } }
               }
             }
           },
@@ -118,7 +121,8 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "coupling": { "value": "DC", "type": "_GuiValue", "description": "AC, DC, GND" } }
+                "fields": { "coupling": { "value": "DC", "type": "_Value",
+ "description": "AC, DC, GND" } }
               }
             }
           },
@@ -166,7 +170,8 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "state": { "value": "ON", "type": "_GuiValue", "description": "ON or OFF" } }
+                "fields": { "state": { "value": "ON", "type": "_Value",
+ "description": "ON or OFF" } }
               }
             }
           },
@@ -182,7 +187,8 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "state": { "value": "OFF", "type": "_GuiValue", "description": "ON or OFF" } }
+                "fields": { "state": { "value": "OFF", "type": "_Value",
+ "description": "ON or OFF" } }
               }
             }
           }

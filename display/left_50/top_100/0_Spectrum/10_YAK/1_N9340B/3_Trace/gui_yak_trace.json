@@ -130,7 +130,8 @@
             "fields": {
               "trace_number": {
                 "value": "1",
-                "type": "_GuiValue",
+                "type": "_Value",
+
                 "description": "The trace number."
               }
             }
@@ -162,7 +163,8 @@
             "fields": {
               "trace_number": {
                 "value": "1",
-                "type": "_GuiValue",
+                "type": "_Value",
+
                 "description": "The trace number."
               }
             }

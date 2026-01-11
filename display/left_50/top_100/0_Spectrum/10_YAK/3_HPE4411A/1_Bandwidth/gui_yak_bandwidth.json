@@ -53,7 +53,8 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "val": { "value": "100 kHz", "type": "_GuiValue", "description": "1kHz, 3kHz, 10kHz..." } }
+                "fields": { "val": { "value": "100 kHz", "type": "_Value",
+ "description": "1kHz, 3kHz, 10kHz..." } }
               }
             }
           },
@@ -125,7 +126,8 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "val": { "value": "1.0", "type": "_GuiValue", "description": "Ratio (e.g. 0.1, 1.0)" } }
+                "fields": { "val": { "value": "1.0", "type": "_Value",
+ "description": "Ratio (e.g. 0.1, 1.0)" } }
               }
             }
           },

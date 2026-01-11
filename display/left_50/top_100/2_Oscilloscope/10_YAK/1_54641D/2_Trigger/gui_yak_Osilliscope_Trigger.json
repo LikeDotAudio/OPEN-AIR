@@ -21,7 +21,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "type": { "value": "NORMal", "type": "_GuiValue", "description": "NORMal, AVERage, PEAK, HRESolution" }
+                  "type": { "value": "NORMal", "type": "_Value",
+ "description": "NORMal, AVERage, PEAK, HRESolution" }
                 }
               }
             }
@@ -39,7 +40,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "type": { "value": "AVERage", "type": "_GuiValue", "description": "NORMal, AVERage, PEAK, HRESolution" }
+                  "type": { "value": "AVERage", "type": "_Value",
+ "description": "NORMal, AVERage, PEAK, HRESolution" }
                 }
               }
             }
@@ -57,7 +59,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "type": { "value": "PEAK", "type": "_GuiValue", "description": "NORMal, AVERage, PEAK, HRESolution" }
+                  "type": { "value": "PEAK", "type": "_Value",
+ "description": "NORMal, AVERage, PEAK, HRESolution" }
                 }
               }
             }
@@ -75,7 +78,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "type": { "value": "HRESolution", "type": "_GuiValue", "description": "NORMal, AVERage, PEAK, HRESolution" }
+                  "type": { "value": "HRESolution", "type": "_Value",
+ "description": "NORMal, AVERage, PEAK, HRESolution" }
                 }
               }
             }
@@ -93,7 +97,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "count": { "value": "8", "type": "_GuiValue", "description": "2 to 65536" }
+                  "count": { "value": "8", "type": "_Value",
+ "description": "2 to 65536" }
                 }
               }
             }
@@ -117,7 +122,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "mode": { "value": "EDGE", "type": "_GuiValue", "description": "EDGE, GLITch, PATTern, TV, DELay" }
+                  "mode": { "value": "EDGE", "type": "_Value",
+ "description": "EDGE, GLITch, PATTern, TV, DELay" }
                 }
               }
             }
@@ -135,7 +141,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "sweep": { "value": "AUTO", "type": "_GuiValue", "description": "AUTO or NORMal" }
+                  "sweep": { "value": "AUTO", "type": "_Value",
+ "description": "AUTO or NORMal" }
                 }
               }
             }
@@ -153,7 +160,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "source": { "value": "CHAN1", "type": "_GuiValue", "description": "CHAN1, CHAN2, EXT, LINE" }
+                  "source": { "value": "CHAN1", "type": "_Value",
+ "description": "CHAN1, CHAN2, EXT, LINE" }
                 }
               }},
             
@@ -167,7 +175,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "source": { "value": "CHAN1", "type": "_GuiValue", "description": "CHAN1, CHAN2, EXT, LINE" }
+                  "source": { "value": "CHAN1", "type": "_Value",
+ "description": "CHAN1, CHAN2, EXT, LINE" }
                 }
               }
           },
@@ -184,7 +193,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "source": { "value": "CHAN2", "type": "_GuiValue", "description": "CHAN1, CHAN2, EXT, LINE" }
+                  "source": { "value": "CHAN2", "type": "_Value",
+ "description": "CHAN1, CHAN2, EXT, LINE" }
                 }
               }
             }
@@ -203,7 +213,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "source": { "value": "EXT", "type": "_GuiValue", "description": "CHAN1, CHAN2, EXT, LINE" }
+                  "source": { "value": "EXT", "type": "_Value",
+ "description": "CHAN1, CHAN2, EXT, LINE" }
                 }
               }
             }
@@ -222,7 +233,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "level": { "value": "0.0", "type": "_GuiValue", "description": "Level in Volts" }
+                  "level": { "value": "0.0", "type": "_Value",
+ "description": "Level in Volts" }
                 }
               }
             }

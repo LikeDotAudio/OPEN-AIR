@@ -61,7 +61,8 @@
       "X_MHz": {
         "label_active": "X",
         "label_inactive": "X",
-        "type": "_GuiValue",
+        "type": "_Value",
+
         "layout": { "height": 30, "width": 100, "Font": 50 },
         "AES70": "OcaFrequencyActuator",
         "handler": "set_marker_frequency",
@@ -113,7 +114,8 @@
       "X_MHz": {
         "label_active": "X",
         "label_inactive": "X",
-        "type": "_GuiValue",
+        "type": "_Value",
+
         "AES70": "OcaFrequencyActuator",
         "handler": "set_marker_frequency",
         "yak_handler": {
@@ -164,7 +166,8 @@
       "X_MHz": {
         "label_active": "X",
         "label_inactive": "X",
-        "type": "_GuiValue",
+        "type": "_Value",
+
         "AES70": "OcaFrequencyActuator",
         "handler": "set_marker_frequency",
         "yak_handler": {
@@ -215,7 +218,8 @@
       "X_MHz": {
         "label_active": "X",
         "label_inactive": "X",
-        "type": "_GuiValue",
+        "type": "_Value",
+
         "AES70": "OcaFrequencyActuator",
         "handler": "set_marker_frequency",
         "yak_handler": {
@@ -266,7 +270,8 @@
       "X_MHz": {
         "label_active": "X",
         "label_inactive": "X",
-        "type": "_GuiValue",
+        "type": "_Value",
+
         "AES70": "OcaFrequencyActuator",
         "handler": "set_marker_frequency",
         "yak_handler": {
@@ -317,7 +322,8 @@
       "X_MHz": {
         "label_active": "X",
         "label_inactive": "X",
-        "type": "_GuiValue",
+        "type": "_Value",
+
         "AES70": "OcaFrequencyActuator",
         "handler": "set_marker_frequency",
         "yak_handler": {

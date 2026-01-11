@@ -66,12 +66,14 @@
             "fields": {
               "rbw_hz_value": {
                 "value": "100000",
-                "type": "_GuiValue",
+                "type": "_Value",
+
                 "description": "The SCPI input for RBW."
               },
               "vbw_hz_value": {
                 "value": "100000",
-                "type": "_GuiValue",
+                "type": "_Value",
+
                 "description": "The SCPI input for VBW."
               }
             }

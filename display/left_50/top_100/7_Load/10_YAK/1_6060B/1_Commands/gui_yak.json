@@ -142,7 +142,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "1.0", "type": "_GuiValue", "description": "Amps" }
+                  "value": { "value": "1.0", "type": "_Value",
+ "description": "Amps" }
                 }
               }
             }
@@ -160,7 +161,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "60", "type": "_GuiValue", "description": "6 or 60 A" }
+                  "value": { "value": "60", "type": "_Value",
+ "description": "6 or 60 A" }
                 }
               }
             }
@@ -178,7 +180,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "1000", "type": "_GuiValue", "description": "A/sec" }
+                  "value": { "value": "1000", "type": "_Value",
+ "description": "A/sec" }
                 }
               }
             }
@@ -202,7 +205,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "12.0", "type": "_GuiValue", "description": "Volts" }
+                  "value": { "value": "12.0", "type": "_Value",
+ "description": "Volts" }
                 }
               }
             }
@@ -220,7 +224,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "60", "type": "_GuiValue", "description": "6, 60, etc" }
+                  "value": { "value": "60", "type": "_Value",
+ "description": "6, 60, etc" }
                 }
               }
             }
@@ -244,7 +249,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "100", "type": "_GuiValue", "description": "Ohms" }
+                  "value": { "value": "100", "type": "_Value",
+ "description": "Ohms" }
                 }
               }
             }
@@ -262,7 +268,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "1000", "type": "_GuiValue", "description": "Range" }
+                  "value": { "value": "1000", "type": "_Value",
+ "description": "Range" }
                 }
               }
             }
@@ -292,7 +299,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "mode": { "value": "CONT", "type": "_GuiValue", "description": "CONT, PULS, TOGG" }
+                  "mode": { "value": "CONT", "type": "_Value",
+ "description": "CONT, PULS, TOGG" }
                 }
               }
             }
@@ -310,7 +318,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "0.5", "type": "_GuiValue", "description": "Main Level" }
+                  "value": { "value": "0.5", "type": "_Value",
+ "description": "Main Level" }
                 }
               }
             }
@@ -328,7 +337,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "5.0", "type": "_GuiValue", "description": "Transient Level" }
+                  "value": { "value": "5.0", "type": "_Value",
+ "description": "Transient Level" }
                 }
               }
             }
@@ -346,7 +356,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "100", "type": "_GuiValue", "description": "Hz" }
+                  "value": { "value": "100", "type": "_Value",
+ "description": "Hz" }
                 }
               }
             }
@@ -364,7 +375,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "50", "type": "_GuiValue", "description": "Percent" }
+                  "value": { "value": "50", "type": "_Value",
+ "description": "Percent" }
                 }
               }
             }

@@ -55,7 +55,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "val": { "value": "0", "type": "_GuiValue", "description": "Value in current Unit (e.g. dBm)" }
+                  "val": { "value": "0", "type": "_Value",
+ "description": "Value in current Unit (e.g. dBm)" }
                 }
               }
             }
@@ -73,7 +74,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "val": { "value": "10", "type": "_GuiValue", "description": "dB per division" }
+                  "val": { "value": "10", "type": "_Value",
+ "description": "dB per division" }
                 }
               }
             }
@@ -97,7 +99,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "val": { "value": "10", "type": "_GuiValue", "description": "dB (0 to 60)" }
+                  "val": { "value": "10", "type": "_Value",
+ "description": "dB (0 to 60)" }
                 }
               }
             }
@@ -135,7 +138,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "unit": { "value": "DBM", "type": "_GuiValue", "description": "DBM, DBMV, DBUV, V, W" }
+                  "unit": { "value": "DBM", "type": "_Value",
+ "description": "DBM, DBMV, DBUV, V, W" }
                 }
               }
             }

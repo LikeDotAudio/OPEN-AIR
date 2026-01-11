@@ -21,7 +21,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "source": { "value": "CHANnel2", "type": "_GuiValue", "description": "CHAN1, CHAN2, MATH" }
+                  "source": { "value": "CHANnel2", "type": "_Value",
+ "description": "CHAN1, CHAN2, MATH" }
                 }
               },
               "Outputs": {

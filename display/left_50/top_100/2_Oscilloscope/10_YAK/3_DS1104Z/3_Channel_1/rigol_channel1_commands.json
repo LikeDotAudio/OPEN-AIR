@@ -84,7 +84,8 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "coupling": { "value": "DC", "type": "_GuiValue", "description": "AC, DC, GND" } }
+                "fields": { "coupling": { "value": "DC", "type": "_Value",
+ "description": "AC, DC, GND" } }
               }
             }
           },
@@ -100,7 +101,8 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "atten": { "value": "10", "type": "_GuiValue", "description": "1, 10, 100" } }
+                "fields": { "atten": { "value": "10", "type": "_Value",
+ "description": "1, 10, 100" } }
               }
             }
           },
@@ -116,7 +118,8 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "limit": { "value": "20M", "type": "_GuiValue", "description": "20M or OFF" } }
+                "fields": { "limit": { "value": "20M", "type": "_Value",
+ "description": "20M or OFF" } }
               }
             }
           }

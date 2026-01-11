@@ -62,7 +62,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "amp": { "value": "1.0 V", "type": "_GuiValue", "description": "e.g., 1.0 V, 0 DBV" }
+                  "amp": { "value": "1.0 V", "type": "_Value",
+ "description": "e.g., 1.0 V, 0 DBV" }
                 }
               }
             }
@@ -80,7 +81,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "freq": { "value": "1000 HZ", "type": "_GuiValue", "description": "Frequency in Hz" }
+                  "freq": { "value": "1000 HZ", "type": "_Value",
+ "description": "Frequency in Hz" }
                 }
               }
             }

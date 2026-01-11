@@ -116,7 +116,8 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "limit": { "value": "20M", "type": "_GuiValue", "description": "20M or OFF" } }
+                "fields": { "limit": { "value": "20M", "type": "_Value",
+ "description": "20M or OFF" } }
               }
             }
           }

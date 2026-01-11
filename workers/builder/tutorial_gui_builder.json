@@ -43,7 +43,8 @@
       "description": "A non-editable field to display a value. This can be a static text or a value updated from a device.",
       "example": {
         "my_value": {
-          "type": "_GuiValue",
+          "type": "_Value",
+
           "value": "Initial Value"
         }
       }
@@ -384,7 +385,8 @@
                           "type": "OcaBlock",
                           "fields": {
                               "status": {
-                                  "type": "_GuiValue",
+                                  "type": "_Value",
+
                                   "value": "Command sent."
                               }
                           }

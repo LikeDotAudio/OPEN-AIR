@@ -128,8 +128,8 @@ class GenericInstrumentGui(ttk.Frame):
         # Make it BIG and clear so we know it's trying to do something
         self.status_label = ttk.Label(
             self,
-            text=f"⏳ Initializing {module_name}...
-Stand by for temporal insertion...",
+            text=f"""⏳ Initializing {module_name}...
+Stand by for temporal insertion...""",
             foreground="orange",
             justify="center",
             font=("Consolas", 10, "italic"),

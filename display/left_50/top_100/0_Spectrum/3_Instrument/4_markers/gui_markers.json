@@ -11,6 +11,7 @@
         "type": "_GuiButtonToggle",
         "AES70": "OcaBooleanActuator",
         "handler": "turn_all_markers_on",
+        "layout": { "height": 50, "width": 200, "sticky": "ew","font":15 },
         "yak_handler": {
           "enable": true,
           "yak_type": "set",
@@ -19,7 +20,7 @@
           "input_name": "state_bool",
           "converter": "bool_to_int"
         },
-        "layout": { "height": 30, "sticky": "" },
+        
         "options": {
           "ON": {
             "label_active": "All Markers ON",

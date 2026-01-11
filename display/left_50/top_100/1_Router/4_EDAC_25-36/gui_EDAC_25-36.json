@@ -2,11 +2,13 @@
   "Card_6_Snake_Interface": {
     "type": "OcaBlock",
     "description": "Card 6 - Snake Channel Routing",
+    "show_label": false,
     "layout": { "sticky": "ew" },
     "fields": {
       "Bus_AB0_Left_Out": {
         "type": "_GuiButtonToggler",
         "AES70": "OcaSwitch",
+        "layout": { "height": 23, "max_cols": 3, "width": 50, "sticky": "ew","font":14 },
         "handler": "set_snake_out_left_c6",
         "yak_handler": {
           "enable": true,
@@ -16,7 +18,6 @@
           "input_name": "relay_id",
           "converter": "int"
         },
-        "layout": { "height": 30, "max_cols": 3, "sticky": "ew" },
         "options": {
           "1": {
             "value": "601",
@@ -75,7 +76,7 @@
           "input_name": "relay_id",
           "converter": "int"
         },
-        "layout": { "height": 30, "max_cols": 3, "sticky": "ew" },
+"layout": { "height": 23, "max_cols": 3, "width": 50, "sticky": "ew","font":14 },
         "options": {
           "1": {
             "value": "621",
@@ -134,7 +135,7 @@
           "input_name": "relay_id",
           "converter": "int"
         },
-        "layout": { "height": 30, "max_cols": 3, "sticky": "ew" },
+"layout": { "height": 23, "max_cols": 3, "width": 50, "sticky": "ew","font":14 },
         "options": {
           "1": {
             "value": "611",
@@ -193,7 +194,7 @@
           "input_name": "relay_id",
           "converter": "int"
         },
-        "layout": { "height": 30, "max_cols": 3, "sticky": "ew" },
+        "layout": {"height": 23, "max_cols": 3, "width": 50, "sticky": "ew","font":14 },
         "options": {
           "1": {
             "value": "631",

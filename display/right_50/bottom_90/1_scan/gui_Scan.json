@@ -1,6 +1,7 @@
 {
       "multi_dataset_graph": {
         "type": "plot_widget",
+       "layout": {"height": 1000} ,
         "id": "multi_dataset_plot",
         "plot_mode": "time_domain",
         "title": "Multiple Datasets Demo",

@@ -38,7 +38,7 @@
           "input_name": "hz_value",
           "converter": "mhz_to_hz"
         },
-        "layout": { "height": 30, "max_cols": 5, "sticky": "ew" },
+        "layout": {"height": 10, "max_cols": 5, "width": 50, "sticky": "ew","font":10 },
         "options": {
           "1": {
             "value": "1",
@@ -157,7 +157,7 @@
           "input_name": "hz_value",
           "converter": "khz_to_hz"
         },
-        "layout": { "height": 30, "max_cols": 5, "sticky": "ew" },
+        "layout": {"height": 10, "max_cols": 5, "width": 50, "sticky": "ew","font":10 },
         "options": {
           "1": {
             "value": "1000",
@@ -279,6 +279,7 @@
         "type": "_GuiButtonToggle",
         "AES70": "OcaBooleanActuator",
         "handler": "toggle_vbw_auto",
+       "layout": { "height": 50, "width": 200, "sticky": "ew","font":15 },
         "yak_handler": {
           "enable": true,
           "yak_type": "set",
@@ -287,7 +288,6 @@
           "input_name": "state_bool",
           "converter": "bool_to_int"
         },
-        "layout": { "height": 30, "sticky": "" },
         "options": {
           "ON": {
             "label_active": "Auto ON",

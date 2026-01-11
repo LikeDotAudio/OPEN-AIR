@@ -1,13 +1,15 @@
 {
-  "Card_10_Coax_Routing": {
+  "Card_001_Coax_Routing": {
     "type": "OcaBlock",
-    "description": "Card 9 - Coax Cross-Point Routing",
+    "description": "Card 001 - Coax Cross-Point Routing",
+    "show_label": false,
     "layout": { "sticky": "ew" },
     "fields": {
       "Main_IO_Toggler": {
         "type": "_GuiButtonToggler",
         "AES70": "OcaSwitch",
         "handler": "set_relay_c9",
+        
         "yak_handler": {
           "enable": true,
           "yak_type": "set",
@@ -16,7 +18,7 @@
           "input_name": "relay_id",
           "converter": "int"
         },
-        "layout": { "height": 30, "max_cols": 4, "sticky": "ew" },
+        "layout": {"height": 23, "max_cols": 3, "width": 50, "sticky": "ew","font":14 },
         "options": {
           "1": {
             "value": "901",
@@ -87,7 +89,7 @@
           "input_name": "relay_id",
           "converter": "int"
         },
-        "layout": { "height": 30, "max_cols": 4, "sticky": "ew" },
+        "layout": { "height": 23, "max_cols": 3, "width": 50, "sticky": "ew","font":14  },
         "options": {
           "1": {
             "value": "910",

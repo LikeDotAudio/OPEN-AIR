@@ -124,7 +124,7 @@
           "input_name": "hz_value",
           "converter": "mhz_to_hz"
         },
-        "layout": { "height": 30, "sticky": "ew", "max_cols": 5 },
+        "layout": {"height": 10, "max_cols": 4, "width": 50, "sticky": "ew","font":12 },
         "options": {
           "1": {
             "value": "0.01",

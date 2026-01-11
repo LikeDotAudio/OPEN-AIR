@@ -3,6 +3,7 @@
         "type": "plot_widget",
         "id": "middle_graph",
         "plot_mode": "time_domain",
+         "layout": {"height": 300},
         "title": "Multiple Datasets Demo",
         "axis": {
           "x": { "label": "X-Axis", "scale": "linear", "min": 0, "max": 1, "color": "white" },

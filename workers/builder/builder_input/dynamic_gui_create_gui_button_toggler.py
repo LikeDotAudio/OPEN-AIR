@@ -107,7 +107,24 @@ class GuiButtonTogglerCreatorMixin:
                 value=initial_selected_key if initial_selected_key else ""
             )
 
+            layout = config.get("layout", {})
+            font_size = layout.get("font")
+
+            selected_style_name = "Custom.Selected.TButton"
+            unselected_style_name = "Custom.TogglerUnselected.TButton"
+
+            if font_size:
+                instance_id = id(group_frame)
+                selected_style_name = f"Instance.{instance_id}.{selected_style_name}"
+                unselected_style_name = f"Instance.{instance_id}.{unselected_style_name}"
+
+                style = ttk.Style()
+                # Inherit from base styles and add font
+                style.configure(selected_style_name, font=("TkDefaultFont", font_size))
+                style.configure(unselected_style_name, font=("TkDefaultFont", font_size))
+
             def update_button_styles(*args):
+                nonlocal selected_style_name, unselected_style_name
                 selected_keys = (
                     selected_keys_var.get().split(",")
                     if selected_keys_var.get()
@@ -120,12 +137,12 @@ class GuiButtonTogglerCreatorMixin:
                         button_text = option_data.get(
                             "label_active", option_data.get("label", "")
                         )
-                        button_widget.config(style="Custom.Selected.TButton")
+                        button_widget.config(style=selected_style_name)
                     else:
                         button_text = option_data.get(
                             "label_inactive", option_data.get("label", "")
                         )
-                        button_widget.config(style="Custom.TogglerUnselected.TButton")
+                        button_widget.config(style=unselected_style_name)
 
                     value = option_data.get("value")
                     units = option_data.get("units")
@@ -159,7 +176,6 @@ class GuiButtonTogglerCreatorMixin:
 
                 selected_keys_var.set(",".join(current_selected_keys))
 
-            layout = config.get("layout", {})
             max_cols = layout.get("max_cols", 3)
             button_height = layout.get("height", 30)
             button_sticky = layout.get("sticky", "ew")
@@ -168,7 +184,7 @@ class GuiButtonTogglerCreatorMixin:
             col_num = 0
 
             for option_key, option_data in options_data.items():
-                button = ttk.Button(button_container)
+                button = ttk.Button(button_container, style=unselected_style_name)
                 button.bind(
                     "<Button-1>",
                     lambda event, key=option_key: on_button_click(event, key),

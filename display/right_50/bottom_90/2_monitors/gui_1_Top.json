@@ -2,6 +2,7 @@
       "top_graph": {
         "type": "plot_widget",
         "id": "top_graph_plot",
+         "layout": {"height": 300},
         "plot_mode": "time_domain",
         "title": "Multiple Datasets Demo",
         "axis": {

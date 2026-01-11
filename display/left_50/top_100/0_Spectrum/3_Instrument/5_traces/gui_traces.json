@@ -317,7 +317,9 @@
       "AVERAGING": {
         "type": "_GuiButtonToggler",
         "AES70": "OcaSwitch",
+        "layout": {"height": 20, "max_cols": 5, "width": 50, "sticky": "ew","font":10 },
         "handler": "set_averaging",
+        
         "yak_handler": {
           "enable": true,
           "yak_type": "set",
@@ -326,7 +328,7 @@
           "input_name": "count_int",
           "converter": "int"
         },
-        "layout": { "height": 30, "sticky": "ew" },
+        
         "options": {
           "0": {
             "label_active": "Off",

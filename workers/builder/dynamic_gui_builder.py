@@ -228,67 +228,75 @@ class DynamicGuiBuilder(
         )
 
         self.canvas.create_window((0, 0), window=self.scroll_frame, anchor="nw")
-        self.canvas.configure(yscrollcommand=self.scrollbar.set)
-
-        self.scroll_frame.bind("<Configure>", self._on_frame_configure)
-        self.canvas.bind("<Configure>", self._on_canvas_configure)
-
-        self.canvas.grid(row=0, column=0, sticky="nsew")
-        self.scrollbar.grid(row=0, column=1, sticky="ns")
-
-        # 3. Reload Button
-        if app_constants.RELOAD_CONFIG_DISPLAYED:
-            self.button_frame = ttk.Frame(self)
-            self.button_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=(5, 10), padx=10)
-            ttk.Button(
-                self.button_frame, text="Reload Config", command=self._force_rebuild_gui
-            ).pack(side=tk.LEFT, pady=10)
-        else:
-            self.button_frame = None
-
-        # 4. Trigger Build
-        if self.json_filepath:
-            self._load_and_build_from_file()
-        else:
-            self._rebuild_gui()
-            self.gui_built = True
-
-    # Event handler called when the scrollable frame's size or position changes.
-    # This function is crucial for ensuring the scrollable area of the canvas is
-    # updated to match the total size of the content within the frame.
-    # Inputs:
-    #     event (tk.Event, optional): The event object passed by the tkinter framework.
-    # Outputs:
-    #     None.
-    def _on_frame_configure(self, event=None):
-        """
-        Event handler for when the scrollable frame is configured. It updates the scroll region of the canvas.
-
-        Args:
-            event (tk.Event, optional): The event object. Defaults to None.
+                self.canvas_window_id = self.canvas.create_window((0, 0), window=self.scroll_frame, anchor="nw")
+                self.canvas.configure(yscrollcommand=self.scrollbar.set)
         
-        Returns:
-            None
-        """
-        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
-
-    # Event handler called when the canvas widget itself is resized.
-    # This function adjusts the width of the frame window embedded within the canvas
-    # to match the new width of the canvas, ensuring content flows correctly on resize.
-    # Inputs:
-    #     event (tk.Event, optional): The event object containing the new dimensions.
-    # Outputs:
-    #     None.
-    def _on_canvas_configure(self, event=None):
-        """
-        Event handler for when the canvas is configured. It resizes the window within the canvas.
-
-        Args:
-            event (tk.Event, optional): The event object. Defaults to None.
-
-        Returns:
-            None
-        """
-        self.canvas.itemconfig(
-            self.canvas.find_withtag("all")[0], width=event.width, height=event.height
-        )
+                self.scroll_frame.bind("<Configure>", self._on_frame_configure)
+                self.canvas.bind("<Configure>", self._on_canvas_configure)
+        
+                self.canvas.grid(row=0, column=0, sticky="nsew")
+                self.scrollbar.grid(row=0, column=1, sticky="ns")
+        
+                # 3. Reload Button
+                if app_constants.RELOAD_CONFIG_DISPLAYED:
+                    self.button_frame = ttk.Frame(self)
+                    self.button_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=(5, 10), padx=10)
+                    ttk.Button(
+                        self.button_frame, text="Reload Config", command=self._force_rebuild_gui
+                    ).pack(side=tk.LEFT, pady=10)
+                else:
+                    self.button_frame = None
+        
+                # 4. Trigger Build
+                if self.json_filepath:
+                    self._load_and_build_from_file()
+                else:
+                    self._rebuild_gui()
+                    self.gui_built = True
+        
+            # Event handler called when the scrollable frame's size or position changes.
+            # This function is crucial for ensuring the scrollable area of the canvas is
+            # updated to match the total size of the content within the frame.
+            # Inputs:
+            #     event (tk.Event, optional): The event object passed by the tkinter framework.
+            # Outputs:
+            #     None.
+            def _on_frame_configure(self, event=None):
+                """
+                Event handler for when the scrollable frame is configured. It updates the scroll region of the canvas.
+        
+                Args:
+                    event (tk.Event, optional): The event object. Defaults to None.
+                
+                Returns:
+                    None
+                """
+                self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        
+            # Event handler called when the canvas widget itself is resized.
+            # This function adjusts the width of the frame window embedded within the canvas
+            # to match the new width of the canvas, ensuring content flows correctly on resize.
+            # Inputs:
+            #     event (tk.Event, optional): The event object containing the new dimensions.
+            # Outputs:
+            #     None.
+            def _on_canvas_configure(self, event=None):
+                """
+                Event handler for when the canvas is configured. It adjusts the width of the
+                window item within the canvas to match the canvas's width.
+        
+                Args:
+                    event (tk.Event, optional): The event object. Defaults to None.
+        
+                Returns:
+                    None
+                """
+                # Update the width of the canvas window item to match the canvas width.
+                # This helps prevent horizontal squashing if the canvas resizes.
+                if event.width and self.canvas_window_id: # Ensure event.width is valid and window ID exists
+                    self.canvas.itemconfig(self.canvas_window_id, width=event.width)
+        
+                # The scrollregion update is handled by _on_frame_configure, which is bound to the
+                # scroll_frame's <Configure> event. Forcing the canvas window's height to match the
+                # canvas height can interfere with vertical scrolling and is generally not needed here.
+        

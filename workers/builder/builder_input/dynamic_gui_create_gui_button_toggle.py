@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260110.2105.5
+# Version 20260110.2115.6
 
 import os
 import tkinter as tk
@@ -163,13 +163,18 @@ class GuiButtonToggleCreatorMixin:
             # Configure Styles
             
             # 1. Normal (Inactive) Style
+            # Inactive = Default BG, Hover = Light Grey
             if not style.layout(unique_style_name):
                  style.layout(unique_style_name, style.layout("TButton"))
                  
             style.configure(unique_style_name, font=inactive_font_tuple)
-            style.map(unique_style_name, font=[('active', active_font_tuple), ('!active', inactive_font_tuple)])
+            style.map(unique_style_name, 
+                font=[('active', active_font_tuple), ('!active', inactive_font_tuple)],
+                background=[('active', 'light grey')]  # <--- Light Grey when hovered
+            )
 
-            # 2. Selected (Active) Style - NOW WITH ORANGE!
+            # 2. Selected (Active) Style
+            # Active = Orange, Hover = Blue
             if not style.layout(unique_selected_style_name):
                  style.layout(unique_selected_style_name, style.layout("TButton"))
 
@@ -180,15 +185,15 @@ class GuiButtonToggleCreatorMixin:
                 foreground="black"
             )
             
-            # Map for hover/active states on the Selected button to keep it Orange-ish
+            # Map for hover/active states
             style.map(unique_selected_style_name,
-                background=[('active', 'dark orange'), ('!active', 'orange')],
-                foreground=[('active', 'black'), ('!active', 'black')]
+                background=[('active', 'blue'), ('!active', 'orange')],  # <--- Blue on hover, Orange otherwise
+                foreground=[('active', 'white'), ('!active', 'black')]   # <--- White text on Blue for contrast
             )
             
             if app_constants.global_settings["debug_enabled"]:
                 debug_logger(
-                    message=f"🎨 Styled '{unique_selected_style_name}' to be ORANGE when active!",
+                    message=f"🎨 Styled '{unique_selected_style_name}': Orange (Active) -> Blue (Hover).",
                     **_get_log_args(),
                 )
 
@@ -222,10 +227,10 @@ class GuiButtonToggleCreatorMixin:
                 # Updates the button's appearance based on its current state.
                 current_state = state_var.get()
                 if current_state:  
-                    # Button is ON (Orange)
+                    # Button is ON (Orange/Blue)
                     button.config(text=on_text, style=unique_selected_style_name)
                 else:  
-                    # Button is OFF (Default)
+                    # Button is OFF (Default/Light Grey)
                     button.config(text=off_text, style=unique_style_name)
 
             def on_button_click(event):
@@ -278,7 +283,7 @@ class GuiButtonToggleCreatorMixin:
 
             if app_constants.global_settings["debug_enabled"]:
                 debug_logger(
-                    message=f"✅ SUCCESS! The toggle button '{label}' is alive, bound, and ORANGE-READY!",
+                    message=f"✅ SUCCESS! The toggle button '{label}' is active, hovering, and spectral!",
                     **_get_log_args(),
                 )
                 

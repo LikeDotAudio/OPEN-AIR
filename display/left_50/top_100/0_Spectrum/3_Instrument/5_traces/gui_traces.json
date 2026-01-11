@@ -273,7 +273,7 @@
           "input_name": "state_bool",
           "converter": "bool_to_int"
         },
-        "layout": { "height": 100, "width": 200, "sticky": "ew","font":15 },
+        "layout": { "height": 75, "width": 200, "sticky": "ew","font":15 },
         "options": {
           "ON": {
             "label_active": "CONTINUOUS ON",
@@ -290,9 +290,9 @@
         }
       },
       "initiate_continuous_on": {
-        "label_active": "Continuous Initiate",
-        "label_inactive": "Continuous Initiate",
-        "layout": { "height": 100, "width": 200, "sticky": "ew","font":15 },
+        "label_active": "CONTINUOUS INITIATED",
+        "label_inactive": "CONTINUOUS INITIATE",
+        "layout": { "height": 75, "width": 200, "sticky": "ew","font":15 },
 
         "type": "_GuiActuator",
         "AES70": "OcaBooleanActuator",

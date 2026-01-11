@@ -62,6 +62,7 @@
         "label_active": "X",
         "label_inactive": "X",
         "type": "_GuiValue",
+        "layout": { "height": 30, "width": 100, "Font": 50 },
         "AES70": "OcaFrequencyActuator",
         "handler": "set_marker_frequency",
         "yak_handler": {

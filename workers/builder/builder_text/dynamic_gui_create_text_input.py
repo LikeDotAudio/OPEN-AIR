@@ -77,12 +77,17 @@ class TextInputCreatorMixin:
             text_var = tk.StringVar()
             text_var.set(config.get("value_default", ""))
 
-            # Create a style for the entry if color is specified
-            style_name = "Custom.TEntry"
+            # Create a style for the entry with light grey background and black text
+            clean_path = path.replace('/', '_') if path else "default"
+            style_name = f"LightGrey.{clean_path}.TEntry"
+            style = ttk.Style()
+            
+            # Default to black text, override if custom_colour is provided
+            text_color = "black"
             if custom_colour:
-                style_name = f"Custom.{path.replace('/', '_')}.TEntry"
-                style = ttk.Style()
-                style.configure(style_name, foreground=custom_colour)
+                text_color = custom_colour
+                
+            style.configure(style_name, fieldbackground="#bcbcbc", foreground=text_color)
 
             entry = ttk.Entry(frame, textvariable=text_var, font=custom_font, style=style_name)
             entry.pack(side=tk.LEFT, fill=tk.X, expand=True)

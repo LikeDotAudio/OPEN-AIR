@@ -107,6 +107,8 @@ class GuiListboxCreatorMixin:
                 selectmode=tk.SINGLE,
                 height=5,
                 width=30,
+                bg="#bcbcbc",
+                fg="black",
             )
 
             scrollbar.config(command=listbox.yview)

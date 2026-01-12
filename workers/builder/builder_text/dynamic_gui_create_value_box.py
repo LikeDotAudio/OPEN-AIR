@@ -127,11 +127,17 @@ class ValueBoxCreatorMixin:
             # Prepare Font
             entry_font = ("TkDefaultFont", font_size)
             
-            style_name = "Custom.TEntry"
+            # Create a style for the entry with light grey background and black text
+            clean_path = path.replace('/', '_') if path else "default"
+            style_name = f"LightGrey.{clean_path}.TEntry"
+            style = ttk.Style()
+            
+            # Default to black text, override if custom_colour is provided
+            text_color = "black"
             if custom_colour:
-                style_name = f"Custom.{path.replace('/', '_')}.TEntry"
-                style = ttk.Style()
-                style.configure(style_name, foreground=custom_colour)
+                text_color = custom_colour
+                
+            style.configure(style_name, fieldbackground="#bcbcbc", foreground=text_color)
 
             entry_widget = ttk.Entry(
                 sub_frame, 

@@ -216,13 +216,18 @@ class GuiDropdownOptionCreatorMixin:
                 except ValueError:
                     debug_logger(message="❌ Invalid selection in dropdown.")
 
+            # Configure custom style for light grey background and black text
+            style = ttk.Style()
+            style.configure("LightGrey.TCombobox", fieldbackground="#bcbcbc", foreground="black", background="#bcbcbc")
+            style.map("LightGrey.TCombobox", fieldbackground=[("readonly", "#bcbcbc")], background=[("readonly", "#bcbcbc")])
+
             # Create a Combobox that uses the displayed_text_var for its text.
             dropdown = ttk.Combobox(
                 sub_frame,
                 textvariable=displayed_text_var,
                 values=option_labels,
                 state="readonly",
-                style="BlackText.TCombobox",
+                style="LightGrey.TCombobox",
             )
 
             dropdown.bind("<<ComboboxSelected>>", on_select)

@@ -8,7 +8,7 @@
       "min": -60.0,
       "max": 12.0,
       "value_default": 0.0,
-      "unit": "dB",
+      "units": "dB",
       "log_exponent": 1.0,
       "width": 100,
       "height": 240,

@@ -49,7 +49,7 @@
                 "value_default": "0.0",
                 "min": "0.0",
                 "max": "50.0",
-                "unit": "A",
+                "units": "A",
                 "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CURR <value>" } }
               }
             }
@@ -64,7 +64,7 @@
                 "value_default": "0.0",
                 "min": "0.0",
                 "max": "50.0",
-                "unit": "A",
+                "units": "A",
                 "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CURR:TLEV <value>" } }
               },
               "Pulse_Enable": {
@@ -88,7 +88,7 @@
             "value_default": "3.0",
             "min": "0.0",
             "max": "48.0",
-            "unit": "V",
+            "units": "V",
             "message_details": {
               "DC_LOAD_MODEL": {
                 "type": "_GuiActuator",
@@ -103,7 +103,7 @@
             "value_default": "500",
             "min": "10",
             "max": "2500",
-            "unit": "A/ms",
+            "units": "A/ms",
             "message_details": {
               "DC_LOAD_MODEL": {
                 "type": "_GuiActuator",

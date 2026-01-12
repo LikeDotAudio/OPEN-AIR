@@ -21,17 +21,17 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "source": { "value": "CHANnel2", "type": "_Value",
+                  "source": { "value": "CHANnel2", "type": "_GuiValue", "label": "Source",
  "description": "CHAN1, CHAN2, MATH" }
                 }
               },
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "vpp": { "value": "Vpp Value", "type": "_GuiValue" },
-                  "vrms": { "value": "Vrms Value", "type": "_GuiValue" },
-                  "vmax": { "value": "Vmax Value", "type": "_GuiValue" },
-                  "vmin": { "value": "Vmin Value", "type": "_GuiValue" }
+                  "vpp": { "value": "Vpp Value", "type": "_GuiValue", "label": "Vpp", "units": "V" },
+                  "vrms": { "value": "Vrms Value", "type": "_GuiValue", "label": "Vrms", "units": "V" },
+                  "vmax": { "value": "Vmax Value", "type": "_GuiValue", "label": "Vmax", "units": "V" },
+                  "vmin": { "value": "Vmin Value", "type": "_GuiValue", "label": "Vmin", "units": "V" }
                 }
               }
             }
@@ -49,16 +49,16 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "source": { "value": "CHANnel2", "type": "_GuiValue" }
+                  "source": { "value": "CHANnel2", "type": "_GuiValue", "label": "Source" }
                 }
               },
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "frequency": { "value": "Freq Value", "type": "_GuiValue" },
-                  "period": { "value": "Period Value", "type": "_GuiValue" },
-                  "duty_cycle": { "value": "Duty Cycle Value", "type": "_GuiValue" },
-                  "rise_time": { "value": "Rise Time Value", "type": "_GuiValue" }
+                  "frequency": { "value": "Freq Value", "type": "_GuiValue", "label": "Frequency", "units": "Hz" },
+                  "period": { "value": "Period Value", "type": "_GuiValue", "label": "Period", "units": "s" },
+                  "duty_cycle": { "value": "Duty Cycle Value", "type": "_GuiValue", "label": "Duty Cycle", "units": "%" },
+                  "rise_time": { "value": "Rise Time Value", "type": "_GuiValue", "label": "Rise Time", "units": "s" }
                 }
               }
             }
@@ -90,7 +90,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "scale": { "value": "1.0", "type": "_GuiValue" } }
+                "fields": { "scale": { "value": "1.0", "type": "_GuiValue", "label": "Scale", "units": "V/div" } }
               }
             }
           },
@@ -106,7 +106,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "offset": { "value": "0.0", "type": "_GuiValue" } }
+                "fields": { "offset": { "value": "0.0", "type": "_GuiValue", "label": "Offset", "units": "V" } }
               }
             }
           },
@@ -122,7 +122,8 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "coupling": { "value": "DC", "type": "_GuiValue" } }
+                "fields": { "coupling": { "value": "DC", "type": "_GuiValue", "label": "Coupling",
+ "description": "AC, DC, GND" } }
               }
             }
           },
@@ -138,7 +139,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "attenuation": { "value": "10", "type": "_GuiValue" } }
+                "fields": { "attenuation": { "value": "10", "type": "_GuiValue", "label": "Probe Atten" } }
               }
             }
           },
@@ -154,7 +155,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "string": { "value": "\"SIG2\"", "type": "_GuiValue" } }
+                "fields": { "string": { "value": "\"SIG2\"", "type": "_GuiValue", "label": "Label" } }
               }
             }
           },
@@ -170,7 +171,8 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "state": { "value": "ON", "type": "_GuiValue" } }
+                "fields": { "state": { "value": "ON", "type": "_GuiValue", "label": "BW Limit",
+ "description": "ON or OFF" } }
               }
             }
           },
@@ -186,7 +188,8 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "state": { "value": "OFF", "type": "_GuiValue" } }
+                "fields": { "state": { "value": "OFF", "type": "_GuiValue", "label": "Invert",
+ "description": "ON or OFF" } }
               }
             }
           }

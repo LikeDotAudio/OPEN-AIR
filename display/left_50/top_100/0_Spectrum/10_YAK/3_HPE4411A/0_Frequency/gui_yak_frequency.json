@@ -1,30 +1,50 @@
 {
-  "nab": {
+  "NAB_Settings": {
     "type": "OcaBlock",
-    "description": "ESA Frequency Readbacks",
+    "description": "NAB Frequency Monitoring",
+    "show_label": false,
     "fields": {
-      "Monitor_Frequency": {
+      "NAB_Frequency_settings": {
         "type": "OcaBlock",
-        "description": "Read Current Settings",
+        "description": "Primary Frequency Monitoring",
         "fields": {
-          "Get_Freq_Settings": {
+          "Execute Command": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label_active": "Get Frequency Settings",
+            "label_inactive": "Get Frequency Settings",
+            "active": true,
+            "trigger": false,
+            "message": ":FREQuency:STARt?;:FREQuency:STOP?;:FREQuency:CENTer?;:FREQuency:SPAN?",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Outputs": {
             "type": "OcaBlock",
             "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":SENS:FREQ:STAR?;:SENS:FREQ:STOP?;:SENS:FREQ:CENT?;:SENS:FREQ:SPAN?",
-                "layout": { "height": 30, "sticky": "" }
+              "start_freq": {
+                "label": "Start Frequency (Hz)",
+                "value": "The current start frequency in Hz.",
+                "type": "_GuiValue",
+                "units": "Hz"
+                
               },
-              "Outputs": {
-                "type": "OcaBlock",
-                "fields": {
-                  "start_freq": { "value": "Start Hz", "type": "_GuiValue" },
-                  "stop_freq": { "value": "Stop Hz", "type": "_GuiValue" },
-                  "center_freq": { "value": "Center Hz", "type": "_GuiValue" },
-                  "span_freq": { "value": "Span Hz", "type": "_GuiValue" }
-                }
+              "stop_freq": {
+                "label": "Stop Frequency (Hz)",
+                "value": "The current stop frequency in Hz.",
+                "type": "_GuiValue",
+                "units": "Hz"
+              },
+              "center_freq": {
+                "label": "Center Frequency (Hz)",
+                "value": "The current center frequency in Hz.",
+                "type": "_GuiValue",
+                "units": "Hz"
+              },
+              "span_freq": {
+                "label": "Span Frequency (Hz)",
+                "value": "The current span frequency in Hz.",
+                "type": "_GuiValue",
+                "units": "Hz"
               }
             }
           }
@@ -32,86 +52,112 @@
       }
     }
   },
-  "rig": {
+  "RIG_Settings": {
     "type": "OcaBlock",
-    "description": "ESA Frequency Control",
+    "description": "RIG Frequency commands",
     "fields": {
-      "Center_Span_Control": {
+      "Rig_freq_start_stop": {
         "type": "OcaBlock",
+        "description": "Frequency Range Commands",
         "fields": {
-          "Set_Center_Freq": {
-            "type": "OcaBlock",
-            "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":SENS:FREQ:CENT <freq>",
-                "layout": { "height": 30, "sticky": "" }
-              },
-              "Input": {
-                "type": "OcaBlock",
-                "fields": { "freq": { "value": "750 MHZ", "type": "_GuiValue" } }
-              }
-            }
-          },
-          "Set_Span_Freq": {
-            "type": "OcaBlock",
-            "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":SENS:FREQ:SPAN <freq>",
-                "layout": { "height": 30, "sticky": "" }
-              },
-              "Input": {
-                "type": "OcaBlock",
-                "fields": { "freq": { "value": "1.5 GHZ", "type": "_GuiValue" } }
-              }
-            }
-          },
-          "Set_Full_Span": {
+          "Execute Command": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
+            "label_active": "Set Start and Stop Frequency",
+            "label_inactive": "Set Start and Stop Frequency",
             "active": true,
-            "label_inactive": "Full Span",
-            "Execute Command": { "message": ":SENS:FREQ:SPAN:FULL" }
+            "trigger": false,
+            "message": ":FREQuency:STARt <start_freq>;:FREQuency:STOP <stop_freq>",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Input": {
+            "type": "OcaBlock",
+            "fields": {
+              "start_freq": {
+                "label": "Start Frequency (Hz)",
+                "value": "12345678",
+                "type": "_GuiValue",
+                "units": "Hz"
+              },
+              "stop_freq": {
+                "label": "Stop Frequency (Hz)",
+                "value": "12345678",
+                "type": "_GuiValue",
+                "units": "Hz"
+              }
+            }
           }
         }
       },
-      "Start_Stop_Control": {
+      "Set_Span_Frequency": {
         "type": "OcaBlock",
         "fields": {
-          "Set_Start_Freq": {
+          "Execute Command": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":FREQuency:SPAN <hz_value>",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Input": {
             "type": "OcaBlock",
             "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":SENS:FREQ:STAR <freq>",
-                "layout": { "height": 30, "sticky": "" }
-              },
-              "Input": {
-                "type": "OcaBlock",
-                "fields": { "freq": { "value": "0 Hz", "type": "_GuiValue" } }
+              "hz_value": {
+                "label": "Span Frequency (Hz)",
+                "value": "12345678",
+                "type": "_GuiValue",
+                "units": "Hz"
               }
             }
+          }
+        }
+      },
+      "Set_Start_Freq_MHz": {
+        "type": "OcaBlock",
+        "fields": {
+          "Execute Command": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "label": "Set Start Frequency",
+            "active": true,
+            "trigger": false,
+            "message": ":FREQuency:STARt <hz_value>",
+            "layout": { "height": 30, "sticky": "" }
           },
-          "Set_Stop_Freq": {
+          "Input": {
             "type": "OcaBlock",
             "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":SENS:FREQ:STOP <freq>",
-                "layout": { "height": 30, "sticky": "" }
-              },
-              "Input": {
-                "type": "OcaBlock",
-                "fields": { "freq": { "value": "1.5 GHZ", "type": "_GuiValue" } }
+              "hz_value": {
+                "label": "Start Frequency (Hz)",
+                "value": "12345678",
+                "type": "_GuiValue",
+                "units": "Hz"
+              }
+            }
+          }
+        }
+      },
+      "Set_Stop_Freq_MHz": {
+        "type": "OcaBlock",
+        "fields": {
+          "Execute Command": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "label_active": "Set Stop Frequency",
+            "label_inactive": "Set Stop Frequency",
+            "message": ":FREQuency:STOP <hz_value>",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Input": {
+            "type": "OcaBlock",
+            "fields": {
+              "hz_value": {
+                "value": "987654321",
+                "type": "_GuiValue",
+                "units": "Hz"
               }
             }
           }
@@ -120,3 +166,4 @@
     }
   }
 }
+  

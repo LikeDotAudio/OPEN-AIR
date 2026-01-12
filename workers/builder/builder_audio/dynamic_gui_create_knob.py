@@ -270,7 +270,8 @@ class KnobCreatorMixin:
             command=None,  # Command is handled by the press/drag/release events now
         )
 
-        if label:
+        show_label = config.get("show_label", True)
+        if label and show_label:
             ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
 
         try:

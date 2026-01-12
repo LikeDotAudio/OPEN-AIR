@@ -20,9 +20,9 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volts": { "value": "V", "type": "_GuiValue" },
-                  "amps": { "value": "A", "type": "_GuiValue" },
-                  "watts": { "value": "W", "type": "_GuiValue" }
+                  "volts": { "value": "V", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "amps": { "value": "A", "type": "_GuiValue", "label": "Current", "units": "A" },
+                  "watts": { "value": "W", "type": "_GuiValue", "label": "Power", "units": "W" }
                 }
               }
             }
@@ -46,7 +46,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "status_byte": { "value": "Byte Value", "type": "_GuiValue" }
+                  "status_byte": { "value": "Byte Value", "type": "_GuiValue", "label": "Status", "units": "" }
                 }
               }
             }
@@ -64,7 +64,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "error_msg": { "value": "Error Message", "type": "_GuiValue" }
+                  "error_msg": { "value": "Error Message", "type": "_GuiValue", "label": "Error", "units": "" }
                 }
               }
             }
@@ -82,7 +82,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "idn_string": { "value": "Device ID", "type": "_GuiValue" }
+                  "idn_string": { "value": "Device ID", "type": "_GuiValue", "label": "ID String", "units": "" }
                 }
               }
             }
@@ -142,8 +142,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "1.0", "type": "_Value",
- "description": "Amps" }
+                  "value": { "value": "1.0", "type": "_GuiValue", "label": "Current", "units": "A", "description": "Amps" }
                 }
               }
             }
@@ -161,8 +160,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "60", "type": "_Value",
- "description": "6 or 60 A" }
+                  "value": { "value": "60", "type": "_GuiValue", "label": "Range", "units": "A", "description": "6 or 60 A" }
                 }
               }
             }
@@ -180,8 +178,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "1000", "type": "_Value",
- "description": "A/sec" }
+                  "value": { "value": "1000", "type": "_GuiValue", "label": "Slew Rate", "units": "A/s", "description": "A/sec" }
                 }
               }
             }
@@ -205,8 +202,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "12.0", "type": "_Value",
- "description": "Volts" }
+                  "value": { "value": "12.0", "type": "_GuiValue", "label": "Voltage", "units": "V", "description": "Volts" }
                 }
               }
             }
@@ -224,8 +220,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "60", "type": "_Value",
- "description": "6, 60, etc" }
+                  "value": { "value": "60", "type": "_GuiValue", "label": "Range", "units": "V", "description": "6, 60, etc" }
                 }
               }
             }
@@ -249,8 +244,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "100", "type": "_Value",
- "description": "Ohms" }
+                  "value": { "value": "100", "type": "_GuiValue", "label": "Resistance", "units": "Ohms", "description": "Ohms" }
                 }
               }
             }
@@ -268,8 +262,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "1000", "type": "_Value",
- "description": "Range" }
+                  "value": { "value": "1000", "type": "_GuiValue", "label": "Range", "units": "Ohms", "description": "Range" }
                 }
               }
             }
@@ -299,8 +292,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "mode": { "value": "CONT", "type": "_Value",
- "description": "CONT, PULS, TOGG" }
+                  "mode": { "value": "CONT", "type": "_GuiValue", "label": "Mode", "units": "", "description": "CONT, PULS, TOGG" }
                 }
               }
             }
@@ -318,8 +310,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "0.5", "type": "_Value",
- "description": "Main Level" }
+                  "value": { "value": "0.5", "type": "_GuiValue", "label": "Level A", "units": "A", "description": "Main Level" }
                 }
               }
             }
@@ -337,8 +328,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "5.0", "type": "_Value",
- "description": "Transient Level" }
+                  "value": { "value": "5.0", "type": "_GuiValue", "label": "Level B", "units": "A", "description": "Transient Level" }
                 }
               }
             }
@@ -356,8 +346,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "100", "type": "_Value",
- "description": "Hz" }
+                  "value": { "value": "100", "type": "_GuiValue", "label": "Frequency", "units": "Hz", "description": "Hz" }
                 }
               }
             }
@@ -375,8 +364,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "value": { "value": "50", "type": "_Value",
- "description": "Percent" }
+                  "value": { "value": "50", "type": "_GuiValue", "label": "Duty Cycle", "units": "%", "description": "Percent" }
                 }
               }
             }

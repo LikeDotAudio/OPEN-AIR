@@ -295,7 +295,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "unit": { "value": "VPP", "type": "_Value",
+                "fields": { "units": { "value": "VPP", "type": "_Value",
  "description": "VPP, VRMS, DBM" } }
               }
             }

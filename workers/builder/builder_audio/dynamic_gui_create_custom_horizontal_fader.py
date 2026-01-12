@@ -207,7 +207,7 @@ class CustomHorizontalFaderCreatorMixin:
         def on_drag_or_click_callback(event):
             canvas = event.widget
             width = canvas.winfo_width()
-            norm_x = (event.x - 10) / (width - 20)
+            norm_x = (event.x - 20) / (width - 40)
             norm_x = max(0.0, min(1.0, norm_x))
 
             log_norm_pos = norm_x**frame.log_exponent
@@ -294,9 +294,9 @@ class CustomHorizontalFaderCreatorMixin:
         canvas.delete("all")
         cy = height / 2
         canvas.create_line(
-            10,
+            20,
             cy,
-            width - 10,
+            width - 20,
             cy,
             fill=frame_instance.track_col,
             width=4,
@@ -312,7 +312,7 @@ class CustomHorizontalFaderCreatorMixin:
         norm_value = max(0.0, min(1.0, norm_value))
 
         display_norm_pos = norm_value ** (1.0 / frame_instance.log_exponent)
-        handle_x = (width - 20) * display_norm_pos + 10
+        handle_x = (width - 40) * display_norm_pos + 20
 
         # Draw the fill line
         canvas.create_line(
@@ -362,7 +362,7 @@ class CustomHorizontalFaderCreatorMixin:
             )
             if 0.0 <= linear_tick_norm <= 1.0:
                 display_tick_norm = linear_tick_norm
-                tick_x_pos = (width - 20) * display_tick_norm + 10
+                tick_x_pos = (width - 40) * display_tick_norm + 20
                 canvas.create_line(
                     tick_x_pos,
                     cy - tick_length_half,

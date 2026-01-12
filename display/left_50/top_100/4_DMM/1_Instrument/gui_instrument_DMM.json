@@ -183,7 +183,7 @@
             "value_default": "10",
             "min": "0.1",
             "max": "1000",
-            "unit": "U",
+            "units": "U",
             "message_details": {
               "DMM_MODEL": {
                 "type": "_GuiActuator",
@@ -198,7 +198,7 @@
             "value_default": "1.0",
             "min": "0.02",
             "max": "100",
-            "unit": "cyc",
+            "units": "cyc",
             "message_details": {
               "DMM_MODEL": {
                 "type": "_GuiActuator",

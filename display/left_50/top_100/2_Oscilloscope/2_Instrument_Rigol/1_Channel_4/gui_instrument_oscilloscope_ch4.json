@@ -48,7 +48,7 @@
             "value_default": "1.0",
             "min": "0.01",
             "max": "100",
-            "unit": "V",
+            "units": "V",
             "message_details": {
               "OSCILLOSCOPE_MODEL": {
                 "type": "_GuiActuator",
@@ -61,7 +61,7 @@
             "type": "_GuiHorizontalKnob",
             "label_active": "Offset",
             "value_default": "0.0",
-            "unit": "V",
+            "units": "V",
             "message_details": {
               "OSCILLOSCOPE_MODEL": {
                 "type": "_GuiActuator",
@@ -95,7 +95,7 @@
             "value_default": "1e-3",
             "min": "1e-9",
             "max": "10",
-            "unit": "s",
+            "units": "s",
             "message_details": {
               "OSCILLOSCOPE_MODEL": {
                 "type": "_GuiActuator",
@@ -108,7 +108,7 @@
             "type": "_GuiHorizontalKnob",
             "label_active": "Delay",
             "value_default": "0.0",
-            "unit": "s",
+            "units": "s",
             "message_details": {
               "OSCILLOSCOPE_MODEL": {
                 "type": "_GuiActuator",
@@ -127,7 +127,7 @@
             "type": "_GuiHorizontalKnob",
             "label_active": "Trig Level",
             "value_default": "0.5",
-            "unit": "V",
+            "units": "V",
             "message_details": {
               "OSCILLOSCOPE_MODEL": {
                 "type": "_GuiActuator",

@@ -61,7 +61,7 @@
             "value_default": "1.0",
             "min": "0.01",
             "max": "100",
-            "unit": "V",
+            "units": "V",
             "message_details": {
               "OSCILLOSCOPE_MODEL": {
                 "type": "_GuiActuator",
@@ -95,7 +95,7 @@
             "value_default": "1.0",
             "min": "0.01",
             "max": "100",
-            "unit": "V",
+            "units": "V",
             "message_details": {
               "OSCILLOSCOPE_MODEL": {
                 "type": "_GuiActuator",
@@ -140,7 +140,7 @@
             "type": "_GuiHorizontalKnob",
             "label_active": "Math Scale",
             "value_default": "1.0",
-            "unit": "U",
+            "units": "U",
             "message_details": {
               "OSCILLOSCOPE_MODEL": {
                 "type": "_GuiActuator",
@@ -153,7 +153,7 @@
             "type": "_GuiHorizontalKnob",
             "label_active": "Math Offset",
             "value_default": "0.0",
-            "unit": "U",
+            "units": "U",
             "message_details": {
               "OSCILLOSCOPE_MODEL": {
                 "type": "_GuiActuator",
@@ -187,7 +187,7 @@
             "value_default": "1000",
             "min": "0",
             "max": "1000000000",
-            "unit": "Hz",
+            "units": "Hz",
             "message_details": {
               "OSCILLOSCOPE_MODEL": {
                 "type": "_GuiActuator",
@@ -202,7 +202,7 @@
             "value_default": "10000",
             "min": "10",
             "max": "1000000000",
-            "unit": "Hz",
+            "units": "Hz",
             "message_details": {
               "OSCILLOSCOPE_MODEL": {
                 "type": "_GuiActuator",
@@ -223,7 +223,7 @@
             "value_default": "1e-3",
             "min": "1e-9",
             "max": "10",
-            "unit": "s",
+            "units": "s",
             "message_details": {
               "OSCILLOSCOPE_MODEL": {
                 "type": "_GuiActuator",
@@ -255,7 +255,7 @@
             "type": "_GuiHorizontalKnob",
             "label_active": "Level",
             "value_default": "0.5",
-            "unit": "V",
+            "units": "V",
             "message_details": {
               "OSCILLOSCOPE_MODEL": {
                 "type": "_GuiActuator",

@@ -11,7 +11,7 @@
           "label_active": "Voltage",
           "max": 12.0,
           "value_default": 7.5,
-          "unit": "V",
+          "units": "V",
           "notes": "Progress bar for voltage display."
         }
       }

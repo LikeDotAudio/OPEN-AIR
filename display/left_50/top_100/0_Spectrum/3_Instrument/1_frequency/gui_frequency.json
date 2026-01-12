@@ -10,8 +10,10 @@
       },
       "center_freq_MHz": {
         "label_active": "Center Frequency",
+        "layout": {"sticky": "ew","font":20 },
         "type": "_Horizontal_with_dial_Value",
         "handler": "set_center_frequency",
+         
         "yak_handler": {
           "enable": true,
           "yak_type": "set",
@@ -25,8 +27,8 @@
         "min": "0",
         "max": "6000",
         "units": "MHz",
-        "step": ".001",
-        "layout": { "sticky": "ew" }
+        "step": ".001"
+        
       },
         "break_2": {
         "type": "OcaBreakLine"
@@ -35,6 +37,8 @@
         "label_active": "Frequency Span",
         "label_inactive": "Frequency Span",
         "type": "_Horizontal_with_dial_Value",
+                "layout": {"sticky": "ew","font":20 },
+
         "handler": "set_span_frequency",
         "yak_handler": {
           "enable": true,
@@ -49,13 +53,15 @@
         "min": "0",
         "max": "1000",
         "units": "MHz",
-        "step": ".001",
-        "layout": { "sticky": "ew" }
+        "step": ".001"
+
       },
           "break_3": {
         "type": "OcaBreakLine"
       },
       "start_freq_MHz": {
+        "layout": {"sticky": "ew","font":20 },
+
         "label_active": "Start Frequency",
         "label_inactive": "Start Frequency",
         "type": "_Horizontal_with_dial_Value",
@@ -73,13 +79,15 @@
         "min": "0",
         "max": "5999",
         "units": "MHz",
-        "step": ".001",
-        "layout": { "sticky": "ew" }
+        "step": ".001"
+
       },
           "break_4": {
         "type": "OcaBreakLine"
       },
       "stop_freq_MHz": {
+                "layout": {"sticky": "ew","font":20 },
+
         "label_active": "Stop Frequency",
         "label_inactive": "Stop Frequency",
         "type": "_Horizontal_with_dial_Value",
@@ -97,8 +105,8 @@
         "min": "1",
         "max": "6000",
         "units": "MHz",
-        "step": ".001",
-        "layout": { "sticky": "ew" }
+        "step": ".001"
+
       }
     }
   },

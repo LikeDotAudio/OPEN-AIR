@@ -1,6 +1,3 @@
-
-
-
 {
   "nab": {
     "type": "OcaBlock",
@@ -24,7 +21,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "idn_string": { "value": "Device ID", "type": "_GuiValue" }
+                  "idn_string": { "value": "Device ID", "type": "_GuiValue", "label": "ID String", "units": "" }
                 }
               }
             }
@@ -42,7 +39,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "error_msg": { "value": "Error Message", "type": "_GuiValue" }
+                  "error_msg": { "value": "Error Message", "type": "_GuiValue", "label": "Error Message", "units": "" }
                 }
               }
             }

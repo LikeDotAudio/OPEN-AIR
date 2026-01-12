@@ -53,7 +53,7 @@
                 "label_active": "BASE (A)",
                 "min": "0",
                 "max": "60",
-                "unit": "A",
+                "units": "A",
                 "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;CURR <value>" } }
               },
               "Pulse_Fader_A": {
@@ -61,7 +61,7 @@
                 "label_active": "PEAK (A)",
                 "min": "0",
                 "max": "60",
-                "unit": "A",
+                "units": "A",
                 "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;CURR:TLEV <value>" } }
               }
             }
@@ -83,7 +83,7 @@
                 "value_default": "3.0",
                 "min": "0",
                 "max": "20",
-                "unit": "V",
+                "units": "V",
                 "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;VOLT:PROT:LOW <value>" } }
               }
             }
@@ -143,7 +143,7 @@
                 "label_active": "BASE (A)",
                 "min": "0",
                 "max": "60",
-                "unit": "A",
+                "units": "A",
                 "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;CURR <value>" } }
               },
               "Pulse_Fader_B": {
@@ -151,7 +151,7 @@
                 "label_active": "PEAK (A)",
                 "min": "0",
                 "max": "60",
-                "unit": "A",
+                "units": "A",
                 "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;CURR:TLEV <value>" } }
               }
             }
@@ -173,7 +173,7 @@
                 "value_default": "10.5",
                 "min": "0",
                 "max": "24",
-                "unit": "V",
+                "units": "V",
                 "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;VOLT:PROT:LOW <value>" } }
               }
             }

@@ -22,7 +22,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "count": { "value": "8", "type": "_Value",
+                  "count": { "value": "8", "type": "_GuiValue", "label": "Count", "units": "",
  "description": "2 to 65536" }
                 }
               }
@@ -47,7 +47,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "scale": { "value": "0.001", "type": "_Value",
+                  "scale": { "value": "0.001", "type": "_GuiValue", "label": "Scale", "units": "s/div",
  "description": "Seconds per division" }
                 }
               }
@@ -66,7 +66,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "position": { "value": "0.0", "type": "_Value",
+                  "position": { "value": "0.0", "type": "_GuiValue", "label": "Position", "units": "s",
  "description": "Offset in seconds" }
                 }
               }

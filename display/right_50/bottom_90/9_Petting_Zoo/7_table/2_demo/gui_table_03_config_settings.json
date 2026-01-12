@@ -16,13 +16,13 @@
         "P1": {
           "Parameter": "Temperature Limit",
           "Value": 75,
-          "Units": "\u00b0C",
+          "units": "\u00b0C",
           "Description": "Max operating temperature"
         },
         "P2": {
           "Parameter": "Alarm Threshold",
           "Value": 10,
-          "Units": "dB",
+          "units": "dB",
           "Description": "Audio alarm level"
         }
       },

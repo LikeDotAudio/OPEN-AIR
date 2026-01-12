@@ -20,7 +20,8 @@
             "fields": {
               "ERROR": {
                 "value": "The number of errors in the queue.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Error Queue"
               }
             }
           }
@@ -43,7 +44,8 @@
             "fields": {
               "identification_string": {
                 "value": "An instrument identification string containing manufacturer, model, serial number, and firmware revision.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "ID String"
               }
             }
           }

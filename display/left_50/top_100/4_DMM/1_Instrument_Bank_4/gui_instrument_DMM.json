@@ -68,7 +68,7 @@
                     "type": "_GuiHorizontalKnob",
                     "label_active": "Range",
                     "value_default": "10",
-                    "unit": "",
+                    "units": "",
                     "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;RANG <value>" } }
                   }
                 }
@@ -136,7 +136,7 @@
                     "type": "_GuiHorizontalKnob",
                     "label_active": "Range",
                     "value_default": "10",
-                    "unit": "",
+                    "units": "",
                     "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;RANG <value>" } }
                   }
                 }
@@ -214,7 +214,7 @@
                     "type": "_GuiHorizontalKnob",
                     "label_active": "Range",
                     "value_default": "10",
-                    "unit": "",
+                    "units": "",
                     "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;RANG <value>" } }
                   }
                 }
@@ -282,7 +282,7 @@
                     "type": "_GuiHorizontalKnob",
                     "label_active": "Range",
                     "value_default": "10",
-                    "unit": "",
+                    "units": "",
                     "message_details": { "DMM_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;RANG <value>" } }
                   }
                 }

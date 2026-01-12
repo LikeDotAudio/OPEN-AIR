@@ -58,20 +58,22 @@
             "fields": {
               "Ref_Level_dBm": {
                 "value": "-45",
-                "type": "_Value",
-
+                "type": "_GuiValue",
+                "label": "Ref Level",
+                "units": "dBm",
                 "description": "The SCPI input for reference level."
               },
               "Attenuation_dB": {
                 "value": "10",
-                "type": "_Value",
-
+                "type": "_GuiValue",
+                "label": "Attenuation",
+                "units": "dB",
                 "description": "The SCPI input for power attenuation."
               },
               "Preamp_On": {
                 "value": "1",
-                "type": "_Value",
-
+                "type": "_GuiValue",
+                "label": "Preamp (0/1)",
                 "description": "The SCPI input for power attenuation."
               }
             }
@@ -171,8 +173,9 @@
             "type": "OcaBlock",
             "fields": {
               "Ref_Level_dBm": {
-                "type": "_Value",
-
+                "type": "_GuiValue",
+                "label": "Ref Level",
+                "units": "dBm",
                 "value": "-40"
               }
             }
@@ -194,8 +197,9 @@
             "type": "OcaBlock",
             "fields": {
               "Power_Attenuation": {
-                "type": "_Value",
-
+                "type": "_GuiValue",
+                "label": "Attenuation",
+                "units": "dB",
                 "value": "20"
               }
             }

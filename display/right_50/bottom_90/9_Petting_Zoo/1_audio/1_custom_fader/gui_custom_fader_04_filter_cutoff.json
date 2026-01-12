@@ -8,7 +8,7 @@
       "min": 20.0,
       "max": 20000.0,
       "value_default": 500.0,
-      "unit": "Hz",
+      "units": "Hz",
       "notes": "A custom fader for adjusting filter cutoff frequency."
     }
   }

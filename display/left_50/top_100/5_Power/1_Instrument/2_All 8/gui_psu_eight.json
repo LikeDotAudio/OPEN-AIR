@@ -33,9 +33,9 @@
               "Meters_1": {
                 "type": "OcaBlock",
                 "fields": {
-                  "V1": { "type": "_GuiAnalogGauge", "label_active": "V1", "min": "0", "max": "100", "unit": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;MEAS:VOLT?" } } },
-                  "I1": { "type": "_GuiAnalogGauge", "label_active": "A1", "min": "0", "max": "10", "unit": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;MEAS:CURR?" } } },
-                  "W1": { "type": "_GuiAnalogGauge", "label_active": "W1", "min": "0", "max": "1000", "unit": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;MEAS:POW?" } } }
+                  "V1": { "type": "_GuiAnalogGauge", "label_active": "V1", "min": "0", "max": "100", "units": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;MEAS:VOLT?" } } },
+                  "I1": { "type": "_GuiAnalogGauge", "label_active": "A1", "min": "0", "max": "10", "units": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;MEAS:CURR?" } } },
+                  "W1": { "type": "_GuiAnalogGauge", "label_active": "W1", "min": "0", "max": "1000", "units": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;MEAS:POW?" } } }
                 }
               },
               "Graph_1": {
@@ -53,9 +53,9 @@
               "Meters_2": {
                 "type": "OcaBlock",
                 "fields": {
-                  "V2": { "type": "_GuiAnalogGauge", "label_active": "V2", "min": "0", "max": "100", "unit": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;MEAS:VOLT?" } } },
-                  "I2": { "type": "_GuiAnalogGauge", "label_active": "A2", "min": "0", "max": "10", "unit": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;MEAS:CURR?" } } },
-                  "W2": { "type": "_GuiAnalogGauge", "label_active": "W2", "min": "0", "max": "1000", "unit": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;MEAS:POW?" } } }
+                  "V2": { "type": "_GuiAnalogGauge", "label_active": "V2", "min": "0", "max": "100", "units": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;MEAS:VOLT?" } } },
+                  "I2": { "type": "_GuiAnalogGauge", "label_active": "A2", "min": "0", "max": "10", "units": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;MEAS:CURR?" } } },
+                  "W2": { "type": "_GuiAnalogGauge", "label_active": "W2", "min": "0", "max": "1000", "units": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;MEAS:POW?" } } }
                 }
               },
               "Graph_2": {
@@ -73,9 +73,9 @@
               "Meters_3": {
                 "type": "OcaBlock",
                 "fields": {
-                  "V3": { "type": "_GuiAnalogGauge", "label_active": "V3", "min": "0", "max": "100", "unit": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;MEAS:VOLT?" } } },
-                  "I3": { "type": "_GuiAnalogGauge", "label_active": "A3", "min": "0", "max": "10", "unit": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;MEAS:CURR?" } } },
-                  "W3": { "type": "_GuiAnalogGauge", "label_active": "W3", "min": "0", "max": "1000", "unit": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;MEAS:POW?" } } }
+                  "V3": { "type": "_GuiAnalogGauge", "label_active": "V3", "min": "0", "max": "100", "units": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;MEAS:VOLT?" } } },
+                  "I3": { "type": "_GuiAnalogGauge", "label_active": "A3", "min": "0", "max": "10", "units": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;MEAS:CURR?" } } },
+                  "W3": { "type": "_GuiAnalogGauge", "label_active": "W3", "min": "0", "max": "1000", "units": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;MEAS:POW?" } } }
                 }
               },
               "Graph_3": {
@@ -93,9 +93,9 @@
               "Meters_4": {
                 "type": "OcaBlock",
                 "fields": {
-                  "V4": { "type": "_GuiAnalogGauge", "label_active": "V4", "min": "0", "max": "100", "unit": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;MEAS:VOLT?" } } },
-                  "I4": { "type": "_GuiAnalogGauge", "label_active": "A4", "min": "0", "max": "10", "unit": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;MEAS:CURR?" } } },
-                  "W4": { "type": "_GuiAnalogGauge", "label_active": "W4", "min": "0", "max": "1000", "unit": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;MEAS:POW?" } } }
+                  "V4": { "type": "_GuiAnalogGauge", "label_active": "V4", "min": "0", "max": "100", "units": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;MEAS:VOLT?" } } },
+                  "I4": { "type": "_GuiAnalogGauge", "label_active": "A4", "min": "0", "max": "10", "units": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;MEAS:CURR?" } } },
+                  "W4": { "type": "_GuiAnalogGauge", "label_active": "W4", "min": "0", "max": "1000", "units": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;MEAS:POW?" } } }
                 }
               },
               "Graph_4": {
@@ -123,9 +123,9 @@
               "Meters_5": {
                 "type": "OcaBlock",
                 "fields": {
-                  "V5": { "type": "_GuiAnalogGauge", "label_active": "V5", "min": "0", "max": "100", "unit": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 5;MEAS:VOLT?" } } },
-                  "I5": { "type": "_GuiAnalogGauge", "label_active": "A5", "min": "0", "max": "10", "unit": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 5;MEAS:CURR?" } } },
-                  "W5": { "type": "_GuiAnalogGauge", "label_active": "W5", "min": "0", "max": "1000", "unit": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 5;MEAS:POW?" } } }
+                  "V5": { "type": "_GuiAnalogGauge", "label_active": "V5", "min": "0", "max": "100", "units": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 5;MEAS:VOLT?" } } },
+                  "I5": { "type": "_GuiAnalogGauge", "label_active": "A5", "min": "0", "max": "10", "units": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 5;MEAS:CURR?" } } },
+                  "W5": { "type": "_GuiAnalogGauge", "label_active": "W5", "min": "0", "max": "1000", "units": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 5;MEAS:POW?" } } }
                 }
               },
               "Graph_5": {
@@ -143,9 +143,9 @@
               "Meters_6": {
                 "type": "OcaBlock",
                 "fields": {
-                  "V6": { "type": "_GuiAnalogGauge", "label_active": "V6", "min": "0", "max": "100", "unit": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 6;MEAS:VOLT?" } } },
-                  "I6": { "type": "_GuiAnalogGauge", "label_active": "A6", "min": "0", "max": "10", "unit": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 6;MEAS:CURR?" } } },
-                  "W6": { "type": "_GuiAnalogGauge", "label_active": "W6", "min": "0", "max": "1000", "unit": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 6;MEAS:POW?" } } }
+                  "V6": { "type": "_GuiAnalogGauge", "label_active": "V6", "min": "0", "max": "100", "units": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 6;MEAS:VOLT?" } } },
+                  "I6": { "type": "_GuiAnalogGauge", "label_active": "A6", "min": "0", "max": "10", "units": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 6;MEAS:CURR?" } } },
+                  "W6": { "type": "_GuiAnalogGauge", "label_active": "W6", "min": "0", "max": "1000", "units": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 6;MEAS:POW?" } } }
                 }
               },
               "Graph_6": {
@@ -163,9 +163,9 @@
               "Meters_7": {
                 "type": "OcaBlock",
                 "fields": {
-                  "V7": { "type": "_GuiAnalogGauge", "label_active": "V7", "min": "0", "max": "100", "unit": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 7;MEAS:VOLT?" } } },
-                  "I7": { "type": "_GuiAnalogGauge", "label_active": "A7", "min": "0", "max": "10", "unit": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 7;MEAS:CURR?" } } },
-                  "W7": { "type": "_GuiAnalogGauge", "label_active": "W7", "min": "0", "max": "1000", "unit": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 7;MEAS:POW?" } } }
+                  "V7": { "type": "_GuiAnalogGauge", "label_active": "V7", "min": "0", "max": "100", "units": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 7;MEAS:VOLT?" } } },
+                  "I7": { "type": "_GuiAnalogGauge", "label_active": "A7", "min": "0", "max": "10", "units": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 7;MEAS:CURR?" } } },
+                  "W7": { "type": "_GuiAnalogGauge", "label_active": "W7", "min": "0", "max": "1000", "units": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 7;MEAS:POW?" } } }
                 }
               },
               "Graph_7": {
@@ -183,9 +183,9 @@
               "Meters_8": {
                 "type": "OcaBlock",
                 "fields": {
-                  "V8": { "type": "_GuiAnalogGauge", "label_active": "V8", "min": "0", "max": "100", "unit": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 8;MEAS:VOLT?" } } },
-                  "I8": { "type": "_GuiAnalogGauge", "label_active": "A8", "min": "0", "max": "10", "unit": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 8;MEAS:CURR?" } } },
-                  "W8": { "type": "_GuiAnalogGauge", "label_active": "W8", "min": "0", "max": "1000", "unit": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 8;MEAS:POW?" } } }
+                  "V8": { "type": "_GuiAnalogGauge", "label_active": "V8", "min": "0", "max": "100", "units": "V", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 8;MEAS:VOLT?" } } },
+                  "I8": { "type": "_GuiAnalogGauge", "label_active": "A8", "min": "0", "max": "10", "units": "A", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 8;MEAS:CURR?" } } },
+                  "W8": { "type": "_GuiAnalogGauge", "label_active": "W8", "min": "0", "max": "1000", "units": "W", "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 8;MEAS:POW?" } } }
                 }
               },
               "Graph_8": {

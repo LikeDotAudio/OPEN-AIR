@@ -19,8 +19,8 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volts": { "value": "V", "type": "_GuiValue" },
-                  "amps": { "value": "A", "type": "_GuiValue" }
+                  "volts": { "value": "V", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "amps": { "value": "A", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -43,8 +43,8 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volts": { "value": "V", "type": "_GuiValue" },
-                  "amps": { "value": "A", "type": "_GuiValue" }
+                  "volts": { "value": "V", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "amps": { "value": "A", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -67,8 +67,8 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volts": { "value": "V", "type": "_GuiValue" },
-                  "amps": { "value": "A", "type": "_GuiValue" }
+                  "volts": { "value": "V", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "amps": { "value": "A", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -91,8 +91,8 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volts": { "value": "V", "type": "_GuiValue" },
-                  "amps": { "value": "A", "type": "_GuiValue" }
+                  "volts": { "value": "V", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "amps": { "value": "A", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -115,8 +115,8 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volts": { "value": "V", "type": "_GuiValue" },
-                  "amps": { "value": "A", "type": "_GuiValue" }
+                  "volts": { "value": "V", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "amps": { "value": "A", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -139,8 +139,8 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volts": { "value": "V", "type": "_GuiValue" },
-                  "amps": { "value": "A", "type": "_GuiValue" }
+                  "volts": { "value": "V", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "amps": { "value": "A", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -163,8 +163,8 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volts": { "value": "V", "type": "_GuiValue" },
-                  "amps": { "value": "A", "type": "_GuiValue" }
+                  "volts": { "value": "V", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "amps": { "value": "A", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -187,8 +187,8 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volts": { "value": "V", "type": "_GuiValue" },
-                  "amps": { "value": "A", "type": "_GuiValue" }
+                  "volts": { "value": "V", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "amps": { "value": "A", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -217,8 +217,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volt": { "value": "5.0", "type": "_GuiValue" },
-                  "curr": { "value": "1.0", "type": "_GuiValue" }
+                  "volt": { "value": "5.0", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "curr": { "value": "1.0", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -241,8 +241,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volt": { "value": "5.0", "type": "_GuiValue" },
-                  "curr": { "value": "1.0", "type": "_GuiValue" }
+                  "volt": { "value": "5.0", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "curr": { "value": "1.0", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -265,8 +265,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volt": { "value": "5.0", "type": "_GuiValue" },
-                  "curr": { "value": "1.0", "type": "_GuiValue" }
+                  "volt": { "value": "5.0", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "curr": { "value": "1.0", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -289,8 +289,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volt": { "value": "5.0", "type": "_GuiValue" },
-                  "curr": { "value": "1.0", "type": "_GuiValue" }
+                  "volt": { "value": "5.0", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "curr": { "value": "1.0", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -313,8 +313,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volt": { "value": "5.0", "type": "_GuiValue" },
-                  "curr": { "value": "1.0", "type": "_GuiValue" }
+                  "volt": { "value": "5.0", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "curr": { "value": "1.0", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -337,8 +337,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volt": { "value": "5.0", "type": "_GuiValue" },
-                  "curr": { "value": "1.0", "type": "_GuiValue" }
+                  "volt": { "value": "5.0", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "curr": { "value": "1.0", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -361,8 +361,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volt": { "value": "5.0", "type": "_GuiValue" },
-                  "curr": { "value": "1.0", "type": "_GuiValue" }
+                  "volt": { "value": "5.0", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "curr": { "value": "1.0", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }
@@ -385,8 +385,8 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "volt": { "value": "5.0", "type": "_GuiValue" },
-                  "curr": { "value": "1.0", "type": "_GuiValue" }
+                  "volt": { "value": "5.0", "type": "_GuiValue", "label": "Voltage", "units": "V" },
+                  "curr": { "value": "1.0", "type": "_GuiValue", "label": "Current", "units": "A" }
                 }
               }
             }

@@ -1,83 +1,110 @@
 {
-  "nab": {
-    "type": "OcaBlock",
-    "description": "ESA Memory Monitor",
-    "fields": {
-      "Memory_Catalog": {
+      "Nab": {
         "type": "OcaBlock",
-        "description": "View Files",
+        "description": "Memory Catalog Monitoring",
         "fields": {
-          "Get_Catalog": {
+          "Nab_Preset_Catalog": {
             "type": "OcaBlock",
+            "description": "View Preset Files",
             "fields": {
-              "Execute Command": {
+              "N9342CN": {
                 "type": "_GuiActuator",
                 "AES70": "OcaBooleanActuator",
                 "active": true,
-                "message": ":MMEM:CAT? <dir>",
+                "trigger": false,
+                "message": ":MMEMory:CATalog? \"<preset_path>\" ",
                 "layout": { "height": 30, "sticky": "" }
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "dir": { "value": "STATE", "type": "_Value",
- "description": "STATE, TRACE, etc." } }
+                "fields": {
+                  "preset_path": {
+                    "value": "C:\\PRESETS\\",
+                    "type": "_GuiValue",
+                    "label": "Preset Path"
+                  }
+                }
               },
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "file_list": { "value": "File List", "type": "_GuiValue" }
+                  "preset_catalog_list": {
+                    "value": "0",
+                    "type": "_GuiValue"
+                  }
                 }
               }
             }
           }
         }
-      }
-    }
-  },
-  "rig": {
-    "type": "OcaBlock",
-    "description": "ESA Memory Actions",
-    "fields": {
-      "State_Operations": {
+      },
+      "Set": {
         "type": "OcaBlock",
-        "description": "Save/Recall Registers",
+        "description": "Memory Actions",
         "fields": {
-          "Save_State": {
+          "Set_stored_Preset": {
             "type": "OcaBlock",
+            "description": "Configure Preset Target",
             "fields": {
-              "Execute Command": {
+              "N9342CN": {
                 "type": "_GuiActuator",
                 "AES70": "OcaBooleanActuator",
                 "active": true,
-                "message": ":MMEM:STOR:STAT <reg>",
+                "trigger": false,
+                "message": ":MMEMory:LOAD STA,\"<preset_path><preset_fileName>\" ",
                 "layout": { "height": 30, "sticky": "" }
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "reg": { "value": "1", "type": "_Value",
- "description": "Register 1-9" } }
+                "fields": {
+                  "preset_fileName": {
+                    "value": "14.STA",
+                    "type": "_GuiValue",
+                    "label": "File Name"
+                  },
+                  "preset_path": {
+                    "value": "C:\\PRESETS\\",
+                    "type": "_GuiValue",
+                    "label": "Preset Path"
+                  }
+                }
               }
             }
           },
-          "Recall_State": {
+          "Do_Load_Preset": {
             "type": "OcaBlock",
+            "description": "Execute Preset Load",
             "fields": {
-              "Execute Command": {
+              "N9342CN": {
                 "type": "_GuiActuator",
                 "AES70": "OcaBooleanActuator",
                 "active": true,
-                "message": ":MMEM:LOAD:STAT <reg>",
+                "trigger": false,
+                "message": ":MMEMory:LOAD:STATe",
                 "layout": { "height": 30, "sticky": "" }
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "reg": { "value": "1", "type": "_Value",
- "description": "Register 1-9" } }
+                "fields": {
+                  "preset_number": {
+                    "value": "0",
+                    "type": "_GuiValue",
+                    "label": "Preset Number"
+                  }
+                }
+              },
+              "Load_Button": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "active": true,
+                "label_active": "LoadPreset",
+                "label_inactive": "LoadPreset",
+                "trigger": 0,
+                "layout": { "height": 30, "sticky": "" }
               }
             }
           }
         }
       }
     }
-  }
-}
+  

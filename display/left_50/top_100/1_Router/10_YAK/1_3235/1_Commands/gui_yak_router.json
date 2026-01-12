@@ -20,14 +20,14 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "channel": { "value": "100", "type": "_Value",
+                  "channel": { "value": "100", "type": "_GuiValue", "label": "Channel", "units": "",
  "description": "Format: esnn (e=extender, s=slot, nn=channel)" }
                 }
               },
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "state": { "value": "0=Open, 1=Closed", "type": "_GuiValue" }
+                  "state": { "value": "0=Open, 1=Closed", "type": "_GuiValue", "label": "State" }
                 }
               }
             }
@@ -51,14 +51,14 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "slot": { "value": "100", "type": "_Value",
+                  "slot": { "value": "100", "type": "_GuiValue", "label": "Slot", "units": "",
  "description": "Slot Number (e.g., 100)" }
                 }
               },
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "id_string": { "value": "Card ID String", "type": "_GuiValue" }
+                  "id_string": { "value": "Card ID String", "type": "_GuiValue", "label": "ID String" }
                 }
               }
             }
@@ -88,7 +88,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "channel_list": { "value": "100,101", "type": "_Value",
+                  "channel_list": { "value": "100,101", "type": "_GuiValue", "label": "Channel List", "units": "",
  "description": "List of channels to close" }
                 }
               }
@@ -113,7 +113,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "channel_list": { "value": "100-103", "type": "_Value",
+                  "channel_list": { "value": "100-103", "type": "_GuiValue", "label": "Channel List", "units": "",
  "description": "List of channels to open" }
                 }
               }
@@ -139,7 +139,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "channel": { "value": "100", "type": "_Value",
+                  "channel": { "value": "100", "type": "_GuiValue", "label": "Channel", "units": "",
  "description": "Target Channel" }
                 }
               }
@@ -177,7 +177,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "slot": { "value": "100", "type": "_Value",
+                  "slot": { "value": "100", "type": "_GuiValue", "label": "Slot", "units": "",
  "description": "Slot to reset" }
                 }
               }

@@ -1,63 +1,123 @@
+
 {
   "nab": {
     "type": "OcaBlock",
-    "description": "ESA Trace Data Readback",
+    "description": "NAB Trace Monitoring",
     "fields": {
-      "Fetch_Trace_Data": {
+      "NAB_traces_1_2_3_N9340B": {
         "type": "OcaBlock",
-        "description": "Get Trace Arrays",
+        "description": "Primary Trace Monitoring",
         "fields": {
-          "Get_Trace_1_Data": {
+          "N9340B": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":FREQuency:STARt?;:FREQuency:STOP?;:TRACe1:MODE?;:TRACe2:MODE?;:TRACe3:MODE?;:TRACe1:DATA?;:TRACe2:DATA?;:TRACe3:DATA?",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Outputs": {
             "type": "OcaBlock",
+            "description": "Trace Settings and Data",
             "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":FORM:DATA ASC;:TRAC? TRACE1",
-                "layout": { "height": 30, "sticky": "" }
+              "StartFreq": {
+                "value": "The starting frequency in Hz.",
+                "type": "_GuiValue"
               },
-              "Outputs": {
-                "type": "OcaBlock",
-                "fields": {
-                  "trace_data": { "value": "Comma Separated Values", "type": "_GuiValue" }
-                }
+              "StopFreq": {
+                "value": "The stopping frequency in Hz.",
+                "type": "_GuiValue",
+                "label": "Stop Frequency"
+              },
+              "TraceMode1": {
+                "value": "The trace modes for each trace.",
+                "type": "_GuiValue",
+                "label": "Trace Mode 1"
+              },
+              "TraceMode2": {
+                "value": "The trace modes for each trace.",
+                "type": "_GuiValue",
+                "label": "Trace Mode 2"
+              },
+              "TraceMode3": {
+                "value": "The trace modes for each trace.",
+                "type": "_GuiValue",
+                "label": "Trace Mode 3"
+              },
+              "TraceData1": {
+                "value": "Processed trace data.",
+                "type": "_GuiValue",
+                "label": "Trace Data 1"
+              },
+              "TraceData2": {
+                "value": "Processed trace data.",
+                "type": "_GuiValue",
+                "label": "Trace Data 2"
+              },
+              "TraceData3": {
+                "value": "Processed trace data.",
+                "type": "_GuiValue",
+                "label": "Trace Data 3"
               }
             }
+          }
+        }
+      },
+      "NAB_traces_1_2_3_N9342CN": {
+        "type": "OcaBlock",
+        "description": "Primary Trace Monitoring",
+        "fields": {
+          "N9342CN": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":FREQuency:STARt?;:FREQuency:STOP?;:TRAC1:MODE?;:TRAC2:MODE?;:TRAC3:MODE?;:TRACe:DATA? TRACE1;:TRACe:DATA? TRACE2;:TRACe:DATA? TRACE3;",
+            "layout": { "height": 30, "sticky": "" }
           },
-          "Get_Trace_2_Data": {
+          "Outputs": {
             "type": "OcaBlock",
+            "description": "Trace Settings and Data",
             "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":FORM:DATA ASC;:TRAC? TRACE2",
-                "layout": { "height": 30, "sticky": "" }
+              "StartFreq": {
+                "value": "The starting frequency in Hz.",
+                "type": "_GuiValue",
+                "label": "Start Frequency"
               },
-              "Outputs": {
-                "type": "OcaBlock",
-                "fields": {
-                  "trace_data": { "value": "Comma Separated Values", "type": "_GuiValue" }
-                }
-              }
-            }
-          },
-          "Get_Trace_3_Data": {
-            "type": "OcaBlock",
-            "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":FORM:DATA ASC;:TRAC? TRACE3",
-                "layout": { "height": 30, "sticky": "" }
+              "StopFreq": {
+                "value": "The stopping frequency in Hz.",
+                "type": "_GuiValue",
+                "label": "Stop Frequency"
               },
-              "Outputs": {
-                "type": "OcaBlock",
-                "fields": {
-                  "trace_data": { "value": "Comma Separated Values", "type": "_GuiValue" }
-                }
+              "TraceMode1": {
+                "value": "The trace modes for each trace.",
+                "type": "_GuiValue",
+                "label": "Trace Mode 1"
+              },
+              "TraceMode2": {
+                "value": "The trace modes for each trace.",
+                "type": "_GuiValue",
+                "label": "Trace Mode 2"
+              },
+              "TraceMode3": {
+                "value": "The trace modes for each trace.",
+                "type": "_GuiValue",
+                "label": "Trace Mode 3"
+              },
+              "TraceData1": {
+                "value": "Processed trace data.",
+                "type": "_GuiValue",
+                "label": "Trace Data 1"
+              },
+              "TraceData2": {
+                "value": "Processed trace data.",
+                "type": "_GuiValue",
+                "label": "Trace Data 2"
+              },
+              "TraceData3": {
+                "value": "Processed trace data.",
+                "type": "_GuiValue",
+                "label": "Trace Data 3"
               }
             }
           }
@@ -65,150 +125,265 @@
       }
     }
   },
-  "rig": {
+  "get": {
     "type": "OcaBlock",
-    "description": "ESA Trace Control",
+    "description": "Trace Data Queries",
     "fields": {
-      "Trace_1_Modes": {
+      "Get_Trace_1_Data_N9340B": {
         "type": "OcaBlock",
-        "description": "Trace A Control",
         "fields": {
-          "Set_Trace1_ClearWrite": {
-            "type": "_GuiActuator",
+          "N9340B": {
+            "type":"_GuiActuator",
             "AES70": "OcaBooleanActuator",
             "active": true,
-            "label_inactive": "T1 Clear Write",
-            "Execute Command": { "message": ":TRAC1:MODE WRIT" }
+            "trigger": false,
+            "message": ":TRACe<trace_number>:DATA?",
+            "layout": { "height": 30, "sticky": "" }
           },
-          "Set_Trace1_MaxHold": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "active": true,
-            "label_inactive": "T1 Max Hold",
-            "Execute Command": { "message": ":TRAC1:MODE MAXH" }
+          "Input": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_number": {
+                "value": "1",
+                "type": "_GuiValue",
+                "label": "Trace Number",
+                "description": "The trace number."
+              }
+            }
           },
-          "Set_Trace1_MinHold": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "active": true,
-            "label_inactive": "T1 Min Hold",
-            "Execute Command": { "message": ":TRAC1:MODE MINH" }
-          },
-          "Set_Trace1_View": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "active": true,
-            "label_inactive": "T1 View",
-            "Execute Command": { "message": ":TRAC1:MODE VIEW" }
-          },
-          "Set_Trace1_Blank": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "active": true,
-            "label_inactive": "T1 Blank",
-            "Execute Command": { "message": ":TRAC1:MODE BLAN" }
+          "Outputs": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_data": {
+                "value": "Processed trace data or False.",
+                "type": "_GuiValue"
+              }
+            }
           }
         }
       },
-      "Trace_2_Modes": {
+      "Get_Trace_1_Data_N9342CN": {
         "type": "OcaBlock",
-        "description": "Trace B Control",
         "fields": {
-          "Set_Trace2_ClearWrite": {
-            "type": "_GuiActuator",
+          "N9342CN": {
+            "type":"_GuiActuator",
             "AES70": "OcaBooleanActuator",
             "active": true,
-            "label_inactive": "T2 Clear Write",
-            "Execute Command": { "message": ":TRAC2:MODE WRIT" }
+            "trigger": false,
+            "message": ":TRACe:DATA? TRACE<trace_number>",
+            "layout": { "height": 30, "sticky": "" }
           },
-          "Set_Trace2_MaxHold": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "active": true,
-            "label_inactive": "T2 Max Hold",
-            "Execute Command": { "message": ":TRAC2:MODE MAXH" }
+          "Input": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_number": {
+                "value": "1",
+                "type": "_GuiValue",
+                "label": "Trace Number",
+                "description": "The trace number."
+              }
+            }
           },
-          "Set_Trace2_MinHold": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "active": true,
-            "label_inactive": "T2 Min Hold",
-            "Execute Command": { "message": ":TRAC2:MODE MINH" }
-          },
-          "Set_Trace2_View": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "active": true,
-            "label_inactive": "T2 View",
-            "Execute Command": { "message": ":TRAC2:MODE VIEW" }
-          },
-          "Set_Trace2_Blank": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "active": true,
-            "label_inactive": "T2 Blank",
-            "Execute Command": { "message": ":TRAC2:MODE BLAN" }
+          "Outputs": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_data": {
+                "value": "Processed trace data or False.",
+                "type": "_GuiValue"
+              }
+            }
           }
         }
       },
-      "Trace_3_Modes": {
+      "Get_Trace_2_Data_N9340B": {
         "type": "OcaBlock",
-        "description": "Trace C Control",
         "fields": {
-          "Set_Trace3_ClearWrite": {
-            "type": "_GuiActuator",
+          "N9340B": {
+            "type":"_GuiActuator",
             "AES70": "OcaBooleanActuator",
             "active": true,
-            "label_inactive": "T3 Clear Write",
-            "Execute Command": { "message": ":TRAC3:MODE WRIT" }
+            "trigger": false,
+            "message": ":TRACe<trace_number>:DATA?",
+            "layout": { "height": 30, "sticky": "" }
           },
-          "Set_Trace3_MaxHold": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "active": true,
-            "label_inactive": "T3 Max Hold",
-            "Execute Command": { "message": ":TRAC3:MODE MAXH" }
+          "Input": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_number": {
+                "value": "2",
+                "type": "_GuiValue",
+                "label": "Trace Number"
+              }
+            }
           },
-          "Set_Trace3_MinHold": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "active": true,
-            "label_inactive": "T3 Min Hold",
-            "Execute Command": { "message": ":TRAC3:MODE MINH" }
-          },
-          "Set_Trace3_View": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "active": true,
-            "label_inactive": "T3 View",
-            "Execute Command": { "message": ":TRAC3:MODE VIEW" }
-          },
-          "Set_Trace3_Blank": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "active": true,
-            "label_inactive": "T3 Blank",
-            "Execute Command": { "message": ":TRAC3:MODE BLAN" }
+          "Outputs": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_data": {
+                "value": "Processed trace data.",
+                "type": "_GuiValue"
+              }
+            }
           }
         }
       },
-      "Trace_Math": {
+      "Get_Trace_2_Data_N9342CN": {
         "type": "OcaBlock",
-        "description": "Trace Math Operations",
         "fields": {
-          "Trace1_Minus_Trace2": {
-            "type": "_GuiActuator",
+          "N9342CN": {
+            "type":"_GuiActuator",
             "AES70": "OcaBooleanActuator",
             "active": true,
-            "label_inactive": "T1 - T2 -> T3",
-            "Execute Command": { "message": ":TRAC:MATH:SUBT TRACE3, TRACE1, TRACE2" }
+            "trigger": false,
+            "message": ":TRACe:DATA? TRACE<trace_number>",
+            "layout": { "height": 30, "sticky": "" }
           },
-          "Trace_Exchange": {
-            "type": "_GuiActuator",
+          "Input": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_number": {
+                "value": "2",
+                "type": "_GuiValue",
+                "label": "Trace Number"
+              }
+            }
+          },
+          "Outputs": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_data": {
+                "value": "Processed trace data.",
+                "type": "_GuiValue"
+              }
+            }
+          }
+        }
+      },
+      "Get_Trace_3_Data_N9340B": {
+        "type": "OcaBlock",
+        "fields": {
+          "N9340B": {
+            "type":"_GuiActuator",
             "AES70": "OcaBooleanActuator",
             "active": true,
-            "label_inactive": "Exchange T1 & T2",
-            "Execute Command": { "message": ":TRAC:EXCH TRACE1, TRACE2" }
+            "trigger": false,
+            "message": ":TRACe<trace_number>:DATA?",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Input": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_number": {
+                "value": "3",
+                "type": "_GuiValue",
+                "label": "Trace Number"
+              }
+            }
+          },
+          "Outputs": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_data": {
+                "value": "Processed trace data.",
+                "type": "_GuiValue"
+              }
+            }
+          }
+        }
+      },
+      "Get_Trace_3_Data_N9342CN": {
+        "type": "OcaBlock",
+        "fields": {
+          "N9342CN": {
+            "type":"_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":TRACe:DATA? TRACE<trace_number>",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Input": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_number": {
+                "value": "3",
+                "type": "_GuiValue",
+                "label": "Trace Number"
+              }
+            }
+          },
+          "Outputs": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_data": {
+                "value": "Processed trace data.",
+                "type": "_GuiValue"
+              }
+            }
+          }
+        }
+      },
+      "Get_Trace_4_Data_N9340B": {
+        "type": "OcaBlock",
+        "fields": {
+          "N9340B": {
+            "type":"_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":TRACe<trace_number>:DATA?",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Input": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_number": {
+                "value": "4",
+                "type": "_GuiValue",
+                "label": "Trace Number"
+              }
+            }
+          },
+          "Outputs": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_data": {
+                "value": "Processed trace data.",
+                "type": "_GuiValue"
+              }
+            }
+          }
+        }
+      },
+      "Get_Trace_4_Data_N9342CN": {
+        "type": "OcaBlock",
+        "fields": {
+          "N9342CN": {
+            "type":"_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":TRACe:DATA? TRACE<trace_number>",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Input": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_number": {
+                "value": "4",
+                "type": "_GuiValue",
+                "label": "Trace Number"
+              }
+            }
+          },
+          "Outputs": {
+            "type": "OcaBlock",
+            "fields": {
+              "trace_data": {
+                "value": "Processed trace data.",
+                "type": "_GuiValue"
+              }
+            }
           }
         }
       }

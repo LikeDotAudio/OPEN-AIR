@@ -61,7 +61,7 @@ class ValueBoxCreatorMixin:
         label = config_data.get("label_active") or config_data.get("label", "ValueBox")
         config = config_data
         path = config_data.get("path")
-        units = config_data.get("units", "")
+        units = config_data.get("units") or config_data.get("unit", "")
 
         # Access global context
         state_mirror_engine = self.state_mirror_engine

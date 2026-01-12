@@ -38,7 +38,7 @@
                     "label_active": "V1",
                     "min": "0",
                     "max": "100",
-                    "unit": "V",
+                    "units": "V",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;MEAS:VOLT?" } }
                   },
                   "I_Meter_1": {
@@ -46,7 +46,7 @@
                     "label_active": "A1",
                     "min": "0",
                     "max": "10",
-                    "unit": "A",
+                    "units": "A",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;MEAS:CURR?" } }
                   },
                   "P_Meter_1": {
@@ -54,7 +54,7 @@
                     "label_active": "W1",
                     "min": "0",
                     "max": "1000",
-                    "unit": "W",
+                    "units": "W",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;MEAS:POW?" } }
                   }
                 }
@@ -67,7 +67,7 @@
                     "label_active": "SET V",
                     "min": "0",
                     "max": "100",
-                    "unit": "V",
+                    "units": "V",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;VOLT <value>" } }
                   },
                   "Amps_Set_1": {
@@ -75,7 +75,7 @@
                     "label_active": "LIM A",
                     "min": "0",
                     "max": "10",
-                    "unit": "A",
+                    "units": "A",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 1;CURR <value>" } }
                   },
                   "Enable_1": {
@@ -100,7 +100,7 @@
                     "label_active": "V2",
                     "min": "0",
                     "max": "100",
-                    "unit": "V",
+                    "units": "V",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;MEAS:VOLT?" } }
                   },
                   "I_Meter_2": {
@@ -108,7 +108,7 @@
                     "label_active": "A2",
                     "min": "0",
                     "max": "10",
-                    "unit": "A",
+                    "units": "A",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;MEAS:CURR?" } }
                   },
                   "P_Meter_2": {
@@ -116,7 +116,7 @@
                     "label_active": "W2",
                     "min": "0",
                     "max": "1000",
-                    "unit": "W",
+                    "units": "W",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;MEAS:POW?" } }
                   }
                 }
@@ -129,7 +129,7 @@
                     "label_active": "SET V",
                     "min": "0",
                     "max": "100",
-                    "unit": "V",
+                    "units": "V",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;VOLT <value>" } }
                   },
                   "Amps_Set_2": {
@@ -137,7 +137,7 @@
                     "label_active": "LIM A",
                     "min": "0",
                     "max": "10",
-                    "unit": "A",
+                    "units": "A",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 2;CURR <value>" } }
                   },
                   "Enable_2": {
@@ -168,7 +168,7 @@
                     "label_active": "V3",
                     "min": "0",
                     "max": "100",
-                    "unit": "V",
+                    "units": "V",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;MEAS:VOLT?" } }
                   },
                   "I_Meter_3": {
@@ -176,7 +176,7 @@
                     "label_active": "A3",
                     "min": "0",
                     "max": "10",
-                    "unit": "A",
+                    "units": "A",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;MEAS:CURR?" } }
                   },
                   "P_Meter_3": {
@@ -184,7 +184,7 @@
                     "label_active": "W3",
                     "min": "0",
                     "max": "1000",
-                    "unit": "W",
+                    "units": "W",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;MEAS:POW?" } }
                   }
                 }
@@ -197,7 +197,7 @@
                     "label_active": "SET V",
                     "min": "0",
                     "max": "100",
-                    "unit": "V",
+                    "units": "V",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;VOLT <value>" } }
                   },
                   "Amps_Set_3": {
@@ -205,7 +205,7 @@
                     "label_active": "LIM A",
                     "min": "0",
                     "max": "10",
-                    "unit": "A",
+                    "units": "A",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 3;CURR <value>" } }
                   },
                   "Enable_3": {
@@ -230,7 +230,7 @@
                     "label_active": "V4",
                     "min": "0",
                     "max": "100",
-                    "unit": "V",
+                    "units": "V",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;MEAS:VOLT?" } }
                   },
                   "I_Meter_4": {
@@ -238,7 +238,7 @@
                     "label_active": "A4",
                     "min": "0",
                     "max": "10",
-                    "unit": "A",
+                    "units": "A",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;MEAS:CURR?" } }
                   },
                   "P_Meter_4": {
@@ -246,7 +246,7 @@
                     "label_active": "W4",
                     "min": "0",
                     "max": "1000",
-                    "unit": "W",
+                    "units": "W",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;MEAS:POW?" } }
                   }
                 }
@@ -259,7 +259,7 @@
                     "label_active": "SET V",
                     "min": "0",
                     "max": "100",
-                    "unit": "V",
+                    "units": "V",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;VOLT <value>" } }
                   },
                   "Amps_Set_4": {
@@ -267,7 +267,7 @@
                     "label_active": "LIM A",
                     "min": "0",
                     "max": "10",
-                    "unit": "A",
+                    "units": "A",
                     "message_details": { "PSU_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "INST:SEL 4;CURR <value>" } }
                   },
                   "Enable_4": {

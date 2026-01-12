@@ -31,7 +31,7 @@
             "label_active": "INPUT VOLTS",
             "min": "0",
             "max": "100",
-            "unit": "V",
+            "units": "V",
             "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "MEAS:VOLT?" } }
           },
           "Meter_Amps": {
@@ -39,7 +39,7 @@
             "label_active": "SINK CURRENT",
             "min": "0",
             "max": "60",
-            "unit": "A",
+            "units": "A",
             "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "MEAS:CURR?" } }
           },
           "Meter_Watts": {
@@ -47,7 +47,7 @@
             "label_active": "DISSIPATION",
             "min": "0",
             "max": "300",
-            "unit": "W",
+            "units": "W",
             "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "MEAS:POW?" } }
           }
         }
@@ -104,7 +104,7 @@
                 "value_default": "0.0",
                 "min": "0.0",
                 "max": "60.0",
-                "unit": "A",
+                "units": "A",
                 "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CURR <value>" } }
               },
               "Set_Slew": {
@@ -113,7 +113,7 @@
                 "value_default": "1000",
                 "min": "10",
                 "max": "5000",
-                "unit": "A/s",
+                "units": "A/s",
                 "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CURR:SLEW <value>" } }
               }
             }
@@ -128,7 +128,7 @@
                 "value_default": "12.0",
                 "min": "0.1",
                 "max": "100.0",
-                "unit": "V",
+                "units": "V",
                 "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "VOLT <value>" } }
               },
               "Set_Resistance": {
@@ -137,7 +137,7 @@
                 "value_default": "100",
                 "min": "0.1",
                 "max": "10000",
-                "unit": "Ω",
+                "units": "Ω",
                 "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "RES <value>" } }
               }
             }
@@ -159,14 +159,14 @@
             "type": "_GuiHorizontalKnob",
             "label_active": "Level A (Base)",
             "value_default": "1.0",
-            "unit": "A",
+            "units": "A",
             "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CURR:LEV <value>" } }
           },
           "Level_B": {
             "type": "_GuiHorizontalKnob",
             "label_active": "Level B (Peak)",
             "value_default": "5.0",
-            "unit": "A",
+            "units": "A",
             "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "CURR:TLEV <value>" } }
           },
           "Pulse_Freq": {
@@ -175,7 +175,7 @@
             "value_default": "100",
             "min": "0.1",
             "max": "10000",
-            "unit": "Hz",
+            "units": "Hz",
             "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "TRAN:FREQ <value>" } }
           },
           "Pulse_Duty": {
@@ -184,7 +184,7 @@
             "value_default": "50",
             "min": "1",
             "max": "99",
-            "unit": "%",
+            "units": "%",
             "message_details": { "DC_LOAD_MODEL": { "type": "_GuiActuator", "trigger": false, "command_value": "TRAN:DCYC <value>" } }
           }
         }

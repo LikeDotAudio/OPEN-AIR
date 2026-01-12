@@ -269,7 +269,7 @@ class CustomFaderCreatorMixin:
             height = canvas.winfo_height()
 
             # Calculate normalized y position (0 at top, 1 at bottom)
-            norm_y_inverted = (event.y - 10) / (height - 20)
+            norm_y_inverted = (event.y - 20) / (height - 40)
             norm_y_inverted = max(
                 0.0, min(1.0, norm_y_inverted)
             )  # Clamp between 0 and 1
@@ -507,9 +507,9 @@ class CustomFaderCreatorMixin:
         # Track (Groove)
         canvas.create_line(
             cx,
-            10,
+            20,
             cx,
-            height - 10,
+            height - 20,
             fill=frame_instance.track_col,
             width=4,
             capstyle=tk.ROUND,
@@ -541,7 +541,7 @@ class CustomFaderCreatorMixin:
         handle_y_norm = 1.0 - display_norm_pos
 
         # Scale to canvas coordinates
-        handle_y = (height - 20) * handle_y_norm + 10
+        handle_y = (height - 40) * handle_y_norm + 20
 
         # Draw Tick Marks
         tick_length_half = width * frame_instance.tick_size
@@ -586,7 +586,7 @@ class CustomFaderCreatorMixin:
                 display_tick_norm = linear_tick_norm  # Linear display position
 
             # Invert display_tick_norm because y=0 is top (max_val), y=1 is bottom (min_val)
-            tick_y_pos = (height - 20) * (1 - display_tick_norm) + 10
+            tick_y_pos = (height - 40) * (1 - display_tick_norm) + 20
 
             if app_constants.global_settings["debug_enabled"]:
                 debug_logger(

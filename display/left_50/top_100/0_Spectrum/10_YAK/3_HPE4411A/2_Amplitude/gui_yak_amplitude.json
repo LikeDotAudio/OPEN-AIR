@@ -1,32 +1,35 @@
 {
   "nab": {
     "type": "OcaBlock",
-    "description": "ESA Amplitude Monitoring",
+    "description": "NAB Amplitude Monitoring",
     "fields": {
-      "Amplitude_Readbacks": {
+      "NAB_amplitude_settings": {
         "type": "OcaBlock",
-        "description": "Power and Scaling Stats",
+        "description": "Power and Attenuation Readbacks",
         "fields": {
-          "Get_Amp_Settings": {
+          "Execute Command": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":DISPlay:WINDow:TRACe:Y:RLEVel?;:POWer:ATTenuation?;:POWer:GAIN?",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Outputs": {
             "type": "OcaBlock",
+            "description": "Readback Values",
             "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":DISP:WIND:TRAC:Y:RLEV?;:DISP:WIND:TRAC:Y:PDIV?;:POW:ATT?;:POW:ATT:AUTO?;:UNIT:POW?;:POW:GAIN?",
-                "layout": { "height": 30, "sticky": "" }
+              "Ref_Level_dBm": {
+                "value": "The reference level in dBm.",
+                "type": "_GuiValue"
               },
-              "Outputs": {
-                "type": "OcaBlock",
-                "fields": {
-                  "ref_level": { "value": "Ref Lvl", "type": "_GuiValue" },
-                  "scale_div": { "value": "dB/Div", "type": "_GuiValue" },
-                  "atten": { "value": "Atten dB", "type": "_GuiValue" },
-                  "atten_auto": { "value": "Auto (0/1)", "type": "_GuiValue" },
-                  "units": { "value": "Unit", "type": "_GuiValue" },
-                  "preamp": { "value": "Preamp (0/1)", "type": "_GuiValue" }
-                }
+              "Attenuation_dB": {
+                "value": "The attenuation in dB.",
+                "type": "_GuiValue"
+              },
+              "Preamp_On": {
+                "value": "Boolean for preamp state.",
+                "type": "_GuiValue"
               }
             }
           }
@@ -36,127 +39,271 @@
   },
   "rig": {
     "type": "OcaBlock",
-    "description": "ESA Amplitude Control",
+    "description": "RIG Amplitude Commands",
     "fields": {
-      "Reference_Level_Control": {
+      "rig_Ref_Level_dBm": {
         "type": "OcaBlock",
-        "description": "Vertical Placement",
+        "description": "Set Power Levels",
         "fields": {
-          "Set_Ref_Level": {
+          "Execute Command": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>;:POWer:RF:ATTenuation <Attenuation_dB>;:POWer:GAIN <Preamp_On>",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Input": {
             "type": "OcaBlock",
             "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":DISP:WIND:TRAC:Y:RLEV <val>",
-                "layout": { "height": 30, "sticky": "" }
+              "Ref_Level_dBm": {
+                "value": "-45",
+                "type": "_GuiValue",
+                "label": "Ref Level",
+                "units": "dBm",
+                "description": "The SCPI input for reference level."
               },
-              "Input": {
-                "type": "OcaBlock",
-                "fields": {
-                  "val": { "value": "0", "type": "_Value",
- "description": "Value in current Unit (e.g. dBm)" }
-                }
+              "Attenuation_dB": {
+                "value": "10",
+                "type": "_GuiValue",
+                "label": "Attenuation",
+                "units": "dB",
+                "description": "The SCPI input for power attenuation."
+              },
+              "Preamp_On": {
+                "value": "1",
+                "type": "_GuiValue",
+                "label": "Preamp (0/1)",
+                "description": "The SCPI input for power attenuation."
               }
             }
+          }
+        }
+      }
+    }
+  },
+  "get": {
+    "type": "OcaBlock",
+    "description": "Individual Read Queries",
+    "fields": {
+      "Get_Reference_Level": {
+        "type": "OcaBlock",
+        "fields": {
+          "Execute Command": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":DISPlay:WINDow:TRACe:Y:RLEVel?",
+            "layout": { "height": 30, "sticky": "" }
           },
-          "Set_Scale_Div": {
+          "Outputs": {
             "type": "OcaBlock",
             "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":DISP:WIND:TRAC:Y:PDIV <val>",
-                "layout": { "height": 30, "sticky": "" }
-              },
-              "Input": {
-                "type": "OcaBlock",
-                "fields": {
-                  "val": { "value": "10", "type": "_Value",
- "description": "dB per division" }
-                }
+              "ref_level": {
+                "value": "The reference level in dBm.",
+                "type": "_GuiValue"
               }
             }
           }
         }
       },
-      "Attenuation_Control": {
+      "Get_Attenuation": {
         "type": "OcaBlock",
-        "description": "Input Protection",
         "fields": {
-          "Set_Attenuation": {
+          "Execute Command": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":POWer:RF:ATTenuation?",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Outputs": {
             "type": "OcaBlock",
             "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":POW:ATT <val>",
-                "layout": { "height": 30, "sticky": "" }
-              },
-              "Input": {
-                "type": "OcaBlock",
-                "fields": {
-                  "val": { "value": "10", "type": "_Value",
- "description": "dB (0 to 60)" }
-                }
+              "attenuation": {
+                "value": "The attenuation in dB.",
+                "type": "_GuiValue"
               }
             }
-          },
-          "Set_Atten_Auto_ON": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "active": true,
-            "label_inactive": "Atten Auto",
-            "Execute Command": { "message": ":POW:ATT:AUTO ON" }
-          },
-          "Set_Atten_Auto_OFF": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "active": true,
-            "label_inactive": "Atten Manual",
-            "Execute Command": { "message": ":POW:ATT:AUTO OFF" }
           }
         }
       },
-      "Units_and_Gain": {
+      "Get_Preamp_State": {
         "type": "OcaBlock",
-        "description": "Units and Preamp",
         "fields": {
-          "Set_Y_Axis_Unit": {
+          "Execute Command": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":SENSE:POWer:RF:GAIN:STATe?",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Outputs": {
             "type": "OcaBlock",
             "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":UNIT:POW <unit>",
-                "layout": { "height": 30, "sticky": "" }
-              },
-              "Input": {
-                "type": "OcaBlock",
-                "fields": {
-                  "unit": { "value": "DBM", "type": "_Value",
- "description": "DBM, DBMV, DBUV, V, W" }
-                }
+              "preamp_state": {
+                "value": "Boolean for preamp state.",
+                "type": "_GuiValue"
               }
             }
+          }
+        }
+      }
+    }
+  },
+  "set": {
+    "type": "OcaBlock",
+    "description": "Individual Power Sets",
+    "fields": {
+      "Set_Reference_Level": {
+        "type": "OcaBlock",
+        "fields": {
+          "Execute Command": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>",
+            "layout": { "height": 30, "sticky": "" }
           },
-          "Set_Preamp_ON": {
+          "Input": {
+            "type": "OcaBlock",
+            "fields": {
+              "Ref_Level_dBm": {
+                "type": "_GuiValue",
+                "label": "Ref Level",
+                "units": "dBm",
+                "value": "-40"
+              }
+            }
+          }
+        }
+      },
+      "Set_Power_Attenuation": {
+        "type": "OcaBlock",
+        "fields": {
+          "Execute Command": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":POWer:ATTenuation <Power_Attenuation>",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Input": {
+            "type": "OcaBlock",
+            "fields": {
+              "Power_Attenuation": {
+                "type": "_GuiValue",
+                "label": "Attenuation",
+                "units": "dB",
+                "value": "20"
+              }
+            }
+          }
+        }
+      },
+      "Auto_Attenuation_Controls": {
+        "type": "OcaBlock",
+        "fields": {
+          "Set_Input_Auto_Attenuation_ON": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "label_inactive": "Auto Atten ON",
+            "layout": { "height": 30, "sticky": "" },
+            "Execute Command": {
+              "message": ":POWer:ATTenuation:AUTO ON"
+            }
+          },
+          "Set_Input_Auto_Attenuation_OFF": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "label_inactive": "Auto Atten OFF",
+            "layout": { "height": 30, "sticky": "" },
+            "Execute Command": {
+              "message": ":POWer:ATTenuation:AUTO OFF"
+            }
+          }
+        }
+      },
+      "Power_Gain_Controls": {
+        "type": "OcaBlock",
+        "fields": {
+          "Set_Power_Gain_ON": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
             "active": true,
             "label_inactive": "Preamp ON",
-            "Execute Command": { "message": ":POW:GAIN ON" }
+            "layout": { "height": 30, "sticky": "" },
+            "Execute Command": {
+              "message": ":POWer:GAIN ON"
+            }
           },
-          "Set_Preamp_OFF": {
+          "Set_Power_Gain_OFF": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
             "active": true,
             "label_inactive": "Preamp OFF",
-            "Execute Command": { "message": ":POW:GAIN OFF" }
+            "layout": { "height": 30, "sticky": "" },
+            "Execute Command": {
+              "trigger": false,
+              "message": ":POWer:GAIN OFF"
+            }
+          }
+        }
+      },
+      "High_Sensitivity_Profiles": {
+        "type": "OcaBlock",
+        "description": "Quick sensitivity presets",
+        "fields": {
+          "Set_High_Sensitive_Power_ON_N9340B": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "label_inactive": "High Sensitivity ON",
+            "layout": { "height": 30, "sticky": "" },
+            "N9340B": {
+              "trigger": false,
+              "message": ":DISPlay:WINDow:TRACe:Y:RLEVel -50; :POWer:ATTenuation 0; :POWer:GAIN ON"
+            }
+          },
+          "Set_High_Sensitive_Power_ON_N9342CN": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "label_inactive": "High Sensitivity ON",
+            "layout": { "height": 30, "sticky": "" },
+            "N9342CN": {
+              "trigger": false,
+              "message": ":POWer:HSENsitive ON"
+            }
+          },
+          "Set_High_Sensitive_Power_OFF_N9340B": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "label_inactive": "High Sensitivity OFF",
+            "layout": { "height": 30, "sticky": "" },
+            "N9340B": {
+              "trigger": false,
+              "message": ":DISPlay:WINDow:TRACe:Y:RLEVel 0; :POWer:ATTenuation 20; :POWer:GAIN OFF"
+            }
+          },
+          "Set_High_Sensitive_Power_OFF_N9342CN": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "label_inactive": "High Sensitivity OFF",
+            "layout": { "height": 30, "sticky": "" },
+            "N9342CN": {
+              "trigger": false,
+              "message": ":POWer:HSENsitive OFF"
+            }
           }
         }
       }

@@ -131,6 +131,8 @@ class HorizontalDialValueCreatorMixin(
             fader_widget.grid(row=0, column=0, sticky="nsew", padx=(DEFAULT_PAD_X, 0))
 
             dial_config = config_data.copy()
+            dial_config["label_active"] = ""
+            dial_config["show_label"] = False
             dial_config["min"] = "0"
             dial_config["max"] = "999"  # Visual range 0-999 as per user request
             

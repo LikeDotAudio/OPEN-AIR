@@ -26,13 +26,13 @@
                 "label": "Resolution Bandwidth (Hz)",
                 "value": "The resolution bandwidth in Hz.",
                 "type": "_GuiValue",
-                "unit": "Hz"
+                "units": "Hz"
               },
               "VBW_Hz": {
                 "label": "Video Bandwidth (Hz)",
                 "value": "The video bandwidth in Hz.",
                 "type": "_GuiValue",
-                "unit": "Hz"
+                "units": "Hz"
               },
               "VBW_Auto_On": {
                 "label": "VBW Auto State",
@@ -48,7 +48,7 @@
                 "label": "Sweep Time (s)",
                 "value": "The sweep time in seconds.",
                 "type": "_GuiValue",
-                "unit": "s"
+                "units": "s"
               }
             }
           }
@@ -81,14 +81,14 @@
                 "label": "Resolution Bandwidth (Hz)",
                 "value": "100000",
                 "type": "_GuiValue",
-                "unit": "Hz",
+                "units": "Hz",
                 "description": "The SCPI input for RBW."
               },
               "vbw_hz_value": {
                 "value": "100000",
                 "type": "_GuiValue",
                 "label": "Video Bandwidth (Hz)",
-                "unit": "Hz",
+                "units": "Hz",
                 "description": "The SCPI input for VBW."
               }
             }
@@ -115,7 +115,7 @@
                 "label": "Sweep Time (s)",
                 "value": "4",
                 "type": "_GuiValue",
-                "unit": "s"
+                "units": "s"
               }
             }
           }
@@ -141,7 +141,7 @@
                 "label": "Video Bandwidth (Hz)",
                 "value": "3000000",
                 "type": "_GuiValue",
-                "unit": "Hz"
+                "units": "Hz"
               }
             }
           }
@@ -167,7 +167,7 @@
                 "label": "Resolution Bandwidth (Hz)",
                 "value": "3000000",
                 "type": "_GuiValue",
-                "unit": "Hz"
+                "units": "Hz"
               }
             }
           }

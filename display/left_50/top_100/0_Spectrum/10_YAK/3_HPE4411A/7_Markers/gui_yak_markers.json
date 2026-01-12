@@ -1,47 +1,83 @@
 {
   "nab": {
     "type": "OcaBlock",
-    "description": "ESA Marker Readback",
+    "description": "NAB Marker Monitoring",
     "fields": {
-      "Read_Markers": {
+      "NAB_all_marker_settings": {
         "type": "OcaBlock",
-        "description": "Get Frequency and Amplitude",
+        "description": "Marker Amplitude and Frequency Readbacks",
         "fields": {
-          "Get_Marker_1": {
-            "type": "OcaBlock",
-            "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":CALC:MARK1:X?;:CALC:MARK1:Y?",
-                "layout": { "height": 30, "sticky": "" }
-              },
-              "Outputs": {
-                "type": "OcaBlock",
-                "fields": {
-                  "freq": { "value": "Hz", "type": "_GuiValue" },
-                  "ampl": { "value": "dBm", "type": "_GuiValue" }
-                }
-              }
-            }
+          "Execute Command": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":CALCulate:MARKer1:Y?;:CALCulate:MARKer2:Y?;:CALCulate:MARKer3:Y?;:CALCulate:MARKer4:Y?;:CALCulate:MARKer5:Y?;:CALCulate:MARKer6:Y?;:CALCulate:MARKer1:X?;:CALCulate:MARKer2:X?;:CALCulate:MARKer3:X?;:CALCulate:MARKer4:X?;:CALCulate:MARKer5:X?;:CALCulate:MARKer6:X?",
+            "layout": { "height": 30, "sticky": "" }
           },
-          "Get_Marker_2": {
+          "Outputs": {
             "type": "OcaBlock",
+            "description": "Marker Values",
             "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":CALC:MARK2:X?;:CALC:MARK2:Y?",
-                "layout": { "height": 30, "sticky": "" }
+              "Marker_1": {
+                "value": "Marker 1 Value in dBm",
+                "type": "_GuiValue",
+                "label": "Marker 1 Amplitude"
               },
-              "Outputs": {
-                "type": "OcaBlock",
-                "fields": {
-                  "freq": { "value": "Hz", "type": "_GuiValue" },
-                  "ampl": { "value": "dBm", "type": "_GuiValue" }
-                }
+              "Marker_2": {
+                "value": "Marker 2 Value in dBm",
+                "type": "_GuiValue",
+                "label": "Marker 2 Amplitude"
+              },
+              "Marker_3": {
+                "value": "Marker 3 Value in dBm",
+                "type": "_GuiValue",
+                "label": "Marker 3 Amplitude"
+              },
+              "Marker_4": {
+                "value": "Marker 4 Value in dBm",
+                "type": "_GuiValue",
+                "label": "Marker 4 Amplitude"
+              },
+              "Marker_5": {
+                "value": "Marker 5 Value in dBm",
+                "type": "_GuiValue",
+                "label": "Marker 5 Amplitude"
+              },
+              "Marker_6": {
+                "value": "Marker 6 Value in dBm",
+                "type": "_GuiValue",
+                "label": "Marker 6 Amplitude"
+              },
+              "Marker_1_X": {
+                "value": "Marker 1 Frequency in Hz",
+                "type": "_GuiValue",
+                "label": "Marker 1 Frequency"
+              },
+              "Marker_2_X": {
+                "value": "Marker 2 Frequency in Hz",
+                "type": "_GuiValue",
+                "label": "Marker 2 Frequency"
+              },
+              "Marker_3_X": {
+                "value": "Marker 3 Frequency in Hz",
+                "type": "_GuiValue",
+                "label": "Marker 3 Frequency"
+              },
+              "Marker_4_X": {
+                "value": "Marker 4 Frequency in Hz",
+                "type": "_GuiValue",
+                "label": "Marker 4 Frequency"
+              },
+              "Marker_5_X": {
+                "value": "Marker 5 Frequency in Hz",
+                "type": "_GuiValue",
+                "label": "Marker 5 Frequency"
+              },
+              "Marker_6_X": {
+                "value": "Marker 6 Frequency in Hz",
+                "type": "_GuiValue",
+                "label": "Marker 6 Frequency"
               }
             }
           }
@@ -49,61 +85,83 @@
       }
     }
   },
-  "rig": {
+  "set": {
     "type": "OcaBlock",
-    "description": "ESA Marker Control",
+    "description": "Marker Command Sets",
     "fields": {
-      "Marker_1_Control": {
+      "Set_Marker_State_ON": {
         "type": "OcaBlock",
+        "description": "Enable Marker",
         "fields": {
-          "Marker_1_Normal": {
+          "Execute Command": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
-            "label_inactive": "Mkr 1 Normal",
-            "Execute Command": { "message": ":CALC:MARK1:MODE POS" }
+            "active": true,
+            "trigger": false,
+            "message": ":CALCulate:MARKer<marker_number>:STATe ON",
+            "layout": { "height": 30, "sticky": "" }
           },
-          "Marker_1_Delta": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "label_inactive": "Mkr 1 Delta",
-            "Execute Command": { "message": ":CALC:MARK1:MODE DELT" }
-          },
-          "Marker_1_Off": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "label_inactive": "Mkr 1 Off",
-            "Execute Command": { "message": ":CALC:MARK1:MODE OFF" }
-          },
-          "Marker_1_Peak_Search": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "label_inactive": "Peak Search",
-            "Execute Command": { "message": ":CALC:MARK1:MAX" }
-          },
-          "Marker_To_Center": {
-            "type": "_GuiActuator",
-            "AES70": "OcaBooleanActuator",
-            "label_inactive": "Mkr -> Center",
-            "Execute Command": { "message": ":CALC:MARK1:CENT" }
+          "Input": {
+            "type": "OcaBlock",
+            "fields": {
+              "marker_number": {
+                "value": "1",
+                "type": "_GuiValue",
+                "label": "Marker Number"
+              }
+            }
           }
         }
       },
-      "Marker_Positioning": {
+      "Set_Marker_State_OFF": {
         "type": "OcaBlock",
+        "description": "Disable Marker",
         "fields": {
-          "Set_Marker_1_Freq": {
+          "Execute Command": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":CALCulate:MARKer<marker_number>:STATe OFF",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Input": {
             "type": "OcaBlock",
             "fields": {
-              "Execute Command": {
-                "type": "_GuiActuator",
-                "AES70": "OcaBooleanActuator",
-                "active": true,
-                "message": ":CALC:MARK1:X <freq>",
-                "layout": { "height": 30, "sticky": "" }
+              "marker_number": {
+                "value": "1",
+                "type": "_GuiValue",
+                "label": "Marker Number"
+              }
+            }
+          }
+        }
+      },
+      "Set_Marker_X_position": {
+        "type": "OcaBlock",
+        "description": "Set Marker Frequency",
+        "fields": {
+          "Execute Command": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "active": true,
+            "trigger": false,
+            "message": ":CALCulate:MARKer<marker_number>:X <x_value>",
+            "layout": { "height": 30, "sticky": "" }
+          },
+          "Input": {
+            "type": "OcaBlock",
+            "fields": {
+              "marker_number": {
+                "value": "1",
+                "type": "_GuiValue",
+                "label": "Marker Number"
               },
-              "Input": {
-                "type": "OcaBlock",
-                "fields": { "freq": { "value": "100 MHZ", "type": "_GuiValue" } }
+              "x_value": {
+                "value": "123456789",
+                "type": "_GuiValue",
+                "label": "Frequency",
+                "units": "Hz"
               }
             }
           }

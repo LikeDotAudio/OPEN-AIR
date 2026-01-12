@@ -21,7 +21,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "source": { "value": "CHAN1", "type": "_Value",
+                "fields": { "source": { "value": "CHAN1", "type": "_GuiValue", "label": "Source",
  "description": "CHAN1, CHAN2, CHAN3, CHAN4" } }
               }
             }
@@ -38,7 +38,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "level": { "value": "0.0", "type": "_GuiValue" } }
+                "fields": { "level": { "value": "0.0", "type": "_GuiValue", "label": "Level", "units": "V" } }
               }
             }
           },
@@ -54,7 +54,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "sweep": { "value": "AUTO", "type": "_Value",
+                "fields": { "sweep": { "value": "AUTO", "type": "_GuiValue", "label": "Sweep",
  "description": "AUTO or NORMal" } }
               }
             }

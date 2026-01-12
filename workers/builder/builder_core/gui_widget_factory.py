@@ -34,6 +34,7 @@ class GuiWidgetFactoryMixin:
             "_GuiButtonToggler": self._create_gui_button_toggler,
             "_GuiDropDownOption": self._create_gui_dropdown_option,
             "_Value": self._create_value_box,
+            "_GuiValue": self._create_value_box,
             "_Label": self._create_label_from_config,
             "_GuiActuator": self._create_gui_actuator,
             "_GuiCheckbox": self._create_gui_checkbox,

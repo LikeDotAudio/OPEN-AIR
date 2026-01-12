@@ -32,7 +32,7 @@
             "value_default": "0",
             "min": "0",
             "max": "100",
-            "unit": "V",
+            "units": "V",
             "description": "Potential Difference",
             "message_details": {
               "PSU_MODEL": {
@@ -48,7 +48,7 @@
             "value_default": "0",
             "min": "0",
             "max": "10",
-            "unit": "A",
+            "units": "A",
             "description": "Electron Flow",
             "message_details": {
               "PSU_MODEL": {
@@ -64,7 +64,7 @@
             "value_default": "0",
             "min": "0",
             "max": "1000",
-            "unit": "W",
+            "units": "W",
             "description": "Energy Consumption",
             "message_details": {
               "PSU_MODEL": {
@@ -105,7 +105,7 @@
             "value_default": "5.0",
             "min": "0.0",
             "max": "100.0",
-            "unit": "V",
+            "units": "V",
             "message_details": {
               "PSU_MODEL": {
                 "type": "_GuiActuator",
@@ -120,7 +120,7 @@
             "value_default": "0.1",
             "min": "0.0",
             "max": "10.0",
-            "unit": "A",
+            "units": "A",
             "message_details": {
               "PSU_MODEL": {
                 "type": "_GuiActuator",

@@ -11,6 +11,8 @@
       "RBW": {
         "label_active": "Resolution Bandwidth",
           "type": "_Horizontal_with_dial_Value",
+                  "layout": {"sticky": "ew","font":20 },
+
         "handler": "set_rbw",
         "yak_handler": {
           "enable": true,
@@ -23,8 +25,8 @@
 
         "default_value": "0.5",
 
-        "units": "MHz",
-        "layout": { "sticky": "ew" }
+        "units": "MHz"
+
       },
       "Resolution Band Width": {
         "type": "_GuiButtonToggler",
@@ -128,6 +130,8 @@
       "vbw_MHz": {
         "label_active": "Video Bandwidth",
           "type": "_Horizontal_with_dial_Value",
+                  "layout": {"sticky": "ew","font":20 },
+
         "handler": "set_vbw",
         "yak_handler": {
           "enable": true,
@@ -142,8 +146,8 @@
         "min": "0",
         "max": "1000",
         "step": "1",
-        "units": "kHz",
-        "layout": { "sticky": "ew" }
+        "units": "kHz"
+
       },
       "Video Band Width ": {
         "type": "_GuiButtonToggler",
@@ -313,6 +317,8 @@
         "type": "OcaBreakLine"
       },
       "sweep_time_setting": {
+                "layout": {"sticky": "ew","font":20 },
+
         "label_active": "Sweep Time",
         "label_inactive": "Sweep Time",
           "type": "_Horizontal_with_dial_Value",
@@ -330,8 +336,7 @@
         "min": "0",
         "max": "50",
         "step": "0.5",
-        "units": "s",
-        "layout": { "sticky": "ew" }
+        "units": "s"
       }
     }
   }

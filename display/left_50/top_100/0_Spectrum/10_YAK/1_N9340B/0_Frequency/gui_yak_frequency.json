@@ -25,26 +25,26 @@
                 "label": "Start Frequency (Hz)",
                 "value": "The current start frequency in Hz.",
                 "type": "_GuiValue",
-                "unit": "Hz"
+                "units": "Hz"
                 
               },
               "stop_freq": {
                 "label": "Stop Frequency (Hz)",
                 "value": "The current stop frequency in Hz.",
                 "type": "_GuiValue",
-                "unit": "Hz"
+                "units": "Hz"
               },
               "center_freq": {
                 "label": "Center Frequency (Hz)",
                 "value": "The current center frequency in Hz.",
                 "type": "_GuiValue",
-                "unit": "Hz"
+                "units": "Hz"
               },
               "span_freq": {
                 "label": "Span Frequency (Hz)",
                 "value": "The current span frequency in Hz.",
                 "type": "_GuiValue",
-                "unit": "Hz"
+                "units": "Hz"
               }
             }
           }
@@ -77,13 +77,13 @@
                 "label": "Start Frequency (Hz)",
                 "value": "12345678",
                 "type": "_GuiValue",
-                "unit": "Hz"
+                "units": "Hz"
               },
               "stop_freq": {
                 "label": "Stop Frequency (Hz)",
                 "value": "12345678",
                 "type": "_GuiValue",
-                "unit": "Hz"
+                "units": "Hz"
               }
             }
           }
@@ -107,7 +107,7 @@
                 "label": "Span Frequency (Hz)",
                 "value": "12345678",
                 "type": "_GuiValue",
-                "unit": "Hz"
+                "units": "Hz"
               }
             }
           }
@@ -132,7 +132,7 @@
                 "label": "Start Frequency (Hz)",
                 "value": "12345678",
                 "type": "_GuiValue",
-                "unit": "Hz"
+                "units": "Hz"
               }
             }
           }
@@ -157,7 +157,7 @@
               "hz_value": {
                 "value": "987654321",
                 "type": "_GuiValue",
-                "unit": "Hz"
+                "units": "Hz"
               }
             }
           }

@@ -20,7 +20,8 @@
                 "fields": {
                   "preset_path": {
                     "value": "C:\\PRESETS\\",
-                    "type": "_GuiValue"
+                    "type": "_GuiValue",
+                    "label": "Preset Path"
                   }
                 }
               },
@@ -58,11 +59,13 @@
                 "fields": {
                   "preset_fileName": {
                     "value": "14.STA",
-                    "type": "_GuiValue"
+                    "type": "_GuiValue",
+                    "label": "File Name"
                   },
                   "preset_path": {
                     "value": "C:\\PRESETS\\",
-                    "type": "_GuiValue"
+                    "type": "_GuiValue",
+                    "label": "Preset Path"
                   }
                 }
               }
@@ -85,7 +88,8 @@
                 "fields": {
                   "preset_number": {
                     "value": "0",
-                    "type": "_GuiValue"
+                    "type": "_GuiValue",
+                    "label": "Preset Number"
                   }
                 }
               },

@@ -22,35 +22,43 @@
             "fields": {
               "StartFreq": {
                 "value": "The starting frequency in Hz.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Start Frequency"
               },
               "StopFreq": {
                 "value": "The stopping frequency in Hz.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Stop Frequency"
               },
               "TraceMode1": {
                 "value": "The trace modes for each trace.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Mode 1"
               },
               "TraceMode2": {
                 "value": "The trace modes for each trace.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Mode 2"
               },
               "TraceMode3": {
                 "value": "The trace modes for each trace.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Mode 3"
               },
               "TraceData1": {
                 "value": "Processed trace data.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Data 1"
               },
               "TraceData2": {
                 "value": "Processed trace data.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Data 2"
               },
               "TraceData3": {
                 "value": "Processed trace data.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Data 3"
               }
             }
           }
@@ -74,35 +82,43 @@
             "fields": {
               "StartFreq": {
                 "value": "The starting frequency in Hz.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Start Frequency"
               },
               "StopFreq": {
                 "value": "The stopping frequency in Hz.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Stop Frequency"
               },
               "TraceMode1": {
                 "value": "The trace modes for each trace.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Mode 1"
               },
               "TraceMode2": {
                 "value": "The trace modes for each trace.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Mode 2"
               },
               "TraceMode3": {
                 "value": "The trace modes for each trace.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Mode 3"
               },
               "TraceData1": {
                 "value": "Processed trace data.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Data 1"
               },
               "TraceData2": {
                 "value": "Processed trace data.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Data 2"
               },
               "TraceData3": {
                 "value": "Processed trace data.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Data 3"
               }
             }
           }
@@ -130,8 +146,8 @@
             "fields": {
               "trace_number": {
                 "value": "1",
-                "type": "_Value",
-
+                "type": "_GuiValue",
+                "label": "Trace Number",
                 "description": "The trace number."
               }
             }
@@ -163,8 +179,8 @@
             "fields": {
               "trace_number": {
                 "value": "1",
-                "type": "_Value",
-
+                "type": "_GuiValue",
+                "label": "Trace Number",
                 "description": "The trace number."
               }
             }
@@ -196,7 +212,8 @@
             "fields": {
               "trace_number": {
                 "value": "2",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Number"
               }
             }
           },
@@ -227,7 +244,8 @@
             "fields": {
               "trace_number": {
                 "value": "2",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Number"
               }
             }
           },
@@ -258,7 +276,8 @@
             "fields": {
               "trace_number": {
                 "value": "3",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Number"
               }
             }
           },
@@ -289,7 +308,8 @@
             "fields": {
               "trace_number": {
                 "value": "3",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Number"
               }
             }
           },
@@ -320,7 +340,8 @@
             "fields": {
               "trace_number": {
                 "value": "4",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Number"
               }
             }
           },
@@ -351,7 +372,8 @@
             "fields": {
               "trace_number": {
                 "value": "4",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Trace Number"
               }
             }
           },

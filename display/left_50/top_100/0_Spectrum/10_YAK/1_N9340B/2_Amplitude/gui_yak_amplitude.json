@@ -20,14 +20,19 @@
             "description": "Readback Values",
             "fields": {
               "Ref_Level_dBm": {
+                "label": "Ref Level (dBm)",
                 "value": "The reference level in dBm.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "dBm"
               },
               "Attenuation_dB": {
+                "label": "Attenuation (dB)",
                 "value": "The attenuation in dB.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "dB"
               },
               "Preamp_On": {
+                "label": "Preamp On",
                 "value": "Boolean for preamp state.",
                 "type": "_GuiValue"
               }
@@ -101,8 +106,10 @@
             "type": "OcaBlock",
             "fields": {
               "ref_level": {
+                "label": "Ref Level (dBm)",
                 "value": "The reference level in dBm.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "dBm"
               }
             }
           }
@@ -123,8 +130,10 @@
             "type": "OcaBlock",
             "fields": {
               "attenuation": {
+                "label": "Attenuation (dB)",
                 "value": "The attenuation in dB.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "dB"
               }
             }
           }
@@ -145,6 +154,7 @@
             "type": "OcaBlock",
             "fields": {
               "preamp_state": {
+                "label": "Preamp State",
                 "value": "Boolean for preamp state.",
                 "type": "_GuiValue"
               }

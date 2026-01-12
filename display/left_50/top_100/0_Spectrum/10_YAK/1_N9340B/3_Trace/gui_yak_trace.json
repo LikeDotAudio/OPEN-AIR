@@ -156,6 +156,7 @@
             "type": "OcaBlock",
             "fields": {
               "trace_data": {
+                "label": "Trace Data",
                 "value": "Processed trace data or False.",
                 "type": "_GuiValue"
               }
@@ -189,6 +190,7 @@
             "type": "OcaBlock",
             "fields": {
               "trace_data": {
+                "label": "Trace Data",
                 "value": "Processed trace data or False.",
                 "type": "_GuiValue"
               }
@@ -221,6 +223,7 @@
             "type": "OcaBlock",
             "fields": {
               "trace_data": {
+                "label": "Trace Data",
                 "value": "Processed trace data.",
                 "type": "_GuiValue"
               }
@@ -253,6 +256,7 @@
             "type": "OcaBlock",
             "fields": {
               "trace_data": {
+                "label": "Trace Data",
                 "value": "Processed trace data.",
                 "type": "_GuiValue"
               }
@@ -285,6 +289,7 @@
             "type": "OcaBlock",
             "fields": {
               "trace_data": {
+                "label": "Trace Data",
                 "value": "Processed trace data.",
                 "type": "_GuiValue"
               }
@@ -317,6 +322,7 @@
             "type": "OcaBlock",
             "fields": {
               "trace_data": {
+                "label": "Trace Data",
                 "value": "Processed trace data.",
                 "type": "_GuiValue"
               }
@@ -349,6 +355,7 @@
             "type": "OcaBlock",
             "fields": {
               "trace_data": {
+                "label": "Trace Data",
                 "value": "Processed trace data.",
                 "type": "_GuiValue"
               }
@@ -381,6 +388,7 @@
             "type": "OcaBlock",
             "fields": {
               "trace_data": {
+                "label": "Trace Data",
                 "value": "Processed trace data.",
                 "type": "_GuiValue"
               }

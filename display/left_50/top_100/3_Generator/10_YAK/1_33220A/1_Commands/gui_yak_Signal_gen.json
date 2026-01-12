@@ -20,7 +20,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "config_string": { "value": "\"SIN 1000, 3.0, 0.0\"", "type": "_GuiValue" }
+                  "config_string": { "value": "\"SIN 1000, 3.0, 0.0\"", "type": "_GuiValue", "label": "Config String", "units": "" }
                 }
               }
             }
@@ -38,7 +38,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "is_on": { "value": "0 or 1", "type": "_GuiValue" }
+                  "is_on": { "value": "0 or 1", "type": "_GuiValue", "label": "Is On", "units": "" }
                 }
               }
             }
@@ -56,7 +56,7 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "error_msg": { "value": "Error Code, Message", "type": "_GuiValue" }
+                  "error_msg": { "value": "Error Code, Message", "type": "_GuiValue", "label": "Error Message", "units": "" }
                 }
               }
             }
@@ -86,11 +86,9 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "freq": { "value": "1000", "type": "_GuiValue" },
-                  "amp": { "value": "1.0", "type": "_Value",
- "description": "Amplitude in Vpp" },
-                  "offset": { "value": "0.0", "type": "_Value",
- "description": "Offset in Volts" }
+"freq": { "value": "1000", "type": "_GuiValue", "label": "Frequency", "units": "Hz" },
+                  "amp": { "value": "1.0", "type": "_GuiValue", "label": "Amplitude", "units": "Vpp", "description": "Amplitude in Vpp" },
+                  "offset": { "value": "0.0", "type": "_GuiValue", "label": "Offset", "units": "V", "description": "Offset in Volts" }
                 }
               }
             }
@@ -108,9 +106,9 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "freq": { "value": "1000", "type": "_GuiValue" },
-                  "amp": { "value": "1.0", "type": "_GuiValue" },
-                  "offset": { "value": "0.0", "type": "_GuiValue" }
+                  "freq": { "value": "1000", "type": "_GuiValue", "label": "Frequency", "units": "Hz" },
+                  "amp": { "value": "1.0", "type": "_GuiValue", "label": "Amplitude", "units": "Vpp" },
+                  "offset": { "value": "0.0", "type": "_GuiValue", "label": "Offset", "units": "V" }
                 }
               }
             }
@@ -128,9 +126,9 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "freq": { "value": "1000", "type": "_GuiValue" },
-                  "amp": { "value": "1.0", "type": "_GuiValue" },
-                  "offset": { "value": "0.0", "type": "_GuiValue" }
+                  "freq": { "value": "1000", "type": "_GuiValue", "label": "Frequency", "units": "Hz" },
+                  "amp": { "value": "1.0", "type": "_GuiValue", "label": "Amplitude", "units": "Vpp" },
+                  "offset": { "value": "0.0", "type": "_GuiValue", "label": "Offset", "units": "V" }
                 }
               }
             }
@@ -154,12 +152,9 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "shape": { "value": "SIN", "type": "_Value",
- "description": "SIN, SQU, TRI, RAMP" },
-                  "freq": { "value": "100", "type": "_Value",
- "description": "Modulating Freq Hz" },
-                  "depth": { "value": "50", "type": "_Value",
- "description": "Depth %" }
+                  "shape": { "value": "SIN", "type": "_GuiValue", "label": "Shape", "units": "", "description": "SIN, SQU, TRI, RAMP" },
+                                    "freq": { "value": "100", "type": "_GuiValue", "label": "Frequency", "units": "Hz", "description": "Modulating Freq Hz" },
+                                    "depth": { "value": "50", "type": "_GuiValue", "label": "Depth", "units": "%", "description": "Depth %" }
                 }
               }
             }
@@ -177,7 +172,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "width_sec": { "value": "0.0001", "type": "_GuiValue" }
+                  "width_sec": { "value": "0.0001", "type": "_GuiValue", "label": "Width", "units": "s" }
                 }
               }
             }
@@ -205,7 +200,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "freq": { "value": "1000", "type": "_GuiValue" } }
+                "fields": { "freq": { "value": "1000", "type": "_GuiValue", "label": "Frequency", "units": "Hz" } }
               }
             }
           },
@@ -221,8 +216,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "amp": { "value": "1.0", "type": "_Value",
- "description": "Default unit is Vpp" } }
+                "fields": { "amp": { "value": "1.0", "type": "_GuiValue", "label": "Amplitude", "units": "Vpp", "description": "Default unit is Vpp" } }
               }
             }
           },
@@ -238,7 +232,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "offset": { "value": "0.0", "type": "_GuiValue" } }
+                "fields": { "offset": { "value": "0.0", "type": "_GuiValue", "label": "Offset", "units": "V" } }
               }
             }
           },
@@ -255,8 +249,7 @@
               "Input": {
                 "type": "OcaBlock",
                 "fields": {
-                  "shape": { "value": "SIN", "type": "_Value",
- "description": "SIN, SQU, RAMP, PULS, NOIS, DC, USER" }
+                  "shape": { "value": "SIN", "type": "_GuiValue", "label": "Shape", "units": "", "description": "SIN, SQU, RAMP, PULS, NOIS, DC, USER" }
                 }
               }
             }
@@ -278,8 +271,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "ohms": { "value": "50", "type": "_Value",
- "description": "Ohms or INFinity" } }
+                "fields": { "ohms": { "value": "50", "type": "_GuiValue", "label": "Load", "units": "Ohms", "description": "Ohms or INFinity" } }
               }
             }
           },
@@ -295,8 +287,7 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "units": { "value": "VPP", "type": "_Value",
- "description": "VPP, VRMS, DBM" } }
+                "fields": { "units": { "value": "VPP", "type": "_GuiValue", "label": "Units", "units": "", "description": "VPP, VRMS, DBM" } }
               }
             }
           }

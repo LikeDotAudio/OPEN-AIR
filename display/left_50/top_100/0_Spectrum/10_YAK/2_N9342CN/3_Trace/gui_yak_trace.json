@@ -21,36 +21,52 @@
             "description": "Trace Settings and Data",
             "fields": {
               "StartFreq": {
+                "label": "Start Frequency (Hz)",
                 "value": "The starting frequency in Hz.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "Hz"
               },
               "StopFreq": {
+                "label": "Stop Frequency (Hz)",
                 "value": "The stopping frequency in Hz.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "Hz"
               },
               "TraceMode1": {
+                "label": "Trace Mode 1",
                 "value": "The trace modes for each trace.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "mode"
               },
               "TraceMode2": {
+                "label": "Trace Mode 2",
                 "value": "The trace modes for each trace.",
-                "type": "_GuiValue"
-              },
-              "TraceMode3": {
-                "value": "The trace modes for each trace.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "mode"
               },
               "TraceData1": {
+                "label": "Trace Data 1",
                 "value": "Processed trace data.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "dBm"
+              },
+              "TraceData1": {
+                "label": "Trace Data 1",
+                "value": "Processed trace data.",
+                "type": "_GuiValue",
+                "units": "dBm"
               },
               "TraceData2": {
+                "label": "Trace Data 2",
                 "value": "Processed trace data.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "dBm"
               },
               "TraceData3": {
+                "label": "Trace Data 3",
                 "value": "Processed trace data.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "dBm"
               }
             }
           }
@@ -73,36 +89,52 @@
             "description": "Trace Settings and Data",
             "fields": {
               "StartFreq": {
+                "label": "Start Frequency (Hz)",
                 "value": "The starting frequency in Hz.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "Hz"
               },
               "StopFreq": {
+                "label": "Stop Frequency (Hz)",
                 "value": "The stopping frequency in Hz.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "Hz"
               },
               "TraceMode1": {
+                "label": "Trace Mode 1",
                 "value": "The trace modes for each trace.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "mode"
               },
               "TraceMode2": {
+                "label": "Trace Mode 2",
                 "value": "The trace modes for each trace.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "mode"
               },
               "TraceMode3": {
+                "label": "Trace Mode 3",
                 "value": "The trace modes for each trace.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "mode"
               },
               "TraceData1": {
+                "label": "Trace Data 1",
                 "value": "Processed trace data.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "dBm"
               },
               "TraceData2": {
+                "label": "Trace Data 2",
                 "value": "Processed trace data.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "dBm"
               },
               "TraceData3": {
+                "label": "Trace Data 3",
                 "value": "Processed trace data.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "dBm"
               }
             }
           }
@@ -140,8 +172,10 @@
             "type": "OcaBlock",
             "fields": {
               "trace_data": {
+                "label": "Trace 1 Data",
                 "value": "Processed trace data or False.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "dBm"
               }
             }
           }
@@ -173,8 +207,10 @@
             "type": "OcaBlock",
             "fields": {
               "trace_data": {
+                "label": "Trace 1 Data",
                 "value": "Processed trace data or False.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "dBm"
               }
             }
           }
@@ -204,8 +240,10 @@
             "type": "OcaBlock",
             "fields": {
               "trace_data": {
+                "label": "Trace 2 Data",
                 "value": "Processed trace data.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "dBm"
               }
             }
           }

@@ -476,8 +476,8 @@ class Application(ttk.Frame):
 
                     new_frame = ttk.Frame(
                         paned_window,
-                        borderwidth=self.theme_colors["border_width"],
-                        relief=self.theme_colors["relief"],
+                        borderwidth=0,
+                        relief="flat",
                     )
                     paned_window.add(new_frame, weight=weight)
 
@@ -527,41 +527,49 @@ class Application(ttk.Frame):
                     notebook.add(tab_frame, text=display_name)
 
             elif layout_type == "monitors":
-                parent_widget.grid_rowconfigure(0, weight=1)
-                parent_widget.grid_rowconfigure(1, weight=1)
-                parent_widget.grid_rowconfigure(2, weight=1)
-                parent_widget.grid_columnconfigure(0, weight=1)
+                # Create a dedicated sub-container to avoid geometry manager conflicts on parent_widget
+                container = ttk.Frame(parent_widget)
+                container.pack(fill=tk.BOTH, expand=True)
+                
+                num_files = len(layout_data["gui_files"])
+                container.grid_columnconfigure(0, weight=1)
 
                 for i, gui_file_path in enumerate(layout_data["gui_files"]):
+                    container.grid_rowconfigure(i, weight=1)
                     frame_instance = self.module_loader.load_and_instantiate_gui(
-                        path=gui_file_path, parent_widget=parent_widget
+                        path=gui_file_path, parent_widget=container
                     )
                     if frame_instance:
                         frame_instance.grid(row=i, column=0, sticky="nsew")
 
             elif layout_type == "recursive_build":
-                for child_dir_path in layout_data["child_containers"]:
-                    self.module_loader.load_and_instantiate_gui(
-                        path=child_dir_path, parent_widget=parent_widget
-                    )
-
-                for gui_file_path in layout_data["gui_files"]:
-                    instance = self.module_loader.load_and_instantiate_gui(
-                        path=gui_file_path, parent_widget=parent_widget
-                    )
-                    if instance:
-                        instance.pack(fill=tk.BOTH, expand=True)
-                        if app_constants.global_settings["debug_enabled"]:
-                            debug_logger(
-                                message=f"✅ Successfully instantiated GUI from file: {gui_file_path}",
-                                **_get_log_args(),
-                            )
-                    else:
-                        if app_constants.global_settings["debug_enabled"]:
-                            debug_logger(
-                                message=f"❌ Failed to instantiate GUI from file: {gui_file_path}",
-                                **_get_log_args(),
-                            )
+                # Create a dedicated sub-container to avoid geometry manager conflicts on parent_widget
+                # and to ensure this directory level's items share space equally.
+                container = ttk.Frame(parent_widget)
+                container.pack(fill=tk.BOTH, expand=True)
+                
+                all_items = layout_data.get("child_containers", []) + layout_data.get("gui_files", [])
+                
+                if all_items:
+                    container.grid_columnconfigure(0, weight=1)
+                    for i, item_path in enumerate(all_items):
+                        container.grid_rowconfigure(i, weight=1)
+                        instance = self.module_loader.load_and_instantiate_gui(
+                            path=item_path, parent_widget=container
+                        )
+                        if instance:
+                            instance.grid(row=i, column=0, sticky="nsew")
+                            if app_constants.global_settings["debug_enabled"]:
+                                debug_logger(
+                                    message=f"✅ Successfully instantiated GUI from: {item_path}",
+                                    **_get_log_args(),
+                                )
+                        else:
+                            if app_constants.global_settings["debug_enabled"]:
+                                debug_logger(
+                                    message=f"❌ Failed to instantiate GUI from: {item_path}",
+                                    **_get_log_args(),
+                                )
 
             else:
                 # General Recursive Fallback

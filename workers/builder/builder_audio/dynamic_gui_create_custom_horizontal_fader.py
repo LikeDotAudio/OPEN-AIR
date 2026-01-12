@@ -186,6 +186,11 @@ class CustomHorizontalFaderCreatorMixin:
         path = config_data.get("path")
         tick_interval = config_data.get("tick_interval")
 
+        layout_config = config.get("layout", {})
+        font_size = layout_config.get("font", 10)
+        custom_font = ("Helvetica", font_size)
+        custom_colour = layout_config.get("colour", None)
+
         state_mirror_engine = self.state_mirror_engine
         subscriber_router = self.subscriber_router
         base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
@@ -224,10 +229,13 @@ class CustomHorizontalFaderCreatorMixin:
             tick_interval=tick_interval,
         )
         if label:
-            ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
+            lbl = tk.Label(frame, text=label, font=custom_font, background=bg_color, foreground=colors.get("fg", "#dcdcdc"))
+            if custom_colour:
+                lbl.configure(foreground=custom_colour)
+            lbl.pack(side=tk.TOP, pady=(0, 5))
 
-        width = config.get("layout", {}).get("width", 200)
-        height = config.get("layout", {}).get("height", DEFAULT_FADER_HEIGHT)
+        width = layout_config.get("width", 200)
+        height = layout_config.get("height", DEFAULT_FADER_HEIGHT)
 
         canvas = tk.Canvas(
             frame, width=width, height=height, bg=bg_color, highlightthickness=0
@@ -237,11 +245,18 @@ class CustomHorizontalFaderCreatorMixin:
 
         def on_fader_value_change(*args):
             current_fader_val = fader_value_var.get()
+            
+            # Use winfo or fall back to config dimensions if not yet mapped
+            current_w = canvas.winfo_width()
+            current_h = canvas.winfo_height()
+            if current_w <= 1: current_w = width
+            if current_h <= 1: current_h = height
+
             self._draw_horizontal_fader(
                 frame,
                 canvas,
-                canvas.winfo_width(),
-                canvas.winfo_height(),
+                current_w,
+                current_h,
                 current_fader_val,
             )
 

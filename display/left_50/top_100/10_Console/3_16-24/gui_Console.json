@@ -4,8 +4,8 @@
     "description": "8-Channel Hybrid Console",
     "layout_columns": 8,
     "column_sizing": [
-      {"weight": 0, "minwidth": 120},
-      {"weight": 0, "minwidth": 120},
+      {"weight": 1},
+      {"weight": 1},
       {"weight": 1},
       {"weight": 1},
       {"weight": 1},

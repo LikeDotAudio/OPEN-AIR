@@ -69,12 +69,20 @@ class NeedleVUMeterCreatorMixin:
 
         frame = ttk.Frame(parent_widget)  # Use parent_widget here
 
+        layout_config = config.get("layout", {})
+        font_size = layout_config.get("font", 10)
+        custom_font = ("Helvetica", font_size)
+        custom_colour = layout_config.get("colour", None)
+
         show_label = config.get("show_label", True)
         if label and show_label:
-            ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
+            lbl = ttk.Label(frame, text=label, font=custom_font)
+            if custom_colour:
+                lbl.configure(foreground=custom_colour)
+            lbl.pack(side=tk.TOP, pady=(0, 5))
 
         try:
-            size = config.get("size", 150)
+            size = int(layout_config.get("width", config.get("size", 150)))
             min_val = float(config.get("min", -20.0))
             max_val = float(config.get("max", 3.0))
             red_zone_start = float(config.get("upper_range", 0.0))

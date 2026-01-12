@@ -53,18 +53,14 @@ class GuiBatchBuilderMixin:
 
             col = 0
             row = row_offset
+            
+            # Root level config handling
             max_cols = int(
                 self.config_data.get("layout_columns", 1)
                 if override_cols is None
                 else override_cols
             )
-
-            current_data = (
-                self.config_data
-                if override_cols is None
-                else widget_configs[start_index][1]
-            )
-            column_sizing = current_data.get("column_sizing", [])
+            column_sizing = self.config_data.get("column_sizing", [])
 
             for col_idx in range(max_cols):
                 sizing_info = (
@@ -93,12 +89,13 @@ class GuiBatchBuilderMixin:
                     if widget_type == "OcaBlock":
                         show_label = value.get("show_label", True)
                         block_cols = value.get("layout_columns", None)
+                        # Add a minimal border and relief to make OcaBlocks visible
                         target_frame = ttk.LabelFrame(
                             parent_frame, text=key if show_label else "", borderwidth=0, relief="flat"
                         )
                         self._create_dynamic_widgets(
                             parent_frame=target_frame,
-                            data=value.get("fields", {}),
+                            data=value, # Pass the WHOLE block config
                             path_prefix=current_path,
                             override_cols=block_cols,
                         )
@@ -125,7 +122,6 @@ class GuiBatchBuilderMixin:
                             target_frame = None
 
                     if target_frame:
-                        tk_var = self.tk_vars.get(current_path)
                         target_frame.grid(
                             row=row,
                             column=col,
@@ -179,7 +175,7 @@ class GuiBatchBuilderMixin:
     # widget factory to create and place each widget on the parent frame.
     # Inputs:
     #     parent_frame: The parent tkinter frame.
-    #     data (dict): A dictionary of widget configurations.
+    #     data (dict): A dictionary of widget configurations OR an OcaBlock config.
     #     path_prefix (str): The base path for widget IDs.
     #     override_cols (int, optional): The number of columns for the layout.
     # Outputs:
@@ -189,14 +185,17 @@ class GuiBatchBuilderMixin:
             if not isinstance(data, dict):
                 return
 
-            col = 0
-            row = 0
+            # Extract fields and layout properties
+            fields = data.get("fields", data)
             max_cols = int(
                 data.get("layout_columns", 1)
                 if override_cols is None
                 else override_cols
             )
             column_sizing = data.get("column_sizing", [])
+
+            col = 0
+            row = 0
 
             for col_idx in range(max_cols):
                 sizing_info = (
@@ -208,7 +207,7 @@ class GuiBatchBuilderMixin:
                     col_idx, weight=weight, minsize=minwidth
                 )
 
-            for key, value in data.items():
+            for key, value in fields.items():
                 current_path = f"{path_prefix}/{key}".strip("/")
 
                 if isinstance(value, dict):
@@ -228,7 +227,7 @@ class GuiBatchBuilderMixin:
                         )
                         self._create_dynamic_widgets(
                             parent_frame=target_frame,
-                            data=value.get("fields", {}),
+                            data=value, # Pass the whole block config
                             path_prefix=current_path,
                             override_cols=block_cols,
                         )
@@ -254,7 +253,6 @@ class GuiBatchBuilderMixin:
                             target_frame = None
 
                     if target_frame:
-                        tk_var = self.tk_vars.get(current_path)
                         target_frame.grid(
                             row=row,
                             column=col,

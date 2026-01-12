@@ -25,6 +25,7 @@ from workers.logger.log_utils import _get_log_args
 from workers.styling.style import THEMES, DEFAULT_THEME
 import os
 from workers.mqtt.mqtt_topic_utils import get_topic
+from workers.handlers.widget_event_binder import bind_variable_trace
 
 
 class CustomFaderFrame(tk.Frame):
@@ -239,6 +240,7 @@ class CustomFaderCreatorMixin:
         # Theme Resolution
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         bg_color = colors.get("bg", "#2b2b2b")
+        fg_color = colors.get("fg", "#dcdcdc")
         accent_color = colors.get("accent", "#33A1FD")
         secondary_color = colors.get("secondary", "#444444")
         handle_color = colors.get("fg", "#dcdcdc")
@@ -308,13 +310,22 @@ class CustomFaderCreatorMixin:
             state_mirror_engine=self.state_mirror_engine,
             command=on_drag_or_click_callback,  # Pass the callback
         )
+
+        layout_config = config.get("layout", {})
+        font_size = layout_config.get("font", 10)
+        custom_font = ("Helvetica", font_size)
+        custom_colour = layout_config.get("colour", None)
+
         if label:
-            ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
+            lbl = tk.Label(frame, text=label, font=custom_font, background=bg_color, foreground=fg_color)
+            if custom_colour:
+                lbl.configure(foreground=custom_colour)
+            lbl.pack(side=tk.TOP, pady=(0, 5))
 
         try:
             # Layout logic handles size, but we need defaults for the canvas
-            width = config.get("width", 60)
-            height = config.get("height", 200)
+            width = layout_config.get("width", 60)
+            height = layout_config.get("height", 200)
 
             # Force canvas to match theme background so it blends in
             canvas = tk.Canvas(
@@ -324,19 +335,25 @@ class CustomFaderCreatorMixin:
             canvas.update_idletasks()
 
             # Value Label for Fader
-            value_label = ttk.Label(
-                frame, text=f"{int(fader_value_var.get())}", font=("Helvetica", 8)
+            value_label = tk.Label(
+                frame, text=f"{int(fader_value_var.get())}", font=("Helvetica", 8), background=bg_color, foreground=fg_color
             )
             value_label.pack(side=tk.BOTTOM)
 
             def on_fader_value_change(*args):
                 current_fader_val = fader_value_var.get()
 
+                # Use winfo or fall back to config dimensions if not yet mapped
+                current_w = canvas.winfo_width()
+                current_h = canvas.winfo_height()
+                if current_w <= 1: current_w = width
+                if current_h <= 1: current_h = height
+
                 self._draw_fader(
                     frame,
                     canvas,
-                    canvas.winfo_width(),
-                    canvas.winfo_height(),
+                    current_w,
+                    current_h,
                     current_fader_val,
                 )
 

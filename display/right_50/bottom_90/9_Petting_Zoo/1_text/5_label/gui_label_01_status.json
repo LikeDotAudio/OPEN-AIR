@@ -1,5 +1,5 @@
 {
-  "elements": {
+  "elements1": {
     "type": "OcaBlock",
     "label_active": "Gui Label 01 Status",
     "fields": {     "examplefields": {

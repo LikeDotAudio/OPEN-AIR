@@ -1,11 +1,13 @@
 {
-  "elements": {
+  "elements5": {
     "type": "OcaBlock",
     "label_active": "Process",
     "fields": {     "examplefields": {
       "type": "_Dial",
       "label_active": "Process",
       "value_default": 900.0,
+      "piechart": true,
+      "pointer": true,
       "width": 55,
       "height": 55,
       "indicator_color": "#6a9955",

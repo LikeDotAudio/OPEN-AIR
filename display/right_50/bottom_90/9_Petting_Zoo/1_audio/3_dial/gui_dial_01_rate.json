@@ -1,5 +1,5 @@
 {
-  "elements": {
+  "elements1": {
     "type": "OcaBlock",
     "label_active": "Rate",
     "fields": { 
@@ -7,6 +7,8 @@
       "type": "_Dial",
       "label_active": "Rate",
       "value_default": 250.0,
+      "piechart": true,
+      "pointer": true,
       "width": 50,
       "height": 50,
       "indicator_color": "#996633",

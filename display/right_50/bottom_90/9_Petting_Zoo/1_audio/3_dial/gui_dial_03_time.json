@@ -1,11 +1,13 @@
 {
-  "elements": {
+  "elements3": {
     "type": "OcaBlock",
     "label_active": "Time",
     "fields": {     "examplefields": {
       "type": "_Dial",
       "label_active": "Time",
       "value_default": 750.0,
+      "piechart": true,
+      "pointer": false,
       "width": 70,
       "height": 70,
       "indicator_color": "#d18616",

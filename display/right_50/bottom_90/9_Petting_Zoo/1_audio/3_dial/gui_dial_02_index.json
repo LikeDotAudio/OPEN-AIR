@@ -1,11 +1,13 @@
 {
-  "elements": {
+  "elements2": {
     "type": "OcaBlock",
     "label_active": "Index",
     "fields": {     "examplefields": {
       "type": "_Dial",
       "label_active": "Index",
       "value_default": 500.0,
+      "piechart": false,
+      "pointer": true,
       "width": 60,
       "height": 60,
       "indicator_color": "#c75450",

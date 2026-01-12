@@ -266,11 +266,15 @@ class DialCreatorMixin:
             command=None,  # Command is handled by the press/drag/release events now
         )
 
-
+        show_label = config.get("show_label", True)
+        if label and show_label:
+            ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
 
         try:
             width = config.get("width", 50)
             height = config.get("height", 50)
+            piechart = config.get("piechart", True)
+            pointer = config.get("pointer", True)
 
             # Canvas with Theme Background
             canvas = tk.Canvas(
@@ -305,6 +309,8 @@ class DialCreatorMixin:
                     accent_for_arc_val,
                     indicator_color_val,
                     secondary_val,
+                    piechart=piechart,
+                    pointer=pointer
                 )
                 if app_constants.global_settings["debug_enabled"]:
                     debug_logger(
@@ -325,6 +331,20 @@ class DialCreatorMixin:
             # --- Bind Special Keys for Quantum Jump and Precise Entry ---
             canvas.bind("<Control-Button-1>", frame._jump_to_reff_point)
             canvas.bind("<Alt-Button-1>", frame._open_manual_entry)
+
+            if path:
+                self.topic_widgets[path] = dial_value_var
+                widget_id = path
+                state_mirror_engine.register_widget(widget_id, dial_value_var, base_mqtt_topic_from_path, config_data)
+                
+                from workers.handlers.widget_event_binder import bind_variable_trace
+                callback = lambda: state_mirror_engine.broadcast_gui_change_to_mqtt(widget_id)
+                bind_variable_trace(dial_value_var, callback)
+                
+                topic = state_mirror_engine.get_widget_topic(widget_id)
+                if topic:
+                    subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
+                state_mirror_engine.initialize_widget_state(widget_id)
 
             if app_constants.global_settings["debug_enabled"]:
                 debug_logger(
@@ -347,6 +367,8 @@ class DialCreatorMixin:
     #     min_val, max_val (float): The min/max values of the dial (0-999).
     #     value_label (ttk.Label): The label for displaying the current value.
     #     neutral_color, accent_for_arc, indicator_color, secondary (str): Color values from the theme.
+    #     piechart (bool): Whether to draw the pie slice fill.
+    #     pointer (bool): Whether to draw the pointer line.
     # Outputs:
     #     None.
     def _draw_dial(
@@ -362,6 +384,8 @@ class DialCreatorMixin:
         accent_for_arc,
         indicator_color,
         secondary,
+        piechart=True,
+        pointer=True
     ):
         canvas.delete("all")
         cx, cy = width / 2, height / 2
@@ -383,35 +407,32 @@ class DialCreatorMixin:
         # 2. Calculate Normalized Value (0.0 to 1.0)
         norm_val = (value - min_val) / (max_val - min_val) if max_val > min_val else 0
 
-        # 3. Active Arc
+        # 3. Active Arc (Pie Chart)
         start_angle = 90  # Start from the top
         val_extent = -360 * norm_val # Negative for clockwise
         active_color = indicator_color
-        value_label.config(foreground=active_color)
         
-        canvas.create_arc(
-            5,
-            5,
-            width - 5,
-            height - 5,
-            start=start_angle,
-            extent=val_extent,
-            style=tk.PIESLICE,
-            outline=active_color,
-            width=4,
-        )
+        if piechart:
+            canvas.create_arc(
+                5,
+                5,
+                width - 5,
+                height - 5,
+                start=start_angle,
+                extent=val_extent,
+                style=tk.PIESLICE,
+                fill=active_color,
+                outline=active_color,
+                width=1,
+            )
 
         # 4. The Pointer Line
-        angle_rad = math.radians(start_angle + val_extent)
-        px = cx + radius * math.cos(angle_rad)
-        py = cy - radius * math.sin(angle_rad)  # Canvas Y is inverted
-        canvas.create_line(
-            cx, cy, px, py, fill=indicator_color, width=2, capstyle=tk.ROUND
-        )
-
-        # Center circle
-        # canvas.create_oval(
-        #     cx - 4, cy - 4, cx + 4, cy + 4, fill=active_color, outline=active_color
-        # )
+        if pointer:
+            angle_rad = math.radians(start_angle + val_extent)
+            px = cx + radius * math.cos(angle_rad)
+            py = cy - radius * math.sin(angle_rad)  # Canvas Y is inverted
+            canvas.create_line(
+                cx, cy, px, py, fill=indicator_color, width=3, capstyle=tk.ROUND
+            )
         
         value_label.config(foreground=active_color)

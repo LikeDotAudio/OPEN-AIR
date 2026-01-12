@@ -37,17 +37,25 @@ class VUMeterCreatorMixin:
 
         frame = ttk.Frame(parent_widget)  # Use parent_widget here
 
+        layout_config = config.get("layout", {})
+        font_size = layout_config.get("font", 10)
+        custom_font = ("Helvetica", font_size)
+        custom_colour = layout_config.get("colour", None)
+
         show_label = config.get("show_label", True)
         if label and show_label:
-            ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
+            lbl = ttk.Label(frame, text=label, font=custom_font)
+            if custom_colour:
+                lbl.configure(foreground=custom_colour)
+            lbl.pack(side=tk.TOP, pady=(0, 5))
 
         try:
             min_val = float(config.get("min", -20.0))
             max_val = float(config.get("max", 3.0))
             value_default = float(config.get("value_default", min_val))
             red_zone_start = float(config.get("upper_range", 0.0))
-            width = int(config.get("width", 200))
-            height = int(config.get("height", 20))
+            width = int(layout_config.get("width", config.get("width", 200)))
+            height = int(layout_config.get("height", config.get("height", 20)))
 
             lower_colour = config.get("Lower_range_colour", "green")
             upper_colour = config.get("upper_range_Colour", "red")

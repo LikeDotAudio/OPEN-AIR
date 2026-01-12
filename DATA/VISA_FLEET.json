@@ -39,7 +39,7 @@
                                 "device_type": "DMM",
                                 "notes": "6.5 Digit Benchtop Standard (Legacy)",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-11T20:09:08.038787"
+                                "connection_timestamp": "2026-01-11T21:15:43.169471"
                             }
                         }
                     }
@@ -86,7 +86,7 @@
                                 "device_type": "Unknown Instrument",
                                 "notes": "Not in Knowledge Base",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-11T20:09:08.038794"
+                                "connection_timestamp": "2026-01-11T21:15:43.169478"
                             }
                         }
                     }

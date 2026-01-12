@@ -10,7 +10,9 @@
       "layout": {
         "width": 150,
         "height": 30,
-        "font": 12
+        "font": 14,
+        "sticky": "ew",
+        "colour": "#d18616"
       },
       "notes": "An editable box for setting a numerical value with units."
     }

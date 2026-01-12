@@ -6,6 +6,7 @@
       "type": "_WebLink",
       "label_active": "View Source Code",
       "url": "https://github.com/APKaudio/OPEN-AIR",
+      "layout": {"sticky": "ew", "font": 12, "colour": "#6464a3"},
       "notes": "Link to the GitHub repository."
     }
   }

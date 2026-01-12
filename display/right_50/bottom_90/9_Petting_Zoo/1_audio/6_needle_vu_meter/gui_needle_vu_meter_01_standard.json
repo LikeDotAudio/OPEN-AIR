@@ -9,6 +9,9 @@
       "min": -20.0,
       "max": 3.0,
       "upper_range": 0.0,
+      "Lower_range_colour": "#6a9955",
+      "upper_range_Colour": "#c75450",
+      "Pointer_colour": "#ffffff",
       "value_default": -7.0,
       "notes": "A classic needle VU meter display."
     }

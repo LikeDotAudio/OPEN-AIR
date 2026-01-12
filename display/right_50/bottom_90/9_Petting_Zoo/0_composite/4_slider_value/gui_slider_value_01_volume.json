@@ -6,7 +6,7 @@
       "examplefields": {
       "type": "_sliderValue",
       "label_active": "Volume",
-      "layout": {"height": 100,  "width": 250, "sticky": "ew", "font":18 },
+      "layout": {"height": 100,  "width": 250, "font":18 },
       "min": 0.0,
       "max": 100.0,
       "value": 50.0,

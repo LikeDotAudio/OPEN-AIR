@@ -88,10 +88,11 @@ class ValueBoxCreatorMixin:
             box_height = layout.get("height")
             box_width = layout.get("width")
             font_size = layout.get("font", 10) # Default font 10
+            custom_colour = layout.get("colour", None)
             
             if app_constants.global_settings["debug_enabled"]:
                 debug_logger(
-                    message=f"🧐 Layout Analysis for '{label}': H={box_height}, W={box_width}, Font={font_size}",
+                    message=f"🧐 Layout Analysis for '{label}': H={box_height}, W={box_width}, Font={font_size}, Colour={custom_colour}",
                     **_get_log_args(),
                 )
 
@@ -113,7 +114,9 @@ class ValueBoxCreatorMixin:
             # 1. Label (Left side)
             # Only create if label is not empty/None
             if label and label != "X": # 'X' might be a placeholder in your config
-                lbl_widget = ttk.Label(sub_frame, text=f"{label}:")
+                lbl_widget = ttk.Label(sub_frame, text=f"{label}:", font=("TkDefaultFont", font_size))
+                if custom_colour:
+                    lbl_widget.configure(foreground=custom_colour)
                 lbl_widget.grid(row=0, column=0, padx=(0, DEFAULT_PAD_X), sticky="w")
 
             # 2. Entry Variable
@@ -124,11 +127,18 @@ class ValueBoxCreatorMixin:
             # Prepare Font
             entry_font = ("TkDefaultFont", font_size)
             
+            style_name = "Custom.TEntry"
+            if custom_colour:
+                style_name = f"Custom.{path.replace('/', '_')}.TEntry"
+                style = ttk.Style()
+                style.configure(style_name, foreground=custom_colour)
+
             entry_widget = ttk.Entry(
                 sub_frame, 
                 textvariable=entry_value,
                 font=entry_font,
-                justify="center" # Center the text looks better for values
+                justify="center", # Center the text looks better for values
+                style=style_name
             )
             
             # STICKY NSEW ensures it fills the calculated frame height/width!
@@ -136,7 +146,9 @@ class ValueBoxCreatorMixin:
 
             # 4. Units Label (Right side)
             if units:
-                units_widget = ttk.Label(sub_frame, text=units)
+                units_widget = ttk.Label(sub_frame, text=units, font=("TkDefaultFont", font_size))
+                if custom_colour:
+                    units_widget.configure(foreground=custom_colour)
                 units_widget.grid(row=0, column=2, padx=(DEFAULT_PAD_X, 0), sticky="e")
 
             # --- Event Binding ---

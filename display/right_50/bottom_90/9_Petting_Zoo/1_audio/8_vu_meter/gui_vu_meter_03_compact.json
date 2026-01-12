@@ -9,6 +9,9 @@
       "max": 0.0,
       "value_default": -10.0,
       "upper_range": -6.0,
+      "Lower_range_colour": "#007acc",
+      "upper_range_Colour": "#ce9178",
+      "Pointer_colour": "#dcdcaa",
       "width": 150,
       "height": 15,
       "notes": "A smaller VU meter suitable for microphone input monitoring."

@@ -58,8 +58,13 @@ class WebLinkCreatorMixin:
         frame = ttk.Frame(parent_widget)  # Use parent_widget here
 
         try:
+            layout_config = config.get("layout", {})
+            font_size = layout_config.get("font", 10)
+            custom_font = ("Helvetica", font_size, "underline")
+            custom_colour = layout_config.get("colour", "blue")
+
             url = config.get("url", "#")
-            link_label = ttk.Label(frame, text=label, foreground="blue", cursor="hand2")
+            link_label = ttk.Label(frame, text=label, foreground=custom_colour, cursor="hand2", font=custom_font)
             link_label.pack(side=tk.LEFT)
 
             def _open_url(event):

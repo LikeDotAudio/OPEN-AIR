@@ -5,6 +5,7 @@
     "fields": {     "examplefields": {
       "type": "_NeedleVUMeter",
       "label_active": "Master Gain Monitor",
+      "show_label": false,
       "size": 200,
       "min": -30.0,
       "max": 6.0,

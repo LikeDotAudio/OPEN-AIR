@@ -6,7 +6,7 @@
       "type": "_TextInput",
       "label_active": "Username",
       "value_default": "user123",
-      "font_size": 12,
+      "layout": {"sticky": "ew", "font": 16, "colour": "#6a9955"},
       "notes": "Standard input field for a username."
     }
   }

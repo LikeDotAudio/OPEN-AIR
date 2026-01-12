@@ -9,6 +9,9 @@
       "min": -20.0,
       "max": 3.0,
       "upper_range": 0.0,
+      "Lower_range_colour": "#6464a3",
+      "upper_range_Colour": "#996633",
+      "Pointer_colour": "#ffffff",
       "value_default": 2.5,
       "notes": "Needle meter showing a value close to the red zone initially."
     }

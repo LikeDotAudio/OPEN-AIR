@@ -6,6 +6,7 @@
       "type": "_WebLink",
       "label_active": "Visit Project Homepage",
       "url": "https://www.like.audio/project",
+      "layout": {"sticky": "ew", "font": 14, "colour": "#007acc"},
       "notes": "Link to the main project website."
     }
   }

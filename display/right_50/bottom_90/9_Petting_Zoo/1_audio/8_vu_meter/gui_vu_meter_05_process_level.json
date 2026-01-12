@@ -9,6 +9,9 @@
       "max": 6.0,
       "value_default": -18.0,
       "upper_range": 0.0,
+      "Lower_range_colour": "#6464a3",
+      "upper_range_Colour": "#996633",
+      "Pointer_colour": "#ffffff",
       "width": 200,
       "height": 20,
       "notes": "VU meter tailored for monitoring process levels."

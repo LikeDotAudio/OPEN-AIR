@@ -5,6 +5,7 @@
     "fields": {     "examplefields": {
       "type": "_VUMeter",
       "label_active": "Wide Range VU",
+      "show_label": false,
       "min": -40.0,
       "max": 10.0,
       "value_default": -15.0,

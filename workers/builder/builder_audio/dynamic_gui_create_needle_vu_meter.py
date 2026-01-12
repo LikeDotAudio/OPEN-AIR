@@ -69,7 +69,8 @@ class NeedleVUMeterCreatorMixin:
 
         frame = ttk.Frame(parent_widget)  # Use parent_widget here
 
-        if label:
+        show_label = config.get("show_label", True)
+        if label and show_label:
             ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
 
         try:
@@ -78,6 +79,10 @@ class NeedleVUMeterCreatorMixin:
             max_val = float(config.get("max", 3.0))
             red_zone_start = float(config.get("upper_range", 0.0))
             value_default = float(config.get("value_default", min_val))
+
+            lower_colour = config.get("Lower_range_colour", "green")
+            upper_colour = config.get("upper_range_Colour", danger_color)
+            pointer_colour = config.get("Pointer_colour", accent_color)
 
             vu_value_var = tk.DoubleVar(value=value_default)
 
@@ -98,10 +103,11 @@ class NeedleVUMeterCreatorMixin:
                     min_val,
                     max_val,
                     red_zone_start,
-                    accent_color,
+                    pointer_colour,
                     secondary_color,
                     fg_color,
-                    danger_color,
+                    upper_colour,
+                    lower_colour
                 )
 
             vu_value_var.trace_add("write", update_visuals)
@@ -157,6 +163,7 @@ class NeedleVUMeterCreatorMixin:
     #     min_val, max_val (float): The min/max range of the meter.
     #     red_zone_start (float): The value at which the red zone begins.
     #     accent, secondary, fg, danger (str): Color values from the theme.
+    #     lower_colour (str): The colour for the lower range.
     # Outputs:
     #     None.
     def _draw_needle_vu_meter(
@@ -167,10 +174,11 @@ class NeedleVUMeterCreatorMixin:
         min_val,
         max_val,
         red_zone_start,
-        accent,
+        pointer_colour,
         secondary,
         fg,
-        danger,
+        upper_colour,
+        lower_colour="green"
     ):
         canvas.delete("all")
         width = size
@@ -237,7 +245,7 @@ class NeedleVUMeterCreatorMixin:
             start=green_start_angle_deg,
             extent=(start_angle_deg - green_start_angle_deg),
             style=tk.ARC,
-            outline="green",
+            outline=lower_colour,
             width=arc_thickness,
         )
 
@@ -249,7 +257,7 @@ class NeedleVUMeterCreatorMixin:
             start=end_angle_deg,
             extent=(green_start_angle_deg - end_angle_deg),
             style=tk.ARC,
-            outline=danger,
+            outline=upper_colour,
             width=arc_thickness,
         )
 
@@ -271,7 +279,7 @@ class NeedleVUMeterCreatorMixin:
         y = center_y - needle_total_len * math.sin(needle_angle_rad)
 
         canvas.create_line(
-            center_x, center_y, x, y, width=3, fill=accent, capstyle=tk.ROUND
+            center_x, center_y, x, y, width=3, fill=pointer_colour, capstyle=tk.ROUND
         )
 
         # --- Draw Pivot ---

@@ -6,6 +6,7 @@
       "type": "_Label",
       "label": "Status",
       "value": "Idle",
+      "layout": {"sticky": "ew", "font": 18, "colour": "#c75450"},
       "notes": "A basic status indicator."
     }
   }

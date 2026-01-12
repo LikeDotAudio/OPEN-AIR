@@ -62,20 +62,29 @@ class TextInputCreatorMixin:
 
         frame = ttk.Frame(parent_widget)  # Use parent_widget here
 
-        if label:
-            ttk.Label(frame, text=label).pack(side=tk.LEFT, padx=(0, 10))
-
         try:
-            theme = THEMES[DEFAULT_THEME]
-            textbox_style = theme.get("textbox_style", {})
-            font_size = config.get("font_size", textbox_style.get("Textbox_Font_size", 13))
-            font_family = textbox_style.get("Textbox_Font", "Segoe UI")
-            font = (font_family, font_size)
+            layout_config = config.get("layout", {})
+            font_size = layout_config.get("font", 13)
+            custom_font = ("Segoe UI", font_size)
+            custom_colour = layout_config.get("colour", None)
+
+            if label:
+                lbl = ttk.Label(frame, text=label, font=custom_font)
+                if custom_colour:
+                    lbl.configure(foreground=custom_colour)
+                lbl.pack(side=tk.LEFT, padx=(0, 10))
 
             text_var = tk.StringVar()
             text_var.set(config.get("value_default", ""))
 
-            entry = ttk.Entry(frame, textvariable=text_var, font=font)
+            # Create a style for the entry if color is specified
+            style_name = "Custom.TEntry"
+            if custom_colour:
+                style_name = f"Custom.{path.replace('/', '_')}.TEntry"
+                style = ttk.Style()
+                style.configure(style_name, foreground=custom_colour)
+
+            entry = ttk.Entry(frame, textvariable=text_var, font=custom_font, style=style_name)
             entry.pack(side=tk.LEFT, fill=tk.X, expand=True)
 
             def _on_text_change(*args):

@@ -9,6 +9,9 @@
       "min": -40.0,
       "max": 10.0,
       "upper_range": 5.0,
+      "Lower_range_colour": "#b5cea8",
+      "upper_range_Colour": "#d18616",
+      "Pointer_colour": "#ffffff",
       "value_default": -15.0,
       "notes": "Needle meter configured for a wider decibel range."
     }

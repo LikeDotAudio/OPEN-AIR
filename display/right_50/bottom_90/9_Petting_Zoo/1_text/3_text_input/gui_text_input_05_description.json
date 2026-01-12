@@ -6,7 +6,7 @@
       "type": "_TextInput",
       "label_active": "Description",
       "value_default": "Enter details here...",
-      "font_size": 13,
+      "layout": {"sticky": "ew", "font": 14, "colour": "#ce9178"},
       "notes": "Input field for a general description."
     }
   }

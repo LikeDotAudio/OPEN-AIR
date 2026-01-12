@@ -81,12 +81,19 @@ class LabelCreatorMixin:
         try:
             sub_frame = ttk.Frame(parent_frame)
 
+            layout_config = config.get("layout", {})
+            font_size = layout_config.get("font", 10)
+            custom_font = ("Helvetica", font_size)
+            custom_colour = layout_config.get("colour", None)
+
             label_text = f"{label}: {value}"
             if units:
                 label_text += f" {units}"
 
             label_var = tk.StringVar(value=label_text)
-            label_widget = ttk.Label(sub_frame, textvariable=label_var)
+            label_widget = ttk.Label(sub_frame, textvariable=label_var, font=custom_font)
+            if custom_colour:
+                label_widget.configure(foreground=custom_colour)
             label_widget.pack(side=tk.LEFT, padx=(DEFAULT_PAD_X, DEFAULT_PAD_X))
 
             if path:

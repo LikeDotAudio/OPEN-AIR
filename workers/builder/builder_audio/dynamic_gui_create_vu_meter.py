@@ -37,7 +37,8 @@ class VUMeterCreatorMixin:
 
         frame = ttk.Frame(parent_widget)  # Use parent_widget here
 
-        if label:
+        show_label = config.get("show_label", True)
+        if label and show_label:
             ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
 
         try:
@@ -47,6 +48,10 @@ class VUMeterCreatorMixin:
             red_zone_start = float(config.get("upper_range", 0.0))
             width = int(config.get("width", 200))
             height = int(config.get("height", 20))
+
+            lower_colour = config.get("Lower_range_colour", "green")
+            upper_colour = config.get("upper_range_Colour", "red")
+            pointer_colour = config.get("Pointer_colour", "yellow")
 
             vu_value_var = tk.DoubleVar(value=value_default)
 
@@ -61,14 +66,14 @@ class VUMeterCreatorMixin:
                 if max_val > min_val
                 else 0
             )
-            canvas.create_rectangle(0, 0, red_zone_x, height, fill="green", outline="")
+            canvas.create_rectangle(0, 0, red_zone_x, height, fill=lower_colour, outline="")
             canvas.create_rectangle(
-                red_zone_x, 0, width, height, fill="red", outline=""
+                red_zone_x, 0, width, height, fill=upper_colour, outline=""
             )
 
             # The indicator
             indicator = canvas.create_rectangle(
-                0, 0, 5, height, fill="yellow", outline=""
+                0, 0, 5, height, fill=pointer_colour, outline=""
             )
 
             def update_visuals(*args):

@@ -78,6 +78,7 @@ class CustomFaderFrame(tk.Frame):
         self.tick_color = config.get("tick_color", fader_style.get("tick_color", "light grey"))
         self.value_follow = config.get("value_follow", fader_style.get("value_follow", True))
         self.value_highlight_color = config.get("value_highlight_color", fader_style.get("value_highlight_color", "#f4902c"))
+        self.is_sliding = False
 
         super().__init__(
             master,
@@ -401,9 +402,18 @@ class CustomFaderCreatorMixin:
             canvas.bind("<Enter>", on_enter)
             canvas.bind("<Leave>", on_leave)
 
-            # Interaction
+            # Interaction Wrappers
+            def start_sliding(event):
+                frame.is_sliding = True
+                frame.command(event)
+
+            def stop_sliding(event):
+                frame.is_sliding = False
+                on_fader_value_change()
+
+            canvas.bind("<Button-1>", start_sliding)
             canvas.bind("<B1-Motion>", frame.command)
-            canvas.bind("<Button-1>", frame.command)
+            canvas.bind("<ButtonRelease-1>", stop_sliding)
 
             # --- Bind Special Keys for Quantum Jump and Precise Entry ---
             canvas.bind("<Control-Button-1>", frame._jump_to_reff_point)
@@ -652,7 +662,7 @@ class CustomFaderCreatorMixin:
             outline=frame_instance.track_col,
         )
 
-        if frame_instance.value_follow:
+        if frame_instance.value_follow and frame_instance.is_sliding:
             canvas.create_text(
                 cx,
                 handle_y - cap_height / 2 - 5,

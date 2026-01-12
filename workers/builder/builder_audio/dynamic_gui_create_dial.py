@@ -282,12 +282,6 @@ class DialCreatorMixin:
             )
             canvas.pack()
 
-            # Value Label (initially based on default value var)
-            value_label = ttk.Label(
-                frame, text=f"{int(dial_value_var.get())}", font=("Helvetica", 8)
-            )
-            value_label.pack(side=tk.BOTTOM)
-
             # Visual State for Hover Effect
             visual_props = {"secondary": secondary_color}
             hover_color = "#999999"
@@ -299,7 +293,6 @@ class DialCreatorMixin:
                 indicator_color_val=indicator_color,
             ):
                 current_dial_val = dial_value_var.get()
-                value_label.config(text=f"{int(current_dial_val)}")
                 self._draw_dial(
                     canvas,
                     width,
@@ -307,7 +300,6 @@ class DialCreatorMixin:
                     current_dial_val,
                     frame.min_val,
                     frame.max_val,
-                    value_label,
                     neutral_color_val,
                     accent_for_arc_val,
                     indicator_color_val,
@@ -394,7 +386,6 @@ class DialCreatorMixin:
         value,
         min_val,
         max_val,
-        value_label,
         neutral_color,
         accent_for_arc,
         indicator_color,
@@ -450,4 +441,24 @@ class DialCreatorMixin:
                 cx, cy, px, py, fill=indicator_color, width=3, capstyle=tk.ROUND
             )
         
-        value_label.config(foreground=active_color)
+        # 5. Value Text in Center with Background
+        text_bg_radius = radius * 0.5
+        canvas.create_oval(
+            cx - text_bg_radius,
+            cy - text_bg_radius,
+            cx + text_bg_radius,
+            cy + text_bg_radius,
+            fill="#2b2b2b",  # Matches default bg, effectively "clearing" center
+            outline=secondary,
+            width=1
+        )
+        
+        # Determine text color for contrast. 
+        # Since bg is dark (#2b2b2b), light text (neutral_color/fg_color) works.
+        canvas.create_text(
+            cx,
+            cy,
+            text=f"{int(value)}",
+            fill=neutral_color,
+            font=("Helvetica", 8, "bold")
+        )

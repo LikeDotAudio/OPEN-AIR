@@ -290,12 +290,15 @@ class KnobCreatorMixin:
             )
             value_label.pack(side=tk.BOTTOM)
 
+            # Visual State for Hover Effect
+            visual_props = {"secondary": secondary_color}
+            hover_color = "#999999"
+
             def update_knob_visuals(
                 *args,
                 neutral_color_val=fg_color,
                 accent_for_arc_val=accent_color,
                 indicator_color_val=indicator_color,
-                secondary_val=secondary_color,
             ):
                 current_knob_val = knob_value_var.get()
                 value_label.config(text=f"{int(current_knob_val)}")
@@ -310,7 +313,7 @@ class KnobCreatorMixin:
                     neutral_color_val,
                     accent_for_arc_val,
                     indicator_color_val,
-                    secondary_val,
+                    visual_props["secondary"],
                 )
                 if app_constants.global_settings["debug_enabled"]:
                     debug_logger(
@@ -322,6 +325,18 @@ class KnobCreatorMixin:
 
             # Initial draw based on default value
             update_knob_visuals()
+
+            # Hover Effects
+            def on_enter(event):
+                visual_props["secondary"] = hover_color
+                update_knob_visuals()
+
+            def on_leave(event):
+                visual_props["secondary"] = secondary_color
+                update_knob_visuals()
+
+            canvas.bind("<Enter>", on_enter)
+            canvas.bind("<Leave>", on_leave)
 
             # Drag Interaction
             canvas.bind("<Button-1>", on_knob_press)

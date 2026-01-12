@@ -81,14 +81,26 @@ class SliderValueCreatorMixin:
             custom_font = ("Helvetica", font_size)
 
             # --- Layout Refactor: Start ---
-            # Line 1: Label
-            label_widget = ttk.Label(sub_frame, text=f"{label}:", font=custom_font)
-            label_widget.pack(
-                side=tk.TOP,
-                fill=tk.X,
-                padx=(DEFAULT_PAD_X, DEFAULT_PAD_Y),
-                pady=(0, DEFAULT_PAD_Y),
+            # Line 1: Label, Textbox, Units
+            top_info_frame = ttk.Frame(sub_frame)
+            top_info_frame.pack(side=tk.TOP, fill=tk.X, padx=DEFAULT_PAD_X, pady=(0, DEFAULT_PAD_Y))
+
+            label_widget = ttk.Label(top_info_frame, text=f"{label}:", font=custom_font)
+            label_widget.pack(side=tk.LEFT, padx=(0, DEFAULT_PAD_X))
+
+            entry_value = tk.StringVar(value=config_data.get("value", "0"))
+            entry = ttk.Entry(
+                top_info_frame,
+                width=7,
+                style="Custom.TEntry",
+                textvariable=entry_value,
+                justify=tk.RIGHT,
+                font=custom_font
             )
+            entry.pack(side=tk.LEFT, padx=(0, DEFAULT_PAD_X))
+
+            units_label = ttk.Label(top_info_frame, text=config_data.get("units", ""), font=custom_font)
+            units_label.pack(side=tk.LEFT)
 
             # Line 2: Slider
             min_val = float(config_data.get("min", "0"))
@@ -117,24 +129,6 @@ class SliderValueCreatorMixin:
                 padx=DEFAULT_PAD_X,
                 pady=(0, DEFAULT_PAD_Y),
             )
-
-            # Line 3: Textbox and Units
-            value_unit_frame = ttk.Frame(sub_frame)
-            value_unit_frame.pack(side=tk.TOP, fill=tk.X, expand=True)
-
-            units_label = ttk.Label(value_unit_frame, text=config_data.get("units", ""), font=custom_font)
-            units_label.pack(side=tk.RIGHT, padx=(DEFAULT_PAD_X, DEFAULT_PAD_X))
-
-            entry_value = tk.StringVar(value=config_data.get("value", "0"))
-            entry = ttk.Entry(
-                value_unit_frame,
-                width=7,
-                style="Custom.TEntry",
-                textvariable=entry_value,
-                justify=tk.RIGHT,
-                font=custom_font
-            )
-            entry.pack(side=tk.RIGHT, padx=(DEFAULT_PAD_X, 0))
 
             try:
                 initial_val = float(entry_value.get())

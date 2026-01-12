@@ -197,6 +197,7 @@ class CustomHorizontalFaderCreatorMixin:
 
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         bg_color = colors.get("bg", "#2b2b2b")
+        secondary_color = colors.get("secondary", "#444444")
 
         min_val = float(config.get("value_min", 0.0))
         max_val = float(config.get("value_max", 100.0))
@@ -243,6 +244,10 @@ class CustomHorizontalFaderCreatorMixin:
         canvas.pack(fill=tk.BOTH, expand=True)
         canvas.update_idletasks()
 
+        # Visual State for Hover Effect
+        visual_props = {"secondary": secondary_color}
+        hover_color = "#999999"
+
         def on_fader_value_change(*args):
             current_fader_val = fader_value_var.get()
             
@@ -258,10 +263,23 @@ class CustomHorizontalFaderCreatorMixin:
                 current_w,
                 current_h,
                 current_fader_val,
+                visual_props["secondary"],
             )
 
         fader_value_var.trace_add("write", on_fader_value_change)
         on_fader_value_change()
+
+        # Hover Effects
+        def on_enter(event):
+            visual_props["secondary"] = hover_color
+            on_fader_value_change()
+
+        def on_leave(event):
+            visual_props["secondary"] = secondary_color
+            on_fader_value_change()
+
+        canvas.bind("<Enter>", on_enter)
+        canvas.bind("<Leave>", on_leave)
 
         canvas.bind("<B1-Motion>", frame.command)
         canvas.bind("<Button-1>", frame.command)
@@ -290,7 +308,7 @@ class CustomHorizontalFaderCreatorMixin:
         ]
         return canvas.create_polygon(points, **kwargs, smooth=True)
 
-    def _draw_horizontal_fader(self, frame_instance, canvas, width, height, value):
+    def _draw_horizontal_fader(self, frame_instance, canvas, width, height, value, current_secondary):
         canvas.delete("all")
         cy = height / 2
         canvas.create_line(
@@ -298,7 +316,7 @@ class CustomHorizontalFaderCreatorMixin:
             cy,
             width - 20,
             cy,
-            fill=frame_instance.track_col,
+            fill=current_secondary,
             width=4,
             capstyle=tk.ROUND,
         )
@@ -391,7 +409,7 @@ class CustomHorizontalFaderCreatorMixin:
             cy + cap_height / 2,
             radius=frame_instance.cap_radius,
             fill=frame_instance.cap_color,
-            outline=frame_instance.cap_outline_color,
+            outline=current_secondary,
         )
 
         if frame_instance.value_follow:
@@ -409,7 +427,7 @@ class CustomHorizontalFaderCreatorMixin:
             cy - center_line_length / 2,
             handle_x,
             cy + center_line_length / 2,
-            fill=frame_instance.track_col,
+            fill=current_secondary,
             width=2,
         )
 
@@ -420,7 +438,7 @@ class CustomHorizontalFaderCreatorMixin:
             cy - side_line_length / 2,
             handle_x - x_offset,
             cy + side_line_length / 2,
-            fill=frame_instance.track_col,
+            fill=current_secondary,
             width=1,
         )
         canvas.create_line(
@@ -428,6 +446,6 @@ class CustomHorizontalFaderCreatorMixin:
             cy - side_line_length / 2,
             handle_x + x_offset,
             cy + side_line_length / 2,
-            fill=frame_instance.track_col,
+            fill=current_secondary,
             width=1,
         )

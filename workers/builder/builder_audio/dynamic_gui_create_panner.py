@@ -286,6 +286,10 @@ class PannerCreatorMixin:
             )
             value_label.pack(side=tk.BOTTOM)
 
+            # Visual State for Hover Effect
+            visual_props = {"secondary": secondary_color}
+            hover_color = "#999999"
+
             def update_panner_visuals(*args):
                 current_panner_val = panner_value_var.get()
                 value_label.config(text=f"{int(current_panner_val)}")
@@ -299,7 +303,7 @@ class PannerCreatorMixin:
                     value_label,
                     fg_color,
                     accent_color,
-                    secondary_color,
+                    visual_props["secondary"],
                 )
                 if app_constants.global_settings["debug_enabled"]:
                     debug_logger(
@@ -311,6 +315,18 @@ class PannerCreatorMixin:
 
             # Initial draw based on default value
             update_panner_visuals()
+
+            # Hover Effects
+            def on_enter(event):
+                visual_props["secondary"] = hover_color
+                update_panner_visuals()
+
+            def on_leave(event):
+                visual_props["secondary"] = secondary_color
+                update_panner_visuals()
+
+            canvas.bind("<Enter>", on_enter)
+            canvas.bind("<Leave>", on_leave)
 
             # Drag Interaction
             canvas.bind("<Button-1>", on_panner_press)

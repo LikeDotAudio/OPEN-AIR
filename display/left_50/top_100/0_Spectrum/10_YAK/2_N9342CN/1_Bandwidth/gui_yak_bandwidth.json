@@ -1,7 +1,8 @@
 {
-  "nab": {
+  "NAB_Settings": {
     "type": "OcaBlock",
     "description": "NAB Bandwidth Monitoring",
+    "show_label": false,
     "fields": {
       "NAB_bandwidth_settings": {
         "type": "OcaBlock",
@@ -10,6 +11,8 @@
           "Execute Command": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
+            "label_active": "Get Bandwidth Settings",
+            "label_inactive": "Get Bandwidth Settings",
             "active": true,
             "trigger": false,
             "message": ":SENSe:BANDwidth:RESolution?;:SENSe:BANDwidth:VIDeo?;:SENSe:BANDwidth:VIDeo:AUTO?;:INITiate:CONTinuous?;:SENSe:SWEep:TIME?",
@@ -20,24 +23,32 @@
             "description": "Bandwidth Readbacks",
             "fields": {
               "RBW_Hz": {
+                "label": "Resolution Bandwidth (Hz)",
                 "value": "The resolution bandwidth in Hz.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "Hz"
               },
               "VBW_Hz": {
+                "label": "Video Bandwidth (Hz)",
                 "value": "The video bandwidth in Hz.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "Hz"
               },
               "VBW_Auto_On": {
+                "label": "VBW Auto State",
                 "value": "Boolean for VBW auto state.",
                 "type": "_GuiValue"
               },
               "Continuous_Mode_On": {
+                "label": "Continuous Mode State",
                 "value": "Boolean for continuous mode state.",
                 "type": "_GuiValue"
               },
               "Sweep_Time_s": {
+                "label": "Sweep Time (s)",
                 "value": "The sweep time in seconds.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "s"
               }
             }
           }
@@ -45,17 +56,19 @@
       }
     }
   },
-  "rig": {
+  "RIG_Settings": {
     "type": "OcaBlock",
     "description": "RIG Bandwidth Commands",
     "fields": {
-      "rig_RBW_VBW_Hz": {
+      "Rig_RBW_VBW_Hz": {
         "type": "OcaBlock",
         "description": "Set Resolution and Video BW",
         "fields": {
           "Execute Command": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
+            "label_active": "Set RBW and VBW",
+            "label_inactive": "Set RBW and VBW",
             "active": true,
             "trigger": false,
             "message": ":SENSe:BANDwidth:RESolution <rbw_hz_value>;:SENSe:BANDwidth:VIDeo <vbw_hz_value>",
@@ -65,33 +78,31 @@
             "type": "OcaBlock",
             "fields": {
               "rbw_hz_value": {
+                "label": "Resolution Bandwidth (Hz)",
                 "value": "100000",
-                "type": "_Value",
-
+                "type": "_GuiValue",
+                "units": "Hz",
                 "description": "The SCPI input for RBW."
               },
               "vbw_hz_value": {
                 "value": "100000",
-                "type": "_Value",
-
+                "type": "_GuiValue",
+                "label": "Video Bandwidth (Hz)",
+                "units": "Hz",
                 "description": "The SCPI input for VBW."
               }
             }
           }
         }
-      }
-    }
-  },
-  "set": {
-    "type": "OcaBlock",
-    "description": "Individual Bandwidth Sets",
-    "fields": {
-      "Set_Sweep_time": {
+      },
+      "Set_Sweep_Time": {
         "type": "OcaBlock",
         "fields": {
           "Execute Command": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
+            "label_active": "Set Sweep Time",
+            "label_inactive": "Set Sweep Time",
             "active": true,
             "trigger": false,
             "message": ":SENSe:SWEep:TIME <sweep_time_s>",
@@ -101,19 +112,23 @@
             "type": "OcaBlock",
             "fields": {
               "sweep_time_s": {
+                "label": "Sweep Time (s)",
                 "value": "4",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "s"
               }
             }
           }
         }
       },
-      "Set_VBW": {
+      "Set_Video_Bandwidth": {
         "type": "OcaBlock",
         "fields": {
           "Execute Command": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
+            "label_active": "Set Video Bandwidth",
+            "label_inactive": "Set Video Bandwidth",
             "active": true,
             "trigger": false,
             "message": ":SENSe:BANDwidth:VIDeo <hz_value>",
@@ -123,18 +138,22 @@
             "type": "OcaBlock",
             "fields": {
               "hz_value": {
+                "label": "Video Bandwidth (Hz)",
                 "value": "3000000",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "Hz"
               }
             }
           }
         }
       },
-      "Set_RBW": {
+      "Set_Resolution_Bandwidth": {
         "type": "OcaBlock",
         "fields": {
           "Execute Command": {
             "type": "_GuiActuator",
+            "label_active": "Set Resolution Bandwidth",
+            "label_inactive": "Set Resolution Bandwidth",
             "AES70": "OcaBooleanActuator",
             "active": true,
             "trigger": false,
@@ -145,91 +164,84 @@
             "type": "OcaBlock",
             "fields": {
               "hz_value": {
+                "label": "Resolution Bandwidth (Hz)",
                 "value": "3000000",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "Hz"
               }
             }
           }
         }
-      }
-    }
-  },
-  "Do": {
-    "type": "OcaBlock",
-    "description": "Automatic State Commands",
-    "fields": {
-      "Sweep_Time_Auto": {
+      },
+      "Toggle_Sweep_Time_Auto": {
         "type": "OcaBlock",
+        "description": "Sweep Time Auto Switches",
         "fields": {
           "Do_Sweep_Time_Auto_ON": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
-            "active": true,
+            "label_active": "Sweep Auto ON",
             "label_inactive": "Sweep Auto ON",
+            "active": true,
             "layout": { "height": 30, "sticky": "" },
-            "Execute Command": {
-              "message": ":SENSe:SWEep:TIME:AUTO ON"
-            }
+            "message": ":SENSe:SWEep:TIME:AUTO ON"
           },
           "Do_Sweep_Time_Auto_OFF": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
             "active": true,
             "label_inactive": "Sweep Auto OFF",
+            "label_active": "Sweep Auto OFF",
             "layout": { "height": 30, "sticky": "" },
-            "Execute Command": {
-              "message": ":SENSe:SWEep:TIME:AUTO OFF"
-            }
+            "message": ":SENSe:SWEep:TIME:AUTO OFF"
           }
         }
       },
-      "Video_Bandwidth_Auto": {
+      "Toggle_Video_Bandwidth_Auto": {
         "type": "OcaBlock",
+        "description": "VBW Auto Switches",
         "fields": {
           "do_Video_Bandwidth_Auto_ON": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
             "active": true,
+            "label_active": "VBW Auto ON",
             "label_inactive": "VBW Auto ON",
             "layout": { "height": 30, "sticky": "" },
-            "Execute Command": {
-              "message": ":SENSe:BANDwidth:VIDeo:AUTO ON"
-            }
+            "message": ":SENSe:BANDwidth:VIDeo:AUTO ON"
           },
           "do_Video_Bandwidth_Auto_OFF": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
             "active": true,
             "label_inactive": "VBW Auto OFF",
+            "label_active": "VBW Auto OFF",
             "layout": { "height": 30, "sticky": "" },
-            "Execute Command": {
-              "message": ":SENSe:BANDwidth:VIDeo:AUTO OFF"
-            }
+            "message": ":SENSe:BANDwidth:VIDeo:AUTO OFF"
           }
         }
       },
-      "Resolution_Bandwidth_Auto": {
+      "Toggle_Resolution_Bandwidth_Auto": {
         "type": "OcaBlock",
+        "description": "RBW Auto Switches",
         "fields": {
           "Set_Resolution_Bandwidth_Auto_ON": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
             "active": true,
+            "label_active": "RBW Auto ON",
             "label_inactive": "RBW Auto ON",
             "layout": { "height": 30, "sticky": "" },
-            "Execute Command": {
-              "message": ":SENSe:BANDwidth:RESolution:AUTO ON"
-            }
+            "message": ":SENSe:BANDwidth:RESolution:AUTO ON"
           },
           "Set_Resolution_Bandwidth_Auto_OFF": {
             "type": "_GuiActuator",
             "AES70": "OcaBooleanActuator",
             "active": true,
             "label_inactive": "RBW Auto OFF",
+            "label_active": "RBW Auto OFF",
             "layout": { "height": 30, "sticky": "" },
-            "Execute Command": {
-              "message": ":SENSe:BANDwidth:RESolution:AUTO OFF"
-            }
+            "message": ":SENSe:BANDwidth:RESolution:AUTO OFF"
           }
         }
       }

@@ -340,6 +340,10 @@ class CustomFaderCreatorMixin:
             )
             value_label.pack(side=tk.BOTTOM)
 
+            # Visual State for Hover Effect
+            visual_props = {"secondary": secondary_color}
+            hover_color = "#999999"
+
             def on_fader_value_change(*args):
                 current_fader_val = fader_value_var.get()
 
@@ -355,6 +359,7 @@ class CustomFaderCreatorMixin:
                     current_w,
                     current_h,
                     current_fader_val,
+                    visual_props["secondary"],
                 )
 
                 # Determine active_color based on norm_val for the label
@@ -383,6 +388,18 @@ class CustomFaderCreatorMixin:
 
             # Initial draw based on default value
             on_fader_value_change()
+
+            # Hover Effects
+            def on_enter(event):
+                visual_props["secondary"] = hover_color
+                on_fader_value_change()
+
+            def on_leave(event):
+                visual_props["secondary"] = secondary_color
+                on_fader_value_change()
+
+            canvas.bind("<Enter>", on_enter)
+            canvas.bind("<Leave>", on_leave)
 
             # Interaction
             canvas.bind("<B1-Motion>", frame.command)
@@ -492,9 +509,10 @@ class CustomFaderCreatorMixin:
     #     canvas: The tkinter canvas to draw on.
     #     width, height (int): The dimensions of the canvas.
     #     value (float): The current value of the fader.
+    #     track_color (str): Optional color for the track (groove). Defaults to frame's track_col.
     # Outputs:
     #     None.
-    def _draw_fader(self, frame_instance, canvas, width, height, value):
+    def _draw_fader(self, frame_instance, canvas, width, height, value, track_color=None):
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message=f"🎨 Drawing fader: value={value}, min_val={frame_instance.min_val}, max_val={frame_instance.max_val}, height={height}",
@@ -510,7 +528,7 @@ class CustomFaderCreatorMixin:
             20,
             cx,
             height - 20,
-            fill=frame_instance.track_col,
+            fill=track_color if track_color else frame_instance.track_col,
             width=4,
             capstyle=tk.ROUND,
         )

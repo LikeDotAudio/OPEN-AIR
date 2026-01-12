@@ -5,6 +5,7 @@
     "fields": {     "examplefields": {
       "type": "_Horizontal_with_dial_Value",
       "label_active": "Master Vol",
+      "layout": {"sticky": "ew","font":22 },
       "min": 0.0,
       "max": 100.0,
       "value": 75.3,

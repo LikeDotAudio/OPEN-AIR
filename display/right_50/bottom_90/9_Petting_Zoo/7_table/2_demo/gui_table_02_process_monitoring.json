@@ -2,10 +2,11 @@
   "elements": {
     "type": "OcaBlock",
     "label_active": "Process Monitoring",
-    "fields": {     "fields": {     "examplefields": {
+    "fields": {     "examplefields": {
       "type": "GuiTable",
       "label_active": "Process Monitoring",
-      "height": 15,
+      "height": 100,
+             "Sort": false,
       "headers": [
         "Process ID",
         "Name",
@@ -53,4 +54,4 @@
       "notes": "Table for monitoring multiple running processes."
     }
   }
-}}}
+}}

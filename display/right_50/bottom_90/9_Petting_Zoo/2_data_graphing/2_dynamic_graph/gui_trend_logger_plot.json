@@ -1,0 +1,16 @@
+{
+    "id": "dmm_trend_log",
+    "type": "plot_widget",
+    "plot_mode": "trend_logger",
+    "title": "Voltage Drift Over Time",
+    "buffer_size": 1000,
+    "axis": {
+        "x": { "label": "Timestamp", "auto_scroll": true, "color": "white" },
+        "y": { "label": "Measured (V)", "auto_scale": true, "color": "red" }
+    },
+    "style": {
+        "background_color": "white",
+        "grid_color": "lightgrey",
+        "line_color": "red"
+    }
+}

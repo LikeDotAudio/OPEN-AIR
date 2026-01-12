@@ -2,9 +2,11 @@
   "elements": {
     "type": "OcaBlock",
     "label_active": "Volume",
-    "examplefields": {
+    "fields": {
+      "examplefields": {
       "type": "_sliderValue",
       "label_active": "Volume",
+      "layout": {"height": 100,  "width": 250, "sticky": "ew", "font":18 },
       "min": 0.0,
       "max": 100.0,
       "value": 50.0,
@@ -12,4 +14,4 @@
       "notes": "A standard horizontal slider with numerical input for volume control."
     }
   }
-}
+}}

@@ -2,8 +2,10 @@
   "elements": {
     "type": "OcaBlock",
     "label_active": "Frequency",
-    "examplefields": {
+    "fields": {
+      "examplefields": {
       "type": "_sliderValue",
+      
       "label_active": "Frequency",
       "min": 20.0,
       "max": 20000.0,
@@ -12,4 +14,4 @@
       "notes": "Slider for selecting frequency, wide range."
     }
   }
-}
+}}

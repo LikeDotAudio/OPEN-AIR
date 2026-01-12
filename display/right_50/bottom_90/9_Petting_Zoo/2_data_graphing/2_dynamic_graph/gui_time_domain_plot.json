@@ -1,0 +1,18 @@
+{
+    "id": "scope_display_ch1",
+    "type": "plot_widget",
+    "plot_mode": "time_domain",
+    "title": "Oscilloscope - Channel 1",
+    "layout": { "row": 0, "col": 0, "width": 600, "height": 400 },
+    "axis": {
+        "x": { "label": "Time (s)", "scale": "linear", "min": 0, "max": 0.05, "color": "white" },
+        "y": { "label": "Voltage (V)", "scale": "linear", "min": -5, "max": 5, "color": "yellow" }
+    },
+    "style": {
+        "background_color": "black",
+        "grid_color": "darkgrey",
+        "line_color": "cyan",
+        "line_width": 2
+    },
+    "data_source": "yak_scope.get_waveform_ch1"
+}

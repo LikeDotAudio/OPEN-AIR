@@ -2,10 +2,18 @@
   "elements": {
     "type": "OcaBlock",
     "label_active": "Instrument Connections",
-    "fields": {     "fields": {     "examplefields": {
+    "fields": {     "examplefields": {
       "type": "GuiTable",
       "label_active": "Instrument Connections",
-      "height": 8,
+      "height": 80,
+
+        "read_cvs": false,
+        "write_cvs": false,
+        "Add_Row": false,
+        "Delete_Row": false,
+        "Undo": false,
+        "Sort": true,
+
       "headers": [
         "Resource",
         "Model",
@@ -29,4 +37,4 @@
       "notes": "A table showing basic instrument connection details."
     }
   }
-}}}
+}}

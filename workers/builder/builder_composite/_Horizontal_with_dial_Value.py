@@ -75,13 +75,9 @@ class HorizontalDialValueCreatorMixin(
         try:
             sub_frame = ttk.Frame(parent_widget)
 
-            # label_widget = ttk.Label(sub_frame, text=f"{label}:")
-            # label_widget.pack(
-            #     side=tk.TOP,
-            #     fill=tk.X,
-            #     padx=(DEFAULT_PAD_X, DEFAULT_PAD_Y),
-            #     pady=(0, DEFAULT_PAD_Y),
-            # )
+            layout_config = config_data.get("layout", {})
+            font_size = layout_config.get("font", 12)
+            custom_font = ("Helvetica", font_size)
 
             min_val = float(config_data.get("min", "0"))
             max_val = float(config_data.get("max", "100"))
@@ -100,10 +96,10 @@ class HorizontalDialValueCreatorMixin(
             value_unit_frame.pack(side=tk.TOP, fill=tk.X, expand=True)
 
             # New label for label_active
-            inline_label_widget = ttk.Label(value_unit_frame, text=f"{label}:")
+            inline_label_widget = ttk.Label(value_unit_frame, text=f"{label}:", font=custom_font)
             inline_label_widget.pack(side=tk.LEFT, padx=(DEFAULT_PAD_X, DEFAULT_PAD_X))
 
-            units_label = ttk.Label(value_unit_frame, text=config_data.get("units", ""), anchor=tk.E)
+            units_label = ttk.Label(value_unit_frame, text=config_data.get("units", ""), anchor=tk.E, font=custom_font)
             units_label.pack(side=tk.RIGHT, padx=(DEFAULT_PAD_X, DEFAULT_PAD_X))
 
             entry = ttk.Entry(
@@ -112,6 +108,7 @@ class HorizontalDialValueCreatorMixin(
                 style="Custom.TEntry",
                 textvariable=entry_string_var,
                 justify=tk.RIGHT,
+                font=custom_font
             )
             entry.pack(side=tk.RIGHT, padx=(DEFAULT_PAD_X, 0))
 
@@ -137,6 +134,12 @@ class HorizontalDialValueCreatorMixin(
             dial_config["min"] = "0"
             dial_config["max"] = "999"  # Visual range 0-999 as per user request
             
+            # Map layout width/height to dial config top-level width/height
+            if "width" in layout_config:
+                dial_config["width"] = layout_config["width"]
+            if "height" in layout_config:
+                dial_config["height"] = layout_config["height"]
+
             if numerical_step < 1:
                 # Scale the initial decimal value to the 0-999 range for default display
                 # Ensure divisor is not zero for numerical_step < 1

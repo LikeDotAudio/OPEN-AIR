@@ -4,6 +4,7 @@
     "label_active": "Delay",
     "fields": {     "examplefields": {
       "type": "_Horizontal_with_dial_Value",
+      "layout": {"height": 100,  "width": 500, "font":20 },
       "label_active": "Delay",
       "min": 0.0,
       "max": 5.0,

@@ -2,10 +2,10 @@
   "elements": {
     "type": "OcaBlock",
     "label_active": "Configuration Settings",
-    "fields": {     "fields": {     "examplefields": {
+    "fields": {       "examplefields": {
       "type": "GuiTable",
       "label_active": "Configuration Settings",
-      "height": 10,
+      "height": 100,
       "headers": [
         "Parameter",
         "Value",
@@ -29,4 +29,4 @@
       "notes": "An editable table for displaying and modifying configuration parameters."
     }
   }
-}}}
+}}

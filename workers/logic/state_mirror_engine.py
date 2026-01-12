@@ -191,7 +191,7 @@ class StateMirrorEngine:
         widget_type = widget_config.get("type")
         update_callback = widget_info.get("update_callback")
 
-        if widget_type == "OcaTable" and update_callback:
+        if widget_type in ["OcaTable", "GuiTable", "DynamicGuiTable"] and update_callback:
             data_topic = full_topic
 
             cached_data = {}

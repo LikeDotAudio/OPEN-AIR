@@ -1,0 +1,15 @@
+{
+    "id": "sa_display_main",
+    "type": "plot_widget",
+    "plot_mode": "frequency_domain",
+    "title": "Spectrum Analysis",
+    "axis": {
+        "x": { "label": "Frequency (Hz)", "scale": "log", "min": 20, "max": 20000, "color": "white" },
+        "y": { "label": "Amplitude (dBm)", "scale": "linear", "min": -120, "max": 0, "color": "lime" }
+    },
+    "style": {
+        "background_color": "#001100",
+        "grid_color": "green",
+        "line_color": "lime"
+    }
+}

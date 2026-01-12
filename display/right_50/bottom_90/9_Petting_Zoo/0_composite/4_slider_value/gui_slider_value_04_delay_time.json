@@ -2,8 +2,9 @@
   "elements": {
     "type": "OcaBlock",
     "label_active": "Delay Time",
-    "examplefields": {
-      "type": "_sliderValue",
+    "fields": {
+      "examplefields": {      "type": "_sliderValue",
+      "layout": {"height": 40,  "width": 250, "sticky": "ew", "font":85 },         
       "label_active": "Delay Time",
       "min": 0.0,
       "max": 2.5,
@@ -11,5 +12,6 @@
       "units": "s",
       "notes": "Slider for adjusting delay time in seconds."
     }
-  }
+  }}
+  
 }

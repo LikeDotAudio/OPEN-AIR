@@ -40,6 +40,8 @@ class GuiWidgetFactoryMixin:
             "_GuiListbox": self._create_gui_listbox,
             "_ProgressBar": self._create_progress_bar,
             "OcaTable": self._create_gui_table,
+            "GuiTable": self._create_gui_table,
+            "DynamicGuiTable": self._create_gui_table,
             "_TextInput": self._create_text_input,
             "_WebLink": self._create_web_link,
             "_ImageDisplay": self._create_image_display,

@@ -2,10 +2,10 @@
   "elements": {
     "type": "OcaBlock",
     "label_active": "Resource Allocation",
-    "fields": {     "fields": {     "examplefields": {
+    "fields": {       "examplefields": {
       "type": "GuiTable",
       "label_active": "Resource Allocation",
-      "height": 7,
+      "height": 70,
       "headers": [
         "Resource Name",
         "Allocated To"
@@ -27,4 +27,4 @@
       "notes": "Table for managing resource allocations."
     }
   }
-}}}
+}}

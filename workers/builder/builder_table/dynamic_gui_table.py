@@ -94,7 +94,12 @@ class GuiTableCreatorMixin:
         # ⚡ ATTACH THE FLUX CAPACITOR (Editor) ⚡
         # The editor and its mixins publish directly, so they need the absolute topic.
         tree.editor = TableEditingManager(
-            tree, self.state_mirror_engine, absolute_data_topic
+            tree, 
+            self.state_mirror_engine, 
+            absolute_data_topic,
+            allow_sort=config.get("Sort", True),
+            allow_undo=config.get("Undo", True),
+            allow_delete=config.get("Delete_Row", True)
         )
 
         item_map = {}  # Maps treeview item ID to device data dict
@@ -151,30 +156,43 @@ class GuiTableCreatorMixin:
 
         # --- Button Frame ---
         button_frame = ttk.Frame(container)
-        button_frame.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(5, 0))
+        
+        buttons_added = False
+        if config.get("write_cvs", True):
+            write_button = ttk.Button(
+                button_frame, text="Write to CSV", command=_handle_write_csv
+            )
+            write_button.pack(side=tk.LEFT, padx=5)
+            buttons_added = True
 
-        write_button = ttk.Button(
-            button_frame, text="Write to CSV", command=_handle_write_csv
-        )
-        write_button.pack(side=tk.LEFT, padx=5)
+        if config.get("read_cvs", True):
+            read_button = ttk.Button(
+                button_frame, text="Read from CSV", command=_handle_read_csv
+            )
+            read_button.pack(side=tk.LEFT, padx=5)
+            buttons_added = True
 
-        read_button = ttk.Button(
-            button_frame, text="Read from CSV", command=_handle_read_csv
-        )
-        read_button.pack(side=tk.LEFT, padx=5)
+        if config.get("Add_Row", True):
+            add_row_button = ttk.Button(
+                button_frame, text="Add Row", command=tree.editor.add_row
+            )
+            add_row_button.pack(side=tk.LEFT, padx=5)
+            buttons_added = True
 
-        add_row_button = ttk.Button(
-            button_frame, text="Add Row", command=tree.editor.add_row
-        )
-        add_row_button.pack(side=tk.LEFT, padx=5)
+        if config.get("Delete_Row", True):
+            delete_row_button = ttk.Button(
+                button_frame, text="Delete Row", command=tree.editor.delete_selection
+            )
+            delete_row_button.pack(side=tk.LEFT, padx=5)
+            buttons_added = True
 
-        delete_row_button = ttk.Button(
-            button_frame, text="Delete Row", command=tree.editor.delete_selection
-        )
-        delete_row_button.pack(side=tk.LEFT, padx=5)
+        if config.get("Undo", True):
+            undo_button = ttk.Button(button_frame, text="Undo", command=tree.editor.undo)
+            undo_button.pack(side=tk.LEFT, padx=5)
+            buttons_added = True
 
-        undo_button = ttk.Button(button_frame, text="Undo", command=tree.editor.undo)
-        undo_button.pack(side=tk.LEFT, padx=5)
+        if buttons_added:
+            button_frame.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(5, 0))
 
         # Immediately set headers from config if they exist
         initial_headers = config.get("headers", [])

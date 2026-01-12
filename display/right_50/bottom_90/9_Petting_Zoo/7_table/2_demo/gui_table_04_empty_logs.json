@@ -2,10 +2,10 @@
   "elements": {
     "type": "OcaBlock",
     "label_active": "New Log Entries",
-    "fields": {     "fields": {     "examplefields": {
+    "fields": {      "examplefields": {
       "type": "GuiTable",
       "label_active": "New Log Entries",
-      "height": 12,
+      "height": 120,
       "headers": [
         "Timestamp",
         "Level",
@@ -16,4 +16,4 @@
       "notes": "An empty table ready to receive new log entries."
     }
   }
-}}}
+}}

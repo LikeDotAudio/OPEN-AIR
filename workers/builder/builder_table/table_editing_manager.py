@@ -41,9 +41,12 @@ class TableEditingManager(
     #     tree: The Tkinter Treeview widget to manage.
     #     state_mirror_engine: The state mirror engine for MQTT synchronization.
     #     data_topic (str): The base MQTT topic for this table's data.
+    #     allow_sort (bool): Whether to allow column sorting.
+    #     allow_undo (bool): Whether to allow undo operations.
+    #     allow_delete (bool): Whether to allow row deletion.
     # Outputs:
     #     None.
-    def __init__(self, tree, state_mirror_engine, data_topic):
+    def __init__(self, tree, state_mirror_engine, data_topic, allow_sort=True, allow_undo=True, allow_delete=True):
         # Initialize mixins
         TableEditingInplaceMixin.__init__(self)
         TableEditingUndoMixin.__init__(self)
@@ -56,11 +59,16 @@ class TableEditingManager(
 
         # Bindings specific to TableEditingManager (which are now methods of mixins)
         self.tree.bind("<Double-1>", self.on_double_click)
-        self.tree.bind("<Delete>", self.delete_selection)
-        self.tree.bind("<Control-z>", self.undo)
+        
+        if allow_delete:
+            self.tree.bind("<Delete>", self.delete_selection)
+        
+        if allow_undo:
+            self.tree.bind("<Control-z>", self.undo)
 
         # Setup Header Sorting (method from TableEditingSortMixin)
-        self._bind_headers()
+        if allow_sort:
+            self._bind_headers()
 
         debug_logger(
             message=f"📊 TableEditingManager initialized for tree {tree}",

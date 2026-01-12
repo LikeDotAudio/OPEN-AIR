@@ -76,9 +76,13 @@ class SliderValueCreatorMixin:
         try:
             sub_frame = ttk.Frame(parent_widget)  # Use parent_widget here
 
+            layout_config = config_data.get("layout", {})
+            font_size = layout_config.get("font", 12)
+            custom_font = ("Helvetica", font_size)
+
             # --- Layout Refactor: Start ---
             # Line 1: Label
-            label_widget = ttk.Label(sub_frame, text=f"{label}:")
+            label_widget = ttk.Label(sub_frame, text=f"{label}:", font=custom_font)
             label_widget.pack(
                 side=tk.TOP,
                 fill=tk.X,
@@ -92,8 +96,12 @@ class SliderValueCreatorMixin:
 
             # 🟢️️️ New fix: Create a custom style for a thicker slider
             style = ttk.Style(sub_frame)
-            style_name = "Thicker.Horizontal.TScale"
-            style.configure(style_name, sliderlength=40)
+            style_name = f"Thicker.{font_size}.Horizontal.TScale"
+            
+            slider_width = layout_config.get("width", 200)
+            slider_height = layout_config.get("height", 40)
+
+            style.configure(style_name, sliderlength=font_size * 2)
             slider = ttk.Scale(
                 sub_frame,
                 from_=min_val,
@@ -114,7 +122,7 @@ class SliderValueCreatorMixin:
             value_unit_frame = ttk.Frame(sub_frame)
             value_unit_frame.pack(side=tk.TOP, fill=tk.X, expand=True)
 
-            units_label = ttk.Label(value_unit_frame, text=config_data.get("units", ""))
+            units_label = ttk.Label(value_unit_frame, text=config_data.get("units", ""), font=custom_font)
             units_label.pack(side=tk.RIGHT, padx=(DEFAULT_PAD_X, DEFAULT_PAD_X))
 
             entry_value = tk.StringVar(value=config_data.get("value", "0"))
@@ -124,6 +132,7 @@ class SliderValueCreatorMixin:
                 style="Custom.TEntry",
                 textvariable=entry_value,
                 justify=tk.RIGHT,
+                font=custom_font
             )
             entry.pack(side=tk.RIGHT, padx=(DEFAULT_PAD_X, 0))
 

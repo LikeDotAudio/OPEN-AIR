@@ -136,11 +136,9 @@ class HorizontalDialValueCreatorMixin(
             dial_config["min"] = "0"
             dial_config["max"] = "999"  # Visual range 0-999 as per user request
             
-            # Map layout width/height to dial config top-level width/height
-            if "width" in layout_config:
-                dial_config["width"] = layout_config["width"]
-            if "height" in layout_config:
-                dial_config["height"] = layout_config["height"]
+            # Map layout width/height to dial config top-level width/height, applying 14% increase
+            dial_config["width"] = int(layout_config.get("width", 50) * 1.14)
+            dial_config["height"] = int(layout_config.get("height", 50) * 1.14)
 
             if numerical_step < 1:
                 # Scale the initial decimal value to the 0-999 range for default display
@@ -157,7 +155,7 @@ class HorizontalDialValueCreatorMixin(
             dial_config["subscriber_router"] = self.subscriber_router
             
             dial_widget = self._create_dial(fader_dial_frame, dial_config, base_mqtt_topic_from_path=base_mqtt_topic_from_path)
-            dial_widget.grid(row=0, column=1, sticky="nsew", padx=(0, DEFAULT_PAD_X))
+            dial_widget.grid(row=0, column=1, sticky="ew", padx=(0, DEFAULT_PAD_X))
 
             # Initialize previous dial value for wrap-around detection
             if numerical_step < 1:

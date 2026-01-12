@@ -280,7 +280,7 @@ class DialCreatorMixin:
             canvas = tk.Canvas(
                 frame, width=width, height=height, bg=bg_color, highlightthickness=0
             )
-            canvas.pack()
+            canvas.pack(expand=True)
 
             # Visual State for Hover Effect
             visual_props = {"secondary": secondary_color}
@@ -416,6 +416,7 @@ class DialCreatorMixin:
         # 3. Active Arc (Pie Chart)
         start_angle = 90  # Start from the top
         val_extent = -360 * norm_val # Negative for clockwise
+        if abs(val_extent) >= 360: val_extent = -359.9 # Ensure it draws a full circle
         active_color = indicator_color
         
         if piechart:

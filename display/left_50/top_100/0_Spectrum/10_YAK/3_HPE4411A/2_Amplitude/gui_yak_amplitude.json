@@ -21,11 +21,15 @@
             "fields": {
               "Ref_Level_dBm": {
                 "value": "The reference level in dBm.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Ref Level",
+                "units": "dBm"
               },
               "Attenuation_dB": {
                 "value": "The attenuation in dB.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Attenuation",
+                "units": "dB"
               },
               "Preamp_On": {
                 "value": "Boolean for preamp state.",
@@ -102,7 +106,9 @@
             "fields": {
               "ref_level": {
                 "value": "The reference level in dBm.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Ref Level",
+                "units": "dBm"
               }
             }
           }
@@ -124,7 +130,9 @@
             "fields": {
               "attenuation": {
                 "value": "The attenuation in dB.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "label": "Attenuation",
+                "units": "dB"
               }
             }
           }

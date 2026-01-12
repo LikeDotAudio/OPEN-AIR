@@ -231,6 +231,7 @@
             "type": "OcaBlock",
             "fields": {
               "trace_number": {
+                "label": "Trace Number",
                 "value": "2",
                 "type": "_GuiValue"
               }
@@ -264,6 +265,7 @@
             "type": "OcaBlock",
             "fields": {
               "trace_number": {
+                "label": "Trace Number",
                 "value": "2",
                 "type": "_GuiValue"
               }
@@ -295,6 +297,7 @@
             "type": "OcaBlock",
             "fields": {
               "trace_number": {
+                "label": "Trace Number",
                 "value": "3",
                 "type": "_GuiValue"
               }
@@ -397,8 +400,10 @@
             "type": "OcaBlock",
             "fields": {
               "trace_data": {
+                "label": "Trace 4 Data",
                 "value": "Processed trace data.",
-                "type": "_GuiValue"
+                "type": "_GuiValue",
+                "units": "dBm"
               }
             }
           }

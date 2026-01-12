@@ -20,10 +20,30 @@
               "Outputs": {
                 "type": "OcaBlock",
                 "fields": {
-                  "Vpp": { "value": "Vpp", "type": "_GuiValue" },
-                  "Vrms": { "value": "Vrms", "type": "_GuiValue" },
-                  "Freq": { "value": "Freq", "type": "_GuiValue" },
-                  "Duty": { "value": "Duty %", "type": "_GuiValue" }
+                  "Vpp": {
+                    "label": "Vpp (Volts)",
+                    "value": "The peak-to-peak voltage.",
+                    "type": "_GuiValue",
+                    "units": "Volts"
+                  },
+                  "Vrms": {
+                    "label": "Vrms (Volts)",
+                    "value": "The root mean square voltage.",
+                    "type": "_GuiValue",
+                    "units": "Volts"
+                  },
+                  "Freq": {
+                    "label": "Frequency (Hz)",
+                    "value": "The signal frequency.",
+                    "type": "_GuiValue",
+                    "units": "Hz"
+                  },
+                  "Duty": {
+                    "label": "Duty Cycle (%)",
+                    "value": "The duty cycle percentage.",
+                    "type": "_GuiValue",
+                    "units": "%"
+                  }
                 }
               }
             }
@@ -52,7 +72,14 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "scale": { "value": "1.0", "type": "_GuiValue" } }
+                "fields": {
+                  "scale": {
+                    "label": "Scale (Volts/Div)",
+                    "value": "The current vertical scale.",
+                    "type": "_GuiValue",
+                    "units": "Volts/Div"
+                  }
+                }
               }
             }
           },
@@ -68,7 +95,14 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "offset": { "value": "0.0", "type": "_GuiValue" } }
+                "fields": {
+                  "offset": {
+                    "label": "Offset (Volts)",
+                    "value": "The current vertical offset.",
+                    "type": "_GuiValue",
+                    "units": "Volts"
+                  }
+                }
               }
             }
           },
@@ -84,7 +118,14 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "coupling": { "value": "DC", "type": "_GuiValue" } }
+                "fields": {
+                  "coupling": {
+                    "label": "Coupling",
+                    "value": "The current coupling (AC, DC, GND).",
+                    "type": "_GuiValue",
+                    "units": ""
+                  }
+                }
               }
             }
           },
@@ -100,7 +141,14 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "atten": { "value": "10", "type": "_GuiValue" } }
+                "fields": {
+                  "atten": {
+                    "label": "Probe Attenuation",
+                    "value": "The current probe attenuation factor.",
+                    "type": "_GuiValue",
+                    "units": "X"
+                  }
+                }
               }
             }
           },
@@ -116,7 +164,14 @@
               },
               "Input": {
                 "type": "OcaBlock",
-                "fields": { "limit": { "value": "20M", "type": "_GuiValue" } }
+                "fields": {
+                  "limit": {
+                    "label": "Bandwidth Limit",
+                    "value": "The current bandwidth limit (20M or OFF).",
+                    "type": "_GuiValue",
+                    "units": ""
+                  }
+                }
               }
             }
           }

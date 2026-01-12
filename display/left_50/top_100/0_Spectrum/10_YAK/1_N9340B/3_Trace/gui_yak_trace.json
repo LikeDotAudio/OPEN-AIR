@@ -1,4 +1,3 @@
-
 {
   "nab": {
     "type": "OcaBlock",
@@ -23,12 +22,14 @@
               "StartFreq": {
                 "value": "The starting frequency in Hz.",
                 "type": "_GuiValue",
-                "label": "Start Frequency"
+                "label": "Start Frequency",
+                "units": "Hz"
               },
               "StopFreq": {
                 "value": "The stopping frequency in Hz.",
                 "type": "_GuiValue",
-                "label": "Stop Frequency"
+                "label": "Stop Frequency",
+                "units": "Hz"
               },
               "TraceMode1": {
                 "value": "The trace modes for each trace.",
@@ -83,12 +84,14 @@
               "StartFreq": {
                 "value": "The starting frequency in Hz.",
                 "type": "_GuiValue",
-                "label": "Start Frequency"
+                "label": "Start Frequency",
+                "units": "Hz"
               },
               "StopFreq": {
                 "value": "The stopping frequency in Hz.",
                 "type": "_GuiValue",
-                "label": "Stop Frequency"
+                "label": "Stop Frequency",
+                "units": "Hz"
               },
               "TraceMode1": {
                 "value": "The trace modes for each trace.",

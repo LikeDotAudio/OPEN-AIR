@@ -22,62 +22,74 @@
               "Marker_1": {
                 "value": "Marker 1 Value in dBm",
                 "type": "_GuiValue",
-                "label": "Marker 1 Amplitude"
+                "label": "Marker 1 Amplitude",
+                "units": "dBm"
               },
               "Marker_2": {
                 "value": "Marker 2 Value in dBm",
                 "type": "_GuiValue",
-                "label": "Marker 2 Amplitude"
+                "label": "Marker 2 Amplitude",
+                "units": "dBm"
               },
               "Marker_3": {
                 "value": "Marker 3 Value in dBm",
                 "type": "_GuiValue",
-                "label": "Marker 3 Amplitude"
+                "label": "Marker 3 Amplitude",
+                "units": "dBm"
               },
               "Marker_4": {
                 "value": "Marker 4 Value in dBm",
                 "type": "_GuiValue",
-                "label": "Marker 4 Amplitude"
+                "label": "Marker 4 Amplitude",
+                "units": "dBm"
               },
               "Marker_5": {
                 "value": "Marker 5 Value in dBm",
                 "type": "_GuiValue",
-                "label": "Marker 5 Amplitude"
+                "label": "Marker 5 Amplitude",
+                "units": "dBm"
               },
               "Marker_6": {
                 "value": "Marker 6 Value in dBm",
                 "type": "_GuiValue",
-                "label": "Marker 6 Amplitude"
+                "label": "Marker 6 Amplitude",
+                "units": "dBm"
               },
               "Marker_1_X": {
                 "value": "Marker 1 Frequency in Hz",
                 "type": "_GuiValue",
-                "label": "Marker 1 Frequency"
+                "label": "Marker 1 Frequency",
+                "units": "Hz"
               },
               "Marker_2_X": {
                 "value": "Marker 2 Frequency in Hz",
                 "type": "_GuiValue",
-                "label": "Marker 2 Frequency"
+                "label": "Marker 2 Frequency",
+                "units": "Hz"
               },
               "Marker_3_X": {
                 "value": "Marker 3 Frequency in Hz",
                 "type": "_GuiValue",
-                "label": "Marker 3 Frequency"
+                "label": "Marker 3 Frequency",
+                "units": "Hz"
               },
               "Marker_4_X": {
                 "value": "Marker 4 Frequency in Hz",
                 "type": "_GuiValue",
-                "label": "Marker 4 Frequency"
+                "label": "Marker 4 Frequency",
+                "units": "Hz"
               },
               "Marker_5_X": {
                 "value": "Marker 5 Frequency in Hz",
                 "type": "_GuiValue",
-                "label": "Marker 5 Frequency"
+                "label": "Marker 5 Frequency",
+                "units": "Hz"
               },
               "Marker_6_X": {
                 "value": "Marker 6 Frequency in Hz",
                 "type": "_GuiValue",
-                "label": "Marker 6 Frequency"
+                "label": "Marker 6 Frequency",
+                "units": "Hz"
               }
             }
           }

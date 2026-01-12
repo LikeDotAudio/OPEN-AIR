@@ -39,3 +39,4 @@
 1768175358.348726❌ Error creating synchronous widget 'img' of type '_ImageDisplay': expected str, bytes or os.PathLike object, not NoneType ❌ gui batch builder🪿  create dynamic widgets  🧩 {'version': 'Unknown_Ver'}
 1768175358.348964❌ Error creating synchronous widget 'anim_gif' of type '_AnimationDisplay': expected str, bytes or os.PathLike object, not NoneType ❌ gui batch builder🪿  create dynamic widgets  🧩 {'version': 'Unknown_Ver'}
 1768175358.349086❌ Error creating synchronous widget 'anim_static' of type '_ImageDisplay': expected str, bytes or os.PathLike object, not NoneType ❌ gui batch builder🪿  create dynamic widgets  🧩 {'version': 'Unknown_Ver'}
+1768175544.970914❌ Error in _load_and_build_from_file: unexpected control character in string: line 6 column 21 (char 132) ❌ gui file loader🪿  load and build from file  🧩 {'version': 'Unknown_Ver'}

@@ -128,6 +128,13 @@ class NeedleVUMeterCreatorMixin:
                 """Jump to a random allowed value."""
                 random_val = random.uniform(min_val, max_val)
                 vu_value_var.set(random_val)
+                
+                if app_constants.global_settings["debug_enabled"]:
+                    debug_logger(
+                        message=f"🖱️ Middle click on '{label}': jumped to {random_val:.2f}",
+                        **_get_log_args(),
+                    )
+
                 if state_mirror_engine:
                     state_mirror_engine.broadcast_gui_change_to_mqtt(path)
 
@@ -140,8 +147,6 @@ class NeedleVUMeterCreatorMixin:
                 )
 
                 # Subscribe to the topic for incoming messages
-                from workers.mqtt.mqtt_topic_utils import get_topic
-
                 topic = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, widget_id)
                 self.subscriber_router.subscribe_to_topic(
                     topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui

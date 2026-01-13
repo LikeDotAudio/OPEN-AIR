@@ -179,6 +179,7 @@ class KnobCreatorMixin:
                     delta = 1 if event.delta > 0 else -1
                 new_val = max(frame.min_val, min(frame.max_val, current_val + (delta * step)))
                 knob_value_var.set(new_val)
+                state_mirror_engine.broadcast_gui_change_to_mqtt(path)
 
             def _bind_mousewheel(event):
                 canvas.bind_all("<MouseWheel>", on_mousewheel)

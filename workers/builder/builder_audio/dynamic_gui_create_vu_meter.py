@@ -2,7 +2,7 @@
 
 import tkinter as tk
 from tkinter import ttk
-import math
+import random
 from managers.configini.config_reader import Config
 
 app_constants = Config.get_instance()  # Get the singleton instance
@@ -107,7 +107,17 @@ class VUMeterCreatorMixin:
                     )
 
             vu_value_var.trace_add("write", update_visuals)
-            update_visuals()  # Initial draw
+            # Initial draw
+            update_visuals()
+
+            def on_middle_click(event):
+                """Jump to a random allowed value."""
+                random_val = random.uniform(min_val, max_val)
+                vu_value_var.set(random_val)
+                if state_mirror_engine:
+                    state_mirror_engine.broadcast_gui_change_to_mqtt(path)
+
+            canvas.bind("<Button-2>", on_middle_click)
 
             if path:
                 widget_id = path

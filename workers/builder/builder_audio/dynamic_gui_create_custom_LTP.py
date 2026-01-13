@@ -5,6 +5,9 @@
 # Control + Drag rotates the knob (-100 to 100).
 # Standard Drag moves the fader vertically.
 # "Freestyle" mode allows adjusting both axes simultaneously (vertical=fader, horizontal=rotation).
+# Grabbing the knob freezes its position (relative drag, no jump).
+# Interaction restricted to handle (grabbing handle).
+# Includes tick marks and mousewheel support.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
@@ -21,6 +24,7 @@
 import tkinter as tk
 from tkinter import ttk
 import math
+import sys
 from managers.configini.config_reader import Config
 
 app_constants = Config.get_instance()
@@ -92,6 +96,7 @@ class CustomLTPFrame(tk.Frame):
         self.value_follow = config.get("value_follow", fader_style.get("value_follow", DEFAULT_VALUE_FOLLOW))
         self.value_highlight_color = config.get("value_highlight_color", fader_style.get("value_highlight_color", DEFAULT_VALUE_HIGHLIGHT_COLOR))
         self.value_color = config.get("value_color", self.text_col)
+        self.ticks = config.get("ticks", None)
 
         super().__init__(
             master,
@@ -110,10 +115,7 @@ class CustomLTPFrame(tk.Frame):
         self.freestyle = config.get("freestyle", False)
 
         # Initialize Variables
-        # Linear Value (Standard Fader)
         self.linear_var = tk.DoubleVar(value=float(config.get("value_default", (self.min_val + self.max_val)/2)))
-        
-        # Rotation Value (Knob)
         self.rotation_var = tk.DoubleVar(value=float(config.get("rotation_default", 0.0)))
 
         self.temp_entry = None
@@ -243,75 +245,119 @@ class CustomLTPCreatorMixin:
         hover_color = "#999999"
         
         # Interaction State
-        drag_state = {"start_x": 0, "start_y": 0, "start_val_lin": 0, "start_val_rot": 0, "active": False}
+        drag_state = {
+            "active": False,
+            "grabbing_handle": False,
+            "start_x": 0, "start_y": 0,
+            "start_val_lin": 0, "start_val_rot": 0,
+            "last_ctrl": False
+        }
+
+        def get_handle_y(canvas_h):
+            value_lin = frame.linear_var.get()
+            norm_value = (
+                (value_lin - frame.min_val)
+                / (frame.max_val - frame.min_val)
+                if (frame.max_val - frame.min_val) != 0
+                else 0
+            )
+            norm_value = max(0.0, min(1.0, norm_value))
+            display_norm_pos = norm_value ** (1.0 / frame.log_exponent)
+            return (canvas_h - 40) * (1.0 - display_norm_pos) + 20
 
         def on_press(event):
-            drag_state["active"] = True
-            drag_state["start_x"] = event.x
-            drag_state["start_y"] = event.y
-            drag_state["start_val_lin"] = frame.linear_var.get()
-            drag_state["start_val_rot"] = frame.rotation_var.get()
+            h = canvas.winfo_height()
+            hy = get_handle_y(h)
+            w = canvas.winfo_width()
+            cx = w / 2
+            r = frame.cap_radius
             
-            if not (event.state & 0x0004): # No Ctrl
-                update_linear_from_y(event.y)
+            if (cx - r <= event.x <= cx + r) and (hy - r <= event.y <= hy + r):
+                drag_state["active"] = True
+                drag_state["grabbing_handle"] = True
+                drag_state["start_x"] = event.x
+                drag_state["start_y"] = event.y
+                drag_state["start_val_lin"] = frame.linear_var.get()
+                drag_state["start_val_rot"] = frame.rotation_var.get()
+                drag_state["last_ctrl"] = bool(event.state & 0x0004)
+            else:
+                drag_state["active"] = False
+                drag_state["grabbing_handle"] = False
 
         def on_drag(event):
-            if not drag_state["active"]:
+            if not drag_state["active"] or not drag_state["grabbing_handle"]:
                 return
             
-            is_ctrl = event.state & 0x0004
+            h = canvas.winfo_height()
+            is_ctrl = bool(event.state & 0x0004)
             
-            if frame.freestyle:
-                # Vertical adjusts fader, Horizontal adjusts rotation
-                update_linear_from_y(event.y)
-                update_rotation_from_x(event.x)
-            elif is_ctrl:
-                # Rotation Mode (Vertical drag for rotation)
-                dy = drag_state["start_y"] - event.y
-                sensitivity = 2.0
-                new_rot = drag_state["start_val_rot"] + (dy * sensitivity)
+            if is_ctrl != drag_state["last_ctrl"]:
+                drag_state["start_x"] = event.x
+                drag_state["start_y"] = event.y
+                drag_state["start_val_lin"] = frame.linear_var.get()
+                drag_state["start_val_rot"] = frame.rotation_var.get()
+                drag_state["last_ctrl"] = is_ctrl
+            
+            fader_len = h - 40
+            if fader_len <= 0: fader_len = 100
+            
+            dx = event.x - drag_state["start_x"]
+            multiplier = 2.0 if (frame.freestyle and is_ctrl) else 1.0
+            
+            if frame.freestyle or is_ctrl:
+                rot_change = (dx / (fader_len / 2.0)) * 100.0 * multiplier
+                new_rot = drag_state["start_val_rot"] + rot_change
                 new_rot = max(ROTATION_MIN, min(ROTATION_MAX, new_rot))
                 frame.rotation_var.set(new_rot)
-            else:
-                # Linear Mode
-                update_linear_from_y(event.y)
+            
+            if frame.freestyle or not is_ctrl:
+                dy = event.y - drag_state["start_y"]
+                lin_range = frame.max_val - frame.min_val
+                lin_change = -(dy / fader_len) * lin_range
+                new_lin = drag_state["start_val_lin"] + lin_change
+                new_lin = max(frame.min_val, min(frame.max_val, new_lin))
+                frame.linear_var.set(new_lin)
 
         def on_release(event):
             drag_state["active"] = False
-
-        def update_linear_from_y(y):
-            h = canvas.winfo_height()
-            norm_y = (y - 20) / (h - 40)
-            norm_y = 1.0 - max(0.0, min(1.0, norm_y))
-            
-            log_norm_pos = norm_y**frame.log_exponent
-            current_value = frame.min_val + log_norm_pos * (
-                frame.max_val - frame.min_val
-            )
-            frame.linear_var.set(current_value)
-
-        def update_rotation_from_x(x):
-            w = canvas.winfo_width()
-            # Rotation area same length as fader height (h-40)
-            # Center it at the current rail? Or just relative to the whole canvas width.
-            # User said "area to move it left or right should be about the same length as the fader"
-            h = canvas.winfo_height()
-            fader_len = h - 40
-            
-            # Start rotation from center of canvas
-            cx = w / 2
-            # Offset from center
-            dx = x - cx
-            # Map dx to rotation value. fader_len total width for full rotation range?
-            # So range is [-fader_len/2, fader_len/2]
-            norm_x = dx / (fader_len / 2.0)
-            norm_x = max(-1.0, min(1.0, norm_x))
-            
-            new_rot = norm_x * 100.0 # ROTATION_MAX
-            frame.rotation_var.set(new_rot)
+            drag_state["grabbing_handle"] = False
 
         def on_alt_click(event):
-            frame._open_manual_entry(event, frame.linear_var, frame.min_val, frame.max_val)
+            h = canvas.winfo_height()
+            hy = get_handle_y(h)
+            w = canvas.winfo_width()
+            cx = w / 2
+            r = frame.cap_radius
+            if (cx - r <= event.x <= cx + r) and (hy - r <= event.y <= hy + r):
+                frame._open_manual_entry(event, frame.linear_var, frame.min_val, frame.max_val)
+
+        def on_mousewheel(event):
+            is_ctrl = bool(event.state & 0x0004)
+            
+            delta = 0
+            if sys.platform == "linux":
+                if event.num == 4: delta = 1
+                elif event.num == 5: delta = -1
+            else:
+                delta = 1 if event.delta > 0 else -1
+
+            if is_ctrl:
+                # Adjust Rotation (Pan)
+                current_rot = frame.rotation_var.get()
+                rot_range = ROTATION_MAX - ROTATION_MIN
+                step = rot_range * 0.05 # 5% steps
+                new_rot = current_rot + (delta * step)
+                new_rot = max(ROTATION_MIN, min(ROTATION_MAX, new_rot))
+                frame.rotation_var.set(new_rot)
+            else:
+                # Adjust Linear (Volume)
+                current_val = frame.linear_var.get()
+                val_range = frame.max_val - frame.min_val
+                step = val_range * 0.05
+                
+                new_val = current_val + (delta * step)
+                new_val = max(frame.min_val, min(frame.max_val, new_val))
+                frame.linear_var.set(new_val)
 
         def redraw(*args):
             current_w = canvas.winfo_width()
@@ -338,18 +384,25 @@ class CustomLTPCreatorMixin:
         canvas.bind("<ButtonRelease-1>", on_release)
         canvas.bind("<Alt-Button-1>", on_alt_click)
         
-        canvas.bind("<Configure>", lambda e: redraw())
-        
-        def on_enter(event):
+        # Mousewheel Binding functions
+        def _bind_mousewheel(event):
+            canvas.bind_all("<MouseWheel>", on_mousewheel)
+            canvas.bind_all("<Button-4>", on_mousewheel)
+            canvas.bind_all("<Button-5>", on_mousewheel)
             visual_props["secondary"] = hover_color
             redraw()
 
-        def on_leave(event):
+        def _unbind_mousewheel(event):
+            canvas.unbind_all("<MouseWheel>")
+            canvas.unbind_all("<Button-4>")
+            canvas.unbind_all("<Button-5>")
             visual_props["secondary"] = secondary_color
             redraw()
-            
-        canvas.bind("<Enter>", on_enter)
-        canvas.bind("<Leave>", on_leave)
+
+        canvas.bind("<Enter>", _bind_mousewheel)
+        canvas.bind("<Leave>", _unbind_mousewheel)
+
+        canvas.bind("<Configure>", lambda e: redraw())
 
         return frame
 
@@ -363,7 +416,39 @@ def _draw_ltp_vertical(frame, canvas, width, height, current_secondary):
         fill=current_secondary, width=4, capstyle=tk.ROUND
     )
     
-    # 2. Calculate Handle Position (Linear)
+    # 2. Draw Tick Marks
+    tick_length_half = width * frame.tick_size
+    tick_values = []
+    if frame.ticks is not None:
+        tick_values = frame.ticks
+    else:
+        val_range = frame.max_val - frame.min_val
+        interval = 10 if val_range > 50 else 5
+        if interval > 0:
+            start_tick = math.ceil(frame.min_val / interval) * interval
+            while start_tick <= frame.max_val:
+                tick_values.append(start_tick)
+                start_tick += interval
+
+    for i, tick_value in enumerate(tick_values):
+        norm_tick = (tick_value - frame.min_val) / (frame.max_val - frame.min_val) if (frame.max_val - frame.min_val) != 0 else 0
+        norm_tick = max(0.0, min(1.0, norm_tick))
+        display_norm_tick = norm_tick ** (1.0 / frame.log_exponent)
+        tick_y = (height - 40) * (1.0 - display_norm_tick) + 20
+        
+        canvas.create_line(
+            cx - tick_length_half, tick_y,
+            cx + tick_length_half, tick_y,
+            fill=frame.tick_color, width=1
+        )
+        if i % 2 == 0:
+            canvas.create_text(
+                cx + tick_length_half + 15, tick_y,
+                text=str(int(tick_value)),
+                fill=frame.tick_color, font=frame.tick_font, anchor="w"
+            )
+
+    # 3. Calculate Handle Position
     value_lin = frame.linear_var.get()
     norm_value = (
         (value_lin - frame.min_val)
@@ -375,21 +460,18 @@ def _draw_ltp_vertical(frame, canvas, width, height, current_secondary):
     display_norm_pos = norm_value ** (1.0 / frame.log_exponent)
     handle_y = (height - 40) * (1.0 - display_norm_pos) + 20
     
-    # 3. Fill Line (from bottom to handle)
+    # 4. Fill Line
     canvas.create_line(
         cx + 2.5, height - 20, cx + 2.5, handle_y,
         fill=frame.value_highlight_color, width=5, capstyle=tk.ROUND
     )
     
-    # 4. Draw Rotatable Cap (Knob)
+    # 5. Draw Rotatable Cap (Knob)
     rot_val = frame.rotation_var.get()
-    # 0 val = -90 degrees (Up)
     angle_deg = -90 + (rot_val / 100.0) * 135.0
     angle_rad = math.radians(angle_deg)
     
     radius = frame.cap_radius
-    
-    # Cap Circle
     canvas.create_oval(
         cx - radius, handle_y - radius,
         cx + radius, handle_y + radius,
@@ -400,29 +482,9 @@ def _draw_ltp_vertical(frame, canvas, width, height, current_secondary):
     pointer_len = radius * 0.8
     px = cx + pointer_len * math.cos(angle_rad)
     py = handle_y + pointer_len * math.sin(angle_rad)
+    canvas.create_line(cx, handle_y, px, py, fill=frame.cap_outline_color, width=2, capstyle=tk.ROUND)
     
-    canvas.create_line(
-        cx, handle_y, px, py,
-        fill=frame.cap_outline_color, width=2, capstyle=tk.ROUND
-    )
-    
-    # Values Text
+    # 6. Values Text
     if frame.value_follow:
-        # Linear Value to the right
-        canvas.create_text(
-            cx + radius + 10,
-            handle_y,
-            text=f"{value_lin:.1f}",
-            fill=frame.value_color,
-            anchor="w",
-            font=("Helvetica", 8)
-        )
-        # Rotation Value to the left
-        canvas.create_text(
-            cx - radius - 10,
-            handle_y,
-            text=f"R:{rot_val:.0f}",
-            fill=frame.value_color,
-            anchor="e",
-            font=("Helvetica", 8)
-        )
+        canvas.create_text(cx + radius + 10, handle_y, text=f"{value_lin:.1f}", fill=frame.value_color, anchor="w", font=("Helvetica", 8))
+        canvas.create_text(cx - radius - 10, handle_y, text=f"R:{rot_val:.0f}", fill=frame.value_color, anchor="e", font=("Helvetica", 8))

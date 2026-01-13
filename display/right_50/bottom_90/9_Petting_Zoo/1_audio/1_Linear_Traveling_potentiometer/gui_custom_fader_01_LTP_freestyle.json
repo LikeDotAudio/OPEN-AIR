@@ -1,24 +1,85 @@
 {
-  "ltp_fader_freestyle": {
-    "type": "_CustomLTP",
-    "label_active": "LTP Freestyle Test",
-    "value_min": -50.0,
-    "value_max": 50.0,
-    "value_default": 0.0,
-    "rotation_default": 0.0,
-    "log_exponent": 1.0,
-    "freestyle": true,
-    "border_width": 1,
-    "border_color": "#444444",
-    "cap_color": "#dcdcdc",
-    "cap_radius": 18,
-    "tick_size": 0.2,
-    "value_follow": true,
-    "layout": {
-        "width": 400,
-        "height": 400,
-        "font": 12,
-        "colour": "#FFFFFF"
+  "LTP_Freestyle_Console": {
+    "type": "OcaBlock",
+    "description": "8-Channel Freestyle LTP Console",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "CH1": {
+        "type": "_CustomLTP",
+        "label_active": "Kick",
+        "value_min": -100.0, "value_max": 20.0, "value_default": -10.0,
+        "rotation_default": 0.0, "freestyle": true,
+        "value_highlight_color": "#FF3333", "cap_color": "#880000",
+        "ticks": [-100, -60, -30, -15, 0, 10, 20],
+        "layout": {"width": 120, "height": 400}
+      },
+      "CH2": {
+        "type": "_CustomLTP",
+        "label_active": "Snare",
+        "value_min": -100.0, "value_max": 20.0, "value_default": -5.0,
+        "rotation_default": -20.0, "freestyle": true,
+        "value_highlight_color": "#33FF33", "cap_color": "#008800",
+        "ticks": [-100, -80, -60, -40, -20, 0, 20],
+        "layout": {"width": 120, "height": 400}
+      },
+      "CH3": {
+        "type": "_CustomLTP",
+        "label_active": "Hat",
+        "value_min": -60.0, "value_max": 10.0, "value_default": -15.0,
+        "rotation_default": 45.0, "freestyle": true,
+        "value_highlight_color": "#3333FF", "cap_color": "#000088",
+        "ticks": [-60, -40, -20, 0, 10],
+        "layout": {"width": 120, "height": 400}
+      },
+      "CH4": {
+        "type": "_CustomLTP",
+        "label_active": "Toms",
+        "value_min": -100.0, "value_max": 20.0, "value_default": -20.0,
+        "rotation_default": -60.0, "freestyle": true,
+        "value_highlight_color": "#FFFF33", "cap_color": "#888800",
+        "ticks": [-100, -50, 0, 20],
+        "layout": {"width": 120, "height": 400}
+      },
+      "CH5": {
+        "type": "_CustomLTP",
+        "label_active": "Bass",
+        "value_min": -100.0, "value_max": 20.0, "value_default": 0.0,
+        "rotation_default": 0.0, "freestyle": true,
+        "value_highlight_color": "#FF33FF", "cap_color": "#880088",
+        "ticks": [-100, -15, 0, 15],
+        "layout": {"width": 120, "height": 400}
+      },
+      "CH6": {
+        "type": "_CustomLTP",
+        "label_active": "Gtr L",
+        "value_min": -100.0, "value_max": 20.0, "value_default": -12.0,
+        "rotation_default": -100.0, "freestyle": true,
+        "value_highlight_color": "#33FFFF", "cap_color": "#008888",
+        "ticks": [-100, -40, -10, 10, 20],
+        "layout": {"width": 120, "height": 400}
+      },
+      "CH7": {
+        "type": "_CustomLTP",
+        "label_active": "Gtr R",
+        "value_min": -100.0, "value_max": 20.0, "value_default": -12.0,
+        "rotation_default": 100.0, "freestyle": true,
+        "value_highlight_color": "#FF8C00", "cap_color": "#CC5500",
+        "ticks": [-100, -40, -10, 10, 20],
+        "layout": {"width": 120, "height": 400}
+      },
+      "CH8": {
+        "type": "_CustomLTP",
+        "label_active": "Vox",
+        "value_min": -100.0, "value_max": 20.0, "value_default": 5.0,
+        "rotation_default": 0.0, "freestyle": true,
+        "value_highlight_color": "#FFFFFF", "cap_color": "#CCCCCC",
+        "ticks": [-100, -20, -10, -5, 0, 5, 10, 15, 20],
+        "layout": {"width": 120, "height": 400}
+      }
     }
   }
 }

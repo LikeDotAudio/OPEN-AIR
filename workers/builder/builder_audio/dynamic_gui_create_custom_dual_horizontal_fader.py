@@ -3,6 +3,7 @@
 # A dual horizontal fader widget that shares a single rail and outputs V1, V2, and Delta.
 # The delta between V1 and V2 is highlighted.
 # Handles highlight on hover and require direct grabbing to move.
+# Supports mousewheel adjustment based on handle hover and middle-click reset.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
@@ -19,7 +20,14 @@
 import tkinter as tk
 from tkinter import ttk
 import math
+import sys
+import os
 from managers.configini.config_reader import Config
+from workers.logger.logger import debug_logger
+from workers.logger.log_utils import _get_log_args
+from workers.styling.style import THEMES, DEFAULT_THEME
+from workers.mqtt.mqtt_topic_utils import get_topic
+from workers.handlers.widget_event_binder import bind_variable_trace
 
 app_constants = Config.get_instance()
 
@@ -41,12 +49,6 @@ DEFAULT_CAP_HEIGHT_RATIO = 0.6
 DEFAULT_CAP_RADIUS = 10
 HOVER_HANDLE_COLOR = "#444444"  # Dark grey
 # ---------------------------------------------
-
-from workers.logger.logger import debug_logger
-from workers.logger.log_utils import _get_log_args
-from workers.styling.style import THEMES, DEFAULT_THEME
-from workers.handlers.widget_event_binder import bind_variable_trace
-
 
 class CustomDualHorizontalFaderFrame(tk.Frame):
     def __init__(
@@ -83,6 +85,11 @@ class CustomDualHorizontalFaderFrame(tk.Frame):
         self.cap_radius = int(config.get("cap_radius", DEFAULT_CAP_RADIUS))
         self.cap_color = config.get("cap_color", self.handle_col)
         self.cap_outline_color = config.get("cap_outline_color", self.track_col)
+
+        # Custom labels
+        self.label_v1 = config.get("label_v1", "V1")
+        self.label_v2 = config.get("label_v2", "V2")
+        self.delta_absolute = config.get("delta_absolute", False)
 
         # Custom styling
         self.tick_size = config.get("tick_size", fader_style.get("tick_size", DEFAULT_TICK_SIZE_RATIO))
@@ -152,19 +159,28 @@ class CustomDualHorizontalFaderFrame(tk.Frame):
     def _calculate_delta(self):
         v1 = self.v1_var.get()
         v2 = self.v2_var.get()
-        self.delta_var.set(v1 - v2)
+        delta = v2 - v1
+        if self.delta_absolute:
+            delta = abs(delta)
+        self.delta_var.set(delta)
 
     def _on_value_change(self, *args):
         self._calculate_delta()
         self.event_generate("<<RedrawFader>>")
 
-    def _jump_to_reff_point(self, event, target_var):
+    def _jump_to_reff_point(self, event, target_var=None):
         if app_constants.global_settings["debug_enabled"]:
             debug_logger(
                 message=f"⚡ User invoked Quantum Jump! Resetting to {self.reff_point}",
                 **_get_log_args(),
             )
-        target_var.set(self.reff_point)
+        
+        if target_var:
+            target_var.set(self.reff_point)
+        else:
+            # If no specific target, reset both
+            self.v1_var.set(self.reff_point)
+            self.v2_var.set(self.reff_point)
 
     def _open_manual_entry(self, event, target_var):
         if self.temp_entry and self.temp_entry.winfo_exists():
@@ -294,12 +310,10 @@ class CustomDualHorizontalFaderCreatorMixin:
             handle = get_handle_under_mouse(event.x, event.y)
             if handle:
                 frame.active_fader = handle
-                # Check for Control click for Reset
                 if event.state & 0x0004:
                     target = frame.v1_var if handle == "V1" else frame.v2_var
                     frame._jump_to_reff_point(event, target)
-                # Check for Alt click for Manual Entry
-                elif event.state & 0x0008 or event.state & 0x0080: # Alt keys
+                elif event.state & 0x0008 or event.state & 0x0080:
                     target = frame.v1_var if handle == "V1" else frame.v2_var
                     frame._open_manual_entry(event, target)
                 else:
@@ -314,6 +328,34 @@ class CustomDualHorizontalFaderCreatorMixin:
         def on_release(event):
             frame.active_fader = None
             redraw()
+
+        def on_middle_click(event):
+            handle = get_handle_under_mouse(event.x, event.y)
+            if handle:
+                target = frame.v1_var if handle == "V1" else frame.v2_var
+                frame._jump_to_reff_point(event, target)
+            else:
+                frame._jump_to_reff_point(event)
+
+        def on_mousewheel(event):
+            if not frame.hovered_fader:
+                return
+            
+            target_var = frame.v1_var if frame.hovered_fader == "V1" else frame.v2_var
+            current_val = target_var.get()
+            val_range = frame.max_val - frame.min_val
+            step = val_range * 0.05
+            
+            delta = 0
+            if sys.platform == "linux":
+                if event.num == 4: delta = 1
+                elif event.num == 5: delta = -1
+            else:
+                delta = 1 if event.delta > 0 else -1
+            
+            new_val = current_val + (delta * step)
+            new_val = max(frame.min_val, min(frame.max_val, new_val))
+            target_var.set(new_val)
 
         def update_active_fader_from_mouse(x):
             w = canvas.winfo_width()
@@ -354,26 +396,28 @@ class CustomDualHorizontalFaderCreatorMixin:
         canvas.bind("<Button-1>", on_press)
         canvas.bind("<B1-Motion>", on_drag)
         canvas.bind("<ButtonRelease-1>", on_release)
+        canvas.bind("<Button-2>", on_middle_click)
         
-        canvas.bind("<Configure>", lambda e: redraw())
-        
-        def on_leave(event):
+        # Mousewheel Binding
+        def _bind_mousewheel(event):
+            canvas.bind_all("<MouseWheel>", on_mousewheel)
+            canvas.bind_all("<Button-4>", on_mousewheel)
+            canvas.bind_all("<Button-5>", on_mousewheel)
+            on_mouse_move(event) # Refresh hover focus on entry
+
+        def _unbind_mousewheel(event):
+            canvas.unbind_all("<MouseWheel>")
+            canvas.unbind_all("<Button-4>")
+            canvas.unbind_all("<Button-5>")
             frame.hovered_fader = None
             redraw()
-            
-        canvas.bind("<Leave>", on_leave)
+
+        canvas.bind("<Enter>", _bind_mousewheel)
+        canvas.bind("<Leave>", _unbind_mousewheel)
+        
+        canvas.bind("<Configure>", lambda e: redraw())
 
         return frame
-
-def _draw_rounded_rectangle(canvas, x1, y1, x2, y2, radius, **kwargs):
-    points = [
-        x1 + radius, y1, x1 + radius, y1, x2 - radius, y1, x2 - radius, y1,
-        x2, y1, x2, y1 + radius, x2, y1 + radius, x2, y2 - radius,
-        x2, y2 - radius, x2, y2, x2 - radius, y2, x2 - radius, y2,
-        x1 + radius, y2, x1 + radius, y2, x1, y2, x1, y2 - radius,
-        x1, y2 - radius, x1, y1 + radius, x1, y1 + radius, x1, y1,
-    ]
-    return canvas.create_polygon(points, **kwargs, smooth=True)
 
 def _draw_dual_fader_shared_rail(frame, canvas, width, height, current_secondary):
     canvas.delete("all")
@@ -413,7 +457,6 @@ def _draw_dual_fader_shared_rail(frame, canvas, width, height, current_secondary
     cap_width = frame.cap_width
     cap_height = height * frame.cap_height_ratio
     
-    # Determine colors based on hover/active state
     v1_col = HOVER_HANDLE_COLOR if (frame.hovered_fader == "V1" or frame.active_fader == "V1") else frame.cap_color
     v2_col = HOVER_HANDLE_COLOR if (frame.hovered_fader == "V2" or frame.active_fader == "V2") else frame.cap_color
     
@@ -424,7 +467,7 @@ def _draw_dual_fader_shared_rail(frame, canvas, width, height, current_secondary
         x1 + cap_width / 2, cy + cap_height / 2,
         radius=frame.cap_radius, fill=v1_col, outline=current_secondary
     )
-    canvas.create_text(x1, cy, text="V1", fill=frame.value_color, font=("Helvetica", 8))
+    canvas.create_text(x1, cy, text=frame.label_v1, fill=frame.value_color, font=("Helvetica", 8))
     
     # Draw V2 Cap
     _draw_rounded_rectangle(
@@ -433,7 +476,7 @@ def _draw_dual_fader_shared_rail(frame, canvas, width, height, current_secondary
         x2 + cap_width / 2, cy + cap_height / 2,
         radius=frame.cap_radius, fill=v2_col, outline=current_secondary
     )
-    canvas.create_text(x2, cy, text="V2", fill=frame.value_color, font=("Helvetica", 8))
+    canvas.create_text(x2, cy, text=frame.label_v2, fill=frame.value_color, font=("Helvetica", 8))
     
     # 5. Delta Value Text
     delta_val = frame.delta_var.get()

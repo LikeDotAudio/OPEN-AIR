@@ -1,0 +1,25 @@
+{
+  "frequency_bounds": {
+    "type": "_CustomDualHorizontalFader",
+    "label_active": "Frequency Bounds (Hz)",
+    "label_v1": "LOW",
+    "label_v2": "HIGH",
+    "delta_absolute": true,
+    "value_min": 0.0,
+    "value_max": 1000.0,
+    "value_default_v1": 200.0,
+    "value_default_v2": 800.0,
+    "log_exponent": 1.0,
+    "value_highlight_color": "#A020F0",
+    "cap_color": "#FFD700",
+    "cap_width": 45,
+    "cap_radius": 8,
+    "value_follow": true,
+    "layout": {
+        "width": 600,
+        "height": 120,
+        "font": 14,
+        "colour": "#A020F0"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "dual_fader_test": {
+    "type": "_CustomDualHorizontalFader",
+    "label_active": "Dual Fader Test",
+    "value_min": -100.0,
+    "value_max": 200.0,
+    "value_default_v1": -100.0,
+    "value_default_v2": 100.0,
+    "log_exponent": 1.0,
+    "border_width": 1,
+    "border_color": "#444444",
+    "cap_color": "#dcdcdc",
+    "cap_width": 40,
+    "cap_height_ratio": 0.5,
+    "cap_radius": 10,
+    "tick_size": 2,
+    "value_follow": true,
+    "layout": {
+        "width": 600,
+        "height": 150,
+        "font": 12,
+        "colour": "#FFFFFF"
+    }
+  }
+}

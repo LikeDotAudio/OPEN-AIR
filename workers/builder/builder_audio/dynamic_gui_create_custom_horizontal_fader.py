@@ -1,6 +1,7 @@
 # builder_audio/dynamic_gui_create_custom_horizontal_fader.py
 #
 # A horizontal fader widget that adapts to the system theme.
+# Includes mousewheel support and middle-click reset.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
@@ -17,7 +18,14 @@
 import tkinter as tk
 from tkinter import ttk
 import math
+import sys
+import os
 from managers.configini.config_reader import Config
+from workers.logger.logger import debug_logger
+from workers.logger.log_utils import _get_log_args
+from workers.styling.style import THEMES, DEFAULT_THEME
+from workers.mqtt.mqtt_topic_utils import get_topic
+from workers.handlers.widget_event_binder import bind_variable_trace
 
 app_constants = Config.get_instance()
 
@@ -46,14 +54,6 @@ DEFAULT_CAP_HEIGHT_RATIO = 0.5
 DEFAULT_CAP_RADIUS = 10
 DEFAULT_CAP_OUTLINE_COLOR = "black" # Using track_col by default
 # ---------------------------------------------
-
-from workers.logger.logger import debug_logger
-from workers.logger.log_utils import _get_log_args
-from workers.styling.style import THEMES, DEFAULT_THEME
-import os
-from workers.mqtt.mqtt_topic_utils import get_topic
-from workers.handlers.widget_event_binder import bind_variable_trace
-
 
 class CustomHorizontalFaderFrame(tk.Frame):
     def __init__(
@@ -269,20 +269,42 @@ class CustomHorizontalFaderCreatorMixin:
         fader_value_var.trace_add("write", on_fader_value_change)
         on_fader_value_change()
 
-        # Hover Effects
-        def on_enter(event):
+        def on_mousewheel(event):
+            current_val = fader_value_var.get()
+            val_range = frame.max_val - frame.min_val
+            step = val_range * 0.05
+            
+            delta = 0
+            if sys.platform == "linux":
+                if event.num == 4: delta = 1
+                elif event.num == 5: delta = -1
+            else:
+                delta = 1 if event.delta > 0 else -1
+            
+            new_val = current_val + (delta * step)
+            new_val = max(frame.min_val, min(frame.max_val, new_val))
+            fader_value_var.set(new_val)
+
+        def _bind_mousewheel(event):
+            canvas.bind_all("<MouseWheel>", on_mousewheel)
+            canvas.bind_all("<Button-4>", on_mousewheel)
+            canvas.bind_all("<Button-5>", on_mousewheel)
             visual_props["secondary"] = hover_color
             on_fader_value_change()
 
-        def on_leave(event):
+        def _unbind_mousewheel(event):
+            canvas.unbind_all("<MouseWheel>")
+            canvas.unbind_all("<Button-4>")
+            canvas.unbind_all("<Button-5>")
             visual_props["secondary"] = secondary_color
             on_fader_value_change()
 
-        canvas.bind("<Enter>", on_enter)
-        canvas.bind("<Leave>", on_leave)
+        canvas.bind("<Enter>", _bind_mousewheel)
+        canvas.bind("<Leave>", _unbind_mousewheel)
 
         canvas.bind("<B1-Motion>", frame.command)
         canvas.bind("<Button-1>", frame.command)
+        canvas.bind("<Button-2>", frame._jump_to_reff_point)
         canvas.bind("<Control-Button-1>", frame._jump_to_reff_point)
         canvas.bind("<Alt-Button-1>", frame._open_manual_entry)
         canvas.bind("<Configure>", lambda e: on_fader_value_change())

@@ -1,19 +1,72 @@
 {
-  "elements1": {
+  "Standard_Variations": {
     "type": "OcaBlock",
-    "label_active": "Analog Output Level",
-    "fields": {     "examplefields": {
-      "type": "_NeedleVUMeter",
-      "label_active": "Analog Output Level",
-      "size": 150,
-      "min": -20.0,
-      "max": 3.0,
-      "upper_range": 0.0,
-      "Lower_range_colour": "#6a9955",
-      "upper_range_Colour": "#c75450",
-      "Pointer_colour": "#ffffff",
-      "value_default": -7.0,
-      "notes": "A classic needle VU meter display."
+    "description": "Timing & Color Variations",
+    "layout_columns": 4,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "Meter_Med": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Med (Hold 500ms)",
+        "size": 150,
+        "min": -20.0, "max": 3.0, "upper_range": 0.0,
+        "glide_time": 200,
+        "dwell_time": 400,
+        "hold_time": 500,
+        "fall_time": 800,
+        "Lower_range_colour": "#4CAF50",
+        "upper_range_Colour": "#F44336",
+        "Pointer_colour": "#FFFFFF",
+        "value_default": -20.0,
+        "notes": "Standard smooth ballistics."
+      },
+      "Meter_Slow": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Slow (No Hold)",
+        "size": 150,
+        "min": -20.0, "max": 3.0, "upper_range": 0.0,
+        "glide_time": 500,
+        "dwell_time": 1000,
+        "hold_time": 0,
+        "fall_time": 2000,
+        "Lower_range_colour": "#2196F3",
+        "upper_range_Colour": "#FFC107",
+        "Pointer_colour": "#FFEB3B",
+        "value_default": -20.0,
+        "notes": "Heavy, damped needle."
+      },
+      "Meter_SuperSlow": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Super Slow (No Hold)",
+        "size": 150,
+        "min": -20.0, "max": 3.0, "upper_range": 0.0,
+        "glide_time": 1000,
+        "dwell_time": 2000,
+        "hold_time": 0,
+        "fall_time": 4000,
+        "Lower_range_colour": "#9C27B0",
+        "upper_range_Colour": "#00BCD4",
+        "Pointer_colour": "#00FFFF",
+        "value_default": -20.0,
+        "notes": "Very heavy, vintage drift."
+      },
+      "Meter_Fast": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Fast (Hold 2s)",
+        "size": 150,
+        "min": -20.0, "max": 3.0, "upper_range": 0.0,
+        "glide_time": 50,
+        "dwell_time": 100,
+        "hold_time": 2000,
+        "fall_time": 300,
+        "Lower_range_colour": "#FF9800",
+        "upper_range_Colour": "#673AB7",
+        "Pointer_colour": "#FF00FF",
+        "value_default": -20.0,
+        "notes": "Snappy, peak-reading style with hold."
+      }
     }
   }
-}}
+}

@@ -18,6 +18,7 @@ import tkinter as tk
 from tkinter import ttk
 import math
 import random
+import time  # <--- ADD THIS LINE
 from managers.configini.config_reader import Config
 
 app_constants = Config.get_instance()  # Get the singleton instance
@@ -92,6 +93,16 @@ class NeedleVUMeterCreatorMixin:
             lower_colour = config.get("Lower_range_colour", "green")
             upper_colour = config.get("upper_range_Colour", danger_color)
             pointer_colour = config.get("Pointer_colour", accent_color)
+            
+            # Animation Parameters (Default: 100ms)
+            # Glide: Time (ms) to traverse full scale upwards
+            glide_time = float(config.get("glide_time", 100))
+            # Dwell: Time (ms) to traverse full scale downwards (to a specific target)
+            dwell_time = float(config.get("dwell_time", 100))
+            # Hold: Time (ms) to hold value before auto-decaying
+            hold_time = float(config.get("hold_time", 0))
+            # Fall: Time (ms) to traverse full scale downwards (auto-decay to min)
+            fall_time = float(config.get("fall_time", 100))
 
             vu_value_var = tk.DoubleVar(value=value_default)
 
@@ -104,11 +115,18 @@ class NeedleVUMeterCreatorMixin:
             )
             canvas.pack()
 
-            def update_visuals(*args):
+            # Animation State
+            self.anim_current_value = value_default
+            self.anim_target = value_default
+            self.anim_mode = "idle" # idle, tracking, holding, decaying
+            self.anim_hold_start = 0
+            self.anim_running = False
+
+            def draw_current_frame():
                 self._draw_needle_vu_meter(
                     canvas,
                     size,
-                    vu_value_var.get(),
+                    self.anim_current_value,
                     min_val,
                     max_val,
                     red_zone_start,
@@ -119,10 +137,102 @@ class NeedleVUMeterCreatorMixin:
                     lower_colour
                 )
 
-            vu_value_var.trace_add("write", update_visuals)
+            def animate():
+                current = self.anim_current_value
+                dt = 20.0 # milliseconds per frame (approx 50 FPS)
+                full_range = max_val - min_val
+                if full_range <= 0: full_range = 1.0
+
+                # --- State Machine Logic ---
+                if self.anim_mode == "holding":
+                    # Check if hold time expired
+                    if (time.time() * 1000) - self.anim_hold_start >= hold_time:
+                        self.anim_mode = "decaying"
+                    else:
+                        # Still holding, just wait
+                        canvas.after(int(dt), animate)
+                        return
+
+                # Determine target based on mode
+                if self.anim_mode == "tracking":
+                    target = self.anim_target
+                elif self.anim_mode == "decaying":
+                    target = min_val
+                else: # idle
+                    target = current # Don't move
+
+                diff = target - current
+                
+                # Check for completion of current move
+                if abs(diff) < 0.05: # Threshold
+                    self.anim_current_value = target
+                    draw_current_frame()
+                    
+                    if self.anim_mode == "tracking":
+                        # Reached tracking target
+                        if hold_time > 0:
+                            self.anim_mode = "holding"
+                            self.anim_hold_start = time.time() * 1000
+                        else:
+                            self.anim_mode = "decaying"
+                        
+                        # Continue animation next frame
+                        canvas.after(int(dt), animate)
+                        return
+                    elif self.anim_mode == "decaying":
+                        # Reached min_val (decay complete)
+                        self.anim_mode = "idle"
+                        self.anim_running = False
+                        return
+                    else:
+                        # Should not happen often if logic is correct
+                        self.anim_running = False
+                        return
+
+                # Calculate step size
+                step = 0.0
+                time_param = 0.0
+                
+                if diff > 0: # Rising
+                    # Only rise if tracking. 
+                    time_param = glide_time
+                else: # Falling
+                    if self.anim_mode == "tracking":
+                        time_param = dwell_time
+                    else:
+                        time_param = fall_time
+                
+                if time_param <= 0:
+                    step = diff # Instant
+                else:
+                    max_step = (full_range / time_param) * dt
+                    # Clamp step to diff to avoid overshoot
+                    if diff > 0:
+                        step = min(diff, max_step)
+                    else:
+                        step = max(diff, -max_step)
+
+                self.anim_current_value += step
+                draw_current_frame()
+                
+                canvas.after(int(dt), animate)
+
+            def on_value_change(*args):
+                # New value received from logic/user
+                new_target = vu_value_var.get()
+                
+                # Update target and switch to tracking mode immediately
+                self.anim_target = new_target
+                self.anim_mode = "tracking"
+                
+                if not self.anim_running:
+                    self.anim_running = True
+                    animate()
+
+            vu_value_var.trace_add("write", on_value_change)
 
             # Initial Draw
-            update_visuals()
+            draw_current_frame()
 
             def on_middle_click(event):
                 """Jump to a random allowed value."""

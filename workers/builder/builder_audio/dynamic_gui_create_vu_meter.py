@@ -3,6 +3,7 @@
 import tkinter as tk
 from tkinter import ttk
 import random
+import time
 from managers.configini.config_reader import Config
 
 app_constants = Config.get_instance()  # Get the singleton instance
@@ -61,6 +62,12 @@ class VUMeterCreatorMixin:
             upper_colour = config.get("upper_range_Colour", "red")
             pointer_colour = config.get("Pointer_colour", "yellow")
 
+            # Animation Parameters (Default: 100ms)
+            glide_time = float(config.get("glide_time", 100))
+            dwell_time = float(config.get("dwell_time", 100))
+            hold_time = float(config.get("hold_time", 0))
+            fall_time = float(config.get("fall_time", 100))
+
             vu_value_var = tk.DoubleVar(value=value_default)
 
             canvas = tk.Canvas(
@@ -84,31 +91,83 @@ class VUMeterCreatorMixin:
                 0, 0, 5, height, fill=pointer_colour, outline=""
             )
 
-            def update_visuals(*args):
-                """Updates the indicator position based on the tk.DoubleVar."""
-                current_value = vu_value_var.get()
+            # Animation State
+            self.anim_current_value = value_default
+            self.anim_target = value_default
+            self.anim_mode = "idle" # idle, tracking, holding, decaying
+            self.anim_hold_start = 0
+            self.anim_running = False
 
-                if current_value < min_val:
-                    current_value = min_val
-                if current_value > max_val:
-                    current_value = max_val
-
+            def draw_indicator():
+                val = self.anim_current_value
+                if val < min_val: val = min_val
+                if val > max_val: val = max_val
                 x_pos = (
-                    (current_value - min_val) / (max_val - min_val) * width
+                    (val - min_val) / (max_val - min_val) * width
                     if max_val > min_val
                     else 0
                 )
                 canvas.coords(indicator, x_pos - 2.5, 0, x_pos + 2.5, height)
 
-                if app_constants.global_settings["debug_enabled"]:
-                    debug_logger(
-                        message=f"🎶 VU meter '{label}' updated to {current_value}",
-                        **_get_log_args(),
-                    )
+            def animate():
+                current = self.anim_current_value
+                dt = 20.0 # ms per frame
+                full_range = max_val - min_val
+                if full_range <= 0: full_range = 1.0
 
-            vu_value_var.trace_add("write", update_visuals)
-            # Initial draw
-            update_visuals()
+                if self.anim_mode == "holding":
+                    if (time.time() * 1000) - self.anim_hold_start >= hold_time:
+                        self.anim_mode = "decaying"
+                    else:
+                        canvas.after(int(dt), animate)
+                        return
+
+                if self.anim_mode == "tracking":
+                    target = self.anim_target
+                elif self.anim_mode == "decaying":
+                    target = min_val
+                else:
+                    target = current
+
+                diff = target - current
+                if abs(diff) < 0.05:
+                    self.anim_current_value = target
+                    draw_indicator()
+                    if self.anim_mode == "tracking":
+                        if hold_time > 0:
+                            self.anim_mode = "holding"
+                            self.anim_hold_start = time.time() * 1000
+                        else:
+                            self.anim_mode = "decaying"
+                        canvas.after(int(dt), animate)
+                        return
+                    else:
+                        self.anim_mode = "idle"
+                        self.anim_running = False
+                        return
+
+                step = 0.0
+                time_param = glide_time if diff > 0 else (dwell_time if self.anim_mode == "tracking" else fall_time)
+                
+                if time_param <= 0:
+                    step = diff
+                else:
+                    max_step = (full_range / time_param) * dt
+                    step = min(diff, max_step) if diff > 0 else max(diff, -max_step)
+
+                self.anim_current_value += step
+                draw_indicator()
+                canvas.after(int(dt), animate)
+
+            def on_value_change(*args):
+                self.anim_target = vu_value_var.get()
+                self.anim_mode = "tracking"
+                if not self.anim_running:
+                    self.anim_running = True
+                    animate()
+
+            vu_value_var.trace_add("write", on_value_change)
+            draw_indicator()
 
             def on_middle_click(event):
                 """Jump to a random allowed value."""

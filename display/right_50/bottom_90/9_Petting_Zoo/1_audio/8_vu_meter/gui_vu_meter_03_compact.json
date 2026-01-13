@@ -1,20 +1,71 @@
 {
-  "elements3": {
+  "Compact_VU_8_Bank": {
     "type": "OcaBlock",
-    "label_active": "Mic Input Level",
-    "fields": {     "examplefields": {
-      "type": "_VUMeter",
-      "label_active": "Mic Input Level",
-      "min": -30.0,
-      "max": 0.0,
-      "value_default": -10.0,
-      "upper_range": -6.0,
-      "Lower_range_colour": "#007acc",
-      "upper_range_Colour": "#ce9178",
-      "Pointer_colour": "#dcdcaa",
-      "width": 150,
-      "height": 15,
-      "notes": "A smaller VU meter suitable for microphone input monitoring."
+    "description": "8-Channel Compact VU Bank",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "CH1": {
+        "type": "_VUMeter",
+        "label_active": "CH 1 (Fast)",
+        "min": -30.0, "max": 0.0, "upper_range": -6.0,
+        "glide_time": 50, "dwell_time": 50, "hold_time": 0, "fall_time": 200,
+        "width": 110, "height": 12, "notes": "Snappy tracking."
+      },
+      "CH2": {
+        "type": "_VUMeter",
+        "label_active": "CH 2 (Hold)",
+        "min": -30.0, "max": 0.0, "upper_range": -6.0,
+        "glide_time": 50, "dwell_time": 50, "hold_time": 1000, "fall_time": 500,
+        "width": 110, "height": 12, "notes": "Peak hold."
+      },
+      "CH3": {
+        "type": "_VUMeter",
+        "label_active": "CH 3 (Slow)",
+        "min": -30.0, "max": 0.0, "upper_range": -6.0,
+        "glide_time": 500, "dwell_time": 1000, "hold_time": 0, "fall_time": 2000,
+        "width": 110, "height": 12, "notes": "Damped response."
+      },
+      "CH4": {
+        "type": "_VUMeter",
+        "label_active": "CH 4 (Instant)",
+        "min": -30.0, "max": 0.0, "upper_range": -6.0,
+        "glide_time": 0, "dwell_time": 0, "hold_time": 200, "fall_time": 100,
+        "width": 110, "height": 12, "notes": "Instant rise."
+      },
+      "CH5": {
+        "type": "_VUMeter",
+        "label_active": "CH 5 (Long)",
+        "min": -30.0, "max": 0.0, "upper_range": -6.0,
+        "glide_time": 200, "dwell_time": 200, "hold_time": 3000, "fall_time": 5000,
+        "width": 110, "height": 12, "notes": "Glacial decay."
+      },
+      "CH6": {
+        "type": "_VUMeter",
+        "label_active": "CH 6 (Pulse)",
+        "min": -30.0, "max": 0.0, "upper_range": -6.0,
+        "glide_time": 10, "dwell_time": 5000, "hold_time": 0, "fall_time": 5000,
+        "width": 110, "height": 12, "notes": "Slow fall."
+      },
+      "CH7": {
+        "type": "_VUMeter",
+        "label_active": "CH 7 (Neon)",
+        "min": -30.0, "max": 0.0, "upper_range": -6.0,
+        "Lower_range_colour": "#E91E63", "upper_range_Colour": "#00FF00",
+        "glide_time": 100, "dwell_time": 100, "hold_time": 500, "fall_time": 800,
+        "width": 110, "height": 12, "notes": "Vibrant colors."
+      },
+      "CH8": {
+        "type": "_VUMeter",
+        "label_active": "CH 8 (Soft)",
+        "min": -30.0, "max": 0.0, "upper_range": -6.0,
+        "Lower_range_colour": "#03A9F4", "upper_range_Colour": "#FFEB3B",
+        "glide_time": 300, "dwell_time": 300, "hold_time": 0, "fall_time": 1200,
+        "width": 110, "height": 12, "notes": "Soft blue/yellow."
+      }
     }
   }
-}}
+}

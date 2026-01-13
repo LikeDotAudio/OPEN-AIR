@@ -79,6 +79,9 @@ class GuiBatchBuilderMixin:
 
                 if isinstance(value, dict):
                     widget_type = value.get("type")
+                    if not widget_type and "widget_type" in value:
+                        widget_type = value.get("widget_type")
+                    
                     layout = value.get("layout", {})
                     col_span = int(layout.get("col_span", 1))
                     row_span = int(layout.get("row_span", 1))
@@ -212,6 +215,9 @@ class GuiBatchBuilderMixin:
 
                 if isinstance(value, dict):
                     widget_type = value.get("type")
+                    if not widget_type and "widget_type" in value:
+                        widget_type = value.get("widget_type")
+                    
                     layout = value.get("layout", {})
                     col_span = int(layout.get("col_span", 1))
                     row_span = int(layout.get("row_span", 1))

@@ -1,0 +1,24 @@
+{
+  "ltp_fader_freestyle": {
+    "type": "_CustomLTP",
+    "label_active": "LTP Freestyle Test",
+    "value_min": -50.0,
+    "value_max": 50.0,
+    "value_default": 0.0,
+    "rotation_default": 0.0,
+    "log_exponent": 1.0,
+    "freestyle": true,
+    "border_width": 1,
+    "border_color": "#444444",
+    "cap_color": "#dcdcdc",
+    "cap_radius": 18,
+    "tick_size": 0.2,
+    "value_follow": true,
+    "layout": {
+        "width": 400,
+        "height": 400,
+        "font": 12,
+        "colour": "#FFFFFF"
+    }
+  }
+}

@@ -95,6 +95,12 @@ from .builder_audio.dynamic_gui_create_trapezoid_toggler import (
 )
 from workers.builder.builder_audio.dynamic_gui_create_knob import KnobCreatorMixin
 from workers.builder.builder_audio.dynamic_gui_create_dial import DialCreatorMixin
+from .builder_audio.dynamic_gui_create_custom_dual_horizontal_fader import (
+    CustomDualHorizontalFaderCreatorMixin,
+)
+from .builder_audio.dynamic_gui_create_custom_LTP import (
+    CustomLTPCreatorMixin,
+)
 
 
 class DynamicGuiBuilder(
@@ -145,6 +151,8 @@ class DynamicGuiBuilder(
     TrapezoidButtonTogglerCreatorMixin,
     KnobCreatorMixin,
     DialCreatorMixin,
+    CustomDualHorizontalFaderCreatorMixin,
+    CustomLTPCreatorMixin,
 ):
     # Initializes the DynamicGuiBuilder, a comprehensive class that constructs a GUI from a JSON configuration.
     # It integrates various mixins for handling styling, widget creation, MQTT communication, and more.

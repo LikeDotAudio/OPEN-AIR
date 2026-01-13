@@ -55,6 +55,8 @@ class GuiWidgetFactoryMixin:
             "_DirectionalButtons": self._create_directional_buttons,
             "_CustomFader": self._create_custom_fader,
             "_CustomHorizontalFader": self._create_custom_horizontal_fader,
+            "_CustomDualHorizontalFader": self._create_custom_dual_horizontal_fader,
+            "_CustomLTP": self._create_custom_ltp,
             "_NeedleVUMeter": self._create_needle_vu_meter,
             "_Panner": self._create_panner,
             "_TrapezoidButton": self._create_trapezoid_button,

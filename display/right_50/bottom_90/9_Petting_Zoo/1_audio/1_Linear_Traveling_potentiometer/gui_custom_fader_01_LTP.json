@@ -1,0 +1,23 @@
+{
+  "ltp_fader_test": {
+    "type": "_CustomLTP",
+    "label_active": "LTP Test",
+    "value_min": -50.0,
+    "value_max": 50.0,
+    "value_default": 0.0,
+    "rotation_default": 0.0,
+    "log_exponent": 1.0,
+    "border_width": 1,
+    "border_color": "#444444",
+    "cap_color": "Orange",
+    "cap_radius": 18,
+    "tick_size": 0.2,
+    "value_follow": true,
+    "layout": {
+        "width": 150, 
+        "height": 400,
+        "font": 12,
+        "colour": "#FFFFFF"
+    }
+  }
+}

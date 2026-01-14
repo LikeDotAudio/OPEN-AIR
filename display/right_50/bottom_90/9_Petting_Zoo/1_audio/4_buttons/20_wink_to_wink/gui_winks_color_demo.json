@@ -1,0 +1,113 @@
+{
+  "Wink_Color_Transition_Demo": {
+    "type": "OcaBlock",
+    "description": "Wink Buttons: Color-to-Color & Text Reveal Transitions",
+    "layout_columns": 4,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "wink_col_01_std": {
+        "type": "_WinkButton",
+        "label_active": "STD",
+        "shape_type": "rect",
+        "width": 80, "height": 50,
+        "color": "#FF0000",
+        "shutter_color": "black",
+        "text_inside": "HOT",
+        "text_inside_color": "black",
+        "latching": false,
+        "notes": "Standard Black -> Red Reveal"
+      },
+      "wink_col_02_blue_yellow": {
+        "type": "_WinkButton",
+        "label_active": "B->Y",
+        "shape_type": "square",
+        "width": 70, "height": 70,
+        "color": "#FFFF00",
+        "shutter_color": "#0000FF",
+        "latching": true,
+        "notes": "Blue Shutters -> Yellow Neon"
+      },
+      "wink_col_03_text_swap": {
+        "type": "_WinkButton",
+        "label_active": "TXT",
+        "shape_type": "round",
+        "width": 80, "height": 80,
+        "color": "#39FF14",
+        "shutter_color": "#222222",
+        "text_closed": "OFF",
+        "text_closed_color": "gray",
+        "text_inside": "ON",
+        "text_inside_color": "black",
+        "latching": true,
+        "notes": "OFF (Grey on Dark) -> ON (Black on Green)"
+      },
+      "wink_col_04_same_reveal": {
+        "type": "_WinkButton",
+        "label_active": "SAME",
+        "shape_type": "rect",
+        "width": 100, "height": 40,
+        "color": "#FFA500",
+        "shutter_color": "#FFA500",
+        "text_inside": "ACTIVE",
+        "text_inside_color": "white",
+        "latching": true,
+        "notes": "Orange -> Orange (Reveals Text Only)"
+      },
+      "wink_col_05_inv_mono": {
+        "type": "_WinkButton",
+        "label_active": "INV",
+        "shape_type": "square",
+        "width": 60, "height": 60,
+        "color": "black",
+        "shutter_color": "white",
+        "text_closed": "WHT",
+        "text_inside": "BLK",
+        "text_inside_color": "white",
+        "latching": false,
+        "notes": "White Shutters -> Black Neon"
+      },
+      "wink_col_06_warn": {
+        "type": "_WinkButton",
+        "label_active": "WARN",
+        "shape_type": "rect",
+        "width": 120, "height": 60,
+        "color": "#FF0000",
+        "shutter_color": "#FFFF00",
+        "text_closed": "CAUTION",
+        "text_closed_color": "black",
+        "text_inside": "DANGER",
+        "text_inside_color": "white",
+        "latching": true,
+        "radius": 10,
+        "notes": "Yellow (Caution) -> Red (Danger)"
+      },
+      "wink_col_07_stealth": {
+        "type": "_WinkButton",
+        "label_active": "STLTH",
+        "shape_type": "round",
+        "width": 60, "height": 60,
+        "color": "#444444",
+        "shutter_color": "#333333",
+        "border_thickness": 1,
+        "latching": true,
+        "notes": "Subtle Dark Grey -> Lighter Grey"
+      },
+      "wink_col_08_party": {
+        "type": "_WinkButton",
+        "label_active": "PARTY",
+        "shape_type": "square",
+        "width": 80, "height": 80,
+        "color": "#FF00FF",
+        "shutter_color": "#00FFFF",
+        "text_closed": "COOL",
+        "text_closed_color": "navy",
+        "text_inside": "HOT!",
+        "text_inside_color": "yellow",
+        "latching": false,
+        "notes": "Cyan -> Magenta (Party Colors)"
+      }
+    }
+  }
+}

@@ -127,6 +127,10 @@ class TrapezoidButtonTogglerCreatorMixin(TrapezoidButtonCreatorMixin):
             full_config = config.copy()
             full_config.update(button_config)
 
+            button_text = full_config.get("button_text", "")
+            if button_text:
+                full_config["button_text"] = button_text[:3]
+
             width = full_config.get("width", 50)
             height = full_config.get("height", 40)
             base_color = full_config.get("color", "#333333")

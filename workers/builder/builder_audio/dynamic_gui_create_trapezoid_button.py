@@ -46,6 +46,11 @@ class TrapezoidButtonCreatorMixin:
 
         # Extract only widget-specific config from config_data
         label = config_data.get("label_active")
+        button_text = config_data.get("button_text", "")
+        if button_text:
+            button_text = button_text[:3]
+            config_data["button_text"] = button_text
+
         config = config_data  # config_data is the config
         path = config_data.get("path")
 
@@ -222,6 +227,24 @@ class TrapezoidButtonCreatorMixin:
                 light_y + light_radius,
                 fill=self._adjust_color(led_color, 1.5),
                 outline=self._adjust_color(led_color, 2.0),
+            )
+
+        # --- Button Text ---
+        button_text = config.get("button_text", "")
+        if button_text:
+            text_x = width / 2
+            # Calculate position based on light position or default
+            light_radius = config.get("light_radius", 5) * 1.2
+            light_y = depth + light_radius + 5
+            text_y = light_y + light_radius + 8  # Position below light
+
+            canvas.create_text(
+                text_x,
+                text_y,
+                text=button_text,
+                fill=self._adjust_color(base_color, 3.0),  # High contrast
+                font=("Arial", 9, "bold"),
+                anchor="center",
             )
 
     # Adjusts a hex color's brightness by a given factor.

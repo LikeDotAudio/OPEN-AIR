@@ -1,0 +1,42 @@
+{
+  "Wink_Buttons_Demo_Orange_Variations": {
+    "type": "OcaBlock",
+    "description": "30 Variations of Orange Wink Buttons (Speed & Latching)",
+    "layout_columns": 5,
+    "column_sizing": [{"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}],
+    "fields": {
+      "round_01_fast_mom": { "type": "_WinkButton", "label_active": "R1 Fast", "shape_type": "round", "width": 60, "height": 60, "color": "#FF5F1F", "open_speed": 0.2, "close_speed": 0.4, "latching": false },
+      "round_02_slow_lat": { "type": "_WinkButton", "label_active": "R2 Slow", "shape_type": "round", "width": 60, "height": 60, "color": "#FF5F1F", "open_speed": 0.05, "close_speed": 0.05, "latching": true },
+      "round_03_med_mom": { "type": "_WinkButton", "label_active": "R3 Med", "shape_type": "round", "width": 60, "height": 60, "color": "#FF5F1F", "open_speed": 0.1, "close_speed": 0.15, "latching": false, "text_inside": "HI" },
+      "round_04_vfast_lat": { "type": "_WinkButton", "label_active": "R4 VFast", "shape_type": "round", "width": 60, "height": 60, "color": "#FF5F1F", "open_speed": 0.4, "close_speed": 0.4, "latching": true },
+      "round_05_vslow_mom": { "type": "_WinkButton", "label_active": "R5 VSlow", "shape_type": "round", "width": 60, "height": 60, "color": "#FF5F1F", "open_speed": 0.02, "close_speed": 0.04, "latching": false },
+      "round_06_fast_lat": { "type": "_WinkButton", "label_active": "R6 Fast", "shape_type": "round", "width": 60, "height": 60, "color": "#FF5F1F", "open_speed": 0.2, "close_speed": 0.2, "latching": true },
+      "round_07_slow_mom": { "type": "_WinkButton", "label_active": "R7 Slow", "shape_type": "round", "width": 60, "height": 60, "color": "#FF5F1F", "open_speed": 0.05, "close_speed": 0.08, "latching": false },
+      "round_08_med_lat": { "type": "_WinkButton", "label_active": "R8 Med", "shape_type": "round", "width": 60, "height": 60, "color": "#FF5F1F", "open_speed": 0.12, "close_speed": 0.2, "latching": true, "text_inside": "OK" },
+      "round_09_snap_mom": { "type": "_WinkButton", "label_active": "R9 Snap", "shape_type": "round", "width": 60, "height": 60, "color": "#FF5F1F", "open_speed": 0.3, "close_speed": 0.5, "latching": false },
+      "round_10_crawl_lat": { "type": "_WinkButton", "label_active": "R10 Crawl", "shape_type": "round", "width": 60, "height": 60, "color": "#FF5F1F", "open_speed": 0.01, "close_speed": 0.01, "latching": true },
+
+      "square_01_fast_mom": { "type": "_WinkButton", "label_active": "S1 Fast", "shape_type": "square", "width": 60, "height": 60, "color": "#FF5F1F", "radius": 5, "open_speed": 0.25, "close_speed": 0.3, "latching": false },
+      "square_02_slow_lat": { "type": "_WinkButton", "label_active": "S2 Slow", "shape_type": "square", "width": 60, "height": 60, "color": "#FF5F1F", "radius": 5, "open_speed": 0.04, "close_speed": 0.06, "latching": true },
+      "square_03_med_mom": { "type": "_WinkButton", "label_active": "S3 Med", "shape_type": "square", "width": 60, "height": 60, "color": "#FF5F1F", "radius": 15, "open_speed": 0.1, "close_speed": 0.1, "latching": false, "text_inside": "ON" },
+      "square_04_vfast_lat": { "type": "_WinkButton", "label_active": "S4 VFast", "shape_type": "square", "width": 60, "height": 60, "color": "#FF5F1F", "radius": 0, "open_speed": 0.5, "close_speed": 0.5, "latching": true },
+      "square_05_vslow_mom": { "type": "_WinkButton", "label_active": "S5 VSlow", "shape_type": "square", "width": 60, "height": 60, "color": "#FF5F1F", "radius": 5, "open_speed": 0.02, "close_speed": 0.02, "latching": false },
+      "square_06_fast_lat": { "type": "_WinkButton", "label_active": "S6 Fast", "shape_type": "square", "width": 60, "height": 60, "color": "#FF5F1F", "radius": 20, "open_speed": 0.2, "close_speed": 0.2, "latching": true },
+      "square_07_slow_mom": { "type": "_WinkButton", "label_active": "S7 Slow", "shape_type": "square", "width": 60, "height": 60, "color": "#FF5F1F", "radius": 5, "open_speed": 0.06, "close_speed": 0.1, "latching": false },
+      "square_08_med_lat": { "type": "_WinkButton", "label_active": "S8 Med", "shape_type": "square", "width": 60, "height": 60, "color": "#FF5F1F", "radius": 10, "open_speed": 0.15, "close_speed": 0.15, "latching": true, "text_inside": "GO" },
+      "square_09_snap_mom": { "type": "_WinkButton", "label_active": "S9 Snap", "shape_type": "square", "width": 60, "height": 60, "color": "#FF5F1F", "radius": 5, "open_speed": 0.3, "close_speed": 0.6, "latching": false },
+      "square_10_crawl_lat": { "type": "_WinkButton", "label_active": "S10 Crawl", "shape_type": "square", "width": 60, "height": 60, "color": "#FF5F1F", "radius": 25, "open_speed": 0.01, "close_speed": 0.01, "latching": true },
+
+      "rect_01_fast_mom": { "type": "_WinkButton", "label_active": "R1 Fast", "shape_type": "rect", "width": 80, "height": 40, "color": "#FF5F1F", "radius": 5, "open_speed": 0.2, "close_speed": 0.3, "latching": false },
+      "rect_02_slow_lat": { "type": "_WinkButton", "label_active": "R2 Slow", "shape_type": "rect", "width": 80, "height": 40, "color": "#FF5F1F", "radius": 5, "open_speed": 0.05, "close_speed": 0.05, "latching": true },
+      "rect_03_med_mom": { "type": "_WinkButton", "label_active": "R3 Med", "shape_type": "rect", "width": 80, "height": 40, "color": "#FF5F1F", "radius": 10, "open_speed": 0.1, "close_speed": 0.15, "latching": false, "text_inside": "TXT" },
+      "rect_04_vfast_lat": { "type": "_WinkButton", "label_active": "R4 VFast", "shape_type": "rect", "width": 80, "height": 40, "color": "#FF5F1F", "radius": 0, "open_speed": 0.4, "close_speed": 0.4, "latching": true },
+      "rect_05_vslow_mom": { "type": "_WinkButton", "label_active": "R5 VSlow", "shape_type": "rect", "width": 80, "height": 40, "color": "#FF5F1F", "radius": 5, "open_speed": 0.02, "close_speed": 0.03, "latching": false },
+      "rect_06_fast_lat": { "type": "_WinkButton", "label_active": "R6 Fast", "shape_type": "rect", "width": 80, "height": 40, "color": "#FF5F1F", "radius": 15, "open_speed": 0.2, "close_speed": 0.2, "latching": true },
+      "rect_07_slow_mom": { "type": "_WinkButton", "label_active": "R7 Slow", "shape_type": "rect", "width": 80, "height": 40, "color": "#FF5F1F", "radius": 5, "open_speed": 0.05, "close_speed": 0.08, "latching": false },
+      "rect_08_med_lat": { "type": "_WinkButton", "label_active": "R8 Med", "shape_type": "rect", "width": 80, "height": 40, "color": "#FF5F1F", "radius": 8, "open_speed": 0.12, "close_speed": 0.2, "latching": true, "text_inside": "yay" },
+      "rect_09_snap_mom": { "type": "_WinkButton", "label_active": "R9 Snap", "shape_type": "rect", "width": 80, "height": 40, "color": "#FF5F1F", "radius": 2, "open_speed": 0.3, "close_speed": 0.5, "latching": false },
+      "rect_10_crawl_lat": { "type": "_WinkButton", "label_active": "R10 Crawl", "shape_type": "rect", "width": 80, "height": 40, "color": "#FF5F1F", "radius": 20, "open_speed": 0.01, "close_speed": 0.01, "latching": true }
+    }
+  }
+}

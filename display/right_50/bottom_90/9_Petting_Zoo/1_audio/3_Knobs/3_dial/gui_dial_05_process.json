@@ -1,0 +1,85 @@
+{
+  "Dial_Zoo_Process": {
+    "type": "OcaBlock",
+    "description": "Process/Progress Dial Variations",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "dial_proc1": {
+        "type": "_Dial",
+        "label_active": "Loading",
+        "value_default": 10.0,
+        "piechart": true, "pointer": false,
+        "width": 50, "height": 50,
+        "indicator_color": "#B0BEC5",
+        "notes": "Start"
+      },
+      "dial_proc2": {
+        "type": "_Dial",
+        "label_active": "Stage 1",
+        "value_default": 25.0,
+        "piechart": true, "pointer": false,
+        "width": 50, "height": 50,
+        "indicator_color": "#90CAF9",
+        "notes": "Blue Light"
+      },
+      "dial_proc3": {
+        "type": "_Dial",
+        "label_active": "Stage 2",
+        "value_default": 50.0,
+        "piechart": true, "pointer": false,
+        "width": 50, "height": 50,
+        "indicator_color": "#64B5F6",
+        "notes": "Blue Med"
+      },
+      "dial_proc4": {
+        "type": "_Dial",
+        "label_active": "Stage 3",
+        "value_default": 75.0,
+        "piechart": true, "pointer": false,
+        "width": 50, "height": 50,
+        "indicator_color": "#2196F3",
+        "notes": "Blue Dark"
+      },
+      "dial_proc5": {
+        "type": "_Dial",
+        "label_active": "Complete",
+        "value_default": 100.0,
+        "piechart": true, "pointer": false,
+        "width": 50, "height": 50,
+        "indicator_color": "#4CAF50",
+        "notes": "Green Done"
+      },
+      "dial_proc6": {
+        "type": "_Dial",
+        "label_active": "Error",
+        "value_default": 88.0,
+        "piechart": true, "pointer": true,
+        "width": 50, "height": 50,
+        "indicator_color": "#F44336",
+        "notes": "Red Error"
+      },
+      "dial_proc7": {
+        "type": "_Dial",
+        "label_active": "Warning",
+        "value_default": 60.0,
+        "piechart": true, "pointer": true,
+        "width": 50, "height": 50,
+        "indicator_color": "#FFC107",
+        "notes": "Amber Warn"
+      },
+      "dial_proc8": {
+        "type": "_Dial",
+        "label_active": "Unknown",
+        "value_default": 0.0,
+        "piechart": false, "pointer": true,
+        "width": 50, "height": 50,
+        "indicator_color": "#9E9E9E",
+        "notes": "Grey Unknown"
+      }
+    }
+  }
+}

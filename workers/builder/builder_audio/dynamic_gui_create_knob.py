@@ -115,6 +115,8 @@ class KnobCreatorMixin:
         max_val = float(config.get("max", 100.0))
         reff_point = float(config.get("reff_point", (min_val + max_val) / 2.0))
         value_default = float(config.get("value_default", 0.0))
+        infinity = config.get("infinity", False)
+        fine_pitch = config.get("fine_pitch", False)
 
         knob_value_var = tk.DoubleVar(value=value_default)
         drag_state = {"start_y": None, "start_value": None}
@@ -126,8 +128,26 @@ class KnobCreatorMixin:
         def on_knob_drag(event):
             if drag_state["start_y"] is None: return
             dy = drag_state["start_y"] - event.y
-            sensitivity = (max_val - min_val) / 100.0
-            new_val = max(min_val, min(max_val, drag_state["start_value"] + (dy * sensitivity)))
+            
+            # Sensitivity Logic
+            # Standard: Full range in ~200 pixels
+            base_sensitivity = (max_val - min_val) / 200.0
+            if fine_pitch:
+                base_sensitivity /= 10.0
+            
+            # Ctrl(4) + Alt(8) = 12
+            if (event.state & 0x000C) == 0x000C: 
+                base_sensitivity /= 2.0
+
+            delta = dy * base_sensitivity
+            raw_new_val = drag_state["start_value"] + delta
+
+            if infinity:
+                 range_span = max_val - min_val
+                 new_val = min_val + ((raw_new_val - min_val) % range_span)
+            else:
+                new_val = max(min_val, min(max_val, raw_new_val))
+
             if knob_value_var.get() != new_val:
                 knob_value_var.set(new_val)
                 state_mirror_engine.broadcast_gui_change_to_mqtt(path)
@@ -147,22 +167,66 @@ class KnobCreatorMixin:
             command=None,
         )
 
+        # Text Position Logic (label_Text_position)
+        text_pos = config.get("label_Text_position", "top").lower()
         if label and config.get("show_label", True):
-            ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
+            lbl = ttk.Label(frame, text=label)
+            if text_pos == "top":
+                lbl.pack(side=tk.TOP, pady=(0, 5))
+            elif text_pos == "bottom":
+                lbl.pack(side=tk.BOTTOM, pady=(5, 0))
+            elif text_pos == "left":
+                lbl.pack(side=tk.LEFT, padx=(0, 5))
+            elif text_pos == "right":
+                lbl.pack(side=tk.RIGHT, padx=(5, 0))
+            else:
+                lbl.pack(side=tk.TOP, pady=(0, 5))
 
         try:
             width, height = config.get("width", 50), config.get("height", 50)
             canvas = tk.Canvas(frame, width=width, height=height, bg=bg_color, highlightthickness=0)
-            canvas.pack()
+            
+            if text_pos in ["left", "right"]:
+                canvas.pack(side=tk.LEFT if text_pos == "right" else tk.RIGHT, expand=True)
+            else:
+                canvas.pack(expand=True)
 
+            # Value Position Logic (Value_text_position)
+            value_pos = config.get("Value_text_position", "bottom").lower()
+            
             value_label = ttk.Label(frame, text=f"{int(knob_value_var.get())}", font=("Helvetica", 8))
-            value_label.pack(side=tk.BOTTOM)
+            
+            if value_pos == "center":
+                pass 
+            elif value_pos == "top":
+                value_label.pack(side=tk.TOP, before=canvas)
+            elif value_pos == "bottom":
+                value_label.pack(side=tk.BOTTOM, after=canvas)
+            elif value_pos == "left":
+                value_label.pack(side=tk.LEFT, before=canvas)
+            elif value_pos == "right":
+                value_label.pack(side=tk.RIGHT, after=canvas)
 
             visual_props = {"secondary": secondary_color}
             hover_color = "#999999"
+            
+            # New visual parameters
+            center_dot = config.get("Center_dot", True)
+            center_dot_color = config.get("Center_dot_colour", None) # If None, use active color
+            show_ticks = config.get("Ticks", False)
+            tick_length = int(config.get("Tick_length", 10))
+            pie_crust = int(config.get("pie_crust", 4))
+            pointer_pad = int(config.get("Pointer_pad", 0))
 
             def update_knob_visuals(*args):
-                self._draw_knob(canvas, width, height, knob_value_var.get(), frame.min_val, frame.max_val, value_label, fg_color, accent_color, indicator_color, visual_props["secondary"])
+                self._draw_knob(
+                    canvas, width, height, knob_value_var.get(), frame.min_val, frame.max_val, 
+                    value_label, fg_color, accent_color, indicator_color, visual_props["secondary"],
+                    value_pos=value_pos,
+                    center_dot=center_dot, center_dot_color=center_dot_color,
+                    show_ticks=show_ticks, tick_length=tick_length,
+                    pie_crust=pie_crust, pointer_pad=pointer_pad
+                )
 
             knob_value_var.trace_add("write", update_knob_visuals)
             update_knob_visuals()
@@ -215,22 +279,74 @@ class KnobCreatorMixin:
             debug_logger(message=f"❌ The knob '{label}' shattered! Error: {e}")
             return None
 
-    def _draw_knob(self, canvas, width, height, value, min_val, max_val, value_label, neutral_color, accent_for_arc, indicator_color, secondary):
+    def _draw_knob(self, canvas, width, height, value, min_val, max_val, value_label, neutral_color, accent_for_arc, indicator_color, secondary, value_pos="bottom", center_dot=True, center_dot_color=None, show_ticks=False, tick_length=10, pie_crust=4, pointer_pad=0):
         canvas.delete("all")
         cx, cy = width / 2, height / 2
+        # Radius for the main ring
         radius = min(width, height) / 2 - 5
-        canvas.create_arc(5, 5, width - 5, height - 5, start=240, extent=-300, style=tk.ARC, outline=secondary, width=4)
+        
+        # If ticks are enabled, we might need to shrink the main ring radius to fit them inside the canvas?
+        # Or assumes user gives enough padding/size.
+        # "Ticks" = true "Tick_length" = 10 this should put 10 pixel line on the outside of the knob
+        # Let's reduce radius if ticks are on to prevent clipping.
+        if show_ticks:
+            radius -= (tick_length + 2)
+            
+        # Draw Background Arc (Crust)
+        canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=240, extent=-300, style=tk.ARC, outline=secondary, width=pie_crust)
+        
         norm_val_0_1 = (value - min_val) / (max_val - min_val) if max_val > min_val else 0
         norm_val = (norm_val_0_1 * 2) - 1 if (min_val < 0 and max_val >= 0) else norm_val_0_1
+        
+        # Color Logic
+        active_color = indicator_color
         if abs(norm_val) < 0.01 and (min_val <= 0 and max_val >= 0):
-            active_color, val_extent = neutral_color, 0
-            value_label.config(foreground=active_color)
+             active_color = neutral_color
+             val_extent = 0
         else:
-            active_color, val_extent = indicator_color, -300 * norm_val_0_1
-            value_label.config(foreground=active_color)
-        canvas.create_arc(5, 5, width - 5, height - 5, start=240, extent=val_extent, style=tk.ARC, outline=active_color, width=4)
+             val_extent = -300 * norm_val_0_1
+             
+        # Update Label
+        if value_pos != "center":
+            value_label.config(foreground=active_color, text=f"{int(value)}")
+        else:
+             canvas.create_text(cx, cy, text=f"{int(value)}", fill=active_color, font=("Helvetica", 8, "bold"))
+
+        # Draw Active Arc
+        canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=240, extent=val_extent, style=tk.ARC, outline=active_color, width=pie_crust)
+        
+        # Pointer Logic
         angle_rad = math.radians(240 + val_extent)
-        px, py = cx + radius * math.cos(angle_rad), cy - radius * math.sin(angle_rad)
-        canvas.create_line(cx, cy, px, py, fill=indicator_color, width=2, capstyle=tk.ROUND)
-        canvas.create_oval(cx - 4, cy - 4, cx + 4, cy + 4, fill=active_color, outline=active_color)
-        value_label.config(text=f"{int(value)}")
+        # Pointer start point (from center + padding)
+        sx = cx + pointer_pad * math.cos(angle_rad)
+        sy = cy - pointer_pad * math.sin(angle_rad)
+        # Pointer end point (to ring)
+        ex = cx + radius * math.cos(angle_rad)
+        ey = cy - radius * math.sin(angle_rad)
+        
+        canvas.create_line(sx, sy, ex, ey, fill=indicator_color, width=2, capstyle=tk.ROUND)
+        
+        # Center Dot
+        if center_dot:
+            dot_col = center_dot_color if center_dot_color else active_color
+            canvas.create_oval(cx - 4, cy - 4, cx + 4, cy + 4, fill=dot_col, outline=dot_col)
+
+        # Draw Ticks
+        if show_ticks:
+            # Start at 240, go -300 degrees.
+            # 15 degree increments.
+            start_angle = 240
+            end_angle = 240 - 300
+            current_angle = start_angle
+            
+            while current_angle >= end_angle:
+                rad = math.radians(current_angle)
+                # Start of tick (at ring radius + gap)
+                ts_x = cx + (radius + 2) * math.cos(rad)
+                ts_y = cy - (radius + 2) * math.sin(rad)
+                # End of tick
+                te_x = cx + (radius + 2 + tick_length) * math.cos(rad)
+                te_y = cy - (radius + 2 + tick_length) * math.sin(rad)
+                
+                canvas.create_line(ts_x, ts_y, te_x, te_y, fill=secondary, width=1)
+                current_angle -= 15

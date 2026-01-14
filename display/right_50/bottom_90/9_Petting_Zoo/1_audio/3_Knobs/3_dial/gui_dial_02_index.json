@@ -1,0 +1,85 @@
+{
+  "Dial_Zoo_Index": {
+    "type": "OcaBlock",
+    "description": "Index Dial Variations",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "dial_idx1": {
+        "type": "_Dial",
+        "label_active": "Index 1",
+        "value_default": 10.0,
+        "piechart": false, "pointer": true,
+        "width": 50, "height": 50,
+        "indicator_color": "#2196F3",
+        "notes": "Blue Pointer"
+      },
+      "dial_idx2": {
+        "type": "_Dial",
+        "label_active": "Index 2",
+        "value_default": 20.0,
+        "piechart": true, "pointer": false,
+        "width": 50, "height": 50,
+        "indicator_color": "#FFC107",
+        "notes": "Amber Pie"
+      },
+      "dial_idx3": {
+        "type": "_Dial",
+        "label_active": "Index 3",
+        "value_default": 30.0,
+        "piechart": true, "pointer": true,
+        "width": 50, "height": 50,
+        "indicator_color": "#4CAF50",
+        "notes": "Green Combo"
+      },
+      "dial_idx4": {
+        "type": "_Dial",
+        "label_active": "Index 4",
+        "value_default": 40.0,
+        "piechart": false, "pointer": true,
+        "width": 30, "height": 30,
+        "indicator_color": "#E91E63",
+        "notes": "Small Pink"
+      },
+      "dial_idx5": {
+        "type": "_Dial",
+        "label_active": "Index 5",
+        "value_default": 50.0,
+        "piechart": true, "pointer": false,
+        "width": 80, "height": 80,
+        "indicator_color": "#9C27B0",
+        "notes": "Large Purple"
+      },
+      "dial_idx6": {
+        "type": "_Dial",
+        "label_active": "Index 6",
+        "value_default": 60.0,
+        "piechart": true, "pointer": true,
+        "width": 60, "height": 60,
+        "indicator_color": "#00BCD4",
+        "notes": "Cyan Combo"
+      },
+      "dial_idx7": {
+        "type": "_Dial",
+        "label_active": "Index 7",
+        "value_default": 70.0,
+        "piechart": false, "pointer": true,
+        "width": 40, "height": 40,
+        "indicator_color": "#FF5722",
+        "notes": "Deep Orange"
+      },
+      "dial_idx8": {
+        "type": "_Dial",
+        "label_active": "Index 8",
+        "value_default": 80.0,
+        "piechart": true, "pointer": true,
+        "width": 70, "height": 70,
+        "indicator_color": "#795548",
+        "notes": "Brown Large"
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "Fader_Zoo_Gain": {
+    "type": "OcaBlock",
+    "description": "Gain Fader Variations",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "fader_gain1": {
+        "type": "_Fader",
+        "label_active": "Input",
+        "min": -20.0, "max": 20.0, "value_default": 0.0,
+        "orientation": "vertical",
+        "height": 200,
+        "indicator_color": "#D32F2F",
+        "notes": "Red Input"
+      },
+      "fader_gain2": {
+        "type": "_Fader",
+        "label_active": "Trim",
+        "min": -10.0, "max": 10.0, "value_default": 0.0,
+        "orientation": "vertical",
+        "height": 150,
+        "indicator_color": "#C2185B",
+        "notes": "Pink Trim"
+      },
+      "fader_gain3": {
+        "type": "_Fader",
+        "label_active": "Drive",
+        "min": 0.0, "max": 100.0, "value_default": 50.0,
+        "orientation": "vertical",
+        "height": 250,
+        "indicator_color": "#7B1FA2",
+        "notes": "Purple Drive"
+      },
+      "fader_gain4": {
+        "type": "_Fader",
+        "label_active": "Makeup",
+        "min": 0.0, "max": 24.0, "value_default": 6.0,
+        "orientation": "vertical",
+        "height": 200,
+        "indicator_color": "#512DA8",
+        "notes": "Deep Purple"
+      },
+      "fader_gain5": {
+        "type": "_Fader",
+        "label_active": "Send",
+        "min": -60.0, "max": 6.0, "value_default": -10.0,
+        "orientation": "vertical",
+        "height": 200,
+        "indicator_color": "#303F9F",
+        "notes": "Indigo Send"
+      },
+      "fader_gain6": {
+        "type": "_Fader",
+        "label_active": "Return",
+        "min": -60.0, "max": 6.0, "value_default": 0.0,
+        "orientation": "vertical",
+        "height": 200,
+        "indicator_color": "#1976D2",
+        "notes": "Blue Return"
+      },
+      "fader_gain7": {
+        "type": "_Fader",
+        "label_active": "Output",
+        "min": -60.0, "max": 0.0, "value_default": -6.0,
+        "orientation": "vertical",
+        "height": 250,
+        "indicator_color": "#0288D1",
+        "notes": "Light Blue Out"
+      },
+      "fader_gain8": {
+        "type": "_Fader",
+        "label_active": "Master",
+        "min": -100.0, "max": 10.0, "value_default": 0.0,
+        "orientation": "vertical",
+        "height": 300,
+        "indicator_color": "#0097A7",
+        "notes": "Cyan Master"
+      }
+    }
+  }
+}

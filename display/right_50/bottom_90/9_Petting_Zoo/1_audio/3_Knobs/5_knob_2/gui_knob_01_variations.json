@@ -1,0 +1,100 @@
+{
+  "Knob_Zoo_Variations": {
+    "type": "OcaBlock",
+    "description": "Knob Styling Variations (Ticks, Dots, Crust)",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "knob_v1": {
+        "type": "_Knob",
+        "label_active": "Ticks On",
+        "min": 0.0, "max": 100.0, "value_default": 50.0,
+        "width": 60, "height": 60,
+        "Ticks": true,
+        "Tick_length": 8,
+        "indicator_color": "#2196F3",
+        "notes": "Standard with ticks"
+      },
+      "knob_v2": {
+        "type": "_Knob",
+        "label_active": "No Dot",
+        "min": 0.0, "max": 100.0, "value_default": 30.0,
+        "width": 60, "height": 60,
+        "Center_dot": false,
+        "Ticks": true,
+        "indicator_color": "#FFC107",
+        "notes": "No center dot"
+      },
+      "knob_v3": {
+        "type": "_Knob",
+        "label_active": "Thick Crust",
+        "min": 0.0, "max": 100.0, "value_default": 75.0,
+        "width": 60, "height": 60,
+        "pie_crust": 10,
+        "Ticks": false,
+        "indicator_color": "#E91E63",
+        "notes": "10px Crust"
+      },
+      "knob_v4": {
+        "type": "_Knob",
+        "label_active": "Float Ptr",
+        "min": 0.0, "max": 100.0, "value_default": 60.0,
+        "width": 60, "height": 60,
+        "Pointer_pad": 15,
+        "Center_dot": true,
+        "Center_dot_colour": "#FFFFFF",
+        "Ticks": true,
+        "indicator_color": "#4CAF50",
+        "notes": "Pad 15px"
+      },
+      "knob_v5": {
+        "type": "_Knob",
+        "label_active": "Long Ticks",
+        "min": 0.0, "max": 100.0, "value_default": 40.0,
+        "width": 70, "height": 70,
+        "Ticks": true,
+        "Tick_length": 15,
+        "indicator_color": "#9C27B0",
+        "notes": "15px Ticks"
+      },
+      "knob_v6": {
+        "type": "_Knob",
+        "label_active": "Red Dot",
+        "min": 0.0, "max": 100.0, "value_default": 20.0,
+        "width": 60, "height": 60,
+        "Center_dot": true,
+        "Center_dot_colour": "#F44336",
+        "indicator_color": "#00BCD4",
+        "notes": "Red Center Dot"
+      },
+      "knob_v7": {
+        "type": "_Knob",
+        "label_active": "Minimal",
+        "min": 0.0, "max": 100.0, "value_default": 10.0,
+        "width": 50, "height": 50,
+        "Ticks": false,
+        "Center_dot": false,
+        "pie_crust": 1,
+        "indicator_color": "#9E9E9E",
+        "notes": "Simple"
+      },
+      "knob_v8": {
+        "type": "_Knob",
+        "label_active": "Maximal",
+        "min": 0.0, "max": 100.0, "value_default": 90.0,
+        "width": 80, "height": 80,
+        "Ticks": true,
+        "Tick_length": 12,
+        "pie_crust": 8,
+        "Pointer_pad": 5,
+        "Center_dot": true,
+        "Center_dot_colour": "#FFFF00",
+        "indicator_color": "#FF5722",
+        "notes": "All Features"
+      }
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "Dial_Zoo_Advanced": {
+    "type": "OcaBlock",
+    "description": "Advanced Dial Features (Infinity, Layout, Thickness)",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "dial_adv1": {
+        "type": "_Dial",
+        "label_active": "Infinite",
+        "min": 0.0, "max": 100.0, "value_default": 0.0,
+        "infinity": true,
+        "width": 60, "height": 60,
+        "indicator_color": "#00BCD4",
+        "notes": "Wraps around 0-100"
+      },
+      "dial_adv2": {
+        "type": "_Dial",
+        "label_active": "Fine Tune",
+        "min": 0.0, "max": 1000.0, "value_default": 500.0,
+        "fine_pitch": true,
+        "width": 60, "height": 60,
+        "indicator_color": "#FFC107",
+        "notes": "10 turns for full range"
+      },
+      "dial_adv3": {
+        "type": "_Dial",
+        "label_active": "Thick Crust",
+        "min": 0.0, "max": 100.0, "value_default": 75.0,
+        "pie_crust_thickness": 10,
+        "width": 60, "height": 60,
+        "indicator_color": "#E91E63",
+        "notes": "10px Crust"
+      },
+      "dial_adv4": {
+        "type": "_Dial",
+        "label_active": "Thin Crust",
+        "min": 0.0, "max": 100.0, "value_default": 25.0,
+        "pie_crust_thickness": 1,
+        "width": 60, "height": 60,
+        "indicator_color": "#8BC34A",
+        "notes": "1px Crust"
+      },
+      "dial_adv5": {
+        "type": "_Dial",
+        "label_active": "Val Top",
+        "min": 0.0, "max": 100.0, "value_default": 50.0,
+        "Value_text_position": "top",
+        "label_Text_position": "bottom",
+        "width": 60, "height": 60,
+        "indicator_color": "#9C27B0",
+        "notes": "Val Top, Text Bot"
+      },
+      "dial_adv6": {
+        "type": "_Dial",
+        "label_active": "Val Left",
+        "min": 0.0, "max": 100.0, "value_default": 60.0,
+        "Value_text_position": "left",
+        "width": 60, "height": 60,
+        "indicator_color": "#FF5722",
+        "notes": "Value on Left"
+      },
+      "dial_adv7": {
+        "type": "_Dial",
+        "label_active": "Val Right",
+        "min": 0.0, "max": 100.0, "value_default": 40.0,
+        "Value_text_position": "right",
+        "width": 60, "height": 60,
+        "indicator_color": "#3F51B5",
+        "notes": "Value on Right"
+      },
+      "dial_adv8": {
+        "type": "_Dial",
+        "label_active": "Full Pie",
+        "min": 0.0, "max": 100.0, "value_default": 100.0,
+        "pie_crust_thickness": 25,
+        "piechart": true,
+        "width": 50, "height": 50,
+        "indicator_color": "#607D8B",
+        "notes": "Super thick crust"
+      }
+    }
+  }
+}

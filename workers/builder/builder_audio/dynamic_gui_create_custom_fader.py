@@ -55,16 +55,31 @@ class CustomFaderFrame(tk.Frame):
         self.label_text = config.get("label_active", "")
         self.outline_col = "black"
         self.outline_width = 1
-        self.ticks = config.get("ticks", None)
-
+        
+        # Ticks logic: config can provide "custom_ticks" explicitly or "ticks"
+        self.custom_ticks = config.get("custom_ticks", config.get("ticks", None))
+        
         # Custom styling
         self.tick_size = config.get("tick_size", fader_style.get("tick_size", 0.1))
+        self.tick_thickness = int(config.get("tick_thickness", fader_style.get("tick_thickness", 1)))
         tick_font_family = config.get("tick_font_family", fader_style.get("tick_font_family", "Helvetica"))
         tick_font_size = config.get("tick_font_size", fader_style.get("tick_font_size", 10))
         self.tick_font = (tick_font_family, tick_font_size)
         self.tick_color = config.get("tick_color", fader_style.get("tick_color", "light grey"))
+        
+        self.unit_text = config.get("unit_text", "")
+        self.unit_color = config.get("unit_color", self.value_color)
+        self.unit_position = config.get("unit_position", "right") # "left" or "right" of the number
+
         self.value_follow = config.get("value_follow", fader_style.get("value_follow", True))
+        self.movement_value_display = config.get("movement_value_display", True) # Master toggle for floating display
         self.value_highlight_color = config.get("value_highlight_color", fader_style.get("value_highlight_color", "#f4902c"))
+        
+        # Fader visual customization
+        self.fader_cap_scale = float(config.get("fader_cap_scale", 1.0))
+        self.fader_track_color = config.get("fader_track_color", config.get("fader_colour", self.track_col))
+        self.fader_grip_color = config.get("fader_grip_color", self.handle_col)
+
         self.is_sliding = False
 
         super().__init__(
@@ -223,7 +238,15 @@ class CustomFaderCreatorMixin:
                     if (frame.max_val - frame.min_val) != 0 else 0
                 )
                 active_color = frame.neutral_color if abs(norm_val) < 0.01 else frame.value_highlight_color
-                value_label.config(text=f"{int(current_fader_val)}", foreground=active_color)
+                
+                val_text = f"{int(current_fader_val)}"
+                if frame.show_units and frame.unit_text:
+                    if frame.unit_position == "left":
+                        val_text = f"{frame.unit_text} {val_text}"
+                    else:
+                        val_text = f"{val_text} {frame.unit_text}"
+                
+                value_label.config(text=val_text, foreground=active_color)
 
             fader_value_var.trace_add("write", on_fader_value_change)
             on_fader_value_change()
@@ -300,25 +323,70 @@ class CustomFaderCreatorMixin:
     def _draw_fader(self, frame_instance, canvas, width, height, value, track_color=None):
         canvas.delete("all")
         cx = width / 2
-        canvas.create_line(cx, 20, cx, height - 20, fill=track_color if track_color else frame_instance.track_col, width=4, capstyle=tk.ROUND)
+        # Use customized track color
+        t_col = frame_instance.fader_track_color if frame_instance.fader_track_color else (track_color if track_color else frame_instance.track_col)
+        
+        canvas.create_line(cx, 20, cx, height - 20, fill=t_col, width=4, capstyle=tk.ROUND)
+        
         norm_value = ((value - frame_instance.min_val) / (frame_instance.max_val - frame_instance.min_val) if (frame_instance.max_val - frame_instance.min_val) != 0 else 0)
         norm_value = max(0.0, min(1.0, norm_value))
         display_norm_pos = max(0.0000001, norm_value) ** (1.0 / frame_instance.log_exponent) if frame_instance.log_exponent != 1.0 else norm_value
         handle_y = (height - 40) * (1.0 - display_norm_pos) + 20
+        
         tick_length_half = width * frame_instance.tick_size
-        tick_values = frame_instance.ticks if frame_instance.ticks is not None else range(int(math.ceil(frame_instance.min_val / 5) * 5), int(math.floor(frame_instance.max_val / 5) * 5) + 1, 5)
+        
+        # Use custom_ticks if provided, otherwise default generation
+        if frame_instance.custom_ticks is not None:
+             tick_values = frame_instance.custom_ticks
+        else:
+             tick_values = range(int(math.ceil(frame_instance.min_val / 5) * 5), int(math.floor(frame_instance.max_val / 5) * 5) + 1, 5)
+
         for i, tick_value in enumerate(tick_values):
             linear_tick_norm = max(0.0, min(1.0, (tick_value - frame_instance.min_val) / (frame_instance.max_val - frame_instance.min_val) if (frame_instance.max_val - frame_instance.min_val) != 0 else 0))
             display_tick_norm = max(0.0000001, linear_tick_norm) ** (1.0 / frame_instance.log_exponent) if frame_instance.log_exponent != 1.0 else linear_tick_norm
             tick_y_pos = (height - 40) * (1 - display_tick_norm) + 20
-            canvas.create_line(cx - tick_length_half, tick_y_pos, cx + tick_length_half, tick_y_pos, fill=frame_instance.tick_color, width=1)
-            if i % 2 == 0:
-                canvas.create_text(cx + 15, tick_y_pos, text=str(int(tick_value)), fill=frame_instance.tick_color, font=frame_instance.tick_font, anchor="w")
-        cap_width, cap_height = 40, 50
-        self._draw_rounded_rectangle(canvas, cx - cap_width / 2, handle_y - cap_height / 2, cx + cap_width / 2, handle_y + cap_height / 2, radius=10, fill=frame_instance.handle_col, outline=frame_instance.track_col)
-        if frame_instance.value_follow and frame_instance.is_sliding:
-            canvas.create_text(cx, handle_y - cap_height / 2 - 5, text=f"{value:.2f}", fill=frame_instance.value_color, anchor="s")
-        canvas.create_line(cx - cap_width * 0.45, handle_y, cx + cap_width * 0.45, handle_y, fill=frame_instance.track_col, width=2)
+            
+            canvas.create_line(cx - tick_length_half, tick_y_pos, cx + tick_length_half, tick_y_pos, fill=frame_instance.tick_color, width=frame_instance.tick_thickness)
+            
+            # Simple logic to avoid overlapping text on every tick if auto-generated, but if custom, show all?
+            # Keeping the i%2 logic for auto, but for custom maybe show all.
+            show_label = True
+            if frame_instance.custom_ticks is None and i % 2 != 0:
+                show_label = False
+            
+            if show_label:
+                t_text = str(int(tick_value))
+                canvas.create_text(cx + 15, tick_y_pos, text=t_text, fill=frame_instance.tick_color, font=frame_instance.tick_font, anchor="w")
+        
+        # Scale Fader Cap
+        scale = frame_instance.fader_cap_scale
+        cap_width, cap_height = 40 * scale, 50 * scale
+        
+        grip_col = frame_instance.fader_grip_color if frame_instance.fader_grip_color else frame_instance.handle_col
+        
+        self._draw_rounded_rectangle(canvas, cx - cap_width / 2, handle_y - cap_height / 2, cx + cap_width / 2, handle_y + cap_height / 2, radius=10 * scale, fill=grip_col, outline=t_col)
+        
+        # Floating Value Display
+        if frame_instance.movement_value_display and frame_instance.value_follow and frame_instance.is_sliding:
+            val_str = f"{value:.2f}"
+            unit = frame_instance.unit_text
+            
+            if frame_instance.show_units and unit:
+                if frame_instance.unit_position == "left":
+                    val_str = f"{unit} {val_str}"
+                else:
+                    val_str = f"{val_str} {unit}"
+            
+            # Position slightly above center line of fader cap
+            text_y = handle_y - 5
+            
+            # Smaller font for movement display
+            small_font = ("Helvetica", 8)
+            
+            canvas.create_text(cx, text_y, text=val_str, fill=frame_instance.value_color, font=small_font, anchor="s")
+            
+        # Grip Lines (scaled)
+        canvas.create_line(cx - cap_width * 0.45, handle_y, cx + cap_width * 0.45, handle_y, fill=t_col, width=2)
         y_offset = cap_height * 0.25
-        canvas.create_line(cx - cap_width * 0.3, handle_y - y_offset, cx + cap_width * 0.3, handle_y - y_offset, fill=frame_instance.track_col, width=1)
-        canvas.create_line(cx - cap_width * 0.3, handle_y + y_offset, cx + cap_width * 0.3, handle_y + y_offset, fill=frame_instance.track_col, width=1)
+        canvas.create_line(cx - cap_width * 0.3, handle_y - y_offset, cx + cap_width * 0.3, handle_y - y_offset, fill=t_col, width=1)
+        canvas.create_line(cx - cap_width * 0.3, handle_y + y_offset, cx + cap_width * 0.3, handle_y + y_offset, fill=t_col, width=1)

@@ -1,0 +1,93 @@
+{
+  "Fader_Zoo_FX": {
+    "type": "OcaBlock",
+    "description": "Effect Send Fader Variations",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "cf_fx1": {
+        "type": "_CustomFader",
+        "label_active": "Reverb",
+        "value_min": 0.0, "value_max": 100.0, "value_default": 30.0,
+        "layout": {"width": 45, "height": 200},
+        "tick_thickness": 1,
+        "show_units": true, "unit_text": "%",
+        "tick_color": "#00796B",
+        "notes": "Teal"
+      },
+      "cf_fx2": {
+        "type": "_CustomFader",
+        "label_active": "Delay",
+        "value_min": 0.0, "value_max": 1000.0, "value_default": 250.0,
+        "layout": {"width": 45, "height": 200},
+        "tick_thickness": 1,
+        "show_units": true, "unit_text": "ms",
+        "tick_color": "#388E3C",
+        "notes": "Green ms"
+      },
+      "cf_fx3": {
+        "type": "_CustomFader",
+        "label_active": "Feedback",
+        "value_min": 0.0, "value_max": 100.0, "value_default": 40.0,
+        "layout": {"width": 45, "height": 200},
+        "tick_thickness": 2,
+        "show_units": true, "unit_text": "%",
+        "tick_color": "#689F38",
+        "notes": "Light Green"
+      },
+      "cf_fx4": {
+        "type": "_CustomFader",
+        "label_active": "Rate",
+        "value_min": 0.1, "value_max": 20.0, "value_default": 5.0,
+        "layout": {"width": 45, "height": 200},
+        "tick_thickness": 1,
+        "show_units": true, "unit_text": "Hz",
+        "tick_color": "#AFB42B",
+        "notes": "Lime Hz"
+      },
+      "cf_fx5": {
+        "type": "_CustomFader",
+        "label_active": "Depth",
+        "value_min": 0.0, "value_max": 100.0, "value_default": 60.0,
+        "layout": {"width": 45, "height": 200},
+        "tick_thickness": 1,
+        "show_units": true, "unit_text": "%",
+        "tick_color": "#FBC02D",
+        "notes": "Yellow"
+      },
+      "cf_fx6": {
+        "type": "_CustomFader",
+        "label_active": "Mix",
+        "value_min": 0.0, "value_max": 100.0, "value_default": 50.0,
+        "layout": {"width": 45, "height": 200},
+        "tick_thickness": 2,
+        "show_units": true, "unit_text": "Dry/Wet",
+        "tick_color": "#FFA000",
+        "notes": "Amber Mix"
+      },
+      "cf_fx7": {
+        "type": "_CustomFader",
+        "label_active": "Width",
+        "value_min": 0.0, "value_max": 200.0, "value_default": 100.0,
+        "layout": {"width": 45, "height": 200},
+        "tick_thickness": 1,
+        "show_units": true, "unit_text": "%",
+        "tick_color": "#F57C00",
+        "notes": "Orange Width"
+      },
+      "cf_fx8": {
+        "type": "_CustomFader",
+        "label_active": "Master FX",
+        "value_min": -60.0, "value_max": 6.0, "value_default": -6.0,
+        "layout": {"width": 45, "height": 200},
+        "tick_thickness": 3,
+        "show_units": true, "unit_text": "dB",
+        "tick_color": "#E64A19",
+        "notes": "Deep Orange"
+      }
+    }
+  }
+}

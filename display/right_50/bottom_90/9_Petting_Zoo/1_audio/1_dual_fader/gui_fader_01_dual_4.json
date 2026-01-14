@@ -1,0 +1,25 @@
+{
+  "stereo_balance": {
+    "type": "_CustomDualHorizontalFader",
+    "label_active": "Stereo Width Control",
+    "label_v1": "LEFT",
+    "label_v2": "RIGHT",
+    "delta_absolute": false,
+    "value_min": -50.0,
+    "value_max": 50.0,
+    "value_default_v1": -25.0,
+    "value_default_v2": 25.0,
+    "log_exponent": 1.0,
+    "value_highlight_color": "#00FFFF",
+    "cap_color": "#2F4F4F",
+    "cap_width": 55,
+    "cap_radius": 12,
+    "value_follow": true,
+    "layout": {
+        "width": 600,
+        "height": 140,
+        "font": 16,
+        "colour": "#00FFFF"
+    }
+  }
+}

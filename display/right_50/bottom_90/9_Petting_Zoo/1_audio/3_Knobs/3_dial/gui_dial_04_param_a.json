@@ -1,0 +1,85 @@
+{
+  "Dial_Zoo_Param": {
+    "type": "OcaBlock",
+    "description": "Parameter Dial Variations",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "dial_prm1": {
+        "type": "_Dial",
+        "label_active": "Param A",
+        "value_default": 50.0,
+        "piechart": true, "pointer": true,
+        "width": 60, "height": 60,
+        "indicator_color": "#00E5FF",
+        "notes": "Cyan Electric"
+      },
+      "dial_prm2": {
+        "type": "_Dial",
+        "label_active": "Param B",
+        "value_default": 25.0,
+        "piechart": false, "pointer": true,
+        "width": 60, "height": 60,
+        "indicator_color": "#D50000",
+        "notes": "Red Tech"
+      },
+      "dial_prm3": {
+        "type": "_Dial",
+        "label_active": "Param C",
+        "value_default": 75.0,
+        "piechart": true, "pointer": false,
+        "width": 60, "height": 60,
+        "indicator_color": "#64DD17",
+        "notes": "Lime Tech"
+      },
+      "dial_prm4": {
+        "type": "_Dial",
+        "label_active": "Mix X",
+        "value_default": 10.0,
+        "piechart": true, "pointer": true,
+        "width": 50, "height": 50,
+        "indicator_color": "#AA00FF",
+        "notes": "Purple Deep"
+      },
+      "dial_prm5": {
+        "type": "_Dial",
+        "label_active": "Mix Y",
+        "value_default": 90.0,
+        "piechart": false, "pointer": true,
+        "width": 50, "height": 50,
+        "indicator_color": "#FF6D00",
+        "notes": "Orange Blaze"
+      },
+      "dial_prm6": {
+        "type": "_Dial",
+        "label_active": "Mod 1",
+        "value_default": 33.0,
+        "piechart": true, "pointer": false,
+        "width": 40, "height": 40,
+        "indicator_color": "#304FFE",
+        "notes": "Indigo"
+      },
+      "dial_prm7": {
+        "type": "_Dial",
+        "label_active": "Mod 2",
+        "value_default": 66.0,
+        "piechart": true, "pointer": true,
+        "width": 70, "height": 70,
+        "indicator_color": "#00C853",
+        "notes": "Green Bright"
+      },
+      "dial_prm8": {
+        "type": "_Dial",
+        "label_active": "Master",
+        "value_default": 100.0,
+        "piechart": true, "pointer": true,
+        "width": 90, "height": 90,
+        "indicator_color": "#263238",
+        "notes": "Dark Master"
+      }
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "Knob_Petting_Zoo": {
+    "type": "OcaBlock",
+    "description": "Knob Variations (Petting Zoo)",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "knob_01": {
+        "type": "_Knob",
+        "label_active": "Std Brown",
+        "min": 0.0,
+        "max": 100.0,
+        "value_default": 70.0,
+        "width": 50,
+        "height": 50,
+        "indicator_color": "#996633",
+        "notes": "Standard size, brown"
+      },
+      "knob_02": {
+        "type": "_Knob",
+        "label_active": "Sm Red",
+        "min": 0.0,
+        "max": 100.0,
+        "value_default": 20.0,
+        "width": 30,
+        "height": 30,
+        "indicator_color": "#FF0000",
+        "notes": "Small size, red"
+      },
+      "knob_03": {
+        "type": "_Knob",
+        "label_active": "Lg Blue",
+        "min": 0.0,
+        "max": 100.0,
+        "value_default": 80.0,
+        "width": 80,
+        "height": 80,
+        "indicator_color": "#0000FF",
+        "notes": "Large size, blue"
+      },
+      "knob_04": {
+        "type": "_Knob",
+        "label_active": "Med Green",
+        "min": 0.0,
+        "max": 100.0,
+        "value_default": 50.0,
+        "width": 50,
+        "height": 50,
+        "indicator_color": "#00FF00",
+        "notes": "Medium size, green"
+      },
+      "knob_05": {
+        "type": "_Knob",
+        "label_active": "Tiny Yel",
+        "min": 0.0,
+        "max": 100.0,
+        "value_default": 10.0,
+        "width": 25,
+        "height": 25,
+        "indicator_color": "#FFFF00",
+        "notes": "Tiny size, yellow"
+      },
+      "knob_06": {
+        "type": "_Knob",
+        "label_active": "Giant Cyn",
+        "min": 0.0,
+        "max": 100.0,
+        "value_default": 90.0,
+        "width": 100,
+        "height": 100,
+        "indicator_color": "#00FFFF",
+        "notes": "Giant size, cyan"
+      },
+      "knob_07": {
+        "type": "_Knob",
+        "label_active": "Med Mag",
+        "min": 0.0,
+        "max": 100.0,
+        "value_default": 60.0,
+        "width": 50,
+        "height": 50,
+        "indicator_color": "#FF00FF",
+        "notes": "Medium size, magenta"
+      },
+      "knob_08": {
+        "type": "_Knob",
+        "label_active": "Lg Orange",
+        "min": 0.0,
+        "max": 100.0,
+        "value_default": 40.0,
+        "width": 80,
+        "height": 80,
+        "indicator_color": "#FFA500",
+        "notes": "Large size, orange"
+      }
+    }
+  }
+}

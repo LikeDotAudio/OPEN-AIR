@@ -1,0 +1,85 @@
+{
+  "Fader_Zoo_Threshold": {
+    "type": "OcaBlock",
+    "description": "Threshold Fader Variations",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "fader_thr1": {
+        "type": "_Fader",
+        "label_active": "Gate Thr",
+        "min": -80.0, "max": 0.0, "value_default": -40.0,
+        "orientation": "vertical",
+        "height": 250,
+        "indicator_color": "#5D4037",
+        "notes": "Brown Gate"
+      },
+      "fader_thr2": {
+        "type": "_Fader",
+        "label_active": "Comp Thr",
+        "min": -60.0, "max": 0.0, "value_default": -20.0,
+        "orientation": "vertical",
+        "height": 250,
+        "indicator_color": "#616161",
+        "notes": "Grey Comp"
+      },
+      "fader_thr3": {
+        "type": "_Fader",
+        "label_active": "Limiter",
+        "min": -20.0, "max": 0.0, "value_default": -1.0,
+        "orientation": "vertical",
+        "height": 250,
+        "indicator_color": "#455A64",
+        "notes": "Blue Grey"
+      },
+      "fader_thr4": {
+        "type": "_Fader",
+        "label_active": "Expander",
+        "min": -80.0, "max": 0.0, "value_default": -50.0,
+        "orientation": "vertical",
+        "height": 250,
+        "indicator_color": "#000000",
+        "notes": "Black Exp"
+      },
+      "fader_thr5": {
+        "type": "_Fader",
+        "label_active": "DeEss",
+        "min": -40.0, "max": 0.0, "value_default": -15.0,
+        "orientation": "vertical",
+        "height": 250,
+        "indicator_color": "#D32F2F",
+        "notes": "Red DeEss"
+      },
+      "fader_thr6": {
+        "type": "_Fader",
+        "label_active": "Ducker",
+        "min": -60.0, "max": 0.0, "value_default": -30.0,
+        "orientation": "vertical",
+        "height": 250,
+        "indicator_color": "#C2185B",
+        "notes": "Pink Ducker"
+      },
+      "fader_thr7": {
+        "type": "_Fader",
+        "label_active": "Floor",
+        "min": -100.0, "max": -40.0, "value_default": -80.0,
+        "orientation": "vertical",
+        "height": 250,
+        "indicator_color": "#7B1FA2",
+        "notes": "Purple Floor"
+      },
+      "fader_thr8": {
+        "type": "_Fader",
+        "label_active": "Ceiling",
+        "min": -20.0, "max": 0.0, "value_default": -0.1,
+        "orientation": "vertical",
+        "height": 250,
+        "indicator_color": "#512DA8",
+        "notes": "Deep Purple"
+      }
+    }
+  }
+}

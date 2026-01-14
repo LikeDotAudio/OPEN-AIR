@@ -1,0 +1,44 @@
+{
+  "Large_Console_Bank": {
+    "type": "OcaBlock",
+    "description": "Large Console Meters (Size 250)",
+    "layout_columns": 4,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "Large_L": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Master Left (Hold 200ms)",
+        "size": 400,
+        "min": -30.0, "max": 6.0, "upper_range": 0.0,
+        "glide_time": 300,
+        "dwell_time": 600,
+        "hold_time": 200,
+        "fall_time": 1500,
+        "Lower_range_colour": "#E0E0E0",
+        "upper_range_Colour": "#FF5722",
+        "Pointer_colour": "#FF0000",
+        "value_default": -30.0,
+        "No_Values": true,
+        "notes": "Classic console look."
+      },
+      "Large_R": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Master Right (Hold 200ms)",
+        "size": 500,
+        "min": -30.0, "max": 6.0, "upper_range": 0.0,
+        "glide_time": 300,
+        "dwell_time": 600,
+        "hold_time": 200,
+        "fall_time": 1500,
+        "Lower_range_colour": "#E0E0E0",
+        "upper_range_Colour": "#FF5722",
+        "Pointer_colour": "#FF0000",
+        "value_default": -30.0,
+        "No_Values": true,
+        "notes": "Matching right channel."
+      }
+    }
+  }
+}

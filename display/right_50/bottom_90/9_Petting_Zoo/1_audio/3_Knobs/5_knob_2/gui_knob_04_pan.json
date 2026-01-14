@@ -1,0 +1,133 @@
+{
+  "Knob_Zoo_Pan": {
+    "type": "OcaBlock",
+    "description": "Pan/Spatial Knob Variations",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "knob_pan1": {
+        "type": "_Knob",
+        "label_active": "Pan L",
+        "min": -100.0, "max": 100.0, "value_default": -50.0,
+        "width": 60, "height": 60,
+        "indicator_color": "#E91E63",
+        "tick_color": "#F8BBD0",
+        "custom_ticks": [-100, -50, 0, 50, 100],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "",
+        "tick_size": 0.2,
+        "notes": "Left bias Pink"
+      },
+      "knob_pan2": {
+        "type": "_Knob",
+        "label_active": "Pan R",
+        "min": -100.0, "max": 100.0, "value_default": 50.0,
+        "width": 60, "height": 60,
+        "indicator_color": "#2196F3",
+        "tick_color": "#BBDEFB",
+        "custom_ticks": [-100, -50, 0, 50, 100],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "",
+        "tick_size": 0.2,
+        "notes": "Right bias Blue"
+      },
+      "knob_pan3": {
+        "type": "_Knob",
+        "label_active": "Width",
+        "min": 0.0, "max": 100.0, "value_default": 100.0,
+        "width": 80, "height": 80,
+        "indicator_color": "#9C27B0",
+        "tick_color": "#E1BEE7",
+        "custom_ticks": [0, 25, 50, 75, 100],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "%",
+        "tick_size": 0.2,
+        "notes": "Stereo Width"
+      },
+      "knob_pan4": {
+        "type": "_Knob",
+        "label_active": "Balance",
+        "min": -100.0, "max": 100.0, "value_default": 0.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#673AB7",
+        "tick_color": "#D1C4E9",
+        "custom_ticks": [-100, -50, 0, 50, 100],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "",
+        "tick_size": 0.2,
+        "notes": "Deep Purple Bal"
+      },
+      "knob_pan5": {
+        "type": "_Knob",
+        "label_active": "Spread",
+        "min": 0.0, "max": 100.0, "value_default": 75.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#00BCD4",
+        "tick_color": "#B2EBF2",
+        "custom_ticks": [0, 25, 50, 75, 100],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "",
+        "tick_size": 0.2,
+        "notes": "Cyan Spread"
+      },
+      "knob_pan6": {
+        "type": "_Knob",
+        "label_active": "Depth",
+        "min": 0.0, "max": 100.0, "value_default": 30.0,
+        "width": 40, "height": 40,
+        "indicator_color": "#009688",
+        "tick_color": "#B2DFDB",
+        "custom_ticks": [0, 25, 50, 75, 100],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "",
+        "tick_size": 0.3,
+        "notes": "Teal Depth"
+      },
+      "knob_pan7": {
+        "type": "_Knob",
+        "label_active": "Azimuth",
+        "min": 0.0, "max": 360.0, "value_default": 45.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#FFC107",
+        "tick_color": "#FFF9C4",
+        "custom_ticks": [0, 90, 180, 270, 360],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "°",
+        "tick_size": 0.2,
+        "notes": "Amber Angle"
+      },
+      "knob_pan8": {
+        "type": "_Knob",
+        "label_active": "Elevation",
+        "min": -90.0, "max": 90.0, "value_default": 10.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#FF5722",
+        "tick_color": "#FFCCBC",
+        "custom_ticks": [-90, -45, 0, 45, 90],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "°",
+        "tick_size": 0.2,
+        "notes": "Orange Elev"
+      }
+    }
+  }
+}

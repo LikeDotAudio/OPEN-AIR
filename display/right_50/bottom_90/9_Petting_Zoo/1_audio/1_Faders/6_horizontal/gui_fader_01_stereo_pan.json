@@ -1,0 +1,18 @@
+{
+  "elements1": {
+    "type": "OcaBlock",
+    "label_active": "Stereo Pan",
+    "fields": {     "examplefields": {
+      "type": "_CustomHorizontalFader",
+      "label_active": "Stereo Pan",
+      "value_min": -100.0,
+      "value_max": 100.0,
+      "value_default": 0.0,
+      "log_exponent": 1.0,
+      "width": 250,
+      "height": 80,
+      "value_highlight_color": "#007acc",
+      "notes": "Standard horizontal pan fader, linear response, centered."
+    }
+  }
+}}

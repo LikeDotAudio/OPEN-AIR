@@ -1,0 +1,15 @@
+{
+  "elements5": {
+    "type": "OcaBlock",
+    "label_active": "Q-Factor",
+    "fields": {
+      "examplefields": {      "type": "_sliderValue",
+      "label_active": "Q-Factor",
+      "min": 0.1,
+      "max": 10.0,
+      "value": 1.5,
+      "units": "",
+      "notes": "Slider for adjusting Q-factor, dimensionless."
+    }
+  }
+}}

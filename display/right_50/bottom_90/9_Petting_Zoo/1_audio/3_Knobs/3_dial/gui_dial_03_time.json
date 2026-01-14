@@ -1,0 +1,85 @@
+{
+  "Dial_Zoo_Time": {
+    "type": "OcaBlock",
+    "description": "Time/Clock Dial Variations",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "dial_tm1": {
+        "type": "_Dial",
+        "label_active": "Seconds",
+        "value_default": 15.0,
+        "piechart": true, "pointer": true,
+        "width": 80, "height": 80,
+        "indicator_color": "#FFFFFF",
+        "notes": "White Clock"
+      },
+      "dial_tm2": {
+        "type": "_Dial",
+        "label_active": "Minutes",
+        "value_default": 45.0,
+        "piechart": false, "pointer": true,
+        "width": 80, "height": 80,
+        "indicator_color": "#B0BEC5",
+        "notes": "Grey Clock"
+      },
+      "dial_tm3": {
+        "type": "_Dial",
+        "label_active": "Millis",
+        "value_default": 500.0,
+        "piechart": true, "pointer": false,
+        "width": 40, "height": 40,
+        "indicator_color": "#FF1744",
+        "notes": "Fast Red"
+      },
+      "dial_tm4": {
+        "type": "_Dial",
+        "label_active": "Delay",
+        "value_default": 250.0,
+        "piechart": true, "pointer": true,
+        "width": 60, "height": 60,
+        "indicator_color": "#2979FF",
+        "notes": "Delay Blue"
+      },
+      "dial_tm5": {
+        "type": "_Dial",
+        "label_active": "Attack",
+        "value_default": 5.0,
+        "piechart": false, "pointer": true,
+        "width": 50, "height": 50,
+        "indicator_color": "#00E676",
+        "notes": "Fast Attack Green"
+      },
+      "dial_tm6": {
+        "type": "_Dial",
+        "label_active": "Release",
+        "value_default": 300.0,
+        "piechart": true, "pointer": false,
+        "width": 50, "height": 50,
+        "indicator_color": "#FF9100",
+        "notes": "Slow Release Orange"
+      },
+      "dial_tm7": {
+        "type": "_Dial",
+        "label_active": "Decay",
+        "value_default": 100.0,
+        "piechart": true, "pointer": true,
+        "width": 50, "height": 50,
+        "indicator_color": "#D500F9",
+        "notes": "Decay Purple"
+      },
+      "dial_tm8": {
+        "type": "_Dial",
+        "label_active": "Hold",
+        "value_default": 50.0,
+        "piechart": false, "pointer": true,
+        "width": 50, "height": 50,
+        "indicator_color": "#3E2723",
+        "notes": "Dark Hold"
+      }
+    }
+  }
+}

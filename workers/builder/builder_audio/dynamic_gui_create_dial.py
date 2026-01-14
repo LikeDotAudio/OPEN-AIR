@@ -112,6 +112,8 @@ class DialCreatorMixin:
         min_val, max_val = 0, 999
         reff_point = float(config.get("reff_point", (min_val + max_val) / 2.0))
         value_default = float(config.get("value_default", 0.0))
+        infinity = config.get("infinity", False)
+        fine_pitch = config.get("fine_pitch", False)
 
         dial_value_var = tk.DoubleVar(value=value_default)
         drag_state = {"start_y": None, "start_value": None}
@@ -123,8 +125,32 @@ class DialCreatorMixin:
         def on_dial_drag(event):
             if drag_state["start_y"] is None: return
             dy = drag_state["start_y"] - event.y
-            sensitivity = (max_val - min_val) / 100.0
-            new_val = max(min_val, min(max_val, drag_state["start_value"] + (dy * sensitivity)))
+            
+            # Determine sensitivity
+            # Standard: Full range in 200 pixels (approx) -> (max-min)/200
+            # User request: "fine pitch should be 10 turns". 
+            # If 1 turn is ~200px (arbitrary comfortable drag), fine pitch makes it 2000px.
+            base_sensitivity = (max_val - min_val) / 200.0
+            
+            if fine_pitch:
+                base_sensitivity /= 10.0
+            
+            # Check for Control(4) + Alt(8) key modifier (mask 12) for extra fine tuning (half speed)
+            # Checking if BOTH are pressed as requested "ctrl+ALT"
+            if (event.state & 0x000C) == 0x000C: 
+                 base_sensitivity /= 2.0
+
+            delta = dy * base_sensitivity
+            raw_new_val = drag_state["start_value"] + delta
+            
+            if infinity:
+                # Modulo arithmetic for wrapping
+                range_span = max_val - min_val
+                # Ensure we handle negative wraps correctly
+                new_val = min_val + ((raw_new_val - min_val) % range_span)
+            else:
+                new_val = max(min_val, min(max_val, raw_new_val))
+
             if dial_value_var.get() != new_val:
                 dial_value_var.set(new_val)
                 state_mirror_engine.broadcast_gui_change_to_mqtt(path)
@@ -142,20 +168,47 @@ class DialCreatorMixin:
             command=None,
         )
 
+        # Text Position Logic (Renamed to label_Text_position)
+        text_pos = config.get("label_Text_position", "top").lower()
         if label and config.get("show_label", True):
-            ttk.Label(frame, text=label).pack(side=tk.TOP, pady=(0, 5))
+            lbl = ttk.Label(frame, text=label)
+            if text_pos == "top":
+                lbl.pack(side=tk.TOP, pady=(0, 5))
+            elif text_pos == "bottom":
+                lbl.pack(side=tk.BOTTOM, pady=(5, 0))
+            elif text_pos == "left":
+                lbl.pack(side=tk.LEFT, padx=(0, 5))
+            elif text_pos == "right":
+                lbl.pack(side=tk.RIGHT, padx=(5, 0))
+            else: # Fallback/Center
+                lbl.pack(side=tk.TOP, pady=(0, 5))
+
 
         try:
             width, height = config.get("width", 50), config.get("height", 50)
             piechart, pointer = config.get("piechart", True), config.get("pointer", True)
             canvas = tk.Canvas(frame, width=width, height=height, bg=bg_color, highlightthickness=0)
-            canvas.pack(expand=True)
+            
+            # Pack canvas relative to text if needed, otherwise default pack
+            if text_pos in ["left", "right"]:
+                canvas.pack(side=tk.LEFT if text_pos == "right" else tk.RIGHT, expand=True)
+            else:
+                canvas.pack(expand=True)
 
             visual_props = {"secondary": secondary_color}
             hover_color = "#999999"
+            
+            # New drawing properties (Renamed to Value_text_position)
+            value_pos = config.get("Value_text_position", "Center")
+            crust_thick = int(config.get("pie_crust_thickness", 4))
 
             def update_dial_visuals(*args):
-                self._draw_dial(canvas, width, height, dial_value_var.get(), frame.min_val, frame.max_val, fg_color, accent_color, indicator_color, visual_props["secondary"], piechart=piechart, pointer=pointer)
+                self._draw_dial(
+                    canvas, width, height, dial_value_var.get(), frame.min_val, frame.max_val, 
+                    fg_color, accent_color, indicator_color, visual_props["secondary"], 
+                    piechart=piechart, pointer=pointer, 
+                    value_pos=value_pos, crust_thick=crust_thick
+                )
 
             dial_value_var.trace_add("write", update_dial_visuals)
             update_dial_visuals()
@@ -210,20 +263,56 @@ class DialCreatorMixin:
             debug_logger(message=f"❌ The dial '{label}' shattered! Error: {e}")
             return None
 
-    def _draw_dial(self, canvas, width, height, value, min_val, max_val, neutral_color, accent_for_arc, indicator_color, secondary, piechart=True, pointer=True):
+    def _draw_dial(self, canvas, width, height, value, min_val, max_val, neutral_color, accent_for_arc, indicator_color, secondary, piechart=True, pointer=True, value_pos="Center", crust_thick=4):
         canvas.delete("all")
         cx, cy = width / 2, height / 2
         radius = min(width, height) / 2 - 5
-        canvas.create_arc(5, 5, width - 5, height - 5, start=0, extent=359.9, style=tk.ARC, outline=secondary, width=4)
+        
+        # Draw background ring (crust)
+        canvas.create_arc(5, 5, width - 5, height - 5, start=0, extent=359.9, style=tk.ARC, outline=secondary, width=crust_thick)
+        
         norm_val = (value - min_val) / (max_val - min_val) if max_val > min_val else 0
         start_angle, val_extent = 90, -360 * norm_val
         if abs(val_extent) >= 360: val_extent = -359.9
+        
         if piechart:
-            canvas.create_arc(5, 5, width - 5, height - 5, start=start_angle, extent=val_extent, style=tk.PIESLICE, fill=indicator_color, outline=indicator_color, width=1)
+            # If thick crust (e.g. > 10), it might look better as an arc than a pie slice, but keeping as slice/arc logic based on fill.
+            # Using width=crust_thick for the active part too if we want it to match the "crust" look, 
+            # but usually piechart implies a filled sector. 
+            # If crust_thick is large, maybe the user wants a donut? 
+            # For now, let's keep the standard filled slice but add an outline of crust_thick if desired, 
+            # or if it's just a thick line arc (like a progress ring).
+            # The prompt implies "pie crust" which usually means the rim.
+            # Let's interpret "piechart" as filling the center, but if we want just the ring (donut), we'd use style=tk.ARC.
+            # However, existing code used tk.PIESLICE. Let's stick to that for now, but maybe use crust_thick for the outline width?
+            # Or perhaps `crust_thick` affects the background ring only?
+            # "pie_crust_thickness ... can be the full size.... or 1".
+            # If it's full size, it's a solid circle. If 1, it's a thin ring.
+            # Let's apply crust_thick to the outline width of the active arc if we treat it as a ring.
+            # But the original code was a PIESLICE.
+            # Let's assume the user might want a thick ring instead of a wedge if they set thickness high.
+            # For now, applying it to the background ring.
+             canvas.create_arc(5, 5, width - 5, height - 5, start=start_angle, extent=val_extent, style=tk.PIESLICE, fill=indicator_color, outline=indicator_color, width=1)
+
         if pointer:
             angle_rad = math.radians(start_angle + val_extent)
             px, py = cx + radius * math.cos(angle_rad), cy - radius * math.sin(angle_rad)
             canvas.create_line(cx, cy, px, py, fill=indicator_color, width=3, capstyle=tk.ROUND)
+        
+        # Value Text Placement
+        tx, ty = cx, cy
+        offset = radius * 0.6 # generic offset
+        
+        vp = value_pos.lower()
+        if vp == "top": ty -= offset
+        elif vp == "bottom": ty += offset
+        elif vp == "left": tx -= offset
+        elif vp == "right": tx += offset
+        # else "center" -> cx, cy
+        
         text_bg_radius = radius * 0.5
-        canvas.create_oval(cx - text_bg_radius, cy - text_bg_radius, cx + text_bg_radius, cy + text_bg_radius, fill="#2b2b2b", outline=secondary, width=1)
-        canvas.create_text(cx, cy, text=f"{int(value)}", fill=neutral_color, font=("Helvetica", 8, "bold"))
+        # Only draw the text background circle if centered, otherwise it might look weird floating
+        if vp == "center":
+            canvas.create_oval(cx - text_bg_radius, cy - text_bg_radius, cx + text_bg_radius, cy + text_bg_radius, fill="#2b2b2b", outline=secondary, width=1)
+        
+        canvas.create_text(tx, ty, text=f"{int(value)}", fill=neutral_color, font=("Helvetica", 8, "bold"))

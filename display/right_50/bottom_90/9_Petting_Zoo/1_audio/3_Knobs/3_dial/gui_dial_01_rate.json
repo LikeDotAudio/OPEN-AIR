@@ -1,0 +1,101 @@
+{
+  "Dial_Petting_Zoo": {
+    "type": "OcaBlock",
+    "description": "Dial Variations (Petting Zoo)",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "dial_01": {
+        "type": "_Dial",
+        "label_active": "Std Combo",
+        "value_default": 250.0,
+        "piechart": true,
+        "pointer": true,
+        "width": 50,
+        "height": 50,
+        "indicator_color": "#996633",
+        "notes": "Standard combo"
+      },
+      "dial_02": {
+        "type": "_Dial",
+        "label_active": "Pie Only",
+        "value_default": 500.0,
+        "piechart": true,
+        "pointer": false,
+        "width": 50,
+        "height": 50,
+        "indicator_color": "#FF0000",
+        "notes": "Piechart only, red"
+      },
+      "dial_03": {
+        "type": "_Dial",
+        "label_active": "Ptr Only",
+        "value_default": 750.0,
+        "piechart": false,
+        "pointer": true,
+        "width": 50,
+        "height": 50,
+        "indicator_color": "#0000FF",
+        "notes": "Pointer only, blue"
+      },
+      "dial_04": {
+        "type": "_Dial",
+        "label_active": "Lg Pie",
+        "value_default": 300.0,
+        "piechart": true,
+        "pointer": false,
+        "width": 80,
+        "height": 80,
+        "indicator_color": "#00FF00",
+        "notes": "Large pie, green"
+      },
+      "dial_05": {
+        "type": "_Dial",
+        "label_active": "Sm Ptr",
+        "value_default": 100.0,
+        "piechart": false,
+        "pointer": true,
+        "width": 30,
+        "height": 30,
+        "indicator_color": "#FFFF00",
+        "notes": "Small pointer, yellow"
+      },
+      "dial_06": {
+        "type": "_Dial",
+        "label_active": "Giant Mix",
+        "value_default": 600.0,
+        "piechart": true,
+        "pointer": true,
+        "width": 100,
+        "height": 100,
+        "indicator_color": "#00FFFF",
+        "notes": "Giant combo, cyan"
+      },
+      "dial_07": {
+        "type": "_Dial",
+        "label_active": "Purple",
+        "value_default": 800.0,
+        "piechart": true,
+        "pointer": true,
+        "width": 60,
+        "height": 60,
+        "indicator_color": "#800080",
+        "notes": "Medium purple"
+      },
+      "dial_08": {
+        "type": "_Dial",
+        "label_active": "Teal",
+        "value_default": 400.0,
+        "piechart": false,
+        "pointer": true,
+        "width": 60,
+        "height": 60,
+        "indicator_color": "#008080",
+        "notes": "Medium teal pointer"
+      }
+    }
+  }
+}

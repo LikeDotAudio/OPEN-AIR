@@ -1,0 +1,85 @@
+{
+  "Fader_Zoo_Volume": {
+    "type": "OcaBlock",
+    "description": "Volume Fader Variations",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "fader_vol1": {
+        "type": "_Fader",
+        "label_active": "Main",
+        "min": -100.0, "max": 10.0, "value_default": 0.0,
+        "orientation": "vertical",
+        "height": 300,
+        "indicator_color": "#FFFFFF",
+        "notes": "Standard White"
+      },
+      "fader_vol2": {
+        "type": "_Fader",
+        "label_active": "Grp 1",
+        "min": -100.0, "max": 10.0, "value_default": -5.0,
+        "orientation": "vertical",
+        "height": 300,
+        "indicator_color": "#FF5252",
+        "notes": "Red Group"
+      },
+      "fader_vol3": {
+        "type": "_Fader",
+        "label_active": "Grp 2",
+        "min": -100.0, "max": 10.0, "value_default": -10.0,
+        "orientation": "vertical",
+        "height": 300,
+        "indicator_color": "#448AFF",
+        "notes": "Blue Group"
+      },
+      "fader_vol4": {
+        "type": "_Fader",
+        "label_active": "Vox",
+        "min": -100.0, "max": 10.0, "value_default": -2.0,
+        "orientation": "vertical",
+        "height": 300,
+        "indicator_color": "#E040FB",
+        "notes": "Purple Vox"
+      },
+      "fader_vol5": {
+        "type": "_Fader",
+        "label_active": "Drums",
+        "min": -100.0, "max": 10.0, "value_default": -6.0,
+        "orientation": "vertical",
+        "height": 300,
+        "indicator_color": "#FFAB40",
+        "notes": "Orange Drums"
+      },
+      "fader_vol6": {
+        "type": "_Fader",
+        "label_active": "Bass",
+        "min": -100.0, "max": 10.0, "value_default": -4.0,
+        "orientation": "vertical",
+        "height": 300,
+        "indicator_color": "#69F0AE",
+        "notes": "Green Bass"
+      },
+      "fader_vol7": {
+        "type": "_Fader",
+        "label_active": "Keys",
+        "min": -100.0, "max": 10.0, "value_default": -8.0,
+        "orientation": "vertical",
+        "height": 300,
+        "indicator_color": "#FFFF00",
+        "notes": "Yellow Keys"
+      },
+      "fader_vol8": {
+        "type": "_Fader",
+        "label_active": "FX",
+        "min": -100.0, "max": 10.0, "value_default": -15.0,
+        "orientation": "vertical",
+        "height": 300,
+        "indicator_color": "#00BCD4",
+        "notes": "Cyan FX"
+      }
+    }
+  }
+}

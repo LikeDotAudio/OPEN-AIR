@@ -1,0 +1,85 @@
+{
+  "Fader_Zoo_DryWet": {
+    "type": "OcaBlock",
+    "description": "Dry/Wet Fader Variations",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "fader_dw1": {
+        "type": "_Fader",
+        "label_active": "Reverb",
+        "min": 0.0, "max": 100.0, "value_default": 20.0,
+        "orientation": "vertical",
+        "height": 200,
+        "indicator_color": "#00796B",
+        "notes": "Teal Reverb"
+      },
+      "fader_dw2": {
+        "type": "_Fader",
+        "label_active": "Delay",
+        "min": 0.0, "max": 100.0, "value_default": 40.0,
+        "orientation": "vertical",
+        "height": 200,
+        "indicator_color": "#388E3C",
+        "notes": "Green Delay"
+      },
+      "fader_dw3": {
+        "type": "_Fader",
+        "label_active": "Chorus",
+        "min": 0.0, "max": 100.0, "value_default": 30.0,
+        "orientation": "vertical",
+        "height": 200,
+        "indicator_color": "#689F38",
+        "notes": "Light Green"
+      },
+      "fader_dw4": {
+        "type": "_Fader",
+        "label_active": "Flanger",
+        "min": 0.0, "max": 100.0, "value_default": 50.0,
+        "orientation": "vertical",
+        "height": 200,
+        "indicator_color": "#AFB42B",
+        "notes": "Lime Flanger"
+      },
+      "fader_dw5": {
+        "type": "_Fader",
+        "label_active": "Phaser",
+        "min": 0.0, "max": 100.0, "value_default": 60.0,
+        "orientation": "vertical",
+        "height": 200,
+        "indicator_color": "#FBC02D",
+        "notes": "Yellow Phaser"
+      },
+      "fader_dw6": {
+        "type": "_Fader",
+        "label_active": "Dist",
+        "min": 0.0, "max": 100.0, "value_default": 80.0,
+        "orientation": "vertical",
+        "height": 200,
+        "indicator_color": "#FFA000",
+        "notes": "Amber Dist"
+      },
+      "fader_dw7": {
+        "type": "_Fader",
+        "label_active": "Comp",
+        "min": 0.0, "max": 100.0, "value_default": 100.0,
+        "orientation": "vertical",
+        "height": 200,
+        "indicator_color": "#F57C00",
+        "notes": "Orange Comp"
+      },
+      "fader_dw8": {
+        "type": "_Fader",
+        "label_active": "Gate",
+        "min": 0.0, "max": 100.0, "value_default": 10.0,
+        "orientation": "vertical",
+        "height": 200,
+        "indicator_color": "#E64A19",
+        "notes": "Deep Orange"
+      }
+    }
+  }
+}

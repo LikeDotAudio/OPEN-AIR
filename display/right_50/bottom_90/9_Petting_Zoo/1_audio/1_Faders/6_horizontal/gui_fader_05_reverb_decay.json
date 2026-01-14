@@ -1,0 +1,22 @@
+{
+  "elements5": {
+    "type": "OcaBlock",
+    "label_active": "Reverb Decay",
+    "fields": {     "examplefields": {
+      "type": "_CustomHorizontalFader",
+      "label_active": "Reverb Decay",
+      "value_min": 0.1,
+      "value_max": 10.0,
+      "value_default": 2.5,
+      "log_exponent": 1.5,
+      "width": 280,
+      "height": 95,
+      "cap_width": 40,
+      "cap_height_ratio": 0.6,
+      "cap_radius": 5,
+      "cap_color": "#7d7d7d",
+      "value_highlight_color": "#7d7d7d",
+      "notes": "Fader with custom sized and shaped handle."
+    }
+  }
+}}

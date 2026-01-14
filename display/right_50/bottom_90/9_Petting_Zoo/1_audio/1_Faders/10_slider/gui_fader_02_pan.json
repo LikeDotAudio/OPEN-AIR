@@ -1,0 +1,85 @@
+{
+  "Fader_Zoo_Pan": {
+    "type": "OcaBlock",
+    "description": "Pan Fader Variations (Horizontal)",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "fader_pan1": {
+        "type": "_Fader",
+        "label_active": "LCR",
+        "min": -100.0, "max": 100.0, "value_default": 0.0,
+        "orientation": "horizontal",
+        "width": 150,
+        "indicator_color": "#FFC107",
+        "notes": "Amber Center"
+      },
+      "fader_pan2": {
+        "type": "_Fader",
+        "label_active": "Front",
+        "min": -50.0, "max": 50.0, "value_default": -25.0,
+        "orientation": "horizontal",
+        "width": 120,
+        "indicator_color": "#00E676",
+        "notes": "Green Left"
+      },
+      "fader_pan3": {
+        "type": "_Fader",
+        "label_active": "Rear",
+        "min": -50.0, "max": 50.0, "value_default": 25.0,
+        "orientation": "horizontal",
+        "width": 120,
+        "indicator_color": "#00B0FF",
+        "notes": "Blue Right"
+      },
+      "fader_pan4": {
+        "type": "_Fader",
+        "label_active": "Surround",
+        "min": 0.0, "max": 100.0, "value_default": 50.0,
+        "orientation": "horizontal",
+        "width": 100,
+        "indicator_color": "#E040FB",
+        "notes": "Purple"
+      },
+      "fader_pan5": {
+        "type": "_Fader",
+        "label_active": "Width",
+        "min": 0.0, "max": 200.0, "value_default": 100.0,
+        "orientation": "horizontal",
+        "width": 150,
+        "indicator_color": "#FF5722",
+        "notes": "Orange Width"
+      },
+      "fader_pan6": {
+        "type": "_Fader",
+        "label_active": "Div",
+        "min": 0.0, "max": 100.0, "value_default": 10.0,
+        "orientation": "horizontal",
+        "width": 80,
+        "indicator_color": "#9E9E9E",
+        "notes": "Grey Small"
+      },
+      "fader_pan7": {
+        "type": "_Fader",
+        "label_active": "Focus",
+        "min": -100.0, "max": 100.0, "value_default": 0.0,
+        "orientation": "horizontal",
+        "width": 180,
+        "indicator_color": "#F44336",
+        "notes": "Red Wide"
+      },
+      "fader_pan8": {
+        "type": "_Fader",
+        "label_active": "Trim",
+        "min": -20.0, "max": 20.0, "value_default": 0.0,
+        "orientation": "horizontal",
+        "width": 100,
+        "indicator_color": "#3F51B5",
+        "notes": "Indigo Trim"
+      }
+    }
+  }
+}

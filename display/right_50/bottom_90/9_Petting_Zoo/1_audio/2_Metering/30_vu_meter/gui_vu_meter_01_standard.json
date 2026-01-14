@@ -1,0 +1,116 @@
+{
+  "Standard_VU_Demos": {
+    "type": "OcaBlock",
+    "description": "Standard VU Meter Showcase (8 Variations)",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "Standard_VU_1": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Standard",
+        "size": 150,
+        "min": -20.0, "max": 3.0, "upper_range": 0.0,
+        "glide_time": 200, "dwell_time": 400, "hold_time": 500, "fall_time": 800,
+        "Lower_range_colour": "#6a9955",
+        "upper_range_Colour": "#c75450",
+        "Pointer_colour": "#ff0000",
+        "value_default": -5.0,
+        "No_Values": true,
+        "notes": "Standard response, red pointer."
+      },
+      "Fast_Response_VU": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Fast Response",
+        "size": 120,
+        "min": -10.0, "max": 6.0, "upper_range": 0.0,
+        "glide_time": 50, "dwell_time": 50, "hold_time": 100, "fall_time": 200,
+        "Lower_range_colour": "#8BC34A",
+        "upper_range_Colour": "#FFC107",
+        "Pointer_colour": "#FFFFFF",
+        "value_default": -10.0,
+        "No_Values": true,
+        "notes": "Snappy peak-meter style."
+      },
+      "Slow_Response_VU": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Slow Response",
+        "size": 180,
+        "min": -30.0, "max": 6.0, "upper_range": 0.0,
+        "glide_time": 800, "dwell_time": 1500, "hold_time": 0, "fall_time": 3000,
+        "Lower_range_colour": "#2196F3",
+        "upper_range_Colour": "#FF5722",
+        "Pointer_colour": "#FFEB3B",
+        "value_default": -30.0,
+        "No_Values": true,
+        "notes": "Vintage, heavy needle feel."
+      },
+      "Wide_Range_VU": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Wide Range",
+        "size": 150,
+        "min": -40.0, "max": 10.0, "upper_range": 0.0,
+        "glide_time": 300, "dwell_time": 600, "hold_time": 500, "fall_time": 1500,
+        "Lower_range_colour": "#607D8B",
+        "upper_range_Colour": "#E91E63",
+        "Pointer_colour": "#00BCD4",
+        "value_default": -40.0,
+        "No_Values": true,
+        "notes": "Full spectrum monitoring."
+      },
+      "Peak_Hold_VU": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Peak Hold (3s)",
+        "size": 140,
+        "min": -10.0, "max": 3.0, "upper_range": 0.0,
+        "glide_time": 50, "dwell_time": 100, "hold_time": 3000, "fall_time": 10000,
+        "Lower_range_colour": "#9C27B0",
+        "upper_range_Colour": "#FF1744",
+        "Pointer_colour": "#FFFFFF",
+        "value_default": -10.0,
+        "No_Values": true,
+        "notes": "Peak-level capture."
+      },
+      "Rainbow_VU": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Rainbow Colors",
+        "size": 150,
+        "min": -20.0, "max": 3.0, "upper_range": 0.0,
+        "glide_time": 300, "dwell_time": 600, "hold_time": 500, "fall_time": 1500,
+        "Lower_range_colour": "#FF0000",
+        "upper_range_Colour": "#00FF00",
+        "Pointer_colour": "#00FFFF",
+        "value_default": -5.0,
+        "No_Values": true,
+        "notes": "Vibrant spectral colors."
+      },
+      "Vintage_VU": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Vintage Look",
+        "size": 160,
+        "min": -20.0, "max": 3.0, "upper_range": 0.0,
+        "glide_time": 600, "dwell_time": 1200, "hold_time": 1000, "fall_time": 4000,
+        "Lower_range_colour": "#E0E0E0",
+        "upper_range_Colour": "#757575",
+        "Pointer_colour": "#BDBDBD",
+        "value_default": -10.0,
+        "No_Values": true,
+        "notes": "Classic analog meter style."
+      },
+      "Tall_Thin_VU": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Tall & Thin",
+        "size": 40,
+        "min": -20.0, "max": 3.0, "upper_range": 0.0,
+        "glide_time": 200, "dwell_time": 400, "hold_time": 500, "fall_time": 800,
+        "Lower_range_colour": "#4FC3F7",
+        "upper_range_Colour": "#F44336",
+        "Pointer_colour": "#FFFFFF",
+        "value_default": -5.0,
+        "notes": "Narrow profile meter."
+      }
+    }
+  }
+}

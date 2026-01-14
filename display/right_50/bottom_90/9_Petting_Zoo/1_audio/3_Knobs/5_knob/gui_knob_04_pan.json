@@ -1,0 +1,77 @@
+{
+  "Knob_Zoo_Pan": {
+    "type": "OcaBlock",
+    "description": "Pan/Spatial Knob Variations",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "knob_pan1": {
+        "type": "_Knob",
+        "label_active": "Pan L",
+        "min": -100.0, "max": 100.0, "value_default": -50.0,
+        "width": 60, "height": 60,
+        "indicator_color": "#E91E63",
+        "notes": "Left bias Pink"
+      },
+      "knob_pan2": {
+        "type": "_Knob",
+        "label_active": "Pan R",
+        "min": -100.0, "max": 100.0, "value_default": 50.0,
+        "width": 60, "height": 60,
+        "indicator_color": "#2196F3",
+        "notes": "Right bias Blue"
+      },
+      "knob_pan3": {
+        "type": "_Knob",
+        "label_active": "Width",
+        "min": 0.0, "max": 200.0, "value_default": 100.0,
+        "width": 80, "height": 80,
+        "indicator_color": "#9C27B0",
+        "notes": "Stereo Width"
+      },
+      "knob_pan4": {
+        "type": "_Knob",
+        "label_active": "Balance",
+        "min": -100.0, "max": 100.0, "value_default": 0.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#673AB7",
+        "notes": "Deep Purple Bal"
+      },
+      "knob_pan5": {
+        "type": "_Knob",
+        "label_active": "Spread",
+        "min": 0.0, "max": 100.0, "value_default": 75.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#00BCD4",
+        "notes": "Cyan Spread"
+      },
+      "knob_pan6": {
+        "type": "_Knob",
+        "label_active": "Depth",
+        "min": 0.0, "max": 100.0, "value_default": 30.0,
+        "width": 40, "height": 40,
+        "indicator_color": "#009688",
+        "notes": "Teal Depth"
+      },
+      "knob_pan7": {
+        "type": "_Knob",
+        "label_active": "Azimuth",
+        "min": 0.0, "max": 360.0, "value_default": 45.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#FFC107",
+        "notes": "Amber Angle"
+      },
+      "knob_pan8": {
+        "type": "_Knob",
+        "label_active": "Elevation",
+        "min": -90.0, "max": 90.0, "value_default": 10.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#FF5722",
+        "notes": "Orange Elev"
+      }
+    }
+  }
+}

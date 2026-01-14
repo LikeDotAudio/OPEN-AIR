@@ -1,0 +1,133 @@
+{
+  "Knob_Zoo_Filter": {
+    "type": "OcaBlock",
+    "description": "Filter/Cutoff Knob Variations",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "knob_f1": {
+        "type": "_Knob",
+        "label_active": "Cutoff",
+        "min": 20.0, "max": 20000.0, "value_default": 2000.0,
+        "width": 90, "height": 90,
+        "indicator_color": "#FFEB3B",
+        "tick_color": "#FFF9C4",
+        "custom_ticks": [20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "Hz",
+        "tick_size": 0.2,
+        "notes": "Giant Yellow Cutoff"
+      },
+      "knob_f2": {
+        "type": "_Knob",
+        "label_active": "Resonance",
+        "min": 0.0, "max": 10.0, "value_default": 2.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#FF9800",
+        "tick_color": "#FFCCBC",
+        "custom_ticks": [0, 2, 4, 6, 8, 10],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "",
+        "tick_size": 0.2,
+        "notes": "Orange Res"
+      },
+      "knob_f3": {
+        "type": "_Knob",
+        "label_active": "Env Amt",
+        "min": -100.0, "max": 100.0, "value_default": 50.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#F44336",
+        "tick_color": "#FFCDD2",
+        "custom_ticks": [-100, -50, 0, 50, 100],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "",
+        "tick_size": 0.2,
+        "notes": "Red Envelope"
+      },
+      "knob_f4": {
+        "type": "_Knob",
+        "label_active": "Drive",
+        "min": 0.0, "max": 11.0, "value_default": 0.0,
+        "width": 40, "height": 40,
+        "indicator_color": "#D32F2F",
+        "tick_color": "#EF9A9A",
+        "custom_ticks": [0, 2, 4, 6, 8, 11],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "",
+        "tick_size": 0.3,
+        "notes": "Dark Red Drive"
+      },
+      "knob_f5": {
+        "type": "_Knob",
+        "label_active": "HPF",
+        "min": 20.0, "max": 500.0, "value_default": 80.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#8BC34A",
+        "tick_color": "#DCEDC8",
+        "custom_ticks": [20, 50, 100, 200, 300, 400, 500],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "Hz",
+        "tick_size": 0.2,
+        "notes": "Light Green HPF"
+      },
+      "knob_f6": {
+        "type": "_Knob",
+        "label_active": "LPF",
+        "min": 1000.0, "max": 20000.0, "value_default": 12000.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#4CAF50",
+        "tick_color": "#A5D6A7",
+        "custom_ticks": [1000, 2000, 4000, 8000, 12000, 16000, 20000],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "Hz",
+        "tick_size": 0.2,
+        "notes": "Green LPF"
+      },
+      "knob_f7": {
+        "type": "_Knob",
+        "label_active": "Key Follow",
+        "min": 0.0, "max": 100.0, "value_default": 30.0,
+        "width": 30, "height": 30,
+        "indicator_color": "#CDDC39",
+        "tick_color": "#F0F4C3",
+        "custom_ticks": [0, 20, 40, 60, 80, 100],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "",
+        "tick_size": 0.3,
+        "notes": "Lime Key"
+      },
+      "knob_f8": {
+        "type": "_Knob",
+        "label_active": "Vel Sens",
+        "min": 0.0, "max": 100.0, "value_default": 70.0,
+        "width": 30, "height": 30,
+        "indicator_color": "#009688",
+        "tick_color": "#B2DFDB",
+        "custom_ticks": [0, 20, 40, 60, 80, 100],
+        "value_text_inside": true,
+        "show_value": true,
+        "show_units": true,
+        "unit_text": "",
+        "tick_size": 0.3,
+        "notes": "Teal Vel"
+      }
+    }
+  }
+}

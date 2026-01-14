@@ -20,7 +20,7 @@
         "upper_range_Colour": "#FF5722",
         "Pointer_colour": "#FF0000",
         "value_default": -30.0,
-        "No_Values": true,
+        "Ticks_visible": false,
         "Needle_thickness": 2,
         "Scale_numbers": false,
         "curve_thickness": 12,
@@ -39,7 +39,7 @@
         "upper_range_Colour": "#FF5722",
         "Pointer_colour": "#FF0000",
         "value_default": -30.0,
-        "No_Values": true,
+        "Ticks_visible": false,
         "Scale_numbers": false,
         "Needle_thickness": 4,
         

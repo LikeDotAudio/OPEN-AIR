@@ -66,6 +66,14 @@ class TrapezoidButtonTogglerCreatorMixin(TrapezoidButtonCreatorMixin):
         group_frame.pack(fill="x", expand=True)
 
         options = config.get("options", {})
+        
+        # Handle list format for options (convert to dict)
+        if isinstance(options, list):
+            options_dict = {}
+            for item in options:
+                options_dict[item] = {"label_active": str(item)}
+            options = options_dict
+
         value_default = config.get(
             "value_default", next(iter(options.keys())) if options else None
         )

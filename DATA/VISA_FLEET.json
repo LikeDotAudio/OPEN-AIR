@@ -39,7 +39,7 @@
                                 "device_type": "Spectrum",
                                 "notes": "Handheld (100 kHz - 3 GHz)",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-13T23:43:22.645271"
+                                "connection_timestamp": "2026-01-13T23:58:21.470524"
                             }
                         }
                     }
@@ -87,7 +87,7 @@
                                 "device_type": "DMM",
                                 "notes": "6.5 Digit Benchtop Standard (Legacy)",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-13T23:43:22.645278"
+                                "connection_timestamp": "2026-01-13T23:58:21.470532"
                             }
                         }
                     }
@@ -134,7 +134,7 @@
                                 "device_type": "Unknown Instrument",
                                 "notes": "Not in Knowledge Base",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-13T23:43:22.645279"
+                                "connection_timestamp": "2026-01-13T23:58:21.470534"
                             }
                         }
                     }

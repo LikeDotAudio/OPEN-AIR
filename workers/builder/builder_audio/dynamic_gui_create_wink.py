@@ -44,7 +44,9 @@ class WinkButtonCreatorMixin:
         
         # Border/Outline Settings
         border_thickness = config.get("border_thickness", 2)
-        border_color = "black" # Always black as requested
+        # Default border color logic: If shutter is black, border should be visible (dark grey)
+        default_border_color = "#333333" if shutter_color.lower() in ["black", "#000000"] else "black"
+        border_color = config.get("border_color", default_border_color) 
         
         # Text Inside
         text_inside = config.get("text_inside", "")
@@ -83,6 +85,7 @@ class WinkButtonCreatorMixin:
             "current_open": 1.0 if initial_value else 0.0,
             "is_pressed": False,
             "is_latched": initial_value,
+            "is_hovering": False,
             "shutter_ids": [],
             "animating": False
         }
@@ -144,6 +147,14 @@ class WinkButtonCreatorMixin:
                 canvas.delete(item)
             state["shutter_ids"] = []
 
+            # Dynamic Visuals based on Hover
+            effective_border_width = border_thickness + (2 if state["is_hovering"] else 0)
+            
+            effective_shutter_color = shutter_color
+            # Lighten black shutters on hover if mostly closed
+            if state["is_hovering"] and shutter_color.lower() in ["black", "#000000"] and state["current_open"] < 0.5:
+                effective_shutter_color = "#333333"
+
             # 1. Background Neon Light
             if shape_type == "round":
                 neon = canvas.create_oval(0, 0, width, height, fill=bg_color, outline="")
@@ -173,26 +184,14 @@ class WinkButtonCreatorMixin:
             l_shutter_x2 = center_x - (gap_size / 2)
             r_shutter_x1 = center_x + (gap_size / 2)
 
-            s1 = canvas.create_rectangle(0, 0, l_shutter_x2, height, fill=shutter_color, outline="")
-            s2 = canvas.create_rectangle(r_shutter_x1, 0, width, height, fill=shutter_color, outline="")
+            s1 = canvas.create_rectangle(0, 0, l_shutter_x2, height, fill=effective_shutter_color, outline="")
+            s2 = canvas.create_rectangle(r_shutter_x1, 0, width, height, fill=effective_shutter_color, outline="")
             state["shutter_ids"].extend([s1, s2])
             
             # 2.5 Text Closed (Drawn on shutters, moves with them)
             if text_closed:
                 font_size_closed = int(height * 0.25)
-                # We draw the full text on BOTH shutters, but we need to clip it? 
-                # Tkinter canvas text doesn't support clipping easily.
-                # Hack: Draw the text at the center relative to the shutter's movement.
-                # Left Shutter: Text is at (width/2) - (gap_size/2).
-                # Right Shutter: Text is at (width/2) + (gap_size/2).
-                # But we want the text to "break".
-                # So "CLOSED" becomes "CLO" (left) and "SED" (right)?
-                # Or simply: The text is painted on the shutter surface.
-                # Center of text was at center of canvas (width/2).
-                # Now that point has moved left by gap_size/2.
-                
                 # Left Half Text
-                # Draw text shifted left
                 t1 = canvas.create_text(
                     (width / 2) - (gap_size / 2), 
                     height / 2,
@@ -201,9 +200,7 @@ class WinkButtonCreatorMixin:
                     font=("Arial", font_size_closed, "bold"),
                     anchor="center"
                 )
-                
                 # Right Half Text
-                # Draw text shifted right
                 t2 = canvas.create_text(
                     (width / 2) + (gap_size / 2), 
                     height / 2,
@@ -212,24 +209,6 @@ class WinkButtonCreatorMixin:
                     font=("Arial", font_size_closed, "bold"),
                     anchor="center"
                 )
-                
-                # Masking hack:
-                # We need the left text to be invisible on the right side, and vice versa.
-                # We can't easily mask.
-                # BUT, the gap is empty (showing neon).
-                # The text should physically move.
-                # If we just draw the text moving, it looks like two copies moving apart.
-                # Which is exactly what "text painted on split doors" looks like if you ignore the cut.
-                # The cut "eats" the middle letters? No.
-                # The cut splits the letters.
-                # Realistically, the text is cut in half.
-                # "O" becomes "(" and ")".
-                # For this prototype, moving the whole text apart is a decent approximation 
-                # effectively duplicating the text, but the visual brain might accept it 
-                # if the gap is obvious.
-                # A better trick: Use a "Gap Mask".
-                # We don't have one.
-                # Let's stick to the "Two Copies Moving" effect. It conveys the idea.
                 state["shutter_ids"].extend([t1, t2])
 
             # 3. Bezel / Detail Ring
@@ -246,20 +225,20 @@ class WinkButtonCreatorMixin:
                 )
                 # Border Ring
                 ring = canvas.create_oval(
-                    border_thickness/2, border_thickness/2, 
-                    width-border_thickness/2, height-border_thickness/2, 
-                    outline=border_color, width=border_thickness
+                    effective_border_width/2, effective_border_width/2, 
+                    width-effective_border_width/2, height-effective_border_width/2, 
+                    outline=border_color, width=effective_border_width
                 )
                 state["shutter_ids"].extend([bezel, ring])
             else:
                 # Rounded Rect Bezel Border (Outline)
                 border = _create_rounded_rect(
                     canvas, 
-                    border_thickness/2, border_thickness/2, 
-                    width-border_thickness/2, height-border_thickness/2, 
+                    effective_border_width/2, effective_border_width/2, 
+                    width-effective_border_width/2, height-effective_border_width/2, 
                     radius=radius, 
                     outline=border_color, 
-                    width=border_thickness, 
+                    width=effective_border_width, 
                     fill=""
                 )
                 state["shutter_ids"].append(border)

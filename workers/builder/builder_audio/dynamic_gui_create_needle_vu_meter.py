@@ -96,6 +96,7 @@ class NeedleVUMeterCreatorMixin:
             
             needle_thickness = int(config.get("Needle_thickness", 3))
             scale_numbers = config.get("Scale_numbers", True)
+            ticks_visible = config.get("Ticks_visible", True)
             curve_thickness = int(config.get("curve_thickness", 4))
             
             # Animation Parameters (Default: 100ms)
@@ -141,7 +142,8 @@ class NeedleVUMeterCreatorMixin:
                     lower_colour,
                     needle_thickness,
                     scale_numbers,
-                    curve_thickness
+                    curve_thickness,
+                    ticks_visible
                 )
 
             def animate():
@@ -321,7 +323,8 @@ class NeedleVUMeterCreatorMixin:
         lower_colour="green",
         needle_thickness=3,
         scale_numbers=True,
-        curve_thickness=4
+        curve_thickness=4,
+        ticks_visible=True
     ):
         canvas.delete("all")
         width = size
@@ -352,19 +355,20 @@ class NeedleVUMeterCreatorMixin:
             current_angle_rad = math.radians(current_angle_deg)
 
             # Tick line: starts on inner arc edge, goes inwards
-            x_tick_start = center_x + tick_start_radius * math.cos(current_angle_rad)
-            y_tick_start = center_y - tick_start_radius * math.sin(current_angle_rad)
+            if ticks_visible:
+                x_tick_start = center_x + tick_start_radius * math.cos(current_angle_rad)
+                y_tick_start = center_y - tick_start_radius * math.sin(current_angle_rad)
 
-            x_tick_end = center_x + (tick_start_radius - tick_length) * math.cos(
-                current_angle_rad
-            )
-            y_tick_end = center_y - (tick_start_radius - tick_length) * math.sin(
-                current_angle_rad
-            )
+                x_tick_end = center_x + (tick_start_radius - tick_length) * math.cos(
+                    current_angle_rad
+                )
+                y_tick_end = center_y - (tick_start_radius - tick_length) * math.sin(
+                    current_angle_rad
+                )
 
-            canvas.create_line(
-                x_tick_start, y_tick_start, x_tick_end, y_tick_end, fill=fg, width=2
-            )
+                canvas.create_line(
+                    x_tick_start, y_tick_start, x_tick_end, y_tick_end, fill=fg, width=2
+                )
 
             # Text label: position further OUT from the arc
             if scale_numbers:

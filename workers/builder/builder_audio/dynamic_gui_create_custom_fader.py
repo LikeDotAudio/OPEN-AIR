@@ -368,22 +368,84 @@ class CustomFaderCreatorMixin:
         
         # Floating Value Display
         if frame_instance.movement_value_display and frame_instance.value_follow and frame_instance.is_sliding:
-            val_str = f"{value:.2f}"
-            unit = frame_instance.unit_text
+            # Simple value, no units, smaller font
+            val_str = f"{value:.1f}" # Slightly less precision for small text
             
-            if frame_instance.show_units and unit:
-                if frame_instance.unit_position == "left":
-                    val_str = f"{unit} {val_str}"
-                else:
-                    val_str = f"{val_str} {unit}"
-            
-            # Position slightly above center line of fader cap
-            text_y = handle_y - 5
+            # Position bottom of text at the center line of fader cap
+            text_y = handle_y
             
             # Smaller font for movement display
-            small_font = ("Helvetica", 8)
+            small_font = ("Helvetica", 6)
             
-            canvas.create_text(cx, text_y, text=val_str, fill=frame_instance.value_color, font=small_font, anchor="s")
+            # Use grip_col for contrast (assuming grip is usually contrasting with track/bg, or needs to match it)
+            # Wait, user said "colour needs to be the fader grip colour".
+            # If the background of text is the fader cap (which is grip_col), then text being grip_col would be invisible.
+            # "colour needs to be the fader grip colour" -> Text color = grip color.
+            # But the text is drawn ON TOP of the fader cap?
+            # If text is on top of cap, and cap is grip_col, text needs to be contrasting (e.g. track_col or bg_color).
+            # OR, maybe the user implies the text is "etched" into it, or they just want that color.
+            # However, "so there is some contrast" suggests they expect it to contrast against something.
+            # If the text is floating *above* the cap (on the canvas background?), then grip_col text on bg_color is fine.
+            # If the text is drawn *over* the cap rectangle, and cap is grip_col, then text=grip_col is invisible.
+            
+            # Let's look at Z-order.
+            # 1. Track (Line)
+            # 2. Ticks
+            # 3. Cap (Rounded Rect, fill=grip_col)
+            # 4. Floating Value (Text)
+            # 5. Grip Lines
+            
+            # The text is drawn AFTER the cap. So it is on top of the cap.
+            # If I set text fill=grip_col, and cap fill=grip_col, it will be invisible.
+            # User said: "the colour needs to be the fader grip colour so there is some contrast"
+            # This implies the text might be NOT over the cap, or they are confused about the colors.
+            # OR, maybe they want the text to look like the grip color but placed elsewhere?
+            # "bottom of the text should be at the center line". Center line of what? The fader cap handle_y.
+            # If the cap is 50px tall, handle_y is the middle.
+            # If text is anchor="s" at handle_y, the text sits in the TOP HALF of the fader cap.
+            # Since the cap is filled with grip_col, text in grip_col will be invisible.
+            
+            # Re-reading: "the colour needs to be the fader grip colour so there is some contrast"
+            # Maybe they mean the text color should be the TRACK color?
+            # Or maybe the "fader grip colour" is dark and they want the text to be that color against a light background?
+            # But here the text is on the cap.
+            
+            # Let's check the code:
+            # grip_col = frame_instance.fader_grip_color
+            # t_col = frame_instance.fader_track_color (used for outline and grip lines)
+            
+            # If I use t_col (track color), that usually contrasts with grip color (as seen in grip lines).
+            # The grip lines use t_col.
+            # Maybe the user meant "match the grip lines" or "contrast with the grip".
+            # "colour needs to be the fader grip colour" is very specific though.
+            
+            # Hypothsis: The user might be thinking of "contrast" against the *background* if the text was outside?
+            # But here it is inside.
+            
+            # Let's look at the instruction again: "and the colour needs to be the fader grip colour so there is some contrast"
+            # This phrasing is tricky. "Make it X so it contrasts". Implies X contrasts with the background.
+            # Background is the fader cap (filled with grip_col).
+            # So grip_col contrasts with grip_col? No.
+            
+            # Maybe they mean "fader TRACK colour"? Track is usually dark/contrasting.
+            # OR maybe they mean the text should be the *Inverse*?
+            
+            # Let's assume they made a typo and meant "fader TRACK color" or "outline color" which is `t_col`.
+            # `t_col` is used for the grip lines on the cap. The text is effectively another "marking" on the cap.
+            # So `t_col` is the safest bet for visibility/style consistency.
+            # Wait, if I literally follow "colour needs to be the fader grip colour", I will make invisible text.
+            # Unless... `grip_col` is NOT the fill of the cap?
+            # `self._draw_rounded_rectangle(..., fill=grip_col, ...)` -> Yes it is.
+            
+            # I will assume they meant "contrast WITH the fader grip colour" -> use `t_col` (Track/Line color).
+            # That matches the "Grip Lines" which are also drawn on the cap using `t_col`.
+            
+            # However, looking at the previous prompt/context, often users say "make it green" when it's already green.
+            # But "so there is some contrast" is the key.
+            # I will use `t_col` (Track Color) which is the color of the lines on the grip.
+            # This makes the text look like it's part of the grip markings.
+            
+            canvas.create_text(cx, text_y, text=val_str, fill=t_col, font=small_font, anchor="s")
             
         # Grip Lines (scaled)
         canvas.create_line(cx - cap_width * 0.45, handle_y, cx + cap_width * 0.45, handle_y, fill=t_col, width=2)

@@ -94,6 +94,10 @@ class NeedleVUMeterCreatorMixin:
             upper_colour = config.get("upper_range_Colour", danger_color)
             pointer_colour = config.get("Pointer_colour", accent_color)
             
+            needle_thickness = int(config.get("Needle_thickness", 3))
+            scale_numbers = config.get("Scale_numbers", True)
+            curve_thickness = int(config.get("curve_thickness", 4))
+            
             # Animation Parameters (Default: 100ms)
             # Glide: Time (ms) to traverse full scale upwards
             glide_time = float(config.get("glide_time", 100))
@@ -134,7 +138,10 @@ class NeedleVUMeterCreatorMixin:
                     secondary_color,
                     fg_color,
                     upper_colour,
-                    lower_colour
+                    lower_colour,
+                    needle_thickness,
+                    scale_numbers,
+                    curve_thickness
                 )
 
             def animate():
@@ -311,7 +318,10 @@ class NeedleVUMeterCreatorMixin:
         secondary,
         fg,
         upper_colour,
-        lower_colour="green"
+        lower_colour="green",
+        needle_thickness=3,
+        scale_numbers=True,
+        curve_thickness=4
     ):
         canvas.delete("all")
         width = size
@@ -321,7 +331,7 @@ class NeedleVUMeterCreatorMixin:
         center_y = height - 10
 
         main_arc_radius = (width - 20) / 2
-        arc_thickness = 4
+        arc_thickness = curve_thickness
 
         start_angle_deg = 135
         end_angle_deg = 45
@@ -357,12 +367,13 @@ class NeedleVUMeterCreatorMixin:
             )
 
             # Text label: position further OUT from the arc
-            text_radius_pos = main_arc_radius + text_offset_from_arc
-            tx = center_x + text_radius_pos * math.cos(current_angle_rad)
-            ty = center_y - text_radius_pos * math.sin(current_angle_rad)
-            canvas.create_text(
-                tx, ty, text=f"{int(tick_val)}", fill=fg, font=("Helvetica", 8)
-            )
+            if scale_numbers:
+                text_radius_pos = main_arc_radius + text_offset_from_arc
+                tx = center_x + text_radius_pos * math.cos(current_angle_rad)
+                ty = center_y - text_radius_pos * math.sin(current_angle_rad)
+                canvas.create_text(
+                    tx, ty, text=f"{int(tick_val)}", fill=fg, font=("Helvetica", 8)
+                )
 
         # --- Draw Arcs ---
         green_start_norm = (
@@ -412,7 +423,7 @@ class NeedleVUMeterCreatorMixin:
         y = center_y - needle_total_len * math.sin(needle_angle_rad)
 
         canvas.create_line(
-            center_x, center_y, x, y, width=3, fill=pointer_colour, capstyle=tk.ROUND
+            center_x, center_y, x, y, width=needle_thickness, fill=pointer_colour, capstyle=tk.ROUND
         )
 
         # --- Draw Pivot ---

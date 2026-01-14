@@ -2,7 +2,7 @@
   "Standard_VU_Demos": {
     "type": "OcaBlock",
     "description": "Standard VU Meter Showcase (8 Variations)",
-    "layout_columns": 8,
+    "layout_columns": 2,
     "column_sizing": [
       
       {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
@@ -19,6 +19,9 @@
         "Pointer_colour": "#ff0000",
         "value_default": -5.0,
         "No_Values": true,
+        "Needle_thickness": 3,
+        "Scale_numbers": true,
+        "curve_thickness": 5,
         "notes": "Standard response, red pointer."
       },
       "Fast_Response_VU": {
@@ -32,6 +35,9 @@
         "Pointer_colour": "#FFFFFF",
         "value_default": -10.0,
         "No_Values": true,
+        "Needle_thickness": 4,
+        "Scale_numbers": false,
+        "curve_thickness": 8,
         "notes": "Snappy peak-meter style."
       },
       "Slow_Response_VU": {
@@ -45,6 +51,9 @@
         "Pointer_colour": "#FFEB3B",
         "value_default": -30.0,
         "No_Values": true,
+        "Needle_thickness": 5,
+        "Scale_numbers": true,
+        "curve_thickness": 10,
         "notes": "Vintage, heavy needle feel."
       },
       "Wide_Range_VU": {
@@ -58,6 +67,9 @@
         "Pointer_colour": "#00BCD4",
         "value_default": -40.0,
         "No_Values": true,
+        "Needle_thickness": 2,
+        "Scale_numbers": false,
+        "curve_thickness": 6,
         "notes": "Full spectrum monitoring."
       }
     }

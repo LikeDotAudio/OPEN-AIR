@@ -1,3 +1,6 @@
+
+
+
 {
   "Large_Console_Bank": {
     "type": "OcaBlock",
@@ -21,6 +24,9 @@
         "Pointer_colour": "#FF0000",
         "value_default": -30.0,
         "No_Values": true,
+        "Needle_thickness": 5,
+        "Scale_numbers": true,
+        "curve_thickness": 12,
         "notes": "Classic console look."
       },
       "Large_R": {
@@ -37,6 +43,9 @@
         "Pointer_colour": "#FF0000",
         "value_default": -30.0,
         "No_Values": true,
+        "Needle_thickness": 5,
+        "Scale_numbers": true,
+        "curve_thickness": 12,
         "notes": "Matching right channel."
       }
     }

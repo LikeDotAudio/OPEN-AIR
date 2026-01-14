@@ -1,0 +1,84 @@
+{
+  "Knob_Zoo_Drive": {
+    "type": "OcaBlock",
+    "description": "Drive/Distortion Knob Variations (8 Demos)",
+    "layout_columns": 4,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "knob_drv1": {
+        "type": "_Knob",
+        "label_active": "Gain",
+        "min": 0.0, "max": 100.0, "value_default": 80.0,
+        "width": 100, "height": 100,
+        "indicator_color": "#33A1FD",
+        "no_center": true,
+        "notes": "Massive Red Gain."
+      },
+      "knob_drv2": {
+        "type": "_Knob",
+        "label_active": "Tone",
+        "min": 0.0, "max": 100.0, "value_default": 50.0,
+        "width": 100, "height": 100,
+        "indicator_color": "#33A1FD",
+        "no_center": true,
+        "notes": "Yellow Tone."
+      },
+      "knob_drv3": {
+        "type": "_Knob",
+        "label_active": "Presence",
+        "min": 0.0, "max": 10.0, "value_default": 5.0,
+        "width": 100, "height": 100,
+        "indicator_color": "#33A1FD",
+        "no_center": true,
+        "notes": "Blue Presence."
+      },
+      "knob_drv4": {
+        "type": "_Knob",
+        "label_active": "Bias",
+        "min": -50.0, "max": 50.0, "value_default": 0.0,
+        "width": 100, "height": 100,
+        "indicator_color": "#33A1FD",
+        "no_center": true,
+        "notes": "Grey Bias."
+      },
+      "knob_drv5": {
+        "type": "_Knob",
+        "label_active": "Fuzz",
+        "min": 0.0, "max": 100.0, "value_default": 90.0,
+        "width": 100, "height": 100,
+        "indicator_color": "#33A1FD",
+        "no_center": true,
+        "notes": "Purple Fuzz."
+      },
+      "knob_drv6": {
+        "type": "_Knob",
+        "label_active": "Crunch",
+        "min": 0.0, "max": 100.0, "value_default": 40.0,
+        "width": 100, "height": 100,
+        "indicator_color": "#33A1FD",
+        "no_center": true,
+        "notes": "Orange Crunch."
+      },
+      "knob_drv7": {
+        "type": "_Knob",
+        "label_active": "Post",
+        "min": 0.0, "max": 100.0, "value_default": 70.0,
+        "width": 100, "height": 100,
+        "indicator_color": "#33A1FD",
+        "no_center": true,
+        "notes": "Green Post-Gain."
+      },
+      "knob_drv8": {
+        "type": "_Knob",
+        "label_active": "Mix",
+        "min": 0.0, "max": 100.0, "value_default": 100.0,
+        "width": 100, "height": 100,
+        "indicator_color": "#33A1FD",
+        "no_center": true,
+        "notes": "White Mix knob."
+      }
+    }
+  }
+}

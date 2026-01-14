@@ -191,41 +191,35 @@ class KnobCreatorMixin:
             else:
                 canvas.pack(expand=True)
 
-            # Value Position Logic (Value_text_position)
-            value_pos = config.get("Value_text_position", "bottom").lower()
-            
             value_label = ttk.Label(frame, text=f"{int(knob_value_var.get())}", font=("Helvetica", 8))
-            
-            if value_pos == "center":
-                pass 
-            elif value_pos == "top":
-                value_label.pack(side=tk.TOP, before=canvas)
-            elif value_pos == "bottom":
-                value_label.pack(side=tk.BOTTOM, after=canvas)
-            elif value_pos == "left":
-                value_label.pack(side=tk.LEFT, before=canvas)
-            elif value_pos == "right":
-                value_label.pack(side=tk.RIGHT, after=canvas)
+            value_label.pack(side=tk.BOTTOM, after=canvas)
 
             visual_props = {"secondary": secondary_color}
             hover_color = "#999999"
+
+            # Clean Parameter Extraction
+            text_inside = config.get("text_inside", False)
+            no_center = config.get("no_center", False)
+            show_ticks = config.get("show_ticks", False)
+            tick_length = int(config.get("tick_length", 10))
+            arc_width = int(config.get("arc_width", 5))
             
-            # New visual parameters
-            center_dot = config.get("Center_dot", True)
-            center_dot_color = config.get("Center_dot_colour", None) # If None, use active color
-            show_ticks = config.get("Ticks", False)
-            tick_length = int(config.get("Tick_length", 10))
-            pie_crust = int(config.get("pie_crust", 4))
-            pointer_pad = int(config.get("Pointer_pad", 0))
+            # Pointer configuration
+            # Default to full radius line if not specified
+            pointer_length = config.get("pointer_length", None) # If None, calculate dynamic full length
+            pointer_offset = int(config.get("pointer_offset", 0)) # Distance from center start
 
             def update_knob_visuals(*args):
                 self._draw_knob(
                     canvas, width, height, knob_value_var.get(), frame.min_val, frame.max_val, 
                     value_label, fg_color, accent_color, indicator_color, visual_props["secondary"],
-                    value_pos=value_pos,
-                    center_dot=center_dot, center_dot_color=center_dot_color,
-                    show_ticks=show_ticks, tick_length=tick_length,
-                    pie_crust=pie_crust, pointer_pad=pointer_pad
+                    text_inside=text_inside,
+                    no_center=no_center,
+                    show_ticks=show_ticks,
+                    tick_length=tick_length,
+                    arc_width=arc_width,
+                    pointer_length=pointer_length,
+                    pointer_offset=pointer_offset
                 )
 
             knob_value_var.trace_add("write", update_knob_visuals)
@@ -279,74 +273,83 @@ class KnobCreatorMixin:
             debug_logger(message=f"❌ The knob '{label}' shattered! Error: {e}")
             return None
 
-    def _draw_knob(self, canvas, width, height, value, min_val, max_val, value_label, neutral_color, accent_for_arc, indicator_color, secondary, value_pos="bottom", center_dot=True, center_dot_color=None, show_ticks=False, tick_length=10, pie_crust=4, pointer_pad=0):
+    def _draw_knob(self, canvas, width, height, value, min_val, max_val, value_label, neutral_color, accent_for_arc, indicator_color, secondary, text_inside=False, no_center=False, show_ticks=False, tick_length=10, arc_width=5, pointer_length=None, pointer_offset=0):
         canvas.delete("all")
         cx, cy = width / 2, height / 2
-        # Radius for the main ring
-        radius = min(width, height) / 2 - 5
         
-        # If ticks are enabled, we might need to shrink the main ring radius to fit them inside the canvas?
-        # Or assumes user gives enough padding/size.
-        # "Ticks" = true "Tick_length" = 10 this should put 10 pixel line on the outside of the knob
-        # Let's reduce radius if ticks are on to prevent clipping.
+        # Calculate max radius that fits
+        # We need padding for the stroke width (arc_width) and potentially ticks
+        padding = arc_width / 2 + 2
         if show_ticks:
-            radius -= (tick_length + 2)
+            padding += tick_length + 2
             
-        # Draw Background Arc (Crust)
-        canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=240, extent=-300, style=tk.ARC, outline=secondary, width=pie_crust)
+        radius = min(width, height) / 2 - padding
+        
+        # Draw Background Arc
+        canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=240, extent=-300, style=tk.ARC, outline=secondary, width=arc_width)
         
         norm_val_0_1 = (value - min_val) / (max_val - min_val) if max_val > min_val else 0
         norm_val = (norm_val_0_1 * 2) - 1 if (min_val < 0 and max_val >= 0) else norm_val_0_1
         
-        # Color Logic
+        # Color & Active Arc
         active_color = indicator_color
-        if abs(norm_val) < 0.01 and (min_val <= 0 and max_val >= 0):
-             active_color = neutral_color
-             val_extent = 0
-        else:
-             val_extent = -300 * norm_val_0_1
-             
-        # Update Label
-        if value_pos != "center":
-            value_label.config(foreground=active_color, text=f"{int(value)}")
-        else:
-             canvas.create_text(cx, cy, text=f"{int(value)}", fill=active_color, font=("Helvetica", 8, "bold"))
-
-        # Draw Active Arc
-        canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=240, extent=val_extent, style=tk.ARC, outline=active_color, width=pie_crust)
+        val_extent = -300 * norm_val_0_1
+        
+        canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=240, extent=val_extent, style=tk.ARC, outline=active_color, width=arc_width)
         
         # Pointer Logic
         angle_rad = math.radians(240 + val_extent)
-        # Pointer start point (from center + padding)
-        sx = cx + pointer_pad * math.cos(angle_rad)
-        sy = cy - pointer_pad * math.sin(angle_rad)
-        # Pointer end point (to ring)
-        ex = cx + radius * math.cos(angle_rad)
-        ey = cy - radius * math.sin(angle_rad)
         
-        canvas.create_line(sx, sy, ex, ey, fill=indicator_color, width=2, capstyle=tk.ROUND)
+        p_start_dist = pointer_offset
+        if pointer_length is None:
+            # Default: from offset to just inside the arc
+            p_end_dist = radius - (arc_width/2)
+        else:
+            p_end_dist = p_start_dist + float(pointer_length)
+            
+        sx = cx + p_start_dist * math.cos(angle_rad)
+        sy = cy - p_start_dist * math.sin(angle_rad)
+        ex = cx + p_end_dist * math.cos(angle_rad)
+        ey = cy - p_end_dist * math.sin(angle_rad)
+        
+        canvas.create_line(sx, sy, ex, ey, fill=active_color, width=2, capstyle=tk.ROUND)
         
         # Center Dot
-        if center_dot:
-            dot_col = center_dot_color if center_dot_color else active_color
-            canvas.create_oval(cx - 4, cy - 4, cx + 4, cy + 4, fill=dot_col, outline=dot_col)
+        if not no_center:
+            canvas.create_oval(cx - 3, cy - 3, cx + 3, cy + 3, fill=active_color, outline=active_color)
+            
+        # Text Inside
+        if text_inside:
+            # Hide the external label if it exists
+            # (In this simple implementation, we just draw over center)
+            # We might want to clear the 'value_label' text if it's being used for outside text, 
+            # but value_label is passed in.
+            value_label.place_forget() # Hide external
+            value_label.pack_forget()
+            canvas.create_text(cx, cy + (10 if not no_center else 0), text=f"{int(value)}", fill=active_color, font=("Helvetica", 8, "bold"))
+        else:
+             # Ensure external label is visible if not inside
+             # Note: positioning is handled in _create_knob pack/grid logic which we didn't fully rewrite here, 
+             # but we can at least set the text.
+             value_label.config(text=f"{int(value)}")
 
         # Draw Ticks
         if show_ticks:
-            # Start at 240, go -300 degrees.
-            # 15 degree increments.
             start_angle = 240
             end_angle = 240 - 300
-            current_angle = start_angle
+            step = 30 # degrees between ticks
             
-            while current_angle >= end_angle:
-                rad = math.radians(current_angle)
-                # Start of tick (at ring radius + gap)
-                ts_x = cx + (radius + 2) * math.cos(rad)
-                ts_y = cy - (radius + 2) * math.sin(rad)
-                # End of tick
-                te_x = cx + (radius + 2 + tick_length) * math.cos(rad)
-                te_y = cy - (radius + 2 + tick_length) * math.sin(rad)
+            curr = start_angle
+            while curr >= end_angle:
+                rad = math.radians(curr)
+                # Start just outside the arc
+                ts_dist = radius + (arc_width/2) + 2
+                te_dist = ts_dist + tick_length
+                
+                ts_x = cx + ts_dist * math.cos(rad)
+                ts_y = cy - ts_dist * math.sin(rad)
+                te_x = cx + te_dist * math.cos(rad)
+                te_y = cy - te_dist * math.sin(rad)
                 
                 canvas.create_line(ts_x, ts_y, te_x, te_y, fill=secondary, width=1)
-                current_angle -= 15
+                curr -= step

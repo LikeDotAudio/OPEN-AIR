@@ -1,0 +1,86 @@
+{
+  "Knob_Zoo_Advanced": {
+    "type": "OcaBlock",
+    "description": "Advanced Knob Features (Infinity, Layout, Sensitivity)",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "knob_adv1": {
+        "type": "_Knob",
+        "label_active": "Infinite",
+        "min": 0.0, "max": 12.0, "value_default": 0.0,
+        "infinity": true,
+        "width": 60, "height": 60,
+        "indicator_color": "#F44336",
+        "notes": "Wraps 0-12"
+      },
+      "knob_adv2": {
+        "type": "_Knob",
+        "label_active": "Fine Pitch",
+        "min": 0.0, "max": 100.0, "value_default": 50.0,
+        "fine_pitch": true,
+        "width": 60, "height": 60,
+        "indicator_color": "#2196F3",
+        "notes": "Slow turn"
+      },
+      "knob_adv3": {
+        "type": "_Knob",
+        "label_active": "Val Top",
+        "min": 0.0, "max": 100.0, "value_default": 30.0,
+        "Value_text_position": "top",
+        "label_Text_position": "bottom",
+        "width": 50, "height": 50,
+        "indicator_color": "#4CAF50",
+        "notes": "Value Top"
+      },
+      "knob_adv4": {
+        "type": "_Knob",
+        "label_active": "Val Left",
+        "min": 0.0, "max": 100.0, "value_default": 70.0,
+        "Value_text_position": "left",
+        "width": 50, "height": 50,
+        "indicator_color": "#FF9800",
+        "notes": "Value Left"
+      },
+      "knob_adv5": {
+        "type": "_Knob",
+        "label_active": "Val Right",
+        "min": 0.0, "max": 100.0, "value_default": 20.0,
+        "Value_text_position": "right",
+        "width": 50, "height": 50,
+        "indicator_color": "#9C27B0",
+        "notes": "Value Right"
+      },
+      "knob_adv6": {
+        "type": "_Knob",
+        "label_active": "Center Val",
+        "min": 0.0, "max": 100.0, "value_default": 50.0,
+        "Value_text_position": "center",
+        "width": 70, "height": 70,
+        "indicator_color": "#795548",
+        "notes": "Value in Center"
+      },
+      "knob_adv7": {
+        "type": "_Knob",
+        "label_active": "Txt Left",
+        "min": 0.0, "max": 100.0, "value_default": 10.0,
+        "label_Text_position": "left",
+        "width": 50, "height": 50,
+        "indicator_color": "#607D8B",
+        "notes": "Label Left"
+      },
+      "knob_adv8": {
+        "type": "_Knob",
+        "label_active": "Txt Right",
+        "min": 0.0, "max": 100.0, "value_default": 90.0,
+        "label_Text_position": "right",
+        "width": 50, "height": 50,
+        "indicator_color": "#009688",
+        "notes": "Label Right"
+      }
+    }
+  }
+}

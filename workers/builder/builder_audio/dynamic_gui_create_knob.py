@@ -1,7 +1,8 @@
 # builder_audio/dynamic_gui_create_knob.py
 #
 # A Tkinter Canvas-based Rotary Knob that respects the global theme.
-# Includes mousewheel support and middle-click reset.
+# Includes advanced geometry (gears, octagons), modular rendering,
+# mousewheel support, and middle-click reset.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
@@ -13,7 +14,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20250821.200641.1
+# Version 20260114.KnobOverhaul.1
 
 import tkinter as tk
 from tkinter import ttk
@@ -205,9 +206,18 @@ class KnobCreatorMixin:
             arc_width = int(config.get("arc_width", 5))
             
             # Pointer configuration
-            # Default to full radius line if not specified
-            pointer_length = config.get("pointer_length", None) # If None, calculate dynamic full length
-            pointer_offset = int(config.get("pointer_offset", 0)) # Distance from center start
+            pointer_length = config.get("pointer_length", None)
+            pointer_offset = int(config.get("pointer_offset", 0)) 
+
+            # New Parameters for Overhaul
+            shape = config.get("shape", "circle").lower() # circle, octagon, gear
+            pointer_style = config.get("pointer_style", "line").lower() # line, triangle, notch
+            tick_style = config.get("tick_style", "simple").lower() # simple, numeric, dots
+            gradient_level = int(config.get("gradient_level", 0)) # 0-5
+            
+            # Outline Parameters
+            knob_outline_thickness = int(config.get("knob_outline_thickness", 0))
+            knob_outline_color = config.get("knob_outline_color", secondary_color)
 
             def update_knob_visuals(*args):
                 self._draw_knob(
@@ -219,7 +229,14 @@ class KnobCreatorMixin:
                     tick_length=tick_length,
                     arc_width=arc_width,
                     pointer_length=pointer_length,
-                    pointer_offset=pointer_offset
+                    pointer_offset=pointer_offset,
+                    shape=shape,
+                    pointer_style=pointer_style,
+                    tick_style=tick_style,
+                    gradient_level=gradient_level,
+                    # New params
+                    outline_thickness=knob_outline_thickness,
+                    outline_color=knob_outline_color
                 )
 
             knob_value_var.trace_add("write", update_knob_visuals)
@@ -273,83 +290,184 @@ class KnobCreatorMixin:
             debug_logger(message=f"❌ The knob '{label}' shattered! Error: {e}")
             return None
 
-    def _draw_knob(self, canvas, width, height, value, min_val, max_val, value_label, neutral_color, accent_for_arc, indicator_color, secondary, text_inside=False, no_center=False, show_ticks=False, tick_length=10, arc_width=5, pointer_length=None, pointer_offset=0):
+    def _draw_knob(self, canvas, width, height, value, min_val, max_val, value_label, neutral_color, accent_for_arc, indicator_color, secondary, text_inside=False, no_center=False, show_ticks=False, tick_length=10, arc_width=5, pointer_length=None, pointer_offset=0, shape="circle", pointer_style="line", tick_style="simple", gradient_level=0, outline_thickness=2, outline_color="gray"):
+        """Modular rendering pipeline."""
         canvas.delete("all")
         cx, cy = width / 2, height / 2
         
-        # Calculate max radius that fits
-        # We need padding for the stroke width (arc_width) and potentially ticks
+        # Calculate max radius
         padding = arc_width / 2 + 2
         if show_ticks:
-            padding += tick_length + 2
+            padding += tick_length + 5 # Extra padding for numbers
             
         radius = min(width, height) / 2 - padding
         
-        # Draw Background Arc
-        canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=240, extent=-300, style=tk.ARC, outline=secondary, width=arc_width)
-        
+        # 1. Math Prep
         norm_val_0_1 = (value - min_val) / (max_val - min_val) if max_val > min_val else 0
-        norm_val = (norm_val_0_1 * 2) - 1 if (min_val < 0 and max_val >= 0) else norm_val_0_1
+        start_angle = 240
+        extent = -300
+        val_extent = extent * norm_val_0_1
+        pointer_angle_deg = start_angle + val_extent
         
-        # Color & Active Arc
-        active_color = indicator_color
-        val_extent = -300 * norm_val_0_1
+        # 2. Draw Track (The Arc)
+        self._draw_track(canvas, cx, cy, radius, start_angle, extent, val_extent, secondary, indicator_color, arc_width)
         
-        canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=240, extent=val_extent, style=tk.ARC, outline=active_color, width=arc_width)
-        
-        # Pointer Logic
-        angle_rad = math.radians(240 + val_extent)
-        
-        p_start_dist = pointer_offset
-        if pointer_length is None:
-            # Default: from offset to just inside the arc
-            p_end_dist = radius - (arc_width/2)
-        else:
-            p_end_dist = p_start_dist + float(pointer_length)
+        # 3. Draw Ticks
+        if show_ticks:
+            self._draw_ticks(canvas, cx, cy, radius, arc_width, tick_length, tick_style, secondary, min_val, max_val)
             
-        sx = cx + p_start_dist * math.cos(angle_rad)
-        sy = cy - p_start_dist * math.sin(angle_rad)
-        ex = cx + p_end_dist * math.cos(angle_rad)
-        ey = cy - p_end_dist * math.sin(angle_rad)
-        
-        canvas.create_line(sx, sy, ex, ey, fill=active_color, width=2, capstyle=tk.ROUND)
-        
-        # Center Dot
-        if not no_center:
-            canvas.create_oval(cx - 3, cy - 3, cx + 3, cy + 3, fill=active_color, outline=active_color)
-            
-        # Text Inside
+        # 4. Draw Pointer
+        self._draw_pointer(canvas, cx, cy, radius, arc_width, pointer_angle_deg, pointer_style, indicator_color, pointer_length, pointer_offset, no_center)
+
+        # 5. Draw Body / Outline (Rendered on TOP)
+        self._draw_body(canvas, cx, cy, radius, shape, outline_color, gradient_level, rotation_angle=pointer_angle_deg, outline_thickness=outline_thickness)
+
+        # 6. Text Updates
         if text_inside:
-            # Hide the external label if it exists
-            # (In this simple implementation, we just draw over center)
-            # We might want to clear the 'value_label' text if it's being used for outside text, 
-            # but value_label is passed in.
-            value_label.place_forget() # Hide external
-            value_label.pack_forget()
-            canvas.create_text(cx, cy + (10 if not no_center else 0), text=f"{int(value)}", fill=active_color, font=("Helvetica", 8, "bold"))
+            value_label.place_forget(); value_label.pack_forget()
+            canvas.create_text(cx, cy + (10 if not no_center else 0), text=f"{int(value)}", fill=indicator_color, font=("Helvetica", 8, "bold"))
         else:
-             # Ensure external label is visible if not inside
-             # Note: positioning is handled in _create_knob pack/grid logic which we didn't fully rewrite here, 
-             # but we can at least set the text.
              value_label.config(text=f"{int(value)}")
 
-        # Draw Ticks
-        if show_ticks:
-            start_angle = 240
-            end_angle = 240 - 300
-            step = 30 # degrees between ticks
+    def _draw_body(self, canvas, cx, cy, radius, shape, color, gradient_level, rotation_angle=0, outline_thickness=0):
+        """Draws the background shape."""
+        # Simple gradient simulation using concentric rings
+        steps = gradient_level + 1
+        for i in range(steps):
+            r = radius - (i * 2)
+            if r <= 0: break
             
-            curr = start_angle
-            while curr >= end_angle:
-                rad = math.radians(curr)
-                # Start just outside the arc
-                ts_dist = radius + (arc_width/2) + 2
-                te_dist = ts_dist + tick_length
-                
-                ts_x = cx + ts_dist * math.cos(rad)
-                ts_y = cy - ts_dist * math.sin(rad)
-                te_x = cx + te_dist * math.cos(rad)
-                te_y = cy - te_dist * math.sin(rad)
-                
-                canvas.create_line(ts_x, ts_y, te_x, te_y, fill=secondary, width=1)
-                curr -= step
+            # Use provided outline_thickness for the outermost ring, and width=1 for internal ones
+            # If outline_thickness is 0, the outer ring (i=0) will have width=0 (invisible)
+            current_thickness = outline_thickness if i == 0 else 1
+
+            # Check if we should draw at all
+            if current_thickness == 0 and i == 0 and gradient_level == 0:
+                continue
+
+            # Simple Shapes
+            if shape == "circle":
+                # Only draw if explicitly needed (e.g. filled body)
+                if gradient_level > 0 or (i == 0 and current_thickness > 0):
+                    canvas.create_oval(cx-r, cy-r, cx+r, cy+r, outline=color, width=current_thickness)
+            elif shape == "octagon":
+                points = self._get_poly_points(cx, cy, r, sides=8, start_angle=rotation_angle)
+                canvas.create_polygon(points, outline=color, fill="", width=current_thickness)
+            elif shape == "gear":
+                # Gear: 8 teeth
+                points = self._get_gear_points(cx, cy, r, teeth=8, notch_depth=0.15, start_angle=rotation_angle)
+                canvas.create_polygon(points, outline=color, fill="", width=current_thickness)
+
+    def _draw_track(self, canvas, cx, cy, radius, start_angle, extent, val_extent, bg_color, active_color, width):
+        """Draws the value arc."""
+        # Background Arc
+        canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=start_angle, extent=extent, style=tk.ARC, outline=bg_color, width=width)
+        # Active Arc
+        canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=start_angle, extent=val_extent, style=tk.ARC, outline=active_color, width=width)
+
+    def _draw_ticks(self, canvas, cx, cy, radius, arc_width, tick_length, style, color, min_val, max_val):
+        start_angle = 240
+        end_angle = 240 - 300
+        step = 30 # degrees between ticks
+        
+        curr = start_angle
+        val_step = (max_val - min_val) / 10.0 # Approx 10 ticks
+        curr_val = min_val
+        
+        while curr >= end_angle - 1: # Allow small float error
+            rad = math.radians(curr)
+            ts_dist = radius + (arc_width/2) + 2
+            te_dist = ts_dist + tick_length
+            
+            ts_x = cx + ts_dist * math.cos(rad)
+            ts_y = cy - ts_dist * math.sin(rad)
+            te_x = cx + te_dist * math.cos(rad)
+            te_y = cy - te_dist * math.sin(rad)
+            
+            if style == "dots":
+                canvas.create_oval(te_x-1, te_y-1, te_x+1, te_y+1, fill=color, outline=color)
+            elif style == "numeric":
+                # Draw number
+                txt = f"{int(curr_val)}"
+                canvas.create_text(te_x, te_y, text=txt, fill=color, font=("Arial", 6))
+            else:
+                # Line (default)
+                canvas.create_line(ts_x, ts_y, te_x, te_y, fill=color, width=1)
+            
+            curr -= step
+            curr_val += val_step
+
+    def _draw_pointer(self, canvas, cx, cy, radius, arc_width, angle_deg, style, color, length, offset, no_center):
+        angle_rad = math.radians(angle_deg)
+        
+        p_start = offset
+        p_end = (radius - arc_width/2) if length is None else (offset + float(length))
+        
+        if style == "triangle":
+            # Triangle pointing out
+            # Base at p_start, tip at p_end
+            tip_x = cx + p_end * math.cos(angle_rad)
+            tip_y = cy - p_end * math.sin(angle_rad)
+            
+            # Base width
+            w = 5 
+            # Base center
+            bx = cx + p_start * math.cos(angle_rad)
+            by = cy - p_start * math.sin(angle_rad)
+            
+            # Perpendicular vector for base corners
+            perp_ang = angle_rad + math.pi/2
+            c1x = bx + w * math.cos(perp_ang)
+            c1y = by - w * math.sin(perp_ang)
+            c2x = bx - w * math.cos(perp_ang)
+            c2y = by + w * math.sin(perp_ang)
+            
+            canvas.create_polygon(tip_x, tip_y, c1x, c1y, c2x, c2y, fill=color, outline=color)
+            
+        elif style == "notch":
+            # Just a small notch on the perimeter
+            # Usually requires a filled body to look right, but we'll draw a thick short line
+            notch_len = 5
+            sx = cx + (radius - notch_len) * math.cos(angle_rad)
+            sy = cy - (radius - notch_len) * math.sin(angle_rad)
+            ex = cx + radius * math.cos(angle_rad)
+            ey = cy - radius * math.sin(angle_rad)
+            canvas.create_line(sx, sy, ex, ey, fill=color, width=4, capstyle=tk.BUTT)
+            
+        else:
+            # Standard Line
+            sx = cx + p_start * math.cos(angle_rad)
+            sy = cy - p_start * math.sin(angle_rad)
+            ex = cx + p_end * math.cos(angle_rad)
+            ey = cy - p_end * math.sin(angle_rad)
+            canvas.create_line(sx, sy, ex, ey, fill=color, width=2, capstyle=tk.ROUND)
+
+        if not no_center:
+            canvas.create_oval(cx - 3, cy - 3, cx + 3, cy + 3, fill=color, outline=color)
+
+    # --- Geometry Helpers ---
+    def _get_poly_points(self, cx, cy, radius, sides=8, start_angle=0):
+        points = []
+        angle_step = 360 / sides
+        for i in range(sides):
+            deg = i * angle_step + start_angle
+            rad = math.radians(deg)
+            x = cx + radius * math.cos(rad)
+            y = cy - radius * math.sin(rad)
+            points.extend([x, y])
+        return points
+
+    def _get_gear_points(self, cx, cy, radius, teeth=8, notch_depth=0.2, start_angle=0):
+        points = []
+        angle_step = 360 / (teeth * 2) # Tooth + Gap
+        inner_radius = radius * (1 - notch_depth)
+        
+        for i in range(teeth * 2):
+            deg = i * angle_step + start_angle
+            rad = math.radians(deg)
+            # Alternate radius
+            r = radius if i % 2 == 0 else inner_radius
+            x = cx + r * math.cos(rad)
+            y = cy - r * math.sin(rad)
+            points.extend([x, y])
+        return points

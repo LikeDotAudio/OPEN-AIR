@@ -1,0 +1,209 @@
+{
+  "Knob_Combined_Demo": {
+    "type": "OcaBlock",
+    "description": "Combined Knob Showcase (Volume, Pitch, Filter)",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "knob_01": {
+        "type": "_Knob",
+        "label_active": "Std Brown",
+        "min": 0.0, "max": 100.0, "value_default": 70.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#996633",
+        "notes": "Standard size, brown"
+      },
+      "knob_02": {
+        "type": "_Knob",
+        "label_active": "Sm Red",
+        "min": 0.0, "max": 100.0, "value_default": 20.0,
+        "width": 30, "height": 30,
+        "indicator_color": "#FF0000",
+        "notes": "Small size, red"
+      },
+      "knob_03": {
+        "type": "_Knob",
+        "label_active": "Lg Blue",
+        "min": 0.0, "max": 100.0,
+        "value_default": 80.0,
+        "width": 80, "height": 80,
+        "indicator_color": "#0000FF",
+        "notes": "Large size, blue"
+      },
+      "knob_04": {
+        "type": "_Knob",
+        "label_active": "Med Green",
+        "min": 0.0, "max": 100.0, "value_default": 50.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#00FF00",
+        "notes": "Medium size, green"
+      },
+      "knob_05": {
+        "type": "_Knob",
+        "label_active": "Tiny Yel",
+        "min": 0.0, "max": 100.0, "value_default": 10.0,
+        "width": 25,
+        "height": 25,
+        "indicator_color": "#FFFF00",
+        "notes": "Tiny size, yellow"
+      },
+      "knob_06": {
+        "type": "_Knob",
+        "label_active": "Giant Cyn",
+        "min": 0.0, "max": 100.0, "value_default": 90.0,
+        "width": 100, "height": 100,
+        "indicator_color": "#00FFFF",
+        "notes": "Giant size, cyan"
+      },
+      "knob_07": {
+        "type": "_Knob",
+        "label_active": "Med Mag",
+        "min": 0.0,
+        "max": 100.0,
+        "value_default": 60.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#FF00FF",
+        "notes": "Medium size, magenta"
+      },
+      "knob_08": {
+        "type": "_Knob",
+        "label_active": "Lg Orange",
+        "min": 0.0, "max": 100.0, "value_default": 40.0,
+        "width": 80, "height": 80,
+        "indicator_color": "#FFA500",
+        "notes": "Large size, orange"
+      },
+      "knob_p1": {
+        "type": "_Knob",
+        "label_active": "Fine Tune",
+        "min": -50.0, "max": 50.0, "value_default": 0.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#4CAF50",
+        "notes": "Green center detent"
+      },
+      "knob_p2": {
+        "type": "_Knob",
+        "label_active": "Coarse",
+        "min": -12.0, "max": 12.0, "value_default": 0.0,
+        "width": 70, "height": 70,
+        "indicator_color": "#2196F3",
+        "notes": "Large blue"
+      },
+      "knob_p3": {
+        "type": "_Knob",
+        "label_active": "Octave",
+        "min": -2.0, "max": 2.0, "value_default": 0.0,
+        "width": 40, "height": 40,
+        "indicator_color": "#FFC107",
+        "notes": "Small amber"
+      },
+      "knob_p4": {
+        "type": "_Knob",
+        "label_active": "Detune",
+        "min": 0.0, "max": 100.0, "value_default": 15.0,
+        "width": 60, "height": 60,
+        "indicator_color": "#9C27B0",
+        "notes": "Purple detune"
+      },
+      "knob_p5": {
+        "type": "_Knob",
+        "label_active": "LFO Amt",
+        "min": 0.0, "max": 100.0, "value_default": 50.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#00BCD4",
+        "notes": "Cyan LFO"
+      },
+      "knob_p6": {
+        "type": "_Knob",
+        "label_active": "Env Mod",
+        "min": -100.0, "max": 100.0, "value_default": 0.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#FF5722",
+        "notes": "Deep Orange Bipolar"
+      },
+      "knob_p7": {
+        "type": "_Knob",
+        "label_active": "Key Trk",
+        "min": 0.0, "max": 100.0, "value_default": 100.0,
+        "width": 30, "height": 30,
+        "indicator_color": "#795548",
+        "notes": "Tiny brown"
+      },
+      "knob_p8": {
+        "type": "_Knob",
+        "label_active": "Glide",
+        "min": 0.0, "max": 100.0, "value_default": 20.0,
+        "width": 80, "height": 80,
+        "indicator_color": "#607D8B",
+        "notes": "Large grey"
+      },
+      "knob_f1": {
+        "type": "_Knob",
+        "label_active": "Cutoff",
+        "min": 20.0, "max": 20000.0, "value_default": 2000.0,
+        "width": 90, "height": 90,
+        "indicator_color": "#FFEB3B",
+        "notes": "Giant Yellow Cutoff"
+      },
+      "knob_f2": {
+        "type": "_Knob",
+        "label_active": "Resonance",
+        "min": 0.0, "max": 10.0, "value_default": 2.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#FF9800",
+        "notes": "Orange Res"
+      },
+      "knob_f3": {
+        "type": "_Knob",
+        "label_active": "Env Amt",
+        "min": -100.0, "max": 100.0, "value_default": 50.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#F44336",
+        "notes": "Red Envelope"
+      },
+      "knob_f4": {
+        "type": "_Knob",
+        "label_active": "Drive",
+        "min": 0.0, "max": 11.0, "value_default": 0.0,
+        "width": 40, "height": 40,
+        "indicator_color": "#D32F2F",
+        "notes": "Dark Red Drive"
+      },
+      "knob_f5": {
+        "type": "_Knob",
+        "label_active": "HPF",
+        "min": 20.0, "max": 500.0, "value_default": 80.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#8BC34A",
+        "notes": "Light Green HPF"
+      },
+      "knob_f6": {
+        "type": "_Knob",
+        "label_active": "LPF",
+        "min": 1000.0, "max": 20000.0, "value_default": 12000.0,
+        "width": 50, "height": 50,
+        "indicator_color": "#4CAF50",
+        "notes": "Green LPF"
+      },
+      "knob_f7": {
+        "type": "_Knob",
+        "label_active": "Key Follow",
+        "min": 0.0, "max": 100.0, "value_default": 30.0,
+        "width": 30, "height": 30,
+        "indicator_color": "#CDDC39",
+        "notes": "Lime Key"
+      },
+      "knob_f8": {
+        "type": "_Knob",
+        "label_active": "Vel Sens",
+        "min": 0.0, "max": 100.0, "value_default": 70.0,
+        "width": 30, "height": 30,
+        "indicator_color": "#009688",
+        "notes": "Teal Vel"
+      }
+    }
+  }
+}

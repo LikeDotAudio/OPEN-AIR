@@ -1,0 +1,299 @@
+{
+  "Knob_Showcase_Ticks_Dials": {
+    "type": "OcaBlock",
+    "description": "30 Medium Knobs Focusing on Ticks, Dials & Thickness",
+    "layout_columns": 6,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "knob_tk_01": {
+        "type": "_Knob",
+        "label_active": "Num Std",
+        "width": 80, "height": 80,
+        "show_ticks": true,
+        "tick_style": "numeric",
+        "indicator_color": "#33A1FD",
+        "notes": "Standard Numeric"
+      },
+      "knob_tk_02": {
+        "type": "_Knob",
+        "label_active": "Long Ticks",
+        "width": 80, "height": 80,
+        "show_ticks": true,
+        "tick_length": 15,
+        "indicator_color": "#FF5722",
+        "notes": "Long Simple Lines"
+      },
+      "knob_tk_03": {
+        "type": "_Knob",
+        "label_active": "Dot Arc",
+        "width": 80, "height": 80,
+        "show_ticks": true,
+        "tick_style": "dots",
+        "indicator_color": "#4CAF50",
+        "notes": "Dot Ticks"
+      },
+      "knob_tk_04": {
+        "type": "_Knob",
+        "label_active": "Gear Num",
+        "shape": "gear",
+        "width": 90, "height": 90,
+        "show_ticks": true,
+        "tick_style": "numeric",
+        "indicator_color": "#FFC107",
+        "notes": "Rotating Gear + Numbers"
+      },
+      "knob_tk_05": {
+        "type": "_Knob",
+        "label_active": "Oct Dot",
+        "shape": "octagon",
+        "width": 80, "height": 80,
+        "show_ticks": true,
+        "tick_style": "dots",
+        "indicator_color": "#9C27B0",
+        "notes": "Rotating Oct + Dots"
+      },
+      
+      "knob_tk_06": {
+        "type": "_Knob",
+        "label_active": "Tri Ptr Num",
+        "width": 80, "height": 80,
+        "pointer_style": "triangle",
+        "show_ticks": true,
+        "tick_style": "numeric",
+        "indicator_color": "#00BCD4"
+      },
+      "knob_tk_07": {
+        "type": "_Knob",
+        "label_active": "Notch Line",
+        "width": 80, "height": 80,
+        "pointer_style": "notch",
+        "show_ticks": true,
+        "tick_length": 10,
+        "indicator_color": "#E91E63",
+        "no_center": true
+      },
+      "knob_tk_08": {
+        "type": "_Knob",
+        "label_active": "Fine Num",
+        "width": 90, "height": 90,
+        "show_ticks": true,
+        "tick_style": "numeric",
+        "fine_pitch": true,
+        "indicator_color": "#795548",
+        "text_inside": true
+      },
+      "knob_tk_09": {
+        "type": "_Knob",
+        "label_active": "Inf Dots",
+        "width": 80, "height": 80,
+        "infinity": true,
+        "show_ticks": true,
+        "tick_style": "dots",
+        "indicator_color": "#607D8B"
+      },
+      "knob_tk_10": {
+        "type": "_Knob",
+        "label_active": "Fat Arc",
+        "width": 80, "height": 80,
+        "arc_width": 10,
+        "show_ticks": true,
+        "tick_style": "numeric",
+        "indicator_color": "#3F51B5"
+      },
+
+      "knob_tk_11": {
+        "type": "_Knob",
+        "label_active": "Mix 1",
+        "shape": "gear",
+        "width": 90, "height": 90,
+        "pointer_style": "triangle",
+        "show_ticks": true,
+        "tick_style": "numeric",
+        "gradient_level": 3,
+        "indicator_color": "#F44336"
+      },
+      "knob_tk_12": {
+        "type": "_Knob",
+        "label_active": "Mix 2",
+        "shape": "octagon",
+        "width": 80, "height": 80,
+        "pointer_style": "notch",
+        "show_ticks": true,
+        "tick_style": "dots",
+        "gradient_level": 2,
+        "indicator_color": "#8BC34A"
+      },
+      "knob_tk_13": {
+        "type": "_Knob",
+        "label_active": "Mix 3",
+        "width": 80, "height": 80,
+        "arc_width": 2,
+        "tick_length": 20,
+        "show_ticks": true,
+        "indicator_color": "#FF9800"
+      },
+      "knob_tk_14": {
+        "type": "_Knob",
+        "label_active": "Mix 4",
+        "shape": "gear",
+        "width": 90, "height": 90,
+        "pointer_style": "line",
+        "show_ticks": true,
+        "tick_style": "dots",
+        "no_center": true,
+        "indicator_color": "#009688"
+      },
+      "knob_tk_15": {
+        "type": "_Knob",
+        "label_active": "Mix 5",
+        "width": 80, "height": 80,
+        "text_inside": true,
+        "show_ticks": true,
+        "tick_style": "numeric",
+        "indicator_color": "#673AB7"
+      },
+
+      "knob_tk_16": {
+        "type": "_Knob",
+        "label_active": "Big Num",
+        "width": 100, "height": 100,
+        "show_ticks": true,
+        "tick_style": "numeric",
+        "indicator_color": "#FF4081"
+      },
+      "knob_tk_17": {
+        "type": "_Knob",
+        "label_active": "Short Num",
+        "width": 80, "height": 80,
+        "show_ticks": true,
+        "tick_style": "numeric",
+        "tick_length": 5,
+        "indicator_color": "#CDDC39"
+      },
+      "knob_tk_18": {
+        "type": "_Knob",
+        "label_active": "Deep Gear",
+        "shape": "gear",
+        "width": 90, "height": 90,
+        "gradient_level": 5,
+        "show_ticks": true,
+        "tick_style": "numeric",
+        "indicator_color": "#2196F3"
+      },
+      "knob_tk_19": {
+        "type": "_Knob",
+        "label_active": "Deep Oct",
+        "shape": "octagon",
+        "width": 80, "height": 80,
+        "gradient_level": 4,
+        "show_ticks": true,
+        "tick_style": "dots",
+        "indicator_color": "#9C27B0"
+      },
+      "knob_tk_20": {
+        "type": "_Knob",
+        "label_active": "The End",
+        "width": 100, "height": 100,
+        "shape": "gear",
+        "pointer_style": "triangle",
+        "show_ticks": true,
+        "tick_style": "numeric",
+        "tick_length": 15,
+        "text_inside": true,
+        "indicator_color": "#FFFFFF"
+      },
+
+      "knob_tk_21": {
+        "type": "_Knob",
+        "label_active": "Thin (1)",
+        "width": 80, "height": 80,
+        "arc_width": 1,
+        "show_ticks": true,
+        "tick_style": "numeric",
+        "indicator_color": "#FFD700"
+      },
+      "knob_tk_22": {
+        "type": "_Knob",
+        "label_active": "Med (3)",
+        "width": 80, "height": 80,
+        "arc_width": 3,
+        "show_ticks": true,
+        "tick_style": "dots",
+        "indicator_color": "#FF6347"
+      },
+      "knob_tk_23": {
+        "type": "_Knob",
+        "label_active": "Std (5)",
+        "width": 80, "height": 80,
+        "arc_width": 5,
+        "show_ticks": true,
+        "indicator_color": "#40E0D0"
+      },
+      "knob_tk_24": {
+        "type": "_Knob",
+        "label_active": "Thick (8)",
+        "width": 80, "height": 80,
+        "arc_width": 8,
+        "show_ticks": true,
+        "pointer_style": "triangle",
+        "indicator_color": "#EE82EE"
+      },
+      "knob_tk_25": {
+        "type": "_Knob",
+        "label_active": "Chunky (12)",
+        "width": 80, "height": 80,
+        "arc_width": 12,
+        "show_ticks": true,
+        "tick_style": "numeric",
+        "indicator_color": "#8A2BE2"
+      },
+      "knob_tk_26": {
+        "type": "_Knob",
+        "label_active": "Massive (16)",
+        "width": 90, "height": 90,
+        "arc_width": 16,
+        "shape": "octagon",
+        "show_ticks": true,
+        "indicator_color": "#DC143C"
+      },
+      "knob_tk_27": {
+        "type": "_Knob",
+        "label_active": "Donut (20)",
+        "width": 90, "height": 90,
+        "arc_width": 20,
+        "no_center": true,
+        "show_ticks": true,
+        "indicator_color": "#00FA9A"
+      },
+      "knob_tk_28": {
+        "type": "_Knob",
+        "label_active": "Gear Thick",
+        "width": 90, "height": 90,
+        "shape": "gear",
+        "arc_width": 10,
+        "gradient_level": 3,
+        "indicator_color": "#FF00FF"
+      },
+      "knob_tk_29": {
+        "type": "_Knob",
+        "label_active": "Fine Arc",
+        "width": 80, "height": 80,
+        "arc_width": 2,
+        "tick_length": 25,
+        "show_ticks": true,
+        "indicator_color": "#F0E68C"
+      },
+      "knob_tk_30": {
+        "type": "_Knob",
+        "label_active": "Max Thick",
+        "width": 100, "height": 100,
+        "arc_width": 25,
+        "pointer_style": "notch",
+        "text_inside": true,
+        "indicator_color": "#1E90FF"
+      }
+    }
+  }
+}

@@ -313,17 +313,17 @@ class KnobCreatorMixin:
         val_extent = extent * norm_val_0_1
         pointer_angle_deg = start_angle + val_extent
 
-        # 2. Draw Body / Outline (Rendered as BACKGROUND)
-        self._draw_body(canvas, cx, cy, radius, shape, outline_color, gradient_level, rotation_angle=pointer_angle_deg, outline_thickness=outline_thickness, fill_color=fill_color, teeth=teeth)
-        
-        # 3. Draw Track (The Arc)
+        # 2. Draw Track (The Arc) - Background
         self._draw_track(canvas, cx, cy, radius, start_angle, extent, val_extent, secondary, indicator_color, arc_width)
         
-        # 4. Draw Ticks
+        # 3. Draw Ticks - Background
         if show_ticks:
             self._draw_ticks(canvas, cx, cy, radius, arc_width, tick_length, tick_style, secondary, min_val, max_val)
+
+        # 4. Draw Body / Outline (The Gear) - Middle Layer
+        self._draw_body(canvas, cx, cy, radius, shape, outline_color, gradient_level, rotation_angle=pointer_angle_deg, outline_thickness=outline_thickness, fill_color=fill_color, teeth=teeth)
             
-        # 5. Draw Pointer
+        # 5. Draw Pointer - Top Layer
         self._draw_pointer(canvas, cx, cy, radius, arc_width, pointer_angle_deg, pointer_style, indicator_color, pointer_length, pointer_offset, no_center)
 
         # 6. Text Updates

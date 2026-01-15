@@ -1,6 +1,6 @@
 # Dynamic GUI Knob Widget User Guide
 
-This guide provides a comprehensive overview of the `_Knob` widget, implemented in `workers/builder/builder_audio/dynamic_gui_create_knob.py`. This widget renders a customizable, rotary knob using Tkinter's Canvas, suitable for audio applications and other control interfaces.
+This guide provides a comprehensive overview of the `_Knob` widget, implemented in `workers/builder/builder_audio/dynamic_gui_create_knob.py`. This widget renders a highly customizable, rotary knob using Tkinter's Canvas, suitable for audio applications and other control interfaces.
 
 ## 1. Overview
 
@@ -10,7 +10,7 @@ The `_Knob` widget is a versatile input control that mimics a physical rotary kn
 *   **Keyboard Modifiers:** Hold `Ctrl` + `Alt` for fine-tuning.
 *   **Manual Entry:** `Alt` + Click to open a text entry box for precise value input.
 *   **Reset:** `Ctrl` + Click or Middle Click to jump to a reference point (default).
-*   **Visual Feedback:** Customizable arc, pointer, and tick marks.
+*   **Visual Feedback:** Customizable shape (Circle, Octagon, Gear), arc, pointer styles, and tick marks.
 *   **State Mirroring:** Integration with MQTT for real-time state synchronization.
 
 ## 2. JSON Configuration Parameters
@@ -47,12 +47,18 @@ To use the knob in your application, define it in your JSON layout configuration
 | `arc_width` | Integer | `5` | The thickness of the value arc track. |
 | `pointer_length` | Float/None | `None` | Custom length of the pointer line. If `None`, calculated dynamically based on radius. |
 | `pointer_offset` | Integer | `0` | Distance from the center where the pointer line starts (useful for "floating" pointers). |
+| `pointer_style` | String | `"line"` | Style of the pointer: `"line"`, `"triangle"`, `"notch"`. |
+| `tick_style` | String | `"simple"` | Style of the ticks: `"simple"` (lines), `"numeric"` (numbers), `"dots"`. |
 
-### Functional Behaviors
+### Shape & Geometry (New in v20260114)
 | Parameter | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
-| `infinity` | Boolean | `False` | If `true`, the knob wraps around from max to min (e.g., for phase 0-360). |
-| `fine_pitch` | Boolean | `False` | If `true`, significantly reduces drag sensitivity for precise adjustments. |
+| `shape` | String | `"circle"` | Base shape of the knob body: `"circle"`, `"octagon"`, `"gear"`. |
+| `knob_fill_color` | Hex String | `""` (Empty) | Solid fill color for the knob body. If empty, it's transparent (or wireframe). |
+| `knob_outline_color` | Hex String | Theme Secondary | Color of the knob shape outline. |
+| `knob_outline_thickness`| Integer | `0` | Thickness of the knob shape outline. |
+| `gradient_level` | Integer | `0` | Adds concentric rings to simulate a gradient (0-5). |
+| `knob_teeth` | Integer | `8` | **For Gear Shape Only.** Sets the number of teeth on the gear. |
 
 ## 3. Interaction Guide
 
@@ -68,7 +74,15 @@ To use the knob in your application, define it in your JSON layout configuration
 *   **Fine Control (Ctrl+Alt+Drag):** Reduces sensitivity by half for finer adjustments.
 *   **Fine Pitch Mode:** If `fine_pitch` is set to `true` in config, base sensitivity is 1/10th of normal.
 
-## 4. Implementation Examples
+## 4. Rendering Layering (Z-Order)
+To ensure clarity and visual stacking, the knob is rendered in the following order (bottom to top):
+1.  **Background Track:** The static arc representing the full range.
+2.  **Ticks:** The scale indicators (dots, lines, or numbers).
+3.  **Body (The Shape):** The main knob form (Gear, Circle, Octagon), including its fill and outline. This sits *on top* of the ticks.
+4.  **Pointer:** The indicator (Line, Triangle, Notch) sits *on top* of the body.
+5.  **Text:** If `text_inside` is active, the value text is rendered on the very top.
+
+## 5. Implementation Examples
 
 ### Basic Volume Knob
 ```json
@@ -84,18 +98,20 @@ To use the knob in your application, define it in your JSON layout configuration
 }
 ```
 
-### Pan Knob (Bipolar)
+### Solid Gear Knob
 ```json
-"pan_knob": {
+"gear_knob": {
   "type": "_Knob",
-  "label_active": "Pan",
-  "min": -50.0,
-  "max": 50.0,
-  "value_default": 0.0,
-  "reff_point": 0.0,
-  "width": 50,
-  "height": 50,
-  "indicator_color": "#FFC107"
+  "label_active": "Gear",
+  "width": 100,
+  "height": 100,
+  "shape": "gear",
+  "knob_teeth": 12,
+  "knob_fill_color": "#FF0000",
+  "knob_outline_color": "white",
+  "knob_outline_thickness": 2,
+  "indicator_color": "white",
+  "pointer_style": "triangle"
 }
 ```
 
@@ -115,26 +131,30 @@ To use the knob in your application, define it in your JSON layout configuration
 }
 ```
 
-### Fine Tune Pitch
+### Monochrome Wireframe
 ```json
-"fine_tune": {
+"mono_knob": {
   "type": "_Knob",
-  "label_active": "Fine Tune",
-  "min": -100.0,
-  "max": 100.0,
-  "fine_pitch": true,
-  "label_Text_position": "left",
-  "indicator_color": "#E91E63"
+  "label_active": "Mono",
+  "width": 80,
+  "height": 80,
+  "shape": "gear",
+  "knob_fill_color": "black",
+  "knob_outline_color": "white",
+  "knob_outline_thickness": 1,
+  "indicator_color": "white",
+  "pointer_style": "notch"
 }
 ```
 
-## 5. Developer Implementation Details
+## 6. Developer Implementation Details
 
 The widget logic is encapsulated in `KnobCreatorMixin` within `dynamic_gui_create_knob.py`.
 
 *   **`_create_knob`**: The factory method that parses the JSON configuration, sets up the `CustomKnobFrame`, handles layout (labels, canvas positioning), and binds events.
 *   **`CustomKnobFrame`**: A `ttk.Frame` subclass that manages the logical state (`variable`), MQTT broadcasting (`state_mirror_engine`), and specialized actions like the manual entry popup (`_open_manual_entry`) and reset logic (`_jump_to_reff_point`).
-*   **`_draw_knob`**: The rendering engine. It draws the background arc (secondary color), the active value arc (indicator color), the pointer line, ticks, and textual values on the Tkinter Canvas.
+*   **`_draw_knob`**: The rendering engine. It orchestrates the drawing steps in a strict Z-order to ensure proper visual layering.
+*   **`_draw_body`**: Handles the geometry generation for shapes (Circle, Octagon, Gear) and applies fills, outlines, and gradient rings.
 *   **Event Binding**: Uses `canvas.bind` for mouse interactions and `knob_value_var.trace_add` to trigger redraws whenever the value changes (whether from UI interaction or incoming MQTT messages).
 
 ---

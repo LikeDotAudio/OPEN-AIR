@@ -218,6 +218,8 @@ class KnobCreatorMixin:
             # Outline Parameters
             knob_outline_thickness = int(config.get("knob_outline_thickness", 0))
             knob_outline_color = config.get("knob_outline_color", secondary_color)
+            knob_fill_color = config.get("knob_fill_color", "")
+            knob_teeth = int(config.get("knob_teeth", 8))
 
             def update_knob_visuals(*args):
                 self._draw_knob(
@@ -236,7 +238,9 @@ class KnobCreatorMixin:
                     gradient_level=gradient_level,
                     # New params
                     outline_thickness=knob_outline_thickness,
-                    outline_color=knob_outline_color
+                    outline_color=knob_outline_color,
+                    fill_color=knob_fill_color,
+                    teeth=knob_teeth
                 )
 
             knob_value_var.trace_add("write", update_knob_visuals)
@@ -290,7 +294,7 @@ class KnobCreatorMixin:
             debug_logger(message=f"❌ The knob '{label}' shattered! Error: {e}")
             return None
 
-    def _draw_knob(self, canvas, width, height, value, min_val, max_val, value_label, neutral_color, accent_for_arc, indicator_color, secondary, text_inside=False, no_center=False, show_ticks=False, tick_length=10, arc_width=5, pointer_length=None, pointer_offset=0, shape="circle", pointer_style="line", tick_style="simple", gradient_level=0, outline_thickness=2, outline_color="gray"):
+    def _draw_knob(self, canvas, width, height, value, min_val, max_val, value_label, neutral_color, accent_for_arc, indicator_color, secondary, text_inside=False, no_center=False, show_ticks=False, tick_length=10, arc_width=5, pointer_length=None, pointer_offset=0, shape="circle", pointer_style="line", tick_style="simple", gradient_level=0, outline_thickness=2, outline_color="gray", fill_color="", teeth=8):
         """Modular rendering pipeline."""
         canvas.delete("all")
         cx, cy = width / 2, height / 2
@@ -308,19 +312,19 @@ class KnobCreatorMixin:
         extent = -300
         val_extent = extent * norm_val_0_1
         pointer_angle_deg = start_angle + val_extent
+
+        # 2. Draw Body / Outline (Rendered as BACKGROUND)
+        self._draw_body(canvas, cx, cy, radius, shape, outline_color, gradient_level, rotation_angle=pointer_angle_deg, outline_thickness=outline_thickness, fill_color=fill_color, teeth=teeth)
         
-        # 2. Draw Track (The Arc)
+        # 3. Draw Track (The Arc)
         self._draw_track(canvas, cx, cy, radius, start_angle, extent, val_extent, secondary, indicator_color, arc_width)
         
-        # 3. Draw Ticks
+        # 4. Draw Ticks
         if show_ticks:
             self._draw_ticks(canvas, cx, cy, radius, arc_width, tick_length, tick_style, secondary, min_val, max_val)
             
-        # 4. Draw Pointer
+        # 5. Draw Pointer
         self._draw_pointer(canvas, cx, cy, radius, arc_width, pointer_angle_deg, pointer_style, indicator_color, pointer_length, pointer_offset, no_center)
-
-        # 5. Draw Body / Outline (Rendered on TOP)
-        self._draw_body(canvas, cx, cy, radius, shape, outline_color, gradient_level, rotation_angle=pointer_angle_deg, outline_thickness=outline_thickness)
 
         # 6. Text Updates
         if text_inside:
@@ -329,7 +333,7 @@ class KnobCreatorMixin:
         else:
              value_label.config(text=f"{int(value)}")
 
-    def _draw_body(self, canvas, cx, cy, radius, shape, color, gradient_level, rotation_angle=0, outline_thickness=0):
+    def _draw_body(self, canvas, cx, cy, radius, shape, color, gradient_level, rotation_angle=0, outline_thickness=0, fill_color="", teeth=8):
         """Draws the background shape."""
         # Simple gradient simulation using concentric rings
         steps = gradient_level + 1
@@ -340,23 +344,28 @@ class KnobCreatorMixin:
             # Use provided outline_thickness for the outermost ring, and width=1 for internal ones
             # If outline_thickness is 0, the outer ring (i=0) will have width=0 (invisible)
             current_thickness = outline_thickness if i == 0 else 1
+            
+            # Apply fill only to the outermost shape or if we want a solid color
+            # If gradient_level is used, filling every step might overlap strangely, 
+            # but for a single gear (gradient_level=0), it's perfect.
+            current_fill = fill_color if (i == 0 or steps == 1) else ""
 
             # Check if we should draw at all
-            if current_thickness == 0 and i == 0 and gradient_level == 0:
+            if current_thickness == 0 and i == 0 and gradient_level == 0 and not current_fill:
                 continue
 
             # Simple Shapes
             if shape == "circle":
                 # Only draw if explicitly needed (e.g. filled body)
-                if gradient_level > 0 or (i == 0 and current_thickness > 0):
-                    canvas.create_oval(cx-r, cy-r, cx+r, cy+r, outline=color, width=current_thickness)
+                if gradient_level > 0 or (i == 0 and (current_thickness > 0 or current_fill)):
+                    canvas.create_oval(cx-r, cy-r, cx+r, cy+r, outline=color, width=current_thickness, fill=current_fill)
             elif shape == "octagon":
                 points = self._get_poly_points(cx, cy, r, sides=8, start_angle=rotation_angle)
-                canvas.create_polygon(points, outline=color, fill="", width=current_thickness)
+                canvas.create_polygon(points, outline=color, fill=current_fill, width=current_thickness)
             elif shape == "gear":
-                # Gear: 8 teeth
-                points = self._get_gear_points(cx, cy, r, teeth=8, notch_depth=0.15, start_angle=rotation_angle)
-                canvas.create_polygon(points, outline=color, fill="", width=current_thickness)
+                # Gear: adjustable teeth
+                points = self._get_gear_points(cx, cy, r, teeth=teeth, notch_depth=0.15, start_angle=rotation_angle)
+                canvas.create_polygon(points, outline=color, fill=current_fill, width=current_thickness)
 
     def _draw_track(self, canvas, cx, cy, radius, start_angle, extent, val_extent, bg_color, active_color, width):
         """Draws the value arc."""

@@ -165,8 +165,8 @@ class WinkButtonCreatorMixin:
 
             # 1.5 Text Inside (Drawn on top of neon, covered by shutters)
             if text_inside:
-                # Calculate font size roughly based on height
-                font_size = int(height * 0.25)
+                # Calculate font size roughly based on min dimension
+                font_size = int(min(width, height) * 0.25)
                 text_item = canvas.create_text(
                     width / 2, 
                     height / 2, 
@@ -177,38 +177,74 @@ class WinkButtonCreatorMixin:
                 )
                 state["shutter_ids"].append(text_item)
 
-            # 2. Shutters (Rectangular, configurable color)
-            gap_size = width * state["current_open"]
-            center_x = width / 2
-            
-            l_shutter_x2 = center_x - (gap_size / 2)
-            r_shutter_x1 = center_x + (gap_size / 2)
+            # 2. Shutters
+            # Determine orientation: Horizontal Wink (Top/Bottom shutters) if Width > Height
+            is_horizontal_wink = width > height
 
-            s1 = canvas.create_rectangle(0, 0, l_shutter_x2, height, fill=effective_shutter_color, outline="")
-            s2 = canvas.create_rectangle(r_shutter_x1, 0, width, height, fill=effective_shutter_color, outline="")
-            state["shutter_ids"].extend([s1, s2])
+            if is_horizontal_wink:
+                 # Top/Bottom Shutters
+                 gap_size = height * state["current_open"]
+                 center_y = height / 2
+                 
+                 top_shutter_y2 = center_y - (gap_size / 2)
+                 bottom_shutter_y1 = center_y + (gap_size / 2)
+
+                 s1 = canvas.create_rectangle(0, 0, width, top_shutter_y2, fill=effective_shutter_color, outline="")
+                 s2 = canvas.create_rectangle(0, bottom_shutter_y1, width, height, fill=effective_shutter_color, outline="")
+                 state["shutter_ids"].extend([s1, s2])
+            else:
+                 # Left/Right Shutters (Default)
+                 gap_size = width * state["current_open"]
+                 center_x = width / 2
+            
+                 l_shutter_x2 = center_x - (gap_size / 2)
+                 r_shutter_x1 = center_x + (gap_size / 2)
+
+                 s1 = canvas.create_rectangle(0, 0, l_shutter_x2, height, fill=effective_shutter_color, outline="")
+                 s2 = canvas.create_rectangle(r_shutter_x1, 0, width, height, fill=effective_shutter_color, outline="")
+                 state["shutter_ids"].extend([s1, s2])
             
             # 2.5 Text Closed (Drawn on shutters, moves with them)
             if text_closed:
-                font_size_closed = int(height * 0.25)
-                # Left Half Text
-                t1 = canvas.create_text(
-                    (width / 2) - (gap_size / 2), 
-                    height / 2,
-                    text=text_closed,
-                    fill=text_closed_color,
-                    font=("Arial", font_size_closed, "bold"),
-                    anchor="center"
-                )
-                # Right Half Text
-                t2 = canvas.create_text(
-                    (width / 2) + (gap_size / 2), 
-                    height / 2,
-                    text=text_closed,
-                    fill=text_closed_color,
-                    font=("Arial", font_size_closed, "bold"),
-                    anchor="center"
-                )
+                font_size_closed = int(min(width, height) * 0.25)
+                if is_horizontal_wink:
+                    # Top Half Text
+                    t1 = canvas.create_text(
+                        width / 2,
+                        (height / 2) - (gap_size / 2), 
+                        text=text_closed,
+                        fill=text_closed_color,
+                        font=("Arial", font_size_closed, "bold"),
+                        anchor="center"
+                    )
+                    # Bottom Half Text
+                    t2 = canvas.create_text(
+                        width / 2,
+                        (height / 2) + (gap_size / 2), 
+                        text=text_closed,
+                        fill=text_closed_color,
+                        font=("Arial", font_size_closed, "bold"),
+                        anchor="center"
+                    )
+                else:
+                    # Left Half Text
+                    t1 = canvas.create_text(
+                        (width / 2) - (gap_size / 2), 
+                        height / 2,
+                        text=text_closed,
+                        fill=text_closed_color,
+                        font=("Arial", font_size_closed, "bold"),
+                        anchor="center"
+                    )
+                    # Right Half Text
+                    t2 = canvas.create_text(
+                        (width / 2) + (gap_size / 2), 
+                        height / 2,
+                        text=text_closed,
+                        fill=text_closed_color,
+                        font=("Arial", font_size_closed, "bold"),
+                        anchor="center"
+                    )
                 state["shutter_ids"].extend([t1, t2])
 
             # 3. Bezel / Detail Ring
@@ -231,6 +267,20 @@ class WinkButtonCreatorMixin:
                 )
                 state["shutter_ids"].extend([bezel, ring])
             else:
+                # Rounded Rect Mask (The fix for "squared corners leak")
+                mask_thickness = max(width, height)
+                offset = mask_thickness / 2
+                mask = _create_rounded_rect(
+                    canvas, 
+                    -offset, -offset, 
+                    width + offset, height + offset, 
+                    radius=radius + offset, 
+                    outline=bezel_color, 
+                    width=mask_thickness, 
+                    fill=""
+                )
+                state["shutter_ids"].append(mask)
+
                 # Rounded Rect Bezel Border (Outline)
                 border = _create_rounded_rect(
                     canvas, 

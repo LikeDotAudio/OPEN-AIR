@@ -98,6 +98,7 @@ class NeedleVUMeterCreatorMixin:
             scale_numbers = config.get("Scale_numbers", True)
             ticks_visible = config.get("Ticks_visible", True)
             curve_thickness = int(config.get("curve_thickness", 4))
+            meter_viewable_angle = float(config.get("Meter_viewable_angle", 90.0))
             
             # Animation Parameters (Default: 100ms)
             # Glide: Time (ms) to traverse full scale upwards
@@ -143,7 +144,8 @@ class NeedleVUMeterCreatorMixin:
                     needle_thickness,
                     scale_numbers,
                     curve_thickness,
-                    ticks_visible
+                    ticks_visible,
+                    meter_viewable_angle
                 )
 
             def animate():
@@ -324,9 +326,10 @@ class NeedleVUMeterCreatorMixin:
         needle_thickness=3,
         scale_numbers=True,
         curve_thickness=4,
-        ticks_visible=True
+        ticks_visible=True,
+        meter_viewable_angle=90.0
     ):
-        canvas.delete("all")
+        canvas.delete("vu_element")
         width = size
         height = size / 2 + 20
 
@@ -336,8 +339,14 @@ class NeedleVUMeterCreatorMixin:
         main_arc_radius = (width - 20) / 2
         arc_thickness = curve_thickness
 
-        start_angle_deg = 135
-        end_angle_deg = 45
+        # Calculate start and end angles centered around 90 degrees (up)
+        # 90 degrees is the top.
+        # If viewable angle is 90, we want 135 to 45.
+        # If viewable angle is 180, we want 180 to 0.
+        half_angle = meter_viewable_angle / 2.0
+        start_angle_deg = 90 + half_angle
+        end_angle_deg = 90 - half_angle
+        
         extent_deg = start_angle_deg - end_angle_deg
 
         # --- Draw Ticks and Labels ---
@@ -367,7 +376,7 @@ class NeedleVUMeterCreatorMixin:
                 )
 
                 canvas.create_line(
-                    x_tick_start, y_tick_start, x_tick_end, y_tick_end, fill=fg, width=2
+                    x_tick_start, y_tick_start, x_tick_end, y_tick_end, fill=fg, width=2, tags="vu_element"
                 )
 
             # Text label: position further OUT from the arc
@@ -376,7 +385,7 @@ class NeedleVUMeterCreatorMixin:
                 tx = center_x + text_radius_pos * math.cos(current_angle_rad)
                 ty = center_y - text_radius_pos * math.sin(current_angle_rad)
                 canvas.create_text(
-                    tx, ty, text=f"{int(tick_val)}", fill=fg, font=("Helvetica", 8)
+                    tx, ty, text=f"{int(tick_val)}", fill=fg, font=("Helvetica", 8), tags="vu_element"
                 )
 
         # --- Draw Arcs ---
@@ -395,6 +404,7 @@ class NeedleVUMeterCreatorMixin:
             style=tk.ARC,
             outline=lower_colour,
             width=arc_thickness,
+            tags="vu_element"
         )
 
         canvas.create_arc(
@@ -407,6 +417,7 @@ class NeedleVUMeterCreatorMixin:
             style=tk.ARC,
             outline=upper_colour,
             width=arc_thickness,
+            tags="vu_element"
         )
 
         # --- Draw Needle ---
@@ -427,7 +438,7 @@ class NeedleVUMeterCreatorMixin:
         y = center_y - needle_total_len * math.sin(needle_angle_rad)
 
         canvas.create_line(
-            center_x, center_y, x, y, width=needle_thickness, fill=pointer_colour, capstyle=tk.ROUND
+            center_x, center_y, x, y, width=needle_thickness, fill=pointer_colour, capstyle=tk.ROUND, tags="vu_element"
         )
 
         # --- Draw Pivot ---
@@ -438,4 +449,8 @@ class NeedleVUMeterCreatorMixin:
             center_y + 5,
             fill=fg,
             outline=secondary,
+            tags="vu_element"
         )
+        
+        # Ensure VU meter elements are behind any overlays (like the Knob in composite widgets)
+        canvas.tag_lower("vu_element")

@@ -1,0 +1,117 @@
+{
+  "VU_Meter_Knob_Demo": {
+    "type": "OcaBlock",
+    "label_active": "Composite VU-Knob Ballistics & Angle Lab",
+    "layout_columns": 4,
+    "fields": {
+      "Slow_270": {
+        "widget_type": "_VUMeterKnob",
+        "label_active": "Slow 270° (1s Ballistics)",
+        "path": "audio/270/slow/vu",
+        "knob_path": "audio/270/slow/gain",
+        "Meter_viewable_angle": 270,
+        "glide_time": 1000,
+        "fall_time": 1000,
+        "size": 180,
+        "knob_width": 80,
+        "knob_height": 80,
+        "knob_shape": "circle"
+      },
+      "Fast_270": {
+        "widget_type": "_VUMeterKnob",
+        "label_active": "Fast 270° (30ms Snappy)",
+        "path": "audio/270/fast/vu",
+        "knob_path": "audio/270/fast/gain",
+        "Meter_viewable_angle": 270,
+        "glide_time": 30,
+        "fall_time": 30,
+        "size": 180,
+        "knob_width": 80,
+        "knob_height": 80,
+        "knob_shape": "gear",
+        "knob_indicator_color": "#00FFFF"
+      },
+      "Sticky_270": {
+        "widget_type": "_VUMeterKnob",
+        "label_active": "Sticky 270° (500ms Hold)",
+        "path": "audio/270/sticky/vu",
+        "knob_path": "audio/270/sticky/gain",
+        "Meter_viewable_angle": 270,
+        "hold_time": 500,
+        "fall_time": 200,
+        "size": 180,
+        "knob_width": 80,
+        "knob_height": 80,
+        "knob_shape": "octagon"
+      },
+      "Dwell_270": {
+        "widget_type": "_VUMeterKnob",
+        "label_active": "Dwell 270° (Target Dwell)",
+        "path": "audio/270/dwell/vu",
+        "knob_path": "audio/270/dwell/gain",
+        "Meter_viewable_angle": 270,
+        "dwell_time": 800,
+        "glide_time": 100,
+        "size": 180,
+        "knob_width": 80,
+        "knob_height": 80,
+        "knob_shape": "circle",
+        "knob_pointer_style": "triangle"
+      },
+      "Instant_270": {
+        "widget_type": "_VUMeterKnob",
+        "label_active": "Instant 270° (0ms)",
+        "path": "audio/270/instant/vu",
+        "knob_path": "audio/270/instant/gain",
+        "Meter_viewable_angle": 270,
+        "glide_time": 0,
+        "fall_time": 0,
+        "size": 180,
+        "knob_width": 80,
+        "knob_height": 80,
+        "knob_shape": "gear",
+        "knob_pointer_style": "notch"
+      },
+      "Lazy_270": {
+        "widget_type": "_VUMeterKnob",
+        "label_active": "Lazy 270° (Slow Decay)",
+        "path": "audio/270/lazy/vu",
+        "knob_path": "audio/270/lazy/gain",
+        "Meter_viewable_angle": 270,
+        "glide_time": 100,
+        "fall_time": 2000,
+        "size": 180,
+        "knob_width": 80,
+        "knob_height": 80,
+        "knob_shape": "circle",
+        "knob_indicator_color": "#FFAA00"
+      },
+      "Test_100": {
+        "widget_type": "_VUMeterKnob",
+        "label_active": "Testing 100° Angle",
+        "path": "audio/100/vu",
+        "knob_path": "audio/100/gain",
+        "Meter_viewable_angle": 100,
+        "size": 180,
+        "knob_width": 90,
+        "knob_height": 90,
+        "knob_shape": "octagon",
+        "knob_indicator_color": "#AAFF00"
+      },
+      "Standard_90": {
+        "widget_type": "_VUMeterKnob",
+        "label_active": "Classic 90° (Fast)",
+        "path": "audio/90/vu",
+        "knob_path": "audio/90/gain",
+        "Meter_viewable_angle": 90,
+        "glide_time": 50,
+        "fall_time": 50,
+        "size": 180,
+        "knob_width": 90,
+        "knob_height": 90,
+        "knob_shape": "circle",
+        "knob_pointer_style": "line"
+      }
+    }
+  }
+}

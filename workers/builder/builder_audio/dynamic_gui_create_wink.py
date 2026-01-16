@@ -58,7 +58,8 @@ class WinkButtonCreatorMixin:
         # Physics Parameters
         open_speed = config.get("open_speed", 0.15)
         close_speed = config.get("close_speed", 0.3)
-        
+        blink_interval = config.get("blink_interval", 0) # ms, 0 = disabled
+
         # Container Frame
         frame = ttk.Frame(parent_widget)
         if label:
@@ -87,7 +88,9 @@ class WinkButtonCreatorMixin:
             "is_latched": initial_value,
             "is_hovering": False,
             "shutter_ids": [],
-            "animating": False
+            "animating": False,
+            "blink_open": True, # Used for toggling during blink
+            "is_blinking_active": False
         }
 
         def _create_rounded_rect(canvas, x1, y1, x2, y2, radius=25, **kwargs):
@@ -140,6 +143,22 @@ class WinkButtonCreatorMixin:
                 canvas.after(16, update_physics)
             else:
                 state["animating"] = False
+
+        def blink_loop():
+            """Toggles the shutter state periodically if blinking is active."""
+            # Stop if not active or var is false (safety check, though on_value_change controls this)
+            if not state["is_blinking_active"] or not value_var.get():
+                return
+
+            # Toggle target
+            state["blink_open"] = not state["blink_open"]
+            state["target_open"] = 1.0 if state["blink_open"] else 0.0
+            
+            if not state["animating"]:
+                state["animating"] = True
+                update_physics()
+
+            canvas.after(blink_interval, blink_loop)
 
         def draw_visuals():
             """Redraws the moving parts (shutters) and the top bezel mask."""
@@ -205,7 +224,7 @@ class WinkButtonCreatorMixin:
                  state["shutter_ids"].extend([s1, s2])
             
             # 2.5 Text Closed (Drawn on shutters, moves with them)
-            if text_closed:
+            if text_closed and state["current_open"] < 1.0:
                 font_size_closed = int(min(width, height) * 0.25)
                 if is_horizontal_wink:
                     # Top Half Text
@@ -282,13 +301,16 @@ class WinkButtonCreatorMixin:
                 state["shutter_ids"].append(mask)
 
                 # Rounded Rect Bezel Border (Outline)
+                # FIX: Slightly thicker border for rounded rects to prevent color leaking at corners
+                rect_border_width = effective_border_width + 2
+                
                 border = _create_rounded_rect(
                     canvas, 
-                    effective_border_width/2, effective_border_width/2, 
-                    width-effective_border_width/2, height-effective_border_width/2, 
+                    rect_border_width/2, rect_border_width/2, 
+                    width-rect_border_width/2, height-rect_border_width/2, 
                     radius=radius, 
                     outline=border_color, 
-                    width=effective_border_width, 
+                    width=rect_border_width, 
                     fill=""
                 )
                 state["shutter_ids"].append(border)
@@ -300,7 +322,15 @@ class WinkButtonCreatorMixin:
             new_val = value_var.get()
             
             # Update Physics Target
-            state["target_open"] = 1.0 if new_val else 0.0
+            if blink_interval > 0 and new_val:
+                if not state["is_blinking_active"]:
+                    state["is_blinking_active"] = True
+                    state["blink_open"] = True # Start open
+                    state["target_open"] = 1.0
+                    blink_loop()
+            else:
+                state["is_blinking_active"] = False
+                state["target_open"] = 1.0 if new_val else 0.0
             
             # Sync Latch State (if updated remotely), but ONLY if not locally pressed
             if is_latching and not state["is_pressed"]:
@@ -317,6 +347,11 @@ class WinkButtonCreatorMixin:
 
         # Trace the variable
         value_var.trace_add("write", on_value_change)
+        
+        # Initial Check for Blink (if default is True)
+        if initial_value and blink_interval > 0:
+             state["is_blinking_active"] = True
+             blink_loop()
 
         # Register with Engine
         subscriber_router = self.subscriber_router

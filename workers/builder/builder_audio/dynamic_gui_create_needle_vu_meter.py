@@ -112,10 +112,30 @@ class NeedleVUMeterCreatorMixin:
 
             vu_value_var = tk.DoubleVar(value=value_default)
 
+            # Calculate required height based on viewable angle
+            half_angle = meter_viewable_angle / 2.0
+            main_arc_radius = (size - 20) / 2
+            center_y = size / 2 + 10
+            
+            # Find lowest point of arc to ensure canvas fits it
+            # Tkinter Y grows downwards. We need space for (center_y + radius * sin(angle))
+            # Tkinter angles: 90 is UP. Y = center_y - radius * sin(radians)
+            # We want to maximize (center_y - radius * sin(radians)) -> minimize sin(radians)
+            angles_to_check = [90 + half_angle, 90 - half_angle]
+            if meter_viewable_angle > 180:
+                angles_to_check.append(270) # Bottom point
+            
+            min_sin = min([math.sin(math.radians(a)) for a in angles_to_check])
+            arc_depth_below_pivot = 0
+            if min_sin < 0:
+                arc_depth_below_pivot = -min_sin * main_arc_radius
+            
+            required_height = int(center_y + arc_depth_below_pivot + 10)
+
             canvas = tk.Canvas(
                 frame,
                 width=size,
-                height=size / 2 + 20,
+                height=required_height,
                 bg=bg_color,
                 highlightthickness=0,
             )
@@ -330,19 +350,15 @@ class NeedleVUMeterCreatorMixin:
         meter_viewable_angle=90.0
     ):
         canvas.delete("vu_element")
+        # Ensure coordinates are aligned with the pivot center used in creation
         width = size
-        height = size / 2 + 20
-
         center_x = width / 2
-        center_y = height - 10
+        center_y = size / 2 + 10
 
         main_arc_radius = (width - 20) / 2
         arc_thickness = curve_thickness
 
         # Calculate start and end angles centered around 90 degrees (up)
-        # 90 degrees is the top.
-        # If viewable angle is 90, we want 135 to 45.
-        # If viewable angle is 180, we want 180 to 0.
         half_angle = meter_viewable_angle / 2.0
         start_angle_deg = 90 + half_angle
         end_angle_deg = 90 - half_angle
@@ -395,10 +411,10 @@ class NeedleVUMeterCreatorMixin:
         green_start_angle_deg = start_angle_deg - (green_start_norm * extent_deg)
 
         canvas.create_arc(
-            10,
-            10,
-            width - 10,
-            width - 10,
+            center_x - main_arc_radius,
+            center_y - main_arc_radius,
+            center_x + main_arc_radius,
+            center_y + main_arc_radius,
             start=green_start_angle_deg,
             extent=(start_angle_deg - green_start_angle_deg),
             style=tk.ARC,
@@ -408,10 +424,10 @@ class NeedleVUMeterCreatorMixin:
         )
 
         canvas.create_arc(
-            10,
-            10,
-            width - 10,
-            width - 10,
+            center_x - main_arc_radius,
+            center_y - main_arc_radius,
+            center_x + main_arc_radius,
+            center_y + main_arc_radius,
             start=end_angle_deg,
             extent=(green_start_angle_deg - end_angle_deg),
             style=tk.ARC,

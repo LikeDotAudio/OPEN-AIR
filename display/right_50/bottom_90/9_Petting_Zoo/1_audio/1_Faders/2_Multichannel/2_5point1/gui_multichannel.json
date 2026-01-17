@@ -1,0 +1,26 @@
+{
+  "Composite_Fader_Demo": {
+    "type": "OcaBlock",
+    "description": "Composite Smart-Fader Demos",
+
+    "fields": {
+      
+      "composite_drums": {
+        "type": "_CompositeFader",
+        "label_active": "Drum Group",
+        "value_min": -60.0, 
+        "value_max": 6.0, 
+        "num_channels": 5,
+        "layout": {"width": 50, "height": 400},
+        "channels": [
+            {"default": -12.0, "label": "lSUR"},
+            {"default": -5.0, "label": "LEFT"},
+            {"default": -10.0, "label": "CENTER"},
+            {"default": -15.0, "label": "RIGHT"},
+            {"default": -12.0, "label": "rSUR"}
+        ]
+      }
+    }
+  }
+}
+

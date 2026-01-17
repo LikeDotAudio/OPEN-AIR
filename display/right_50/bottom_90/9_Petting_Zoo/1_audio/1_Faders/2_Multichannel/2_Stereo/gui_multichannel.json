@@ -1,0 +1,21 @@
+{
+  "Composite_Fader_Demo": {
+    "type": "OcaBlock",
+    "description": "Composite Smart-Fader Demos",
+
+    "fields": {
+      "composite_stereo": {
+        "type": "_CompositeFader",
+        "label_active": "Stereo Mix",
+        "value_min": 0.0, 
+        "value_max": 100.0, 
+        "num_channels": 2,
+        "layout": {"width": 20, "height": 400},
+        "channels": [
+            {"default": 75.0, "label": "Left"},
+            {"default": 75.0, "label": "Right"}
+        ]
+      }
+    }
+  }
+}

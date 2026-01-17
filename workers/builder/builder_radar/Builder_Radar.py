@@ -252,12 +252,10 @@ class RadarCreatorMixin:
         def on_middle_click(event):
             # Manual trigger test
             random_val = random.uniform(min_val, max_val)
-            if mode == "data_driven":
-                # Update variable which triggers trace
-                radar_value_var.set(random_val)
-            else:
-                # Force update in sweep mode (inject value)
-                radar_state["current_input_value"] = random_val
+            # Update variable which triggers trace -> process_update (if data_driven) 
+            # and updates current_input_value (for sweep). 
+            # This also triggers StateMirror broadcast.
+            radar_value_var.set(random_val)
 
         canvas.bind("<Control-Button-1>", clear_plot)
         canvas.bind("<Button-2>", on_middle_click)

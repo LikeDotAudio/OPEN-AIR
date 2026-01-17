@@ -12,7 +12,7 @@
           "window_size": [600, 600],
           "background_color": "transparent",
           "refresh_rate_ms": 20,
-          "mode": "sweep"
+          "mode": "data_driven"
         },
         "data_parameters": {
           "min_value": -50,
@@ -23,7 +23,7 @@
           "start_angle": 180
         },
         "visuals": {
-          "plot_style": "bar",
+          "plot_style": "line",
           "center_x": 300,
           "center_y": 300,
           "radius": 280

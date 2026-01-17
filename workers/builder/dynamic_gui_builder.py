@@ -104,6 +104,7 @@ from .builder_audio.dynamic_gui_create_custom_LTP import (
 from .builder_audio.dynamic_gui_create_wink import WinkButtonCreatorMixin
 from workers.builder.builder_composite.VU_Meter_Knob import VUMeterKnobCreatorMixin
 from workers.builder.builder_radar.Builder_Radar import RadarCreatorMixin
+from workers.builder.builder_composite.Composite_fader_multichannel import CompositeFaderCreatorMixin
 
 
 class DynamicGuiBuilder(
@@ -159,6 +160,7 @@ class DynamicGuiBuilder(
     WinkButtonCreatorMixin,
     VUMeterKnobCreatorMixin,
     RadarCreatorMixin,
+    CompositeFaderCreatorMixin,
 ):
     # Initializes the DynamicGuiBuilder, a comprehensive class that constructs a GUI from a JSON configuration.
     # It integrates various mixins for handling styling, widget creation, MQTT communication, and more.

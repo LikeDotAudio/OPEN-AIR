@@ -23,7 +23,7 @@
           "start_angle": 90
         },
         "visuals": {
-          "plot_style": "bar",
+          "plot_style": "area",
           "center_x": 300,
           "center_y": 300,
           "radius": 250

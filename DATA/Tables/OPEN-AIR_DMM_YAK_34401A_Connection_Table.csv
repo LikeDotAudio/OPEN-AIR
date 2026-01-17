@@ -1,2 +1,2 @@
 type,resource_string,ip_address,interface_port,gpib_address,status,manufacturer,model,serial_number,firmware,idn_string,device_type,notes,allocated,connection_timestamp
-GATEWAY,"TCPIP::44.44.44.111::gpib7,4::INSTR",44.44.44.111,gpib7,4,CONNECTED,HEWLETT-PACKARD,34401A,0,11-5-3,"HEWLETT-PACKARD,34401A,0,11-5-3",DMM,6.5 Digit Benchtop Standard (Legacy),False,2026-01-17T00:13:26.696230
+GATEWAY,"TCPIP::44.44.44.111::gpib7,4::INSTR",44.44.44.111,gpib7,4,CONNECTED,HEWLETT-PACKARD,34401A,0,11-5-3,"HEWLETT-PACKARD,34401A,0,11-5-3",DMM,6.5 Digit Benchtop Standard (Legacy),False,2026-01-17T00:26:16.710210

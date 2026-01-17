@@ -65,6 +65,7 @@ class GuiWidgetFactoryMixin:
             "_WinkButton": self._create_wink_button,
             "_VUMeterKnob": self._create_vu_meter_knob,
             "_Radar": self._create_radar,
+            "_CompositeFader": self._create_composite_fader,
             # Complex Adapters (Methods inherited from Adapter Mixins)
             "plot_widget": self._create_plot_widget,
             "_HorizontalMeterWithText": self._create_horizontal_meter,

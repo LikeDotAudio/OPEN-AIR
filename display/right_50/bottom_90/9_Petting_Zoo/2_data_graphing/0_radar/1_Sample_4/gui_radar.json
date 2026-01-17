@@ -1,57 +1,57 @@
 {
-  "Radar_Eye_Zoo": {
+  "Radar_Eye_Zoo_4": {
     "type": "OcaBlock",
-    "description": "Radar Eye Visualization Demo",
+    "description": "Radar Eye Sample 4 - Minimalist",
     "layout_columns": 1,
     "fields": {
-      "radar_eye_1": {
+      "radar_eye_4": {
         "type": "_Radar",
-        "label_active": "Radar Eye 01",
+        "label_active": "Minimalist Radar",
         "app_settings": {
-          "title": "Radar Eye v1.0",
-          "window_size": [600, 600],
-          "background_color": "#1e1e1e",
-          "refresh_rate_ms": 50,
+          "title": "Minimal v4.0",
+          "window_size": [400, 400],
+          "background_color": "transparent",
+          "refresh_rate_ms": 60,
           "mode": "sweep"
         },
         "data_parameters": {
           "min_value": 0,
-          "max_value": 100,
-          "points_per_revolution": 360,
-          "history_buffer_size": 360,
+          "max_value": 10,
+          "points_per_revolution": 60,
+          "history_buffer_size": 60,
           "clockwise": true,
-          "start_angle": 90
+          "start_angle": 270
         },
         "visuals": {
-          "plot_style": "bar",
-          "center_x": 300,
-          "center_y": 300,
-          "radius": 250
+          "plot_style": "area",
+          "center_x": 200,
+          "center_y": 200,
+          "radius": 150
         },
         "grid_system": {
           "show_grid": true,
-          "grid_color": "#444444",
-          "ring_interval": 20,
-          "spoke_interval": 30,
+          "grid_color": "#CCCCCC",
+          "ring_interval": 5,
+          "spoke_interval": 90,
           "labels": {
             "show_values": true,
-            "show_time_scale": true,
-            "font": "Consolas 10"
+            "show_time_scale": false,
+            "font": "Verdana 8"
           }
         },
         "color_thresholds": {
-          "mid_point": 50,
-          "upper_point": 80,
+          "mid_point": 5,
+          "upper_point": 8,
           "colors": {
-            "safe": "#00ff00",
-            "warning": "#ffff00",
-            "critical": "#ff0000"
+            "safe": "#FFFFFF",
+            "warning": "#AAAAAA",
+            "critical": "#555555"
           }
         },
         "connectivity": {
-          "mqtt_enabled": true,
-          "mqtt_topic": "sensor/radar_eye/01",
-          "log_to_file": true
+          "mqtt_enabled": false,
+          "mqtt_topic": "",
+          "log_to_file": false
         }
       }
     }

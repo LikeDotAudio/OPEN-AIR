@@ -1,126 +1,320 @@
-Product Specification: The "Composite Smart-Fader"
-1. High-Level Concept
-A standard motorized fader where the plastic cap is replaced by a high-resolution, touch-sensitive OLED/AMOLED display module. The physical position of the fader controls the Global Average (Master) of a group of parameters. "Opening" the cap (via a UI gesture on the cap itself) reveals the Individual Parameters (Children), allowing for micro-adjustments relative to the master position.
+# workers/builder/builder_composite/Composite_fader_multichannel.py
 
-2. Hardware Architecture
-To build this, we are creating a "parasitic" device that sits on top of a standard component.
+import tkinter as tk
+from tkinter import ttk
+import math
+import sys
+from managers.configini.config_reader import Config
+from workers.logger.logger import debug_logger
+from workers.logger.log_utils import _get_log_args
+from workers.styling.style import THEMES, DEFAULT_THEME
+from workers.mqtt.mqtt_topic_utils import get_topic
+from workers.handlers.widget_event_binder import bind_variable_trace
 
-The Base Unit: A standard 100mm Motorized Fader (e.g., ALPS or Bourns).
+app_constants = Config.get_instance()
 
-Purpose: Provides physical resistance, gross motor control, and haptic feedback.
+class CompositeFaderFrame(tk.Frame):
+    def __init__(self, master, config, path, state_mirror_engine, subscriber_router, base_mqtt_topic):
+        colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
+        self.bg_color = colors.get("bg", "#2b2b2b")
+        self.track_col = colors.get("secondary", "#444444")
+        self.handle_col = colors.get("fg", "#dcdcdc")
+        
+        super().__init__(master, bg=self.bg_color, bd=0, highlightthickness=0)
+        
+        self.config = config
+        self.path = path
+        self.state_mirror_engine = state_mirror_engine
+        self.subscriber_router = subscriber_router
+        self.base_mqtt_topic = base_mqtt_topic
+        
+        # Configuration
+        self.min_val = float(config.get("value_min", 0.0))
+        self.max_val = float(config.get("value_max", 100.0))
+        self.num_channels = int(config.get("num_channels", 4))
+        self.label = config.get("label_active", "Composite")
+        
+        # Visual Config
+        layout_config = config.get("layout", {})
+        self.width = int(layout_config.get("width", config.get("width", 100)))
+        self.height = int(layout_config.get("height", config.get("height", 400)))
+        
+        # Ticks
+        self.show_ticks = config.get("show_ticks", True)
+        self.tick_thickness = int(config.get("tick_thickness", 1))
+        self.tick_color = config.get("tick_color", "light grey")
+        self.tick_interval = float(config.get("tick_interval", (self.max_val - self.min_val) / 10.0))
 
-The "Smart Cap" (The Composite Device):
+        # State
+        self.mode = "macro" # "macro" (closed) or "micro" (open)
+        self.master_value = tk.DoubleVar(value=self.min_val)
+        self.child_values = []
+        self.child_offsets = []
+        
+        # Initialize Children
+        channel_config = config.get("channels", [])
+        for i in range(self.num_channels):
+            val = self.min_val
+            if i < len(channel_config):
+                val = float(channel_config[i].get("default", self.min_val))
+            
+            var = tk.DoubleVar(value=val)
+            self.child_values.append(var)
+            self.child_offsets.append(0.0)
+            
+            if self.path:
+                child_path = f"{self.path}/ch_{i+1}"
+                self.state_mirror_engine.register_widget(child_path, var, self.base_mqtt_topic, config)
+                var.trace_add("write", self._request_redraw)
 
-Display: A customized 1.5-inch wide (approx. 40mm) OLED touch bar mounted horizontally on the fader tang.
+        self.master_value.set(self._calculate_master_average())
+        self._recalculate_offsets()
+        
+        self.master_value.trace_add("write", self._request_redraw)
 
-The Brain: A tiny microcontroller (e.g., Seeed XIAO ESP32 or similar small footprint) embedded inside the cap housing.
+        # UI Setup
+        self.canvas = tk.Canvas(self, width=self.width, height=self.height, bg=self.bg_color, highlightthickness=0)
+        self.canvas.pack(fill=tk.BOTH, expand=True)
+        
+        # Interaction State
+        self.dragging_master = False
+        self.dragging_child = -1
+        self.start_y = 0
+        self.start_val = 0
+        
+        # Bindings
+        self.canvas.bind("<Button-1>", self._on_press)
+        self.canvas.bind("<B1-Motion>", self._on_drag)
+        self.canvas.bind("<ButtonRelease-1>", self._on_release)
+        self.canvas.bind("<Button-3>", self._toggle_mode) # Right click to toggle view
+        self.canvas.bind("<Double-Button-1>", self._toggle_mode) # Double click too
+        self.canvas.bind("<Configure>", self._on_resize)
 
-Connectivity: A Flexible Flat Cable (FFC) running from the cap, down the side of the fader stem, to the main logic board to handle data transfer without impeding movement.
+        self._draw()
 
-3. Functional States
-The device operates in two distinct modes.
+    def _calculate_master_average(self):
+        total = sum([v.get() for v in self.child_values])
+        return total / len(self.child_values) if self.child_values else self.min_val
 
-State A: The "Closed" Fader (Macro View)
-Visual: The screen on the fader cap displays a single, wide waveform or gradient bar representing the sum or average of the group.
+    def _recalculate_offsets(self):
+        m_val = self.master_value.get()
+        for i in range(self.num_channels):
+            self.child_offsets[i] = self.child_values[i].get() - m_val
 
-Action: Moving the fader physically adjusts the output of the entire group simultaneously.
+    def _update_children_from_master(self):
+        m_val = self.master_value.get()
+        for i in range(self.num_channels):
+            new_val = m_val + self.child_offsets[i]
+            new_val = max(self.min_val, min(self.max_val, new_val))
+            self.child_values[i].set(new_val)
+            if self.path:
+                self.state_mirror_engine.broadcast_gui_change_to_mqtt(f"{self.path}/ch_{i+1}")
 
-Logic: Standard 1:1 relationship. Fader at 50% = Group Average at 50%.
+    def _update_master_from_children(self):
+        new_master = self._calculate_master_average()
+        self.master_value.set(new_master)
+        self._recalculate_offsets()
 
-State B: The "Open" Fader (Micro View)
-Trigger: User performs a "spread" gesture (two fingers moving apart) on the fader cap screen.
+    def _toggle_mode(self, event):
+        self.mode = "micro" if self.mode == "macro" else "macro"
+        self._draw()
 
-Visual: The single bar on the screen splits into 4 (or x) vertical stripes. These represent the individual channels contained within the group.
+    def _on_resize(self, event):
+        self.width = event.width
+        self.height = event.height
+        self._draw()
 
-Action: The user can touch these individual stripes on the fader cap to adjust their levels independently of the physical fader position.
+    def _get_y_from_val(self, val):
+        norm = (val - self.min_val) / (self.max_val - self.min_val) if (self.max_val - self.min_val) != 0 else 0
+        # Add padding for cap
+        draw_h = self.height - 40
+        return 20 + draw_h * (1.0 - norm)
 
-4. The Proportional Logic Algorithm
-This is the mathematical logic required to handle the "Master vs. Individual" relationship.
+    def _get_val_from_y(self, y):
+        draw_h = self.height - 40
+        norm = (draw_h - (y - 20)) / draw_h
+        return self.min_val + (norm * (self.max_val - self.min_val))
 
-Definitions:
+    def _on_press(self, event):
+        self.start_y = event.y
+        m_val = self.master_value.get()
+        cap_y = self._get_y_from_val(m_val)
+        cap_h = 60
+        
+        if (cap_y - cap_h/2) <= event.y <= (cap_y + cap_h/2):
+            if self.mode == "micro":
+                strip_w = self.width / self.num_channels
+                col_idx = int(event.x / strip_w)
+                if 0 <= col_idx < self.num_channels:
+                    self.dragging_child = col_idx
+                    self.start_val = self.child_values[col_idx].get()
+                    return
+            
+            self.dragging_master = True
+            self.start_val = m_val
+        else:
+            self.dragging_master = True
+            self.start_val = self._get_val_from_y(event.y)
+            self.master_value.set(max(self.min_val, min(self.max_val, self.start_val)))
+            self._update_children_from_master()
 
-P 
-master
-​
- : The physical position of the fader (0.0 to 1.0).
+    def _on_drag(self, event):
+        if self.dragging_master:
+            new_val = self._get_val_from_y(event.y)
+            new_val = max(self.min_val, min(self.max_val, new_val))
+            self.master_value.set(new_val)
+            self._update_children_from_master()
+            
+        elif self.dragging_child >= 0:
+            dy = self.start_y - event.y
+            val_range = self.max_val - self.min_val
+            pixel_range = self.height - 40
+            
+            delta_val = (dy / pixel_range) * val_range
+            new_val = self.start_val + delta_val
+            new_val = max(self.min_val, min(self.max_val, new_val))
+            
+            self.child_values[self.dragging_child].set(new_val)
+            self._update_master_from_children()
 
-V 
-child
-​
- [i]: The value of an individual parameter inside the group.
+    def _on_release(self, event):
+        self.dragging_master = False
+        self.dragging_child = -1
 
-O 
-offset
-​
- [i]: The relative difference between the child and the master.
+    def _request_redraw(self, *args):
+        self._draw()
 
-The Logic Flow:
+    def _draw_ticks(self, cx, h):
+        if not self.show_ticks: return
+        
+        val_range = self.max_val - self.min_val
+        if val_range == 0: return
+        
+        # Determine number of ticks
+        steps = int(val_range / self.tick_interval)
+        
+        for i in range(steps + 1):
+            val = self.min_val + (i * self.tick_interval)
+            y = self._get_y_from_val(val)
+            
+            # Draw tick line
+            # Check width to decide style. If wide, ticks on both sides?
+            # Standard: Ticks on track.
+            w = 20 # track width approx
+            self.canvas.create_line(cx - 10, y, cx + 10, y, fill=self.tick_color, width=self.tick_thickness)
+            
+            # Label
+            if i % 2 == 0: # Every other tick
+                self.canvas.create_text(cx + 15, y, text=f"{int(val)}", fill=self.tick_color, anchor="w", font=("Arial", 8))
 
-Initialization: When the group is formed, the system calculates the offset for each child:
+    def _draw(self):
+        self.canvas.delete("all")
+        w, h = self.width, self.height
+        cx = w / 2
+        
+        # 1. Track
+        self.canvas.create_line(cx, 20, cx, h-20, fill=self.track_col, width=4, capstyle=tk.ROUND)
+        
+        # 2. Ticks
+        self._draw_ticks(cx, h)
+        
+        # 3. Master Cap Position
+        m_val = self.master_value.get()
+        cap_y = self._get_y_from_val(m_val)
+        cap_h = 60 
+        cap_w = w - 10 # Slightly smaller than full width
+        
+        # 4. Draw Cap Container (The "Smart" Screen)
+        # Bezel / Housing
+        self.canvas.create_rectangle(
+            cx - cap_w/2, cap_y - cap_h/2, 
+            cx + cap_w/2, cap_y + cap_h/2, 
+            fill="#333333", outline=self.handle_col, width=2
+        )
+        
+        # Screen Area
+        screen_margin = 4
+        sx1 = cx - cap_w/2 + screen_margin
+        sx2 = cx + cap_w/2 - screen_margin
+        sy1 = cap_y - cap_h/2 + screen_margin
+        sy2 = cap_y + cap_h/2 - screen_margin
+        
+        self.canvas.create_rectangle(sx1, sy1, sx2, sy2, fill="black", outline="")
+        
+        # 5. Draw Cap Content
+        if self.mode == "macro":
+            # Waveform / Gradient Bar
+            norm_val = (m_val - self.min_val) / (self.max_val - self.min_val) if (self.max_val - self.min_val) else 0
+            
+            # Simple bar visualization
+            bar_w = (sx2 - sx1) * 0.9
+            bar_h = 10
+            bx1 = (sx1 + sx2)/2 - bar_w/2
+            bx2 = (sx1 + sx2)/2 + bar_w/2
+            by1 = (sy1 + sy2)/2 - bar_h/2
+            by2 = (sy1 + sy2)/2 + bar_h/2
+            
+            self.canvas.create_rectangle(bx1, by1, bx2, by2, fill=self._get_color(norm_val), outline="")
+            self.canvas.create_text((sx1+sx2)/2, (sy1+sy2)/2 + 15, text=f"{m_val:.1f}", fill="white", font=("Arial", 8))
+            self.canvas.create_text((sx1+sx2)/2, (sy1+sy2)/2 - 15, text="AVG", fill="#888888", font=("Arial", 6))
+            
+        elif self.mode == "micro":
+            # Vertical Stripes for Children
+            total_screen_w = sx2 - sx1
+            strip_w = total_screen_w / self.num_channels
+            
+            for i in range(self.num_channels):
+                c_val = self.child_values[i].get()
+                norm_c = (c_val - self.min_val) / (self.max_val - self.min_val) if (self.max_val - self.min_val) else 0
+                
+                x1 = sx1 + i * strip_w
+                x2 = x1 + strip_w
+                
+                # Gap
+                x1 += 1
+                x2 -= 1
+                
+                # Visualizing Value inside the strip
+                fill_h = norm_c * (sy2 - sy1)
+                bar_top = sy2 - fill_h
+                
+                # Background
+                self.canvas.create_rectangle(x1, sy1, x2, sy2, fill="#222222", outline="")
+                # Value
+                self.canvas.create_rectangle(x1, bar_top, x2, sy2, fill=self._get_color(norm_c), outline="")
+                # Label
+                self.canvas.create_text((x1+x2)/2, sy2 - 5, text=f"{i+1}", fill="white", font=("Arial", 6), anchor="s")
 
-O 
-offset
-​
- [i]=V 
-child
-​
- [i]−P 
-master
-​
- 
-Master Movement (The "Delta" Approach): When the physical fader moves to a new position (P 
-new
-​
- ), the children update based on their preserved offsets, maintaining their relative mix:
+    def _get_color(self, norm_val):
+        if norm_val < 0.5:
+            r = int(255 * (norm_val * 2))
+            g = 255
+            b = 0
+        else:
+            r = 255
+            g = int(255 * (1.0 - (norm_val - 0.5) * 2))
+            b = 0
+        return f"#{r:02x}{g:02x}{b:02x}"
 
-V 
-child
-​
- [i]=P 
-new
-​
- +O 
-offset
-​
- [i]
-(Note: Hard limits apply. If a child hits 100%, it caps out, but the others continue to rise until the fader stops.)
 
-Micro Adjustment (Inside the Cap): When the user adjusts a specific child strip on the cap (modifying V 
-child
-​
- [i]), the system must decide how to handle the physical fader:
-
-Option A (Static Master): The physical fader stays still; only the offset O 
-offset
-​
- [i] is updated.
-
-Option B (Dynamic Master): The physical fader moves to represent the new weighted average of all children.
-
-5. Fabrication Specification (Bill of Materials)
-If you were to prototype this today, here is the build list:
-
-Component	Specification	Function
-Main Fader	100mm Motorized Linear Potentiometer	The chassis and master coordinate system.
-Touch Display	1.14" to 2" IPS/OLED Touch Module (SPI interface)	The "Cap." Must be wide enough to touch individual "strips."
-Microcontroller	ESP32-S3 (Mini)	Handles the touch logic and drawing the UI on the cap.
-Housing	SLA 3D Printed Resin	Custom shell to hold the screen onto the fader stem (Tang).
-Umbilical	10-pin FFC (Ribbon Cable)	Carries power and data to the moving cap.
-
-Export to Sheets
-
-6. Use Case Example
-Imagine you are mixing drums.
-
-You assign Kick, Snare, and Hats to the Composite Fader.
-
-Closed Mode: You move the fader down. The whole drum kit gets quieter.
-
-Open Mode: You tap the fader cap. It displays three small vertical bars. You see the Snare is too loud relative to the Kick.
-
-You drag your finger down on the middle bar (Snare) on the cap itself. The Snare volume drops.
-
-You close the cap. You continue to use the physical fader to automate the volume of the whole kit, with the new Snare balance preserved.
-
-Next Step
-This requires a very specific custom 3D print to mount a screen onto a fader stem. Would you like me to generate a pseudocode for the proportional logic (in Python or C++) so you can test the math before building the hardware?
+class CompositeFaderCreatorMixin:
+    def _create_composite_fader(self, parent_widget, config_data, **kwargs):
+        path = config_data.get("path", "")
+        base_mqtt_topic = kwargs.get("base_mqtt_topic_from_path", "")
+        
+        frame = CompositeFaderFrame(
+            parent_widget, 
+            config_data, 
+            path, 
+            self.state_mirror_engine, 
+            self.subscriber_router,
+            base_mqtt_topic
+        )
+        
+        if path:
+            self.state_mirror_engine.register_widget(path, frame.master_value, base_mqtt_topic, config_data)
+            topic = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic, path)
+            self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
+            self.state_mirror_engine.initialize_widget_state(path)
+            
+        return frame

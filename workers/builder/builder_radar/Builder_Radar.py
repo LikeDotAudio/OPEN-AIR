@@ -55,6 +55,7 @@ class RadarCreatorMixin:
             bg_color = bg_setting
 
         refresh_rate = app_settings.get("refresh_rate_ms", 50)
+        mode = app_settings.get("mode", "sweep") # sweep, data_driven
         
         points_count = data_params.get("points_per_revolution", 360)
         min_val = data_params.get("min_value", 0)
@@ -65,7 +66,7 @@ class RadarCreatorMixin:
         cx = visuals.get("center_x", width / 2)
         cy = visuals.get("center_y", height / 2)
         radius = visuals.get("radius", min(width, height) / 2 - 20)
-        plot_style = visuals.get("plot_style", "bar")
+        plot_style = visuals.get("plot_style", "bar") # bar, line, area
 
         # 2. Setup Container
         frame = tk.Frame(parent_widget, bg=bg_color)
@@ -73,7 +74,7 @@ class RadarCreatorMixin:
             lbl = tk.Label(frame, text=label, bg=bg_color, fg="white", font=("Helvetica", 10, "bold"))
             lbl.pack(side=tk.TOP, pady=(0, 5))
 
-        canvas = tk.Canvas(frame, width=width, height=height, bg=bg_color, highlightthickness=0)
+        canvas = tk.Canvas(frame, width=width, height=height, bg=bg_color, highlightthickness=0, bd=0)
         canvas.pack()
 
         # 3. State Variables
@@ -86,19 +87,8 @@ class RadarCreatorMixin:
 
         # 4. Helper Functions
         def polar_to_cartesian(angle_deg, r):
-            # Tkinter angle: 0 is Right (East), 90 is Up (North).
-            # Standard Math: 0 is Right (East), CCW positive.
-            # Radar logic: start_angle (90) is 0 index.
-            # Clockwise means angle decreases.
-            
-            # Convert index/logic angle to Tkinter geometric angle
-            # Logic: If 0 is at 90 deg (North)...
-            # CW: 0->90, 1->(90-step), etc.
-            
             theta_rad = math.radians(angle_deg)
             # Flip Y for screen coords (y grows down)
-            # x = cx + r * cos(theta)
-            # y = cy - r * sin(theta)  (minus because y is inverted)
             x = cx + r * math.cos(theta_rad)
             y = cy - r * math.sin(theta_rad)
             return x, y
@@ -130,14 +120,74 @@ class RadarCreatorMixin:
             spoke_int = grid_sys.get("spoke_interval", 30)
             if spoke_int > 0:
                 for a in range(0, 360, int(spoke_int)):
-                    # Adjust for start angle and direction if needed, or just draw standard geometric spokes
-                    # Usually spokes are fixed geometric
                     px, py = polar_to_cartesian(a, radius)
                     canvas.create_line(cx, cy, px, py, fill=grid_sys.get("grid_color", "#444"), tags="grid")
+                    
+                    # Time/Angle Scale Labels
+                    if grid_sys.get("labels", {}).get("show_time_scale", False):
+                        # Draw label slightly outside
+                        lx, ly = polar_to_cartesian(a, radius + 15)
+                        canvas.create_text(lx, ly, text=f"{a}°", fill="#888", font=grid_sys.get("labels", {}).get("font", "Arial 8"), tags="grid")
 
-        def draw_data_slice(idx, val, clear=False):
-            # Calculate angle for this index
-            # If idx 0 is at start_angle
+        def redraw_full_plot():
+            """Redraws the entire plot based on data buffer. efficient for polygon/area mode."""
+            canvas.delete("data")
+            
+            if plot_style == "area":
+                points = [cx, cy] # Start at center
+                
+                step = 360.0 / points_count
+                
+                # Order points based on rotation
+                for i in range(points_count):
+                    val = radar_state["data_buffer"][i]
+                    offset = i * step
+                    if clockwise:
+                        angle = start_angle - offset
+                    else:
+                        angle = start_angle + offset
+                    
+                    norm = (val - min_val) / (max_val - min_val)
+                    r = norm * radius
+                    px, py = polar_to_cartesian(angle, r)
+                    points.extend([px, py])
+                
+                # Close the loop
+                points.extend(points[2:4]) 
+                
+                # Use 'safe' color for fill, or maybe a gradient logic if possible (complex)
+                fill_col = colors.get("colors", {}).get("safe", "#00ff00")
+                # Transparent stipple? Tkinter transparency is hard.
+                # Just outline and fill
+                canvas.create_polygon(points, fill=fill_col, outline=fill_col, width=1, tags="data", stipple="gray25")
+                
+            elif plot_style == "line":
+                # Connect dots
+                prev_x, prev_y = None, None
+                step = 360.0 / points_count
+                
+                for i in range(points_count + 1): # +1 to close loop
+                    idx = i % points_count
+                    val = radar_state["data_buffer"][idx]
+                    
+                    offset = idx * step
+                    if clockwise:
+                        angle = start_angle - offset
+                    else:
+                        angle = start_angle + offset
+                        
+                    norm = (val - min_val) / (max_val - min_val)
+                    r = norm * radius
+                    px, py = polar_to_cartesian(angle, r)
+                    
+                    if prev_x is not None:
+                        color = get_color(val)
+                        canvas.create_line(prev_x, prev_y, px, py, fill=color, width=2, tags="data")
+                    
+                    prev_x, prev_y = px, py
+
+        def update_plot_slice(idx, val):
+            """Updates just the slice for bar mode."""
             step = 360.0 / points_count
             offset = idx * step
             
@@ -146,55 +196,52 @@ class RadarCreatorMixin:
             else:
                 angle = start_angle + offset
             
-            # Clear previous slice visuals (if any specialized tag management used)
-            # Here we might redraw everything or just this slice. 
-            # Tkinter canvas isn't a pixel buffer, so "overwriting" means adding new items or deleting old.
-            # To avoid memory leak, we should manage tags per index.
             tag = f"slice_{idx}"
             canvas.delete(tag)
             
-            if clear: return
-
             norm = (val - min_val) / (max_val - min_val)
             r = norm * radius
             if r <= 0: return
 
             color = get_color(val)
-            
             px, py = polar_to_cartesian(angle, r)
             
-            if plot_style == "bar":
-                canvas.create_line(cx, cy, px, py, fill=color, width=2, tags=("data", tag))
-            elif plot_style == "line":
-                # Need previous point
-                pass # Complex for slice-by-slice update, simplified for bar
+            canvas.create_line(cx, cy, px, py, fill=color, width=2, tags=("data", tag))
 
-        # 6. Update Loop (The Sweep)
-        def sweep():
-            if not radar_state["running"]: return
-            
-            # Get current input
-            val = radar_state["current_input_value"]
-            idx = radar_state["current_angle_idx"]
-            
-            # Update history
-            radar_state["data_buffer"][idx] = val
-            
-            # Draw
-            draw_data_slice(idx, val)
-            
-            # Draw "Scan Line" (Cursor)
+        def draw_cursor(idx):
             canvas.delete("scan_line")
             step = 360.0 / points_count
             offset = idx * step
             angle = (start_angle - offset) if clockwise else (start_angle + offset)
             lx, ly = polar_to_cartesian(angle, radius)
-            canvas.create_line(cx, cy, lx, ly, fill="#00ff00", width=2, tags="scan_line")
+            canvas.create_line(cx, cy, lx, ly, fill="#FFFFFF", width=2, tags="scan_line")
+
+        # 6. Update Logic
+        def process_update(val=None):
+            if val is None:
+                val = radar_state["current_input_value"]
+            
+            idx = radar_state["current_angle_idx"]
+            radar_state["data_buffer"][idx] = val
+            
+            if plot_style in ["area", "line"]:
+                # Full redraw needed for connected styles to look right?
+                # Optimization: Could just update points, but Tkinter polygon needs full list.
+                # For smooth animation, full redraw is safer.
+                redraw_full_plot()
+            else:
+                update_plot_slice(idx, val)
+            
+            draw_cursor(idx)
             
             # Increment
             radar_state["current_angle_idx"] = (idx + 1) % points_count
-            
-            canvas.after(refresh_rate, sweep)
+
+        def sweep_loop():
+            if not radar_state["running"]: return
+            if mode == "sweep":
+                process_update()
+                canvas.after(refresh_rate, sweep_loop)
 
         # 7. Interaction
         def clear_plot(event):
@@ -203,31 +250,29 @@ class RadarCreatorMixin:
             debug_logger(message=f"Radar '{label}' cleared.", **_get_log_args())
 
         def on_middle_click(event):
-            # 1. Generate random valid data point
+            # Manual trigger test
             random_val = random.uniform(min_val, max_val)
-            
-            # 2. Update current point in buffer and draw it
-            idx = radar_state["current_angle_idx"]
-            radar_state["data_buffer"][idx] = random_val
-            draw_data_slice(idx, random_val)
-            
-            # 3. Move to next point
-            radar_state["current_angle_idx"] = (idx + 1) % points_count
-            
-            if app_constants.global_settings["debug_enabled"]:
-                debug_logger(message=f"🎲 Radar '{label}' manual test: {random_val:.2f} at index {idx}", **_get_log_args())
+            if mode == "data_driven":
+                # Update variable which triggers trace
+                radar_value_var.set(random_val)
+            else:
+                # Force update in sweep mode (inject value)
+                radar_state["current_input_value"] = random_val
 
         canvas.bind("<Control-Button-1>", clear_plot)
         canvas.bind("<Button-2>", on_middle_click)
 
         # 8. MQTT / Value Interface
-        # Create a Variable to bind to MQTT
-        # This variable holds the "live" value that the sweeper picks up
         radar_value_var = tk.DoubleVar(value=min_val)
         
         def on_value_change(*args):
             try:
-                radar_state["current_input_value"] = radar_value_var.get()
+                new_val = radar_value_var.get()
+                radar_state["current_input_value"] = new_val
+                
+                if mode == "data_driven":
+                    process_update(new_val)
+                    
             except: pass
             
         radar_value_var.trace_add("write", on_value_change)
@@ -240,9 +285,13 @@ class RadarCreatorMixin:
 
         # Start
         draw_static_grid()
-        sweep()
+        if mode == "sweep":
+            sweep_loop()
+        elif mode == "data_driven":
+            # Initial draw
+            redraw_full_plot() if plot_style in ["area", "line"] else None
         
         if app_constants.global_settings["debug_enabled"]:
-            debug_logger(message=f"📡 Radar Eye '{label}' is scanning...", **_get_log_args())
+            debug_logger(message=f"📡 Radar Eye '{label}' is ready (Mode: {mode}).", **_get_log_args())
 
         return frame

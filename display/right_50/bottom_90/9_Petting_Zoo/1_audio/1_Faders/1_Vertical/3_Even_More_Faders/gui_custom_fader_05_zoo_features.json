@@ -1,0 +1,69 @@
+{
+  "Fader_Zoo_Features": {
+    "type": "OcaBlock",
+    "description": "Showcasing new Custom Fader Features",
+    "layout_columns": 6,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "cf_feat1": {
+        "type": "_CustomFader",
+        "label_active": "Big Knob",
+        "value_min": 0.0, "value_max": 100.0, "value_default": 50.0,
+        "fader_cap_scale": 1.5,
+        "fader_grip_color": "#FFD700",
+        "fader_colour": "#4B0082",
+        "layout": {"width": 80, "height": 300},
+        "notes": "Scaled Cap & Custom Colors"
+      },
+      "cf_feat2": {
+        "type": "_CustomFader",
+        "label_active": "Custom Ticks",
+        "value_min": -60.0, "value_max": 12.0, "value_default": 0.0,
+        "custom_ticks": [-60, -40, -20, -10, -5, 0, 5, 12],
+        "tick_color": "#00FFFF",
+        "tick_thickness": 2,
+        "layout": {"width": 80, "height": 300},
+        "notes": "Non-linear tick spacing"
+      },
+      "cf_feat3": {
+        "type": "_CustomFader",
+        "label_active": "Left Units",
+        "value_min": 0.0, "value_max": 100.0, "value_default": 25.0,
+        "show_units": true,
+        "unit_text": "$",
+        "unit_position": "left",
+        "layout": {"width": 80, "height": 300},
+        "notes": "Units on the left"
+      },
+      "cf_feat4": {
+        "type": "_CustomFader",
+        "label_active": "No Float",
+        "value_min": 0.0, "value_max": 100.0, "value_default": 75.0,
+        "movement_value_display": false,
+        "layout": {"width": 80, "height": 300},
+        "notes": "Movement display OFF"
+      },
+      "cf_feat5": {
+        "type": "_CustomFader",
+        "label_active": "Small Knob",
+        "value_min": 0.0, "value_max": 100.0, "value_default": 10.0,
+        "fader_cap_scale": 0.6,
+        "fader_grip_color": "#E0E0E0",
+        "layout": {"width": 80, "height": 300},
+        "notes": "Mini Fader"
+      },
+      "cf_feat6": {
+        "type": "_CustomFader",
+        "label_active": "Pink Track",
+        "value_min": 0.0, "value_max": 100.0, "value_default": 90.0,
+        "fader_colour": "#FF69B4",
+        "tick_color": "#FF1493",
+        "layout": {"width": 80, "height": 300},
+        "notes": "Custom track color"
+      }
+    }
+  }
+}

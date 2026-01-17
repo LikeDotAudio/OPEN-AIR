@@ -1,0 +1,96 @@
+{
+  "Fader_Zoo_MainVol": {
+    "type": "OcaBlock",
+    "description": "Main Volume Fader Variations",
+    "layout_columns": 8,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "cf_vol1": {
+        "type": "_CustomFader",
+        "label_active": "Standard",
+        "value_min": -100.0, "value_max": 10.0, "value_default": 0.0,
+        "layout": {"width": 60, "height": 300},
+        "tick_thickness": 1,
+        "show_units": true, "unit_text": "dB",
+        "notes": "Standard dB"
+      },
+      "cf_vol2": {
+        "type": "_CustomFader",
+        "label_active": "Thick Ticks",
+        "value_min": -60.0, "value_max": 6.0, "value_default": -10.0,
+        "layout": {"width": 60, "height": 300},
+        "tick_thickness": 3,
+        "tick_color": "#FF5252",
+        "show_units": true, "unit_text": "dB",
+        "notes": "Red Thick Ticks"
+      },
+      "cf_vol3": {
+        "type": "_CustomFader",
+        "label_active": "Percent",
+        "value_min": 0.0, "value_max": 100.0, "value_default": 75.0,
+        "layout": {"width": 60, "height": 300},
+        "tick_thickness": 1,
+        "tick_color": "#448AFF",
+        "show_units": true, "unit_text": "%",
+        "notes": "Blue Percent"
+      },
+      "cf_vol4": {
+        "type": "_CustomFader",
+        "label_active": "Voltage",
+        "value_min": 0.0, "value_max": 5.0, "value_default": 3.3,
+        "layout": {"width": 60, "height": 300},
+        "tick_thickness": 2,
+        "tick_color": "#E040FB",
+        "show_units": true, "unit_text": "V",
+        "value_highlight_color": "#E040FB",
+        "notes": "Purple Voltage"
+      },
+      "cf_vol5": {
+        "type": "_CustomFader",
+        "label_active": "No Units",
+        "value_min": 0.0, "value_max": 127.0, "value_default": 64.0,
+        "layout": {"width": 60, "height": 300},
+        "tick_thickness": 1,
+        "show_units": false,
+        "tick_color": "#FFAB40",
+        "notes": "MIDI 0-127"
+      },
+      "cf_vol6": {
+        "type": "_CustomFader",
+        "label_active": "Fine Ticks",
+        "value_min": -20.0, "value_max": 20.0, "value_default": 0.0,
+        "layout": {"width": 60, "height": 300},
+        "tick_thickness": 1,
+        "tick_size": 0.3,
+        "tick_color": "#69F0AE",
+        "show_units": true, "unit_text": "dB",
+        "notes": "Long Green Ticks"
+      },
+      "cf_vol7": {
+        "type": "_CustomFader",
+        "label_active": "Hertz",
+        "value_min": 20.0, "value_max": 20000.0, "value_default": 1000.0,
+        "log_exponent": 0.5,
+        "layout": {"width": 60, "height": 300},
+        "tick_thickness": 2,
+        "tick_color": "#FFFF00",
+        "show_units": true, "unit_text": "Hz",
+        "notes": "Log Scale Hz"
+      },
+      "cf_vol8": {
+        "type": "_CustomFader",
+        "label_active": "Ghost",
+        "value_min": 0.0, "value_max": 10.0, "value_default": 5.0,
+        "layout": {"width": 60, "height": 300},
+        "tick_thickness": 1,
+        "tick_color": "#404040",
+        "value_highlight_color": "#FFFFFF",
+        "show_units": true, "unit_text": "x",
+        "notes": "Subtle Ticks"
+      }
+    }
+  }
+}

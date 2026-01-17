@@ -93,9 +93,10 @@ class VUMeterCreatorMixin:
             if scale_position == "top":
                 bar_y = vertical_padding
 
-            lower_colour = config.get("Lower_range_colour", "green")
-            upper_colour = config.get("upper_range_Colour", "red")
-            pointer_colour = config.get("Pointer_colour", "white") # Default white for visibility
+            lower_colour = config.get("Lower_range_colour", config.get("lower_range_colour", "green"))
+            middle_colour = config.get("Middle_range_colour", config.get("middle_range_colour", "yellow"))
+            upper_colour = config.get("upper_range_Colour", config.get("upper_range_colour", config.get("Upper_range_colour", "red")))
+            pointer_colour = config.get("Pointer_colour", config.get("pointer_colour", "white")) # Default white for visibility
 
             # Animation Parameters (Default: 100ms)
             glide_time = float(config.get("glide_time", 100))

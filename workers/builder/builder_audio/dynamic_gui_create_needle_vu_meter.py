@@ -92,9 +92,9 @@ class NeedleVUMeterCreatorMixin:
             # Resting point for correlation meters is usually 0, for VU meters it's min_val
             resting_point = float(config.get("resting_point", min_val))
 
-            lower_colour = config.get("Lower_range_colour", "green")
-            upper_colour = config.get("upper_range_Colour", danger_color)
-            pointer_colour = config.get("Pointer_colour", accent_color)
+            lower_colour = config.get("Lower_range_colour", config.get("lower_range_colour", "green"))
+            upper_colour = config.get("upper_range_Colour", config.get("upper_range_colour", config.get("Upper_range_colour", danger_color)))
+            pointer_colour = config.get("Pointer_colour", config.get("pointer_colour", accent_color))
             
             needle_thickness = int(config.get("Needle_thickness", 3))
             scale_numbers = config.get("Scale_numbers", True)

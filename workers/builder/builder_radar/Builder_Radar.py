@@ -8,6 +8,9 @@ import random
 from workers.logger.logger import debug_logger
 from workers.logger.log_utils import _get_log_args
 from workers.mqtt.mqtt_topic_utils import get_topic
+from managers.configini.config_reader import Config
+
+app_constants = Config.get_instance()
 
 class RadarCreatorMixin:
     """
@@ -38,7 +41,19 @@ class RadarCreatorMixin:
         # Defaults
         width = app_settings.get("window_size", [600, 600])[0]
         height = app_settings.get("window_size", [600, 600])[1]
-        bg_color = app_settings.get("background_color", "#1e1e1e")
+        
+        bg_setting = app_settings.get("background_color", "transparent")
+        
+        if bg_setting.lower() == "transparent":
+            try:
+                # Try to get parent background. Works for tk widgets.
+                bg_color = parent_widget.cget("background")
+            except:
+                # Fallback if parent is ttk or fails
+                bg_color = "#1e1e1e" 
+        else:
+            bg_color = bg_setting
+
         refresh_rate = app_settings.get("refresh_rate_ms", 50)
         
         points_count = data_params.get("points_per_revolution", 360)

@@ -158,6 +158,7 @@ class DynamicGuiBuilder(
     CustomLTPCreatorMixin,
     WinkButtonCreatorMixin,
     VUMeterKnobCreatorMixin,
+    RadarCreatorMixin,
 ):
     # Initializes the DynamicGuiBuilder, a comprehensive class that constructs a GUI from a JSON configuration.
     # It integrates various mixins for handling styling, widget creation, MQTT communication, and more.

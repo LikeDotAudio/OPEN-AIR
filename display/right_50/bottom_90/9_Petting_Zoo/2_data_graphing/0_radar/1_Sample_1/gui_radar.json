@@ -1,0 +1,59 @@
+{
+  "Radar_Eye_Zoo": {
+    "type": "OcaBlock",
+    "description": "Radar Eye Visualization Demo",
+    "layout_columns": 1,
+    "fields": {
+      "radar_eye_1": {
+        "type": "_Radar",
+        "label_active": "Radar Eye 01",
+        "app_settings": {
+          "title": "Radar Eye v1.0",
+          "window_size": [600, 600],
+          "background_color": "transparent",
+          "refresh_rate_ms": 50,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 100,
+          "points_per_revolution": 360,
+          "history_buffer_size": 360,
+          "clockwise": true,
+          "start_angle": 90
+        },
+        "visuals": {
+          "plot_style": "bar",
+          "center_x": 300,
+          "center_y": 300,
+          "radius": 250
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#444444",
+          "ring_interval": 20,
+          "spoke_interval": 30,
+          "labels": {
+            "show_values": true,
+            "show_time_scale": true,
+            "font": "Consolas 10"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 50,
+          "upper_point": 80,
+          "colors": {
+            "safe": "#00ff00",
+            "warning": "#ffff00",
+            "critical": "#ff0000"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": true,
+          "mqtt_topic": "sensor/radar_eye/01",
+          "log_to_file": true
+        }
+      }
+    }
+  }
+}

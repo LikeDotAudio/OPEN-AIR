@@ -1,0 +1,59 @@
+{
+  "Radar_Eye_Zoo_2": {
+    "type": "OcaBlock",
+    "description": "Radar Eye Sample 2 - Sonar",
+    "layout_columns": 1,
+    "fields": {
+      "radar_eye_2": {
+        "type": "_Radar",
+        "label_active": "Sonar Sweep",
+        "app_settings": {
+          "title": "Sonar v2.0",
+          "window_size": [600, 600],
+          "background_color": "transparent",
+          "refresh_rate_ms": 100,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 100,
+          "points_per_revolution": 180,
+          "history_buffer_size": 180,
+          "clockwise": false,
+          "start_angle": 0
+        },
+        "visuals": {
+          "plot_style": "bar",
+          "center_x": 300,
+          "center_y": 300,
+          "radius": 200
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#004400",
+          "ring_interval": 25,
+          "spoke_interval": 45,
+          "labels": {
+            "show_values": true,
+            "show_time_scale": false,
+            "font": "Courier 12"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 60,
+          "upper_point": 90,
+          "colors": {
+            "safe": "#003300",
+            "warning": "#008800",
+            "critical": "#00FF00"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": true,
+          "mqtt_topic": "sensor/radar_eye/02",
+          "log_to_file": false
+        }
+      }
+    }
+  }
+}

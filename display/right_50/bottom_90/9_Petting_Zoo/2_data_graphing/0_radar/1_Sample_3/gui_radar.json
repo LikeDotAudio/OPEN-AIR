@@ -1,0 +1,59 @@
+{
+  "Radar_Eye_Zoo_3": {
+    "type": "OcaBlock",
+    "description": "Radar Eye Sample 3 - High Speed",
+    "layout_columns": 1,
+    "fields": {
+      "radar_eye_3": {
+        "type": "_Radar",
+        "label_active": "High Speed Scan",
+        "app_settings": {
+          "title": "Fast Scan v3.0",
+          "window_size": [600, 600],
+          "background_color": "transparent",
+          "refresh_rate_ms": 20,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": -50,
+          "max_value": 50,
+          "points_per_revolution": 720,
+          "history_buffer_size": 720,
+          "clockwise": true,
+          "start_angle": 180
+        },
+        "visuals": {
+          "plot_style": "bar",
+          "center_x": 300,
+          "center_y": 300,
+          "radius": 280
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#008888",
+          "ring_interval": 10,
+          "spoke_interval": 15,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": true,
+            "font": "Arial 8"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 0,
+          "upper_point": 30,
+          "colors": {
+            "safe": "#00FFFF",
+            "warning": "#0000FF",
+            "critical": "#FF00FF"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": true,
+          "mqtt_topic": "sensor/radar_eye/03",
+          "log_to_file": true
+        }
+      }
+    }
+  }
+}

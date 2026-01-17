@@ -9,7 +9,7 @@
     ],
     "fields": {
       "dial_01": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Std Combo",
         "value_default": 250.0,
         "piechart": true,
@@ -20,7 +20,7 @@
         "notes": "Standard combo"
       },
       "dial_02": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Pie Only",
         "value_default": 500.0,
         "piechart": true,
@@ -31,7 +31,7 @@
         "notes": "Piechart only, red"
       },
       "dial_03": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Ptr Only",
         "value_default": 750.0,
         "piechart": false,
@@ -42,7 +42,7 @@
         "notes": "Pointer only, blue"
       },
       "dial_04": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Lg Pie",
         "value_default": 300.0,
         "piechart": true,
@@ -53,7 +53,7 @@
         "notes": "Large pie, green"
       },
       "dial_05": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Sm Ptr",
         "value_default": 100.0,
         "piechart": false,
@@ -64,7 +64,7 @@
         "notes": "Small pointer, yellow"
       },
       "dial_06": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Giant Mix",
         "value_default": 600.0,
         "piechart": true,
@@ -75,7 +75,7 @@
         "notes": "Giant combo, cyan"
       },
       "dial_07": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Purple",
         "value_default": 800.0,
         "piechart": true,
@@ -86,7 +86,7 @@
         "notes": "Medium purple"
       },
       "dial_08": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Teal",
         "value_default": 400.0,
         "piechart": false,

@@ -263,8 +263,14 @@ class CustomFaderCreatorMixin:
                     delta = 1 if event.delta > 0 else -1
                 new_val = current_val + (delta * step)
                 new_val = max(frame.min_val, min(frame.max_val, new_val))
+                
+                # Show value display briefly during mousewheel
+                frame.is_sliding = True
                 fader_value_var.set(new_val)
                 state_mirror_engine.broadcast_gui_change_to_mqtt(path)
+                
+                # Reset sliding state after a short delay
+                canvas.after(500, lambda: setattr(frame, 'is_sliding', False) or on_fader_value_change())
 
             def _bind_mousewheel(event):
                 canvas.bind_all("<MouseWheel>", on_mousewheel)
@@ -339,7 +345,30 @@ class CustomFaderCreatorMixin:
         if frame_instance.custom_ticks is not None:
              tick_values = frame_instance.custom_ticks
         else:
-             tick_values = range(int(math.ceil(frame_instance.min_val / 5) * 5), int(math.floor(frame_instance.max_val / 5) * 5) + 1, 5)
+             value_range = frame_instance.max_val - frame_instance.min_val
+             if value_range <= 10:
+                 tick_interval = 2
+             elif value_range <= 50:
+                 tick_interval = 5
+             elif value_range <= 100:
+                 tick_interval = 10
+             elif value_range <= 1000:
+                 tick_interval = 100
+             elif value_range <= 5000:
+                 tick_interval = 250
+             elif value_range <= 10000:
+                 tick_interval = 1000
+             else:
+                 tick_interval = 2500
+
+             tick_values = []
+             if tick_interval > 0:
+                 current_tick = (
+                     math.ceil(frame_instance.min_val / tick_interval) * tick_interval
+                 )
+                 while current_tick <= frame_instance.max_val:
+                     tick_values.append(current_tick)
+                     current_tick += tick_interval
 
         for i, tick_value in enumerate(tick_values):
             linear_tick_norm = max(0.0, min(1.0, (tick_value - frame_instance.min_val) / (frame_instance.max_val - frame_instance.min_val) if (frame_instance.max_val - frame_instance.min_val) != 0 else 0))

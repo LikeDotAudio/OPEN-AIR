@@ -210,6 +210,7 @@ class KnobCreatorMixin:
             pointer_offset = int(config.get("pointer_offset", 0)) 
 
             # New Parameters for Overhaul
+            knob_style = config.get("knob_style", "standard").lower() # standard, panner, dial
             shape = config.get("shape", "circle").lower() # circle, octagon, gear
             pointer_style = config.get("pointer_style", "line").lower() # line, triangle, notch
             tick_style = config.get("tick_style", "simple").lower() # simple, numeric, dots
@@ -240,7 +241,8 @@ class KnobCreatorMixin:
                     outline_thickness=knob_outline_thickness,
                     outline_color=knob_outline_color,
                     fill_color=knob_fill_color,
-                    teeth=knob_teeth
+                    teeth=knob_teeth,
+                    knob_style=knob_style
                 )
 
             knob_value_var.trace_add("write", update_knob_visuals)
@@ -294,7 +296,7 @@ class KnobCreatorMixin:
             debug_logger(message=f"❌ The knob '{label}' shattered! Error: {e}")
             return None
 
-    def _draw_knob(self, canvas, width, height, value, min_val, max_val, value_label, neutral_color, accent_for_arc, indicator_color, secondary, text_inside=False, no_center=False, show_ticks=False, tick_length=10, arc_width=5, pointer_length=None, pointer_offset=0, shape="circle", pointer_style="line", tick_style="simple", gradient_level=0, outline_thickness=2, outline_color="gray", fill_color="", teeth=8):
+    def _draw_knob(self, canvas, width, height, value, min_val, max_val, value_label, neutral_color, accent_for_arc, indicator_color, secondary, text_inside=False, no_center=False, show_ticks=False, tick_length=10, arc_width=5, pointer_length=None, pointer_offset=0, shape="circle", pointer_style="line", tick_style="simple", gradient_level=0, outline_thickness=2, outline_color="gray", fill_color="", teeth=8, knob_style="standard"):
         """Modular rendering pipeline."""
         canvas.delete("all")
         cx, cy = width / 2, height / 2
@@ -307,21 +309,72 @@ class KnobCreatorMixin:
         radius = min(width, height) / 2 - padding
         
         # 1. Math Prep
-        norm_val_0_1 = (value - min_val) / (max_val - min_val) if max_val > min_val else 0
+        if max_val > min_val:
+            norm_val_0_1 = (value - min_val) / (max_val - min_val)
+        else:
+            norm_val_0_1 = 0
+
+        # Style-Specific Math
         start_angle = 240
         extent = -300
         val_extent = extent * norm_val_0_1
         pointer_angle_deg = start_angle + val_extent
 
+        if knob_style == "panner":
+            # Center Zero Logic
+            # Assuming min_val < 0 < max_val usually, or we map 0.5 to center
+            # Let's assume standard -100 to 100 or similar where 0 is center.
+            # Or if min/max are positive, we treat midpoint as center?
+            # "Panner" usually implies 0 is center. 
+            mid_val = (min_val + max_val) / 2
+            norm_from_center = (value - mid_val) / ((max_val - min_val) / 2) # -1 to 1
+            
+            # Arc logic for panner: Top is 90 degrees.
+            # Right is Clockwise (-), Left is Counter-Clockwise (+)
+            # Extent is proportional to distance from center.
+            # Max extent from center? Let's say +/- 135 degrees
+            panner_max_arc = 135
+            
+            # If norm_from_center > 0 (Right), start=90, extent = - (norm * 135)
+            # If norm_from_center < 0 (Left), start=90, extent = + (abs(norm) * 135)
+            
+            if norm_from_center >= 0:
+                 start_angle = 90
+                 val_extent = -1 * norm_from_center * panner_max_arc
+            else:
+                 start_angle = 90
+                 val_extent = abs(norm_from_center) * panner_max_arc
+            
+            pointer_angle_deg = 90 + (-1 * norm_from_center * panner_max_arc) # 90 is 12 o'clock
+
+        elif knob_style == "dial":
+             # Dial / Pie Chart style
+             # Usually starts at 90 (12 o'clock) and goes full 360 or 240?
+             # Based on dynamic_gui_create_dial.py: start=90, extent = -360 * norm
+             start_angle = 90
+             val_extent = -360 * norm_val_0_1
+             if abs(val_extent) >= 360: val_extent = -359.9
+             pointer_angle_deg = start_angle + val_extent
+
+
         # 2. Draw Track (The Arc) - Background
-        self._draw_track(canvas, cx, cy, radius, start_angle, extent, val_extent, secondary, indicator_color, arc_width)
+        # For Dial, we might not want a background track, or a full circle?
+        # Dial code had: start=0, extent=359.9
+        bg_start = 0 if knob_style == "dial" else 240
+        bg_extent = 359.9 if knob_style == "dial" else -300
+        if knob_style == "panner":
+             bg_start = 225
+             bg_extent = -270 # 135 left + 135 right
+        
+        self._draw_track(canvas, cx, cy, radius, bg_start, bg_extent, start_angle, val_extent, secondary, indicator_color, arc_width, knob_style)
         
         # 3. Draw Ticks - Background
         if show_ticks:
             self._draw_ticks(canvas, cx, cy, radius, arc_width, tick_length, tick_style, secondary, min_val, max_val)
 
         # 4. Draw Body / Outline (The Gear) - Middle Layer
-        self._draw_body(canvas, cx, cy, radius, shape, outline_color, gradient_level, rotation_angle=pointer_angle_deg, outline_thickness=outline_thickness, fill_color=fill_color, teeth=teeth)
+        if knob_style != "dial": # Dial usually doesn't have a central "knob" body in the same way, or it IS the body
+            self._draw_body(canvas, cx, cy, radius, shape, outline_color, gradient_level, rotation_angle=pointer_angle_deg, outline_thickness=outline_thickness, fill_color=fill_color, teeth=teeth)
             
         # 5. Draw Pointer - Top Layer
         self._draw_pointer(canvas, cx, cy, radius, arc_width, pointer_angle_deg, pointer_style, indicator_color, pointer_length, pointer_offset, no_center)
@@ -367,12 +420,31 @@ class KnobCreatorMixin:
                 points = self._get_gear_points(cx, cy, r, teeth=teeth, notch_depth=0.15, start_angle=rotation_angle)
                 canvas.create_polygon(points, outline=color, fill=current_fill, width=current_thickness)
 
-    def _draw_track(self, canvas, cx, cy, radius, start_angle, extent, val_extent, bg_color, active_color, width):
+    def _draw_track(self, canvas, cx, cy, radius, bg_start, bg_extent, start_angle, val_extent, bg_color, active_color, width, knob_style="standard"):
         """Draws the value arc."""
         # Background Arc
-        canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=start_angle, extent=extent, style=tk.ARC, outline=bg_color, width=width)
+        canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=bg_start, extent=bg_extent, style=tk.ARC, outline=bg_color, width=width)
+        
         # Active Arc
-        canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=start_angle, extent=val_extent, style=tk.ARC, outline=active_color, width=width)
+        style = tk.ARC
+        if knob_style == "dial":
+             style = tk.PIESLICE
+             
+        # Panner Coloring
+        final_color = active_color
+        if knob_style == "panner":
+             # Use red for right (negative extent from 90), white/active for left
+             # val_extent is negative for CW (Right), positive for CCW (Left)
+             if val_extent < 0:
+                  final_color = "red" # Right / Positive Panning usually
+             else:
+                  final_color = active_color # Left
+
+        if abs(val_extent) > 0.1:
+            canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=start_angle, extent=val_extent, style=style, outline=final_color if style==tk.ARC else "", fill=final_color if style==tk.PIESLICE else "", width=width)
+        elif knob_style == "panner": 
+            # Center tick for panner when near 0
+            canvas.create_line(cx, cy - radius + 2, cx, cy - radius + 12, fill=bg_color, width=2)
 
     def _draw_ticks(self, canvas, cx, cy, radius, arc_width, tick_length, style, color, min_val, max_val):
         start_angle = 240

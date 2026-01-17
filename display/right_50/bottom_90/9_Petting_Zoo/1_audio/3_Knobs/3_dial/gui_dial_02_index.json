@@ -9,7 +9,7 @@
     ],
     "fields": {
       "dial_idx1": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Index 1",
         "value_default": 10.0,
         "piechart": false, "pointer": true,
@@ -18,7 +18,7 @@
         "notes": "Blue Pointer"
       },
       "dial_idx2": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Index 2",
         "value_default": 20.0,
         "piechart": true, "pointer": false,
@@ -27,7 +27,7 @@
         "notes": "Amber Pie"
       },
       "dial_idx3": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Index 3",
         "value_default": 30.0,
         "piechart": true, "pointer": true,
@@ -36,7 +36,7 @@
         "notes": "Green Combo"
       },
       "dial_idx4": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Index 4",
         "value_default": 40.0,
         "piechart": false, "pointer": true,
@@ -45,7 +45,7 @@
         "notes": "Small Pink"
       },
       "dial_idx5": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Index 5",
         "value_default": 50.0,
         "piechart": true, "pointer": false,
@@ -54,7 +54,7 @@
         "notes": "Large Purple"
       },
       "dial_idx6": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Index 6",
         "value_default": 60.0,
         "piechart": true, "pointer": true,
@@ -63,7 +63,7 @@
         "notes": "Cyan Combo"
       },
       "dial_idx7": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Index 7",
         "value_default": 70.0,
         "piechart": false, "pointer": true,
@@ -72,7 +72,7 @@
         "notes": "Deep Orange"
       },
       "dial_idx8": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Index 8",
         "value_default": 80.0,
         "piechart": true, "pointer": true,

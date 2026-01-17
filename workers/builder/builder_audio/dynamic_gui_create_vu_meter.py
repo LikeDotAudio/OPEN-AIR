@@ -55,8 +55,33 @@ class VUMeterCreatorMixin:
             max_val = float(config.get("max", 3.0))
             value_default = float(config.get("value_default", min_val))
             red_zone_start = float(config.get("upper_range", 0.0))
-            width = int(layout_config.get("width", config.get("width", 200)))
-            height = int(layout_config.get("height", config.get("height", 20)))
+            
+            # Layout & Features
+            base_width = int(layout_config.get("width", config.get("width", 200)))
+            bar_height = int(layout_config.get("height", config.get("height", 20)))
+            
+            show_ticks = config.get("show_ticks", False)
+            tick_color = config.get("tick_color", bg_color) # Default to background color ("invisible" scale)
+            scale_position = config.get("scale_position", "bottom").lower() # top, bottom, none
+            show_peak_hold = config.get("show_peak_hold", False)
+            peak_hold_time = float(config.get("peak_hold_time", 2000)) # ms
+
+            # Calculate total canvas size
+            pad_x = 5
+            peak_led_size = bar_height if show_peak_hold else 0
+            peak_led_gap = 5 if show_peak_hold else 0
+            
+            total_width = base_width + peak_led_gap + peak_led_size + (pad_x * 2)
+            
+            tick_height = 5 if show_ticks else 0
+            text_height = 10 if scale_position != "none" else 0
+            vertical_padding = tick_height + text_height + 5 if (show_ticks or scale_position != "none") else 0
+            
+            total_height = bar_height + vertical_padding
+            
+            bar_y = 0
+            if scale_position == "top":
+                bar_y = vertical_padding
 
             lower_colour = config.get("Lower_range_colour", "green")
             upper_colour = config.get("upper_range_Colour", "red")
@@ -71,25 +96,60 @@ class VUMeterCreatorMixin:
             vu_value_var = tk.DoubleVar(value=value_default)
 
             canvas = tk.Canvas(
-                frame, width=width, height=height, bg="gray", highlightthickness=0
+                frame, width=total_width, height=total_height, bg="gray", highlightthickness=0
             )
             canvas.pack()
 
-            # Draw the background
+            # --- Draw Background Bar ---
             red_zone_x = (
-                (red_zone_start - min_val) / (max_val - min_val) * width
+                (red_zone_start - min_val) / (max_val - min_val) * base_width
                 if max_val > min_val
                 else 0
             )
-            canvas.create_rectangle(0, 0, red_zone_x, height, fill=lower_colour, outline="")
+            canvas.create_rectangle(pad_x, bar_y, pad_x + red_zone_x, bar_y + bar_height, fill=lower_colour, outline="")
             canvas.create_rectangle(
-                red_zone_x, 0, width, height, fill=upper_colour, outline=""
+                pad_x + red_zone_x, bar_y, pad_x + base_width, bar_y + bar_height, fill=upper_colour, outline=""
             )
 
-            # The indicator
+            # --- Draw Ticks & Scale ---
+            if show_ticks or scale_position != "none":
+                tick_y_start = bar_y + bar_height if scale_position == "bottom" else bar_y
+                tick_direction = 1 if scale_position == "bottom" else -1
+                
+                # Simple linear ticks
+                num_ticks = 5
+                for i in range(num_ticks + 1):
+                    norm = i / num_ticks
+                    val = min_val + norm * (max_val - min_val)
+                    x_pos = pad_x + (norm * base_width)
+                    
+                    if show_ticks:
+                        canvas.create_line(x_pos, tick_y_start, x_pos, tick_y_start + (tick_height * tick_direction), fill=tick_color)
+                    
+                    if scale_position != "none":
+                        text_y = tick_y_start + ((tick_height + 5) * tick_direction)
+                        anchor = "n" if scale_position == "bottom" else "s"
+                        canvas.create_text(x_pos, text_y, text=f"{int(val)}", fill=tick_color, font=("Helvetica", 8), anchor=anchor)
+
+            # --- Draw Indicator ---
             indicator = canvas.create_rectangle(
-                0, 0, 5, height, fill=pointer_colour, outline=""
+                pad_x, bar_y, pad_x + 5, bar_y + bar_height, fill=pointer_colour, outline=""
             )
+
+            # --- Draw Peak Hold LED ---
+            peak_led = None
+            if show_peak_hold:
+                led_x = pad_x + base_width + peak_led_gap
+                peak_led = canvas.create_rectangle(
+                    led_x, bar_y, led_x + peak_led_size, bar_y + bar_height,
+                    fill="#444444", outline="black"
+                )
+                
+                def reset_peak(event):
+                    self.anim_peak_expiry = 0
+                    canvas.itemconfig(peak_led, fill="#444444")
+                
+                canvas.tag_bind(peak_led, "<Button-1>", reset_peak)
 
             # Animation State
             self.anim_current_value = value_default
@@ -97,17 +157,29 @@ class VUMeterCreatorMixin:
             self.anim_mode = "idle" # idle, tracking, holding, decaying
             self.anim_hold_start = 0
             self.anim_running = False
+            self.anim_peak_expiry = 0
 
             def draw_indicator():
                 val = self.anim_current_value
                 if val < min_val: val = min_val
                 if val > max_val: val = max_val
+                
+                # Indicator Position
                 x_pos = (
-                    (val - min_val) / (max_val - min_val) * width
+                    (val - min_val) / (max_val - min_val) * base_width
                     if max_val > min_val
                     else 0
                 )
-                canvas.coords(indicator, x_pos - 2.5, 0, x_pos + 2.5, height)
+                canvas.coords(indicator, pad_x + x_pos - 2.5, bar_y, pad_x + x_pos + 2.5, bar_y + bar_height)
+                
+                # Peak Hold Logic
+                if show_peak_hold and peak_led:
+                    now_ms = time.time() * 1000
+                    if val >= red_zone_start:
+                        canvas.itemconfig(peak_led, fill="red")
+                        self.anim_peak_expiry = now_ms + peak_hold_time
+                    elif now_ms > self.anim_peak_expiry:
+                        canvas.itemconfig(peak_led, fill="#444444")
 
             def animate():
                 current = self.anim_current_value

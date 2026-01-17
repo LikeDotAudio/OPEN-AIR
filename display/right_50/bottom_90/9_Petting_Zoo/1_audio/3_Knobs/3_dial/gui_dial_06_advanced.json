@@ -9,7 +9,7 @@
     ],
     "fields": {
       "dial_adv1": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Infinite",
         "min": 0.0, "max": 100.0, "value_default": 0.0,
         "infinity": true,
@@ -18,7 +18,7 @@
         "notes": "Wraps around 0-100"
       },
       "dial_adv2": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Fine Tune",
         "min": 0.0, "max": 1000.0, "value_default": 500.0,
         "fine_pitch": true,
@@ -27,7 +27,7 @@
         "notes": "10 turns for full range"
       },
       "dial_adv3": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Thick Crust",
         "min": 0.0, "max": 100.0, "value_default": 75.0,
         "pie_crust_thickness": 10,
@@ -36,7 +36,7 @@
         "notes": "10px Crust"
       },
       "dial_adv4": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Thin Crust",
         "min": 0.0, "max": 100.0, "value_default": 25.0,
         "pie_crust_thickness": 1,
@@ -45,7 +45,7 @@
         "notes": "1px Crust"
       },
       "dial_adv5": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Val Top",
         "min": 0.0, "max": 100.0, "value_default": 50.0,
         "Value_text_position": "top",
@@ -55,7 +55,7 @@
         "notes": "Val Top, Text Bot"
       },
       "dial_adv6": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Val Left",
         "min": 0.0, "max": 100.0, "value_default": 60.0,
         "Value_text_position": "left",
@@ -64,7 +64,7 @@
         "notes": "Value on Left"
       },
       "dial_adv7": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Val Right",
         "min": 0.0, "max": 100.0, "value_default": 40.0,
         "Value_text_position": "right",
@@ -73,7 +73,7 @@
         "notes": "Value on Right"
       },
       "dial_adv8": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Full Pie",
         "min": 0.0, "max": 100.0, "value_default": 100.0,
         "pie_crust_thickness": 25,

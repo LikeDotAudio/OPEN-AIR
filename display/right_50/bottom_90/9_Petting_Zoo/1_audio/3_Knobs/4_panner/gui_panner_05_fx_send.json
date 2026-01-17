@@ -3,7 +3,7 @@
     "type": "OcaBlock",
     "label_active": "FX Send",
     "fields": {     "examplefields": {
-      "type": "_Panner",
+      "type": "_Knob", "knob_style": "panner",
       "label_active": "FX Send",
       "min": -50.0,
       "max": 50.0,

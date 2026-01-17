@@ -1,0 +1,83 @@
+{
+  "Correlation_Meter_Petting_Zoo": {
+    "type": "OcaBlock",
+    "description": "Correlation Meter Variations",
+    "layout_columns": 2,
+    "column_sizing": [
+      {"weight": 1},
+      {"weight": 1},
+      {"weight": 1},
+      {"weight": 1},
+      {"weight": 1}
+    ],
+    "fields": {
+      "corr_standard": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Standard",
+        "min": -90.0, "max": 90.0, "value_default": 0.0,
+        "size": 200, "upper_range": 0.0, "resting_point": 0.0,
+        "Lower_range_colour": "#FF4500", "upper_range_Colour": "#32CD32",
+        "custom_ticks": [-90, -45, 0, 45, 90],
+        "Meter_viewable_angle": 120, "Needle_thickness": 3, "Pointer_colour": "white",
+        "glide_time": 100, "dwell_time": 100, "hold_time": 0, "fall_time": 100,
+        "notes": "Standard: Fast rise, fast fall."
+      },
+      "corr_slow": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Slow/Damped",
+        "min": -1.0, "max": 1.0, "value_default": 0.0,
+        "size": 150, "upper_range": 0.0, "resting_point": 0.0,
+        "Lower_range_colour": "#D32F2F", "upper_range_Colour": "#388E3C",
+        "custom_ticks": [-1, 0, 1],
+        "Meter_viewable_angle": 90, "Needle_thickness": 2, "Pointer_colour": "#FFD700",
+        "glide_time": 500, "dwell_time": 500, "hold_time": 0, "fall_time": 500,
+        "notes": "Slow: Highly damped movement (500ms)."
+      },
+      "corr_peak_hold": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Peak Hold",
+        "min": -90.0, "max": 90.0, "value_default": 0.0,
+        "size": 250, "upper_range": 0.0, "resting_point": 0.0,
+        "Lower_range_colour": "#C62828", "upper_range_Colour": "#2E7D32",
+        "custom_ticks": [-90, -45, 0, 45, 90],
+        "Meter_viewable_angle": 160, "Needle_thickness": 4, "Pointer_colour": "#00FFFF",
+        "glide_time": 50, "dwell_time": 1000, "hold_time": 2000, "fall_time": 3000,
+        "notes": "Peak Hold: Instant rise, 2s hold, very slow fall."
+      },
+      "corr_ballistic": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Fast Ballistic",
+        "min": -90.0, "max": 90.0, "value_default": 0.0,
+        "size": 180, "upper_range": 0.0, "resting_point": 0.0,
+        "Lower_range_colour": "#FF5252", "upper_range_Colour": "#69F0AE",
+        "custom_ticks": [-90, 0, 90],
+        "Meter_viewable_angle": 140, "Needle_thickness": 2, "Pointer_colour": "#FFFFFF",
+        "glide_time": 20, "dwell_time": 20, "hold_time": 0, "fall_time": 50,
+        "notes": "Ballistic: Ultra-fast tracking (20ms)."
+      },
+      "corr_lazy": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Lazy/Smooth",
+        "min": -1.0, "max": 1.0, "value_default": 0.0,
+        "size": 220, "upper_range": 0.0, "resting_point": 0.0,
+        "Lower_range_colour": "#FF6E40", "upper_range_Colour": "#B2FF59",
+        "custom_ticks": [-1, -0.5, 0, 0.5, 1],
+        "Meter_viewable_angle": 100, "Needle_thickness": 3, "Pointer_colour": "#1E1E1E",
+        "glide_time": 300, "dwell_time": 800, "hold_time": 500, "fall_time": 1000,
+        "notes": "Lazy: Smooth tracking with slight hold."
+      },
+      
+      "APK": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Lazy/Smooth",
+        "min": -20.0, "max": 20.0, "value_default": 0.0,
+        "size": 220, "upper_range": 0.0, "resting_point": 0.0,
+        "Lower_range_colour": "#FF6E40", "upper_range_Colour": "#B2FF59",
+        
+        "Meter_viewable_angle": 100, "Needle_thickness": 8, "Pointer_colour": "ORANGE",
+        "glide_time": 1000, "dwell_time": 1000, "hold_time": 200, "fall_time": 1000,
+        "notes": "Lazy: Smooth tracking with slight hold."
+      }
+    }
+  }
+}

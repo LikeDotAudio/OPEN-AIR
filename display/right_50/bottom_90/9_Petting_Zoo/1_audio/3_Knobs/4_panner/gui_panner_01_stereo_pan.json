@@ -8,7 +8,7 @@
     ],
     "fields": {
       "stereo_pan_center": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Pan L/R",
         "min": -100.0, "max": 100.0, "value_default": 0.0,
         "width": 50, "height": 50,
@@ -24,7 +24,7 @@
         "notes": "Standard stereo panner, centered."
       },
       "pan_left_latching": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Pan Left",
         "min": -100.0, "max": 0.0, "value_default": -50.0,
         "width": 60, "height": 60,
@@ -41,7 +41,7 @@
         "notes": "Latching left pan."
       },
       "pan_right_momentary": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Pan Right",
         "min": 0.0, "max": 100.0, "value_default": 50.0,
         "width": 70, "height": 70,
@@ -58,7 +58,7 @@
         "notes": "Momentary right pan."
       },
       "width_latching": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Width",
         "min": 0.0, "max": 200.0, "value_default": 100.0,
         "width": 80, "height": 80,
@@ -75,7 +75,7 @@
         "notes": "Latching stereo width."
       },
       "balance_momentary": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Balance",
         "min": -100.0, "max": 100.0, "value_default": 0.0,
         "width": 50, "height": 50,
@@ -91,7 +91,7 @@
         "notes": "Momentary balance control."
       },
       "spread_latching": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Spread",
         "min": 0.0, "max": 100.0, "value_default": 75.0,
         "width": 70, "height": 70,
@@ -107,7 +107,7 @@
         "notes": "Latching spread control."
       },
       "azimuth_momentary": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Azimuth",
         "min": 0.0, "max": 360.0, "value_default": 45.0,
         "width": 60, "height": 60,
@@ -124,7 +124,7 @@
         "notes": "Momentary azimuth angle."
       },
       "elevation_latching": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Elevation",
         "min": -90.0, "max": 90.0, "value_default": 10.0,
         "width": 70, "height": 70,

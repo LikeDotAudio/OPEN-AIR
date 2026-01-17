@@ -1,0 +1,92 @@
+{
+  "Stereo_Needle_Zoo": {
+    "type": "OcaBlock",
+    "description": "Stereo Needle Meter Demos (Varied Ballistics)",
+    "layout_columns": 4,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "vu_standard": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Standard VU",
+        "meter_mode": "stereo",
+        "min": -20.0, "max": 3.0, "value_default": -5.0, "upper_range": 0.0,
+        "size": 200, 
+        "Pointer_colour": "#FFFFFF", "Pointer_colour_2": "#FF0000",
+        "glide_time": 300, "dwell_time": 300, "hold_time": 0, "fall_time": 300,
+        "notes": "Classic VU response (300ms integration)."
+      },
+      "vu_ppm_fast": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Fast PPM",
+        "meter_mode": "stereo",
+        "min": -20.0, "max": 3.0, "value_default": 0.0, "upper_range": 0.0,
+        "size": 200, 
+        "Pointer_colour": "#00FFFF", "Pointer_colour_2": "#FF00FF",
+        "glide_time": 10, "dwell_time": 10, "hold_time": 500, "fall_time": 1500,
+        "notes": "Peak Program Meter: Instant attack, slow decay."
+      },
+      "vu_broadcast": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Broadcast Avg",
+        "meter_mode": "stereo",
+        "min": -20.0, "max": 3.0, "value_default": -7.0, "upper_range": 0.0,
+        "size": 200,
+        "Pointer_colour": "#FFFF00", "Pointer_colour_2": "#00FF00",
+        "glide_time": 600, "dwell_time": 600, "hold_time": 0, "fall_time": 600,
+        "notes": "Slow averaging for loudness consistency."
+      },
+      "vu_vintage": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Vintage Damped",
+        "meter_mode": "stereo",
+        "min": -20.0, "max": 3.0, "value_default": -3.0, "upper_range": 0.0,
+        "size": 200,
+        "Pointer_colour": "#FFA500", "Pointer_colour_2": "#8B4513",
+        "glide_time": 450, "dwell_time": 450, "hold_time": 100, "fall_time": 800,
+        "notes": "Heavy physical needle damping."
+      },
+      "vu_hyper_sensitive": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Hyper Sensitive",
+        "meter_mode": "stereo",
+        "min": -20.0, "max": 3.0, "value_default": -10.0, "upper_range": 0.0,
+        "size": 200,
+        "Pointer_colour": "#00FF00", "Pointer_colour_2": "#FF0000",
+        "glide_time": 5, "dwell_time": 5, "hold_time": 0, "fall_time": 50,
+        "notes": "Tracks transients perfectly (no smoothing)."
+      },
+      "vu_lazy_peak": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Lazy Peak",
+        "meter_mode": "stereo",
+        "min": -20.0, "max": 3.0, "value_default": -5.0, "upper_range": 0.0,
+        "size": 200,
+        "Pointer_colour": "#E0E0E0", "Pointer_colour_2": "#404040",
+        "glide_time": 100, "dwell_time": 100, "hold_time": 2000, "fall_time": 4000,
+        "notes": "Moderate attack, very long hold & decay."
+      },
+      "vu_stereo_comp": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Stereo Comp",
+        "meter_mode": "stereo",
+        "min": -20.0, "max": 3.0, "value_default": -2.0, "upper_range": -3.0,
+        "size": 200,
+        "Pointer_colour": "#FF69B4", "Pointer_colour_2": "#1E90FF",
+        "glide_time": 20, "dwell_time": 20, "hold_time": 0, "fall_time": 300,
+        "notes": "Compressor-style gain reduction ballistics."
+      },
+      "vu_mastering": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Mastering",
+        "meter_mode": "stereo",
+        "min": -10.0, "max": 5.0, "value_default": 0.0, "upper_range": 0.0,
+        "size": 200,
+        "Pointer_colour": "#D4AF37", "Pointer_colour_2": "#C0C0C0",
+        "glide_time": 400, "dwell_time": 400, "hold_time": 0, "fall_time": 400,
+        "notes": "Tight range, highly damped precision."
+      }
+    }
+  }
+}

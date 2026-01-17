@@ -100,6 +100,7 @@ class CustomDualHorizontalFaderFrame(tk.Frame):
         self.value_follow = config.get("value_follow", fader_style.get("value_follow", DEFAULT_VALUE_FOLLOW))
         self.value_highlight_color = config.get("value_highlight_color", fader_style.get("value_highlight_color", DEFAULT_VALUE_HIGHLIGHT_COLOR))
         self.value_color = config.get("value_color", self.text_col)
+        self.ticks = config.get("ticks", None)
 
         super().__init__(
             master,
@@ -440,6 +441,61 @@ def _draw_dual_fader_shared_rail(frame, canvas, width, height, current_secondary
         fill=current_secondary, width=4, capstyle=tk.ROUND
     )
     
+    # 1b. Draw Ticks (Inserted)
+    tick_length_half = height * frame.tick_size
+    tick_values_to_draw = []
+    
+    if hasattr(frame, "ticks") and frame.ticks is not None:
+         tick_values_to_draw = frame.ticks
+    else:
+        value_range = frame.max_val - frame.min_val
+        if value_range <= 10:
+            tick_interval = 2
+        elif value_range <= 50:
+            tick_interval = 5
+        elif value_range <= 100:
+            tick_interval = 10
+        elif value_range <= 1000:
+            tick_interval = 100
+        elif value_range <= 5000:
+            tick_interval = 250
+        elif value_range <= 10000:
+            tick_interval = 1000
+        else: 
+            tick_interval = 2500
+
+        if tick_interval > 0:
+            current_tick = (
+                math.ceil(frame.min_val / tick_interval) * tick_interval
+            )
+            while current_tick <= frame.max_val:
+                tick_values_to_draw.append(current_tick)
+                current_tick += tick_interval
+
+    for i, tick_value in enumerate(tick_values_to_draw):
+        norm_tick = (tick_value - frame.min_val) / (frame.max_val - frame.min_val) if (frame.max_val - frame.min_val) != 0 else 0
+        if 0.0 <= norm_tick <= 1.0:
+            display_tick_norm = norm_tick ** (1.0 / frame.log_exponent)
+            tick_x_pos = (width - 40) * display_tick_norm + 20
+            
+            canvas.create_line(
+                tick_x_pos,
+                cy - tick_length_half,
+                tick_x_pos,
+                cy + tick_length_half,
+                fill=frame.tick_color,
+                width=1,
+            )
+            if i % 2 == 0:
+                canvas.create_text(
+                    tick_x_pos,
+                    cy + 25,
+                    text=str(int(tick_value)),
+                    fill=frame.tick_color,
+                    font=frame.tick_font,
+                    anchor="n",
+                )
+
     # 2. Calculate Handle Positions
     def get_x(val):
         norm_value = (

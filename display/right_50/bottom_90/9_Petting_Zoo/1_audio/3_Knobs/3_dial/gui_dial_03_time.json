@@ -9,7 +9,7 @@
     ],
     "fields": {
       "dial_tm1": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Seconds",
         "value_default": 15.0,
         "piechart": true, "pointer": true,
@@ -18,7 +18,7 @@
         "notes": "White Clock"
       },
       "dial_tm2": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Minutes",
         "value_default": 45.0,
         "piechart": false, "pointer": true,
@@ -27,7 +27,7 @@
         "notes": "Grey Clock"
       },
       "dial_tm3": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Millis",
         "value_default": 500.0,
         "piechart": true, "pointer": false,
@@ -36,7 +36,7 @@
         "notes": "Fast Red"
       },
       "dial_tm4": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Delay",
         "value_default": 250.0,
         "piechart": true, "pointer": true,
@@ -45,7 +45,7 @@
         "notes": "Delay Blue"
       },
       "dial_tm5": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Attack",
         "value_default": 5.0,
         "piechart": false, "pointer": true,
@@ -54,7 +54,7 @@
         "notes": "Fast Attack Green"
       },
       "dial_tm6": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Release",
         "value_default": 300.0,
         "piechart": true, "pointer": false,
@@ -63,7 +63,7 @@
         "notes": "Slow Release Orange"
       },
       "dial_tm7": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Decay",
         "value_default": 100.0,
         "piechart": true, "pointer": true,
@@ -72,7 +72,7 @@
         "notes": "Decay Purple"
       },
       "dial_tm8": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Hold",
         "value_default": 50.0,
         "piechart": false, "pointer": true,

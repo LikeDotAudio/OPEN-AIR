@@ -89,12 +89,12 @@ from .builder_input.dynamic_gui_create_directional_buttons import (
 )
 from .builder_audio.dynamic_gui_create_custom_fader import CustomFaderCreatorMixin
 from .builder_audio.dynamic_gui_create_needle_vu_meter import NeedleVUMeterCreatorMixin
-from .builder_audio.dynamic_gui_create_panner import PannerCreatorMixin
+# from .builder_audio.dynamic_gui_create_panner import PannerCreatorMixin
 from .builder_audio.dynamic_gui_create_trapezoid_toggler import (
     TrapezoidButtonTogglerCreatorMixin,
 )
 from workers.builder.builder_audio.dynamic_gui_create_knob import KnobCreatorMixin
-from workers.builder.builder_audio.dynamic_gui_create_dial import DialCreatorMixin
+# from workers.builder.builder_audio.dynamic_gui_create_dial import DialCreatorMixin
 from .builder_audio.dynamic_gui_create_custom_dual_horizontal_fader import (
     CustomDualHorizontalFaderCreatorMixin,
 )
@@ -149,10 +149,10 @@ class DynamicGuiBuilder(
     DirectionalButtonsCreatorMixin,
     CustomFaderCreatorMixin,
     NeedleVUMeterCreatorMixin,
-    PannerCreatorMixin,
+#     PannerCreatorMixin,
     TrapezoidButtonTogglerCreatorMixin,
     KnobCreatorMixin,
-    DialCreatorMixin,
+#     DialCreatorMixin,
     CustomDualHorizontalFaderCreatorMixin,
     CustomLTPCreatorMixin,
     WinkButtonCreatorMixin,

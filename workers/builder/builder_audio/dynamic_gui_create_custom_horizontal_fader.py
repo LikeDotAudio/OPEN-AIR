@@ -379,11 +379,13 @@ class CustomHorizontalFaderCreatorMixin:
             elif value_range <= 100:
                 tick_interval = 10
             elif value_range <= 1000:
-                tick_interval = 50
+                tick_interval = 100
             elif value_range <= 5000:
                 tick_interval = 250
-            else: 
-                tick_interval = 500
+            elif value_range <= 10000:
+                tick_interval = 1000
+            else:
+                tick_interval = 2500
 
             if tick_interval > 0:
                 current_tick = (

@@ -179,7 +179,15 @@ class WinkButtonCreatorMixin:
                 neon = canvas.create_oval(0, 0, width, height, fill=bg_color, outline="")
                 state["shutter_ids"].append(neon)
             else:
-                neon = _create_rounded_rect(canvas, 0, 0, width, height, radius=radius, fill=bg_color, outline="")
+                # FIX: Inset neon slightly and enforce min radius to prevent corner bleeding
+                inset = 1
+                safe_radius = max(radius, 2)
+                neon = _create_rounded_rect(
+                    canvas, 
+                    inset, inset, width-inset, height-inset, 
+                    radius=safe_radius, 
+                    fill=bg_color, outline=""
+                )
                 state["shutter_ids"].append(neon)
 
             # 1.5 Text Inside (Drawn on top of neon, covered by shutters)

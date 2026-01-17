@@ -9,7 +9,7 @@
     ],
     "fields": {
       "dial_prm1": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Param A",
         "value_default": 50.0,
         "piechart": true, "pointer": true,
@@ -18,7 +18,7 @@
         "notes": "Cyan Electric"
       },
       "dial_prm2": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Param B",
         "value_default": 25.0,
         "piechart": false, "pointer": true,
@@ -27,7 +27,7 @@
         "notes": "Red Tech"
       },
       "dial_prm3": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Param C",
         "value_default": 75.0,
         "piechart": true, "pointer": false,
@@ -36,7 +36,7 @@
         "notes": "Lime Tech"
       },
       "dial_prm4": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Mix X",
         "value_default": 10.0,
         "piechart": true, "pointer": true,
@@ -45,7 +45,7 @@
         "notes": "Purple Deep"
       },
       "dial_prm5": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Mix Y",
         "value_default": 90.0,
         "piechart": false, "pointer": true,
@@ -54,7 +54,7 @@
         "notes": "Orange Blaze"
       },
       "dial_prm6": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Mod 1",
         "value_default": 33.0,
         "piechart": true, "pointer": false,
@@ -63,7 +63,7 @@
         "notes": "Indigo"
       },
       "dial_prm7": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Mod 2",
         "value_default": 66.0,
         "piechart": true, "pointer": true,
@@ -72,7 +72,7 @@
         "notes": "Green Bright"
       },
       "dial_prm8": {
-        "type": "_Dial",
+        "type": "_Knob", "knob_style": "dial",
         "label_active": "Master",
         "value_default": 100.0,
         "piechart": true, "pointer": true,

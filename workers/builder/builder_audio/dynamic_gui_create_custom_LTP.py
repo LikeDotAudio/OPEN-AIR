@@ -422,13 +422,29 @@ def _draw_ltp_vertical(frame, canvas, width, height, current_secondary):
     if frame.ticks is not None:
         tick_values = frame.ticks
     else:
-        val_range = frame.max_val - frame.min_val
-        interval = 10 if val_range > 50 else 5
-        if interval > 0:
-            start_tick = math.ceil(frame.min_val / interval) * interval
-            while start_tick <= frame.max_val:
-                tick_values.append(start_tick)
-                start_tick += interval
+        value_range = frame.max_val - frame.min_val
+        if value_range <= 10:
+            tick_interval = 2
+        elif value_range <= 50:
+            tick_interval = 5
+        elif value_range <= 100:
+            tick_interval = 10
+        elif value_range <= 1000:
+            tick_interval = 100
+        elif value_range <= 5000:
+            tick_interval = 250
+        elif value_range <= 10000:
+            tick_interval = 1000
+        else:
+            tick_interval = 2500
+
+        if tick_interval > 0:
+            current_tick = (
+                math.ceil(frame.min_val / tick_interval) * tick_interval
+            )
+            while current_tick <= frame.max_val:
+                tick_values.append(current_tick)
+                current_tick += tick_interval
 
     for i, tick_value in enumerate(tick_values):
         norm_tick = (tick_value - frame.min_val) / (frame.max_val - frame.min_val) if (frame.max_val - frame.min_val) != 0 else 0

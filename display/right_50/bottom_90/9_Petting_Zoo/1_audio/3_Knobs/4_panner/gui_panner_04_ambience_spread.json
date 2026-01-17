@@ -8,7 +8,7 @@
     ],
     "fields": {
       "ambience_standard_width": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Width",
         "min": 0.0, "max": 100.0, "value_default": 100.0,
         "width": 70, "height": 70,
@@ -24,7 +24,7 @@
         "notes": "Standard stereo width."
       },
       "ambience_narrow_momentary": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Narrow",
         "min": 0.0, "max": 50.0, "value_default": 25.0,
         "width": 50, "height": 50,
@@ -40,7 +40,7 @@
         "notes": "Narrower width control."
       },
       "ambience_wide_latching": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Wide",
         "min": 50.0, "max": 150.0, "value_default": 100.0,
         "width": 80, "height": 80,
@@ -57,7 +57,7 @@
         "notes": "Wider stereo spread."
       },
       "ambience_full_momentary": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Full",
         "min": -100.0, "max": 100.0, "value_default": 0.0,
         "width": 70, "height": 70,
@@ -74,7 +74,7 @@
         "notes": "Full L/R pan range."
       },
       "balance_latching": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Balance",
         "min": -100.0, "max": 100.0, "value_default": 0.0,
         "width": 50, "height": 50,
@@ -90,7 +90,7 @@
         "notes": "Latching balance control."
       },
       "depth_momentary": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Depth",
         "min": 0.0, "max": 100.0, "value_default": 75.0,
         "width": 60, "height": 60,
@@ -107,7 +107,7 @@
         "notes": "Momentary depth control."
       },
       "azimuth_latching": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Azimuth",
         "min": 0.0, "max": 360.0, "value_default": 45.0,
         "width": 70, "height": 70,
@@ -124,7 +124,7 @@
         "notes": "Latching azimuth angle."
       },
       "elevation_momentary": {
-        "type": "_Panner",
+        "type": "_Knob", "knob_style": "panner",
         "label_active": "Elevation",
         "min": -90.0, "max": 90.0, "value_default": 10.0,
         "width": 50, "height": 50,

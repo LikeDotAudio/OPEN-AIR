@@ -26,7 +26,7 @@ from workers.mqtt.mqtt_topic_utils import get_topic
 from workers.builder.builder_audio.dynamic_gui_create_custom_horizontal_fader import (
     CustomHorizontalFaderCreatorMixin,
 )
-from workers.builder.builder_audio.dynamic_gui_create_dial import DialCreatorMixin
+from workers.builder.builder_audio.dynamic_gui_create_knob import KnobCreatorMixin
 
 
 app_constants = Config.get_instance()
@@ -37,7 +37,7 @@ DEFAULT_PAD_Y = 2
 
 
 class HorizontalDialValueCreatorMixin(
-    CustomHorizontalFaderCreatorMixin, DialCreatorMixin
+    CustomHorizontalFaderCreatorMixin, KnobCreatorMixin
 ):
     """
     A mixin class that provides the functionality for creating a
@@ -154,7 +154,9 @@ class HorizontalDialValueCreatorMixin(
             dial_config["state_mirror_engine"] = self.state_mirror_engine
             dial_config["subscriber_router"] = self.subscriber_router
             
-            dial_widget = self._create_dial(fader_dial_frame, dial_config, base_mqtt_topic_from_path=base_mqtt_topic_from_path)
+            # Use KnobCreatorMixin's _create_knob with dial style
+            dial_config["knob_style"] = "dial"
+            dial_widget = self._create_knob(fader_dial_frame, dial_config, base_mqtt_topic_from_path=base_mqtt_topic_from_path)
             dial_widget.grid(row=0, column=1, sticky="ew", padx=(0, DEFAULT_PAD_X))
 
             # Initialize previous dial value for wrap-around detection

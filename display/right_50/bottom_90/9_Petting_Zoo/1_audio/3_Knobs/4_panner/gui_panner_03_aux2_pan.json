@@ -3,7 +3,7 @@
     "type": "OcaBlock",
     "label_active": "Aux 2 Pan",
     "fields": {     "examplefields": {
-      "type": "_Panner",
+      "type": "_Knob", "knob_style": "panner",
       "label_active": "Aux 2 Pan",
       "min": -64.0,
       "max": 64.0,

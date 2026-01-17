@@ -89,6 +89,8 @@ class NeedleVUMeterCreatorMixin:
             max_val = float(config.get("max", 3.0))
             red_zone_start = float(config.get("upper_range", 0.0))
             value_default = float(config.get("value_default", min_val))
+            # Resting point for correlation meters is usually 0, for VU meters it's min_val
+            resting_point = float(config.get("resting_point", min_val))
 
             lower_colour = config.get("Lower_range_colour", "green")
             upper_colour = config.get("upper_range_Colour", danger_color)
@@ -99,7 +101,16 @@ class NeedleVUMeterCreatorMixin:
             ticks_visible = config.get("Ticks_visible", True)
             curve_thickness = int(config.get("curve_thickness", 4))
             meter_viewable_angle = float(config.get("Meter_viewable_angle", 90.0))
+            meter_center_angle = float(config.get("Meter_center_angle", 90.0))
+            counter_clockwise = config.get("Counter_Clockwise", False)
+            custom_ticks = config.get("custom_ticks", None)
             
+            pointer_style = config.get("Pointer_Style", "line").lower()
+            pivot_size = int(config.get("Pivot_size", 10))
+            
+            meter_mode = config.get("meter_mode", "mono").lower()
+            pointer_colour_2 = config.get("Pointer_colour_2", "#FF0000") # Default Red for 2nd needle
+
             # Animation Parameters (Default: 100ms)
             # Glide: Time (ms) to traverse full scale upwards
             glide_time = float(config.get("glide_time", 100))
@@ -111,6 +122,7 @@ class NeedleVUMeterCreatorMixin:
             fall_time = float(config.get("fall_time", 100))
 
             vu_value_var = tk.DoubleVar(value=value_default)
+            vu_value_var_2 = tk.DoubleVar(value=value_default) if meter_mode == "stereo" else None
 
             # Calculate required height based on viewable angle
             half_angle = meter_viewable_angle / 2.0
@@ -118,13 +130,17 @@ class NeedleVUMeterCreatorMixin:
             center_y = size / 2 + 10
             
             # Find lowest point of arc to ensure canvas fits it
-            # Tkinter Y grows downwards. We need space for (center_y + radius * sin(angle))
-            # Tkinter angles: 90 is UP. Y = center_y - radius * sin(radians)
-            # We want to maximize (center_y - radius * sin(radians)) -> minimize sin(radians)
-            angles_to_check = [90 + half_angle, 90 - half_angle]
-            if meter_viewable_angle > 180:
-                angles_to_check.append(270) # Bottom point
-            
+            angles_to_check = [meter_center_angle + half_angle, meter_center_angle - half_angle]
+            # Check cardinal points if they are within range
+            for cardinal in [0, 90, 180, 270, 360]:
+                # Normalize angles
+                c_norm = cardinal % 360
+                start_norm = (meter_center_angle + half_angle) % 360
+                end_norm = (meter_center_angle - half_angle) % 360
+                # Simple check (might fail for wrap around 0, but good enough for typical meters)
+                if start_norm > end_norm:
+                    if end_norm <= c_norm <= start_norm: angles_to_check.append(cardinal)
+                
             min_sin = min([math.sin(math.radians(a)) for a in angles_to_check])
             arc_depth_below_pivot = 0
             if min_sin < 0:
@@ -144,11 +160,15 @@ class NeedleVUMeterCreatorMixin:
             # Animation State
             self.anim_current_value = value_default
             self.anim_target = value_default
+            self.anim_current_value_2 = value_default
+            self.anim_target_2 = value_default
+            
             self.anim_mode = "idle" # idle, tracking, holding, decaying
             self.anim_hold_start = 0
             self.anim_running = False
 
             def draw_current_frame():
+                val2 = self.anim_current_value_2 if meter_mode == "stereo" else None
                 self._draw_needle_vu_meter(
                     canvas,
                     size,
@@ -165,11 +185,17 @@ class NeedleVUMeterCreatorMixin:
                     scale_numbers,
                     curve_thickness,
                     ticks_visible,
-                    meter_viewable_angle
+                    meter_viewable_angle,
+                    custom_ticks,
+                    value2=val2,
+                    pointer_colour2=pointer_colour_2,
+                    meter_center_angle=meter_center_angle,
+                    counter_clockwise=counter_clockwise,
+                    pointer_style=pointer_style,
+                    pivot_size=pivot_size
                 )
 
             def animate():
-                current = self.anim_current_value
                 dt = 20.0 # milliseconds per frame (approx 50 FPS)
                 full_range = max_val - min_val
                 if full_range <= 0: full_range = 1.0
@@ -184,21 +210,63 @@ class NeedleVUMeterCreatorMixin:
                         canvas.after(int(dt), animate)
                         return
 
-                # Determine target based on mode
-                if self.anim_mode == "tracking":
-                    target = self.anim_target
-                elif self.anim_mode == "decaying":
-                    target = min_val
-                else: # idle
-                    target = current # Don't move
-
-                diff = target - current
+                targets = [self.anim_target]
+                currents = [self.anim_current_value]
                 
-                # Check for completion of current move
-                if abs(diff) < 0.05: # Threshold
-                    self.anim_current_value = target
-                    draw_current_frame()
+                if meter_mode == "stereo":
+                    targets.append(self.anim_target_2)
+                    currents.append(self.anim_current_value_2)
+
+                new_currents = []
+                all_done = True
+
+                for i, current in enumerate(currents):
+                    # Determine target based on mode
+                    if self.anim_mode == "tracking":
+                        target = targets[i]
+                    elif self.anim_mode == "decaying":
+                        target = resting_point
+                    else: # idle
+                        target = current # Don't move
+
+                    diff = target - current
                     
+                    # Check for completion of current move
+                    if abs(diff) < 0.05: # Threshold
+                        new_currents.append(target)
+                    else:
+                        all_done = False
+                        # Calculate step size
+                        step = 0.0
+                        time_param = 0.0
+                        
+                        if diff > 0: # Rising
+                            # Only rise if tracking. 
+                            time_param = glide_time
+                        else: # Falling
+                            if self.anim_mode == "tracking":
+                                time_param = dwell_time
+                            else:
+                                time_param = fall_time
+                        
+                        if time_param <= 0:
+                            step = diff # Instant
+                        else:
+                            max_step = (full_range / time_param) * dt
+                            # Clamp step to diff to avoid overshoot
+                            if diff > 0:
+                                step = min(diff, max_step)
+                            else:
+                                step = max(diff, -max_step)
+                        new_currents.append(current + step)
+
+                self.anim_current_value = new_currents[0]
+                if meter_mode == "stereo":
+                    self.anim_current_value_2 = new_currents[1]
+
+                draw_current_frame()
+                
+                if all_done:
                     if self.anim_mode == "tracking":
                         # Reached tracking target
                         if hold_time > 0:
@@ -206,61 +274,34 @@ class NeedleVUMeterCreatorMixin:
                             self.anim_hold_start = time.time() * 1000
                         else:
                             self.anim_mode = "decaying"
-                        
-                        # Continue animation next frame
                         canvas.after(int(dt), animate)
-                        return
                     elif self.anim_mode == "decaying":
-                        # Reached min_val (decay complete)
+                        # Reached resting_point (decay complete)
                         self.anim_mode = "idle"
                         self.anim_running = False
-                        return
-                    else:
-                        # Should not happen often if logic is correct
-                        self.anim_running = False
-                        return
-
-                # Calculate step size
-                step = 0.0
-                time_param = 0.0
-                
-                if diff > 0: # Rising
-                    # Only rise if tracking. 
-                    time_param = glide_time
-                else: # Falling
-                    if self.anim_mode == "tracking":
-                        time_param = dwell_time
-                    else:
-                        time_param = fall_time
-                
-                if time_param <= 0:
-                    step = diff # Instant
                 else:
-                    max_step = (full_range / time_param) * dt
-                    # Clamp step to diff to avoid overshoot
-                    if diff > 0:
-                        step = min(diff, max_step)
-                    else:
-                        step = max(diff, -max_step)
-
-                self.anim_current_value += step
-                draw_current_frame()
-                
-                canvas.after(int(dt), animate)
+                    canvas.after(int(dt), animate)
 
             def on_value_change(*args):
                 # New value received from logic/user
                 new_target = vu_value_var.get()
-                
-                # Update target and switch to tracking mode immediately
                 self.anim_target = new_target
                 self.anim_mode = "tracking"
-                
                 if not self.anim_running:
                     self.anim_running = True
                     animate()
 
             vu_value_var.trace_add("write", on_value_change)
+            
+            if meter_mode == "stereo":
+                def on_value_change_2(*args):
+                    new_target = vu_value_var_2.get()
+                    self.anim_target_2 = new_target
+                    self.anim_mode = "tracking"
+                    if not self.anim_running:
+                        self.anim_running = True
+                        animate()
+                vu_value_var_2.trace_add("write", on_value_change_2)
 
             # Initial Draw
             draw_current_frame()
@@ -269,6 +310,9 @@ class NeedleVUMeterCreatorMixin:
                 """Jump to a random allowed value."""
                 random_val = random.uniform(min_val, max_val)
                 vu_value_var.set(random_val)
+                if meter_mode == "stereo":
+                    random_val_2 = random.uniform(min_val, max_val)
+                    vu_value_var_2.set(random_val_2)
                 
                 if app_constants.global_settings["debug_enabled"]:
                     debug_logger(
@@ -278,6 +322,8 @@ class NeedleVUMeterCreatorMixin:
 
                 if state_mirror_engine:
                     state_mirror_engine.broadcast_gui_change_to_mqtt(path)
+                    if meter_mode == "stereo":
+                         state_mirror_engine.broadcast_gui_change_to_mqtt(path + "_2") # Implicit path for 2nd channel?
 
             canvas.bind("<Button-2>", on_middle_click)
 
@@ -286,12 +332,23 @@ class NeedleVUMeterCreatorMixin:
                 state_mirror_engine.register_widget(
                     widget_id, vu_value_var, base_mqtt_topic_from_path, config
                 )
-
-                # Subscribe to the topic for incoming messages
                 topic = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, widget_id)
                 self.subscriber_router.subscribe_to_topic(
                     topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui
                 )
+                
+                if meter_mode == "stereo":
+                    # Register second variable with suffix
+                    widget_id_2 = path + "_2" # Convention for stereo pair?
+                    # Or maybe the config should specify paths?
+                    # For now, let's append _R or _2
+                    state_mirror_engine.register_widget(
+                        widget_id_2, vu_value_var_2, base_mqtt_topic_from_path, config
+                    )
+                    topic_2 = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic_from_path, widget_id_2)
+                    self.subscriber_router.subscribe_to_topic(
+                        topic_2, self.state_mirror_engine.sync_incoming_mqtt_to_gui
+                    )
 
                 if app_constants.global_settings["debug_enabled"]:
                     debug_logger(
@@ -300,6 +357,8 @@ class NeedleVUMeterCreatorMixin:
                     )
                 # Initialize state from cache or broadcast
                 state_mirror_engine.initialize_widget_state(path)
+                if meter_mode == "stereo":
+                     state_mirror_engine.initialize_widget_state(path + "_2")
 
             if app_constants.global_settings["debug_enabled"]:
                 debug_logger(
@@ -347,7 +406,14 @@ class NeedleVUMeterCreatorMixin:
         scale_numbers=True,
         curve_thickness=4,
         ticks_visible=True,
-        meter_viewable_angle=90.0
+        meter_viewable_angle=90.0,
+        custom_ticks=None,
+        value2=None,
+        pointer_colour2=None,
+        meter_center_angle=90.0,
+        counter_clockwise=False,
+        pointer_style="line",
+        pivot_size=10
     ):
         canvas.delete("vu_element")
         # Ensure coordinates are aligned with the pivot center used in creation
@@ -358,10 +424,10 @@ class NeedleVUMeterCreatorMixin:
         main_arc_radius = (width - 20) / 2
         arc_thickness = curve_thickness
 
-        # Calculate start and end angles centered around 90 degrees (up)
+        # Calculate start and end angles centered around meter_center_angle
         half_angle = meter_viewable_angle / 2.0
-        start_angle_deg = 90 + half_angle
-        end_angle_deg = 90 - half_angle
+        start_angle_deg = meter_center_angle + half_angle
+        end_angle_deg = meter_center_angle - half_angle
         
         extent_deg = start_angle_deg - end_angle_deg
 
@@ -372,11 +438,29 @@ class NeedleVUMeterCreatorMixin:
         # Ticks should start from the inner edge of the arc
         tick_start_radius = main_arc_radius - (arc_thickness / 2)
 
-        for i in range(6):
-            percentage = i / 5.0
-            tick_val = min_val + (percentage * (max_val - min_val))
+        if custom_ticks:
+            tick_values = custom_ticks
+        else:
+            tick_values = [min_val + (i / 5.0 * (max_val - min_val)) for i in range(6)]
 
-            current_angle_deg = start_angle_deg - (percentage * extent_deg)
+        for tick_val in tick_values:
+            # Calculate normalized position (0.0 to 1.0)
+            range_val = max_val - min_val
+            percentage = (tick_val - min_val) / range_val if range_val != 0 else 0
+            
+            # Map to angle
+            if counter_clockwise:
+                # Min(0) -> End Angle (Right). Max(1) -> Start Angle (Left). 
+                # CCW rotation is increasing angle (Right to Left). 
+                # So if Min corresponds to 0deg (Right) and Max to 90deg (Up).
+                # Start=90, End=0. Extent=90.
+                # Val -> Angle: End + (Norm * Extent).
+                # If Norm=0, Angle=End. If Norm=1, Angle=Start.
+                current_angle_deg = end_angle_deg + (percentage * extent_deg)
+            else:
+                # CW rotation (Standard): Start -> End.
+                current_angle_deg = start_angle_deg - (percentage * extent_deg)
+                
             current_angle_rad = math.radians(current_angle_deg)
 
             # Tick line: starts on inner arc edge, goes inwards
@@ -408,61 +492,156 @@ class NeedleVUMeterCreatorMixin:
         green_start_norm = (
             (red_zone_start - min_val) / (max_val - min_val) if max_val > min_val else 0
         )
-        green_start_angle_deg = start_angle_deg - (green_start_norm * extent_deg)
+        
+        if counter_clockwise:
+            # Green Zone: From Min to red_zone_start
+            # Min is at end_angle_deg. red_zone_start is at transition angle.
+            transition_angle_deg = end_angle_deg + (green_start_norm * extent_deg)
+            
+            # Lower Color Arc (Green): From End to Transition (CCW)
+            canvas.create_arc(
+                center_x - main_arc_radius,
+                center_y - main_arc_radius,
+                center_x + main_arc_radius,
+                center_y + main_arc_radius,
+                start=end_angle_deg,
+                extent=(transition_angle_deg - end_angle_deg),
+                style=tk.ARC,
+                outline=lower_colour,
+                width=arc_thickness,
+                tags="vu_element"
+            )
+            
+            # Upper Color Arc (Red): From Transition to Start (CCW)
+            canvas.create_arc(
+                center_x - main_arc_radius,
+                center_y - main_arc_radius,
+                center_x + main_arc_radius,
+                center_y + main_arc_radius,
+                start=transition_angle_deg,
+                extent=(start_angle_deg - transition_angle_deg),
+                style=tk.ARC,
+                outline=upper_colour,
+                width=arc_thickness,
+                tags="vu_element"
+            )
+        else:
+            # Standard CW
+            # Green Zone: From Min to red_zone_start
+            # Min is at start_angle_deg. red_zone_start is at transition.
+            transition_angle_deg = start_angle_deg - (green_start_norm * extent_deg)
+            
+            # Lower Color Arc (Green): From Start to Transition (CW)
+            # Tkinter arcs draw CCW. So we must draw from Transition to Start? No, Start=Start, Extent=negative.
+            # But tk.create_arc extent is always relative to start.
+            # To draw CW from Start, we assume Start is the Leftmost (Largest angle).
+            # Green segment is Min->Transition.
+            # Min is Start. Transition is < Start.
+            # So segment is Start -> Transition.
+            # In Tkinter, Start=Transition, Extent = (Start - Transition).
+            canvas.create_arc(
+                center_x - main_arc_radius,
+                center_y - main_arc_radius,
+                center_x + main_arc_radius,
+                center_y + main_arc_radius,
+                start=transition_angle_deg,
+                extent=(start_angle_deg - transition_angle_deg),
+                style=tk.ARC,
+                outline=lower_colour,
+                width=arc_thickness,
+                tags="vu_element"
+            )
 
-        canvas.create_arc(
-            center_x - main_arc_radius,
-            center_y - main_arc_radius,
-            center_x + main_arc_radius,
-            center_y + main_arc_radius,
-            start=green_start_angle_deg,
-            extent=(start_angle_deg - green_start_angle_deg),
-            style=tk.ARC,
-            outline=lower_colour,
-            width=arc_thickness,
-            tags="vu_element"
-        )
+            # Upper Color Arc (Red): From Transition to End (Max)
+            # Segment Transition -> End.
+            # Transition > End.
+            # Start=End, Extent=(Transition - End)
+            canvas.create_arc(
+                center_x - main_arc_radius,
+                center_y - main_arc_radius,
+                center_x + main_arc_radius,
+                center_y + main_arc_radius,
+                start=end_angle_deg,
+                extent=(transition_angle_deg - end_angle_deg),
+                style=tk.ARC,
+                outline=upper_colour,
+                width=arc_thickness,
+                tags="vu_element"
+            )
 
-        canvas.create_arc(
-            center_x - main_arc_radius,
-            center_y - main_arc_radius,
-            center_x + main_arc_radius,
-            center_y + main_arc_radius,
-            start=end_angle_deg,
-            extent=(green_start_angle_deg - end_angle_deg),
-            style=tk.ARC,
-            outline=upper_colour,
-            width=arc_thickness,
-            tags="vu_element"
-        )
+        # --- Helper for Drawing Needle ---
+        def draw_single_needle(val, color):
+            if val < min_val: val = min_val
+            if val > max_val: val = max_val
 
-        # --- Draw Needle ---
-        if value < min_val:
-            value = min_val
-        if value > max_val:
-            value = max_val
+            norm_val = (val - min_val) / (max_val - min_val) if max_val > min_val else 0
 
-        norm_val = (value - min_val) / (max_val - min_val) if max_val > min_val else 0
+            if counter_clockwise:
+                needle_angle_deg = end_angle_deg + (norm_val * extent_deg)
+            else:
+                needle_angle_deg = start_angle_deg - (norm_val * extent_deg)
+                
+            needle_angle_rad = math.radians(needle_angle_deg)
 
-        needle_angle_deg = start_angle_deg - (norm_val * extent_deg)
-        needle_angle_rad = math.radians(needle_angle_deg)
+            # Make needle extend into the numbers
+            needle_total_len = main_arc_radius + text_offset_from_arc - 2
 
-        # Make needle extend into the numbers
-        needle_total_len = main_arc_radius + text_offset_from_arc - 2
+            # Tip calculation
+            tip_x = center_x + needle_total_len * math.cos(needle_angle_rad)
+            tip_y = center_y - needle_total_len * math.sin(needle_angle_rad)
 
-        x = center_x + needle_total_len * math.cos(needle_angle_rad)
-        y = center_y - needle_total_len * math.sin(needle_angle_rad)
+            if pointer_style == "taper" or pointer_style == "teardrop":
+                # Base corners calculation
+                # Perpendicular to the needle direction
+                perp_angle_rad = needle_angle_rad + (math.pi / 2)
+                base_radius = pivot_size / 2.0
+                
+                base_x1 = center_x + base_radius * math.cos(perp_angle_rad)
+                base_y1 = center_y - base_radius * math.sin(perp_angle_rad)
+                base_x2 = center_x - base_radius * math.cos(perp_angle_rad)
+                base_y2 = center_y + base_radius * math.sin(perp_angle_rad)
+                
+                # Taper is a triangle
+                # Teardrop is smoothed. 
+                # For teardrop, we can add control points or just use smooth=True
+                # A teardrop needs to be rounded at the bottom (pivot).
+                # We can simulate this by adding points BEHIND the pivot?
+                # Or just relying on the pivot circle to cover the base.
+                # Actually, "upside down heart" implies the lobes are at the pivot.
+                # If we draw a triangle and smooth it, it might just look like a blob.
+                # Let's add a "back" point for teardrop to round it out.
+                
+                points = [base_x1, base_y1, tip_x, tip_y, base_x2, base_y2]
+                
+                if pointer_style == "teardrop":
+                    # Add a point behind center to round the base
+                    back_len = base_radius * 0.8
+                    back_x = center_x - back_len * math.cos(needle_angle_rad)
+                    back_y = center_y + back_len * math.sin(needle_angle_rad)
+                    # Insert back point between base_x2 and base_x1 (closing the loop)
+                    points.extend([back_x, back_y])
+                    
+                canvas.create_polygon(points, fill=color, outline=color, smooth=(pointer_style=="teardrop"), tags="vu_element")
+                
+            else:
+                # Line style
+                canvas.create_line(
+                    center_x, center_y, tip_x, tip_y, width=needle_thickness, fill=color, capstyle=tk.ROUND, tags="vu_element"
+                )
 
-        canvas.create_line(
-            center_x, center_y, x, y, width=needle_thickness, fill=pointer_colour, capstyle=tk.ROUND, tags="vu_element"
-        )
+        # --- Draw Needles ---
+        draw_single_needle(value, pointer_colour)
+        
+        if value2 is not None and pointer_colour2:
+            draw_single_needle(value2, pointer_colour2)
 
         # --- Draw Pivot ---
+        pivot_radius = pivot_size / 2.0
         canvas.create_oval(
-            center_x - 5,
-            center_y - 5,
-            center_x + 5,
-            center_y + 5,
+            center_x - pivot_radius,
+            center_y - pivot_radius,
+            center_x + pivot_radius,
+            center_y + pivot_radius,
             fill=fg,
             outline=secondary,
             tags="vu_element"

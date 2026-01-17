@@ -1,52 +1,43 @@
 {
-  "Large_Console_Bank": {
+  "Needle_Styles_Demo": {
     "type": "OcaBlock",
-    "description": "Large Console Meters (Size 250)",
-    "layout_columns": 4,
+    "description": "Needle Style Variations",
+    "layout_columns": 3,
     "column_sizing": [
-      {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1}
+      {"weight": 1}, {"weight": 1}, {"weight": 1}
     ],
     "fields": {
-      
-      "Large_S2": {
+      "meter_line": {
         "type": "_NeedleVUMeter",
-        "label_active": "Master Left (Hold 200ms)",
-        "size": 400,
-        "min": -30.0, "max": 6.0, "upper_range": 0.0,
-        "glide_time": 300,
-        "dwell_time": 600,
-        "hold_time": 200,
-        "fall_time": 1500,
-        "Lower_range_colour": "#E0E0E0",
-        "upper_range_Colour": "#FF5722",
-        "Pointer_colour": "#FF0000",
-        "value_default": -30.0,
-        "Ticks_visible": false,
-        "Needle_thickness": 6,
-        "Scale_numbers": false,
-        "curve_thickness": 12,
-        "notes": "Classic console look."
+        "label_active": "Standard Line",
+        "min": -20.0, "max": 3.0, "value_default": -5.0, "upper_range": 0.0,
+        "size": 250, "glide_time": 200, "dwell_time": 200, "hold_time": 0, "fall_time": 500,
+        "Pointer_Style": "line",
+        "Pivot_size": 10,
+        "Needle_thickness": 3,
+        "Pointer_colour": "#FFFFFF",
+        "notes": "Classic line pointer."
       },
-      "Large_S1": {
+      "meter_taper": {
         "type": "_NeedleVUMeter",
-        "label_active": "Master Right (Hold 200ms)",
-        "size": 500,
-        "min": -30.0, "max": 6.0, "upper_range": 0.0,
-        "glide_time": 300,
-        "dwell_time": 600,
-        "hold_time": 200,
-        "fall_time": 1500,
-        "Lower_range_colour": "#E0E0E0",
-        "upper_range_Colour": "#FF5722",
-        "Pointer_colour": "#FF0000",
-        "value_default": -30.0,
-        "Ticks_visible": false,
-        "Needle_thickness": 8,
-        "Scale_numbers": true,
-        "curve_thickness": 20,
-        "notes": "Matching right channel."
+        "label_active": "Tapered Pointer",
+        "min": -20.0, "max": 3.0, "value_default": 0.0, "upper_range": 0.0,
+        "size": 250, "glide_time": 200, "dwell_time": 200, "hold_time": 0, "fall_time": 500,
+        "Pointer_Style": "taper",
+        "Pivot_size": 16,
+        "Pointer_colour": "#FFD700",
+        "notes": "Triangle tapering from pivot."
+      },
+      "meter_teardrop": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Teardrop Pointer",
+        "min": -20.0, "max": 3.0, "value_default": 1.0, "upper_range": 0.0,
+        "size": 250, "glide_time": 200, "dwell_time": 200, "hold_time": 0, "fall_time": 500,
+        "Pointer_Style": "teardrop",
+        "Pivot_size": 20,
+        "Pointer_colour": "#00FFFF",
+        "notes": "Smoothed teardrop shape."
       }
     }
   }
 }
-

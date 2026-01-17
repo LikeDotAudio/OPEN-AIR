@@ -51,6 +51,7 @@ from workers.logger.logger import debug_logger
 from workers.logger.log_utils import _get_log_args
 from workers.styling.style import THEMES, DEFAULT_THEME
 from workers.handlers.widget_event_binder import bind_variable_trace
+from workers.mqtt.mqtt_topic_utils import get_topic
 
 
 class CustomLTPFrame(tk.Frame):
@@ -149,9 +150,13 @@ class CustomLTPFrame(tk.Frame):
         callback = lambda: self.state_mirror_engine.broadcast_gui_change_to_mqtt(target_path)
         bind_variable_trace(variable, callback)
         
-        topic = self.state_mirror_engine.get_widget_topic(target_path)
+        # Explicit topic construction
+        topic = get_topic(self.state_mirror_engine.base_topic, self.base_mqtt_topic, target_path)
+        
         if topic:
             self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
+            if app_constants.global_settings["debug_enabled"]:
+                debug_logger(f"✅ LTP Subscribed: {topic} -> {target_path}", **_get_log_args())
             
         self.state_mirror_engine.initialize_widget_state(target_path)
 

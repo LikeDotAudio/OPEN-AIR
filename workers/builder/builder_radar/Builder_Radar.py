@@ -249,18 +249,34 @@ class RadarCreatorMixin:
             radar_state["data_buffer"] = [min_val] * points_count
             debug_logger(message=f"Radar '{label}' cleared.", **_get_log_args())
 
-        def on_middle_click(event):
-            # Manual trigger test
-            random_val = random.uniform(min_val, max_val)
-            # Update variable which triggers trace -> process_update (if data_driven) 
-            # and updates current_input_value (for sweep). 
-            # This also triggers StateMirror broadcast.
-            radar_value_var.set(random_val)
+        def on_mouse_interaction(event):
+            # Calculate coordinates relative to center
+            dx = event.x - cx
+            dy = cy - event.y # Screen Y is inverted
+            
+            # Calculate Radius (Value)
+            r_px = math.sqrt(dx*dx + dy*dy)
+            # Normalize radius to value range
+            # Clamp radius to max radius for calculation, but allow 0
+            r_px = max(0, min(radius, r_px))
+            norm_r = r_px / radius
+            new_val = min_val + (norm_r * (max_val - min_val))
+            
+            # Update the current input value (Sensor Simulation)
+            # This feeds the sweep loop or data_driven trigger
+            radar_state["current_input_value"] = new_val 
+            
+            # Update the variable to sync with MQTT and other UI parts
+            # We use set() which triggers the trace 'on_value_change'
+            # on_value_change also updates current_input_value, so it's redundant but safe.
+            # Crucially, this broadcasts the value.
+            radar_value_var.set(new_val)
             if path:
                 state_mirror_engine.broadcast_gui_change_to_mqtt(path)
 
         canvas.bind("<Control-Button-1>", clear_plot)
-        canvas.bind("<Button-2>", on_middle_click)
+        canvas.bind("<Button-2>", on_mouse_interaction)
+        canvas.bind("<B2-Motion>", on_mouse_interaction)
 
         # 8. MQTT / Value Interface
         radar_value_var = tk.DoubleVar(value=min_val)

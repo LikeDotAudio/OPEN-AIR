@@ -10,7 +10,7 @@
     "fields": {
       "CH1": {
         "type": "_CustomLTP",
-        "label_active": "Kick (Standard)",
+        "label_active": "Kick (Filled)",
         "value_min": -100.0, "value_max": 20.0, "value_default": -10.0,
         "rotation_default": 0.0,
         "freestyle": true,
@@ -18,7 +18,8 @@
         "cap_color": "#880000",
         "ticks": [-100, -60, -30, -15, 0, 10, 20],
         "layout": {"width": 120, "height": 400},
-        "knob_style": "standard", "shape": "circle", "pointer_style": "line"
+        "knob_style": "standard", "shape": "circle", "pointer_style": "line",
+        "knob_fill_color": "#550000", "knob_outline_color": "#FF0000", "knob_outline_thickness": 2
       },
       "CH2": {
         "type": "_CustomLTP",
@@ -31,7 +32,7 @@
         "ticks": [-100, -80, -60, -40, -20, 0, 20],
         "layout": {"width": 120, "height": 400},
         "knob_style": "standard", "shape": "octagon", "pointer_style": "triangle",
-        "cap_radius": 22
+        "cap_radius": 22, "knob_fill_color": "#004400", "knob_outline_color": "#00FF00", "knob_outline_thickness": 1
       },
       "CH3": {
         "type": "_CustomLTP",
@@ -44,7 +45,7 @@
         "ticks": [-60, -40, -20, 0, 10],
         "layout": {"width": 120, "height": 400},
         "knob_style": "standard", "shape": "gear", "pointer_style": "notch",
-        "knob_teeth": 12, "cap_radius": 25
+        "knob_teeth": 12, "cap_radius": 25, "knob_fill_color": "#000055", "knob_outline_color": "#8888FF", "knob_outline_thickness": 2
       },
       "CH4": {
         "type": "_CustomLTP",
@@ -56,7 +57,8 @@
         "cap_color": "#888800",
         "ticks": [-100, -50, 0, 20],
         "layout": {"width": 120, "height": 400},
-        "knob_style": "panner", "shape": "circle", "pointer_style": "line"
+        "knob_style": "panner", "shape": "circle", "pointer_style": "line",
+        "knob_fill_color": "#444400", "knob_outline_color": "#FFFF00", "knob_outline_thickness": 3
       },
       "CH5": {
         "type": "_CustomLTP",
@@ -68,7 +70,8 @@
         "cap_color": "#880088",
         "ticks": [-100, -15, 0, 15],
         "layout": {"width": 120, "height": 400},
-        "knob_style": "dial", "shape": "circle"
+        "knob_style": "dial", "shape": "circle",
+        "knob_fill_color": "#440044"
       },
       "CH6": {
         "type": "_CustomLTP",
@@ -81,7 +84,7 @@
         "ticks": [-100, -40, -10, 10, 20],
         "layout": {"width": 120, "height": 400},
         "knob_style": "standard", "shape": "circle", "gradient_level": 3,
-        "knob_fill_color": "#00FFFF"
+        "knob_fill_color": "#00AAAA", "knob_outline_color": "#00FFFF", "knob_outline_thickness": 1
       },
       "CH7": {
         "type": "_CustomLTP",
@@ -94,7 +97,7 @@
         "ticks": [-100, -40, -10, 10, 20],
         "layout": {"width": 120, "height": 400},
         "knob_style": "standard", "shape": "circle",
-        "knob_outline_thickness": 4, "knob_outline_color": "white"
+        "knob_outline_thickness": 5, "knob_outline_color": "#FFA500", "knob_fill_color": "#663300"
       },
       "CH8": {
         "type": "_CustomLTP",
@@ -107,7 +110,8 @@
         "ticks": [-100, -20, -10, -5, 0, 5, 10, 15, 20],
         "layout": {"width": 120, "height": 400},
         "knob_style": "standard", "shape": "gear", "knob_teeth": 24,
-        "pointer_style": "triangle", "cap_radius": 20
+        "pointer_style": "triangle", "cap_radius": 20,
+        "knob_fill_color": "#444444", "knob_outline_color": "#FFFFFF", "knob_outline_thickness": 1
       }
     }
   }

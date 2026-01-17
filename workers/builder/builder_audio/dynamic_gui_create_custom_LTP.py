@@ -42,7 +42,7 @@ DEFAULT_TICK_FONT_SIZE = 10
 DEFAULT_TICK_COLOR = "light grey"
 DEFAULT_VALUE_FOLLOW = True
 DEFAULT_VALUE_HIGHLIGHT_COLOR = "#f4902c"
-DEFAULT_CAP_RADIUS = 18  # Radius of the knob cap (Increased by 20% from 15)
+DEFAULT_CAP_RADIUS = 18
 ROTATION_MIN = -100.0
 ROTATION_MAX = 100.0
 # ---------------------------------------------
@@ -253,6 +253,19 @@ class CustomLTPCreatorMixin:
             "last_ctrl": False
         }
 
+        # --- Knob Params ---
+        knob_style = config.get("knob_style", "standard").lower()
+        shape = config.get("shape", "circle").lower()
+        pointer_style = config.get("pointer_style", "line").lower()
+        tick_style = config.get("knob_tick_style", "simple").lower()
+        gradient_level = int(config.get("gradient_level", 0))
+        outline_thickness = int(config.get("knob_outline_thickness", 0))
+        outline_color = config.get("knob_outline_color", secondary_color)
+        fill_color = config.get("knob_fill_color", "")
+        teeth = int(config.get("knob_teeth", 8))
+        no_center = config.get("no_center", False)
+        # -------------------
+
         def get_handle_y(canvas_h):
             value_lin = frame.linear_var.get()
             norm_value = (
@@ -365,12 +378,23 @@ class CustomLTPCreatorMixin:
             if current_w <= 1: current_w = width
             if current_h <= 1: current_h = height
             
-            _draw_ltp_vertical(
+            self._draw_ltp_vertical(
                 frame,
                 canvas,
                 current_w,
                 current_h,
-                visual_props["secondary"]
+                visual_props["secondary"],
+                # Pass knob params
+                knob_style=knob_style,
+                shape=shape,
+                pointer_style=pointer_style,
+                tick_style=tick_style,
+                gradient_level=gradient_level,
+                outline_thickness=outline_thickness,
+                outline_color=outline_color,
+                fill_color=fill_color,
+                teeth=teeth,
+                no_center=no_center
             )
 
         frame.bind("<<RedrawLTP>>", redraw)
@@ -406,101 +430,245 @@ class CustomLTPCreatorMixin:
 
         return frame
 
-def _draw_ltp_vertical(frame, canvas, width, height, current_secondary):
-    canvas.delete("all")
-    cx = width / 2
-    
-    # 1. Track Line
-    canvas.create_line(
-        cx, 20, cx, height - 20,
-        fill=current_secondary, width=4, capstyle=tk.ROUND
-    )
-    
-    # 2. Draw Tick Marks
-    tick_length_half = width * frame.tick_size
-    tick_values = []
-    if frame.ticks is not None:
-        tick_values = frame.ticks
-    else:
-        value_range = frame.max_val - frame.min_val
-        if value_range <= 10:
-            tick_interval = 2
-        elif value_range <= 50:
-            tick_interval = 5
-        elif value_range <= 100:
-            tick_interval = 10
-        elif value_range <= 1000:
-            tick_interval = 100
-        elif value_range <= 5000:
-            tick_interval = 250
-        elif value_range <= 10000:
-            tick_interval = 1000
-        else:
-            tick_interval = 2500
-
-        if tick_interval > 0:
-            current_tick = (
-                math.ceil(frame.min_val / tick_interval) * tick_interval
-            )
-            while current_tick <= frame.max_val:
-                tick_values.append(current_tick)
-                current_tick += tick_interval
-
-    for i, tick_value in enumerate(tick_values):
-        norm_tick = (tick_value - frame.min_val) / (frame.max_val - frame.min_val) if (frame.max_val - frame.min_val) != 0 else 0
-        norm_tick = max(0.0, min(1.0, norm_tick))
-        display_norm_tick = norm_tick ** (1.0 / frame.log_exponent)
-        tick_y = (height - 40) * (1.0 - display_norm_tick) + 20
+    # --- Reused Knob Logic ---
+    def _draw_knob(self, canvas, cx, cy, radius, value, min_val, max_val, indicator_color, secondary, no_center=False, show_ticks=False, tick_length=10, arc_width=5, pointer_length=None, pointer_offset=0, shape="circle", pointer_style="line", tick_style="simple", gradient_level=0, outline_thickness=2, outline_color="gray", fill_color="", teeth=8, knob_style="standard"):
+        """Modular knob rendering pipeline."""
         
-        canvas.create_line(
-            cx - tick_length_half, tick_y,
-            cx + tick_length_half, tick_y,
-            fill=frame.tick_color, width=1
-        )
-        if i % 2 == 0:
-            canvas.create_text(
-                cx + tick_length_half + 15, tick_y,
-                text=str(int(tick_value)),
-                fill=frame.tick_color, font=frame.tick_font, anchor="w"
-            )
+        # 1. Math Prep
+        if max_val > min_val:
+            norm_val_0_1 = (value - min_val) / (max_val - min_val)
+        else:
+            norm_val_0_1 = 0
 
-    # 3. Calculate Handle Position
-    value_lin = frame.linear_var.get()
-    norm_value = (
-        (value_lin - frame.min_val)
-        / (frame.max_val - frame.min_val)
-        if (frame.max_val - frame.min_val) != 0
-        else 0
-    )
-    norm_value = max(0.0, min(1.0, norm_value))
-    display_norm_pos = norm_value ** (1.0 / frame.log_exponent)
-    handle_y = (height - 40) * (1.0 - display_norm_pos) + 20
-    
-    # 4. Fill Line
-    canvas.create_line(
-        cx + 2.5, height - 20, cx + 2.5, handle_y,
-        fill=frame.value_highlight_color, width=5, capstyle=tk.ROUND
-    )
-    
-    # 5. Draw Rotatable Cap (Knob)
-    rot_val = frame.rotation_var.get()
-    angle_deg = -90 + (rot_val / 100.0) * 135.0
-    angle_rad = math.radians(angle_deg)
-    
-    radius = frame.cap_radius
-    canvas.create_oval(
-        cx - radius, handle_y - radius,
-        cx + radius, handle_y + radius,
-        fill=frame.cap_color, outline=frame.cap_outline_color, width=2
-    )
-    
-    # Pointer Line
-    pointer_len = radius * 0.8
-    px = cx + pointer_len * math.cos(angle_rad)
-    py = handle_y + pointer_len * math.sin(angle_rad)
-    canvas.create_line(cx, handle_y, px, py, fill=frame.cap_outline_color, width=2, capstyle=tk.ROUND)
-    
-    # 6. Values Text
-    if frame.value_follow:
-        canvas.create_text(cx + radius + 10, handle_y, text=f"{value_lin:.1f}", fill=frame.value_color, anchor="w", font=("Helvetica", 8))
-        canvas.create_text(cx - radius - 10, handle_y, text=f"R:{rot_val:.0f}", fill=frame.value_color, anchor="e", font=("Helvetica", 8))
+        # Style-Specific Math
+        start_angle = 240
+        extent = -300
+        val_extent = extent * norm_val_0_1
+        pointer_angle_deg = start_angle + val_extent
+
+        if knob_style == "panner":
+            mid_val = (min_val + max_val) / 2
+            norm_from_center = (value - mid_val) / ((max_val - min_val) / 2) 
+            panner_max_arc = 135
+            
+            if norm_from_center >= 0:
+                 start_angle = 90
+                 val_extent = -1 * norm_from_center * panner_max_arc
+            else:
+                 start_angle = 90
+                 val_extent = abs(norm_from_center) * panner_max_arc
+            pointer_angle_deg = 90 + (-1 * norm_from_center * panner_max_arc) 
+
+        elif knob_style == "dial":
+             start_angle = 90
+             val_extent = -360 * norm_val_0_1
+             if abs(val_extent) >= 360: val_extent = -359.9
+             pointer_angle_deg = start_angle + val_extent
+
+        # 2. Draw Track (Background Arc)
+        bg_start = 0 if knob_style == "dial" else 240
+        bg_extent = 359.9 if knob_style == "dial" else -300
+        if knob_style == "panner":
+             bg_start = 225
+             bg_extent = -270
+        
+        self._draw_track(canvas, cx, cy, radius, bg_start, bg_extent, start_angle, val_extent, secondary, indicator_color, arc_width, knob_style)
+        
+        # 3. Draw Body / Outline (The Cap)
+        if knob_style != "dial":
+            self._draw_body(canvas, cx, cy, radius, shape, outline_color, gradient_level, rotation_angle=pointer_angle_deg, outline_thickness=outline_thickness, fill_color=fill_color, teeth=teeth)
+            
+        # 4. Draw Pointer
+        self._draw_pointer(canvas, cx, cy, radius, arc_width, pointer_angle_deg, pointer_style, indicator_color, pointer_length, pointer_offset, no_center)
+
+    def _draw_body(self, canvas, cx, cy, radius, shape, color, gradient_level, rotation_angle=0, outline_thickness=0, fill_color="", teeth=8):
+        steps = gradient_level + 1
+        for i in range(steps):
+            r = radius - (i * 2)
+            if r <= 0: break
+            current_thickness = outline_thickness if i == 0 else 1
+            current_fill = fill_color if (i == 0 or steps == 1) else ""
+
+            if current_thickness == 0 and i == 0 and gradient_level == 0 and not current_fill:
+                continue
+
+            if shape == "circle":
+                if gradient_level > 0 or (i == 0 and (current_thickness > 0 or current_fill)):
+                    canvas.create_oval(cx-r, cy-r, cx+r, cy+r, outline=color, width=current_thickness, fill=current_fill)
+            elif shape == "octagon":
+                points = self._get_poly_points(cx, cy, r, sides=8, start_angle=rotation_angle)
+                canvas.create_polygon(points, outline=color, fill=current_fill, width=current_thickness)
+            elif shape == "gear":
+                points = self._get_gear_points(cx, cy, r, teeth=teeth, notch_depth=0.15, start_angle=rotation_angle)
+                canvas.create_polygon(points, outline=color, fill=current_fill, width=current_thickness)
+
+    def _draw_track(self, canvas, cx, cy, radius, bg_start, bg_extent, start_angle, val_extent, bg_color, active_color, width, knob_style="standard"):
+        canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=bg_start, extent=bg_extent, style=tk.ARC, outline=bg_color, width=width)
+        
+        style = tk.ARC
+        if knob_style == "dial":
+             style = tk.PIESLICE
+             
+        final_color = active_color
+        if knob_style == "panner":
+             if val_extent < 0:
+                  final_color = "red" 
+             else:
+                  final_color = active_color
+
+        if abs(val_extent) > 0.1:
+            canvas.create_arc(cx - radius, cy - radius, cx + radius, cy + radius, start=start_angle, extent=val_extent, style=style, outline=final_color if style==tk.ARC else "", fill=final_color if style==tk.PIESLICE else "", width=width)
+        elif knob_style == "panner": 
+            canvas.create_line(cx, cy - radius + 2, cx, cy - radius + 12, fill=bg_color, width=2)
+
+    def _draw_pointer(self, canvas, cx, cy, radius, arc_width, angle_deg, style, color, length, offset, no_center):
+        angle_rad = math.radians(angle_deg)
+        p_start = offset
+        p_end = (radius - arc_width/2) if length is None else (offset + float(length))
+        
+        if style == "triangle":
+            tip_x = cx + p_end * math.cos(angle_rad)
+            tip_y = cy - p_end * math.sin(angle_rad)
+            w = 5 
+            bx = cx + p_start * math.cos(angle_rad)
+            by = cy - p_start * math.sin(angle_rad)
+            perp_ang = angle_rad + math.pi/2
+            c1x = bx + w * math.cos(perp_ang)
+            c1y = by - w * math.sin(perp_ang)
+            c2x = bx - w * math.cos(perp_ang)
+            c2y = by + w * math.sin(perp_ang)
+            canvas.create_polygon(tip_x, tip_y, c1x, c1y, c2x, c2y, fill=color, outline=color)
+        elif style == "notch":
+            notch_len = 5
+            sx = cx + (radius - notch_len) * math.cos(angle_rad)
+            sy = cy - (radius - notch_len) * math.sin(angle_rad)
+            ex = cx + radius * math.cos(angle_rad)
+            ey = cy - radius * math.sin(angle_rad)
+            canvas.create_line(sx, sy, ex, ey, fill=color, width=4, capstyle=tk.BUTT)
+        else:
+            sx = cx + p_start * math.cos(angle_rad)
+            sy = cy - p_start * math.sin(angle_rad)
+            ex = cx + p_end * math.cos(angle_rad)
+            ey = cy - p_end * math.sin(angle_rad)
+            canvas.create_line(sx, sy, ex, ey, fill=color, width=2, capstyle=tk.ROUND)
+
+        if not no_center:
+            canvas.create_oval(cx - 3, cy - 3, cx + 3, cy + 3, fill=color, outline=color)
+
+    def _get_poly_points(self, cx, cy, radius, sides=8, start_angle=0):
+        points = []
+        angle_step = 360 / sides
+        for i in range(sides):
+            deg = i * angle_step + start_angle
+            rad = math.radians(deg)
+            x = cx + radius * math.cos(rad)
+            y = cy - r * math.sin(rad) # r is not defined here, using radius
+            y = cy - radius * math.sin(rad)
+            points.extend([x, y])
+        return points
+
+    def _get_gear_points(self, cx, cy, radius, teeth=8, notch_depth=0.2, start_angle=0):
+        points = []
+        angle_step = 360 / (teeth * 2) 
+        inner_radius = radius * (1 - notch_depth)
+        
+        for i in range(teeth * 2):
+            deg = i * angle_step + start_angle
+            rad = math.radians(deg)
+            r = radius if i % 2 == 0 else inner_radius
+            x = cx + r * math.cos(rad)
+            y = cy - r * math.sin(rad)
+            points.extend([x, y])
+        return points
+
+    def _draw_ltp_vertical(self, frame, canvas, width, height, current_secondary, **knob_kwargs):
+        canvas.delete("all")
+        cx = width / 2
+        
+        # 1. Track Line
+        canvas.create_line(
+            cx, 20, cx, height - 20,
+            fill=current_secondary, width=4, capstyle=tk.ROUND
+        )
+        
+        # 2. Draw Tick Marks
+        tick_length_half = width * frame.tick_size
+        tick_values = []
+        if frame.ticks is not None:
+            tick_values = frame.ticks
+        else:
+            value_range = frame.max_val - frame.min_val
+            if value_range <= 10: tick_interval = 2
+            elif value_range <= 50: tick_interval = 5
+            elif value_range <= 100: tick_interval = 10
+            elif value_range <= 1000: tick_interval = 100
+            elif value_range <= 5000: tick_interval = 250
+            elif value_range <= 10000: tick_interval = 1000
+            else: tick_interval = 2500
+
+            if tick_interval > 0:
+                current_tick = (math.ceil(frame.min_val / tick_interval) * tick_interval)
+                while current_tick <= frame.max_val:
+                    tick_values.append(current_tick)
+                    current_tick += tick_interval
+
+        for i, tick_value in enumerate(tick_values):
+            norm_tick = (tick_value - frame.min_val) / (frame.max_val - frame.min_val) if (frame.max_val - frame.min_val) != 0 else 0
+            norm_tick = max(0.0, min(1.0, norm_tick))
+            display_norm_tick = norm_tick ** (1.0 / frame.log_exponent)
+            tick_y = (height - 40) * (1.0 - display_norm_tick) + 20
+            
+            canvas.create_line(
+                cx - tick_length_half, tick_y,
+                cx + tick_length_half, tick_y,
+                fill=frame.tick_color, width=1
+            )
+            if i % 2 == 0:
+                canvas.create_text(
+                    cx + tick_length_half + 15, tick_y,
+                    text=str(int(tick_value)),
+                    fill=frame.tick_color, font=frame.tick_font, anchor="w"
+                )
+
+        # 3. Calculate Handle Position
+        value_lin = frame.linear_var.get()
+        norm_value = (
+            (value_lin - frame.min_val)
+            / (frame.max_val - frame.min_val)
+            if (frame.max_val - frame.min_val) != 0
+            else 0
+        )
+        norm_value = max(0.0, min(1.0, norm_value))
+        display_norm_pos = norm_value ** (1.0 / frame.log_exponent)
+        handle_y = (height - 40) * (1.0 - display_norm_pos) + 20
+        
+        # 4. Fill Line
+        canvas.create_line(
+            cx + 2.5, height - 20, cx + 2.5, handle_y,
+            fill=frame.value_highlight_color, width=5, capstyle=tk.ROUND
+        )
+        
+        # 5. Draw Rotatable Cap (Knob) using reused logic
+        rot_val = frame.rotation_var.get()
+        
+        # Filter out cx and cy from knob_kwargs if they exist, as they are positional args for _draw_knob
+        safe_kwargs = {k: v for k, v in knob_kwargs.items() if k not in ["cx", "cy"]}
+        
+        self._draw_knob(
+            canvas=canvas, 
+            cx=cx, 
+            cy=handle_y, 
+            radius=frame.cap_radius, 
+            value=rot_val, 
+            min_val=ROTATION_MIN, 
+            max_val=ROTATION_MAX, 
+            indicator_color=frame.cap_outline_color, 
+            secondary=frame.cap_color, 
+            arc_width=3, 
+            **safe_kwargs
+        )
+        
+        # 6. Values Text
+        if frame.value_follow:
+            canvas.create_text(cx + frame.cap_radius + 10, handle_y, text=f"{value_lin:.1f}", fill=frame.value_color, anchor="w", font=("Helvetica", 8))
+            canvas.create_text(cx - frame.cap_radius - 10, handle_y, text=f"R:{rot_val:.0f}", fill=frame.value_color, anchor="e", font=("Helvetica", 8))

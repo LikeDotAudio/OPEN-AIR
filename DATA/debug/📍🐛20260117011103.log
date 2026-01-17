@@ -1,0 +1,13 @@
+1768630263.569501 🧪  Flushing 7 buffered messages to the timeline! 🦆 logger🪿 set log directory  🧩 {'version': 'Unknown_Ver'}
+1768630263.292479 --- Loaded Debug Settings --- 🦆 config reader🪿 read config  🧩 {'version': 'Unknown_Ver'}
+1768630263.292492 ENABLE_DEBUG_MODE: True 🦆 config reader🪿 read config  🧩 {'version': 'Unknown_Ver'}
+1768630263.292496 ENABLE_DEBUG_SCREEN: True 🦆 config reader🪿 read config  🧩 {'version': 'Unknown_Ver'}
+1768630263.292499 ----------------------------- 🦆 config reader🪿 read config  🧩 {'version': 'Unknown_Ver'}
+1768630263.550241 DEBUG: Loading dynamic_gui_mousewheel_mixin.py from: /home/anthony/Documents/OPEN-AIR/workers/builder/builder_input/dynamic_gui_mousewheel_mixin.py 🦆 dynamic gui mousewheel mixin🪿 <module>  🧩 {'version': 'Unknown_Ver'}
+1768630263.569456 📁 GLOBAL_PROJECT_ROOT set to /home/anthony/Documents/OPEN-AIR 🦆 path initializer🪿 initialize paths  🧩 {'version': 'Unknown_Ver'}
+1768630263.569469 ⚙️ sys.path updated. Current sys.path: ['/home/anthony/Documents/OPEN-AIR', '/usr/lib/python312.zip', '/usr/lib/python3.12', '/usr/lib/python3.12/lib-dynload', '/home/anthony/.local/lib/python3.12/site-packages', '/usr/local/lib/python3.12/dist-packages', '/usr/lib/python3/dist-packages'] 🦆 path initializer🪿 initialize paths  🧩 {'version': 'Unknown_Ver'}
+1768630263.569722 ⏩ Not on Windows ('nt'), skipping console encoding reconfiguration. 🦆 console encoder🪿 configure console encoding  🧩 {'version': 'Unknown_Ver'}
+1768630263.569745 ✅ Exiting configure_console_encoding. 🦆 console encoder🪿 configure console encoding  🧩 {'version': 'Unknown_Ver'}
+1768630263.570014 🚀 Continuing initialization sequence for version 20251225. 🦆 application initializer🪿 initialize app  🧩 {'version': 'Unknown_Ver'}
+1768630263.570038 ✅ Application initialization completed successfully. 🦆 application initializer🪿 initialize app  🧩 {'version': 'Unknown_Ver'}
+1768630263.570073 ✅ Dependency check skipped as per config.ini. 🦆 OpenAir🪿 conditional console print  🧩 {'version': '20251226.000000.1'}

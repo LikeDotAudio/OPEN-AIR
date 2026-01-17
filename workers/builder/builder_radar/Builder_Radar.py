@@ -256,6 +256,8 @@ class RadarCreatorMixin:
             # and updates current_input_value (for sweep). 
             # This also triggers StateMirror broadcast.
             radar_value_var.set(random_val)
+            if path:
+                state_mirror_engine.broadcast_gui_change_to_mqtt(path)
 
         canvas.bind("<Control-Button-1>", clear_plot)
         canvas.bind("<Button-2>", on_middle_click)

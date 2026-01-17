@@ -1,7 +1,7 @@
 {
-  "LTP_Standard_Console": {
+  "LTP_Freestyle_Console": {
     "type": "OcaBlock",
-    "description": "8-Channel Standard LTP Console (Ctrl for Pan)",
+    "description": "8-Channel Freestyle LTP Console with Knob Variations",
     "layout_columns": 8,
     "column_sizing": [
       {"weight": 1}, {"weight": 1}, {"weight": 1}, {"weight": 1},
@@ -9,52 +9,105 @@
     ],
     "fields": {
       "CH1": {
-        "type": "_CustomLTP", "label_active": "Master L",
-        "value_min": -100.0, "value_max": 20.0, "value_default": 0.0, "rotation_default": -100.0,
-        "freestyle": false, "value_highlight_color": "#00FF00", "cap_color": "#004400",
-        "ticks": [-100, -60, -30, 0, 20], "layout": {"width": 120, "height": 400}
+        "type": "_CustomLTP",
+        "label_active": "Kick (Standard)",
+        "value_min": -100.0, "value_max": 20.0, "value_default": -10.0,
+        "rotation_default": 0.0,
+        "freestyle": true,
+        "value_highlight_color": "#FF3333",
+        "cap_color": "#880000",
+        "ticks": [-100, -60, -30, -15, 0, 10, 20],
+        "layout": {"width": 120, "height": 400},
+        "knob_style": "standard", "shape": "circle", "pointer_style": "line"
       },
       "CH2": {
-        "type": "_CustomLTP", "label_active": "Master R",
-        "value_min": -100.0, "value_max": 20.0, "value_default": 0.0, "rotation_default": 100.0,
-        "freestyle": false, "value_highlight_color": "#00FF00", "cap_color": "#004400",
-        "ticks": [-100, -60, -30, 0, 20], "layout": {"width": 120, "height": 400}
+        "type": "_CustomLTP",
+        "label_active": "Snare (Octagon)",
+        "value_min": -100.0, "value_max": 20.0, "value_default": -5.0,
+        "rotation_default": -20.0,
+        "freestyle": true,
+        "value_highlight_color": "#33FF33",
+        "cap_color": "#008800",
+        "ticks": [-100, -80, -60, -40, -20, 0, 20],
+        "layout": {"width": 120, "height": 400},
+        "knob_style": "standard", "shape": "octagon", "pointer_style": "triangle",
+        "cap_radius": 22
       },
       "CH3": {
-        "type": "_CustomLTP", "label_active": "Synth 1",
-        "value_min": -100.0, "value_max": 20.0, "value_default": -10.0, "rotation_default": -30.0,
-        "freestyle": false, "value_highlight_color": "#33A1FD", "cap_color": "#003366",
-        "ticks": [-100, -50, 0, 20], "layout": {"width": 120, "height": 400}
+        "type": "_CustomLTP",
+        "label_active": "Hat (Gear)",
+        "value_min": -60.0, "value_max": 10.0, "value_default": -15.0,
+        "rotation_default": 45.0,
+        "freestyle": true,
+        "value_highlight_color": "#3333FF",
+        "cap_color": "#000088",
+        "ticks": [-60, -40, -20, 0, 10],
+        "layout": {"width": 120, "height": 400},
+        "knob_style": "standard", "shape": "gear", "pointer_style": "notch",
+        "knob_teeth": 12, "cap_radius": 25
       },
       "CH4": {
-        "type": "_CustomLTP", "label_active": "Synth 2",
-        "value_min": -100.0, "value_max": 20.0, "value_default": -10.0, "rotation_default": 30.0,
-        "freestyle": false, "value_highlight_color": "#33A1FD", "cap_color": "#003366",
-        "ticks": [-100, -50, 0, 20], "layout": {"width": 120, "height": 400}
+        "type": "_CustomLTP",
+        "label_active": "Toms (Panner)",
+        "value_min": -100.0, "value_max": 20.0, "value_default": -20.0,
+        "rotation_default": -60.0,
+        "freestyle": true,
+        "value_highlight_color": "#FFFF33",
+        "cap_color": "#888800",
+        "ticks": [-100, -50, 0, 20],
+        "layout": {"width": 120, "height": 400},
+        "knob_style": "panner", "shape": "circle", "pointer_style": "line"
       },
       "CH5": {
-        "type": "_CustomLTP", "label_active": "Pad L",
-        "value_min": -100.0, "value_max": 20.0, "value_default": -20.0, "rotation_default": -80.0,
-        "freestyle": false, "value_highlight_color": "#A020F0", "cap_color": "#4B0082",
-        "ticks": [-100, -40, 0, 20], "layout": {"width": 120, "height": 400}
+        "type": "_CustomLTP",
+        "label_active": "Bass (Dial)",
+        "value_min": -100.0, "value_max": 20.0, "value_default": 0.0,
+        "rotation_default": 0.0,
+        "freestyle": true,
+        "value_highlight_color": "#FF33FF",
+        "cap_color": "#880088",
+        "ticks": [-100, -15, 0, 15],
+        "layout": {"width": 120, "height": 400},
+        "knob_style": "dial", "shape": "circle"
       },
       "CH6": {
-        "type": "_CustomLTP", "label_active": "Pad R",
-        "value_min": -100.0, "value_max": 20.0, "value_default": -20.0, "rotation_default": 80.0,
-        "freestyle": false, "value_highlight_color": "#A020F0", "cap_color": "#4B0082",
-        "ticks": [-100, -40, 0, 20], "layout": {"width": 120, "height": 400}
+        "type": "_CustomLTP",
+        "label_active": "Gtr L (Gradient)",
+        "value_min": -100.0, "value_max": 20.0, "value_default": -12.0,
+        "rotation_default": -100.0,
+        "freestyle": true,
+        "value_highlight_color": "#33FFFF",
+        "cap_color": "#008888",
+        "ticks": [-100, -40, -10, 10, 20],
+        "layout": {"width": 120, "height": 400},
+        "knob_style": "standard", "shape": "circle", "gradient_level": 3,
+        "knob_fill_color": "#00FFFF"
       },
       "CH7": {
-        "type": "_CustomLTP", "label_active": "FX 1",
-        "value_min": -100.0, "value_max": 20.0, "value_default": -5.0, "rotation_default": 0.0,
-        "freestyle": false, "value_highlight_color": "#FFD700", "cap_color": "#8B4513",
-        "ticks": [-100, -20, 0, 20], "layout": {"width": 120, "height": 400}
+        "type": "_CustomLTP",
+        "label_active": "Gtr R (Thick)",
+        "value_min": -100.0, "value_max": 20.0, "value_default": -12.0,
+        "rotation_default": 100.0,
+        "freestyle": true,
+        "value_highlight_color": "#FF8C00",
+        "cap_color": "#CC5500",
+        "ticks": [-100, -40, -10, 10, 20],
+        "layout": {"width": 120, "height": 400},
+        "knob_style": "standard", "shape": "circle",
+        "knob_outline_thickness": 4, "knob_outline_color": "white"
       },
       "CH8": {
-        "type": "_CustomLTP", "label_active": "FX 2",
-        "value_min": -100.0, "value_max": 20.0, "value_default": -5.0, "rotation_default": 0.0,
-        "freestyle": false, "value_highlight_color": "#FFD700", "cap_color": "#8B4513",
-        "ticks": [-100, -20, 0, 20], "layout": {"width": 120, "height": 400}
+        "type": "_CustomLTP",
+        "label_active": "Vox (Fine Gear)",
+        "value_min": -100.0, "value_max": 20.0, "value_default": 5.0,
+        "rotation_default": 0.0,
+        "freestyle": true,
+        "value_highlight_color": "#FFFFFF",
+        "cap_color": "#CCCCCC",
+        "ticks": [-100, -20, -10, -5, 0, 5, 10, 15, 20],
+        "layout": {"width": 120, "height": 400},
+        "knob_style": "standard", "shape": "gear", "knob_teeth": 24,
+        "pointer_style": "triangle", "cap_radius": 20
       }
     }
   }

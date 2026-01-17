@@ -36,17 +36,20 @@ class CompositeFaderFrame(tk.Frame):
         
         # Visual Config
         layout_config = config.get("layout", {})
-        self.width = int(layout_config.get("width", config.get("width", 100)))
-        self.height = int(layout_config.get("height", config.get("height", 400)))
+        self.req_width = int(layout_config.get("width", config.get("width", 100)))
+        self.req_height = int(layout_config.get("height", config.get("height", 400)))
+        self.width = self.req_width
+        self.height = self.req_height
         
-        # Ticks
         self.show_ticks = config.get("show_ticks", True)
         self.tick_thickness = int(config.get("tick_thickness", 1))
         self.tick_color = config.get("tick_color", "light grey")
         self.tick_interval = float(config.get("tick_interval", (self.max_val - self.min_val) / 10.0))
 
         # State
-        self.mode = "macro" # "macro" (closed) or "micro" (open)
+        self.mode = "macro" 
+        self._lock_sync = False # Prevents circular updates
+        
         self.master_value = tk.DoubleVar(value=self.min_val)
         self.child_values = []
         self.child_offsets = []
@@ -62,15 +65,20 @@ class CompositeFaderFrame(tk.Frame):
             self.child_values.append(var)
             self.child_offsets.append(0.0)
             
+            # Register with State Engine
             if self.path:
                 child_path = f"{self.path}/ch_{i+1}"
                 self.state_mirror_engine.register_widget(child_path, var, self.base_mqtt_topic, config)
-                var.trace_add("write", self._request_redraw)
+                
+            # Internal trace for logic
+            var.trace_add("write", lambda *args, idx=i: self._on_child_var_change(idx))
 
-        self.master_value.set(self._calculate_master_average())
+        # Master trace for logic
+        self.master_value.trace_add("write", self._on_master_var_change)
+
+        # Initial Sync
+        self._update_master_from_children(broadcast=False)
         self._recalculate_offsets()
-        
-        self.master_value.trace_add("write", self._request_redraw)
 
         # UI Setup
         self.canvas = tk.Canvas(self, width=self.width, height=self.height, bg=self.bg_color, highlightthickness=0)
@@ -86,9 +94,11 @@ class CompositeFaderFrame(tk.Frame):
         self.canvas.bind("<Button-1>", self._on_press)
         self.canvas.bind("<B1-Motion>", self._on_drag)
         self.canvas.bind("<ButtonRelease-1>", self._on_release)
-        self.canvas.bind("<Button-3>", self._toggle_mode) # Right click to toggle view
-        self.canvas.bind("<Double-Button-1>", self._toggle_mode) # Double click too
+        self.canvas.bind("<Button-3>", self._toggle_mode) 
+        self.canvas.bind("<Double-Button-1>", self._toggle_mode) 
         self.canvas.bind("<Configure>", self._on_resize)
+        self.canvas.bind("<Enter>", self._bind_mousewheel)
+        self.canvas.bind("<Leave>", self._unbind_mousewheel)
 
         self._draw()
 
@@ -101,32 +111,50 @@ class CompositeFaderFrame(tk.Frame):
         for i in range(self.num_channels):
             self.child_offsets[i] = self.child_values[i].get() - m_val
 
-    def _update_children_from_master(self):
+    def _update_children_from_master(self, broadcast=True):
         m_val = self.master_value.get()
         for i in range(self.num_channels):
             new_val = m_val + self.child_offsets[i]
             new_val = max(self.min_val, min(self.max_val, new_val))
-            self.child_values[i].set(new_val)
-            if self.path:
-                self.state_mirror_engine.broadcast_gui_change_to_mqtt(f"{self.path}/ch_{i+1}")
+            if abs(self.child_values[i].get() - new_val) > 0.001:
+                self.child_values[i].set(new_val)
+                if broadcast and self.path:
+                    self.state_mirror_engine.broadcast_gui_change_to_mqtt(f"{self.path}/ch_{i+1}")
 
-    def _update_master_from_children(self):
+    def _update_master_from_children(self, broadcast=True):
         new_master = self._calculate_master_average()
-        self.master_value.set(new_master)
+        if abs(self.master_value.get() - new_master) > 0.001:
+            self.master_value.set(new_master)
+            if broadcast and self.path:
+                self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
+
+    def _on_master_var_change(self, *args):
+        if self._lock_sync: return
+        self._lock_sync = True
+        self._update_children_from_master(broadcast=False) # Variable trace handles broadcast? No, StateMirror does.
+        # However, we might want explicit control here if we are sliding.
+        self._lock_sync = False
+        self._draw()
+
+    def _on_child_var_change(self, idx, *args):
+        if self._lock_sync: return
+        self._lock_sync = True
+        self._update_master_from_children(broadcast=False)
         self._recalculate_offsets()
+        self._lock_sync = False
+        self._draw()
 
     def _toggle_mode(self, event):
         self.mode = "micro" if self.mode == "macro" else "macro"
         self._draw()
 
     def _on_resize(self, event):
-        self.width = event.width
-        self.height = event.height
+        if event.width > 1: self.width = event.width
+        if event.height > 1: self.height = event.height
         self._draw()
 
     def _get_y_from_val(self, val):
         norm = (val - self.min_val) / (self.max_val - self.min_val) if (self.max_val - self.min_val) != 0 else 0
-        # Add padding for cap
         draw_h = self.height - 40
         return 20 + draw_h * (1.0 - norm)
 
@@ -149,151 +177,169 @@ class CompositeFaderFrame(tk.Frame):
                     self.dragging_child = col_idx
                     self.start_val = self.child_values[col_idx].get()
                     return
-            
             self.dragging_master = True
             self.start_val = m_val
         else:
             self.dragging_master = True
             self.start_val = self._get_val_from_y(event.y)
-            self.master_value.set(max(self.min_val, min(self.max_val, self.start_val)))
-            self._update_children_from_master()
+            new_v = max(self.min_val, min(self.max_val, self.start_val))
+            self.master_value.set(new_v)
+            if self.path:
+                self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
 
     def _on_drag(self, event):
         if self.dragging_master:
             new_val = self._get_val_from_y(event.y)
             new_val = max(self.min_val, min(self.max_val, new_val))
             self.master_value.set(new_val)
-            self._update_children_from_master()
+            if self.path:
+                self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
             
         elif self.dragging_child >= 0:
             dy = self.start_y - event.y
             val_range = self.max_val - self.min_val
             pixel_range = self.height - 40
-            
             delta_val = (dy / pixel_range) * val_range
-            new_val = self.start_val + delta_val
-            new_val = max(self.min_val, min(self.max_val, new_val))
+            new_val = max(self.min_val, min(self.max_val, self.start_val + delta_val))
             
             self.child_values[self.dragging_child].set(new_val)
-            self._update_master_from_children()
+            if self.path:
+                self.state_mirror_engine.broadcast_gui_change_to_mqtt(f"{self.path}/ch_{self.dragging_child+1}")
 
     def _on_release(self, event):
         self.dragging_master = False
         self.dragging_child = -1
+        
+    def _on_mousewheel(self, event):
+        delta = 0
+        if sys.platform == "linux":
+            if event.num == 4: delta = 1
+            elif event.num == 5: delta = -1
+        else:
+            delta = 1 if event.delta > 0 else -1
+        if delta == 0: return
+
+        current_val = self.master_value.get()
+        val_range = self.max_val - self.min_val
+        step = val_range * 0.05 
+        new_val = max(self.min_val, min(self.max_val, current_val + (delta * step)))
+        
+        self.master_value.set(new_val)
+        if self.path:
+            self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
+
+    def _bind_mousewheel(self, event):
+        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
+        self.canvas.bind_all("<Button-4>", self._on_mousewheel)
+        self.canvas.bind_all("<Button-5>", self._on_mousewheel)
+
+    def _unbind_mousewheel(self, event):
+        self.canvas.unbind_all("<MouseWheel>")
+        self.canvas.unbind_all("<Button-4>")
+        self.canvas.unbind_all("<Button-5>")
 
     def _request_redraw(self, *args):
         self._draw()
 
-    def _draw_ticks(self, cx, h):
+    def _draw_ticks(self, width, height):
         if not self.show_ticks: return
-        
         val_range = self.max_val - self.min_val
         if val_range == 0: return
-        
-        # Determine number of ticks
         steps = int(val_range / self.tick_interval)
-        
         for i in range(steps + 1):
             val = self.min_val + (i * self.tick_interval)
             y = self._get_y_from_val(val)
+            # Ticks span end to end
+            self.canvas.create_line(0, y, width, y, fill=self.tick_color, width=self.tick_thickness)
+            if i % 2 == 0:
+                self.canvas.create_text(width - 5, y - 5, text=f"{int(val)}", fill=self.tick_color, anchor="e", font=("Arial", 8))
+
+    def _draw_channel_lines(self, width, height):
+        strip_w = width / self.num_channels
+        for i in range(1, self.num_channels):
+            x = i * strip_w
+            self.canvas.create_line(x, 20, x, height - 20, fill="#333333", width=1, dash=(2, 4))
+
+    def _draw_channel_values(self, width):
+        # Draw a small marker on the track for each child's current value
+        strip_w = width / self.num_channels
+        for i in range(self.num_channels):
+            c_val = self.child_values[i].get()
+            y = self._get_y_from_val(c_val)
+            norm_c = (c_val - self.min_val) / (self.max_val - self.min_val) if (self.max_val - self.min_val) else 0
             
-            # Draw tick line
-            # Check width to decide style. If wide, ticks on both sides?
-            # Standard: Ticks on track.
-            w = 20 # track width approx
-            self.canvas.create_line(cx - 10, y, cx + 10, y, fill=self.tick_color, width=self.tick_thickness)
+            # Determine horizontal position based on channel index
+            # Center of the channel strip
+            cx = (i * strip_w) + (strip_w / 2)
             
-            # Label
-            if i % 2 == 0: # Every other tick
-                self.canvas.create_text(cx + 15, y, text=f"{int(val)}", fill=self.tick_color, anchor="w", font=("Arial", 8))
+            # Draw marker
+            marker_w = strip_w * 0.6
+            color = self._get_color(norm_c)
+            self.canvas.create_line(cx - marker_w/2, y, cx + marker_w/2, y, fill=color, width=3)
+
+    def _draw_rounded_rectangle(self, x1, y1, x2, y2, radius=10, **kwargs):
+        points = [
+            x1 + radius, y1, x1 + radius, y1, x2 - radius, y1, x2 - radius, y1,
+            x2, y1, x2, y1 + radius, x2, y1 + radius, x2, y2 - radius,
+            x2, y2 - radius, x2, y2, x2 - radius, y2, x2 - radius, y2,
+            x1 + radius, y2, x1 + radius, y2, x1, y2, x1, y2 - radius,
+            x1, y2 - radius, x1, y1 + radius, x1, y1 + radius, x1, y1,
+        ]
+        return self.canvas.create_polygon(points, **kwargs, smooth=True)
 
     def _draw(self):
         self.canvas.delete("all")
         w, h = self.width, self.height
         cx = w / 2
         
-        # 1. Track
+        # 1. Background / Track
         self.canvas.create_line(cx, 20, cx, h-20, fill=self.track_col, width=4, capstyle=tk.ROUND)
         
-        # 2. Ticks
-        self._draw_ticks(cx, h)
+        # 2. Draw Channel Lines (Guide)
+        self._draw_channel_lines(w, h)
         
-        # 3. Master Cap Position
+        # 3. Draw Channel Value Markers (Relative Position Indicators)
+        self._draw_channel_values(w)
+        
+        # 4. Ticks (End to End)
+        self._draw_ticks(w, h)
+        
         m_val = self.master_value.get()
         cap_y = self._get_y_from_val(m_val)
-        cap_h = 60 
-        cap_w = w - 10 # Slightly smaller than full width
+        cap_h, cap_w = 60, w - 10 
         
-        # 4. Draw Cap Container (The "Smart" Screen)
-        # Bezel / Housing
-        self.canvas.create_rectangle(
-            cx - cap_w/2, cap_y - cap_h/2, 
-            cx + cap_w/2, cap_y + cap_h/2, 
-            fill="#333333", outline=self.handle_col, width=2
-        )
+        # 5. Draw Cap
+        self._draw_rounded_rectangle(cx - cap_w/2, cap_y - cap_h/2, cx + cap_w/2, cap_y + cap_h/2, radius=8, fill="#333333", outline=self.handle_col, width=2)
         
-        # Screen Area
         screen_margin = 4
-        sx1 = cx - cap_w/2 + screen_margin
-        sx2 = cx + cap_w/2 - screen_margin
-        sy1 = cap_y - cap_h/2 + screen_margin
-        sy2 = cap_y + cap_h/2 - screen_margin
-        
+        sx1, sx2 = cx - cap_w/2 + screen_margin, cx + cap_w/2 - screen_margin
+        sy1, sy2 = cap_y - cap_h/2 + screen_margin, cap_y + cap_h/2 - screen_margin
         self.canvas.create_rectangle(sx1, sy1, sx2, sy2, fill="black", outline="")
         
-        # 5. Draw Cap Content
         if self.mode == "macro":
-            # Waveform / Gradient Bar
             norm_val = (m_val - self.min_val) / (self.max_val - self.min_val) if (self.max_val - self.min_val) else 0
-            
-            # Simple bar visualization
-            bar_w = (sx2 - sx1) * 0.9
-            bar_h = 10
-            bx1 = (sx1 + sx2)/2 - bar_w/2
-            bx2 = (sx1 + sx2)/2 + bar_w/2
-            by1 = (sy1 + sy2)/2 - bar_h/2
-            by2 = (sy1 + sy2)/2 + bar_h/2
-            
+            bar_w, bar_h = (sx2 - sx1) * 0.9, 10
+            bx1, bx2 = (sx1 + sx2)/2 - bar_w/2, (sx1 + sx2)/2 + bar_w/2
+            by1, by2 = (sy1 + sy2)/2 - bar_h/2, (sy1 + sy2)/2 + bar_h/2
             self.canvas.create_rectangle(bx1, by1, bx2, by2, fill=self._get_color(norm_val), outline="")
             self.canvas.create_text((sx1+sx2)/2, (sy1+sy2)/2 + 15, text=f"{m_val:.1f}", fill="white", font=("Arial", 8))
             self.canvas.create_text((sx1+sx2)/2, (sy1+sy2)/2 - 15, text="AVG", fill="#888888", font=("Arial", 6))
-            
         elif self.mode == "micro":
-            # Vertical Stripes for Children
-            total_screen_w = sx2 - sx1
-            strip_w = total_screen_w / self.num_channels
-            
+            strip_w = (sx2 - sx1) / self.num_channels
             for i in range(self.num_channels):
                 c_val = self.child_values[i].get()
                 norm_c = (c_val - self.min_val) / (self.max_val - self.min_val) if (self.max_val - self.min_val) else 0
-                
-                x1 = sx1 + i * strip_w
-                x2 = x1 + strip_w
-                
-                # Gap
-                x1 += 1
-                x2 -= 1
-                
-                # Visualizing Value inside the strip
+                x1, x2 = sx1 + i * strip_w + 1, sx1 + (i + 1) * strip_w - 1
                 fill_h = norm_c * (sy2 - sy1)
-                bar_top = sy2 - fill_h
-                
-                # Background
                 self.canvas.create_rectangle(x1, sy1, x2, sy2, fill="#222222", outline="")
-                # Value
-                self.canvas.create_rectangle(x1, bar_top, x2, sy2, fill=self._get_color(norm_c), outline="")
-                # Label
+                self.canvas.create_rectangle(x1, sy2 - fill_h, x2, sy2, fill=self._get_color(norm_c), outline="")
                 self.canvas.create_text((x1+x2)/2, sy2 - 5, text=f"{i+1}", fill="white", font=("Arial", 6), anchor="s")
 
     def _get_color(self, norm_val):
         if norm_val < 0.5:
-            r = int(255 * (norm_val * 2))
-            g = 255
-            b = 0
+            r, g, b = int(255 * (norm_val * 2)), 255, 0
         else:
-            r = 255
-            g = int(255 * (1.0 - (norm_val - 0.5) * 2))
-            b = 0
+            r, g, b = 255, int(255 * (1.0 - (norm_val - 0.5) * 2)), 0
         return f"#{r:02x}{g:02x}{b:02x}"
 
 
@@ -302,19 +348,21 @@ class CompositeFaderCreatorMixin:
         path = config_data.get("path", "")
         base_mqtt_topic = kwargs.get("base_mqtt_topic_from_path", "")
         
-        frame = CompositeFaderFrame(
-            parent_widget, 
-            config_data, 
-            path, 
-            self.state_mirror_engine, 
-            self.subscriber_router,
-            base_mqtt_topic
-        )
+        frame = CompositeFaderFrame(parent_widget, config_data, path, self.state_mirror_engine, self.subscriber_router, base_mqtt_topic)
         
         if path:
+            # Register master
             self.state_mirror_engine.register_widget(path, frame.master_value, base_mqtt_topic, config_data)
             topic = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic, path)
             self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
             self.state_mirror_engine.initialize_widget_state(path)
+            
+            # Register and subscribe each child
+            for i in range(frame.num_channels):
+                child_path = f"{path}/ch_{i+1}"
+                # Registration already happened in __init__ for variables
+                child_topic = get_topic(self.state_mirror_engine.base_topic, base_mqtt_topic, child_path)
+                self.subscriber_router.subscribe_to_topic(child_topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
+                self.state_mirror_engine.initialize_widget_state(child_path)
             
         return frame

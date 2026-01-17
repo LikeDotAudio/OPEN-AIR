@@ -1,0 +1,104 @@
+{
+  "Tilted_Meter_Petting_Zoo": {
+    "type": "OcaBlock",
+    "description": "Tilted and Reversed Meter Demos",
+    "layout_columns": 2,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "left_meter": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Left Meter (180-90)",
+        "min": -20.0, "max": 3.0, "value_default": -5.0, "upper_range": 0.0,
+        "size": 200, "glide_time": 200, "dwell_time": 200, "hold_time": 0, "fall_time": 500,
+        "Meter_center_angle": 135, "Meter_viewable_angle": 90, "Counter_Clockwise": false,
+        "sub_ticks": 5,
+        "notes": "Classic Left Tilted."
+      },
+      "right_meter": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Right Meter (0-90)",
+        "min": -20.0, "max": 3.0, "value_default": -5.0, "upper_range": 0.0,
+        "size": 200, "glide_time": 200, "dwell_time": 200, "hold_time": 0, "fall_time": 500,
+        "Meter_center_angle": 45, "Meter_viewable_angle": 90, "Counter_Clockwise": true,
+        "sub_ticks": 5,
+        "notes": "Classic Right Tilted (CCW)."
+      },
+      "rev_meter": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Standard Reverse",
+        "min": -20.0, "max": 3.0, "value_default": -5.0, "upper_range": 0.0,
+        "size": 200, "glide_time": 200, "dwell_time": 200, "hold_time": 0, "fall_time": 500,
+        "Counter_Clockwise": true,
+        "sub_ticks": 5,
+        "notes": "Standard orientation, Counter-Clockwise motion."
+      },
+      "ceiling_meter": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Ceiling Mount",
+        "min": -20.0, "max": 3.0, "value_default": 0.0, "upper_range": 0.0,
+        "size": 200, "glide_time": 200, "dwell_time": 200, "hold_time": 0, "fall_time": 500,
+        "Meter_center_angle": 270, "Meter_viewable_angle": 120, "Counter_Clockwise": true,
+        "sub_ticks": 5,
+        "notes": "Upside down (270 deg)."
+      },
+      "floor_meter": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Floor Mount",
+        "min": -20.0, "max": 3.0, "value_default": -10.0, "upper_range": 0.0,
+        "size": 200, "glide_time": 200, "dwell_time": 200, "hold_time": 0, "fall_time": 500,
+        "Meter_center_angle": 90, "Meter_viewable_angle": 180, "Counter_Clockwise": false,
+        "sub_ticks": 5,
+        "notes": "Full 180 degree floor arc."
+      },
+      "sideways_L": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Sideways Left",
+        "min": -20.0, "max": 3.0, "value_default": -5.0, "upper_range": 0.0,
+        "size": 200, "glide_time": 200, "dwell_time": 200, "hold_time": 0, "fall_time": 500,
+        "Meter_center_angle": 180, "Meter_viewable_angle": 90, "Counter_Clockwise": false,
+        "sub_ticks": 5,
+        "notes": "Facing Left (180 deg)."
+      },
+      "sideways_R": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Sideways Right",
+        "min": -20.0, "max": 3.0, "value_default": -5.0, "upper_range": 0.0,
+        "size": 200, "glide_time": 200, "dwell_time": 200, "hold_time": 0, "fall_time": 500,
+        "Meter_center_angle": 0, "Meter_viewable_angle": 90, "Counter_Clockwise": true,
+        "sub_ticks": 5,
+        "notes": "Facing Right (0 deg)."
+      },
+      "compass_N": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Compass North",
+        "min": -100.0, "max": 100.0, "value_default": 0.0, "upper_range": 0.0,
+        "size": 200, "glide_time": 500, "dwell_time": 500, "hold_time": 0, "fall_time": 1000,
+        "Meter_center_angle": 90, "Meter_viewable_angle": 270, "Counter_Clockwise": false,
+        "sub_ticks": 5,
+        "notes": "Extremely wide compass style."
+      },
+      "tilted_stereo": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Stereo Tilted",
+        "meter_mode": "stereo",
+        "min": -20.0, "max": 3.0, "value_default": -3.0, "upper_range": 0.0,
+        "size": 250, "glide_time": 300, "dwell_time": 300, "hold_time": 0, "fall_time": 600,
+        "Meter_center_angle": 120, "Meter_viewable_angle": 100, "Counter_Clockwise": false,
+        "Pointer_colour": "#00FF00", "Pointer_colour_2": "#FF0000",
+        "sub_ticks": 5,
+        "notes": "Stereo pointers on a tilted meter."
+      },
+      "radar_sweep": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Radar Sweep",
+        "min": 0.0, "max": 360.0, "value_default": 180.0, "upper_range": 360.0,
+        "size": 200, "glide_time": 1000, "dwell_time": 1000, "hold_time": 0, "fall_time": 2000,
+        "Meter_center_angle": 90, "Meter_viewable_angle": 359, "Counter_Clockwise": false,
+        "sub_ticks": 5,
+        "notes": "Near-full circle sweep."
+      }
+    }
+  }
+}

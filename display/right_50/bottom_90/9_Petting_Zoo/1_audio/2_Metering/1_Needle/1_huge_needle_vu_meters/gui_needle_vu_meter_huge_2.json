@@ -1,0 +1,43 @@
+{
+  "Needle_Styles_Demo": {
+    "type": "OcaBlock",
+    "description": "Needle Style Variations",
+    "layout_columns": 3,
+    "column_sizing": [
+      {"weight": 1}, {"weight": 1}, {"weight": 1}
+    ],
+    "fields": {
+      "meter_line": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Standard Line",
+        "min": -20.0, "max": 3.0, "value_default": -5.0, "upper_range": 0.0,
+        "size": 250, "glide_time": 200, "dwell_time": 200, "hold_time": 0, "fall_time": 500,
+        "Pointer_Style": "line",
+        "Pivot_size": 10,
+        "Needle_thickness": 3,
+        "Pointer_colour": "#FFFFFF",
+        "notes": "Classic line pointer."
+      },
+      "meter_taper": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Tapered Pointer",
+        "min": -20.0, "max": 3.0, "value_default": 0.0, "upper_range": 0.0,
+        "size": 250, "glide_time": 200, "dwell_time": 200, "hold_time": 0, "fall_time": 500,
+        "Pointer_Style": "taper",
+        "Pivot_size": 16,
+        "Pointer_colour": "#FFD700",
+        "notes": "Triangle tapering from pivot."
+      },
+      "meter_teardrop": {
+        "type": "_NeedleVUMeter",
+        "label_active": "Teardrop Pointer",
+        "min": -20.0, "max": 3.0, "value_default": 1.0, "upper_range": 0.0,
+        "size": 250, "glide_time": 200, "dwell_time": 200, "hold_time": 0, "fall_time": 500,
+        "Pointer_Style": "teardrop",
+        "Pivot_size": 20,
+        "Pointer_colour": "#00FFFF",
+        "notes": "Smoothed teardrop shape."
+      }
+    }
+  }
+}

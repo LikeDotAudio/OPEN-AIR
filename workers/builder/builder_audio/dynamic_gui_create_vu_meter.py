@@ -9,6 +9,7 @@ from managers.configini.config_reader import Config
 app_constants = Config.get_instance()  # Get the singleton instance
 from workers.logger.logger import debug_logger
 from workers.logger.log_utils import _get_log_args
+from workers.styling.style import THEMES, DEFAULT_THEME
 import os
 from workers.mqtt.mqtt_topic_utils import get_topic
 
@@ -36,6 +37,13 @@ class VUMeterCreatorMixin:
                 **_get_log_args(),
             )
 
+        # Theme Resolution
+        colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
+        bg_color = colors.get("bg", "#2b2b2b")
+        fg_color = colors.get("fg", "#dcdcdc")
+        accent_color = colors.get("accent", "#33A1FD")
+        secondary_color = colors.get("secondary", "#444444")
+
         frame = ttk.Frame(parent_widget)  # Use parent_widget here
 
         layout_config = config.get("layout", {})
@@ -55,12 +63,14 @@ class VUMeterCreatorMixin:
             max_val = float(config.get("max", 3.0))
             value_default = float(config.get("value_default", min_val))
             red_zone_start = float(config.get("upper_range", 0.0))
+            middle_zone_start = float(config.get("middle_range", red_zone_start))
             
             # Layout & Features
             base_width = int(layout_config.get("width", config.get("width", 200)))
             bar_height = int(layout_config.get("height", config.get("height", 20)))
             
             show_ticks = config.get("show_ticks", False)
+            sub_ticks = int(config.get("sub_ticks", 0))
             tick_color = config.get("tick_color", bg_color) # Default to background color ("invisible" scale)
             scale_position = config.get("scale_position", "bottom").lower() # top, bottom, none
             show_peak_hold = config.get("show_peak_hold", False)
@@ -84,6 +94,7 @@ class VUMeterCreatorMixin:
                 bar_y = vertical_padding
 
             lower_colour = config.get("Lower_range_colour", "green")
+            middle_colour = config.get("Middle_range_colour", "yellow")
             upper_colour = config.get("upper_range_Colour", "red")
             pointer_colour = config.get("Pointer_colour", "yellow")
 
@@ -101,35 +112,57 @@ class VUMeterCreatorMixin:
             canvas.pack()
 
             # --- Draw Background Bar ---
-            red_zone_x = (
-                (red_zone_start - min_val) / (max_val - min_val) * base_width
-                if max_val > min_val
-                else 0
-            )
-            canvas.create_rectangle(pad_x, bar_y, pad_x + red_zone_x, bar_y + bar_height, fill=lower_colour, outline="")
-            canvas.create_rectangle(
-                pad_x + red_zone_x, bar_y, pad_x + base_width, bar_y + bar_height, fill=upper_colour, outline=""
-            )
+            # Zone 1: Min -> Middle
+            zone1_end = (middle_zone_start - min_val) / (max_val - min_val) * base_width
+            zone1_end = max(0, min(base_width, zone1_end))
+            
+            # Zone 2: Middle -> Upper
+            zone2_end = (red_zone_start - min_val) / (max_val - min_val) * base_width
+            zone2_end = max(0, min(base_width, zone2_end))
+            
+            # Draw Zones
+            # Lower (Min -> Middle)
+            canvas.create_rectangle(pad_x, bar_y, pad_x + zone1_end, bar_y + bar_height, fill=lower_colour, outline="")
+            
+            # Middle (Middle -> Upper)
+            if zone2_end > zone1_end:
+                canvas.create_rectangle(pad_x + zone1_end, bar_y, pad_x + zone2_end, bar_y + bar_height, fill=middle_colour, outline="")
+            
+            # Upper (Upper -> Max)
+            if base_width > zone2_end:
+                canvas.create_rectangle(pad_x + zone2_end, bar_y, pad_x + base_width, bar_y + bar_height, fill=upper_colour, outline="")
 
             # --- Draw Ticks & Scale ---
             if show_ticks or scale_position != "none":
                 tick_y_start = bar_y + bar_height if scale_position == "bottom" else bar_y
                 tick_direction = 1 if scale_position == "bottom" else -1
                 
-                # Simple linear ticks
-                num_ticks = 5
-                for i in range(num_ticks + 1):
-                    norm = i / num_ticks
+                # Simple linear ticks with sub-ticks
+                num_main_ticks = 5
+                
+                for i in range(num_main_ticks + 1):
+                    # Main Tick
+                    norm = i / num_main_ticks
                     val = min_val + norm * (max_val - min_val)
                     x_pos = pad_x + (norm * base_width)
                     
                     if show_ticks:
-                        canvas.create_line(x_pos, tick_y_start, x_pos, tick_y_start + (tick_height * tick_direction), fill=tick_color)
+                        canvas.create_line(x_pos, tick_y_start, x_pos, tick_y_start + (tick_height * tick_direction), fill=tick_color, width=2)
                     
                     if scale_position != "none":
                         text_y = tick_y_start + ((tick_height + 5) * tick_direction)
                         anchor = "n" if scale_position == "bottom" else "s"
                         canvas.create_text(x_pos, text_y, text=f"{int(val)}", fill=tick_color, font=("Helvetica", 8), anchor=anchor)
+                    
+                    # Sub Ticks
+                    if i < num_main_ticks and sub_ticks > 0:
+                        step_width = base_width / num_main_ticks
+                        sub_step = step_width / (sub_ticks + 1)
+                        for j in range(1, sub_ticks + 1):
+                            sub_x = x_pos + (j * sub_step)
+                            if show_ticks:
+                                # Sub ticks are half height
+                                canvas.create_line(sub_x, tick_y_start, sub_x, tick_y_start + ((tick_height * 0.5) * tick_direction), fill=tick_color, width=1)
 
             # --- Draw Indicator ---
             indicator = canvas.create_rectangle(
@@ -146,21 +179,21 @@ class VUMeterCreatorMixin:
                 )
                 
                 def reset_peak(event):
-                    self.anim_peak_expiry = 0
+                    frame.anim_peak_expiry = 0
                     canvas.itemconfig(peak_led, fill="#444444")
                 
                 canvas.tag_bind(peak_led, "<Button-1>", reset_peak)
 
             # Animation State
-            self.anim_current_value = value_default
-            self.anim_target = value_default
-            self.anim_mode = "idle" # idle, tracking, holding, decaying
-            self.anim_hold_start = 0
-            self.anim_running = False
-            self.anim_peak_expiry = 0
+            frame.anim_current_value = value_default
+            frame.anim_target = value_default
+            frame.anim_mode = "idle" # idle, tracking, holding, decaying
+            frame.anim_hold_start = 0
+            frame.anim_running = False
+            frame.anim_peak_expiry = 0
 
             def draw_indicator():
-                val = self.anim_current_value
+                val = frame.anim_current_value
                 if val < min_val: val = min_val
                 if val > max_val: val = max_val
                 
@@ -177,49 +210,49 @@ class VUMeterCreatorMixin:
                     now_ms = time.time() * 1000
                     if val >= red_zone_start:
                         canvas.itemconfig(peak_led, fill="red")
-                        self.anim_peak_expiry = now_ms + peak_hold_time
-                    elif now_ms > self.anim_peak_expiry:
+                        frame.anim_peak_expiry = now_ms + peak_hold_time
+                    elif now_ms > frame.anim_peak_expiry:
                         canvas.itemconfig(peak_led, fill="#444444")
 
             def animate():
-                current = self.anim_current_value
+                current = frame.anim_current_value
                 dt = 20.0 # ms per frame
                 full_range = max_val - min_val
                 if full_range <= 0: full_range = 1.0
 
-                if self.anim_mode == "holding":
-                    if (time.time() * 1000) - self.anim_hold_start >= hold_time:
-                        self.anim_mode = "decaying"
+                if frame.anim_mode == "holding":
+                    if (time.time() * 1000) - frame.anim_hold_start >= hold_time:
+                        frame.anim_mode = "decaying"
                     else:
                         canvas.after(int(dt), animate)
                         return
 
-                if self.anim_mode == "tracking":
-                    target = self.anim_target
-                elif self.anim_mode == "decaying":
+                if frame.anim_mode == "tracking":
+                    target = frame.anim_target
+                elif frame.anim_mode == "decaying":
                     target = min_val
                 else:
                     target = current
 
                 diff = target - current
                 if abs(diff) < 0.05:
-                    self.anim_current_value = target
+                    frame.anim_current_value = target
                     draw_indicator()
-                    if self.anim_mode == "tracking":
+                    if frame.anim_mode == "tracking":
                         if hold_time > 0:
-                            self.anim_mode = "holding"
-                            self.anim_hold_start = time.time() * 1000
+                            frame.anim_mode = "holding"
+                            frame.anim_hold_start = time.time() * 1000
                         else:
-                            self.anim_mode = "decaying"
+                            frame.anim_mode = "decaying"
                         canvas.after(int(dt), animate)
                         return
                     else:
-                        self.anim_mode = "idle"
-                        self.anim_running = False
+                        frame.anim_mode = "idle"
+                        frame.anim_running = False
                         return
 
                 step = 0.0
-                time_param = glide_time if diff > 0 else (dwell_time if self.anim_mode == "tracking" else fall_time)
+                time_param = glide_time if diff > 0 else (dwell_time if frame.anim_mode == "tracking" else fall_time)
                 
                 if time_param <= 0:
                     step = diff
@@ -227,15 +260,15 @@ class VUMeterCreatorMixin:
                     max_step = (full_range / time_param) * dt
                     step = min(diff, max_step) if diff > 0 else max(diff, -max_step)
 
-                self.anim_current_value += step
+                frame.anim_current_value += step
                 draw_indicator()
                 canvas.after(int(dt), animate)
 
             def on_value_change(*args):
-                self.anim_target = vu_value_var.get()
-                self.anim_mode = "tracking"
-                if not self.anim_running:
-                    self.anim_running = True
+                frame.anim_target = vu_value_var.get()
+                frame.anim_mode = "tracking"
+                if not frame.anim_running:
+                    frame.anim_running = True
                     animate()
 
             vu_value_var.trace_add("write", on_value_change)

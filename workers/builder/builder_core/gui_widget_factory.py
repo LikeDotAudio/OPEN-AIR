@@ -64,6 +64,7 @@ class GuiWidgetFactoryMixin:
             "_HeaderStatusLight": self._create_header_status_light,
             "_WinkButton": self._create_wink_button,
             "_VUMeterKnob": self._create_vu_meter_knob,
+            "_Radar": self._create_radar,
             # Complex Adapters (Methods inherited from Adapter Mixins)
             "plot_widget": self._create_plot_widget,
             "_HorizontalMeterWithText": self._create_horizontal_meter,

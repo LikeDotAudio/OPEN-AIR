@@ -103,6 +103,7 @@ from .builder_audio.dynamic_gui_create_custom_LTP import (
 )
 from .builder_audio.dynamic_gui_create_wink import WinkButtonCreatorMixin
 from workers.builder.builder_composite.VU_Meter_Knob import VUMeterKnobCreatorMixin
+from workers.builder.builder_radar.Builder_Radar import RadarCreatorMixin
 
 
 class DynamicGuiBuilder(

@@ -94,9 +94,8 @@ class VUMeterCreatorMixin:
                 bar_y = vertical_padding
 
             lower_colour = config.get("Lower_range_colour", "green")
-            middle_colour = config.get("Middle_range_colour", "yellow")
             upper_colour = config.get("upper_range_Colour", "red")
-            pointer_colour = config.get("Pointer_colour", "yellow")
+            pointer_colour = config.get("Pointer_colour", "white") # Default white for visibility
 
             # Animation Parameters (Default: 100ms)
             glide_time = float(config.get("glide_time", 100))
@@ -203,7 +202,18 @@ class VUMeterCreatorMixin:
                     if max_val > min_val
                     else 0
                 )
-                canvas.coords(indicator, pad_x + x_pos - 2.5, bar_y, pad_x + x_pos + 2.5, bar_y + bar_height)
+                
+                # Extend pointer into text area
+                y1 = bar_y
+                y2 = bar_y + bar_height
+                extension = bar_height * 0.15 # 15% extension
+                
+                if scale_position == "top":
+                    y1 -= extension
+                elif scale_position == "bottom":
+                    y2 += extension
+                
+                canvas.coords(indicator, pad_x + x_pos - 2.5, y1, pad_x + x_pos + 2.5, y2)
                 
                 # Peak Hold Logic
                 if show_peak_hold and peak_led:

@@ -431,7 +431,7 @@ class CustomLTPCreatorMixin:
         return frame
 
     # --- Reused Knob Logic ---
-    def _draw_knob(self, canvas, cx, cy, radius, value, min_val, max_val, indicator_color, secondary, no_center=False, show_ticks=False, tick_length=10, arc_width=5, pointer_length=None, pointer_offset=0, shape="circle", pointer_style="line", tick_style="simple", gradient_level=0, outline_thickness=2, outline_color="gray", fill_color="", teeth=8, knob_style="standard"):
+    def _draw_ltp_knob(self, canvas, cx, cy, radius, value, min_val, max_val, indicator_color, secondary, no_center=False, show_ticks=False, tick_length=10, arc_width=5, pointer_length=None, pointer_offset=0, shape="circle", pointer_style="line", tick_style="simple", gradient_level=0, outline_thickness=2, outline_color="gray", fill_color="", teeth=8, knob_style="standard"):
         """Modular knob rendering pipeline."""
         
         # 1. Math Prep
@@ -654,7 +654,7 @@ class CustomLTPCreatorMixin:
         # Filter out cx and cy from knob_kwargs if they exist, as they are positional args for _draw_knob
         safe_kwargs = {k: v for k, v in knob_kwargs.items() if k not in ["cx", "cy"]}
         
-        self._draw_knob(
+        self._draw_ltp_knob(
             canvas=canvas, 
             cx=cx, 
             cy=handle_y, 

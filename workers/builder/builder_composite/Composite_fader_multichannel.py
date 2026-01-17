@@ -13,6 +13,8 @@ from workers.handlers.widget_event_binder import bind_variable_trace
 
 app_constants = Config.get_instance()
 
+MIN_CHANNEL_WIDTH = 30
+
 class CompositeFaderFrame(tk.Frame):
     def __init__(self, master, config, path, state_mirror_engine, subscriber_router, base_mqtt_topic):
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
@@ -36,7 +38,12 @@ class CompositeFaderFrame(tk.Frame):
         
         # Visual Config
         layout_config = config.get("layout", {})
-        self.req_width = int(layout_config.get("width", config.get("width", 100)))
+        
+        # Calculate Width Requirements
+        requested_w = int(layout_config.get("width", config.get("width", 100)))
+        min_required_w = self.num_channels * MIN_CHANNEL_WIDTH
+        self.req_width = max(requested_w, min_required_w)
+        
         self.req_height = int(layout_config.get("height", config.get("height", 400)))
         self.width = self.req_width
         self.height = self.req_height
@@ -169,14 +176,20 @@ class CompositeFaderFrame(tk.Frame):
         cap_y = self._get_y_from_val(m_val)
         cap_h = 60
         
+        # Calculate active area same as draw
+        draw_w = self.req_width
+        offset_x = (self.width - draw_w) / 2 if self.width > draw_w else 0
+        
         if (cap_y - cap_h/2) <= event.y <= (cap_y + cap_h/2):
             if self.mode == "micro":
-                strip_w = self.width / self.num_channels
-                col_idx = int(event.x / strip_w)
-                if 0 <= col_idx < self.num_channels:
-                    self.dragging_child = col_idx
-                    self.start_val = self.child_values[col_idx].get()
-                    return
+                # Check bounds horizontally
+                if offset_x <= event.x <= (offset_x + draw_w):
+                    strip_w = draw_w / self.num_channels
+                    col_idx = int((event.x - offset_x) / strip_w)
+                    if 0 <= col_idx < self.num_channels:
+                        self.dragging_child = col_idx
+                        self.start_val = self.child_values[col_idx].get()
+                        return
             self.dragging_master = True
             self.start_val = m_val
         else:
@@ -241,7 +254,7 @@ class CompositeFaderFrame(tk.Frame):
     def _request_redraw(self, *args):
         self._draw()
 
-    def _draw_ticks(self, width, height):
+    def _draw_ticks(self, width, height, offset_x=0):
         if not self.show_ticks: return
         val_range = self.max_val - self.min_val
         if val_range == 0: return
@@ -249,30 +262,36 @@ class CompositeFaderFrame(tk.Frame):
         for i in range(steps + 1):
             val = self.min_val + (i * self.tick_interval)
             y = self._get_y_from_val(val)
-            # Ticks span end to end
-            self.canvas.create_line(0, y, width, y, fill=self.tick_color, width=self.tick_thickness)
+            # Ticks span the active drawing area
+            self.canvas.create_line(offset_x, y, offset_x + width, y, fill=self.tick_color, width=self.tick_thickness)
             if i % 2 == 0:
-                self.canvas.create_text(width - 5, y - 5, text=f"{int(val)}", fill=self.tick_color, anchor="e", font=("Arial", 8))
+                # Numbers on both left and right
+                self.canvas.create_text(offset_x + 5, y - 5, text=f"{int(val)}", fill=self.tick_color, anchor="w", font=("Arial", 8))
+                self.canvas.create_text(offset_x + width - 5, y - 5, text=f"{int(val)}", fill=self.tick_color, anchor="e", font=("Arial", 8))
 
-    def _draw_channel_lines(self, width, height):
+    def _draw_channel_lines(self, width, height, offset_x=0):
         strip_w = width / self.num_channels
-        for i in range(1, self.num_channels):
-            x = i * strip_w
-            self.canvas.create_line(x, 20, x, height - 20, fill="#333333", width=1, dash=(2, 4))
+        for i in range(self.num_channels):
+            # Center line for each channel track
+            x = offset_x + (i * strip_w) + (strip_w / 2)
+            self.canvas.create_line(x, 20, x, height - 20, fill=self.track_col, width=4, capstyle=tk.ROUND)
+            
+            # Subtle boundary line between channels
+            if i > 0:
+                bx = offset_x + (i * strip_w)
+                self.canvas.create_line(bx, 20, bx, height - 20, fill="#333333", width=1, dash=(2, 4))
 
-    def _draw_channel_values(self, width):
-        # Draw a small marker on the track for each child's current value
+    def _draw_channel_values(self, width, offset_x=0):
+        # Draw a small marker on each channel track for its current value
         strip_w = width / self.num_channels
         for i in range(self.num_channels):
             c_val = self.child_values[i].get()
             y = self._get_y_from_val(c_val)
             norm_c = (c_val - self.min_val) / (self.max_val - self.min_val) if (self.max_val - self.min_val) else 0
             
-            # Determine horizontal position based on channel index
-            # Center of the channel strip
-            cx = (i * strip_w) + (strip_w / 2)
+            cx = offset_x + (i * strip_w) + (strip_w / 2)
             
-            # Draw marker
+            # Draw marker line
             marker_w = strip_w * 0.6
             color = self._get_color(norm_c)
             self.canvas.create_line(cx - marker_w/2, y, cx + marker_w/2, y, fill=color, width=3)
@@ -289,30 +308,30 @@ class CompositeFaderFrame(tk.Frame):
 
     def _draw(self):
         self.canvas.delete("all")
-        w, h = self.width, self.height
-        cx = w / 2
         
-        # 1. Background / Track
-        self.canvas.create_line(cx, 20, cx, h-20, fill=self.track_col, width=4, capstyle=tk.ROUND)
+        # Calculate active drawing area
+        draw_w = self.req_width
+        offset_x = (self.width - draw_w) / 2 if self.width > draw_w else 0
+        h = self.height
         
-        # 2. Draw Channel Lines (Guide)
-        self._draw_channel_lines(w, h)
+        # 1. Background / Tracks (Draw one solid line per channel)
+        self._draw_channel_lines(draw_w, h, offset_x)
         
-        # 3. Draw Channel Value Markers (Relative Position Indicators)
-        self._draw_channel_values(w)
+        # 2. Draw Channel Value Markers
+        self._draw_channel_values(draw_w, offset_x)
         
-        # 4. Ticks (End to End)
-        self._draw_ticks(w, h)
+        # 3. Ticks (End to End with numbers on both sides)
+        self._draw_ticks(draw_w, h, offset_x)
         
         m_val = self.master_value.get()
         cap_y = self._get_y_from_val(m_val)
-        cap_h, cap_w = 60, w - 10 
+        cap_h, cap_w = 60, draw_w - 10 
         
-        # 5. Draw Cap
-        self._draw_rounded_rectangle(cx - cap_w/2, cap_y - cap_h/2, cx + cap_w/2, cap_y + cap_h/2, radius=8, fill="#333333", outline=self.handle_col, width=2)
+        # 4. Draw Cap
+        self._draw_rounded_rectangle(offset_x + draw_w/2 - cap_w/2, cap_y - cap_h/2, offset_x + draw_w/2 + cap_w/2, cap_y + cap_h/2, radius=8, fill="#333333", outline=self.handle_col, width=2)
         
         screen_margin = 4
-        sx1, sx2 = cx - cap_w/2 + screen_margin, cx + cap_w/2 - screen_margin
+        sx1, sx2 = offset_x + draw_w/2 - cap_w/2 + screen_margin, offset_x + draw_w/2 + cap_w/2 - screen_margin
         sy1, sy2 = cap_y - cap_h/2 + screen_margin, cap_y + cap_h/2 - screen_margin
         self.canvas.create_rectangle(sx1, sy1, sx2, sy2, fill="black", outline="")
         

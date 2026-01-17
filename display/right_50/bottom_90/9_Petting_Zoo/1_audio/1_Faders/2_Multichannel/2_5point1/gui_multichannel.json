@@ -1,5 +1,5 @@
 {
-  "Composite_Fader_Demo": {
+  "5 point One": {
     "type": "OcaBlock",
     "description": "Composite Smart-Fader Demos",
 
@@ -11,7 +11,7 @@
         "value_min": -60.0, 
         "value_max": 6.0, 
         "num_channels": 5,
-        "layout": {"width": 50, "height": 400},
+        "layout": {"width": 150, "height": 400},
         "channels": [
             {"default": -12.0, "label": "lSUR"},
             {"default": -5.0, "label": "LEFT"},

@@ -1,7 +1,7 @@
 {
   "Radar_Eye_Zoo": {
     "type": "OcaBlock",
-    "description": "Radar Eye Visualization Demo - 9 Mixed",
+    "description": "Radar Eye Visualization Demo - 9 Mixed Auto-MQTT",
     "layout_columns": 3,
     "fields": {
       "radar_eye_1": {
@@ -14,7 +14,7 @@
             100
           ],
           "background_color": "transparent",
-          "refresh_rate_ms": 20,
+          "refresh_rate_ms": 100,
           "mode": "data_driven"
         },
         "data_parameters": {
@@ -33,7 +33,7 @@
         },
         "grid_system": {
           "show_grid": true,
-          "grid_color": "#d6871a",
+          "grid_color": "#86c0db",
           "ring_interval": 20,
           "spoke_interval": 30,
           "labels": {
@@ -46,15 +46,10 @@
           "mid_point": 50,
           "upper_point": 80,
           "colors": {
-            "safe": "#dc3688",
-            "warning": "#68a298",
-            "critical": "#f17d50"
+            "safe": "#0c75ec",
+            "warning": "#2f6988",
+            "critical": "#455594"
           }
-        },
-        "connectivity": {
-          "mqtt_enabled": true,
-          "mqtt_topic": "sensor/radar_eye/01",
-          "log_to_file": true
         }
       },
       "radar_eye_2": {
@@ -67,7 +62,7 @@
             100
           ],
           "background_color": "transparent",
-          "refresh_rate_ms": 50,
+          "refresh_rate_ms": 100,
           "mode": "sweep"
         },
         "data_parameters": {
@@ -86,7 +81,7 @@
         },
         "grid_system": {
           "show_grid": true,
-          "grid_color": "#da0b9c",
+          "grid_color": "#6d92df",
           "ring_interval": 20,
           "spoke_interval": 30,
           "labels": {
@@ -99,15 +94,10 @@
           "mid_point": 50,
           "upper_point": 80,
           "colors": {
-            "safe": "#cb92f2",
-            "warning": "#fc63c6",
-            "critical": "#7bc4fd"
+            "safe": "#0a60ef",
+            "warning": "#83520f",
+            "critical": "#8cc716"
           }
-        },
-        "connectivity": {
-          "mqtt_enabled": true,
-          "mqtt_topic": "sensor/radar_eye/02",
-          "log_to_file": true
         }
       },
       "radar_eye_3": {
@@ -120,7 +110,7 @@
             100
           ],
           "background_color": "transparent",
-          "refresh_rate_ms": 1000,
+          "refresh_rate_ms": 800,
           "mode": "data_driven"
         },
         "data_parameters": {
@@ -139,7 +129,7 @@
         },
         "grid_system": {
           "show_grid": true,
-          "grid_color": "#96e5c1",
+          "grid_color": "#df879a",
           "ring_interval": 20,
           "spoke_interval": 30,
           "labels": {
@@ -152,15 +142,10 @@
           "mid_point": 50,
           "upper_point": 80,
           "colors": {
-            "safe": "#9976bf",
-            "warning": "#97fe5f",
-            "critical": "#d11806"
+            "safe": "#8d51b7",
+            "warning": "#1bd363",
+            "critical": "#9e1668"
           }
-        },
-        "connectivity": {
-          "mqtt_enabled": true,
-          "mqtt_topic": "sensor/radar_eye/03",
-          "log_to_file": true
         }
       },
       "radar_eye_4": {
@@ -173,7 +158,7 @@
             100
           ],
           "background_color": "transparent",
-          "refresh_rate_ms": 100,
+          "refresh_rate_ms": 20,
           "mode": "sweep"
         },
         "data_parameters": {
@@ -192,7 +177,7 @@
         },
         "grid_system": {
           "show_grid": true,
-          "grid_color": "#3165fa",
+          "grid_color": "#23bde4",
           "ring_interval": 20,
           "spoke_interval": 30,
           "labels": {
@@ -205,15 +190,10 @@
           "mid_point": 50,
           "upper_point": 80,
           "colors": {
-            "safe": "#60544e",
-            "warning": "#f5bb1c",
-            "critical": "#916de5"
+            "safe": "#54fd0d",
+            "warning": "#5fa629",
+            "critical": "#5aaf1c"
           }
-        },
-        "connectivity": {
-          "mqtt_enabled": true,
-          "mqtt_topic": "sensor/radar_eye/04",
-          "log_to_file": true
         }
       },
       "radar_eye_5": {
@@ -226,7 +206,7 @@
             100
           ],
           "background_color": "transparent",
-          "refresh_rate_ms": 100,
+          "refresh_rate_ms": 50,
           "mode": "data_driven"
         },
         "data_parameters": {
@@ -245,7 +225,7 @@
         },
         "grid_system": {
           "show_grid": true,
-          "grid_color": "#3fb3bd",
+          "grid_color": "#465aa2",
           "ring_interval": 20,
           "spoke_interval": 30,
           "labels": {
@@ -258,15 +238,10 @@
           "mid_point": 50,
           "upper_point": 80,
           "colors": {
-            "safe": "#8e79ed",
-            "warning": "#68bc7c",
-            "critical": "#c5f5d7"
+            "safe": "#298eec",
+            "warning": "#50ec1d",
+            "critical": "#785bd4"
           }
-        },
-        "connectivity": {
-          "mqtt_enabled": true,
-          "mqtt_topic": "sensor/radar_eye/05",
-          "log_to_file": true
         }
       },
       "radar_eye_6": {
@@ -279,7 +254,7 @@
             100
           ],
           "background_color": "transparent",
-          "refresh_rate_ms": 800,
+          "refresh_rate_ms": 500,
           "mode": "sweep"
         },
         "data_parameters": {
@@ -298,7 +273,7 @@
         },
         "grid_system": {
           "show_grid": true,
-          "grid_color": "#3cb4ee",
+          "grid_color": "#97837c",
           "ring_interval": 20,
           "spoke_interval": 30,
           "labels": {
@@ -311,15 +286,10 @@
           "mid_point": 50,
           "upper_point": 80,
           "colors": {
-            "safe": "#a26856",
-            "warning": "#7bc532",
-            "critical": "#e1da60"
+            "safe": "#44ccd7",
+            "warning": "#01b923",
+            "critical": "#53904f"
           }
-        },
-        "connectivity": {
-          "mqtt_enabled": true,
-          "mqtt_topic": "sensor/radar_eye/06",
-          "log_to_file": true
         }
       },
       "radar_eye_7": {
@@ -351,7 +321,7 @@
         },
         "grid_system": {
           "show_grid": true,
-          "grid_color": "#6c02a2",
+          "grid_color": "#b8fb0b",
           "ring_interval": 20,
           "spoke_interval": 30,
           "labels": {
@@ -364,15 +334,10 @@
           "mid_point": 50,
           "upper_point": 80,
           "colors": {
-            "safe": "#ae7894",
-            "warning": "#8fabf1",
-            "critical": "#aea8a9"
+            "safe": "#500b36",
+            "warning": "#a2c5f3",
+            "critical": "#0a4a28"
           }
-        },
-        "connectivity": {
-          "mqtt_enabled": true,
-          "mqtt_topic": "sensor/radar_eye/07",
-          "log_to_file": true
         }
       },
       "radar_eye_8": {
@@ -385,7 +350,7 @@
             100
           ],
           "background_color": "transparent",
-          "refresh_rate_ms": 100,
+          "refresh_rate_ms": 20,
           "mode": "sweep"
         },
         "data_parameters": {
@@ -404,7 +369,7 @@
         },
         "grid_system": {
           "show_grid": true,
-          "grid_color": "#9fbb9e",
+          "grid_color": "#e37cdb",
           "ring_interval": 20,
           "spoke_interval": 30,
           "labels": {
@@ -417,15 +382,10 @@
           "mid_point": 50,
           "upper_point": 80,
           "colors": {
-            "safe": "#2d51bd",
-            "warning": "#72ce29",
-            "critical": "#8bbcb1"
+            "safe": "#497d1c",
+            "warning": "#71ce71",
+            "critical": "#bc30c5"
           }
-        },
-        "connectivity": {
-          "mqtt_enabled": true,
-          "mqtt_topic": "sensor/radar_eye/08",
-          "log_to_file": true
         }
       },
       "radar_eye_9": {
@@ -438,7 +398,7 @@
             100
           ],
           "background_color": "transparent",
-          "refresh_rate_ms": 500,
+          "refresh_rate_ms": 800,
           "mode": "data_driven"
         },
         "data_parameters": {
@@ -457,7 +417,7 @@
         },
         "grid_system": {
           "show_grid": true,
-          "grid_color": "#180a98",
+          "grid_color": "#085e1f",
           "ring_interval": 20,
           "spoke_interval": 30,
           "labels": {
@@ -470,15 +430,10 @@
           "mid_point": 50,
           "upper_point": 80,
           "colors": {
-            "safe": "#f43be6",
-            "warning": "#92b265",
-            "critical": "#1fcd7e"
+            "safe": "#8bfeff",
+            "warning": "#a7c771",
+            "critical": "#cfecda"
           }
-        },
-        "connectivity": {
-          "mqtt_enabled": true,
-          "mqtt_topic": "sensor/radar_eye/09",
-          "log_to_file": true
         }
       }
     }

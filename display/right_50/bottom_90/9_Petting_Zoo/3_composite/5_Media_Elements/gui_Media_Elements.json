@@ -19,7 +19,7 @@
         "fields": {
             "fader_standard": { "type": "_Fader", "label_active": "Standard Fader", "value_default": 50, "layout": {"height": 200, "width": 60} },
             "needle": { "type": "_NeedleVUMeter", "label_active": "Analog VU", "value_default": -5, "min": -20, "max": 3, "size": 200 },
-            "vu_meter": { "type": "_VUMeter", "label_active": "Digital VU", "value_default": -10, "min": -40, "max": 0, "layout": {"width": 60, "height": 200} },
+            "vu_meter": { "type": "_BarGraph", "label_active": "Digital VU", "value_default": -10, "min": -40, "max": 0, "layout": {"width": 60, "height": 200} },
             "knob_example": { "type": "_Knob", "label_active": "Knob Control", "value_default": 0.5, "min": 0.0, "max": 1.0, "resolution": 0.01, "size": 100 },
             "knob_blue": { "type": "_Knob", "label_active": "Blue Knob", "indicator_color": "#0000FF", "value_default": 25, "min": 0, "max": 100, "size": 50 },
             "knob_green": { "type": "_Knob", "label_active": "Green Knob", "indicator_color": "#00FF00", "value_default": 50, "min": 0, "max": 100, "size": 50 },

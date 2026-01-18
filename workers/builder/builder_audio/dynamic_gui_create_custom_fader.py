@@ -221,7 +221,7 @@ class CustomFaderCreatorMixin:
             )
             value_label.pack(side=tk.BOTTOM)
 
-            visual_props = {"secondary": secondary_color}
+            visual_props = {"secondary": frame.fader_track_color}
             hover_color = "#999999"
 
             def on_fader_value_change(*args):
@@ -283,7 +283,7 @@ class CustomFaderCreatorMixin:
                 canvas.unbind_all("<MouseWheel>")
                 canvas.unbind_all("<Button-4>")
                 canvas.unbind_all("<Button-5>")
-                visual_props["secondary"] = secondary_color
+                visual_props["secondary"] = frame.fader_track_color
                 on_fader_value_change()
 
             canvas.bind("<Enter>", _bind_mousewheel)
@@ -329,8 +329,9 @@ class CustomFaderCreatorMixin:
     def _draw_fader(self, frame_instance, canvas, width, height, value, track_color=None):
         canvas.delete("all")
         cx = width / 2
-        # Use customized track color
-        t_col = frame_instance.fader_track_color if frame_instance.fader_track_color else (track_color if track_color else frame_instance.track_col)
+        # If track_color is passed (which includes hover state), use it.
+        # Otherwise fallback to the custom track color or default track color.
+        t_col = track_color if track_color else (frame_instance.fader_track_color if frame_instance.fader_track_color else frame_instance.track_col)
         
         canvas.create_line(cx, 20, cx, height - 20, fill=t_col, width=4, capstyle=tk.ROUND)
         

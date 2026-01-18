@@ -81,7 +81,7 @@ from .builder_images.dynamic_gui_create_image_display import ImageDisplayCreator
 from .builder_images.dynamic_gui_create_animation_display import (
     AnimationDisplayCreatorMixin,
 )
-from .builder_audio.dynamic_gui_create_vu_meter import VUMeterCreatorMixin
+from .builder_audio.dynamic_gui_create_bar_graph import BarGraphCreatorMixin
 from .builder_input.dynamic_gui_create_fader import FaderCreatorMixin
 from .builder_input.dynamic_gui_create_inc_dec_buttons import IncDecButtonsCreatorMixin
 from .builder_input.dynamic_gui_create_directional_buttons import (
@@ -145,7 +145,7 @@ class DynamicGuiBuilder(
     WebLinkCreatorMixin,
     ImageDisplayCreatorMixin,
     AnimationDisplayCreatorMixin,
-    VUMeterCreatorMixin,
+    BarGraphCreatorMixin,
     FaderCreatorMixin,
     IncDecButtonsCreatorMixin,
     DirectionalButtonsCreatorMixin,

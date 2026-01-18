@@ -1,0 +1,113 @@
+{
+  "Wide_Range_tribar_demo": {
+    "type": "OcaBlock",
+    "description": "Comprehensive Bar Graph Visual & Ballistic Demos",
+    "layout_columns": 1,
+    "fields": {
+      "demo_01_standard_bottom": {
+        "type": "_BarGraph", "Peak_display": true, "Peak_display_Fall_time": 1000,
+        "bg": "black",
+        "label_active": "01: Black BG + Scale Bottom",
+        "min": -40.0, "max": 10.0, "value_default": -15.0, "upper_range": 0.0, "middle_range": -10.0,
+        "width": 420, "height": 30,
+        "show_ticks": true, "sub_ticks": 3, "scale_position": "bottom", "tick_color": "#AAAAAA",
+        "show_peak_hold": true, "peak_hold_time": 2000,
+        "glide_time": 300, "dwell_time": 0, "hold_time": 0, "fall_time": 300,
+        "notes": "Classic layout with explicit black background."
+      },
+      "demo_02_scale_top": {
+        "type": "_BarGraph", "Peak_display": true, "Peak_display_Fall_time": 800,
+        "bg": "#111111",
+        "label_active": "02: Deep Grey BG + Scale Top",
+        "min": -40.0, "max": 10.0, "value_default": -15.0, "upper_range": 0.0, "middle_range": -10.0,
+        "width": 420, "height": 30,
+        "show_ticks": true, "sub_ticks": 5, "scale_position": "top", "tick_color": "#00FF00",
+        "show_peak_hold": true, "peak_hold_time": 1000,
+        "glide_time": 50, "dwell_time": 0, "hold_time": 0, "fall_time": 50,
+        "notes": "Scale positioned above with custom dark background."
+      },
+      "demo_03_no_ticks_bottom_text": {
+        "type": "_BarGraph", "Peak_display": true, "Peak_display_Fall_time": 2000,
+        "label_active": "03: Theme BG + Bottom Text",
+        "min": -60.0, "max": 6.0, "value_default": -20.0, "upper_range": 0.0, "middle_range": -18.0,
+        "width": 420, "height": 25,
+        "show_ticks": false, "scale_position": "bottom", "tick_color": "#888888",
+        "show_peak_hold": false,
+        "glide_time": 1000, "dwell_time": 0, "hold_time": 0, "fall_time": 1000,
+        "notes": "Uses the default theme background color."
+      },
+      "demo_04_ticks_no_text": {
+        "type": "_BarGraph", "Peak_display": true, "Peak_display_Fall_time": 2800,
+        "label_active": "04: Theme BG + Ticks Only",
+        "min": -40.0, "max": 10.0, "value_default": -5.0, "upper_range": 0.0, "middle_range": -10.0,
+        "width": 420, "height": 40,
+        "show_ticks": true, "sub_ticks": 1, "scale_position": "none", "tick_color": "#FFFFFF",
+        "show_peak_hold": true, "peak_hold_time": 3000,
+        "glide_time": 10, "dwell_time": 0, "hold_time": 0, "fall_time": 2800,
+        "notes": "Tick marks are visible but numeric scale is hidden."
+      },
+      "demo_05_no_label_above": {
+        "type": "_BarGraph", "Peak_display": true, "Peak_display_Fall_time": 500,
+        "show_label": false,
+        "label_active": "HIDDEN LABEL",
+        "min": -40.0, "max": 10.0, "value_default": -15.0, "upper_range": 0.0, "middle_range": -10.0,
+        "width": 420, "height": 35,
+        "show_ticks": true, "scale_position": "bottom", "tick_color": "#FFCC00",
+        "show_peak_hold": true, "peak_hold_time": 500,
+        "glide_time": 100, "dwell_time": 0, "hold_time": 0, "fall_time": 300,
+        "notes": "Main label disabled to save vertical space."
+      },
+      "demo_06_rect_peak_top": {
+        "type": "_BarGraph", "Peak_display": true, "Peak_display_Fall_time": 5000,
+        "Peak_display_line_style": "rect", "Peak_display_colour": "cyan",
+        "label_active": "06: Rect Peak + Top Scale",
+        "min": -40.0, "max": 10.0, "value_default": -10.0, "upper_range": 0.0, "middle_range": -10.0,
+        "width": 420, "height": 30,
+        "show_ticks": true, "scale_position": "top", "tick_color": "#CCCCCC",
+        "show_peak_hold": true, "peak_hold_time": 5000,
+        "glide_time": 150, "dwell_time": 0, "hold_time": 0, "fall_time": 500,
+        "notes": "Uses a rectangle instead of a line for the secondary peak."
+      },
+      "demo_07_minimalist_none": {
+        "type": "_BarGraph", "Peak_display": false,
+        "label_active": "07: Minimalist (No Ticks/Scale/Peak)",
+        "min": -30.0, "max": 0.0, "value_default": -10.0, "upper_range": -3.0, "middle_range": -12.0,
+        "width": 420, "height": 20,
+        "show_ticks": false, "scale_position": "none",
+        "show_peak_hold": false,
+        "glide_time": 200, "dwell_time": 0, "hold_time": 0, "fall_time": 500,
+        "notes": "Pure bar visualization."
+      },
+      "demo_08_inverted_colors": {
+        "type": "_BarGraph", "Peak_display": true, "Peak_display_Fall_time": 1200,
+        "label_active": "08: High Contrast Blue Ticks (Bottom)",
+        "min": -100.0, "max": 0.0, "value_default": -40.0, "upper_range": -6.0, "middle_range": -20.0,
+        "width": 420, "height": 30,
+        "show_ticks": true, "sub_ticks": 9, "scale_position": "bottom", "tick_color": "#0000FF",
+        "show_peak_hold": true,
+        "glide_time": 300, "dwell_time": 0, "hold_time": 0, "fall_time": 300,
+        "notes": "Demonstrating wide range and custom tick colors."
+      },
+      "demo_09_thick_bar_top": {
+        "type": "_BarGraph", "Peak_display": true, "Peak_display_Fall_time": 1000,
+        "label_active": "09: Thick Bar + Top Scale",
+        "min": -40.0, "max": 10.0, "value_default": -15.0, "upper_range": 0.0, "middle_range": -10.0,
+        "width": 420, "height": 60,
+        "show_ticks": true, "scale_position": "top", "tick_color": "#FFFFFF",
+        "show_peak_hold": true,
+        "glide_time": 200, "dwell_time": 0, "hold_time": 0, "fall_time": 500,
+        "notes": "Large vertical height demonstration."
+      },
+      "demo_10_ultra_fast_bottom": {
+        "type": "_BarGraph", "Peak_display": true, "Peak_display_Fall_time": 150,
+        "label_active": "10: Transient Monitor (Scale Bottom)",
+        "min": -40.0, "max": 10.0, "value_default": -15.0, "upper_range": 0.0, "middle_range": -10.0,
+        "width": 420, "height": 30,
+        "show_ticks": true, "sub_ticks": 2, "scale_position": "bottom", "tick_color": "#FF00FF",
+        "show_peak_hold": true, "peak_hold_time": 100,
+        "glide_time": 2, "dwell_time": 0, "hold_time": 0, "fall_time": 50,
+        "notes": "Maximum responsiveness layout."
+      }
+    }
+  }
+}

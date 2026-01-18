@@ -263,7 +263,7 @@ class StateMirrorEngine:
                         "_CustomFader",
                         "_sliderValue",
                         "_Knob",
-                        "_VUMeter",
+                        "_BarGraph",
                         "_NeedleVUMeter",
                         "_Panner",
                     ]:
@@ -492,7 +492,7 @@ class StateMirrorEngine:
                         "_CustomFader",
                         "_sliderValue",
                         "_Knob",
-                        "_VUMeter",
+                        "_BarGraph",
                         "_NeedleVUMeter",
                         "_Panner",
                     ]:

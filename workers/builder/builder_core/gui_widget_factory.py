@@ -47,7 +47,7 @@ class GuiWidgetFactoryMixin:
             "_WebLink": self._create_web_link,
             "_ImageDisplay": self._create_image_display,
             "_AnimationDisplay": self._create_animation_display,
-            "_VUMeter": self._create_vu_meter,
+            "_BarGraph": self._create_bar_graph,
             "_Fader": self._create_fader,
             "_Knob": self._create_knob,
 #             "_Dial": self._create_dial,
@@ -64,6 +64,7 @@ class GuiWidgetFactoryMixin:
             "_HeaderStatusLight": self._create_header_status_light,
             "_WinkButton": self._create_wink_button,
             "_VUMeterKnob": self._create_vu_meter_knob,
+            "_BarGraphKnob": self._create_vu_meter_knob,
             "_Radar": self._create_radar,
             "_CompositeFader": self._create_composite_fader,
             # Complex Adapters (Methods inherited from Adapter Mixins)

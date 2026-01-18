@@ -1,15 +1,18 @@
 {
   "Radar_Eye_Zoo_4": {
     "type": "OcaBlock",
-    "description": "Radar Eye Sample 4 - Minimalist",
-    "layout_columns": 1,
+    "description": "Radar Eye Sample 4 - 12 Mini Radars",
+    "layout_columns": 4,
     "fields": {
-      "radar_eye_4": {
+      "radar_01": {
         "type": "_Radar",
-        "label_active": "Minimalist Radar",
+        "label_active": "Radar 01",
         "app_settings": {
-          "title": "Minimal v4.0",
-          "window_size": [400, 400],
+          "title": "Mini",
+          "window_size": [
+            100,
+            100
+          ],
           "background_color": "transparent",
           "refresh_rate_ms": 60,
           "mode": "sweep"
@@ -24,9 +27,9 @@
         },
         "visuals": {
           "plot_style": "area",
-          "center_x": 200,
-          "center_y": 200,
-          "radius": 150
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
         },
         "grid_system": {
           "show_grid": true,
@@ -34,9 +37,592 @@
           "ring_interval": 5,
           "spoke_interval": 90,
           "labels": {
-            "show_values": true,
+            "show_values": false,
             "show_time_scale": false,
-            "font": "Verdana 8"
+            "font": "Verdana 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 5,
+          "upper_point": 8,
+          "colors": {
+            "safe": "#FFFFFF",
+            "warning": "#AAAAAA",
+            "critical": "#555555"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": false,
+          "mqtt_topic": "",
+          "log_to_file": false
+        }
+      },
+      "radar_02": {
+        "type": "_Radar",
+        "label_active": "Radar 02",
+        "app_settings": {
+          "title": "Mini",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 60,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 10,
+          "points_per_revolution": 60,
+          "history_buffer_size": 60,
+          "clockwise": true,
+          "start_angle": 270
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#CCCCCC",
+          "ring_interval": 5,
+          "spoke_interval": 90,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": false,
+            "font": "Verdana 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 5,
+          "upper_point": 8,
+          "colors": {
+            "safe": "#FFFFFF",
+            "warning": "#AAAAAA",
+            "critical": "#555555"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": false,
+          "mqtt_topic": "",
+          "log_to_file": false
+        }
+      },
+      "radar_03": {
+        "type": "_Radar",
+        "label_active": "Radar 03",
+        "app_settings": {
+          "title": "Mini",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 60,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 10,
+          "points_per_revolution": 60,
+          "history_buffer_size": 60,
+          "clockwise": true,
+          "start_angle": 270
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#CCCCCC",
+          "ring_interval": 5,
+          "spoke_interval": 90,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": false,
+            "font": "Verdana 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 5,
+          "upper_point": 8,
+          "colors": {
+            "safe": "#FFFFFF",
+            "warning": "#AAAAAA",
+            "critical": "#555555"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": false,
+          "mqtt_topic": "",
+          "log_to_file": false
+        }
+      },
+      "radar_04": {
+        "type": "_Radar",
+        "label_active": "Radar 04",
+        "app_settings": {
+          "title": "Mini",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 60,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 10,
+          "points_per_revolution": 60,
+          "history_buffer_size": 60,
+          "clockwise": true,
+          "start_angle": 270
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#CCCCCC",
+          "ring_interval": 5,
+          "spoke_interval": 90,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": false,
+            "font": "Verdana 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 5,
+          "upper_point": 8,
+          "colors": {
+            "safe": "#FFFFFF",
+            "warning": "#AAAAAA",
+            "critical": "#555555"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": false,
+          "mqtt_topic": "",
+          "log_to_file": false
+        }
+      },
+      "radar_05": {
+        "type": "_Radar",
+        "label_active": "Radar 05",
+        "app_settings": {
+          "title": "Mini",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 60,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 10,
+          "points_per_revolution": 60,
+          "history_buffer_size": 60,
+          "clockwise": true,
+          "start_angle": 270
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#CCCCCC",
+          "ring_interval": 5,
+          "spoke_interval": 90,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": false,
+            "font": "Verdana 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 5,
+          "upper_point": 8,
+          "colors": {
+            "safe": "#FFFFFF",
+            "warning": "#AAAAAA",
+            "critical": "#555555"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": false,
+          "mqtt_topic": "",
+          "log_to_file": false
+        }
+      },
+      "radar_06": {
+        "type": "_Radar",
+        "label_active": "Radar 06",
+        "app_settings": {
+          "title": "Mini",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 60,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 10,
+          "points_per_revolution": 60,
+          "history_buffer_size": 60,
+          "clockwise": true,
+          "start_angle": 270
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#CCCCCC",
+          "ring_interval": 5,
+          "spoke_interval": 90,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": false,
+            "font": "Verdana 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 5,
+          "upper_point": 8,
+          "colors": {
+            "safe": "#FFFFFF",
+            "warning": "#AAAAAA",
+            "critical": "#555555"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": false,
+          "mqtt_topic": "",
+          "log_to_file": false
+        }
+      },
+      "radar_07": {
+        "type": "_Radar",
+        "label_active": "Radar 07",
+        "app_settings": {
+          "title": "Mini",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 60,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 10,
+          "points_per_revolution": 60,
+          "history_buffer_size": 60,
+          "clockwise": true,
+          "start_angle": 270
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#CCCCCC",
+          "ring_interval": 5,
+          "spoke_interval": 90,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": false,
+            "font": "Verdana 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 5,
+          "upper_point": 8,
+          "colors": {
+            "safe": "#FFFFFF",
+            "warning": "#AAAAAA",
+            "critical": "#555555"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": false,
+          "mqtt_topic": "",
+          "log_to_file": false
+        }
+      },
+      "radar_08": {
+        "type": "_Radar",
+        "label_active": "Radar 08",
+        "app_settings": {
+          "title": "Mini",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 60,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 10,
+          "points_per_revolution": 60,
+          "history_buffer_size": 60,
+          "clockwise": true,
+          "start_angle": 270
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#CCCCCC",
+          "ring_interval": 5,
+          "spoke_interval": 90,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": false,
+            "font": "Verdana 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 5,
+          "upper_point": 8,
+          "colors": {
+            "safe": "#FFFFFF",
+            "warning": "#AAAAAA",
+            "critical": "#555555"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": false,
+          "mqtt_topic": "",
+          "log_to_file": false
+        }
+      },
+      "radar_09": {
+        "type": "_Radar",
+        "label_active": "Radar 09",
+        "app_settings": {
+          "title": "Mini",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 60,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 10,
+          "points_per_revolution": 60,
+          "history_buffer_size": 60,
+          "clockwise": true,
+          "start_angle": 270
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#CCCCCC",
+          "ring_interval": 5,
+          "spoke_interval": 90,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": false,
+            "font": "Verdana 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 5,
+          "upper_point": 8,
+          "colors": {
+            "safe": "#FFFFFF",
+            "warning": "#AAAAAA",
+            "critical": "#555555"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": false,
+          "mqtt_topic": "",
+          "log_to_file": false
+        }
+      },
+      "radar_10": {
+        "type": "_Radar",
+        "label_active": "Radar 10",
+        "app_settings": {
+          "title": "Mini",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 60,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 10,
+          "points_per_revolution": 60,
+          "history_buffer_size": 60,
+          "clockwise": true,
+          "start_angle": 270
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#CCCCCC",
+          "ring_interval": 5,
+          "spoke_interval": 90,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": false,
+            "font": "Verdana 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 5,
+          "upper_point": 8,
+          "colors": {
+            "safe": "#FFFFFF",
+            "warning": "#AAAAAA",
+            "critical": "#555555"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": false,
+          "mqtt_topic": "",
+          "log_to_file": false
+        }
+      },
+      "radar_11": {
+        "type": "_Radar",
+        "label_active": "Radar 11",
+        "app_settings": {
+          "title": "Mini",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 60,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 10,
+          "points_per_revolution": 60,
+          "history_buffer_size": 60,
+          "clockwise": true,
+          "start_angle": 270
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#CCCCCC",
+          "ring_interval": 5,
+          "spoke_interval": 90,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": false,
+            "font": "Verdana 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 5,
+          "upper_point": 8,
+          "colors": {
+            "safe": "#FFFFFF",
+            "warning": "#AAAAAA",
+            "critical": "#555555"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": false,
+          "mqtt_topic": "",
+          "log_to_file": false
+        }
+      },
+      "radar_12": {
+        "type": "_Radar",
+        "label_active": "Radar 12",
+        "app_settings": {
+          "title": "Mini",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 60,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 10,
+          "points_per_revolution": 60,
+          "history_buffer_size": 60,
+          "clockwise": true,
+          "start_angle": 270
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#CCCCCC",
+          "ring_interval": 5,
+          "spoke_interval": 90,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": false,
+            "font": "Verdana 6"
           }
         },
         "color_thresholds": {

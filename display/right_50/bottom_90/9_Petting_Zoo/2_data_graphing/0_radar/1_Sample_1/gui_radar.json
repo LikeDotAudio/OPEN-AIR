@@ -1,15 +1,71 @@
 {
   "Radar_Eye_Zoo": {
     "type": "OcaBlock",
-    "description": "Radar Eye Visualization Demo",
-    "layout_columns": 1,
+    "description": "Radar Eye Visualization Demo - 9 Mixed",
+    "layout_columns": 3,
     "fields": {
       "radar_eye_1": {
         "type": "_Radar",
         "label_active": "Radar Eye 01",
         "app_settings": {
           "title": "Radar Eye v1.0",
-          "window_size": [600, 600],
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 20,
+          "mode": "data_driven"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 100,
+          "points_per_revolution": 360,
+          "history_buffer_size": 360,
+          "clockwise": true,
+          "start_angle": 90
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#d6871a",
+          "ring_interval": 20,
+          "spoke_interval": 30,
+          "labels": {
+            "show_values": true,
+            "show_time_scale": true,
+            "font": "Consolas 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 50,
+          "upper_point": 80,
+          "colors": {
+            "safe": "#dc3688",
+            "warning": "#68a298",
+            "critical": "#f17d50"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": true,
+          "mqtt_topic": "sensor/radar_eye/01",
+          "log_to_file": true
+        }
+      },
+      "radar_eye_2": {
+        "type": "_Radar",
+        "label_active": "Radar Eye 02",
+        "app_settings": {
+          "title": "Radar Eye v1.0",
+          "window_size": [
+            100,
+            100
+          ],
           "background_color": "transparent",
           "refresh_rate_ms": 50,
           "mode": "sweep"
@@ -24,33 +80,404 @@
         },
         "visuals": {
           "plot_style": "area",
-          "center_x": 300,
-          "center_y": 300,
-          "radius": 250
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
         },
         "grid_system": {
           "show_grid": true,
-          "grid_color": "#444444",
+          "grid_color": "#da0b9c",
           "ring_interval": 20,
           "spoke_interval": 30,
           "labels": {
-            "show_values": true,
+            "show_values": false,
             "show_time_scale": true,
-            "font": "Consolas 10"
+            "font": "Consolas 6"
           }
         },
         "color_thresholds": {
           "mid_point": 50,
           "upper_point": 80,
           "colors": {
-            "safe": "#00ff00",
-            "warning": "#ffff00",
-            "critical": "#ff0000"
+            "safe": "#cb92f2",
+            "warning": "#fc63c6",
+            "critical": "#7bc4fd"
           }
         },
         "connectivity": {
           "mqtt_enabled": true,
-          "mqtt_topic": "sensor/radar_eye/01",
+          "mqtt_topic": "sensor/radar_eye/02",
+          "log_to_file": true
+        }
+      },
+      "radar_eye_3": {
+        "type": "_Radar",
+        "label_active": "Radar Eye 03",
+        "app_settings": {
+          "title": "Radar Eye v1.0",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 1000,
+          "mode": "data_driven"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 100,
+          "points_per_revolution": 360,
+          "history_buffer_size": 360,
+          "clockwise": true,
+          "start_angle": 90
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#96e5c1",
+          "ring_interval": 20,
+          "spoke_interval": 30,
+          "labels": {
+            "show_values": true,
+            "show_time_scale": true,
+            "font": "Consolas 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 50,
+          "upper_point": 80,
+          "colors": {
+            "safe": "#9976bf",
+            "warning": "#97fe5f",
+            "critical": "#d11806"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": true,
+          "mqtt_topic": "sensor/radar_eye/03",
+          "log_to_file": true
+        }
+      },
+      "radar_eye_4": {
+        "type": "_Radar",
+        "label_active": "Radar Eye 04",
+        "app_settings": {
+          "title": "Radar Eye v1.0",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 100,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 100,
+          "points_per_revolution": 360,
+          "history_buffer_size": 360,
+          "clockwise": true,
+          "start_angle": 90
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#3165fa",
+          "ring_interval": 20,
+          "spoke_interval": 30,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": true,
+            "font": "Consolas 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 50,
+          "upper_point": 80,
+          "colors": {
+            "safe": "#60544e",
+            "warning": "#f5bb1c",
+            "critical": "#916de5"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": true,
+          "mqtt_topic": "sensor/radar_eye/04",
+          "log_to_file": true
+        }
+      },
+      "radar_eye_5": {
+        "type": "_Radar",
+        "label_active": "Radar Eye 05",
+        "app_settings": {
+          "title": "Radar Eye v1.0",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 100,
+          "mode": "data_driven"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 100,
+          "points_per_revolution": 360,
+          "history_buffer_size": 360,
+          "clockwise": true,
+          "start_angle": 90
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#3fb3bd",
+          "ring_interval": 20,
+          "spoke_interval": 30,
+          "labels": {
+            "show_values": true,
+            "show_time_scale": true,
+            "font": "Consolas 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 50,
+          "upper_point": 80,
+          "colors": {
+            "safe": "#8e79ed",
+            "warning": "#68bc7c",
+            "critical": "#c5f5d7"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": true,
+          "mqtt_topic": "sensor/radar_eye/05",
+          "log_to_file": true
+        }
+      },
+      "radar_eye_6": {
+        "type": "_Radar",
+        "label_active": "Radar Eye 06",
+        "app_settings": {
+          "title": "Radar Eye v1.0",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 800,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 100,
+          "points_per_revolution": 360,
+          "history_buffer_size": 360,
+          "clockwise": true,
+          "start_angle": 90
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#3cb4ee",
+          "ring_interval": 20,
+          "spoke_interval": 30,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": true,
+            "font": "Consolas 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 50,
+          "upper_point": 80,
+          "colors": {
+            "safe": "#a26856",
+            "warning": "#7bc532",
+            "critical": "#e1da60"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": true,
+          "mqtt_topic": "sensor/radar_eye/06",
+          "log_to_file": true
+        }
+      },
+      "radar_eye_7": {
+        "type": "_Radar",
+        "label_active": "Radar Eye 07",
+        "app_settings": {
+          "title": "Radar Eye v1.0",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 100,
+          "mode": "data_driven"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 100,
+          "points_per_revolution": 360,
+          "history_buffer_size": 360,
+          "clockwise": true,
+          "start_angle": 90
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#6c02a2",
+          "ring_interval": 20,
+          "spoke_interval": 30,
+          "labels": {
+            "show_values": true,
+            "show_time_scale": true,
+            "font": "Consolas 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 50,
+          "upper_point": 80,
+          "colors": {
+            "safe": "#ae7894",
+            "warning": "#8fabf1",
+            "critical": "#aea8a9"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": true,
+          "mqtt_topic": "sensor/radar_eye/07",
+          "log_to_file": true
+        }
+      },
+      "radar_eye_8": {
+        "type": "_Radar",
+        "label_active": "Radar Eye 08",
+        "app_settings": {
+          "title": "Radar Eye v1.0",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 100,
+          "mode": "sweep"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 100,
+          "points_per_revolution": 360,
+          "history_buffer_size": 360,
+          "clockwise": true,
+          "start_angle": 90
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#9fbb9e",
+          "ring_interval": 20,
+          "spoke_interval": 30,
+          "labels": {
+            "show_values": false,
+            "show_time_scale": true,
+            "font": "Consolas 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 50,
+          "upper_point": 80,
+          "colors": {
+            "safe": "#2d51bd",
+            "warning": "#72ce29",
+            "critical": "#8bbcb1"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": true,
+          "mqtt_topic": "sensor/radar_eye/08",
+          "log_to_file": true
+        }
+      },
+      "radar_eye_9": {
+        "type": "_Radar",
+        "label_active": "Radar Eye 09",
+        "app_settings": {
+          "title": "Radar Eye v1.0",
+          "window_size": [
+            100,
+            100
+          ],
+          "background_color": "transparent",
+          "refresh_rate_ms": 500,
+          "mode": "data_driven"
+        },
+        "data_parameters": {
+          "min_value": 0,
+          "max_value": 100,
+          "points_per_revolution": 360,
+          "history_buffer_size": 360,
+          "clockwise": true,
+          "start_angle": 90
+        },
+        "visuals": {
+          "plot_style": "area",
+          "center_x": 50,
+          "center_y": 50,
+          "radius": 40
+        },
+        "grid_system": {
+          "show_grid": true,
+          "grid_color": "#180a98",
+          "ring_interval": 20,
+          "spoke_interval": 30,
+          "labels": {
+            "show_values": true,
+            "show_time_scale": true,
+            "font": "Consolas 6"
+          }
+        },
+        "color_thresholds": {
+          "mid_point": 50,
+          "upper_point": 80,
+          "colors": {
+            "safe": "#f43be6",
+            "warning": "#92b265",
+            "critical": "#1fcd7e"
+          }
+        },
+        "connectivity": {
+          "mqtt_enabled": true,
+          "mqtt_topic": "sensor/radar_eye/09",
           "log_to_file": true
         }
       }

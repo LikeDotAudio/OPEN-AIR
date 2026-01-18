@@ -12262,3 +12262,614 @@
 1768704905.139801 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
 1768704905.139851 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
 1768704905.139894 📨 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency', Payload='b'{"val":{"Tuning":{"type":"OcaBlock","show_label":false,"description":"A block for managing all frequency-related settings.","layout":{"sticky":"ew"},"fields":{"break_1":{"type":"OcaBreakLine"},"center_freq_MHz":{"label_active":"Center Frequency","layout":{"sticky":"ew","font":20},"type":"_Horizontal_with_dial_Value","handler":"set_center_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Center_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"500","min":"0","max":"6000","units":"MHz","step":".001"},"break_2":{"type":"OcaBreakLine"},"span_freq_MHz":{"label_active":"Frequency Span","label_inactive":"Frequency Span","type":"_Horizontal_with_dial_Value","layout":{"sticky":"ew","font":20},"handler":"set_span_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Span_Frequency","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"200","min":"0","max":"1000","units":"MHz","step":".001"},"break_3":{"type":"OcaBreakLine"},"start_freq_MHz":{"layout":{"sticky":"ew","font":20},"label_active":"Start Frequency","label_inactive":"Start Frequency","type":"_Horizontal_with_dial_Value","handler":"set_start_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Start_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"400","min":"0","max":"5999","units":"MHz","step":".001"},"break_4":{"type":"OcaBreakLine"},"stop_freq_MHz":{"layout":{"sticky":"ew","font":20},"label_active":"Stop Frequency","label_inactive":"Stop Frequency","type":"_Horizontal_with_dial_Value","handler":"set_stop_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Stop_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"600","min":"1","max":"6000","units":"MHz","step":".001"}}},"Quick Span":{"type":"OcaBlock","description":"A block for managing all frequency-related presets.","layout":{"sticky":"ew"},"show_label":false,"fields":{"break_1":{"type":"OcaBreakLine"},"Span":{"type":"_GuiButtonToggler","AES70":"OcaSwitch","label_active":"Span","handler":"set_span_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Span_Frequency","input_name":"hz_value","converter":"mhz_to_hz"},"layout":{"height":10,"max_cols":4,"width":50,"sticky":"ew","font":12},"options":{"1":{"value":"0.01","label_active":"Microscope","label_inactive":"Microscope","description":"So tight you\'ll feel like a cellular biologist examining a single-cell waveform.","units":"MHz","selected":false},"2":{"value":"0.1","label_active":"Tight","label_inactive":"Tight","description":"A narrow, focused view for getting up close and personal with signals.","units":"MHz","selected":false},"3":{"value":"1","label_active":"Normal","label_inactive":"Normal","description":"The standard span, a balanced diet for most common analysis.","units":"MHz","selected":false},"4":{"value":"10","label_active":"Wide","label_inactive":"Wide","description":"A broad, digestible view of the spectrum, great for general reconnaissance.","units":"MHz","selected":false},"5":{"value":"100","label_active":"Ultra Wide","label_inactive":"Ultra Wide","description":"A very broad span for finding signals over a large frequency range. It\'s like scanning with a wide-angle lens.","units":"MHz","selected":false},"6":{"value":"500","label_active":"From Space","label_inactive":"From Space","description":"A very broad span for finding signals over a large frequency range.","units":"MHz","selected":false},"7":{"value":"1000","label_active":"From The Moon","label_inactive":"From The Moon","description":"A very broad span for finding signals over a large frequency range. It\'s like scanning with a wide-angle lens.","units":"MHz","selected":false},"UNSELECTED":{"value":"NONE","label_active":"None Selected","label_inactive":"None Selected","description":"No span option is currently selected.","units":"","selected":true}}}}}},"src":"gui-init","ts":1768704905.1384652,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73"}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704906.692824 🔬⚡️ Entering '_create_horizontal_dial_value' to assemble a fader-dial combo for 'Center Frequency'. 🦆  Horizontal with dial Value🪿  create horizontal dial value  🧩 {'version': 'Unknown_Ver'}
+1768704906.696051 Trace added for variable PY_VAR2 🦆 widget event binder🪿 bind variable trace  🧩 {'version': '20251226.000000.1'}
+1768704906.696133 📝 Topic 'OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704906.696160 🧠 Found cached state for Tuning/center_freq_MHz/fader. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704906.696918 📝 Topic 'OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/dial' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704906.696963 🧠 Found cached state for Tuning/center_freq_MHz/dial. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704906.697175 📤 Published to OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader: b'{"val":500.0,"ts":1768704906.6970778,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","type":"_Horizontal_with_dial_Value","handler":"set_center_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Center_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"500","min":"0","max":"6000","units":"MHz","step":".001","path":"Tuning/center_freq_MHz/fader","value_min":"0","value_max":"6000","value_default":"500"}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704906.697266 🌀 Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.697359 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.697427 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.697466 ⚖️ Comparing timelines for topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.697509 🕰️ Comparing timestamps: Incoming '1768704906.6970778' vs Cached '1768669730.5515158' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.697546 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.697588 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.697640 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.697692 📤 Published to OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader: b'{"val":500.0,"ts":1768704906.6976473,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","type":"_Horizontal_with_dial_Value","handler":"set_center_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Center_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"500","min":"0","max":"6000","units":"MHz","step":".001","path":"Tuning/center_freq_MHz/fader","value_min":"0","value_max":"6000","value_default":"500"}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704906.697721 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.697762 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.698406 Trace added for variable PY_VAR0 🦆 widget event binder🪿 bind variable trace  🧩 {'version': '20251226.000000.1'}
+1768704906.698421 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmp_ayf2hxo.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.698480 📝 Topic 'OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704906.698507 🧠 Found cached state for Tuning/center_freq_MHz. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704906.698531 ✅ SUCCESS! The fader-dial combo 'Center Frequency' has materialized! 🦆  Horizontal with dial Value🪿  create horizontal dial value  🧩 {'version': 'Unknown_Ver'}
+1768704906.698607 🔬⚡️ Entering '_create_horizontal_dial_value' to assemble a fader-dial combo for 'Frequency Span'. 🦆  Horizontal with dial Value🪿  create horizontal dial value  🧩 {'version': 'Unknown_Ver'}
+1768704906.698673 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.698711 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.698754 📨 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader', Payload='b'{"val":500.0,"ts":1768704906.6970778,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","type":"_Horizontal_with_dial_Value","handler":"set_center_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Center_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"500","min":"0","max":"6000","units":"MHz","step":".001","path":"Tuning/center_freq_MHz/fader","value_min":"0","value_max":"6000","value_default":"500"}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704906.698820 📥 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader', Payload='{"val":500.0,"ts":1768704906.6970778,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","type":"_Horizontal_with_dial_Value","handler":"set_center_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Center_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"500","min":"0","max":"6000","units":"MHz","step":".001","path":"Tuning/center_freq_MHz/fader","value_min":"0","value_max":"6000","value_default":"500"}' 🦆 state mirror engine🪿 sync incoming mqtt to gui  🧩 {'version': '20251225.004500.1'}
+1768704906.698972 🌀 Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.699022 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.699099 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.699121 ⚖️ Comparing timelines for topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.699155 🕰️ Comparing timestamps: Incoming '1768704906.6976473' vs Cached '1768704906.6970778' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.699175 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.699215 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.699245 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.699266 Trace added for variable PY_VAR6 🦆 widget event binder🪿 bind variable trace  🧩 {'version': '20251226.000000.1'}
+1768704906.699294 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.699338 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.699356 📝 Topic 'OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704906.699416 🧠 Found cached state for Tuning/span_freq_MHz/fader. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704906.699941 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpum0nnz9z.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.700038 📝 Topic 'OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/dial' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704906.700074 🧠 Found cached state for Tuning/span_freq_MHz/dial. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704906.700194 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.700218 📤 Published to OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader: b'{"val":200.0,"ts":1768704906.700162,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Frequency Span","type":"_Horizontal_with_dial_Value","handler":"set_span_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Span_Frequency","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"200","min":"0","max":"1000","units":"MHz","step":".001","path":"Tuning/span_freq_MHz/fader","value_min":"0","value_max":"1000","value_default":"200"}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704906.700252 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.700295 📨 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader', Payload='b'{"val":500.0,"ts":1768704906.6976473,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","type":"_Horizontal_with_dial_Value","handler":"set_center_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Center_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"500","min":"0","max":"6000","units":"MHz","step":".001","path":"Tuning/center_freq_MHz/fader","value_min":"0","value_max":"6000","value_default":"500"}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704906.700365 📥 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/center_freq_MHz/fader', Payload='{"val":500.0,"ts":1768704906.6976473,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","type":"_Horizontal_with_dial_Value","handler":"set_center_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Center_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"500","min":"0","max":"6000","units":"MHz","step":".001","path":"Tuning/center_freq_MHz/fader","value_min":"0","value_max":"6000","value_default":"500"}' 🦆 state mirror engine🪿 sync incoming mqtt to gui  🧩 {'version': '20251225.004500.1'}
+1768704906.700495 🌀 Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.700542 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.700576 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.700601 ⚖️ Comparing timelines for topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.700654 🕰️ Comparing timestamps: Incoming '1768704906.700162' vs Cached '1768669730.5557466' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.700641 📤 Published to OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader: b'{"val":200.0,"ts":1768704906.7006118,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Frequency Span","type":"_Horizontal_with_dial_Value","handler":"set_span_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Span_Frequency","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"200","min":"0","max":"1000","units":"MHz","step":".001","path":"Tuning/span_freq_MHz/fader","value_min":"0","value_max":"1000","value_default":"200"}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704906.700681 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.700709 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.700752 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.700800 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.700854 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.701285 Trace added for variable PY_VAR4 🦆 widget event binder🪿 bind variable trace  🧩 {'version': '20251226.000000.1'}
+1768704906.701311 📝 Topic 'OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704906.701332 🧠 Found cached state for Tuning/span_freq_MHz. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704906.701352 ✅ SUCCESS! The fader-dial combo 'Frequency Span' has materialized! 🦆  Horizontal with dial Value🪿  create horizontal dial value  🧩 {'version': 'Unknown_Ver'}
+1768704906.701365 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmptnm8m718.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.701454 🔬⚡️ Entering '_create_horizontal_dial_value' to assemble a fader-dial combo for 'Start Frequency'. 🦆  Horizontal with dial Value🪿  create horizontal dial value  🧩 {'version': 'Unknown_Ver'}
+1768704906.701531 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.701557 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.701610 📨 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader', Payload='b'{"val":200.0,"ts":1768704906.700162,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Frequency Span","type":"_Horizontal_with_dial_Value","handler":"set_span_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Span_Frequency","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"200","min":"0","max":"1000","units":"MHz","step":".001","path":"Tuning/span_freq_MHz/fader","value_min":"0","value_max":"1000","value_default":"200"}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704906.701678 📥 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader', Payload='{"val":200.0,"ts":1768704906.700162,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Frequency Span","type":"_Horizontal_with_dial_Value","handler":"set_span_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Span_Frequency","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"200","min":"0","max":"1000","units":"MHz","step":".001","path":"Tuning/span_freq_MHz/fader","value_min":"0","value_max":"1000","value_default":"200"}' 🦆 state mirror engine🪿 sync incoming mqtt to gui  🧩 {'version': '20251225.004500.1'}
+1768704906.701787 🌀 Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.701829 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.701860 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.701881 ⚖️ Comparing timelines for topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.701924 🕰️ Comparing timestamps: Incoming '1768704906.7006118' vs Cached '1768704906.700162' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.701992 Trace added for variable PY_VAR10 🦆 widget event binder🪿 bind variable trace  🧩 {'version': '20251226.000000.1'}
+1768704906.701972 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.702064 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.702077 📝 Topic 'OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704906.702109 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.702132 🧠 Found cached state for Tuning/start_freq_MHz/fader. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704906.702153 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.702188 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.702679 📝 Topic 'OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/dial' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704906.702696 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmp8ug4ash9.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.702808 🧠 Found cached state for Tuning/start_freq_MHz/dial. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704906.702920 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.702961 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.702941 📤 Published to OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader: b'{"val":400.0,"ts":1768704906.7028983,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Start Frequency","type":"_Horizontal_with_dial_Value","handler":"set_start_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Start_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"400","min":"0","max":"5999","units":"MHz","step":".001","path":"Tuning/start_freq_MHz/fader","value_min":"0","value_max":"5999","value_default":"400"}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704906.703003 📨 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader', Payload='b'{"val":200.0,"ts":1768704906.7006118,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Frequency Span","type":"_Horizontal_with_dial_Value","handler":"set_span_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Span_Frequency","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"200","min":"0","max":"1000","units":"MHz","step":".001","path":"Tuning/span_freq_MHz/fader","value_min":"0","value_max":"1000","value_default":"200"}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704906.703068 📥 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/span_freq_MHz/fader', Payload='{"val":200.0,"ts":1768704906.7006118,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Frequency Span","type":"_Horizontal_with_dial_Value","handler":"set_span_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Span_Frequency","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"200","min":"0","max":"1000","units":"MHz","step":".001","path":"Tuning/span_freq_MHz/fader","value_min":"0","value_max":"1000","value_default":"200"}' 🦆 state mirror engine🪿 sync incoming mqtt to gui  🧩 {'version': '20251225.004500.1'}
+1768704906.703208 🌀 Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.703249 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.703281 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.703314 📤 Published to OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader: b'{"val":400.0,"ts":1768704906.7032876,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Start Frequency","type":"_Horizontal_with_dial_Value","handler":"set_start_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Start_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"400","min":"0","max":"5999","units":"MHz","step":".001","path":"Tuning/start_freq_MHz/fader","value_min":"0","value_max":"5999","value_default":"400"}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704906.703344 ⚖️ Comparing timelines for topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.703395 🕰️ Comparing timestamps: Incoming '1768704906.7028983' vs Cached '1768669730.5612853' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.703445 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.703521 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.703581 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.703733 Trace added for variable PY_VAR8 🦆 widget event binder🪿 bind variable trace  🧩 {'version': '20251226.000000.1'}
+1768704906.703781 📝 Topic 'OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704906.703808 🧠 Found cached state for Tuning/start_freq_MHz. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704906.703837 ✅ SUCCESS! The fader-dial combo 'Start Frequency' has materialized! 🦆  Horizontal with dial Value🪿  create horizontal dial value  🧩 {'version': 'Unknown_Ver'}
+1768704906.703925 🔬⚡️ Entering '_create_horizontal_dial_value' to assemble a fader-dial combo for 'Stop Frequency'. 🦆  Horizontal with dial Value🪿  create horizontal dial value  🧩 {'version': 'Unknown_Ver'}
+1768704906.703629 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.704047 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.704846 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpp6gzmum6.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.705239 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.705404 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.705442 📨 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader', Payload='b'{"val":400.0,"ts":1768704906.7028983,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Start Frequency","type":"_Horizontal_with_dial_Value","handler":"set_start_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Start_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"400","min":"0","max":"5999","units":"MHz","step":".001","path":"Tuning/start_freq_MHz/fader","value_min":"0","value_max":"5999","value_default":"400"}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704906.705649 📥 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader', Payload='{"val":400.0,"ts":1768704906.7028983,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Start Frequency","type":"_Horizontal_with_dial_Value","handler":"set_start_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Start_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"400","min":"0","max":"5999","units":"MHz","step":".001","path":"Tuning/start_freq_MHz/fader","value_min":"0","value_max":"5999","value_default":"400"}' 🦆 state mirror engine🪿 sync incoming mqtt to gui  🧩 {'version': '20251225.004500.1'}
+1768704906.705770 🌀 Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.705946 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.706086 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.706186 ⚖️ Comparing timelines for topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.706266 🕰️ Comparing timestamps: Incoming '1768704906.7032876' vs Cached '1768704906.7028983' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.706339 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.706405 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.706469 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.706537 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.706613 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.707489 Trace added for variable PY_VAR14 🦆 widget event binder🪿 bind variable trace  🧩 {'version': '20251226.000000.1'}
+1768704906.707548 📝 Topic 'OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704906.707577 🧠 Found cached state for Tuning/stop_freq_MHz/fader. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704906.707682 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpw__v2368.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.707834 📝 Topic 'OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/dial' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704906.707878 🧠 Found cached state for Tuning/stop_freq_MHz/dial. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704906.707947 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.708142 📤 Published to OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader: b'{"val":600.0,"ts":1768704906.708083,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Stop Frequency","type":"_Horizontal_with_dial_Value","handler":"set_stop_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Stop_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"600","min":"1","max":"6000","units":"MHz","step":".001","path":"Tuning/stop_freq_MHz/fader","value_min":"1","value_max":"6000","value_default":"600"}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704906.708207 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.708278 📨 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader', Payload='b'{"val":400.0,"ts":1768704906.7032876,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Start Frequency","type":"_Horizontal_with_dial_Value","handler":"set_start_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Start_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"400","min":"0","max":"5999","units":"MHz","step":".001","path":"Tuning/start_freq_MHz/fader","value_min":"0","value_max":"5999","value_default":"400"}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704906.708495 📤 Published to OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader: b'{"val":600.0,"ts":1768704906.708463,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Stop Frequency","type":"_Horizontal_with_dial_Value","handler":"set_stop_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Stop_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"600","min":"1","max":"6000","units":"MHz","step":".001","path":"Tuning/stop_freq_MHz/fader","value_min":"1","value_max":"6000","value_default":"600"}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704906.708427 📥 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/start_freq_MHz/fader', Payload='{"val":400.0,"ts":1768704906.7032876,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Start Frequency","type":"_Horizontal_with_dial_Value","handler":"set_start_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Start_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"400","min":"0","max":"5999","units":"MHz","step":".001","path":"Tuning/start_freq_MHz/fader","value_min":"0","value_max":"5999","value_default":"400"}' 🦆 state mirror engine🪿 sync incoming mqtt to gui  🧩 {'version': '20251225.004500.1'}
+1768704906.708768 Trace added for variable PY_VAR12 🦆 widget event binder🪿 bind variable trace  🧩 {'version': '20251226.000000.1'}
+1768704906.708798 🌀 Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.708908 📝 Topic 'OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704906.708886 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.708949 🧠 Found cached state for Tuning/stop_freq_MHz. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704906.708985 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.709048 ✅ SUCCESS! The fader-dial combo 'Stop Frequency' has materialized! 🦆  Horizontal with dial Value🪿  create horizontal dial value  🧩 {'version': 'Unknown_Ver'}
+1768704906.709084 ⚖️ Comparing timelines for topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.709151 🕰️ Comparing timestamps: Incoming '1768704906.708083' vs Cached '1768669730.5668232' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.709243 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.709264 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.709284 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.709302 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.709325 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.710038 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpca72hcue.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.710212 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.710378 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.710443 📨 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader', Payload='b'{"val":600.0,"ts":1768704906.708083,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Stop Frequency","type":"_Horizontal_with_dial_Value","handler":"set_stop_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Stop_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"600","min":"1","max":"6000","units":"MHz","step":".001","path":"Tuning/stop_freq_MHz/fader","value_min":"1","value_max":"6000","value_default":"600"}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704906.710569 📥 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader', Payload='{"val":600.0,"ts":1768704906.708083,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Stop Frequency","type":"_Horizontal_with_dial_Value","handler":"set_stop_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Stop_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"600","min":"1","max":"6000","units":"MHz","step":".001","path":"Tuning/stop_freq_MHz/fader","value_min":"1","value_max":"6000","value_default":"600"}' 🦆 state mirror engine🪿 sync incoming mqtt to gui  🧩 {'version': '20251225.004500.1'}
+1768704906.710648 🌀 Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.710752 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.710818 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.710876 ⚖️ Comparing timelines for topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.710937 🕰️ Comparing timestamps: Incoming '1768704906.708463' vs Cached '1768704906.708083' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.710962 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704906.711016 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704906.711040 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.711100 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.711164 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.711866 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpza3a1g9x.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.712218 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704906.712312 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704906.712380 📨 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader', Payload='b'{"val":600.0,"ts":1768704906.708463,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Stop Frequency","type":"_Horizontal_with_dial_Value","handler":"set_stop_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Stop_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"600","min":"1","max":"6000","units":"MHz","step":".001","path":"Tuning/stop_freq_MHz/fader","value_min":"1","value_max":"6000","value_default":"600"}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704906.712504 📥 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/Tuning/stop_freq_MHz/fader', Payload='{"val":600.0,"ts":1768704906.708463,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73","label_active":"","label_inactive":"Stop Frequency","type":"_Horizontal_with_dial_Value","handler":"set_stop_frequency","yak_handler":{"enable":true,"yak_type":"set","sub_path":"Frequency","command":"Set_Stop_Freq_MHz","input_name":"hz_value","converter":"mhz_to_hz"},"locked":false,"default_value":"600","min":"1","max":"6000","units":"MHz","step":".001","path":"Tuning/stop_freq_MHz/fader","value_min":"1","value_max":"6000","value_default":"600"}' 🦆 state mirror engine🪿 sync incoming mqtt to gui  🧩 {'version': '20251225.004500.1'}
+1768704906.796969 🔬⚡️ Entering '_create_gui_button_toggler' to assemble a bucket of buttons for 'Span'. 🦆 dynamic gui create gui button toggler🪿  create gui button toggler  🧩 {'version': 'Unknown_Ver'}
+1768704906.798559 Trace added for variable PY_VAR16 🦆 widget event binder🪿 bind variable trace  🧩 {'version': '20251226.000000.1'}
+1768704906.798636 📝 Topic 'OPEN-AIR/Spectrum/Instrument/frequency/Quick Span/Span' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704906.798676 🧠 Found cached state for Quick Span/Span. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704906.798712 ✅ SUCCESS! The button toggler 'Span' is fully operational with multi-select! 🦆 dynamic gui create gui button toggler🪿  create gui button toggler  🧩 {'version': 'Unknown_Ver'}
+1768704906.798784 ✅ Batch processing complete! All widgets built. 🦆 gui batch builder🪿  create widgets in batches  🧩 {'version': 'Unknown_Ver'}
+1768704906.804736 ✅ It works! FREQUENCY is fully operational! 🦆 gui from json🪿  construct dynamic gui  🧩 {'version': '20260111.1510.1'}
+1768704906.805804 ⚡ De-queuing update for GUI Widget 'Tuning/center_freq_MHz' to 5428.691 🦆 state mirror engine🪿  process queue  🧩 {'version': '20251225.004500.1'}
+1768704906.806383 ⚡ De-queuing update for GUI Widget 'Tuning/span_freq_MHz' to 500.0 🦆 state mirror engine🪿  process queue  🧩 {'version': '20251225.004500.1'}
+1768704906.806699 ⚡ De-queuing update for GUI Widget 'Tuning/start_freq_MHz' to 4799.2 🦆 state mirror engine🪿  process queue  🧩 {'version': '20251225.004500.1'}
+1768704906.806963 ⚡ De-queuing update for GUI Widget 'Tuning/stop_freq_MHz' to 3599.5 🦆 state mirror engine🪿  process queue  🧩 {'version': '20251225.004500.1'}
+1768704906.808365 ⚡ De-queuing update for GUI Widget 'Quick Span/Span' to 2 🦆 state mirror engine🪿  process queue  🧩 {'version': '20251225.004500.1'}
+1768704909.938846 🧪 Great Scott! Universal Loader initializing 'START_PAUSE_STOP'! Target: /home/anthony/Documents/OPEN-AIR/display/right_50/top_10/gui_start_pause_stop.json 🦆 gui from json🪿  init ui  🧩 {'version': '20260111.1510.1'}
+1768704910.644609 ✨ UniversalGuiLoader materialized successfully for /home/anthony/Documents/OPEN-AIR/display/right_50/top_10/gui_start_pause_stop.json! 🦆 module loader🪿 load and instantiate gui  🧩 {'version': '20251229.1755.1'}
+1768704910.644758 ✅ Successfully instantiated GUI from: /home/anthony/Documents/OPEN-AIR/display/right_50/top_10/gui_start_pause_stop.json 🦆 gui display🪿  build from directory  🧩 {'version': 'Unknown_Ver'}
+1768704910.645035 🏗️ _build_from_directory for path: '/home/anthony/Documents/OPEN-AIR/display/right_50/bottom_90' 🦆 gui display🪿  build from directory  🧩 {'version': 'Unknown_Ver'}
+1768704910.645077 📂 Parsing directory: '/home/anthony/Documents/OPEN-AIR/display/right_50/bottom_90' 🦆 layout parser🪿 parse directory  🧩 {'version': 'Unknown_Ver'}
+1768704910.645273 🗺️ Parsed layout for '/home/anthony/Documents/OPEN-AIR/display/right_50/bottom_90': Type='notebook', Data={'tabs': [{'name': '1_scan', 'path': PosixPath('/home/anthony/Documents/OPEN-AIR/display/right_50/bottom_90/1_scan'), 'display_name': 'Scan'}, {'name': '2_monitors', 'path': PosixPath('/home/anthony/Documents/OPEN-AIR/display/right_50/bottom_90/2_monitors'), 'display_name': 'Monitors'}, {'name': '9_Petting_Zoo', 'path': PosixPath('/home/anthony/Documents/OPEN-AIR/display/right_50/bottom_90/9_Petting_Zoo'), 'display_name': 'Petting Zoo'}, {'name': '100_Setup', 'path': PosixPath('/home/anthony/Documents/OPEN-AIR/display/right_50/bottom_90/100_Setup'), 'display_name': 'Setup'}]} 🦆 layout parser🪿 parse directory  🧩 {'version': 'Unknown_Ver'}
+1768704910.754242 ▶️ _on_tab_change detected. 🦆 gui display🪿  on tab change  🧩 {'version': 'Unknown_Ver'}
+1768704910.754371 ⚡ Lazy Loading engaged for tab: Scan 🦆 gui display🪿  on tab change  🧩 {'version': 'Unknown_Ver'}
+1768704910.754397 🏗️ _build_from_directory for path: '/home/anthony/Documents/OPEN-AIR/display/right_50/bottom_90/1_scan' 🦆 gui display🪿  build from directory  🧩 {'version': 'Unknown_Ver'}
+1768704910.754426 📂 Parsing directory: '/home/anthony/Documents/OPEN-AIR/display/right_50/bottom_90/1_scan' 🦆 layout parser🪿 parse directory  🧩 {'version': 'Unknown_Ver'}
+1768704910.754489 🗺️ Parsed layout for '/home/anthony/Documents/OPEN-AIR/display/right_50/bottom_90/1_scan': Type='recursive_build', Data={'child_containers': [], 'gui_files': [PosixPath('/home/anthony/Documents/OPEN-AIR/display/right_50/bottom_90/1_scan/gui_Scan.json')]} 🦆 layout parser🪿 parse directory  🧩 {'version': 'Unknown_Ver'}
+1768704910.754693 🧪 Great Scott! Universal Loader initializing 'SCAN'! Target: /home/anthony/Documents/OPEN-AIR/display/right_50/bottom_90/1_scan/gui_Scan.json 🦆 gui from json🪿  init ui  🧩 {'version': '20260111.1510.1'}
+1768704910.754900 ✨ UniversalGuiLoader materialized successfully for /home/anthony/Documents/OPEN-AIR/display/right_50/bottom_90/1_scan/gui_Scan.json! 🦆 module loader🪿 load and instantiate gui  🧩 {'version': '20251229.1755.1'}
+1768704910.754938 ✅ Successfully instantiated GUI from: /home/anthony/Documents/OPEN-AIR/display/right_50/bottom_90/1_scan/gui_Scan.json 🦆 gui display🪿  build from directory  🧩 {'version': 'Unknown_Ver'}
+1768704910.755614 🏗️ Constructing 'START_PAUSE_STOP' via DynamicGuiBuilder... 🦆 gui from json🪿  construct dynamic gui  🧩 {'version': '20260111.1510.1'}
+1768704910.755708 🖥️🟢 Igniting DynamicGuiBuilder for None 🦆 dynamic gui builder🪿   init    🧩 {'version': 'Unknown_Ver'}
+1768704911.450059 📝 Topic 'OPEN-AIR/GUI/Global/Header/StatusLight' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704911.450167 📝 Topic 'OPENAIR/GUI/Global/Header/StatusLight' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704911.450214 🔬⚡️ Entering '_create_gui_button_toggler' to assemble a bucket of buttons for ''. 🦆 dynamic gui create gui button toggler🪿  create gui button toggler  🧩 {'version': 'Unknown_Ver'}
+1768704911.450542 Trace added for variable PY_VAR17 🦆 widget event binder🪿 bind variable trace  🧩 {'version': '20251226.000000.1'}
+1768704911.450611 📝 Topic 'OPEN-AIR/Buttons' added to pending subscriptions. 🦆 mqtt subscriber router🪿 subscribe to topic  🧩 {'version': 'Unknown_Ver'}
+1768704911.450638 🧠 Found cached state for Buttons. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704911.450656 ✅ SUCCESS! The button toggler '' is fully operational with multi-select! 🦆 dynamic gui create gui button toggler🪿  create gui button toggler  🧩 {'version': 'Unknown_Ver'}
+1768704911.450703 ✅ Batch processing complete! All widgets built. 🦆 gui batch builder🪿  create widgets in batches  🧩 {'version': 'Unknown_Ver'}
+1768704911.456777 ✅ It works! START_PAUSE_STOP is fully operational! 🦆 gui from json🪿  construct dynamic gui  🧩 {'version': '20260111.1510.1'}
+1768704911.456953 🏗️ Constructing 'SCAN' via DynamicGuiBuilder... 🦆 gui from json🪿  construct dynamic gui  🧩 {'version': '20260111.1510.1'}
+1768704911.457038 🖥️🟢 Igniting DynamicGuiBuilder for None 🦆 dynamic gui builder🪿   init    🧩 {'version': 'Unknown_Ver'}
+1768704911.457741 📤 Published to OPEN-AIR/scan: b'{"val":{"multi_dataset_graph":{"type":"plot_widget","layout":{"height":1000},"id":"multi_dataset_plot","plot_mode":"time_domain","title":"Multiple Datasets Demo","axis":{"x":{"label":"X-Axis","scale":"linear","min":0,"max":1,"color":"white"},"y":{"label":"Y-Axis","scale":"linear","min":-1.5,"max":1.5,"color":"white"}},"style":{"background_color":"black","grid_color":"darkgrey","title_color":"white"},"datasets":[{"id":"linear_line","label":"Linear","style":{"line_color":"white","line_width":1},"initial_csv_data":"x,y\\n0,0\\n1,1"},{"id":"sine_wave_2","label":"Sine","style":{"line_color":"cyan","line_width":2},"initial_csv_data":"x,y\\n0.00,0.00\\n0.05,0.31\\n0.10,0.59\\n0.15,0.81\\n0.20,0.95\\n0.25,1.00\\n0.30,0.95\\n0.35,0.81\\n0.40,0.59\\n0.45,0.31\\n0.50,0.00\\n0.55,-0.31\\n0.60,-0.59\\n0.65,-0.81\\n0.70,-0.95\\n0.75,-1.00\\n0.80,-0.95\\n0.85,-0.81\\n0.90,-0.59\\n0.95,-0.31\\n1.00,0.00"},{"id":"cosine_wave","label":"Cosine","style":{"line_color":"magenta","line_width":2},"initial_csv_data":"x,y\\n0.00,1.00\\n0.05,0.95\\n0.10,0.81\\n0.15,0.59\\n0.20,0.31\\n0.25,0.00\\n0.30,-0.31\\n0.35,-0.59\\n0.40,-0.81\\n0.45,-0.95\\n0.50,-1.00\\n0.55,-0.95\\n0.60,-0.81\\n0.65,-0.59\\n0.70,-0.31\\n0.75,0.00\\n0.80,0.31\\n0.85,0.59\\n0.90,0.81\\n0.95,0.95\\n1.00,1.00"},{"id":"sine_2x","label":"Sine 2x","style":{"line_color":"yellow","line_width":1},"initial_csv_data":"x,y\\n0.00,0.00\\n0.05,0.59\\n0.10,0.95\\n0.15,0.95\\n0.20,0.59\\n0.25,0.00\\n0.30,-0.59\\n0.35,-0.95\\n0.40,-0.95\\n0.45,-0.59\\n0.50,0.00\\n0.55,0.59\\n0.60,0.95\\n0.65,0.95\\n0.70,0.59\\n0.75,0.00\\n0.80,-0.59\\n0.85,-0.95\\n0.90,-0.95\\n0.95,-0.59\\n1.00,0.00"},{"id":"sine_4x","label":"Sine 4x","style":{"line_color":"lime","line_width":1},"initial_csv_data":"x,y\\n0.00,0.00\\n0.05,0.95\\n0.10,0.59\\n0.15,-0.59\\n0.20,-0.95\\n0.25,0.00\\n0.30,0.95\\n0.35,0.59\\n0.40,-0.59\\n0.45,-0.95\\n0.50,0.00\\n0.55,0.95\\n0.60,0.59\\n0.65,-0.59\\n0.70,-0.95\\n0.75,0.00\\n0.80,0.95\\n0.85,0.59\\n0.90,-0.59\\n0.95,-0.95\\n1.00,0.00"}]}},"src":"gui-init","ts":1768704911.4576297,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73"}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704911.457876 📤 Published command to topic OPEN-AIR/scan 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704911.457832 🌀 Topic: OPEN-AIR/scan 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704911.457929 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/scan 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704911.458188 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704911.458220 ⚖️ Comparing timelines for topic: OPEN-AIR/scan 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704911.458247 🕰️ Comparing timestamps: Incoming '1768704911.4576297' vs Cached '1768669735.389559' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704911.458268 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704911.458289 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/scan 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704911.458309 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704911.458380 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704911.458462 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704911.459424 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpw61xicrl.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704911.459741 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704911.459834 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704911.459905 📨 MQTT Message Received: Topic='OPEN-AIR/scan', Payload='b'{"val":{"multi_dataset_graph":{"type":"plot_widget","layout":{"height":1000},"id":"multi_dataset_plot","plot_mode":"time_domain","title":"Multiple Datasets Demo","axis":{"x":{"label":"X-Axis","scale":"linear","min":0,"max":1,"color":"white"},"y":{"label":"Y-Axis","scale":"linear","min":-1.5,"max":1.5,"color":"white"}},"style":{"background_color":"black","grid_color":"darkgrey","title_color":"white"},"datasets":[{"id":"linear_line","label":"Linear","style":{"line_color":"white","line_width":1},"initial_csv_data":"x,y\\n0,0\\n1,1"},{"id":"sine_wave_2","label":"Sine","style":{"line_color":"cyan","line_width":2},"initial_csv_data":"x,y\\n0.00,0.00\\n0.05,0.31\\n0.10,0.59\\n0.15,0.81\\n0.20,0.95\\n0.25,1.00\\n0.30,0.95\\n0.35,0.81\\n0.40,0.59\\n0.45,0.31\\n0.50,0.00\\n0.55,-0.31\\n0.60,-0.59\\n0.65,-0.81\\n0.70,-0.95\\n0.75,-1.00\\n0.80,-0.95\\n0.85,-0.81\\n0.90,-0.59\\n0.95,-0.31\\n1.00,0.00"},{"id":"cosine_wave","label":"Cosine","style":{"line_color":"magenta","line_width":2},"initial_csv_data":"x,y\\n0.00,1.00\\n0.05,0.95\\n0.10,0.81\\n0.15,0.59\\n0.20,0.31\\n0.25,0.00\\n0.30,-0.31\\n0.35,-0.59\\n0.40,-0.81\\n0.45,-0.95\\n0.50,-1.00\\n0.55,-0.95\\n0.60,-0.81\\n0.65,-0.59\\n0.70,-0.31\\n0.75,0.00\\n0.80,0.31\\n0.85,0.59\\n0.90,0.81\\n0.95,0.95\\n1.00,1.00"},{"id":"sine_2x","label":"Sine 2x","style":{"line_color":"yellow","line_width":1},"initial_csv_data":"x,y\\n0.00,0.00\\n0.05,0.59\\n0.10,0.95\\n0.15,0.95\\n0.20,0.59\\n0.25,0.00\\n0.30,-0.59\\n0.35,-0.95\\n0.40,-0.95\\n0.45,-0.59\\n0.50,0.00\\n0.55,0.59\\n0.60,0.95\\n0.65,0.95\\n0.70,0.59\\n0.75,0.00\\n0.80,-0.59\\n0.85,-0.95\\n0.90,-0.95\\n0.95,-0.59\\n1.00,0.00"},{"id":"sine_4x","label":"Sine 4x","style":{"line_color":"lime","line_width":1},"initial_csv_data":"x,y\\n0.00,0.00\\n0.05,0.95\\n0.10,0.59\\n0.15,-0.59\\n0.20,-0.95\\n0.25,0.00\\n0.30,0.95\\n0.35,0.59\\n0.40,-0.59\\n0.45,-0.95\\n0.50,0.00\\n0.55,0.95\\n0.60,0.59\\n0.65,-0.59\\n0.70,-0.95\\n0.75,0.00\\n0.80,0.95\\n0.85,0.59\\n0.90,-0.59\\n0.95,-0.95\\n1.00,0.00"}]}},"src":"gui-init","ts":1768704911.4576297,"GUID":"dc3745ff-7586-4860-a562-34c824ed8f73"}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704912.338800 🧠 Found cached state for multi_dataset_graph/datasets/linear_line. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704912.338923 🧠 Found cached state for multi_dataset_graph/datasets/sine_wave_2. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704912.338970 🧠 Found cached state for multi_dataset_graph/datasets/cosine_wave. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704912.338996 🧠 Found cached state for multi_dataset_graph/datasets/sine_2x. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704912.339017 🧠 Found cached state for multi_dataset_graph/datasets/sine_4x. Applying from snapshot. 🦆 state mirror engine🪿 initialize widget state  🧩 {'version': '20251225.004500.1'}
+1768704912.339047 Processing CSV data for dataset 'linear_line':
+x,y
+0,0
+1,1 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.339079 Extracted x_values: [0.0, 1.0] 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.339095 Extracted y_values: [0.0, 1.0] 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.339107 Loading initial data for dataset 'linear_line' 🦆 dynamic graph🪿 load initial data  🧩 {'version': '20260101.000000.1'}
+1768704912.356449 Processing CSV data for dataset 'sine_wave_2':
+x,y
+0.00,0.00
+0.05,0.31
+0.10,0.59
+0.15,0.81
+0.20,0.95
+0.25,1.00
+0.30,0.95
+0.35,0.81
+0.40,0.59
+0.45,0.31
+0.50,0.00
+0.55,-0.31
+0.60,-0.59
+0.65,-0.81
+0.70,-0.95
+0.75,-1.00
+0.80,-0.95
+0.85,-0.81
+0.90,-0.59
+0.95,-0.31
+1.00,0.00 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.356561 Extracted x_values: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0] 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.356593 Extracted y_values: [0.0, 0.31, 0.59, 0.81, 0.95, 1.0, 0.95, 0.81, 0.59, 0.31, 0.0, -0.31, -0.59, -0.81, -0.95, -1.0, -0.95, -0.81, -0.59, -0.31, 0.0] 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.356609 Loading initial data for dataset 'sine_wave_2' 🦆 dynamic graph🪿 load initial data  🧩 {'version': '20260101.000000.1'}
+1768704912.367326 Processing CSV data for dataset 'cosine_wave':
+x,y
+0.00,1.00
+0.05,0.95
+0.10,0.81
+0.15,0.59
+0.20,0.31
+0.25,0.00
+0.30,-0.31
+0.35,-0.59
+0.40,-0.81
+0.45,-0.95
+0.50,-1.00
+0.55,-0.95
+0.60,-0.81
+0.65,-0.59
+0.70,-0.31
+0.75,0.00
+0.80,0.31
+0.85,0.59
+0.90,0.81
+0.95,0.95
+1.00,1.00 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.367421 Extracted x_values: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0] 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.367446 Extracted y_values: [1.0, 0.95, 0.81, 0.59, 0.31, 0.0, -0.31, -0.59, -0.81, -0.95, -1.0, -0.95, -0.81, -0.59, -0.31, 0.0, 0.31, 0.59, 0.81, 0.95, 1.0] 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.367461 Loading initial data for dataset 'cosine_wave' 🦆 dynamic graph🪿 load initial data  🧩 {'version': '20260101.000000.1'}
+1768704912.377634 Processing CSV data for dataset 'sine_2x':
+x,y
+0.00,0.00
+0.05,0.59
+0.10,0.95
+0.15,0.95
+0.20,0.59
+0.25,0.00
+0.30,-0.59
+0.35,-0.95
+0.40,-0.95
+0.45,-0.59
+0.50,0.00
+0.55,0.59
+0.60,0.95
+0.65,0.95
+0.70,0.59
+0.75,0.00
+0.80,-0.59
+0.85,-0.95
+0.90,-0.95
+0.95,-0.59
+1.00,0.00 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.377744 Extracted x_values: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0] 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.377776 Extracted y_values: [0.0, 0.59, 0.95, 0.95, 0.59, 0.0, -0.59, -0.95, -0.95, -0.59, 0.0, 0.59, 0.95, 0.95, 0.59, 0.0, -0.59, -0.95, -0.95, -0.59, 0.0] 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.377797 Loading initial data for dataset 'sine_2x' 🦆 dynamic graph🪿 load initial data  🧩 {'version': '20260101.000000.1'}
+1768704912.388108 Processing CSV data for dataset 'sine_4x':
+x,y
+0.00,0.00
+0.05,0.95
+0.10,0.59
+0.15,-0.59
+0.20,-0.95
+0.25,0.00
+0.30,0.95
+0.35,0.59
+0.40,-0.59
+0.45,-0.95
+0.50,0.00
+0.55,0.95
+0.60,0.59
+0.65,-0.59
+0.70,-0.95
+0.75,0.00
+0.80,0.95
+0.85,0.59
+0.90,-0.59
+0.95,-0.95
+1.00,0.00 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.388194 Extracted x_values: [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0] 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.388217 Extracted y_values: [0.0, 0.95, 0.59, -0.59, -0.95, 0.0, 0.95, 0.59, -0.59, -0.95, 0.0, 0.95, 0.59, -0.59, -0.95, 0.0, 0.95, 0.59, -0.59, -0.95, 0.0] 🦆 dynamic graph🪿  on dataset var change  🧩 {'version': '20260101.000000.1'}
+1768704912.388232 Loading initial data for dataset 'sine_4x' 🦆 dynamic graph🪿 load initial data  🧩 {'version': '20260101.000000.1'}
+1768704912.399304 ✅ Batch processing complete! All widgets built. 🦆 gui batch builder🪿  create widgets in batches  🧩 {'version': 'Unknown_Ver'}
+1768704912.405232 ✅ It works! SCAN is fully operational! 🦆 gui from json🪿  construct dynamic gui  🧩 {'version': '20260111.1510.1'}
+1768704912.688975 🔍🔵 The architectural marvel is complete! Finished building GUI from directory structure. 🦆 gui display🪿   init    🧩 {'version': 'Unknown_Ver'}
+1768704912.689007 ✅ Lazy Loading complete for tab: Scan 🦆 gui display🪿  on tab change  🧩 {'version': 'Unknown_Ver'}
+1768704912.689126 ⏹️_on_tab_change complete for 'Scan'. 🦆 gui display🪿  on tab change  🧩 {'version': 'Unknown_Ver'}
+1768704912.689270 🟢️️️🟢 Eureka! We are kicking off the worker engines from 'launch_all_workers'! 🦆 Worker Launcher🪿 launch all workers  🧩 {'version': '20251215.120000.2'}
+1768704912.689300 🟢️️️🔵 Worker 'ActivePeakPublisher' initialized. The lab is buzzing with activity! 🦆 Worker Launcher🪿 launch all workers  🧩 {'version': '20251215.120000.2'}
+1768704912.689356 ✅ All workers have been successfully conjured and set to their tasks! 🦆 Worker Launcher🪿 launch all workers  🧩 {'version': '20251215.120000.2'}
+1768704912.689429 DEBUG: Calling _reveal_main_window. 🦆 OpenAir🪿 action open display  🧩 {'version': '20251226.000000.1'}
+1768704912.689459 DEBUG: Entering _reveal_main_window. 🦆 OpenAir🪿  reveal main window  🧩 {'version': '20251226.000000.1'}
+1768704912.689474 DEBUG: Revealing main window... 🦆 OpenAir🪿  reveal main window  🧩 {'version': '20251226.000000.1'}
+1768704912.689486 DEBUG: Calling root.deiconify(). 🦆 OpenAir🪿  reveal main window  🧩 {'version': '20251226.000000.1'}
+1768704912.694901 DEBUG: Calling splash.hide(). 🦆 OpenAir🪿  reveal main window  🧩 {'version': '20251226.000000.1'}
+1768704912.694976 DEBUG: splash.hide() called. Attempting to dismiss splash screen. 🦆 splash screen🪿  safe log  🧩 {'version': 'Unknown_Ver'}
+1768704912.732306 DEBUG: _reveal_main_window completed. 🦆 OpenAir🪿  reveal main window  🧩 {'version': '20251226.000000.1'}
+1768704912.732468 DEBUG: _reveal_main_window returned. 🦆 OpenAir🪿 action open display  🧩 {'version': '20251226.000000.1'}
+1768704912.733809 DEBUG: Entering _reveal_main_window. 🦆 OpenAir🪿  reveal main window  🧩 {'version': '20251226.000000.1'}
+1768704912.733915 DEBUG: Revealing main window... 🦆 OpenAir🪿  reveal main window  🧩 {'version': '20251226.000000.1'}
+1768704912.733939 DEBUG: Calling root.deiconify(). 🦆 OpenAir🪿  reveal main window  🧩 {'version': '20251226.000000.1'}
+1768704912.733966 DEBUG: Calling splash.hide(). 🦆 OpenAir🪿  reveal main window  🧩 {'version': '20251226.000000.1'}
+1768704912.733983 DEBUG: splash.hide() called. Attempting to dismiss splash screen. 🦆 splash screen🪿  safe log  🧩 {'version': 'Unknown_Ver'}
+1768704912.734002 DEBUG: _reveal_main_window completed. 🦆 OpenAir🪿  reveal main window  🧩 {'version': '20251226.000000.1'}
+1768704912.765214 📤 Published to OPEN-AIR/visibility/geometry: b'{"width":1600,"height":1131,"x":0,"y":1149,"ts":1768704912.7650552,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704912.765409 🌀 Topic: OPEN-AIR/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.765526 📤 Published command to topic OPEN-AIR/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704912.765548 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.765635 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.765691 ⚖️ Comparing timelines for topic: OPEN-AIR/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.765730 🕰️ Comparing timestamps: Incoming '1768704912.7650552' vs Cached '1768703716.5935915' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.765749 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.765763 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.765784 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.765799 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.765824 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.766449 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmps11yyaa0.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.766646 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.766671 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.766688 📨 MQTT Message Received: Topic='OPEN-AIR/visibility/geometry', Payload='b'{"width":1600,"height":1131,"x":0,"y":1149,"ts":1768704912.7650552,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704912.793172 📤 Published to OPEN-AIR/scan/visibility/geometry: b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704912.7930303,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704912.793364 🌀 Topic: OPEN-AIR/scan/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.793424 📤 Published command to topic OPEN-AIR/scan/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704912.793496 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/scan/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.793543 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.793612 ⚖️ Comparing timelines for topic: OPEN-AIR/scan/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.793786 🕰️ Comparing timestamps: Incoming '1768704912.7930303' vs Cached '1768669736.5954819' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.793706 📤 Published to OPEN-AIR/visibility/geometry: b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704912.7936583,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704912.793870 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.793888 📤 Published command to topic OPEN-AIR/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704912.793950 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/scan/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.793988 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.794010 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.794054 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.794865 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmp5wk8wbhm.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.795129 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.795161 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.795182 📨 MQTT Message Received: Topic='OPEN-AIR/scan/visibility/geometry', Payload='b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704912.7930303,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704912.795341 🌀 Topic: OPEN-AIR/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.795368 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.795388 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.795402 ⚖️ Comparing timelines for topic: OPEN-AIR/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.795419 🕰️ Comparing timestamps: Incoming '1768704912.7936583' vs Cached '1768704912.7650552' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.795432 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.795444 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.795456 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.795469 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.795491 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.796027 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpnoh5rasz.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.796179 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.796202 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.796219 📨 MQTT Message Received: Topic='OPEN-AIR/visibility/geometry', Payload='b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704912.7936583,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704912.802228 📤 Published to OPEN-AIR/scan/visibility/geometry: b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704912.8021753,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704912.802337 🌀 Topic: OPEN-AIR/scan/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.802408 📤 Published command to topic OPEN-AIR/scan/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704912.802426 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/scan/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.802508 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.802555 ⚖️ Comparing timelines for topic: OPEN-AIR/scan/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.802588 🕰️ Comparing timestamps: Incoming '1768704912.8021753' vs Cached '1768704912.7930303' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.802605 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.802619 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/scan/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.802633 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.802646 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.802668 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.803190 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmp39gwu8an.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.803363 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.803416 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.803440 📨 MQTT Message Received: Topic='OPEN-AIR/scan/visibility/geometry', Payload='b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704912.8021753,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704912.812621 📤 Published to OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry: b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704912.8123589,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704912.812558 🌀 Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.812752 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.812811 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.812831 ⚖️ Comparing timelines for topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.812853 🕰️ Comparing timestamps: Incoming '1768704912.8123589' vs Cached '1768703716.597002' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.812870 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.812886 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.812904 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.812922 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.812950 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.813748 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpowwl6_mf.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.813948 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.813981 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.814002 📨 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry', Payload='b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704912.8123589,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704912.812720 📤 Published command to topic OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704912.834606 📤 Published to OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry: b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704912.8344753,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704912.834747 🌀 Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.834799 📤 Published command to topic OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704912.834867 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.834921 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.834941 ⚖️ Comparing timelines for topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.834960 🕰️ Comparing timestamps: Incoming '1768704912.8344753' vs Cached '1768704912.8123589' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.834974 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.834988 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.835002 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.835016 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.835041 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.835697 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpeh5hwmwv.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.835915 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.835982 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.836028 📨 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry', Payload='b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704912.8344753,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704912.908259 📤 Published to OPEN-AIR/visibility/geometry: b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704912.9081454,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704912.908349 🌀 Topic: OPEN-AIR/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.908465 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.908450 📤 Published command to topic OPEN-AIR/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704912.908513 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.908539 ⚖️ Comparing timelines for topic: OPEN-AIR/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.908558 🕰️ Comparing timestamps: Incoming '1768704912.9081454' vs Cached '1768704912.7936583' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.908571 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.908584 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.908596 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.908610 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.908632 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.909236 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpofgux8ny.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.910092 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.910163 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.910191 📨 MQTT Message Received: Topic='OPEN-AIR/visibility/geometry', Payload='b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704912.9081454,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704912.966416 📤 Published to OPEN-AIR/scan/visibility/geometry: b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704912.966325,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704912.966596 📤 Published command to topic OPEN-AIR/scan/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704912.966551 🌀 Topic: OPEN-AIR/scan/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.966659 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/scan/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.966702 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.966724 ⚖️ Comparing timelines for topic: OPEN-AIR/scan/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.966749 🕰️ Comparing timestamps: Incoming '1768704912.966325' vs Cached '1768704912.8021753' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.966770 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704912.966791 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/scan/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704912.966819 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.966839 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.966868 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.967690 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpzvfxh2tb.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.967895 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704912.967921 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704912.967941 📨 MQTT Message Received: Topic='OPEN-AIR/scan/visibility/geometry', Payload='b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704912.966325,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704913.000546 📤 Published to OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry: b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704913.0003982,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704913.000697 🌀 Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704913.000784 📤 Published command to topic OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704913.000827 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704913.000901 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704913.000921 ⚖️ Comparing timelines for topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704913.000940 🕰️ Comparing timestamps: Incoming '1768704913.0003982' vs Cached '1768704912.8344753' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704913.000958 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704913.001062 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704913.001123 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704913.001190 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704913.001224 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704913.001847 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpsqoe_n80.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704913.002032 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704913.002079 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704913.002138 📨 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry', Payload='b'{"width":1920,"height":1131,"x":0,"y":1149,"ts":1768704913.0003982,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704913.189314 🔍🔵 Triggering initial tab selection for all notebooks. 🦆 gui display🪿  trigger initial tab selection  🧩 {'version': 'Unknown_Ver'}
+1768704913.189458 ▶️ _on_tab_change detected. 🦆 gui display🪿  on tab change  🧩 {'version': 'Unknown_Ver'}
+1768704913.189523 ⏹️_on_tab_change complete for 'Spectrum'. 🦆 gui display🪿  on tab change  🧩 {'version': 'Unknown_Ver'}
+1768704913.189550 ▶️ _on_tab_change detected. 🦆 gui display🪿  on tab change  🧩 {'version': 'Unknown_Ver'}
+1768704913.189577 ⏹️_on_tab_change complete for 'Instrument'. 🦆 gui display🪿  on tab change  🧩 {'version': 'Unknown_Ver'}
+1768704913.189595 ▶️ _on_tab_change detected. 🦆 gui display🪿  on tab change  🧩 {'version': 'Unknown_Ver'}
+1768704913.189620 ⏹️_on_tab_change complete for 'Frequency'. 🦆 gui display🪿  on tab change  🧩 {'version': 'Unknown_Ver'}
+1768704913.189635 ▶️ _on_tab_change detected. 🦆 gui display🪿  on tab change  🧩 {'version': 'Unknown_Ver'}
+1768704913.189658 ⏹️_on_tab_change complete for 'Scan'. 🦆 gui display🪿  on tab change  🧩 {'version': 'Unknown_Ver'}
+1768704913.189671 ✅ All initial tab selections triggered. 🦆 gui display🪿  trigger initial tab selection  🧩 {'version': 'Unknown_Ver'}
+1768704922.876136 📤 Published to OPEN-AIR/visibility/geometry: b'{"width":1600,"height":839,"x":0,"y":1245,"ts":1768704922.8759727,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704922.876364 🌀 Topic: OPEN-AIR/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704922.876496 📤 Published command to topic OPEN-AIR/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704922.876758 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704922.876901 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704922.876933 ⚖️ Comparing timelines for topic: OPEN-AIR/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704922.877036 🕰️ Comparing timestamps: Incoming '1768704922.8759727' vs Cached '1768704912.9081454' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704922.877085 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704922.877110 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704922.877133 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704922.877156 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704922.877186 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704922.877987 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpni1qpo_3.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704922.878249 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704922.878298 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704922.878334 📨 MQTT Message Received: Topic='OPEN-AIR/visibility/geometry', Payload='b'{"width":1600,"height":839,"x":0,"y":1245,"ts":1768704922.8759727,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704922.878939 📤 Published to OPEN-AIR/scan/visibility/geometry: b'{"width":1600,"height":839,"x":0,"y":1245,"ts":1768704922.8788536,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704922.879063 🌀 Topic: OPEN-AIR/scan/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704922.879099 📤 Published command to topic OPEN-AIR/scan/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704922.879141 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/scan/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704922.879196 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704922.879216 ⚖️ Comparing timelines for topic: OPEN-AIR/scan/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704922.879238 🕰️ Comparing timestamps: Incoming '1768704922.8788536' vs Cached '1768704912.966325' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704922.879265 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704922.879280 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/scan/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704922.879296 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704922.879362 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704922.879395 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704922.880111 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpwbu5ma1t.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704922.880046 📤 Published to OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry: b'{"width":1600,"height":839,"x":0,"y":1245,"ts":1768704922.8800054,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704922.880183 📤 Published command to topic OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704922.885133 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704922.885732 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704922.885783 📨 MQTT Message Received: Topic='OPEN-AIR/scan/visibility/geometry', Payload='b'{"width":1600,"height":839,"x":0,"y":1245,"ts":1768704922.8788536,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704922.887056 🌀 Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704922.887795 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704922.887865 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704922.887896 ⚖️ Comparing timelines for topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704922.887928 🕰️ Comparing timestamps: Incoming '1768704922.8800054' vs Cached '1768704913.0003982' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704922.887954 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704922.887975 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704922.887998 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704922.888020 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704922.888187 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704922.892168 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmp_fwe0ou_.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704922.892489 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704922.892537 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704922.892570 📨 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry', Payload='b'{"width":1600,"height":839,"x":0,"y":1245,"ts":1768704922.8800054,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704925.150562 🌀 Topic: OPEN-AIR/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704925.150454 📤 Published to OPEN-AIR/visibility/geometry: b'{"width":1920,"height":1163,"x":3840,"y":1117,"ts":1768704925.1502979,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704925.150788 📤 Published command to topic OPEN-AIR/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704925.150768 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704925.150861 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704925.150886 ⚖️ Comparing timelines for topic: OPEN-AIR/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704925.150912 🕰️ Comparing timestamps: Incoming '1768704925.1502979' vs Cached '1768704922.8759727' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704925.150927 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704925.150950 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704925.150969 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704925.151003 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704925.151035 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704925.151699 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpwl2bd9nf.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704925.151950 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704925.152006 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704925.152038 📨 MQTT Message Received: Topic='OPEN-AIR/visibility/geometry', Payload='b'{"width":1920,"height":1163,"x":3840,"y":1117,"ts":1768704925.1502979,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704925.153753 🌀 Topic: OPEN-AIR/scan/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704925.153794 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/scan/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704925.153659 📤 Published to OPEN-AIR/scan/visibility/geometry: b'{"width":1920,"height":1163,"x":3840,"y":1117,"ts":1768704925.1536007,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704925.153822 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704925.153873 📤 Published command to topic OPEN-AIR/scan/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704925.153858 ⚖️ Comparing timelines for topic: OPEN-AIR/scan/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704925.153923 🕰️ Comparing timestamps: Incoming '1768704925.1536007' vs Cached '1768704922.8788536' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704925.153947 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704925.153960 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/scan/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704925.153972 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704925.153988 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704925.154013 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704925.154620 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpis62vym0.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704925.154639 📤 Published to OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry: b'{"width":1920,"height":1163,"x":3840,"y":1117,"ts":1768704925.1545792,"tab_name":null}' 🦆 mqtt publisher service🪿 publish payload  🧩 {'version': 'Unknown_Ver'}
+1768704925.154698 📤 Published command to topic OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state mirror engine🪿 publish command  🧩 {'version': '20251225.004500.1'}
+1768704925.154837 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704925.154866 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704925.154928 📨 MQTT Message Received: Topic='OPEN-AIR/scan/visibility/geometry', Payload='b'{"width":1920,"height":1163,"x":3840,"y":1117,"ts":1768704925.1536007,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}
+1768704925.178679 🌀 Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704925.179562 tt! A new event is rippling through the timeline! Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704925.179630 🧑‍⚖️ Payload decoded. Now, to the Judge! 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704925.179859 ⚖️ Comparing timelines for topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704925.180021 🕰️ Comparing timestamps: Incoming '1768704925.1545792' vs Cached '1768704922.8800054' 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704925.180180 🚀 The future has arrived! Updating. 🦆 state comparator🪿 should update  🧩 {'version': '20251230.230100.1'}
+1768704925.180351 ⚓ A change in the timeline! This is heavy. Topic: OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry 🦆 cache traffic controller🪿 process traffic  🧩 {'version': '20251230.230300.1'}
+1768704925.180479 🏋️ This is heavy! The timeline has been altered. Recording the new event. 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704925.180607 ✍️  We're about to write to the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704925.180774 👯 Creating a temporal duplicate in /home/anthony/Documents/OPEN-AIR/DATA... 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704925.182431 ↔️ Temporal duplicate created at /home/anthony/Documents/OPEN-AIR/DATA/tmpyek1v44u.tmp. Now, for the switch! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704925.183234 💾  The timeline has been successfully recorded in the Almanac! 🦆 cache io handler🪿 save cache  🧩 {'version': '20251230.230000.1'}
+1768704925.183363 ⏩ Forwarding the temporal flux to the main timeline... 🦆 state cache manager🪿 handle incoming mqtt  🧩 {'version': '20251230.230400.1'}
+1768704925.183470 📨 MQTT Message Received: Topic='OPEN-AIR/Spectrum/Instrument/frequency/visibility/geometry', Payload='b'{"width":1920,"height":1163,"x":3840,"y":1117,"ts":1768704925.1545792,"tab_name":null}'' 🦆 mqtt subscriber router🪿  on message  🧩 {'version': 'Unknown_Ver'}

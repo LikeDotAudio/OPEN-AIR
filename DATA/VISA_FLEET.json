@@ -1,52 +1,4 @@
 {
-    "Spectrum": {
-        "YAK": {
-            "N9340B": {
-                "Connection": {
-                    "Table": {
-                        "type": "OcaTable",
-                        "description": "Discovered Devices",
-                        "headers": [
-                            "type",
-                            "resource_string",
-                            "ip_address",
-                            "interface_port",
-                            "gpib_address",
-                            "status",
-                            "manufacturer",
-                            "model",
-                            "serial_number",
-                            "firmware",
-                            "idn_string",
-                            "device_type",
-                            "notes",
-                            "allocated",
-                            "connection_timestamp"
-                        ],
-                        "data": {
-                            "Direct": {
-                                "type": "DEDICATED",
-                                "resource_string": "TCPIP::44.44.44.66::INSTR",
-                                "ip_address": "44.44.44.66",
-                                "interface_port": "Ethernet",
-                                "gpib_address": "Direct",
-                                "status": "CONNECTED",
-                                "manufacturer": "Keysight Technologies",
-                                "model": "N9340B",
-                                "serial_number": "CN03480580",
-                                "firmware": "A.02.07",
-                                "idn_string": "Keysight Technologies,N9340B,CN03480580,A.02.07",
-                                "device_type": "Spectrum",
-                                "notes": "Handheld (100 kHz - 3 GHz)",
-                                "allocated": false,
-                                "connection_timestamp": "2026-01-17T01:30:44.002874"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
     "DMM": {
         "YAK": {
             "34401A": {
@@ -87,7 +39,7 @@
                                 "device_type": "DMM",
                                 "notes": "6.5 Digit Benchtop Standard (Legacy)",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-17T01:30:44.002882"
+                                "connection_timestamp": "2026-01-17T12:08:48.185219"
                             }
                         }
                     }
@@ -134,7 +86,7 @@
                                 "device_type": "Unknown Instrument",
                                 "notes": "Not in Knowledge Base",
                                 "allocated": false,
-                                "connection_timestamp": "2026-01-17T01:30:44.002884"
+                                "connection_timestamp": "2026-01-17T12:08:48.185226"
                             }
                         }
                     }

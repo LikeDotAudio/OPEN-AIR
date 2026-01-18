@@ -74,9 +74,14 @@ class GuiTableCreatorMixin:
         container.grid_columnconfigure(0, weight=1)
 
         relative_data_topic = get_topic(base_mqtt_topic_from_path, path)
+        base_topic = getattr(self.state_mirror_engine, "base_topic", "OPEN-AIR")
         absolute_data_topic = (
-            f"OPEN-AIR/{relative_data_topic}" if relative_data_topic else None
+            get_topic(base_topic, relative_data_topic) if relative_data_topic else None
         )
+        
+        # Calculate "Room" topic (the parent topic of this widget, i.e., the config file's scope)
+        # This allows us to listen to siblings (like a Radar) in the same "room".
+        room_topic = get_topic(base_topic, base_mqtt_topic_from_path)
 
         table_height = config.get("height", 10)
         tree = ttk.Treeview(
@@ -301,99 +306,116 @@ class GuiTableCreatorMixin:
                 )
 
         def update_table_incremental(topic, payload):
-            debug_logger(
-                message=f"--- Calling update_table_incremental for '{label}' on topic '{topic}'",
-                **_get_log_args(),
-            )
+            # 1. DECODE PAYLOAD (Always)
             try:
-                if topic.endswith("/selected"):
-                    return
-
-                # Handle new topics like .../Table/data/23
-                if not absolute_data_topic:
-                    return
-                data_prefix = absolute_data_topic + "/data/"
-                if not topic.startswith(data_prefix):
-                    debug_logger(
-                        message=f"--- Topic '{topic}' does not match data prefix '{data_prefix}', ignoring.",
-                        **_get_log_args(),
-                    )
-                    return
-
-                device_key = topic[len(data_prefix) :]
-                # Ignore deeper nested topics
-                if "/" in device_key:
-                    debug_logger(
-                        message=f"--- Topic '{topic}' has extra segments, ignoring.",
-                        **_get_log_args(),
-                    )
-                    return
-
-                debug_logger(message=f"--- Device key: {device_key}", **_get_log_args())
-
-                if not payload:
-                    debug_logger(
-                        message="--- Empty payload, deleting row.", **_get_log_args()
-                    )
-                    if device_key in device_key_map:
-                        item_id = device_key_map.pop(device_key)
-                        if item_id in item_map:
-                            del item_map[item_id]
-                        tree.delete(item_id)
-                        debug_logger(
-                            message=f"--- Deleted device '{device_key}' from table '{label}'.",
-                            **_get_log_args(),
-                        )
-                    _handle_write_csv()  # Auto-save
-                    return
-
                 if isinstance(payload, bytes):
                     data = orjson.loads(payload.decode("utf-8"))
                 elif isinstance(payload, str):
                     data = orjson.loads(payload)
                 else:
                     data = payload
-                debug_logger(message=f"--- Incremental data: {data}", **_get_log_args())
+            except:
+                # If we can't parse, we can't do anything meaningful.
+                return
 
-                if not tree["columns"]:
-                    debug_logger(
-                        message="--- First time update, setting columns.",
-                        **_get_log_args(),
-                    )
-                    columns = list(data.keys())
-                    tree["columns"] = columns
-                    for col in columns:
-                        tree.heading(col, text=col)
-                        tree.column(
-                            col, width=120, minwidth=60, stretch=tk.YES, anchor="w"
-                        )
+            if topic.endswith("/selected"):
+                return
+            
+            # 2. CHECK FOR PULSE (Priority High - Syncs the table)
+            # We check this first so we can catch pulses even if the topic isn't strictly our 'data' topic
+            # (e.g. if we are listening to the whole room)
+            pulse_angle = data.get("angle")
+            if pulse_angle is None:
+                pulse_angle = data.get("position")
 
-                values = [data.get(col, "") for col in tree["columns"]]
+            if isinstance(data, dict) and data.get("pulse") is True and pulse_angle is not None:
+                angle = pulse_angle
+                debug_logger(message=f"--- Table '{label}' received angle pulse: {angle}", **_get_log_args())
+                
+                # Find matching row
+                target_id = None
+                
+                # 2a. Try matching device key (exact match)
+                try:
+                    angle_key = str(int(angle)) 
+                    if angle_key in device_key_map:
+                        target_id = device_key_map[angle_key]
+                except: pass
+                
+                # 2b. If not found, try searching columns
+                if not target_id:
+                    angle_col = None
+                    for col in tree["columns"]:
+                        if col.lower() in ["angle", "deg", "degree", "position", "rotation"]:
+                            angle_col = col
+                            break
+                    
+                    if angle_col:
+                        for item_id, item_data in item_map.items():
+                            val = item_data.get(angle_col)
+                            try:
+                                if abs(float(val) - float(angle)) < 1.0: # 1 degree tolerance
+                                    target_id = item_id
+                                    break
+                            except: pass
+                
+                if target_id:
+                    tree.selection_set(target_id)
+                    tree.see(target_id)
+                    # debug_logger(message=f"--- Table '{label}' synced to row {target_id}", **_get_log_args())
+                
+                return # Pulse handled, no further processing needed
 
+            # 3. CHECK FOR TABLE DATA (Row Updates)
+            if not absolute_data_topic:
+                return
+
+            data_prefix = absolute_data_topic + "/data/"
+            
+            # If the topic is exactly the absolute topic, it might be a full update or misc data
+            if topic == absolute_data_topic:
+                return # We handled pulse above; ignore generic object data here to avoid overwriting table
+            
+            # Strict check: Must start with our data prefix
+            if not topic.startswith(data_prefix):
+                return
+
+            device_key = topic[len(data_prefix) :]
+            if "/" in device_key:
+                return # Ignore nested paths
+
+            if not data and data is not False and data != 0: # Check for empty/None (deletion)
                 if device_key in device_key_map:
-                    debug_logger(
-                        message=f"--- Updating device '{device_key}'.",
-                        **_get_log_args(),
-                    )
-                    item_id = device_key_map[device_key]
-                    tree.item(item_id, values=values)
-                    item_map[item_id] = data
-                else:
-                    debug_logger(
-                        message=f"--- Adding new device '{device_key}'.",
-                        **_get_log_args(),
-                    )
-                    item_id = tree.insert("", tk.END, values=values, tags=(device_key,))
-                    item_map[item_id] = data
-                    device_key_map[device_key] = item_id
+                    item_id = device_key_map.pop(device_key)
+                    if item_id in item_map:
+                        del item_map[item_id]
+                    tree.delete(item_id)
+                _handle_write_csv()
+                return
 
-                _handle_write_csv()  # Auto-save
-            except Exception as e:
-                debug_logger(
-                    message=f"Error doing incremental table update for '{label}': {e}",
-                    level="ERROR",
-                    **_get_log_args(),
-                )
+            # Update/Add Row
+            debug_logger(message=f"--- Incremental data: {data}", **_get_log_args())
+
+            if not tree["columns"]:
+                columns = list(data.keys())
+                tree["columns"] = columns
+                for col in columns:
+                    tree.heading(col, text=col)
+                    tree.column(col, width=120, minwidth=60, stretch=tk.YES, anchor="w")
+
+            values = [data.get(col, "") for col in tree["columns"]]
+
+            if device_key in device_key_map:
+                item_id = device_key_map[device_key]
+                tree.item(item_id, values=values)
+                item_map[item_id] = data
+            else:
+                item_id = tree.insert("", tk.END, values=values, tags=(device_key,))
+                item_map[item_id] = data
+                device_key_map[device_key] = item_id
+
+            _handle_write_csv()  # Auto-save
+
 
         def on_select(event):
             selection = tree.selection()
@@ -421,13 +443,17 @@ class GuiTableCreatorMixin:
             )
 
             if absolute_data_topic:
+                # Subscribe to our own data subtopics (standard behavior)
                 self.subscriber_router.subscribe_to_topic(
                     absolute_data_topic + "/#", update_table_incremental
                 )
-                debug_logger(
-                    message=f"Table '{label}' subscribed to data topic '{absolute_data_topic}/#'",
-                    **_get_log_args(),
+                
+            if room_topic and room_topic != absolute_data_topic:
+                 # Subscribe to the ROOM (siblings) to catch pulses from neighbors (like Radar)
+                self.subscriber_router.subscribe_to_topic(
+                    room_topic + "/#", update_table_incremental
                 )
+                print(f"DEBUG: Table '{label}' SUBSCRIBING TO ROOM: {room_topic}")
 
             # If static data exists in the config, publish it as the default state.
             static_data = config.get("data")

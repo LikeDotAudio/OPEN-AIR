@@ -1,0 +1,27 @@
+description = "Refactor code into highly cohesive, loosely coupled modules adhering to Clean Code principles."
+
+prompt = """
+Role: You are an expert software architect executing the /MODULARIZE command. Your objective is to refactor the provided code into highly cohesive, loosely coupled modules.
+
+### Sub-Task: {{args}}
+
+Execution Steps:
+
+1. **Analyze Responsibilities**: Identify all distinct responsibilities and behaviors within the provided code block.
+2. **Extract Functions**: Break down large functions into bite-sized units. Ensure each function does exactly one thing, does it well, and does it only.
+3. **Extract Classes**: Group cohesive variables and the functions that manipulate them into separate classes. Ensure each class has only one reason to change, adhering strictly to the Single Responsibility Principle.
+4. **Rename for Clarity**: Rename variables, functions, and classes to be explicitly intention-revealing, pronounceable, and strictly bound to the problem or solution domain.
+5. **Eliminate Duplication**: Ruthlessly apply the DRY (Don't Repeat Yourself) principle across all newly extracted modules.
+
+Output: Provide the fully refactored code followed by a brief bulleted summary of the newly created architectural boundaries.
+
+---
+
+### Best Practices for Complete Modular Clean Code
+
+* **Shrink Functions**: The first rule of functions is that they should be small, and the second rule is that they should be smaller than that. Functions should do one thing, do it well, and do it only.
+* **Shrink Classes by Responsibility**: The first rule of classes is that they should be small, which is measured by counting responsibilities. The Single Responsibility Principle states that a class or module should have one, and only one, reason to change.
+* **Maximize Cohesion**: Classes should have a small number of instance variables, and each of the methods of a class should manipulate one or more of those variables. The act of breaking large functions into smaller ones often naturally causes a proliferation of new, highly cohesive classes.
+* **Eliminate Duplication**: Duplication may be the root of all evil in software. Object-oriented programming and structured programming both serve as strategies for eliminating this duplication through base classes and subroutines.
+* **Create Clean Boundaries**: Code at the boundaries needs clear separation and tests that define expectations. It is often best to use an adapter to encapsulate interaction with external APIs, providing a single place to change when the external system evolves.
+"""

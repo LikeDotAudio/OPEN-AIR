@@ -1,3 +1,17 @@
+## [2026-03-15 00:40:00] Critical API Restoration
+**************************************
+### Fixed
+- **Missing API Methods**: Restored critical missing methods in the modularized core that were causing startup crashes.
+- **Config**: Re-implemented `get_mqtt_base_topic()` to support `VisaFleetManager`.
+- **StateCacheManager**: Re-implemented `subscribe_to_all_topics()` to support the standard state synchronization loop.
+
+## [2026-03-14 23:45:00] Critical UI and Protocol Dispatch Fixes
+**************************************
+### Fixed
+- **UI Startup Crash**: Resolved a `KeyError: 'orientation'` in `gui_display.py` caused by missing metadata in the `LayoutParser`'s directory scanning logic.
+- **MIDI/OSC/SNMP Dispatch Error**: Fixed a critical regression where the modularized `ProtocolRouter` attempted to call a non-existent `publish` or `send` method on transport managers.
+- **Explicit Dispatch Interface**: Standardized the transport manager interface by implementing `publish` (MIDI, SNMP) and `send` (OSC) methods, moving outbound synchronization logic from passive observers to explicit dispatch paths.
+
 ## [2026-03-14 23:25:00] Protocol Router Modularization
 **************************************
 ### Improved

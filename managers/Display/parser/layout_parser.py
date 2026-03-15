@@ -121,7 +121,8 @@ class LayoutParser:
         parsed_data = {}
 
         if layout_type in ["horizontal_split", "vertical_split"]:
-            parsed_data["orientation"] = tk.HORIZONTAL if layout_type == "horizontal_split" else tk.VERTICAL
+            orientation = tk.HORIZONTAL if layout_type == "horizontal_split" else tk.VERTICAL
+            parsed_data["orientation"] = orientation
             raw_panels = layout_data.get("panels", [])
             percentages = layout_data.get("percentages", [])
             
@@ -195,9 +196,18 @@ class LayoutParser:
                 return {"type": "error", "data": {"error_message": "Mixed horizontal and vertical layouts."}}
 
             layout_type = "horizontal_split" if is_horizontal else "vertical_split"
-            parsed_data = {"panels": [], "panel_percentages": []}
+            parsed_data = {
+                "panels": [], 
+                "panel_percentages": [],
+                "orientation": tk.HORIZONTAL if is_horizontal else tk.VERTICAL
+            }
             
+            # Sort panels correctly
             sort_order = ["left", "right"] if is_horizontal else ["top", "bottom"]
+            
+            # We only sort the directories that match the convention
+            # Other directories will be ignored by the split layout logic 
+            # (they should ideally be inside the split panels)
             sorted_layout_dirs = sorted(layout_dirs, key=lambda d: sort_order.index(d.name.split("_")[0]))
 
             for sub_dir in sorted_layout_dirs:
@@ -211,22 +221,25 @@ class LayoutParser:
             if LOCAL_DEBUG: logger.debug(f"🗺️ Parsed '{layout_type}' from dir names '{path}'")
             return {"type": layout_type, "data": parsed_data}
 
-        # 2. Check for Notebook Layout
+        # 2. Check for Notebook Layout (Numerical Prefix)
         potential_tab_dirs = [d for d in sub_dirs if d.name and d.name[0].isdigit()]
         if potential_tab_dirs:
-            layout_type = "notebook"
-            parsed_data = {"tabs": []}
-            
+            # Only consider it a notebook if at least one numerical dir contains GUI files
             valid_tab_dirs = [d for d in potential_tab_dirs if self._scan_for_gui_files(d)]
-            sorted_tabs = sorted(valid_tab_dirs, key=lambda d: int(d.name.split("_")[0]))
-            
-            for tab_dir in sorted_tabs:
-                parts = tab_dir.name.split("_")
-                display_name = " ".join(parts[1:]).title() if len(parts) > 1 else tab_dir.name
-                parsed_data["tabs"].append({"path": tab_dir, "display_name": display_name})
+            if valid_tab_dirs:
+                layout_type = "notebook"
+                parsed_data = {"tabs": []}
+                
+                # Sort numerically
+                sorted_tabs = sorted(valid_tab_dirs, key=lambda d: int(d.name.split("_")[0]))
+                
+                for tab_dir in sorted_tabs:
+                    parts = tab_dir.name.split("_")
+                    display_name = " ".join(parts[1:]).title() if len(parts) > 1 else tab_dir.name
+                    parsed_data["tabs"].append({"path": tab_dir, "display_name": display_name})
 
-            if LOCAL_DEBUG: logger.debug(f"🗺️ Parsed 'notebook' layout from dir names '{path}'")
-            return {"type": layout_type, "data": parsed_data}
+                if LOCAL_DEBUG: logger.debug(f"🗺️ Parsed 'notebook' layout from dir names '{path}'")
+                return {"type": layout_type, "data": parsed_data}
 
         # 3. Fallback to simple directory listing
         gui_files = sorted(

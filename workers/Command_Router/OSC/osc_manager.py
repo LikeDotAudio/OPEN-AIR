@@ -183,8 +183,67 @@ class OSCManager:
         
         self._notify_monitor("RX", address, value, topic)
 
+    def send(self, address, value, meta=None):
+        """
+        Explicit publication method called by ProtocolRouter.
+        Handles Internal -> External OSC Sync (OSC Out).
+        """
+        if not self._running or not self.run_bridge or not self.tx_client:
+            return
+
+        meta = meta or {}
+        # ⚡ ANTI-FEEDBACK SPEC: Unified Fields
+        msg_type = meta.get("msg_type", "SPLICE_ACTION")
+        origin_source = meta.get("origin_source", "UNKNOWN")
+
+        # ⚡ ANTI-FEEDBACK SPEC: The Golden Rule for Transports
+        if msg_type == "LINK_FEEDBACK" and not meta.get("is_settled"):
+            return
+        if origin_source == "OSC":
+            return
+
+        # ⚡ LOGGING
+        if LOCAL_DEBUG:
+            osc_logger.debug(f"📤📡📤 [OSC] TX: {address} <- {value}")
+        
+        self.tx_client.send_message(address, value)
+        
+        # ⚡ BROADCAST activity back to UI monitor (as a TX event)
+        if self.run_bridge and self.state_cache_manager: 
+            monitor_payload = {
+                "val": value,
+                "source": "OSC",
+                "address": address,
+                "direction": "TX",
+                "ts": time.time(),
+                "GUID": app_constants.INSTANCE_GUID,
+                "partition": app_constants.PARTITION_ID
+            }
+            # ⚡ ANTI-FEEDBACK SPEC: Preserve identity in monitor log
+            monitor_payload["msg_guid"] = meta.get("msg_guid")
+            monitor_payload["msg_type"] = meta.get("msg_type")
+            monitor_payload["origin_source"] = origin_source
+
+            self.state_cache_manager.handle_external_update(
+                "OPEN-AIR/System/Monitor/OSC/Activity",
+                monitor_payload,
+                source="OSC"
+            )
+
+        from workers.Command_Router.protocol_router import ProtocolRouter
+        # Ingest the TX event back into the router for forensics
+        ProtocolRouter.get_instance().ingest("OSC-TX", f"OPEN-AIR/OSC{address}", value, {
+            "osc_address": address, 
+            "partition": app_constants.PARTITION_ID,
+            "msg_guid": meta.get("msg_guid"),
+            "msg_type": msg_type,
+            "origin_source": origin_source
+        })
+
+        self._notify_monitor("TX", address, value)
+
     def _on_protocol_event(self, msg):
-        """Callback for all router traffic. Handles OSC mirroring and monitor updates."""
+        """Callback for all router traffic. Handles OSC status and monitor updates."""
         if not self._running: return
         
         source = msg.get("source", "UNKNOWN").upper()
@@ -192,38 +251,8 @@ class OSCManager:
         topic = str(msg.get("topic", ""))
         val = msg.get("val")
         meta = msg.get("meta", {})
-        guid = msg.get("guid")
         
-        # ⚡ ANTI-FEEDBACK SPEC: Unified Fields
-        msg_type = msg.get("msg_type") or meta.get("msg_type", "SPLICE_ACTION")
-        origin_source = msg.get("origin_source") or meta.get("origin_source", logical_source)
-
-        # ⚡ RECURSION PREVENTION: Ignore OSC monitor traffic and system internal topics
-        if any(x in topic for x in ["/System/Monitor/", "/System/Status/", "/System/Control/"]):
-            return
-
-        # --- CASE 1: Mirroring Outbound Traffic (Core Only) ---
-        # We mirror GUI, MIDI, MQTT, SNMP, and SYSTEM changes TO the OSC world.
-        if self.run_bridge and source in ["GUI", "MIDI", "MQTT", "SNMP", "SYSTEM"]:
-            # ⚡ ANTI-FEEDBACK SPEC: The Golden Rule for Transports
-            # 1. If it's LINK_FEEDBACK, we don't re-broadcast to OSC (unless it's a settling message)
-            if msg_type == "LINK_FEEDBACK" and not msg.get("is_settled"):
-                return
-                
-            # 2. If the origin_source is OSC, don't send it back to OSC
-            if origin_source == "OSC":
-                return
-
-            # 3. If it's a reflection of our own transport (MQTT) from our own GUID, ignore it.
-            if source == "MQTT" and guid == app_constants.INSTANCE_GUID:
-                return
-            
-            # For logic/outbound, we need the actual value
-            real_val = val.get("val") if isinstance(val, dict) and "val" in val else val
-            self._handle_outbound_logic(topic, real_val, source, meta=meta)
-            return
-
-        # --- CASE 2: Monitor UI Update (UI Only) ---
+        # --- CASE 1: Monitor UI Update (UI Only) ---
         # Dashboard needs to see OSC events (RX or TX)
         if not self.run_bridge:
             if logical_source == "OSC":
@@ -238,53 +267,9 @@ class OSCManager:
                 self._notify_monitor("TX", meta.get("osc_address", topic), val, topic)
             return
 
-    def _handle_outbound_logic(self, topic, val, source, meta=None):
-        if not self.tx_client: return
-        meta = meta or {}
-
-        osc_address = self.topic_to_osc.get(topic, "/" + topic.replace("OPEN-AIR/", ""))
-        
-        # ⚡ LOGGING
-        if LOCAL_DEBUG:
-            osc_logger.debug(f"📤📡📤 [OSC] TX: {osc_address} <- {val} "
-                             f"(Source: {source})")
-        
-        self.tx_client.send_message(osc_address, val)
-        
-        # ⚡ BROADCAST activity back to UI monitor (as a TX event)
-        if self.run_bridge and self.state_cache_manager: 
-            monitor_payload = {
-                "val": val,
-                "source": "OSC",
-                "address": osc_address,
-                "direction": "TX",
-                "ts": time.time(),
-                "GUID": app_constants.INSTANCE_GUID,
-                "partition": app_constants.PARTITION_ID
-            }
-            # ⚡ ANTI-FEEDBACK SPEC: Preserve identity in monitor log
-            monitor_payload["msg_guid"] = meta.get("msg_guid")
-            monitor_payload["msg_type"] = meta.get("msg_type")
-            monitor_payload["origin_source"] = meta.get("origin_source")
-
-            self.state_cache_manager.handle_external_update(
-                "OPEN-AIR/System/Monitor/OSC/Activity",
-                monitor_payload,
-                source="OSC"
-            )
-
-        from workers.Command_Router.protocol_router import ProtocolRouter
-        ProtocolRouter.get_instance().ingest("OSC-TX", topic, val, {
-            "osc_address": osc_address, 
-            "source": source,
-            "partition": app_constants.PARTITION_ID,
-            # ⚡ ANTI-FEEDBACK SPEC: Propagate
-            "msg_guid": meta.get("msg_guid"),
-            "msg_type": meta.get("msg_type"),
-            "origin_source": meta.get("origin_source")
-        })
-
-        self._notify_monitor("TX", osc_address, val, topic)
+        # --- CASE 2: Internal -> External Sync ---
+        # ⚡ DEPRECATED: Now handled by explicit send() method.
+        pass
 
     def register_route(self, osc_address: str, topic: str):
         self.osc_to_topic[osc_address] = topic

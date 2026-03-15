@@ -123,6 +123,15 @@ class SNMPManager:
         self._running = False
         snmp_logger.warning("🌐 SNMP Bridge Offline.")
 
+    def publish(self, topic, val, meta=None):
+        """
+        Explicit publication method called by ProtocolRouter.
+        For SNMP, the state is synchronized via the file loop, 
+        so direct publication is not strictly required here unless
+        immediate file-writing is desired.
+        """
+        pass
+
     def handle_protocol_event(self, msg):
         """Callback for all router traffic. No direct action needed as SNMP syncs via file loop."""
         pass

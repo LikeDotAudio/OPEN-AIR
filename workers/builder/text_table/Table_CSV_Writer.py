@@ -61,6 +61,5 @@ class TableCsvWriter:
             if LOCAL_DEBUG: logger.success(f"✅ Successfully wrote table data to {file_path}")
             return True
         except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception(f"❌ Error writing to CSV file {file_path}")
-            raise CSVWriteError(f"Failed to write to {file_path}: {e}") from e
+            from workers.handlers.safe_file_io import handle_file_write_error
+            return handle_file_write_error(file_path, e)

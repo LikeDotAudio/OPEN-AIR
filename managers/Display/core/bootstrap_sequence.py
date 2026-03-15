@@ -89,7 +89,7 @@ class AsyncBootstrapEngine:
                     self.splash.set_status("Ignition Complete!")
                     def _finish():
                         UIWindowManager.reveal_main_window(self.root, self.splash, self.app_constants.global_settings["debug_enabled"])
-                        mirror_engine.start_queue_processing()
+                        mirror_engine._schedule_queue_processing()
                     self.root.after(1, _finish)
 
                 app = Application(parent=self.root, root=self.root, mqtt_connection_manager=mqtt_conn, subscriber_router=sub_router, state_mirror_engine=mirror_engine, state_cache_manager=state_cache, on_complete=_on_ignition_complete)

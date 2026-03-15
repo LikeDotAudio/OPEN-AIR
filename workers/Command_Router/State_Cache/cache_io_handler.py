@@ -70,7 +70,8 @@ def load_cache() -> Dict[str, Any]:
                 if LOCAL_DEBUG: logger.success("💾✅ Cache loaded successfully.")
             return data
     except Exception as e:
-        raise CacheLoadError(f"Error parsing cache file {app_constants.DEVICE_STATE_CACHE_PATH}: {e}") from e
+        from .core.cache_recovery_handler import recover_corrupted_cache
+        return recover_corrupted_cache(app_constants.DEVICE_STATE_CACHE_PATH, e)
 
 
 # Atomically saves the application state cache to `device_state_cache.json` on disk.

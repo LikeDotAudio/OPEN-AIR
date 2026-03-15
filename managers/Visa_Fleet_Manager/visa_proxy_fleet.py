@@ -48,19 +48,9 @@ def _write_safe_fleet(proxy_instance, command):
         proxy_instance.inst.write(command)
         if LOCAL_DEBUG: logger.success(f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): ✅ Sent command: {command}")
         return True
-    except Exception:
-        logger.exception(f"Error writing command '{command}' to {proxy_instance.device_serial}")
-        error_msg = (
-            f"Error writing command '{command}' to {proxy_instance.device_serial}"
-        )
-        proxy_instance.manager._notify_error(
-            serial=proxy_instance.device_serial, message=error_msg, command=command
-        )
-
-        # Attempt a device-specific reset if it's not a reset command itself
-        if command.strip().upper() not in ["*RST", ":SYSTem:POWer:RESet"]:
-            proxy_instance._reset_device_fleet()
-        return False
+    except Exception as e:
+        from .core.visa_timeout_handler import visa_timeout_handler
+        return visa_timeout_handler(proxy_instance, command, e)
 
 
 def _query_safe_fleet(proxy_instance, command, correlation_id="N/A"):
@@ -94,17 +84,9 @@ def _query_safe_fleet(proxy_instance, command, correlation_id="N/A"):
             corr_id=correlation_id,
         )
         return response
-    except Exception:
-        logger.exception(f"Error querying command '{command}' from {proxy_instance.device_serial}")
-        error_msg = f"Error querying command '{command}' from {proxy_instance.device_serial}"
-        proxy_instance.manager._notify_error(
-            serial=proxy_instance.device_serial, message=error_msg, command=command
-        )
-
-        # Attempt a device-specific reset if it's not a reset command itself
-        if command.strip().upper() not in ["*RST", ":SYSTem:POWer:RESet"]:
-            proxy_instance._reset_device_fleet()
-        return None
+    except Exception as e:
+        from .core.visa_timeout_handler import visa_timeout_handler
+        return visa_timeout_handler(proxy_instance, command, e)
 
 
 class VisaProxyFleet:

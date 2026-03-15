@@ -44,7 +44,17 @@ Execution Rules:
    * Ensure that '/home/anthony/Documents/OPEN-AIR/README.md' is generated or updated to reflect the changes introduced by this code. 
    * Update the Documentation Map, Dependency lists, or Architectural descriptions if the provided code introduces new modules, external libraries, or changes the system's fundamental flow (e.g., Core/UI partitioning shifts).
 
-6. Visual Clarity & Purpose (Emoji Library):
+6. Folder-Level Synthesis (Summary.md):
+   * For every folder containing more than one .md file, you MUST generate or update a 'Summary.md' file.
+   * Style: High-level, thematic, and "story-esque". Avoid dry technical listing.
+   * Content: Explain the "WHY"—the narrative purpose of the software within that folder and why it's essential to the broader OPEN-AIR ecosystem.
+   * Integration: These Summary.md files MUST be captured in the Documentation Map.
+
+7. Architectural Instruction:
+   * Maintain a central architectural document (instructional) that explains "how to" and "why it works".
+   * This should serve as the primary guide for understanding the system's design philosophy and operational flow.
+
+8. Visual Clarity & Purpose (Emoji Library):
    * Documentation and logs should mirror the following emoji clarity to supercharge parsing and forensic analysis:
 
 | Category | Emoji/Tag | Meaning & Best Use Case |

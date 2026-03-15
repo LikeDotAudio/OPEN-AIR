@@ -53,10 +53,11 @@ class TableCsvReader:
                 reader = csv.DictReader(csvfile)
                 headers = reader.fieldnames
                 if headers is None:
-                     headers = [] # Handle empty files gracefully instead of returning None
+                     headers = [] # Handle empty files gracefully
                 data = [row for row in reader]
 
             if LOCAL_DEBUG: logger.success(f"✅ Successfully read {len(data)} rows from {file_path}")
             return headers, data
         except Exception as e:
-            raise CSVReadError(f"Error reading from CSV file {file_path}: {e}") from e
+            from workers.handlers.safe_file_io import handle_file_read_error
+            return handle_file_read_error(file_path, e, fallback=(None, None))

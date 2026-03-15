@@ -40,7 +40,12 @@ class BuilderTextTableCreator(TransparencyMixin):
         csv_svc = TableCSVService(config_data.get("label_active", "Table"))
         
         # 2. Treeview
-        tree = ttk.Treeview(container, show="headings", height=config_data.get("height", 10), style="Custom.Treeview")
+        headers = config_data.get("headers", [])
+        tree = ttk.Treeview(container, show="headings", columns=headers, height=config_data.get("height", 10), style="Custom.Treeview")
+        for h in headers:
+            tree.heading(h, text=h)
+            tree.column(h, width=config_data.get("column_width", 120), anchor="w")
+        
         vsb = ttk.Scrollbar(container, orient="vertical", command=tree.yview)
         hsb = ttk.Scrollbar(container, orient="horizontal", command=tree.xview)
         tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)

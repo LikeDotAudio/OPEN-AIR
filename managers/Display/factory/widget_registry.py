@@ -72,6 +72,13 @@ class WidgetRegistry:
         return decorator
 
     @classmethod
+    def get_registry(cls) -> Dict[str, Any]:
+        """
+        Returns a copy of the current widget registry.
+        """
+        return cls._registry.copy()
+
+    @classmethod
     def get_creator(cls, widget_type: str) -> Optional[Any]:
         """
         Retrieves the creator class for a specific widget identifier.

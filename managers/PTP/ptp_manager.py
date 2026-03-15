@@ -29,6 +29,7 @@ class PtpManager:
         self.sniffer_thread = None
         self.last_heartbeat = 0
         self.heartbeat_interval = 1.0
+        self.permission_error_reported = False
 
     def start(self):
         """Starts the sniffing worker and MQTT subscriptions."""
@@ -37,6 +38,9 @@ class PtpManager:
         
         if not SCAPY_AVAILABLE:
             if LOCAL_DEBUG: logger.warning("⚠️ Scapy not available. Local sniffing disabled.")
+            return
+        
+        if self.permission_error_reported:
             return
 
         self.sniffer_thread = threading.Thread(target=self._run_sniffer, daemon=True, name="PTP_Sniffer")
@@ -64,9 +68,15 @@ class PtpManager:
                   prn=self._process_packet, 
                   stop_filter=lambda x: self.stop_event.is_set(),
                   store=0)
+        except PermissionError:
+            self.permission_error_reported = True
+            logger.warning("⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo to enable local PTP sniffing. Sniffer disabled for this session.")
         except Exception as e:
-            if "Permission denied" in str(e): logger.warning("⏱️ PTP Sniffer: Permission denied (Run as root).")
-            else: logger.exception("⏱️ PTP Sniffer: CRITICAL Error.")
+            if "Permission denied" in str(e): 
+                self.permission_error_reported = True
+                logger.warning("⏱️ PTP Sniffer: [PERMISSION DENIED] Scapy requires root privileges for raw capture. Sniffer disabled.")
+            else: 
+                logger.exception("⏱️ PTP Sniffer: CRITICAL Error.")
 
     def _process_packet(self, pkt):
         """Dissects raw packets and distributes data."""

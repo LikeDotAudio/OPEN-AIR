@@ -30,16 +30,11 @@ Follow these steps exactly:
      Message: [Summary of the change]
      **************************************
 
-5. **PURGE Local Git Data**:
-   - To free up all local space and keep nothing but the bare essentials:
-   - Run `git clean -fdx -e config.ini -e ".gemini/*" -e ".vscode/*"` to remove all untracked/ignored files (like DATA/ and .crawler/) except configuration.
-   - Run `rm -rf /home/anthony/Documents/OPEN-AIR/.git/objects` to completely purge local history.
-   - Run `git reflog expire --expire=now --all`.
-   - Run `git gc --prune=now --aggressive --force` to force-clear any locked processes and shrink the database to the absolute minimum.
 
-6. **Summary**:
+
+5. **Summary**:
    - Provide a final summary of the rotation, commit hash, and space cleared.
 
-7.  **Open the Git hub** 
+6.  **Open the Git hub** 
    - open the git hub repository (https://github.com/LikeDotAudio/OPEN-AIR)
 '''

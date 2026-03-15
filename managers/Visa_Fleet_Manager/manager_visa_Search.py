@@ -23,7 +23,7 @@ app_constants = Config.get_instance()
 # --- CONFIGURATION ---
 # Increased timeout for discovery to prevent UI hangs on dead IP addresses but
 # allow slow network devices to respond.
-VISA_TIMEOUT = 2500
+VISA_TIMEOUT = 5000
 
 # Global registry of locks to prevent concurrent probes to the same gateway/IP.
 _IP_LOCKS = {}

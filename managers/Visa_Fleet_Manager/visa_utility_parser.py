@@ -5,7 +5,7 @@ import pyvisa
 from loguru import logger
 
 # --- CONFIGURATION ---
-VISA_TIMEOUT = 2500
+VISA_TIMEOUT = 5000
 
 class VisaUtilityParser:
     """Centralized utilities for VISA device discovery and string parsing."""
@@ -67,14 +67,23 @@ class VisaUtilityParser:
             if not idn:
                 return None
             return idn
+        except pyvisa.errors.VisaIOError as e:
+            if inst:
+                try:
+                    inst.close()
+                except:
+                    pass
+            logger.debug(f"      💳⚠️ [VISA ERROR] {resource_str}: {e.description} (Code: {e.error_code})")
+            if attempt == 1 and ("USB" in resource_str or "ASRL" in resource_str):
+                return VisaUtilityParser.query_device_safe(rm, resource_str, attempt=2, timeout=timeout)
+            return None
         except Exception as e:
             if inst:
                 try:
                     inst.close()
                 except:
                     pass
-            if attempt == 1 and ("USB" in resource_str or "ASRL" in resource_str):
-                return VisaUtilityParser.query_device_safe(rm, resource_str, attempt=2, timeout=timeout)
+            logger.error(f"      💳💀 [EXCEPTION] {resource_str}: {type(e).__name__} - {e}")
             return None
 
     @staticmethod

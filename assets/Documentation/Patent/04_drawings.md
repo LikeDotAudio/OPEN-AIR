@@ -1,46 +1,55 @@
 # Drawings
 
-## Figure 1: System Architecture
+## Figure 1: Partitioned System Architecture
 
-The following diagram illustrates the high-level architecture of the software system.
+The following diagram illustrates the partitioned architecture of the OPEN-AIR platform.
 
 ```
 +-----------------------------------------------------------------+
 |                        Desktop Computer                         |
 |                                                                 |
-| +-----------------------+      +------------------------------+ |
-| |   Graphical User      |      |     Instrument Hardware      | |
-| |      Interface        |<---->| (e.g., RF Spectrum Analyzer) | |
-| |      (Display)        |      +------------------------------+ |
-| +-----------------------+                      ^                |
-|           ^                                    |                |
-|           |                                    |                |
-|           v                                    |                |
-| +-------------------------------------------------------------+ |
-| |                     MQTT Message Bus                        | |
-| +-------------------------------------------------------------+ |
-|           ^                                    ^                |
-|           |                                    |                |
-|           v                                    v                |
-| +-----------------------+      +-----------------------+        |
-| |      Managers         |      |        Workers        |        |
-| | (e.g., FreqManager,   |<---->|  (e.g., PeakPublisher)|        |
-| |  BWManager, YaketyYak)|      |                       |        |
-| +-----------------------+      +-----------------------+        |
+|  +-----------------------------------------------------------+  |
+|  |                SUPERVISOR (OpenAir.py)                    |  |
+|  +-----------------------------------------------------------+  |
+|           |                                       |             |
+|           v                                       v             |
+|  +-----------------------+      +-----------------------------+ |
+|  |  PARTITION B (UI)     |      |    PARTITION A (CORE)       | |
+|  | photorealistic engine |      |  safety-critical drivers    | |
+|  +-----------------------+      +-----------------------------+ |
+|           ^                                       ^             |
+|           |                                       |             |
+|           v                                       v             |
+|  +-----------------------------------------------------------+  |
+|  |                     MQTT MESSAGE BUS                      |  |
+|  +-----------------------------------------------------------+  |
+|           ^                                       ^             |
+|           |                                       |             |
+|           v                                       v             |
+|  +-----------------------+      +-----------------------------+ |
+|  |      MANAGERS         |      |        WORKERS              | |
+|  | (State Control & YAK) |<---->|  (Hardware Acquisition)     | |
+|  +-----------------------+      +-----------------------------+ |
+|                                                   |             |
+|                                                   v             |
+|                                     +-------------------------+ |
+|                                     |  INSTRUMENT HARDWARE    | |
+|                                     | (VISA/USB/SCPI/Yak Mon) | |
+|                                     +-------------------------+ |
 |                                                                 |
 +-----------------------------------------------------------------+
 ```
 
 **Description of Figure 1:**
 
-Figure 1 is a block diagram of the software system. The system runs on a desktop computer and interacts with an external instrument, such as an RF spectrum analyzer.
+Figure 1 is a block diagram of the partitioned software system. The system is managed by a **Supervisor (OpenAir.py)** which orchestrates two distinct execution environments.
 
-The **Graphical User Interface (GUI)**, also referred to as the **Display**, is the primary interface for the user. It is dynamically generated based on the filesystem structure. The GUI sends user commands to the MQTT message bus and subscribes to data streams from the bus to display information to the user.
+**Partition B (UI Engine)** is responsible for the photorealistic, filesystem-driven graphical user interface. It utilizes the "Next Gen" rendering engine to create industrial dashboards and subscribes/publishes to the MQTT bus for state synchronization.
 
-The **MQTT Message Bus** is the central communication hub of the system. It allows the different components to communicate with each other in a decoupled, asynchronous manner.
+**Partition A (Core)** handles all safety-critical interactions with the **Instrument Hardware**. It contains the low-level drivers and the MQTT bridge that isolates hardware latency from the user interface.
 
-The **Managers** are a set of components that are responsible for managing the desired state of the instrument. They subscribe to command messages from the GUI and publish state change messages to the workers. The `YaketyYakManager` is a special manager that implements the YAK command abstraction protocol, translating abstract commands into instrument-specific commands.
+The **MQTT Message Bus** serves as the asynchronous communication backbone, linking the UI, Managers, and Workers.
 
-The **Workers** are a set of components that are responsible for acquiring data from the instrument. They subscribe to state change messages from the managers and publish data messages to the GUI.
+The **Managers** reside in the logic layer, processing state changes and implementing the YAK command abstraction protocol to translate abstract UI interactions into hardware-specific commands.
 
-The **Instrument Hardware** is the physical test and measurement instrument that is being controlled and monitored by the software.
+The **Workers** perform high-speed data acquisition from the physical instruments and publish processed results back to the message bus for visualization.

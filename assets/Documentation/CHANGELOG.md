@@ -1,4 +1,28 @@
+## [2026-03-15 01:55:00] Bug Fix: GUI Builder Refactor Stabilization
+**************************************
+### Fixed
+- **WidgetRegistry AttributeError**: Fixed a crash where `WidgetRegistry` was missing the `get_registry()` method required by the builder initialization.
+- **DynamicGuiBuilder Attribute Errors**: Resolved multiple crashes where the builder was missing legacy `make_` methods (e.g., `make_slider_value`).
+- **Factory Mapping Robustness**: Refactored `factory_mapping.py` to use `self._lazy_wrap` for all core widgets. This aligns with the new modular architecture by eliminating hardcoded imports while maintaining full compatibility with existing JSON blueprints.
+
+## [2026-03-15 01:50:00] Bug Fix: Diagnostic Transparency & Log Suppression
+**************************************
+### Fixed
+- **PTP Sniffer Spam**: Implemented a "fail-fast" suppression mechanism in `ptp_manager.py`. The sniffer now disables itself for the remainder of the session after the first `PermissionError`, preventing log clutter when not running as root.
+- **VISA Probe Diagnostics**: Enhanced `visa_utility_parser.py` with detailed error logging for `pyvisa.errors.VisaIOError` and general exceptions. This eliminates the silent `IDN Query Error` and provides actionable insights (e.g., connection refused, timeout) for failing instrument probes.
+
+## [2026-03-15 01:45:00] Critical Stability & Permission Hardening
+**************************************
+### Fixed
+- **UI Startup Crash**: Fixed an `AttributeError` in `bootstrap_sequence.py` where a non-existent method `start_queue_processing` was being called on the `StateMirrorEngine`. Corrected to `_schedule_queue_processing`.
+- **PTP Sniffer PermissionError**: Hardened `ptp_manager.py` to gracefully handle `PermissionError` when running without root/sudo. It now provides a clear instructional warning instead of a critical traceback.
+- **VISA Discovery Reliability**: Increased `VISA_TIMEOUT` from 2500ms to 5000ms in both `manager_visa_Search.py` and `visa_utility_parser.py` to accommodate slower network instruments and reduce `IDN Query Error` warnings.
+
 ## [2026-03-15 01:30:00] Anti-Pattern Resolution: Error Swallowing & Dependency Magnets
+**************************************
+Commit: ad5cd3d226ed93282558391f820594cb8fe7d2c7
+Date: 2026-03-15 01:07:45
+Message: Anti-Pattern Resolution: Error Swallowing & Dependency Magnets
 **************************************
 ### Improved
 - **Error Handling**: Eliminated boolean return codes and silent failures in favor of explicit exceptions (`CSVReadError`, `CSVWriteError`, `CacheLoadError`).

@@ -59,10 +59,11 @@ class TableSyncEngine:
             return
 
         # 2. Handle Data Update
-        prefix = self.abs_topic + "/data/"
-        if not self.abs_topic or not topic.startswith(prefix): return
-        dk = topic[len(prefix):]
-        if "/" in dk: return
+        if not self.abs_topic or "/data/" not in topic or not topic.startswith(self.abs_topic): return
+        
+        # Extract the data key (dk) which is the part after the last "/data/"
+        dk = topic.split("/data/")[-1]
+        if "/" in dk: return # We only want flat IDs directly after a "/data/" segment
 
         if not data and data is not False: # Deletion
             if dk in self.device_key_map:

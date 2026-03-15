@@ -73,7 +73,7 @@ class VisaUtilityParser:
                     inst.close()
                 except:
                     pass
-            logger.debug(f"      💳⚠️ [VISA ERROR] {resource_str}: {e.description} (Code: {e.error_code})")
+            logger.warning(f"      💳⚠️ [VISA ERROR] {resource_str}: {e.description} (Code: {e.error_code})")
             if attempt == 1 and ("USB" in resource_str or "ASRL" in resource_str):
                 return VisaUtilityParser.query_device_safe(rm, resource_str, attempt=2, timeout=timeout)
             return None

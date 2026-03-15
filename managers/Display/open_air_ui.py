@@ -42,7 +42,10 @@ def main():
 
     # 3. Splash Screen Initiation
     splash = SplashScreen(root, app_constants.CURRENT_VERSION, app_constants.global_settings["debug_enabled"])
-    root.update()
+    # root.update() # This might be needed to ensure splash screen is drawn immediately
+
+    # MODIFICATION: Reveal the main window after creation and before mainloop
+    UIWindowManager.reveal_main_window(root, splash, app_constants.global_settings["debug_enabled"])
 
     # Shared Manager Registry
     shared_instances = {

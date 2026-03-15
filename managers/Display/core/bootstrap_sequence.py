@@ -27,6 +27,8 @@ class AsyncBootstrapEngine:
 
     def run(self):
         try:
+            self.app_constants.SCAN_OSC = False
+
             self.splash.set_status("Initializing Comms...")
             mqtt_conn = MqttConnectionManager()
             self.shared_instances["mqtt_conn"] = mqtt_conn

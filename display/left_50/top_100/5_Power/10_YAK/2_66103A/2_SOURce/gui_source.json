@@ -1,0 +1,66 @@
+{
+  "Power_YAK_66103A_SOURce": {
+    "type": "OcaBin",
+    "id": "50.100.5.10.2.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Source": {
+        "type": "OcaBlock",
+        "description": "Configuration",
+        "fields": {
+          "Set_Levels": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "INST:NSEL 1;VOLT <volt>;CURR <curr>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "volt": {
+                    "value": "5.0",
+                    "type": "_GuiValue",
+                    "label": "Voltage",
+                    "units": "V"
+                  },
+                  "curr": {
+                    "value": "1.0",
+                    "type": "_GuiValue",
+                    "label": "Current",
+                    "units": "A"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

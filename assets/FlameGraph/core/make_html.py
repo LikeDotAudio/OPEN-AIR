@@ -1,0 +1,369 @@
+# assets/FlameGraph/core/make_html.py
+
+HTML_TEMPLATE = r"""
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenAir Performance Intelligence</title>
+    <style>
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: #0f111a; margin: 0; padding: 20px; color: #e0e0e0; }
+        .card { background: #1a1c27; padding: 25px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.6); margin-bottom: 30px; border: 1px solid #2d3142; }
+        h1 { margin-top: 0; color: #fff; border-bottom: 2px solid #3498db; padding-bottom: 10px; font-weight: 300; }
+        h2 { color: #3498db; margin-top: 0; font-size: 1.2em; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .svg-outer {
+            height: 650px;
+            border: 1px solid #2d3142;
+            background: #000;
+            border-radius: 8px;
+            margin-top: 15px;
+            position: relative;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+        
+        #flamegraph-svg {
+            display: block;
+            height: 600px;
+            transform-origin: left top;
+        }
+
+        #tooltip {
+            position: fixed;
+            background: rgba(20, 25, 40, 0.95);
+            color: #fff;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+            border: 1px solid #3498db;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .tt-title { color: #3498db; font-weight: bold; border-bottom: 1px solid #333; margin-bottom: 5px; padding-bottom: 5px; }
+        .tt-stat { display: flex; justify-content: space-between; gap: 20px; }
+        .tt-val { color: #4ade80; }
+
+        .zoom-controls {
+            position: sticky;
+            top: 10px;
+            left: 10px;
+            z-index: 100;
+            display: flex;
+            gap: 5px;
+            margin-bottom: -40px;
+        }
+        .zoom-btn {
+            background: #252836;
+            color: #fff;
+            border: 1px solid #3d425a;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .zoom-btn:hover { background: #3498db; }
+
+        .table-container {
+            max-height: 800px; 
+            overflow-y: auto; 
+            border: 1px solid #2d3142; 
+            border-radius: 8px;
+            position: relative;
+        }
+        table { width: 100%; border-collapse: collapse; table-layout: fixed; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #2d3142; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        th { 
+            background-color: #252836; 
+            position: sticky; 
+            top: 0; 
+            z-index: 10; 
+            font-weight: 600; 
+            color: #888; 
+            text-transform: uppercase; 
+            font-size: 11px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            cursor: pointer;
+            user-select: none;
+        }
+        th:hover { color: #fff; background-color: #2d3142; }
+        th::after { content: ' \2195'; opacity: 0.3; }
+        th.sort-asc::after { content: ' \2191'; opacity: 1; color: #3498db; }
+        th.sort-desc::after { content: ' \2193'; opacity: 1; color: #3498db; }
+        
+        .controls { margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: #252836; padding: 15px; border-radius: 8px; }
+        input[type="text"] { padding: 10px 15px; width: 250px; border: 1px solid #3d425a; background: #0f111a; color: #fff; border-radius: 6px; font-size: 14px; outline: none; }
+        
+        .filter-btn { padding: 6px 12px; border-radius: 6px; border: 1px solid #3d425a; background: #1a1c27; color: #aaa; cursor: pointer; font-size: 11px; font-weight: bold; }
+        .filter-btn.active { background: #3498db; color: #fff; border-color: #3498db; }
+
+        .tag { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: bold; margin-right: 4px; text-transform: uppercase; }
+        .tag-layer-APP { background: #0c3d20; color: #4ade80; border: 1px solid #166534; }
+        .tag-layer-LIB { background: #451a1a; color: #f87171; border: 1px solid #991b1b; }
+        .tag-layer-CORE { background: #1a2d45; color: #60a5fa; border: 1px solid #1e3a8a; }
+        
+        .shame-box { background: #000; color: #ffaa00; padding: 15px; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; overflow-x: auto; white-space: pre; border: 1px solid #333; line-height: 1.4; margin-bottom: 20px; }
+        .pitty-box { background: #000; color: #00ff00; padding: 15px; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; overflow-x: auto; white-space: pre; border: 1px solid #333; line-height: 1.4; }
+    </style>
+</head>
+<body>
+    <div id="tooltip"></div>
+
+    <div class="card">
+        <h1>OpenAir Performance Intelligence</h1>
+        <p style="color: #666">Captured: <span id="genDate" style="color: #3498db"></span></p>
+        
+        <h2>Execution Topology (Stretch-Zoom Flame Graph)</h2>
+        <p style="color: #888; font-size: 12px; margin-top: -10px;">🎡 <b>Wheel</b> to stretch horizontally | 🖱️ <b>Click</b> blocks to filter table | ✋ <b>Hover</b> for stats</p>
+        
+        <div class="zoom-controls">
+            <button class="zoom-btn" onclick="adjustZoom(1.5)">Stretch In [X]</button>
+            <button class="zoom-btn" onclick="adjustZoom(0.66)">Stretch Out [X]</button>
+            <button class="zoom-btn" onclick="fitToScreen()">Fit to Screen</button>
+            <button class="zoom-btn" onclick="resetZoom()">Full Res</button>
+        </div>
+
+        <div class="svg-outer" id="scroll-container">
+            {{SVG_CONTENT}}
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Event Analysis Engine</h2>
+        <div class="controls">
+            <input type="text" id="filterInput" placeholder="🔍 Search events..." onkeyup="updateFilters()">
+            
+            <div class="filter-group">
+                <button class="filter-btn active" id="btn-APP" onclick="toggleLayer('APP')">Project</button>
+                <button class="filter-btn active" id="btn-LIB" onclick="toggleLayer('LIB')">Library</button>
+                <button class="filter-btn active" id="btn-CORE" onclick="toggleLayer('CORE')">Core</button>
+            </div>
+
+            <div class="filter-group" id="rootFilters">
+                {{ROOT_FILTER_BUTTONS}}
+            </div>
+
+            <div style="flex-grow: 1; text-align: right; color: #666; font-size: 12px;">
+                Showing <span id="visibleCount">0</span> / <span id="totalCount">0</span>
+            </div>
+        </div>
+        <div class="table-container">
+            <table id="statsTable">
+                <thead>
+                    <tr>
+                        <th style="width: 40%" onclick="sortTable(0)">Event / Source</th>
+                        <th style="width: 10%" onclick="sortTable(1)">Calls</th>
+                        <th style="width: 10%" onclick="sortTable(2)">Self Time</th>
+                        <th style="width: 10%" onclick="sortTable(3)">Cum. Time</th>
+                        <th style="width: 10%" onclick="sortTable(4)">Per Call</th>
+                        <th style="width: 20%" onclick="sortTable(5)">Contribution</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    {{TABLE_ROWS}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Wall of Pitty (Detailed Intelligence Report)</h2>
+        <div class="pitty-box" id="pittyBox" style="margin-bottom: 20px;">{{WALL_OF_PITTY}}</div>
+
+        <h2>Wall of Shame (Top Offenders)</h2>
+        <div class="shame-box" id="shameBox">{{WALL_OF_SHAME}}</div>
+    </div>
+
+    <script>
+        document.getElementById('genDate').textContent = new Date().toLocaleString();
+        
+        const svg = document.getElementById('flamegraph-svg');
+        const tooltip = document.getElementById('tooltip');
+        let initialWidth = 6000; // Default fallback if read fails
+
+        // Capture initial width on load
+        if (svg) {
+            // Try to get width from attribute or style
+            const attrW = svg.getAttribute('width');
+            if (attrW && attrW.indexOf('%') === -1) {
+                initialWidth = parseFloat(attrW);
+            } else {
+                // Fallback to computed width if no attribute or %
+                initialWidth = svg.getBoundingClientRect().width;
+            }
+        }
+
+        function adjustZoom(factor) {
+            if (!svg) return;
+            let currentW = parseFloat(svg.style.width || svg.getAttribute('width') || initialWidth);
+            // Handle if currentW ended up as NaN or 0
+            if (!currentW || isNaN(currentW)) currentW = initialWidth;
+            
+            let newW = currentW * factor;
+            
+            // Limit minimum width to container width (Fit)
+            const containerW = document.getElementById('scroll-container').clientWidth;
+            if (newW < containerW) newW = containerW;
+            
+            applyWidth(newW);
+        }
+
+        function resetZoom() {
+            // Reset to native high-resolution width
+            applyWidth(initialWidth);
+        }
+
+        function fitToScreen() {
+            const containerW = document.getElementById('scroll-container').clientWidth;
+            applyWidth(containerW);
+        }
+
+        function applyWidth(w) {
+            if (!svg) return;
+            svg.style.width = w + "px";
+            svg.setAttribute('width', w);
+        }
+
+        document.getElementById('scroll-container').addEventListener('wheel', function(e) {
+            if (e.ctrlKey || e.shiftKey) {
+                e.preventDefault();
+                const factor = e.deltaY > 0 ? 0.8 : 1.2;
+                adjustZoom(factor);
+            }
+        }, {passive: false});
+
+        // Interactive Tooltip & Click
+        if (svg) {
+            svg.addEventListener('mousemove', function(e) {
+                let target = e.target;
+                while (target && target.tagName !== 'svg') {
+                    const title = target.querySelector('title');
+                    if (title) {
+                        const lines = title.textContent.split('\n');
+                        let html = '<div class="tt-title">' + lines[0] + '</div>';
+                        for(let i=1; i<lines.length; i++) {
+                            if(!lines[i].trim()) continue;
+                            const parts = lines[i].split(':');
+                            if(parts.length >= 2) {
+                                html += '<div class="tt-stat"><span>' + parts[0] + ':</span><span class="tt-val">' + parts.slice(1).join(':') + '</span></div>';
+                            }
+                        }
+                        tooltip.innerHTML = html;
+                        tooltip.style.display = 'block';
+                        tooltip.style.left = (e.clientX + 15) + 'px';
+                        tooltip.style.top = (e.clientY + 15) + 'px';
+                        return;
+                    }
+                    target = target.parentElement;
+                }
+                tooltip.style.display = 'none';
+            });
+
+            svg.addEventListener('mouseout', () => tooltip.style.display = 'none');
+
+            svg.addEventListener('click', function(e) {
+                let target = e.target;
+                while (target && target.tagName !== 'svg') {
+                    const title = target.querySelector('title');
+                    if (title) {
+                        const fullText = title.textContent.split('\n')[0];
+                        let funcName = 'root';
+                        if (fullText.startsWith('built-in:')) {
+                            const nameMatch = fullText.match(/built-in: ([^(\s]+)/);
+                            if (nameMatch) funcName = nameMatch[1].split(':').pop();
+                        } else {
+                            const nameMatch = fullText.match(/^([^(\s]+)/);
+                            if (nameMatch) funcName = nameMatch[1];
+                        }
+                        if (funcName && funcName !== 'root') {
+                            const input = document.getElementById('filterInput');
+                            input.value = funcName;
+                            updateFilters();
+                            document.querySelector('.table-container').scrollTop = 0;
+                        }
+                        break;
+                    }
+                    target = target.parentElement;
+                }
+            });
+        }
+
+        // Filter Logic
+        const activeLayers = { 'APP': true, 'LIB': true, 'CORE': true };
+        const activeRoots = {}; 
+        
+        function toggleLayer(layer) {
+            activeLayers[layer] = !activeLayers[layer];
+            document.getElementById('btn-' + layer).classList.toggle('active');
+            updateFilters();
+        }
+
+        function toggleRoot(rootName) {
+            activeRoots[rootName] = !activeRoots[rootName];
+            document.getElementById('btn-root-' + rootName).classList.toggle('active');
+            updateFilters();
+        }
+
+        function updateFilters() {
+            const searchText = document.getElementById("filterInput").value.toUpperCase();
+            const rows = document.getElementById("tableBody").getElementsByTagName("tr");
+            let visible = 0;
+            for (let i = 0; i < rows.length; i++) {
+                const layer = rows[i].getAttribute('data-layer');
+                const rootsStr = rows[i].getAttribute('data-roots') || "";
+                const roots = rootsStr.split(' ').filter(r => r.length > 0);
+                const text = rows[i].textContent.toUpperCase();
+                const matchesSearch = text.indexOf(searchText) > -1;
+                const matchesLayer = activeLayers[layer];
+                let matchesRoot = (roots.length === 0);
+                for (let r of roots) { if (activeRoots[r]) { matchesRoot = true; break; } }
+                if (searchText && matchesSearch && matchesLayer && matchesRoot) { rows[i].style.display = ""; visible++; } 
+                else if (!searchText && matchesLayer && matchesRoot) { rows[i].style.display = ""; visible++; }
+                else { rows[i].style.display = "none"; }
+            }
+            document.getElementById('visibleCount').textContent = visible;
+            document.getElementById('totalCount').textContent = rows.length;
+        }
+
+        function sortTable(n) {
+            const table = document.getElementById("statsTable");
+            const tbody = document.getElementById("tableBody");
+            const headers = table.querySelectorAll("th");
+            const rows = Array.from(tbody.rows);
+            const currentDir = table.dataset.sortCol === n.toString() ? table.dataset.sortDir : 'none';
+            const newDir = currentDir === 'asc' ? 'desc' : 'asc';
+            headers.forEach(h => h.classList.remove('sort-asc', 'sort-desc'));
+            headers[n].classList.add(newDir === 'asc' ? 'sort-asc' : 'sort-desc');
+            table.dataset.sortCol = n; table.dataset.sortDir = newDir;
+            rows.sort((a, b) => {
+                let x = a.cells[n].textContent.trim(); let y = b.cells[n].textContent.trim();
+                if (n > 0) {
+                    const parseNum = (val) => parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                    return newDir === 'asc' ? parseNum(x) - parseNum(y) : parseNum(y) - parseNum(x);
+                } else { return newDir === 'asc' ? x.localeCompare(y) : y.localeCompare(x); }
+            });
+            rows.forEach(row => tbody.appendChild(row));
+        }
+        
+        document.querySelectorAll('.filter-btn[id^="btn-root-"]').forEach(btn => {
+            activeRoots[btn.id.replace('btn-root-', '')] = true;
+        });
+        updateFilters();
+    </script>
+</body>
+</html>
+"""
+
+def generate_final_html(svg_content, table_rows, root_buttons, wall_of_shame, wall_of_pitty, output_file):
+    """Assembles all components into the final Intelligence Report."""
+    content = HTML_TEMPLATE.replace("{{SVG_CONTENT}}", svg_content)
+    content = content.replace("{{TABLE_ROWS}}", table_rows)
+    content = content.replace("{{ROOT_FILTER_BUTTONS}}", root_buttons)
+    content = content.replace("{{WALL_OF_SHAME}}", wall_of_shame)
+    content = content.replace("{{WALL_OF_PITTY}}", wall_of_pitty)
+    
+    with open(output_file, 'w') as f:
+        f.write(content)

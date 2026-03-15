@@ -1,0 +1,72 @@
+{
+  "Zoo_data_graphing_XY_Graphs_Bar_graph": {
+    "type": "OcaBin",
+    "id": "50.90.9.4.1.5",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements": {
+        "type": "OcaBlock",
+        "label_active": "Gui Dynamic Bar Graph",
+        "fields": {
+          "bar_graph_examples": {
+            "type": "OcaBlock",
+            "label_active": "Bar Graph Examples",
+            "description": "Examples of the DynamicBarGraph element.",
+            "fields": {
+              "simple_bar_graph": {
+                "type": "DynamicBarGraph",
+                "label": "Metric Comparison",
+                "notes": "Demonstrates categorical data as bars.",
+                "show_title": true,
+                "title": "System Resource Usage",
+                "layout": {
+                  "height": 50,
+                  "alpha": 0.9
+                },
+                "axis": {
+                  "x": {
+                    "label": "Resource ID",
+                    "color": "white"
+                  },
+                  "y": {
+                    "label": "Usage (%)",
+                    "min": 0,
+                    "max": 100,
+                    "color": "cyan"
+                  },
+                  "show_grid": true,
+                  "show_x_axis": true,
+                  "show_y_axis": true
+                },
+                "datasets": [
+                  {
+                    "id": "ds_usage",
+                    "label": "Usage",
+                    "style": {
+                      "line_color": "cyan",
+                      "line_width": 1
+                    },
+                    "initial_csv_data": "x,y\n1,45\n2,78\n3,12\n4,90\n5,55"
+                  }
+                ],
+                "Navigation": {
+                  "enable_zoom": true,
+                  "enable_pan": true,
+                  "show_hover_value": true
+                },
+                "initial_markers": "y,80,red,2,Warning Threshold"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1185 @@
+{
+  "Zoo_Faders_Vertical_Scales": {
+    "type": "OcaBin",
+    "id": "50.90.9.0.1.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Fader_Zoo_MainVol": {
+        "type": "OcaBlock",
+        "description": "Main Volume Fader Variations",
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "cf_vol1": {
+            "type": "_SmartFader",
+            "label": "Dark Standard",
+            "notes": "Dark Fader Cap",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": -100.0,
+                "max": 10.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#33A1FD"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  -100,
+                  -60,
+                  -40,
+                  -20,
+                  -10,
+                  0,
+                  5,
+                  10
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "show_units": true,
+            "unit_text": "dB",
+            "fader_cap_scale": 1.0,
+            "unit_position": "right",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_vol2": {
+            "type": "_SmartFader",
+            "label": "Thick Ticks",
+            "notes": "Red Thick Ticks",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": -60.0,
+                "max": 6.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#FF5252"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  -60,
+                  -30,
+                  -20,
+                  -10,
+                  -6,
+                  0,
+                  3,
+                  6
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 3,
+            "show_units": true,
+            "unit_text": "dB",
+            "fader_cap_scale": 1.2,
+            "unit_position": "left",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_vol3": {
+            "type": "_SmartFader",
+            "label": "Percent",
+            "notes": "Blue Percent",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 0.0,
+                "max": 100.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#448AFF"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  25,
+                  50,
+                  75,
+                  100
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "show_units": true,
+            "unit_text": "%",
+            "fader_cap_scale": 0.9,
+            "unit_position": "right",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_vol4": {
+            "type": "_SmartFader",
+            "label": "Voltage",
+            "notes": "Purple Voltage",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 0.0,
+                "max": 5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#E040FB",
+                "highlight": "#E040FB"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 2,
+            "show_units": true,
+            "unit_text": "V",
+            "fader_cap_scale": 1.1,
+            "unit_position": "left",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_vol5": {
+            "type": "_SmartFader",
+            "label": "No Units",
+            "notes": "MIDI 0-127",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 0.0,
+                "max": 127.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#FFAB40"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  32,
+                  64,
+                  96,
+                  127
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "show_units": false,
+            "fader_cap_scale": 1.0,
+            "unit_position": "right",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_vol6": {
+            "type": "_SmartFader",
+            "label": "Fine Ticks",
+            "notes": "Long Green Ticks",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": -20.0,
+                "max": 20.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#69F0AE"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  -20,
+                  -15,
+                  -10,
+                  -5,
+                  0,
+                  5,
+                  10,
+                  15,
+                  20
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "tick_size": 0.3,
+            "show_units": true,
+            "unit_text": "dB",
+            "fader_cap_scale": 1.3,
+            "unit_position": "left",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_vol7": {
+            "type": "_SmartFader",
+            "label": "Hertz",
+            "notes": "Log Scale Hz",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 20.0,
+                "max": 20000.0,
+                "law": "linear"
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#FFFF00"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  20,
+                  50,
+                  100,
+                  200,
+                  500,
+                  1000,
+                  2000,
+                  5000,
+                  10000,
+                  20000
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 2,
+            "show_units": true,
+            "unit_text": "Hz",
+            "fader_cap_scale": 1.1,
+            "unit_position": "right",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_vol8": {
+            "type": "_SmartFader",
+            "label": "Dark Ghost",
+            "notes": "Almost Black Cap",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 0.0,
+                "max": 10.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#050505",
+                "secondary": "#404040",
+                "highlight": "#FFFFFF"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  2.5,
+                  5.0,
+                  7.5,
+                  10
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "show_units": true,
+            "unit_text": "x",
+            "fader_cap_scale": 1.0,
+            "unit_position": "right",
+            "movement_value_display": true,
+            "value_follow": true
+          }
+        }
+      },
+      "Fader_Zoo_ChanGain": {
+        "type": "OcaBlock",
+        "description": "Channel Gain Fader Variations",
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "cf_gain1": {
+            "type": "_SmartFader",
+            "label": "Dark Pre",
+            "notes": "Dark Fader Cap",
+            "geometry": {
+              "width": 90,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 0.0,
+                "max": 60.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#D32F2F"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  10,
+                  20,
+                  30,
+                  40,
+                  50,
+                  60
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 2,
+            "show_units": true,
+            "unit_text": "dB",
+            "fader_cap_scale": 1.1,
+            "unit_position": "right",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_gain2": {
+            "type": "_SmartFader",
+            "label": "Trim",
+            "notes": "Pink Trim",
+            "geometry": {
+              "width": 90,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": -20.0,
+                "max": 20.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#C2185B"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  -20,
+                  -10,
+                  0,
+                  10,
+                  20
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "show_units": true,
+            "unit_text": "dB",
+            "fader_cap_scale": 1.0,
+            "unit_position": "left",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_gain3": {
+            "type": "_SmartFader",
+            "label": "Drive",
+            "notes": "Thick Purple",
+            "geometry": {
+              "width": 90,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 0.0,
+                "max": 11.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#7B1FA2"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  2,
+                  4,
+                  6,
+                  8,
+                  10,
+                  11
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 3,
+            "show_units": true,
+            "unit_text": "",
+            "fader_cap_scale": 1.2,
+            "unit_position": "right",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_gain4": {
+            "type": "_SmartFader",
+            "label": "Level",
+            "notes": "Deep Purple",
+            "geometry": {
+              "width": 90,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 0.0,
+                "max": 100.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#512DA8"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  25,
+                  50,
+                  75,
+                  100
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "show_units": true,
+            "unit_text": "%",
+            "fader_cap_scale": 1.0,
+            "unit_position": "left",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_gain5": {
+            "type": "_SmartFader",
+            "label": "Aux 1",
+            "notes": "Indigo",
+            "geometry": {
+              "width": 90,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": -60.0,
+                "max": 6.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#303F9F"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  -60,
+                  -40,
+                  -20,
+                  -10,
+                  -5,
+                  0,
+                  3,
+                  6
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "show_units": true,
+            "unit_text": "dB",
+            "fader_cap_scale": 1.0,
+            "unit_position": "right",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_gain6": {
+            "type": "_SmartFader",
+            "label": "Aux 2",
+            "notes": "Blue",
+            "geometry": {
+              "width": 90,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": -60.0,
+                "max": 6.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#1976D2"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  -60,
+                  -40,
+                  -20,
+                  -10,
+                  -5,
+                  0,
+                  3,
+                  6
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "show_units": true,
+            "unit_text": "dB",
+            "fader_cap_scale": 1.0,
+            "unit_position": "left",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_gain7": {
+            "type": "_SmartFader",
+            "label": "FX Send",
+            "notes": "Light Blue",
+            "geometry": {
+              "width": 90,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": -60.0,
+                "max": 6.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#0288D1"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  -60,
+                  -40,
+                  -20,
+                  -10,
+                  -5,
+                  0,
+                  3,
+                  6
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 2,
+            "show_units": true,
+            "unit_text": "dB",
+            "fader_cap_scale": 1.1,
+            "unit_position": "right",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_gain8": {
+            "type": "_SmartFader",
+            "label": "Dark Mon",
+            "notes": "Dark Fader Cap",
+            "geometry": {
+              "width": 90,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": -60.0,
+                "max": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#050505",
+                "secondary": "#0097A7"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  -60,
+                  -50,
+                  -40,
+                  -30,
+                  -20,
+                  -10,
+                  0
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "show_units": true,
+            "unit_text": "dB",
+            "fader_cap_scale": 1.0,
+            "unit_position": "left",
+            "movement_value_display": true,
+            "value_follow": true
+          }
+        }
+      },
+      "Fader_Zoo_FX": {
+        "type": "OcaBlock",
+        "description": "Effect Send Fader Variations",
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "cf_fx1": {
+            "type": "_SmartFader",
+            "label": "Dark Verb",
+            "notes": "Dark Fader Cap",
+            "geometry": {
+              "width": 80,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 0.0,
+                "max": 100.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#00796B"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  25,
+                  50,
+                  75,
+                  100
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "show_units": true,
+            "unit_text": "%",
+            "fader_cap_scale": 1.1,
+            "unit_position": "right",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_fx2": {
+            "type": "_SmartFader",
+            "label": "Delay",
+            "notes": "Green ms",
+            "geometry": {
+              "width": 80,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 0.0,
+                "max": 1000.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#388E3C"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  250,
+                  500,
+                  750,
+                  1000
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "show_units": true,
+            "unit_text": "ms",
+            "fader_cap_scale": 1.0,
+            "unit_position": "left",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_fx3": {
+            "type": "_SmartFader",
+            "label": "Feedback",
+            "notes": "Light Green",
+            "geometry": {
+              "width": 80,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 0.0,
+                "max": 100.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#689F38"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  20,
+                  40,
+                  60,
+                  80,
+                  100
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 2,
+            "show_units": true,
+            "unit_text": "%",
+            "fader_cap_scale": 1.2,
+            "unit_position": "right",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_fx4": {
+            "type": "_SmartFader",
+            "label": "Rate",
+            "notes": "Lime Hz",
+            "geometry": {
+              "width": 80,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 0.1,
+                "max": 20.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#AFB42B"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  0.1,
+                  1.0,
+                  5.0,
+                  10.0,
+                  20.0
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "show_units": true,
+            "unit_text": "Hz",
+            "fader_cap_scale": 1.0,
+            "unit_position": "left",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_fx5": {
+            "type": "_SmartFader",
+            "label": "Depth",
+            "notes": "Yellow",
+            "geometry": {
+              "width": 80,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 0.0,
+                "max": 100.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#FBC02D"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  25,
+                  50,
+                  75,
+                  100
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "show_units": true,
+            "unit_text": "%",
+            "fader_cap_scale": 1.0,
+            "unit_position": "right",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_fx6": {
+            "type": "_SmartFader",
+            "label": "Mix",
+            "notes": "Amber Mix",
+            "geometry": {
+              "width": 80,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 0.0,
+                "max": 100.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#FFA000"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  25,
+                  50,
+                  75,
+                  100
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 2,
+            "show_units": true,
+            "unit_text": "Dry/Wet",
+            "fader_cap_scale": 1.2,
+            "unit_position": "left",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_fx7": {
+            "type": "_SmartFader",
+            "label": "Width",
+            "notes": "Orange Width",
+            "geometry": {
+              "width": 80,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": 0.0,
+                "max": 200.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2b2b2b",
+                "secondary": "#F57C00"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  50,
+                  100,
+                  150,
+                  200
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 1,
+            "show_units": true,
+            "unit_text": "%",
+            "fader_cap_scale": 1.0,
+            "unit_position": "right",
+            "movement_value_display": true,
+            "value_follow": true
+          },
+          "cf_fx8": {
+            "type": "_SmartFader",
+            "label": "Dark Master FX",
+            "notes": "Deep Black Cap",
+            "geometry": {
+              "width": 80,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0,
+                "min": -60.0,
+                "max": 6.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#050505",
+                "secondary": "#E64A19"
+              },
+              "style_flags": {},
+              "style_overrides": {
+                "custom_ticks": [
+                  -60,
+                  -40,
+                  -20,
+                  -10,
+                  -5,
+                  0,
+                  3,
+                  6
+                ]
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "layout": {},
+            "tick_thickness": 3,
+            "show_units": true,
+            "unit_text": "dB",
+            "fader_cap_scale": 1.1,
+            "unit_position": "left",
+            "movement_value_display": true,
+            "value_follow": true
+          }
+        }
+      }
+    }
+  }
+}

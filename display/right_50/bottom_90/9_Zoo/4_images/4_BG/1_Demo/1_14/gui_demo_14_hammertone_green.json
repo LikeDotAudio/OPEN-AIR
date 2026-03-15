@@ -1,0 +1,71 @@
+{
+  "Zoo_images_BG_Demo_14": {
+    "type": "OcaBin",
+    "id": "50.90.9.4.4.1.1.14",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "fields": {
+        "Meter_1": {
+          "type": "_NeedleVUMeter",
+          "label": "Octagon 1",
+          "geometry": {
+            "width": 250,
+            "height": 250
+          },
+          "domain": {
+            "primary": {
+              "min": -20.0,
+              "max": 3.0,
+              "value_default": -10.0
+            }
+          },
+          "cosmetics": {
+            "colors": {
+              "bezel": "#111111"
+            },
+            "style_overrides": {
+              "bezel_shape": "octagon",
+              "bezel_width": 6,
+              "Pointer_Style": "baton",
+              "overlay_style": "dome"
+            }
+          }
+        },
+        "Meter_2": {
+          "type": "_NeedleVUMeter",
+          "label": "Hotdog 2",
+          "geometry": {
+            "width": 400,
+            "height": 200
+          },
+          "domain": {
+            "primary": {
+              "min": -20.0,
+              "max": 3.0,
+              "value_default": -8.0
+            }
+          },
+          "cosmetics": {
+            "colors": {
+              "bezel": "#111111",
+              "background": "transparent"
+            },
+            "style_overrides": {
+              "bezel_shape": "hotdog",
+              "bezel_width": 6,
+              "Pointer_Style": "baton",
+              "overlay_style": "dome"
+            }
+          }
+        }
+      }
+    }
+  }
+}

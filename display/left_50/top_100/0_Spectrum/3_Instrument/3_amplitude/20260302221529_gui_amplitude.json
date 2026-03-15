@@ -1,0 +1,541 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Pre Amp": {
+        "type": "OcaBlock",
+        "description": "Settings for Attenuation",
+        "show_label": false,
+        "layout": {
+          "weight": 0
+        },
+        "fields": {
+          "preamp_on": {
+            "type": "_GuiButtonToggle",
+            "label_active": "Preamp",
+            "label_inactive": "Preamp",
+            "AES70": "OcaBooleanActuator",
+            "handler": "toggle_preamp",
+            "layout": {
+              "height": 50,
+              "stretch": "width",
+              "font": 15
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "ON": {
+                "label_active": "Preamp ON",
+                "label_inactive": "Preamp ON",
+                "selected": false
+              },
+              "OFF": {
+                "label_active": "Preamp OFF",
+                "label_inactive": "Preamp OFF",
+                "selected": true
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Amplitude",
+              "command": "Set_Power_Gain",
+              "input_name": "state_bool",
+              "converter": "bool_to_int"
+            }
+          },
+          "high_sensitivity_on": {
+            "type": "_GuiButtonToggle",
+            "AES70": "OcaBooleanActuator",
+            "handler": "toggle_high_sensitivity",
+            "layout": {
+              "height": 50,
+              "stretch": "width",
+              "font": 15
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "ON": {
+                "label_active": "High Sensitivity ON",
+                "label_inactive": "High Sensitivity ON",
+                "selected": false
+              },
+              "OFF": {
+                "label_active": "High Sensitivity OFF",
+                "label_inactive": "High Sensitivity OFF",
+                "selected": true
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Amplitude",
+              "command": "Set_High_Sensitivity",
+              "input_name": "state_bool",
+              "converter": "bool_to_int"
+            }
+          }
+        }
+      },
+      "Fold_RefLevel": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Reference Level": {
+        "type": "OcaBlock",
+        "label": "Reference Level",
+        "show_label": false,
+        "description": "Settings for Reference Level",
+        "layout": {
+          "weight": 0
+        },
+        "fields": {
+          "break_reffLeve": {
+            "type": "OcaFold",
+            "layout": {
+              "thickness": 2,
+              "pady": 5,
+              "color": "#33A1FD",
+              "stretch": "width"
+            }
+          },
+          "REFERENCE_LEVEL_dropdown": {
+            "type": "_GuiDropDownOption",
+            "AES70": "OcaSwitch",
+            "label": "Reference Level",
+            "handler": "set_reference_level",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Amplitude",
+              "command": "Set_Reference_Level",
+              "input_name": "dbm_value",
+              "converter": "float"
+            },
+            "layout": {
+              "height": 30,
+              "stretch": "width"
+            },
+            "options": {
+              "1": {
+                "label_active": "-125 dB",
+                "label_inactive": "-125 dB",
+                "value": "-125",
+                "units": "dB",
+                "selected": false
+              },
+              "2": {
+                "label_active": "-120 dB",
+                "label_inactive": "-120 dB",
+                "value": "-120",
+                "units": "dB",
+                "selected": false
+              },
+              "3": {
+                "label_active": "-115 dB",
+                "label_inactive": "-115 dB",
+                "value": "-115",
+                "units": "dB",
+                "selected": false
+              },
+              "4": {
+                "label_active": "-110 dB",
+                "label_inactive": "-110 dB",
+                "value": "-110",
+                "units": "dB",
+                "selected": false
+              },
+              "5": {
+                "label_active": "-105 dB",
+                "label_inactive": "-105 dB",
+                "value": "-105",
+                "units": "dB",
+                "selected": false
+              },
+              "6": {
+                "label_active": "-100 dB",
+                "label_inactive": "-100 dB",
+                "value": "-100",
+                "units": "dB",
+                "selected": false
+              },
+              "7": {
+                "label_active": "-95 dB",
+                "label_inactive": "-95 dB",
+                "value": "-95",
+                "units": "dB",
+                "selected": false
+              },
+              "8": {
+                "label_active": "-90 dB",
+                "label_inactive": "-90 dB",
+                "value": "-90",
+                "units": "dB",
+                "selected": false
+              },
+              "9": {
+                "label_active": "-85 dB",
+                "label_inactive": "-85 dB",
+                "value": "-85",
+                "units": "dB",
+                "selected": false
+              },
+              "10": {
+                "label_active": "-80 dB",
+                "label_inactive": "-80 dB",
+                "value": "-80",
+                "units": "dB",
+                "selected": false
+              },
+              "11": {
+                "label_active": "-75 dB",
+                "label_inactive": "-75 dB",
+                "value": "-75",
+                "units": "dB",
+                "selected": false
+              },
+              "12": {
+                "label_active": "-70 dB",
+                "label_inactive": "-70 dB",
+                "value": "-70",
+                "units": "dB",
+                "selected": false
+              },
+              "13": {
+                "label_active": "-65 dB",
+                "label_inactive": "-65 dB",
+                "value": "-65",
+                "units": "dB",
+                "selected": false
+              },
+              "14": {
+                "label_active": "-60 dB",
+                "label_inactive": "-60 dB",
+                "value": "-60",
+                "units": "dB",
+                "selected": false
+              },
+              "15": {
+                "label_active": "-55 dB",
+                "label_inactive": "-55 dB",
+                "value": "-55",
+                "units": "dB",
+                "selected": false
+              },
+              "16": {
+                "label_active": "-50 dB",
+                "label_inactive": "-50 dB",
+                "value": "-50",
+                "units": "dB",
+                "selected": false
+              },
+              "17": {
+                "label_active": "-45 dB",
+                "label_inactive": "-45 dB",
+                "value": "-45",
+                "units": "dB",
+                "selected": true
+              },
+              "18": {
+                "label_active": "-40 dB",
+                "label_inactive": "-40 dB",
+                "value": "-40",
+                "units": "dB",
+                "selected": false
+              },
+              "19": {
+                "label_active": "-35 dB",
+                "label_inactive": "-35 dB",
+                "value": "-35",
+                "units": "dB",
+                "selected": false
+              },
+              "20": {
+                "label_active": "-30 dB",
+                "label_inactive": "-30 dB",
+                "value": "-30",
+                "units": "dB",
+                "selected": false
+              },
+              "21": {
+                "label_active": "-25 dB",
+                "label_inactive": "-25 dB",
+                "value": "-25",
+                "units": "dB",
+                "selected": false
+              },
+              "22": {
+                "label_active": "-20 dB",
+                "label_inactive": "-20 dB",
+                "value": "-20",
+                "units": "dB",
+                "selected": false
+              },
+              "23": {
+                "label_active": "-15 dB",
+                "label_inactive": "-15 dB",
+                "value": "-15",
+                "units": "dB",
+                "selected": false
+              },
+              "24": {
+                "label_active": "-10 dB",
+                "label_inactive": "-10 dB",
+                "value": "-10",
+                "units": "dB",
+                "selected": false
+              },
+              "25": {
+                "label_active": "-5 dB",
+                "label_inactive": "-5 dB",
+                "value": "-5",
+                "units": "dB",
+                "selected": false
+              }
+            }
+          },
+          "ref_level_dBm": {
+            "label": "Reference Level",
+            "type": "_Horizontal_with_dial_Value",
+            "layout": {
+              "height": 100,
+              "width": 400,
+              "sticky": "ew",
+              "font": 12,
+              "padx": 10,
+              "pady": 10
+            },
+            "handler": "set_ref_level",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Amplitude",
+              "command": "Set_Reference_Level",
+              "input_name": "dbm_value",
+              "converter": "float"
+            },
+            "default_value": "-30",
+            "units": "dBm",
+            "min": "-100",
+            "max": "0",
+            "step_coarse": "10",
+            "step_fine": "1",
+            "show_label": true,
+            "value_config": {
+              "height": 30,
+              "colour": "#ffffff",
+              "bg_color": "#1a1a1a",
+              "width": 12,
+              "font": 14
+            },
+            "fader_config": {
+              "type": "_GuiFaderHorizontal",
+              "tick_interval": 10,
+              "show_ticks": true,
+              "bar_color": "#444444",
+              "active_color": "#FF9900",
+              "glow_intensity": 1.5,
+              "width": 300,
+              "height": 65
+            },
+            "dial_config": {
+              "type": "_GuiKnob",
+              "knob_style": "dial",
+              "width": 60,
+              "height": 60,
+              "active_color": "#00ffff",
+              "bg_color": "#2b2b2b"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          }
+        }
+      },
+      "Fold_Attenuation": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Attenuation": {
+        "type": "OcaBlock",
+        "description": "Settings for Attenuation",
+        "show_label": false,
+        "layout": {
+          "weight": 0
+        },
+        "fields": {
+          "break_1": {
+            "type": "OcaFold",
+            "layout": {
+              "thickness": 1,
+              "pady": 5,
+              "color": "#FF9900",
+              "stretch": "width"
+            }
+          },
+          "POWER_ATTENUATION": {
+            "type": "_GuiDropDownOption",
+            "AES70": "OcaSwitch",
+            "handler": "set_power_attenuation",
+            "label": "Power Attenuation",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Amplitude",
+              "command": "Set_Power_Attenuation",
+              "input_name": "db_value",
+              "converter": "float"
+            },
+            "layout": {
+              "height": 30,
+              "stretch": "width"
+            },
+            "options": {
+              "1": {
+                "label_active": "0 dB",
+                "label_inactive": "0 dB",
+                "value": "0",
+                "units": "dB",
+                "selected": false
+              },
+              "2": {
+                "label_active": "10 dB",
+                "label_inactive": "10 dB",
+                "value": "10",
+                "units": "dB",
+                "selected": false
+              },
+              "3": {
+                "label_active": "20 dB",
+                "label_inactive": "20 dB",
+                "value": "20",
+                "units": "dB",
+                "selected": false
+              },
+              "4": {
+                "label_active": "30 dB",
+                "label_inactive": "30 dB",
+                "value": "30",
+                "units": "dB",
+                "selected": false
+              },
+              "5": {
+                "label_active": "40 dB",
+                "label_inactive": "40 dB",
+                "value": "40",
+                "units": "dB",
+                "selected": false
+              },
+              "6": {
+                "label_active": "50 dB",
+                "label_inactive": "50 dB",
+                "value": "50",
+                "units": "dB",
+                "selected": false
+              }
+            }
+          },
+          "power_attenuation_dB": {
+            "type": "_Horizontal_with_dial_Value",
+            "label_active": "Power Attenuation",
+            "handler": "set_power_attenuation",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Amplitude",
+              "command": "Set_Power_Attenuation",
+              "input_name": "db_value",
+              "converter": "float"
+            },
+            "default_value": "10",
+            "units": "dBm",
+            "min": "-100",
+            "max": "0",
+            "step_coarse": "10",
+            "step_fine": "1",
+            "show_label": true,
+            "layout": {
+              "height": 100,
+              "width": 400,
+              "sticky": "ew",
+              "font": 12,
+              "padx": 10,
+              "pady": 10
+            },
+            "value_config": {
+              "height": 30,
+              "colour": "#ffffff",
+              "bg_color": "#1a1a1a",
+              "width": 12,
+              "font": 14
+            },
+            "fader_config": {
+              "type": "_GuiFaderHorizontal",
+              "tick_interval": 10,
+              "show_ticks": true,
+              "bar_color": "#444444",
+              "active_color": "#FF9900",
+              "glow_intensity": 1.5,
+              "width": 300,
+              "height": 65
+            },
+            "dial_config": {
+              "type": "_GuiKnob",
+              "knob_style": "dial",
+              "width": 60,
+              "height": 60,
+              "active_color": "#00ffff",
+              "bg_color": "#2b2b2b"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

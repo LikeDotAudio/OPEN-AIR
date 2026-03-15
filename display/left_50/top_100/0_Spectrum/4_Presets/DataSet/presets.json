@@ -1,0 +1,367 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": [
+      {
+        "PRESET_001": {
+          "Active": true,
+          "FileName": "14MON.STA",
+          "NickName": "470-530    14 MON",
+          "Start": "470",
+          "Stop": "530",
+          "Center": "500",
+          "Span": "60",
+          "RBW": "30000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_002": {
+          "Active": true,
+          "FileName": "24MON.STA",
+          "NickName": "530-590     24MON",
+          "Start": "530",
+          "Stop": "590",
+          "Center": "560",
+          "Span": "60",
+          "RBW": "30000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_003": {
+          "Active": true,
+          "FileName": "34MON.STA",
+          "NickName": "590 - 650      34MON",
+          "Start": "590",
+          "Stop": "650",
+          "Center": "620",
+          "Span": "60",
+          "RBW": "30000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_004": {
+          "Active": true,
+          "FileName": "44MON.STA",
+          "NickName": "650 - 710      44MON",
+          "Start": "650",
+          "Stop": "710",
+          "Center": "680",
+          "Span": "60",
+          "RBW": "30000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_005": {
+          "Active": true,
+          "FileName": "470608MON.STA",
+          "NickName": "470-608 MON",
+          "Start": "470",
+          "Stop": "608",
+          "Center": "539",
+          "Span": "138",
+          "RBW": "30000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_006": {
+          "Active": true,
+          "FileName": "44.STA",
+          "NickName": "650-710",
+          "Start": "650",
+          "Stop": "710",
+          "Center": "680",
+          "Span": "60",
+          "RBW": "300000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_007": {
+          "Active": true,
+          "FileName": "02.STA",
+          "NickName": "54-88 MHz",
+          "Start": "54",
+          "Stop": "88",
+          "Center": "71",
+          "Span": "34",
+          "RBW": "300000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_008": {
+          "Active": true,
+          "FileName": "450-470LMR.STA",
+          "NickName": "450-470 LMR",
+          "Start": "450",
+          "Stop": "470",
+          "Center": "460",
+          "Span": "20",
+          "RBW": "1000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_009": {
+          "Active": true,
+          "FileName": "34.STA",
+          "NickName": "34",
+          "Start": "590",
+          "Stop": "650",
+          "Center": "620",
+          "Span": "60",
+          "RBW": "300000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_010": {
+          "Active": true,
+          "FileName": "14.STA",
+          "NickName": "14",
+          "Start": "470",
+          "Stop": "530",
+          "Center": "500",
+          "Span": "60",
+          "RBW": "300000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_011": {
+          "Active": true,
+          "FileName": "07.STA",
+          "NickName": "7",
+          "Start": "174",
+          "Stop": "218",
+          "Center": "196",
+          "Span": "44",
+          "RBW": "300000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_012": {
+          "Active": true,
+          "FileName": "DECT_NA.STA",
+          "NickName": "DECT NA",
+          "Start": "1920",
+          "Stop": "1930",
+          "Center": "1925",
+          "Span": "10",
+          "RBW": "100000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_013": {
+          "Active": true,
+          "FileName": "DECT_EU.STA",
+          "NickName": "DECT EU",
+          "Start": "1880",
+          "Stop": "1900",
+          "Center": "1890",
+          "Span": "20",
+          "RBW": "300000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_014": {
+          "Active": true,
+          "FileName": "22GHZCAMS.STA",
+          "NickName": "22GHZCAMS",
+          "Start": "2200",
+          "Stop": "2300",
+          "Center": "2250",
+          "Span": "100",
+          "RBW": "1000000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_015": {
+          "Active": true,
+          "FileName": "2GHZCAMS.STA",
+          "NickName": "Wireless cameras",
+          "Start": "2050",
+          "Stop": "2300",
+          "Center": "2175",
+          "Span": "250",
+          "RBW": "1000000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      },
+      {
+        "PRESET_016": {
+          "Active": true,
+          "FileName": "3GHZCAMS.STA",
+          "NickName": "3GHZCAMS",
+          "Start": "3150",
+          "Stop": "3300",
+          "Center": "3225",
+          "Span": "150",
+          "RBW": "1000000",
+          "VBW": null,
+          "RefLevel": "-50",
+          "Attenuation": "20",
+          "MaxHold": null,
+          "HighSens": null,
+          "PreAmp": "1",
+          "Trace1Mode": "WRITE",
+          "Trace2Mode": "MAXhold",
+          "Trace3Mode": "MINhold",
+          "Trace4Mode": "BLANK"
+        }
+      }
+    ]
+  }
+}

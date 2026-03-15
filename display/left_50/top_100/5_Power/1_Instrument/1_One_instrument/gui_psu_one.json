@@ -1,0 +1,234 @@
+{
+  "Power_Instrument_One_instrument": {
+    "type": "OcaBin",
+    "id": "50.100.5.1.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "PSU_Reactor_Interface": {
+        "type": "OcaBlock",
+        "description": "High-Voltage Analog Injection System",
+        "fields": {
+          "Top_Level_Interlock": {
+            "type": "OcaBlock",
+            "description": "MAIN POWER BUS",
+            "fields": {
+              "Master_Output_Switch": {
+                "type": "_TrapezoidButton",
+                "label_active": "\u2622\ufe0f MAIN BUS: ACTIVE \u2622\ufe0f",
+                "label_inactive": "MAIN BUS: DISENGAGED",
+                "state_default": false,
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "OUTP <state>"
+                  }
+                }
+              }
+            }
+          },
+          "Analog_Telemetry_Deck": {
+            "type": "OcaBlock",
+            "description": "Galvanometer Array",
+            "fields": {
+              "Meter_Voltage": {
+                "type": "_GuiAnalogGauge",
+                "label_active": "VOLTAGE",
+                "value_default": "0",
+                "min": "0",
+                "max": "100",
+                "units": "V",
+                "description": "Potential Difference",
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:VOLT?"
+                  }
+                }
+              },
+              "Meter_Current": {
+                "type": "_GuiAnalogGauge",
+                "label_active": "CURRENT",
+                "value_default": "0",
+                "min": "0",
+                "max": "10",
+                "units": "A",
+                "description": "Electron Flow",
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:CURR?"
+                  }
+                }
+              },
+              "Meter_Power": {
+                "type": "_GuiAnalogGauge",
+                "label_active": "TOTAL POWER",
+                "value_default": "0",
+                "min": "0",
+                "max": "1000",
+                "units": "W",
+                "description": "Energy Consumption",
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:POW?"
+                  }
+                }
+              }
+            }
+          },
+          "Visual_History_Sector": {
+            "type": "OcaBlock",
+            "description": "Temporal Log",
+            "fields": {
+              "Power_History": {
+                "type": "_GuiGraph",
+                "label_active": "Stability Matrix",
+                "description": "Voltage & Current over Time",
+                "height": 200,
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:SCAL:ALL?"
+                  }
+                }
+              }
+            }
+          },
+          "Reactor_Control_Rods": {
+            "type": "OcaBlock",
+            "description": "Manual Regulation",
+            "fields": {
+              "Voltage_Fader": {
+                "type": "_GuiVerticalFader",
+                "label_active": "SET VOLTS (V)",
+                "value_default": "5.0",
+                "min": "0.0",
+                "max": "100.0",
+                "units": "V",
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "VOLT <value>"
+                  }
+                }
+              },
+              "Current_Fader": {
+                "type": "_GuiVerticalFader",
+                "label_active": "LIMIT AMPS (A)",
+                "value_default": "0.1",
+                "min": "0.0",
+                "max": "10.0",
+                "units": "A",
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "CURR <value>"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

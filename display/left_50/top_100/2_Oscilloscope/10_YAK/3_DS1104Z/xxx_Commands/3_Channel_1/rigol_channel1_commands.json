@@ -1,0 +1,321 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "nab": {
+        "type": "OcaBlock",
+        "description": "Rigol Measurements",
+        "fields": {
+          "Measurements_CH1": {
+            "type": "OcaBlock",
+            "description": "Channel 1 Stats",
+            "fields": {
+              "Get_Stats_CH1": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":MEASure:VPP? CHANnel1;:MEASure:VRMS? CHANnel1;:MEASure:FREQuency? CHANnel1;:MEASure:PDUTy? CHANnel1"
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "Vpp": {
+                        "value": "Vpp",
+                        "type": "_GuiValue"
+                      },
+                      "Vrms": {
+                        "value": "Vrms",
+                        "type": "_GuiValue"
+                      },
+                      "Freq": {
+                        "value": "Freq",
+                        "type": "_GuiValue"
+                      },
+                      "Duty": {
+                        "value": "Duty %",
+                        "type": "_GuiValue"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "rig": {
+        "type": "OcaBlock",
+        "description": "Scope Configuration",
+        "fields": {
+          "Config_CH1": {
+            "type": "OcaBlock",
+            "description": "Channel 1 Vertical",
+            "fields": {
+              "CH1_Scale": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":CHANnel1:SCALe <scale>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "scale": {
+                        "value": "1.0",
+                        "type": "_GuiValue"
+                      }
+                    }
+                  }
+                }
+              },
+              "CH1_Offset": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":CHANnel1:OFFSet <offset>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "offset": {
+                        "value": "0.0",
+                        "type": "_GuiValue"
+                      }
+                    }
+                  }
+                }
+              },
+              "CH1_Coupling": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":CHANnel1:COUPling <coupling>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "coupling": {
+                        "value": "DC",
+                        "type": "_Value",
+                        "description": "AC, DC, GND"
+                      }
+                    }
+                  }
+                }
+              },
+              "CH1_Probe": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":CHANnel1:PROBe <atten>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "atten": {
+                        "value": "10",
+                        "type": "_Value",
+                        "description": "1, 10, 100"
+                      }
+                    }
+                  }
+                }
+              },
+              "CH1_BWLimit": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":CHANnel1:BWLimit <limit>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "limit": {
+                        "value": "20M",
+                        "type": "_Value",
+                        "description": "20M or OFF"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Do": {
+        "type": "OcaBlock",
+        "description": "Actions and Toggles",
+        "fields": {
+          "Channel_Display_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "CH1_ON": {
+                "type": "_GuiActuator",
+                "label_inactive": "CH1 ON",
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "Execute Command": {
+                  "message": ":CHANnel1:DISPlay ON"
+                }
+              },
+              "CH1_OFF": {
+                "type": "_GuiActuator",
+                "label_inactive": "CH1 OFF",
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "Execute Command": {
+                  "message": ":CHANnel1:DISPlay OFF"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

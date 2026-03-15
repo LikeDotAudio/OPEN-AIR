@@ -1,0 +1,143 @@
+{
+  "Zoo": {
+    "type": "OcaBin",
+    "id": "50.90.9",
+    "description": "Root container locked to window edges with smart auto-scrolling.",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Universal_Rhyme_Showcase": {
+        "type": "OcaBlock",
+        "description": "Hot-swappable Smart Widgets",
+        "layout_columns": 4,
+        "fields": {
+          "Master_Meter": {
+            "type": "_SmartMeter",
+            "label": "Smart Meter (VU)",
+            "geometry": {
+              "width": 60,
+              "height": 300,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -60.0,
+                "max": 6.0,
+                "law": "log",
+                "unit": "dB"
+              }
+            },
+            "dynamics": {
+              "ballistics": "vu",
+              "fps_limit": 60
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00ff00",
+                "secondary": "#444444",
+                "alert": "#ff0000"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "fill_shape": true
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "Master_Fader": {
+            "type": "_SmartFader",
+            "label": "Smart Fader",
+            "geometry": {
+              "width": 60,
+              "height": 300,
+              "orientation": "vert"
+            },
+            "domain": {
+              "primary": {
+                "min": -60.0,
+                "max": 6.0,
+                "law": "log",
+                "unit": "dB"
+              }
+            },
+            "dynamics": {
+              "smoothing": 0.1
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#1a1a1a",
+                "secondary": "#444444"
+              }
+            },
+            "interaction": {
+              "is_read_only": false,
+              "sensitivity": 1.0,
+              "scroll_enabled": true
+            }
+          },
+          "Master_Knob": {
+            "type": "_SmartKnob",
+            "label": "Smart Knob",
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "unit": "%"
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#33A1FD",
+                "secondary": "#222222"
+              },
+              "style_flags": {
+                "show_grid": true
+              }
+            }
+          },
+          "Master_Graph": {
+            "type": "_DataGraph",
+            "label": "Smart Graph",
+            "geometry": {
+              "width": 300,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "min": -90,
+                "max": 6,
+                "unit": "dB"
+              },
+              "secondary": {
+                "min": 20,
+                "max": 20000,
+                "unit": "Hz"
+              }
+            },
+            "dynamics": {
+              "retention": 5000
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00FF00",
+                "background": "#000000"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

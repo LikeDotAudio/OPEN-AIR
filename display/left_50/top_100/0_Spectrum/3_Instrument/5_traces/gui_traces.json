@@ -1,0 +1,538 @@
+{
+  "Spectrum_Instrument_traces": {
+    "type": "OcaBin",
+    "id": "50.100.0.3.5",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Trace 1": {
+        "type": "OcaBlock",
+        "show_label": true,
+        "description": "Settings for Trace 1 Mode",
+        "layout": {
+          "weight": 1
+        },
+        "fields": {
+          "TRACE_MODE_1": {
+            "type": "_GuiDropDownOption",
+            "AES70": "OcaSwitch",
+            "handler": "set_trace_mode",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Trace",
+              "command": "Set_Trace_Mode",
+              "input_name": "mode_string",
+              "converter": "string",
+              "trace_number": 1
+            },
+            "layout": {
+              "height": 30,
+              "align": "center",
+              "max_cols": 5
+            },
+            "options": {
+              "WRITE": {
+                "label_active": "LIVE REALTIME",
+                "label_inactive": "LIVE REALTIME",
+                "description": "Captures and displays the trace in real time, like a hyperactive surveillance camera.",
+                "value": "WRITE",
+                "units": "mode",
+                "selected": false
+              },
+              "MAXHOLD": {
+                "label_active": "MAX HOLD",
+                "label_inactive": "MAX HOLD",
+                "description": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                "value": "MAXHOLD",
+                "units": "mode",
+                "selected": false
+              },
+              "MINHOLD": {
+                "label_active": "MIN HOLD",
+                "label_inactive": "MIN HOLD",
+                "description": "Holds onto the lowest points, great for detecting signals that vanish in the noise.",
+                "value": "MINHOLD",
+                "units": "mode",
+                "selected": false
+              },
+              "BLANK": {
+                "label_active": "BLANK",
+                "label_inactive": "BLANK",
+                "description": "Clears the slate, preparing for a new scan. A zen state for the scanner.",
+                "value": "BLANK",
+                "units": "mode",
+                "selected": false
+              },
+              "VIEW": {
+                "label_active": "VIEW",
+                "label_inactive": "VIEW",
+                "description": "The standard mode, simply viewing the current sweep data.",
+                "value": "VIEW",
+                "units": "mode",
+                "selected": true
+              }
+            }
+          }
+        }
+      },
+      "Trace 2": {
+        "type": "OcaBlock",
+        "show_label": true,
+        "description": "Settings for Trace 2 Mode",
+        "layout": {
+          "weight": 1
+        },
+        "fields": {
+          "TRACE_MODE_2": {
+            "type": "_GuiDropDownOption",
+            "AES70": "OcaSwitch",
+            "handler": "set_trace_mode",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Trace",
+              "command": "Set_Trace_Mode",
+              "input_name": "mode_string",
+              "converter": "string",
+              "trace_number": 2
+            },
+            "layout": {
+              "height": 30,
+              "align": "center",
+              "max_cols": 5
+            },
+            "options": {
+              "WRITE": {
+                "label_active": "LIVE REALTIME",
+                "label_inactive": "LIVE REALTIME",
+                "description": "Captures and displays the trace in real time, like a hyperactive surveillance camera.",
+                "value": "WRITE",
+                "units": "mode",
+                "selected": false
+              },
+              "MAXHOLD": {
+                "label_active": "MAX HOLD",
+                "label_inactive": "MAX HOLD",
+                "description": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                "value": "MAXHOLD",
+                "units": "mode",
+                "selected": true
+              },
+              "MINHOLD": {
+                "label_active": "MIN HOLD",
+                "label_inactive": "MIN HOLD",
+                "description": "Holds onto the lowest points, great for detecting signals that vanish in the noise.",
+                "value": "MINHOLD",
+                "units": "mode",
+                "selected": false
+              },
+              "BLANK": {
+                "label_active": "BLANK",
+                "label_inactive": "BLANK",
+                "description": "Clears the slate, preparing for a new scan. A zen state for the scanner.",
+                "value": "BLANK",
+                "units": "mode",
+                "selected": false
+              },
+              "VIEW": {
+                "label_active": "VIEW",
+                "label_inactive": "VIEW",
+                "description": "The standard mode, simply viewing the current sweep data.",
+                "value": "VIEW",
+                "units": "mode",
+                "selected": false
+              }
+            }
+          }
+        }
+      },
+      "Trace 3": {
+        "type": "OcaBlock",
+        "show_label": true,
+        "description": "Settings for Trace 3 Mode",
+        "layout": {
+          "weight": 1
+        },
+        "fields": {
+          "TRACE_MODE_3": {
+            "type": "_GuiDropDownOption",
+            "AES70": "OcaSwitch",
+            "handler": "set_trace_mode",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Trace",
+              "command": "Set_Trace_Mode",
+              "input_name": "mode_string",
+              "converter": "string",
+              "trace_number": 3
+            },
+            "layout": {
+              "height": 30,
+              "align": "center",
+              "max_cols": 5
+            },
+            "options": {
+              "WRITE": {
+                "label_active": "LIVE REALTIME",
+                "label_inactive": "LIVE REALTIME",
+                "description": "Captures and displays the trace in real time, like a hyperactive surveillance camera.",
+                "value": "WRITE",
+                "units": "mode",
+                "selected": false
+              },
+              "MAXHOLD": {
+                "label_active": "MAX HOLD",
+                "label_inactive": "MAX HOLD",
+                "description": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                "value": "MAXHOLD",
+                "units": "mode",
+                "selected": false
+              },
+              "MINHOLD": {
+                "label_active": "MIN HOLD",
+                "label_inactive": "MIN HOLD",
+                "description": "Holds onto the lowest points, great for detecting signals that vanish in the noise.",
+                "value": "MINHOLD",
+                "units": "mode",
+                "selected": true
+              },
+              "BLANK": {
+                "label_active": "BLANK",
+                "label_inactive": "BLANK",
+                "description": "Clears the slate, preparing for a new scan. A zen state for the scanner.",
+                "value": "BLANK",
+                "units": "mode",
+                "selected": false
+              },
+              "VIEW": {
+                "label_active": "VIEW",
+                "label_inactive": "VIEW",
+                "description": "The standard mode, simply viewing the current sweep data.",
+                "value": "VIEW",
+                "units": "mode",
+                "selected": false
+              }
+            }
+          }
+        }
+      },
+      "Trace 4": {
+        "type": "OcaBlock",
+        "show_label": true,
+        "description": "Settings for Trace 4 Mode",
+        "layout": {
+          "weight": 1
+        },
+        "fields": {
+          "TRACE_MODE_4": {
+            "type": "_GuiDropDownOption",
+            "AES70": "OcaSwitch",
+            "handler": "set_trace_mode",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Trace",
+              "command": "Set_Trace_Mode",
+              "input_name": "mode_string",
+              "converter": "string",
+              "trace_number": 4
+            },
+            "layout": {
+              "height": 30,
+              "align": "center",
+              "max_cols": 5
+            },
+            "options": {
+              "WRITE": {
+                "label_active": "LIVE REALTIME",
+                "label_inactive": "LIVE REALTIME",
+                "description": "Captures and displays the trace in real time, like a hyperactive surveillance camera.",
+                "value": "WRITE",
+                "units": "mode",
+                "selected": false
+              },
+              "MAXHOLD": {
+                "label_active": "MAX HOLD",
+                "label_inactive": "MAX HOLD",
+                "description": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                "value": "MAXHOLD",
+                "units": "mode",
+                "selected": false
+              },
+              "MINHOLD": {
+                "label_active": "MIN HOLD",
+                "label_inactive": "MIN HOLD",
+                "description": "Holds onto the lowest points, great for detecting signals that vanish in the noise.",
+                "value": "MINHOLD",
+                "units": "mode",
+                "selected": false
+              },
+              "BLANK": {
+                "label_active": "BLANK",
+                "label_inactive": "BLANK",
+                "description": "Clears the slate, preparing for a new scan. A zen state for the scanner.",
+                "value": "BLANK",
+                "units": "mode",
+                "selected": true
+              },
+              "VIEW": {
+                "label_active": "VIEW",
+                "label_inactive": "VIEW",
+                "description": "The standard mode, simply viewing the current sweep data.",
+                "value": "VIEW",
+                "units": "mode",
+                "selected": false
+              }
+            }
+          }
+        }
+      },
+      "Fold_Continuous": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Continuous": {
+        "type": "OcaBlock",
+        "AES70": "OcaTraceManager",
+        "description": "A block for managing the continuous sweep settings.",
+        "layout": {
+          "weight": 1
+        },
+        "fields": {
+          "CONTINUOUS_MODE": {
+            "type": "_GuiButtonToggle",
+            "AES70": "OcaBooleanActuator",
+            "handler": "set_continuous_initiate_mode",
+            "layout": {
+              "height": 75,
+              "width": 200,
+              "align": "center",
+              "font": 15
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "ON": {
+                "label_active": "CONTINUOUS ON",
+                "label_inactive": "CONTINUOUS ON",
+                "description": "Turns on continuous sweep mode. The scanner never rests!",
+                "selected": true
+              },
+              "OFF": {
+                "label_active": "CONTINUOUS OFF",
+                "label_inactive": "CONTINUOUS OFF",
+                "description": "Turns off continuous sweep mode. The scanner will perform a single sweep and then rest.",
+                "selected": false
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Trace",
+              "command": "Set_Continuous_Mode",
+              "input_name": "state_bool",
+              "converter": "bool_to_int"
+            }
+          },
+          "initiate_continuous_on": {
+            "type": "_GuiActuator",
+            "label_active": "CONTINUOUS INITIATED",
+            "label_inactive": "CONTINUOUS INITIATE",
+            "AES70": "OcaBooleanActuator",
+            "handler": "toggle_continuous_initiate",
+            "layout": {
+              "height": 75,
+              "width": 200,
+              "align": "center",
+              "font": 15
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "do",
+              "sub_path": "Trace",
+              "command": "Do_Initiate_Continuous",
+              "trigger_only": true
+            },
+            "trigger": "0"
+          }
+        }
+      },
+      "Fold_Averaging": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Averaging": {
+        "type": "OcaBlock",
+        "AES70": "OcaTraceManager",
+        "description": "A block for managing trace averaging settings.",
+        "layout": {
+          "weight": 0
+        },
+        "fields": {
+          "AVERAGING": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_averaging",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9,
+              "max_cols": 5,
+              "width": 50,
+              "stretch": "width",
+              "font": 10
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "0": {
+                "label_active": "Off",
+                "label_inactive": "Off",
+                "description": "Just a raw, single sweep. Great for seeing fast changes and fleeting events, but the noise floor is high and the trace is very jittery.",
+                "value": "0",
+                "units": "count",
+                "selected": true
+              },
+              "5": {
+                "label_active": "Light Filter",
+                "label_inactive": "Light Filter",
+                "description": "A very mild smoothing of the signal, removing some of the jitter. It's like putting a slight damper on the noise, making the trace a little easier to read.",
+                "value": "5",
+                "units": "count",
+                "selected": false
+              },
+              "10": {
+                "label_active": "Getting Clear",
+                "label_inactive": "Getting Clear",
+                "description": "The trace becomes noticeably less fuzzy. The random spikes of the noise floor start to settle down, revealing more consistent signals.",
+                "value": "10",
+                "units": "count",
+                "selected": false
+              },
+              "25": {
+                "label_active": "The Sweet Spot",
+                "label_inactive": "The Sweet Spot",
+                "description": "A good balance of noise reduction and display speed. The noise floor is clean, and low-level, stable signals are clearly visible.",
+                "value": "25",
+                "units": "count",
+                "selected": false
+              },
+              "50": {
+                "label_active": "Steady Hands",
+                "label_inactive": "Steady Hands",
+                "description": "The noise floor is now very stable and appears as a thin line. You're only seeing the most consistent signals and cutting out most of the random interference.",
+                "value": "50",
+                "units": "count",
+                "selected": false
+              },
+              "75": {
+                "label_active": "Deep Dive",
+                "label_inactive": "Deep Dive",
+                "description": "This setting is for serious analysis. It's a highly stable trace that filters out a large portion of the ambient RF noise, allowing for precise measurements of continuous signals.",
+                "value": "75",
+                "units": "count",
+                "selected": false
+              },
+              "100": {
+                "label_active": "Scientific Grade",
+                "label_inactive": "Scientific Grade",
+                "description": "For when only the cleanest signal will do. This high level of averaging provides a virtually noise-free display, perfect for scientific or very low-level signal detection.",
+                "value": "100",
+                "units": "count",
+                "selected": false
+              },
+              "200": {
+                "label_active": "Crystal Clear",
+                "label_inactive": "Crystal Clear",
+                "description": "A deep and thorough look at the spectrum. All but the most stable signals are averaged out, offering a truly pristine view of the fundamental RF environment.",
+                "value": "200",
+                "units": "count",
+                "selected": false
+              },
+              "500": {
+                "label_active": "The Observer",
+                "label_inactive": "The Observer",
+                "description": "An incredibly slow and deliberate pace. This is for long-term monitoring, allowing you to see the overall shape of the spectrum with almost all noise removed.",
+                "value": "500",
+                "units": "count",
+                "selected": false
+              },
+              "1000": {
+                "label_active": "Meditative Mode",
+                "label_inactive": "Meditative Mode",
+                "description": "For the patient and the meticulous. This is the ultimate level of noise reduction, yielding an exceptionally smooth and stable trace for the most demanding analysis.",
+                "value": "1000",
+                "units": "count",
+                "selected": false
+              },
+              "UNSELECTED": {
+                "value": "NONE",
+                "label_active": "None Selected",
+                "label_inactive": "None Selected",
+                "description": "No averaging option is currently selected.",
+                "units": "",
+                "selected": false
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Trace",
+              "command": "Set_Averaging",
+              "input_name": "count_int",
+              "converter": "int"
+            },
+            "geometry": {
+              "width": 126
+            }
+          }
+        }
+      }
+    }
+  }
+}

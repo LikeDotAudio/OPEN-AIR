@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=OPEN-AIR
+Comment=OPEN-AIR Application
+Exec=/home/anthony/Documents/OPEN-AIR/OpenAir.py
+Icon=/home/anthony/Documents/OPEN-AIR/assets/images/open_air_icon.svg
+Path=/home/anthony/Documents/OPEN-AIR
+Terminal=false
+StartupNotify=true
+Categories=Utility;Development;

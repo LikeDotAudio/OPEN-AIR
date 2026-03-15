@@ -1,0 +1,311 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Generic_Display_Block": {
+        "type": "OcaBlock",
+        "description": "Dynamic Content for yak_PSU",
+        "fields": {
+          "Agilent_PSU_66000A": {
+            "nab": {
+              "type": "OcaBlock",
+              "description": "MPS Metering",
+              "fields": {
+                "Read_Values": {
+                  "type": "OcaBlock",
+                  "description": "Read Voltage and Current",
+                  "fields": {
+                    "Execute Command": {
+                      "type": "_GuiActuator",
+                      "AES70": "OcaBooleanActuator",
+                      "layout": {
+                        "height": 30,
+                        "sticky": ""
+                      },
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "trigger": false,
+                      "message": "INST:NSEL <channel>;MEAS:VOLT?;MEAS:CURR?"
+                    },
+                    "Input": {
+                      "type": "OcaBlock",
+                      "fields": {
+                        "channel": {
+                          "value": "1",
+                          "type": "_Value",
+                          "description": "Module/Channel Number (1-8)"
+                        }
+                      }
+                    },
+                    "Outputs": {
+                      "type": "OcaBlock",
+                      "fields": {
+                        "voltage_v": {
+                          "value": "Voltage readout",
+                          "type": "_Value"
+                        },
+                        "current_a": {
+                          "value": "Current readout",
+                          "type": "_Value"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "rig": {
+              "type": "OcaBlock",
+              "description": "MPS Settings",
+              "fields": {
+                "Set_Voltage_Current": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "Execute Command": {
+                      "type": "_GuiActuator",
+                      "AES70": "OcaBooleanActuator",
+                      "layout": {
+                        "height": 30,
+                        "sticky": ""
+                      },
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "trigger": false,
+                      "message": "INST:NSEL <channel>;VOLT <voltage>;CURR <current>"
+                    },
+                    "Input": {
+                      "type": "OcaBlock",
+                      "fields": {
+                        "channel": {
+                          "value": "1",
+                          "type": "_Value"
+                        },
+                        "voltage": {
+                          "value": "5.0",
+                          "type": "_Value"
+                        },
+                        "current": {
+                          "value": "1.0",
+                          "type": "_Value"
+                        }
+                      }
+                    }
+                  }
+                },
+                "Set_Protection": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "Execute Command": {
+                      "type": "_GuiActuator",
+                      "layout": {
+                        "height": 30,
+                        "sticky": ""
+                      },
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "INST:NSEL <channel>;VOLT:PROT <ovp_level>;CURR:PROT:STAT <ocp_state>"
+                    },
+                    "Input": {
+                      "type": "OcaBlock",
+                      "fields": {
+                        "channel": {
+                          "value": "1",
+                          "type": "_Value"
+                        },
+                        "ovp_level": {
+                          "value": "5.5",
+                          "type": "_Value",
+                          "description": "Over-Voltage Protection Level"
+                        },
+                        "ocp_state": {
+                          "value": "OFF",
+                          "type": "_Value",
+                          "description": "Over-Current Protection (ON/OFF)"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Do": {
+              "type": "OcaBlock",
+              "description": "Output Control",
+              "fields": {
+                "Output_Toggle": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "Output_ON": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "Output ON",
+                      "AES70": "OcaBooleanActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "Execute Command": {
+                        "message": "INST:NSEL <channel>;OUTP ON"
+                      },
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "channel": {
+                            "value": "1",
+                            "type": "_Value"
+                          }
+                        }
+                      }
+                    },
+                    "Output_OFF": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "Output OFF",
+                      "AES70": "OcaBooleanActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "Execute Command": {
+                        "message": "INST:NSEL <channel>;OUTP OFF"
+                      },
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "channel": {
+                            "value": "1",
+                            "type": "_Value"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "System_Actions": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "Clear_Protection": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "Clear Prot",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "Execute Command": {
+                        "message": "INST:NSEL <channel>;OUTP:PROT:CLE"
+                      },
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "channel": {
+                            "value": "1",
+                            "type": "_Value"
+                          }
+                        }
+                      }
+                    },
+                    "Reset_Module": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "Reset",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "Execute Command": {
+                        "message": "INST:NSEL <channel>;*RST"
+                      },
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "channel": {
+                            "value": "1",
+                            "type": "_Value"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

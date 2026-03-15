@@ -1,0 +1,685 @@
+{
+  "Zoo_Metering_Next_Gen_Shapes_Squircle": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.5.1.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Squircle_Variations": {
+        "type": "OcaBlock",
+        "description": "Squircle (Square) Variations",
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "Squircle_Square_1": {
+            "type": "_NeedleVUMeter",
+            "label": "Standard Squircle",
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "#000000",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "squircle",
+                "bezel_width": 6,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "knife-edge",
+                "sub_ticks": 4,
+                "tick_length": 8,
+                "sub_tick_length": 4,
+                "arc_radius_offset": 0,
+                "tick_radius_offset": 0,
+                "label_radius_offset": 10,
+                "needle_length_factor": 1.0
+              },
+              "labels": [
+                {
+                  "text": "SQUIRCLE",
+                  "x": 0,
+                  "y": -150,
+                  "size": 14,
+                  "font": "Arial",
+                  "weight": "bold"
+                },
+                {
+                  "value_overlay": true,
+                  "x": 0,
+                  "y": -120,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "#000000",
+                  "sig_fig": 3
+                }
+              ]
+            },
+            "label_active": "Standard Squircle",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 300,
+            "height": 300,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squircle",
+            "bezel_width": 6,
+            "overlay_style": "aperture_mask",
+            "Pointer_Style": "knife-edge",
+            "sub_ticks": 4,
+            "tick_length": 8,
+            "sub_tick_length": 4,
+            "arc_radius_offset": 0,
+            "tick_radius_offset": 0,
+            "label_radius_offset": 10,
+            "needle_length_factor": 1.0,
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": 0.0,
+            "value": 0.0,
+            "default_value": 0.0,
+            "path": "Squircle_Variations/Squircle_Square_1"
+          },
+          "Squircle_Square_2_Small": {
+            "type": "_NeedleVUMeter",
+            "label": "Small Blue",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#333",
+                "bezel": "#33A1FD",
+                "scale_label": "#333"
+              },
+              "style_overrides": {
+                "bezel_shape": "squircle",
+                "bezel_width": 4,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "needle",
+                "sub_ticks": 4,
+                "label_radius_offset": 10
+              },
+              "labels": [
+                {
+                  "text": "SMALL",
+                  "x": 0,
+                  "y": -75,
+                  "size": 10,
+                  "font": "Arial",
+                  "weight": "bold",
+                  "color": "#33A1FD"
+                }
+              ]
+            },
+            "label_active": "Small Blue",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 200,
+            "height": 200,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squircle",
+            "bezel_width": 4,
+            "overlay_style": "aperture_mask",
+            "Pointer_Style": "needle",
+            "sub_ticks": 4,
+            "label_radius_offset": 10,
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -5.0,
+            "value": -5.0,
+            "default_value": -5.0,
+            "path": "Squircle_Variations/Squircle_Square_2_Small"
+          },
+          "Squircle_Square_3_Large": {
+            "type": "_NeedleVUMeter",
+            "label": "Large Red",
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000",
+                "bezel": "red",
+                "scale_label": "#000"
+              },
+              "style_overrides": {
+                "bezel_shape": "squircle",
+                "bezel_width": 7,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "spade",
+                "sub_ticks": 4,
+                "label_radius_offset": 10
+              },
+              "labels": [
+                {
+                  "text": "PRECISION VU METER",
+                  "x": 0,
+                  "y": -150,
+                  "size": 18,
+                  "font": "Times New Roman",
+                  "weight": "bold",
+                  "color": "red"
+                }
+              ]
+            },
+            "label_active": "Large Red",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 300,
+            "height": 300,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squircle",
+            "bezel_width": 7,
+            "overlay_style": "aperture_mask",
+            "Pointer_Style": "spade",
+            "sub_ticks": 4,
+            "label_radius_offset": 10,
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -10.0,
+            "value": -10.0,
+            "default_value": -10.0,
+            "path": "Squircle_Variations/Squircle_Square_3_Large"
+          },
+          "Squircle_Square_4_Tiny": {
+            "type": "_NeedleVUMeter",
+            "label": "Tiny Silver",
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFF",
+                "bezel": "silver",
+                "scale_label": "#FFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "squircle",
+                "bezel_width": 2,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "line",
+                "sub_ticks": 0,
+                "label_radius_offset": 5
+              }
+            },
+            "label_active": "Tiny Silver",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 150,
+            "height": 150,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squircle",
+            "bezel_width": 2,
+            "overlay_style": "aperture_mask",
+            "Pointer_Style": "line",
+            "sub_ticks": 0,
+            "label_radius_offset": 5,
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": 0.0,
+            "value": 0.0,
+            "default_value": 0.0,
+            "path": "Squircle_Variations/Squircle_Square_4_Tiny"
+          },
+          "Squircle_Square_5_Neon": {
+            "type": "_NeedleVUMeter",
+            "label": "Neon Pink",
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -3.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#0F0",
+                "bezel": "#FF1493",
+                "scale_label": "#0F0"
+              },
+              "style_overrides": {
+                "bezel_shape": "squircle",
+                "bezel_width": 5,
+                "overlay_style": "aperture_mask",
+                "enable_lighting": true,
+                "Pointer_Style": "needle",
+                "sub_ticks": 4,
+                "label_radius_offset": 10
+              },
+              "labels": [
+                {
+                  "text": "NEON",
+                  "x": 0,
+                  "y": -100,
+                  "size": 16,
+                  "font": "Courier New",
+                  "weight": "bold",
+                  "color": "#FF1493"
+                }
+              ]
+            },
+            "label_active": "Neon Pink",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 250,
+            "height": 250,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squircle",
+            "bezel_width": 5,
+            "overlay_style": "aperture_mask",
+            "enable_lighting": true,
+            "Pointer_Style": "needle",
+            "sub_ticks": 4,
+            "label_radius_offset": 10,
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -3.0,
+            "value": -3.0,
+            "default_value": -3.0,
+            "path": "Squircle_Variations/Squircle_Square_5_Neon"
+          },
+          "Squircle_Square_6_Vintage": {
+            "type": "_NeedleVUMeter",
+            "label": "Vintage Cream",
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -8.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#5D4037",
+                "bezel": "#8B4513",
+                "scale_label": "#5D4037"
+              },
+              "style_overrides": {
+                "bezel_shape": "squircle",
+                "bezel_width": 6,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "baton",
+                "sub_ticks": 4,
+                "label_radius_offset": 10
+              },
+              "labels": [
+                {
+                  "text": "VINTAGE",
+                  "x": 0,
+                  "y": -110,
+                  "size": 14,
+                  "font": "Times New Roman",
+                  "color": "#8B4513"
+                }
+              ]
+            },
+            "label_active": "Vintage Cream",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 250,
+            "height": 250,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squircle",
+            "bezel_width": 6,
+            "overlay_style": "aperture_mask",
+            "Pointer_Style": "baton",
+            "sub_ticks": 4,
+            "label_radius_offset": 10,
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -8.0,
+            "value": -8.0,
+            "default_value": -8.0,
+            "path": "Squircle_Variations/Squircle_Square_6_Vintage"
+          },
+          "Squircle_Square_7_Cyber": {
+            "type": "_NeedleVUMeter",
+            "label": "Cyber Cyan",
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -1.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#00E5FF",
+                "bezel": "#00E5FF",
+                "scale_label": "#00E5FF"
+              },
+              "style_overrides": {
+                "bezel_shape": "squircle",
+                "bezel_width": 6,
+                "overlay_style": "aperture_mask",
+                "enable_lighting": true,
+                "Pointer_Style": "needle",
+                "sub_ticks": 4,
+                "label_radius_offset": 10
+              },
+              "labels": [
+                {
+                  "text": "CYBER",
+                  "x": 0,
+                  "y": -130,
+                  "size": 18,
+                  "font": "Courier New",
+                  "weight": "bold",
+                  "color": "#00E5FF"
+                }
+              ]
+            },
+            "label_active": "Cyber Cyan",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 300,
+            "height": 300,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squircle",
+            "bezel_width": 6,
+            "overlay_style": "aperture_mask",
+            "enable_lighting": true,
+            "Pointer_Style": "needle",
+            "sub_ticks": 4,
+            "label_radius_offset": 10,
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -1.0,
+            "value": -1.0,
+            "default_value": -1.0,
+            "path": "Squircle_Variations/Squircle_Square_7_Cyber"
+          },
+          "Squircle_Square_8_Blueprint": {
+            "type": "_NeedleVUMeter",
+            "label": "Blueprint",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFF",
+                "bezel": "#FFF",
+                "scale_label": "#FFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "squircle",
+                "bezel_width": 2,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "line",
+                "sub_ticks": 4,
+                "label_radius_offset": 10
+              },
+              "labels": [
+                {
+                  "text": "PLAN",
+                  "x": 0,
+                  "y": -95,
+                  "size": 12,
+                  "font": "Courier New",
+                  "color": "white"
+                }
+              ]
+            },
+            "label_active": "Blueprint",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squircle",
+            "bezel_width": 2,
+            "overlay_style": "aperture_mask",
+            "Pointer_Style": "line",
+            "sub_ticks": 4,
+            "label_radius_offset": 10,
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -15.0,
+            "value": -15.0,
+            "default_value": -15.0,
+            "path": "Squircle_Variations/Squircle_Square_8_Blueprint"
+          },
+          "Squircle_Square_9_Gold": {
+            "type": "_NeedleVUMeter",
+            "label": "Black & Gold",
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "gold",
+                "bezel": "gold",
+                "scale_label": "gold"
+              },
+              "style_overrides": {
+                "bezel_shape": "squircle",
+                "bezel_width": 6,
+                "overlay_style": "aperture_mask",
+                "Pointer_Style": "spade",
+                "sub_ticks": 4,
+                "label_radius_offset": 10
+              },
+              "labels": [
+                {
+                  "text": "PRESTIGE",
+                  "x": 0,
+                  "y": -120,
+                  "size": 18,
+                  "font": "Times New Roman",
+                  "weight": "bold",
+                  "color": "gold"
+                }
+              ]
+            },
+            "label_active": "Black & Gold",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 300,
+            "height": 300,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squircle",
+            "bezel_width": 6,
+            "overlay_style": "aperture_mask",
+            "Pointer_Style": "spade",
+            "sub_ticks": 4,
+            "label_radius_offset": 10,
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -2.0,
+            "value": -2.0,
+            "default_value": -2.0,
+            "path": "Squircle_Variations/Squircle_Square_9_Gold"
+          }
+        },
+        "active_text_color": "#1a1a1a",
+        "text_color": "#888888",
+        "active_font_style": "bold",
+        "active_font_size": null,
+        "inactive_font_style": "normal",
+        "inactive_font_size": null,
+        "active_color": "#FF9900",
+        "active_bg_color": "#000000",
+        "bg_color": "#2b2b2b",
+        "glow_intensity": 1.0,
+        "Orientation": "vertical",
+        "layout": {}
+      }
+    }
+  }
+}

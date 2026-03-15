@@ -1,0 +1,299 @@
+{
+  "Oscilloscope_YAK_54641D_WAVeform": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.1.6",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": "Waveform Data Transfer Settings",
+        "fields": {
+          "Set_Waveform_Source": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "WAVeform:SOURce <source>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "source": {
+                    "value": "CHAN1",
+                    "type": "_GuiValue",
+                    "label": "Source",
+                    "units": "",
+                    "description": "CHANn, DIGn, PODn, FUNCtion, MATH"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Waveform_Format": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "WAVeform:FORMat <format>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "format": {
+                    "value": "BYTE",
+                    "type": "_GuiValue",
+                    "label": "Format",
+                    "units": "",
+                    "description": "ASCii, WORD, BYTE"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Waveform_Points": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "WAVeform:POINts <points>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "points": {
+                    "value": "1000",
+                    "type": "_GuiValue",
+                    "label": "Points",
+                    "units": "",
+                    "description": "100, 250, 500, 1000, 2000, MAXimum"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Byte_Order": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "WAVeform:BYTeorder <order>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "order": {
+                    "value": "LSBFirst",
+                    "type": "_GuiValue",
+                    "label": "Order",
+                    "units": "",
+                    "description": "LSBFirst or MSBFirst"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Unsigned": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "WAVeform:UNSigned <state>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "state": {
+                    "value": "ON",
+                    "type": "_GuiValue",
+                    "label": "Unsigned",
+                    "units": "",
+                    "description": "ON (0-255) or OFF (-128-127)"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "nab": {
+        "type": "OcaBlock",
+        "description": "Waveform Data Readbacks",
+        "fields": {
+          "Get_Waveform_Data": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "WAVeform:DATA?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "data": {
+                    "value": "Binary Block",
+                    "type": "_GuiValue",
+                    "label": "Data",
+                    "units": ""
+                  }
+                }
+              }
+            }
+          },
+          "Get_Preamble": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "WAVeform:PREamble?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "preamble": {
+                    "value": "Fmt, Type, Pts, Cnt, XInc, XOrg, XRef, YInc, YOrg, YRef",
+                    "type": "_GuiValue",
+                    "label": "Preamble",
+                    "units": ""
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

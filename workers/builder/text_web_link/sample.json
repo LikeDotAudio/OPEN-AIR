@@ -1,0 +1,24 @@
+{
+  "text_web_link_Example": {
+    "type": "_SmartLink",
+    "label": "Visit Project Homepage",
+    "notes": "Link to the main project website.",
+    "geometry": {
+      "sticky": "ew",
+      "font": 14,
+      "colour": "#007acc"
+    },
+    "interaction": {
+      "url": "https://www.like.audio/project"
+    },
+    "layout": {},
+    "cosmetics": {
+      "colors": {
+        "primary": "#FF9900",
+        "secondary": "#444444",
+        "background": "#2b2b2b"
+      }
+    }
+  },
+  "_README": "This is an enhanced sample configuration demonstrating full instantiation capabilities."
+}

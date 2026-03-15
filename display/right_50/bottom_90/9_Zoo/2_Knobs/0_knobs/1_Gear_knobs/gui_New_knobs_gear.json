@@ -1,0 +1,2740 @@
+{
+  "Zoo_Knobs_knobs_Gear_knobs": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.0.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Knob_Showcase_Gear_Advanced": {
+        "type": "OcaBlock",
+        "description": "50 Gear Knobs showcasing Teeth count, Monochrome styles, and varied Pointers.",
+        "layout_columns": 5,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "gear_01": {
+            "type": "_SmartKnob",
+            "label": "Mono 8T",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "black",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_02": {
+            "type": "_SmartKnob",
+            "label": "Mono 12T",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "triangle",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "dots",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 12,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "black",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_03": {
+            "type": "_SmartKnob",
+            "label": "Mono 24T",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "notch",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "numeric",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 24,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "black",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_04": {
+            "type": "_SmartKnob",
+            "label": "Mono 6T",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 6,
+                "outline_thickness": 2,
+                "outline_color": "white",
+                "fill_color": "black",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_05": {
+            "type": "_SmartKnob",
+            "label": "Mono Text",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": true,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 16,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "black",
+                "arc_width": 5,
+                "no_center": true
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_06": {
+            "type": "_SmartKnob",
+            "label": "Grey 10T",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "dots",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 10,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#808080",
+                "arc_width": 8,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_07": {
+            "type": "_SmartKnob",
+            "label": "Red 20T",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "triangle",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 20,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#8B0000",
+                "arc_width": 10,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_08": {
+            "type": "_SmartKnob",
+            "label": "Blue 4T",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 4,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#00008B",
+                "arc_width": 12,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_09": {
+            "type": "_SmartKnob",
+            "label": "Grn 32T",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "notch",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 32,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#90EE90",
+                "arc_width": 15,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_10": {
+            "type": "_SmartKnob",
+            "label": "Yel 5T",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": true,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 5,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#FFD700",
+                "arc_width": 20,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_11": {
+            "type": "_SmartKnob",
+            "label": "White 8T",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 2,
+                "outline_color": "black",
+                "fill_color": "white",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_12": {
+            "type": "_SmartKnob",
+            "label": "Orange 12T",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 12,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#FFA500",
+                "arc_width": 10,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_13": {
+            "type": "_SmartKnob",
+            "label": "Purp 18T",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "numeric",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 18,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#800080",
+                "arc_width": 15,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_14": {
+            "type": "_SmartKnob",
+            "label": "Cyan 9T",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "triangle",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 9,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#00FFFF",
+                "arc_width": 20,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_15": {
+            "type": "_SmartKnob",
+            "label": "Pink 7T",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": true,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 7,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#FFC0CB",
+                "arc_width": 25,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_16": {
+            "type": "_SmartKnob",
+            "label": "M_Line_8",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 1,
+                "outline_color": "white",
+                "fill_color": "#2b2b2b",
+                "arc_width": 6,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_17": {
+            "type": "_SmartKnob",
+            "label": "M_Tri_12",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "triangle",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 12,
+                "outline_thickness": 1,
+                "outline_color": "white",
+                "fill_color": "#2b2b2b",
+                "arc_width": 11,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_18": {
+            "type": "_SmartKnob",
+            "label": "M_Notch_16",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "notch",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 16,
+                "outline_thickness": 1,
+                "outline_color": "white",
+                "fill_color": "#2b2b2b",
+                "arc_width": 16,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_19": {
+            "type": "_SmartKnob",
+            "label": "M_Dot_20",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "dots",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 20,
+                "outline_thickness": 1,
+                "outline_color": "white",
+                "fill_color": "#2b2b2b",
+                "arc_width": 21,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_20": {
+            "type": "_SmartKnob",
+            "label": "M_Num_24",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "numeric",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 24,
+                "outline_thickness": 1,
+                "outline_color": "white",
+                "fill_color": "#2b2b2b",
+                "arc_width": 26,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_21": {
+            "type": "_SmartKnob",
+            "label": "Tomato 8",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#FF6347",
+                "arc_width": 7,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_22": {
+            "type": "_SmartKnob",
+            "label": "Olive 12",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "dots",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 12,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#808000",
+                "arc_width": 13,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_23": {
+            "type": "_SmartKnob",
+            "label": "Teal 16",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "numeric",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 16,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#008080",
+                "arc_width": 19,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_24": {
+            "type": "_SmartKnob",
+            "label": "Navy 24",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "notch",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 24,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#000080",
+                "arc_width": 24,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_25": {
+            "type": "_SmartKnob",
+            "label": "Maroon 6",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "triangle",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 6,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#800000",
+                "arc_width": 29,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_26": {
+            "type": "_SmartKnob",
+            "label": "Orchid 14",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 14,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#BA55D3",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_27": {
+            "type": "_SmartKnob",
+            "label": "Pink2 22",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "notch",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 22,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#FF69B4",
+                "arc_width": 9,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_28": {
+            "type": "_SmartKnob",
+            "label": "SpgG 10",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 10,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#00FA9A",
+                "arc_width": 14,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_29": {
+            "type": "_SmartKnob",
+            "label": "FireB 30",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": true,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 30,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#B22222",
+                "arc_width": 23,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_30": {
+            "type": "_SmartKnob",
+            "label": "Dodg2 18",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": true,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 18,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#1E90FF",
+                "arc_width": 27,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_31": {
+            "type": "_SmartKnob",
+            "label": "Mono Inv 8",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 2,
+                "outline_color": "black",
+                "fill_color": "white",
+                "arc_width": 6,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_32": {
+            "type": "_SmartKnob",
+            "label": "Mono Inv 12",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "triangle",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 12,
+                "outline_thickness": 2,
+                "outline_color": "black",
+                "fill_color": "white",
+                "arc_width": 12,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_33": {
+            "type": "_SmartKnob",
+            "label": "Mono Inv 24",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "notch",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 24,
+                "outline_thickness": 2,
+                "outline_color": "black",
+                "fill_color": "white",
+                "arc_width": 18,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_34": {
+            "type": "_SmartKnob",
+            "label": "Khaki 7",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 7,
+                "outline_thickness": 2,
+                "outline_color": "brown",
+                "fill_color": "#F0E68C",
+                "arc_width": 22,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_35": {
+            "type": "_SmartKnob",
+            "label": "PalT 11",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": true,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 11,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#AFEEEE",
+                "arc_width": 28,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_36": {
+            "type": "_SmartKnob",
+            "label": "Plum 9",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "triangle",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 9,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#DDA0DD",
+                "arc_width": 8,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_37": {
+            "type": "_SmartKnob",
+            "label": "PalV 13",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "notch",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 13,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#DB7093",
+                "arc_width": 11,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_38": {
+            "type": "_SmartKnob",
+            "label": "MedS 15",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 15,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#3CB371",
+                "arc_width": 16,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_39": {
+            "type": "_SmartKnob",
+            "label": "DkR 17",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 17,
+                "outline_thickness": 3,
+                "outline_color": "red",
+                "fill_color": "#8B0000",
+                "arc_width": 21,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_40": {
+            "type": "_SmartKnob",
+            "label": "StlB 19",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": true,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 19,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#4682B4",
+                "arc_width": 26,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_41": {
+            "type": "_SmartKnob",
+            "label": "Sal 21",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "numeric",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 21,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#FA8072",
+                "arc_width": 7,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_42": {
+            "type": "_SmartKnob",
+            "label": "YelG 23",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "dots",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 23,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#9ACD32",
+                "arc_width": 13,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_43": {
+            "type": "_SmartKnob",
+            "label": "MedB 25",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 25,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#0000CD",
+                "arc_width": 19,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_44": {
+            "type": "_SmartKnob",
+            "label": "Lem 27",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 27,
+                "outline_thickness": 3,
+                "outline_color": "gray",
+                "fill_color": "#FFFACD",
+                "arc_width": 24,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_45": {
+            "type": "_SmartKnob",
+            "label": "LtS 29",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": true,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 29,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#20B2AA",
+                "arc_width": 30,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_46": {
+            "type": "_SmartKnob",
+            "label": "DkO 31",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "triangle",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 31,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#9932CC",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_47": {
+            "type": "_SmartKnob",
+            "label": "MedV 33",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "notch",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 33,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#C71585",
+                "arc_width": 10,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_48": {
+            "type": "_SmartKnob",
+            "label": "For 35",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 35,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#228B22",
+                "arc_width": 15,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_49": {
+            "type": "_SmartKnob",
+            "label": "Sie 40",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "white"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 40,
+                "outline_thickness": 2,
+                "outline_color": "black",
+                "fill_color": "#A52A2A",
+                "arc_width": 20,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "gear_50": {
+            "type": "_SmartKnob",
+            "label": "SB2 50",
+            "notes": "",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": true,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "black"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "gear",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 50,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "#87CEEB",
+                "arc_width": 25,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "Zoo_Faders_MDP": {
+    "type": "OcaBin",
+    "id": "50.90.9.0.7",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "mdp_demo": {
+        "type": "OcaBlock",
+        "description": "Motion Draggable Potentiometer Demo",
+        "fields": {
+          "mdp_1": {
+            "type": "_MDP",
+            "label_active": "MDP 1",
+            "path": "audio/mdp/1",
+            "initial_x": 210,
+            "initial_y": 125,
+            "graph": {
+              "title": "XY Space",
+              "show_title": false,
+              "show_grid": true,
+              "show_legend": false,
+              "show_axis": true,
+              "xlim": [
+                0,
+                20
+              ],
+              "ylim": [
+                0,
+                20
+              ],
+              "style": {
+                "bg_color": "#000000",
+                "grid_color": "#666666",
+                "title_color": "white",
+                "axis_color": "white"
+              },
+              "axis": {
+                "x": {
+                  "label": "X",
+                  "color": "white",
+                  "scale": "linear"
+                },
+                "y": {
+                  "label": "Y",
+                  "color": "white",
+                  "scale": "linear"
+                }
+              },
+              "datasets": [
+                {
+                  "id": "grid_ref",
+                  "label": "Grid Ref",
+                  "style": {
+                    "line_color": "cyan"
+                  },
+                  "initial_csv_data": "x,y\n0,0\n20,20"
+                }
+              ]
+            },
+            "ltp": {
+              "label_active": "Level",
+              "value_default": -10,
+              "cap_color": "#00FF00",
+              "freestyle": true,
+              "knob_style": "standard"
+            },
+            "layout": {
+              "width": 500,
+              "height": 500
+            }
+          }
+        }
+      }
+    }
+  }
+}

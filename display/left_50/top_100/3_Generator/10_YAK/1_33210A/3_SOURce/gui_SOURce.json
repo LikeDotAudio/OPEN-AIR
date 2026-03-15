@@ -1,0 +1,215 @@
+{
+  "Generator_YAK_33210A_SOURce": {
+    "type": "OcaBin",
+    "id": "50.100.3.10.1.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": "SOURce Configuration",
+        "fields": {
+          "Set_Frequency": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "FREQuency <freq>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "freq": {
+                    "value": "1000",
+                    "type": "_GuiValue",
+                    "label": "Frequency",
+                    "units": "Hz"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Amplitude": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "VOLTage <amp>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "amp": {
+                    "value": "1.0",
+                    "type": "_GuiValue",
+                    "label": "Amplitude",
+                    "units": "Vpp",
+                    "description": "Default unit is Vpp"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Offset": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "VOLTage:OFFSet <offset>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "offset": {
+                    "value": "0.0",
+                    "type": "_GuiValue",
+                    "label": "Offset",
+                    "units": "V"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Function_Shape": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "FUNCtion <shape>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "shape": {
+                    "value": "SIN",
+                    "type": "_GuiValue",
+                    "label": "Shape",
+                    "units": "",
+                    "description": "SIN, SQU, RAMP, PULS, NOIS, DC, USER"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Voltage_Unit": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "VOLTage:UNIT <unit>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "units": {
+                    "value": "VPP",
+                    "type": "_GuiValue",
+                    "label": "Units",
+                    "units": "",
+                    "description": "VPP, VRMS, DBM"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

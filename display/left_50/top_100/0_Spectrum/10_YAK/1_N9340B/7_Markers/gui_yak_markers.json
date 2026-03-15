@@ -1,0 +1,258 @@
+{
+  "Spectrum_YAK_N9340B_Markers": {
+    "type": "OcaBin",
+    "id": "50.100.0.10.1.7",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "nab": {
+        "type": "OcaBlock",
+        "description": "NAB Marker Monitoring",
+        "fields": {
+          "all_marker_settings": {
+            "type": "OcaBlock",
+            "description": "Marker Amplitude and Frequency Readbacks",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":CALCulate:MARKer1:Y?;:CALCulate:MARKer2:Y?;:CALCulate:MARKer3:Y?;:CALCulate:MARKer4:Y?;:CALCulate:MARKer5:Y?;:CALCulate:MARKer6:Y?;:CALCulate:MARKer1:X?;:CALCulate:MARKer2:X?;:CALCulate:MARKer3:X?;:CALCulate:MARKer4:X?;:CALCulate:MARKer5:X?;:CALCulate:MARKer6:X?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "description": "Marker Values",
+                "fields": {
+                  "Marker_1": {
+                    "value": "Marker 1 Value in dBm",
+                    "type": "_GuiValue",
+                    "label": "Marker 1 Amplitude",
+                    "units": "dBm"
+                  },
+                  "Marker_2": {
+                    "value": "Marker 2 Value in dBm",
+                    "type": "_GuiValue",
+                    "label": "Marker 2 Amplitude",
+                    "units": "dBm"
+                  },
+                  "Marker_3": {
+                    "value": "Marker 3 Value in dBm",
+                    "type": "_GuiValue",
+                    "label": "Marker 3 Amplitude",
+                    "units": "dBm"
+                  },
+                  "Marker_4": {
+                    "value": "Marker 4 Value in dBm",
+                    "type": "_GuiValue",
+                    "label": "Marker 4 Amplitude",
+                    "units": "dBm"
+                  },
+                  "Marker_5": {
+                    "value": "Marker 5 Value in dBm",
+                    "type": "_GuiValue",
+                    "label": "Marker 5 Amplitude",
+                    "units": "dBm"
+                  },
+                  "Marker_6": {
+                    "value": "Marker 6 Value in dBm",
+                    "type": "_GuiValue",
+                    "label": "Marker 6 Amplitude",
+                    "units": "dBm"
+                  },
+                  "Marker_1_X": {
+                    "value": "Marker 1 Frequency in Hz",
+                    "type": "_GuiValue",
+                    "label": "Marker 1 Frequency",
+                    "units": "Hz"
+                  },
+                  "Marker_2_X": {
+                    "value": "Marker 2 Frequency in Hz",
+                    "type": "_GuiValue",
+                    "label": "Marker 2 Frequency",
+                    "units": "Hz"
+                  },
+                  "Marker_3_X": {
+                    "value": "Marker 3 Frequency in Hz",
+                    "type": "_GuiValue",
+                    "label": "Marker 3 Frequency",
+                    "units": "Hz"
+                  },
+                  "Marker_4_X": {
+                    "value": "Marker 4 Frequency in Hz",
+                    "type": "_GuiValue",
+                    "label": "Marker 4 Frequency",
+                    "units": "Hz"
+                  },
+                  "Marker_5_X": {
+                    "value": "Marker 5 Frequency in Hz",
+                    "type": "_GuiValue",
+                    "label": "Marker 5 Frequency",
+                    "units": "Hz"
+                  },
+                  "Marker_6_X": {
+                    "value": "Marker 6 Frequency in Hz",
+                    "type": "_GuiValue",
+                    "label": "Marker 6 Frequency",
+                    "units": "Hz"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "set": {
+        "type": "OcaBlock",
+        "description": "Marker Command Sets",
+        "fields": {
+          "Marker_State_ON": {
+            "type": "OcaBlock",
+            "description": "Enable Marker",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":CALCulate:MARKer<marker_number>:STATe ON"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "marker_number": {
+                    "value": "1",
+                    "type": "_GuiValue",
+                    "label": "Marker Number"
+                  }
+                }
+              }
+            }
+          },
+          "Marker_State_OFF": {
+            "type": "OcaBlock",
+            "description": "Disable Marker",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":CALCulate:MARKer<marker_number>:STATe OFF"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "marker_number": {
+                    "value": "1",
+                    "type": "_GuiValue",
+                    "label": "Marker Number"
+                  }
+                }
+              }
+            }
+          },
+          "Marker_X_position": {
+            "type": "OcaBlock",
+            "description": "Set Marker Frequency",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":CALCulate:MARKer<marker_number>:X <x_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "marker_number": {
+                    "value": "1",
+                    "type": "_GuiValue",
+                    "label": "Marker Number"
+                  },
+                  "x_value": {
+                    "value": "123456789",
+                    "type": "_GuiValue",
+                    "label": "Frequency",
+                    "units": "Hz"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

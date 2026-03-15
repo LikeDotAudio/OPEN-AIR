@@ -1,0 +1,22 @@
+# core/widget_context.py
+from dataclasses import dataclass
+from typing import Any, Optional, Callable
+
+@dataclass(frozen=True)
+class WidgetContext:
+    """
+    A strictly typed, immutable context object for widget creation.
+    Replaces loose **kwargs to improve transparency and debugging.
+    """
+    state_mirror_engine: Any
+    subscriber_router: Any
+    base_mqtt_topic_from_path: str
+    app_instance: Any
+    # Phase 1: Expansion
+    asset_cache_manager: Any = None
+    style_manager: Any = None
+    transparency_manager: Any = None
+    builder_instance: Any = None # ⚡ ADDED: The DynamicGuiBuilder instance for transparency
+    
+    on_focus_widget: Optional[Callable[[str], None]] = None
+    on_complete: Optional[Callable[[], None]] = None

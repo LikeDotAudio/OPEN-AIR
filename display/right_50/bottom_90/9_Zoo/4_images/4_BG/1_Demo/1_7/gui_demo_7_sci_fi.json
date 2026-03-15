@@ -1,0 +1,70 @@
+{
+  "Zoo_images_BG_Demo_7": {
+    "type": "OcaBin",
+    "id": "50.90.9.4.4.1.1.7",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "fields": {
+        "Meter_1": {
+          "type": "_NeedleVUMeter",
+          "label": "Squircle 1",
+          "geometry": {
+            "width": 250,
+            "height": 250
+          },
+          "domain": {
+            "primary": {
+              "min": -20.0,
+              "max": 3.0,
+              "value_default": -10.0
+            }
+          },
+          "cosmetics": {
+            "colors": {
+              "bezel": "#111111"
+            },
+            "style_overrides": {
+              "bezel_shape": "squircle",
+              "bezel_width": 6,
+              "Pointer_Style": "knife-edge",
+              "overlay_style": "aperture_mask"
+            }
+          }
+        },
+        "Meter_2": {
+          "type": "_NeedleVUMeter",
+          "label": "Hex 2",
+          "geometry": {
+            "width": 400,
+            "height": 200
+          },
+          "domain": {
+            "primary": {
+              "min": -20.0,
+              "max": 3.0,
+              "value_default": -8.0
+            }
+          },
+          "cosmetics": {
+            "colors": {
+              "bezel": "#111111"
+            },
+            "style_overrides": {
+              "bezel_shape": "hex",
+              "bezel_width": 6,
+              "Pointer_Style": "knife-edge",
+              "overlay_style": "dome"
+            }
+          }
+        }
+      }
+    }
+  }
+}

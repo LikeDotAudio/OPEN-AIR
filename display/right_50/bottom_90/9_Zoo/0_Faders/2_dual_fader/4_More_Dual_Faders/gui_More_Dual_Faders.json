@@ -1,0 +1,269 @@
+{
+  "Zoo_Faders_dual_fader_More_Dual_Faders": {
+    "type": "OcaBin",
+    "id": "50.90.9.0.2.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Dual_Fader_Expansion": {
+        "type": "OcaBlock",
+        "description": "20 Additional Dual Fader Variations",
+        "layout_columns": 5,
+        "fields": {
+          "df_1": {
+            "type": "_CustomDualHorizontalFader",
+            "label": "Red/White",
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF0000",
+                "highlight": "#FFFFFF"
+              }
+            }
+          },
+          "df_2": {
+            "type": "_CustomDualHorizontalFader",
+            "label": "Green/Black",
+            "cosmetics": {
+              "colors": {
+                "cap": "#00FF00",
+                "highlight": "#000000"
+              }
+            }
+          },
+          "df_3": {
+            "type": "_CustomDualHorizontalFader",
+            "label": "Blue/Gold",
+            "cosmetics": {
+              "colors": {
+                "cap": "#0000FF",
+                "highlight": "#FFD700"
+              }
+            }
+          },
+          "df_4": {
+            "type": "_CustomDualHorizontalFader",
+            "label": "Yellow/Purple",
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFFF00",
+                "highlight": "#4B0082"
+              }
+            }
+          },
+          "df_5": {
+            "type": "_CustomDualHorizontalFader",
+            "label": "Cyan/Red",
+            "cosmetics": {
+              "colors": {
+                "cap": "#00FFFF",
+                "highlight": "#FF0000"
+              }
+            }
+          },
+          "df_6": {
+            "type": "_CustomDualVerticalFader",
+            "label": "Tall Red",
+            "geometry": {
+              "width": 80,
+              "height": 400
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF0000"
+              }
+            }
+          },
+          "df_7": {
+            "type": "_CustomDualVerticalFader",
+            "label": "Tall Green",
+            "geometry": {
+              "width": 80,
+              "height": 400
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#00FF00"
+              }
+            }
+          },
+          "df_8": {
+            "type": "_CustomDualVerticalFader",
+            "label": "Tall Blue",
+            "geometry": {
+              "width": 80,
+              "height": 400
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#0000FF"
+              }
+            }
+          },
+          "df_9": {
+            "type": "_CustomDualVerticalFader",
+            "label": "Tall Orange",
+            "geometry": {
+              "width": 80,
+              "height": 400
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF8C00"
+              }
+            }
+          },
+          "df_10": {
+            "type": "_CustomDualVerticalFader",
+            "label": "Tall Pink",
+            "geometry": {
+              "width": 80,
+              "height": 400
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF1493"
+              }
+            }
+          },
+          "df_11": {
+            "type": "_CustomDualHorizontalFader",
+            "label": "Wide Red",
+            "geometry": {
+              "width": 600,
+              "height": 80
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF0000"
+              }
+            }
+          },
+          "df_12": {
+            "type": "_CustomDualHorizontalFader",
+            "label": "Wide Green",
+            "geometry": {
+              "width": 600,
+              "height": 80
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#00FF00"
+              }
+            }
+          },
+          "df_13": {
+            "type": "_CustomDualHorizontalFader",
+            "label": "Wide Blue",
+            "geometry": {
+              "width": 600,
+              "height": 80
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#0000FF"
+              }
+            }
+          },
+          "df_14": {
+            "type": "_CustomDualHorizontalFader",
+            "label": "Wide Yellow",
+            "geometry": {
+              "width": 600,
+              "height": 80
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFFF00"
+              }
+            }
+          },
+          "df_15": {
+            "type": "_CustomDualHorizontalFader",
+            "label": "Wide Purple",
+            "geometry": {
+              "width": 600,
+              "height": 80
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#800080"
+              }
+            }
+          },
+          "df_16": {
+            "type": "_CustomDualVerticalFader",
+            "label": "Boxy 1",
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFFFFF"
+              }
+            }
+          },
+          "df_17": {
+            "type": "_CustomDualVerticalFader",
+            "label": "Boxy 2",
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#000000",
+                "highlight": "#00FF00"
+              }
+            }
+          },
+          "df_18": {
+            "type": "_CustomDualVerticalFader",
+            "label": "Boxy 3",
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFD700"
+              }
+            }
+          },
+          "df_19": {
+            "type": "_CustomDualVerticalFader",
+            "label": "Boxy 4",
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#C0C0C0"
+              }
+            }
+          },
+          "df_20": {
+            "type": "_CustomDualVerticalFader",
+            "label": "Boxy 5",
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF4500"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

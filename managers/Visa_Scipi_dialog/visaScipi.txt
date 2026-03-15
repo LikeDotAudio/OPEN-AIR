@@ -1,0 +1,380 @@
+# VISA SCPI Module Documentation
+
+This document outlines the functionality, workflow, and suggestions for the VISA SCPI management module located within the `managers/VisaScipi` directory. This module provides a comprehensive framework for discovering, connecting to, controlling, and managing scientific instruments and devices that communicate via the Virtual Instrument Software Architecture (VISA) standard.
+
+## 1. Current Logic and Workflow
+
+The `VisaScipi` module is designed to abstract the complexities of PyVISA and SCPI (Standard Commands for Programmable Instruments) communication, offering a structured and safe interface for instrument interaction.
+
+### 1.1. Core Components:
+
+*   **`manager_visa_list_visa_resources.py` / `worker_visa_pre_flight_check.py`:**
+    *   The primary function `list_visa_resources()` (originating from `worker_visa_pre_flight_check.py` and likely used by `manager_visa_search_results.py`) uses PyVISA to scan the system for all available VISA-compatible instruments (USB, TCP/IP, Serial/ASRL, GPIB, etc.).
+    *   It attempts to use the `@py` (pure Python) backend and reports on the status of optional dependencies like `pyusb`, `psutil`, and `zeroconf`.
+
+*   **`manager_visa_search_results.py` (`VisaDeviceSearcher`):**
+    *   Takes the raw list of resources from `list_visa_resources`.
+    *   Loads a configuration (`yak_config`, currently hardcoded) which contains patterns for expected device types (e.g., USB, ASRL).
+    *   Filters the discovered resources, returning only those that match the configured patterns. This helps in presenting a relevant list of devices to the user.
+    *   Stores the results of the last search.
+
+*   **`manager_visa_proxy.py` (`VisaProxy`):**
+    *   Acts as the central, low-level SCPI command dispatcher.
+    *   Manages the active `pyvisa` instrument instance (`self.inst`).
+    *   Uses a queue and a worker thread (`_command_processor_worker`) for asynchronous, safe execution of commands.
+    *   Provides `write_safe()` and `query_safe()` functions that wrap PyVISA's `write()` and `query()` methods. These functions include error handling, placeholder checks, and publish results/errors via MQTT.
+    *   Handles basic device reset mechanisms by calling `write_safe("*RST")` or a specific reboot command if no instrument is connected or an error occurs.
+
+*   **`manager_visa_safe_writer.py` (`write_safe` function):**
+    *   A helper function (likely intended to be in this file) that safely executes SCPI `write` commands, ensuring an instrument is connected and the command is valid.
+
+*   **`manager_visa_safe_query.py` (`query_safe` function):**
+    *   A helper function (likely intended to be in this file) that safely executes SCPI `query` commands, retrieves the response, publishes it to `OPEN-AIR/Proxy/Rx_Outbox`, and handles errors.
+
+*   **`manager_logic_connect_instrument.py` (`VisaConnector`):**
+    *   Handles the logic for establishing a connection to a selected VISA resource.
+    *   Uses `pyvisa.ResourceManager().open_resource()` to connect.
+    *   Configures instrument settings like `timeout`, `read_termination`, `write_termination`, and `query_delay`.
+    *   Performs an initial `*IDN?` query to identify the instrument (Manufacturer, Model, Serial, Firmware).
+    *   Updates GUI status and publishes connection details.
+
+*   **`manager_logic_disconnect_instrument.py` (`VisaDisconnector`):**
+    *   Handles closing the VISA instrument connection using `inst.close()`.
+    *   Resets the instrument instance in the proxy and updates GUI/proxy status to disconnected.
+
+*   **`manager_visa_reset.py` (`VisaResetManager`):**
+    *   Listens for MQTT messages on `OPEN-AIR/Device/Instrument_Connection/System_Reset/Reset_device/trigger`.
+    *   Upon receiving a valid trigger, it commands `VisaProxy` to send the `*RST` SCPI command.
+
+*   **`manager_visa_reboot.py` (`VisaRebootManager`):**
+    *   Listens for MQTT messages on `OPEN-AIR/Device/Instrument_Connection/System_Reset/Reboot_device/trigger`.
+    *   Upon receiving a valid trigger, it commands `VisaProxy` to send the `:SYSTem:POWer:RESet` SCPI command (or equivalent for a power cycle).
+
+*   **`manager_logic_mqtt_listen.py` (`VisaMqttListener`):**
+    *   Subscribes to various MQTT topics related to device connection and control.
+    *   **Topics:**
+        *   `OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Search_for_devices/trigger`: Initiates a device search.
+        *   `OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/+/selected`: Handles device selection from the GUI list.
+        *   `OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Connect_to_Device/trigger`: Initiates connection based on GUI selection.
+        *   `OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Disconnect_device/trigger`: Initiates disconnection.
+        *   `OPEN-AIR/commands/instrument/connect`: Allows direct connection via resource string.
+    *   Orchestrates the search, connection, and disconnection processes by calling the appropriate manager methods.
+
+*   **`manager_visa_transmit.py` (`VisaGuiPublisher`):**
+    *   Responsible for publishing status updates to the GUI via MQTT.
+    *   Publishes lists of found devices (`_update_found_devices_gui`), connection status, device identification details, and proxy status.
+
+*   **`manager_visa.py` (`VisaManagerOrchestrator`):**
+    *   The main entry point and orchestrator for the `VisaScipi` module.
+    *   Instantiates and wires together all other manager classes (`VisaProxy`, `VisaDeviceSearcher`, `VisaConnector`, `VisaDisconnector`, `VisaMqttListener`, `VisaResetManager`, `VisaRebootManager`, `VisaGuiPublisher`).
+
+### 1.2. Typical Workflow:
+
+1.  **Discovery:** An MQTT message on `SEARCH_TRIGGER` topic prompts `VisaMqttListener` to call `VisaDeviceSearcher.search_resources()`.
+2.  **Filtering & Display:** `VisaDeviceSearcher` uses `list_visa_resources` to find all devices and then filters them based on `yak_config`. The results are sent to `VisaGuiPublisher` to update the GUI.
+3.  **Selection:** The user selects a device from the GUI, triggering an MQTT message on `DEVICE_SELECT` topic. `VisaMqttListener` records the selected resource.
+4.  **Connection:** The user clicks "Connect" in the GUI, sending an MQTT message on `CONNECT_TRIGGER`. `VisaMqttListener` triggers `VisaConnector.connect_instrument_logic()`.
+5.  **Instrument Initialization:** `VisaConnector` establishes a connection via PyVISA, sets parameters, queries `*IDN?`, and updates the GUI/proxy status. The connected `inst` object is passed to `VisaProxy`.
+6.  **Command Execution:** SCPI commands are sent via MQTT to `OPEN-AIR/Proxy/Tx_Inbox`. `VisaProxy` receives these, enqueues them, and processes them asynchronously using `write_safe` or `query_safe`, publishing results/errors back via MQTT.
+7.  **Control Commands (Reset/Reboot):** MQTT messages on specific topics trigger `VisaResetManager` or `VisaRebootManager`, which use `VisaProxy` to send SCPI reset/reboot commands.
+8.  **Disconnection:** A disconnect MQTT message triggers `VisaDisconnector`, which closes the instrument connection and updates status.
+
+## 2. To-Do List (Future Enhancements)
+
+The current module provides a solid foundation for VISA instrument control. The following are suggested enhancements to further mature the system:
+
+1.  **Dynamic Manager/Driver Creation:**
+    *   **Goal:** Automatically instantiate device-specific manager classes based on the `*IDN?` response or other identifying characteristics.
+    *   **Implementation:** Develop a system where the `*IDN?` string or a parsed model/manufacturer is used to look up and instantiate a corresponding driver/manager class (e.g., `OscilloscopeManager`, `PowerSupplyManager`, `SignalGeneratorManager`). This would replace generic SCPI command sending with higher-level, device-appropriate functions.
+
+2.  **Comprehensive Device Capability Cataloging:**
+    *   **Goal:** Beyond `*IDN?`, actively probe devices to discover their supported SCPI commands, option boards, and capabilities.
+    *   **Implementation:** Implement routines that query standard SCPI commands like `*OPT?`, `*AVS?` (for options), or manufacturer-specific commands to build a detailed profile of each instrument's features. This profile could then inform the dynamic manager creation.
+
+3.  **Robust Inventory Management System:**
+    *   **Goal:** Maintain a persistent, detailed inventory of all discovered and connected instruments.
+    *   **Implementation:**
+        *   Store device details (resource name, `*IDN?` parsed info, capabilities, current status, connection history, last known configuration) in a structured format (e.g., JSON files, a small SQLite database).
+        *   The system should be able to load and manage this inventory across application restarts.
+        *   Allow users to add manual entries or notes to devices in the inventory.
+
+4.  **Advanced SCPI Command Parsing and Validation:**
+    *   **Goal:** More intelligently parse responses from SCPI queries, not just returning raw strings.
+    *   **Implementation:** Create parsers for common data types (numbers, arrays, status registers) and potentially for specific SCPI commands. Validate responses against expected formats or ranges.
+
+5.  **Enhanced GPIB Bus Management:**
+    *   **Goal:** Improve handling of multiple devices on a single GPIB bus, especially concerning addressing, bus contention, and resource allocation.
+    *   **Implementation:**
+        *   Refine the `list_visa_resources` and `VisaDeviceSearcher` to explicitly identify and differentiate GPIB addresses (e.g., `GPIB::address::INSTR`).
+        *   Develop strategies for managing simultaneous access if multiple devices are required, potentially through sequential access or by ensuring unique resource names are used for each connection.
+        *   Consider implementing a GPIB bus controller abstraction if complex bus operations are needed.
+
+6.  **Automated Configuration Loading:**
+    *   **Goal:** Allow instrument-specific configuration profiles (e.g., optimal timeouts, preferred terminations, custom commands) to be loaded based on the detected instrument model.
+    *   **Implementation:** Store configuration files per instrument model, which are loaded automatically upon connection.
+
+7.  **Improved Error Recovery and Reconnection:**
+    *   **Goal:** Automatically attempt to re-establish connections or recover from transient communication errors without user intervention.
+    *   **Implementation:** Implement retry mechanisms for connection attempts and SCPI commands, with configurable backoff strategies.
+
+## 3. Usage Guide
+
+### 3.1. Discovering Instruments:
+
+1.  **Trigger Search:** Publish a message with `{"value": true}` to the MQTT topic:
+    `OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Search_for_devices/trigger`
+2.  **View Results:** The GUI will update with a list of discovered and validated instruments.
+3.  **Select Device:** Click on the desired instrument from the list. Its resource name will be stored for connection.
+
+### 3.2. Connecting to an Instrument:
+
+1.  **From GUI:**
+    *   Ensure a device is selected from the search results.
+    *   Publish a message with `{"value": true}` to the MQTT topic:
+        `OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Connect_to_Device/trigger`
+2.  **Direct Connection (via Resource String):**
+    *   Publish a JSON payload containing the `resource` name to the MQTT topic:
+        `OPEN-AIR/commands/instrument/connect`
+    *   Example Payload: `{"resource": "USB0::0x1234::0x5678::SN12345::INSTR"}`
+
+### 3.3. Sending SCPI Commands:
+
+*   All raw SCPI commands are sent via the `OPEN-AIR/Proxy/Tx_Inbox` topic.
+*   The payload must be a JSON object with at least a `command` field.
+*   Use `"query": true` to send a query command and receive a response.
+*   Use `"query": false` (or omit it) for write commands.
+*   Include a `correlation_id` for tracking responses.
+
+**Example: Sending a Write Command (e.g., Set voltage to 5V)**
+```json
+{
+  "command": "VOLT 5.0",
+  "query": false,
+  "correlation_id": "some_unique_id_123"
+}
+```
+*Publish this to:* `OPEN-AIR/Proxy/Tx_Inbox`
+
+**Example: Sending a Query Command (e.g., Get IDN)**
+```json
+{
+  "command": "*IDN?",
+  "query": true,
+  "correlation_id": "some_unique_id_456"
+}
+```
+*Publish this to:* `OPEN-AIR/Proxy/Tx_Inbox`
+
+### 3.4. Receiving Responses:
+
+*   **SCPI Command Responses:** Will be published to `OPEN-AIR/Proxy/Rx_Outbox` with the `correlation_id` for matching.
+    Example Payload: `{"response": "MANUFACTURER,MODEL,SERIAL,FIRMWARE", "command": "*IDN?", "correlation_id": "some_unique_id_456", "timestamp": ...}`
+*   **Proxy Errors:** Will be published to `OPEN-AIR/Proxy/Error`.
+*   **Connection/Status Updates:** Published to `OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Device_status/<topic_suffix>` and `OPEN-AIR/Proxy/Status`.
+
+### 3.5. Resetting/Rebooting Instruments:
+
+*   **Soft Reset (`*RST`):** Publish `{"value": true}` to
+    `OPEN-AIR/Device/Instrument_Connection/System_Reset/Reset_device/trigger`
+*   **Power Cycle/Reboot:** Publish `{"value": true}` to
+    `OPEN-AIR/Device/Instrument_Connection/System_Reset/Reboot_device/trigger`
+
+### 3.6. Disconnecting from an Instrument:
+
+1.  **Trigger Disconnect:** Publish a message with `{"value": true}` to the MQTT topic:
+    `OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Disconnect_device/trigger`
+
+## 4. Suggestions and Advice
+
+### 4.1. Device Search and Filtering:
+
+*   **Refine `resource_pattern`:** The `yak_config` (currently embedded in `manager_visa_search_results.py`) contains `resource_pattern` fields. These are crucial for filtering. Ensure these patterns accurately match the expected VISA resource strings for your instruments. Use `list_visa_resources()` directly if you need to see all potential resources before applying filters.
+*   **Consider `?*::INSTR`:** For a broad search that includes all instrument types (including TCPIP, USB, ASRL, GPIB, etc.), the PyVISA `list_resources()` pattern `?*::INSTR` is very effective, as used in `manager_visa_list_visa_resources.py`. The `VisaDeviceSearcher` then filters this broad list.
+
+### 4.2. Cataloging and Inventory Management:
+
+*   **Persistent Storage:** Implement a system to store instrument details persistently. A JSON file for each instrument or a central SQLite database are good options.
+*   **Key Information to Store:**
+    *   Full VISA Resource Name.
+    *   Parsed `*IDN?` string (Manufacturer, Model, Serial Number, Firmware Version).
+    *   Discovered capabilities (list of SCPI commands supported, option boards).
+    *   Connection status and history (last connected time, duration).
+    *   User-defined aliases or notes for easier identification.
+    *   Instrument-specific configuration settings (timeouts, termination characters, etc.).
+*   **Centralized Inventory Service:** A dedicated service could manage this inventory, providing an API to query, add, update, and delete instrument records.
+
+### 4.3. Querying for IDN? and Understanding Capabilities:
+
+*   **`*IDN?` is Standard:** The `*IDN?` command is a SCPI standard and will return a comma-separated string identifying the manufacturer, model, serial number, and firmware. The `VisaConnector` already parses this.
+*   **Exploring Other Capabilities:** To understand what else a device can do, you typically need to consult its programming manual. Common methods include:
+    *   **SCPI Command Reference:** Manufacturers provide lists of supported commands. You can send these using `VisaProxy.write()` or `VisaProxy.query()`.
+    *   **Querying Options:** Commands like `*OPT?` might reveal installed option boards or features.
+    *   **Status Registers:** Commands like `*STB?` (Status Byte Register) or `*ESR?` (Event Status Register) provide crucial information about the instrument's operational state.
+    *   **Device-Specific Queries:** Many instruments have unique query commands for specific parameters or settings (e.g., `MEAS:VOLT?` on a DMM, `FREQuency?` on a signal generator).
+
+### 4.4. Managing Multiple Devices on the GPIB Bus:
+
+*   **Unique Resource Names:** The primary way to address multiple devices is through their unique VISA resource strings. For GPIB, this typically looks like `GPIB::device_address::INSTR` (e.g., `GPIB::5::INSTR` for device address 5).
+*   **Discovery:** Ensure `list_visa_resources()` correctly detects all GPIB-bound devices and their addresses. PyVISA's default backend should handle this.
+*   **Isolation:** When connecting, always use the full, specific resource name for the device you intend to communicate with. This ensures commands are directed only to that instrument.
+*   **Bus Contention:** Be mindful that GPIB is a shared bus. If multiple instruments are connected, you generally cannot communicate with them simultaneously on the same bus. You'll need to sequentially connect, command, and disconnect or manage connections to different instruments in parallel if your system architecture allows (which requires PyVISA's backend to support concurrent sessions, often feasible with modern setups).
+*   **Inventory Tracking:** The inventory management system (suggestion #3) is critical here to map device aliases or models to their specific GPIB addresses.
+
+### 4.5. Dynamic Manager and VISA Manager for Each Instrument:
+
+*   **Concept:** Instead of a generic `VisaProxy` that sends raw SCPI, create a system where each connected instrument instance is managed by a specialized class tailored to its type (e.g., `OscilloscopeManager`, `DMMManager`).
+*   **Implementation Strategy:**
+    1.  **Instrument Identification:** After a connection is established and `*IDN?` is queried, parse the response to determine the instrument's model and manufacturer.
+    2.  **Manager Registry/Factory:** Maintain a registry or factory pattern that maps instrument models (or patterns thereof) to their corresponding manager classes.
+    3.  **Dynamic Instantiation:** When a new instrument connects, look up its manager class in the registry. If found, instantiate it, passing the connected `pyvisa` instrument object (`inst`) and potentially the `VisaProxy` to this new manager.
+    4.  **Specialized Interfaces:** These dynamic managers would expose high-level methods like `set_voltage()`, `measure_frequency()`, `get_waveform()`, etc., abstracting the underlying SCPI commands.
+    5.  **Centralized VISA Manager:** A top-level `VisaInstrumentManager` could hold instances of all connected, dynamically managed instruments, providing a unified interface to interact with any device in the system. This manager would also oversee the inventory.
+*   **Benefits:** Improves code readability, maintainability, and allows for device-specific optimizations and error handling.
+
+This `VisaScipi` module forms a robust foundation for instrument control. By implementing the suggested enhancements, it can evolve into a highly sophisticated and user-friendly system for managing complex laboratory or industrial setups.
+
+
+
+Hello Anthony. This is a robust plan. You are asking to move from a Single-Instrument Remote architecture to a Fleet Management architecture.
+
+To achieve "Alignment," we must merge the Safety/Execution logic you have already built (Proxies, Queues, Safe Writers) with a new Supervisory Layer that manages multiple instances of that logic.
+
+Here is the comprehensive visaScpi.txt file. It documents your current robust foundation and outlines the specific architectural steps to handle the GPIB bus inventory and dynamic manager creation.
+
+Action:
+Create a file named visaScpi.txt in managers/VisaScipi/ and paste the content below.
+
+VISA/SCPI MODULE: ARCHITECTURE & FLEET MANAGEMENT GUIDE
+==============================================================================
+Context: Open-Air Hardware Interface
+Module: managers/VisaScipi
+Author: Anthony Peter Kuzub
+==============================================================================
+1. EXECUTIVE SUMMARY
+This module provides a thread-safe, event-driven bridge between MQTT (Logical Control) and PyVISA (Hardware Control).
+
+Current State (Single Device): The system creates one "Proxy" that connects to one manually selected device. It effectively serializes commands to prevent bus collisions.
+
+Target State (Fleet Management): The system will operate a "Device Supervisor" that scans the bus (GPIB/USB), fingerprints every device found, and spawns a dedicated, isolated Proxy for each instrument. This allows simultaneous control of an Oscilloscope, DMM, and Power Supply via distinct MQTT topics.
+
+2. FILE STRUCTURE & RESPONSIBILITIES
+A. The Supervisors (High Level)
+manager_visa_supervisor.py (NEW): * Role: The "Factory." It does not send commands. It scans resources, queries *IDN?, identifies the device type, and spawns the appropriate Manager/Proxy.
+
+Responsibility: Maintains the Inventory dictionary mapping UUIDs to Resource Strings.
+
+manager_visa_search_results.py: * Role: The "Scout." Uses list_visa_resources to find raw address strings (e.g., GPIB0::14::INSTR).
+
+B. The Executors (Mid Level)
+manager_visa_proxy.py: * Role: The "Driver." A reusable class instantiated once per device.
+
+Responsibility: Owns the queue.Queue, the worker_thread, and the pyvisa instance.
+
+manager_visa_dynamic_drivers.py (NEW):
+
+Role: The "Translator." Contains classes like TektronixScope or KeithleyDMM that map high-level actions (e.g., set_voltage) to specific SCPI commands.
+
+C. The Safety Layer (Low Level)
+manager_visa_safe_writer.py: Sanity checks writes, prevents malformed injection, handles timeouts.
+
+manager_visa_safe_query.py: Manages the Write -> Read cycle and correlates responses.
+
+3. WORKFLOW: MULTI-DEVICE DISCOVERY & MANAGEMENT
+To achieve the goal of "querying each device and creating a dynamic manager," follow this loop:
+
+Step 1: The "Roll Call" (Discovery)
+Triggered by: .../Search_for_devices/trigger
+
+Scan: Call pyvisa.ResourceManager().list_resources().
+
+Result: ['USB0::...::INSTR', 'GPIB0::12::INSTR', 'GPIB0::14::INSTR'].
+
+Filter: Apply yak_config regex patterns to ignore irrelevant ports (like system Serial ports).
+
+Step 2: The "Handshake" (Fingerprinting)
+Crucial Step for Inventory: Iterate through the validated list. For each resource R:
+
+Open: temp_inst = rm.open_resource(R)
+
+Query: idn = temp_inst.query("*IDN?")
+
+Example Return: TEKTRONIX,TDS2024C,C012345,v1.0
+
+Parse: Extract Make, Model, and Serial.
+
+Close: temp_inst.close() (Release the bus immediately).
+
+Catalog: Store this data in a persistent Inventory dictionary.
+
+Step 3: The "Assignment" (Factory Pattern)
+Based on the parsed Make/Model:
+
+Select Driver: * If Model starts with "TDS": Use TekScopeDriver.
+
+If Model starts with "34401": Use AgilentDMMDriver.
+
+Else: Use GenericScpiDriver.
+
+Spawn Proxy: Create a new instance of VisaProxy initialized with the specific Resource Name and the selected Driver.
+
+Assign Topic: The Proxy subscribes to a unique topic:
+
+OPEN-AIR/Device/{Serial_Number}/Tx_Inbox
+
+4. HANDLING THE GPIB BUS (Inventory Management)
+GPIB allows up to 15 devices daisy-chained. To manage this:
+
+1. Addressing: Each device has a unique address (1-30). PyVISA sees them as GPIB0::1::INSTR, GPIB0::2::INSTR, etc.
+
+Strategy: The Inventory must key devices by Serial Number (immutable), not Address (changeable). If a user changes a dipswitch on the back of the unit, the system should re-discover it as the same "Device" but at a new "Address."
+
+2. Concurrency: While PyVISA is thread-safe, the physical GPIB bus is not.
+
+Solution: Your VisaProxy architecture is perfect here. Because every device has its own Queue, if 5 devices try to talk at once, Python's Global Interpreter Lock (GIL) and the Visa DLL will serialize the electrical signals. You do not need to manually lock the bus if you use distinct Proxy instances.
+
+5. DYNAMIC MANAGER IMPLEMENTATION GUIDE
+To implement "A manager for each device," structure your classes like this:
+
+A. The Base Class (Generic)
+
+Python
+
+class GenericInstrument:
+    def __init__(self, visa_proxy):
+        self.proxy = visa_proxy
+    
+    def idn(self):
+        return self.proxy.query_safe("*IDN?")
+    
+    def reset(self):
+        return self.proxy.write_safe("*RST")
+B. The Child Class (Specific)
+
+Python
+
+class TektronixScope(GenericInstrument):
+    def get_waveform(self, channel=1):
+        self.proxy.write_safe(f"DAT:SOU CH{channel}")
+        return self.proxy.query_safe("CURV?")
+        
+    def autoset(self):
+        self.proxy.write_safe("AUTOSET EXECUTE")
+C. The Factory (The Supervisor Logic)
+
+Python
+
+def get_driver(make, model, proxy_instance):
+    if "TEKTRONIX" in make.upper():
+        return TektronixScope(proxy_instance)
+    elif "KEITHLEY" in make.upper():
+        return KeithleyDMM(proxy_instance)
+    else:
+        return GenericInstrument(proxy_instance)
+6. USER "TO-DO" LIST (Roadmap)
+[ ] Refactor Proxy: Modify VisaProxy.__init__ to accept a topic_prefix argument. This allows dynamic topic generation (e.g., Device/Scope1/... vs Device/DMM2/...).
+
+[ ] Build Supervisor: Create manager_visa_supervisor.py. Move the logic from manager_logic_connect_instrument.py into this. It should loop through list_visa_resources and perform the "Handshake" described in Section 3.
+
+[ ] Update MQTT Listener: The listener currently hardcodes specific global topics. It needs to support wildcard subscriptions (OPEN-AIR/Device/+/Tx_Inbox) so one listener can route messages to the correct Proxy instance.
+
+[ ] Persist Inventory: Save the discovered fleet to inventory.json so the system remembers device aliases (e.g., "Lab_Bench_Scope") between reboots.

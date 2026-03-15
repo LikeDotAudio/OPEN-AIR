@@ -1,0 +1,300 @@
+{
+  "Information": {
+    "type": "OcaBlock",
+    "AES70": "OcaApplicationManager",
+    "description": "A block for managing and displaying high-level application settings.",
+    "fields": {
+      "Active": {
+        "type": "_GuiButtonToggle",
+        "label": "Application Active",
+        "AES70": "OcaBooleanActuator",
+        "handler": "set_application_active",
+        "style": {
+          "active_text_color": "#1a1a1a",
+          "text_color": "#888888",
+          "active_font_style": "bold",
+          "active_font_size": null,
+          "inactive_font_style": "normal",
+          "inactive_font_size": null,
+          "active_color": "#FF9900",
+          "active_bg_color": "#000000",
+          "bg_color": "#2b2b2b",
+          "glow_intensity": 1.944
+        },
+        "options": {
+          "ON": {
+            "label": "Active",
+            "selected": true
+          },
+          "OFF": {
+            "label": "Inactive",
+            "selected": false
+          }
+        }
+      },
+      "geometry": {
+        "label": "Window Geometry",
+        "type": "_Label",
+        "AES70": "OcaStringSensor",
+        "value": "1920x1127+1912+32",
+        "units": null
+      },
+      "window_state": {
+        "label": "Window State",
+        "type": "_Label",
+        "AES70": "OcaStringSensor",
+        "value": "zoomed",
+        "units": null
+      },
+      "last_config_save_time": {
+        "label": "Last Config Save Time",
+        "type": "_Label",
+        "AES70": "OcaStringSensor",
+        "value": "2025-08-23 21:33:40",
+        "units": null
+      },
+      "paned_window_sash_position_percentage": {
+        "label": "Paned Window Sash Position",
+        "type": "_sliderValue",
+        "AES70": "OcaFloat32Actuator",
+        "handler": "set_sash_position",
+        "value": "40",
+        "min": "0",
+        "max": "100",
+        "step": "1",
+        "units": "%"
+      }
+    }
+  },
+  "Debug": {
+    "type": "OcaBlock",
+    "AES70": "OcaDiagnosticManager",
+    "description": "A block for managing debug and logging settings.",
+    "fields": {
+      "general_debug_enabled": {
+        "type": "_GuiButtonToggle",
+        "label": "General Debug Enabled",
+        "AES70": "OcaBooleanActuator",
+        "handler": "toggle_general_debug",
+        "style": {
+          "active_text_color": "#1a1a1a",
+          "text_color": "#888888",
+          "active_font_style": "bold",
+          "active_font_size": null,
+          "inactive_font_style": "normal",
+          "inactive_font_size": null,
+          "active_color": "#FF9900",
+          "active_bg_color": "#000000",
+          "bg_color": "#2b2b2b",
+          "glow_intensity": 1.944
+        },
+        "options": {
+          "ON": {
+            "label": "ON",
+            "selected": true
+          },
+          "OFF": {
+            "label": "OFF",
+            "selected": false
+          }
+        }
+      },
+      "debug_to_gui_console": {
+        "type": "_GuiButtonToggle",
+        "label": "Debug to GUI Console",
+        "AES70": "OcaBooleanActuator",
+        "handler": "toggle_debug_gui_console",
+        "style": {
+          "active_text_color": "#1a1a1a",
+          "text_color": "#888888",
+          "active_font_style": "bold",
+          "active_font_size": null,
+          "inactive_font_style": "normal",
+          "inactive_font_size": null,
+          "active_color": "#FF9900",
+          "active_bg_color": "#000000",
+          "bg_color": "#2b2b2b",
+          "glow_intensity": 1.944
+        },
+        "options": {
+          "ON": {
+            "label": "ON",
+            "selected": true
+          },
+          "OFF": {
+            "label": "OFF",
+            "selected": false
+          }
+        }
+      },
+      "debug_enabled": {
+        "type": "_GuiButtonToggle",
+        "label": "Debug to Terminal",
+        "AES70": "OcaBooleanActuator",
+        "handler": "toggle_debug_terminal",
+        "style": {
+          "active_text_color": "#1a1a1a",
+          "text_color": "#888888",
+          "active_font_style": "bold",
+          "active_font_size": null,
+          "inactive_font_style": "normal",
+          "inactive_font_size": null,
+          "active_color": "#FF9900",
+          "active_bg_color": "#000000",
+          "bg_color": "#2b2b2b",
+          "glow_intensity": 1.944
+        },
+        "options": {
+          "ON": {
+            "label": "ON",
+            "selected": false
+          },
+          "OFF": {
+            "label": "OFF",
+            "selected": true
+          }
+        }
+      },
+      "debug_to_file": {
+        "type": "_GuiButtonToggle",
+        "label": "Debug to File",
+        "AES70": "OcaBooleanActuator",
+        "handler": "toggle_debug_file",
+        "style": {
+          "active_text_color": "#1a1a1a",
+          "text_color": "#888888",
+          "active_font_style": "bold",
+          "active_font_size": null,
+          "inactive_font_style": "normal",
+          "inactive_font_size": null,
+          "active_color": "#FF9900",
+          "active_bg_color": "#000000",
+          "bg_color": "#2b2b2b",
+          "glow_intensity": 1.944
+        },
+        "options": {
+          "ON": {
+            "label": "ON",
+            "selected": true
+          },
+          "OFF": {
+            "label": "OFF",
+            "selected": false
+          }
+        }
+      },
+      "include_console_messages_to_debug_file": {
+        "type": "_GuiButtonToggle",
+        "label": "Include Console in Debug File",
+        "AES70": "OcaBooleanActuator",
+        "handler": "toggle_console_to_file",
+        "style": {
+          "active_text_color": "#1a1a1a",
+          "text_color": "#888888",
+          "active_font_style": "bold",
+          "active_font_size": null,
+          "inactive_font_style": "normal",
+          "inactive_font_size": null,
+          "active_color": "#FF9900",
+          "active_bg_color": "#000000",
+          "bg_color": "#2b2b2b",
+          "glow_intensity": 1.944
+        },
+        "options": {
+          "ON": {
+            "label": "ON",
+            "selected": true
+          },
+          "OFF": {
+            "label": "OFF",
+            "selected": false
+          }
+        }
+      },
+      "#log_visa_commands_enabled": {
+        "type": "_GuiButtonToggle",
+        "label": "Log VISA Commands",
+        "AES70": "OcaBooleanActuator",
+        "handler": "toggle_visa_logging",
+        "style": {
+          "active_text_color": "#1a1a1a",
+          "text_color": "#888888",
+          "active_font_style": "bold",
+          "active_font_size": null,
+          "inactive_font_style": "normal",
+          "inactive_font_size": null,
+          "active_color": "#FF9900",
+          "active_bg_color": "#000000",
+          "bg_color": "#2b2b2b",
+          "glow_intensity": 1.944
+        },
+        "options": {
+          "ON": {
+            "label": "ON",
+            "selected": false
+          },
+          "OFF": {
+            "label": "OFF",
+            "selected": true
+          }
+        }
+      },
+      "log_truncation_enabled": {
+        "type": "_GuiButtonToggle",
+        "label": "Log Truncation",
+        "AES70": "OcaBooleanActuator",
+        "handler": "toggle_log_truncation",
+        "style": {
+          "active_text_color": "#1a1a1a",
+          "text_color": "#888888",
+          "active_font_style": "bold",
+          "active_font_size": null,
+          "inactive_font_style": "normal",
+          "inactive_font_size": null,
+          "active_color": "#FF9900",
+          "active_bg_color": "#000000",
+          "bg_color": "#2b2b2b",
+          "glow_intensity": 1.944
+        },
+        "options": {
+          "ON": {
+            "label": "ON",
+            "selected": true
+          },
+          "OFF": {
+            "label": "OFF",
+            "selected": false
+          }
+        }
+      },
+      "include_visa_messages_to_debug_file": {
+        "type": "_GuiButtonToggle",
+        "label": "Include VISA in Debug File",
+        "AES70": "OcaBooleanActuator",
+        "handler": "toggle_visa_to_file",
+        "style": {
+          "active_text_color": "#1a1a1a",
+          "text_color": "#888888",
+          "active_font_style": "bold",
+          "active_font_size": null,
+          "inactive_font_style": "normal",
+          "inactive_font_size": null,
+          "active_color": "#FF9900",
+          "active_bg_color": "#000000",
+          "bg_color": "#2b2b2b",
+          "glow_intensity": 1.944
+        },
+        "options": {
+          "ON": {
+            "label": "ON",
+            "selected": true
+          },
+          "OFF": {
+            "label": "OFF",
+            "selected": false
+          }
+        }
+      }
+    }
+  }
+}

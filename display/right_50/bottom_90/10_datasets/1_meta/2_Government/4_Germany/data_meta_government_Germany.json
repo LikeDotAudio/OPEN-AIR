@@ -1,0 +1,77 @@
+{
+  "FM_Radio_Broadcast": {
+    "Value": "FM Radio Broadcast",
+    "Start_MHz": 87.5,
+    "Stop_MHz": 108.0
+  },
+  "Amateur_Radio_2m": {
+    "Value": "Amateur Radio 2m",
+    "Start_MHz": 144.0,
+    "Stop_MHz": 146.0
+  },
+  "Public_Safety_TETRA": {
+    "Value": "Public Safety TETRA",
+    "Start_MHz": 380.0,
+    "Stop_MHz": 400.0
+  },
+  "Amateur_Radio_70cm": {
+    "Value": "Amateur Radio 70cm",
+    "Start_MHz": 430.0,
+    "Stop_MHz": 440.0
+  },
+  "DVB_T2_UHF": {
+    "Value": "DVB-T2 (UHF)",
+    "Start_MHz": 470.0,
+    "Stop_MHz": 694.0
+  },
+  "Mobile_700MHz_Band": {
+    "Value": "Mobile 700MHz Band",
+    "Start_MHz": 703.0,
+    "Stop_MHz": 733.0
+  },
+  "Mobile_800MHz_Band": {
+    "Value": "Mobile 800MHz Band (Digital Dividend 1)",
+    "Start_MHz": 791.0,
+    "Stop_MHz": 862.0
+  },
+  "Mobile_900MHz_Band": {
+    "Value": "Mobile 900MHz Band",
+    "Start_MHz": 880.0,
+    "Stop_MHz": 960.0
+  },
+  "Mobile_1800MHz_Band": {
+    "Value": "Mobile 1800MHz Band",
+    "Start_MHz": 1710.0,
+    "Stop_MHz": 1880.0
+  },
+  "Mobile_2100MHz_Band": {
+    "Value": "Mobile 2100MHz Band",
+    "Start_MHz": 1920.0,
+    "Stop_MHz": 2170.0
+  },
+  "Wi_Fi_2_4_GHz": {
+    "Value": "Wi-Fi 2.4 GHz",
+    "Start_MHz": 2400.0,
+    "Stop_MHz": 2483.5
+  },
+  "Mobile_2_6GHz_Band": {
+    "Value": "Mobile 2.6GHz Band",
+    "Start_MHz": 2500.0,
+    "Stop_MHz": 2690.0
+  },
+  "Mobile_3_5GHz_Band": {
+    "Value": "Mobile 3.5GHz Band (5G)",
+    "Start_MHz": 3400.0,
+    "Stop_MHz": 3800.0
+  },
+  "Wi_Fi_5_GHz": {
+    "Value": "Wi-Fi 5 GHz",
+    "Start_MHz": 5150.0,
+    "Stop_MHz": 5850.0
+  },
+  "Mobile_26GHz_Band": {
+    "Value": "Mobile 26GHz Band (5G mmWave)",
+    "Start_MHz": 24250.0,
+    "Stop_MHz": 27500.0
+  }
+}

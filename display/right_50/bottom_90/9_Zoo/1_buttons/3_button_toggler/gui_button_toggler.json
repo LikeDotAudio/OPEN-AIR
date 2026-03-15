@@ -1,0 +1,1179 @@
+{
+  "Zoo_buttons_button_toggler": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label_active": "Select Channel",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartToggler",
+            "label": "Select Channel",
+            "notes": "A 4-channel selector, with CH1 initially active.",
+            "geometry": {
+              "height": 50,
+              "alpha": 0.9,
+              "font": 12
+            },
+            "interaction": {
+              "options": {
+                "CH1": {
+                  "label_active": "CH1",
+                  "selected": true
+                },
+                "CH2": {
+                  "label_active": "CH2"
+                },
+                "CH3": {
+                  "label_active": "CH3"
+                },
+                "CH4": {
+                  "label_active": "CH4"
+                }
+              }
+            },
+            "layout": {
+              "max_cols": 2
+            }
+          }
+        }
+      },
+      "neon_intensity": {
+        "type": "OcaBlock",
+        "label_active": "Glow Intensity Demo",
+        "fields": {
+          "glow_0_1": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#00FF00",
+              "glow_intensity": 0.1
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "0.1 GLOW",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "OFF"
+                }
+              }
+            }
+          },
+          "glow_1_0": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#00FF00",
+              "glow_intensity": 1.0
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "1.0 GLOW",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "OFF"
+                }
+              }
+            }
+          },
+          "glow_2_5": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#00FF00",
+              "glow_intensity": 2.5
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "2.5 GLOW",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "OFF"
+                }
+              }
+            }
+          },
+          "glow_5_0": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#00FF00",
+              "glow_intensity": 5.0
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "5.0 GLOW",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "OFF"
+                }
+              }
+            }
+          }
+        }
+      },
+      "color_spectrum": {
+        "type": "OcaBlock",
+        "label_active": "Vivid Color Spectrum",
+        "fields": {
+          "red_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#FF0000",
+              "glow_intensity": 2.0
+            },
+            "interaction": {
+              "options": {
+                "R": {
+                  "label_active": "CRIMSON",
+                  "selected": true
+                },
+                "O": {
+                  "label_active": "OFF"
+                }
+              }
+            }
+          },
+          "amber_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#FF9900",
+              "glow_intensity": 2.0
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "AMBER",
+                  "selected": true
+                },
+                "O": {
+                  "label_active": "OFF"
+                }
+              }
+            }
+          },
+          "gold_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#FFFF00",
+              "glow_intensity": 2.0
+            },
+            "interaction": {
+              "options": {
+                "G": {
+                  "label_active": "GOLD",
+                  "selected": true
+                },
+                "O": {
+                  "label_active": "OFF"
+                }
+              }
+            }
+          },
+          "lime_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#00FF00",
+              "glow_intensity": 2.0
+            },
+            "interaction": {
+              "options": {
+                "L": {
+                  "label_active": "LIME",
+                  "selected": true
+                },
+                "O": {
+                  "label_active": "OFF"
+                }
+              }
+            }
+          },
+          "cyan_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#00FFFF",
+              "glow_intensity": 2.0
+            },
+            "interaction": {
+              "options": {
+                "C": {
+                  "label_active": "CYAN",
+                  "selected": true
+                },
+                "O": {
+                  "label_active": "OFF"
+                }
+              }
+            }
+          },
+          "cobalt_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#0066FF",
+              "glow_intensity": 2.0
+            },
+            "interaction": {
+              "options": {
+                "B": {
+                  "label_active": "COBALT",
+                  "selected": true
+                },
+                "O": {
+                  "label_active": "OFF"
+                }
+              }
+            }
+          },
+          "violet_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#9900FF",
+              "glow_intensity": 2.0
+            },
+            "interaction": {
+              "options": {
+                "V": {
+                  "label_active": "VIOLET",
+                  "selected": true
+                },
+                "O": {
+                  "label_active": "OFF"
+                }
+              }
+            }
+          },
+          "pink_neon": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#FF00FF",
+              "glow_intensity": 2.0
+            },
+            "interaction": {
+              "options": {
+                "P": {
+                  "label_active": "MAGENTA",
+                  "selected": true
+                },
+                "O": {
+                  "label_active": "OFF"
+                }
+              }
+            }
+          }
+        }
+      },
+      "industrial_color_pairs": {
+        "type": "OcaBlock",
+        "label_active": "Industrial Color Pairs",
+        "fields": {
+          "pair_1": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "OFF": {
+                  "label_active": "TAG",
+                  "bg_color": "#4a483e",
+                  "active_bg_color": "#FFFDD0",
+                  "active_color": "#FFFDD0",
+                  "text_color": "#1a1a1a",
+                  "active_text_color": "#1a1a1a",
+                  "selected": true
+                },
+                "ON": {
+                  "label_active": "TAG",
+                  "bg_color": "#FFFDD0",
+                  "active_bg_color": "#FFFDD0",
+                  "active_color": "#FFFDD0",
+                  "text_color": "#1a1a1a",
+                  "active_text_color": "#1a1a1a"
+                }
+              }
+            }
+          },
+          "pair_2": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#400010",
+                  "active_bg_color": "#e0115f",
+                  "active_color": "#e0115f",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#400010",
+                  "active_bg_color": "#e0115f",
+                  "active_color": "#e0115f"
+                }
+              }
+            }
+          },
+          "pair_3": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#003010",
+                  "active_bg_color": "#50c878",
+                  "active_color": "#50c878",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#003010",
+                  "active_bg_color": "#50c878",
+                  "active_color": "#50c878"
+                }
+              }
+            }
+          },
+          "pair_4": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#001040",
+                  "active_bg_color": "#0f52ba",
+                  "active_color": "#0f52ba",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#001040",
+                  "active_bg_color": "#0f52ba",
+                  "active_color": "#0f52ba"
+                }
+              }
+            }
+          },
+          "pair_5": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#302000",
+                  "active_bg_color": "#ffbf00",
+                  "active_color": "#ffbf00",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#302000",
+                  "active_bg_color": "#ffbf00",
+                  "active_color": "#ffbf00"
+                }
+              }
+            }
+          },
+          "pair_6": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#300030",
+                  "active_bg_color": "#ee82ee",
+                  "active_color": "#ee82ee",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#300030",
+                  "active_bg_color": "#ee82ee",
+                  "active_color": "#ee82ee"
+                }
+              }
+            }
+          },
+          "pair_7": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#003030",
+                  "active_bg_color": "#00ffff",
+                  "active_color": "#00ffff",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#003030",
+                  "active_bg_color": "#00ffff",
+                  "active_color": "#00ffff"
+                }
+              }
+            }
+          },
+          "pair_8": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#400040",
+                  "active_bg_color": "#ff00ff",
+                  "active_color": "#ff00ff",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#400040",
+                  "active_bg_color": "#ff00ff",
+                  "active_color": "#ff00ff"
+                }
+              }
+            }
+          },
+          "pair_9": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#103000",
+                  "active_bg_color": "#32cd32",
+                  "active_color": "#32cd32",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#103000",
+                  "active_bg_color": "#32cd32",
+                  "active_color": "#32cd32"
+                }
+              }
+            }
+          },
+          "pair_10": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#303000",
+                  "active_bg_color": "#ffd700",
+                  "active_color": "#ffd700",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#303000",
+                  "active_bg_color": "#ffd700",
+                  "active_color": "#ffd700"
+                }
+              }
+            }
+          },
+          "pair_11": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#101020",
+                  "active_bg_color": "#708090",
+                  "active_color": "#708090",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#101020",
+                  "active_bg_color": "#708090",
+                  "active_color": "#708090"
+                }
+              }
+            }
+          },
+          "pair_12": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#201000",
+                  "active_bg_color": "#d2691e",
+                  "active_color": "#d2691e",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#201000",
+                  "active_bg_color": "#d2691e",
+                  "active_color": "#d2691e"
+                }
+              }
+            }
+          },
+          "pair_13": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#002020",
+                  "active_bg_color": "#20b2aa",
+                  "active_color": "#20b2aa",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#002020",
+                  "active_bg_color": "#20b2aa",
+                  "active_color": "#20b2aa"
+                }
+              }
+            }
+          },
+          "pair_14": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#300000",
+                  "active_bg_color": "#ff4500",
+                  "active_color": "#ff4500",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#300000",
+                  "active_bg_color": "#ff4500",
+                  "active_color": "#ff4500"
+                }
+              }
+            }
+          },
+          "pair_15": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#001030",
+                  "active_bg_color": "#4682b4",
+                  "active_color": "#4682b4",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#001030",
+                  "active_bg_color": "#4682b4",
+                  "active_color": "#4682b4"
+                }
+              }
+            }
+          },
+          "pair_16": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#102010",
+                  "active_bg_color": "#9acd32",
+                  "active_color": "#9acd32",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#102010",
+                  "active_bg_color": "#9acd32",
+                  "active_color": "#9acd32"
+                }
+              }
+            }
+          },
+          "pair_17": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#200020",
+                  "active_bg_color": "#ba55d3",
+                  "active_color": "#ba55d3",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#200020",
+                  "active_bg_color": "#ba55d3",
+                  "active_color": "#ba55d3"
+                }
+              }
+            }
+          },
+          "pair_18": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#003020",
+                  "active_bg_color": "#3cb371",
+                  "active_color": "#3cb371",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#003020",
+                  "active_bg_color": "#3cb371",
+                  "active_color": "#3cb371"
+                }
+              }
+            }
+          },
+          "pair_19": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#303030",
+                  "active_bg_color": "#f0f0f0",
+                  "active_color": "#f0f0f0",
+                  "active_text_color": "#1a1a1a",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#303030",
+                  "active_bg_color": "#f0f0f0",
+                  "active_color": "#f0f0f0",
+                  "active_text_color": "#1a1a1a"
+                }
+              }
+            }
+          },
+          "pair_20": {
+            "type": "_SmartToggler",
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "SEL",
+                  "bg_color": "#1a1a1a",
+                  "active_bg_color": "#ff69b4",
+                  "active_color": "#ff69b4",
+                  "selected": true
+                },
+                "B": {
+                  "label_active": "SEL",
+                  "bg_color": "#1a1a1a",
+                  "active_bg_color": "#ff69b4",
+                  "active_color": "#ff69b4"
+                }
+              }
+            }
+          }
+        }
+      },
+      "form_factors": {
+        "type": "OcaBlock",
+        "label_active": "Size & Geometry Variety",
+        "fields": {
+          "micro_strip": {
+            "type": "_SmartToggler",
+            "geometry": {
+              "height": 18,
+              "font": 7
+            },
+            "interaction": {
+              "options": {
+                "1": {
+                  "label_active": "S1"
+                },
+                "2": {
+                  "label_active": "S2"
+                },
+                "3": {
+                  "label_active": "S3",
+                  "selected": true
+                }
+              }
+            }
+          },
+          "massive_alert": {
+            "type": "_SmartToggler",
+            "geometry": {
+              "height": 120,
+              "font": 32
+            },
+            "style": {
+              "active_color": "#FF3300",
+              "glow_intensity": 3.0,
+              "active_font_style": "bold"
+            },
+            "interaction": {
+              "options": {
+                "STOP": {
+                  "label_active": "STOP",
+                  "selected": true
+                },
+                "GO": {
+                  "label_active": "GO"
+                }
+              }
+            }
+          },
+          "vertical_stack": {
+            "type": "_SmartToggler",
+            "geometry": {
+              "height": 40
+            },
+            "layout": {
+              "max_cols": 1
+            },
+            "interaction": {
+              "options": {
+                "TOP": {
+                  "label_active": "TOP"
+                },
+                "MID": {
+                  "label_active": "MID",
+                  "selected": true
+                },
+                "BOT": {
+                  "label_active": "BOT"
+                }
+              }
+            }
+          },
+          "wide_spread": {
+            "type": "_SmartToggler",
+            "geometry": {
+              "height": 30
+            },
+            "layout": {
+              "max_cols": 8
+            },
+            "interaction": {
+              "options": {
+                "1": {
+                  "label_active": "1"
+                },
+                "2": {
+                  "label_active": "2"
+                },
+                "3": {
+                  "label_active": "3"
+                },
+                "4": {
+                  "label_active": "4"
+                },
+                "5": {
+                  "label_active": "5"
+                },
+                "6": {
+                  "label_active": "6"
+                },
+                "7": {
+                  "label_active": "7"
+                },
+                "8": {
+                  "label_active": "8",
+                  "selected": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "aesthetic_mix": {
+        "type": "OcaBlock",
+        "label_active": "Industrial Styles",
+        "fields": {
+          "stealth": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#333333",
+              "active_text_color": "#FFFFFF",
+              "bg_color": "#111111",
+              "text_color": "#222222"
+            },
+            "interaction": {
+              "options": {
+                "OFF": {
+                  "label_active": "VOID"
+                },
+                "ON": {
+                  "label_active": "ACTIVE",
+                  "selected": true
+                }
+              }
+            }
+          },
+          "hot_rod": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#FF4500",
+              "bg_color": "#220000",
+              "glow_intensity": 2.5
+            },
+            "interaction": {
+              "options": {
+                "IGNITE": {
+                  "label_active": "IGNITE",
+                  "selected": true
+                },
+                "KILL": {
+                  "label_active": "KILL"
+                }
+              }
+            }
+          },
+          "matrix": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#00FF41",
+              "bg_color": "#000D00",
+              "text_color": "#003B00",
+              "glow_intensity": 1.8
+            },
+            "interaction": {
+              "options": {
+                "DATA": {
+                  "label_active": "STREAMING",
+                  "selected": true
+                },
+                "IDLE": {
+                  "label_active": "IDLE"
+                }
+              }
+            }
+          },
+          "ice": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#F0F8FF",
+              "active_text_color": "#000080",
+              "glow_intensity": 1.2
+            },
+            "interaction": {
+              "options": {
+                "FROST": {
+                  "label_active": "FROZEN",
+                  "selected": true
+                },
+                "MELT": {
+                  "label_active": "THAW"
+                }
+              }
+            }
+          },
+          "vintage": {
+            "type": "_SmartToggler",
+            "style": {
+              "active_color": "#F4A460",
+              "active_text_color": "#4B0082",
+              "bg_color": "#2F4F4F"
+            },
+            "interaction": {
+              "options": {
+                "OLD": {
+                  "label_active": "ANTIQUE",
+                  "selected": true
+                },
+                "NEW": {
+                  "label_active": "MODERN"
+                }
+              }
+            }
+          },
+          "ghost_alpha": {
+            "type": "_SmartToggler",
+            "geometry": {
+              "alpha": 0.3,
+              "height": 50
+            },
+            "style": {
+              "active_color": "#FFFFFF"
+            },
+            "interaction": {
+              "options": {
+                "VIS": {
+                  "label_active": "VISIBLE"
+                },
+                "INV": {
+                  "label_active": "GHOST",
+                  "selected": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "complex_arrays": {
+        "type": "OcaBlock",
+        "label_active": "Multi-Choice Arrays",
+        "fields": {
+          "radio_12": {
+            "type": "_SmartToggler",
+            "layout": {
+              "max_cols": 6
+            },
+            "style": {
+              "active_color": "#FF0099"
+            },
+            "interaction": {
+              "options": {
+                "1": {
+                  "label_active": "A"
+                },
+                "2": {
+                  "label_active": "B"
+                },
+                "3": {
+                  "label_active": "C"
+                },
+                "4": {
+                  "label_active": "D"
+                },
+                "5": {
+                  "label_active": "E"
+                },
+                "6": {
+                  "label_active": "F"
+                },
+                "7": {
+                  "label_active": "G"
+                },
+                "8": {
+                  "label_active": "H"
+                },
+                "9": {
+                  "label_active": "I"
+                },
+                "10": {
+                  "label_active": "J"
+                },
+                "11": {
+                  "label_active": "K"
+                },
+                "12": {
+                  "label_active": "L",
+                  "selected": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "circular_demos": {
+        "type": "OcaBlock",
+        "label_active": "Circular Button Demos",
+        "fields": {
+          "circular_channels": {
+            "type": "_SmartToggler",
+            "label": "Round Selectors",
+            "geometry": {
+              "width": 60,
+              "height": 60,
+              "font": 11
+            },
+            "style": {
+              "Circular": true,
+              "active_color": "#00CCFF"
+            },
+            "interaction": {
+              "options": {
+                "1": {
+                  "label_active": "1",
+                  "selected": true
+                },
+                "2": {
+                  "label_active": "2"
+                },
+                "3": {
+                  "label_active": "3"
+                },
+                "4": {
+                  "label_active": "4"
+                }
+              }
+            },
+            "layout": {
+              "max_cols": 4
+            }
+          },
+          "circular_traffic": {
+            "type": "_SmartToggler",
+            "label": "Traffic Lights",
+            "geometry": {
+              "width": 80,
+              "height": 80,
+              "font": 14
+            },
+            "style": {
+              "Circular": true
+            },
+            "interaction": {
+              "options": {
+                "RED": {
+                  "label_active": "STOP",
+                  "active_color": "#FF0000",
+                  "glow_intensity": 3.0,
+                  "selected": true
+                },
+                "YEL": {
+                  "label_active": "WAIT",
+                  "active_color": "#FFCC00",
+                  "glow_intensity": 2.5
+                },
+                "GRN": {
+                  "label_active": "GO",
+                  "active_color": "#00FF00",
+                  "glow_intensity": 2.5
+                }
+              }
+            },
+            "layout": {
+              "max_cols": 3
+            }
+          },
+          "circular_tiny": {
+            "type": "_SmartToggler",
+            "label": "Tiny Indicators",
+            "geometry": {
+              "width": 30,
+              "height": 30,
+              "font": 8
+            },
+            "style": {
+              "Circular": true,
+              "active_color": "#FF00FF"
+            },
+            "interaction": {
+              "options": {
+                "A": {
+                  "label_active": "A"
+                },
+                "B": {
+                  "label_active": "B"
+                },
+                "C": {
+                  "label_active": "C",
+                  "selected": true
+                },
+                "D": {
+                  "label_active": "D"
+                }
+              }
+            },
+            "layout": {
+              "max_cols": 4
+            }
+          },
+          "circular_large_lamp": {
+            "type": "_SmartToggler",
+            "label": "Large Pilot Lamps",
+            "geometry": {
+              "width": 120,
+              "height": 120,
+              "font": 20
+            },
+            "style": {
+              "Circular": true,
+              "glow_intensity": 4.0
+            },
+            "interaction": {
+              "options": {
+                "POWER": {
+                  "label_active": "PWR",
+                  "active_color": "#00AAFF",
+                  "selected": true
+                },
+                "FAULT": {
+                  "label_active": "ERR",
+                  "active_color": "#FF3300"
+                }
+              }
+            },
+            "layout": {
+              "max_cols": 2
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCA - Master Color Palette</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --panel-bg: #1e1e1e;
+            --text-color: #f0f0f0;
+            --accent-color: #f4902c;
+            --border-color: #333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 { color: var(--accent-color); letter-spacing: 5px; margin-bottom: 40px; font-weight: 900; }
+
+        .mixer-frame {
+            display: flex;
+            background: #252525;
+            border: 3px solid var(--border-color);
+            border-top: 6px solid var(--accent-color);
+            border-radius: 16px;
+            padding: 40px;
+            gap: 40px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.9);
+            align-items: stretch;
+        }
+
+        .output-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 220px;
+            background: #111;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #333;
+        }
+
+        .swatch-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 10px solid #222;
+            box-shadow: 0 0 80px rgba(0,0,0,1);
+            margin-bottom: 25px;
+            background-color: #000;
+        }
+
+        .code-display {
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 1.2em;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+        }
+
+        canvas {
+            background: #000;
+            border-radius: 10px;
+            cursor: ns-resize;
+            box-shadow: inset 0 0 30px rgba(0,0,0,1);
+        }
+
+        .hint {
+            margin-top: 40px;
+            color: #555;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>MASTER COLOR PALETTE</h1>
+    
+    <div class="mixer-frame">
+        <div class="output-panel">
+            <div style="font-size: 0.8em; color: #666; margin-bottom: 10px; font-weight: bold;">MIX OUTPUT</div>
+            <div id="swatch" class="swatch-circle"></div>
+            <div id="code" class="code-display">rgb(0,0,0)</div>
+        </div>
+        <div id="canvas-container">
+            <canvas id="mixer"></canvas>
+        </div>
+    </div>
+
+    <div class="hint">
+        GCA: Drag Bridge for Master | Drag Color Caps for Trim | Double-Click for Mode Toggle
+    </div>
+
+    <script>
+        const palette = [
+            {name:"BLACK",   rgb:[30,30,30]},
+            {name:"GREY",    rgb:[128,128,128]},
+            {name:"WHITE",   rgb:[255,255,255]},
+            {name:"CYAN",    rgb:[0,255,255]},
+            {name:"YELLOW",  rgb:[255,255,0]},
+            {name:"MAGENTA", rgb:[255,0,255]},
+            {name:"KEY(K)",  rgb:[15,15,15]},
+            {name:"RED",     rgb:[255,0,0]},
+            {name:"GREEN",   rgb:[0,255,0]},
+            {name:"BLUE",    rgb:[0,0,255]},
+            {name:"ORANGE",  rgb:[255,165,0]},
+            {name:"INDIGO",  rgb:[75,0,130]},
+            {name:"VIOLET",  rgb:[238,130,238]},
+            {name:"MASTER",  rgb:[255,255,255], isMaster: true}
+        ];
+
+        const canvas = document.getElementById('mixer');
+        const ctx = canvas.getContext('2d');
+        const swatch = document.getElementById('swatch');
+        const code = document.getElementById('code');
+
+        const W = 1000;
+        const H = 500;
+        canvas.width = W;
+        canvas.height = H;
+
+        let values = palette.map(p => p.isMaster ? 80 : 50); // 0-100
+        const mIdx = palette.length - 1;
+        let offsets = values.map(v => v - values[mIdx]);
+        let isDragging = false;
+        let dragTarget = null;
+        let startY = 0;
+        let startVal = 0;
+
+        function getY(val) { return (H - 60) - (val / 100 * (H - 120)); }
+        function getVal(y) { return Math.max(0, Math.min(100, ((H - 60) - y) / (H - 120) * 100)); }
+
+        function draw() {
+            ctx.fillStyle = "#000";
+            ctx.fillRect(0, 0, W, H);
+
+            const stripW = W / palette.length;
+
+            // 1. Draw Channels
+            for (let i = 0; i < palette.length; i++) {
+                const cx = i * stripW + stripW/2;
+                const isMasterTrack = palette[i].isMaster;
+                
+                // Track Slot
+                ctx.fillStyle = "#111";
+                ctx.fillRect(cx-6, 40, 12, H-80);
+                ctx.fillStyle = "#222";
+                ctx.fillRect(cx-2, 40, 4, H-80);
+
+                // Cap
+                const val = values[i];
+                const y = getY(val);
+                const rgb = palette[i].rgb;
+                
+                // Cap Body
+                const capCol = isMasterTrack ? "#f4902c" : `rgb(${rgb.join(',')})`;
+                ctx.fillStyle = capCol;
+                ctx.shadowBlur = isMasterTrack ? 20 : 10;
+                ctx.shadowColor = capCol;
+                ctx.fillRect(cx - stripW*0.4, y - 8, stripW*0.8, 16);
+                ctx.shadowBlur = 0;
+                
+                ctx.strokeStyle = "#fff";
+                ctx.lineWidth = 2;
+                ctx.strokeRect(cx - stripW*0.4, y - 8, stripW*0.8, 16);
+
+                // Labels
+                ctx.fillStyle = isMasterTrack ? "#f4902c" : "#666";
+                ctx.font = "bold 11px monospace";
+                ctx.textAlign = "center";
+                ctx.fillText(palette[i].name, cx, H - 25);
+            }
+
+            // 2. The Master Bridge (The "Main Fader")
+            const masterY = getY(values[mIdx]);
+            
+            // Bridge Gradient
+            const grad = ctx.createLinearGradient(0, masterY - 30, 0, masterY + 30);
+            grad.addColorStop(0, "#555");
+            grad.addColorStop(0.5, "#888");
+            grad.addColorStop(1, "#444");
+            
+            ctx.fillStyle = grad;
+            ctx.strokeStyle = "#f4902c";
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.roundRect(15, masterY - 30, W - 30, 60, 12);
+            ctx.fill();
+            ctx.stroke();
+
+            // Bridge Inset
+            ctx.fillStyle = "black";
+            ctx.fillRect(W/2 - 60, masterY - 20, 120, 40);
+
+            // Master Readout
+            ctx.fillStyle = "#f4902c";
+            ctx.font = "900 12px sans-serif";
+            ctx.fillText("MASTER GCA", W/2, masterY - 5);
+            ctx.fillStyle = "#fff";
+            ctx.font = "bold 20px monospace";
+            ctx.fillText(Math.round(values[mIdx]), W/2, masterY + 16);
+
+            updateOutput();
+        }
+
+        function updateOutput() {
+            let r=0, g=0, b=0;
+            // Accumulate color from non-master strips
+            for(let i=0; i < mIdx; i++) {
+                const norm = values[i] / 100;
+                r += palette[i].rgb[0] * norm;
+                g += palette[i].rgb[1] * norm;
+                b += palette[i].rgb[2] * norm;
+            }
+            // Master intensity
+            const mNorm = values[mIdx] / 100;
+            const finalCol = `rgb(${Math.min(255, Math.floor(r*mNorm))},${Math.min(255, Math.floor(g*mNorm))},${Math.min(255, Math.floor(b*mNorm))})`;
+            swatch.style.backgroundColor = finalCol;
+            swatch.style.boxShadow = `0 0 100px ${finalCol}`;
+            code.innerText = finalCol;
+        }
+
+        function handleInput(e) {
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches ? e.touches[0] : e;
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+            const masterY = getY(values[mIdx]);
+
+            if (!isDragging) {
+                if (y >= masterY - 30 && y <= masterY + 30) {
+                    dragTarget = 'bridge';
+                } else {
+                    const stripW = W / palette.length;
+                    dragTarget = Math.floor(x / stripW);
+                }
+                isDragging = true;
+                startY = touch.clientY;
+                startVal = (dragTarget === 'bridge') ? values[mIdx] : values[dragTarget];
+                return;
+            }
+
+            const dy = startY - touch.clientY;
+            const delta = (dy / (H - 120)) * 100;
+            const newVal = Math.max(0, Math.min(100, startVal + delta));
+
+            if (dragTarget === 'bridge') {
+                values[mIdx] = newVal;
+                for(let i=0; i < palette.length; i++) {
+                    if(i === mIdx) continue;
+                    values[i] = Math.max(0, Math.min(100, newVal + offsets[i]));
+                }
+            } else {
+                values[dragTarget] = newVal;
+                if (dragTarget === mIdx) {
+                    // Moving the master strip itself moves everything
+                    for(let i=0; i < palette.length; i++) {
+                        if(i === mIdx) continue;
+                        values[i] = Math.max(0, Math.min(100, newVal + offsets[i]));
+                    }
+                } else {
+                    // Trim mode: update offset relative to bridge
+                    offsets[dragTarget] = values[dragTarget] - values[mIdx];
+                }
+            }
+            draw();
+        }
+
+        canvas.addEventListener('mousedown', handleInput);
+        window.addEventListener('mousemove', e => { if(isDragging) handleInput(e); });
+        window.addEventListener('mouseup', () => { isDragging = false; });
+        canvas.addEventListener('touchstart', e => { handleInput(e); e.preventDefault(); }, {passive:false});
+        window.addEventListener('touchmove', e => { if(isDragging) handleInput(e); e.preventDefault(); }, {passive:false});
+        window.addEventListener('touchend', () => isDragging = false);
+
+        draw();
+    </script>
+</body>
+</html>

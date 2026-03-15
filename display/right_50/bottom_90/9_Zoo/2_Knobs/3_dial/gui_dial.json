@@ -1,0 +1,2896 @@
+{
+  "Zoo_Knobs_dial": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Dial_Petting_Zoo": {
+        "type": "OcaBlock",
+        "description": "Dial Variations (Petting Zoo)",
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "dial_01": {
+            "type": "_SmartKnob",
+            "label": "Std Combo",
+            "notes": "Standard combo",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#996633"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 250.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_02": {
+            "type": "_SmartKnob",
+            "label": "Pie Only",
+            "notes": "Piechart only, red",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF0000"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 500.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_03": {
+            "type": "_SmartKnob",
+            "label": "Ptr Only",
+            "notes": "Pointer only, blue",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#0000FF"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 750.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_04": {
+            "type": "_SmartKnob",
+            "label": "Lg Pie",
+            "notes": "Large pie, green",
+            "geometry": {
+              "width": 80,
+              "height": 80
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00FF00"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 300.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_05": {
+            "type": "_SmartKnob",
+            "label": "Sm Ptr",
+            "notes": "Small pointer, yellow",
+            "geometry": {
+              "width": 30,
+              "height": 30
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFFF00"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 100.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_06": {
+            "type": "_SmartKnob",
+            "label": "Giant Mix",
+            "notes": "Giant combo, cyan",
+            "geometry": {
+              "width": 100,
+              "height": 100
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00FFFF"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 600.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_07": {
+            "type": "_SmartKnob",
+            "label": "Purple",
+            "notes": "Medium purple",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#800080"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 800.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_08": {
+            "type": "_SmartKnob",
+            "label": "Teal",
+            "notes": "Medium teal pointer",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#008080"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 400.0,
+                "reff_point": 50.0
+              }
+            }
+          }
+        }
+      },
+      "Dial_Zoo_Index": {
+        "type": "OcaBlock",
+        "description": "Index Dial Variations",
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "dial_idx1": {
+            "type": "_SmartKnob",
+            "label": "Index 1",
+            "notes": "Blue Pointer",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2196F3"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 10.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_idx2": {
+            "type": "_SmartKnob",
+            "label": "Index 2",
+            "notes": "Amber Pie",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFC107"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 20.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_idx3": {
+            "type": "_SmartKnob",
+            "label": "Index 3",
+            "notes": "Green Combo",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#4CAF50"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 30.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_idx4": {
+            "type": "_SmartKnob",
+            "label": "Index 4",
+            "notes": "Small Pink",
+            "geometry": {
+              "width": 30,
+              "height": 30
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#E91E63"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 40.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_idx5": {
+            "type": "_SmartKnob",
+            "label": "Index 5",
+            "notes": "Large Purple",
+            "geometry": {
+              "width": 80,
+              "height": 80
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#9C27B0"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_idx6": {
+            "type": "_SmartKnob",
+            "label": "Index 6",
+            "notes": "Cyan Combo",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00BCD4"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 60.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_idx7": {
+            "type": "_SmartKnob",
+            "label": "Index 7",
+            "notes": "Deep Orange",
+            "geometry": {
+              "width": 40,
+              "height": 50,
+              "alpha": 0.9
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF5722"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 70.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_idx8": {
+            "type": "_SmartKnob",
+            "label": "Index 8",
+            "notes": "Brown Large",
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#795548"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 80.0,
+                "reff_point": 50.0
+              }
+            }
+          }
+        }
+      },
+      "Dial_Zoo_Time": {
+        "type": "OcaBlock",
+        "description": "Time/Clock Dial Variations",
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "dial_tm1": {
+            "type": "_SmartKnob",
+            "label": "Seconds",
+            "notes": "White Clock",
+            "geometry": {
+              "width": 80,
+              "height": 80
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFFFFF"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 15.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_tm2": {
+            "type": "_SmartKnob",
+            "label": "Minutes",
+            "notes": "Grey Clock",
+            "geometry": {
+              "width": 80,
+              "height": 80
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#B0BEC5"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 45.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_tm3": {
+            "type": "_SmartKnob",
+            "label": "Millis",
+            "notes": "Fast Red",
+            "geometry": {
+              "width": 40,
+              "height": 50,
+              "alpha": 0.9
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF1744"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 500.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_tm4": {
+            "type": "_SmartKnob",
+            "label": "Delay",
+            "notes": "Delay Blue",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2979FF"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 250.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_tm5": {
+            "type": "_SmartKnob",
+            "label": "Attack",
+            "notes": "Fast Attack Green",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00E676"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 5.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_tm6": {
+            "type": "_SmartKnob",
+            "label": "Release",
+            "notes": "Slow Release Orange",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9100"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 300.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_tm7": {
+            "type": "_SmartKnob",
+            "label": "Decay",
+            "notes": "Decay Purple",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#D500F9"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 100.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_tm8": {
+            "type": "_SmartKnob",
+            "label": "Hold",
+            "notes": "Dark Hold",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#3E2723"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0
+              }
+            }
+          }
+        }
+      },
+      "Dial_Zoo_Param": {
+        "type": "OcaBlock",
+        "description": "Parameter Dial Variations",
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "dial_prm1": {
+            "type": "_SmartKnob",
+            "label": "Param A",
+            "notes": "Cyan Electric",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00E5FF"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_prm2": {
+            "type": "_SmartKnob",
+            "label": "Param B",
+            "notes": "Red Tech",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#D50000"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 25.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_prm3": {
+            "type": "_SmartKnob",
+            "label": "Param C",
+            "notes": "Lime Tech",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#64DD17"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 75.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_prm4": {
+            "type": "_SmartKnob",
+            "label": "Mix X",
+            "notes": "Purple Deep",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#AA00FF"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 10.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_prm5": {
+            "type": "_SmartKnob",
+            "label": "Mix Y",
+            "notes": "Orange Blaze",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF6D00"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 90.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_prm6": {
+            "type": "_SmartKnob",
+            "label": "Mod 1",
+            "notes": "Indigo",
+            "geometry": {
+              "width": 40,
+              "height": 50,
+              "alpha": 0.9
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#304FFE"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 33.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_prm7": {
+            "type": "_SmartKnob",
+            "label": "Mod 2",
+            "notes": "Green Bright",
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00C853"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 66.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_prm8": {
+            "type": "_SmartKnob",
+            "label": "Master",
+            "notes": "Dark Master",
+            "geometry": {
+              "width": 90,
+              "height": 90
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#263238"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 100.0,
+                "reff_point": 50.0
+              }
+            }
+          }
+        }
+      },
+      "Dial_Zoo_Process": {
+        "type": "OcaBlock",
+        "description": "Process/Progress Dial Variations",
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "dial_proc1": {
+            "type": "_SmartKnob",
+            "label": "Loading",
+            "notes": "Start",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#B0BEC5"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 10.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_proc2": {
+            "type": "_SmartKnob",
+            "label": "Stage 1",
+            "notes": "Blue Light",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#90CAF9"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 25.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_proc3": {
+            "type": "_SmartKnob",
+            "label": "Stage 2",
+            "notes": "Blue Med",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#64B5F6"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_proc4": {
+            "type": "_SmartKnob",
+            "label": "Stage 3",
+            "notes": "Blue Dark",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#2196F3"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 75.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_proc5": {
+            "type": "_SmartKnob",
+            "label": "Complete",
+            "notes": "Green Done",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#4CAF50"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": false
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 100.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_proc6": {
+            "type": "_SmartKnob",
+            "label": "Error",
+            "notes": "Red Error",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#F44336"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 88.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_proc7": {
+            "type": "_SmartKnob",
+            "label": "Warning",
+            "notes": "Amber Warn",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFC107"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 60.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_proc8": {
+            "type": "_SmartKnob",
+            "label": "Unknown",
+            "notes": "Grey Unknown",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#9E9E9E"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0,
+                "show": true
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          }
+        }
+      },
+      "Dial_Zoo_Advanced": {
+        "type": "OcaBlock",
+        "description": "Advanced Dial Features (Infinity, Layout, Thickness)",
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "dial_adv1": {
+            "type": "_SmartKnob",
+            "label": "Infinite",
+            "notes": "Wraps around 0-100",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": true,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00BCD4"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_adv2": {
+            "type": "_SmartKnob",
+            "label": "Fine Tune",
+            "notes": "10 turns for full range",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": true
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFC107"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 1000.0,
+                "value_default": 500.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_adv3": {
+            "type": "_SmartKnob",
+            "label": "Thick Crust",
+            "notes": "10px Crust",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#E91E63"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 75.0,
+                "reff_point": 50.0
+              }
+            },
+            "pie_crust_thickness": 10
+          },
+          "dial_adv4": {
+            "type": "_SmartKnob",
+            "label": "Thin Crust",
+            "notes": "1px Crust",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#8BC34A"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 25.0,
+                "reff_point": 50.0
+              }
+            },
+            "pie_crust_thickness": 1
+          },
+          "dial_adv5": {
+            "type": "_SmartKnob",
+            "label": "Val Top",
+            "notes": "Val Top, Text Bot",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "location": "top",
+              "label_position": "bottom"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#9C27B0"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_adv6": {
+            "type": "_SmartKnob",
+            "label": "Val Left",
+            "notes": "Value on Left",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "location": "left",
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF5722"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 60.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_adv7": {
+            "type": "_SmartKnob",
+            "label": "Val Right",
+            "notes": "Value on Right",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "location": "right",
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#3F51B5"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 40.0,
+                "reff_point": 50.0
+              }
+            }
+          },
+          "dial_adv8": {
+            "type": "_SmartKnob",
+            "label": "Full Pie",
+            "notes": "Super thick crust",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#607D8B"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "fill_shape": true,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 100.0,
+                "reff_point": 50.0
+              }
+            },
+            "pie_crust_thickness": 25
+          }
+        }
+      }
+    }
+  }
+}

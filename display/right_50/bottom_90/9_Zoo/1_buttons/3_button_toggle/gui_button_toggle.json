@@ -1,0 +1,1007 @@
+{
+  "Zoo_buttons_button_toggle": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements_classic": {
+        "type": "OcaBlock",
+        "label_active": "Classic Toggles",
+        "fields": {
+          "mute": {
+            "type": "_SmartToggle",
+            "label": "Mute (Sticky)",
+            "geometry": {
+              "width": 90,
+              "height": 45,
+              "font": 14
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "MUTED",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "UNMUTED"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "record": {
+            "type": "_SmartToggle",
+            "label": "Record (Momentary)",
+            "geometry": {
+              "width": 100,
+              "height": 50,
+              "font": 10
+            },
+            "style": {
+              "active_color": "#FF0000"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "ARMING..."
+                },
+                "OFF": {
+                  "label_inactive": "DISARMED"
+                }
+              },
+              "is_sticky": false
+            }
+          }
+        }
+      },
+      "industrial_toggle_spectrum": {
+        "type": "OcaBlock",
+        "label_active": "20 Industrial Variants",
+        "fields": {
+          "v1": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#4a483e",
+              "active_bg_color": "#FFFDD0",
+              "active_color": "#FFFDD0"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v2": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#400010",
+              "active_bg_color": "#e0115f",
+              "active_color": "#e0115f"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v3": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#003010",
+              "active_bg_color": "#50c878",
+              "active_color": "#50c878"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v4": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#001040",
+              "active_bg_color": "#0f52ba",
+              "active_color": "#0f52ba"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v5": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#302000",
+              "active_bg_color": "#ffbf00",
+              "active_color": "#ffbf00"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v6": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#300030",
+              "active_bg_color": "#ee82ee",
+              "active_color": "#ee82ee"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v7": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#003030",
+              "active_bg_color": "#00ffff",
+              "active_color": "#00ffff"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v8": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#400040",
+              "active_bg_color": "#ff00ff",
+              "active_color": "#ff00ff"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v9": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#103000",
+              "active_bg_color": "#32cd32",
+              "active_color": "#32cd32"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v10": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#303000",
+              "active_bg_color": "#ffd700",
+              "active_color": "#ffd700"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v11": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#101020",
+              "active_bg_color": "#708090",
+              "active_color": "#708090"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v12": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#201000",
+              "active_bg_color": "#d2691e",
+              "active_color": "#d2691e"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v13": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#002020",
+              "active_bg_color": "#20b2aa",
+              "active_color": "#20b2aa"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v14": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#300000",
+              "active_bg_color": "#ff4500",
+              "active_color": "#ff4500"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v15": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#001030",
+              "active_bg_color": "#4682b4",
+              "active_color": "#4682b4"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v16": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#102010",
+              "active_bg_color": "#9acd32",
+              "active_color": "#9acd32"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v17": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#200020",
+              "active_bg_color": "#ba55d3",
+              "active_color": "#ba55d3"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v18": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#003020",
+              "active_bg_color": "#3cb371",
+              "active_color": "#3cb371"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v19": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#303030",
+              "active_bg_color": "#f0f0f0",
+              "active_color": "#f0f0f0",
+              "active_text_color": "#1a1a1a"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "v20": {
+            "type": "_SmartToggle",
+            "style": {
+              "Circular": true,
+              "bg_color": "#1a1a1a",
+              "active_bg_color": "#ff69b4",
+              "active_color": "#ff69b4"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PUSH",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "PUSH"
+                }
+              },
+              "is_sticky": true
+            }
+          }
+        }
+      },
+      "elements_glow": {
+        "type": "OcaBlock",
+        "label_active": "Intensity Demo (Momentary)",
+        "fields": {
+          "dim": {
+            "type": "_SmartToggle",
+            "label": "Dim",
+            "style": {
+              "active_color": "#00FF00",
+              "glow_intensity": 0.2
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "LOW"
+                },
+                "OFF": {
+                  "label_inactive": "OFF"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "mid": {
+            "type": "_SmartToggle",
+            "label": "Mid",
+            "style": {
+              "active_color": "#00FF00",
+              "glow_intensity": 1.2
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "MID"
+                },
+                "OFF": {
+                  "label_inactive": "OFF"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "high": {
+            "type": "_SmartToggle",
+            "label": "High",
+            "style": {
+              "active_color": "#00FF00",
+              "glow_intensity": 2.5
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "HIGH"
+                },
+                "OFF": {
+                  "label_inactive": "OFF"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "ultra": {
+            "type": "_SmartToggle",
+            "label": "Ultra",
+            "style": {
+              "active_color": "#00FF00",
+              "glow_intensity": 4.5
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "BURNING"
+                },
+                "OFF": {
+                  "label_inactive": "OFF"
+                }
+              },
+              "is_sticky": false
+            }
+          }
+        }
+      },
+      "elements_colors": {
+        "type": "OcaBlock",
+        "label_active": "Industrial Palette (Momentary)",
+        "fields": {
+          "amber": {
+            "type": "_SmartToggle",
+            "style": {
+              "active_color": "#FF9900"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "AMBER"
+                },
+                "OFF": {
+                  "label_inactive": "OFF"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "cyan": {
+            "type": "_SmartToggle",
+            "style": {
+              "active_color": "#00FFFF"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "CYAN"
+                },
+                "OFF": {
+                  "label_inactive": "OFF"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "magenta": {
+            "type": "_SmartToggle",
+            "style": {
+              "active_color": "#FF00FF"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PINK"
+                },
+                "OFF": {
+                  "label_inactive": "OFF"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "white": {
+            "type": "_SmartToggle",
+            "style": {
+              "active_color": "#FFFFFF",
+              "glow_intensity": 1.0
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "WHITE"
+                },
+                "OFF": {
+                  "label_inactive": "OFF"
+                }
+              },
+              "is_sticky": false
+            }
+          }
+        }
+      },
+      "elements_sizes": {
+        "type": "OcaBlock",
+        "label_active": "Size Variations (Momentary)",
+        "fields": {
+          "micro": {
+            "type": "_SmartToggle",
+            "geometry": {
+              "width": 40,
+              "height": 20,
+              "font": 7
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "ON"
+                },
+                "OFF": {
+                  "label_inactive": "OFF"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "slender": {
+            "type": "_SmartToggle",
+            "geometry": {
+              "width": 200,
+              "height": 30,
+              "font": 12
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "WIDE STRIP ACTIVE"
+                },
+                "OFF": {
+                  "label_inactive": "IDLE"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "tall": {
+            "type": "_SmartToggle",
+            "geometry": {
+              "width": 60,
+              "height": 120,
+              "font": 14
+            },
+            "style": {
+              "active_color": "#3399FF"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "V\nE\nR\nT"
+                },
+                "OFF": {
+                  "label_inactive": "O\nF\nF"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "massive": {
+            "type": "_SmartToggle",
+            "geometry": {
+              "width": 150,
+              "height": 100,
+              "font": 20
+            },
+            "style": {
+              "active_color": "#FF3300",
+              "glow_intensity": 2.2
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "DANGER"
+                },
+                "OFF": {
+                  "label_inactive": "SAFE"
+                }
+              },
+              "is_sticky": false
+            }
+          }
+        }
+      },
+      "elements_logic": {
+        "type": "OcaBlock",
+        "label_active": "State Logic (Momentary)",
+        "fields": {
+          "inverted": {
+            "type": "_SmartToggle",
+            "style": {
+              "active_color": "#444444",
+              "bg_color": "#00FF00"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "OFF"
+                },
+                "OFF": {
+                  "label_inactive": "ACTIVE"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "hot_swap": {
+            "type": "_SmartToggle",
+            "label": "Hot Swap (Sticky)",
+            "style": {
+              "active_color": "#FF0000",
+              "text_color": "#FFFF00"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "CRITICAL",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "STANDBY"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "ghost": {
+            "type": "_SmartToggle",
+            "geometry": {
+              "alpha": 0.3
+            },
+            "style": {
+              "active_color": "#AAAAAA"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "GHOST"
+                },
+                "OFF": {
+                  "label_inactive": "VOID"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "nuclear": {
+            "type": "_SmartToggle",
+            "style": {
+              "active_color": "#7FFF00",
+              "glow_intensity": 5.0,
+              "active_text_color": "#000000"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "RAD"
+                },
+                "OFF": {
+                  "label_inactive": "COLD"
+                }
+              },
+              "is_sticky": false
+            }
+          }
+        }
+      },
+      "elements_vibe": {
+        "type": "OcaBlock",
+        "label_active": "Aesthetic Mix (Momentary)",
+        "fields": {
+          "ocean": {
+            "type": "_SmartToggle",
+            "style": {
+              "active_color": "#0077BE",
+              "bg_color": "#001a33"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "DEEP"
+                },
+                "OFF": {
+                  "label_inactive": "SURFACE"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "forest": {
+            "type": "_SmartToggle",
+            "style": {
+              "active_color": "#228B22",
+              "glow_intensity": 1.5
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "PINE"
+                },
+                "OFF": {
+                  "label_inactive": "EARTH"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "sunset": {
+            "type": "_SmartToggle",
+            "style": {
+              "active_color": "#FD5E53",
+              "active_text_color": "#FFF5EE"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "GLOW"
+                },
+                "OFF": {
+                  "label_inactive": "DUSK"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "mono": {
+            "type": "_SmartToggle",
+            "style": {
+              "active_color": "#333333",
+              "active_text_color": "#FFFFFF",
+              "bg_color": "#CCCCCC"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "DARK"
+                },
+                "OFF": {
+                  "label_inactive": "LIGHT"
+                }
+              },
+              "is_sticky": false
+            }
+          }
+        }
+      },
+      "circular_demos": {
+        "type": "OcaBlock",
+        "label_active": "Circular Toggles",
+        "fields": {
+          "power_button": {
+            "type": "_SmartToggle",
+            "label": "Main Power",
+            "geometry": {
+              "width": 80,
+              "height": 80,
+              "font": 16
+            },
+            "style": {
+              "Circular": true,
+              "active_color": "#00FFFF",
+              "glow_intensity": 3.0
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "ON",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "OFF"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "record_circle": {
+            "type": "_SmartToggle",
+            "label": "Record",
+            "geometry": {
+              "width": 60,
+              "height": 60,
+              "font": 10
+            },
+            "style": {
+              "Circular": true,
+              "active_color": "#FF0000"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "REC"
+                },
+                "OFF": {
+                  "label_inactive": "REC"
+                }
+              },
+              "is_sticky": true
+            }
+          },
+          "momentary_blip": {
+            "type": "_SmartToggle",
+            "label": "Push to Talk",
+            "geometry": {
+              "width": 50,
+              "height": 50,
+              "font": 9
+            },
+            "style": {
+              "Circular": true,
+              "active_color": "#00FF00"
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "TALK"
+                },
+                "OFF": {
+                  "label_inactive": "PTT"
+                }
+              },
+              "is_sticky": false
+            }
+          },
+          "status_lamp": {
+            "type": "_SmartToggle",
+            "label": "Status OK",
+            "geometry": {
+              "width": 40,
+              "height": 40,
+              "font": 8
+            },
+            "style": {
+              "Circular": true,
+              "active_color": "#00FF00",
+              "glow_intensity": 1.5
+            },
+            "interaction": {
+              "options": {
+                "ON": {
+                  "label_active": "OK",
+                  "selected": true
+                },
+                "OFF": {
+                  "label_inactive": "FAIL"
+                }
+              },
+              "is_sticky": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

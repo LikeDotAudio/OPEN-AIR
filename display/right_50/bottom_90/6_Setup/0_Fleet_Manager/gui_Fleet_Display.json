@@ -1,0 +1,97 @@
+{
+  "geometry": {
+    "w": 1200,
+    "h": 800,
+    "columns": 1
+  },
+  "items": [
+    {
+      "identity": {
+        "type": "Block",
+        "id": "controls_group",
+        "lbl": "Fleet Discovery"
+      },
+      "geometry": {
+        "row": 0,
+        "col": 0,
+        "pad": 10
+      },
+      "items": [
+        {
+          "identity": {
+            "type": "_ButtonActuator",
+            "id": "btn_find_fleet",
+            "lbl": "FIND FLEET"
+          },
+          "geometry": {
+            "w": 300,
+            "h": 60,
+            "pad": 10
+          },
+          "dynamics": {
+            "path": "System/Control/Fleet/Scan",
+            "value": "TRIGGER"
+          },
+          "cosmetics": {
+            "active_color": "#33A1FD"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "scan_status",
+            "lbl": "Scan Status"
+          },
+          "geometry": {
+            "w": 300,
+            "h": 60,
+            "pad": 10
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Fleet/Complete",
+            "key": "status"
+          }
+        }
+      ]
+    },
+    {
+      "identity": {
+        "type": "Block",
+        "id": "fleet_inventory_group",
+        "lbl": "Connected Devices"
+      },
+      "geometry": {
+        "row": 1,
+        "col": 0,
+        "pad": 10,
+        "sticky": "nsew"
+      },
+      "items": [
+        {
+          "identity": {
+            "type": "_Table",
+            "id": "fleet_table",
+            "lbl": "Fleet Inventory"
+          },
+          "geometry": {
+            "w": 1100,
+            "h": 600,
+            "pad": 10
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR",
+            "absolute_data_topic": "OPEN-AIR",
+            "recursive": true
+          },
+          "cosmetics": {
+            "bg": "#1a1a1a"
+          }
+        }
+      ]
+    }
+  ],
+  "Setup_Fleet_Manager": {
+    "id": "50.90.3.0",
+    "lbl": "Visa Fleet Manager"
+  }
+}

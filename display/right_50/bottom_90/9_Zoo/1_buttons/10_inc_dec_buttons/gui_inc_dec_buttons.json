@@ -1,0 +1,116 @@
+{
+  "Zoo_buttons_inc_dec_buttons": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.10",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label_active": "Count:",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartIncDec",
+            "label": "Count:",
+            "notes": "Simple increment/decrement counter.",
+            "domain": {
+              "primary": {
+                "value_default": 0
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "increment": 1
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label_active": "Volume:",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartIncDec",
+            "label": "Volume:",
+            "notes": "Adjusts volume level in steps of 5.",
+            "domain": {
+              "primary": {
+                "value_default": 50
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "increment": 5
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label_active": "Fine Tune:",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartIncDec",
+            "label": "Fine Tune:",
+            "notes": "For precise adjustments with decimal steps.",
+            "domain": {
+              "primary": {
+                "value_default": 0.0
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "increment": 0.1
+          }
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label_active": "Channel:",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartIncDec",
+            "label": "Channel:",
+            "notes": "Selects channels (integer values).",
+            "domain": {
+              "primary": {
+                "value_default": 1
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "increment": 1
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label_active": "Brightness:",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartIncDec",
+            "label": "Brightness:",
+            "notes": "Controls brightness in steps of 10.",
+            "domain": {
+              "primary": {
+                "value_default": 100
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "increment": 10
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,381 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Hex_Variations": {
+        "type": "OcaBlock",
+        "description": "Hex Meter Variations",
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "Hex_1_Large": {
+            "type": "_NeedleVUMeter",
+            "label": "Large Classic",
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "#000000",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 6,
+                "Pointer_Style": "teardrop",
+                "pivot_colour": "#222222"
+              },
+              "labels": [
+                {
+                  "text": "HEXAGONAL VU",
+                  "x": 0,
+                  "y": -45,
+                  "size": 12,
+                  "weight": "bold"
+                },
+                {
+                  "value_overlay": true,
+                  "x": 0,
+                  "y": 20,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "#000000",
+                  "sig_fig": 3
+                }
+              ]
+            }
+          },
+          "Hex_2_Medium": {
+            "type": "_NeedleVUMeter",
+            "label": "Medium Silver",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "silver",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 5,
+                "Pointer_Style": "knife-edge",
+                "pivot_colour": "silver"
+              },
+              "labels": [
+                {
+                  "text": "SILVER HEX",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10
+                }
+              ]
+            }
+          },
+          "Hex_3_Small": {
+            "type": "_NeedleVUMeter",
+            "label": "Small Bronze",
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#cd7f32",
+                "bezel": "#cd7f32",
+                "scale_label": "#cd7f32"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 2,
+                "mask": false,
+                "Pointer_Style": "needle",
+                "pivot_colour": "#cd7f32"
+              },
+              "labels": [
+                {
+                  "text": "BRONZE",
+                  "x": 0,
+                  "y": -22,
+                  "size": 8,
+                  "color": "#cd7f32"
+                }
+              ]
+            }
+          },
+          "Hex_4_Cobalt": {
+            "type": "_NeedleVUMeter",
+            "label": "Cobalt Blue",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#00FFFF",
+                "bezel": "#4169E1",
+                "scale_label": "#00FFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 5,
+                "enable_lighting": true,
+                "Pointer_Style": "taper"
+              },
+              "labels": [
+                {
+                  "text": "COBALT",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "#00FFFF"
+                }
+              ]
+            }
+          },
+          "Hex_5_Amber": {
+            "type": "_NeedleVUMeter",
+            "label": "Amber Alert",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -8.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFBF00",
+                "bezel": "#FF8C00",
+                "scale_label": "#FFBF00"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 5,
+                "enable_lighting": true,
+                "Pointer_Style": "spade"
+              },
+              "labels": [
+                {
+                  "text": "AMBER",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "#FFBF00"
+                }
+              ]
+            }
+          },
+          "Hex_6_Graphite": {
+            "type": "_NeedleVUMeter",
+            "label": "Graphite Flat",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#D3D3D3",
+                "bezel": "#A9A9A9",
+                "scale_label": "#D3D3D3"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 2,
+                "enable_lighting": false,
+                "Pointer_Style": "baton"
+              },
+              "labels": [
+                {
+                  "text": "GRAPHITE",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "#D3D3D3"
+                }
+              ]
+            }
+          },
+          "Hex_7_Solar": {
+            "type": "_NeedleVUMeter",
+            "label": "Solar Flare",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -4.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFFF00",
+                "bezel": "#FF4500",
+                "scale_label": "#FFFF00"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 6,
+                "enable_lighting": true,
+                "Pointer_Style": "needle"
+              },
+              "labels": [
+                {
+                  "text": "SOLAR",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "#FFFF00"
+                }
+              ]
+            }
+          },
+          "Hex_8_Arctic": {
+            "type": "_NeedleVUMeter",
+            "label": "Arctic Ice",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -18.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#00CED1",
+                "bezel": "#B0E0E6",
+                "scale_label": "#00CED1"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 5,
+                "enable_lighting": false,
+                "Pointer_Style": "knife-edge"
+              },
+              "labels": [
+                {
+                  "text": "ARCTIC",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "#00CED1"
+                }
+              ]
+            }
+          },
+          "Hex_9_Steampunk": {
+            "type": "_NeedleVUMeter",
+            "label": "Steampunk",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -6.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#8B0000",
+                "bezel": "#CD853F",
+                "scale_label": "#8B0000"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 7,
+                "enable_lighting": true,
+                "Pointer_Style": "teardrop"
+              },
+              "labels": [
+                {
+                  "text": "STEAMPUNK",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "#8B0000"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

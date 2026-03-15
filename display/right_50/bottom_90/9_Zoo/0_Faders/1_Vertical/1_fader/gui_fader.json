@@ -1,0 +1,358 @@
+{
+  "Zoo_Faders_Vertical_fader": {
+    "type": "OcaBin",
+    "id": "50.90.9.0.1.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Fader_Zoo_MASTER": {
+        "type": "OcaBlock",
+        "description": "Standard Master Demos (New Defaults)",
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "m_1": {
+            "type": "_SmartFader",
+            "label": "Wide Master",
+            "notes": "120x300, 60x40 cap",
+            "geometry": {
+              "width": 120,
+              "height": 300,
+              "cap": {
+                "x": 60,
+                "y": 40
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFFFFF",
+                "cap_highlights": "#00FFFF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "m_2": {
+            "type": "_SmartFader",
+            "label": "Tall Skinny",
+            "notes": "60x400, 30x60 cap",
+            "geometry": {
+              "width": 60,
+              "height": 400,
+              "cap": {
+                "x": 30,
+                "y": 60
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF0000"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "m_3": {
+            "type": "_SmartFader",
+            "label": "Boxy",
+            "notes": "100x200, 50x50 cap",
+            "geometry": {
+              "width": 100,
+              "height": 200,
+              "cap": {
+                "x": 50,
+                "y": 50
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#00FF00"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "m_4": {
+            "type": "_SmartFader",
+            "label": "Stubby",
+            "notes": "80x150, 40x30 cap",
+            "geometry": {
+              "width": 80,
+              "height": 150,
+              "cap": {
+                "x": 40,
+                "y": 30
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#0000FF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "m_5": {
+            "type": "_SmartFader",
+            "label": "Classic",
+            "notes": "100x250 (New Default)",
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF9800"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "m_6": {
+            "type": "_SmartFader",
+            "label": "Deep Purple",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#9C27B0"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "m_7": {
+            "type": "_SmartFader",
+            "label": "Neon Cyan",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#00FFFF",
+                "cap_highlights": "#000000"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "m_8": {
+            "type": "_SmartFader",
+            "label": "Stealth",
+            "geometry": {
+              "width": 100,
+              "height": 300
+            },
+            "cosmetics": {
+              "colors": {
+                "cap": "#111111",
+                "cap_highlights": "#FFFFFF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          }
+        }
+      },
+      "Fader_Zoo_Rainbow": {
+        "type": "OcaBlock",
+        "description": "The Rainbow Collection",
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "r_1": {
+            "type": "_SmartFader",
+            "label": "Red",
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF0000"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "r_2": {
+            "type": "_SmartFader",
+            "label": "Orange",
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF7F00"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "r_3": {
+            "type": "_SmartFader",
+            "label": "Yellow",
+            "cosmetics": {
+              "colors": {
+                "cap": "#FFFF00"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "r_4": {
+            "type": "_SmartFader",
+            "label": "Green",
+            "cosmetics": {
+              "colors": {
+                "cap": "#00FF00"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "r_5": {
+            "type": "_SmartFader",
+            "label": "Blue",
+            "cosmetics": {
+              "colors": {
+                "cap": "#0000FF"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "r_6": {
+            "type": "_SmartFader",
+            "label": "Indigo",
+            "cosmetics": {
+              "colors": {
+                "cap": "#4B0082"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "r_7": {
+            "type": "_SmartFader",
+            "label": "Violet",
+            "cosmetics": {
+              "colors": {
+                "cap": "#9400D3"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          },
+          "r_8": {
+            "type": "_SmartFader",
+            "label": "Pink",
+            "cosmetics": {
+              "colors": {
+                "cap": "#FF1493"
+              }
+            },
+            "domain": {
+              "primary": {
+                "value_default": -15.0
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

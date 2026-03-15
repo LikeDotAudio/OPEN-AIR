@@ -1,0 +1,193 @@
+{
+  "Zoo_Faders_Fader_Dial_Classic": {
+    "type": "OcaBin",
+    "id": "50.90.9.0.3.0",
+    "geometry": {
+      "anchor": "NS"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label_active": "Frequency",
+        "fields": {
+          "examplefields": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "label_active": "Frequency",
+            "layout": {
+              "width": 600,
+              "height": 80,
+              "sticky": "ew",
+              "font": 12
+            },
+            "min": 0.0,
+            "max": 1000.0,
+            "value": 250.5,
+            "step_coarse": 50.0,
+            "step_fine": 0.1,
+            "units": "Hz",
+            "show_label": true,
+            "value_config": {
+              "height": 25,
+              "text_color": "#00ff00",
+              "bg_color": "#000000"
+            },
+            "fader_config": {
+              "tick_interval": 100,
+              "bar_color": "#333333"
+            },
+            "dial_config": {
+              "knob_style": "vintage",
+              "width": 45,
+              "height": 45,
+              "active_color": "#ffaa00"
+            }
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label_active": "Master Vol",
+        "fields": {
+          "examplefields": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "label_active": "Master Vol",
+            "layout": {
+              "width": 600,
+              "height": 100,
+              "sticky": "ew",
+              "font": 18
+            },
+            "min": 0.0,
+            "max": 100.0,
+            "value": 75.3,
+            "step_coarse": 10.0,
+            "step_fine": 0.1,
+            "units": "%",
+            "show_label": true,
+            "fader_config": {
+              "active_color": "#ff0000",
+              "glow_intensity": 2.0
+            },
+            "value_config": {
+              "font_size": 16,
+              "width": 8
+            }
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label_active": "Delay",
+        "fields": {
+          "examplefields": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "label_active": "Delay",
+            "layout": {
+              "width": 600,
+              "height": 120,
+              "font": 20
+            },
+            "min": 0.0,
+            "max": 5.0,
+            "value": 1.25,
+            "step_coarse": 0.5,
+            "step_fine": 0.001,
+            "units": "s",
+            "show_label": true,
+            "dial_config": {
+              "knob_style": "dial",
+              "width": 70,
+              "height": 70,
+              "active_color": "#00ffff"
+            },
+            "fader_config": {
+              "tick_interval": 1.0
+            }
+          }
+        }
+      },
+      "element4": {
+        "type": "OcaBlock",
+        "label_active": "Decay",
+        "fields": {
+          "examplefields": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "label_active": "Decay",
+            "layout": {
+              "width": 600,
+              "height": 70,
+              "font": 12
+            },
+            "min": 0.0,
+            "max": 10.0,
+            "value": 5.0,
+            "step_coarse": 1.0,
+            "step_fine": 1.0,
+            "units": "s",
+            "show_label": true,
+            "fader_config": {
+              "bar_color": "#222222",
+              "active_color": "#888888"
+            }
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label_active": "Pitch Shift",
+        "fields": {
+          "examplefields": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "label_active": "Pitch Shift",
+            "layout": {
+              "width": 600,
+              "height": 90,
+              "font": 12
+            },
+            "min": -12.0,
+            "max": 12.0,
+            "value": 0.75,
+            "step_coarse": 1.0,
+            "step_fine": 0.01,
+            "units": "st",
+            "show_label": true,
+            "value_config": {
+              "bg_color": "#1a1a1a",
+              "text_color": "#33A1FD"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,632 @@
+{
+  "Zoo_Faders_Fader_Dial_More_Dials": {
+    "type": "OcaBin",
+    "id": "50.90.9.0.3.1",
+    "geometry": {
+      "anchor": "NS"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Dial_Expansion": {
+        "type": "OcaBlock",
+        "description": "20 Exhaustive Horizontal + Dial Variations showing FULL Randomness and Capabilities",
+        "layout_columns": 1,
+        "fields": {
+          "dial_1": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Vintage Voltage",
+            "min": 0,
+            "max": 10,
+            "value": 5,
+            "step_coarse": 1.0,
+            "step_fine": 0.01,
+            "units": "V",
+            "fader_config": {
+              "tick_interval": 1.0,
+              "bar_color": "#FF5500",
+              "glow_intensity": 2.0,
+              "cap_color": "#dcdcdc",
+              "cap_height": 50
+            },
+            "dial_config": {
+              "knob_style": "vintage",
+              "shape": "gear",
+              "knob_teeth": 12,
+              "active_color": "#FF9900",
+              "width": 45,
+              "height": 45
+            },
+            "value_config": {
+              "bg_color": "#1a1a1a",
+              "text_color": "#FF9900",
+              "font": 10
+            }
+          },
+          "dial_2": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Industrial Current",
+            "min": 0,
+            "max": 50,
+            "value": 12,
+            "step_coarse": 5.0,
+            "step_fine": 0.1,
+            "units": "mA",
+            "fader_config": {
+              "tick_interval": 10.0,
+              "bar_color": "#33A1FD",
+              "cap_highlight_color": "#33A1FD",
+              "cap_height": 55
+            },
+            "dial_config": {
+              "knob_style": "industrial",
+              "shape": "octagon",
+              "width": 50,
+              "height": 50,
+              "indicator_color": "#33A1FD"
+            },
+            "value_config": {
+              "colour": "#33A1FD"
+            }
+          },
+          "dial_3": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Modern Power",
+            "min": 0,
+            "max": 5000,
+            "value": 1500,
+            "step_coarse": 500,
+            "step_fine": 1,
+            "units": "kW",
+            "fader_config": {
+              "active_color": "#00FF00",
+              "fader_cap_scale": 1.5,
+              "cap_height": 45
+            },
+            "dial_config": {
+              "knob_style": "modern",
+              "active_color": "#00FF00",
+              "width": 40,
+              "height": 40
+            }
+          },
+          "dial_4": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Ghost Tuning",
+            "min": 88,
+            "max": 108,
+            "value": 94.5,
+            "step_coarse": 1.0,
+            "step_fine": 0.05,
+            "units": "MHz",
+            "fader_config": {
+              "bar_color": "#444",
+              "show_ticks": false,
+              "cap_height": 60
+            },
+            "dial_config": {
+              "knob_style": "dial",
+              "no_center": true,
+              "arc_width": 10,
+              "active_color": "#FFFFFF",
+              "width": 45,
+              "height": 45
+            },
+            "value_config": {
+              "bg_color": "transparent",
+              "text_color": "white"
+            }
+          },
+          "dial_5": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "High-Res Bias",
+            "min": -5,
+            "max": 5,
+            "value": 0.123,
+            "step_coarse": 1.0,
+            "step_fine": 0.001,
+            "units": "V",
+            "dial_config": {
+              "knob_style": "vintage",
+              "infinity": true,
+              "fine_pitch": true,
+              "knob_fill_color": "#222",
+              "width": 50,
+              "height": 50
+            },
+            "fader_config": {
+              "cap_height": 40
+            },
+            "value_config": {
+              "width": 14,
+              "font": 10
+            }
+          },
+          "dial_6": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Log Harmonic",
+            "min": 20,
+            "max": 20000,
+            "value": 440,
+            "step_coarse": 1000,
+            "step_fine": 1,
+            "units": "Hz",
+            "fader_config": {
+              "log_exponent": 2.0,
+              "tick_interval": 5000,
+              "bar_color": "#AA00FF",
+              "cap_height": 50
+            },
+            "dial_config": {
+              "knob_style": "panner",
+              "active_color": "#AA00FF",
+              "width": 45,
+              "height": 45
+            }
+          },
+          "dial_7": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Deep Space",
+            "min": 0,
+            "max": 1,
+            "value": 0.005,
+            "step_coarse": 0.1,
+            "step_fine": 0.0001,
+            "units": "bar",
+            "dial_config": {
+              "knob_style": "modern",
+              "shape": "gear",
+              "knob_teeth": 32,
+              "active_color": "#00FFFF",
+              "width": 50,
+              "height": 50
+            },
+            "fader_config": {
+              "active_color": "#00FFFF",
+              "cap_height": 45
+            }
+          },
+          "dial_8": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Ruby Gain",
+            "min": -100,
+            "max": 12,
+            "value": -12,
+            "step_coarse": 10,
+            "step_fine": 0.1,
+            "units": "dB",
+            "fader_config": {
+              "bar_color": "#990000",
+              "cap_color": "#CC0000",
+              "reff_point": 0.0,
+              "cap_height": 55
+            },
+            "dial_config": {
+              "knob_style": "vintage",
+              "indicator_color": "#FF0000",
+              "width": 45,
+              "height": 45
+            }
+          },
+          "dial_9": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Emerald Phase",
+            "min": -180,
+            "max": 180,
+            "value": 90,
+            "step_coarse": 45,
+            "step_fine": 1,
+            "units": "deg",
+            "fader_config": {
+              "active_color": "#00FF88",
+              "value_highlight_color": "#00FF88",
+              "cap_height": 50
+            },
+            "dial_config": {
+              "knob_style": "dial",
+              "active_color": "#00FF88",
+              "pointer_style": "notch",
+              "width": 45,
+              "height": 45
+            }
+          },
+          "dial_10": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Big Knob",
+            "min": 0,
+            "max": 100,
+            "value": 50,
+            "step_coarse": 10,
+            "step_fine": 0.5,
+            "units": "%",
+            "dial_config": {
+              "width": 60,
+              "height": 60,
+              "knob_style": "industrial",
+              "gradient_level": 5
+            },
+            "fader_config": {
+              "cap_width": 80,
+              "cap_height": 50
+            }
+          },
+          "dial_11": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Tiny Precision",
+            "min": 0,
+            "max": 1,
+            "value": 0.5,
+            "step_coarse": 0.1,
+            "step_fine": 0.001,
+            "units": "x",
+            "dial_config": {
+              "width": 30,
+              "height": 30,
+              "knob_style": "modern"
+            },
+            "fader_config": {
+              "fader_cap_scale": 0.7,
+              "cap_height": 35
+            }
+          },
+          "dial_12": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Stealth Black",
+            "min": 0,
+            "max": 100,
+            "value": 20,
+            "step_coarse": 25,
+            "step_fine": 1,
+            "units": "lux",
+            "fader_config": {
+              "bar_color": "#111",
+              "tick_color": "#333",
+              "sub_tick_color": "#222",
+              "cap_height": 45
+            },
+            "dial_config": {
+              "bg_color": "#050505",
+              "knob_fill_color": "#111",
+              "active_color": "#444",
+              "width": 40,
+              "height": 40
+            },
+            "value_config": {
+              "bg_color": "#000",
+              "text_color": "#555"
+            }
+          },
+          "dial_13": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Gold Standard",
+            "min": 0,
+            "max": 1000,
+            "value": 777,
+            "step_coarse": 100,
+            "step_fine": 1,
+            "units": "oz",
+            "fader_config": {
+              "bar_color": "#D4AF37",
+              "active_color": "#FFD700",
+              "cap_height": 50
+            },
+            "dial_config": {
+              "active_color": "#FFD700",
+              "indicator_color": "#D4AF37",
+              "width": 45,
+              "height": 45
+            }
+          },
+          "dial_14": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Oceanic Depth",
+            "min": 0,
+            "max": 11000,
+            "value": 3000,
+            "step_coarse": 1000,
+            "step_fine": 10,
+            "units": "m",
+            "fader_config": {
+              "bar_color": "#0077BE",
+              "cap_highlight_color": "#00FFFF",
+              "cap_height": 55
+            },
+            "dial_config": {
+              "knob_style": "vintage",
+              "active_color": "#0077BE",
+              "width": 45,
+              "height": 45
+            }
+          },
+          "dial_15": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Cyberpunk",
+            "min": 0,
+            "max": 100,
+            "value": 80,
+            "step_coarse": 10,
+            "step_fine": 0.1,
+            "units": "HP",
+            "fader_config": {
+              "bar_color": "#f3e600",
+              "active_color": "#00f0ff",
+              "cap_height": 50
+            },
+            "dial_config": {
+              "active_color": "#ff003c",
+              "shape": "octagon",
+              "width": 50,
+              "height": 50
+            }
+          },
+          "dial_16": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Log Temp",
+            "min": 1,
+            "max": 6000,
+            "value": 5778,
+            "step_coarse": 1000,
+            "step_fine": 1,
+            "units": "K",
+            "fader_config": {
+              "log_exponent": 3.0,
+              "bar_color": "#ffcc00",
+              "cap_height": 45
+            },
+            "dial_config": {
+              "knob_style": "industrial",
+              "active_color": "#ff3300",
+              "width": 45,
+              "height": 45
+            }
+          },
+          "dial_17": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Binary",
+            "min": 0,
+            "max": 1,
+            "value": 0,
+            "step_coarse": 1,
+            "step_fine": 1,
+            "units": "bit",
+            "fader_config": {
+              "show_ticks": true,
+              "tick_interval": 1,
+              "cap_height": 60
+            },
+            "dial_config": {
+              "tick_style": "numeric",
+              "knob_style": "modern",
+              "width": 40,
+              "height": 40
+            }
+          },
+          "dial_18": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Wide Track",
+            "min": 0,
+            "max": 100,
+            "value": 50,
+            "step_coarse": 10,
+            "step_fine": 0.5,
+            "units": "m",
+            "fader_config": {
+              "height": 120,
+              "cap_height": 60,
+              "bar_color": "#222"
+            },
+            "dial_config": {
+              "width": 55,
+              "height": 55
+            }
+          },
+          "dial_19": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "Panner",
+            "min": -100,
+            "max": 100,
+            "value": 0,
+            "step_coarse": 50,
+            "step_fine": 1,
+            "units": "L/R",
+            "fader_config": {
+              "reff_point": 0.0,
+              "active_color": "#FFFFFF",
+              "cap_height": 50
+            },
+            "dial_config": {
+              "knob_style": "panner",
+              "active_color": "#FF00FF",
+              "width": 45,
+              "height": 45
+            }
+          },
+          "dial_20": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "width": 600
+            },
+            "label_active": "The End",
+            "min": 0,
+            "max": 1,
+            "value": 1,
+            "step_coarse": 1,
+            "step_fine": 1,
+            "units": "bool",
+            "fader_config": {
+              "bar_color": "#FFFFFF",
+              "active_color": "#000000",
+              "cap_height": 55
+            },
+            "dial_config": {
+              "knob_style": "modern",
+              "active_color": "#888",
+              "width": 40,
+              "height": 40
+            }
+          }
+        }
+      }
+    }
+  }
+}

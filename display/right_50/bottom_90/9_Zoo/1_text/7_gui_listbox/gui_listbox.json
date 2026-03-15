@@ -1,0 +1,186 @@
+{
+  "Zoo_text_gui_listbox": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.7",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label_active": "Select File",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartList",
+            "label": "Select File",
+            "notes": "Listbox for selecting a file from a list.",
+            "interaction": {
+              "options": {
+                "file1": {
+                  "label_active": "document.pdf",
+                  "value": "/path/to/document.pdf",
+                  "active": "true"
+                },
+                "file2": {
+                  "label_active": "report.docx",
+                  "value": "/path/to/report.docx",
+                  "active": "true"
+                },
+                "file3": {
+                  "label_active": "image.png",
+                  "value": "/path/to/image.png",
+                  "active": "true",
+                  "selected": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label_active": "Load Preset",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartList",
+            "label": "Load Preset",
+            "notes": "Listbox for selecting audio effect presets.",
+            "interaction": {
+              "options": {
+                "preset1": {
+                  "label_active": "Clean Guitar",
+                  "value": "preset_clean",
+                  "active": "true"
+                },
+                "preset2": {
+                  "label_active": "Crunch Lead",
+                  "value": "preset_crunch",
+                  "active": "true"
+                },
+                "preset3": {
+                  "label_active": "Heavy Metal",
+                  "value": "preset_metal",
+                  "active": "true",
+                  "selected": true
+                },
+                "preset4": {
+                  "label_active": "Ambient Pad",
+                  "value": "preset_pad",
+                  "active": "true"
+                }
+              }
+            }
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label_active": "Active Channels",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartList",
+            "label": "Active Channels",
+            "notes": "Listbox where some channels are initially inactive.",
+            "interaction": {
+              "options": {
+                "ch1": {
+                  "label_active": "Channel 1",
+                  "value": "CH1",
+                  "active": "true"
+                },
+                "ch2": {
+                  "label_active": "Channel 2",
+                  "value": "CH2",
+                  "active": "true",
+                  "selected": true
+                },
+                "ch3": {
+                  "label_active": "Channel 3",
+                  "value": "CH3",
+                  "active": "false"
+                },
+                "ch4": {
+                  "label_active": "Channel 4",
+                  "value": "CH4",
+                  "active": "true"
+                }
+              }
+            }
+          }
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label_active": "Select User",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartList",
+            "label": "Select User",
+            "notes": "Listbox for selecting from a list of users.",
+            "interaction": {
+              "options": {
+                "userA": {
+                  "label_active": "Alice",
+                  "value": "alice_id",
+                  "active": "true"
+                },
+                "userB": {
+                  "label_active": "Bob",
+                  "value": "bob_id",
+                  "active": "true",
+                  "selected": true
+                },
+                "userC": {
+                  "label_active": "Charlie",
+                  "value": "charlie_id",
+                  "active": "true"
+                }
+              }
+            }
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label_active": "Log Level",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartList",
+            "label": "Log Level",
+            "notes": "Listbox for selecting the logging verbosity level.",
+            "interaction": {
+              "options": {
+                "Debug": {
+                  "label_active": "DEBUG",
+                  "value": 0,
+                  "active": "true"
+                },
+                "Info": {
+                  "label_active": "INFO",
+                  "value": 1,
+                  "active": "true",
+                  "selected": true
+                },
+                "Warn": {
+                  "label_active": "WARNING",
+                  "value": 2,
+                  "active": "true"
+                },
+                "Error": {
+                  "label_active": "ERROR",
+                  "value": 3,
+                  "active": "true"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

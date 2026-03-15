@@ -1,0 +1,732 @@
+{
+  "Zoo_Metering_Bar_Meter_Surround": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.2.5",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Surround_Monitoring_Station": {
+        "type": "OcaBlock",
+        "description": "Stereo and Surround Monitoring",
+        "layout_columns": 1,
+        "fields": {
+          "Surround_5_1_Vert": {
+            "type": "OcaBlock",
+            "label_active": "5.1 Surround (Vertical + Scale)",
+            "layout_columns": 6,
+            "column_sizing": [
+              {
+                "weight": 0
+              },
+              {
+                "weight": 0
+              },
+              {
+                "weight": 0
+              },
+              {
+                "weight": 0
+              },
+              {
+                "weight": 0
+              },
+              {
+                "weight": 0
+              }
+            ],
+            "fields": {
+              "L": {
+                "type": "_SmartMeter",
+                "label": "L",
+                "labels": {
+                  "show_label": true,
+                  "label_position": "top",
+                  "show_scale_labels": true
+                },
+                "scale": {
+                  "position": "left"
+                },
+                "show_ticks": true,
+                "tick_both_sides": true,
+                "geometry": {
+                  "width": 25,
+                  "height": 250,
+                  "orientation": "vert"
+                },
+                "domain": {
+                  "primary": {
+                    "min": -40.0,
+                    "max": 10.0,
+                    "value_default": -20.0
+                  }
+                },
+                "ballistics": {
+                  "attack_ms": 300,
+                  "release_ms": 300,
+                  "overload": {
+                    "Overload_display": true,
+                    "overload_hold_ms": 2000,
+                    "overload_fade_ms": 3000
+                  }
+                },
+                "cosmetics": {
+                  "colors": {
+                    "lower": "#00FF00",
+                    "middle": "#FFFF00",
+                    "upper": "#FF0000",
+                    "Overload_alert": "red",
+                    "pointer": "white",
+                    "tick": "white",
+                    "scale": "white"
+                  },
+                  "style_flags": {
+                    "show_grid": false,
+                    "fill_shape": true
+                  },
+                  "style_overrides": {
+                    "tick_size": 5
+                  }
+                },
+                "interaction": {
+                  "is_read_only": true
+                }
+              },
+              "C": {
+                "type": "_SmartMeter",
+                "label": "C",
+                "labels": {
+                  "show_label": true,
+                  "label_position": "top",
+                  "show_scale_labels": false
+                },
+                "scale": {
+                  "position": "none"
+                },
+                "show_ticks": true,
+                "tick_both_sides": true,
+                "geometry": {
+                  "width": 25,
+                  "height": 250,
+                  "orientation": "vert"
+                },
+                "domain": {
+                  "primary": {
+                    "min": -40.0,
+                    "max": 10.0,
+                    "value_default": -20.0
+                  }
+                },
+                "ballistics": {
+                  "attack_ms": 300,
+                  "release_ms": 300,
+                  "overload": {
+                    "Overload_display": true,
+                    "overload_hold_ms": 2000,
+                    "overload_fade_ms": 3000
+                  }
+                },
+                "cosmetics": {
+                  "colors": {
+                    "lower": "#00FF00",
+                    "middle": "#FFFF00",
+                    "upper": "#FF0000",
+                    "Overload_alert": "red",
+                    "pointer": "white",
+                    "tick": "white"
+                  },
+                  "style_flags": {
+                    "show_grid": false,
+                    "fill_shape": true
+                  },
+                  "style_overrides": {
+                    "tick_size": 5
+                  }
+                },
+                "interaction": {
+                  "is_read_only": true
+                }
+              },
+              "R": {
+                "type": "_SmartMeter",
+                "label": "R",
+                "labels": {
+                  "show_label": true,
+                  "label_position": "top",
+                  "show_scale_labels": false
+                },
+                "scale": {
+                  "position": "none"
+                },
+                "show_ticks": true,
+                "tick_both_sides": true,
+                "geometry": {
+                  "width": 25,
+                  "height": 250,
+                  "orientation": "vert"
+                },
+                "domain": {
+                  "primary": {
+                    "min": -40.0,
+                    "max": 10.0,
+                    "value_default": -20.0
+                  }
+                },
+                "ballistics": {
+                  "attack_ms": 300,
+                  "release_ms": 300,
+                  "overload": {
+                    "Overload_display": true,
+                    "overload_hold_ms": 2000,
+                    "overload_fade_ms": 3000
+                  }
+                },
+                "cosmetics": {
+                  "colors": {
+                    "lower": "#00FF00",
+                    "middle": "#FFFF00",
+                    "upper": "#FF0000",
+                    "Overload_alert": "red",
+                    "pointer": "white",
+                    "tick": "white",
+                    "scale": "white"
+                  },
+                  "style_flags": {
+                    "show_grid": false,
+                    "fill_shape": true
+                  },
+                  "style_overrides": {
+                    "tick_size": 5
+                  }
+                },
+                "interaction": {
+                  "is_read_only": true
+                }
+              },
+              "Ls": {
+                "type": "_SmartMeter",
+                "label": "Ls",
+                "labels": {
+                  "show_label": true,
+                  "label_position": "top",
+                  "show_scale_labels": false
+                },
+                "scale": {
+                  "position": "none"
+                },
+                "show_ticks": true,
+                "tick_both_sides": true,
+                "geometry": {
+                  "width": 25,
+                  "height": 250,
+                  "orientation": "vert"
+                },
+                "domain": {
+                  "primary": {
+                    "min": -40.0,
+                    "max": 10.0,
+                    "value_default": -20.0
+                  }
+                },
+                "ballistics": {
+                  "attack_ms": 300,
+                  "release_ms": 300,
+                  "overload": {
+                    "Overload_display": true,
+                    "overload_hold_ms": 2000,
+                    "overload_fade_ms": 3000
+                  }
+                },
+                "cosmetics": {
+                  "colors": {
+                    "lower": "#00FF00",
+                    "middle": "#FFFF00",
+                    "upper": "#FF0000",
+                    "Overload_alert": "red",
+                    "pointer": "white",
+                    "tick": "white"
+                  },
+                  "style_flags": {
+                    "show_grid": false,
+                    "fill_shape": true
+                  },
+                  "style_overrides": {
+                    "tick_size": 5
+                  }
+                },
+                "interaction": {
+                  "is_read_only": true
+                }
+              },
+              "Rs": {
+                "type": "_SmartMeter",
+                "label": "Rs",
+                "labels": {
+                  "show_label": true,
+                  "label_position": "top",
+                  "show_scale_labels": false
+                },
+                "scale": {
+                  "position": "none"
+                },
+                "show_ticks": true,
+                "tick_both_sides": true,
+                "geometry": {
+                  "width": 25,
+                  "height": 250,
+                  "orientation": "vert"
+                },
+                "domain": {
+                  "primary": {
+                    "min": -40.0,
+                    "max": 10.0,
+                    "value_default": -20.0
+                  }
+                },
+                "ballistics": {
+                  "attack_ms": 300,
+                  "release_ms": 300,
+                  "overload": {
+                    "Overload_display": true,
+                    "overload_hold_ms": 2000,
+                    "overload_fade_ms": 3000
+                  }
+                },
+                "cosmetics": {
+                  "colors": {
+                    "lower": "#00FF00",
+                    "middle": "#FFFF00",
+                    "upper": "#FF0000",
+                    "Overload_alert": "red",
+                    "pointer": "white",
+                    "tick": "white"
+                  },
+                  "style_flags": {
+                    "show_grid": false,
+                    "fill_shape": true
+                  },
+                  "style_overrides": {
+                    "tick_size": 5
+                  }
+                },
+                "interaction": {
+                  "is_read_only": true
+                }
+              },
+              "LFE": {
+                "type": "_SmartMeter",
+                "label": "LFE",
+                "labels": {
+                  "show_label": true,
+                  "label_position": "top",
+                  "show_scale_labels": true
+                },
+                "scale": {
+                  "position": "right"
+                },
+                "show_ticks": true,
+                "tick_both_sides": true,
+                "geometry": {
+                  "width": 25,
+                  "height": 250,
+                  "orientation": "vert"
+                },
+                "domain": {
+                  "primary": {
+                    "min": -40.0,
+                    "max": 10.0,
+                    "value_default": -20.0
+                  }
+                },
+                "ballistics": {
+                  "attack_ms": 300,
+                  "release_ms": 300,
+                  "overload": {
+                    "Overload_display": true,
+                    "overload_hold_ms": 2000,
+                    "overload_fade_ms": 3000
+                  }
+                },
+                "cosmetics": {
+                  "colors": {
+                    "lower": "#FFA500",
+                    "middle": "#FF4500",
+                    "upper": "#FF0000",
+                    "Overload_alert": "red",
+                    "pointer": "white",
+                    "tick": "white",
+                    "scale": "white"
+                  },
+                  "style_flags": {
+                    "show_grid": false,
+                    "fill_shape": true
+                  },
+                  "style_overrides": {
+                    "tick_size": 5
+                  }
+                },
+                "interaction": {
+                  "is_read_only": true
+                }
+              }
+            }
+          },
+          "Surround_5_1_Horiz": {
+            "type": "OcaBlock",
+            "label_active": "5.1 Surround (Horizontal + Start Labels)",
+            "layout_columns": 1,
+            "fields": {
+              "L": {
+                "type": "_SmartMeter",
+                "label": "L",
+                "labels": {
+                  "show_label": true,
+                  "label_position": "left",
+                  "label_width": 4,
+                  "show_scale_labels": true
+                },
+                "scale": {
+                  "position": "top"
+                },
+                "show_ticks": true,
+                "tick_both_sides": true,
+                "geometry": {
+                  "width": 450,
+                  "height": 20,
+                  "orientation": "horiz"
+                },
+                "domain": {
+                  "primary": {
+                    "min": -40.0,
+                    "max": 10.0,
+                    "value_default": -20.0
+                  }
+                },
+                "ballistics": {
+                  "attack_ms": 300,
+                  "release_ms": 300,
+                  "overload": {
+                    "Overload_display": true,
+                    "overload_hold_ms": 2000,
+                    "overload_fade_ms": 3000
+                  }
+                },
+                "cosmetics": {
+                  "colors": {
+                    "lower": "#00FF00",
+                    "middle": "#FFFF00",
+                    "upper": "#FF0000",
+                    "Overload_alert": "red",
+                    "pointer": "white",
+                    "tick": "white",
+                    "scale": "white"
+                  },
+                  "style_flags": {
+                    "show_grid": false,
+                    "fill_shape": true
+                  },
+                  "style_overrides": {
+                    "tick_size": 5
+                  }
+                },
+                "interaction": {
+                  "is_read_only": true
+                }
+              },
+              "C": {
+                "type": "_SmartMeter",
+                "label": "C",
+                "labels": {
+                  "show_label": true,
+                  "label_position": "left",
+                  "label_width": 4,
+                  "show_scale_labels": false
+                },
+                "scale": {
+                  "position": "none"
+                },
+                "show_ticks": true,
+                "tick_both_sides": true,
+                "geometry": {
+                  "width": 450,
+                  "height": 20,
+                  "orientation": "horiz"
+                },
+                "domain": {
+                  "primary": {
+                    "min": -40.0,
+                    "max": 10.0,
+                    "value_default": -20.0
+                  }
+                },
+                "ballistics": {
+                  "attack_ms": 300,
+                  "release_ms": 300,
+                  "overload": {
+                    "Overload_display": true,
+                    "overload_hold_ms": 2000,
+                    "overload_fade_ms": 3000
+                  }
+                },
+                "cosmetics": {
+                  "colors": {
+                    "lower": "#00FF00",
+                    "middle": "#FFFF00",
+                    "upper": "#FF0000",
+                    "Overload_alert": "red",
+                    "pointer": "white",
+                    "tick": "white",
+                    "scale": "white"
+                  },
+                  "style_flags": {
+                    "show_grid": false,
+                    "fill_shape": true
+                  },
+                  "style_overrides": {
+                    "tick_size": 5
+                  }
+                },
+                "interaction": {
+                  "is_read_only": true
+                }
+              },
+              "R": {
+                "type": "_SmartMeter",
+                "label": "R",
+                "labels": {
+                  "show_label": true,
+                  "label_position": "left",
+                  "label_width": 4,
+                  "show_scale_labels": false
+                },
+                "scale": {
+                  "position": "none"
+                },
+                "show_ticks": true,
+                "tick_both_sides": true,
+                "geometry": {
+                  "width": 450,
+                  "height": 20,
+                  "orientation": "horiz"
+                },
+                "domain": {
+                  "primary": {
+                    "min": -40.0,
+                    "max": 10.0,
+                    "value_default": -20.0
+                  }
+                },
+                "ballistics": {
+                  "attack_ms": 300,
+                  "release_ms": 300,
+                  "overload": {
+                    "Overload_display": true,
+                    "overload_hold_ms": 2000,
+                    "overload_fade_ms": 3000
+                  }
+                },
+                "cosmetics": {
+                  "colors": {
+                    "lower": "#00FF00",
+                    "middle": "#FFFF00",
+                    "upper": "#FF0000",
+                    "Overload_alert": "red",
+                    "pointer": "white",
+                    "tick": "white",
+                    "scale": "white"
+                  },
+                  "style_flags": {
+                    "show_grid": false,
+                    "fill_shape": true
+                  },
+                  "style_overrides": {
+                    "tick_size": 5
+                  }
+                },
+                "interaction": {
+                  "is_read_only": true
+                }
+              },
+              "Ls": {
+                "type": "_SmartMeter",
+                "label": "Ls",
+                "labels": {
+                  "show_label": true,
+                  "label_position": "left",
+                  "label_width": 4,
+                  "show_scale_labels": false
+                },
+                "scale": {
+                  "position": "none"
+                },
+                "show_ticks": true,
+                "tick_both_sides": true,
+                "geometry": {
+                  "width": 450,
+                  "height": 20,
+                  "orientation": "horiz"
+                },
+                "domain": {
+                  "primary": {
+                    "min": -40.0,
+                    "max": 10.0,
+                    "value_default": -20.0
+                  }
+                },
+                "ballistics": {
+                  "attack_ms": 300,
+                  "release_ms": 300,
+                  "overload": {
+                    "Overload_display": true,
+                    "overload_hold_ms": 2000,
+                    "overload_fade_ms": 3000
+                  }
+                },
+                "cosmetics": {
+                  "colors": {
+                    "lower": "#00FF00",
+                    "middle": "#FFFF00",
+                    "upper": "#FF0000",
+                    "Overload_alert": "red",
+                    "pointer": "white",
+                    "tick": "white",
+                    "scale": "white"
+                  },
+                  "style_flags": {
+                    "show_grid": false,
+                    "fill_shape": true
+                  },
+                  "style_overrides": {
+                    "tick_size": 5
+                  }
+                },
+                "interaction": {
+                  "is_read_only": true
+                }
+              },
+              "Rs": {
+                "type": "_SmartMeter",
+                "label": "Rs",
+                "labels": {
+                  "show_label": true,
+                  "label_position": "left",
+                  "label_width": 4,
+                  "show_scale_labels": false
+                },
+                "scale": {
+                  "position": "none"
+                },
+                "show_ticks": true,
+                "tick_both_sides": true,
+                "geometry": {
+                  "width": 450,
+                  "height": 20,
+                  "orientation": "horiz"
+                },
+                "domain": {
+                  "primary": {
+                    "min": -40.0,
+                    "max": 10.0,
+                    "value_default": -20.0
+                  }
+                },
+                "ballistics": {
+                  "attack_ms": 300,
+                  "release_ms": 300,
+                  "overload": {
+                    "Overload_display": true,
+                    "overload_hold_ms": 2000,
+                    "overload_fade_ms": 3000
+                  }
+                },
+                "cosmetics": {
+                  "colors": {
+                    "lower": "#00FF00",
+                    "middle": "#FFFF00",
+                    "upper": "#FF0000",
+                    "Overload_alert": "red",
+                    "pointer": "white",
+                    "tick": "white",
+                    "scale": "white"
+                  },
+                  "style_flags": {
+                    "show_grid": false,
+                    "fill_shape": true
+                  },
+                  "style_overrides": {
+                    "tick_size": 5
+                  }
+                },
+                "interaction": {
+                  "is_read_only": true
+                }
+              },
+              "LFE": {
+                "type": "_SmartMeter",
+                "label": "LFE",
+                "labels": {
+                  "show_label": true,
+                  "label_position": "left",
+                  "label_width": 4,
+                  "show_scale_labels": true
+                },
+                "scale": {
+                  "position": "bottom"
+                },
+                "show_ticks": true,
+                "tick_both_sides": true,
+                "geometry": {
+                  "width": 450,
+                  "height": 20,
+                  "orientation": "horiz"
+                },
+                "domain": {
+                  "primary": {
+                    "min": -40.0,
+                    "max": 10.0,
+                    "value_default": -20.0
+                  }
+                },
+                "ballistics": {
+                  "attack_ms": 300,
+                  "release_ms": 300,
+                  "overload": {
+                    "Overload_display": true,
+                    "overload_hold_ms": 2000,
+                    "overload_fade_ms": 3000
+                  }
+                },
+                "cosmetics": {
+                  "colors": {
+                    "lower": "#FFA500",
+                    "middle": "#FF4500",
+                    "upper": "#FF0000",
+                    "Overload_alert": "red",
+                    "pointer": "white",
+                    "tick": "white",
+                    "scale": "white"
+                  },
+                  "style_flags": {
+                    "show_grid": false,
+                    "fill_shape": true
+                  },
+                  "style_overrides": {
+                    "tick_size": 5
+                  }
+                },
+                "interaction": {
+                  "is_read_only": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

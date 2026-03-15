@@ -1,0 +1,123 @@
+{
+  "geometry": {
+    "w": 1200,
+    "h": 800,
+    "columns": 1
+  },
+  "items": [
+    {
+      "identity": {
+        "type": "Block",
+        "id": "paths_group",
+        "lbl": "Active System Paths"
+      },
+      "geometry": {
+        "row": 0,
+        "col": 0,
+        "pad": 10
+      },
+      "items": [
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "path_root",
+            "lbl": "Global Project Root"
+          },
+          "geometry": {
+            "w": 800,
+            "h": 60,
+            "pad": 10
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Paths",
+            "key": "root"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "path_markers",
+            "lbl": "Markers JSON Path"
+          },
+          "geometry": {
+            "w": 800,
+            "h": 60,
+            "pad": 10
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Paths",
+            "key": "markers"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "path_device_state",
+            "lbl": "Device State Cache"
+          },
+          "geometry": {
+            "w": 800,
+            "h": 60,
+            "pad": 10
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Paths",
+            "key": "device_state"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "path_fleet",
+            "lbl": "Visa Fleet JSON"
+          },
+          "geometry": {
+            "w": 800,
+            "h": 60,
+            "pad": 10
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Paths",
+            "key": "fleet"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "path_yak",
+            "lbl": "Yak Repo Path"
+          },
+          "geometry": {
+            "w": 800,
+            "h": 60,
+            "pad": 10
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Paths",
+            "key": "yak"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "path_presets",
+            "lbl": "Presets CSV Path"
+          },
+          "geometry": {
+            "w": 800,
+            "h": 60,
+            "pad": 10
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Paths",
+            "key": "presets"
+          }
+        }
+      ]
+    }
+  ],
+  "Setup_file Paths": {
+    "id": "50.90.3.11",
+    "lbl": "Application File Paths"
+  }
+}

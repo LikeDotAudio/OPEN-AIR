@@ -1,0 +1,368 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Card_8_Peripheral_Interface": {
+        "type": "OcaBlock",
+        "description": "Card 8 - Peripheral Channel Routing",
+        "show_label": false,
+        "layout": {
+          "sticky": "ew"
+        },
+        "fields": {
+          "Bus_AB00_Periph_Left_Out": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_periph_out_left_c8",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9,
+              "max_cols": 8,
+              "width": 100,
+              "font": 14,
+              "padx": 10,
+              "pady": 5
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "1": {
+                "value": "801",
+                "label_active": "Comp DAC L",
+                "label_inactive": "Comp DAC L",
+                "description": "Computer DAC Left OUT to Bus AB-00"
+              },
+              "2": {
+                "value": "802",
+                "label_active": "Sig Gen L",
+                "label_inactive": "Sig Gen L",
+                "description": "Signal Generator Left OUT to Bus AB-00"
+              },
+              "3": {
+                "value": "803",
+                "label_active": "Distortion L",
+                "label_inactive": "Distortion L",
+                "description": "Distortion Analyzer Left OUT to Bus AB-00"
+              },
+              "4": {
+                "value": "804",
+                "label_active": "Aux IN L",
+                "label_inactive": "Aux IN L",
+                "description": "Aux Input Left OUT to Bus AB-00"
+              },
+              "5": {
+                "value": "805",
+                "label_active": "DUT OUT L",
+                "label_inactive": "DUT OUT L",
+                "description": "Device Under Test Left OUT to Bus AB-00"
+              }
+            },
+            "selection_mode": "radio",
+            "Allow_Null": true,
+            "Allow_Multi_Alt_Select": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Routing",
+              "command": "Set_Relay_Card8",
+              "input_name": "relay_id",
+              "converter": "int"
+            },
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.944,
+            "width": 100,
+            "height": 50,
+            "Orientation": "vertical",
+            "path": "Card_8_Peripheral_Interface/Bus_AB00_Periph_Left_Out"
+          },
+          "Bus_AB02_Periph_Right_Out": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_periph_out_right_c8",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9,
+              "max_cols": 8,
+              "width": 100,
+              "font": 14,
+              "padx": 10,
+              "pady": 5
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#ff0000",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "1": {
+                "value": "821",
+                "label_active": "Comp DAC R",
+                "label_inactive": "Comp DAC R",
+                "description": "Computer DAC Right OUT to Bus AB-02"
+              },
+              "2": {
+                "value": "822",
+                "label_active": "Sig Gen R",
+                "label_inactive": "Sig Gen R",
+                "description": "Signal Generator Right OUT to Bus AB-02"
+              },
+              "3": {
+                "value": "823",
+                "label_active": "Distortion R",
+                "label_inactive": "Distortion R",
+                "description": "Distortion Analyzer Right OUT to Bus AB-02"
+              },
+              "4": {
+                "value": "824",
+                "label_active": "Aux IN R",
+                "label_inactive": "Aux IN R",
+                "description": "Aux Input Right OUT to Bus AB-02"
+              },
+              "5": {
+                "value": "825",
+                "label_active": "DUT OUT R",
+                "label_inactive": "DUT OUT R",
+                "description": "Device Under Test Right OUT to Bus AB-02"
+              }
+            },
+            "selection_mode": "radio",
+            "Allow_Null": true,
+            "Allow_Multi_Alt_Select": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Routing",
+              "command": "Set_Relay_Card8",
+              "input_name": "relay_id",
+              "converter": "int"
+            },
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#ff0000",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.944,
+            "width": 100,
+            "height": 50,
+            "Orientation": "vertical",
+            "path": "Card_8_Peripheral_Interface/Bus_AB02_Periph_Right_Out"
+          },
+          "Bus_AB01_Periph_Left_In": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_periph_in_left_c8",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9,
+              "max_cols": 8,
+              "width": 100,
+              "font": 14,
+              "padx": 10,
+              "pady": 5
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "1": {
+                "value": "811",
+                "label_active": "DUT In L",
+                "label_inactive": "DUT In L",
+                "description": "Device Under Test Left IN from Bus AB-01"
+              },
+              "2": {
+                "value": "812",
+                "label_active": "DAC IN L",
+                "label_inactive": "DAC IN L",
+                "description": "DAC Left IN from Bus AB-01"
+              },
+              "3": {
+                "value": "813",
+                "label_active": "Monitor 1 L",
+                "label_inactive": "Monitor 1 L",
+                "description": "Monitor 1 Left IN from Bus AB-01"
+              },
+              "4": {
+                "value": "814",
+                "label_active": "Monitor 2 L",
+                "label_inactive": "Monitor 2 L",
+                "description": "Monitor 2 Left IN from Bus AB-01"
+              },
+              "5": {
+                "value": "815",
+                "label_active": "Monitor 3 L",
+                "label_inactive": "Monitor 3 L",
+                "description": "Monitor 3 Left IN from Bus AB-01"
+              }
+            },
+            "selection_mode": "radio",
+            "Allow_Null": true,
+            "Allow_Multi_Alt_Select": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Routing",
+              "command": "Set_Relay_Card8",
+              "input_name": "relay_id",
+              "converter": "int"
+            },
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.944,
+            "width": 100,
+            "height": 50,
+            "Orientation": "vertical",
+            "path": "Card_8_Peripheral_Interface/Bus_AB01_Periph_Left_In"
+          },
+          "Bus_AB03_Periph_Right_In": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_periph_in_right_c8",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9,
+              "max_cols": 5,
+              "width": 100,
+              "font": 14,
+              "padx": 10,
+              "pady": 5
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#ff0000",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "1": {
+                "value": "831",
+                "label_active": "DUT In R",
+                "label_inactive": "DUT In R",
+                "description": "Device Under Test Right IN from Bus AB-03"
+              },
+              "2": {
+                "value": "832",
+                "label_active": "DAC IN R",
+                "label_inactive": "DAC IN R",
+                "description": "DAC Right IN from Bus AB-03"
+              },
+              "3": {
+                "value": "833",
+                "label_active": "Monitor 1 R",
+                "label_inactive": "Monitor 1 R",
+                "description": "Monitor 1 Right IN from Bus AB-03"
+              },
+              "4": {
+                "value": "834",
+                "label_active": "Monitor 2 R",
+                "label_inactive": "Monitor 2 R",
+                "description": "Monitor 2 Right IN from Bus AB-03"
+              },
+              "5": {
+                "value": "835",
+                "label_active": "Monitor 3 R",
+                "label_inactive": "Monitor 3 R",
+                "description": "Monitor 3 Right IN from Bus AB-03"
+              }
+            },
+            "selection_mode": "radio",
+            "Allow_Null": true,
+            "Allow_Multi_Alt_Select": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Routing",
+              "command": "Set_Relay_Card8",
+              "input_name": "relay_id",
+              "converter": "int"
+            },
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#ff0000",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.944,
+            "width": 100,
+            "height": 50,
+            "Orientation": "vertical",
+            "path": "Card_8_Peripheral_Interface/Bus_AB03_Periph_Right_In"
+          }
+        },
+        "active_text_color": "#1a1a1a",
+        "text_color": "#888888",
+        "active_font_style": "bold",
+        "active_font_size": null,
+        "inactive_font_style": "normal",
+        "inactive_font_size": null,
+        "active_color": "#FF9900",
+        "active_bg_color": "#000000",
+        "bg_color": "#2b2b2b",
+        "glow_intensity": 1.0,
+        "Orientation": "vertical"
+      }
+    }
+  }
+}

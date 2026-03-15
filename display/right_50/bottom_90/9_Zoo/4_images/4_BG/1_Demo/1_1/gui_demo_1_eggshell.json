@@ -1,0 +1,44 @@
+{
+  "Zoo_images_BG_Demo_1": {
+    "type": "OcaBin",
+    "id": "50.90.9.4.4.1.1.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "fields": {
+        "Meter_1": {
+          "type": "_NeedleVUMeter",
+          "label": "Hotdog 1",
+          "geometry": {
+            "width": 400,
+            "height": 200
+          },
+          "domain": {
+            "primary": {
+              "min": -20.0,
+              "max": 3.0,
+              "value_default": -10.0
+            }
+          },
+          "cosmetics": {
+            "colors": {
+              "bezel": "#111111"
+            },
+            "style_overrides": {
+              "bezel_shape": "hotdog",
+              "bezel_width": 6,
+              "Pointer_Style": "knife-edge",
+              "overlay_style": "dome"
+            }
+          }
+        }
+      }
+    }
+  }
+}

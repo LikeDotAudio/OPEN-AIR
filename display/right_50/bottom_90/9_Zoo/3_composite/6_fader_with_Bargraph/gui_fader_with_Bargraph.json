@@ -1,0 +1,141 @@
+{
+  "Zoo_composite_fader_with_Bargraph": {
+    "type": "OcaBin",
+    "id": "50.90.9.3.6",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "FaderWithVU": {
+        "type": "OcaBlock",
+        "label_active": "Fader with VU Meter Examples",
+        "layout_columns": 8,
+        "fields": {
+          "ex1_standard": {
+            "type": "_FaderWithBarGraph",
+            "label_active": "Standard",
+            "value_min": -60.0,
+            "value_max": 10.0,
+            "value_default": -10.0,
+            "layout": {
+              "height": 300,
+              "width": 120
+            },
+            "meter_width": 15,
+            "cap_height": 40,
+            "show_ticks": true,
+            "tick_steps": 10
+          },
+          "ex2_custom_cap": {
+            "type": "_FaderWithBarGraph",
+            "label_active": "Big Cap",
+            "layout": {
+              "height": 300,
+              "width": 120
+            },
+            "value_min": 0,
+            "value_max": 100,
+            "value_default": 50,
+            "cap_height": 60,
+            "cap_width": 90,
+            "cap_colour": "#FF5555",
+            "tick_steps": 5
+          },
+          "ex3_slim_fader": {
+            "type": "_FaderWithBarGraph",
+            "label_active": "Slim",
+            "layout": {
+              "height": 300,
+              "width": 100
+            },
+            "value_default": -20,
+            "fader_width": 10,
+            "meter_width": 10,
+            "bar_padding": 2,
+            "cap_height": 30,
+            "cap_colour": "#55FF55",
+            "tick_steps": 20
+          },
+          "ex4_wide_meters": {
+            "type": "_FaderWithBarGraph",
+            "label_active": "Wide Meters",
+            "layout": {
+              "height": 300,
+              "width": 140
+            },
+            "value_default": -5,
+            "meter_width": 25,
+            "fader_width": 20,
+            "cap_height": 20,
+            "tick_steps": 15
+          },
+          "ex5_no_meters": {
+            "type": "_FaderWithBarGraph",
+            "label_active": "No Meters",
+            "layout": {
+              "height": 300,
+              "width": 80
+            },
+            "value_default": 75,
+            "bar_enable": false,
+            "fader_width": 20,
+            "cap_colour": "#5555FF"
+          },
+          "ex6_discrete_ticks": {
+            "type": "_FaderWithBarGraph",
+            "label_active": "Many Ticks",
+            "layout": {
+              "height": 300,
+              "width": 120
+            },
+            "value_default": 0,
+            "show_ticks": true,
+            "tick_steps": 50,
+            "meter_width": 12
+          },
+          "ex7_inverse_colors": {
+            "type": "_FaderWithBarGraph",
+            "label_active": "Inverse",
+            "value_default": -40,
+            "left_meter_style": {
+              "lower_range_colour": "blue",
+              "middle_range_colour": "cyan",
+              "upper_range_colour": "white"
+            },
+            "right_meter_style": {
+              "lower_range_colour": "blue",
+              "middle_range_colour": "cyan",
+              "upper_range_colour": "white"
+            },
+            "layout": {
+              "height": 300,
+              "width": 120
+            },
+            "fader_track_color": "#AAAAAA",
+            "cap_colour": "#222222"
+          },
+          "ex8_log_scale": {
+            "type": "_FaderWithBarGraph",
+            "label_active": "Log Scale",
+            "log_exponent": 2.0,
+            "value_min": 0,
+            "value_max": 1000,
+            "value_default": 250,
+            "layout": {
+              "height": 300,
+              "width": 120
+            },
+            "cap_height": 10,
+            "cap_colour": "orange",
+            "tick_steps": 10
+          }
+        }
+      }
+    }
+  }
+}

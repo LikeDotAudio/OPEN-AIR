@@ -1,0 +1,15 @@
+{
+  "Zoo_images_BG_Demo_5": {
+    "type": "OcaBin",
+    "id": "50.90.9.4.4.2.2.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {}
+  }
+}

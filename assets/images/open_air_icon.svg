@@ -1,0 +1,6 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" rx="60" fill="#2E3440" />
+  <text x="50%" y="54%" font-family="Arial, sans-serif" font-size="160" font-weight="bold" text-anchor="middle" dominant-baseline="central">
+    <tspan fill="#FF8C00" dx="-5">O</tspan><tspan fill="#007BFF" dx="5">A</tspan>
+  </text>
+</svg>

@@ -1,0 +1,175 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Card_001_Coax_Routing": {
+        "type": "OcaBlock",
+        "description": "Card 001 - Coax Cross-Point Routing",
+        "show_label": false,
+        "layout": {
+          "sticky": "ew"
+        },
+        "fields": {
+          "Main_IO_Toggler": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_relay_c9",
+            "layout": {
+              "height": 50,
+              "max_cols": 4,
+              "width": 150,
+              "font": 14,
+              "padx": 10,
+              "pady": 10,
+              "alpha": 0.9
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#ff0000",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "1": {
+                "value": "901",
+                "label_active": "Patch Panel OUT",
+                "label_inactive": "Patch Panel OUT",
+                "description": "Patch Panel OUT"
+              },
+              "2": {
+                "value": "902",
+                "label_active": "Patch Panel IN",
+                "label_inactive": "Patch Panel IN",
+                "description": "Patch Panel IN"
+              },
+              "3": {
+                "value": "903",
+                "label_active": "HP-xformer 1 IN",
+                "label_inactive": "HP-xformer 1 IN",
+                "description": "HP-xformer 1 IN"
+              },
+              "4": {
+                "value": "904",
+                "label_active": "HP-xformer 2 IN",
+                "label_inactive": "HP-xformer 2 IN",
+                "description": "HP-xformer 2 IN"
+              },
+              "5": {
+                "value": "905",
+                "label_active": "TO AMPLIFIER L",
+                "label_inactive": "TO AMPLIFIER L",
+                "description": "TO AMPLIFIER L"
+              },
+              "6": {
+                "value": "906",
+                "label_active": "TO AMPLIFIER R",
+                "label_inactive": "TO AMPLIFIER R",
+                "description": "TO AMPLIFIER R"
+              },
+              "7": {
+                "value": "907",
+                "label_active": "From Signal Gen",
+                "label_inactive": "From Signal Gen",
+                "description": "From Signal Gen"
+              },
+              "8": {
+                "value": "908",
+                "label_active": "From Signal Gen",
+                "label_inactive": "From Signal Gen",
+                "description": "From Signal Gen"
+              }
+            },
+            "selection_mode": "radio",
+            "Allow_Null": true,
+            "Allow_Multi_Alt_Select": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Routing",
+              "command": "Set_Relay_Card9",
+              "input_name": "relay_id",
+              "converter": "int"
+            }
+          },
+          "Scopes_Toggler": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_relay_c9",
+            "layout": {
+              "height": 50,
+              "max_cols": 4,
+              "width": 150,
+              "font": 14,
+              "padx": 10,
+              "pady": 10,
+              "alpha": 0.9
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#ff0000",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "1": {
+                "value": "910",
+                "label_active": "SCOPE IN 1",
+                "label_inactive": "SCOPE IN 1",
+                "description": "SCOPE IN 1"
+              },
+              "2": {
+                "value": "920",
+                "label_active": "SCOPE IN 2",
+                "label_inactive": "SCOPE IN 2",
+                "description": "SCOPE IN 2"
+              },
+              "3": {
+                "value": "930",
+                "label_active": "SCOPE IN 3",
+                "label_inactive": "SCOPE IN 3",
+                "description": "SCOPE IN 3"
+              },
+              "4": {
+                "value": "940",
+                "label_active": "SCOPE IN 4",
+                "label_inactive": "SCOPE IN 4",
+                "description": "SCOPE IN 4"
+              }
+            },
+            "selection_mode": "radio",
+            "Allow_Null": true,
+            "Allow_Multi_Alt_Select": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Routing",
+              "command": "Set_Relay_Card9",
+              "input_name": "relay_id",
+              "converter": "int"
+            }
+          }
+        }
+      }
+    }
+  }
+}

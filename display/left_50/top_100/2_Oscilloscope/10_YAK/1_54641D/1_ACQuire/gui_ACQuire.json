@@ -1,0 +1,182 @@
+{
+  "Oscilloscope_YAK_54641D_ACQuire": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.1.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": "Acquisition Settings",
+        "fields": {
+          "Set_Acquire_Type": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "ACQuire:TYPE <type>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "type": {
+                    "value": "NORMal",
+                    "type": "_GuiValue",
+                    "label": "Type",
+                    "units": "",
+                    "description": "NORMal, AVERage, PEAK"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Average_Count": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "ACQuire:COUNt <count>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "count": {
+                    "value": "8",
+                    "type": "_GuiValue",
+                    "label": "Count",
+                    "units": ""
+                  }
+                }
+              }
+            }
+          },
+          "Set_Points": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "ACQuire:POINts <points>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "points": {
+                    "value": "MAXimum",
+                    "type": "_GuiValue",
+                    "label": "Points",
+                    "units": "",
+                    "description": "100, 250, 500, 1000, 2000, MAXimum"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "nab": {
+        "type": "OcaBlock",
+        "description": "Acquisition Readbacks",
+        "fields": {
+          "Get_Sample_Rate": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "ACQuire:SRATe?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "srate": {
+                    "value": "Hz",
+                    "type": "_GuiValue",
+                    "label": "Sample Rate",
+                    "units": "Hz"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

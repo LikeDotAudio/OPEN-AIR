@@ -1,0 +1,326 @@
+{
+  "Router_Switcher_EDAC_1-12": {
+    "type": "OcaBin",
+    "id": "50.100.1.1.1.13",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Card_5_Snake_Interface": {
+        "type": "OcaBlock",
+        "description": "EDAC 2 - Snake Channel Routing",
+        "show_label": false,
+        "layout": {
+          "sticky": ""
+        },
+        "fields": {
+          "Bus_AB0_Left_Out": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_snake_out_left",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9,
+              "max_cols": 6,
+              "width": 100,
+              "font": 14,
+              "padx": 5,
+              "pady": 5
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "1": {
+                "value": "501",
+                "label_active": "Ch 1 (L)",
+                "label_inactive": "Ch 1 (L)",
+                "description": "Snake Ch 1 Left/Odd OUT to Bus AB0"
+              },
+              "2": {
+                "value": "502",
+                "label_active": "Ch 3 (L)",
+                "label_inactive": "Ch 3 (L)",
+                "description": "Snake Ch 3 Left/Odd OUT to Bus AB0"
+              },
+              "3": {
+                "value": "503",
+                "label_active": "Ch 5 (L)",
+                "label_inactive": "Ch 5 (L)",
+                "description": "Snake Ch 5 Left/Odd OUT to Bus AB0"
+              },
+              "4": {
+                "value": "504",
+                "label_active": "Ch 7 (L)",
+                "label_inactive": "Ch 7 (L)",
+                "description": "Snake Ch 7 Left/Odd OUT to Bus AB0"
+              },
+              "5": {
+                "value": "505",
+                "label_active": "Ch 9 (L)",
+                "label_inactive": "Ch 9 (L)",
+                "description": "Snake Ch 9 Left/Odd OUT to Bus AB0"
+              },
+              "6": {
+                "value": "506",
+                "label_active": "Ch 11 (L)",
+                "label_inactive": "Ch 11 (L)",
+                "description": "Snake Ch 11 Left/Odd OUT to Bus AB0"
+              }
+            },
+            "selection_mode": "radio",
+            "Allow_Null": true,
+            "Allow_Multi_Alt_Select": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Routing",
+              "command": "Set_Relay_Card4",
+              "input_name": "relay_id",
+              "converter": "int"
+            }
+          },
+          "Bus_AB2_Right_Out": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_snake_out_right",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9,
+              "max_cols": 6,
+              "width": 100,
+              "font": 14,
+              "padx": 5,
+              "pady": 5
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#ff0000",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "1": {
+                "value": "521",
+                "label_active": "Ch 2 (R)",
+                "label_inactive": "Ch 2 (R)",
+                "description": "Snake Ch 2 Right/Even OUT to Bus AB2"
+              },
+              "2": {
+                "value": "522",
+                "label_active": "Ch 4 (R)",
+                "label_inactive": "Ch 4 (R)",
+                "description": "Snake Ch 4 Right/Even OUT to Bus AB2"
+              },
+              "3": {
+                "value": "523",
+                "label_active": "Ch 6 (R)",
+                "label_inactive": "Ch 6 (R)",
+                "description": "Snake Ch 6 Right/Even OUT to Bus AB2"
+              },
+              "4": {
+                "value": "524",
+                "label_active": "Ch 8 (R)",
+                "label_inactive": "Ch 8 (R)",
+                "description": "Snake Ch 8 Right/Even OUT to Bus AB2"
+              },
+              "5": {
+                "value": "525",
+                "label_active": "Ch 10 (R)",
+                "label_inactive": "Ch 10 (R)",
+                "description": "Snake Ch 10 Right/Even OUT to Bus AB2"
+              },
+              "6": {
+                "value": "526",
+                "label_active": "Ch 12 (R)",
+                "label_inactive": "Ch 12 (R)",
+                "description": "Snake Ch 12 Right/Even OUT to Bus AB2"
+              }
+            },
+            "selection_mode": "radio",
+            "Allow_Null": true,
+            "Allow_Multi_Alt_Select": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Routing",
+              "command": "Set_Relay_Card4",
+              "input_name": "relay_id",
+              "converter": "int"
+            }
+          },
+          "Bus_AB1_Left_In": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_snake_in_left",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9,
+              "max_cols": 6,
+              "width": 100,
+              "font": 14,
+              "padx": 5,
+              "pady": 5
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "1": {
+                "value": "511",
+                "label_active": "Ch 13 (L)",
+                "label_inactive": "Ch 13 (L)",
+                "description": "Snake Ch 13 Left/Odd IN from Bus AB1"
+              },
+              "2": {
+                "value": "512",
+                "label_active": "Ch 15 (L)",
+                "label_inactive": "Ch 15 (L)",
+                "description": "Snake Ch 15 Left/Odd IN from Bus AB1"
+              },
+              "3": {
+                "value": "513",
+                "label_active": "Ch 17 (L)",
+                "label_inactive": "Ch 17 (L)",
+                "description": "Snake Ch 17 Left/Odd IN from Bus AB1"
+              },
+              "4": {
+                "value": "514",
+                "label_active": "Ch 19 (L)",
+                "label_inactive": "Ch 19 (L)",
+                "description": "Snake Ch 19 Left/Odd IN from Bus AB1"
+              },
+              "5": {
+                "value": "515",
+                "label_active": "Ch 21 (L)",
+                "label_inactive": "Ch 21 (L)",
+                "description": "Snake Ch 21 Left/Odd IN from Bus AB1"
+              },
+              "6": {
+                "value": "516",
+                "label_active": "Ch 23 (L)",
+                "label_inactive": "Ch 23 (L)",
+                "description": "Snake Ch 23 Left/Odd IN from Bus AB1"
+              }
+            },
+            "selection_mode": "radio",
+            "Allow_Null": true,
+            "Allow_Multi_Alt_Select": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Routing",
+              "command": "Set_Relay_Card4",
+              "input_name": "relay_id",
+              "converter": "int"
+            }
+          },
+          "Bus_AB3_Right_In": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_snake_in_right",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9,
+              "max_cols": 6,
+              "width": 100,
+              "font": 14,
+              "padx": 5,
+              "pady": 5
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#ff0000",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "1": {
+                "value": "531",
+                "label_active": "Ch 14 (R)",
+                "label_inactive": "Ch 14 (R)",
+                "description": "Snake Ch 14 Right/Even IN from Bus AB3"
+              },
+              "2": {
+                "value": "532",
+                "label_active": "Ch 16 (R)",
+                "label_inactive": "Ch 16 (R)",
+                "description": "Snake Ch 16 Right/Even IN from Bus AB3"
+              },
+              "3": {
+                "value": "533",
+                "label_active": "Ch 18 (R)",
+                "label_inactive": "Ch 18 (R)",
+                "description": "Snake Ch 18 Right/Even IN from Bus AB3"
+              },
+              "4": {
+                "value": "534",
+                "label_active": "Ch 20 (R)",
+                "label_inactive": "Ch 20 (R)",
+                "description": "Snake Ch 20 Right/Even IN from Bus AB3"
+              },
+              "5": {
+                "value": "535",
+                "label_active": "Ch 22 (R)",
+                "label_inactive": "Ch 22 (R)",
+                "description": "Snake Ch 22 Right/Even IN from Bus AB3"
+              },
+              "6": {
+                "value": "536",
+                "label_active": "Ch 24 (R)",
+                "label_inactive": "Ch 24 (R)",
+                "description": "Snake Ch 24 Right/Even IN from Bus AB3"
+              }
+            },
+            "selection_mode": "radio",
+            "Allow_Null": true,
+            "Allow_Multi_Alt_Select": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Routing",
+              "command": "Set_Relay_Card4",
+              "input_name": "relay_id",
+              "converter": "int"
+            }
+          }
+        }
+      }
+    }
+  }
+}

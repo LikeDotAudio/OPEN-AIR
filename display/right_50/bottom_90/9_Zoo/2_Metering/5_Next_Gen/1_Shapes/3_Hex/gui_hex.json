@@ -1,0 +1,641 @@
+{
+  "Zoo_Metering_Next_Gen_Shapes_Hex": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.5.1.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Hex_Variations": {
+        "type": "OcaBlock",
+        "description": "Hex Meter Variations",
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "Hex_1_Large": {
+            "type": "_NeedleVUMeter",
+            "label": "Large Classic",
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "#000000",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 6,
+                "Pointer_Style": "teardrop",
+                "pivot_colour": "#222222"
+              },
+              "labels": [
+                {
+                  "text": "HEXAGONAL VU",
+                  "x": 0,
+                  "y": -45,
+                  "size": 12,
+                  "weight": "bold"
+                },
+                {
+                  "value_overlay": true,
+                  "x": 0,
+                  "y": -100,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "#000000",
+                  "sig_fig": 3
+                }
+              ]
+            },
+            "label_active": "Large Classic",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 300,
+            "height": 300,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hex",
+            "bezel_width": 6,
+            "Pointer_Style": "teardrop",
+            "pivot_colour": "#222222",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -10.0,
+            "value": -10.0,
+            "default_value": -10.0,
+            "step": 5.0,
+            "path": "Hex_Variations/Hex_1_Large"
+          },
+          "Hex_2_Medium": {
+            "type": "_NeedleVUMeter",
+            "label": "Medium Silver",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "silver",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 5,
+                "Pointer_Style": "knife-edge",
+                "pivot_colour": "silver"
+              },
+              "labels": [
+                {
+                  "text": "SILVER HEX",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10
+                }
+              ]
+            },
+            "label_active": "Medium Silver",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hex",
+            "bezel_width": 5,
+            "Pointer_Style": "knife-edge",
+            "pivot_colour": "silver",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -5.0,
+            "value": -5.0,
+            "default_value": -5.0,
+            "step": 5.0,
+            "path": "Hex_Variations/Hex_2_Medium"
+          },
+          "Hex_3_Small": {
+            "type": "_NeedleVUMeter",
+            "label": "Small Bronze",
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#cd7f32",
+                "bezel": "#cd7f32",
+                "scale_label": "#cd7f32"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 2,
+                "mask": false,
+                "Pointer_Style": "needle",
+                "pivot_colour": "#cd7f32"
+              },
+              "labels": [
+                {
+                  "text": "BRONZE",
+                  "x": 0,
+                  "y": -22,
+                  "size": 8,
+                  "color": "#cd7f32"
+                }
+              ]
+            },
+            "label_active": "Small Bronze",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 150,
+            "height": 150,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hex",
+            "bezel_width": 2,
+            "mask": false,
+            "Pointer_Style": "needle",
+            "pivot_colour": "#cd7f32",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": 0.0,
+            "value": 0.0,
+            "default_value": 0.0,
+            "step": 5.0,
+            "path": "Hex_Variations/Hex_3_Small"
+          },
+          "Hex_4_Cobalt": {
+            "type": "_NeedleVUMeter",
+            "label": "Cobalt Blue",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#00FFFF",
+                "bezel": "#4169E1",
+                "scale_label": "#00FFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 5,
+                "enable_lighting": true,
+                "Pointer_Style": "taper"
+              },
+              "labels": [
+                {
+                  "text": "COBALT",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "#00FFFF"
+                }
+              ]
+            },
+            "label_active": "Cobalt Blue",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hex",
+            "bezel_width": 5,
+            "enable_lighting": true,
+            "Pointer_Style": "taper",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -2.0,
+            "value": -2.0,
+            "default_value": -2.0,
+            "path": "Hex_Variations/Hex_4_Cobalt"
+          },
+          "Hex_5_Amber": {
+            "type": "_NeedleVUMeter",
+            "label": "Amber Alert",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -8.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFBF00",
+                "bezel": "#FF8C00",
+                "scale_label": "#FFBF00"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 5,
+                "enable_lighting": true,
+                "Pointer_Style": "spade"
+              },
+              "labels": [
+                {
+                  "text": "AMBER",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "#FFBF00"
+                }
+              ]
+            },
+            "label_active": "Amber Alert",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hex",
+            "bezel_width": 5,
+            "enable_lighting": true,
+            "Pointer_Style": "spade",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -8.0,
+            "value": -8.0,
+            "default_value": -8.0,
+            "path": "Hex_Variations/Hex_5_Amber"
+          },
+          "Hex_6_Graphite": {
+            "type": "_NeedleVUMeter",
+            "label": "Graphite Flat",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#D3D3D3",
+                "bezel": "#A9A9A9",
+                "scale_label": "#D3D3D3"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 2,
+                "enable_lighting": false,
+                "Pointer_Style": "baton"
+              },
+              "labels": [
+                {
+                  "text": "GRAPHITE",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "#D3D3D3"
+                }
+              ]
+            },
+            "label_active": "Graphite Flat",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hex",
+            "bezel_width": 2,
+            "enable_lighting": false,
+            "Pointer_Style": "baton",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -15.0,
+            "value": -15.0,
+            "default_value": -15.0,
+            "path": "Hex_Variations/Hex_6_Graphite"
+          },
+          "Hex_7_Solar": {
+            "type": "_NeedleVUMeter",
+            "label": "Solar Flare",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -4.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFFF00",
+                "bezel": "#FF4500",
+                "scale_label": "#FFFF00"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 6,
+                "enable_lighting": true,
+                "Pointer_Style": "needle"
+              },
+              "labels": [
+                {
+                  "text": "SOLAR",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "#FFFF00"
+                }
+              ]
+            },
+            "label_active": "Solar Flare",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hex",
+            "bezel_width": 6,
+            "enable_lighting": true,
+            "Pointer_Style": "needle",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -4.0,
+            "value": -4.0,
+            "default_value": -4.0,
+            "path": "Hex_Variations/Hex_7_Solar"
+          },
+          "Hex_8_Arctic": {
+            "type": "_NeedleVUMeter",
+            "label": "Arctic Ice",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -18.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#00CED1",
+                "bezel": "#B0E0E6",
+                "scale_label": "#00CED1"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 5,
+                "enable_lighting": false,
+                "Pointer_Style": "knife-edge"
+              },
+              "labels": [
+                {
+                  "text": "ARCTIC",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "#00CED1"
+                }
+              ]
+            },
+            "label_active": "Arctic Ice",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hex",
+            "bezel_width": 5,
+            "enable_lighting": false,
+            "Pointer_Style": "knife-edge",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -18.0,
+            "value": -18.0,
+            "default_value": -18.0,
+            "path": "Hex_Variations/Hex_8_Arctic"
+          },
+          "Hex_9_Steampunk": {
+            "type": "_NeedleVUMeter",
+            "label": "Steampunk",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -6.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#8B0000",
+                "bezel": "#CD853F",
+                "scale_label": "#8B0000"
+              },
+              "style_overrides": {
+                "bezel_shape": "hex",
+                "bezel_width": 7,
+                "enable_lighting": true,
+                "Pointer_Style": "teardrop"
+              },
+              "labels": [
+                {
+                  "text": "STEAMPUNK",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "#8B0000"
+                }
+              ]
+            },
+            "label_active": "Steampunk",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hex",
+            "bezel_width": 7,
+            "enable_lighting": true,
+            "Pointer_Style": "teardrop",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -6.0,
+            "value": -6.0,
+            "default_value": -6.0,
+            "path": "Hex_Variations/Hex_9_Steampunk"
+          }
+        },
+        "active_text_color": "#1a1a1a",
+        "text_color": "#888888",
+        "active_font_style": "bold",
+        "active_font_size": null,
+        "inactive_font_style": "normal",
+        "inactive_font_size": null,
+        "active_color": "#FF9900",
+        "active_bg_color": "#000000",
+        "bg_color": "#2b2b2b",
+        "glow_intensity": 1.0,
+        "Orientation": "vertical",
+        "layout": {}
+      }
+    }
+  }
+}

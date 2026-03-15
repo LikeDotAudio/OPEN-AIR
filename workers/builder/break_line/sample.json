@@ -1,0 +1,21 @@
+{
+  "break_line_Example": {
+    "type": "OcaBreakLine",
+    "layout": {
+      "height": 2,
+      "padx": 10,
+      "pady": 5,
+      "colour": "#555555",
+      "alpha": 1.0,
+      "sticky": "ew"
+    },
+    "cosmetics": {
+      "colors": {
+        "primary": "#FF9900",
+        "secondary": "#444444",
+        "background": "#2b2b2b"
+      }
+    }
+  },
+  "_README": "This is an enhanced sample configuration demonstrating full instantiation capabilities."
+}

@@ -1,0 +1,131 @@
+{
+  "Generator_YAK_33220A_System": {
+    "type": "OcaBin",
+    "id": "50.100.3.10.1.7",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Do": {
+        "type": "OcaBlock",
+        "description": "System Actions",
+        "fields": {
+          "System_Actions": {
+            "type": "OcaBlock",
+            "fields": {
+              "Trigger_Immediate": {
+                "type": "_GuiActuator",
+                "label_inactive": "Trigger (*TRG)",
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "Execute Command": {
+                  "message": "*TRG"
+                }
+              },
+              "Reset_Device": {
+                "type": "_GuiActuator",
+                "label_inactive": "Reset (*RST)",
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "Execute Command": {
+                  "message": "*RST"
+                }
+              },
+              "Clear_Text": {
+                "type": "_GuiActuator",
+                "label_inactive": "Clear Display",
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "Execute Command": {
+                  "message": "DISPlay:TEXT:CLEar"
+                }
+              }
+            }
+          }
+        }
+      },
+      "nab": {
+        "type": "OcaBlock",
+        "description": "System Readbacks",
+        "fields": {
+          "Get_Error_Queue": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "SYSTem:ERRor?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "error_msg": {
+                    "value": "Error Code, Message",
+                    "type": "_GuiValue",
+                    "label": "Error Message",
+                    "units": ""
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

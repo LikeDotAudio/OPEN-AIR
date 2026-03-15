@@ -1,0 +1,429 @@
+{
+  "Spectrum_YAK_HPE4411A_Bandwidth": {
+    "type": "OcaBin",
+    "id": "50.100.0.10.3.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "NAB": {
+        "type": "OcaBlock",
+        "description": "NAB Bandwidth Monitoring",
+        "show_label": false,
+        "fields": {
+          "bandwidth_settings": {
+            "type": "OcaBlock",
+            "description": "Bandwidth and Sweep Monitoring",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label_active": "Get Bandwidth Settings",
+                "label_inactive": "Get Bandwidth Settings",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":SENSe:BANDwidth:RESolution?;:SENSe:BANDwidth:VIDeo?;:SENSe:BANDwidth:VIDeo:AUTO?;:INITiate:CONTinuous?;:SENSe:SWEep:TIME?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "description": "Bandwidth Readbacks",
+                "fields": {
+                  "RBW_Hz": {
+                    "label": "Resolution Bandwidth (Hz)",
+                    "value": "The resolution bandwidth in Hz.",
+                    "type": "_GuiValue",
+                    "units": "Hz"
+                  },
+                  "VBW_Hz": {
+                    "label": "Video Bandwidth (Hz)",
+                    "value": "The video bandwidth in Hz.",
+                    "type": "_GuiValue",
+                    "units": "Hz"
+                  },
+                  "VBW_Auto_On": {
+                    "label": "VBW Auto State",
+                    "value": "Boolean for VBW auto state.",
+                    "type": "_GuiValue"
+                  },
+                  "Continuous_Mode_On": {
+                    "label": "Continuous Mode State",
+                    "value": "Boolean for continuous mode state.",
+                    "type": "_GuiValue"
+                  },
+                  "Sweep_Time_s": {
+                    "label": "Sweep Time (s)",
+                    "value": "The sweep time in seconds.",
+                    "type": "_GuiValue",
+                    "units": "s"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "RIG_Settings": {
+        "type": "OcaBlock",
+        "description": "RIG Bandwidth Commands",
+        "fields": {
+          "RBW_VBW_Hz": {
+            "type": "OcaBlock",
+            "description": "Set Resolution and Video BW",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label_active": "Set RBW and VBW",
+                "label_inactive": "Set RBW and VBW",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":SENSe:BANDwidth:RESolution <rbw_hz_value>;:SENSe:BANDwidth:VIDeo <vbw_hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "rbw_hz_value": {
+                    "label": "Resolution Bandwidth (Hz)",
+                    "value": "100000",
+                    "type": "_GuiValue",
+                    "units": "Hz",
+                    "description": "The SCPI input for RBW."
+                  },
+                  "vbw_hz_value": {
+                    "value": "100000",
+                    "type": "_GuiValue",
+                    "label": "Video Bandwidth (Hz)",
+                    "units": "Hz",
+                    "description": "The SCPI input for VBW."
+                  }
+                }
+              }
+            }
+          },
+          "Sweep_Time": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label_active": "Set Sweep Time",
+                "label_inactive": "Set Sweep Time",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":SENSe:SWEep:TIME <sweep_time_s>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "sweep_time_s": {
+                    "label": "Sweep Time (s)",
+                    "value": "4",
+                    "type": "_GuiValue",
+                    "units": "s"
+                  }
+                }
+              }
+            }
+          },
+          "Video_Bandwidth": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label_active": "Set Video Bandwidth",
+                "label_inactive": "Set Video Bandwidth",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":SENSe:BANDwidth:VIDeo <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "label": "Video Bandwidth (Hz)",
+                    "value": "3000000",
+                    "type": "_GuiValue",
+                    "units": "Hz"
+                  }
+                }
+              }
+            }
+          },
+          "Resolution_Bandwidth": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label_active": "Set Resolution Bandwidth",
+                "label_inactive": "Set Resolution Bandwidth",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":SENSe:BANDwidth:RESolution <hz_value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "hz_value": {
+                    "label": "Resolution Bandwidth (Hz)",
+                    "value": "3000000",
+                    "type": "_GuiValue",
+                    "units": "Hz"
+                  }
+                }
+              }
+            }
+          },
+          "Toggle_Sweep_Time_Auto": {
+            "type": "OcaBlock",
+            "description": "Sweep Time Auto Switches",
+            "fields": {
+              "Do_Sweep_Time_Auto_ON": {
+                "type": "_GuiActuator",
+                "label_active": "Sweep Auto ON",
+                "label_inactive": "Sweep Auto ON",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": ":SENSe:SWEep:TIME:AUTO ON"
+              },
+              "Do_Sweep_Time_Auto_OFF": {
+                "type": "_GuiActuator",
+                "label_active": "Sweep Auto OFF",
+                "label_inactive": "Sweep Auto OFF",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": ":SENSe:SWEep:TIME:AUTO OFF"
+              }
+            }
+          },
+          "Toggle_Video_Bandwidth_Auto": {
+            "type": "OcaBlock",
+            "description": "VBW Auto Switches",
+            "fields": {
+              "do_Video_Bandwidth_Auto_ON": {
+                "type": "_GuiActuator",
+                "label_active": "VBW Auto ON",
+                "label_inactive": "VBW Auto ON",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": ":SENSe:BANDwidth:VIDeo:AUTO ON"
+              },
+              "do_Video_Bandwidth_Auto_OFF": {
+                "type": "_GuiActuator",
+                "label_active": "VBW Auto OFF",
+                "label_inactive": "VBW Auto OFF",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": ":SENSe:BANDwidth:VIDeo:AUTO OFF"
+              }
+            }
+          },
+          "Toggle_Resolution_Bandwidth_Auto": {
+            "type": "OcaBlock",
+            "description": "RBW Auto Switches",
+            "fields": {
+              "Set_Resolution_Bandwidth_Auto_ON": {
+                "type": "_GuiActuator",
+                "label_active": "RBW Auto ON",
+                "label_inactive": "RBW Auto ON",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": ":SENSe:BANDwidth:RESolution:AUTO ON"
+              },
+              "Set_Resolution_Bandwidth_Auto_OFF": {
+                "type": "_GuiActuator",
+                "label_active": "RBW Auto OFF",
+                "label_inactive": "RBW Auto OFF",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": ":SENSe:BANDwidth:RESolution:AUTO OFF"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

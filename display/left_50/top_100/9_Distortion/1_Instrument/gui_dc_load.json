@@ -1,0 +1,15 @@
+{
+  "Distortion_Instrument": {
+    "type": "OcaBin",
+    "id": "50.100.9.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {}
+  }
+}

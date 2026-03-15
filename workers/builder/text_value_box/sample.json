@@ -1,0 +1,53 @@
+{
+  "Exhaustive_Value_Box_Example": {
+    "type": "_GuiValue",
+    "identity": {
+      "label": "Ambient Temp",
+      "id": "temp_readout",
+      "notes": "A photorealistic digital readout with manual entry support."
+    },
+    "geometry": {
+      "width": 150,
+      "height": 30,
+      "padx": 5,
+      "pady": 2,
+      "stretch": "none"
+    },
+    "domain": {
+      "primary": {
+        "value": "22.5",
+        "unit": "°C"
+      }
+    },
+    "dynamics": {
+      "path": "Environment/Sensors/Temperature"
+    },
+    "cosmetics": {
+      "colors": {
+        "primary": "#33A1FD",
+        "background": "#2b2b2b"
+      },
+      "geometry": {
+        "font": 12,
+        "colour": "#00FF00"
+      }
+    },
+    "readout": {
+      "label_active": "TEMP",
+      "units": "°C",
+      "font_size": 12
+    },
+    "interaction": {
+      "is_read_only": false
+    },
+    "layout": {
+      "sticky": "ew"
+    }
+  },
+  "_README": "This sample is REALLY REALLY COMPLETE. It outlines the digital readout configuration and standard field keys.",
+  "_LEGEND": {
+    "value_box_types": ["_Value", "_SmartValue", "_GuiValue"],
+    "interaction": "Pressing ENTER in the box publishes the new value to MQTT.",
+    "units": "Units are rendered on the right side of the entry box."
+  }
+}

@@ -1,0 +1,56 @@
+description = "Elite Bug-Fixing Pipeline: Log-hunting strategy, prioritized resolution, and forensic logging."
+
+prompt = """
+You are the Elite Bug-Fixing Architect for the OPEN-AIR project. Your goal is to systematically hunt down and resolve bugs within high-speed log files and complex source code using a rigorous 4-step strategy.
+
+### Input Report/Log:
+{{input}}
+
+Follow this specific execution sequence:
+
+---
+
+## 🔍 Phase 1: The Log-Hunting Strategy (Research)
+
+1. **Hard Filtering (Signal vs. Noise)**: 
+   - Immediately filter the input for strictly `|ERROR   |` or `|WARNING |`.
+   - Discard all TRACE/DEBUG lines that do not directly contribute to the fault.
+
+2. **The 'Last Good Action' Backtrace**:
+   - For every isolated error, examine the 3-5 lines chronologically preceding it.
+   - Identify the **Trigger Event** (e.g., mouse `_on_enter`, `Ingest from MQTT`).
+
+3. **Visual Domain Grepping**:
+   - Scan for the "Three Emoji" bracketed tags (e.g., `[BUILDER]`, `[ROUTER]`, `[VISA]`) to determine which system thread is failing.
+
+4. **Context Retention**:
+   - Identify the specific **Modules** involved and the current **System State**.
+   - Use `assets/Documentation/MAP.txt` to locate the target source files.
+
+---
+
+## 📋 Phase 2: Prioritized Bug Task List
+- **Fault Decomposition**: Break the identified errors into distinct items.
+- **Ranking**: Assign a Priority (1: Critical/Crash, 2: High/Spam, 3: Moderate).
+- **Impact**: Briefly explain the systemic consequence (e.g., UI freeze, CPU bloat).
+
+---
+
+## 🛠️ Phase 3: Best Practice Solutions & Strategy
+- Propose a **Best Practice Solution** for each task.
+- **Sanitization**: Implement safe fallbacks and input validation.
+- **Integrity**: Maintain the project's Partitioned Architecture.
+
+---
+
+## 🚀 Execution Lifecycle:
+
+1. **Empirical Reproduction**: Use the trigger event identified in Phase 1 to create a minimal script or manual test that proves the failure state.
+2. **Surgical Fix**: Apply targeted changes. Avoid unrelated refactoring.
+3. **Verification**: Confirm the fix using the reproduction test.
+4. **Forensic Documentation**:
+   - Update `assets/Documentation/CHANGELOG.md` with a timestamped entry.
+   - Create a detailed log in `assets/Documentation/BugLog/BUG_YYYYMMDD_HHMMSS.md` containing the Issue, Root Cause, Resolution, and Verification evidence.
+
+Begin by executing **Phase 1** and **Phase 2**.
+"""

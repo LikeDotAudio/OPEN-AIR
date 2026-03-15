@@ -1,0 +1,1902 @@
+{
+  "Zoo_Knobs_panner": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Panner_Petting_Zoo": {
+        "type": "OcaBlock",
+        "description": "Panner Variations (8 Demos)",
+        "layout_columns": 4,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "stereo_pan_center": {
+            "type": "_SmartKnob",
+            "label": "Pan L/R",
+            "notes": "Standard stereo panner, centered.",
+            "geometry": {
+              "width": 50,
+              "height": 50,
+              "orientation": "vert"
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00BFFF",
+                "secondary": "#ADD8E6"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  -100,
+                  -50,
+                  0,
+                  50,
+                  100
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#007acc",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "%"
+          },
+          "pan_left_latching": {
+            "type": "_SmartKnob",
+            "label": "Pan Left",
+            "notes": "Latching left pan.",
+            "geometry": {
+              "width": 60,
+              "height": 60,
+              "orientation": "vert"
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF8A80",
+                "secondary": "#F8BBD0"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  -100,
+                  -75,
+                  -50,
+                  -25,
+                  0
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 0.0,
+                "value_default": -50.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#E91E63",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "%",
+            "latching": true
+          },
+          "pan_right_momentary": {
+            "type": "_SmartKnob",
+            "label": "Pan Right",
+            "notes": "Momentary right pan.",
+            "geometry": {
+              "width": 70,
+              "height": 70,
+              "orientation": "vert"
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#BBDEFB",
+                "secondary": "#BBDEFB"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  25,
+                  50,
+                  75,
+                  100
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#2196F3",
+            "tick_size": 0.25,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "%",
+            "latching": false
+          },
+          "width_latching": {
+            "type": "_SmartKnob",
+            "label": "Width",
+            "notes": "Latching stereo width.",
+            "geometry": {
+              "width": 80,
+              "height": 80,
+              "orientation": "vert"
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#E1BEE7",
+                "secondary": "#E1BEE7"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  50,
+                  100,
+                  150,
+                  200
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 200.0,
+                "value_default": 100.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#9C27B0",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "%",
+            "latching": true
+          },
+          "balance_momentary": {
+            "type": "_SmartKnob",
+            "label": "Balance",
+            "notes": "Momentary balance control.",
+            "geometry": {
+              "width": 50,
+              "height": 50,
+              "orientation": "vert"
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#8BC34A",
+                "secondary": "#DCEDC8"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  -100,
+                  -50,
+                  0,
+                  50,
+                  100
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#4CAF50",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": false,
+            "latching": false
+          },
+          "spread_latching": {
+            "type": "_SmartKnob",
+            "label": "Spread",
+            "notes": "Latching spread control.",
+            "geometry": {
+              "width": 70,
+              "height": 70,
+              "orientation": "vert"
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFAB40",
+                "secondary": "#FFCCBC"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  25,
+                  50,
+                  75,
+                  100
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 75.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#FF9800",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": false,
+            "latching": true
+          },
+          "azimuth_momentary": {
+            "type": "_SmartKnob",
+            "label": "Azimuth",
+            "notes": "Momentary azimuth angle.",
+            "geometry": {
+              "width": 60,
+              "height": 60,
+              "orientation": "vert"
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#B2DFDB",
+                "secondary": "#B2DFDB"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  90,
+                  180,
+                  270,
+                  360
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 360.0,
+                "value_default": 45.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#00BCD4",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "\u00b0",
+            "latching": false
+          },
+          "elevation_latching": {
+            "type": "_SmartKnob",
+            "label": "Elevation",
+            "notes": "Latching elevation angle.",
+            "geometry": {
+              "width": 70,
+              "height": 70,
+              "orientation": "vert"
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#E1BEE7",
+                "secondary": "#E1BEE7"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  -90,
+                  -45,
+                  0,
+                  45,
+                  90
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -90.0,
+                "max": 90.0,
+                "value_default": 10.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#9C27B0",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "\u00b0",
+            "latching": true
+          }
+        }
+      },
+      "Panner_Aux1_Variations": {
+        "type": "OcaBlock",
+        "description": "Auxiliary Panner Variations (8 Demos)",
+        "layout_columns": 4,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "aux1_pan_center": {
+            "type": "_SmartKnob",
+            "label": "Aux 1 Pan",
+            "notes": "Standard stereo pan, centered.",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#00BFFF",
+                "secondary": "#ADD8E6"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  -100,
+                  -50,
+                  0,
+                  50,
+                  100
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#007acc",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "%"
+          },
+          "aux1_pan_left": {
+            "type": "_SmartKnob",
+            "label": "Aux 1 L",
+            "notes": "Left-biased pan.",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF8A80",
+                "secondary": "#F8BBD0"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  -100,
+                  -75,
+                  -50,
+                  -25,
+                  0
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 0.0,
+                "value_default": -50.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#E91E63",
+            "tick_size": 0.25,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "%"
+          },
+          "aux1_pan_right": {
+            "type": "_SmartKnob",
+            "label": "Aux 1 R",
+            "notes": "Right-biased pan.",
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#BBDEFB",
+                "secondary": "#BBDEFB"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  25,
+                  50,
+                  75,
+                  100
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 50.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#2196F3",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "%"
+          },
+          "aux1_width_latching": {
+            "type": "_SmartKnob",
+            "label": "Width",
+            "notes": "Latching stereo width.",
+            "geometry": {
+              "width": 80,
+              "height": 80
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#8BC34A",
+                "secondary": "#DCEDC8"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  25,
+                  50,
+                  75,
+                  100
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 100.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#4CAF50",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "%",
+            "latching": true
+          },
+          "aux1_balance_momentary": {
+            "type": "_SmartKnob",
+            "label": "Balance",
+            "notes": "Momentary balance control.",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFCCBC",
+                "secondary": "#FFCCBC"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  -100,
+                  -50,
+                  0,
+                  50,
+                  100
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#FF9800",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": false,
+            "latching": false
+          },
+          "aux1_spread_latching": {
+            "type": "_SmartKnob",
+            "label": "Spread",
+            "notes": "Latching spread control.",
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#E1BEE7",
+                "secondary": "#E1BEE7"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  25,
+                  50,
+                  75,
+                  100
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 75.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#9C27B0",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": false,
+            "latching": true
+          },
+          "aux1_azimuth_momentary": {
+            "type": "_SmartKnob",
+            "label": "Azimuth",
+            "notes": "Momentary azimuth angle.",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#B2DFDB",
+                "secondary": "#B2DFDB"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  90,
+                  180,
+                  270,
+                  360
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 360.0,
+                "value_default": 45.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#00BCD4",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "\u00b0",
+            "latching": false
+          },
+          "aux1_elevation_latching": {
+            "type": "_SmartKnob",
+            "label": "Elevation",
+            "notes": "Latching elevation angle.",
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#D7CCC8",
+                "secondary": "#D7CCC8"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  -90,
+                  -45,
+                  0,
+                  45,
+                  90
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -90.0,
+                "max": 90.0,
+                "value_default": 10.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#795548",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "\u00b0",
+            "latching": true
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label_active": "Aux 2 Pan",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartKnob",
+            "label": "Aux 2 Pan",
+            "notes": "Panner with a default position to the right.",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#ce9178"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -64.0,
+                "max": 64.0,
+                "value_default": 32.0,
+                "reff_point": 50.0
+              }
+            }
+          }
+        }
+      },
+      "Panner_Ambience_Variations": {
+        "type": "OcaBlock",
+        "description": "Ambience & Spatial Panner Variations (8 Demos)",
+        "layout_columns": 4,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "ambience_standard_width": {
+            "type": "_SmartKnob",
+            "label": "Width",
+            "notes": "Standard stereo width.",
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#85c1e9",
+                "secondary": "#cce5f9"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  25,
+                  50,
+                  75,
+                  100
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 100.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#3498db",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "%"
+          },
+          "ambience_narrow_momentary": {
+            "type": "_SmartKnob",
+            "label": "Narrow",
+            "notes": "Narrower width control.",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#ff7675",
+                "secondary": "#f8bbd0"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  10,
+                  20,
+                  30,
+                  40,
+                  50
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 50.0,
+                "value_default": 25.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#e74c3c",
+            "tick_size": 0.25,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "%"
+          },
+          "ambience_wide_latching": {
+            "type": "_SmartKnob",
+            "label": "Wide",
+            "notes": "Wider stereo spread.",
+            "geometry": {
+              "width": 80,
+              "height": 80
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#8BC34A",
+                "secondary": "#DCEDC8"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  50,
+                  75,
+                  100,
+                  125,
+                  150
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 50.0,
+                "max": 150.0,
+                "value_default": 100.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#4CAF50",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "%",
+            "latching": true
+          },
+          "ambience_full_momentary": {
+            "type": "_SmartKnob",
+            "label": "Full",
+            "notes": "Full L/R pan range.",
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#E1BEE7",
+                "secondary": "#E1BEE7"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  -100,
+                  -50,
+                  0,
+                  50,
+                  100
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#9C27B0",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "%",
+            "latching": false
+          },
+          "balance_latching": {
+            "type": "_SmartKnob",
+            "label": "Balance",
+            "notes": "Latching balance control.",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FFCCBC",
+                "secondary": "#FFCCBC"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  -100,
+                  -50,
+                  0,
+                  50,
+                  100
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -100.0,
+                "max": 100.0,
+                "value_default": 0.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#FF9800",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": false,
+            "latching": true
+          },
+          "depth_momentary": {
+            "type": "_SmartKnob",
+            "label": "Depth",
+            "notes": "Momentary depth control.",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#B2DFDB",
+                "secondary": "#B2DFDB"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  25,
+                  50,
+                  75,
+                  100
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 100.0,
+                "value_default": 75.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#00BCD4",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "%",
+            "latching": false
+          },
+          "azimuth_latching": {
+            "type": "_SmartKnob",
+            "label": "Azimuth",
+            "notes": "Latching azimuth angle.",
+            "geometry": {
+              "width": 70,
+              "height": 70
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#E1BEE7",
+                "secondary": "#E1BEE7"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  0,
+                  90,
+                  180,
+                  270,
+                  360
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": 0.0,
+                "max": 360.0,
+                "value_default": 45.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#9C27B0",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "\u00b0",
+            "latching": true
+          },
+          "elevation_momentary": {
+            "type": "_SmartKnob",
+            "label": "Elevation",
+            "notes": "Momentary elevation angle.",
+            "geometry": {
+              "width": 50,
+              "height": 50
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "show_value": true,
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#D7CCC8",
+                "secondary": "#D7CCC8"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "style_overrides": {
+                "custom_ticks": [
+                  -90,
+                  -45,
+                  0,
+                  45,
+                  90
+                ]
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -90.0,
+                "max": 90.0,
+                "value_default": 10.0,
+                "reff_point": 50.0
+              }
+            },
+            "color": "#795548",
+            "tick_size": 0.2,
+            "value_text_inside": true,
+            "show_units": true,
+            "unit_text": "\u00b0",
+            "latching": false
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label_active": "FX Send",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartKnob",
+            "label": "FX Send",
+            "notes": "Compact panner starting at its extreme left position.",
+            "geometry": {
+              "width": 40,
+              "height": 50,
+              "alpha": 0.9
+            },
+            "interaction": {
+              "is_read_only": false,
+              "infinity": false,
+              "fine_pitch": false
+            },
+            "readout": {
+              "text_inside": false,
+              "label_position": "top"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#7d7d7d"
+              },
+              "style_flags": {
+                "show_grid": false,
+                "show_label": true
+              },
+              "visualization": "circle",
+              "pointer": {
+                "style": "line",
+                "length": null,
+                "offset": 0
+              },
+              "scale": {
+                "style": "simple",
+                "length": 10
+              },
+              "styling": {
+                "gradient": 0,
+                "teeth": 8,
+                "outline_thickness": 0,
+                "outline_color": "#444444",
+                "fill_color": "",
+                "arc_width": 5,
+                "no_center": false
+              }
+            },
+            "domain": {
+              "primary": {
+                "min": -50.0,
+                "max": 50.0,
+                "value_default": -50.0,
+                "reff_point": 50.0
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

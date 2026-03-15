@@ -1,0 +1,41 @@
+{
+  "Zoo_Data_tree_view": {
+    "type": "OcaBin",
+    "id": "50.90.9.7.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "JSON_Tree_Viewer_Demo": {
+        "type": "OcaBlock",
+        "description": "Demonstration of the JSON Tree Viewer widget.",
+        "layout_columns": 1,
+        "fields": {
+          "AES70_Dataset": {
+            "type": "_JsonTree",
+            "label_active": "AES70 Object Model (data_AES70.json)",
+            "json_source": "display/right_50/bottom_90/10_datasets/3_AES70/data_AES70.json",
+            "allow_filter": true
+          },
+          "Application_Config": {
+            "type": "JsonTree",
+            "label_active": "Dataset Configuration Application",
+            "json_source": "display/right_50/bottom_90/10_datasets/dataset_configuration_application.json",
+            "allow_filter": true
+          },
+          "Browse_Example": {
+            "type": "JsonTree",
+            "label_active": "File Browser",
+            "allow_browse": true,
+            "allow_filter": true
+          }
+        }
+      }
+    }
+  }
+}

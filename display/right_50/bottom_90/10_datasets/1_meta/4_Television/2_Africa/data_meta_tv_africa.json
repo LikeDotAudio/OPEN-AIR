@@ -1,0 +1,1769 @@
+{
+  "VHF (System N) South America": {
+    "name": "VHF (System N) South America",
+    "description": "VHF (Band I & III) for Argentina, Paraguay and Uruguay (System N 625 lines)",
+    "country": "Argentina, Paraguay, Uruguay",
+    "region": "South America",
+    "type": "tv",
+    "id": "vhf_system_n_south_america",
+    "system": "System N 625 lines",
+    "start_frequency_mhz": 44.0,
+    "stop_frequency_mhz": 216.0,
+    "channels": {
+      "1": {
+        "channel": "1",
+        "start_frequency_mhz": 44.0,
+        "stop_frequency_mhz": 50.0,
+        "video_carrier_mhz": 45.25,
+        "audio_carrier_mhz": 49.75,
+        "isdb_t_center_mhz": 47.142857
+      },
+      "2": {
+        "channel": "2",
+        "start_frequency_mhz": 54.0,
+        "stop_frequency_mhz": 60.0,
+        "video_carrier_mhz": 55.25,
+        "audio_carrier_mhz": 59.75,
+        "isdb_t_center_mhz": 57.142857
+      },
+      "3": {
+        "channel": "3",
+        "start_frequency_mhz": 60.0,
+        "stop_frequency_mhz": 66.0,
+        "video_carrier_mhz": 61.25,
+        "audio_carrier_mhz": 65.75,
+        "isdb_t_center_mhz": 63.142857
+      },
+      "4": {
+        "channel": "4",
+        "start_frequency_mhz": 66.0,
+        "stop_frequency_mhz": 72.0,
+        "video_carrier_mhz": 67.25,
+        "audio_carrier_mhz": 71.75,
+        "isdb_t_center_mhz": 69.142857
+      },
+      "5": {
+        "channel": "5",
+        "start_frequency_mhz": 76.0,
+        "stop_frequency_mhz": 82.0,
+        "video_carrier_mhz": 77.25,
+        "audio_carrier_mhz": 81.75,
+        "isdb_t_center_mhz": 79.142857
+      },
+      "6": {
+        "channel": "6",
+        "start_frequency_mhz": 82.0,
+        "stop_frequency_mhz": 88.0,
+        "video_carrier_mhz": 83.25,
+        "audio_carrier_mhz": 87.75,
+        "isdb_t_center_mhz": 85.142857
+      },
+      "7": {
+        "channel": "7",
+        "start_frequency_mhz": 174.0,
+        "stop_frequency_mhz": 180.0,
+        "video_carrier_mhz": 175.25,
+        "audio_carrier_mhz": 179.75,
+        "isdb_t_center_mhz": 177.142857
+      },
+      "8": {
+        "channel": "8",
+        "start_frequency_mhz": 180.0,
+        "stop_frequency_mhz": 186.0,
+        "video_carrier_mhz": 181.25,
+        "audio_carrier_mhz": 185.75,
+        "isdb_t_center_mhz": 183.142857
+      },
+      "9": {
+        "channel": "9",
+        "start_frequency_mhz": 186.0,
+        "stop_frequency_mhz": 192.0,
+        "video_carrier_mhz": 187.25,
+        "audio_carrier_mhz": 191.75,
+        "isdb_t_center_mhz": 189.142857
+      },
+      "10": {
+        "channel": "10",
+        "start_frequency_mhz": 192.0,
+        "stop_frequency_mhz": 198.0,
+        "video_carrier_mhz": 193.25,
+        "audio_carrier_mhz": 197.75,
+        "isdb_t_center_mhz": 195.142857
+      },
+      "11": {
+        "channel": "11",
+        "start_frequency_mhz": 198.0,
+        "stop_frequency_mhz": 204.0,
+        "video_carrier_mhz": 199.25,
+        "audio_carrier_mhz": 203.75,
+        "isdb_t_center_mhz": 201.142857
+      },
+      "12": {
+        "channel": "12",
+        "start_frequency_mhz": 204.0,
+        "stop_frequency_mhz": 210.0,
+        "video_carrier_mhz": 205.25,
+        "audio_carrier_mhz": 209.75,
+        "isdb_t_center_mhz": 207.142857
+      },
+      "13": {
+        "channel": "13",
+        "start_frequency_mhz": 210.0,
+        "stop_frequency_mhz": 216.0,
+        "video_carrier_mhz": 211.25,
+        "audio_carrier_mhz": 215.75,
+        "isdb_t_center_mhz": 213.142857
+      }
+    }
+  },
+  "VHF (System K) French Overseas Territories and former French African Colonies": {
+    "name": "VHF (System K) French Overseas Territories and former French African Colonies",
+    "description": "VHF for French Overseas Territories and former French African Colonies (System K 625 lines)",
+    "country": "French Overseas Territories and former French African Colonies",
+    "region": "Africa",
+    "type": "tv",
+    "id": "vhf_system_k_french_overseas",
+    "system": "System K 625 lines",
+    "start_frequency_mhz": 52.25,
+    "stop_frequency_mhz": 229.75,
+    "channels": {
+      "K2": {
+        "channel": "K2",
+        "start_frequency_mhz": 51.25,
+        "stop_frequency_mhz": 58.75,
+        "video_carrier_mhz": 52.25,
+        "audio_carrier_mhz": 58.75
+      },
+      "K3": {
+        "channel": "K3",
+        "start_frequency_mhz": 59.25,
+        "stop_frequency_mhz": 66.75,
+        "video_carrier_mhz": 60.25,
+        "audio_carrier_mhz": 66.75
+      },
+      "K4": {
+        "channel": "K4",
+        "start_frequency_mhz": 174.25,
+        "stop_frequency_mhz": 181.75,
+        "video_carrier_mhz": 175.25,
+        "audio_carrier_mhz": 181.75
+      },
+      "K5": {
+        "channel": "K5",
+        "start_frequency_mhz": 182.25,
+        "stop_frequency_mhz": 189.75,
+        "video_carrier_mhz": 183.25,
+        "audio_carrier_mhz": 189.75
+      },
+      "K6": {
+        "channel": "K6",
+        "start_frequency_mhz": 190.25,
+        "stop_frequency_mhz": 197.75,
+        "video_carrier_mhz": 191.25,
+        "audio_carrier_mhz": 197.75
+      },
+      "K7": {
+        "channel": "K7",
+        "start_frequency_mhz": 198.25,
+        "stop_frequency_mhz": 205.75,
+        "video_carrier_mhz": 199.25,
+        "audio_carrier_mhz": 205.75
+      },
+      "K8": {
+        "channel": "K8",
+        "start_frequency_mhz": 206.25,
+        "stop_frequency_mhz": 213.75,
+        "video_carrier_mhz": 207.25,
+        "audio_carrier_mhz": 213.75
+      },
+      "K9": {
+        "channel": "K9",
+        "start_frequency_mhz": 214.25,
+        "stop_frequency_mhz": 221.75,
+        "video_carrier_mhz": 215.25,
+        "audio_carrier_mhz": 221.75
+      },
+      "K10": {
+        "channel": "K10",
+        "start_frequency_mhz": 222.25,
+        "stop_frequency_mhz": 229.75,
+        "video_carrier_mhz": 223.25,
+        "audio_carrier_mhz": 229.75
+      }
+    }
+  },
+  "VHF (System I) Angola, Botswana, Lesotho, South Africa": {
+    "name": "VHF (System I) Angola, Botswana, Lesotho, South Africa",
+    "description": "VHF for Angola, Botswana, Lesotho, and South Africa (System I 625 lines)",
+    "country": "Angola, Botswana, Lesotho, South Africa",
+    "region": "Africa",
+    "type": "tv",
+    "id": "vhf_system_i_angola_botswana_lesotho_south_africa",
+    "system": "System I 625 lines",
+    "start_frequency_mhz": 175.25,
+    "stop_frequency_mhz": 253.25,
+    "channels": {
+      "1": {
+        "channel": "1",
+        "start_frequency_mhz": 42.25,
+        "stop_frequency_mhz": 49.25,
+        "video_carrier_mhz": 43.25,
+        "audio_carrier_mhz": 49.25,
+        "remarks": "Never used terrestrially"
+      },
+      "2": {
+        "channel": "2",
+        "start_frequency_mhz": 51.25,
+        "stop_frequency_mhz": 58.25,
+        "video_carrier_mhz": 52.25,
+        "audio_carrier_mhz": 58.25,
+        "remarks": "Never used terrestrially"
+      },
+      "3": {
+        "channel": "3",
+        "start_frequency_mhz": 59.25,
+        "stop_frequency_mhz": 66.25,
+        "video_carrier_mhz": 60.25,
+        "audio_carrier_mhz": 66.25,
+        "remarks": "Never used terrestrially"
+      },
+      "4": {
+        "channel": "4",
+        "start_frequency_mhz": 174.25,
+        "stop_frequency_mhz": 181.25,
+        "video_carrier_mhz": 175.25,
+        "audio_carrier_mhz": 181.25,
+        "remarks": "Identical to Irish Channel D"
+      },
+      "5": {
+        "channel": "5",
+        "start_frequency_mhz": 182.25,
+        "stop_frequency_mhz": 189.25,
+        "video_carrier_mhz": 183.25,
+        "audio_carrier_mhz": 189.25,
+        "remarks": "Identical to Irish Channel E"
+      },
+      "6": {
+        "channel": "6",
+        "start_frequency_mhz": 190.25,
+        "stop_frequency_mhz": 197.25,
+        "video_carrier_mhz": 191.25,
+        "audio_carrier_mhz": 197.25,
+        "remarks": "Identical to Irish Channel F"
+      },
+      "7": {
+        "channel": "7",
+        "start_frequency_mhz": 198.25,
+        "stop_frequency_mhz": 205.25,
+        "video_carrier_mhz": 199.25,
+        "audio_carrier_mhz": 205.25,
+        "remarks": "Identical to Irish Channel G"
+      },
+      "8": {
+        "channel": "8",
+        "start_frequency_mhz": 206.25,
+        "stop_frequency_mhz": 213.25,
+        "video_carrier_mhz": 207.25,
+        "audio_carrier_mhz": 213.25,
+        "remarks": "Identical to Irish Channel H"
+      },
+      "9": {
+        "channel": "9",
+        "start_frequency_mhz": 214.25,
+        "stop_frequency_mhz": 221.25,
+        "video_carrier_mhz": 215.25,
+        "audio_carrier_mhz": 221.25,
+        "remarks": "Identical to Irish Channel I"
+      },
+      "10": {
+        "channel": "10",
+        "start_frequency_mhz": 222.25,
+        "stop_frequency_mhz": 229.25,
+        "video_carrier_mhz": 223.25,
+        "audio_carrier_mhz": 229.25,
+        "remarks": "Identical to Irish Channel J"
+      },
+      "11": {
+        "channel": "11",
+        "start_frequency_mhz": 230.25,
+        "stop_frequency_mhz": 237.25,
+        "video_carrier_mhz": 231.25,
+        "audio_carrier_mhz": 237.25
+      },
+      "12": {
+        "channel": "12",
+        "start_frequency_mhz": 238.25,
+        "stop_frequency_mhz": 245.25,
+        "video_carrier_mhz": 239.25,
+        "audio_carrier_mhz": 245.25,
+        "remarks": "Never used terrestrially"
+      },
+      "13": {
+        "channel": "13",
+        "start_frequency_mhz": 246.25,
+        "stop_frequency_mhz": 253.25,
+        "video_carrier_mhz": 247.25,
+        "audio_carrier_mhz": 253.25
+      }
+    }
+  },
+  "UHF System I 625 lines (Falkland Islands) South America UHF": {
+    "name": "UHF System I 625 lines (Falkland Islands) South America UHF",
+    "description": "UHF System I 625 lines standard for Falkland Islands, South America (UHF)",
+    "country": "Falkland Islands",
+    "region": "South America",
+    "type": "tv",
+    "id": "uhf_system_i_625_lines_falkland_islands_south_america_uhf",
+    "system": "UHF System I 625 lines",
+    "start_frequency_mhz": 471.25,
+    "stop_frequency_mhz": 861.25,
+    "channels": {
+      "21": {
+        "channel": "21",
+        "start_frequency_mhz": 470.25,
+        "stop_frequency_mhz": 478.25,
+        "video_carrier_mhz": 471.25,
+        "audio_carrier_mhz": 477.25
+      },
+      "22": {
+        "channel": "22",
+        "start_frequency_mhz": 478.25,
+        "stop_frequency_mhz": 486.25,
+        "video_carrier_mhz": 479.25,
+        "audio_carrier_mhz": 485.25
+      },
+      "23": {
+        "channel": "23",
+        "start_frequency_mhz": 486.25,
+        "stop_frequency_mhz": 494.25,
+        "video_carrier_mhz": 487.25,
+        "audio_carrier_mhz": 493.25
+      },
+      "24": {
+        "channel": "24",
+        "start_frequency_mhz": 494.25,
+        "stop_frequency_mhz": 502.25,
+        "video_carrier_mhz": 495.25,
+        "audio_carrier_mhz": 501.25
+      },
+      "25": {
+        "channel": "25",
+        "start_frequency_mhz": 502.25,
+        "stop_frequency_mhz": 510.25,
+        "video_carrier_mhz": 503.25,
+        "audio_carrier_mhz": 509.25
+      },
+      "26": {
+        "channel": "26",
+        "start_frequency_mhz": 510.25,
+        "stop_frequency_mhz": 518.25,
+        "video_carrier_mhz": 511.25,
+        "audio_carrier_mhz": 517.25
+      },
+      "27": {
+        "channel": "27",
+        "start_frequency_mhz": 518.25,
+        "stop_frequency_mhz": 526.25,
+        "video_carrier_mhz": 519.25,
+        "audio_carrier_mhz": 525.25
+      },
+      "28": {
+        "channel": "28",
+        "start_frequency_mhz": 526.25,
+        "stop_frequency_mhz": 534.25,
+        "video_carrier_mhz": 527.25,
+        "audio_carrier_mhz": 533.25
+      },
+      "29": {
+        "channel": "29",
+        "start_frequency_mhz": 534.25,
+        "stop_frequency_mhz": 542.25,
+        "video_carrier_mhz": 535.25,
+        "audio_carrier_mhz": 541.25
+      },
+      "30": {
+        "channel": "30",
+        "start_frequency_mhz": 542.25,
+        "stop_frequency_mhz": 550.25,
+        "video_carrier_mhz": 543.25,
+        "audio_carrier_mhz": 549.25
+      },
+      "31": {
+        "channel": "31",
+        "start_frequency_mhz": 550.25,
+        "stop_frequency_mhz": 558.25,
+        "video_carrier_mhz": 551.25,
+        "audio_carrier_mhz": 557.25
+      },
+      "32": {
+        "channel": "32",
+        "start_frequency_mhz": 558.25,
+        "stop_frequency_mhz": 566.25,
+        "video_carrier_mhz": 559.25,
+        "audio_carrier_mhz": 565.25
+      },
+      "33": {
+        "channel": "33",
+        "start_frequency_mhz": 566.25,
+        "stop_frequency_mhz": 574.25,
+        "video_carrier_mhz": 567.25,
+        "audio_carrier_mhz": 573.25
+      },
+      "34": {
+        "channel": "34",
+        "start_frequency_mhz": 574.25,
+        "stop_frequency_mhz": 582.25,
+        "video_carrier_mhz": 575.25,
+        "audio_carrier_mhz": 581.25
+      },
+      "35": {
+        "channel": "35",
+        "start_frequency_mhz": 582.25,
+        "stop_frequency_mhz": 590.25,
+        "video_carrier_mhz": 583.25,
+        "audio_carrier_mhz": 589.25
+      },
+      "36": {
+        "channel": "36",
+        "start_frequency_mhz": 590.25,
+        "stop_frequency_mhz": 598.25,
+        "video_carrier_mhz": 591.25,
+        "audio_carrier_mhz": 597.25
+      },
+      "37": {
+        "channel": "37",
+        "start_frequency_mhz": 598.25,
+        "stop_frequency_mhz": 606.25,
+        "video_carrier_mhz": 599.25,
+        "audio_carrier_mhz": 605.25
+      },
+      "38": {
+        "channel": "38",
+        "start_frequency_mhz": 606.25,
+        "stop_frequency_mhz": 614.25,
+        "video_carrier_mhz": 607.25,
+        "audio_carrier_mhz": 613.25
+      },
+      "39": {
+        "channel": "39",
+        "start_frequency_mhz": 614.25,
+        "stop_frequency_mhz": 622.25,
+        "video_carrier_mhz": 615.25,
+        "audio_carrier_mhz": 621.25
+      },
+      "40": {
+        "channel": "40",
+        "start_frequency_mhz": 622.25,
+        "stop_frequency_mhz": 630.25,
+        "video_carrier_mhz": 623.25,
+        "audio_carrier_mhz": 629.25
+      },
+      "41": {
+        "channel": "41",
+        "start_frequency_mhz": 630.25,
+        "stop_frequency_mhz": 638.25,
+        "video_carrier_mhz": 631.25,
+        "audio_carrier_mhz": 637.25
+      },
+      "42": {
+        "channel": "42",
+        "start_frequency_mhz": 638.25,
+        "stop_frequency_mhz": 646.25,
+        "video_carrier_mhz": 639.25,
+        "audio_carrier_mhz": 645.25
+      },
+      "43": {
+        "channel": "43",
+        "start_frequency_mhz": 646.25,
+        "stop_frequency_mhz": 654.25,
+        "video_carrier_mhz": 647.25,
+        "audio_carrier_mhz": 653.25
+      },
+      "44": {
+        "channel": "44",
+        "start_frequency_mhz": 654.25,
+        "stop_frequency_mhz": 662.25,
+        "video_carrier_mhz": 655.25,
+        "audio_carrier_mhz": 661.25
+      },
+      "45": {
+        "channel": "45",
+        "start_frequency_mhz": 662.25,
+        "stop_frequency_mhz": 670.25,
+        "video_carrier_mhz": 663.25,
+        "audio_carrier_mhz": 669.25
+      },
+      "46": {
+        "channel": "46",
+        "start_frequency_mhz": 670.25,
+        "stop_frequency_mhz": 678.25,
+        "video_carrier_mhz": 671.25,
+        "audio_carrier_mhz": 677.25
+      },
+      "47": {
+        "channel": "47",
+        "start_frequency_mhz": 678.25,
+        "stop_frequency_mhz": 686.25,
+        "video_carrier_mhz": 679.25,
+        "audio_carrier_mhz": 685.25
+      },
+      "48": {
+        "channel": "48",
+        "start_frequency_mhz": 686.25,
+        "stop_frequency_mhz": 694.25,
+        "video_carrier_mhz": 687.25,
+        "audio_carrier_mhz": 693.25
+      },
+      "49": {
+        "channel": "49",
+        "start_frequency_mhz": 694.25,
+        "stop_frequency_mhz": 702.25,
+        "video_carrier_mhz": 695.25,
+        "audio_carrier_mhz": 701.25
+      },
+      "50": {
+        "channel": "50",
+        "start_frequency_mhz": 702.25,
+        "stop_frequency_mhz": 710.25,
+        "video_carrier_mhz": 703.25,
+        "audio_carrier_mhz": 709.25
+      },
+      "51": {
+        "channel": "51",
+        "start_frequency_mhz": 710.25,
+        "stop_frequency_mhz": 718.25,
+        "video_carrier_mhz": 711.25,
+        "audio_carrier_mhz": 717.25
+      },
+      "52": {
+        "channel": "52",
+        "start_frequency_mhz": 718.25,
+        "stop_frequency_mhz": 726.25,
+        "video_carrier_mhz": 719.25,
+        "audio_carrier_mhz": 725.25
+      },
+      "53": {
+        "channel": "53",
+        "start_frequency_mhz": 726.25,
+        "stop_frequency_mhz": 734.25,
+        "video_carrier_mhz": 727.25,
+        "audio_carrier_mhz": 733.25
+      },
+      "54": {
+        "channel": "54",
+        "start_frequency_mhz": 734.25,
+        "stop_frequency_mhz": 742.25,
+        "video_carrier_mhz": 735.25,
+        "audio_carrier_mhz": 741.25
+      },
+      "55": {
+        "channel": "55",
+        "start_frequency_mhz": 742.25,
+        "stop_frequency_mhz": 750.25,
+        "video_carrier_mhz": 743.25,
+        "audio_carrier_mhz": 749.25
+      },
+      "56": {
+        "channel": "56",
+        "start_frequency_mhz": 750.25,
+        "stop_frequency_mhz": 758.25,
+        "video_carrier_mhz": 751.25,
+        "audio_carrier_mhz": 757.25
+      },
+      "57": {
+        "channel": "57",
+        "start_frequency_mhz": 758.25,
+        "stop_frequency_mhz": 766.25,
+        "video_carrier_mhz": 759.25,
+        "audio_carrier_mhz": 765.25
+      },
+      "58": {
+        "channel": "58",
+        "start_frequency_mhz": 766.25,
+        "stop_frequency_mhz": 774.25,
+        "video_carrier_mhz": 767.25,
+        "audio_carrier_mhz": 773.25
+      },
+      "59": {
+        "channel": "59",
+        "start_frequency_mhz": 774.25,
+        "stop_frequency_mhz": 782.25,
+        "video_carrier_mhz": 775.25,
+        "audio_carrier_mhz": 781.25
+      },
+      "60": {
+        "channel": "60",
+        "start_frequency_mhz": 782.25,
+        "stop_frequency_mhz": 790.25,
+        "video_carrier_mhz": 783.25,
+        "audio_carrier_mhz": 789.25
+      },
+      "61": {
+        "channel": "61",
+        "start_frequency_mhz": 790.25,
+        "stop_frequency_mhz": 798.25,
+        "video_carrier_mhz": 791.25,
+        "audio_carrier_mhz": 797.75
+      },
+      "62": {
+        "channel": "62",
+        "start_frequency_mhz": 798.25,
+        "stop_frequency_mhz": 806.25,
+        "video_carrier_mhz": 799.25,
+        "audio_carrier_mhz": 805.75
+      },
+      "63": {
+        "channel": "63",
+        "start_frequency_mhz": 806.25,
+        "stop_frequency_mhz": 814.25,
+        "video_carrier_mhz": 807.25,
+        "audio_carrier_mhz": 813.25
+      },
+      "64": {
+        "channel": "64",
+        "start_frequency_mhz": 814.25,
+        "stop_frequency_mhz": 822.25,
+        "video_carrier_mhz": 815.25,
+        "audio_carrier_mhz": 821.25
+      },
+      "65": {
+        "channel": "65",
+        "start_frequency_mhz": 822.25,
+        "stop_frequency_mhz": 830.25,
+        "video_carrier_mhz": 823.25,
+        "audio_carrier_mhz": 829.25
+      },
+      "66": {
+        "channel": "66",
+        "start_frequency_mhz": 830.25,
+        "stop_frequency_mhz": 838.25,
+        "video_carrier_mhz": 831.25,
+        "audio_carrier_mhz": 837.25
+      },
+      "67": {
+        "channel": "67",
+        "start_frequency_mhz": 838.25,
+        "stop_frequency_mhz": 846.25,
+        "video_carrier_mhz": 839.25,
+        "audio_carrier_mhz": 845.25
+      },
+      "68": {
+        "channel": "68",
+        "start_frequency_mhz": 846.25,
+        "stop_frequency_mhz": 854.25,
+        "video_carrier_mhz": 847.25,
+        "audio_carrier_mhz": 853.25
+      },
+      "69": {
+        "channel": "69",
+        "start_frequency_mhz": 854.25,
+        "stop_frequency_mhz": 862.25,
+        "video_carrier_mhz": 855.25,
+        "audio_carrier_mhz": 861.25
+      }
+    }
+  },
+  "UHF System G/H 625 lines (Most countries in Africa) Africa UHF": {
+    "name": "UHF System G/H 625 lines (Most countries in Africa) Africa UHF",
+    "description": "UHF System G/H 625 lines standard for Most countries in Africa, UHF",
+    "country": "Most countries in Africa",
+    "region": "Africa",
+    "type": "tv",
+    "id": "uhf_system_g_h_625_lines_most_countries_in_africa_africa_uhf",
+    "system": "UHF System G/H 625 lines",
+    "start_frequency_mhz": 471.25,
+    "stop_frequency_mhz": 956.75,
+    "channels": {
+      "21": {
+        "channel": "21",
+        "start_frequency_mhz": 470.25,
+        "stop_frequency_mhz": 478.25,
+        "video_carrier_mhz": 471.25,
+        "audio_carrier_mhz": 476.75
+      },
+      "22": {
+        "channel": "22",
+        "start_frequency_mhz": 478.25,
+        "stop_frequency_mhz": 486.25,
+        "video_carrier_mhz": 479.25,
+        "audio_carrier_mhz": 484.75
+      },
+      "23": {
+        "channel": "23",
+        "start_frequency_mhz": 486.25,
+        "stop_frequency_mhz": 494.25,
+        "video_carrier_mhz": 487.25,
+        "audio_carrier_mhz": 492.75
+      },
+      "24": {
+        "channel": "24",
+        "start_frequency_mhz": 494.25,
+        "stop_frequency_mhz": 502.25,
+        "video_carrier_mhz": 495.25,
+        "audio_carrier_mhz": 500.75
+      },
+      "25": {
+        "channel": "25",
+        "start_frequency_mhz": 502.25,
+        "stop_frequency_mhz": 510.25,
+        "video_carrier_mhz": 503.25,
+        "audio_carrier_mhz": 508.75
+      },
+      "26": {
+        "channel": "26",
+        "start_frequency_mhz": 510.25,
+        "stop_frequency_mhz": 518.25,
+        "video_carrier_mhz": 511.25,
+        "audio_carrier_mhz": 516.75
+      },
+      "27": {
+        "channel": "27",
+        "start_frequency_mhz": 518.25,
+        "stop_frequency_mhz": 526.25,
+        "video_carrier_mhz": 519.25,
+        "audio_carrier_mhz": 524.75
+      },
+      "28": {
+        "channel": "28",
+        "start_frequency_mhz": 526.25,
+        "stop_frequency_mhz": 534.25,
+        "video_carrier_mhz": 527.25,
+        "audio_carrier_mhz": 532.75
+      },
+      "29": {
+        "channel": "29",
+        "start_frequency_mhz": 534.25,
+        "stop_frequency_mhz": 542.25,
+        "video_carrier_mhz": 535.25,
+        "audio_carrier_mhz": 540.75
+      },
+      "30": {
+        "channel": "30",
+        "start_frequency_mhz": 542.25,
+        "stop_frequency_mhz": 550.25,
+        "video_carrier_mhz": 543.25,
+        "audio_carrier_mhz": 548.75
+      },
+      "31": {
+        "channel": "31",
+        "start_frequency_mhz": 550.25,
+        "stop_frequency_mhz": 558.25,
+        "video_carrier_mhz": 551.25,
+        "audio_carrier_mhz": 556.75
+      },
+      "32": {
+        "channel": "32",
+        "start_frequency_mhz": 558.25,
+        "stop_frequency_mhz": 566.25,
+        "video_carrier_mhz": 559.25,
+        "audio_carrier_mhz": 564.75
+      },
+      "33": {
+        "channel": "33",
+        "start_frequency_mhz": 566.25,
+        "stop_frequency_mhz": 574.25,
+        "video_carrier_mhz": 567.25,
+        "audio_carrier_mhz": 572.75
+      },
+      "34": {
+        "channel": "34",
+        "start_frequency_mhz": 574.25,
+        "stop_frequency_mhz": 582.25,
+        "video_carrier_mhz": 575.25,
+        "audio_carrier_mhz": 580.75
+      },
+      "35": {
+        "channel": "35",
+        "start_frequency_mhz": 582.25,
+        "stop_frequency_mhz": 590.25,
+        "video_carrier_mhz": 583.25,
+        "audio_carrier_mhz": 588.75
+      },
+      "36": {
+        "channel": "36",
+        "start_frequency_mhz": 590.25,
+        "stop_frequency_mhz": 598.25,
+        "video_carrier_mhz": 591.25,
+        "audio_carrier_mhz": 596.75
+      },
+      "37": {
+        "channel": "37",
+        "start_frequency_mhz": 598.25,
+        "stop_frequency_mhz": 606.25,
+        "video_carrier_mhz": 599.25,
+        "audio_carrier_mhz": 604.75
+      },
+      "38": {
+        "channel": "38",
+        "start_frequency_mhz": 606.25,
+        "stop_frequency_mhz": 614.25,
+        "video_carrier_mhz": 607.25,
+        "audio_carrier_mhz": 612.75
+      },
+      "39": {
+        "channel": "39",
+        "start_frequency_mhz": 614.25,
+        "stop_frequency_mhz": 622.25,
+        "video_carrier_mhz": 615.25,
+        "audio_carrier_mhz": 620.75
+      },
+      "40": {
+        "channel": "40",
+        "start_frequency_mhz": 622.25,
+        "stop_frequency_mhz": 630.25,
+        "video_carrier_mhz": 623.25,
+        "audio_carrier_mhz": 628.75
+      },
+      "41": {
+        "channel": "41",
+        "start_frequency_mhz": 630.25,
+        "stop_frequency_mhz": 638.25,
+        "video_carrier_mhz": 631.25,
+        "audio_carrier_mhz": 636.75
+      },
+      "42": {
+        "channel": "42",
+        "start_frequency_mhz": 638.25,
+        "stop_frequency_mhz": 646.25,
+        "video_carrier_mhz": 639.25,
+        "audio_carrier_mhz": 645.25
+      },
+      "43": {
+        "channel": "43",
+        "start_frequency_mhz": 646.25,
+        "stop_frequency_mhz": 654.25,
+        "video_carrier_mhz": 647.25,
+        "audio_carrier_mhz": 653.25
+      },
+      "44": {
+        "channel": "44",
+        "start_frequency_mhz": 654.25,
+        "stop_frequency_mhz": 662.25,
+        "video_carrier_mhz": 655.25,
+        "audio_carrier_mhz": 660.75
+      },
+      "45": {
+        "channel": "45",
+        "start_frequency_mhz": 662.25,
+        "stop_frequency_mhz": 670.25,
+        "video_carrier_mhz": 663.25,
+        "audio_carrier_mhz": 669.25
+      },
+      "46": {
+        "channel": "46",
+        "start_frequency_mhz": 670.25,
+        "stop_frequency_mhz": 678.25,
+        "video_carrier_mhz": 671.25,
+        "audio_carrier_mhz": 677.25
+      },
+      "47": {
+        "channel": "47",
+        "start_frequency_mhz": 678.25,
+        "stop_frequency_mhz": 686.25,
+        "video_carrier_mhz": 679.25,
+        "audio_carrier_mhz": 685.25
+      },
+      "48": {
+        "channel": "48",
+        "start_frequency_mhz": 686.25,
+        "stop_frequency_mhz": 694.25,
+        "video_carrier_mhz": 687.25,
+        "audio_carrier_mhz": 692.75
+      },
+      "49": {
+        "channel": "49",
+        "start_frequency_mhz": 694.25,
+        "stop_frequency_mhz": 702.25,
+        "video_carrier_mhz": 695.25,
+        "audio_carrier_mhz": 700.75
+      },
+      "50": {
+        "channel": "50",
+        "start_frequency_mhz": 702.25,
+        "stop_frequency_mhz": 710.25,
+        "video_carrier_mhz": 703.25,
+        "audio_carrier_mhz": 708.75
+      },
+      "51": {
+        "channel": "51",
+        "start_frequency_mhz": 710.25,
+        "stop_frequency_mhz": 718.25,
+        "video_carrier_mhz": 711.25,
+        "audio_carrier_mhz": 716.75
+      },
+      "52": {
+        "channel": "52",
+        "start_frequency_mhz": 718.25,
+        "stop_frequency_mhz": 726.25,
+        "video_carrier_mhz": 719.25,
+        "audio_carrier_mhz": 724.75
+      },
+      "53": {
+        "channel": "53",
+        "start_frequency_mhz": 726.25,
+        "stop_frequency_mhz": 734.25,
+        "video_carrier_mhz": 727.25,
+        "audio_carrier_mhz": 732.75
+      },
+      "54": {
+        "channel": "54",
+        "start_frequency_mhz": 734.25,
+        "stop_frequency_mhz": 742.25,
+        "video_carrier_mhz": 735.25,
+        "audio_carrier_mhz": 741.25
+      },
+      "55": {
+        "channel": "55",
+        "start_frequency_mhz": 742.25,
+        "stop_frequency_mhz": 750.25,
+        "video_carrier_mhz": 743.25,
+        "audio_carrier_mhz": 748.75
+      },
+      "56": {
+        "channel": "56",
+        "start_frequency_mhz": 750.25,
+        "stop_frequency_mhz": 758.25,
+        "video_carrier_mhz": 751.25,
+        "audio_carrier_mhz": 756.75
+      },
+      "57": {
+        "channel": "57",
+        "start_frequency_mhz": 758.25,
+        "stop_frequency_mhz": 766.25,
+        "video_carrier_mhz": 759.25,
+        "audio_carrier_mhz": 764.75
+      },
+      "58": {
+        "channel": "58",
+        "start_frequency_mhz": 766.25,
+        "stop_frequency_mhz": 774.25,
+        "video_carrier_mhz": 767.25,
+        "audio_carrier_mhz": 773.25
+      },
+      "59": {
+        "channel": "59",
+        "start_frequency_mhz": 774.25,
+        "stop_frequency_mhz": 782.25,
+        "video_carrier_mhz": 775.25,
+        "audio_carrier_mhz": 780.75
+      },
+      "60": {
+        "channel": "60",
+        "start_frequency_mhz": 782.25,
+        "stop_frequency_mhz": 790.25,
+        "video_carrier_mhz": 783.25,
+        "audio_carrier_mhz": 788.75
+      },
+      "61": {
+        "channel": "61",
+        "start_frequency_mhz": 790.25,
+        "stop_frequency_mhz": 798.25,
+        "video_carrier_mhz": 791.25,
+        "audio_carrier_mhz": 796.75
+      },
+      "62": {
+        "channel": "62",
+        "start_frequency_mhz": 798.25,
+        "stop_frequency_mhz": 806.25,
+        "video_carrier_mhz": 799.25,
+        "audio_carrier_mhz": 804.75
+      },
+      "63": {
+        "channel": "63",
+        "start_frequency_mhz": 806.25,
+        "stop_frequency_mhz": 814.25,
+        "video_carrier_mhz": 807.25,
+        "audio_carrier_mhz": 812.75
+      },
+      "64": {
+        "channel": "64",
+        "start_frequency_mhz": 814.25,
+        "stop_frequency_mhz": 822.25,
+        "video_carrier_mhz": 815.25,
+        "audio_carrier_mhz": 821.25
+      },
+      "65": {
+        "channel": "65",
+        "start_frequency_mhz": 822.25,
+        "stop_frequency_mhz": 830.25,
+        "video_carrier_mhz": 823.25,
+        "audio_carrier_mhz": 829.25
+      },
+      "66": {
+        "channel": "66",
+        "start_frequency_mhz": 830.25,
+        "stop_frequency_mhz": 838.25,
+        "video_carrier_mhz": 831.25,
+        "audio_carrier_mhz": 837.25
+      },
+      "67": {
+        "channel": "67",
+        "start_frequency_mhz": 838.25,
+        "stop_frequency_mhz": 846.25,
+        "video_carrier_mhz": 839.25,
+        "audio_carrier_mhz": 844.75
+      },
+      "68": {
+        "channel": "68",
+        "start_frequency_mhz": 846.25,
+        "stop_frequency_mhz": 854.25,
+        "video_carrier_mhz": 847.25,
+        "audio_carrier_mhz": 853.25
+      },
+      "69": {
+        "channel": "69",
+        "start_frequency_mhz": 854.25,
+        "stop_frequency_mhz": 862.25,
+        "video_carrier_mhz": 855.25,
+        "audio_carrier_mhz": 861.25
+      },
+      "70": {
+        "channel": "70",
+        "start_frequency_mhz": 862.25,
+        "stop_frequency_mhz": 870.25,
+        "video_carrier_mhz": 863.25,
+        "audio_carrier_mhz": 868.75
+      },
+      "71": {
+        "channel": "71",
+        "start_frequency_mhz": 870.25,
+        "stop_frequency_mhz": 878.25,
+        "video_carrier_mhz": 871.25,
+        "audio_carrier_mhz": 876.75
+      },
+      "72": {
+        "channel": "72",
+        "start_frequency_mhz": 878.25,
+        "stop_frequency_mhz": 886.25,
+        "video_carrier_mhz": 879.25,
+        "audio_carrier_mhz": 884.75
+      },
+      "73": {
+        "channel": "73",
+        "start_frequency_mhz": 886.25,
+        "stop_frequency_mhz": 894.25,
+        "video_carrier_mhz": 887.25,
+        "audio_carrier_mhz": 892.75
+      },
+      "74": {
+        "channel": "74",
+        "start_frequency_mhz": 894.25,
+        "stop_frequency_mhz": 902.25,
+        "video_carrier_mhz": 895.25,
+        "audio_carrier_mhz": 900.75
+      },
+      "75": {
+        "channel": "75",
+        "start_frequency_mhz": 902.25,
+        "stop_frequency_mhz": 910.25,
+        "video_carrier_mhz": 903.25,
+        "audio_carrier_mhz": 908.75
+      },
+      "76": {
+        "channel": "76",
+        "start_frequency_mhz": 910.25,
+        "stop_frequency_mhz": 918.25,
+        "video_carrier_mhz": 911.25,
+        "audio_carrier_mhz": 916.75
+      },
+      "77": {
+        "channel": "77",
+        "start_frequency_mhz": 918.25,
+        "stop_frequency_mhz": 926.25,
+        "video_carrier_mhz": 919.25,
+        "audio_carrier_mhz": 924.75
+      },
+      "78": {
+        "channel": "78",
+        "start_frequency_mhz": 926.25,
+        "stop_frequency_mhz": 934.25,
+        "video_carrier_mhz": 927.25,
+        "audio_carrier_mhz": 932.75
+      },
+      "79": {
+        "channel": "79",
+        "start_frequency_mhz": 934.25,
+        "stop_frequency_mhz": 942.25,
+        "video_carrier_mhz": 935.25,
+        "audio_carrier_mhz": 940.75
+      },
+      "80": {
+        "channel": "80",
+        "start_frequency_mhz": 942.25,
+        "stop_frequency_mhz": 950.25,
+        "video_carrier_mhz": 943.25,
+        "audio_carrier_mhz": 948.75
+      },
+      "81": {
+        "channel": "81",
+        "start_frequency_mhz": 950.25,
+        "stop_frequency_mhz": 958.25,
+        "video_carrier_mhz": 951.25,
+        "audio_carrier_mhz": 956.75
+      }
+    }
+  },
+  "UHF System K & L 625 lines (French overseas territories and former French African colonies) Africa UHF": {
+    "name": "UHF System K & L 625 lines (French overseas territories and former French African colonies) Africa UHF",
+    "description": "UHF System K & L 625 lines standard for French overseas territories and former French African colonies, Africa (UHF)",
+    "country": "French overseas territories and former French African colonies",
+    "region": "Africa",
+    "type": "tv",
+    "id": "uhf_system_k_l_625_lines_french_overseas_territories_and_former_french_african_colonies_africa_uhf",
+    "system": "UHF System K & L 625 lines",
+    "start_frequency_mhz": 471.25,
+    "stop_frequency_mhz": 861.75,
+    "channels": {
+      "21": {
+        "channel": "21",
+        "start_frequency_mhz": 470.75,
+        "stop_frequency_mhz": 477.75,
+        "video_carrier_mhz": 471.25,
+        "audio_carrier_mhz": 477.75
+      },
+      "22": {
+        "channel": "22",
+        "start_frequency_mhz": 478.75,
+        "stop_frequency_mhz": 485.75,
+        "video_carrier_mhz": 479.25,
+        "audio_carrier_mhz": 485.75
+      },
+      "23": {
+        "channel": "23",
+        "start_frequency_mhz": 486.75,
+        "stop_frequency_mhz": 493.75,
+        "video_carrier_mhz": 487.25,
+        "audio_carrier_mhz": 493.75
+      },
+      "24": {
+        "channel": "24",
+        "start_frequency_mhz": 494.75,
+        "stop_frequency_mhz": 501.75,
+        "video_carrier_mhz": 495.25,
+        "audio_carrier_mhz": 501.75
+      },
+      "25": {
+        "channel": "25",
+        "start_frequency_mhz": 502.75,
+        "stop_frequency_mhz": 509.75,
+        "video_carrier_mhz": 503.25,
+        "audio_carrier_mhz": 509.75
+      },
+      "26": {
+        "channel": "26",
+        "start_frequency_mhz": 510.75,
+        "stop_frequency_mhz": 517.75,
+        "video_carrier_mhz": 511.25,
+        "audio_carrier_mhz": 517.75
+      },
+      "27": {
+        "channel": "27",
+        "start_frequency_mhz": 518.75,
+        "stop_frequency_mhz": 525.75,
+        "video_carrier_mhz": 519.25,
+        "audio_carrier_mhz": 525.75
+      },
+      "28": {
+        "channel": "28",
+        "start_frequency_mhz": 526.75,
+        "stop_frequency_mhz": 533.75,
+        "video_carrier_mhz": 527.25,
+        "audio_carrier_mhz": 533.75
+      },
+      "29": {
+        "channel": "29",
+        "start_frequency_mhz": 534.75,
+        "stop_frequency_mhz": 541.75,
+        "video_carrier_mhz": 535.25,
+        "audio_carrier_mhz": 541.75
+      },
+      "30": {
+        "channel": "30",
+        "start_frequency_mhz": 542.75,
+        "stop_frequency_mhz": 549.75,
+        "video_carrier_mhz": 543.25,
+        "audio_carrier_mhz": 549.75
+      },
+      "31": {
+        "channel": "31",
+        "start_frequency_mhz": 550.75,
+        "stop_frequency_mhz": 557.75,
+        "video_carrier_mhz": 551.25,
+        "audio_carrier_mhz": 557.75
+      },
+      "32": {
+        "channel": "32",
+        "start_frequency_mhz": 558.75,
+        "stop_frequency_mhz": 565.75,
+        "video_carrier_mhz": 559.25,
+        "audio_carrier_mhz": 565.75
+      },
+      "33": {
+        "channel": "33",
+        "start_frequency_mhz": 566.75,
+        "stop_frequency_mhz": 573.75,
+        "video_carrier_mhz": 567.25,
+        "audio_carrier_mhz": 573.75
+      },
+      "34": {
+        "channel": "34",
+        "start_frequency_mhz": 574.75,
+        "stop_frequency_mhz": 581.75,
+        "video_carrier_mhz": 575.25,
+        "audio_carrier_mhz": 581.75
+      },
+      "35": {
+        "channel": "35",
+        "start_frequency_mhz": 582.75,
+        "stop_frequency_mhz": 589.75,
+        "video_carrier_mhz": 583.25,
+        "audio_carrier_mhz": 589.75
+      },
+      "36": {
+        "channel": "36",
+        "start_frequency_mhz": 590.75,
+        "stop_frequency_mhz": 597.75,
+        "video_carrier_mhz": 591.25,
+        "audio_carrier_mhz": 597.75
+      },
+      "37": {
+        "channel": "37",
+        "start_frequency_mhz": 598.75,
+        "stop_frequency_mhz": 605.75,
+        "video_carrier_mhz": 599.25,
+        "audio_carrier_mhz": 605.75
+      },
+      "38": {
+        "channel": "38",
+        "start_frequency_mhz": 606.75,
+        "stop_frequency_mhz": 613.75,
+        "video_carrier_mhz": 607.25,
+        "audio_carrier_mhz": 613.75
+      },
+      "39": {
+        "channel": "39",
+        "start_frequency_mhz": 614.75,
+        "stop_frequency_mhz": 621.75,
+        "video_carrier_mhz": 615.25,
+        "audio_carrier_mhz": 621.75
+      },
+      "40": {
+        "channel": "40",
+        "start_frequency_mhz": 622.75,
+        "stop_frequency_mhz": 629.75,
+        "video_carrier_mhz": 623.25,
+        "audio_carrier_mhz": 629.75
+      },
+      "41": {
+        "channel": "41",
+        "start_frequency_mhz": 630.75,
+        "stop_frequency_mhz": 637.75,
+        "video_carrier_mhz": 631.25,
+        "audio_carrier_mhz": 637.75
+      },
+      "42": {
+        "channel": "42",
+        "start_frequency_mhz": 638.75,
+        "stop_frequency_mhz": 645.75,
+        "video_carrier_mhz": 639.25,
+        "audio_carrier_mhz": 645.75
+      },
+      "43": {
+        "channel": "43",
+        "start_frequency_mhz": 646.75,
+        "stop_frequency_mhz": 653.75,
+        "video_carrier_mhz": 647.25,
+        "audio_carrier_mhz": 653.75
+      },
+      "44": {
+        "channel": "44",
+        "start_frequency_mhz": 654.75,
+        "stop_frequency_mhz": 661.75,
+        "video_carrier_mhz": 655.25,
+        "audio_carrier_mhz": 661.75
+      },
+      "45": {
+        "channel": "45",
+        "start_frequency_mhz": 662.75,
+        "stop_frequency_mhz": 669.75,
+        "video_carrier_mhz": 663.25,
+        "audio_carrier_mhz": 669.75
+      },
+      "46": {
+        "channel": "46",
+        "start_frequency_mhz": 670.75,
+        "stop_frequency_mhz": 677.75,
+        "video_carrier_mhz": 671.25,
+        "audio_carrier_mhz": 677.75
+      },
+      "47": {
+        "channel": "47",
+        "start_frequency_mhz": 678.75,
+        "stop_frequency_mhz": 685.75,
+        "video_carrier_mhz": 679.25,
+        "audio_carrier_mhz": 685.75
+      },
+      "48": {
+        "channel": "48",
+        "start_frequency_mhz": 686.75,
+        "stop_frequency_mhz": 693.75,
+        "video_carrier_mhz": 687.25,
+        "audio_carrier_mhz": 693.75
+      },
+      "49": {
+        "channel": "49",
+        "start_frequency_mhz": 694.75,
+        "stop_frequency_mhz": 701.75,
+        "video_carrier_mhz": 695.25,
+        "audio_carrier_mhz": 701.75
+      },
+      "50": {
+        "channel": "50",
+        "start_frequency_mhz": 702.75,
+        "stop_frequency_mhz": 709.75,
+        "video_carrier_mhz": 703.25,
+        "audio_carrier_mhz": 709.75
+      },
+      "51": {
+        "channel": "51",
+        "start_frequency_mhz": 710.75,
+        "stop_frequency_mhz": 717.75,
+        "video_carrier_mhz": 711.25,
+        "audio_carrier_mhz": 717.75
+      },
+      "52": {
+        "channel": "52",
+        "start_frequency_mhz": 718.75,
+        "stop_frequency_mhz": 725.75,
+        "video_carrier_mhz": 719.25,
+        "audio_carrier_mhz": 725.75
+      },
+      "53": {
+        "channel": "53",
+        "start_frequency_mhz": 726.75,
+        "stop_frequency_mhz": 733.75,
+        "video_carrier_mhz": 727.25,
+        "audio_carrier_mhz": 733.75
+      },
+      "54": {
+        "channel": "54",
+        "start_frequency_mhz": 734.75,
+        "stop_frequency_mhz": 741.75,
+        "video_carrier_mhz": 735.25,
+        "audio_carrier_mhz": 741.75
+      },
+      "55": {
+        "channel": "55",
+        "start_frequency_mhz": 742.75,
+        "stop_frequency_mhz": 749.75,
+        "video_carrier_mhz": 743.25,
+        "audio_carrier_mhz": 749.75
+      },
+      "56": {
+        "channel": "56",
+        "start_frequency_mhz": 750.75,
+        "stop_frequency_mhz": 757.75,
+        "video_carrier_mhz": 751.25,
+        "audio_carrier_mhz": 757.75
+      },
+      "57": {
+        "channel": "57",
+        "start_frequency_mhz": 758.75,
+        "stop_frequency_mhz": 765.75,
+        "video_carrier_mhz": 759.25,
+        "audio_carrier_mhz": 765.75
+      },
+      "58": {
+        "channel": "58",
+        "start_frequency_mhz": 766.75,
+        "stop_frequency_mhz": 773.75,
+        "video_carrier_mhz": 767.25,
+        "audio_carrier_mhz": 773.75
+      },
+      "59": {
+        "channel": "59",
+        "start_frequency_mhz": 774.75,
+        "stop_frequency_mhz": 781.75,
+        "video_carrier_mhz": 775.25,
+        "audio_carrier_mhz": 781.75
+      },
+      "60": {
+        "channel": "60",
+        "start_frequency_mhz": 782.75,
+        "stop_frequency_mhz": 789.75,
+        "video_carrier_mhz": 783.25,
+        "audio_carrier_mhz": 789.75
+      },
+      "61": {
+        "channel": "61",
+        "start_frequency_mhz": 790.75,
+        "stop_frequency_mhz": 797.75,
+        "video_carrier_mhz": 791.25,
+        "audio_carrier_mhz": 797.75
+      },
+      "62": {
+        "channel": "62",
+        "start_frequency_mhz": 798.75,
+        "stop_frequency_mhz": 805.75,
+        "video_carrier_mhz": 799.25,
+        "audio_carrier_mhz": 805.75
+      },
+      "63": {
+        "channel": "63",
+        "start_frequency_mhz": 806.75,
+        "stop_frequency_mhz": 813.75,
+        "video_carrier_mhz": 807.25,
+        "audio_carrier_mhz": 813.75
+      },
+      "64": {
+        "channel": "64",
+        "start_frequency_mhz": 814.75,
+        "stop_frequency_mhz": 821.75,
+        "video_carrier_mhz": 815.25,
+        "audio_carrier_mhz": 821.75
+      },
+      "65": {
+        "channel": "65",
+        "start_frequency_mhz": 822.75,
+        "stop_frequency_mhz": 829.75,
+        "video_carrier_mhz": 823.25,
+        "audio_carrier_mhz": 829.75
+      },
+      "66": {
+        "channel": "66",
+        "start_frequency_mhz": 830.75,
+        "stop_frequency_mhz": 837.75,
+        "video_carrier_mhz": 831.25,
+        "audio_carrier_mhz": 837.75
+      },
+      "67": {
+        "channel": "67",
+        "start_frequency_mhz": 838.75,
+        "stop_frequency_mhz": 845.75,
+        "video_carrier_mhz": 839.25,
+        "audio_carrier_mhz": 845.75
+      },
+      "68": {
+        "channel": "68",
+        "start_frequency_mhz": 846.75,
+        "stop_frequency_mhz": 853.75,
+        "video_carrier_mhz": 847.25,
+        "audio_carrier_mhz": 853.75
+      },
+      "69": {
+        "channel": "69",
+        "start_frequency_mhz": 854.75,
+        "stop_frequency_mhz": 861.75,
+        "video_carrier_mhz": 855.25,
+        "audio_carrier_mhz": 861.75
+      }
+    }
+  },
+  "DVB-T/T2/DTMB/ISDB-T (Most countries in Africa) Africa UHF Digital": {
+    "name": "DVB-T/T2/DTMB/ISDB-T (Most countries in Africa) Africa UHF Digital",
+    "description": "DVB-T/T2/DTMB/ISDB-T standard for Most countries in Africa, UHF Digital",
+    "country": "Most countries in Africa",
+    "region": "Africa",
+    "type": "tv",
+    "id": "dvb-t_t2_dtmb_isdb-t_most_countries_in_africa_africa_uhf_digital",
+    "system": "DVB-T/T2/DTMB/ISDB-T",
+    "start_frequency_mhz": 474.0,
+    "stop_frequency_mhz": 858.0,
+    "channels": {
+      "21": {
+        "channel": "21",
+        "start_frequency_mhz": 474.0,
+        "stop_frequency_mhz": 482.0,
+        "center_frequency_mhz": 474.0
+      },
+      "22": {
+        "channel": "22",
+        "start_frequency_mhz": 482.0,
+        "stop_frequency_mhz": 490.0,
+        "center_frequency_mhz": 482.0
+      },
+      "23": {
+        "channel": "23",
+        "start_frequency_mhz": 490.0,
+        "stop_frequency_mhz": 498.0,
+        "center_frequency_mhz": 490.0
+      },
+      "24": {
+        "channel": "24",
+        "start_frequency_mhz": 498.0,
+        "stop_frequency_mhz": 506.0,
+        "center_frequency_mhz": 498.0
+      },
+      "25": {
+        "channel": "25",
+        "start_frequency_mhz": 506.0,
+        "stop_frequency_mhz": 514.0,
+        "center_frequency_mhz": 506.0
+      },
+      "26": {
+        "channel": "26",
+        "start_frequency_mhz": 514.0,
+        "stop_frequency_mhz": 522.0,
+        "center_frequency_mhz": 514.0
+      },
+      "27": {
+        "channel": "27",
+        "start_frequency_mhz": 522.0,
+        "stop_frequency_mhz": 530.0,
+        "center_frequency_mhz": 522.0
+      },
+      "28": {
+        "channel": "28",
+        "start_frequency_mhz": 530.0,
+        "stop_frequency_mhz": 538.0,
+        "center_frequency_mhz": 530.0
+      },
+      "29": {
+        "channel": "29",
+        "start_frequency_mhz": 538.0,
+        "stop_frequency_mhz": 546.0,
+        "center_frequency_mhz": 538.0
+      },
+      "30": {
+        "channel": "30",
+        "start_frequency_mhz": 546.0,
+        "stop_frequency_mhz": 554.0,
+        "center_frequency_mhz": 546.0
+      },
+      "31": {
+        "channel": "31",
+        "start_frequency_mhz": 554.0,
+        "stop_frequency_mhz": 562.0,
+        "center_frequency_mhz": 554.0
+      },
+      "32": {
+        "channel": "32",
+        "start_frequency_mhz": 562.0,
+        "stop_frequency_mhz": 570.0,
+        "center_frequency_mhz": 562.0
+      },
+      "33": {
+        "channel": "33",
+        "start_frequency_mhz": 570.0,
+        "stop_frequency_mhz": 578.0,
+        "center_frequency_mhz": 570.0
+      },
+      "34": {
+        "channel": "34",
+        "start_frequency_mhz": 578.0,
+        "stop_frequency_mhz": 586.0,
+        "center_frequency_mhz": 578.0
+      },
+      "35": {
+        "channel": "35",
+        "start_frequency_mhz": 586.0,
+        "stop_frequency_mhz": 594.0,
+        "center_frequency_mhz": 586.0
+      },
+      "36": {
+        "channel": "36",
+        "start_frequency_mhz": 594.0,
+        "stop_frequency_mhz": 602.0,
+        "center_frequency_mhz": 594.0
+      },
+      "37": {
+        "channel": "37",
+        "start_frequency_mhz": 602.0,
+        "stop_frequency_mhz": 610.0,
+        "center_frequency_mhz": 602.0
+      },
+      "38": {
+        "channel": "38",
+        "start_frequency_mhz": 610.0,
+        "stop_frequency_mhz": 618.0,
+        "center_frequency_mhz": 610.0
+      },
+      "39": {
+        "channel": "39",
+        "start_frequency_mhz": 618.0,
+        "stop_frequency_mhz": 626.0,
+        "center_frequency_mhz": 618.0
+      },
+      "40": {
+        "channel": "40",
+        "start_frequency_mhz": 626.0,
+        "stop_frequency_mhz": 634.0,
+        "center_frequency_mhz": 626.0
+      },
+      "41": {
+        "channel": "41",
+        "start_frequency_mhz": 634.0,
+        "stop_frequency_mhz": 642.0,
+        "center_frequency_mhz": 634.0
+      },
+      "42": {
+        "channel": "42",
+        "start_frequency_mhz": 642.0,
+        "stop_frequency_mhz": 650.0,
+        "center_frequency_mhz": 642.0
+      },
+      "43": {
+        "channel": "43",
+        "start_frequency_mhz": 650.0,
+        "stop_frequency_mhz": 658.0,
+        "center_frequency_mhz": 650.0
+      },
+      "44": {
+        "channel": "44",
+        "start_frequency_mhz": 658.0,
+        "stop_frequency_mhz": 666.0,
+        "center_frequency_mhz": 658.0
+      },
+      "45": {
+        "channel": "45",
+        "start_frequency_mhz": 666.0,
+        "stop_frequency_mhz": 674.0,
+        "center_frequency_mhz": 666.0
+      },
+      "46": {
+        "channel": "46",
+        "start_frequency_mhz": 674.0,
+        "stop_frequency_mhz": 682.0,
+        "center_frequency_mhz": 674.0
+      },
+      "47": {
+        "channel": "47",
+        "start_frequency_mhz": 682.0,
+        "stop_frequency_mhz": 690.0,
+        "center_frequency_mhz": 682.0
+      },
+      "48": {
+        "channel": "48",
+        "start_frequency_mhz": 690.0,
+        "stop_frequency_mhz": 698.0,
+        "center_frequency_mhz": 690.0
+      },
+      "49": {
+        "channel": "49",
+        "start_frequency_mhz": 698.0,
+        "stop_frequency_mhz": 706.0,
+        "center_frequency_mhz": 698.0
+      },
+      "50": {
+        "channel": "50",
+        "start_frequency_mhz": 706.0,
+        "stop_frequency_mhz": 714.0,
+        "center_frequency_mhz": 706.0
+      },
+      "51": {
+        "channel": "51",
+        "start_frequency_mhz": 714.0,
+        "stop_frequency_mhz": 722.0,
+        "center_frequency_mhz": 714.0
+      },
+      "52": {
+        "channel": "52",
+        "start_frequency_mhz": 722.0,
+        "stop_frequency_mhz": 730.0,
+        "center_frequency_mhz": 722.0
+      },
+      "53": {
+        "channel": "53",
+        "start_frequency_mhz": 730.0,
+        "stop_frequency_mhz": 738.0,
+        "center_frequency_mhz": 730.0
+      },
+      "54": {
+        "channel": "54",
+        "start_frequency_mhz": 738.0,
+        "stop_frequency_mhz": 746.0,
+        "center_frequency_mhz": 738.0
+      },
+      "55": {
+        "channel": "55",
+        "start_frequency_mhz": 746.0,
+        "stop_frequency_mhz": 754.0,
+        "center_frequency_mhz": 746.0
+      },
+      "56": {
+        "channel": "56",
+        "start_frequency_mhz": 754.0,
+        "stop_frequency_mhz": 762.0,
+        "center_frequency_mhz": 754.0
+      },
+      "57": {
+        "channel": "57",
+        "start_frequency_mhz": 762.0,
+        "stop_frequency_mhz": 770.0,
+        "center_frequency_mhz": 762.0
+      },
+      "58": {
+        "channel": "58",
+        "start_frequency_mhz": 770.0,
+        "stop_frequency_mhz": 778.0,
+        "center_frequency_mhz": 770.0
+      },
+      "59": {
+        "channel": "59",
+        "start_frequency_mhz": 778.0,
+        "stop_frequency_mhz": 786.0,
+        "center_frequency_mhz": 778.0
+      },
+      "60": {
+        "channel": "60",
+        "start_frequency_mhz": 786.0,
+        "stop_frequency_mhz": 794.0,
+        "center_frequency_mhz": 786.0
+      },
+      "61": {
+        "channel": "61",
+        "start_frequency_mhz": 794.0,
+        "stop_frequency_mhz": 802.0,
+        "center_frequency_mhz": 794.0
+      },
+      "62": {
+        "channel": "62",
+        "start_frequency_mhz": 802.0,
+        "stop_frequency_mhz": 810.0,
+        "center_frequency_mhz": 802.0
+      },
+      "63": {
+        "channel": "63",
+        "start_frequency_mhz": 810.0,
+        "stop_frequency_mhz": 818.0,
+        "center_frequency_mhz": 810.0
+      },
+      "64": {
+        "channel": "64",
+        "start_frequency_mhz": 818.0,
+        "stop_frequency_mhz": 826.0,
+        "center_frequency_mhz": 818.0
+      },
+      "65": {
+        "channel": "65",
+        "start_frequency_mhz": 826.0,
+        "stop_frequency_mhz": 834.0,
+        "center_frequency_mhz": 826.0
+      },
+      "66": {
+        "channel": "66",
+        "start_frequency_mhz": 834.0,
+        "stop_frequency_mhz": 842.0,
+        "center_frequency_mhz": 834.0
+      },
+      "67": {
+        "channel": "67",
+        "start_frequency_mhz": 842.0,
+        "stop_frequency_mhz": 850.0,
+        "center_frequency_mhz": 842.0
+      },
+      "68": {
+        "channel": "68",
+        "start_frequency_mhz": 850.0,
+        "stop_frequency_mhz": 858.0,
+        "center_frequency_mhz": 850.0
+      },
+      "69": {
+        "channel": "69",
+        "start_frequency_mhz": 858.0,
+        "stop_frequency_mhz": 866.0,
+        "center_frequency_mhz": 858.0
+      }
+    }
+  }
+}

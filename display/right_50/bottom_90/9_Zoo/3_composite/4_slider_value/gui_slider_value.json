@@ -1,0 +1,126 @@
+{
+  "Zoo_composite_slider_value": {
+    "type": "OcaBin",
+    "id": "50.90.9.3.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label_active": "Volume",
+        "fields": {
+          "examplefields": {
+            "type": "_sliderValue",
+            "label_active": "Volume",
+            "layout": {
+              "height": 100,
+              "width": 250,
+              "font": 18
+            },
+            "min": 0.0,
+            "max": 100.0,
+            "value": 50.0,
+            "units": "%",
+            "notes": "A standard horizontal slider with numerical input for volume control.",
+            "show_label": true
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label_active": "Gain",
+        "fields": {
+          "examplefields": {
+            "type": "_sliderValue",
+            "label_active": "Gain",
+            "layout": {
+              "height": 100,
+              "width": 250,
+              "sticky": "ew",
+              "font": 18
+            },
+            "min": -12.0,
+            "max": 12.0,
+            "value": 0.0,
+            "units": "dB",
+            "notes": "Slider for fine-tuning gain, bipolar range with dB units.",
+            "show_label": true
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label_active": "Frequency",
+        "fields": {
+          "examplefields": {
+            "type": "_sliderValue",
+            "label_active": "Frequency",
+            "layout": {
+              "height": 100,
+              "width": 250,
+              "sticky": "ew",
+              "font": 18
+            },
+            "min": 20.0,
+            "max": 20000.0,
+            "value": 1000.0,
+            "units": "Hz",
+            "notes": "Slider for selecting frequency, wide range.",
+            "show_label": true
+          }
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label_active": "Delay Time",
+        "fields": {
+          "examplefields": {
+            "type": "_sliderValue",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9,
+              "width": 250,
+              "sticky": "ew",
+              "font": 85
+            },
+            "label_active": "Delay Time",
+            "min": 0.0,
+            "max": 2.5,
+            "value": 0.75,
+            "units": "s",
+            "notes": "Slider for adjusting delay time in seconds.",
+            "show_label": true
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label_active": "Q-Factor",
+        "fields": {
+          "examplefields": {
+            "type": "_sliderValue",
+            "label_active": "Q-Factor",
+            "min": 0.1,
+            "max": 10.0,
+            "value": 1.5,
+            "units": "",
+            "notes": "Slider for adjusting Q-factor, dimensionless.",
+            "layout": {
+              "font": 12,
+              "width": 200,
+              "height": 50,
+              "alpha": 0.9
+            },
+            "show_label": true
+          }
+        }
+      }
+    }
+  }
+}

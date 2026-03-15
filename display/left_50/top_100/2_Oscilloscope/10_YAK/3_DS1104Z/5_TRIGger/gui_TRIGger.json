@@ -1,0 +1,271 @@
+{
+  "Oscilloscope_YAK_DS1104Z_TRIGger": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.3.5",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": "Trigger Settings",
+        "fields": {
+          "Set_Mode": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": ":TRIGger:MODE <mode>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "mode": {
+                    "value": "EDGE",
+                    "type": "_GuiValue",
+                    "label": "Mode",
+                    "units": "",
+                    "description": "EDGE, PULSe, SLOPE, VIDEO, PATTern"
+                  }
+                }
+              }
+            }
+          },
+          "Edge_Trigger_Config": {
+            "type": "OcaBlock",
+            "description": "Edge Trigger Configuration",
+            "fields": {
+              "Set_Edge_Source": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":TRIGger:EDGe:SOURce <source>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "source": {
+                        "value": "CHAN1",
+                        "type": "_GuiValue",
+                        "label": "Source",
+                        "units": "",
+                        "description": "CHANn, AC"
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Edge_Slope": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":TRIGger:EDGe:SLOPe <slope>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "slope": {
+                        "value": "POSitive",
+                        "type": "_GuiValue",
+                        "label": "Slope",
+                        "units": "",
+                        "description": "POSitive, NEGative, RFALI"
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Edge_Level": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":TRIGger:EDGe:LEVel <level>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "level": {
+                        "value": "0.0",
+                        "type": "_GuiValue",
+                        "label": "Level",
+                        "units": "V"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Sweep_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "Set_Sweep": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":TRIGger:SWEep <sweep>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "sweep": {
+                        "value": "AUTO",
+                        "type": "_GuiValue",
+                        "label": "Sweep",
+                        "units": "",
+                        "description": "AUTO, NORMal, SINGle"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "nab": {
+        "type": "OcaBlock",
+        "description": "Trigger Status",
+        "fields": {
+          "Get_Status": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": ":TRIGger:STATus?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "status": {
+                    "value": "STOP",
+                    "type": "_GuiValue",
+                    "label": "Status",
+                    "units": ""
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

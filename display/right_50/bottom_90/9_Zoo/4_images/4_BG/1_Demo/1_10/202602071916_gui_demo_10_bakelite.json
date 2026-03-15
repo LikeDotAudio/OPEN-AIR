@@ -1,0 +1,95 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "fields": {
+        "Meter_1": {
+          "type": "_NeedleVUMeter",
+          "label": "Crest 1",
+          "geometry": {
+            "width": 250,
+            "height": 250
+          },
+          "domain": {
+            "primary": {
+              "min": -20.0,
+              "max": 3.0,
+              "value_default": -10.0
+            }
+          },
+          "cosmetics": {
+            "colors": {
+              "bezel": "#111111"
+            },
+            "style_overrides": {
+              "bezel_shape": "crest",
+              "bezel_width": 6,
+              "Pointer_Style": "knife-edge",
+              "overlay_style": "dome"
+            }
+          }
+        },
+        "Meter_2": {
+          "type": "_NeedleVUMeter",
+          "label": "Super_Gem 2",
+          "geometry": {
+            "width": 250,
+            "height": 250
+          },
+          "domain": {
+            "primary": {
+              "min": -20.0,
+              "max": 3.0,
+              "value_default": -8.0
+            }
+          },
+          "cosmetics": {
+            "colors": {
+              "bezel": "#111111"
+            },
+            "style_overrides": {
+              "bezel_shape": "super_gem",
+              "bezel_width": 6,
+              "Pointer_Style": "knife-edge",
+              "overlay_style": "aperture_mask"
+            }
+          }
+        },
+        "Meter_3": {
+          "type": "_NeedleVUMeter",
+          "label": "Crest 3",
+          "geometry": {
+            "width": 250,
+            "height": 250
+          },
+          "domain": {
+            "primary": {
+              "min": -20.0,
+              "max": 3.0,
+              "value_default": -6.0
+            }
+          },
+          "cosmetics": {
+            "colors": {
+              "bezel": "#111111"
+            },
+            "style_overrides": {
+              "bezel_shape": "crest",
+              "bezel_width": 6,
+              "Pointer_Style": "needle",
+              "overlay_style": "dome"
+            }
+          }
+        }
+      }
+    }
+  }
+}

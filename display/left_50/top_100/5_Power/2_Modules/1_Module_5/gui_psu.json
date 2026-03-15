@@ -1,0 +1,125 @@
+{
+  "Power_Modules_Module_5": {
+    "type": "OcaBin",
+    "id": "50.100.5.2.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "PSU_Panel": {
+        "type": "OcaBlock",
+        "description": "Power Supply Unit Control Panel",
+        "fields": {
+          "Voltage_Control": {
+            "type": "OcaBlock",
+            "description": "Voltage Output",
+            "fields": {
+              "voltage_set": {
+                "type": "_TextInput",
+                "label_active": "Voltage (V)",
+                "value_default": "5.0",
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "VOLT <value>"
+                  }
+                }
+              }
+            }
+          },
+          "Current_Control": {
+            "type": "OcaBlock",
+            "description": "Current Limit",
+            "fields": {
+              "current_set": {
+                "type": "_TextInput",
+                "label_active": "Current (A)",
+                "value_default": "0.1",
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "CURR <value>"
+                  }
+                }
+              }
+            }
+          },
+          "Output_Control": {
+            "type": "OcaBlock",
+            "description": "Output State",
+            "fields": {
+              "output_enable": {
+                "type": "_GuiButtonToggle",
+                "label_active": "ON",
+                "label_inactive": "OFF",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "state_default": false,
+                "message_details": {
+                  "PSU_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "OUTP <state>"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

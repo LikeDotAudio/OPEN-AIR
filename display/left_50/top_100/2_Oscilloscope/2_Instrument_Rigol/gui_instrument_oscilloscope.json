@@ -1,0 +1,213 @@
+{
+  "Oscilloscope_Instrument_Rigol": {
+    "type": "OcaBin",
+    "id": "50.100.2.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Oscilloscope_Panel": {
+        "type": "OcaBlock",
+        "description": "Oscilloscope Control Panel",
+        "fields": {
+          "Timebase_Control": {
+            "type": "OcaBlock",
+            "description": "Timebase",
+            "fields": {
+              "time_per_div": {
+                "type": "_TextInput",
+                "label_active": "Time/Div (s)",
+                "value_default": "1e-3",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "TIMEBASE:SCALE <value>"
+                  }
+                }
+              }
+            }
+          },
+          "Voltage_Control": {
+            "type": "OcaBlock",
+            "description": "Channel 1 Voltage",
+            "fields": {
+              "voltage_per_div": {
+                "type": "_TextInput",
+                "label_active": "Volts/Div (V)",
+                "value_default": "1",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "CHAN1:VOLTS <value>"
+                  }
+                }
+              },
+              "channel1_coupling": {
+                "type": "_GuiDropDownOption",
+                "label_active": "Coupling",
+                "options": [
+                  "AC",
+                  "DC",
+                  "GND"
+                ],
+                "default_option": "DC",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "CHAN1:COUPLING <value>"
+                  }
+                }
+              }
+            }
+          },
+          "Trigger_Control": {
+            "type": "OcaBlock",
+            "description": "Trigger",
+            "fields": {
+              "trigger_mode": {
+                "type": "_GuiDropDownOption",
+                "label_active": "Mode",
+                "options": [
+                  "AUTO",
+                  "NORMAL",
+                  "SINGLE"
+                ],
+                "default_option": "AUTO",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "TRIG:MODE <value>"
+                  }
+                }
+              },
+              "trigger_level": {
+                "type": "_TextInput",
+                "label_active": "Level (V)",
+                "value_default": "0",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "TRIG:LEVEL <value>"
+                  }
+                }
+              }
+            }
+          },
+          "Acquisition_Control": {
+            "type": "OcaBlock",
+            "description": "Acquisition",
+            "fields": {
+              "run_stop": {
+                "type": "_GuiButtonToggle",
+                "label_active": "RUN",
+                "label_inactive": "STOP",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "state_default": true,
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "ACQ:STATE <state>"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

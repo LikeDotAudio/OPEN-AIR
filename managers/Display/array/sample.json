@@ -1,0 +1,43 @@
+{
+  "array_Example": {
+    "type": "OcaArray",
+    "layout_columns": 4,
+    "blueprint": {
+      "type": "_SmartFader",
+      "label": "Channel {{id}}",
+      "geometry": {
+        "width": 80,
+        "height": 300
+      }
+    },
+    "data": [
+      {
+        "id": "1",
+        "val": 0
+      },
+      {
+        "id": "2",
+        "val": 0
+      },
+      {
+        "id": "3",
+        "val": 0
+      },
+      {
+        "id": "4",
+        "val": 0
+      }
+    ],
+    "layout": {
+      "sticky": "nsew"
+    },
+    "cosmetics": {
+      "colors": {
+        "primary": "#FF9900",
+        "secondary": "#444444",
+        "background": "#2b2b2b"
+      }
+    }
+  },
+  "_README": "This is an enhanced sample configuration demonstrating full instantiation capabilities."
+}

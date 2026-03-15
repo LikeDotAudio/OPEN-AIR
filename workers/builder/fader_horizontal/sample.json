@@ -1,0 +1,90 @@
+{
+  "Exhaustive_Horizontal_Fader_Example": {
+    "type": "_CustomHorizontalFader",
+    "identity": {
+      "label": "Stereo Width",
+      "id": "width_control",
+      "notes": "A photorealistic horizontal fader with a concave saddle cap."
+    },
+    "geometry": {
+      "width": 400,
+      "height": 100,
+      "padding": 5,
+      "stretch": "width",
+      "anchor": "center",
+      "align": "center",
+      "fader_cap_scale": 1.0,
+      "cap_width": 50,
+      "cap_height": 35
+    },
+    "domain": {
+      "primary": {
+        "min": 0.0,
+        "max": 200.0,
+        "value_default": 100.0,
+        "unit": "%",
+        "zero_point": 100.0,
+        "law": "linear",
+        "log_exponent": 1.0
+      }
+    },
+    "dynamics": {
+      "fps_limit": 60,
+      "smoothing": 0.1,
+      "path": "MasterBus/Processing/Width"
+    },
+    "cosmetics": {
+      "colors": {
+        "primary": "#33A1FD",
+        "secondary": "#222222",
+        "background": "#2b2b2b",
+        "cap": "#dcdcdc",
+        "cap_highlight": "#FF9900",
+        "tick_color": "light grey",
+        "sub_tick_color": "#555555",
+        "highlight": "#FF9900"
+      },
+      "style_flags": {
+        "show_grid": true,
+        "show_label": true
+      },
+      "scale": {
+        "show": true,
+        "style": "simple",
+        "interval": 20.0,
+        "size": 0.35,
+        "thickness": 1
+      },
+      "styling": {
+        "glow_intensity": 1.5,
+        "track_hover_color": "#333333",
+        "fader_track_color": "#050505"
+      }
+    },
+    "readout": {
+      "show_value": true,
+      "units": "%",
+      "location": "bottom",
+      "decimal_places": 1,
+      "font_size": 9,
+      "label_position": "top"
+    },
+    "interaction": {
+      "scroll_enabled": true,
+      "is_read_only": false,
+      "reff_point": 100.0
+    },
+    "layout": {
+      "sticky": "ew",
+      "padx": 20,
+      "pady": 10,
+      "weight": 1
+    }
+  },
+  "_README": "This sample is REALLY REALLY COMPLETE. It follows the 5-pillar 'Universal Rhyme' schema (Identity, Geometry, Domain, Dynamics, Cosmetics) plus Readout, Interaction, and Layout.",
+  "_LEGEND": {
+    "fader_types": ["_CustomHorizontalFader", "_SmartFader (with orientation: horizontal)"],
+    "laws": ["linear", "log"],
+    "mouse_actions": "Middle-click resets to reff_point. Alt-click opens manual entry. Mousewheel for fine-tuning."
+  }
+}

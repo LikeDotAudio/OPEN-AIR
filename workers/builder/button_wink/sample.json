@@ -1,0 +1,34 @@
+{
+  "button_wink_Example": {
+    "type": "_WinkButton",
+    "label_active": "01",
+    "path": "audio/wink/target_demo_001",
+    "width": 60,
+    "height": 60,
+    "shape_type": "square",
+    "color": "#00FF00",
+    "shutter_color": "#000000",
+    "latching": false,
+    "open_speed": 0.22,
+    "close_speed": 0.33,
+    "text_inside": "GO",
+    "text_inside_color": "white",
+    "radius": 0,
+    "text_closed": "",
+    "layout": {
+      "sticky": "ew",
+      "padx": 5,
+      "pady": 5,
+      "width": 100,
+      "height": 50
+    },
+    "cosmetics": {
+      "colors": {
+        "primary": "#FF9900",
+        "secondary": "#444444",
+        "background": "#2b2b2b"
+      }
+    }
+  },
+  "_README": "This is an enhanced sample configuration demonstrating full instantiation capabilities."
+}

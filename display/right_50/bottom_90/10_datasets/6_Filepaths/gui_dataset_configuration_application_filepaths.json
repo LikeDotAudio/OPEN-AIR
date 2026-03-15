@@ -1,0 +1,32 @@
+{
+  "datasets_Filepaths": {
+    "type": "OcaBlock",
+    "id": "50.90.10.6",
+    "description": "JSON Tree Viewer for Dataset Configuration Application Filepaths",
+    "layout_columns": 1,
+    "fields": {
+      "Data_Tree": {
+        "type": "JsonTree",
+        "label_active": "Dataset Configuration Application Filepaths",
+        "json_source": "display/right_50/bottom_90/10_datasets/6_Filepaths/data_dataset_configuration_application_filepaths.json",
+        "height": 50,
+        "alpha": 0.9,
+        "layout": {
+          "sticky": "nsew",
+          "weight_y": 1,
+          "pady": 0
+        },
+        "ALLOW": {
+          "filter": true,
+          "browse": false,
+          "edit": true,
+          "expand_all": true,
+          "save_as": true,
+          "table_toggle": true
+        },
+        "show_values": true
+      }
+    },
+    "show_label": false
+  }
+}

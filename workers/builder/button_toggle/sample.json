@@ -1,0 +1,64 @@
+{
+  "Exhaustive_Toggle_Example": {
+    "type": "_SmartToggle",
+    "identity": {
+      "label": "Mute Control",
+      "id": "mute_btn",
+      "notes": "A boolean toggle button with custom photorealistic states."
+    },
+    "geometry": {
+      "width": 120,
+      "height": 50,
+      "corner_radius": 8,
+      "stretch": "none"
+    },
+    "domain": {
+      "primary": {
+        "value_default": false
+      }
+    },
+    "dynamics": {
+      "path": "Audio/Output/Mute"
+    },
+    "cosmetics": {
+      "active_color": "#FF3300",
+      "active_bg_color": "#220000",
+      "bg_color": "#1a1a1a",
+      "active_text_color": "#FFFFFF",
+      "text_color": "#888888",
+      "glow_intensity": 1.5,
+      "alpha": 1.0,
+      "active_font_style": "bold",
+      "active_font_size": 11,
+      "inactive_font_style": "normal",
+      "inactive_font_size": 10
+    },
+    "readout": {
+      "label_position": "top"
+    },
+    "interaction": {
+      "is_read_only": false,
+      "options": {
+        "ON": {
+          "label_active": "MUTED",
+          "selected": false
+        },
+        "OFF": {
+          "label_inactive": "LIVE",
+          "selected": true
+        }
+      }
+    },
+    "layout": {
+      "sticky": "nw",
+      "padx": 10,
+      "pady": 10
+    }
+  },
+  "_README": "This sample is REALLY REALLY COMPLETE. It follows the 5-pillar 'Universal Rhyme' schema and outlines the state-specific labels used for boolean logic.",
+  "_LEGEND": {
+    "toggle_types": ["_SmartToggle", "_GuiButtonToggle"],
+    "options_keys": "The 'ON' and 'OFF' keys in interaction.options are mandatory for boolean mapping.",
+    "font_styles": ["normal", "bold", "italic"]
+  }
+}

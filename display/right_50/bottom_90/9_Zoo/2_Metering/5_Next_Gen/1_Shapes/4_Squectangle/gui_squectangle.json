@@ -1,0 +1,638 @@
+{
+  "Zoo_Metering_Next_Gen_Shapes_Squectangle": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.5.1.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Squectangle_Variations": {
+        "type": "OcaBlock",
+        "description": "Squectangle Meter Variations",
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "Squectangle_1_Large": {
+            "type": "_NeedleVUMeter",
+            "label": "Large Classic",
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "#000000",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "squectangle",
+                "bezel_width": 6,
+                "Pointer_Style": "knife-edge",
+                "pivot_colour": "#444444"
+              },
+              "labels": [
+                {
+                  "text": "SQUECTANGLE",
+                  "x": 0,
+                  "y": -25,
+                  "size": 12,
+                  "weight": "bold"
+                },
+                {
+                  "value_overlay": true,
+                  "x": 0,
+                  "y": -60,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "#000000",
+                  "sig_fig": 3
+                }
+              ]
+            },
+            "label_active": "Large Classic",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 300,
+            "height": 300,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squectangle",
+            "bezel_width": 6,
+            "Pointer_Style": "knife-edge",
+            "pivot_colour": "#444444",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": 0.0,
+            "value": 0.0,
+            "default_value": 0.0,
+            "step": 5.0,
+            "path": "Squectangle_Variations/Squectangle_1_Large"
+          },
+          "Squectangle_2_Medium": {
+            "type": "_NeedleVUMeter",
+            "label": "Medium Brown",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "#8B4513",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "squectangle",
+                "bezel_width": 5,
+                "Pointer_Style": "baton",
+                "pivot_colour": "#8B4513"
+              },
+              "labels": [
+                {
+                  "text": "VINTAGE AUDIO",
+                  "x": 0,
+                  "y": -25,
+                  "size": 10,
+                  "weight": "bold"
+                }
+              ]
+            },
+            "label_active": "Medium Brown",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squectangle",
+            "bezel_width": 5,
+            "Pointer_Style": "baton",
+            "pivot_colour": "#8B4513",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -5.0,
+            "value": -5.0,
+            "default_value": -5.0,
+            "step": 5.0,
+            "path": "Squectangle_Variations/Squectangle_2_Medium"
+          },
+          "Squectangle_3_Small": {
+            "type": "_NeedleVUMeter",
+            "label": "Small Silver",
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#ffffff",
+                "bezel": "silver",
+                "scale_label": "#ffffff"
+              },
+              "style_overrides": {
+                "bezel_shape": "squectangle",
+                "bezel_width": 2,
+                "mask": false,
+                "Pointer_Style": "needle",
+                "pivot_colour": "silver"
+              }
+            },
+            "label_active": "Small Silver",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 150,
+            "height": 150,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squectangle",
+            "bezel_width": 2,
+            "mask": false,
+            "Pointer_Style": "needle",
+            "pivot_colour": "silver",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -10.0,
+            "value": -10.0,
+            "default_value": -10.0,
+            "step": 5.0,
+            "path": "Squectangle_Variations/Squectangle_3_Small"
+          },
+          "Squectangle_4_Midnight_Blue": {
+            "type": "_NeedleVUMeter",
+            "label": "Midnight Blue",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#ADD8E6",
+                "bezel": "#4682B4",
+                "scale_label": "#ADD8E6"
+              },
+              "style_overrides": {
+                "bezel_shape": "squectangle",
+                "bezel_width": 5,
+                "enable_lighting": true,
+                "Pointer_Style": "teardrop"
+              },
+              "labels": [
+                {
+                  "text": "MIDNIGHT-VU",
+                  "x": 0,
+                  "y": -25,
+                  "size": 10,
+                  "weight": "bold",
+                  "color": "#ADD8E6"
+                }
+              ]
+            },
+            "label_active": "Midnight Blue",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squectangle",
+            "bezel_width": 5,
+            "enable_lighting": true,
+            "Pointer_Style": "teardrop",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -2.0,
+            "value": -2.0,
+            "default_value": -2.0,
+            "path": "Squectangle_Variations/Squectangle_4_Midnight_Blue"
+          },
+          "Squectangle_5_Forest_Green": {
+            "type": "_NeedleVUMeter",
+            "label": "Forest Green",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -8.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#98FB98",
+                "bezel": "#228B22",
+                "scale_label": "#98FB98"
+              },
+              "style_overrides": {
+                "bezel_shape": "squectangle",
+                "bezel_width": 5,
+                "enable_lighting": true,
+                "Pointer_Style": "spade"
+              },
+              "labels": [
+                {
+                  "text": "FOREST ANALOG",
+                  "x": 0,
+                  "y": -25,
+                  "size": 10,
+                  "weight": "bold",
+                  "color": "#98FB98"
+                }
+              ]
+            },
+            "label_active": "Forest Green",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squectangle",
+            "bezel_width": 5,
+            "enable_lighting": true,
+            "Pointer_Style": "spade",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -8.0,
+            "value": -8.0,
+            "default_value": -8.0,
+            "path": "Squectangle_Variations/Squectangle_5_Forest_Green"
+          },
+          "Squectangle_6_Slate_Grey": {
+            "type": "_NeedleVUMeter",
+            "label": "Slate Grey",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFFFFF",
+                "bezel": "#2F4F4F",
+                "scale_label": "#FFFFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "squectangle",
+                "bezel_width": 2,
+                "enable_lighting": false,
+                "Pointer_Style": "baton"
+              },
+              "labels": [
+                {
+                  "text": "SLATE-SYSTEM",
+                  "x": 0,
+                  "y": -25,
+                  "size": 10,
+                  "weight": "bold",
+                  "color": "#FFFFFF"
+                }
+              ]
+            },
+            "label_active": "Slate Grey",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squectangle",
+            "bezel_width": 2,
+            "enable_lighting": false,
+            "Pointer_Style": "baton",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -15.0,
+            "value": -15.0,
+            "default_value": -15.0,
+            "path": "Squectangle_Variations/Squectangle_6_Slate_Grey"
+          },
+          "Squectangle_7_Neon_Pink": {
+            "type": "_NeedleVUMeter",
+            "label": "Neon Pink",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -4.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#00FF00",
+                "bezel": "#FF1493",
+                "scale_label": "#00FF00"
+              },
+              "style_overrides": {
+                "bezel_shape": "squectangle",
+                "bezel_width": 6,
+                "enable_lighting": true,
+                "Pointer_Style": "needle"
+              },
+              "labels": [
+                {
+                  "text": "NEON OPS",
+                  "x": 0,
+                  "y": -25,
+                  "size": 10,
+                  "weight": "bold",
+                  "color": "#FF1493"
+                }
+              ]
+            },
+            "label_active": "Neon Pink",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squectangle",
+            "bezel_width": 6,
+            "enable_lighting": true,
+            "Pointer_Style": "needle",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -4.0,
+            "value": -4.0,
+            "default_value": -4.0,
+            "path": "Squectangle_Variations/Squectangle_7_Neon_Pink"
+          },
+          "Squectangle_8_Cloud_White": {
+            "type": "_NeedleVUMeter",
+            "label": "Cloud White",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -18.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "#B0C4DE",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "squectangle",
+                "bezel_width": 5,
+                "enable_lighting": false,
+                "Pointer_Style": "knife-edge"
+              },
+              "labels": [
+                {
+                  "text": "CLOUD METER",
+                  "x": 0,
+                  "y": -25,
+                  "size": 10,
+                  "weight": "bold"
+                }
+              ]
+            },
+            "label_active": "Cloud White",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squectangle",
+            "bezel_width": 5,
+            "enable_lighting": false,
+            "Pointer_Style": "knife-edge",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -18.0,
+            "value": -18.0,
+            "default_value": -18.0,
+            "path": "Squectangle_Variations/Squectangle_8_Cloud_White"
+          },
+          "Squectangle_9_Copper": {
+            "type": "_NeedleVUMeter",
+            "label": "Copper",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -6.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#800000",
+                "bezel": "#A0522D",
+                "scale_label": "#800000"
+              },
+              "style_overrides": {
+                "bezel_shape": "squectangle",
+                "bezel_width": 7,
+                "enable_lighting": true,
+                "Pointer_Style": "teardrop"
+              },
+              "labels": [
+                {
+                  "text": "COPPER-VU",
+                  "x": 0,
+                  "y": -25,
+                  "size": 10,
+                  "weight": "bold",
+                  "color": "#800000"
+                }
+              ]
+            },
+            "label_active": "Copper",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 220,
+            "height": 220,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "squectangle",
+            "bezel_width": 7,
+            "enable_lighting": true,
+            "Pointer_Style": "teardrop",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -6.0,
+            "value": -6.0,
+            "default_value": -6.0,
+            "path": "Squectangle_Variations/Squectangle_9_Copper"
+          }
+        },
+        "active_text_color": "#1a1a1a",
+        "text_color": "#888888",
+        "active_font_style": "bold",
+        "active_font_size": null,
+        "inactive_font_style": "normal",
+        "inactive_font_size": null,
+        "active_color": "#FF9900",
+        "active_bg_color": "#000000",
+        "bg_color": "#2b2b2b",
+        "glow_intensity": 1.0,
+        "Orientation": "vertical",
+        "layout": {}
+      }
+    }
+  }
+}

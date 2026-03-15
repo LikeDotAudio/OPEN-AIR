@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LTP: Linear Travelling Potentiometer - Anthony Kuzub (Anthony@Kuzub.com)</title>
+    <style>
+        :root {
+            --bg-color: #2b2b2b;
+            --panel-bg: #3c3f41;
+            --text-color: #dcdcdc;
+            --accent-color: #33A1FD;
+            --secondary-color: #444444;
+            --border-color: #555555;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 { margin-bottom: 20px; }
+
+        .demo-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .widget-wrapper {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .widget-label {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        canvas {
+            cursor: ns-resize;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+            border-radius: 4px;
+            background-color: #222;
+            touch-action: none; /* Critical for custom touch handling */
+        }
+        
+        .controls {
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: #888;
+            max-width: 600px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>LTP: Linear Travelling Potentiometer - Anthony Kuzub (Anthony@Kuzub.com)</h1>
+    <div id="app" class="demo-container"></div>
+    <div class="controls">
+        <strong>Controls:</strong><br>
+        Drag Handle: Adjust Linear Value (Volume/Level)<br>
+        <span class="mod-key">Ctrl</span> + Drag Handle: Adjust Rotation (Pan/Param)<br>
+        <strong>Freestyle Mode:</strong> Drag adjusts BOTH simultaneously.<br>
+        Scroll: Fine-tune Linear | <span class="mod-key">Ctrl</span> + Scroll: Fine-tune Rotation<br>
+        <strong>Mobile:</strong> Grab the fader with one finger and move a second left and right to adjust the potentiometer.
+    </div>
+
+    <script>
+        // Modifier Key Configuration
+        const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+        const modKeyName = isMac ? "Option (Alt)" : "Alt";
+        const modKeyEvent = "Alt";
+        
+        // Update UI Labels
+        document.querySelectorAll('.mod-key').forEach(el => el.innerText = modKeyName);
+
+        class LTPWidget {
+            constructor(container, config) {
+                this.config = config;
+                this.min = config.min || 0;
+                this.max = config.max || 100;
+                this.rotMin = -100;
+                this.rotMax = 100;
+                
+                this.width = config.width || 100;
+                this.height = config.height || 300;
+                this.radius = 18; // Diameter 36
+                
+                this.freestyle = config.freestyle || false;
+                
+                // State
+                this.linearVal = config.value || (this.min + this.max)/2;
+                this.rotVal = config.rotValue || 0;
+                
+                // UI
+                this.wrapper = document.createElement('div');
+                this.wrapper.className = 'widget-wrapper';
+                
+                const label = document.createElement('div');
+                label.className = 'widget-label';
+                label.style.fontSize = this.width < 40 ? '8px' : '12px';
+                label.innerText = config.label || "LTP";
+                this.wrapper.appendChild(label);
+
+                this.canvas = document.createElement('canvas');
+                this.canvas.width = this.width;
+                this.canvas.height = this.height;
+                this.ctx = this.canvas.getContext('2d');
+                this.wrapper.appendChild(this.canvas);
+                
+                // Set initial cursor
+                if (this.freestyle) {
+                    this.canvas.style.cursor = 'move';
+                }
+                
+                container.appendChild(this.wrapper);
+
+                // Interaction
+                this.dragging = false;
+                this.startX = 0;
+                this.startY = 0;
+                this.startLin = 0;
+                this.startRot = 0;
+                this.isMod = false; 
+
+                this.canvas.addEventListener('mousedown', this.onMouseDown.bind(this));
+                document.addEventListener('mousemove', this.onMouseMove.bind(this));
+                document.addEventListener('mouseup', this.onMouseUp.bind(this));
+                this.canvas.addEventListener('wheel', this.onWheel.bind(this));
+                
+                // Touch Events
+                this.canvas.addEventListener('touchstart', this.onCanvasTouchStart.bind(this), {passive: false});
+                this.canvas.addEventListener('dblclick', this.onDblClick.bind(this));
+                
+                // Global handlers (bound for removal)
+                this.onGlobalTouchStart = this.onGlobalTouchStart.bind(this);
+                this.onGlobalTouchMove = this.onGlobalTouchMove.bind(this);
+                this.onGlobalTouchEnd = this.onGlobalTouchEnd.bind(this);
+
+                // Touch State
+                this.knobTouchId = null;
+                this.sweepTouchId = null;
+                                this.touchStartLin = 0;
+                                this.touchStartRot = 0;
+                                this.touchStartY = 0;
+                                this.touchStartX = 0;
+                                
+                                // Pan Latch State (Double-click feature)
+                                this.panLatch = false;
+                
+                                // Track key state for cursor (if not freestyle)
+                                if (!this.freestyle) {
+                                    document.addEventListener('keydown', (e) => { if(e.key === modKeyEvent) this.updateCursor(true); });
+                                    document.addEventListener('keyup', (e) => { if(e.key === modKeyEvent) this.updateCursor(false); });
+                                }
+                
+                                this.draw();
+                            }
+                            
+                            updateCursor(active) {
+                                this.canvas.style.cursor = active ? 'ew-resize' : 'ns-resize';
+                            }
+                            
+                            checkMod(e) {
+                                return e.altKey;
+                            }
+                
+                            getHandleY() {
+                                const range = this.max - this.min;
+                                const norm = (this.linearVal - this.min) / range;
+                                const drawH = this.height - 40; // 20px padding top/bottom
+                                return 20 + drawH * (1.0 - norm);
+                            }
+                            
+                            isOverHandle(x, y) {
+                                const handleY = this.getHandleY();
+                                const cx = this.width / 2;
+                                // Generous hit area for touch (1.5x radius)
+                                const hitRadius = this.radius * 1.5; 
+                                const dist = Math.sqrt((x-cx)**2 + (y-handleY)**2);
+                                return dist <= hitRadius;
+                            }
+                            
+                            onDblClick(e) {
+                                const rect = this.canvas.getBoundingClientRect();
+                                const x = e.clientX - rect.left;
+                                const y = e.clientY - rect.top;
+                                
+                                if (this.isOverHandle(x, y)) {
+                                    this.panLatch = true;
+                                    this.draw();
+                                }
+                            }
+                
+                            draw() {
+                                const ctx = this.ctx;
+                                const w = this.width;
+                                const h = this.height;
+                                const cx = w / 2;
+                                const isNarrow = w < 50;
+                                
+                                // Logic to determine if "being adjusted for pot"
+                                // Rotation is active if: PanLatch is ON, OR Sweep Touch is active, OR (Mouse Dragging AND (Mod Key OR Freestyle))
+                                const isTouchRotating = this.panLatch || this.sweepTouchId !== null;
+                                const isMouseRotating = this.dragging && (this.isMod || this.freestyle);
+                                const isAdjustingPot = isTouchRotating || isMouseRotating;
+                                
+                                // Clear
+                                ctx.fillStyle = "#222"; 
+                                ctx.fillRect(0,0,w,h);
+                
+                                // 1. Track Line
+                                ctx.strokeStyle = "#444";
+                                ctx.lineWidth = 4;
+                                ctx.lineCap = "round";
+                                ctx.beginPath();
+                                ctx.moveTo(cx, 20);
+                                ctx.lineTo(cx, h-20);
+                                ctx.stroke();
+                
+                                const handleY = this.getHandleY();
+                
+                                // 2. Fill Line (Highlight) from bottom to handle
+                                ctx.strokeStyle = this.freestyle ? "#FF5555" : "#f4902c"; // Different color for freestyle
+                                ctx.lineWidth = 4;
+                                ctx.beginPath();
+                                ctx.moveTo(cx, h-20);
+                                ctx.lineTo(cx, handleY);
+                                ctx.stroke();
+                
+                                // 3. Ticks
+                                const range = this.max - this.min;
+                                const steps = isNarrow ? 5 : 10;
+                                ctx.strokeStyle = "#666";
+                                ctx.lineWidth = 1;
+                                ctx.font = isNarrow ? "7px Arial" : "10px Arial";
+                                ctx.fillStyle = "#888";
+                                ctx.textAlign = "left";
+                                
+                                for(let i=0; i<=steps; i++) {
+                                    const norm = i/steps;
+                                    const y = 20 + (h-40) * (1.0 - norm);
+                                    const val = this.min + (norm * range);
+                                    
+                                    // Tick line
+                                    ctx.beginPath();
+                                    const tw = isNarrow ? 5 : 10;
+                                    ctx.moveTo(cx - tw, y);
+                                    ctx.lineTo(cx + tw, y);
+                                    ctx.stroke();
+                                    
+                                    // Text (every other)
+                                    if(i % 2 === 0 && !isNarrow) {
+                                        ctx.fillText(val.toFixed(0), cx + 15, y + 3);
+                                    }
+                                }
+                
+                                // 4. Draw Knob (Handle)
+                                const radius = this.radius;
+                                
+                                // Knob Glow (Pan Latch Active)
+                                if (this.panLatch) {
+                                    ctx.save();
+                                    ctx.shadowColor = "#33A1FD";
+                                    ctx.shadowBlur = 15;
+                                    ctx.fillStyle = "#fff"; // Brighter body
+                                } else {
+                                    ctx.fillStyle = "#dcdcdc";
+                                }
+                                
+                                // Knob Body
+                                ctx.beginPath();
+                                ctx.arc(cx, handleY, radius, 0, Math.PI * 2);
+                                ctx.fill();
+                                
+                                if (this.panLatch) ctx.restore(); // Restore shadow
+                                
+                                // Knob Indicator (Rotation)
+                                // Draw Indicator Line
+                                const angle = (this.rotVal / 100) * 135; // +/- 135 degrees range
+                                const rad = (angle - 90) * Math.PI / 180; 
+                                
+                                // Dynamic Length for "Adjusting" state (10x if rotating)
+                                const drawLen = isAdjustingPot ? radius * 10 : radius;
+
+                                const px = cx + drawLen * Math.cos(rad);
+                                const py = handleY + drawLen * Math.sin(rad);
+                                
+                                ctx.strokeStyle = "#f4902c"; // Orange Indicator
+                                ctx.lineWidth = 2;
+                                ctx.beginPath();
+                                ctx.moveTo(cx, handleY);
+                                ctx.lineTo(px, py);
+                                ctx.stroke();
+                                
+                                // Center Dot
+                                ctx.fillStyle = "#f4902c"; // Orange Center Dot
+                                ctx.beginPath();
+                                ctx.arc(cx, handleY, 3, 0, Math.PI*2);
+                                ctx.fill();
+                
+                                // 5. Value Text labels
+                                if (!isNarrow) {
+                                    ctx.fillStyle = "#fff";
+                                    ctx.textAlign = "right";
+                                    ctx.fillText(`L: ${this.linearVal.toFixed(1)}`, cx - 25, handleY + 4);
+                                    
+                                    ctx.textAlign = "left";
+                                    ctx.fillText(`R: ${this.rotVal.toFixed(0)}`, cx + 25, handleY + 4);
+                                } else {
+                                    ctx.fillStyle = "#000";
+                                    ctx.textAlign = "center";
+                                    ctx.font = "7px Arial";
+                                    ctx.fillText(`${this.linearVal.toFixed(0)}`, cx, handleY + 3);
+                                }
+                                
+                                if (this.freestyle && !isNarrow) {
+                                    ctx.textAlign = "center";
+                                    ctx.fillStyle = "#FF5555";
+                                    ctx.font = "bold 10px Arial";
+                                    ctx.fillText("FREESTYLE", cx, h - 5);
+                                }
+                            }
+                            
+                                        // --- Touch Handling ---
+                            
+                                        onCanvasTouchStart(e) {
+                                            e.preventDefault(); // Prevent scroll
+                                            const rect = this.canvas.getBoundingClientRect();
+                                            
+                                            let grabbed = false;
+                                            for (let i = 0; i < e.changedTouches.length; i++) {
+                                                const t = e.changedTouches[i];
+                                                const x = t.clientX - rect.left;
+                                                const y = t.clientY - rect.top;
+                                                
+                                                if (this.knobTouchId === null && this.isOverHandle(x, y)) {
+                                                    this.knobTouchId = t.identifier;
+                                                    this.touchStartY = y; // Canvas Relative Y
+                                                    this.touchStartX = t.clientX; // Screen Relative X for Pan/Latch
+                                                    this.touchStartLin = this.linearVal;
+                                                    this.touchStartRot = this.rotVal;
+                                                    grabbed = true;
+                                                }
+                                            }
+                                            
+                                            if (grabbed) {
+                                                // Attach global listeners
+                                                document.addEventListener('touchstart', this.onGlobalTouchStart, {passive: false});
+                                                document.addEventListener('touchmove', this.onGlobalTouchMove, {passive: false});
+                                                document.addEventListener('touchend', this.onGlobalTouchEnd);
+                                                document.addEventListener('touchcancel', this.onGlobalTouchEnd);
+                                            }
+                                        }
+                            
+                                        onGlobalTouchStart(e) {
+                                            // Check for second finger
+                                            if (this.knobTouchId !== null && this.sweepTouchId === null) {
+                                                for (let i = 0; i < e.changedTouches.length; i++) {
+                                                     const t = e.changedTouches[i];
+                                                     if (t.identifier !== this.knobTouchId) {
+                                                         this.sweepTouchId = t.identifier;
+                                                         this.touchStartX = t.clientX; // Use Global X for sweep
+                                                         this.touchStartRot = this.rotVal;
+                                                         break;
+                                                     }
+                                                }
+                                            }
+                                        }
+                            
+                                        onGlobalTouchMove(e) {
+                                            e.preventDefault();
+                                            const rect = this.canvas.getBoundingClientRect();
+                            
+                                            for (let i = 0; i < e.changedTouches.length; i++) {
+                                                const t = e.changedTouches[i];
+                                                
+                                                // Knob Finger
+                                                if (t.identifier === this.knobTouchId) {
+                                                    if (this.panLatch) {
+                                                         // Global X logic for PanLatch
+                                                         const x = t.clientX;
+                                                         const dx = x - this.touchStartX;
+                                                         const sensitivity = 0.5; 
+                                                         const change = dx * sensitivity;
+                                                         this.rotVal = Math.max(this.rotMin, Math.min(this.rotMax, this.touchStartRot + change));
+                                                    } else {
+                                                        // Canvas Relative Y logic for Linear
+                                                        // Note: We use clientY and subtract rect.top to get canvas Y
+                                                        const y = t.clientY - rect.top;
+                                                        const dy = y - this.touchStartY;
+                                                        const pixelRange = this.height - 40;
+                                                        const valRange = this.max - this.min;
+                                                        const change = -(dy / pixelRange) * valRange;
+                                                        
+                                                        this.linearVal = Math.max(this.min, Math.min(this.max, this.touchStartLin + change));
+                                                    }
+                                                }
+                                                
+                                                // Sweep Finger - Always Global X
+                                                                    if (t.identifier === this.sweepTouchId) {
+                                                                        const x = t.clientX;
+                                                                        const dx = x - this.touchStartX;
+                                                                        const sensitivity = 0.5; 
+                                                                        const change = dx * sensitivity;
+                                                                        
+                                                                        this.rotVal = Math.max(this.rotMin, Math.min(this.rotMax, this.touchStartRot + change));
+                                                                    }                                            }
+                                            this.draw();
+                                        }
+                            
+                                        onGlobalTouchEnd(e) {
+                                            for (let i = 0; i < e.changedTouches.length; i++) {
+                                                const t = e.changedTouches[i];
+                                                if (t.identifier === this.knobTouchId) {
+                                                    this.knobTouchId = null;
+                                                    this.sweepTouchId = null; // Lose knob -> lose control
+                                                    
+                                                    if (this.panLatch) {
+                                                        this.panLatch = false;
+                                                        this.draw();
+                                                    }
+                                                } else if (t.identifier === this.sweepTouchId) {
+                                                    this.sweepTouchId = null;
+                                                }
+                                            }
+                                            
+                                            if (this.knobTouchId === null) {
+                                                document.removeEventListener('touchstart', this.onGlobalTouchStart);
+                                                document.removeEventListener('touchmove', this.onGlobalTouchMove);
+                                                document.removeEventListener('touchend', this.onGlobalTouchEnd);
+                                                document.removeEventListener('touchcancel', this.onGlobalTouchEnd);
+                                            }
+                                        }                
+                            onMouseDown(e) {
+                                const rect = this.canvas.getBoundingClientRect();
+                                const x = e.clientX - rect.left;
+                                const y = e.clientY - rect.top;
+                                
+                                // Use helper
+                                if (this.isOverHandle(x, y)) {
+                                    this.dragging = true;
+                                    this.startX = x;
+                                    this.startY = y;
+                                    this.startLin = this.linearVal;
+                                    this.startRot = this.rotVal;
+                                    this.isMod = this.checkMod(e);
+                                }
+                            }
+                            
+                            onMouseMove(e) {
+                                if (!this.dragging) return;
+                                
+                                const rect = this.canvas.getBoundingClientRect();
+                                const x = e.clientX - rect.left;
+                                const y = e.clientY - rect.top;
+                                
+                                const currentMod = this.checkMod(e);
+                
+                                // If not freestyle, check for mode switch
+                                if (!this.freestyle && currentMod !== this.isMod) {
+                                    this.startX = x;
+                                    this.startY = y;
+                                    this.startLin = this.linearVal;
+                                    this.startRot = this.rotVal;
+                                    this.isMod = currentMod;
+                                    this.updateCursor(this.isMod);
+                                }
+                
+                                // Rotation Logic
+                                // Active if: Freestyle OR Mod Key pressed OR Pan Latch Active
+                                if (this.freestyle || this.isMod || this.panLatch) {
+                                    const dx = x - this.startX;
+                                    const sensitivity = 0.5; 
+                                    let change = dx * sensitivity;
+                                    if (this.freestyle) change /= 2; 
+                                    
+                                    this.rotVal = Math.max(this.rotMin, Math.min(this.rotMax, this.startRot + change));
+                                } 
+                                
+                                // Linear Logic
+                                // Active if: Freestyle OR (NOT Mod Key AND NOT Pan Latch)
+                                if (this.freestyle || (!this.isMod && !this.panLatch)) {
+                                    const dy = y - this.startY;
+                                    const pixelRange = this.height - 40;
+                                    const valRange = this.max - this.min;
+                                    let change = -(dy / pixelRange) * valRange;
+                                    if (this.freestyle) change /= 2;
+                                    
+                                    this.linearVal = Math.max(this.min, Math.min(this.max, this.startLin + change));
+                                }
+                                
+                                this.draw();
+                            }
+                            
+                            onMouseUp(e) {
+                                this.dragging = false;
+                                if (this.panLatch) {
+                                    this.panLatch = false;
+                                    this.draw();
+                                }
+                            }
+                
+                            onWheel(e) {
+                                e.preventDefault();
+                                const delta = Math.sign(e.deltaY) * -1; // Up is positive
+                                
+                                // In freestyle, maybe affect both or just one? Usually standard scroll behavior persists.
+                                if(this.checkMod(e)) {
+                                    this.rotVal = Math.max(this.rotMin, Math.min(this.rotMax, this.rotVal + (delta * 5)));
+                                } else {
+                                    this.linearVal = Math.max(this.min, Math.min(this.max, this.linearVal + (delta * 2)));
+                                }
+                                this.draw();
+                            }        }
+
+        // --- Demo Data ---
+        // All same size: 100x400
+        const w = 100;
+        const h = 400;
+        const demos = [
+            { label: "Main Fader", width: w, height: h, min: 0, max: 100, value: 75, rotValue: 0 },
+            { label: "Effect Send", width: w, height: h, min: 0, max: 100, value: 20, rotValue: 0, freestyle: true },
+            { label: "4 Channel Bus", height: h, min: -60, max: 10, value: -10, rotValue: 0, channels: 4 },
+            "controls"
+        ];
+
+        const app = document.getElementById('app');
+        demos.forEach(conf => {
+            if (conf === "controls") {
+                const controls = document.querySelector('.controls');
+                app.appendChild(controls);
+                controls.style.width = "100%";
+                return;
+            }
+
+            if (conf.channels) {
+                // Create a container for the multichannel group
+                const group = document.createElement('div');
+                group.style.display = 'flex';
+                group.style.gap = '5px';
+                group.style.padding = '10px';
+                group.style.backgroundColor = 'rgba(0,0,0,0.2)';
+                group.style.borderRadius = '4px';
+                group.style.flexDirection = 'column';
+                group.style.alignItems = 'center';
+                
+                const gLabel = document.createElement('div');
+                gLabel.innerText = conf.label;
+                gLabel.style.fontWeight = 'bold';
+                gLabel.style.marginBottom = '10px';
+                group.appendChild(gLabel);
+                
+                const stripContainer = document.createElement('div');
+                stripContainer.style.display = 'flex';
+                stripContainer.style.gap = '2px';
+                group.appendChild(stripContainer);
+                
+                app.appendChild(group);
+                
+                const stripW = 36; // Diameter of the knob (radius 18 * 2)
+                for(let i=0; i<conf.channels; i++) {
+                    const randomVal = Math.random() * (conf.max - conf.min) + conf.min;
+                    const randomRot = Math.random() * 200 - 100; // -100 to 100
+                    new LTPWidget(stripContainer, {
+                        ...conf,
+                        label: `CH${i+1}`,
+                        width: stripW,
+                        height: conf.height,
+                        value: randomVal,
+                        rotValue: randomRot
+                    });
+                }
+            } else {
+                new LTPWidget(app, conf);
+            }
+        });
+
+
+    </script>
+    <footer style="margin-top: 40px; font-size: 7pt; color: #666; max-width: 800px; text-align: left; line-height: 1.2;">
+        <hr style="border: 0; border-top: 1px solid #444; margin-bottom: 20px;">
+        <p><strong>The Open Concept License</strong></p>
+        <p>Posted on 20260121</p>
+        <p>Copyright © 2026 Anthony Kuzub</p>
+        <p>This license allows for the free and open use of the concepts, designs, and software associated with this project, strictly adhering to the terms set forth below regarding nomenclature and attribution.</p>
+        <p><strong>1. Grant of License</strong></p>
+        <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this design, software, or associated documentation (the “Work”), to deal in the Work without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Work, subject to the following conditions.</p>
+        <p><strong>2. Mandatory Nomenclature</strong></p>
+        <p>Any implementation, derivative work, or physical hardware constructed using these concepts must formally and publicly utilize the following terminology in all documentation, marketing materials, and technical specifications:</p>
+        <p>LTP: Linear Travelling Potentiometer</p>
+        <p>GCA: Ganged Controlled Array</p>
+        <p>CMDP: Circular Motion Displacement Potentiometer</p>
+        <p>MDP: Multi-Dimensional Panner</p>
+        <p><strong>3. Attribution and Credit</strong></p>
+        <p>In all copies or substantial portions of the Work, and in all derivative works, explicit credit must be given to Anthony Kuzub as the source of inspiration and original concept. This credit must be prominent and clearly visible to the end-user somehow.</p>
+        <p><strong>4. “As Is” Warranty</strong></p>
+        <p>THE WORK IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS IN THE WORK.</p>
+    </footer>
+</body>
+</html>

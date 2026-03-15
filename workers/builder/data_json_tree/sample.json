@@ -1,0 +1,23 @@
+{
+  "data_json_tree_Example": {
+    "type": "_JsonTree",
+    "label_active": "AES70 Object Model (data_AES70.json)",
+    "json_source": "display/right_50/bottom_90/10_datasets/3_AES70/data_AES70.json",
+    "allow_filter": true,
+    "layout": {
+      "sticky": "ew",
+      "padx": 5,
+      "pady": 5,
+      "width": 100,
+      "height": 50
+    },
+    "cosmetics": {
+      "colors": {
+        "primary": "#FF9900",
+        "secondary": "#444444",
+        "background": "#2b2b2b"
+      }
+    }
+  },
+  "_README": "This is an enhanced sample configuration demonstrating full instantiation capabilities."
+}

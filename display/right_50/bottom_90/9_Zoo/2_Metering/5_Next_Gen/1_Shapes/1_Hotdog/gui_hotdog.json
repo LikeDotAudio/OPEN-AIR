@@ -1,0 +1,642 @@
+{
+  "Zoo_Metering_Next_Gen_Shapes_Hotdog": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.5.1.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Hotdog_Variations": {
+        "type": "OcaBlock",
+        "description": "Hotdog Meter Variations",
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "Hotdog_1_Large": {
+            "type": "_NeedleVUMeter",
+            "label": "Large Classic",
+            "geometry": {
+              "width": 300,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -7.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "#000000",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "hotdog",
+                "bezel_width": 5,
+                "Pointer_Style": "knife-edge",
+                "pivot_colour": "#3e2723"
+              },
+              "labels": [
+                {
+                  "text": "VU METER",
+                  "x": 0,
+                  "y": -45,
+                  "size": 12,
+                  "weight": "bold"
+                },
+                {
+                  "value_overlay": true,
+                  "x": 0,
+                  "y": -100,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "#000000",
+                  "sig_fig": 3
+                }
+              ]
+            },
+            "label_active": "Large Classic",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 300,
+            "height": 200,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hotdog",
+            "bezel_width": 5,
+            "Pointer_Style": "knife-edge",
+            "pivot_colour": "#3e2723",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -7.0,
+            "value": -7.0,
+            "default_value": -7.0,
+            "step": 5.0,
+            "path": "Hotdog_Variations/Hotdog_1_Large"
+          },
+          "Hotdog_2_Medium": {
+            "type": "_NeedleVUMeter",
+            "label": "Medium Gold",
+            "geometry": {
+              "width": 250,
+              "height": 160
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#ffffff",
+                "bezel": "#FFD700",
+                "scale_label": "#ffffff"
+              },
+              "style_overrides": {
+                "bezel_shape": "hotdog",
+                "bezel_width": 3,
+                "Pointer_Style": "baton",
+                "pivot_colour": "#FFD700"
+              },
+              "labels": [
+                {
+                  "text": "AUDIO LEVEL",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "gold"
+                }
+              ]
+            },
+            "label_active": "Medium Gold",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 250,
+            "height": 160,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hotdog",
+            "bezel_width": 3,
+            "Pointer_Style": "baton",
+            "pivot_colour": "#FFD700",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -10.0,
+            "value": -10.0,
+            "default_value": -10.0,
+            "step": 5.0,
+            "path": "Hotdog_Variations/Hotdog_2_Medium"
+          },
+          "Hotdog_3_Small": {
+            "type": "_NeedleVUMeter",
+            "label": "Small Silver",
+            "geometry": {
+              "width": 180,
+              "height": 120
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -3.0,
+                "reff_point": 0.0,
+                "step": 5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "silver",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "hotdog",
+                "bezel_width": 1,
+                "mask": false,
+                "Pointer_Style": "needle",
+                "pivot_colour": "silver"
+              },
+              "labels": [
+                {
+                  "text": "MINI-DOG",
+                  "x": 0,
+                  "y": -25,
+                  "size": 8
+                }
+              ]
+            },
+            "label_active": "Small Silver",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 180,
+            "height": 120,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hotdog",
+            "bezel_width": 1,
+            "mask": false,
+            "Pointer_Style": "needle",
+            "pivot_colour": "silver",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -3.0,
+            "value": -3.0,
+            "default_value": -3.0,
+            "step": 5.0,
+            "path": "Hotdog_Variations/Hotdog_3_Small"
+          },
+          "Hotdog_4_Night_Mode": {
+            "type": "_NeedleVUMeter",
+            "label": "Night Mode",
+            "geometry": {
+              "width": 250,
+              "height": 160
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#00FF00",
+                "bezel": "#333333",
+                "scale_label": "#00FF00"
+              },
+              "style_overrides": {
+                "bezel_shape": "hotdog",
+                "bezel_width": 4,
+                "enable_lighting": true,
+                "Pointer_Style": "knife-edge"
+              },
+              "labels": [
+                {
+                  "text": "LUMINESCENT",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "#00FF00"
+                }
+              ]
+            },
+            "label_active": "Night Mode",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 250,
+            "height": 160,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hotdog",
+            "bezel_width": 4,
+            "enable_lighting": true,
+            "Pointer_Style": "knife-edge",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -5.0,
+            "value": -5.0,
+            "default_value": -5.0,
+            "path": "Hotdog_Variations/Hotdog_4_Night_Mode"
+          },
+          "Hotdog_5_Flat": {
+            "type": "_NeedleVUMeter",
+            "label": "Flat Blue",
+            "geometry": {
+              "width": 250,
+              "height": 160
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#333333",
+                "bezel": "#33A1FD",
+                "scale_label": "#333333"
+              },
+              "style_overrides": {
+                "bezel_shape": "hotdog",
+                "bezel_width": 2,
+                "enable_lighting": false,
+                "Pointer_Style": "baton"
+              },
+              "labels": [
+                {
+                  "text": "FLAT DESIGN",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "color": "#33A1FD"
+                }
+              ]
+            },
+            "label_active": "Flat Blue",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 250,
+            "height": 160,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hotdog",
+            "bezel_width": 2,
+            "enable_lighting": false,
+            "Pointer_Style": "baton",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -15.0,
+            "value": -15.0,
+            "default_value": -15.0,
+            "path": "Hotdog_Variations/Hotdog_5_Flat"
+          },
+          "Hotdog_6_Luxury": {
+            "type": "_NeedleVUMeter",
+            "label": "Luxury Gold",
+            "geometry": {
+              "width": 250,
+              "height": 160
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "#B8860B",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "hotdog",
+                "bezel_width": 5,
+                "enable_lighting": true,
+                "Pointer_Style": "spade"
+              },
+              "labels": [
+                {
+                  "text": "PRESTIGE",
+                  "x": 0,
+                  "y": -40,
+                  "size": 12,
+                  "weight": "bold"
+                }
+              ]
+            },
+            "label_active": "Luxury Gold",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 250,
+            "height": 160,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hotdog",
+            "bezel_width": 5,
+            "enable_lighting": true,
+            "Pointer_Style": "spade",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": 0.0,
+            "value": 0.0,
+            "default_value": 0.0,
+            "path": "Hotdog_Variations/Hotdog_6_Luxury"
+          },
+          "Hotdog_7_Cyber": {
+            "type": "_NeedleVUMeter",
+            "label": "Cyber Neon",
+            "geometry": {
+              "width": 250,
+              "height": 160
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -2.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#00FFFF",
+                "bezel": "#FF00FF",
+                "scale_label": "#00FFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "hotdog",
+                "bezel_width": 2,
+                "enable_lighting": true,
+                "Pointer_Style": "taper"
+              },
+              "labels": [
+                {
+                  "text": "CYBERPUNK",
+                  "x": 0,
+                  "y": -35,
+                  "size": 12,
+                  "font": "Courier New",
+                  "color": "#00FFFF"
+                }
+              ]
+            },
+            "label_active": "Cyber Neon",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 250,
+            "height": 160,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hotdog",
+            "bezel_width": 2,
+            "enable_lighting": true,
+            "Pointer_Style": "taper",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -2.0,
+            "value": -2.0,
+            "default_value": -2.0,
+            "path": "Hotdog_Variations/Hotdog_7_Cyber"
+          },
+          "Hotdog_8_Vintage": {
+            "type": "_NeedleVUMeter",
+            "label": "Vintage Cream",
+            "geometry": {
+              "width": 250,
+              "height": 160
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#552200",
+                "bezel": "#8B4513",
+                "scale_label": "#552200"
+              },
+              "style_overrides": {
+                "bezel_shape": "hotdog",
+                "bezel_width": 5,
+                "enable_lighting": false,
+                "Pointer_Style": "teardrop"
+              },
+              "labels": [
+                {
+                  "text": "EST. 1970",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "font": "Times New Roman"
+                }
+              ]
+            },
+            "label_active": "Vintage Cream",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 250,
+            "height": 160,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hotdog",
+            "bezel_width": 5,
+            "enable_lighting": false,
+            "Pointer_Style": "teardrop",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -10.0,
+            "value": -10.0,
+            "default_value": -10.0,
+            "path": "Hotdog_Variations/Hotdog_8_Vintage"
+          },
+          "Hotdog_9_Blueprint": {
+            "type": "_NeedleVUMeter",
+            "label": "Blueprint",
+            "geometry": {
+              "width": 250,
+              "height": 160
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -20.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFFFFF",
+                "bezel": "#FFFFFF",
+                "scale_label": "#FFFFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "hotdog",
+                "bezel_width": 2,
+                "enable_lighting": false,
+                "Pointer_Style": "line"
+              },
+              "labels": [
+                {
+                  "text": "CAD DRAWING",
+                  "x": 0,
+                  "y": -35,
+                  "size": 10,
+                  "font": "Courier New"
+                }
+              ]
+            },
+            "label_active": "Blueprint",
+            "active_text_color": "#1a1a1a",
+            "text_color": "#888888",
+            "active_font_style": "bold",
+            "active_font_size": null,
+            "inactive_font_style": "normal",
+            "inactive_font_size": null,
+            "active_color": "#FF9900",
+            "active_bg_color": "#000000",
+            "bg_color": "#2b2b2b",
+            "glow_intensity": 1.0,
+            "width": 250,
+            "height": 160,
+            "Orientation": "vertical",
+            "layout": {},
+            "bezel_shape": "hotdog",
+            "bezel_width": 2,
+            "enable_lighting": false,
+            "Pointer_Style": "line",
+            "min": -20.0,
+            "value_min": -20.0,
+            "max": 3.0,
+            "value_max": 3.0,
+            "value_default": -20.0,
+            "value": -20.0,
+            "default_value": -20.0,
+            "path": "Hotdog_Variations/Hotdog_9_Blueprint"
+          }
+        },
+        "active_text_color": "#1a1a1a",
+        "text_color": "#888888",
+        "active_font_style": "bold",
+        "active_font_size": null,
+        "inactive_font_style": "normal",
+        "inactive_font_size": null,
+        "active_color": "#FF9900",
+        "active_bg_color": "#000000",
+        "bg_color": "#2b2b2b",
+        "glow_intensity": 1.0,
+        "Orientation": "vertical",
+        "layout": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "Load_YAK_6060B_CURRent": {
+    "type": "OcaBin",
+    "id": "50.100.7.10.1.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Current": {
+        "type": "OcaBlock",
+        "description": "Constant Current Parameters",
+        "fields": {
+          "Set_Current_Level": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "CURR <value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "value": {
+                    "value": "1.0",
+                    "type": "_GuiValue",
+                    "label": "Current",
+                    "units": "A",
+                    "description": "Amps"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Current_Range": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "CURR:RANG <value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "value": {
+                    "value": "60",
+                    "type": "_GuiValue",
+                    "label": "Range",
+                    "units": "A",
+                    "description": "6 or 60 A"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Current_Slew": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "CURR:SLEW <value>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "value": {
+                    "value": "1000",
+                    "type": "_GuiValue",
+                    "label": "Slew Rate",
+                    "units": "A/s",
+                    "description": "A/sec"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

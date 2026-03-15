@@ -1,0 +1,61 @@
+{
+  "Zoo_images_BG_sample": {
+    "type": "OcaBin",
+    "id": "50.90.9.4.4.5",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "fields": {
+        "Master_Meter": {
+          "type": "_NeedleVUMeter",
+          "label": "Master Studio Output",
+          "geometry": {
+            "width": 400,
+            "height": 250
+          },
+          "domain": {
+            "primary": {
+              "min": -20.0,
+              "max": 3.0,
+              "value_default": -7.0
+            }
+          },
+          "cosmetics": {
+            "colors": {
+              "bezel": "#111111"
+            },
+            "style_overrides": {
+              "bezel_shape": "hotdog",
+              "bezel_width": 8,
+              "Pointer_Style": "knife-edge",
+              "overlay_style": "dome"
+            }
+          },
+          "label_active": "Master Studio Output",
+          "width": 400,
+          "height": 250,
+          "Orientation": "vertical",
+          "layout": {},
+          "bezel_shape": "hotdog",
+          "bezel_width": 8,
+          "Pointer_Style": "knife-edge",
+          "overlay_style": "dome",
+          "min": -20.0,
+          "value_min": -20.0,
+          "max": 3.0,
+          "value_max": 3.0,
+          "value_default": -7.0,
+          "value": -7.0,
+          "default_value": -7.0,
+          "path": "Master_Meter"
+        }
+      }
+    }
+  }
+}

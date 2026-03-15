@@ -1,0 +1,560 @@
+{
+  "Spectrum_YAK_HPE4411A_Trace": {
+    "type": "OcaBin",
+    "id": "50.100.0.10.3.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "nab": {
+        "type": "OcaBlock",
+        "description": "NAB Trace Monitoring",
+        "fields": {
+          "NAB_traces_1_2_3_N9340B": {
+            "type": "OcaBlock",
+            "description": "Primary Trace Monitoring",
+            "fields": {
+              "N9340B": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":FREQuency:STARt?;:FREQuency:STOP?;:TRACe1:MODE?;:TRACe2:MODE?;:TRACe3:MODE?;:TRACe1:DATA?;:TRACe2:DATA?;:TRACe3:DATA?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "description": "Trace Settings and Data",
+                "fields": {
+                  "StartFreq": {
+                    "value": "The starting frequency in Hz.",
+                    "type": "_GuiValue",
+                    "label": "Start Frequency",
+                    "units": "Hz"
+                  },
+                  "StopFreq": {
+                    "value": "The stopping frequency in Hz.",
+                    "type": "_GuiValue",
+                    "label": "Stop Frequency",
+                    "units": "Hz"
+                  },
+                  "TraceMode1": {
+                    "value": "The trace modes for each trace.",
+                    "type": "_GuiValue",
+                    "label": "Trace Mode 1"
+                  },
+                  "TraceMode2": {
+                    "value": "The trace modes for each trace.",
+                    "type": "_GuiValue",
+                    "label": "Trace Mode 2"
+                  },
+                  "TraceMode3": {
+                    "value": "The trace modes for each trace.",
+                    "type": "_GuiValue",
+                    "label": "Trace Mode 3"
+                  },
+                  "TraceData1": {
+                    "value": "Processed trace data.",
+                    "type": "_GuiValue",
+                    "label": "Trace Data 1"
+                  },
+                  "TraceData2": {
+                    "value": "Processed trace data.",
+                    "type": "_GuiValue",
+                    "label": "Trace Data 2"
+                  },
+                  "TraceData3": {
+                    "value": "Processed trace data.",
+                    "type": "_GuiValue",
+                    "label": "Trace Data 3"
+                  }
+                }
+              }
+            }
+          },
+          "NAB_traces_1_2_3_N9342CN": {
+            "type": "OcaBlock",
+            "description": "Primary Trace Monitoring",
+            "fields": {
+              "N9342CN": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":FREQuency:STARt?;:FREQuency:STOP?;:TRAC1:MODE?;:TRAC2:MODE?;:TRAC3:MODE?;:TRACe:DATA? TRACE1;:TRACe:DATA? TRACE2;:TRACe:DATA? TRACE3;"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "description": "Trace Settings and Data",
+                "fields": {
+                  "StartFreq": {
+                    "value": "The starting frequency in Hz.",
+                    "type": "_GuiValue",
+                    "label": "Start Frequency",
+                    "units": "Hz"
+                  },
+                  "StopFreq": {
+                    "value": "The stopping frequency in Hz.",
+                    "type": "_GuiValue",
+                    "label": "Stop Frequency",
+                    "units": "Hz"
+                  },
+                  "TraceMode1": {
+                    "value": "The trace modes for each trace.",
+                    "type": "_GuiValue",
+                    "label": "Trace Mode 1"
+                  },
+                  "TraceMode2": {
+                    "value": "The trace modes for each trace.",
+                    "type": "_GuiValue",
+                    "label": "Trace Mode 2"
+                  },
+                  "TraceMode3": {
+                    "value": "The trace modes for each trace.",
+                    "type": "_GuiValue",
+                    "label": "Trace Mode 3"
+                  },
+                  "TraceData1": {
+                    "value": "Processed trace data.",
+                    "type": "_GuiValue",
+                    "label": "Trace Data 1"
+                  },
+                  "TraceData2": {
+                    "value": "Processed trace data.",
+                    "type": "_GuiValue",
+                    "label": "Trace Data 2"
+                  },
+                  "TraceData3": {
+                    "value": "Processed trace data.",
+                    "type": "_GuiValue",
+                    "label": "Trace Data 3"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "type": "OcaBlock",
+        "description": "Trace Data Queries",
+        "fields": {
+          "Get_Trace_1_Data_N9340B": {
+            "type": "OcaBlock",
+            "fields": {
+              "N9340B": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":TRACe<trace_number>:DATA?"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_number": {
+                    "value": "1",
+                    "type": "_GuiValue",
+                    "label": "Trace Number",
+                    "description": "The trace number."
+                  }
+                }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_data": {
+                    "value": "Processed trace data or False.",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          },
+          "Get_Trace_1_Data_N9342CN": {
+            "type": "OcaBlock",
+            "fields": {
+              "N9342CN": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":TRACe:DATA? TRACE<trace_number>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_number": {
+                    "value": "1",
+                    "type": "_GuiValue",
+                    "label": "Trace Number",
+                    "description": "The trace number."
+                  }
+                }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_data": {
+                    "value": "Processed trace data or False.",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          },
+          "Get_Trace_2_Data_N9340B": {
+            "type": "OcaBlock",
+            "fields": {
+              "N9340B": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":TRACe<trace_number>:DATA?"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_number": {
+                    "value": "2",
+                    "type": "_GuiValue",
+                    "label": "Trace Number"
+                  }
+                }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_data": {
+                    "value": "Processed trace data.",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          },
+          "Get_Trace_2_Data_N9342CN": {
+            "type": "OcaBlock",
+            "fields": {
+              "N9342CN": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":TRACe:DATA? TRACE<trace_number>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_number": {
+                    "value": "2",
+                    "type": "_GuiValue",
+                    "label": "Trace Number"
+                  }
+                }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_data": {
+                    "value": "Processed trace data.",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          },
+          "Get_Trace_3_Data_N9340B": {
+            "type": "OcaBlock",
+            "fields": {
+              "N9340B": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":TRACe<trace_number>:DATA?"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_number": {
+                    "value": "3",
+                    "type": "_GuiValue",
+                    "label": "Trace Number"
+                  }
+                }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_data": {
+                    "value": "Processed trace data.",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          },
+          "Get_Trace_3_Data_N9342CN": {
+            "type": "OcaBlock",
+            "fields": {
+              "N9342CN": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":TRACe:DATA? TRACE<trace_number>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_number": {
+                    "value": "3",
+                    "type": "_GuiValue",
+                    "label": "Trace Number"
+                  }
+                }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_data": {
+                    "value": "Processed trace data.",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          },
+          "Get_Trace_4_Data_N9340B": {
+            "type": "OcaBlock",
+            "fields": {
+              "N9340B": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":TRACe<trace_number>:DATA?"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_number": {
+                    "value": "4",
+                    "type": "_GuiValue",
+                    "label": "Trace Number"
+                  }
+                }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_data": {
+                    "value": "Processed trace data.",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          },
+          "Get_Trace_4_Data_N9342CN": {
+            "type": "OcaBlock",
+            "fields": {
+              "N9342CN": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":TRACe:DATA? TRACE<trace_number>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_number": {
+                    "value": "4",
+                    "type": "_GuiValue",
+                    "label": "Trace Number"
+                  }
+                }
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "trace_data": {
+                    "value": "Processed trace data.",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "fader_bar_graph_Example": {
+    "type": "_FaderWithBarGraph",
+    "label_active": "Standard",
+    "value_min": -60.0,
+    "value_max": 10.0,
+    "value_default": -10.0,
+    "layout": {
+      "height": 300,
+      "width": 120
+    },
+    "meter_width": 15,
+    "cap_height": 40,
+    "show_ticks": true,
+    "tick_steps": 10,
+    "cosmetics": {
+      "colors": {
+        "primary": "#FF9900",
+        "secondary": "#444444",
+        "background": "#2b2b2b"
+      }
+    }
+  },
+  "_README": "This is an enhanced sample configuration demonstrating full instantiation capabilities."
+}

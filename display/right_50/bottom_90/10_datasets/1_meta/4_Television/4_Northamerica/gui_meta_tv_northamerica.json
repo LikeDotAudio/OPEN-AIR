@@ -1,0 +1,32 @@
+{
+  "datasets_meta_Television_Northamerica": {
+    "type": "OcaBlock",
+    "id": "50.90.10.1.4.4",
+    "description": "JSON Tree Viewer for Tv Northamerica",
+    "layout_columns": 1,
+    "fields": {
+      "Data_Tree": {
+        "type": "JsonTree",
+        "label_active": "Tv Northamerica",
+        "json_source": "display/right_50/bottom_90/10_datasets/1_meta/4_Television/4_Northamerica/data_meta_tv_northamerica.json",
+        "height": 50,
+        "alpha": 0.9,
+        "layout": {
+          "sticky": "nsew",
+          "weight_y": 1,
+          "pady": 0
+        },
+        "ALLOW": {
+          "filter": true,
+          "browse": false,
+          "edit": true,
+          "expand_all": true,
+          "save_as": true,
+          "table_toggle": true
+        },
+        "show_values": true
+      }
+    },
+    "show_label": false
+  }
+}

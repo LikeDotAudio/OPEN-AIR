@@ -1,0 +1,86 @@
+{
+  "Zoo_buttons_directional_buttons": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.9",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label_active": "Navigation",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartNav",
+            "label": "Navigation",
+            "notes": "Standard directional buttons for navigation.",
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label_active": "Camera Movement",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartNav",
+            "label": "Camera Movement",
+            "notes": "Controls for moving a camera (up, down, left, right).",
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label_active": "Robot Controls",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartNav",
+            "label": "Robot Controls",
+            "notes": "Used to control the movement of a robot.",
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label_active": "Cursor",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartNav",
+            "label": "Cursor",
+            "notes": "Generic directional buttons for cursor movement.",
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label_active": "Focus Adjust",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartNav",
+            "label": "Focus Adjust",
+            "notes": "Buttons for adjusting focus in optical systems.",
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      }
+    }
+  }
+}

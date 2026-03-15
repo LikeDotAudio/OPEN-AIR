@@ -1,0 +1,304 @@
+{
+  "Oscilloscope_YAK_54641D_TRIGger": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.1.5",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": "Trigger Settings",
+        "fields": {
+          "Set_Trigger_Mode": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "TRIGger:MODE <mode>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "mode": {
+                    "value": "EDGE",
+                    "type": "_GuiValue",
+                    "label": "Mode",
+                    "units": "",
+                    "description": "EDGE, PATTern, PULSe, TV, IIC, SPI, GLITch"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Holdoff": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "TRIGger:HOLDoff <time>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "time": {
+                    "value": "60e-9",
+                    "type": "_GuiValue",
+                    "label": "Holdoff",
+                    "units": "s"
+                  }
+                }
+              }
+            }
+          },
+          "Edge_Trigger_Setup": {
+            "type": "OcaBlock",
+            "description": "Edge Trigger Config",
+            "fields": {
+              "Set_Edge_Source": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": "TRIGger:EDGE:SOURce <source>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "source": {
+                        "value": "CHAN1",
+                        "type": "_GuiValue",
+                        "label": "Source",
+                        "units": "",
+                        "description": "CHANn, DIGn, EXT"
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Edge_Slope": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": "TRIGger:EDGE:SLOPe <slope>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "slope": {
+                        "value": "POSitive",
+                        "type": "_GuiValue",
+                        "label": "Slope",
+                        "units": "",
+                        "description": "POSitive, NEGative"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Glitch_Trigger_Setup": {
+            "type": "OcaBlock",
+            "description": "Glitch/Pulse Width Config",
+            "fields": {
+              "Set_Glitch_Source": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": "TRIGger:GLITch:SOURce <source>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "source": {
+                        "value": "CHAN1",
+                        "type": "_GuiValue",
+                        "label": "Source",
+                        "units": ""
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Glitch_Condition": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": "TRIGger:GLITch:QUALifier <qual>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "qual": {
+                        "value": "LESSthan",
+                        "type": "_GuiValue",
+                        "label": "Condition",
+                        "units": "",
+                        "description": "LESSthan, GREaterthan, RANGe"
+                      }
+                    }
+                  }
+                }
+              },
+              "Set_Glitch_Width": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": "TRIGger:GLITch:LESSthan <time>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "time": {
+                        "value": "100e-9",
+                        "type": "_GuiValue",
+                        "label": "Time",
+                        "units": "s"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,561 @@
+{
+  "Spectrum_YAK_N9340B_Amplitude": {
+    "type": "OcaBin",
+    "id": "50.100.0.10.1.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "nab": {
+        "type": "OcaBlock",
+        "description": "NAB Amplitude Monitoring",
+        "fields": {
+          "amplitude_settings": {
+            "type": "OcaBlock",
+            "description": "Power and Attenuation Readbacks",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":DISPlay:WINDow:TRACe:Y:RLEVel?;:POWer:ATTenuation?;:POWer:GAIN?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "description": "Readback Values",
+                "fields": {
+                  "Ref_Level_dBm": {
+                    "label": "Ref Level (dBm)",
+                    "value": "The reference level in dBm.",
+                    "type": "_GuiValue",
+                    "units": "dBm"
+                  },
+                  "Attenuation_dB": {
+                    "label": "Attenuation (dB)",
+                    "value": "The attenuation in dB.",
+                    "type": "_GuiValue",
+                    "units": "dB"
+                  },
+                  "Preamp_On": {
+                    "label": "Preamp On",
+                    "value": "Boolean for preamp state.",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "rig": {
+        "type": "OcaBlock",
+        "description": "RIG Amplitude Commands",
+        "fields": {
+          "Ref_Level_dBm": {
+            "type": "OcaBlock",
+            "description": "Set Power Levels",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>;:POWer:RF:ATTenuation <Attenuation_dB>;:POWer:GAIN <Preamp_On>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Ref_Level_dBm": {
+                    "value": "-45",
+                    "type": "_GuiValue",
+                    "label": "Ref Level",
+                    "units": "dBm",
+                    "description": "The SCPI input for reference level."
+                  },
+                  "Attenuation_dB": {
+                    "value": "10",
+                    "type": "_GuiValue",
+                    "label": "Attenuation",
+                    "units": "dB",
+                    "description": "The SCPI input for power attenuation."
+                  },
+                  "Preamp_On": {
+                    "value": "1",
+                    "type": "_GuiValue",
+                    "label": "Preamp (0/1)",
+                    "description": "The SCPI input for power attenuation."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "type": "OcaBlock",
+        "description": "Individual Read Queries",
+        "fields": {
+          "Reference_Level": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":DISPlay:WINDow:TRACe:Y:RLEVel?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "ref_level": {
+                    "label": "Ref Level (dBm)",
+                    "value": "The reference level in dBm.",
+                    "type": "_GuiValue",
+                    "units": "dBm"
+                  }
+                }
+              }
+            }
+          },
+          "Attenuation": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":POWer:RF:ATTenuation?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "attenuation": {
+                    "label": "Attenuation (dB)",
+                    "value": "The attenuation in dB.",
+                    "type": "_GuiValue",
+                    "units": "dB"
+                  }
+                }
+              }
+            }
+          },
+          "Preamp_State": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":SENSE:POWer:RF:GAIN:STATe?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "preamp_state": {
+                    "label": "Preamp State",
+                    "value": "Boolean for preamp state.",
+                    "type": "_GuiValue"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "set": {
+        "type": "OcaBlock",
+        "description": "Individual Power Sets",
+        "fields": {
+          "Reference_Level": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":DISPlay:WINDow:TRACe:Y:RLEVel <Ref_Level_dBm>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Ref_Level_dBm": {
+                    "type": "_GuiValue",
+                    "label": "Ref Level",
+                    "units": "dBm",
+                    "value": "-40"
+                  }
+                }
+              }
+            }
+          },
+          "Power_Attenuation": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":POWer:ATTenuation <Power_Attenuation>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Power_Attenuation": {
+                    "type": "_GuiValue",
+                    "label": "Attenuation",
+                    "units": "dB",
+                    "value": "20"
+                  }
+                }
+              }
+            }
+          },
+          "Auto_Attenuation_Controls": {
+            "type": "OcaBlock",
+            "fields": {
+              "Set_Input_Auto_Attenuation_ON": {
+                "type": "_GuiActuator",
+                "label_inactive": "Auto Atten ON",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "Execute Command": {
+                  "message": ":POWer:ATTenuation:AUTO ON"
+                }
+              },
+              "Set_Input_Auto_Attenuation_OFF": {
+                "type": "_GuiActuator",
+                "label_inactive": "Auto Atten OFF",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "Execute Command": {
+                  "message": ":POWer:ATTenuation:AUTO OFF"
+                }
+              }
+            }
+          },
+          "Power_Gain_Controls": {
+            "type": "OcaBlock",
+            "fields": {
+              "Set_Power_Gain_ON": {
+                "type": "_GuiActuator",
+                "label_inactive": "Preamp ON",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "Execute Command": {
+                  "message": ":POWer:GAIN ON"
+                }
+              },
+              "Set_Power_Gain_OFF": {
+                "type": "_GuiActuator",
+                "label_inactive": "Preamp OFF",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "Execute Command": {
+                  "trigger": false,
+                  "message": ":POWer:GAIN OFF"
+                }
+              }
+            }
+          },
+          "High_Sensitivity_Profiles": {
+            "type": "OcaBlock",
+            "description": "Quick sensitivity presets",
+            "fields": {
+              "Set_High_Sensitive_Power_ON_N9340B": {
+                "type": "_GuiActuator",
+                "label_inactive": "High Sensitivity ON",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "N9340B": {
+                  "trigger": false,
+                  "message": ":DISPlay:WINDow:TRACe:Y:RLEVel -50; :POWer:ATTenuation 0; :POWer:GAIN ON"
+                }
+              },
+              "Set_High_Sensitive_Power_ON_N9342CN": {
+                "type": "_GuiActuator",
+                "label_inactive": "High Sensitivity ON",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "N9342CN": {
+                  "trigger": false,
+                  "message": ":POWer:HSENsitive ON"
+                }
+              },
+              "Set_High_Sensitive_Power_OFF_N9340B": {
+                "type": "_GuiActuator",
+                "label_inactive": "High Sensitivity OFF",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "N9340B": {
+                  "trigger": false,
+                  "message": ":DISPlay:WINDow:TRACe:Y:RLEVel 0; :POWer:ATTenuation 20; :POWer:GAIN OFF"
+                }
+              },
+              "Set_High_Sensitive_Power_OFF_N9342CN": {
+                "type": "_GuiActuator",
+                "label_inactive": "High Sensitivity OFF",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "N9342CN": {
+                  "trigger": false,
+                  "message": ":POWer:HSENsitive OFF"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

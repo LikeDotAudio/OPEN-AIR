@@ -1,0 +1,404 @@
+{
+  "Oscilloscope_YAK_54641D_MEASure": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.1.7",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": "Measurement Settings",
+        "fields": {
+          "Set_Measure_Source": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "MEASure:SOURce <source>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "source": {
+                    "value": "CHAN1",
+                    "type": "_GuiValue",
+                    "label": "Source",
+                    "units": "",
+                    "description": "CHANn, DIGn, MATH"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Measure_Thresholds": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "MEASure:DEFine:THResholds <mode>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "mode": {
+                    "value": "PERCent",
+                    "type": "_GuiValue",
+                    "label": "Mode",
+                    "units": "",
+                    "description": "PERCent or ABSolute"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "nab": {
+        "type": "OcaBlock",
+        "description": "Measurements",
+        "fields": {
+          "Voltage_Measurements": {
+            "type": "OcaBlock",
+            "description": "Voltage",
+            "fields": {
+              "Get_Vpp": {
+                "type": "_GuiActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "MEASure:VPP?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "V",
+                      "type": "_GuiValue"
+                    }
+                  }
+                }
+              },
+              "Get_Vmax": {
+                "type": "_GuiActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "MEASure:VMAX?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "V",
+                      "type": "_GuiValue"
+                    }
+                  }
+                }
+              },
+              "Get_Vrms": {
+                "type": "_GuiActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "MEASure:VRMS?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "V",
+                      "type": "_GuiValue"
+                    }
+                  }
+                }
+              },
+              "Get_Vavg": {
+                "type": "_GuiActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "MEASure:VAVerage?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "V",
+                      "type": "_GuiValue"
+                    }
+                  }
+                }
+              },
+              "Get_Overshoot": {
+                "type": "_GuiActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "MEASure:OVERshoot?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "%",
+                      "type": "_GuiValue"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Time_Measurements": {
+            "type": "OcaBlock",
+            "description": "Time",
+            "fields": {
+              "Get_Frequency": {
+                "type": "_GuiActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "MEASure:FREQuency?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "Hz",
+                      "type": "_GuiValue"
+                    }
+                  }
+                }
+              },
+              "Get_Period": {
+                "type": "_GuiActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "MEASure:PERiod?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "s",
+                      "type": "_GuiValue"
+                    }
+                  }
+                }
+              },
+              "Get_RiseTime": {
+                "type": "_GuiActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "MEASure:RISetime?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "s",
+                      "type": "_GuiValue"
+                    }
+                  }
+                }
+              },
+              "Get_FallTime": {
+                "type": "_GuiActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "MEASure:FALLtime?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "s",
+                      "type": "_GuiValue"
+                    }
+                  }
+                }
+              },
+              "Get_PosWidth": {
+                "type": "_GuiActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "MEASure:PWIDth?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "s",
+                      "type": "_GuiValue"
+                    }
+                  }
+                }
+              },
+              "Get_DutyCycle": {
+                "type": "_GuiActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "MEASure:DUTYcycle?",
+                "Outputs": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "val": {
+                      "value": "%",
+                      "type": "_GuiValue"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

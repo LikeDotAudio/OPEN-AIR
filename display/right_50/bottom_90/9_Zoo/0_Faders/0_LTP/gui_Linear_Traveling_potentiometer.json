@@ -1,0 +1,323 @@
+{
+  "Zoo_Faders_LTP": {
+    "type": "OcaBin",
+    "id": "50.90.9.0.0",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "LTP_Freestyle_Console": {
+        "type": "OcaBlock",
+        "description": "8-Channel Freestyle LTP Console with Advanced Scale and Tick Parameters",
+        "layout_columns": 8,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "CH1": {
+            "type": "_CustomLTP",
+            "label_active": "Kick",
+            "fader_config": {
+              "value_min": -60.0,
+              "value_max": 12.0,
+              "value_default": -10.0,
+              "value_highlight_color": "#FF3131",
+              "show_value": true,
+              "unit_text": "dB",
+              "show_units": true
+            },
+            "knob_config": {
+              "cap_radius": 22,
+              "cap_color": "#1a1a1a",
+              "cap_outline_color": "#FF3131",
+              "knob_style": "standard"
+            },
+            "style": {
+              "knob_shape": "octagon",
+              "pointer_style": "line",
+              "tick_color": "#FF3131",
+              "tick_label_position": "right"
+            },
+            "layout": {
+              "width": 100,
+              "height": 400
+            }
+          },
+          "CH2": {
+            "type": "_CustomLTP",
+            "label_active": "Snare",
+            "fader_config": {
+              "value_min": -60.0,
+              "value_max": 12.0,
+              "value_default": -5.0,
+              "value_highlight_color": "#39FF14"
+            },
+            "knob_config": {
+              "cap_radius": 20,
+              "cap_color": "#2b2b2b",
+              "cap_outline_color": "#39FF14",
+              "knob_style": "dial"
+            },
+            "style": {
+              "knob_shape": "gear",
+              "knob_teeth": 16,
+              "pointer_style": "triangle",
+              "tick_color": "#39FF14",
+              "tick_label_position": "left"
+            },
+            "layout": {
+              "width": 100,
+              "height": 400
+            }
+          },
+          "CH3": {
+            "type": "_CustomLTP",
+            "label_active": "Hat",
+            "fader_config": {
+              "value_min": -60.0,
+              "value_max": 12.0,
+              "value_default": -15.0,
+              "value_highlight_color": "#33A1FD"
+            },
+            "knob_config": {
+              "cap_radius": 18,
+              "cap_color": "#050505",
+              "cap_outline_color": "#33A1FD",
+              "knob_style": "panner"
+            },
+            "style": {
+              "knob_shape": "circle",
+              "pointer_style": "dot",
+              "tick_color": "#33A1FD",
+              "tick_label_position": "both"
+            },
+            "layout": {
+              "width": 100,
+              "height": 400
+            }
+          },
+          "CH4": {
+            "type": "_CustomLTP",
+            "label_active": "Toms",
+            "fader_config": {
+              "value_min": -60.0,
+              "value_max": 12.0,
+              "value_default": -20.0,
+              "value_highlight_color": "yellow"
+            },
+            "knob_config": {
+              "cap_radius": 24,
+              "cap_color": "#1a1a1a",
+              "cap_outline_color": "yellow",
+              "freestyle": true
+            },
+            "style": {
+              "knob_shape": "octagon",
+              "pointer_style": "line",
+              "arc_width": 5,
+              "tick_color": "#aaaaaa"
+            },
+            "layout": {
+              "width": 100,
+              "height": 400
+            }
+          },
+          "CH5": {
+            "type": "_CustomLTP",
+            "label_active": "Bass",
+            "fader_config": {
+              "value_min": -60.0,
+              "value_max": 12.0,
+              "value_default": 0.0,
+              "value_highlight_color": "#FF6B35"
+            },
+            "knob_config": {
+              "cap_radius": 22,
+              "cap_color": "#2b2b2b",
+              "cap_outline_color": "#FF6B35"
+            },
+            "style": {
+              "knob_shape": "gear",
+              "knob_teeth": 24,
+              "tick_color": "#FF6B35"
+            },
+            "layout": {
+              "width": 100,
+              "height": 400
+            }
+          },
+          "CH6": {
+            "type": "_CustomLTP",
+            "label_active": "Gtr L",
+            "fader_config": {
+              "value_min": -60.0,
+              "value_max": 12.0,
+              "value_default": -12.0,
+              "value_highlight_color": "#00FFFF"
+            },
+            "knob_config": {
+              "cap_radius": 20,
+              "cap_color": "#1a1a1a",
+              "cap_outline_color": "#00FFFF"
+            },
+            "style": {
+              "knob_shape": "circle",
+              "pointer_style": "triangle",
+              "arc_width": 2,
+              "tick_color": "#00FFFF"
+            },
+            "layout": {
+              "width": 100,
+              "height": 400
+            }
+          },
+          "CH7": {
+            "type": "_CustomLTP",
+            "label_active": "Gtr R",
+            "fader_config": {
+              "value_min": -60.0,
+              "value_max": 12.0,
+              "value_default": -12.0,
+              "value_highlight_color": "#FFA500"
+            },
+            "knob_config": {
+              "cap_radius": 20,
+              "cap_color": "#2b2b2b",
+              "cap_outline_color": "#FFA500"
+            },
+            "style": {
+              "knob_shape": "octagon",
+              "pointer_style": "dot",
+              "tick_color": "#FFA500"
+            },
+            "layout": {
+              "width": 100,
+              "height": 400
+            }
+          },
+          "CH8": {
+            "type": "_CustomLTP",
+            "label_active": "Vox",
+            "fader_config": {
+              "value_min": -60.0,
+              "value_max": 12.0,
+              "value_default": 5.0,
+              "value_highlight_color": "#FFFFFF"
+            },
+            "knob_config": {
+              "cap_radius": 22,
+              "cap_color": "#050505",
+              "cap_outline_color": "#FFFFFF"
+            },
+            "style": {
+              "knob_shape": "gear",
+              "knob_teeth": 12,
+              "pointer_style": "line",
+              "tick_color": "#ffffff"
+            },
+            "layout": {
+              "width": 100,
+              "height": 400
+            }
+          }
+        }
+      },
+      "LTP_Demo_Bottom": {
+        "type": "OcaBlock",
+        "description": "Horizontal LTP Evolution",
+        "layout_columns": 3,
+        "fields": {
+          "H1": {
+            "type": "_CustomLTP",
+            "label_active": "Industrial Gear",
+            "fader_config": {
+              "value_highlight_color": "#f4902c"
+            },
+            "knob_config": {
+              "cap_radius": 25,
+              "cap_color": "#1a1a1a",
+              "cap_outline_color": "#f4902c"
+            },
+            "style": {
+              "knob_shape": "gear",
+              "knob_teeth": 10,
+              "pointer_style": "triangle"
+            },
+            "layout": {
+              "width": 300,
+              "height": 80
+            }
+          },
+          "H2": {
+            "type": "_CustomLTP",
+            "label_active": "Sleek Octagon",
+            "fader_config": {
+              "value_highlight_color": "#33A1FD"
+            },
+            "knob_config": {
+              "cap_radius": 22,
+              "cap_color": "#2b2b2b",
+              "cap_outline_color": "#33A1FD"
+            },
+            "style": {
+              "knob_shape": "octagon",
+              "pointer_style": "line"
+            },
+            "layout": {
+              "width": 300,
+              "height": 80
+            }
+          },
+          "H3": {
+            "type": "_CustomLTP",
+            "label_active": "Ghost Circle",
+            "fader_config": {
+              "value_highlight_color": "#AAAAAA"
+            },
+            "knob_config": {
+              "cap_radius": 20,
+              "cap_color": "#050505",
+              "cap_outline_color": "#AAAAAA"
+            },
+            "style": {
+              "knob_shape": "circle",
+              "pointer_style": "dot"
+            },
+            "layout": {
+              "width": 300,
+              "height": 80
+            }
+          }
+        }
+      }
+    }
+  }
+}

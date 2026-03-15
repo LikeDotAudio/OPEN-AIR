@@ -1,0 +1,20 @@
+{
+  "Distortion_YAK_HP_8903B_Connection": {
+    "type": "OcaBin",
+    "id": "50.100.9.10.2.100",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Table": {
+        "type": "OcaTable",
+        "description": "Discovered Devices"
+      }
+    }
+  }
+}

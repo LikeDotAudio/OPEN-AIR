@@ -1,0 +1,196 @@
+{
+  "Distortion_YAK_Porta_one_Digital": {
+    "type": "OcaBin",
+    "id": "50.100.9.10.1.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": "Digital I/O Configuration",
+        "fields": {
+          "Digital_Input_Source": {
+            "type": "OcaBlock",
+            "description": "Select Digital Input Connector",
+            "fields": {
+              "Select_DIN_XLR": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":DINPut XLR"
+                  }
+                }
+              },
+              "Select_DIN_BNC": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":DINPut BNC"
+                  }
+                }
+              },
+              "Select_DIN_Optical": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":DINPut OPTical"
+                  }
+                }
+              },
+              "Select_DIN_Generator": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":DINPut GENerator"
+                  }
+                }
+              }
+            }
+          },
+          "Digital_Output_Control": {
+            "type": "OcaBlock",
+            "description": "Digital Output State",
+            "fields": {
+              "Set_DOUT_ON": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":DOUTput ON"
+                  }
+                }
+              },
+              "Set_DOUT_OFF": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":DOUTput OFF"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

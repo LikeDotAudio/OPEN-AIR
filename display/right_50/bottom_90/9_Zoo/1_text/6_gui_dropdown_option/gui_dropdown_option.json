@@ -1,0 +1,139 @@
+{
+  "Zoo_text_gui_dropdown_option": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.6",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label_active": "Gui Dropdown 01 Audio Input",
+        "fields": {
+          "examplefields": {
+            "type": "_GuiDropDownOption",
+            "label": "Input",
+            "options": {
+              "Mic1": {
+                "label_active": "Microphone 1",
+                "value": "MIC1_IN",
+                "selected": true
+              },
+              "Mic2": {
+                "label_active": "Microphone 2",
+                "value": "MIC2_IN"
+              },
+              "LineIn": {
+                "label_active": "Line Input",
+                "value": "LINE_IN"
+              }
+            },
+            "notes": "Dropdown for selecting an audio input source."
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label_active": "Gui Dropdown 02 Sample Rate",
+        "fields": {
+          "examplefields": {
+            "type": "_GuiDropDownOption",
+            "label": "Sample Rate",
+            "options": {
+              "44.1kHz": {
+                "label_active": "44.1 kHz",
+                "value": 44100
+              },
+              "48kHz": {
+                "label_active": "48 kHz",
+                "value": 48000,
+                "selected": true
+              },
+              "96kHz": {
+                "label_active": "96 kHz",
+                "value": 96000
+              }
+            },
+            "notes": "Selects different audio sample rates."
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label_active": "Gui Dropdown 03 Effect Type",
+        "fields": {
+          "examplefields": {
+            "type": "_GuiDropDownOption",
+            "label": "Effect",
+            "options": {
+              "Reverb": {
+                "label_active": "Reverb"
+              },
+              "Delay": {
+                "label_active": "Delay"
+              },
+              "Chorus": {
+                "label_active": "Chorus",
+                "selected": true
+              }
+            },
+            "notes": "Dropdown for choosing an effect type."
+          }
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label_active": "Gui Dropdown 04 Units",
+        "fields": {
+          "examplefields": {
+            "type": "_GuiDropDownOption",
+            "label": "Units",
+            "options": {
+              "Celsius": {
+                "label_active": "Celsius",
+                "value": "C"
+              },
+              "Fahrenheit": {
+                "label_active": "Fahrenheit",
+                "value": "F",
+                "selected": true
+              }
+            },
+            "notes": "Switches between different units of measurement."
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label_active": "Gui Dropdown 05 Device Mode",
+        "fields": {
+          "examplefields": {
+            "type": "_GuiDropDownOption",
+            "label": "Mode",
+            "options": {
+              "Standard": {
+                "label_active": "Standard Mode",
+                "value": "STANDARD"
+              },
+              "Performance": {
+                "label_active": "Performance Mode",
+                "value": "PERF_MODE"
+              },
+              "Eco": {
+                "label_active": "Eco Mode",
+                "value": "ECO_MODE",
+                "selected": true
+              }
+            },
+            "notes": "Selects an operating mode for a device."
+          }
+        }
+      }
+    }
+  }
+}

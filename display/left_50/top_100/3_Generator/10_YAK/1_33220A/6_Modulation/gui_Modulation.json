@@ -1,0 +1,166 @@
+{
+  "Generator_YAK_33220A_Modulation": {
+    "type": "OcaBin",
+    "id": "50.100.3.10.1.6",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "rig": {
+        "type": "OcaBlock",
+        "description": "Modulation Setup",
+        "fields": {
+          "Setup_AM": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": "AM:INTernal:FUNCtion <shape>;AM:INTernal:FREQuency <freq>;AM:DEPTh <depth>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "shape": {
+                    "value": "SIN",
+                    "type": "_GuiValue",
+                    "label": "Shape",
+                    "units": "",
+                    "description": "SIN, SQU, TRI, RAMP"
+                  },
+                  "freq": {
+                    "value": "100",
+                    "type": "_GuiValue",
+                    "label": "Frequency",
+                    "units": "Hz",
+                    "description": "Modulating Freq Hz"
+                  },
+                  "depth": {
+                    "value": "50",
+                    "type": "_GuiValue",
+                    "label": "Depth",
+                    "units": "%",
+                    "description": "Depth %"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Do": {
+        "type": "OcaBlock",
+        "description": "Modulation Control",
+        "fields": {
+          "Modulation_Control": {
+            "type": "OcaBlock",
+            "fields": {
+              "AM_State_ON": {
+                "type": "_GuiActuator",
+                "label_inactive": "AM ON",
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "Execute Command": {
+                  "message": "AM:STATe ON"
+                }
+              },
+              "AM_State_OFF": {
+                "type": "_GuiActuator",
+                "label_inactive": "AM OFF",
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "Execute Command": {
+                  "message": "AM:STATe OFF"
+                }
+              },
+              "FM_State_ON": {
+                "type": "_GuiActuator",
+                "label_inactive": "FM ON",
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "Execute Command": {
+                  "message": "FM:STATe ON"
+                }
+              },
+              "FM_State_OFF": {
+                "type": "_GuiActuator",
+                "label_inactive": "FM OFF",
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "Execute Command": {
+                  "message": "FM:STATe OFF"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "Zoo_Data_demo": {
+    "type": "OcaBin",
+    "id": "50.90.9.7.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label_active": "Instrument Connections",
+        "fields": {
+          "examplefields": {
+            "type": "GuiTable",
+            "label_active": "Instrument Connections",
+            "height": 80,
+            "read_cvs": false,
+            "write_cvs": false,
+            "Add_Row": false,
+            "Delete_Row": false,
+            "Undo": false,
+            "Sort": true,
+            "headers": [
+              "Resource",
+              "Model",
+              "Serial",
+              "Status"
+            ],
+            "data": {
+              "USB0::0x0957::0x0607::MY44026369::0::INSTR": {
+                "Resource": "USB0::0x0957::0x0607::MY44026369::0::INSTR",
+                "Model": "34401A",
+                "Serial": "MY44026369",
+                "Status": "Connected"
+              },
+              "GPIB0::22::INSTR": {
+                "Resource": "GPIB0::22::INSTR",
+                "Model": "E3631A",
+                "Serial": "0N11111",
+                "Status": "Disconnected"
+              }
+            },
+            "notes": "A table showing basic instrument connection details."
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label_active": "Process Monitoring",
+        "fields": {
+          "examplefields": {
+            "type": "GuiTable",
+            "label_active": "Process Monitoring",
+            "height": 100,
+            "Sort": false,
+            "headers": [
+              "Process ID",
+              "Name",
+              "CPU %",
+              "Memory MB",
+              "Status"
+            ],
+            "data": {
+              "101": {
+                "Process ID": 101,
+                "Name": "App A",
+                "CPU %": 12.5,
+                "Memory MB": 256,
+                "Status": "Running"
+              },
+              "102": {
+                "Process ID": 102,
+                "Name": "App B",
+                "CPU %": 5.1,
+                "Memory MB": 128,
+                "Status": "Running"
+              },
+              "103": {
+                "Process ID": 103,
+                "Name": "Service X",
+                "CPU %": 0.8,
+                "Memory MB": 64,
+                "Status": "Idle"
+              },
+              "104": {
+                "Process ID": 104,
+                "Name": "Agent Y",
+                "CPU %": 2.2,
+                "Memory MB": 96,
+                "Status": "Running"
+              },
+              "105": {
+                "Process ID": 105,
+                "Name": "Log Processor",
+                "CPU %": 1.0,
+                "Memory MB": 300,
+                "Status": "Running"
+              }
+            },
+            "notes": "Table for monitoring multiple running processes.",
+            "Undo": true,
+            "Delete_Row": true,
+            "Add_Row": true,
+            "write_cvs": true,
+            "read_cvs": true
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label_active": "Configuration Settings",
+        "fields": {
+          "examplefields": {
+            "type": "GuiTable",
+            "label_active": "Configuration Settings",
+            "height": 100,
+            "headers": [
+              "Parameter",
+              "Value",
+              "Units",
+              "Description"
+            ],
+            "data": {
+              "P1": {
+                "Parameter": "Temperature Limit",
+                "Value": 75,
+                "units": "\u00b0C",
+                "Description": "Max operating temperature"
+              },
+              "P2": {
+                "Parameter": "Alarm Threshold",
+                "Value": 10,
+                "units": "dB",
+                "Description": "Audio alarm level"
+              }
+            },
+            "notes": "An editable table for displaying and modifying configuration parameters.",
+            "Sort": true,
+            "Undo": true,
+            "Delete_Row": true,
+            "Add_Row": true,
+            "write_cvs": true,
+            "read_cvs": true
+          }
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label_active": "New Log Entries",
+        "fields": {
+          "examplefields": {
+            "type": "GuiTable",
+            "label_active": "New Log Entries",
+            "height": 120,
+            "headers": [
+              "Timestamp",
+              "Level",
+              "Message",
+              "Source"
+            ],
+            "data": {},
+            "notes": "An empty table ready to receive new log entries.",
+            "Sort": true,
+            "Undo": true,
+            "Delete_Row": true,
+            "Add_Row": true,
+            "write_cvs": true,
+            "read_cvs": true
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label_active": "Resource Allocation",
+        "fields": {
+          "examplefields": {
+            "type": "GuiTable",
+            "label_active": "Resource Allocation",
+            "height": 70,
+            "headers": [
+              "Resource Name",
+              "Allocated To"
+            ],
+            "data": {
+              "CPU Core 0": {
+                "Resource Name": "CPU Core 0",
+                "Allocated To": "Task A"
+              },
+              "Memory Block 1": {
+                "Resource Name": "Memory Block 1",
+                "Allocated To": "Task B"
+              },
+              "GPU Slice 0": {
+                "Resource Name": "GPU Slice 0",
+                "Allocated To": "Task C"
+              }
+            },
+            "notes": "Table for managing resource allocations.",
+            "Sort": true,
+            "Undo": true,
+            "Delete_Row": true,
+            "Add_Row": true,
+            "write_cvs": true,
+            "read_cvs": true
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "Spectrum_YAK_N9342CN_System": {
+    "type": "OcaBin",
+    "id": "50.100.0.10.2.9",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Get": {
+        "type": "OcaBlock",
+        "description": "System Status and Identification",
+        "fields": {
+          "Get_error_information": {
+            "type": "OcaBlock",
+            "description": "System Error Check",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "message": ":SYSTem:ERRor?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "ERROR": {
+                    "value": "The number of errors in the queue.",
+                    "type": "_GuiValue",
+                    "label": "Error Count",
+                    "units": ""
+                  }
+                }
+              }
+            }
+          },
+          "Get_identification_query": {
+            "type": "OcaBlock",
+            "description": "Instrument ID",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "trigger": false,
+                "value": "*IDN?"
+              },
+              "Outputs": {
+                "type": "OcaBlock",
+                "fields": {
+                  "identification_string": {
+                    "value": "An instrument identification string containing manufacturer, model, serial number, and firmware revision.",
+                    "type": "_GuiValue",
+                    "label": "ID String",
+                    "units": ""
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Actions": {
+        "type": "OcaBlock",
+        "description": "System Maintenance Controls",
+        "fields": {
+          "Do_Update_Display": {
+            "type": "_GuiActuator",
+            "label_inactive": "Update Display",
+            "AES70": "OcaBooleanActuator",
+            "layout": {
+              "height": 30,
+              "sticky": ""
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "active": true,
+            "Execute Command": {
+              "trigger": false,
+              "message": ":SYSTem:DISPlay:UPDate"
+            }
+          },
+          "Maintenance_Commands": {
+            "type": "OcaBlock",
+            "description": "Hardware Reset and Clear",
+            "fields": {
+              "Do_Clear_Device": {
+                "type": "_GuiActuator",
+                "label_inactive": "Clear Status (*CLS)",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "Execute Command": {
+                  "trigger": false,
+                  "value": "*CLS"
+                }
+              },
+              "Do_Reset": {
+                "type": "_GuiActuator",
+                "label_inactive": "Reset Device (*RST)",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "Execute Command": {
+                  "trigger": false,
+                  "value": "*RST"
+                }
+              },
+              "Do_Power_Cycle": {
+                "type": "_GuiActuator",
+                "label_inactive": "Power Cycle",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "Execute Command": {
+                  "trigger": false,
+                  "message": ":SYSTem:POWer:RESet"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

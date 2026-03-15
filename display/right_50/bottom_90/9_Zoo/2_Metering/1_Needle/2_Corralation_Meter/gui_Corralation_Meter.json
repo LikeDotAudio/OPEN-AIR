@@ -1,0 +1,413 @@
+{
+  "Zoo_Metering_Needle_Corralation_Meter": {
+    "type": "OcaBin",
+    "id": "50.90.9.2.1.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Correlation_Meter_Petting_Zoo": {
+        "type": "OcaBlock",
+        "description": "Correlation Meter Variations",
+        "layout_columns": 2,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "corr_standard": {
+            "type": "_SmartMeter",
+            "label": "Standard",
+            "notes": "Standard: Fast rise, fast fall.",
+            "geometry": {
+              "width": 200,
+              "height": 200
+            },
+            "domain": {
+              "primary": {
+                "min": -90.0,
+                "max": 90.0,
+                "value_default": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 100,
+              "release_ms": 100,
+              "dwell_time": 100,
+              "hold_time": 0,
+              "resting_point": 0.0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF4500",
+                "alert": "#32CD32"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "visualization": "needle"
+              },
+              "style_overrides": {
+                "sub_ticks": 5,
+                "Meter_viewable_angle": 120,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "meter_mode": "mono",
+                "Pointer_Style": "line",
+                "Pivot_size": 10,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "custom_ticks": [
+                  -90,
+                  -45,
+                  0,
+                  45,
+                  90
+                ],
+                "Peak_flag": true
+              },
+              "scale": {
+                "upper_range": 0.0
+              },
+              "pointer": {
+                "secondary_color": "#FF0000",
+                "thickness": 3
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "show_label": true
+          },
+          "corr_slow": {
+            "type": "_SmartMeter",
+            "label": "Slow/Damped",
+            "notes": "Slow: Highly damped movement (500ms).",
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "domain": {
+              "primary": {
+                "min": -1.0,
+                "max": 1.0,
+                "value_default": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 500,
+              "release_ms": 500,
+              "dwell_time": 500,
+              "hold_time": 0,
+              "resting_point": 0.0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#D32F2F",
+                "alert": "#388E3C"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "visualization": "needle"
+              },
+              "style_overrides": {
+                "sub_ticks": 0,
+                "Meter_viewable_angle": 90,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "meter_mode": "mono",
+                "Pointer_Style": "line",
+                "Pivot_size": 10,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "custom_ticks": [
+                  -1,
+                  0,
+                  1
+                ],
+                "Peak_flag": true
+              },
+              "scale": {
+                "upper_range": 0.0
+              },
+              "pointer": {
+                "secondary_color": "#FF0000",
+                "thickness": 2
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "show_label": true
+          },
+          "corr_peak_hold": {
+            "type": "_SmartMeter",
+            "label": "Peak Hold",
+            "notes": "Peak Hold: Instant rise, 2s hold, very slow fall.",
+            "geometry": {
+              "width": 250,
+              "height": 250
+            },
+            "domain": {
+              "primary": {
+                "min": -90.0,
+                "max": 90.0,
+                "value_default": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 50,
+              "release_ms": 3000,
+              "dwell_time": 1000,
+              "hold_time": 2000,
+              "resting_point": 0.0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#C62828",
+                "alert": "#2E7D32"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "visualization": "needle"
+              },
+              "style_overrides": {
+                "sub_ticks": 0,
+                "Meter_viewable_angle": 160,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "meter_mode": "mono",
+                "Pointer_Style": "line",
+                "Pivot_size": 10,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "custom_ticks": [
+                  -90,
+                  -45,
+                  0,
+                  45,
+                  90
+                ],
+                "Peak_flag": true
+              },
+              "scale": {
+                "upper_range": 0.0
+              },
+              "pointer": {
+                "secondary_color": "#FF0000",
+                "thickness": 4
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "show_label": true
+          },
+          "corr_ballistic": {
+            "type": "_SmartMeter",
+            "label": "Fast Ballistic",
+            "notes": "Ballistic: Ultra-fast tracking (20ms).",
+            "geometry": {
+              "width": 180,
+              "height": 180
+            },
+            "domain": {
+              "primary": {
+                "min": -90.0,
+                "max": 90.0,
+                "value_default": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 20,
+              "release_ms": 50,
+              "dwell_time": 20,
+              "hold_time": 0,
+              "resting_point": 0.0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF5252",
+                "alert": "#69F0AE"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "visualization": "needle"
+              },
+              "style_overrides": {
+                "sub_ticks": 0,
+                "Meter_viewable_angle": 140,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "meter_mode": "mono",
+                "Pointer_Style": "line",
+                "Pivot_size": 10,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "custom_ticks": [
+                  -90,
+                  0,
+                  90
+                ],
+                "Peak_flag": true
+              },
+              "scale": {
+                "upper_range": 0.0
+              },
+              "pointer": {
+                "secondary_color": "#FF0000",
+                "thickness": 2
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "show_label": true
+          },
+          "corr_lazy": {
+            "type": "_SmartMeter",
+            "label": "Lazy/Smooth",
+            "notes": "Lazy: Smooth tracking with slight hold.",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -1.0,
+                "max": 1.0,
+                "value_default": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 300,
+              "release_ms": 1000,
+              "dwell_time": 800,
+              "hold_time": 500,
+              "resting_point": 0.0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF6E40",
+                "alert": "#B2FF59"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "visualization": "needle"
+              },
+              "style_overrides": {
+                "sub_ticks": 0,
+                "Meter_viewable_angle": 100,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "meter_mode": "mono",
+                "Pointer_Style": "line",
+                "Pivot_size": 10,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "custom_ticks": [
+                  -1,
+                  -0.5,
+                  0,
+                  0.5,
+                  1
+                ],
+                "Peak_flag": true
+              },
+              "scale": {
+                "upper_range": 0.0
+              },
+              "pointer": {
+                "secondary_color": "#FF0000",
+                "thickness": 3
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "show_label": true
+          },
+          "APK": {
+            "type": "_SmartMeter",
+            "label": "Lazy/Smooth",
+            "notes": "Lazy: Smooth tracking with slight hold.",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 20.0,
+                "value_default": 0.0
+              }
+            },
+            "dynamics": {
+              "attack_ms": 1000,
+              "release_ms": 1000,
+              "dwell_time": 1000,
+              "hold_time": 200,
+              "resting_point": 0.0
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF6E40",
+                "alert": "#B2FF59"
+              },
+              "style_flags": {
+                "show_grid": true,
+                "visualization": "needle"
+              },
+              "style_overrides": {
+                "sub_ticks": 0,
+                "Meter_viewable_angle": 100,
+                "Meter_center_angle": 90.0,
+                "Counter_Clockwise": false,
+                "mask": true,
+                "meter_mode": "mono",
+                "Pointer_Style": "line",
+                "Pivot_size": 10,
+                "curve_thickness": 4,
+                "Scale_numbers": true,
+                "Peak_flag": true
+              },
+              "scale": {
+                "upper_range": 0.0
+              },
+              "pointer": {
+                "secondary_color": "#FF0000",
+                "thickness": 8
+              }
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "show_label": true
+          }
+        }
+      }
+    }
+  }
+}

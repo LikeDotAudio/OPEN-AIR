@@ -1,0 +1,456 @@
+{
+  "geometry": {
+    "w": 800,
+    "h": 800,
+    "columns": 4
+  },
+  "items": [
+    {
+      "identity": {
+        "type": "Block",
+        "id": "header_group",
+        "lbl": "System Status"
+      },
+      "geometry": {
+        "row": 0,
+        "col": 0,
+        "colspan": 4,
+        "pad": 10
+      },
+      "items": [
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "conn_status",
+            "lbl": "Broker Connection"
+          },
+          "geometry": {
+            "w": 300,
+            "h": 60,
+            "pad": 10
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Broker/Connection",
+            "key": "status"
+          },
+          "cosmetics": {
+            "bg": "#1a1a1a",
+            "fg": "#00ff00"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "broker_addr",
+            "lbl": "Broker Address"
+          },
+          "geometry": {
+            "w": 300,
+            "h": 60,
+            "pad": 10
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Broker/Connection",
+            "key": "address"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "broker_port",
+            "lbl": "Broker Port"
+          },
+          "geometry": {
+            "w": 200,
+            "h": 60,
+            "pad": 10
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Broker/Connection",
+            "key": "port"
+          }
+        }
+      ]
+    },
+    {
+      "identity": {
+        "type": "Block",
+        "id": "stats_group",
+        "lbl": "Broker Statistics ($SYS)"
+      },
+      "geometry": {
+        "row": 1,
+        "col": 0,
+        "colspan": 4,
+        "pad": 10
+      },
+      "items": [
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "stat_uptime",
+            "lbl": "Uptime"
+          },
+          "geometry": {
+            "row": 0,
+            "col": 0,
+            "w": 250,
+            "h": 60,
+            "pad": 5
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Broker/Stats",
+            "key": "uptime"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "stat_version",
+            "lbl": "Version"
+          },
+          "geometry": {
+            "row": 0,
+            "col": 1,
+            "w": 250,
+            "h": 60,
+            "pad": 5
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Broker/Stats",
+            "key": "version"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "stat_clients_conn",
+            "lbl": "Clients Connected"
+          },
+          "geometry": {
+            "row": 0,
+            "col": 2,
+            "w": 250,
+            "h": 60,
+            "pad": 5
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Broker/Stats",
+            "key": "clients/connected"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "stat_clients_total",
+            "lbl": "Clients Total"
+          },
+          "geometry": {
+            "row": 0,
+            "col": 3,
+            "w": 250,
+            "h": 60,
+            "pad": 5
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Broker/Stats",
+            "key": "clients/total"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "stat_msg_sent",
+            "lbl": "Messages Sent"
+          },
+          "geometry": {
+            "row": 1,
+            "col": 0,
+            "w": 250,
+            "h": 60,
+            "pad": 5
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Broker/Stats",
+            "key": "messages/sent"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "stat_msg_recv",
+            "lbl": "Messages Received"
+          },
+          "geometry": {
+            "row": 1,
+            "col": 1,
+            "w": 250,
+            "h": 60,
+            "pad": 5
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Broker/Stats",
+            "key": "messages/received"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "stat_bytes_sent",
+            "lbl": "Bytes Sent"
+          },
+          "geometry": {
+            "row": 1,
+            "col": 2,
+            "w": 250,
+            "h": 60,
+            "pad": 5
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Broker/Stats",
+            "key": "bytes/sent"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "stat_bytes_recv",
+            "lbl": "Bytes Received"
+          },
+          "geometry": {
+            "row": 1,
+            "col": 3,
+            "w": 250,
+            "h": 60,
+            "pad": 5
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Broker/Stats",
+            "key": "bytes/received"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "stat_heap",
+            "lbl": "Heap Memory"
+          },
+          "geometry": {
+            "row": 2,
+            "col": 0,
+            "w": 250,
+            "h": 60,
+            "pad": 5
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Broker/Stats",
+            "key": "heap/current"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ValueBox",
+            "id": "stat_stored",
+            "lbl": "Stored Messages"
+          },
+          "geometry": {
+            "row": 2,
+            "col": 1,
+            "w": 250,
+            "h": 60,
+            "pad": 5
+          },
+          "dynamics": {
+            "sub": "OPEN-AIR/System/Status/Broker/Stats",
+            "key": "store/messages/count"
+          }
+        }
+      ]
+    },
+    {
+      "identity": {
+        "type": "Block",
+        "id": "maint_group",
+        "lbl": "Maintenance"
+      },
+      "geometry": {
+        "row": 2,
+        "col": 0,
+        "colspan": 2,
+        "pad": 10
+      },
+      "items": [
+        {
+          "identity": {
+            "type": "_ButtonActuator",
+            "id": "btn_clear",
+            "lbl": "CLEAR HEAP & STORED"
+          },
+          "geometry": {
+            "w": 400,
+            "h": 60,
+            "pad": 10
+          },
+          "domain": {
+            "value": "sudo systemctl restart mosquitto"
+          },
+          "dynamics": {
+            "path": "System/Control/Broker/Service/Restart"
+          }
+        }
+      ]
+    },
+    {
+      "identity": {
+        "type": "Block",
+        "id": "service_group",
+        "lbl": "Service Control (mosquitto)"
+      },
+      "geometry": {
+        "row": 2,
+        "col": 2,
+        "colspan": 2,
+        "pad": 10
+      },
+      "items": [
+        {
+          "identity": {
+            "type": "_ButtonActuator",
+            "id": "btn_stop",
+            "lbl": "STOP"
+          },
+          "geometry": {
+            "row": 0,
+            "col": 0,
+            "w": 120,
+            "h": 50,
+            "pad": 5
+          },
+          "domain": {
+            "value": "sudo systemctl stop mosquitto"
+          },
+          "dynamics": {
+            "path": "System/Control/Broker/Service/Stop"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ButtonActuator",
+            "id": "btn_start",
+            "lbl": "START"
+          },
+          "geometry": {
+            "row": 0,
+            "col": 1,
+            "w": 120,
+            "h": 50,
+            "pad": 5
+          },
+          "domain": {
+            "value": "sudo systemctl start mosquitto"
+          },
+          "dynamics": {
+            "path": "System/Control/Broker/Service/Start"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ButtonActuator",
+            "id": "btn_restart",
+            "lbl": "RESTART"
+          },
+          "geometry": {
+            "row": 0,
+            "col": 2,
+            "w": 120,
+            "h": 50,
+            "pad": 5
+          },
+          "domain": {
+            "value": "sudo systemctl restart mosquitto"
+          },
+          "dynamics": {
+            "path": "System/Control/Broker/Service/Restart"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ButtonActuator",
+            "id": "btn_del_db",
+            "lbl": "DELETE DB COMPLETELY"
+          },
+          "geometry": {
+            "row": 1,
+            "col": 0,
+            "colspan": 3,
+            "w": 380,
+            "h": 50,
+            "pad": 5
+          },
+          "domain": {
+            "value": "sudo systemctl stop mosquitto && sudo rm /var/lib/mosquitto/mosquitto.db"
+          },
+          "dynamics": {
+            "path": "System/Control/Broker/Service/DeleteDB"
+          }
+        }
+      ]
+    },
+    {
+      "identity": {
+        "type": "Block",
+        "id": "danger_group",
+        "lbl": "Danger Zone"
+      },
+      "geometry": {
+        "row": 3,
+        "col": 0,
+        "colspan": 4,
+        "pad": 10
+      },
+      "items": [
+        {
+          "identity": {
+            "type": "_ButtonActuator",
+            "id": "btn_delete_tree",
+            "lbl": "DELETE OPEN-AIR TOPIC TREE"
+          },
+          "geometry": {
+            "w": 800,
+            "h": 80,
+            "pad": 20
+          },
+          "dynamics": {
+            "path": "System/Control/Broker/Delete"
+          },
+          "cosmetics": {
+            "active_color": "#ff0000",
+            "text_color": "#ff4444"
+          }
+        },
+        {
+          "identity": {
+            "type": "_ButtonActuator",
+            "id": "btn_pkill",
+            "lbl": "COPY PKILL COMMAND"
+          },
+          "geometry": {
+            "w": 400,
+            "h": 50,
+            "pad": 10
+          },
+          "domain": {
+            "value": "pkill -f OpenAir.py"
+          },
+          "dynamics": {
+            "path": "System/Control/Broker/Pkill"
+          }
+        }
+      ]
+    }
+  ],
+  "Setup_MQTT": {
+    "id": "50.90.3.0",
+    "lbl": "MQTT Broker Dashboard"
+  }
+}

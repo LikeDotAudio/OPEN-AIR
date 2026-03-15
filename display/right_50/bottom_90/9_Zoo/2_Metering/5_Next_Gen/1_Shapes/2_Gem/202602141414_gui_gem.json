@@ -1,0 +1,372 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Gem_Variations": {
+        "type": "OcaBlock",
+        "description": "Gem Meter Variations",
+        "layout_columns": 3,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "Gem_1_Large": {
+            "type": "_NeedleVUMeter",
+            "label": "Large Classic",
+            "geometry": {
+              "width": 300,
+              "height": 300
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -5.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#000000",
+                "bezel": "red",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "gem",
+                "bezel_width": 6,
+                "Pointer_Style": "spade"
+              },
+              "labels": [
+                {
+                  "text": "GEMSTONE SERIES",
+                  "x": 0,
+                  "y": 20,
+                  "size": 12,
+                  "weight": "bold"
+                },
+                {
+                  "value_overlay": true,
+                  "x": 0,
+                  "y": -40,
+                  "size": 14,
+                  "weight": "bold",
+                  "color": "#000000",
+                  "sig_fig": 3
+                }
+              ]
+            }
+          },
+          "Gem_2_Medium": {
+            "type": "_NeedleVUMeter",
+            "label": "Medium Blue",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -12.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#ffffff",
+                "bezel": "#33A1FD",
+                "scale_label": "#ffffff"
+              },
+              "style_overrides": {
+                "bezel_shape": "gem",
+                "bezel_width": 5,
+                "mask": false,
+                "Pointer_Style": "teardrop"
+              },
+              "labels": [
+                {
+                  "text": "PRECISION GEM",
+                  "x": 0,
+                  "y": 15,
+                  "size": 10,
+                  "color": "#33A1FD"
+                }
+              ]
+            }
+          },
+          "Gem_3_Small": {
+            "type": "_NeedleVUMeter",
+            "label": "Small Gold",
+            "geometry": {
+              "width": 150,
+              "height": 150
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": 0.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFD700",
+                "bezel": "#FFD700",
+                "scale_label": "#FFD700"
+              },
+              "style_overrides": {
+                "bezel_shape": "gem",
+                "bezel_width": 2,
+                "Pointer_Style": "baton"
+              },
+              "labels": [
+                {
+                  "text": "GOLD GEM",
+                  "x": 0,
+                  "y": 12,
+                  "size": 8
+                }
+              ]
+            }
+          },
+          "Gem_4_Ruby": {
+            "type": "_NeedleVUMeter",
+            "label": "Ruby Red",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -3.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFCCCC",
+                "bezel": "#FF0000",
+                "scale_label": "#FFCCCC"
+              },
+              "style_overrides": {
+                "bezel_shape": "gem",
+                "bezel_width": 5,
+                "enable_lighting": true,
+                "Pointer_Style": "spade"
+              },
+              "labels": [
+                {
+                  "text": "RUBY VU",
+                  "x": 0,
+                  "y": 15,
+                  "size": 10,
+                  "color": "red"
+                }
+              ]
+            }
+          },
+          "Gem_5_Emerald": {
+            "type": "_NeedleVUMeter",
+            "label": "Emerald Flat",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -10.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#003300",
+                "bezel": "#006600",
+                "scale_label": "#003300"
+              },
+              "style_overrides": {
+                "bezel_shape": "gem",
+                "bezel_width": 5,
+                "enable_lighting": false,
+                "Pointer_Style": "knife-edge"
+              },
+              "labels": [
+                {
+                  "text": "EMERALD",
+                  "x": 0,
+                  "y": 15,
+                  "size": 10,
+                  "font": "Arial"
+                }
+              ]
+            }
+          },
+          "Gem_6_Sapphire": {
+            "type": "_NeedleVUMeter",
+            "label": "Sapphire Deep",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -15.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#FFFFFF",
+                "bezel": "#0000FF",
+                "scale_label": "#FFFFFF"
+              },
+              "style_overrides": {
+                "bezel_shape": "gem",
+                "bezel_width": 6,
+                "enable_lighting": true,
+                "Pointer_Style": "taper"
+              },
+              "labels": [
+                {
+                  "text": "SAPPHIRE",
+                  "x": 0,
+                  "y": 15,
+                  "size": 10,
+                  "color": "#FFFFFF"
+                }
+              ]
+            }
+          },
+          "Gem_7_Onyx": {
+            "type": "_NeedleVUMeter",
+            "label": "Onyx Stealth",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -20.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#444444",
+                "bezel": "#222222",
+                "scale_label": "#444444"
+              },
+              "style_overrides": {
+                "bezel_shape": "gem",
+                "bezel_width": 3,
+                "enable_lighting": true,
+                "Pointer_Style": "line"
+              },
+              "labels": [
+                {
+                  "text": "ONYX STEALTH",
+                  "x": 0,
+                  "y": 15,
+                  "size": 10,
+                  "color": "#444"
+                }
+              ]
+            }
+          },
+          "Gem_8_Pearl": {
+            "type": "_NeedleVUMeter",
+            "label": "Pearl White",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -1.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#999999",
+                "bezel": "#DDDDDD",
+                "scale_label": "#000000"
+              },
+              "style_overrides": {
+                "bezel_shape": "gem",
+                "bezel_width": 1,
+                "enable_lighting": true,
+                "Pointer_Style": "baton"
+              },
+              "labels": [
+                {
+                  "text": "PEARL EDITION",
+                  "x": 0,
+                  "y": 15,
+                  "size": 10,
+                  "color": "#999"
+                }
+              ]
+            }
+          },
+          "Gem_9_Amethyst": {
+            "type": "_NeedleVUMeter",
+            "label": "Amethyst",
+            "geometry": {
+              "width": 220,
+              "height": 220
+            },
+            "domain": {
+              "primary": {
+                "min": -20.0,
+                "max": 3.0,
+                "value_default": -7.0
+              }
+            },
+            "cosmetics": {
+              "colors": {
+                "foreground": "#E6E6FA",
+                "bezel": "#9370DB",
+                "scale_label": "#E6E6FA"
+              },
+              "style_overrides": {
+                "bezel_shape": "gem",
+                "bezel_width": 5,
+                "enable_lighting": true,
+                "Pointer_Style": "spade"
+              },
+              "labels": [
+                {
+                  "text": "AMETHYST",
+                  "x": 0,
+                  "y": 15,
+                  "size": 10,
+                  "color": "#E6E6FA"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

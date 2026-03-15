@@ -1,0 +1,163 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Instrument_Controls": {
+        "type": "OcaBlock",
+        "description": "Dynamic Controls for yak_system",
+        "fields": {
+          "Get": {
+            "Get_error_information": {
+              "message_details": {
+                "Execute Command": {
+                  "type": "_GuiActuator",
+                  "style": {
+                    "active_text_color": "#1a1a1a",
+                    "text_color": "#888888",
+                    "active_font_style": "bold",
+                    "active_font_size": null,
+                    "inactive_font_style": "normal",
+                    "inactive_font_size": null,
+                    "active_color": "#FF9900",
+                    "active_bg_color": "#000000",
+                    "bg_color": "#2b2b2b",
+                    "glow_intensity": 1.944
+                  },
+                  "trigger": false,
+                  "message": ":SYSTem:ERRor?"
+                }
+              },
+              "Outputs": {
+                "ERROR": {
+                  "value": "The number of errors in the queue.",
+                  "type": "_GuiValue"
+                }
+              }
+            },
+            "Get_identification_query": {
+              "message_details": {
+                "Execute Command": {
+                  "type": "_GuiActuator",
+                  "style": {
+                    "active_text_color": "#1a1a1a",
+                    "text_color": "#888888",
+                    "active_font_style": "bold",
+                    "active_font_size": null,
+                    "inactive_font_style": "normal",
+                    "inactive_font_size": null,
+                    "active_color": "#FF9900",
+                    "active_bg_color": "#000000",
+                    "bg_color": "#2b2b2b",
+                    "glow_intensity": 1.944
+                  },
+                  "trigger": false,
+                  "value": "*IDN?"
+                }
+              },
+              "Outputs": {
+                "identification_string": {
+                  "value": "An instrument identification string containing manufacturer, model, serial number, and firmware revision.",
+                  "type": "_GuiValue"
+                }
+              }
+            }
+          },
+          "Do_Update_Display": {
+            "message_details": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "trigger": false,
+                "message": ":SYSTem:DISPlay:UPDate"
+              }
+            }
+          },
+          "do": {
+            "Do_Clear_Device": {
+              "message_details": {
+                "Execute Command": {
+                  "type": "_GuiActuator",
+                  "style": {
+                    "active_text_color": "#1a1a1a",
+                    "text_color": "#888888",
+                    "active_font_style": "bold",
+                    "active_font_size": null,
+                    "inactive_font_style": "normal",
+                    "inactive_font_size": null,
+                    "active_color": "#FF9900",
+                    "active_bg_color": "#000000",
+                    "bg_color": "#2b2b2b",
+                    "glow_intensity": 1.944
+                  },
+                  "trigger": false,
+                  "value": "*CLS"
+                }
+              }
+            },
+            "Do_Reset": {
+              "message_details": {
+                "Execute Command": {
+                  "type": "_GuiActuator",
+                  "style": {
+                    "active_text_color": "#1a1a1a",
+                    "text_color": "#888888",
+                    "active_font_style": "bold",
+                    "active_font_size": null,
+                    "inactive_font_style": "normal",
+                    "inactive_font_size": null,
+                    "active_color": "#FF9900",
+                    "active_bg_color": "#000000",
+                    "bg_color": "#2b2b2b",
+                    "glow_intensity": 1.944
+                  },
+                  "trigger": false,
+                  "value": "*RST"
+                }
+              }
+            },
+            "Do_Power_Cycle": {
+              "message_details": {
+                "Execute Command": {
+                  "type": "_GuiActuator",
+                  "style": {
+                    "active_text_color": "#1a1a1a",
+                    "text_color": "#888888",
+                    "active_font_style": "bold",
+                    "active_font_size": null,
+                    "inactive_font_style": "normal",
+                    "inactive_font_size": null,
+                    "active_color": "#FF9900",
+                    "active_bg_color": "#000000",
+                    "bg_color": "#2b2b2b",
+                    "glow_intensity": 1.944
+                  },
+                  "trigger": false,
+                  "message": ":SYSTem:POWer:RESet"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "fields": {
+        "Master_Meter": {
+          "type": "_NeedleVUMeter",
+          "label": "Master Studio Output",
+          "geometry": {
+            "width": 400,
+            "height": 250
+          },
+          "domain": {
+            "primary": {
+              "min": -20.0,
+              "max": 3.0,
+              "value_default": -7.0
+            }
+          },
+          "cosmetics": {
+            "colors": {
+              "bezel": "#111111",
+              "meter_face_colour": "transparent"
+            },
+            "style_overrides": {
+              "bezel_shape": "hotdog",
+              "bezel_width": 8,
+              "Pointer_Style": "knife-edge",
+              "overlay_style": "dome"
+            }
+          }
+        }
+      }
+    }
+  }
+}

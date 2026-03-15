@@ -1,0 +1,712 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Generic_Display_Block": {
+        "type": "OcaBlock",
+        "description": "Dynamic Content for yak_Signal_gen",
+        "fields": {
+          "Agilent_SigGen_33220A": {
+            "nab": {
+              "type": "OcaBlock",
+              "description": "SigGen Readbacks",
+              "fields": {
+                "Read_Current_Setup": {
+                  "type": "OcaBlock",
+                  "description": "Query active configuration",
+                  "fields": {
+                    "Get_Apply_String": {
+                      "type": "_GuiActuator",
+                      "layout": {
+                        "height": 30,
+                        "sticky": ""
+                      },
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "APPLy?",
+                      "Outputs": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "config_string": {
+                            "value": "\"SIN 1000, 3.0, 0.0\"",
+                            "type": "_Value"
+                          }
+                        }
+                      }
+                    },
+                    "Get_Output_State": {
+                      "type": "_GuiActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "OUTPut?",
+                      "Outputs": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "is_on": {
+                            "value": "0 or 1",
+                            "type": "_Value"
+                          }
+                        }
+                      }
+                    },
+                    "Get_Error_Queue": {
+                      "type": "_GuiActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "SYSTem:ERRor?",
+                      "Outputs": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "error_msg": {
+                            "value": "Error Code, Message",
+                            "type": "_Value"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "rig": {
+              "type": "OcaBlock",
+              "description": "Waveform Configuration",
+              "fields": {
+                "Quick_Setup_Apply": {
+                  "type": "OcaBlock",
+                  "description": "APPLy Macro Commands",
+                  "fields": {
+                    "Apply_Sine": {
+                      "type": "_GuiActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "APPLy:SINusoid <freq>, <amp>, <offset>",
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "freq": {
+                            "value": "1000",
+                            "type": "_Value"
+                          },
+                          "amp": {
+                            "value": "1.0",
+                            "type": "_Value",
+                            "description": "Amplitude in Vpp"
+                          },
+                          "offset": {
+                            "value": "0.0",
+                            "type": "_Value",
+                            "description": "Offset in Volts"
+                          }
+                        }
+                      }
+                    },
+                    "Apply_Square": {
+                      "type": "_GuiActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "APPLy:SQUare <freq>, <amp>, <offset>",
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "freq": {
+                            "value": "1000",
+                            "type": "_Value"
+                          },
+                          "amp": {
+                            "value": "1.0",
+                            "type": "_Value"
+                          },
+                          "offset": {
+                            "value": "0.0",
+                            "type": "_Value"
+                          }
+                        }
+                      }
+                    },
+                    "Apply_Pulse": {
+                      "type": "_GuiActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "APPLy:PULSe <freq>, <amp>, <offset>",
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "freq": {
+                            "value": "1000",
+                            "type": "_Value"
+                          },
+                          "amp": {
+                            "value": "1.0",
+                            "type": "_Value"
+                          },
+                          "offset": {
+                            "value": "0.0",
+                            "type": "_Value"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Modulation_Setup": {
+                  "type": "OcaBlock",
+                  "description": "AM/FM/Pulse Config",
+                  "fields": {
+                    "Setup_AM": {
+                      "type": "_GuiActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "AM:INTernal:FUNCtion <shape>;AM:INTernal:FREQuency <freq>;AM:DEPTh <depth>",
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "shape": {
+                            "value": "SIN",
+                            "type": "_Value",
+                            "description": "SIN, SQU, TRI, RAMP"
+                          },
+                          "freq": {
+                            "value": "100",
+                            "type": "_Value",
+                            "description": "Modulating Freq Hz"
+                          },
+                          "depth": {
+                            "value": "50",
+                            "type": "_Value",
+                            "description": "Depth %"
+                          }
+                        }
+                      }
+                    },
+                    "Setup_Pulse_Width": {
+                      "type": "_GuiActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "FUNCtion:PULSe:WIDTh <width_sec>",
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "width_sec": {
+                            "value": "0.0001",
+                            "type": "_Value"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "set": {
+              "type": "OcaBlock",
+              "description": "Individual Parameters",
+              "fields": {
+                "Set_Main_Parameters": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "Set_Frequency": {
+                      "type": "_GuiActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "FREQuency <freq>",
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "freq": {
+                            "value": "1000",
+                            "type": "_Value"
+                          }
+                        }
+                      }
+                    },
+                    "Set_Amplitude": {
+                      "type": "_GuiActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "VOLTage <amp>",
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "amp": {
+                            "value": "1.0",
+                            "type": "_Value",
+                            "description": "Default unit is Vpp"
+                          }
+                        }
+                      }
+                    },
+                    "Set_Offset": {
+                      "type": "_GuiActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "VOLTage:OFFSet <offset>",
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "offset": {
+                            "value": "0.0",
+                            "type": "_Value"
+                          }
+                        }
+                      }
+                    },
+                    "Set_Function_Shape": {
+                      "type": "_GuiActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "FUNCtion <shape>",
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "shape": {
+                            "value": "SIN",
+                            "type": "_Value",
+                            "description": "SIN, SQU, RAMP, PULS, NOIS, DC, USER"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Set_Units_Load": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "Set_Output_Load": {
+                      "type": "_GuiActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "OUTPut:LOAD <ohms>",
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "ohms": {
+                            "value": "50",
+                            "type": "_Value",
+                            "description": "Ohms or INFinity"
+                          }
+                        }
+                      }
+                    },
+                    "Set_Voltage_Unit": {
+                      "type": "_GuiActuator",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "message": "VOLTage:UNIT <unit>",
+                      "Input": {
+                        "type": "OcaBlock",
+                        "fields": {
+                          "units": {
+                            "value": "VPP",
+                            "type": "_Value",
+                            "description": "VPP, VRMS, DBM"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Do": {
+              "type": "OcaBlock",
+              "description": "Actions and Toggles",
+              "fields": {
+                "Output_Control": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "Output_ON": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "Output ON",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "Execute Command": {
+                        "message": "OUTPut ON"
+                      }
+                    },
+                    "Output_OFF": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "Output OFF",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "Execute Command": {
+                        "message": "OUTPut OFF"
+                      }
+                    },
+                    "Sync_ON": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "Sync ON",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "Execute Command": {
+                        "message": "OUTPut:SYNC ON"
+                      }
+                    },
+                    "Sync_OFF": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "Sync OFF",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "active": true,
+                      "Execute Command": {
+                        "message": "OUTPut:SYNC OFF"
+                      }
+                    }
+                  }
+                },
+                "Modulation_Control": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "AM_State_ON": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "AM ON",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "Execute Command": {
+                        "message": "AM:STATe ON"
+                      }
+                    },
+                    "AM_State_OFF": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "AM OFF",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "Execute Command": {
+                        "message": "AM:STATe OFF"
+                      }
+                    },
+                    "FM_State_ON": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "FM ON",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "Execute Command": {
+                        "message": "FM:STATe ON"
+                      }
+                    },
+                    "FM_State_OFF": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "FM OFF",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "Execute Command": {
+                        "message": "FM:STATe OFF"
+                      }
+                    }
+                  }
+                },
+                "System_Actions": {
+                  "type": "OcaBlock",
+                  "fields": {
+                    "Trigger_Immediate": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "Trigger (*TRG)",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "Execute Command": {
+                        "message": "*TRG"
+                      }
+                    },
+                    "Reset_Device": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "Reset (*RST)",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "Execute Command": {
+                        "message": "*RST"
+                      }
+                    },
+                    "Clear_Text": {
+                      "type": "_GuiActuator",
+                      "label_inactive": "Clear Display",
+                      "style": {
+                        "active_text_color": "#1a1a1a",
+                        "text_color": "#888888",
+                        "active_font_style": "bold",
+                        "active_font_size": null,
+                        "inactive_font_style": "normal",
+                        "inactive_font_size": null,
+                        "active_color": "#FF9900",
+                        "active_bg_color": "#000000",
+                        "bg_color": "#2b2b2b",
+                        "glow_intensity": 1.944
+                      },
+                      "Execute Command": {
+                        "message": "DISPlay:TEXT:CLEar"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

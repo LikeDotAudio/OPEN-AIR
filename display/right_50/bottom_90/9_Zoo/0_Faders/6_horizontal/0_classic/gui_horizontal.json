@@ -1,0 +1,126 @@
+{
+  "Zoo_Faders_horizontal_classic": {
+    "type": "OcaBin",
+    "id": "50.90.9.0.6.0",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label_active": "Stereo Pan",
+        "fields": {
+          "pan_classic": {
+            "type": "_CustomHorizontalFader",
+            "label_active": "Classic Pan",
+            "layout": {
+              "W": 400,
+              "H": 80,
+              "sticky": "ew"
+            },
+            "value_min": -100.0,
+            "value_max": 100.0,
+            "value_default": 0.0,
+            "cap_width": 55,
+            "cap_height": 40,
+            "cap_color": "#dcdcdc"
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label_active": "Frequency Sweep",
+        "fields": {
+          "freq_sweep": {
+            "type": "_CustomHorizontalFader",
+            "label_active": "Log Sweep",
+            "layout": {
+              "W": 400,
+              "H": 100,
+              "sticky": "ew"
+            },
+            "value_min": 20.0,
+            "value_max": 20000.0,
+            "value_default": 1000.0,
+            "log_exponent": 3.0,
+            "tick_interval": 2000,
+            "cap_width": 45,
+            "cap_height": 50,
+            "cap_color": "#33A1FD",
+            "value_highlight_color": "#33A1FD"
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label_active": "Mix Ratio",
+        "fields": {
+          "compact_mix": {
+            "type": "_CustomHorizontalFader",
+            "label_active": "Compact Mix",
+            "layout": {
+              "W": 300,
+              "H": 60,
+              "sticky": "ew"
+            },
+            "value_min": 0.0,
+            "value_max": 10.0,
+            "value_default": 5.0,
+            "cap_width": 30,
+            "cap_height": 25,
+            "cap_color": "#ce9178",
+            "tick_interval": 1.0
+          }
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label_active": "Delay Time",
+        "fields": {
+          "long_delay": {
+            "type": "_CustomHorizontalFader",
+            "label_active": "Long Delay",
+            "layout": {
+              "W": 500,
+              "H": 70,
+              "sticky": "ew"
+            },
+            "value_min": 0.0,
+            "value_max": 2.0,
+            "value_default": 0.5,
+            "cap_width": 80,
+            "cap_height": 30,
+            "cap_color": "#b5cea8",
+            "value_highlight_color": "#b5cea8"
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label_active": "Reverb Decay",
+        "fields": {
+          "industrial_decay": {
+            "type": "_CustomHorizontalFader",
+            "label_active": "Industrial Decay",
+            "layout": {
+              "W": 400,
+              "H": 120,
+              "sticky": "ew"
+            },
+            "value_min": 0.1,
+            "value_max": 10.0,
+            "value_default": 2.5,
+            "fader_cap_scale": 1.5,
+            "cap_color": "#FF9900",
+            "tick_interval": 0.5
+          }
+        }
+      }
+    }
+  }
+}

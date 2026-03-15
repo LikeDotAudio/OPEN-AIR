@@ -1,0 +1,217 @@
+{
+  "Zoo_Faders_dual_fader": {
+    "type": "OcaBin",
+    "id": "50.90.9.0.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "dual_fader_h": {
+        "type": "_CustomDualHorizontalFader",
+        "label": "Horizontal Dual Fader",
+        "notes": "Standard horizontal configuration",
+        "geometry": {
+          "width": 400,
+          "height": 100,
+          "font": 12,
+          "colour": "#FFFFFF",
+          "orientation": "horizontal"
+        },
+        "domain": {
+          "primary": {
+            "min": -100.0,
+            "max": 20.0,
+            "value_default_v1": -10.0,
+            "value_default_v2": -20.0,
+            "law": "linear",
+            "log_exponent": 1.0
+          }
+        },
+        "cosmetics": {
+          "colors": {
+            "primary": "#dcdcdc"
+          },
+          "style_flags": {},
+          "style_overrides": {
+            "cap_width": 40,
+            "cap_height_ratio": 0.5,
+            "cap_radius": 5,
+            "value_follow": true,
+            "border_width": 1,
+            "border_color": "#444444"
+          }
+        },
+        "interaction": {
+          "is_read_only": false
+        },
+        "layout": {}
+      },
+      "dual_fader_v": {
+        "type": "_CustomDualVerticalFader",
+        "label": "Vertical Dual Fader",
+        "notes": "Standard vertical configuration",
+        "geometry": {
+          "width": 100,
+          "height": 400,
+          "font": 12,
+          "colour": "#FFFFFF",
+          "orientation": "vertical"
+        },
+        "domain": {
+          "primary": {
+            "min": -100.0,
+            "max": 20.0,
+            "value_default_v1": -10.0,
+            "value_default_v2": -20.0,
+            "law": "linear",
+            "log_exponent": 1.0
+          }
+        },
+        "cosmetics": {
+          "colors": {
+            "primary": "#dcdcdc"
+          },
+          "style_flags": {},
+          "style_overrides": {
+            "cap_width": 40,
+            "cap_height_ratio": 0.5,
+            "cap_radius": 5,
+            "value_follow": true,
+            "border_width": 1,
+            "border_color": "#444444"
+          }
+        },
+        "interaction": {
+          "is_read_only": false
+        },
+        "layout": {}
+      },
+      "frequency_bounds_h": {
+        "type": "_CustomDualHorizontalFader",
+        "label": "Frequency Bounds (Hz) - H",
+        "notes": "Horizontal frequency range selector",
+        "geometry": {
+          "width": 500,
+          "height": 120,
+          "font": 14,
+          "colour": "#A020F0",
+          "orientation": "horizontal"
+        },
+        "domain": {
+          "primary": {
+            "min": 0.0,
+            "max": 1000.0,
+            "value_default_v1": 200.0,
+            "value_default_v2": 800.0,
+            "law": "linear",
+            "log_exponent": 1.0
+          }
+        },
+        "cosmetics": {
+          "colors": {
+            "primary": "#FFD700",
+            "highlight": "#A020F0"
+          },
+          "style_flags": {},
+          "style_overrides": {
+            "cap_width": 35,
+            "cap_radius": 8,
+            "value_follow": true
+          }
+        },
+        "interaction": {
+          "is_read_only": false
+        },
+        "layout": {}
+      },
+      "stereo_balance_v": {
+        "type": "_CustomDualVerticalFader",
+        "label": "Stereo Width Control - V",
+        "notes": "Vertical balance/width control",
+        "geometry": {
+          "width": 120,
+          "height": 400,
+          "font": 16,
+          "colour": "#00FFFF",
+          "orientation": "vertical"
+        },
+        "domain": {
+          "primary": {
+            "min": -50.0,
+            "max": 50.0,
+            "value_default_v1": -25.0,
+            "value_default_v2": 25.0,
+            "law": "linear",
+            "log_exponent": 1.0
+          }
+        },
+        "cosmetics": {
+          "colors": {
+            "primary": "#2F4F4F"
+          },
+          "style_flags": {},
+          "style_overrides": {
+            "cap_width": 55,
+            "cap_radius": 12,
+            "value_follow": true
+          }
+        },
+        "interaction": {
+          "is_read_only": false
+        },
+        "label_v1": "LEFT",
+        "label_v2": "RIGHT",
+        "delta_absolute": false,
+        "value_highlight_color": "#00FFFF",
+        "layout": {}
+      },
+      "pan_control_h": {
+        "type": "_CustomDualHorizontalFader",
+        "label": "Stereo Pan Control - H",
+        "notes": "Horizontal pan control",
+        "geometry": {
+          "width": 450,
+          "height": 100,
+          "font": 16,
+          "colour": "#00FF00",
+          "orientation": "horizontal"
+        },
+        "domain": {
+          "primary": {
+            "min": -100.0,
+            "max": 100.0,
+            "value_default_v1": -50.0,
+            "value_default_v2": 50.0,
+            "law": "linear",
+            "log_exponent": 1.0
+          }
+        },
+        "cosmetics": {
+          "colors": {
+            "primary": "#333333",
+            "highlight": "#00FF00"
+          },
+          "style_flags": {},
+          "style_overrides": {
+            "cap_width": 40,
+            "cap_radius": 20,
+            "value_follow": true
+          }
+        },
+        "interaction": {
+          "is_read_only": false
+        },
+        "label_v1": "L",
+        "label_v2": "R",
+        "delta_absolute": false,
+        "value_highlight_color": "#00FF00",
+        "layout": {}
+      }
+    }
+  }
+}

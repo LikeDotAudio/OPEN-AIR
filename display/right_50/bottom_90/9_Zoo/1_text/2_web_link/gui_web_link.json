@@ -1,0 +1,98 @@
+{
+  "Zoo_text_web_link": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label_active": "Visit Project Homepage",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartLink",
+            "label": "Visit Project Homepage",
+            "notes": "Link to the main project website.",
+            "geometry": {
+              "sticky": "ew",
+              "font": 14,
+              "colour": "#007acc"
+            },
+            "interaction": {
+              "url": "https://www.like.audio/project"
+            },
+            "layout": {}
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label_active": "Read Documentation",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartLink",
+            "label": "Read Documentation",
+            "notes": "Link to the online documentation.",
+            "interaction": {
+              "url": "https://docs.example.com/guide"
+            }
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label_active": "Contact Support",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartLink",
+            "label": "Contact Support",
+            "notes": "Link to the customer support page.",
+            "interaction": {
+              "url": "https://support.example.com"
+            }
+          }
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label_active": "View Source Code",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartLink",
+            "label": "View Source Code",
+            "notes": "Link to the GitHub repository.",
+            "geometry": {
+              "sticky": "ew",
+              "font": 12,
+              "colour": "#6464a3"
+            },
+            "interaction": {
+              "url": "https://github.com/APKaudio/OPEN-AIR"
+            },
+            "layout": {}
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label_active": "Latest Blog Post",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartLink",
+            "label": "Latest Blog Post",
+            "notes": "Link to a relevant blog post.",
+            "interaction": {
+              "url": "https://www.like.audio/blog/latest"
+            }
+          }
+        }
+      }
+    }
+  }
+}

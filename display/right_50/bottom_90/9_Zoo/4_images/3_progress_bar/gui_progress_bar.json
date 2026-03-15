@@ -1,0 +1,114 @@
+{
+  "Zoo_images_progress_bar": {
+    "type": "OcaBin",
+    "id": "50.90.9.4.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label_active": "Download Progress",
+        "fields": {
+          "examplefields": {
+            "download_progress_bar": {
+              "title": "File Download",
+              "description": "Indicates the progress of a file download.",
+              "progress_bar": {
+                "type": "_SmartProgress",
+                "label": "Progress",
+                "notes": "Shows the progress of a download.",
+                "domain": {
+                  "primary": {
+                    "max": 100,
+                    "value_default": 25
+                  }
+                },
+                "interaction": {
+                  "is_read_only": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label_active": "Voltage Indicator",
+        "fields": {
+          "examplefields": {
+            "voltage_progress_bar": {
+              "title": "Voltage Level",
+              "description": "Displays current voltage level.",
+              "progress_bar": {
+                "type": "_SmartProgress",
+                "label": "Voltage",
+                "notes": "Progress bar for voltage display.",
+                "domain": {
+                  "primary": {
+                    "max": 12.0,
+                    "value_default": 7.5,
+                    "units": "V"
+                  }
+                },
+                "interaction": {
+                  "is_read_only": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label_active": "System Load",
+        "fields": {
+          "examplefields": {
+            "type": "ProgressBar",
+            "label_active": "System Load",
+            "min": 0,
+            "max": 1000,
+            "value_default": 750,
+            "units": "Units",
+            "notes": "A progress bar indicating system load."
+          }
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label_active": "Temperature Sensor",
+        "fields": {
+          "examplefields": {
+            "type": "ProgressBar",
+            "label_active": "Temperature Sensor",
+            "min": -20,
+            "max": 50,
+            "value_default": 18.2,
+            "units": "\u00b0C",
+            "notes": "Displays temperature within a specific range."
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label_active": "Initialization Steps",
+        "fields": {
+          "examplefields": {
+            "type": "ProgressBar",
+            "label_active": "Initialization Steps",
+            "min": 0,
+            "max": 50,
+            "value_default": 40,
+            "units": "Steps",
+            "notes": "Progress bar tracking steps in an initialization process."
+          }
+        }
+      }
+    }
+  }
+}

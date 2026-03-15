@@ -1,0 +1,69 @@
+{
+  "Zoo_images_animation_display": {
+    "type": "OcaBin",
+    "id": "50.90.9.4.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label_active": "Animated Time Circuits",
+        "examplefields": {
+          "type": "AnimationDisplay",
+          "label_active": "Animated Time Circuits",
+          "gif_path": "assets/images/time_circuits.gif",
+          "value_default": 0,
+          "notes": "A standard animation of the time circuits."
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label_active": "Time Circuits (Start Frame 5)",
+        "examplefields": {
+          "type": "AnimationDisplay",
+          "label_active": "Time Circuits (Start Frame 5)",
+          "gif_path": "assets/images/time_circuits.gif",
+          "value_default": 5,
+          "notes": "Time circuits animation starting from a later frame."
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label_active": "Animation Start Frame 10",
+        "examplefields": {
+          "type": "_GuiAnimation",
+          "label_active": "Start Frame 10",
+          "path": "assets/animations/start_frame_10.gif",
+          "start_frame": 10,
+          "notes": "An animation that starts playing from frame 10."
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label_active": "Thematic Animation Label",
+        "examplefields": {
+          "type": "_GuiAnimation",
+          "label_active": "Thematic Animation",
+          "path": "assets/animations/thematic_label.gif",
+          "notes": "An animation used as a thematic label or separator."
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label_active": "Detailed Notes Animation",
+        "examplefields": {
+          "type": "_GuiAnimation",
+          "label_active": "Detailed Animation",
+          "path": "assets/animations/detailed_notes.gif",
+          "notes": "An animation providing detailed contextual information."
+        }
+      }
+    }
+  }
+}

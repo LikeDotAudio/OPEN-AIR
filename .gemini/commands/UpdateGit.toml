@@ -1,0 +1,45 @@
+description = "Automated Git Push with Changelog rotation and Local Data Purge."
+prompt = '''
+You are a Senior Feature Architect for the OPEN-AIR project. 
+The user wants to commit and push all current changes to GitHub.
+
+Follow these steps exactly:
+
+0. **Pre-Flight Cleanup**:
+   - Recursively delete all `__pycache__` folders to ensure a clean build state: !{find /home/anthony/Documents/OPEN-AIR -name "__pycache__" -type d -exec rm -rf {} +}
+
+1. **Monthly Rotation Check**:
+   - Check the current month/year (YYYY-MM).
+   - If `assets/Documentation/CHANGELOG.md` exists and was last updated in a previous month, move it to `assets/Documentation/ChangeLog/CHANGELOG_YYYYMM.md` (using the previous month's date) and create a fresh `assets/Documentation/CHANGELOG.md`.
+
+2. **Stage Changes**:
+   - Run `git add .` to stage all changes including untracked files.
+
+3. **Commit & Push**:
+   - Identify the latest entry in `assets/Documentation/CHANGELOG.md` (the first section starting with `## [`).
+   - Use that latest entry (title and description) as the commit message.
+   - Run `git commit -m "$(grep -Pzo '(?s)## \[.*?\]\s*.*?(?=\n## \[|\Z)' assets/Documentation/CHANGELOG.md | tr -d '\0')"` (or similar logic to extract the first entry).
+   - Run `git push`.
+
+4. **Update Changelog Decoration**:
+   - Get the new commit hash and date.
+   - **Insert** the following block into `assets/Documentation/CHANGELOG.md` immediately AFTER the latest entry header (e.g., after the `## [YYYY-MM-DD HH:MM:SS] Title` line):
+     **************************************
+     Commit: [HASH]
+     Date: [YYYY-MM-DD HH:MM:SS]
+     Message: [Summary of the change]
+     **************************************
+
+5. **PURGE Local Git Data**:
+   - To free up all local space and keep nothing but the bare essentials:
+   - Run `git clean -fdx -e config.ini -e ".gemini/*" -e ".vscode/*"` to remove all untracked/ignored files (like DATA/ and .crawler/) except configuration.
+   - Run `rm -rf /home/anthony/Documents/OPEN-AIR/.git/objects` to completely purge local history.
+   - Run `git reflog expire --expire=now --all`.
+   - Run `git gc --prune=now --aggressive --force` to force-clear any locked processes and shrink the database to the absolute minimum.
+
+6. **Summary**:
+   - Provide a final summary of the rotation, commit hash, and space cleared.
+
+7.  **Open the Git hub** 
+   - open the git hub repository (https://github.com/LikeDotAudio/OPEN-AIR)
+'''

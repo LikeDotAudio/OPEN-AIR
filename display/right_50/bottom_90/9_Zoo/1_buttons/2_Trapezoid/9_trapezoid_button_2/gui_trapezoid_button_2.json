@@ -1,0 +1,356 @@
+{
+  "Zoo_buttons_Trapezoid_trapezoid_button_2": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.2.9.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Trapezoid_Button_MUTE_Variations": {
+        "type": "OcaBlock",
+        "description": "MUTE Button Variations (8 Demos)",
+        "layout_columns": 4,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "mute_standard_latch": {
+            "type": "_TrapezoidButton",
+            "label_active": "MUTE",
+            "button_text": "MUT",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 70,
+            "height": 45,
+            "color": "#7d7d7d",
+            "led_color": "#FFFF00",
+            "latching": true,
+            "slant": 8,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Standard latching MUTE, yellow LED."
+          },
+          "mute_momentary_red": {
+            "type": "_TrapezoidButton",
+            "label_active": "MUTE",
+            "button_text": "HEY",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 50,
+            "height": 50,
+            "color": "#D32F2F",
+            "led_color": "#FF8A80",
+            "latching": false,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary red, square."
+          },
+          "solo_latching_blue": {
+            "type": "_TrapezoidButton",
+            "label_active": "SOLO",
+            "button_text": "SOLO",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 70,
+            "height": 70,
+            "color": "#2196F3",
+            "led_color": "#BBDEFB",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Large blue latching SOLO, square."
+          },
+          "bypass_momentary_green": {
+            "type": "_TrapezoidButton",
+            "label_active": "BYPASS",
+            "button_text": "BYP",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 60,
+            "height": 60,
+            "color": "#4CAF50",
+            "led_color": "#8BC34A",
+            "latching": false,
+            "slant": 15,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Small green momentary BYPASS."
+          },
+          "effect_latching_purple": {
+            "type": "_TrapezoidButton",
+            "label_active": "EFFECT",
+            "button_text": "FX",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 70,
+            "height": 70,
+            "color": "#9C27B0",
+            "led_color": "#E1BEE7",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching purple, square."
+          },
+          "power_momentary_orange": {
+            "type": "_TrapezoidButton",
+            "label_active": "POWER",
+            "button_text": "ON",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 50,
+            "height": 50,
+            "color": "#FF9800",
+            "led_color": "#FFAB40",
+            "latching": false,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary orange."
+          },
+          "reset_latching_cyan": {
+            "type": "_TrapezoidButton",
+            "button_text": "RST",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 60,
+            "height": 60,
+            "color": "#00BCD4",
+            "led_color": "#B2DFDB",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Cyan latching, square."
+          },
+          "filter_momentary_wide": {
+            "type": "_TrapezoidButton",
+            "button_text": "GO",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 100,
+            "height": 50,
+            "alpha": 0.9,
+            "color": "#607D8B",
+            "led_color": "#CFD8DC",
+            "latching": false,
+            "slant": 5,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Wide button, grey."
+          }
+        }
+      },
+      "Trapezoid_Button_SELECT_Variations": {
+        "type": "OcaBlock",
+        "description": "SELECT Button Variations (8 Demos)",
+        "layout_columns": 4,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "select_standard_momentary": {
+            "type": "_TrapezoidButton",
+            "label_active": "SELECT",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 100,
+            "height": 55,
+            "color": "#007acc",
+            "led_color": "#00BFFF",
+            "latching": false,
+            "slant": 20,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Wider momentary select button with blue indicator."
+          },
+          "enter_latching_green": {
+            "type": "_TrapezoidButton",
+            "label_active": "ENTER",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 80,
+            "height": 80,
+            "color": "#4CAF50",
+            "led_color": "#8BC34A",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Large green latching ENTER, square."
+          },
+          "ok_momentary_blue": {
+            "type": "_TrapezoidButton",
+            "label_active": "OK",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 60,
+            "height": 60,
+            "color": "#2196F3",
+            "led_color": "#BBDEFB",
+            "latching": false,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary blue OK."
+          },
+          "cancel_latching_red": {
+            "type": "_TrapezoidButton",
+            "label_active": "CANCEL",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 70,
+            "height": 70,
+            "color": "#D32F2F",
+            "led_color": "#FF8A80",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching red CANCEL, square."
+          },
+          "back_momentary_orange": {
+            "type": "_TrapezoidButton",
+            "label_active": "BACK",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 50,
+            "height": 50,
+            "color": "#FF9800",
+            "led_color": "#FFCCBC",
+            "latching": false,
+            "slant": 15,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary orange BACK."
+          },
+          "next_latching_purple": {
+            "type": "_TrapezoidButton",
+            "label_active": "NEXT",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 60,
+            "height": 60,
+            "color": "#9C27B0",
+            "led_color": "#E1BEE7",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching purple NEXT, square."
+          },
+          "done_momentary_cyan": {
+            "type": "_TrapezoidButton",
+            "label_active": "DONE",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 70,
+            "height": 70,
+            "color": "#00BCD4",
+            "led_color": "#B2DFDB",
+            "latching": false,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary cyan."
+          },
+          "execute_wide_grey": {
+            "type": "_TrapezoidButton",
+            "label_active": "EXECUTE",
+            "min": 0.0,
+            "max": 1.0,
+            "value_default": false,
+            "width": 100,
+            "height": 50,
+            "alpha": 0.9,
+            "color": "#607D8B",
+            "led_color": "#CFD8DC",
+            "latching": false,
+            "slant": 5,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Wide grey button."
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label_active": "BYPASS",
+        "fields": {
+          "examplefields": {
+            "type": "_TrapezoidButton",
+            "label_active": "BYPASS",
+            "width": 75,
+            "height": 48,
+            "color": "#d18616",
+            "led_color": "#FFA500",
+            "latching": true,
+            "value_default": true,
+            "slant": 12,
+            "notes": "Latching bypass button, active by default."
+          }
+        }
+      }
+    }
+  }
+}

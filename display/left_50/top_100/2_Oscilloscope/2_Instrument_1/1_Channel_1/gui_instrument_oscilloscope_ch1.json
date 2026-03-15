@@ -1,0 +1,492 @@
+{
+  "Oscilloscope_Instrument_1_Channel_1": {
+    "type": "OcaBin",
+    "id": "50.100.2.2.1.1",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Oscilloscope_Main_Station": {
+        "type": "OcaBlock",
+        "description": "Primary Oscilloscope Interface",
+        "fields": {
+          "Display_Sector": {
+            "type": "OcaBlock",
+            "description": "Visual Data Stream",
+            "fields": {
+              "Device_Identity": {
+                "type": "_TextInput",
+                "label_active": "Device Name",
+                "value_default": "Flux_Scope_88",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "SYST:NAME <value>"
+                  }
+                }
+              },
+              "Main_Graph_Display": {
+                "type": "_GuiGraph",
+                "label_active": "Signal Visualization",
+                "description": "Real-time waveform rendering",
+                "height": 50,
+                "alpha": 0.9,
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "DISP:DATA?"
+                  }
+                }
+              }
+            }
+          },
+          "Control_Deck_Break": {
+            "type": "OcaSeparator",
+            "layout": {
+              "thickness": 2,
+              "pady": 10,
+              "color": "#33A1FD",
+              "sticky": "ew"
+            }
+          },
+          "Vertical_Control_Deck": {
+            "type": "OcaBlock",
+            "description": "Vertical (Amplitude)",
+            "fields": {
+              "Ch1_Volts_Div": {
+                "type": "_GuiHorizontalKnob",
+                "label_active": "Volts / Div",
+                "value_default": "1.0",
+                "min": "0.01",
+                "max": "100",
+                "units": "V",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "CHAN1:SCAL <value>"
+                  }
+                }
+              },
+              "Ch1_Offset": {
+                "type": "_GuiHorizontalKnob",
+                "label_active": "Offset",
+                "value_default": "0.0",
+                "units": "V",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "CHAN1:OFFS <value>"
+                  }
+                }
+              },
+              "Coupling_Mode": {
+                "type": "_GuiDropDownOption",
+                "label_active": "Coupling",
+                "options": [
+                  "AC",
+                  "DC",
+                  "GND",
+                  "50\u03a9"
+                ],
+                "default_option": "DC",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "CHAN1:COUP <value>"
+                  }
+                }
+              }
+            }
+          },
+          "Horizontal_Control_Deck": {
+            "type": "OcaBlock",
+            "description": "Horizontal (Timebase)",
+            "fields": {
+              "Time_Div": {
+                "type": "_GuiHorizontalKnob",
+                "label_active": "Time / Div",
+                "value_default": "1e-3",
+                "min": "1e-9",
+                "max": "10",
+                "units": "s",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "TIM:SCAL <value>"
+                  }
+                }
+              },
+              "Time_Offset": {
+                "type": "_GuiHorizontalKnob",
+                "label_active": "Delay",
+                "value_default": "0.0",
+                "units": "s",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "TIM:OFFS <value>"
+                  }
+                }
+              }
+            }
+          },
+          "Trigger_Systems": {
+            "type": "OcaBlock",
+            "description": "Trigger Logic",
+            "fields": {
+              "Trigger_Level": {
+                "type": "_GuiHorizontalKnob",
+                "label_active": "Trig Level",
+                "value_default": "0.5",
+                "units": "V",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "TRIG:LEV <value>"
+                  }
+                }
+              },
+              "Trigger_Edge_Toggle": {
+                "type": "_GuiButtonToggle",
+                "label_active": "RISING",
+                "label_inactive": "FALLING",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "state_default": true,
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "TRIG:SLOP <value>"
+                  }
+                }
+              },
+              "Force_Trigger": {
+                "type": "_TrapezoidButton",
+                "label_active": "FORCE",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": true,
+                    "command_value": "TRIG:FORC"
+                  }
+                }
+              }
+            }
+          },
+          "Acquisition_Main": {
+            "type": "OcaBlock",
+            "description": "Acquisition State",
+            "fields": {
+              "Run_Stop_Toggle": {
+                "type": "_GuiButtonToggle",
+                "label_active": "RUNNING \ud83d\udfe2",
+                "label_inactive": "STOPPED \ud83d\udd34",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "state_default": true,
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "ACQ:STATE <value>"
+                  }
+                }
+              },
+              "Single_Shot": {
+                "type": "_GuiButton",
+                "label_active": "SINGLE SEQ",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": true,
+                    "command_value": "ACQ:MOD SING;RUN"
+                  }
+                }
+              }
+            }
+          },
+          "Telemetry_Readout": {
+            "type": "OcaBlock",
+            "description": "Live Measurements",
+            "fields": {
+              "Read_Vpp": {
+                "type": "_GuiLabel",
+                "label_active": "Vpp",
+                "value_default": "--- V",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:VPP?"
+                  }
+                }
+              },
+              "Read_Vrms": {
+                "type": "_GuiLabel",
+                "label_active": "Vrms",
+                "value_default": "--- V",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:VRMS?"
+                  }
+                }
+              },
+              "Read_Freq": {
+                "type": "_GuiLabel",
+                "label_active": "Freq",
+                "value_default": "--- Hz",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:FREQ?"
+                  }
+                }
+              },
+              "Read_dB": {
+                "type": "_GuiLabel",
+                "label_active": "dB",
+                "value_default": "--- dB",
+                "message_details": {
+                  "OSCILLOSCOPE_MODEL": {
+                    "type": "_GuiActuator",
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "trigger": false,
+                    "command_value": "MEAS:DB?"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

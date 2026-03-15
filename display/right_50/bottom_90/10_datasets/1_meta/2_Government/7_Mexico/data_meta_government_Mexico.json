@@ -1,0 +1,77 @@
+{
+  "FM_Radio_Broadcast": {
+    "Value": "FM Radio Broadcast",
+    "Start_MHz": 88.0,
+    "Stop_MHz": 108.0
+  },
+  "DTT_VHF_Channels_7_13": {
+    "Value": "Digital Terrestrial Television VHF (Channels 7-13)",
+    "Start_MHz": 174.0,
+    "Stop_MHz": 216.0
+  },
+  "DTT_UHF_Channels_14_36": {
+    "Value": "Digital Terrestrial Television UHF (Channels 14-36)",
+    "Start_MHz": 470.0,
+    "Stop_MHz": 608.0
+  },
+  "4G_LTE_700MHz_Band_28_APT": {
+    "Value": "4G LTE 700 MHz (Band 28 APT)",
+    "Start_MHz": 703.0,
+    "Stop_MHz": 803.0
+  },
+  "2G_3G_850MHz": {
+    "Value": "2G/3G 850 MHz",
+    "Start_MHz": 824.0,
+    "Stop_MHz": 894.0
+  },
+  "4G_LTE_850MHz": {
+    "Value": "4G LTE 850 MHz",
+    "Start_MHz": 824.0,
+    "Stop_MHz": 894.0
+  },
+  "4G_LTE_AWS_1700_2100MHz_Band_4": {
+    "Value": "4G LTE AWS 1700/2100 MHz (Band 4)",
+    "Start_MHz": 1710.0,
+    "Stop_MHz": 2155.0
+  },
+  "2G_3G_1900MHz": {
+    "Value": "2G/3G 1900 MHz",
+    "Start_MHz": 1850.0,
+    "Stop_MHz": 1990.0
+  },
+  "4G_LTE_1900MHz": {
+    "Value": "4G LTE 1900 MHz",
+    "Start_MHz": 1850.0,
+    "Stop_MHz": 1990.0
+  },
+  "Wi_Fi_2_4_GHz": {
+    "Value": "Wi-Fi 2.4 GHz",
+    "Start_MHz": 2400.0,
+    "Stop_MHz": 2483.5
+  },
+  "4G_LTE_2_5GHz": {
+    "Value": "4G LTE 2.5 GHz",
+    "Start_MHz": 2500.0,
+    "Stop_MHz": 2690.0
+  },
+  "5G_3_5GHz_n78": {
+    "Value": "5G 3.5 GHz (n78)",
+    "Start_MHz": 3300.0,
+    "Stop_MHz": 3800.0
+  },
+  "Wi_Fi_5_GHz": {
+    "Value": "Wi-Fi 5 GHz",
+    "Start_MHz": 5150.0,
+    "Stop_MHz": 5850.0
+  },
+  "Wi_Fi_6_GHz": {
+    "Value": "Wi-Fi 6 GHz (Wi-Fi 6E)",
+    "Start_MHz": 5925.0,
+    "Stop_MHz": 7125.0
+  },
+  "5G_mmWave_26_28GHz": {
+    "Value": "5G mmWave 26/28 GHz",
+    "Start_MHz": 24250.0,
+    "Stop_MHz": 29500.0
+  }
+}

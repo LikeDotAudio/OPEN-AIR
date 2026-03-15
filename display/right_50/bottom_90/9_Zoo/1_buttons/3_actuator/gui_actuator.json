@@ -1,0 +1,376 @@
+{
+  "Zoo_buttons_actuator": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.3",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "elements1": {
+        "type": "OcaBlock",
+        "label_active": "SENDING...",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartActuator",
+            "label": "SENDING...",
+            "notes": "A button to trigger a 'send' command.",
+            "geometry": {
+              "width": 100,
+              "height": 50,
+              "alpha": 0.9,
+              "font": 12
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "label_inactive": "SEND",
+            "layout": {}
+          }
+        }
+      },
+      "elements2": {
+        "type": "OcaBlock",
+        "label_active": "RUNNING",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartActuator",
+            "label": "RUNNING",
+            "notes": "Button to initiate a process, showing 'RUNNING' when active.",
+            "geometry": {
+              "width": 120,
+              "height": 50,
+              "font": 14
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "label_inactive": "START",
+            "layout": {}
+          }
+        }
+      },
+      "elements3": {
+        "type": "OcaBlock",
+        "label_active": "STOPPING!",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartActuator",
+            "label": "STOPPING!",
+            "notes": "Large emergency stop button.",
+            "geometry": {
+              "width": 150,
+              "height": 70,
+              "font": 18
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "label_inactive": "STOP",
+            "layout": {}
+          }
+        }
+      },
+      "elements4": {
+        "type": "OcaBlock",
+        "label_active": "RESETTING...",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartActuator",
+            "label": "RESETTING...",
+            "notes": "Compact button to reset a device.",
+            "geometry": {
+              "width": 80,
+              "height": 30,
+              "font": 10
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "label_inactive": "RESET",
+            "layout": {}
+          }
+        }
+      },
+      "elements5": {
+        "type": "OcaBlock",
+        "label_active": "CALIBRATING",
+        "fields": {
+          "examplefields": {
+            "type": "_SmartActuator",
+            "label": "CALIBRATING",
+            "notes": "Button to trigger sensor calibration.",
+            "geometry": {
+              "width": 110,
+              "height": 45,
+              "font": 11
+            },
+            "interaction": {
+              "is_read_only": false
+            },
+            "label_inactive": "CALIBRATE",
+            "layout": {}
+          }
+        }
+      },
+      "circular_demos": {
+        "type": "OcaBlock",
+        "label_active": "Circular Actuators",
+        "fields": {
+          "panic_button": {
+            "type": "_SmartActuator",
+            "label": "PANIC",
+            "label_active": "HALT!",
+            "label_inactive": "PANIC",
+            "geometry": {
+              "width": 100,
+              "height": 100,
+              "font": 16
+            },
+            "style": {
+              "Circular": true,
+              "active_color": "#FF0000",
+              "glow_intensity": 5.0
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "start_circle": {
+            "type": "_SmartActuator",
+            "label": "START",
+            "label_active": "GO!",
+            "label_inactive": "START",
+            "geometry": {
+              "width": 80,
+              "height": 80,
+              "font": 14
+            },
+            "style": {
+              "Circular": true,
+              "active_color": "#00FF00"
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "trigger_circle": {
+            "type": "_SmartActuator",
+            "label": "TRIG",
+            "label_active": "FIRING",
+            "label_inactive": "TRIG",
+            "geometry": {
+              "width": 60,
+              "height": 60,
+              "font": 10
+            },
+            "style": {
+              "Circular": true,
+              "active_color": "#FF9900"
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          },
+          "tiny_poke": {
+            "type": "_SmartActuator",
+            "label": "Poke",
+            "label_active": "!",
+            "label_inactive": "?",
+            "geometry": {
+              "width": 30,
+              "height": 30,
+              "font": 12
+            },
+            "style": {
+              "Circular": true,
+              "active_color": "#00CCFF"
+            },
+            "interaction": {
+              "is_read_only": false
+            }
+          }
+        }
+      },
+      "cream_and_variants": {
+        "type": "OcaBlock",
+        "label_active": "Cream & Color Variants",
+        "fields": {
+          "cream_off": {
+            "type": "_SmartActuator",
+            "label": "CREAM DIM",
+            "label_inactive": "DIM",
+            "label_active": "...",
+            "geometry": {
+              "width": 100,
+              "height": 60,
+              "font": 12
+            },
+            "active_color": "#FFFDD0",
+            "bg_color": "#c4bc96",
+            "active_bg_color": "#c4bc96",
+            "text_color": "#1a1a1a",
+            "active_text_color": "#1a1a1a",
+            "style": {
+              "Circular": true
+            }
+          },
+          "cream_on": {
+            "type": "_SmartActuator",
+            "label": "CREAM LIT",
+            "label_inactive": "...",
+            "label_active": "LIT",
+            "geometry": {
+              "width": 100,
+              "height": 60,
+              "font": 12
+            },
+            "active_color": "#FFFDD0",
+            "bg_color": "#c4bc96",
+            "active_bg_color": "#FFFDD0",
+            "text_color": "#1a1a1a",
+            "active_text_color": "#1a1a1a",
+            "glow_intensity": 5.0,
+            "style": {
+              "Circular": true
+            }
+          },
+          "ruby_pulse": {
+            "type": "_SmartActuator",
+            "label": "RUBY",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "active_color": "#e0115f",
+            "active_bg_color": "#400010",
+            "style": {
+              "Circular": true
+            }
+          },
+          "emerald_glow": {
+            "type": "_SmartActuator",
+            "label": "EMER",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "active_color": "#50c878",
+            "active_bg_color": "#003010",
+            "style": {
+              "Circular": true
+            }
+          },
+          "sapphire_deep": {
+            "type": "_SmartActuator",
+            "label": "SAPP",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "active_color": "#0f52ba",
+            "active_bg_color": "#001040",
+            "style": {
+              "Circular": true
+            }
+          },
+          "amber_warm": {
+            "type": "_SmartActuator",
+            "label": "AMBR",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "active_color": "#ffbf00",
+            "active_bg_color": "#302000",
+            "style": {
+              "Circular": true
+            }
+          },
+          "violet_vibes": {
+            "type": "_SmartActuator",
+            "label": "VIOL",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "active_color": "#ee82ee",
+            "active_bg_color": "#300030",
+            "style": {
+              "Circular": true
+            }
+          },
+          "cyan_ice": {
+            "type": "_SmartActuator",
+            "label": "CYAN",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "active_color": "#00ffff",
+            "active_bg_color": "#003030",
+            "style": {
+              "Circular": true
+            }
+          },
+          "magenta_hot": {
+            "type": "_SmartActuator",
+            "label": "MAGN",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "active_color": "#ff00ff",
+            "active_bg_color": "#400040",
+            "style": {
+              "Circular": true
+            }
+          },
+          "lime_zest": {
+            "type": "_SmartActuator",
+            "label": "LIME",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "active_color": "#32cd32",
+            "active_bg_color": "#103000",
+            "style": {
+              "Circular": true
+            }
+          },
+          "gold_lux": {
+            "type": "_SmartActuator",
+            "label": "GOLD",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "active_color": "#ffd700",
+            "active_bg_color": "#303000",
+            "style": {
+              "Circular": true
+            }
+          },
+          "slate_cool": {
+            "type": "_SmartActuator",
+            "label": "SLAT",
+            "geometry": {
+              "width": 60,
+              "height": 60
+            },
+            "active_color": "#708090",
+            "active_bg_color": "#101020",
+            "style": {
+              "Circular": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

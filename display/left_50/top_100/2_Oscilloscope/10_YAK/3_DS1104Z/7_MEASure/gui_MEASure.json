@@ -1,0 +1,231 @@
+{
+  "Oscilloscope_YAK_DS1104Z_MEASure": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.3.7",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": "Measurement Settings",
+        "fields": {
+          "Set_Measure_Source": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": ":MEASure:SOURce <source>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "source": {
+                    "value": "CHAN1",
+                    "type": "_GuiValue",
+                    "label": "Source",
+                    "units": "",
+                    "description": "CHANn"
+                  }
+                }
+              }
+            }
+          },
+          "Clear_Measurements": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "label_inactive": "Clear All",
+                "AES70": "OcaBooleanActuator",
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "Execute Command": {
+                  "message": ":MEASure:CLEar"
+                }
+              }
+            }
+          },
+          "Show_Statistics": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": ":MEASure:STATistic:DISPlay <state>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "state": {
+                    "value": "ON",
+                    "type": "_GuiValue",
+                    "label": "Stats Table",
+                    "units": "",
+                    "description": "ON or OFF"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "nab": {
+        "type": "OcaBlock",
+        "description": "Measurement Queries",
+        "fields": {
+          "Measure_Item": {
+            "type": "OcaBlock",
+            "description": "Immediate Measurement (:MEAS:ITEM?)",
+            "fields": {
+              "Measure_Vpp": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":MEASure:ITEM? VPP,<chan>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "chan": {
+                        "value": "CHAN1",
+                        "type": "_GuiValue",
+                        "label": "Ch",
+                        "units": ""
+                      }
+                    }
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "val": {
+                        "value": "V",
+                        "type": "_GuiValue"
+                      }
+                    }
+                  }
+                }
+              },
+              "Measure_Frequency": {
+                "type": "OcaBlock",
+                "fields": {
+                  "Execute Command": {
+                    "type": "_GuiActuator",
+                    "AES70": "OcaBooleanActuator",
+                    "layout": {
+                      "height": 30,
+                      "sticky": ""
+                    },
+                    "style": {
+                      "active_text_color": "#1a1a1a",
+                      "text_color": "#888888",
+                      "active_font_style": "bold",
+                      "active_font_size": null,
+                      "inactive_font_style": "normal",
+                      "inactive_font_size": null,
+                      "active_color": "#FF9900",
+                      "active_bg_color": "#000000",
+                      "bg_color": "#2b2b2b",
+                      "glow_intensity": 1.944
+                    },
+                    "active": true,
+                    "message": ":MEASure:ITEM? FREQ,<chan>"
+                  },
+                  "Input": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "chan": {
+                        "value": "CHAN1",
+                        "type": "_GuiValue",
+                        "label": "Ch",
+                        "units": ""
+                      }
+                    }
+                  },
+                  "Outputs": {
+                    "type": "OcaBlock",
+                    "fields": {
+                      "val": {
+                        "value": "Hz",
+                        "type": "_GuiValue"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,447 @@
+{
+  "Spectrum_Instrument_markers": {
+    "type": "OcaBin",
+    "id": "50.100.0.3.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "All Marker On": {
+        "type": "OcaBlock",
+        "AES70": "OcaMarkerManager",
+        "description": "A block for managing global marker settings.",
+        "layout": {
+          "weight": 1
+        },
+        "fields": {
+          "All_Markers_On": {
+            "type": "_GuiButtonToggle",
+            "label_active": "All Markers ON",
+            "label_inactive": "All Markers ON",
+            "AES70": "OcaBooleanActuator",
+            "handler": "turn_all_markers_on",
+            "layout": {
+              "height": 50,
+              "stretch": "width",
+              "font": 15
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "ON": {
+                "label_active": "All Markers ON",
+                "label_inactive": "All Markers ON",
+                "selected": true
+              },
+              "OFF": {
+                "label_active": "All Markers OFF",
+                "label_inactive": "All Markers OFF",
+                "selected": false
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Markers",
+              "command": "Set_All_Markers_State",
+              "input_name": "state_bool",
+              "converter": "bool_to_int"
+            }
+          }
+        }
+      },
+      "Fold_M1": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Marker 1": {
+        "type": "OcaBlock",
+        "description": "Settings for Marker 1",
+        "layout": {
+          "weight": 1
+        },
+        "fields": {
+          "Active": {
+            "label_active": "Active",
+            "label_inactive": "Active",
+            "type": "_GuiCheckbox",
+            "AES70": "OcaSwitch",
+            "handler": "toggle_marker_active",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Markers",
+              "command": "Set_Marker_State",
+              "input_name": "state_bool",
+              "converter": "bool_to_int",
+              "marker_number": 1
+            },
+            "value": false,
+            "layout": {
+              "height": 30
+            }
+          },
+          "X_MHz": {
+            "label_active": "X",
+            "label_inactive": "X",
+            "type": "_Value",
+            "layout": {
+              "height": 30,
+              "stretch": "width",
+              "Font": 50
+            },
+            "AES70": "OcaFrequencyActuator",
+            "handler": "set_marker_frequency",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Markers",
+              "command": "Set_Marker_X_position",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz",
+              "marker_number": 1
+            },
+            "value": "111",
+            "units": "MHz"
+          },
+          "Y_dBm": {
+            "label_active": "Y",
+            "label_inactive": "Y",
+            "type": "_Label",
+            "AES70": "OcaLevelSensor",
+            "value": "-30",
+            "units": "dBm"
+          }
+        }
+      },
+      "Fold_M2": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Marker 2": {
+        "type": "OcaBlock",
+        "description": "Settings for Marker 2",
+        "layout": {
+          "weight": 1
+        },
+        "fields": {
+          "Active": {
+            "label_active": "Active",
+            "label_inactive": "Active",
+            "type": "_GuiCheckbox",
+            "AES70": "OcaSwitch",
+            "handler": "toggle_marker_active",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Markers",
+              "command": "Set_Marker_State",
+              "input_name": "state_bool",
+              "converter": "bool_to_int",
+              "marker_number": 2
+            },
+            "value": false,
+            "layout": {
+              "height": 30
+            }
+          },
+          "X_MHz": {
+            "label_active": "X",
+            "label_inactive": "X",
+            "type": "_Value",
+            "AES70": "OcaFrequencyActuator",
+            "handler": "set_marker_frequency",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Markers",
+              "command": "Set_Marker_X_position",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz",
+              "marker_number": 2
+            },
+            "value": "111",
+            "units": "MHz"
+          },
+          "Y_dBm": {
+            "label_active": "Y",
+            "label_inactive": "Y",
+            "type": "_Label",
+            "AES70": "OcaLevelSensor",
+            "value": "-30",
+            "units": "dBm"
+          }
+        }
+      },
+      "Fold_M3": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Marker 3": {
+        "type": "OcaBlock",
+        "description": "Settings for Marker 3",
+        "layout": {
+          "weight": 1
+        },
+        "fields": {
+          "Active": {
+            "label_active": "Active",
+            "label_inactive": "Active",
+            "type": "_GuiCheckbox",
+            "AES70": "OcaSwitch",
+            "handler": "toggle_marker_active",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Markers",
+              "command": "Set_Marker_State",
+              "input_name": "state_bool",
+              "converter": "bool_to_int",
+              "marker_number": 3
+            },
+            "value": false,
+            "layout": {
+              "height": 30
+            }
+          },
+          "X_MHz": {
+            "label_active": "X",
+            "label_inactive": "X",
+            "type": "_Value",
+            "AES70": "OcaFrequencyActuator",
+            "handler": "set_marker_frequency",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Markers",
+              "command": "Set_Marker_X_position",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz",
+              "marker_number": 3
+            },
+            "value": "111",
+            "units": "MHz"
+          },
+          "Y_dBm": {
+            "label_active": "Y",
+            "label_inactive": "Y",
+            "type": "_Label",
+            "AES70": "OcaLevelSensor",
+            "value": "-30",
+            "units": "dBm"
+          }
+        }
+      },
+      "Fold_M4": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Marker 4": {
+        "type": "OcaBlock",
+        "description": "Settings for Marker 4",
+        "layout": {
+          "weight": 1
+        },
+        "fields": {
+          "Active": {
+            "label_active": "Active",
+            "label_inactive": "Active",
+            "type": "_GuiCheckbox",
+            "AES70": "OcaSwitch",
+            "handler": "toggle_marker_active",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Markers",
+              "command": "Set_Marker_State",
+              "input_name": "state_bool",
+              "converter": "bool_to_int",
+              "marker_number": 4
+            },
+            "value": false,
+            "layout": {
+              "height": 30
+            }
+          },
+          "X_MHz": {
+            "label_active": "X",
+            "label_inactive": "X",
+            "type": "_Value",
+            "AES70": "OcaFrequencyActuator",
+            "handler": "set_marker_frequency",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Markers",
+              "command": "Set_Marker_X_position",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz",
+              "marker_number": 4
+            },
+            "value": "111",
+            "units": "MHz"
+          },
+          "Y_dBm": {
+            "label_active": "Y",
+            "label_inactive": "Y",
+            "type": "_Label",
+            "AES70": "OcaLevelSensor",
+            "value": "-30",
+            "units": "dBm"
+          }
+        }
+      },
+      "Fold_M5": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Marker 5": {
+        "type": "OcaBlock",
+        "description": "Settings for Marker 5",
+        "layout": {
+          "weight": 1
+        },
+        "fields": {
+          "Active": {
+            "label_active": "Active",
+            "label_inactive": "Active",
+            "type": "_GuiCheckbox",
+            "AES70": "OcaSwitch",
+            "handler": "toggle_marker_active",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Markers",
+              "command": "Set_Marker_State",
+              "input_name": "state_bool",
+              "converter": "bool_to_int",
+              "marker_number": 5
+            },
+            "value": false,
+            "layout": {
+              "height": 30
+            }
+          },
+          "X_MHz": {
+            "label_active": "X",
+            "label_inactive": "X",
+            "type": "_Value",
+            "AES70": "OcaFrequencyActuator",
+            "handler": "set_marker_frequency",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Markers",
+              "command": "Set_Marker_X_position",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz",
+              "marker_number": 5
+            },
+            "value": "111",
+            "units": "MHz"
+          },
+          "Y_dBm": {
+            "label_active": "Y",
+            "label_inactive": "Y",
+            "type": "_Label",
+            "AES70": "OcaLevelSensor",
+            "value": "-30",
+            "units": "dBm"
+          }
+        }
+      },
+      "Fold_M6": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Marker 6": {
+        "type": "OcaBlock",
+        "description": "Settings for Marker 6",
+        "layout": {
+          "weight": 1
+        },
+        "fields": {
+          "Active": {
+            "label_active": "Active",
+            "label_inactive": "Active",
+            "type": "_GuiCheckbox",
+            "AES70": "OcaSwitch",
+            "handler": "toggle_marker_active",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Markers",
+              "command": "Set_Marker_State",
+              "input_name": "state_bool",
+              "converter": "bool_to_int",
+              "marker_number": 6
+            },
+            "value": false,
+            "layout": {
+              "height": 30
+            }
+          },
+          "X_MHz": {
+            "label_active": "X",
+            "label_inactive": "X",
+            "type": "_Value",
+            "AES70": "OcaFrequencyActuator",
+            "handler": "set_marker_frequency",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Markers",
+              "command": "Set_Marker_X_position",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz",
+              "marker_number": 6
+            },
+            "value": "111",
+            "units": "MHz"
+          },
+          "Y_dBm": {
+            "label_active": "Y",
+            "label_inactive": "Y",
+            "type": "_Label",
+            "AES70": "OcaLevelSensor",
+            "value": "-30",
+            "units": "dBm"
+          }
+        }
+      }
+    }
+  }
+}

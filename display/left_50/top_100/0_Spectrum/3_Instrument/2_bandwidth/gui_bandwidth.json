@@ -1,0 +1,556 @@
+{
+  "Spectrum_Instrument_bandwidth": {
+    "type": "OcaBin",
+    "id": "50.100.0.3.2",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Resolution Bandwidth": {
+        "type": "OcaBlock",
+        "description": "Resolution Bandwidth (RBW) settings.",
+        "layout": {
+          "weight": 0
+        },
+        "show_label": false,
+        "fields": {
+          "RBW": {
+            "label_active": "Resolution Bandwidth",
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "height": 100,
+              "width": 400,
+              "sticky": "ewn",
+              "font": 20,
+              "padx": 10,
+              "pady": 10
+            },
+            "handler": "set_rbw",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Bandwidth",
+              "command": "Set_RBW",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz"
+            },
+            "default_value": "0.5",
+            "min": "0",
+            "max": "10",
+            "step_coarse": "1",
+            "step_fine": "0.001",
+            "units": "MHz",
+            "show_label": true,
+            "value_config": {
+              "height": 30,
+              "colour": "#ffffff",
+              "bg_color": "#1a1a1a",
+              "width": 12,
+              "font": 18
+            },
+            "fader_config": {
+              "type": "_GuiFaderHorizontal",
+              "tick_interval": 1,
+              "show_ticks": true,
+              "bar_color": "#333333",
+              "active_color": "#FF9900",
+              "glow_intensity": 1.5
+            },
+            "dial_config": {
+              "type": "_GuiKnob",
+              "knob_style": "dial",
+              "active_color": "#00ffff",
+              "bg_color": "#2b2b2b"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "Resolution Band Width": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_resolution_bandwidth",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9,
+              "max_cols": 3,
+              "width": 160,
+              "stretch": "width",
+              "font": 10,
+              "padx": 2,
+              "pady": 2
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "1": {
+                "value": "1",
+                "label_active": "Fast",
+                "label_inactive": "Fast",
+                "description": "Like a race car: fast sweep, low detail. Best for catching fleeting signals.",
+                "units": "MHz",
+                "selected": false
+              },
+              "2": {
+                "value": "0.3",
+                "label_active": "Brisk",
+                "label_inactive": "Brisk",
+                "description": "A jog through the spectrum; quick enough to see the sights without missing much.",
+                "units": "MHz",
+                "selected": false
+              },
+              "3": {
+                "value": "0.1",
+                "label_active": "Deliberate",
+                "label_inactive": "Deliberate",
+                "description": "The perfect balance of speed and fidelity. Not too fast, not too slow.",
+                "units": "MHz",
+                "selected": false
+              },
+              "4": {
+                "value": "0.03",
+                "label_active": "Steady",
+                "label_inactive": "Steady",
+                "description": "A calm stroll, giving you time to appreciate the finer signal details.",
+                "units": "MHz",
+                "selected": false
+              },
+              "5": {
+                "value": "0.01",
+                "label_active": "Leisurely",
+                "label_inactive": "Leisurely",
+                "description": "A slow saunter through the noise floor, where every waveform is a work of art.",
+                "units": "MHz",
+                "selected": false
+              },
+              "6": {
+                "value": "0.003",
+                "label_active": "Unhurried",
+                "label_inactive": "Unhurried",
+                "description": "For the patient scientist. You'll see things nobody else can, but it'll take a while.",
+                "units": "MHz",
+                "selected": false
+              },
+              "7": {
+                "value": "0.001",
+                "label_active": "Slothlike",
+                "label_inactive": "Slothlike",
+                "description": "So slow you can practically see the electrons move. The highest fidelity, but you'll miss any quick events.",
+                "units": "MHz",
+                "selected": false
+              },
+              "8": {
+                "value": "0.0003",
+                "label_active": "Slothlike",
+                "label_inactive": "Slothlike",
+                "description": "So slow you can practically see the electrons move. The highest fidelity, but you'll miss any quick events.",
+                "units": "MHz",
+                "selected": false
+              },
+              "UNSELECTED": {
+                "value": "NONE",
+                "label_active": "None Selected",
+                "label_inactive": "None Selected",
+                "description": "No resolution bandwidth option is currently selected.",
+                "units": "",
+                "selected": true
+              }
+            },
+            "selection_mode": "radio",
+            "Allow_Null": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Bandwidth",
+              "command": "Set_RBW",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz"
+            }
+          }
+        }
+      },
+      "Fold_VBW": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Video Bandwidth": {
+        "type": "OcaBlock",
+        "description": "Video Bandwidth (VBW) settings.",
+        "show_label": false,
+        "layout": {
+          "weight": 0
+        },
+        "fields": {
+          "vbw_MHz": {
+            "label_active": "Video Bandwidth",
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "height": 100,
+              "width": 400,
+              "sticky": "ewn",
+              "font": 20,
+              "padx": 10,
+              "pady": 10
+            },
+            "handler": "set_vbw",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Bandwidth",
+              "command": "Set_VBW",
+              "input_name": "hz_value",
+              "converter": "mhz_to_hz"
+            },
+            "default_locked": false,
+            "default_value": "0.5",
+            "min": "0",
+            "max": "1000",
+            "step_coarse": "10",
+            "step_fine": "1",
+            "units": "kHz",
+            "show_label": true,
+            "value_config": {
+              "height": 30,
+              "colour": "#ffffff",
+              "bg_color": "#1a1a1a",
+              "width": 12,
+              "font": 18
+            },
+            "fader_config": {
+              "type": "_GuiFaderHorizontal",
+              "tick_interval": 10,
+              "show_ticks": true,
+              "bar_color": "#333333",
+              "active_color": "#FF9900",
+              "glow_intensity": 1.5,
+              "width": 300,
+              "height": 65
+            },
+            "dial_config": {
+              "type": "_GuiKnob",
+              "knob_style": "dial",
+              "width": 70,
+              "height": 70,
+              "active_color": "#00ffff",
+              "bg_color": "#2b2b2b"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          },
+          "Video Band Width ": {
+            "type": "_GuiButtonToggler",
+            "AES70": "OcaSwitch",
+            "handler": "set_video_bandwidth",
+            "layout": {
+              "height": 50,
+              "alpha": 0.9,
+              "max_cols": 3,
+              "width": 160,
+              "stretch": "width",
+              "font": 10,
+              "padx": 2,
+              "pady": 2
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "1": {
+                "value": "1000",
+                "label_active": "Ultra Fast",
+                "label_inactive": "Ultra Fast",
+                "description": "A lightning-fast sweep. Filters are wide open, letting everything through.",
+                "units": "kHz",
+                "selected": false
+              },
+              "2": {
+                "value": "300",
+                "label_active": "Very Fast",
+                "label_inactive": "Very Fast",
+                "description": "A quick pass through the spectrum, ideal for fast-changing signals.",
+                "units": "kHz",
+                "selected": false
+              },
+              "3": {
+                "value": "100",
+                "label_active": "Fast",
+                "label_inactive": "Fast",
+                "description": "A balanced speed for general purpose monitoring and signal capture.",
+                "units": "kHz",
+                "selected": false
+              },
+              "4": {
+                "value": "30",
+                "label_active": "Normal",
+                "label_inactive": "Normal",
+                "description": "The standard filter setting for most common analysis tasks. Not too much, not too little.",
+                "units": "kHz",
+                "selected": false
+              },
+              "5": {
+                "value": "10",
+                "label_active": "Slow",
+                "label_inactive": "Slow",
+                "description": "A gentle filter, giving you more time to appreciate the finer details of a waveform.",
+                "units": "kHz",
+                "selected": false
+              },
+              "6": {
+                "value": "3",
+                "label_active": "Very Slow",
+                "label_inactive": "Very Slow",
+                "description": "For the meticulous scientist. You'll filter out fast noise and jitter, but at the cost of speed.",
+                "units": "kHz",
+                "selected": false
+              },
+              "7": {
+                "value": "1",
+                "label_active": "Ultra Slow",
+                "label_inactive": "Ultra Slow",
+                "description": "A meditative pace. So slow you can practically see the electrons move, offering maximum stability and noise reduction.",
+                "units": "kHz",
+                "selected": false
+              },
+              "8": {
+                "value": "0.3",
+                "label_active": "Glacial",
+                "label_inactive": "Glacial",
+                "description": "A slow crawl. Good for very detailed analysis of continuous signals and filtering out transient noise.",
+                "units": "kHz",
+                "selected": false
+              },
+              "9": {
+                "value": "0.1",
+                "label_active": "Glacial",
+                "label_inactive": "Glacial",
+                "description": "A slow crawl. Good for very detailed analysis of continuous signals and filtering out transient noise.",
+                "units": "kHz",
+                "selected": false
+              },
+              "10": {
+                "value": "0.03",
+                "label_active": "Sub-Glacial",
+                "label_inactive": "Sub-Glacial",
+                "description": "The scanner cries, but it's worth it. Filters out almost all random noise, giving you a crystal-clear, steady line.",
+                "units": "kHz",
+                "selected": false
+              },
+              "11": {
+                "value": "0.01",
+                "label_active": "Sub-Glacial",
+                "label_inactive": "Sub-Glacial",
+                "description": "The scanner cries, but it's worth it. Filters out almost all random noise, giving you a crystal-clear, steady line.",
+                "units": "kHz",
+                "selected": false
+              },
+              "12": {
+                "value": "0.003",
+                "label_active": "Crazy Slow",
+                "label_inactive": "Crazy Slow",
+                "description": "Time seems to stop. For the most patient scientists and signals with incredible stability. The ultimate low-pass filter.",
+                "units": "kHz",
+                "selected": false
+              },
+              "13": {
+                "value": "0.001",
+                "label_active": "Crazy Slow",
+                "label_inactive": "Crazy Slow",
+                "description": "Time seems to stop. For the most patient scientists and signals with incredible stability. The ultimate low-pass filter.",
+                "units": "kHz",
+                "selected": false
+              },
+              "UNSELECTED": {
+                "value": "NONE",
+                "label_active": "None Selected",
+                "label_inactive": "None Selected",
+                "description": "No video bandwidth option is currently selected.",
+                "units": "",
+                "selected": true
+              }
+            },
+            "selection_mode": "radio",
+            "Allow_Null": true,
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Bandwidth",
+              "command": "Set_VBW",
+              "input_name": "hz_value",
+              "converter": "khz_to_hz"
+            }
+          },
+          "VBW_Automatic": {
+            "type": "_GuiButtonToggle",
+            "label_active": "VBW Auto On",
+            "label_inactive": "VBW Auto On",
+            "AES70": "OcaBooleanActuator",
+            "handler": "toggle_vbw_auto",
+            "layout": {
+              "height": 50,
+              "width": 200,
+              "stretch": "width",
+              "font": 15
+            },
+            "style": {
+              "active_text_color": "#1a1a1a",
+              "text_color": "#888888",
+              "active_font_style": "bold",
+              "active_font_size": null,
+              "inactive_font_style": "normal",
+              "inactive_font_size": null,
+              "active_color": "#FF9900",
+              "active_bg_color": "#000000",
+              "bg_color": "#2b2b2b",
+              "glow_intensity": 1.944
+            },
+            "options": {
+              "ON": {
+                "label_active": "Auto ON",
+                "label_inactive": "Auto ON",
+                "selected": true
+              },
+              "OFF": {
+                "label_active": "Auto OFF",
+                "label_inactive": "Auto OFF",
+                "selected": false
+              }
+            },
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Bandwidth",
+              "command": "Set_VBW_Auto",
+              "input_name": "state_bool",
+              "converter": "bool_to_int"
+            }
+          }
+        }
+      },
+      "Fold_Sweep": {
+        "type": "OcaFold",
+        "layout": {
+          "pady": 5,
+          "stretch": "width"
+        }
+      },
+      "Sweep Time": {
+        "type": "OcaBlock",
+        "description": "Sweep Time settings.",
+        "show_label": false,
+        "layout": {
+          "weight": 0
+        },
+        "fields": {
+          "sweep_time_setting": {
+            "type": "_Horizontal_with_dial_Value",
+            "column_spacing": [
+              80,
+              10,
+              10
+            ],
+            "layout": {
+              "height": 100,
+              "width": 400,
+              "sticky": "ewn",
+              "font": 20,
+              "padx": 10,
+              "pady": 10
+            },
+            "label_active": "Sweep Time",
+            "label_inactive": "Sweep Time",
+            "handler": "set_sweep_time",
+            "yak_handler": {
+              "enable": true,
+              "yak_type": "set",
+              "sub_path": "Bandwidth",
+              "command": "Set_Sweep_time",
+              "input_name": "s_value",
+              "converter": "float"
+            },
+            "default_value": "0",
+            "min": "0",
+            "max": "50",
+            "step_coarse": "1",
+            "step_fine": "0.1",
+            "units": "s",
+            "show_label": true,
+            "value_config": {
+              "height": 30,
+              "colour": "#ffffff",
+              "bg_color": "#1a1a1a",
+              "width": 12,
+              "font": 18
+            },
+            "fader_config": {
+              "type": "_GuiFaderHorizontal",
+              "tick_interval": 1,
+              "show_ticks": true,
+              "bar_color": "#333333",
+              "active_color": "#FF9900",
+              "glow_intensity": 1.5
+            },
+            "dial_config": {
+              "type": "_GuiKnob",
+              "knob_style": "dial",
+              "active_color": "#00ffff",
+              "bg_color": "#2b2b2b"
+            },
+            "cosmetics": {
+              "colors": {
+                "primary": "#FF9900",
+                "secondary": "#444444",
+                "background": "#2b2b2b"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

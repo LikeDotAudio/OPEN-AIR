@@ -1,0 +1,1110 @@
+{
+  "Zoo_buttons_Trapezoid_trapezoid_toggler": {
+    "type": "OcaBin",
+    "id": "50.90.9.1.2.10",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "Trapezoid_Toggler_Demos": {
+        "type": "OcaBlock",
+        "description": "Trapezoid Toggler Showcase (10 Demos)",
+        "layout_columns": 4,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "toggler_input_mic": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Input",
+            "options": [
+              "Mic",
+              "Line",
+              "USB"
+            ],
+            "value_default": "Mic",
+            "width": 80,
+            "height": 50,
+            "color": "#6a9955",
+            "led_color": "#00FF00",
+            "latching": true,
+            "slant": 15,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Input source selector (Mic/Line/USB)."
+          },
+          "toggler_mode_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Mode",
+            "options": [
+              "Normal",
+              "Wide",
+              "Mono"
+            ],
+            "value_default": "Normal",
+            "width": 70,
+            "height": 70,
+            "color": "#2196F3",
+            "led_color": "#BBDEFB",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching mode selector."
+          },
+          "toggler_eq_band_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "EQ Band",
+            "options": [
+              "LF",
+              "MF",
+              "HF",
+              "Parametric"
+            ],
+            "value_default": "MF",
+            "width": 60,
+            "height": 60,
+            "color": "#D32F2F",
+            "led_color": "#FF8A80",
+            "latching": false,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary EQ band select."
+          },
+          "toggler_preamp_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Preamp",
+            "options": [
+              "Tube",
+              "Solid State",
+              "Digital"
+            ],
+            "value_default": "Solid State",
+            "width": 70,
+            "height": 70,
+            "color": "#9C27B0",
+            "led_color": "#E1BEE7",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching preamp type."
+          },
+          "toggler_channel_group_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Group",
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "value_default": "A",
+            "width": 50,
+            "height": 50,
+            "color": "#FF9800",
+            "led_color": "#FFCCBC",
+            "latching": false,
+            "slant": 15,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary group select."
+          },
+          "toggler_effect_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Effect",
+            "options": [
+              "Off",
+              "On",
+              "Send"
+            ],
+            "value_default": "Off",
+            "width": 60,
+            "height": 60,
+            "color": "#00BCD4",
+            "led_color": "#B2DFDB",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching effect state."
+          },
+          "toggler_output_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Output",
+            "options": [
+              "Main",
+              "Aux",
+              "Headphones"
+            ],
+            "value_default": "Main",
+            "width": 70,
+            "height": 70,
+            "color": "#607D8B",
+            "led_color": "#CFD8DC",
+            "latching": false,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary output selection."
+          },
+          "toggler_source_wide": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Source",
+            "options": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "F"
+            ],
+            "value_default": "A",
+            "width": 100,
+            "height": 50,
+            "alpha": 0.9,
+            "color": "#007acc",
+            "led_color": "#00BFFF",
+            "latching": false,
+            "slant": 5,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Wide momentary source selection."
+          },
+          "toggler_gate_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Gate",
+            "options": [
+              "Off",
+              "On",
+              "Auto"
+            ],
+            "value_default": "Off",
+            "width": 50,
+            "height": 50,
+            "color": "#4CAF50",
+            "led_color": "#8BC34A",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching Gate control."
+          },
+          "toggler_phase_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Phase",
+            "options": [
+              "Normal",
+              "Invert"
+            ],
+            "value_default": "Normal",
+            "width": 60,
+            "height": 60,
+            "color": "#9C27B0",
+            "led_color": "#E1BEE7",
+            "latching": false,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary Phase invert."
+          }
+        }
+      },
+      "Trapezoid_Toggler_Demos_2": {
+        "type": "OcaBlock",
+        "description": "Trapezoid Toggler Showcase (10 Demos)",
+        "layout_columns": 4,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "toggler_mode_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Mode",
+            "options": [
+              "Normal",
+              "Wide",
+              "Mono"
+            ],
+            "value_default": "Normal",
+            "width": 70,
+            "height": 70,
+            "color": "#2196F3",
+            "led_color": "#BBDEFB",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching mode selector."
+          },
+          "toggler_type_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Type",
+            "options": [
+              "A",
+              "B",
+              "C"
+            ],
+            "value_default": "A",
+            "width": 60,
+            "height": 60,
+            "color": "#D32F2F",
+            "led_color": "#FF8A80",
+            "latching": false,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary type selector."
+          },
+          "toggler_input_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Input",
+            "options": [
+              "Mic",
+              "Line",
+              "USB"
+            ],
+            "value_default": "Mic",
+            "width": 80,
+            "height": 80,
+            "color": "#4CAF50",
+            "led_color": "#8BC34A",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching input selector."
+          },
+          "toggler_eq_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "EQ",
+            "options": [
+              "LF",
+              "MF",
+              "HF"
+            ],
+            "value_default": "MF",
+            "width": 50,
+            "height": 50,
+            "color": "#FF9800",
+            "led_color": "#FFCCBC",
+            "latching": false,
+            "slant": 15,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary EQ band select."
+          },
+          "toggler_preamp_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Preamp",
+            "options": [
+              "Tube",
+              "SS",
+              "Digital"
+            ],
+            "value_default": "SS",
+            "width": 70,
+            "height": 70,
+            "color": "#9C27B0",
+            "led_color": "#E1BEE7",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching preamp type."
+          },
+          "toggler_channel_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Channel",
+            "options": [
+              "1-4",
+              "5-8",
+              "All"
+            ],
+            "value_default": "1-4",
+            "width": 60,
+            "height": 60,
+            "color": "#00BCD4",
+            "led_color": "#B2DFDB",
+            "latching": false,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary channel select."
+          },
+          "toggler_effect_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Effect",
+            "options": [
+              "Off",
+              "On",
+              "Send"
+            ],
+            "value_default": "Off",
+            "width": 60,
+            "height": 60,
+            "color": "#607D8B",
+            "led_color": "#CFD8DC",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching effect state."
+          },
+          "toggler_output_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Output",
+            "options": [
+              "Main",
+              "Aux",
+              "Phones"
+            ],
+            "value_default": "Main",
+            "width": 80,
+            "height": 80,
+            "color": "#795548",
+            "led_color": "#D7CCC8",
+            "latching": false,
+            "slant": 15,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary output select."
+          },
+          "toggler_gate_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Gate",
+            "options": [
+              "Off",
+              "On",
+              "Auto"
+            ],
+            "value_default": "Off",
+            "width": 50,
+            "height": 50,
+            "color": "#4CAF50",
+            "led_color": "#8BC34A",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching Gate control."
+          },
+          "toggler_phase_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Phase",
+            "options": [
+              "Normal",
+              "Invert"
+            ],
+            "value_default": "Normal",
+            "width": 60,
+            "height": 60,
+            "color": "#9C27B0",
+            "led_color": "#E1BEE7",
+            "latching": false,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary Phase invert."
+          }
+        }
+      },
+      "Trapezoid_Toggler_EQ_Variations": {
+        "type": "OcaBlock",
+        "description": "EQ Band Toggler Showcase (10 Demos)",
+        "layout_columns": 4,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "eq_lf_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "LF Band",
+            "options": [
+              "Flat",
+              "Boost",
+              "Cut"
+            ],
+            "value_default": "Flat",
+            "width": 70,
+            "height": 45,
+            "color": "#B71C1C",
+            "led_color": "#FF8A80",
+            "latching": true,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching LF EQ Band."
+          },
+          "eq_mf_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "MF Band",
+            "options": [
+              "Flat",
+              "Boost",
+              "Cut"
+            ],
+            "value_default": "Flat",
+            "width": 60,
+            "height": 60,
+            "color": "#2196F3",
+            "led_color": "#BBDEFB",
+            "latching": false,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary MF EQ."
+          },
+          "eq_hf_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "HF Band",
+            "options": [
+              "Flat",
+              "Boost",
+              "Cut"
+            ],
+            "value_default": "Flat",
+            "width": 80,
+            "height": 80,
+            "color": "#4CAF50",
+            "led_color": "#8BC34A",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching HF EQ Band."
+          },
+          "filter_hpf_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "HPF",
+            "options": [
+              "Off",
+              "On"
+            ],
+            "value_default": "Off",
+            "width": 50,
+            "height": 50,
+            "color": "#FFC107",
+            "led_color": "#FFEB3B",
+            "latching": false,
+            "slant": 15,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary HPF toggle."
+          },
+          "filter_lpf_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "LPF",
+            "options": [
+              "Off",
+              "On"
+            ],
+            "value_default": "Off",
+            "width": 70,
+            "height": 70,
+            "color": "#9C27B0",
+            "led_color": "#E1BEE7",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching LPF toggle."
+          },
+          "filter_bpf_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "BPF",
+            "options": [
+              "Off",
+              "On"
+            ],
+            "value_default": "Off",
+            "width": 60,
+            "height": 60,
+            "color": "#00BCD4",
+            "led_color": "#B2DFDB",
+            "latching": false,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary BPF toggle."
+          },
+          "slope_latching_orange": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Slope",
+            "options": [
+              "12dB",
+              "24dB",
+              "48dB"
+            ],
+            "value_default": "12dB",
+            "width": 70,
+            "height": 70,
+            "color": "#FF9800",
+            "led_color": "#FFAB40",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching slope selector."
+          },
+          "q_momentary_grey": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Q",
+            "options": [
+              "Narrow",
+              "Wide"
+            ],
+            "value_default": "Narrow",
+            "width": 50,
+            "height": 50,
+            "color": "#607D8B",
+            "led_color": "#CFD8DC",
+            "latching": false,
+            "slant": 15,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary Q setting."
+          },
+          "resonance_latching_teal": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Res",
+            "options": [
+              "Low",
+              "Med",
+              "High"
+            ],
+            "value_default": "Med",
+            "width": 60,
+            "height": 60,
+            "color": "#009688",
+            "led_color": "#80CBC4",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching resonance level."
+          },
+          "gain_momentary_purple": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Gain",
+            "options": [
+              "Boost",
+              "Cut",
+              "Flat"
+            ],
+            "value_default": "Flat",
+            "width": 70,
+            "height": 70,
+            "color": "#9C27B0",
+            "led_color": "#E1BEE7",
+            "latching": false,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary gain boost/cut."
+          }
+        }
+      },
+      "Trapezoid_Toggler_Preamp_Variations": {
+        "type": "OcaBlock",
+        "description": "Preamp Type Toggler Showcase (10 Demos)",
+        "layout_columns": 4,
+        "column_sizing": [
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          },
+          {
+            "weight": 1
+          }
+        ],
+        "fields": {
+          "preamp_tube_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Tube",
+            "options": [
+              "Tube",
+              "SS",
+              "FET"
+            ],
+            "value_default": "Tube",
+            "width": 70,
+            "height": 70,
+            "color": "#d18616",
+            "led_color": "#FFA500",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching Tube preamp."
+          },
+          "preamp_ss_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "SS",
+            "options": [
+              "Tube",
+              "SS",
+              "FET"
+            ],
+            "value_default": "SS",
+            "width": 60,
+            "height": 60,
+            "color": "#c75450",
+            "led_color": "#FF8A80",
+            "latching": false,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary Solid State preamp."
+          },
+          "preamp_fet_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "FET",
+            "options": [
+              "Tube",
+              "SS",
+              "FET"
+            ],
+            "value_default": "FET",
+            "width": 80,
+            "height": 80,
+            "color": "#6a9955",
+            "led_color": "#8BC34A",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching FET preamp, square."
+          },
+          "preamp_opamp_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "OpAmp",
+            "options": [
+              "OpAmp",
+              "Discrete"
+            ],
+            "value_default": "OpAmp",
+            "width": 50,
+            "height": 50,
+            "color": "#2196F3",
+            "led_color": "#BBDEFB",
+            "latching": false,
+            "slant": 15,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary OpAmp type."
+          },
+          "preamp_discrete_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Discrete",
+            "options": [
+              "OpAmp",
+              "Discrete"
+            ],
+            "value_default": "Discrete",
+            "width": 70,
+            "height": 70,
+            "color": "#9C27B0",
+            "led_color": "#E1BEE7",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching Discrete type, square."
+          },
+          "preamp_vintage_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Vintage",
+            "options": [
+              "Vintage",
+              "Modern"
+            ],
+            "value_default": "Vintage",
+            "width": 60,
+            "height": 60,
+            "color": "#795548",
+            "led_color": "#D7CCC8",
+            "latching": false,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary Vintage."
+          },
+          "preamp_modern_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Modern",
+            "options": [
+              "Vintage",
+              "Modern"
+            ],
+            "value_default": "Modern",
+            "width": 70,
+            "height": 70,
+            "color": "#607D8B",
+            "led_color": "#CFD8DC",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching Modern, square."
+          },
+          "preamp_clean_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Clean",
+            "options": [
+              "Clean",
+              "Dirty"
+            ],
+            "value_default": "Clean",
+            "width": 50,
+            "height": 50,
+            "color": "#4CAF50",
+            "led_color": "#8BC34A",
+            "latching": false,
+            "slant": 15,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary Clean mode."
+          },
+          "preamp_boost_latching": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Boost",
+            "options": [
+              "Boost",
+              "Cut"
+            ],
+            "value_default": "Boost",
+            "width": 60,
+            "height": 60,
+            "color": "#FFC107",
+            "led_color": "#FFEB3B",
+            "latching": true,
+            "slant": 0,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Latching Boost/Cut."
+          },
+          "preamp_cut_momentary": {
+            "type": "_TrapezoidButtonToggler",
+            "label_active": "Cut",
+            "options": [
+              "Boost",
+              "Cut"
+            ],
+            "value_default": "Cut",
+            "width": 70,
+            "height": 70,
+            "color": "#D32F2F",
+            "led_color": "#FF8A80",
+            "latching": false,
+            "slant": 10,
+            "value_text_inside": true,
+            "show_value": true,
+            "show_units": false,
+            "notes": "Momentary Cut."
+          }
+        }
+      },
+      "Trapezoid_Toggler_Channel_Variations": {
+        "Trapezoid_Toggler_Channel_Variations": {
+          "type": "OcaBlock",
+          "description": "Channel Group Toggler Showcase (10 Demos)",
+          "layout_columns": 4,
+          "column_sizing": [
+            {
+              "weight": 1
+            },
+            {
+              "weight": 1
+            },
+            {
+              "weight": 1
+            },
+            {
+              "weight": 1
+            }
+          ],
+          "fields": {
+            "group_a_latching": {
+              "type": "_TrapezoidButtonToggler",
+              "label_active": "Group A",
+              "options": [
+                "A",
+                "B",
+                "C"
+              ],
+              "value_default": "A",
+              "width": 70,
+              "height": 70,
+              "color": "#1abc9c",
+              "led_color": "#2ecc71",
+              "latching": true,
+              "slant": 0,
+              "value_text_inside": true,
+              "show_value": true,
+              "show_units": false,
+              "notes": "Latching Group A."
+            },
+            "group_b_momentary": {
+              "type": "_TrapezoidButtonToggler",
+              "label_active": "Group B",
+              "options": [
+                "A",
+                "B",
+                "C"
+              ],
+              "value_default": "B",
+              "width": 60,
+              "height": 60,
+              "color": "#3498db",
+              "led_color": "#2980b9",
+              "latching": false,
+              "slant": 10,
+              "value_text_inside": true,
+              "show_value": true,
+              "show_units": false,
+              "notes": "Momentary Group B."
+            },
+            "group_c_latching": {
+              "type": "_TrapezoidButtonToggler",
+              "label_active": "Group C",
+              "options": [
+                "A",
+                "B",
+                "C"
+              ],
+              "value_default": "C",
+              "width": 80,
+              "height": 80,
+              "color": "#9b59b6",
+              "led_color": "#8e44ad",
+              "latching": true,
+              "slant": 0,
+              "value_text_inside": true,
+              "show_value": true,
+              "show_units": false,
+              "notes": "Latching Group C, square."
+            },
+            "all_momentary": {
+              "type": "_TrapezoidButtonToggler",
+              "label_active": "All",
+              "options": [
+                "On",
+                "Off"
+              ],
+              "value_default": "Off",
+              "width": 50,
+              "height": 50,
+              "color": "#e74c3c",
+              "led_color": "#ff7675",
+              "latching": false,
+              "slant": 15,
+              "value_text_inside": true,
+              "show_value": true,
+              "show_units": false,
+              "notes": "Momentary All toggle."
+            },
+            "none_latching": {
+              "type": "_TrapezoidButtonToggler",
+              "label_active": "None",
+              "options": [
+                "On",
+                "Off"
+              ],
+              "value_default": "Off",
+              "width": 70,
+              "height": 70,
+              "color": "#f39c12",
+              "led_color": "#f1c40f",
+              "latching": true,
+              "slant": 0,
+              "value_text_inside": true,
+              "show_value": true,
+              "show_units": false,
+              "notes": "Latching None toggle."
+            },
+            "sub_mix_momentary": {
+              "type": "_TrapezoidButtonToggler",
+              "label_active": "Sub Mix",
+              "options": [
+                "On",
+                "Off"
+              ],
+              "value_default": "Off",
+              "width": 60,
+              "height": 60,
+              "color": "#34495e",
+              "led_color": "#ecf0f1",
+              "latching": false,
+              "slant": 10,
+              "value_text_inside": true,
+              "show_value": true,
+              "show_units": false,
+              "notes": "Momentary Sub Mix."
+            },
+            "main_latching": {
+              "type": "_TrapezoidButtonToggler",
+              "label_active": "Main",
+              "options": [
+                "On",
+                "Off"
+              ],
+              "value_default": "On",
+              "width": 70,
+              "height": 70,
+              "color": "#bdc3c7",
+              "led_color": "#ecf0f1",
+              "latching": true,
+              "slant": 0,
+              "value_text_inside": true,
+              "show_value": true,
+              "show_units": false,
+              "notes": "Latching Main Mix."
+            },
+            "bus1_momentary": {
+              "type": "_TrapezoidButtonToggler",
+              "label_active": "Bus 1",
+              "options": [
+                "Active",
+                "Inactive"
+              ],
+              "value_default": "Inactive",
+              "width": 50,
+              "height": 50,
+              "color": "#e74c3c",
+              "led_color": "#ff7675",
+              "latching": false,
+              "slant": 15,
+              "value_text_inside": true,
+              "show_value": true,
+              "show_units": false,
+              "notes": "Momentary Bus 1."
+            },
+            "bus2_latching": {
+              "type": "_TrapezoidButtonToggler",
+              "label_active": "Bus 2",
+              "options": [
+                "Active",
+                "Inactive"
+              ],
+              "value_default": "Inactive",
+              "width": 60,
+              "height": 60,
+              "color": "#27ae60",
+              "led_color": "#2ecc71",
+              "latching": true,
+              "slant": 0,
+              "value_text_inside": true,
+              "show_value": true,
+              "show_units": false,
+              "notes": "Latching Bus 2."
+            },
+            "bus3_momentary_wide": {
+              "type": "_TrapezoidButtonToggler",
+              "label_active": "Bus 3",
+              "options": [
+                "Active",
+                "Inactive"
+              ],
+              "value_default": "Inactive",
+              "width": 100,
+              "height": 50,
+              "alpha": 0.9,
+              "color": "#34495e",
+              "led_color": "#3498db",
+              "latching": false,
+              "slant": 5,
+              "value_text_inside": true,
+              "show_value": true,
+              "show_units": false,
+              "notes": "Wide momentary Bus 3."
+            }
+          }
+        }
+      }
+    }
+  }
+}

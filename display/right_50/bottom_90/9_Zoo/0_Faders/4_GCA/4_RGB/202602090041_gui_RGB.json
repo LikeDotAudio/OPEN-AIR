@@ -1,0 +1,40 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "RGB_Mixer_Demo": {
+        "type": "_CompositeFader",
+        "label_active": "RGB Color Mixer",
+        "is_rgb": true,
+        "num_channels": 3,
+        "value_min": 0,
+        "value_max": 100,
+        "layout": {
+          "width": 120,
+          "height": 50,
+          "alpha": 0.9,
+          "sticky": "nsew"
+        },
+        "channels": [
+          {
+            "default": 100
+          },
+          {
+            "default": 50
+          },
+          {
+            "default": 25
+          }
+        ]
+      }
+    }
+  }
+}

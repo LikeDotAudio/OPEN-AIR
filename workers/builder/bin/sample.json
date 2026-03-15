@@ -1,0 +1,34 @@
+{
+  "Master_Layout_Bin": {
+    "type": "OcaBin",
+    "description": "Root container locked to window edges with responsive NS overflow.",
+    "geometry": {
+      "anchor": "NSEW",
+      "min_width": 800,
+      "min_height": 600
+    },
+    "behavior": {
+      "overflow_ns": "auto",  
+      "overflow_ew": "deny"   
+    },
+    "fields": {
+      "Control_Panel_Block": {
+        "type": "OcaBlock",
+        "description": "Inner content that might overflow.",
+        "fields": {
+          "Some_Fader": {
+            "type": "_SmartFader",
+            "geometry": {
+              "height": 800
+            }
+          }
+        }
+      }
+    }
+  },
+  "_README": "This sample demonstrates the OcaBin responsive viewport triad.",
+  "_LEGEND": {
+    "overflow_ns": ["auto", "allow", "deny"],
+    "overflow_ew": ["auto", "allow", "deny"]
+  }
+}

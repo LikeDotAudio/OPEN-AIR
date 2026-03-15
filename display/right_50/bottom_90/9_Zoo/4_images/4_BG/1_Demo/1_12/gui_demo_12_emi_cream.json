@@ -1,0 +1,150 @@
+{
+  "Zoo_images_BG_Demo_12": {
+    "type": "OcaBin",
+    "id": "50.90.9.4.4.1.1.12",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "fields": {
+        "Meter_1": {
+          "type": "_NeedleVUMeter",
+          "label": "Super_Gem 1",
+          "geometry": {
+            "width": 250,
+            "height": 250
+          },
+          "domain": {
+            "primary": {
+              "min": -20.0,
+              "max": 3.0,
+              "value_default": -10.0
+            }
+          },
+          "cosmetics": {
+            "colors": {
+              "bezel": "#111111"
+            },
+            "style_overrides": {
+              "bezel_shape": "super_gem",
+              "bezel_width": 6,
+              "Pointer_Style": "knife-edge",
+              "overlay_style": "aperture_mask"
+            }
+          },
+          "label_active": "Super_Gem 1",
+          "background_color": "transparent",
+          "width": 250,
+          "height": 250,
+          "Orientation": "vertical",
+          "layout": {},
+          "bezel_shape": "super_gem",
+          "bezel_width": 6,
+          "Pointer_Style": "knife-edge",
+          "overlay_style": "aperture_mask",
+          "min": -20.0,
+          "value_min": -20.0,
+          "max": 3.0,
+          "value_max": 3.0,
+          "value_default": -10.0,
+          "value": -10.0,
+          "default_value": -10.0,
+          "path": "Meter_1"
+        },
+        "Meter_2": {
+          "type": "_NeedleVUMeter",
+          "label": "Hex 2",
+          "geometry": {
+            "width": 250,
+            "height": 250
+          },
+          "domain": {
+            "primary": {
+              "min": -20.0,
+              "max": 3.0,
+              "value_default": -8.0
+            }
+          },
+          "cosmetics": {
+            "colors": {
+              "bezel": "#111111"
+            },
+            "style_overrides": {
+              "bezel_shape": "hex",
+              "bezel_width": 6,
+              "Pointer_Style": "knife-edge",
+              "overlay_style": "dome"
+            }
+          },
+          "label_active": "Hex 2",
+          "background_color": "transparent",
+          "width": 250,
+          "height": 250,
+          "Orientation": "vertical",
+          "layout": {},
+          "bezel_shape": "hex",
+          "bezel_width": 6,
+          "Pointer_Style": "knife-edge",
+          "overlay_style": "dome",
+          "min": -20.0,
+          "value_min": -20.0,
+          "max": 3.0,
+          "value_max": 3.0,
+          "value_default": -8.0,
+          "value": -8.0,
+          "default_value": -8.0,
+          "path": "Meter_2"
+        },
+        "Meter_3": {
+          "type": "_NeedleVUMeter",
+          "label": "Super_Gem 3",
+          "geometry": {
+            "width": 250,
+            "height": 250
+          },
+          "domain": {
+            "primary": {
+              "min": -20.0,
+              "max": 3.0,
+              "value_default": -6.0
+            }
+          },
+          "cosmetics": {
+            "colors": {
+              "bezel": "#111111"
+            },
+            "style_overrides": {
+              "bezel_shape": "super_gem",
+              "bezel_width": 6,
+              "Pointer_Style": "spade",
+              "overlay_style": "aperture_mask"
+            }
+          },
+          "label_active": "Super_Gem 3",
+          "background_color": "transparent",
+          "width": 250,
+          "height": 250,
+          "Orientation": "vertical",
+          "layout": {},
+          "bezel_shape": "super_gem",
+          "bezel_width": 6,
+          "Pointer_Style": "spade",
+          "overlay_style": "aperture_mask",
+          "min": -20.0,
+          "value_min": -20.0,
+          "max": 3.0,
+          "value_max": 3.0,
+          "value_default": -6.0,
+          "value": -6.0,
+          "default_value": -6.0,
+          "path": "Meter_3"
+        }
+      }
+    }
+  }
+}

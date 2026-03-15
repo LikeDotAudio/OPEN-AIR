@@ -1,0 +1,137 @@
+{
+  "Oscilloscope_YAK_DS1104Z_Commands_TIMebase": {
+    "type": "OcaBin",
+    "id": "50.100.2.10.3.1.4",
+    "geometry": {
+      "anchor": "NSEW"
+    },
+    "behavior": {
+      "overflow_ns": "auto",
+      "overflow_ew": "auto",
+      "fluid_ew": true
+    },
+    "blocks": {
+      "set": {
+        "type": "OcaBlock",
+        "description": "Horizontal Timebase Settings",
+        "fields": {
+          "Set_Mode": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": ":TIMebase:MODE <mode>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "mode": {
+                    "value": "MAIN",
+                    "type": "_GuiValue",
+                    "label": "Mode",
+                    "units": "",
+                    "description": "MAIN, XY, ROLL"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Scale": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": ":TIMebase:SCALe <scale>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "scale": {
+                    "value": "1.0e-3",
+                    "type": "_GuiValue",
+                    "label": "Scale",
+                    "units": "s/div"
+                  }
+                }
+              }
+            }
+          },
+          "Set_Offset": {
+            "type": "OcaBlock",
+            "fields": {
+              "Execute Command": {
+                "type": "_GuiActuator",
+                "AES70": "OcaBooleanActuator",
+                "layout": {
+                  "height": 30,
+                  "sticky": ""
+                },
+                "style": {
+                  "active_text_color": "#1a1a1a",
+                  "text_color": "#888888",
+                  "active_font_style": "bold",
+                  "active_font_size": null,
+                  "inactive_font_style": "normal",
+                  "inactive_font_size": null,
+                  "active_color": "#FF9900",
+                  "active_bg_color": "#000000",
+                  "bg_color": "#2b2b2b",
+                  "glow_intensity": 1.944
+                },
+                "active": true,
+                "message": ":TIMebase:OFFSet <offset>"
+              },
+              "Input": {
+                "type": "OcaBlock",
+                "fields": {
+                  "offset": {
+                    "value": "0.0",
+                    "type": "_GuiValue",
+                    "label": "Delay",
+                    "units": "s"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

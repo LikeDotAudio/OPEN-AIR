@@ -1,0 +1,219 @@
+# text_table/table_editing_inplace_mixin.py
+#
+# A mixin for in-place editing of cells within a Tkinter Treeview widget.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20250821.200641.1
+import tkinter as tk
+from tkinter import ttk
+import orjson
+import re
+
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+from workers.logger.logger import initialize_logging, set_log_directory
+from loguru import logger
+
+from managers.configini.config_reader import Config
+
+app_constants = Config.get_instance()
+
+from workers.Command_Router.mqtt.mqtt_topic_utils import get_topic
+
+
+class TableEditingInplaceMixin:
+    # Initializes the in-place editing functionality for a Treeview widget.
+    # This sets up internal state variables to track the currently active editing session.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
+    def __init__(self):
+        # State for active editing
+        self.editing_entry = None
+        self.active_row = None
+        self.active_col = None
+
+    # Handles a double-click event on the Treeview to initiate cell editing.
+    # This method identifies the cell that was double-clicked and spawns an Entry widget
+    # over it, allowing the user to modify the cell's content.
+    # Inputs:
+    #     event: The tkinter double-click event object.
+    # Outputs:
+    #     None.
+    def on_double_click(self, event):
+        """Identify cell and spawn Entry widget"""
+        region = self.tree.identify("region", event.x, event.y)
+        if region != "cell":
+            return
+
+        col = self.tree.identify_column(event.x)  # Returns '#1'
+        row_id = self.tree.identify_row(event.y)
+
+        # Logic to spawn Entry widget over the cell...
+        self.start_edit(row_id, col)
+
+    # Starts an in-place editing session for a specified cell.
+    # This method creates and places an Entry widget over the target cell, pre-populates it
+    # with the cell's current value, and binds events for committing or canceling the edit.
+    # Inputs:
+    #     row_id: The ID of the Treeview row to edit.
+    #     col: The identifier of the Treeview column to edit.
+    # Outputs:
+    #     None.
+    def start_edit(self, row_id, col):
+        if self.editing_entry:
+            self.destroy_entry()  # Destroy any existing entry before creating a new one
+
+        # Store active cell info
+        self.active_row = row_id
+        self.active_col = col
+
+        # Get cell bounding box
+        # Convert column identifier (e.g., '#1') to display column name
+        display_col_index = int(col.replace("#", "")) - 1
+        display_col_name = self.tree["columns"][display_col_index]
+
+        x, y, width, height = self.tree.bbox(row_id, col)
+
+        # Get current cell value
+        current_value = self.tree.set(
+            row_id, display_col_name
+        )  # Use display_col_name here
+
+        # Create and place entry widget
+        entry_var = tk.StringVar(value=current_value)
+        self.editing_entry = ttk.Entry(self.tree, textvariable=entry_var)
+        self.editing_entry.place(x=x, y=y, width=width, height=height)
+        self.editing_entry.focus_set()
+
+        # Bind events for committing or canceling edit
+        self.editing_entry.bind("<Return>", self._on_entry_commit)
+        self.editing_entry.bind("<FocusOut>", self._on_entry_commit)
+        # Bind Shift-Return for auto-incrementing and committing
+        self.editing_entry.bind("<Shift-Return>", self._on_entry_commit)
+
+        if LOCAL_DEBUG: logger.debug(f"📝 Starting edit for row {row_id}, col {col} with value '{current_value}'")
+
+    # Commits the changes made in the in-place editor to the Treeview and MQTT.
+    # This method updates the Treeview cell with the new value, records the change
+    # in the undo stack, and publishes the updated row data via MQTT.
+    # Inputs:
+    #     new_value: The new value to set for the cell.
+    # Outputs:
+    #     None.
+    def commit_edit(self, new_value):
+        if not self.active_row or not self.active_col:
+            self.destroy_entry()
+            return
+
+        # Get old value for Undo Stack
+        # Convert self.active_col (e.g., '#1') to column name
+        display_col_index = int(self.active_col.replace("#", "")) - 1
+        display_col_name = self.tree["columns"][display_col_index]
+        old_value = self.tree.set(self.active_row, display_col_name)
+
+        # Only proceed if the value actually changed
+        if old_value == new_value:
+            self.destroy_entry()
+            return
+
+        # Push to Undo Stack - self.undo_stack will be defined in the main TableEditingManager
+        self.undo_stack.append(
+            {
+                "action": "edit",
+                "row": self.active_row,
+                "col": self.active_col,
+                "display_col_name": display_col_name,
+                "old": old_value,
+                "new": new_value,
+            }
+        )
+
+        # Update Tree
+        self.tree.set(self.active_row, display_col_name, new_value)
+
+        # Update MQTT (State Mirror) - self.data_topic and self.state_mirror_engine will be in main TableEditingManager
+        current_values = list(self.tree.item(self.active_row, "values"))
+        row_data = {
+            self.tree["columns"][i]: current_values[i]
+            for i in range(len(self.tree["columns"]))
+        }
+        item_tags = self.tree.item(self.active_row, "tags")
+        device_key = item_tags[0] if item_tags else None
+
+        if self.data_topic and device_key:
+            field_topic = get_topic(self.data_topic, "data", device_key)
+            self.state_mirror_engine.publish_command(
+                field_topic, orjson.dumps(row_data).decode()
+            )  # publish_payload from state_mirror_engine
+            if LOCAL_DEBUG: logger.debug(f"MQTT Updated: topic='{field_topic}', payload='{row_data}'")
+
+        if LOCAL_DEBUG: logger.debug(f"💾 Committed edit: row {self.active_row}, col {display_col_name}, new value {new_value}")
+        self.destroy_entry()
+
+    # Handles the commit of the in-place editor entry.
+    # This method retrieves the new value from the Entry widget and calls `commit_edit`.
+    # It also supports auto-incrementing the value if Shift+Return is pressed.
+    # Inputs:
+    #     event: The tkinter event object (optional).
+    # Outputs:
+    #     None.
+    def _on_entry_commit(self, event=None):
+        if not self.editing_entry:
+            return
+
+        new_value = self.editing_entry.get()
+
+        if event and event.keysym == "Return" and (event.state & 0x0001):
+            new_value = self._increment_string_with_trailing_digits(new_value)
+            if LOCAL_DEBUG: logger.debug(f"Auto-incremented value to: {new_value}")
+
+        self.commit_edit(new_value)
+
+    # Destroys the active in-place editor Entry widget.
+    # This cleans up the temporary Entry widget and resets the internal state variables
+    # tracking the active editing session.
+    # Inputs:
+    #     None.
+    # Outputs:
+    #     None.
+    def destroy_entry(self):
+        if self.editing_entry:
+            self.editing_entry.destroy()
+            self.editing_entry = None
+            self.active_row = None
+            self.active_col = None
+            if LOCAL_DEBUG: logger.debug("📝 Editing entry destroyed.")
+
+    # Increments any trailing digits in a string.
+    # This helper function is used for auto-incrementing cell values. If the string
+    # ends with numbers, it increments them; otherwise, it appends '1'.
+    # Inputs:
+    #     text (str): The input string.
+    # Outputs:
+    #     str: The incremented string.
+    def _increment_string_with_trailing_digits(self, text):
+        """
+        Increments any trailing digits in a string. If no trailing digits, appends '1'.
+        e.g., "Mic 1" -> "Mic 2", "Camera" -> "Camera 1", "Ch 09" -> "Ch 10"
+        """
+        match = re.search(r"(\d+)$", text)
+        if match:
+            num_str = match.group(1)
+            prefix = text[: -len(num_str)]
+            incremented_num = int(num_str) + 1
+            # Preserve leading zeros
+            new_num_str = str(incremented_num).zfill(len(num_str))
+            return f"{prefix}{new_num_str}"
+        else:
+            return f"{text} 1"

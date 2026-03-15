@@ -2,6 +2,7 @@
 #
 # The main Entry Point for the new Modular WYSIWYG Definition Builder.
 # Assembles all workspaces into a multi-tabbed interactive editor.
+# Refactored for Modular SRP: Separates Save logic from UI lifecycle.
 #
 # Author: Gemini CLI
 
@@ -74,14 +75,14 @@ class WysiwygEditor:
         self.window.configure(bg="#2b2b2b")
         
         # INTERCEPT WM_DELETE_WINDOW to ensure clean cleanup
-        self.window.protocol("WM_DELETE_WINDOW", self._close_editor)
+        self.window.protocol("WM_DELETE_WINDOW", self.close_window)
         
         # Main Toolbar
         if LOCAL_DEBUG: logger.debug("🏗️ WysiwygEditor: Creating Toolbar...")
         toolbar = ttk.Frame(self.window)
         toolbar.pack(side="top", fill="x", padx=5, pady=5)
         
-        ttk.Button(toolbar, text="Save & Backup", command=self._save_file).pack(side="left", padx=2)
+        ttk.Button(toolbar, text="Save & Backup", command=self.save_workspace).pack(side="left", padx=2)
         
         # 🟢 NEW SAVE AND CLOSE BUTTON
         save_close_btn = tk.Button(toolbar, text="SAVE AND CLOSE", bg="#2ecc71", fg="white", 
@@ -94,7 +95,7 @@ class WysiwygEditor:
         # 🔴 NEW CLOSE BUTTON
         close_btn = tk.Button(toolbar, text="CLOSE (Unsaved)", bg="#FF3333", fg="white", 
                              font=("Arial", 8, "bold"), relief="flat", padx=10,
-                             command=self._close_editor)
+                             command=self.close_window)
         close_btn.pack(side="left", padx=20)
         
         self.status_lbl = ttk.Label(toolbar, text="Modular Editor Active", foreground="#33A1FD")
@@ -136,8 +137,8 @@ class WysiwygEditor:
         
         if LOCAL_DEBUG: logger.info("🏗️ WysiwygEditor: UI Build Complete.")
 
-    def _close_editor(self):
-        """Explicitly cleans up and destroys the window."""
+    def close_window(self):
+        """Explicitly cleans up and destroys the UI window."""
         if LOCAL_DEBUG: logger.info("🏗️ WysiwygEditor: Shutdown Sequence Initiated.")
         event_bus.unsubscribe("FOCUS_REQUESTED", self._on_focus_requested)
         
@@ -167,8 +168,8 @@ class WysiwygEditor:
             if LOCAL_DEBUG: logger.debug(f"🏗️ WysiwygEditor: Focus Event - Switching to Props tab for element at path: {path}")
             self.left_notebook.select(2)
 
-    def _save_file(self):
-        """Triggers the File IO handler to save."""
+    def save_workspace(self):
+        """Triggers the File IO handler to serialize the workspace to disk."""
         if LOCAL_DEBUG: logger.info(f"🏗️ WysiwygEditor: Manual Save Triggered for file: {state_manager.get_file_path()}")
         
         # 🛡️ Attempt Save
@@ -184,8 +185,9 @@ class WysiwygEditor:
     def _save_and_close(self):
         """Saves the file and then closes the editor."""
         if LOCAL_DEBUG: logger.info("🏗️ WysiwygEditor: 'SAVE AND CLOSE' triggered.")
-        if self._save_file():
-            self._close_editor()
+        # SRP REFACTOR: Orchestrate modular actions
+        if self.save_workspace():
+            self.close_window()
 
     def _test_config(self):
         """Triggers the test callback with current master state."""

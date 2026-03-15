@@ -6,6 +6,7 @@ class CMDP_LTPObject:
     """
     Circular/Composite Motion Draggable Potentiometer Object.
     Handles rendering and interaction for a single fader in the CMDP array.
+    Refactored for Modular SRP: Separates Coordinate Math from Canvas Rendering.
     """
     def __init__(self, canvas, widget_id, color, group_idx, label, 
                  val_var, rot_var, angle_var, mute_var, on_change_cb, widget_ref):
@@ -31,6 +32,9 @@ class CMDP_LTPObject:
         self.render()
 
     def update_position(self):
+        """
+        ⚡ MATH ONLY: Calculates new physical coordinates based on state variables.
+        """
         try: angle = float(self.angle_var.get())
         except: angle = 0.0
         rad = math.radians(angle)
@@ -42,7 +46,14 @@ class CMDP_LTPObject:
         self.y = cy + dist * math.sin(rad)
 
     def update_position_and_render(self):
+        """
+        ⚡ ORCHESTRATOR: Recomputes coordinates and then pushes state to canvas.
+        Refactored for Modular SRP.
+        """
+        # SRP REFACTOR: Step 1 - Recompute geometry
         self.update_position()
+        
+        # SRP REFACTOR: Step 2 - Push to canvas
         self.render()
 
     def rotate_point(self, px, py, cx, cy, cos_a, sin_a):
@@ -51,6 +62,10 @@ class CMDP_LTPObject:
         return cos_a * dx - sin_a * dy + cx, sin_a * dx + cos_a * dy + cy
 
     def render(self):
+        """
+        ⚡ RENDER ONLY: Strictly pushes the current state to the canvas.
+        No state computation or coordinate logic should live here.
+        """
         self.canvas.delete(self.tag_root)
         if not self.visible or self.mute_var.get(): return
         

@@ -1,0 +1,65 @@
+import math
+
+class CompositeStateSync:
+    """Manages the synchronization math between the main value, fader (coarse), and dial (fine)."""
+
+    @staticmethod
+    def get_format_string(step):
+        step = float(step)
+        if step == 0: return "{}"
+        if step == int(step): return "{:.0f}"
+        try: decimal_places = len(str(float(step)).split('.')[-1])
+        except: decimal_places = 2
+        return f"{{:.{decimal_places}f}}"
+
+    @staticmethod
+    def calculate_initial_fine(initial_value, step_coarse, numerical_step):
+        scaled_initial_fine = 0.0
+        if numerical_step < step_coarse:
+            fine_part = initial_value % step_coarse
+            eff_range = step_coarse - numerical_step if (step_coarse - numerical_step) > 0 else step_coarse
+            scaled_initial_fine = (fine_part / eff_range) * 999.0
+        return round(scaled_initial_fine)
+
+    @staticmethod
+    def sync_from_main(main_val, step_coarse, numerical_step, format_string, entry_var, fader_var, dial_widget):
+        try:
+            entry_var.set(format_string.format(main_val))
+            coarse_val = math.floor(main_val / step_coarse) * step_coarse
+            fader_var.set(coarse_val)
+            if numerical_step < step_coarse:
+                fine_part = main_val % step_coarse
+                eff_range = step_coarse - numerical_step if (step_coarse - numerical_step) > 0 else step_coarse
+                dial_disp = (fine_part / eff_range) * 999.0
+                dial_widget.variable.set(round(dial_disp))
+                dial_widget._prev_dial_val_for_wrap_detection = round(dial_disp)
+            else:
+                dial_widget.variable.set(0)
+        except Exception: pass
+
+    @staticmethod
+    def calc_from_fader(fader_val, main_val, step_coarse, numerical_step, min_val, max_val):
+        try:
+            f_val = round(fader_val / step_coarse) * step_coarse
+            fine = main_val % step_coarse if numerical_step < step_coarse else 0
+            new_val = round((f_val + fine) / numerical_step) * numerical_step
+            return max(min_val, min(max_val, new_val))
+        except: return main_val
+
+    @staticmethod
+    def calc_from_dial(curr_dial, main_val, fader_var, dial_widget, step_coarse, numerical_step, min_val, max_val):
+        try:
+            if numerical_step < step_coarse:
+                if hasattr(dial_widget, '_prev_dial_val_for_wrap_detection'):
+                    if dial_widget._prev_dial_val_for_wrap_detection == 999 and curr_dial == 0:
+                        fader_var.set(fader_var.get() + step_coarse)
+                    elif dial_widget._prev_dial_val_for_wrap_detection == 0 and curr_dial == 999:
+                        fader_var.set(fader_var.get() - step_coarse)
+                dial_widget._prev_dial_val_for_wrap_detection = curr_dial
+                
+                base = math.floor(main_val / step_coarse) * step_coarse
+                eff_range = step_coarse - numerical_step if (step_coarse - numerical_step) > 0 else step_coarse
+                new_fine = round(((curr_dial / 999.0) * eff_range) / numerical_step) * numerical_step
+                return max(min_val, min(max_val, round((base + new_fine) / numerical_step) * numerical_step))
+        except: pass
+        return main_val

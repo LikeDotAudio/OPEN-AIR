@@ -1,4 +1,24 @@
+## [2026-03-15 01:00:00] System-Wide Modularization & SRP Refactoring
+**************************************
+### Improved
+- **Single Responsibility Principle (SRP) Audit**: Refactored multiple core functions that were performing multiple hidden actions.
+- **Discovery Orchestrator**: Split `scan_and_manage_fleet` into `scan_network` (I/O) and `update_fleet_inventory` (State).
+- **WYSIWYG Editor**: Decoupled `save_workspace` (File I/O) from `close_window` (UI Lifecycle).
+- **Data Graphing**: Separated `autoscale_axes` (Math) from `render_canvas` (UI Draw) in the FluxPlotter engine.
+- **CMDP Handler**: Split `update_position` (Trigonometry) from `render` (Drawing) for the circular potentiometer array.
+- **Module Loader**: Isolated `load_module_from_path` (System Import) from `instantiate_widget` (UI Construction).
+- **Showtime Markers**: Partitioned `group_markers` (Transformation) and `sort_markers` (Ordering) logic.
+
+## [2026-03-15 00:45:00] Graph Component Import Fix
+**************************************
+### Fixed
+- **ImportError in FluxPlotter**: Fixed a regression in the modularized data graphing component where `graph_patina_mixin.py` and `graph_throttle_mixin.py` were using incorrect relative imports for `graph_updater.py`, preventing the UI from launching.
+
 ## [2026-03-15 00:40:00] Critical API Restoration
+**************************************
+Commit: e2a904ac98e77b67d3aebf3ba84f4dd72ce59798
+Date: 2026-03-15 00:39:44
+Message: Critical API Restoration
 **************************************
 ### Fixed
 - **Missing API Methods**: Restored critical missing methods in the modularized core that were causing startup crashes.

@@ -2,6 +2,7 @@
 #
 # Unified discovery orchestrator that dispatches agents and collects findings.
 # Decoupled: All hardware operations now run in a dedicated background thread.
+# Refactored for Modular SRP: Separates Scanning from Inventory Management.
 #
 # Author: Gemini Agent
 #
@@ -69,7 +70,8 @@ class DiscoveryOrchestrator:
 
     def scan_and_manage_fleet(self):
         """
-        ⚡ NON-BLOCKING: Requests a scan. Returns immediately.
+        ⚡ NON-BLOCKING: Requests a scan and management pass. 
+        Entry point for the management lifecycle.
         """
         now = time.time()
         if self._scan_in_progress or (now - self._last_scan_time) < self._SCAN_DEBOUNCE:
@@ -90,7 +92,11 @@ class DiscoveryOrchestrator:
                 self._scan_in_progress = True
                 self._last_scan_time = time.time()
                 
-                self._perform_actual_discovery()
+                # SRP REFACTOR: Step 1 - Pure I/O Scanning
+                found_devices = self.scan_network()
+                
+                # SRP REFACTOR: Step 2 - State Management
+                self.update_fleet_inventory(found_devices)
                 
             except Exception as e:
                 logger.exception(
@@ -101,13 +107,14 @@ class DiscoveryOrchestrator:
                 self._scan_in_progress = False
                 self.scan_queue.task_done()
 
-    def _perform_actual_discovery(self):
-        """Internal method called only by the background thread."""
+    def scan_network(self):
+        """
+        ⚡ PURE I/O: Performs the network/USB scan protocol.
+        Returns:
+            dict: Collection of probed devices from all agents.
+        """
         if LOCAL_DEBUG:
-            logger.debug(
-                "💳🔍🧬 [DISCOVERY] DiscoveryWorker: Starting comprehensive "
-                "fleet scan..."
-            )
+            logger.debug("💳🔍🧬 [DISCOVERY] Initiating network scan protocol...")
 
         potential_targets = []
 
@@ -119,9 +126,8 @@ class DiscoveryOrchestrator:
         # 2. mDNS / ZeroConf Discovery (Network Scan)
         dedicated_ips, gateway_ips = agent_mdns_zeroconf.discover_ip_devices()
         
-        # 2a. Integrate AES70 / mDNS findings directly into AES70 Manager
+        # 2a. Integrate AES70 findings
         if self.aes70_manager and app_constants.SCAN_AES70:
-            # Trigger a fresh AES70 scan
             aes70_results = agent_mdns_zeroconf.discover_aes70_devices(timeout=1.5)
             for name, data in aes70_results.items():
                 self.aes70_manager.register_device(name, data["ip"], data["port"], data["properties"])
@@ -135,20 +141,24 @@ class DiscoveryOrchestrator:
             for res_str in gateway_resources: potential_targets.append({"Type": "GATEWAY", "Resource": res_str})
 
         # 4. PROBE (The Heavy Lifter)
-        probed_devices_collection = manager_visa_Search.probe_devices(self.resource_manager, potential_targets)
-        
-        # 5. Process results
-        self.instrument_inventory.clear()
-        current_scanned_serials = set(probed_devices_collection.keys())
+        return manager_visa_Search.probe_devices(self.resource_manager, potential_targets)
 
-        for device_identifier, device_entry in probed_devices_collection.items():
+    def update_fleet_inventory(self, found_devices):
+        """
+        ⚡ STATE MANAGEMENT: Processes discovered devices and updates system state.
+        """
+        if LOCAL_DEBUG:
+            logger.debug(f"💳🚢🔄 [INVENTORY] Processing {len(found_devices)} discovered devices.")
+
+        self.instrument_inventory.clear()
+        current_scanned_serials = set(found_devices.keys())
+
+        for device_identifier, device_entry in found_devices.items():
             self.instrument_inventory[device_identifier] = device_entry
 
             if device_entry.get("status") == "Active":
                 if device_identifier not in self.device_proxies:
                     if self._should_skip_connection(device_identifier): continue
-                    
-                    # Connection setup also stays in this background context
                     self._setup_new_active_device(device_identifier, device_entry)
                 else:
                     # Update resource name if changed
@@ -191,8 +201,6 @@ class DiscoveryOrchestrator:
         resource_name = device_entry.get("resource_string", "N/A")
         model = device_entry.get("model", "Unknown Model")
         manufacturer = device_entry.get("manufacturer", "Unknown Manufacturer")
-        idn_string = device_entry.get("idn_string", "")
-        idn_details = parse_idn_string(idn_string)
 
         proxy = VisaProxyFleet(
             manager_ref=self.manager,

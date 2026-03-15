@@ -1,6 +1,6 @@
 import time
 from workers.logger.logger import builder_logger
-from . import graph_updater
+from workers.builder.data_graphing import graph_updater
 
 # --- Standard Debug Logging Setup ---
 BUILDER_DEBUG = True

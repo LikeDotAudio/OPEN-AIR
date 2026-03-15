@@ -1,16 +1,10 @@
 # Showtime/worker_showtime_group.py
 #
 # This module processes and groups marker data by Zone, Group, and Device for display in the Showtime tab.
+# Refactored for Modular SRP: Separates Grouping logic from Sorting logic.
 #
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
-#
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
 #
 # Version 20250821.200641.1
 
@@ -27,27 +21,44 @@ from managers.configini.config_reader import Config
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-
-# Processes and groups marker data by Zone, Group, and Device.
-# This function iterates through the raw marker data, organizes it into a nested
-# dictionary structure based on Zone and Group, and then sorts devices within each group
-# by their Name.
-# Inputs:
-#     showtime_tab_instance: An instance of the Showtime tab, containing `marker_data`.
-# Outputs:
-#     None.
-def process_and_sort_markers(showtime_tab_instance):
-    if LOCAL_DEBUG: logger.debug("🟢️️️🔵 Processing and sorting marker data by Zone, Group, and Device.")
-
-    showtime_tab_instance.grouped_markers = defaultdict(lambda: defaultdict(list))
-
-    for row in showtime_tab_instance.marker_data:
+def group_markers(raw_marker_data):
+    """
+    ⚡ DATA TRANSFORMATION: Organizes raw list into nested Zone/Group dictionary.
+    Inputs:
+        raw_marker_data (list): Raw list of marker dictionaries.
+    Returns:
+        defaultdict: Nested structure {zone: {group: [markers]}}
+    """
+    if LOCAL_DEBUG: logger.debug("🟢 [DATA] Grouping marker data by Zone and Group.")
+    grouped = defaultdict(lambda: defaultdict(list))
+    for row in raw_marker_data:
         zone = row.get("ZONE", "N/A")
         group = row.get("GROUP", "N/A")
-        showtime_tab_instance.grouped_markers[zone][group].append(row)
+        grouped[zone][group].append(row)
+    return grouped
 
-    for zone, groups in showtime_tab_instance.grouped_markers.items():
+def sort_markers(grouped_markers):
+    """
+    ⚡ DATA ORDERING: Alphabetically sorts devices within each group.
+    Inputs:
+        grouped_markers (dict): The nested structure to sort.
+    """
+    if LOCAL_DEBUG: logger.debug("🔵 [DATA] Sorting markers by Device Name.")
+    for zone, groups in grouped_markers.items():
         for group, devices in groups.items():
             devices.sort(key=lambda x: x.get("NAME", ""))
+
+def process_and_sort_markers(showtime_tab_instance):
+    """
+    ⚡ ORCHESTRATOR: Coordinates the grouping and sorting pipeline.
+    Refactored for Modular SRP.
+    """
+    if LOCAL_DEBUG: logger.info("🟢️️️🔵 Starting marker processing pipeline.")
+
+    # SRP REFACTOR: Step 1 - Grouping
+    showtime_tab_instance.grouped_markers = group_markers(showtime_tab_instance.marker_data)
+
+    # SRP REFACTOR: Step 2 - Sorting
+    sort_markers(showtime_tab_instance.grouped_markers)
 
     if LOCAL_DEBUG: logger.success("✅ Markers grouped and sorted successfully.")

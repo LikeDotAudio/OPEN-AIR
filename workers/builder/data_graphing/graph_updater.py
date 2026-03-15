@@ -46,12 +46,11 @@ def clear_plot_data(line: Any, x_data: deque, y_data: deque):
 # redrawing everything (axes, grid, text) is 100x slower than blitting lines.
 _bg_cache = {}
 
-def autoscale_and_redraw(ax: Any, canvas: Any):
+def autoscale_axes(ax: Any):
     """
-    ⚡ HIGH PERFORMANCE: Redraws the graph using Blit logic if possible.
-    Bypasses Matplotlib's slow 'get_window_extent' text measurement on every frame.
+    ⚡ MATH ONLY: Recalculates axis limits based on current data.
     """
-    if LOCAL_DEBUG: logger.trace(f"📊💹 graph_updater: Executing full autoscale and redraw sequence.")
+    if LOCAL_DEBUG: logger.trace(f"📊💹 [MATH] Recalculating axis limits.")
     # Force background cache invalidation on autoscale
     fig = ax.get_figure()
     fig_id = id(fig)
@@ -60,8 +59,26 @@ def autoscale_and_redraw(ax: Any, canvas: Any):
 
     ax.relim()
     ax.autoscale(enable=True, axis='both', tight=True)
+
+def render_canvas(canvas: Any):
+    """
+    ⚡ RENDER ONLY: Commands the UI to redraw the canvas.
+    """
+    if LOCAL_DEBUG: logger.trace(f"🎨🖌️ [RENDER] Redrawing canvas structure.")
     canvas.draw() # Synchronous draw to update background buffer
     canvas.draw_idle()
+
+def autoscale_and_redraw(ax: Any, canvas: Any):
+    """
+    ⚡ HIGH PERFORMANCE: Redraws the graph using Blit logic if possible.
+    Bypasses Matplotlib's slow 'get_window_extent' text measurement on every frame.
+    Refactored for Modular SRP.
+    """
+    if LOCAL_DEBUG: logger.trace(f"📊💹 graph_updater: Executing full autoscale and redraw sequence.")
+    
+    # SRP REFACTOR: Orchestrate modular actions
+    autoscale_axes(ax)
+    render_canvas(canvas)
 
 def perform_fast_blit(ax: Any, canvas: Any, lines: List[Any]):
     """

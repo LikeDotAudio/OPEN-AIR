@@ -97,7 +97,7 @@ class OSCManager:
         if self._running: return
         self._running = True
         
-        rx_port = getattr(app_constants, "OSC_RX_PORT", 8000)
+        rx_port = getattr(app_constants, "OSC_RX_PORT", 8888)
         tx_host = getattr(app_constants, "OSC_REMOTE_IP", "127.0.0.1")
         tx_port = getattr(app_constants, "OSC_TX_PORT", 9000)
 

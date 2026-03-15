@@ -50,15 +50,6 @@ from workers.builder.input_mousewheel_mixin.input_mousewheel_mixin import (
 )
 from workers.builder.panels.panel_generator import PanelGenerator
 from PIL import ImageTk
-
-# --- 5. COMPLEX WIDGET MIXINS ---
-from workers.builder.composite_mdp.composite_mdp import BuilderCompositeMdpCreator
-from workers.builder.circular_motion_displacement_potentiometer.circular_motion_displacement_potentiometer import BuilderCircularMotionDisplacementPotentiometerCreator
-from workers.builder.button_actuator.button_actuator import BuilderButtonActuatorCreator
-from workers.builder.button_wink.button_wink import BuilderButtonWinkCreator
-from workers.builder.button_wink_toggler.button_wink_toggler import BuilderButtonWinkTogglerCreator
-from managers.Display.array.array import BuilderArrayCreator
-from managers.Display.array.collapsible_block.collapsible_block import CollapsibleBlockCreatorMixin
 from managers.Display.context.widget_context import WidgetContext
 
 class AutoScrollbar(ttk.Scrollbar):
@@ -72,15 +63,7 @@ class AutoScrollbar(ttk.Scrollbar):
 
 class DynamicGuiBuilder(
     ttk.Frame,
-    # 1. Specialized Creators
-    BuilderButtonWinkTogglerCreator,
-    BuilderButtonWinkCreator,         
-    BuilderCompositeMdpCreator,
-    BuilderCircularMotionDisplacementPotentiometerCreator,
-    BuilderButtonActuatorCreator,
-    BuilderArrayCreator,
-    CollapsibleBlockCreatorMixin,
-    # 2. Framework Core Logic
+    # Framework Core Logic
     GuiMqttManagerMixin,
     GuiStyleMixin,
     GuiWidgetFactoryMixin,
@@ -92,7 +75,7 @@ class DynamicGuiBuilder(
     BuilderContextMenuMixin,
     BuilderBackgroundManagerMixin,
     BuilderSlicingRegistryMixin,
-    # 3. Foundation Mixins
+    # Foundation Mixins
     MousewheelScrollMixin,
     HiddenBreakoffManagerMixin,
 ):

@@ -1,5 +1,6 @@
 import tkinter as tk
 from .fader_bar_asset_generator import FaderBarAssetGenerator
+from workers.builder.core.ui_geometry_math import UIGeometryMath
 
 class FaderBarRendererMixin:
     """Handles static and dynamic rendering for the Fader with dual Bar Graphs."""
@@ -53,7 +54,8 @@ class FaderBarRendererMixin:
         
         self.cap_img = FaderBarAssetGenerator.get_3d_cap(int(cap_w), int(cap_h), self.fader_grip_color, self.fader_track_color)
         val = self.fader_var.get()
-        y = self.top_m + self._get_pos_from_val(val, self.draw_h)
+        # Use centralized geometry math for value-to-pixel mapping
+        y = self.top_m + UIGeometryMath.value_to_pixel(val, self.min_val, self.max_val, self.draw_h, reverse=True)
         self.canvas.create_image(self.cx, y, image=self.cap_img, tags=("dynamic", "cap"))
         
         text_col = "white" if self.fader_grip_color.lower() in ["black", "#000000", "#222222"] else "black"
@@ -67,7 +69,8 @@ class FaderBarRendererMixin:
         style = self.left_style if side == "left" else self.right_style
         
         meter_w = self.meter_width
-        val_h = self.draw_h - self._get_pos_from_val(val, self.draw_h)
+        # Use centralized geometry math for value-to-pixel mapping
+        val_h = UIGeometryMath.value_to_pixel(val, self.min_val, self.max_val, self.draw_h)
         fy = self.top_m + (self.draw_h - val_h)
         
         # Ranges
@@ -78,9 +81,3 @@ class FaderBarRendererMixin:
         
         for g1, g2, col in ranges:
             if g2 > g1: self.canvas.create_rectangle(x+1, g1, x+meter_w-1, g2, fill=col, outline="", tags=("dynamic", tag))
-
-    def _get_pos_from_val(self, val, height):
-        r = self.max_val - self.min_val
-        norm = max(0.0, min(1.0, (val - self.min_val) / r)) if r != 0 else 0
-        if self.log_exponent != 1.0: norm = norm ** (1.0 / self.log_exponent)
-        return height - (norm * height)

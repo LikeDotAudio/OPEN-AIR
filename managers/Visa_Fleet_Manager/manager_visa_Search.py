@@ -15,8 +15,8 @@ import socket
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
 from loguru import logger
-
 from managers.configini.config_reader import Config
+from .visa_utility_parser import VisaUtilityParser
 
 app_constants = Config.get_instance()
 
@@ -37,89 +37,6 @@ def _get_lock_for_ip(ip_address):
         return _IP_LOCKS[ip_address]
 
 
-def _clean_string_for_display(s):
-    if not s:
-        return ""
-    return "".join(filter(lambda x: x in string.printable, s)).strip()
-
-
-def _parse_idn(idn_str):
-    if not idn_str:
-        return ("Unknown", "Unknown", "", "")
-    parts = idn_str.split(",")
-    while len(parts) < 4:
-        parts.append("")
-    return (parts[0].strip(), parts[1].strip(), parts[2].strip(), parts[3].strip())
-
-
-def _parse_resource_details(res_str):
-    details = {"IP": "Unknown", "Interface": "Unknown", "GPIB_Addr": "N/A"}
-    clean_res = _clean_string_for_display(res_str)
-    parts = clean_res.split("::")
-
-    if clean_res.startswith("TCPIP"):
-        if len(parts) >= 2:
-            details["IP"] = parts[1]
-            if len(parts) > 2 and "," in parts[2]:
-                sub_parts = parts[2].split(",")
-                details["Interface"] = sub_parts[0]
-                details["GPIB_Addr"] = ",".join(sub_parts[1:])
-            else:
-                details["Interface"] = "Ethernet"
-                details["GPIB_Addr"] = "Direct"
-    elif clean_res.startswith("USB"):
-        details["Interface"] = "USB"
-        details["IP"] = "USB"
-        details["GPIB_Addr"] = "Direct"
-    return details
-
-
-def _query_device_safe(rm, resource_str, attempt=1):
-    inst = None
-    try:
-        inst = rm.open_resource(resource_str)
-        inst.timeout = VISA_TIMEOUT
-        inst.read_termination = "\n"
-        inst.write_termination = "\n"
-
-        # Explicitly log the raw IDN response for debugging
-        raw_idn = inst.query("*IDN?")
-        idn = _clean_string_for_display(raw_idn)
-
-        if LOCAL_DEBUG: logger.debug(f"      Raw IDN for {resource_str}: '{raw_idn}'")
-        if LOCAL_DEBUG: logger.debug(f"      Cleaned IDN for {resource_str}: '{idn}'")
-
-        inst.close()
-
-        if not idn:  # If IDN is empty after cleaning
-            if LOCAL_DEBUG: logger.warning(f"      Empty IDN received for {resource_str}.")
-            return None  # Treat empty IDN as failure to probe
-        return idn
-    except pyvisa.errors.VisaIOError as vioe:
-        if LOCAL_DEBUG: logger.warning(f"      💳⚠️ [TIMEOUT] VISA IO Error for {resource_str}: {vioe}")
-        if inst:
-            try:
-                inst.close()
-            except:
-                pass
-        if attempt == 1 and ("USB" in resource_str or "ASRL" in resource_str):
-            #time.sleep(2.0)
-            return _query_device_safe(rm, resource_str, attempt=2)
-        return None
-    except Exception as e:
-        if LOCAL_DEBUG:
-            logger.warning(f"      💳⚠️ [TIMEOUT] Unexpected Error for {resource_str}: {e}")
-        if inst:
-            try:
-                inst.close()
-            except:
-                pass
-        if attempt == 1 and ("USB" in resource_str or "ASRL" in resource_str):
-            #time.sleep(2.0)
-            return _query_device_safe(rm, resource_str, attempt=2)
-        return None
-
-
 def probe_devices(resource_manager, potential_targets):
     """
     Probes a list of potential VISA resources to gather detailed information.
@@ -138,11 +55,11 @@ def probe_devices(resource_manager, potential_targets):
     try:
         for idx, target in enumerate(potential_targets):
             raw_res = target["Resource"]
-            display_res = _clean_string_for_display(raw_res)
+            display_res = VisaUtilityParser.clean_string_for_display(raw_res)
 
             if LOCAL_DEBUG: logger.debug(f"   🎯 Probing {display_res} ... ")
 
-            conn_details = _parse_resource_details(display_res)
+            conn_details = VisaUtilityParser.parse_resource_details(display_res)
             
             # Use per-IP locking to prevent 'wrong xid' desync on multi-port gateways
             ip = conn_details["IP"]
@@ -151,7 +68,7 @@ def probe_devices(resource_manager, potential_targets):
             idn = None
             try:
                 with lock:
-                    idn = _query_device_safe(resource_manager, raw_res)
+                    idn = VisaUtilityParser.query_device_safe(resource_manager, raw_res)
             except socket.timeout:
                 logger.warning(f"      💳⚠️ [TIMEOUT] Socket timeout for {display_res}.")
                 idn = None
@@ -170,9 +87,9 @@ def probe_devices(resource_manager, potential_targets):
 
             if idn:
                 if LOCAL_DEBUG: logger.success(f"SUCCESS")
-                mfg, model, serial_num, firm = _parse_idn(
+                mfg, model, serial_num, firm = VisaUtilityParser.parse_idn(
                     idn
-                )  # Use _parse_idn for basic parsing
+                )  # Use VisaUtilityParser for basic parsing
 
                 device_identifier = serial_num
                 if not device_identifier or device_identifier == "0":

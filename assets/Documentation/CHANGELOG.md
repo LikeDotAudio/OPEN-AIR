@@ -1,3 +1,21 @@
+## [2026-03-15 01:30:00] Anti-Pattern Resolution: Error Swallowing & Dependency Magnets
+**************************************
+### Improved
+- **Error Handling**: Eliminated boolean return codes and silent failures in favor of explicit exceptions (`CSVReadError`, `CSVWriteError`, `CacheLoadError`).
+- **CSV Data Tables**: `Table_CSV_Reader` and `Table_CSV_Writer` now raise exceptions instead of returning `None` or `False`, preventing downstream crashes and allowing callers to handle file I/O errors gracefully.
+- **State Cache Resilience**: `cache_io_handler` now raises a `CacheLoadError` if the cache file is corrupted, allowing the `StateCacheManager` to differentiate between a first-time boot (`FileNotFoundError`) and critical database corruption, preventing accidental overwrites of recoverable data.
+- **Dynamic Dependency Injection**: Refactored `manager_launcher.py` to act as an IoC (Inversion of Control) container. It now dynamically imports and instantiates only the protocol managers explicitly enabled in `config.ini`, eliminating the "Dependency Magnet" anti-pattern and reducing startup overhead.
+- **GUI Builder Decoupling**: Completely stripped explicit concrete widget imports from the central `DynamicGuiBuilder` and `GuiWidgetFactoryMixin`. The builder now relies entirely on the `WidgetRegistry` and plugin pattern to discover and instantiate UI components dynamically.
+
+## [2026-03-15 01:15:00] Data Trampolining Elimination & UI Refactoring
+**************************************
+### Improved
+- **Anti-Pattern Resolution**: Systematic removal of "Data Trampolining" (redundant parameter passing) across multiple UI components.
+- **Fader Interaction**: Refactored `FaderInteractionMixin` to access state via `self` instead of explicit method arguments. Updated `CustomFaderFrame` to encapsulate its own variables and callbacks.
+- **Trapezoid Button**: Introduced the `TrapezoidButton` class, de-bloating the factory and simplifying interaction signatures from 8 arguments down to just `(self, event)`.
+- **Knob Interaction**: Converted the procedural `knob_events.py` into a cohesive `KnobInteractionMixin`. `CustomKnobFrame` now owns its configuration and state, eliminating cross-file data leakage.
+- **Code Hygiene**: Removed redundant lambda wrappers in widget creation factories, improving readability and memory efficiency.
+
 ## [2026-03-15 01:00:00] System-Wide Modularization & SRP Refactoring
 **************************************
 ### Improved

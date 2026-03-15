@@ -17,6 +17,7 @@ app_constants = Config.get_instance()
 
 # --- EXTRACTED CORE MODULES ---
 from . import cache_io_handler, cache_traffic_controller, gui_state_restorer
+from .cache_io_handler import CacheLoadError
 from .core.cache_save_engine import CacheSaveEngine
 from .core.cache_search_engine import CacheSearchEngine
 from .core.cache_observer_registry import CacheObserverRegistry
@@ -30,8 +31,17 @@ class StateCacheManager:
         self.subscriber_router = None
         
         # 1. Initialize Cache & Search
-        try: self.cache = cache_io_handler.load_cache()
-        except: self.cache = {}
+        self.cache = {}
+        try: 
+            self.cache = cache_io_handler.load_cache()
+        except FileNotFoundError:
+            if LOCAL_DEBUG: data_logger.info("💾✨ First boot detected. Starting with fresh cache.")
+        except CacheLoadError as e:
+            if LOCAL_DEBUG: data_logger.error(f"💥💾 Critical Cache Corruption: {e}. Starting fresh.")
+            # Depending on policy, we might want to backup the corrupted file here
+        except Exception as e:
+            if LOCAL_DEBUG: data_logger.exception("💥💾 Unexpected error loading cache.")
+            
         self.search_engine = CacheSearchEngine()
         self.search_engine.rebuild(self.cache)
         
@@ -66,15 +76,25 @@ class StateCacheManager:
 
     def initialize_state(self) -> None:
         try:
-            self.cache = cache_io_handler.load_cache(); self.search_engine.rebuild(self.cache)
-            if self.cache:
-                from workers.Command_Router.protocol_router import ProtocolRouter
-                router = ProtocolRouter.get_instance()
-                for t, p in self.cache.items():
-                    v = p.get("val") if isinstance(p, dict) else p
-                    router.ingest("DISK", t, v, {"msg_type": "LINK_FEEDBACK", "is_settled": True, "origin_source": "DISK", "boot": True})
-                gui_state_restorer.restore_timeline(self.cache, self.state_mirror_engine)
-        except Exception: data_logger.exception("🧠💾 State initialization failed")
+            self.cache = cache_io_handler.load_cache()
+            self.search_engine.rebuild(self.cache)
+        except FileNotFoundError:
+            if LOCAL_DEBUG: data_logger.info("💾✨ No cache to initialize.")
+            self.cache = {}
+        except CacheLoadError as e:
+            if LOCAL_DEBUG: data_logger.error(f"💥💾 Critical Cache Corruption during init: {e}.")
+            self.cache = {}
+        except Exception: 
+            data_logger.exception("🧠💾 State initialization failed")
+            self.cache = {}
+
+        if self.cache:
+            from workers.Command_Router.protocol_router import ProtocolRouter
+            router = ProtocolRouter.get_instance()
+            for t, p in self.cache.items():
+                v = p.get("val") if isinstance(p, dict) else p
+                router.ingest("DISK", t, v, {"msg_type": "LINK_FEEDBACK", "is_settled": True, "origin_source": "DISK", "boot": True})
+            gui_state_restorer.restore_timeline(self.cache, self.state_mirror_engine)
 
     def handle_external_update(self, topic: str, value: Any, source: str = "EXTERNAL", metadata: dict = None):
         from workers.logic.manifest.builder import create_manifest

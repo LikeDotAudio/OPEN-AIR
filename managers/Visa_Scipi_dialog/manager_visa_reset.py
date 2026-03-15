@@ -31,9 +31,10 @@ from managers.configini.config_reader import Config
 app_constants = Config.get_instance()
 
 from .manager_visa_proxy import VisaProxy  # Use VisaProxy
+from managers.core.mqtt_subscriber_mixin import MqttSubscriberMixin
 
 
-class VisaResetManager:
+class VisaResetManager(MqttSubscriberMixin):
     """
     Listens for MQTT commands to reset or reboot the instrument and dispatches them.
     """
@@ -56,29 +57,13 @@ class VisaResetManager:
             self.BASE_TOPIC = "OPEN-AIR/Device/Instrument_Connection/System_Reset"
             self.TOPIC_RESET = f"{self.BASE_TOPIC}/Reset_device/trigger"
 
-            self._setup_mqtt_subscriptions()
+            self.register_mqtt_topics({self.TOPIC_RESET: self._on_reset_request})
             if LOCAL_DEBUG: logger.success(f"💳 ✅ {self.current_class_name} initialized and listening.")
 
         except Exception as e:
             if LOCAL_DEBUG:
-                logger.exception("💳 ❌ Error in {self.current_class_name}.{current_function_name}"
-                )
-                if LOCAL_DEBUG: logger.debug(f"💳 🟢️️️🔴 Catastrophic failure during {self.current_class_name} initialization! The error be: {e}")
-
-    def _setup_mqtt_subscriptions(self):
-        # A brief, one-sentence description of the function's purpose.
-        current_function_name = inspect.currentframe().f_code.co_name
-        if LOCAL_DEBUG: logger.debug(f"💳 ▶️ {current_function_name} to subscribe to reset/reboot topics.")
-        try:
-            self.subscriber_router.subscribe_to_topic(
-                topic_filter=self.TOPIC_RESET, callback_func=self._on_reset_request
-            )
-            if LOCAL_DEBUG: logger.success("💳 ✅ The reset manager did subscribe to its topics.")
-
-        except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("💳 ❌ Error in {current_function_name}")
-                if LOCAL_DEBUG: logger.debug(f"💳 🟢️️️🔴 The subscription circuits are fried! The error be: {e}")
+                logger.exception(f"💳 ❌ Error in {self.current_class_name}.{current_function_name}")
+                logger.debug(f"💳 🟢️️️🔴 Catastrophic failure during {self.current_class_name} initialization! The error be: {e}")
 
     def _on_reset_request(self, topic, payload):
         current_function_name = inspect.currentframe().f_code.co_name

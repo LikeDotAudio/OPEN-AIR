@@ -1,27 +1,22 @@
-# knob/dynamic_guimake_knob.py
+# knob/knob.py
 import tkinter as tk
-
-# --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from workers.logger.logger import initialize_logging, set_log_directory
 from loguru import logger
-
 from managers.configini.config_reader import Config
-
-app_constants = Config.get_instance()
-
-from workers.Command_Router.mqtt.mqtt_topic_utils import get_topic
-from managers.Display.transparency.transparency_manager import TransparencyManager
 from managers.Display.factory.widget_registry import WidgetRegistry
+from workers.builder.core.base_widget_creator import BaseWidgetCreator
 
 # Core Modules
 from .core.knob_config import extract_knob_config
 from .core.knob_state import create_knob_state
 from .core.knob_renderer import draw_knob_visuals
-from .core.knob_events import bind_knob_events
+from .core.knob_interaction_mixin import KnobInteractionMixin
 
-class CustomKnobFrame(tk.Canvas):
-    def __init__(self, parent, variable, min_val, max_val, reff_point, path, state_mirror_engine, command, *args, **kwargs):
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = True
+
+class CustomKnobFrame(tk.Canvas, KnobInteractionMixin):
+    def __init__(self, parent, variable, config, state, path, state_mirror_engine, 
+                 draw_cb, broadcast_cb, **kwargs):
         # ⚡ OPTIMIZATION: Ensure frame respects its requested dimensions to prevent clipping
         if "width" in kwargs: kwargs["width"] = max(kwargs["width"], 10)
         if "height" in kwargs: kwargs["height"] = max(kwargs["height"], 10)
@@ -40,13 +35,24 @@ class CustomKnobFrame(tk.Canvas):
         kwargs.pop("highlightthickness", None)
         kwargs.pop("relief", None)
 
-        super().__init__(parent, bd=0, highlightthickness=0, relief="flat", bg=p_bg, *args, **kwargs)
+        super().__init__(parent, bd=0, highlightthickness=0, relief="flat", bg=p_bg, **kwargs)
         self.pack_propagate(False)
         self.grid_propagate(False)
-        self.variable, self.min_val, self.max_val, self.reff_point = variable, min_val, max_val, reff_point
-        self.path, self.state_mirror_engine, self.command = path, state_mirror_engine, command
+        
+        self.variable = variable
+        self.config = config
+        self.state = state
+        self.min_val, self.max_val = config["min"], config["max"]
+        self.reff_point = config["reff_point"]
+        self.path = path
+        self.state_mirror_engine = state_mirror_engine
+        self._draw_cb = draw_cb
+        self._broadcast_cb = broadcast_cb
+        
         self.is_locked = False # ⚡ INTERACTION LOCK
         self.temp_entry = None
+        
+        self._bind_knob_events()
 
     def _jump_to_reff_point(self, event):
         if LOCAL_DEBUG: logger.debug(f"⚡ User invoked Quantum Jump! Resetting to {self.reff_point}")
@@ -77,105 +83,50 @@ class CustomKnobFrame(tk.Canvas):
             self.temp_entry.destroy(); self.temp_entry = None
 
 @WidgetRegistry.register("_Knob", "_SmartKnob")
-class BuilderKnobCreator:
+class BuilderKnobCreator(BaseWidgetCreator):
     
-    @staticmethod
-    def make(parent_widget, config_data, context=None, **kwargs):
-        """
-        Static factory method for creating a Knob widget.
-        Replaces the old instance-based make_knob.
-        """
-        if LOCAL_DEBUG: logger.opt(raw=True).trace(f"🔬 Entering BuilderKnobCreator.make with config: {config_data}")
+    def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
+        """Assembles the Knob UI elements."""
         config = extract_knob_config(config_data)
-        path, label = config_data.get("path"), config_data.get("label_active")
+        label = config_data.get("label_active") or config_data.get("label", "Unknown")
+        path = config_data.get("path")
         
-        # ⚡ HARDENED INTERFACE: Extract from context if available
-        if context:
-            state_mirror_engine = context.state_mirror_engine
-            subscriber_router = context.subscriber_router
-            base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
-            app_instance = context.app_instance
-            builder_instance = context.builder_instance or app_instance # Fallback for safety
-        else:
-            # Fallback for legacy calls (should be phased out)
-            state_mirror_engine = kwargs.get("state_mirror_engine")
-            subscriber_router = kwargs.get("subscriber_router")
-            base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
-            builder_instance = kwargs.get("builder_instance")
-            app_instance = kwargs.get("app_instance")
-
         knob_value_var = kwargs.get("variable") or tk.DoubleVar(value=config["value_default"])
         state = create_knob_state(config)
 
-        # Container frame
+        def broadcast_cb():
+            state_mirror_engine = getattr(context, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine')
+            if state_mirror_engine and path: 
+                state_mirror_engine.broadcast_gui_change_to_mqtt(path)
+
+        # Container frame/canvas
         frame = CustomKnobFrame(
-            parent_widget, knob_value_var, config["min"], config["max"], config["reff_point"], 
-            path, state_mirror_engine, None,
+            parent_widget, knob_value_var, config, state, 
+            path, 
+            getattr(context, 'state_mirror_engine', None) or kwargs.get('state_mirror_engine'), 
+            None, # draw_cb placeholder
+            broadcast_cb,
             width=config["width"], height=config["height"]
         )
-        frame.pack_propagate(False) # Prevent frame from shrinking to canvas if it's smaller
-
-        try:
-            # Robust Background Inheritance for factory
-            try:
-                p_bg = parent_widget.cget("bg")
-                if not p_bg or not p_bg.startswith("#"): p_bg = "#2b2b2b"
-            except:
-                p_bg = "#2b2b2b"
-
-            canvas = tk.Canvas(frame, width=config["width"], height=config["height"], highlightthickness=0, bd=0, relief="flat", bg=p_bg)
-            canvas.pack(expand=True, fill=tk.BOTH)
-
-            # Apply Transparency via Manager
-            TransparencyManager.apply_transparency(frame, canvas, config_data, builder_instance)
-            # ⚡ MANDATORY: Slices the patina onto the outer container frame too
-            TransparencyManager.apply_transparency(frame, frame, config_data, builder_instance)
-
-            def sync_bg():
-                draw_cb()
-
-            def draw_cb(): 
-                draw_knob_visuals(canvas, state, config, knob_value_var.get(), label)
-            
-            knob_value_var.trace_add("write", lambda *a: draw_cb())
-            frame._draw = sync_bg
-            frame.render = sync_bg
-            
-            # Initial sync
-            sync_bg()
-
-            def broadcast_cb():
-                if state_mirror_engine: state_mirror_engine.broadcast_gui_change_to_mqtt(path)
-
-            bind_knob_events(canvas, frame, state, config, knob_value_var, draw_cb, broadcast_cb)
-
-            if path and state_mirror_engine:
-                topic = state_mirror_engine.register_widget(path, knob_value_var, base_mqtt_topic_from_path, config_data, instance=frame)
-                if subscriber_router and topic:
-                    subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
-                state_mirror_engine.initialize_widget_state(path)
-
-            draw_cb()
-            if LOCAL_DEBUG: logger.success(f"✅ SUCCESS! The knob '{label}' has materialized!")
-            return frame
-        except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("🔘❌ Error creating knob '{label}'")
-            return None
-
-    # Maintain backward compatibility for mixin usage until full transition
-    def make_knob(self, parent_widget, config_data, context=None, **kwargs):
-        # In mixin mode, 'self' is the builder instance, so pass it as app_instance if needed
-        # But wait, self IS the builder instance. 
-        # The new static 'make' expects 'context' to contain 'app_instance'.
-        # If calling from legacy mixin, we need to ensure transparency works.
-        if context and not context.app_instance:
-             # Create a patched context? No, Context is frozen.
-             # We assume if make_knob is called on the builder, 'self' is the builder.
-             pass
         
-        # Call static implementation
-        # If context is missing app_instance (because it's the old style context), pass self as builder_instance in kwargs
-        # ⚡ ROBUSTNESS: Ensure we don't pass multiple values for builder_instance
-        b_inst = kwargs.pop('builder_instance', self)
-        return BuilderKnobCreator.make(parent_widget, config_data, context, builder_instance=b_inst, **kwargs)
+        frame.variable = knob_value_var # Ensure variable is accessible for registration
+
+        def draw_cb(): 
+            draw_knob_visuals(frame, state, config, knob_value_var.get(), label)
+        
+        frame._draw_cb = draw_cb # Inject actual draw callback
+        knob_value_var.trace_add("write", lambda *a: draw_cb())
+        frame._draw = draw_cb
+        frame.render = draw_cb
+        
+        draw_cb()
+        return frame, frame
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        """Legacy compatibility layer."""
+        return BuilderKnobCreator.build(parent_widget, config_data, context, **kwargs)
+
+    # Maintain backward compatibility for mixin usage
+    def make_knob(self, parent_widget, config_data, context=None, **kwargs):
+        return BuilderKnobCreator.build(parent_widget, config_data, context, **kwargs)

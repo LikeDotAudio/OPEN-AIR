@@ -44,29 +44,33 @@ current_version_hash = 20251230 * 230000 * 1
 #     None.
 # Outputs:
 #     Dict[str, Any]: A dictionary representing the loaded cache data, or an empty dictionary on failure.
+class CacheLoadError(Exception):
+    """Raised when the cache file exists but cannot be parsed."""
+    pass
+
 def load_cache() -> Dict[str, Any]:
     """
     Reads device_state_cache.json from the DATA directory defined in app_constants.
-    Returns an empty dict on failure/missing file.
+    Raises FileNotFoundError if the file doesn't exist, and CacheLoadError if it's corrupted.
     """
     if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
         if LOCAL_DEBUG: logger.debug("💾📖 Reading Cache.")
-    try:
-        if app_constants.DEVICE_STATE_CACHE_PATH.exists():
-            if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
-                if LOCAL_DEBUG: logger.debug("💾⏳ Cache file exists. Reading...")
-            with open(app_constants.DEVICE_STATE_CACHE_PATH, "rb") as f:
-                data = orjson.loads(f.read())
-                if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
-                    if LOCAL_DEBUG: logger.success("💾✅ Cache loaded successfully.")
-                return data
-        else:
-            if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
-                if LOCAL_DEBUG: logger.debug("💾📄 No cache file found.")
-    except Exception as e:
+        
+    if not app_constants.DEVICE_STATE_CACHE_PATH.exists():
         if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
-            logger.exception("💾❌ Error reading cache file")
-    return {}
+            if LOCAL_DEBUG: logger.debug("💾📄 No cache file found.")
+        raise FileNotFoundError(f"Cache file missing: {app_constants.DEVICE_STATE_CACHE_PATH}")
+
+    try:
+        if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
+            if LOCAL_DEBUG: logger.debug("💾⏳ Cache file exists. Reading...")
+        with open(app_constants.DEVICE_STATE_CACHE_PATH, "rb") as f:
+            data = orjson.loads(f.read())
+            if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
+                if LOCAL_DEBUG: logger.success("💾✅ Cache loaded successfully.")
+            return data
+    except Exception as e:
+        raise CacheLoadError(f"Error parsing cache file {app_constants.DEVICE_STATE_CACHE_PATH}: {e}") from e
 
 
 # Atomically saves the application state cache to `device_state_cache.json` on disk.

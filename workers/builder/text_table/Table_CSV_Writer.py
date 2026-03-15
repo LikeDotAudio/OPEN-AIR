@@ -26,17 +26,12 @@ from managers.configini.config_reader import Config
 app_constants = Config.get_instance()
 
 
+class CSVWriteError(Exception):
+    """Custom exception raised when a CSV file cannot be written."""
+    pass
+
+
 class TableCsvWriter:
-    # Writes a list of dictionaries to a CSV file.
-    # This function creates (or overwrites) a CSV file at the specified path, including
-    # a header row derived from the provided headers, and then writes each dictionary
-    # in the data list as a row in the CSV.
-    # Inputs:
-    #     file_path (str): The full path to the output CSV file.
-    #     headers (list): A list of strings for the CSV header row.
-    #     data (list): A list of dictionaries, where each dictionary represents a row.
-    # Outputs:
-    #     bool: True if the write operation was successful, False otherwise.
     def write_to_csv(self, file_path, headers, data):
         """
         Writes a list of dictionaries to a CSV file.
@@ -45,6 +40,9 @@ class TableCsvWriter:
             file_path (str): The full path to the output CSV file.
             headers (list): A list of strings for the CSV header row.
             data (list): A list of dictionaries, where each dictionary is a row.
+            
+        Raises:
+            CSVWriteError: If the file cannot be written.
         """
         try:
             # Ensure the directory exists
@@ -64,5 +62,5 @@ class TableCsvWriter:
             return True
         except Exception as e:
             if LOCAL_DEBUG:
-                logger.exception("❌ Error writing to CSV file {file_path}")
-            return False
+                logger.exception(f"❌ Error writing to CSV file {file_path}")
+            raise CSVWriteError(f"Failed to write to {file_path}: {e}") from e

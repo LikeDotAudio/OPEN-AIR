@@ -26,13 +26,11 @@ from managers.configini.config_reader import Config
 app_constants = Config.get_instance()
 
 
+class CSVReadError(Exception):
+    """Custom exception raised when a CSV file cannot be parsed."""
+    pass
+
 class TableCsvReader:
-    # Reads data from a CSV file and returns it as a list of dictionaries.
-    # Each dictionary in the list represents a row, with keys corresponding to the CSV headers.
-    # Inputs:
-    #     file_path (str): The full path to the input CSV file.
-    # Outputs:
-    #     tuple: A tuple containing (headers, data_list) on success, or (None, None) on error.
     def read_from_csv(self, file_path):
         """
         Reads data from a CSV file into a list of dictionaries.
@@ -41,21 +39,24 @@ class TableCsvReader:
             file_path (str): The full path to the input CSV file.
 
         Returns:
-            A tuple containing (headers, data_list) or (None, None) on error.
+            tuple: A tuple containing (headers, data_list).
+            
+        Raises:
+            FileNotFoundError: If the file does not exist.
+            CSVReadError: If the file cannot be read or parsed.
         """
         if not os.path.exists(file_path):
-            logger.warning(f"⚠️ CSV file not found at {file_path}")
-            return None, None
+            raise FileNotFoundError(f"CSV file not found at {file_path}")
 
         try:
             with open(file_path, "r", newline="", encoding="utf-8") as csvfile:
                 reader = csv.DictReader(csvfile)
                 headers = reader.fieldnames
+                if headers is None:
+                     headers = [] # Handle empty files gracefully instead of returning None
                 data = [row for row in reader]
 
             if LOCAL_DEBUG: logger.success(f"✅ Successfully read {len(data)} rows from {file_path}")
             return headers, data
         except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("❌ Error reading from CSV file {file_path}")
-            return None, None
+            raise CSVReadError(f"Error reading from CSV file {file_path}: {e}") from e

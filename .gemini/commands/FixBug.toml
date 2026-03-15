@@ -52,5 +52,10 @@ Follow this specific execution sequence:
    - Update `assets/Documentation/CHANGELOG.md` with a timestamped entry.
    - Create a detailed log in `assets/Documentation/BugLog/BUG_YYYYMMDD_HHMMSS.md` containing the Issue, Root Cause, Resolution, and Verification evidence.
 
-Begin by executing **Phase 1** and **Phase 2**.
+
+
+## 🛠️ Phase 4: Ask User if they want to move on with the proposed fixes based on the Best Practice Solutions & Strategy
+
+
+
 """

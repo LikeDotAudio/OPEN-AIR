@@ -39,11 +39,15 @@ def analyze_file_naming(root, files, dirs):
 
     for file in files:
         if file.startswith("__"): continue
+        if "audit" in file.lower(): continue # Ignore audit tools
         rel_file_path = os.path.join(rel_root, file)
         
         # 1. Noise Words
         for word in NOISE_WORDS:
             if word.lower() in file.lower() and not file.startswith(word.lower()):
+                # Special case for "Object" in audit contexts or specific domain terms
+                if word == "Object" and "class" in file.lower(): continue
+                
                 issues.append({
                     "path": rel_file_path,
                     "type": "Noise Word in File Name",

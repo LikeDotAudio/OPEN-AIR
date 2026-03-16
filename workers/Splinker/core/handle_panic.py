@@ -1,6 +1,6 @@
 from ..constants import splinker_logger
 
-def _handle_panic(self, trigger_splink_id=None):
+def handle_panic(self, trigger_splink_id=None):
     """Emergency shutdown of all splinks."""
     self.panic_active = True
     
@@ -16,13 +16,13 @@ def _handle_panic(self, trigger_splink_id=None):
             s["active"] = False
             splinker_logger.warning(f"  🛑 Deactivating splink [{s['id']}] for safety.")
             # Trigger persistence
-            self._save_splink(s)
+            self.save_splink(s)
 
     # Notify UI/MQTT
     import orjson
     panic_payload = {"val": True, "trigger_id": trigger_splink_id}
     
-    self._notify_monitor("panic", panic_payload)
+    self.notify_monitor("panic", panic_payload)
     if self.mqtt_manager:
         self.mqtt_manager.publish(
             "OPEN-AIR/System/Status/Splinker/Panic", 
@@ -41,7 +41,7 @@ def _reset_panic(self):
     splinker_logger.info("✅ SPLINKER PANIC RESET. Ready for operation.")
     
     reset_payload = {"val": False}
-    self._notify_monitor("panic", reset_payload)
+    self.notify_monitor("panic", reset_payload)
     if self.mqtt_manager:
         self.mqtt_manager.publish(
             "OPEN-AIR/System/Status/Splinker/Panic", 

@@ -10,9 +10,9 @@ class LyricManager:
 
     def _load(self):
         try:
-            from .. import lyrics
-            self.lyrics = getattr(lyrics_data, "lyrics", ["...Loading..."])
-        except ImportError:
+            from ..lyrics import lyrics
+            self.lyrics = lyrics if isinstance(lyrics, list) else ["...Loading..."]
+        except (ImportError, AttributeError):
             self.lyrics = ["...Loading..."]
         self.update_display()
 

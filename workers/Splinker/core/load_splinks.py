@@ -1,7 +1,7 @@
 import orjson
 from ..constants import Splinker_debug_enabled, splinker_logger
 
-def _load_splinks(self):
+def load_splinks(self):
     try:
         if Splinker_debug_enabled:
             splinker_logger.debug(f"📂🔗⚙️ [SPLINKER] Storage Path: "
@@ -15,7 +15,7 @@ def _load_splinks(self):
         for f in self.storage_path.glob("*.json"):
             with open(f, "rb") as splink_file:
                 self.splinks.append(orjson.loads(splink_file.read()))
-        self._publish_splinks()
+        self.publish_splinks()
     except Exception as e:
         # Gravity of Errors: Non-gated failure reporting.
         splinker_logger.error(f"📂🔗🚫 [SPLINKER] ERROR: Failed to load "

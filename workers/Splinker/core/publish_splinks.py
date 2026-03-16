@@ -2,7 +2,7 @@ import time
 import orjson
 from ..constants import app_constants
 
-def _publish_splinks(self):
+def publish_splinks(self):
     from workers.Command_Router.protocol_router import ProtocolRouter
     router = ProtocolRouter.get_instance()
     

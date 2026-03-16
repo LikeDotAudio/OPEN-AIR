@@ -1,8 +1,8 @@
 from ..constants import Splinker_debug_enabled, splinker_logger
 
-def _broker_link(self, splink, val, original_source, original_msg=None):
+def broker_link(self, splink, val, original_source, original_msg=None):
     if not self.state_cache_manager: return
-    src_topic, src_key = self._parse_splink_path(splink["source"])
+    src_topic, src_key = self.parse_splink_path(splink["source"])
     
     if not src_topic: return
     

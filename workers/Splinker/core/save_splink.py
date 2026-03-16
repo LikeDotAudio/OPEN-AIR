@@ -1,7 +1,7 @@
 import orjson
 from ..constants import Splinker_debug_enabled, splinker_logger
 
-def _save_splink(self, splink):
+def save_splink(self, splink):
     try:
         splinker_logger.debug(f"💾 Splinker: Attempting to save splink {splink['id']}...")
         self.storage_path.mkdir(parents=True, exist_ok=True)
@@ -18,7 +18,7 @@ def _save_splink(self, splink):
             f.write(orjson.dumps(splink, option=orjson.OPT_INDENT_2))
             
         splinker_logger.success(f"✅ Splinker: File saved successfully: {file_path.name}")
-        self._publish_splinks()
+        self.publish_splinks()
     except Exception as e:
         splinker_logger.error(f"❌ Splinker: Save failed for {splink['id']}: {e}")
         import traceback

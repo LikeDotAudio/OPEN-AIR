@@ -1,7 +1,7 @@
 import orjson
 from ..constants import splinker_logger
 
-def _handle_command(self, topic, payload):
+def handle_command(self, topic, payload):
     """Unified command handler for both MQTT and internal Router events."""
     if not topic:
         splinker_logger.error("❌ Splinker: _handle_command received None as topic.")
@@ -73,6 +73,6 @@ def _process_update_command(self, splink_id, payload):
     """Specific logic for Update command."""
     data = self._unwrap_payload(payload)
     if data:
-        self._update_splink(splink_id, data)
+        self.update_splink(splink_id, data)
     else:
         splinker_logger.warning(f"⚠️ Splinker: Update for {splink_id} received with empty/None payload.")

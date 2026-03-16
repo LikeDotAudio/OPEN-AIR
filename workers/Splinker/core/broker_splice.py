@@ -1,8 +1,8 @@
 from ..constants import Splinker_debug_enabled, splinker_logger
 
-def _broker_splice(self, splink, val, original_source, original_msg=None):
+def broker_splice(self, splink, val, original_source, original_msg=None):
     if not self.state_cache_manager: return
-    dest_topic, dest_key = self._parse_splink_path(splink["dest"])
+    dest_topic, dest_key = self.parse_splink_path(splink["dest"])
     
     if not dest_topic: return
     

@@ -12,7 +12,7 @@ class ScaleHandler(BaseHandler):
         d_min = self.params.get("dest_min", 0)
         d_max = self.params.get("dest_max", 255)
         
-        from ..manager_constants import splinker_logger, Splinker_debug_enabled
+        from ..constants import splinker_logger, Splinker_debug_enabled
 
         try:
             val_float = float(value)

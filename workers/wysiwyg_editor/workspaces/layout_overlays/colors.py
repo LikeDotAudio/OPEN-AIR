@@ -1,7 +1,7 @@
 # workers/wysiwyg_editor/workspaces/layout_overlays/colors.py
 import tkinter as tk
 from tkinter import colorchooser
-from ...core.state_manager import state_manager
+from ...core.state import state
 
 def apply(layout, widget, path, is_focused, design_elements):
     """Handles the 🎨 color palette button."""

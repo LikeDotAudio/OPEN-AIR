@@ -10,12 +10,12 @@ from loguru import logger
 LOCAL_DEBUG = True
 
 from ..core.event_bus import event_bus
-from ..core.state_manager import state_manager
+from ..core.state import state
 
 # --- EXTRACTED CORE MODULES ---
 from .core.layout.preview_engine import PreviewEngine
-from .core.layout.focus_manager import FocusManager
-from .core.layout.overlay_manager import OverlayManager
+from .core.layout.focus import FocusManager
+from .core.layout.overlay import OverlayManager
 
 class InteractiveLayout(tk.Frame):
     """The visual workspace where users interact with the GUI layout."""

@@ -6,7 +6,7 @@ from typing import Dict, Any
 from loguru import logger
 
 # --- EXTRACTED CORE MODULES ---
-from .core.annotation_manager import AnnotationManager
+from .core.annotation import AnnotationManager
 from .core.view_controller import ViewController
 from .core.graph_context_menu import GraphContextMenu
 

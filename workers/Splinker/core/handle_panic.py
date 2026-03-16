@@ -1,4 +1,4 @@
-from ..manager_constants import splinker_logger
+from ..constants import splinker_logger
 
 def _handle_panic(self, trigger_splink_id=None):
     """Emergency shutdown of all splinks."""

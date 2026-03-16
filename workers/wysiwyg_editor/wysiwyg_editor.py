@@ -12,7 +12,7 @@ import pathlib
 
 # Import Modular Components
 from .core.event_bus import event_bus
-from .core.state_manager import state_manager
+from .core.state import state
 from .core.file_io_handler import FileIOHandler
 from .workspaces.interactive_layout import InteractiveLayout
 from .workspaces.json_editor import JsonEditor

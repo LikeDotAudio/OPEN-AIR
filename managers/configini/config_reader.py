@@ -7,7 +7,7 @@ from loguru import logger
 
 # --- EXTRACTED CORE MODULES ---
 from .core.config_defaults import ConfigDefaults
-from .core.identity_manager import IdentityManager
+from .core.identity import IdentityManager
 from .core.config_loader import ConfigLoader
 
 LOCAL_DEBUG = True

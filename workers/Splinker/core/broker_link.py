@@ -1,4 +1,4 @@
-from ..manager_constants import Splinker_debug_enabled, splinker_logger
+from ..constants import Splinker_debug_enabled, splinker_logger
 
 def _broker_link(self, splink, val, original_source, original_msg=None):
     if not self.state_cache_manager: return

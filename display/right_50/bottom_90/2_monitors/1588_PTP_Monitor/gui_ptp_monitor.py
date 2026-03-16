@@ -10,7 +10,7 @@ from pathlib import Path
 from loguru import logger
 
 # --- EXTRACTED CORE MODULES ---
-from .core.ptp_data_processor import PTPDataProcessor
+from .core.ptp_processor import PTPDataProcessor
 from .core.ptp_meter_panel import PTPMeterPanel
 from .core.ptp_dissector_engine import PTPDissectorEngine
 

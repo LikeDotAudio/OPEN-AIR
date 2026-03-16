@@ -18,7 +18,7 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 # 2. Import Modular Core
-from core.capture_data import MultiThreadProfiler
+from core.capture import MultiThreadProfiler
 from core.make_graph import generate_flamegraph_with_flameprof
 from core.handle_events import process_stats_for_ui, generate_table_rows
 from core.wall_of_shame import generate_wall_of_shame

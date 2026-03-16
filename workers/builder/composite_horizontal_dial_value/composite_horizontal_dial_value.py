@@ -21,7 +21,7 @@ from managers.Display.transparency.transparency import TransparencyManager
 from managers.Display.factory.widget_registry import WidgetRegistry
 
 # --- EXTRACTED CORE MODULES ---
-from .core.grid_manager import GridManager
+from .core.grid import GridManager
 from .core.state_sync import CompositeStateSync
 from .core.ui_components import CompositeUIComponents
 

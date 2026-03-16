@@ -9,7 +9,7 @@
 import tkinter as tk
 from tkinter import ttk
 from ..core.event_bus import event_bus
-from ..core.state_manager import state_manager
+from ..core.state import state
 from loguru import logger
 
 class TreeRefactor(ttk.Frame):

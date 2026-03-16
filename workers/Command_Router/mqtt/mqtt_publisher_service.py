@@ -14,7 +14,7 @@
 #
 # Version 20250821.200641.1
 
-from .mqtt_connection_manager import MqttConnectionManager
+from .mqtt_connection import MqttConnectionManager
 import orjson
 import queue
 import threading

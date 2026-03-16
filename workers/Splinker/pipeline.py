@@ -1,5 +1,5 @@
 import time
-from .manager_constants import Splinker_debug_enabled, splinker_logger, HANDLER_MAP
+from .constants import Splinker_debug_enabled, splinker_logger, HANDLER_MAP
 
 class SplinkPipeline:
     def __init__(self, splink, splinker_manager):

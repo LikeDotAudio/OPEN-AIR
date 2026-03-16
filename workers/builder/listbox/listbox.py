@@ -19,7 +19,7 @@ from managers.Display.transparency.transparency import TransparencyManager
 from managers.Display.factory.widget_registry import WidgetRegistry
 
 # --- EXTRACTED CORE MODULES ---
-from .core.listbox_options_manager import ListboxOptionsManager
+from .core.listbox_options import ListboxOptionsManager
 from .core.listbox_sync_engine import ListboxSyncEngine
 
 class BuilderListboxCreator(TransparencyMixin):

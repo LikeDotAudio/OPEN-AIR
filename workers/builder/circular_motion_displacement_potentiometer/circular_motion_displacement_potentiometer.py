@@ -21,7 +21,7 @@ from .cmdp_channel_handler import CMDP_LTPObject
 
 # --- EXTRACTED CORE MODULES ---
 from .core.cmdp_interaction_mixin import CMDPInteractionMixin
-from .core.cmdp_tree_manager import CMDPTreeManager
+from .core.cmdp_tree import CMDPTreeManager
 from .core.cmdp_renderer_mixin import CMDPRendererMixin
 
 class CMDPWidget(

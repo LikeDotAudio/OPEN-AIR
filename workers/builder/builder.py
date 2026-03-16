@@ -42,7 +42,7 @@ from managers.Display.transparency.transparency import TransparencyManager
 from managers.Display.telemetry.ui_tracking_service import UITrackingService
 
 # --- 3. HIDDEN FEATURES ---
-from .breakoff_manager.hidden_breakoff_manager import HiddenBreakoffManagerMixin
+from .breakoff_manager.hidden_breakoff import HiddenBreakoffManagerMixin
 
 # --- 4. UTILITIES ---
 from workers.builder.input_mousewheel_mixin.input_mousewheel_mixin import (

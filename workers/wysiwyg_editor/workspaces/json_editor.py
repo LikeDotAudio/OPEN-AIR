@@ -10,7 +10,7 @@ from tkinter import ttk
 import orjson
 import re
 from ..core.event_bus import event_bus
-from ..core.state_manager import state_manager
+from ..core.state import state
 from workers.logger.logger import initialize_logging, set_log_directory
 from loguru import logger
 

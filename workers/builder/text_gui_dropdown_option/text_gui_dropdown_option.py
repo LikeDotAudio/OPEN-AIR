@@ -18,7 +18,7 @@ from managers.Display.factory.widget_registry import WidgetRegistry
 
 # --- EXTRACTED CORE MODULES ---
 from .core.dropdown_style_mixin import DropdownStyleMixin
-from .core.dropdown_data_manager import DropdownDataManager
+from .core.dropdown import DropdownDataManager
 
 @WidgetRegistry.register("_GuiDropDownOption")
 class BuilderTextGuiDropdownOptionCreator(TransparencyMixin):

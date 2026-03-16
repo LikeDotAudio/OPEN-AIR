@@ -1,4 +1,4 @@
-from ..manager_constants import Splinker_debug_enabled, splinker_logger
+from ..constants import Splinker_debug_enabled, splinker_logger
 
 def _update_splink(self, splink_id, new_data):
     """Updates an existing splink with new configuration."""

@@ -30,7 +30,7 @@ from managers.configini.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from .manager_visa_proxy import VisaProxy  # Use VisaProxy
+from .visa_proxy import VisaProxy  # Use VisaProxy
 from managers.core.mqtt_subscriber_mixin import MqttSubscriberMixin
 
 

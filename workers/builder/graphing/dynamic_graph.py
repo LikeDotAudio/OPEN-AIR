@@ -13,7 +13,7 @@ from workers.logger.logger import builder_logger
 from managers.configini.config_reader import Config
 app_constants = Config.get_instance()
 
-from . import graph_builder, graph_styler, graph_interactor, graph_updater
+from . import graph, graph_styler, graph_interactor, graph_updater
 from workers.styling.style import THEMES, DEFAULT_THEME
 from managers.Display.transparency.transparency_mixin import TransparencyMixin
 from managers.Display.transparency.transparency import TransparencyManager

@@ -5,12 +5,12 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from ..core.event_bus import event_bus
-from ..core.state_manager import state_manager
+from ..core.state import state
 from ..grab_bag.grab_bag_loader import GrabBagLoader
 from loguru import logger
 
 # --- EXTRACTED CORE MODULES ---
-from .core.structural_manager_mixin import StructuralManagerMixin
+from .core.structural_mixin import StructuralManagerMixin
 from .core.layout_tools_mixin import LayoutToolsMixin
 from .core.property_renderer_mixin import PropertyRendererMixin
 

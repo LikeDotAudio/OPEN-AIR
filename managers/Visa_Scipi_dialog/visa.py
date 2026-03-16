@@ -5,14 +5,14 @@
 # Author: Anthony Peter Kuzub
 #
 
-from .manager_logic_mqtt_publisher import VisaGuiPublisher
-from .manager_visa_proxy import VisaProxy
-from .manager_visa_search_results import VisaDeviceSearcher
-from .manager_logic_connect_instrument import VisaConnector
-from .manager_logic_disconnect_instrument import VisaDisconnector
-from .manager_logic_mqtt_listen import VisaMqttListener
-from .manager_visa_reset import VisaResetManager
-from .manager_visa_reboot import VisaRebootManager
+from .logic_mqtt_publisher import VisaGuiPublisher
+from .visa_proxy import VisaProxy
+from .visa_search_results import VisaDeviceSearcher
+from .logic_connect_instrument import VisaConnector
+from .logic_disconnect_instrument import VisaDisconnector
+from .logic_mqtt_listen import VisaMqttListener
+from .visa_reset import VisaResetManager
+from .visa_reboot import VisaRebootManager
 
 
 class VisaManagerOrchestrator:

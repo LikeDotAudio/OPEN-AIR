@@ -14,7 +14,7 @@ from managers.configini.config_reader import Config
 app_constants = Config.get_instance()
 
 from workers.Command_Router.mqtt import mqtt_publisher_service
-from .table_editing_manager import TableEditingManager
+from .table_editing import TableEditingManager
 from managers.Display.transparency.transparency_mixin import TransparencyMixin
 from managers.Display.factory.widget_registry import WidgetRegistry
 

@@ -38,8 +38,8 @@ from managers.configini.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from .manager_visa_safe_writer import write_safe
-from .manager_visa_safe_query import query_safe
+from .visa_safe_writer import write_safe
+from .visa_safe_query import query_safe
 
 
 class VisaProxy:

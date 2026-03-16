@@ -28,7 +28,7 @@ app_constants = Config.get_instance()
 # Import necessary components
 from managers.Visa_Fleet.visa_proxy_fleet import VisaProxyFleet
 from managers.Visa_Fleet.visa_parse_idn import parse_idn_string
-from managers.Visa_Fleet import manager_visa_Search
+from managers.Visa_Fleet import visa_Search
 from workers.discovery_agents import agent_usb_enumerator, agent_mdns_zeroconf, agent_static_ip_prober
 
 class DiscoveryOrchestrator:

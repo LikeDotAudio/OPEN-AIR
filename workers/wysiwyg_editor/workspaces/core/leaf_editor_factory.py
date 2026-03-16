@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, colorchooser
-from ..core.state_manager import state_manager
+from ..core.state import state
 
 class LeafEditorFactory:
     """Spawns specialized editor widgets for leaf JSON properties."""

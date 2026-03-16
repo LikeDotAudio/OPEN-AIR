@@ -1,6 +1,6 @@
 import time
 from ..pipeline import SplinkPipeline
-from ..manager_constants import Splinker_debug_enabled, splinker_logger
+from ..constants import Splinker_debug_enabled, splinker_logger
 
 def create_splink_with_params(self, source, dest, source_val=None, dest_val=None):
     splinker_logger.info(f"🔗 Splinker: create_splink_with_params received. Source={source} ({source_val}), Dest={dest} ({dest_val})")

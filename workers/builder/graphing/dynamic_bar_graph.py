@@ -13,7 +13,7 @@ from managers.configini.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from . import graph_builder
+from . import graph
 from . import graph_styler
 from . import graph_interactor
 from . import graph_updater

@@ -6,7 +6,7 @@
 # Author: Anthony Peter Kuzub
 # Version 20260222.Adapter.1
 
-from .transparency_manager import TransparencyManager
+from .transparency import TransparencyManager
 
 class TransparencyMixin:
     """Legacy Mixin. Forwards to TransparencyManager."""

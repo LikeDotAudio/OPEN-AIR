@@ -10,7 +10,7 @@ class LyricManager:
 
     def _load(self):
         try:
-            from .. import lyrics_data
+            from .. import lyrics
             self.lyrics = getattr(lyrics_data, "lyrics", ["...Loading..."])
         except ImportError:
             self.lyrics = ["...Loading..."]

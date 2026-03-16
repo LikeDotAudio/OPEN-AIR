@@ -17,7 +17,7 @@ from managers.configini.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from .manager_visa_list_visa_resources import list_visa_resources
+from .visa_list_visa_resources import list_visa_resources
 
 
 class VisaDeviceSearcher:

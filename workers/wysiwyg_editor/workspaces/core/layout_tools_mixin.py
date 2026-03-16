@@ -1,5 +1,5 @@
 import tkinter as tk
-from ..core.state_manager import state_manager
+from ..core.state import state
 
 class LayoutToolsMixin:
     """Provides Quick Alignment and Sticky UI tools for the properties panel."""

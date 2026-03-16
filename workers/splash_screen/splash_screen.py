@@ -8,7 +8,7 @@ from loguru import logger
 
 # --- EXTRACTED CORE MODULES ---
 from .core.gif_animator import GifAnimator
-from .core.lyric_manager import LyricManager
+from .core.lyric import LyricManager
 
 class SplashScreen:
     """Manages the lifecycle and display of the animated application splash screen."""

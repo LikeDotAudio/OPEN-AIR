@@ -84,7 +84,7 @@ class AsyncBootstrapEngine:
         try:
             self.splash.set_status("Building Workspace...")
             from managers.Display.builder.gui_display import Application
-            from .ui_window_manager import UIWindowManager
+            from .ui_window import UIWindowManager
             
             with mirror_engine.suspend_bindings():
                 def _on_ignition_complete():

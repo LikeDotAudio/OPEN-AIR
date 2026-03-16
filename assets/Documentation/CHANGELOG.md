@@ -1,5 +1,9 @@
 ## [2026-03-15 22:45:00] Bug Fix: Log Filter Engine Initialization
 **************************************
+Commit: 1c55af3
+Date: 2026-03-15 22:31:47
+Message: Bug Fix: Log Filter Engine Initialization
+**************************************
 ### Fixed
 - **LogFilterEngine ImportError**: Resolved a critical startup crash in `manager_launcher.py` where `initialize_filter_engine` was being imported from the wrong module (`workers.logger.logger` instead of `workers.logger.log_filter_engine`).
 - **MqttSubscriberRouter Case Sensitivity**: Fixed multiple `ImportError` and `AttributeError` instances in `log_filter_engine.py` caused by incorrect case sensitivity in `MqttSubscriberRouter` references.

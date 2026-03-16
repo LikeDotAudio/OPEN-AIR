@@ -13,7 +13,7 @@ app_constants = Config.get_instance()
 from managers.Display.factory.widget_registry import WidgetRegistry
 from workers.builder.core.base_widget_creator import BaseWidgetCreator
 from managers.Display.transparency.transparency_mixin import TransparencyMixin
-from managers.Display.transparency.transparency_manager import TransparencyManager
+from managers.Display.transparency.transparency import TransparencyManager
 
 # Core Modules
 from .core.knob_config import extract_knob_config

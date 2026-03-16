@@ -1,5 +1,5 @@
 from loguru import logger
-from workers.markers.worker_marker_logic import calculate_frequency_range
+from workers.markers.marker_logic import calculate_frequency_range
 
 class ShowtimeTuneMixin:
     """

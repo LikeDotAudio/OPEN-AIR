@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from loguru import logger
-from workers.importers.worker_importer_saver import save_markers_file_internally
+from workers.importers.saver import save_markers_file_internally
 
 class TreeCellEditor:
     """Manages the spawning and lifecycle of the in-place entry editor for Treeview cells."""

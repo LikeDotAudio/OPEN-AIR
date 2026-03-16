@@ -7,7 +7,7 @@ Analyzed codebase for God Classes, SRP violations, Low Cohesion, and Law of Deme
 
 ## Top Offenders
 
-### workers/builder/circular_motion_displacement_potentiometer/core/cmdp_tree_manager.py
+### workers/builder/circular_motion_displacement_potentiometer/core/cmdp_tree.py
 #### SRP Violation (Naming)
 - Line 4: Class 'CMDPTreeManager' uses noise word 'Manager' indicating mixed responsibilities.
   `class CMDPTreeManager:`
@@ -35,7 +35,7 @@ Analyzed codebase for God Classes, SRP violations, Low Cohesion, and Law of Deme
 - ... and 20 more.
 
 ---
-### workers/builder/data_graphing/core/view_controller.py
+### workers/builder/graphing/core/view_controller.py
 #### SRP Violation (Naming)
 - Line 4: Class 'ViewController' uses noise word 'Controller' indicating mixed responsibilities.
   `class ViewController:`
@@ -94,7 +94,7 @@ Analyzed codebase for God Classes, SRP violations, Low Cohesion, and Law of Deme
   `class CMDPGroupHandler:`
 
 ---
-### workers/builder/data_graphing/core/graph_patina_mixin.py
+### workers/builder/graphing/core/graph_patina_mixin.py
 #### Law of Demeter (Train Wreck)
 - Line 28: Chain of 3 calls/attributes violates encapsulation.
   `self.fig.patch.set_facecolor(bg_hex)`
@@ -123,7 +123,7 @@ Analyzed codebase for God Classes, SRP violations, Low Cohesion, and Law of Deme
   `inner = self.w.widget_config.copy()`
 
 ---
-### workers/builder/data_graphing/core/annotation_manager.py
+### workers/builder/graphing/core/annotation.py
 #### SRP Violation (Naming)
 - Line 3: Class 'AnnotationManager' uses noise word 'Manager' indicating mixed responsibilities.
   `class AnnotationManager:`
@@ -156,7 +156,7 @@ Analyzed codebase for God Classes, SRP violations, Low Cohesion, and Law of Deme
   `try: self.router._observers.remove(self.on_router_event)`
 
 ---
-### assets/Stand Alone Utilities/Log Viewer/LogViewer.py
+### assets/Stand_Alone_Utilities/Log_Viewer/LogViewer.py
 #### Law of Demeter (Train Wreck)
 - Line 178: Chain of 3 calls/attributes violates encapsulation.
   `color_discrete_sequence=px.colors.qualitative.Pastel`
@@ -164,7 +164,7 @@ Analyzed codebase for God Classes, SRP violations, Low Cohesion, and Law of Deme
   `nbins=50, barmode="stack", color_discrete_sequence=px.colors.qualitative.Vivid`
 
 ---
-### managers/Display/builder/core/layout_cache_manager.py
+### managers/Display/builder/core/layout_cache.py
 #### SRP Violation (Naming)
 - Line 8: Class 'LayoutCacheManager' uses noise word 'Manager' indicating mixed responsibilities.
   `class LayoutCacheManager:`
@@ -189,7 +189,7 @@ Analyzed codebase for God Classes, SRP violations, Low Cohesion, and Law of Deme
   `project_root = pathlib.Path(__file__).parent.parent.parent.parent`
 
 ---
-### workers/Command_Router/SNMP/snmp_manager.py
+### workers/Command_Router/SNMP/snmp.py
 #### SRP Violation (Naming)
 - Line 34: Class 'SNMPManager' uses noise word 'Manager' indicating mixed responsibilities.
   `class SNMPManager:`
@@ -204,55 +204,55 @@ Analyzed codebase for God Classes, SRP violations, Low Cohesion, and Law of Deme
   `if isinstance(child.func, ast.Attribute) and child.func.attr.startswith("assert"):`
 
 ---
-### assets/Stand Alone Utilities/OSC monitor/OSC monitor.py
+### assets/Stand_Alone_Utilities/OSC_monitor/OSC_monitor.py
 #### SRP Violation (Naming)
 - Line 14: Class 'StandaloneOscMonitor' uses noise word 'And' indicating mixed responsibilities.
   `class StandaloneOscMonitor:`
 
 ---
-### assets/Stand Alone Utilities/Fluke Meter/flukeMeter.py
+### assets/Stand_Alone_Utilities/Fluke_Meter/flukeMeter.py
 #### Law of Demeter (Train Wreck)
 - Line 12: Chain of 3 calls/attributes violates encapsulation.
   `ports = list(serial.tools.list_ports.comports())`
 
 ---
-### managers/Visa_Fleet_Manager/visa_fleet_manager.py
+### managers/Visa_Fleet/visa_fleet.py
 #### SRP Violation (Naming)
 - Line 25: Class 'VisaFleetManager' uses noise word 'Manager' indicating mixed responsibilities.
   `class VisaFleetManager:`
 
 ---
-### managers/Visa_Fleet_Manager/core/fleet_scan_mixin.py
+### managers/Visa_Fleet/core/fleet_scan_mixin.py
 #### Law of Demeter (Train Wreck)
 - Line 37: Chain of 3 calls/attributes violates encapsulation.
   `self.mqtt_bridge.mqtt_manager.publish(topic, orjson.dumps(payload).decode())`
 
 ---
-### managers/Visa_Fleet_Manager/core/fleet_command_queue_mixin.py
+### managers/Visa_Fleet/core/fleet_command_queue_mixin.py
 #### SRP Violation (Naming)
 - Line 3: Class 'FleetCommandQueueMixin' uses noise word 'And' indicating mixed responsibilities.
   `class FleetCommandQueueMixin:`
 
 ---
-### managers/configini/core/identity_manager.py
+### managers/configini/core/identity.py
 #### SRP Violation (Naming)
 - Line 3: Class 'IdentityManager' uses noise word 'Manager' indicating mixed responsibilities.
   `class IdentityManager:`
 
 ---
-### managers/Display/factory/asset_cache_manager.py
+### managers/Display/factory/asset_cache.py
 #### SRP Violation (Naming)
 - Line 30: Class 'AssetCacheManager' uses noise word 'Manager' indicating mixed responsibilities.
   `class AssetCacheManager:`
 
 ---
-### managers/Display/breakoff_manager/hidden_breakoff_manager.py
+### managers/Display/breakoff/hidden_breakoff.py
 #### SRP Violation (Naming)
 - Line 23: Class 'HiddenBreakoffManagerMixin' uses noise word 'Manager' indicating mixed responsibilities.
   `class HiddenBreakoffManagerMixin:`
 
 ---
-### managers/Display/transparency/transparency_manager.py
+### managers/Display/transparency/transparency.py
 #### SRP Violation (Naming)
 - Line 9: Class 'TransparencyManager' uses noise word 'Manager' indicating mixed responsibilities.
   `class TransparencyManager:`
@@ -288,7 +288,7 @@ Analyzed codebase for God Classes, SRP violations, Low Cohesion, and Law of Deme
   `class ViewManager:`
 
 ---
-### managers/Display/builder/window_manager.py
+### managers/Display/builder/window.py
 #### SRP Violation (Naming)
 - Line 32: Class 'WindowManager' uses noise word 'Manager' indicating mixed responsibilities.
   `class WindowManager:`

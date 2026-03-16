@@ -36,9 +36,9 @@ from managers.configini.config_reader import Config
 
 app_constants = Config.get_instance()
 
-from workers.Command_Router.mqtt.mqtt_connection_manager import MqttConnectionManager
+from workers.Command_Router.mqtt.mqtt_connection import MqttConnectionManager
 from workers.Command_Router.mqtt.mqtt_subscriber_router import MqttSubscriberRouter
-from workers.initialization.worker_project_paths import YAKETY_YAK_REPO_PATH
+from workers.initialization.project_paths import YAKETY_YAK_REPO_PATH
 
 class YakTranslator:
     """

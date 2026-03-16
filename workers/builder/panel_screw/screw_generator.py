@@ -7,7 +7,7 @@ BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from workers.logger.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
-from managers.Display.factory.asset_cache_manager import AssetCacheManager
+from managers.Display.factory.asset_cache import AssetCacheManager
 
 class ScrewGenerator:
     """

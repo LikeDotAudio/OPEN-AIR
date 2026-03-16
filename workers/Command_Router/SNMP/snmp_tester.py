@@ -4,7 +4,7 @@ import os
 import re
 from loguru import logger
 from managers.configini.config_reader import Config
-from workers.initialization.worker_project_paths import SNMP_TEMP_MIB
+from workers.initialization.project_paths import SNMP_TEMP_MIB
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True

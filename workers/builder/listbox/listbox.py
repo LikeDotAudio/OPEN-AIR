@@ -15,7 +15,7 @@ app_constants = Config.get_instance()
 
 from workers.styling.style import THEMES, DEFAULT_THEME
 from managers.Display.transparency.transparency_mixin import TransparencyMixin
-from managers.Display.transparency.transparency_manager import TransparencyManager
+from managers.Display.transparency.transparency import TransparencyManager
 from managers.Display.factory.widget_registry import WidgetRegistry
 
 # --- EXTRACTED CORE MODULES ---

@@ -18,7 +18,7 @@ from loguru import logger
 from workers.builder.knob.knob import CustomKnobFrame
 from workers.styling.style import THEMES, DEFAULT_THEME
 from workers.Command_Router.mqtt.mqtt_topic_utils import get_topic
-from managers.Display.transparency.transparency_manager import TransparencyManager
+from managers.Display.transparency.transparency import TransparencyManager
 from managers.Display.factory.widget_registry import WidgetRegistry
 
 # Core Modules for Knob Rendering

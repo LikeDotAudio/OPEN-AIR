@@ -33,18 +33,18 @@ File: OpenAir.py
     * Excessively large (137 lines)
     * Deeply nested structure (depth 3)
 
-File: assets/Stand Alone Utilities/Fluke Meter/flukeMeter.py
+File: assets/Stand_Alone_Utilities/Fluke_Meter/flukeMeter.py
   - Function: select_serial_port (Line 7)
     * Deeply nested structure (depth 3)
   - Function: main (Line 39)
     * Excessively large (51 lines)
 
-File: assets/Stand Alone Utilities/Log Viewer/LogViewer.py
+File: assets/Stand_Alone_Utilities/Log_Viewer/LogViewer.py
   - Function: update_visuals (Line 160)
     * Too many arguments (4)
     * Excessively large (58 lines)
 
-File: assets/Stand Alone Utilities/OSC monitor/OSC monitor.py
+File: assets/Stand_Alone_Utilities/OSC_monitor/OSC_monitor.py
   - Function: _setup_ui (Line 33)
     * Excessively large (80 lines)
   - Function: _sync_ui (Line 175)
@@ -52,23 +52,23 @@ File: assets/Stand Alone Utilities/OSC monitor/OSC monitor.py
     * Excessively large (42 lines)
     * Deeply nested structure (depth 3)
 
-File: assets/Stand Alone Utilities/SUB APP - CSV to json APP/core/csv_converter_engine.py
+File: assets/Stand_Alone_Utilities/SUB_APP_CSV_to_json_APP/core/csv_converter_engine.py
   - Function: build_hierarchy (Line 11)
     * Too many arguments (4)
     * Excessively large (57 lines)
     * Deeply nested structure (depth 6)
 
-File: assets/Stand Alone Utilities/SUB APP - CSV to json APP/core/header_config_ui.py
+File: assets/Stand_Alone_Utilities/SUB_APP_CSV_to_json_APP/core/header_config_ui.py
   - Function: __init__ (Line 7)
     * Too many arguments (4)
 
-File: assets/Stand Alone Utilities/SUB APP - CSV to json APP/core/json_preview_ui.py
+File: assets/Stand_Alone_Utilities/SUB_APP_CSV_to_json_APP/core/json_preview_ui.py
   - Function: update (Line 31)
     * Deeply nested structure (depth 4)
   - Function: insert (Line 34)
     * Deeply nested structure (depth 4)
 
-File: assets/Stand Alone Utilities/SUB APP - CSV to json APP/csvtojson.py
+File: assets/Stand_Alone_Utilities/SUB_APP_CSV_to_json_APP/csvtojson.py
   - Function: convert (Line 98)
     * Deeply nested structure (depth 3)
 
@@ -91,7 +91,7 @@ File: assets/Testing/FlameGraph/core/Wall_of_pitty.py
     * Excessively large (168 lines)
     * Deeply nested structure (depth 4)
 
-File: assets/Testing/FlameGraph/core/capture_data.py
+File: assets/Testing/FlameGraph/core/capture.py
   - Function: kill_all_profilers (Line 8)
     * Deeply nested structure (depth 3)
 
@@ -240,25 +240,25 @@ File: display/right_50/bottom_90/4_Splinker/111_Logs/gui_splinker_logs.py
   - Function: _refresh_investigation (Line 162)
     * Excessively large (45 lines)
 
-File: display/right_50/bottom_90/4_Splinker/222_ Editor/gui_splinker_editor.py
+File: display/right_50/bottom_90/4_Splinker/222_Editor/gui_splinker_editor.py
   - Function: _setup_ui (Line 37)
     * Excessively large (92 lines)
   - Function: on_select_splink (Line 169)
     * Deeply nested structure (depth 3)
 
-File: display/right_50/bottom_90/9_Zoo/1_buttons/2_Trapezoid/6_Media_Buttons/XXXXXXgui_Media_Buttons.py
+File: display/right_50/bottom_90/9_Zoo/1_buttons/2_Trapezoid/6_Media_Buttons/gui_Media_Buttons.py
   - Function: __init__ (Line 66)
     * Too many arguments (4)
   - Function: _construct_dynamic_gui (Line 130)
     * Excessively large (56 lines)
 
-File: display/right_50/bottom_90/9_Zoo/4_data_graphing/1_XY_Graphs/2_Graphing_2/gui_Graphing_Cont.py
+File: display/right_50/bottom_90/9_Zoo/4_graphing/1_XY_Graphs/2_Graphing_2/gui_Graphing_Cont.py
   - Function: __init__ (Line 54)
     * Too many arguments (4)
   - Function: _construct_dynamic_gui (Line 114)
     * Excessively large (52 lines)
 
-File: display/right_50/bottom_90/9_Zoo/4_data_graphing/1_XY_Graphs/2_Graphing_3/gui_Graphing_Cont_1.py
+File: display/right_50/bottom_90/9_Zoo/4_graphing/1_XY_Graphs/2_Graphing_3/gui_Graphing_Cont_1.py
   - Function: __init__ (Line 54)
     * Too many arguments (4)
   - Function: _construct_dynamic_gui (Line 116)
@@ -282,7 +282,7 @@ File: managers/Display/array/collapsible_block/collapsible_block.py
     * Too many arguments (4)
     * Excessively large (85 lines)
 
-File: managers/Display/breakoff_manager/hidden_breakoff_manager.py
+File: managers/Display/breakoff/hidden_breakoff.py
   - Function: _check_breakoff_state (Line 65)
     * Deeply nested structure (depth 4)
 
@@ -305,7 +305,7 @@ File: managers/Display/builder/core/batch_processing_engine.py
     * Too many arguments (7)
     * Deeply nested structure (depth 4)
 
-File: managers/Display/builder/core/directory_builder.py
+File: managers/Display/builder/core/directory.py
   - Function: _add_instance_to_parent (Line 40)
     * Too many arguments (4)
   - Function: _build_from_directory (Line 54)
@@ -321,7 +321,7 @@ File: managers/Display/builder/core/grid_topology_configurator.py
   - Function: configure (Line 5)
     * Deeply nested structure (depth 3)
 
-File: managers/Display/builder/core/layout_cache_manager.py
+File: managers/Display/builder/core/layout_cache.py
   - Function: load (Line 17)
     * Deeply nested structure (depth 3)
   - Function: _make_cache_serializable (Line 40)
@@ -329,13 +329,13 @@ File: managers/Display/builder/core/layout_cache_manager.py
   - Function: _restore_cache_paths (Line 50)
     * Deeply nested structure (depth 5)
 
-File: managers/Display/builder/core/navigation_manager.py
+File: managers/Display/builder/core/navigation.py
   - Function: show_splinker_tab (Line 8)
     * Deeply nested structure (depth 6)
   - Function: _update_dashboard (Line 24)
     * Deeply nested structure (depth 3)
 
-File: managers/Display/builder/core/tab_manager.py
+File: managers/Display/builder/core/tab.py
   - Function: _on_tab_change (Line 24)
     * Deeply nested structure (depth 4)
   - Function: _handle_tab_visibility (Line 54)
@@ -343,7 +343,7 @@ File: managers/Display/builder/core/tab_manager.py
   - Function: _trigger_wysiwyg_editor (Line 79)
     * Deeply nested structure (depth 3)
 
-File: managers/Display/builder/gui_batch_builder.py
+File: managers/Display/builder/gui_batch.py
   - Function: _create_dynamic_widgets (Line 67)
     * Too many arguments (8)
 
@@ -352,16 +352,16 @@ File: managers/Display/builder/gui_display.py
     * Too many arguments (13)
     * Excessively large (76 lines)
 
-File: managers/Display/builder/gui_mqtt_manager.py
+File: managers/Display/builder/gui_mqtt.py
   - Function: _initialize_mqtt_context (Line 45)
     * Too many arguments (4)
 
-File: managers/Display/builder/gui_rebuilder.py
+File: managers/Display/builder/gui_re.py
   - Function: _rebuild_gui (Line 33)
     * Excessively large (65 lines)
     * Deeply nested structure (depth 3)
 
-File: managers/Display/builder/window_manager.py
+File: managers/Display/builder/window.py
   - Function: tear_off_tab (Line 61)
     * Excessively large (80 lines)
     * Deeply nested structure (depth 3)
@@ -381,11 +381,11 @@ File: managers/Display/core/shutdown_coordinator.py
   - Function: on_closing (Line 12)
     * Deeply nested structure (depth 6)
 
-File: managers/Display/core/ui_window_manager.py
+File: managers/Display/core/ui_window.py
   - Function: create_root_window (Line 9)
     * Excessively large (52 lines)
 
-File: managers/Display/factory/asset_cache_manager.py
+File: managers/Display/factory/asset_cache.py
   - Function: get_asset_hash (Line 50)
     * Too many arguments (5)
   - Function: load_from_cache (Line 58)
@@ -484,7 +484,7 @@ File: managers/Display/parser/widget_schema_normalizer.py
   - Function: _process_homogenized_schema (Line 233)
     * Deeply nested structure (depth 3)
 
-File: managers/Display/styling/gui_style_manager.py
+File: managers/Display/styling/gui_style.py
   - Function: _blend_colors (Line 15)
     * Too many arguments (4)
 
@@ -500,7 +500,7 @@ File: managers/Display/telemetry/ui_tracking_service.py
   - Function: _on_destroy (Line 89)
     * Deeply nested structure (depth 3)
 
-File: managers/Display/transparency/transparency_manager.py
+File: managers/Display/transparency/transparency.py
   - Function: apply_transparency (Line 30)
     * Too many arguments (4)
     * Excessively large (202 lines)
@@ -526,7 +526,7 @@ File: managers/System_Core/open_air_core.py
     * Excessively large (95 lines)
     * Deeply nested structure (depth 5)
 
-File: managers/Visa_Fleet_Manager/Prototype/cli_visa_find.py
+File: managers/Visa_Fleet/Prototype/cli_visa_find.py
   - Function: check_host (Line 57)
     * Deeply nested structure (depth 5)
   - Function: hunt_for_devices (Line 91)
@@ -541,37 +541,37 @@ File: managers/Visa_Fleet_Manager/Prototype/cli_visa_find.py
     * Excessively large (132 lines)
     * Deeply nested structure (depth 3)
 
-File: managers/Visa_Fleet_Manager/core/fleet_command_queue_mixin.py
+File: managers/Visa_Fleet/core/fleet_command_queue_mixin.py
   - Function: enqueue_command (Line 6)
     * Too many arguments (5)
     * Uses flag argument: 'query'
 
-File: managers/Visa_Fleet_Manager/core/fleet_inventory_mixin.py
+File: managers/Visa_Fleet/core/fleet_inventory_mixin.py
   - Function: _notify_response (Line 27)
     * Too many arguments (5)
   - Function: _notify_error (Line 31)
     * Too many arguments (4)
 
-File: managers/Visa_Fleet_Manager/manager_fleet_mqtt_bridge.py
+File: managers/Visa_Fleet/fleet_mqtt_bridge.py
   - Function: __init__ (Line 39)
     * Too many arguments (4)
   - Function: _publish_flattened_dict (Line 135)
     * Excessively large (51 lines)
     * Deeply nested structure (depth 4)
 
-File: managers/Visa_Fleet_Manager/manager_visa_Search.py
+File: managers/Visa_Fleet/visa_Search.py
   - Function: probe_devices (Line 40)
     * Excessively large (139 lines)
     * Deeply nested structure (depth 6)
 
-File: managers/Visa_Fleet_Manager/manager_visa_csv_builder.py
+File: managers/Visa_Fleet/visa_csv.py
   - Function: build_csvs_from_json (Line 63)
     * Excessively large (47 lines)
     * Deeply nested structure (depth 4)
   - Function: _write_table_to_csv (Line 135)
     * Excessively large (50 lines)
 
-File: managers/Visa_Fleet_Manager/manager_visa_json_builder.py
+File: managers/Visa_Fleet/visa_json.py
   - Function: save_query_response_to_json (Line 144)
     * Too many arguments (5)
   - Function: _group_devices_by_type_and_model (Line 174)
@@ -580,13 +580,13 @@ File: managers/Visa_Fleet_Manager/manager_visa_json_builder.py
   - Function: _flatten_grouped_inventory (Line 238)
     * Deeply nested structure (depth 10)
 
-File: managers/Visa_Fleet_Manager/visa_fleet_manager.py
+File: managers/Visa_Fleet/visa_fleet.py
   - Function: __init__ (Line 28)
     * Too many arguments (4)
   - Function: set_callbacks (Line 53)
     * Too many arguments (5)
 
-File: managers/Visa_Fleet_Manager/visa_proxy_fleet.py
+File: managers/Visa_Fleet/visa_proxy_fleet.py
   - Function: _query_safe_fleet (Line 53)
     * Excessively large (44 lines)
   - Function: __init__ (Line 107)
@@ -595,7 +595,7 @@ File: managers/Visa_Fleet_Manager/visa_proxy_fleet.py
     * Too many arguments (4)
     * Uses flag argument: 'query'
 
-File: managers/Visa_Fleet_Manager/visa_utility_parser.py
+File: managers/Visa_Fleet/visa_utility_parser.py
   - Function: parse_resource_details (Line 31)
     * Deeply nested structure (depth 3)
   - Function: query_device_safe (Line 54)
@@ -603,17 +603,17 @@ File: managers/Visa_Fleet_Manager/visa_utility_parser.py
     * Excessively large (42 lines)
     * Deeply nested structure (depth 4)
 
-File: managers/Visa_Scipi_dialog/manager_logic_connect_instrument.py
+File: managers/Visa_Scipi_dialog/logic_connect_instrument.py
   - Function: connect_instrument_logic (Line 92)
     * Excessively large (58 lines)
 
-File: managers/Visa_Scipi_dialog/manager_logic_disconnect_instrument.py
+File: managers/Visa_Scipi_dialog/logic_disconnect_instrument.py
   - Function: disconnect_instrument (Line 40)
     * Deeply nested structure (depth 3)
   - Function: disconnect_instrument_logic (Line 89)
     * Excessively large (42 lines)
 
-File: managers/Visa_Scipi_dialog/manager_logic_mqtt_listen.py
+File: managers/Visa_Scipi_dialog/logic_mqtt_listen.py
   - Function: __init__ (Line 46)
     * Too many arguments (6)
   - Function: _on_search_request (Line 113)
@@ -627,23 +627,23 @@ File: managers/Visa_Scipi_dialog/manager_logic_mqtt_listen.py
   - Function: _on_connect_request (Line 272)
     * Deeply nested structure (depth 3)
 
-File: managers/Visa_Scipi_dialog/manager_logic_mqtt_publisher.py
+File: managers/Visa_Scipi_dialog/logic_mqtt_publisher.py
   - Function: _update_found_devices_gui (Line 50)
     * Excessively large (101 lines)
     * Deeply nested structure (depth 3)
 
-File: managers/Visa_Scipi_dialog/manager_visa_list_visa_resources.py
+File: managers/Visa_Scipi_dialog/visa_list_visa_resources.py
   - Function: list_visa_resources (Line 42)
     * Excessively large (45 lines)
     * Deeply nested structure (depth 4)
 
-File: managers/Visa_Scipi_dialog/manager_visa_proxy.py
+File: managers/Visa_Scipi_dialog/visa_proxy.py
   - Function: _publish_proxy_response (Line 202)
     * Too many arguments (4)
   - Function: set_instrument_instance (Line 217)
     * Deeply nested structure (depth 3)
 
-File: managers/Visa_Scipi_dialog/manager_visa_reboot.py
+File: managers/Visa_Scipi_dialog/visa_reboot.py
   - Function: __init__ (Line 40)
     * Too many arguments (4)
     * Deeply nested structure (depth 3)
@@ -652,26 +652,26 @@ File: managers/Visa_Scipi_dialog/manager_visa_reboot.py
   - Function: _on_reboot_request (Line 84)
     * Deeply nested structure (depth 3)
 
-File: managers/Visa_Scipi_dialog/manager_visa_reset.py
+File: managers/Visa_Scipi_dialog/visa_reset.py
   - Function: __init__ (Line 42)
     * Too many arguments (4)
   - Function: _on_reset_request (Line 68)
     * Deeply nested structure (depth 3)
 
-File: managers/Visa_Scipi_dialog/manager_visa_safe_query.py
+File: managers/Visa_Scipi_dialog/visa_safe_query.py
   - Function: query_safe (Line 15)
     * Excessively large (58 lines)
 
-File: managers/Visa_Scipi_dialog/manager_visa_search_results.py
+File: managers/Visa_Scipi_dialog/visa_search_results.py
   - Function: search_resources (Line 44)
     * Deeply nested structure (depth 4)
 
-File: managers/Visa_Scipi_dialog/worker_visa_pre_flight_check.py
+File: managers/Visa_Scipi_dialog/visa_pre_flight_check.py
   - Function: list_visa_resources (Line 51)
     * Excessively large (69 lines)
     * Deeply nested structure (depth 4)
 
-File: managers/configini/config_builder.py
+File: managers/configini/config.py
   - Function: create_default_config_ini (Line 24)
     * Excessively large (72 lines)
     * Uses flag argument: 'silent'
@@ -694,11 +694,11 @@ File: managers/configini/core/config_loader.py
     * Deeply nested structure (depth 4)
     * Uses flag argument: 'local_debug'
 
-File: managers/manager_launcher.py
+File: managers/launcher.py
   - Function: launch_core_managers (Line 55)
     * Excessively large (171 lines)
 
-File: managers/yak/manager_yak_rx.py
+File: managers/yak/yak_rx.py
   - Function: __init__ (Line 30)
     * Too many arguments (5)
   - Function: _on_rx_outbox_message (Line 55)
@@ -708,7 +708,7 @@ File: managers/yak/manager_yak_rx.py
     * Excessively large (64 lines)
     * Deeply nested structure (depth 4)
 
-File: managers/yak/yak_command_builder.py
+File: managers/yak/yak_command.py
   - Function: fill_scpi_placeholders (Line 41)
     * Deeply nested structure (depth 4)
   - Function: process_fleet (Line 83)
@@ -744,7 +744,7 @@ File: workers/Command_Router/MIDI/core/midi_port_controller.py
   - Function: get_port_info (Line 13)
     * Too many arguments (4)
 
-File: workers/Command_Router/MIDI/midi_manager.py
+File: workers/Command_Router/MIDI/midi.py
   - Function: __init__ (Line 24)
     * Uses flag argument: 'run_bridge'
   - Function: _midi_listen_loop (Line 62)
@@ -755,11 +755,11 @@ File: workers/Command_Router/MIDI/midi_manager.py
   - Function: _on_protocol_event (Line 101)
     * Deeply nested structure (depth 4)
 
-File: workers/Command_Router/Mqtt_Manager/Stand_Alone_Purge.py
+File: workers/Command_Router/Mqtt/Stand_Alone_Purge.py
   - Function: purge_mqtt (Line 21)
     * Excessively large (71 lines)
 
-File: workers/Command_Router/Mqtt_Manager/mqtt_manager.py
+File: workers/Command_Router/Mqtt/mqtt.py
   - Function: __init__ (Line 32)
     * Too many arguments (4)
   - Function: _publish_async (Line 64)
@@ -770,7 +770,7 @@ File: workers/Command_Router/Mqtt_Manager/mqtt_manager.py
   - Function: _system_status_loop (Line 82)
     * Deeply nested structure (depth 3)
 
-File: workers/Command_Router/OSC/osc_manager.py
+File: workers/Command_Router/OSC/osc.py
   - Function: __init__ (Line 32)
     * Too many arguments (4)
     * Uses flag argument: 'run_bridge'
@@ -798,7 +798,7 @@ File: workers/Command_Router/SNMP/snmp_installer_generator.py
   - Function: generate (Line 6)
     * Excessively large (52 lines)
 
-File: workers/Command_Router/SNMP/snmp_manager.py
+File: workers/Command_Router/SNMP/snmp.py
   - Function: __init__ (Line 40)
     * Too many arguments (4)
     * Uses flag argument: 'run_bridge'
@@ -831,7 +831,7 @@ File: workers/Command_Router/SNMP/snmp_tester.py
     * Excessively large (105 lines)
     * Deeply nested structure (depth 4)
 
-File: workers/Command_Router/SNMP/snmp_tree_builder.py
+File: workers/Command_Router/SNMP/snmp_tree.py
   - Function: generate_master_script (Line 23)
     * Excessively large (76 lines)
   - Function: generate_pass_script (Line 101)
@@ -862,7 +862,7 @@ File: workers/Command_Router/State_Cache/gui_state_restorer.py
   - Function: restore_timeline (Line 43)
     * Deeply nested structure (depth 4)
 
-File: workers/Command_Router/State_Cache/state_cache_manager.py
+File: workers/Command_Router/State_Cache/state_cache.py
   - Function: handle_external_update (Line 99)
     * Too many arguments (5)
   - Function: handle_incoming_mqtt (Line 114)
@@ -873,7 +873,7 @@ File: workers/Command_Router/State_Cache/state_comparator.py
   - Function: should_update (Line 40)
     * Deeply nested structure (depth 3)
 
-File: workers/Command_Router/mqtt/XXX worker_mqtt_data_flattening.py
+File: workers/Command_Router/mqtt/mqtt_flattening.py
   - Function: process_mqtt_message_and_pivot (Line 78)
     * Too many arguments (4)
     * Excessively large (76 lines)
@@ -890,7 +890,7 @@ File: workers/Command_Router/mqtt/delete_open_air.py
   - Function: delete_topics (Line 71)
     * Deeply nested structure (depth 4)
 
-File: workers/Command_Router/mqtt/mqtt_connection_manager.py
+File: workers/Command_Router/mqtt/mqtt_connection.py
   - Function: __new__ (Line 32)
     * Deeply nested structure (depth 3)
   - Function: publish (Line 67)
@@ -1008,12 +1008,12 @@ File: workers/Showtime/core/showtime_ui_mixin.py
   - Function: _create_button_with_bar_graph (Line 54)
     * Too many arguments (4)
 
-File: workers/Showtime/worker_showtime_draw_bargraph.py
+File: workers/Showtime/showtime_draw_bargraph.py
   - Function: create_bar_graph_image (Line 44)
     * Too many arguments (7)
     * Excessively large (54 lines)
 
-File: workers/Showtime/worker_showtime_tune.py
+File: workers/Showtime/showtime_tune.py
   - Function: on_tune_request_from_selection (Line 40)
     * Excessively large (58 lines)
     * Deeply nested structure (depth 4)
@@ -1040,31 +1040,31 @@ File: workers/Splinker/handlers/scale_handler.py
     * Too many arguments (5)
     * Excessively large (47 lines)
 
-File: workers/Splinker/manager/_broker_link.py
+File: workers/Splinker/core/broker_link.py
   - Function: _broker_link (Line 3)
     * Too many arguments (5)
     * Excessively large (50 lines)
 
-File: workers/Splinker/manager/_broker_splice.py
+File: workers/Splinker/core/broker_splice.py
   - Function: _broker_splice (Line 3)
     * Too many arguments (5)
     * Excessively large (51 lines)
 
-File: workers/Splinker/manager/_load_splinks.py
+File: workers/Splinker/core/load_splinks.py
   - Function: _load_splinks (Line 4)
     * Deeply nested structure (depth 3)
 
-File: workers/Splinker/manager/_update_splink.py
+File: workers/Splinker/core/update_splink.py
   - Function: _update_splink (Line 3)
     * Deeply nested structure (depth 3)
 
-File: workers/Splinker/manager/create_splink_with_params.py
+File: workers/Splinker/core/create_splink_with_params.py
   - Function: create_splink_with_params (Line 5)
     * Too many arguments (5)
     * Excessively large (86 lines)
     * Deeply nested structure (depth 3)
 
-File: workers/Splinker/manager/process_router_event.py
+File: workers/Splinker/core/process_router_event.py
   - Function: process_router_event (Line 4)
     * Excessively large (155 lines)
     * Deeply nested structure (depth 5)
@@ -1077,21 +1077,21 @@ File: workers/Splinker/pipeline.py
     * Excessively large (54 lines)
     * Deeply nested structure (depth 3)
 
-File: workers/Splinker/splinker_manager.py
+File: workers/Splinker/splinker.py
   - Function: get_instance (Line 75)
     * Deeply nested structure (depth 3)
 
-File: workers/Worker_Launcher.py
+File: workers/Launcher.py
   - Function: launch_all_workers (Line 96)
     * Excessively large (64 lines)
 
-File: workers/active/XXX worker_active_marker_tune_and_collect.py
+File: workers/active/active_marker_tune_and_collect.py
   - Function: _handle_start_stop (Line 72)
     * Deeply nested structure (depth 4)
   - Function: _processing_loop (Line 106)
     * Deeply nested structure (depth 3)
 
-File: workers/active/XXX-worker_active_peak_publisher.py
+File: workers/active/active_peak_publisher.py
   - Function: _on_marker_message (Line 113)
     * Excessively large (54 lines)
   - Function: _republish_to_hierarchical_topic (Line 178)
@@ -1110,7 +1110,7 @@ File: workers/builder/break_line/hidden_BreakLine.py
   - Function: redraw_line (Line 101)
     * Deeply nested structure (depth 3)
 
-File: workers/builder/breakoff_manager/hidden_breakoff_manager.py
+File: workers/builder/breakoff/hidden_breakoff.py
   - Function: _check_breakoff_state (Line 65)
     * Deeply nested structure (depth 4)
 
@@ -1291,7 +1291,7 @@ File: workers/builder/circular_motion_displacement_potentiometer/core/cmdp_math.
   - Function: get_angle (Line 22)
     * Too many arguments (4)
 
-File: workers/builder/circular_motion_displacement_potentiometer/core/cmdp_tree_manager.py
+File: workers/builder/circular_motion_displacement_potentiometer/core/cmdp_tree.py
   - Function: _on_click (Line 43)
     * Deeply nested structure (depth 3)
   - Function: _spawn_edit (Line 54)
@@ -1368,7 +1368,7 @@ File: workers/builder/core/base_widget_creator.py
   - Function: _assemble_ui (Line 57)
     * Too many arguments (4)
 
-File: workers/builder/core/builder_background_manager.py
+File: workers/builder/core/background.py
   - Function: _apply_panel_background (Line 37)
     * Too many arguments (4)
     * Excessively large (49 lines)
@@ -1383,14 +1383,14 @@ File: workers/builder/core/builder_background_manager.py
     * Deeply nested structure (depth 3)
     * Uses flag argument: 'force'
 
-File: workers/builder/core/builder_context_menu.py
+File: workers/builder/core/context_menu.py
   - Function: _show_wysiwyg_editor (Line 40)
     * Excessively large (49 lines)
     * Deeply nested structure (depth 5)
   - Function: _check_dependencies (Line 91)
     * Deeply nested structure (depth 3)
 
-File: workers/builder/core/builder_slicing_registry.py
+File: workers/builder/core/slicing_registry.py
   - Function: register_for_slicing (Line 14)
     * Deeply nested structure (depth 4)
   - Function: _perform_batch_reslice (Line 52)
@@ -1408,18 +1408,18 @@ File: workers/builder/core/ui_geometry_math.py
   - Function: get_angle (Line 43)
     * Too many arguments (4)
 
-File: workers/builder/data_graphing/core/annotation_manager.py
+File: workers/builder/graphing/core/annotation.py
   - Function: update (Line 7)
     * Excessively large (41 lines)
     * Deeply nested structure (depth 5)
 
-File: workers/builder/data_graphing/core/graph_context_menu.py
+File: workers/builder/graphing/core/graph_context_menu.py
   - Function: show (Line 10)
     * Too many arguments (5)
     * Excessively large (67 lines)
     * Deeply nested structure (depth 3)
 
-File: workers/builder/data_graphing/core/graph_interaction_mixin.py
+File: workers/builder/graphing/core/graph_interaction_mixin.py
   - Function: _on_pick (Line 7)
     * Deeply nested structure (depth 3)
   - Function: _on_motion (Line 16)
@@ -1427,12 +1427,12 @@ File: workers/builder/data_graphing/core/graph_interaction_mixin.py
   - Function: _on_marker_release (Line 35)
     * Deeply nested structure (depth 4)
 
-File: workers/builder/data_graphing/core/graph_patina_mixin.py
+File: workers/builder/graphing/core/graph_patina_mixin.py
   - Function: _on_patina_update (Line 12)
     * Excessively large (42 lines)
     * Deeply nested structure (depth 3)
 
-File: workers/builder/data_graphing/core/graph_state_mixin.py
+File: workers/builder/graphing/core/graph_state_mixin.py
   - Function: _initialize_state_mirroring (Line 19)
     * Deeply nested structure (depth 3)
   - Function: _on_dataset_var_change (Line 32)
@@ -1440,17 +1440,17 @@ File: workers/builder/data_graphing/core/graph_state_mixin.py
   - Function: _on_setting_var_change (Line 46)
     * Deeply nested structure (depth 7)
 
-File: workers/builder/data_graphing/core/horizontal_meter_renderer.py
+File: workers/builder/graphing/core/horizontal_meter_renderer.py
   - Function: __init__ (Line 13)
     * Too many arguments (5)
 
-File: workers/builder/data_graphing/core/vertical_meter_renderer.py
+File: workers/builder/graphing/core/vertical_meter_renderer.py
   - Function: __init__ (Line 13)
     * Too many arguments (5)
   - Function: _on_value_change (Line 40)
     * Deeply nested structure (depth 3)
 
-File: workers/builder/data_graphing/core/view_controller.py
+File: workers/builder/graphing/core/view_controller.py
   - Function: __init__ (Line 7)
     * Too many arguments (4)
   - Function: on_press (Line 12)
@@ -1465,7 +1465,7 @@ File: workers/builder/data_graphing/core/view_controller.py
   - Function: _set_axis_mode (Line 90)
     * Too many arguments (5)
 
-File: workers/builder/data_graphing/dynamic_bar_graph.py
+File: workers/builder/graphing/dynamic_bar_graph.py
   - Function: load_initial_data (Line 52)
     * Too many arguments (4)
   - Function: update_plot (Line 68)
@@ -1473,7 +1473,7 @@ File: workers/builder/data_graphing/dynamic_bar_graph.py
   - Function: clear_plot (Line 106)
     * Deeply nested structure (depth 4)
 
-File: workers/builder/data_graphing/dynamic_graph.py
+File: workers/builder/graphing/dynamic_graph.py
   - Function: __init__ (Line 39)
     * Too many arguments (6)
   - Function: _init_dataset_config (Line 86)
@@ -1483,39 +1483,39 @@ File: workers/builder/data_graphing/dynamic_graph.py
   - Function: _rename_marker (Line 145)
     * Deeply nested structure (depth 3)
 
-File: workers/builder/data_graphing/graph_interactor.py
+File: workers/builder/graphing/graph_interactor.py
   - Function: setup_interaction (Line 13)
     * Too many arguments (4)
 
-File: workers/builder/data_graphing/graph_styler.py
+File: workers/builder/graphing/graph_styler.py
   - Function: apply_style (Line 38)
     * Too many arguments (4)
     * Excessively large (104 lines)
     * Deeply nested structure (depth 3)
 
-File: workers/builder/data_graphing/graph_updater.py
+File: workers/builder/graphing/graph_updater.py
   - Function: update_graph_data (Line 24)
     * Too many arguments (6)
   - Function: load_initial_data (Line 33)
     * Too many arguments (6)
 
-File: workers/builder/data_graphing/plot_widget_adapter.py
+File: workers/builder/graphing/plot_widget_adapter.py
   - Function: _create_plot_widget (Line 17)
     * Too many arguments (4)
   - Function: _create_bar_graph_widget (Line 44)
     * Too many arguments (4)
 
-File: workers/builder/data_json_tree/core/json_data_manager.py
+File: workers/builder/json_tree/core/json.py
   - Function: load (Line 19)
     * Deeply nested structure (depth 4)
   - Function: discover_columns (Line 74)
     * Deeply nested structure (depth 7)
 
-File: workers/builder/data_json_tree/core/json_tree_editor_mixin.py
+File: workers/builder/json_tree/core/json_tree_editor_mixin.py
   - Function: _update_data_from_tree_id (Line 48)
     * Deeply nested structure (depth 3)
 
-File: workers/builder/data_json_tree/core/json_tree_renderer_mixin.py
+File: workers/builder/json_tree/core/json_tree_renderer_mixin.py
   - Function: _insert_node_iterative (Line 6)
     * Too many arguments (5)
     * Deeply nested structure (depth 5)
@@ -1523,7 +1523,7 @@ File: workers/builder/data_json_tree/core/json_tree_renderer_mixin.py
   - Function: refresh_tree_display (Line 40)
     * Uses flag argument: 'show_values'
 
-File: workers/builder/data_json_tree/data_json_tree.py
+File: workers/builder/json_tree/json_tree.py
   - Function: __init__ (Line 37)
     * Too many arguments (5)
   - Function: _setup_ui (Line 59)
@@ -1531,7 +1531,7 @@ File: workers/builder/data_json_tree/data_json_tree.py
   - Function: make_data_json_tree (Line 159)
     * Too many arguments (4)
 
-File: workers/builder/data_radar/data_radar.py
+File: workers/builder/radar/radar.py
   - Function: make_data_radar (Line 29)
     * Too many arguments (4)
     * Excessively large (241 lines)
@@ -1830,7 +1830,7 @@ File: workers/builder/knob_rotary_selector/knob_rotary_selector.py
     * Excessively large (163 lines)
     * Deeply nested structure (depth 3)
 
-File: workers/builder/listbox/core/listbox_options_manager.py
+File: workers/builder/listbox/core/listbox_options.py
   - Function: process_mqtt_update (Line 11)
     * Too many arguments (4)
 
@@ -2063,7 +2063,7 @@ File: workers/builder/meter_needle/ui/frame_factory.py
   - Function: create_canvas (Line 82)
     * Too many arguments (4)
 
-File: workers/builder/midi_keyboard/builder_midi_keyboard.py
+File: workers/builder/midi_keyboard/midi_keyboard.py
   - Function: _setup_keys (Line 68)
     * Excessively large (44 lines)
   - Function: handle_midi (Line 119)
@@ -2124,7 +2124,7 @@ File: workers/builder/status_light/status_light.py
   - Function: _build_header_status_light (Line 164)
     * Too many arguments (4)
 
-File: workers/builder/text_gui_dropdown_option/core/dropdown_data_manager.py
+File: workers/builder/text_gui_dropdown_option/core/dropdown.py
   - Function: determine_initial_state (Line 19)
     * Too many arguments (4)
 
@@ -2173,7 +2173,7 @@ File: workers/builder/text_table/table_editing_inplace_mixin.py
   - Function: commit_edit (Line 114)
     * Excessively large (48 lines)
 
-File: workers/builder/text_table/table_editing_manager.py
+File: workers/builder/text_table/table_editing.py
   - Function: __init__ (Line 57)
     * Too many arguments (7)
     * Uses flag argument: 'allow_sort'
@@ -2270,37 +2270,37 @@ File: workers/importers/core/tree_sorting_engine.py
   - Function: sort (Line 7)
     * Uses flag argument: 'ascending'
 
-File: workers/importers/formats/worker_importer_from_csv_unknown.py
+File: workers/importers/formats/from_csv_unknown.py
   - Function: Marker_convert_csv_unknow_report_to_csv (Line 54)
     * Excessively large (91 lines)
     * Deeply nested structure (depth 9)
 
-File: workers/importers/formats/worker_importer_from_ias_html.py
+File: workers/importers/formats/from_ias_html.py
   - Function: Marker_convert_IAShtml_report_to_csv (Line 55)
     * Excessively large (234 lines)
     * Deeply nested structure (depth 13)
 
-File: workers/importers/formats/worker_importer_from_shure_wwb_shw.py
+File: workers/importers/formats/from_shure_wwb_shw.py
   - Function: Marker_convert_WWB_SHW_File_report_to_csv (Line 57)
     * Excessively large (127 lines)
     * Deeply nested structure (depth 4)
 
-File: workers/importers/formats/worker_importer_from_shure_wwb_zip.py
+File: workers/importers/formats/from_shure_wwb_zip.py
   - Function: Marker_convert_wwb_zip_report_to_csv (Line 56)
     * Excessively large (112 lines)
     * Deeply nested structure (depth 6)
 
-File: workers/importers/formats/worker_importer_from_soundbase_pdf_v1.py
+File: workers/importers/formats/from_soundbase_pdf_v1.py
   - Function: Marker_convert_SB_PDF_File_report_to_csv (Line 58)
     * Excessively large (184 lines)
     * Deeply nested structure (depth 6)
 
-File: workers/importers/formats/worker_importer_from_soundbase_pdf_v2.py
+File: workers/importers/formats/from_soundbase_pdf_v2.py
   - Function: Marker_convert_SB_v2_PDF_File_report_to_csv (Line 54)
     * Excessively large (98 lines)
     * Deeply nested structure (depth 6)
 
-File: workers/importers/worker_importer_editor.py
+File: workers/importers/editor.py
   - Function: start_editing_cell (Line 34)
     * Too many arguments (4)
   - Function: navigate_cells (Line 39)
@@ -2308,15 +2308,15 @@ File: workers/importers/worker_importer_editor.py
   - Function: delete_selected_row (Line 77)
     * Deeply nested structure (depth 3)
 
-File: workers/importers/worker_importer_loader.py
+File: workers/importers/loader.py
   - Function: maker_file_check_for_markers_file (Line 63)
     * Deeply nested structure (depth 3)
 
-File: workers/importers/worker_importer_saver.py
+File: workers/importers/saver.py
   - Function: save_open_air_file (Line 80)
     * Excessively large (45 lines)
 
-File: workers/importers/worker_marker_csv_to_json_mqtt.py
+File: workers/importers/marker_csv_to_json_mqtt.py
   - Function: csv_to_json_and_publish (Line 75)
     * Excessively large (103 lines)
     * Deeply nested structure (depth 6)
@@ -2363,12 +2363,12 @@ File: workers/logic/work_stealing_pool.py
   - Function: _worker_loop (Line 50)
     * Deeply nested structure (depth 4)
 
-File: workers/markers/XXXX worker_marker_peak_re_publisher.py
+File: workers/markers/marker_peak_re_publisher.py
   - Function: _on_nab_output_and_republish_peak (Line 139)
     * Excessively large (59 lines)
     * Deeply nested structure (depth 4)
 
-File: workers/markers/worker_marker_logic.py
+File: workers/markers/marker_logic.py
   - Function: calculate_frequency_range (Line 53)
     * Deeply nested structure (depth 3)
 
@@ -2376,14 +2376,14 @@ File: workers/monitoring/fleet_status_monitor.py
   - Function: _on_scan_complete (Line 92)
     * Deeply nested structure (depth 3)
 
-File: workers/presets/XXX worker_preset_pusher.py
+File: workers/presets/preset_pusher.py
   - Function: Tune_to_preset (Line 100)
     * Excessively large (147 lines)
   - Function: publish_message (Line 253)
     * Too many arguments (5)
     * Uses flag argument: 'retain'
 
-File: workers/presets/XXXworker_preset_from_device.py
+File: workers/presets/preset_from_device.py
   - Function: publish_presets_to_repository (Line 188)
     * Excessively large (49 lines)
   - Function: publish_message (Line 292)
@@ -2428,7 +2428,7 @@ File: workers/wysiwyg_editor/core/file_io_handler.py
     * Excessively large (44 lines)
     * Deeply nested structure (depth 3)
 
-File: workers/wysiwyg_editor/core/state_manager.py
+File: workers/wysiwyg_editor/core/state.py
   - Function: update_state (Line 55)
     * Too many arguments (4)
     * Deeply nested structure (depth 4)
@@ -2451,15 +2451,15 @@ File: workers/wysiwyg_editor/grab_bag/grab_bag_view.py
     * Excessively large (56 lines)
     * Deeply nested structure (depth 4)
 
-File: workers/wysiwyg_editor/run_builder.py
+File: workers/wysiwyg_editor/run.py
   - Function: main (Line 28)
     * Excessively large (100 lines)
 
-File: workers/wysiwyg_editor/workspaces/core/layout/focus_manager.py
+File: workers/wysiwyg_editor/workspaces/core/layout/focus.py
   - Function: handle_focus_request (Line 11)
     * Deeply nested structure (depth 4)
 
-File: workers/wysiwyg_editor/workspaces/core/layout/overlay_manager.py
+File: workers/wysiwyg_editor/workspaces/core/layout/overlay.py
   - Function: _recursive_clear (Line 17)
     * Deeply nested structure (depth 3)
   - Function: _recursive_apply (Line 25)

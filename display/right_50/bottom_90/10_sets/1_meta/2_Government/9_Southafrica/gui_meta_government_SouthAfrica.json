@@ -1,0 +1,32 @@
+{
+  "datasets_meta_Government_Southafrica": {
+    "type": "OcaBlock",
+    "id": "50.90.10.1.2.9",
+    "description": "JSON Tree Viewer for Government Southafrica",
+    "layout_columns": 1,
+    "fields": {
+      "Data_Tree": {
+        "type": "JsonTree",
+        "label_active": "Government Southafrica",
+        "json_source": "display/right_50/bottom_90/10_sets/1_meta/2_Government/9_Southafrica/meta_government_SouthAfrica.json",
+        "height": 50,
+        "alpha": 0.9,
+        "layout": {
+          "sticky": "nsew",
+          "weight_y": 1,
+          "pady": 0
+        },
+        "ALLOW": {
+          "filter": true,
+          "browse": false,
+          "edit": true,
+          "expand_all": true,
+          "save_as": true,
+          "table_toggle": true
+        },
+        "show_values": true
+      }
+    },
+    "show_label": false
+  }
+}

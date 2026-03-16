@@ -3,7 +3,7 @@ import re
 from ..Table_CSV_Writer import TableCsvWriter
 from ..Table_CSV_Reader import TableCsvReader
 from ..Table_CSV_check import TableCsvCheck
-import workers.initialization.worker_project_paths as app_paths
+import workers.initialization.project_paths as app_paths
 
 CSV_SAVE_DIR = str(app_paths.TABLES_DIR)
 

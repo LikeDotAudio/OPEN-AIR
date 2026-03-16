@@ -21,7 +21,7 @@ from managers.configini.console_encoder import configure_console_encoding
 from workers.splash_screen.splash_screen import SplashScreen
 
 # --- EXTRACTED CORE MODULES ---
-from managers.Display.core.ui_window_manager import UIWindowManager
+from managers.Display.core.ui_window import UIWindowManager
 from managers.Display.core.shutdown_coordinator import ShutdownCoordinator
 from managers.Display.core.bootstrap_sequence import AsyncBootstrapEngine
 

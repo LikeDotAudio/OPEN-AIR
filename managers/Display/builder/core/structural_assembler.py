@@ -1,5 +1,5 @@
 import tkinter as tk
-from managers.Display.transparency.transparency_manager import TransparencyManager
+from managers.Display.transparency.transparency import TransparencyManager
 
 class StructuralAssembler:
     """Manages the immediate creation of structural containers (OcaBlock, OcaBin)."""

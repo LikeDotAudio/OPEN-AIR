@@ -11,7 +11,7 @@ from workers.logger.logger import builder_logger
 from managers.configini.config_reader import Config
 app_constants = Config.get_instance()
 
-from workers.builder.data_graphing.dynamic_graph import FluxPlotter
+from workers.builder.graphing.dynamic_graph import FluxPlotter
 from managers.Display.transparency.transparency_mixin import TransparencyMixin
 from managers.Display.factory.widget_registry import WidgetRegistry
 

@@ -26,7 +26,7 @@ app_constants = Config.get_instance()
 
 from workers.Command_Router.mqtt.mqtt_topic_utils import generate_topic_path_from_filepath
 from managers.Display.loader.gui_from_json import UniversalGuiLoader
-from workers.initialization.worker_project_paths import GLOBAL_PROJECT_ROOT
+from workers.initialization.project_paths import GLOBAL_PROJECT_ROOT
 from workers.builder.builder import DynamicGuiBuilder
 
 # Globals for Versioning

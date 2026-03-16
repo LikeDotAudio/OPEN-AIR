@@ -19,7 +19,7 @@ Message: Feature Suspension: AES70, OSC, and Window Visibility Telemetry
 - **AES70 Protocol Bridge**: Temporarily disabled the `AES70Manager`.
 - **OSC Protocol Bridge**: Temporarily disabled the `OSCManager`.
 - **Window Visibility Telemetry**: Commented out the `VisibilitySnitch` MQTT publishing logic. This reduces redundant MQTT traffic (`visibility/visible`) during the UI build and runtime interaction phases.
-- **Scanning Mechanism**: Set `scan_aes70 = False` and `scan_osc = False` in `config.ini`, and suppressed their launch in `managers/manager_launcher.py`.
+- **Scanning Mechanism**: Set `scan_aes70 = False` and `scan_osc = False` in `config.ini`, and suppressed their launch in `managers/launcher.py`.
 
 ## [2026-03-15 23:30:00] New Audit: Bad File/Folder Naming & Containerization
 **************************************
@@ -488,7 +488,7 @@ Message: README Cleanup and Documentation Engine Update
 ### Added
 - Refactored monolithic `gui_splinker.py` into specialized sub-tabs.
 - `display/right_50/bottom_90/4_Splinker/111_Logs/gui_splinker_logs.py`: Dedicated tab for internal logs and live brokerage feed.
-- `display/right_50/bottom_90/4_Splinker/222_ Editor/gui_splinker_editor.py`: Dedicated tab for Splink management (creation, list, and scaling).
+- `display/right_50/bottom_90/4_Splinker/222_Editor/gui_splinker_editor.py`: Dedicated tab for Splink management (creation, list, and scaling).
 
 ### Improved
 - Cleaned up Splinker Editor UI by removing brokerage activity logs from the management view.

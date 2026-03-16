@@ -1,1 +1,1 @@
-# workers/icons/__init__.py
+# workers/icons/init.py

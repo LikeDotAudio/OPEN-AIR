@@ -5,7 +5,7 @@ from datetime import datetime
 from tkinter import filedialog
 from workers.logger.logger import initialize_logging, set_log_directory
 from loguru import logger
-from workers.initialization.worker_project_paths import GLOBAL_PROJECT_ROOT
+from workers.initialization.project_paths import GLOBAL_PROJECT_ROOT
 
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 

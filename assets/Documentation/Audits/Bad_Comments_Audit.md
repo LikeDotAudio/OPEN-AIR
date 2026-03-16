@@ -7,7 +7,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 
 ## Top Offenders
 
-### workers/SPLINKER - early thigns - archive/frequency_callbacks.py
+### workers/splinker_archive/frequency_callbacks.py
 #### Journal/History Comment
 - Line 1: Change log or version history found in file header.
   `# # Author: Anthony Peter Kuzub`
@@ -23,7 +23,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - Line 18: Line appears to be commented-out source code.
   `# from loguru import logger`
 - Line 21: Line appears to be commented-out source code.
-  `# from workers.Command_Router.mqtt.worker_mqtt_controller_util import MqttControllerUtility`
+  `# from workers.Command_Router.mqtt.mqtt_controller_util import MqttControllerUtility`
 - Line 22: Line appears to be commented-out source code.
   `# from .frequency_state import FrequencyState`
 - Line 23: Line appears to be commented-out source code.
@@ -35,7 +35,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - ... and 81 more.
 
 ---
-### workers/SPLINKER - early thigns - archive/XXX - utils_display_monitor.py
+### workers/splinker_archive/utils_display_monitor.py
 #### Journal/History Comment
 - Line 5: Change log or version history found in file header.
   `# # Author: Anthony Peter Kuzub`
@@ -63,7 +63,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - ... and 65 more.
 
 ---
-### workers/SPLINKER - early thigns - archive/bandwidth_presets.py
+### workers/splinker_archive/bandwidth_presets.py
 #### Journal/History Comment
 - Line 10: Change log or version history found in file header.
   `# # Author: Anthony Peter Kuzub`
@@ -91,7 +91,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - ... and 47 more.
 
 ---
-### workers/SPLINKER - early thigns - archive/manager_presets_span.py
+### workers/splinker_archive/presets_span.py
 #### Journal/History Comment
 - Line 10: Change log or version history found in file header.
   `# # Author: Anthony Peter Kuzub`
@@ -109,7 +109,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - Line 29: Line appears to be commented-out source code.
   `# from loguru import logger`
 - Line 32: Line appears to be commented-out source code.
-  `# from workers.Command_Router.mqtt.worker_mqtt_controller_util import MqttControllerUtility`
+  `# from workers.Command_Router.mqtt.mqtt_controller_util import MqttControllerUtility`
 - Line 37: Line appears to be commented-out source code.
   `# class SpanSettingsManager:`
 - Line 42: Line appears to be commented-out source code.
@@ -119,7 +119,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - ... and 40 more.
 
 ---
-### workers/SPLINKER - early thigns - archive/bandwidth_yak_communicator.py
+### workers/splinker_archive/bandwidth_yak_communicator.py
 #### Journal/History Comment
 - Line 10: Change log or version history found in file header.
   `# # Author: Anthony Peter Kuzub`
@@ -147,7 +147,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - ... and 40 more.
 
 ---
-### workers/SPLINKER - early thigns - archive/xxx - utils_scan_view.py
+### workers/splinker_archive/xxx_utils_scan_view.py
 #### Journal/History Comment
 - Line 5: Change log or version history found in file header.
   `# # Author: Anthony Peter Kuzub`
@@ -175,7 +175,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - ... and 36 more.
 
 ---
-### workers/SPLINKER - early thigns - archive/frequency_yak_communicator.py
+### workers/splinker_archive/frequency_yak_communicator.py
 #### Journal/History Comment
 - Line 10: Change log or version history found in file header.
   `# # Author: Anthony Peter Kuzub`
@@ -193,7 +193,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - Line 28: Line appears to be commented-out source code.
   `# from loguru import logger`
 - Line 31: Line appears to be commented-out source code.
-  `# from workers.Command_Router.mqtt.worker_mqtt_controller_util import MqttControllerUtility`
+  `# from workers.Command_Router.mqtt.mqtt_controller_util import MqttControllerUtility`
 - Line 32: Line appears to be commented-out source code.
   `# from .frequency_state import FrequencyState`
 - Line 38: Line appears to be commented-out source code.
@@ -203,7 +203,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - ... and 34 more.
 
 ---
-### workers/SPLINKER - early thigns - archive/bandwidth_callbacks.py
+### workers/splinker_archive/bandwidth_callbacks.py
 #### Journal/History Comment
 - Line 5: Change log or version history found in file header.
   `# # Author: Anthony Peter Kuzub`
@@ -231,7 +231,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - ... and 16 more.
 
 ---
-### workers/SPLINKER - early thigns - archive/dc_load_yak.py
+### workers/splinker_archive/dc_load_yak.py
 #### Commented-out Code
 - Line 5: Line appears to be commented-out source code.
   `# from workers.logger.logger import initialize_logging, set_log_directory`
@@ -256,7 +256,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - ... and 10 more.
 
 ---
-### workers/SPLINKER - early thigns - archive/psu_yak.py
+### workers/splinker_archive/psu_yak.py
 #### Commented-out Code
 - Line 5: Line appears to be commented-out source code.
   `# from workers.logger.logger import initialize_logging, set_log_directory`
@@ -281,7 +281,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - ... and 10 more.
 
 ---
-### workers/SPLINKER - early thigns - archive/signal_generator_yak.py
+### workers/splinker_archive/signal_generator_yak.py
 #### Commented-out Code
 - Line 5: Line appears to be commented-out source code.
   `# from workers.logger.logger import initialize_logging, set_log_directory`
@@ -306,7 +306,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - ... and 10 more.
 
 ---
-### workers/SPLINKER - early thigns - archive/relay_driver_yak.py
+### workers/splinker_archive/relay_driver_yak.py
 #### Commented-out Code
 - Line 5: Line appears to be commented-out source code.
   `# from workers.logger.logger import initialize_logging, set_log_directory`
@@ -331,7 +331,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - ... and 6 more.
 
 ---
-### workers/SPLINKER - early thigns - archive/bandwidth_state.py
+### workers/splinker_archive/bandwidth_state.py
 #### Journal/History Comment
 - Line 5: Change log or version history found in file header.
   `# # Author: Anthony Peter Kuzub`
@@ -359,7 +359,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - ... and 3 more.
 
 ---
-### workers/SPLINKER - early thigns - archive/oscilloscope_yak.py
+### workers/splinker_archive/oscilloscope_yak.py
 #### Commented-out Code
 - Line 5: Line appears to be commented-out source code.
   `# from workers.logger.logger import initialize_logging, set_log_directory`
@@ -384,7 +384,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
 - ... and 3 more.
 
 ---
-### workers/SPLINKER - early thigns - archive/dmm_yak.py
+### workers/splinker_archive/dmm_yak.py
 #### Commented-out Code
 - Line 5: Line appears to be commented-out source code.
   `# from workers.logger.logger import initialize_logging, set_log_directory`
@@ -408,7 +408,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
   `#         return "N/A"  # Placeholder for query`
 
 ---
-### workers/Command_Router/Mqtt_Manager/mqtt_manager.py
+### workers/Command_Router/Mqtt/mqtt.py
 #### Journal/History Comment
 - Line 6: Change log or version history found in file header.
   `# Author: Anthony Peter Kuzub`
@@ -431,7 +431,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
   `#     self._publish_async("OPEN-AIR/System/Status/Broker/Stats", orjson.dumps(formatted_stats).decode())`
 
 ---
-### managers/Display/builder/gui_mqtt_manager.py
+### managers/Display/builder/gui_mqtt.py
 #### Journal/History Comment
 - Line 5: Change log or version history found in file header.
   `# Author: Anthony Peter Kuzub`
@@ -463,7 +463,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
   `#     self._publish_initial_widget_states(self.config_data)`
 
 ---
-### managers/yak/manager_yakety_yak.py
+### managers/yak/yakety_yak.py
 #### Journal/History Comment
 - Line 6: Change log or version history found in file header.
   `# Author: Anthony Peter Kuzub`
@@ -503,7 +503,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
   `# for module, level in self.active_filters.items():`
 
 ---
-### workers/Command_Router/mqtt/worker_mqtt_controller_util.py
+### workers/Command_Router/mqtt/mqtt_controller_util.py
 #### Journal/History Comment
 - Line 5: Change log or version history found in file header.
   `# Author: Anthony Peter Kuzub`
@@ -516,7 +516,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
   `# def subscribe(self, topic):`
 
 ---
-### managers/manager_launcher.py
+### managers/launcher.py
 #### Journal/History Comment
 - Line 6: Change log or version history found in file header.
   `# Author: Anthony Peter Kuzub`
@@ -527,7 +527,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
   `# if getattr(app_constants, "SCAN_OSC", False):`
 
 ---
-### managers/Visa_Fleet_Manager/visa_proxy_fleet.py
+### managers/Visa_Fleet/visa_proxy_fleet.py
 #### Journal/History Comment
 - Line 5: Change log or version history found in file header.
   `# Author: Gemini Agent`
@@ -539,7 +539,7 @@ Analyzed codebase for commented-out code, redundant comments, journal headers, a
   `# self.shutdown() # Removed to prevent recursive shutdown calls if set_instrument_instance(None) is called during shutdown`
 
 ---
-### workers/Worker_Launcher.py
+### workers/Launcher.py
 #### Journal/History Comment
 - Line 20: Change log or version history found in file header.
   `# Author: Anthony Peter Kuzub`

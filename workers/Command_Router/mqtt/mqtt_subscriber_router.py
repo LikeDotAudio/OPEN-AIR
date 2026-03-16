@@ -81,7 +81,7 @@ class MqttSubscriberRouter:
         if topic_filter.startswith(f"{self._base_topic}/") or topic_filter == self._root_topic:
             if self._root_topic not in self._active_broker_subscriptions:
                 self._active_broker_subscriptions.add(self._root_topic)
-                from workers.Command_Router.mqtt.mqtt_connection_manager import MqttConnectionManager
+                from workers.Command_Router.mqtt.mqtt_connection import MqttConnectionManager
                 MqttConnectionManager().subscribe(self._root_topic)
             return
 
@@ -89,7 +89,7 @@ class MqttSubscriberRouter:
             return
 
         self._active_broker_subscriptions.add(topic_filter)
-        from workers.Command_Router.mqtt.mqtt_connection_manager import MqttConnectionManager
+        from workers.Command_Router.mqtt.mqtt_connection import MqttConnectionManager
         MqttConnectionManager().subscribe(topic_filter)
 
     def unsubscribe_from_topic(self, topic_filter: str, callback_func: Callable[[MqttMessage], None]):

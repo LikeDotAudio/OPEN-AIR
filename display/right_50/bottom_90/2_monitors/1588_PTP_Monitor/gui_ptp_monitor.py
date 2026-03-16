@@ -14,7 +14,7 @@ from .core.ptp_data_processor import PTPDataProcessor
 from .core.ptp_meter_panel import PTPMeterPanel
 from .core.ptp_dissector_engine import PTPDissectorEngine
 
-from managers.PTP.ptp_manager import register_ptp_callback, unregister_ptp_callback
+from managers.PTP.ptp import register_ptp_callback, unregister_ptp_callback
 from managers.configini.config_reader import Config
 from workers.styling.style import THEMES, DEFAULT_THEME
 from managers.Display.transparency.transparency_mixin import TransparencyMixin

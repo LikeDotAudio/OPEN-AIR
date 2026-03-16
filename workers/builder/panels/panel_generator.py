@@ -17,7 +17,7 @@ from .core.layer_metal_fold import MetalFoldLayer
 BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from workers.logger.logger import builder_logger
 from managers.configini.config_reader import Config
-from managers.Display.factory.asset_cache_manager import AssetCacheManager
+from managers.Display.factory.asset_cache import AssetCacheManager
 
 class PanelGenerator:
     """

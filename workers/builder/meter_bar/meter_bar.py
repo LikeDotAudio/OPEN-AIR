@@ -13,7 +13,7 @@ from workers.logger.logger import initialize_logging, set_log_directory, builder
 from loguru import logger
 
 from .smart_meter import SmartMeter
-from managers.Display.transparency.transparency_manager import TransparencyManager
+from managers.Display.transparency.transparency import TransparencyManager
 from managers.Display.factory.widget_registry import WidgetRegistry
 
 @WidgetRegistry.register("_BarGraph", "_SmartMeter", "MeterBar", "_MeterBar")

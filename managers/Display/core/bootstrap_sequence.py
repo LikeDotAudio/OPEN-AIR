@@ -3,17 +3,17 @@ import traceback
 from loguru import logger
 
 # --- Framework Imports ---
-from workers.Command_Router.mqtt.mqtt_connection_manager import MqttConnectionManager
+from workers.Command_Router.mqtt.mqtt_connection import MqttConnectionManager
 from workers.Command_Router.mqtt.mqtt_subscriber_router import MqttSubscriberRouter
-from workers.Command_Router.State_Cache.state_cache_manager import StateCacheManager
+from workers.Command_Router.State_Cache.state_cache import StateCacheManager
 from workers.logic.state_mirror_engine import StateMirrorEngine
 from workers.Command_Router.protocol_router import ProtocolRouter
 
 # --- External Managers ---
-from workers.Command_Router.OSC.osc_manager import OSCManager
-from workers.Command_Router.SNMP.snmp_manager import SNMPManager
-from workers.Command_Router.MIDI.midi_manager import MidiManager
-from workers.Splinker.splinker_manager import SplinkerManager
+from workers.Command_Router.OSC.osc import OSCManager
+from workers.Command_Router.SNMP.snmp import SNMPManager
+from workers.Command_Router.MIDI.midi import MidiManager
+from workers.Splinker.splinker import SplinkerManager
 
 class AsyncBootstrapEngine:
     """Manages the non-blocking initialization sequence for UI and Comms."""

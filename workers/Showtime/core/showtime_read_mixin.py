@@ -1,5 +1,5 @@
 from loguru import logger
-from workers.importers.worker_importer_loader import maker_file_check_for_markers_file
+from workers.importers.loader import maker_file_check_for_markers_file
 
 class ShowtimeReadMixin:
     """

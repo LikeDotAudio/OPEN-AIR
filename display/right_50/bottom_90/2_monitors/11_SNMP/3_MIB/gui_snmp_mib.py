@@ -3,7 +3,7 @@ from tkinter import ttk
 import os
 from loguru import logger
 from managers.Display.transparency.transparency_mixin import TransparencyMixin
-from workers.initialization.worker_project_paths import SNMP_CURRENT_MIB
+from workers.initialization.project_paths import SNMP_CURRENT_MIB
 
 class SnmpMib(tk.Frame, TransparencyMixin):
     """

@@ -21,7 +21,7 @@ The script maintains a list of `EXTERNAL_PACKAGES` (things we need from PyPI) an
 ## 📚 **Imports**
 *   `os`, `sys`, `subprocess`: For running system commands and pip. 🖥️
 *   `importlib`: (Implicitly used via `__import__`).
-*   `managers.configini.config_builder`: To update config after install. 🏗️
+*   `managers.configini.config`: To update config after install. 🏗️
 *   `managers.configini.config_reader`: (Referenced in comments, but avoided to prevent circular deps).
 
 ---

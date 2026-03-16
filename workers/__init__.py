@@ -1,4 +1,4 @@
-# workers/__init__.py
+# workers/init.py
 #
 # Initializes the workers package.
 #

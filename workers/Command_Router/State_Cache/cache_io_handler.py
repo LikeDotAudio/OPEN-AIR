@@ -30,7 +30,7 @@ from managers.configini.config_reader import Config
 
 app_config = Config.get_instance()
 
-import workers.initialization.worker_project_paths as app_constants
+import workers.initialization.project_paths as app_constants
 
 current_version = "20251230.230000.1"
 current_version_hash = 20251230 * 230000 * 1

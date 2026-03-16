@@ -20,18 +20,18 @@ from tkinter import ttk
 import pathlib
 
 # --- Module Imports ---
-from managers.Display.builder.window_manager import WindowManager
+from managers.Display.builder.window import WindowManager
 from managers.Display.loader.module_loader import ModuleLoader
 from managers.Display.parser.layout_parser import LayoutParser
 from workers.styling.style import THEMES, DEFAULT_THEME
-from workers.initialization.worker_project_paths import LAYOUT_CACHE_PATH
+from workers.initialization.project_paths import LAYOUT_CACHE_PATH
 from managers.Display.factory.widget_registry import WidgetRegistry
 
 # --- EXTRACTED CORE MODULES ---
-from managers.Display.builder.core.layout_cache_manager import LayoutCacheManager
-from managers.Display.builder.core.directory_builder import DirectoryBuilderMixin
-from managers.Display.builder.core.tab_manager import TabManagerMixin
-from managers.Display.builder.core.navigation_manager import NavigationManagerMixin
+from managers.Display.builder.core.layout_cache import LayoutCacheManager
+from managers.Display.builder.core.directory import DirectoryBuilderMixin
+from managers.Display.builder.core.tab import TabManagerMixin
+from managers.Display.builder.core.navigation import NavigationManagerMixin
 
 class Application(
     ttk.Frame,

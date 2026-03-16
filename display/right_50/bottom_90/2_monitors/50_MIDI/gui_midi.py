@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import datetime
-from workers.builder.midi_keyboard.builder_midi_keyboard import MidiKeyboard, get_midi_color
+from workers.builder.midi_keyboard.midi_keyboard import MidiKeyboard, get_midi_color
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True

@@ -15,7 +15,7 @@ The codebase heavily utilizes silent `except: pass` blocks, particularly in UI r
 - **Risk**: High. If discovery fails due to a library bug or local permission issue, it fails silently, and the user simply sees "0 devices found" without knowing why.
 - **Recommendation**: Catch `socket.error` and `zeroconf.Error` specifically and log them at the `DEBUG` level.
 
-### 2. `managers/Visa_Fleet_Manager/Prototype/cli_visa_find.py`
+### 2. `managers/Visa_Fleet/Prototype/cli_visa_find.py`
 - **Violation**: Multiple generic `except:` and `except Exception:` blocks.
 - **Risk**: High. This is a core hardware management utility. Silent failures here lead to "ghost instruments" that are connected but unresponsive, with no error trail.
 - **Recommendation**: Refactor `query_device_safe` to use a retry decorator and log the specific VISA error on final failure.

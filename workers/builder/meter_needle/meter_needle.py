@@ -20,7 +20,7 @@ from .integration.state_linker import StateLinker
 from .core.rendering_engine import MeterRenderingEngine
 from .core.visual_helpers import MeterVisualHelpers
 from managers.Display.transparency.transparency_mixin import TransparencyMixin
-from managers.Display.transparency.transparency_manager import TransparencyManager
+from managers.Display.transparency.transparency import TransparencyManager
 from managers.Display.factory.widget_registry import WidgetRegistry
 
 class BuilderMeterNeedleCreator(TransparencyMixin):

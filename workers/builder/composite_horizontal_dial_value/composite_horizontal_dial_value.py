@@ -17,7 +17,7 @@ from managers.Display.context.widget_context import WidgetContext
 from workers.builder.fader_horizontal.fader_horizontal import BuilderFaderHorizontalCreator
 from workers.builder.knob.knob import BuilderKnobCreator
 from managers.Display.transparency.transparency_mixin import TransparencyMixin
-from managers.Display.transparency.transparency_manager import TransparencyManager
+from managers.Display.transparency.transparency import TransparencyManager
 from managers.Display.factory.widget_registry import WidgetRegistry
 
 # --- EXTRACTED CORE MODULES ---

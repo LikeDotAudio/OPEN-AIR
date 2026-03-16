@@ -893,7 +893,7 @@ Analyzed codebase for magic numbers, short variables, noise words, and poor func
   `return tuple(int(c[i:i+2], 16) for i in (0, 2, 4))`
 
 ---
-### managers/Display/transparency/transparency_manager.py
+### managers/Display/transparency/transparency.py
 #### Function Naming
 - Line 16: Function 'cleanup' may not be a verb phrase.
   `def cleanup(builder_instance):`
@@ -926,7 +926,7 @@ Analyzed codebase for magic numbers, short variables, noise words, and poor func
   `hex_bg = '#%02x%02x%02x' % center_rgb[:3]`
 
 ---
-### workers/builder/data_graphing/core/view_controller.py
+### workers/builder/graphing/core/view_controller.py
 #### Short Variable Name
 - Line 14: Variable 'x' is too short for its scope.
   `bbox, x, y = self.ax.bbox, event.x, event.y`
@@ -1061,7 +1061,7 @@ Analyzed codebase for magic numbers, short variables, noise words, and poor func
   `def pick_group_color(self, name):`
 
 ---
-### assets/Stand Alone Utilities/SUB APP - CSV to json APP/csvtojson.py
+### assets/Stand_Alone_Utilities/SUB_APP_CSV_to_json_APP/csvtojson.py
 #### Magic Number
 - Line 29: Literal '10' should be a named constant.
   `top = tk.Frame(self, padx=10, pady=10); top.pack(fill=tk.X)`
@@ -1247,7 +1247,7 @@ Analyzed codebase for magic numbers, short variables, noise words, and poor func
   `v = self.config.get("reff_point", self.config.get("zero_point"))`
 
 ---
-### workers/builder/data_radar/data_radar.py
+### workers/builder/radar/radar.py
 #### Function Naming
 - Line 29: Function 'make_data_radar' may not be a verb phrase.
   `def make_data_radar(self, parent_widget, config_data, context=None, **kwargs):`
@@ -1407,7 +1407,7 @@ Analyzed codebase for magic numbers, short variables, noise words, and poor func
 - ... and 1 more.
 
 ---
-### display/right_50/bottom_90/4_Splinker/222_ Editor/gui_splinker_editor.py
+### display/right_50/bottom_90/4_Splinker/222_Editor/gui_splinker_editor.py
 #### Magic Number
 - Line 57: Literal '5' should be a named constant.
   `mode_frame = tk.LabelFrame(self.editor_frame, text="Communication Mode", bg="#2b2b2b", fg="#888888", pady=5)`

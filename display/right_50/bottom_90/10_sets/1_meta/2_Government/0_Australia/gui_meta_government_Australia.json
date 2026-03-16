@@ -1,0 +1,32 @@
+{
+  "datasets_meta_Government_Australia": {
+    "type": "OcaBlock",
+    "id": "50.90.10.1.2.0",
+    "description": "JSON Tree Viewer for Government Australia",
+    "layout_columns": 1,
+    "fields": {
+      "Data_Tree": {
+        "type": "JsonTree",
+        "label_active": "Government Australia",
+        "json_source": "display/right_50/bottom_90/10_sets/1_meta/2_Government/0_Australia/meta_government_Australia.json",
+        "height": 50,
+        "alpha": 0.9,
+        "layout": {
+          "sticky": "nsew",
+          "weight_y": 1,
+          "pady": 0
+        },
+        "ALLOW": {
+          "filter": true,
+          "browse": false,
+          "edit": true,
+          "expand_all": true,
+          "save_as": true,
+          "table_toggle": true
+        },
+        "show_values": true
+      }
+    },
+    "show_label": false
+  }
+}

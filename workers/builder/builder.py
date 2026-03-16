@@ -24,21 +24,21 @@ app_constants = Config.get_instance()
 from workers.styling.style import DEFAULT_THEME, THEMES
 
 # --- 1. CORE MIXINS ---
-from managers.Display.styling.gui_style_manager import GuiStyleMixin
+from managers.Display.styling.gui_style import GuiStyleMixin
 from managers.Display.factory.gui_widget_factory import GuiWidgetFactoryMixin
-from managers.Display.builder.gui_mqtt_manager import GuiMqttManagerMixin
+from managers.Display.builder.gui_mqtt import GuiMqttManagerMixin
 from managers.Display.loader.gui_file_loader import GuiFileLoaderMixin
-from managers.Display.builder.gui_rebuilder import GuiRebuilderMixin
-from managers.Display.builder.gui_batch_builder import GuiBatchBuilderMixin
+from managers.Display.builder.gui_re import GuiRebuilderMixin
+from managers.Display.builder.gui_batch import GuiBatchBuilderMixin
 from managers.Display.transparency.transparency_mixin import TransparencyMixin
 
 # --- EXTRACTED CORE MODULES ---
-from workers.builder.core.builder_context_menu import BuilderContextMenuMixin
-from workers.builder.core.builder_background_manager import BuilderBackgroundManagerMixin
-from workers.builder.core.builder_slicing_registry import BuilderSlicingRegistryMixin
+from workers.builder.core.context_menu import BuilderContextMenuMixin
+from workers.builder.core.background import BuilderBackgroundManagerMixin
+from workers.builder.core.slicing_registry import BuilderSlicingRegistryMixin
 
 # --- 2. DECOUPLED SERVICES ---
-from managers.Display.transparency.transparency_manager import TransparencyManager
+from managers.Display.transparency.transparency import TransparencyManager
 from managers.Display.telemetry.ui_tracking_service import UITrackingService
 
 # --- 3. HIDDEN FEATURES ---

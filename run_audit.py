@@ -3,7 +3,7 @@ import ast
 import time
 
 project_root = "/home/anthony/Documents/OPEN-AIR"
-output_file = os.path.join(project_root, "TRY CATCH.txt")
+output_file = os.path.join(project_root, "TRY_CATCH.txt")
 debug_log = os.path.join(project_root, "audit_debug.log")
 
 def write_log(msg):
@@ -93,7 +93,7 @@ def process_file(filepath):
         out.flush()
 
 with open(output_file, "w", encoding="utf-8") as f:
-    f.write("TRY CATCH AUDIT\n====================\n\n")
+    f.write("TRY_CATCH AUDIT\n====================\n\n")
 with open(debug_log, "w", encoding="utf-8") as f:
     f.write("AUDIT DEBUG LOG\n====================\n\n")
 

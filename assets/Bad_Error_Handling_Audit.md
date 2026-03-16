@@ -7,7 +7,7 @@ Analyzed codebase for silent failures, generic catches, and muddled error flows.
 
 ## Top Offenders (Silent Failures & Bare Excepts)
 
-### managers/Visa_Fleet_Manager/Prototype/cli_visa_find.py
+### managers/Visa_Fleet/Prototype/cli_visa_find.py
 - Line 50: **Generic Exception catch without proper logging** (Severity: Medium)
   `except Exception:`
 - Line 75: **Bare except block** (Severity: High)
@@ -89,7 +89,7 @@ Analyzed codebase for silent failures, generic catches, and muddled error flows.
 - Line 294: **Bare except block** (Severity: Medium)
   `except:`
 
-### assets/Stand Alone Utilities/SUB APP - CSV to json APP/csvtojson.py
+### assets/Stand_Alone_Utilities/SUB_APP_CSV_to_json_APP/csvtojson.py
 - Line 80: **Generic Exception catch without proper logging** (Severity: Medium)
   `except Exception as e: messagebox.showerror("Error", str(e))`
 - Line 90: **Generic Exception catch without proper logging** (Severity: Medium)
@@ -97,7 +97,7 @@ Analyzed codebase for silent failures, generic catches, and muddled error flows.
 - Line 106: **Generic Exception catch without proper logging** (Severity: Medium)
   `except Exception as e: messagebox.showerror("Error", str(e))`
 
-### workers/builder/core/builder_slicing_registry.py
+### workers/builder/core/slicing_registry.py
 - Line 44: **Bare except block** (Severity: High)
   `except: pass`
 - Line 38: **Bare except block** (Severity: High)
@@ -113,7 +113,7 @@ Analyzed codebase for silent failures, generic catches, and muddled error flows.
 - Line 125: **Bare except block** (Severity: Medium)
   `except: channel = 0`
 
-### display/right_50/bottom_90/4_Splinker/222_ Editor/gui_splinker_editor.py
+### display/right_50/bottom_90/4_Splinker/222_Editor/gui_splinker_editor.py
 - Line 138: **Bare except block** (Severity: High)
   `except: pass`
 - Line 151: **Bare except block** (Severity: High)
@@ -127,7 +127,7 @@ Analyzed codebase for silent failures, generic catches, and muddled error flows.
 - Line 71: **Bare except block** (Severity: Medium)
   `except: on_complete()`
 
-### workers/wysiwyg_editor/workspaces/core/layout/overlay_manager.py
+### workers/wysiwyg_editor/workspaces/core/layout/overlay.py
 - Line 21: **Bare except block** (Severity: High)
   `except: pass`
 - Line 58: **Bare except block** (Severity: High)
@@ -157,19 +157,19 @@ Analyzed codebase for silent failures, generic catches, and muddled error flows.
 - Line 57: **Bare except block** (Severity: High)
   `except: pass`
 
-### workers/builder/data_graphing/graph_styler.py
+### workers/builder/graphing/graph_styler.py
 - Line 69: **Bare except block** (Severity: High)
   `except: pass`
 - Line 77: **Bare except block** (Severity: High)
   `except: pass`
 
-### workers/builder/data_graphing/core/graph_state_mixin.py
+### workers/builder/graphing/core/graph_state_mixin.py
 - Line 44: **Bare except block** (Severity: High)
   `except: pass`
 - Line 58: **Bare except block** (Severity: High)
   `except: pass`
 
-### workers/builder/data_graphing/core/graph_interaction_mixin.py
+### workers/builder/graphing/core/graph_interaction_mixin.py
 - Line 54: **Bare except block** (Severity: High)
   `except: pass`
 - Line 61: **Bare except block** (Severity: High)

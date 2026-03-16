@@ -1,6 +1,6 @@
 import os
 from PIL import Image, ImageDraw, ImageFont
-import workers.initialization.worker_project_paths as project_paths
+import workers.initialization.project_paths as project_paths
 
 def create_bar_graph_image(
     value,

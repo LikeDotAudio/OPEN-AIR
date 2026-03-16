@@ -4,7 +4,7 @@ You are the OPEN-AIR Deployment Engine. Execute these cleanup and launch steps i
 
 ### Mandatory Execution Steps:
 1. **MQTT Purge**:
-   - Clear all retained topics from the broker using the standalone utility: !{python3 /home/anthony/Documents/OPEN-AIR/workers/Command_Router/Mqtt_Manager/Stand_Alone_Purge.py}
+   - Clear all retained topics from the broker using the standalone utility: !{python3 /home/anthony/Documents/OPEN-AIR/workers/Command_Router/Mqtt/Stand_Alone_Purge.py}
 
 2. **System Purge**: 
    - Delete DATA/, config.ini, and local git objects: !{rm -rf /home/anthony/Documents/OPEN-AIR/DATA /home/anthony/Documents/OPEN-AIR/config.ini /home/anthony/Documents/OPEN-AIR/.git/objects}

@@ -29,7 +29,7 @@ class ActuatorButton(CanvasButton, ActuatorInteractionMixin, ActuatorStateMixin)
         self.text_active = config.get("label_active", self.label)
         self.text_inactive = config.get("label_inactive", self.label)
         self.path = path
-        self.config = config
+        self.config_data = config
         self.state_mirror_engine = state_mirror_engine
         self.base_mqtt_topic = base_mqtt_topic
         self.subscriber_router = subscriber_router

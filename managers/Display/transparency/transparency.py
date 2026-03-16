@@ -6,6 +6,17 @@ from PIL import ImageTk
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
+# Dimension and Coordinate Constants
+MIN_WIDGET_DIMENSION = 1
+PRE_LAYOUT_DIMENSION_LIMIT = 1
+JITTER_THRESHOLD_PIXELS = 2
+CENTER_SAMPLE_DIVISOR = 2
+
+# Structural and Theme Constants
+STRUCTURAL_WIDGET_TYPES = ["OcaBlock", "OcaBin", "OcaArray", "OcaCollapsibleBlock", "Block", "Array", "Bin"]
+THEME_BACKGROUND_COLORS = ["#2b2b2b", "#3c3f41", "#4e5254", "#1a1a1a", "#000000", "#dcdcdc", "#f0f0f0"]
+DEFAULT_THEME_BACKGROUND = "#2b2b2b"
+
 class TransparencyManager:
     """
     Centralized engine for Industrial Transparency.
@@ -13,220 +24,212 @@ class TransparencyManager:
     """
     
     @staticmethod
-    def cleanup(builder_instance):
+    def cleanup_transparency_context(builder):
         """
         Clears the slicing registry and image references for a builder.
         Call this during tab closure or complete GUI rebuilds.
         """
-        if LOCAL_DEBUG: logger.trace(f"TransparencyManager: Cleaning up context for {builder_instance}")
-        if hasattr(builder_instance, '_slicing_registry'):
-            builder_instance._slicing_registry.clear()
+        if LOCAL_DEBUG: 
+            logger.trace(f"TransparencyManager: Cleaning up context for {builder}")
+        
+        if hasattr(builder, '_slicing_registry'):
+            builder._slicing_registry.clear()
         
         # Force a system garbage collection after a major cleanup
         import gc
         gc.collect()
 
     @staticmethod
-    def apply_transparency(widget, canvas, config, builder_instance):
+    def apply_industrial_transparency(widget, canvas, configuration, builder):
         """
         Registers a widget for background slicing.
         Gated: Only applies if no background color is explicitly set or if 'transparent' is true.
         """
-        if not widget or not builder_instance:
-            if LOCAL_DEBUG: logger.warning(f"TransparencyManager: Missing widget or builder_instance. Widget: {widget}, Builder: {builder_instance}")
+        if not widget or not builder:
+            if LOCAL_DEBUG: 
+                logger.warning(f"TransparencyManager: Missing widget or builder. Widget: {widget}, Builder: {builder}")
             return
 
-        # ⚡ DEBUG: Check builder_instance capabilities
-        has_registry = hasattr(builder_instance, 'register_for_slicing')
-        has_bg = hasattr(builder_instance, 'panel_bg_pil')
-        
         # 1. Determine if transparency is appropriate
-        # By default, everything is transparent unless it has a solid non-theme color
-        
         # Check various common background keys
-        bg = config.get("bg_color") or config.get("bg") or config.get("background_color")
-        if not bg:
-            # Check nested style config
-            style = config.get("style", {})
-            if isinstance(style, dict):
-                bg = style.get("background_color") or style.get("bg_color") or style.get("bg")
+        background_color = configuration.get("bg_color") or configuration.get("bg") or configuration.get("background_color")
+        if not background_color:
+            # Check nested style configuration
+            style_settings = configuration.get("style", {})
+            if isinstance(style_settings, dict):
+                background_color = style_settings.get("background_color") or style_settings.get("bg_color") or style_settings.get("bg")
         
-        # ⚡ VIRTUAL CONTAINER AWARENESS: Structural containers should always be transparent-friendly
-        # Use robust type checking for OcaBlocks/Arrays which are implemented as tk.Canvas
-        STRUCTURAL_TYPES = ["OcaBlock", "OcaBin", "OcaArray", "OcaCollapsibleBlock", "Block", "Array", "Bin"]
-        is_struct_type = any(config.get(k) in STRUCTURAL_TYPES for k in ["type", "widget_type"])
-        is_virtual_container = is_struct_type and isinstance(widget, tk.Canvas)
+        # Structural containers should always be transparent-friendly
+        is_structural_type = any(configuration.get(key) in STRUAL_WIDGET_TYPES for key in ["type", "widget_type"])
+        is_virtual_container = is_structural_type and isinstance(widget, tk.Canvas)
         
-        # If it's a standard hex color like #2b2b2b, we assume it's the theme and allow transparency
-        # If it's "transparent", "None", or empty, definitely transparent.
-        bg_str = str(bg).lower() if bg else ""
+        background_string = str(background_color).lower() if background_color else ""
         
-        # ⚡ THEME AWARENESS: These colors are part of the theme and should be treated as transparent
-        THEME_COLORS = ["#2b2b2b", "#3c3f41", "#4e5254", "#1a1a1a", "#000000", "#dcdcdc", "#f0f0f0"]
-        is_explicitly_solid = (bg and str(bg).startswith("#") and bg_str not in THEME_COLORS)
-        is_explicitly_transparent = (bg_str in ["transparent", "none", "match_theme"]) or (config.get("transparent") is True) or is_virtual_container
+        # Theme awareness: treat certain colors as transparent
+        is_explicitly_solid = (background_color and str(background_color).startswith("#") and background_string not in THEME_BACKGROUND_COLORS)
+        is_explicitly_transparent = (background_string in ["transparent", "none", "match_theme"]) or (configuration.get("transparent") is True) or is_virtual_container
         
-        if LOCAL_DEBUG: logger.trace(f"TransparencyManager: Applying to {widget}. BG: {bg_str}, Solid: {is_explicitly_solid}, Trans: {is_explicitly_transparent}")
+        if LOCAL_DEBUG: 
+            logger.trace(f"TransparencyManager: Applying to {widget}. BG: {background_string}, Solid: {is_explicitly_solid}, Trans: {is_explicitly_transparent}")
 
         # Explicit override to DISABLE
-        if config.get("transparent") is False:
-            if LOCAL_DEBUG: logger.debug(f"TransparencyManager: {widget} explicitly disabled via config.")
+        if configuration.get("transparent") is False:
+            if LOCAL_DEBUG: 
+                logger.debug(f"TransparencyManager: {widget} explicitly disabled via configuration.")
             return
             
         # If forced transparent, ignore solid color check
         if is_explicitly_solid and not is_explicitly_transparent:
-            if LOCAL_DEBUG: logger.debug(f"TransparencyManager: {widget} skipped due to solid color: {bg_str}")
+            if LOCAL_DEBUG: 
+                logger.debug(f"TransparencyManager: {widget} skipped due to solid color: {background_string}")
             return
 
         # 2. Define slicing logic
-        def _perform_slice(source_bg_pil=None, scroll_ref=None, scroll_root_x=None, scroll_root_y=None):
-            if not widget.winfo_exists(): return
+        def _perform_background_slice(source_background_pil=None, scroll_reference=None, scroll_root_x=None, scroll_root_y=None):
+            if not widget.winfo_exists(): 
+                return
             
             # If we have a separate canvas for drawing, use it for the slice
-            draw_target = canvas if canvas and canvas.winfo_exists() else widget
+            rendering_target = canvas if canvas and canvas.winfo_exists() else widget
             
-            # Get background source
-            source = source_bg_pil or getattr(builder_instance, 'panel_bg_pil', None)
+            # Get background source image
+            background_source = source_background_pil or getattr(builder, 'panel_bg_pil', None)
             
-            # ⚡ FALLBACK: If no source image, ensure we at least use the theme background
-            if not source:
-                # 🛡️ SILENCE: If background is explicitly 'none', theme fallback is intended.
-                bg_cfg = getattr(builder_instance, 'config_data', {}).get("background")
-                if bg_cfg == "none":
+            # Fallback: if no source image, ensure we at least use the theme background
+            if not background_source:
+                background_config = getattr(builder, 'config_data', {}).get("background")
+                if background_config == "none":
                     return 
 
-                # Only warn if we're not currently generating a new background or rebuilding
-                # Also skip if we are in early layout (1x1)
-                w, h = 0, 0
-                if draw_target.winfo_exists():
-                    w, h = draw_target.winfo_width(), draw_target.winfo_height()
+                target_width, target_height = 0, 0
+                if rendering_target.winfo_exists():
+                    target_width = rendering_target.winfo_width()
+                    target_height = rendering_target.winfo_height()
                     
-                is_busy = getattr(builder_instance, '_is_rebuilding', False) or \
-                          (getattr(builder_instance, '_bg_task_id', 0) > 0 and getattr(builder_instance, 'panel_bg_pil', None) is None)
+                is_builder_busy = getattr(builder, '_is_rebuilding', False) or \
+                                  (getattr(builder, '_bg_task_id', 0) > 0 and getattr(builder, 'panel_bg_pil', None) is None)
                 
-                if not is_busy and w > 1 and h > 1:
-                    # ⚡ SILENCE: Theme fallback is a normal state, not a warning.
-                    if LOCAL_DEBUG: logger.trace(f"TransparencyManager: No source image for {widget}. Using theme fallback.")
+                if not is_builder_busy and target_width > PRE_LAYOUT_DIMENSION_LIMIT and target_height > PRE_LAYOUT_DIMENSION_LIMIT:
+                    if LOCAL_DEBUG: 
+                        logger.trace(f"TransparencyManager: No source image for {widget}. Using theme fallback.")
                 
-                theme_bg = "#2b2b2b" # Default
-                if hasattr(builder_instance, 'theme_colors'):
-                    theme_bg = builder_instance.theme_colors.get("bg", theme_bg)
+                theme_background = DEFAULT_THEME_BACKGROUND
+                if hasattr(builder, 'theme_colors'):
+                    theme_background = builder.theme_colors.get("bg", theme_background)
                 
-                if widget.winfo_exists() and widget.cget("bg") != theme_bg:
-                    widget.configure(bg=theme_bg)
-                if canvas and canvas.winfo_exists() and canvas.cget("bg") != theme_bg:
-                    canvas.configure(bg=theme_bg)
+                if widget.winfo_exists() and widget.cget("bg") != theme_background:
+                    widget.configure(bg=theme_background)
+                if canvas and canvas.winfo_exists() and canvas.cget("bg") != theme_background:
+                    canvas.configure(bg=theme_background)
                 return
 
-            # ⚡ OPTIMIZATION: Use root coordinates for fast relative calculation
-            # Use a small per-event cache to avoid redundant winfo_rootx calls in batch passes
-            cache = getattr(builder_instance, '_root_coord_cache', None)
+            # Use root coordinates for fast relative calculation
+            coord_cache = getattr(builder, '_root_coord_cache', None)
             
-            wx, wy = 0, 0
-            if draw_target.winfo_exists():
-                if cache is not None and id(draw_target) in cache:
-                    wx, wy = cache[id(draw_target)]
+            widget_root_x, widget_root_y = 0, 0
+            if rendering_target.winfo_exists():
+                if coord_cache is not None and id(rendering_target) in coord_cache:
+                    widget_root_x, widget_root_y = coord_cache[id(rendering_target)]
                 else:
-                    wx, wy = draw_target.winfo_rootx(), draw_target.winfo_rooty()
-                    if cache is not None: cache[id(draw_target)] = (wx, wy)
+                    widget_root_x = rendering_target.winfo_rootx()
+                    widget_root_y = rendering_target.winfo_rooty()
+                    if coord_cache is not None: 
+                        coord_cache[id(rendering_target)] = (widget_root_x, widget_root_y)
             else:
-                return # Draw target gone
+                return
             
             # Use pre-calculated scroll root or look it up
-            sx, sy = 0, 0
+            scroll_x, scroll_y = 0, 0
             if scroll_root_x is not None and scroll_root_y is not None:
-                sx, sy = scroll_root_x, scroll_root_y
+                scroll_x, scroll_y = scroll_root_x, scroll_root_y
             else:
-                # Use cache for scroll root too
-                if cache is not None and "scroll_root" in cache:
-                    sx, sy = cache["scroll_root"]
+                if coord_cache is not None and "scroll_root" in coord_cache:
+                    scroll_x, scroll_y = coord_cache["scroll_root"]
                 else:
-                    ref = scroll_ref or getattr(builder_instance, 'scroll_frame', None)
-                    if not ref or not ref.winfo_exists(): 
-                        if LOCAL_DEBUG: logger.trace(f"TransparencyManager: No scroll_frame reference for {widget} in {builder_instance}")
+                    container_ref = scroll_reference or getattr(builder, 'scroll_frame', None)
+                    if not container_ref or not container_ref.winfo_exists(): 
+                        if LOCAL_DEBUG: 
+                            logger.trace(f"TransparencyManager: No scroll_frame reference for {widget} in {builder}")
                         return
-                    sx, sy = ref.winfo_rootx(), ref.winfo_rooty()
-                    if cache is not None: cache["scroll_root"] = (sx, sy)
+                    scroll_x = container_ref.winfo_rootx()
+                    scroll_y = container_ref.winfo_rooty()
+                    if coord_cache is not None: 
+                        coord_cache["scroll_root"] = (scroll_x, scroll_y)
 
-            rel_x, rel_y = wx - sx, wy - sy
-            w, h = draw_target.winfo_width(), draw_target.winfo_height()
+            relative_x, relative_y = widget_root_x - scroll_x, widget_root_y - scroll_y
+            current_width = rendering_target.winfo_width()
+            current_height = rendering_target.winfo_height()
             
-            # ⚡ OPTIMIZATION: 1x1 is a standard 'pre-layout' state in Tkinter.
-            if w <= 1 or h <= 1: 
+            if current_width <= PRE_LAYOUT_DIMENSION_LIMIT or current_height <= PRE_LAYOUT_DIMENSION_LIMIT: 
                 return
 
-            # ⚡ JITTER FILTERING: If coordinates moved by < 2 pixels, and image ID/size is same, ignore.
-            last_state = getattr(draw_target, '_last_slice_state', (None, None, 0, 0, 0))
-            last_rx, last_ry, last_w, last_h, last_img_id = last_state
+            # Jitter filtering to avoid redundant updates
+            previous_state = getattr(rendering_target, '_last_slice_state', (None, None, 0, 0, 0))
+            last_rel_x, last_rel_y, last_width, last_height, last_image_id = previous_state
             
-            if last_img_id == id(source) and w == last_w and h == last_h and last_rx is not None:
-                dx, dy = abs(rel_x - last_rx), abs(rel_y - last_ry)
-                if dx < 2 and dy < 2:
-                    if LOCAL_DEBUG: logger.trace(f"TransparencyManager: Slice SKIPPED for {widget} (Jitter Filter). Delta: ({dx}px, {dy}px)")
+            if last_image_id == id(background_source) and current_width == last_width and current_height == last_height and last_rel_x is not None:
+                delta_x = abs(relative_x - last_rel_x)
+                delta_y = abs(relative_y - last_rel_y)
+                if delta_x < JITTER_THRESHOLD_PIXELS and delta_y < JITTER_THRESHOLD_PIXELS:
+                    if LOCAL_DEBUG: 
+                        logger.trace(f"TransparencyManager: Slice SKIPPED for {widget} (Jitter Filter). Delta: ({delta_x}px, {delta_y}px)")
                     return
 
-            current_state = (rel_x, rel_y, w, h, id(source))
+            current_slice_state = (relative_x, relative_y, current_width, current_height, id(background_source))
             
-            if LOCAL_DEBUG:
-                reason = "Image ID Change" if last_img_id != id(source) else "Coordinate Shift"
-                logger.trace(f"TransparencyManager: Slicing {widget} ({w}x{h}) at ({rel_x}, {rel_y}). Reason: {reason}")
-
             # Perform the crop
-            bw, bh = source.size
+            source_width, source_height = background_source.size
             
-            # ⚡ ROBUSTNESS: Ensure crop coordinates are within image bounds
-            x1, y1 = max(0, min(bw - 1, rel_x)), max(0, min(bh - 1, rel_y))
-            x2, y2 = max(x1 + 1, min(bw, rel_x + w)), max(y1 + 1, min(bh, rel_y + h))
+            # Robustness: Ensure crop coordinates are within image bounds
+            crop_x1 = max(0, min(source_width - 1, relative_x))
+            crop_y1 = max(0, min(source_height - 1, relative_y))
+            crop_x2 = max(crop_x1 + 1, min(source_width, relative_x + current_width))
+            crop_y2 = max(crop_y1 + 1, min(source_height, relative_y + current_height))
             
-            if x2 > x1 and y2 > y1:
-                crop = source.crop((x1, y1, x2, y2))
+            if crop_x2 > crop_x1 and crop_y2 > crop_y1:
+                image_slice = background_source.crop((crop_x1, crop_y1, crop_x2, crop_y2))
                 
-                # Update widget flat color (center sample) for safety/containers
-                center_rgb = crop.getpixel(((x2-x1)//2, (y2-y1)//2))
-                hex_bg = '#%02x%02x%02x' % center_rgb[:3]
+                # Update widget flat color for safety
+                center_color_rgb = image_slice.getpixel(((crop_x2 - crop_x1) // CENTER_SAMPLE_DIVISOR, (crop_y2 - crop_y1) // CENTER_SAMPLE_DIVISOR))
+                hex_background_color = '#%02x%02x%02x' % center_color_rgb[:3]
                 
-                # ⚡ MANDATORY: Update both container and draw target backgrounds
-                if widget.winfo_exists() and widget.cget("bg") != hex_bg:
-                    widget.configure(bg=hex_bg)
-                if draw_target != widget and draw_target.winfo_exists() and draw_target.cget("bg") != hex_bg:
-                    draw_target.configure(bg=hex_bg)
+                if widget.winfo_exists() and widget.cget("bg") != hex_background_color:
+                    widget.configure(bg=hex_background_color)
+                if rendering_target != widget and rendering_target.winfo_exists() and rendering_target.cget("bg") != hex_background_color:
+                    rendering_target.configure(bg=hex_background_color)
 
                 # If it's a canvas, draw the slice
-                if isinstance(draw_target, tk.Canvas) and draw_target.winfo_exists():
-                    tk_img = ImageTk.PhotoImage(crop)
+                if isinstance(rendering_target, tk.Canvas) and rendering_target.winfo_exists():
+                    tkinter_image = ImageTk.PhotoImage(image_slice)
                     
-                    # ⚡ MANDATORY: Keep reference on BOTH to prevent GC and support custom draw methods
-                    draw_target.panel_bg_image = tk_img
-                    draw_target.panel_bg_pil_slice = crop
-                    draw_target.panel_bg_pil = source # ⚡ Full source for masking logic
+                    rendering_target.panel_bg_image = tkinter_image
+                    rendering_target.panel_bg_pil_slice = image_slice
+                    rendering_target.panel_bg_pil = background_source
                     
-                    if widget != draw_target and widget.winfo_exists():
-                        widget.panel_bg_image = tk_img
-                        widget.panel_bg_pil_slice = crop
-                        widget.panel_bg_pil = source # ⚡ Full source
+                    if widget != rendering_target and widget.winfo_exists():
+                        widget.panel_bg_image = tkinter_image
+                        widget.panel_bg_pil_slice = image_slice
+                        widget.panel_bg_pil = background_source
                         
-                    draw_target.delete("panel_bg_slice")
-                    draw_target.create_image(0, 0, image=tk_img, anchor="nw", tags="panel_bg_slice")
-                    draw_target.tag_lower("panel_bg_slice")
+                    rendering_target.delete("panel_bg_slice")
+                    rendering_target.create_image(0, 0, image=tkinter_image, anchor="nw", tags="panel_bg_slice")
+                    rendering_target.tag_lower("panel_bg_slice")
                 
-                draw_target._last_slice_state = current_state
+                rendering_target._last_slice_state = current_slice_state
                 
                 # Trigger redraw if widget has custom drawing logic
-                if hasattr(widget, 'render'): widget.render()
-                elif hasattr(widget, '_draw'): widget._draw()
+                if hasattr(widget, 'render'): 
+                    widget.render()
+                elif hasattr(widget, '_draw'): 
+                    widget._draw()
             else:
-                # Silently skip slicing for truly off-screen widgets (common during scrolling/rebuilds)
-                if LOCAL_DEBUG: logger.trace(f"TransparencyManager: Skipping empty crop for {widget} at ({x1},{y1}) to ({x2},{y2}) [BW: {bw}, BH: {bh}]")
+                if LOCAL_DEBUG: 
+                    logger.trace(f"TransparencyManager: Skipping empty crop for {widget} at ({crop_x1},{crop_y1}) to ({crop_x2},{crop_y2})")
                 return
 
-
         # 3. Register with builder for synchronized batch reslicing
-        if hasattr(builder_instance, 'register_for_slicing'):
-            builder_instance.register_for_slicing(_perform_slice)
-        else:
-            # ⚡ OPTIMIZATION: Suppress noise. If not a DynamicGuiBuilder, transparency 
-            # might not be supported or is handled manually.
-            if LOCAL_DEBUG: logger.trace(f"TransparencyManager: builder_instance {builder_instance} ({type(builder_instance)}) missing 'register_for_slicing'")
+        if hasattr(builder, 'register_for_slicing'):
+            builder.register_for_slicing(_perform_background_slice)
         
-        # Also bind to Map to ensure we slice when first visible
-        widget.bind("<Map>", lambda e: _perform_slice(), add="+")
+        # Ensure we slice when first visible
+        widget.bind("<Map>", lambda event: _perform_background_slice(), add="+")

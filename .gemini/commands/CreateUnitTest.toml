@@ -1,0 +1,40 @@
+description = "Generates unit tests for Python files using best practices and F.I.R.S.T. principles."
+
+prompt = """
+Write a command to write unit tests for the following file(s):
+{{input}}
+
+### Principles of Clean Testing
+Test code is just as important as production code and must be treated as a first-class citizen. It requires thought, design, and care. Having an automated suite of clean unit tests is the key to keeping your design and architecture as clean as possible, because tests enable the "-ilities" of software: flexibility, maintainability, and reusability. Without tests, every change is a possible bug, which instills a fear of change that causes production code to rot.
+
+Apply the following prescriptions and best practices:
+
+#### 1. Best Practices for Writing a Stand-Alone Test
+A single test should be clear, simple, and have a high density of expression.
+- **Follow the BUILD-OPERATE-CHECK Pattern**: Structure your test into three distinct parts: building the test data (Given), operating on that data (When), and checking that the expected results occurred (Then).
+- **Test a Single Concept**: A test function should not evaluate a miscellaneous laundry list of things. Test just one concept per test function to prevent the reader from having to guess what each section is validating.
+- **Minimize Asserts**: While some advocate for exactly one assert per test, the more practical rule is to minimize the number of asserts per concept so that the test comes to a single, easily understandable conclusion.
+- **Apply a Dual Standard**: Test code must be just as clean and well-designed as production code, but it does not necessarily need to be as CPU- or memory-efficient, since it runs in a test environment rather than a production environment.
+
+#### 2. Best Practices for a Suite of Tests
+A test suite must be easy to manage and adapt as the system evolves. If the test suite becomes messy and tangled, it will take longer to add new tests than to write new production code, eventually leading teams to discard the suite entirely.
+
+**Follow the F.I.R.S.T. Principles**:
+- **Fast**: Tests should run quickly so developers are encouraged to run them constantly.
+- **Independent**: Tests should never depend on each other. One test should not set up the conditions for the next test. You must be able to run each test independently and in any order.
+- **Repeatable**: Tests should produce consistent results in any environment (production, QA, or an offline laptop).
+- **Self-Validating**: Tests must have a definitive boolean output (pass or fail). You should not have to manually read a log file or compare text outputs to know if a test passed.
+- **Timely**: Unit tests should be written just before the production code that makes them pass.
+
+- **Build a Domain-Specific Testing Language**: To make your test suite highly readable and flexible, do not rely strictly on the system's raw APIs. Instead, build a specialized set of functions and utilities designed specifically to be used by your tests.
+- **Exhaustively Test Boundaries and Bugs**: Take special care to test boundary conditions. When you find a bug, exhaustively test that specific function.
+- **Use Property-Based Testing to Validate Assumptions**: Instead of only writing tests with hard-coded values, use property-based testing frameworks to automatically generate test data according to the contracts and invariants of your code.
+
+#### 3. Writing Tests for External Code (Learning Tests)
+When you need to utilize third-party code or an external API, do not experiment in your production code. Instead, write "learning tests". Learning tests are controlled experiments that check your understanding of the third-party API by calling it exactly as you expect to use it in your application. These tests act as boundary tests.
+
+**Instructions**:
+- Do not suggest dirty tests.
+- Each `.py` file should have a corresponding test file.
+- Ensure the tests are idiomatic and follow the project's architecture.
+"""

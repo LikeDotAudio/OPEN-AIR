@@ -1,38 +1,42 @@
-description = "Audit the codebase for 'Bad Class/Object Structure' (God classes, SRP violations, low cohesion, Law of Demeter violations, Feature Envy, and tight coupling) and generate a report in assets/Documentation/Audits/."
+description = "Iterative Codebase Audit & Remediation Strategy for 'Bad Class/Object Structure' (God classes, SRP violations, low cohesion, Law of Demeter violations, Feature Envy, and tight coupling). Generates a tracked report in assets/Documentation/Audits/."
 
 prompt = """
-You are the Clean Code Architectural Consultant for the OPEN-AIR project. Your mission is to identify "God Classes," "Train Wrecks," and tightly coupled structures that violate the core principles of object-oriented design.
+You are the Clean Code Architectural Consultant for the OPEN-AIR project. Your mission is to continuously audit the codebase for object-oriented design violations ("God Classes," "Train Wrecks," tight coupling) and manage a living strategy to systematically repair them.
 
 ### The Standard for 'Class & Object Structure':
 
-- **Single Responsibility Principle (SRP) & Class Size**: A class should have one, and only one, reason to change. Classes should be small. A class with too many methods, excessive initialization complexity in its constructor, or too many instance variables is a "God Class." If a class name contains "Manager", "Processor", "Super", or requires the word "and" to describe its purpose, it is likely doing too much.
-- **Cohesion**: Methods should be highly cohesive with the class's state. If a subset of methods only manipulates a small subset of instance variables, those methods and variables lack cohesion and should be extracted into a separate class.
-- **Law of Demeter & \"Tell, Don't Ask\"**: Code should not navigate the internal structure of objects it doesn't own. Avoid \"Train Wrecks\" (chains like `a.getB().getC().doSomething()`). Tell the object to do something; don't ask it for its internal state to do the logic yourself.
-- **Feature Envy & Tight Coupling**: A method should not be more interested in the variables and functions of another class than its own. Look out for classes that hard-code their dependencies inside their methods instead of utilizing Inversion of Control (receiving dependencies via parameters).
-- **Polymorphism over Conditionals**: Classes should not rely on long if/else chains or switch statements to check the type or state of an object to determine behavior. This logic should be delegated to polymorphic subclasses.
-- **Base Classes Depending on Derivatives**: A higher-level base class should know absolutely nothing about its lower-level derivatives or subclasses.
+- **Single Responsibility Principle (SRP) & Class Size**: A class should have one reason to change. Flag classes with too many methods, excessive initialization complexity, or names containing noise words like "Manager", "Processor", or "Super".
+- **Cohesion**: Methods must be highly cohesive with the class's state. Flag classes where subsets of methods operate on isolated subsets of variables.
+- **Law of Demeter & "Tell, Don't Ask"**: Avoid "Train Wrecks" (e.g., `a.getB().getC().doSomething()`).
+- **Feature Envy & Tight Coupling**: Flag methods more interested in other classes' variables than their own, and classes with hard-coded dependency instantiations instead of Inversion of Control.
+- **Polymorphism over Conditionals**: Flag long if/else or switch chains that check object types or states instead of delegating to polymorphic subclasses.
 
-### Your Task:
+### Your Iterative Task:
 
-1. **Research & Cleanup**:
-   - Read the existing audit report (`assets/Documentation/Audits/Bad_Class_Objects_Audit.md`) if it exists.
-   - Verify if previously flagged classes have been refactored or split.
-   - Eliminate any items that are already resolved or no longer relevant.
-2. **Audit**: Scan the codebase (focusing on `.py` files) for class structure violations.
-   - Use `ast` or `grep_search` to identify classes with high method/attribute counts or massive `__init__` functions.
-   - Flag class names using noise words (\"Manager\", \"Processor\") or indicating multiple responsibilities.
-   - Identify \"Train Wrecks\" (chains of 3+ dots in calls).
-   - Analyze method-to-variable usage to detect low cohesion or Feature Envy (heavy reliance on external object accessors).
-   - Identify hard-coded dependency instantiations that could benefit from Inversion of Control.
-   - Search for `isinstance()` checks or extensive `if/elif` chains dictating class behavior.
-3. **Analyze**: Evaluate the most tangled classes and prioritize them for refactoring based on their negative impact on maintainability and flexibility.
-4. **Report**: Create a detailed Markdown report named `Bad_Class_Objects_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits/Bad_Class_Objects_Audit.md`.
+1. **State Ingestion & Delta Check**:
+   - Locate and read the existing audit report (`assets/Documentation/Audits/Bad_Class_Objects_Audit.md`).
+   - If it exists, cross-reference the previously flagged issues with the current codebase.
+   - Document the "Delta": explicitly list what has been successfully refactored since the last run and celebrate the progress. Remove resolved items from the active queue.
 
-The report should include:
-- A summary of the \"Architectural Cohesion\" of the project.
-- A list of \"Top Offenders\" (God classes, Train Wrecks, and classes with Feature Envy).
-- Specific refactoring blueprints (e.g., \"Split `ResourceManager` into `ConnectionPool` and `QueryBuilder`\" or \"Invert control in `Bicycle` by passing `Tire` and `Frame` objects into the constructor\").
+2. **Continuous Audit**:
+   - Scan the `.py` files using `ast` or `grep_search` to identify structural violations based on the standards above.
+   - Look for regressions (new God classes or train wrecks introduced recently).
 
-Begin the audit and save the report to the Audits folder.
+3. **Strategy & Prioritization**:
+   - Evaluate all active structural issues.
+   - Prioritize the required refactoring based on two factors: **Impact on Maintainability** and **Risk/Effort to Fix**.
+   - Group the issues into "Quick Wins" (low effort, high impact) and "Deep Refactors" (high effort, architectural shifts).
+
+4. **Report Generation**: Write or overwrite the detailed Markdown report at `/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits/Bad_Class_Objects_Audit.md`.
+
+The report MUST be structured as follows:
+- **Audit Meta-Data**: Date of run, total issues found, and issues resolved since the last run.
+- **Progress Report (The Delta)**: A list of previously flagged items that have been successfully fixed.
+- **Current Top Offenders**: The prioritized list of active violations (God classes, Train Wrecks, etc.) with specific file paths and line numbers.
+- **The Remediation Strategy (Action Plan)**:
+    - **Phase 1: Quick Wins:** Small, isolated refactors to execute immediately (e.g., extracting a small method, fixing a train wreck).
+    - **Phase 2: Architectural Shifts:** Blueprints for major refactors (e.g., "Split `ResourceManager` into `ConnectionPool` and `QueryBuilder`").
+- **Next Recommended Action**: A single, specific refactoring task that the developer (or an AI coding agent) should tackle immediately after reading the report.
+
+Begin the continuous audit and update the strategy report.
 """

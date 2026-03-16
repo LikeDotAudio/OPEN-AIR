@@ -59,7 +59,7 @@ class LayoutParser:
     @staticmethod
     def _scan_for_gui_files(path: pathlib.Path) -> bool:
         """
-        Recursively checks if a folder or any of its sub-folders contain a 'gui_*.json' file.
+        Recursively checks if a folder or any of its sub-folders contain a '.json' or '.py' file.
         Uses os.scandir for speed and caches results.
         """
         path_str = str(path)
@@ -73,7 +73,9 @@ class LayoutParser:
                 for entry in it:
                     if entry.is_file():
                         name = entry.name
-                        if name.startswith("gui_") and (name.endswith(".json") or name.endswith(".py")):
+                        # Acceptance criteria: any .json or .py file (excluding __init__ and layout.json)
+                        if (name.endswith(".json") or name.endswith(".py")) and \
+                           name != "layout.json" and not name.startswith("__"):
                             result = True
                             break
                     elif entry.is_dir() and not entry.name.startswith("__"):
@@ -243,7 +245,7 @@ class LayoutParser:
 
         # 3. Fallback to simple directory listing
         gui_files = sorted(
-            [f for f in path.iterdir() if f.is_file() and f.name.startswith("gui_") and (f.suffix == ".json" or f.suffix == ".py")]
+            [f for f in path.iterdir() if f.is_file() and (f.suffix == ".json" or f.suffix == ".py") and f.name != "layout.json" and not f.name.startswith("__")]
         )
         content_dirs = [d for d in sub_dirs if d not in layout_dirs and d not in potential_tab_dirs]
 

@@ -185,3 +185,31 @@ Message: Critical API Restoration
 - Resolved 'data_logger' is not defined in workers/Command_Router/State_Cache/state_cache.py by adding it to the logger imports
 ### [2026-03-16 00:52:00] Fixed ModuleNotFoundError in DynamicGuiBuilder
 - Resolved 'workers.builder.breakoff_manager' not found by updating import to 'workers.builder.breakoff.hidden_breakoff'
+**************************************
+Commit: 887020356757de9f5ab312a5585bbbb243ff8e96
+Date: 2026-03-16 00:50:11
+Message: ### [2026-03-16 00:52:00] Fixed ModuleNotFoundError in DynamicGuiBuilder
+**************************************## [2026-03-16 01:00:00] Major Naming and Containerization Refactor
+- Flattened redundant 'display/' directory structures.
+- Grouped 'workers/builder' widgets into logical sub-containers.
+- Removed redundant 'gui_' and 'showtime_' prefixes from files.
+- Consolidated 'config_reader.py' and 'hidden_breakoff.py' sources of truth.
+- Renamed 'Mqtt_Manager' to 'core' and merged redundant MQTT directories.
+### [2026-03-16 01:05:00] Fixed ModuleNotFoundError in Builder and Factory
+- Updated over 30 files with corrected import paths after the massive widget migration to 'workers/builder/widgets/'.
+- Restored functionality to 'DynamicGuiBuilder', 'BuilderBackgroundManagerMixin', and 'FactoryMapping'.
+### [2026-03-16 01:10:00] Graphing Component Mapping and VISA Discovery Orchestrator Fixes
+- Registered 'plot_widget' and 'bar_graph' to 'PlotWidgetAdapterMixin' in 'managers/Display/factory/core/factory_mapping.py' to fix UI bootstrapping errors.
+- Fixed 'NameError' in 'workers/discovery_agents/discovery_orchestrator.py' by correctly aliasing 'visa_Search' to 'manager_visa_Search'.
+- Resolved circular import between 'managers/Visa_Fleet/__init__.py' and 'discovery_orchestrator.py'.
+### [2026-03-16 01:15:00] UI Widget Resolution and Showtime Refactor Fixes
+- Registered 'OcaFold' in 'factory_mapping.py' to resolve unknown widget errors in spectrum layouts.
+- Fixed Showtime module loading by updating ShowtimeTab import path and removing 'gui_' prefix from monitor modules.
+### [2026-03-16 01:18:00] Fixed circular ImportError in VisaFleetManager
+- Updated 'managers/Visa_Fleet/visa_fleet.py' to import 'DiscoveryOrchestrator' directly from 'workers.discovery_agents', resolving the breakage caused by removing the circular package-level import.
+### [2026-03-16 01:23:00] Enforced Minimum Window Size
+- Set absolute minimum window dimensions to 800x600 in 'UIWindowManager' to prevent the UI from collapsing when moved between displays.
+### [2026-03-16 01:35:00] Fixed Component Registration and Graphing Imports
+- Resolved 'OcaFold' AttributeErrors by correctly implementing 'BuilderBreakLineCreator' and leveraging the dynamic WidgetRegistry.
+- Fixed 'ModuleNotFoundError' in graphing mixins by updating import paths to the new categorized structure.
+- Optimized VISA device probing in 'VisaUtilityParser' by removing redundant 'list_resources' calls and adding robust error handling.

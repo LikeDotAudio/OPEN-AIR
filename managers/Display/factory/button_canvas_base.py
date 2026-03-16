@@ -3,6 +3,17 @@ import tkinter as tk
 from PIL import Image, ImageDraw, ImageTk, ImageFont, ImageFilter, ImageChops
 from loguru import logger
 
+# --- Constants ---
+DEFAULT_CORNER_RADIUS = 6
+DEFAULT_PADDING = 4
+MIN_SIZE_FOR_TEXTURE = 12
+GLOW_SAMPLES = 15
+DEFAULT_GLOW_RED = 255
+DEFAULT_GLOW_GREEN = 150
+DEFAULT_GLOW_BLUE = 0
+DEFAULT_FONT_SIZE = 12
+MAX_ALPHA = 255
+
 class CanvasButton(tk.Canvas):
     """
     A custom Canvas-based button that supports photorealistic 'Backlit Glass Bar' rendering.
@@ -10,7 +21,7 @@ class CanvasButton(tk.Canvas):
     """
     def __init__(self, parent, text, command, 
                  width=100, height=50, 
-                 corner_radius=6, 
+                 corner_radius=DEFAULT_CORNER_RADIUS, 
                  pillow_mode=False,
                  bg_color=None, 
                  active_color="#FF9900", 
@@ -114,49 +125,49 @@ class CanvasButton(tk.Canvas):
 
     def _generate_rect_glass_texture(self, width, height, is_active, is_hovered, text, base_color, glow_color):
         image = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-        pad = 4
-        if width < 12 or height < 12: return ImageTk.PhotoImage(image)
+        padding = DEFAULT_PADDING
+        if width < MIN_SIZE_FOR_TEXTURE or height < MIN_SIZE_FOR_TEXTURE: return ImageTk.PhotoImage(image)
         
-        r = min(self.corner_radius, (width - pad*2)//2, (height - pad*2)//2)
+        radius = min(self.corner_radius, (width - padding*2)//2, (height - padding*2)//2)
         
         # 0. Shadow
         shadow_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-        ImageDraw.Draw(shadow_layer).rounded_rectangle((pad-1, pad-1, width-pad+1, height-pad+1), radius=r+1, fill=(0, 0, 0, 150))
+        ImageDraw.Draw(shadow_layer).rounded_rectangle((padding-1, padding-1, width-padding+1, height-padding+1), radius=radius+1, fill=(0, 0, 0, 150))
         shadow_layer = shadow_layer.filter(ImageFilter.GaussianBlur(radius=2))
         image = Image.alpha_composite(image, shadow_layer)
 
         # 1. Well
         well_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
         well_draw = ImageDraw.Draw(well_layer)
-        well_draw.rounded_rectangle((pad, pad, width-pad, height-pad), radius=r, fill="#0a0a0a", outline=(26, 26, 26, 180), width=1)
-        if height > pad*2 + 6:
-            well_draw.rounded_rectangle((pad+1, pad+1, width-pad-1, pad+5), radius=r, fill="#000000")
+        well_draw.rounded_rectangle((padding, padding, width-padding, height-padding), radius=radius, fill="#0a0a0a", outline=(26, 26, 26, 180), width=1)
+        if height > padding*2 + 6:
+            well_draw.rounded_rectangle((padding+1, padding+1, width-padding-1, padding+5), radius=radius, fill="#000000")
         image = Image.alpha_composite(image, well_layer)
 
         # 2. Body
-        inner_pad = pad + 1
+        inner_pad = padding + 1
         body_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
         body_draw = ImageDraw.Draw(body_layer)
-        body_draw.rounded_rectangle((inner_pad, inner_pad, width-inner_pad, height-inner_pad), radius=r, fill=self._get_color(self.active_bg_color if is_active else self.bg_color))
+        body_draw.rounded_rectangle((inner_pad, inner_pad, width-inner_pad, height-inner_pad), radius=radius, fill=self._get_color(self.active_bg_color if is_active else self.bg_color))
         
         if is_active:
             glow_layer = Image.new("RGBA", (width, height), (0,0,0,0))
-            g_draw = ImageDraw.Draw(glow_layer)
-            try: r_c, g_c, b_c = Image.new("RGB", (1,1), glow_color).getpixel((0,0))
+            glow_draw = ImageDraw.Draw(glow_layer)
+            try: red, green, blue = Image.new("RGB", (1,1), glow_color).getpixel((0,0))
             except Exception as e:
                 logger.trace(f"Error getting glow color {glow_color}: {e}")
-                r_c, g_c, b_c = 255, 150, 0
+                red, green, blue = DEFAULT_GLOW_RED, DEFAULT_GLOW_GREEN, DEFAULT_GLOW_BLUE
             
-            for i in range(15):
-                alpha = int(255 * (0.1 + 0.9 * ((i/15)**2)) * self.glow_intensity)
-                hot = (i/15)**3
-                current_col = (int(r_c+(255-r_c)*hot), int(g_c+(255-g_c)*hot), int(b_c+(255-b_c)*hot), alpha)
-                sx, sy = int(width*0.8*(1-i/15)), int(height*1.5*(1-i/15))
-                g_draw.ellipse((width//2-sx, height//2-sy, width//2+sx, height//2+sy), fill=current_col)
+            for i in range(GLOW_SAMPLES):
+                alpha = int(MAX_ALPHA * (0.1 + 0.9 * ((i/GLOW_SAMPLES)**2)) * self.glow_intensity)
+                hot = (i/GLOW_SAMPLES)**3
+                current_col = (int(red+(MAX_ALPHA-red)*hot), int(green+(MAX_ALPHA-green)*hot), int(blue+(MAX_ALPHA-blue)*hot), alpha)
+                sx, sy = int(width*0.8*(1-i/GLOW_SAMPLES)), int(height*1.5*(1-i/GLOW_SAMPLES))
+                glow_draw.ellipse((width//2-sx, height//2-sy, width//2+sx, height//2+sy), fill=current_col)
             body_layer = Image.alpha_composite(body_layer, glow_layer.filter(ImageFilter.GaussianBlur(radius=8)))
 
         mask = Image.new("L", (width, height), 0)
-        ImageDraw.Draw(mask).rounded_rectangle((inner_pad, inner_pad, width-inner_pad, height-inner_pad), radius=r, fill=255)
+        ImageDraw.Draw(mask).rounded_rectangle((inner_pad, inner_pad, width-inner_pad, height-inner_pad), radius=radius, fill=MAX_ALPHA)
         temp_body = Image.new("RGBA", (width, height), (0, 0, 0, 0))
         temp_body.paste(body_layer, (0, 0), mask)
         image = Image.alpha_composite(image, temp_body)
@@ -164,74 +175,74 @@ class CanvasButton(tk.Canvas):
         # 3. Legend
         if text:
             draw = ImageDraw.Draw(image)
-            f_size = self.active_font_size if is_active else self.inactive_font_size
-            if not f_size: f_size = int(self.font_info[1]) if len(self.font_info)>1 else 12
-            try: font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf", f_size)
+            font_size = self.active_font_size if is_active else self.inactive_font_size
+            if not font_size: font_size = int(self.font_info[1]) if len(self.font_info)>1 else DEFAULT_FONT_SIZE
+            try: font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf", font_size)
             except Exception as e:
                 logger.trace(f"Error loading font: {e}")
                 font = ImageFont.load_default()
             
             # ⚡ HIGH-PRECISION CENTERING: Use anchor="mm" and align="center"
-            tx, ty = width / 2, height / 2
-            if is_hovered: ty += 1
-            draw.text((tx, ty), text, font=font, fill=self.active_text_color if is_active else self.text_color, anchor="mm", align="center")
+            text_x, text_y = width / 2, height / 2
+            if is_hovered: text_y += 1
+            draw.text((text_x, text_y), text, font=font, fill=self.active_text_color if is_active else self.text_color, anchor="mm", align="center")
 
         return ImageTk.PhotoImage(image)
 
     def _generate_circular_glass_texture(self, width, height, is_active, is_hovered, text, base_color, glow_color):
         image = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-        pad = 4
-        if width < 12 or height < 12: return ImageTk.PhotoImage(image)
+        padding = DEFAULT_PADDING
+        if width < MIN_SIZE_FOR_TEXTURE or height < MIN_SIZE_FOR_TEXTURE: return ImageTk.PhotoImage(image)
         
-        r = (min(width, height) - pad*2) // 2
-        cx, cy = width//2, height//2
+        radius = (min(width, height) - padding*2) // 2
+        center_x, center_y = width//2, height//2
         
         # 0. Shadow
         shadow_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-        ImageDraw.Draw(shadow_layer).ellipse((cx-r-1, cy-r-1, cx+r+1, cy+r+1), fill=(0, 0, 0, 150))
+        ImageDraw.Draw(shadow_layer).ellipse((center_x-radius-1, center_y-radius-1, center_x+radius+1, center_y+radius+1), fill=(0, 0, 0, 150))
         image = Image.alpha_composite(image, shadow_layer.filter(ImageFilter.GaussianBlur(radius=2)))
 
         # 1. Well
         well_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-        ImageDraw.Draw(well_layer).ellipse((cx-r, cy-r, cx+r, cy+r), fill="#0a0a0a", outline=(26, 26, 26, 180), width=1)
+        ImageDraw.Draw(well_layer).ellipse((center_x-radius, center_y-radius, center_x+radius, center_y+radius), fill="#0a0a0a", outline=(26, 26, 26, 180), width=1)
         image = Image.alpha_composite(image, well_layer)
 
         # 2. Body
-        body_r = r - 1
+        body_radius = radius - 1
         body_layer = Image.new("RGBA", (width, height), (0, 0, 0, 0))
         body_draw = ImageDraw.Draw(body_layer)
-        body_draw.ellipse((cx-body_r, cy-body_r, cx+body_r, cy+body_r), fill=self.active_bg_color if is_active else self.bg_color)
+        body_draw.ellipse((center_x-body_radius, center_y-body_radius, center_x+body_radius, center_y+body_radius), fill=self.active_bg_color if is_active else self.bg_color)
         
         if is_active:
             glow_layer = Image.new("RGBA", (width, height), (0,0,0,0))
-            g_draw = ImageDraw.Draw(glow_layer)
-            try: r_c, g_c, b_c = Image.new("RGB", (1,1), glow_color).getpixel((0,0))
+            glow_draw = ImageDraw.Draw(glow_layer)
+            try: red, green, blue = Image.new("RGB", (1,1), glow_color).getpixel((0,0))
             except Exception as e:
                 logger.trace(f"Error getting circular glow color {glow_color}: {e}")
-                r_c, g_c, b_c = 255, 150, 0
-            for i in range(15):
-                alpha = int(255 * (0.2+0.8*((i/15)**2)) * self.glow_intensity)
-                hot = (i/15)**4
-                curr_r = int(body_r*1.2*(1-i/15))
-                g_draw.ellipse((cx-curr_r, cy-curr_r, cx+curr_r, cy+curr_r), fill=(int(r_c+(255-r_c)*hot), int(g_c+(255-g_c)*hot), int(b_c+(255-b_c)*hot), alpha))
+                red, green, blue = DEFAULT_GLOW_RED, DEFAULT_GLOW_GREEN, DEFAULT_GLOW_BLUE
+            for i in range(GLOW_SAMPLES):
+                alpha = int(MAX_ALPHA * (0.2+0.8*((i/GLOW_SAMPLES)**2)) * self.glow_intensity)
+                hot = (i/GLOW_SAMPLES)**4
+                curr_radius = int(body_radius*1.2*(1-i/GLOW_SAMPLES))
+                glow_draw.ellipse((center_x-curr_radius, center_y-curr_radius, center_x+curr_radius, center_y+curr_radius), fill=(int(red+(MAX_ALPHA-red)*hot), int(green+(MAX_ALPHA-green)*hot), int(blue+(MAX_ALPHA-blue)*hot), alpha))
             body_layer = Image.alpha_composite(body_layer, glow_layer.filter(ImageFilter.GaussianBlur(radius=6)))
 
         mask = Image.new("L", (width, height), 0)
-        ImageDraw.Draw(mask).ellipse((cx-body_r, cy-body_r, cx+body_r, cy+body_r), fill=255)
+        ImageDraw.Draw(mask).ellipse((center_x-body_radius, center_y-body_radius, center_x+body_radius, center_y+body_radius), fill=MAX_ALPHA)
         temp_body = Image.new("RGBA", (width, height), (0, 0, 0, 0))
         temp_body.paste(body_layer, (0, 0), mask)
         image = Image.alpha_composite(image, temp_body)
 
         if text:
             draw = ImageDraw.Draw(image)
-            try: font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf", 12)
+            try: font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf", DEFAULT_FONT_SIZE)
             except Exception as e:
                 logger.trace(f"Error loading circular font: {e}")
                 font = ImageFont.load_default()
             # ⚡ HIGH-PRECISION CENTERING: Use anchor="mm" and align="center"
-            tx, ty = width / 2, height / 2
-            if is_hovered: ty += 1
-            draw.text((tx, ty), text, font=font, fill=self.active_text_color if is_active else self.text_color, anchor="mm", align="center")
+            text_x, text_y = width / 2, height / 2
+            if is_hovered: text_y += 1
+            draw.text((text_x, text_y), text, font=font, fill=self.active_text_color if is_active else self.text_color, anchor="mm", align="center")
 
         return ImageTk.PhotoImage(image)
 

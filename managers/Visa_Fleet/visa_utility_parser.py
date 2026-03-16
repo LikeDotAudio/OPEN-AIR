@@ -53,13 +53,9 @@ class VisaUtilityParser:
     @staticmethod
     def query_device_safe(rm, resource_str, attempt=1, timeout=VISA_TIMEOUT):
         """Safely queries *IDN? from a VISA resource with defensive pre-checks."""
-        # ⚡ DEFENSIVE CHECK: Verify resource exists in system before opening
-        available_resources = rm.list_resources()
-        if resource_str not in available_resources:
-            logger.warning(f"      💳⚠️ [VISA] Resource {resource_str} not found in system.")
-            return None
-
+        
         # ⚡ NETWORK PRE-CHECK: If TCPIP, verify port 5025 (standard SCPI) or 111 (VXI-11) is open
+        # This prevents blocking on dead IP addresses before PyVISA even tries.
         if "TCPIP" in resource_str:
             details = VisaUtilityParser.parse_resource_details(resource_str)
             ip = details["IP"]
@@ -81,19 +77,29 @@ class VisaUtilityParser:
                         return None
 
         # If we reach here, we have high confidence the resource is reachable.
-        # We proceed with PyVISA calls. If they still throw, it's a fatal HW error.
-        inst = rm.open_resource(resource_str)
-        inst.timeout = timeout
-        inst.read_termination = "\n"
-        inst.write_termination = "\n"
+        # We proceed with PyVISA calls.
+        inst = None
+        try:
+            inst = rm.open_resource(resource_str)
+            inst.timeout = timeout
+            # Standard SCPI terminations
+            inst.read_termination = "\n"
+            inst.write_termination = "\n"
 
-        raw_idn = inst.query("*IDN?")
-        idn = VisaUtilityParser.clean_string_for_display(raw_idn)
-        inst.close()
+            raw_idn = inst.query("*IDN?")
+            idn = VisaUtilityParser.clean_string_for_display(raw_idn)
+            return idn if idn else None
 
-        if not idn:
+        except pyvisa.errors.VisaIOError as e:
+            logger.debug(f"      💳⚠️ [VISA] IO Error for {resource_str}: {e.description}")
             return None
-        return idn
+        except Exception as e:
+            logger.debug(f"      💳⚠️ [VISA] Unexpected error probing {resource_str}: {e}")
+            return None
+        finally:
+            if inst:
+                try: inst.close()
+                except: pass
 
     @staticmethod
     def get_local_ip():
@@ -101,8 +107,11 @@ class VisaUtilityParser:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         # connect() on a UDP socket doesn't actually send a packet, 
         # so it's extremely unlikely to throw.
-        s.connect(("10.255.255.255", 1))
-        IP = s.getsockname()[0]
-        s.close()
+        try:
+            s.connect(("10.255.255.255", 1))
+            IP = s.getsockname()[0]
+        except:
+            IP = "127.0.0.1"
+        finally:
+            s.close()
         return IP
-

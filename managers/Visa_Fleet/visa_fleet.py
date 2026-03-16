@@ -11,8 +11,8 @@ from workers.logger.logger import builder_logger
 from managers.configini.config_reader import Config
 app_constants = Config.get_instance()
 
-# Note: DiscoveryOrchestrator is expected to be available in the same package
-from managers.Visa_Fleet import DiscoveryOrchestrator
+# Note: DiscoveryOrchestrator is imported from discovery_agents
+from workers.discovery_agents.discovery_orchestrator import DiscoveryOrchestrator
 from managers.Visa_Fleet.visa_json import VisaJsonBuilder
 from managers.Visa_Fleet.fleet_mqtt_bridge import MqttFleetBridge
 from managers.Visa_Fleet.visa_csv import VisaCsvBuilder

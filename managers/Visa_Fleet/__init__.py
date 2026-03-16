@@ -4,4 +4,3 @@
 # It will build upon the existing VisaScipi module to provide
 # concurrent, device-specific control and management.
 
-from workers.discovery_agents.discovery_orchestrator import DiscoveryOrchestrator

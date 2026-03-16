@@ -118,7 +118,7 @@ class ModuleLoader:
                 found_py = []
                 with os.scandir(path_str) as it:
                     for entry in it:
-                        if entry.is_file() and entry.name.startswith("gui_"):
+                        if entry.is_file() and not entry.name.startswith("__") and entry.name != "layout.json":
                             if entry.name.endswith(".json"):
                                 found_json.append(pathlib.Path(entry.path))
                             elif entry.name.endswith(".py"):
@@ -129,9 +129,9 @@ class ModuleLoader:
                 else: return None
             except (FileNotFoundError, PermissionError): return None
 
-        elif path.is_file() and path.name.startswith("gui_"):
-            if path.suffix == ".json": json_path = path
-            elif path.suffix == ".py": python_path = path
+        elif path.is_file():
+            if path.suffix == ".json" and path.name != "layout.json": json_path = path
+            elif path.suffix == ".py" and not path.name.startswith("__"): python_path = path
             else: return None
         else: return None
 

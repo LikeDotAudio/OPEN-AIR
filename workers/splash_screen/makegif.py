@@ -29,24 +29,41 @@ FPS = 20
 WIDTH, HEIGHT = 6, 2.5
 BG_COLOR = "black"
 
+# --- Constants ---
+X_LIMIT_MAX = 4 * np.pi
+Y_LIMIT_MAX = 22
+NUM_BARS = 120
+BAR_WIDTH = 0.08
+ENVELOPE_COEFFICIENT = -0.025
+ENVELOPE_RANGE_LIMIT = 10
+SPIKE_TRIGGER_CENTER = 3.5
+SPIKE_TRIGGER_STEEPNESS = -8
+LINE_OFFSET_STANDARD = 0.2
+LINE_OFFSET_ELECTRIC = 0.3
+BASE_HEIGHT_LAYER1 = 6
+BASE_HEIGHT_LAYER2 = 8
+BASE_HEIGHT_LAYER3 = 10
+BASE_HEIGHT_LAYER4 = 7
+BASE_HEIGHT_LAYER5 = 18
+
 # --- Setup Figure ---
 fig = plt.figure(figsize=(WIDTH, HEIGHT), facecolor=BG_COLOR)
 fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
 
 # --- 2. Setup Wave Axes ---
-ax = fig.add_axes([0, 0.0, 1, 1.0], facecolor=BG_COLOR)
-ax.set_axis_off()
-ax.set_ylim(0, 22)
-ax.set_xlim(0, 4 * np.pi)
+axes = fig.add_axes([0, 0.0, 1, 1.0], facecolor=BG_COLOR)
+axes.set_axis_off()
+axes.set_ylim(0, Y_LIMIT_MAX)
+axes.set_xlim(0, X_LIMIT_MAX)
 
 # --- 3. Data & Objects ---
-num_bars = 120
-x_vals = np.linspace(0, 4 * np.pi, num_bars)
+num_bars = NUM_BARS
+x_vals = np.linspace(0, X_LIMIT_MAX, num_bars)
 
 # Gradient (Orange -> Blue)
 colors = ["#FF4500", "#FF8C00", "#FFD700", "#40E0D0", "#1E90FF"]
-cm = LinearSegmentedColormap.from_list("orange_blue", colors, N=num_bars)
-bar_colors = cm(np.linspace(0, 1, num_bars))
+colormap = LinearSegmentedColormap.from_list("orange_blue", colors, N=num_bars)
+bar_colors = colormap(np.linspace(0, 1, num_bars))
 
 
 # Creates a set of bar and line objects for a single layer of the wave animation.
@@ -59,45 +76,45 @@ bar_colors = cm(np.linspace(0, 1, num_bars))
 #     alpha_line (float): The transparency (alpha) for the line plot.
 # Outputs:
 #     tuple: A tuple containing a list of bar objects and a line object.
-def create_layer(alpha_bar, color_line, width_line, alpha_line):
+def create_wave_layer(alpha_bar, color_line, width_line, alpha_line):
     # Always use the standard 'bar_colors' gradient
-    bars = ax.bar(
-        x_vals, np.zeros(num_bars), width=0.08, color=bar_colors, alpha=alpha_bar
+    bars = axes.bar(
+        x_vals, np.zeros(num_bars), width=BAR_WIDTH, color=bar_colors, alpha=alpha_bar
     )
-    (line) = ax.plot([], [], color=color_line, linewidth=width_line, alpha=alpha_line)
+    (line) = axes.plot([], [], color=color_line, linewidth=width_line, alpha=alpha_line)
     return bars, line
 
 
 # --- CREATE 5 LAYERS (All Gradient) ---
 # 1. Deep Background
-bars1, line1 = create_layer(0.15, "#1E90FF", 1.0, 0.3)
+bars1, line1 = create_wave_layer(0.15, "#1E90FF", 1.0, 0.3)
 # 2. Ghost
-bars2, line2 = create_layer(0.25, "#3633FD", 1.5, 0.5)
+bars2, line2 = create_wave_layer(0.25, "#3633FD", 1.5, 0.5)
 # 3. Main
-bars3, line3 = create_layer(0.70, "white", 2.5, 0.9)
+bars3, line3 = create_wave_layer(0.70, "white", 2.5, 0.9)
 # 4. Electric
-bars4, line4 = create_layer(0.40, "#FFD700", 1.0, 0.7)
+bars4, line4 = create_wave_layer(0.40, "#FFD700", 1.0, 0.7)
 
 # 5. HARMONIC SPIKE
 # Removed color override. Now uses standard gradient bars.
 # Line is White to show intensity (matching Main layer).
-bars5, line5 = create_layer(0.60, "#FFA600", 2.0, 0.9)
+bars5, line5 = create_wave_layer(0.60, "#FFA600", 2.0, 0.9)
 
 # --- ENVELOPE (Wide Edges) ---
-envelope = np.exp(-0.025 * (np.linspace(-10, 10, num_bars)) ** 2)
+envelope = np.exp(ENVELOPE_COEFFICIENT * (np.linspace(-ENVELOPE_RANGE_LIMIT, ENVELOPE_RANGE_LIMIT, num_bars)) ** 2)
 
 
-# Calculates the height of the wave pattern at a given time `t`.
+# Calculates the height of the wave pattern at a given time `time_phase`.
 # This function generates a dynamic wave based on sine functions, x-coordinates,
 # and time-dependent offsets, contributing to the animation's movement.
 # Inputs:
-#     t (float): The current time in the animation cycle.
+#     time_phase (float): The current time in the animation cycle.
 #     offset_x (float): An x-axis offset for the wave.
 #     offset_t (float): A time-based offset for the wave.
 # Outputs:
 #     numpy.ndarray: An array of wave heights.
-def get_wave(t, offset_x, offset_t):
-    return np.abs(np.sin(x_vals + offset_x - t) * np.sin(0.5 * x_vals + t + offset_t))
+def calculate_wave_height(time_phase, offset_x, offset_t):
+    return np.abs(np.sin(x_vals + offset_x - time_phase) * np.sin(0.5 * x_vals + time_phase + offset_t))
 
 
 # Updates the animation for each frame.
@@ -108,49 +125,49 @@ def get_wave(t, offset_x, offset_t):
 #     frame (int): The current frame number in the animation sequence.
 # Outputs:
 #     list: A list of all updated Matplotlib artists (bars and lines) for the frame.
-def update(frame):
+def update_animation_frame(frame):
     progress = frame / FRAMES
-    t = 2 * np.pi * progress  # Perfect Loop
+    time_phase = 2 * np.pi * progress  # Perfect Loop
 
     # --- MATH FOR LAYERS ---
 
     # 1. Deep Background
-    h1 = get_wave(t, 1.0, 0) * envelope * 6 * (1.0 + 0.1 * np.sin(t))
+    height_layer1 = calculate_wave_height(time_phase, 1.0, 0) * envelope * BASE_HEIGHT_LAYER1 * (1.0 + 0.1 * np.sin(time_phase))
 
     # 2. Ghost
-    h2 = get_wave(t, 2.0, 1.5) * envelope * 8 * (1.0 + 0.15 * np.sin(2 * t))
+    height_layer2 = calculate_wave_height(time_phase, 2.0, 1.5) * envelope * BASE_HEIGHT_LAYER2 * (1.0 + 0.15 * np.sin(2 * time_phase))
 
     # 3. Main
-    raw_main = get_wave(t, 0, 0) + (np.abs(np.sin(2 * x_vals - t * 2) * 0.3))
-    h3 = raw_main * envelope * 10 * (1.0 + 0.1 * np.sin(t))
+    raw_main = calculate_wave_height(time_phase, 0, 0) + (np.abs(np.sin(2 * x_vals - time_phase * 2) * 0.3))
+    height_layer3 = raw_main * envelope * BASE_HEIGHT_LAYER3 * (1.0 + 0.1 * np.sin(time_phase))
 
     # 4. Electric
-    raw_elec = get_wave(t * 2, 0.5, 3.0)
-    h4 = raw_elec * envelope * 7 * (1.0 + 0.2 * np.sin(3 * t))
+    raw_elec = calculate_wave_height(time_phase * 2, 0.5, 3.0)
+    height_layer4 = raw_elec * envelope * BASE_HEIGHT_LAYER4 * (1.0 + 0.2 * np.sin(3 * time_phase))
 
     # 5. THE HARMONIC SPIKE
     # Trigger Logic: Active around t=3.5
-    spike_trigger = np.exp(-8 * (t - 3.5) ** 2)
+    spike_trigger = np.exp(SPIKE_TRIGGER_STEEPNESS * (time_phase - SPIKE_TRIGGER_CENTER) ** 2)
 
     # Harmonics: Sharp peaks
-    harmonics = np.abs(np.sin(12 * x_vals - t * 5) * np.sin(18 * x_vals + t))
-    h5 = harmonics * envelope * 18 * spike_trigger
+    harmonics = np.abs(np.sin(12 * x_vals - time_phase * 5) * np.sin(18 * x_vals + time_phase))
+    height_layer5 = harmonics * envelope * BASE_HEIGHT_LAYER5 * spike_trigger
 
     # --- UPDATE PLOTS ---
-    def update_set(bars, line, heights, line_offset):
-        for bar, h in zip(bars, heights):
-            bar.set_height(h)
+    def update_layer_set(bars, line, heights, line_offset):
+        for bar, height in zip(bars, heights):
+            bar.set_height(height)
         line.set_data(x_vals, heights + line_offset)
 
     # All lines now sit tight to the bars (offset 0.2)
     # This keeps them on the "Same X Axis" visually
-    update_set(bars1, line1, h1, 0.2)
-    update_set(bars2, line2, h2, 0.2)
-    update_set(bars3, line3, h3, 0.2)
-    update_set(bars4, line4, h4, 0.3)
+    update_layer_set(bars1, line1, height_layer1, LINE_OFFSET_STANDARD)
+    update_layer_set(bars2, line2, height_layer2, LINE_OFFSET_STANDARD)
+    update_layer_set(bars3, line3, height_layer3, LINE_OFFSET_STANDARD)
+    update_layer_set(bars4, line4, height_layer4, LINE_OFFSET_ELECTRIC)
 
     # Spike layer also sits tight
-    update_set(bars5, line5, h5, 0.2)
+    update_layer_set(bars5, line5, height_layer5, LINE_OFFSET_STANDARD)
 
     return (
         list(bars1)
@@ -164,7 +181,7 @@ def update(frame):
 
 # --- 5. Generate and Save ---
 print(f"Generating {FRAMES} frames (Standard Colors)...")
-ani = animation.FuncAnimation(fig, update, frames=FRAMES, blit=False)
+ani = animation.FuncAnimation(fig, update_animation_frame, frames=FRAMES, blit=False)
 ani.save(
     FILENAME, writer="pillow", fps=FPS, savefig_kwargs={"facecolor": BG_COLOR}, dpi=100
 )

@@ -42,13 +42,13 @@ from managers.Display.transparency.transparency import TransparencyManager
 from managers.Display.telemetry.ui_tracking_service import UITrackingService
 
 # --- 3. HIDDEN FEATURES ---
-from .breakoff.hidden_breakoff import HiddenBreakoffManagerMixin
+from .widgets.utils.breakoff.hidden_breakoff import HiddenBreakoffManagerMixin
 
 # --- 4. UTILITIES ---
-from workers.builder.input_mousewheel_mixin.input_mousewheel_mixin import (
+from workers.builder.widgets.input.input_mousewheel_mixin.input_mousewheel_mixin import (
     MousewheelScrollMixin,
 )
-from workers.builder.panels.panel_generator import PanelGenerator
+from workers.builder.widgets.utils.panels.panel_generator import PanelGenerator
 from PIL import ImageTk
 from managers.Display.context.widget_context import WidgetContext
 

@@ -26,6 +26,11 @@ class UIWindowManager:
         
         root.title("OPEN-AIR (Partitioned UI)")
         
+        # ⚡ ENFORCE MINIMUM SIZE: Prevent the window from collapsing (e.g., when moving between screens)
+        WINDOW_MIN_WIDTH, WINDOW_MIN_HEIGHT = 800, 600
+        root.minsize(WINDOW_MIN_WIDTH, WINDOW_MIN_HEIGHT)
+        logger.debug(f"Enforced minimum window size: {WINDOW_MIN_WIDTH}x{WINDOW_MIN_HEIGHT}")
+        
         # Apply OS-specific window maximization logic and handle errors gracefully
         logger.debug("Attempting to set window maximization attributes...")
         try:

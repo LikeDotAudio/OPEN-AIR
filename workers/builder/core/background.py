@@ -9,7 +9,7 @@ LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from workers.logger.logger import builder_logger
 
 from workers.styling.style import DEFAULT_THEME, THEMES
-from workers.builder.panels.panel_generator import PanelGenerator
+from workers.builder.widgets.utils.panels.panel_generator import PanelGenerator
 
 class BuilderBackgroundManagerMixin:
     """

@@ -34,7 +34,7 @@ app_constants = Config.get_instance()
 # --- Core/Mandatory Imports Only ---
 from workers.Command_Router.mqtt.mqtt_connection import MqttConnectionManager
 from workers.Command_Router.mqtt.mqtt_subscriber_router import MqttSubscriberRouter
-from workers.Command_Router.Mqtt.mqtt import MqttManager
+from workers.Command_Router.mqtt.core.mqtt import MqttManager
 from workers.Command_Router.protocol_router import ProtocolRouter
 
 def _load_protocol_manager(module_path, class_name, **kwargs):

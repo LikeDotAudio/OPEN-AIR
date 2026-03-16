@@ -61,18 +61,32 @@ class ProtocolRouter:
 
     @classmethod
     def get_instance(cls, force_reload=False):
+        """
+        Thread-safe singleton getter.
+        """
+        # Fast path for existing instance
+        if cls._instance is not None and not force_reload:
+            return cls._instance
+
         with cls._lock:
+            # Re-check inside lock
             if cls._instance is None or force_reload:
                 if force_reload and cls._instance:
                     router_logger.warning("📜📑💻 [CONFIG] Force Reloading ProtocolRouter.")
+                    # Capture state from old instance
                     old_observers = cls._instance.monitor._observers
                     old_mqtt = cls._instance.mqtt_manager
                     old_splinker = cls._instance.splinker_manager
                     
-                    cls._instance = cls()
-                    cls._instance.monitor._observers = old_observers
-                    cls._instance.mqtt_manager = old_mqtt
-                    cls._instance.splinker_manager = old_splinker
+                    # Create new instance
+                    new_instance = cls()
+                    
+                    # Restore state
+                    new_instance.monitor._observers = old_observers
+                    new_instance.mqtt_manager = old_mqtt
+                    new_instance.splinker_manager = old_splinker
+                    
+                    cls._instance = new_instance
                 else:
                     cls._instance = cls()
         return cls._instance

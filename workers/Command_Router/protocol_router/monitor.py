@@ -39,30 +39,38 @@ class Monitor:
         with self._firehose_lock:
             match = next((m for m in self.firehose if 
                           f"{m['ts']:.6f}" == msg_ts or m['ts'] == msg_ts), None)
+            
             if not match:
                 return None, None
             
             s_id = (match["meta"].get("splink_id") or 
                     match["meta"].get("splinker_source"))
+            
             if not s_id:
                 return None, None
             
-            partner = None
-            if match["meta"].get("splink_active"):
+            is_active = match["meta"].get("splink_active")
+            
+            if is_active:
                 candidates = [m for m in self.firehose if 
                              m["meta"].get("splinker_source") == s_id]
-                if candidates:
-                    partner = min(candidates, key=lambda m: abs(m["ts"]-match["ts"]))
-                return match["ts"], (partner["ts"] if partner else None)
             else:
                 candidates = [m for m in self.firehose if 
                              m["meta"].get("splink_id") == s_id]
-                if candidates:
-                    partner = min(candidates, key=lambda m: abs(m["ts"]-match["ts"]))
-                return (partner["ts"] if partner else None), match["ts"]
+        
+        if not candidates:
+            return (match["ts"] if is_active else None), (None if is_active else match["ts"])
+            
+        partner = min(candidates, key=lambda m: abs(m["ts"] - match["ts"]))
+        
+        if is_active:
+            return match["ts"], partner["ts"]
+        else:
+            return partner["ts"], match["ts"]
 
     def get_dpi_report(self, msg_ts):
         """Generates a human-readable investigation report for a specific packet."""
+        match = None
         with self._firehose_lock:
             match = next((m for m in self.firehose if 
                           f"{m['ts']:.6f}" == msg_ts or m['ts'] == msg_ts), None)

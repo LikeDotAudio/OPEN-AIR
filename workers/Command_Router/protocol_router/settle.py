@@ -52,31 +52,38 @@ class SettleManager:
         """
         Schedules a terminal LINK_FEEDBACK after a period of silence.
         """
+        # Cancel previous timer for this topic if it exists.
         with self._settle_lock:
             if topic in self._settle_timers:
                 self._settle_timers[topic].cancel()
-                
-            def _fire_settled():
-                settled_meta = original_msg["meta"].copy()
-                settled_meta["msg_type"] = "LINK_FEEDBACK"
-                settled_meta["is_settled"] = True
-                
-                if LOCAL_DEBUG:
-                    router_logger.debug(
-                        f"⏳⏳🔄 [ROUTER] Settling: Firing final "
-                        f"LINK_FEEDBACK for {topic}"
-                    )
-                
-                self.unlock_parameter(topic, original_msg.get("full_id"))
-                
-                # Re-ingest as settled to inform all spokes.
-                self._ingest_callback("SYSTEM", topic, original_msg["val"], settled_meta)
-                
-                with self._settle_lock:
-                    if topic in self._settle_timers:
-                        del self._settle_timers[topic]
+        
+        # Prepare final settling callback.
+        def _fire_settled():
+            settled_meta = original_msg["meta"].copy()
+            settled_meta["msg_type"] = "LINK_FEEDBACK"
+            settled_meta["is_settled"] = True
             
-            # 50ms silence required to consider a parameter 'settled'.
-            t = threading.Timer(0.050, _fire_settled)
+            if LOCAL_DEBUG:
+                router_logger.debug(
+                    f"⏳⏳🔄 [ROUTER] Settling: Firing final "
+                    f"LINK_FEEDBACK for {topic}"
+                )
+            
+            # Unlock parameter.
+            self.unlock_parameter(topic, original_msg.get("full_id"))
+            
+            # Re-ingest as settled to inform all spokes.
+            self._ingest_callback("SYSTEM", topic, original_msg["val"], settled_meta)
+            
+            # Clean up the timer reference.
+            with self._settle_lock:
+                if self._settle_timers.get(topic) == t:
+                    del self._settle_timers[topic]
+        
+        # 50ms silence required to consider a parameter 'settled'.
+        t = threading.Timer(0.050, _fire_settled)
+        
+        with self._settle_lock:
             self._settle_timers[topic] = t
-            t.start()
+            
+        t.start()

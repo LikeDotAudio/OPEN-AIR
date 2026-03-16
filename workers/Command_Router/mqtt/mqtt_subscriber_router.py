@@ -22,6 +22,30 @@ from workers.Command_Router.mqtt.mqtt_message import MqttMessage
 
 app_constants = Config.get_instance()
 
+class ThreadSafeMatchCache:
+    """Encapsulates a thread-safe cache for MQTT wildcard matches."""
+    def __init__(self, limit=1000):
+        self._cache: Dict[str, List[Callable[[MqttMessage], None]]] = {}
+        self._lock = threading.Lock()
+        self._limit = limit
+
+    def get(self, topic: str):
+        with self._lock:
+            return self._cache.get(topic)
+
+    def set(self, topic: str, callbacks: List[Callable[[MqttMessage], None]]):
+        with self._lock:
+            if len(self._cache) < self._limit:
+                self._cache[topic] = callbacks
+
+    def clear(self):
+        with self._lock:
+            self._cache.clear()
+
+    def __len__(self):
+        with self._lock:
+            return len(self._cache)
+
 class MqttSubscriberRouter:
     """
     Optimized MQTT routing engine.
@@ -34,8 +58,7 @@ class MqttSubscriberRouter:
         self._wildcard_subscribers: List[List[Union[str, List[Callable[[MqttMessage], None]]]]] = []
         
         # ⚡ OPTIMIZATION: Cache for wildcard matches to avoid redundant pattern matching
-        self._match_cache: Dict[str, List[Callable[[MqttMessage], None]]] = {}
-        self._cache_lock = threading.Lock()
+        self._match_cache = ThreadSafeMatchCache(limit=1000)
         
         self._client = None
         
@@ -57,8 +80,7 @@ class MqttSubscriberRouter:
             logger.debug(f"🚀📤📥 [MQTT] Subscribing to {topic_filter}")
             
         # ⚡ Invalidate cache when subscriptions change
-        with self._cache_lock:
-            self._match_cache.clear()
+        self._match_cache.clear()
         
         if "#" in topic_filter or "+" in topic_filter:
             found = False
@@ -95,8 +117,7 @@ class MqttSubscriberRouter:
     def unsubscribe_from_topic(self, topic_filter: str, callback_func: Callable[[MqttMessage], None]):
         """Removes a specific callback function from a topic filter."""
         # ⚡ Invalidate cache when subscriptions change
-        with self._cache_lock:
-            self._match_cache.clear()
+        self._match_cache.clear()
         
         if "#" in topic_filter or "+" in topic_filter:
             for i, entry in enumerate(self._wildcard_subscribers):
@@ -136,11 +157,11 @@ class MqttSubscriberRouter:
                 callback_func(msg)
 
         # 3. PATTERN DISPATCH: Wildcard Filters with Match Caching
-        with self._cache_lock:
-            if topic in self._match_cache:
-                for callback_func in self._match_cache[topic]:
-                    callback_func(msg)
-                return
+        cached_callbacks = self._match_cache.get(topic)
+        if cached_callbacks is not None:
+            for callback_func in cached_callbacks:
+                callback_func(msg)
+            return
 
         # Cache Miss: Resolve wildcards
         matched_callbacks = []
@@ -151,10 +172,8 @@ class MqttSubscriberRouter:
                     matched_callbacks.append(cb)
                     cb(msg)
         
-        # Store in cache (limit size to prevent memory leak if topics are dynamic)
-        with self._cache_lock:
-            if len(self._match_cache) < 1000:
-                self._match_cache[topic] = matched_callbacks
+        # Store in cache
+        self._match_cache.set(topic, matched_callbacks)
 
     def get_on_message_callback(self):
         return self._on_message
@@ -164,8 +183,7 @@ class MqttSubscriberRouter:
         Async resubscription. Called by MqttConnectionManager within the async context.
         """
         self._active_broker_subscriptions.clear()
-        with self._cache_lock:
-            self._match_cache.clear()
+        self._match_cache.clear()
 
         await client.subscribe(self._root_topic)
         self._active_broker_subscriptions.add(self._root_topic)

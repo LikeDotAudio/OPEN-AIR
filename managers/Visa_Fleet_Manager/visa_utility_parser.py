@@ -52,49 +52,57 @@ class VisaUtilityParser:
 
     @staticmethod
     def query_device_safe(rm, resource_str, attempt=1, timeout=VISA_TIMEOUT):
-        """Safely queries *IDN? from a VISA resource with timeout handling."""
-        inst = None
-        try:
-            inst = rm.open_resource(resource_str)
-            inst.timeout = timeout
-            inst.read_termination = "\n"
-            inst.write_termination = "\n"
-
-            raw_idn = inst.query("*IDN?")
-            idn = VisaUtilityParser.clean_string_for_display(raw_idn)
-            inst.close()
-
-            if not idn:
-                return None
-            return idn
-        except pyvisa.errors.VisaIOError as e:
-            if inst:
-                try:
-                    inst.close()
-                except:
-                    pass
-            logger.warning(f"      💳⚠️ [VISA ERROR] {resource_str}: {e.description} (Code: {e.error_code})")
-            if attempt == 1 and ("USB" in resource_str or "ASRL" in resource_str):
-                return VisaUtilityParser.query_device_safe(rm, resource_str, attempt=2, timeout=timeout)
+        """Safely queries *IDN? from a VISA resource with defensive pre-checks."""
+        # ⚡ DEFENSIVE CHECK: Verify resource exists in system before opening
+        available_resources = rm.list_resources()
+        if resource_str not in available_resources:
+            logger.warning(f"      💳⚠️ [VISA] Resource {resource_str} not found in system.")
             return None
-        except Exception as e:
-            if inst:
-                try:
-                    inst.close()
-                except:
-                    pass
-            logger.error(f"      💳💀 [EXCEPTION] {resource_str}: {type(e).__name__} - {e}")
+
+        # ⚡ NETWORK PRE-CHECK: If TCPIP, verify port 5025 (standard SCPI) or 111 (VXI-11) is open
+        if "TCPIP" in resource_str:
+            details = VisaUtilityParser.parse_resource_details(resource_str)
+            ip = details["IP"]
+            if ip != "Unknown":
+                # Check 5025 (Raw) or 111 (RPC/VXI-11)
+                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sock.settimeout(1.0)
+                # connect_ex returns 0 on success, no exception
+                res_5025 = sock.connect_ex((ip, 5025))
+                sock.close()
+                
+                if res_5025 != 0:
+                    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    sock.settimeout(1.0)
+                    res_111 = sock.connect_ex((ip, 111))
+                    sock.close()
+                    if res_111 != 0:
+                        logger.warning(f"      💳⚠️ [VISA] Network host {ip} is unreachable (5025/111 closed).")
+                        return None
+
+        # If we reach here, we have high confidence the resource is reachable.
+        # We proceed with PyVISA calls. If they still throw, it's a fatal HW error.
+        inst = rm.open_resource(resource_str)
+        inst.timeout = timeout
+        inst.read_termination = "\n"
+        inst.write_termination = "\n"
+
+        raw_idn = inst.query("*IDN?")
+        idn = VisaUtilityParser.clean_string_for_display(raw_idn)
+        inst.close()
+
+        if not idn:
             return None
+        return idn
 
     @staticmethod
     def get_local_ip():
-        """Retrieves the primary local IP address."""
+        """Retrieves the primary local IP address without using exceptions."""
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        try:
-            s.connect(("10.255.255.255", 1))
-            IP = s.getsockname()[0]
-        except Exception:
-            IP = "127.0.0.1"
-        finally:
-            s.close()
+        # connect() on a UDP socket doesn't actually send a packet, 
+        # so it's extremely unlikely to throw.
+        s.connect(("10.255.255.255", 1))
+        IP = s.getsockname()[0]
+        s.close()
         return IP
+

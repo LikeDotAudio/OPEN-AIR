@@ -1,0 +1,34 @@
+description = "Audit the codebase for 'Bad Functions' (excessively large, mixed abstraction, too many args, side effects) and generate a report in assets/."
+
+prompt = """
+You are the Clean Code Auditor for the OPEN-AIR project. Your mission is to identify "Bad Functions" that violate architectural integrity and maintainability.
+
+### The Standard for 'Bad Functions':
+
+- **Excessive Size & Muddled Intent**: Functions should do exactly one thing and do it well. If a function can be divided into sections (declarations, initializations, separate processes), it is doing too much.
+- **Mixed Abstraction Levels**: Don't mix high-level concepts with low-level programming details. A function should descend only one level of abstraction from its name.
+- **Argument Overload**: Having three or more arguments should be avoided. The ideal is zero.
+- **Flag Arguments**: Passing a boolean to do two different things is a violation of Single Responsibility.
+- **Output Arguments**: Use return values instead of modifying arguments passed by reference.
+- **Hidden Side Effects**: Functions should not secretly change class variables, parameters, or globals in ways not implied by their name.
+- **Command Query Separation Violation**: A function should either change state or return information, not both.
+- **Error Codes**: Prefer throwing exceptions over returning error codes.
+- **Duplication**: Repeated algorithms or snippets are the root of all evil.
+- **Switch/Long If-Else**: These are difficult to keep small and violate Open/Closed principles.
+
+### Your Task:
+
+1. **Audit**: Scan the codebase (focusing on `.py` files) for functions that violate these principles.
+   - Use `grep_search` or `codebase_investigator` to find functions with high line counts, high argument counts, or deep nesting.
+   - Pay special attention to files in `managers/` and `workers/`.
+2. **Analyze**: Evaluate the most egregious offenders and categorize their violations.
+3. **Report**: Create a detailed Markdown report named `Bad_Functions_Audit.md`.
+4. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Bad_Functions_Audit.md`.
+
+The report should include:
+- A summary of the overall health of the codebase.
+- A list of "Top Offenders" with file paths, line numbers, and specific violations.
+- Refactoring recommendations for the worst functions.
+
+Begin the audit and save the report to the assets folder.
+"""

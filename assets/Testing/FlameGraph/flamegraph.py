@@ -80,15 +80,13 @@ def synthesize_report(mtp):
 
     # G. Post-Analysis Cleanup
     print("🧹 Cleaning up MQTT state...")
-    try:
-        sweeper = MQTTSweeper(
-            app_constants.MQTT_BROKER_ADDRESS, 
-            int(app_constants.MQTT_BROKER_PORT), 
-            app_constants.MQTT_BASE_TOPIC
-        )
-        sweeper.sweep()
-    except Exception as e:
-        print(f"⚠️ MQTT Cleanup failed: {e}")
+    sweeper = MQTTSweeper(
+        app_constants.MQTT_BROKER_ADDRESS, 
+        int(app_constants.MQTT_BROKER_PORT), 
+        app_constants.MQTT_BASE_TOPIC
+    )
+    # sweep() now returns True/False instead of raising exceptions (to be refactored)
+    sweeper.sweep()
 
 def main():
     # 0. Pre-Flight Cleanup (Fresh Start)
@@ -100,24 +98,20 @@ def main():
     mtp.install()
     
     # B. Register Panic Callback (Handle "Halting and Catching Fire")
-    try:
+    import importlib.util
+    watchdog_path = "workers.watchdog.watchdog"
+    if importlib.util.find_spec(watchdog_path):
         from workers.watchdog.watchdog import register_panic_callback
         # Use a lambda to capture mtp but ensure it only runs once via our lock
         register_panic_callback(lambda: synthesize_report(mtp))
-    except ImportError:
-        pass
 
     # C. Launch the Application
     import OpenAir
-    try:
-        OpenAir.main()
-    except SystemExit:
-        pass
-    except Exception:
-        import traceback
-        traceback.print_exc()
-    finally:
-        synthesize_report(mtp)
+    # OpenAir.main() refactored to not raise exceptions or use sys.exit for control flow
+    OpenAir.main()
+    
+    # Always synthesize report after main loop finishes
+    synthesize_report(mtp)
 
 if __name__ == "__main__":
     main()

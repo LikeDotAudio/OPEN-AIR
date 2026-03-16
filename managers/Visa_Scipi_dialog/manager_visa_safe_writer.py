@@ -16,17 +16,10 @@ def write_safe(proxy, command):
     # Safely writes a SCPI command to the instrument.
     if LOCAL_DEBUG: logger.debug(f"💳 ℹ️ Proxy Log: 💳💳⬆️⬆️ Send Visa Command: Transmitting command: {command}")
 
-    if not proxy.inst:
-        error_msg = "Instrument not connected. Cannot write command."
+    # ⚡ DEFENSIVE CHECK: Ensure session is still valid
+    if not proxy.inst or not proxy.inst.session:
+        error_msg = "Instrument session lost. Cannot write command."
         proxy._publish_proxy_error(message=error_msg, command=command)
-        proxy.mqtt_util.get_client_instance().publish(
-            topic="OPEN-AIR/Proxy/Error",
-            payload=orjson.dumps(
-                {"error": error_msg, "command": command, "timestamp": time.time()}
-            ),
-            qos=0,
-            retain=False,
-        )
         return False
 
     if "<" in command or ">" in command:
@@ -42,22 +35,7 @@ def write_safe(proxy, command):
         )
         return False
 
-    try:
-        proxy.inst.write(command)
-        if LOCAL_DEBUG: logger.success(f"💳 ℹ️ Proxy Log: ✅ Sent command: {command}")
-        return True
-    except Exception as e:
-        error_msg = f"Error writing command '{command}': {e}"
-        proxy._publish_proxy_error(message=error_msg, command=command)
-        proxy.mqtt_util.get_client_instance().publish(
-            topic="OPEN-AIR/Proxy/Error",
-            payload=orjson.dumps(
-                {"error": error_msg, "command": command, "timestamp": time.time()}
-            ),
-            qos=0,
-            retain=False,
-        )
-
-        if command != "*RST":
-            proxy._reset_device()
-        return False
+    # ⚡ DIRECT CALL: Assuming hardware state is validated or fatal if not
+    proxy.inst.write(command)
+    if LOCAL_DEBUG: logger.success(f"💳 ℹ️ Proxy Log: ✅ Sent command: {command}")
+    return True

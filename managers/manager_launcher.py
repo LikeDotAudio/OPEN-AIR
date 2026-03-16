@@ -14,6 +14,8 @@ import pathlib
 import sys
 import importlib
 
+import importlib.util
+
 # Ensure the root directory is in the search path for local module imports.
 current_dir = pathlib.Path(__file__).resolve().parent
 project_root = current_dir.parent
@@ -37,13 +39,18 @@ from workers.Command_Router.protocol_router import ProtocolRouter
 
 def _load_protocol_manager(module_path, class_name, **kwargs):
     """Dynamically loads and instantiates a protocol manager if enabled."""
-    try:
-        module = importlib.import_module(module_path)
-        manager_class = getattr(module, class_name)
-        return manager_class(**kwargs)
-    except Exception as e:
-        logger.error(f"❌ Failed to load dynamic protocol manager {class_name}: {e}")
+    spec = importlib.util.find_spec(module_path)
+    if spec is None:
+        logger.error(f"❌ Module {module_path} not found.")
         return None
+    
+    module = importlib.import_module(module_path)
+    if not hasattr(module, class_name):
+        logger.error(f"❌ Class {class_name} not found in module {module_path}.")
+        return None
+        
+    manager_class = getattr(module, class_name)
+    return manager_class(**kwargs)
 
 def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     """
@@ -62,8 +69,13 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     initialize_filter_engine(mqtt_router=subscriber_router, logger_reconfigurator_callable=initialize_logging)
     
     # Core Infrastructure
-    splinker_module = importlib.import_module("workers.Splinker.splinker_manager")
-    splinker_manager = splinker_module.SplinkerManager.get_instance(state_cache_manager, mqtt_connection_manager)
+    splinker_module_path = "workers.Splinker.splinker_manager"
+    if importlib.util.find_spec(splinker_module_path):
+        splinker_module = importlib.import_module(splinker_module_path)
+        splinker_manager = splinker_module.SplinkerManager.get_instance(state_cache_manager, mqtt_connection_manager)
+    else:
+        logger.critical("❌ Critical module missing: workers.Splinker.splinker_manager")
+        return None
     
     mqtt_manager = MqttManager(subscriber_router=subscriber_router, mqtt_client=mqtt_connection_manager, state_cache_manager=state_cache_manager)
 
@@ -98,29 +110,54 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     )
     
     # Fleet & Yak (Loaded dynamically to avoid import loops)
-    visa_fleet_module = importlib.import_module("managers.Visa_Fleet_Manager.visa_fleet_manager")
-    STATE_VISA_FLEET_manager = visa_fleet_module.VisaFleetManager(
-        mqtt_connection_manager=mqtt_connection_manager, 
-        subscriber_router=subscriber_router, 
-        aes70_manager=aes70_manager
-    )
+    visa_fleet_module_path = "managers.Visa_Fleet_Manager.visa_fleet_manager"
+    if importlib.util.find_spec(visa_fleet_module_path):
+        visa_fleet_module = importlib.import_module(visa_fleet_module_path)
+        STATE_VISA_FLEET_manager = visa_fleet_module.VisaFleetManager(
+            mqtt_connection_manager=mqtt_connection_manager, 
+            subscriber_router=subscriber_router, 
+            aes70_manager=aes70_manager
+        )
+    else:
+        logger.critical("❌ Critical module missing: managers.Visa_Fleet_Manager.visa_fleet_manager")
+        return None
     
-    yak_translator_module = importlib.import_module("managers.yak.yak_translator")
-    yak_translator = yak_translator_module.YakTranslator(mqtt_connection_manager=mqtt_connection_manager, subscriber_router=subscriber_router)
+    yak_translator_module_path = "managers.yak.yak_translator"
+    if importlib.util.find_spec(yak_translator_module_path):
+        yak_translator_module = importlib.import_module(yak_translator_module_path)
+        yak_translator = yak_translator_module.YakTranslator(mqtt_connection_manager=mqtt_connection_manager, subscriber_router=subscriber_router)
+    else:
+        logger.critical("❌ Critical module missing: managers.yak.yak_translator")
+        return None
     
-    yak_rx_module = importlib.import_module("managers.yak.manager_yak_rx")
-    yak_rx_manager = yak_rx_module.YakRxManager(
-        mqtt_connection_manager=mqtt_connection_manager, 
-        subscriber_router=subscriber_router, 
-        yak_translator=yak_translator, 
-        state_cache_manager=state_cache_manager
-    )
+    yak_rx_module_path = "managers.yak.manager_yak_rx"
+    if importlib.util.find_spec(yak_rx_module_path):
+        yak_rx_module = importlib.import_module(yak_rx_module_path)
+        yak_rx_manager = yak_rx_module.YakRxManager(
+            mqtt_connection_manager=mqtt_connection_manager, 
+            subscriber_router=subscriber_router, 
+            yak_translator=yak_translator, 
+            state_cache_manager=state_cache_manager
+        )
+    else:
+        logger.critical("❌ Critical module missing: managers.yak.manager_yak_rx")
+        return None
     
-    fleet_status_module = importlib.import_module("workers.monitoring.fleet_status_monitor")
-    fleet_status_monitor = fleet_status_module.FleetStatusMonitor(state_mirror_engine=None, subscriber_router=subscriber_router)
+    fleet_status_module_path = "workers.monitoring.fleet_status_monitor"
+    if importlib.util.find_spec(fleet_status_module_path):
+        fleet_status_module = importlib.import_module(fleet_status_module_path)
+        fleet_status_monitor = fleet_status_module.FleetStatusMonitor(state_mirror_engine=None, subscriber_router=subscriber_router)
+    else:
+        logger.critical("❌ Critical module missing: workers.monitoring.fleet_status_monitor")
+        return None
     
-    ptp_module = importlib.import_module("managers.PTP.ptp_manager")
-    ptp_manager = ptp_module.PtpManager(mqtt_connection_manager=mqtt_connection_manager, subscriber_router=subscriber_router)
+    ptp_module_path = "managers.PTP.ptp_manager"
+    if importlib.util.find_spec(ptp_module_path):
+        ptp_module = importlib.import_module(ptp_module_path)
+        ptp_manager = ptp_module.PtpManager(mqtt_connection_manager=mqtt_connection_manager, subscriber_router=subscriber_router)
+    else:
+        logger.critical("❌ Critical module missing: managers.PTP.ptp_manager")
+        return None
 
     # --- 2. Linking Phase ---
     if LOCAL_DEBUG: logger.debug("🚀⚙️🔗 [LAUNCHER] Linking cross-dependent managers...")

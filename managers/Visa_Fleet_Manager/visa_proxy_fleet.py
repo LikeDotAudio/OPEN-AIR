@@ -30,7 +30,7 @@ def _write_safe_fleet(proxy_instance, command):
     # Safely writes a SCPI command to the instrument for the fleet proxy.
     if LOCAL_DEBUG: logger.trace(f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): 💳💳⬆️⬆️ Send Visa Command: Transmitting command: {command}")
 
-    if not proxy_instance.inst:
+    if not proxy_instance.inst or not proxy_instance.inst.session:
         error_msg = f"Instrument {proxy_instance.device_serial} not connected. Cannot write command."
         proxy_instance.manager._notify_error(
             serial=proxy_instance.device_serial, message=error_msg, command=command
@@ -44,20 +44,17 @@ def _write_safe_fleet(proxy_instance, command):
         )
         return False
 
-    try:
-        proxy_instance.inst.write(command)
-        if LOCAL_DEBUG: logger.success(f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): ✅ Sent command: {command}")
-        return True
-    except Exception as e:
-        from .core.visa_timeout_handler import visa_timeout_handler
-        return visa_timeout_handler(proxy_instance, command, e)
+    # ⚡ DIRECT CALL: Assuming hardware state is validated or fatal if not
+    proxy_instance.inst.write(command)
+    if LOCAL_DEBUG: logger.success(f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): ✅ Sent command: {command}")
+    return True
 
 
 def _query_safe_fleet(proxy_instance, command, correlation_id="N/A"):
     # Safely queries the instrument with a SCPI command and returns the response for the fleet proxy.
     if LOCAL_DEBUG: logger.trace(f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): 💳💳⬆️⬆️ Send Visa Command: Querying command: {command}")
 
-    if not proxy_instance.inst:
+    if not proxy_instance.inst or not proxy_instance.inst.session:
         error_msg = f"Instrument {proxy_instance.device_serial} not connected. Cannot query command."
         proxy_instance.manager._notify_error(
             serial=proxy_instance.device_serial, message=error_msg, command=command
@@ -71,22 +68,34 @@ def _query_safe_fleet(proxy_instance, command, correlation_id="N/A"):
         )
         return None
 
-    try:
-        response = proxy_instance.inst.query(command).strip()
-        if LOCAL_DEBUG: logger.success(f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): ✅ Sent query: {command}")
-        if LOCAL_DEBUG: logger.trace(f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): 💳💳⬇️⬇️ RX Visa Response: Received response: {response}")
+    # ⚡ DIRECT CALL: Assuming hardware state is validated or fatal if not
+    # We use write then a polling read for 'Zero Exception' architecture
+    proxy_instance.inst.write(command)
+    
+    # ⚡ POLLING READ: Instead of a blocking query() which might timeout/exception
+    # Wait for data to arrive in buffer
+    start_wait = time.time()
+    while proxy_instance.inst.bytes_in_buffer == 0 and (time.time() - start_wait) < (proxy_instance.inst.timeout / 1000.0):
+        time.sleep(0.01)
+    
+    if proxy_instance.inst.bytes_in_buffer == 0:
+        logger.error(f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): ❌ Timeout waiting for response to {command}")
+        return None
 
-        # Notify the manager of the response
-        proxy_instance.manager._notify_response(
-            serial=proxy_instance.device_serial,
-            response=response,
-            command=command,
-            corr_id=correlation_id,
-        )
-        return response
-    except Exception as e:
-        from .core.visa_timeout_handler import visa_timeout_handler
-        return visa_timeout_handler(proxy_instance, command, e)
+    response = proxy_instance.inst.read().strip()
+    
+    if LOCAL_DEBUG: logger.success(f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): ✅ Sent query: {command}")
+    if LOCAL_DEBUG: logger.trace(f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): 💳💳⬇️⬇️ RX Visa Response: Received response: {response}")
+
+    # Notify the manager of the response
+    proxy_instance.manager._notify_response(
+        serial=proxy_instance.device_serial,
+        response=response,
+        command=command,
+        corr_id=correlation_id,
+    )
+    return response
+
 
 
 class VisaProxyFleet:
@@ -145,15 +154,9 @@ class VisaProxyFleet:
 
         # Ensure connection is closed if proxy is shut down
         if self.inst:
-            try:
-                self.inst.close()
-                if LOCAL_DEBUG: logger.debug(f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Closed PyVISA instrument instance during shutdown.")
-            except Exception as e:
-                self.manager._notify_error(
-                    serial=self.device_serial,
-                    message=f"Error closing instrument during shutdown: {e}",
-                    command="shutdown",
-                )
+            # We assume close() is safe or fatal if not
+            self.inst.close()
+            if LOCAL_DEBUG: logger.debug(f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Closed PyVISA instrument instance during shutdown.")
             self.inst = None
             self.is_connected = False
             self.manager._notify_status(
@@ -166,36 +169,23 @@ class VisaProxyFleet:
         ⚡ OPTIMIZATION: Uses pure blocking get() with a Poison Pill for shutdown (Rule #5).
         """
         while True:
-            try:
-                # ⚡ BLOCKING: Consumes zero CPU while waiting for commands
-                command_info = self.command_queue.get()
-                
-                if command_info is None: # The Poison Pill
-                    break
+            # ⚡ BLOCKING: Consumes zero CPU while waiting for commands
+            command_info = self.command_queue.get()
+            
+            if command_info is None: # The Poison Pill
+                break
 
-                command = command_info["command"]
-                query = command_info["query"]
-                correlation_id = command_info["correlation_id"]
+            command = command_info["command"]
+            query = command_info["query"]
+            correlation_id = command_info["correlation_id"]
 
-                if query:
-                    _query_safe_fleet(self, command, correlation_id)
-                else:
-                    _write_safe_fleet(self, command)
+            if query:
+                _query_safe_fleet(self, command, correlation_id)
+            else:
+                _write_safe_fleet(self, command)
 
-                self.command_queue.task_done()
-                
-            except Exception as e:
-                cmd_for_error = command_info.get("command", "N/A") if command_info else "N/A"
-                if LOCAL_DEBUG:
-                    logger.critical(f"💳 Unhandled exception in FleetProxy worker for {self.device_serial}: {e}")
-                self.manager._notify_error(
-                    serial=self.device_serial,
-                    message=f"Unhandled worker exception: {e}",
-                    command=cmd_for_error,
-                )
-                if command_info is not None:
-                    self.command_queue.task_done()
-
+            self.command_queue.task_done()
+            
         if LOCAL_DEBUG: logger.debug(f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Command processor worker terminated.")
 
     def enqueue_command(self, command, query=False, correlation_id="N/A"):
@@ -227,23 +217,18 @@ class VisaProxyFleet:
     def _reset_device_fleet(self):
         """Attempts to reset the connected instrument using standard SCPI commands."""
         if LOCAL_DEBUG: logger.debug(f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Attempting a system-wide reset for the device.")
-        try:
-            logger.warning(
-                f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Instrument instance is None. Connection lost."
+        logger.warning(
+            f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Instrument instance is None. Connection lost."
+        )
+        reset_success = _write_safe_fleet(self, command="*RST")
+
+        if reset_success:
+            if LOCAL_DEBUG: logger.success(f"💳 ℹ️ FleetProxy Log ({self.device_serial}): ✅ Success! The device reset command was sent.")
+        else:
+            self.manager._notify_error(
+                serial=self.device_serial,
+                message="❌ Failure! The device did not respond to the reset command.",
+                command="*RST",
             )
-            reset_success = _write_safe_fleet(self, command="*RST")
+        return reset_success
 
-            if reset_success:
-                if LOCAL_DEBUG: logger.success(f"💳 ℹ️ FleetProxy Log ({self.device_serial}): ✅ Success! The device reset command was sent.")
-            else:
-                self.manager._notify_error(
-                    serial=self.device_serial,
-                    message="❌ Failure! The device did not respond to the reset command.",
-                    command="*RST",
-                )
-            return reset_success
-
-        except Exception as e:
-            error_msg = f"❌ Error in _reset_device_fleet for {self.device_serial}: {e}"
-            self.manager._notify_error(serial=self.device_serial, message=error_msg)
-            return False

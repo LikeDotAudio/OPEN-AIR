@@ -8,6 +8,8 @@ import orjson
 from scapy.all import sniff, UDP
 from loguru import logger
 
+import os
+
 # --- EXTRACTED CORE MODULES ---
 from .core.ptp_packet_schema import PTP, SCAPY_AVAILABLE
 from .core.ptp_packet_parser import PTPPacketParser
@@ -29,7 +31,7 @@ class PtpManager:
         self.sniffer_thread = None
         self.last_heartbeat = 0
         self.heartbeat_interval = 1.0
-        self.permission_error_reported = False
+        self.permission_error_reported = os.geteuid() != 0
 
     def start(self):
         """Starts the sniffing worker and MQTT subscriptions."""
@@ -41,6 +43,7 @@ class PtpManager:
             return
         
         if self.permission_error_reported:
+            if LOCAL_DEBUG: logger.warning("⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.")
             return
 
         self.sniffer_thread = threading.Thread(target=self._run_sniffer, daemon=True, name="PTP_Sniffer")
@@ -53,40 +56,53 @@ class PtpManager:
 
     def _on_external_data(self, msg: MqttMessage):
         """Bridge for PTP data received via MQTT (Core-to-UI)."""
-        try:
-            payload = msg.payload
-            data = orjson.loads(payload) if isinstance(payload, (bytes, str)) else payload
-            if isinstance(data.get("message_type"), int):
-                data["message_type"] = PTPPacketParser.MSG_TYPES.get(data["message_type"], f"Unknown ({data['message_type']})")
-            PTPObserverRegistry.notify(data)
-        except Exception as e: logger.error(f"❌ PTP Bridge Error: {e}")
+        payload = msg.payload
+        if not payload: return
+
+        # ⚡ PRE-VALIDATION: Structural integrity check
+        data = None
+        if isinstance(payload, (bytes, str)):
+            stripped = payload.strip() if isinstance(payload, str) else payload.strip()
+            # Simple check for JSON-like structure
+            if stripped and (stripped[0] in (ord('{'), ord('[')) if isinstance(stripped, bytes) else stripped[0] in ('{', '[')):
+                data = orjson.loads(payload)
+        else:
+            data = payload
+        
+        if not data: return
+
+        if isinstance(data.get("message_type"), int):
+            data["message_type"] = PTPPacketParser.MSG_TYPES.get(data["message_type"], f"Unknown ({data['message_type']})")
+        PTPObserverRegistry.notify(data)
 
     def _run_sniffer(self):
         """Background loop for raw packet capture."""
-        try:
-            sniff(filter="udp port 319 or udp port 320", 
-                  prn=self._process_packet, 
-                  stop_filter=lambda x: self.stop_event.is_set(),
-                  store=0)
-        except PermissionError:
-            self.permission_error_reported = True
-            logger.warning("⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo to enable local PTP sniffing. Sniffer disabled for this session.")
-        except Exception as e:
-            if "Permission denied" in str(e): 
-                self.permission_error_reported = True
-                logger.warning("⏱️ PTP Sniffer: [PERMISSION DENIED] Scapy requires root privileges for raw capture. Sniffer disabled.")
-            else: 
-                logger.exception("⏱️ PTP Sniffer: CRITICAL Error.")
+        # ⚡ PRIVILEGE VALIDATION: Already checked in __init__ and start()
+        # sniff() will be called only if we are root. 
+        # Fatal if it fails for other reasons (e.g. interface down).
+        sniff(filter="udp port 319 or udp port 320", 
+                prn=self._process_packet, 
+                stop_filter=lambda x: self.stop_event.is_set(),
+                store=0)
 
     def _process_packet(self, pkt):
         """Dissects raw packets and distributes data."""
-        if not pkt.haslayer(UDP): return
-        try:
-            ptp_layer = pkt[PTP] if pkt.haslayer(PTP) else PTP(bytes(pkt[UDP].payload))
-            data = PTPPacketParser.tear_apart(pkt, ptp_layer)
-            self._handle_heartbeat(data)
-            PTPObserverRegistry.notify(data)
-        except: pass
+        if not pkt or not pkt.haslayer(UDP): return
+        
+        ptp_layer = None
+        if pkt.haslayer(PTP):
+            ptp_layer = pkt[PTP]
+        else:
+            payload = bytes(pkt[UDP].payload)
+            if len(payload) >= 34:
+                ptp_layer = PTP(payload)
+        
+        if not ptp_layer: return
+
+        data = PTPPacketParser.tear_apart(pkt, ptp_layer)
+        self._handle_heartbeat(data)
+        PTPObserverRegistry.notify(data)
+
 
     def _handle_heartbeat(self, data):
         """Publishes activity status to MQTT at 1Hz."""

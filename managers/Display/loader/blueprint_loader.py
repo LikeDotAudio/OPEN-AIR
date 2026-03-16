@@ -74,24 +74,6 @@ class BlueprintLoader:
     def load_blueprint(json_filepath: Path, tab_name: str, last_hash: str = None):
         """
         Retrieves and prepares a GUI blueprint for the builder.
-
-        Lead with action: Loads a JSON file, verifies its integrity via MD5,
-        merges it with the system defaults, and performs full-tree
-        normalization to "pre-flatten" widget parameters.
-
-        Inputs:
-            json_filepath (Path): The absolute path to the blueprint file.
-            tab_name (str): The logical name of the GUI tab.
-            last_hash (str, optional): The MD5 hash of the previous version
-                                       to facilitate change detection.
-
-        Outputs:
-            tuple: (config_data (dict), new_hash (str), is_changed (bool))
-                   Returns (None, hash, False) if the content has not changed.
-
-        Side Effects:
-            - Performs blocking filesystem I/O.
-            - Updates internal caches if not already populated.
         """
         if json_filepath is None or not json_filepath.exists():
             # Fallback to the default configuration if the specific file is 
@@ -102,37 +84,38 @@ class BlueprintLoader:
                 return normalized, None, True
             return {}, None, True
 
-        try:
-            with open(json_filepath, "r") as f:
-                raw_content = f.read()
-
-            # Generate MD5 hash for rapid change detection.
-            current_hash = hashlib.md5(raw_content.encode("utf-8")).hexdigest()
-            if last_hash == current_hash:
-                return None, current_hash, False
-
-            if not raw_content.strip():
-                logger.error(f"❌ BlueprintLoader: Empty file at {json_filepath}")
-                return {}, current_hash, False
-
-            # 1. Parse the specific GUI configuration using high-speed orjson.
-            specific_config = orjson.loads(raw_content)
-            
-            # 2. Merge with global defaults to ensure theme consistency.
-            default_config = BlueprintLoader._load_default_config()
-            config_data = BlueprintLoader._recursive_merge(default_config, 
-                                                            specific_config)
-            
-            # 3. ⚡ PERFORMANCE: Pre-normalize the entire tree.
-            # This 'flattens' the blueprint structure so the renderer does 
-            # not have to perform normalization calculations during layout.
-            config_data = BlueprintLoader._recursively_normalize(config_data)
-            
-            return config_data, current_hash, True
-
-        except Exception as e:
-            logger.exception(f"❌ BlueprintLoader: Error loading {json_filepath}")
+        # ⚡ ZERO EXCEPTION: Pre-read validation
+        if json_filepath.stat().st_size == 0:
+            logger.error(f"❌ BlueprintLoader: Empty file at {json_filepath}")
             return {}, None, False
+
+        with open(json_filepath, "r") as f:
+            raw_content = f.read()
+
+        # Generate MD5 hash for rapid change detection.
+        current_hash = hashlib.md5(raw_content.encode("utf-8")).hexdigest()
+        if last_hash == current_hash:
+            return None, current_hash, False
+
+        # ⚡ PRE-VALIDATION: Structural integrity check
+        stripped_content = raw_content.strip()
+        if not stripped_content.startswith(("{", "[")) or not stripped_content.endswith(("}", "]")):
+            logger.error(f"❌ BlueprintLoader: JSON structural validation failed for {json_filepath}")
+            return {}, current_hash, False
+
+        # 1. Parse the specific GUI configuration using high-speed orjson.
+        specific_config = orjson.loads(raw_content)
+        
+        # 2. Merge with global defaults to ensure theme consistency.
+        default_config = BlueprintLoader._load_default_config()
+        config_data = BlueprintLoader._recursive_merge(default_config, 
+                                                        specific_config)
+        
+        # 3. ⚡ PERFORMANCE: Pre-normalize the entire tree.
+        config_data = BlueprintLoader._recursively_normalize(config_data)
+        
+        return config_data, current_hash, True
+
 
     @staticmethod
     def _recursively_normalize(config, root=None):
@@ -185,30 +168,29 @@ class BlueprintLoader:
     def _load_default_config():
         """
         Loads the system default configuration with memory-caching.
-
-        Lead with action: Retrieves 'default_panel.json' from the filesystem.
-        Uses a deepcopy of the cached version on subsequent calls to ensure
-        partition isolation.
-
-        Outputs:
-            dict: The system default configuration tree.
         """
         global _DEFAULT_CONFIG_CACHE
         if _DEFAULT_CONFIG_CACHE is not None:
             return copy.deepcopy(_DEFAULT_CONFIG_CACHE)
 
-        try:
-            # Locate default_panel.json relative to the current module path.
-            current_dir = Path(__file__).resolve().parent
-            default_path = current_dir.parent / "default_panel.json"
-            
-            if default_path.exists():
-                with open(default_path, "r") as f:
-                    _DEFAULT_CONFIG_CACHE = orjson.loads(f.read())
+        # Locate default_panel.json relative to the current module path.
+        current_dir = Path(__file__).resolve().parent
+        default_path = current_dir.parent / "default_panel.json"
+        
+        if default_path.exists() and default_path.stat().st_size > 0:
+            with open(default_path, "r") as f:
+                raw_data = f.read()
+                # ⚡ PRE-VALIDATION: Structural check
+                if raw_data.strip().startswith("{"):
+                    _DEFAULT_CONFIG_CACHE = orjson.loads(raw_data)
                     return copy.deepcopy(_DEFAULT_CONFIG_CACHE)
-        except Exception as e:
-            logger.warning(f"🟡 BlueprintLoader: Default config load failed: {e}")
+                else:
+                    logger.warning(f"🟡 BlueprintLoader: default_panel.json failed structural check.")
+        else:
+            logger.warning(f"🟡 BlueprintLoader: default_panel.json missing or empty.")
+            
         return {}
+
 
     @staticmethod
     def _recursive_merge(base, overrides):

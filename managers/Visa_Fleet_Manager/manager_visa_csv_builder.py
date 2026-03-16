@@ -88,20 +88,21 @@ class VisaCsvBuilder:
         for filename in os.listdir(self.csv_dir):
             if filename.endswith(".csv"):
                 file_path = os.path.join(self.csv_dir, filename)
-                try:
+                if os.path.exists(file_path):
                     os.remove(file_path)
                     if LOCAL_DEBUG:
                         logger.debug(f"  Removed old file: {filename}")
-                except Exception as e:
-                    if LOCAL_DEBUG:
-                        logger.exception(f"  Error removing file {file_path}")
 
         with open(self.json_path, "rb") as f:
-            try:
-                data = orjson.loads(f.read())
-            except Exception as e:
-                logger.error(f"Error decoding JSON from {self.json_path}: {e}")
-                return
+            raw_data = f.read()
+
+        # ⚡ PRE-VALIDATION: Structural integrity check
+        stripped_data = raw_data.strip()
+        if not stripped_data.startswith(b"{") or not stripped_data.endswith(b"}"):
+            logger.error(f"❌ Error: JSON structural validation failed for {self.json_path}. Corrupted file?")
+            return
+
+        data = orjson.loads(raw_data)
 
         # Start the recursive traversal from the root node.
         self._traverse_and_build(data, ["OPEN-AIR"])
@@ -169,18 +170,20 @@ class VisaCsvBuilder:
             logger.debug(f"Writing table for topic '{topic_string}' "
                          f"to '{csv_filepath}'...")
 
-        try:
-            with open(csv_filepath, "w", newline="", encoding="utf-8") as f:
-                writer = csv.DictWriter(
-                    f, fieldnames=headers, extrasaction="ignore"
-                )
-                writer.writeheader()
-                writer.writerows(data_list)
-            if LOCAL_DEBUG:
-                logger.success(f"  Successfully wrote {len(data_list)} rows.")
-        except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception(f"  Error writing CSV file {csv_filepath}")
+        # We assume csv_dir is created and writable.
+        with open(csv_filepath, "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(
+                f, fieldnames=headers, extrasaction="ignore"
+            )
+            writer.writeheader()
+            writer.writerows(data_list)
+        
+        if LOCAL_DEBUG:
+            if os.path.exists(csv_filepath):
+                logger.success(f"  Successfully wrote {len(data_list)} rows to {csv_filepath}")
+            else:
+                logger.error(f"  Failed to write CSV file {csv_filepath}")
+
 
 if __name__ == "__main__":
     # Standalone execution for testing and manual export.

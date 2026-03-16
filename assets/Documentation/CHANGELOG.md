@@ -1,3 +1,10 @@
+## [2026-03-15 22:55:00] Bug Fix: UI Rendering & Layout Cache Corruption
+**************************************
+### Fixed
+- **UI Render Failure (Empty Screen)**: Resolved a critical issue where the GUI would fail to render after a restart, resulting in an empty screen. The root cause was identified as a cache corruption bug in the `DirectoryBuilderMixin`.
+- **Layout Cache Logic**: Fixed `DirectoryBuilderMixin._get_layout_info` which was incorrectly attempting to re-normalize already-normalized layout data on cache hits. This caused critical fields (like `panels` or `tabs`) to be wiped out and saved back to disk as empty lists.
+- **Cache Recovery**: Manually purged the corrupted `layout_cache.json` to ensure a clean build.
+
 ## [2026-03-15 22:45:00] Bug Fix: Log Filter Engine Initialization
 **************************************
 Commit: 1c55af3

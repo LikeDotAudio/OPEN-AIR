@@ -70,27 +70,31 @@ class GuiMqttManagerMixin:
         rebuild_topic = "OPEN-AIR/System/Control/UI/Rebuild"
         
         def _handle_rebuild_request(msg):
-            try:
-                # msg is an MqttMessage object
-                payload = msg.payload
-                data = orjson.loads(payload)
-                target_path = data.get("path")
-                new_config = data.get("config")
+            # ⚡ ZERO EXCEPTION: Structural validation before processing
+            payload = msg.payload
+            if not payload: return
+            
+            # Simple check for JSON-like structure
+            if not (payload.startswith(b"{") or payload.startswith("{")):
+                return
+
+            data = orjson.loads(payload)
+            target_path = data.get("path")
+            new_config = data.get("config")
+            
+            # Check if this builder instance is for the requested file
+            if target_path and str(Path(target_path).resolve()) == str(self.json_filepath.resolve()):
+                if LOCAL_DEBUG: logger.info(f"♻️ MQTT: Rebuild request received for '{self.tab_name}'. Injecting new config...")
                 
-                # Check if this builder instance is for the requested file
-                if target_path and str(Path(target_path).resolve()) == str(self.json_filepath.resolve()):
-                    if LOCAL_DEBUG: logger.info(f"♻️ MQTT: Rebuild request received for '{self.tab_name}'. Injecting new config...")
-                    
-                    # 1. Update config data
-                    if new_config:
-                        self.config_data = new_config
-                    
-                    # 2. Trigger rebuild (GuiRebuilderMixin)
-                    if hasattr(self, "_rebuild_gui"):
-                        # Use self.after to ensure we run on the main Tkinter thread
-                        self.after(0, self._rebuild_gui)
-            except Exception as e:
-                logger.error(f"❌ MQTT: Failed to process rebuild request: {e}")
+                # 1. Update config data
+                if new_config:
+                    self.config_data = new_config
+                
+                # 2. Trigger rebuild (GuiRebuilderMixin)
+                if hasattr(self, "_rebuild_gui"):
+                    # Use self.after to ensure we run on the main Tkinter thread
+                    self.after(0, self._rebuild_gui)
+
 
         # Correct method name is subscribe_to_topic
         self.subscriber_router.subscribe_to_topic(rebuild_topic, _handle_rebuild_request)

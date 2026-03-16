@@ -63,54 +63,55 @@ class VisaJsonBuilder:
         """
         filepath = STATE_VISA_FLEET_JSON_PATH
         temp_path = None
-        try:
-            os.makedirs(os.path.dirname(filepath), exist_ok=True)
+        
+        # Ensure directory exists (exist_ok=True prevents exception)
+        os.makedirs(os.path.dirname(filepath), exist_ok=True)
 
-            # Group the inventory data before saving
-            grouped_data = self._group_devices_by_type_and_model(inventory_data)
+        # Group the inventory data before saving
+        grouped_data = self._group_devices_by_type_and_model(inventory_data)
 
-            # Write to a temporary file in the same directory
-            with tempfile.NamedTemporaryFile(
-                mode="wb", delete=False, dir=os.path.dirname(filepath), suffix=".tmp"
-            ) as tmp_f:
-                temp_path = tmp_f.name
-                tmp_f.write(orjson.dumps(grouped_data, option=orjson.OPT_INDENT_2))
+        # Write to a temporary file in the same directory
+        with tempfile.NamedTemporaryFile(
+            mode="wb", delete=False, dir=os.path.dirname(filepath), suffix=".tmp"
+        ) as tmp_f:
+            temp_path = tmp_f.name
+            tmp_f.write(orjson.dumps(grouped_data, option=orjson.OPT_INDENT_2))
 
+        # ⚡ VALIDATION: Ensure temp file was actually created and has content
+        if temp_path and os.path.exists(temp_path) and os.path.getsize(temp_path) > 0:
             # Atomically rename the temp file to the final destination
             os.rename(temp_path, filepath)
-
             if LOCAL_DEBUG: logger.debug(f"✅ Atomically saved fleet inventory to {filepath}")
-        except Exception as e:
-            if LOCAL_DEBUG:
-                logger.error(
-                    f"❌ Error saving inventory to JSON: {e}")
+        else:
+            logger.error(f"❌ Failed to save inventory: Temp file {temp_path} is invalid.")
             if temp_path and os.path.exists(temp_path):
-                os.remove(temp_path)  # Clean up temp file on error
+                os.remove(temp_path)
 
     def load_inventory_from_json(self):
         """Loads fleet inventory from a JSON file if it exists, is not empty, and flattens it."""
         filepath = STATE_VISA_FLEET_JSON_PATH
-        if os.path.exists(filepath):
-            if os.path.getsize(filepath) == 0:  # Check if file is empty
-                if LOCAL_DEBUG: logger.debug(f"ℹ️ Inventory file {filepath} is empty. Initializing empty inventory.")
-                return []  # Treat empty file as empty inventory
-            try:
-                with open(filepath, "rb") as f:
-                    grouped_inventory = orjson.loads(f.read())
-                flat_inventory = self._flatten_grouped_inventory(grouped_inventory)
-                if LOCAL_DEBUG: logger.debug(f"✅ Loaded and flattened fleet inventory from {filepath} with {len(flat_inventory)} devices.")
-                return flat_inventory
-            except orjson.JSONDecodeError as e:
-                logger.error(f"❌ Error decoding inventory JSON from {filepath}: {e}. Initializing empty inventory.")
-                return []  # Return empty list, as it's flattened
-            except Exception as e:
-                if LOCAL_DEBUG:
-                    logger.error(f"❌ Error loading inventory from JSON: {e}. Initializing empty inventory.")
-                return []  # Return empty list
-        else:
+        if not os.path.exists(filepath):
             if LOCAL_DEBUG: logger.debug(f"ℹ️ No existing inventory file found at {filepath}. Initializing empty inventory and creating file.")
             self.save_inventory_to_json([])  # Create the file with an empty inventory
-            return []  # Return empty list
+            return []
+
+        if os.path.getsize(filepath) == 0:  # Check if file is empty
+            if LOCAL_DEBUG: logger.debug(f"ℹ️ Inventory file {filepath} is empty. Initializing empty inventory.")
+            return []  # Treat empty file as empty inventory
+
+        with open(filepath, "rb") as f:
+            raw_data = f.read()
+
+        # ⚡ PRE-VALIDATION: Structural integrity check
+        stripped_data = raw_data.strip()
+        if not stripped_data.startswith((b"{", b"[")) or not stripped_data.endswith((b"}", b"]")):
+            logger.error(f"❌ Error: JSON structural validation failed for {filepath}. Corrupted file?")
+            return []
+
+        grouped_inventory = orjson.loads(raw_data)
+        flat_inventory = self._flatten_grouped_inventory(grouped_inventory)
+        if LOCAL_DEBUG: logger.debug(f"✅ Loaded and flattened fleet inventory from {filepath} with {len(flat_inventory)} devices.")
+        return flat_inventory
 
     def load_grouped_inventory_from_json(self):
         """
@@ -118,26 +119,27 @@ class VisaJsonBuilder:
         hierarchical (grouped) dictionary without flattening.
         """
         filepath = STATE_VISA_FLEET_JSON_PATH
-        if os.path.exists(filepath):
-            if os.path.getsize(filepath) == 0:  # Check if file is empty
-                if LOCAL_DEBUG: logger.debug(f"ℹ️ Grouped inventory file {filepath} is empty. Returning empty dictionary.")
-                return {}
-            try:
-                with open(filepath, "rb") as f:
-                    grouped_inventory = orjson.loads(f.read())
-                if LOCAL_DEBUG: logger.debug(f"✅ Loaded raw grouped fleet inventory from {filepath}.")
-                return grouped_inventory
-            except orjson.JSONDecodeError as e:
-                logger.error(f"❌ Error decoding grouped inventory JSON from {filepath}: {e}")
-                return {}  # Return empty dict, as it's grouped
-            except Exception as e:
-                if LOCAL_DEBUG:
-                    logger.error(f"❌ Error loading grouped inventory from JSON: {e}")
-                return {}  # Return empty dict
-        else:
+        if not os.path.exists(filepath):
             if LOCAL_DEBUG: logger.debug(f"ℹ️ No existing grouped inventory file found at {filepath}. Initializing empty grouped inventory and creating file.")
             self.save_inventory_to_json([])  # Create the file with an empty inventory
-            return {}  # Return empty dict
+            return {}
+
+        if os.path.getsize(filepath) == 0:  # Check if file is empty
+            if LOCAL_DEBUG: logger.debug(f"ℹ️ Grouped inventory file {filepath} is empty. Returning empty dictionary.")
+            return {}
+
+        with open(filepath, "rb") as f:
+            raw_data = f.read()
+
+        # ⚡ PRE-VALIDATION: Structural integrity check
+        stripped_data = raw_data.strip()
+        if not stripped_data.startswith(b"{") or not stripped_data.endswith(b"}"):
+            logger.error(f"❌ Error: JSON structural validation failed for {filepath}. Corrupted grouped file?")
+            return {}
+
+        grouped_inventory = orjson.loads(raw_data)
+        if LOCAL_DEBUG: logger.debug(f"✅ Loaded raw grouped fleet inventory from {filepath}.")
+        return grouped_inventory
 
     def save_query_response_to_json(self, serial, response, command, corr_id):
         """
@@ -158,14 +160,16 @@ class VisaJsonBuilder:
             "timestamp": datetime.datetime.now().isoformat(),
         }
 
-        try:
-            with open(filepath, "wb") as f:
-                f.write(orjson.dumps(query_data, option=orjson.OPT_INDENT_2))
-            if LOCAL_DEBUG: logger.debug(f"✅ Saved query response for {serial} to {filepath}")
-        except Exception as e:
-            if LOCAL_DEBUG:
-                logger.error(
-                    f"❌ Error saving query response to JSON: {e}")
+        with open(filepath, "wb") as f:
+            f.write(orjson.dumps(query_data, option=orjson.OPT_INDENT_2))
+        
+        if LOCAL_DEBUG: 
+            # Final validation: check if file was written
+            if os.path.exists(filepath):
+                logger.debug(f"✅ Saved query response for {serial} to {filepath}")
+            else:
+                logger.error(f"❌ Failed to save query response for {serial} to {filepath}")
+
 
     def _group_devices_by_type_and_model(self, inventory_data):
         """

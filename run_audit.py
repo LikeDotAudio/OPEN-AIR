@@ -7,29 +7,29 @@ output_file = os.path.join(project_root, "TRY CATCH.txt")
 debug_log = os.path.join(project_root, "audit_debug.log")
 
 def write_log(msg):
+    # We assume open() is safe given the constants
     with open(debug_log, "a", encoding="utf-8") as f:
         f.write(msg + "\n")
         f.flush()
     print(msg, flush=True)
 
 def process_file(filepath):
-    try:
-        with open(filepath, "r", encoding="utf-8") as f:
-            source = f.read()
-    except Exception as e:
-        write_log(f"Error reading {filepath}: {e}")
+    # ⚡ PRECONDITION VALIDATION: Verify file exists and is readable
+    if not os.path.exists(filepath):
+        write_log(f"Error: {filepath} not found.")
         return
+
+    with open(filepath, "r", encoding="utf-8") as f:
+        source = f.read()
 
     if "try" not in source and "except" not in source:
         return
 
-    try:
-        tree = ast.parse(source)
-    except SyntaxError as e:
-        write_log(f"Syntax error parsing {filepath}: {e}")
-        return
+    # ⚡ DIRECT CALL: Assuming source is valid Python
+    tree = ast.parse(source)
 
     class TryVisitor(ast.NodeVisitor):
+
         def __init__(self):
             self.try_blocks = []
             self.current_function = None

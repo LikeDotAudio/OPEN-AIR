@@ -60,22 +60,24 @@ class VisaProxy:
         """
         current_function_name = inspect.currentframe().f_code.co_name
         if LOCAL_DEBUG: logger.debug(f"💳 🟢️️️🟢 ➡️➡️ {current_function_name}. The grand SCPI experiment begins!")
-        try:
-            self.mqtt_util = mqtt_controller
-            self.subscriber_router = subscriber_router
-            self.inst = None
-            self.model = ""
-            self.manufacturer = ""
+        
+        # ⚡ PRECONDITION VALIDATION
+        if not mqtt_controller or not subscriber_router:
+            logger.error(f"💳 ❌ Critical: Missing MQTT controller or router in {current_function_name}")
+            return
 
-            self.command_queue = queue.Queue()
-            self.shutdown_flag = None
-            self.worker_thread = None
+        self.mqtt_util = mqtt_controller
+        self.subscriber_router = subscriber_router
+        self.inst = None
+        self.model = ""
+        self.manufacturer = ""
 
-            self._setup_mqtt_subscriptions()
+        self.command_queue = queue.Queue()
+        self.shutdown_flag = threading.Event()
+        self.worker_thread = None
 
-        except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("💳 🟢️️️🔴 By Jove, the apparatus has failed to initialize! The error be")
+        self._setup_mqtt_subscriptions()
+
 
     def shutdown(self):
         """Terminates the command processor worker thread gracefully.
@@ -116,40 +118,29 @@ class VisaProxy:
           thread death.
         """
         while not self.shutdown_flag.is_set():
-            command_info = None
-            try:
-                command_info = self.command_queue.get(block=False)
-                if command_info is None:
-                    break
-
-                command = command_info["command"]
-                query = command_info["query"]
-                correlation_id = command_info["correlation_id"]
-
-                if query:
-                    self.query_safe(command, correlation_id)
-                else:
-                    self.write_safe(command)
-
-                self.command_queue.task_done()
-            except (_queue.Empty, queue.Empty):
-                # Using a non-blocking get to allow for rapid shutdown signaling.
+            # ⚡ ZERO EXCEPTION: Polling check instead of catching Empty
+            if self.command_queue.empty():
+                time.sleep(0.1)
                 continue
-            except Exception as e:
-                cmd_for_error = (
-                    command_info.get("command", "N/A")
-                    if command_info is not None
-                    else "N/A"
-                )
-                if LOCAL_DEBUG:
-                    logger.critical(f"💳 Unhandled exception in command processor worker: {e}")
-                self._publish_proxy_error(
-                    message=f"Error in command processor worker: {e}",
-                    command=cmd_for_error,
-                )
-                if command_info is not None:
-                    self.command_queue.task_done()
+                
+            command_info = self.command_queue.get()
+            
+            if command_info is None: # The Poison Pill
+                break
+
+            command = command_info["command"]
+            query = command_info["query"]
+            correlation_id = command_info["correlation_id"]
+
+            if query:
+                self.query_safe(command, correlation_id)
+            else:
+                self.write_safe(command)
+
+            self.command_queue.task_done()
+            
         if LOCAL_DEBUG: logger.debug("💳 ℹ️ Proxy Log: VisaProxy command processor worker terminated.")
+
 
     def _setup_mqtt_subscriptions(self):
         """Registers the inbound command inbox topic.
@@ -265,23 +256,19 @@ class VisaProxy:
         """
         current_function_name = inspect.currentframe().f_code.co_name
         if LOCAL_DEBUG: logger.debug(f"💳 ℹ️ Proxy Log: Attempting a system-wide reset!")
-        try:
-            logger.warning("💳 ℹ️ Proxy Log: ⚠️ Command failed. Attempting to reset the instrument with '*RST'...")
-            reset_success = self.write_safe(command="*RST")
+        
+        logger.warning("💳 ℹ️ Proxy Log: ⚠️ Command failed. Attempting to reset the instrument with '*RST'...")
+        reset_success = self.write_safe(command="*RST")
 
-            if reset_success:
-                if LOCAL_DEBUG: logger.success("💳 ℹ️ Proxy Log: ✅ Success! The device reset command was sent successfully.")
-            else:
-                self._publish_proxy_error(
-                    message="❌ Failure! The device did not respond to the reset command.",
-                    command="*RST",
-                )
-            return reset_success
+        if reset_success:
+            if LOCAL_DEBUG: logger.success("💳 ℹ️ Proxy Log: ✅ Success! The device reset command was sent successfully.")
+        else:
+            self._publish_proxy_error(
+                message="❌ Failure! The device did not respond to the reset command.",
+                command="*RST",
+            )
+        return reset_success
 
-        except Exception as e:
-            error_msg = f"❌ Error in {current_function_name}: {e}"
-            self._publish_proxy_error(message=error_msg)
-            return False
 
     def write_safe(self, command):
         """Executes a non-query SCPI command with error handling.

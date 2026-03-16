@@ -1,0 +1,55 @@
+description = "Audit the codebase for 'Bad Test Modules' or 'No Tests' and generate a report in assets/."
+
+prompt = """
+You are the Quality Assurance Lead for the OPEN-AIR project. Your mission is to identify "Bad Test Modules" or components with "No Tests" to ensure architectural integrity and reliability.
+
+### The Standard for 'Bad Tests':
+
+- **Missing Tests**: Production code without a corresponding test module. Every component (especially in `managers/` and `workers/`) should have an associated test or "tester" file.
+- **Muddled Intent**: A single test function should test one concept. If a test is a miscellaneous series of operations, it is failing the Single Responsibility Principle for tests.
+- **Violation of F.I.R.S.T.**: Tests should be Fast, Independent, Repeatable, Self-Validating, and Timely.
+- **Lack of Assertions**: A test that doesn't actually validate its output (no `assert` or equivalent check) is just a script, not a test.
+- **Exhaustive Testing**: Failure to test boundary conditions and error states is a major risk.
+
+### Your Task:
+
+1. **Audit**: Scan the codebase (focusing on `.py` files) for missing or poorly written tests.
+   - For each functional module in `managers/` and `workers/`, check for a corresponding `test_*.py` or `*_tester.py` file.
+   - Use `ast` or `grep_search` to analyze existing tests for assertions and complexity.
+2. **Analyze**: Evaluate the most critical components lacking test coverage or having poor quality tests.
+3. **Report**: Create a detailed Markdown report named `Bad_Tests_Audit.md`.
+4. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Bad_Tests_Audit.md`.
+
+The report should include:
+- A summary of the overall test coverage and health.
+- A list of "Top Offenders" (modules with no tests or the worst tests) with file paths and specific concerns.
+- Recommendations for a testing strategy (e.g., introducing a Domain-Specific Testing Language).
+
+Begin the audit and save the report to the assets folder.
+
+---
+
+### Core Principles for Clean Tests (for your reference):
+
+Test code is just as important as production code and must be kept equally clean, as it is the tests that keep the production code flexible, maintainable, and reusable. If test code is allowed to become messy, tangled, and dirty, it becomes a severe liability that makes modifying the system harder and eventually causes the production code to rot.
+
+To write high-quality, professional tests, you should adhere to the following core requirements:
+Prioritize Readability: Clarity, simplicity, and density of expression are essential in test writing. You should structure your tests using the BUILD-OPERATE-CHECK (or Given-When-Then) pattern, which clearly splits the test into three distinct parts: building the test data, operating on that data, and checking that the operation yielded the expected results.
+
+Follow the F.I.R.S.T. Principles: Clean tests must conform to these five rules:
+Fast: Tests should run quickly so developers are encouraged to run them frequently.
+Independent: Tests should not depend on each other and must be able to run independently in any order.
+Repeatable: You should be able to run the tests in any environment, whether it is QA, production, or an offline local laptop.
+Self-Validating: Tests should have a definitive boolean output—they either pass or fail—so you do not have to manually evaluate log files or compare text outputs.
+Timely: Unit tests should be written in a timely fashion, ideally just before the production code that is required to make them pass.
+
+Test a Single Concept: A single test function should not test a miscellaneous series of things. Instead, test just one concept per test function to prevent readers from having to guess what each section of a long test is validating. While there is a school of thought advocating for exactly one assert per test, the more practical rule is to simply minimize the number of asserts per concept.
+
+Create a Domain-Specific Testing Language: Instead of relying strictly on the system's standard APIs to manipulate data, build up a specialized set of functions and utilities designed specifically to be used by your tests. This testing API acts as a domain-specific language that makes your tests significantly easier to write and read.
+
+Exhaustively Test Boundaries and Errors: A test suite is insufficient as long as there are unexplored conditions. Take special care to test boundary conditions, as programmers often misjudge boundaries. Additionally, when you find a bug, exhaustively test the surrounding function because bugs tend to congregate together.
+
+Follow the Three Laws of TDD: Do not write production code until you have written a failing unit test; do not write more of a unit test than is sufficient to fail; and do not write more production code than is sufficient to pass that currently failing test.
+
+Finally, remember that while test code must be exceptionally clean, it operates under a dual standard: it does not necessarily need to be as CPU- or memory-efficient as production code, since it runs in a testing environment rather than a production environment.
+"""

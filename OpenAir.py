@@ -105,11 +105,8 @@ def main():
     def log(msg):
         """Internal helper for consistent supervisor console output."""
         print(f"[SUPERVISOR] {msg}")
-        try:
-            if _DEBUG: 
-                logger.debug(f"🚀 SUPERVISOR: {msg}")
-        except: 
-            pass
+        if _DEBUG: 
+            logger.debug(f"🚀 SUPERVISOR: {msg}")
 
     log(f"Launching OPEN-AIR Partitions... (Mission Critical: {is_mission_critical})")
 
@@ -141,60 +138,68 @@ def main():
     p_core = None
     p_ui = None
 
-    try:
-        # 1. Launch UI Partition (Handles User Feedback/Splash Screen).
-        log("Spawning Partition B (UI)...")
-        p_ui = subprocess.Popen([python_executable, ui_script], env=ui_env)
-        processes.append(p_ui)
-        
-        # 2. Launch Core Partition (Handles Hardware/Logic).
-        log("Spawning Partition A (Core)...")
-        p_core = subprocess.Popen([python_executable, core_script], env=core_env)
-        # Core is prioritized in the monitoring list at index 0.
-        processes.insert(0, p_core)
-        
-        log("System Running. Monitoring child processes...")
+    # Use a flag for graceful shutdown instead of catching KeyboardInterrupt
+    shutdown_requested = [False]
+    def signal_handler(sig, frame):
+        log("🛑 Keyboard Interrupt (Signal). Initiating graceful shutdown...")
+        shutdown_requested[0] = True
 
-        # --- Monitoring Loop ---
-        while True:
-            time.sleep(0.5) # Throttle loop to minimize CPU impact.
-            
-            # Check Core partition liveness.
-            if p_core.poll() is not None:
-                if is_mission_critical:
-                    log(f"❌ Core died (Code {p_core.returncode}). Restarting...")
-                    p_core = subprocess.Popen([python_executable, core_script], 
-                                               env=core_env)
-                    processes[0] = p_core
-                else:
-                    log(f"🛑 Core exited (Code {p_core.returncode}). Shutting down.")
-                    break
-            
-            # Check UI partition liveness.
-            if p_ui.poll() is not None:
-                if is_mission_critical:
-                    log(f"⚠️ UI exited (Code {p_ui.returncode}). Restarting...")
-                    p_ui = subprocess.Popen([python_executable, ui_script], 
-                                             env=ui_env)
-                    processes[1] = p_ui
-                else:
-                    log(f"👋 UI exited (Code {p_ui.returncode}). System complete.")
-                    break
+    signal.signal(signal.SIGINT, signal_handler)
 
-    except KeyboardInterrupt:
-        log("🛑 Keyboard Interrupt. Initiating graceful shutdown...")
-    finally:
-        # --- Finalization and Cleanup ---
-        log("Terminating child processes...")
-        for p in processes:
-            if p and p.poll() is None:
-                p.terminate()
-                try:
-                    p.wait(timeout=2)
-                except subprocess.TimeoutExpired:
-                    # Force-kill if the process refuses to terminate within 2s.
-                    p.kill()
-        log("Supervisor shutdown complete. Goodbye.")
+    # 1. Launch UI Partition (Handles User Feedback/Splash Screen).
+    log("Spawning Partition B (UI)...")
+    p_ui = subprocess.Popen([python_executable, ui_script], env=ui_env)
+    processes.append(p_ui)
+    
+    # 2. Launch Core Partition (Handles Hardware/Logic).
+    log("Spawning Partition A (Core)...")
+    p_core = subprocess.Popen([python_executable, core_script], env=core_env)
+    # Core is prioritized in the monitoring list at index 0.
+    processes.insert(0, p_core)
+    
+    log("System Running. Monitoring child processes...")
+
+    # --- Monitoring Loop ---
+    while not shutdown_requested[0]:
+        time.sleep(0.5) # Throttle loop to minimize CPU impact.
+        
+        # Check Core partition liveness.
+        if p_core.poll() is not None:
+            if is_mission_critical and not shutdown_requested[0]:
+                log(f"❌ Core died (Code {p_core.returncode}). Restarting...")
+                p_core = subprocess.Popen([python_executable, core_script], 
+                                            env=core_env)
+                processes[0] = p_core
+            else:
+                log(f"🛑 Core exited (Code {p_core.returncode}). Shutting down.")
+                break
+        
+        # Check UI partition liveness.
+        if p_ui.poll() is not None:
+            if is_mission_critical and not shutdown_requested[0]:
+                log(f"⚠️ UI exited (Code {p_ui.returncode}). Restarting...")
+                p_ui = subprocess.Popen([python_executable, ui_script], 
+                                            env=ui_env)
+                processes[1] = p_ui
+            else:
+                log(f"👋 UI exited (Code {p_ui.returncode}). System complete.")
+                break
+
+    # --- Finalization and Cleanup ---
+    log("Terminating child processes...")
+    for p in processes:
+        if p and p.poll() is None:
+            p.terminate()
+            # Polling instead of p.wait(timeout=2) to avoid exception
+            start_wait = time.time()
+            while p.poll() is None and (time.time() - start_wait) < 2:
+                time.sleep(0.1)
+            
+            if p.poll() is None:
+                # Force-kill if the process refuses to terminate within 2s.
+                p.kill()
+                p.wait() # Final wait to clean up zombie
+    log("Supervisor shutdown complete. Goodbye.")
 
 if __name__ == "__main__":
     main()

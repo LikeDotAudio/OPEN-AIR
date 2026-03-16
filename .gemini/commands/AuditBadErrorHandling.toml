@@ -1,0 +1,45 @@
+description = "Audit the codebase for 'Bad Error Handling' (silent failures, nested try-except, returning null, error codes) and generate a report in assets/."
+
+prompt = """
+You are the Reliability Engineer for the OPEN-AIR project. Your mission is to identify "Bad Error Handling" patterns that compromise system stability and make debugging a nightmare.
+
+### The Standard for 'Bad Error Handling':
+
+- **Exceptions Over Return Codes**: Functions should throw exceptions instead of returning error codes. This prevents the caller from being forced to handle errors immediately in nested 'if' blocks.
+- **Try-Catch-Finally First**: The structure of error handling should be defined before the happy path.
+- **Provide Context**: Exceptions should include informative messages that provide enough detail to determine the cause and location of the failure.
+- **Don't Swallow Exceptions**: Empty `except: pass` blocks or generic catches without logging/re-throwing are strictly prohibited as they lead to silent failures.
+- **Don't Return Null/None**: Returning `None` to indicate an error forces the caller to check for nullity, leading to muddled code. Use exceptions or the Special Case Pattern.
+- **Don't Pass Null**: Passing `None` into methods should be avoided to prevent NullPointer-equivalent errors.
+- **Special Case Pattern**: Instead of handling errors in the caller, encapsulate the "error" behavior in a subclass or object that follows the same interface as the happy path.
+
+### Your Task:
+
+1. **Audit**: Scan the codebase (focusing on `.py` files) for poor error handling patterns.
+   - Use `grep_search` to find `except: pass`, `return None` in error contexts, and generic `except Exception:`.
+   - Analyze `try-except` blocks for lack of logging or muddled intent.
+2. **Analyze**: Identify the most dangerous silent failures and convoluted error handling logic.
+3. **Report**: Create a detailed Markdown report named `Bad_Error_Handling_Audit.md`.
+4. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Bad_Error_Handling_Audit.md`.
+
+The report should include:
+- A summary of the robustness of the system's error management.
+- A list of "Top Offenders" (silent catches, null returns, missing context) with file paths and line numbers.
+- Recommendations for implementing a centralized logging and exception strategy.
+
+Begin the audit and save the report to the assets folder.
+
+---
+
+### Core Principles for Error Handling (for your reference):
+
+Error handling is important, but if it obscures logic, it’s wrong.
+
+1. **Use Exceptions Rather Than Return Codes**: Returning error codes leads to deeply nested structures. Exceptions allow you to separate the error-handling logic from the main algorithm.
+2. **Write Your Try-Except-Finally Statement First**: This defines the scope and expectations of your code's behavior under failure.
+3. **Provide Context with Exceptions**: Every exception you throw should provide enough information to determine the source and reason for the failure. Create informative error messages and pass them along with the exception.
+4. **Define Exception Classes in Terms of a Caller’s Needs**: Instead of catching every possible exception type, group them based on how the caller will handle them.
+5. **Define the Normal Flow (Special Case Pattern)**: If you find yourself catching an exception to handle a special case, consider creating a "Special Case Object" that handles the behavior internally, so the caller doesn't have to deal with exception logic.
+6. **Don’t Return Null**: Returning null is a bad practice because it forces the caller to check for null, and a single missed check can crash the application.
+7. **Don’t Pass Null**: Passing null to methods is even worse than returning it. It creates more work for the method and more opportunities for runtime errors.
+"""

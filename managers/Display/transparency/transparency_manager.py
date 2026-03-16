@@ -97,10 +97,9 @@ class TransparencyManager:
 
                 # Only warn if we're not currently generating a new background or rebuilding
                 # Also skip if we are in early layout (1x1)
-                try:
+                w, h = 0, 0
+                if draw_target.winfo_exists():
                     w, h = draw_target.winfo_width(), draw_target.winfo_height()
-                except:
-                    w, h = 0, 0
                     
                 is_busy = getattr(builder_instance, '_is_rebuilding', False) or \
                           (getattr(builder_instance, '_bg_task_id', 0) > 0 and getattr(builder_instance, 'panel_bg_pil', None) is None)
@@ -109,124 +108,117 @@ class TransparencyManager:
                     # ⚡ SILENCE: Theme fallback is a normal state, not a warning.
                     if LOCAL_DEBUG: logger.trace(f"TransparencyManager: No source image for {widget}. Using theme fallback.")
                 
-                try:
-                    theme_bg = "#2b2b2b" # Default
-                    if hasattr(builder_instance, 'theme_colors'):
-                        theme_bg = builder_instance.theme_colors.get("bg", theme_bg)
-                    
-                    if widget.cget("bg") != theme_bg:
-                        widget.configure(bg=theme_bg)
-                    if canvas and canvas.winfo_exists() and canvas.cget("bg") != theme_bg:
-                        canvas.configure(bg=theme_bg)
-                except Exception as e: 
-                    if LOCAL_DEBUG: logger.error(f"TransparencyManager fallback error: {e}")
+                theme_bg = "#2b2b2b" # Default
+                if hasattr(builder_instance, 'theme_colors'):
+                    theme_bg = builder_instance.theme_colors.get("bg", theme_bg)
+                
+                if widget.winfo_exists() and widget.cget("bg") != theme_bg:
+                    widget.configure(bg=theme_bg)
+                if canvas and canvas.winfo_exists() and canvas.cget("bg") != theme_bg:
+                    canvas.configure(bg=theme_bg)
                 return
 
-            try:
-                # ⚡ OPTIMIZATION: Use root coordinates for fast relative calculation
-                # Use a small per-event cache to avoid redundant winfo_rootx calls in batch passes
-                cache = getattr(builder_instance, '_root_coord_cache', None)
-                
+            # ⚡ OPTIMIZATION: Use root coordinates for fast relative calculation
+            # Use a small per-event cache to avoid redundant winfo_rootx calls in batch passes
+            cache = getattr(builder_instance, '_root_coord_cache', None)
+            
+            wx, wy = 0, 0
+            if draw_target.winfo_exists():
                 if cache is not None and id(draw_target) in cache:
                     wx, wy = cache[id(draw_target)]
                 else:
                     wx, wy = draw_target.winfo_rootx(), draw_target.winfo_rooty()
                     if cache is not None: cache[id(draw_target)] = (wx, wy)
-                
-                # Use pre-calculated scroll root or look it up
-                if scroll_root_x is not None and scroll_root_y is not None:
-                    sx, sy = scroll_root_x, scroll_root_y
+            else:
+                return # Draw target gone
+            
+            # Use pre-calculated scroll root or look it up
+            sx, sy = 0, 0
+            if scroll_root_x is not None and scroll_root_y is not None:
+                sx, sy = scroll_root_x, scroll_root_y
+            else:
+                # Use cache for scroll root too
+                if cache is not None and "scroll_root" in cache:
+                    sx, sy = cache["scroll_root"]
                 else:
-                    # Use cache for scroll root too
-                    if cache is not None and "scroll_root" in cache:
-                        sx, sy = cache["scroll_root"]
-                    else:
-                        ref = scroll_ref or getattr(builder_instance, 'scroll_frame', None)
-                        if not ref: 
-                            if LOCAL_DEBUG: logger.trace(f"TransparencyManager: No scroll_frame reference for {widget} in {builder_instance}")
-                            return
-                        sx, sy = ref.winfo_rootx(), ref.winfo_rooty()
-                        if cache is not None: cache["scroll_root"] = (sx, sy)
-
-                rel_x, rel_y = wx - sx, wy - sy
-                w, h = draw_target.winfo_width(), draw_target.winfo_height()
-                
-                # ⚡ OPTIMIZATION: 1x1 is a standard 'pre-layout' state in Tkinter.
-                if w <= 1 or h <= 1: 
-                    return
-
-                # ⚡ JITTER FILTERING: If coordinates moved by < 2 pixels, and image ID/size is same, ignore.
-                # This stops 'shimmering' during subtle parent resizes or scroll jitters.
-                last_state = getattr(draw_target, '_last_slice_state', (None, None, 0, 0, 0))
-                last_rx, last_ry, last_w, last_h, last_img_id = last_state
-                
-                if last_img_id == id(source) and w == last_w and h == last_h and last_rx is not None:
-                    dx, dy = abs(rel_x - last_rx), abs(rel_y - last_ry)
-                    if dx < 2 and dy < 2:
-                        if LOCAL_DEBUG: logger.trace(f"TransparencyManager: Slice SKIPPED for {widget} (Jitter Filter). Delta: ({dx}px, {dy}px)")
+                    ref = scroll_ref or getattr(builder_instance, 'scroll_frame', None)
+                    if not ref or not ref.winfo_exists(): 
+                        if LOCAL_DEBUG: logger.trace(f"TransparencyManager: No scroll_frame reference for {widget} in {builder_instance}")
                         return
+                    sx, sy = ref.winfo_rootx(), ref.winfo_rooty()
+                    if cache is not None: cache["scroll_root"] = (sx, sy)
 
-                current_state = (rel_x, rel_y, w, h, id(source))
-                
-                if LOCAL_DEBUG:
-                    reason = "Image ID Change" if last_img_id != id(source) else "Coordinate Shift"
-                    logger.trace(f"TransparencyManager: Slicing {widget} ({w}x{h}) at ({rel_x}, {rel_y}). Reason: {reason}")
+            rel_x, rel_y = wx - sx, wy - sy
+            w, h = draw_target.winfo_width(), draw_target.winfo_height()
+            
+            # ⚡ OPTIMIZATION: 1x1 is a standard 'pre-layout' state in Tkinter.
+            if w <= 1 or h <= 1: 
+                return
 
-                # Perform the crop
-                bw, bh = source.size
-                
-                # ⚡ ROBUSTNESS: Ensure crop coordinates are within image bounds
-                # If widget is partially off-background, we clamp and sample the edge
-                x1, y1 = max(0, min(bw - 1, rel_x)), max(0, min(bh - 1, rel_y))
-                x2, y2 = max(x1 + 1, min(bw, rel_x + w)), max(y1 + 1, min(bh, rel_y + h))
-                
-                if x2 > x1 and y2 > y1:
-                    try:
-                        crop = source.crop((x1, y1, x2, y2))
-                        
-                        # Update widget flat color (center sample) for safety/containers
-                        center_rgb = crop.getpixel(((x2-x1)//2, (y2-y1)//2))
-                        hex_bg = '#%02x%02x%02x' % center_rgb[:3]
-                        
-                        # ⚡ MANDATORY: Update both container and draw target backgrounds
-                        if widget.cget("bg") != hex_bg:
-                            widget.configure(bg=hex_bg)
-                        if draw_target != widget and draw_target.cget("bg") != hex_bg:
-                            draw_target.configure(bg=hex_bg)
-
-                        # If it's a canvas, draw the slice
-                        if isinstance(draw_target, tk.Canvas):
-                            tk_img = ImageTk.PhotoImage(crop)
-                            
-                            # ⚡ MANDATORY: Keep reference on BOTH to prevent GC and support custom draw methods
-                            draw_target.panel_bg_image = tk_img
-                            draw_target.panel_bg_pil_slice = crop
-                            draw_target.panel_bg_pil = source # ⚡ Full source for masking logic
-                            
-                            if widget != draw_target:
-                                widget.panel_bg_image = tk_img
-                                widget.panel_bg_pil_slice = crop
-                                widget.panel_bg_pil = source # ⚡ Full source
-                                
-                            draw_target.delete("panel_bg_slice")
-                            draw_target.create_image(0, 0, image=tk_img, anchor="nw", tags="panel_bg_slice")
-                            draw_target.tag_lower("panel_bg_slice")
-                        
-                        draw_target._last_slice_state = current_state
-                        
-                        # Trigger redraw if widget has custom drawing logic
-                        if hasattr(widget, 'render'): widget.render()
-                        elif hasattr(widget, '_draw'): widget._draw()
-
-                    except Exception as e:
-                        if LOCAL_DEBUG: logger.error(f"TransparencyManager slicing/color error: {e}")
-                else:
-                    # Silently skip slicing for truly off-screen widgets (common during scrolling/rebuilds)
-                    if LOCAL_DEBUG: logger.trace(f"TransparencyManager: Skipping empty crop for {widget} at ({x1},{y1}) to ({x2},{y2}) [BW: {bw}, BH: {bh}]")
+            # ⚡ JITTER FILTERING: If coordinates moved by < 2 pixels, and image ID/size is same, ignore.
+            last_state = getattr(draw_target, '_last_slice_state', (None, None, 0, 0, 0))
+            last_rx, last_ry, last_w, last_h, last_img_id = last_state
+            
+            if last_img_id == id(source) and w == last_w and h == last_h and last_rx is not None:
+                dx, dy = abs(rel_x - last_rx), abs(rel_y - last_ry)
+                if dx < 2 and dy < 2:
+                    if LOCAL_DEBUG: logger.trace(f"TransparencyManager: Slice SKIPPED for {widget} (Jitter Filter). Delta: ({dx}px, {dy}px)")
                     return
+
+            current_state = (rel_x, rel_y, w, h, id(source))
+            
+            if LOCAL_DEBUG:
+                reason = "Image ID Change" if last_img_id != id(source) else "Coordinate Shift"
+                logger.trace(f"TransparencyManager: Slicing {widget} ({w}x{h}) at ({rel_x}, {rel_y}). Reason: {reason}")
+
+            # Perform the crop
+            bw, bh = source.size
+            
+            # ⚡ ROBUSTNESS: Ensure crop coordinates are within image bounds
+            x1, y1 = max(0, min(bw - 1, rel_x)), max(0, min(bh - 1, rel_y))
+            x2, y2 = max(x1 + 1, min(bw, rel_x + w)), max(y1 + 1, min(bh, rel_y + h))
+            
+            if x2 > x1 and y2 > y1:
+                crop = source.crop((x1, y1, x2, y2))
+                
+                # Update widget flat color (center sample) for safety/containers
+                center_rgb = crop.getpixel(((x2-x1)//2, (y2-y1)//2))
+                hex_bg = '#%02x%02x%02x' % center_rgb[:3]
+                
+                # ⚡ MANDATORY: Update both container and draw target backgrounds
+                if widget.winfo_exists() and widget.cget("bg") != hex_bg:
+                    widget.configure(bg=hex_bg)
+                if draw_target != widget and draw_target.winfo_exists() and draw_target.cget("bg") != hex_bg:
+                    draw_target.configure(bg=hex_bg)
+
+                # If it's a canvas, draw the slice
+                if isinstance(draw_target, tk.Canvas) and draw_target.winfo_exists():
+                    tk_img = ImageTk.PhotoImage(crop)
                     
-            except Exception as e:
-                if LOCAL_DEBUG: logger.exception(f"TransparencyManager: Error slicing {widget}: {e}")
+                    # ⚡ MANDATORY: Keep reference on BOTH to prevent GC and support custom draw methods
+                    draw_target.panel_bg_image = tk_img
+                    draw_target.panel_bg_pil_slice = crop
+                    draw_target.panel_bg_pil = source # ⚡ Full source for masking logic
+                    
+                    if widget != draw_target and widget.winfo_exists():
+                        widget.panel_bg_image = tk_img
+                        widget.panel_bg_pil_slice = crop
+                        widget.panel_bg_pil = source # ⚡ Full source
+                        
+                    draw_target.delete("panel_bg_slice")
+                    draw_target.create_image(0, 0, image=tk_img, anchor="nw", tags="panel_bg_slice")
+                    draw_target.tag_lower("panel_bg_slice")
+                
+                draw_target._last_slice_state = current_state
+                
+                # Trigger redraw if widget has custom drawing logic
+                if hasattr(widget, 'render'): widget.render()
+                elif hasattr(widget, '_draw'): widget._draw()
+            else:
+                # Silently skip slicing for truly off-screen widgets (common during scrolling/rebuilds)
+                if LOCAL_DEBUG: logger.trace(f"TransparencyManager: Skipping empty crop for {widget} at ({x1},{y1}) to ({x2},{y2}) [BW: {bw}, BH: {bh}]")
+                return
+
 
         # 3. Register with builder for synchronized batch reslicing
         if hasattr(builder_instance, 'register_for_slicing'):

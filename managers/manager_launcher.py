@@ -23,6 +23,7 @@ if str(project_root) not in sys.path:
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from workers.logger.logger import initialize_logging, set_log_directory
+from workers.logger.log_filter_engine import initialize_filter_engine
 from loguru import logger
 
 from managers.configini.config_reader import Config
@@ -55,6 +56,10 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     
     subscriber_router = MqttSubscriberRouter()
     protocol_router = ProtocolRouter.get_instance()
+    
+    # Initialize the log filter engine to enable dynamic log filtering via MQTT.
+    # This must be called after the MQTT router and logger are set up.
+    initialize_filter_engine(mqtt_router=subscriber_router, logger_reconfigurator_callable=initialize_logging)
     
     # Core Infrastructure
     splinker_module = importlib.import_module("workers.Splinker.splinker_manager")

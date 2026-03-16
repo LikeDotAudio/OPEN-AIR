@@ -60,7 +60,7 @@ class ActuatorButton(CanvasButton, ActuatorInteractionMixin, ActuatorStateMixin)
         self.bind("<ButtonRelease-1>", self._on_release, add="+")
         
         if self.path and self.state_mirror_engine:
-            self._status_topic = self.state_mirror_engine.calculate_topic(f"{self.path}/active", self.base_mqtt_topic)
+            self._status_topic = self.state_mirror_engine.topic_calculator.calculate(f"{self.path}/active", self.base_mqtt_topic)
             if self.subscriber_router:
                 self.subscriber_router.subscribe_to_topic(self._status_topic, self._on_mqtt_state_update)
             self.bind("<Destroy>", self._cleanup, add="+")

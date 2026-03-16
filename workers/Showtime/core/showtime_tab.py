@@ -23,9 +23,10 @@ class ShowtimeTab(
     Adheres to SRP and follows the 'self-only' argument rule for stateful logic.
     """
 
-    def __init__(self, parent, config=None, **kwargs):
+    def __init__(self, parent, config=None, json_path=None, **kwargs):
         super().__init__(parent, **kwargs)
         self.config_data = config or {}
+        self.json_path = json_path
         
         # 1. Initialize Mixin State
         self._initialize_showtime_state()

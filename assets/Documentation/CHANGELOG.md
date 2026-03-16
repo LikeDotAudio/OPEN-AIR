@@ -1,3 +1,17 @@
+## [2026-03-15 22:45:00] Bug Fix: Log Filter Engine Initialization
+**************************************
+### Fixed
+- **LogFilterEngine ImportError**: Resolved a critical startup crash in `manager_launcher.py` where `initialize_filter_engine` was being imported from the wrong module (`workers.logger.logger` instead of `workers.logger.log_filter_engine`).
+- **MqttSubscriberRouter Case Sensitivity**: Fixed multiple `ImportError` and `AttributeError` instances in `log_filter_engine.py` caused by incorrect case sensitivity in `MqttSubscriberRouter` references.
+- **LogFilterEngine Protocol Alignment**: Updated `LogFilterEngine` to correctly use the `MqttMessage` object and its `get_json_payload()` method for incoming MQTT traffic, and standardized its subscription logic to use `subscribe_to_topic()`.
+
+## [2026-03-15 22:30:00] Bug Fix: Fader Synchronization & Core Stability
+**************************************
+### Fixed
+- **Fader Echo/Ghosting**: Implemented centralized `LOCKED` and `SETTLED` metadata in `StateMirrorEngine.broadcast_gui_change_to_mqtt`. Faders now correctly signal their "in-motion" status (`SETTLED: False`) during interaction, preventing network echo loops and ghost touch conflicts.
+- **StateMirrorEngine API Restoration**: Added a `calculate_topic` shim to `StateMirrorEngine` for backward compatibility with legacy widget callers (e.g., `TextTable`, `ButtonActuator`, `StatusLight`), resolving multiple `AttributeError` crashes.
+- **ShowtimeTab Initialization**: Fixed a `TclError: unknown option "-json_path"` in `ShowtimeTab` by explicitly handling the `json_path` argument in `__init__`, preventing it from being passed to the underlying `tk.Frame`.
+
 ## [2026-03-15 01:55:00] Bug Fix: GUI Builder Refactor Stabilization
 **************************************
 ### Fixed
@@ -397,7 +411,7 @@ Message: README Cleanup and Documentation Engine Update
 
 ### Improved
 - Updated `.gemini/commands/GitCommit.toml` and `.gemini/commands/FreshStart.toml` to explicitly delete `/home/anthony/Documents/OPEN-AIR/.git/objects` during local data purges.
-- This ensures that local git history is fully cleared before committing or restarting the application.
+- This ensures that local git history is fully cleared before committing to GitHub or performing a fresh application start.
 
 ### Fixed
 - Intermittent failure to recreate `config.ini` when `OpenAir.py` starts, particularly when modules import `Config` before the main application has initialized paths.
@@ -468,3 +482,18 @@ Commit: 74cbe6f8
 Date: 2026-03-13 22:46:01
 Message: Documentation and README Link Repair
 **************************************
+## [2026-03-15 15:15:00] Logging System Enhancements: Hierarchical Namespacing, Dynamic Filtering, JSON Output, and Unique IDs
+**************************************
+### Added
+- **Hierarchical Namespacing**: Implemented `LoggerFactory` to support hierarchical logger categories (e.g., `Worker.Splinker.DebounceHandler`), enabling more granular log filtering and analysis.
+- **Dynamic Runtime Log Filtering**: Introduced `LogFilterEngine` which subscribes to `OPEN-AIR/system/logger/filter/set` via MQTT, allowing on-the-fly adjustment of log levels per module without application restarts.
+- **Structured JSON Logging**: Added a secondary JSON Lines (`.jsonl`) sink to Loguru, outputting logs with structured fields like `ptp_time`, `level`, `partition`, `category`, `action`, `component_guid`, and `payload` for external system ingestion.
+- **Unique Component IDs**: Logger binding now includes `component_guid` to uniquely identify instances of workers and other components in log records, aiding debugging of multi-instance scenarios.
+
+### Improved
+- **Logger Initialization**: Integrated `LogFilterEngine` initialization into `initialize_logging`.
+- **Codebase Readability**: Refactored logger instantiation across the codebase to use `LoggerFactory` for consistent and hierarchical binding.
+
+### Fixed
+- **Log Filtering**: Ensured that dynamic filters applied via MQTT correctly update Loguru's sink configurations.
+- **JSON Sink Configuration**: Correctly configured the JSON sink to capture all relevant log details including the new hierarchical categories and component IDs.

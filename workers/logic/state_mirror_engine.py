@@ -117,6 +117,15 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
         widget_info = self._get_widget_info(widget_id)
         if not widget_info: return
         
+        # ⚡ AUTO-METADATA: Extract interaction state from widget instance
+        instance = widget_info.get("instance")
+        is_locked = getattr(instance, "is_locked", False)
+        is_settled = not getattr(instance, "is_sliding", False)
+        
+        metadata = extra_payload or {}
+        if "LOCKED" not in metadata: metadata["LOCKED"] = is_locked
+        if "SETTLED" not in metadata: metadata["SETTLED"] = is_settled
+        
         now = time.time()
         if (now - self._last_global_broadcast_ts) < self._GLOBAL_THROTTLE_MS: return
         if (now - widget_info.get("last_broadcast_ts", 0)) < 0.050: return
@@ -131,10 +140,10 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
         self._last_global_broadcast_ts = now
         
         if self.state_cache_manager:
-            self.state_cache_manager.handle_external_update(widget_info["topic"], current_val, source="GUI", metadata=extra_payload)
+            self.state_cache_manager.handle_external_update(widget_info["topic"], current_val, source="GUI", metadata=metadata)
         else:
             from workers.logic.manifest.builder import create_manifest
-            payload = create_manifest(current_val, widget_info["topic"], "GUI", extra_payload)
+            payload = create_manifest(current_val, widget_info["topic"], "GUI", metadata)
             mqtt_publisher_service.publish_payload(widget_info["topic"], orjson.dumps(payload).decode())
 
     def sync_incoming_mqtt_to_gui(self, msg: MqttMessage):
@@ -175,6 +184,10 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
         try: callback(data)
         except: pass
         finally: self._silent_update = False
+
+    def calculate_topic(self, widget_id: str, tab_name: str) -> str:
+        """Shim for backward compatibility with legacy widget callers."""
+        return self.topic_calculator.calculate(widget_id, tab_name)
 
     def publish_command(self, topic: str, payload: str):
         if not self.is_inert and not self._silent_update:

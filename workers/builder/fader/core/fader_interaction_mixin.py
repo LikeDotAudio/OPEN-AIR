@@ -23,13 +23,19 @@ class FaderInteractionMixin:
         
         self.variable.set(current_value)
         if self.state_mirror_engine:
-            self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
+            self.state_mirror_engine.broadcast_gui_change_to_mqtt(
+                self.path, 
+                extra_payload={"SETTLED": False, "LOCKED": True}
+            )
 
     def _stop_interaction(self, event):
         self.is_sliding = False
         self.is_locked = False
         if self.state_mirror_engine:
-            self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
+            self.state_mirror_engine.broadcast_gui_change_to_mqtt(
+                self.path, 
+                extra_payload={"SETTLED": True, "LOCKED": False}
+            )
         if self.sync_callback:
             self.sync_callback()
 
@@ -47,7 +53,10 @@ class FaderInteractionMixin:
         self.variable.set(new_val)
         
         if self.state_mirror_engine:
-            self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
+            self.state_mirror_engine.broadcast_gui_change_to_mqtt(
+                self.path, 
+                extra_payload={"SETTLED": True, "LOCKED": False}
+            )
             
         self.canvas.after(500, lambda: self._clear_sliding_state())
 

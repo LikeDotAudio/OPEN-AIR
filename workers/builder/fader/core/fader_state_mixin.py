@@ -6,7 +6,10 @@ class FaderStateMixin:
     def _jump_to_reff_point(self, event):
         self.variable.set(self.reff_point)
         if self.state_mirror_engine:
-            self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
+            self.state_mirror_engine.broadcast_gui_change_to_mqtt(
+                self.path, 
+                extra_payload={"SETTLED": True, "LOCKED": False}
+            )
 
     def _open_manual_entry(self, event):
         if getattr(self, 'temp_entry', None) and self.temp_entry.winfo_exists(): return
@@ -27,7 +30,10 @@ class FaderStateMixin:
             if self.min_val <= val <= self.max_val:
                 self.variable.set(val)
                 if self.state_mirror_engine:
-                    self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
+                    self.state_mirror_engine.broadcast_gui_change_to_mqtt(
+                        self.path, 
+                        extra_payload={"SETTLED": True, "LOCKED": False}
+                    )
         except Exception:
             pass
         self._destroy_manual_entry()

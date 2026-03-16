@@ -26,13 +26,10 @@ class DirectoryBuilderMixin:
         if path_str in self._layout_cache:
             cached_entry = self._layout_cache[path_str]
             if cached_entry.get("mtime") == current_mtime:
-                try:
-                    layout_data = cached_entry.get("layout_data", cached_entry)
-                    normalized = self.layout_parser.parse_layout_data(layout_data, path)
-                    normalized["mtime"] = current_mtime
-                    return normalized
-                except Exception as e:
-                    if LOCAL_DEBUG: logger.warning(f"⚠️ Cache normalization failed for {path}: {e}")
+                # ⚡ CACHE HIT: Return already normalized layout info directly.
+                # Redundant re-normalization via parse_layout_data was causing failures 
+                # because the parser expects 'raw' input, not already-normalized results.
+                return cached_entry
 
         # Re-parse if not in cache or if mtime changed
         layout_info = self.layout_parser.parse_directory(path)

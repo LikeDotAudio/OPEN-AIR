@@ -46,69 +46,88 @@ class RotarySelectorSwitch(CustomKnobFrame):
             command=None, *args, **kwargs
         )
 
-    def _draw_selector(self, canvas, width, height, current_idx, positions, fg_color, accent_color, indicator_color, secondary, 
-                       shape="circle", pointer_style="line", knob_style="standard", no_center=False, continuous=False,
-                       main_label=None, selection_text=None, show_label=True):
+    def _draw_selector(self, canvas, width, height, current_idx, positions, colors, options):
         """Internal drawing pipeline for the selector switch."""
+        self._prepare_canvas(canvas)
         
-        # ⚡ INDUSTRIAL TRANSPARENCY: Don't delete everything, preserve the patina slice
+        layout = self._calc_layout(width, height, options)
+        angles = self._calc_angles(len(positions), options.get("continuous", False))
+        
+        self._draw_track(canvas, layout, angles, colors['secondary'], options.get("continuous", False))
+        self._draw_ticks_and_labels(canvas, layout, angles, current_idx, positions, colors)
+        self._draw_knob_elements(canvas, layout, angles, current_idx, colors, options)
+        self._draw_text_overlays(canvas, width, height, colors, options)
+
+    def _prepare_canvas(self, canvas):
+        """Preserve industrial transparency slice while clearing other elements."""
         for item in canvas.find_all():
-            tags = canvas.gettags(item)
-            if "panel_bg_slice" not in tags:
+            if "panel_bg_slice" not in canvas.gettags(item):
                 canvas.delete(item)
         
-        # 0. Draw Industrial Background (Fallback if slice doesn't exist)
         if hasattr(canvas, 'panel_bg_image') and not canvas.find_withtag("panel_bg_slice"):
             canvas.create_image(0, 0, image=canvas.panel_bg_image, anchor="nw", tags="panel_bg_slice")
-            
-        cx, cy, num_pos = width / 2, height / 2, len(positions)
-        
-        # Reserves for labels
-        top_reserve = 20 if show_label and main_label else 0
-        bottom_reserve = 20 # Always some space for the selection label
-        
-        usable_h = height - top_reserve - bottom_reserve
-        adj_cy = cy + (top_reserve - bottom_reserve) / 2
-        
+
+    def _calc_layout(self, width, height, options):
+        """Calculate center points and usable radius."""
+        cx, cy = width / 2, height / 2
+        top_res = 20 if options.get("show_label") and options.get("main_label") else 0
+        bottom_res = 20
+        usable_h = height - top_res - bottom_res
+        adj_cy = cy + (top_res - bottom_res) / 2
+        radius = min(width, usable_h) / 2 - 25
+        return {'cx': cx, 'cy': cy, 'adj_cy': adj_cy, 'radius': radius}
+
+    def _calc_angles(self, num_pos, continuous):
+        """Determine angular start, step, and total span."""
         start_angle, total_span = (90, 360) if continuous else (240, 300)
         angle_step = total_span / (num_pos if continuous else max(1, num_pos - 1))
-        
-        radius = min(width, usable_h) / 2 - 25
-        
-        # 1. Draw Track
-        if continuous: 
-            canvas.create_oval(cx - radius, adj_cy - radius, cx + radius, adj_cy + radius, outline=secondary, width=2)
-        else: 
-            canvas.create_arc(cx - radius, adj_cy - radius, cx + radius, adj_cy + radius, start=start_angle, extent=-total_span, style=tk.ARC, outline=secondary, width=2)
+        return {'start': start_angle, 'step': angle_step, 'span': total_span}
 
-        # 2. Draw Position Ticks and Labels
+    def _draw_track(self, canvas, layout, angles, color, continuous):
+        """Draw the circular or arc track."""
+        cx, adj_cy, radius = layout['cx'], layout['adj_cy'], layout['radius']
+        if continuous: 
+            canvas.create_oval(cx - radius, adj_cy - radius, cx + radius, adj_cy + radius, outline=color, width=2)
+        else: 
+            canvas.create_arc(cx - radius, adj_cy - radius, cx + radius, adj_cy + radius, 
+                               start=angles['start'], extent=-angles['span'], style=tk.ARC, outline=color, width=2)
+
+    def _draw_ticks_and_labels(self, canvas, layout, angles, current_idx, positions, colors):
+        """Draw position ticks and labels around the track."""
+        cx, adj_cy, radius = layout['cx'], layout['adj_cy'], layout['radius']
         for i, pos_text in enumerate(positions):
-            angle_deg = start_angle - (i * angle_step)
+            angle_deg = angles['start'] - (i * angles['step'])
             angle_rad = math.radians(angle_deg)
             ts_x, ts_y = cx + (radius + 2) * math.cos(angle_rad), adj_cy - (radius + 2) * math.sin(angle_rad)
             te_x, te_y = cx + (radius + 10) * math.cos(angle_rad), adj_cy - (radius + 10) * math.sin(angle_rad)
             tl_x, tl_y = cx + (radius + 24) * math.cos(angle_rad), adj_cy - (radius + 24) * math.sin(angle_rad)
             
-            canvas.create_line(ts_x, ts_y, te_x, te_y, fill=secondary, width=1)
+            canvas.create_line(ts_x, ts_y, te_x, te_y, fill=colors['secondary'], width=1)
             canvas.create_text(
                 tl_x, tl_y, text=str(pos_text), 
-                fill=indicator_color if i == current_idx else fg_color, 
+                fill=colors['indicator'] if i == current_idx else colors['fg'], 
                 font=("Helvetica", 8, "bold" if i == current_idx else "normal"), 
                 tags="industrial_text"
             )
 
-        # 3. Draw Knob Body and Pointer
-        p_angle = start_angle - (current_idx * angle_step)
-        _draw_body(canvas, cx, adj_cy, radius - 5, shape, secondary, 1, rotation_angle=p_angle, outline_thickness=1, fill_color="", teeth=8)
-        _draw_pointer(canvas, cx, adj_cy, radius - 5, 4, p_angle, pointer_style, indicator_color, length=radius+14, offset=0, no_center=no_center)
+    def _draw_knob_elements(self, canvas, layout, angles, current_idx, colors, options):
+        """Draw the physical knob body and pointer."""
+        cx, adj_cy, radius = layout['cx'], layout['adj_cy'], layout['radius']
+        p_angle = angles['start'] - (current_idx * angles['step'])
+        _draw_body(canvas, cx, adj_cy, radius - 5, options.get("shape", "circle"), colors['secondary'], 1, 
+                   rotation_angle=p_angle, outline_thickness=1, fill_color="", teeth=8)
+        _draw_pointer(canvas, cx, adj_cy, radius - 5, 4, p_angle, options.get("pointer_style", "line"), 
+                      colors['indicator'], length=radius+14, offset=0, no_center=options.get("no_center", False))
 
-        # 4. Draw Main Label (Title)
-        if show_label and main_label:
-            canvas.create_text(cx, 10, text=main_label, fill=fg_color, font=("Helvetica", 9, "bold"), anchor="n", tags="industrial_text")
-
-        # 5. Draw Selection Label (Current Value)
-        if selection_text:
-            canvas.create_text(cx, height - 10, text=selection_text, fill=indicator_color, font=("Helvetica", 9, "bold"), anchor="s", tags="industrial_text")
+    def _draw_text_overlays(self, canvas, width, height, colors, options):
+        """Draw the main title and selection value text."""
+        cx = width / 2
+        if options.get("show_label") and options.get("main_label"):
+            canvas.create_text(cx, 10, text=options.get("main_label"), fill=colors['fg'], 
+                               font=("Helvetica", 9, "bold"), anchor="n", tags="industrial_text")
+        if options.get("selection_text"):
+            canvas.create_text(cx, height - 10, text=options.get("selection_text"), fill=colors['indicator'], 
+                               font=("Helvetica", 9, "bold"), anchor="s", tags="industrial_text")
 
 @WidgetRegistry.register("SelectorSwitch", "_SelectorSwitch")
 class BuilderKnobRotarySelectorCreator:
@@ -208,18 +227,24 @@ class BuilderKnobRotarySelectorCreator:
             sel_text = str(positions[idx])
             if LOCAL_DEBUG: builder_logger.trace(f"🔄✨🎨 [REDRAW] Updating rotary selector '{label}' visuals to index {idx} ('{sel_text}')")
             
-            frame._draw_selector(
-                canvas, width, height, idx, positions, 
-                fg_color, accent_color, indicator_color, secondary_color, 
-                shape=config_data.get("shape", "circle"), 
-                pointer_style=config_data.get("pointer_style", "line"), 
-                knob_style=config_data.get("knob_style", "standard"), 
-                no_center=config_data.get("no_center", False), 
-                continuous=continuous,
-                main_label=label,
-                selection_text=sel_text,
-                show_label=config_data.get("show_label", True)
-            )
+            colors = {
+                "fg": fg_color,
+                "accent": accent_color,
+                "indicator": indicator_color,
+                "secondary": secondary_color
+            }
+            options = {
+                "shape": config_data.get("shape", "circle"),
+                "pointer_style": config_data.get("pointer_style", "line"),
+                "knob_style": config_data.get("knob_style", "standard"),
+                "no_center": config_data.get("no_center", False),
+                "continuous": continuous,
+                "main_label": label,
+                "selection_text": sel_text,
+                "show_label": config_data.get("show_label", True)
+            }
+            
+            frame._draw_selector(canvas, width, height, idx, positions, colors, options)
 
         def sync_bg():
             update_visuals() 

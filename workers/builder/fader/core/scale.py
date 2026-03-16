@@ -5,116 +5,137 @@ import tkinter as tk
 
 class ScaleDrawer:
     @staticmethod
-    def draw(canvas, frame, width, height, cx, available_height, padding, tick_length_half, slot_w, cap_width=40):
+    def draw(canvas, frame, width, height, layout):
         """Draws the ticks and labels for the vertical fader."""
-        tick_values = []
+        cx = layout['cx']
+        avail_h = layout['available_height']
+        padding = layout['padding']
+        tick_h_half = layout['tick_length_half']
+        slot_w = layout['slot_w']
+        cap_w = layout.get('cap_width', 40)
+
+        tick_values = ScaleDrawer._get_tick_values(frame)
+        label_every, draw_every = ScaleDrawer._calc_intervals(len(tick_values))
+        
+        cfg = ScaleDrawer._get_tick_config(frame)
+        offset = ScaleDrawer._calc_text_offset(width, cx, tick_h_half, slot_w, cap_w, frame, cfg['label_pos'])
+
+        for i, val in enumerate(tick_values):
+            y = ScaleDrawer._calc_tick_y(val, frame, avail_h, padding)
+            is_main = (i % label_every == 0)
+            
+            if i % draw_every == 0:
+                ScaleDrawer._draw_tick_line(canvas, cx, y, tick_h_half, slot_w, is_main, frame, cfg)
+            
+            if is_main:
+                ScaleDrawer._draw_tick_label(canvas, cx, y, val, offset, frame, cfg)
+
+    @staticmethod
+    def _get_tick_values(frame):
+        """Retrieve custom ticks or generate smart ticks based on frame range."""
         if frame.custom_ticks is not None:
-             tick_values = frame.custom_ticks
-        else:
-             value_range = frame.max_val - frame.min_val
+            return frame.custom_ticks
              
-             # Smart tick logic
-             if hasattr(frame, "tick_interval") and frame.tick_interval is not None:
-                 ti = float(frame.tick_interval)
-             else:
-                 target_ticks = 10
-                 if value_range > 0:
-                     raw_interval = value_range / target_ticks
-                     exponent = math.floor(math.log10(raw_interval))
-                     fraction = raw_interval / (10**exponent)
-                     if fraction < 1.5: snapped = 1
-                     elif fraction < 3.5: snapped = 2
-                     elif fraction < 7.5: snapped = 5
-                     else: snapped = 10
-                     ti = snapped * (10**exponent)
-                 else:
-                     ti = 10
+        v_range = frame.max_val - frame.min_val
+        ti = ScaleDrawer._get_smart_interval(frame, v_range)
+        
+        ticks = []
+        if ti > 0:
+            curr = math.ceil(frame.min_val / ti) * ti
+            while curr <= frame.max_val:
+                ticks.append(curr); curr += ti
+        return ticks
 
-             if ti > 0:
-                 curr = math.ceil(frame.min_val / ti) * ti
-                 while curr <= frame.max_val:
-                     tick_values.append(curr); curr += ti
+    @staticmethod
+    def _get_smart_interval(frame, v_range):
+        """Calculate a human-friendly tick interval."""
+        if hasattr(frame, "tick_interval") and frame.tick_interval is not None:
+            return float(frame.tick_interval)
+        if v_range <= 0: return 10
+        
+        raw = v_range / 10.0
+        exp = math.floor(math.log10(raw))
+        frac = raw / (10**exp)
+        
+        if frac < 1.5: snap = 1
+        elif frac < 3.5: snap = 2
+        elif frac < 7.5: snap = 5
+        else: snap = 10
+        return snap * (10**exp)
 
-        # Calculate labeling and drawing intervals
-        num_ticks = len(tick_values)
+    @staticmethod
+    def _calc_intervals(num_ticks):
+        """Determine labeling and drawing density to avoid overcrowding."""
+        label_map = [(5000, 500), (1000, 200), (500, 50), (250, 20), (100, 10), (50, 5), (20, 2)]
         label_every = 1
-        if num_ticks > 20: label_every = 2
-        if num_ticks > 50: label_every = 5
-        if num_ticks > 100: label_every = 10
-        if num_ticks > 250: label_every = 20
-        if num_ticks > 500: label_every = 50
-        if num_ticks > 1000: label_every = 200
-        if num_ticks > 5000: label_every = 500
-
+        for threshold, interval in label_map:
+            if num_ticks > threshold:
+                label_every = interval
+                break
+        
+        draw_map = [(500, 100), (200, 50), (50, 10), (20, 5), (10, 2), (5, 1)]
         draw_every = 1
-        if label_every >= 500: draw_every = 100
-        elif label_every >= 200: draw_every = 50
-        elif label_every >= 50: draw_every = 10
-        elif label_every >= 20: draw_every = 5
-        elif label_every >= 10: draw_every = 2
-        elif label_every >= 5: draw_every = 1
+        for threshold, interval in draw_map:
+            if label_every >= threshold:
+                draw_every = interval
+                break
+        return label_every, draw_every
 
-        tick_col = getattr(frame, "tick_color", "light grey")
-        sub_tick_col = getattr(frame, "sub_tick_color", tick_col)
-        
-        # Granular Text Colors
-        tick_txt_col = getattr(frame, "tick_text_color", tick_col)
-        sub_tick_txt_col = getattr(frame, "sub_tick_text_color", sub_tick_col)
-        
-        label_pos = getattr(frame, "tick_label_position", "right")
+    @staticmethod
+    def _get_tick_config(frame):
+        """Extract aesthetic configuration for ticks from the frame."""
+        t_col = getattr(frame, "tick_color", "light grey")
+        st_col = getattr(frame, "sub_tick_color", t_col)
+        return {
+            'tick_col': t_col,
+            'sub_tick_col': st_col,
+            'tick_txt_col': getattr(frame, "tick_text_color", t_col),
+            'sub_tick_txt_col': getattr(frame, "sub_tick_text_color", st_col),
+            'label_pos': getattr(frame, "tick_label_position", "right")
+        }
 
-        # Calculate safety margin to avoid fader cap overlap
-        # Labels should be at least 5px away from the cap edge OR the tick edge
-        # On narrow faders, we reduce this margin.
+    @staticmethod
+    def _calc_text_offset(width, cx, tick_h_half, slot_w, cap_w, frame, label_pos):
+        """Calculate safe offset for labels to avoid overlap with the fader cap."""
         margin = 5
         if width < 100: margin = 2
         if width < 80: margin = 0
         
-        text_offset = max(tick_length_half, (cap_width / 2)) + margin
-
-        # If still too wide for the canvas, we allow it to overlap the cap slightly
-        # because the user might have a very wide cap in a narrow fader.
-        if label_pos in ["right", "both"] and (cx + text_offset > width - 10):
-            # Try to fit it by reducing offset, even if it overlaps cap
-            text_offset = width - cx - 15 # Give at least 15px for the number text
-            # But don't go inside the track!
-            text_offset = max(text_offset, slot_w/2 + 5)
+        offset = max(tick_h_half, (cap_w / 2)) + margin
         
-        if label_pos in ["left", "both"] and (cx - text_offset < 10):
-            text_offset = cx - 15
-            text_offset = max(text_offset, slot_w/2 + 5)
+        # Prevent overflowing the canvas boundaries
+        if label_pos in ["right", "both"] and (cx + offset > width - 10):
+            offset = max(width - cx - 15, slot_w/2 + 5)
+        if label_pos in ["left", "both"] and (cx - offset < 10):
+            offset = max(cx - 15, slot_w/2 + 5)
+        return offset
 
-        for i, tick_value in enumerate(tick_values):
-            range_val = frame.max_val - frame.min_val
-            linear_tick_norm = max(0.0, min(1.0, (tick_value - frame.min_val) / range_val if range_val != 0 else 0))
-            
-            display_tick_norm = max(0.0000001, linear_tick_norm) ** (1.0 / frame.log_exponent) if frame.log_exponent != 1.0 else linear_tick_norm
-            tick_y_pos = available_height * (1 - display_tick_norm) + padding
-            
-            is_main_tick = (i % label_every == 0)
-            current_tick_col = tick_col if is_main_tick else sub_tick_col
-            current_text_col = tick_txt_col if is_main_tick else sub_tick_txt_col
+    @staticmethod
+    def _calc_tick_y(val, frame, avail_h, padding):
+        """Convert a value to a vertical Y coordinate on the canvas."""
+        v_range = frame.max_val - frame.min_val
+        lin_norm = max(0.0, min(1.0, (val - frame.min_val) / v_range if v_range != 0 else 0))
+        disp_norm = max(1e-7, lin_norm) ** (1.0 / frame.log_exponent) if frame.log_exponent != 1.0 else lin_norm
+        return avail_h * (1 - disp_norm) + padding
 
-            # Draw tick line (Segmented to avoid crossing the track slot)
-            if i % draw_every == 0:
-                gap = 2
-                # Left segment
-                canvas.create_line(cx - tick_length_half, tick_y_pos, cx - slot_w/2 - gap, tick_y_pos, 
-                                   fill=current_tick_col, width=frame.tick_thickness, tags="static")
-                # Right segment
-                canvas.create_line(cx + slot_w/2 + gap, tick_y_pos, cx + tick_length_half, tick_y_pos, 
-                                   fill=current_tick_col, width=frame.tick_thickness, tags="static")
-            
-            # Draw tick label
-            if is_main_tick:
-                if tick_value == int(tick_value):
-                    tick_text = str(int(tick_value))
-                else:
-                    tick_text = f"{tick_value:.1f}"
-                
-                if label_pos in ["right", "both"]:
-                    canvas.create_text(cx + text_offset, tick_y_pos, text=tick_text, 
-                                       fill=current_text_col, font=frame.tick_font, anchor="w", tags="static")
-                if label_pos in ["left", "both"]:
-                    canvas.create_text(cx - text_offset, tick_y_pos, text=tick_text, 
-                                       fill=current_text_col, font=frame.tick_font, anchor="e", tags="static")
+    @staticmethod
+    def _draw_tick_line(canvas, cx, y, length_half, slot_w, is_main, frame, cfg):
+        """Draw segmented tick lines on both sides of the track slot."""
+        color = cfg['tick_col'] if is_main else cfg['sub_tick_col']
+        gap = 2
+        canvas.create_line(cx - length_half, y, cx - slot_w/2 - gap, y, 
+                           fill=color, width=frame.tick_thickness, tags="static")
+        canvas.create_line(cx + slot_w/2 + gap, y, cx + length_half, y, 
+                           fill=color, width=frame.tick_thickness, tags="static")
+
+    @staticmethod
+    def _draw_tick_label(canvas, cx, y, val, offset, frame, cfg):
+        """Render the numeric label at the specified offset."""
+        text = str(int(val)) if val == int(val) else f"{val:.1f}"
+        color = cfg['tick_txt_col'] # In this refactor we assume only main ticks call this
+        pos = cfg['label_pos']
+        
+        if pos in ["right", "both"]:
+            canvas.create_text(cx + offset, y, text=text, fill=color, font=frame.tick_font, anchor="w", tags="static")
+        if pos in ["left", "both"]:
+            canvas.create_text(cx - offset, y, text=text, fill=color, font=frame.tick_font, anchor="e", tags="static")

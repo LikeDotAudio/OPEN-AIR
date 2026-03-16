@@ -169,6 +169,24 @@ TRAPEZOID_TOP_WIDTH = 1.6
 TRAPEZOID_TOP_HEIGHT = 1.6 
 TRAPEZOID_BOTTOM_WIDTH = 1.3
 
+# Hill Mask / Aperture Constants
+HILL_CONFIGS = {
+    "hotdog": (2.5, 0.3),
+    "gem": (0.8, 0.3),
+    "super_gem": (0.4, 0.3),
+    "hex": (1.8, 0.3),
+    "octagon": (1.8, 0.3),
+    "triangle": (0.2, 0.1),
+    "pyramid": (0.2, 0.1),
+    "parking_meter": (0.2, 0.1),
+    "squircle": (0.5, 0.3),
+    "squimonde": (0.5, 0.3),
+    "crest": (1.0, 0.3),
+    "squectangle": (0.7, 0.3),
+    "trapezoid": (1.2, 0.3),
+    "default": (1.5, 0.3)
+}
+
 # Lens Constants
 LENS_GLOW_STEPS = 10
 LENS_GLOW_SHRINK_MAX = 60

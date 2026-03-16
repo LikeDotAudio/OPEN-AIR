@@ -29,7 +29,17 @@ class LTPRendererMixin:
         
         if self.orientation == "vertical":
             TrackDrawer.draw(canvas, self, cx, top_res, ch, 10, hover_color=self.track_hover_color if self.is_hovered else None)
-            ScaleDrawer.draw(canvas, self, cw, ch, cx, ch - top_res - bot_res, top_res, cw * self.tick_size, 10, cap_width=self.cap_radius*2)
+            
+            layout = {
+                'cx': cx,
+                'available_height': ch - top_res - bot_res,
+                'padding': top_res,
+                'tick_length_half': cw * self.tick_size,
+                'slot_w': 10,
+                'cap_width': self.cap_radius * 2
+            }
+            ScaleDrawer.draw(canvas, self, cw, ch, layout)
+            
             h_pos = self._get_handle_pos(ch)
             canvas.create_line(cx, ch - bot_res, cx, h_pos, fill=self.value_highlight_color, width=2, capstyle=tk.ROUND, tags="fill_line")
             self._draw_knob_on_handle(canvas, cx, h_pos)

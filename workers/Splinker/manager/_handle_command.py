@@ -8,69 +8,71 @@ def _handle_command(self, topic, payload):
         return
 
     parts = topic.split('/')
-    if len(parts) < 5: return
+    if len(parts) < 5: 
+        return
 
     command = parts[-1]
-    
     splinker_logger.info(f"🔗 Splinker: Command '{command}' received on topic {topic}")
     splinker_logger.debug(f"🔗 Splinker: Raw Payload type={type(payload)}, value={payload}")
 
-    if command == "Create":
-        self.create_splink()
-        return
-    elif command == "Panic":
-        self._handle_panic()
-        return
-    elif command == "ResetPanic":
-        self._reset_panic()
-        return
-    elif command == "Refresh":
-        self._load_splinks()
-        return
-    elif command == "DirectCreate":
-        try:
-            # Payload might be bytes (from MQTT) or dict (from internal Router ingest)
-            data = payload
-            if isinstance(payload, (bytes, str)):
-                data = orjson.loads(payload)
-            
-            # ⚡ UNWRAP: Check if it's in a standard 'val' envelope
-            if isinstance(data, dict) and "val" in data:
-                data = data["val"]
+    # 1. Global Commands (No Splink ID required)
+    global_handlers = {
+        "Create": self.create_splink,
+        "Panic": self._handle_panic,
+        "ResetPanic": self._reset_panic,
+        "Refresh": self._load_splinks,
+        "DirectCreate": lambda: self._process_direct_create(payload)
+    }
 
-            if data and isinstance(data, dict):
-                self.create_splink_with_params(
-                    data.get("source"), 
-                    data.get("dest"),
-                    source_val=data.get("source_val"),
-                    dest_val=data.get("dest_val")
-                )
-            else:
-                splinker_logger.warning(f"⚠️ Splinker: DirectCreate received with invalid or empty payload: {data}")
-        except Exception as e:
-            splinker_logger.error(f"❌ Splinker: Failed to parse DirectCreate: {e}")
+    if command in global_handlers:
+        global_handlers[command]()
         return
-        
+
+    # 2. Instance Commands (Splink ID required)
     splink_id = parts[-2]
-    if command == "Learn":
-        self.set_learn_mode(splink_id)
-    elif command == "Teach":
-        self.set_teach_mode(splink_id)
-    elif command == "Delete":
-        self.delete_splink(splink_id)
-    elif command == "Update":
-        try:
-            data = payload
-            if isinstance(payload, (bytes, str)):
-                data = orjson.loads(payload)
-            
-            # ⚡ UNWRAP
-            if isinstance(data, dict) and "val" in data:
-                data = data["val"]
+    instance_handlers = {
+        "Learn": lambda: self.set_learn_mode(splink_id),
+        "Teach": lambda: self.set_teach_mode(splink_id),
+        "Delete": lambda: self.delete_splink(splink_id),
+        "Update": lambda: self._process_update_command(splink_id, payload)
+    }
 
-            if data:
-                self._update_splink(splink_id, data)
-            else:
-                splinker_logger.warning(f"⚠️ Splinker: Update command for {splink_id} received with empty/None payload. Ignoring.")
-        except Exception as e:
-            splinker_logger.error(f"❌ Splinker: Failed to parse Update for {splink_id}: {e}")
+    if command in instance_handlers:
+        instance_handlers[command]()
+    else:
+        splinker_logger.warning(f"⚠️ Splinker: Unknown command '{command}' received.")
+
+def _unwrap_payload(self, payload):
+    """Safely extracts data from MQTT bytes/str or direct dicts."""
+    try:
+        data = payload
+        if isinstance(payload, (bytes, str)):
+            data = orjson.loads(payload)
+        
+        if isinstance(data, dict) and "val" in data:
+            return data["val"]
+        return data
+    except Exception as e:
+        splinker_logger.error(f"❌ Splinker: Failed to unwrap payload: {e}")
+        return None
+
+def _process_direct_create(self, payload):
+    """Specific logic for DirectCreate command."""
+    data = self._unwrap_payload(payload)
+    if data and isinstance(data, dict):
+        self.create_splink_with_params(
+            data.get("source"), 
+            data.get("dest"),
+            source_val=data.get("source_val"),
+            dest_val=data.get("dest_val")
+        )
+    else:
+        splinker_logger.warning(f"⚠️ Splinker: DirectCreate received with invalid or empty payload: {data}")
+
+def _process_update_command(self, splink_id, payload):
+    """Specific logic for Update command."""
+    data = self._unwrap_payload(payload)
+    if data:
+        self._update_splink(splink_id, data)
+    else:
+        splinker_logger.warning(f"⚠️ Splinker: Update for {splink_id} received with empty/None payload.")

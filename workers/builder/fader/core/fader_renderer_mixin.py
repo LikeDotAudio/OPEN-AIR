@@ -65,7 +65,15 @@ class FaderRendererMixin:
         TrackDrawer.draw(self.canvas, self, cx, top_res + padding, height - bot_res, 10, hover_color=self.track_hover_color if self.is_hovered else None)
         
         f_h = u_h - (2.0 * padding)
-        ScaleDrawer.draw(self.canvas, self, width, height - bot_res, cx, f_h, top_res + padding, width * self.tick_size, 10, cap_width=cap_w)
+        layout = {
+            'cx': cx,
+            'available_height': f_h,
+            'padding': top_res + padding,
+            'tick_length_half': width * self.tick_size,
+            'slot_w': 10,
+            'cap_width': cap_w
+        }
+        ScaleDrawer.draw(self.canvas, self, width, height - bot_res, layout)
         
         norm = (value - self.min_val) / (self.max_val - self.min_val) if (self.max_val - self.min_val) != 0 else 0
         disp_norm = max(0.0, min(1.0, norm)) ** (1.0 / self.log_exponent) if self.log_exponent != 1.0 else norm

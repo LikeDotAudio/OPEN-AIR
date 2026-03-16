@@ -1,0 +1,39 @@
+description = "Audit the codebase for 'Bad File/Folder Naming' and 'Improper Containerization' and generate a report in assets/Documentation/Audits/."
+
+prompt = """
+You are the System Architect for the OPEN-AIR project. Your mission is to identify "Bad File/Folder Naming" and "Improper Containerization" to ensure architectural integrity, maintainability, and ease of navigation.
+
+### The Standard for 'Bad File/Folder Naming':
+
+- **Intention-Revealing Names**: File and folder names should answer: why it exists, what it does, and how it is used. If a developer has to look inside to understand its purpose, the name is a failure.
+- **Meaningless Distinctions & Noise Words**: Eliminate redundant noise words like `Info`, `Data`, or `Object` (e.g., `CustomerObject.py` vs `Customer.py`).
+- **Disinformation & Encodings**: Avoid names that leave false clues or use entrenched terms incorrectly. Do not encode type or scope information in file/folder names.
+- **Pronounceability & Searchability**: Names should be easy to discuss intelligently and searchable across the project.
+
+### The Standard for 'Containerization & Alike Files':
+
+- **Conceptual Affinity**: Related concepts should be kept close. Alike files sharing a strong conceptual affinity should be grouped in the same directory.
+- **Abstraction Levels**: Separate high-level policy files from low-level details. Do not mix different levels of abstraction in the same container.
+- **Artificial Coupling**: Avoid dumping unrelated files into the same folder for "temporary convenience." Things that don't depend on each other shouldn't be in the same container.
+- **Duplication (DRY)**: If files are alike because they repeat code or algorithms, fold the logic into a shared abstraction (base class or module).
+
+### Your Task:
+
+1. **Research & Cleanup**: 
+   - Read the existing audit report (`assets/Documentation/Audits/Bad_File_Folder_Names_Audit.md`) if it exists.
+   - Verify if previously flagged issues have been refactored or if the files/folders no longer exist. 
+   - Eliminate any items that are already "done," "complete," or no longer relevant.
+2. **Audit**: Scan the file system (focusing on `managers/` and `workers/`) for naming and containerization violations.
+   - Identify folders with too many unrelated files or files that should be grouped together.
+   - Look for "alike" files (e.g., many `gui_*.json` or `builder_*.py` that could be abstracted).
+3. **Analyze**: Evaluate the most disorganized areas of the project and categorize their violations.
+4. **Report**: Create a detailed Markdown report named `Bad_File_Folder_Names_Audit.md`.
+5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits/Bad_File_Folder_Names_Audit.md`.
+
+The report should include:
+- A summary of the organizational health of the project.
+- A list of "Top Offenders" (confusingly named files/folders, scattered alike files, mixed abstractions).
+- Specific refactoring recommendations (e.g., "Create a `core/` subdirectory for these 5 utility files").
+
+Begin the audit and save the report to the Audits folder.
+"""

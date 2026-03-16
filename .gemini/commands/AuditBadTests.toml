@@ -1,4 +1,4 @@
-description = "Audit the codebase for 'Bad Test Modules' or 'No Tests' and generate a report in assets/."
+description = "Audit the codebase for 'Bad Tests' or 'No Tests' and generate a report in assets/Documentation/Audits/."
 
 prompt = """
 You are the Quality Assurance Lead for the OPEN-AIR project. Your mission is to identify "Bad Test Modules" or components with "No Tests" to ensure architectural integrity and reliability.
@@ -13,19 +13,18 @@ You are the Quality Assurance Lead for the OPEN-AIR project. Your mission is to 
 
 ### Your Task:
 
-1. **Audit**: Scan the codebase (focusing on `.py` files) for missing or poorly written tests.
+1. **Research & Cleanup**: 
+   - Read the existing audit report (`assets/Documentation/Audits/Bad_Tests_Audit.md`).
+   - Verify if "missing tests" have been created or if "poor quality tests" have been refactored.
+   - Eliminate any items that are now "covered" or no longer needed.
+2. **Audit**: Scan the codebase (focusing on `.py` files) for missing or poorly written tests.
    - For each functional module in `managers/` and `workers/`, check for a corresponding `test_*.py` or `*_tester.py` file.
-   - Use `ast` or `grep_search` to analyze existing tests for assertions and complexity.
-2. **Analyze**: Evaluate the most critical components lacking test coverage or having poor quality tests.
-3. **Report**: Create a detailed Markdown report named `Bad_Tests_Audit.md`.
-4. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Bad_Tests_Audit.md`.
+3. **Analyze**: Evaluate the most critical components lacking test coverage or having poor quality tests.
+4. **Report**: Create a detailed Markdown report named `Bad_Tests_Audit.md`.
+5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits/Bad_Tests_Audit.md`.
+6. **Suggest GOOD Tests**: For the "Top Offenders," provide specific refactoring suggestions or draft "GOOD" test cases that adhere to the principles below.
 
-The report should include:
-- A summary of the overall test coverage and health.
-- A list of "Top Offenders" (modules with no tests or the worst tests) with file paths and specific concerns.
-- Recommendations for a testing strategy (e.g., introducing a Domain-Specific Testing Language).
-
-Begin the audit and save the report to the assets folder.
+Begin the audit and save the report to the Audits folder.
 
 ---
 
@@ -49,7 +48,19 @@ Create a Domain-Specific Testing Language: Instead of relying strictly on the sy
 
 Exhaustively Test Boundaries and Errors: A test suite is insufficient as long as there are unexplored conditions. Take special care to test boundary conditions, as programmers often misjudge boundaries. Additionally, when you find a bug, exhaustively test the surrounding function because bugs tend to congregate together.
 
-Follow the Three Laws of TDD: Do not write production code until you have written a failing unit test; do not write more of a unit test than is sufficient to fail; and do not write more production code than is sufficient to pass that currently failing test.
+Follow the Three Laws of TDD: Do not write production code until you have written a failing unit test; do not write more of a test than is sufficient to fail; and do not write more production code than is sufficient to pass that currently failing test.
 
 Finally, remember that while test code must be exceptionally clean, it operates under a dual standard: it does not necessarily need to be as CPU- or memory-efficient as production code, since it runs in a testing environment rather than a production environment.
+
+Tests enable the "-ilities" of software, such as flexibility, maintainability, and reusability. Without an automated test suite, every modification to the codebase carries the risk of introducing a new bug. This instills a fear of change that causes production code to slowly rot because developers avoid refactoring it. Conversely, comprehensive tests eliminate this fear, empowering you to safely clean up tangled logic, improve the architecture, and confidently add new features. Tests also act as practical documentation by example, allowing future readers to quickly grasp exactly what a class or function is meant to do.
+
+What makes a good software test: Readability is the single most important aspect of a good test. A good test is clear, simple, and achieves a high density of expression, saying a lot with very few statements. To achieve this, a good test should:
+- Follow the BUILD-OPERATE-CHECK pattern.
+- Use a Domain-Specific Testing Language.
+- Test a Single Concept.
+- Exhaustively Test Boundaries.
+
+High-quality tests strictly adhere to the F.I.R.S.T. principles: Fast, Independent, Repeatable, Self-Validating, and Timely.
+
+A Good Test vs. A Bad Test: A good test operates under a "dual standard." While it must be kept just as clean, well-designed, and thoughtful as production code, it does not necessarily need to be as CPU- or memory-efficient. A bad test is treated as a "quick and dirty" second-class citizen. It is tangled, poorly named, and loaded with obscure details. If a test suite is allowed to be dirty, it becomes a massive liability. Once the bad tests are discarded, the code rots, defects rise, and the project slowly fails.
 """

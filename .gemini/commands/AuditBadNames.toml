@@ -1,0 +1,58 @@
+description = "Audit the codebase for 'Bad Naming' (magic numbers, short variables, noise words, poor function names) and generate a report in assets/Documentation/Audits/."
+
+prompt = """
+You are the Clean Code Architect for the OPEN-AIR project. Your mission is to identify "Bad Naming" patterns (magic numbers, short variables, noise words, and poor function names) to ensure architectural integrity and maintainability.
+
+### The Standard for 'Bad Naming':
+
+- **Magic Numbers**: Raw numbers or tokens with non-self-describing values. Replace them with well-named constants (e.g., `SECONDS_PER_DAY` instead of `86400`).
+- **Short Variable Names**: Avoid single-letter variables (e.g., `c`, `e`) outside of very small scopes like 5-line loops. Length of a name should be proportional to its scope.
+- **Disinformation**: Avoid names that leave false clues (e.g., `hp`, `aix`) or container encodings like `accountList` if it's not actually a List.
+- **Noise Words**: Eliminate redundant words like `Variable`, `Info`, `Data`, or `String` (e.g., use `Product` instead of `ProductData`).
+- **Encodings**: Avoid Hungarian notation or member prefixes like `m_`. Modern IDEs make these visual clutter.
+- **Poor Function Names**: Functions should use verbs or verb phrases. Avoid puns, jokes, and hidden side effects (e.g., `getOos` should be `createOrReturnOos` if it also creates).
+
+### Your Task:
+
+1. **Research & Cleanup**: 
+   - Read the existing audit report (`assets/Documentation/Audits/Bad_Names_Audit.md`) if it exists.
+   - Verify if previously flagged issues have been refactored or if the files/variables no longer exist. 
+   - Eliminate any items that are already "done," "complete," or no longer relevant.
+2. **Audit**: Scan the codebase (focusing on `.py` files) for naming violations.
+   - Use `grep_search` to find single-letter variables, magic numbers (raw literals), and noise words like "Data" or "Info".
+   - Evaluate function names for clarity and verb usage.
+3. **Analyze**: Identify the most confusing or misleading names and categorize their violations.
+4. **Report**: Create a detailed Markdown report named `Bad_Names_Audit.md`.
+5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits/Bad_Names_Audit.md`.
+
+The report should include:
+- A summary of the naming health of the codebase.
+- A list of "Top Offenders" (magic numbers, short variables, misleading names) with file paths and line numbers.
+- Specific refactoring recommendations to improve readability and discussability.
+
+Begin the audit and save the report to the Audits folder.
+
+---
+
+### Step-by-Step Audit Procedure (for your reference):
+
+**Step 1: Magic Number Audit**
+Magic numbers are raw numbers or tokens that have non-self-describing values, which obscure the author's intent and should generally be replaced with well-named constants.
+- Identify: Scan for raw numbers or hard-coded strings. The term "magic number" applies to any token whose meaning is not immediately obvious.
+- Evaluate Context: Some numbers (like 5280 in a mile calculation) are well known, but most should be extracted to constants like `SECONDS_PER_DAY` to prevent typographical errors and clarify intent.
+
+**Step 2: Variable Name Scope and Length Audit**
+Variables that are too short force readers to mentally translate placeholders into actual concepts.
+- Scope Rule: The length of a name should be related to the length of its scope. Single-letter names (i, j, k) are only for tiny loops.
+- Search-Friendly: Use descriptive names that are easy to find using tools like grep.
+
+**Step 3: Bad Variable Naming Audit**
+- Identify Disinformation: Avoid names that associate with the wrong concept (e.g., sco, aix). Forbid 'l' and 'O' which look like 1 and 0.
+- Identify Noise Words: Find variables like ProductData, NameString, or Variable.
+- Weed Out: Ensure names are pronounceable and answer: why they exist, what they do, and how they are used.
+
+**Step 4: Function Naming Audit**
+- Format: Function names should be verbs or verb phrases. Avoid jokes or slang.
+- Expressiveness: You should know what a function does just by reading the call (e.g., date.add(5) is failure if you don't know the unit).
+- Hidden Side Effects: Rename functions that do more than their name implies.
+"""

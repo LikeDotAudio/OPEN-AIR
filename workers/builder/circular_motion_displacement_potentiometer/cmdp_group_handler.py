@@ -24,13 +24,16 @@ class CMDPGroupHandler:
     def add_group_ui(self, group_name, color, initial_visible=True, initial_mute=False):
         if group_name in self.w.group_vars: return
         
-        bp = f"{self.w.path}/groups/{group_name}"
-        fr = tk.Frame(self.w.groups_container)
-        fr.pack(fill=tk.X, padx=1, pady=1)
+        vars = self._init_group_state(group_name, color, initial_visible, initial_mute)
+        self._register_group_sme(group_name, vars)
+        self._create_group_ui_row(group_name, vars)
         
-        # Sync bg immediately
-        fr.config(bg=self.w.groups_container.cget("bg"))
-        
+        self._apply_vis(group_name)
+        self._apply_group_mute(group_name)
+        self.w.refresh_pop_tree()
+
+    def _init_group_state(self, group_name, color, initial_visible, initial_mute):
+        """Initialize Tkinter variables and store them in the widget references."""
         iv = tk.BooleanVar(value=initial_visible)
         im = tk.BooleanVar(value=initial_mute)
         cv = tk.StringVar(value=color)
@@ -41,65 +44,92 @@ class CMDPGroupHandler:
         self.w.group_color_vars[group_name] = cv
         self.w.group_name_vars[group_name] = nv
         
-        # SME Registration
-        if self.w.mixin_ref.state_mirror_engine:
-            sme = self.w.mixin_ref.state_mirror_engine
-            sme.register_widget(f"{bp}/visible", iv, self.w.base_mqtt_topic, {"type": "_CMDP_GrpVis"})
-            sme.register_widget(f"{bp}/mute", im, self.w.base_mqtt_topic, {"type": "_CMDP_GrpMute"})
-            sme.register_widget(f"{bp}/color", cv, self.w.base_mqtt_topic, {"type": "_CMDP_GrpCol"})
-            sme.register_widget(f"{bp}/name", nv, self.w.base_mqtt_topic, {"type": "_CMDP_GrpName"})
-            def _bc(p):
-                if not getattr(sme, "_silent_update", False): sme.broadcast_gui_change_to_mqtt(p)
-            iv.trace_add("write", lambda *a: _bc(f"{bp}/visible"))
-            im.trace_add("write", lambda *a: _bc(f"{bp}/mute"))
-            cv.trace_add("write", lambda *a: _bc(f"{bp}/color"))
-            nv.trace_add("write", lambda *a: _bc(f"{bp}/name"))
-            for p, v in [("visible", iv), ("mute", im), ("color", cv), ("name", nv)]:
-                t = sme.get_widget_topic(f"{bp}/{p}")
-                if self.w.mixin_ref.subscriber_router and t: self.w.mixin_ref.subscriber_router.subscribe_to_topic(t, sme.sync_incoming_mqtt_to_gui)
-                sme.initialize_widget_state(f"{bp}/{p}")
+        return {"visible": iv, "mute": im, "color": cv, "name": nv}
 
-        # UI Elements
-        b_vis = tk.Button(fr, text="👁", bg="#f4902c", fg="black", width=1, bd=0, font=("Arial", 7), command=lambda: iv.set(not iv.get()))
-        b_vis.pack(side=tk.LEFT, padx=1)
-        b_vis.bind("<Alt-Button-1>", lambda e: self.solo_group_visibility(group_name))
-        b_vis.bind("<Control-Button-1>", lambda e: self.show_all_groups())
-        self.group_buttons[group_name] = b_vis
+    def _register_group_sme(self, group_name, vars):
+        """Handle State Mirror Engine registration and MQTT topic subscriptions."""
+        if not self.w.mixin_ref.state_mirror_engine:
+            return
+            
+        sme = self.w.mixin_ref.state_mirror_engine
+        bp = f"{self.w.path}/groups/{group_name}"
+        iv, im, cv, nv = vars["visible"], vars["mute"], vars["color"], vars["name"]
         
-        b_mute = tk.Button(fr, text="🔊", bg="#f4902c", fg="black", width=1, bd=0, font=("Arial", 7), command=lambda: self.toggle_group_mute(group_name))
-        b_mute.pack(side=tk.LEFT, padx=1)
-        b_mute.bind("<Alt-Button-1>", lambda e: self.solo_group_mute(group_name))
-        b_mute.bind("<Control-Button-1>", lambda e: self.unmute_all_groups())
-        self.group_mute_buttons[group_name] = b_mute
+        sme.register_widget(f"{bp}/visible", iv, self.w.base_mqtt_topic, {"type": "_CMDP_GrpVis"})
+        sme.register_widget(f"{bp}/mute", im, self.w.base_mqtt_topic, {"type": "_CMDP_GrpMute"})
+        sme.register_widget(f"{bp}/color", cv, self.w.base_mqtt_topic, {"type": "_CMDP_GrpCol"})
+        sme.register_widget(f"{bp}/name", nv, self.w.base_mqtt_topic, {"type": "_CMDP_GrpName"})
         
-        lbl = tk.Label(fr, textvariable=nv, fg=color, anchor="w", cursor="hand2", font=("Arial", 8, "bold"))
+        def _bc(p):
+            if not getattr(sme, "_silent_update", False): sme.broadcast_gui_change_to_mqtt(p)
+            
+        iv.trace_add("write", lambda *a: _bc(f"{bp}/visible"))
+        im.trace_add("write", lambda *a: _bc(f"{bp}/mute"))
+        cv.trace_add("write", lambda *a: _bc(f"{bp}/color"))
+        nv.trace_add("write", lambda *a: _bc(f"{bp}/name"))
+        
+        for p, v in [("visible", iv), ("mute", im), ("color", cv), ("name", nv)]:
+            t = sme.get_widget_topic(f"{bp}/{p}")
+            if self.w.mixin_ref.subscriber_router and t: 
+                self.w.mixin_ref.subscriber_router.subscribe_to_topic(t, sme.sync_incoming_mqtt_to_gui)
+            sme.initialize_widget_state(f"{bp}/{p}")
+
+    def _create_group_ui_row(self, group_name, vars):
+        """Construct the UI elements for a single group row."""
+        fr = tk.Frame(self.w.groups_container)
+        fr.pack(fill=tk.X, padx=1, pady=1)
+        fr.config(bg=self.w.groups_container.cget("bg"))
+        
+        iv, im, cv, nv = vars["visible"], vars["mute"], vars["color"], vars["name"]
+        
+        # Visibility & Mute Buttons
+        self.group_buttons[group_name] = self._create_vis_btn(fr, group_name, iv)
+        self.group_mute_buttons[group_name] = self._create_mute_btn(fr, group_name, im)
+        
+        # Group Label
+        lbl = tk.Label(fr, textvariable=nv, fg=cv.get(), anchor="w", cursor="hand2", font=("Arial", 8, "bold"))
         lbl.config(bg=fr.cget("bg"))
         lbl.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(2, 0))
         self.group_labels[group_name] = lbl
         
-        def sync_row_bg():
-            bg = self.w.groups_container.cget("bg")
-            fr.config(bg=bg)
-            lbl.config(bg=bg)
-            
-        # Hook into main draw if possible, or just rely on initial set. 
-        # Since rows are added dynamically, we need a way to update them if the main bg changes.
-        # We can monkey-patch a 'sync_bg' method on the frame and call it from the main widget loop if we iterate children.
-        fr.sync_bg = sync_row_bg
-        
+        # Bindings & Traces
+        fr.sync_bg = lambda: self._sync_row_bg(fr, lbl)
+        self._attach_group_traces(group_name, iv, im, cv, nv, lbl)
+        self._attach_group_bindings(group_name, lbl)
+
+    def _create_vis_btn(self, parent, group_name, var):
+        btn = tk.Button(parent, text="👁", bg="#f4902c", fg="black", width=1, bd=0, font=("Arial", 7), 
+                        command=lambda: var.set(not var.get()))
+        btn.pack(side=tk.LEFT, padx=1)
+        btn.bind("<Alt-Button-1>", lambda e: self.solo_group_visibility(group_name))
+        btn.bind("<Control-Button-1>", lambda e: self.show_all_groups())
+        return btn
+
+    def _create_mute_btn(self, parent, group_name, var):
+        btn = tk.Button(parent, text="🔊", bg="#f4902c", fg="black", width=1, bd=0, font=("Arial", 7), 
+                        command=lambda: self.toggle_group_mute(group_name))
+        btn.pack(side=tk.LEFT, padx=1)
+        btn.bind("<Alt-Button-1>", lambda e: self.solo_group_mute(group_name))
+        btn.bind("<Control-Button-1>", lambda e: self.unmute_all_groups())
+        return btn
+
+    def _sync_row_bg(self, frame, label):
+        bg = self.w.groups_container.cget("bg")
+        frame.config(bg=bg)
+        label.config(bg=bg)
+
+    def _attach_group_traces(self, group_name, iv, im, cv, nv, label):
         iv.trace_add("write", lambda *a: self._apply_vis(group_name))
         im.trace_add("write", lambda *a: self._apply_group_mute(group_name))
         cv.trace_add("write", lambda *a: self._sync_col(group_name))
-        nv.trace_add("write", lambda *a: lbl.config(fg=cv.get() if cv.get() else "#FFFFFF"))
-        
-        lbl.bind("<Button-1>", lambda e: self.rename_group(group_name))
-        lbl.bind("<Double-Button-1>", lambda e: self.pick_group_color(group_name))
-        lbl.bind("<Button-2>", lambda e: self.on_group_drag_start(e, group_name))
-        lbl.bind("<B2-Motion>", self.on_group_drag_move)
-        
-        self._apply_vis(group_name)
-        self._apply_group_mute(group_name)
-        self.w.refresh_pop_tree()
+        nv.trace_add("write", lambda *a: label.config(fg=cv.get() if cv.get() else "#FFFFFF"))
+
+    def _attach_group_bindings(self, group_name, label):
+        label.bind("<Button-1>", lambda e: self.rename_group(group_name))
+        label.bind("<Double-Button-1>", lambda e: self.pick_group_color(group_name))
+        label.bind("<Button-2>", lambda e: self.on_group_drag_start(e, group_name))
+        label.bind("<B2-Motion>", self.on_group_drag_move)
+
 
     def solo_group_visibility(self, target_name):
         for gn in self.w.group_vars: self.w.group_vars[gn].set(gn == target_name)

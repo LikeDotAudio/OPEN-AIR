@@ -1,5 +1,25 @@
 import tkinter as tk
 import math
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass
+class NeedleConfig:
+    val: float
+    min_val: float
+    max_val: float
+    start_angle_deg: float
+    end_angle_deg: float
+    extent_deg: float
+    main_arc_radius: float
+    text_offset_from_arc: float
+    color: str
+    style: str
+    thick: float
+    counter_clockwise: bool
+    pivot_size: float
+    needle_scale: float = 1.0
+    tag: str = "vu_needle"
 
 class NeedleDrawer:
     @staticmethod
@@ -10,116 +30,145 @@ class NeedleDrawer:
                     color, style, thick, counter_clockwise, pivot_size,
                     needle_scale=1.0, tag="vu_needle"):
         """
-        Draws or updates the needle. Uses coords() if the tag already exists for performance.
+        Draws or updates the needle. Legacy wrapper for draw_with_config.
         """
-        if val < min_val: val = min_val
-        if val > max_val: val = max_val
+        config = NeedleConfig(
+            val=val, min_val=min_val, max_val=max_val,
+            start_angle_deg=start_angle_deg, end_angle_deg=end_angle_deg, extent_deg=extent_deg,
+            main_arc_radius=main_arc_radius, text_offset_from_arc=text_offset_from_arc,
+            color=color, style=style, thick=thick, counter_clockwise=counter_clockwise,
+            pivot_size=pivot_size, needle_scale=needle_scale, tag=tag
+        )
+        return NeedleDrawer.draw_with_config(canvas, center_x, center_y, config)
 
-        range_val = max_val - min_val
-        norm_val = (val - min_val) / range_val if range_val != 0 else 0
+    @staticmethod
+    def draw_with_config(canvas, cx, cy, config: NeedleConfig):
+        """Unified entry point for drawing the needle with a config object."""
+        # 1. Prepare common values
+        val = max(min(config.val, config.max_val), config.min_val)
+        range_val = config.max_val - config.min_val
+        norm_val = (val - config.min_val) / range_val if range_val != 0 else 0
 
-        if counter_clockwise:
-            needle_angle_deg = end_angle_deg + (norm_val * extent_deg)
-        else:
-            needle_angle_deg = start_angle_deg - (norm_val * extent_deg)
+        angle_deg = config.end_angle_deg + (norm_val * config.extent_deg) if config.counter_clockwise \
+                    else config.start_angle_deg - (norm_val * config.extent_deg)
             
-        needle_angle_rad = math.radians(needle_angle_deg)
-        needle_total_len = (main_arc_radius + text_offset_from_arc - 2) * needle_scale
+        angle_rad = math.radians(angle_deg)
+        length = (config.main_arc_radius + config.text_offset_from_arc - 2) * config.needle_scale
+        tip_x, tip_y = cx + length * math.cos(angle_rad), cy - length * math.sin(angle_rad)
 
-        tip_x = center_x + needle_total_len * math.cos(needle_angle_rad)
-        tip_y = center_y - needle_total_len * math.sin(needle_angle_rad)
-
-        # ⚡ OPTIMIZATION: Check if we can just update coordinates
-        existing = canvas.find_withtag(tag)
-        
-        # Helper to decide if we can use simple coords update
-        # Complex styles like teardrop or hollow-diamond use multiple items and are harder to 'coords' update
-        # without significant refactoring. We'll optimize 'line', 'baton', 'taper', 'knife-edge' first.
-        
-        if style in ["line", "baton", "taper", "knife-edge"] and existing:
-            if style == "line":
-                canvas.coords(tag, center_x, center_y, tip_x, tip_y)
-            elif style == "taper" or style == "knife-edge":
-                perp_angle_rad = needle_angle_rad + (math.pi / 2)
-                base_radius = (pivot_size / 2.0) if style == "taper" else (thick * 1.5)
-                bx1 = center_x + base_radius * math.cos(perp_angle_rad)
-                by1 = center_y - base_radius * math.sin(perp_angle_rad)
-                bx2 = center_x - base_radius * math.cos(perp_angle_rad)
-                by2 = center_y + base_radius * math.sin(perp_angle_rad)
-                canvas.coords(tag, bx1, by1, tip_x, tip_y, bx2, by2)
-            elif style == "baton":
-                perp_angle_rad = needle_angle_rad + (math.pi / 2)
-                off_x = (thick / 2.0) * math.cos(perp_angle_rad)
-                off_y = (thick / 2.0) * math.sin(perp_angle_rad)
-                canvas.coords(tag, center_x + off_x, center_y - off_y, tip_x + off_x, tip_y - off_y,
-                                   tip_x - off_x, tip_y + off_y, center_x - off_x, center_y + off_y)
+        # 2. Try Optimization
+        if NeedleDrawer._try_update_existing(canvas, cx, cy, tip_x, tip_y, angle_rad, config):
             return
 
-        # If not simple update or doesn't exist, delete old and create new
+        # 3. Full redraw
+        existing = canvas.find_withtag(config.tag)
         if existing:
-            canvas.delete(tag)
+            canvas.delete(config.tag)
 
-        if style in ["teardrop", "spade"]:
-            d1, d2 = needle_total_len * 0.75, needle_total_len * 0.875
-            p1x, p1y = center_x + d1 * math.cos(needle_angle_rad), center_y - d1 * math.sin(needle_angle_rad)
-            p2x, p2y = center_x + d2 * math.cos(needle_angle_rad), center_y - d2 * math.sin(needle_angle_rad)
-            
-            # Line 1
-            canvas.create_line(center_x, center_y, p1x, p1y, width=thick, fill=color, capstyle=tk.ROUND, tags=(tag, "vu_element"))
-            
-            # Bulb
-            bulb_w = thick * 2.5
-            perp_angle = needle_angle_rad + (math.pi / 2)
-            bx, by = center_x + (d1 - thick) * math.cos(needle_angle_rad), center_y - (d1 - thick) * math.sin(needle_angle_rad)
-            mid_dist = (d1 + d2) / 2
-            mx, my = center_x + mid_dist * math.cos(needle_angle_rad), center_y - mid_dist * math.sin(needle_angle_rad)
-            s1x, s1y = mx + bulb_w * math.cos(perp_angle), my - bulb_w * math.sin(perp_angle)
-            s2x, s2y = mx - bulb_w * math.cos(perp_angle), my + bulb_w * math.sin(perp_angle)
-            
-            canvas.create_polygon([bx, by, s1x, s1y, p2x, p2y, s2x, s2y], fill=color, outline=color, smooth=True, tags=(tag, "vu_element"))
-            
-            # Tip
-            canvas.create_line(p2x, p2y, tip_x, tip_y, width=thick, fill=color, capstyle=tk.ROUND, tags=(tag, "vu_element"))
+        # Style Dispatcher
+        handlers = {
+            "teardrop": NeedleDrawer._draw_teardrop,
+            "spade": NeedleDrawer._draw_teardrop, # shared logic
+            "knife-edge": NeedleDrawer._draw_knife_edge,
+            "baton": NeedleDrawer._draw_baton,
+            "hollow-diamond": NeedleDrawer._draw_hollow_diamond,
+            "taper": NeedleDrawer._draw_taper,
+        }
+        
+        handler = handlers.get(config.style, NeedleDrawer._draw_line)
+        handler(canvas, cx, cy, tip_x, tip_y, angle_rad, length, config)
 
-        elif style == "knife-edge":
-            perp_angle_rad = needle_angle_rad + (math.pi / 2)
-            base_radius = thick * 1.5
-            bx1, by1 = center_x + base_radius * math.cos(perp_angle_rad), center_y - base_radius * math.sin(perp_angle_rad)
-            bx2, by2 = center_x - base_radius * math.cos(perp_angle_rad), center_y + base_radius * math.sin(perp_angle_rad)
-            canvas.create_polygon([bx1, by1, tip_x, tip_y, bx2, by2], fill=color, outline=color, tags=(tag, "vu_element"))
-
-        elif style == "baton":
-            perp_angle_rad = needle_angle_rad + (math.pi / 2)
-            off_x, off_y = (thick / 2.0) * math.cos(perp_angle_rad), (thick / 2.0) * math.sin(perp_angle_rad)
-            canvas.create_polygon([center_x + off_x, center_y - off_y, tip_x + off_x, tip_y - off_y,
-                                   tip_x - off_x, tip_y + off_y, center_x - off_x, center_y + off_y], 
-                                   fill=color, outline=color, tags=(tag, "vu_element"))
-
-        elif style == "hollow-diamond":
-            d_mid, d_start = needle_total_len * 0.8, needle_total_len * 0.6
-            perp_angle, width = needle_angle_rad + (math.pi / 2), thick * 4
-            mx, my = center_x + d_mid * math.cos(needle_angle_rad), center_y - d_mid * math.sin(needle_angle_rad)
-            sx, sy = center_x + d_start * math.cos(needle_angle_rad), center_y - d_start * math.sin(needle_angle_rad)
+    @staticmethod
+    def _try_update_existing(canvas, cx, cy, tip_x, tip_y, angle_rad, config):
+        """Attempts to update existing needle coordinates for performance."""
+        existing = canvas.find_withtag(config.tag)
+        if not existing or config.style not in ["line", "baton", "taper", "knife-edge"]:
+            return False
             
-            p1x, p1y = mx + width * math.cos(perp_angle), my - width * math.sin(perp_angle)
-            p2x, p2y = mx - width * math.cos(perp_angle), my + width * math.sin(perp_angle)
-            canvas.create_polygon([sx, sy, p1x, p1y, tip_x, tip_y, p2x, p2y], fill=color, outline=color, tags=(tag, "vu_element"))
-            
-            bg, i_width, i_start, i_tip_dist = canvas.cget("bg"), width * 0.6, d_start + (thick * 2), needle_total_len - (thick * 2)
-            itx, ity = center_x + i_tip_dist * math.cos(needle_angle_rad), center_y - i_tip_dist * math.sin(needle_angle_rad)
-            ip1x, ip1y = mx + i_width * math.cos(perp_angle), my - i_width * math.sin(perp_angle)
-            ip2x, ip2y = mx - i_width * math.cos(perp_angle), my + i_width * math.sin(perp_angle)
-            # Use 'vu_element' for cutout so it clears correctly
-            canvas.create_polygon([sx + (thick*2)*math.cos(needle_angle_rad), sy - (thick*2)*math.sin(needle_angle_rad), 
-                                   ip1x, ip1y, itx, ity, ip2x, ip2y], fill=bg, outline=bg, tags=(tag, "vu_element"))
-            canvas.create_line(center_x, center_y, sx, sy, width=thick, fill=color, tags=(tag, "vu_element"))
+        if config.style == "line":
+            canvas.coords(config.tag, cx, cy, tip_x, tip_y)
+        elif config.style in ["taper", "knife-edge"]:
+            perp_angle = angle_rad + (math.pi / 2)
+            base_rad = (config.pivot_size / 2.0) if config.style == "taper" else (config.thick * 1.5)
+            bx1, by1 = cx + base_rad * math.cos(perp_angle), cy - base_rad * math.sin(perp_angle)
+            bx2, by2 = cx - base_rad * math.cos(perp_angle), cy + base_rad * math.sin(perp_angle)
+            canvas.coords(config.tag, bx1, by1, tip_x, tip_y, bx2, by2)
+        elif config.style == "baton":
+            perp_angle = angle_rad + (math.pi / 2)
+            off_x, off_y = (config.thick / 2.0) * math.cos(perp_angle), (config.thick / 2.0) * math.sin(perp_angle)
+            canvas.coords(config.tag, cx + off_x, cy - off_y, tip_x + off_x, tip_y - off_y,
+                               tip_x - off_x, tip_y + off_y, cx - off_x, cy + off_y)
+        return True
 
-        elif style == "taper":
-            perp_angle_rad = needle_angle_rad + (math.pi / 2)
-            base_radius = pivot_size / 2.0
-            bx1, by1 = center_x + base_radius * math.cos(perp_angle_rad), center_y - base_radius * math.sin(perp_angle_rad)
-            bx2, by2 = center_x - base_radius * math.cos(perp_angle_rad), center_y + base_radius * math.sin(perp_angle_rad)
-            canvas.create_polygon([bx1, by1, tip_x, tip_y, bx2, by2], fill=color, outline=color, tags=(tag, "vu_element"))
-            
-        else:
-            canvas.create_line(center_x, center_y, tip_x, tip_y, width=thick, fill=color, capstyle=tk.ROUND, tags=(tag, "vu_element"))
+    @staticmethod
+    def _draw_line(canvas, cx, cy, tip_x, tip_y, angle_rad, length, config):
+        canvas.create_line(cx, cy, tip_x, tip_y, width=config.thick, fill=config.color, 
+                           capstyle=tk.ROUND, tags=(config.tag, "vu_element"))
+
+    @staticmethod
+    def _draw_taper(canvas, cx, cy, tip_x, tip_y, angle_rad, length, config):
+        perp_angle = angle_rad + (math.pi / 2)
+        base_rad = config.pivot_size / 2.0
+        bx1, by1 = cx + base_rad * math.cos(perp_angle), cy - base_rad * math.sin(perp_angle)
+        bx2, by2 = cx - base_rad * math.cos(perp_angle), cy + base_rad * math.sin(perp_angle)
+        canvas.create_polygon([bx1, by1, tip_x, tip_y, bx2, by2], fill=config.color, outline=config.color, tags=(config.tag, "vu_element"))
+
+    @staticmethod
+    def _draw_knife_edge(canvas, cx, cy, tip_x, tip_y, angle_rad, length, config):
+        perp_angle = angle_rad + (math.pi / 2)
+        base_rad = config.thick * 1.5
+        bx1, by1 = cx + base_rad * math.cos(perp_angle), cy - base_rad * math.sin(perp_angle)
+        bx2, by2 = cx - base_rad * math.cos(perp_angle), cy + base_rad * math.sin(perp_angle)
+        canvas.create_polygon([bx1, by1, tip_x, tip_y, bx2, by2], fill=config.color, outline=config.color, tags=(config.tag, "vu_element"))
+
+    @staticmethod
+    def _draw_baton(canvas, cx, cy, tip_x, tip_y, angle_rad, length, config):
+        perp_angle = angle_rad + (math.pi / 2)
+        off_x, off_y = (config.thick / 2.0) * math.cos(perp_angle), (config.thick / 2.0) * math.sin(perp_angle)
+        canvas.create_polygon([cx + off_x, cy - off_y, tip_x + off_x, tip_y - off_y,
+                               tip_x - off_x, tip_y + off_y, cx - off_x, cy + off_y], 
+                               fill=config.color, outline=config.color, tags=(config.tag, "vu_element"))
+
+    @staticmethod
+    def _draw_teardrop(canvas, cx, cy, tip_x, tip_y, angle_rad, length, config):
+        d1, d2 = length * 0.75, length * 0.875
+        p1x, p1y = cx + d1 * math.cos(angle_rad), cy - d1 * math.sin(angle_rad)
+        p2x, p2y = cx + d2 * math.cos(angle_rad), cy - d2 * math.sin(angle_rad)
+        
+        # Line 1
+        canvas.create_line(cx, cy, p1x, p1y, width=config.thick, fill=config.color, capstyle=tk.ROUND, tags=(config.tag, "vu_element"))
+        
+        # Bulb
+        bulb_w = config.thick * 2.5
+        perp_angle = angle_rad + (math.pi / 2)
+        bx, by = cx + (d1 - config.thick) * math.cos(angle_rad), cy - (d1 - config.thick) * math.sin(angle_rad)
+        mid_dist = (d1 + d2) / 2
+        mx, my = cx + mid_dist * math.cos(angle_rad), cy - mid_dist * math.sin(angle_rad)
+        s1x, s1y = mx + bulb_w * math.cos(perp_angle), my - bulb_w * math.sin(perp_angle)
+        s2x, s2y = mx - bulb_w * math.cos(perp_angle), my + bulb_w * math.sin(perp_angle)
+        
+        canvas.create_polygon([bx, by, s1x, s1y, p2x, p2y, s2x, s2y], fill=config.color, outline=config.color, smooth=True, tags=(config.tag, "vu_element"))
+        
+        # Tip
+        canvas.create_line(p2x, p2y, tip_x, tip_y, width=config.thick, fill=config.color, capstyle=tk.ROUND, tags=(config.tag, "vu_element"))
+
+    @staticmethod
+    def _draw_hollow_diamond(canvas, cx, cy, tip_x, tip_y, angle_rad, length, config):
+        d_mid, d_start = length * 0.8, length * 0.6
+        perp_angle, width = angle_rad + (math.pi / 2), config.thick * 4
+        mx, my = cx + d_mid * math.cos(angle_rad), cy - d_mid * math.sin(angle_rad)
+        sx, sy = cx + d_start * math.cos(angle_rad), cy - d_start * math.sin(angle_rad)
+        
+        p1x, p1y = mx + width * math.cos(perp_angle), my - width * math.sin(perp_angle)
+        p2x, p2y = mx - width * math.cos(perp_angle), my + width * math.sin(perp_angle)
+        canvas.create_polygon([sx, sy, p1x, p1y, tip_x, tip_y, p2x, p2y], fill=config.color, outline=config.color, tags=(config.tag, "vu_element"))
+        
+        bg, i_width, i_start, i_tip_dist = canvas.cget("bg"), width * 0.6, d_start + (config.thick * 2), length - (config.thick * 2)
+        itx, ity = cx + i_tip_dist * math.cos(angle_rad), cy - i_tip_dist * math.sin(angle_rad)
+        ip1x, ip1y = mx + i_width * math.cos(perp_angle), my - i_width * math.sin(perp_angle)
+        ip2x, ip2y = mx - i_width * math.cos(perp_angle), my + i_width * math.sin(perp_angle)
+        
+        cutout_sx = sx + (config.thick*2)*math.cos(angle_rad)
+        cutout_sy = sy - (config.thick*2)*math.sin(angle_rad)
+        canvas.create_polygon([cutout_sx, cutout_sy, ip1x, ip1y, itx, ity, ip2x, ip2y], fill=bg, outline=bg, tags=(config.tag, "vu_element"))
+        canvas.create_line(cx, cy, sx, sy, width=config.thick, fill=config.color, tags=(config.tag, "vu_element"))

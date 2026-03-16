@@ -1,5 +1,6 @@
 import orjson
 import tkinter as tk
+from loguru import logger
 from workers.Command_Router.mqtt.mqtt_topic_utils import get_topic
 from workers.Command_Router.mqtt import mqtt_publisher_service
 
@@ -41,8 +42,11 @@ class TableSyncEngine:
     def update_incremental(self, msg):
         """Processes a single row update or pulse event."""
         topic, payload = msg.topic, msg.payload
-        try: data = payload if isinstance(payload, (dict, list)) else orjson.loads(payload)
-        except: return
+        try:
+            data = payload if isinstance(payload, (dict, list)) else orjson.loads(payload)
+        except Exception as e:
+            logger.debug(f"Failed to decode payload in incremental update: {e}")
+            return
 
         # 1. Handle Pulse (Radar Sync)
         pa = data.get("angle") or data.get("position")
@@ -54,7 +58,8 @@ class TableSyncEngine:
                     for iid, idat in self.item_map.items():
                         try:
                             if abs(float(idat.get(ac)) - float(pa)) < 1.0: tid = iid; break
-                        except: pass
+                        except Exception as e:
+                            logger.trace(f"Error checking pulse match: {e}")
             if tid: self.tree.selection_set(tid); self.tree.see(tid)
             return
 

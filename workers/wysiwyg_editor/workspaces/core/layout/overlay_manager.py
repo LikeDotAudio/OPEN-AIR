@@ -18,7 +18,7 @@ class OverlayManager:
         for child in list(container.winfo_children()):
             if getattr(child, '_is_design_overlay', False):
                 try: child.destroy()
-                except: pass
+                except Exception as e: logger.trace(f"Failed to destroy child overlay: {e}")
             elif isinstance(child, (tk.Frame, ttk.Frame, tk.Canvas, tk.LabelFrame)):
                 self._recursive_clear(child)
 
@@ -55,7 +55,7 @@ class OverlayManager:
             
             if hasattr(widget, '_oca_configure_sid'):
                 try: widget.unbind("<Configure>", widget._oca_configure_sid)
-                except: pass
+                except Exception as e: logger.trace(f"Failed to unbind from widget: {e}")
             widget._oca_configure_sid = widget.bind("<Configure>", _sync_pos, add="+")
             widget.after(100, _sync_pos)
                 

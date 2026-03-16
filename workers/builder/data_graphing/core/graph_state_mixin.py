@@ -1,4 +1,5 @@
 import tkinter as tk
+from loguru import logger
 from workers.logger.logger import builder_logger
 
 # --- Standard Debug Logging Setup ---
@@ -41,7 +42,8 @@ class GraphStateMixin:
                 ps = l.split(",")
                 if len(ps) >= 2: x.append(float(ps[0])); y.append(float(ps[1]))
             self._pending_data[ds_id] = (x, y); self._schedule_update()
-        except: pass
+        except Exception as e:
+            logger.trace(f"Error parsing dataset variable change: {e}")
 
     def _on_setting_var_change(self, s):
         v = self.settings_vars[s].get()
@@ -55,4 +57,5 @@ class GraphStateMixin:
             elif s == "x_label": self.ax.set_xlabel(v)
             elif s == "y_label": self.ax.set_ylabel(v)
             self._force_redraw = True; self._schedule_update()
-        except: pass
+        except Exception as e:
+            logger.trace(f"Error applying setting change '{s}': {e}")

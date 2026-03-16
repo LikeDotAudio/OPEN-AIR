@@ -2,8 +2,8 @@
 
 ## Executive Summary
 Analyzed codebase for magic numbers, short variables, noise words, and poor function names.
-- **Files with Issues**: 443
-- **Total Violations**: 3703
+- **Files with Issues**: 444
+- **Total Violations**: 3678
 
 ## Top Offenders
 
@@ -173,55 +173,6 @@ Analyzed codebase for magic numbers, short variables, noise words, and poor func
   `m_draw = ImageDraw.Draw(mask)`
 - Line 179: Variable 'f_size' uses legacy prefix.
   `f_size = config["font_size"] or int(min(width, height) * 0.25)`
-
----
-### workers/builder/meter_needle/cosmetics/lighting_overlay.py
-#### Function Naming
-- Line 27: Function 'generate_overlay' may not be a verb phrase.
-  `def generate_overlay(width, height, bezel_shape, bezel_width, pivot_x, pivot_y, lighting_config={}):`
-- Line 223: Function 'photo_image' may not be a verb phrase.
-  `def photo_image(width, height, bezel_shape, bezel_width, pivot_x, pivot_y, lighting_config={}):`
-#### Short Variable Name
-- Line 30: Variable 'w' is too short for its scope.
-  `w, h = width * scale, height * scale`
-- Line 30: Variable 'h' is too short for its scope.
-  `w, h = width * scale, height * scale`
-- Line 71: Variable 'c' is too short for its scope.
-  `c = str(glow_color_hex).lstrip('#')`
-- Line 72: Variable 'i' is too short for its scope.
-  `rgb = tuple(int(c[i:i+2], 16) for i in (0, 2, 4))`
-- Line 86: Variable 'r' is too short for its scope.
-  `r, g, b, a = glow_layer.split()`
-- Line 86: Variable 'g' is too short for its scope.
-  `r, g, b, a = glow_layer.split()`
-- Line 86: Variable 'b' is too short for its scope.
-  `r, g, b, a = glow_layer.split()`
-- Line 86: Variable 'a' is too short for its scope.
-  `r, g, b, a = glow_layer.split()`
-- Line 87: Variable 'a' is too short for its scope.
-  `a = a.point(lambda p: p * (glow_intensity * 0.8))`
-#### Magic Number
-- Line 36: Literal '0.25' should be a named constant.
-  `glow_intensity = float(lighting_config.get("intensity", 0.25))`
-- Line 39: Literal '0.25' should be a named constant.
-  `size_y_mult = float(lighting_config.get("size_y", 0.25))`
-- Line 53: Literal '255' should be a named constant.
-  `draw_mask.polygon(points_inner, fill=255)`
-- Line 60: Literal '4' should be a named constant.
-  `vignette = vignette.filter(ImageFilter.GaussianBlur(radius=4*scale))`
-- Line 68: Literal '255' should be a named constant.
-  `rgb = (255, 180, 80) # Default`
-- Line 68: Literal '180' should be a named constant.
-  `rgb = (255, 180, 80) # Default`
-- Line 68: Literal '80' should be a named constant.
-  `rgb = (255, 180, 80) # Default`
-- Line 72: Literal '16' should be a named constant.
-  `rgb = tuple(int(c[i:i+2], 16) for i in (0, 2, 4))`
-- Line 72: Literal '4' should be a named constant.
-  `rgb = tuple(int(c[i:i+2], 16) for i in (0, 2, 4))`
-- Line 82: Literal '180' should be a named constant.
-  `start=180, end=0, fill=rgb + (255,)`
-- ... and 46 more.
 
 ---
 ### workers/builder/fader_horizontal/core/horizontal_fader_renderer_mixin.py
@@ -524,6 +475,55 @@ Analyzed codebase for magic numbers, short variables, noise words, and poor func
 #### Encoding/Prefix
 - Line 50: Variable 'm_draw' uses legacy prefix.
   `mask = Image.new("L", (uw, uh), 0); m_draw = ImageDraw.Draw(mask); m_draw.rounded_rectangle((0,0,uw,uh), radius=3*upscale, fill=255)`
+
+---
+### workers/builder/meter_needle/cosmetics/lighting_overlay.py
+#### Function Naming
+- Line 27: Function 'generate_overlay' may not be a verb phrase.
+  `def generate_overlay(width, height, bezel_shape, bezel_width, pivot_x, pivot_y, lighting_config={}):`
+- Line 197: Function 'photo_image' may not be a verb phrase.
+  `def photo_image(width, height, bezel_shape, bezel_width, pivot_x, pivot_y, lighting_config={}):`
+#### Short Variable Name
+- Line 30: Variable 'w' is too short for its scope.
+  `w, h = width * scale, height * scale`
+- Line 30: Variable 'h' is too short for its scope.
+  `w, h = width * scale, height * scale`
+- Line 71: Variable 'c' is too short for its scope.
+  `c = str(glow_color_hex).lstrip('#')`
+- Line 72: Variable 'i' is too short for its scope.
+  `rgb = tuple(int(c[i:i+2], 16) for i in (0, 2, 4))`
+- Line 86: Variable 'r' is too short for its scope.
+  `r, g, b, a = glow_layer.split()`
+- Line 86: Variable 'g' is too short for its scope.
+  `r, g, b, a = glow_layer.split()`
+- Line 86: Variable 'b' is too short for its scope.
+  `r, g, b, a = glow_layer.split()`
+- Line 86: Variable 'a' is too short for its scope.
+  `r, g, b, a = glow_layer.split()`
+- Line 87: Variable 'a' is too short for its scope.
+  `a = a.point(lambda p: p * (glow_intensity * 0.8))`
+#### Magic Number
+- Line 36: Literal '0.25' should be a named constant.
+  `glow_intensity = float(lighting_config.get("intensity", 0.25))`
+- Line 39: Literal '0.25' should be a named constant.
+  `size_y_mult = float(lighting_config.get("size_y", 0.25))`
+- Line 53: Literal '255' should be a named constant.
+  `draw_mask.polygon(points_inner, fill=255)`
+- Line 60: Literal '4' should be a named constant.
+  `vignette = vignette.filter(ImageFilter.GaussianBlur(radius=4*scale))`
+- Line 68: Literal '255' should be a named constant.
+  `rgb = (255, 180, 80) # Default`
+- Line 68: Literal '180' should be a named constant.
+  `rgb = (255, 180, 80) # Default`
+- Line 68: Literal '80' should be a named constant.
+  `rgb = (255, 180, 80) # Default`
+- Line 72: Literal '16' should be a named constant.
+  `rgb = tuple(int(c[i:i+2], 16) for i in (0, 2, 4))`
+- Line 72: Literal '4' should be a named constant.
+  `rgb = tuple(int(c[i:i+2], 16) for i in (0, 2, 4))`
+- Line 82: Literal '180' should be a named constant.
+  `start=180, end=0, fill=rgb + (255,)`
+- ... and 25 more.
 
 ---
 ### workers/builder/fader/core/cap.py
@@ -1355,34 +1355,6 @@ Analyzed codebase for magic numbers, short variables, noise words, and poor func
 - ... and 2 more.
 
 ---
-### workers/builder/meter_needle/cosmetics/mask.py
-#### Function Naming
-- Line 11: Function 'draw' may not be a verb phrase.
-  `def draw(canvas, cx, cy, w, h, cosmetics):`
-#### Magic Number
-- Line 30: Literal '12' should be a named constant.
-  `line_width = int(style_overrides.get("bezel_width", 12))`
-- Line 40: Literal '2.5' should be a named constant.
-  `hill_w = radius * 2.5`
-- Line 41: Literal '0.3' should be a named constant.
-  `hill_h = radius * 0.3`
-- Line 43: Literal '0.8' should be a named constant.
-  `hill_w = radius * 0.8`
-- Line 44: Literal '0.3' should be a named constant.
-  `hill_h = radius * 0.3`
-- Line 46: Literal '0.4' should be a named constant.
-  `hill_w = radius * 0.4`
-- Line 47: Literal '0.3' should be a named constant.
-  `hill_h = radius * 0.3`
-- Line 49: Literal '1.8' should be a named constant.
-  `hill_w = radius * 1.8`
-- Line 50: Literal '0.3' should be a named constant.
-  `hill_h = radius * 0.3`
-- Line 52: Literal '1.8' should be a named constant.
-  `hill_w = radius * 1.8`
-- ... and 14 more.
-
----
 ### workers/builder/composite_mdp/core/mdp_ltp_component.py
 #### Function Naming
 - Line 27: Function 'render' may not be a verb phrase.
@@ -1433,5 +1405,59 @@ Analyzed codebase for magic numbers, short variables, noise words, and poor func
 - Line 54: Literal '22' should be a named constant.
   `r = 22; out = self.outline_hover if self.hovered else self.outline_normal`
 - ... and 1 more.
+
+---
+### display/right_50/bottom_90/4_Splinker/222_ Editor/gui_splinker_editor.py
+#### Magic Number
+- Line 57: Literal '5' should be a named constant.
+  `mode_frame = tk.LabelFrame(self.editor_frame, text="Communication Mode", bg="#2b2b2b", fg="#888888", pady=5)`
+- Line 58: Literal '5' should be a named constant.
+  `mode_frame.pack(fill=tk.X, pady=5)`
+- Line 69: Literal '5' should be a named constant.
+  `tk.Label(mode_frame, text=desc, bg="#2b2b2b", fg="#aaaaaa", font=("Helvetica", 8, "italic")).grid(row=i, column=1, sticky="w", padx=5)`
+- Line 72: Literal '5' should be a named constant.
+  `scale_frame = tk.LabelFrame(self.editor_frame, text="Scaling / Mapping", bg="#2b2b2b", fg="#888888", pady=5)`
+- Line 102: Literal '5' should be a named constant.
+  `list_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)`
+- Line 102: Literal '5' should be a named constant.
+  `list_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)`
+- Line 114: Literal '5' should be a named constant.
+  `controls_frame = tk.Frame(list_container, bg="#2b2b2b", pady=5)`
+- Line 116: Literal '5' should be a named constant.
+  `ttk.Button(controls_frame, text="New Splink", command=self.create_new_splink).pack(side=tk.LEFT, padx=5)`
+- Line 117: Literal '5' should be a named constant.
+  `ttk.Button(controls_frame, text="🔄 Refresh Splinks", command=self.trigger_refresh).pack(side=tk.LEFT, padx=5)`
+- Line 126: Literal '5' should be a named constant.
+  `self.reset_btn.pack(side=tk.LEFT, padx=5)`
+- ... and 2 more.
+#### Noise Word
+- Line 98: Variable 'list_container' contains redundant word 'List'.
+  `list_container = tk.Frame(self.paned, bg="#2b2b2b")`
+- Line 101: Variable 'list_frame' contains redundant word 'List'.
+  `list_frame = tk.LabelFrame(list_container, text="Active Splinks", bg="#2b2b2b", fg="#888888")`
+- Line 133: Variable 'data' contains redundant word 'Data'.
+  `data = orjson.loads(payload)`
+- Line 142: Variable 'data' contains redundant word 'Data'.
+  `data = orjson.loads(payload)`
+#### Function Naming
+- Line 153: Function 'trigger_panic' may not be a verb phrase.
+  `def trigger_panic(self):`
+- Line 156: Function 'trigger_reset_panic' may not be a verb phrase.
+  `def trigger_reset_panic(self):`
+- Line 159: Function 'refresh_splink_list' may not be a verb phrase.
+  `def refresh_splink_list(self):`
+- Line 193: Function 'save_splink_editor' may not be a verb phrase.
+  `def save_splink_editor(self):`
+- Line 218: Function 'trigger_refresh' may not be a verb phrase.
+  `def trigger_refresh(self):`
+- Line 226: Function 'destroy' may not be a verb phrase.
+  `def destroy(self):`
+#### Short Variable Name
+- Line 174: Variable 's' is too short for its scope.
+  `splink = next((s for s in self.splinker_manager.splinks if s["id"] == self.selected_splink_id), None)`
+- Line 195: Variable 's' is too short for its scope.
+  `splink = next((s for s in self.splinker_manager.splinks if s["id"] == self.selected_splink_id), None)`
+- Line 200: Variable 'h' is too short for its scope.
+  `scale_h = next((h for h in splink.get("handlers", []) if h["type"] == "scale"), None)`
 
 ---

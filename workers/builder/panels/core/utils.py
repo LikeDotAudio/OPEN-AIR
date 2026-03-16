@@ -1,4 +1,5 @@
 from PIL import Image
+from loguru import logger
 
 class PanelUtils:
     @staticmethod
@@ -9,7 +10,9 @@ class PanelUtils:
         try:
             rgb = tuple(int(c[i:i+2], 16) for i in (0, 2, 4))
             return rgb[:3] + (255,)
-        except: return (128, 128, 128, 255)
+        except Exception as e:
+            logger.error(f"Failed to convert hex to rgba ({hex_str}): {e}")
+            return (128, 128, 128, 255)
 
     @staticmethod
     def hex_to_rgb(hex_str):
@@ -19,4 +22,6 @@ class PanelUtils:
         try:
             rgb = tuple(int(c[i:i+2], 16) for i in (0, 2, 4))
             return rgb[:3] # Ensure only 3 components
-        except: return (128, 128, 128)
+        except Exception as e:
+            logger.error(f"Failed to convert hex to rgb ({hex_str}): {e}")
+            return (128, 128, 128)

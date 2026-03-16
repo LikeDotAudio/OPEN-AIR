@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 import time
 import random
+from loguru import logger
 from .core.config_parser import MeterConfig
 from .core.ballistics import BallisticsEngine
 from .core.layout_calculator import MeterLayoutCalculator
@@ -17,7 +18,8 @@ class SmartMeter(tk.Canvas):
         try:
             p_bg = parent.cget("bg")
             if not p_bg or not p_bg.startswith("#"): p_bg = "#2b2b2b"
-        except:
+        except Exception as e:
+            logger.trace(f"Could not get parent bg, defaulting to #2b2b2b: {e}")
             p_bg = "#2b2b2b"
 
         super().__init__(parent, bd=0, highlightthickness=0, relief="flat", bg=p_bg)
@@ -108,8 +110,8 @@ class SmartMeter(tk.Canvas):
             if self._anim_timer_id is None:
                 self._last_anim_time = time.time() * 1000
                 self._animate()
-        except:
-            pass
+        except Exception as e:
+            logger.error(f"Error updating meter value: {e}")
 
     def _animate(self):
         self._anim_timer_id = None

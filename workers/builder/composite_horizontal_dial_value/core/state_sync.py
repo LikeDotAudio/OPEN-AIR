@@ -1,4 +1,5 @@
 import math
+from loguru import logger
 
 class CompositeStateSync:
     """Manages the synchronization math between the main value, fader (coarse), and dial (fine)."""
@@ -8,8 +9,11 @@ class CompositeStateSync:
         step = float(step)
         if step == 0: return "{}"
         if step == int(step): return "{:.0f}"
-        try: decimal_places = len(str(float(step)).split('.')[-1])
-        except: decimal_places = 2
+        try:
+            decimal_places = len(str(float(step)).split('.')[-1])
+        except Exception as e:
+            logger.debug(f"Failed to calculate decimal places for step {step}: {e}")
+            decimal_places = 2
         return f"{{:.{decimal_places}f}}"
 
     @staticmethod
@@ -35,7 +39,8 @@ class CompositeStateSync:
                 dial_widget._prev_dial_val_for_wrap_detection = round(dial_disp)
             else:
                 dial_widget.variable.set(0)
-        except Exception: pass
+        except Exception as e:
+            logger.error(f"Error in sync_from_main: {e}")
 
     @staticmethod
     def calc_from_fader(fader_val, main_val, step_coarse, numerical_step, min_val, max_val):
@@ -44,7 +49,9 @@ class CompositeStateSync:
             fine = main_val % step_coarse if numerical_step < step_coarse else 0
             new_val = round((f_val + fine) / numerical_step) * numerical_step
             return max(min_val, min(max_val, new_val))
-        except: return main_val
+        except Exception as e:
+            logger.error(f"Error in calc_from_fader: {e}")
+            return main_val
 
     @staticmethod
     def calc_from_dial(curr_dial, main_val, fader_var, dial_widget, step_coarse, numerical_step, min_val, max_val):
@@ -61,5 +68,6 @@ class CompositeStateSync:
                 eff_range = step_coarse - numerical_step if (step_coarse - numerical_step) > 0 else step_coarse
                 new_fine = round(((curr_dial / 999.0) * eff_range) / numerical_step) * numerical_step
                 return max(min_val, min(max_val, round((base + new_fine) / numerical_step) * numerical_step))
-        except: pass
+        except Exception as e:
+            logger.error(f"Error in calc_from_dial: {e}")
         return main_val

@@ -40,7 +40,8 @@ class AsyncGridRenderer:
                     w, h = data.get("width") or geom.get("width"), data.get("height") or geom.get("height")
                     if w: parent_frame.config(width=w)
                     if h: parent_frame.config(height=h)
-                except: pass
+                except Exception as e:
+                    renderer_logger.trace(f"Geometry configuration skipped: {e}")
 
             fields = data.get("fields", data.get("blocks", data))
             all_fields = list(fields.items())
@@ -53,8 +54,8 @@ class AsyncGridRenderer:
             # 2. Batch Orchestration
             self._process_fields(parent_frame, all_fields, path_prefix, num_cols, on_complete, eff_bg, data, context)
             
-        except Exception:
-            renderer_logger.exception(f"❌ Synchronized build error: {path_prefix}")
+        except Exception as e:
+            renderer_logger.exception(f"❌ Synchronized build error in '{path_prefix}': {e}")
             if on_complete: on_complete()
 
     def _process_fields(self, parent, field_list, prefix, max_cols, on_complete, bg_pil, parent_data, context):
@@ -67,8 +68,11 @@ class AsyncGridRenderer:
                 if parent.winfo_exists() and prefix == "" and hasattr(self.builder, '_trigger_reslice_all'):
                     self.builder._trigger_reslice_all()
                 if on_complete:
-                    try: parent.after(1, on_complete)
-                    except: on_complete()
+                    try:
+                        parent.after(1, on_complete)
+                    except Exception as e:
+                        renderer_logger.trace(f"Deferred completion callback failed, executing immediately: {e}")
+                        on_complete()
 
         while i < len(field_list):
             if not parent.winfo_exists(): state["aborted"] = True; break

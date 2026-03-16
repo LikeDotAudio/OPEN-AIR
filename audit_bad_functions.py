@@ -2,7 +2,7 @@ import os
 import ast
 
 project_root = "/home/anthony/Documents/OPEN-AIR"
-output_file = os.path.join(project_root, "assets/Documentation/Audits/Bad Functions.txt")
+output_file = os.path.join(project_root, "assets/Documentation/Audits/Bad_Functions_Audit.md")
 
 # Configuration for "Bad Function" detection
 MAX_ARGS = 3 # Ideal is 0, avoid 3+
@@ -102,8 +102,11 @@ for root, dirs, files in os.walk(project_root):
             all_results.extend(audit_file(filepath))
 
 # Update the file
-with open(output_file, "r", encoding="utf-8") as f:
-    intro = f.read()
+if os.path.exists(output_file):
+    with open(output_file, "r", encoding="utf-8") as f:
+        intro = f.read()
+else:
+    intro = "Bad functions are excessively large and try to accomplish too much, resulting in muddled intent and ambiguity of purpose..."
 
 # Split intro if it already has audit findings
 if "--- AUDIT RESULTS ---" in intro:

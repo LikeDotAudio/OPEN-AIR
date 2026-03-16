@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import simpledialog
+from loguru import logger
 
 class GraphInteractionMixin:
     """Handles Matplotlib-specific interactions (Markers, Dragging, Renaming)."""
@@ -51,11 +52,13 @@ class GraphInteractionMixin:
         try:
             if 'color' in self.saved_style: m.set_color(self.saved_style['color'])
             if 'linewidth' in self.saved_style: m.set_linewidth(self.saved_style['linewidth'])
-        except: pass
+        except Exception as e:
+            logger.trace(f"Error restoring marker style: {e}")
         self.saved_style = {}
 
     def _apply_highlight(self, m):
         try:
             m.set_color('yellow')
             if hasattr(m, 'set_linewidth'): m.set_linewidth(m.get_linewidth() + 2)
-        except: pass
+        except Exception as e:
+            logger.trace(f"Error applying marker highlight: {e}")

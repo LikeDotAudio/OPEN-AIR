@@ -50,14 +50,16 @@ class HiddenVisibilityManagerMixin:
             self._publish_visibility(False)
 
     def _publish_visibility(self, is_visible: bool):
-        if not is_connected():
-            return
+        # 🧊 [ON ICE] Visibility telemetry is currently suspended for re-architecture.
+        # if not is_connected():
+        #     return
 
-        payload = {
-            "visible": is_visible,
-            "ts": time.time(),
-            "tab_name": getattr(self, "tab_name", "Unknown"),
-        }
-        self.state_mirror_engine.publish_command(
-            self.visibility_topic, orjson.dumps(payload).decode()
-        )
+        # payload = {
+        #     "visible": is_visible,
+        #     "ts": time.time(),
+        #     "tab_name": getattr(self, "tab_name", "Unknown"),
+        # }
+        # self.state_mirror_engine.publish_command(
+        #     self.visibility_topic, orjson.dumps(payload).decode()
+        # )
+        pass

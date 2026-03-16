@@ -14,11 +14,11 @@
 #
 # Version 20250821.200641.1
 from typing import Dict, Any
+from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from workers.logger.logger import initialize_logging, set_log_directory
-from loguru import logger
 
 from managers.configini.config_reader import Config
 
@@ -66,7 +66,7 @@ def apply_style(
         fig.patch.set_visible(False)
         ax.patch.set_visible(False)
         try: ax.patch.set_alpha(0.0)
-        except: pass
+        except Exception as e: logger.trace(f"Error setting alpha 0.0: {e}")
     else:
         # Standard hex or named color
         fig.patch.set_facecolor(bg_color)
@@ -74,7 +74,7 @@ def apply_style(
         fig.patch.set_visible(True)
         ax.patch.set_visible(True)
         try: ax.patch.set_alpha(1.0)
-        except: pass
+        except Exception as e: logger.trace(f"Error setting alpha 1.0: {e}")
 
     # Resolve 'axis' dictionary
     axis_config = style_config.get("axis", {})

@@ -67,7 +67,8 @@ class YakMonitor(tk.Frame, TransparencyMixin):
                 return curr
             try:
                 curr = curr.master
-            except:
+            except Exception as e:
+                logger.trace(f"End of parent hierarchy reached for {widget}: {e}")
                 break
         return None
 
@@ -221,7 +222,8 @@ class YakMonitor(tk.Frame, TransparencyMixin):
                     val_display = f"[{data['type']}]"
             elif "message" in payload:
                 tags = ("orange_row")
-        except:
+        except Exception as e:
+            logger.debug(f"Payload not JSON or error parsing for topic {topic}: {e}")
             if "message" in payload:
                 tags = ("orange_row")
 
@@ -261,7 +263,8 @@ class YakMonitor(tk.Frame, TransparencyMixin):
         try:
             data = orjson.loads(payload)
             self._populate_dissector("", data)
-        except Exception:
+        except Exception as e:
+            logger.debug(f"Selected payload not JSON or error parsing: {e}")
             # Not JSON or error parsing, show as raw string
             self.dissector_tree.insert("", "end", text="Raw Payload", values=(payload))
 
@@ -291,7 +294,8 @@ class YakMonitor(tk.Frame, TransparencyMixin):
                         # Trigger dissector update
                         self.on_log_select()
                         return
-                except:
+                except Exception as e:
+                    logger.trace(f"Skipping log entry in jump_to_latest_val_msg: {e}")
                     continue
 
     def _populate_dissector(self, parent, data):

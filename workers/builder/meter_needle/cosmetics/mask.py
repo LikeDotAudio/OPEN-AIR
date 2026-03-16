@@ -1,92 +1,56 @@
 import tkinter as tk
 import math
+from dataclasses import dataclass
 
 from workers.builder.meter_needle.cosmetics.geometry import BezelGeometry
 from workers.builder.meter_needle.constants import (
-    GEM_BEZEL_EXPANSION, GEM_BASE_HEIGHT
+    GEM_BEZEL_EXPANSION, GEM_BASE_HEIGHT, SHAPE_Y_SHIFTS, HILL_CONFIGS
 )
+
+@dataclass
+class MaskParams:
+    cx: float
+    cy: float
+    w: float
+    h: float
+    cosmetics: dict
 
 class BezelMask:
     @staticmethod
     def draw(canvas, cx, cy, w, h, cosmetics):
-        style_overrides = cosmetics.get("style_overrides", {})
-        overlay_style = style_overrides.get("overlay_style", None)
-        bezel_shape = style_overrides.get("bezel_shape", "").lower()
-        
+        params = MaskParams(cx, cy, w, h, cosmetics)
+        return BezelMask._draw_with_params(canvas, params)
+
+    @staticmethod
+    def _draw_with_params(canvas, p: MaskParams):
+        # 1. Guard Clauses
+        style_ovr = p.cosmetics.get("style_overrides", {})
+        overlay_style = style_ovr.get("overlay_style", None)
         if not overlay_style or overlay_style.lower() != "aperture_mask":
             return
 
-        colors = cosmetics.get("colors", {})
-        # Prefer specific mask color, then bezel color, then fallback to faceplate
+        colors = p.cosmetics.get("colors", {})
         mask_color = colors.get("mask", colors.get("bezel", colors.get("faceplate", "#e0d4b4")))
-        
-        # ⚡ INDUSTRIAL TRANSPARENCY: Check for slicing first
-        # If we have a slice, we can use it to 'mask out' the hill or blend it.
-        # However, for a TRUE aperture mask (mechanical part), we often WANT a solid color.
-        # If mask_color is 'transparent', we skip.
         if not mask_color or mask_color.lower() in ["transparent", "none", ""]:
             return
 
-        line_width = int(style_overrides.get("bezel_width", 12))
+        # 2. Setup
+        bezel_shape = style_ovr.get("bezel_shape", "").lower()
+        line_width = int(style_ovr.get("bezel_width", 12))
+        radius, global_y_shift, shape_key = BezelGeometry.get_scaling_params(p.w, p.h, bezel_shape, line_width)
         
-        # Use BezelGeometry for consistent scaling
-        radius, global_y_shift, shape_key = BezelGeometry.get_scaling_params(w, h, bezel_shape, line_width)
+        # 3. Draw Hill
+        BezelMask._draw_hill(canvas, p.cx, p.cy, radius, global_y_shift, shape_key, mask_color)
+
+    @staticmethod
+    def _draw_hill(canvas, cx, cy, radius, global_y_shift, shape_key, color):
+        w_factor, h_factor = HILL_CONFIGS.get(shape_key, HILL_CONFIGS["default"])
+        hill_w, hill_h = radius * w_factor, radius * h_factor
         
-        tag = "nextgen_foreground"
-        
-        # Aperture Mask logic (The 'Hill' covering the bottom of the needle)
-        # Dynamic width based on shape
-        if shape_key == "hotdog":
-            hill_w = radius * 2.5
-            hill_h = radius * 0.3
-        elif shape_key == "gem":
-            hill_w = radius * 0.8
-            hill_h = radius * 0.3
-        elif shape_key == "super_gem":
-            hill_w = radius * 0.4
-            hill_h = radius * 0.3
-        elif shape_key == "hex":
-            hill_w = radius * 1.8
-            hill_h = radius * 0.3
-        elif shape_key == "octagon":
-            hill_w = radius * 1.8
-            hill_h = radius * 0.3
-        elif shape_key in ["triangle", "pyramid", "parking_meter"]:
-            hill_w = radius * 0.2
-            hill_h = radius * 0.1
-        elif shape_key in ["squircle", "squimonde"]:
-            hill_w = radius * 0.5
-            hill_h = radius * 0.3
-        elif shape_key == "crest":
-            hill_w = radius * 1.0
-            hill_h = radius * 0.3
-        elif shape_key == "squectangle":
-            hill_w = radius * 0.7
-            hill_h = radius * 0.3
-        elif shape_key == "trapezoid":
-            hill_w = radius * 1.2
-            hill_h = radius * 0.3
-        else:
-            hill_w = radius * 1.5
-            hill_h = radius * 0.3
+        base_y = BezelMask._get_base_y(cy, radius, global_y_shift, shape_key)
         
         steps = 20
         poly_points = []
-        
-        # Determine base Y (bottom of the mask)
-        if shape_key == "gem":
-            gem_rad = radius * GEM_BEZEL_EXPANSION
-            y_base_user = (GEM_BASE_HEIGHT * gem_rad) + global_y_shift
-            base_y = cy - y_base_user
-        elif shape_key == "super_gem":
-            base_y = cy
-        elif shape_key == "octagon":
-            oct_rad = radius * 1.4
-            y_base_user = (-0.923 * oct_rad) + global_y_shift
-            base_y = cy - y_base_user
-        else:
-            base_y = cy - global_y_shift
-        
         for i in range(steps + 1):
             x_norm = 1.0 - (2.0 * i / steps)
             x = cx + (x_norm * hill_w)
@@ -97,4 +61,19 @@ class BezelMask:
         poly_points.extend([cx - hill_w, base_y])
         poly_points.extend([cx + hill_w, base_y])
         
-        canvas.create_polygon(poly_points, fill=mask_color, outline=mask_color, tags=tag)
+        canvas.create_polygon(poly_points, fill=color, outline=color, tags="nextgen_foreground")
+
+    @staticmethod
+    def _get_base_y(cy, radius, global_y_shift, shape_key):
+        if shape_key == "gem":
+            gem_rad = radius * GEM_BEZEL_EXPANSION
+            return cy - ((GEM_BASE_HEIGHT * gem_rad) + global_y_shift)
+        
+        if shape_key == "super_gem":
+            return cy
+            
+        if shape_key == "octagon":
+            oct_rad = radius * 1.4 # OCTAGON_BEZEL_EXPANSION
+            return cy - ((-0.923 * oct_rad) + global_y_shift)
+            
+        return cy - global_y_shift

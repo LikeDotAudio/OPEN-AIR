@@ -1,6 +1,7 @@
 # managers/Display/core/button_canvas_base.py
 import tkinter as tk
 from PIL import Image, ImageDraw, ImageTk, ImageFont, ImageFilter, ImageChops
+from loguru import logger
 
 class CanvasButton(tk.Canvas):
     """
@@ -142,7 +143,9 @@ class CanvasButton(tk.Canvas):
             glow_layer = Image.new("RGBA", (width, height), (0,0,0,0))
             g_draw = ImageDraw.Draw(glow_layer)
             try: r_c, g_c, b_c = Image.new("RGB", (1,1), glow_color).getpixel((0,0))
-            except: r_c, g_c, b_c = 255, 150, 0
+            except Exception as e:
+                logger.trace(f"Error getting glow color {glow_color}: {e}")
+                r_c, g_c, b_c = 255, 150, 0
             
             for i in range(15):
                 alpha = int(255 * (0.1 + 0.9 * ((i/15)**2)) * self.glow_intensity)
@@ -164,7 +167,9 @@ class CanvasButton(tk.Canvas):
             f_size = self.active_font_size if is_active else self.inactive_font_size
             if not f_size: f_size = int(self.font_info[1]) if len(self.font_info)>1 else 12
             try: font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf", f_size)
-            except: font = ImageFont.load_default()
+            except Exception as e:
+                logger.trace(f"Error loading font: {e}")
+                font = ImageFont.load_default()
             
             # ⚡ HIGH-PRECISION CENTERING: Use anchor="mm" and align="center"
             tx, ty = width / 2, height / 2
@@ -201,7 +206,9 @@ class CanvasButton(tk.Canvas):
             glow_layer = Image.new("RGBA", (width, height), (0,0,0,0))
             g_draw = ImageDraw.Draw(glow_layer)
             try: r_c, g_c, b_c = Image.new("RGB", (1,1), glow_color).getpixel((0,0))
-            except: r_c, g_c, b_c = 255, 150, 0
+            except Exception as e:
+                logger.trace(f"Error getting circular glow color {glow_color}: {e}")
+                r_c, g_c, b_c = 255, 150, 0
             for i in range(15):
                 alpha = int(255 * (0.2+0.8*((i/15)**2)) * self.glow_intensity)
                 hot = (i/15)**4
@@ -218,7 +225,9 @@ class CanvasButton(tk.Canvas):
         if text:
             draw = ImageDraw.Draw(image)
             try: font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf", 12)
-            except: font = ImageFont.load_default()
+            except Exception as e:
+                logger.trace(f"Error loading circular font: {e}")
+                font = ImageFont.load_default()
             # ⚡ HIGH-PRECISION CENTERING: Use anchor="mm" and align="center"
             tx, ty = width / 2, height / 2
             if is_hovered: ty += 1

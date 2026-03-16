@@ -1,3 +1,37 @@
+## [2026-03-15 23:50:00] Comprehensive Error Handling & Logging Refactor
+**************************************
+Commit: PENDING
+Date: 2026-03-15 23:55:00
+Message: Refactored 113 files to eliminate bare excepts and improve forensic logging.
+**************************************
+### Refactored
+- **Error Handling Standardization**: Systematically eliminated 165 instances of "Bad Error Handling" across the project. Replaced all bare `except:` blocks with explicit exception catching (`except Exception as e:`) and integrated `loguru` for robust forensic trails.
+- **Logging Gravity**: Ensured that critical error and exception logs are no longer gated behind `LOCAL_DEBUG` flags, adhering to the project's "Gravity of Errors" mandate for better observability.
+- **Top Offenders Remediation**: Specifically patched key modules including `Visa_Fleet_Manager`, `state_mirror_engine`, and multiple GUI builders to ensure silent failures are eliminated.
+
+## [2026-03-15 23:26:00] Feature Suspension: AES70, OSC, and Visibility Telemetry
+**************************************
+Commit: PENDING
+Date: 2026-03-15 23:40:00
+Message: Feature Suspension: AES70, OSC, and Window Visibility Telemetry
+**************************************
+### Suspended
+- **AES70 Protocol Bridge**: Temporarily disabled the `AES70Manager`.
+- **OSC Protocol Bridge**: Temporarily disabled the `OSCManager`.
+- **Window Visibility Telemetry**: Commented out the `VisibilitySnitch` MQTT publishing logic. This reduces redundant MQTT traffic (`visibility/visible`) during the UI build and runtime interaction phases.
+- **Scanning Mechanism**: Set `scan_aes70 = False` and `scan_osc = False` in `config.ini`, and suppressed their launch in `managers/manager_launcher.py`.
+
+## [2026-03-15 23:30:00] New Audit: Bad File/Folder Naming & Containerization
+**************************************
+Commit: 7ca07af899f36f6004b7325251664e1654e9632f
+Date: 2026-03-15 23:32:45
+Message: New Audit: Bad File/Folder Naming & Containerization
+**************************************
+### Added
+- **Audit Command**: Created `.gemini/commands/AuditFileFolderNames.toml` to identify poor file system organization.
+- **Automation Script**: Created `audit_file_folder_names.py` for programmatic scanning of naming and containerization violations.
+- **Initial Report**: Generated `assets/Documentation/Audits/Bad_File_Folder_Names_Audit.md` identifying 252 violations and high-priority flat directories.
+
 ## [2026-03-15 22:55:00] Bug Fix: UI Rendering & Layout Cache Corruption
 **************************************
 Commit: cede7b1ccd85c83e3a0c8c8ba332487c85cf8c59

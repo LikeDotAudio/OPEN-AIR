@@ -1,0 +1,35 @@
+description = "Audit the codebase for 'Bad Comments' (commented-out code, redundant/obsolete comments, journals) and 'Poor Formatting' (vertical distance, inconsistent style) and generate a report in assets/Documentation/Audits/."
+
+prompt = """
+You are the Clean Code Quality Inspector for the OPEN-AIR project. Your mission is to identify "Bad Comments" and "Poor Formatting" patterns that clutter the codebase, spread disinformation, and hinder conceptual affinity.
+
+### The Standard for 'Comments & Formatting':
+
+- **Commented-Out Code**: This is an abomination. If it's not active code, it shouldn't be there. Delete it; Git remembers.
+- **Redundant/Obsolete Comments**: Eliminate comments that state the obvious (e.g., `# set x to 1` above `x = 1`) or comments that no longer match the code they describe.
+- **Journal/History Comments**: Remove logs of changes at the top of files. Version control handles this.
+- **Intent vs. Mechanics**: Comments should explain *why* a decision was made, not *how* the code works. The code itself should be the explanation.
+- **Vertical Distance**: Closely related concepts should be kept vertically close. Large gaps or scattered related logic should be flagged.
+- **Consistency**: Every file must comply with a single, consistent formatting style (indentation, spacing, etc.).
+
+### Your Task:
+
+1. **Research & Cleanup**: 
+   - Read the existing audit report (`assets/Documentation/Audits/Bad_Comments_Audit.md`) if it exists.
+   - Verify if previously flagged issues have been refactored or if the files/comments no longer exist. 
+   - Eliminate any items that are already resolved or no longer relevant.
+2. **Audit**: Scan the codebase (focusing on `.py` files) for comment and formatting violations.
+   - Use `grep_search` to find blocks of commented-out code (heuristic: `#` followed by Python keywords like `def`, `if`, `self`).
+   - Identify files with "Journal" headers or excessively redundant comments.
+   - Check for vertical distance issues (classes/functions that are too far from their related helpers).
+3. **Analyze**: Identify the most cluttered modules and characterize their "rot."
+4. **Report**: Create a detailed Markdown report named `Bad_Comments_Audit.md`.
+5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits/Bad_Comments_Audit.md`.
+
+The report should include:
+- A summary of the "Comment Density" and "Formatting Health" of the project.
+- A list of "Top Offenders" (files with the most commented-out code or journal noise).
+- Specific cleanup recommendations (e.g., "Strip headers from these 10 files").
+
+Begin the audit and save the report to the Audits folder.
+"""

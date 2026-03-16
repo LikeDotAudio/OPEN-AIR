@@ -105,7 +105,9 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
                 if widget_info["update_callback"]:
                     self.root.after(0, lambda: self._safe_execute_callback(widget_info["update_callback"], data, widget_id))
             return True
-        except: return False
+        except Exception as e:
+            state_logger.error(f"Failed to initialize widget state for {widget_id}: {e}")
+            return False
 
     def broadcast_gui_change_to_mqtt(self, widget_id, extra_payload=None):
         if not widget_id or self.is_inert or self._suppress_broadcast or self._silent_update or self._binding_suspended:
@@ -130,8 +132,11 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
         if (now - self._last_global_broadcast_ts) < self._GLOBAL_THROTTLE_MS: return
         if (now - widget_info.get("last_broadcast_ts", 0)) < 0.050: return
         
-        try: current_val = widget_info["var"].get()
-        except: return
+        try:
+            current_val = widget_info["var"].get()
+        except Exception as e:
+            state_logger.error(f"Failed to get value for widget {widget_id}: {e}")
+            return
 
         if current_val == widget_info.get("last_sent_val"): return
 
@@ -177,13 +182,17 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
                 
                 if widget_info["update_callback"]:
                     self.root.after(0, lambda: self._safe_execute_callback(widget_info["update_callback"], data, widget_id))
-        except: pass
+        except Exception as e:
+            state_logger.error(f"Error syncing incoming MQTT to GUI for topic {msg.topic}: {e}")
 
     def _safe_execute_callback(self, callback, data, widget_id):
         self._silent_update = True
-        try: callback(data)
-        except: pass
-        finally: self._silent_update = False
+        try:
+            callback(data)
+        except Exception as e:
+            state_logger.error(f"Error executing callback for widget {widget_id}: {e}")
+        finally:
+            self._silent_update = False
 
     def calculate_topic(self, widget_id: str, tab_name: str) -> str:
         """Shim for backward compatibility with legacy widget callers."""

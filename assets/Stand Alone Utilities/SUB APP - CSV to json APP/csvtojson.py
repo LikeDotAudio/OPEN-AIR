@@ -7,6 +7,7 @@ from tkinter import filedialog, messagebox, ttk
 import pandas as pd
 import orjson
 import os
+from loguru import logger
 
 # --- EXTRACTED CORE MODULES ---
 from core.csv_converter_engine import CSVConverterEngine
@@ -77,7 +78,9 @@ class CSVToJSONApp(tk.Tk):
             df = pd.read_csv(self.csv_filepath, nrows=1, keep_default_na=False)
             self.headers = list(df.columns)
             self.header_ui = HeaderConfigUI(self.h_frame, self.headers, self.preview)
-        except Exception as e: messagebox.showerror("Error", str(e))
+        except Exception as e:
+            logger.exception(f"Header loading failed: {e}")
+            messagebox.showerror("Error", str(e))
 
     def generate_data(self):
         try:
@@ -88,6 +91,7 @@ class CSVToJSONApp(tk.Tk):
             res = CSVConverterEngine.build_hierarchy(df, h_map, "root", self.headers)
             return {self.root_en.get(): res}
         except Exception as e:
+            logger.exception(f"Generation failed: {e}")
             messagebox.showerror("Error", f"Generation failed: {e}")
             return None
 
@@ -103,7 +107,9 @@ class CSVToJSONApp(tk.Tk):
             try:
                 with open(path, "wb") as f: f.write(orjson.dumps(data))
                 messagebox.showinfo("Success", f"Saved to {path}")
-            except Exception as e: messagebox.showerror("Error", str(e))
+            except Exception as e:
+                logger.exception(f"Conversion or file saving failed: {e}")
+                messagebox.showerror("Error", str(e))
 
 if __name__ == "__main__":
     CSVToJSONApp().mainloop()

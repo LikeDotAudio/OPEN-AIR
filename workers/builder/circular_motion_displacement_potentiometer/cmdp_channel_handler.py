@@ -1,6 +1,7 @@
 # workers/builder/circular_motion_displacement_potentiometer/cmdp_channel_handler.py
 import tkinter as tk
 import math
+from loguru import logger
 
 class CMDP_LTPObject:
     """
@@ -36,7 +37,9 @@ class CMDP_LTPObject:
         ⚡ MATH ONLY: Calculates new physical coordinates based on state variables.
         """
         try: angle = float(self.angle_var.get())
-        except: angle = 0.0
+        except Exception as e:
+            logger.error(f"Failed to get float angle from {self.angle_var}: {e}")
+            angle = 0.0
         rad = math.radians(angle)
         near, far = self.widget_ref.near_radius, self.widget_ref.far_radius
         self.track_len = far - near
@@ -72,7 +75,8 @@ class CMDP_LTPObject:
         cx, cy = self.x, self.y
         try:
             ang, val_curr, rot_curr = float(self.angle_var.get()), float(self.val_var.get()), float(self.rot_var.get())
-        except:
+        except Exception as e:
+            logger.error(f"Failed to get float values for rendering: {e}")
             ang, val_curr, rot_curr = 0.0, 0.0, 0.0
             
         tl, t_ang_rad = self.track_len, math.radians(ang + 90)

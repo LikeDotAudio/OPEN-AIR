@@ -135,7 +135,8 @@ class SplinkerEditor(tk.Frame):
             if isinstance(splinks, list):
                 self.splinker_manager.splinks = splinks
                 self.refresh_splink_list()
-        except: pass
+        except Exception as e:
+            logger.debug(f"Failed to handle splinker status: {e}")
 
     def handle_panic_status(self, payload):
         try:
@@ -148,7 +149,8 @@ class SplinkerEditor(tk.Frame):
             else:
                 self.panic_btn.config(text="🆘 PANIC", bg="#880000", state=tk.NORMAL)
                 self.reset_btn.pack_forget()
-        except: pass
+        except Exception as e:
+            logger.debug(f"Failed to handle panic status: {e}")
 
     def trigger_panic(self):
         if self.router: self.router.ingest("GUI", "OPEN-AIR/System/Control/Splinker/Panic", "")
@@ -208,6 +210,7 @@ class SplinkerEditor(tk.Frame):
             scale_h["params"]["dest_min"] = float(self.d_min.get() or 0)
             scale_h["params"]["dest_max"] = float(self.d_max.get() or 100)
         except Exception as e:
+            logger.error(f"Invalid scaling parameters: {e}")
             messagebox.showerror("Error", f"Invalid scaling parameters: {e}")
             return
         self.router.ingest("GUI", f"OPEN-AIR/System/Control/Splinker/{self.selected_splink_id}/Update", splink)

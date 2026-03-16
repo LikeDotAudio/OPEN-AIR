@@ -9,6 +9,7 @@ import string
 import time
 import socket
 from concurrent.futures import ThreadPoolExecutor
+from loguru import logger
 
 # --- CONFIGURATION ---
 OUTPUT_FILENAME = "fleet_inventory.json"
@@ -47,7 +48,8 @@ def get_local_ip():
     try:
         s.connect(("10.255.255.255", 1))
         IP = s.getsockname()[0]
-    except Exception:
+    except Exception as e:
+        logger.trace(f"Error getting local IP: {e}")
         IP = "127.0.0.1"
     finally:
         s.close()
@@ -69,10 +71,12 @@ def check_host(ip):
                 with urllib.request.urlopen(url, timeout=1) as resp:
                     if "E5810" in resp.read().decode("utf-8", errors="ignore"):
                         is_gateway = True
-            except:
+            except Exception as e:
+                logger.trace(f"Error checking instruments page for {ip}: {e}")
                 pass
             return (ip, "GATEWAY" if is_gateway else "DEDICATED")
-    except:
+    except Exception as e:
+        logger.trace(f"Error connecting to Port 111 on {ip}: {e}")
         pass
 
     # 2. Port 5025 (SCPI)
@@ -83,7 +87,8 @@ def check_host(ip):
         sock.close()
         if result == 0:
             return (ip, "DEDICATED")
-    except:
+    except Exception as e:
+        logger.trace(f"Error connecting to Port 5025 on {ip}: {e}")
         pass
     return None
 
@@ -178,7 +183,8 @@ def get_gateway_inventory(ip):
                 m = m.strip()
                 if "COM" not in m:
                     targets.append(m)
-    except Exception:
+    except Exception as e:
+        logger.trace(f"Error getting gateway inventory from {ip}: {e}")
         pass
     return targets
 
@@ -193,11 +199,13 @@ def query_device_safe(rm, resource_str, attempt=1):
         idn = inst.query("*IDN?").strip()
         inst.close()
         return clean_string_for_display(idn)
-    except Exception:
+    except Exception as e:
+        logger.trace(f"Error querying device {resource_str}: {e}")
         if inst:
             try:
                 inst.close()
-            except:
+            except Exception as e_close:
+                logger.trace(f"Error closing instrument: {e_close}")
                 pass
         if attempt == 1 and ("USB" in resource_str or "ASRL" in resource_str):
             #time.sleep(2.0)
@@ -211,7 +219,8 @@ def main():
     potential_targets = []
     try:
         rm = pyvisa.ResourceManager("@py")
-    except:
+    except Exception as e:
+        logger.debug(f"PyVISA-py not found or failed to load: {e}. Falling back to default.")
         rm = pyvisa.ResourceManager()
 
     # 1. HUNT
@@ -252,7 +261,8 @@ def main():
                 potential_targets.append({"Type": "LOCAL", "Resource": res})
                 count += 1
         print(f" Found {count}.")
-    except:
+    except Exception as e:
+        logger.error(f"Error listing local resources: {e}")
         print(" Error.")
 
     print(f"\n   ⏳ Pausing 2s for settling...")

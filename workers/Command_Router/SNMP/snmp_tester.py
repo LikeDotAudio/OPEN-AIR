@@ -36,6 +36,7 @@ class SnmpTester:
                 if result.stderr: output = "ERRORS/WARNINGS:\n" + result.stderr + "\n" + "-"*40 + "\n" + output
                 return output if output.strip() else "No OID data returned. Is snmpd running?"
             except Exception as e:
+                snmp_logger.error(f"Raw Walk Exception: {e}")
                 return f"Raw Walk Exception: {e}"
 
         # --- MIB MODE: MIB provided or requested ---
@@ -65,6 +66,7 @@ class SnmpTester:
                     f.write(mib_content)
                 active_mib_path = temp_mib
             except Exception as e:
+                snmp_logger.error(f"FAILED to write temporary MIB: {e}")
                 diagnostics.append(f"! FAILED to write temporary MIB: {e}")
 
         if active_mib_path and os.path.exists(active_mib_path):
@@ -77,7 +79,8 @@ class SnmpTester:
                     if match:
                         module_name = match.group(1)
                         diagnostics.append(f"- Module name detected: {module_name}")
-            except: pass
+            except Exception as e:
+                snmp_logger.debug(f"Failed to detect module name from MIB: {e}")
         else:
             diagnostics.append("! No custom MIB provided or found.")
 
@@ -120,6 +123,7 @@ class SnmpTester:
             elif not output.strip():
                 output = "No data returned and walk failed. Check snmpd logs."
         except Exception as e:
+            snmp_logger.error(f"Process Exception during SNMP walk: {e}")
             output = f"Process Exception: {e}"
             
         return "\n".join(diagnostics) + output

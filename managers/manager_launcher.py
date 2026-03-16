@@ -81,20 +81,22 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
 
     # --- Dynamic Protocol Injection ---
     if LOCAL_DEBUG: logger.debug("🚀⚙️🔗 [LAUNCHER] Injecting dynamic protocols...")
-    
+
     aes70_manager = None
-    if getattr(app_constants, "SCAN_AES70", False):
-        aes70_manager = _load_protocol_manager(
-            "workers.Command_Router.AES70.aes70", "AES70Manager",
-            state_cache_manager=state_cache_manager, run_bridge=True
-        )
+    # 📻🔌🛑 [DISABLED] AES70 Feature is currently suspended for re-architecture.
+    # if getattr(app_constants, "SCAN_AES70", False):
+    #     aes70_manager = _load_protocol_manager(
+    #         "workers.Command_Router.AES70.aes70", "AES70Manager",
+    #         state_cache_manager=state_cache_manager, run_bridge=True
+    #     )
 
     osc_manager = None
-    if getattr(app_constants, "SCAN_OSC", False):
-        osc_manager = _load_protocol_manager(
-            "workers.Command_Router.OSC.osc_manager", "OSCManager",
-            state_cache_manager=state_cache_manager, mqtt_connection_manager=mqtt_connection_manager, run_bridge=True
-        )
+    # 🅾️🔌🛑 [DISABLED] OSC Feature is currently suspended.
+    # if getattr(app_constants, "SCAN_OSC", False):
+    #     osc_manager = _load_protocol_manager(
+    #         "workers.Command_Router.OSC.osc_manager", "OSCManager",
+    #         state_cache_manager=state_cache_manager, mqtt_connection_manager=mqtt_connection_manager, run_bridge=True
+    #     )
 
     snmp_manager = None
     if getattr(app_constants, "SCAN_SNMP", False):

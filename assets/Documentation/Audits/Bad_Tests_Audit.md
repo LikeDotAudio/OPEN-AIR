@@ -1,79 +1,44 @@
-# Quality Assurance Audit: Bad Tests & Missing Coverage
-
-**Date:** Sunday, March 15, 2026
-**Project:** OPEN-AIR
-**Scope:** Test Modules and Functional Components in `managers/` and `workers/`
-**Overall Test Health:** CRITICAL (Severe Under-coverage)
-
----
+# Bad Tests Audit Report
 
 ## Executive Summary
-The OPEN-AIR project is currently operating with a significant deficit in automated testing. Out of 468 functional modules analyzed, **467 have no identified automated test coverage**. This represents a coverage rate of approximately **0.21%**. 
+Total modules analyzed: 468
+- **Missing Tests**: 467
+- **Bad Quality Tests**: 1
+- **Healthy Tests**: 0
 
-Most existing testing assets are "Diagnostic Testers"—standalone manual scripts that require human interaction and visual verification. While these tools are useful for ad-hoc debugging, they are not **self-validating** and cannot be used for regression testing in an automated pipeline. This creates a "Fear of Change" environment where refactoring core logic (like the Splinker or Display Builder) is inherently high-risk.
+**Test Coverage Rate**: 0.21%
 
----
+## Top Offenders (Missing Tests)
+These modules have no identified test or tester file. High priority for new test creation.
 
-## Top Offenders: Components with NO Automated Tests
+- managers/Display/array/array.py
+- managers/Display/array/collapsible_block/collapsible_block.py
+- managers/Display/breakoff_manager/hidden_breakoff_manager.py
+- managers/Display/builder/async_grid_renderer.py
+- managers/Display/builder/core/batch_processing_engine.py
+- managers/Display/builder/core/directory_builder.py
+- managers/Display/builder/core/grid_topology_configurator.py
+- managers/Display/builder/core/layout_cache_manager.py
+- managers/Display/builder/core/navigation_manager.py
+- managers/Display/builder/core/structural_assembler.py
+- managers/Display/builder/core/tab_manager.py
+- managers/Display/builder/gui_batch_builder.py
+- managers/Display/builder/gui_display.py
+- managers/Display/builder/gui_mqtt_manager.py
+- managers/Display/builder/gui_rebuilder.py
+- managers/Display/builder/window_manager.py
+- managers/Display/context/widget_context.py
+- managers/Display/core/bootstrap_sequence.py
+- managers/Display/core/shutdown_coordinator.py
+- managers/Display/core/ui_window_manager.py
 
-### 1. `workers/Splinker/` (State-Mirroring & Data Processing)
-- **Status:** **CRITICAL - NO TESTS**.
-- **Violation:** Missing Tests.
-- **Concern:** This component handles mission-critical scaling, deadband, and inversion logic. It is the core mathematical engine for data flow. Errors here are difficult to trace and can cause cascading failures across the display and hardware layers.
-- **Risk:** High.
+... and 447 more.
 
-### 2. `workers/Command_Router/` (MQTT/OSC/MIDI/SNMP)
-- **Status:** **CRITICAL - MANUAL ONLY**.
-- **Violation:** Muddled Intent & Violation of F.I.R.S.T. (Independent/Self-Validating).
-- **Concern:** The routing logic is verified via `snmp_tester.py`, which is a manual script requiring a live `snmpd` environment. There are no unit tests to verify protocol translation or topic mapping in isolation.
-- **Risk:** High.
+## Poor Quality Tests
+These modules have tests, but they violate clean testing principles.
 
-### 3. `managers/Display/` (GUI Builder & Dynamic Generation)
-- **Status:** **CRITICAL - NO TESTS**.
-- **Violation:** Missing Tests.
-- **Concern:** The recursive layout parser and asynchronous grid renderer are highly complex. Without tests, there is no way to verify that a change to a single widget creator won't break rendering for all JSON-based GUIs.
-- **Risk:** High.
+### workers/builder/composite_mdp/composite_mdp.py
+**Test File:** workers/builder/composite_mdp/tester.py
+**Issues:**
+- Test file exists but contains no test functions
 
-### 4. `workers/logger/` (Log Filter & Output Engine)
-- **Status:** **NO TESTS**.
-- **Violation:** Missing Tests.
-- **Concern:** Logging is the only window into system state. There are no tests to verify that the `log_filter_engine` correctly manages verbosity levels or that the batch-writing logic is reliable under high load.
-- **Risk:** Medium.
-
----
-
-## Audit of Existing "Tests" (Testers vs. Tests)
-
-| File Path | Type | F.I.R.S.T. Assessment | Issues Found |
-| :--- | :--- | :--- | :--- |
-| `PTPtester.py` | Manual Script | **F-I-R-S-T** (None) | Requires root, live network, and manual observation. |
-| `snmp_tester.py` | Manual Script | **F-I-R-S-T** (None) | No assertions; relies on `snmpwalk` output to console. |
-| `CMDP_tester.py` | Manual GUI | **F-I-R-S-T** (None) | Requires a human to move a GUI fader and look at logs. |
-| `tester.py` (Composite MDP) | Manual GUI | **F-I-R-S-T** (None) | Zero assertions. It's a prototype, not a test. |
-| `test_dynamic_gui_mousewheel_mixin.py` | Unit Test | **F-I-R-S-T** (Fast/Repeatable) | **Good Intent, Low Density.** Only tests a single bug fix. |
-
----
-
-## Patterns of "Bad Testing"
-
-1. **The "Tester" Anti-Pattern:** A "Tester" is a script that *helps a human test the code*. A "Test" is a piece of code that *tests the code for you*. OPEN-AIR is currently over-reliant on the former.
-2. **Environment Dependency:** Tests like `PTPtester.py` violate the **Repeatable** principle because they cannot run on a developer's laptop without a specific network setup and root access.
-3. **Missing Assertions:** The existing "testers" print "Success" or "Failure" to the log but do not use `assert` or `self.assertEqual()`. This means the test runner cannot programmatically determine if the suite passed.
-4. **Lack of Boundary Testing:** None of the existing testers explore what happens with empty inputs, disconnected states, or malformed data packets.
-
----
-
-## Recommendations for a Clean Testing Strategy
-
-1. **Create a Domain-Specific Testing Language (DSTL):**
-   - Implement a `tests/mock_hardware` module to simulate MQTT instruments.
-   - Implement a `tests/mock_display` module to simulate the tkinter canvas without spawning a physical window.
-2. **Migrate "Testers" to "Tests":**
-   - Take the logic in `snmp_tester.py` and wrap it in a `unittest` class using mocks for `subprocess.run()`. Replace manual log checks with assertions.
-3. **The "One Concept per Test" Rule:**
-   - Instead of one giant `tester.py` that checks everything, create individual test functions for `test_scaling()`, `test_deadband()`, and `test_inversion()`.
-4. **Self-Validation Mandate:**
-   - Every new feature MUST include a `test_*.py` file that returns a definitive Pass/Fail boolean.
-
----
-*Report generated by the Quality Assurance Lead for OPEN-AIR.*

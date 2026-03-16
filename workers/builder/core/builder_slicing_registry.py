@@ -1,5 +1,6 @@
 import time
 import tkinter as tk
+from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
@@ -35,13 +36,16 @@ class BuilderSlicingRegistryMixin:
                         scroll_root_x=rx,
                         scroll_root_y=ry
                     )
-                except: pass
+                except Exception as e:
+                    logger.debug(f"Immediate slice failed: {e}")
 
     def _trigger_reslice_all(self):
         """⚡ BATCH RESLICE ENGINE"""
         if hasattr(self, '_reslice_trigger_id') and self._reslice_trigger_id:
-            try: self.after_cancel(self._reslice_trigger_id)
-            except: pass
+            try:
+                self.after_cancel(self._reslice_trigger_id)
+            except Exception as e:
+                logger.trace(f"Failed to cancel reslice trigger: {e}")
         delay = 150 if getattr(self, '_is_rebuilding', False) else 50
         self._reslice_trigger_id = self.after(delay, self._perform_batch_reslice)
 
@@ -84,7 +88,8 @@ class BuilderSlicingRegistryMixin:
                             pos_pct = wy / wh
                             if 0.0 <= pos_pct <= 1.0:
                                 folds_detected.append({"position_pct": pos_pct, "orientation": "horizontal"})
-                    except: pass
+                    except Exception as e:
+                        logger.trace(f"Failed to calculate fold position for child: {e}")
 
         folds_detected.sort(key=lambda x: x["position_pct"])
 
@@ -132,7 +137,7 @@ class BuilderSlicingRegistryMixin:
                 root_x = scroll_ref.winfo_rootx()
                 root_y = scroll_ref.winfo_rooty()
             except Exception as e:
-                if LOCAL_DEBUG: builder_logger.error(f"🧩🚫🛑 [ERROR] Batch Reslice: Error updating root coords: {e}")
+                logger.error(f"🧩🚫🛑 [ERROR] Batch Reslice: Error updating root coords: {e}")
 
         # If we're still generating a background, defer batch reslice
         if bg_pil is None and getattr(self, '_bg_task_id', 0) > 0:
@@ -158,7 +163,7 @@ class BuilderSlicingRegistryMixin:
                 else: processed += 1
                 count += 1
             except Exception as e:
-                if LOCAL_DEBUG: builder_logger.error(f"🧩🚫🛑 [ERROR] Batch Reslice: Error in callback: {e}")
+                logger.error(f"🧩🚫🛑 [ERROR] Batch Reslice: Error in callback: {e}")
         
         if LOCAL_DEBUG:
             builder_logger.info(f"🧩🆗✅ [BUILDER] Reslice COMPLETE: {processed} updated, {skipped} skipped (Jitter Filter) for '{getattr(self, 'tab_name', 'Unknown')}'.")

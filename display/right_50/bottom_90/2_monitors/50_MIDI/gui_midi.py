@@ -32,8 +32,11 @@ class MidiDashboard(tk.Frame):
         while curr:
             if isinstance(curr, DynamicGuiBuilder) and hasattr(curr, 'app_instance'):
                 return getattr(curr.app_instance, 'midi_manager', None)
-            try: curr = curr.master
-            except: break
+            try:
+                curr = curr.master
+            except Exception as e:
+                logger.trace(f"End of widget tree reached: {e}")
+                break
         return None
 
     def _setup_ui(self):
@@ -121,8 +124,11 @@ class MidiDashboard(tk.Frame):
                 # Fallback: Parse from raw string
                 raw = msg.get("raw", "")
                 if "channel=" in raw:
-                    try: channel = int(raw.split("channel=")[1].split()[0])
-                    except: channel = 0
+                    try:
+                        channel = int(raw.split("channel=")[1].split()[0])
+                    except Exception as e:
+                        logger.debug(f"Failed to parse MIDI channel from raw string: {e}")
+                        channel = 0
                 else:
                     channel = 0
         elif hasattr(msg, "channel"):
@@ -146,8 +152,10 @@ class MidiDashboard(tk.Frame):
 
     def destroy(self):
         if self.midi_manager:
-            try: self.midi_manager.remove_monitor_callback(self.on_midi_activity)
-            except: pass
+            try:
+                self.midi_manager.remove_monitor_callback(self.on_midi_activity)
+            except Exception as e:
+                logger.trace(f"Failed to remove MIDI monitor callback: {e}")
         super().destroy()
 
 def get_gui_class():

@@ -1,0 +1,34 @@
+description = "Audit the codebase for 'Bad Concurrency/Threading' (unprotected shared data, large critical sections, mixed threading/business logic) and generate a report in assets/Documentation/Audits/."
+
+prompt = """
+You are the Concurrency Expert for the OPEN-AIR project. Your mission is to identify "Threading Risks" and "Synchronization Inefficiencies" that lead to sporadic, hard-to-repeat bugs and performance bottlenecks.
+
+### The Standard for 'Concurrency & Threading':
+
+- **Isolate Concurrency**: Thread management (locks, queues, pools) should strictly follow SRP. Code that manages threads should do nothing else. Business logic should be "thread-ignorant" where possible.
+- **Minimize Critical Sections**: Locks are expensive. Audit `with self.lock:` or `threading.Lock()` usage. Synchronized blocks must be as small as possible to reduce contention and overhead.
+- **Limit Shared Data**: The best way to avoid concurrency bugs is to not share data. Audit for global state or instance variables modified across multiple threads. Prefer data copies or immutable objects.
+- **Avoid "One-Off" Fallacy**: Never ignore a threading bug as a hardware glitch. Every sporadic crash is an underlying defect in the execution model.
+
+### Your Task:
+
+1. **Research & Cleanup**: 
+   - Read the existing audit report (`assets/Documentation/Audits/Bad_Threading_Audit.md`) if it exists.
+   - Verify if previously flagged threading issues have been refactored. 
+   - Eliminate any items that are already resolved or no longer relevant.
+2. **Audit**: Scan the codebase (focusing on `managers/` and `workers/`) for threading violations.
+   - Use `grep_search` to find imports of `threading`, `multiprocessing`, `asyncio`, and `queue`.
+   - Identify classes that mix business logic with thread orchestration.
+   - Look for large `try-except` blocks inside locks or long-running operations under a mutex.
+   - Detect shared state (e.g., globals or shared dictionaries) being modified without protection or with excessive locking.
+3. **Analyze**: Evaluate the complexity of the threading model and identify the most vulnerable synchronization points.
+4. **Report**: Create a detailed Markdown report named `Bad_Threading_Audit.md`.
+5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits/Bad_Threading_Audit.md`.
+
+The report should include:
+- A summary of the "Concurrency Health" of the system.
+- A list of "Top Offenders" (classes with mixed responsibilities, oversized locks, or high shared-data risk).
+- Specific refactoring recommendations (e.g., "Use a thread-safe Queue instead of a locked list").
+
+Begin the audit and save the report to the Audits folder.
+"""

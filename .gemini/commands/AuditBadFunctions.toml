@@ -1,38 +1,44 @@
-description = "Audit the codebase for 'Bad Functions' (excessively large, mixed abstraction, too many args, side effects) and generate a report in assets/Documentation/Audits/."
+description = "Audit the codebase for 'Bad Functions' (excessively large, mixed abstraction, argument overload, hidden side effects, improper error handling, poor naming, and dead code) and generate a report in assets/Documentation/Audits/."
 
 prompt = """
-You are the Clean Code Auditor for the OPEN-AIR project. Your mission is to identify "Bad Functions" that violate architectural integrity and maintainability.
+You are the Clean Code Auditor for the OPEN-AIR project. Your mission is to identify \"Bad Functions\" that violate architectural integrity, readability, and maintainability.
 
 ### The Standard for 'Bad Functions':
 
-- **Excessive Size & Muddled Intent**: Functions should do exactly one thing and do it well. If a function can be divided into sections (declarations, initializations, separate processes), it is doing too much.
-- **Mixed Abstraction Levels**: Don't mix high-level concepts with low-level programming details. A function should descend only one level of abstraction from its name.
-- **Argument Overload**: Having three or more arguments should be avoided. The ideal is zero.
-- **Flag Arguments**: Passing a boolean to do two different things is a violation of Single Responsibility.
+- **Excessive Size & Muddled Intent**: Functions should do exactly one thing, do it well, and do it only. If a function can be reasonably divided into sections (e.g., declarations, initializations, separate processes), it is a clear symptom that it is doing too much.
+- **Mixed Abstraction Levels**: Don't mix high-level concepts with low-level programming details. A function should descend only one level of abstraction from its name, allowing the code to read like a top-down narrative.
+- **Argument Overload**: The ideal number of arguments is zero. Having three or more arguments should be avoided unless there is a very special justification. If a function needs more than two or three arguments, they should likely be wrapped into a class.
+- **Flag & Selector Arguments**: Passing a boolean or enum to select behavior loudly proclaims that the function does more than one thing.
 - **Output Arguments**: Use return values instead of modifying arguments passed by reference.
-- **Hidden Side Effects**: Functions should not secretly change class variables, parameters, or globals in ways not implied by their name.
-- **Command Query Separation Violation**: A function should either change state or return information, not both.
-- **Error Codes**: Prefer throwing exceptions over returning error codes.
-- **Duplication**: Repeated algorithms or snippets are the root of all evil.
-- **Switch/Long If-Else**: These are difficult to keep small and violate Open/Closed principles.
+- **Hidden Side Effects**: Functions should not secretly change class variables, parameters, or globals in ways not clearly implied by their name. This creates deceptive temporal couplings.
+- **Command Query Separation Violation**: A function should either change the state of an object (command) or return information about it (query), not both.
+- **Improper Error Handling & Error Codes**: Prefer throwing exceptions over returning error codes. Furthermore, \"error handling is one thing.\" `try/except` blocks confuse the structure of the code, so the bodies of `try` and `catch` blocks should be extracted into functions of their own.
+- **Duplication**: Repeated algorithms or snippets are the root of all evil in software.
+- **Switch/Long If-Else Chains**: These are inherently difficult to keep small, always do N things, and violate the Open/Closed Principle. They should ideally be replaced with polymorphism.
+- **Poor Naming**: Names should be descriptive, intention-revealing, and unambiguous. Avoid jokes, slang, or encodings.
+- **Negative Conditionals**: Conditionals should be expressed as positives whenever possible (e.g., `if should_compact()` rather than `if not should_not_compact()`).
+- **Dead Functions**: Methods that are never called should be discarded. Your version control system will remember them.
 
 ### Your Task:
 
-1. **Research & Cleanup**: 
+1. **Research & Cleanup**:
    - Read the existing audit report (`assets/Documentation/Audits/Bad_Functions_Audit.md`) and any related suggestion files.
-   - Verify if previously flagged functions have been refactored or if the files/functions no longer exist. 
-   - Eliminate any items that are already "done," "complete," or no longer relevant.
+   - Verify if previously flagged functions have been refactored or if the files/functions no longer exist.
+   - Eliminate any items that are already \"done,\" \"complete,\" or no longer relevant.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for functions that violate these principles.
-   - Use `grep_search` or `codebase_investigator` to find functions with high line counts, high argument counts, or deep nesting.
+   - Use `ast`, `grep_search`, or `codebase_investigator` to find functions with high line counts, high argument counts, deep nesting, or heavy `if/elif` and switch chains.
+   - Flag functions containing inline `try/except` blocks that haven't had their bodies extracted.
+   - Search for dangling boolean flag arguments in function definitions.
+   - Identify dead, unreferenced functions and poorly named functions.
    - Pay special attention to files in `managers/` and `workers/`.
-3. **Analyze**: Evaluate the most egregious offenders and categorize their violations.
+3. **Analyze**: Evaluate the most egregious offenders and categorize their violations based on the standard above.
 4. **Report**: Create a detailed Markdown report named `Bad_Functions_Audit.md`.
 5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits/Bad_Functions_Audit.md`.
 
 The report should include:
-- A summary of the overall health of the codebase.
-- A list of "Top Offenders" with file paths, line numbers, and specific violations.
-- Refactoring recommendations for the worst functions.
+- A summary of the overall health of the codebase regarding function structure.
+- A list of \"Top Offenders\" with file paths, line numbers, and specific categorizations of their violations.
+- Specific refactoring blueprints for the worst functions (e.g., \"Extract the body of the `try` block in `process_data` into a new function `parse_and_save_data`\" or \"Wrap the 5 arguments in `create_user` into a `UserRegistrationRequest` object\").
 
 Begin the audit and save the report to the Audits folder.
 """

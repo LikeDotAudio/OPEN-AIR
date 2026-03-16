@@ -2,8 +2,8 @@
 
 ## Executive Summary
 Analyzed codebase for magic numbers, short variables, noise words, and poor function names.
-- **Files with Issues**: 444
-- **Total Violations**: 3678
+- **Files with Issues**: 447
+- **Total Violations**: 3700
 
 ## Top Offenders
 
@@ -374,53 +374,53 @@ Analyzed codebase for magic numbers, short variables, noise words, and poor func
 ---
 ### managers/Display/factory/button_canvas_base.py
 #### Magic Number
-- Line 12: Literal '6' should be a named constant.
+- Line 13: Literal '6' should be a named constant.
   `corner_radius=6,`
-- Line 116: Literal '4' should be a named constant.
+- Line 117: Literal '4' should be a named constant.
   `pad = 4`
-- Line 117: Literal '12' should be a named constant.
+- Line 118: Literal '12' should be a named constant.
   `if width < 12 or height < 12: return ImageTk.PhotoImage(image)`
-- Line 117: Literal '12' should be a named constant.
+- Line 118: Literal '12' should be a named constant.
   `if width < 12 or height < 12: return ImageTk.PhotoImage(image)`
-- Line 131: Literal '6' should be a named constant.
+- Line 132: Literal '6' should be a named constant.
   `if height > pad*2 + 6:`
-- Line 145: Literal '255' should be a named constant.
-  `except: r_c, g_c, b_c = 255, 150, 0`
-- Line 147: Literal '15' should be a named constant.
-  `for i in range(15):`
 - Line 148: Literal '255' should be a named constant.
+  `r_c, g_c, b_c = 255, 150, 0`
+- Line 150: Literal '15' should be a named constant.
+  `for i in range(15):`
+- Line 151: Literal '255' should be a named constant.
   `alpha = int(255 * (0.1 + 0.9 * ((i/15)**2)) * self.glow_intensity)`
-- Line 148: Literal '0.1' should be a named constant.
+- Line 151: Literal '0.1' should be a named constant.
   `alpha = int(255 * (0.1 + 0.9 * ((i/15)**2)) * self.glow_intensity)`
-- Line 148: Literal '0.9' should be a named constant.
+- Line 151: Literal '0.9' should be a named constant.
   `alpha = int(255 * (0.1 + 0.9 * ((i/15)**2)) * self.glow_intensity)`
 - ... and 31 more.
 #### Short Variable Name
-- Line 119: Variable 'r' is too short for its scope.
+- Line 120: Variable 'r' is too short for its scope.
   `r = min(self.corner_radius, (width - pad*2)//2, (height - pad*2)//2)`
-- Line 170: Variable 'tx' is too short for its scope.
+- Line 175: Variable 'tx' is too short for its scope.
   `tx, ty = width / 2, height / 2`
-- Line 170: Variable 'ty' is too short for its scope.
+- Line 175: Variable 'ty' is too short for its scope.
   `tx, ty = width / 2, height / 2`
-- Line 171: Variable 'ty' is too short for its scope.
+- Line 176: Variable 'ty' is too short for its scope.
   `if is_hovered: ty += 1`
-- Line 181: Variable 'r' is too short for its scope.
+- Line 186: Variable 'r' is too short for its scope.
   `r = (min(width, height) - pad*2) // 2`
-- Line 182: Variable 'cx' is too short for its scope.
+- Line 187: Variable 'cx' is too short for its scope.
   `cx, cy = width//2, height//2`
-- Line 182: Variable 'cy' is too short for its scope.
+- Line 187: Variable 'cy' is too short for its scope.
   `cx, cy = width//2, height//2`
-- Line 223: Variable 'tx' is too short for its scope.
+- Line 232: Variable 'tx' is too short for its scope.
   `tx, ty = width / 2, height / 2`
-- Line 223: Variable 'ty' is too short for its scope.
+- Line 232: Variable 'ty' is too short for its scope.
   `tx, ty = width / 2, height / 2`
-- Line 224: Variable 'ty' is too short for its scope.
+- Line 233: Variable 'ty' is too short for its scope.
   `if is_hovered: ty += 1`
 - ... and 2 more.
 #### Encoding/Prefix
-- Line 164: Variable 'f_size' uses legacy prefix.
+- Line 167: Variable 'f_size' uses legacy prefix.
   `f_size = self.active_font_size if is_active else self.inactive_font_size`
-- Line 165: Variable 'f_size' uses legacy prefix.
+- Line 168: Variable 'f_size' uses legacy prefix.
   `if not f_size: f_size = int(self.font_info[1]) if len(self.font_info)>1 else 12`
 
 ---
@@ -577,55 +577,55 @@ Analyzed codebase for magic numbers, short variables, noise words, and poor func
 ---
 ### workers/builder/circular_motion_displacement_potentiometer/cmdp_channel_handler.py
 #### Magic Number
-- Line 19: Literal '100.0' should be a named constant.
+- Line 20: Literal '100.0' should be a named constant.
   `self.visible, self.val_min, self.val_max, self.rot_min, self.rot_max = True, 0.0, 100.0, 0.0, 100.0`
-- Line 19: Literal '100.0' should be a named constant.
+- Line 20: Literal '100.0' should be a named constant.
   `self.visible, self.val_min, self.val_max, self.rot_min, self.rot_max = True, 0.0, 100.0, 0.0, 100.0`
-- Line 82: Literal '60' should be a named constant.
+- Line 86: Literal '60' should be a named constant.
   `hb_w = 60`
-- Line 83: Literal '20' should be a named constant.
+- Line 87: Literal '20' should be a named constant.
   `hbp = [self.rotate_point(cx - hb_w/2, cy - tl/2 - 20, cx, cy, cos_t, sin_t),`
-- Line 84: Literal '20' should be a named constant.
+- Line 88: Literal '20' should be a named constant.
   `self.rotate_point(cx + hb_w/2, cy - tl/2 - 20, cx, cy, cos_t, sin_t),`
-- Line 85: Literal '20' should be a named constant.
+- Line 89: Literal '20' should be a named constant.
   `self.rotate_point(cx + hb_w/2, cy + tl/2 + 20, cx, cy, cos_t, sin_t),`
-- Line 86: Literal '20' should be a named constant.
+- Line 90: Literal '20' should be a named constant.
   `self.rotate_point(cx - hb_w/2, cy + tl/2 + 20, cx, cy, cos_t, sin_t)]`
-- Line 99: Literal '10.0' should be a named constant.
+- Line 103: Literal '10.0' should be a named constant.
   `ly = (-tl/2) + ((i/10.0) * tl)`
-- Line 100: Literal '15' should be a named constant.
+- Line 104: Literal '15' should be a named constant.
   `tp1 = self.rotate_point(cx - 15, cy + ly, cx, cy, cos_t, sin_t)`
-- Line 101: Literal '25' should be a named constant.
+- Line 105: Literal '25' should be a named constant.
   `tp2 = self.rotate_point(cx - 25, cy + ly, cx, cy, cos_t, sin_t)`
 - ... and 8 more.
 #### Short Variable Name
-- Line 44: Variable 'cx' is too short for its scope.
+- Line 47: Variable 'cx' is too short for its scope.
   `cx, cy = self.widget_ref.center_x, self.widget_ref.center_y`
-- Line 44: Variable 'cy' is too short for its scope.
+- Line 47: Variable 'cy' is too short for its scope.
   `cx, cy = self.widget_ref.center_x, self.widget_ref.center_y`
-- Line 61: Variable 'dx' is too short for its scope.
+- Line 64: Variable 'dx' is too short for its scope.
   `dx, dy = px - cx, py - cy`
-- Line 61: Variable 'dy' is too short for its scope.
+- Line 64: Variable 'dy' is too short for its scope.
   `dx, dy = px - cx, py - cy`
-- Line 72: Variable 'cx' is too short for its scope.
+- Line 75: Variable 'cx' is too short for its scope.
   `cx, cy = self.x, self.y`
-- Line 72: Variable 'cy' is too short for its scope.
+- Line 75: Variable 'cy' is too short for its scope.
   `cx, cy = self.x, self.y`
-- Line 78: Variable 'tl' is too short for its scope.
+- Line 82: Variable 'tl' is too short for its scope.
   `tl, t_ang_rad = self.track_len, math.radians(ang + 90)`
-- Line 88: Variable 'pt' is too short for its scope.
+- Line 92: Variable 'pt' is too short for its scope.
   `flat_hbp = [c for pt in hbp for c in pt]`
-- Line 88: Variable 'c' is too short for its scope.
+- Line 92: Variable 'c' is too short for its scope.
   `flat_hbp = [c for pt in hbp for c in pt]`
-- Line 92: Variable 'p1' is too short for its scope.
+- Line 96: Variable 'p1' is too short for its scope.
   `p1 = self.rotate_point(cx, cy - tl/2, cx, cy, cos_t, sin_t)`
 - ... and 13 more.
 #### Function Naming
-- Line 59: Function 'rotate_point' may not be a verb phrase.
+- Line 62: Function 'rotate_point' may not be a verb phrase.
   `def rotate_point(self, px, py, cx, cy, cos_a, sin_a):`
-- Line 64: Function 'render' may not be a verb phrase.
+- Line 67: Function 'render' may not be a verb phrase.
   `def render(self):`
-- Line 138: Function 'lift' may not be a verb phrase.
+- Line 142: Function 'lift' may not be a verb phrase.
   `def lift(self):`
 
 ---
@@ -1063,103 +1063,103 @@ Analyzed codebase for magic numbers, short variables, noise words, and poor func
 ---
 ### assets/Stand_Alone_Utilities/SUB_APP_CSV_to_json_APP/csvtojson.py
 #### Magic Number
-- Line 29: Literal '10' should be a named constant.
+- Line 30: Literal '10' should be a named constant.
   `top = tk.Frame(self, padx=10, pady=10); top.pack(fill=tk.X)`
-- Line 29: Literal '10' should be a named constant.
+- Line 30: Literal '10' should be a named constant.
   `top = tk.Frame(self, padx=10, pady=10); top.pack(fill=tk.X)`
-- Line 31: Literal '5' should be a named constant.
+- Line 32: Literal '5' should be a named constant.
   `self.csv_en = tk.Entry(top, width=50); self.csv_en.grid(row=0, column=1, padx=5)`
-- Line 35: Literal '5' should be a named constant.
+- Line 36: Literal '5' should be a named constant.
   `self.json_en = tk.Entry(top, width=50); self.json_en.grid(row=1, column=1, padx=5)`
-- Line 39: Literal '5' should be a named constant.
+- Line 40: Literal '5' should be a named constant.
   `self.root_en = tk.Entry(top, width=20); self.root_en.insert(0, "root"); self.root_en.grid(row=2, column=1, sticky="W", padx=5)`
-- Line 41: Literal '10' should be a named constant.
+- Line 42: Literal '10' should be a named constant.
   `btns = tk.Frame(top); btns.grid(row=3, column=0, columnspan=3, pady=10)`
-- Line 42: Literal '5' should be a named constant.
-  `tk.Button(btns, text="Load Headers", command=self.load_headers).pack(side=tk.LEFT, padx=5)`
 - Line 43: Literal '5' should be a named constant.
-  `tk.Button(btns, text="Preview JSON", command=self.preview).pack(side=tk.LEFT, padx=5)`
+  `tk.Button(btns, text="Load Headers", command=self.load_headers).pack(side=tk.LEFT, padx=5)`
 - Line 44: Literal '5' should be a named constant.
+  `tk.Button(btns, text="Preview JSON", command=self.preview).pack(side=tk.LEFT, padx=5)`
+- Line 45: Literal '5' should be a named constant.
   `tk.Button(btns, text="Convert & Save", command=self.convert).pack(side=tk.LEFT, padx=5)`
-- Line 47: Literal '10' should be a named constant.
+- Line 48: Literal '10' should be a named constant.
   `main = tk.Frame(self, padx=10, pady=10); main.pack(fill=tk.BOTH, expand=True)`
 - ... and 5 more.
 #### Function Naming
-- Line 63: Function 'load_csv' may not be a verb phrase.
+- Line 64: Function 'load_csv' may not be a verb phrase.
   `def load_csv(self):`
-- Line 69: Function 'save_json_dlg' may not be a verb phrase.
+- Line 70: Function 'save_json_dlg' may not be a verb phrase.
   `def save_json_dlg(self):`
-- Line 73: Function 'load_headers' may not be a verb phrase.
+- Line 74: Function 'load_headers' may not be a verb phrase.
   `def load_headers(self):`
-- Line 82: Function 'generate_data' may not be a verb phrase.
+- Line 85: Function 'generate_data' may not be a verb phrase.
   `def generate_data(self):`
-- Line 94: Function 'preview' may not be a verb phrase.
+- Line 98: Function 'preview' may not be a verb phrase.
   `def preview(self):`
-- Line 98: Function 'convert' may not be a verb phrase.
+- Line 102: Function 'convert' may not be a verb phrase.
   `def convert(self):`
 #### Short Variable Name
-- Line 64: Variable 'fp' is too short for its scope.
+- Line 65: Variable 'fp' is too short for its scope.
   `fp = filedialog.askopenfilename(filetypes=[("CSV", "*.csv")])`
-- Line 70: Variable 'fp' is too short for its scope.
+- Line 71: Variable 'fp' is too short for its scope.
   `fp = filedialog.asksaveasfilename(defaultextension=".json", filetypes=[("JSON", "*.json")])`
-- Line 77: Variable 'df' is too short for its scope.
+- Line 78: Variable 'df' is too short for its scope.
   `df = pd.read_csv(self.csv_filepath, nrows=1, keep_default_na=False)`
-- Line 84: Variable 'df' is too short for its scope.
+- Line 87: Variable 'df' is too short for its scope.
   `df = pd.read_csv(self.csv_filepath, keep_default_na=False)`
-- Line 86: Variable 'h' is too short for its scope.
+- Line 89: Variable 'h' is too short for its scope.
   `sort_cols = [h for h, cfg in h_map.items() if cfg["role"] in ["Hierarchical Key", "Value as Key", "Key Name and Value"]]`
-- Line 104: Variable 'f' is too short for its scope.
+- Line 108: Variable 'f' is too short for its scope.
   `with open(path, "wb") as f: f.write(orjson.dumps(data))`
 #### Noise Word
-- Line 95: Variable 'data' contains redundant word 'Data'.
+- Line 99: Variable 'data' contains redundant word 'Data'.
   `data = self.generate_data()`
-- Line 101: Variable 'data' contains redundant word 'Data'.
+- Line 105: Variable 'data' contains redundant word 'Data'.
   `data = self.generate_data()`
 
 ---
 ### display/right_50/bottom_90/2_monitors/22_Yak_Monitor/gui_yak_monitor.py
 #### Magic Number
-- Line 88: Literal '5' should be a named constant.
+- Line 89: Literal '5' should be a named constant.
   `self.main_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)`
-- Line 88: Literal '5' should be a named constant.
+- Line 89: Literal '5' should be a named constant.
   `self.main_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)`
-- Line 91: Literal '12' should be a named constant.
+- Line 92: Literal '12' should be a named constant.
   `lbl = ttk.Label(self.main_frame, text="Yak Traffic Monitor", font=("Helvetica", 12, "bold"), style="Dark.TLabel")`
-- Line 92: Literal '5' should be a named constant.
+- Line 93: Literal '5' should be a named constant.
   `lbl.pack(side=tk.TOP, pady=(0, 5))`
-- Line 139: Literal '5' should be a named constant.
+- Line 140: Literal '5' should be a named constant.
   `self.dissect_header_frame.pack(side=tk.TOP, fill=tk.X, pady=(5, 0))`
-- Line 155: Literal '10' should be a named constant.
+- Line 156: Literal '10' should be a named constant.
   `font=("Helvetica", 10, "bold"), style="Dark.TLabel", padding=(0, 0, 10, 0))`
-- Line 155: Literal '10' should be a named constant.
+- Line 156: Literal '10' should be a named constant.
   `font=("Helvetica", 10, "bold"), style="Dark.TLabel", padding=(0, 0, 10, 0))`
-- Line 179: Literal '5' should be a named constant.
+- Line 180: Literal '5' should be a named constant.
   `self.btn_clear.pack(side=tk.BOTTOM, pady=5)`
-- Line 203: Literal '3' should be a named constant.
+- Line 204: Literal '3' should be a named constant.
   `model = parts[3] if len(parts) > 3 else "-"`
-- Line 203: Literal '3' should be a named constant.
+- Line 204: Literal '3' should be a named constant.
   `model = parts[3] if len(parts) > 3 else "-"`
 - ... and 10 more.
 #### Noise Word
-- Line 212: Variable 'data' contains redundant word 'Data'.
+- Line 213: Variable 'data' contains redundant word 'Data'.
   `data = orjson.loads(payload)`
-- Line 262: Variable 'data' contains redundant word 'Data'.
+- Line 264: Variable 'data' contains redundant word 'Data'.
   `data = orjson.loads(payload)`
-- Line 285: Variable 'data' contains redundant word 'Data'.
+- Line 288: Variable 'data' contains redundant word 'Data'.
   `data = orjson.loads(payload)`
 #### Function Naming
-- Line 268: Function 'jump_to_latest_message' may not be a verb phrase.
+- Line 271: Function 'jump_to_latest_message' may not be a verb phrase.
   `def jump_to_latest_message(self):`
-- Line 278: Function 'jump_to_latest_val_msg' may not be a verb phrase.
+- Line 281: Function 'jump_to_latest_val_msg' may not be a verb phrase.
   `def jump_to_latest_val_msg(self):`
-- Line 314: Function 'clear_log' may not be a verb phrase.
+- Line 318: Function 'clear_log' may not be a verb phrase.
   `def clear_log(self):`
-- Line 320: Function 'render' may not be a verb phrase.
+- Line 324: Function 'render' may not be a verb phrase.
   `def render(self):`
-- Line 326: Function 'destroy' may not be a verb phrase.
+- Line 330: Function 'destroy' may not be a verb phrase.
   `def destroy(self):`
 #### Short Variable Name
-- Line 322: Variable 'bg' is too short for its scope.
+- Line 326: Variable 'bg' is too short for its scope.
   `bg = self.cget("bg")`
 
 ---
@@ -1437,27 +1437,27 @@ Analyzed codebase for magic numbers, short variables, noise words, and poor func
   `list_frame = tk.LabelFrame(list_container, text="Active Splinks", bg="#2b2b2b", fg="#888888")`
 - Line 133: Variable 'data' contains redundant word 'Data'.
   `data = orjson.loads(payload)`
-- Line 142: Variable 'data' contains redundant word 'Data'.
+- Line 143: Variable 'data' contains redundant word 'Data'.
   `data = orjson.loads(payload)`
 #### Function Naming
-- Line 153: Function 'trigger_panic' may not be a verb phrase.
+- Line 155: Function 'trigger_panic' may not be a verb phrase.
   `def trigger_panic(self):`
-- Line 156: Function 'trigger_reset_panic' may not be a verb phrase.
+- Line 158: Function 'trigger_reset_panic' may not be a verb phrase.
   `def trigger_reset_panic(self):`
-- Line 159: Function 'refresh_splink_list' may not be a verb phrase.
+- Line 161: Function 'refresh_splink_list' may not be a verb phrase.
   `def refresh_splink_list(self):`
-- Line 193: Function 'save_splink_editor' may not be a verb phrase.
+- Line 195: Function 'save_splink_editor' may not be a verb phrase.
   `def save_splink_editor(self):`
-- Line 218: Function 'trigger_refresh' may not be a verb phrase.
+- Line 221: Function 'trigger_refresh' may not be a verb phrase.
   `def trigger_refresh(self):`
-- Line 226: Function 'destroy' may not be a verb phrase.
+- Line 229: Function 'destroy' may not be a verb phrase.
   `def destroy(self):`
 #### Short Variable Name
-- Line 174: Variable 's' is too short for its scope.
+- Line 176: Variable 's' is too short for its scope.
   `splink = next((s for s in self.splinker_manager.splinks if s["id"] == self.selected_splink_id), None)`
-- Line 195: Variable 's' is too short for its scope.
+- Line 197: Variable 's' is too short for its scope.
   `splink = next((s for s in self.splinker_manager.splinks if s["id"] == self.selected_splink_id), None)`
-- Line 200: Variable 'h' is too short for its scope.
+- Line 202: Variable 'h' is too short for its scope.
   `scale_h = next((h for h in splink.get("handlers", []) if h["type"] == "scale"), None)`
 
 ---

@@ -51,7 +51,7 @@ class ScrewGenerator:
     """
 
     @staticmethod
-    def generate_procedural_screw(size_pixels, configuration_data={}):
+    def generate_screw(size_pixels, configuration_data={}):
         """
         Generates a single screw image (RGBA) centered in a square canvas.
         Includes disk caching to prevent redundant generation.

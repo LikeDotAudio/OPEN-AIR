@@ -211,3 +211,9 @@ class ViewController:
             setattr(self, mode_attribute, 'y')
             self.mouse_press_position = (mouse_x, mouse_y)
             self.current_ylim = self.axes.get_ylim()
+
+    # --- Event Aliases for GraphInteractor ---
+    def on_press(self, event): self.handle_mouse_press(event)
+    def on_release(self, event): self.handle_mouse_release(event)
+    def on_motion(self, event): self.handle_mouse_motion(event)
+    def on_scroll(self, event): self.handle_scroll_wheel(event)

@@ -24,6 +24,7 @@ def get_core_factory_mapping(self):
         "_GuiListbox": self._lazy_wrap("workers.builder.widgets.utils.listbox.listbox", "BuilderListboxCreator", "make_listbox"),
         "_SmartList": self._lazy_wrap("workers.builder.widgets.utils.listbox.listbox", "BuilderListboxCreator", "make_listbox"),
         "_ProgressBar": self._lazy_wrap("workers.builder.widgets.images.images_progress_bar.images_progress_bar", "BuilderImagesProgressBarCreator", "make_images_progress_bar"),
+        "ProgressBar": self._lazy_wrap("workers.builder.widgets.images.images_progress_bar.images_progress_bar", "BuilderImagesProgressBarCreator", "make_images_progress_bar"),
         "_SmartProgress": self._lazy_wrap("workers.builder.widgets.images.images_progress_bar.images_progress_bar", "BuilderImagesProgressBarCreator", "make_images_progress_bar"),
         "OcaTable": self._lazy_wrap("workers.builder.widgets.text.text_table.text_table", "BuilderTextTableCreator", "make_text_table"),
         "GuiTable": self._lazy_wrap("workers.builder.widgets.text.text_table.text_table", "BuilderTextTableCreator", "make_text_table"),
@@ -79,5 +80,5 @@ def get_core_factory_mapping(self):
         "_MDP": self._lazy_wrap("workers.builder.widgets.utils.composite_mdp.composite_mdp", "BuilderCompositeMdpCreator", "make_composite_mdp"),
         "_CMDP": self._lazy_wrap("workers.builder.widgets.utils.circular_motion_displacement_potentiometer.circular_motion_displacement_potentiometer", "BuilderCircularMotionDisplacementPotentiometerCreator", "make_circular_motion_displacement_potentiometer"),
         # Complex Adapters (Some might be missing - need to verify paths)
-        "OcaArray": self._lazy_wrap("workers.builder.widgets.utils.panels.panel_generator", "PanelGenerator", "make_array"),
+        "OcaArray": self._lazy_wrap("managers.Display.array.array", "BuilderArrayCreator", "make_array"),
     }

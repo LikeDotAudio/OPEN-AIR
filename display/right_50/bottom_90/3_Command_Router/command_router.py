@@ -32,7 +32,7 @@ class CommandRouter(tk.Frame):
         self._setup_ui()
         
         # Register as observer of the central protocol router
-        self.router.add_observer(self.on_router_event)
+        self.router.register_cache_observer(self.on_router_event)
 
     def _setup_ui(self):
         self.pack(fill=tk.BOTH, expand=True)

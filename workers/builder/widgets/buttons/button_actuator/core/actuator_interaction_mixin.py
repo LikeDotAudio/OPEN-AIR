@@ -14,7 +14,7 @@ class ActuatorInteractionMixin:
         self.set_text(self.text_active)
         
         # Maintenance Command Handling
-        scpi_msg = str(self.config.get("message", self.config.get("value", self.config.get("domain", {}).get("value", ""))))
+        scpi_msg = str(self.config_data.get("message", self.config_data.get("value", self.config_data.get("domain", {}).get("value", ""))))
         if self._handle_maintenance_command(scpi_msg):
             return 
         
@@ -34,7 +34,7 @@ class ActuatorInteractionMixin:
             self.set_text(self.text_inactive)
 
         # Maintenance check
-        scpi_msg = str(self.config.get("message", self.config.get("value", self.config.get("domain", {}).get("value", ""))))
+        scpi_msg = str(self.config_data.get("message", self.config_data.get("value", self.config_data.get("domain", {}).get("value", ""))))
         if self._is_maintenance(scpi_msg):
             return
 

@@ -89,8 +89,9 @@ class TiledPanelGenerator:
         # For now, we simulate by generating the whole thing and cropping,
         # which isn't efficient but proves the work-stealing flow.
         
-        # TODO: Optimize to only generate required pixel data
-        full_panel = PanelGenerator.generate_panel(total_w, total_h, config)
+        # ⚡ OPTIMIZATION: Sampling logic should be moved into PanelGenerator to avoid
+        # generating full-resolution buffers for single tile crops.
+        full_panel = PanelGenerator.generate_procedural_panel(total_w, total_h, config)
         tile = full_panel.crop((x_off, y_off, x_off + tw, y_off + th))
         
         return (tile, x_off, y_off)

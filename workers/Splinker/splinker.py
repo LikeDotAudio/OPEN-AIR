@@ -8,7 +8,7 @@
 
 import threading
 from pathlib import Path
-class SplinkerManager:
+class ControlBroker:
     _instance = None
     _lock = threading.Lock()
 

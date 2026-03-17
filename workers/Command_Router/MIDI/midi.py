@@ -33,7 +33,7 @@ class MidiManager:
         self._monitor_callbacks = []
 
         from workers.Command_Router.protocol_router import ProtocolRouter
-        ProtocolRouter.get_instance().add_observer(self._on_protocol_event)
+        ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
 
     def add_monitor_callback(self, cb): self._monitor_callbacks.append(cb)
     def remove_monitor_callback(self, cb): (cb in self._monitor_callbacks) and self._monitor_callbacks.remove(cb)

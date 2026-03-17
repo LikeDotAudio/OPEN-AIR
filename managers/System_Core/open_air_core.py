@@ -57,7 +57,7 @@ from workers.initialization.path_initializer import initialize_paths
 from managers.configini.console_encoder import configure_console_encoding
 import workers.watchdog.watchdog as watchdog
 from workers.Command_Router.mqtt.mqtt_connection import MqttConnectionManager
-from workers.Command_Router.State_Cache.state_cache import StateCacheManager
+from workers.Command_Router.State_Cache.state_cache import StateRegistry
 from managers.launcher import launch_core_managers
 from workers.Command_Router.mqtt.mqtt_publisher_service import shutdown_publisher_worker
 
@@ -104,7 +104,7 @@ def main():
     
     # 3. --- Core Manager Lifecycle ---
     mqtt_connection_manager = MqttConnectionManager()
-    state_cache_manager = StateCacheManager(mqtt_connection_manager)
+    state_cache_manager = StateRegistry(mqtt_connection_manager)
     
     # launch_core_managers returns a registry of active services.
     managers = launch_core_managers(state_cache_manager, mqtt_connection_manager)

@@ -5,7 +5,7 @@ from loguru import logger
 # --- Framework Imports ---
 from workers.Command_Router.mqtt.mqtt_connection import MqttConnectionManager
 from workers.Command_Router.mqtt.mqtt_subscriber_router import MqttSubscriberRouter
-from workers.Command_Router.State_Cache.state_cache import StateCacheManager
+from workers.Command_Router.State_Cache.state_cache import StateRegistry
 from workers.logic.state_mirror_engine import StateMirrorEngine
 from workers.Command_Router.protocol_router import ProtocolRouter
 
@@ -13,7 +13,7 @@ from workers.Command_Router.protocol_router import ProtocolRouter
 from workers.Command_Router.OSC.osc import OSCManager
 from workers.Command_Router.SNMP.snmp import SNMPManager
 from workers.Command_Router.MIDI.midi import MidiManager
-from workers.Splinker.splinker import SplinkerManager
+from workers.Splinker.splinker import ControlBroker
 
 class AsyncBootstrapEngine:
     """Manages the non-blocking initialization sequence for UI and Comms."""
@@ -35,7 +35,7 @@ class AsyncBootstrapEngine:
             sub_router = MqttSubscriberRouter()
             
             self.splash.set_status("Loading State Cache...")
-            state_cache = StateCacheManager(mqtt_conn)
+            state_cache = StateRegistry(mqtt_conn)
             state_cache.subscriber_router = sub_router
             self.shared_instances["state_cache"] = state_cache
             
@@ -67,7 +67,7 @@ class AsyncBootstrapEngine:
             protocol_router.set_mqtt_manager(mqtt_conn)
             protocol_router.start()
             
-            splinker = SplinkerManager.get_instance(state_cache, mqtt_conn)
+            splinker = ControlBroker.get_instance(state_cache, mqtt_conn)
             protocol_router.set_splinker_manager(splinker)
             self.shared_instances["splinker_manager"] = splinker
 

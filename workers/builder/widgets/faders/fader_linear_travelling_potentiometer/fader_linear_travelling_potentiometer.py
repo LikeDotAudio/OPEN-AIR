@@ -52,7 +52,18 @@ class CustomLTPFrame(tk.Frame, LTPRendererMixin, LTPInteractionMixin):
         self.freestyle = k_cfg.get("freestyle", False)
         
         self.knob_shape, self.knob_teeth, self.pointer_style = s_cfg.get("knob_shape", "circle"), int(s_cfg.get("knob_teeth", 12)), s_cfg.get("pointer_style", "line")
+        self.arc_width = int(s_cfg.get("arc_width", 5))
+        self.pointer_length = s_cfg.get("pointer_length", None)
+        self.pointer_offset = int(s_cfg.get("pointer_offset", 0))
+        self.no_center = s_cfg.get("no_center", False)
+        
         self.tick_size, self.tick_color, self.track_hover_color = float(s_cfg.get("tick_size", 0.35)), s_cfg.get("tick_color", "light grey"), s_cfg.get("track_hover_color", "#444")
+        self.tick_thickness = int(s_cfg.get("tick_thickness", 1))
+        self.tick_font = ("Arial", 7)
+        self.tick_label_position = s_cfg.get("tick_label_position", "both")
+        self.custom_ticks = s_cfg.get("custom_ticks", None)
+        self.tick_interval = s_cfg.get("tick_interval", None)
+        self.tick_color = s_cfg.get("tick_color", "light grey")
         self.accent_color, self.value_color = colors.get("accent"), colors.get("accent")
 
         # 3. State

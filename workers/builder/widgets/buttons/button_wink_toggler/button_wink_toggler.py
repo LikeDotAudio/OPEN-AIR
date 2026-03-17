@@ -162,7 +162,7 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
             
             # Create Button Widget
             full_config["latching"] = True 
-            widget = self.make_button_wink(btn_cell, full_config, context=context, variable=bool_var, builder_instance=builder_instance)
+            widget = BuilderButtonWinkCreator.make(btn_cell, full_config, context=context, variable=bool_var, builder_instance=builder_instance)
             widget.pack(fill="both", expand=True)
 
             # Ensure child container respects parent's background

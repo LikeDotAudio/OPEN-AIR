@@ -70,7 +70,7 @@ class ActuatorButton(CanvasButton, ActuatorInteractionMixin, ActuatorStateMixin)
             if self.subscriber_router:
                 self.subscriber_router.unsubscribe_from_topic(self._status_topic, self._on_mqtt_state_update)
 
-@WidgetRegistry.register("_GuiActuator", "_SmartActuator", "_ButtonActuator")
+@WidgetRegistry.register("_GuiActuator", "_SmartActuator", "_ButtonActuator", "_GuiButton")
 class BuilderButtonActuatorCreator(TransparencyMixin):
     """Factory for creating Actuator Buttons."""
 

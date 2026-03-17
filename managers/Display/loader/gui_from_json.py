@@ -110,15 +110,15 @@ class UniversalGuiLoader(tk.Frame):
 
         except Exception as e:
             # 4. Catastrophic Failure Handling
-            tb = traceback.format_exc()
-            
-            # Log it
-            if LOCAL_DEBUG:
-                logger.debug(f"💥 The Flux Capacitor cracked while building {self.module_name}! {e}\n{tb}")
+            # Log it as an error with full traceback
+            logger.exception(f"💥 The Flux Capacitor cracked while building {self.module_name}! Error: {e}")
 
             # Show it (Minimal fallback since status_label is gone)
             if self.winfo_exists():
-                tk.Label(self, text=f"Error: {e}", fg="red", bg="#2b2b2b").pack(pady=20)
+                # Ensure we clear the frame before showing error
+                for child in self.winfo_children():
+                    child.destroy()
+                tk.Label(self, text=f"Error: {e}", fg="red", bg="#2b2b2b", font=("Arial", 12, "bold")).pack(pady=20)
 
     def _on_tab_selected(self, event):
         """Optional hook for tab selection events."""

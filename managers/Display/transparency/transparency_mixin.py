@@ -32,8 +32,12 @@ class TransparencyMixin:
                 if canvas and canvas.winfo_exists() and canvas.cget("bg") != p_bg:
                     canvas.configure(bg=p_bg)
                 
-                # Re-apply transparency slicing if active
-                self._apply_transparency(widget, canvas, config_data, builder_instance)
+                # Use stored slice method if available
+                if hasattr(widget, '_perform_background_slice'):
+                    widget._perform_background_slice()
+                else:
+                    # Re-apply transparency slicing if not already registered
+                    self._apply_transparency(widget, canvas, config_data, builder_instance)
             except Exception:
                 pass
 

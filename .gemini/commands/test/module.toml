@@ -1,0 +1,3 @@
+[command]
+description = "Generates comprehensive unit tests for top-level system modules and logs them to the test suite."
+prompt = "Analyze the provided file or folder: {{input}}. Generate a unit test appropriate for its contents. Use /home/anthony/Documents/OPEN-AIR/assets/Documentation/Testing/generate_and_log_tests.py to integrate these into the test collection. All new unit tests must be created within the directory: /home/anthony/Documents/OPEN-AIR/assets/Documentation/Testing"

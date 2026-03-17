@@ -64,6 +64,13 @@ class CustomFaderFrame(
         self.cap_height_override = config.get("cap_height")
         self.fader_cap_scale = float(config.get("fader_cap_scale", 1.0))
 
+        self.tick_thickness = int(config.get("tick_thickness", 1))
+        self.tick_font = ("Arial", 7)
+        self.tick_label_position = config.get("tick_label_position", "right")
+        self.custom_ticks = config.get("custom_ticks", None)
+        self.tick_interval = config.get("tick_interval", None)
+        self.tick_color = config.get("tick_color", "light grey")
+
         # 2. State Setup
         self.is_sliding = self.is_locked = self.is_hovered = False
         self.temp_entry = None

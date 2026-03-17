@@ -24,7 +24,9 @@ from workers.Command_Router.mqtt.mqtt_topic_utils import get_topic
 from managers.Display.transparency.transparency_mixin import TransparencyMixin
 from workers.handlers.widget_event_binder import bind_variable_trace
 from managers.Display.context.widget_context import WidgetContext
+from managers.Display.factory.widget_registry import WidgetRegistry
 
+@WidgetRegistry.register("_Label", "_SmartLabel", "_GuiLabel")
 class BuilderTextLabelCreator(TransparencyMixin):
     """
     A mixin class that provides the functionality for creating a label widget.
@@ -141,3 +143,8 @@ class BuilderTextLabelCreator(TransparencyMixin):
             if LOCAL_DEBUG:
                 logger.exception("💥 Label creation for '{label}' has exploded! Error")
             return None
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderTextLabelCreator()
+        return creator.make_text_label(parent_widget, config_data, context, **kwargs)

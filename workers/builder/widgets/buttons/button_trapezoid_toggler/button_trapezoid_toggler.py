@@ -209,7 +209,7 @@ class BuilderButtonTrapezoidTogglerCreator(BuilderButtonTrapezoidCreator):
             # or maybe we do if it's a multi-path setup. 
             # But usually toggler is one path.
             # Base creator will register if path is in full_config.
-            btn_canvas = self.make_button_trapezoid(
+            btn_canvas = BuilderButtonTrapezoidCreator.make(
                 group_frame, full_config, variable=bool_var, 
                 context=context, # ⚡ MANDATORY: Pass context for transparency!
                 base_mqtt_topic_from_path=base_mqtt_topic_from_path

@@ -48,7 +48,7 @@ class FluxPlotter(
         self.dragging_marker, self.highlighted_marker, self.saved_style = None, None, {}
 
         self._initialize_throttle()
-        self.fig, self.ax, self.canvas = graph_builder.create_base_plot(self, config)
+        self.fig, self.ax, self.canvas = graph.create_base_plot(self, config)
         
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         self.theme_colors = colors

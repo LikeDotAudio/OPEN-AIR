@@ -1,15 +1,16 @@
-# assets/FlameGraph/flamegraph.py
+# assets/Testing/FlameGraph/flamegraph.py
 #
 # Main entry point for the OpenAir Performance Intelligence Engine.
 # Orchestrates multi-threaded profiling and modular report generation.
 #
-# Author: Anthony Peter Kuzub
-# Version 20260218.Modular.1
 
 import sys
 import pathlib
 import os
 import threading
+
+# --- Constants ---
+VERSION = "20260218.Modular.1"
 
 # 1. Setup Environment
 current_dir = pathlib.Path(__file__).resolve().parent

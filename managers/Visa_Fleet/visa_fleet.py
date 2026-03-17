@@ -22,11 +22,11 @@ from .core.fleet_command_queue_mixin import FleetCommandQueueMixin
 from .core.fleet_inventory_mixin import FleetInventoryMixin
 from .core.fleet_scan_mixin import FleetScanMixin
 
-class VisaFleetManager(FleetCommandQueueMixin, FleetInventoryMixin, FleetScanMixin):
+class FleetOrchestrator(FleetCommandQueueMixin, FleetInventoryMixin, FleetScanMixin):
     """Commander for the VISA instrument fleet, managing discovery and communication."""
     
     def __init__(self, mqtt_connection_manager=None, subscriber_router=None, aes70_manager=None):
-        if LOCAL_DEBUG: logger.debug("💳🚢🔍 [VISA] Initializing VisaFleetManager.")
+        if LOCAL_DEBUG: logger.debug("💳🚢🔍 [VISA] Initializing FleetOrchestrator.")
 
         self.json_builder = VisaJsonBuilder()
         self.csv_builder = VisaCsvBuilder()
@@ -48,7 +48,7 @@ class VisaFleetManager(FleetCommandQueueMixin, FleetInventoryMixin, FleetScanMix
         self._running = False
         self.initial_scan_complete_event = threading.Event()
 
-        if LOCAL_DEBUG: logger.success("✅ [SUCCESS] VisaFleetManager initialized.")
+        if LOCAL_DEBUG: logger.success("✅ [SUCCESS] FleetOrchestrator initialized.")
 
     def set_callbacks(self, on_inventory_update, on_device_response, on_device_error, on_proxy_status):
         self.cb_inventory = on_inventory_update
@@ -58,10 +58,10 @@ class VisaFleetManager(FleetCommandQueueMixin, FleetInventoryMixin, FleetScanMix
 
     def start(self):
         self._running = True
-        if LOCAL_DEBUG: logger.debug("💳🚢🔍 [VISA] VisaFleetManager Started.")
+        if LOCAL_DEBUG: logger.debug("💳🚢🔍 [VISA] FleetOrchestrator Started.")
 
     def stop(self):
         self._running = False
         if self.discovery_orchestrator: self.discovery_orchestrator.shutdown()
         if self.mqtt_bridge: self.mqtt_bridge.disconnect()
-        if LOCAL_DEBUG: logger.debug("💳🚢🔍 [VISA] VisaFleetManager Stopped.")
+        if LOCAL_DEBUG: logger.debug("💳🚢🔍 [VISA] FleetOrchestrator Stopped.")

@@ -1,6 +1,7 @@
 import queue
 import threading
 import tkinter as tk
+from loguru import logger
 
 class SyncQueueMixin:
     """Manages the UI update queue and the background registration worker."""
@@ -42,7 +43,10 @@ class SyncQueueMixin:
                 count += 1
                 try:
                     if tk_var.get() == value: continue
-                except: pass
+                except tk.TclError as e:
+                    # Specific exception for Tkinter errors to avoid masking underlying issues
+                    logger.warning(f"⚠️ [GUI] Failed to read tk_var for widget_id {widget_id}: {e}")
+                    continue
 
                 self._silent_update = True
                 try: tk_var.set(value)

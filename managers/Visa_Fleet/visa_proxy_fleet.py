@@ -101,7 +101,7 @@ def _query_safe_fleet(proxy_instance, command, correlation_id="N/A"):
 class VisaProxyFleet:
     """
     Manages a single PyVISA connection for a specific instrument in a fleet.
-    Communicates via callbacks to the managing entity (VisaFleetManager).
+    Communicates via callbacks to the managing entity (FleetOrchestrator).
     """
 
     def __init__(
@@ -112,7 +112,7 @@ class VisaProxyFleet:
         instrument_model="Generic",
         manufacturer="Unknown Manufacturer",
     ):
-        self.manager = manager_ref  # Reference to the VisaFleetManager
+        self.manager = manager_ref  # Reference to the FleetOrchestrator
         self.device_serial = device_serial  # Unique identifier for this device
         self.resource_name = resource_name  # e.g., 'USB0::...' or 'GPIB::10::INSTR'
         self.instrument_model = instrument_model  # e.g., 'TDS2024C'

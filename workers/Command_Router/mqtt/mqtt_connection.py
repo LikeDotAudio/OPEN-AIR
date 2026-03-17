@@ -138,38 +138,42 @@ class MqttConnectionManager:
             kwargs["username"] = app_constants.MQTT_USERNAME
             kwargs["password"] = app_constants.MQTT_PASSWORD
 
-        # No try/except here. If the connection fails, it crashes.
-        async with aiomqtt.Client(**kwargs) as client:
-            self.client = client
-            self._connected = True
-            
-            if LOCAL_DEBUG:
-                logger.success("🚀🆗✅ [SUCCESS] aiomqtt: Connected to broker.")
-            
-            # 1. Re-subscribe existing topics via router
-            if self.subscriber_router:
-                await self.subscriber_router.resubscribe_all_topics(client)
+        # Wrap the connection in a try/except to ensure state is updated if it fails to start.
+        try:
+            async with aiomqtt.Client(**kwargs) as client:
+                self.client = client
+                self._connected = True
+                
+                if LOCAL_DEBUG:
+                    logger.success("🚀🆗✅ [SUCCESS] aiomqtt: Connected to broker.")
+                
+                # 1. Re-subscribe existing topics via router
+                if self.subscriber_router:
+                    await self.subscriber_router.resubscribe_all_topics(client)
 
-            # 2. Start tasks
-            receiver_task = asyncio.create_task(self._message_receiver_task(client))
-            worker_task = asyncio.create_task(self._queue_worker_task(client))
-            stop_waiter = asyncio.create_task(self._stop_event.wait())
+                # 2. Start tasks
+                receiver_task = asyncio.create_task(self._message_receiver_task(client))
+                worker_task = asyncio.create_task(self._queue_worker_task(client))
+                stop_waiter = asyncio.create_task(self._stop_event.wait())
 
-            # Wait for any task to finish (e.g. stop event or connection loss)
-            done, pending = await asyncio.wait(
-                [receiver_task, worker_task, stop_waiter],
-                return_when=asyncio.FIRST_COMPLETED
-            )
+                # Wait for any task to finish (e.g. stop event or connection loss)
+                done, pending = await asyncio.wait(
+                    [receiver_task, worker_task, stop_waiter],
+                    return_when=asyncio.FIRST_COMPLETED
+                )
 
-            # Cancel remaining tasks
-            for task in pending:
-                task.cancel()
-            
-            # Allow tasks to cleanup
-            await asyncio.gather(*pending, return_exceptions=True)
-            
-            if LOCAL_DEBUG:
-                logger.debug("📡🔗👋 [MQTT] aiomqtt: Disconnecting from broker...")
+                # Cancel remaining tasks
+                for task in pending:
+                    task.cancel()
+                
+                # Allow tasks to cleanup
+                await asyncio.gather(*pending, return_exceptions=True)
+                
+                if LOCAL_DEBUG:
+                    logger.debug("📡🔗👋 [MQTT] aiomqtt: Disconnecting from broker...")
+        except Exception as e:
+            self._connected = False
+            logger.error(f"🚀🚫🛑 [MQTT] ERROR: aiomqtt main loop error: {e}")
 
     async def _message_receiver_task(self, client):
         """Listens for incoming messages and dispatches them to the callback."""

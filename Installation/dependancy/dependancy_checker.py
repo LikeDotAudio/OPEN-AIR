@@ -2,49 +2,25 @@
 #
 # Automated validation and repair of Python library requirements.
 #
-# Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-#
-# Professional services for customizing and tailoring this software to your
-# specific application can be negotiated. There is no charge to use, modify,
-# or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20260314.004000.REV01
 
 """
 Primary Purpose:
 This module manages the identification, verification, and automated installation
- of third-party Python packages required for the OPEN-AIR platform. It abstracts
- the underlying 'pip' commands and handles environmental edge cases (such as
- package name conflicts).
-
-Hard Constraints:
-- Execution Privilege: May require administrative rights to install packages
-  depending on the environment.
-- System State: Assumes connectivity to the Python Package Index (PyPI).
-- Tooling: Depends on the availability of the 'pip' module in the current Python
-  interpreter.
+ of third-party Python packages required for the OPEN-AIR platform.
 """
 
 import os
 import sys
-import inspect
 import subprocess
-import pathlib
 
 # --- Standard Debug Logging Setup ---
-# LOCAL_DEBUG: Toggles verbose logging for the dependency validation lifecycle.
 LOCAL_DEBUG = True
 from loguru import logger
 
-current_file = f"{os.path.basename(__file__)}"
-current_version = "20260131.000000.1"
-
 # --- Constants ---
+VERSION = "20260314.004000.REV01"
+EXIT_CODE_DEPENDENCY_FAILURE = 1
+
 # EXTERNAL_PACKAGES: Maps human-friendly names to actual Python import paths.
 EXTERNAL_PACKAGES = {
     "numpy": "numpy",
@@ -95,23 +71,6 @@ def _execute_pip_command(action, package_name, console_print_func,
                          debug_log_func):
     """
     Invokes the 'pip' module to perform a specific package action.
-
-    Lead with action: Executes a subprocess call to 'pip' using the current
-    Python interpreter to ensure the target environment is correctly modified.
-
-    Inputs:
-        action (str): The pip command to run ('install' or 'uninstall').
-        package_name (str): The exact name of the package on PyPI.
-        console_print_func (callable): Function for visible status reporting.
-        debug_log_func (callable): Function for detailed diagnostic logging.
-
-    Outputs:
-        bool: True if the operation succeeded or was already in the target 
-              state; False if pip returned a non-zero exit code.
-
-    Side Effects:
-        - Spawns an external 'pip' process.
-        - Modifies the local Python site-packages directory.
     """
     # Use current interpreter to avoid 'pip' version or path mismatches.
     command = [sys.executable, "-m", "pip", action, package_name, 
@@ -149,24 +108,6 @@ def action_check_dependancies(console_print_func, debug_log_func,
                               should_clean_install=False):
     """
     Iterates through all required packages and verifies their availability.
-
-    Lead with action: Scans the current import registry for every package 
-    defined in 'EXTERNAL_PACKAGES'. If a package is missing, it attempts an
-    automated installation.
-
-    Inputs:
-        console_print_func (callable): Sink for primary status messages.
-        debug_log_func (callable): Sink for verbose tracing.
-        should_clean_install (bool): If True, uninstalls then reinstalls
-            every package to ensure fresh state. Defaults to False.
-
-    Outputs:
-        bool: True if all dependencies are satisfied; False if one or more
-              packages remain missing or failed to install.
-
-    Side Effects:
-        - Dynamically imports modules to verify existence.
-        - May modify filesystem state via '_execute_pip_command'.
     """
     missing_packages = []
     if LOCAL_DEBUG:
@@ -242,14 +183,11 @@ def run_interactive_pre_check(console_print_func, debug_log_func,
                               should_clean_install=False):
     """
     Orchestrates the dependency check and triggers process exit on failure.
-
-    Inputs:
-        See 'action_check_dependancies'.
     """
     if LOCAL_DEBUG:
         logger.info("🔍📦🔗 [DEPENDENCY] Starting dependency check...")
     if not action_check_dependancies(console_print_func, debug_log_func, 
                                      should_clean_install):
-        sys.exit(1)
+        sys.exit(EXIT_CODE_DEPENDENCY_FAILURE)
     if LOCAL_DEBUG:
         logger.success("✅✅✅ [SUCCESS] Dependencies verified.")

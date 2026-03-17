@@ -17,13 +17,18 @@ class WidgetDiscoveryEngine:
     @staticmethod
     def _make_wrapper(cls_ref, builder_instance):
         def wrapper(parent_widget, config_data, context=None, **kwargs):
-            if not hasattr(cls_ref, 'make'):
-                logger.warning(f"⚠️ Registry class {cls_ref} missing static 'make' method.")
-                return None
-            
-            # Ensure builder instance is passed if missing from context
-            if context and not hasattr(context, 'app_instance'): kwargs['builder_instance'] = builder_instance
-            elif not context: kwargs['builder_instance'] = builder_instance
-            
-            return cls_ref.make(parent_widget, config_data, context, **kwargs)
+            try:
+                if not hasattr(cls_ref, 'make'):
+                    logger.warning(f"⚠️ Registry class {cls_ref} missing static 'make' method.")
+                    return None
+                
+                # Ensure builder instance is passed if missing from context
+                if context and not hasattr(context, 'app_instance'): kwargs['builder_instance'] = builder_instance
+                elif not context: kwargs['builder_instance'] = builder_instance
+                
+                return cls_ref.make(parent_widget, config_data, context, **kwargs)
+            except Exception as e:
+                logger.exception(f"❌ Failed to instantiate widget of type {cls_ref} at {config_data.get('path', 'unknown')}: {e}")
+                # Create a fallback error label in the UI
+                return tk.Label(parent_widget, text=f"Error: {e}", fg="red", bg="#2b2b2b")
         return wrapper

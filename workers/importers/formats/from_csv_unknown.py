@@ -1,71 +1,28 @@
-# formats/worker_importer_from_csv_unknown.py
+# workers/importers/formats/from_csv_unknown.py
 #
-# This module contains the logic for a 'best-effort' conversion of CSV files
-# with unknown headers into the standardized marker report format.
+# Best-effort conversion of CSV files with unknown headers into standard marker format.
 #
-# Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-#
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
 
 import csv
-import inspect
 import re
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from workers.logger.logger import initialize_logging, set_log_directory
+LOCAL_DEBUG = True
 from loguru import logger
-
 from managers.configini.config_reader import Config
 
-app_constants = Config.get_instance()  # Get the singleton instance
+app_constants = Config.get_instance()
 
-# --- Global Scope Variables ---
-Current_Date = 20251129
-Current_Time = 120000
-Current_iteration = 1
+# --- Constants ---
+VERSION = "20251129.120000.1"
 
-current_version = f"{Current_Date}.{Current_Time}.{Current_iteration}"
-current_version_hash = Current_Date * Current_Time * Current_iteration
-
-current_file = os.path.basename(__file__)
-
-headers = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
-
-
-# Performs a 'best-effort' conversion of a CSV file with unknown headers to the standardized marker report format.
-# This function attempts to map column headers from the input CSV to a predefined set of
-# standard headers (ZONE, GROUP, DEVICE, NAME, FREQ_MHZ, PEAK) and converts frequency values
-# to MHz as needed.
-# Inputs:
-#     file_path (str): The path to the input CSV file.
-# Outputs:
-#     tuple: A tuple containing the standardized headers and a list of dictionaries
-#            with the matched data. Returns empty lists on error or file not found.
-def Marker_convert_csv_unknow_report_to_csv(file_path):
+def convert_csv_unknown_to_markers(file_path):
     """
     Performs a 'best-effort' conversion of a CSV file with unknown headers
     to the standardized marker report format.
-
-    Args:
-        file_path (str): The path to the input CSV file.
-
-    Returns:
-        tuple: A tuple containing the standardized headers and a list of
-               dictionaries with the matched data.
     """
-    logger.debug(f"▶️ Starting best-effort CSV conversion for: {file_path}",
-        file=current_file,
-        version=current_version)
+    logger.debug(f"▶️ Starting best-effort CSV conversion for: {file_path}")
 
     # Standardized headers and their common aliases
     standard_headers = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
@@ -127,19 +84,13 @@ def Marker_convert_csv_unknow_report_to_csv(file_path):
                         new_row[std_header] = value
             processed_data.append(new_row)
 
-        logger.success(f"✅ Finished best-effort conversion. Headers mapped: {header_map}",
-            file=current_file,
-            version=current_version)
+        logger.success(f"✅ Finished best-effort conversion. Headers mapped: {header_map}")
         return standard_headers, processed_data
 
     except FileNotFoundError:
-        logger.error(f"❌ The file '{file_path}' was not found.",
-            file=current_file,
-            version=current_version)
+        logger.error(f"❌ The file '{file_path}' was not found.")
         return [], []
-    except Exception as e:
+    except Exception:
         if LOCAL_DEBUG:
-            logger.exception("❌ Error during best-effort CSV conversion",
-                file=current_file,
-                version=current_version)
+            logger.exception("❌ Error during best-effort CSV conversion")
         return [], []

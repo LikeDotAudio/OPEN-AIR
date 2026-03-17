@@ -37,7 +37,7 @@ class AES70Manager:
         
         # Link to state cache if provided
         if state_cache_manager:
-            self.state_cache_manager.add_observer(self._on_state_update)
+            self.state_cache_manager.register_cache_observer(self._on_state_update)
             if LOCAL_DEBUG:
                 aes_logger.debug("📻🛠️🔗 [AES70] Bridge linked to State Cache.")
 
@@ -72,7 +72,7 @@ class AES70Manager:
                                 "mode.")
 
     def _on_state_update(self, topic, payload):
-        """Observer for all state changes from the StateCacheManager."""
+        """Observer for all state changes from the StateRegistry."""
         if not self._running: return
 
         # ⚡ LOGGING: High-signal Firehose style

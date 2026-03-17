@@ -72,7 +72,7 @@ class BuilderBackgroundManagerMixin:
         def _bg_worker():
             try:
                 # 1. Generate (or Load from Cache) in background
-                panel_bg_pil = PanelGenerator.generate_panel(width, height, panel_config)
+                panel_bg_pil = PanelGenerator.generate_procedural_panel(width, height, panel_config)
                 
                 # 2. Schedule UI update on main thread (only if this is still the active task)
                 if self.winfo_exists() and self._bg_task_id == current_task_id:
@@ -110,18 +110,21 @@ class BuilderBackgroundManagerMixin:
             except:
                 pass
 
-            if not hasattr(self, 'panel_bg_label') or not self.panel_bg_label:
-                self.panel_bg_label = tk.Label(self.scroll_frame, image=self.panel_bg_image, bd=0)
-                self.panel_bg_label.place(x=0, y=0, width=width, height=height)
-                self.panel_bg_label.lower()
-                if hasattr(self, '_on_right_click'):
-                    self.panel_bg_label.bind("<Button-3>", self._on_right_click)
+            # ⚡ CRITICAL FIX: If scroll_frame is a canvas, draw the image directly on it.
+            # This is much more robust for Z-ordering than a Label with place().
+            if isinstance(self.scroll_frame, tk.Canvas):
+                self.scroll_frame.delete("panel_procedural_bg")
+                self.scroll_frame.create_image(0, 0, image=self.panel_bg_image, anchor="nw", tags="panel_procedural_bg")
+                self.scroll_frame.tag_lower("panel_procedural_bg")
             else:
-                self.panel_bg_label.config(image=self.panel_bg_image)
-                # Ensure the label size matches the image exactly
-                self.panel_bg_label.place(x=0, y=0, width=width, height=height)
-                if hasattr(self, '_on_right_click'):
-                    self.panel_bg_label.bind("<Button-3>", self._on_right_click)
+                # Fallback for non-canvas scroll frames
+                if not hasattr(self, 'panel_bg_label') or not self.panel_bg_label:
+                    self.panel_bg_label = tk.Label(self.scroll_frame, image=self.panel_bg_image, bd=0)
+                    self.panel_bg_label.place(x=0, y=0, width=width, height=height)
+                    self.panel_bg_label.lower()
+                else:
+                    self.panel_bg_label.config(image=self.panel_bg_image)
+                    self.panel_bg_label.place(x=0, y=0, width=width, height=height)
             
             # --- Trigger reslice for all registered widgets ---
             self._trigger_reslice_all()

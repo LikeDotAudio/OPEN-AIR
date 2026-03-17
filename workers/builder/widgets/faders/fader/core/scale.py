@@ -22,7 +22,7 @@ DRAWING_THRESHOLDS = [(500, 100), (200, 50), (50, 10), (20, 5), (10, 2), (5, 1)]
 
 class ScaleDrawer:
     @staticmethod
-    def draw_scale_markers(canvas, frame, width, height, layout):
+    def draw(canvas, frame, width, height, layout):
         """Draws the ticks and labels for the vertical fader."""
         center_x = layout['cx']
         available_height = layout['available_height']
@@ -161,3 +161,41 @@ class ScaleDrawer:
             canvas.create_text(center_x + offset, y_coordinate, text=label_text, fill=text_color, font=frame.tick_font, anchor="w", tags="static")
         if label_position in ["left", "both"]:
             canvas.create_text(center_x - offset, y_coordinate, text=label_text, fill=text_color, font=frame.tick_font, anchor="e", tags="static")
+
+    @staticmethod
+    def draw_horizontal(canvas, frame, width, height, cy, available_width, padding, tick_length_half, slot_height, cap_width=DEFAULT_CAP_WIDTH):
+        """Draws the ticks and labels for the horizontal fader."""
+        tick_values = ScaleDrawer._get_tick_values(frame)
+        label_interval, draw_interval = ScaleDrawer._calculate_tick_intervals(len(tick_values))
+        config = ScaleDrawer._get_tick_configuration(frame)
+        
+        # Determine label position (default to both for horizontal if not specified or vertical-specific)
+        label_pos = frame.widget_config.get("style", {}).get("tick_label_position", "both")
+        if label_pos in ["left", "right"]: label_pos = "both" # Sanitize for horizontal
+
+        value_range = frame.max_val - frame.min_val
+        
+        for index, value in enumerate(tick_values):
+            norm_val = max(0.0, min(1.0, (value - frame.min_val) / value_range if value_range != 0 else 0))
+            display_norm = max(1e-7, norm_val) ** (1.0 / frame.log_exponent) if frame.log_exponent != 1.0 else norm_val
+            tick_x = available_width * display_norm + padding
+            
+            is_main_tick = (index % label_interval == 0)
+            
+            if index % draw_interval == 0:
+                color = config['tick_color'] if is_main_tick else config['sub_tick_color']
+                # Draw tick lines (above and below slot)
+                canvas.create_line(tick_x, cy - slot_height/2 - TICK_LINE_GAP, tick_x, cy - slot_height/2 - TICK_LINE_GAP - tick_length_half, 
+                                   fill=color, width=frame.tick_thickness, tags="static")
+                canvas.create_line(tick_x, cy + slot_height/2 + TICK_LINE_GAP, tick_x, cy + slot_height/2 + TICK_LINE_GAP + tick_length_half, 
+                                   fill=color, width=frame.tick_thickness, tags="static")
+            
+            if is_main_tick:
+                label_text = str(int(value)) if value == int(value) else f"{value:.1f}"
+                text_color = config['tick_text_color']
+                offset = tick_length_half + 8
+                
+                if label_pos in ["top", "both"]:
+                    canvas.create_text(tick_x, cy - offset - slot_height/2, text=label_text, fill=text_color, font=frame.tick_font, anchor="s", tags="static")
+                if label_pos in ["bottom", "both"]:
+                    canvas.create_text(tick_x, cy + offset + slot_height/2, text=label_text, fill=text_color, font=frame.tick_font, anchor="n", tags="static")

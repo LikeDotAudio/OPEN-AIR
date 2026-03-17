@@ -4,7 +4,7 @@ class CacheObserverRegistry:
     def __init__(self):
         self._observers = []
 
-    def add(self, callback):
+    def register_observer(self, callback):
         if callback not in self._observers: self._observers.append(callback)
 
     def remove(self, callback):

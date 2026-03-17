@@ -9,7 +9,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import orjson
 from loguru import logger
-from workers.Splinker.splinker import SplinkerManager
+from workers.Splinker.splinker import ControlBroker
 
 class SplinkerEditor(tk.Frame):
     def __init__(self, parent, **kwargs):
@@ -17,7 +17,7 @@ class SplinkerEditor(tk.Frame):
         self.json_path = kwargs.pop("json_path", None)
         super().__init__(parent, **kwargs)
         
-        self.splinker_manager = SplinkerManager.get_instance()
+        self.splinker_manager = ControlBroker.get_instance()
         app = self.config_data.get("app_instance")
         self.mqtt_manager = app.mqtt_connection_manager if app else None
         self.state_cache_manager = app.state_cache_manager if app else None

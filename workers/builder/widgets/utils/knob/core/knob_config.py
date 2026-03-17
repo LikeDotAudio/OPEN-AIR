@@ -1,48 +1,80 @@
 from workers.styling.style import THEMES, DEFAULT_THEME
 
 def extract_knob_config(config_data):
-    """Extracts and normalizes configuration for the Rotary Knob."""
-    config = config_data
+    """
+    Extracts and normalizes configuration for the Rotary Knob.
+    Robustly handles nested Universal Rhyme schema and flat legacy keys.
+    """
+    c = config_data
     
-    colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
-    bg_color = colors.get("bg", "#2b2b2b")
-    fg_color = colors.get("fg", "#dcdcdc")
-    accent_color = colors.get("accent", "#33A1FD")
-    secondary_color = colors.get("secondary", "#444444")
-    indicator_color = config.get("indicator_color", accent_color)
+    # 1. Block Extraction
+    cosmetics = c.get("cosmetics", {})
+    styling = cosmetics.get("styling", {})
+    overrides = cosmetics.get("style_overrides", {})
+    pointer = cosmetics.get("pointer", {})
+    scale = cosmetics.get("scale", c.get("scale", {}))
+    readout = c.get("readout", {})
+    interaction = c.get("interaction", {})
+    domain = c.get("domain", {})
+    primary_domain = domain.get("primary", domain)
+    
+    # 2. Theme and Color Resolution
+    themes = THEMES.get(DEFAULT_THEME, THEMES["dark"])
+    colors = cosmetics.get("colors", {})
+    
+    accent_color = colors.get("primary", themes.get("accent", "#33A1FD"))
+    bg_color = colors.get("background", themes.get("bg", "#2b2b2b"))
+    fg_color = colors.get("fg", themes.get("fg", "#dcdcdc"))
+    secondary_color = colors.get("secondary", themes.get("secondary", "#444444"))
+    
+    indicator_color = c.get("indicator_color", colors.get("active", accent_color))
 
-    min_val = float(config.get("min", 0.0))
-    max_val = float(config.get("max", 100.0))
-    reff_point = float(config.get("reff_point", (min_val + max_val) / 2.0))
-    value_default = float(config.get("value_default", 0.0))
-    infinity = config.get("infinity", False)
-    fine_pitch = config.get("fine_pitch", False)
+    # 3. Domain and Range
+    min_val = float(primary_domain.get("min", c.get("min", 0.0)))
+    max_val = float(primary_domain.get("max", c.get("max", 100.0)))
+    reff_point = float(primary_domain.get("reff_point", (min_val + max_val) / 2.0))
+    value_default = float(primary_domain.get("value_default", c.get("value_default", 0.0)))
     
-    width = config.get("width", 50)
-    height = config.get("height", 50)
+    # 4. Interaction
+    infinity = interaction.get("infinity", c.get("infinity", False))
+    fine_pitch = interaction.get("fine_pitch", c.get("fine_pitch", False))
     
-    text_pos = config.get("label_Text_position", "top").lower()
-    show_label = config.get("show_label", True)
+    # 5. Geometry
+    geom = c.get("geometry", {})
+    width = geom.get("width", c.get("width", 50))
+    height = geom.get("height", c.get("height", 50))
     
-    text_inside = config.get("text_inside", False)
-    no_center = config.get("no_center", False)
-    show_ticks = config.get("show_ticks", False)
-    tick_length = int(config.get("tick_length", 10))
-    arc_width = int(config.get("arc_width", 5))
+    # 6. Readout and Labels
+    text_pos = readout.get("label_position", c.get("label_Text_position", "top")).lower()
+    show_label = readout.get("show_label", c.get("show_label", True))
+    text_inside = readout.get("text_inside", c.get("text_inside", False))
     
-    pointer_length = config.get("pointer_length", None)
-    pointer_offset = int(config.get("pointer_offset", 0)) 
+    # 7. Aesthetics (The "Pattern" fix)
+    # We probe overrides -> styling -> cosmetics -> top-level
+    knob_style = overrides.get("knob_style", styling.get("knob_style", cosmetics.get("visualization", c.get("knob_style", "standard")))).lower()
+    shape = overrides.get("shape", styling.get("shape", c.get("shape", "circle"))).lower()
+    
+    no_center = styling.get("no_center", c.get("no_center", False))
+    arc_width = int(styling.get("arc_width", c.get("arc_width", 5)))
+    gradient_level = int(styling.get("gradient", styling.get("gradient_level", c.get("gradient_level", 0))))
+    
+    # Teeth for Gear knobs
+    knob_teeth = int(styling.get("teeth", c.get("knob_teeth", 8)))
+    
+    # Outline
+    knob_outline_thickness = int(styling.get("outline_thickness", c.get("knob_outline_thickness", 0)))
+    knob_outline_color = styling.get("outline_color", c.get("knob_outline_color", secondary_color))
+    knob_fill_color = styling.get("fill_color", c.get("knob_fill_color", ""))
 
-    knob_style = config.get("knob_style", "standard").lower()
-    shape = config.get("shape", "circle").lower()
-    pointer_style = config.get("pointer_style", "line").lower()
-    tick_style = config.get("tick_style", "simple").lower()
-    gradient_level = int(config.get("gradient_level", 0))
-    
-    knob_outline_thickness = int(config.get("knob_outline_thickness", 0))
-    knob_outline_color = config.get("knob_outline_color", secondary_color)
-    knob_fill_color = config.get("knob_fill_color", "")
-    knob_teeth = int(config.get("knob_teeth", 8))
+    # 8. Pointer Configuration
+    pointer_style = pointer.get("style", c.get("pointer_style", "line")).lower()
+    pointer_length = pointer.get("length", c.get("pointer_length", None))
+    pointer_offset = int(pointer.get("offset", c.get("pointer_offset", 0)))
+
+    # 9. Scale and Ticks
+    show_ticks = scale.get("show", c.get("show_ticks", False))
+    tick_length = int(scale.get("length", c.get("tick_length", 10)))
+    tick_style = scale.get("style", c.get("tick_style", "simple")).lower()
 
     return {
         "bg_color": bg_color,

@@ -72,7 +72,7 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     splinker_module_path = "workers.Splinker.splinker"
     if importlib.util.find_spec(splinker_module_path):
         splinker_module = importlib.import_module(splinker_module_path)
-        splinker_manager = splinker_module.SplinkerManager.get_instance(state_cache_manager, mqtt_connection_manager)
+        splinker_manager = splinker_module.ControlBroker.get_instance(state_cache_manager, mqtt_connection_manager)
     else:
         logger.critical("❌ Critical module missing: workers.Splinker.splinker")
         return None
@@ -115,7 +115,7 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     visa_fleet_module_path = "managers.Visa_Fleet.visa_fleet"
     if importlib.util.find_spec(visa_fleet_module_path):
         visa_fleet_module = importlib.import_module(visa_fleet_module_path)
-        STATE_VISA_FLEET_manager = visa_fleet_module.VisaFleetManager(
+        STATE_VISA_FLEET_manager = visa_fleet_module.FleetOrchestrator(
             mqtt_connection_manager=mqtt_connection_manager, 
             subscriber_router=subscriber_router, 
             aes70_manager=aes70_manager

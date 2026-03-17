@@ -12,6 +12,7 @@ from managers.configini.config_reader import Config
 app_constants = Config.get_instance()
 
 from managers.Display.transparency.transparency_mixin import TransparencyMixin
+from managers.Display.factory.widget_registry import WidgetRegistry
 
 # Core Modules
 from .core.wink_config import extract_wink_config
@@ -20,6 +21,7 @@ from .core.wink_physics import update_physics, blink_loop
 from .core.wink_renderer import draw_wink_visuals
 from .core.wink_events import bind_wink_events
 
+@WidgetRegistry.register("_WinkButton")
 class BuilderButtonWinkCreator(TransparencyMixin):
     """
     A mixin to create 'Wink' style buttons/switches.
@@ -60,7 +62,8 @@ class BuilderButtonWinkCreator(TransparencyMixin):
         # 2. Variable Management
         value_var = kwargs.get("variable")
         if value_var is None:
-            value_var = tk.BooleanVar(value=config["value_default"])
+            initial_state = bool(config.get("value_default", False))
+            value_var = tk.BooleanVar(value=initial_state)
         if LOCAL_DEBUG: builder_logger.debug(f"🔋🔘✨ [STATE] Initial state for '{label}': {value_var.get()}")
 
         # 3. Create State
@@ -185,3 +188,8 @@ class BuilderButtonWinkCreator(TransparencyMixin):
 
         if LOCAL_DEBUG: builder_logger.success(f"✅🆗🔳 [SUCCESS] The wink button '{label}' has materialized!")
         return frame
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderButtonWinkCreator()
+        return creator.make_button_wink(parent_widget, config_data, context, **kwargs)

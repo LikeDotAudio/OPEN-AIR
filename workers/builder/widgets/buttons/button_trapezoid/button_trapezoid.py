@@ -99,7 +99,7 @@ class TrapezoidButton(tk.Canvas, TrapezoidRendererMixin, TrapezoidInteractionMix
             "led_color": self.config_data.get("led_color", self.config_data.get("indicator_color", "#FF0000")),
             "label": self.label
         }
-        self._draw_trapezoid_button(self, self.config_data, current_state)
+        self.render_trapezoid_button(self, self.config_data, current_state)
 
 @WidgetRegistry.register("_TrapezoidButton")
 class BuilderButtonTrapezoidCreator(TransparencyMixin):
@@ -125,7 +125,7 @@ class BuilderButtonTrapezoidCreator(TransparencyMixin):
             base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
             builder_instance = kwargs.get("builder_instance") or self
 
-        initial_state = config_data.get("value_default", False)
+        initial_state = bool(config_data.get("value_default", False))
         state_var = kwargs.get("variable") or tk.BooleanVar(value=initial_state)
 
         # Instantiate the specialized widget class

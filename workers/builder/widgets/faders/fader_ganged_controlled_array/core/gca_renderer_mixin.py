@@ -201,7 +201,7 @@ class GCARendererMixin:
         if self.is_rgb:
             MIN_RGB_INTENSITY = 50
             MAX_RGB_VAL = 255
-            intensity = int(max(MIN_RGB_INTENSITY, normalized_color * MAX_RGB_VAL))
+            intensity = max(0, min(255, int(max(MIN_RGB_INTENSITY, normalized_color * MAX_RGB_VAL))))
             if index == 0: return f"#{intensity:02x}0000"
             if index == 1: return f"#00{intensity:02x}00"
             if index == 2: return f"#0000{intensity:02x}"
@@ -211,9 +211,12 @@ class GCARendererMixin:
         MAX_RGB_VAL = 255
         COLOR_SPLIT_THRESHOLD = 0.5
         if norm_val < COLOR_SPLIT_THRESHOLD: 
-            red, green, blue = int(MAX_RGB_VAL * (norm_val * 2)), MAX_RGB_VAL, 0
+            red = max(0, min(255, int(MAX_RGB_VAL * (norm_val * 2))))
+            green, blue = MAX_RGB_VAL, 0
         else: 
-            red, green, blue = MAX_RGB_VAL, int(MAX_RGB_VAL * (1.0 - (norm_val - COLOR_SPLIT_THRESHOLD) * 2)), 0
+            red = MAX_RGB_VAL
+            green = max(0, min(255, int(MAX_RGB_VAL * (1.0 - (norm_val - COLOR_SPLIT_THRESHOLD) * 2))))
+            blue = 0
         return f"#{red:02x}{green:02x}{blue:02x}"
 
 
@@ -225,9 +228,9 @@ class GCARendererMixin:
         normalize = lambda v: (self._safe_get(v) - self.min_val) / val_range if val_range else 0
         
         MAX_RGB_VAL = 255
-        red = int(normalize(self.child_values[0]) * MAX_RGB_VAL)
-        green = int(normalize(self.child_values[1]) * MAX_RGB_VAL)
-        blue = int(normalize(self.child_values[2]) * MAX_RGB_VAL)
+        red = max(0, min(255, int(normalize(self.child_values[0]) * MAX_RGB_VAL)))
+        green = max(0, min(255, int(normalize(self.child_values[1]) * MAX_RGB_VAL)))
+        blue = max(0, min(255, int(normalize(self.child_values[2]) * MAX_RGB_VAL)))
         return f"#{red:02x}{green:02x}{blue:02x}"
 
     def _calculate_smart_interval(self, val_range):

@@ -134,7 +134,6 @@ class WorkerLauncher:
             # Implementation Note:
             # ActivePeakPublisher is the primary data distribution worker.
             # Its initialization triggers the data ingestion pipeline.
-            ## active_peak_publisher = ActivePeakPublisher()
             
             # self.splash.set_status("Active Peak Publisher initialized.")
             if LOCAL_DEBUG:

@@ -104,7 +104,7 @@ class SNMPManager:
                 
                 # Protocol Router Sync Logic: Listen for remote/local activity
                 from workers.Command_Router.protocol_router import ProtocolRouter
-                ProtocolRouter.get_instance().add_observer(self.handle_protocol_event)
+                ProtocolRouter.get_instance().register_cache_observer(self.handle_protocol_event)
                     
                 self._log_monitor_thread = threading.Thread(target=self._file_to_sql_loop, daemon=True)
                 self._log_monitor_thread.start()

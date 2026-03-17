@@ -10,11 +10,11 @@ class WorkStealingQueue:
         self.deque = collections.deque()
         self.lock = threading.Lock()
 
-    def push(self, task):
+    def push_task(self, task):
         with self.lock:
             self.deque.append(task)
 
-    def pop(self):
+    def pop_local_task(self):
         """Local worker pops from the right (LIFO) for cache locality."""
         with self.lock:
             if self.deque:
@@ -52,7 +52,7 @@ class WorkStealingPool:
         
         while not self._shutdown:
             # 1. Try local queue (LIFO)
-            task = my_queue.pop()
+            task = my_queue.pop_local_task()
             
             # 2. If empty, try stealing from neighbors (FIFO)
             if task is None:
@@ -88,7 +88,7 @@ class WorkStealingPool:
         # Round-robin initial distribution
         for i, (func, args, kwargs) in enumerate(tasks):
             queue_idx = i % self.num_workers
-            self.queues[queue_idx].push((func, args, kwargs, results))
+            self.queues[queue_idx].push_task((func, args, kwargs, results))
         
         # Wait for completion (simple spin-wait for the proof of concept)
         total = len(tasks)

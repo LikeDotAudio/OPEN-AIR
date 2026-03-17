@@ -120,6 +120,10 @@ class BuilderArrayCreator(TransparencyMixin):
         data_array = config_data.get("data", [])
         layout_cols = config_data.get("layout_columns", 8)
         
+        # ⚡ COMPOSITION FIX: Ensure we use an instance of this creator for internal helpers
+        # because 'self' when called via factory wrapper is actually the DynamicGuiBuilder.
+        creator_instance = BuilderArrayCreator()
+
         # Configure Grid Container Columns
         column_sizing = config_data.get("column_sizing", [])
         for col_idx in range(layout_cols):
@@ -156,10 +160,10 @@ class BuilderArrayCreator(TransparencyMixin):
             
             # Inject generic data
             if LOCAL_DEBUG: logger.trace(f"    ├─ 💉 Injecting data contexts into element '{item_id}'")
-            self._inject_data(item_config, item)
+            creator_instance._inject_data(item_config, item)
             
             # Pass ViewManager reference via a special key
-            self._inject_view_manager(item_config, view_manager)
+            creator_instance._inject_view_manager(item_config, view_manager)
 
             synthetic_fields[str(item_id)] = item_config
             if LOCAL_DEBUG: logger.trace(f"    └─ ✅ Element '{item_id}' ready for batch build.")

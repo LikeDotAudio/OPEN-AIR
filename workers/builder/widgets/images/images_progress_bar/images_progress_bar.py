@@ -15,8 +15,10 @@ app_constants = Config.get_instance()  # Get the singleton instance
 from workers.Command_Router.mqtt.mqtt_topic_utils import get_topic
 import os
 from managers.Display.transparency.transparency_mixin import TransparencyMixin
+from managers.Display.factory.widget_registry import WidgetRegistry
 
 
+@WidgetRegistry.register("ProgressBar", "_ProgressBar", "_SmartProgress")
 class BuilderImagesProgressBarCreator(TransparencyMixin):
     def make_images_progress_bar(
         self, parent_widget, config_data, context=None, **kwargs

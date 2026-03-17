@@ -20,6 +20,7 @@ from managers.Display.factory.widget_registry import WidgetRegistry
 from .core.fader_bar_renderer_mixin import FaderBarRendererMixin
 from .core.fader_bar_interaction_mixin import FaderBarInteractionMixin
 from .core.fader_bar_state_mixin import FaderBarStateMixin
+from workers.builder.core.ui_geometry_math import UIGeometryMath
 
 class FaderWithBarGraphFrame(
     tk.Frame,
@@ -67,7 +68,7 @@ class FaderWithBarGraphFrame(
     def render(self): self._draw_static(); self._draw_dynamic()
     def _update_fader_pos(self):
         if not hasattr(self, 'draw_h'): return
-        y = self.top_m + self._get_pos_from_val(self.fader_var.get(), self.draw_h)
+        y = self.top_m + UIGeometryMath.value_to_pixel(self.fader_var.get(), self.min_val, self.max_val, self.draw_h, reverse=True)
         self.canvas.coords("cap", self.cx, y); self.canvas.coords("cap_text", self.cx, y)
         self.canvas.itemconfig("cap_text", text=f"{self.fader_var.get():.1f}")
 

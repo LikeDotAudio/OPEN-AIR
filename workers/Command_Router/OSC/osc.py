@@ -57,7 +57,7 @@ class OSCManager:
 
         # Protocol Router Sync Logic: Listen for remote/local activity
         from workers.Command_Router.protocol_router import ProtocolRouter
-        ProtocolRouter.get_instance().add_observer(self._on_protocol_event)
+        ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
 
     def _broadcast_status_loop(self):
         """Periodically publishes OSC bridge status to MQTT for UI sync."""

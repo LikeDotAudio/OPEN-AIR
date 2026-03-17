@@ -1,238 +1,108 @@
-# active/XXX-worker_active_peak_publisher.py
+# workers/active/active_peak_publisher.py
 #
-# A worker module that listens for marker frequency and amplitude outputs from the
-# YAK repository and republishes the data to a new, deeply hierarchical topic
-# structure based on the frequency (GHz down to 1s of kHz).
+# Event-driven worker that transforms flat marker data into a hierarchical
+# topic structure based on frequency.
 #
-# Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-#
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
 
 import os
-import inspect
 import orjson
-import threading
-import re
 import datetime
 import math
-
-# --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from workers.logger.logger import initialize_logging, set_log_directory
 from loguru import logger
-
 from managers.configini.config_reader import Config
-
-app_constants = Config.get_instance()  # Get the singleton instance
-
 from workers.Command_Router.mqtt.mqtt_controller_util import MqttControllerUtility
 
-# --- Global Scope Variables (as per your instructions) ---
-# NOTE: Version is updated to the current session time and revision 3
-current_version = "20251006.223430.3"
-# The hash calculation removes leading zeros, if any.
-current_version_hash = 20251006 * 223430 * 3
-current_file = f"{os.path.basename(__file__)}"
+app_constants = Config.get_instance()
 
-# --- Constants (No Magic Numbers) ---
-# FIX: Using the single-level wildcard '+' to match the dynamic 'Marker_X' or 'Marker_X_freq' segment.
-TOPIC_MARKER_PEAK_WILDCARD = (
-    "OPEN-AIR/yak/Markers/nab/NAB_all_marker_settings/Outputs/+/value"
-)
-TOPIC_MARKER_FREQ_WILDCARD = (
-    "OPEN-AIR/yak/Markers/nab/NAB_all_marker_settings/Outputs/+/value"
-)
+# --- Constants ---
+VERSION = "20251006.223430.3"
+TOPIC_MARKER_PEAK_WILDCARD = "OPEN-AIR/yak/Markers/nab/NAB_all_marker_settings/Outputs/+/value"
+TOPIC_MARKER_FREQ_WILDCARD = "OPEN-AIR/yak/Markers/nab/NAB_all_marker_settings/Outputs/+/value"
 TOPIC_MEASUREMENTS_ROOT = "OPEN-AIR/measurements"
 TOPIC_DELIMITER = "/"
-
+LOCAL_DEBUG = True
 
 class ActivePeakPublisher:
     """
-    An event-driven worker that transforms flat marker data into a hierarchical
-    topic structure based on frequency (GHz -> 100MHz -> 10MHz -> 1MHz -> 100kHz -> 10kHz -> 1kHz).
+    Transforms flat marker data into a hierarchical frequency-based topic structure.
     """
 
-    # Initializes the ActivePeakPublisher.
-    # This sets up the worker with an MQTT utility and a buffer for storing incomplete
-    # marker data. It also calls the method to establish MQTT subscriptions.
-    # Inputs:
-    #     mqtt_util (MqttControllerUtility): The MQTT utility for publishing and subscribing.
-    # Outputs:
-    #     None.
     def __init__(self, mqtt_util: MqttControllerUtility):
-        """
-        Initializes the publisher and sets up subscriptions.
-        """
-        if LOCAL_DEBUG: logger.debug(f"🟢️️️🟢 Initializing the Active Peak Publisher. Ready to pivot the data!")
-
+        if LOCAL_DEBUG:
+            logger.debug("🟢 Initializing ActivePeakPublisher.")
         self.mqtt_util = mqtt_util
-        # Buffer to hold incomplete marker data (Peak or Freq only)
-        # Key: Marker_ID (e.g., 'Marker_1'), Value: {'peak': float, 'freq_hz': float}
         self.marker_data_buffer = {}
-
         self._setup_subscriptions()
-        
-        if LOCAL_DEBUG: logger.success("✅ Active Peak Publisher is online and listening for marker data.")
+        if LOCAL_DEBUG:
+            logger.success("✅ ActivePeakPublisher online.")
 
-    # Sets up the necessary MQTT subscriptions for the worker.
-    # This method subscribes to wildcard topics that capture all marker peak and frequency
-    # value updates from the instrument.
-    # Inputs:
-    #     None.
-    # Outputs:
-    #     None.
     def _setup_subscriptions(self):
-        """
-        Subscribes to the wildcards for all marker peak and frequency values.
-        """
-        self.mqtt_util.add_subscriber(
-            TOPIC_MARKER_PEAK_WILDCARD, self._on_marker_message
-        )
-        self.mqtt_util.add_subscriber(
-            TOPIC_MARKER_FREQ_WILDCARD, self._on_marker_message
-        )
+        self.mqtt_util.add_subscriber(TOPIC_MARKER_PEAK_WILDCARD, self._on_marker_message)
+        self.mqtt_util.add_subscriber(TOPIC_MARKER_FREQ_WILDCARD, self._on_marker_message)
 
-        if LOCAL_DEBUG: logger.debug(f"🔍 Subscribed to both peak and frequency wildcards.")
-
-    # Callback function for handling incoming marker data.
-    # This method receives both frequency and peak messages, buffers them, and when a
-    # complete pair for a marker is received, it triggers the republishing process.
-    # Inputs:
-    #     topic (str): The MQTT topic the message was received on.
-    #     payload (str): The message payload.
-    # Outputs:
-    #     None.
-    def _on_marker_message(self, topic, payload):
-        """
-        Primary callback to receive data, buffer it, and check for completeness.
-        """
-        # Determine if it's a frequency or peak message
-        # We look for the literal string 'freq' now, as the filter no longer guarantees a specific segment position.
-        is_frequency = "freq" in topic
-
-        # The Marker ID is the second-to-last part of the topic.
-        # Example: .../Marker_1/value -> ['value', 'Marker_1', ...] -> Marker_1
-        marker_id = topic.split(TOPIC_DELIMITER)[-2].replace("_freq", "")
-
-        # Extract the value safely
+    def _parse_marker_payload(self, payload):
+        """Extracts numeric value from JSON payload safely."""
         try:
-            # 1. Decode the entire JSON payload to a Python dictionary
             payload_dict = orjson.loads(payload)
-            # 2. Extract the string value (e.g., "-6.219589233E+01")
             value_str = payload_dict.get("value")
-
-            # 3. Attempt to convert the string value to a float
-            numeric_value = float(value_str)
-
+            return float(value_str)
         except (orjson.JSONDecodeError, ValueError, TypeError):
-            # This block now captures errors from:
-            # a) Invalid JSON structure (JSONDecodeError)
-            # b) Missing 'value' key (TypeError/AttributeError from get("value") )
-            # c) Unparsable number string (ValueError)
-            if LOCAL_DEBUG: logger.debug(f"⚠️ Silent Skip: Unparsable payload '{payload}'.")
+            return None
+
+    def _on_marker_message(self, topic, payload):
+        """Primary callback for incoming marker data."""
+        numeric_value = self._parse_marker_payload(payload)
+        if numeric_value is None:
+            if LOCAL_DEBUG:
+                logger.debug(f"⚠️ Unparsable payload: {payload}")
             return
 
-        # Initialize marker entry if it doesn't exist
+        is_frequency = "freq" in topic
+        marker_id = topic.split(TOPIC_DELIMITER)[-2].replace("_freq", "")
+
         if marker_id not in self.marker_data_buffer:
             self.marker_data_buffer[marker_id] = {"peak": None, "freq_hz": None}
 
-        # Update the buffer
         if is_frequency:
             self.marker_data_buffer[marker_id]["freq_hz"] = numeric_value
-            data_type = "Frequency"
         else:
             self.marker_data_buffer[marker_id]["peak"] = numeric_value
-            data_type = "Peak"
 
-        if LOCAL_DEBUG: logger.debug(f"↔️ Buffered {data_type} for {marker_id}: {numeric_value}. Checking for pair...")
+        self._check_marker_pair_completeness(marker_id)
 
-        # Check if both peak and frequency are now available
-        buffer_entry = self.marker_data_buffer[marker_id]
-        if buffer_entry["peak"] is not None and buffer_entry["freq_hz"] is not None:
-            # Full data set for this marker is ready for publishing
+    def _check_marker_pair_completeness(self, marker_id):
+        """Checks if both peak and frequency are available for a marker."""
+        entry = self.marker_data_buffer[marker_id]
+        if entry["peak"] is not None and entry["freq_hz"] is not None:
             self._republish_to_hierarchical_topic(
                 marker_id=marker_id,
-                freq_hz=buffer_entry["freq_hz"],
-                peak_dbm=buffer_entry["peak"],
+                freq_hz=entry["freq_hz"],
+                peak_dbm=entry["peak"]
             )
-            # Clear the entry from the buffer
             del self.marker_data_buffer[marker_id]
 
-    # Republishes marker data to a hierarchical topic based on its frequency.
-    # This function takes complete marker data (ID, frequency, and peak), constructs a
-    # deeply nested topic structure from the frequency, and publishes the data to that topic.
-    # Inputs:
-    #     marker_id (str): The ID of the marker (e.g., 'Marker_1').
-    #     freq_hz (float): The frequency of the marker in Hz.
-    #     peak_dbm (float): The peak amplitude of the marker in dBm.
-    # Outputs:
-    #     None.
     def _republish_to_hierarchical_topic(self, marker_id, freq_hz, peak_dbm):
-        """
-        Converts frequency in Hz to the required hierarchical topic structure and publishes.
-        """
+        """Constructs and publishes to hierarchical frequency topics."""
         try:
-            # Convert Hz to MHz for easier parsing (e.g., 612,345,000 Hz -> 612.345 MHz)
             freq_mhz = freq_hz / 1_000_000.0
-
-            # --- Hierarchical Parsing ---
-
-            # 1. Gigahertz (A)
+            
+            # Breakdown for path: GHz/100M/10M/1M/100k/10k/1k
             ghz = int(freq_mhz // 1000)
-            freq_mhz_remainder = freq_mhz % 1000
+            m_rem = freq_mhz % 1000
+            m100 = int(m_rem // 100)
+            m_rem %= 100
+            m10 = int(m_rem // 10)
+            m1 = int(m_rem % 10)
+            
+            k_total = round((freq_mhz - int(freq_mhz)) * 1000.0, 0)
+            k100 = int(k_total // 100)
+            k_rem = k_total % 100
+            k10 = int(k_rem // 10)
+            k1 = int(k_rem % 10)
 
-            # 2. Hundreds of MHz (B)
-            mhz_hundreds = int(freq_mhz_remainder // 100)
-            mhz_remainder = freq_mhz_remainder % 100
-
-            # 3. Tens of MHz (C)
-            mhz_tens = int(mhz_remainder // 10)
-            mhz_remainder = mhz_remainder % 10
-
-            # 4. Ones of MHz (D)
-            mhz_ones = int(mhz_remainder // 1)
-
-            # 5. Kilohertz (E, F, G) - Convert remaining fraction to kHz
-            khz_total = round((freq_mhz - int(freq_mhz)) * 1000.0, 0)
-
-            khz_hundreds = int(khz_total // 100)
-            khz_remainder = khz_total % 100
-
-            khz_tens = int(khz_remainder // 10)
-            khz_ones = int(khz_remainder % 10)
-
-            # Final Frequency Breakdowns for the Topic Path: A/B/C/D/E/F/G
-            # A: GHz
-            # B: 100s of MHz
-            # C: 10s of MHz
-            # D: 1s of MHz
-            # E: 100s of kHz
-            # F: 10s of kHz
-            # G: 1s of kHz
-
-            topic_parts = [
-                ghz,
-                mhz_hundreds,
-                mhz_tens,
-                mhz_ones,
-                khz_hundreds,
-                khz_tens,
-                khz_ones,
-            ]
-
-            # Join the parts to form the topic path
-            topic_path = TOPIC_DELIMITER.join(map(str, topic_parts))
+            topic_path = TOPIC_DELIMITER.join(map(str, [ghz, m100, m10, m1, k100, k10, k1]))
             full_topic = f"{TOPIC_MEASUREMENTS_ROOT}/{topic_path}"
 
-            # Final Payload for the leaf node (G)
             final_payload = {
                 "Marker": marker_id,
                 "Peak_dBm": round(peak_dbm, 2),
@@ -240,7 +110,6 @@ class ActivePeakPublisher:
                 "Timestamp": datetime.datetime.now().isoformat(),
             }
 
-            # Publish to the newly constructed hierarchical topic
             self.mqtt_util.publish_message(
                 topic=full_topic,
                 subtopic="",
@@ -248,10 +117,9 @@ class ActivePeakPublisher:
                 retain=True,
             )
 
-            if LOCAL_DEBUG: logger.debug(f"🐐💾 Reposted {marker_id} data to hierarchical topic.")
-            if LOCAL_DEBUG: logger.success(f"✅ Reposted {marker_id} ({round(freq_mhz, 3)} MHz) to {full_topic}")
-
-        except Exception as e:
             if LOCAL_DEBUG:
-                logger.exception("❌ Error during hierarchical republishing for {marker_id}")
-                logger.exception("❌ Arrr, the code be capsized in republishing! The error be")
+                logger.success(f"✅ Reposted {marker_id} ({round(freq_mhz, 3)} MHz) to {full_topic}")
+
+        except Exception:
+            if LOCAL_DEBUG:
+                logger.exception(f"❌ Error republishing marker {marker_id}")

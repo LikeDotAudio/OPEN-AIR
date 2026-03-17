@@ -1,6 +1,6 @@
 # State_Cache/state_cache_manager.py
 # Modularized State Cache Management.
-# Version 20260315.Modular.1
+# Version 20260316.1
 
 import time
 import orjson
@@ -22,7 +22,7 @@ from .core.cache_save_engine import CacheSaveEngine
 from .core.cache_search_engine import CacheSearchEngine
 from .core.cache_observer_registry import CacheObserverRegistry
 
-class StateCacheManager:
+class StateRegistry:
     """The central orchestrator for application state caching, persistence, and distribution."""
 
     def __init__(self, mqtt_connection_manager: Any, state_mirror_engine: Any = None):
@@ -38,8 +38,7 @@ class StateCacheManager:
             if LOCAL_DEBUG: data_logger.info("💾✨ First boot detected. Starting with fresh cache.")
         except CacheLoadError as e:
             if LOCAL_DEBUG: data_logger.error(f"💥💾 Critical Cache Corruption: {e}. Starting fresh.")
-            # Depending on policy, we might want to backup the corrupted file here
-        except Exception as e:
+        except Exception:
             if LOCAL_DEBUG: data_logger.exception("💥💾 Unexpected error loading cache.")
             
         self.search_engine = CacheSearchEngine()
@@ -53,14 +52,18 @@ class StateCacheManager:
         if LOCAL_DEBUG: data_logger.debug(f"🧠💾 [CACHE] Initialized with {len(self.cache)} entries.")
 
     def check_prefix_exists(self, prefix: str) -> bool: return self.search_engine.exists(prefix)
-    def add_observer(self, cb: Any): self.observers.add(cb)
-    def get(self, topic: str) -> Any: entry = self.cache.get(topic); return entry.get("val") if isinstance(entry, dict) else entry
+    def register_cache_observer(self, callback: Any): self.observers.register_observer(callback)
+    
+    def get_cached_value(self, topic: str) -> Any:
+        """Retrieves the cached value for a given topic."""
+        entry = self.cache.get(topic)
+        return entry.get("val") if isinstance(entry, dict) else entry
 
     def save_preset(self, name: str):
         try:
-            p = os.path.join("DATA", "state", "presets", f"{name}.preset.json")
-            os.makedirs(os.path.dirname(p), exist_ok=True)
-            with open(p, "wb") as f: f.write(orjson.dumps(self.cache, option=orjson.OPT_INDENT_2))
+            path = os.path.join("DATA", "state", "presets", f"{name}.preset.json")
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            with open(path, "wb") as f: f.write(orjson.dumps(self.cache, option=orjson.OPT_INDENT_2))
             if LOCAL_DEBUG: data_logger.success(f"📸💾 Preset saved: {name}")
             return True
         except Exception as e: data_logger.error(f"🧠💾 Preset failed: {e}"); return False
@@ -91,46 +94,67 @@ class StateCacheManager:
         if self.cache:
             from workers.Command_Router.protocol_router import ProtocolRouter
             router = ProtocolRouter.get_instance()
-            for t, p in self.cache.items():
-                v = p.get("val") if isinstance(p, dict) else p
-                router.ingest("DISK", t, v, {"msg_type": "LINK_FEEDBACK", "is_settled": True, "origin_source": "DISK", "boot": True})
+            for topic, payload in self.cache.items():
+                val = payload.get("val") if isinstance(payload, dict) else payload
+                router.ingest("DISK", topic, val, {"msg_type": "LINK_FEEDBACK", "is_settled": True, "origin_source": "DISK", "boot": True})
             gui_state_restorer.restore_timeline(self.cache, self.state_mirror_engine)
 
     def handle_external_update(self, topic: str, value: Any, source: str = "EXTERNAL", metadata: dict = None):
         from workers.logic.manifest.builder import create_manifest
-        pld = create_manifest(value, topic, source, metadata)
+        payload = create_manifest(value, topic, source, metadata)
         
-        self.cache[topic] = pld
-        self.save_engine.schedule_save(topic, pld); self.search_engine.add_topic(topic)
+        self.cache[topic] = payload
+        self.save_engine.schedule_save(topic, payload); self.search_engine.add_topic(topic)
         
         from workers.Command_Router.protocol_router import ProtocolRouter
-        ProtocolRouter.get_instance().ingest(source, topic, value, pld)
+        ProtocolRouter.get_instance().ingest(source, topic, value, payload)
 
         if self.mqtt:
             if "/System/Monitor/" not in topic and (source == "GUI" or (source in ["MIDI", "SNMP", "OSC", "VISA"] and not self.state_mirror_engine)):
-                self.mqtt.publish(topic, orjson.dumps(pld).decode())
-        self.observers.notify(topic, pld)
+                self.mqtt.publish(topic, orjson.dumps(payload).decode())
+        self.observers.notify(topic, payload)
+
+    def _parse_mqtt_payload(self, msg: MqttMessage):
+        """Standardizes MQTT payload extraction into source, value, and metadata."""
+        raw = msg.get_json_payload()
+        source, value, metadata = "MQTT", raw, {}
+        
+        if isinstance(raw, dict):
+            source = str(raw.get("source", "MQTT")).upper()
+            value = raw.get("val")
+            metadata = raw.copy()
+            # Preserve standard fields
+            for field in ["msg_type", "msg_guid", "origin_source", "is_settled", "full_id", "boot"]:
+                if field in raw: metadata[field] = raw[field]
+        
+        return source, value, metadata, raw
+
+    def _update_cache_entry(self, topic, payload):
+        """Updates internal cache and schedules persistence."""
+        self.cache[topic] = payload
+        self.search_engine.add_topic(topic)
+        self.save_engine.schedule_save(topic, payload)
+        self._updates_since_last_log += 1
+        
+        if time.time() - self._last_log_time >= 5.0:
+            if LOCAL_DEBUG: data_logger.success(f"🧠⚓ State synced: {self._updates_since_last_log} variables.")
+            self._last_log_time, self._updates_since_last_log = time.time(), 0
 
     def handle_incoming_mqtt(self, client, userdata, msg: MqttMessage) -> None:
         topic = msg.topic
-        if self.subscriber_router: self.subscriber_router._on_message(client, userdata, msg)
+        if self.subscriber_router: 
+            self.subscriber_router._on_message(client, userdata, msg)
+            
         try:
-            raw = msg.get_json_payload(); src, val, meta = "MQTT", raw, {}
-            if isinstance(raw, dict):
-                src, val, meta = str(raw.get("source", "MQTT")).upper(), raw.get("val"), raw.copy()
-                for f in ["msg_type", "msg_guid", "origin_source", "is_settled", "full_id", "boot"]:
-                    if f in raw: meta[f] = raw[f]
+            source, value, metadata, raw_payload = self._parse_mqtt_payload(msg)
 
             from workers.Command_Router.protocol_router import ProtocolRouter
-            ProtocolRouter.get_instance().ingest("MQTT", topic, val, meta)
-            self.observers.notify(topic, raw)
+            ProtocolRouter.get_instance().ingest("MQTT", topic, value, metadata)
+            self.observers.notify(topic, raw_payload)
 
-            proc, new_pld = cache_traffic_controller.process_traffic(msg, self.cache)
-            if proc:
-                self.cache[topic] = new_pld; self.search_engine.add_topic(topic)
-                self.save_engine.schedule_save(topic, new_pld)
-                self._updates_since_last_log += 1
-                if time.time() - self._last_log_time >= 5.0:
-                    if LOCAL_DEBUG: data_logger.success(f"🧠⚓ State synced: {self._updates_since_last_log} variables.")
-                    self._last_log_time, self._updates_since_last_log = time.time(), 0
-        except Exception: data_logger.exception(f"🧠💾 Error handling MQTT for {topic}")
+            should_process, new_payload = cache_traffic_controller.process_traffic(msg, self.cache)
+            if should_process:
+                self._update_cache_entry(topic, new_payload)
+                
+        except Exception: 
+            data_logger.exception(f"🧠💾 Error handling MQTT for {topic}")

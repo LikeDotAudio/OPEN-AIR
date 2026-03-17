@@ -18,7 +18,7 @@ class Monitor:
         self._firehose_lock = threading.Lock()
         self._observers = []
 
-    def add_observer(self, callback):
+    def register_cache_observer(self, callback):
         """Registers a callback for UI/Monitoring broadcast."""
         self._observers.append(callback)
 

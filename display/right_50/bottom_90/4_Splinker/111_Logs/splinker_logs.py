@@ -10,7 +10,7 @@ from tkinter import ttk
 import orjson
 import time
 from loguru import logger
-from workers.Splinker.splinker import SplinkerManager
+from workers.Splinker.splinker import ControlBroker
 
 class SplinkerLogs(tk.Frame):
     def __init__(self, parent, **kwargs):
@@ -18,7 +18,7 @@ class SplinkerLogs(tk.Frame):
         self.json_path = kwargs.pop("json_path", None)
         super().__init__(parent, **kwargs)
         
-        self.splinker_manager = SplinkerManager.get_instance()
+        self.splinker_manager = ControlBroker.get_instance()
         app = self.config_data.get("app_instance")
         self.mqtt_manager = app.mqtt_connection_manager if app else None
         self.subscriber_router = self.config_data.get("subscriber_router")

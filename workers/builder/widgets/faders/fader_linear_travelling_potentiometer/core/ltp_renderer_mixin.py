@@ -1,7 +1,7 @@
 import tkinter as tk
 from ...fader.core.scale import ScaleDrawer
 from ...fader.core.track import TrackDrawer
-from ...knob.core.knob_renderer import _draw_track, _draw_pointer
+from ....utils.knob.core.knob_renderer import _draw_track, _draw_pointer
 from .ltp_asset_generator import LTPAssetGenerator
 
 class LTPRendererMixin:
@@ -57,7 +57,7 @@ class LTPRendererMixin:
         
         norm_rot = (self.rotation_var.get() - self.rotation_min) / (self.rotation_max - self.rotation_min) if (self.rotation_max - self.rotation_min) else 0.5
         angle = 225 - (norm_rot * 270)
-        _draw_pointer(canvas, x, y, self.cap_radius, angle, self.accent_color, self.pointer_style)
+        _draw_pointer(canvas, x, y, self.cap_radius, self.arc_width, angle, self.pointer_style, self.accent_color, self.pointer_length, self.pointer_offset, self.no_center)
         
         if self.show_value:
             txt = f"{self.linear_var.get():.1f}"

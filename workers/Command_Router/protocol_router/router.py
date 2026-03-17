@@ -116,7 +116,7 @@ class ProtocolRouter:
     def set_snmp_manager(self, m): self.snmp_manager = m
 
     # --- Observation APIs ---
-    def add_observer(self, cb): self.monitor.add_observer(cb)
+    def register_cache_observer(self, cb): self.monitor.register_cache_observer(cb)
     def remove_observer(self, cb): self.monitor.remove_observer(cb)
 
     def ingest(self, transport_source, topic, value, metadata=None):

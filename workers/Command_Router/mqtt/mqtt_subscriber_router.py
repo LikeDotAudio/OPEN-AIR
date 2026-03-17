@@ -29,11 +29,11 @@ class ThreadSafeMatchCache:
         self._lock = threading.Lock()
         self._limit = limit
 
-    def get(self, topic: str):
+    def get_cached_callbacks(self, topic: str):
         with self._lock:
             return self._cache.get(topic)
 
-    def set(self, topic: str, callbacks: List[Callable[[MqttMessage], None]]):
+    def cache_callbacks(self, topic: str, callbacks: List[Callable[[MqttMessage], None]]):
         with self._lock:
             if len(self._cache) < self._limit:
                 self._cache[topic] = callbacks
@@ -57,6 +57,9 @@ class MqttSubscriberRouter:
         # Wildcard list: (filter, list of callbacks)
         self._wildcard_subscribers: List[List[Union[str, List[Callable[[MqttMessage], None]]]]] = []
         
+        # ⚡ THREAD SAFETY: Protects subscriber maps during concurrent access
+        self._lock = threading.RLock()
+
         # ⚡ OPTIMIZATION: Cache for wildcard matches to avoid redundant pattern matching
         self._match_cache = ThreadSafeMatchCache(limit=1000)
         
@@ -82,62 +85,64 @@ class MqttSubscriberRouter:
         # ⚡ Invalidate cache when subscriptions change
         self._match_cache.clear()
         
-        if "#" in topic_filter or "+" in topic_filter:
-            found = False
-            for entry in self._wildcard_subscribers:
-                f, cb_list = entry
-                if f == topic_filter:
-                    if callback_func not in cb_list:
-                        cb_list.append(callback_func)
-                    found = True
-                    break
-            if not found:
-                self._wildcard_subscribers.append([topic_filter, [callback_func]])
-        else:
-            if topic_filter not in self._exact_subscribers:
-                self._exact_subscribers[topic_filter] = []
-            if callback_func not in self._exact_subscribers[topic_filter]:
-                self._exact_subscribers[topic_filter].append(callback_func)
-        
-        # ⚡ aiomqtt Optimization: Avoid redundant broker subscriptions
-        if topic_filter.startswith(f"{self._base_topic}/") or topic_filter == self._root_topic:
-            if self._root_topic not in self._active_broker_subscriptions:
-                self._active_broker_subscriptions.add(self._root_topic)
-                from workers.Command_Router.mqtt.mqtt_connection import MqttConnectionManager
-                MqttConnectionManager().subscribe(self._root_topic)
-            return
+        with self._lock:
+            if "#" in topic_filter or "+" in topic_filter:
+                found = False
+                for entry in self._wildcard_subscribers:
+                    f, cb_list = entry
+                    if f == topic_filter:
+                        if callback_func not in cb_list:
+                            cb_list.append(callback_func)
+                        found = True
+                        break
+                if not found:
+                    self._wildcard_subscribers.append([topic_filter, [callback_func]])
+            else:
+                if topic_filter not in self._exact_subscribers:
+                    self._exact_subscribers[topic_filter] = []
+                if callback_func not in self._exact_subscribers[topic_filter]:
+                    self._exact_subscribers[topic_filter].append(callback_func)
+            
+            # ⚡ aiomqtt Optimization: Avoid redundant broker subscriptions
+            if topic_filter.startswith(f"{self._base_topic}/") or topic_filter == self._root_topic:
+                if self._root_topic not in self._active_broker_subscriptions:
+                    self._active_broker_subscriptions.add(self._root_topic)
+                    from workers.Command_Router.mqtt.mqtt_connection import MqttConnectionManager
+                    MqttConnectionManager().subscribe(self._root_topic)
+                return
 
-        if topic_filter in self._active_broker_subscriptions:
-            return
+            if topic_filter in self._active_broker_subscriptions:
+                return
 
-        self._active_broker_subscriptions.add(topic_filter)
-        from workers.Command_Router.mqtt.mqtt_connection import MqttConnectionManager
-        MqttConnectionManager().subscribe(topic_filter)
+            self._active_broker_subscriptions.add(topic_filter)
+            from workers.Command_Router.mqtt.mqtt_connection import MqttConnectionManager
+            MqttConnectionManager().subscribe(topic_filter)
 
     def unsubscribe_from_topic(self, topic_filter: str, callback_func: Callable[[MqttMessage], None]):
         """Removes a specific callback function from a topic filter."""
         # ⚡ Invalidate cache when subscriptions change
         self._match_cache.clear()
         
-        if "#" in topic_filter or "+" in topic_filter:
-            for i, entry in enumerate(self._wildcard_subscribers):
-                f, cb_list = entry
-                if f == topic_filter:
+        with self._lock:
+            if "#" in topic_filter or "+" in topic_filter:
+                for i, entry in enumerate(self._wildcard_subscribers):
+                    f, cb_list = entry
+                    if f == topic_filter:
+                        try:
+                            cb_list.remove(callback_func)
+                            if not cb_list: 
+                                self._wildcard_subscribers.pop(i)
+                                self._active_broker_subscriptions.discard(topic_filter)
+                        except ValueError: pass
+                        break
+            else:
+                if topic_filter in self._exact_subscribers:
                     try:
-                        cb_list.remove(callback_func)
-                        if not cb_list: 
-                            self._wildcard_subscribers.pop(i)
+                        self._exact_subscribers[topic_filter].remove(callback_func)
+                        if not self._exact_subscribers[topic_filter]:
+                            del self._exact_subscribers[topic_filter]
                             self._active_broker_subscriptions.discard(topic_filter)
                     except ValueError: pass
-                    break
-        else:
-            if topic_filter in self._exact_subscribers:
-                try:
-                    self._exact_subscribers[topic_filter].remove(callback_func)
-                    if not self._exact_subscribers[topic_filter]:
-                        del self._exact_subscribers[topic_filter]
-                        self._active_broker_subscriptions.discard(topic_filter)
-                except ValueError: pass
 
     def _on_message(self, client, userdata, msg: MqttMessage):
         """
@@ -151,29 +156,30 @@ class MqttSubscriberRouter:
             from managers.yak.yak_trigger_handler import handle_yak_monitor_traffic
             handle_yak_monitor_traffic(msg)
 
-        # 2. FAST DISPATCH: Exact Topic Match (O(1))
-        if topic in self._exact_subscribers:
-            for callback_func in self._exact_subscribers[topic]:
-                callback_func(msg)
+        with self._lock:
+            # 2. FAST DISPATCH: Exact Topic Match (O(1))
+            if topic in self._exact_subscribers:
+                for callback_func in self._exact_subscribers[topic]:
+                    callback_func(msg)
 
-        # 3. PATTERN DISPATCH: Wildcard Filters with Match Caching
-        cached_callbacks = self._match_cache.get(topic)
-        if cached_callbacks is not None:
-            for callback_func in cached_callbacks:
-                callback_func(msg)
-            return
+            # 3. PATTERN DISPATCH: Wildcard Filters with Match Caching
+            cached_callbacks = self._match_cache.get_cached_callbacks(topic)
+            if cached_callbacks is not None:
+                for callback_func in cached_callbacks:
+                    callback_func(msg)
+                return
 
-        # Cache Miss: Resolve wildcards
-        matched_callbacks = []
-        for entry in self._wildcard_subscribers:
-            topic_filter, callbacks = entry
-            if mqtt.topic_matches_sub(topic_filter, topic):
-                for cb in callbacks:
-                    matched_callbacks.append(cb)
-                    cb(msg)
-        
-        # Store in cache
-        self._match_cache.set(topic, matched_callbacks)
+            # Cache Miss: Resolve wildcards
+            matched_callbacks = []
+            for entry in self._wildcard_subscribers:
+                topic_filter, callbacks = entry
+                if mqtt.topic_matches_sub(topic_filter, topic):
+                    for cb in callbacks:
+                        matched_callbacks.append(cb)
+                        cb(msg)
+            
+            # Store in cache
+            self._match_cache.cache_callbacks(topic, matched_callbacks)
 
     def get_on_message_callback(self):
         return self._on_message
@@ -182,22 +188,23 @@ class MqttSubscriberRouter:
         """
         Async resubscription. Called by MqttConnectionManager within the async context.
         """
-        self._active_broker_subscriptions.clear()
-        self._match_cache.clear()
+        with self._lock:
+            self._active_broker_subscriptions.clear()
+            self._match_cache.clear()
 
-        await client.subscribe(self._root_topic)
-        self._active_broker_subscriptions.add(self._root_topic)
-        
-        for topic_filter in self._exact_subscribers:
-            if not topic_filter.startswith(f"{self._base_topic}/"):
-                await client.subscribe(topic_filter)
-                self._active_broker_subscriptions.add(topic_filter)
-                
-        for entry in self._wildcard_subscribers:
-            topic_filter, _ = entry
-            if not topic_filter.startswith(f"{self._base_topic}/"):
-                await client.subscribe(topic_filter)
-                self._active_broker_subscriptions.add(topic_filter)
+            await client.subscribe(self._root_topic)
+            self._active_broker_subscriptions.add(self._root_topic)
+            
+            for topic_filter in self._exact_subscribers:
+                if not topic_filter.startswith(f"{self._base_topic}/"):
+                    await client.subscribe(topic_filter)
+                    self._active_broker_subscriptions.add(topic_filter)
+                    
+            for entry in self._wildcard_subscribers:
+                topic_filter, _ = entry
+                if not topic_filter.startswith(f"{self._base_topic}/"):
+                    await client.subscribe(topic_filter)
+                    self._active_broker_subscriptions.add(topic_filter)
         
         if LOCAL_DEBUG:
             logger.debug("🚀📤📥 [MQTT] aiomqtt: Resubscribed to root and "

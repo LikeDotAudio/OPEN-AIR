@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OPEN-AIR Unified Test Report</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; background: #f4f7f6; color: #333; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-top: 0; }
+        .summary-box { display: flex; gap: 20px; margin-bottom: 30px; }
+        .stat { flex: 1; padding: 20px; border-radius: 6px; text-align: center; color: white; font-weight: bold; font-size: 1.1em; }
+        .total { background: #34495e; }
+        .passed { background: #27ae60; }
+        .failed { background: #e74c3c; }
+        .errors { background: #f39c12; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }
+        th, td { border: 1px solid #eee; padding: 15px; text-align: left; vertical-align: top; overflow: hidden; word-wrap: break-word; }
+        th { background-color: #fafafa; color: #666; font-weight: 600; text-transform: uppercase; font-size: 0.85em; letter-spacing: 0.05em; }
+        tr:nth-child(even) { background-color: #fcfcfc; }
+        tr:hover { background-color: #f8f9fa; }
+        .status-passed { color: #27ae60; font-weight: bold; }
+        .status-failed { color: #e74c3c; font-weight: bold; }
+        .status-error { color: #f39c12; font-weight: bold; }
+        .description { font-size: 0.9em; color: #555; line-height: 1.4; }
+        .test-name { font-family: 'Courier New', Courier, monospace; font-size: 0.85em; color: #2980b9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OPEN-AIR Unified Test Report</h1>
+        <p style="color: #999; margin-bottom: 25px;">Generated on: <strong>2026-03-17 01:49:47</strong></p>
+        
+        <div class="summary-box">
+            <div class="stat total">Total: 35</div>
+            <div class="stat passed">Passed: 35</div>
+            <div class="stat failed">Failed: 0</div>
+            <div class="stat errors">Errors: 0</div>
+        </div>
+
+        <table>
+            <colgroup>
+                <col style="width: 25%;">
+                <col style="width: 50%;">
+                <col style="width: 12%;">
+                <col style="width: 13%;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>Test Case</th>
+                    <th>Goal & Achievement</th>
+                    <th>Status</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td class="test-name">test_create_default_config_ini (assets.Documentation.Testing.test_config.TestConfigGenerator.test_create_default_config_ini)</td>
+                    <td class="description">Test that the default config.ini is created with expected sections.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_default_values (assets.Documentation.Testing.test_config_reader.TestConfigReader.test_default_values)</td>
+                    <td class="description">Test that default values are present after initialization.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_global_settings_property (assets.Documentation.Testing.test_config_reader.TestConfigReader.test_global_settings_property)</td>
+                    <td class="description">Test the global_settings property.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton (assets.Documentation.Testing.test_config_reader.TestConfigReader.test_singleton)</td>
+                    <td class="description">Test that the Config class acts as a singleton.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_validate_configuration (assets.Documentation.Testing.test_config_validator.TestConfigValidator.test_validate_configuration)</td>
+                    <td class="description">Test that validation returns True with a dummy printer.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_batch_log_sink (assets.Documentation.Testing.test_logger.TestLogger.test_batch_log_sink)</td>
+                    <td class="description">Test that BatchLogSink writes to file in batches or on interval.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.1008s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_get_logger (assets.Documentation.Testing.test_logger.TestLogger.test_get_logger)</td>
+                    <td class="description">Test that get_logger returns a bound logger.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_mqtt_sweeper_on_message_filter (assets.Documentation.Testing.test_mqtt_logic.TestMQTTLogic.test_mqtt_sweeper_on_message_filter)</td>
+                    <td class="description">Verify on_message correctly filters for the configured base topic.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_topic_calculator_calculate (assets.Documentation.Testing.test_mqtt_logic.TestMQTTLogic.test_topic_calculator_calculate)</td>
+                    <td class="description">Validate string manipulation for dynamic MQTT topics based on UI hierarchy.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_match_cache (assets.Documentation.Testing.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_match_cache)</td>
+                    <td class="description">Test that matching results are cached.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_multiple_subscribers (assets.Documentation.Testing.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_multiple_subscribers)</td>
+                    <td class="description">Test multiple subscribers for the same topic.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_subscribe_exact_topic (assets.Documentation.Testing.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_exact_topic)</td>
+                    <td class="description">Test exact topic subscription.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_subscribe_wildcard_topic (assets.Documentation.Testing.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_wildcard_topic)</td>
+                    <td class="description">Test wildcard topic subscription.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_handle_incoming_osc (assets.Documentation.Testing.test_osc.TestOSCManager.test_handle_incoming_osc)</td>
+                    <td class="description">Test handling of incoming OSC messages.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0011s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (assets.Documentation.Testing.test_osc.TestOSCManager.test_initialization)</td>
+                    <td class="description">Test OSCManager initialization.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_monitor_callbacks (assets.Documentation.Testing.test_osc.TestOSCManager.test_monitor_callbacks)</td>
+                    <td class="description">Test that monitor callbacks are triggered.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_register_route (assets.Documentation.Testing.test_osc.TestOSCManager.test_register_route)</td>
+                    <td class="description">Test registering a route between OSC and MQTT.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialize_paths (assets.Documentation.Testing.test_path_initializer.TestPathInitializer.test_initialize_paths)</td>
+                    <td class="description">Check if required system directories are created.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_ingest_puts_to_queue (assets.Documentation.Testing.test_protocol_router.TestProtocolRouter.test_ingest_puts_to_queue)</td>
+                    <td class="description">Test that ingest puts messages into the inbound queue with the correct schema.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_router_stop_stops_threads (assets.Documentation.Testing.test_protocol_router.TestProtocolRouter.test_router_stop_stops_threads)</td>
+                    <td class="description">Test that stop() correctly resets the running flag.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0011s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton (assets.Documentation.Testing.test_protocol_router.TestProtocolRouter.test_singleton)</td>
+                    <td class="description">Test that ProtocolRouter is a singleton.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_add_monitor_callback (assets.Documentation.Testing.test_splinker.TestSplinker.test_add_monitor_callback)</td>
+                    <td class="description">Test adding a monitor callback.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (assets.Documentation.Testing.test_splinker.TestSplinker.test_initialization)</td>
+                    <td class="description">Test broker initialization.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton (assets.Documentation.Testing.test_splinker.TestSplinker.test_singleton)</td>
+                    <td class="description">Test that ControlBroker is a singleton.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_broadcast_gui_change (assets.Documentation.Testing.test_state_mirror_engine.TestStateMirrorEngine.test_broadcast_gui_change)</td>
+                    <td class="description">Test that GUI changes trigger MQTT publication.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0902s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_calculate_topic (assets.Documentation.Testing.test_state_mirror_engine.TestStateMirrorEngine.test_calculate_topic)</td>
+                    <td class="description">Test topic calculation logic.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0067s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_register_widget (assets.Documentation.Testing.test_state_mirror_engine.TestStateMirrorEngine.test_register_widget)</td>
+                    <td class="description">Test widget registration and topic binding.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0068s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_file_io_load (assets.Documentation.Testing.test_ui_and_data.TestUIAndData.test_file_io_load)</td>
+                    <td class="description">Load and parse JSON configuration files.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_layout_parser_scan (assets.Documentation.Testing.test_ui_and_data.TestUIAndData.test_layout_parser_scan)</td>
+                    <td class="description">Recursively find valid UI definition files.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_marker_logic_grouping (assets.Documentation.Testing.test_ui_and_data.TestUIAndData.test_marker_logic_grouping)</td>
+                    <td class="description">Transform a flat list of marker data into a nested Zone/Group dictionary.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_state_manager_update (assets.Documentation.Testing.test_ui_and_data.TestUIAndData.test_state_manager_update)</td>
+                    <td class="description">Validate that UI changes correctly update the master data state.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0004s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_library_error (assets.Documentation.Testing.test_visa_logic.TestVisaLogic.test_visa_library_error)</td>
+                    <td class="description">Fail: LibraryError is raised due to missing pyvisa-py.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_proxy_init_fail (assets.Documentation.Testing.test_visa_logic.TestVisaLogic.test_visa_proxy_init_fail)</td>
+                    <td class="description">Fail: Missing MQTT controller or router during initialization.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_proxy_init_success (assets.Documentation.Testing.test_visa_logic.TestVisaLogic.test_visa_proxy_init_success)</td>
+                    <td class="description">Check thread-safe command queue initialization.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0008s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_resource_lister (assets.Documentation.Testing.test_visa_logic.TestVisaLogic.test_visa_resource_lister)</td>
+                    <td class="description">Confirm the backend library loads and returns available hardware identifiers.</td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0209s</td>
+                </tr>
+            
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

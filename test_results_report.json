@@ -1,0 +1,219 @@
+{
+    "timestamp": "2026-03-17T01:44:44.941664",
+    "total": 35,
+    "passed": 35,
+    "failed": 0,
+    "errors": 0,
+    "details": [
+        {
+            "name": "test_create_default_config_ini (test_config.TestConfigGenerator.test_create_default_config_ini)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0005s"
+        },
+        {
+            "name": "test_default_values (test_config_reader.TestConfigReader.test_default_values)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0000s"
+        },
+        {
+            "name": "test_global_settings_property (test_config_reader.TestConfigReader.test_global_settings_property)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0000s"
+        },
+        {
+            "name": "test_singleton (test_config_reader.TestConfigReader.test_singleton)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0000s"
+        },
+        {
+            "name": "test_validate_configuration (test_config_validator.TestConfigValidator.test_validate_configuration)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0001s"
+        },
+        {
+            "name": "test_batch_log_sink (test_logger.TestLogger.test_batch_log_sink)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.1020s"
+        },
+        {
+            "name": "test_get_logger (test_logger.TestLogger.test_get_logger)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0001s"
+        },
+        {
+            "name": "test_mqtt_sweeper_on_message_filter (test_mqtt_logic.TestMQTTLogic.test_mqtt_sweeper_on_message_filter)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0004s"
+        },
+        {
+            "name": "test_topic_calculator_calculate (test_mqtt_logic.TestMQTTLogic.test_topic_calculator_calculate)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0000s"
+        },
+        {
+            "name": "test_match_cache (test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_match_cache)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0003s"
+        },
+        {
+            "name": "test_multiple_subscribers (test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_multiple_subscribers)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0003s"
+        },
+        {
+            "name": "test_subscribe_exact_topic (test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_exact_topic)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0001s"
+        },
+        {
+            "name": "test_subscribe_wildcard_topic (test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_wildcard_topic)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0001s"
+        },
+        {
+            "name": "test_handle_incoming_osc (test_osc.TestOSCManager.test_handle_incoming_osc)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0006s"
+        },
+        {
+            "name": "test_initialization (test_osc.TestOSCManager.test_initialization)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0002s"
+        },
+        {
+            "name": "test_monitor_callbacks (test_osc.TestOSCManager.test_monitor_callbacks)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0004s"
+        },
+        {
+            "name": "test_register_route (test_osc.TestOSCManager.test_register_route)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0002s"
+        },
+        {
+            "name": "test_initialize_paths (test_path_initializer.TestPathInitializer.test_initialize_paths)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0001s"
+        },
+        {
+            "name": "test_ingest_puts_to_queue (test_protocol_router.TestProtocolRouter.test_ingest_puts_to_queue)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0002s"
+        },
+        {
+            "name": "test_router_stop_stops_threads (test_protocol_router.TestProtocolRouter.test_router_stop_stops_threads)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0008s"
+        },
+        {
+            "name": "test_singleton (test_protocol_router.TestProtocolRouter.test_singleton)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0001s"
+        },
+        {
+            "name": "test_add_monitor_callback (test_splinker.TestSplinker.test_add_monitor_callback)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0003s"
+        },
+        {
+            "name": "test_initialization (test_splinker.TestSplinker.test_initialization)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0002s"
+        },
+        {
+            "name": "test_singleton (test_splinker.TestSplinker.test_singleton)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0001s"
+        },
+        {
+            "name": "test_broadcast_gui_change (test_state_mirror_engine.TestStateMirrorEngine.test_broadcast_gui_change)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.1015s"
+        },
+        {
+            "name": "test_calculate_topic (test_state_mirror_engine.TestStateMirrorEngine.test_calculate_topic)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0085s"
+        },
+        {
+            "name": "test_register_widget (test_state_mirror_engine.TestStateMirrorEngine.test_register_widget)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0070s"
+        },
+        {
+            "name": "test_file_io_load (test_ui_and_data.TestUIAndData.test_file_io_load)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0007s"
+        },
+        {
+            "name": "test_layout_parser_scan (test_ui_and_data.TestUIAndData.test_layout_parser_scan)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0002s"
+        },
+        {
+            "name": "test_marker_logic_grouping (test_ui_and_data.TestUIAndData.test_marker_logic_grouping)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0001s"
+        },
+        {
+            "name": "test_state_manager_update (test_ui_and_data.TestUIAndData.test_state_manager_update)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0004s"
+        },
+        {
+            "name": "test_visa_library_error (test_visa_logic.TestVisaLogic.test_visa_library_error)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0001s"
+        },
+        {
+            "name": "test_visa_proxy_init_fail (test_visa_logic.TestVisaLogic.test_visa_proxy_init_fail)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0001s"
+        },
+        {
+            "name": "test_visa_proxy_init_success (test_visa_logic.TestVisaLogic.test_visa_proxy_init_success)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0004s"
+        },
+        {
+            "name": "test_visa_resource_lister (test_visa_logic.TestVisaLogic.test_visa_resource_lister)",
+            "status": "PASS",
+            "message": "",
+            "duration": "0.0190s"
+        }
+    ]
+}

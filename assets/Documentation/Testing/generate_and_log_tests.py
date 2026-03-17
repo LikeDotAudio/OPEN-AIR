@@ -1,209 +1,200 @@
 import os
-import glob
-import subprocess
+import sys
+import unittest
+import time
+import json
 import xml.etree.ElementTree as ET
-from collections import defaultdict
 from datetime import datetime
 
-def find_test_files(test_dir='tests'):
-    """Finds all Python test files (convention: test_*.py) in the specified directory and its subdirectories."""
-    test_files = glob.glob(os.path.join(test_dir, '**', 'test_*.py'), recursive=True)
-    return test_files
+class UnifiedTestRunner:
+    def __init__(self, html_report_path, json_report_path):
+        self.html_report_path = html_report_path
+        self.json_report_path = json_report_path
+        self.test_results = []
+        self.summary = {
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "total": 0,
+            "passed": 0,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+        }
 
-def run_tests(test_files, junit_report_path='report.xml'):
-    """Runs pytest on the discovered test files and generates a JUnit XML report."""
-    if not test_files:
-        print("No test files found. Exiting.")
-        return False
+    def run(self, search_dirs, top_level_dir=None):
+        loader = unittest.TestLoader()
+        suites = []
+        for d in search_dirs:
+            if os.path.exists(d):
+                print(f"🔍 Discovering tests in: {d}")
+                try:
+                    suites.append(loader.discover(d, pattern="test_*.py", top_level_dir=top_level_dir))
+                except ImportError as e:
+                    print(f"❌ ImportError in {d}: {e}")
+        
+        full_suite = unittest.TestSuite(suites)
+        
+        class ReportingResult(unittest.TestResult):
+            def __init__(self, runner):
+                super().__init__()
+                self.runner = runner
+                self.start_times = {}
 
-    # Construct the pytest command.
-    # --junitxml generates the report, --durations=0 shows test durations.
-    # Using shell=True might be necessary if pytest is not directly in PATH,
-    # but it's generally safer to avoid if possible. For simplicity here, assume pytest is in PATH.
-    # We'll run pytest in the project root to ensure correct module discovery.
-    command = [
-        'pytest',
-        f'--junitxml={junit_report_path}',
-        '--durations=0',
-    ]
-    command.extend(test_files)
+            def startTest(self, test):
+                self.start_times[test] = time.time()
+                super().startTest(test)
 
-    print(f"Running command: {' '.join(command)}")
+            def addSuccess(self, test):
+                duration = time.time() - self.start_times.get(test, time.time())
+                self.runner._record(test, "passed", duration=duration)
+                super().addSuccess(test)
 
-    try:
-        # Execute pytest. capture_output=True to get stdout/stderr.
-        # text=True decodes stdout/stderr as strings.
-        result = subprocess.run(command, capture_output=True, text=True, check=False)
-        print(f"Pytest stdout:{result.stdout}")
-        print(f"Pytest stderr:{result.stderr}")
-        if result.returncode != 0 and result.returncode != 1: # 0=passed, 1=failed, 2=error
-            print(f"Pytest execution failed with return code {result.returncode}")
-            return False
-        return True
-    except FileNotFoundError:
-        print("Error: 'pytest' command not found. Please ensure pytest is installed and in your PATH.")
-        return False
-    except Exception as e:
-        print(f"An unexpected error occurred during test execution: {e}")
-        return False
+            def addFailure(self, test, err):
+                duration = time.time() - self.start_times.get(test, time.time())
+                self.runner._record(test, "failed", message=str(err[1]), duration=duration)
+                super().addFailure(test, err)
 
-def parse_junit_xml_report(junit_report_path):
-    """Parses the JUnit XML report to extract test results."""
-    test_results = []
-    try:
-        tree = ET.parse(junit_report_path)
-        root = tree.getroot()
-        for testsuite in root.findall('testsuite'):
-            for testcase in testsuite.findall('testcase'):
-                name = testcase.get('name')
-                classname = testcase.get('classname')
-                duration = float(testcase.get('time', 0))
-                
-                status = 'passed'
-                if testcase.find('failure') is not None:
-                    status = 'failed'
-                elif testcase.find('skipped') is not None:
-                    status = 'skipped'
-                
-                test_results.append({
-                    'classname': classname,
-                    'name': name,
-                    'status': status,
-                    'duration': f"{duration:.4f}s"
-                })
-        return test_results
-    except ET.ParseError:
-        print(f"Error parsing JUnit XML report: {junit_report_path}")
-        return None
-    except FileNotFoundError:
-        print(f"JUnit XML report not found: {junit_report_path}")
-        return None
-    except Exception as e:
-        print(f"An unexpected error occurred during report parsing: {e}")
-        return None
+            def addError(self, test, err):
+                duration = time.time() - self.start_times.get(test, time.time())
+                self.runner._record(test, "error", message=str(err[1]), duration=duration)
+                super().addError(test, err)
 
-def generate_html_report(test_results, output_path='test_report.html'):
-    """Generates a simple HTML report from the parsed test results."""
-    if test_results is None:
-        print("No test results to generate HTML report.")
-        return
+            def addSkip(self, test, reason):
+                duration = time.time() - self.start_times.get(test, time.time())
+                self.runner._record(test, "skipped", message=reason, duration=duration)
+                super().addSkip(test, reason)
 
-    # Basic HTML template
-    html_template = """
+        result = ReportingResult(self)
+        full_suite.run(result)
+        self._generate_reports()
+
+    def _record(self, test, status, message="", duration=0):
+        self.summary["total"] += 1
+        if status == "passed": self.summary["passed"] += 1
+        elif status == "failed": self.summary["failed"] += 1
+        elif status == "error": self.summary["errors"] += 1
+        elif status == "skipped": self.summary["skipped"] += 1
+
+        # ⚡ EXTRACTION: Get the docstring to use as "Goal & Achievement"
+        description = getattr(test, "_testMethodDoc", "") or "No description provided."
+        description = description.strip().replace("\n", "<br>")
+
+        self.test_results.append({
+            "classname": test.__class__.__name__,
+            "name": str(test),
+            "status": status,
+            "message": message,
+            "description": description,
+            "duration": f"{duration:.4f}s"
+        })
+
+    def _generate_reports(self):
+        # 1. JSON Report
+        with open(self.json_report_path, "w") as f:
+            json.dump({"summary": self.summary, "details": self.test_results}, f, indent=4)
+        
+        # 2. HTML Report
+        html_template = """
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test Execution Report</title>
+    <title>OPEN-AIR Unified Test Report</title>
     <style>
-        body {{ font-family: Arial, sans-serif; margin: 20px; }}
-        h1 {{ color: #333; }}
-        table {{ width: 100%; border-collapse: collapse; margin-top: 20px; }}
-        th, td {{ border: 1px solid #ddd; padding: 10px; text-align: left; }}
-        th {{ background-color: #f2f2f2; }}
-        .passed {{ color: green; font-weight: bold; }}
-        .failed {{ color: red; font-weight: bold; }}
-        .skipped {{ color: orange; }}
-        .summary {{ margin-top: 20px; font-style: italic; }}
+        body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; background: #f4f7f6; color: #333; }}
+        .container {{ max-width: 1200px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }}
+        h1 {{ color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-top: 0; }}
+        .summary-box {{ display: flex; gap: 20px; margin-bottom: 30px; }}
+        .stat {{ flex: 1; padding: 20px; border-radius: 6px; text-align: center; color: white; font-weight: bold; font-size: 1.1em; }}
+        .total {{ background: #34495e; }}
+        .passed {{ background: #27ae60; }}
+        .failed {{ background: #e74c3c; }}
+        .errors {{ background: #f39c12; }}
+        table {{ width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }}
+        th, td {{ border: 1px solid #eee; padding: 15px; text-align: left; vertical-align: top; overflow: hidden; word-wrap: break-word; }}
+        th {{ background-color: #fafafa; color: #666; font-weight: 600; text-transform: uppercase; font-size: 0.85em; letter-spacing: 0.05em; }}
+        tr:nth-child(even) {{ background-color: #fcfcfc; }}
+        tr:hover {{ background-color: #f8f9fa; }}
+        .status-passed {{ color: #27ae60; font-weight: bold; }}
+        .status-failed {{ color: #e74c3c; font-weight: bold; }}
+        .status-error {{ color: #f39c12; font-weight: bold; }}
+        .description {{ font-size: 0.9em; color: #555; line-height: 1.4; }}
+        .test-name {{ font-family: 'Courier New', Courier, monospace; font-size: 0.85em; color: #2980b9; }}
     </style>
 </head>
 <body>
-    <h1>Test Execution Report</h1>
-    <p class="summary">Generated on: {generation_time}</p>
-    <p class="summary">Total Tests Found: {total_tests}</p>
-    <p class="summary">Passed: {passed_tests}</p>
-    <p class="summary">Failed: {failed_tests}</p>
-    <p class="summary">Skipped: {skipped_tests}</p>
+    <div class="container">
+        <h1>OPEN-AIR Unified Test Report</h1>
+        <p style="color: #999; margin-bottom: 25px;">Generated on: <strong>{timestamp}</strong></p>
+        
+        <div class="summary-box">
+            <div class="stat total">Total: {total}</div>
+            <div class="stat passed">Passed: {passed}</div>
+            <div class="stat failed">Failed: {failed}</div>
+            <div class="stat errors">Errors: {errors}</div>
+        </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Class Name</th>
-                <th>Test Name</th>
-                <th>Status</th>
-                <th>Duration</th>
-            </tr>
-        </thead>
-        <tbody>
-            {table_rows}
-        </tbody>
-    </table>
+        <table>
+            <colgroup>
+                <col style="width: 25%;">
+                <col style="width: 50%;">
+                <col style="width: 12%;">
+                <col style="width: 13%;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>Test Case</th>
+                    <th>Goal & Achievement</th>
+                    <th>Status</th>
+                    <th>Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                {table_rows}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
 """
+        table_rows = []
+        for r in self.test_results:
+            row = f"""
+                <tr>
+                    <td class="test-name">{r['name']}</td>
+                    <td class="description">{r['description']}</td>
+                    <td class="status-{r['status']}">{r['status'].capitalize()}</td>
+                    <td>{r['duration']}</td>
+                </tr>
+            """
+            table_rows.append(row)
 
-    table_rows = []
-    passed_count = 0
-    failed_count = 0
-    skipped_count = 0
-
-    for result in test_results:
-        status_class = result['status']
-        if status_class == 'passed':
-            passed_count += 1
-        elif status_class == 'failed':
-            failed_count += 1
-        elif status_class == 'skipped':
-            skipped_count += 1
-            
-        table_rows.append(f"""
-            <tr>
-                <td>{result['classname']}</td>
-                <td>{result['name']}</td>
-                <td class="{status_class}">{result['status'].capitalize()}</td>
-                <td>{result['duration']}</td>
-            </tr>
-        """)
-
-    generation_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    total_tests = len(test_results)
-
-    html_content = html_template.format(
-        generation_time=generation_time,
-        total_tests=total_tests,
-        passed_tests=passed_count,
-        failed_tests=failed_count,
-        skipped_tests=skipped_count,
-        table_rows="".join(table_rows)
-    )
-
-    try:
-        with open(output_path, 'w') as f:
+        html_content = html_template.format(
+            timestamp=self.summary["timestamp"],
+            total=self.summary["total"],
+            passed=self.summary["passed"],
+            failed=self.summary["failed"],
+            errors=self.summary["errors"],
+            table_rows="".join(table_rows)
+        )
+        
+        with open(self.html_report_path, "w") as f:
             f.write(html_content)
-        print(f"HTML report generated successfully at: {output_path}")
-    except IOError as e:
-        print(f"Error writing HTML report to {output_path}: {e}")
+        
+        print(f"\n✅ Reports generated:")
+        print(f"   - JSON: {self.json_report_path}")
+        print(f"   - HTML: {self.html_report_path}")
 
 def main():
-    project_root = os.getcwd() # Assuming the script is run from the project root
-    test_discovery_dir = os.path.join(project_root, 'tests') # Default test directory
-    junit_report_path = os.path.join(project_root, 'report.xml') # Temporary JUnit report
-    html_report_path = os.path.join(project_root, 'assets', 'Documentation', 'Testing', 'test_execution_report.html')
-
-    # Ensure the output directory for HTML report exists
-    os.makedirs(os.path.dirname(html_report_path), exist_ok=True)
-
-    print(f"Discovering test files in: {test_discovery_dir}")
-    test_files = find_test_files(test_discovery_dir)
-
-    if run_tests(test_files, junit_report_path):
-        print(f"Parsing JUnit XML report: {junit_report_path}")
-        test_results = parse_junit_xml_report(junit_report_path)
-        if test_results:
-            generate_html_report(test_results, html_report_path)
-        else:
-            print("Failed to parse test results.")
-    else:
-        print("Test execution encountered errors or no tests were found/run.")
-        # Optionally, create a minimal report indicating failure to run tests
-        generate_html_report(None, html_report_path) # Pass None to indicate no results
-
-    # Clean up the temporary JUnit XML report
-    if os.path.exists(junit_report_path):
-        try:
-            os.remove(junit_report_path)
-            print(f"Cleaned up temporary report: {junit_report_path}")
-        except OSError as e:
-            print(f"Error removing temporary report {junit_report_path}: {e}")
+    project_root = os.getcwd()
+    sys.path.insert(0, project_root)
+    
+    html_path = os.path.join(project_root, 'assets', 'Documentation', 'Testing', 'test_execution_report.html')
+    json_path = os.path.join(project_root, 'assets', 'Documentation', 'Testing', 'test_results_report.json')
+    
+    runner = UnifiedTestRunner(html_path, json_path)
+    runner.run([
+        os.path.join(project_root, 'tests'),
+        os.path.join(project_root, 'assets', 'Documentation', 'Testing')
+    ], top_level_dir=project_root)
 
 if __name__ == "__main__":
     main()

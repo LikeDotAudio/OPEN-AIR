@@ -1,4 +1,4 @@
-# active/XXX worker_active_marker_tune_and_collect.py
+# active/active_marker_tune_and_collect.py
 #
 # Modularized Marker Go-Getter Worker.
 # Version 20260315.Modular.1

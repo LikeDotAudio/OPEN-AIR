@@ -119,8 +119,8 @@ Workers are active background processes for data acquisition and system monitori
      ├----> [worker_showtime_read](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/Showtime/showtime_read.md) — *Worker Showtime Read*<br>
      ├----> [worker_showtime_tune](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/Showtime/showtime_tune.md) — *Worker Showtime Tune*<br>
 ├-----**active/**<br>
-     ├----> [XXX worker_active_marker_tune_and_collect](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/active/XXX%20worker_active_marker_tune_and_collect.md) — *Xxx Worker Active Marker Tune And Collect*<br>
-     ├----> [XXX-worker_active_peak_publisher](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/active/active_peak_publisher.md) — *Xxx-Worker Active Peak Publisher*<br>
+     ├----> [worker_active_marker_tune_and_collect](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/active/active_marker_tune_and_collect.md) — *Worker Active Marker Tune And Collect*<br>
+     ├----> [worker_active_peak_publisher](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/active/active_peak_publisher.md) — *Worker Active Peak Publisher*<br>
 ├-----**builder/**<br>
      ├----> **break_line/**<br>
         |   -> [hidden_BreakLine](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/break_line/hidden_BreakLine.md) — *Hidden Breakline*<br>
@@ -324,13 +324,13 @@ Workers are active background processes for data acquisition and system monitori
 ├-----**logic/**<br>
      ├----> [state_mirror_engine](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/logic/state_mirror_engine.md) — *State Mirror Engine*<br>
 ├-----**markers/**<br>
-     ├----> [XXXX worker_marker_peak_re_publisher](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/markers/XXXX%20worker_marker_peak_re_publisher.md) — *Xxxx Worker Marker Peak Re Publisher*<br>
+     ├----> [worker_marker_peak_re_publisher](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/markers/marker_peak_re_publisher.md) — *Worker Marker Peak Re Publisher*<br>
      ├----> [worker_marker_logic](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/markers/marker_logic.md) — *Worker Marker Logic*<br>
 ├-----**monitoring/**<br>
      ├----> [fleet_status_monitor](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/monitoring/fleet_status_monitor.md) — *Fleet Status Monitor*<br>
 ├-----**presets/**<br>
-     ├----> [XXX worker_preset_pusher](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/presets/XXX%20worker_preset_pusher.md) — *Xxx Worker Preset Pusher*<br>
-     ├----> [XXXworker_preset_from_device](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/presets/preset_from_device.md) — *Xxxworker Preset From Device*<br>
+     ├----> [worker_preset_pusher](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/presets/preset_pusher.md) — *Worker Preset Pusher*<br>
+     ├----> [worker_preset_from_device](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/presets/preset_from_device.md) — *Worker Preset From Device*<br>
 ├-----**splash_screen/**<br>
      ├----> [lyrics_data](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/splash_screen/lyrics.md) — *Lyrics Data*<br>
      ├----> [makegif](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/splash_screen/makegif.md) — *Makegif*<br>

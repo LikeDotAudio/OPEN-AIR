@@ -92,8 +92,8 @@ class BlueprintLoader:
         with open(json_filepath, "r") as f:
             raw_content = f.read()
 
-        # Generate MD5 hash for rapid change detection.
-        current_hash = hashlib.md5(raw_content.encode("utf-8")).hexdigest()
+        # Generate SHA256 hash for rapid change detection (Satisfies security audit).
+        current_hash = hashlib.sha256(raw_content.encode("utf-8")).hexdigest()
         if last_hash == current_hash:
             return None, current_hash, False
 

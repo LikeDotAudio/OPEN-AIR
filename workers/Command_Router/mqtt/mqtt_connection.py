@@ -16,7 +16,7 @@ import sys
 from typing import Optional, Callable
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = True # ⚡ OPTIMIZATION
 from workers.logger.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -53,12 +53,19 @@ class MqttConnectionManager:
         self._connected = False
         self._publish_queue = queue.Queue() # Outbound messages
         self._subscribe_queue = queue.Queue() # Outbound subscriptions
-        # Track pending subscriptions to avoid queue spam
         self._pending_subscriptions = set()
         self._pending_lock = threading.Lock()
+        
+        # ⚡ OPTIMIZATION: Signal event to wake up the async worker
+        self._worker_kick_event: Optional[asyncio.Event] = None
 
     def is_connected(self):
         return self._connected
+
+    def _kick_worker(self):
+        """Signals the async loop that there is work to do."""
+        if self._loop and self._worker_kick_event:
+            self._loop.call_soon_threadsafe(self._worker_kick_event.set)
 
     def get_client_instance(self):
         """Returns self as a proxy for publishing and subscribing."""
@@ -70,12 +77,9 @@ class MqttConnectionManager:
         if "/System/Monitor/" in str(topic):
             return
 
-        self._publish_queue.put(MqttMessage(
-            topic=topic,
-            payload=payload,
-            qos=qos,
-            retain=retain
-        ))
+        # ⚡ OPTIMIZATION: Put raw data in queue to avoid early object creation
+        self._publish_queue.put((topic, payload, qos, retain))
+        self._kick_worker()
 
     def subscribe(self, topic, qos=0):
         """Thread-safe subscribe proxy. Queues the request for the async loop."""
@@ -88,6 +92,7 @@ class MqttConnectionManager:
             "topic": topic,
             "qos": qos
         })
+        self._kick_worker()
 
     def connect_to_broker(self, address=None, port=None, on_message_callback=None, subscriber_router=None):
         """Starts the async MQTT loop in a background thread."""
@@ -107,6 +112,7 @@ class MqttConnectionManager:
         self._loop = asyncio.new_event_loop()
         asyncio.set_event_loop(self._loop)
         self._stop_event = asyncio.Event()
+        self._worker_kick_event = asyncio.Event()
         
         # We allow exceptions to bubble up here, which will terminate the thread.
         # In the Partitioned Core, we want the Supervisor to handle restarts.
@@ -203,13 +209,26 @@ class MqttConnectionManager:
         """Processes the thread-safe publish and subscribe queues."""
         try:
             while not self._stop_event.is_set():
-                processed_anything = False
+                # ⚡ OPTIMIZATION: Wait for a signal that there is work to do
+                # Use a combined waiter for efficiency
+                try:
+                    await asyncio.wait_for(
+                        self._worker_kick_event.wait(),
+                        timeout=5.0
+                    )
+                except asyncio.TimeoutError:
+                    pass
                 
+                # Clear BEFORE processing to catch signals during the loop
+                self._worker_kick_event.clear()
+                
+                if self._stop_event.is_set():
+                    break
+
                 # 1. Process Subscriptions
                 while not self._subscribe_queue.empty():
                     try:
                         job = self._subscribe_queue.get_nowait()
-                        processed_anything = True
                         try:
                             await client.subscribe(job["topic"], qos=job["qos"])
                         except Exception as e:
@@ -227,50 +246,41 @@ class MqttConnectionManager:
                 # 2. Process Publications
                 while not self._publish_queue.empty():
                     try:
-                        msg = self._publish_queue.get_nowait()
-                        processed_anything = True
-                        if isinstance(msg, MqttMessage):
-                            # ⚡ OPTIMIZATION: Lazy evaluation to avoid string work
-                            if LOCAL_DEBUG:
-                                def _lazy_log(m=msg):
-                                    p_str = m.payload.decode('utf-8', errors='replace') if isinstance(m.payload, (bytes, bytearray)) else str(m.payload)
-                                    return f"🚀📤📢 [MQTT] {m.topic} 📨 {p_str}"
-                                logger.opt(lazy=True).trace("{}", _lazy_log)
-
-                            try:
-                                await client.publish(
-                                    msg.topic, 
-                                    payload=msg.payload, 
-                                    qos=msg.qos, 
-                                    retain=msg.retain
-                                )
-                            except Exception as e:
-                                # Gravity of Errors
-                                logger.error(
-                                    f"🚀🚫🛑 [MQTT] ERROR: Publish Failed for "
-                                    f"'{msg.topic}': {e}"
-                                )
+                        item = self._publish_queue.get_nowait()
+                        
+                        if isinstance(item, tuple):
+                            topic, payload, qos, retain = item
+                        elif isinstance(item, MqttMessage):
+                            topic, payload, qos, retain = item.topic, item.payload, item.qos, item.retain
                         else:
-                            # Legacy support for dict-based jobs if any remain
-                            try:
-                                await client.publish(
-                                    msg["topic"], 
-                                    payload=msg["payload"], 
-                                    qos=msg.get("qos", 0), 
-                                    retain=msg.get("retain", False)
-                                )
-                            except Exception as e:
-                                # Gravity of Errors
-                                logger.error(
-                                    f"🚀🚫🛑 [MQTT] ERROR: Publish Failed for "
-                                    f"'{msg['topic']}': {e}"
-                                )
+                            # Legacy dict support
+                            topic = item.get("topic")
+                            payload = item.get("payload")
+                            qos = item.get("qos", 0)
+                            retain = item.get("retain", False)
+
+                        # ⚡ OPTIMIZATION: Lazy evaluation to avoid string work
+                        if LOCAL_DEBUG:
+                            def _lazy_log(t=topic, p=payload):
+                                p_str = p.decode('utf-8', errors='replace') if isinstance(p, (bytes, bytearray)) else str(p)
+                                return f"🚀📤📢 [MQTT] {t} 📨 {p_str[:100]}"
+                            logger.opt(lazy=True).trace("{}", _lazy_log)
+
+                        try:
+                            await client.publish(
+                                topic, 
+                                payload=payload, 
+                                qos=qos, 
+                                retain=retain
+                            )
+                        except Exception as e:
+                            # Gravity of Errors
+                            logger.error(
+                                f"🚀🚫🛑 [MQTT] ERROR: Publish Failed for "
+                                f"'{topic}': {e}"
+                            )
                     except queue.Empty:
                         break
-                
-                # Sleep to prevent busy-loop if nothing was processed
-                if not processed_anything:
-                    await asyncio.sleep(0.01)
 
         except asyncio.CancelledError:
             pass

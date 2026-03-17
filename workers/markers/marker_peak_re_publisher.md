@@ -1,11 +1,11 @@
-# 🏷️ Xxxx Worker Marker Peak Re Publisher
+# 🏷️ Worker Marker Peak Re Publisher
 
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Documentation](https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen)
 
 ## 📖 Description & Purpose
 ### File Level
-markers/XXXX worker_marker_peak_re_publisher.py
+markers/marker_peak_re_publisher.py
 
 This worker listens to the immediate output of the NAB marker command
 (Marker_1/value, etc.)

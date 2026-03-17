@@ -166,7 +166,8 @@ def main():
         # Check Core partition liveness.
         if p_core.poll() is not None:
             if is_mission_critical and not shutdown_requested[0]:
-                log(f"❌ Core died (Code {p_core.returncode}). Restarting...")
+                log(f"❌ Core died (Code {p_core.returncode}). Restarting in 1s...")
+                time.sleep(1.0) # ⚡ OPTIMIZATION: Throttled restart backoff
                 p_core = subprocess.Popen([python_executable, core_script], 
                                             env=core_env)
                 processes[0] = p_core
@@ -177,7 +178,8 @@ def main():
         # Check UI partition liveness.
         if p_ui.poll() is not None:
             if is_mission_critical and not shutdown_requested[0]:
-                log(f"⚠️ UI exited (Code {p_ui.returncode}). Restarting...")
+                log(f"⚠️ UI exited (Code {p_ui.returncode}). Restarting in 1s...")
+                time.sleep(1.0) # ⚡ OPTIMIZATION: Throttled restart backoff
                 p_ui = subprocess.Popen([python_executable, ui_script], 
                                             env=ui_env)
                 processes[1] = p_ui

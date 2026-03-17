@@ -1,11 +1,11 @@
-# 🏷️ Xxx Worker Active Marker Tune And Collect
+# 🏷️ Active Marker Tune And Collect
 
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Documentation](https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen)
 
 ## 📖 Description & Purpose
 ### File Level
-active/XXX worker_active_marker_tune_and_collect.py
+active/active_marker_tune_and_collect.py
 
 This worker listens for a start command and then continuously loops through all
 markers from the repository, gets their peak values from the instrument, and

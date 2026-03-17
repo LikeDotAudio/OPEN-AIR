@@ -1,11 +1,11 @@
-# 🏷️ Xxxworker Preset From Device
+# 🏷️ Preset From Device
 
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Documentation](https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen)
 
 ## 📖 Description & Purpose
 ### File Level
-presets/XXXworker_preset_from_device.py
+presets/preset_from_device.py
 
 A worker module to handle the logic for querying, parsing, and presenting
 presets stored on the connected instrument via MQTT.

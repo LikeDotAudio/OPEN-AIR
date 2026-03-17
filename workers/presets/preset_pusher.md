@@ -1,11 +1,11 @@
-# 🏷️ Xxx Worker Preset Pusher
+# 🏷️ Preset Pusher
 
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Documentation](https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen)
 
 ## 📖 Description & Purpose
 ### File Level
-presets/XXX worker_preset_pusher.py
+presets/preset_pusher.py
 
 A worker module to process a selected preset and push the corresponding
 SCPI commands via MQTT to configure the instrument.

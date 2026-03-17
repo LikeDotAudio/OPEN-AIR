@@ -1,11 +1,11 @@
-# 🏷️ Xxx Worker Mqtt Data Flattening
+# 🏷️ Mqtt Flattening
 
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Documentation](https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen)
 
 ## 📖 Description & Purpose
 ### File Level
-mqtt/XXX worker_mqtt_data_flattening.py
+mqtt/mqtt_flattening.py
 
 A utility module to process and flatten nested MQTT payloads into a format
 suitable for display in a flat table or export to CSV. It buffers incoming

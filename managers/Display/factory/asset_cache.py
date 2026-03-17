@@ -52,7 +52,8 @@ class AssetCacheManager:
         # Convert config to a stable JSON string for hashing
         config_json = orjson.dumps(config, option=orjson.OPT_SORT_KEYS)
         hash_input = f"{key_prefix}_{width}x{height}_{config_json.decode()}"
-        return hashlib.md5(hash_input.encode()).hexdigest()
+        # Using SHA256 for better collision resistance and to satisfy security audits.
+        return hashlib.sha256(hash_input.encode()).hexdigest()
 
     @classmethod
     def load_from_cache(cls, key_prefix, width, height, config):

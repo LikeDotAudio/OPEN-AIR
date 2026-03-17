@@ -27,10 +27,6 @@ class TestMousewheelScrollMixin(unittest.TestCase):
         path_with_forwardslash = path_with_backslash.replace("\\", "/")
         self.assertEqual(path_with_forwardslash, "workers/builder/input_mousewheel_mixin/mousewheel_mixin.py")
 
-        # Faulty replacement - this will raise a SyntaxError if uncommented
-        # with self.assertRaises(SyntaxError):
-        #     exec('path_with_backslash.replace("\", "/")')
-
 if __name__ == '__main__':
     unittest.main()
 

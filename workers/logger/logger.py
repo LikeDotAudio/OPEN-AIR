@@ -38,18 +38,71 @@ Constraints:
 
 import sys
 import os
+import threading
+import time
+from collections import deque
 from loguru import logger
 from datetime import datetime
 from workers.Showtime.ptp_time import get_ptp_time
 
 # LOCAL_DEBUG: Toggles internal diagnostics for the logging system.
-LOCAL_DEBUG = True
+LOCAL_DEBUG = True # ⚡ OPTIMIZATION: Disable for performance
 
 # --- Global State and Caches ---
-# These variables cache expensive lookups to ensure negligible overhead.
 _config_instance_cache = None
 _last_ptp_second = -1
 _cached_hhmmss = ""
+
+class BatchLogSink:
+    """
+    ⚡ HIGH PERFORMANCE SINK: Caches logs in memory and writes in batches.
+    Reduces I/O overhead and lock contention on the hot path.
+    """
+    def __init__(self, file_path, format_str, batch_size=250, interval=5):
+        self.file_path = file_path
+        self.format_str = format_str
+        self.batch_size = batch_size
+        self.interval = interval
+        self.buffer = deque()
+        self._lock = threading.RLock() # ⚡ FIX: Use RLock to prevent deadlock on flush
+        self._is_running = True
+        
+        # Start the background flusher thread.
+        self._flush_thread = threading.Thread(target=self._flush_loop, daemon=True, name="LogBatchFlusher")
+        self._flush_thread.start()
+
+    def write(self, message):
+        """Standard Loguru sink write method."""
+        with self._lock:
+            self.buffer.append(message)
+            if len(self.buffer) >= self.batch_size:
+                self._trigger_flush()
+
+    def _trigger_flush(self):
+        """Internal helper to write the buffer to disk."""
+        if not self.buffer:
+            return
+            
+        # Swap buffer to minimize lock time
+        with self._lock:
+            lines_to_write = list(self.buffer)
+            self.buffer.clear()
+            
+        try:
+            with open(self.file_path, "a", encoding="utf-8") as f:
+                f.writelines(lines_to_write)
+        except Exception as e:
+            print(f"CRITICAL: Log batch write failed: {e}", file=sys.stderr)
+
+    def _flush_loop(self):
+        """Background thread to ensure logs are flushed periodically."""
+        while self._is_running:
+            time.sleep(self.interval)
+            self._trigger_flush()
+
+    def stop(self):
+        self._is_running = False
+        self._trigger_flush()
 
 def _get_cached_config():
     """
@@ -152,12 +205,13 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
     )
 
     # 1. --- Console Sink ---
+    # Console output is direct to minimize queue overhead.
     console_level = "TRACE" if debug_enabled else "INFO"
     logger.add(
         sys.stderr, 
         format=log_format, 
         level=console_level,
-        enqueue=True,
+        enqueue=False, # ⚡ OPTIMIZATION: Direct write to stderr
         filter=lambda record: record["extra"].get("category") != "QUARANTINE",
         diagnose=False
     )
@@ -170,21 +224,22 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
         os.makedirs(log_dir, exist_ok=True)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M")
         
-        # Primary Application Log (Rotating).
-        file_level = "DEBUG" if debug_enabled else "INFO"
+        # Primary Application Log (⚡ HIGH PERFORMANCE BATCHING).
+        file_level = "TRACE" if debug_enabled else "INFO"
+        app_log_path = os.path.join(log_dir, f"Application_{timestamp}.log")
         logger.add(
-            os.path.join(log_dir, f"Application_{timestamp}.log"),
-            format=file_format, level=file_level, enqueue=True,
-            rotation="20 MB", retention="1 month",
+            BatchLogSink(app_log_path, format_str=file_format, batch_size=50, interval=2),
+            format=file_format, level=file_level,
             filter=lambda record: record["extra"].get("category") != "QUARANTINE",
-            backtrace=True, diagnose=False
+            backtrace=True, diagnose=True
         )
 
-        # Isolated Error Log (High Severity).
+        # Isolated Error Log (⚡ HIGH PERFORMANCE BATCHING).
+        error_log_path = os.path.join(log_dir, f"errors_{timestamp}.log")
         logger.add(
-            os.path.join(log_dir, f"errors_{timestamp}.log"),
+            BatchLogSink(error_log_path, format_str=file_format, batch_size=10, interval=2),
             format=file_format, level="WARNING", backtrace=True,
-            diagnose=True, enqueue=True, rotation="10 MB"
+            diagnose=True
         )
 
     except Exception as e:

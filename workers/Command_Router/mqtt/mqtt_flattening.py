@@ -1,4 +1,4 @@
-# mqtt/XXX worker_mqtt_data_flattening.py
+# mqtt/mqtt_flattening.py
 #
 # A utility module to process and flatten nested MQTT payloads into a format
 # suitable for display in a flat table or export to CSV. It buffers incoming

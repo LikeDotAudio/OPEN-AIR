@@ -1,11 +1,11 @@
-# 🏷️ Xxx-Worker Active Peak Publisher
+# 🏷️ Active Peak Publisher
 
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Documentation](https://img.shields.io/badge/docs-GNU%2FLinux_Standard-brightgreen)
 
 ## 📖 Description & Purpose
 ### File Level
-active/XXX-worker_active_peak_publisher.py
+active/active_peak_publisher.py
 
 A worker module that listens for marker frequency and amplitude outputs from the
 YAK repository and republishes the data to a new, deeply hierarchical topic

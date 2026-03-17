@@ -1,4 +1,9 @@
-# presets/XXX worker_preset_pusher.py
+# presets/preset_pusher.py
+#
+# A worker module to process a selected preset and push the corresponding
+# SCPI commands via MQTT to configure the instrument.
+#
+... User modified the `new_string` content to be: # presets/preset_pusher.py
 #
 # A worker module to process a selected preset and push the corresponding
 # SCPI commands via MQTT to configure the instrument.

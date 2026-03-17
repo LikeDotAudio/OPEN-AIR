@@ -9,7 +9,7 @@ import orjson
 import shutil
 import datetime
 from pathlib import Path
-from .state import state
+from .state import state_manager
 from workers.logger.logger import initialize_logging, set_log_directory
 from loguru import logger
 

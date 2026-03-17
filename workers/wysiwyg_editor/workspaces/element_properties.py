@@ -5,7 +5,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from ..core.event_bus import event_bus
-from ..core.state import state
+from ..core.state import state_manager
 from ..grab_bag.grab_bag_loader import GrabBagLoader
 from loguru import logger
 

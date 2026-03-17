@@ -1,5 +1,12 @@
 # OPEN-AIR Changelog
 
+## [2026.03.17] - 01:25
+### WYSIWYG Editor Fixes
+- Resolved `ImportError`: Renamed `state` to `state_manager` and updated all 16 module files to use the correct singleton export.
+- Resolved `ModuleNotFoundError`: Corrected relative import depths across `wysiwyg_editor/workspaces/core/` and `layout_overlays/` to align with the modular package structure.
+- Refactored `run.py` to `run_builder.py` for standalone process consistency.
+- Updated `context_menu.py` with file-existence checks and un-gated error logging for better forensic traceability.
+
 ## [2026.03.17] - 01:15
 ### Security & Cleanup
 - Refactored all `xxx_Commands` directories to `_Legacy_Commands` and updated system-wide path references.

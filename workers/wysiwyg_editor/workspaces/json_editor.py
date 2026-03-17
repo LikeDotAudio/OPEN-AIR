@@ -10,7 +10,7 @@ from tkinter import ttk
 import orjson
 import re
 from ..core.event_bus import event_bus
-from ..core.state import state
+from ..core.state import state_manager
 from workers.logger.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -110,7 +110,7 @@ class JsonEditor(tk.Frame):
             self._apply_highlight()
 
     def _apply_changes(self):
-        """Parses the text and updates the master state."""
+        """Parses the text and updates the master state_manager."""
         if LOCAL_DEBUG: logger.info("📝 JsonEditor: 'Apply Changes' manual trigger.")
         try:
             raw_text = self.text_area.get("1.0", "end-1c")
@@ -130,7 +130,7 @@ class JsonEditor(tk.Frame):
             formatted = orjson.dumps(data, option=orjson.OPT_INDENT_2).decode()
             self.text_area.delete("1.0", "end")
             self.text_area.insert("1.0", formatted)
-            if LOCAL_DEBUG: logger.debug("📝 JsonEditor: JSON beautified. Applying highlights and syncing state...")
+            if LOCAL_DEBUG: logger.debug("📝 JsonEditor: JSON beautified. Applying highlights and syncing state_manager...")
             self._apply_highlight()
             self._apply_changes()
         except Exception as e:

@@ -43,7 +43,7 @@ class BuilderContextMenuMixin:
         import sys
         
         if not hasattr(self, 'json_filepath') or not self.json_filepath:
-            if LOCAL_DEBUG: builder_logger.error("🏗️🚫🛑 [BUILDER] DynamicGuiBuilder: Cannot launch editor without a valid JSON file path.")
+            builder_logger.error("🏗️🚫🛑 [BUILDER] DynamicGuiBuilder: Cannot launch editor without a valid JSON file path.")
             return
 
         # ⚡ SINGLETON CHECK: Verify if an editor process is already running
@@ -61,7 +61,7 @@ class BuilderContextMenuMixin:
                         BuilderContextMenuMixin._editor_process.terminate()
                         BuilderContextMenuMixin._editor_process.wait(timeout=1.0)
                     except Exception as e:
-                        if LOCAL_DEBUG: builder_logger.warning(f"🏗️🚫⚠️ [BUILDER] Failed to gracefully close previous editor: {e}")
+                        builder_logger.warning(f"🏗️🚫⚠️ [BUILDER] Failed to gracefully close previous editor: {e}")
                         BuilderContextMenuMixin._editor_process.kill()
             
             # Clear state for a fresh spawn
@@ -73,6 +73,11 @@ class BuilderContextMenuMixin:
         # Path to the standalone runner
         runner_path = Path(__file__).resolve().parent.parent.parent / "wysiwyg_editor" / "run_builder.py"
         
+        # ⚡ GRAVITY OF ERRORS: Explicit check before spawning
+        if not runner_path.exists():
+            builder_logger.error(f"🏗️🚫🛑 [BUILDER] CRITICAL: Standalone runner not found at {runner_path}")
+            return
+
         try:
             # Launch as a separate process and track it globally
             BuilderContextMenuMixin._editor_process = subprocess.Popen([
@@ -84,7 +89,8 @@ class BuilderContextMenuMixin:
             
             if LOCAL_DEBUG: builder_logger.success("🏗️🆗✅ [BUILDER] DynamicGuiBuilder: Standalone process spawned successfully.")
         except Exception as e:
-            if LOCAL_DEBUG: builder_logger.exception("🏗️🚫🛑 [ERROR] DynamicGuiBuilder Error: Failed to launch standalone editor")
+            # ⚡ GRAVITY OF ERRORS: Log regardless of LOCAL_DEBUG
+            builder_logger.exception("🏗️🚫🛑 [ERROR] DynamicGuiBuilder Error: Failed to launch standalone editor")
             BuilderContextMenuMixin._editor_process = None
             BuilderContextMenuMixin._editor_file = None
 
@@ -94,7 +100,7 @@ class BuilderContextMenuMixin:
         setup_path = GLOBAL_PROJECT_ROOT / "Installation" / "Setup.py"
         
         if not setup_path.exists():
-            if LOCAL_DEBUG: builder_logger.error(f"🏗️🚫🛑 [BUILDER] Setup script not found at {setup_path}")
+            builder_logger.error(f"🏗️🚫🛑 [BUILDER] Setup script not found at {setup_path}")
             return
 
         if LOCAL_DEBUG: builder_logger.info("🏗️🚀📦 [BUILDER] Launching Installation/Setup.py...")
@@ -107,6 +113,6 @@ class BuilderContextMenuMixin:
             if result.returncode == 0:
                 if LOCAL_DEBUG: builder_logger.success("🏗️🆗✅ [BUILDER] Dependency check/Setup completed successfully.")
             else:
-                if LOCAL_DEBUG: builder_logger.error(f"🏗️🚫🛑 [BUILDER] Setup failed with exit code {result.returncode}")
+                builder_logger.error(f"🏗️🚫🛑 [BUILDER] Setup failed with exit code {result.returncode}")
         except Exception as e:
-            if LOCAL_DEBUG: builder_logger.exception("🏗️🚫🛑 [ERROR] DynamicGuiBuilder: Failed to launch setup script")
+            builder_logger.exception("🏗️🚫🛑 [ERROR] DynamicGuiBuilder: Failed to launch setup script")

@@ -10,7 +10,7 @@ from loguru import logger
 LOCAL_DEBUG = True
 
 from ..core.event_bus import event_bus
-from ..core.state import state
+from ..core.state import state_manager
 
 # --- EXTRACTED CORE MODULES ---
 from .core.layout.preview_engine import PreviewEngine

@@ -1,7 +1,7 @@
 # workers/wysiwyg_editor/grab_bag/grab_bag_view.py
 #
 # The UI palette for the Grab Bag.
-# Displays available modular components and allows adding them to the state.
+# Displays available modular components and allows adding them to the state_manager.
 # Now supports intelligent insertion after the currently selected element.
 #
 # Author: Gemini CLI
@@ -11,7 +11,7 @@ from tkinter import ttk
 import copy
 from .grab_bag_loader import GrabBagLoader
 from ..core.event_bus import event_bus
-from ..core.state import state
+from ..core.state import state_manager
 from workers.logger.logger import initialize_logging, set_log_directory
 from loguru import logger
 

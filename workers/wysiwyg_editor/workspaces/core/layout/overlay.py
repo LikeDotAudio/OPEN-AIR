@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from loguru import logger
-from ...workspaces.layout_overlays import selection, structure, blocks, columns, sizing, sticky, alignment, colors
+from ...layout_overlays import selection, structure, blocks, columns, sizing, sticky, alignment, colors
 
 class OverlayManager:
     """Manages the recursive application of design controls (structure, sticky, sizing, etc.) to widgets."""

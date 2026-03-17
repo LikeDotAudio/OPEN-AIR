@@ -1,4 +1,4 @@
-# workers/wysiwyg_editor/run.py
+# workers/wysiwyg_editor/run_builder.py
 #
 # Standalone entry point for the Modular WYSIWYG Definition Builder.
 # Runs as its own process to isolate heavy rendering and avoid UI lag.
@@ -31,7 +31,7 @@ def main():
     initialize_paths()
 
     if len(sys.argv) < 2:
-        print("Usage: python run_builder.py <json_file_path>")
+        logger.error("🏗️🚫🛑 [BUILDER] Usage: python run_builder.py <json_file_path>")
         sys.exit(1)
 
     json_filepath = pathlib.Path(sys.argv[1])

@@ -1,6 +1,6 @@
 from loguru import logger
-from ...core.event_bus import event_bus
-from ...core.state import state
+from ....core.event_bus import event_bus
+from ....core.state import state_manager
 
 class FocusManager:
     """Handles path logic, array redirection, and event publishing for widget focus."""

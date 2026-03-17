@@ -1,4 +1,4 @@
-# workers/wysiwyg_editor/core/state.py
+# workers/wysiwyg_editor/core/state_manager.py
 #
 # The Central State Manager for the modular WYSIWYG editor.
 # Manages the master JSON schema and broadcasts updates to subscribers.
@@ -43,7 +43,7 @@ class StateManager:
         sm_logger.success("✅ StateManager: Initialization complete.")
 
     def reset(self):
-        """Resets the state manager to an empty state."""
+        """Resets the state manager to an empty state_manager."""
         sm_logger.info("🧠 StateManager: Wiping internal state memory (Reset).")
         self._json_data = {}
         self._file_path = None
@@ -54,7 +54,7 @@ class StateManager:
 
     def update_state(self, new_data, path=None, source=None):
         """
-        Updates the master JSON state.
+        Updates the master JSON state_manager.
         If path is provided (as a dot-notated string or list), updates a specific branch.
         """
         source_name = source.__class__.__name__ if source else "Unknown"
@@ -186,12 +186,12 @@ class StateManager:
         target_parent[key] = val
         sm_logger.trace(f"  ↳ Inserted '{key}' into target parent '{'.'.join(target_parent_path)}'")
         
-        sm_logger.trace("📦 StateManager: Move sequence complete. Broadcasting updated state.")
+        sm_logger.trace("📦 StateManager: Move sequence complete. Broadcasting updated state_manager.")
         event_bus.publish("STATE_UPDATED", json_data=self._json_data, source=source)
         sm_logger.success(f"📦 StateManager: Successfully moved '{key}' to '{'.'.join(target_parent_path)}'.")
 
     def delete_element(self, path, source=None):
-        """Removes an element from the state."""
+        """Removes an element from the state_manager."""
         sm_logger.info(f"🗑️ StateManager: DELETE OPERATION: {path}")
         if isinstance(path, str): path = path.split(".")
         if len(path) < 1: return
@@ -224,7 +224,7 @@ class StateManager:
             return None
 
     def set_file_path(self, path):
-        """Sets the file path for the current JSON state."""
+        """Sets the file path for the current JSON state_manager."""
         sm_logger.info(f"📂 StateManager: Active File Path updated to: {path}")
         self._file_path = path
 

@@ -1,7 +1,7 @@
 # workers/wysiwyg_editor/workspaces/layout_overlays/colors.py
 import tkinter as tk
 from tkinter import colorchooser
-from ...core.state import state
+from ...core.state import state_manager
 
 def apply(layout, widget, path, is_focused, design_elements):
     """Handles the 🎨 color palette button."""
@@ -34,7 +34,7 @@ def _has_color_properties(path):
     return _scan(data)
 
 def _open_color_picker(layout, path):
-    """Opens the OS color picker and updates the state."""
+    """Opens the OS color picker and updates the state_manager."""
     color_key = "style.active_color"
     # Smart key detection
     if "cap_config" in path: color_key = path.replace("cap_config", "cap_color")

@@ -12,7 +12,7 @@ import pathlib
 
 # Import Modular Components
 from .core.event_bus import event_bus
-from .core.state import state
+from .core.state import state_manager
 from .core.file_io_handler import FileIOHandler
 from .workspaces.interactive_layout import InteractiveLayout
 from .workspaces.json_editor import JsonEditor
@@ -190,8 +190,8 @@ class WysiwygEditor:
             self.close_window()
 
     def _test_config(self):
-        """Triggers the test callback with current master state."""
-        if LOCAL_DEBUG: logger.info("🏗️ WysiwygEditor: Rebuilding main UI with current editor state...")
+        """Triggers the test callback with current master state_manager."""
+        if LOCAL_DEBUG: logger.info("🏗️ WysiwygEditor: Rebuilding main UI with current editor state_manager...")
         if self.on_test:
             self.on_test(state_manager.get_state())
             if self.status_lbl.winfo_exists():

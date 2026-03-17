@@ -1,24 +1,40 @@
 {
     "summary": {
-        "timestamp": "2026-03-17 01:49:47",
-        "total": 35,
-        "passed": 35,
+        "timestamp": "2026-03-17 02:04:21",
+        "total": 40,
+        "passed": 37,
         "failed": 0,
-        "errors": 0,
+        "errors": 3,
         "skipped": 0
     },
     "details": [
         {
             "classname": "TestConfigGenerator",
-            "name": "test_create_default_config_ini (assets.Documentation.Testing.test_config.TestConfigGenerator.test_create_default_config_ini)",
+            "name": "test_create_default_config_ini (tests.managers.test_config.TestConfigGenerator.test_create_default_config_ini)",
             "status": "passed",
             "message": "",
             "description": "Test that the default config.ini is created with expected sections.",
-            "duration": "0.0005s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestConfigReader",
-            "name": "test_default_values (assets.Documentation.Testing.test_config_reader.TestConfigReader.test_default_values)",
+            "name": "test_config_loading_from_file (tests.managers.test_config_reader.TestConfigReader.test_config_loading_from_file)",
+            "status": "error",
+            "message": "<class 'managers.configini.core.config_defaults.ConfigDefaults'> does not have the attribute 'get_defaults'",
+            "description": "BUILD: Mock file content. OPERATE: Load. CHECK: Assert specific value.",
+            "duration": "0.0007s"
+        },
+        {
+            "classname": "TestConfigReader",
+            "name": "test_singleton_integrity (tests.managers.test_config_reader.TestConfigReader.test_singleton_integrity)",
+            "status": "passed",
+            "message": "",
+            "description": "BUILD: Request two instances. CHECK: Assert they are identical.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestConfigReader",
+            "name": "test_default_values (tests.managers.test_config_reader_old.TestConfigReader.test_default_values)",
             "status": "passed",
             "message": "",
             "description": "Test that default values are present after initialization.",
@@ -26,7 +42,7 @@
         },
         {
             "classname": "TestConfigReader",
-            "name": "test_global_settings_property (assets.Documentation.Testing.test_config_reader.TestConfigReader.test_global_settings_property)",
+            "name": "test_global_settings_property (tests.managers.test_config_reader_old.TestConfigReader.test_global_settings_property)",
             "status": "passed",
             "message": "",
             "description": "Test the global_settings property.",
@@ -34,7 +50,7 @@
         },
         {
             "classname": "TestConfigReader",
-            "name": "test_singleton (assets.Documentation.Testing.test_config_reader.TestConfigReader.test_singleton)",
+            "name": "test_singleton (tests.managers.test_config_reader_old.TestConfigReader.test_singleton)",
             "status": "passed",
             "message": "",
             "description": "Test that the Config class acts as a singleton.",
@@ -42,47 +58,95 @@
         },
         {
             "classname": "TestConfigValidator",
-            "name": "test_validate_configuration (assets.Documentation.Testing.test_config_validator.TestConfigValidator.test_validate_configuration)",
+            "name": "test_validate_configuration (tests.managers.test_config_validator.TestConfigValidator.test_validate_configuration)",
             "status": "passed",
             "message": "",
             "description": "Test that validation returns True with a dummy printer.",
+            "duration": "0.0001s"
+        },
+        {
+            "classname": "TestVisaFleet",
+            "name": "test_inventory_notification (tests.managers.test_visa_fleet.TestVisaFleet.test_inventory_notification)",
+            "status": "passed",
+            "message": "",
+            "description": "Goal: Verify that the fleet correctly notifies and persists new inventory data.",
+            "duration": "0.0019s"
+        },
+        {
+            "classname": "TestVisaLogic",
+            "name": "test_visa_library_error (tests.managers.test_visa_logic.TestVisaLogic.test_visa_library_error)",
+            "status": "passed",
+            "message": "",
+            "description": "Fail: LibraryError is raised due to missing pyvisa-py.",
+            "duration": "0.0001s"
+        },
+        {
+            "classname": "TestVisaLogic",
+            "name": "test_visa_proxy_init_fail (tests.managers.test_visa_logic.TestVisaLogic.test_visa_proxy_init_fail)",
+            "status": "passed",
+            "message": "",
+            "description": "Fail: Missing MQTT controller or router during initialization.",
             "duration": "0.0002s"
         },
         {
-            "classname": "TestLogger",
-            "name": "test_batch_log_sink (assets.Documentation.Testing.test_logger.TestLogger.test_batch_log_sink)",
+            "classname": "TestVisaLogic",
+            "name": "test_visa_proxy_init_success (tests.managers.test_visa_logic.TestVisaLogic.test_visa_proxy_init_success)",
             "status": "passed",
             "message": "",
-            "description": "Test that BatchLogSink writes to file in batches or on interval.",
-            "duration": "0.1008s"
+            "description": "Check thread-safe command queue initialization.",
+            "duration": "0.0004s"
+        },
+        {
+            "classname": "TestVisaLogic",
+            "name": "test_visa_resource_lister (tests.managers.test_visa_logic.TestVisaLogic.test_visa_resource_lister)",
+            "status": "passed",
+            "message": "",
+            "description": "Confirm the backend library loads and returns available hardware identifiers.",
+            "duration": "0.0161s"
+        },
+        {
+            "classname": "_FailedTest",
+            "name": "tests.workers.test_advanced_suites (unittest.loader._FailedTest.tests.workers.test_advanced_suites)",
+            "status": "error",
+            "message": "Failed to import test module: tests.workers.test_advanced_suites\nTraceback (most recent call last):\n  File \"/usr/lib/python3.12/unittest/loader.py\", line 394, in _find_test_path\n    module = self._get_module_from_name(name)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/unittest/loader.py\", line 337, in _get_module_from_name\n    __import__(name)\n  File \"/home/anthony/Documents/OPEN-AIR/tests/workers/test_advanced_suites.py\", line 20, in <module>\n    from managers.Display.styling.gui_style import GuiStyle\nImportError: cannot import name 'GuiStyle' from 'managers.Display.styling.gui_style' (/home/anthony/Documents/OPEN-AIR/managers/Display/styling/gui_style.py)\n",
+            "description": "No description provided.",
+            "duration": "0.0001s"
         },
         {
             "classname": "TestLogger",
-            "name": "test_get_logger (assets.Documentation.Testing.test_logger.TestLogger.test_get_logger)",
+            "name": "test_batch_log_sink (tests.workers.test_logger.TestLogger.test_batch_log_sink)",
+            "status": "passed",
+            "message": "",
+            "description": "Test that BatchLogSink writes to file in batches or on interval.",
+            "duration": "0.1010s"
+        },
+        {
+            "classname": "TestLogger",
+            "name": "test_get_logger (tests.workers.test_logger.TestLogger.test_get_logger)",
             "status": "passed",
             "message": "",
             "description": "Test that get_logger returns a bound logger.",
             "duration": "0.0001s"
         },
         {
-            "classname": "TestMQTTLogic",
-            "name": "test_mqtt_sweeper_on_message_filter (assets.Documentation.Testing.test_mqtt_logic.TestMQTTLogic.test_mqtt_sweeper_on_message_filter)",
+            "classname": "TestMidiManager",
+            "name": "test_status_broadcast (tests.workers.test_midi.TestMidiManager.test_status_broadcast)",
             "status": "passed",
             "message": "",
-            "description": "Verify on_message correctly filters for the configured base topic.",
-            "duration": "0.0005s"
+            "description": "Goal: Verify that starting the MIDI manager broadcasts active ports to the system state.",
+            "duration": "0.0009s"
         },
         {
-            "classname": "TestMQTTLogic",
-            "name": "test_topic_calculator_calculate (assets.Documentation.Testing.test_mqtt_logic.TestMQTTLogic.test_topic_calculator_calculate)",
-            "status": "passed",
-            "message": "",
-            "description": "Validate string manipulation for dynamic MQTT topics based on UI hierarchy.",
+            "classname": "_FailedTest",
+            "name": "tests.workers.test_mqtt_logic (unittest.loader._FailedTest.tests.workers.test_mqtt_logic)",
+            "status": "error",
+            "message": "Failed to import test module: tests.workers.test_mqtt_logic\nTraceback (most recent call last):\n  File \"/usr/lib/python3.12/unittest/loader.py\", line 394, in _find_test_path\n    module = self._get_module_from_name(name)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/unittest/loader.py\", line 337, in _get_module_from_name\n    __import__(name)\n  File \"/home/anthony/Documents/OPEN-AIR/tests/workers/test_mqtt_logic.py\", line 8, in <module>\n    from ClearMQTT import MQTTSweeper\nModuleNotFoundError: No module named 'ClearMQTT'\n",
+            "description": "No description provided.",
             "duration": "0.0000s"
         },
         {
             "classname": "TestMqttSubscriberRouter",
-            "name": "test_match_cache (assets.Documentation.Testing.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_match_cache)",
+            "name": "test_match_cache (tests.workers.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_match_cache)",
             "status": "passed",
             "message": "",
             "description": "Test that matching results are cached.",
@@ -90,15 +154,15 @@
         },
         {
             "classname": "TestMqttSubscriberRouter",
-            "name": "test_multiple_subscribers (assets.Documentation.Testing.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_multiple_subscribers)",
+            "name": "test_multiple_subscribers (tests.workers.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_multiple_subscribers)",
             "status": "passed",
             "message": "",
             "description": "Test multiple subscribers for the same topic.",
-            "duration": "0.0005s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestMqttSubscriberRouter",
-            "name": "test_subscribe_exact_topic (assets.Documentation.Testing.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_exact_topic)",
+            "name": "test_subscribe_exact_topic (tests.workers.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_exact_topic)",
             "status": "passed",
             "message": "",
             "description": "Test exact topic subscription.",
@@ -106,23 +170,23 @@
         },
         {
             "classname": "TestMqttSubscriberRouter",
-            "name": "test_subscribe_wildcard_topic (assets.Documentation.Testing.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_wildcard_topic)",
+            "name": "test_subscribe_wildcard_topic (tests.workers.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_wildcard_topic)",
             "status": "passed",
             "message": "",
             "description": "Test wildcard topic subscription.",
-            "duration": "0.0002s"
+            "duration": "0.0007s"
         },
         {
             "classname": "TestOSCManager",
-            "name": "test_handle_incoming_osc (assets.Documentation.Testing.test_osc.TestOSCManager.test_handle_incoming_osc)",
+            "name": "test_handle_incoming_osc (tests.workers.test_osc.TestOSCManager.test_handle_incoming_osc)",
             "status": "passed",
             "message": "",
             "description": "Test handling of incoming OSC messages.",
-            "duration": "0.0011s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestOSCManager",
-            "name": "test_initialization (assets.Documentation.Testing.test_osc.TestOSCManager.test_initialization)",
+            "name": "test_initialization (tests.workers.test_osc.TestOSCManager.test_initialization)",
             "status": "passed",
             "message": "",
             "description": "Test OSCManager initialization.",
@@ -130,7 +194,7 @@
         },
         {
             "classname": "TestOSCManager",
-            "name": "test_monitor_callbacks (assets.Documentation.Testing.test_osc.TestOSCManager.test_monitor_callbacks)",
+            "name": "test_monitor_callbacks (tests.workers.test_osc.TestOSCManager.test_monitor_callbacks)",
             "status": "passed",
             "message": "",
             "description": "Test that monitor callbacks are triggered.",
@@ -138,7 +202,7 @@
         },
         {
             "classname": "TestOSCManager",
-            "name": "test_register_route (assets.Documentation.Testing.test_osc.TestOSCManager.test_register_route)",
+            "name": "test_register_route (tests.workers.test_osc.TestOSCManager.test_register_route)",
             "status": "passed",
             "message": "",
             "description": "Test registering a route between OSC and MQTT.",
@@ -146,7 +210,7 @@
         },
         {
             "classname": "TestPathInitializer",
-            "name": "test_initialize_paths (assets.Documentation.Testing.test_path_initializer.TestPathInitializer.test_initialize_paths)",
+            "name": "test_initialize_paths (tests.workers.test_path_initializer.TestPathInitializer.test_initialize_paths)",
             "status": "passed",
             "message": "",
             "description": "Check if required system directories are created.",
@@ -154,7 +218,7 @@
         },
         {
             "classname": "TestProtocolRouter",
-            "name": "test_ingest_puts_to_queue (assets.Documentation.Testing.test_protocol_router.TestProtocolRouter.test_ingest_puts_to_queue)",
+            "name": "test_ingest_puts_to_queue (tests.workers.test_protocol_router.TestProtocolRouter.test_ingest_puts_to_queue)",
             "status": "passed",
             "message": "",
             "description": "Test that ingest puts messages into the inbound queue with the correct schema.",
@@ -162,15 +226,15 @@
         },
         {
             "classname": "TestProtocolRouter",
-            "name": "test_router_stop_stops_threads (assets.Documentation.Testing.test_protocol_router.TestProtocolRouter.test_router_stop_stops_threads)",
+            "name": "test_router_stop_stops_threads (tests.workers.test_protocol_router.TestProtocolRouter.test_router_stop_stops_threads)",
             "status": "passed",
             "message": "",
             "description": "Test that stop() correctly resets the running flag.",
-            "duration": "0.0011s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestProtocolRouter",
-            "name": "test_singleton (assets.Documentation.Testing.test_protocol_router.TestProtocolRouter.test_singleton)",
+            "name": "test_singleton (tests.workers.test_protocol_router.TestProtocolRouter.test_singleton)",
             "status": "passed",
             "message": "",
             "description": "Test that ProtocolRouter is a singleton.",
@@ -178,7 +242,7 @@
         },
         {
             "classname": "TestSplinker",
-            "name": "test_add_monitor_callback (assets.Documentation.Testing.test_splinker.TestSplinker.test_add_monitor_callback)",
+            "name": "test_add_monitor_callback (tests.workers.test_splinker.TestSplinker.test_add_monitor_callback)",
             "status": "passed",
             "message": "",
             "description": "Test adding a monitor callback.",
@@ -186,7 +250,7 @@
         },
         {
             "classname": "TestSplinker",
-            "name": "test_initialization (assets.Documentation.Testing.test_splinker.TestSplinker.test_initialization)",
+            "name": "test_initialization (tests.workers.test_splinker.TestSplinker.test_initialization)",
             "status": "passed",
             "message": "",
             "description": "Test broker initialization.",
@@ -194,55 +258,63 @@
         },
         {
             "classname": "TestSplinker",
-            "name": "test_singleton (assets.Documentation.Testing.test_splinker.TestSplinker.test_singleton)",
+            "name": "test_singleton (tests.workers.test_splinker.TestSplinker.test_singleton)",
             "status": "passed",
             "message": "",
             "description": "Test that ControlBroker is a singleton.",
             "duration": "0.0002s"
         },
         {
+            "classname": "TestStateCache",
+            "name": "test_handle_external_update (tests.workers.test_state_cache.TestStateCache.test_handle_external_update)",
+            "status": "passed",
+            "message": "",
+            "description": "Goal: Verify that external updates are correctly cached, persisted, and broadcast.",
+            "duration": "0.0017s"
+        },
+        {
             "classname": "TestStateMirrorEngine",
-            "name": "test_broadcast_gui_change (assets.Documentation.Testing.test_state_mirror_engine.TestStateMirrorEngine.test_broadcast_gui_change)",
+            "name": "test_broadcast_gui_change (tests.workers.test_state_mirror_engine.TestStateMirrorEngine.test_broadcast_gui_change)",
             "status": "passed",
             "message": "",
             "description": "Test that GUI changes trigger MQTT publication.",
-            "duration": "0.0902s"
+            "duration": "0.0915s"
         },
         {
             "classname": "TestStateMirrorEngine",
-            "name": "test_calculate_topic (assets.Documentation.Testing.test_state_mirror_engine.TestStateMirrorEngine.test_calculate_topic)",
+            "name": "test_calculate_topic (tests.workers.test_state_mirror_engine.TestStateMirrorEngine.test_calculate_topic)",
             "status": "passed",
             "message": "",
             "description": "Test topic calculation logic.",
-            "duration": "0.0067s"
+            "duration": "0.0071s"
         },
         {
             "classname": "TestStateMirrorEngine",
-            "name": "test_register_widget (assets.Documentation.Testing.test_state_mirror_engine.TestStateMirrorEngine.test_register_widget)",
+            "name": "test_register_widget (tests.workers.test_state_mirror_engine.TestStateMirrorEngine.test_register_widget)",
             "status": "passed",
             "message": "",
             "description": "Test widget registration and topic binding.",
-            "duration": "0.0068s"
+            "duration": "0.0100s"
         },
         {
             "classname": "TestUIAndData",
-            "name": "test_file_io_load (assets.Documentation.Testing.test_ui_and_data.TestUIAndData.test_file_io_load)",
+            "name": "test_file_io_load (tests.workers.test_ui_and_data.TestUIAndData.test_file_io_load)",
             "status": "passed",
             "message": "",
             "description": "Load and parse JSON configuration files.",
-            "duration": "0.0006s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestUIAndData",
-            "name": "test_layout_parser_scan (assets.Documentation.Testing.test_ui_and_data.TestUIAndData.test_layout_parser_scan)",
+            "name": "test_layout_parser_scan (tests.workers.test_ui_and_data.TestUIAndData.test_layout_parser_scan)",
             "status": "passed",
             "message": "",
             "description": "Recursively find valid UI definition files.",
-            "duration": "0.0002s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestUIAndData",
-            "name": "test_marker_logic_grouping (assets.Documentation.Testing.test_ui_and_data.TestUIAndData.test_marker_logic_grouping)",
+            "name": "test_marker_logic_grouping (tests.workers.test_ui_and_data.TestUIAndData.test_marker_logic_grouping)",
             "status": "passed",
             "message": "",
             "description": "Transform a flat list of marker data into a nested Zone/Group dictionary.",
@@ -250,43 +322,11 @@
         },
         {
             "classname": "TestUIAndData",
-            "name": "test_state_manager_update (assets.Documentation.Testing.test_ui_and_data.TestUIAndData.test_state_manager_update)",
+            "name": "test_state_manager_update (tests.workers.test_ui_and_data.TestUIAndData.test_state_manager_update)",
             "status": "passed",
             "message": "",
             "description": "Validate that UI changes correctly update the master data state.",
-            "duration": "0.0004s"
-        },
-        {
-            "classname": "TestVisaLogic",
-            "name": "test_visa_library_error (assets.Documentation.Testing.test_visa_logic.TestVisaLogic.test_visa_library_error)",
-            "status": "passed",
-            "message": "",
-            "description": "Fail: LibraryError is raised due to missing pyvisa-py.",
-            "duration": "0.0002s"
-        },
-        {
-            "classname": "TestVisaLogic",
-            "name": "test_visa_proxy_init_fail (assets.Documentation.Testing.test_visa_logic.TestVisaLogic.test_visa_proxy_init_fail)",
-            "status": "passed",
-            "message": "",
-            "description": "Fail: Missing MQTT controller or router during initialization.",
-            "duration": "0.0001s"
-        },
-        {
-            "classname": "TestVisaLogic",
-            "name": "test_visa_proxy_init_success (assets.Documentation.Testing.test_visa_logic.TestVisaLogic.test_visa_proxy_init_success)",
-            "status": "passed",
-            "message": "",
-            "description": "Check thread-safe command queue initialization.",
-            "duration": "0.0008s"
-        },
-        {
-            "classname": "TestVisaLogic",
-            "name": "test_visa_resource_lister (assets.Documentation.Testing.test_visa_logic.TestVisaLogic.test_visa_resource_lister)",
-            "status": "passed",
-            "message": "",
-            "description": "Confirm the backend library loads and returns available hardware identifiers.",
-            "duration": "0.0209s"
+            "duration": "0.0005s"
         }
     ]
 }

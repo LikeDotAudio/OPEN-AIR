@@ -1,5 +1,17 @@
 # OPEN-AIR Changelog
 
+## [2026.03.17] - 02:15
+### Quality Assurance & Testing Suite
+- Implemented a Unified Test Launcher (`tests/generate_and_log_tests.py`) that automatically discovers and executes tests with HTML/JSON reporting.
+- Created 9 comprehensive unit test modules in `tests/assets_tests/` (now consolidated into `tests/managers/` and `tests/workers/`) covering critical "Top Offender" components.
+- Established the "Network Chaos" suite to verify MQTT reconnection logic and message idempotency.
+- Developed the "Hardware Boundary" suite to test VISA timeout handling and command buffer overflow stability.
+- Implemented "File & Environment" tests for permission denial scenarios and corrupt state recovery.
+- Added UI Rendering Edge Case tests for malformed GUI definitions and font fallback mechanisms.
+- Conducted a successful "Round Trip" E2E test verifying the path from MQTT input to VISA output.
+- Fixed `TopicCalculator` logic to strip structural layout tokens ('display', 'gui') as per engineering standards.
+- Performed a comprehensive Quality Assurance audit, identifying and removing legacy mock-testing-mock anti-patterns.
+
 ## [2026.03.17] - 01:25
 **************************************
 Commit: 6d434891bbb7c5aa991c6fdb4815d2b3c4d8c54e

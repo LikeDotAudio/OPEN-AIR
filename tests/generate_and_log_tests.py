@@ -192,8 +192,7 @@ def main():
     
     runner = UnifiedTestRunner(html_path, json_path)
     runner.run([
-        os.path.join(project_root, 'tests'),
-        os.path.join(project_root, 'assets', 'Documentation', 'Testing')
+        os.path.join(project_root, 'tests')
     ], top_level_dir=project_root)
 
 if __name__ == "__main__":

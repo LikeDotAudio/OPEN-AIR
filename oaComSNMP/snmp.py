@@ -92,7 +92,7 @@ class SNMPManager:
         self._socket_info = f"{get_local_ip()}:161 (System Daemon Bridge)"
         
         # ⚡ CRAWLER: Build the metadata map from folders
-        initialize_oid_map("display")
+        initialize_oid_map("oaGuiDefinitions")
 
         # 🟢 Start Background Monitor
         self._flat_file_thread = threading.Thread(target=self._state_to_file_loop, daemon=True)

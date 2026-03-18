@@ -11,12 +11,16 @@ def create_ultra_structure(config_path):
     # Collect all categories that need subfolders (everything except 'vaults')
     module_categories = [cat for cat in config['domains'] if cat != 'vaults']
     
+    # Define the 12-folder standard
+    extra_subs = ["FileReaders", "FileWriters"]
+    all_standard_subs = standard_subs + extra_subs
+    
     for category in module_categories:
         for module in config['domains'][category]:
             # If root_name is ".", we join with current directory
             module_path = os.path.join(os.getcwd(), root, module)
             
-            for sub in standard_subs:
+            for sub in all_standard_subs:
                 path = os.path.join(module_path, sub)
                 os.makedirs(path, exist_ok=True)
                 

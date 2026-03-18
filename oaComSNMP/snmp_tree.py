@@ -13,9 +13,10 @@ snmp_logger = logger.bind(subsystem="SNMP")
 class SNMPTreeBuilder:
     def __init__(self, base_oid=".1.3.6.1.4.1.25030"):
         self.base_oid = base_oid
-        self.script_dir = "oaDataSNMP/pass_scripts"
+        from oaOchestration.project_paths import SNMP_DATA_DIR
+        self.script_dir = SNMP_DATA_DIR / "pass_scripts"
         os.makedirs(self.script_dir, exist_ok=True)
-        self.master_script_path = os.path.join(self.script_dir, "master_snmp_bridge.sh")
+        self.master_script_path = self.script_dir / "master_snmp_bridge.sh"
 
     def _verbose_logging_enabled(self):
         return snmp_tree_builder_verbose_logging_enabled

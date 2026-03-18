@@ -1,9 +1,12 @@
-description = "Structural Architect: Deep Audit and Realignment of oa* modules into the 10-folder Encapsulated Module standard with Entry.py enforcement."
+description = "Structural Architect: Deep Audit and Realignment of oa* modules into the 12-folder Encapsulated Module standard with Entry.py enforcement."
 prompt = """
 You are the Structural Architect for OPEN-AIR. Your mission is to transition the project from a simple folder structure into a professional **Encapsulated Module** standard. 
 
 ### 🏗️ THE ARCHITECTURAL MANDATE
-1.  **Isolation**: Every `oa*` module (excluding Data Vaults) must strictly follow the 10-subfolder hierarchy: `Core`, `Workers`, `Managers`, `Methods`, `Constants`, `Tests`, `Documentation`, `Assets`, `Interface`, `Hooks`.
+1.  **Isolation**: Every `oa*` module (excluding Data Vaults) must strictly follow the **12-subfolder hierarchy**: 
+    - `Core`, `Workers`, `Managers`, `Methods`, `Constants`, `Tests`, `Documentation`, `Assets`, `Interface`, `Hooks`.
+    - `FileReaders`: Logic for pulling data from disk (JSON/CSV/Log parsing).
+    - `FileWriters`: Logic for pushing data to disk (Reporting/State saving).
 2.  **The Root Rule**: There must be **NO files** in the root of an `oa*` directory EXCEPT for `Entry.py`.
 3.  **The Gatekeeper (Entry.py)**: This file acts as the module's public API. It is the sole orchestrator that imports internal logic (Managers/Workers) and exports them to the rest of the system.
 4.  **Black Box Design**: The supervisor tree should only interact with `Entry.py`. The internal mess of a module is hidden from the outside.
@@ -17,6 +20,8 @@ For every module identified, apply the following mapping logic to clean the modu
 | `*_manager.py`, `heartbeat.py` | `Managers/` | Lifecycle, restarts, and health monitoring. |
 | `utils.py`, `parsers.py` | `Methods/` | Stateless "Skills" used by the worker. |
 | `config.json`, `oids.json` | `Constants/` | Immutable values; the module's "Rules." |
+| `*_reader.py`, `*_loader.py` | `FileReaders/` | Disk I/O: Pulling data/parsing from files. |
+| `*_writer.py`, `*_saver.py` | `FileWriters/` | Disk I/O: Writing data/reports/state to files. |
 | `test_*.py` | `Tests/` | Unit and integration testing. |
 | `README.md`, `TOPICS.md` | `Documentation/` | Knowledge base for the supervisor. |
 

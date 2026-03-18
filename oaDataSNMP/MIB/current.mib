@@ -5,11 +5,11 @@ IMPORTS
     DisplayString FROM SNMPv2-TC;
 
 openAirMIB MODULE-IDENTITY
-    LAST-UPDATED "202603180037Z"
+    LAST-UPDATED "202603180041Z"
     ORGANIZATION "OPEN-AIR Project"
     CONTACT-INFO "Anthony Peter Kuzub"
     DESCRIPTION "MQTT-Aligned OID Tree for OPEN-AIR."
-    REVISION "202603180037Z"
+    REVISION "202603180041Z"
     DESCRIPTION "Strictly unique path-aligned generation."
     ::= { enterprises 25030 }
 
@@ -94,6 +94,14 @@ dialconfig1899 OBJECT-TYPE
     STATUS      current
     DESCRIPTION "Source: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/dial_config"
     ::= { rBWbdc3 40509 }
+
+-- MQTT: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/fader_config
+faderconfig52af OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/fader_config"
+    ::= { rBWbdc3 57098 }
 
 amplitude6019 OBJECT IDENTIFIER ::= { instrumente51a 56303 }
 spectrumInstrumentamplitude4603 OBJECT IDENTIFIER ::= { amplitude6019 50913 }

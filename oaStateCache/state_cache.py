@@ -61,7 +61,8 @@ class StateRegistry:
 
     def save_preset(self, name: str):
         try:
-            path = os.path.join("DATA", "state", "presets", f"{name}.preset.json")
+            from oaOchestration.path_initializer import DATA_RUNNING_DIR
+            path = DATA_RUNNING_DIR / "presets" / f"{name}.preset.json"
             os.makedirs(os.path.dirname(path), exist_ok=True)
             with open(path, "wb") as f: f.write(orjson.dumps(self.cache, option=orjson.OPT_INDENT_2))
             if LOCAL_DEBUG: data_logger.success(f"📸💾 Preset saved: {name}")

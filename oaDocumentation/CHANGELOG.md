@@ -1,6 +1,11 @@
 # OPEN-AIR Changelog
 
 ## [2026.03.18] - 00:30
+**************************************
+Commit: 25bd5e36f5895de4981fd198cbb41ee00e1b881c
+Date: 2026-03-18 00:30:00
+Message: ## [2026.03.18] - 00:30 ### The Supervisor Tree Refactor (Migration Phase 1) - Core Infrastructure: Migrated system-level managers to specialized oaConfiguration, oaLogging, and oaDependancies modules. - Communication Layer: Moved hardware and protocol scripts into dedicated silos. - Data Vaults: Reorganized all DATA/ and assets/ content into oaData* directories. - GUI Engine: Refactored the UI controller and builders into oaGuiManager, oaGuiBuild, and oaGuiElements. - System Integrity: Updated all import paths, path guards, and fixed ModuleNotFoundErrors.
+**************************************
 ### The Supervisor Tree Refactor (Migration Phase 1)
 - **Core Infrastructure**: Migrated system-level managers to specialized `oaConfiguration`, `oaLogging`, and `oaDependancies` modules.
 - **Communication Layer**: Moved hardware and protocol scripts into dedicated silos: `oaComsBroker` (MQTT/Router), `oaComVisa`, `oaComMidi`, `oaComOSC`, and `oaComSNMP`.

@@ -1,0 +1,8 @@
+003530.280 | WARNING  | CORE | SYSTEM     | oaPTP.ptp            | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+003534.386 | WARNING  | CORE | SYSTEM     | oaComVisa.Visa_Fleet.visa_Search | FAILED (IDN Query Error)
+003534.387 | WARNING  | CORE | SYSTEM     | oaComVisa.Visa_Fleet.visa_Search | FAILED (IDN Query Error)
+003544.566 | WARNING  | CORE | SYSTEM     | oaComVisa.Visa_Fleet.visa_Search | FAILED (IDN Query Error)
+003548.665 | WARNING  | CORE | SYSTEM     | oaComVisa.Visa_Fleet.visa_Search | FAILED (IDN Query Error)
+003548.665 | WARNING  | CORE | SYSTEM     | oaComVisa.Visa_Fleet.visa_Search | FAILED (IDN Query Error)
+003558.866 | WARNING  | CORE | SYSTEM     | oaComVisa.Visa_Fleet.visa_Search | FAILED (IDN Query Error)
+003601.405 | WARNING  | UI   | SYSTEM     | oaComSNMP.snmp       | 🌐 SNMP Bridge Offline.

@@ -67,7 +67,8 @@ def maker_file_check_for_markers_file():
     current_function = inspect.currentframe().f_code.co_name
 
     # Use the stable GLOBAL_PROJECT_ROOT now available.
-    target_path = GLOBAL_PROJECT_ROOT / "DATA" / "MARKERS.csv"
+    from oaOchestration.path_initializer import DATA_RUNNING_DIR
+    target_path = DATA_RUNNING_DIR / "MARKERS.csv"
 
     if LOCAL_DEBUG:
         logger.debug(f"📥📑🔍 [IMPORTER] {current_function}")

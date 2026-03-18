@@ -31,7 +31,8 @@ class AssetCacheManager:
     """Manages disk and memory caching for procedurally generated PIL images."""
     
     # ⚡ OPTIMIZATION: Use absolute path relative to project root
-    _CACHE_DIR = GLOBAL_PROJECT_ROOT / "DATA" / "cache" / "assets"
+    from oaOchestration.path_initializer import DATA_CACHE_DIR
+    _CACHE_DIR = DATA_CACHE_DIR / "assets"
     
     @classmethod
     def _ensure_cache_dir(cls):

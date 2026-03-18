@@ -47,7 +47,8 @@ def save_intermediate_file(tree_headers, tree_data):
     current_function = inspect.currentframe().f_code.co_name
 
     # ANCHOR FIX: Use the stable GLOBAL_PROJECT_ROOT now available.
-    target_path = GLOBAL_PROJECT_ROOT / "DATA" / "MARKERS.csv"
+    from oaOchestration.path_initializer import DATA_RUNNING_DIR
+    target_path = DATA_RUNNING_DIR / "MARKERS.csv"
 
     logger.debug(f"💾 personal saving data to intermediate file: {target_path}. Headers: {tree_headers}, first row: {tree_data[0] if tree_data else 'N/A'}",
         file=os.path.basename(__file__),

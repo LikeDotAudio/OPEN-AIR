@@ -1,28 +1,38 @@
-description = "Comprehensive structural enforcement for oa* modules: moves all root files into the 10-folder standard and ensures Entry.py is the sole orchestrator."
+description = "Structural Architect: Deep Audit and Realignment of oa* modules into the 10-folder Encapsulated Module standard with Entry.py enforcement."
 prompt = """
-You are the Structural Architect for OPEN-AIR. Your task is to perform a Deep Audit and Realignment of all `oa*` modules to conform to the 10-folder isolation standard.
+You are the Structural Architect for OPEN-AIR. Your mission is to transition the project from a simple folder structure into a professional **Encapsulated Module** standard. 
 
-### THE ULTRA-HIGH LEVEL (Rules & Constraints)
-1.  **Module Isolation**: Every `oa*` module (except Data Vaults) must strictly follow the 10-subfolder structure: `Core`, `Workers`, `Managers`, `Methods`, `Constants`, `Tests`, `Documentation`, `Assets`, `Interface`, `Hooks`.
-2.  **The "Entry" Mandate**: There must be NO files in the root of an `oa*` directory EXCEPT for `Entry.py`.
-3.  **Entry.py Role**: This file is the sole entry point/orchestrator for the module. It handles initialization and exports the module's public interface.
-4.  **Data Vault Exception**: Modules like `oaData*`, `oaRuntimeData`, `oaStateCache`, and `oaGuiDefinitions` remain flat/custom as they are storage-only.
+### 🏗️ THE ARCHITECTURAL MANDATE
+1.  **Isolation**: Every `oa*` module (excluding Data Vaults) must strictly follow the 10-subfolder hierarchy: `Core`, `Workers`, `Managers`, `Methods`, `Constants`, `Tests`, `Documentation`, `Assets`, `Interface`, `Hooks`.
+2.  **The Root Rule**: There must be **NO files** in the root of an `oa*` directory EXCEPT for `Entry.py`.
+3.  **The Gatekeeper (Entry.py)**: This file acts as the module's public API. It is the sole orchestrator that imports internal logic (Managers/Workers) and exports them to the rest of the system.
+4.  **Black Box Design**: The supervisor tree should only interact with `Entry.py`. The internal mess of a module is hidden from the outside.
 
-### THE ULTRA-LOW LEVEL (Execution Strategy)
-For every module identified (e.g., `oaComVisa`):
-1.  **Audit**: Scan the root of the module for any `.py`, `.md`, or config files.
-2.  **Classify & Move**:
-    - Move logic loops/background tasks to `Workers/`.
-    - Move lifecycle/state managers to `Managers/`.
-    - Move primary shared logic to `Core/`.
-    - Move standalone utility functions to `Methods/`.
-    - Move READMEs and specs to `Documentation/`.
-    - Move unit tests to `Tests/`.
-3.  **Bootstrap Entry**:
-    - If a main file exists (e.g., `visa_manager.py` or `midi.py`), refactor it into `Entry.py` or create `Entry.py` to import from the new subfolder locations.
-    - Ensure all internal imports within the module are updated to reflect their new nested paths (e.g., `from .Core import ...`).
-4.  **Clean up**: Remove any empty folders or redundant `__init__.py` files if they conflict with the new structure, but ensure every new subfolder HAS an `__init__.py`.
+### 🛠️ EXECUTION STRATEGY: CLASSIFY & MOVE
+For every module identified, apply the following mapping logic to clean the module root:
 
-### OUTPUT
-Provide a detailed report of every file moved and the resulting structure of the module. Flag any files that were ambiguous and required a judgment call on their destination.
+| Original File Type | New Destination | Architectural Reasoning |
+| :--- | :--- | :--- |
+| `*_worker.py`, `*_loop.py` | `Workers/` | Pure execution; no state management. |
+| `*_manager.py`, `heartbeat.py` | `Managers/` | Lifecycle, restarts, and health monitoring. |
+| `utils.py`, `parsers.py` | `Methods/` | Stateless "Skills" used by the worker. |
+| `config.json`, `oids.json` | `Constants/` | Immutable values; the module's "Rules." |
+| `test_*.py` | `Tests/` | Unit and integration testing. |
+| `README.md`, `TOPICS.md` | `Documentation/` | Knowledge base for the supervisor. |
+
+### 🔄 BOOTSTRAP ENTRY.PY
+For each module, refactor or create `Entry.py`. It must:
+- Import the primary Manager from `Managers/`.
+- Import the primary Worker from `Workers/`.
+- Export standard methods: `start()`, `stop()`, and `status()`.
+- Update all internal relative imports to reflect the new nested structure.
+
+### 📋 AUDIT REPORT
+Provide a report for each processed module in this format:
+**Module**: [Name]
+**Status**: ✅ Realignment Complete
+**Moves**:
+- [file] ➡️ [destination]
+**Entry.py Status**: [Created/Refactored]. Now exports [methods].
+**Judgment Calls**: [Any ambiguous files and why you chose their destination].
 """

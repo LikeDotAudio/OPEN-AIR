@@ -1,3 +1,3 @@
 type,resource_string,ip_address,interface_port,gpib_address,status,manufacturer,model,serial_number,firmware,device_type,notes,allocated,connection_timestamp
-DEDICATED,TCPIP::44.44.44.150::INSTR,44.44.44.150,Ethernet,Direct,Unresponsive,Unknown,Unknown,Unknown,Unknown,Unknown Instrument,Not in Knowledge Base,False,2026-03-18T00:25:41.404978
-GATEWAY,"TCPIP::44.44.44.222::gpib7,5::INSTR",44.44.44.222,gpib7,5,Unresponsive,Unknown,Unknown,Unknown,Unknown,Unknown Instrument,Not in Knowledge Base,False,2026-03-18T00:25:41.404981
+DEDICATED,TCPIP::44.44.44.150::INSTR,44.44.44.150,Ethernet,Direct,Unresponsive,Unknown,Unknown,Unknown,Unknown,Unknown Instrument,Not in Knowledge Base,False,2026-03-18T00:32:18.054752
+GATEWAY,"TCPIP::44.44.44.222::gpib7,5::INSTR",44.44.44.222,gpib7,5,Unresponsive,Unknown,Unknown,Unknown,Unknown,Unknown Instrument,Not in Knowledge Base,False,2026-03-18T00:32:18.054756

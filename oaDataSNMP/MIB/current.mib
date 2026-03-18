@@ -5,11 +5,11 @@ IMPORTS
     DisplayString FROM SNMPv2-TC;
 
 openAirMIB MODULE-IDENTITY
-    LAST-UPDATED "202603180027Z"
+    LAST-UPDATED "202603180037Z"
     ORGANIZATION "OPEN-AIR Project"
     CONTACT-INFO "Anthony Peter Kuzub"
     DESCRIPTION "MQTT-Aligned OID Tree for OPEN-AIR."
-    REVISION "202603180027Z"
+    REVISION "202603180037Z"
     DESCRIPTION "Strictly unique path-aligned generation."
     ::= { enterprises 25030 }
 
@@ -144,6 +144,27 @@ startfreqMHzb662 OBJECT-TYPE
     STATUS      current
     DESCRIPTION "Source: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz"
     ::= { startStop1efd 28691 }
+
+consoleec87 OBJECT IDENTIFIER ::= { oaGuiDefinitionsa30c 44106 }
+noded936 OBJECT IDENTIFIER ::= { consoleec87 1617 }
+fields4d78 OBJECT IDENTIFIER ::= { noded936 28171 }
+ch1b66 OBJECT IDENTIFIER ::= { fields4d78 54098 }
+soloCHOn72f6 OBJECT IDENTIFIER ::= { ch1b66 36094 }
+-- MQTT: OPEN-AIR/oaGuiDefinitions/Console/9/fields/ch9/Solo_CH_On/ch_on
+chone741 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/oaGuiDefinitions/Console/9/fields/ch9/Solo_CH_On/ch_on"
+    ::= { soloCHOn72f6 17972 }
+
+-- MQTT: OPEN-AIR/oaGuiDefinitions/Console/9/fields/ch9/Solo_CH_On/solo
+solo573c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/oaGuiDefinitions/Console/9/fields/ch9/Solo_CH_On/solo"
+    ::= { soloCHOn72f6 26476 }
 
 zoo6ba2 OBJECT IDENTIFIER ::= { oaGuiDefinitionsa30c 55842 }
 fadersfd7c OBJECT IDENTIFIER ::= { zoo6ba2 56788 }

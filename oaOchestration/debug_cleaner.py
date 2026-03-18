@@ -32,30 +32,24 @@ app_constants = Config.get_instance()  # Get the singleton instance
 # Inputs:
 #     data_dir (str): The base data directory where the 'debug' subdirectory is located.
 # Outputs:
-#     None.
-def clear_debug_directory(data_dir):  # Removed _func argument
+def clear_debug_directory():
+    """Clears all files within the refactored log directory."""
+    from oaOchestration.path_initializer import DATA_LOGS_DIR
     if LOCAL_DEBUG: logger.debug("▶️ Entering clear_debug_directory.")
-    # Clear debug directory
-    debug_dir = os.path.join(data_dir, "debug")
-    if os.path.exists(debug_dir):
-        if LOCAL_DEBUG: logger.debug(f"🔍 Debug directory found: {debug_dir}. Proceeding to clear contents.")
-        try:
-            filenames = os.listdir(debug_dir)  # Get list of files before deletion
-            if LOCAL_DEBUG: logger.debug(f"🔍 Found {len(filenames)} items in debug directory.")
-            for filename in filenames:
-                file_path = os.path.join(debug_dir, filename)
-                try:
-                    if LOCAL_DEBUG: logger.debug(f"🗑️ Attempting to delete: {file_path}")
-                    if os.path.isfile(file_path):
-                        os.unlink(file_path)
-                        if LOCAL_DEBUG: logger.success(f"🗑️ Successfully deleted: {file_path}")
-                except Exception as e:
-                    if LOCAL_DEBUG:
-                        logger.exception("❌ Failed to delete {file_path}. Reason")
-            if LOCAL_DEBUG: logger.debug("🧹 Finished clearing debug directory.")
-        except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("❌ Error listing or deleting files in {debug_dir}. Reason")
 
+    if DATA_LOGS_DIR.exists():
+        if LOCAL_DEBUG: logger.debug(f"🔍 Log directory found: {DATA_LOGS_DIR}. Proceeding to clear contents.")
+        try:
+            for item in DATA_LOGS_DIR.iterdir():
+                try:
+                    if item.is_file():
+                        item.unlink()
+                        if LOCAL_DEBUG: logger.success(f"🗑️ Successfully deleted: {item}")
+                except Exception as e:
+                    if LOCAL_DEBUG: logger.error(f"❌ Failed to delete {item}: {e}")
+            if LOCAL_DEBUG: logger.debug("🧹 Finished clearing log directory.")
+        except Exception as e:
+            if LOCAL_DEBUG: logger.error(f"❌ Error clearing log directory: {e}")
     else:
-        if LOCAL_DEBUG: logger.debug(f"⏩ Debug directory not found: {debug_dir}. Skipping clear.")
+        if LOCAL_DEBUG: logger.debug(f"⏩ Log directory not found: {DATA_LOGS_DIR}. Skipping clear.")
+

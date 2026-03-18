@@ -118,5 +118,5 @@ The report should include:
 - A list of "Top Offenders" (files treating `print()` like a logger, missing error logs, potential PII leaks).
 - Recommendations for structured logging implementation.
 
-Begin the audit and save the report as `assets/Documentation/Audits/Bad_Logging_Audit.md` to the Audits folder.
+Begin the audit and save the report as `oaDataAudits/Bad_Logging_Audit.md` to the oaDataAudits folder.
 """

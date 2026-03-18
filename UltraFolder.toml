@@ -25,7 +25,7 @@ utilities = [
 vaults = [
     "oaGuiDefinitions", "oaDataRunningFiles", "oaDataLogs", 
     "oaDataCache", "oaDataSNMP", "oaDataSplinks", "oaDataTests",
-    "oaRuntimeData", "oaStateCache"
+    "oaRuntimeData", "oaStateCache", "oaDataAudits"
 ]
 
 # GUI Engine

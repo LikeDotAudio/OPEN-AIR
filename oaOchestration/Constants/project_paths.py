@@ -18,7 +18,7 @@ from loguru import logger
 
 from oaConfiguration.config_reader import Config
 # ⚡ OPTIMIZATION: Use static path cache
-from oaOchestration.path_initializer import (
+from ..Managers.path_initializer import (
     GLOBAL_PROJECT_ROOT, 
     DATA_RUNNING_DIR, 
     DATA_LOGS_DIR, 

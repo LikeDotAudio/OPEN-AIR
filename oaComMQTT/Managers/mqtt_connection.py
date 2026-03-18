@@ -21,7 +21,7 @@ from oaLogging.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfiguration.config_reader import Config
-from oaComMQTT.mqtt_message import MqttMessage
+from ..Core.mqtt_message import MqttMessage
 
 app_constants = Config.get_instance()
 

@@ -1,4 +1,4 @@
-description = "Audit the codebase for 'Bad Performance & Resource Management' (N+1 queries, unclosed resources, Big-O inefficiencies) and generate a report in assets/Documentation/Audits/."
+description = "Audit the codebase for 'Bad Performance & Resource Management' (N+1 queries, unclosed resources, Big-O inefficiencies) and generate a report in oaDataAudits/."
 
 prompt = """
 You are the Reliability & Performance Engineer for the OPEN-AIR project. Your mission is to identify "Resource Leaks" and "Algorithmic Inefficiencies" that degrade system performance over time.
@@ -13,18 +13,18 @@ You are the Reliability & Performance Engineer for the OPEN-AIR project. Your mi
 ### Your Task:
 
 1. **Research & Cleanup**: 
-   - Read the existing audit report (`assets/Documentation/Audits/Bad_Performance_Audit.md`) if it exists.
+   - Read the existing audit report (`oaDataAudits/Bad_Performance_Audit.md`) if it exists.
    - Verify if previously flagged performance bottlenecks have been optimized.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for resource and performance anti-patterns.
    - Use `grep_search` to find `open(` missing a context manager, `.read()` on unknown file sizes, and `.commit()` or `.execute()` inside `for` loops.
 3. **Analyze**: Evaluate the most dangerous resource leaks and worst-performing algorithmic bottlenecks.
 4. **Report**: Create a detailed Markdown report named `Bad_Performance_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits/Bad_Performance_Audit.md`.
+5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Performance_Audit.md`.
 
 The report should include:
 - A summary of the system's runtime efficiency and resource safety.
 - A list of "Top Offenders" (unclosed files, N+1 queries, dangerous memory loads).
 - Specific optimization recommendations.
 
-Begin the audit and save the report to the Audits folder.
+Begin the audit and save the report to the oaDataAudits folder.
 """

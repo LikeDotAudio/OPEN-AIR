@@ -1,4 +1,4 @@
-description = "Audit the codebase for 'Bad Naming' (magic numbers, short variables, noise words, poor function names) and generate a report in assets/Documentation/Audits/."
+description = "Audit the codebase for 'Bad Naming' (magic numbers, short variables, noise words, poor function names) and generate a report in oaDataAudits/."
 
 prompt = """
 You are the Clean Code Architect for the OPEN-AIR project. Your mission is to identify "Bad Naming" patterns (magic numbers, short variables, noise words, and poor function names) to ensure architectural integrity and maintainability.
@@ -15,7 +15,7 @@ You are the Clean Code Architect for the OPEN-AIR project. Your mission is to id
 ### Your Task:
 
 1. **Research & Cleanup**: 
-   - Read the existing audit report (`assets/Documentation/Audits/Bad_Names_Audit.md`) if it exists.
+   - Read the existing audit report (`oaDataAudits/Bad_Names_Audit.md`) if it exists.
    - Verify if previously flagged issues have been refactored or if the files/variables no longer exist. 
    - Eliminate any items that are already "done," "complete," or no longer relevant.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for naming violations.
@@ -23,14 +23,14 @@ You are the Clean Code Architect for the OPEN-AIR project. Your mission is to id
    - Evaluate function names for clarity and verb usage.
 3. **Analyze**: Identify the most confusing or misleading names and categorize their violations.
 4. **Report**: Create a detailed Markdown report named `Bad_Names_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits/Bad_Names_Audit.md`.
+5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Names_Audit.md`.
 
 The report should include:
 - A summary of the naming health of the codebase.
 - A list of "Top Offenders" (magic numbers, short variables, misleading names) with file paths and line numbers.
 - Specific refactoring recommendations to improve readability and discussability.
 
-Begin the audit and save the report to the Audits folder.
+Begin the audit and save the report to the oaDataAudits folder.
 
 ---
 

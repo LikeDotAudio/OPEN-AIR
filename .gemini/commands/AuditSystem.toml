@@ -1,56 +1,54 @@
-description = "Audit the whole system"
+description = "Comprehensive System Audit: Performs a high-level review OR executes ALL individual specialized audits if 'all' or 'everything' is specified."
 prompt = """
-Audit the whole system and write an audit_Code_review.md to '/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits'. 
+You are the Lead Systems Auditor for OPEN-AIR. Your goal is to provide a forensic, end-to-end evaluation of the entire project.
 
-This audit should look for these 20 things:
+### 🕹️ EXECUTION MODES:
+1.  **Standard Mode**: If no special keywords are provided, perform the 20-point high-level audit described below.
+2.  **'Whole Thing' Mode**: If the input includes keywords like `all`, `everything`, `whole thing`, or `all things`, you MUST execute every specialized audit command in the system sequentially.
 
-### Security & Compliance Audits
-1. Dependency Security Audit: Automated scanning of all third-party libraries and open-source components for known Common Vulnerabilities and Exposures (CVEs).
-2. Identity & Access Management (IAM) Audit: Verifying that the Principle of Least Privilege is enforced. Are former employees offboarded? Do services have more permissions than they need?
-3. Secrets Management Audit: Scanning repositories and environments to ensure no API keys, passwords, or tokens are hardcoded in plaintext.
-4. Vulnerability & Penetration Audit: Scheduled ethical hacking—both automated (DAST/SAST) and manual—to simulate real-world attacks on your perimeter.
-5. Data Privacy & Compliance Audit: Verifying that user data is encrypted at rest and in transit, and that the system complies with relevant frameworks (GDPR, HIPAA, SOC2).
+### 🚀 SPECIALIZED AUDIT SEQUENCE (For 'Whole Thing' Mode):
+If in 'Whole Thing' mode, you are directed to run these commands (or simulate their logic) and collect their reports:
+- `AuditArchitecture` (DIP, Circular Deps, Layering)
+- `AuditFileFolderNames` (12-folder standard, Entry.py, Naming)
+- `AuditPerformance` (Resource leaks, N+1, Big-O)
+- `AuditLogging` (Zero-cost gates, Emoji grepping, Gravity)
+- `AuditErrorHandling` (Try/Except blocks, Tracebacks)
+- `AuditThreading` (Race conditions, Deadlocks)
+- `AuditSecurity` (Secrets, IAM, CVEs)
+- `AuditTests` (Coverage, Mock quality)
+- `AuditConfiguration` (Defaults, Validators)
 
-### Code Quality & Architecture Audits
-6. Technical Debt Assessment: A frank evaluation of legacy code, quick-fixes, and outdated frameworks to prioritize what must be refactored before it bottlenecks development.
-7. Static Code Analysis: Automated sweeps for code smells, anti-patterns, and adherence to team style guides using linters and analysis tools.
-8. Architecture & Design Audit: Evaluating if the current architecture (e.g., monolith, microservices) still serves the business's scaling needs or if it is creating unnecessary friction.
-9. Test Coverage Audit: Analyzing the completeness of unit, integration, and end-to-end (E2E) tests. High coverage doesn't guarantee lack of bugs, but low coverage guarantees instability.
-10. Open Source Licensing Audit: Ensuring that imported libraries do not have restrictive "copyleft" licenses that could legally compromise proprietary software.
-
-### Performance & Reliability Audits
-11. Load & Stress Testing Audit: Simulating traffic spikes to identify the exact point where the system degrades or breaks, allowing teams to provision accordingly.
-12. Database Performance Audit: Analyzing slow-query logs, checking index fragmentation, and optimizing database schema to prevent I/O bottlenecks.
-13. Disaster Recovery (DR) & Backup Audit: Testing the worst-case scenario. Are backups actually restorable? What is the true Recovery Time Objective (RTO)?
-14. Infrastructure & Cloud Cost Audit: Identifying \"zombie\" servers, over-provisioned instances, and unattached storage volumes to rein in cloud waste.
-15. Observability & Logging Audit: Ensuring that logs, metrics, and traces are centralized, searchable, and actually useful for debugging during an outage.
-
-### Operational & Process Audits
-16. CI/CD Pipeline Audit: Reviewing the speed, reliability, and security gates of your deployment pipeline. A slow pipeline discourages developers from pushing small, safe updates.
-17. Incident Response Audit: A review of past post-mortems to calculate Mean Time To Resolution (MTTR) and assess if the team is learning from outages.
-18. Alert Fatigue Audit: Pruning monitoring systems to eliminate noisy, unactionable alerts so engineers don't ignore the pager when a real crisis hits.
-19. Accessibility (a11y) Audit: Ensuring the front-end complies with WCAG standards so the application is usable by people with disabilities.
-20. Documentation & Runbook Audit: Checking if onboarding docs, API specifications, and emergency runbooks are up to date. Dead documentation is worse than no documentation.
+### 📊 REPORTING:
+- **Standard Audit**: Save to `oaDataAudits/audit_Code_review.md`.
+- **Whole Thing Audit**: Consolidate all specialized findings into a single master report: `oaDataAudits/System_Master_Audit.md`. This report must include an Executive Summary of all subsystems.
 
 ---
 
-### Daily Habits for Managing Large Systems (Reference)
- Elite human engineering teams keep massive, unwieldy systems from collapsing into chaos by relying on boring, disciplined daily habits:
-- Morning Dashboard Triage
-- Micro-Deployments
-- Zero-Inbox for Alerts
-- Automated Dependency Updates
-- Living Documentation
-- Blameless Code Reviews
+### 🔍 THE 20-POINT SYSTEM AUDIT (Baseline):
+1.  **Dependency Security**: Automated scanning for CVEs.
+2.  **IAM & Access**: Least Privilege and service permissions.
+3.  **Secrets Management**: Hardcoded keys/tokens.
+4.  **Vulnerability & Pen-test**: Simulated attack vectors.
+5.  **Data Privacy**: Encryption at rest/transit (GDPR/SOC2).
+6.  **Technical Debt**: Legacy bottlenecks and refactor priority.
+7.  **Static Analysis**: Code smells and style guide adherence.
+8.  **Architecture Design**: Scaling friction and DIP violations.
+9.  **Test Coverage**: Unit/E2E completeness.
+10. **OS Licensing**: Copyleft check.
+11. **Load/Stress**: Degradation points.
+12. **DB Performance**: Slow-query logs and schema optimization.
+13. **Disaster Recovery**: Backup restorability and RTO.
+14. **Infra/Cloud Cost**: Zombie servers and over-provisioning.
+15. **Observability**: Centralized logging and forensic utility.
+16. **CI/CD Pipeline**: Speed and security gates.
+17. **Incident Response**: MTTR and post-mortem learning.
+18. **Alert Fatigue**: Pruning noisy/unautionable alerts.
+19. **Accessibility (a11y)**: WCAG compliance.
+20. **Documentation**: Dead vs. Living runbooks/specs.
 
----
-
-### Instructions for Audit
-1. Include these 20 audits at the top of the report as a reference guide.
-2. Review the entire project.
-3. Identify issues categorized as CRITICAL, HIGH, MEDIUM, and LOW.
-4. For each issue, include:
-    - The file name.
-    - A code snippet.
-    - A suggestion on how to best solve, mitigate, or prioritize the repairs.
+### 📋 INSTRUCTIONS:
+- Review the entire project.
+- Categorize issues: **CRITICAL**, **HIGH**, **MEDIUM**, **LOW**.
+- For each issue: File name, code snippet, and a prioritized repair suggestion.
+- **Silent/Automated**: If triggered with `all`, perform this as a silent "end of day" audit—exhaustive but concise.
 """

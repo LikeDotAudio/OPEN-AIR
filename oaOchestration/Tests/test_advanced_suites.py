@@ -14,7 +14,7 @@ from oaComMQTT.mqtt_subscriber_router import MqttSubscriberRouter
 from oaComMQTT.mqtt_message import MqttMessage
 from oaTranslator.state_mirror_engine import StateMirrorEngine
 from oaComVisa.Visa_Scipi_dialog.visa_proxy import VisaProxy
-from oaOchestration.path_initializer import initialize_paths
+from ..Managers.path_initializer import initialize_paths
 from oaGuiEditorWYSIWYG.core.state import StateManager
 from oaGuiManager.parser.layout_parser import LayoutParser
 from oaStyle.gui_style import GuiStyleMixin
@@ -144,7 +144,7 @@ class TestFileAndEnvironment(unittest.TestCase):
         mock_mkdir.side_effect = PermissionError("Permission Denied")
         
         # We need to clear the cache first since initialize_paths caches results
-        import oaOchestration.path_initializer as pi
+        import ..Managers.path_initializer as pi
         pi.GLOBAL_PROJECT_ROOT = None
         pi.DATA_DIR = None
         

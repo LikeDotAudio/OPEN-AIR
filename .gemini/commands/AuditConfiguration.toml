@@ -1,4 +1,4 @@
-description = "Audit the codebase for 'Bad Configuration Management' (magic strings, hardcoded URLs, environment logic) and generate a report in assets/Documentation/Audits/."
+description = "Audit the codebase for 'Bad Configuration Management' (magic strings, hardcoded URLs, environment logic) and generate a report in oaDataAudits/."
 
 prompt = """
 You are the Release Engineer for the OPEN-AIR project. Your mission is to identify "Configuration Entanglement" to ensure the application strictly adheres to 12-Factor App methodology regarding configuration separation.
@@ -13,7 +13,7 @@ You are the Release Engineer for the OPEN-AIR project. Your mission is to identi
 ### Your Task:
 
 1. **Research & Cleanup**: 
-   - Read the existing audit report (`assets/Documentation/Audits/Bad_Configuration_Audit.md`) if it exists.
+   - Read the existing audit report (`oaDataAudits/Bad_Configuration_Audit.md`) if it exists.
    - Verify if previously flagged hardcoded configs have been extracted to `.env` or config classes.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for configuration anti-patterns.
    - Use `grep_search` to find `http://`, `https://`, IP addresses (e.g., `127.0.0.1`), and port numbers inside logic files.
@@ -21,12 +21,12 @@ You are the Release Engineer for the OPEN-AIR project. Your mission is to identi
    - Flag environment branching (`if env ==`, `if is_prod:`).
 3. **Analyze**: Identify the most rigid, environment-locked components in the system.
 4. **Report**: Create a detailed Markdown report named `Bad_Configuration_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits/Bad_Configuration_Audit.md`.
+5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Configuration_Audit.md`.
 
 The report should include:
 - A summary of the 12-Factor configuration compliance.
 - A list of "Top Offenders" (hardcoded URLs, scattered `os.environ` calls, environment branching).
 - Recommendations for a centralized `ConfigManager` or dependency injection strategy.
 
-Begin the audit and save the report to the Audits folder.
+Begin the audit and save the report to the oaDataAudits folder.
 """

@@ -18,7 +18,7 @@ from oaLogging.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfiguration.config_reader import Config
-from oaComMQTT.mqtt_message import MqttMessage
+from ..Core.mqtt_message import MqttMessage
 
 app_constants = Config.get_instance()
 
@@ -107,7 +107,7 @@ class MqttSubscriberRouter:
             if topic_filter.startswith(f"{self._base_topic}/") or topic_filter == self._root_topic:
                 if self._root_topic not in self._active_broker_subscriptions:
                     self._active_broker_subscriptions.add(self._root_topic)
-                    from oaComMQTT.mqtt_connection import MqttConnectionManager
+                    from .mqtt_connection import MqttConnectionManager
                     MqttConnectionManager().subscribe(self._root_topic)
                 return
 
@@ -115,7 +115,7 @@ class MqttSubscriberRouter:
                 return
 
             self._active_broker_subscriptions.add(topic_filter)
-            from oaComMQTT.mqtt_connection import MqttConnectionManager
+            from .mqtt_connection import MqttConnectionManager
             MqttConnectionManager().subscribe(topic_filter)
 
     def unsubscribe_from_topic(self, topic_filter: str, callback_func: Callable[[MqttMessage], None]):

@@ -1,4 +1,4 @@
-description = "Audit the codebase for 'Bad Tests' or 'No Tests' and generate a report in assets/Documentation/Audits/."
+description = "Audit the codebase for 'Bad Tests' or 'No Tests' and generate a report in oaDataAudits/."
 
 prompt = """
 You are the Quality Assurance Lead for the OPEN-AIR project. Your mission is to identify "Bad Test Modules" or components with "No Tests" to ensure architectural integrity and reliability.
@@ -14,17 +14,17 @@ You are the Quality Assurance Lead for the OPEN-AIR project. Your mission is to 
 ### Your Task:
 
 1. **Research & Cleanup**: 
-   - Read the existing audit report (`assets/Documentation/Audits/Bad_Tests_Audit.md`).
+   - Read the existing audit report (`oaDataAudits/Bad_Tests_Audit.md`).
    - Verify if "missing tests" have been created or if "poor quality tests" have been refactored.
    - Eliminate any items that are now "covered" or no longer needed.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for missing or poorly written tests.
    - For each functional module in `managers/` and `workers/`, check for a corresponding `test_*.py` or `*_tester.py` file.
 3. **Analyze**: Evaluate the most critical components lacking test coverage or having poor quality tests.
 4. **Report**: Create a detailed Markdown report named `Bad_Tests_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits/Bad_Tests_Audit.md`.
+5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Tests_Audit.md`.
 6. **Suggest GOOD Tests**: For the "Top Offenders," provide specific refactoring suggestions or draft "GOOD" test cases that adhere to the principles below.
 
-Begin the audit and save the report to the Audits folder.
+Begin the audit and save the report to the oaDataAudits folder.
 
 ---
 

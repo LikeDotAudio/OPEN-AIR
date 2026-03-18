@@ -1,4 +1,4 @@
-description = "Audit the codebase for 'Architectural Boundary Violations' (circular dependencies, DIP violations, layer contamination) and generate a report in assets/Documentation/Audits/."
+description = "Audit the codebase for 'Architectural Boundary Violations' (circular dependencies, DIP violations, layer contamination) and generate a report in oaDataAudits/."
 
 prompt = """
 You are the Principal Systems Architect for the OPEN-AIR project. Your mission is to identify "Architectural Boundary Violations" to prevent the codebase from degrading into a Big Ball of Mud.
@@ -13,7 +13,7 @@ You are the Principal Systems Architect for the OPEN-AIR project. Your mission i
 ### Your Task:
 
 1. **Research & Cleanup**: 
-   - Read the existing audit report (`assets/Documentation/Audits/Bad_Architecture_Audit.md`) if it exists.
+   - Read the existing audit report (`oaDataAudits/Bad_Architecture_Audit.md`) if it exists.
    - Verify if previously flagged architectural violations have been decoupled. 
    - Remove resolved items.
 2. **Audit**: Scan the codebase (focusing on import statements at the top of `.py` files).
@@ -22,12 +22,12 @@ You are the Principal Systems Architect for the OPEN-AIR project. Your mission i
    - Identify cross-layer contamination (e.g., a worker importing a UI component or vice versa).
 3. **Analyze**: Identify the tightest coupling choke-points in the system.
 4. **Report**: Create a detailed Markdown report named `Bad_Architecture_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits/Bad_Architecture_Audit.md`.
+5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Architecture_Audit.md`.
 
 The report should include:
 - A summary of architectural boundary health.
 - A list of "Top Offenders" (circular imports, UI/DB coupling, hidden dependencies).
 - Blueprint recommendations for Inversion of Control (e.g., "Inject an `IStorage` interface into `DataManager` instead of hardcoding `SQLDatabase`").
 
-Begin the audit and save the report to the Audits folder.
+Begin the audit and save the report to the oaDataAudits folder.
 """

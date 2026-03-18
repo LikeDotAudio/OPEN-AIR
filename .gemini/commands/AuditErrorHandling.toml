@@ -1,4 +1,4 @@
-description = "Audit the codebase for 'Bad Error Handling' (silent failures, nested try-except, returning null, error codes) and generate a report in assets/Documentation/Audits/."
+description = "Audit the codebase for 'Bad Error Handling' (silent failures, nested try-except, returning null, error codes) and generate a report in oaDataAudits/."
 
 prompt = """
 You are the Reliability Engineer for the OPEN-AIR project. Your mission is to identify "Bad Error Handling" patterns that compromise system stability and make debugging a nightmare.
@@ -16,7 +16,7 @@ You are the Reliability Engineer for the OPEN-AIR project. Your mission is to id
 ### Your Task:
 
 1. **Research & Cleanup**: 
-   - Read the existing audit report (`assets/Documentation/Audits/Bad_Error_Handling_Audit.md`).
+   - Read the existing audit report (`oaDataAudits/Bad_Error_Handling_Audit.md`).
    - Verify if previously flagged "silent failures" or "bad practices" have been corrected.
    - Eliminate any items that are already resolved or no longer present in the code.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for poor error handling patterns.
@@ -24,14 +24,14 @@ You are the Reliability Engineer for the OPEN-AIR project. Your mission is to id
    - Analyze `try-except` blocks for lack of logging or muddled intent.
 3. **Analyze**: Identify the most dangerous silent failures and convoluted error handling logic.
 4. **Report**: Create a detailed Markdown report named `Bad_Error_Handling_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/assets/Documentation/Audits/Bad_Error_Handling_Audit.md`.
+5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Error_Handling_Audit.md`.
 
 The report should include:
 - A summary of the robustness of the system's error management.
 - A list of "Top Offenders" (silent catches, null returns, missing context) with file paths and line numbers.
 - Recommendations for implementing a centralized logging and exception strategy.
 
-Begin the audit and save the report to the Audits folder.
+Begin the audit and save the report to the oaDataAudits folder.
 
 ---
 

@@ -7,7 +7,7 @@
 # Original Author: Anthony Peter Kuzub
 # Modularized: Saturday, March 14, 2026
 
-from .protocol_router.router import ProtocolRouter
+from ..Core.protocol_router.router import ProtocolRouter
 
 # Ensure that external modules can still access the class as if it was in this file.
 __all__ = ["ProtocolRouter"]

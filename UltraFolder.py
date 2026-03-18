@@ -34,11 +34,15 @@ def create_ultra_structure(config_path):
             print(f"✅ Created/Standardized Module: {module}")
 
     # Create Vaults (Flat structure, no 10-subs)
-    if 'vaults' in config['domains']:
-        for vault in config['domains']['vaults']:
-            path = os.path.join(os.getcwd(), root, vault)
-            os.makedirs(path, exist_ok=True)
-            print(f"📦 Created Vault: {vault}")
+    vaults = [
+        "oaGuiDefinitions", "oaDataRunningFiles", "oaDataLogs", 
+        "oaDataCache", "oaDataSNMP", "oaDataSplinks", "oaDataTests",
+        "oaRuntimeData", "oaStateCache", "oaDataAudits"
+    ]
+    for vault in vaults:
+        path = os.path.join(os.getcwd(), root, vault)
+        os.makedirs(path, exist_ok=True)
+        print(f"📦 Created/Standardized Vault: {vault}")
 
 if __name__ == "__main__":
     # Ensure it's run from the project root if that's where UltraFolder.toml is

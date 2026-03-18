@@ -6,9 +6,9 @@ import threading
 from loguru import logger
 
 # --- EXTRACTED CORE MODULES ---
-from .core.config_defaults import ConfigDefaults
-from .core.identity import IdentityManager
-from .core.config_loader import ConfigLoader
+from ..Core.config_defaults import ConfigDefaults
+from ..Core.identity import IdentityManager
+from ..Core.config_loader import ConfigLoader
 
 LOCAL_DEBUG = True
 

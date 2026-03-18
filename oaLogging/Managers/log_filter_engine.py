@@ -27,7 +27,7 @@ Dependencies:
 import json
 import sys
 from loguru import logger
-from oaLogging.logger import initialize_logging, get_logger, quarantine_logger # Assuming logger module is accessible
+from .logger import initialize_logging, get_logger, quarantine_logger # Assuming logger module is accessible
 # We need to import the MQTT router to subscribe to topics.
 # Assuming it's structured like this, adjust if needed.
 try:

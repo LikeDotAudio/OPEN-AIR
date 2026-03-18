@@ -34,7 +34,7 @@ app_constants = Config.get_instance()  # Get the singleton instance
 # Outputs:
 def clear_debug_directory():
     """Clears all files within the refactored log directory."""
-    from oaOchestration.path_initializer import DATA_LOGS_DIR
+    from ..Managers.path_initializer import DATA_LOGS_DIR
     if LOCAL_DEBUG: logger.debug("▶️ Entering clear_debug_directory.")
 
     if DATA_LOGS_DIR.exists():

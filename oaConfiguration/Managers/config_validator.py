@@ -16,7 +16,7 @@ Assumptions and Constraints:
   the configuration.
 """
 
-from oaConfiguration.config_reader import Config
+from ..Managers.config_reader import Config
 from loguru import logger
 
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file

@@ -4,7 +4,7 @@
 
 ## Executive Summary:
 
-This audit focused on identifying architectural boundary violations within the OPEN-AIR project, adhering to principles like Dependency Inversion, Layer Isolation, and avoiding hidden dependencies. The codebase shows good separation in some areas, particularly the UI layer (`display/`) appearing relatively isolated from core logic. However, there is a systemic pattern of using singletons (like `Config`) and direct instantiation of services (e.g., `MqttConnectionManager`, `StateCacheManager`) instead of employing Dependency Injection. Specific cross-subsystem dependencies and tight couplings were also identified, which could hinder modularity and testability.
+This audit focused on identifying architectural boundary violations within the OPEN-AIR project, adhering to principles like Dependency Inversion, Layer Isolation, and avoiding hidden dependencies. The codebase shows good separation in some areas, particularly the UI layer (`oaGuiDefinitions/`) appearing relatively isolated from core logic. However, there is a systemic pattern of using singletons (like `Config`) and direct instantiation of services (e.g., `MqttConnectionManager`, `StateCacheManager`) instead of employing Dependency Injection. Specific cross-subsystem dependencies and tight couplings were also identified, which could hinder modularity and testability.
 
 ## Top Offenders:
 
@@ -13,21 +13,21 @@ This audit focused on identifying architectural boundary violations within the O
 *   **Description**: Numerous classes directly instantiate or access singleton instances of services (e.g., `Config.get_instance()`, `MqttConnectionManager()`, `StateCacheManager()`, `UITrackingService()`, `ThreadSafeMatchCache()`) instead of receiving them as explicit dependencies. This obscures dependencies, makes testing harder, and can lead to tight coupling.
 *   **Flagged Classes & Modules:**
     *   `Config.get_instance()`: Widely used across many modules for configuration access.
-    *   `MqttConnectionManager()`: Directly instantiated/accessed in `workers/Command_Router/mqtt/mqtt_subscriber_router.py`, `managers.System_Core.open_air_core.py`, `managers.Display.core.bootstrap_sequence.py`, `workers/Command_Router/mqtt/mqtt_publisher_service.py`.
-    *   `StateCacheManager()`: Instantiated directly in `managers.System_Core.open_air_core.py` and `managers.Display.core.bootstrap_sequence.py`.
+    *   `MqttConnectionManager()`: Directly instantiated/accessed in `workers/Command_Router/mqtt/mqtt_subscriber_router.py`, `oaComsBroker.open_air_core.py`, `oaGuiManager.core.bootstrap_sequence.py`, `workers/Command_Router/mqtt/mqtt_publisher_service.py`.
+    *   `StateCacheManager()`: Instantiated directly in `oaComsBroker.open_air_core.py` and `oaGuiManager.core.bootstrap_sequence.py`.
     *   `UITrackingService()`: Instantiated directly in `workers/builder/builder.py`.
     *   `ThreadSafeMatchCache()`: Instantiated directly in `workers/Command_Router/mqtt/mqtt_subscriber_router.py`.
 
 ### 2. Layer Isolation & Cross-Subsystem Dependencies:
 
-*   **Description**: While the `display/` layer appears well-isolated, other modules exhibit direct dependencies that might cross architectural boundaries or create tight couplings between subsystems.
+*   **Description**: While the `oaGuiDefinitions/` layer appears well-isolated, other modules exhibit direct dependencies that might cross architectural boundaries or create tight couplings between subsystems.
 *   **Flagged Interactions:**
-    *   **`workers/builder/builder.py` imports `managers.Display.*`**: The UI builder imports heavily from `managers.Display` (styling, telemetry, factories, transparency). This indicates a tight coupling between the UI construction logic and display management services.
-    *   **`workers/Command_Router/mqtt/mqtt_subscriber_router.py` imports `managers.yak.yak_trigger_handler`**: The MQTT router has a hardcoded, direct import and call to a specific manager's handler for "yak" topics. This bypasses generic routing for a particular subsystem.
+    *   **`workers/builder/builder.py` imports `oaGuiManager.*`**: The UI builder imports heavily from `oaGuiManager` (styling, telemetry, factories, transparency). This indicates a tight coupling between the UI construction logic and display management services.
+    *   **`workers/Command_Router/mqtt/mqtt_subscriber_router.py` imports `oaComVisa.yak.yak_trigger_handler`**: The MQTT router has a hardcoded, direct import and call to a specific manager's handler for "yak" topics. This bypasses generic routing for a particular subsystem.
 
 ### 3. Circular Dependencies:
 
-*   **Description**: A comprehensive analysis for circular dependencies was not performed due to the complexity of static import analysis for transitive cycles. However, the observed patterns of heavy interdependencies between `workers/`, `managers/`, and `display/` modules suggest that circular dependencies may exist and should be investigated further using specialized tooling or code review.
+*   **Description**: A comprehensive analysis for circular dependencies was not performed due to the complexity of static import analysis for transitive cycles. However, the observed patterns of heavy interdependencies between `workers/`, `managers/`, and `oaGuiDefinitions/` modules suggest that circular dependencies may exist and should be investigated further using specialized tooling or code review.
 
 ## Blueprint Recommendations for Inversion of Control (IoC) & Decoupling:
 
@@ -38,12 +38,12 @@ This audit focused on identifying architectural boundary violations within the O
 
 2.  **Abstract or Decouple Specific Subsystem Routing**:
     *   **Recommendation**: For the hardcoded "yak" routing in `workers/Command_Router/mqtt/mqtt_subscriber_router.py`:
-        *   Introduce an abstraction layer for specific topic handlers. The router could dispatch to a registered handler interface (e.g., `IRouterHandler`) based on topic patterns or metadata, rather than directly importing `managers.yak.yak_trigger_handler`.
+        *   Introduce an abstraction layer for specific topic handlers. The router could dispatch to a registered handler interface (e.g., `IRouterHandler`) based on topic patterns or metadata, rather than directly importing `oaComVisa.yak.yak_trigger_handler`.
         *   Alternatively, make the `yak_trigger_handler` a pluggable strategy passed during router initialization.
     *   **Benefit**: Reduces direct coupling between the core communication router and a specific application subsystem.
 
 3.  **Review `workers/builder` and `managers/Display` Coupling**:
-    *   **Recommendation**: Analyze the depth of imports from `managers.Display.*` into `workers/builder/builder.py`.
+    *   **Recommendation**: Analyze the depth of imports from `oaGuiManager.*` into `workers/builder/builder.py`.
     *   Explore if interfaces or higher-level abstractions could be used, rather than direct imports of concrete components like styling, telemetry, or factory implementations.
     *   **Benefit**: Enhances the reusability and maintainability of the builder module, and clarifies responsibilities between UI construction and UI management.
 

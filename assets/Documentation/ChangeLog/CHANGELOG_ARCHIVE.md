@@ -31,7 +31,7 @@ This document provides a high-level summary of the architectural and functional 
 
 ## January 2026: Fleet Management and Visual Analytics
 - **Key Tool Developments**: Introduced the `VisaFleetManager` and `FleetMqttBridge` for comprehensive hardware inventory tracking. Implemented the `OcaTable` GUI for structured device management.
-- **Architectural Shifts**: Moved the DATA/ directory to `.gitignore` to maintain a clean repository. Automated the publication of the entire VISA hardware fleet state directly to the MQTT bus.
+- **Architectural Shifts**: Moved the oaDataRunningFiles/ directory to `.gitignore` to maintain a clean repository. Automated the publication of the entire VISA hardware fleet state directly to the MQTT bus.
 - **Major Feature Milestones**: Executed a comprehensive rebuild of bar graphs and needle meters with dynamic range scaling. Implemented multi-threaded hardware discovery for TCP/IP and USB-based instruments.
 
 ## February 2026: Process Partitioning and High-Performance UI

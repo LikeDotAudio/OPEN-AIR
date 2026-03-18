@@ -11,7 +11,7 @@ OPEN-AIR was created to bridge the gap between raw hardware capabilities and hig
 
 ### The Three Pillars:
 1.  **Freedom from Vendor Lock-in:** Use one interface to control multiple brands of hardware through the YAK command abstraction.
-2.  **Your Folders are Your Interface:** No complex UI designers. Reorganizing your `display/` folders instantly redraws your dashboard.
+2.  **Your Folders are Your Interface:** No complex UI designers. Reorganizing your `oaGuiDefinitions/` folders instantly redraws your dashboard.
 3.  **Photorealistic "Next Gen" Visuals:** High-fidelity vintage meters and industrial aesthetics provide a tactile, professional monitoring experience.
 
 ---

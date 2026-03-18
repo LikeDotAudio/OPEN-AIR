@@ -196,10 +196,10 @@ Workers are active background processes for data acquisition and system monitori
      ├----> **fader_linear_travelling_potentiometer/**<br>
         |   -> [README](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/fader_linear_travelling_potentiometer/README.md) — *Readme*<br>
         |   -> [fader_linear_travelling_potentiometer](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/fader_linear_travelling_potentiometer/fader_linear_travelling_potentiometer.md) — *Fader Linear Travelling Potentiometer*<br>
-     ├----> **images_animation_display/**<br>
-        |   -> [images_animation_display](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/images_animation_display/images_animation_display.md) — *Images Animation Display*<br>
-     ├----> **images_image_display/**<br>
-        |   -> [images_image_display](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/images_image_display/images_image_display.md) — *Images Image Display*<br>
+     ├----> **images_animation_oaGuiDefinitions/**<br>
+        |   -> [images_animation_display](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/images_animation_oaGuiDefinitions/images_animation_display.md) — *Images Animation Display*<br>
+     ├----> **images_image_oaGuiDefinitions/**<br>
+        |   -> [images_image_display](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/images_image_oaGuiDefinitions/images_image_display.md) — *Images Image Display*<br>
      ├----> **images_progress_bar/**<br>
         |   -> [images_progress_bar](https://github.com/LikeDotAudio/OPEN-AIR/blob/main/workers/builder/images_progress_bar/images_progress_bar.md) — *Images Progress Bar*<br>
      ├----> **input_directional_buttons/**<br>

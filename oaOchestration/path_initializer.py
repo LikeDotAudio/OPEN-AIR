@@ -1,0 +1,66 @@
+# setup/path_initializer.py
+#
+# This module initializes global project paths, including the project root and data directory, and adds them to the system path.
+# Optimized: Implements static path caching to eliminate redundant 'resolve()' and 'join()' calls.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+# Version 20260222.Optimized.1
+
+import os
+import sys
+import pathlib
+
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+from loguru import logger
+
+# ⚡ CACHE: Store resolved paths as module-level constants to avoid recalculation
+GLOBAL_PROJECT_ROOT = None
+DATA_DIR = None
+DATA_RUNNING_DIR = None
+DATA_LOGS_DIR = None
+DATA_CACHE_DIR = None
+DATA_SNMP_DIR = None
+DATA_SPLINKS_DIR = None
+
+def initialize_paths():
+    """
+    Initializes global project paths once and returns them.
+    Subsequent calls return the cached constants instantly.
+    """
+    global GLOBAL_PROJECT_ROOT, DATA_DIR, DATA_RUNNING_DIR, DATA_LOGS_DIR, DATA_CACHE_DIR, DATA_SNMP_DIR, DATA_SPLINKS_DIR
+
+    # ⚡ OPTIMIZATION: Return cached values if already initialized
+    if GLOBAL_PROJECT_ROOT is not None and DATA_DIR is not None:
+        return GLOBAL_PROJECT_ROOT, DATA_DIR
+
+    # --- GLOBAL PATH ANCHOR ---
+    # Determine the absolute, true root path of the project.
+    # Since this file is in oaOchestration/, the root is 2 levels up.
+    GLOBAL_PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent
+    
+    # Add project root to sys.path if not already present
+    root_str = str(GLOBAL_PROJECT_ROOT)
+    if root_str not in sys.path:
+        sys.path.insert(0, root_str)
+    
+    # --- Set Data Directories (Refactored Structure) ---
+    DATA_DIR = GLOBAL_PROJECT_ROOT / "DATA" # Legacy fallback/container
+    DATA_RUNNING_DIR = GLOBAL_PROJECT_ROOT / "oaDataRunningFiles"
+    DATA_LOGS_DIR = GLOBAL_PROJECT_ROOT / "oaDataLogs"
+    DATA_CACHE_DIR = GLOBAL_PROJECT_ROOT / "oaDataCache"
+    DATA_SNMP_DIR = GLOBAL_PROJECT_ROOT / "oaDataSNMP"
+    DATA_SPLINKS_DIR = GLOBAL_PROJECT_ROOT / "oaDataSplinks"
+
+    # Ensure directories exist
+    DATA_RUNNING_DIR.mkdir(parents=True, exist_ok=True)
+    DATA_LOGS_DIR.mkdir(parents=True, exist_ok=True)
+    DATA_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    DATA_SNMP_DIR.mkdir(parents=True, exist_ok=True)
+    DATA_SPLINKS_DIR.mkdir(parents=True, exist_ok=True)
+
+    return GLOBAL_PROJECT_ROOT, DATA_DIR
+
+# ⚡ AUTO-INITIALIZATION on import to provide constants immediately
+initialize_paths()

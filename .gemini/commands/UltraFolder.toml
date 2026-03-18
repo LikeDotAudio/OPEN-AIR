@@ -1,0 +1,28 @@
+description = "Comprehensive structural enforcement for oa* modules: moves all root files into the 10-folder standard and ensures Entry.py is the sole orchestrator."
+prompt = """
+You are the Structural Architect for OPEN-AIR. Your task is to perform a Deep Audit and Realignment of all `oa*` modules to conform to the 10-folder isolation standard.
+
+### THE ULTRA-HIGH LEVEL (Rules & Constraints)
+1.  **Module Isolation**: Every `oa*` module (except Data Vaults) must strictly follow the 10-subfolder structure: `Core`, `Workers`, `Managers`, `Methods`, `Constants`, `Tests`, `Documentation`, `Assets`, `Interface`, `Hooks`.
+2.  **The "Entry" Mandate**: There must be NO files in the root of an `oa*` directory EXCEPT for `Entry.py`.
+3.  **Entry.py Role**: This file is the sole entry point/orchestrator for the module. It handles initialization and exports the module's public interface.
+4.  **Data Vault Exception**: Modules like `oaData*`, `oaRuntimeData`, `oaStateCache`, and `oaGuiDefinitions` remain flat/custom as they are storage-only.
+
+### THE ULTRA-LOW LEVEL (Execution Strategy)
+For every module identified (e.g., `oaComVisa`):
+1.  **Audit**: Scan the root of the module for any `.py`, `.md`, or config files.
+2.  **Classify & Move**:
+    - Move logic loops/background tasks to `Workers/`.
+    - Move lifecycle/state managers to `Managers/`.
+    - Move primary shared logic to `Core/`.
+    - Move standalone utility functions to `Methods/`.
+    - Move READMEs and specs to `Documentation/`.
+    - Move unit tests to `Tests/`.
+3.  **Bootstrap Entry**:
+    - If a main file exists (e.g., `visa_manager.py` or `midi.py`), refactor it into `Entry.py` or create `Entry.py` to import from the new subfolder locations.
+    - Ensure all internal imports within the module are updated to reflect their new nested paths (e.g., `from .Core import ...`).
+4.  **Clean up**: Remove any empty folders or redundant `__init__.py` files if they conflict with the new structure, but ensure every new subfolder HAS an `__init__.py`.
+
+### OUTPUT
+Provide a detailed report of every file moved and the resulting structure of the module. Flag any files that were ambiguous and required a judgment call on their destination.
+"""

@@ -74,7 +74,7 @@ Create a `tests/conftest.py` or a testing utility module that provides:
 ```python
 import unittest
 from unittest.mock import patch, mock_open
-from managers.configini.config_reader import Config
+from oaConfiguration.config_reader import Config
 
 class TestConfigReader(unittest.TestCase):
     def test_singleton_integrity(self):

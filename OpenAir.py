@@ -54,10 +54,10 @@ import signal
 current_dir = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(current_dir))
 
-from workers.logger.logger import initialize_logging, set_log_directory
+from oaLogging.logger import initialize_logging, set_log_directory
 from loguru import logger
-from workers.initialization.path_initializer import initialize_paths
-from managers.configini.config_reader import Config
+from oaOchestration.path_initializer import initialize_paths, DATA_LOGS_DIR
+from oaConfiguration.config_reader import Config
 
 # _DEBUG: Internal flag to toggle verbose supervisor logging.
 _DEBUG = True
@@ -80,23 +80,23 @@ def main():
     Side Effects:
         - Spawns multiple child processes.
         - Modifies the system environment for child processes.
-        - Writes logs to the 'debug/SUP' directory.
+        - Writes logs to the 'oaDataLogs' directory.
     """
     # Handle direct partition launching for developer convenience.
     if len(sys.argv) > 1:
         mode = sys.argv[1]
         if mode == "--core":
-            import managers.System_Core.open_air_core as core_mod
+            import oaComsBroker.open_air_core as core_mod
             core_mod.main()
             return
         elif mode == "--ui":
-            import managers.Display.open_air_ui as ui_mod
+            import oaGuiManager.open_air_ui as ui_mod
             ui_mod.main()
             return
 
     # --- Supervisor Setup ---
-    GLOBAL_PROJECT_ROOT, data_dir = initialize_paths()
-    log_dir = pathlib.Path(data_dir) / "debug"
+    initialize_paths()
+    log_dir = DATA_LOGS_DIR
     set_log_directory(log_dir, partition="SUP")
     
     app_config = Config.get_instance()
@@ -111,9 +111,9 @@ def main():
     log(f"Launching OPEN-AIR Partitions... (Mission Critical: {is_mission_critical})")
 
     python_executable = sys.executable
-    core_script = os.path.join(current_dir, "managers", "System_Core", 
+    core_script = os.path.join(current_dir, "oaComsBroker", 
                                "open_air_core.py")
-    ui_script = os.path.join(current_dir, "managers", "Display", 
+    ui_script = os.path.join(current_dir, "oaGuiManager", 
                              "open_air_ui.py")
 
     def get_host_guid():

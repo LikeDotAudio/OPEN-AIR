@@ -1,0 +1,44 @@
+[settings]
+root_name = "."
+apply_init_py = true
+
+[domains]
+# Core Infrastructure
+infrastructure = [
+    "oaThreadManager", "oaConfiguration", "oaLogging", 
+    "oaDependancies", "oaIntstallation", "oaOchestration", "oaWatchdog"
+]
+
+# Communication Protocols
+protocols = [
+    "oaComsBroker", "oaComVisa", "oaComMidi", 
+    "oaComOSC", "oaComSNMP", "oaSplinker", "oaPTP", "oaTranslator", "oaComMQTT"
+]
+
+# Data & File I/O Utilities
+utilities = [
+    "oaFileExportCSV", "oaFileImportCSV", "oaFileImportHTML", 
+    "oaFileImportPDF", "oaFileImportShow", "oaGraphing", "oaTranslator"
+]
+
+# Data Vaults (Note: These don't get the 10-subfolder logic)
+vaults = [
+    "oaGuiDefinitions", "oaDataRunningFiles", "oaDataLogs", 
+    "oaDataCache", "oaDataSNMP", "oaDataSplinks", "oaDataTests",
+    "oaRuntimeData", "oaStateCache"
+]
+
+# GUI Engine
+gui = [
+    "oaGuiManager", "oaGuiBuild", "oaGuiBuilder", "oaGuiDestroy", 
+    "oaGuiElements", "oaGuiMediaElements", "oaStyle", "oaGuiTelemetry",
+    "oaGuiBackground", "oaGuiEditorWYSIWYG", "oaGuiFolderParser", 
+    "oaGuiShowtime", "oaGuiSplashScreen", "oaGuiTests"
+]
+
+[subfolders]
+# Every 'oa' module (except vaults) gets these 10
+standard = [
+    "Core", "Workers", "Managers", "Methods", "Constants",
+    "Tests", "Documentation", "Assets", "Interface", "Hooks"
+]

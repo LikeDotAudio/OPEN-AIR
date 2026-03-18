@@ -5,7 +5,7 @@
 The OPEN-AIR interface is designed for real-time monitoring and high-fidelity interaction.
 
 ### The "Filesystem is the UI" Concept
-Your dashboard layout is dynamically generated based on the `display/` directory structure.
+Your dashboard layout is dynamically generated based on the `oaGuiDefinitions/` directory structure.
 
 - **Vertical Splits:** A folder named `left_50` or `right_50` creates a vertical column taking 50% of the screen width.
 - **Horizontal Splits:** Folders like `top_10` or `bottom_90` create rows within those columns.

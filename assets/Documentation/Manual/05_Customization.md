@@ -6,7 +6,7 @@ One of OPEN-AIR's greatest strengths is its deep customization through simple, h
 
 ### Customizing the UI Layout
 To reorganize your dashboard:
-1.  **Rearrange Folders:** Move folders within the `display/` directory. For example, moving a folder from `left_50/top_10` to `right_50/top_10` will move that entire UI block to the right column.
+1.  **Rearrange Folders:** Move folders within the `oaGuiDefinitions/` directory. For example, moving a folder from `left_50/top_10` to `right_50/top_10` will move that entire UI block to the right column.
 2.  **Add New Tabs:** Create a new folder (e.g., `5_My_Dashboard`) within a container directory. The system will automatically add it as a new tab.
 
 ### Editing Widget Configurations
@@ -38,5 +38,5 @@ The `config.ini` file in the root directory manages system-level settings:
 
 ### Background and Screws
 OPEN-AIR can automatically generate industrial backgrounds and panel screws for your UI.
-- **Default Panels:** If a JSON GUI doesn't specify a background, it defaults to the configuration in `display/default_panel.json`.
+- **Default Panels:** If a JSON GUI doesn't specify a background, it defaults to the configuration in `oaGuiDefinitions/default_panel.json`.
 - **Panel Screws:** The system can render realistic hardware screws on your panels, with customizable styles (e.g., Phillips, Slotted, Hex).

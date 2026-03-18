@@ -36,7 +36,7 @@ These are directories that contain a collection of files with related concepts b
 
 1.  **Rename Unclear Worker Directories:**
     *   **`workers/active/`**: Rename to a more descriptive name based on its actual function. Potential names: `workers/status_monitor/`, `workers/connection_manager/`, or `workers/process_tracking/`.
-    *   **`workers/Showtime/`**: Rename to clearly indicate its purpose. Examples: `workers/visualization_engine/`, `workers/ui_renderer/`, or `workers/runtime_display/`.
+    *   **`workers/Showtime/`**: Rename to clearly indicate its purpose. Examples: `workers/visualization_engine/`, `workers/ui_renderer/`, or `workers/runtime_oaGuiDefinitions/`.
     *   **`workers/Splinker/`**: Identify the function of "Splinker" and rename this directory accordingly. If it's related to archiving, a name like `workers/archiving/` or `workers/data_pipeline/` might be appropriate.
     *   **`workers/splinker_archive/`**: Rename this directory to match the new name chosen for `workers/Splinker/` and reflect its archive nature, e.g., `workers/archiving/archive/`.
 

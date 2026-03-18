@@ -35,4 +35,4 @@ For advanced users or debugging, the supervisor supports flags to run specific p
 2.  **Configuration:** Check `config.ini` in the root directory to set your preferred broker address and debug modes.
 3.  **Hardware Connection:** Ensure your instruments are connected via USB, Ethernet (VXI-11), or Serial.
 
-Once launched, the supervisor will initialize the MQTT bridge, start the state managers, and render the initial dashboard based on the `display/` directory structure.
+Once launched, the supervisor will initialize the MQTT bridge, start the state managers, and render the initial dashboard based on the `oaGuiDefinitions/` directory structure.

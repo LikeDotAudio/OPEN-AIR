@@ -1,5 +1,17 @@
 # OPEN-AIR Changelog
 
+## [2026.03.18] - 00:30
+### The Supervisor Tree Refactor (Migration Phase 1)
+- **Core Infrastructure**: Migrated system-level managers to specialized `oaConfiguration`, `oaLogging`, and `oaDependancies` modules.
+- **Communication Layer**: Moved hardware and protocol scripts into dedicated silos: `oaComsBroker` (MQTT/Router), `oaComVisa`, `oaComMidi`, `oaComOSC`, and `oaComSNMP`.
+- **Data Vaults**: Reorganized all `DATA/` and `assets/` content into `oaData*` directories (RunningFiles, Logs, Cache, SNMP, Splinks).
+- **GUI Engine**: Refactored the UI controller and builders into `oaGuiManager`, `oaGuiBuild`, and `oaGuiElements`.
+- **System Integrity**: 
+    - Updated all absolute and relative import paths project-wide.
+    - Corrected path guard logic in dynamic GUI modules to align with the new hierarchy.
+    - Fixed `ModuleNotFoundError` by ensuring all refactored directories contain proper `__init__.py` package markers.
+    - Verified the Supervisor (`OpenAir.py`) correctly orchestrates the new Partitioned Architecture.
+
 ## [2026.03.17] - 02:15
 **************************************
 Commit: b2856ee249f11ff24f01bc9b07895c730a54e1ec
@@ -48,7 +60,3 @@ Commit: 24d142473c50ae3cf4073103135171b85c4c98c1
 Date: 2026-03-17 00:40:32
 Message: ## [2026.03.16] - 23:00 ### Fixed - Fixed  in background panel generation by updating  calls to . - Fixed  in  graph initialization by correctly referencing the  module. - Resolved multiple thread failures occurring during dynamic GUI building.
 **************************************
-### Fixed
-- Fixed `AttributeError` in background panel generation by updating `PanelGenerator` calls to `generate_procedural_panel`.
-- Fixed `NameError` in `FluxPlotter` graph initialization by correctly referencing the `graph` module.
-- Resolved multiple thread failures occurring during dynamic GUI building.

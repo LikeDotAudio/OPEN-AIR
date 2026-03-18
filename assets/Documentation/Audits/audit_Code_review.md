@@ -69,7 +69,7 @@
     *   **Suggestion:** If PII or sensitive data is handled, ensure compliance with relevant regulations and implement robust encryption and data handling practices.
 *   **Technical Debt Assessment:**
     *   **Issue:** Numerous `TODO` items and `XXX` prefixed files; use of "placeholder" notes in configurations.
-    *   **File:** `workers/active/active_peak_publisher.md`, `display/.../_Legacy_Commands/`, `display/.../BURSt.json`.
+    *   **File:** `workers/active/active_peak_publisher.md`, `oaGuiDefinitions/.../_Legacy_Commands/`, `oaGuiDefinitions/.../BURSt.json`.
     *   **Code Snippet:** `[TODO: ...]`, `_Legacy_Commands/`, `"note": "Placeholder..."`
     *   **Suggestion:** Prioritize addressing `TODO`s, refactoring `XXX` files, and finalizing placeholders to improve code quality and maintainability.
 *   **Load & Stress Testing Audit:**
@@ -116,7 +116,7 @@
     *   **Suggestion:** Use safer alternatives to `ast.literal_eval` if possible, consider stronger hashing algorithms, and centralize notes into documentation.
 *   **Architecture & Design Audit:**
     *   **Issue:** Central orchestrator (`OpenAir.py`) may become a bottleneck; potential for tight coupling between UI and backend; unclear purpose of `SPLINKER` directory.
-    *   **File:** `OpenAir.py`, `display/` and `managers/` interactions, `DATA/SPLINKER/`.
+    *   **File:** `OpenAir.py`, `oaGuiDefinitions/` and `managers/` interactions, `oaDataSplinks/`.
     *   **Code Snippet:** N/A
     *   **Suggestion:** Diagram architecture, define clear interfaces, and clarify/refactor unclear directory purposes.
 *   **Observability & Logging Audit:**
@@ -133,7 +133,7 @@
 ### LOW
 *   **Static Code Analysis:**
     *   **Issue:** Long lines in data files (CSV, JSON) and verbose MIB descriptions.
-    *   **File:** `DATA/state/CSV/...`, `DATA/snmp/MIB/current.mib`.
+    *   **File:** `oaDataRunningFiles/CSV/...`, `oaDataSNMP/MIB/current.mib`.
     *   **Code Snippet:** Long lines in CSV/JSON, verbose `DESCRIPTION` fields in MIB.
     *   **Suggestion:** Format data files for readability; consider condensing MIB descriptions if clarity is maintained.
 *   **Database Performance Audit:**

@@ -1,0 +1,193 @@
+OPENAIR-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    MODULE-IDENTITY, OBJECT-TYPE, enterprises FROM SNMPv2-SMI
+    DisplayString FROM SNMPv2-TC;
+
+openAirMIB MODULE-IDENTITY
+    LAST-UPDATED "202603180027Z"
+    ORGANIZATION "OPEN-AIR Project"
+    CONTACT-INFO "Anthony Peter Kuzub"
+    DESCRIPTION "MQTT-Aligned OID Tree for OPEN-AIR."
+    REVISION "202603180027Z"
+    DESCRIPTION "Strictly unique path-aligned generation."
+    ::= { enterprises 25030 }
+
+v1 OBJECT IDENTIFIER ::= { openAirMIB 1 }
+
+spectrumff5d OBJECT IDENTIFIER ::= { v1 4582 }
+instrument36ce OBJECT IDENTIFIER ::= { spectrumff5d 59555 }
+traces6d96 OBJECT IDENTIFIER ::= { instrument36ce 21942 }
+spectrumInstrumenttraces4e8f OBJECT IDENTIFIER ::= { traces6d96 32449 }
+continuous9a24 OBJECT IDENTIFIER ::= { spectrumInstrumenttraces4e8f 49832 }
+initiatecontinuouson64e7 OBJECT IDENTIFIER ::= { continuous9a24 30316 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/traces/Spectrum_Instrument_traces/Continuous/initiate_continuous_on/trigger
+trigger709d OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/traces/Spectrum_Instrument_traces/Continuous/initiate_continuous_on/trigger"
+    ::= { initiatecontinuouson64e7 45545 }
+
+frequencye887 OBJECT IDENTIFIER ::= { instrument36ce 41438 }
+spectrumInstrumentfrequency7dc9 OBJECT IDENTIFIER ::= { frequencye887 42633 }
+blocks742d OBJECT IDENTIFIER ::= { spectrumInstrumentfrequency7dc9 3561 }
+startStop9226 OBJECT IDENTIFIER ::= { blocks742d 17133 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz
+startfreqMHz5c5f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz"
+    ::= { startStop9226 25465 }
+
+frequencydd46 OBJECT IDENTIFIER ::= { blocks742d 57029 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz
+centerfreqMHzceb3 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz"
+    ::= { frequencydd46 4552 }
+
+unknownInstrument319b OBJECT IDENTIFIER ::= { v1 7871 }
+yAKb471 OBJECT IDENTIFIER ::= { unknownInstrument319b 21184 }
+unknown9eeb OBJECT IDENTIFIER ::= { yAKb471 6195 }
+connectionb306 OBJECT IDENTIFIER ::= { unknown9eeb 33817 }
+tablef5ff OBJECT IDENTIFIER ::= { connectionb306 13455 }
+-- MQTT: OPEN-AIR/Unknown Instrument/YAK/Unknown/Connection/Table/type
+typeb385 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Unknown Instrument/YAK/Unknown/Connection/Table/type"
+    ::= { tablef5ff 44637 }
+
+-- MQTT: OPEN-AIR/Unknown Instrument/YAK/Unknown/Connection/Table/description
+descriptiona0d5 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Unknown Instrument/YAK/Unknown/Connection/Table/description"
+    ::= { tablef5ff 60130 }
+
+-- MQTT: OPEN-AIR/status
+status7b00 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/status"
+    ::= { v1 25884 }
+
+oaGuiDefinitionsa30c OBJECT IDENTIFIER ::= { v1 38698 }
+spectrum4b8c OBJECT IDENTIFIER ::= { oaGuiDefinitionsa30c 11186 }
+instrumente51a OBJECT IDENTIFIER ::= { spectrum4b8c 55763 }
+bandwidth81bd OBJECT IDENTIFIER ::= { instrumente51a 38545 }
+spectrumInstrumentbandwidth7704 OBJECT IDENTIFIER ::= { bandwidth81bd 17056 }
+blocksdde5 OBJECT IDENTIFIER ::= { spectrumInstrumentbandwidth7704 58428 }
+resolutionBandwidth11b8 OBJECT IDENTIFIER ::= { blocksdde5 35133 }
+rBWbdc3 OBJECT IDENTIFIER ::= { resolutionBandwidth11b8 13761 }
+-- MQTT: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/dial_config
+dialconfig1899 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/dial_config"
+    ::= { rBWbdc3 40509 }
+
+amplitude6019 OBJECT IDENTIFIER ::= { instrumente51a 56303 }
+spectrumInstrumentamplitude4603 OBJECT IDENTIFIER ::= { amplitude6019 50913 }
+blocks400f OBJECT IDENTIFIER ::= { spectrumInstrumentamplitude4603 36843 }
+referenceLeveldaf3 OBJECT IDENTIFIER ::= { blocks400f 6743 }
+refleveldBmd376 OBJECT IDENTIFIER ::= { referenceLeveldaf3 40681 }
+-- MQTT: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Reference Level/ref_level_dBm/dial_config
+dialconfig2886 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Reference Level/ref_level_dBm/dial_config"
+    ::= { refleveldBmd376 5244 }
+
+frequency2dcb OBJECT IDENTIFIER ::= { instrumente51a 64493 }
+spectrumInstrumentfrequency65a9 OBJECT IDENTIFIER ::= { frequency2dcb 54025 }
+blocksab4b OBJECT IDENTIFIER ::= { spectrumInstrumentfrequency65a9 29524 }
+frequencyd520 OBJECT IDENTIFIER ::= { blocksab4b 7323 }
+-- MQTT: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz
+centerfreqMHz248e OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz"
+    ::= { frequencyd520 674 }
+
+-- MQTT: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz
+spanfreqMHz47b0 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz"
+    ::= { frequencyd520 48682 }
+
+startStop1efd OBJECT IDENTIFIER ::= { blocksab4b 22748 }
+-- MQTT: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz
+stopfreqMHz367c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz"
+    ::= { startStop1efd 9778 }
+
+-- MQTT: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz
+startfreqMHzb662 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz"
+    ::= { startStop1efd 28691 }
+
+zoo6ba2 OBJECT IDENTIFIER ::= { oaGuiDefinitionsa30c 55842 }
+fadersfd7c OBJECT IDENTIFIER ::= { zoo6ba2 56788 }
+faderDial34b4 OBJECT IDENTIFIER ::= { fadersfd7c 23306 }
+classice1fb OBJECT IDENTIFIER ::= { faderDial34b4 49120 }
+zooFadersFaderDialClassicdc04 OBJECT IDENTIFIER ::= { classice1fb 28215 }
+blocks1d8e OBJECT IDENTIFIER ::= { zooFadersFaderDialClassicdc04 63431 }
+elements5db7 OBJECT IDENTIFIER ::= { blocks1d8e 32017 }
+examplefieldsf5c0 OBJECT IDENTIFIER ::= { elements5db7 18078 }
+-- MQTT: OPEN-AIR/oaGuiDefinitions/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/elements1/examplefields/fader_config
+faderconfig3b0e OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/oaGuiDefinitions/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/elements1/examplefields/fader_config"
+    ::= { examplefieldsf5c0 20255 }
+
+-- MQTT: OPEN-AIR/oaGuiDefinitions/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/elements1/examplefields/dial_config
+dialconfigbfcb OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/oaGuiDefinitions/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/elements1/examplefields/dial_config"
+    ::= { examplefieldsf5c0 30126 }
+
+dMM53cf OBJECT IDENTIFIER ::= { v1 45793 }
+yAK32aa OBJECT IDENTIFIER ::= { dMM53cf 5745 }
+a2a39 OBJECT IDENTIFIER ::= { yAK32aa 44112 }
+connection9560 OBJECT IDENTIFIER ::= { a2a39 61057 }
+tablef5c5 OBJECT IDENTIFIER ::= { connection9560 24000 }
+-- MQTT: OPEN-AIR/DMM/YAK/34401A/Connection/Table/description
+descriptionb66a OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/DMM/YAK/34401A/Connection/Table/description"
+    ::= { tablef5c5 30767 }
+
+-- MQTT: OPEN-AIR/DMM/YAK/34401A/Connection/Table/type
+type6f4b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/DMM/YAK/34401A/Connection/Table/type"
+    ::= { tablef5c5 47370 }
+
+END

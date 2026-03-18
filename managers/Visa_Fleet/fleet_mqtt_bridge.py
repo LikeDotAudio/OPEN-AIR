@@ -177,7 +177,10 @@ class MqttFleetBridge:
                 new_topic = f"{base_topic}/{index}"
                 self._publish_flattened_dict(item, new_topic)
         else:
-            # Leaf node: publish the literal value.
+            # Leaf node: publish the literal value (skip if None).
+            if data is None:
+                return
+                
             try:
                 self.mqtt_manager.publish(base_topic, str(data))
             except Exception as e:

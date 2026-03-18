@@ -2,18 +2,20 @@
 import tkinter as tk
 
 def apply(layout, widget, path, is_focused, design_elements):
-    """Handles the basic structure outline (#444444 border)."""
+    """Handles the basic structure outline (#444444 border) using an overlay."""
     
-    if layout.show_structure.get():
-        try: 
-            widget.config(highlightbackground="#444444", highlightthickness=1)
-        except tk.TclError: pass
-    else:
-        try: 
-            widget.config(highlightthickness=0)
-        except tk.TclError: pass
+    border = tk.Frame(widget.master, bg="#444444", bd=0, highlightthickness=0)
+    border._is_design_overlay = True
+    design_elements.append(border)
 
     def sync(x, y, w, h):
-        pass # No extra design elements to position
+        if layout.show_structure.get():
+            # Create a 1px border by placing behind or around
+            # We'll place it slightly larger than the widget
+            th = 1
+            border.place(x=x-th, y=y-th, width=w+(th*2), height=h+(th*2))
+            border.lower(widget) # Ensure it stays behind functional elements
+        else:
+            border.place_forget()
 
     return sync

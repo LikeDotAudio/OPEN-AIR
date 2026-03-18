@@ -137,17 +137,23 @@ class BlueprintLoader:
         config = WidgetSchemaNormalizer.normalize(config, root_config=root)
         
         # 2. Optimized recursion: Only descend into logical widget containers.
-        if "fields" in config and isinstance(config["fields"], dict):
-            for key, field in config["fields"].items():
-                config["fields"][key] = (
-                    BlueprintLoader._recursively_normalize(field, root)
-                )
+        if "fields" in config:
+            fields = config["fields"]
+            if isinstance(fields, dict):
+                for key, field in fields.items():
+                    fields[key] = BlueprintLoader._recursively_normalize(field, root)
+            elif isinstance(fields, list):
+                for i, field in enumerate(fields):
+                    fields[i] = BlueprintLoader._recursively_normalize(field, root)
         
-        elif "blocks" in config and isinstance(config["blocks"], dict):
-            for key, block in config["blocks"].items():
-                config["blocks"][key] = (
-                    BlueprintLoader._recursively_normalize(block, root)
-                )
+        elif "blocks" in config:
+            blocks = config["blocks"]
+            if isinstance(blocks, dict):
+                for key, block in blocks.items():
+                    blocks[key] = BlueprintLoader._recursively_normalize(block, root)
+            elif isinstance(blocks, list):
+                for i, block in enumerate(blocks):
+                    blocks[i] = BlueprintLoader._recursively_normalize(block, root)
         
         elif not config.get("type"):
             # If the current level has no 'type', it is a structural container.
@@ -156,11 +162,13 @@ class BlueprintLoader:
                     # Skip known metadata keys to avoid redundant processing.
                     if key not in ["background", "styles", "style", "behavior", 
                                    "metadata", "geometry", "cosmetics", "domain", 
-                                   "dynamics", "readout", "interaction", "layout", 
-                                   "blocks"]:
+                                   "dynamics", "readout", "interaction", "layout"]:
                         config[key] = (
                             BlueprintLoader._recursively_normalize(value, root)
                         )
+                elif isinstance(value, list) and key in ["items", "blocks", "fields"]:
+                     for i, item in enumerate(value):
+                         value[i] = BlueprintLoader._recursively_normalize(item, root)
                 
         return config
 

@@ -40,6 +40,12 @@ class FluxPlotter(
         self.subscriber_router = kwargs.pop("subscriber_router", None)
         self.state_mirror_engine = kwargs.pop("state_mirror_engine", None)
         super().__init__(parent, **kwargs)
+        
+        # ⚡ FIX: Prevent geometry propagation to stop "vibrating" resize loops.
+        # This ensures the frame size is determined by its container (e.g. PanedWindow or Grid)
+        # and not by the internal Matplotlib canvas changing its requested size.
+        self.pack_propagate(False)
+        self.grid_propagate(False)
 
         self.widget_config, self.base_mqtt_topic_from_path, self.widget_id, self.instance = config, base_mqtt_topic_from_path, widget_id, builder_instance
         self.lines, self.x_data, self.y_data, self.datasets_config = {}, {}, {}, {}
@@ -76,12 +82,18 @@ class FluxPlotter(
 
     def _init_plot_elements(self):
         graph_styler.apply_style(self.ax, self.fig, self.widget_config, graph_styler.get_theme_style("dark"))
+        if BUILDER_DEBUG:
+            builder_logger.success(f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' visual styles applied.")
+            
         graph_interactor.setup_interaction(self.fig, self.ax, self.widget_config, {"on_view_change": lambda x, y: None, "on_setting_change": lambda n, v: None, "on_add_marker": self._on_add_marker})
         for ds in self.widget_config.get("datasets", []):
             ds_id = ds.get("id")
             if ds_id:
                 line, = self.ax.plot([], [], color=ds.get("style", {}).get("line_color") or "cyan", linewidth=1, label=ds.get("label", ds_id))
                 self.lines[ds_id], self.x_data[ds_id], self.y_data[ds_id] = line, deque(maxlen=self.widget_config.get("buffer_size", 100)), deque(maxlen=self.widget_config.get("buffer_size", 100))
+        
+        if BUILDER_DEBUG:
+            builder_logger.success(f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' plot elements initialized.")
 
     def _init_dataset_config(self):
         for ds in self.widget_config.get("datasets", []):
@@ -103,16 +115,30 @@ class FluxPlotter(
             if csv: self.dataset_vars[ds_id].set(csv)
 
     def _on_resize_event(self, event):
+        # 🛡️ GLOBAL RESIZE GUARD: Don't process local resizes if the whole app is resizing.
+        # This prevents "vibration" where the container and child fight for priority.
+        if getattr(self.instance, "global_resizing", False):
+            if BUILDER_DEBUG: builder_logger.trace(f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' skipping resize (global lock).")
+            return
+
+        if BUILDER_DEBUG: builder_logger.trace(f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' resize event: {event.width}x{event.height}")
         last_w, last_h = getattr(self, "_last_resize_dim", (0, 0))
-        if abs(event.width - last_w) <= 2 and abs(event.height - last_h) <= 2: return
+        
+        # 🛡️ JITTER FILTER: Increased threshold to 10px to stop minor rounding-error vibrations.
+        if abs(event.width - last_w) <= 10 and abs(event.height - last_h) <= 10: return
+        
         self._last_resize_dim = (event.width, event.height)
         if hasattr(self, "_resize_timer") and self._resize_timer: self.after_cancel(self._resize_timer)
-        self._resize_timer = self.after(200, lambda: self._perform_resize(event.width, event.height))
+        # Increased debounce to 350ms
+        self._resize_timer = self.after(350, lambda: self._perform_resize(event.width, event.height))
 
     def _perform_resize(self, w, h):
+        if BUILDER_DEBUG: builder_logger.debug(f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' performing resize to {w}x{h}")
         self._resize_timer = None
         if hasattr(self, "fig") and w > 1 and h > 1:
-            dpi = self.fig.get_dpi(); self.fig.set_size_inches(w / dpi, h / dpi)
+            # ⚡ FIX: Use forward=False to prevent Matplotlib from pushing size changes back to Tkinter
+            dpi = self.fig.get_dpi()
+            self.fig.set_size_inches(w / dpi, h / dpi, forward=False)
             self._on_patina_update()
 
     def _on_marker_var_change(self, *args):

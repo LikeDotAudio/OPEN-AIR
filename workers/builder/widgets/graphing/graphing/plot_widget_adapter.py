@@ -11,7 +11,7 @@ from managers.Display.factory.widget_registry import WidgetRegistry
 
 app_constants = Config.get_instance()
 
-@WidgetRegistry.register("plot_widget", "bar_graph")
+@WidgetRegistry.register("plot_widget", "bar_graph", "_GuiGraph")
 class BuilderGraphingCreator:
     """Factory for creating Plot/Graph widgets."""
 
@@ -19,7 +19,7 @@ class BuilderGraphingCreator:
     def make(parent_widget, config_data, context=None, **kwargs):
         """Unified entry point for graphing widgets."""
         w_type = config_data.get("type")
-        if w_type == "plot_widget":
+        if w_type in ["plot_widget", "_GuiGraph"]:
             return BuilderGraphingCreator._create_plot_widget(parent_widget, config_data, context, **kwargs)
         elif w_type == "bar_graph":
             return BuilderGraphingCreator._create_bar_graph_widget(parent_widget, config_data, context, **kwargs)
@@ -27,7 +27,8 @@ class BuilderGraphingCreator:
 
     @staticmethod
     def _create_plot_widget(parent_widget, config_data, context=None, **kwargs):
-        if BUILDER_DEBUG: builder_logger.debug(f"📊📈📉 [BUILDER] plot_adapter: Spawning FluxPlotter '{config_data.get('path', 'Unknown')}'.")
+        if BUILDER_DEBUG:
+            builder_logger.debug(f"🔬🏗️📊 [BUILDER] plot_adapter: Spawning FluxPlotter '{config_data.get('path', 'Unknown')}'.")
         
         # ⚡ HARDENED INTERFACE
         if context:
@@ -54,7 +55,8 @@ class BuilderGraphingCreator:
 
     @staticmethod
     def _create_bar_graph_widget(parent_widget, config_data, context=None, **kwargs):
-        if BUILDER_DEBUG: builder_logger.debug(f"📊💹📊 [BUILDER] plot_adapter: Spawning DynamicBarGraph '{config_data.get('path', 'Unknown')}'.")
+        if BUILDER_DEBUG:
+            builder_logger.debug(f"🔬🏗️📊 [BUILDER] plot_adapter: Spawning DynamicBarGraph '{config_data.get('path', 'Unknown')}'.")
         
         if context:
             state_mirror_engine = context.state_mirror_engine

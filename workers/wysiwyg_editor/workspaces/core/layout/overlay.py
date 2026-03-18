@@ -32,7 +32,7 @@ class OverlayManager:
                 self._inject_controls(child)
             
             if isinstance(child, (tk.Frame, ttk.Frame, tk.Canvas, tk.LabelFrame)):
-                if path: self._recursive_apply(child, depth + 1)
+                self._recursive_apply(child, depth + 1)
 
     def _inject_controls(self, widget):
         try:

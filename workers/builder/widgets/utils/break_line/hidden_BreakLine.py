@@ -18,7 +18,7 @@ from managers.Display.transparency.transparency_mixin import TransparencyMixin
 from managers.Display.transparency.transparency import TransparencyManager
 from managers.Display.factory.widget_registry import WidgetRegistry
 
-@WidgetRegistry.register("OcaFold", "BreakLine", "_Separator")
+@WidgetRegistry.register("OcaFold", "BreakLine", "_Separator", "OcaSeparator")
 class BuilderBreakLineCreator(TransparencyMixin):
     """Factory class for creating horizontal or vertical break lines."""
 

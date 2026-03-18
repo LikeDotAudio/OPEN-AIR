@@ -9,7 +9,7 @@ LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 # Dimension and Coordinate Constants
 MIN_WIDGET_DIMENSION = 1
 PRE_LAYOUT_DIMENSION_LIMIT = 1
-JITTER_THRESHOLD_PIXELS = 2
+JITTER_THRESHOLD_PIXELS = 5
 CENTER_SAMPLE_DIVISOR = 2
 
 # Structural and Theme Constants
@@ -123,10 +123,17 @@ class TransparencyManager:
                     if hasattr(builder, 'theme_colors'):
                         theme_background = builder.theme_colors.get("bg", theme_background)
                     
-                    if widget.winfo_exists() and widget.cget("bg") != theme_background:
-                        widget.configure(bg=theme_background)
-                    if canvas and canvas.winfo_exists() and canvas.cget("bg") != theme_background:
-                        canvas.configure(bg=theme_background)
+                    try:
+                        if widget.winfo_exists() and widget.cget("bg") != theme_background:
+                            widget.configure(bg=theme_background)
+                    except tk.TclError:
+                        pass # Widget doesn't support 'bg' option (e.g. ttk)
+
+                    try:
+                        if canvas and canvas.winfo_exists() and canvas.cget("bg") != theme_background:
+                            canvas.configure(bg=theme_background)
+                    except tk.TclError:
+                        pass
                     return
 
                 # Use root coordinates for fast relative calculation
@@ -199,10 +206,17 @@ class TransparencyManager:
                     center_color_rgb = image_slice.getpixel(((crop_x2 - crop_x1) // CENTER_SAMPLE_DIVISOR, (crop_y2 - crop_y1) // CENTER_SAMPLE_DIVISOR))
                     hex_background_color = '#%02x%02x%02x' % center_color_rgb[:3]
                     
-                    if widget.winfo_exists() and widget.cget("bg") != hex_background_color:
-                        widget.configure(bg=hex_background_color)
-                    if rendering_target != widget and rendering_target.winfo_exists() and rendering_target.cget("bg") != hex_background_color:
-                        rendering_target.configure(bg=hex_background_color)
+                    try:
+                        if widget.winfo_exists() and widget.cget("bg") != hex_background_color:
+                            widget.configure(bg=hex_background_color)
+                    except tk.TclError:
+                        pass
+                        
+                    try:
+                        if rendering_target != widget and rendering_target.winfo_exists() and rendering_target.cget("bg") != hex_background_color:
+                            rendering_target.configure(bg=hex_background_color)
+                    except tk.TclError:
+                        pass
 
                     # If it's a canvas, draw the slice
                     if isinstance(rendering_target, tk.Canvas) and rendering_target.winfo_exists():

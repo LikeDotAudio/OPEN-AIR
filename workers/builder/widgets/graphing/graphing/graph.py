@@ -19,8 +19,8 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from typing import Dict, Any
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from workers.logger.logger import initialize_logging, set_log_directory
+BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
+from workers.logger.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
 from managers.configini.config_reader import Config
@@ -42,7 +42,9 @@ def create_base_plot(parent_frame: tk.Frame, config: Dict[str, Any]) -> tuple:
     Creates the FigureCanvasTkAgg and basic Axis.
     Returns (figure, axis, canvas).
     """
-    if LOCAL_DEBUG: logger.debug(f"📊📈 graph_builder: Creating base Matplotlib plot for '{config.get('path', 'Unknown')}'.")
+    if BUILDER_DEBUG:
+        builder_logger.debug(f"🔬🏗️📊 [BUILDER] graph_builder: Creating base Matplotlib plot for '{config.get('path', 'Unknown')}'.")
+
     layout_config = config.get("layout", {})
     # ⚡ Enable transparency at the Figure level
     fig = Figure(
@@ -58,7 +60,7 @@ def create_base_plot(parent_frame: tk.Frame, config: Dict[str, Any]) -> tuple:
 
     canvas = FigureCanvasTkAgg(fig, master=parent_frame)
     canvas_widget = canvas.get_tk_widget()
-    
+
     # ⚡ Ensure the Tkinter widget itself is configured for transparency
     # (Though it still needs the Industrial Transparency slice to look perfect)
     canvas_widget.configure(highlightthickness=0, bd=0)

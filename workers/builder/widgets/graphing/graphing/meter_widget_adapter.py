@@ -43,7 +43,9 @@ class MeterWidgetAdapterMixin:
     def _create_horizontal_meter(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
-        if BUILDER_DEBUG: builder_logger.debug(f"📊📈📶 [BUILDER] meter_adapter: Instantiating HorizontalMeter '{config_data.get('id', 'Unknown')}'.")
+        if BUILDER_DEBUG:
+            builder_logger.debug(f"🔬🏗️📊 [BUILDER] meter_adapter: Instantiating HorizontalMeter '{config_data.get('id', 'Unknown')}'.")
+            
         # Extract arguments from config_data
         config = config_data  # config_data is the config
         base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
@@ -51,7 +53,10 @@ class MeterWidgetAdapterMixin:
         subscriber_router = config_data.get("subscriber_router")
 
         widget_id = config.get("id", "h_meter")
-        if BUILDER_DEBUG: builder_logger.trace(f"🏗️📊📈 [CONSTRUCT] Spawning HorizontalMeterWithText core for '{widget_id}'")
+        
+        if BUILDER_DEBUG:
+            builder_logger.trace(f"🔬🏗️📊 [BUILDER] Spawning HorizontalMeterWithText core for '{widget_id}'")
+            
         return HorizontalMeterWithText(
             parent=parent_widget,  # Use parent_widget here
             config=config,
@@ -73,7 +78,9 @@ class MeterWidgetAdapterMixin:
     def _create_vertical_meter(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
-        if BUILDER_DEBUG: builder_logger.debug(f"📊💹📶 [BUILDER] meter_adapter: Instantiating VerticalMeter '{config_data.get('id', 'Unknown')}'.")
+        if BUILDER_DEBUG:
+            builder_logger.debug(f"🔬🏗️📊 [BUILDER] meter_adapter: Instantiating VerticalMeter '{config_data.get('id', 'Unknown')}'.")
+            
         # Extract arguments from config_data
         config = config_data  # config_data is the config
         base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
@@ -81,7 +88,10 @@ class MeterWidgetAdapterMixin:
         subscriber_router = config_data.get("subscriber_router")
 
         widget_id = config.get("id", "v_meter")
-        if BUILDER_DEBUG: builder_logger.trace(f"🏗️📊💹 [CONSTRUCT] Spawning VerticalMeter core for '{widget_id}'")
+        
+        if BUILDER_DEBUG:
+            builder_logger.trace(f"🔬🏗️📊 [BUILDER] Spawning VerticalMeter core for '{widget_id}'")
+            
         return VerticalMeter(
             parent=parent_widget,  # Use parent_widget here
             config=config,

@@ -17,12 +17,23 @@ class StructuralAssembler:
         hull = tk.Frame(parent, bg="#2b2b2b", bd=0, highlightthickness=0)
         hull.grid_rowconfigure(0, weight=1); hull.grid_columnconfigure(0, weight=1)
         
-        viewport = tk.Canvas(hull, bd=0, highlightthickness=0, bg="#2b2b2b")
+        # 📏 GEOMETRY: Extract explicit size from config or geometry block
+        geom = value.get("geometry", {})
+        w = value.get("width") or geom.get("width") or 200
+        h = value.get("height") or geom.get("height") or 200
+        
+        viewport = tk.Canvas(hull, bd=0, highlightthickness=0, bg="#2b2b2b", width=w, height=h)
         viewport.grid(row=0, column=0, sticky="nsew")
         
-        inner = tk.Frame(viewport, bg="#2b2b2b", bd=0, highlightthickness=0)
+        inner = tk.Frame(viewport, bg="#2b2b2b", bd=0, highlightthickness=0, width=w, height=h)
         inner_id = viewport.create_window((0, 0), window=inner, anchor="nw")
         
+        # ⚡ FIX: Sync inner frame width with viewport to ensure children are visible.
+        def _sync_width(event):
+            if viewport.winfo_exists():
+                viewport.itemconfig(inner_id, width=event.width)
+        
+        viewport.bind("<Configure>", _sync_width, add="+")
         inner.bind("<Configure>", lambda e: viewport.configure(scrollregion=viewport.bbox("all")) if viewport.winfo_exists() else None)
         
         TransparencyManager.apply_transparency(hull, viewport, value, builder)

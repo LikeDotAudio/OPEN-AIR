@@ -48,9 +48,13 @@ def synthesize_report(mtp):
     mtp.stop()
     print("\n🛑 OpenAir closed or frozen. Synthesizing Intelligence Report...")
     
+    # ⚡ DATA RELOCATION: Reports now kept in assets/DATA
+    data_dir = project_root / "assets" / "DATA" / "FlameGraph"
+    data_dir.mkdir(parents=True, exist_ok=True)
+    
     ps = mtp.get_stats()
-    svg_file = current_dir / "flamegraph.svg"
-    html_file = current_dir / "flamegraph.html"
+    svg_file = data_dir / "flamegraph.svg"
+    html_file = data_dir / "flamegraph.html"
     
     # D. Process Stats
     stats_list = process_stats_for_ui(ps)

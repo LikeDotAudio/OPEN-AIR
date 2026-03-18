@@ -5,8 +5,8 @@ from collections import deque
 from typing import Dict, Any, List
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from workers.logger.logger import initialize_logging, set_log_directory
+BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
+from workers.logger.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
 from managers.configini.config_reader import Config
@@ -27,7 +27,9 @@ class DynamicBarGraph(FluxPlotter):
     
     def _initialize_plot_elements(self):
         """Initializes plot elements like bars, styles, and interactions."""
-        if LOCAL_DEBUG: logger.debug(f"📊📈 DynamicBarGraph '{self.widget_id}' initializing plot elements.")
+        if BUILDER_DEBUG:
+            builder_logger.debug(f"🔬🏗️📊 [BUILDER] DynamicBarGraph '{self.widget_id}' initializing plot elements.")
+        
         theme = graph_styler.get_theme_style("dark")
         graph_styler.apply_style(self.ax, self.fig, self.widget_config, theme)
 
@@ -47,13 +49,17 @@ class DynamicBarGraph(FluxPlotter):
                 self.bar_containers[ds_id] = None # Will be created on first data
                 self.x_data[ds_id] = deque(maxlen=self.widget_config.get("buffer_size", 100))
                 self.y_data[ds_id] = deque(maxlen=self.widget_config.get("buffer_size", 100))
-        if LOCAL_DEBUG: logger.success(f"📊💹 DynamicBarGraph '{self.widget_id}' plot elements initialized.")
+        
+        if BUILDER_DEBUG:
+            builder_logger.success(f"🔬🏗️📊 [BUILDER] DynamicBarGraph '{self.widget_id}' plot elements initialized.")
 
     def load_initial_data(self, dataset_id: str, x_values: List[float], y_values: List[float]):
         """Loads data and renders as bars."""
         if dataset_id not in self.bar_containers:
             return
-        if LOCAL_DEBUG: logger.debug(f"💹📉 DynamicBarGraph '{self.widget_id}' loading {len(x_values)} points into dataset '{dataset_id}'.")
+            
+        if BUILDER_DEBUG:
+            builder_logger.debug(f"🔬🏗️📊 [BUILDER] DynamicBarGraph '{self.widget_id}' loading {len(x_values)} points into dataset '{dataset_id}'.")
             
         # Update deques
         self.x_data[dataset_id].clear()
@@ -63,7 +69,9 @@ class DynamicBarGraph(FluxPlotter):
         
         self._render_bars(dataset_id)
         graph_updater.autoscale_and_redraw(self.ax, self.canvas)
-        if LOCAL_DEBUG: logger.success(f"📊📈 DynamicBarGraph '{self.widget_id}' dataset '{dataset_id}' population complete.")
+        
+        if BUILDER_DEBUG:
+            builder_logger.success(f"🔬🏗️📊 [BUILDER] DynamicBarGraph '{self.widget_id}' dataset '{dataset_id}' population complete.")
 
     def update_plot(self, dataset_id: str, x_new: float, y_new: float):
         """Updates a dataset with a new data point and re-renders bars."""
@@ -76,7 +84,9 @@ class DynamicBarGraph(FluxPlotter):
         if x_new == last_x and y_new == last_y:
             return
 
-        if LOCAL_DEBUG: logger.trace(f"📉💹 DynamicBarGraph '{self.widget_id}' receiving new point ({x_new}, {y_new}) for dataset '{dataset_id}'.")
+        if BUILDER_DEBUG:
+            builder_logger.trace(f"🔬🏗️📊 [BUILDER] DynamicBarGraph '{self.widget_id}' receiving point ({x_new}, {y_new}) for dataset '{dataset_id}'.")
+            
         self.x_data[dataset_id].append(x_new)
         self.y_data[dataset_id].append(y_new)
         
@@ -85,7 +95,9 @@ class DynamicBarGraph(FluxPlotter):
 
     def _render_bars(self, dataset_id):
         """Internal helper to draw/update bars for a dataset."""
-        if LOCAL_DEBUG: logger.trace(f"📊💹 DynamicBarGraph '{self.widget_id}' rendering bars for dataset '{dataset_id}'.")
+        if BUILDER_DEBUG:
+            builder_logger.trace(f"🔬🏗️📊 [BUILDER] DynamicBarGraph '{self.widget_id}' rendering bars for dataset '{dataset_id}'.")
+            
         # Remove old bars for this dataset
         if self.bar_containers[dataset_id]:
             for bar in self.bar_containers[dataset_id]:
@@ -115,4 +127,6 @@ class DynamicBarGraph(FluxPlotter):
                 self.x_data[d_id].clear()
                 self.y_data[d_id].clear()
         graph_updater.autoscale_and_redraw(self.ax, self.canvas)
-        if LOCAL_DEBUG: logger.debug(f"💹📉 DynamicBarGraph '{self.widget_id}' data has been cleared.")
+        
+        if BUILDER_DEBUG:
+            builder_logger.debug(f"🔬🏗️📊 [BUILDER] DynamicBarGraph '{self.widget_id}' data has been cleared.")

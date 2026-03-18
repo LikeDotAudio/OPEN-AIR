@@ -4,6 +4,7 @@ import unittest
 import time
 import json
 import xml.etree.ElementTree as ET
+import webbrowser
 from datetime import datetime
 
 class UnifiedTestRunner:
@@ -187,13 +188,21 @@ def main():
     project_root = os.getcwd()
     sys.path.insert(0, project_root)
     
-    html_path = os.path.join(project_root, 'assets', 'Documentation', 'Testing', 'test_execution_report.html')
-    json_path = os.path.join(project_root, 'assets', 'Documentation', 'Testing', 'test_results_report.json')
+    # ⚡ DATA RELOCATION: Reports now kept in assets/DATA
+    data_dir = os.path.join(project_root, 'assets', 'DATA', 'Testing')
+    os.makedirs(data_dir, exist_ok=True)
+    
+    html_path = os.path.join(data_dir, 'test_execution_report.html')
+    json_path = os.path.join(data_dir, 'test_results_report.json')
     
     runner = UnifiedTestRunner(html_path, json_path)
     runner.run([
         os.path.join(project_root, 'tests')
     ], top_level_dir=project_root)
+
+    # 🌐 AUTO-OPEN: Open the report in the default browser
+    print(f"🌐 Launching report...")
+    webbrowser.open('file://' + os.path.realpath(html_path))
 
 if __name__ == "__main__":
     main()

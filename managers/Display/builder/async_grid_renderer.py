@@ -44,7 +44,26 @@ class AsyncGridRenderer:
                     renderer_logger.trace(f"Geometry configuration skipped: {e}")
 
             fields = data.get("fields", data.get("blocks", data))
-            all_fields = list(fields.items())
+            
+            # Robust Field Parsing: handle dict (default) or list of dicts (presets/OcaBin)
+            if isinstance(fields, dict):
+                all_fields = list(fields.items())
+            elif isinstance(fields, list):
+                all_fields = []
+                for item in fields:
+                    if isinstance(item, dict):
+                        # Handle list of single-keyed dicts (presets style)
+                        if len(item) == 1 and not any(k in ["type", "widget_type"] for k in item.keys()):
+                            all_fields.extend(item.items())
+                        else:
+                            # Handle list of widget configs (items style)
+                            item_key = item.get("id") or item.get("label") or item.get("label_active")
+                            all_fields.append((item_key, item))
+                    else:
+                        all_fields.append((None, item))
+            else:
+                all_fields = []
+
             num_cols = GridTopologyConfigurator.configure(parent_frame, data, all_fields)
             
             eff_bg = parent_bg_pil or getattr(self.builder, 'panel_bg_pil', None)
@@ -77,11 +96,23 @@ class AsyncGridRenderer:
         while i < len(field_list):
             if not parent.winfo_exists(): state["aborted"] = True; break
             key, val = field_list[i]
+            
+            # Metadata filter
             if key in ["layout", "type", "geometry", "column_sizing", "background"] or not isinstance(val, dict):
                 i += 1; continue
             
-            p_sfx = "fields" if (parent_data and "fields" in parent_data) else ""
-            cur_path = f"{prefix}.{p_sfx}.{key}".strip(".")
+            # Resolve unique path key
+            path_key = key or val.get("id") or val.get("label") or f"item_{i}"
+            
+            # ⚡ FIX: Correct path segment identification to prevent double dots.
+            p_sfx = ""
+            if parent_data:
+                if "fields" in parent_data: p_sfx = "fields"
+                elif "blocks" in parent_data: p_sfx = "blocks"
+            
+            raw_path = f"{prefix}.{p_sfx}.{path_key}"
+            cur_path = ".".join([part for part in raw_path.split(".") if part])
+            
             w_type = val.get("type", val.get("widget_type"))
             if not w_type: i += 1; continue
 
@@ -92,11 +123,14 @@ class AsyncGridRenderer:
             if w_type in STRUCT:
                 if w_type == "OcaBlock":
                     target = StructuralAssembler.create_block(parent, val, self.builder)
+                    target._oca_path = cur_path
                     target.grid(row=cr, column=cc, columnspan=cs, rowspan=rs, sticky=st)
                     state["pending"] += 1
                     self.render(target, val, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context)
                 elif w_type == "OcaBin":
                     hull, inner = StructuralAssembler.create_bin(parent, val, self.builder)
+                    hull._oca_path = cur_path
+                    inner._oca_path = f"{cur_path}.fields"
                     hull.grid(row=cr, column=cc, columnspan=cs, rowspan=rs, sticky=st)
                     state["pending"] += 1
                     self.render(inner, val, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context)
@@ -104,7 +138,9 @@ class AsyncGridRenderer:
                     state["pending"] += 1; creator = self.builder.widget_factory.get(w_type)
                     if creator:
                         target = creator(parent_widget=parent, config_data=val, context=context)
-                        if target: target.grid(row=cr, column=cc, columnspan=cs, rowspan=rs, sticky=st)
+                        if target: 
+                            target._oca_path = cur_path
+                            target.grid(row=cr, column=cc, columnspan=cs, rowspan=rs, sticky=st)
                     state["pending"] -= 1; _check_done()
             else:
                 state["pending"] += 1

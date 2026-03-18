@@ -1,4 +1,5 @@
 import sys
+import threading
 from loguru import logger
 
 class ShutdownCoordinator:
@@ -8,24 +9,34 @@ class ShutdownCoordinator:
         self.root = root
         self.shared_instances = shared_instances
         self.debug_enabled = debug_enabled
+        self._shutdown_in_progress = False
 
     def on_closing(self):
         """Gracefully terminates all UI and Communication sub-processes."""
+        if self._shutdown_in_progress:
+            return
+        self._shutdown_in_progress = True
+        
         if self.debug_enabled: logger.debug("🖥️🎨 [UI] Initiating shutdown...")
         self.root._shutdown = True
         
-        # Sequentially stop all active managers
-        for name, instance in self.shared_instances.items():
-            if instance:
-                try:
-                    if hasattr(instance, "stop"): instance.stop()
-                    elif hasattr(instance, "shutdown"): instance.shutdown()
-                    elif hasattr(instance, "disconnect"): instance.disconnect()
-                except Exception as e:
-                    logger.warning(f"⚠️ Error shutting down {name}: {e}")
-        
-        self.root.destroy()
-        sys.exit(0)
+        # ⚡ THREADED SHUTDOWN: Run manager stops in a separate thread to prevent UI hang
+        def _stop_managers():
+            for name, instance in self.shared_instances.items():
+                if instance:
+                    try:
+                        if self.debug_enabled: logger.debug(f"🛑 Stopping manager: {name}")
+                        if hasattr(instance, "stop"): instance.stop()
+                        elif hasattr(instance, "shutdown"): instance.shutdown()
+                        elif hasattr(instance, "disconnect"): instance.disconnect()
+                    except Exception as e:
+                        logger.warning(f"⚠️ Error shutting down {name}: {e}")
+            
+            # After managers are signaled to stop, quit the mainloop
+            if self.debug_enabled: logger.debug("🖥️🎨 [UI] Managers signaled to stop. Quitting mainloop...")
+            self.root.after(0, self.root.quit)
+
+        threading.Thread(target=_stop_managers, daemon=True).start()
 
     def attach_to_root(self):
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)

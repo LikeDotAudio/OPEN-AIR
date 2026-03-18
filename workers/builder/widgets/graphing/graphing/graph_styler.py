@@ -17,8 +17,8 @@ from typing import Dict, Any
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from workers.logger.logger import initialize_logging, set_log_directory
+BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
+from workers.logger.logger import initialize_logging, set_log_directory, builder_logger
 
 from managers.configini.config_reader import Config
 
@@ -42,15 +42,17 @@ def apply_style(
     Applies colors, grid visibility, and axis visibility.
     Supports nested 'style' and 'axis' configurations.
     """
-    if LOCAL_DEBUG: logger.debug(f"📊💹 graph_styler: Applying visual styles to axis.")
+    if BUILDER_DEBUG:
+        builder_logger.debug(f"🔬🏗️📊 [BUILDER] graph_styler: Applying visual styles to axis.")
+
     # Resolve 'style' dictionary
     nested_style = style_config.get("style", {})
-    
+
     bg_color = nested_style.get("bg_color", nested_style.get("background_color", style_config.get("bg_color", "match_theme")))
-    
+
     # ⚡ Check for explicit transparency override
     is_transparent = style_config.get("transparent", False)
-    
+
     if bg_color == "match_theme":
         resolved_bg = theme.get("background", "none")
         if resolved_bg == "none": is_transparent = True
@@ -66,7 +68,8 @@ def apply_style(
         fig.patch.set_visible(False)
         ax.patch.set_visible(False)
         try: ax.patch.set_alpha(0.0)
-        except Exception as e: logger.trace(f"Error setting alpha 0.0: {e}")
+        except Exception as e:
+            logger.trace(f"Error setting alpha 0.0: {e}")
     else:
         # Standard hex or named color
         fig.patch.set_facecolor(bg_color)
@@ -74,11 +77,12 @@ def apply_style(
         fig.patch.set_visible(True)
         ax.patch.set_visible(True)
         try: ax.patch.set_alpha(1.0)
-        except Exception as e: logger.trace(f"Error setting alpha 1.0: {e}")
+        except Exception as e:
+            logger.trace(f"Error setting alpha 1.0: {e}")
 
     # Resolve 'axis' dictionary
     axis_config = style_config.get("axis", {})
-    
+
     # Grid
     show_grid = axis_config.get("show_grid", style_config.get("show_grid", True))
     grid_color = nested_style.get("grid_color", theme.get("grid", "gray"))
@@ -95,19 +99,19 @@ def apply_style(
         a_conf = axis_config.get(axis_name, {})
         if not a_conf:
             continue
-            
+
         # Label
         label = a_conf.get("label")
         if label:
             if axis_name == "x": ax.set_xlabel(label, color=theme.get("text", "black"))
             else: ax.set_ylabel(label, color=theme.get("text", "black"))
-            
+
         # Scale
         scale = a_conf.get("scale")
         if scale:
             if axis_name == "x": ax.set_xscale(scale)
             else: ax.set_yscale(scale)
-            
+
         # Color (Ticks and Spines)
         color = a_conf.get("color")
         if color:
@@ -124,12 +128,12 @@ def apply_style(
     # We handle this separately to allow 'auto' or numeric values
     x_conf = axis_config.get("x", {})
     y_conf = axis_config.get("y", {})
-    
+
     x_min = x_conf.get("min")
     x_max = x_conf.get("max")
     if x_min is not None and x_max is not None and x_min != "auto" and x_max != "auto":
          ax.set_xlim(float(x_min), float(x_max))
-         
+
     y_min = y_conf.get("min")
     y_max = y_conf.get("max")
     if y_min is not None and y_max is not None and y_min != "auto" and y_max != "auto":

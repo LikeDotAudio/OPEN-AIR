@@ -6,7 +6,10 @@ class GridTopologyConfigurator:
         """Calculates grid dimensions and configures row/column weights."""
         max_r, max_c = 0, 0
         if all_fields:
-            for _, val in all_fields:
+            for item in all_fields:
+                # Handle both (key, val) pairs and raw values (if list was processed)
+                val = item[1] if isinstance(item, tuple) and len(item) == 2 else item
+                
                 if isinstance(val, dict):
                     lay = val.get("layout", {})
                     max_r = max(max_r, lay.get("row", 0) + lay.get("row_span", 1) - 1)

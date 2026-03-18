@@ -40,6 +40,7 @@ Constraints:
 """
 
 from workers.styling.style import THEMES, DEFAULT_THEME
+from .standardizers.widget_type_resolver import WidgetTypeResolver
 
 class WidgetSchemaNormalizer:
     """
@@ -199,20 +200,9 @@ class WidgetSchemaNormalizer:
         if "layout" not in config: config["layout"] = {}
         if final_sticky: config["layout"]["sticky"] = final_sticky
 
-        # 5. --- Smart Alias Resolution ---
-        w_type = config.get("type", "")
-        # Resolve dynamic widget types based on metadata and orientation.
-        if w_type in ["_SmartMeter"]:
-            viz = cosmetics.get("style_flags", {}).get("visualization", "bar")
-            config["type"] = "_NeedleVUMeter" if viz == "needle" else "_BarGraph"
-        elif w_type == "_SmartKnob":
-            config["type"] = "_Knob"
-        elif w_type == "_SmartFader":
-            orientation = str(geometry.get("orientation", "")).lower()
-            config["type"] = ("_CustomHorizontalFader" if "horiz" in orientation 
-                              else "_CustomFader")
-        elif w_type == "Block":
-            config["type"] = "OcaBlock"
+        # 5. --- Centralized Alias Resolution ---
+        orientation = str(geometry.get("orientation", "vertical")).lower()
+        config["type"] = WidgetTypeResolver.resolve_type(config, orientation)
 
         # 6. --- Domain and Ballistics ---
         primary_domain = domain.get("primary", domain)
@@ -247,11 +237,16 @@ class WidgetSchemaNormalizer:
 
         # Handle 'items' as a generic container for child widgets.
         if "items" in config and "fields" not in config:
-            config["fields"] = {}
-            for item in config["items"]:
-                item_id = item.get("id") or item.get("label")
-                if item_id:
-                    config["fields"][item_id] = item
+            # ⚡ SRP: Preserve order. If it's a list, keep it as a list for the renderer.
+            # Only map to a dict if explicitly requested or if it's already a dict.
+            if isinstance(config["items"], dict):
+                config["fields"] = {}
+                for key, item in config["items"].items():
+                    config["fields"][key] = item
+            # If it's a list, we leave it as 'items' or move to 'fields' as a list.
+            # The Renderer now supports both formats.
+            else:
+                config["fields"] = config["items"]
         return config
 
     @staticmethod

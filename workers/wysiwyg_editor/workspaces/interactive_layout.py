@@ -28,11 +28,11 @@ class InteractiveLayout(tk.Frame):
         # Display Toggles
         self.show_structure = tk.BooleanVar(value=True)
         self.show_blocks = tk.BooleanVar(value=True)
-        self.show_columns = tk.BooleanVar(value=False)
-        self.show_sizing = tk.BooleanVar(value=False)
-        self.show_sticky = tk.BooleanVar(value=False)
-        self.show_alignment = tk.BooleanVar(value=False)
-        self.show_colors = tk.BooleanVar(value=False)
+        self.show_columns = tk.BooleanVar(value=True)
+        self.show_sizing = tk.BooleanVar(value=True)
+        self.show_sticky = tk.BooleanVar(value=True)
+        self.show_alignment = tk.BooleanVar(value=True)
+        self.show_colors = tk.BooleanVar(value=True)
         
         self.focused_path = None
         self.pending_changes = 0
@@ -102,6 +102,10 @@ class InteractiveLayout(tk.Frame):
 
     def _manual_rebuild(self):
         self.pending_changes = 0; self._update_rebuild_ui(); self._refresh_preview()
+
+    def _on_widget_focused(self, path):
+        """Internal callback for selection events."""
+        event_bus.publish("FOCUS_REQUESTED", path=path, source=self)
 
     def _force_overlay_refresh(self):
         if self.preview_builder: self.overlay_mgr.apply_outlines(self.preview_builder.scroll_frame)

@@ -5,8 +5,8 @@ import numpy as np
 import time
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from workers.logger.logger import initialize_logging, set_log_directory
+BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
+from workers.logger.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
 from managers.configini.config_reader import Config
@@ -50,7 +50,9 @@ def autoscale_axes(ax: Any):
     """
     ⚡ MATH ONLY: Recalculates axis limits based on current data.
     """
-    if LOCAL_DEBUG: logger.trace(f"📊💹 [MATH] Recalculating axis limits.")
+    if BUILDER_DEBUG:
+        builder_logger.trace(f"🔬🏗️📊 [BUILDER] autoscale_axes: Recalculating axis limits.")
+        
     # Force background cache invalidation on autoscale
     fig = ax.get_figure()
     fig_id = id(fig)
@@ -64,7 +66,9 @@ def render_canvas(canvas: Any):
     """
     ⚡ RENDER ONLY: Commands the UI to redraw the canvas.
     """
-    if LOCAL_DEBUG: logger.trace(f"🎨🖌️ [RENDER] Redrawing canvas structure.")
+    if BUILDER_DEBUG:
+        builder_logger.trace(f"🔬🏗️📊 [BUILDER] render_canvas: Redrawing canvas structure.")
+        
     canvas.draw() # Synchronous draw to update background buffer
     canvas.draw_idle()
 
@@ -74,7 +78,8 @@ def autoscale_and_redraw(ax: Any, canvas: Any):
     Bypasses Matplotlib's slow 'get_window_extent' text measurement on every frame.
     Refactored for Modular SRP.
     """
-    if LOCAL_DEBUG: logger.trace(f"📊💹 graph_updater: Executing full autoscale and redraw sequence.")
+    if BUILDER_DEBUG:
+        builder_logger.trace(f"🔬🏗️📊 [BUILDER] graph_updater: Executing full autoscale and redraw sequence.")
     
     # SRP REFACTOR: Orchestrate modular actions
     autoscale_axes(ax)
@@ -90,7 +95,8 @@ def perform_fast_blit(ax: Any, canvas: Any, lines: List[Any]):
     
     # ⚡ OPTIMIZATION: Only do full draw once to capture axes/background
     if fig_id not in _bg_cache:
-        if LOCAL_DEBUG: logger.debug(f"📈📉 graph_updater: Blit cache miss for fig {fig_id}. Capturing background fabric.")
+        if BUILDER_DEBUG:
+            builder_logger.debug(f"🔬🏗️📊 [BUILDER] graph_updater: Blit cache miss for fig {fig_id}. Capturing background fabric.")
         # This is where the get_window_extent stall usually happens, but we only do it once.
         canvas.draw()
         _bg_cache[fig_id] = canvas.copy_from_bbox(ax.bbox)
@@ -99,6 +105,9 @@ def perform_fast_blit(ax: Any, canvas: Any, lines: List[Any]):
     for line in lines:
         ax.draw_artist(line)
     canvas.blit(ax.bbox)
-    if LOCAL_DEBUG: logger.trace(f"💹📊 graph_updater: Fast blit redraw complete for {len(lines)} lines.")
+    
+    if BUILDER_DEBUG:
+        builder_logger.trace(f"🔬🏗️📊 [BUILDER] graph_updater: Fast blit redraw complete for {len(lines)} lines.")
+        
     # Flush GUI events to ensure blit shows immediately without waiting for mainloop idle
     canvas.flush_events()

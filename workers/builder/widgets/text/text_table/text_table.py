@@ -34,6 +34,7 @@ class BuilderTextTableCreator(TransparencyMixin):
         # 1. Container & Scaffolding
         container = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat")
         container.grid_rowconfigure(0, weight=1); container.grid_columnconfigure(0, weight=1)
+        
         if hasattr(self, '_apply_transparency'): self._apply_transparency(container, container, config_data, b_inst)
 
         abs_topic = ctx.state_mirror_engine.calculate_topic(config_data.get("path"), ctx.base_mqtt_topic_from_path)

@@ -120,12 +120,20 @@ class StateRegistry:
         source, value, metadata = "MQTT", raw, {}
         
         if isinstance(raw, dict):
-            source = str(raw.get("source", "MQTT")).upper()
-            value = raw.get("val")
-            metadata = raw.copy()
-            # Preserve standard fields
-            for field in ["msg_type", "msg_guid", "origin_source", "is_settled", "full_id", "boot"]:
-                if field in raw: metadata[field] = raw[field]
+            # Check if this follows the standard Unified Message Schema (Splinker Manifest)
+            if "val" in raw or "value" in raw:
+                source = str(raw.get("source", "MQTT")).upper()
+                value = raw.get("val") if "val" in raw else raw.get("value")
+                metadata = raw.copy()
+                # Preserve standard fields
+                for field in ["msg_type", "msg_guid", "origin_source", "is_settled", "full_id", "boot"]:
+                    if field in raw: metadata[field] = raw[field]
+            else:
+                # This is a raw JSON dictionary (e.g. device inventory blob)
+                # Treat the entire dictionary as the value.
+                value = raw
+                source = "MQTT"
+                metadata = {}
         
         return source, value, metadata, raw
 

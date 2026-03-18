@@ -3,6 +3,10 @@
 # Version 20260315.Modular.1
 
 from typing import Dict, Any
+
+# --- Standard Debug Logging Setup ---
+BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
+from workers.logger.logger import builder_logger
 from loguru import logger
 
 # --- EXTRACTED CORE MODULES ---
@@ -13,7 +17,9 @@ from .core.graph_context_menu import GraphContextMenu
 def setup_interaction(fig: object, ax: object, interaction_config: Dict[str, Any], callbacks: Dict[str, Any] = None):
     """Initializes interactive features (Zoom, Pan, Hover, Context Menu) for a figure."""
     try:
-        logger.debug("📊💹 graph_interactor: Initializing interaction protocols.")
+        if BUILDER_DEBUG:
+            builder_logger.debug("🔬🏗️📊 [BUILDER] graph_interactor: Initializing interaction protocols.")
+            
         nav_cfg = interaction_config.get("Navigation", interaction_config)
         
         # 1. Hover Annotations
@@ -37,7 +43,8 @@ def setup_interaction(fig: object, ax: object, interaction_config: Dict[str, Any
             fig.canvas.mpl_connect("motion_notify_event", ax.zoom_pan.on_motion)
             fig.canvas.mpl_connect("scroll_event", ax.zoom_pan.on_scroll)
 
-    except Exception as e: logger.exception(f"❌ Graph Interactor: Setup failed - {e}")
+    except Exception as e:
+        logger.exception(f"❌ Graph Interactor: Setup failed - {e}")
 
 def update_annotation(event, ax, annot):
     """Backwards compatibility wrapper for AnnotationManager."""

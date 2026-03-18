@@ -128,16 +128,23 @@ class VisaProxy:
             if command_info is None: # The Poison Pill
                 break
 
-            command = command_info["command"]
-            query = command_info["query"]
-            correlation_id = command_info["correlation_id"]
+            try:
+                command = command_info["command"]
+                query = command_info["query"]
+                correlation_id = command_info["correlation_id"]
 
-            if query:
-                self.query_safe(command, correlation_id)
-            else:
-                self.write_safe(command)
-
-            self.command_queue.task_done()
+                if query:
+                    self.query_safe(command, correlation_id)
+                else:
+                    self.write_safe(command)
+            except Exception as e:
+                # ⚡ THREAD SAFETY: Catching all exceptions to prevent worker death
+                self._publish_proxy_error(
+                    message=f"Exception during background command execution: {str(e)}",
+                    command=command_info.get("command", "Unknown")
+                )
+            finally:
+                self.command_queue.task_done()
             
         if LOCAL_DEBUG: logger.debug("💳 ℹ️ Proxy Log: VisaProxy command processor worker terminated.")
 

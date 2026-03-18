@@ -70,6 +70,14 @@ def main():
     
     if LOCAL_DEBUG: logger.debug("🖥️🎨 [UI] Entering Tkinter MainLoop.")
     root.mainloop()
+    
+    if LOCAL_DEBUG: logger.debug("🖥️🎨 [UI] MainLoop exited. Destroying root...")
+    try:
+        root.destroy()
+    except Exception as e:
+        logger.trace(f"Error during root.destroy(): {e}")
+    
+    sys.exit(0)
 
 if __name__ == "__main__":
     main()

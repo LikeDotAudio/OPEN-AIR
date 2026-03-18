@@ -4,7 +4,7 @@ from workers.logic.core.topic_calculator import TopicCalculator
 # Using sys.path to import from a non-standard location for MQTTSweeper
 import sys
 import os
-sys.path.append(os.path.abspath("assets/Testing/FlameGraph/core"))
+sys.path.append(os.path.abspath("tests/FlameGraph/core"))
 from ClearMQTT import MQTTSweeper
 
 class TestMQTTLogic(unittest.TestCase):

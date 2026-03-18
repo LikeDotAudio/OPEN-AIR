@@ -138,8 +138,13 @@ class DynamicGuiBuilder(
             self.main_content_frame, background=colors["bg"], bd=0, highlightthickness=0
         )
         self.scroll_frame = tk.Canvas(self.canvas, bd=0, highlightthickness=0, bg=colors["bg"])
-        
-        TransparencyManager.apply_transparency(self.scroll_frame, self.scroll_frame, {"transparent": True}, self)
+
+        # ⚡ FIX: Prevent children from resizing the scroll_frame
+        self.scroll_frame.pack_propagate(False)
+        self.scroll_frame.grid_propagate(False)
+
+        TransparencyManager.apply_transparency(self, self.scroll_frame, {"transparent": True}, self)
+
 
         self.scrollbar_v = AutoScrollbar(
             self.main_content_frame, orient=tk.VERTICAL, command=self.canvas.yview

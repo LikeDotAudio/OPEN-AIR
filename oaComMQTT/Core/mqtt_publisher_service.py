@@ -7,7 +7,7 @@
 # Blog: www.Like.audio (Contributor to this project)
 # Version 20260316.1
 
-from .mqtt_connection import MqttConnectionManager
+from ..mqtt_connection import MqttConnectionManager
 import orjson
 
 from oaConfiguration.config_reader import Config

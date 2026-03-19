@@ -9,7 +9,7 @@ def create_ultra_structure(config_path):
     standard_subs = config['subfolders']['standard']
     
     # Collect all categories that need subfolders (everything except 'vaults')
-    module_categories = [cat for cat in config['domains'] if cat != 'vaults']
+    module_categories = ['infrastructure', 'protocols', 'utilities', 'gui']
     
     # Define the 12-folder standard
     extra_subs = ["FileReaders", "FileWriters"]

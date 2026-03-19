@@ -97,7 +97,7 @@ class BuilderContextMenuMixin:
     def _check_dependencies(self):
         """Manually triggers the Installation/Setup script to verify dependencies."""
         from oaOchestration.path_initializer import GLOBAL_PROJECT_ROOT
-        setup_path = GLOBAL_PROJECT_ROOT / "oaIntstallation" / "Setup.py"
+        setup_path = GLOBAL_PROJECT_ROOT / "oaInstallation" / "Setup.py"
         
         if not setup_path.exists():
             builder_logger.error(f"🏗️🚫🛑 [BUILDER] Setup script not found at {setup_path}")

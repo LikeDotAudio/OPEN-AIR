@@ -7,17 +7,22 @@ from oaOchestration.path_initializer import initialize_paths
 class TestPathInitializer(unittest.TestCase):
     def test_initialize_paths(self):
         """Check if required system directories are created."""
-        # Use initialize_paths to get project root and data dir
-        root, data_dir = initialize_paths()
+        # Use initialize_paths to get project root and running state dir
+        root, running_dir = initialize_paths()
         
         self.assertTrue(root.exists(), "Project root does not exist")
-        self.assertTrue(data_dir.exists(), "Data directory does not exist")
+        self.assertTrue(running_dir.exists(), "Running state directory does not exist")
         
-        # Check for specific folders in the DATA tree
-        expected_folders = ["cache", "debug", "state"]
-        for folder in expected_folders:
-            folder_path = data_dir / folder
-            self.assertTrue(folder_path.exists(), f"DATA folder '{folder}' missing")
+        # Check for specific refactored directories sibling to the hidden cache
+        expected_dirs = [
+            root / "oaDataLogs",
+            root / "oaDataCache",
+            root / "oaDataSNMP",
+            root / "oaDataSplinks"
+        ]
+        
+        for d in expected_dirs:
+            self.assertTrue(d.exists(), f"Refactored directory '{d.name}' missing")
 
 if __name__ == "__main__":
     unittest.main()

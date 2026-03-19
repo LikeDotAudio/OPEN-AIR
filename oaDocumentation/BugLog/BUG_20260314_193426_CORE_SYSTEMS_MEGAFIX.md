@@ -2,7 +2,7 @@
 - **ID**: 20260314_193426
 - **STATUS**: RESOLVED
 - **SEVERITY**: 1 (Critical)
-- **COMPONENT**: `oaComsBroker.protocol_router`, `oaThreadManager`
+- **COMPONENT**: `oaComBroker.protocol_router`, `oaThreadManager`
 
 ## Issue
 Multiple core, unrelated application features, including MIDI I/O, SNMP, and OSC, were completely non-functional. Log files indicated that the respective managers for these protocols were starting successfully, but no data was being sent or received. The system was failing silently, creating a highly confusing and critical state.

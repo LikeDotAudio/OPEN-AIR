@@ -10,7 +10,7 @@ from pathlib import Path
 current_path = Path(__file__).resolve()
 root_path = current_path
 for parent in current_path.parents:
-    if (parent / "oaComsBroker").exists() and (parent / "oaGuiDefinitions").exists():
+    if (parent / "oaComBroker").exists() and (parent / "oaGuiDefinitions").exists():
         root_path = parent
         break
 

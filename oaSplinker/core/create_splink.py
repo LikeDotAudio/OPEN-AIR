@@ -10,7 +10,7 @@ def create_splink(self):
     self._save_splink(splink)
     
     # ⚡ FIREHOSE: Ingest creation event for visibility
-    from oaComsBroker.protocol_router import ProtocolRouter
+    from oaComBroker.protocol_router import ProtocolRouter
     ProtocolRouter.get_instance().ingest("SPLINKER", f"OPEN-AIR/System/Status/Splinker/{new_id}", "CREATED", {"id": new_id, "type": "Empty"})
     
     self.set_learn_mode(new_id)

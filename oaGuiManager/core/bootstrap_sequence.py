@@ -7,7 +7,7 @@ from oaComMQTT.mqtt_connection import MqttConnectionManager
 from oaComMQTT.mqtt_subscriber_router import MqttSubscriberRouter
 from oaStateCache.state_cache import StateRegistry
 from oaTranslator.state_mirror_engine import StateMirrorEngine
-from oaComsBroker.protocol_router import ProtocolRouter
+from oaComBroker.protocol_router import ProtocolRouter
 
 # --- External Managers ---
 from oaComOSC.osc import OSCManager

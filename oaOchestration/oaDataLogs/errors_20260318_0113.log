@@ -1,0 +1,7 @@
+011323.930 | WARNING  | CORE | SYSTEM     | oaPTP.ptp            | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+011324.621 | ERROR    | UI   | SYSTEM     | oaGuiManager.factory.widget_registry | ❌ WidgetRegistry: Path not found: /home/anthony/Documents/OPEN-AIR/oaOchestration/oaGuiElements
+011324.646 | ERROR    | UI   | SYSTEM     | oaGuiManager.parser.layout_parser | ❌ Error: Directory not found for parsing: /home/anthony/Documents/OPEN-AIR/oaOchestration/oaGuiDefinitions
+011324.646 | ERROR    | UI   | SYSTEM     | oaGuiBuild.core.directory | ❌🔴 Layout parsing failed for /home/anthony/Documents/OPEN-AIR/oaOchestration/oaGuiDefinitions: Directory not found.
+011328.026 | WARNING  | CORE | SYSTEM     | oaComVisa.Visa_Fleet.visa_Search | FAILED (IDN Query Error)
+011328.027 | WARNING  | CORE | SYSTEM     | oaComVisa.Visa_Fleet.visa_Search | FAILED (IDN Query Error)
+011338.174 | WARNING  | CORE | SYSTEM     | oaComVisa.Visa_Fleet.visa_Search | FAILED (IDN Query Error)

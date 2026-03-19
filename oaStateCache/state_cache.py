@@ -93,7 +93,7 @@ class StateRegistry:
             self.cache = {}
 
         if self.cache:
-            from oaComsBroker.protocol_router import ProtocolRouter
+            from oaComBroker.protocol_router import ProtocolRouter
             router = ProtocolRouter.get_instance()
             for topic, payload in self.cache.items():
                 val = payload.get("val") if isinstance(payload, dict) else payload
@@ -107,7 +107,7 @@ class StateRegistry:
         self.cache[topic] = payload
         self.save_engine.schedule_save(topic, payload); self.search_engine.add_topic(topic)
         
-        from oaComsBroker.protocol_router import ProtocolRouter
+        from oaComBroker.protocol_router import ProtocolRouter
         ProtocolRouter.get_instance().ingest(source, topic, value, payload)
 
         if self.mqtt:
@@ -157,7 +157,7 @@ class StateRegistry:
         try:
             source, value, metadata, raw_payload = self._parse_mqtt_payload(msg)
 
-            from oaComsBroker.protocol_router import ProtocolRouter
+            from oaComBroker.protocol_router import ProtocolRouter
             ProtocolRouter.get_instance().ingest("MQTT", topic, value, metadata)
             self.observers.notify(topic, raw_payload)
 

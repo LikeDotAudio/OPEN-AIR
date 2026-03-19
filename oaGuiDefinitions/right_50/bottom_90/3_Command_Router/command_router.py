@@ -6,7 +6,7 @@ import time
 LOCAL_DEBUG = True
 from loguru import logger
 from oaConfiguration.config_reader import Config
-from oaComsBroker.protocol_router import ProtocolRouter
+from oaComBroker.protocol_router import ProtocolRouter
 
 app_constants = Config.get_instance()
 

@@ -103,7 +103,7 @@ class SNMPManager:
                 self.tree_builder.generate_master_script()
                 
                 # Protocol Router Sync Logic: Listen for remote/local activity
-                from oaComsBroker.protocol_router import ProtocolRouter
+                from oaComBroker.protocol_router import ProtocolRouter
                 ProtocolRouter.get_instance().register_cache_observer(self.handle_protocol_event)
                     
                 self._log_monitor_thread = threading.Thread(target=self._file_to_sql_loop, daemon=True)
@@ -301,7 +301,7 @@ class SNMPManager:
                                     "origin_source": "SNMP"
                                 }
 
-                                from oaComsBroker.protocol_router import ProtocolRouter
+                                from oaComBroker.protocol_router import ProtocolRouter
                                 ProtocolRouter.get_instance().ingest("SNMP", oid, val, meta)
 
                                 self._notify_monitor("RX_SET", oid, val)

@@ -5,7 +5,7 @@ k I have a HUGE refactoring request....        I would like this to happen step 
      - oaComMidi/
    - oaComMQTT/
    - oaComOSC/
-   - oaComsBroker/
+   - oaComBroker/
    - oaComSNMP/
    - oaComVisa/
    - oaConfiguration/
@@ -15,7 +15,7 @@ k I have a HUGE refactoring request....        I would like this to happen step 
    - oaDataSNMP/
    - oaDataSplinks/
    - oaDataTests/
-   - oaDependancies/
+   - oaDependencies/
    - oaFileExportCSV/
    - oaFileImportCSV/
    - oaFileImportHTML/
@@ -36,7 +36,7 @@ k I have a HUGE refactoring request....        I would like this to happen step 
    - oaGuiSplashScreen/
    - oaGuiTelemetry/
    - oaGuiTests/
-   - oaIntstallation/
+   - oaInstallation/
    - oaLogging/
    - oaOchestration/
    - oaPTP/
@@ -51,7 +51,7 @@ k I have a HUGE refactoring request....        I would like this to happen step 
    MOVE - adjust reffere4nce.... then rebuild strategy
 
 
-1. The Core Infrastructure (Orchestration)These modules replace your current OpenAir.py and system-level managers.New FolderSource (Where it comes from now)Key ResponsibilityoaThreadManager/OpenAir.py (Main Loop logic)Spawning and killing all other threads.oaConfiguration/managers/configini/Reading config.ini and boot settings.oaLogging/workers/logger/System-wide loguru instances.oaDependancies/Installation/dependancy/Pre-flight check before threads start.oaIntstallation/Installation/Setup.pyFirst-time setup and environment config.2. The Communication Layer (The Blind Workers)These are the hardware and protocol scripts. They move from managers/ and workers/ into protocol-specific silos.New FolderSource (Where it comes from now)How it works after movingoaComsBroker/managers/System_Core/Houses the MQTT Broker and the Router.oaComVisa/workers/instruments/ + managers/VISA/Handles all SCPI/VISA hardware comms.oaComMidi/workers/midi/ + managers/Midi/Translates MIDI messages to MQTT strings.oaComOSC/workers/osc/Listens for and sends OSC packets.oaComSNMP/workers/snmp/Handles MIB gets/sets via MQTT requests.oaSplinker/managers/Splink/ (if exists)The "Math Spy" between MQTT topics.3. The Data Vaults (State & Storage)All files in your current DATA/ and assets/ folders move here. No code lives here.New FolderSource (Where it comes from now)ContentsoaGuiDefinitions/display/*.jsonThe blueprints for building the UI.oaDataRunningFiles/DATA/*.csvThe live "Master State" (Master CSV).oaDataLogs/DATA/logs/Historic .log and .txt session data.oaDataCache/DATA/cache/Temporary binary/JSON scraps.oaDataSNMP/DATA/snmp/Compiled MIB files.oaDataSplinks/DATA/splinks/Math scaling and mapping definitions.4. The GUI Engine (The Consumer)These folders hold the logic for drawing and destroying the interface based on the oaGuiDefinitions.New FolderSource (Where it comes from now)FunctionoaGuiManager/managers/Display/The top-level UI controller.oaGuiBuild/managers/Display/builder/Inflates JSONs into Tkinter widgets.oaGuiDestroy/managers/Display/cleaner/Deflates/Kills tabs when inactive.oaGuiElements/display/elements/Your custom buttons, knobs, and faders.oaStyle/display/themes/Colors, fonts, and CSS-like styling.Visualizing the FlowThe flow moves from Hardware through a Blind Worker to the Broker, where the GUI simply watches and reacts.How to Update Your ReferencesWhen you move a file like visa_worker.py to oaComVisa/, you must update the top of your scripts.Example Change Order:Old Import: from managers.configini import config_readerNew Import: from oaConfiguration import config_readerOld Path: self.path = "DATA/state.csv"New Path: self.path = "oaDataRunningFiles/state.csv"
+1. The Core Infrastructure (Orchestration)These modules replace your current OpenAir.py and system-level managers.New FolderSource (Where it comes from now)Key ResponsibilityoaThreadManager/OpenAir.py (Main Loop logic)Spawning and killing all other threads.oaConfiguration/managers/configini/Reading config.ini and boot settings.oaLogging/workers/logger/System-wide loguru instances.oaDependencies/Installation/dependancy/Pre-flight check before threads start.oaInstallation/Installation/Setup.pyFirst-time setup and environment config.2. The Communication Layer (The Blind Workers)These are the hardware and protocol scripts. They move from managers/ and workers/ into protocol-specific silos.New FolderSource (Where it comes from now)How it works after movingoaComBroker/managers/System_Core/Houses the MQTT Broker and the Router.oaComVisa/workers/instruments/ + managers/VISA/Handles all SCPI/VISA hardware comms.oaComMidi/workers/midi/ + managers/Midi/Translates MIDI messages to MQTT strings.oaComOSC/workers/osc/Listens for and sends OSC packets.oaComSNMP/workers/snmp/Handles MIB gets/sets via MQTT requests.oaSplinker/managers/Splink/ (if exists)The "Math Spy" between MQTT topics.3. The Data Vaults (State & Storage)All files in your current DATA/ and assets/ folders move here. No code lives here.New FolderSource (Where it comes from now)ContentsoaGuiDefinitions/display/*.jsonThe blueprints for building the UI.oaDataRunningFiles/DATA/*.csvThe live "Master State" (Master CSV).oaDataLogs/DATA/logs/Historic .log and .txt session data.oaDataCache/DATA/cache/Temporary binary/JSON scraps.oaDataSNMP/DATA/snmp/Compiled MIB files.oaDataSplinks/DATA/splinks/Math scaling and mapping definitions.4. The GUI Engine (The Consumer)These folders hold the logic for drawing and destroying the interface based on the oaGuiDefinitions.New FolderSource (Where it comes from now)FunctionoaGuiManager/managers/Display/The top-level UI controller.oaGuiBuild/managers/Display/builder/Inflates JSONs into Tkinter widgets.oaGuiDestroy/managers/Display/cleaner/Deflates/Kills tabs when inactive.oaGuiElements/display/elements/Your custom buttons, knobs, and faders.oaStyle/display/themes/Colors, fonts, and CSS-like styling.Visualizing the FlowThe flow moves from Hardware through a Blind Worker to the Broker, where the GUI simply watches and reacts.How to Update Your ReferencesWhen you move a file like visa_worker.py to oaComVisa/, you must update the top of your scripts.Example Change Order:Old Import: from managers.configini import config_readerNew Import: from oaConfiguration import config_readerOld Path: self.path = "DATA/state.csv"New Path: self.path = "oaDataRunningFiles/state.csv"
 
 The "Supervisor Tree" Strategy
 In this model, your oaThreadManager acts as the "Root." It doesn't do the work; it just watches the watchers.
@@ -92,7 +92,7 @@ oaConfiguration/ — The source of truth for thread settings (Baud rates, OIDs, 
 The Managed Service Folders
 Each of these folders now contains a manager.py (the watchdog) and a worker.py (the blind logic).
 
-oaComsBroker/ — (Includes the Router/MQTT setup).
+oaComBroker/ — (Includes the Router/MQTT setup).
 
 oaComMidi/
 

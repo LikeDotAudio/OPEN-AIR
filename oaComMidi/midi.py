@@ -32,7 +32,7 @@ class MidiManager:
         self._active_in_names, self._active_out_names = [], []
         self._monitor_callbacks = []
 
-        from oaComsBroker.protocol_router import ProtocolRouter
+        from oaComBroker.protocol_router import ProtocolRouter
         ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
 
     def add_monitor_callback(self, cb): self._monitor_callbacks.append(cb)
@@ -60,7 +60,7 @@ class MidiManager:
                 self.state_cache_manager.handle_external_update(f"OPEN-AIR/System/Status/MIDI/Active{p}", n, source="MIDI")
 
     def _midi_listen_loop(self, port):
-        from oaComsBroker.protocol_router import ProtocolRouter
+        from oaComBroker.protocol_router import ProtocolRouter
         router = ProtocolRouter.get_instance()
         while self._running:
             try:
@@ -95,7 +95,7 @@ class MidiManager:
                 try: p.send(midi_msg); self._notify_monitor("TX", f"[{p.name}] {str(midi_msg)}")
                 except Exception as e: midi_logger.error(f"❌ TX Error on {p.name}: {e}")
             
-            from oaComsBroker.protocol_router import ProtocolRouter
+            from oaComBroker.protocol_router import ProtocolRouter
             ProtocolRouter.get_instance().ingest("MIDI-TX", topic, rv, {"midi_raw": str(midi_msg), "msg_type": meta.get("msg_type"), "origin_source": meta.get("origin_source")})
 
     def _on_protocol_event(self, msg):

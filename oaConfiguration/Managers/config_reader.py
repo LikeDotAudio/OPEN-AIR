@@ -104,7 +104,7 @@ class Config(ConfigDefaults):
         
         from oaOchestration.path_initializer import GLOBAL_PROJECT_ROOT
         config_path = GLOBAL_PROJECT_ROOT / "config.ini"
-        setup_path = GLOBAL_PROJECT_ROOT / "oaIntstallation" / "Setup.py"
+        setup_path = GLOBAL_PROJECT_ROOT / "oaInstallation" / "Setup.py"
         
         config = ConfigLoader.load(config_path, setup_path, LOCAL_DEBUG)
         if not config: return

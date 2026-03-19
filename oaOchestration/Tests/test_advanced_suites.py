@@ -144,7 +144,7 @@ class TestFileAndEnvironment(unittest.TestCase):
         mock_mkdir.side_effect = PermissionError("Permission Denied")
         
         # We need to clear the cache first since initialize_paths caches results
-        import ..Managers.path_initializer as pi
+        from ..Managers import path_initializer as pi
         pi.GLOBAL_PROJECT_ROOT = None
         pi.DATA_DIR = None
         

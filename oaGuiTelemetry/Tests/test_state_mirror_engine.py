@@ -5,7 +5,8 @@ from oaTranslator.state_mirror_engine import StateMirrorEngine
 
 class TestStateMirrorEngine(unittest.TestCase):
     def setUp(self):
-        self.root = tk.Tk()
+        with patch("tkinter.Tk"):
+            self.root = tk.Tk()
         self.base_topic = "OPEN-AIR"
         self.subscriber_router = MagicMock()
         self.state_cache_manager = MagicMock()

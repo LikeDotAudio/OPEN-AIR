@@ -35,7 +35,7 @@ app_constants = Config.get_instance()
 from oaComMQTT.mqtt_connection import MqttConnectionManager
 from oaComMQTT.mqtt_subscriber_router import MqttSubscriberRouter
 from oaComMQTT.core.mqtt import MqttManager
-from oaComsBroker.protocol_router import ProtocolRouter
+from oaComBroker.protocol_router import ProtocolRouter
 
 def _load_protocol_manager(module_path, class_name, **kwargs):
     """Dynamically loads and instantiates a protocol manager if enabled."""

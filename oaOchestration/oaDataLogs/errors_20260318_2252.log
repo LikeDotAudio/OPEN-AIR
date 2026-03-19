@@ -1,0 +1,5 @@
+225258.547 | ERROR    | UI   | SYSTEM     | oaGuiManager.factory.widget_registry | ❌ WidgetRegistry: Path not found: /home/anthony/Documents/OPEN-AIR/oaOchestration/oaGuiElements
+225258.558 | ERROR    | UI   | SYSTEM     | oaGuiBuild.core.directory | ❌🔴 Layout parsing failed for /home/anthony/Documents/OPEN-AIR/oaOchestration/oaGuiDefinitions: Directory not found.
+225259.046 | WARNING  | CORE | SYSTEM     | oaPTP.ptp            | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+225303.140 | WARNING  | CORE | SYSTEM     | oaComVisa.Visa_Fleet.visa_Search | FAILED (IDN Query Error)
+225303.141 | WARNING  | CORE | SYSTEM     | oaComVisa.Visa_Fleet.visa_Search | FAILED (IDN Query Error)

@@ -56,7 +56,7 @@ class OSCManager:
         self._monitor_callbacks = []
 
         # Protocol Router Sync Logic: Listen for remote/local activity
-        from oaComsBroker.protocol_router import ProtocolRouter
+        from oaComBroker.protocol_router import ProtocolRouter
         ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
 
     def _broadcast_status_loop(self):
@@ -178,7 +178,7 @@ class OSCManager:
             )
         else:
             # Fallback if no state manager
-            from oaComsBroker.protocol_router import ProtocolRouter
+            from oaComBroker.protocol_router import ProtocolRouter
             ProtocolRouter.get_instance().ingest("OSC", topic, value, meta)
         
         self._notify_monitor("RX", address, value, topic)
@@ -230,7 +230,7 @@ class OSCManager:
                 source="OSC"
             )
 
-        from oaComsBroker.protocol_router import ProtocolRouter
+        from oaComBroker.protocol_router import ProtocolRouter
         # Ingest the TX event back into the router for forensics
         ProtocolRouter.get_instance().ingest("OSC-TX", f"OPEN-AIR/OSC{address}", value, {
             "osc_address": address, 

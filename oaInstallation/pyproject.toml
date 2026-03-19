@@ -46,4 +46,4 @@ open-air = "OpenAir:main"
 
 [tool.setuptools]
 py-modules = ["OpenAir"]
-packages = ["display", "managers", "workers", "oaIntstallation", "Splinker"]
+packages = ["display", "managers", "workers", "oaInstallation", "Splinker"]

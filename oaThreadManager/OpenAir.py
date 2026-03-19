@@ -88,7 +88,7 @@ def main():
     if len(sys.argv) > 1:
         mode = sys.argv[1]
         if mode == "--core":
-            import oaComsBroker.open_air_core as core_mod
+            import oaComBroker.open_air_core as core_mod
             core_mod.main()
             return
         elif mode == "--ui":
@@ -113,7 +113,7 @@ def main():
     log(f"Launching OPEN-AIR Partitions... (Mission Critical: {is_mission_critical})")
 
     python_executable = sys.executable
-    core_script = os.path.join(project_root, "oaComsBroker", 
+    core_script = os.path.join(project_root, "oaComBroker", 
                                "open_air_core.py")
     ui_script = os.path.join(project_root, "oaGuiManager", 
                              "open_air_ui.py")

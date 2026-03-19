@@ -43,7 +43,7 @@ def main():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(current_dir)
     
-    # Inject project root into the path to enable 'oaDependancies' 
+    # Inject project root into the path to enable 'oaDependencies' 
     # imports.
     if project_root not in sys.path:
         sys.path.insert(0, project_root)
@@ -55,7 +55,7 @@ def main():
     if LOCAL_DEBUG:
         logger.info(f"🛠️⚙️📦 [SETUP] --- Stage {STAGE_PYTHON_DEPS}: Python Dependencies ---")
     try:
-        from oaDependancies import dependancy_checker
+        from oaDependencies import dependancy_checker
         
         # Define a zero-cost debug proxy for the dependency engine
         def setup_debug_log(message, **kwargs):

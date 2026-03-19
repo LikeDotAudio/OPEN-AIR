@@ -11,12 +11,12 @@
 ## 1. Core Infrastructure (Orchestration)
 - [x] **oaConfiguration:** Move `managers/configini/` content to `oaConfiguration/`
 - [x] **oaLogging:** Move `workers/logger/` content to `oaLogging/`
-- [x] **oaDependancies:** Move `Installation/dependancy/` content to `oaDependancies/`
-- [x] **oaIntstallation:** Move `Installation/Setup.py` to `oaIntstallation/`
+- [x] **oaDependencies:** Move `Installation/dependancy/` content to `oaDependencies/`
+- [x] **oaInstallation:** Move `Installation/Setup.py` to `oaInstallation/`
 - [x] **oaThreadManager:** Initialize with `OpenAir.py` logic (Migration start).
 
 ## 2. Communication Layer (The Blind Workers)
-- [x] **oaComsBroker:** Move `managers/System_Core/` (Broker/Router) to `oaComsBroker/`
+- [x] **oaComBroker:** Move `managers/System_Core/` (Broker/Router) to `oaComBroker/`
 - [x] **oaComVisa:** Move `workers/instruments/` and `managers/VISA/` to `oaComVisa/`
 - [x] **oaComMidi:** Move `workers/midi/` and `managers/Midi/` to `oaComMidi/`
 - [x] **oaComOSC:** Move `workers/osc/` to `oaComOSC/`

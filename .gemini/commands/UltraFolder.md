@@ -12,12 +12,12 @@ apply_init_py = true
 # Core Infrastructure
 infrastructure = [
     "oaThreadManager", "oaConfiguration", "oaLogging", 
-    "oaDependancies", "oaIntstallation", "oaOchestration"
+    "oaDependencies", "oaInstallation", "oaOchestration"
 ]
 
 # Communication Protocols
 protocols = [
-    "oaComsBroker", "oaComVisa", "oaComMidi", 
+    "oaComBroker", "oaComVisa", "oaComMidi", 
     "oaComOSC", "oaComSNMP", "oaSplinker", "oaPTP", "oaTranslator"
 ]
 

@@ -86,11 +86,17 @@ def main():
     if len(sys.argv) > 1:
         mode = sys.argv[1]
         if mode == "--core":
-            import oaComsBroker.open_air_core as core_mod
+            try:
+                import oaComBroker.Core.open_air_core as core_mod
+            except ImportError:
+                import oaComBroker.open_air_core as core_mod
             core_mod.main()
             return
         elif mode == "--ui":
-            import oaGuiManager.open_air_ui as ui_mod
+            try:
+                import oaGuiManager.open_air_ui as ui_mod
+            except ImportError:
+                import oaGuiManager.Core.open_air_ui as ui_mod
             ui_mod.main()
             return
 
@@ -111,10 +117,19 @@ def main():
     log(f"Launching OPEN-AIR Partitions... (Mission Critical: {is_mission_critical})")
 
     python_executable = sys.executable
-    core_script = os.path.join(current_dir, "oaComsBroker", 
-                               "open_air_core.py")
-    ui_script = os.path.join(current_dir, "oaGuiManager", 
-                             "open_air_ui.py")
+    
+    # Core Partition (Communication & Logic)
+    core_script = os.path.join(current_dir, "oaComBroker", "Core", "open_air_core.py")
+    if not os.path.exists(core_script):
+        core_script = os.path.join(current_dir, "oaComBroker", "open_air_core.py")
+        
+    # UI Partition (Display & Interaction)
+    ui_script = os.path.join(current_dir, "oaGuiManager", "open_air_ui.py")
+    if not os.path.exists(ui_script):
+        # Handle potential future realignment of GuiManager
+        ui_script_alt = os.path.join(current_dir, "oaGuiManager", "Core", "open_air_ui.py")
+        if os.path.exists(ui_script_alt):
+            ui_script = ui_script_alt
 
     def get_host_guid():
         """Generates a non-persistent, 64-bit session identifier."""

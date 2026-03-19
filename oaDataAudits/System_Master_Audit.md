@@ -14,7 +14,7 @@ This report represents the "Whole Thing" execution, aggregating specialized chec
 - **Entry.py Mandate**: **Zero** modules currently utilize the required `Entry.py` gatekeeper pattern.
 - **Root Violations**: 95% of modules (`oaComMQTT`, `oaTranslator`, etc.) have logic files sitting in their root directory.
 - **DIP Violations (Coupling)**: `oaOchestration/project_paths.py` and test suites directly import concrete implementations from UI, hardware, and broker layers rather than depending on interfaces.
-- **Naming Conventions**: `oaComsBroker`, `oaDependancies`, and `oaIntstallation` contain spelling or standard violations.
+- **Naming Conventions**: `oaComBroker`, `oaDependencies`, and `oaInstallation` contain spelling or standard violations.
 
 ## 2. Performance & Resource Management (AuditPerformance)
 **Status**: ⚠️ HIGH RISK
@@ -54,7 +54,7 @@ This report represents the "Whole Thing" execution, aggregating specialized chec
 
 ### Phase 2: Structural Realignment (Architecture)
 3. **The "UltraFolder" Sweep**: Realign `oaConfiguration`, `oaLogging`, and `oaOchestration`. Move their internal files to `Core/`, `Managers/`, etc., and create `Entry.py` orchestrators for each.
-4. **Fix Names**: Rename `oaComsBroker` to `oaComBroker`.
+4. **Fix Names**: Rename `oaComBroker` to `oaComBroker`.
 
 ### Phase 3: Forensic Hygiene (Logging)
 5. **Enforce LOCAL_DEBUG**: Write a script to wrap all bare `logger.debug` and `logger.trace` calls in `LOCAL_DEBUG` gates to recover CPU cycles.

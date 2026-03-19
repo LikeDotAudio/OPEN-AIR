@@ -1,0 +1,6 @@
+223608.271 | WARNING  | CORE | SYSTEM     | oaPTP.ptp            | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+223608.193 | ERROR    | UI   | SYSTEM     | oaGuiManager.factory.widget_registry | ❌ WidgetRegistry: Path not found: /home/anthony/Documents/OPEN-AIR/oaOchestration/oaGuiElements
+223608.203 | ERROR    | UI   | SYSTEM     | oaGuiBuild.core.directory | ❌🔴 Layout parsing failed for /home/anthony/Documents/OPEN-AIR/oaOchestration/oaGuiDefinitions: Directory not found.
+223612.348 | WARNING  | CORE | SYSTEM     | oaComVisa.Visa_Fleet.visa_Search | FAILED (IDN Query Error)
+223612.348 | WARNING  | CORE | SYSTEM     | oaComVisa.Visa_Fleet.visa_Search | FAILED (IDN Query Error)
+223615.603 | WARNING  | UI   | SYSTEM     | oaComSNMP.snmp       | 🌐 SNMP Bridge Offline.

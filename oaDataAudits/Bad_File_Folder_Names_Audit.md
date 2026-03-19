@@ -2,53 +2,63 @@
 
 **Date**: 2026-03-18  
 **Architect**: Gemini Systems Architect  
-**Status**: 🔴 POOR ORGANIZATIONAL HEALTH  
+**Status**: 🟡 IMPROVING (Transitional)
 
 ## Executive Summary
-The project is currently suffering from a "Transition Gap." While the 12-subfolder hierarchy has been established, the actual contents are not properly containerized. 95% of modules violate the **Root Rule** by keeping logic files in the module root. Furthermore, naming conventions are inconsistent, relying heavily on "noise words" and type-encoding rather than intention-revealing names.
+Since the previous audit, significant progress has been made: foundational modules have been renamed (`oaDependencies`, `oaInstallation`, `oaComBroker`) and Level 1 Infrastructure has been realigned. However, the **Root File Plague** remains critical in Level 2 and Level 3 modules. The 12-folder standard is now established as a project baseline, but manual realignment is required for the remaining 80% of the codebase.
 
 ---
 
-## 1. Top Offenders: Bad Naming
+## 1. Top Offenders: Bad Naming (New & Remaining)
 
 | File/Folder | Violation | Suggested Refactor |
 | :--- | :--- | :--- |
-| `oaComsBroker` | **Inconsistency**: The "s" in "Coms" differs from `oaComVisa`, `oaComMidi`. | `oaComBroker` |
-| `oaDependancies` | **Misspelling**: Common spelling error. | `oaDependencies` |
-| `oaIntstallation` | **Misspelling**: Common spelling error. | `oaInstallation` |
-| `*_utils.py`, `*_util.py` | **Noise Word**: "Util" is a meaningless distinction. | Rename based on specific function (e.g., `topic_calculator.py`). |
-| `*_mixin.py` | **Encoding**: Encoding the implementation pattern (Mixin) in the name. | Focus on the capability (e.g., `InteractionHandler.py`). |
-| `*_logic.py` | **Noise Word**: Everything is "logic." | Identify the specific domain (e.g., `visa_handshake.py`). |
-| `oaUnitTests` | **Dead Reference**: Folder was deleted but references might remain. | Verify and remove all import references. |
+| `oaComBroker/AES70` | **Naming Inconsistency**: Folder name is all-caps, unlike `protocol_router`. | `oaComBroker/Core/aes70/` |
+| `midi.py` (in `oaComMidi`) | **Intention-Blind**: General name sitting at root. | `oaComMidi/Managers/midi_manager.py` |
+| `osc.py`, `osc_rx_server.py` | **Noise Word**: Sitting at root. | Move to `Managers/` and `Workers/`. |
+| `snmp_utils.py`, `mqtt_topic_utils.py`| **Noise Word**: Meaningless distinction "utils". | Rename to `snmp_helpers.py` or `topic_formatter.py`. |
+| `*_mixin.py` | **Pattern Encoding**: Encoding 'Mixin' in the filename. | Focus on the responsibility (e.g., `StateSync.py`). |
+
+### Magic Numbers & Boolean Blindness
+- **oaComBroker/Core/protocol_router/settle.py**: Hardcoded `0.050` (50ms) for settling logic. Should be a named constant in `Constants/`.
+- **oaComBroker/Core/protocol_router/monitor.py**: Magic number `2000` for buffer size.
+- **oaComMQTT/Entry.py**: Magic number `1883` for port. Should pull from `Config`.
 
 ---
 
-## 2. Improper Containerization (Artificial Coupling & Scatters)
+## 2. Improper Containerization (Remaining Scatters)
 
-### The "Root File" Plague
-Almost every `oa*` module has its primary logic files sitting in the root instead of the standardized subfolders. This breaks the **Encapsulated Module** standard.
-- **Offender**: `oaComMQTT` has 12+ files at its root (e.g., `mqtt_connection.py`, `mqtt_message.py`).
-- **Offender**: `oaTranslator` has 10+ `yak_*` files at its root.
-- **Offender**: `oaConfiguration` has all its core logic (`config_reader.py`, etc.) at the root.
+### The "Root File" Plague (Remaining Level 2/3)
+The following modules still have primary logic files sitting in the root:
+- **oaComMidi**: `midi.py`
+- **oaComOSC**: `osc.py`, `osc_rx_server.py`, `osc_tx_client.py`
+- **oaComSNMP**: 6 files sits at root.
+- **oaComVisa**: 8 files sits at root (despite having `Managers/` and `Workers/` folders).
+- **oaTranslator**: 10+ `yak_*` files sitting at root.
 
-### Abstraction Level Mixing
-- **oaGuiManager**: Contains `open_air_ui.py` at the root, mixing high-level UI policy with low-level telemetry in subdirectories.
-- **oaOchestration**: Mixes path initialization (`project_paths.py`) with complex application bootstrapping at the root level.
-
-### "Alike" File Scatters
-- **GUI Definitions**: `oaGuiDefinitions` contains a massive flat list of `yak_*.json` and `Connection_*.json` files. These should be sub-grouped by device type or function.
+### Scatter: GUI Definitions
+`oaGuiDefinitions` remains a massive flat directory of 50+ JSON files.
+- **Offender**: Mixing Agilent equipment with Yak protocols and general connection dialogs.
+- **Recommendation**: Sub-group into `oaGuiDefinitions/Agilent/`, `oaGuiDefinitions/Yak/`, etc.
 
 ---
 
-## 3. Specific Refactoring Recommendations
+## 3. Realignment Progress (The "Clean" List)
+The following modules are now **100% Compliant** with the 12-folder & Entry.py standard:
+- [x] **oaConfiguration**
+- [x] **oaLogging**
+- [x] **oaOchestration**
+- [x] **oaComBroker**
+- [x] **oaComMQTT**
 
-1.  **Enforce the Root Rule**: Move all `.py` files in the root of `oa*` modules into `Core/`, `Managers/`, or `Workers/` as per the `UltraFolder` execution strategy.
-2.  **Rename Noise Modules**:
-    - `oaComMQTT/mqtt_topic_utils.py` ➡️ `oaComMQTT/Methods/topic_formatter.py`
-    - `oaComSNMP/snmp_utils.py` ➡️ `oaComSNMP/Methods/snmp_helpers.py`
-3.  **Group GUI Definitions**: Create subdirectories in `oaGuiDefinitions` for `Yak/`, `Agilent/`, `Connection_Dialogs/`, etc.
-4.  **Fix Core Spelling**: Rename `oaDependancies` and `oaIntstallation` immediately to prevent import confusion.
-5.  **Bootstrap Entry.py**: Every module needs an `Entry.py` to hide its internal folder structure from the supervisor.
+---
+
+## 4. Specific Refactoring Roadmap (Next Steps)
+
+1.  **Phase 2 Realignment**: Target `oaComVisa` and `oaComMidi`. These are high-traffic modules with cluttered roots.
+2.  **Phase 3 Realignment**: Target `oaTranslator` (The Yak Engine). This is the most complex scatter.
+3.  **Magic Number Consolidation**: Extract hardcoded timeouts and buffers into module-specific `Constants/` folders.
+4.  **Rename Mixins**: Transition from `*_mixin.py` to responsibility-based naming (e.g., `InteractionHandler.py`).
 
 ## Conclusion
-The current naming and containerization are creating high cognitive load for developers. Navigating the `oa*` modules is difficult because the root is cluttered and names do not reveal intention. Priority should be given to cleaning the module roots and fixing the misspelled foundational modules.
+The architectural foundation is now solid. The "Root File Plague" is being systematically eradicated. Priority for the next session should be the realignment of the hardware protocol modules (`oaCom*`) to ensure they match the professional **Encapsulated Module** standard.

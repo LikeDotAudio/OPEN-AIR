@@ -1,4 +1,5 @@
-# managers/SNMP/snmp_installer_generator.py
+# managers/SNMP/snmp_manager.py
+
 import os
 
 class InstallerGenerator:
@@ -20,17 +21,17 @@ class InstallerGenerator:
             "# OPEN-AIR SNMP Master Bridge: Automated Installer",
             "",
             "# 1. Install Prerequisites",
-            "echo "[SNMP] Installing snmpd and utilities..."",
+            'echo "[SNMP] Installing snmpd and utilities..."',
             "sudo apt-get update && sudo apt-get install snmpd snmp snmp-mibs-downloader -y",
             "",
             "# 2. Permission Fix (Traverse home to access project)",
-            "echo "[SNMP] Adjusting folder permissions for system access..."",
+            'echo "[SNMP] Adjusting folder permissions for system access..."',
             "sudo chmod o+x /home /home/anthony",
             "sudo chmod -R o+rwx ./oaDataRunningFiles/snmp",
 
             "# 3. Master Configuration",
-            "CONF_FILE="/etc/snmp/snmpd.conf"",
-            "echo "[SNMP] Configuring Master Bridge at $CONF_FILE..."",
+            "CONF_FILE='/etc/snmp/snmpd.conf'",
+            'echo "[SNMP] Configuring Master Bridge at $CONF_FILE..."',
             "",
             "# Clean up old configurations",
             "sudo sed -i '/# --- BEGIN OPEN-AIR ---/,/# --- END OPEN-AIR ---/d' $CONF_FILE",
@@ -44,20 +45,19 @@ class InstallerGenerator:
             "view   all   included   .1",
             "rocommunity public default -V all",
             "rwcommunity private default -V all",
-            f"pass {base_oid.lstrip('.')} {relative_master_path}", # Use constructed relative path
+            f"pass {base_oid.lstrip('.')} {relative_master_path}",
             "# --- END OPEN-AIR ---",
             "EOT",
             "",
             "# 4. Service Management",
-            "echo "[SNMP] Restarting service..."",
+            'echo "[SNMP] Restarting service..."',
             "sudo systemctl restart snmpd",
             "sudo systemctl enable snmpd",
             "",
-            "echo "[SNMP] Setup Complete!"",
-            f"echo "[SNMP] Testing: snmpwalk -v2c -c public localhost {base_oid}"",
+            'echo "[SNMP] Setup Complete!"',
+            f'echo "[SNMP] Testing: snmpwalk -v2c -c public localhost {base_oid.lstrip(".")}"',
             "sleep 1",
-            f"snmpwalk -v2c -c public localhost {base_oid}",
+            f'snmpwalk -v2c -c public localhost {base_oid.lstrip(".")}',
         ]
         
-        return "
-".join(installer_lines)
+        return '\n'.join(installer_lines)

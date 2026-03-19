@@ -48,12 +48,20 @@ class BuilderMeterNeedleCreator(TransparencyMixin):
 
             # 3. Animation Logic
             def render_cb(full_redraw=False):
-                now = time.time() * 1000; v1, v2 = frame.anim_current_value, (frame.anim_current_value_2 if config.meter_mode == "stereo" else None)
-                if v1 >= config.red_zone_start or (v2 is not None and v2 >= config.red_zone_start):
-                    frame.anim_peak_on, frame.anim_peak_expiry = True, now + config.peak_hold_ms
-                elif now > frame.anim_peak_expiry: frame.anim_peak_on = False
-                
-                MeterRenderingEngine.render(canvas, config, v1, v2, frame.anim_peak_on, ox, oy, full_redraw=full_redraw)
+                try:
+                    now = time.time() * 1000; v1, v2 = frame.anim_current_value, (frame.anim_current_value_2 if config.meter_mode == "stereo" else None)
+                    if v1 >= config.red_zone_start or (v2 is not None and v2 >= config.red_zone_start):
+                        frame.anim_peak_on, frame.anim_peak_expiry = True, now + config.peak_hold_ms
+                    elif now > frame.anim_peak_expiry: frame.anim_peak_on = False
+                    
+                    # Wrap rendering in try-except to catch potential TclError (e.g., tagOrId not found)
+                    MeterRenderingEngine.render(canvas, config, v1, v2, frame.anim_peak_on, ox, oy, full_redraw=full_redraw)
+                except tk.TclError as e:
+                    # Log the error, but don't let it crash the application or tests
+                    builder_logger.warning(f"TclError during meter rendering for '{config.label}': {e}. This might be due to missing tags or canvas items.")
+                except Exception as e:
+                    builder_logger.exception(f"Unexpected error during meter rendering for '{config.label}': {e}")
+
             
             frame.render = lambda: render_cb(full_redraw=True)
             animator = MeterAnimator(frame, config, canvas, render_cb)

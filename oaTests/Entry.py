@@ -157,7 +157,14 @@ class UnifiedTestRunner:
 </html>
 """
         table_rows = []
-        for r in self.test_results:
+        
+        # Sort results: errors and failures first, warnings next, then the rest
+        def status_weight(status):
+            return {"error": 0, "failed": 1, "warning": 2}.get(status, 3)
+            
+        sorted_results = sorted(self.test_results, key=lambda x: (status_weight(x['status']), x['name']))
+
+        for r in sorted_results:
             row = f"""
                 <tr>
                     <td class="test-name">{r['name']}</td>

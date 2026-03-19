@@ -1,0 +1,27 @@
+012848.826 | DEBUG    | SUP  | SYSTEM     | oaConfiguration.FileReaders.config_reader | 📜 [CONFIG] Loaded: Version 20251225, Debug: True
+012848.826 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Launching OPEN-AIR Partitions... (Mission Critical: False)
+012848.826 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Session Identity established (Randomized): 94FAD3741B12192E
+012848.826 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Spawning Partition B (UI)...
+012848.827 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Spawning Partition A (Core)...
+012848.827 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: System Running. Monitoring child processes...
+012849.479 | DEBUG    | CORE | SYSTEM     | oaConfiguration.Methods.console_encoder | ⏩ Not on Windows ('nt'), skipping console encoding reconfiguration.
+012849.479 | SUCCESS  | CORE | SYSTEM     | oaConfiguration.Methods.console_encoder | ✅ Exiting configure_console_encoding.
+012849.479 | DEBUG    | CORE | SYSTEM     | __main__             | ⚡🛡️⚙️ [CORE] Starting OpenAir Core Service...
+012849.479 | DEBUG    | CORE | SYSTEM     | oaWatchdog.Managers.watchdog | 🐕⏳🔋 [WATCHDOG] Started (Timeout: 120.0s)
+012849.479 | DEBUG    | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📖 Reading Cache.
+012849.479 | DEBUG    | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾⏳ Cache file exists. Reading...
+012849.479 | SUCCESS  | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾✅ Cache loaded successfully.
+012849.480 | DEBUG    | CORE | DATA       | oaStateCache.Core.state_cache | 🧠💾 [CACHE] Initialized with 345 entries.
+012849.480 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Beginning CORE manager launch sequence...
+012849.480 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Initializing core instances...
+012849.480 | INFO     | CORE | LOG_FILTER | oaLogging.Managers.log_filter_engine | Setting up MQTT subscription for dynamic log filtering on topic: OPEN-AIR/system/logger/filter/set
+012849.480 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/system/logger/filter/set
+012849.480 | INFO     | CORE | SYSTEM     | oaLogging.Managers.log_filter_engine | LogFilterEngine initialized and subscribed to MQTT topic.
+012849.482 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SPLINKER on OPEN-AIR/System/Status/Splinker/List: []
+012849.482 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Broker/Delete/#
+012849.482 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Broker/Service/#
+012849.482 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Status/Fleet/Complete
+012849.482 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_manager | 🚀📤📥 [MQTT] MqttManager initialized with Async Publisher.
+012849.482 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Injecting dynamic protocols...
+012859.866 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/Splinker/List
+012859.867 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []

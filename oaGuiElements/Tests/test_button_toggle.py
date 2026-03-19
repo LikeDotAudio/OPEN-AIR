@@ -7,6 +7,7 @@ from oaGuiElements.Core.buttons.button_toggle.button_toggle import BuilderButton
 class TestButtonToggle(unittest.TestCase):
     def setUp(self):
         self.root = None
+        self.mock_bool_var = None # Initialize to None
         self.patchers = [] # To keep track of active patches.
 
         try:
@@ -39,21 +40,20 @@ class TestButtonToggle(unittest.TestCase):
             mock_canvas_instance._last_redraw_size = (0,0) # For redraw_labels logic.
 
             # Mock instance for tk.BooleanVar.
-            mock_bool_var = MagicMock()
-            mock_bool_var.get.return_value = False # Default state for BooleanVar.
-            mock_bool_var.trace_add.return_value = None
+            self.mock_bool_var = MagicMock() # Assign mock_bool_var here
+            self.mock_bool_var.get.return_value = False # Default state for BooleanVar.
+            self.mock_bool_var.trace_add.return_value = None
             
             # Patch tkinter.Canvas and tkinter.BooleanVar.
             canvas_patcher = patch('tkinter.Canvas', return_value=mock_canvas_instance)
             self.patchers.append(canvas_patcher)
             canvas_patcher.start()
 
-            bool_var_patcher = patch('tkinter.BooleanVar', return_value=mock_bool_var)
+            bool_var_patcher = patch('tkinter.BooleanVar', return_value=self.mock_bool_var)
             self.patchers.append(bool_var_patcher)
             bool_var_patcher.start()
 
             # Ensure tk.TclError is available for the try-except block to catch.
-            # This line is mostly for clarity; tk.TclError is usually available if tkinter is imported.
             tk.TclError = tk.TclError 
 
         # Common mocks setup, independent of Tkinter availability.
@@ -109,7 +109,8 @@ class TestButtonToggle(unittest.TestCase):
     def test_toggle_registration(self):
         """Goal: Verify that the toggle button registers itself with the mirror engine."""
         creator = BuilderButtonToggleCreator()
-        creator.topic_widgets = {} # Ensure topic_widgets is empty before test.
+        # Ensure topic_widgets is initialized on the creator instance for this test.
+        creator.topic_widgets = {} 
         widget = creator.make_button_toggle(
             parent_widget=self.root,
             config_data=self.config,
@@ -119,6 +120,7 @@ class TestButtonToggle(unittest.TestCase):
         # Assert that mirror_engine.register_widget was called.
         self.mirror_engine.register_widget.assert_called()
         # Assert that the correct state variable was stored in topic_widgets.
+        # Compare against self.mock_bool_var which is now guaranteed to be defined.
         self.assertIn(self.config["path"], creator.topic_widgets)
         self.assertEqual(creator.topic_widgets[self.config["path"]][0], self.mock_bool_var)
 

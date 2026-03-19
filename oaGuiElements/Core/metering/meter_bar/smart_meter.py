@@ -22,7 +22,7 @@ class SmartMeter(tk.Canvas):
             logger.trace(f"Could not get parent bg, defaulting to #2b2b2b: {e}")
             p_bg = "#2b2b2b"
 
-        super().__init__(parent, bd=0, highlightthickness=0, relief="flat", bg=p_bg)
+        super().__init__(parent, bd=0, highlightthickness=0, relief="flat", bg=p_bg, **kwargs)
         
         # 1. Initialize Components
         self.cfg = MeterConfig.from_dict(raw_config)
@@ -41,6 +41,7 @@ class SmartMeter(tk.Canvas):
         
         self._anim_timer_id = None
         self._last_anim_time = 0
+        self.is_resizing = False # Flag to prevent animation during resize
         
         # 4. Finalize Initial State
         self.after(10, self._initial_draw)
@@ -90,18 +91,26 @@ class SmartMeter(tk.Canvas):
             return
         
         self._last_resize_dim = (event.width, event.height)
+        
+        # Set resize flag and schedule layout/redraw
+        self.is_resizing = True
         self.after(50, lambda: self._perform_layout(self.canvas.winfo_width(), self.canvas.winfo_height()))
 
     def render(self):
         """Hook for TransparencyMixin to trigger a redraw when slicing updates."""
         if self.canvas.winfo_width() > 1:
-            self._perform_layout(self.canvas.winfo_width(), self.canvas.winfo_height())
+            # Ensure we don't trigger layout if a resize is already in progress
+            if not self.is_resizing:
+                 self._perform_layout(self.canvas.winfo_width(), self.canvas.winfo_height())
 
     def _perform_layout(self, w, h):
         if w <= 1 or h <= 1: return
         self.current_layout = self.layout_calc.calculate(w, h, self.cfg)
         self.renderer.draw_static(self.current_layout, self.cfg)
         self._refresh_frame()
+        
+        # Reset resize flag after layout is complete and redraw is done
+        self.is_resizing = False
 
     def _on_value_update(self, *args):
         try:
@@ -114,6 +123,11 @@ class SmartMeter(tk.Canvas):
             logger.error(f"Error updating meter value: {e}")
 
     def _animate(self):
+        # Prevent animation updates if a resize is in progress
+        if self.is_resizing:
+            self._anim_timer_id = None # Clear timer to avoid re-scheduling until resize is done
+            return
+
         self._anim_timer_id = None
         if not hasattr(self, 'current_layout'): return
         

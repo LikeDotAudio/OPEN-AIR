@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, filedialog
-from oaGuiManager.transparency.transparency_mixin import TransparencyMixin
-from oaOchestration.project_paths import SNMP_CURRENT_MIB
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaOchestration.Constants.project_paths import SNMP_CURRENT_MIB
 
 class SnmpVerifyWithMib(tk.Frame, TransparencyMixin):
     """
@@ -15,7 +15,7 @@ class SnmpVerifyWithMib(tk.Frame, TransparencyMixin):
         self._setup_ui()
 
     def _find_snmp_manager(self, widget):
-        from oaGuiBuilder.builder import DynamicGuiBuilder
+        from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
         curr = widget
         while curr:
             if isinstance(curr, DynamicGuiBuilder) and hasattr(curr, 'app_instance'):

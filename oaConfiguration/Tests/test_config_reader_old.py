@@ -1,5 +1,5 @@
 import unittest
-from oaConfiguration.config_reader import Config
+from oaConfiguration.FileReaders.config_reader import Config
 
 class TestConfigReader(unittest.TestCase):
     def test_singleton(self):

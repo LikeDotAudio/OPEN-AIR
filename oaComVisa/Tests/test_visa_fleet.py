@@ -1,13 +1,13 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from oaComVisa.Visa_Fleet.visa_fleet import FleetOrchestrator
+from oaComVisa.Core.visa_fleet import FleetOrchestrator
 
 class TestVisaFleet(unittest.TestCase):
     def setUp(self):
         self.mqtt = MagicMock()
         self.router = MagicMock()
-        with patch("oaComVisa.Visa_Fleet.visa_fleet.DiscoveryOrchestrator"), \
-             patch("oaComVisa.Visa_Fleet.visa_fleet.VisaJsonBuilder.load_inventory_from_json", return_value=[]):
+        with patch("oaComVisa.Core.visa_fleet.DiscoveryOrchestrator"), \
+             patch("oaComVisa.Core.visa_fleet.VisaJsonBuilder.load_inventory_from_json", return_value=[]):
             self.fleet = FleetOrchestrator(self.mqtt, self.router)
 
     def test_inventory_notification(self):

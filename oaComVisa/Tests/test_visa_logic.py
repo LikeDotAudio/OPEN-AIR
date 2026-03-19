@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 import pyvisa
-from oaComVisa.Visa_Scipi_dialog.visa_proxy import VisaProxy
+from oaComVisa.Core.visa_proxy import VisaProxy
 
 class TestVisaLogic(unittest.TestCase):
     def test_visa_resource_lister(self):

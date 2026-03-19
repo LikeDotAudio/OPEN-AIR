@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from oaGuiManager.transparency.transparency_mixin import TransparencyMixin
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 class SnmpVerifyOid(tk.Frame, TransparencyMixin):
     """
@@ -13,7 +13,7 @@ class SnmpVerifyOid(tk.Frame, TransparencyMixin):
         self._setup_ui()
 
     def _find_snmp_manager(self, widget):
-        from oaGuiBuilder.builder import DynamicGuiBuilder
+        from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
         curr = widget
         while curr:
             if isinstance(curr, DynamicGuiBuilder) and hasattr(curr, 'app_instance'):

@@ -17,15 +17,15 @@ for parent in current_path.parents:
 if str(root_path) not in sys.path:
     sys.path.insert(0, str(root_path))
 
-from oaTranslator.yak_trigger_handler import register_monitor_callback, unregister_monitor_callback
+from oaTranslator.Managers.yak_trigger_handler import register_monitor_callback, unregister_monitor_callback
 
 # --- Protocol: Integration Layer ---
-from oaLogging.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
-from oaConfiguration.config_reader import Config
+from oaConfiguration.FileReaders.config_reader import Config
 
-from oaStyle.style import THEMES, DEFAULT_THEME
-from oaGuiManager.transparency.transparency_mixin import TransparencyMixin
+from oaStyle.Core.style import THEMES, DEFAULT_THEME
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
@@ -60,7 +60,7 @@ class YakMonitor(tk.Frame, TransparencyMixin):
 
     def _find_builder_instance(self, widget):
         """Recursively searches for a DynamicGuiBuilder in the parent hierarchy."""
-        from oaGuiBuilder.builder import DynamicGuiBuilder
+        from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
         curr = widget
         while curr:
             if isinstance(curr, DynamicGuiBuilder):

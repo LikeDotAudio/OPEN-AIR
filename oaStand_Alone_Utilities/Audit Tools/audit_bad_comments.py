@@ -3,7 +3,7 @@ import re
 from collections import defaultdict
 
 project_root = "/home/anthony/Documents/OPEN-AIR"
-output_file = os.path.join(project_root, "assets/Documentation/Audits/Bad_Comments_Audit.md")
+output_file = os.path.join(project_root, "oaDataAudits/Documentation/Audits/Bad_Comments_Audit.md")
 
 # Regex for commented-out code heuristics
 CODE_RE = re.compile(r"^\s*#\s*(if|else|elif|def|class|for|while|import|from|self\.|return|yield|try|except|print\(|tk\.)\b")

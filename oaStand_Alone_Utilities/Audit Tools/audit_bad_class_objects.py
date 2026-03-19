@@ -3,7 +3,7 @@ import ast
 from collections import defaultdict
 
 project_root = "/home/anthony/Documents/OPEN-AIR"
-output_file = os.path.join(project_root, "assets/Documentation/Audits/Bad_Class_Objects_Audit.md")
+output_file = os.path.join(project_root, "oaDataAudits/Documentation/Audits/Bad_Class_Objects_Audit.md")
 
 # Thresholds
 GOD_CLASS_METHODS = 15

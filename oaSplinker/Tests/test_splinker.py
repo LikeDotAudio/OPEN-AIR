@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock
-from oaSplinker.splinker import ControlBroker
+from oaSplinker.Core.splinker import ControlBroker
 
 class TestSplinker(unittest.TestCase):
     def setUp(self):

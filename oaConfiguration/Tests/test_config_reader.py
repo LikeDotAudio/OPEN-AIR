@@ -1,7 +1,7 @@
 import unittest
 import configparser
 from unittest.mock import patch, MagicMock
-from oaConfiguration.config_reader import Config
+from oaConfiguration.FileReaders.config_reader import Config
 
 class TestConfigReader(unittest.TestCase):
     def test_singleton_integrity(self):
@@ -10,7 +10,7 @@ class TestConfigReader(unittest.TestCase):
         c2 = Config.get_instance()
         self.assertIs(c1, c2)
 
-    @patch("oaConfiguration.config_reader.ConfigLoader.load")
+    @patch("oaConfiguration.FileReaders.config_reader.ConfigLoader.load")
     def test_config_loading_from_file(self, mock_load):
         """BUILD: Mock ConfigParser content. OPERATE: Load. CHECK: Assert specific value."""
         # Setup mock ConfigParser

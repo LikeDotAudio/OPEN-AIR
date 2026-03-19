@@ -24,10 +24,10 @@ import traceback  # Added for detailed forensics
 from typing import Dict, Any  # Added for type hinting
 
 # --- Protocol: Integration Layer ---
-from oaGuiBuilder.builder import DynamicGuiBuilder
-from oaLogging.logger import initialize_logging, set_log_directory
+from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
+from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
-from oaConfiguration.config_reader import Config
+from oaConfiguration.FileReaders.config_reader import Config
 
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 

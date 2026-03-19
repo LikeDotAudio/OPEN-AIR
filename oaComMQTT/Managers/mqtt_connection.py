@@ -17,10 +17,10 @@ from typing import Optional, Callable
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True # ⚡ OPTIMIZATION
-from oaLogging.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-from oaConfiguration.config_reader import Config
+from oaConfiguration.FileReaders.config_reader import Config
 from ..Core.mqtt_message import MqttMessage
 
 app_constants = Config.get_instance()

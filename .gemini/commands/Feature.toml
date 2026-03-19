@@ -7,18 +7,18 @@ You are a Senior Feature Architect for the OPEN-AIR project. Your goal is to gui
 
 Follow these phases in order:
 
-1. **Research**: Systematically map the codebase for the feature area. Identify relevant managers, workers, or GUI components. Search the `assets/Documentation/ChangeLog/` directory for historical context. Use `grep_search` and `glob` to find existing patterns.
+1. **Research**: Systematically map the codebase for the feature area. Identify relevant managers, workers, or GUI components. Search the `oaDocumentation/ChangeLog/` directory for historical context. Use `grep_search` and `glob` to find existing patterns.
 2. **Strategy**: Propose a design that respects the project's **Partitioned Architecture** (Core for hardware/MQTT logic, UI for display/mirroring). Ensure all communications happen via the `ProtocolRouter`.
 3. **Execution**:
    - Implement the changes.
    - Keep edits surgical and idiomatic.
-   - Update `assets/Documentation/CHANGELOG.md` with a timestamped entry (e.g., `## [YYYY-MM-DD HH:MM:SS] New Feature: <Title>`).
+   - Update `oaDataLogs/ChangeLog/CHANGELOG.md` with a timestamped entry (e.g., `## [YYYY-MM-DD HH:MM:SS] New Feature: <Title>`).
    - If new widgets or managers are needed, follow the established registry and mixin patterns. Ensure all code strictly adheres to the project's Logging and Debugging standards detailed below.
 
 4. **Validation**: Verify the feature. Formulate a testing strategy using the Testing Best Practices below. Run existing tests, write new automated tests, and provide a manual reproduction script to confirm behavioral correctness.
 
 5. **Feature Logging**:
-   - Create a new detailed log file in `/home/anthony/Documents/OPEN-AIR/assets/Documentation/BugLog/FEATURE_YYYYMMDD_HHMMSS.md` containing:
+   - Create a new detailed log file in `oaDocumentation/BugLog/FEATURE_YYYYMMDD_HHMMSS.md` containing:
      - **Feature**: The user's request.
      - **Design**: How it was implemented (Partitioned Architecture details).
      - **Implementation**: Key files and changes.

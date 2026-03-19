@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock
-from oaComMQTT.mqtt_subscriber_router import MqttSubscriberRouter
-from oaComMQTT.mqtt_message import MqttMessage
+from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
+from oaComMQTT.Core.mqtt_message import MqttMessage
 
 class TestMqttSubscriberRouter(unittest.TestCase):
     def setUp(self):

@@ -8,7 +8,7 @@
 import threading
 import time
 from .constants import LOCAL_DEBUG
-from oaLogging.logger import router_logger
+from oaLogging.Core.logger import router_logger
 
 class SettleManager:
     """

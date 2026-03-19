@@ -9,7 +9,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 import orjson
 from loguru import logger
-from oaSplinker.splinker import ControlBroker
+from oaSplinker.Core.splinker import ControlBroker
 
 class SplinkerEditor(tk.Frame):
     def __init__(self, parent, **kwargs):
@@ -22,7 +22,7 @@ class SplinkerEditor(tk.Frame):
         self.mqtt_manager = app.mqtt_connection_manager if app else None
         self.state_cache_manager = app.state_cache_manager if app else None
         
-        from oaComBroker.protocol_router import ProtocolRouter
+        from oaComBroker.Managers.protocol_router import ProtocolRouter
         self.router = ProtocolRouter.get_instance()
         
         self._setup_ui()

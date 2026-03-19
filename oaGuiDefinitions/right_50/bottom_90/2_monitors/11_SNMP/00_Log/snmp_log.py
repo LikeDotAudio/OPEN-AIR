@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from oaGuiManager.transparency.transparency_mixin import TransparencyMixin
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 class SnmpLog(tk.Frame, TransparencyMixin):
     """
@@ -25,7 +25,7 @@ class SnmpLog(tk.Frame, TransparencyMixin):
             self.snmp_manager.add_monitor_callback(self.on_snmp_traffic)
 
     def _find_snmp_manager(self, widget):
-        from oaGuiBuilder.builder import DynamicGuiBuilder
+        from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
         curr = widget
         while curr:
             if isinstance(curr, DynamicGuiBuilder) and hasattr(curr, 'app_instance'):

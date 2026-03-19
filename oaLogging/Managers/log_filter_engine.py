@@ -27,16 +27,16 @@ Dependencies:
 import json
 import sys
 from loguru import logger
-from .logger import initialize_logging, get_logger, quarantine_logger # Assuming logger module is accessible
+from ..Core.logger import initialize_logging, get_logger, quarantine_logger # Assuming logger module is accessible
 # We need to import the MQTT router to subscribe to topics.
 # Assuming it's structured like this, adjust if needed.
 try:
-    from oaComMQTT.mqtt_subscriber_router import MqttSubscriberRouter
+    from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
 except ImportError:
     logger.error("MqttSubscriberRouter not found. Dynamic log filtering will not function.")
     MqttSubscriberRouter = None # Placeholder to prevent further errors
 
-from oaComMQTT.mqtt_message import MqttMessage
+from oaComMQTT.Core.mqtt_message import MqttMessage
 
 # Global instance to manage filters and the MQTT router
 _log_filter_engine = None
@@ -155,7 +155,7 @@ if __name__ == "__main__":
     # and logger are initialized.
 
     # Mock logger initialization
-    from oaLogging.logger import initialize_logging as mock_init_logging, get_logger as mock_get_logger
+    from oaLogging.Core.logger import initialize_logging as mock_init_logging, get_logger as mock_get_logger
     
     class MockConfig: # Dummy config for testing
         global_settings = {"debug_enabled": True}

@@ -1,14 +1,14 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from oaComOSC.osc import OSCManager
+from oaComOSC.Managers.osc_manager import OSCManager
 
 class TestOSCManager(unittest.TestCase):
     def setUp(self):
         self.state_cache_manager = MagicMock()
         self.mqtt_connection_manager = MagicMock()
         # Mock servers to avoid socket binding
-        with patch("oaComOSC.osc.OscRxServer"), \
-             patch("oaComOSC.osc.OscTxClient"):
+        with patch("oaComOSC.Managers.osc_manager.OscRxServer"), \
+             patch("oaComOSC.Managers.osc_manager.OscTxClient"):
             self.manager = OSCManager(
                 state_cache_manager=self.state_cache_manager,
                 mqtt_connection_manager=self.mqtt_connection_manager,

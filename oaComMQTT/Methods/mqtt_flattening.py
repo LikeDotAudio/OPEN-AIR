@@ -21,7 +21,7 @@ import inspect
 import orjson
 
 # --- Module Imports ---
-from oaLogging.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 

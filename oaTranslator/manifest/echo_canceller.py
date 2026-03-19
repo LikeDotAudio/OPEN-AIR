@@ -4,7 +4,7 @@
 # Checks if an incoming payload originated from the local instance.
 
 from typing import Dict
-from oaConfiguration.config_reader import Config
+from oaConfiguration.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 

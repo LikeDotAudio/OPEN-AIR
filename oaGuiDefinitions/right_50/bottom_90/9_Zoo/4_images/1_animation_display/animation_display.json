@@ -17,7 +17,7 @@
         "examplefields": {
           "type": "AnimationDisplay",
           "label_active": "Animated Time Circuits",
-          "gif_path": "assets/images/time_circuits.gif",
+          "gif_path": "oaDataCache/assets/images/time_circuits.gif",
           "value_default": 0,
           "notes": "A standard animation of the time circuits."
         }
@@ -28,7 +28,7 @@
         "examplefields": {
           "type": "AnimationDisplay",
           "label_active": "Time Circuits (Start Frame 5)",
-          "gif_path": "assets/images/time_circuits.gif",
+          "gif_path": "oaDataCache/assets/images/time_circuits.gif",
           "value_default": 5,
           "notes": "Time circuits animation starting from a later frame."
         }
@@ -39,7 +39,7 @@
         "examplefields": {
           "type": "_GuiAnimation",
           "label_active": "Start Frame 10",
-          "path": "assets/animations/start_frame_10.gif",
+          "path": "oaDataCache/assets/animations/start_frame_10.gif",
           "start_frame": 10,
           "notes": "An animation that starts playing from frame 10."
         }
@@ -50,7 +50,7 @@
         "examplefields": {
           "type": "_GuiAnimation",
           "label_active": "Thematic Animation",
-          "path": "assets/animations/thematic_label.gif",
+          "path": "oaDataCache/assets/animations/thematic_label.gif",
           "notes": "An animation used as a thematic label or separator."
         }
       },
@@ -60,7 +60,7 @@
         "examplefields": {
           "type": "_GuiAnimation",
           "label_active": "Detailed Animation",
-          "path": "assets/animations/detailed_notes.gif",
+          "path": "oaDataCache/assets/animations/detailed_notes.gif",
           "notes": "An animation providing detailed contextual information."
         }
       }

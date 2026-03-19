@@ -3,8 +3,8 @@ import ast
 import re
 
 project_root = "/home/anthony/Documents/OPEN-AIR"
-audit_file = os.path.join(project_root, "assets/Documentation/Audits/Bad Functions.txt")
-output_file = os.path.join(project_root, "assets/Documentation/Audits/Bad Functions suggestions.txt")
+audit_file = os.path.join(project_root, "oaDataAudits/Documentation/Audits/Bad Functions.txt")
+output_file = os.path.join(project_root, "oaDataAudits/Documentation/Audits/Bad Functions suggestions.txt")
 
 def get_function_source(filepath, func_name, start_line):
     full_path = os.path.join(project_root, filepath)

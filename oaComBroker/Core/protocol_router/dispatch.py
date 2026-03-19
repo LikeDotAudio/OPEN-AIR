@@ -4,8 +4,8 @@
 
 import orjson
 from .constants import LOCAL_DEBUG
-from oaLogging.logger import router_logger
-from oaOchestration.protocol_guard import protocol_guard
+from oaLogging.Core.logger import router_logger
+from oaOchestration.Managers.protocol_guard import protocol_guard
 
 def dispatch_message(msg, managers):
     """

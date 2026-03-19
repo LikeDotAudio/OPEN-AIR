@@ -6,12 +6,12 @@ import pathlib
 from unittest.mock import MagicMock, patch
 
 # --- UI & Widget Construction ---
-from oaGuiManager.parser.layout_parser import LayoutParser
-from oaGuiEditorWYSIWYG.core.state import StateManager
+from oaGuiManager.Core.parser.layout_parser import LayoutParser
+from oaGuiEditorWYSIWYG.Core.state import StateManager
 
 # --- Data & Processing Utilities ---
-from oaGuiShowtime.group import group_markers
-from oaGuiEditorWYSIWYG.core.file_io_handler import FileIOHandler
+from oaGuiShowtime.Methods.group import group_markers
+from oaGuiEditorWYSIWYG.Core.file_io_handler import FileIOHandler
 
 class TestUIAndData(unittest.TestCase):
     def setUp(self):
@@ -99,7 +99,7 @@ class TestUIAndData(unittest.TestCase):
             
         handler = FileIOHandler()
         # Mock StateManager since it's a singleton used inside load_file
-        with patch('oaGuiEditorWYSIWYG.core.file_io_handler.state_manager') as mock_sm:
+        with patch('oaGuiEditorWYSIWYG.Core.file_io_handler.state_manager') as mock_sm:
             success = handler.load_file(test_json)
             self.assertTrue(success)
             mock_sm.initialize.assert_called_once()

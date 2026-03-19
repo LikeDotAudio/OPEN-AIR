@@ -3,7 +3,7 @@
 # Unified entry point for the Showtime tab.
 # Bridges the Framework ModuleLoader to the refactored Showtime logic.
 
-from oaGuiShowtime.core.tab import ShowtimeTab
+from oaGuiShowtime.Core.tab import ShowtimeTab
 
 # The ModuleLoader expects a class that inherits from tk.Frame or ttk.Frame.
 # ShowtimeTab already does this.

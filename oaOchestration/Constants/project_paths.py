@@ -16,9 +16,9 @@ import sys
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from loguru import logger
 
-from oaConfiguration.config_reader import Config
+from oaConfiguration.FileReaders.config_reader import Config
 # ⚡ OPTIMIZATION: Use static path cache
-from ..Managers.path_initializer import (
+from ..Core.path_initializer import (
     GLOBAL_PROJECT_ROOT, 
     DATA_RUNNING_DIR, 
     DATA_LOGS_DIR, 

@@ -10,14 +10,14 @@ from pathlib import Path
 from loguru import logger
 
 # --- EXTRACTED CORE MODULES ---
-from .core.ptp_processor import PTPDataProcessor
-from .core.ptp_meter_panel import PTPMeterPanel
-from .core.ptp_dissector_engine import PTPDissectorEngine
+from .Core.ptp_processor import PTPDataProcessor
+from .Core.ptp_meter_panel import PTPMeterPanel
+from .Core.ptp_dissector_engine import PTPDissectorEngine
 
-from oaPTP.ptp import register_ptp_callback, unregister_ptp_callback
-from oaConfiguration.config_reader import Config
-from oaStyle.style import THEMES, DEFAULT_THEME
-from oaGuiManager.transparency.transparency_mixin import TransparencyMixin
+from oaPTP.Core.ptp import register_ptp_callback, unregister_ptp_callback
+from oaConfiguration.FileReaders.config_reader import Config
+from oaStyle.Core.style import THEMES, DEFAULT_THEME
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 LOCAL_DEBUG = True
 app_constants = Config.get_instance()
@@ -49,7 +49,7 @@ class PtpMonitor(tk.Frame, TransparencyMixin):
         if LOCAL_DEBUG: logger.debug("🖥️ PTP Monitor Initialized.")
 
     def _find_builder(self, widget):
-        from oaGuiBuilder.builder import DynamicGuiBuilder
+        from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
         curr = widget
         while curr:
             if isinstance(curr, DynamicGuiBuilder): return curr

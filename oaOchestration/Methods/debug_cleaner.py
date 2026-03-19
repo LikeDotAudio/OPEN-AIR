@@ -18,10 +18,10 @@ import os
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from oaLogging.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-from oaConfiguration.config_reader import Config
+from oaConfiguration.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
@@ -34,7 +34,7 @@ app_constants = Config.get_instance()  # Get the singleton instance
 # Outputs:
 def clear_debug_directory():
     """Clears all files within the refactored log directory."""
-    from ..Managers.path_initializer import DATA_LOGS_DIR
+    from ..Core.path_initializer import DATA_LOGS_DIR
     if LOCAL_DEBUG: logger.debug("▶️ Entering clear_debug_directory.")
 
     if DATA_LOGS_DIR.exists():

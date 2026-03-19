@@ -1,0 +1,262 @@
+004004.028 | WARNING  | CORE | SYSTEM     | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+004004.958 | ERROR    | UI   | SYSTEM     | oaGuiBuild.Core.batch_processing_engine | ❌ Deferred build error: right_top.blocks.Control_Buttons.fields.Pause
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 3729, in <module>
+    main()
+    -> <function main at 0x7f785adf3060>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 3714, in main
+    globals = debugger.run(setup["file"], None, None, is_module)
+              |        |   |                          -> False
+              |        |   -> {'port': 37651, 'ppid': 950545, 'vm_type': None, 'client': '127.0.0.1', 'access-token': None, 'client-access-token': 'ee65c9f...
+              |        -> <function PyDB.run at 0x7f785adf0fe0>
+              -> <__main__.PyDB object at 0x7f785b23fda0>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 2698, in run
+    return self._exec(is_module, entry_point_fn, module_name, file, globals, locals)
+           |    |     |          |               |            |     |        -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |    |     |          |               |            |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |    |     |          |               |            -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+           |    |     |          |               -> None
+           |    |     |          -> ''
+           |    |     -> False
+           |    -> <function PyDB._exec at 0x7f785adf1080>
+           -> <__main__.PyDB object at 0x7f785b23fda0>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 2706, in _exec
+    globals = pydevd_runpy.run_path(file, globals, "__main__")
+              |            |        |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+              |            |        -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+              |            -> <function run_path at 0x7f785b4279c0>
+              -> <module '_pydevd_bundle.pydevd_runpy' from '/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/li...
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 310, in run_path
+    return _run_module_code(code, init_globals, run_name, pkg_name=pkg_name, script_name=fname)
+           |                |     |             |                  |                     -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+           |                |     |             |                  -> ''
+           |                |     |             -> '__main__'
+           |                |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |                -> <code object <module> at 0x2a4b92f0, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+           -> <function _run_module_code at 0x7f785b427600>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 127, in _run_module_code
+    _run_code(code, mod_globals, init_globals, mod_name, mod_spec, pkg_name, script_name)
+    |         |     |            |             |         |         |         -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+    |         |     |            |             |         |         -> ''
+    |         |     |            |             |         -> None
+    |         |     |            |             -> '__main__'
+    |         |     |            -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+    |         |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': None, '__spec__': None, '__file__': '/home/anthony...
+    |         -> <code object <module> at 0x2a4b92f0, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+    -> <function _run_code at 0x7f785b4271a0>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 118, in _run_code
+    exec(code, run_globals)
+         |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': None, '__spec__': None, '__file__': '/home/anthony...
+         -> <code object <module> at 0x2a4b92f0, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 83, in <module>
+    main()
+    -> <function main at 0x7f785ae5b060>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 72, in main
+    root.mainloop()
+    |    -> <function Misc.mainloop at 0x7f7858aeb6a0>
+    -> <tkinter.Tk object .>
+
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1504, in mainloop
+    self.tk.mainloop(n)
+    |    |  |        -> 0
+    |    |  -> <method 'mainloop' of '_tkinter.tkapp' objects>
+    |    -> <_tkinter.tkapp object at 0x7f784b86bab0>
+    -> <tkinter.Tk object .>
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1967, in __call__
+    return self.func(*args)
+           |    |     -> ()
+           |    -> <function Misc.after.<locals>.callit at 0x7f784831fba0>
+           -> <tkinter.CallWrapper object at 0x7f7848386930>
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 861, in callit
+    func(*args)
+    |     -> ()
+    -> <function AsyncBootstrapEngine.run.<locals>.<lambda> at 0x7f784831fc40>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 77, in <lambda>
+    self.root.after(1, lambda: self._launch_app(mqtt_conn, sub_router, mirror_engine, state_cache))
+    |    |    |                |    |           |          |           |              -> <oaStateCache.Core.state_cache.StateRegistry object at 0x7f784b98d400>
+    |    |    |                |    |           |          |           -> <oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x7f7849c1c740>
+    |    |    |                |    |           |          -> <oaComMQTT.Managers.mqtt_subscriber_router.MqttSubscriberRouter object at 0x7f784b8f8140>
+    |    |    |                |    |           -> <oaComMQTT.Managers.mqtt_connection.MqttConnectionManager object at 0x7f784b98f740>
+    |    |    |                |    -> <function AsyncBootstrapEngine._launch_app at 0x7f784b8ba5c0>
+    |    |    |                -> <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x7f7858b68860>
+    |    |    -> <function Misc.after at 0x7f7858ae8040>
+    |    -> <tkinter.Tk object .>
+    -> <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x7f7858b68860>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 100, in _launch_app
+    self.root.update()
+    |    |    -> <function Misc.update at 0x7f7858aeafc0>
+    |    -> <tkinter.Tk object .>
+    -> <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x7f7858b68860>
+
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1372, in update
+    self.tk.call('update')
+    |    |  -> <method 'call' of '_tkinter.tkapp' objects>
+    |    -> <_tkinter.tkapp object at 0x7f784b86bab0>
+    -> <tkinter.Tk object .>
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1967, in __call__
+    return self.func(*args)
+           |    |     -> ()
+           |    -> <function Misc.after.<locals>.callit at 0x7f77f07985e0>
+           -> <tkinter.CallWrapper object at 0x7f77f37e4b00>
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 861, in callit
+    func(*args)
+    |     -> ()
+    -> <bound method UniversalGuiLoader._construct_dynamic_gui of <oaGuiManager.Core.loader.gui_from_json.UniversalGuiLoader object ...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/loader/gui_from_json.py", line 99, in _construct_dynamic_gui
+    self.dynamic_gui = DynamicGuiBuilder(
+    |                  -> <class 'oaGuiBuilder.Workers.builder.DynamicGuiBuilder'>
+    -> <oaGuiManager.Core.loader.gui_from_json.UniversalGuiLoader object .!application.!panedwindow.!frame2.!panedwindow.!frame.!uni...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuilder/Workers/builder.py", line 204, in __init__
+    self._load_and_build_from_file()
+    |    -> <function GuiFileLoaderMixin._load_and_build_from_file at 0x7f78483ab7e0>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguilo...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/FileReaders/gui_file_loader.py", line 59, in _load_and_build_from_file
+    self._rebuild_gui()
+    |    -> <function GuiRebuilderMixin._rebuild_gui at 0x7f78483abba0>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguilo...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuild/Managers/gui_re.py", line 95, in _rebuild_gui
+    self._create_dynamic_widgets(self.scroll_frame, self.config_data, on_complete=on_build_complete)
+    |    |                       |    |             |    |                        -> <function GuiRebuilderMixin._rebuild_gui.<locals>.on_build_complete at 0x7f780be9f740>
+    |    |                       |    |             |    -> {'background': {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'color...
+    |    |                       |    |             -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguilo...
+    |    |                       |    -> <tkinter.Canvas object .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguiloader.!dynamicguibuilder.!frame.!...
+    |    |                       -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguilo...
+    |    -> <function GuiBatchBuilderMixin._create_dynamic_widgets at 0x7f7848230860>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguilo...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuild/Managers/gui_batch.py", line 75, in _create_dynamic_widgets
+    self._async_renderer.render(
+    |    |               -> <function AsyncGridRenderer.render at 0x7f7848230540>
+    |    -> <oaGuiBuild.Workers.async_grid_renderer.AsyncGridRenderer object at 0x7f77f37e7980>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguilo...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuild/Workers/async_grid_renderer.py", line 74, in render
+    self._process_fields(parent_frame, all_fields, path_prefix, num_cols, on_complete, eff_bg, data, context)
+    |    |               |             |           |            |         |            |       |     -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x7f7849c1c740>, subscri...
+    |    |               |             |           |            |         |            |       -> {'background': {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'color...
+    |    |               |             |           |            |         |            -> None
+    |    |               |             |           |            |         -> <function GuiRebuilderMixin._rebuild_gui.<locals>.on_build_complete at 0x7f780be9f740>
+    |    |               |             |           |            -> 1
+    |    |               |             |           -> ''
+    |    |               |             -> [('background', {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'colo...
+    |    |               -> <tkinter.Canvas object .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguiloader.!dynamicguibuilder.!frame.!...
+    |    -> <function AsyncGridRenderer._process_fields at 0x7f7848230720>
+    -> <oaGuiBuild.Workers.async_grid_renderer.AsyncGridRenderer object at 0x7f77f37e7980>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuild/Workers/async_grid_renderer.py", line 136, in _process_fields
+    self.render(inner, val, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context)
+    |    |      |      |    |                              |     |                  |                     |                             |               -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x7f7849c1c740>, subscri...
+    |    |      |      |    |                              |     |                  |                     |                             -> None
+    |    |      |      |    |                              |     |                  |                     -> <function AsyncGridRenderer._process_fields.<locals>._check_done at 0x7f780be9f560>
+    |    |      |      |    |                              |     |                  -> {'pending': 1, 'loop_done': False, 'aborted': False}
+    |    |      |      |    |                              |     -> <method 'update' of 'dict' objects>
+    |    |      |      |    |                              -> {'pending': 1, 'loop_done': False, 'aborted': False}
+    |    |      |      |    -> 'right_top'
+    |    |      |      -> {'type': 'OcaBin', 'id': '50.10', 'description': 'Root container locked to window edges with smart auto-scrolling.', 'behavio...
+    |    |      -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguiloader.!dynamicguibuilder.!frame.!c...
+    |    -> <function AsyncGridRenderer.render at 0x7f7848230540>
+    -> <oaGuiBuild.Workers.async_grid_renderer.AsyncGridRenderer object at 0x7f77f37e7980>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuild/Workers/async_grid_renderer.py", line 74, in render
+    self._process_fields(parent_frame, all_fields, path_prefix, num_cols, on_complete, eff_bg, data, context)
+    |    |               |             |           |            |         |            |       |     -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x7f7849c1c740>, subscri...
+    |    |               |             |           |            |         |            |       -> {'type': 'OcaBin', 'id': '50.10', 'description': 'Root container locked to window edges with smart auto-scrolling.', 'behavio...
+    |    |               |             |           |            |         |            -> None
+    |    |               |             |           |            |         -> <function AsyncGridRenderer._process_fields.<locals>.<lambda> at 0x7f780be9f2e0>
+    |    |               |             |           |            -> 1
+    |    |               |             |           -> 'right_top'
+    |    |               |             -> [('Control_Buttons', {'type': 'OcaBlock', 'fields': {'Start': {'type': '_GuiActuator', 'label': 'Start', 'handler': 'start_bu...
+    |    |               -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguiloader.!dynamicguibuilder.!frame.!c...
+    |    -> <function AsyncGridRenderer._process_fields at 0x7f7848230720>
+    -> <oaGuiBuild.Workers.async_grid_renderer.AsyncGridRenderer object at 0x7f77f37e7980>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuild/Workers/async_grid_renderer.py", line 129, in _process_fields
+    self.render(target, val, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context)
+    |    |      |       |    |                              |     |                  |                     |                             |               -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x7f7849c1c740>, subscri...
+    |    |      |       |    |                              |     |                  |                     |                             -> None
+    |    |      |       |    |                              |     |                  |                     -> <function AsyncGridRenderer._process_fields.<locals>._check_done at 0x7f780be9eb60>
+    |    |      |       |    |                              |     |                  -> {'pending': 1, 'loop_done': False, 'aborted': False}
+    |    |      |       |    |                              |     -> <method 'update' of 'dict' objects>
+    |    |      |       |    |                              -> {'pending': 1, 'loop_done': False, 'aborted': False}
+    |    |      |       |    -> 'right_top.blocks.Control_Buttons'
+    |    |      |       -> {'type': 'OcaBlock', 'fields': {'Start': {'type': '_GuiActuator', 'label': 'Start', 'handler': 'start_button_clicked', 'layou...
+    |    |      -> <tkinter.Canvas object .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguiloader.!dynamicguibuilder.!frame.!...
+    |    -> <function AsyncGridRenderer.render at 0x7f7848230540>
+    -> <oaGuiBuild.Workers.async_grid_renderer.AsyncGridRenderer object at 0x7f77f37e7980>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuild/Workers/async_grid_renderer.py", line 74, in render
+    self._process_fields(parent_frame, all_fields, path_prefix, num_cols, on_complete, eff_bg, data, context)
+    |    |               |             |           |            |         |            |       |     -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x7f7849c1c740>, subscri...
+    |    |               |             |           |            |         |            |       -> {'type': 'OcaBlock', 'fields': {'Start': {'type': '_GuiActuator', 'label': 'Start', 'handler': 'start_button_clicked', 'layou...
+    |    |               |             |           |            |         |            -> None
+    |    |               |             |           |            |         -> <function AsyncGridRenderer._process_fields.<locals>.<lambda> at 0x7f780be9ea20>
+    |    |               |             |           |            -> 1
+    |    |               |             |           -> 'right_top.blocks.Control_Buttons'
+    |    |               |             -> [('Start', {'type': '_GuiActuator', 'label': 'Start', 'handler': 'start_button_clicked', 'layout': {'width': 80, 'height': 40...
+    |    |               -> <tkinter.Canvas object .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguiloader.!dynamicguibuilder.!frame.!...
+    |    -> <function AsyncGridRenderer._process_fields at 0x7f7848230720>
+    -> <oaGuiBuild.Workers.async_grid_renderer.AsyncGridRenderer object at 0x7f77f37e7980>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuild/Workers/async_grid_renderer.py", line 154, in _process_fields
+    if deferred and not state["aborted"]: self.batch_engine.process(parent, deferred, 25, context, state, _check_done)
+       |                |                 |    |            |       |       |             |        |      -> <function AsyncGridRenderer._process_fields.<locals>._check_done at 0x7f780be9e840>
+       |                |                 |    |            |       |       |             |        -> {'pending': 2, 'loop_done': True, 'aborted': False}
+       |                |                 |    |            |       |       |             -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x7f7849c1c740>, subscri...
+       |                |                 |    |            |       |       -> [{'r': 0, 'c': 0, 'val': {'type': '_GuiActuator', 'label': 'Start', 'handler': 'start_button_clicked', 'layout': {'width': 80...
+       |                |                 |    |            |       -> <tkinter.Canvas object .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguiloader.!dynamicguibuilder.!frame.!...
+       |                |                 |    |            -> <function BatchProcessingEngine.process at 0x7f7848230680>
+       |                |                 |    -> <oaGuiBuild.Core.batch_processing_engine.BatchProcessingEngine object at 0x7f77f37e6540>
+       |                |                 -> <oaGuiBuild.Workers.async_grid_renderer.AsyncGridRenderer object at 0x7f77f37e7980>
+       |                -> {'pending': 2, 'loop_done': True, 'aborted': False}
+       -> [{'r': 0, 'c': 0, 'val': {'type': '_GuiActuator', 'label': 'Start', 'handler': 'start_button_clicked', 'layout': {'width': 80...
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiBuild/Core/batch_processing_engine.py", line 23, in process
+    widget = creator(parent_widget=parent, config_data=wd, context=context)
+             |                     |                   |           -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x7f7849c1c740>, subscri...
+             |                     |                   -> {'type': '_GuiButtonToggle', 'label': 'Pause', 'handler': 'pause_button_clicked', 'layout': {'width': 80, 'height': 40}, 'sty...
+             |                     -> <tkinter.Canvas object .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguiloader.!dynamicguibuilder.!frame.!...
+             -> <function GuiWidgetFactoryMixin._lazy_wrap.<locals>.wrapper at 0x7f77f37c8680>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/factory/gui_widget_factory.py", line 43, in wrapper
+    module = importlib.import_module(module_path)
+             |         |             -> 'oaGuiElements.Core.buttons.button_toggle.button_toggle'
+             |         -> <function import_module at 0x7f785b5914e0>
+             -> <module 'importlib' from '/usr/lib/python3.12/importlib/__init__.py'>
+
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           |          |           |    |        |        -> 0
+           |          |           |    |        -> None
+           |          |           |    -> 0
+           |          |           -> 'oaGuiElements.Core.buttons.button_toggle.button_toggle'
+           |          -> <function _gcd_import at 0x7f785c51c0e0>
+           -> <module '_frozen_importlib' (frozen)>
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiElements/Core/buttons/button_toggle/button_toggle.py", line 29, in <module>
+    @WidgetRegistry.register("_GuiButtonToggle", "_SmartToggle", "_ButtonToggle")
+
+NameError: name 'WidgetRegistry' is not defined
+004008.144 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
+004008.144 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
+004018.351 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)

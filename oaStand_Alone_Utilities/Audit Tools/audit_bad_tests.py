@@ -3,7 +3,7 @@ import ast
 import re
 
 project_root = "/home/anthony/Documents/OPEN-AIR"
-output_file = os.path.join(project_root, "assets/Documentation/Audits/Bad_Tests_Audit.md")
+output_file = os.path.join(project_root, "oaDataAudits/Documentation/Audits/Bad_Tests_Audit.md")
 
 # Paths to scan
 SCAN_DIRS = ["managers", "workers"]

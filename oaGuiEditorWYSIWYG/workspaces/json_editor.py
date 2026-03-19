@@ -9,9 +9,9 @@ import tkinter as tk
 from tkinter import ttk
 import orjson
 import re
-from ..core.event_bus import event_bus
-from ..core.state import state_manager
-from oaLogging.logger import initialize_logging, set_log_directory
+from ..Core.event_bus import event_bus
+from ..Core.state import state_manager
+from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file

@@ -5,7 +5,7 @@
 import time
 import random
 from .constants import LOCAL_DEBUG, app_constants
-from oaLogging.logger import router_logger
+from oaLogging.Core.logger import router_logger
 
 def normalize_and_ingest(
     transport_source, 

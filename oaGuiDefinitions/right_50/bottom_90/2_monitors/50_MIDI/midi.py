@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import datetime
-from oaGuiElements.utils.midi_keyboard.midi_keyboard import MidiKeyboard, get_midi_color
+from oaGuiElements.Core.utils.midi_keyboard.midi_keyboard import MidiKeyboard, get_midi_color
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
@@ -27,7 +27,7 @@ class MidiDashboard(tk.Frame):
             self._refresh_ui()
 
     def _find_midi_manager(self, widget):
-        from oaGuiBuilder.builder import DynamicGuiBuilder
+        from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
         curr = widget
         while curr:
             if isinstance(curr, DynamicGuiBuilder) and hasattr(curr, 'app_instance'):

@@ -2,7 +2,7 @@ import configparser
 import sys
 import subprocess
 from loguru import logger
-from oaConfiguration.config import create_default_config_ini
+from oaConfiguration.Core.config_builder import create_default_config_ini
 
 class ConfigLoader:
     """Orchestrates the loading, parsing, and auto-generation of the config.ini file."""

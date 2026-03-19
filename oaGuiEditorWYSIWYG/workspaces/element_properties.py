@@ -4,15 +4,15 @@
 
 import tkinter as tk
 from tkinter import ttk, messagebox
-from ..core.event_bus import event_bus
-from ..core.state import state_manager
+from ..Core.event_bus import event_bus
+from ..Core.state import state_manager
 from ..grab_bag.grab_bag_loader import GrabBagLoader
 from loguru import logger
 
 # --- EXTRACTED CORE MODULES ---
-from .core.structural_mixin import StructuralManagerMixin
-from .core.layout_tools_mixin import LayoutToolsMixin
-from .core.property_renderer_mixin import PropertyRendererMixin
+from .Core.structural_mixin import StructuralManagerMixin
+from .Core.layout_tools_mixin import LayoutToolsMixin
+from .Core.property_renderer_mixin import PropertyRendererMixin
 
 LOCAL_DEBUG = True
 
@@ -112,7 +112,7 @@ class ElementProperties(
             display_data = self._deep_merge(schema, actual_data)
             self._render_recursive_properties(display_data, self.scroll_frame, prefix=self.focused_path, actual_data=actual_data)
         else:
-            from .core.leaf_editor_factory import LeafEditorFactory
+            from .Core.leaf_editor_factory import LeafEditorFactory
             LeafEditorFactory.create(self.scroll_frame, self.focused_path.split(".")[-1], actual_data, self.focused_path, self)
 
     def _deep_merge(self, template, actual):

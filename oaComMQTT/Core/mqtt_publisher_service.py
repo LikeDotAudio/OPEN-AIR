@@ -7,10 +7,10 @@
 # Blog: www.Like.audio (Contributor to this project)
 # Version 20260316.1
 
-from ..mqtt_connection import MqttConnectionManager
+from ..Managers.mqtt_connection import MqttConnectionManager
 import orjson
 
-from oaConfiguration.config_reader import Config
+from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 def start_publisher_worker():

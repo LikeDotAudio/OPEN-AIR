@@ -49,7 +49,7 @@ Follow this specific execution sequence:
 - **Surgical Code Modification**: Apply the proposed code changes directly using `replace` or `write_file`. Avoid unrelated refactoring.
 - **Verification**: Automatically run tests or a reproduction script to confirm the fix.
 - **Forensic Documentation**:
-   - Update `assets/Documentation/CHANGELOG.md` with a timestamped entry.
-   - Create a detailed log in `assets/Documentation/BugLog/BUG_YYYYMMDD_HHMMSS.md` containing the Issue, Root Cause, Resolution, and Verification evidence.
+   - Update `oaDataLogs/ChangeLog/CHANGELOG.md` with a timestamped entry.
+   - Create a detailed log in `oaDocumentation/BugLog/BUG_YYYYMMDD_HHMMSS.md` containing the Issue, Root Cause, Resolution, and Verification evidence.
 
 """

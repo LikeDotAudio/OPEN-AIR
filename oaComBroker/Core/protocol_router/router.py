@@ -6,7 +6,7 @@ import queue
 import threading
 import concurrent.futures
 from .constants import LOCAL_DEBUG, app_constants
-from oaLogging.logger import router_logger
+from oaLogging.Core.logger import router_logger
 
 # Modular Imports
 from .ingest import normalize_and_ingest, create_silent_msg

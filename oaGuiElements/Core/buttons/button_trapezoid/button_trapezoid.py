@@ -1,0 +1,145 @@
+# button_trapezoid/button_trapezoid.py
+# Modularized dynamic, theme-aware trapezoidal button.
+# Version 20260315.Modular.1
+
+import tkinter as tk
+from loguru import logger
+
+# --- Standard Debug Logging Setup ---
+BUILDER_DEBUG = True
+from oaLogging.Core.logger import builder_logger
+from oaConfiguration.FileReaders.config_reader import Config
+app_constants = Config.get_instance()
+
+from oaStyle.Core.style import THEMES, DEFAULT_THEME
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+
+# --- EXTRACTED CORE MODULES ---
+from .Core.trapezoid_renderer_mixin import TrapezoidRendererMixin
+from .Core.trapezoid_interaction_mixin import TrapezoidInteractionMixin
+
+class TrapezoidButton(tk.Canvas, TrapezoidRendererMixin, TrapezoidInteractionMixin):
+    """
+    A self-contained Trapezoid Button widget that manages its own state and interaction.
+    Refactored to eliminate redundant parameter passing (Data Trampolining).
+    """
+    def __init__(self, parent, variable, config, label, path, state_mirror_engine, 
+                 base_mqtt_topic_from_path, subscriber_router, **kwargs):
+        self.config_data = config
+        self.variable = variable
+        self.label = label
+        self.path = path
+        self.state_mirror_engine = state_mirror_engine
+        self.base_mqtt_topic_from_path = base_mqtt_topic_from_path
+        self.subscriber_router = subscriber_router
+        self.is_latching = config.get("latching", False)
+        self._is_pressed = False
+        
+        # Extract dimensions
+        width = config.get("width", 80)
+        height = config.get("height", 50)
+        full_height = height + (25 if label else 0)
+        
+        # Background handling
+        p_bg = kwargs.pop("bg", None)
+        if p_bg is None:
+            try: p_bg = parent.cget("bg")
+            except: p_bg = "#2b2b2b"
+        if not p_bg or not p_bg.startswith("#"): p_bg = "#2b2b2b"
+
+        super().__init__(parent, bd=0, highlightthickness=0, relief="flat", 
+                         width=width, height=full_height, bg=p_bg, **kwargs)
+        
+        # Bindings
+        self.bind("<Button-1>", self._on_press)
+        self.bind("<ButtonRelease-1>", self._on_release)
+        self.bind("<Configure>", lambda e: self.render(), add="+")
+
+        # State Sync
+        self.variable.trace_add("write", lambda *a: self.render_and_broadcast())
+        
+        if self.path and self.state_mirror_engine:
+            topic = self.state_mirror_engine.register_widget(
+                self.path, self.variable, self.base_mqtt_topic_from_path, self.config_data)
+            if self.subscriber_router and topic:
+                self.subscriber_router.subscribe_to_topic(topic, self.state_mirror_engine.sync_incoming_mqtt_to_gui)
+            self.state_mirror_engine.initialize_widget_state(self.path)
+
+        # Rendering API
+        self._draw = self.render
+        self.render()
+
+    def render(self):
+        """Orchestrates the drawing process."""
+        self._trigger_redraw()
+
+    def render_and_broadcast(self):
+        """Redraws the button and announces the change to MQTT."""
+        self.render()
+        if self.state_mirror_engine:
+            self.state_mirror_engine.broadcast_gui_change_to_mqtt(self.path)
+
+    def _trigger_redraw(self):
+        """Prepares state and calls the renderer mixin."""
+        current_face = self.config_data.get("color", "#8B0000")
+        
+        # Attempt to sample parent background for transparency-like feel
+        try:
+            p_bg = self.master.cget("bg")
+            sampled_bg = self.cget("bg")
+            if current_face == p_bg and sampled_bg.startswith("#"):
+                current_face = sampled_bg
+        except: pass
+
+        current_state = {
+            "pressed": self._is_pressed,
+            "lit": self.variable.get(),
+            "base_color": current_face,
+            "led_color": self.config_data.get("led_color", self.config_data.get("indicator_color", "#FF0000")),
+            "label": self.label
+        }
+        self.render_trapezoid_button(self, self.config_data, current_state)
+
+@WidgetRegistry.register("_TrapezoidButton")
+class BuilderButtonTrapezoidCreator(TransparencyMixin):
+    """Factory for creating TrapezoidButton instances."""
+
+    def make_button_trapezoid(self, parent_widget, config_data, context=None, **kwargs):
+        """Creates a trapezoidal button widget."""
+        label = config_data.get("label_active") or config_data.get("label", "")
+        button_text = config_data.get("button_text", "")
+        if button_text: config_data["button_text"] = button_text[:3]
+        
+        path = config_data.get("path")
+
+        # Context Extraction
+        if context:
+            state_mirror_engine = context.state_mirror_engine
+            subscriber_router = context.subscriber_router
+            base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
+            builder_instance = context.builder_instance
+        else:
+            state_mirror_engine = kwargs.get("state_mirror_engine")
+            subscriber_router = kwargs.get("subscriber_router")
+            base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
+            builder_instance = kwargs.get("builder_instance") or self
+
+        initial_state = bool(config_data.get("value_default", False))
+        state_var = kwargs.get("variable") or tk.BooleanVar(master=parent_widget, value=initial_state)
+
+        # Instantiate the specialized widget class
+        button = TrapezoidButton(
+            parent_widget, state_var, config_data, label, path, 
+            state_mirror_engine, base_mqtt_topic_from_path, subscriber_router
+        )
+
+        if hasattr(self, '_apply_transparency'):
+            self._apply_transparency(button, button, config_data, builder_instance)
+
+        return button
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderButtonTrapezoidCreator()
+        return creator.make_button_trapezoid(parent_widget, config_data, context, **kwargs)

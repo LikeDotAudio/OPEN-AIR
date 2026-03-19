@@ -49,17 +49,16 @@ project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from oaConfiguration.config_reader import Config
-from oaLogging.logger import initialize_logging, set_log_directory
+from oaConfiguration.FileReaders.config_reader import Config
+from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-from oaOchestration.path_initializer import initialize_paths, DATA_LOGS_DIR
-from oaConfiguration.console_encoder import configure_console_encoding
-import oaWatchdog.watchdog as watchdog
-from oaComMQTT.mqtt_connection import MqttConnectionManager
-from oaStateCache.state_cache import StateRegistry
-from oaThreadManager.launcher import launch_core_managers
-from oaComMQTT.mqtt_publisher_service import shutdown_publisher_worker
+from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
+from oaConfiguration.Methods.console_encoder import configure_console_encoding
+import oaWatchdog.Managers.watchdog as watchdog
+from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
+from oaStateCache.Core.state_cache import StateRegistry
+from oaComMQTT.Core.mqtt_publisher_service import shutdown_publisher_worker
 
 # LOCAL_DEBUG: Toggles verbose tracing for the core boot sequence.
 LOCAL_DEBUG = True
@@ -84,6 +83,9 @@ def main():
         - Performs periodic I/O (filesystem/network) during the main loop.
         - Not thread-safe or reentrant; must be called as the main entry point.
     """
+    # ⚡ CIRCULAR IMPORT PROTECTION: Import launcher here to break the loop with oaComBroker.Entry
+    from oaThreadManager.Workers.launcher import launch_core_managers
+
     # 1. --- Environment Initialization ---
     initialize_paths()
     log_dir = DATA_LOGS_DIR

@@ -10,7 +10,7 @@ from tkinter import ttk
 import orjson
 import time
 from loguru import logger
-from oaSplinker.splinker import ControlBroker
+from oaSplinker.Core.splinker import ControlBroker
 
 class SplinkerLogs(tk.Frame):
     def __init__(self, parent, **kwargs):

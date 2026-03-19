@@ -19,10 +19,10 @@ OPEN-AIR was created to bridge the gap between raw hardware capabilities and hig
 ## 🧭 Navigation
 For detailed information, please refer to the modular documentation:
 
-- **[User Manual](assets/Documentation/Manual/01_Introduction.md)**: Start here to learn how to use the software.
-- **[Installation Guide](assets/Documentation/Landmarks/Installation_Guide.md)**: Setup, dependencies, and environment configuration.
-- **[Documentation Map](assets/Documentation/Landmarks/Documentation_Map.md)**: Deep dive into the project structure and modules.
-- **[Patent Details](assets/Documentation/Patent/01_abstract.md)**: Technical descriptions of the novel architecture.
+- **[User Manual](oaDocumentation/Manual/01_Introduction.md)**: Start here to learn how to use the software.
+- **[Installation Guide](oaDocumentation/Landmarks/Installation_Guide.md)**: Setup, dependencies, and environment configuration.
+- **[Documentation Map](oaDocumentation/Landmarks/Documentation_Map.md)**: Deep dive into the project structure and modules.
+- **[Patent Details](oaDocumentation/Patent/01_abstract.md)**: Technical descriptions of the novel architecture.
 
 ---
 

@@ -3,7 +3,7 @@ import re
 from collections import defaultdict
 
 project_root = "/home/anthony/Documents/OPEN-AIR"
-output_file = os.path.join(project_root, "assets/Documentation/Audits/Bad_File_Folder_Names_Audit.md")
+output_file = os.path.join(project_root, "oaDataAudits/Documentation/Audits/Bad_File_Folder_Names_Audit.md")
 
 # Configuration for Bad Naming
 NOISE_WORDS = ["Data", "Info", "Object", "Manager", "Builder", "Worker"]

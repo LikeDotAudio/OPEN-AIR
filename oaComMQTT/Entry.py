@@ -9,12 +9,14 @@ interfaces to the rest of the project.
 
 from .Managers.mqtt_connection import MqttConnectionManager
 from .Managers.mqtt_subscriber_router import MqttSubscriberRouter
+from .Managers.mqtt_manager import MqttManager
 from .Core.mqtt_message import MqttMessage
 from .Core import mqtt_publisher_service
 from .Methods.mqtt_topic_utils import (
-    format_topic, 
-    parse_topic, 
-    validate_topic
+    generate_topic_path_from_filepath,
+    get_topic,
+    generate_base_topic,
+    generate_widget_topic
 )
 
 def get_connection_manager():
@@ -24,6 +26,10 @@ def get_connection_manager():
 def get_subscriber_router():
     """Returns the singleton MqttSubscriberRouter instance."""
     return MqttSubscriberRouter()
+
+def get_mqtt_manager(subscriber_router, mqtt_client, state_cache_manager):
+    """Returns a new MqttManager instance."""
+    return MqttManager(subscriber_router, mqtt_client, state_cache_manager)
 
 def start_mqtt_services(broker_address="localhost", broker_port=1883):
     """
@@ -53,13 +59,16 @@ def stop_mqtt_services():
 __all__ = [
     "MqttConnectionManager",
     "MqttSubscriberRouter",
+    "MqttManager",
     "MqttMessage",
     "mqtt_publisher_service",
     "get_connection_manager",
     "get_subscriber_router",
+    "get_mqtt_manager",
     "start_mqtt_services",
     "stop_mqtt_services",
-    "format_topic",
-    "parse_topic",
-    "validate_topic"
+    "generate_topic_path_from_filepath",
+    "get_topic",
+    "generate_base_topic",
+    "generate_widget_topic"
 ]

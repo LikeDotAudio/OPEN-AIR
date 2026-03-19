@@ -7,8 +7,8 @@ lifecycle of the configuration manager and exports the core 'Config'
 singleton and its associated functions to the rest of the project.
 """
 
-from .Managers.config_reader import Config
-from .Managers.config_validator import validate_configuration
+from .FileReaders.config_reader import Config
+from .Methods.config_validator import validate_configuration
 from .Methods.console_encoder import ConsoleEncoder
 
 def get_config_instance():

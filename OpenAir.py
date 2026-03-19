@@ -54,10 +54,10 @@ import signal
 current_dir = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(current_dir))
 
-from oaLogging.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
-from oaOchestration.path_initializer import initialize_paths, DATA_LOGS_DIR
-from oaConfiguration.config_reader import Config
+from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
+from oaConfiguration.FileReaders.config_reader import Config
 
 # _DEBUG: Internal flag to toggle verbose supervisor logging.
 _DEBUG = True
@@ -86,17 +86,11 @@ def main():
     if len(sys.argv) > 1:
         mode = sys.argv[1]
         if mode == "--core":
-            try:
-                import oaComBroker.Core.open_air_core as core_mod
-            except ImportError:
-                import oaComBroker.open_air_core as core_mod
+            from oaComBroker.Core import open_air_core as core_mod
             core_mod.main()
             return
         elif mode == "--ui":
-            try:
-                import oaGuiManager.open_air_ui as ui_mod
-            except ImportError:
-                import oaGuiManager.Core.open_air_ui as ui_mod
+            from oaGuiManager.Managers import open_air_ui as ui_mod
             ui_mod.main()
             return
 
@@ -124,12 +118,10 @@ def main():
         core_script = os.path.join(current_dir, "oaComBroker", "open_air_core.py")
         
     # UI Partition (Display & Interaction)
-    ui_script = os.path.join(current_dir, "oaGuiManager", "open_air_ui.py")
+    ui_script = os.path.join(current_dir, "oaGuiManager", "Managers", "open_air_ui.py")
     if not os.path.exists(ui_script):
-        # Handle potential future realignment of GuiManager
-        ui_script_alt = os.path.join(current_dir, "oaGuiManager", "Core", "open_air_ui.py")
-        if os.path.exists(ui_script_alt):
-            ui_script = ui_script_alt
+        # Fallback for old structure just in case, though we are refactoring
+        ui_script = os.path.join(current_dir, "oaGuiManager", "open_air_ui.py")
 
     def get_host_guid():
         """Generates a non-persistent, 64-bit session identifier."""

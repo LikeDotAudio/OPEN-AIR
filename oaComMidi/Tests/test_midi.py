@@ -1,11 +1,11 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from oaComMidi.midi import MidiManager
+from oaComMidi.Managers.midi_manager import MidiManager
 
 class TestMidiManager(unittest.TestCase):
     def setUp(self):
         self.state_cache = MagicMock()
-        with patch("oaComBroker.protocol_router.ProtocolRouter.get_instance"):
+        with patch("oaComBroker.Managers.protocol_router.ProtocolRouter.get_instance"):
             self.midi = MidiManager(self.state_cache, run_bridge=True)
 
     def test_status_broadcast(self):

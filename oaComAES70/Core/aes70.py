@@ -11,7 +11,7 @@ import time
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
 from loguru import logger
-from oaConfiguration.config_reader import Config
+from oaConfiguration.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 # ⚡ SUBSYSTEM: AES70_BRIDGE

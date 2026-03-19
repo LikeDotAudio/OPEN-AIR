@@ -2,7 +2,7 @@ import unittest
 import pathlib
 import os
 import configparser
-from oaConfiguration.config import create_default_config_ini
+from oaConfiguration.Core.config_builder import create_default_config_ini
 
 class TestConfigGenerator(unittest.TestCase):
     def setUp(self):

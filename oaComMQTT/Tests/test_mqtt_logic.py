@@ -1,10 +1,10 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from oaTranslator.core.topic_calculator import TopicCalculator
+from oaTranslator.Core.topic_calculator import TopicCalculator
 # Using sys.path to import from a non-standard location for MQTTSweeper
 import sys
 import os
-sys.path.append(os.path.abspath("oaDataTests/FlameGraph/core"))
+sys.path.append(os.path.abspath("oaTests/Core"))
 from ClearMQTT import MQTTSweeper
 
 class TestMQTTLogic(unittest.TestCase):

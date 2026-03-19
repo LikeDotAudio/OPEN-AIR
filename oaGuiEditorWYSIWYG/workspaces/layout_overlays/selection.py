@@ -1,6 +1,6 @@
 # workers/wysiwyg_editor/workspaces/layout_overlays/selection.py
 import tkinter as tk
-from ...core.event_bus import event_bus
+from ...Core.event_bus import event_bus
 
 def apply(layout, widget, path, is_focused, design_elements):
     """Handles the selection target (emoji) and focus highlight."""

@@ -1,6 +1,6 @@
 # workers/wysiwyg_editor/workspaces/layout_overlays/alignment.py
 import tkinter as tk
-from ...core.state import state_manager
+from ...Core.state import state_manager
 
 def apply(layout, widget, path, is_focused, design_elements):
     """Handles LRCTB alignment indicators."""

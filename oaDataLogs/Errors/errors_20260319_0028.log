@@ -1,0 +1,9 @@
+002816.380 | WARNING  | CORE | SYSTEM     | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+002820.490 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
+002820.490 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
+002828.984 | ERROR    | UI   | BUILDER    | oaGuiBuilder.Core.context_menu | 🏗️🚫🛑 [BUILDER] CRITICAL: Standalone runner not found at /home/anthony/Documents/OPEN-AIR/wysiwyg_editor/run_builder.py
+002830.654 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
+002834.752 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
+002834.754 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
+002844.853 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
+003304.340 | WARNING  | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🌐 SNMP Bridge Offline.

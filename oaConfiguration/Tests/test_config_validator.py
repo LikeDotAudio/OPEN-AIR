@@ -1,5 +1,5 @@
 import unittest
-from oaConfiguration.config_validator import validate_configuration
+from oaConfiguration.Methods.config_validator import validate_configuration
 
 class TestConfigValidator(unittest.TestCase):
     def test_validate_configuration(self):

@@ -1,11 +1,11 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from oaStateCache.state_cache import StateRegistry
+from oaStateCache.Core.state_cache import StateRegistry
 
 class TestStateCache(unittest.TestCase):
     def setUp(self):
         self.mqtt = MagicMock()
-        with patch("oaStateCache.cache_io_handler.load_cache", return_value={}):
+        with patch("oaStateCache.Core.state_cache.cache_io_handler.load_cache", return_value={}):
             self.registry = StateRegistry(self.mqtt)
 
     def test_handle_external_update(self):
@@ -14,7 +14,7 @@ class TestStateCache(unittest.TestCase):
         self.registry.save_engine = MagicMock()
         self.registry.observers = MagicMock()
         
-        with patch("oaComBroker.protocol_router.ProtocolRouter.get_instance"), \
+        with patch("oaComBroker.Managers.protocol_router.ProtocolRouter.get_instance"), \
              patch("oaTranslator.manifest.builder.create_manifest", return_value={"val": 42}):
             
             self.registry.handle_external_update("TEST/TOPIC", 42, source="GUI")

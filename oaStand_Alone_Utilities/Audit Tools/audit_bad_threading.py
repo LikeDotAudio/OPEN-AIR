@@ -3,7 +3,7 @@ import ast
 from collections import defaultdict
 
 project_root = "/home/anthony/Documents/OPEN-AIR"
-output_file = os.path.join(project_root, "assets/Documentation/Audits/Bad_Threading_Audit.md")
+output_file = os.path.join(project_root, "oaDataAudits/Documentation/Audits/Bad_Threading_Audit.md")
 
 class ConcurrencyVisitor(ast.NodeVisitor):
     def __init__(self, filename):

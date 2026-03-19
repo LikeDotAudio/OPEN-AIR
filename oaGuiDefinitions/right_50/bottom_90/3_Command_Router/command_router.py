@@ -5,8 +5,8 @@ import time
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
 from loguru import logger
-from oaConfiguration.config_reader import Config
-from oaComBroker.protocol_router import ProtocolRouter
+from oaConfiguration.FileReaders.config_reader import Config
+from oaComBroker.Managers.protocol_router import ProtocolRouter
 
 app_constants = Config.get_instance()
 
@@ -282,7 +282,7 @@ class CommandRouter(tk.Frame):
             return match["val"] if match else None
 
     def _find_app_instance(self):
-        from oaGuiBuild.gui_display import Application
+        from oaGuiBuild.Managers.gui_display import Application
         curr = self.master
         while curr:
             if isinstance(curr, Application):

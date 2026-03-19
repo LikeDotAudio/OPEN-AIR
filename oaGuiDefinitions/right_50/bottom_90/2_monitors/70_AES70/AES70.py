@@ -25,7 +25,7 @@ class Aes70Dashboard(tk.Frame):
             self._refresh_ui()
 
     def _find_aes_manager(self, widget):
-        from oaGuiBuilder.builder import DynamicGuiBuilder
+        from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
         curr = widget
         while curr:
             if isinstance(curr, DynamicGuiBuilder) and hasattr(curr, 'app_instance'):

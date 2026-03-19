@@ -10,20 +10,20 @@ Follow these steps exactly:
 
 1. **Monthly Rotation Check**:
    - Check the current month/year (YYYY-MM).
-   - If `assets/Documentation/CHANGELOG.md` exists and was last updated in a previous month, move it to `assets/Documentation/ChangeLog/CHANGELOG_YYYYMM.md` (using the previous month's date) and create a fresh `assets/Documentation/CHANGELOG.md`.
+   - If `oaDataLogs/ChangeLog/CHANGELOG.md` exists and was last updated in a previous month, move it to `oaDocumentation/ChangeLog/CHANGELOG_YYYYMM.md` (using the previous month's date) and create a fresh `oaDataLogs/ChangeLog/CHANGELOG.md`.
 
 2. **Stage Changes**:
    - Run `git add .` to stage all changes including untracked files.
 
 3. **Commit & Push**:
-   - Identify the latest entry in `assets/Documentation/CHANGELOG.md` (the first section starting with `## [`).
+   - Identify the latest entry in `oaDataLogs/ChangeLog/CHANGELOG.md` (the first section starting with `## [`).
    - Use that latest entry (title and description) as the commit message.
-   - Run `git commit -m "$(grep -Pzo '(?s)## \[.*?\]\s*.*?(?=\n## \[|\Z)' assets/Documentation/CHANGELOG.md | tr -d '\0')"` (or similar logic to extract the first entry).
+   - Run `git commit -m "$(grep -Pzo '(?s)## \[.*?\]\s*.*?(?=\n## \[|\Z)' oaDataLogs/ChangeLog/CHANGELOG.md | tr -d '\0')"` (or similar logic to extract the first entry).
    - Run `git push`.
 
 4. **Update Changelog Decoration**:
    - Get the new commit hash and date.
-   - **Insert** the following block into `assets/Documentation/CHANGELOG.md` immediately AFTER the latest entry header (e.g., after the `## [YYYY-MM-DD HH:MM:SS] Title` line):
+   - **Insert** the following block into `oaDataLogs/ChangeLog/CHANGELOG.md` immediately AFTER the latest entry header (e.g., after the `## [YYYY-MM-DD HH:MM:SS] Title` line):
      **************************************
      Commit: [HASH]
      Date: [YYYY-MM-DD HH:MM:SS]

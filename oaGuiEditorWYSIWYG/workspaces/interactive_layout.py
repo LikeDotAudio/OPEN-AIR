@@ -9,13 +9,13 @@ from loguru import logger
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
 
-from ..core.event_bus import event_bus
-from ..core.state import state_manager
+from ..Core.event_bus import event_bus
+from ..Core.state import state_manager
 
 # --- EXTRACTED CORE MODULES ---
-from .core.layout.preview_engine import PreviewEngine
-from .core.layout.focus import FocusManager
-from .core.layout.overlay import OverlayManager
+from .Core.layout.preview_engine import PreviewEngine
+from .Core.layout.focus import FocusManager
+from .Core.layout.overlay import OverlayManager
 
 class InteractiveLayout(tk.Frame):
     """The visual workspace where users interact with the GUI layout."""
@@ -38,7 +38,7 @@ class InteractiveLayout(tk.Frame):
         self.pending_changes = 0
         self._refresh_timer = None
         
-        from oaGuiManager.factory.widget_registry import WidgetRegistry
+        from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
         WidgetRegistry.scan_widgets()
         
         self._build_ui()

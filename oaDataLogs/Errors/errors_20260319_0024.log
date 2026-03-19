@@ -1,9 +1,0 @@
-002453.562 | WARNING  | CORE | SYSTEM     | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
-002457.665 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
-002457.667 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
-002507.821 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
-002511.924 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
-002511.925 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
-002522.246 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
-002526.790 | ERROR    | UI   | SYSTEM     | oaGuiManager.FileReaders.blueprint_loader | ❌ BlueprintLoader: JSON structural validation failed for /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90/9_Zoo/1_buttons/2_Trapezoid/6_Media_Buttons/Media_Buttons.py
-002545.042 | WARNING  | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🌐 SNMP Bridge Offline.

@@ -33,6 +33,9 @@ class BuilderButtonToggleCreator(TransparencyMixin):
     A mixin class that provides the functionality for creating photorealistic
     toggle button widgets that flip between two boolean states.
     """
+    def __init__(self):
+        super().__init__() # Call parent __init__ if it exists (TransparencyMixin has none)
+        self.topic_widgets = {} # Initialize topic_widgets attribute
 
     def make_button_toggle(self, parent_widget, config_data, context=None, **kwargs):
         if LOCAL_DEBUG: logger.trace(f"🔬 Entering make_button_toggle with config: {config_data}")  

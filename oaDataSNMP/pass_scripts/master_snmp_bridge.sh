@@ -1,8 +1,8 @@
 #!/bin/bash
 # OPEN-AIR Master SNMP Bridge
-FLAT_FILE="/home/anthony/Documents/OPEN-AIR/oaDataSNMP/openair_snmp_objects.txt"
-LOG_FILE="/home/anthony/Documents/OPEN-AIR/oaDataSNMP/openair_snmp_set.log"
-DEBUG_LOG="/home/anthony/Documents/OPEN-AIR/oaDataSNMP/bridge_debug.log"
+FLAT_FILE="./oaDataSNMP/openair_snmp_objects.txt"
+LOG_FILE="./oaDataSNMP/openair_snmp_set.log"
+DEBUG_LOG="./oaDataSNMP/bridge_debug.log"
 
 # Log all requests for debugging
 echo "[$(date)] REQ: $1 $2" >> $DEBUG_LOG

@@ -2,7 +2,7 @@ import os
 import ast
 import re
 
-project_root = "/home/anthony/Documents/OPEN-AIR"
+project_root = "."
 output_file = os.path.join(project_root, "oaDataAudits/Documentation/Audits/Bad_Error_Handling_Audit.md")
 
 def analyze_error_handling(filepath):

@@ -1,7 +1,7 @@
 import os
 import ast
 
-project_root = "/home/anthony/Documents/OPEN-AIR"
+project_root = "."
 output_file = os.path.join(project_root, "oaDataAudits/Documentation/Audits/Bad_Functions_Audit.md")
 
 # Configuration for "Bad Function" detection

@@ -1,2 +1,0 @@
-description = "Generates comprehensive unit tests for top-level system modules and logs them to the test suite."
-prompt = "Analyze the provided file or folder: {{input}}. Generate a unit test appropriate for its contents. New unit tests must be created within the 'Tests' subdirectory of the corresponding 'oa*' module (e.g., 'oaComMQTT/Tests/'). If the module is not an 'oa*' module, place the test in the global 'tests/' directory. Test results and reports will be consolidated in /home/anthony/Documents/OPEN-AIR/oaDataLogs/testing/."

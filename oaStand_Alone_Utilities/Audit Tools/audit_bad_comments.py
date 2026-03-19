@@ -2,7 +2,7 @@ import os
 import re
 from collections import defaultdict
 
-project_root = "/home/anthony/Documents/OPEN-AIR"
+project_root = "."
 output_file = os.path.join(project_root, "oaDataAudits/Documentation/Audits/Bad_Comments_Audit.md")
 
 # Regex for commented-out code heuristics

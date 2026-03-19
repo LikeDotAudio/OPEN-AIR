@@ -2,7 +2,7 @@ import os
 import ast
 import re
 
-project_root = "/home/anthony/Documents/OPEN-AIR"
+project_root = "."
 audit_file = os.path.join(project_root, "oaDataAudits/Documentation/Audits/Bad Functions.txt")
 output_file = os.path.join(project_root, "oaDataAudits/Documentation/Audits/Bad Functions suggestions.txt")
 

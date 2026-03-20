@@ -20,6 +20,13 @@ from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 
 @WidgetRegistry.register("ProgressBar", "_ProgressBar", "_SmartProgress")
 class BuilderImagesProgressBarCreator(TransparencyMixin):
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        """Static factory method for the registry."""
+        return BuilderImagesProgressBarCreator().make_images_progress_bar(
+            parent_widget, config_data, context=context, **kwargs
+        )
+
     def make_images_progress_bar(
         self, parent_widget, config_data, context=None, **kwargs
     ):  # Updated signature

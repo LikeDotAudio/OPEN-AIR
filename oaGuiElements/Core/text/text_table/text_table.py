@@ -37,7 +37,9 @@ class BuilderTextTableCreator(TransparencyMixin):
         
         if hasattr(self, '_apply_transparency'): self._apply_transparency(container, container, config_data, b_inst)
 
-        abs_topic = ctx.state_mirror_engine.calculate_topic(config_data.get("path"), ctx.base_mqtt_topic_from_path)
+        # ⚡ Path Resolution: Use config or passed kwargs
+        path = config_data.get("path") or kwargs.get("path")
+        abs_topic = ctx.state_mirror_engine.calculate_topic(path, ctx.base_mqtt_topic_from_path)
         csv_svc = TableCSVService(config_data.get("label_active", "Table"))
         
         # 2. Treeview
@@ -78,21 +80,21 @@ class BuilderTextTableCreator(TransparencyMixin):
         # 5. Events & Registration
         def _on_select(e):
             sel = tree.selection()
-            if sel and config_data.get("path"):
-                sd = item_map.get(sel[0]); tp = ctx.state_mirror_engine.calculate_topic(f"{config_data.get('path')}/selected", ctx.base_mqtt_topic_from_path)
+            if sel and path:
+                sd = item_map.get(sel[0]); tp = ctx.state_mirror_engine.calculate_topic(f"{path}/selected", ctx.base_mqtt_topic_from_path)
                 mqtt_publisher_service.publish_payload(tp, orjson.dumps({"val": sd}).decode())
         tree.bind("<<TreeviewSelect>>", _on_select)
 
-        if config_data.get("path"):
-            ctx.state_mirror_engine.register_widget(config_data.get("path"), tk.StringVar(), ctx.base_mqtt_topic_from_path, config_data, update_callback=sync.update_full)
+        if path:
+            ctx.state_mirror_engine.register_widget(path, tk.StringVar(), ctx.base_mqtt_topic_from_path, config_data, update_callback=sync.update_full)
             if abs_topic: ctx.subscriber_router.subscribe_to_topic(abs_topic + "/#", sync.update_incremental)
             
             def _cleanup(e):
                 if e.widget == str(container): ctx.subscriber_router.unsubscribe_from_topic(abs_topic + "/#", sync.update_incremental)
             container.bind("<Destroy>", _cleanup)
 
-            if not ctx.state_mirror_engine.initialize_widget_state(config_data.get("path")):
-                if config_data.get("data"): sync.update_full(config_data.get("data"))
+            if not ctx.state_mirror_engine.initialize_widget_state(path):
+                if config_data.get("data"): sync.update_full(config_data.get("data"), suppress_mqtt=True)
                 else: csv_svc.save(tree["columns"], item_map)
 
         return container

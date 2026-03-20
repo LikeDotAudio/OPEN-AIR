@@ -45,7 +45,7 @@ class WidgetTypeResolver:
         """
         Detects the implementation type based on aliases and context.
         """
-        widget_type = config.get("type", "")
+        widget_type = config.get("type") or config.get("widget_type", "")
         
         if widget_type == "_SmartMeter":
             cosmetics = config.get("cosmetics", {})

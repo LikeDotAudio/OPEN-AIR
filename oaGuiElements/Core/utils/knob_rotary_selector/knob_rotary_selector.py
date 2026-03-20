@@ -39,7 +39,7 @@ class RotarySelectorSwitch(CustomKnobFrame):
         super().__init__(
             parent, variable, 
             config, state,
-            path,, 
+            path, 
             state_mirror_engine=state_mirror_engine, 
             label_text=label_text,
             **kwargs

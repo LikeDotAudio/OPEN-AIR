@@ -12,7 +12,7 @@ class TableSyncEngine:
         self.abs_topic, self.csv_svc, self.logger = absolute_topic, csv_service, builder_logger
         self.is_reading_csv = False
 
-    def update_full(self, payload):
+    def update_full(self, payload, suppress_mqtt=False):
         """Processes a full table refresh from a dictionary payload."""
         try:
             data = payload if isinstance(payload, dict) else orjson.loads(payload)
@@ -33,7 +33,7 @@ class TableSyncEngine:
             for k, v in data.items():
                 iid = self.tree.insert("", tk.END, values=[v.get(c, "") for c in cols], tags=(k))
                 self.item_map[iid], self.device_key_map[k] = v, iid
-                if self.abs_topic and not self.is_reading_csv:
+                if self.abs_topic and not self.is_reading_csv and not suppress_mqtt:
                     mqtt_publisher_service.publish_payload(get_topic(self.abs_topic, "data", k), orjson.dumps(v).decode())
             
             self.csv_svc.save(cols, self.item_map)

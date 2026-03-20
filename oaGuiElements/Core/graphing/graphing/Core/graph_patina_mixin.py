@@ -31,9 +31,18 @@ class GraphPatinaMixin:
                 is_trans = self.widget_config.get("transparent") is True or \
                            self.widget_config.get("style", {}).get("background_color") == "match_theme"
                 
-                visible = not (has_patina or is_trans)
-                self.fig.patch.set_visible(visible)
-                self.ax.patch.set_visible(visible)
+                # ⚡ FIX: Never hide the figure/axis patch if we want to see anything.
+                # Matplotlib needs these to be visible to correctly capture the 'background' for blitting.
+                # Instead of hiding them, we set their alpha or keep them as fallback.
+                self.fig.patch.set_visible(True)
+                self.ax.patch.set_visible(True)
+                
+                if has_patina or is_trans:
+                    self.fig.patch.set_alpha(0.0)
+                    self.ax.patch.set_alpha(0.0)
+                else:
+                    self.fig.patch.set_alpha(1.0)
+                    self.ax.patch.set_alpha(1.0)
         except: pass
 
         # 2. Sync texture details

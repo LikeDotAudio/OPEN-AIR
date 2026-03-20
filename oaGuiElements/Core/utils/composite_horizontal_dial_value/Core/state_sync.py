@@ -54,8 +54,19 @@ class CompositeStateSync:
             return main_val
 
     @staticmethod
-    def calc_from_dial(curr_dial, main_val, fader_var, dial_widget, step_coarse, numerical_step, min_val, max_val):
+    def calc_from_dial(ctx):
+        """Calculates the new main value based on dial rotation, handling wraps."""
         try:
+            # Unpack context for readability
+            curr_dial = ctx['curr_dial']
+            main_val = ctx['main_val']
+            fader_var = ctx['fader_var']
+            dial_widget = ctx['dial_widget']
+            step_coarse = ctx['step_coarse']
+            numerical_step = ctx['numerical_step']
+            min_val = ctx['min_val']
+            max_val = ctx['max_val']
+
             if numerical_step < step_coarse:
                 if hasattr(dial_widget, '_prev_dial_val_for_wrap_detection'):
                     if dial_widget._prev_dial_val_for_wrap_detection == 999 and curr_dial == 0:

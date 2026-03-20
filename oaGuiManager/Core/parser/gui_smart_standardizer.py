@@ -1,6 +1,6 @@
-from oaGuiManager.parser.standardizers.lexicon_expander import LexiconExpander
-from oaGuiManager.parser.standardizers.semantic_layout_resolver import SemanticLayoutResolver
-from oaGuiManager.parser.standardizers.widget_type_resolver import WidgetTypeResolver
+from oaGuiManager.Core.parser.standardizers.lexicon_expander import LexiconExpander
+from oaGuiManager.Core.parser.standardizers.semantic_layout_resolver import SemanticLayoutResolver
+from oaGuiManager.Core.parser.standardizers.widget_type_resolver import WidgetTypeResolver
 
 class SmartWidgetStandardizerMixin:
     """

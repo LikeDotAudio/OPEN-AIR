@@ -216,7 +216,7 @@ class VintageLightingGenerator:
         return cy - y_shift
 
     @staticmethod
-    def create_photo_image_overlay(width, height, bezel_shape, bezel_width, pivot_x, pivot_y, lighting_config={}):
+    def photo_image(width, height, bezel_shape, bezel_width, pivot_x, pivot_y, lighting_config={}):
         try:
             pil_img = VintageLightingGenerator.create_lighting_overlay(
                 width, height, bezel_shape, bezel_width, pivot_x, pivot_y, lighting_config

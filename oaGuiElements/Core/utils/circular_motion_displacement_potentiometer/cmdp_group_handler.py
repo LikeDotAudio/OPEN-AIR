@@ -60,13 +60,13 @@ class CMDPGroupHandler:
         sme.register_widget(f"{bp}/color", cv, self.w.base_mqtt_topic, {"type": "_CMDP_GrpCol"})
         sme.register_widget(f"{bp}/name", nv, self.w.base_mqtt_topic, {"type": "_CMDP_GrpName"})
         
-        def _bc(p):
+        def _broadcast_change(p):
             if not getattr(sme, "_silent_update", False): sme.broadcast_gui_change_to_mqtt(p)
             
-        iv.trace_add("write", lambda *a: _bc(f"{bp}/visible"))
-        im.trace_add("write", lambda *a: _bc(f"{bp}/mute"))
-        cv.trace_add("write", lambda *a: _bc(f"{bp}/color"))
-        nv.trace_add("write", lambda *a: _bc(f"{bp}/name"))
+        iv.trace_add("write", lambda *a: _broadcast_change(f"{bp}/visible"))
+        im.trace_add("write", lambda *a: _broadcast_change(f"{bp}/mute"))
+        cv.trace_add("write", lambda *a: _broadcast_change(f"{bp}/color"))
+        nv.trace_add("write", lambda *a: _broadcast_change(f"{bp}/name"))
         
         for p, v in [("visible", iv), ("mute", im), ("color", cv), ("name", nv)]:
             t = sme.get_widget_topic(f"{bp}/{p}")

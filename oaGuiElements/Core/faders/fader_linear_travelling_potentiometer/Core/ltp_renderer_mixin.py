@@ -45,7 +45,13 @@ class LTPRendererMixin:
             self._draw_knob_on_handle(canvas, cx, h_pos)
         else:
             TrackDrawer.draw_horizontal(canvas, self, cy, top_res, cw, 10, hover_color=self.track_hover_color if self.is_hovered else None)
-            ScaleDrawer.draw_horizontal(canvas, self, cw, ch, cy, cw - top_res - bot_res, top_res, ch * self.tick_size, 10, cap_width=self.cap_radius*2)
+            geo = {
+                'width': cw, 'height': ch, 'cy': cy, 
+                'available_width': cw - top_res - bot_res, 
+                'padding': top_res, 'tick_length_half': ch * self.tick_size, 
+                'slot_height': 10, 'cap_width': self.cap_radius*2
+            }
+            ScaleDrawer.draw_horizontal(canvas, self, geo)
             h_pos = self._get_handle_pos(cw)
             canvas.create_line(top_res, cy, h_pos, cy, fill=self.value_highlight_color, width=2, capstyle=tk.ROUND, tags="fill_line")
             self._draw_knob_on_handle(canvas, h_pos, cy)

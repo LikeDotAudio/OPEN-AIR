@@ -78,7 +78,16 @@ class BuilderCompositeHorizontalDialValueCreator(
             v_width = max(3, min(int(float(v_cfg.get("width", 6))), v_width_limit))
 
             # 3. Component Creation
-            f_label, draw_f_label = CompositeUIComponents.build_label(sub_frame, label, p_bg, TransparencyManager, builder_instance, config_data)
+            ui_ctx = {
+                'sub_frame': sub_frame, 'p_bg': p_bg, 'trans_mgr': TransparencyManager,
+                'builder_instance': builder_instance, 'config_data': config_data,
+                'label_text': label, 'path': path, 'v_width': v_width,
+                'v_font_size': v_font_size, 'v_text_color': v_text_color,
+                'entry_string_var': entry_string_var, 'on_manual_cb': None,
+                'units_txt': config_data.get("units", "")
+            }
+
+            f_label, draw_f_label = CompositeUIComponents.build_label(ui_ctx)
 
             # Fader
             f_cfg = config_data.copy()
@@ -100,15 +109,23 @@ class BuilderCompositeHorizontalDialValueCreator(
                     main_value_var.set(max(min_val, min(max_val, val)))
                 except: entry_string_var.set(fmt_str.format(main_value_var.get()))
 
-            val_container, entry, sync_entry_style = CompositeUIComponents.build_entry(sub_frame, v_width, v_font_size, v_text_color, entry_string_var, p_bg, path, TransparencyManager, builder_instance, config_data, on_manual)
-            unit_label, draw_unit_label = CompositeUIComponents.build_unit_label(sub_frame, config_data.get("units", ""), v_font_size, p_bg, TransparencyManager, builder_instance, config_data)
+            ui_ctx['on_manual_cb'] = on_manual
+            val_container, entry, sync_entry_style = CompositeUIComponents.build_entry(ui_ctx)
+            unit_label, draw_unit_label = CompositeUIComponents.build_unit_label(ui_ctx)
 
             # 4. State Synchronization
             dial_widget._prev_dial_val_for_wrap_detection = CompositeStateSync.calculate_initial_fine(init_val, step_coarse, numerical_step)
 
             def update_from_main(*args): CompositeStateSync.sync_from_main(main_value_var.get(), step_coarse, numerical_step, fmt_str, entry_string_var, fader_widget.variable, dial_widget)
             def on_f_change(*args): main_value_var.set(CompositeStateSync.calc_from_fader(fader_widget.variable.get(), main_value_var.get(), step_coarse, numerical_step, min_val, max_val))
-            def on_d_change(*args): main_value_var.set(CompositeStateSync.calc_from_dial(dial_widget.variable.get(), main_value_var.get(), fader_widget.variable, dial_widget, step_coarse, numerical_step, min_val, max_val))
+            def on_d_change(*args):
+                ctx = {
+                    'curr_dial': dial_widget.variable.get(), 'main_val': main_value_var.get(),
+                    'fader_var': fader_widget.variable, 'dial_widget': dial_widget,
+                    'step_coarse': step_coarse, 'numerical_step': numerical_step,
+                    'min_val': min_val, 'max_val': max_val
+                }
+                main_value_var.set(CompositeStateSync.calc_from_dial(ctx))
 
             fader_widget.variable.trace_add("write", on_f_change)
             dial_widget.variable.trace_add("write", on_d_change)

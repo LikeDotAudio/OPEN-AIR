@@ -31,11 +31,21 @@ app_constants = Config.get_instance()
 
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
+from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+
+@WidgetRegistry.register("_VUMeterKnob")
 class BuilderMeterKnobWithVuMeterCreator(TransparencyMixin):
     """
     Mixin for creating a composite VU Meter + Knob widget.
     Requires BuilderMeterNeedleCreator and BuilderKnobCreator to be present in the host class.
     """
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        """Static factory method for the registry."""
+        return BuilderMeterKnobWithVuMeterCreator().make_meter_knob_with_vu_meter(
+            parent_widget, config_data, context=context, **kwargs
+        )
 
     def make_meter_knob_with_vu_meter(self, parent_widget, config_data, context=None, **kwargs):
         if LOCAL_DEBUG: logger.trace(f"🔬 Entering make_meter_knob_with_vu_meter with config: {config_data}")
@@ -74,7 +84,8 @@ class BuilderMeterKnobWithVuMeterCreator(TransparencyMixin):
             if LOCAL_DEBUG: logger.debug(f"🛠️ VUMeterKnob: Building for '{vu_config.get('label_active')}'.")
 
             # 2. Create VU Meter (This now returns a Canvas or transparent Frame)
-            vu_widget = self.make_meter_needle(parent_widget, vu_config, context=context, builder_instance=builder_instance, **kwargs)
+            from oaGuiElements.Core.metering.meter_needle.meter_needle import BuilderMeterNeedleCreator
+            vu_widget = BuilderMeterNeedleCreator.make(parent_widget, vu_config, context=context, builder_instance=builder_instance, **kwargs)
             if not vu_widget:
                 return None
 
@@ -108,7 +119,8 @@ class BuilderMeterKnobWithVuMeterCreator(TransparencyMixin):
                  knob_config["height"] = 40
                  
             # Knob is embedded in the VU canvas
-            knob_widget = self.make_knob(canvas, knob_config, context=context, builder_instance=builder_instance, **kwargs)
+            from oaGuiElements.Core.utils.knob.knob import BuilderKnobCreator
+            knob_widget = BuilderKnobCreator.make(canvas, knob_config, context=context, builder_instance=builder_instance, **kwargs)
             
             if knob_widget:
                 # 5. Check for Clipping and Resize Canvas if needed

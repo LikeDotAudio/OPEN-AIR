@@ -72,6 +72,10 @@ class FluxPlotter(
         self._init_dataset_config()
         self._load_initial_data()
 
+        # ⚡ FORCE INITIAL DRAW: Capture background fabric for Blit engine
+        self._force_redraw = True
+        self._schedule_update()
+
         self.bind("<Configure>", self._on_resize_event)
         self.canvas.mpl_connect('pick_event', self._on_pick)
         self.canvas.mpl_connect('motion_notify_event', self._on_motion)

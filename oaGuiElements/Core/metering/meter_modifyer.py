@@ -1,7 +1,12 @@
 # workers/builder/meter_needle/meter_modifyer.py
 
 import tkinter as tk
-from tkinter import Image, ImageDraw, ImageTk
+try:
+    from PIL import Image, ImageDraw, ImageTk
+except ImportError:
+    from tkinter import Image
+    ImageDraw = None
+    ImageTk = None
 import math
 from loguru import logger
 

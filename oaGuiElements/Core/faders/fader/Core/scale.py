@@ -163,8 +163,18 @@ class ScaleDrawer:
             canvas.create_text(center_x - offset, y_coordinate, text=label_text, fill=text_color, font=frame.tick_font, anchor="e", tags="static")
 
     @staticmethod
-    def draw_horizontal(canvas, frame, width, height, cy, available_width, padding, tick_length_half, slot_height, cap_width=DEFAULT_CAP_WIDTH):
-        """Draws the ticks and labels for the horizontal fader."""
+    def draw_horizontal(canvas, frame, geo):
+        """Draws the ticks and labels for the horizontal fader using a geometry context."""
+        # Unpack geometry for readability
+        width = geo['width']
+        height = geo['height']
+        cy = geo['cy']
+        available_width = geo['available_width']
+        padding = geo['padding']
+        tick_length_half = geo['tick_length_half']
+        slot_height = geo['slot_height']
+        cap_width = geo.get('cap_width', DEFAULT_CAP_WIDTH)
+
         tick_values = ScaleDrawer._get_tick_values(frame)
         label_interval, draw_interval = ScaleDrawer._calculate_tick_intervals(len(tick_values))
         config = ScaleDrawer._get_tick_configuration(frame)

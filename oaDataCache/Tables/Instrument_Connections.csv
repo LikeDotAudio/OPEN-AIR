@@ -1,0 +1,3 @@
+Resource,Model,Serial,Status
+USB0::0x0957::0x0607::MY44026369::0::INSTR,34401A,MY44026369,Connected
+GPIB0::22::INSTR,E3631A,0N11111,Disconnected

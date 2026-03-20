@@ -36,7 +36,7 @@ class SmartMeter(tk.Canvas):
         self.state_mirror = state_mirror_engine
         self.router = subscriber_router
         self.base_topic = base_topic
-        self.value_var = kwargs.get("variable") or tk.DoubleVar(master=parent_widget, value=self.cfg.value_default)
+        self.value_var = kwargs.get("variable") or tk.DoubleVar(master=parent, value=self.cfg.value_default)
         self.value_var.trace_add("write", self._on_value_update)
         
         self._anim_timer_id = None

@@ -17,7 +17,7 @@
         "examplefields": {
           "type": "AnimationDisplay",
           "label_active": "Animated Time Circuits",
-          "gif_path": "oaDataCache/assets/images/time_circuits.gif",
+          "gif_path": "oaGuiMediaElements/Assets/time_circuits.gif",
           "value_default": 0,
           "notes": "A standard animation of the time circuits."
         }
@@ -28,7 +28,7 @@
         "examplefields": {
           "type": "AnimationDisplay",
           "label_active": "Time Circuits (Start Frame 5)",
-          "gif_path": "oaDataCache/assets/images/time_circuits.gif",
+          "gif_path": "oaGuiMediaElements/Assets/time_circuits.gif",
           "value_default": 5,
           "notes": "Time circuits animation starting from a later frame."
         }

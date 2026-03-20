@@ -80,10 +80,22 @@ class CanvasButton(tk.Canvas):
 
     def _on_release(self, event):
         if self.is_pressed:
-            if self.command:
-                self.command()
+            self._safe_execute_command(event)
         self.is_pressed = False
         self._draw()
+
+    def _safe_execute_command(self, event):
+        """Safely executes the command, passing the event if supported."""
+        if not self.command:
+            return
+            
+        # ⚡ FIXED: Pass the event to the command lambda if it expects it.
+        # Standard Tkinter commands usually take 0 args, 
+        # but CanvasButton's command often needs the event (e.g. for Alt-click/modifiers).
+        try:
+            self.command(event)
+        except TypeError:
+            self.command()
 
     def _get_font_path(self):
         # Placeholder for robust font finding

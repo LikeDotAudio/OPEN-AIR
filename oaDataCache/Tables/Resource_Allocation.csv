@@ -1,0 +1,4 @@
+Resource Name,Allocated To
+CPU Core 0,Task A
+Memory Block 1,Task B
+GPU Slice 0,Task C

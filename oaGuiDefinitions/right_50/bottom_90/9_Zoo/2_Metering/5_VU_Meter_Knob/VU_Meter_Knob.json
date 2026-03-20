@@ -17,7 +17,7 @@
         "layout_columns": 4,
         "fields": {
           "Master_L": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "Master L",
             "path": "audio/master/left/vu",
@@ -34,7 +34,7 @@
             "knob_outline_thickness": 5
           },
           "Master_R": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "Master R",
             "path": "audio/master/right/vu",
@@ -52,7 +52,7 @@
             "knob_indicator_color": "#FFD700"
           },
           "Sub_Mix": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "Sub Mix (Default 90\u00b0)",
             "path": "audio/sub/vu",
@@ -70,7 +70,7 @@
             "knob_outline_thickness": 3
           },
           "Wide_Angle": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "Wide Angle (180\u00b0)",
             "path": "audio/wide/vu",
@@ -88,7 +88,7 @@
             "knob_indicator_color": "#FF5555"
           },
           "Medium_Angle": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "Medium Angle (120\u00b0)",
             "path": "audio/medium/vu",
@@ -108,7 +108,7 @@
             "knob_outline_thickness": 2
           },
           "Narrow_Angle": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "Narrow Angle (60\u00b0)",
             "path": "audio/narrow/vu",
@@ -126,7 +126,7 @@
             "knob_indicator_color": "#5555FF"
           },
           "Slow_270": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "Slow 270\u00b0 (1s Ballistics)",
             "path": "audio/270/slow/vu",
@@ -141,7 +141,7 @@
             "knob_outline_thickness": 4
           },
           "Fast_270": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "Fast 270\u00b0 (30ms Snappy)",
             "path": "audio/270/fast/vu",
@@ -157,7 +157,7 @@
             "knob_indicator_color": "#00FFFF"
           },
           "Sticky_270": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "Sticky 270\u00b0 (500ms Hold)",
             "path": "audio/270/sticky/vu",
@@ -171,7 +171,7 @@
             "knob_shape": "octagon"
           },
           "Dwell_270": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "Dwell 270\u00b0 (Target Dwell)",
             "path": "audio/270/dwell/vu",
@@ -187,7 +187,7 @@
             "knob_outline_thickness": 6
           },
           "Instant_270": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "Instant 270\u00b0 (0ms)",
             "path": "audio/270/instant/vu",
@@ -203,7 +203,7 @@
             "knob_pointer_style": "notch"
           },
           "Lazy_270": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "Lazy 270\u00b0 (Slow Decay)",
             "path": "audio/270/lazy/vu",
@@ -218,7 +218,7 @@
             "knob_indicator_color": "#FFAA00"
           },
           "Test_100": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "Testing 100\u00b0 Angle",
             "path": "audio/100/vu",
@@ -232,7 +232,7 @@
             "knob_outline_thickness": 8
           },
           "Standard_90": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "Classic 90\u00b0 (Fast)",
             "path": "audio/90/vu",
@@ -247,7 +247,7 @@
             "knob_pointer_style": "line"
           },
           "Neon_Sawblade": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "\u26a0\ufe0f NEON SAWBLADE (300\u00b0)",
             "path": "audio/wild/sawblade/vu",
@@ -266,7 +266,7 @@
             "knob_outline_thickness": 4
           },
           "Deep_Abyss": {
-            "widget_type": "_VUMeterKnob",
+            "type": "_VUMeterKnob",
             "meter_face_colour": "transparent",
             "label_active": "\u26ab DEEP ABYSS (320\u00b0)",
             "path": "audio/wild/abyss/vu",

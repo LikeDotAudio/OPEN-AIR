@@ -1,0 +1,33 @@
+234840.505 | DEBUG    | UI   | SYSTEM     | oaConfiguration.Methods.console_encoder | ⏩ Not on Windows ('nt'), skipping console encoding reconfiguration.
+234840.505 | SUCCESS  | UI   | SYSTEM     | oaConfiguration.Methods.console_encoder | ✅ Exiting configure_console_encoding.
+234840.505 | DEBUG    | UI   | SYSTEM     | __main__             | 🖥️🎨 [UI] Starting OpenAir UI Service...
+234840.486 | DEBUG    | CORE | SYSTEM     | oaConfiguration.Methods.console_encoder | ⏩ Not on Windows ('nt'), skipping console encoding reconfiguration.
+234840.486 | SUCCESS  | CORE | SYSTEM     | oaConfiguration.Methods.console_encoder | ✅ Exiting configure_console_encoding.
+234840.486 | DEBUG    | CORE | SYSTEM     | __main__             | ⚡🛡️⚙️ [CORE] Starting OpenAir Core Service...
+234840.488 | DEBUG    | CORE | SYSTEM     | oaWatchdog.Managers.watchdog | 🐕⏳🔋 [WATCHDOG] Started (Timeout: 120.0s)
+234840.488 | DEBUG    | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📖 Reading Cache.
+234840.488 | DEBUG    | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾⏳ Cache file exists. Reading...
+234840.489 | SUCCESS  | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾✅ Cache loaded successfully.
+234840.489 | DEBUG    | CORE | DATA       | oaStateCache.Core.state_cache | 🧠💾 [CACHE] Initialized with 479 entries.
+234840.489 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Beginning CORE manager launch sequence...
+234840.489 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Initializing core instances...
+234840.489 | INFO     | CORE | LOG_FILTER | oaLogging.Managers.log_filter_engine | Setting up MQTT subscription for dynamic log filtering on topic: OPEN-AIR/system/logger/filter/set
+234840.489 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/system/logger/filter/set
+234840.490 | INFO     | CORE | SYSTEM     | oaLogging.Managers.log_filter_engine | LogFilterEngine initialized and subscribed to MQTT topic.
+234840.491 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SPLINKER on OPEN-AIR/System/Status/Splinker/List: []
+234840.492 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Broker/Delete/#
+234840.492 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Broker/Service/#
+234840.492 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Status/Fleet/Complete
+234840.492 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_manager | 🚀📤📥 [MQTT] MqttManager initialized with Async Publisher.
+234840.492 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Injecting dynamic protocols...
+234840.543 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/Splinker/List
+234840.543 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+234840.409 | DEBUG    | SUP  | SYSTEM     | oaConfiguration.FileReaders.config_reader | 📜 [CONFIG] Loaded: Version 20251225, Debug: True
+234840.409 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Launching OPEN-AIR Partitions... (Mission Critical: False)
+234840.413 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Session Identity established (Randomized): CCE7B678963B7771
+234840.413 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Spawning Partition B (UI)...
+234840.413 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Spawning Partition A (Core)...
+234840.413 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: System Running. Monitoring child processes...
+234840.914 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: 🛑 Core exited (Code 1). Shutting down.
+234840.914 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Terminating child processes...
+234840.914 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Supervisor shutdown complete. Goodbye.

@@ -191,3 +191,8 @@ class BuilderButtonToggleCreator(TransparencyMixin):
             if LOCAL_DEBUG:
                 logger.exception("❌ Error creating toggle button '{label}'")
             return None
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderButtonToggleCreator()
+        return creator.make_button_toggle(parent_widget, config_data, context, **kwargs)

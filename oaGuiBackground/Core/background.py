@@ -107,7 +107,8 @@ class BuilderBackgroundManagerMixin:
                 self.scroll_frame.configure(bg=base_hex)
                 # ⚡ MANDATORY: Update canvas background too to avoid borders
                 self.canvas.configure(bg=base_hex)
-            except:
+            except Exception as e:
+                if LOCAL_DEBUG: builder_logger.warning(f"⚠️ Could not extract base color from background: {e}")
                 pass
 
             # ⚡ CRITICAL FIX: If scroll_frame is a canvas, draw the image directly on it.

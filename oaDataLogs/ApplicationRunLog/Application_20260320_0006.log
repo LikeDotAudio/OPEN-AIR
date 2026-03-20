@@ -1,0 +1,62 @@
+000640.224 | DEBUG    | UI   | SYSTEM     | oaConfiguration.Methods.console_encoder | ⏩ Not on Windows ('nt'), skipping console encoding reconfiguration.
+000640.224 | SUCCESS  | UI   | SYSTEM     | oaConfiguration.Methods.console_encoder | ✅ Exiting configure_console_encoding.
+000640.224 | DEBUG    | UI   | SYSTEM     | __main__             | 🖥️🎨 [UI] Starting OpenAir UI Service...
+000640.196 | DEBUG    | CORE | SYSTEM     | oaConfiguration.Methods.console_encoder | ⏩ Not on Windows ('nt'), skipping console encoding reconfiguration.
+000640.196 | SUCCESS  | CORE | SYSTEM     | oaConfiguration.Methods.console_encoder | ✅ Exiting configure_console_encoding.
+000640.196 | DEBUG    | CORE | SYSTEM     | __main__             | ⚡🛡️⚙️ [CORE] Starting OpenAir Core Service...
+000640.196 | DEBUG    | CORE | SYSTEM     | oaWatchdog.Managers.watchdog | 🐕⏳🔋 [WATCHDOG] Started (Timeout: 120.0s)
+000640.196 | DEBUG    | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📖 Reading Cache.
+000640.196 | DEBUG    | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾⏳ Cache file exists. Reading...
+000640.197 | SUCCESS  | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾✅ Cache loaded successfully.
+000640.197 | DEBUG    | CORE | DATA       | oaStateCache.Core.state_cache | 🧠💾 [CACHE] Initialized with 523 entries.
+000640.197 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Beginning CORE manager launch sequence...
+000640.197 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Initializing core instances...
+000640.197 | INFO     | CORE | LOG_FILTER | oaLogging.Managers.log_filter_engine | Setting up MQTT subscription for dynamic log filtering on topic: OPEN-AIR/system/logger/filter/set
+000640.197 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/system/logger/filter/set
+000640.198 | INFO     | CORE | SYSTEM     | oaLogging.Managers.log_filter_engine | LogFilterEngine initialized and subscribed to MQTT topic.
+000640.199 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SPLINKER on OPEN-AIR/System/Status/Splinker/List: []
+000640.200 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Broker/Delete/#
+000640.200 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Broker/Service/#
+000640.200 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Status/Fleet/Complete
+000640.203 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_manager | 🚀📤📥 [MQTT] MqttManager initialized with Async Publisher.
+000640.203 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Injecting dynamic protocols...
+000640.254 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/Splinker/List
+000640.254 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+000640.279 | DEBUG    | CORE | SYSTEM     | oaTranslator.Managers.yak_translator | 🟡 YAK repository file not found or empty at /home/anthony/Documents/OPEN-AIR/.pytest_cache/oaDataState/YAKETYYAK.json. Initializing empty repository.
+000640.279 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/yak/commands/#
+000640.279 | DEBUG    | CORE | SYSTEM     | oaTranslator.Managers.yak_translator | 👂 Subscribed to YAK trigger topic: 'OPEN-AIR/yak/commands/#'
+000640.279 | SUCCESS  | CORE | SYSTEM     | oaTranslator.Managers.yak_translator | ✅ YakTranslator initialized and ready to translate!
+000640.279 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Proxy/Rx_Outbox
+000640.279 | SUCCESS  | CORE | SYSTEM     | oaTranslator.Methods.yak_rx | ✅✅✅ [SUCCESS] YakRxManager subscribed to 'OPEN-AIR/Proxy/Rx_Outbox' for proxy responses.
+000640.279 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Status/Fleet/Start
+000640.279 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Status/Fleet/Complete
+000640.571 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Linking cross-dependent managers...
+000640.571 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Splinker/#
+000640.571 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Starting all manager services...
+000640.613 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 INPUT READY: Mbox 2:Mbox 2 MIDI 1 28:0
+000640.614 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 INPUT READY: Midi Through:Midi Through Port-0 14:0
+000640.614 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 INPUT READY: RtMidiOut Client:RtMidi output 130:0
+000640.615 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 INPUT READY: RtMidiOut Client:RtMidi output 131:0
+000640.615 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 OUTPUT READY: Midi Through:Midi Through Port-0 14:0
+000640.616 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 OUTPUT READY: Mbox 2:Mbox 2 MIDI 1 28:0
+000640.617 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 OUTPUT READY: RtMidiIn Client:RtMidi input 128:0
+000640.617 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 OUTPUT READY: RtMidiIn Client:RtMidi input 129:0
+000640.617 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MIDI on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0', 'RtMidiOut Client:RtMidi outp...
+000640.618 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MIDI on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'RtMidiIn Client:RtMidi input...
+000640.618 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/PTP/Capture
+000640.618 | WARNING  | CORE | SYSTEM     | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+000640.618 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🔗 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+000640.618 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+000640.618 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0', 'RtMidiOut Client:RtMidi outp...
+000640.618 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'RtMidiIn Client:RtMidi input...
+000640.618 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+000640.618 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+000640.124 | DEBUG    | SUP  | SYSTEM     | oaConfiguration.FileReaders.config_reader | 📜 [CONFIG] Loaded: Version 20251225, Debug: True
+000640.124 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Launching OPEN-AIR Partitions... (Mission Critical: False)
+000640.124 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Session Identity established (Randomized): 67F198C40B32E44F
+000640.124 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Spawning Partition B (UI)...
+000640.124 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Spawning Partition A (Core)...
+000640.124 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: System Running. Monitoring child processes...
+000640.624 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: 👋 UI exited (Code 1). System complete.
+000640.624 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Terminating child processes...
+000640.725 | DEBUG    | SUP  | SYSTEM     | __main__             | 🚀 SUPERVISOR: Supervisor shutdown complete. Goodbye.

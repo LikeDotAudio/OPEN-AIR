@@ -43,7 +43,16 @@ class AsyncGridRenderer:
                 except Exception as e:
                     renderer_logger.trace(f"Geometry configuration skipped: {e}")
 
-            fields = data.get("fields", data.get("blocks", data))
+            fields = data.get("fields", data.get("blocks"))
+            
+            # ⚡ SAFETY: If no fields/blocks found, and data itself has no 'type',
+            # it might be a raw dict of widgets. Otherwise, stop recursion.
+            if fields is None:
+                if not data.get("type"):
+                    fields = data
+                else:
+                    if on_complete: on_complete()
+                    return
             
             # Robust Field Parsing: handle dict (default) or list of dicts (presets/OcaBin)
             if isinstance(fields, dict):

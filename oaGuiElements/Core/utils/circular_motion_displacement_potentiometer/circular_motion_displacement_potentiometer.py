@@ -110,6 +110,11 @@ class CMDPWidget(
 
     def update_tree(self, f): self.tm.refresh()
 
+    def refresh_pop_tree(self):
+        """Public alias for the tree manager's refresh method, used by handlers."""
+        if hasattr(self, 'tm'):
+            self.tm.refresh()
+
 @WidgetRegistry.register("_CMDP")
 class BuilderCircularMotionDisplacementPotentiometerCreator:
     @staticmethod

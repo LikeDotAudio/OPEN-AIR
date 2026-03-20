@@ -52,22 +52,22 @@ class GraphContextMenu:
 
             # 4. Limits & Rename
             rn_menu = tk.Menu(menu, tearoff=0); menu.add_cascade(label="Rename", menu=rn_menu)
-            def rn(attr):
+            def _rename_attribute(attr):
                 v = simpledialog.askstring("Rename", f"New {attr}:", initialvalue=getattr(ax, f"get_{attr}")())
                 if v: getattr(ax, f"set_{attr}")(v); fig.canvas.draw_idle()
-            rn_menu.add_command(label="Chart Title", command=lambda: rn("title"))
-            rn_menu.add_command(label="X-Axis Label", command=lambda: rn("xlabel"))
-            rn_menu.add_command(label="Y-Axis Label", command=lambda: rn("ylabel"))
+            rn_menu.add_command(label="Chart Title", command=lambda: _rename_attribute("title"))
+            rn_menu.add_command(label="X-Axis Label", command=lambda: _rename_attribute("xlabel"))
+            rn_menu.add_command(label="Y-Axis Label", command=lambda: _rename_attribute("ylabel"))
 
             # 5. Save
             sv_menu = tk.Menu(menu, tearoff=0); menu.add_cascade(label="Save Graph", menu=sv_menu)
-            def _sv(p):
+            def _save_graph(p):
                 was = annot.get_visible(); annot.set_visible(False)
                 if hasattr(ax, "_hover_vline"): ax._hover_vline.set_visible(False)
                 for d in getattr(ax, "_hover_dots", []): d.set_visible(False)
                 fig.savefig(p, dpi=fig.dpi*4); annot.set_visible(was); fig.canvas.draw_idle()
-            sv_menu.add_command(label="Save (Quick)", command=lambda: _sv(f"Graph_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.png"))
-            sv_menu.add_command(label="Save As...", command=lambda: (p := filedialog.asksaveasfilename(defaultextension=".png")) and _sv(p))
+            sv_menu.add_command(label="Save (Quick)", command=lambda: _save_graph(f"Graph_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.png"))
+            sv_menu.add_command(label="Save As...", command=lambda: (p := filedialog.asksaveasfilename(defaultextension=".png")) and _save_graph(p))
 
             menu.add_separator()
             if hasattr(ax, "zoom_pan"): menu.add_command(label="Reset View", command=ax.zoom_pan.reset_view)

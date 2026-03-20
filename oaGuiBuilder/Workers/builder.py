@@ -137,11 +137,8 @@ class DynamicGuiBuilder(
         self.canvas = tk.Canvas(
             self.main_content_frame, background=colors["bg"], bd=0, highlightthickness=0
         )
-        self.scroll_frame = tk.Canvas(self.canvas, bd=0, highlightthickness=0, bg=colors["bg"])
-
-        # ⚡ FIX: Prevent children from resizing the scroll_frame
-        self.scroll_frame.pack_propagate(False)
-        self.scroll_frame.grid_propagate(False)
+        # ⚡ FIX: scroll_frame MUST be a Frame for grid propagation to work with Canvas scrolling.
+        self.scroll_frame = tk.Frame(self.canvas, bd=0, highlightthickness=0, bg=colors["bg"])
 
         TransparencyManager.apply_transparency(self, self.scroll_frame, {"transparent": True}, self)
 

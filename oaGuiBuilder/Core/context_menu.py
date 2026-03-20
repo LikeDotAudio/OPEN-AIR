@@ -71,7 +71,8 @@ class BuilderContextMenuMixin:
         if LOCAL_DEBUG: builder_logger.info(f"🏗️🚀💻 [BUILDER] DynamicGuiBuilder: Launching standalone WYSIWYG Editor process for {self.json_filepath}")
         
         # Path to the standalone runner
-        runner_path = Path(__file__).resolve().parent.parent.parent / "wysiwyg_editor" / "run_builder.py"
+        # ⚡ CORRECTED: Point to the actual location in oaGuiEditorWYSIWYG
+        runner_path = Path(__file__).resolve().parent.parent.parent / "oaGuiEditorWYSIWYG" / "Managers" / "run_builder.py"
         
         # ⚡ GRAVITY OF ERRORS: Explicit check before spawning
         if not runner_path.exists():

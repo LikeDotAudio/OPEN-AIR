@@ -27,7 +27,7 @@
         "examplefields": {
           "type": "_GuiImage",
           "label_active": "Time Circuits (GIF)",
-          "path": "oaDataCache/assets/images/time_circuits.gif",
+          "path": "oaGuiMediaElements/Assets/time_circuits.gif",
           "notes": "A GIF animation of the time circuits."
         }
       },
@@ -57,7 +57,7 @@
         "examplefields": {
           "type": "_GuiImage",
           "label_active": "Time Circuits (PNG)",
-          "path": "oaDataCache/assets/images/time_circuits.gif.png",
+          "path": "oaGuiMediaElements/Assets/time_circuits.gif.png",
           "notes": "A static PNG version of the time circuits."
         }
       }

@@ -5,11 +5,11 @@ IMPORTS
     DisplayString FROM SNMPv2-TC;
 
 openAirMIB MODULE-IDENTITY
-    LAST-UPDATED "202603190133Z"
+    LAST-UPDATED "202603190136Z"
     ORGANIZATION "OPEN-AIR Project"
     CONTACT-INFO "Anthony Peter Kuzub"
     DESCRIPTION "MQTT-Aligned OID Tree for OPEN-AIR."
-    REVISION "202603190133Z"
+    REVISION "202603190136Z"
     DESCRIPTION "Strictly unique path-aligned generation."
     ::= { enterprises 25030 }
 
@@ -1259,5 +1259,53 @@ reflinearb56a OBJECT-TYPE
     STATUS      current
     DESCRIPTION "Source: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear"
     ::= { oaDataRunningFilesc463 44547 }
+
+console3603 OBJECT IDENTIFIER ::= { v1 53174 }
+nodeb584 OBJECT IDENTIFIER ::= { console3603 17030 }
+fieldsac22 OBJECT IDENTIFIER ::= { nodeb584 2165 }
+ch4b85 OBJECT IDENTIFIER ::= { fieldsac22 54367 }
+soloCHOnd239 OBJECT IDENTIFIER ::= { ch4b85 37992 }
+-- MQTT: OPEN-AIR/Console/9/fields/ch9/Solo_CH_On/ch_on
+chon32c9 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Console/9/fields/ch9/Solo_CH_On/ch_on"
+    ::= { soloCHOnd239 2543 }
+
+-- MQTT: OPEN-AIR/Console/9/fields/ch9/Solo_CH_On/solo
+solobf32 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Console/9/fields/ch9/Solo_CH_On/solo"
+    ::= { soloCHOnd239 22606 }
+
+-- MQTT: OPEN-AIR/Console/9/fields/ch9/fader
+fader1c6a OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Console/9/fields/ch9/fader"
+    ::= { ch4b85 44886 }
+
+nodebb5f OBJECT IDENTIFIER ::= { console3603 51892 }
+fields7fc7 OBJECT IDENTIFIER ::= { nodebb5f 5056 }
+ch4352 OBJECT IDENTIFIER ::= { fields7fc7 10899 }
+-- MQTT: OPEN-AIR/Console/1/fields/ch1/fader
+fader38d4 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Console/1/fields/ch1/fader"
+    ::= { ch4352 20285 }
+
+-- MQTT: OPEN-AIR/Console/1/fields/ch1/needle
+needlec366 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Console/1/fields/ch1/needle"
+    ::= { ch4352 62500 }
 
 END

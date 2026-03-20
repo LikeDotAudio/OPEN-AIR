@@ -1,0 +1,5 @@
+013628.175 | WARNING  | CORE | SYSTEM     | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+013630.124 | WARNING  | UI   | SYSTEM     | oaGuiManager.Core.factory.Core.widget_discovery_engine | ⚠️ Registry class <class 'oaGuiElements.Core.buttons.button_toggle.button_toggle.BuilderButtonToggleCreator'> missing static 'make' method.
+013632.281 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
+013632.282 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)
+013642.394 | WARNING  | CORE | SYSTEM     | oaComVisa.Methods.visa_Search | FAILED (IDN Query Error)

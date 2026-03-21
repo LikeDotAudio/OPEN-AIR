@@ -5,17 +5,17 @@
 import os
 from pathlib import Path
 from loguru import logger
-
-def generate_final_html(svg_content, table_rows, root_buttons, wall_of_shame, wall_of_pitty, output_file):
+def generate_final_html(svg_content, table_rows, root_buttons, wall_of_shame, wall_of_pitty):
     """
     Assembles SVG and statistical data into a standalone interactive HTML report.
     Loads the UI structure from a separate template file for modularity.
     """
     try:
+        # Template is in a subfolder of this script
         template_path = Path(__file__).parent / "templates" / "report_template.html"
         if not template_path.exists():
             logger.error(f"❌ HTML Template not found at: {template_path}")
-            return False
+            return "<html><body><h1>Error: Template not found</h1></body></html>"
 
         with open(template_path, "r", encoding="utf-8") as f:
             template = f.read()
@@ -33,12 +33,9 @@ def generate_final_html(svg_content, table_rows, root_buttons, wall_of_shame, wa
         for placeholder, value in replacements.items():
             content = content.replace(placeholder, value)
 
-        with open(output_file, 'w', encoding="utf-8") as f:
-            f.write(content)
-            
-        logger.success(f"✅ Standalone Performance Report generated: {output_file}")
-        return True
+        logger.success("✅ Standalone Performance Report generated in memory.")
+        return content
 
     except Exception as e:
         logger.exception(f"❌ Failed to generate FlameGraph HTML: {e}")
-        return False
+        return f"<html><body><h1>Error: {e}</h1></body></html>"

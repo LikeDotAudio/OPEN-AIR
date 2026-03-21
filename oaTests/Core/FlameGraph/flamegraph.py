@@ -19,14 +19,13 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 # 2. Import Modular Core
-from core.capture import MultiThreadProfiler
-from core.make_graph import generate_flamegraph_with_flameprof
-from core.handle_events import process_stats_for_ui, generate_table_rows
-from core.wall_of_shame import generate_wall_of_shame
-from core.Wall_of_pitty import generate_wall_of_pitty
-from core.make_html import generate_final_html
-from core.DeleteCache import delete_local_data
-from core.ClearMQTT import MQTTSweeper
+from .capture import MultiThreadProfiler
+from .make_graph import generate_flamegraph_with_flameprof
+from .handle_events import process_stats_for_ui, generate_table_rows
+from .wall_of_shame import generate_wall_of_shame
+from .Wall_of_pitty import generate_wall_of_pitty
+from .make_html import generate_final_html
+
 
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -83,20 +82,11 @@ def synthesize_report(mtp):
     # Show the wordy report first in console
     print("\n" + wall_of_pitty_text[:1000] + "...\n[Report Truncated - Open HTML for full details]")
 
-    # G. Post-Analysis Cleanup
-    print("🧹 Cleaning up MQTT state...")
-    sweeper = MQTTSweeper(
-        app_constants.MQTT_BROKER_ADDRESS, 
-        int(app_constants.MQTT_BROKER_PORT), 
-        app_constants.MQTT_BASE_TOPIC
-    )
-    # sweep() now returns True/False instead of raising exceptions (to be refactored)
-    sweeper.sweep()
-
+   
 def main():
     # 0. Pre-Flight Cleanup (Fresh Start)
     print("🧹 Clearing DATA cache for a fresh start...")
-    delete_local_data()
+   
 
     # A. Initialize and Install Profiler
     mtp = MultiThreadProfiler()

@@ -1,10 +1,10 @@
 {
     "summary": {
-        "timestamp": "2026-03-19 23:15:45",
-        "total": 76,
-        "passed": 70,
+        "timestamp": "2026-03-21 02:31:02",
+        "total": 77,
+        "passed": 73,
         "failed": 3,
-        "errors": 3,
+        "errors": 1,
         "skipped": 0
     },
     "details": [
@@ -14,7 +14,7 @@
             "status": "passed",
             "message": "",
             "description": "Test adding a monitor callback.",
-            "duration": "0.0008s"
+            "duration": "0.0007s"
         },
         {
             "classname": "TestSplinker",
@@ -22,7 +22,7 @@
             "status": "passed",
             "message": "",
             "description": "Test broker initialization.",
-            "duration": "0.0002s"
+            "duration": "0.0008s"
         },
         {
             "classname": "TestSplinker",
@@ -38,7 +38,7 @@
             "status": "passed",
             "message": "",
             "description": "Test handling of incoming OSC messages.",
-            "duration": "0.0013s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestOSCManager",
@@ -62,7 +62,7 @@
             "status": "passed",
             "message": "",
             "description": "Test registering a route between OSC and MQTT.",
-            "duration": "0.0002s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestStateCache",
@@ -126,7 +126,7 @@
             "status": "passed",
             "message": "",
             "description": "Test that validation returns True with a dummy printer.",
-            "duration": "0.0001s"
+            "duration": "0.0000s"
         },
         {
             "classname": "TestButtonActuator",
@@ -134,7 +134,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that the ActuatorButton initializes correctly.",
-            "duration": "0.0957s"
+            "duration": "0.0873s"
         },
         {
             "classname": "TestButtonActuator",
@@ -142,7 +142,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that BuilderButtonActuatorCreator creates an ActuatorButton.",
-            "duration": "0.0080s"
+            "duration": "0.0095s"
         },
         {
             "classname": "TestButtonToggle",
@@ -150,15 +150,15 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that BuilderButtonToggleCreator creates a toggle button widget.",
-            "duration": "0.0114s"
+            "duration": "0.0113s"
         },
         {
             "classname": "TestButtonToggle",
             "name": "test_toggle_registration (oaGuiElements.Tests.test_button_toggle.TestButtonToggle.test_toggle_registration)",
             "status": "failed",
-            "message": "<tkinter.BooleanVar object at 0x7cf79f5881a0> != None",
+            "message": "<tkinter.BooleanVar object at 0x7d7f70c736e0> != None",
             "description": "Goal: Verify that the toggle button registers itself with the mirror engine.",
-            "duration": "0.0096s"
+            "duration": "0.0077s"
         },
         {
             "classname": "TestButtonToggler",
@@ -166,7 +166,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that BuilderButtonTogglerCreator creates a toggler group.",
-            "duration": "0.0087s"
+            "duration": "0.0083s"
         },
         {
             "classname": "TestButtonTrapezoid",
@@ -174,7 +174,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that TrapezoidButton initializes correctly.",
-            "duration": "0.0162s"
+            "duration": "0.0161s"
         },
         {
             "classname": "TestButtonTrapezoid",
@@ -182,7 +182,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that TrapezoidButton registers with state mirror engine.",
-            "duration": "0.0115s"
+            "duration": "0.0082s"
         },
         {
             "classname": "TestButtonTrapezoidToggler",
@@ -190,7 +190,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that BuilderButtonTrapezoidTogglerCreator creates a group.",
-            "duration": "0.0109s"
+            "duration": "0.0106s"
         },
         {
             "classname": "TestButtonWink",
@@ -198,7 +198,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that BuilderButtonWinkCreator creates a wink button.",
-            "duration": "0.0264s"
+            "duration": "0.0175s"
         },
         {
             "classname": "TestButtonWinkToggler",
@@ -206,7 +206,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that BuilderButtonWinkTogglerCreator creates a group.",
-            "duration": "0.0214s"
+            "duration": "0.0147s"
         },
         {
             "classname": "TestMousewheelScrollMixin",
@@ -230,7 +230,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that BuilderFaderCreator creates a fader frame.",
-            "duration": "0.0108s"
+            "duration": "0.0112s"
         },
         {
             "classname": "TestFader",
@@ -238,7 +238,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that CustomFaderFrame initializes correctly.",
-            "duration": "0.0087s"
+            "duration": "0.0083s"
         },
         {
             "classname": "TestFaderBarGraph",
@@ -246,7 +246,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that BuilderFaderBarGraphCreator creates a fader bar graph frame.",
-            "duration": "0.0124s"
+            "duration": "0.0353s"
         },
         {
             "classname": "TestFaderBarGraph",
@@ -254,7 +254,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that FaderWithBarGraphFrame initializes correctly.",
-            "duration": "0.0114s"
+            "duration": "0.0080s"
         },
         {
             "classname": "TestFaderDual",
@@ -262,7 +262,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that BuilderFaderDualCreator creates a dual fader frame.",
-            "duration": "0.0081s"
+            "duration": "0.0078s"
         },
         {
             "classname": "TestFaderDual",
@@ -270,7 +270,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that CustomDualFaderFrame initializes correctly.",
-            "duration": "0.0072s"
+            "duration": "0.0067s"
         },
         {
             "classname": "TestFaderHorizontal",
@@ -278,7 +278,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that BuilderFaderHorizontalCreator creates a horizontal fader frame.",
-            "duration": "0.0085s"
+            "duration": "0.0075s"
         },
         {
             "classname": "TestFaderHorizontal",
@@ -286,7 +286,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that CustomHorizontalFaderFrame initializes correctly.",
-            "duration": "0.0069s"
+            "duration": "0.0066s"
         },
         {
             "classname": "TestFaderLinearTravellingPotentiometer",
@@ -294,7 +294,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that BuilderFaderLinearTravellingPotentiometerCreator creates an LTP frame.",
-            "duration": "0.0078s"
+            "duration": "0.0073s"
         },
         {
             "classname": "TestFaderLinearTravellingPotentiometer",
@@ -302,23 +302,15 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that CustomLTPFrame initializes correctly.",
-            "duration": "0.0075s"
+            "duration": "0.0067s"
         },
         {
-            "classname": "TestKnobWidget",
-            "name": "test_broadcast_notifies_engine (oaGuiElements.Tests.test_knob.TestKnobWidget.test_broadcast_notifies_engine)",
+            "classname": "TestFluxPlotter",
+            "name": "test_creation (oaGuiElements.Tests.test_flux_plotter.TestFluxPlotter.test_creation)",
             "status": "error",
-            "message": "'min'",
-            "description": "Goal: Verify that broadcast_change triggers the mirror engine.",
-            "duration": "0.0068s"
-        },
-        {
-            "classname": "TestKnobWidget",
-            "name": "test_initialization (oaGuiElements.Tests.test_knob.TestKnobWidget.test_initialization)",
-            "status": "error",
-            "message": "'min'",
-            "description": "Goal: Verify that the Knob frame initializes its internal state.",
-            "duration": "0.0068s"
+            "message": "unknown option \"-context\"",
+            "description": "Verify that FluxPlotter initializes without error.",
+            "duration": "0.0067s"
         },
         {
             "classname": "TestMeterBar",
@@ -326,15 +318,15 @@
             "status": "failed",
             "message": "None is not an instance of <class 'oaGuiElements.Core.metering.meter_bar.smart_meter.SmartMeter'>",
             "description": "Goal: Verify that BuilderMeterBarCreator creates a SmartMeter.",
-            "duration": "0.0124s"
+            "duration": "0.0093s"
         },
         {
             "classname": "TestMeterBar",
             "name": "test_smart_meter_initialization (oaGuiElements.Tests.test_meter_bar.TestMeterBar.test_smart_meter_initialization)",
-            "status": "error",
-            "message": "name 'parent_widget' is not defined",
+            "status": "passed",
+            "message": "",
             "description": "Goal: Verify that SmartMeter initializes correctly.",
-            "duration": "0.0072s"
+            "duration": "0.0069s"
         },
         {
             "classname": "TestMeterNeedle",
@@ -342,7 +334,7 @@
             "status": "failed",
             "message": "<tkinter.Canvas object .!canvas> is not an instance of <class 'tkinter.Frame'>",
             "description": "Goal: Verify that BuilderMeterNeedleCreator creates a needle meter.",
-            "duration": "0.0099s"
+            "duration": "0.0115s"
         },
         {
             "classname": "TestTextLabel",
@@ -350,7 +342,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that BuilderTextLabelCreator creates a label widget (canvas).",
-            "duration": "0.0080s"
+            "duration": "0.0095s"
         },
         {
             "classname": "TestTextLabel",
@@ -358,7 +350,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify the static make method.",
-            "duration": "0.0088s"
+            "duration": "0.0086s"
         },
         {
             "classname": "TestTextTable",
@@ -366,7 +358,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that BuilderTextTableCreator creates a table widget.",
-            "duration": "0.0138s"
+            "duration": "0.0118s"
         },
         {
             "classname": "TestTextValueBox",
@@ -374,7 +366,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that BuilderTextValueBoxCreator creates a value box widget.",
-            "duration": "0.0132s"
+            "duration": "0.0100s"
         },
         {
             "classname": "TestWatchdogFunctions",
@@ -390,7 +382,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that callbacks can be registered.",
-            "duration": "0.0002s"
+            "duration": "0.0001s"
         },
         {
             "classname": "TestWatchdogFunctions",
@@ -398,7 +390,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that start_heartbeat spawns a thread and sets running flag.",
-            "duration": "0.0005s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestVisaFleet",
@@ -406,7 +398,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that the fleet correctly notifies and persists new inventory data.",
-            "duration": "0.0013s"
+            "duration": "0.0012s"
         },
         {
             "classname": "TestVisaLogic",
@@ -438,7 +430,7 @@
             "status": "passed",
             "message": "",
             "description": "Confirm the backend library loads and returns available hardware identifiers.",
-            "duration": "0.0199s"
+            "duration": "0.0201s"
         },
         {
             "classname": "TestMidiManager",
@@ -462,7 +454,7 @@
             "status": "passed",
             "message": "",
             "description": "Test that stop() correctly resets the running flag.",
-            "duration": "0.0023s"
+            "duration": "0.0042s"
         },
         {
             "classname": "TestProtocolRouter",
@@ -486,7 +478,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that AsyncGridRenderer initializes with a builder and batch engine.",
-            "duration": "0.0074s"
+            "duration": "0.0088s"
         },
         {
             "classname": "TestUIAndData",
@@ -494,7 +486,7 @@
             "status": "passed",
             "message": "",
             "description": "Load and parse JSON configuration files.",
-            "duration": "0.0008s"
+            "duration": "0.0011s"
         },
         {
             "classname": "TestUIAndData",
@@ -502,7 +494,7 @@
             "status": "passed",
             "message": "",
             "description": "Recursively find valid UI definition files.",
-            "duration": "0.0002s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestUIAndData",
@@ -526,7 +518,7 @@
             "status": "passed",
             "message": "",
             "description": "Test that GUI changes trigger MQTT publication.",
-            "duration": "0.0110s"
+            "duration": "0.0093s"
         },
         {
             "classname": "TestStateMirrorEngine",
@@ -534,7 +526,7 @@
             "status": "passed",
             "message": "",
             "description": "Test topic calculation logic.",
-            "duration": "0.0112s"
+            "duration": "0.0100s"
         },
         {
             "classname": "TestStateMirrorEngine",
@@ -542,7 +534,7 @@
             "status": "passed",
             "message": "",
             "description": "Test widget registration and topic binding.",
-            "duration": "0.0075s"
+            "duration": "0.0094s"
         },
         {
             "classname": "TestMQTTLogic",
@@ -550,7 +542,7 @@
             "status": "passed",
             "message": "",
             "description": "Verify on_message correctly filters for the configured base topic.",
-            "duration": "0.0004s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestMQTTLogic",
@@ -566,7 +558,7 @@
             "status": "passed",
             "message": "",
             "description": "Test that matching results are cached.",
-            "duration": "0.0004s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestMqttSubscriberRouter",
@@ -574,7 +566,7 @@
             "status": "passed",
             "message": "",
             "description": "Test multiple subscribers for the same topic.",
-            "duration": "0.0006s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestMqttSubscriberRouter",
@@ -582,7 +574,7 @@
             "status": "passed",
             "message": "",
             "description": "Test exact topic subscription.",
-            "duration": "0.0002s"
+            "duration": "0.0001s"
         },
         {
             "classname": "TestMqttSubscriberRouter",
@@ -590,7 +582,23 @@
             "status": "passed",
             "message": "",
             "description": "Test wildcard topic subscription.",
-            "duration": "0.0002s"
+            "duration": "0.0001s"
+        },
+        {
+            "classname": "TestAsyncGridRenderer",
+            "name": "test_render_functional_widget_trigger (oaGuiBuildShell.Tests.test_async_grid_renderer.TestAsyncGridRenderer.test_render_functional_widget_trigger)",
+            "status": "passed",
+            "message": "",
+            "description": "Goal: Verify that functional widgets are passed to the batch engine.",
+            "duration": "0.0074s"
+        },
+        {
+            "classname": "TestAsyncGridRenderer",
+            "name": "test_render_initialization (oaGuiBuildShell.Tests.test_async_grid_renderer.TestAsyncGridRenderer.test_render_initialization)",
+            "status": "passed",
+            "message": "",
+            "description": "Goal: Verify that AsyncGridRenderer initializes with a builder and batch engine.",
+            "duration": "0.0083s"
         },
         {
             "classname": "TestSNMPManager",
@@ -598,7 +606,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that GUI monitor callbacks can be registered.",
-            "duration": "0.0003s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestSNMPManager",
@@ -614,7 +622,7 @@
             "status": "passed",
             "message": "",
             "description": "Goal: Verify that starting the manager sets the running flag.",
-            "duration": "0.0390s"
+            "duration": "0.0371s"
         }
     ]
 }

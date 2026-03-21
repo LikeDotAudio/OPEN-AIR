@@ -4,7 +4,7 @@ import tkinter as tk
 import os
 import json
 
-from .....Core.Knobs.knob_rotary_selector.knob_rotary_selector import RotarySelectorSwitch, BuilderKnobRotarySelectorCreator
+from oaGuiElements.Core.Knobs.knob_rotary_selector.knob_rotary_selector import RotarySelectorSwitch, BuilderKnobRotarySelectorCreator
 
 # Helper to load sample config
 def load_sample_config():
@@ -17,17 +17,34 @@ def load_sample_config():
 class TestRotarySelector(unittest.TestCase):
 
     def setUp(self):
+        # Patch tkinter.Tk before creating any widgets
+        self.tk_patch = patch('tkinter.Tk', MagicMock)
+        self.mock_tk = self.tk_patch.start()
+
         # Create a root window for the tests
         self.root = tk.Tk()
-        self.root.withdraw()  # Hide the window
 
         self.config_data = load_sample_config()
-        self.variable = tk.DoubleVar(value=self.config_data.get("value_default", 0))
+        
+        # Correctly handle default value if it's a string
+        if isinstance(self.config_data.get("value_default"), str):
+            try:
+                default_val_index = self.config_data['positions'].index(self.config_data['value_default'])
+                self.variable = tk.DoubleVar(value=default_val_index)
+            except (ValueError, KeyError):
+                self.variable = tk.DoubleVar(value=0) # Fallback
+        else:
+            self.variable = tk.DoubleVar(value=self.config_data.get("value_default", 0))
+
         self.positions = self.config_data.get("positions", ["A", "B", "C"])
 
         # Mock dependencies
         self.state_mirror_engine = MagicMock()
-        
+
+        # Patch themes to avoid deep style dependencies
+        self.theme_patch = patch('oaStyle.Core.style.THEMES', {'dark': {'knob': {}}})
+        self.mock_themes = self.theme_patch.start()
+
         # Use a real config extracted from sample, but mock the state for simplicity
         from oaGuiElements.Core.Knobs.knob.Core.knob_config import extract_knob_config
         self.knob_config = extract_knob_config(self.config_data)
@@ -70,15 +87,15 @@ class TestRotarySelector(unittest.TestCase):
             
             # The options dict passed to _draw_selector should contain the correct text
             call_args, call_kwargs = mock_draw_selector.call_args
-            options_arg = call_kwargs.get('options', call_args[6]) # Argument by name or position
-            self.assertEqual(options_arg['selection_text'], self.positions[1])
+            options_arg = call_kwargs.get('options') or (call_args[6] if len(call_args) > 6 else {})
+            self.assertEqual(options_arg.get('selection_text'), self.positions[1])
 
             # Change value to the index of the third position
             self.variable.set(2)
             self.selector._draw_visuals()
             call_args, call_kwargs = mock_draw_selector.call_args
-            options_arg = call_kwargs.get('options', call_args[6])
-            self.assertEqual(options_arg['selection_text'], self.positions[2])
+            options_arg = call_kwargs.get('options') or (call_args[6] if len(call_args) > 6 else {})
+            self.assertEqual(options_arg.get('selection_text'), self.positions[2])
 
     def test_04_builder_creation(self):
         """Verify the Builder can create a RotarySelectorSwitch instance."""
@@ -105,8 +122,9 @@ class TestRotarySelector(unittest.TestCase):
 
 
     def tearDown(self):
-        # Destroy the root window
-        self.root.destroy()
+        # Stop the patchers
+        self.theme_patch.stop()
+        self.tk_patch.stop()
 
 if __name__ == '__main__':
     # This allows running the test script directly

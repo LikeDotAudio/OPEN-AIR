@@ -282,7 +282,7 @@ class CommandRouter(tk.Frame):
             return match["val"] if match else None
 
     def _find_app_instance(self):
-        from oaGuiBuild.Managers.gui_display import Application
+        from oaGuiBuildShell.Managers.gui_display import Application
         curr = self.master
         while curr:
             if isinstance(curr, Application):

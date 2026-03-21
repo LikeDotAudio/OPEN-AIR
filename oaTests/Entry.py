@@ -5,7 +5,6 @@ import glob
 import webbrowser
 import select
 from datetime import datetime
-import threading
 
 # Ensure project root is in sys.path
 project_root = os.getcwd()
@@ -17,16 +16,6 @@ from oaTests.Core.Report_Builder.run_test import TestRunner
 from oaTests.Core.Report_Builder.collate_data import collate_extra_tabs
 from oaTests.Core.Report_Builder.run_report_builder import ReportGenerator
 from oaTests.Core.Report_Builder import clear_logs
-
-# Imports for FlameGraph Generation
-from oaTests.Core.FlameGraph.capture import MultiThreadProfiler
-from oaTests.Core.FlameGraph.make_graph import generate_flamegraph_with_flameprof
-from oaTests.Core.FlameGraph.handle_events import process_stats_for_ui, generate_table_rows
-from oaTests.Core.FlameGraph.wall_of_shame import generate_wall_of_shame
-from oaTests.Core.FlameGraph.Wall_of_pitty import generate_wall_of_pitty
-from oaTests.Core.FlameGraph.make_html import generate_final_html
-from oaConfiguration.FileReaders.config_reader import Config
-app_constants = Config.get_instance()
 
 class UnifiedOrchestrator:
     def __init__(self):
@@ -58,8 +47,7 @@ class UnifiedOrchestrator:
         elif status == "skipped": self.summary["skipped"] += 1
 
         description = getattr(test, "_testMethodDoc", "") or "No description provided."
-        description = description.strip().replace("
-", "<br>")
+        description = description.strip().replace(" " + chr(10), "<br>") # Explicitly handle newline
 
         self.test_results.append({
             "classname": test.__class__.__name__,
@@ -68,59 +56,34 @@ class UnifiedOrchestrator:
             "message": message,
             "cause": cause,
             "description": description,
-            "duration": f"{duration:.4f}s"
-        })
+            "duration": f"{duration:.4f}s"        })
 
-    def generate_flamegraph_report(self):
-        print("
-🔥 [FLAME TEST] Running flame test...")
-        try:
-            # A. Initialize and Install Profiler
-            mtp = MultiThreadProfiler()
-            mtp.install()
-
-            # B. Launch the Application (in a thread)
-            import OpenAir
-            app_thread = threading.Thread(target=OpenAir.main)
-            app_thread.start()
-            app_thread.join(timeout=60) # Run for a max of 60 seconds
-
-            # C. Synthesize Intelligence
-            mtp.stop()
-            print("
-🛑 OpenAir closed or frozen. Synthesizing Intelligence Report...")
-            
-            ps = mtp.get_stats()
-            
-            # D. Process Stats
-            stats_list = process_stats_for_ui(ps)
-            
-            # E. Generate Components
-            svg_content = generate_flamegraph_with_flameprof(ps, None) or "<!-- SVG Failed -->"
-            table_rows = generate_table_rows(stats_list)
-            wall_of_shame_text = generate_wall_of_shame(stats_list, ps)
-            wall_of_pitty_text = generate_wall_of_pitty(stats_list, ps)
-            
-            # Extract unique roots for the filter buttons
-            all_roots = sorted(list(set(r for s in stats_list for r in s['roots'])))
-            root_buttons = "".join([f'<button class="filter-btn active" id="btn-root-{l}" onclick="toggleRoot('{l}')">{l}</button>' for l in all_roots])
-            
-            # F. Assemble Final Report
-            return generate_final_html(
-                svg_content=svg_content,
-                table_rows=table_rows,
-                root_buttons=root_buttons,
-                wall_of_shame=wall_of_shame_text,
-                wall_of_pitty=wall_of_pitty_text
-            )
-        except Exception as e:
-            print(f"⚠️ Flame test failed: {e}")
-            return f"<html><body><h1>Flame test failed</h1><p>{e}</p></body></html>"
+    def run_flame_test_prompt(self):
+        print() # Separate line for newline
+        print('🔥 [FLAME TEST] Would you like to run a flame test? (y/N)') # Changed to single quotes
+        print("   (Automatically cancelling in 10 seconds...)")
+        
+        # Non-blocking input with timeout
+        rlist, _, _ = select.select([sys.stdin], [], [], 10)
+        if rlist:
+            response = sys.stdin.readline().strip().lower()
+            if response == 'y':
+                print("🚀 Launching Flame Test suite...")
+                try:
+                    import subprocess
+                    flame_path = os.path.join(self.project_root, "oaTests", "Core", "FlameGraph", "wall_of_shame.py")
+                    subprocess.run([sys.executable, flame_path])
+                except Exception as e:
+                    print(f"⚠️ Flame test failed: {e}")
+            else:
+                print("⏭️ Skipping Flame Test.")
+        else:
+            print("⏰ Timeout reached. Skipping Flame Test.")
 
     def run_cleanup_prompts(self):
         # 1. Clear MQTT Prompt
-        print("
-🧹 [CLEANUP] Would you like to blow away the MQTT topic tree? (y/N)")
+        print() # Separate line for newline
+        print('🧹 [CLEANUP] Would you like to blow away the MQTT topic tree? (y/N)') # Changed to single quotes
         print("   (Automatically cancelling in 10 seconds...)")
         rlist, _, _ = select.select([sys.stdin], [], [], 10)
         if rlist and sys.stdin.readline().strip().lower() == 'y':
@@ -135,8 +98,8 @@ class UnifiedOrchestrator:
             print("⏭️ Skipping MQTT cleanup.")
 
         # 2. Delete Cache Prompt
-        print("
-🧹 [CLEANUP] Would you like to blow away all cached items? (y/N)")
+        print() # Separate line for newline
+        print('🧹 [CLEANUP] Would you like to blow away all cached items? (y/N)') # Changed to single quotes
         print("   (Automatically cancelling in 10 seconds...)")
         rlist, _, _ = select.select([sys.stdin], [], [], 10)
         if rlist and sys.stdin.readline().strip().lower() == 'y':
@@ -152,12 +115,15 @@ class UnifiedOrchestrator:
 
     def execute(self):
         # 1. Optional Flame Test
-        flamegraph_html = self.generate_flamegraph_report()
+        self.run_flame_test_prompt()
 
         # 2. run_test.py
-        print(f"
-🔬 Starting Unified Test Runner...")
+        print(f"🔬 Starting Unified Test Runner...")
         test_dirs = glob.glob(os.path.join(self.project_root, "oa*", "Tests"))
+        # Add the oaGuiElements tests specifically
+        gui_elements_tests_dir = os.path.join(self.project_root, "oaGuiElements", "Tests")
+        if os.path.exists(gui_elements_tests_dir):
+            test_dirs.append(gui_elements_tests_dir)
         legacy_tests = os.path.join(self.project_root, 'tests')
         if os.path.exists(legacy_tests):
             test_dirs.append(legacy_tests)
@@ -166,20 +132,16 @@ class UnifiedOrchestrator:
         runner.run(test_dirs, top_level_dir=self.project_root)
 
         # 3. collate_data.py
-        print(f"
-📊 Collating extra report data...")
+        print(f"📊 Collating extra report data...")
         extra_tabs = collate_extra_tabs(self.project_root)
-        extra_tabs['flamegraph'] = flamegraph_html
 
         # 4. run_report_builder.py (Generate JSON and HTML via generate_html.py)
-        print(f"
-📝 Generating unified reports...")
+        print(f"📝 Generating unified reports...")
         generator = ReportGenerator(self.html_path, self.json_path, self.timestamp)
         generator.generate_json(self.summary, self.test_results)
         generator.generate_html(self.summary, self.test_results, extra_tabs)
 
-        print(f"
-✅ Reports generated:")
+        print(f"✅ Reports generated:")
         print(f"   - JSON: {self.json_path}")
         print(f"   - HTML: {self.html_path}")
 

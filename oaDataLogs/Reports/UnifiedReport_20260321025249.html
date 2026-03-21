@@ -66,7 +66,7 @@
 <body>
     <div class="header">
         <h1>OPEN-AIR Unified Intelligence Report</h1>
-        <p style="color: #666; margin: 5px 0 0 0;">Generated on: <strong>2026-03-21 01:46:17</strong></p>
+        <p style="color: #666; margin: 5px 0 0 0;">Generated on: <strong>2026-03-21 02:52:49</strong></p>
     </div>
 
     <div class="container">
@@ -76,15 +76,16 @@
             <button class="tab-btn" onclick="openTab(event, 'ChangeLogs')">Change Logs</button>
             <button class="tab-btn" onclick="openTab(event, 'ErrorLogs')">Error Logs</button>
             <button class="tab-btn" onclick="openTab(event, 'RunLogs')">Application Run Logs</button>
+            <button class="tab-btn" onclick="openTab(event, 'FlameGraph')">Flame Graph</button>
         </div>
 
         <!-- TAB 1: Test Results -->
         <div id="TestResults" class="tab-content active">
             <div class="summary-box">
-                <div class="stat total">Total: 81</div>
-                <div class="stat passed">Passed: 77</div>
-                <div class="stat failed">Failed: 4</div>
-                <div class="stat errors">Errors: 0</div>
+                <div class="stat total">Total: 104</div>
+                <div class="stat passed">Passed: 95</div>
+                <div class="stat failed">Failed: 6</div>
+                <div class="stat errors">Errors: 3</div>
             </div>
 
             <table>
@@ -107,35 +108,85 @@
                 <tbody>
                     
                 <tr>
-                    <td class="test-name">test_broadcast_notifies_engine (oaGuiElements.Tests.test_knob.TestKnobWidget.test_broadcast_notifies_engine)</td>
+                    <td class="test-name">oaComMQTT.Tests.test_mqtt_logic (unittest.loader._FailedTest.oaComMQTT.Tests.test_mqtt_logic)</td>
                     <td class="description">No description provided.</td>
-                    <td class="description">Test broadcast notifies engine crashed. Error: can only concatenate str (not "int") to str<br><small><i>At case.py:715 in fail -> raise self.failureException(msg)</i></small></td>
-                    <td class="status-failed">Failed</td>
-                    <td>0.0085s</td>
+                    <td class="description">Failed to import test module: oaComMQTT.Tests.test_mqtt_logic
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/anthony/Documents/OPEN-AIR/oaComMQTT/Tests/test_mqtt_logic.py", line 8, in <module>
+    from ClearMQTT import MQTTSweeper
+ModuleNotFoundError: No module named 'ClearMQTT'
+<br><small><i>At loader.py:33 in testFailure -> raise self._exception</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0001s</td>
                 </tr>
             
                 <tr>
                     <td class="test-name">test_creation (oaGuiElements.Tests.test_flux_plotter.TestFluxPlotter.test_creation)</td>
-                    <td class="description">No description provided.</td>
-                    <td class="description">Test creation crashed. Error: unknown option "-context"<br><small><i>At case.py:715 in fail -> raise self.failureException(msg)</i></small></td>
-                    <td class="status-failed">Failed</td>
-                    <td>0.0070s</td>
+                    <td class="description">Verify that FluxPlotter initializes without error.</td>
+                    <td class="description">unknown option "-context"<br><small><i>At __init__.py:2648 in __init__ -> self.tk.call(</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0069s</td>
                 </tr>
             
                 <tr>
-                    <td class="test-name">test_creation (oaGuiElements.Tests.test_graphing.TestFluxPlotter.test_creation)</td>
-                    <td class="description">No description provided.</td>
-                    <td class="description">Test creation crashed. Error: unknown option "-context"<br><small><i>At case.py:715 in fail -> raise self.failureException(msg)</i></small></td>
-                    <td class="status-failed">Failed</td>
-                    <td>0.0070s</td>
+                    <td class="test-name">test_creation (oaGuiElements.Tests.test_flux_plotter.TestFluxPlotter.test_creation)</td>
+                    <td class="description">Verify that FluxPlotter initializes without error.</td>
+                    <td class="description">unknown option "-context"<br><small><i>At __init__.py:2648 in __init__ -> self.tk.call(</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0067s</td>
                 </tr>
             
                 <tr>
-                    <td class="test-name">test_creation_via_builder (oaGuiElements.Tests.test_knob.TestKnobWidget.test_creation_via_builder)</td>
-                    <td class="description">No description provided.</td>
-                    <td class="description">Test creation via builder crashed. Error: can only concatenate str (not "int") to str<br><small><i>At case.py:715 in fail -> raise self.failureException(msg)</i></small></td>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_meter_bar.TestMeterBar.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderMeterBarCreator creates a SmartMeter.</td>
+                    <td class="description">None is not an instance of <class 'oaGuiElements.Core.metering.meter_bar.smart_meter.SmartMeter'><br><small><i>At case.py:715 in fail -> raise self.failureException(msg)</i></small></td>
                     <td class="status-failed">Failed</td>
-                    <td>0.0084s</td>
+                    <td>0.0096s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_meter_bar.TestMeterBar.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderMeterBarCreator creates a SmartMeter.</td>
+                    <td class="description">None is not an instance of <class 'oaGuiElements.Core.metering.meter_bar.smart_meter.SmartMeter'><br><small><i>At case.py:715 in fail -> raise self.failureException(msg)</i></small></td>
+                    <td class="status-failed">Failed</td>
+                    <td>0.0083s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_meter_needle.TestMeterNeedle.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderMeterNeedleCreator creates a needle meter.</td>
+                    <td class="description"><tkinter.Canvas object .!canvas> is not an instance of <class 'tkinter.Frame'><br><small><i>At case.py:715 in fail -> raise self.failureException(msg)</i></small></td>
+                    <td class="status-failed">Failed</td>
+                    <td>0.0111s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_meter_needle.TestMeterNeedle.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderMeterNeedleCreator creates a needle meter.</td>
+                    <td class="description"><tkinter.Canvas object .!canvas> is not an instance of <class 'tkinter.Frame'><br><small><i>At case.py:715 in fail -> raise self.failureException(msg)</i></small></td>
+                    <td class="status-failed">Failed</td>
+                    <td>0.0110s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_toggle_registration (oaGuiElements.Tests.test_button_toggle.TestButtonToggle.test_toggle_registration)</td>
+                    <td class="description">Goal: Verify that the toggle button registers itself with the mirror engine.</td>
+                    <td class="description"><tkinter.BooleanVar object at 0x778f8837f590> != None<br><small><i>At case.py:878 in _baseAssertEqual -> raise self.failureException(msg)</i></small></td>
+                    <td class="status-failed">Failed</td>
+                    <td>0.0116s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_toggle_registration (oaGuiElements.Tests.test_button_toggle.TestButtonToggle.test_toggle_registration)</td>
+                    <td class="description">Goal: Verify that the toggle button registers itself with the mirror engine.</td>
+                    <td class="description"><tkinter.BooleanVar object at 0x778f66754620> != None<br><small><i>At case.py:878 in _baseAssertEqual -> raise self.failureException(msg)</i></small></td>
+                    <td class="status-failed">Failed</td>
+                    <td>0.0075s</td>
                 </tr>
             
                 <tr>
@@ -143,7 +194,15 @@
                     <td class="description">Goal: Verify that the ActuatorButton initializes correctly.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0923s</td>
+                    <td>0.0862s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_actuator_button_initialization (oaGuiElements.Tests.test_button_actuator.TestButtonActuator.test_actuator_button_initialization)</td>
+                    <td class="description">Goal: Verify that the ActuatorButton initializes correctly.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0098s</td>
                 </tr>
             
                 <tr>
@@ -167,7 +226,7 @@
                     <td class="description">Test that GUI changes trigger MQTT publication.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0107s</td>
+                    <td>0.0109s</td>
                 </tr>
             
                 <tr>
@@ -175,7 +234,15 @@
                     <td class="description">Goal: Verify that BuilderButtonActuatorCreator creates an ActuatorButton.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0078s</td>
+                    <td>0.0083s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_button_actuator.TestButtonActuator.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderButtonActuatorCreator creates an ActuatorButton.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0077s</td>
                 </tr>
             
                 <tr>
@@ -183,68 +250,148 @@
                     <td class="description">Goal: Verify that BuilderButtonToggleCreator creates a toggle button widget.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0098s</td>
+                    <td>0.0109s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_button_toggle.TestButtonToggle.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderButtonToggleCreator creates a toggle button widget.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0080s</td>
                 </tr>
             
                 <tr>
                     <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_button_toggler.TestButtonToggler.test_builder_creator_make)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that BuilderButtonTogglerCreator creates a toggler group.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0092s</td>
+                    <td>0.0115s</td>
                 </tr>
             
                 <tr>
-                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_button_trapezoid_toggler.TestButtonTrapezoidToggler.test_builder_creator_make)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_button_toggler.TestButtonToggler.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderButtonTogglerCreator creates a toggler group.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
                     <td>0.0104s</td>
                 </tr>
             
                 <tr>
-                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_button_wink.TestButtonWink.test_builder_creator_make)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_button_trapezoid_toggler.TestButtonTrapezoidToggler.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderButtonTrapezoidTogglerCreator creates a group.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0166s</td>
+                    <td>0.0108s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_button_trapezoid_toggler.TestButtonTrapezoidToggler.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderButtonTrapezoidTogglerCreator creates a group.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0097s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_button_wink.TestButtonWink.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderButtonWinkCreator creates a wink button.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0161s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_button_wink.TestButtonWink.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderButtonWinkCreator creates a wink button.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0148s</td>
                 </tr>
             
                 <tr>
                     <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_button_wink_toggler.TestButtonWinkToggler.test_builder_creator_make)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that BuilderButtonWinkTogglerCreator creates a group.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0197s</td>
+                    <td>0.0198s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_button_wink_toggler.TestButtonWinkToggler.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderButtonWinkTogglerCreator creates a group.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0232s</td>
                 </tr>
             
                 <tr>
                     <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_fader.TestFader.test_builder_creator_make)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that BuilderFaderCreator creates a fader frame.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0101s</td>
+                    <td>0.0097s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_fader.TestFader.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderFaderCreator creates a fader frame.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0106s</td>
                 </tr>
             
                 <tr>
                     <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_fader_bar_graph.TestFaderBarGraph.test_builder_creator_make)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that BuilderFaderBarGraphCreator creates a fader bar graph frame.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0253s</td>
+                    <td>0.0085s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_fader_bar_graph.TestFaderBarGraph.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderFaderBarGraphCreator creates a fader bar graph frame.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0088s</td>
                 </tr>
             
                 <tr>
                     <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_fader_dual.TestFaderDual.test_builder_creator_make)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that BuilderFaderDualCreator creates a dual fader frame.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0078s</td>
+                    <td>0.0084s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_fader_dual.TestFaderDual.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderFaderDualCreator creates a dual fader frame.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0077s</td>
                 </tr>
             
                 <tr>
                     <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_fader_horizontal.TestFaderHorizontal.test_builder_creator_make)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that BuilderFaderHorizontalCreator creates a horizontal fader frame.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0076s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_fader_horizontal.TestFaderHorizontal.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderFaderHorizontalCreator creates a horizontal fader frame.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0082s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_fader_linear_travelling_potentiometer.TestFaderLinearTravellingPotentiometer.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderFaderLinearTravellingPotentiometerCreator creates an LTP frame.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
                     <td>0.0077s</td>
@@ -252,34 +399,10 @@
             
                 <tr>
                     <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_fader_linear_travelling_potentiometer.TestFaderLinearTravellingPotentiometer.test_builder_creator_make)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that BuilderFaderLinearTravellingPotentiometerCreator creates an LTP frame.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
                     <td>0.0075s</td>
-                </tr>
-            
-                <tr>
-                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_json_tree.TestJsonTree.test_builder_creator_make)</td>
-                    <td class="description">No description provided.</td>
-                    <td class="description"></td>
-                    <td class="status-passed">Passed</td>
-                    <td>0.0119s</td>
-                </tr>
-            
-                <tr>
-                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_meter_bar.TestMeterBar.test_builder_creator_make)</td>
-                    <td class="description">No description provided.</td>
-                    <td class="description"></td>
-                    <td class="status-passed">Passed</td>
-                    <td>0.0080s</td>
-                </tr>
-            
-                <tr>
-                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.test_meter_needle.TestMeterNeedle.test_builder_creator_make)</td>
-                    <td class="description">No description provided.</td>
-                    <td class="description"></td>
-                    <td class="status-passed">Passed</td>
-                    <td>0.0136s</td>
                 </tr>
             
                 <tr>
@@ -287,7 +410,7 @@
                     <td class="description">Test topic calculation logic.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0102s</td>
+                    <td>0.0101s</td>
                 </tr>
             
                 <tr>
@@ -303,15 +426,7 @@
                     <td class="description">Test that the default config.ini is created with expected sections.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0018s</td>
-                </tr>
-            
-                <tr>
-                    <td class="test-name">test_creation (oaGuiElements.Tests.test_radar.TestRadarWidget.test_creation)</td>
-                    <td class="description">No description provided.</td>
-                    <td class="description"></td>
-                    <td class="status-passed">Passed</td>
-                    <td>0.0092s</td>
+                    <td>0.0004s</td>
                 </tr>
             
                 <tr>
@@ -324,7 +439,15 @@
             
                 <tr>
                     <td class="test-name">test_dual_fader_initialization (oaGuiElements.Tests.test_fader_dual.TestFaderDual.test_dual_fader_initialization)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that CustomDualFaderFrame initializes correctly.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0072s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_dual_fader_initialization (oaGuiElements.Tests.test_fader_dual.TestFaderDual.test_dual_fader_initialization)</td>
+                    <td class="description">Goal: Verify that CustomDualFaderFrame initializes correctly.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
                     <td>0.0068s</td>
@@ -332,18 +455,34 @@
             
                 <tr>
                     <td class="test-name">test_fader_bar_graph_initialization (oaGuiElements.Tests.test_fader_bar_graph.TestFaderBarGraph.test_fader_bar_graph_initialization)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that FaderWithBarGraphFrame initializes correctly.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0077s</td>
+                    <td>0.0239s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_fader_bar_graph_initialization (oaGuiElements.Tests.test_fader_bar_graph.TestFaderBarGraph.test_fader_bar_graph_initialization)</td>
+                    <td class="description">Goal: Verify that FaderWithBarGraphFrame initializes correctly.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0075s</td>
                 </tr>
             
                 <tr>
                     <td class="test-name">test_fader_initialization (oaGuiElements.Tests.test_fader.TestFader.test_fader_initialization)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that CustomFaderFrame initializes correctly.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0097s</td>
+                    <td>0.0094s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_fader_initialization (oaGuiElements.Tests.test_fader.TestFader.test_fader_initialization)</td>
+                    <td class="description">Goal: Verify that CustomFaderFrame initializes correctly.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0089s</td>
                 </tr>
             
                 <tr>
@@ -351,7 +490,7 @@
                     <td class="description">Load and parse JSON configuration files.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0013s</td>
+                    <td>0.0012s</td>
                 </tr>
             
                 <tr>
@@ -367,7 +506,7 @@
                     <td class="description">Goal: Verify that external updates are correctly cached, persisted, and broadcast.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0013s</td>
+                    <td>0.0014s</td>
                 </tr>
             
                 <tr>
@@ -375,15 +514,31 @@
                     <td class="description">Test handling of incoming OSC messages.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0015s</td>
+                    <td>0.0014s</td>
                 </tr>
             
                 <tr>
                     <td class="test-name">test_horizontal_fader_initialization (oaGuiElements.Tests.test_fader_horizontal.TestFaderHorizontal.test_horizontal_fader_initialization)</td>
+                    <td class="description">Goal: Verify that CustomHorizontalFaderFrame initializes correctly.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0066s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_horizontal_fader_initialization (oaGuiElements.Tests.test_fader_horizontal.TestFaderHorizontal.test_horizontal_fader_initialization)</td>
+                    <td class="description">Goal: Verify that CustomHorizontalFaderFrame initializes correctly.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0070s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_import (oaGuiElements.Tests.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_import)</td>
                     <td class="description">No description provided.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0068s</td>
+                    <td>0.0000s</td>
                 </tr>
             
                 <tr>
@@ -415,7 +570,7 @@
                     <td class="description">Goal: Verify that SNMPManager initializes with correct default state.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0003s</td>
+                    <td>0.0002s</td>
                 </tr>
             
                 <tr>
@@ -431,15 +586,7 @@
                     <td class="description">Goal: Verify that the fleet correctly notifies and persists new inventory data.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0020s</td>
-                </tr>
-            
-                <tr>
-                    <td class="test-name">test_json_tree_initialization (oaGuiElements.Tests.test_json_tree.TestJsonTree.test_json_tree_initialization)</td>
-                    <td class="description">No description provided.</td>
-                    <td class="description"></td>
-                    <td class="status-passed">Passed</td>
-                    <td>0.0112s</td>
+                    <td>0.0013s</td>
                 </tr>
             
                 <tr>
@@ -460,34 +607,66 @@
             
                 <tr>
                     <td class="test-name">test_ltp_initialization (oaGuiElements.Tests.test_fader_linear_travelling_potentiometer.TestFaderLinearTravellingPotentiometer.test_ltp_initialization)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that CustomLTPFrame initializes correctly.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
                     <td>0.0069s</td>
                 </tr>
             
                 <tr>
-                    <td class="test-name">test_make_text_label (oaGuiElements.Tests.test_text_label.TestTextLabel.test_make_text_label)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="test-name">test_ltp_initialization (oaGuiElements.Tests.test_fader_linear_travelling_potentiometer.TestFaderLinearTravellingPotentiometer.test_ltp_initialization)</td>
+                    <td class="description">Goal: Verify that CustomLTPFrame initializes correctly.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0107s</td>
+                    <td>0.0068s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_make_text_label (oaGuiElements.Tests.test_text_label.TestTextLabel.test_make_text_label)</td>
+                    <td class="description">Goal: Verify that BuilderTextLabelCreator creates a label widget (canvas).</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0095s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_make_text_label (oaGuiElements.Tests.test_text_label.TestTextLabel.test_make_text_label)</td>
+                    <td class="description">Goal: Verify that BuilderTextLabelCreator creates a label widget (canvas).</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0091s</td>
                 </tr>
             
                 <tr>
                     <td class="test-name">test_make_text_table (oaGuiElements.Tests.test_text_table.TestTextTable.test_make_text_table)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that BuilderTextTableCreator creates a table widget.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0147s</td>
+                    <td>0.0119s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_make_text_table (oaGuiElements.Tests.test_text_table.TestTextTable.test_make_text_table)</td>
+                    <td class="description">Goal: Verify that BuilderTextTableCreator creates a table widget.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0112s</td>
                 </tr>
             
                 <tr>
                     <td class="test-name">test_make_text_value_box (oaGuiElements.Tests.test_text_value_box.TestTextValueBox.test_make_text_value_box)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that BuilderTextValueBoxCreator creates a value box widget.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0136s</td>
+                    <td>0.0115s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_make_text_value_box (oaGuiElements.Tests.test_text_value_box.TestTextValueBox.test_make_text_value_box)</td>
+                    <td class="description">Goal: Verify that BuilderTextValueBoxCreator creates a value box widget.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0099s</td>
                 </tr>
             
                 <tr>
@@ -495,7 +674,7 @@
                     <td class="description">Transform a flat list of marker data into a nested Zone/Group dictionary.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0001s</td>
+                    <td>0.0002s</td>
                 </tr>
             
                 <tr>
@@ -512,14 +691,6 @@
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
                     <td>0.0005s</td>
-                </tr>
-            
-                <tr>
-                    <td class="test-name">test_mqtt_sweeper_on_message_filter (oaComMQTT.Tests.test_mqtt_logic.TestMQTTLogic.test_mqtt_sweeper_on_message_filter)</td>
-                    <td class="description">Verify on_message correctly filters for the configured base topic.</td>
-                    <td class="description"></td>
-                    <td class="status-passed">Passed</td>
-                    <td>0.0003s</td>
                 </tr>
             
                 <tr>
@@ -551,7 +722,7 @@
                     <td class="description">Test widget registration and topic binding.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0091s</td>
+                    <td>0.0092s</td>
                 </tr>
             
                 <tr>
@@ -559,7 +730,7 @@
                     <td class="description">Goal: Verify that functional widgets are passed to the batch engine.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0088s</td>
+                    <td>0.0074s</td>
                 </tr>
             
                 <tr>
@@ -567,7 +738,15 @@
                     <td class="description">Goal: Verify that AsyncGridRenderer initializes with a builder and batch engine.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0085s</td>
+                    <td>0.0101s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_replace_backslash (oaGuiElements.Tests.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_replace_backslash)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
                 </tr>
             
                 <tr>
@@ -583,7 +762,7 @@
                     <td class="description">Test that stop() correctly resets the running flag.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0010s</td>
+                    <td>0.0012s</td>
                 </tr>
             
                 <tr>
@@ -591,7 +770,7 @@
                     <td class="description">Test that ProtocolRouter is a singleton.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0002s</td>
+                    <td>0.0003s</td>
                 </tr>
             
                 <tr>
@@ -620,10 +799,18 @@
             
                 <tr>
                     <td class="test-name">test_smart_meter_initialization (oaGuiElements.Tests.test_meter_bar.TestMeterBar.test_smart_meter_initialization)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that SmartMeter initializes correctly.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0072s</td>
+                    <td>0.0081s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_smart_meter_initialization (oaGuiElements.Tests.test_meter_bar.TestMeterBar.test_smart_meter_initialization)</td>
+                    <td class="description">Goal: Verify that SmartMeter initializes correctly.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0078s</td>
                 </tr>
             
                 <tr>
@@ -631,7 +818,7 @@
                     <td class="description">Goal: Verify that start_heartbeat spawns a thread and sets running flag.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0005s</td>
+                    <td>0.0003s</td>
                 </tr>
             
                 <tr>
@@ -639,7 +826,7 @@
                     <td class="description">Goal: Verify that starting the manager sets the running flag.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0355s</td>
+                    <td>0.0363s</td>
                 </tr>
             
                 <tr>
@@ -647,15 +834,23 @@
                     <td class="description">Validate that UI changes correctly update the master data state.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0005s</td>
+                    <td>0.0007s</td>
                 </tr>
             
                 <tr>
                     <td class="test-name">test_static_make (oaGuiElements.Tests.test_text_label.TestTextLabel.test_static_make)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify the static make method.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0083s</td>
+                    <td>0.0082s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_static_make (oaGuiElements.Tests.test_text_label.TestTextLabel.test_static_make)</td>
+                    <td class="description">Goal: Verify the static make method.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0090s</td>
                 </tr>
             
                 <tr>
@@ -663,7 +858,7 @@
                     <td class="description">Goal: Verify that starting the MIDI manager broadcasts active ports to the system state.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0011s</td>
+                    <td>0.0010s</td>
                 </tr>
             
                 <tr>
@@ -671,7 +866,7 @@
                     <td class="description">Test exact topic subscription.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0001s</td>
+                    <td>0.0002s</td>
                 </tr>
             
                 <tr>
@@ -679,39 +874,39 @@
                     <td class="description">Test wildcard topic subscription.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0002s</td>
-                </tr>
-            
-                <tr>
-                    <td class="test-name">test_toggle_registration (oaGuiElements.Tests.test_button_toggle.TestButtonToggle.test_toggle_registration)</td>
-                    <td class="description">Goal: Verify that the toggle button registers itself with the mirror engine.</td>
-                    <td class="description"></td>
-                    <td class="status-passed">Passed</td>
-                    <td>0.0117s</td>
-                </tr>
-            
-                <tr>
-                    <td class="test-name">test_topic_calculator_calculate (oaComMQTT.Tests.test_mqtt_logic.TestMQTTLogic.test_topic_calculator_calculate)</td>
-                    <td class="description">Validate string manipulation for dynamic MQTT topics based on UI hierarchy.</td>
-                    <td class="description"></td>
-                    <td class="status-passed">Passed</td>
-                    <td>0.0000s</td>
+                    <td>0.0001s</td>
                 </tr>
             
                 <tr>
                     <td class="test-name">test_trapezoid_button_initialization (oaGuiElements.Tests.test_button_trapezoid.TestButtonTrapezoid.test_trapezoid_button_initialization)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that TrapezoidButton initializes correctly.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0126s</td>
+                    <td>0.0159s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_trapezoid_button_initialization (oaGuiElements.Tests.test_button_trapezoid.TestButtonTrapezoid.test_trapezoid_button_initialization)</td>
+                    <td class="description">Goal: Verify that TrapezoidButton initializes correctly.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0136s</td>
                 </tr>
             
                 <tr>
                     <td class="test-name">test_trapezoid_registration (oaGuiElements.Tests.test_button_trapezoid.TestButtonTrapezoid.test_trapezoid_registration)</td>
-                    <td class="description">No description provided.</td>
+                    <td class="description">Goal: Verify that TrapezoidButton registers with state mirror engine.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0116s</td>
+                    <td>0.0110s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_trapezoid_registration (oaGuiElements.Tests.test_button_trapezoid.TestButtonTrapezoid.test_trapezoid_registration)</td>
+                    <td class="description">Goal: Verify that TrapezoidButton registers with state mirror engine.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0114s</td>
                 </tr>
             
                 <tr>
@@ -743,7 +938,7 @@
                     <td class="description">Check thread-safe command queue initialization.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0006s</td>
+                    <td>0.0004s</td>
                 </tr>
             
                 <tr>
@@ -751,7 +946,7 @@
                     <td class="description">Confirm the backend library loads and returns available hardware identifiers.</td>
                     <td class="description"></td>
                     <td class="status-passed">Passed</td>
-                    <td>0.0220s</td>
+                    <td>0.0221s</td>
                 </tr>
             
                 </tbody>
@@ -770,30 +965,17 @@
 
         <!-- TAB 4: Error Logs -->
         <div id="ErrorLogs" class="tab-content">
-            <h3>Error Log Browser</h3>
-        <div class="log-entry error-log">
-            <div class="log-header">
-                <span class="log-filename">errors_20260321_0145.log</span>
-                <span class="log-time">2026-03-21 01:45:27</span>
-            </div>
-            <pre class="log-content">014525.855 | WARNING  | CORE | SYSTEM     | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
-</pre>
-        </div>
-        
+            <h3>No Error Logs Found</h3><p>Everything seems to be running correctly. Error logs will appear here if a crash occurs.</p>
         </div>
 
         <!-- TAB 5: Application Run Logs -->
         <div id="RunLogs" class="tab-content">
-            <h3>Application Run Log Browser</h3>
-        <div class="log-entry">
-            <div class="log-header">
-                <span class="log-filename">Application_20260321_0145.log</span>
-                <span class="log-time">2026-03-21 01:46:17</span>
-            </div>
-            <pre class="log-content">014615.297 | DEBUG    | CORE | SYSTEM     | oaWatchdog.Managers.watchdog | 🐕💓🐕 [WATCHDOG] Heartbeat 5
-</pre>
+            <h3>No Application Run Logs Found</h3><p>Application logs will appear here after the system is launched.</p>
         </div>
-        
+
+        <!-- TAB 6: Flame Graph -->
+        <div id="FlameGraph" class="tab-content">
+            No FlameGraph data available.
         </div>
     </div>
 </body>

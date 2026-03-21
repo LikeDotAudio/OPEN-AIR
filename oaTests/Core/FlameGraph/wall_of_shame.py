@@ -18,7 +18,7 @@ def generate_wall_of_shame(stats_list, ps):
     shame_lines = ["--- PERFORMANCE WALL OF SHAME (TOP OFFENDERS) ---", ""]
     
     for title, sort_key in categories:
-        shame_lines.append(f"
+        shame_lines.append("CATEGORY 1: BLOCKING / HEAVY PATHS (Cumulative Time)")
 {title}") # Use f-string with newline as intended
         # INCREASED TO 50 ITEMS PER CATEGORY
         by_metric = sorted(stats_list, key=sort_key, reverse=True)[:50]

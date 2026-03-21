@@ -4,9 +4,10 @@ import time
 import glob
 import webbrowser
 import select
+import subprocess
 from datetime import datetime
 
-# Ensure project root is in sys.path
+# Ensure project root is in sys.path for module resolution
 project_root = os.getcwd()
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
@@ -40,6 +41,7 @@ class UnifiedOrchestrator:
         }
 
     def _record_result(self, test, status, message="", cause="", duration=0):
+        """Callback for TestRunner to log results into the internal summary."""
         self.summary["total"] += 1
         if status == "passed": self.summary["passed"] += 1
         elif status == "failed": self.summary["failed"] += 1
@@ -47,7 +49,8 @@ class UnifiedOrchestrator:
         elif status == "skipped": self.summary["skipped"] += 1
 
         description = getattr(test, "_testMethodDoc", "") or "No description provided."
-        description = description.strip().replace(" " + chr(10), "<br>") # Explicitly handle newline
+        # Ensure newlines in docstrings render as HTML breaks
+        description = description.strip().replace("\n", "<br>")
 
         self.test_results.append({
             "classname": test.__class__.__name__,
@@ -56,86 +59,59 @@ class UnifiedOrchestrator:
             "message": message,
             "cause": cause,
             "description": description,
-            "duration": f"{duration:.4f}s"        })
+            "duration": f"{duration:.4f}s"
+        })
 
-    def run_flame_test_prompt(self):
-        print() # Separate line for newline
-        print('🔥 [FLAME TEST] Would you like to run a flame test? (y/N)') # Changed to single quotes
+    def _run_timed_prompt(self, label, question, script_path):
+        """Helper to handle the repetitive timeout-based prompts."""
+        print(f"\n{label} {question} (y/N)")
         print("   (Automatically cancelling in 10 seconds...)")
         
-        # Non-blocking input with timeout
         rlist, _, _ = select.select([sys.stdin], [], [], 10)
         if rlist:
             response = sys.stdin.readline().strip().lower()
             if response == 'y':
-                print("🚀 Launching Flame Test suite...")
+                print(f"🚀 Launching {os.path.basename(script_path)}...")
                 try:
-                    import subprocess
-                    flame_path = os.path.join(self.project_root, "oaTests", "Core", "FlameGraph", "wall_of_shame.py")
-                    subprocess.run([sys.executable, flame_path])
+                    subprocess.run([sys.executable, script_path])
                 except Exception as e:
-                    print(f"⚠️ Flame test failed: {e}")
+                    print(f"⚠️ Task failed: {e}")
             else:
-                print("⏭️ Skipping Flame Test.")
+                print("⏭️ Skipping task.")
         else:
-            print("⏰ Timeout reached. Skipping Flame Test.")
-
-    def run_cleanup_prompts(self):
-        # 1. Clear MQTT Prompt
-        print() # Separate line for newline
-        print('🧹 [CLEANUP] Would you like to blow away the MQTT topic tree? (y/N)') # Changed to single quotes
-        print("   (Automatically cancelling in 10 seconds...)")
-        rlist, _, _ = select.select([sys.stdin], [], [], 10)
-        if rlist and sys.stdin.readline().strip().lower() == 'y':
-            print("🚀 Running ClearMQTT...")
-            try:
-                import subprocess
-                mqtt_path = os.path.join(self.project_root, "oaTests", "Core", "CleanupUtilities", "ClearMQTT.py")
-                subprocess.run([sys.executable, mqtt_path])
-            except Exception as e:
-                print(f"⚠️ MQTT cleanup failed: {e}")
-        else:
-            print("⏭️ Skipping MQTT cleanup.")
-
-        # 2. Delete Cache Prompt
-        print() # Separate line for newline
-        print('🧹 [CLEANUP] Would you like to blow away all cached items? (y/N)') # Changed to single quotes
-        print("   (Automatically cancelling in 10 seconds...)")
-        rlist, _, _ = select.select([sys.stdin], [], [], 10)
-        if rlist and sys.stdin.readline().strip().lower() == 'y':
-            print("🚀 Running DeleteCache...")
-            try:
-                import subprocess
-                cache_path = os.path.join(self.project_root, "oaTests", "Core", "CleanupUtilities", "DeleteCache.py")
-                subprocess.run([sys.executable, cache_path])
-            except Exception as e:
-                print(f"⚠️ Cache deletion failed: {e}")
-        else:
-            print("⏭️ Skipping cache deletion.")
+            print("⏰ Timeout reached. Skipping task.")
 
     def execute(self):
         # 1. Optional Flame Test
-        self.run_flame_test_prompt()
+        flame_path = os.path.join(self.project_root, "oaTests", "Core", "FlameGraph", "wall_of_shame.py")
+        self._run_timed_prompt("🔥 [FLAME TEST]", "Would you like to run a flame test?", flame_path)
 
-        # 2. run_test.py
-        print(f"🔬 Starting Unified Test Runner...")
-        test_dirs = glob.glob(os.path.join(self.project_root, "oa*", "Tests"))
-        # Add the oaGuiElements tests specifically
-        gui_elements_tests_dir = os.path.join(self.project_root, "oaGuiElements", "Tests")
-        if os.path.exists(gui_elements_tests_dir):
-            test_dirs.append(gui_elements_tests_dir)
-        legacy_tests = os.path.join(self.project_root, 'tests')
-        if os.path.exists(legacy_tests):
-            test_dirs.append(legacy_tests)
+        # 2. run_test.py (IMPORT & DISCOVERY FIX)
+        print(f"\n🔬 Starting Deep Test Discovery...")
+        
+        # We start discovery from the project root. This ensures that when unittest
+        # finds a file in oaGuiElements/Tests/Knobs/knob, the import 'oaGuiElements'
+        # can be resolved correctly because the search started at the root.
+        
+        # We'll print the directories that contain tests just for your visibility
+        test_files = glob.glob(os.path.join(self.project_root, "**", "test_*.py"), recursive=True)
+        found_dirs = sorted(list(set([os.path.dirname(f) for f in test_files])))
+        
+        print(f"📂 Discovery identified {len(found_dirs)} sub-folders containing test files.")
+        for d in found_dirs:
+            rel = os.path.relpath(d, self.project_root)
+            print(f"   - {rel}")
 
+        # Execute the runner. 
+        # By passing [self.project_root], we give unittest a valid 'importable' start point.
         runner = TestRunner(self._record_result)
-        runner.run(test_dirs, top_level_dir=self.project_root)
+        runner.run([self.project_root], top_level_dir=self.project_root)
 
         # 3. collate_data.py
-        print(f"📊 Collating extra report data...")
+        print(f"\n📊 Collating extra report data...")
         extra_tabs = collate_extra_tabs(self.project_root)
 
-        # 4. run_report_builder.py (Generate JSON and HTML via generate_html.py)
+        # 4. run_report_builder.py
         print(f"📝 Generating unified reports...")
         generator = ReportGenerator(self.html_path, self.json_path, self.timestamp)
         generator.generate_json(self.summary, self.test_results)
@@ -149,10 +125,14 @@ class UnifiedOrchestrator:
         clear_logs.cleanup_logs(self.html_path)
 
         # 6. Optional Cleanup Prompts
-        self.run_cleanup_prompts()
+        mqtt_path = os.path.join(self.project_root, "oaTests", "Core", "CleanupUtilities", "ClearMQTT.py")
+        cache_path = os.path.join(self.project_root, "oaTests", "Core", "CleanupUtilities", "DeleteCache.py")
+        
+        self._run_timed_prompt("🧹 [CLEANUP]", "Would you like to blow away the MQTT topic tree?", mqtt_path)
+        self._run_timed_prompt("🧹 [CLEANUP]", "Would you like to blow away all cached items?", cache_path)
 
-        # 7. Celebrate
-        print("🎉 MISSION ACCOMPLISHED: Unified Intelligence Report is ready.")
+        # 7. Finalize
+        print("\n🎉 MISSION ACCOMPLISHED: Unified Intelligence Report is ready.")
         
         # 8. Auto-Open
         print(f"🌐 Launching report...")

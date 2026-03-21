@@ -1,6 +1,0 @@
-Process ID,Name,CPU %,Memory MB,Status
-101,App A,12.5,256,Running
-102,App B,5.1,128,Running
-103,Service X,0.8,64,Idle
-104,Agent Y,2.2,96,Running
-105,Log Processor,1.0,300,Running

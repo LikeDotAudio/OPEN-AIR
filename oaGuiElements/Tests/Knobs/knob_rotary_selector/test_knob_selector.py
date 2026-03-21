@@ -17,12 +17,9 @@ def load_sample_config():
 class TestRotarySelector(unittest.TestCase):
 
     def setUp(self):
-        # Patch tkinter.Tk before creating any widgets
-        self.tk_patch = patch('tkinter.Tk', MagicMock)
-        self.mock_tk = self.tk_patch.start()
-
         # Create a root window for the tests
         self.root = tk.Tk()
+        self.root.withdraw()  # Hide the window
 
         self.config_data = load_sample_config()
         
@@ -122,9 +119,9 @@ class TestRotarySelector(unittest.TestCase):
 
 
     def tearDown(self):
-        # Stop the patchers
+        # Stop the patcher
         self.theme_patch.stop()
-        self.tk_patch.stop()
+        self.root.destroy()
 
 if __name__ == '__main__':
     # This allows running the test script directly

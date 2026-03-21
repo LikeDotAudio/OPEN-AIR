@@ -1,19 +1,48 @@
 import os
 import sys
-import unittest
 import time
-import json
-import xml.etree.ElementTree as ET
+import glob
 import webbrowser
+import select
 from datetime import datetime
+import threading
 
-class UnifiedTestRunner:
-    def __init__(self, html_report_path, json_report_path):
-        self.html_report_path = html_report_path
-        self.json_report_path = json_report_path
+# Ensure project root is in sys.path
+project_root = os.getcwd()
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
+# Import modular components using requested filenames
+from oaTests.Core.Report_Builder.run_test import TestRunner
+from oaTests.Core.Report_Builder.collate_data import collate_extra_tabs
+from oaTests.Core.Report_Builder.run_report_builder import ReportGenerator
+from oaTests.Core.Report_Builder import clear_logs
+
+# Imports for FlameGraph Generation
+from oaTests.Core.FlameGraph.capture import MultiThreadProfiler
+from oaTests.Core.FlameGraph.make_graph import generate_flamegraph_with_flameprof
+from oaTests.Core.FlameGraph.handle_events import process_stats_for_ui, generate_table_rows
+from oaTests.Core.FlameGraph.wall_of_shame import generate_wall_of_shame
+from oaTests.Core.FlameGraph.Wall_of_pitty import generate_wall_of_pitty
+from oaTests.Core.FlameGraph.make_html import generate_final_html
+from oaConfiguration.FileReaders.config_reader import Config
+app_constants = Config.get_instance()
+
+class UnifiedOrchestrator:
+    def __init__(self):
+        self.project_root = os.getcwd()
+        self.timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.file_timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        
+        self.reports_dir = os.path.join(self.project_root, 'oaDataLogs', 'Reports')
+        os.makedirs(self.reports_dir, exist_ok=True)
+        
+        self.html_path = os.path.join(self.reports_dir, f'UnifiedReport_{self.file_timestamp}.html')
+        self.json_path = os.path.join(self.reports_dir, f'UnifiedReport_{self.file_timestamp}.json')
+        
         self.test_results = []
         self.summary = {
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "timestamp": self.timestamp,
             "total": 0,
             "passed": 0,
             "failed": 0,
@@ -21,206 +50,152 @@ class UnifiedTestRunner:
             "skipped": 0
         }
 
-    def run(self, search_dirs, top_level_dir=None):
-        loader = unittest.TestLoader()
-        suites = []
-        for d in search_dirs:
-            if os.path.exists(d):
-                print(f"🔍 Discovering tests in: {d}")
-                try:
-                    suites.append(loader.discover(d, pattern="test_*.py", top_level_dir=top_level_dir))
-                except ImportError as e:
-                    print(f"❌ ImportError in {d}: {e}")
-        
-        full_suite = unittest.TestSuite(suites)
-        
-        class ReportingResult(unittest.TestResult):
-            def __init__(self, runner):
-                super().__init__()
-                self.runner = runner
-                self.start_times = {}
-
-            def startTest(self, test):
-                self.start_times[test] = time.time()
-                super().startTest(test)
-
-            def addSuccess(self, test):
-                duration = time.time() - self.start_times.get(test, time.time())
-                self.runner._record(test, "passed", duration=duration)
-                super().addSuccess(test)
-
-            def addFailure(self, test, err):
-                duration = time.time() - self.start_times.get(test, time.time())
-                self.runner._record(test, "failed", message=str(err[1]), duration=duration)
-                super().addFailure(test, err)
-
-            def addError(self, test, err):
-                duration = time.time() - self.start_times.get(test, time.time())
-                self.runner._record(test, "error", message=str(err[1]), duration=duration)
-                super().addError(test, err)
-
-            def addSkip(self, test, reason):
-                duration = time.time() - self.start_times.get(test, time.time())
-                self.runner._record(test, "skipped", message=reason, duration=duration)
-                super().addSkip(test, reason)
-
-        result = ReportingResult(self)
-        full_suite.run(result)
-        self._generate_reports()
-
-    def _record(self, test, status, message="", duration=0):
+    def _record_result(self, test, status, message="", cause="", duration=0):
         self.summary["total"] += 1
         if status == "passed": self.summary["passed"] += 1
         elif status == "failed": self.summary["failed"] += 1
         elif status == "error": self.summary["errors"] += 1
         elif status == "skipped": self.summary["skipped"] += 1
 
-        # ⚡ EXTRACTION: Get the docstring to use as "Goal & Achievement"
         description = getattr(test, "_testMethodDoc", "") or "No description provided."
-        description = description.strip().replace("\n", "<br>")
+        description = description.strip().replace("
+", "<br>")
 
         self.test_results.append({
             "classname": test.__class__.__name__,
             "name": str(test),
             "status": status,
             "message": message,
+            "cause": cause,
             "description": description,
             "duration": f"{duration:.4f}s"
         })
 
-    def _generate_reports(self):
-        # 1. JSON Report
-        with open(self.json_report_path, "w") as f:
-            json.dump({"summary": self.summary, "details": self.test_results}, f, indent=4)
-        
-        # 2. HTML Report
-        html_template = """
-<!DOCTYPE html>
-<html>
-<head>
-    <title>OPEN-AIR Unified Test Report</title>
-    <style>
-        body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; background: #f4f7f6; color: #333; }}
-        .container {{ max-width: 1200px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }}
-        h1 {{ color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-top: 0; }}
-        .summary-box {{ display: flex; gap: 20px; margin-bottom: 30px; }}
-        .stat {{ flex: 1; padding: 20px; border-radius: 6px; text-align: center; color: white; font-weight: bold; font-size: 1.1em; }}
-        .total {{ background: #34495e; }}
-        .passed {{ background: #27ae60; }}
-        .failed {{ background: #e74c3c; }}
-        .errors {{ background: #f39c12; }}
-        table {{ width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }}
-        th, td {{ border: 1px solid #eee; padding: 15px; text-align: left; vertical-align: top; overflow: hidden; word-wrap: break-word; }}
-        th {{ background-color: #fafafa; color: #666; font-weight: 600; text-transform: uppercase; font-size: 0.85em; letter-spacing: 0.05em; }}
-        tr:nth-child(even) {{ background-color: #fcfcfc; }}
-        tr:hover {{ background-color: #f8f9fa; }}
-        .status-passed {{ color: #27ae60; font-weight: bold; }}
-        .status-failed {{ color: #e74c3c; font-weight: bold; }}
-        .status-error {{ color: #f39c12; font-weight: bold; }}
-        .description {{ font-size: 0.9em; color: #555; line-height: 1.4; }}
-        .test-name {{ font-family: 'Courier New', Courier, monospace; font-size: 0.85em; color: #2980b9; }}
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>OPEN-AIR Unified Test Report</h1>
-        <p style="color: #999; margin-bottom: 25px;">Generated on: <strong>{timestamp}</strong></p>
-        
-        <div class="summary-box">
-            <div class="stat total">Total: {total}</div>
-            <div class="stat passed">Passed: {passed}</div>
-            <div class="stat failed">Failed: {failed}</div>
-            <div class="stat errors">Errors: {errors}</div>
-        </div>
+    def generate_flamegraph_report(self):
+        print("
+🔥 [FLAME TEST] Running flame test...")
+        try:
+            # A. Initialize and Install Profiler
+            mtp = MultiThreadProfiler()
+            mtp.install()
 
-        <table>
-            <colgroup>
-                <col style="width: 25%;">
-                <col style="width: 50%;">
-                <col style="width: 12%;">
-                <col style="width: 13%;">
-            </colgroup>
-            <thead>
-                <tr>
-                    <th>Test Case</th>
-                    <th>Goal & Achievement</th>
-                    <th>Status</th>
-                    <th>Duration</th>
-                </tr>
-            </thead>
-            <tbody>
-                {table_rows}
-            </tbody>
-        </table>
-    </div>
-</body>
-</html>
-"""
-        table_rows = []
-        
-        # Sort results: errors and failures first, warnings next, then the rest
-        def status_weight(status):
-            return {"error": 0, "failed": 1, "warning": 2}.get(status, 3)
+            # B. Launch the Application (in a thread)
+            import OpenAir
+            app_thread = threading.Thread(target=OpenAir.main)
+            app_thread.start()
+            app_thread.join(timeout=60) # Run for a max of 60 seconds
+
+            # C. Synthesize Intelligence
+            mtp.stop()
+            print("
+🛑 OpenAir closed or frozen. Synthesizing Intelligence Report...")
             
-        sorted_results = sorted(self.test_results, key=lambda x: (status_weight(x['status']), x['name']))
+            ps = mtp.get_stats()
+            
+            # D. Process Stats
+            stats_list = process_stats_for_ui(ps)
+            
+            # E. Generate Components
+            svg_content = generate_flamegraph_with_flameprof(ps, None) or "<!-- SVG Failed -->"
+            table_rows = generate_table_rows(stats_list)
+            wall_of_shame_text = generate_wall_of_shame(stats_list, ps)
+            wall_of_pitty_text = generate_wall_of_pitty(stats_list, ps)
+            
+            # Extract unique roots for the filter buttons
+            all_roots = sorted(list(set(r for s in stats_list for r in s['roots'])))
+            root_buttons = "".join([f'<button class="filter-btn active" id="btn-root-{l}" onclick="toggleRoot('{l}')">{l}</button>' for l in all_roots])
+            
+            # F. Assemble Final Report
+            return generate_final_html(
+                svg_content=svg_content,
+                table_rows=table_rows,
+                root_buttons=root_buttons,
+                wall_of_shame=wall_of_shame_text,
+                wall_of_pitty=wall_of_pitty_text
+            )
+        except Exception as e:
+            print(f"⚠️ Flame test failed: {e}")
+            return f"<html><body><h1>Flame test failed</h1><p>{e}</p></body></html>"
 
-        for r in sorted_results:
-            row = f"""
-                <tr>
-                    <td class="test-name">{r['name']}</td>
-                    <td class="description">{r['description']}</td>
-                    <td class="status-{r['status']}">{r['status'].capitalize()}</td>
-                    <td>{r['duration']}</td>
-                </tr>
-            """
-            table_rows.append(row)
+    def run_cleanup_prompts(self):
+        # 1. Clear MQTT Prompt
+        print("
+🧹 [CLEANUP] Would you like to blow away the MQTT topic tree? (y/N)")
+        print("   (Automatically cancelling in 10 seconds...)")
+        rlist, _, _ = select.select([sys.stdin], [], [], 10)
+        if rlist and sys.stdin.readline().strip().lower() == 'y':
+            print("🚀 Running ClearMQTT...")
+            try:
+                import subprocess
+                mqtt_path = os.path.join(self.project_root, "oaTests", "Core", "CleanupUtilities", "ClearMQTT.py")
+                subprocess.run([sys.executable, mqtt_path])
+            except Exception as e:
+                print(f"⚠️ MQTT cleanup failed: {e}")
+        else:
+            print("⏭️ Skipping MQTT cleanup.")
 
-        html_content = html_template.format(
-            timestamp=self.summary["timestamp"],
-            total=self.summary["total"],
-            passed=self.summary["passed"],
-            failed=self.summary["failed"],
-            errors=self.summary["errors"],
-            table_rows="".join(table_rows)
-        )
+        # 2. Delete Cache Prompt
+        print("
+🧹 [CLEANUP] Would you like to blow away all cached items? (y/N)")
+        print("   (Automatically cancelling in 10 seconds...)")
+        rlist, _, _ = select.select([sys.stdin], [], [], 10)
+        if rlist and sys.stdin.readline().strip().lower() == 'y':
+            print("🚀 Running DeleteCache...")
+            try:
+                import subprocess
+                cache_path = os.path.join(self.project_root, "oaTests", "Core", "CleanupUtilities", "DeleteCache.py")
+                subprocess.run([sys.executable, cache_path])
+            except Exception as e:
+                print(f"⚠️ Cache deletion failed: {e}")
+        else:
+            print("⏭️ Skipping cache deletion.")
+
+    def execute(self):
+        # 1. Optional Flame Test
+        flamegraph_html = self.generate_flamegraph_report()
+
+        # 2. run_test.py
+        print(f"
+🔬 Starting Unified Test Runner...")
+        test_dirs = glob.glob(os.path.join(self.project_root, "oa*", "Tests"))
+        legacy_tests = os.path.join(self.project_root, 'tests')
+        if os.path.exists(legacy_tests):
+            test_dirs.append(legacy_tests)
+
+        runner = TestRunner(self._record_result)
+        runner.run(test_dirs, top_level_dir=self.project_root)
+
+        # 3. collate_data.py
+        print(f"
+📊 Collating extra report data...")
+        extra_tabs = collate_extra_tabs(self.project_root)
+        extra_tabs['flamegraph'] = flamegraph_html
+
+        # 4. run_report_builder.py (Generate JSON and HTML via generate_html.py)
+        print(f"
+📝 Generating unified reports...")
+        generator = ReportGenerator(self.html_path, self.json_path, self.timestamp)
+        generator.generate_json(self.summary, self.test_results)
+        generator.generate_html(self.summary, self.test_results, extra_tabs)
+
+        print(f"
+✅ Reports generated:")
+        print(f"   - JSON: {self.json_path}")
+        print(f"   - HTML: {self.html_path}")
+
+        # 5. clear_logs.py
+        clear_logs.cleanup_logs(self.html_path)
+
+        # 6. Optional Cleanup Prompts
+        self.run_cleanup_prompts()
+
+        # 7. Celebrate
+        print("🎉 MISSION ACCOMPLISHED: Unified Intelligence Report is ready.")
         
-        with open(self.html_report_path, "w") as f:
-            f.write(html_content)
-        
-        print(f"\n✅ Reports generated:")
-        print(f"   - JSON: {self.json_report_path}")
-        print(f"   - HTML: {self.html_report_path}")
-
-def main():
-    # --- GLOBAL PATH ANCHOR ---
-    project_root = os.getcwd()
-    if project_root not in sys.path:
-        sys.path.insert(0, project_root)
-
-    # ⚡ DATA RELOCATION: Reports now kept in oaDataLogs/testing
-    data_dir = os.path.join(project_root, 'oaDataLogs', 'testing')
-    os.makedirs(data_dir, exist_ok=True)
-
-    html_path = os.path.join(data_dir, 'test_execution_report.html')
-    json_path = os.path.join(data_dir, 'test_results_report.json')
-
-    # Discover all standardized test directories
-    import glob
-    test_dirs = glob.glob(os.path.join(project_root, "oa*", "Tests"))
-
-    # Add the legacy/global 'tests' directory if it exists
-    legacy_tests = os.path.join(project_root, 'tests')
-    if os.path.exists(legacy_tests):
-        test_dirs.append(legacy_tests)
-
-    print(f"🔬 Discovered {len(test_dirs)} test directories.")
-
-    runner = UnifiedTestRunner(html_path, json_path)
-    runner.run(test_dirs, top_level_dir=project_root)
-
-    # 🌐 AUTO-OPEN: Open the report in the default browser
-    print(f"🌐 Launching report...")
-    webbrowser.open('file://' + os.path.realpath(html_path))
+        # 8. Auto-Open
+        print(f"🌐 Launching report...")
+        webbrowser.open('file://' + os.path.realpath(self.html_path))
 
 if __name__ == "__main__":
-    main()
+    orchestrator = UnifiedOrchestrator()
+    orchestrator.execute()

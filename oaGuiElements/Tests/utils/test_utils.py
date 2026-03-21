@@ -1,0 +1,21 @@
+import json
+import os
+from pathlib import Path
+
+def load_sample_config(component_path, entry_key=None):
+    """
+    Loads a sample.json from the specified component path.
+    If entry_key is provided, returns that specific entry.
+    Otherwise returns the first non-README entry found.
+    """
+    sample_file = Path(component_path) / 'sample.json'
+    if not sample_file.exists():
+        raise FileNotFoundError(f'Sample file not found: {sample_file}')
+    with open(sample_file, 'r') as f:
+        data = json.load(f)
+    if entry_key and entry_key in data:
+        return data[entry_key]
+    for k, v in data.items():
+        if not k.startswith('_'):
+            return v
+    return data

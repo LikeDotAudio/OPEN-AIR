@@ -1,0 +1,9 @@
+def create_knob_state(config):
+    """Initializes the state for a Rotary Knob."""
+    return {
+        "start_y": None,
+        "start_value": None,
+        "dims": {"w": config["width"], "h": config["height"]},
+        "_resize_timer": None,
+        "secondary_current": config["secondary_color"]
+    }

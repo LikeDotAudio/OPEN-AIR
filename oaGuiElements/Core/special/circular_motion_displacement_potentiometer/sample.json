@@ -1,0 +1,551 @@
+{
+  "circular_motion_displacement_potentiometer_Example": {
+    "type": "_CMDP",
+    "label_active": "CMDP 1",
+    "path": "audio/cmdp/1",
+    "layout": {
+      "sticky": "nsew",
+      "weight_y": 1
+    },
+    "group_configs": [
+      {
+        "name": "Drums",
+        "color": "#FF4444",
+        "visible": true,
+        "mute": false
+      },
+      {
+        "name": "Bass",
+        "color": "#FFFF44",
+        "visible": true,
+        "mute": false
+      },
+      {
+        "name": "Guitars",
+        "color": "#44FF44",
+        "visible": true,
+        "mute": false
+      },
+      {
+        "name": "Keys",
+        "color": "#44FFFF",
+        "visible": true,
+        "mute": false
+      },
+      {
+        "name": "Vocals",
+        "color": "#4444FF",
+        "visible": true,
+        "mute": false
+      },
+      {
+        "name": "Strings",
+        "color": "#FF44FF",
+        "visible": true,
+        "mute": false
+      },
+      {
+        "name": "Brass",
+        "color": "#FF4488",
+        "visible": true,
+        "mute": false
+      },
+      {
+        "name": "FX",
+        "color": "#888888",
+        "visible": true,
+        "mute": false
+      }
+    ],
+    "channels": [
+      {
+        "id": 1,
+        "name": "Kick In",
+        "group": "Drums",
+        "angle": 0,
+        "level": 12,
+        "depth": 84,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 2,
+        "name": "Kick Out",
+        "group": "Drums",
+        "angle": 7.5,
+        "level": 67,
+        "depth": 23,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 3,
+        "name": "Snare T",
+        "group": "Drums",
+        "angle": 15,
+        "level": 45,
+        "depth": 91,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 4,
+        "name": "Snare B",
+        "group": "Drums",
+        "angle": 22.5,
+        "level": 88,
+        "depth": 5,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 5,
+        "name": "Hat",
+        "group": "Drums",
+        "angle": 30,
+        "level": 34,
+        "depth": 76,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 6,
+        "name": "Ride",
+        "group": "Drums",
+        "angle": 37.5,
+        "level": 56,
+        "depth": 42,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 7,
+        "name": "Tom 1",
+        "group": "Drums",
+        "angle": 45,
+        "level": 21,
+        "depth": 68,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 8,
+        "name": "Tom 2",
+        "group": "Drums",
+        "angle": -62.3,
+        "level": 79,
+        "depth": 14,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 9,
+        "name": "Tom 3",
+        "group": "Drums",
+        "angle": 60,
+        "level": 93,
+        "depth": 37,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 10,
+        "name": "Floor 1",
+        "group": "Drums",
+        "angle": 67.5,
+        "level": 18,
+        "depth": 59,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 11,
+        "name": "Floor 2",
+        "group": "Drums",
+        "angle": 75,
+        "level": 44,
+        "depth": 82,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 12,
+        "name": "Gong",
+        "group": "Drums",
+        "angle": 82.5,
+        "level": 72,
+        "depth": 29,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 13,
+        "name": "Bass DI",
+        "group": "Bass",
+        "angle": 90,
+        "level": 5,
+        "depth": 95,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 14,
+        "name": "Bass Mic",
+        "group": "Bass",
+        "angle": 97.5,
+        "level": 61,
+        "depth": 48,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 15,
+        "name": "Bass Syn",
+        "group": "Bass",
+        "angle": 105,
+        "level": 39,
+        "depth": 17,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 16,
+        "name": "Upright",
+        "group": "Bass",
+        "angle": 112.5,
+        "level": 84,
+        "depth": 71,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 17,
+        "name": "Sub",
+        "group": "Bass",
+        "angle": 120,
+        "level": 27,
+        "depth": 53,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 18,
+        "name": "Bass FX",
+        "group": "Bass",
+        "angle": 127.5,
+        "level": 52,
+        "depth": 89,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 19,
+        "name": "Gtr 1 L",
+        "group": "Guitars",
+        "angle": 135,
+        "level": 16,
+        "depth": 32,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 20,
+        "name": "Gtr 1 R",
+        "group": "Guitars",
+        "angle": 142.5,
+        "level": 75,
+        "depth": 64,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 21,
+        "name": "Gtr 2 L",
+        "group": "Guitars",
+        "angle": 150,
+        "level": 98,
+        "depth": 11,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 22,
+        "name": "Gtr 2 R",
+        "group": "Guitars",
+        "angle": 157.5,
+        "level": 41,
+        "depth": 78,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 23,
+        "name": "Ac Gtr",
+        "group": "Guitars",
+        "angle": 165,
+        "level": 63,
+        "depth": 46,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 24,
+        "name": "12 Str",
+        "group": "Guitars",
+        "angle": 172.5,
+        "level": 29,
+        "depth": 92,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 25,
+        "name": "Piano L",
+        "group": "Keys",
+        "angle": -168,
+        "level": 87,
+        "depth": 25,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 26,
+        "name": "Piano R",
+        "group": "Keys",
+        "angle": -160.5,
+        "level": 14,
+        "depth": 57,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 27,
+        "name": "Organ L",
+        "group": "Keys",
+        "angle": -153,
+        "level": 49,
+        "depth": 81,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 28,
+        "name": "Organ R",
+        "group": "Keys",
+        "angle": -145.5,
+        "level": 71,
+        "depth": 38,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 29,
+        "name": "Synth 1",
+        "group": "Keys",
+        "angle": -138,
+        "level": 33,
+        "depth": 69,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 30,
+        "name": "Synth 2",
+        "group": "Keys",
+        "angle": -130.5,
+        "level": 58,
+        "depth": 12,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 31,
+        "name": "Lead Vox",
+        "group": "Vocals",
+        "angle": 225,
+        "level": 95,
+        "depth": 44,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 32,
+        "name": "Double",
+        "group": "Vocals",
+        "angle": 232.5,
+        "level": 22,
+        "depth": 73,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 33,
+        "name": "BGV 1",
+        "group": "Vocals",
+        "angle": 240,
+        "level": 47,
+        "depth": 19,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 34,
+        "name": "BGV 2",
+        "group": "Vocals",
+        "angle": 247.5,
+        "level": 81,
+        "depth": 62,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 35,
+        "name": "BGV 3",
+        "group": "Vocals",
+        "angle": 255,
+        "level": 66,
+        "depth": 35,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 36,
+        "name": "BGV 4",
+        "group": "Vocals",
+        "angle": 262.5,
+        "level": 10,
+        "depth": 87,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 37,
+        "name": "Violin 1",
+        "group": "Strings",
+        "angle": 270,
+        "level": 54,
+        "depth": 51,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 38,
+        "name": "Violin 2",
+        "group": "Strings",
+        "angle": 277.5,
+        "level": 77,
+        "depth": 28,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 39,
+        "name": "Viola",
+        "group": "Strings",
+        "angle": 285,
+        "level": 0,
+        "depth": 40.8,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 40,
+        "name": "Cello",
+        "group": "Strings",
+        "angle": -50.8,
+        "level": 89,
+        "depth": 6,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 41,
+        "name": "Trumpet",
+        "group": "Brass",
+        "angle": -137.3,
+        "level": 23,
+        "depth": 18,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 42,
+        "name": "Sax",
+        "group": "Brass",
+        "angle": 307.5,
+        "level": 69,
+        "depth": 15,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 43,
+        "name": "Trombone",
+        "group": "Brass",
+        "angle": -44.2,
+        "level": 25,
+        "depth": 49,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 44,
+        "name": "Tuba",
+        "group": "Brass",
+        "angle": 322.5,
+        "level": 82,
+        "depth": 83,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 45,
+        "name": "Rev 1",
+        "group": "FX",
+        "angle": 330,
+        "level": 19,
+        "depth": 36,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 46,
+        "name": "Rev 2",
+        "group": "FX",
+        "angle": 337.5,
+        "level": 46,
+        "depth": 61,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 47,
+        "name": "Delay",
+        "group": "FX",
+        "angle": 345,
+        "level": 73,
+        "depth": 24,
+        "visible": true,
+        "mute": false
+      },
+      {
+        "id": 48,
+        "name": "Echo",
+        "group": "FX",
+        "angle": 352.5,
+        "level": 38,
+        "depth": 97,
+        "visible": true,
+        "mute": false
+      }
+    ],
+    "cosmetics": {
+      "colors": {
+        "primary": "#FF9900",
+        "secondary": "#444444",
+        "background": "#2b2b2b"
+      }
+    }
+  },
+  "_README": "This is an enhanced sample configuration demonstrating full instantiation capabilities."
+}

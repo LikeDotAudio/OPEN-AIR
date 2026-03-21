@@ -1,6 +1,6 @@
 {
     "summary": {
-        "timestamp": "2026-03-21 03:31:39",
+        "timestamp": "2026-03-21 03:54:44",
         "total": 44,
         "passed": 43,
         "failed": 0,
@@ -24,7 +24,7 @@
             "message": "",
             "cause": "",
             "description": "Test that stop() correctly resets the running flag.",
-            "duration": "0.0007s"
+            "duration": "0.0008s"
         },
         {
             "classname": "TestProtocolRouter",
@@ -60,7 +60,7 @@
             "message": "",
             "cause": "",
             "description": "Test multiple subscribers for the same topic.",
-            "duration": "0.0004s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestMqttSubscriberRouter",
@@ -78,7 +78,7 @@
             "message": "",
             "cause": "",
             "description": "Test wildcard topic subscription.",
-            "duration": "0.0002s"
+            "duration": "0.0001s"
         },
         {
             "classname": "TestMidiManager",
@@ -87,7 +87,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that starting the MIDI manager broadcasts active ports to the system state.",
-            "duration": "0.0016s"
+            "duration": "0.0011s"
         },
         {
             "classname": "TestOSCManager",
@@ -141,7 +141,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that SNMPManager initializes with correct default state.",
-            "duration": "0.0001s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestSNMPManager",
@@ -150,7 +150,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that starting the manager sets the running flag.",
-            "duration": "0.0368s"
+            "duration": "0.0387s"
         },
         {
             "classname": "TestVisaFleet",
@@ -159,7 +159,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that the fleet correctly notifies and persists new inventory data.",
-            "duration": "0.0016s"
+            "duration": "0.0017s"
         },
         {
             "classname": "TestVisaLogic",
@@ -195,7 +195,7 @@
             "message": "",
             "cause": "",
             "description": "Confirm the backend library loads and returns available hardware identifiers.",
-            "duration": "0.0217s"
+            "duration": "0.0205s"
         },
         {
             "classname": "TestConfigGenerator",
@@ -204,7 +204,7 @@
             "message": "",
             "cause": "",
             "description": "Test that the default config.ini is created with expected sections.",
-            "duration": "0.0005s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestConfigReader",
@@ -213,7 +213,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock ConfigParser content. OPERATE: Load. CHECK: Assert specific value.",
-            "duration": "0.0005s"
+            "duration": "0.0008s"
         },
         {
             "classname": "TestConfigReader",
@@ -267,7 +267,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that functional widgets are passed to the batch engine.",
-            "duration": "0.0855s"
+            "duration": "0.0892s"
         },
         {
             "classname": "TestAsyncGridRenderer",
@@ -276,7 +276,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that AsyncGridRenderer initializes with a builder and batch engine.",
-            "duration": "0.0079s"
+            "duration": "0.0070s"
         },
         {
             "classname": "TestUIAndData",
@@ -285,7 +285,7 @@
             "message": "",
             "cause": "",
             "description": "Load and parse JSON configuration files.",
-            "duration": "0.0010s"
+            "duration": "0.0008s"
         },
         {
             "classname": "TestUIAndData",
@@ -294,7 +294,7 @@
             "message": "",
             "cause": "",
             "description": "Recursively find valid UI definition files.",
-            "duration": "0.0003s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestUIAndData",
@@ -312,7 +312,7 @@
             "message": "",
             "cause": "",
             "description": "Validate that UI changes correctly update the master data state.",
-            "duration": "0.0005s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestStateMirrorEngine",
@@ -321,7 +321,7 @@
             "message": "",
             "cause": "",
             "description": "Test that GUI changes trigger MQTT publication.",
-            "duration": "0.0104s"
+            "duration": "0.0090s"
         },
         {
             "classname": "TestStateMirrorEngine",
@@ -330,7 +330,7 @@
             "message": "",
             "cause": "",
             "description": "Test topic calculation logic.",
-            "duration": "0.0088s"
+            "duration": "0.0130s"
         },
         {
             "classname": "TestStateMirrorEngine",
@@ -339,7 +339,7 @@
             "message": "",
             "cause": "",
             "description": "Test widget registration and topic binding.",
-            "duration": "0.0106s"
+            "duration": "0.0097s"
         },
         {
             "classname": "TestSplinker",
@@ -366,7 +366,7 @@
             "message": "",
             "cause": "",
             "description": "Test that ControlBroker is a singleton.",
-            "duration": "0.0002s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestStateCache",
@@ -375,7 +375,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that external updates are correctly cached, persisted, and broadcast.",
-            "duration": "0.0022s"
+            "duration": "0.0030s"
         },
         {
             "classname": "TestWatchdogFunctions",
@@ -393,7 +393,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that callbacks can be registered.",
-            "duration": "0.0001s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestWatchdogFunctions",
@@ -402,7 +402,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that start_heartbeat spawns a thread and sets running flag.",
-            "duration": "0.0004s"
+            "duration": "0.0007s"
         }
     ]
 }

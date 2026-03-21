@@ -39,8 +39,7 @@ class RotarySelectorSwitch(CustomKnobFrame):
         super().__init__(
             parent, variable, 
             config, state,
-            path, 
-            state_mirror_engine=state_mirror_engine, 
+            path=path, state_mirror_engine=state_mirror_engine,
             label_text=label_text,
             **kwargs
         )
@@ -209,7 +208,7 @@ class BuilderKnobRotarySelectorCreator:
         frame = RotarySelectorSwitch(
             parent_widget, variable=knob_value_var, 
             positions=positions, continuous=continuous, 
-            path,, state_mirror_engine=state_mirror_engine,
+            path=path, state_mirror_engine=state_mirror_engine,
             config=knob_config, state=knob_state,
             label_text=label,
             width=width, height=height,

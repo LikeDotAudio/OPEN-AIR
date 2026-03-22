@@ -124,7 +124,7 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
         orig_global_ts = self._last_global_broadcast_ts
         self._last_global_broadcast_ts = 0
         
-        for widget_id in list(self.widgets.keys()):
+        for widget_id in list(self.registered_widgets.keys()):
             widget_info = self._get_widget_info(widget_id)
             if not widget_info: continue
             

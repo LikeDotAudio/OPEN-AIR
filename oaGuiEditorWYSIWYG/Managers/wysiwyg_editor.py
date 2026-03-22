@@ -9,14 +9,14 @@ from tkinter import ttk
 import pathlib
 
 # Import Modular Components
-from .Core.event_bus import event_bus
-from .Core.state import state_manager
-from .Core.file_io_handler import FileIOHandler
-from .workspaces.interactive_layout import InteractiveLayout
-from .workspaces.json_editor import JsonEditor
-from .workspaces.tree_refactor import TreeRefactor
-from .workspaces.element_properties import ElementProperties
-from .grab_bag.grab_bag_view import GrabBagView
+from ..Core.event_bus import event_bus
+from ..Core.state import state_manager
+from ..Core.file_io_handler import FileIOHandler
+from ..workspaces.interactive_layout import InteractiveLayout
+from ..workspaces.json_editor import JsonEditor
+from ..workspaces.tree_refactor import TreeRefactor
+from ..workspaces.element_properties import ElementProperties
+from ..grab_bag.grab_bag_view import GrabBagView
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import initialize_logging, set_log_directory

@@ -7,7 +7,7 @@
 import tkinter as tk
 from tkinter import ttk
 import copy
-from .grab_bag_loader import GrabBagLoader
+from ..FileReaders.grab_bag_loader import GrabBagLoader
 from ..Core.event_bus import event_bus
 from ..Core.state import state_manager
 from oaLogging.Core.logger import initialize_logging, set_log_directory

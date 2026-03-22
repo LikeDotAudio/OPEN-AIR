@@ -9914,3 +9914,651 @@ AttributeError: 'StateMirrorEngine' object has no attribute 'widgets'
 103122.407 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 38
 103127.370 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 157
 103127.371 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 40
+103127.407 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 155
+103127.408 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 38
+103132.371 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 157
+103132.372 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 40
+103132.447 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 155
+103132.448 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 38
+103137.373 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 157
+103137.374 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 40
+103137.449 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 155
+103137.450 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 38
+103137.757 | INFO     | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🖱️👆🔘 [INPUT] Toggler '' button click: '1'
+103137.757 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ⚡🔄🔋 [STATE] Toggler '' new state: 1
+103137.757 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ✨🔄🎨 [SYNC] Updating styles for '' group. Selected: ['1']
+103137.769 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ⚡🔴📡 [EVENT] Toggler '' GUI change. Broadcasting to MQTT.
+103137.769 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] GUI on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.769 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.769 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.770 | SUCCESS  | UI   | DATA       | oaStateCache.Core.cache_save_engine | 💾✍️ [CACHE] Debounced Commit: 1 deltas saved.
+103137.770 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.771 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.771 | SUCCESS  | UI   | DATA       | oaStateCache.Core.state_cache | 🧠⚓ State synced: 100 variables.
+103137.771 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.771 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.822 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width 
+103137.822 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.822 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.822 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.824 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.824 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.826 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.826 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.770 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.770 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.770 | SUCCESS  | CORE | DATA       | oaStateCache.Core.state_cache | 🧠⚓ State synced: 100 variables.
+103137.771 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.771 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.771 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.771 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.771 | SUCCESS  | CORE | DATA       | oaStateCache.Core.cache_save_engine | 💾✍️ [CACHE] Debounced Commit: 1 deltas saved.
+103137.772 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.772 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.822 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width 
+103137.822 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.824 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.824 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.824 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.824 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.825 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.826 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.826 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.826 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.826 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.827 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.827 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103137.827 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 1
+103138.373 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.374 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.374 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.374 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.375 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.375 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.376 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.376 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.426 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width 
+103138.426 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.426 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.426 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.426 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.427 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.427 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.427 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.428 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.428 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.429 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.429 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.429 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.429 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.358 | INFO     | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🖱️👆🔘 [INPUT] Toggler '' button click: '2'
+103138.358 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ⚡🔄🔋 [STATE] Toggler '' new state: 2
+103138.358 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ✨🔄🎨 [SYNC] Updating styles for '' group. Selected: ['2']
+103138.371 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ⚡🔴📡 [EVENT] Toggler '' GUI change. Broadcasting to MQTT.
+103138.371 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] GUI on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.372 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.372 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.373 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.374 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.375 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.376 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.426 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width 
+103138.426 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.426 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.427 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.427 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.427 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.428 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103138.428 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width : 2
+103140.431 | SUCCESS  | CORE | DATA       | oaStateCache.Core.cache_save_engine | 💾✍️ [CACHE] Debounced Commit: 1 deltas saved.
+103140.428 | SUCCESS  | UI   | DATA       | oaStateCache.Core.cache_save_engine | 💾✍️ [CACHE] Debounced Commit: 1 deltas saved.
+103141.653 | DEBUG    | CORE | SYSTEM     | oaWatchdog.Managers.watchdog | 🐕💓🐕 [WATCHDOG] Heartbeat 10
+103142.375 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 158
+103142.375 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 41
+103142.375 | INFO     | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🆕 Tree Expansion (40 -> 41). Syncing MIB...
+103142.376 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🌐 Generating dynamic MIB content.
+103142.376 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 158
+103142.376 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 41
+103142.377 | SUCCESS  | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 📜 MIB Synchronized to /home/anthony/Documents/OPEN-AIR/oaDataSNMP/MIB/current.mib
+103142.450 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 156
+103142.451 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 39
+103147.378 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 158
+103147.378 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 41
+103147.451 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 156
+103147.452 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 39
+103151.180 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.180 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.180 | SUCCESS  | CORE | DATA       | oaStateCache.Core.state_cache | 🧠⚓ State synced: 8 variables.
+103151.180 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.181 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.181 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.181 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.181 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.181 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.231 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width
+103151.231 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.232 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.232 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.232 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.232 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.233 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.233 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.233 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.233 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.234 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.234 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.235 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.235 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.173 | INFO     | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🖱️👆🔘 [INPUT] Toggler '' button click: '2'
+103151.173 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ⚡🔄🔋 [STATE] Toggler '' new state: 2
+103151.173 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ✨🔄🎨 [SYNC] Updating styles for '' group. Selected: ['2']
+103151.178 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ⚡🔴📡 [EVENT] Toggler '' GUI change. Broadcasting to MQTT.
+103151.179 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] GUI on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.179 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.179 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.180 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.181 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.181 | SUCCESS  | UI   | DATA       | oaStateCache.Core.state_cache | 🧠⚓ State synced: 8 variables.
+103151.182 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.182 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.233 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width
+103151.233 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.233 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.234 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.234 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.235 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.235 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.235 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 2
+103151.893 | INFO     | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🖱️👆🔘 [INPUT] Toggler '' button click: '1'
+103151.893 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ⚡🔄🔋 [STATE] Toggler '' new state: 1
+103151.893 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ✨🔄🎨 [SYNC] Updating styles for '' group. Selected: ['1']
+103151.899 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ⚡🔴📡 [EVENT] Toggler '' GUI change. Broadcasting to MQTT.
+103151.899 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] GUI on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.899 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.899 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.900 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.901 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.901 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.901 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.951 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width
+103151.952 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.952 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.952 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.952 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.953 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.953 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.953 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.900 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.900 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.900 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.900 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.901 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.901 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.901 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.901 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.951 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width
+103151.951 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.952 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.952 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.952 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.952 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.953 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.953 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.953 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.953 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.953 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.953 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.953 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103151.953 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 1
+103152.382 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 159
+103152.383 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 42
+103152.384 | INFO     | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🆕 Tree Expansion (41 -> 42). Syncing MIB...
+103152.385 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🌐 Generating dynamic MIB content.
+103152.385 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 159
+103152.385 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 42
+103152.387 | SUCCESS  | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 📜 MIB Synchronized to /home/anthony/Documents/OPEN-AIR/oaDataSNMP/MIB/current.mib
+103152.534 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.534 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.534 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.535 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.535 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.535 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.535 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.535 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.585 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width
+103152.585 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.586 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.586 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.588 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.588 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.588 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.589 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.589 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.589 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.590 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.591 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.591 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.591 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103153.135 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.136 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.136 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.136 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.136 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.136 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.137 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.137 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.187 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width
+103153.187 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.187 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.187 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.187 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.187 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.188 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.188 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.188 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.188 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.188 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.188 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.188 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.188 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103152.452 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 157
+103152.453 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 40
+103152.525 | INFO     | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🖱️👆🔘 [INPUT] Toggler '' button click: '5'
+103152.525 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ⚡🔄🔋 [STATE] Toggler '' new state: 5
+103152.525 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ✨🔄🎨 [SYNC] Updating styles for '' group. Selected: ['5']
+103152.533 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ⚡🔴📡 [EVENT] Toggler '' GUI change. Broadcasting to MQTT.
+103152.533 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] GUI on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.533 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.534 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.534 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.535 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.535 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.535 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.585 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width
+103152.585 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.586 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.586 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.586 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.588 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.588 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103152.588 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 5
+103153.125 | INFO     | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🖱️👆🔘 [INPUT] Toggler '' button click: '3'
+103153.125 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ⚡🔄🔋 [STATE] Toggler '' new state: 3
+103153.125 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ✨🔄🎨 [SYNC] Updating styles for '' group. Selected: ['3']
+103153.133 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ⚡🔴📡 [EVENT] Toggler '' GUI change. Broadcasting to MQTT.
+103153.134 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] GUI on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.134 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.134 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.135 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.136 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.136 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.136 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.187 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width
+103153.187 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.187 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.187 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.187 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.188 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.188 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103153.188 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width: 3
+103154.273 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 👁️ UITrackingService: HIDDEN for None
+103154.274 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.274 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.282 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.tab | ▶️ _on_tab_change detected.
+103154.293 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.directory | 🏗️ [BUILDER] Starting build for: /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90/2_monitors/11_SNMP/0_Status
+103154.293 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 📂 Parsing directory listing via naming convention for: '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90/2_monitors/11_SNMP/0_Status'
+103154.293 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 🗺️ Parsed 'directory_listing' as fallback for '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90/2_monitors/11_SNMP/0_Status'
+103154.294 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 📡 UITrackingService: Tracking 'None'
+103154.294 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to DynamicGuiBuilder. BG: , Solid: None, Trans: True
+103154.296 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'None'
+103154.296 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.context_menu | 🍔🔽🖱️ [UI] Configuring right-click context menu.
+103154.296 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Starting destruction of current UI for 'None'
+103154.296 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Cleaning up context for .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame2.!notebook.!frame2.!dynamicguibuilder
+103154.375 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible
+103154.375 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.375 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.375 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.376 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re |   └─ 💥 Destroyed 0 widgets.
+103154.376 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.376 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.377 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.377 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.382 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 👁️ UITrackingService: VISIBLE for None
+103154.383 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.383 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.396 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Handing off to BatchBuilder for creation pass.
+103154.397 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Workers.async_grid_renderer | 🏗️ Rendering branch ''
+103154.408 | TRACE    | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨🧹✨ [BUILDER] Clearing panel background for 'None'
+103154.409 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Build sequence FINISHED for 'None'
+103154.434 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible
+103154.434 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.435 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.435 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.436 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.436 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.443 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.444 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.559 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_batch | 🧩 BatchBuilder: Clearing coordinate cache.
+103154.559 | DEBUG    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🏗️✨ [SYNC] Executing batch reslice for 0 widgets in 'None'
+103154.559 | INFO     | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🆗✅ [BUILDER] Reslice COMPLETE: 0 updated, 0 skipped (Jitter Filter) for 'None'.
+103154.651 | TRACE    | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨📐🔳 [LAYOUT] BG Sync BLOCKED for 'None': Rebuild in progress.
+103154.651 | INFO     | UI   | SYSTEM     | oaTranslator.Core.state_mirror_engine | 📢 [STATE] Announcing all widget states to MQTT...
+103154.651 | ERROR    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | 🖥️🎨 [UI] CRITICAL: Tkinter Exception:
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1967, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 861, in callit
+    func(*args)
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Managers/gui_re.py", line 90, in _wrap_settle
+    _final_settle()
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Managers/gui_re.py", line 81, in _final_settle
+    self._publish_initial_widget_states(self.config_data)
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Managers/gui_mqtt.py", line 119, in _publish_initial_widget_states
+    self.state_mirror_engine.announce_all_widgets()
+  File "/home/anthony/Documents/OPEN-AIR/oaTranslator/Core/state_mirror_engine.py", line 127, in announce_all_widgets
+    for widget_id in list(self.widgets.keys()):
+                          ^^^^^^^^^^^^
+AttributeError: 'StateMirrorEngine' object has no attribute 'widgets'
+
+103154.801 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_batch | 🧩 BatchBuilder: Clearing coordinate cache.
+103154.801 | DEBUG    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🏗️✨ [SYNC] Executing batch reslice for 0 widgets in 'None'
+103154.801 | INFO     | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🆗✅ [BUILDER] Reslice COMPLETE: 0 updated, 0 skipped (Jitter Filter) for 'None'.
+103154.883 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.883 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 📏 UITrackingService: Published geometry for None
+103154.884 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.933 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry
+103154.276 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.276 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.326 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible
+103154.327 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.328 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.331 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.332 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.333 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.377 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.377 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189914.2734935, 'tab_name': None}
+103154.383 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.383 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.436 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible
+103154.436 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.438 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.442 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.442 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.442 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.443 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.444 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189914.3825116, 'tab_name': None}
+103154.883 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.883 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.934 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry
+103154.934 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.935 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.936 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.936 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.937 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.937 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.937 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.934 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.934 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.935 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.935 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.935 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.937 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103154.938 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189914.8827345, 'tab_name': None}
+103156.939 | SUCCESS  | CORE | DATA       | oaStateCache.Core.cache_save_engine | 💾✍️ [CACHE] Debounced Commit: 3 deltas saved.
+103157.388 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 159
+103157.389 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 42
+103156.938 | SUCCESS  | UI   | DATA       | oaStateCache.Core.cache_save_engine | 💾✍️ [CACHE] Debounced Commit: 3 deltas saved.
+103157.453 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 157
+103157.454 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 40
+103159.029 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 👁️ UITrackingService: HIDDEN for None
+103159.032 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.033 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.034 | SUCCESS  | UI   | DATA       | oaStateCache.Core.state_cache | 🧠⚓ State synced: 25 variables.
+103159.034 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.tab | ▶️ _on_tab_change detected.
+103159.044 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.directory | 🏗️ [BUILDER] Starting build for: /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90/2_monitors/11_SNMP/3_MIB
+103159.045 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 📂 Parsing directory listing via naming convention for: '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90/2_monitors/11_SNMP/3_MIB'
+103159.045 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 🗺️ Parsed 'directory_listing' as fallback for '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90/2_monitors/11_SNMP/3_MIB'
+103159.046 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 📡 UITrackingService: Tracking 'None'
+103159.046 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to DynamicGuiBuilder. BG: , Solid: None, Trans: True
+103159.046 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'None'
+103159.046 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.context_menu | 🍔🔽🖱️ [UI] Configuring right-click context menu.
+103159.046 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Starting destruction of current UI for 'None'
+103159.046 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Cleaning up context for .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame2.!notebook.!frame3.!dynamicguibuilder
+103159.104 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible
+103159.104 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.104 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.104 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re |   └─ 💥 Destroyed 0 widgets.
+103159.105 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.105 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.106 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.106 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.106 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.109 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 👁️ UITrackingService: VISIBLE for None
+103159.111 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.111 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.120 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Handing off to BatchBuilder for creation pass.
+103159.120 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Workers.async_grid_renderer | 🏗️ Rendering branch ''
+103159.128 | TRACE    | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨🧹✨ [BUILDER] Clearing panel background for 'None'
+103159.128 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Build sequence FINISHED for 'None'
+103159.161 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible
+103159.161 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.161 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.162 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.162 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.162 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.163 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.163 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.278 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_batch | 🧩 BatchBuilder: Clearing coordinate cache.
+103159.278 | DEBUG    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🏗️✨ [SYNC] Executing batch reslice for 0 widgets in 'None'
+103159.278 | INFO     | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🆗✅ [BUILDER] Reslice COMPLETE: 0 updated, 0 skipped (Jitter Filter) for 'None'.
+103159.361 | TRACE    | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨📐🔳 [LAYOUT] BG Sync BLOCKED for 'None': Rebuild in progress.
+103159.361 | INFO     | UI   | SYSTEM     | oaTranslator.Core.state_mirror_engine | 📢 [STATE] Announcing all widget states to MQTT...
+103159.362 | ERROR    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | 🖥️🎨 [UI] CRITICAL: Tkinter Exception:
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1967, in __call__
+    return self.func(*args)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 861, in callit
+    func(*args)
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Managers/gui_re.py", line 90, in _wrap_settle
+    _final_settle()
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Managers/gui_re.py", line 81, in _final_settle
+    self._publish_initial_widget_states(self.config_data)
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Managers/gui_mqtt.py", line 119, in _publish_initial_widget_states
+    self.state_mirror_engine.announce_all_widgets()
+  File "/home/anthony/Documents/OPEN-AIR/oaTranslator/Core/state_mirror_engine.py", line 127, in announce_all_widgets
+    for widget_id in list(self.widgets.keys()):
+                          ^^^^^^^^^^^^
+AttributeError: 'StateMirrorEngine' object has no attribute 'widgets'
+
+103159.511 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_batch | 🧩 BatchBuilder: Clearing coordinate cache.
+103159.512 | DEBUG    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🏗️✨ [SYNC] Executing batch reslice for 0 widgets in 'None'
+103159.512 | INFO     | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🆗✅ [BUILDER] Reslice COMPLETE: 0 updated, 0 skipped (Jitter Filter) for 'None'.
+103159.610 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 📏 UITrackingService: Published geometry for None
+103159.610 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.610 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.032 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.033 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.034 | SUCCESS  | CORE | DATA       | oaStateCache.Core.state_cache | 🧠⚓ State synced: 25 variables.
+103159.084 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible
+103159.084 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.084 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.084 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.085 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.086 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.105 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.106 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.029776, 'tab_name': None}
+103159.110 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.111 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.162 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible
+103159.162 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.162 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.162 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.162 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.163 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.163 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.163 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.109774, 'tab_name': None}
+103159.611 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.611 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.661 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry
+103159.661 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.662 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.663 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.663 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.664 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.665 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.665 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.685 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 👁️ UITrackingService: HIDDEN for None
+103159.685 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.tab | ▶️ _on_tab_change detected.
+103159.686 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.685436, 'tab_name': None}
+103159.686 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.685436, 'tab_name': None}
+103159.687 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 👁️ UITrackingService: VISIBLE for None
+103159.687 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.687 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.689 | TRACE    | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨🧹✨ [BUILDER] Clearing panel background for 'None'
+103159.737 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible
+103159.738 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.738 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.738 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.738 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.739 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.759 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.760 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.839 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_batch | 🧩 BatchBuilder: Clearing coordinate cache.
+103159.839 | DEBUG    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🏗️✨ [SYNC] Executing batch reslice for 0 widgets in 'None'
+103159.839 | INFO     | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🆗✅ [BUILDER] Reslice COMPLETE: 0 updated, 0 skipped (Jitter Filter) for 'None'.
+103159.661 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry
+103159.661 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.662 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.662 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.664 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.664 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.665 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.665 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189919.6099494, 'tab_name': None}
+103159.706 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.685436, 'tab_name': None}
+103159.706 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189919.685436, 'tab_name': None}
+103159.707 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.707 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.739 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.739 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.758 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible
+103159.758 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.759 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.759 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.759 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103159.760 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189919.6871138, 'tab_name': None}
+103200.188 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.189 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.239 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry
+103200.239 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.240 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.240 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.240 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.241 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.241 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.241 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.187 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 📏 UITrackingService: Published geometry for None
+103200.188 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.189 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.240 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry
+103200.240 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.240 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.240 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.241 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.241 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.241 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103200.241 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189920.1874113, 'tab_name': None}
+103202.245 | SUCCESS  | CORE | DATA       | oaStateCache.Core.cache_save_engine | 💾✍️ [CACHE] Debounced Commit: 2 deltas saved.
+103202.390 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 159
+103202.390 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 42
+103202.510 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189922.5094845, 'tab_name': None}
+103202.510 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189922.5094845, 'tab_name': None}
+103202.511 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.511 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.561 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible
+103202.561 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.563 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.563 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.566 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.567 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.567 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.567 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103203.011 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.012 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.063 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.063 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.065 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry
+103203.065 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.065 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.065 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.066 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.067 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103202.242 | SUCCESS  | UI   | DATA       | oaStateCache.Core.cache_save_engine | 💾✍️ [CACHE] Debounced Commit: 2 deltas saved.
+103202.500 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 157
+103202.500 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 40
+103202.509 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 👁️ UITrackingService: HIDDEN for None
+103202.509 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.tab | ▶️ _on_tab_change detected.
+103202.510 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189922.5094845, 'tab_name': None}
+103202.510 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': False, 'ts': 1774189922.5094845, 'tab_name': None}
+103202.510 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 👁️ UITrackingService: VISIBLE for None
+103202.511 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.511 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.512 | TRACE    | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨🧹✨ [BUILDER] Clearing panel background for 'None'
+103202.561 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible
+103202.562 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.562 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.562 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.563 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.563 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.567 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.568 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/visible: {'visible': True, 'ts': 1774189922.5109057, 'tab_name': None}
+103202.662 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_batch | 🧩 BatchBuilder: Clearing coordinate cache.
+103202.662 | DEBUG    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🏗️✨ [SYNC] Executing batch reslice for 0 widgets in 'None'
+103202.662 | INFO     | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🆗✅ [BUILDER] Reslice COMPLETE: 0 updated, 0 skipped (Jitter Filter) for 'None'.
+103203.011 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 📏 UITrackingService: Published geometry for None
+103203.011 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.012 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.062 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry
+103203.062 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.062 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.063 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.063 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.065 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.066 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103203.066 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GENERIC_GUI_TOPIC/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 3840, 'y': 37, 'ts': 1774189923.0110781, 'tab_name': None}
+103205.068 | SUCCESS  | CORE | DATA       | oaStateCache.Core.cache_save_engine | 💾✍️ [CACHE] Debounced Commit: 2 deltas saved.
+103205.066 | SUCCESS  | UI   | DATA       | oaStateCache.Core.cache_save_engine | 💾✍️ [CACHE] Debounced Commit: 2 deltas saved.
+103207.392 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 159
+103207.393 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 42
+103207.501 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 157
+103207.502 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 40
+103212.394 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 159
+103212.395 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 42
+103212.502 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 157
+103212.503 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 40
+103217.395 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 159
+103217.396 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 42
+103217.505 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 157
+103217.505 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 40
+103222.397 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 159
+103222.398 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 42
+103222.508 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 157
+103222.509 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 40
+103227.400 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 159
+103227.401 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 42
+103227.509 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 157
+103227.510 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 40
+103231.656 | DEBUG    | CORE | SYSTEM     | oaWatchdog.Managers.watchdog | 🐕💓🐕 [WATCHDOG] Heartbeat 15
+103232.401 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 159
+103232.402 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 42
+103232.552 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 157
+103232.552 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 40
+103237.404 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 159
+103237.405 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 42
+103237.553 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 157
+103237.553 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 40
+103242.412 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 159
+103242.413 | DEBUG    | CORE | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 42
+103242.554 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🔍 [SNMP] Updating OID map. Cache size: 157
+103242.554 | DEBUG    | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | ✅ [SNMP] OID map updated. Active objects: 40

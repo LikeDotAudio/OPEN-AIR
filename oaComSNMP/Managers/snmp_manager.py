@@ -242,9 +242,11 @@ class SNMPManager:
                         # ⚡ ANTI-FEEDBACK SPEC: The Golden Rule for Transports
                         msg_type = payload.get("msg_type")
                         origin_source = payload.get("origin_source")
+                        is_settled = payload.get("is_settled", False)
                         
-                        # 1. If it's LINK_FEEDBACK, we don't push to SNMP (SNMP is a control surface)
-                        if msg_type == "LINK_FEEDBACK":
+                        # 1. If it's LINK_FEEDBACK, we only push to SNMP if it's SETTLED (confirmed state)
+                        # This ensures initial 'boot' announcements and final settled states are visible.
+                        if msg_type == "LINK_FEEDBACK" and not is_settled:
                             continue
                             
                         # 2. If the origin_source is SNMP, don't send it back to SNMP

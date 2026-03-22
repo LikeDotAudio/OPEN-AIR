@@ -79,6 +79,38 @@ class TestMeterNeedle(unittest.TestCase):
         # Check if the expected variables are attached to the frame (StateLinker adds them)
         self.assertTrue(hasattr(meter_frame, "vu_value_var"))
 
+    def test_tilted_meter_config_extraction(self):
+        """Goal: Verify that tilt and crop commands are extracted from style_overrides and pointer."""
+        from oaGuiElements.Core.metering.meter_needle.config.meter_config import MeterConfig
+        test_config = {
+            "cosmetics": {
+                "style_overrides": {
+                    "Meter_viewable_angle": 120,
+                    "Meter_center_angle": 270,
+                    "pivot_crop": 0.5
+                },
+                "pointer": {
+                    "pivot_crop": 0.75
+                }
+            }
+        }
+        cfg = MeterConfig(test_config)
+        self.assertEqual(cfg.meter_viewable_angle, 120.0)
+        self.assertEqual(cfg.meter_center_angle, 270.0)
+        # Should pull from style_overrides first
+        self.assertEqual(cfg.pivot_crop, 0.5)
+
+        test_config_2 = {
+            "cosmetics": {
+                "pointer": {
+                    "pivot_crop": 0.75
+                }
+            }
+        }
+        cfg2 = MeterConfig(test_config_2)
+        # Should fallback to pointer
+        self.assertEqual(cfg2.pivot_crop, 0.75)
+
     def tearDown(self):
         if hasattr(self, 'patchers'):
             for p in self.patchers:

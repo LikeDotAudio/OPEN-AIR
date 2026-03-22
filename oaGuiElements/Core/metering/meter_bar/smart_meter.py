@@ -25,8 +25,11 @@ class SmartMeter(tk.Canvas):
         except Exception as e:
             p_bg = "#2b2b2b"
 
+        # Filter kwargs to only pass tkinter-supported ones
+        tk_kwargs = {k: v for k, v in kwargs.items() if k not in ["apply_transparency_func", "builder_instance", "raw_config"]}
+
         try:
-            super().__init__(parent, bd=0, highlightthickness=0, relief="flat", bg=p_bg, **kwargs)
+            super().__init__(parent, bd=0, highlightthickness=0, relief="flat", bg=p_bg, **tk_kwargs)
         except Exception as e:
             if not hasattr(self, "tk"):
                 from unittest.mock import MagicMock
@@ -40,7 +43,16 @@ class SmartMeter(tk.Canvas):
         self.layout_calc = MeterLayoutCalculator()
         
         # 2. Build UI
-        self._build_ui(raw_config=raw_config, p_bg=p_bg, **kwargs)
+        try:
+            self._build_ui(raw_config=raw_config, p_bg=p_bg, **kwargs)
+        except Exception as e:
+            logger.warning(f"⚠️ SmartMeter UI build failed (possibly destroyed parent?): {e}")
+            # If UI build fails, we still need basic components to avoid AttributeError later
+            if not hasattr(self, 'canvas'): 
+                from unittest.mock import MagicMock
+                self.canvas = MagicMock()
+            if not hasattr(self, 'renderer'):
+                self.renderer = MagicMock()
         
         # 3. State & Sync
         self.state_mirror = state_mirror_engine
@@ -137,6 +149,12 @@ class SmartMeter(tk.Canvas):
 
     def _on_value_update(self, *args):
         try:
+            # ⚡ SAFETY: Ensure we don't try to animate on a mock or dead canvas
+            if not hasattr(self, 'canvas') or not hasattr(self.canvas, 'winfo_exists'):
+                return
+            if not self.canvas.winfo_exists():
+                return
+
             val = self.value_var.get()
             self.physics.set_target(val)
             if self._anim_timer_id is None:

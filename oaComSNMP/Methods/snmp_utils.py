@@ -15,7 +15,8 @@ _clean_to_num_map = {}
 def initialize_oid_map(display_root):
     """
     Crawls the display directory to build a mapping of clean topics to sorting numbers.
-    Example: 'oaGuiDefinitions/left_50/top_100' -> {'left': '50', 'left/top': '100'}
+    Aligns with MQTT topic generation by stripping layout tokens (left, right, etc.).
+    Example: 'oaGuiDefinitions/left_50/top_100/0_Spectrum' -> {'Spectrum': '0'}
     """
     global _clean_to_num_map
     _clean_to_num_map.clear()
@@ -23,24 +24,29 @@ def initialize_oid_map(display_root):
     root = Path(display_root)
     if not root.exists(): return
 
+    # ⚡ ALIGNMENT: Tokens to strip from the clean path to match MQTT topics
+    LAYOUT_TOKENS = ["display", "gui", "left", "right", "top", "bottom", "oaguidefinitions"]
+
     for path in root.rglob("*"):
         if not path.is_dir(): continue
         
         # Build the clean path relative to display root
         rel_parts = path.relative_to(root).parts
-        clean_parts = []
-        num_parts = []
         
         # Trace the path to build clean vs numerical mapping
         current_clean_path = []
-        temp_path = root
         for p in rel_parts:
-            # Extract number
+            # ⚡ CLEAN: Strip numeric prefix/suffix (e.g. '1_Router' -> 'Router')
+            clean = re.sub(r"^(\d+)[_-]?", "", p)
+            clean = re.sub(r"[_-]?(\d+)$", "", clean).replace(" ", "_")
+            
+            # ⚡ ALIGNMENT: Skip structural layout tokens
+            if clean.lower() in LAYOUT_TOKENS or not clean:
+                continue
+
+            # Extract sorting number for OID assignment
             num_match = re.search(r"(\d+)", p)
             num = num_match.group(1) if num_match else None
-            
-            # Extract clean name
-            clean = re.sub(r"^(\d+)[_-]|[_-](\d+)$", "", p).replace(" ", "_")
             
             current_clean_path.append(clean)
             clean_str = "/".join(current_clean_path)

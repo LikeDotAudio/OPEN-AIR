@@ -8,7 +8,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from ..Core.event_bus import event_bus
 from ..Core.state import state_manager
-from ..grab_bag.grab_bag_loader import GrabBagLoader
+from ..FileReaders.grab_bag_loader import GrabBagLoader
 from loguru import logger
 
 # --- EXTRACTED CORE MODULES ---

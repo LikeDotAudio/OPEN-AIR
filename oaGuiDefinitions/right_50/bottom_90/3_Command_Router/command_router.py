@@ -283,7 +283,7 @@ class CommandRouter(tk.Frame):
     def _get_val_from_utp(self, utp):
         """Finds the raw value for a specific machine time in the firehose."""
         if not utp: return None
-        with self.router._firehose_lock:
+        with self.router.monitor._firehose_lock:
             match = next((m for m in self.router.firehose if f"{m['ts']:.6f}" == utp), None)
             return match["val"] if match else None
 
@@ -307,7 +307,7 @@ class CommandRouter(tk.Frame):
     def clear_log(self):
         for item in self.tree.get_children():
             self.tree.delete(item)
-        with self.router._firehose_lock:
+        with self.router.monitor._firehose_lock:
             self.router.firehose.clear()
 
     def destroy(self):

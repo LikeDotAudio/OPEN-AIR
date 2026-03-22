@@ -62,6 +62,7 @@ class MeterConfig:
         self.cosmetics = self.config.get("cosmetics", {})
         self.colors_cfg = self.cosmetics.get("colors", {})
         self.style_overrides = self.cosmetics.get("style_overrides", {})
+        self.pointer = self.cosmetics.get("pointer", {})
 
         self.theme_colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         self.default_theme_bg = self.theme_colors.get("bg", "#2b2b2b")
@@ -75,6 +76,8 @@ class MeterConfig:
             val = getattr(self, src_name).get(key)
             if val is None and src_name == "config":
                 val = self.style_overrides.get(key)
+                if val is None:
+                    val = self.pointer.get(key)
             if val is None:
                 val = default
             if val is None: return None

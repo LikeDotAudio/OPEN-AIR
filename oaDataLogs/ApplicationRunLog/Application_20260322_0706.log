@@ -1,0 +1,964 @@
+070637.092 | DEBUG    | UI   | SYSTEM     | oaConfiguration.Methods.console_encoder | ⏩ Not on Windows ('nt'), skipping console encoding reconfiguration.
+070637.092 | SUCCESS  | UI   | SYSTEM     | oaConfiguration.Methods.console_encoder | ✅ Exiting configure_console_encoding.
+070637.092 | DEBUG    | UI   | SYSTEM     | __main__             | 🖥️🎨 [UI] Starting OpenAir UI Service...
+070637.188 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | Enforced minimum window size: 800x600
+070637.188 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | Attempting to set window maximization attributes...
+070637.188 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | Set '-zoomed' attribute for Linux.
+070637.192 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.composition_root | 🏗️ [ROOT] Composing UI Services...
+070637.192 | DEBUG    | UI   | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📖 Reading Cache.
+070637.192 | DEBUG    | UI   | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📄 No cache file found.
+070637.192 | INFO     | UI   | DATA       | oaStateCache.Core.state_cache | 💾✨ First boot detected. Starting with fresh cache.
+070637.192 | DEBUG    | UI   | DATA       | oaStateCache.Core.state_cache | 🧠💾 [CACHE] Initialized with 0 entries.
+070637.193 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SPLINKER on OPEN-AIR/System/Status/Splinker/List: []
+070637.193 | INFO     | UI   | OSC        | oaComOSC.Managers.osc_manager | 🅾️📡💻 [OSC] Initializing Bridge (Bridge=False)...
+070637.194 | SUCCESS  | UI   | SYSTEM     | oaGuiManager.Core.composition_root | ✅ [ROOT] UI Service Graph Composed.
+070637.206 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | ✅ SplashScreen materialised.
+070637.206 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | 🖥️🎨 [UI] Reveal main window.
+070637.212 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 👋 SplashScreen dismissed.
+070637.221 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Connecting to Broker...
+070637.221 | DEBUG    | UI   | SYSTEM     | __main__             | 🖥️🎨 [UI] Entering Tkinter MainLoop.
+070637.221 | DEBUG    | UI   | DATA       | oaStateCache.Core.state_cache | 🚀📤📥 [CACHE] Subscribing to root: OPEN-AIR/#
+070637.221 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Starting Protocol Services...
+070637.221 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🔗 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+070637.223 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+070637.223 | SUCCESS  | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | ▶️▶️▶️ [START] Protocol Router Active (GUID: 6BACD38C897D76F2).
+070637.223 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Starting OSC...
+070637.224 | INFO     | UI   | OSC        | oaComOSC.Managers.osc_manager | 🅾️📡💻 [OSC] Bridge: Observer mode active.
+070637.224 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Starting SNMP...
+070637.225 | SUCCESS  | UI   | SYSTEM     | oaComMQTT.Workers.mqtt_async_worker | 🚀🆗✅ [SUCCESS] aiomqtt: Connected to broker.
+070637.226 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] aiomqtt: Resubscribed to root and external filters.
+070637.226 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+070637.227 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/Splinker/List: []
+070637.256 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Starting MIDI...
+070637.256 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Splinker/#
+070637.257 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Building Workspace...
+070637.277 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/Splinker/List
+070637.277 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+070637.277 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🔗 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+070637.277 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+070637.278 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+070637.278 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/Splinker/List: []
+070637.338 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.input.input_mousewheel_mixin.input_mousewheel_mixin | 📐🏗️💻 [BUILDER] Loading mousewheel_mixin.py from: /home/anthony/Documents/OPEN-AIR/oaGuiElements/Core/input/input_mousewheel_mixin/input_mousewheel_mixin.py
+070637.342 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.factory.widget_registry | 🔍 WidgetRegistry: Scanning /home/anthony/Documents/OPEN-AIR/oaGuiElements...
+070637.724 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.factory.widget_registry | ✅ WidgetRegistry: Discovered 47 types from 249 modules.
+070637.725 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_display | 🖥️🚦 The grand orchestrator is waking up!
+070637.736 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.directory | 🏗️ [BUILDER] Starting build for: /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions
+070637.736 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 📂 Parsing directory listing via naming convention for: '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions'
+070637.736 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 🗺️ Parsed 'horizontal_split' from dir names '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions'
+070637.741 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.directory | 🏗️ [BUILDER] Starting build for: /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50
+070637.742 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 📂 Parsing directory listing via naming convention for: '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50'
+070637.742 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 🗺️ Parsed 'vertical_split' from dir names '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50'
+070637.745 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.directory | 🏗️ [BUILDER] Starting build for: /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50/top_100
+070637.745 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 📂 Parsing directory listing via naming convention for: '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50/top_100'
+070637.745 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 🗺️ Parsed 'notebook' layout from dir names '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50/top_100'
+070637.746 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.tab | ▶️ _on_tab_change detected.
+070637.753 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.directory | 🏗️ [BUILDER] Starting build for: /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50
+070637.753 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 📂 Parsing directory listing via naming convention for: '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50'
+070637.754 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 🗺️ Parsed 'vertical_split' from dir names '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50'
+070637.759 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.directory | 🏗️ [BUILDER] Starting build for: /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50/top_100/0_Spectrum
+070637.759 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 📂 Parsing directory listing via naming convention for: '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50/top_100/0_Spectrum'
+070637.760 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 🗺️ Parsed 'notebook' layout from dir names '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50/top_100/0_Spectrum'
+070637.762 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.tab | ▶️ _on_tab_change detected.
+070637.766 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.directory | 🏗️ [BUILDER] Starting build for: /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/top_10
+070637.766 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 📂 Parsing directory listing via naming convention for: '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/top_10'
+070637.767 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 🗺️ Parsed 'directory_listing' as fallback for '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/top_10'
+070637.767 | SUCCESS  | UI   | SYSTEM     | oaGuiManager.FileReaders.module_loader | 🏗️🪟✨/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/top_10/start_pause_stop.json!
+070637.768 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.loader.gui_from_json | 🏗️ Constructing 'START_PAUSE_STOP' via DynamicGuiBuilder...
+070637.768 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/UI/Rebuild
+070637.768 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.factory.gui_widget_factory | 🔬 Initializing GuiWidgetFactory...
+070637.768 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.factory.Core.widget_discovery_engine | 🧩 Merging 47 widgets from Registry into Factory.
+070637.768 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 📡 UITrackingService: Tracking 'START_PAUSE_STOP'
+070637.769 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to DynamicGuiBuilder. BG: , Solid: None, Trans: True
+070637.769 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'START_PAUSE_STOP'
+070637.769 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.context_menu | 🍔🔽🖱️ [UI] Configuring right-click context menu.
+070637.773 | TRACE    | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨📐🔳 [BUILDER] Skipping bg regen for 'START_PAUSE_STOP': Canvas not yet sized.
+070637.773 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Starting destruction of current UI for 'START_PAUSE_STOP'
+070637.773 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Cleaning up context for .!application.!panedwindow.!frame2.!panedwindow.!frame.!universalguiloader.!dynamicguibuilder
+070637.797 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re |   └─ 💥 Destroyed 0 widgets.
+070637.798 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Handing off to BatchBuilder for creation pass.
+070637.798 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Workers.async_grid_renderer | 🏗️ Rendering branch ''
+070637.799 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Frame. BG: transparent, Solid: False, Trans: True
+070637.799 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'START_PAUSE_STOP'
+070637.799 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Frame. BG: transparent, Solid: False, Trans: True
+070637.799 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'START_PAUSE_STOP'
+070637.799 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Workers.async_grid_renderer | 🏗️ Rendering branch 'right_top'
+070637.800 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: transparent, Solid: False, Trans: True
+070637.800 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'START_PAUSE_STOP'
+070637.800 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Workers.async_grid_renderer | 🏗️ Rendering branch 'right_top.blocks.Control_Buttons'
+070637.801 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.batch_processing_engine |   └─ 🔨 Creating '_GuiActuator' at 'right_top.blocks.Control_Buttons.fields.Start'
+070637.801 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_actuator.button_actuator | 🔬🏗️🔘 [BUILDER] Creating ActuatorButton.
+070637.801 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to right_top.blocks.Control_Buttons.fields.Start. BG: #2b2b2b, Solid: False, Trans: False
+070637.801 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'START_PAUSE_STOP'
+070637.801 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/right_top/blocks/Control_Buttons/Start/active
+070637.802 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.buttons.button_actuator.button_actuator | ✅🆗🔘 [SUCCESS] The actuator 'Start' has materialized!
+070637.802 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.batch_processing_engine |   └─ 🔨 Creating '_GuiButtonToggle' at 'right_top.blocks.Control_Buttons.fields.Pause'
+070637.802 | TRACE    | UI   | SYSTEM     | oaGuiElements.Core.buttons.button_toggle.button_toggle | 🔬 Entering make_button_toggle with config: {'type': '_GuiButtonToggle', 'label': 'Pause', 'handler': 'pause_button_clicked', 'layout': {'width': 80, 'height': 40}, 'style': {'active_color': '#ffff00'}, 'label_active': 'Pause', 'active_color': '#ffff00', 'active_text_color': '#1a1a1a', 'text_color': '#888888', 'active_font_style': 'bold', 'inactive_font_style': 'normal', 'bg_color': '#2b2b2b', 'width': 80, 'height': 40, 'value_min': 0.0, 'value_max': 1.0, 'value_default': 0.0, 'path': 'right_top.blocks.Control_Buttons.fields.Pause'}
+070637.802 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070637.802 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'START_PAUSE_STOP'
+070637.802 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to CanvasButton. BG: #2b2b2b, Solid: False, Trans: False
+070637.802 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'START_PAUSE_STOP'
+070637.803 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/right_top/blocks/Control_Buttons/Pause
+070637.803 | SUCCESS  | UI   | SYSTEM     | oaGuiElements.Core.buttons.button_toggle.button_toggle | ✅ SUCCESS! The toggle button 'Pause' has materialized!
+070637.804 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.batch_processing_engine |   └─ 🔨 Creating '_GuiActuator' at 'right_top.blocks.Control_Buttons.fields.Stop'
+070637.804 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_actuator.button_actuator | 🔬🏗️🔘 [BUILDER] Creating ActuatorButton.
+070637.804 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to right_top.blocks.Control_Buttons.fields.Stop. BG: #2b2b2b, Solid: False, Trans: False
+070637.804 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'START_PAUSE_STOP'
+070637.804 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/right_top/blocks/Control_Buttons/Stop/active
+070637.805 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.buttons.button_actuator.button_actuator | ✅🆗🔘 [SUCCESS] The actuator 'Stop' has materialized!
+070637.805 | SUCCESS  | UI   | SYSTEM     | oaGuiManager.Core.loader.gui_from_json | ✅ It works! START_PAUSE_STOP is fully operational!
+070637.806 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.directory | 🏗️ [BUILDER] Starting build for: /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50/top_100/0_Spectrum/3_Instrument
+070637.817 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 👁️ UITrackingService: VISIBLE for START_PAUSE_STOP
+070637.818 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070637.818 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070637.818 | INFO     | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨🏗️🌀 [BUILDER] Spawning background generation thread for 'START_PAUSE_STOP' (200x200)
+070637.819 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 📦🔍✨ [CACHE] Checking for procedural panel in cache: 200x200
+070637.819 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Build sequence FINISHED for 'START_PAUSE_STOP'
+070637.819 | INFO     | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🎨🏗️🌀 [BUILDER] Generating NEW Procedural Panel (200x200) Seed: 303
+070637.819 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🎨🖌️🔳 [LAYER] 1. Substrate: #000000
+070637.819 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🖌️🎨✨ [LAYER] Applying flat streak texture.
+070637.819 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🎨🖌️🌈 [LAYER] 2. Paint: #ffffff (Opacity: 0.1)
+070637.819 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🔪🎨✨ [LAYER] Etching edge wear scratches.
+070637.820 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🗡️🎨✨ [LAYER] Carving deep substrate-revealing scratches.
+070637.820 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 📐🎨✨ [LAYER] Applying linear lighting gradient.
+070637.821 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🔳🎨✨ [LAYER] 5. Applying vignette edge fade.
+070637.821 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🖊️🎨✨ [LAYER] 6. Adding surface micro-scratches.
+070637.822 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🔩🎨✨ [LAYER] 8. Drilling screws into the panel.
+070637.822 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 📦🔍✨ [CACHE] Checking for procedural screw in cache: 24px
+070637.822 | INFO     | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔩🏗️🌀 [BUILDER] Generating NEW Procedural Screw (24px)
+070637.822 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | ⚙️🔘✅ [CONFIG] Type: fillister, Finish: custom, Rotation: 15.0°
+070637.822 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 👻🌀🔳 [LAYER] 1. Casting external drop shadow.
+070637.822 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🖌️🔘 [LAYER] 2. Lathe-turning screw head: #e0cebc
+070637.822 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔳📐🕳️ [LAYER] 3. Punching Robertson square drive void.
+070637.822 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🆗💾 [SUCCESS] Procedural screw generation complete. Saving to cache.
+070637.824 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 📦🔍✨ [CACHE] Checking for procedural screw in cache: 24px
+070637.825 | INFO     | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔩🏗️🌀 [BUILDER] Generating NEW Procedural Screw (24px)
+070637.825 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | ⚙️🔘✅ [CONFIG] Type: fillister, Finish: custom, Rotation: 85.0°
+070637.825 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 👻🌀🔳 [LAYER] 1. Casting external drop shadow.
+070637.825 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🖌️🔘 [LAYER] 2. Lathe-turning screw head: #e0cebc
+070637.825 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔳📐🕳️ [LAYER] 3. Punching Robertson square drive void.
+070637.825 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🆗💾 [SUCCESS] Procedural screw generation complete. Saving to cache.
+070637.826 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 📦🔍✨ [CACHE] Checking for procedural screw in cache: 24px
+070637.826 | INFO     | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔩🏗️🌀 [BUILDER] Generating NEW Procedural Screw (24px)
+070637.826 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | ⚙️🔘✅ [CONFIG] Type: fillister, Finish: custom, Rotation: 83.0°
+070637.826 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 👻🌀🔳 [LAYER] 1. Casting external drop shadow.
+070637.826 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🖌️🔘 [LAYER] 2. Lathe-turning screw head: #e0cebc
+070637.827 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔳📐🕳️ [LAYER] 3. Punching Robertson square drive void.
+070637.827 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🆗💾 [SUCCESS] Procedural screw generation complete. Saving to cache.
+070637.831 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 📦🔍✨ [CACHE] Checking for procedural screw in cache: 24px
+070637.832 | INFO     | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔩🏗️🌀 [BUILDER] Generating NEW Procedural Screw (24px)
+070637.832 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | ⚙️🔘✅ [CONFIG] Type: fillister, Finish: custom, Rotation: 64.0°
+070637.832 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 👻🌀🔳 [LAYER] 1. Casting external drop shadow.
+070637.833 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🖌️🔘 [LAYER] 2. Lathe-turning screw head: #e0cebc
+070637.833 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔳📐🕳️ [LAYER] 3. Punching Robertson square drive void.
+070637.833 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🆗💾 [SUCCESS] Procedural screw generation complete. Saving to cache.
+070637.834 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 📐🎨✨ [LAYER] 8. Folding metal creases.
+070637.834 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 📂 Parsing directory listing via naming convention for: '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50/top_100/0_Spectrum/3_Instrument'
+070637.834 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 🗺️ Parsed 'notebook' layout from dir names '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50/top_100/0_Spectrum/3_Instrument'
+070637.835 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🌫️🎨✨ [LAYER] 8. Settling fine dust particles.
+070637.835 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🌫️🎨✨ [FINAL] Applying global Gaussian blur: 0.8
+070637.836 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.tab | ▶️ _on_tab_change detected.
+070637.837 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🎨🆗💾 [SUCCESS] Procedural panel generation complete. Saving to disk cache.
+070637.840 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.directory | 🏗️ [BUILDER] Starting build for: /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90
+070637.840 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 📂 Parsing directory listing via naming convention for: '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90'
+070637.842 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 🗺️ Parsed 'notebook' layout from dir names '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90'
+070637.842 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_display | 🖥️🏗️🎨 [DISPLAY] Initial build pass finished.
+070637.842 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Ignition Complete!
+070637.843 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.tab | ▶️ _on_tab_change detected.
+070637.844 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | 🖥️🎨 [UI] Reveal main window.
+070637.844 | SUCCESS  | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨🆗✨ [BUILDER] Applying generated background (200x200) to 'START_PAUSE_STOP' UI.
+070637.849 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.directory | 🏗️ [BUILDER] Starting build for: /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50/top_100/0_Spectrum/3_Instrument/1_frequency
+070637.854 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.directory | 🏗️ [BUILDER] Starting build for: /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90/1_scan
+070637.868 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/oaGuiDefinitions/visibility/visible
+070637.870 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070637.870 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070637.874 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070637.875 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070637.876 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070637.879 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 📂 Parsing directory listing via naming convention for: '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90/1_scan'
+070637.880 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 🗺️ Parsed 'directory_listing' as fallback for '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90/1_scan'
+070637.880 | SUCCESS  | UI   | SYSTEM     | oaGuiManager.FileReaders.module_loader | 🏗️🪟✨/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90/1_scan/Scan.json!
+070637.884 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.loader.gui_from_json | 🏗️ Constructing 'SCAN' via DynamicGuiBuilder...
+070637.884 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/UI/Rebuild
+070637.884 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 📡 UITrackingService: Tracking 'SCAN'
+070637.884 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to DynamicGuiBuilder. BG: , Solid: None, Trans: True
+070637.884 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'SCAN'
+070637.884 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.context_menu | 🍔🔽🖱️ [UI] Configuring right-click context menu.
+070637.885 | TRACE    | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨📐🔳 [BUILDER] Skipping bg regen for 'SCAN': Canvas not yet sized.
+070637.886 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Starting destruction of current UI for 'SCAN'
+070637.886 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Cleaning up context for .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame.!universalguiloader.!dynamicguibuilder
+070637.911 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re |   └─ 💥 Destroyed 0 widgets.
+070637.911 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Handing off to BatchBuilder for creation pass.
+070637.911 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Workers.async_grid_renderer | 🏗️ Rendering branch ''
+070637.911 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Frame. BG: transparent, Solid: False, Trans: True
+070637.911 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'SCAN'
+070637.911 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Frame. BG: transparent, Solid: False, Trans: True
+070637.911 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'SCAN'
+070637.911 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Workers.async_grid_renderer | 🏗️ Rendering branch 'scan'
+070637.912 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.batch_processing_engine |   └─ 🔨 Creating 'plot_widget' at 'scan.blocks.multi_dataset_graph'
+070637.912 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.graphing.graphing.plot_widget_adapter | 🔬🏗️📊 [BUILDER] plot_adapter: Spawning FluxPlotter 'scan.blocks.multi_dataset_graph'.
+070637.912 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.graphing.graphing.graph | 🔬🏗️📊 [BUILDER] graph_builder: Creating base Matplotlib plot for 'scan.blocks.multi_dataset_graph'.
+070637.918 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to FluxPlotter. BG: #2b2b2b, Solid: False, Trans: True
+070637.468 | DEBUG    | CORE | SYSTEM     | oaConfiguration.Methods.console_encoder | ⏩ Not on Windows ('nt'), skipping console encoding reconfiguration.
+070637.469 | SUCCESS  | CORE | SYSTEM     | oaConfiguration.Methods.console_encoder | ✅ Exiting configure_console_encoding.
+070637.469 | DEBUG    | CORE | SYSTEM     | __main__             | ⚡🛡️⚙️ [CORE] Starting OpenAir Core Service...
+070637.469 | DEBUG    | CORE | SYSTEM     | oaWatchdog.Managers.watchdog | 🐕⏳🔋 [WATCHDOG] Started (Timeout: 120.0s)
+070637.469 | DEBUG    | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📖 Reading Cache.
+070637.469 | DEBUG    | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📄 No cache file found.
+070637.469 | INFO     | CORE | DATA       | oaStateCache.Core.state_cache | 💾✨ First boot detected. Starting with fresh cache.
+070637.469 | DEBUG    | CORE | DATA       | oaStateCache.Core.state_cache | 🧠💾 [CACHE] Initialized with 0 entries.
+070637.469 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Beginning CORE manager launch sequence...
+070637.469 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Initializing core instances...
+070637.469 | INFO     | CORE | LOG_FILTER | oaLogging.Managers.log_filter_engine | Setting up MQTT subscription for dynamic log filtering on topic: OPEN-AIR/system/logger/filter/set
+070637.469 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/system/logger/filter/set
+070637.470 | INFO     | CORE | SYSTEM     | oaLogging.Managers.log_filter_engine | LogFilterEngine initialized and subscribed to MQTT topic.
+070637.471 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SPLINKER on OPEN-AIR/System/Status/Splinker/List: []
+070637.472 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Broker/Delete/#
+070637.472 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Broker/Service/#
+070637.472 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Status/Fleet/Complete
+070637.472 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_manager | 🚀📤📥 [MQTT] MqttManager initialized with Async Publisher.
+070637.472 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Injecting dynamic protocols...
+070637.525 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/Splinker/List
+070637.527 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+070637.573 | DEBUG    | CORE | SYSTEM     | oaTranslator.Managers.yak_translator | 🟡 YAK repository file not found or empty at /home/anthony/Documents/OPEN-AIR/.pytest_cache/oaDataState/YAKETYYAK.json. Initializing empty repository.
+070637.573 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/yak/commands/#
+070637.573 | DEBUG    | CORE | SYSTEM     | oaTranslator.Managers.yak_translator | 👂 Subscribed to YAK trigger topic: 'OPEN-AIR/yak/commands/#'
+070637.573 | SUCCESS  | CORE | SYSTEM     | oaTranslator.Managers.yak_translator | ✅ YakTranslator initialized and ready to translate!
+070637.573 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Proxy/Rx_Outbox
+070637.573 | SUCCESS  | CORE | SYSTEM     | oaTranslator.Methods.yak_rx | ✅✅✅ [SUCCESS] YakRxManager subscribed to 'OPEN-AIR/Proxy/Rx_Outbox' for proxy responses.
+070637.573 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Status/Fleet/Start
+070637.573 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Status/Fleet/Complete
+070637.999 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Linking cross-dependent managers...
+070637.999 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Splinker/#
+070637.999 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Starting all manager services...
+070638.032 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 INPUT READY: Mbox 2:Mbox 2 MIDI 1 28:0
+070638.033 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 INPUT READY: Midi Through:Midi Through Port-0 14:0
+070638.035 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 OUTPUT READY: Midi Through:Midi Through Port-0 14:0
+070638.036 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 OUTPUT READY: Mbox 2:Mbox 2 MIDI 1 28:0
+070638.037 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MIDI on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.037 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MIDI on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.038 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/PTP/Capture
+070638.038 | WARNING  | CORE | SYSTEM     | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+070638.038 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🔗 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+070638.038 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+070638.039 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.039 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+070638.039 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+070638.039 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.039 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.039 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.040 | SUCCESS  | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | ▶️▶️▶️ [START] Protocol Router Active (GUID: 6BACD38C897D76F2).
+070638.040 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Connecting CORE MQTT Client to broker and running scans...
+070637.919 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'SCAN'
+070637.919 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/show_grid
+070637.919 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/xlim
+070637.919 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/ylim
+070637.919 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/title
+070637.919 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/x_label
+070637.919 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/scan/scan/blocks/multi_dataset_graph/settings/y_label
+070637.919 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/MARKERS
+070637.919 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.graphing.graphing.graph_styler | 🔬🏗️📊 [BUILDER] graph_styler: Applying visual styles to axis.
+070637.920 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.graphing.graphing.dynamic_graph | 🔬🏗️📊 [BUILDER] FluxPlotter 'scan.blocks.multi_dataset_graph' visual styles applied.
+070637.920 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.graphing.graphing.graph_interactor | 🔬🏗️📊 [BUILDER] graph_interactor: Initializing interaction protocols.
+070637.925 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.graphing.graphing.dynamic_graph | 🔬🏗️📊 [BUILDER] FluxPlotter 'scan.blocks.multi_dataset_graph' plot elements initialized.
+070637.925 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear
+070637.925 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/sig_a
+070637.925 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/sig_b
+070637.926 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] GUI on OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear: x,y
+0,0
+1,1
+070637.926 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear: x,y
+0,0
+1,1
+070637.926 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear: x,y
+0,0
+1,1
+070637.927 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear: x,y
+0,0
+1,1
+070637.927 | SUCCESS  | UI   | SYSTEM     | oaGuiManager.Core.loader.gui_from_json | ✅ It works! SCAN is fully operational!
+070637.928 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear: x,y
+0,0
+1,1
+070637.928 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear: x,y
+0,0
+1,1
+070637.929 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear: x,y
+0,0
+1,1
+070637.930 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.graphing.graphing.graph_updater | 🔬🏗️📊 [BUILDER] graph_updater: Executing full autoscale and redraw sequence.
+070637.930 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.graphing.graphing.graph_updater | 🔬🏗️📊 [BUILDER] autoscale_axes: Recalculating axis limits.
+070637.930 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.graphing.graphing.graph_updater | 🔬🏗️📊 [BUILDER] render_canvas: Redrawing canvas structure.
+070637.979 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear
+070637.979 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear: x,y
+0,0
+1,1
+070637.979 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear: x,y
+0,0
+1,1
+070637.979 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear: x,y
+0,0
+1,1
+070637.980 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear: x,y
+0,0
+1,1
+070637.980 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear: x,y
+0,0
+1,1
+070638.042 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_batch | 🧩 BatchBuilder: Clearing coordinate cache.
+070638.042 | DEBUG    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🏗️✨ [SYNC] Executing batch reslice for 7 widgets in 'START_PAUSE_STOP'
+070638.045 | INFO     | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🆗✅ [BUILDER] Reslice COMPLETE: 7 updated, 0 skipped (Jitter Filter) for 'START_PAUSE_STOP'.
+070638.089 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.090 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.090 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.090 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.091 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.091 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.092 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+070638.092 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🔗 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+070638.092 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+070638.092 | TRACE    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter OPEN-AIR/System/Status/Splinker/List
+070638.093 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.093 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.094 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.095 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.095 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.040 | DEBUG    | CORE | DATA       | oaStateCache.Core.state_cache | 🚀📤📥 [CACHE] Subscribing to root: OPEN-AIR/#
+070638.041 | SUCCESS  | CORE | SYSTEM     | oaThreadManager.Workers.launcher | ✅✅✅ [SUCCESS] All CORE managers have been successfully launched!
+070638.041 | SUCCESS  | CORE | SYSTEM     | oaComMQTT.Workers.mqtt_async_worker | 🚀🆗✅ [SUCCESS] aiomqtt: Connected to broker.
+070638.042 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Connecting CORE MQTT Client to broker and running scans...
+070638.042 | DEBUG    | CORE | DATA       | oaStateCache.Core.state_cache | 🚀📤📥 [CACHE] Subscribing to root: OPEN-AIR/#
+070638.042 | SUCCESS  | CORE | SYSTEM     | __main__             | ✅ [SUCCESS] CORE: Service Operational. Watchdog Active.
+070638.042 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] aiomqtt: Resubscribed to root and external filters.
+070638.083 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070638.083 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070638.087 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/MIDI/ActiveInputs
+070638.087 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.087 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.088 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.088 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.088 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/MIDI/ActiveOutputs
+070638.089 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.089 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070638.089 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.090 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070638.090 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.090 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.091 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.091 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.092 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.092 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.093 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.093 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.093 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+070638.093 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/Splinker/List: []
+070638.094 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+070638.094 | TRACE    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter OPEN-AIR/System/Status/Splinker/List
+070638.094 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.094 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.096 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.096 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.096 | TRACE    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter OPEN-AIR/System/Status/MIDI/ActiveInputs
+070638.096 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.136 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.136 | TRACE    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter OPEN-AIR/System/Status/MIDI/ActiveOutputs
+070638.140 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/oaGuiDefinitions/visibility/visible
+070638.140 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070638.140 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070638.141 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070638.141 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.141 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.141 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GUI/Global/Header/StatusLight
+070638.141 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.142 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.142 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.142 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070638.095 | TRACE    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter OPEN-AIR/System/Status/MIDI/ActiveInputs
+070638.095 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.095 | TRACE    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter OPEN-AIR/System/Status/MIDI/ActiveOutputs
+070638.140 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GUI/Global/Header/StatusLight
+070638.140 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.140 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.140 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.141 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.141 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.141 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070638.141 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070638.142 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/Splinker/List
+070638.142 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+070638.142 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🔗 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+070638.142 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+070638.143 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+070638.143 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🔗 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+070638.144 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/MIDI/ActiveInputs
+070638.144 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.144 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.144 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.144 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.144 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+070638.146 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.147 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/MIDI/ActiveOutputs
+070638.147 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.147 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🔗 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+070638.147 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.147 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.147 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.148 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.148 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.149 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.149 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.149 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.154 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 👁️ UITrackingService: VISIBLE for SCAN
+070638.154 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.155 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.165 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.graphing.graphing.dynamic_graph | 🔬🏗️📊 [BUILDER] FluxPlotter 'scan.blocks.multi_dataset_graph' resize event: 1x1
+070638.169 | TRACE    | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨📐🔳 [LAYOUT] BG Sync BLOCKED for 'START_PAUSE_STOP': Rebuild in progress.
+070638.169 | INFO     | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨🏗️🌀 [BUILDER] Spawning background generation thread for 'SCAN' (950x977)
+070638.172 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 📦🔍✨ [CACHE] Checking for procedural panel in cache: 950x977
+070638.172 | INFO     | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🎨🏗️🌀 [BUILDER] Generating NEW Procedural Panel (950x977) Seed: 303
+070638.172 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🎨🖌️🔳 [LAYER] 1. Substrate: #000000
+070638.173 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🖌️🎨✨ [LAYER] Applying flat streak texture.
+070638.173 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Build sequence FINISHED for 'SCAN'
+070638.177 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.graphing.graphing.dynamic_graph | 🔬🏗️📊 [BUILDER] FluxPlotter 'scan.blocks.multi_dataset_graph' resize event: 1x1
+070638.181 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 📂 Parsing directory listing via naming convention for: '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50/top_100/0_Spectrum/3_Instrument/1_frequency'
+070638.181 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.parser.layout_parser | 🗺️ Parsed 'directory_listing' as fallback for '/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50/top_100/0_Spectrum/3_Instrument/1_frequency'
+070638.181 | SUCCESS  | UI   | SYSTEM     | oaGuiManager.FileReaders.module_loader | 🏗️🪟✨/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/left_50/top_100/0_Spectrum/3_Instrument/1_frequency/frequency.json!
+070638.185 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🎨🖌️🌈 [LAYER] 2. Paint: #ffffff (Opacity: 0.1)
+070638.186 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🔪🎨✨ [LAYER] Etching edge wear scratches.
+070638.187 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🗡️🎨✨ [LAYER] Carving deep substrate-revealing scratches.
+070638.188 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.loader.gui_from_json | 🏗️ Constructing 'FREQUENCY' via DynamicGuiBuilder...
+070638.188 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/UI/Rebuild
+070638.188 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 📡 UITrackingService: Tracking 'FREQUENCY'
+070638.189 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to DynamicGuiBuilder. BG: , Solid: None, Trans: True
+070638.190 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.190 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.context_menu | 🍔🔽🖱️ [UI] Configuring right-click context menu.
+070638.192 | TRACE    | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨📐🔳 [BUILDER] Skipping bg regen for 'FREQUENCY': Canvas not yet sized.
+070638.193 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Starting destruction of current UI for 'FREQUENCY'
+070638.193 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Cleaning up context for .!application.!panedwindow.!frame.!panedwindow.!frame.!notebook.!frame.!notebook.!frame.!notebook.!frame.!universalguiloader.!dynamicguibuilder
+070638.216 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.216 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.216 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re |   └─ 💥 Destroyed 0 widgets.
+070638.217 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Handing off to BatchBuilder for creation pass.
+070638.217 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Workers.async_grid_renderer | 🏗️ Rendering branch ''
+070638.217 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Frame. BG: transparent, Solid: False, Trans: True
+070638.217 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.217 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Frame. BG: transparent, Solid: False, Trans: True
+070638.217 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.217 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Workers.async_grid_renderer | 🏗️ Rendering branch 'Spectrum_Instrument_frequency'
+070638.217 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: transparent, Solid: False, Trans: True
+070638.217 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.217 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Workers.async_grid_renderer | 🏗️ Rendering branch 'Spectrum_Instrument_frequency.blocks.Frequency'
+070638.217 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.batch_processing_engine |   └─ 🔨 Creating '_Horizontal_with_dial_Value' at 'Spectrum_Instrument_frequency.blocks.Frequency.fields.center_freq_MHz'
+070638.217 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.input.composite_horizontal_dial_value.composite_horizontal_dial_value | 🔬🏗️🔀 [BUILDER] Creating composite horizontal dial value.
+070638.217 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.218 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.218 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.218 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.218 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Spectrum_Instrument_frequency.blocks.Frequency.fields.center_freq_MHz. BG: #2b2b2b, Solid: False, Trans: False
+070638.218 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.218 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Spectrum_Instrument_frequency.blocks.Frequency.fields.center_freq_MHz. BG: #2b2b2b, Solid: False, Trans: False
+070638.218 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.218 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz
+070638.218 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Spectrum_Instrument_frequency.blocks.Frequency.fields.center_freq_MHz. BG: #2b2b2b, Solid: False, Trans: False
+070638.218 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.218 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz
+070638.218 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz
+070638.218 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.218 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.220 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.220 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.229 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] GUI on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.229 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.229 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.232 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.232 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.232 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 📐🎨✨ [LAYER] Applying linear lighting gradient.
+070638.232 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.233 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz
+070638.236 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.batch_processing_engine |   └─ 🔨 Creating '_Horizontal_with_dial_Value' at 'Spectrum_Instrument_frequency.blocks.Frequency.fields.span_freq_MHz'
+070638.236 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.input.composite_horizontal_dial_value.composite_horizontal_dial_value | 🔬🏗️🔀 [BUILDER] Creating composite horizontal dial value.
+070638.236 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.236 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.236 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.236 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.236 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Spectrum_Instrument_frequency.blocks.Frequency.fields.span_freq_MHz. BG: #2b2b2b, Solid: False, Trans: False
+070638.240 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🔳🎨✨ [LAYER] 5. Applying vignette edge fade.
+070638.240 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.240 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Spectrum_Instrument_frequency.blocks.Frequency.fields.span_freq_MHz. BG: #2b2b2b, Solid: False, Trans: False
+070638.240 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.240 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.241 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz
+070638.241 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Spectrum_Instrument_frequency.blocks.Frequency.fields.span_freq_MHz. BG: #2b2b2b, Solid: False, Trans: False
+070638.241 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.241 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz
+070638.241 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz
+070638.241 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.241 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.241 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.241 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.246 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz
+070638.247 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: transparent, Solid: False, Trans: True
+070638.247 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.247 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Workers.async_grid_renderer | 🏗️ Rendering branch 'Spectrum_Instrument_frequency.blocks.Start Stop'
+070638.247 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.batch_processing_engine |   └─ 🔨 Creating '_Horizontal_with_dial_Value' at 'Spectrum_Instrument_frequency.blocks.Start Stop.fields.start_freq_MHz'
+070638.247 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.input.composite_horizontal_dial_value.composite_horizontal_dial_value | 🔬🏗️🔀 [BUILDER] Creating composite horizontal dial value.
+070638.247 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.247 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.247 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.247 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.247 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Spectrum_Instrument_frequency.blocks.Start Stop.fields.start_freq_MHz. BG: #2b2b2b, Solid: False, Trans: False
+070638.247 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.247 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Spectrum_Instrument_frequency.blocks.Start Stop.fields.start_freq_MHz. BG: #2b2b2b, Solid: False, Trans: False
+070638.247 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.247 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz
+070638.251 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Spectrum_Instrument_frequency.blocks.Start Stop.fields.start_freq_MHz. BG: #2b2b2b, Solid: False, Trans: False
+070638.251 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.251 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz
+070638.251 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz
+070638.251 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.251 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.252 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.252 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.252 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] GUI on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.252 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.252 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.253 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz
+070638.257 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.257 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.257 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.batch_processing_engine |   └─ 🔨 Creating '_Horizontal_with_dial_Value' at 'Spectrum_Instrument_frequency.blocks.Start Stop.fields.stop_freq_MHz'
+070638.258 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.input.composite_horizontal_dial_value.composite_horizontal_dial_value | 🔬🏗️🔀 [BUILDER] Creating composite horizontal dial value.
+070638.258 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.258 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.256 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🖊️🎨✨ [LAYER] 6. Adding surface micro-scratches.
+070638.259 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🔩🎨✨ [LAYER] 8. Drilling screws into the panel.
+070638.260 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.258 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.260 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.260 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.260 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 📦🔍✨ [CACHE] Checking for procedural screw in cache: 24px
+070638.261 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 📦🆗✅ [CACHE] Retaining procedural screw from disk cache.
+070638.261 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 📦🔍✨ [CACHE] Checking for procedural screw in cache: 24px
+070638.261 | INFO     | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔩🏗️🌀 [BUILDER] Generating NEW Procedural Screw (24px)
+070638.261 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | ⚙️🔘✅ [CONFIG] Type: fillister, Finish: custom, Rotation: 34.0°
+070638.261 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 👻🌀🔳 [LAYER] 1. Casting external drop shadow.
+070638.262 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🖌️🔘 [LAYER] 2. Lathe-turning screw head: #e0cebc
+070638.262 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Spectrum_Instrument_frequency.blocks.Start Stop.fields.stop_freq_MHz. BG: #2b2b2b, Solid: False, Trans: False
+070638.262 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.262 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Spectrum_Instrument_frequency.blocks.Start Stop.fields.stop_freq_MHz. BG: #2b2b2b, Solid: False, Trans: False
+070638.262 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.263 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔳📐🕳️ [LAYER] 3. Punching Robertson square drive void.
+070638.263 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🆗💾 [SUCCESS] Procedural screw generation complete. Saving to cache.
+070638.263 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz
+070638.264 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Spectrum_Instrument_frequency.blocks.Start Stop.fields.stop_freq_MHz. BG: #2b2b2b, Solid: False, Trans: False
+070638.264 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.264 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz
+070638.264 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 📦🔍✨ [CACHE] Checking for procedural screw in cache: 24px
+070638.265 | INFO     | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔩🏗️🌀 [BUILDER] Generating NEW Procedural Screw (24px)
+070638.265 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | ⚙️🔘✅ [CONFIG] Type: fillister, Finish: custom, Rotation: 3.0°
+070638.265 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 👻🌀🔳 [LAYER] 1. Casting external drop shadow.
+070638.265 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz
+070638.265 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🖌️🔘 [LAYER] 2. Lathe-turning screw head: #e0cebc
+070638.266 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.266 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.266 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔳📐🕳️ [LAYER] 3. Punching Robertson square drive void.
+070638.266 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/oaGuiDefinitions/scan/visibility/visible
+070638.266 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🆗💾 [SUCCESS] Procedural screw generation complete. Saving to cache.
+070638.266 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.267 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.267 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.267 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.267 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 📦🔍✨ [CACHE] Checking for procedural screw in cache: 24px
+070638.268 | INFO     | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔩🏗️🌀 [BUILDER] Generating NEW Procedural Screw (24px)
+070638.268 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | ⚙️🔘✅ [CONFIG] Type: fillister, Finish: custom, Rotation: 49.0°
+070638.268 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 👻🌀🔳 [LAYER] 1. Casting external drop shadow.
+070638.269 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🖌️🔘 [LAYER] 2. Lathe-turning screw head: #e0cebc
+070638.269 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔳📐🕳️ [LAYER] 3. Punching Robertson square drive void.
+070638.269 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🆗💾 [SUCCESS] Procedural screw generation complete. Saving to cache.
+070638.271 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 📐🎨✨ [LAYER] 8. Folding metal creases.
+070638.268 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.272 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.272 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] GUI on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.272 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🌫️🎨✨ [LAYER] 8. Settling fine dust particles.
+070638.273 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.275 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🌫️🎨✨ [FINAL] Applying global Gaussian blur: 0.8
+070638.275 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.275 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.276 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.276 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.276 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.276 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.276 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz
+070638.277 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: transparent, Solid: False, Trans: True
+070638.277 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.277 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Workers.async_grid_renderer | 🏗️ Rendering branch 'Spectrum_Instrument_frequency.blocks.Quick Span'
+070638.277 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.batch_processing_engine |   └─ 🔨 Creating '_GuiButtonToggler' at 'Spectrum_Instrument_frequency.blocks.Quick Span.fields.Span'
+070638.277 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🔬🏗️🔘 [BUILDER] Entering make_button_toggler
+070638.277 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 📜📑💻 [CONFIG] Raw config received: {'type': '_GuiButtonToggler', 'label_active': 'Span', 'AES70': 'OcaSwitch', 'handler': 'set_span_frequency', 'layout': {'height': 50, 'max_cols': 4, 'width': 160, 'stretch': 'width', 'font': 11, 'alpha': 0.9, 'padx': 2, 'pady': 2, 'sticky': 'ew'}, 'style': {'active_text_color': '#1a1a1a', 'text_color': '#888888', 'active_font_style': 'bold', 'active_font_size': None, 'inactive_font_style': 'normal', 'inactive_font_size': None, 'active_color': '#FF9900', 'active_bg_color': '#000000', 'bg_color': '#2b2b2b', 'glow_intensity': 1.944}, 'options': {'1': {'value': '0.01', 'label_active': 'Microscope', 'label_inactive': 'Microscope', 'description': "So tight you'll feel like a cellular biologist examining a single-cell waveform.", 'units': 'MHz', 'selected': False}, '2': {'value': '0.1', 'label_active': 'Tight', 'label_inactive': 'Tight', 'description': 'A narrow, focused view for getting up close and personal with signals.', 'units': 'MHz', 'selected': False}, '3': {'value': '1', 'label_active': 'Normal', 'label_inactive': 'Normal', 'description': 'The standard span, a balanced diet for most common analysis.', 'units': 'MHz', 'selected': False}, '4': {'value': '10', 'label_active': 'Wide', 'label_inactive': 'Wide', 'description': 'A broad, digestible view of the spectrum, great for general reconnaissance.', 'units': 'MHz', 'selected': False}, '5': {'value': '100', 'label_active': 'Ultra Wide', 'label_inactive': 'Ultra Wide', 'description': "A very broad span for finding signals over a large frequency range. It's like scanning with a wide-angle lens.", 'units': 'MHz', 'selected': False}, '6': {'value': '500', 'label_active': 'From Space', 'label_inactive': 'From Space', 'description': 'A very broad span for finding signals over a large frequency range.', 'units': 'MHz', 'selected': False}, '7': {'value': '1000', 'label_active': 'From The Moon', 'label_inactive': 'From The Moon', 'description': "A very broad span for finding signals over a large frequency range. It's like scanning with a wide-angle lens.", 'units': 'MHz', 'selected': False}, 'UNSELECTED': {'value': 'NONE', 'label_active': 'None Selected', 'label_inactive': 'None Selected', 'description': 'No span option is currently selected.', 'units': '', 'selected': True}}, 'yak_handler': {'enable': True, 'yak_type': 'set', 'sub_path': 'Frequency', 'command': 'Set_Span_Frequency', 'input_name': 'hz_value', 'converter': 'mhz_to_hz'}, 'active_text_color': '#1a1a1a', 'text_color': '#888888', 'active_font_style': 'bold', 'active_font_size': None, 'inactive_font_style': 'normal', 'inactive_font_size': None, 'active_color': '#FF9900', 'active_bg_color': '#000000', 'bg_color': '#2b2b2b', 'glow_intensity': 1.944, 'width': 160, 'height': 50, 'value_min': 0.0, 'value_max': 1.0, 'value_default': 0.0, 'path': 'Spectrum_Instrument_frequency.blocks.Quick Span.fields.Span'}
+070638.277 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...
+070638.277 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.
+070638.277 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🔬⚡️🔘 [BUILDER] Spawning button toggler group for 'Span' at path 'Spectrum_Instrument_frequency.blocks.Quick Span.fields.Span'.
+070638.277 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🏗️🪟🎨 [CONSTRUCT] Creating main canvas container for toggler 'Span'
+070638.277 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 👻🌀🪟 [ALPHA] Applying industrial transparency to toggler container 'Span'
+070638.277 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.277 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.277 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🔋🔘✨ [STATE] Initial selected keys for 'Span': UNSELECTED
+070638.277 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 📐📏🔳 [LAYOUT] Grid: max_cols=4, pads=(2,2), btn_dim=160x50
+070638.277 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ⚙️🔀✅ [CONFIG] Mode: radio, AllowNull: False, MultiAlt: False
+070638.277 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🏗️🔳🕹️ [CONSTRUCT] Iterating through options to create CanvasButtons for 'Span'
+070638.277 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to CanvasButton. BG: #2b2b2b, Solid: False, Trans: False
+070638.278 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.278 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to CanvasButton. BG: #2b2b2b, Solid: False, Trans: False
+070638.278 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.278 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to CanvasButton. BG: #2b2b2b, Solid: False, Trans: False
+070638.278 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.278 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to CanvasButton. BG: #2b2b2b, Solid: False, Trans: False
+070638.278 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.279 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to CanvasButton. BG: #2b2b2b, Solid: False, Trans: False
+070638.279 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.279 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to CanvasButton. BG: #2b2b2b, Solid: False, Trans: False
+070638.279 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.279 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to CanvasButton. BG: #2b2b2b, Solid: False, Trans: False
+070638.279 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.279 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to CanvasButton. BG: #2b2b2b, Solid: False, Trans: False
+070638.279 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.279 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ✨🔄🎨 [SYNC] Updating styles for 'Span' group. Selected: ['UNSELECTED']
+070638.279 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 📡📶🔗 [MQTT] Registering toggler at path 'Spectrum_Instrument_frequency.blocks.Quick Span.fields.Span'
+070638.143 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/visibility/visible: {'visible': True, 'ts': 1774177597.8179412, 'tab_name': 'START_PAUSE_STOP'}
+070638.143 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+070638.144 | TRACE    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter OPEN-AIR/System/Status/Splinker/List
+070638.144 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/Splinker/List
+070638.144 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+070638.144 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🔗 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+070638.144 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+070638.144 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.144 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774177597.5736377}
+070638.145 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/MIDI/ActiveInputs
+070638.145 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.145 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.146 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.146 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.146 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/MIDI/ActiveOutputs
+070638.146 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.147 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.146 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+070638.147 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.147 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/Splinker/List: []
+070638.147 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.147 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.147 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.147 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.147 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+070638.188 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.188 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.189 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.190 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.190 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+070638.190 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.230 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.230 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.230 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.230 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.232 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.232 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.232 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.232 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.240 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/oaGuiDefinitions/scan/visibility/visible
+070638.240 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.241 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.241 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.241 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.241 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.282 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz
+070638.282 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.283 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.283 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.283 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.284 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.283 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.284 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.284 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.284 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.285 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.285 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.285 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.285 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.285 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.285 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.285 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/scan/visibility/visible: {'visible': True, 'ts': 1774177598.1544678, 'tab_name': 'SCAN'}
+070638.285 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.285 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.285 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.286 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.286 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.286 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.286 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.286 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.286 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.286 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.286 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.326 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.326 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.326 | TRACE    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz
+070638.327 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.327 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.327 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.335 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz
+070638.335 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.335 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.335 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.335 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.336 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.336 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.336 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.336 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz
+070638.337 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.337 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.338 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.338 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.338 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.338 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.339 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.339 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.339 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.339 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.340 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.340 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.279 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 📥📶🔄 [MQTT] Subscribing to topic: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Quick Span/Span
+070638.279 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Quick Span/Span
+070638.279 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🔄⏳🔋 [STATE] Initializing widget state from cache/broker for 'Spectrum_Instrument_frequency.blocks.Quick Span.fields.Span'
+070638.280 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | ✅🆗🔘 [SUCCESS] The button toggler group 'Span' has materialized!
+070638.280 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.batch_processing_engine |   └─ 🔨 Creating 'OcaFold' at 'Spectrum_Instrument_frequency.blocks.Fold_Start_Stop'
+070638.280 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.280 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.280 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.batch_processing_engine |   └─ 🔨 Creating 'OcaFold' at 'Spectrum_Instrument_frequency.blocks.Fold_Presets'
+070638.280 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Applying to Canvas. BG: #2b2b2b, Solid: False, Trans: False
+070638.280 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 👻🔗✨ [ALPHA] Registering widget for transparency slicing in 'FREQUENCY'
+070638.280 | SUCCESS  | UI   | SYSTEM     | oaGuiManager.Core.loader.gui_from_json | ✅ It works! FREQUENCY is fully operational!
+070638.283 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_batch | 🧩 BatchBuilder: Clearing coordinate cache.
+070638.283 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩⏳🌀 [SYNC] Batch reslice for 'SCAN' deferred: Background generation in progress.
+070638.290 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz
+070638.290 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.290 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.290 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.291 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.291 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.292 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.293 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.293 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.faders.fader_horizontal.Core.horizontal_fader_asset_generator | 🏗️🖼️🎨 [ASSET] Generating NEW 3D horizontal fader cap: 50x55
+070638.300 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🎨🆗💾 [SUCCESS] Procedural panel generation complete. Saving to disk cache.
+070638.306 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_re | ♻️ Rebuilder: Build sequence FINISHED for 'FREQUENCY'
+070638.323 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz
+070638.323 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.324 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.324 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.327 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.327 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+070638.335 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 👁️ UITrackingService: VISIBLE for FREQUENCY
+070638.335 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.335 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.342 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz
+070638.342 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.342 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.342 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.342 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.343 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.343 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.343 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.343 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+070638.343 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.349 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🔄🎨🔤 [REDRAW] Redrawing labels for toggler 'Span'
+070638.371 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🔄🎨🔤 [REDRAW] Redrawing labels for toggler 'Span'
+070638.383 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.383 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.385 | INFO     | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨🏗️🌀 [BUILDER] Spawning background generation thread for 'FREQUENCY' (942x1020)
+070638.388 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.389 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.390 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 📦🔍✨ [CACHE] Checking for procedural panel in cache: 942x1020
+070638.390 | INFO     | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🎨🏗️🌀 [BUILDER] Generating NEW Procedural Panel (942x1020) Seed: 303
+070638.390 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🎨🖌️🔳 [LAYER] 1. Substrate: #000000
+070638.390 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🖌️🎨✨ [LAYER] Applying flat streak texture.
+070638.394 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_batch | 🧩 BatchBuilder: Clearing coordinate cache.
+070638.394 | DEBUG    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🏗️✨ [SYNC] Executing batch reslice for 7 widgets in 'START_PAUSE_STOP'
+070638.401 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible
+070638.401 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.403 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.404 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.405 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.406 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.411 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🎨🖌️🌈 [LAYER] 2. Paint: #ffffff (Opacity: 0.1)
+070638.412 | INFO     | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🆗✅ [BUILDER] Reslice COMPLETE: 7 updated, 0 skipped (Jitter Filter) for 'START_PAUSE_STOP'.
+070638.412 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.tab | 🔍🔵 Triggering initial tab selection for all notebooks.
+070638.412 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.tab | ▶️ _on_tab_change detected.
+070638.412 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.tab | ▶️ _on_tab_change detected.
+070638.412 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.tab | ▶️ _on_tab_change detected.
+070638.412 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.loader.gui_from_json | 🖥️🔵 Tab 'FREQUENCY' focused. Systems nominal.
+070638.412 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Core.tab | ▶️ _on_tab_change detected.
+070638.413 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.loader.gui_from_json | 🖥️🔵 Tab 'SCAN' focused. Systems nominal.
+070638.413 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 📏 UITrackingService: Published geometry for START_PAUSE_STOP
+070638.413 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🔪🎨✨ [LAYER] Etching edge wear scratches.
+070638.416 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🗡️🎨✨ [LAYER] Carving deep substrate-revealing scratches.
+070638.416 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.422 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🔄🎨🔤 [REDRAW] Redrawing labels for toggler 'Span'
+070638.422 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.447 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 📐🎨✨ [LAYER] Applying linear lighting gradient.
+070638.458 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🔳🎨✨ [LAYER] 5. Applying vignette edge fade.
+070638.461 | TRACE    | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨📐🔳 [LAYOUT] BG Sync BLOCKED for 'SCAN': Rebuild in progress.
+070638.461 | SUCCESS  | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨🆗✨ [BUILDER] Applying generated background (950x977) to 'SCAN' UI.
+070638.471 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🖊️🎨✨ [LAYER] 6. Adding surface micro-scratches.
+070638.472 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🔩🎨✨ [LAYER] 8. Drilling screws into the panel.
+070638.472 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 📦🔍✨ [CACHE] Checking for procedural screw in cache: 24px
+070638.472 | INFO     | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔩🏗️🌀 [BUILDER] Generating NEW Procedural Screw (24px)
+070638.472 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | ⚙️🔘✅ [CONFIG] Type: fillister, Finish: custom, Rotation: 24.0°
+070638.472 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 👻🌀🔳 [LAYER] 1. Casting external drop shadow.
+070638.472 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🖌️🔘 [LAYER] 2. Lathe-turning screw head: #e0cebc
+070638.473 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔳📐🕳️ [LAYER] 3. Punching Robertson square drive void.
+070638.473 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_batch | 🧩 BatchBuilder: Clearing coordinate cache.
+070638.473 | TRACE    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩⏳🌀 [SYNC] Batch reslice for 'FREQUENCY' deferred: Background generation in progress.
+070638.473 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🆗💾 [SUCCESS] Procedural screw generation complete. Saving to cache.
+070638.473 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 📦🔍✨ [CACHE] Checking for procedural screw in cache: 24px
+070638.474 | INFO     | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔩🏗️🌀 [BUILDER] Generating NEW Procedural Screw (24px)
+070638.474 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | ⚙️🔘✅ [CONFIG] Type: fillister, Finish: custom, Rotation: 38.0°
+070638.474 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 👻🌀🔳 [LAYER] 1. Casting external drop shadow.
+070638.474 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🖌️🔘 [LAYER] 2. Lathe-turning screw head: #e0cebc
+070638.474 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔳📐🕳️ [LAYER] 3. Punching Robertson square drive void.
+070638.474 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🆗💾 [SUCCESS] Procedural screw generation complete. Saving to cache.
+070638.474 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 📦🔍✨ [CACHE] Checking for procedural screw in cache: 24px
+070636.671 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Launching OPEN-AIR Partitions... (Mission Critical: False)
+070636.671 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Session Identity established (Randomized): 6BACD38C897D76F2
+070636.671 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Spawning Partition B (UI)...
+070636.672 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Spawning Partition A (Core)...
+070636.673 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: System Running. Monitoring child processes...
+070638.475 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 📦🆗✅ [CACHE] Retaining procedural screw from disk cache.
+070638.475 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 📦🔍✨ [CACHE] Checking for procedural screw in cache: 24px
+070638.475 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/oaGuiDefinitions/visibility/geometry
+070638.475 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.475 | INFO     | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔩🏗️🌀 [BUILDER] Generating NEW Procedural Screw (24px)
+070638.476 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.476 | DEBUG    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | ⚙️🔘✅ [CONFIG] Type: fillister, Finish: custom, Rotation: 66.0°
+070638.476 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.476 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 👻🌀🔳 [LAYER] 1. Casting external drop shadow.
+070638.476 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🖌️🔘 [LAYER] 2. Lathe-turning screw head: #e0cebc
+070638.476 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.477 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.477 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🔳📐🕳️ [LAYER] 3. Punching Robertson square drive void.
+070638.477 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.utils.panel_screw.screw_generator | 🎨🆗💾 [SUCCESS] Procedural screw generation complete. Saving to cache.
+070638.479 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 📐🎨✨ [LAYER] 8. Folding metal creases.
+070638.481 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🌫️🎨✨ [LAYER] 8. Settling fine dust particles.
+070638.483 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🌫️🎨✨ [FINAL] Applying global Gaussian blur: 0.8
+070638.483 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.483 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.506 | SUCCESS  | UI   | BUILDER    | oaGuiElements.Core.utils.panels.panel_generator | 🎨🆗💾 [SUCCESS] Procedural panel generation complete. Saving to disk cache.
+070638.522 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_batch | 🧩 BatchBuilder: Clearing coordinate cache.
+070638.523 | DEBUG    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🏗️✨ [SYNC] Executing batch reslice for 3 widgets in 'SCAN'
+070638.535 | INFO     | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🆗✅ [BUILDER] Reslice COMPLETE: 3 updated, 0 skipped (Jitter Filter) for 'SCAN'.
+070638.536 | SUCCESS  | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨🆗✨ [BUILDER] Applying generated background (942x1020) to 'FREQUENCY' UI.
+070638.585 | TRACE    | UI   | BUILDER    | oaGuiBackground.Core.background | 🎨📐🔳 [LAYOUT] BG Sync BLOCKED for 'FREQUENCY': Rebuild in progress.
+070638.586 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_batch | 🧩 BatchBuilder: Clearing coordinate cache.
+070638.586 | DEBUG    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🏗️✨ [SYNC] Executing batch reslice for 3 widgets in 'SCAN'
+070638.586 | TRACE    | UI   | SYSTEM     | oaGuiManager.Core.transparency.transparency | TransparencyManager: Slice SKIPPED for Frame (Jitter Filter). Delta: (0px, 0px)
+070638.586 | INFO     | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🆗✅ [BUILDER] Reslice COMPLETE: 3 updated, 0 skipped (Jitter Filter) for 'SCAN'.
+070638.654 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 📏 UITrackingService: Published geometry for SCAN
+070638.655 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.655 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.705 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry
+070638.706 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.706 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.706 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.706 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.707 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.707 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.707 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.735 | TRACE    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_batch | 🧩 BatchBuilder: Clearing coordinate cache.
+070638.735 | DEBUG    | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🏗️✨ [SYNC] Executing batch reslice for 44 widgets in 'FREQUENCY'
+070638.795 | INFO     | UI   | BUILDER    | oaGuiBuilder.Core.slicing_registry | 🧩🆗✅ [BUILDER] Reslice COMPLETE: 44 updated, 0 skipped (Jitter Filter) for 'FREQUENCY'.
+070638.820 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🔄🎨🔤 [REDRAW] Redrawing labels for toggler 'Span'
+070638.836 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 📏 UITrackingService: Published geometry for FREQUENCY
+070638.837 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.837 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.843 | TRACE    | UI   | BUILDER    | oaGuiElements.Core.buttons.button_toggler.button_toggler | 🔄🎨🔤 [REDRAW] Redrawing labels for toggler 'Span'
+070638.844 | DEBUG    | UI   | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📖 Reading Cache.
+070638.845 | DEBUG    | UI   | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📄 No cache file found.
+070638.845 | INFO     | UI   | DATA       | oaStateCache.Core.state_cache | 💾✨ No cache to initialize.
+070638.887 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry
+070638.888 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.888 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.889 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.889 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.889 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.890 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.890 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.340 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.380 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.380 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] Ⓖ 🚀 💾 Ⓜ️ 🅾️ Ⓢ 🎹 >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.380 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.380 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+070638.386 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible
+070638.387 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.387 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.387 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.388 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.388 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.430 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.430 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.430 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774177598.3354173, 'tab_name': 'FREQUENCY'}
+070638.430 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.476 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.477 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.480 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/oaGuiDefinitions/visibility/geometry
+070638.480 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.481 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.481 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.481 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.482 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.41307, 'tab_name': 'START_PAUSE...
+070638.655 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.655 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.705 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry
+070638.706 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.706 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.706 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.707 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.707 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.707 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.708 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/scan/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.654846, 'tab_name': 'SCAN'}
+070638.837 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.837 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.887 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry
+070638.887 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.888 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.888 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.888 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.888 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.890 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070638.890 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/oaGuiDefinitions/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1131, 'x': 1920, 'y': 69, 'ts': 1774177598.8366008, 'tab_name': 'FREQUENCY...
+070640.891 | SUCCESS  | UI   | DATA       | oaStateCache.Core.cache_save_engine | 💾✍️ [CACHE] Debounced Commit: 14 deltas saved.
+070640.890 | SUCCESS  | CORE | DATA       | oaStateCache.Core.cache_save_engine | 💾✍️ [CACHE] Debounced Commit: 13 deltas saved.
+070641.094 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🖥️🎨 [UI] Initiating shutdown...
+070641.094 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: app
+070641.094 | DEBUG    | UI   | SYSTEM     | oaGuiBuildShell.Managers.gui_display | Initiating application shutdown...
+070641.095 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_connection | 📡🔗👋 [MQTT] Disconnection initiated.
+070641.095 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: mqtt_conn
+070641.095 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_connection | 📡🔗👋 [MQTT] Disconnection initiated.
+070641.095 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: sub_router
+070641.096 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: state_cache
+070641.097 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: mirror_engine
+070641.097 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: osc_manager
+070641.097 | WARNING  | UI   | OSC        | oaComOSC.Managers.osc_manager | 🅾️📡🛑 [OSC] Bridge Offline.
+070641.097 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: snmp_manager
+070641.097 | WARNING  | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🌐 SNMP Bridge Offline.
+070641.098 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: midi_manager
+070641.098 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: splinker_manager
+070641.098 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: protocol_router
+070641.098 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🖥️🎨 [UI] Managers signaled to stop. Quitting mainloop...
+070641.098 | DEBUG    | UI   | SYSTEM     | __main__             | 🖥️🎨 [UI] MainLoop exited. Destroying root...
+070641.119 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 👁️ UITrackingService: DESTROYED FREQUENCY
+070641.125 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 👁️ UITrackingService: DESTROYED START_PAUSE_STOP
+070641.130 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.telemetry.ui_tracking_service | 👁️ UITrackingService: DESTROYED SCAN
+070642.674 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: 👋 UI exited (Code 0). System complete.
+070642.674 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Terminating child processes...
+070642.775 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Supervisor shutdown complete. Goodbye.
+070642.775 | INFO     | SUP  | SYSTEM     | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] Stopping Profiler...
+070642.775 | INFO     | SUP  | SYSTEM     | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] Synthesizing Intelligence Report...
+070642.796 | DEBUG    | SUP  | SYSTEM     | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] JSON components saved to /home/anthony/Documents/OPEN-AIR/oaDataLogs/FlameGraph
+070642.800 | SUCCESS  | SUP  | SYSTEM     | oaTests.Core.FlameGraph.flame_html | ? Standalone Performance Report generated: /home/anthony/Documents/OPEN-AIR/oaDataLogs/FlameGraph/flamegraph.html
+070642.800 | SUCCESS  | SUP  | SYSTEM     | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] Intelligence Report: /home/anthony/Documents/OPEN-AIR/oaDataLogs/FlameGraph/flamegraph.html
+070642.800 | SUCCESS  | SUP  | SYSTEM     | __main__             | 🔥 [ENTRY] Performance profiling session complete.
+070642.800 | INFO     | SUP  | SYSTEM     | __main__             | 🔥 [ENTRY] Report: /home/anthony/Documents/OPEN-AIR/oaDataLogs/FlameGraph/flamegraph.html

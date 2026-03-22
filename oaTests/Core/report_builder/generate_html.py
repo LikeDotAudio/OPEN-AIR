@@ -5,6 +5,7 @@
 # Description: Brief summary of purpose
 
 import os
+import html
 
 class HTMLGenerator:
     @staticmethod
@@ -38,16 +39,16 @@ class HTMLGenerator:
         .errors {{ background: #f39c12; }}
 
         /* Tables */
-        table {{ width: 100%; border-collapse: collapse; margin-top: 10px; table-layout: fixed; background: #333; }}
-        th, td {{ border: 1px solid #444; padding: 12px; text-align: left; vertical-align: top; overflow: hidden; word-wrap: break-word; }}
+        table {{ width: 100%; border-collapse: collapse; margin-top: 10px; table-layout: auto; background: #333; }}
+        th, td {{ border: 1px solid #444; padding: 12px; text-align: left; vertical-align: top; word-wrap: break-word; }}
         th {{ background-color: #3d3d3d; color: #aaa; font-weight: 600; text-transform: uppercase; font-size: 0.8em; letter-spacing: 0.05em; }}
         tr:nth-child(even) {{ background-color: #383838; }}
         tr:hover {{ background-color: #404040; }}
         .status-passed {{ color: #2ecc71; font-weight: bold; }}
         .status-failed {{ color: #e74c3c; font-weight: bold; }}
         .status-error {{ color: #f39c12; font-weight: bold; }}
-        .description {{ font-size: 0.9em; color: #bbb; line-height: 1.4; }}
-        .test-name {{ font-family: 'Consolas', monospace; font-size: 0.85em; color: #33A1FD; }}
+        .description {{ font-size: 0.9em; color: #bbb; line-height: 1.4; white-space: pre-wrap; max-height: 300px; overflow-y: auto; }}
+        .test-name {{ font-family: 'Consolas', monospace; font-size: 0.85em; color: #33A1FD; white-space: pre-wrap; word-break: break-all; }}
 
         /* Log Entry Styles */
         .log-entry {{ background: #1a1a1a; border: 1px solid #444; border-radius: 5px; margin-bottom: 20px; overflow: hidden; }}
@@ -102,13 +103,6 @@ class HTMLGenerator:
             </div>
 
             <table>
-                <colgroup>
-                    <col style="width: 20%;">
-                    <col style="width: 35%;">
-                    <col style="width: 25%;">
-                    <col style="width: 10%;">
-                    <col style="width: 10%;">
-                </colgroup>
                 <thead>
                     <tr>
                         <th>Test Case</th>
@@ -166,9 +160,9 @@ class HTMLGenerator:
         for r in sorted_results:
             row = f"""
                 <tr>
-                    <td class="test-name">{r['name']}</td>
-                    <td class="description">{r['description']}</td>
-                    <td class="description">{r.get('cause', '')}</td>
+                    <td class="test-name">{html.escape(r['name'])}</td>
+                    <td class="description">{html.escape(r['description'])}</td>
+                    <td class="description">{html.escape(r.get('cause', ''))}</td>
                     <td class="status-{r['status']}">{r['status'].capitalize()}</td>
                     <td>{r['duration']}</td>
                 </tr>

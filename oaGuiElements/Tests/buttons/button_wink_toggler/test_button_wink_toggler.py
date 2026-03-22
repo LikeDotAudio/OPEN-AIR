@@ -25,8 +25,11 @@ class TestButtonWinkToggler(unittest.TestCase):
             self.root = MagicMock()
             self.root.winfo_exists.return_value = True
             self.patchers.append(patch('tkinter.BooleanVar', return_value=MagicMock()))
+            self.patchers.append(patch('tkinter.StringVar', return_value=MagicMock()))
             mock_canvas = MagicMock()
             mock_canvas.winfo_exists.return_value = True
+            mock_canvas.winfo_width.return_value = 100
+            mock_canvas.winfo_height.return_value = 100
             self.patchers.append(patch('tkinter.Canvas', return_value=mock_canvas))
             
         for p in self.patchers:
@@ -43,13 +46,13 @@ class TestButtonWinkToggler(unittest.TestCase):
         self.context.app_instance = MagicMock()
 
     def test_builder_creator_make(self):
-        try:
-            'Goal: Verify that BuilderButtonWinkTogglerCreator creates a group.'
+        'Goal: Verify that BuilderButtonWinkTogglerCreator creates a group.'
+        # Patch the renderer to avoid image issues during creation test
+        # These are handled by drawing logic that requires real Tk context for images
+        with patch('oaGuiElements.Core.buttons.button_wink.button_wink.draw_wink_visuals'):
             creator = BuilderButtonWinkTogglerCreator()
             widget = creator.make_button_wink_toggler(parent_widget=self.root, config_data=self.config, context=self.context)
             self.assertIsNotNone(widget, 'Expected widget to be not None')
-        except Exception as e:
-            self.fail(f'Test builder creator make crashed. Error: {str(e)}')
 
     def tearDown(self):
         if hasattr(self, 'patchers'):

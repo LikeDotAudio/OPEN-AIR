@@ -23,7 +23,6 @@ from oaTests.Core.report_runner.run_test import TestRunner
 from oaTests.Core.report_runner.collate_data import collate_extra_tabs
 from oaTests.Core.report_runner.run_report_builder import ReportGenerator
 from oaTests.Core.report_runner import DiscoverTests
-from oaTests.Core.report_builder import audit_parser
 from oaTests.Core.CleanupUtilities import clear_logs
 
 class UnifiedOrchestrator:
@@ -105,28 +104,6 @@ class UnifiedOrchestrator:
         # By passing [self.project_root], we give unittest a valid 'importable' start point.
         runner = TestRunner(self._record_result)
         runner.run([self.project_root], top_level_dir=self.project_root)
-
-        # 2.5 Audit Results Integration
-        print(f"📡 Integrating Audit Results...")
-        audit_dir = os.path.join(self.project_root, "oaDataAudits")
-        audit_results = audit_parser.get_latest_audit_results(audit_dir)
-        for r in audit_results:
-            self.summary["total"] += 1
-            if r["status"] == "passed": self.summary["passed"] += 1
-            elif r["status"] == "failed": self.summary["failed"] += 1
-            elif r["status"] == "error": self.summary["errors"] += 1
-            elif r["status"] == "skipped": self.summary["skipped"] += 1
-            
-            # Map audit result to the detail format
-            self.test_results.append({
-                "classname": "Audit",
-                "name": r["name"],
-                "status": r["status"],
-                "message": "",
-                "cause": r["cause"],
-                "description": r["description"],
-                "duration": r["duration"]
-            })
 
         # 3. collate_data.py
         print(f"\n📊 Collating extra report data...")

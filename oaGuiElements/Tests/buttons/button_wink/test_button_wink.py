@@ -43,13 +43,13 @@ class TestButtonWink(unittest.TestCase):
         self.context.app_instance = MagicMock()
 
     def test_builder_creator_make(self):
-        try:
-            'Goal: Verify that BuilderButtonWinkCreator creates a wink button.'
+        'Goal: Verify that BuilderButtonWinkCreator creates a wink button.'
+        # Patch the renderer to avoid image issues during creation test
+        # These are handled by drawing logic that requires real Tk context for images
+        with patch('oaGuiElements.Core.buttons.button_wink.button_wink.draw_wink_visuals'):
             creator = BuilderButtonWinkCreator()
             widget = creator.make_button_wink(parent_widget=self.root, config_data=self.config, context=self.context)
             self.assertIsNotNone(widget, 'Expected widget to be not None')
-        except Exception as e:
-            self.fail(f'Test builder creator make crashed. Error: {str(e)}')
 
     def tearDown(self):
         if hasattr(self, 'patchers'):

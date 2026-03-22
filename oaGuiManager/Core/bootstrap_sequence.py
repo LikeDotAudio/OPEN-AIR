@@ -93,8 +93,8 @@ class AsyncBootstrapEngine:
             splinker.handle_mqtt_command(topic=msg.topic, payload=msg.payload)
         
         sub_router.subscribe_to_topic(
-            topic="OPEN-AIR/System/Control/Splinker/#", 
-            callback=splinker_mqtt_wrapper
+            topic_filter="OPEN-AIR/System/Control/Splinker/#", 
+            callback_func=splinker_mqtt_wrapper
         )
 
     def _launch_app(self, mqtt_conn, sub_router, mirror_engine, state_cache):

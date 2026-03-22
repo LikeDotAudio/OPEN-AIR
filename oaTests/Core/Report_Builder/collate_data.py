@@ -6,18 +6,20 @@ def collate_extra_tabs(project_root):
     by calling their respective builder modules.
     """
     try:
-        from oaTests.Core.Report_Builder import ReportBuilder_Audits, ReportBuilder_ChangeLog, ReportBuilder_ErrorLog, ReportBuilder_RunLog
+        from oaTests.Core.Report_Builder import ReportBuilder_Audits, ReportBuilder_ChangeLog, ReportBuilder_ErrorLog, ReportBuilder_RunLog, ReportBuilder_FlameGraph
         
         audit_html = ReportBuilder_Audits.build_tab(os.path.join(project_root, "oaDataAudits"))
         changelog_html = ReportBuilder_ChangeLog.build_tab(os.path.join(project_root, "oaDataLogs", "ChangeLog"))
         error_html = ReportBuilder_ErrorLog.build_tab(os.path.join(project_root, "oaDataLogs", "Errors"))
         runlog_html = ReportBuilder_RunLog.build_tab(os.path.join(project_root, "oaDataLogs", "ApplicationRunLog"))
+        flamegraph_html = ReportBuilder_FlameGraph.build_tab(project_root)
         
         return {
             "audit": audit_html,
             "changelog": changelog_html,
             "error": error_html,
-            "runlog": runlog_html
+            "runlog": runlog_html,
+            "flamegraph": flamegraph_html
         }
     except Exception as e:
         print(f"⚠️ Error during data collation: {e}")

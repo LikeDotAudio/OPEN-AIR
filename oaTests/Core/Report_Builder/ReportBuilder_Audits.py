@@ -6,7 +6,7 @@ def build_tab(data_dir):
     """
     Scans the audits directory and returns an HTML snippet for the tab content.
     """
-    audit_files = glob.glob(os.path.join(data_dir, "*.md"))
+    audit_files = glob.glob(os.path.join(data_dir, "*.md")) + glob.glob(os.path.join(data_dir, "*.txt"))
     if not audit_files:
         return "<h3>No Audit Reports Found</h3><p>Run an audit command to generate reports.</p>"
 

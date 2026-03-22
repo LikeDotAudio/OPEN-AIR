@@ -1,0 +1,5 @@
+out/*
+logs/*
+.vs
+installer/*.exe
+ember-csv-logs

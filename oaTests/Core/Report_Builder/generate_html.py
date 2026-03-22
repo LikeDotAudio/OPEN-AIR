@@ -78,7 +78,7 @@ class HTMLGenerator:
     <div class="container">
         <div class="tab-box">
             <button class="tab-btn active" onclick="openTab(event, 'TestResults')">Test Results</button>
-            <button class="tab-btn" onclick="openTab(event, 'AudioReports')">Audit Reports</button>
+            <button class="tab-btn" onclick="openTab(event, 'AuditReports')">Audit Reports</button>
             <button class="tab-btn" onclick="openTab(event, 'ChangeLogs')">Change Logs</button>
             <button class="tab-btn" onclick="openTab(event, 'ErrorLogs')">Error Logs</button>
             <button class="tab-btn" onclick="openTab(event, 'RunLogs')">Application Run Logs</button>
@@ -118,7 +118,7 @@ class HTMLGenerator:
         </div>
 
         <!-- TAB 2: Audit Reports -->
-        <div id="AudioReports" class="tab-content">
+        <div id="AuditReports" class="tab-content">
             {audit_html}
         </div>
 

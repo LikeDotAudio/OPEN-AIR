@@ -410,7 +410,7 @@
             "cosmetics": {
               "colors": {
                 "primary": "#FFAB40",
-                "secondary": "#FFCCBC"
+                "secondary": "#FFCAPK"
               },
               "style_flags": {
                 "show_grid": false,
@@ -925,8 +925,8 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#FFCCBC",
-                "secondary": "#FFCCBC"
+                "primary": "#FFCAPK",
+                "secondary": "#FFCAPK"
               },
               "style_flags": {
                 "show_grid": false,
@@ -1571,8 +1571,8 @@
             },
             "cosmetics": {
               "colors": {
-                "primary": "#FFCCBC",
-                "secondary": "#FFCCBC"
+                "primary": "#FFCAPK",
+                "secondary": "#FFCAPK"
               },
               "style_flags": {
                 "show_grid": false,

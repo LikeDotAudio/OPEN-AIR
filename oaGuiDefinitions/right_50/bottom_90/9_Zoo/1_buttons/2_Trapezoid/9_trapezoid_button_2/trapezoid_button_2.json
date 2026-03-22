@@ -271,7 +271,7 @@
             "width": 50,
             "height": 50,
             "color": "#FF9800",
-            "led_color": "#FFCCBC",
+            "led_color": "#FFCAPK",
             "latching": false,
             "slant": 15,
             "value_text_inside": true,

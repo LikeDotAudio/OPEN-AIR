@@ -5,11 +5,11 @@ IMPORTS
     DisplayString FROM SNMPv2-TC;
 
 openAirMIB MODULE-IDENTITY
-    LAST-UPDATED "202603210358Z"
+    LAST-UPDATED "202603220556Z"
     ORGANIZATION "OPEN-AIR Project"
     CONTACT-INFO "Anthony Peter Kuzub"
     DESCRIPTION "MQTT-Aligned OID Tree for OPEN-AIR."
-    REVISION "202603210358Z"
+    REVISION "202603220556Z"
     DESCRIPTION "Strictly unique path-aligned generation."
     ::= { enterprises 25030 }
 

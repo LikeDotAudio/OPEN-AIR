@@ -438,9 +438,9 @@
               "colors": {}
             }
           },
-          "Scale_CBC": {
+          "Scale_APK": {
             "type": "_NeedleVUMeter",
-            "label": "4. CBC (Canada)",
+            "label": "4. APK (Canada)",
             "notes": "-4 to +20. Ref +8. 'dBm 600 \u03a9'. Yellow Strip (+16 to +24).",
             "geometry": {
               "width": 150,

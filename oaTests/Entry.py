@@ -16,7 +16,7 @@ if project_root not in sys.path:
 from oaTests.Core.Report_Builder.run_test import TestRunner
 from oaTests.Core.Report_Builder.collate_data import collate_extra_tabs
 from oaTests.Core.Report_Builder.run_report_builder import ReportGenerator
-from oaTests.Core.Report_Builder import clear_logs
+from oaTests.Core.Report_Builder import clear_logs, audit_parser
 
 class UnifiedOrchestrator:
     def __init__(self):
@@ -83,7 +83,7 @@ class UnifiedOrchestrator:
 
     def execute(self):
         # 1. Optional Flame Test
-        flame_path = os.path.join(self.project_root, "oaTests", "Core", "FlameGraph", "wall_of_shame.py")
+        flame_path = os.path.join(self.project_root, "oaTests", "Core", "FlameGraph", "Entry.py")
         self._run_timed_prompt("🔥 [FLAME TEST]", "Would you like to run a flame test?", flame_path)
 
         # 2. run_test.py (IMPORT & DISCOVERY FIX)
@@ -106,6 +106,28 @@ class UnifiedOrchestrator:
         # By passing [self.project_root], we give unittest a valid 'importable' start point.
         runner = TestRunner(self._record_result)
         runner.run([self.project_root], top_level_dir=self.project_root)
+
+        # 2.5 Audit Results Integration
+        print(f"📡 Integrating Audit Results...")
+        audit_dir = os.path.join(self.project_root, "oaDataAudits")
+        audit_results = audit_parser.get_latest_audit_results(audit_dir)
+        for r in audit_results:
+            self.summary["total"] += 1
+            if r["status"] == "passed": self.summary["passed"] += 1
+            elif r["status"] == "failed": self.summary["failed"] += 1
+            elif r["status"] == "error": self.summary["errors"] += 1
+            elif r["status"] == "skipped": self.summary["skipped"] += 1
+            
+            # Map audit result to the detail format
+            self.test_results.append({
+                "classname": "Audit",
+                "name": r["name"],
+                "status": r["status"],
+                "message": "",
+                "cause": r["cause"],
+                "description": r["description"],
+                "duration": r["duration"]
+            })
 
         # 3. collate_data.py
         print(f"\n📊 Collating extra report data...")

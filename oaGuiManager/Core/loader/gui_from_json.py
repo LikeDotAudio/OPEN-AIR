@@ -69,7 +69,7 @@ class UniversalGuiLoader(tk.Frame):
 
         except Exception as e:
             # 4. Catastrophic Failure Handling
-            logger.exception(f"💥 The Flux Capacitor cracked while building {self.module_name}! Error: {e}")
+            logger.exception(f"💥 The Flux Capacitocracked while building {self.module_name}! Error: {e}")
             self._handle_build_error(e)
 
     def _instantiate_builder(self):

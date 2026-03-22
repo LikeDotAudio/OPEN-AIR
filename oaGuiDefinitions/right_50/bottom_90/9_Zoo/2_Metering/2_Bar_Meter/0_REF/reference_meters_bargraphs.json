@@ -438,11 +438,11 @@
               }
             }
           },
-          "Scale_CBC_Bar": {
+          "Scale_APK_Bar": {
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "4. CBC (Canada)",
+            "label": "4. APK (Canada)",
             "notes": "Ref +8. Yellow Strip (+16 to +24).",
             "geometry": {
               "width": 300,

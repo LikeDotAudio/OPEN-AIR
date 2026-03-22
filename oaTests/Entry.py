@@ -16,7 +16,7 @@ if project_root not in sys.path:
 from oaTests.Core.Report_Builder.run_test import TestRunner
 from oaTests.Core.Report_Builder.collate_data import collate_extra_tabs
 from oaTests.Core.Report_Builder.run_report_builder import ReportGenerator
-from oaTests.Core.Report_Builder import clear_logs, audit_parser
+from oaTests.Core.Report_Builder import clear_logs, audit_parser, DiscoverTests
 
 class UnifiedOrchestrator:
     def __init__(self):
@@ -89,18 +89,9 @@ class UnifiedOrchestrator:
         # 2. run_test.py (IMPORT & DISCOVERY FIX)
         print(f"\n🔬 Starting Deep Test Discovery...")
         
-        # We start discovery from the project root. This ensures that when unittest
-        # finds a file in oaGuiElements/Tests/Knobs/knob, the import 'oaGuiElements'
-        # can be resolved correctly because the search started at the root.
-        
-        # We'll print the directories that contain tests just for your visibility
-        test_files = glob.glob(os.path.join(self.project_root, "**", "test_*.py"), recursive=True)
-        found_dirs = sorted(list(set([os.path.dirname(f) for f in test_files])))
-        
-        print(f"📂 Discovery identified {len(found_dirs)} sub-folders containing test files.")
-        for d in found_dirs:
-            rel = os.path.relpath(d, self.project_root)
-            print(f"   - {rel}")
+        # Identify directories containing tests
+        found_dirs = DiscoverTests.identify_test_directories(self.project_root)
+        DiscoverTests.print_discovery_summary(self.project_root, found_dirs)
 
         # Execute the runner. 
         # By passing [self.project_root], we give unittest a valid 'importable' start point.

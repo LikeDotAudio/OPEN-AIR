@@ -1,0 +1,1455 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OPEN-AIR Unified Intelligence Report</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #1e1e1e; color: #dcdcdc; }
+        .header { background: #2b2b2b; padding: 20px 40px; border-bottom: 2px solid #33A1FD; }
+        h1 { color: #ffffff; margin: 0; font-size: 1.8em; }
+        .container { padding: 30px 40px; }
+        
+        /* Tabs Styling */
+        .tab-box { display: flex; border-bottom: 1px solid #444; margin-bottom: 20px; }
+        .tab-btn { padding: 12px 25px; cursor: pointer; background: #2b2b2b; border: none; color: #888; border-radius: 5px 5px 0 0; margin-right: 5px; transition: 0.3s; font-weight: 600; }
+        .tab-btn:hover { background: #333; color: #fff; }
+        .tab-btn.active { background: #33A1FD; color: white; }
+        .tab-content { display: none; background: #2b2b2b; padding: 25px; border-radius: 0 0 8px 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .tab-content.active { display: block; }
+
+        /* Summary Stats */
+        .summary-box { display: flex; gap: 20px; margin-bottom: 30px; }
+        .stat { flex: 1; padding: 15px; border-radius: 6px; text-align: center; color: white; font-weight: bold; font-size: 1.1em; }
+        .total { background: #444; }
+        .passed { background: #27ae60; }
+        .failed { background: #e74c3c; }
+        .errors { background: #f39c12; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; table-layout: fixed; background: #333; }
+        th, td { border: 1px solid #444; padding: 12px; text-align: left; vertical-align: top; overflow: hidden; word-wrap: break-word; }
+        th { background-color: #3d3d3d; color: #aaa; font-weight: 600; text-transform: uppercase; font-size: 0.8em; letter-spacing: 0.05em; }
+        tr:nth-child(even) { background-color: #383838; }
+        tr:hover { background-color: #404040; }
+        .status-passed { color: #2ecc71; font-weight: bold; }
+        .status-failed { color: #e74c3c; font-weight: bold; }
+        .status-error { color: #f39c12; font-weight: bold; }
+        .description { font-size: 0.9em; color: #bbb; line-height: 1.4; }
+        .test-name { font-family: 'Consolas', monospace; font-size: 0.85em; color: #33A1FD; }
+
+        /* Log Entry Styles */
+        .log-entry { background: #1a1a1a; border: 1px solid #444; border-radius: 5px; margin-bottom: 20px; overflow: hidden; }
+        .log-header { background: #333; padding: 10px 15px; border-bottom: 1px solid #444; display: flex; justify-content: space-between; align-items: center; }
+        .log-filename { color: #33A1FD; font-weight: bold; font-family: monospace; }
+        .log-time { color: #666; font-size: 0.85em; }
+        .log-content { padding: 15px; margin: 0; font-family: 'Consolas', monospace; font-size: 0.9em; white-space: pre-wrap; color: #ccc; max-height: 400px; overflow-y: auto; }
+        .error-log { border-left: 5px solid #e74c3c; }
+    </style>
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>OPEN-AIR Unified Intelligence Report</h1>
+        <p style="color: #666; margin: 5px 0 0 0;">Generated on: <strong>2026-03-22 06:03:34</strong></p>
+    </div>
+
+    <div class="container">
+        <div class="tab-box">
+            <button class="tab-btn active" onclick="openTab(event, 'TestResults')">Test Results</button>
+            <button class="tab-btn" onclick="openTab(event, 'AuditReports')">Audit Reports</button>
+            <button class="tab-btn" onclick="openTab(event, 'ChangeLogs')">Change Logs</button>
+            <button class="tab-btn" onclick="openTab(event, 'ErrorLogs')">Error Logs</button>
+            <button class="tab-btn" onclick="openTab(event, 'RunLogs')">Application Run Logs</button>
+            <button class="tab-btn" onclick="openTab(event, 'FlameGraph')">Flame Graph</button>
+        </div>
+
+        <!-- TAB 1: Test Results -->
+        <div id="TestResults" class="tab-content active">
+            <div class="summary-box">
+                <div class="stat total">Total: 46</div>
+                <div class="stat passed">Passed: 45</div>
+                <div class="stat failed">Failed: 0</div>
+                <div class="stat errors">Errors: 1</div>
+            </div>
+
+            <table>
+                <colgroup>
+                    <col style="width: 20%;">
+                    <col style="width: 35%;">
+                    <col style="width: 25%;">
+                    <col style="width: 10%;">
+                    <col style="width: 10%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Test Case</th>
+                        <th>Goal & Achievement</th>
+                        <th>Failure Cause</th>
+                        <th>Status</th>
+                        <th>Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                <tr>
+                    <td class="test-name">oaComMQTT.Tests.test_mqtt_logic (unittest.loader._FailedTest.oaComMQTT.Tests.test_mqtt_logic)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description">Failed to import test module: oaComMQTT.Tests.test_mqtt_logic
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/anthony/Documents/OPEN-AIR/oaComMQTT/Tests/test_mqtt_logic.py", line 8, in <module>
+    from ClearMQTT import MQTTSweeper
+ModuleNotFoundError: No module named 'ClearMQTT'
+<br><small><i>At loader.py:33 in testFailure -> raise self._exception</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">Audit: AuditArchitecture.toml</td>
+                    <td class="description">This is the first architectural audit of the OPEN-AIR project. The codebase is structured into modular components, with a supervisor process (`OpenAir.py`) managing a core partition (`oaComBroker/Core/open_air_core.py`) and UI partition. Key infrastructure modules for MQTT, VISA, SNMP, MIDI, and configuration handling are present.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>N/A</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">Audit: AuditClassObjects.toml</td>
+                    <td class="description">The initial audit reveals several potential areas for improvement:</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>N/A</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_add_monitor_callback (oaComSNMP.Tests.test_snmp_manager.TestSNMPManager.test_add_monitor_callback)</td>
+                    <td class="description">Goal: Verify that GUI monitor callbacks can be registered.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_add_monitor_callback (oaSplinker.Tests.test_splinker.TestSplinker.test_add_monitor_callback)</td>
+                    <td class="description">Test adding a monitor callback.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0013s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_broadcast_gui_change (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_broadcast_gui_change)</td>
+                    <td class="description">Test that GUI changes trigger MQTT publication.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0073s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_calculate_topic (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_calculate_topic)</td>
+                    <td class="description">Test topic calculation logic.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0072s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_config_loading_from_file (oaConfiguration.Tests.test_config_reader.TestConfigReader.test_config_loading_from_file)</td>
+                    <td class="description">BUILD: Mock ConfigParser content. OPERATE: Load. CHECK: Assert specific value.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_create_default_config_ini (oaConfiguration.Tests.test_config.TestConfigGenerator.test_create_default_config_ini)</td>
+                    <td class="description">Test that the default config.ini is created with expected sections.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0004s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_default_values (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_default_values)</td>
+                    <td class="description">Test that default values are present after initialization.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_file_io_load (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_file_io_load)</td>
+                    <td class="description">Load and parse JSON configuration files.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0008s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_global_settings_property (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_global_settings_property)</td>
+                    <td class="description">Test the global_settings property.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_handle_external_update (oaStateCache.Tests.test_state_cache.TestStateCache.test_handle_external_update)</td>
+                    <td class="description">Goal: Verify that external updates are correctly cached, persisted, and broadcast.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0014s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_handle_incoming_osc (oaComOSC.Tests.test_osc.TestOSCManager.test_handle_incoming_osc)</td>
+                    <td class="description">Test handling of incoming OSC messages.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_ingest_puts_to_queue (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_ingest_puts_to_queue)</td>
+                    <td class="description">Test that ingest puts messages into the inbound queue with the correct schema.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (oaComOSC.Tests.test_osc.TestOSCManager.test_initialization)</td>
+                    <td class="description">Test OSCManager initialization.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (oaComSNMP.Tests.test_snmp_manager.TestSNMPManager.test_initialization)</td>
+                    <td class="description">Goal: Verify that SNMPManager initializes with correct default state.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (oaSplinker.Tests.test_splinker.TestSplinker.test_initialization)</td>
+                    <td class="description">Test broker initialization.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_inventory_notification (oaComVisa.Tests.test_visa_fleet.TestVisaFleet.test_inventory_notification)</td>
+                    <td class="description">Goal: Verify that the fleet correctly notifies and persists new inventory data.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0015s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_kick_watchdog (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_kick_watchdog)</td>
+                    <td class="description">Goal: Verify that kick_watchdog updates the timestamp.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0101s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_layout_parser_scan (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_layout_parser_scan)</td>
+                    <td class="description">Recursively find valid UI definition files.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_marker_logic_grouping (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_marker_logic_grouping)</td>
+                    <td class="description">Transform a flat list of marker data into a nested Zone/Group dictionary.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_match_cache (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_match_cache)</td>
+                    <td class="description">Test that matching results are cached.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_monitor_callbacks (oaComOSC.Tests.test_osc.TestOSCManager.test_monitor_callbacks)</td>
+                    <td class="description">Test that monitor callbacks are triggered.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_multiple_subscribers (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_multiple_subscribers)</td>
+                    <td class="description">Test multiple subscribers for the same topic.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_register_panic_callback (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_register_panic_callback)</td>
+                    <td class="description">Goal: Verify that callbacks can be registered.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_register_route (oaComOSC.Tests.test_osc.TestOSCManager.test_register_route)</td>
+                    <td class="description">Test registering a route between OSC and MQTT.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_register_widget (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_register_widget)</td>
+                    <td class="description">Test widget registration and topic binding.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0103s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_render_functional_widget_trigger (oaGuiBuildShell.Tests.test_async_grid_renderer.TestAsyncGridRenderer.test_render_functional_widget_trigger)</td>
+                    <td class="description">Goal: Verify that functional widgets are passed to the batch engine.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0938s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_render_initialization (oaGuiBuildShell.Tests.test_async_grid_renderer.TestAsyncGridRenderer.test_render_initialization)</td>
+                    <td class="description">Goal: Verify that AsyncGridRenderer initializes with a builder and batch engine.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0069s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_router_stop_stops_threads (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_router_stop_stops_threads)</td>
+                    <td class="description">Test that stop() correctly resets the running flag.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_singleton)</td>
+                    <td class="description">Test that ProtocolRouter is a singleton.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_singleton)</td>
+                    <td class="description">Test that the Config class acts as a singleton.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton (oaSplinker.Tests.test_splinker.TestSplinker.test_singleton)</td>
+                    <td class="description">Test that ControlBroker is a singleton.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton_integrity (oaConfiguration.Tests.test_config_reader.TestConfigReader.test_singleton_integrity)</td>
+                    <td class="description">BUILD: Request two instances. CHECK: Assert they are identical.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_start_heartbeat (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_start_heartbeat)</td>
+                    <td class="description">Goal: Verify that start_heartbeat spawns a thread and sets running flag.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_start_sequence (oaComSNMP.Tests.test_snmp_manager.TestSNMPManager.test_start_sequence)</td>
+                    <td class="description">Goal: Verify that starting the manager sets the running flag.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0401s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_state_manager_update (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_state_manager_update)</td>
+                    <td class="description">Validate that UI changes correctly update the master data state.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_status_broadcast (oaComMidi.Tests.test_midi.TestMidiManager.test_status_broadcast)</td>
+                    <td class="description">Goal: Verify that starting the MIDI manager broadcasts active ports to the system state.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_subscribe_exact_topic (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_exact_topic)</td>
+                    <td class="description">Test exact topic subscription.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_subscribe_wildcard_topic (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_wildcard_topic)</td>
+                    <td class="description">Test wildcard topic subscription.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_validate_configuration (oaConfiguration.Tests.test_config_validator.TestConfigValidator.test_validate_configuration)</td>
+                    <td class="description">Test that validation returns True with a dummy printer.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_library_error (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_library_error)</td>
+                    <td class="description">Fail: LibraryError is raised due to missing pyvisa-py.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_proxy_init_fail (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_proxy_init_fail)</td>
+                    <td class="description">Fail: Missing MQTT controller or router during initialization.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_proxy_init_success (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_proxy_init_success)</td>
+                    <td class="description">Check thread-safe command queue initialization.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_resource_lister (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_resource_lister)</td>
+                    <td class="description">Confirm the backend library loads and returns available hardware identifiers.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0168s</td>
+                </tr>
+            
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TAB 2: Audit Reports -->
+        <div id="AuditReports" class="tab-content">
+            <h3>Latest Audit Reports</h3>
+        <div class="log-entry">
+            <div class="log-header">
+                <span class="log-filename">AuditLog_20260322060040.md</span>
+                <span class="log-time">2026-03-22 06:02:50</span>
+            </div>
+            <pre class="log-content"># Audit Session: 2026-03-22 06:00:40
+
+**Model used:** gemini-2.5-flash-lite
+
+---
+
+## File: AuditArchitecture.toml (PASSED)
+
+This is the first architectural audit of the OPEN-AIR project. The codebase is structured into modular components, with a supervisor process (`OpenAir.py`) managing a core partition (`oaComBroker/Core/open_air_core.py`) and UI partition. Key infrastructure modules for MQTT, VISA, SNMP, MIDI, and configuration handling are present.
+
+The audit identified the following architectural boundary violations and areas for improvement:
+
+### Summary of Architectural Boundary Health
+
+The project exhibits good process isolation via the supervisor pattern. Core services are modularized. However, several areas show tight coupling between infrastructure components and application-specific logic, or between different layers of the same module.
+
+### Top Offenders
+
+1.  **Tight Coupling in MQTT Router:**
+    *   **Offender:** `oaComMQTT/Managers/mqtt_subscriber_router.py`
+    *   **Violation:** The MQTT router directly imports and calls `handle_yak_monitor_traffic` from `oaTranslator/Managers/yak_trigger_handler.py`. This creates a direct dependency from core MQTT infrastructure to a specific application-level handler, bypassing abstraction.
+    *   **Code Snippet:**
+        ```python
+        # In oaComMQTT/Managers/mqtt_subscriber_router.py
+        # ...
+        if "yak" in topic.lower():
+            from oaTranslator.Managers.yak_trigger_handler import handle_yak_monitor_traffic # Direct import
+            handle_yak_monitor_traffic(msg) # Direct call
+        # ...
+        ```
+
+2.  **VISA Layering and Utility Dependencies:**
+    *   **Offenders:** `oaComVisa/Core/visa_proxy.py`, `oaComVisa/Core/visa_proxy_fleet.py`, `oaComVisa/Core/visa_safe_writer.py`, `oaComVisa/Core/visa_safe_query.py`, `oaComVisa/Core/visa_timeout_handler.py`.
+    *   **Violation:** Utility functions (`visa_safe_writer.py`, `visa_safe_query.py`) directly call manager methods (`_publish_proxy_error`, `mqtt_util.get_client_instance().publish`) and rely on properties of the `proxy` object without clear abstraction. This creates hidden dependencies and tight coupling between low-level utilities, proxy objects, and manager components. `visa_proxy_fleet.py` and `visa_proxy.py` also exhibit tight coupling by directly invoking these utilities and manager callbacks. The `visa_timeout_handler` also demonstrates tight coupling by directly invoking manager and proxy methods.
+    *   **Code Snippets:**
+        *   **`oaComVisa/Core/visa_safe_writer.py`**:
+            ```python
+            # ...
+            proxy._publish_proxy_error(message=error_msg, command=command) # Direct call to manager method
+            proxy.mqtt_util.get_client_instance().publish(...) # Direct MQTT publish
+            # ...
+            ```
+        *   **`oaComVisa/Core/visa_proxy.py`**:
+            ```python
+            # ...
+            # Relies on external write_safe and query_safe
+            return write_safe(self, command) 
+            # ...
+            # Directly publishes MQTT errors
+            self._publish_proxy_error(...) 
+            # ...
+            # Directly uses mqtt_util
+            self.mqtt_util.get_client_instance().publish(...)
+            # ...
+            ```
+
+3.  **Direct Library and File I/O in MIDI Entry Point:**
+    *   **Offender:** `oaComMidi/Core/Hui/scripts/main.py`
+    *   **Violation:** This script directly imports and uses low-level libraries (`mido` for port management, `configparser` for configuration, `csvReader`/`csvWriter` for file I/O) and manages threads directly. This bypasses higher-level abstractions for these concerns.
+    *   **Code Snippets:**
+        ```python
+        # In oaComMidi/Core/Hui/scripts/main.py
+        import mido
+        import configparser
+        import csvWriter
+        import csvReader
+        # ...
+        config = configparser.ConfigParser() # Direct use
+        config.read('config.ini')
+        # ...
+        input_port = mido.open_input(input_port_name) # Direct port management
+        # ...
+        table = csvReader.read_table(csv_path) # Direct file I/O
+        csvWriter.write_table(csv_path, table) # Direct file I/O
+        ```
+
+### Blueprint Recommendations for Inversion of Control
+
+1.  **Decouple MQTT Router and Application Handlers:**
+    *   **Recommendation:** Refactor `mqtt_subscriber_router.py` to use an observer pattern or an event bus. Instead of directly calling `handle_yak_monitor_traffic`, it should publish an event (e.g., "yak_message_received") or an abstract message type. Components interested in Yak messages (like `yak_trigger_handler`) would subscribe to these events or message types.
+    *   **Implementation:**
+        *   Introduce an `IMessageHandler` interface or an `EventBus` class.
+        *   The router would dispatch messages to registered handlers/subscribers based on topic patterns or message types.
+        *   `yak_trigger_handler.py` would register itself as a handler for "yak" related events.
+
+2.  **Abstract VISA Interactions:**
+    *   **Recommendation:** Introduce an `IVisaInstrument` interface or a `VisaInstrumentDriver` abstraction layer.
+    *   **Implementation:**
+        *   The `VisaProxy` (or a new `VisaDriver` class) should implement this interface.
+        *   The utility functions (`visa_safe_writer.py`, `visa_safe_query.py`) should be refactored to take this interface as a parameter, rather than a concrete `VisaProxy` object. These functions should also be responsible for reporting errors and publishing MQTT messages via dependency injection, not by directly accessing `proxy.mqtt_util`.
+        *   `visa_fleet.py` should orchestrate `VisaDriver` instances and manage their lifecycle, injecting dependencies like error reporting and MQTT publishers into the drivers.
+        *   The `visa_timeout_handler` should be integrated into the driver/proxy layer and receive necessary callbacks (like `notify_error`, `notify_status`) through dependency injection.
+
+3.  **Centralize MIDI and Configuration Management:**
+    *   **Recommendation:** Abstract direct `mido` port management, `configparser` usage, and direct CSV file I/O into dedicated manager services.
+    *   **Implementation:**
+        *   Create a `MidiManager` service that handles opening, closing, and routing MIDI ports, abstracting `mido` calls. This manager would provide an interface for other components to send/receive MIDI messages.
+        *   Ensure all configuration loading is done via `oaConfiguration.Core.config_loader.ConfigLoader.load()`. `oaComMidi/Core/Hui/scripts/main.py` should obtain its configuration through this central loader.
+        *   Create generic `FileWriter` and `FileReader` services (or leverage existing ones if present) for CSV and other file operations, abstracting direct calls to `csvReader` and `csvWriter`. The `main.py` script would then interact with these services.
+
+These recommendations aim to improve modularity, testability, and adherence to the Dependency Inversion Principle, preventing the codebase from becoming a "Big Ball of Mud."Okay, I have reviewed the content of the files I read and analyzed their dependencies. Here's a detailed breakdown of the architectural findings, potential violations, and recommendations.
+
+### Architectural Boundary Violations Audit Report
+
+**Project:** OPEN-AIR
+**Date:** March 22, 2026
+
+---
+
+### 1. Summary of Architectural Boundary Health
+
+The OPEN-AIR project demonstrates a commendable effort towards modularization, notably through the use of a supervisor process (`OpenAir.py`) that orchestrates distinct core (`oaComBroker/Core/open_air_core.py`) and UI partitions. Various communication protocols (MQTT, VISA, SNMP, MIDI) and utilities are managed in their respective modules (`oaComXXX`). However, several areas exhibit tight coupling between layers and components, particularly in the MQTT routing, VISA communication, and MIDI entry points. These dependencies can hinder independent testability, maintainability, and the overall scalability of the system.
+
+---
+
+### 2. Top Offenders
+
+**a) Tight Coupling in MQTT Router**
+
+*   **Offender:** `oaComMQTT/Managers/mqtt_subscriber_router.py`
+*   **Violation:** The MQTT router directly imports and calls `handle_yak_monitor_traffic` from `oaTranslator/Managers/yak_trigger_handler.py`. This creates a direct, hardcoded dependency from a core infrastructure component (the router) to a specific application-level handler.
+*   **Analysis:** While the `global_context` mentions this as a deliberate refactoring for the Yak Monitor, it bypasses typical abstraction patterns. Ideally, the router should announce received messages or specific patterns, allowing any interested subscriber (like `yak_trigger_handler`) to register and receive them without the router needing explicit knowledge of the handler's existence or location.
+*   **Code Snippet:**
+    ```python
+    # In oaComMQTT/Managers/mqtt_subscriber_router.py
+    # ...
+    if "yak" in topic.lower():
+        # Direct import and call, coupling router to a specific handler
+        from oaTranslator.Managers.yak_trigger_handler import handle_yak_monitor_traffic
+        handle_yak_monitor_traffic(msg)
+    # ...
+    ```
+
+**b) VISA Layering and Utility Dependencies**
+
+*   **Offenders:** `oaComVisa/Core/visa_proxy.py`, `oaComVisa/Core/visa_proxy_fleet.py`, `oaComVisa/Core/visa_safe_writer.py`, `oaComVisa/Core/visa_safe_query.py`, `oaComVisa/Core/visa_timeout_handler.py`.
+*   **Violation:**
+    1.  **Hidden Dependencies & Tight Coupling in Utilities:** The external utility functions (`visa_safe_writer.py`, `visa_safe_query.py`) and the `visa_timeout_handler.py` directly interact with the `proxy` object's internal attributes (`inst`), call its methods (`_publish_proxy_error`, `_reset_device_fleet`), and access its `mqtt_util` for publishing. This creates hidden dependencies and tight coupling, making these utilities difficult to test or reuse independently.
+    2.  **Manager-Utility Interdependence:** The utility functions, in turn, directly publish MQTT messages and call manager methods (`_publish_proxy_error`, `_notify_error`, `_notify_response`, `_notify_status`), blurring the lines between infrastructure utilities, proxy objects, and the higher-level manager (`FleetOrchestrator`).
+    3.  **Layer Contamination:** `visa_proxy.py` directly calls `mqtt_util.get_client_instance().publish` and subscribes to `"OPEN-AIR/Proxy/Tx_Inbox"`, indicating direct interaction with MQTT from within the VISA proxy layer, rather than delegating to a higher-level communication manager.
+*   **Code Snippets:**
+    *   **`oaComVisa/Core/visa_safe_writer.py`**:
+        ```python
+        # ...
+        proxy._publish_proxy_error(message=error_msg, command=command) # Directly calls manager error reporting
+        proxy.mqtt_util.get_client_instance().publish(...) # Directly publishes MQTT
+        # ...
+        ```
+    *   **`oaComVisa/Core/visa_proxy.py`**:
+        ```python
+        # ...
+        # Direct use of external utilities and manager methods
+        return write_safe(self, command) 
+        self._publish_proxy_error(...) 
+        self.mqtt_util.get_client_instance().publish(...)
+        self.subscriber_router.subscribe_to_topic(...) # Direct subscription
+        # ...
+        ```
+    *   **`oaComVisa/Core/visa_timeout_handler.py`**:
+        ```python
+        # ...
+        proxy_instance.manager._notify_error(...) # Direct call to manager callback
+        proxy_instance.manager._notify_status(...) # Direct call to manager callback
+        proxy_instance._reset_device_fleet() # Direct call to proxy method
+        # ...
+        ```
+
+**c) Direct Library and File I/O in MIDI Entry Point**
+
+*   **Offender:** `oaComMidi/Core/Hui/scripts/main.py`
+*   **Violation:** This script acts as a direct entry point for MIDI handling and exhibits tight coupling by:
+    1.  **Direct `mido` Port Management:** It directly opens and closes MIDI input/output ports using `mido.open_input`/`open_output`.
+    2.  **Direct Configuration Parsing:** It uses `configparser` directly to read `config.ini`.
+    3.  **Direct CSV File I/O:** It directly imports and uses `csvReader` and `csvWriter` for file operations.
+    4.  **Direct Thread Management:** It manually creates and starts `threading.Thread` instances for MIDI listening and CSV writing.
+*   **Analysis:** This approach bypasses potential higher-level abstractions for device management, configuration loading, and file persistence that might exist or could be implemented within the project's core services.
+*   **Code Snippets:**
+    ```python
+    # In oaComMidi/Core/Hui/scripts/main.py
+    import mido
+    import configparser
+    import csvWriter
+    import csvReader
+    # ...
+    config = configparser.ConfigParser() # Direct use
+    config.read('config.ini')
+    # ...
+    input_port = mido.open_input(input_port_name) # Direct port management
+    # ...
+    table = csvReader.read_table(csv_path) # Direct file I/O
+    csvWriter.write_table(csv_path, table) # Direct file I/O
+    # ...
+    hui_input_thread = Thread(...) # Direct thread creation
+    ```
+
+---
+
+### 3. Blueprint Recommendations for Inversion of Control
+
+The following recommendations focus on abstracting dependencies and promoting the Dependency Inversion Principle (DIP) to decouple components and improve testability.
+
+**a) Decouple MQTT Router from Application Handlers**
+
+*   **Recommendation:** Refactor `oaComMQTT/Managers/mqtt_subscriber_router.py` to use an observer pattern or an event bus for message routing.
+*   **Implementation Details:**
+    *   **Router Role:** The router should primarily focus on filtering messages based on MQTT topic patterns and dispatching them to registered listeners based on these patterns. It should not have explicit knowledge of application-specific handlers like `yak_trigger_handler`.
+    *   **Event/Observer Pattern:** Introduce an `IMessageListener` interface or an `EventBus` class. The router would maintain a registry of listeners for specific topic patterns or message types.
+    *   **`yak_trigger_handler` Role:** This component would register itself with the router's event system as a listener for messages matching "yak" related topics. It would receive messages from the router through a standard callback, without the router needing to import it.
+    *   **Benefit:** Isolates MQTT infrastructure from application logic, making the router more generic and the handler more independent.
+
+**b) Abstract VISA Interactions**
+
+*   **Recommendation:** Introduce a clear abstraction layer for VISA instrument interactions and error handling.
+*   **Implementation Details:**
+    1.  **`IVisaInstrumentDriver` Interface:** Define an interface that abstracts operations like `write`, `query`, `get_status`, `reset`, and error reporting.
+    2.  **Concrete Driver Implementation:** Create a `VisaInstrumentDriver` class (potentially replacing `VisaProxy` and `VisaProxyFleet`) that implements `IVisaInstrumentDriver`. This driver would encapsulate PyVISA interactions and delegate error reporting and status updates to its manager via dependency injection.
+    3.  **Utility Refactoring:** Refactor `visa_safe_writer.py`, `visa_safe_query.py`, and `visa_timeout_handler.py` to accept an `IVisaInstrumentDriver` (or a similar abstraction) as a parameter. These utilities should report errors through methods provided by the interface, rather than directly calling manager methods or publishing MQTT messages.
+    4.  **Manager Orchestration:** `oaComVisa/Core/visa_fleet.py` (the orchestrator) would be responsible for creating and managing instances of `VisaInstrumentDriver` and injecting necessary dependencies (like error reporting callbacks, MQTT clients) into them.
+    5.  **Benefit:** Enforces DIP by having higher-level managers depend on abstractions (`IVisaInstrumentDriver`) rather than concrete low-level implementations. Decouples instrument communication logic from direct MQTT publishing and manager method calls.
+
+**c) Centralize MIDI Management and Configuration Loading**
+
+*   **Recommendation:** Abstract direct MIDI port management, configuration parsing, and file I/O into dedicated manager services.
+*   **Implementation Details:**
+    1.  **`MidiManager` Service:** Create a `MidiManager` service (potentially within `oaComMidi/Core/`) responsible for discovering, opening, closing, and managing MIDI ports using `mido`. This manager would provide a unified interface for sending and receiving MIDI messages, abstracting away direct `mido` calls and port management from application-level scripts.
+    2.  **Configuration Loading:** All components requiring configuration should obtain it through the central `oaConfiguration.Core.config_loader.ConfigLoader` class. The `oaComMidi/Core/Hui/scripts/main.py` script should be refactored to use this loader instead of `configparser` directly.
+    3.  **File I/O Abstraction:** Introduce generic `FileWriter` and `FileReader` services (or leverage existing ones if applicable) to handle persistent data storage (like CSVs). `oaComMidi/Core/Hui/scripts/main.py` should interact with these services instead of directly importing and using `csvReader` and `csvWriter`.
+    4.  **Thread Management Abstraction:** Consider integrating thread management for background tasks (like MIDI listening or periodic saving) into higher-level manager services, allowing `main.py` to request these tasks be run rather than manually managing threads.
+    5.  **Benefit:** Centralizes control over external dependencies (MIDI hardware, configuration files, filesystem), making the MIDI handling logic more robust, testable, and aligned with the project's overall architectural patterns.
+
+---
+
+### 4. Circular Dependencies
+
+No direct circular dependencies were immediately evident from the current code review. However, the tight coupling identified in the VISA layer and MQTT router warrants further investigation during refactoring, as it can often lead to or mask circular dependencies. A full import graph analysis would be beneficial to confirm this.
+
+---
+
+This report identifies key areas where architectural boundaries can be strengthened. Addressing these points will lead to a more maintainable, testable, and scalable codebase.
+
+---
+
+## File: AuditClassObjects.toml (PASSED)
+
+The initial audit reveals several potential areas for improvement:
+
+**Potential God Classes / SRP Violations:**
+The `grep_search` for class names ending in `Manager`, `Processor`, `Handler`, `Controller`, `Service`, `Core`, `App`, or `System` (and explicitly `OpenAir.py`) identified many files. These are often indicators of classes that may be taking on too many responsibilities. While naming is not definitive, it's a strong hint.
+
+**Train Wrecks (Law of Demeter Violations):**
+The search for method chaining (`.\w+.\w+.\w+`) found numerous instances across various files, including `oaTests/Core/FlameGraph/flame_manager.py`, `oaTests/Core/FlameGraph/Entry.py`, `oaGuiBuildShell/Managers/gui_re.py`, `oaGuiBuildShell/Core/batch_processing_engine.py`, `oaComMQTT/Workers/mqtt_async_worker.py`, and `oaGuiManager/FileReaders/blueprint_loader.py`. These chains often indicate tight coupling and a violation of the Law of Demeter, making the code harder to refactor and understand.
+
+**Areas Mentioned in `GEMINI.md` Context:**
+The provided `.gemini/GEMINI.md` context indicates significant refactoring efforts in areas like `DynamicGuiBuilder`, `mqtt` components, `oaGuiManager`, and the partitioning of `OpenAir.py`. This is positive progress. However, the presence of train wrecks in some of these refactored areas (e.g., `oaGuiBuildShell/Core/batch_processing_engine.py`) suggests that while components might be breaking down, internal coupling might still be an issue.
+
+**Missing Information:**
+*   **Previous Audit Report:** No existing audit report (`oaDataAudits/Bad_Class_Objects_Audit.md`) was found. This is the first audit run. Therefore, there is no "Delta" to report.
+*   **Class Size/Method Count:** `grep_search` alone cannot accurately count methods within a class or determine class size. A more detailed analysis using AST parsing would be required for this.
+*   **Cohesion and Feature Envy:** These are harder to detect with simple pattern matching and would require deeper code inspection.
+
+---
+
+## OPEN-AIR Codebase Audit Report
+
+**Audit Meta-Data:**
+*   **Date:** 2026-03-22
+*   **Total Issues Found:** 100+ (Heuristics applied for method chaining and naming conventions)
+*   **Issues Resolved Since Last Run:** 0 (First audit run)
+
+**Progress Report (The Delta):**
+*   N/A (This is the initial audit. No previous report was found.)
+
+**Current Top Offenders:**
+
+1.  **Law of Demeter Violations (Train Wrecks):**
+    *   `oaTests/Core/FlameGraph/flame_manager.py` (L14-L16: `current_dir.parent.parent.parent` indicates deep navigation)
+    *   `oaTests/Core/FlameGraph/Entry.py` (L14: `current_dir.parent.parent.parent`)
+    *   `oaGuiBuildShell/Managers/gui_re.py` (L26: `AssetCacheManager` accessed via `BlueprintLoader`)
+    *   `oaGuiBuildShell/Core/batch_processing_engine.py` (L18: `self.builder.widget_factory.get`)
+    *   `oaComMQTT/Workers/mqtt_async_worker.py` (L47: `self.manager.subscriber_router.resubscribe_all_topics`)
+    *   `oaComMQTT/Workers/mqtt_async_worker.py` (L95: `self.manager._subscribe_queue.get_nowait()`)
+    *   `oaComMQTT/Workers/mqtt_async_worker.py` (L106: `self.manager._publish_queue.get_nowait()`)
+    *   `oaGuiManager/FileReaders/blueprint_loader.py` (L29: `self.json_path.stem.replace("gui_").upper()`)
+    *   *...and many more instances of chained method calls detected.*
+
+2.  **Potential God Classes / SRP Violations (Based on Naming & Class Definition):**
+    *   `oaComSNMP/Managers/snmp_manager.py` (Class `SNMPManager`)
+    *   `oaGuiBuildShell/Managers/gui_display.py` (Class `Application`)
+    *   `oaGuiBuildShell/Core/navigation.py` (Class `NavigationManagerMixin`)
+    *   `oaGuiBuildShell/Core/layout_cache.py` (Class `LayoutCacheManager`)
+    *   `oaGuiBuildShell/Core/window.py` (Class `WindowManager`)
+    *   `oaGuiBuildShell/Core/tab.py` (Class `TabManagerMixin`)
+    *   `oaComMQTT/Managers/mqtt_connection.py` (Class `MqttConnectionManager`)
+    *   `oaComMQTT/Managers/mqtt_manager.py` (Class `MqttManager`)
+    *   `oaGuiManager/Core/array/array.py` (Class `ViewManager`)
+    *   `oaGuiManager/Core/telemetry/visibility_snitch/visibility_snitch.py` (Class `HiddenVisibilityManagerMixin`)
+    *   `oaGuiManager/Core/telemetry/geometry_snitch/geometry_snitch.py` (Class `HiddenGeometryManagerMixin`)
+    *   `oaGuiManager/Core/telemetry/ui_tracking_service.py` (Class `UITrackingService`)
+    *   `OpenAir.py` (Main supervisor, potential for monolithic logic)
+    *   *...numerous other classes with "Manager", "Core", "Handler", "Controller", "Service" in their names or file paths.*
+
+**The Remediation Strategy (Action Plan):**
+
+*   **Phase 1: Quick Wins (Addressing Train Wrecks):**
+    *   **Refactor Law of Demeter Violations:** For identified "Train Wreck" instances, refactor by:
+        *   Introducing intermediate methods or classes to encapsulate the intermediate steps (e.g., instead of `a.getB().getC().doSomething()`, create a method in `a` that calls `getB().getC().doSomething()` and returns the result, or a new class that handles the `B -> C` interaction).
+        *   If possible, apply the "Tell, Don't Ask" principle by having objects perform actions on their own data rather than exposing it for external manipulation.
+    *   **Focus Areas:** Prioritize refactoring in core modules like `oaComMQTT`, `oaGuiManager`, `oaGuiBuildShell`, and `oaTests` where chains are most prevalent.
+
+*   **Phase 2: Architectural Shifts (Addressing Potential God Classes):**
+    *   **SRP Application:** For identified potential God Classes (especially those with "Manager" suffixes), conduct a detailed analysis of their responsibilities.
+        *   Extract distinct responsibilities into new, smaller classes.
+        *   Favor composition over inheritance where appropriate.
+        *   Use dependency injection to decouple classes.
+    *   **Modularization:** Continue the efforts noted in `GEMINI.md` to partition large classes and modules. Pay close attention to the supervisor role of `OpenAir.py` and ensure it delegates effectively.
+    *   **Object-Oriented Principles:** Actively look for opportunities to use polymorphism over conditional statements (e.g., replace long `if/elif/else` blocks checking types with strategy patterns or subclasses).
+
+**Next Recommended Action:**
+Address the most prominent Law of Demeter violation found in `oaTests/Core/FlameGraph/flame_manager.py` (L14-L16: `current_dir.parent.parent.parent`) by introducing a helper method or constant to resolve the project root path more directly, thus breaking the chain.
+```json
+{
+  "audit_date": "2026-03-22",
+  "total_issues_found": "100+",
+  "issues_resolved_since_last_run": 0,
+  "delta": [],
+  "top_offenders": {
+    "law_of_demeter": [
+      {
+        "file": "oaTests/Core/FlameGraph/flame_manager.py",
+        "line_numbers": "14-16",
+        "description": "Deep navigation in path resolution: `current_dir.parent.parent.parent`."
+      },
+      {
+        "file": "oaTests/Core/FlameGraph/Entry.py",
+        "line_numbers": "14",
+        "description": "Deep navigation in path resolution: `current_dir.parent.parent.parent`."
+      },
+      {
+        "file": "oaGuiBuildShell/Managers/gui_re.py",
+        "line_numbers": "26",
+        "description": "Accessing `AssetCacheManager` via `BlueprintLoader`."
+      },
+      {
+        "file": "oaGuiBuildShell/Core/batch_processing_engine.py",
+        "line_numbers": "18",
+        "description": "Accessing widget factory via builder: `self.builder.widget_factory.get`."
+      },
+      {
+        "file": "oaComMQTT/Workers/mqtt_async_worker.py",
+        "line_numbers": "47",
+        "description": "Calling subscriber router method via manager: `self.manager.subscriber_router.resubscribe_all_topics`."
+      },
+      {
+        "file": "oaComMQTT/Workers/mqtt_async_worker.py",
+        "line_numbers": "95",
+        "description": "Accessing queue via manager: `self.manager._subscribe_queue.get_nowait()`."
+      },
+      {
+        "file": "oaComMQTT/Workers/mqtt_async_worker.py",
+        "line_numbers": "106",
+        "description": "Accessing queue via manager: `self.manager._publish_queue.get_nowait()`."
+      },
+      {
+        "file": "oaGuiManager/FileReaders/blueprint_loader.py",
+        "line_numbers": "29",
+        "description": "String manipulation on path object: `self.json_path.stem.replace(\"gui_\").upper()`."
+      }
+    ],
+    "potential_god_classes_srp": [
+      {"file": "oaComSNMP/Managers/snmp_manager.py", "class_name": "SNMPManager", "description": "Class name ends with 'Manager'."},
+      {"file": "oaGuiBuildShell/Managers/gui_display.py", "class_name": "Application", "description": "Class name is 'Application', often indicates broad scope."},
+      {"file": "oaGuiBuildShell/Core/navigation.py", "class_name": "NavigationManagerMixin", "description": "Class name ends with 'ManagerMixin'."},
+      {"file": "oaGuiBuildShell/Core/layout_cache.py", "class_name": "LayoutCacheManager", "description": "Class name ends with 'Manager'."},
+      {"file": "oaGuiBuildShell/Core/window.py", "class_name": "WindowManager", "description": "Class name ends with 'Manager'."},
+      {"file": "oaGuiBuildShell/Core/tab.py", "class_name": "TabManagerMixin", "description": "Class name ends with 'ManagerMixin'."},
+      {"file": "oaComMQTT/Managers/mqtt_connection.py", "class_name": "MqttConnectionManager", "description": "Class name ends with 'Manager'."},
+      {"file": "oaComMQTT/Managers/mqtt_manager.py", "class_name": "MqttManager", "description": "Class name ends with 'Manager'."},
+      {"file": "oaGuiManager/Core/array/array.py", "class_name": "ViewManager", "description": "Class name ends with 'Manager'."},
+      {"file": "oaGuiManager/Core/telemetry/visibility_snitch/visibility_snitch.py", "class_name": "HiddenVisibilityManagerMixin", "description": "Class name ends with 'ManagerMixin'."},
+      {"file": "oaGuiManager/Core/telemetry/geometry_snitch/geometry_snitch.py", "class_name": "HiddenGeometryManagerMixin", "description": "Class name ends with 'ManagerMixin'."},
+      {"file": "oaGuiManager/Core/telemetry/ui_tracking_service.py", "class_name": "UITrackingService", "description": "Class name ends with 'Service'."},
+      {"file": "OpenAir.py", "class_name": "OpenAir", "description": "Main entry point, potential for monolithic logic."}
+    ]
+  },
+  "remediation_strategy": {
+    "phase_1_quick_wins": [
+      "Refactor Law of Demeter Violations: For identified 'Train Wreck' instances, refactor by introducing intermediate methods or classes to encapsulate intermediate steps. Prioritize areas like oaComMQTT, oaGuiManager, oaGuiBuildShell, and oaTests.",
+      "Apply 'Tell, Don't Ask' principle where possible to reduce direct data access chains."
+    ],
+    "phase_2_architectural_shifts": [
+      "SRP Application: For potential God Classes (especially those with 'Manager' suffixes), extract distinct responsibilities into new, smaller classes. Favor composition over inheritance and use dependency injection.",
+      "Modularization: Continue partitioning large classes and modules, ensuring supervisor roles (like OpenAir.py) delegate effectively.",
+      "Polymorphism over Conditionals: Actively replace long `if/elif/else` blocks checking types with strategy patterns or subclasses."
+    ]
+  },
+  "next_recommended_action": "Refactor the Law of Demeter violation in `oaTests/Core/FlameGraph/flame_manager.py` (L14-L16) by introducing a helper method or constant for project root path resolution."
+}
+```
+
+</pre>
+        </div>
+        
+        </div>
+
+        <!-- TAB 3: Change Logs -->
+        <div id="ChangeLogs" class="tab-content">
+            <h3>No Change Logs Found</h3><p>Ensure CHANGELOG.md exists in the data directory.</p>
+        </div>
+
+        <!-- TAB 4: Error Logs -->
+        <div id="ErrorLogs" class="tab-content">
+            <h3>Error Log Browser</h3>
+        <div class="log-entry error-log">
+            <div class="log-header">
+                <span class="log-filename">errors_20260322_0603.log</span>
+                <span class="log-time">2026-03-22 06:03:38</span>
+            </div>
+            <pre class="log-content">060338.129 | ERROR    | UI   | SYSTEM     | oaComMQTT.Workers.mqtt_async_worker | 🚀🚫🛑 [MQTT] Worker failure: can't register atexit after shutdown
+060338.157 | ERROR    | UI   | SYSTEM     | oaGuiManager.Core.bootstrap_sequence | 🖥️🎨 [UI] Bootstrap Failure:Traceback (most recent call last):
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 96, in run
+    protocol_router.start()
+  File "/home/anthony/Documents/OPEN-AIR/oaComBroker/Core/protocol_router/router.py", line 98, in start
+    self._executor = concurrent.futures.ThreadPoolExecutor(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/__init__.py", line 49, in __getattr__
+    from .thread import ThreadPoolExecutor as te
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 37, in <module>
+    threading._register_atexit(_python_exit)
+  File "/usr/lib/python3.12/threading.py", line 1559, in _register_atexit
+    raise RuntimeError("can't register atexit after shutdown")
+RuntimeError: can't register atexit after shutdown
+
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py", line 1134, in __call__
+    ret = self.original_func(*self.args, **self.kwargs)
+          |    |              |    |       |    -> {}
+          |    |              |    |       -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x77c23addc500>
+          |    |              |    -> ()
+          |    |              -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x77c23addc500>
+          |    -> <bound method Thread._bootstrap of <Thread(Thread-6 (run), started daemon 131676094060224)>>
+          -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x77c23addc500>
+
+  File "/usr/lib/python3.12/threading.py", line 1030, in _bootstrap
+    self._bootstrap_inner()
+    |    -> <function Thread._bootstrap_inner at 0x77c24c727d80>
+    -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+    |    -> <function Thread.run at 0x77c24c727a60>
+    -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+    |    |        |    |        |    -> {}
+    |    |        |    |        -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+    |    |        |    -> ()
+    |    |        -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+    |    -> <bound method AsyncBootstrapEngine.run of <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x77c23addc3e0>>
+    -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 96, in run
+    protocol_router.start()
+    |               -> <function ProtocolRouter.start at 0x77c23bf52b60>
+    -> <oaComBroker.Core.protocol_router.router.ProtocolRouter object at 0x77c23becd1c0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaComBroker/Core/protocol_router/router.py", line 98, in start
+    self._executor = concurrent.futures.ThreadPoolExecutor(
+    |    |           |          -> <module 'concurrent.futures' from '/usr/lib/python3.12/concurrent/futures/__init__.py'>
+    |    |           -> <module 'concurrent' from '/usr/lib/python3.12/concurrent/__init__.py'>
+    |    -> None
+    -> <oaComBroker.Core.protocol_router.router.ProtocolRouter object at 0x77c23becd1c0>
+
+  File "/usr/lib/python3.12/concurrent/futures/__init__.py", line 49, in __getattr__
+    from .thread import ThreadPoolExecutor as te
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 37, in <module>
+    threading._register_atexit(_python_exit)
+    |         |                -> <function _python_exit at 0x77c23bec7420>
+    |         -> <function _register_atexit at 0x77c24c705120>
+    -> <module 'threading' from '/usr/lib/python3.12/threading.py'>
+  File "/usr/lib/python3.12/threading.py", line 1559, in _register_atexit
+    raise RuntimeError("can't register atexit after shutdown")
+
+RuntimeError: can't register atexit after shutdown
+</pre>
+        </div>
+        
+        <div class="log-entry error-log">
+            <div class="log-header">
+                <span class="log-filename">errors_20260321_0358.log</span>
+                <span class="log-time">2026-03-21 03:58:18</span>
+            </div>
+            <pre class="log-content">035817.290 | ERROR    | UI   | SYSTEM     | oaComMQTT.Workers.mqtt_async_worker | 🚀🚫🛑 [MQTT] Worker failure: can't register atexit after shutdown
+035817.319 | ERROR    | UI   | SYSTEM     | oaGuiManager.Core.bootstrap_sequence | 🖥️🎨 [UI] Bootstrap Failure:Traceback (most recent call last):
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 96, in run
+    protocol_router.start()
+  File "/home/anthony/Documents/OPEN-AIR/oaComBroker/Core/protocol_router/router.py", line 98, in start
+    self._executor = concurrent.futures.ThreadPoolExecutor(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/__init__.py", line 49, in __getattr__
+    from .thread import ThreadPoolExecutor as te
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 37, in <module>
+    threading._register_atexit(_python_exit)
+  File "/usr/lib/python3.12/threading.py", line 1559, in _register_atexit
+    raise RuntimeError("can't register atexit after shutdown")
+RuntimeError: can't register atexit after shutdown
+
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py", line 1134, in __call__
+    ret = self.original_func(*self.args, **self.kwargs)
+          |    |              |    |       |    -> {}
+          |    |              |    |       -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x70b65cbe0200>
+          |    |              |    -> ()
+          |    |              -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x70b65cbe0200>
+          |    -> <bound method Thread._bootstrap of <Thread(Thread-6 (run), started daemon 123928541472448)>>
+          -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x70b65cbe0200>
+
+  File "/usr/lib/python3.12/threading.py", line 1030, in _bootstrap
+    self._bootstrap_inner()
+    |    -> <function Thread._bootstrap_inner at 0x70b666527ce0>
+    -> <Thread(Thread-6 (run), started daemon 123928541472448)>
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+    |    -> <function Thread.run at 0x70b6665279c0>
+    -> <Thread(Thread-6 (run), started daemon 123928541472448)>
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+    |    |        |    |        |    -> {}
+    |    |        |    |        -> <Thread(Thread-6 (run), started daemon 123928541472448)>
+    |    |        |    -> ()
+    |    |        -> <Thread(Thread-6 (run), started daemon 123928541472448)>
+    |    -> <bound method AsyncBootstrapEngine.run of <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x70b65cbe0050>>
+    -> <Thread(Thread-6 (run), started daemon 123928541472448)>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 96, in run
+    protocol_router.start()
+    |               -> <function ProtocolRouter.start at 0x70b65dd4aac0>
+    -> <oaComBroker.Core.protocol_router.router.ProtocolRouter object at 0x70b6666543b0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaComBroker/Core/protocol_router/router.py", line 98, in start
+    self._executor = concurrent.futures.ThreadPoolExecutor(
+    |    |           |          -> <module 'concurrent.futures' from '/usr/lib/python3.12/concurrent/futures/__init__.py'>
+    |    |           -> <module 'concurrent' from '/usr/lib/python3.12/concurrent/__init__.py'>
+    |    -> None
+    -> <oaComBroker.Core.protocol_router.router.ProtocolRouter object at 0x70b6666543b0>
+
+  File "/usr/lib/python3.12/concurrent/futures/__init__.py", line 49, in __getattr__
+    from .thread import ThreadPoolExecutor as te
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 37, in <module>
+    threading._register_atexit(_python_exit)
+    |         |                -> <function _python_exit at 0x70b65dcc7380>
+    |         -> <function _register_atexit at 0x70b666505080>
+    -> <module 'threading' from '/usr/lib/python3.12/threading.py'>
+  File "/usr/lib/python3.12/threading.py", line 1559, in _register_atexit
+    raise RuntimeError("can't register atexit after shutdown")
+
+RuntimeError: can't register atexit after shutdown
+</pre>
+        </div>
+        
+        <div class="log-entry error-log">
+            <div class="log-header">
+                <span class="log-filename">errors_20260321_0338.log</span>
+                <span class="log-time">2026-03-21 03:38:02</span>
+            </div>
+            <pre class="log-content">033801.750 | ERROR    | UI   | SYSTEM     | oaComMQTT.Workers.mqtt_async_worker | 🚀🚫🛑 [MQTT] Worker failure: can't register atexit after shutdown
+033801.752 | ERROR    | UI   | SYSTEM     | oaGuiManager.Core.bootstrap_sequence | 🖥️🎨 [UI] Bootstrap Failure:Traceback (most recent call last):
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 76, in run
+    state_cache.subscribe_to_all_topics()
+  File "/home/anthony/Documents/OPEN-AIR/oaStateCache/Core/state_cache.py", line 81, in subscribe_to_all_topics
+    self.mqtt.subscribe(root)
+  File "/home/anthony/Documents/OPEN-AIR/oaComMQTT/Managers/mqtt_connection.py", line 76, in subscribe
+    self._kick_worker()
+  File "/home/anthony/Documents/OPEN-AIR/oaComMQTT/Managers/mqtt_connection.py", line 62, in _kick_worker
+    self._worker.loop.call_soon_threadsafe(self._worker.kick_event.set)
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 840, in call_soon_threadsafe
+    self._check_closed()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 541, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py", line 1134, in __call__
+    ret = self.original_func(*self.args, **self.kwargs)
+          |    |              |    |       |    -> {}
+          |    |              |    |       -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x705cbffe0410>
+          |    |              |    -> ()
+          |    |              -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x705cbffe0410>
+          |    -> <bound method Thread._bootstrap of <Thread(Thread-6 (run), started daemon 123543659476672)>>
+          -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x705cbffe0410>
+
+  File "/usr/lib/python3.12/threading.py", line 1030, in _bootstrap
+    self._bootstrap_inner()
+    |    -> <function Thread._bootstrap_inner at 0x705cd999bce0>
+    -> <Thread(Thread-6 (run), started daemon 123543659476672)>
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+    |    -> <function Thread.run at 0x705cd999b9c0>
+    -> <Thread(Thread-6 (run), started daemon 123543659476672)>
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+    |    |        |    |        |    -> {}
+    |    |        |    |        -> <Thread(Thread-6 (run), started daemon 123543659476672)>
+    |    |        |    -> ()
+    |    |        -> <Thread(Thread-6 (run), started daemon 123543659476672)>
+    |    -> <bound method AsyncBootstrapEngine.run of <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x705cbffe0230>>
+    -> <Thread(Thread-6 (run), started daemon 123543659476672)>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 76, in run
+    state_cache.subscribe_to_all_topics()
+    |           -> <function StateRegistry.subscribe_to_all_topics at 0x705cd5137380>
+    -> <oaStateCache.Core.state_cache.StateRegistry object at 0x705cbffe0bf0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaStateCache/Core/state_cache.py", line 81, in subscribe_to_all_topics
+    self.mqtt.subscribe(root)
+    |    |    |         -> 'OPEN-AIR/#'
+    |    |    -> <function MqttConnectionManager.subscribe at 0x705cd5135800>
+    |    -> <oaComMQTT.Managers.mqtt_connection.MqttConnectionManager object at 0x705cbffe06e0>
+    -> <oaStateCache.Core.state_cache.StateRegistry object at 0x705cbffe0bf0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaComMQTT/Managers/mqtt_connection.py", line 76, in subscribe
+    self._kick_worker()
+    |    -> <function MqttConnectionManager._kick_worker at 0x705cd51356c0>
+    -> <oaComMQTT.Managers.mqtt_connection.MqttConnectionManager object at 0x705cbffe06e0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaComMQTT/Managers/mqtt_connection.py", line 62, in _kick_worker
+    self._worker.loop.call_soon_threadsafe(self._worker.kick_event.set)
+    |    |       |    |                    |    |       |          -> <function Event.set at 0x705cd6f15e40>
+    |    |       |    |                    |    |       -> <asyncio.locks.Event object at 0x705cd9af4e90 [unset]>
+    |    |       |    |                    |    -> <oaComMQTT.Workers.mqtt_async_worker.MqttAsyncWorker object at 0x705cd9af4da0>
+    |    |       |    |                    -> <oaComMQTT.Managers.mqtt_connection.MqttConnectionManager object at 0x705cbffe06e0>
+    |    |       |    -> <function BaseEventLoop.call_soon_threadsafe at 0x705cd6541300>
+    |    |       -> <_UnixSelectorEventLoop running=False closed=True debug=False>
+    |    -> <oaComMQTT.Workers.mqtt_async_worker.MqttAsyncWorker object at 0x705cd9af4da0>
+    -> <oaComMQTT.Managers.mqtt_connection.MqttConnectionManager object at 0x705cbffe06e0>
+
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 840, in call_soon_threadsafe
+    self._check_closed()
+    |    -> <function BaseEventLoop._check_closed at 0x705cd6540540>
+    -> <_UnixSelectorEventLoop running=False closed=True debug=False>
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 541, in _check_closed
+    raise RuntimeError('Event loop is closed')
+
+RuntimeError: Event loop is closed
+</pre>
+        </div>
+        
+        <div class="log-entry error-log">
+            <div class="log-header">
+                <span class="log-filename">errors_20260321_0304.log</span>
+                <span class="log-time">2026-03-21 03:04:53</span>
+            </div>
+            <pre class="log-content">030453.178 | ERROR    | UI   | SYSTEM     | oaComMQTT.Workers.mqtt_async_worker | 🚀🚫🛑 [MQTT] Worker failure: can't register atexit after shutdown
+030453.209 | ERROR    | UI   | SYSTEM     | oaGuiManager.Core.bootstrap_sequence | 🖥️🎨 [UI] Bootstrap Failure:Traceback (most recent call last):
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 96, in run
+    protocol_router.start()
+  File "/home/anthony/Documents/OPEN-AIR/oaComBroker/Core/protocol_router/router.py", line 98, in start
+    self._executor = concurrent.futures.ThreadPoolExecutor(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/__init__.py", line 49, in __getattr__
+    from .thread import ThreadPoolExecutor as te
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 37, in <module>
+    threading._register_atexit(_python_exit)
+  File "/usr/lib/python3.12/threading.py", line 1559, in _register_atexit
+    raise RuntimeError("can't register atexit after shutdown")
+RuntimeError: can't register atexit after shutdown
+
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py", line 1134, in __call__
+    ret = self.original_func(*self.args, **self.kwargs)
+          |    |              |    |       |    -> {}
+          |    |              |    |       -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7a95c57fc200>
+          |    |              |    -> ()
+          |    |              -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7a95c57fc200>
+          |    -> <bound method Thread._bootstrap of <Thread(Thread-6 (run), started daemon 134783321503424)>>
+          -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7a95c57fc200>
+
+  File "/usr/lib/python3.12/threading.py", line 1030, in _bootstrap
+    self._bootstrap_inner()
+    |    -> <function Thread._bootstrap_inner at 0x7a95ce177ce0>
+    -> <Thread(Thread-6 (run), started daemon 134783321503424)>
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+    |    -> <function Thread.run at 0x7a95ce1779c0>
+    -> <Thread(Thread-6 (run), started daemon 134783321503424)>
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+    |    |        |    |        |    -> {}
+    |    |        |    |        -> <Thread(Thread-6 (run), started daemon 134783321503424)>
+    |    |        |    -> ()
+    |    |        -> <Thread(Thread-6 (run), started daemon 134783321503424)>
+    |    -> <bound method AsyncBootstrapEngine.run of <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x7a95cc5929f0>>
+    -> <Thread(Thread-6 (run), started daemon 134783321503424)>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 96, in run
+    protocol_router.start()
+    |               -> <function ProtocolRouter.start at 0x7a95c5966ac0>
+    -> <oaComBroker.Core.protocol_router.router.ProtocolRouter object at 0x7a95ce2f8170>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaComBroker/Core/protocol_router/router.py", line 98, in start
+    self._executor = concurrent.futures.ThreadPoolExecutor(
+    |    |           |          -> <module 'concurrent.futures' from '/usr/lib/python3.12/concurrent/futures/__init__.py'>
+    |    |           -> <module 'concurrent' from '/usr/lib/python3.12/concurrent/__init__.py'>
+    |    -> None
+    -> <oaComBroker.Core.protocol_router.router.ProtocolRouter object at 0x7a95ce2f8170>
+
+  File "/usr/lib/python3.12/concurrent/futures/__init__.py", line 49, in __getattr__
+    from .thread import ThreadPoolExecutor as te
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 37, in <module>
+    threading._register_atexit(_python_exit)
+    |         |                -> <function _python_exit at 0x7a95c445cea0>
+    |         -> <function _register_atexit at 0x7a95ce0b1080>
+    -> <module 'threading' from '/usr/lib/python3.12/threading.py'>
+  File "/usr/lib/python3.12/threading.py", line 1559, in _register_atexit
+    raise RuntimeError("can't register atexit after shutdown")
+
+RuntimeError: can't register atexit after shutdown
+</pre>
+        </div>
+        
+        </div>
+
+        <!-- TAB 5: Application Run Logs -->
+        <div id="RunLogs" class="tab-content">
+            <h3>Application Run Log Browser</h3>
+        <div class="log-entry">
+            <div class="log-header">
+                <span class="log-filename">Application_20260322_0603.log</span>
+                <span class="log-time">2026-03-22 06:03:39</span>
+            </div>
+            <pre class="log-content">060338.116 | DEBUG    | UI   | SYSTEM     | oaConfiguration.Methods.console_encoder | ⏩ Not on Windows ('nt'), skipping console encoding reconfiguration.
+060338.116 | SUCCESS  | UI   | SYSTEM     | oaConfiguration.Methods.console_encoder | ✅ Exiting configure_console_encoding.
+060338.116 | DEBUG    | UI   | SYSTEM     | __main__             | 🖥️🎨 [UI] Starting OpenAir UI Service...
+060338.116 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | Enforced minimum window size: 800x600
+060338.116 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | Attempting to set window maximization attributes...
+060338.116 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | Set '-zoomed' attribute for Linux.
+060338.120 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | ✅ SplashScreen materialised.
+060338.120 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | 🖥️🎨 [UI] Reveal main window.
+060338.120 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 👋 SplashScreen dismissed.
+060338.126 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Initializing Comms...
+060338.126 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Loading State Cache...
+060338.126 | DEBUG    | UI   | SYSTEM     | __main__             | 🖥️🎨 [UI] Entering Tkinter MainLoop.
+060338.126 | DEBUG    | UI   | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📖 Reading Cache.
+060338.126 | DEBUG    | UI   | SYSTEM     | __main__             | 🖥️🎨 [UI] MainLoop exited. Destroying root...
+060338.126 | DEBUG    | UI   | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📄 No cache file found.
+060338.126 | INFO     | UI   | DATA       | oaStateCache.Core.state_cache | 💾✨ First boot detected. Starting with fresh cache.
+060338.127 | DEBUG    | UI   | DATA       | oaStateCache.Core.state_cache | 🧠💾 [CACHE] Initialized with 0 entries.
+060338.127 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Connecting to Broker...
+060338.128 | DEBUG    | UI   | DATA       | oaStateCache.Core.state_cache | 🚀📤📥 [CACHE] Subscribing to root: OPEN-AIR/#
+060338.128 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Starting SNMP...
+060338.129 | ERROR    | UI   | SYSTEM     | oaComMQTT.Workers.mqtt_async_worker | 🚀🚫🛑 [MQTT] Worker failure: can't register atexit after shutdown
+060338.154 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Starting MIDI...
+060338.154 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Starting Splinker...
+060338.157 | ERROR    | UI   | SYSTEM     | oaGuiManager.Core.bootstrap_sequence | 🖥️🎨 [UI] Bootstrap Failure:Traceback (most recent call last):
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 96, in run
+    protocol_router.start()
+  File "/home/anthony/Documents/OPEN-AIR/oaComBroker/Core/protocol_router/router.py", line 98, in start
+    self._executor = concurrent.futures.ThreadPoolExecutor(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/__init__.py", line 49, in __getattr__
+    from .thread import ThreadPoolExecutor as te
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 37, in <module>
+    threading._register_atexit(_python_exit)
+  File "/usr/lib/python3.12/threading.py", line 1559, in _register_atexit
+    raise RuntimeError("can't register atexit after shutdown")
+RuntimeError: can't register atexit after shutdown
+
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py", line 1134, in __call__
+    ret = self.original_func(*self.args, **self.kwargs)
+          |    |              |    |       |    -> {}
+          |    |              |    |       -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x77c23addc500>
+          |    |              |    -> ()
+          |    |              -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x77c23addc500>
+          |    -> <bound method Thread._bootstrap of <Thread(Thread-6 (run), started daemon 131676094060224)>>
+          -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x77c23addc500>
+
+  File "/usr/lib/python3.12/threading.py", line 1030, in _bootstrap
+    self._bootstrap_inner()
+    |    -> <function Thread._bootstrap_inner at 0x77c24c727d80>
+    -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+    |    -> <function Thread.run at 0x77c24c727a60>
+    -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+    |    |        |    |        |    -> {}
+    |    |        |    |        -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+    |    |        |    -> ()
+    |    |        -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+    |    -> <bound method AsyncBootstrapEngine.run of <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x77c23addc3e0>>
+    -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 96, in run
+    protocol_router.start()
+    |               -> <function ProtocolRouter.start at 0x77c23bf52b60>
+    -> <oaComBroker.Core.protocol_router.router.ProtocolRouter object at 0x77c23becd1c0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaComBroker/Core/protocol_router/router.py", line 98, in start
+    self._executor = concurrent.futures.ThreadPoolExecutor(
+    |    |           |          -> <module 'concurrent.futures' from '/usr/lib/python3.12/concurrent/futures/__init__.py'>
+    |    |           -> <module 'concurrent' from '/usr/lib/python3.12/concurrent/__init__.py'>
+    |    -> None
+    -> <oaComBroker.Core.protocol_router.router.ProtocolRouter object at 0x77c23becd1c0>
+
+  File "/usr/lib/python3.12/concurrent/futures/__init__.py", line 49, in __getattr__
+    from .thread import ThreadPoolExecutor as te
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 37, in <module>
+    threading._register_atexit(_python_exit)
+    |         |                -> <function _python_exit at 0x77c23bec7420>
+    |         -> <function _register_atexit at 0x77c24c705120>
+    -> <module 'threading' from '/usr/lib/python3.12/threading.py'>
+  File "/usr/lib/python3.12/threading.py", line 1559, in _register_atexit
+    raise RuntimeError("can't register atexit after shutdown")
+
+RuntimeError: can't register atexit after shutdown
+060338.401 | DEBUG    | CORE | SYSTEM     | oaConfiguration.Methods.console_encoder | ⏩ Not on Windows ('nt'), skipping console encoding reconfiguration.
+060338.401 | SUCCESS  | CORE | SYSTEM     | oaConfiguration.Methods.console_encoder | ✅ Exiting configure_console_encoding.
+060338.401 | DEBUG    | CORE | SYSTEM     | __main__             | ⚡🛡️⚙️ [CORE] Starting OpenAir Core Service...
+060338.401 | DEBUG    | CORE | SYSTEM     | oaWatchdog.Managers.watchdog | 🐕⏳🔋 [WATCHDOG] Started (Timeout: 120.0s)
+060338.402 | DEBUG    | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📖 Reading Cache.
+060338.402 | DEBUG    | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📄 No cache file found.
+060338.402 | INFO     | CORE | DATA       | oaStateCache.Core.state_cache | 💾✨ First boot detected. Starting with fresh cache.
+060338.402 | DEBUG    | CORE | DATA       | oaStateCache.Core.state_cache | 🧠💾 [CACHE] Initialized with 0 entries.
+060338.402 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Beginning CORE manager launch sequence...
+060338.402 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Initializing core instances...
+060338.402 | INFO     | CORE | LOG_FILTER | oaLogging.Managers.log_filter_engine | Setting up MQTT subscription for dynamic log filtering on topic: OPEN-AIR/system/logger/filter/set
+060338.402 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/system/logger/filter/set
+060338.402 | INFO     | CORE | SYSTEM     | oaLogging.Managers.log_filter_engine | LogFilterEngine initialized and subscribed to MQTT topic.
+060338.404 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SPLINKER on OPEN-AIR/System/Status/Splinker/List: []
+060338.404 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Broker/Delete/#
+060338.405 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Broker/Service/#
+060338.405 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Status/Fleet/Complete
+060338.405 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_manager | 🚀📤📥 [MQTT] MqttManager initialized with Async Publisher.
+060338.405 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Injecting dynamic protocols...
+060338.455 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/Splinker/List
+060338.455 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+060338.499 | DEBUG    | CORE | SYSTEM     | oaTranslator.Managers.yak_translator | 🟡 YAK repository file not found or empty at /home/anthony/Documents/OPEN-AIR/.pytest_cache/oaDataState/YAKETYYAK.json. Initializing empty repository.
+060338.499 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/yak/commands/#
+060338.499 | DEBUG    | CORE | SYSTEM     | oaTranslator.Managers.yak_translator | 👂 Subscribed to YAK trigger topic: 'OPEN-AIR/yak/commands/#'
+060338.500 | SUCCESS  | CORE | SYSTEM     | oaTranslator.Managers.yak_translator | ✅ YakTranslator initialized and ready to translate!
+060338.500 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Proxy/Rx_Outbox
+060338.500 | SUCCESS  | CORE | SYSTEM     | oaTranslator.Methods.yak_rx | ✅✅✅ [SUCCESS] YakRxManager subscribed to 'OPEN-AIR/Proxy/Rx_Outbox' for proxy responses.
+060338.501 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Status/Fleet/Start
+060338.501 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Status/Fleet/Complete
+060338.844 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Linking cross-dependent managers...
+060338.844 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Splinker/#
+060338.844 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Starting all manager services...
+060338.872 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 INPUT READY: Mbox 2:Mbox 2 MIDI 1 28:0
+060338.873 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 INPUT READY: Midi Through:Midi Through Port-0 14:0
+060338.874 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 OUTPUT READY: Midi Through:Midi Through Port-0 14:0
+060338.874 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 OUTPUT READY: Mbox 2:Mbox 2 MIDI 1 28:0
+060338.876 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MIDI on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+060338.876 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MIDI on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+060338.876 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/PTP/Capture
+060338.876 | WARNING  | CORE | SYSTEM     | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+060338.877 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🔗 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+060338.877 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+060338.877 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+060338.877 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+060338.877 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+060338.878 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+060338.878 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+060338.878 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+060338.878 | SUCCESS  | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | ▶️▶️▶️ [START] Protocol Router Active (GUID: DD875F3EBA434490).
+060338.879 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Connecting CORE MQTT Client to broker and running scans...
+060338.879 | DEBUG    | CORE | DATA       | oaStateCache.Core.state_cache | 🚀📤📥 [CACHE] Subscribing to root: OPEN-AIR/#
+060338.879 | SUCCESS  | CORE | SYSTEM     | oaThreadManager.Workers.launcher | ✅✅✅ [SUCCESS] All CORE managers have been successfully launched!
+060338.879 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Connecting CORE MQTT Client to broker and running scans...
+060338.879 | DEBUG    | CORE | DATA       | oaStateCache.Core.state_cache | 🚀📤📥 [CACHE] Subscribing to root: OPEN-AIR/#
+060338.879 | SUCCESS  | CORE | SYSTEM     | __main__             | ✅ [SUCCESS] CORE: Service Operational. Watchdog Active.
+060338.880 | SUCCESS  | CORE | SYSTEM     | oaComMQTT.Workers.mqtt_async_worker | 🚀🆗✅ [SUCCESS] aiomqtt: Connected to broker.
+060338.881 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] aiomqtt: Resubscribed to root and external filters.
+060338.923 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774079897.0471363}
+060338.923 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774079897.0471363}
+060338.923 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/status: OFFLINE
+060338.923 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/status: OFFLINE
+060338.926 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/MIDI/ActiveInputs
+060338.926 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+060338.926 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+060338.926 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/MIDI/ActiveOutputs
+060338.927 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+060338.927 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+060338.927 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+060338.927 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+060338.927 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+060338.927 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+060338.928 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774079897.0471363}
+060338.928 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774079897.0471363}
+060338.928 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/status: OFFLINE
+060338.928 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/status: OFFLINE
+060338.929 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774173818.5015762}
+060338.929 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774173818.5015762}
+060338.929 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+060338.929 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+060338.930 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+060338.930 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+060338.930 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+060338.930 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/Splinker/List: []
+060338.930 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+060338.930 | TRACE    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter OPEN-AIR/System/Status/Splinker/List
+060338.931 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+060338.931 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+060338.931 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+060338.931 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+060338.931 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+060338.931 | TRACE    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter OPEN-AIR/System/Status/MIDI/ActiveInputs
+060338.971 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+060338.971 | TRACE    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter OPEN-AIR/System/Status/MIDI/ActiveOutputs
+060338.979 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/status
+060338.979 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/status: OFFLINE
+060338.979 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GUI/Global/Header/StatusLight
+060338.979 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774173818.5015762}
+060338.980 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/Splinker/List
+060338.980 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+060338.980 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/status: OFFLINE
+060337.731 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Launching OPEN-AIR Partitions... (Mission Critical: False)
+060337.731 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Session Identity established (Randomized): DD875F3EBA434490
+060337.732 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Spawning Partition B (UI)...
+060337.732 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Spawning Partition A (Core)...
+060337.733 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: System Running. Monitoring child processes...
+060339.233 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: 👋 UI exited (Code 0). System complete.
+060339.233 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Terminating child processes...
+060339.334 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Supervisor shutdown complete. Goodbye.
+060339.334 | INFO     | SUP  | SYSTEM     | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] Stopping Profiler...
+060339.334 | INFO     | SUP  | SYSTEM     | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] Synthesizing Intelligence Report...
+060339.353 | SUCCESS  | SUP  | SYSTEM     | oaTests.Core.FlameGraph.flame_html | ? Standalone Performance Report generated: /home/anthony/Documents/OPEN-AIR/oaDataLogs/Reports/FlameGraph/flamegraph.html
+060339.353 | SUCCESS  | SUP  | SYSTEM     | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] Intelligence Report: /home/anthony/Documents/OPEN-AIR/oaDataLogs/Reports/FlameGraph/flamegraph.html
+060339.353 | SUCCESS  | SUP  | SYSTEM     | __main__             | 🔥 [ENTRY] Performance profiling session complete.
+060339.353 | INFO     | SUP  | SYSTEM     | __main__             | 🔥 [ENTRY] Report: /home/anthony/Documents/OPEN-AIR/oaDataLogs/Reports/FlameGraph/flamegraph.html
+</pre>
+        </div>
+        
+        </div>
+
+        <!-- TAB 6: Flame Graph -->
+        <div id="FlameGraph" class="tab-content">
+            
+        <h3>Performance Flame Graph</h3>
+        <p>A specialized performance report was generated during the last profiling session.</p>
+        <div style="margin: 20px 0;">
+            <a href="FlameGraph/flamegraph.html" target="_blank" class="tab-btn" style="text-decoration: none; display: inline-block;">
+                🚀 OPEN FULL PERFORMANCE REPORT
+            </a>
+        </div>
+        <p><i>Note: The full report contains interactive SVG graphs, Event Analysis Engine, and the Wall of Pitty.</i></p>
+        <iframe src="FlameGraph/flamegraph.html" style="width: 100%; height: 600px; border: 1px solid #444; border-radius: 8px;"></iframe>
+        
+        </div>
+    </div>
+</body>
+</html>

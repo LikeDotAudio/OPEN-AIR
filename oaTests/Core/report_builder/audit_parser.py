@@ -1,8 +1,9 @@
 # Report_Builder/audit_parser.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 1.1.0
 #
-# Description: Brief summary of purpose
+# Description: Parses Markdown-formatted audit logs into structured results.
+# Refactored to preserve full audit findings 1:1.
 
 import os
 import re
@@ -11,12 +12,12 @@ import glob
 def parse_audit_log(file_path):
     """
     Parses an audit log file and returns a list of result dictionaries.
-    Compatible with Markdown-formatted audit logs.
+    Captures full 1:1 content for reporting.
     """
     if not os.path.exists(file_path):
         return []
 
-    with open(file_path, 'r') as f:
+    with open(file_path, 'r', encoding="utf-8") as f:
         content = f.read()
 
     # Split by "## File: "
@@ -27,17 +28,17 @@ def parse_audit_log(file_path):
         lines = section.split('\n')
         if not lines:
             continue
+        
         header_line = lines[0].strip()
         
         # Extract filename and status
         # Example: AuditArchitecture.toml (PASSED)
-        # Regex to handle various statuses in parentheses
         match = re.search(r'^(.*?)\s*\((PASSED|FAILED|SKIPPED|ERROR|UNEXPECTED ERROR)\)', header_line)
         if match:
             name = match.group(1).strip()
             status_raw = match.group(2).upper()
             
-            # Map statuses to reporting categories: passed, failed, error, skipped
+            # Map statuses to reporting categories
             status_map = {
                 "PASSED": "passed",
                 "FAILED": "failed",
@@ -47,43 +48,33 @@ def parse_audit_log(file_path):
             }
             status = status_map.get(status_raw, "error")
             
-            # Extract description (Goal/Achievement)
-            # For PASSED, it's the text following the header until the next separator
-            # For FAILED, we look for error details
+            # Capture EVERYTHING after the header line as the body
+            # We strip the trailing separator '---' if it exists at the end
+            body = "\n".join(lines[1:]).strip()
+            if body.endswith('---'):
+                body = body[:-3].strip()
             
+            # For passed audits, the body goes to description
+            # For failed/error, the body goes to cause
             description = ""
             cause = ""
             
             if status == "passed":
-                # Find the first non-empty line after the header
-                for l in lines[1:]:
-                    if l.strip() and not l.strip().startswith('---'):
-                        description = l.strip()
-                        break
-            elif status == "failed":
-                # Extract error details
-                error_match = re.search(r'\*\*Error Details:\*\*\s*```text\s*(.*?)\s*```', section, re.DOTALL)
-                if error_match:
-                    cause = error_match.group(1).strip()
-                
-                # Try to find partial output as description
-                partial_match = re.search(r'\*\*Partial Output:\*\*\s*(.*?)\s*(?:---|##|$)', section, re.DOTALL)
-                if partial_match:
-                    description = partial_match.group(1).strip().split('\n')[0]
-            elif status == "error":
-                # Extract error message
-                error_msg_match = re.search(r'\*\*Error:\*\*\s*(.*?)\s*(?:---|##|$)', section, re.DOTALL)
-                if error_msg_match:
-                    cause = error_msg_match.group(1).strip()
-            
-            if not description:
-                description = f"Architectural audit for {name}"
+                description = body
+            else:
+                cause = body
+                # Extract a short summary for the description if it's a failure
+                desc_match = re.search(r'\*\*Partial Output:\*\*\s*(.*?)\s*(?:---|##|$)', section, re.DOTALL)
+                if desc_match:
+                    description = desc_match.group(1).strip().split('\n')[0]
+                else:
+                    description = f"Architectural audit failure in {name}"
 
             results.append({
                 "name": f"Audit: {name}",
                 "status": status,
                 "description": description,
-                "cause": cause.replace('\n', '<br>'),
+                "cause": cause, # Preserve raw newlines, HTML generator will handle formatting
                 "duration": "N/A"
             })
     

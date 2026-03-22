@@ -6,7 +6,7 @@
 
 import os
 import json
-from oaTests.Core.Report_Builder.generate_html import HTMLGenerator
+from oaTests.Core.report_builder.generate_html import HTMLGenerator
 
 class ReportGenerator:
     def __init__(self, html_path, json_path, timestamp):

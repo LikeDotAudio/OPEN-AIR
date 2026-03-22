@@ -61,7 +61,7 @@ class AsyncBootstrapEngine:
 
     def _connect_communication_services(self, mqtt_conn, sub_router, state_cache):
         """Initializes the connection to the MQTT broker and sets up state subscriptions."""
-        self.splash.set_status(status="Connecting to Broker...")
+        self.splash.set_status(message="Connecting to Broker...")
         mqtt_conn.connect_to_broker(
             on_message_callback=state_cache.handle_incoming_mqtt, 
             subscriber_router=sub_router
@@ -70,7 +70,7 @@ class AsyncBootstrapEngine:
 
     def _start_protocol_services(self, protocol_router):
         """Starts the main protocol routing services."""
-        self.splash.set_status(status="Starting Protocol Services...")
+        self.splash.set_status(message="Starting Protocol Services...")
         protocol_router.start()
 
     def _start_optional_services(self):
@@ -84,7 +84,7 @@ class AsyncBootstrapEngine:
         for key, display_name in service_map.items():
             service = self.services.get(key)
             if service:
-                self.splash.set_status(status=f"Starting {display_name}...")
+                self.splash.set_status(message=f"Starting {display_name}...")
                 service.start()
 
     def _setup_control_links(self, sub_router, splinker):
@@ -102,13 +102,13 @@ class AsyncBootstrapEngine:
         Final phase: Build the Workspace and reveal.
         """
         try:
-            self.splash.set_status("Building Workspace...")
+            self.splash.set_status(message="Building Workspace...")
             from oaGuiBuildShell.Entry import Application
             from .ui_window import UIWindowManager
 
             with mirror_engine.suspend_bindings():
                 def _on_ignition_complete():
-                    self.splash.set_status("Ignition Complete!")
+                    self.splash.set_status(message="Ignition Complete!")
                     def _finish():
                         UIWindowManager.reveal_main_window(self.root, self.splash, self.app_constants.global_settings["debug_enabled"])
                         mirror_engine._schedule_queue_processing()

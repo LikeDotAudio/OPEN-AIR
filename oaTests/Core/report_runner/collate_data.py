@@ -12,7 +12,7 @@ def collate_extra_tabs(project_root):
     by calling their respective builder modules.
     """
     try:
-        from oaTests.Core.Report_Builder import (
+        from oaTests.Core.report_builder import (
             ReportBuilder_Audits, 
             ReportBuilder_ChangeLog, 
             ReportBuilder_ErrorLog, 

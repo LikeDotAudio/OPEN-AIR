@@ -19,10 +19,12 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 # Import modular components using requested filenames
-from oaTests.Core.Report_Builder.run_test import TestRunner
-from oaTests.Core.Report_Builder.collate_data import collate_extra_tabs
-from oaTests.Core.Report_Builder.run_report_builder import ReportGenerator
-from oaTests.Core.Report_Builder import clear_logs, audit_parser, DiscoverTests
+from oaTests.Core.report_runner.run_test import TestRunner
+from oaTests.Core.report_runner.collate_data import collate_extra_tabs
+from oaTests.Core.report_runner.run_report_builder import ReportGenerator
+from oaTests.Core.report_runner import DiscoverTests
+from oaTests.Core.report_builder import audit_parser
+from oaTests.Core.CleanupUtilities import clear_logs
 
 class UnifiedOrchestrator:
     def __init__(self):

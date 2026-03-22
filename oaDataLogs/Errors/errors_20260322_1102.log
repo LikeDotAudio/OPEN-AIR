@@ -1,0 +1,5 @@
+110213.711 | WARNING  | CORE | SYSTEM     | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+110214.934 | CRITICAL | CORE | COMM       | oaSplinker.Core.handle_panic | 🆘 SPLINKER PANIC TRIGGERED! Emergency stop active.
+110214.935 | CRITICAL | UI   | COMM       | oaSplinker.Core.handle_panic | 🆘 SPLINKER PANIC TRIGGERED! Emergency stop active.
+110216.773 | WARNING  | UI   | OSC        | oaComOSC.Managers.osc_manager | 🅾️📡🛑 [OSC] Bridge Offline.
+110216.773 | WARNING  | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🌐 SNMP Bridge Offline.

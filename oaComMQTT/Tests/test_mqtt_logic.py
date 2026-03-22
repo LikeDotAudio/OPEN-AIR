@@ -7,10 +7,14 @@
 import unittest
 from unittest.mock import MagicMock, patch
 from oaTranslator.Core.topic_calculator import TopicCalculator
-# Using sys.path to import from a non-standard location for MQTTSweeper
+# Using a robust path to import from a non-standard location for MQTTSweeper
 import sys
 import os
-sys.path.append(os.path.abspath("oaTests/Core/CleanupUtilities"))
+# Calculate the project root by going up three levels from the current file
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+utility_path = os.path.join(project_root, "oaTests", "Core", "CleanupUtilities")
+if utility_path not in sys.path:
+    sys.path.append(utility_path)
 from ClearMQTT import MQTTSweeper
 
 class TestMQTTLogic(unittest.TestCase):

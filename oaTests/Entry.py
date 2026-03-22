@@ -14,7 +14,8 @@ import subprocess
 from datetime import datetime
 
 # Ensure project root is in sys.path for module resolution
-project_root = os.getcwd()
+# Robustly find the project root by going up one directory from the script's location.
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
@@ -26,8 +27,8 @@ from oaTests.Core.report_runner import DiscoverTests
 from oaTests.Core.CleanupUtilities import clear_logs
 
 class UnifiedOrchestrator:
-    def __init__(self):
-        self.project_root = os.getcwd()
+    def __init__(self, project_root):
+        self.project_root = project_root
         self.timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.file_timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         
@@ -63,7 +64,7 @@ class UnifiedOrchestrator:
             "classname": test.__class__.__name__,
             "name": str(test),
             "status": status,
-            "message": message,
+"message": message,
             "cause": cause,
             "description": description,
             "duration": f"{duration:.4f}s"
@@ -138,5 +139,5 @@ class UnifiedOrchestrator:
         webbrowser.open('file://' + os.path.realpath(self.html_path))
 
 if __name__ == "__main__":
-    orchestrator = UnifiedOrchestrator()
+    orchestrator = UnifiedOrchestrator(project_root)
     orchestrator.execute()

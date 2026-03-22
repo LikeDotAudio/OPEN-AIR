@@ -1,6 +1,6 @@
 import unittest
 import tkinter as tk
-from unittest.mock import MagicMock, Patch
+from unittest.mock import MagicMock, patch
 from oaGuiEditorWYSIWYG.grab_bag.grab_bag_view import GrabBagView
 
 class TestGrabBagView(unittest.TestCase):

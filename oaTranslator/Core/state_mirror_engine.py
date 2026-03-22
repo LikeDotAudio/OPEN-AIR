@@ -110,6 +110,34 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
             state_logger.error(f"Failed to initialize widget state for {widget_id}: {e}")
             return False
 
+    def announce_all_widgets(self):
+        """
+        Forces an initial MQTT announcement for all registered widgets.
+        Bypasses standard throttles to ensure the broker/SNMP bridge 
+        receives the complete system state on load.
+        """
+        if self.is_inert or self._suppress_broadcast: return
+        
+        if LOCAL_DEBUG: state_logger.info("📢 [STATE] Announcing all widget states to MQTT...")
+        
+        # ⚡ BYPASS THROTTLE: Reset global throttle for this batch
+        orig_global_ts = self._last_global_broadcast_ts
+        self._last_global_broadcast_ts = 0
+        
+        for widget_id in list(self.widgets.keys()):
+            widget_info = self._get_widget_info(widget_id)
+            if not widget_info: continue
+            
+            # Reset widget-level throttle temporarily
+            orig_widget_ts = widget_info.get("last_broadcast_ts", 0)
+            widget_info["last_broadcast_ts"] = 0
+            
+            # Force broadcast with 'boot' flag
+            self.broadcast_gui_change_to_mqtt(widget_id, extra_payload={"boot": True})
+            
+        # Global throttle will naturally recover on next user interaction
+        # as it will be set to 'now' by the last broadcast in the loop.
+
     def broadcast_gui_change_to_mqtt(self, widget_id, extra_payload=None):
         if not widget_id or self.is_inert or self._suppress_broadcast or self._silent_update or self._binding_suspended:
             return

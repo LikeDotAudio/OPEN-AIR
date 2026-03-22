@@ -38,7 +38,7 @@
       "path": "System/DSP/Oscillator/Freq"
     },
     "cosmetics": {
-      "visualization": "dial",
+      "visualization": "gear",
       "colors": {
         "primary": "#33A1FD",
         "secondary": "#444444",

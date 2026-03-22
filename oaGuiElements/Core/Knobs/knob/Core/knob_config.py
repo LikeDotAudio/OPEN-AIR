@@ -62,8 +62,16 @@ def extract_knob_config(config_data):
     
     # 7. Aesthetics (The "Pattern" fix)
     # We probe overrides -> styling -> cosmetics -> top-level
-    knob_style = overrides.get("knob_style", styling.get("knob_style", cosmetics.get("visualization", c.get("knob_style", "standard")))).lower()
+    visualization = cosmetics.get("visualization", c.get("visualization", "")).lower()
+    
+    knob_style = overrides.get("knob_style", styling.get("knob_style", c.get("knob_style", "standard"))).lower()
     shape = overrides.get("shape", styling.get("shape", c.get("shape", "circle"))).lower()
+    
+    if visualization:
+        if visualization in ["panner", "dial", "standard"]:
+            knob_style = visualization
+        elif visualization in ["circle", "octagon", "gear"]:
+            shape = visualization
     
     no_center = styling.get("no_center", c.get("no_center", False))
     arc_width = int(styling.get("arc_width", c.get("arc_width", 5)))

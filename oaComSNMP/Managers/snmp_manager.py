@@ -24,7 +24,7 @@ from oaComSNMP.Workers.snmp_tester import SnmpTester
 from oaComSNMP.Methods.snmp_utils import get_snmp_node_id, get_snmp_descriptor, initialize_oid_map
 
 # --- Standard Debug Logging Setup ---
-snmp_manager_verbose_logging_enabled = False
+snmp_manager_verbose_logging_enabled = True
 app_constants = Config.get_instance()
 # ⚡ SUBSYSTEM: SNMP_BRIDGE
 snmp_logger = logger.bind(subsystem="SNMP_BRIDGE")
@@ -177,13 +177,15 @@ class SNMPManager:
         cache = self.state_cache_manager.cache
         new_oid_map = {}
         
+        if self._verbose_logging_enabled():
+            snmp_logger.debug(f"🔍 [SNMP] Updating OID map. Cache size: {len(cache)}")
+
         for topic, payload in cache.items():
             # ⚡ FILTER: Skip System control/status, Router, and large Blobs
-            # This handles both the specific Firehose topic and any general system overhead
             if any(x in topic for x in ["/System/", "/Control/", "/Status/", "/Router/"]):
                 continue
                 
-            # ⚡ FILTER: Skip GUI Initialization and Discovery metadata (NOT state)
+            # ⚡ FILTER: Skip GUI Initialization and Discovery metadata
             source = str(payload.get("source", "")).upper() if isinstance(payload, dict) else ""
             if source in ["GUI-INIT", "GUI-LOAD", "SYSTEM-CONFIG"]:
                 continue
@@ -191,8 +193,7 @@ class SNMPManager:
             val = payload.get("val") if isinstance(payload, dict) else payload
             val_str = str(val) if val is not None else ""
             
-            # ⚡ PERFORMANCE: Skip massive blobs (GUI Configs, Blueprints, etc.)
-            # and nested structures that aren't simple values
+            # ⚡ PERFORMANCE: Skip massive blobs and nested structures
             if len(val_str) > 1000 or "{" in val_str or "[" in val_str:
                 continue
 
@@ -214,6 +215,10 @@ class SNMPManager:
                 "descriptor": descriptor,
                 "path_parts": parts
             }
+        
+        if self._verbose_logging_enabled():
+            snmp_logger.debug(f"✅ [SNMP] OID map updated. Active objects: {len(new_oid_map)}")
+            
         self.oid_map = new_oid_map
         return new_oid_map
 

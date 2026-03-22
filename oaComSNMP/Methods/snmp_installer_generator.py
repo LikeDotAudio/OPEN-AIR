@@ -31,9 +31,10 @@ class InstallerGenerator:
             "# 2. Permission Fix (Traverse home to access project)",
             'echo "[SNMP] Adjusting folder permissions for system access..."',
             "sudo chmod o+x /home /home/anthony",
-            "sudo chmod -R o+rwx ./oaDataRunningFiles/snmp",
+            "sudo chmod -R o+rwx ./oaDataSNMP",
 
-            "# 3. Master Configuration",
+            "# 3. Master Configuration"
+,
             "CONF_FILE='/etc/snmp/snmpd.conf'",
             'echo "[SNMP] Configuring Master Bridge at $CONF_FILE..."',
             "",

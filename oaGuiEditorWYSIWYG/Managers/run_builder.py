@@ -11,11 +11,11 @@ import tkinter as tk
 
 # 1. Setup Environment: Ensure the project root is in sys.path
 current_dir = pathlib.Path(__file__).resolve().parent
-project_root = current_dir.parent
+project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from oaGuiEditorWYSIWYG.wysiwyg_editor import WysiwygEditor
+from oaGuiEditorWYSIWYG.Managers.wysiwyg_editor import WysiwygEditor
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 

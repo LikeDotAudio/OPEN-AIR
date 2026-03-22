@@ -5,14 +5,395 @@ IMPORTS
     DisplayString FROM SNMPv2-TC;
 
 openAirMIB MODULE-IDENTITY
-    LAST-UPDATED "202603220709Z"
+    LAST-UPDATED "202603221030Z"
     ORGANIZATION "OPEN-AIR Project"
     CONTACT-INFO "Anthony Peter Kuzub"
     DESCRIPTION "MQTT-Aligned OID Tree for OPEN-AIR."
-    REVISION "202603220709Z"
+    REVISION "202603221030Z"
     DESCRIPTION "Strictly unique path-aligned generation."
     ::= { enterprises 25030 }
 
 v1 OBJECT IDENTIFIER ::= { openAirMIB 1 }
+
+spectrumff5d OBJECT IDENTIFIER ::= { v1 4582 }
+instrument36ce OBJECT IDENTIFIER ::= { spectrumff5d 59555 }
+frequencye887 OBJECT IDENTIFIER ::= { instrument36ce 41438 }
+spectrumInstrumentfrequency7dc9 OBJECT IDENTIFIER ::= { frequencye887 42633 }
+blocks742d OBJECT IDENTIFIER ::= { spectrumInstrumentfrequency7dc9 3561 }
+quickSpan2e10 OBJECT IDENTIFIER ::= { blocks742d 547 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Quick Span/Span
+spanc85a OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Quick Span/Span"
+    ::= { quickSpan2e10 31513 }
+
+startStop9226 OBJECT IDENTIFIER ::= { blocks742d 17133 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz
+startfreqMHz5c5f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz"
+    ::= { startStop9226 25465 }
+
+-- MQTT: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz
+stopfreqMHzde28 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz"
+    ::= { startStop9226 30134 }
+
+frequencydd46 OBJECT IDENTIFIER ::= { blocks742d 57029 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz
+spanfreqMHzab37 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz"
+    ::= { frequencydd46 2413 }
+
+-- MQTT: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz
+centerfreqMHzceb3 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz"
+    ::= { frequencydd46 4552 }
+
+bandwidth44f1 OBJECT IDENTIFIER ::= { instrument36ce 52386 }
+spectrumInstrumentbandwidth6f64 OBJECT IDENTIFIER ::= { bandwidth44f1 14112 }
+blocks2839 OBJECT IDENTIFIER ::= { spectrumInstrumentbandwidth6f64 39553 }
+sweepTime4ff2 OBJECT IDENTIFIER ::= { blocks2839 15347 }
+sweeptimesettingfbe2 OBJECT IDENTIFIER ::= { sweepTime4ff2 39899 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Sweep Time/sweep_time_setting/dial_config
+dialconfig50aa OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Sweep Time/sweep_time_setting/dial_config"
+    ::= { sweeptimesettingfbe2 6285 }
+
+resolutionBandwidthbba6 OBJECT IDENTIFIER ::= { blocks2839 16920 }
+rBW5597 OBJECT IDENTIFIER ::= { resolutionBandwidthbba6 26181 }
+-- MQTT: OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/dial_config
+dialconfigab15 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/dial_config"
+    ::= { rBW5597 29766 }
+
+zoo994f OBJECT IDENTIFIER ::= { v1 16181 }
+faderse5a7 OBJECT IDENTIFIER ::= { zoo994f 10471 }
+gCAac38 OBJECT IDENTIFIER ::= { faderse5a7 34427 }
+point31c3 OBJECT IDENTIFIER ::= { gCAac38 8898 }
+zooFadersGCApointcf29 OBJECT IDENTIFIER ::= { point31c3 19916 }
+blocks8132 OBJECT IDENTIFIER ::= { zooFadersGCApointcf29 64952 }
+pointOned678 OBJECT IDENTIFIER ::= { blocks8132 34076 }
+compositedrumsb9f8 OBJECT IDENTIFIER ::= { pointOned678 45296 }
+-- MQTT: OPEN-AIR/Zoo/Faders/GCA/5point/Zoo_Faders_GCA_5point1/blocks/5 point One/composite_drums/ch_1
+ch5d8f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/GCA/5point/Zoo_Faders_GCA_5point1/blocks/5 point One/composite_drums/ch_1"
+    ::= { compositedrumsb9f8 58690 }
+
+rGB9619 OBJECT IDENTIFIER ::= { gCAac38 13001 }
+zooFadersGCARGB6fe5 OBJECT IDENTIFIER ::= { rGB9619 48817 }
+blocksfe05 OBJECT IDENTIFIER ::= { zooFadersGCARGB6fe5 15163 }
+rGBMixerDemo6353 OBJECT IDENTIFIER ::= { blocksfe05 56612 }
+-- MQTT: OPEN-AIR/Zoo/Faders/GCA/RGB/Zoo_Faders_GCA_RGB/blocks/RGB_Mixer_Demo/ch_1
+ch464c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/GCA/RGB/Zoo_Faders_GCA_RGB/blocks/RGB_Mixer_Demo/ch_1"
+    ::= { rGBMixerDemo6353 35857 }
+
+zooFadersGCA6506 OBJECT IDENTIFIER ::= { gCAac38 45921 }
+blockse991 OBJECT IDENTIFIER ::= { zooFadersGCA6506 30411 }
+point8ab8 OBJECT IDENTIFIER ::= { blockse991 39873 }
+compositedrumsdcfd OBJECT IDENTIFIER ::= { point8ab8 50842 }
+-- MQTT: OPEN-AIR/Zoo/Faders/GCA/Zoo_Faders_GCA_20/blocks/20 point/composite_drums/ch_1
+chde18 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/GCA/Zoo_Faders_GCA_20/blocks/20 point/composite_drums/ch_1"
+    ::= { compositedrumsdcfd 10471 }
+
+point4877 OBJECT IDENTIFIER ::= { gCAac38 48421 }
+zooFadersGCApoint2b41 OBJECT IDENTIFIER ::= { point4877 29481 }
+blocks1e85 OBJECT IDENTIFIER ::= { zooFadersGCApoint2b41 63542 }
+pointfecc OBJECT IDENTIFIER ::= { blocks1e85 63844 }
+compositedrums8e50 OBJECT IDENTIFIER ::= { pointfecc 21307 }
+-- MQTT: OPEN-AIR/Zoo/Faders/GCA/20point/Zoo_Faders_GCA_20point4/blocks/20 point 4/composite_drums/ch_1
+ch40ec OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/GCA/20point/Zoo_Faders_GCA_20point4/blocks/20 point 4/composite_drums/ch_1"
+    ::= { compositedrums8e50 32434 }
+
+stereob1dd OBJECT IDENTIFIER ::= { gCAac38 53665 }
+zooFadersGCAStereo5341 OBJECT IDENTIFIER ::= { stereob1dd 63889 }
+blocks1cbf OBJECT IDENTIFIER ::= { zooFadersGCAStereo5341 17980 }
+stereo85ed OBJECT IDENTIFIER ::= { blocks1cbf 42746 }
+compositestereo4ac1 OBJECT IDENTIFIER ::= { stereo85ed 33590 }
+-- MQTT: OPEN-AIR/Zoo/Faders/GCA/Stereo/Zoo_Faders_GCA_Stereo/blocks/Stereo/composite_stereo/ch_1
+chcd6f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/GCA/Stereo/Zoo_Faders_GCA_Stereo/blocks/Stereo/composite_stereo/ch_1"
+    ::= { compositestereo4ac1 49943 }
+
+mDP845e OBJECT IDENTIFIER ::= { faderse5a7 46488 }
+zooFadersMDP32a1 OBJECT IDENTIFIER ::= { mDP845e 51650 }
+blocksa1b6 OBJECT IDENTIFIER ::= { zooFadersMDP32a1 58626 }
+mdpdemobd12 OBJECT IDENTIFIER ::= { blocksa1b6 27253 }
+mdp1529 OBJECT IDENTIFIER ::= { mdpdemobd12 60880 }
+graph8df2 OBJECT IDENTIFIER ::= { mdp1529 31471 }
+oaDataRunningFiles87eb OBJECT IDENTIFIER ::= { graph8df2 36219 }
+-- MQTT: OPEN-AIR/Zoo/Faders/MDP/Zoo_Faders_MDP/blocks/mdp_demo/mdp_1/graph/oaDataRunningFiles/grid_ref
+gridref994b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/MDP/Zoo_Faders_MDP/blocks/mdp_demo/mdp_1/graph/oaDataRunningFiles/grid_ref"
+    ::= { oaDataRunningFiles87eb 23976 }
+
+faderDial4a55 OBJECT IDENTIFIER ::= { faderse5a7 50352 }
+moreDialsde89 OBJECT IDENTIFIER ::= { faderDial4a55 33471 }
+zooFadersFaderDialMoreDials7238 OBJECT IDENTIFIER ::= { moreDialsde89 15807 }
+blockse508 OBJECT IDENTIFIER ::= { zooFadersFaderDialMoreDials7238 4794 }
+dialExpansion4809 OBJECT IDENTIFIER ::= { blockse508 60361 }
+dial7bc2 OBJECT IDENTIFIER ::= { dialExpansion4809 3650 }
+-- MQTT: OPEN-AIR/Zoo/Faders/Fader_Dial/More_Dials/Zoo_Faders_Fader_Dial_More_Dials/blocks/Dial_Expansion/dial_1/dial_config
+dialconfig2094 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/Fader_Dial/More_Dials/Zoo_Faders_Fader_Dial_More_Dials/blocks/Dial_Expansion/dial_1/dial_config"
+    ::= { dial7bc2 65161 }
+
+dial6c72 OBJECT IDENTIFIER ::= { dialExpansion4809 15763 }
+-- MQTT: OPEN-AIR/Zoo/Faders/Fader_Dial/More_Dials/Zoo_Faders_Fader_Dial_More_Dials/blocks/Dial_Expansion/dial_10/dial_config
+dialconfig1052 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/Fader_Dial/More_Dials/Zoo_Faders_Fader_Dial_More_Dials/blocks/Dial_Expansion/dial_10/dial_config"
+    ::= { dial6c72 3734 }
+
+dial15ae OBJECT IDENTIFIER ::= { dialExpansion4809 34103 }
+-- MQTT: OPEN-AIR/Zoo/Faders/Fader_Dial/More_Dials/Zoo_Faders_Fader_Dial_More_Dials/blocks/Dial_Expansion/dial_19/dial_config
+dialconfig97c7 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/Fader_Dial/More_Dials/Zoo_Faders_Fader_Dial_More_Dials/blocks/Dial_Expansion/dial_19/dial_config"
+    ::= { dial15ae 1150 }
+
+horizontalwithdialValuef1d2 OBJECT IDENTIFIER ::= { faderDial4a55 44513 }
+zooFadersFaderDialHorizontalwithdialValue1311 OBJECT IDENTIFIER ::= { horizontalwithdialValuef1d2 63341 }
+blocks266c OBJECT IDENTIFIER ::= { zooFadersFaderDialHorizontalwithdialValue1311 57367 }
+dialExpansion1347 OBJECT IDENTIFIER ::= { blocks266c 30146 }
+diala566 OBJECT IDENTIFIER ::= { dialExpansion1347 17152 }
+-- MQTT: OPEN-AIR/Zoo/Faders/Fader_Dial/Horizontal_with_dial_Value/Zoo_Faders_Fader_Dial_Horizontal_with_dial_Value/blocks/Dial_Expansion/dial_1/dial_config
+dialconfig9d66 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/Fader_Dial/Horizontal_with_dial_Value/Zoo_Faders_Fader_Dial_Horizontal_with_dial_Value/blocks/Dial_Expansion/dial_1/dial_config"
+    ::= { diala566 45838 }
+
+dial8414 OBJECT IDENTIFIER ::= { dialExpansion1347 19949 }
+-- MQTT: OPEN-AIR/Zoo/Faders/Fader_Dial/Horizontal_with_dial_Value/Zoo_Faders_Fader_Dial_Horizontal_with_dial_Value/blocks/Dial_Expansion/dial_15/dial_config
+dialconfig7e1c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/Fader_Dial/Horizontal_with_dial_Value/Zoo_Faders_Fader_Dial_Horizontal_with_dial_Value/blocks/Dial_Expansion/dial_15/dial_config"
+    ::= { dial8414 22859 }
+
+dialdcba OBJECT IDENTIFIER ::= { dialExpansion1347 64420 }
+-- MQTT: OPEN-AIR/Zoo/Faders/Fader_Dial/Horizontal_with_dial_Value/Zoo_Faders_Fader_Dial_Horizontal_with_dial_Value/blocks/Dial_Expansion/dial_8/dial_config
+dialconfig1af3 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/Fader_Dial/Horizontal_with_dial_Value/Zoo_Faders_Fader_Dial_Horizontal_with_dial_Value/blocks/Dial_Expansion/dial_8/dial_config"
+    ::= { dialdcba 47590 }
+
+classiccb53 OBJECT IDENTIFIER ::= { faderDial4a55 58835 }
+zooFadersFaderDialClassicc464 OBJECT IDENTIFIER ::= { classiccb53 7095 }
+blocksc2e8 OBJECT IDENTIFIER ::= { zooFadersFaderDialClassicc464 35194 }
+elementsdbdb OBJECT IDENTIFIER ::= { blocksc2e8 48975 }
+examplefields1947 OBJECT IDENTIFIER ::= { elementsdbdb 61913 }
+-- MQTT: OPEN-AIR/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/elements1/examplefields/dial_config
+dialconfig555b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/elements1/examplefields/dial_config"
+    ::= { examplefields1947 8278 }
+
+-- MQTT: OPEN-AIR/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/elements1/examplefields/fader_config
+faderconfig8882 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/elements1/examplefields/fader_config"
+    ::= { examplefields1947 42340 }
+
+element3707 OBJECT IDENTIFIER ::= { blocksc2e8 54702 }
+examplefieldseb56 OBJECT IDENTIFIER ::= { element3707 28161 }
+-- MQTT: OPEN-AIR/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/element4/examplefields/fader_config
+faderconfig1eeb OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/element4/examplefields/fader_config"
+    ::= { examplefieldseb56 16045 }
+
+elementse3b3 OBJECT IDENTIFIER ::= { blocksc2e8 56931 }
+examplefieldsb1c1 OBJECT IDENTIFIER ::= { elementse3b3 16456 }
+-- MQTT: OPEN-AIR/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/elements3/examplefields/dial_config
+dialconfig8843 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/elements3/examplefields/dial_config"
+    ::= { examplefieldsb1c1 5844 }
+
+-- MQTT: OPEN-AIR/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/elements3/examplefields/fader_config
+faderconfig8be9 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/elements3/examplefields/fader_config"
+    ::= { examplefieldsb1c1 24414 }
+
+elements94b4 OBJECT IDENTIFIER ::= { blocksc2e8 61173 }
+examplefields83a9 OBJECT IDENTIFIER ::= { elements94b4 39840 }
+-- MQTT: OPEN-AIR/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/elements2/examplefields/fader_config
+faderconfig8a5c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Faders/Fader_Dial/Classic/Zoo_Faders_Fader_Dial_Classic/blocks/elements2/examplefields/fader_config"
+    ::= { examplefields83a9 41539 }
+
+meteringf6b9 OBJECT IDENTIFIER ::= { zoo994f 37923 }
+vUMeterKnob3a72 OBJECT IDENTIFIER ::= { meteringf6b9 4435 }
+audioa637 OBJECT IDENTIFIER ::= { vUMeterKnob3a72 7154 }
+wilddb5f OBJECT IDENTIFIER ::= { audioa637 40305 }
+abyss1f21 OBJECT IDENTIFIER ::= { wilddb5f 54969 }
+-- MQTT: OPEN-AIR/Zoo/Metering/VU_Meter_Knob/audio/wild/abyss/gain
+gain9e5f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Metering/VU_Meter_Knob/audio/wild/abyss/gain"
+    ::= { abyss1f21 5053 }
+
+zooMeteringVUMeterKnob849d OBJECT IDENTIFIER ::= { vUMeterKnob3a72 28249 }
+blocks14a8 OBJECT IDENTIFIER ::= { zooMeteringVUMeterKnob849d 41555 }
+vUMeterKnobDemo1911 OBJECT IDENTIFIER ::= { blocks14a8 42664 }
+-- MQTT: OPEN-AIR/Zoo/Metering/VU_Meter_Knob/Zoo_Metering_VU_Meter_Knob/blocks/VU_Meter_Knob_Demo/Deep_Abyss
+deepAbyssad54 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Metering/VU_Meter_Knob/Zoo_Metering_VU_Meter_Knob/blocks/VU_Meter_Knob_Demo/Deep_Abyss"
+    ::= { vUMeterKnobDemo1911 2938 }
+
+-- MQTT: OPEN-AIR/Zoo/Metering/VU_Meter_Knob/Zoo_Metering_VU_Meter_Knob/blocks/VU_Meter_Knob_Demo/Neon_Sawblade
+neonSawbladedd98 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Metering/VU_Meter_Knob/Zoo_Metering_VU_Meter_Knob/blocks/VU_Meter_Knob_Demo/Neon_Sawblade"
+    ::= { vUMeterKnobDemo1911 55749 }
+
+needleb67b OBJECT IDENTIFIER ::= { meteringf6b9 33255 }
+tiltedvumeterse09a OBJECT IDENTIFIER ::= { needleb67b 11061 }
+zooMeteringNeedleTiltedvumeters9cb4 OBJECT IDENTIFIER ::= { tiltedvumeterse09a 63706 }
+blocks3f15 OBJECT IDENTIFIER ::= { zooMeteringNeedleTiltedvumeters9cb4 38247 }
+tiltedMeterPettingZoo6448 OBJECT IDENTIFIER ::= { blocks3f15 13620 }
+-- MQTT: OPEN-AIR/Zoo/Metering/Needle/Tilted_vu_meters/Zoo_Metering_Needle_Tilted_vu_meters/blocks/Tilted_Meter_Petting_Zoo/left_meter
+leftmeteref16 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Metering/Needle/Tilted_vu_meters/Zoo_Metering_Needle_Tilted_vu_meters/blocks/Tilted_Meter_Petting_Zoo/left_meter"
+    ::= { tiltedMeterPettingZoo6448 35009 }
+
+rEF77ad OBJECT IDENTIFIER ::= { needleb67b 14711 }
+zooMeteringNeedleREF9b66 OBJECT IDENTIFIER ::= { rEF77ad 6661 }
+blocks57f0 OBJECT IDENTIFIER ::= { zooMeteringNeedleREF9b66 18626 }
+hardwareScalesb070 OBJECT IDENTIFIER ::= { blocks57f0 14442 }
+-- MQTT: OPEN-AIR/Zoo/Metering/Needle/REF/Zoo_Metering_Needle_REF/blocks/Hardware_Scales_1/Scale_ABC_West
+scaleABCWestf1d4 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Metering/Needle/REF/Zoo_Metering_Needle_REF/blocks/Hardware_Scales_1/Scale_ABC_West"
+    ::= { hardwareScalesb070 10767 }
+
+digitalMeters1122 OBJECT IDENTIFIER ::= { blocks57f0 18238 }
+-- MQTT: OPEN-AIR/Zoo/Metering/Needle/REF/Zoo_Metering_Needle_REF/blocks/Digital_Meters/LUFS_Momentary
+lUFSMomentaryac75 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Metering/Needle/REF/Zoo_Metering_Needle_REF/blocks/Digital_Meters/LUFS_Momentary"
+    ::= { digitalMeters1122 24100 }
+
+moreneedlevumeters2e44 OBJECT IDENTIFIER ::= { needleb67b 22754 }
+zooMeteringNeedlemoreneedlevumeters3368 OBJECT IDENTIFIER ::= { moreneedlevumeters2e44 900 }
+blocks6aa7 OBJECT IDENTIFIER ::= { zooMeteringNeedlemoreneedlevumeters3368 30044 }
+largeConsoleBank3922 OBJECT IDENTIFIER ::= { blocks6aa7 32511 }
+-- MQTT: OPEN-AIR/Zoo/Metering/Needle/more_needle_vu_meters/Zoo_Metering_Needle_more_needle_vu_meters/blocks/Large_Console_Bank/Large_L
+largeLa45b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Metering/Needle/more_needle_vu_meters/Zoo_Metering_Needle_more_needle_vu_meters/blocks/Large_Console_Bank/Large_L"
+    ::= { largeConsoleBank3922 40849 }
+
+-- MQTT: OPEN-AIR/Zoo/Metering/Needle/more_needle_vu_meters/Zoo_Metering_Needle_more_needle_vu_meters/blocks/Large_Console_Bank/Large_R
+largeR5e54 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Zoo/Metering/Needle/more_needle_vu_meters/Zoo_Metering_Needle_more_needle_vu_meters/blocks/Large_Console_Bank/Large_R"
+    ::= { largeConsoleBank3922 41714 }
+
+-- MQTT: OPEN-AIR/status
+status7b00 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/status"
+    ::= { v1 25884 }
+
+scanc4b3 OBJECT IDENTIFIER ::= { v1 45998 }
+scanc81a OBJECT IDENTIFIER ::= { scanc4b3 45562 }
+blocks5387 OBJECT IDENTIFIER ::= { scanc81a 20061 }
+multidatasetgraph2af6 OBJECT IDENTIFIER ::= { blocks5387 9825 }
+oaDataRunningFilesc463 OBJECT IDENTIFIER ::= { multidatasetgraph2af6 24572 }
+-- MQTT: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear
+reflinearb56a OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear"
+    ::= { oaDataRunningFilesc463 44547 }
 
 END

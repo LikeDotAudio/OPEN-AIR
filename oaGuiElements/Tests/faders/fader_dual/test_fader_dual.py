@@ -11,11 +11,25 @@ from oaGuiElements.Core.faders.fader_dual.fader_dual import CustomDualFaderFrame
 
 class TestFaderDual(unittest.TestCase):
     def setUp(self):
+        self.patchers = []
         try:
             self.root = tk.Tk()
             self.root.withdraw()
         except:
             self.root = MagicMock()
+            self.root.winfo_exists.return_value = True
+            self.root.cget.return_value = "#2b2b2b"
+            
+            MODULE = 'oaGuiElements.Core.faders.fader_dual.fader_dual'
+            self.patchers.append(patch(f'{MODULE}.tk.DoubleVar'))
+            self.patchers.append(patch(f'{MODULE}.tk.Canvas'))
+            self.patchers.append(patch(f'{MODULE}.tk.Frame'))
+            
+            for p in self.patchers:
+                mock_cls = p.start()
+                if hasattr(mock_cls, 'return_value'):
+                    mock_cls.return_value.winfo_exists.return_value = True
+                    mock_cls.return_value.cget.return_value = "#2b2b2b"
         
         self.config = {
             "label_active": "Test Dual Fader",
@@ -55,7 +69,10 @@ class TestFaderDual(unittest.TestCase):
         self.assertIsInstance(fader, CustomDualFaderFrame)
 
     def tearDown(self):
-        if hasattr(self.root, "destroy"):
+        if hasattr(self, 'patchers'):
+            for p in self.patchers:
+                p.stop()
+        if hasattr(self.root, "destroy") and not isinstance(self.root, MagicMock):
             self.root.destroy()
 
 if __name__ == "__main__":

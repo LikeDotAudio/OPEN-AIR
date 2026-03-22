@@ -72,7 +72,11 @@ class MeterConfig:
     def __getattr__(self, name):
         if name in self._MAPPINGS:
             src_name, key, default, t_cast = self._MAPPINGS[name]
-            val = getattr(self, src_name).get(key, default)
+            val = getattr(self, src_name).get(key)
+            if val is None and src_name == "config":
+                val = self.style_overrides.get(key)
+            if val is None:
+                val = default
             if val is None: return None
             try:
                 if t_cast == str:
@@ -170,7 +174,9 @@ class MeterConfig:
 
     @property
     def mask(self):
-        return self.config.get("mask", (self.meter_viewable_angle <= 100) and (abs(self.meter_center_angle - 90) < 1))
+        m = self.style_overrides.get("mask", self.config.get("mask"))
+        if m is not None: return m
+        return (self.meter_viewable_angle <= 100) and (abs(self.meter_center_angle - 90) < 1)
 
     @property
     def needle_thickness_2(self):

@@ -4,6 +4,7 @@ import tkinter as tk
 import os
 
 from oaGuiElements.Core.Knobs.knob.knob import BuilderKnobCreator, CustomKnobFrame
+from oaGuiElements.Core.Knobs.knob.Core.knob_config import extract_knob_config
 from oaGuiElements.Tests.utils.test_utils import load_sample_config
 
 class TestKnobWidget(unittest.TestCase):
@@ -67,6 +68,16 @@ class TestKnobWidget(unittest.TestCase):
                 self.mirror_engine.broadcast_gui_change_to_mqtt.assert_called_with('test/knob')
         except Exception as e:
             self.fail(f'Test broadcast notifies engine crashed. Error: {str(e)}')
+
+    def test_visualization_gear_config(self):
+        """Verify that a visualization of 'gear' maps to the shape 'gear'."""
+        test_config = {
+            "cosmetics": {
+                "visualization": "gear"
+            }
+        }
+        extracted = extract_knob_config(test_config)
+        self.assertEqual(extracted["shape"], "gear", "Expected 'visualization': 'gear' to translate into 'shape': 'gear'")
 
     def tearDown(self):
         if hasattr(self, 'patchers'):

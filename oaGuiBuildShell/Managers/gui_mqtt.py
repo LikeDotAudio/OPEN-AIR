@@ -112,12 +112,11 @@ class GuiMqttManagerMixin:
 
     def _publish_initial_widget_states(self, config_data):
         """
-        Recursively scans the config_data for widgets and publishes their initial values.
-        This ensures all topics exist in the broker/SNMP bridge immediately on load.
+        Forces an initial MQTT announcement for all registered widgets in this builder.
+        Ensures the broker/SNMP bridge has the complete state on load.
         """
-        # ⚡ ICE: User requested to stop initial widget state announcements
-        # ... (implementation kept in comments if needed later)
-        pass
+        if self.state_mirror_engine:
+            self.state_mirror_engine.announce_all_widgets()
 
     # Transmits a command or state change from a widget to the MQTT broker.
     # This centralized method handles the sending of GUI updates, either by broadcasting

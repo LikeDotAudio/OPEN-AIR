@@ -75,6 +75,11 @@ class GuiRebuilderMixin:
                 if hasattr(self, '_trigger_reslice_all'):
                     self._trigger_reslice_all()
 
+                # ⚡ MQTT ANNOUNCEMENT: Force all widgets to announce their initial state
+                # This ensures the SNMP tree and Broker cache are populated immediately.
+                if hasattr(self, '_publish_initial_widget_states'):
+                    self._publish_initial_widget_states(self.config_data)
+
                 # Call the user-defined callback if it exists
                 if hasattr(self, 'on_complete_callback') and self.on_complete_callback:
                     self.on_complete_callback()

@@ -24,7 +24,7 @@ class TestFluxPlotter(unittest.TestCase):
             self.patchers.append(patch('oaGuiElements.Core.graphing.graphing.graph.FigureCanvasTkAgg', return_value=mock_canvas_agg))
             for p in self.patchers:
                 p.start()
-        component_dir = os.path.join(os.path.dirname(__file__), '..', 'Core', 'graphing', 'graphing')
+        component_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'Core', 'graphing', 'graphing')
         full_sample = load_sample_config(component_dir)
         self.config = full_sample.get('blocks', {}).get('multi_dataset_graph', {})
         self.config['path'] = 'test/graph'

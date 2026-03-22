@@ -25,7 +25,7 @@ class TestMeterNeedleBatch(unittest.TestCase):
                 p.start()
 
         # Load the composite test JSON
-        json_path = os.path.join(os.path.dirname(__file__), 'composite_needle_test_20.json')
+        json_path = os.path.join(os.path.dirname(__file__), '..', 'composite_needle_test_20.json')
         with open(json_path, 'r') as f:
             self.full_data = json.load(f)
         

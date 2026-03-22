@@ -30,11 +30,12 @@ class TestTextValueBox(unittest.TestCase):
         creator = BuilderTextValueBoxCreator()
         
         # OPERATE
-        box_widget = creator.make_text_value_box(
-            parent_widget=self.root,
-            config_data=self.config,
-            context=self.context
-        )
+        with patch('tkinter.ttk.Style'):
+            box_widget = creator.make_text_value_box(
+                parent_widget=self.root,
+                config_data=self.config,
+                context=self.context
+            )
         
         # CHECK
         self.assertIsInstance(box_widget, tk.Canvas)

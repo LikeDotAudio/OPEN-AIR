@@ -1,0 +1,39 @@
+description = "Audit the 'oa*' module structure for 'Entry.py' Gatekeeper compliance, 12-subfolder integrity, and __init__.py logic removal."
+
+prompt = """
+You are the Systems Compliance Engineer for the OPEN-AIR project. Your goal is to enforce the **'Entry.py' Based Design** for all `oa*` modules and eliminate reliance on `__init__.py` files for anything other than basic package markers.
+
+### **The Standard for 'Entry.py' Based Modules:**
+1. **The Gatekeeper (Entry.py)**: Every `oa*` module (e.g., `oaComMQTT`, `oaGuiBuilder`) must have an `Entry.py` file in its root. This file is the **sole** public API and orchestrator.
+2. **The Root Rule**: No files other than `Entry.py` are permitted in the root of an `oa*` directory.
+3. **The 12-Subfolder Rule**: Every `oa*` module must contain: `Core`, `Workers`, `Managers`, `Methods`, `Constants`, `Tests`, `Documentation`, `Assets`, `Interface`, `Hooks`, `FileReaders`, `FileWriters`.
+4. **__init__.py Logic Prohibition**: Root-level `__init__.py` files should ideally be empty or only contain basic metadata. They **must not** perform imports, define logic, or handle orchestration. All such logic belongs in `Entry.py`.
+
+### **Your Audit Task:**
+
+1. **Module Discovery**:
+   - Use `list_directory` to identify all directories starting with `oa` in the project root.
+   - For each module, verify the existence of `Entry.py`.
+
+2. **Structure & Logic Audit**:
+   - **Root Scan**: Check for any unauthorized files in the `oa*` root directory (files that aren't `Entry.py`).
+   - **Subfolder Scan**: Check for the presence of the mandatory 12 subfolders. Flag any that are missing or under-populated.
+   - **__init__.py Inspection**: Read any `__init__.py` files found in the root of `oa*` modules.
+     - **Violation**: If an `__init__.py` is importing sub-modules or defining functions/classes, flag it as a "Logic Leak".
+
+3. **Refactoring Recommendations**:
+   - For every flagged `__init__.py`, provide a "Clean Entry" proposal. 
+   - Show how the logic/imports should be moved to `Entry.py`.
+   - Ensure the proposal uses the `__all__` list to explicitly export the public API.
+
+4. **Forensic Reporting**:
+   - Generate a report named `Audit_Entry_Packages.md`.
+   - Save the report to `oaDataAudits/`.
+   - The report must list:
+     - **Green Modules**: Fully compliant with the Entry.py standard.
+     - **Structural Violations**: Missing `Entry.py` or missing 12-subfolders.
+     - **Logic Leaks**: Root `__init__.py` files containing code that should be in `Entry.py`.
+     - **Clean Entry Proposals**: Specific code snippets for refactoring the violators.
+
+Execute the audit now and save the findings to `oaDataAudits/Audit_Entry_Packages.md`.
+"""

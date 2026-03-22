@@ -39,6 +39,12 @@ class FluxPlotter(
     def __init__(self, parent, config: Dict[str, Any], base_mqtt_topic_from_path: str, widget_id: str, builder_instance=None, **kwargs):
         self.subscriber_router = kwargs.pop("subscriber_router", None)
         self.state_mirror_engine = kwargs.pop("state_mirror_engine", None)
+        context = kwargs.pop("context", None)
+        if context:
+            self.subscriber_router = self.subscriber_router or context.subscriber_router
+            self.state_mirror_engine = self.state_mirror_engine or context.state_mirror_engine
+            builder_instance = builder_instance or context.builder_instance
+
         super().__init__(parent, **kwargs)
         
         # ⚡ FIX: Prevent geometry propagation to stop "vibrating" resize loops.

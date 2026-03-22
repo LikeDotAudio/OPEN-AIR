@@ -30,7 +30,7 @@ class TestKnobWidget(unittest.TestCase):
             for p in self.patchers:
                 p.start()
 
-        component_dir = os.path.join(os.path.dirname(__file__), '..', 'Core', 'Knobs', 'knob')
+        component_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'Core', 'Knobs', 'knob')
         self.config = load_sample_config(component_dir)
         self.config['path'] = 'test/knob'
         

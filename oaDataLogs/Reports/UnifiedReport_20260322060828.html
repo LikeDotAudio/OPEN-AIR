@@ -1,0 +1,1182 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OPEN-AIR Unified Intelligence Report</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #1e1e1e; color: #dcdcdc; }
+        .header { background: #2b2b2b; padding: 20px 40px; border-bottom: 2px solid #33A1FD; }
+        h1 { color: #ffffff; margin: 0; font-size: 1.8em; }
+        .container { padding: 30px 40px; }
+        
+        /* Tabs Styling */
+        .tab-box { display: flex; border-bottom: 1px solid #444; margin-bottom: 20px; }
+        .tab-btn { padding: 12px 25px; cursor: pointer; background: #2b2b2b; border: none; color: #888; border-radius: 5px 5px 0 0; margin-right: 5px; transition: 0.3s; font-weight: 600; }
+        .tab-btn:hover { background: #333; color: #fff; }
+        .tab-btn.active { background: #33A1FD; color: white; }
+        .tab-content { display: none; background: #2b2b2b; padding: 25px; border-radius: 0 0 8px 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .tab-content.active { display: block; }
+
+        /* Summary Stats */
+        .summary-box { display: flex; gap: 20px; margin-bottom: 30px; }
+        .stat { flex: 1; padding: 15px; border-radius: 6px; text-align: center; color: white; font-weight: bold; font-size: 1.1em; }
+        .total { background: #444; }
+        .passed { background: #27ae60; }
+        .failed { background: #e74c3c; }
+        .errors { background: #f39c12; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; table-layout: fixed; background: #333; }
+        th, td { border: 1px solid #444; padding: 12px; text-align: left; vertical-align: top; overflow: hidden; word-wrap: break-word; }
+        th { background-color: #3d3d3d; color: #aaa; font-weight: 600; text-transform: uppercase; font-size: 0.8em; letter-spacing: 0.05em; }
+        tr:nth-child(even) { background-color: #383838; }
+        tr:hover { background-color: #404040; }
+        .status-passed { color: #2ecc71; font-weight: bold; }
+        .status-failed { color: #e74c3c; font-weight: bold; }
+        .status-error { color: #f39c12; font-weight: bold; }
+        .description { font-size: 0.9em; color: #bbb; line-height: 1.4; }
+        .test-name { font-family: 'Consolas', monospace; font-size: 0.85em; color: #33A1FD; }
+
+        /* Log Entry Styles */
+        .log-entry { background: #1a1a1a; border: 1px solid #444; border-radius: 5px; margin-bottom: 20px; overflow: hidden; }
+        .log-header { background: #333; padding: 10px 15px; border-bottom: 1px solid #444; display: flex; justify-content: space-between; align-items: center; }
+        .log-filename { color: #33A1FD; font-weight: bold; font-family: monospace; }
+        .log-time { color: #666; font-size: 0.85em; }
+        .log-content { padding: 15px; margin: 0; font-family: 'Consolas', monospace; font-size: 0.9em; white-space: pre-wrap; color: #ccc; max-height: 400px; overflow-y: auto; }
+        .error-log { border-left: 5px solid #e74c3c; }
+    </style>
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>OPEN-AIR Unified Intelligence Report</h1>
+        <p style="color: #666; margin: 5px 0 0 0;">Generated on: <strong>2026-03-22 06:08:28</strong></p>
+    </div>
+
+    <div class="container">
+        <div class="tab-box">
+            <button class="tab-btn active" onclick="openTab(event, 'TestResults')">Test Results</button>
+            <button class="tab-btn" onclick="openTab(event, 'AuditReports')">Audit Reports</button>
+            <button class="tab-btn" onclick="openTab(event, 'ChangeLogs')">Change Logs</button>
+            <button class="tab-btn" onclick="openTab(event, 'ErrorLogs')">Error Logs</button>
+            <button class="tab-btn" onclick="openTab(event, 'RunLogs')">Application Run Logs</button>
+            <button class="tab-btn" onclick="openTab(event, 'FlameGraph')">Flame Graph</button>
+        </div>
+
+        <!-- TAB 1: Test Results -->
+        <div id="TestResults" class="tab-content active">
+            <div class="summary-box">
+                <div class="stat total">Total: 89</div>
+                <div class="stat passed">Passed: 64</div>
+                <div class="stat failed">Failed: 3</div>
+                <div class="stat errors">Errors: 22</div>
+            </div>
+
+            <table>
+                <colgroup>
+                    <col style="width: 20%;">
+                    <col style="width: 35%;">
+                    <col style="width: 25%;">
+                    <col style="width: 10%;">
+                    <col style="width: 10%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Test Case</th>
+                        <th>Goal & Achievement</th>
+                        <th>Failure Cause</th>
+                        <th>Status</th>
+                        <th>Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                <tr>
+                    <td class="test-name">oaComMQTT.Tests.test_mqtt_logic (unittest.loader._FailedTest.oaComMQTT.Tests.test_mqtt_logic)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description">Failed to import test module: oaComMQTT.Tests.test_mqtt_logic
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/anthony/Documents/OPEN-AIR/oaComMQTT/Tests/test_mqtt_logic.py", line 8, in <module>
+    from ClearMQTT import MQTTSweeper
+ModuleNotFoundError: No module named 'ClearMQTT'
+<br><small><i>At loader.py:33 in testFailure -> raise self._exception</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_01_initialization (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_01_initialization)</td>
+                    <td class="description">Verify the selector initializes with the correct number of positions.</td>
+                    <td class="description">couldn't connect to display ""<br><small><i>At __init__.py:2345 in __init__ -> self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_02_draw_visuals_calls_internal_methods (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_02_draw_visuals_calls_internal_methods)</td>
+                    <td class="description">Ensure _draw_visuals triggers the main drawing pipeline.</td>
+                    <td class="description">couldn't connect to display ""<br><small><i>At __init__.py:2345 in __init__ -> self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_03_value_change_updates_selection_text (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_03_value_change_updates_selection_text)</td>
+                    <td class="description">Check if changing the variable updates the displayed text.</td>
+                    <td class="description">couldn't connect to display ""<br><small><i>At __init__.py:2345 in __init__ -> self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_04_builder_creation (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_04_builder_creation)</td>
+                    <td class="description">Verify the Builder can create a RotarySelectorSwitch instance.</td>
+                    <td class="description">couldn't connect to display ""<br><small><i>At __init__.py:2345 in __init__ -> self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_batch_creation (oaGuiElements.Tests.metering.meter_needle.test_meter_needle_batch.TestMeterNeedleBatch.test_batch_creation)</td>
+                    <td class="description">Goal: Verify all 20 meter variations in the composite JSON can be built.</td>
+                    <td class="description">[Errno 2] No such file or directory: '/home/anthony/Documents/OPEN-AIR/oaGuiElements/Tests/metering/meter_needle/composite_needle_test_20.json'<br><small><i>At test_meter_needle_batch.py:29 in setUp -> with open(json_path, 'r') as f:</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_broadcast_notifies_engine (oaGuiElements.Tests.Knobs.knob.test_knob.TestKnobWidget.test_broadcast_notifies_engine)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description">Sample file not found: /home/anthony/Documents/OPEN-AIR/oaGuiElements/Tests/Knobs/knob/../Core/Knobs/knob/sample.json<br><small><i>At test_utils.py:13 in load_sample_config -> raise FileNotFoundError(f'Sample file not found: {sample_file}')</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.buttons.button_toggler.test_button_toggler.TestButtonToggler.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderButtonTogglerCreator creates a toggler group.</td>
+                    <td class="description">isinstance() arg 2 must be a type, a tuple of types, or a union<br><small><i>At case.py:1292 in assertIsInstance -> if not isinstance(obj, cls):</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0058s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.buttons.button_trapezoid_toggler.test_button_trapezoid_toggler.TestButtonTrapezoidToggler.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderButtonTrapezoidTogglerCreator creates a group.</td>
+                    <td class="description">'>' not supported between instances of 'MagicMock' and 'int'<br><small><i>At trapezoid_renderer_mixin.py:52 in render_trapezoid_button -> canvas_width = int(canvas.winfo_width()) if canvas.winfo_width() > 1 else configuration.get("width", DEFAULT_BUTTON_WIDTH)</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0033s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.metering.meter_needle.test_meter_needle.TestMeterNeedle.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderMeterNeedleCreator creates a needle meter.</td>
+                    <td class="description">isinstance() arg 2 must be a type, a tuple of types, or a union<br><small><i>At case.py:1292 in assertIsInstance -> if not isinstance(obj, cls):</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0032s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_creation (oaGuiElements.Tests.graphing.graphing.test_graphing.TestFluxPlotter.test_creation)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description">Sample file not found: /home/anthony/Documents/OPEN-AIR/oaGuiElements/Tests/graphing/graphing/../Core/graphing/graphing/sample.json<br><small><i>At test_utils.py:13 in load_sample_config -> raise FileNotFoundError(f'Sample file not found: {sample_file}')</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_creation (oaGuiElements.Tests.graphing.radar.test_radar.TestRadarWidget.test_creation)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description">Sample file not found: /home/anthony/Documents/OPEN-AIR/oaGuiElements/Tests/graphing/radar/../Core/graphing/radar/sample.json<br><small><i>At test_utils.py:13 in load_sample_config -> raise FileNotFoundError(f'Sample file not found: {sample_file}')</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0013s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_creation (oaGuiElements.Tests.text.test_flux_plotter.TestFluxPlotter.test_creation)</td>
+                    <td class="description">Verify that FluxPlotter initializes without error.</td>
+                    <td class="description">couldn't connect to display ""<br><small><i>At __init__.py:2345 in __init__ -> self.tk = _tkinter.create(screenName, baseName, className, interactive, wantobjects, useTk, sync, use)</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_creation_via_builder (oaGuiElements.Tests.Knobs.knob.test_knob.TestKnobWidget.test_creation_via_builder)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description">Sample file not found: /home/anthony/Documents/OPEN-AIR/oaGuiElements/Tests/Knobs/knob/../Core/Knobs/knob/sample.json<br><small><i>At test_utils.py:13 in load_sample_config -> raise FileNotFoundError(f'Sample file not found: {sample_file}')</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0009s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_make_text_label (oaGuiElements.Tests.text.text_label.test_text_label.TestTextLabel.test_make_text_label)</td>
+                    <td class="description">Goal: Verify that BuilderTextLabelCreator creates a label widget (canvas).</td>
+                    <td class="description">isinstance() arg 2 must be a type, a tuple of types, or a union<br><small><i>At case.py:1292 in assertIsInstance -> if not isinstance(obj, cls):</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0018s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_make_text_table (oaGuiElements.Tests.text.text_table.test_text_table.TestTextTable.test_make_text_table)</td>
+                    <td class="description">Goal: Verify that BuilderTextTableCreator creates a table widget.</td>
+                    <td class="description">__str__ returned non-string (type MagicMock)<br><small><i>At table_editing.py:81 in __init__ -> if LOCAL_DEBUG: logger.debug(f"📊 TableEditingManager initialized for tree {tree}")</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0026s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_make_text_value_box (oaGuiElements.Tests.text.text_value_box.test_text_value_box.TestTextValueBox.test_make_text_value_box)</td>
+                    <td class="description">Goal: Verify that BuilderTextValueBoxCreator creates a value box widget.</td>
+                    <td class="description">isinstance() arg 2 must be a type, a tuple of types, or a union<br><small><i>At case.py:1292 in assertIsInstance -> if not isinstance(obj, cls):</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0033s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_make_text_value_box (oaGuiElements.Tests.text.text_value_with_units.test_text_value_with_units.TestTextValueBox.test_make_text_value_box)</td>
+                    <td class="description">Goal: Verify that BuilderTextValueBoxCreator creates a value box widget.</td>
+                    <td class="description">isinstance() arg 2 must be a type, a tuple of types, or a union<br><small><i>At case.py:1292 in assertIsInstance -> if not isinstance(obj, cls):</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0029s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_smart_meter_initialization (oaGuiElements.Tests.metering.meter_bar.test_meter_bar.TestMeterBar.test_smart_meter_initialization)</td>
+                    <td class="description">Goal: Verify that SmartMeter initializes correctly.</td>
+                    <td class="description">isinstance() arg 2 must be a type, a tuple of types, or a union<br><small><i>At case.py:1292 in assertIsInstance -> if not isinstance(obj, cls):</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0019s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_static_make (oaGuiElements.Tests.text.text_label.test_text_label.TestTextLabel.test_static_make)</td>
+                    <td class="description">Goal: Verify the static make method.</td>
+                    <td class="description">isinstance() arg 2 must be a type, a tuple of types, or a union<br><small><i>At case.py:1292 in assertIsInstance -> if not isinstance(obj, cls):</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0018s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_trapezoid_button_initialization (oaGuiElements.Tests.buttons.button_trapezoid.test_button_trapezoid.TestButtonTrapezoid.test_trapezoid_button_initialization)</td>
+                    <td class="description">Goal: Verify that TrapezoidButton initializes correctly.</td>
+                    <td class="description">'>' not supported between instances of 'MagicMock' and 'int'<br><small><i>At trapezoid_renderer_mixin.py:52 in render_trapezoid_button -> canvas_width = int(canvas.winfo_width()) if canvas.winfo_width() > 1 else configuration.get("width", DEFAULT_BUTTON_WIDTH)</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0026s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_trapezoid_registration (oaGuiElements.Tests.buttons.button_trapezoid.test_button_trapezoid.TestButtonTrapezoid.test_trapezoid_registration)</td>
+                    <td class="description">Goal: Verify that TrapezoidButton registers with state mirror engine.</td>
+                    <td class="description">'>' not supported between instances of 'MagicMock' and 'int'<br><small><i>At trapezoid_renderer_mixin.py:52 in render_trapezoid_button -> canvas_width = int(canvas.winfo_width()) if canvas.winfo_width() > 1 else configuration.get("width", DEFAULT_BUTTON_WIDTH)</i></small></td>
+                    <td class="status-error">Error</td>
+                    <td>0.0027s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.buttons.button_wink_toggler.test_button_wink_toggler.TestButtonWinkToggler.test_builder_creator_make)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description">Test builder creator make crashed. Error: '<=' not supported between instances of 'MagicMock' and 'int'<br><small><i>At case.py:715 in fail -> raise self.failureException(msg)</i></small></td>
+                    <td class="status-failed">Failed</td>
+                    <td>0.0062s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_creation (oaGuiElements.Tests.graphing.test_flux_plotter.TestFluxPlotter.test_creation)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description">Test creation crashed. Error: __str__ returned non-string (type MagicMock)<br><small><i>At case.py:715 in fail -> raise self.failureException(msg)</i></small></td>
+                    <td class="status-failed">Failed</td>
+                    <td>0.0070s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_ltp_initialization (oaGuiElements.Tests.faders.fader_linear_travelling_potentiometer.test_fader_linear_travelling_potentiometer.TestFaderLinearTravellingPotentiometer.test_ltp_initialization)</td>
+                    <td class="description">Goal: Verify that CustomLTPFrame initializes correctly.</td>
+                    <td class="description"><MagicMock name='mock.get()' id='139245992553856'> != 50.0<br><small><i>At case.py:878 in _baseAssertEqual -> raise self.failureException(msg)</i></small></td>
+                    <td class="status-failed">Failed</td>
+                    <td>0.0018s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_actuator_button_initialization (oaGuiElements.Tests.buttons.button_actuator.test_button_actuator.TestButtonActuator.test_actuator_button_initialization)</td>
+                    <td class="description">Goal: Verify that the ActuatorButton initializes correctly.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0022s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_add_monitor_callback (oaComSNMP.Tests.test_snmp_manager.TestSNMPManager.test_add_monitor_callback)</td>
+                    <td class="description">Goal: Verify that GUI monitor callbacks can be registered.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_add_monitor_callback (oaSplinker.Tests.test_splinker.TestSplinker.test_add_monitor_callback)</td>
+                    <td class="description">Test adding a monitor callback.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_broadcast_gui_change (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_broadcast_gui_change)</td>
+                    <td class="description">Test that GUI changes trigger MQTT publication.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0014s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.buttons.button_actuator.test_button_actuator.TestButtonActuator.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderButtonActuatorCreator creates an ActuatorButton.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0191s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.buttons.button_toggle.test_button_toggle.TestButtonToggle.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderButtonToggleCreator creates a toggle button widget.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0040s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.buttons.button_wink.test_button_wink.TestButtonWink.test_builder_creator_make)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0044s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.faders.fader.test_fader.TestFader.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderFaderCreator creates a fader frame.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0025s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.faders.fader_bar_graph.test_fader_bar_graph.TestFaderBarGraph.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderFaderBarGraphCreator creates a fader bar graph frame.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0027s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.faders.fader_dual.test_fader_dual.TestFaderDual.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderFaderDualCreator creates a dual fader frame.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0022s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.faders.fader_horizontal.test_fader_horizontal.TestFaderHorizontal.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderFaderHorizontalCreator creates a horizontal fader frame.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0022s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.faders.fader_linear_travelling_potentiometer.test_fader_linear_travelling_potentiometer.TestFaderLinearTravellingPotentiometer.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderFaderLinearTravellingPotentiometerCreator creates an LTP frame.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0243s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.input.json_tree.test_json_tree.TestJsonTree.test_builder_creator_make)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0056s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.metering.meter_bar.test_meter_bar.TestMeterBar.test_builder_creator_make)</td>
+                    <td class="description">Goal: Verify that BuilderMeterBarCreator creates a SmartMeter.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0032s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_calculate_topic (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_calculate_topic)</td>
+                    <td class="description">Test topic calculation logic.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_config_loading_from_file (oaConfiguration.Tests.test_config_reader.TestConfigReader.test_config_loading_from_file)</td>
+                    <td class="description">BUILD: Mock ConfigParser content. OPERATE: Load. CHECK: Assert specific value.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_create_default_config_ini (oaConfiguration.Tests.test_config.TestConfigGenerator.test_create_default_config_ini)</td>
+                    <td class="description">Test that the default config.ini is created with expected sections.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_default_values (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_default_values)</td>
+                    <td class="description">Test that default values are present after initialization.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_dual_fader_initialization (oaGuiElements.Tests.faders.fader_dual.test_fader_dual.TestFaderDual.test_dual_fader_initialization)</td>
+                    <td class="description">Goal: Verify that CustomDualFaderFrame initializes correctly.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0019s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_fader_bar_graph_initialization (oaGuiElements.Tests.faders.fader_bar_graph.test_fader_bar_graph.TestFaderBarGraph.test_fader_bar_graph_initialization)</td>
+                    <td class="description">Goal: Verify that FaderWithBarGraphFrame initializes correctly.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0023s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_fader_initialization (oaGuiElements.Tests.faders.fader.test_fader.TestFader.test_fader_initialization)</td>
+                    <td class="description">Goal: Verify that CustomFaderFrame initializes correctly.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0018s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_file_io_load (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_file_io_load)</td>
+                    <td class="description">Load and parse JSON configuration files.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_global_settings_property (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_global_settings_property)</td>
+                    <td class="description">Test the global_settings property.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_handle_external_update (oaStateCache.Tests.test_state_cache.TestStateCache.test_handle_external_update)</td>
+                    <td class="description">Goal: Verify that external updates are correctly cached, persisted, and broadcast.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_handle_incoming_osc (oaComOSC.Tests.test_osc.TestOSCManager.test_handle_incoming_osc)</td>
+                    <td class="description">Test handling of incoming OSC messages.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0004s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_horizontal_fader_initialization (oaGuiElements.Tests.faders.fader_horizontal.test_fader_horizontal.TestFaderHorizontal.test_horizontal_fader_initialization)</td>
+                    <td class="description">Goal: Verify that CustomHorizontalFaderFrame initializes correctly.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0016s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_import (oaGuiElements.Tests.input.input_mousewheel_mixin.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_import)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_import (oaGuiElements.Tests.utils.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_import)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_ingest_puts_to_queue (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_ingest_puts_to_queue)</td>
+                    <td class="description">Test that ingest puts messages into the inbound queue with the correct schema.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0004s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (oaComOSC.Tests.test_osc.TestOSCManager.test_initialization)</td>
+                    <td class="description">Test OSCManager initialization.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (oaComSNMP.Tests.test_snmp_manager.TestSNMPManager.test_initialization)</td>
+                    <td class="description">Goal: Verify that SNMPManager initializes with correct default state.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (oaSplinker.Tests.test_splinker.TestSplinker.test_initialization)</td>
+                    <td class="description">Test broker initialization.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_inventory_notification (oaComVisa.Tests.test_visa_fleet.TestVisaFleet.test_inventory_notification)</td>
+                    <td class="description">Goal: Verify that the fleet correctly notifies and persists new inventory data.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0011s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_json_tree_initialization (oaGuiElements.Tests.input.json_tree.test_json_tree.TestJsonTree.test_json_tree_initialization)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0047s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_kick_watchdog (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_kick_watchdog)</td>
+                    <td class="description">Goal: Verify that kick_watchdog updates the timestamp.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0102s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_layout_parser_scan (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_layout_parser_scan)</td>
+                    <td class="description">Recursively find valid UI definition files.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_marker_logic_grouping (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_marker_logic_grouping)</td>
+                    <td class="description">Transform a flat list of marker data into a nested Zone/Group dictionary.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_match_cache (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_match_cache)</td>
+                    <td class="description">Test that matching results are cached.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_monitor_callbacks (oaComOSC.Tests.test_osc.TestOSCManager.test_monitor_callbacks)</td>
+                    <td class="description">Test that monitor callbacks are triggered.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0004s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_multiple_subscribers (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_multiple_subscribers)</td>
+                    <td class="description">Test multiple subscribers for the same topic.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0004s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_register_panic_callback (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_register_panic_callback)</td>
+                    <td class="description">Goal: Verify that callbacks can be registered.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_register_route (oaComOSC.Tests.test_osc.TestOSCManager.test_register_route)</td>
+                    <td class="description">Test registering a route between OSC and MQTT.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_register_widget (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_register_widget)</td>
+                    <td class="description">Test widget registration and topic binding.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0009s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_render_functional_widget_trigger (oaGuiBuildShell.Tests.test_async_grid_renderer.TestAsyncGridRenderer.test_render_functional_widget_trigger)</td>
+                    <td class="description">Goal: Verify that functional widgets are passed to the batch engine.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0023s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_render_initialization (oaGuiBuildShell.Tests.test_async_grid_renderer.TestAsyncGridRenderer.test_render_initialization)</td>
+                    <td class="description">Goal: Verify that AsyncGridRenderer initializes with a builder and batch engine.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0020s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_replace_backslash (oaGuiElements.Tests.input.input_mousewheel_mixin.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_replace_backslash)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_replace_backslash (oaGuiElements.Tests.utils.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_replace_backslash)</td>
+                    <td class="description">No description provided.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_router_stop_stops_threads (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_router_stop_stops_threads)</td>
+                    <td class="description">Test that stop() correctly resets the running flag.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_singleton)</td>
+                    <td class="description">Test that ProtocolRouter is a singleton.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_singleton)</td>
+                    <td class="description">Test that the Config class acts as a singleton.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton (oaSplinker.Tests.test_splinker.TestSplinker.test_singleton)</td>
+                    <td class="description">Test that ControlBroker is a singleton.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton_integrity (oaConfiguration.Tests.test_config_reader.TestConfigReader.test_singleton_integrity)</td>
+                    <td class="description">BUILD: Request two instances. CHECK: Assert they are identical.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_start_heartbeat (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_start_heartbeat)</td>
+                    <td class="description">Goal: Verify that start_heartbeat spawns a thread and sets running flag.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_start_sequence (oaComSNMP.Tests.test_snmp_manager.TestSNMPManager.test_start_sequence)</td>
+                    <td class="description">Goal: Verify that starting the manager sets the running flag.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0186s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_state_manager_update (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_state_manager_update)</td>
+                    <td class="description">Validate that UI changes correctly update the master data state.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_status_broadcast (oaComMidi.Tests.test_midi.TestMidiManager.test_status_broadcast)</td>
+                    <td class="description">Goal: Verify that starting the MIDI manager broadcasts active ports to the system state.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_subscribe_exact_topic (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_exact_topic)</td>
+                    <td class="description">Test exact topic subscription.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_subscribe_wildcard_topic (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_wildcard_topic)</td>
+                    <td class="description">Test wildcard topic subscription.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_toggle_registration (oaGuiElements.Tests.buttons.button_toggle.test_button_toggle.TestButtonToggle.test_toggle_registration)</td>
+                    <td class="description">Goal: Verify that the toggle button registers itself with the mirror engine.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0038s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_validate_configuration (oaConfiguration.Tests.test_config_validator.TestConfigValidator.test_validate_configuration)</td>
+                    <td class="description">Test that validation returns True with a dummy printer.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_library_error (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_library_error)</td>
+                    <td class="description">Fail: LibraryError is raised due to missing pyvisa-py.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_proxy_init_fail (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_proxy_init_fail)</td>
+                    <td class="description">Fail: Missing MQTT controller or router during initialization.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_proxy_init_success (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_proxy_init_success)</td>
+                    <td class="description">Check thread-safe command queue initialization.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_resource_lister (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_resource_lister)</td>
+                    <td class="description">Confirm the backend library loads and returns available hardware identifiers.</td>
+                    <td class="description"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0153s</td>
+                </tr>
+            
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TAB 2: Audit Reports -->
+        <div id="AuditReports" class="tab-content">
+            <h3>No Audit Reports Found</h3><p>Run an audit command to generate reports.</p>
+        </div>
+
+        <!-- TAB 3: Change Logs -->
+        <div id="ChangeLogs" class="tab-content">
+            <h3>No Change Logs Found</h3><p>Ensure CHANGELOG.md exists in the data directory.</p>
+        </div>
+
+        <!-- TAB 4: Error Logs -->
+        <div id="ErrorLogs" class="tab-content">
+            <h3>Error Log Browser</h3>
+        <div class="log-entry error-log">
+            <div class="log-header">
+                <span class="log-filename">errors_20260322_0603.log</span>
+                <span class="log-time">2026-03-22 06:03:38</span>
+            </div>
+            <pre class="log-content">060338.129 | ERROR    | UI   | SYSTEM     | oaComMQTT.Workers.mqtt_async_worker | 🚀🚫🛑 [MQTT] Worker failure: can't register atexit after shutdown
+060338.157 | ERROR    | UI   | SYSTEM     | oaGuiManager.Core.bootstrap_sequence | 🖥️🎨 [UI] Bootstrap Failure:Traceback (most recent call last):
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 96, in run
+    protocol_router.start()
+  File "/home/anthony/Documents/OPEN-AIR/oaComBroker/Core/protocol_router/router.py", line 98, in start
+    self._executor = concurrent.futures.ThreadPoolExecutor(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/__init__.py", line 49, in __getattr__
+    from .thread import ThreadPoolExecutor as te
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 37, in <module>
+    threading._register_atexit(_python_exit)
+  File "/usr/lib/python3.12/threading.py", line 1559, in _register_atexit
+    raise RuntimeError("can't register atexit after shutdown")
+RuntimeError: can't register atexit after shutdown
+
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py", line 1134, in __call__
+    ret = self.original_func(*self.args, **self.kwargs)
+          |    |              |    |       |    -> {}
+          |    |              |    |       -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x77c23addc500>
+          |    |              |    -> ()
+          |    |              -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x77c23addc500>
+          |    -> <bound method Thread._bootstrap of <Thread(Thread-6 (run), started daemon 131676094060224)>>
+          -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x77c23addc500>
+
+  File "/usr/lib/python3.12/threading.py", line 1030, in _bootstrap
+    self._bootstrap_inner()
+    |    -> <function Thread._bootstrap_inner at 0x77c24c727d80>
+    -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+    |    -> <function Thread.run at 0x77c24c727a60>
+    -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+    |    |        |    |        |    -> {}
+    |    |        |    |        -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+    |    |        |    -> ()
+    |    |        -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+    |    -> <bound method AsyncBootstrapEngine.run of <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x77c23addc3e0>>
+    -> <Thread(Thread-6 (run), started daemon 131676094060224)>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 96, in run
+    protocol_router.start()
+    |               -> <function ProtocolRouter.start at 0x77c23bf52b60>
+    -> <oaComBroker.Core.protocol_router.router.ProtocolRouter object at 0x77c23becd1c0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaComBroker/Core/protocol_router/router.py", line 98, in start
+    self._executor = concurrent.futures.ThreadPoolExecutor(
+    |    |           |          -> <module 'concurrent.futures' from '/usr/lib/python3.12/concurrent/futures/__init__.py'>
+    |    |           -> <module 'concurrent' from '/usr/lib/python3.12/concurrent/__init__.py'>
+    |    -> None
+    -> <oaComBroker.Core.protocol_router.router.ProtocolRouter object at 0x77c23becd1c0>
+
+  File "/usr/lib/python3.12/concurrent/futures/__init__.py", line 49, in __getattr__
+    from .thread import ThreadPoolExecutor as te
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 37, in <module>
+    threading._register_atexit(_python_exit)
+    |         |                -> <function _python_exit at 0x77c23bec7420>
+    |         -> <function _register_atexit at 0x77c24c705120>
+    -> <module 'threading' from '/usr/lib/python3.12/threading.py'>
+  File "/usr/lib/python3.12/threading.py", line 1559, in _register_atexit
+    raise RuntimeError("can't register atexit after shutdown")
+
+RuntimeError: can't register atexit after shutdown
+</pre>
+        </div>
+        
+        <div class="log-entry error-log">
+            <div class="log-header">
+                <span class="log-filename">errors_20260321_0358.log</span>
+                <span class="log-time">2026-03-21 03:58:18</span>
+            </div>
+            <pre class="log-content">035817.290 | ERROR    | UI   | SYSTEM     | oaComMQTT.Workers.mqtt_async_worker | 🚀🚫🛑 [MQTT] Worker failure: can't register atexit after shutdown
+035817.319 | ERROR    | UI   | SYSTEM     | oaGuiManager.Core.bootstrap_sequence | 🖥️🎨 [UI] Bootstrap Failure:Traceback (most recent call last):
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 96, in run
+    protocol_router.start()
+  File "/home/anthony/Documents/OPEN-AIR/oaComBroker/Core/protocol_router/router.py", line 98, in start
+    self._executor = concurrent.futures.ThreadPoolExecutor(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/__init__.py", line 49, in __getattr__
+    from .thread import ThreadPoolExecutor as te
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 37, in <module>
+    threading._register_atexit(_python_exit)
+  File "/usr/lib/python3.12/threading.py", line 1559, in _register_atexit
+    raise RuntimeError("can't register atexit after shutdown")
+RuntimeError: can't register atexit after shutdown
+
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py", line 1134, in __call__
+    ret = self.original_func(*self.args, **self.kwargs)
+          |    |              |    |       |    -> {}
+          |    |              |    |       -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x70b65cbe0200>
+          |    |              |    -> ()
+          |    |              -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x70b65cbe0200>
+          |    -> <bound method Thread._bootstrap of <Thread(Thread-6 (run), started daemon 123928541472448)>>
+          -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x70b65cbe0200>
+
+  File "/usr/lib/python3.12/threading.py", line 1030, in _bootstrap
+    self._bootstrap_inner()
+    |    -> <function Thread._bootstrap_inner at 0x70b666527ce0>
+    -> <Thread(Thread-6 (run), started daemon 123928541472448)>
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+    |    -> <function Thread.run at 0x70b6665279c0>
+    -> <Thread(Thread-6 (run), started daemon 123928541472448)>
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+    |    |        |    |        |    -> {}
+    |    |        |    |        -> <Thread(Thread-6 (run), started daemon 123928541472448)>
+    |    |        |    -> ()
+    |    |        -> <Thread(Thread-6 (run), started daemon 123928541472448)>
+    |    -> <bound method AsyncBootstrapEngine.run of <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x70b65cbe0050>>
+    -> <Thread(Thread-6 (run), started daemon 123928541472448)>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 96, in run
+    protocol_router.start()
+    |               -> <function ProtocolRouter.start at 0x70b65dd4aac0>
+    -> <oaComBroker.Core.protocol_router.router.ProtocolRouter object at 0x70b6666543b0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaComBroker/Core/protocol_router/router.py", line 98, in start
+    self._executor = concurrent.futures.ThreadPoolExecutor(
+    |    |           |          -> <module 'concurrent.futures' from '/usr/lib/python3.12/concurrent/futures/__init__.py'>
+    |    |           -> <module 'concurrent' from '/usr/lib/python3.12/concurrent/__init__.py'>
+    |    -> None
+    -> <oaComBroker.Core.protocol_router.router.ProtocolRouter object at 0x70b6666543b0>
+
+  File "/usr/lib/python3.12/concurrent/futures/__init__.py", line 49, in __getattr__
+    from .thread import ThreadPoolExecutor as te
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 37, in <module>
+    threading._register_atexit(_python_exit)
+    |         |                -> <function _python_exit at 0x70b65dcc7380>
+    |         -> <function _register_atexit at 0x70b666505080>
+    -> <module 'threading' from '/usr/lib/python3.12/threading.py'>
+  File "/usr/lib/python3.12/threading.py", line 1559, in _register_atexit
+    raise RuntimeError("can't register atexit after shutdown")
+
+RuntimeError: can't register atexit after shutdown
+</pre>
+        </div>
+        
+        <div class="log-entry error-log">
+            <div class="log-header">
+                <span class="log-filename">errors_20260321_0338.log</span>
+                <span class="log-time">2026-03-21 03:38:02</span>
+            </div>
+            <pre class="log-content">033801.750 | ERROR    | UI   | SYSTEM     | oaComMQTT.Workers.mqtt_async_worker | 🚀🚫🛑 [MQTT] Worker failure: can't register atexit after shutdown
+033801.752 | ERROR    | UI   | SYSTEM     | oaGuiManager.Core.bootstrap_sequence | 🖥️🎨 [UI] Bootstrap Failure:Traceback (most recent call last):
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 76, in run
+    state_cache.subscribe_to_all_topics()
+  File "/home/anthony/Documents/OPEN-AIR/oaStateCache/Core/state_cache.py", line 81, in subscribe_to_all_topics
+    self.mqtt.subscribe(root)
+  File "/home/anthony/Documents/OPEN-AIR/oaComMQTT/Managers/mqtt_connection.py", line 76, in subscribe
+    self._kick_worker()
+  File "/home/anthony/Documents/OPEN-AIR/oaComMQTT/Managers/mqtt_connection.py", line 62, in _kick_worker
+    self._worker.loop.call_soon_threadsafe(self._worker.kick_event.set)
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 840, in call_soon_threadsafe
+    self._check_closed()
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 541, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py", line 1134, in __call__
+    ret = self.original_func(*self.args, **self.kwargs)
+          |    |              |    |       |    -> {}
+          |    |              |    |       -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x705cbffe0410>
+          |    |              |    -> ()
+          |    |              -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x705cbffe0410>
+          |    -> <bound method Thread._bootstrap of <Thread(Thread-6 (run), started daemon 123543659476672)>>
+          -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x705cbffe0410>
+
+  File "/usr/lib/python3.12/threading.py", line 1030, in _bootstrap
+    self._bootstrap_inner()
+    |    -> <function Thread._bootstrap_inner at 0x705cd999bce0>
+    -> <Thread(Thread-6 (run), started daemon 123543659476672)>
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+    |    -> <function Thread.run at 0x705cd999b9c0>
+    -> <Thread(Thread-6 (run), started daemon 123543659476672)>
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+    |    |        |    |        |    -> {}
+    |    |        |    |        -> <Thread(Thread-6 (run), started daemon 123543659476672)>
+    |    |        |    -> ()
+    |    |        -> <Thread(Thread-6 (run), started daemon 123543659476672)>
+    |    -> <bound method AsyncBootstrapEngine.run of <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x705cbffe0230>>
+    -> <Thread(Thread-6 (run), started daemon 123543659476672)>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 76, in run
+    state_cache.subscribe_to_all_topics()
+    |           -> <function StateRegistry.subscribe_to_all_topics at 0x705cd5137380>
+    -> <oaStateCache.Core.state_cache.StateRegistry object at 0x705cbffe0bf0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaStateCache/Core/state_cache.py", line 81, in subscribe_to_all_topics
+    self.mqtt.subscribe(root)
+    |    |    |         -> 'OPEN-AIR/#'
+    |    |    -> <function MqttConnectionManager.subscribe at 0x705cd5135800>
+    |    -> <oaComMQTT.Managers.mqtt_connection.MqttConnectionManager object at 0x705cbffe06e0>
+    -> <oaStateCache.Core.state_cache.StateRegistry object at 0x705cbffe0bf0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaComMQTT/Managers/mqtt_connection.py", line 76, in subscribe
+    self._kick_worker()
+    |    -> <function MqttConnectionManager._kick_worker at 0x705cd51356c0>
+    -> <oaComMQTT.Managers.mqtt_connection.MqttConnectionManager object at 0x705cbffe06e0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaComMQTT/Managers/mqtt_connection.py", line 62, in _kick_worker
+    self._worker.loop.call_soon_threadsafe(self._worker.kick_event.set)
+    |    |       |    |                    |    |       |          -> <function Event.set at 0x705cd6f15e40>
+    |    |       |    |                    |    |       -> <asyncio.locks.Event object at 0x705cd9af4e90 [unset]>
+    |    |       |    |                    |    -> <oaComMQTT.Workers.mqtt_async_worker.MqttAsyncWorker object at 0x705cd9af4da0>
+    |    |       |    |                    -> <oaComMQTT.Managers.mqtt_connection.MqttConnectionManager object at 0x705cbffe06e0>
+    |    |       |    -> <function BaseEventLoop.call_soon_threadsafe at 0x705cd6541300>
+    |    |       -> <_UnixSelectorEventLoop running=False closed=True debug=False>
+    |    -> <oaComMQTT.Workers.mqtt_async_worker.MqttAsyncWorker object at 0x705cd9af4da0>
+    -> <oaComMQTT.Managers.mqtt_connection.MqttConnectionManager object at 0x705cbffe06e0>
+
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 840, in call_soon_threadsafe
+    self._check_closed()
+    |    -> <function BaseEventLoop._check_closed at 0x705cd6540540>
+    -> <_UnixSelectorEventLoop running=False closed=True debug=False>
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 541, in _check_closed
+    raise RuntimeError('Event loop is closed')
+
+RuntimeError: Event loop is closed
+</pre>
+        </div>
+        
+        <div class="log-entry error-log">
+            <div class="log-header">
+                <span class="log-filename">errors_20260321_0304.log</span>
+                <span class="log-time">2026-03-21 03:04:53</span>
+            </div>
+            <pre class="log-content">030453.178 | ERROR    | UI   | SYSTEM     | oaComMQTT.Workers.mqtt_async_worker | 🚀🚫🛑 [MQTT] Worker failure: can't register atexit after shutdown
+030453.209 | ERROR    | UI   | SYSTEM     | oaGuiManager.Core.bootstrap_sequence | 🖥️🎨 [UI] Bootstrap Failure:Traceback (most recent call last):
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 96, in run
+    protocol_router.start()
+  File "/home/anthony/Documents/OPEN-AIR/oaComBroker/Core/protocol_router/router.py", line 98, in start
+    self._executor = concurrent.futures.ThreadPoolExecutor(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/__init__.py", line 49, in __getattr__
+    from .thread import ThreadPoolExecutor as te
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 37, in <module>
+    threading._register_atexit(_python_exit)
+  File "/usr/lib/python3.12/threading.py", line 1559, in _register_atexit
+    raise RuntimeError("can't register atexit after shutdown")
+RuntimeError: can't register atexit after shutdown
+
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py", line 1134, in __call__
+    ret = self.original_func(*self.args, **self.kwargs)
+          |    |              |    |       |    -> {}
+          |    |              |    |       -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7a95c57fc200>
+          |    |              |    -> ()
+          |    |              -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7a95c57fc200>
+          |    -> <bound method Thread._bootstrap of <Thread(Thread-6 (run), started daemon 134783321503424)>>
+          -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7a95c57fc200>
+
+  File "/usr/lib/python3.12/threading.py", line 1030, in _bootstrap
+    self._bootstrap_inner()
+    |    -> <function Thread._bootstrap_inner at 0x7a95ce177ce0>
+    -> <Thread(Thread-6 (run), started daemon 134783321503424)>
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+    |    -> <function Thread.run at 0x7a95ce1779c0>
+    -> <Thread(Thread-6 (run), started daemon 134783321503424)>
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+    |    |        |    |        |    -> {}
+    |    |        |    |        -> <Thread(Thread-6 (run), started daemon 134783321503424)>
+    |    |        |    -> ()
+    |    |        -> <Thread(Thread-6 (run), started daemon 134783321503424)>
+    |    -> <bound method AsyncBootstrapEngine.run of <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x7a95cc5929f0>>
+    -> <Thread(Thread-6 (run), started daemon 134783321503424)>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 96, in run
+    protocol_router.start()
+    |               -> <function ProtocolRouter.start at 0x7a95c5966ac0>
+    -> <oaComBroker.Core.protocol_router.router.ProtocolRouter object at 0x7a95ce2f8170>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaComBroker/Core/protocol_router/router.py", line 98, in start
+    self._executor = concurrent.futures.ThreadPoolExecutor(
+    |    |           |          -> <module 'concurrent.futures' from '/usr/lib/python3.12/concurrent/futures/__init__.py'>
+    |    |           -> <module 'concurrent' from '/usr/lib/python3.12/concurrent/__init__.py'>
+    |    -> None
+    -> <oaComBroker.Core.protocol_router.router.ProtocolRouter object at 0x7a95ce2f8170>
+
+  File "/usr/lib/python3.12/concurrent/futures/__init__.py", line 49, in __getattr__
+    from .thread import ThreadPoolExecutor as te
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 37, in <module>
+    threading._register_atexit(_python_exit)
+    |         |                -> <function _python_exit at 0x7a95c445cea0>
+    |         -> <function _register_atexit at 0x7a95ce0b1080>
+    -> <module 'threading' from '/usr/lib/python3.12/threading.py'>
+  File "/usr/lib/python3.12/threading.py", line 1559, in _register_atexit
+    raise RuntimeError("can't register atexit after shutdown")
+
+RuntimeError: can't register atexit after shutdown
+</pre>
+        </div>
+        
+        </div>
+
+        <!-- TAB 5: Application Run Logs -->
+        <div id="RunLogs" class="tab-content">
+            <h3>No Application Run Logs Found</h3><p>Application logs will appear here after the system is launched.</p>
+        </div>
+
+        <!-- TAB 6: Flame Graph -->
+        <div id="FlameGraph" class="tab-content">
+            
+        <h3>Performance Flame Graph</h3>
+        <p>A specialized performance report was generated during the last profiling session.</p>
+        <div style="margin: 20px 0;">
+            <a href="FlameGraph/flamegraph.html" target="_blank" class="tab-btn" style="text-decoration: none; display: inline-block;">
+                🚀 OPEN FULL PERFORMANCE REPORT
+            </a>
+        </div>
+        <p><i>Note: The full report contains interactive SVG graphs, Event Analysis Engine, and the Wall of Pitty.</i></p>
+        <iframe src="FlameGraph/flamegraph.html" style="width: 100%; height: 600px; border: 1px solid #444; border-radius: 8px;"></iframe>
+        
+        </div>
+    </div>
+</body>
+</html>

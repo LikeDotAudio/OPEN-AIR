@@ -31,7 +31,7 @@ class TestRadarWidget(unittest.TestCase):
             self.patchers.append(patch("tkinter.Frame", return_value=MagicMock()))
 
             for p in self.patchers: p.start()
-        component_dir = os.path.join(os.path.dirname(__file__), '..', 'Core', 'graphing', 'radar')
+        component_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'Core', 'graphing', 'radar')
         self.config = load_sample_config(component_dir)
         self.config['path'] = 'test/radar'
         self.radar_creator = RadarTestComponent()

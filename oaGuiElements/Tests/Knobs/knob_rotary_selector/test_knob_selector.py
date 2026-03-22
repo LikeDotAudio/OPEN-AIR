@@ -10,7 +10,7 @@ from oaGuiElements.Core.Knobs.knob_rotary_selector.knob_rotary_selector import R
 def load_sample_config():
     # Correctly locate the sample.json relative to this test file
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    sample_path = os.path.join(dir_path, '../../../../Core/Knobs/knob_rotary_selector/sample.json')
+    sample_path = os.path.join(dir_path, '../../../Core/Knobs/knob_rotary_selector/sample.json')
     with open(sample_path, 'r') as f:
         return json.load(f)
 

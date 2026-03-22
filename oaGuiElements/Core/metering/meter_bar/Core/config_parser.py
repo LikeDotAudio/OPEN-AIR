@@ -130,6 +130,10 @@ class MeterConfig:
             try: return float(v)
             except: return float(default)
 
+        def safe_int(v, default):
+            try: return int(v)
+            except: return int(default)
+
         min_v = safe_float(domain_cfg.get("min"), -40.0)
         max_v = safe_float(domain_cfg.get("max"), 10.0)
         val_def = safe_float(domain_cfg.get("value_default"), min_v)
@@ -190,38 +194,38 @@ class MeterConfig:
             min_val=min_v,
             max_val=max_v,
             value_default=val_def,
-            upper_range=float(scale_group.get("upper_range", config.get("upper_range", 0.0))),
-            middle_range=float(scale_group.get("middle_range", config.get("middle_range", -10.0))),
+            upper_range=safe_float(scale_group.get("upper_range", config.get("upper_range")), 0.0),
+            middle_range=safe_float(scale_group.get("middle_range", config.get("middle_range")), -10.0),
             
             orientation=orient_val,
             rotation_angle=angle,
             is_vertical=is_vert,
-            width=int(geometry_cfg.get("width", config.get("width", 200))),
-            height=int(geometry_cfg.get("height", config.get("height", 20))),
-            tick_size=int(geometry_cfg.get("tick_size", flat_cfg.get("tick_size", 5))),
-            font_size=int(geometry_cfg.get("font_size", 8)),
-            peak_size=int(geometry_cfg.get("peak_size", -1)),
+            width=safe_int(geometry_cfg.get("width", config.get("width")), 200),
+            height=safe_int(geometry_cfg.get("height", config.get("height")), 20),
+            tick_size=safe_int(geometry_cfg.get("tick_size", flat_cfg.get("tick_size")), 5),
+            font_size=safe_int(geometry_cfg.get("font_size"), 8),
+            peak_size=safe_int(geometry_cfg.get("peak_size"), -1),
             show_ticks=flat_cfg.get("show_ticks", False),
             tick_both_sides=flat_cfg.get("tick_both_sides", False),
-            sub_ticks=int(flat_cfg.get("sub_ticks", flat_cfg.get("ticks_sub_divisions", 0))),
+            sub_ticks=safe_int(flat_cfg.get("sub_ticks", flat_cfg.get("ticks_sub_divisions")), 0),
             tick_grid_overlay=t_grid,
             tick_sub_grid_overlay=ts_grid,
             fill_bar_shape=f_bar_shape,
             fill_with_value=not f_bar_shape,
             
-            attack_ms=float(ballistics_cfg.get("attack_ms", ballistics_cfg.get("Attack_ms", 100))),
-            release_ms=float(ballistics_cfg.get("release_ms", ballistics_cfg.get("Release_ms", 300))),
-            glide_time=float(ballistics_cfg.get("glide_time", 100)),
-            dwell_time=float(ballistics_cfg.get("dwell_time", 100)),
-            hold_time=float(ballistics_cfg.get("hold_time", 0)),
-            fall_time=float(ballistics_cfg.get("fall_time", ballistics_cfg.get("release_ms", ballistics_cfg.get("Release_ms", 300)))),
+            attack_ms=safe_float(ballistics_cfg.get("attack_ms", ballistics_cfg.get("Attack_ms")), 100),
+            release_ms=safe_float(ballistics_cfg.get("release_ms", ballistics_cfg.get("Release_ms")), 300),
+            glide_time=safe_float(ballistics_cfg.get("glide_time"), 100),
+            dwell_time=safe_float(ballistics_cfg.get("dwell_time"), 100),
+            hold_time=safe_float(ballistics_cfg.get("hold_time"), 0),
+            fall_time=safe_float(ballistics_cfg.get("fall_time", ballistics_cfg.get("release_ms", ballistics_cfg.get("Release_ms"))), 300),
             
             peak_display=peak_disp,
             peak_flag=peak_flg,
             show_peak_hold=show_ovl,
-            peak_hold_time=float(overload_cfg.get("overload_hold_ms", overload_cfg.get("peak_hold_ms", ballistics_cfg.get("peak_hold_ms", 1000)))),
-            overload_fade_time=float(overload_cfg.get("overload_fade_ms", 500)),
-            peak_display_fall_time=float(overload_cfg.get("Peak_display_Fall_time", 1000)),
+            peak_hold_time=safe_float(overload_cfg.get("overload_hold_ms", overload_cfg.get("peak_hold_ms", ballistics_cfg.get("peak_hold_ms"))), 1000),
+            overload_fade_time=safe_float(overload_cfg.get("overload_fade_ms"), 500),
+            peak_display_fall_time=safe_float(overload_cfg.get("Peak_display_Fall_time"), 1000),
             peak_display_style=overload_cfg.get("Peak_display_line_style", "line"),
             
             bg_color=flat_cfg.get("bg", base_bg),

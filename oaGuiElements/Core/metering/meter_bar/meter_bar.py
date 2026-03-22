@@ -84,7 +84,5 @@ class BuilderMeterBarCreator:
 
         except Exception as e:
             if BUILDER_DEBUG:
-                import traceback
-                traceback.print_exc()
                 builder_logger.exception(f"❌🚫🛑 [ERROR] Critical failure building modular SmartMeter for '{label}': {e}")
             return None

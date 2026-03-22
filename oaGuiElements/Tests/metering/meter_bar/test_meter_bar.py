@@ -13,7 +13,11 @@ from oaGuiElements.Core.metering.meter_bar.smart_meter import SmartMeter
 class TestMeterBar(unittest.TestCase):
     def setUp(self):
         self.patchers = []
-        if True: # Force mock path for debugging
+        try:
+            self.root = tk.Tk()
+            self.root.withdraw()
+            self.HAS_DISPLAY = True
+        except:
             self.HAS_DISPLAY = False
             self.root = MagicMock()
             self.root.winfo_exists.return_value = True

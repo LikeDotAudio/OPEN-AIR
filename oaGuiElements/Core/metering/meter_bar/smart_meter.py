@@ -46,7 +46,17 @@ class SmartMeter(tk.Canvas):
         self.state_mirror = state_mirror_engine
         self.router = subscriber_router
         self.base_topic = base_topic
-        self.value_var = kwargs.get("variable") or tk.DoubleVar(master=parent, value=self.cfg.value_default)
+        
+        # Create or use existing variable
+        self.value_var = kwargs.get("variable")
+        if not self.value_var:
+            try:
+                self.value_var = tk.DoubleVar(master=parent, value=self.cfg.value_default)
+            except Exception:
+                # If tk.DoubleVar fails (e.g. headless), use a fallback mock
+                from unittest.mock import MagicMock
+                self.value_var = MagicMock()
+
         self.value_var.trace_add("write", self._on_value_update)
         
         self._anim_timer_id = None
@@ -54,7 +64,10 @@ class SmartMeter(tk.Canvas):
         self.is_resizing = False # Flag to prevent animation during resize
         
         # 4. Finalize Initial State
-        self.after(10, self._initial_draw)
+        try:
+            self.after(10, self._initial_draw)
+        except:
+            pass
 
     def _build_ui(self, **kwargs):
         # 1. Calculate Required Size

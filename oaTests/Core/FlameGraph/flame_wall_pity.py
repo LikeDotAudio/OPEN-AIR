@@ -1,13 +1,8 @@
-
-
-#####################################
-### File: OPEN-AIR/oaTests/Core/FlameGraph/Wall_of_pitty.py
-#####################################
-# oaTests/Core/Wall_of_pitty.py
+# oaTests/Core/FlameGraph/flame_wall_pity.py
 import os
 import html
 
-def generate_wall_of_pitty(stats_list, ps):
+def generate_wall_of_pity(stats_list, ps):
     """
     Generates a highly detailed, descriptive performance report.
     Designed to provide a 'blind coder' with full context on architectural bottlenecks.
@@ -104,7 +99,7 @@ def generate_wall_of_pitty(stats_list, ps):
         report.append(f"CONTEXT: {cat['description']}")
         report.append("")
         
-        # 50 items as requested
+        # 50 items
         by_metric = sorted(stats_list, key=cat['sort_key'], reverse=True)[:50]
         
         for i, s in enumerate(by_metric, 1):

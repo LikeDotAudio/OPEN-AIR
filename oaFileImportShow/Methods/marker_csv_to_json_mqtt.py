@@ -1,18 +1,8 @@
-# importers/worker_marker_csv_to_json_mqtt.py
-#
-# This module contains the logic for converting marker data from a CSV file to a device-centric JSON structure and publishing it to MQTT.
-#
+# Methods/marker_csv_to_json_mqtt.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
+# Description: importers/worker_marker_csv_to_json_mqtt.py
 
 import os
 import inspect

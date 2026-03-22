@@ -1,28 +1,8 @@
-# workers/watchdog/watchdog.py
-#
-# Primary Purpose:
-# This module implements a robust watchdog timer designed to monitor the health
-# and responsiveness of the application's main GUI thread. It provides an
-# automated "panic" mechanism that triggers a hard process exit if the main
-# thread becomes unresponsive (hangs) for a predefined duration.
-#
-# Responsibilities:
-# - Track the last 'heartbeat' (kick) received from the main thread.
-# - Execute a background monitoring loop to verify thread activity.
-# - Capture and report the main thread's stack trace upon failure.
-# - Execute registered panic callbacks (e.g., emergency logging, state dumping).
-# - Forcefully terminate the application using '_os._exit(1)' to prevent 
-#   cascading failures in distributed systems.
-#
-# Constraints:
-# - Requires 'threading' and 'sys' for thread enumeration and frame access.
-# - Assumes 'kick_watchdog()' is called regularly (e.g., from the UI loop).
-# - Hard-coded 120-second timeout threshold; must be tuned for hardware.
-#
+# Managers/watchdog.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 1.0.0
 #
-# Version 20260125.WatchdogOverhaul.1
+# Description: Primary Purpose:
 
 import threading
 import time

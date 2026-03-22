@@ -1,10 +1,8 @@
-# managers/Display/transparency/transparency_mixin.py
-#
-# Legacy Mixin for Industrial Transparency.
-# Now delegates to the centralized TransparencyManager.
-#
+# transparency/transparency_mixin.py
 # Author: Anthony Peter Kuzub
-# Version 20260222.Adapter.1
+# Version: 20260222.Adapter.1
+#
+# Description: Legacy Mixin for Industrial Transparency.
 
 from .transparency import TransparencyManager
 
@@ -22,11 +20,13 @@ class TransparencyMixin:
         """
         builder_instance = context.builder_instance if context else None
         parent = widget.master
+        print(f"DEBUG: parent is {parent}")
 
         def perform_sync(event=None):
             if not widget.winfo_exists(): return
             try:
                 p_bg = parent.cget("bg")
+                print(f"DEBUG: p_bg is {p_bg}")
                 if widget.cget("bg") != p_bg:
                     widget.configure(bg=p_bg)
                 if canvas and canvas.winfo_exists() and canvas.cget("bg") != p_bg:
@@ -38,7 +38,8 @@ class TransparencyMixin:
                 else:
                     # Re-apply transparency slicing if not already registered
                     self._apply_transparency(widget, canvas, config_data, builder_instance)
-            except Exception:
+            except Exception as e:
+                print(f"DEBUG: perform_sync error: {e}")
                 pass
 
         # Bind to parent's configuration changes to keep in sync

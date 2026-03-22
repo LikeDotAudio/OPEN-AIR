@@ -1,4 +1,8 @@
-# workers/builder/meter_bar/core/config_parser.py
+# Core/config_parser.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
 
 from dataclasses import dataclass, field
 from typing import Dict, Any, Optional, Tuple

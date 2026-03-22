@@ -1,3 +1,9 @@
+# Core/knob_renderer.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 import math
 from ..effects.knob_3d_effects import draw_knob_3d_effects

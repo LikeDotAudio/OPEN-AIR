@@ -1,4 +1,9 @@
-# workers/wysiwyg_editor/workspaces/layout_overlays/blocks.py
+# layout_overlays/blocks.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 
 def apply(layout, widget, path, is_focused, design_elements):

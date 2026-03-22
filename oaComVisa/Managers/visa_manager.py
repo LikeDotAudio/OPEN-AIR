@@ -1,9 +1,8 @@
-# managers/VisaScipi/manager_visa.py
-#
-# Main orchestrator for VISA device interactions.
-#
+# Managers/visa_manager.py
 # Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
+# Description: Main orchestrator for VISA device interactions.
 
 from ..Workers.logic_mqtt_publisher import VisaGuiPublisher
 from ..Core.visa_proxy import VisaProxy

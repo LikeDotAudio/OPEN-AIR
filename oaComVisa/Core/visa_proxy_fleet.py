@@ -1,9 +1,9 @@
-# managers/STATE_VISA_FLEET_Manager/visa_proxy_fleet.py
-#
-# Refactored VisaProxy for fleet management, handling device-specific communication via Manager callbacks.
-#
+# Core/visa_proxy_fleet.py
 # Author: Gemini Agent
+# Version: 1.0.0
 #
+# Description: Refactored VisaProxy for fleet management, handling device-specific communication via Manager callbacks.
+
 import os
 import inspect
 import pyvisa

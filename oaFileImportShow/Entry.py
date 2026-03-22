@@ -1,3 +1,9 @@
+# oaFileImportShow/Entry.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 """
 oaFileImportShow/Entry.py - The sole orchestrator for the Show Import Module.
 """

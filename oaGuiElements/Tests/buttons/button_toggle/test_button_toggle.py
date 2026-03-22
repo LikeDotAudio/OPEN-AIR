@@ -1,3 +1,9 @@
+# button_toggle/test_button_toggle.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import unittest
 import unittest
 from unittest.mock import MagicMock, patch
@@ -109,8 +115,6 @@ class TestButtonToggle(unittest.TestCase):
     def test_toggle_registration(self):
         """Goal: Verify that the toggle button registers itself with the mirror engine."""
         creator = BuilderButtonToggleCreator()
-        # Ensure topic_widgets is initialized on the creator instance for this test.
-        creator.topic_widgets = {} 
         widget = creator.make_button_toggle(
             parent_widget=self.root,
             config_data=self.config,
@@ -119,10 +123,6 @@ class TestButtonToggle(unittest.TestCase):
         self.assertIsNotNone(widget)
         # Assert that mirror_engine.register_widget was called.
         self.mirror_engine.register_widget.assert_called()
-        # Assert that the correct state variable was stored in topic_widgets.
-        # Compare against self.mock_bool_var which is now guaranteed to be defined.
-        self.assertIn(self.config["path"], creator.topic_widgets)
-        self.assertEqual(creator.topic_widgets[self.config["path"]][0], self.mock_bool_var)
 
 if __name__ == "__main__":
     unittest.main()

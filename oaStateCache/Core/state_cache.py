@@ -1,6 +1,8 @@
-# State_Cache/state_cache_manager.py
-# Modularized State Cache Management.
-# Version 20260316.1
+# Core/state_cache.py
+# Author: Anthony Peter Kuzub
+# Version: 20260316.1
+#
+# Description: Modularized State Cache Management.
 
 import time
 import orjson

@@ -1,3 +1,9 @@
+# Core/broker_link.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from ..Constants.constants import Splinker_debug_enabled, splinker_logger
 
 def broker_link(self, splink, val, original_source, original_msg=None):

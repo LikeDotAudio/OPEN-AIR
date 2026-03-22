@@ -1,3 +1,9 @@
+# Core/json.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import orjson
 from pathlib import Path
 from oaLogging.Core.logger import builder_logger

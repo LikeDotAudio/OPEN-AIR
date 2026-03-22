@@ -11,7 +11,6 @@ A high-performance, photorealistic dual fader widget.
 Refactored for zero-flicker tagged updates and debounced resizing.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260220.Modular.5
 
 ## ⚙️ Assumptions & Constraints

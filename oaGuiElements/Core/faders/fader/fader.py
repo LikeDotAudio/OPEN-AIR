@@ -1,6 +1,8 @@
 # fader/fader.py
-# Modularized Vertical Fader Widget.
-# Version 20260315.Modular.1
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Vertical Fader Widget.
 
 import tkinter as tk
 from tkinter import ttk

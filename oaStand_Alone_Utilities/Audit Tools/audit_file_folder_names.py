@@ -1,3 +1,9 @@
+# Audit Tools/audit_file_folder_names.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import os
 import re
 from collections import defaultdict

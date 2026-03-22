@@ -12,7 +12,6 @@ Service Control.
 Serves as the backend for the JSON-defined MQTT Dashboard and System Status.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260219.Performance.1
 
 ## ⚙️ Assumptions & Constraints

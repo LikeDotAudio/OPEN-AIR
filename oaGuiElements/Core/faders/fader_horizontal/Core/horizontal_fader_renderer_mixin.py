@@ -1,3 +1,9 @@
+# Core/horizontal_fader_renderer_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import math
 import tkinter as tk
 from oaStyle.Core.style import THEMES, DEFAULT_THEME

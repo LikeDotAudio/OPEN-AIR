@@ -1,10 +1,8 @@
-# workers/Command_Router/AES70/aes70.py
-#
-# Dedicated orchestrator for AES70 / OCA (Open Control Architecture) traffic.
-# This manager acts as a bridge between the internal state system and the AES70 network.
-#
+# Core/aes70.py
 # Author: Anthony P. Kuzub(Refactored)
-# Version 20260308.Harden.1
+# Version: 20260308.Harden.1
+#
+# Description: Dedicated orchestrator for AES70 / OCA (Open Control Architecture) traffic.
 
 import threading
 import time

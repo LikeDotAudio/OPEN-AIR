@@ -1,3 +1,9 @@
+# Core/dual_fader_renderer_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 from oaGuiElements.Core.faders.fader_dual.Core.dual_fader_asset_generator import DualFaderAssetGenerator
 

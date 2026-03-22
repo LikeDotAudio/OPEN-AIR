@@ -1,3 +1,9 @@
+# images/test_background_renderings.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import pytest
 from PIL import Image, ImageChops
 from oaGuiBackground.Panels.panels.panel_generator import PanelGenerator

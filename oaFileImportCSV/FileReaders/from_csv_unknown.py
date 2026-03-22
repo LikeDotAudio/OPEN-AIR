@@ -1,7 +1,8 @@
-# workers/importers/formats/from_csv_unknown.py
+# FileReaders/from_csv_unknown.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Best-effort conversion of CSV files with unknown headers into standard marker format.
-#
+# Description: Best-effort conversion of CSV files with unknown headers into standard marker format.
 
 import csv
 import re

@@ -1,3 +1,9 @@
+# Core/view_controller.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from matplotlib.patches import Rectangle
 from tkinter import simpledialog
 

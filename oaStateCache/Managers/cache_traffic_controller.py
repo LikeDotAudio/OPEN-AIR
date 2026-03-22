@@ -1,18 +1,8 @@
-# State_Cache/cache_traffic_controller.py
-#
-# Acts as a middleware for incoming MQTT messages, decoding payloads and determining if cache updates are necessary.
-#
+# Managers/cache_traffic_controller.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
+# Description: State_Cache/cache_traffic_controller.py
 
 import orjson
 import inspect
@@ -36,7 +26,6 @@ current_version_hash = 20251230 * 230300 * 1
 
 # Processes incoming MQTT messages, decodes their payloads, and determines if an update to the cache is required.
 # This function acts as a gatekeeper, checking for redundancy by comparing the new payload
-# with the current cache state. If a significant change is detected, it signals that an update is needed.
 # Inputs:
 #     msg (MqttMessage): The MQTT message object.
 #     current_cache (Dict): The current state of the application cache.

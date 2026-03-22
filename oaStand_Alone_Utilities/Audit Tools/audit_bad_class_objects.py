@@ -1,3 +1,9 @@
+# Audit Tools/audit_bad_class_objects.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import os
 import ast
 from collections import defaultdict

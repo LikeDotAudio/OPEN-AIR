@@ -1,22 +1,17 @@
-# markers/marker_peak_re_publisher.py
+# Methods/marker_peak_re_publisher.py
+# Author: Anthony Peter Kuzub
+# Version: 20250821.200641.1
 #
-# This worker listens to the immediate output of the NAB marker command (Marker_1/value, etc.)
-# and republishes the received peak value to the final markers repository location.
-#
+# Description: markers/marker_peak_re_publisher.py
+
 ... User modified the `new_string` content to be: # markers/marker_peak_re_publisher.py
 #
 # This worker listens to the immediate output of the NAB marker command (Marker_1/value, etc.)
 # and republishes the received peak value to the final markers repository location.
 #
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
 #
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
 #
 # Version 20250821.200641.1
 
@@ -33,7 +28,6 @@ from loguru import logger
 
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
-# from oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
 
 # --- Global Scope Variables ---
 Current_Date = 20251213

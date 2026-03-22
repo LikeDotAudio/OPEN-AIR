@@ -1,4 +1,9 @@
-#!/usr/bin/env python3
+# Methods/PTPtester.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: !/usr/bin/env python3
+
 """
 PTP Traffic Sniffer and MQTT Reporter.
 

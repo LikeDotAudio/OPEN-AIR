@@ -1,3 +1,9 @@
+# Core/grid_topology_configurator.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 class GridTopologyConfigurator:
     """Handles the calculation and application of Tkinter grid configurations."""
 

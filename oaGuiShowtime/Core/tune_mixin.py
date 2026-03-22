@@ -1,3 +1,9 @@
+# Core/tune_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from loguru import logger
 from oaGuiTelemetry.marker_logic import calculate_frequency_range
 

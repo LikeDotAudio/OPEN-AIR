@@ -1,0 +1,197 @@
+065626.931 | DEBUG    | UI   | SYSTEM     | oaConfiguration.Methods.console_encoder | ⏩ Not on Windows ('nt'), skipping console encoding reconfiguration.
+065626.931 | SUCCESS  | UI   | SYSTEM     | oaConfiguration.Methods.console_encoder | ✅ Exiting configure_console_encoding.
+065626.931 | DEBUG    | UI   | SYSTEM     | __main__             | 🖥️🎨 [UI] Starting OpenAir UI Service...
+065627.026 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | Enforced minimum window size: 800x600
+065627.026 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | Attempting to set window maximization attributes...
+065627.026 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | Set '-zoomed' attribute for Linux.
+065627.035 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.composition_root | 🏗️ [ROOT] Composing UI Services...
+065627.037 | DEBUG    | UI   | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📖 Reading Cache.
+065627.037 | DEBUG    | UI   | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📄 No cache file found.
+065627.038 | INFO     | UI   | DATA       | oaStateCache.Core.state_cache | 💾✨ First boot detected. Starting with fresh cache.
+065627.038 | DEBUG    | UI   | DATA       | oaStateCache.Core.state_cache | 🧠💾 [CACHE] Initialized with 0 entries.
+065627.039 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SPLINKER on OPEN-AIR/System/Status/Splinker/List: []
+065627.039 | INFO     | UI   | OSC        | oaComOSC.Managers.osc_manager | 🅾️📡💻 [OSC] Initializing Bridge (Bridge=False)...
+065627.040 | SUCCESS  | UI   | SYSTEM     | oaGuiManager.Core.composition_root | ✅ [ROOT] UI Service Graph Composed.
+065627.053 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | ✅ SplashScreen materialised.
+065627.053 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.ui_window | 🖥️🎨 [UI] Reveal main window.
+065627.061 | DEBUG    | UI   | SYSTEM     | oaGuiSplashScreen.Methods.splash_screen | 👋 SplashScreen dismissed.
+065627.070 | DEBUG    | UI   | SYSTEM     | __main__             | 🖥️🎨 [UI] Entering Tkinter MainLoop.
+065627.071 | ERROR    | UI   | SYSTEM     | oaGuiManager.Core.bootstrap_sequence | 🖥️🎨 [UI] Bootstrap Failure:Traceback (most recent call last):
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 32, in run
+    self._connect_communication_services(
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 64, in _connect_communication_services
+    self.splash.set_status(status="Connecting to Broker...")
+TypeError: SplashScreen.set_status() got an unexpected keyword argument 'status'
+
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py", line 1134, in __call__
+    ret = self.original_func(*self.args, **self.kwargs)
+          |    |              |    |       |    -> {}
+          |    |              |    |       -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7b67fb7b8650>
+          |    |              |    -> ()
+          |    |              -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7b67fb7b8650>
+          |    -> <bound method Thread._bootstrap of <Thread(Thread-8 (run), started daemon 135685801506496)>>
+          -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7b67fb7b8650>
+
+  File "/usr/lib/python3.12/threading.py", line 1030, in _bootstrap
+    self._bootstrap_inner()
+    |    -> <function Thread._bootstrap_inner at 0x7b67fb5dfd80>
+    -> <Thread(Thread-8 (run), started daemon 135685801506496)>
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+    |    -> <function Thread.run at 0x7b67fb5dfa60>
+    -> <Thread(Thread-8 (run), started daemon 135685801506496)>
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+    |    |        |    |        |    -> {}
+    |    |        |    |        -> <Thread(Thread-8 (run), started daemon 135685801506496)>
+    |    |        |    -> ()
+    |    |        -> <Thread(Thread-8 (run), started daemon 135685801506496)>
+    |    -> <bound method AsyncBootstrapEngine.run of <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x7b67eaee7260>>
+    -> <Thread(Thread-8 (run), started daemon 135685801506496)>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 32, in run
+    self._connect_communication_services(
+    |    -> <function AsyncBootstrapEngine._connect_communication_services at 0x7b67eb8293a0>
+    -> <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x7b67eaee7260>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 64, in _connect_communication_services
+    self.splash.set_status(status="Connecting to Broker...")
+    |    |      -> <function SplashScreen.set_status at 0x7b67f8160680>
+    |    -> <oaGuiSplashScreen.Methods.splash_screen.SplashScreen object at 0x7b67eae05d90>
+    -> <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x7b67eaee7260>
+
+TypeError: SplashScreen.set_status() got an unexpected keyword argument 'status'
+065627.073 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🖥️🎨 [UI] Initiating shutdown...
+065627.073 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: mqtt_conn
+065627.073 | DEBUG    | UI   | SYSTEM     | oaComMQTT.Managers.mqtt_connection | 📡🔗👋 [MQTT] Disconnection initiated.
+065627.073 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: sub_router
+065627.073 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: state_cache
+065627.073 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: mirror_engine
+065627.073 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: osc_manager
+065627.073 | WARNING  | UI   | OSC        | oaComOSC.Managers.osc_manager | 🅾️📡🛑 [OSC] Bridge Offline.
+065627.073 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: snmp_manager
+065627.073 | WARNING  | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🌐 SNMP Bridge Offline.
+065627.073 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: midi_manager
+065627.073 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: splinker_manager
+065627.073 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: protocol_router
+065627.073 | DEBUG    | UI   | SYSTEM     | oaGuiManager.Core.shutdown_coordinator | 🖥️🎨 [UI] Managers signaled to stop. Quitting mainloop...
+065627.073 | DEBUG    | UI   | SYSTEM     | __main__             | 🖥️🎨 [UI] MainLoop exited. Destroying root...
+065627.089 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/Splinker/List
+065627.090 | DEBUG    | UI   | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+065627.230 | DEBUG    | CORE | SYSTEM     | oaConfiguration.Methods.console_encoder | ⏩ Not on Windows ('nt'), skipping console encoding reconfiguration.
+065627.230 | SUCCESS  | CORE | SYSTEM     | oaConfiguration.Methods.console_encoder | ✅ Exiting configure_console_encoding.
+065627.230 | DEBUG    | CORE | SYSTEM     | __main__             | ⚡🛡️⚙️ [CORE] Starting OpenAir Core Service...
+065627.230 | DEBUG    | CORE | SYSTEM     | oaWatchdog.Managers.watchdog | 🐕⏳🔋 [WATCHDOG] Started (Timeout: 120.0s)
+065627.230 | DEBUG    | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📖 Reading Cache.
+065627.231 | DEBUG    | CORE | SYSTEM     | oaStateCache.FileReaders.cache_io_handler | 💾📄 No cache file found.
+065627.231 | INFO     | CORE | DATA       | oaStateCache.Core.state_cache | 💾✨ First boot detected. Starting with fresh cache.
+065627.231 | DEBUG    | CORE | DATA       | oaStateCache.Core.state_cache | 🧠💾 [CACHE] Initialized with 0 entries.
+065627.231 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Beginning CORE manager launch sequence...
+065627.231 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Initializing core instances...
+065627.232 | INFO     | CORE | LOG_FILTER | oaLogging.Managers.log_filter_engine | Setting up MQTT subscription for dynamic log filtering on topic: OPEN-AIR/system/logger/filter/set
+065627.232 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/system/logger/filter/set
+065627.232 | INFO     | CORE | SYSTEM     | oaLogging.Managers.log_filter_engine | LogFilterEngine initialized and subscribed to MQTT topic.
+065627.236 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SPLINKER on OPEN-AIR/System/Status/Splinker/List: []
+065627.236 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Broker/Delete/#
+065627.236 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Broker/Service/#
+065627.236 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Status/Fleet/Complete
+065627.237 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_manager | 🚀📤📥 [MQTT] MqttManager initialized with Async Publisher.
+065627.237 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Injecting dynamic protocols...
+065627.291 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/Splinker/List
+065627.297 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+065627.368 | DEBUG    | CORE | SYSTEM     | oaTranslator.Managers.yak_translator | 🟡 YAK repository file not found or empty at /home/anthony/Documents/OPEN-AIR/.pytest_cache/oaDataState/YAKETYYAK.json. Initializing empty repository.
+065627.368 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/yak/commands/#
+065627.368 | DEBUG    | CORE | SYSTEM     | oaTranslator.Managers.yak_translator | 👂 Subscribed to YAK trigger topic: 'OPEN-AIR/yak/commands/#'
+065627.368 | SUCCESS  | CORE | SYSTEM     | oaTranslator.Managers.yak_translator | ✅ YakTranslator initialized and ready to translate!
+065627.369 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/Proxy/Rx_Outbox
+065627.369 | SUCCESS  | CORE | SYSTEM     | oaTranslator.Methods.yak_rx | ✅✅✅ [SUCCESS] YakRxManager subscribed to 'OPEN-AIR/Proxy/Rx_Outbox' for proxy responses.
+065627.370 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Status/Fleet/Start
+065627.370 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Status/Fleet/Complete
+065627.735 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Linking cross-dependent managers...
+065627.736 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/Control/Splinker/#
+065627.736 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Starting all manager services...
+065627.768 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 INPUT READY: Mbox 2:Mbox 2 MIDI 1 28:0
+065627.769 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 INPUT READY: Midi Through:Midi Through Port-0 14:0
+065627.770 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 OUTPUT READY: Midi Through:Midi Through Port-0 14:0
+065627.770 | SUCCESS  | CORE | MIDI       | oaComMidi.Core.midi_port_controller | 🎹 OUTPUT READY: Mbox 2:Mbox 2 MIDI 1 28:0
+065627.771 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MIDI on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.772 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MIDI on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+065627.772 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] Subscribing to OPEN-AIR/System/PTP/Capture
+065627.772 | WARNING  | CORE | SYSTEM     | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+065627.772 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🔗 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+065627.772 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+065627.773 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.773 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+065627.773 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+065627.773 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+065627.773 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.773 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+065627.774 | SUCCESS  | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | ▶️▶️▶️ [START] Protocol Router Active (GUID: 6D822B20A842BBA4).
+065627.774 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Connecting CORE MQTT Client to broker and running scans...
+065627.774 | DEBUG    | CORE | DATA       | oaStateCache.Core.state_cache | 🚀📤📥 [CACHE] Subscribing to root: OPEN-AIR/#
+065627.774 | SUCCESS  | CORE | SYSTEM     | oaThreadManager.Workers.launcher | ✅✅✅ [SUCCESS] All CORE managers have been successfully launched!
+065627.774 | DEBUG    | CORE | SYSTEM     | oaThreadManager.Workers.launcher | 🚀⚙️🔗 [LAUNCHER] Connecting CORE MQTT Client to broker and running scans...
+065627.774 | DEBUG    | CORE | DATA       | oaStateCache.Core.state_cache | 🚀📤📥 [CACHE] Subscribing to root: OPEN-AIR/#
+065627.774 | SUCCESS  | CORE | SYSTEM     | __main__             | ✅ [SUCCESS] CORE: Service Operational. Watchdog Active.
+065627.775 | SUCCESS  | CORE | SYSTEM     | oaComMQTT.Workers.mqtt_async_worker | 🚀🆗✅ [SUCCESS] aiomqtt: Connected to broker.
+065627.776 | DEBUG    | CORE | SYSTEM     | oaComMQTT.Managers.mqtt_subscriber_router | 🚀📤📥 [MQTT] aiomqtt: Resubscribed to root and external filters.
+065627.822 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/MIDI/ActiveInputs
+065627.822 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.822 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.822 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/MIDI/ActiveOutputs
+065627.822 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+065627.822 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.822 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.823 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+065627.823 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+065627.823 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+065627.823 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774176987.370455}
+065627.824 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774176987.370455}
+065627.824 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.824 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.825 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+065627.825 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+065627.826 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+065627.826 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/Splinker/List: []
+065627.826 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+065627.826 | TRACE    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter OPEN-AIR/System/Status/Splinker/List
+065627.826 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.827 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.827 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+065627.827 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] IGNORE (REFLECT) >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+065627.827 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.827 | TRACE    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter OPEN-AIR/System/Status/MIDI/ActiveInputs
+065627.828 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+065627.828 | TRACE    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter OPEN-AIR/System/Status/MIDI/ActiveOutputs
+065627.874 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/GUI/Global/Header/StatusLight
+065627.874 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774176987.370455}
+065627.874 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] SYSTEM 🚀 💾 Ⓖ >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774176987.370455}
+065627.874 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774176987.370455}
+065627.876 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/Splinker/List
+065627.876 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+065627.876 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🔗 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/Splinker/List: []
+065627.876 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+065627.877 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/MIDI/ActiveInputs
+065627.877 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.877 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.router | 📥📡📤 [ROUTER] 🎹 🚀 💾 Ⓖ >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.877 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.877 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through Port-0 14:0']
+065627.877 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/MIDI/ActiveOutputs
+065627.877 | DEBUG    | CORE | ROUTER     | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0']
+065626.496 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Launching OPEN-AIR Partitions... (Mission Critical: False)
+065626.496 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Session Identity established (Randomized): 6D822B20A842BBA4
+065626.497 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Spawning Partition B (UI)...
+065626.497 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Spawning Partition A (Core)...
+065626.498 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: System Running. Monitoring child processes...
+065627.998 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: 👋 UI exited (Code 0). System complete.
+065627.999 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Terminating child processes...
+065628.099 | DEBUG    | SUP  | SYSTEM     | OpenAir              | 🚀 SUPERVISOR: Supervisor shutdown complete. Goodbye.
+065628.099 | INFO     | SUP  | SYSTEM     | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] Stopping Profiler...
+065628.099 | INFO     | SUP  | SYSTEM     | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] Synthesizing Intelligence Report...
+065628.131 | DEBUG    | SUP  | SYSTEM     | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] JSON components saved to /home/anthony/Documents/OPEN-AIR/oaDataLogs/FlameGraph
+065628.136 | SUCCESS  | SUP  | SYSTEM     | oaTests.Core.FlameGraph.flame_html | ? Standalone Performance Report generated: /home/anthony/Documents/OPEN-AIR/oaDataLogs/FlameGraph/flamegraph.html
+065628.136 | SUCCESS  | SUP  | SYSTEM     | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] Intelligence Report: /home/anthony/Documents/OPEN-AIR/oaDataLogs/FlameGraph/flamegraph.html
+065628.136 | SUCCESS  | SUP  | SYSTEM     | __main__             | 🔥 [ENTRY] Performance profiling session complete.
+065628.136 | INFO     | SUP  | SYSTEM     | __main__             | 🔥 [ENTRY] Report: /home/anthony/Documents/OPEN-AIR/oaDataLogs/FlameGraph/flamegraph.html

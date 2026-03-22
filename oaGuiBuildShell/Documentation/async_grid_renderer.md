@@ -12,7 +12,6 @@ with a "Skeleton-First" rendering system.
 Decoupled from DynamicGuiBuilder inheritance.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio
 Version 20260222.Renderer.1
 
 ## ⚙️ Assumptions & Constraints

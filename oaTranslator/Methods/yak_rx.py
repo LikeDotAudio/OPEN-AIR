@@ -1,11 +1,8 @@
-# Proxy/yak_manager/manager_yak_rx.py
-#
-# This file (manager_yak_rx.py) processes the response from an SCPI query and publishes the parsed output values to MQTT.
-# REFACTORED for Partitioned Architecture (Core Only).
-#
+# Methods/yak_rx.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260221.Partition.1
+# Version: 20260221.Partition.1
+#
+# Description: Processes the response from an SCPI query and publishes the parsed output values to MQTT.
 
 import os
 import inspect

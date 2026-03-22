@@ -1,3 +1,9 @@
+# Report_Builder/collate_data.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import os
 
 def collate_extra_tabs(project_root):
@@ -6,12 +12,20 @@ def collate_extra_tabs(project_root):
     by calling their respective builder modules.
     """
     try:
-        from oaTests.Core.Report_Builder import ReportBuilder_Audits, ReportBuilder_ChangeLog, ReportBuilder_ErrorLog, ReportBuilder_RunLog, ReportBuilder_FlameGraph
+        from oaTests.Core.Report_Builder import (
+            ReportBuilder_Audits, 
+            ReportBuilder_ChangeLog, 
+            ReportBuilder_ErrorLog, 
+            ReportBuilder_RunLog, 
+            ReportBuilder_FlameGraph,
+            ReportBuilder_BugLog
+        )
         
         audit_html = ReportBuilder_Audits.build_tab(os.path.join(project_root, "oaDataAudits"))
         changelog_html = ReportBuilder_ChangeLog.build_tab(os.path.join(project_root, "oaDataLogs", "ChangeLog"))
         error_html = ReportBuilder_ErrorLog.build_tab(os.path.join(project_root, "oaDataLogs", "Errors"))
         runlog_html = ReportBuilder_RunLog.build_tab(os.path.join(project_root, "oaDataLogs", "ApplicationRunLog"))
+        buglog_html = ReportBuilder_BugLog.build_tab(os.path.join(project_root, "oaDataLogs", "BugLog"))
         flamegraph_html = ReportBuilder_FlameGraph.build_tab(project_root)
         
         return {
@@ -19,6 +33,7 @@ def collate_extra_tabs(project_root):
             "changelog": changelog_html,
             "error": error_html,
             "runlog": runlog_html,
+            "buglog": buglog_html,
             "flamegraph": flamegraph_html
         }
     except Exception as e:

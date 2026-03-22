@@ -1,3 +1,9 @@
+# oaComAES70/Entry.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 """
 oaComAES70/Entry.py - The sole orchestrator for the AES70 Communication Module.
 

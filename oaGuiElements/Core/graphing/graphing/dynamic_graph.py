@@ -1,6 +1,8 @@
-# data_graphing/dynamic_graph.py
-# Modularized FluxPlotter Graph Component.
-# Version 20260315.Modular.1
+# graphing/dynamic_graph.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized FluxPlotter Graph Component.
 
 import tkinter as tk
 from collections import deque

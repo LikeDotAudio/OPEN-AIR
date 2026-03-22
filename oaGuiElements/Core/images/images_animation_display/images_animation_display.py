@@ -1,10 +1,8 @@
-# images_animation_oaGuiDefinitions/dynamic_guimake_images_animation_display.py
-#
-# A mixin for creating an animation display widget from a GIF file.
-#
+# images_animation_display/images_animation_display.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20250821.200641.1
+# Version: 20250821.200641.1
+#
+# Description: A mixin for creating an animation display widget from a GIF file.
 
 import tkinter as tk
 from tkinter import ttk

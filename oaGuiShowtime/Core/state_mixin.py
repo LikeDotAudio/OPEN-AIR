@@ -1,3 +1,9 @@
+# Core/state_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from collections import defaultdict
 
 class ShowtimeStateMixin:

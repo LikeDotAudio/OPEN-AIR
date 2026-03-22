@@ -1,23 +1,8 @@
-# managers/VisaScipi/manager_visa_proxy.py
-#
-# This manager provides a safe, low-level interface for executing SCPI write
-# and query commands via PyVISA. It acts as a command queue and execution
-# engine for instrument communication, ensuring that I/O operations are
-# serialized and handled gracefully in a background thread.
-#
-# Primary Responsibilities:
-# - Maintain a thread-safe command queue for SCPI operations.
-# - Coordinate background execution of write and query commands.
-# - Manage the lifecycle of the instrument session proxy.
-# - Listen for inbound MQTT commands and dispatch results/errors.
-#
-# Assumptions and Constraints:
-# - Assumes only one instrument is active at a time per proxy instance.
-# - Blocking VISA I/O is offloaded to a dedicated worker thread.
-# - MQTT payloads must follow the project's standard command format.
-#
+# Core/visa_proxy.py
 # Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
+# Description: This manager provides a safe, low-level interface for executing SCPI write
 
 import os
 import inspect

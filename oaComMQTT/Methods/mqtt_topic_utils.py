@@ -1,4 +1,9 @@
-# mqtt/mqtt_topic_utils.py
+# Methods/mqtt_topic_utils.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import re
 import pathlib
 from pathlib import Path

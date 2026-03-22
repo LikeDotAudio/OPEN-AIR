@@ -1,7 +1,8 @@
-# workers/logic/manifest/echo_canceller.py
+# manifest/echo_canceller.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Logic to prevent infinite feedback loops via Echo Cancellation.
-# Checks if an incoming payload originated from the local instance.
+# Description: Logic to prevent infinite feedback loops via Echo Cancellation.
 
 from typing import Dict
 from oaConfiguration.FileReaders.config_reader import Config

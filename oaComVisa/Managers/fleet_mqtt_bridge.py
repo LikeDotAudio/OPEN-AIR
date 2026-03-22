@@ -1,21 +1,8 @@
-# managers/Visa_Fleet/fleet_mqtt_bridge.py
+# Managers/fleet_mqtt_bridge.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Bridges the Visa Fleet Manager's internal state and controls with MQTT.
-#
-# Primary Responsibilities:
-# - Subscribing to fleet-wide control topics (e.g., Scan triggers).
-# - Publishing discovered device inventory as a hierarchical MQTT structure.
-# - Facilitating the distribution of device-specific data via the shared
-#   MQTT manager.
-#
-# Assumptions and Constraints:
-# - Relies on a shared `mqtt_connection_manager` for actual network I/O.
-# - Uses `subscriber_router` for handling incoming control messages.
-# - Hierarchical publishing is limited to dictionaries and lists.
-# - Serializes complex device blobs using `orjson` with indentation for
-#   readability.
-#
-# Author: Gemini Agent / Anthony Peter Kuzub
+# Description: Bridges the Visa Fleet Manager's internal state and controls with MQTT.
 
 import orjson
 import os

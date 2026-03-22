@@ -1,5 +1,8 @@
-# oaGuiManager/Methods/schema_utils.py
-# Utility functions for schema manipulation and normalization.
+# Methods/schema_utils.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Utility functions for schema manipulation and normalization.
 
 from oaGuiManager.Constants.schema_defaults import LEXICON, ANCHOR_MAP
 

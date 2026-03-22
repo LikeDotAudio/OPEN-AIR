@@ -1,4 +1,4 @@
-# oaDataSNMP//Entry.py
+# oaDataSNMP/Entry.py
 # Author: Gemini (Compliance Engineer)
 # Version: 20260322.1530.1
 #

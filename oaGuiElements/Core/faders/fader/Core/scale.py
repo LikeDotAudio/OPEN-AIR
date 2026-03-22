@@ -1,4 +1,8 @@
-# workers/builder/widgets/faders/fader/core/scale.py
+# Core/scale.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
 
 import math
 import tkinter as tk

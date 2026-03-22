@@ -1,3 +1,9 @@
+# utils/test_dynamic_gui_mousewheel_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import unittest
 import os
 import sys

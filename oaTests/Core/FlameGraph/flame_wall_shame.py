@@ -1,4 +1,9 @@
-# oaTests/Core/FlameGraph/flame_wall_shame.py
+# FlameGraph/flame_wall_shame.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import html
 
 def generate_wall_of_shame(stats_list, ps):

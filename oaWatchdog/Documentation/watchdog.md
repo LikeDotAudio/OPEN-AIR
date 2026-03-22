@@ -11,7 +11,6 @@ This file implements a watchdog timer to detect if the main GUI thread has
 frozen.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 
 Version 20260125.WatchdogOverhaul.1
 

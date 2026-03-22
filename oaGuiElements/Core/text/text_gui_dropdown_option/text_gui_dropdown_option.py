@@ -1,6 +1,8 @@
 # text_gui_dropdown_option/text_gui_dropdown_option.py
-# Modularized dynamic Text Dropdown (Combobox).
-# Version 20260315.Modular.1
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized dynamic Text Dropdown (Combobox).
 
 import tkinter as tk
 from tkinter import ttk

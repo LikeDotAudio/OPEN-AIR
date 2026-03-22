@@ -1,4 +1,9 @@
-# entry.py
+# graphing/entry.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: entry.py
+
 from oaLogging.Core.logger import builder_logger
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 from .adapters.plot_adapter import PlotAdapter

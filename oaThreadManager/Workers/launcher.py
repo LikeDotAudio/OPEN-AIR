@@ -1,11 +1,8 @@
-# managers/launcher.py
-#
-# This file contains the function to launch and initialize all the application's managers.
-# REFACTORED for Partitioned Architecture (Core Only) and Modular Dependency Injection.
-#
+# Workers/launcher.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260318.Modular.2
+# Version: 20260318.Modular.2
+#
+# Description: This file contains the function to launch and initialize all the application's managers.
 
 import os
 import threading
@@ -79,7 +76,6 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
 
     aes70_manager = None
     # 📻🔌🛑 [DISABLED] AES70 Feature is currently suspended for re-architecture.
-    # if getattr(app_constants, "SCAN_AES70", False):
     #     aes70_manager = _load_protocol_manager(
     #         "oaComAES70.Entry", "AES70Manager",
     #         state_cache=state_cache_manager, run_bridge=True
@@ -87,7 +83,6 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
 
     osc_manager = None
     # 🅾️🔌🛑 [DISABLED] OSC Feature is currently suspended.
-    # if getattr(app_constants, "SCAN_OSC", False):
     #     osc_manager = _load_protocol_manager(
     #         "oaComOSC.Entry", "OSCManager",
     #         state_cache_manager=state_cache_manager, mqtt_connection_manager=mqtt_connection_manager, run_bridge=True

@@ -12,7 +12,6 @@ radio-style buttons in the GUI.
 Updated to support WYSIWYG resizing via the first button in the group.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260220.Modular.1
 
 ## ⚙️ Assumptions & Constraints

@@ -1,7 +1,8 @@
-# workers/logic/manifest/settle.py
+# manifest/settle.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Logic for managing the 'is_settled' flag and debounce logic.
-# Distinguishes between continuous motion and finalized values.
+# Description: Logic for managing the 'is_settled' flag and debounce logic.
 
 import threading
 from typing import Callable, Any

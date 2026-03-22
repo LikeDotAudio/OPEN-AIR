@@ -1,3 +1,9 @@
+# Core/visa_timeout_handler.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from loguru import logger
 
 def visa_timeout_handler(proxy_instance, command, exception):

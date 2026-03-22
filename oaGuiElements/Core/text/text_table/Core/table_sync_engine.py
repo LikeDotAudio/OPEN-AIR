@@ -1,3 +1,9 @@
+# Core/table_sync_engine.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import orjson
 import tkinter as tk
 from loguru import logger

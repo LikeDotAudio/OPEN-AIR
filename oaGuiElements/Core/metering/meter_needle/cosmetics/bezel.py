@@ -1,3 +1,9 @@
+# cosmetics/bezel.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 from oaGuiElements.Core.metering.meter_needle.cosmetics.geometry import BezelGeometry
 

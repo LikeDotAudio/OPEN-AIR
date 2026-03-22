@@ -1,3 +1,9 @@
+# Report_Builder/generate_html.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import os
 
 class HTMLGenerator:
@@ -80,6 +86,7 @@ class HTMLGenerator:
             <button class="tab-btn active" onclick="openTab(event, 'TestResults')">Test Results</button>
             <button class="tab-btn" onclick="openTab(event, 'AuditReports')">Audit Reports</button>
             <button class="tab-btn" onclick="openTab(event, 'ChangeLogs')">Change Logs</button>
+            <button class="tab-btn" onclick="openTab(event, 'BugLogs')">Bug Logs</button>
             <button class="tab-btn" onclick="openTab(event, 'ErrorLogs')">Error Logs</button>
             <button class="tab-btn" onclick="openTab(event, 'RunLogs')">Application Run Logs</button>
             <button class="tab-btn" onclick="openTab(event, 'FlameGraph')">Flame Graph</button>
@@ -127,6 +134,11 @@ class HTMLGenerator:
             {changelog_html}
         </div>
 
+        <!-- TAB 3.5: Bug Logs -->
+        <div id="BugLogs" class="tab-content">
+            {buglog_html}
+        </div>
+
         <!-- TAB 4: Error Logs -->
         <div id="ErrorLogs" class="tab-content">
             {error_html}
@@ -172,6 +184,7 @@ class HTMLGenerator:
             table_rows="".join(table_rows),
             audit_html=extra_tabs.get("audit", ""),
             changelog_html=extra_tabs.get("changelog", ""),
+            buglog_html=extra_tabs.get("buglog", ""),
             error_html=extra_tabs.get("error", ""),
             runlog_html=extra_tabs.get("runlog", ""),
             flamegraph_html=extra_tabs.get("flamegraph", "No FlameGraph data available.")

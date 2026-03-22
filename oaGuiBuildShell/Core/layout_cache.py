@@ -1,3 +1,9 @@
+# Core/layout_cache.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import pathlib
 import orjson
 from loguru import logger

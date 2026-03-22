@@ -1,4 +1,9 @@
-# workers/Splinker/handlers/deadband_handler.py
+# Methods/deadband_handler.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from .base_handler import BaseHandler
 
 class DeadbandHandler(BaseHandler):

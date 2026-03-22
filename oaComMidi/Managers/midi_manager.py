@@ -1,6 +1,8 @@
-# MIDI/midi_manager.py
-# Modularized MIDI Orchestrator.
-# Version 20260315.Modular.1
+# Managers/midi_manager.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized MIDI Orchestrator.
 
 import threading
 import time

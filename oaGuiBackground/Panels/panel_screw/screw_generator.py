@@ -1,3 +1,9 @@
+# panel_screw/screw_generator.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from PIL import Image, ImageDraw, ImageFilter, ImageChops, ImageOps
 import random
 import math

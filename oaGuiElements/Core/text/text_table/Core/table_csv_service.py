@@ -1,3 +1,9 @@
+# Core/table_csv_service.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import os
 import re
 from ..Table_CSV_Writer import TableCsvWriter

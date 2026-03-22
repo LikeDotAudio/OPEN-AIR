@@ -1,4 +1,9 @@
-# managers/Display/geometry_snitch/geometry_snitch.py
+# geometry_snitch/geometry_snitch.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import time
 import orjson
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic

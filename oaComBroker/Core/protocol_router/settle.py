@@ -1,9 +1,8 @@
-# workers/Command_Router/protocol_router/settle.py
+# protocol_router/settle.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Interaction Locking and Parameter Settling Logic.
-# 
-# Prevents feedback loops by rejecting self-reflections while a parameter
-# is actively being modified by a human or a high-frequency stream.
+# Description: Interaction Locking and Parameter Settling Logic.
 
 import threading
 import time

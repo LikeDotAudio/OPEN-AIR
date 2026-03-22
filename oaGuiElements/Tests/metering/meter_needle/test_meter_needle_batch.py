@@ -1,3 +1,9 @@
+# meter_needle/test_meter_needle_batch.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import unittest
 import json
 import os

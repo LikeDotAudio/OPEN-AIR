@@ -1,9 +1,8 @@
-# oaGuiDefinitions/right_50/bottom_90/4_Splinker/222_Editor/gui_splinker_editor.py
-#
-# Splinker UI for managing brokerage connections.
-#
+# 222_Editor/splinker_editor.py
 # Author: Anthony P. Kuzub(Splinker Protocol)
-# Version 20260311.Editor.1
+# Version: 20260311.Editor.1
+#
+# Description: Splinker UI for managing brokerage connections.
 
 import tkinter as tk
 from tkinter import ttk, messagebox

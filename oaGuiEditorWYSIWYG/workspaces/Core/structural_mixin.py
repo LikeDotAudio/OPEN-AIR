@@ -1,3 +1,9 @@
+# Core/structural_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from tkinter import messagebox
 from ...Core.state import state_manager
 

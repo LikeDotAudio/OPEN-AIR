@@ -1,6 +1,8 @@
 # fader_linear_travelling_potentiometer/fader_linear_travelling_potentiometer.py
-# Modularized Linear Travelling Potentiometer (LTP).
-# Version 20260315.Modular.1
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Linear Travelling Potentiometer (LTP).
 
 import tkinter as tk
 from tkinter import ttk

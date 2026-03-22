@@ -1,3 +1,9 @@
+# graphing/plot_widget_adapter.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from oaGuiElements.Core.graphing.graphing.dynamic_graph import FluxPlotter
 from oaGuiElements.Core.graphing.graphing.dynamic_bar_graph import DynamicBarGraph
 

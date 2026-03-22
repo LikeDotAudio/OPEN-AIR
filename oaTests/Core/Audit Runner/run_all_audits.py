@@ -1,3 +1,9 @@
+# Audit Runner/run_all_audits.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import os
 import subprocess
 import pathlib
@@ -62,10 +68,6 @@ def run_all_audits():
     # Ensure the output directory exists
     pathlib.Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
 
-    # Generate a timestamp for the log file
-    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    log_file_path = os.path.join(OUTPUT_DIR, f"AuditLog_{timestamp}.md")
-
     # Filter for Audit files, skipping AuditAll.toml
     audit_files = sorted([f for f in audit_path.glob("Audit*.toml") if f.name != "AuditAll.toml"])
     
@@ -73,25 +75,28 @@ def run_all_audits():
         print("No audit files found.")
         return
 
-    # Open the log file in append mode ('a')
-    with open(log_file_path, "a", encoding="utf-8") as f_out:
-        # Write a session header with the current timestamp
-        f_out.write(f"# Audit Session: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
-        f_out.write(f"**Model used:** {DEFAULT_MODEL}\n\n---\n\n")
+    session_results = []
+    session_timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    
+    for file_path in audit_files:
+        audit_name = file_path.stem # e.g., AuditArchitecture
+        audit_timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        individual_log_name = f"{audit_name}_{audit_timestamp}.md"
+        individual_log_path = os.path.join(OUTPUT_DIR, individual_log_name)
+        
+        print(f"🔍 Running: {file_path.name}...")
+        prompt_content = extract_prompt_from_toml(file_path)
+        
+        result_entry = ""
+        status = "UNKNOWN"
 
-        for file_path in audit_files:
-            print(f"🔍 Running: {file_path.name}...")
-            prompt_content = extract_prompt_from_toml(file_path)
-            
-            if not prompt_content:
-                print(f"⚠️  No prompt content found in {file_path.name}.")
-                f_out.write(f"## File: {file_path.name} (SKIPPED)\n\n")
-                f_out.write("No prompt content found in the TOML file.\n\n---\n\n")
-                continue
-                
+        if not prompt_content:
+            print(f"⚠️  No prompt content found in {file_path.name}.")
+            status = "SKIPPED"
+            result_entry = f"## File: {file_path.name} (SKIPPED)\n\nNo prompt content found in the TOML file.\n\n---\n\n"
+        else:
             try:
                 # Execute the command with npx gemini
-                # Pass the prompt content as input to the command
                 result = subprocess.run(
                     GEMINI_CMD_BASE,
                     input=prompt_content,
@@ -101,37 +106,53 @@ def run_all_audits():
                 )
                 
                 output_text = result.stdout.strip()
-                
-                # Log to the markdown file
-                f_out.write(f"## File: {file_path.name} (PASSED)\n\n")
-                f_out.write(f"{output_text}\n\n") # Model output is already markdown
-                f_out.write("---\n\n")
-                
+                status = "PASSED"
+                result_entry = f"## File: {file_path.name} (PASSED)\n\n{output_text}\n\n---\n\n"
                 print(f"✅ Success: {file_path.name} recorded.")
                 
             except subprocess.CalledProcessError as e:
                 error_detail = e.stderr.strip()
                 print(f"❌ Failed {file_path.name} (Exit Code {e.returncode})")
-                
-                # Log the error to the file
-                f_out.write(f"## File: {file_path.name} (FAILED)\n\n")
-                f_out.write(f"**Exit Code:** {e.returncode}\n\n")
-                f_out.write(f"**Error Details:**\n\n```text\n{error_detail}\n```\n\n")
+                status = "FAILED"
+                result_entry = f"## File: {file_path.name} (FAILED)\n\n"
+                result_entry += f"**Exit Code:** {e.returncode}\n\n"
+                result_entry += f"**Error Details:**\n\n```text\n{error_detail}\n```\n\n"
                 if e.stdout:
-                    f_out.write(f"**Partial Output:**\n\n{e.stdout.strip()}\n\n")
-                f_out.write("---\n\n")
+                    result_entry += f"**Partial Output:**\n\n{e.stdout.strip()}\n\n"
+                result_entry += "---\n\n"
 
             except FileNotFoundError:
-                print(f"❌ Error: Command '{GEMINI_CMD_BASE[0]}' not found. Ensure Node.js and npx are installed and in your PATH.")
-                f_out.write(f"## File: {file_path.name} (ERROR)\n\n")
-                f_out.write(f"**Error:** Command '{GEMINI_CMD_BASE[0]}' not found. Ensure Node.js and npx are installed and in your PATH.\n\n---\n\n")
-                break # Stop if the command itself isn't found
+                print(f"❌ Error: Command '{GEMINI_CMD_BASE[0]}' not found.")
+                status = "ERROR"
+                result_entry = f"## File: {file_path.name} (ERROR)\n\n"
+                result_entry += f"**Error:** Command '{GEMINI_CMD_BASE[0]}' not found.\n\n---\n\n"
             except Exception as e:
                 print(f"❌ Unexpected error on {file_path.name}: {e}")
-                f_out.write(f"## File: {file_path.name} (UNEXPECTED ERROR)\n\n")
-                f_out.write(f"**Error:** {e}\n\n---\n\n")
+                status = "UNEXPECTED ERROR"
+                result_entry = f"## File: {file_path.name} (UNEXPECTED ERROR)\n\n"
+                result_entry += f"**Error:** {e}\n\n---\n\n"
 
-    print(f"🏁 All audits completed. Results saved in {log_file_path}")
+        # Write individual audit file IMMEDIATELY
+        with open(individual_log_path, "w", encoding="utf-8") as f_ind:
+            f_ind.write(f"# Audit Result: {audit_name}\n")
+            f_ind.write(f"**Timestamp:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f_ind.write(f"**Model:** {DEFAULT_MODEL}\n\n")
+            f_ind.write(result_entry)
+        
+        session_results.append(result_entry)
+        
+        if status == "ERROR":
+            break # Stop if the command itself isn't found
+
+    # Create the combined session log at the END
+    session_log_path = os.path.join(OUTPUT_DIR, f"AuditSession_{session_timestamp}.md")
+    with open(session_log_path, "w", encoding="utf-8") as f_session:
+        f_session.write(f"# Audit Session: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+        f_session.write(f"**Model used:** {DEFAULT_MODEL}\n\n---\n\n")
+        for entry in session_results:
+            f_session.write(entry)
+
+    print(f"🏁 All audits completed. Session log saved in {session_log_path}")
 
 if __name__ == "__main__":
     run_all_audits()

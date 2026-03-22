@@ -1,6 +1,8 @@
-# oaGuiDefinitions/right_50/bottom_90/2_monitors/1588_PTP_Monitor/gui_ptp_monitor.py
-# Modularized PTP (Precision Time Protocol) Monitor GUI.
-# Version 20260315.Modular.1
+# 1588_PTP_Monitor/ptp_monitor.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized PTP (Precision Time Protocol) Monitor GUI.
 
 import tkinter as tk
 from tkinter import ttk

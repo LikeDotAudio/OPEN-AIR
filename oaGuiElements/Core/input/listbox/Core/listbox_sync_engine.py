@@ -1,3 +1,9 @@
+# Core/listbox_sync_engine.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 import time
 import orjson

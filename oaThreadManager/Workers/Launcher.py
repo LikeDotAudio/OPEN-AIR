@@ -1,34 +1,8 @@
-# workers/Launcher.py
-#
-# Primary Purpose:
-# Orchestrate the initialization, configuration, and execution of all background
-# worker processes for the OPEN-AIR application. This file acts as the central
-# authority for the worker lifecycle, ensuring that all necessary subsystems
-# are instantiated and operational before the main application loop takes over.
-#
-# Responsibilities:
-# - Manage the sequence of worker initialization to handle dependencies.
-# - Provide visual feedback to the user via the splash screen during startup.
-# - Handle and log errors that occur during the critical worker launch phase.
-# - Maintain a consistent execution environment for all background tasks.
-#
-# Constraints:
-# - Requires a valid 'config.ini' file to be present and readable.
-# - Execution assumes an active event loop for logging and UI updates.
-# - Assumes a thread-safe environment for initial worker instantiation.
-#
+# Workers/Launcher.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.1
 #
-# Professional services for customizing and tailoring this software to your
-# specific application can be negotiated. There is no charge to use, modify,
-# or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
+# Description: Orchestrate the initialization, configuration, and execution of all background worker processes for the OPEN-AIR application.
 
 import os
 import inspect
@@ -128,14 +102,6 @@ class WorkerLauncher:
             # The launch sequence is designed to be extensible. New workers
             # should be instantiated and registered here.
             
-            # --- Status updates handled by root.update() in main.py ---
-            # self.splash.set_status("Initializing workers...")
-
-            # Implementation Note:
-            # ActivePeakPublisher is the primary data distribution worker.
-            # Its initialization triggers the data ingestion pipeline.
-            
-            # self.splash.set_status("Active Peak Publisher initialized.")
             if LOCAL_DEBUG:
                 logger.debug("🟢️️️🔵 Worker 'ActivePeakPublisher' initialized. "
                              "The lab is buzzing with activity!")

@@ -1,3 +1,9 @@
+# 5_Verify_MIB/snmp_verify_mib.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 from tkinter import ttk, filedialog
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin

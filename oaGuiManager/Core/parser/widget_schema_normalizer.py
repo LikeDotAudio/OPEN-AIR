@@ -1,5 +1,8 @@
-# managers/Display/parser/widget_schema_normalizer.py
-# Semantic Schema Normalization for the OPEN-AIR Dynamic GUI.
+# parser/widget_schema_normalizer.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Semantic Schema Normalization for the OPEN-AIR Dynamic GUI.
 
 from .standardizers.widget_type_resolver import WidgetTypeResolver
 from oaGuiManager.Constants.schema_defaults import PILLARS, STRUCT_TYPES, DEFAULT_COLORS

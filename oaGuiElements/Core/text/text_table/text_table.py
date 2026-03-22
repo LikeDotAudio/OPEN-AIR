@@ -1,6 +1,8 @@
 # text_table/text_table.py
-# Modularized Editable Table Widget.
-# Version 20260315.Modular.1
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Editable Table Widget.
 
 import tkinter as tk
 from tkinter import ttk

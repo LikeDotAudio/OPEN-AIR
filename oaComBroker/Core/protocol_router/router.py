@@ -1,6 +1,8 @@
-# workers/Command_Router/protocol_router/router.py
+# protocol_router/router.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# The Orchestrator for the modular Protocol Router.
+# Description: The Orchestrator for the modular Protocol Router.
 
 import queue
 import threading
@@ -95,12 +97,22 @@ class ProtocolRouter:
         if self._running: return
         self._running = True
         threading.Thread(target=self._ingest_loop, daemon=True).start()
-        self._executor = concurrent.futures.ThreadPoolExecutor(
-            max_workers=self._dispatch_threads, 
-            thread_name_prefix="ProtocolDispatch"
-        )
-        for _ in range(self._dispatch_threads):
-            self._executor.submit(self._dispatch_loop)
+        
+        try:
+            self._executor = concurrent.futures.ThreadPoolExecutor(
+                max_workers=self._dispatch_threads, 
+                thread_name_prefix="ProtocolDispatch"
+            )
+            for _ in range(self._dispatch_threads):
+                self._executor.submit(self._dispatch_loop)
+        except RuntimeError as e:
+            if "atexit" in str(e):
+                router_logger.warning("⚠️ [ROUTER] ThreadPoolExecutor failed (atexit after shutdown). Falling back to single-threaded dispatch.")
+                # Fallback: manually start one dispatch thread without using a pool
+                t = threading.Thread(target=self._dispatch_loop, name="ProtocolDispatchFallback", daemon=True)
+                t.start()
+            else:
+                raise
         
         router_logger.success(f"▶️▶️▶️ [START] Protocol Router Active (GUID: {self.GUID}).")
 

@@ -11,7 +11,6 @@ A specialized knob for multi-position rotary switching.
 Supports Industrial Transparency and procedural rendering.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260223.Modernized.1
 
 ## ⚙️ Assumptions & Constraints

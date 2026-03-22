@@ -1,8 +1,8 @@
-# managers/Display/loader/gui_from_json.py
+# loader/gui_from_json.py
+# Author: Anthony Peter Kuzub
+# Version: 20260111.1510.1
 #
-# Universal GUI Loader - Host for Dynamic GUI components.
-#
-# Version 20260111.1510.1
+# Description: Universal GUI Loader - Host for Dynamic GUI components.
 
 import tkinter as tk
 from loguru import logger

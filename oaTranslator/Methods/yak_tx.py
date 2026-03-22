@@ -1,12 +1,8 @@
-# managers/yak/yak_tx.py
-#
-# This file (manager_yak_tx.py) is responsible for transmitting the final SCPI command to the device via the ScpiDispatcher.
-# A complete and comprehensive pre-amble that describes the file and the functions within.
-# The purpose is to provide clear documentation and versioning.
-#
+# Methods/yak_tx.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260218.1
+# Version: 20260218.1
+#
+# Description: This file (manager_yak_tx.py) is responsible for transmitting the final SCPI command to the device via the ScpiDispatcher.
 
 import os
 import inspect

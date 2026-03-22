@@ -1,3 +1,9 @@
+# standardizers/lexicon_expander.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 class LexiconExpander:
     """
     Maps Lexicon Abbreviations to engine-expected keys.

@@ -12,7 +12,6 @@ Serial, etc.)
 and list them for diagnostic purposes.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 
 Version 20251013.202759.4
 

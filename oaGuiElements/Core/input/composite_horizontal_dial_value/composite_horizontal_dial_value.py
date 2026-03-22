@@ -1,6 +1,8 @@
 # composite_horizontal_dial_value/composite_horizontal_dial_value.py
-# Modularized Composite Horizontal Fader & Dial.
-# Version 20260315.Modular.1
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Composite Horizontal Fader & Dial.
 
 import tkinter as tk
 from tkinter import ttk

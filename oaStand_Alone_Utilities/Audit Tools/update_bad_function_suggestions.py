@@ -1,3 +1,9 @@
+# Audit Tools/update_bad_function_suggestions.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import os
 import ast
 import re

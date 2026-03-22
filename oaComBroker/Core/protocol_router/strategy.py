@@ -1,7 +1,8 @@
-# workers/Command_Router/protocol_router/strategy.py
+# protocol_router/strategy.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Logic for calculating routing strategies and UI tags.
-# Decides where a message should go (e.g., MQTT, OSC, MIDI).
+# Description: Logic for calculating routing strategies and UI tags.
 
 from .constants import SINK_STRATEGIES, app_constants
 

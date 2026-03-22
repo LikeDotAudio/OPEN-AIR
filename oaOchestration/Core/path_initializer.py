@@ -1,11 +1,8 @@
-# setup/path_initializer.py
-#
-# This module initializes global project paths, including the project root and data directory, and adds them to the system path.
-# Optimized: Implements static path caching to eliminate redundant 'resolve()' and 'join()' calls.
-#
+# Core/path_initializer.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260222.Optimized.1
+# Version: 20260222.Optimized.1
+#
+# Description: This module initializes global project paths, including the project root and data directory, and adds them to the system path.
 
 import os
 import sys

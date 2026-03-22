@@ -1,3 +1,9 @@
+# Core/listbox_options.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import orjson
 from loguru import logger
 from oaComMQTT.Methods.mqtt_topic_utils import TOPIC_DELIMITER

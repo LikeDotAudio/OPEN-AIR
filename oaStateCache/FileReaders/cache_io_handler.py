@@ -1,18 +1,8 @@
-# State_Cache/cache_io_handler.py
-#
-# Handles all disk I/O operations for the application's state cache, including loading and atomic saving of snapshots.
-#
+# FileReaders/cache_io_handler.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
+# Description: State_Cache/cache_io_handler.py
 
 import os
 import orjson
@@ -106,7 +96,6 @@ def save_cache(data: Dict[str, Any]) -> bool:
             temp_path = temp_f.name
 
         os.rename(temp_path, app_constants.DEVICE_STATE_CACHE_PATH)
-        # if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
         #     logger.success("💾✅ Cache saved.")
         return True
     except Exception as e:

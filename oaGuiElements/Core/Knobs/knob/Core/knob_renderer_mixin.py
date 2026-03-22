@@ -1,3 +1,9 @@
+# Core/knob_renderer_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 import math
 from .knob_renderer import draw_knob_visuals
@@ -16,7 +22,7 @@ class KnobRendererMixin:
         draw_knob_visuals(
             canvas=self,
             state=self.state,
-            config=self.config,
+            config=self.widget_config,
             value=self.variable.get(),
             label_text=getattr(self, 'label_text', None)
         )

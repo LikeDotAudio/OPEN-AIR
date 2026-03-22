@@ -1,3 +1,9 @@
+# Tests/test_mqtt_subscriber_router.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import unittest
 from unittest.mock import MagicMock
 from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter

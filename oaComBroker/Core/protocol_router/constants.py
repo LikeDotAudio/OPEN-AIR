@@ -1,6 +1,8 @@
-# workers/Command_Router/protocol_router/constants.py
+# protocol_router/constants.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Shared constants and emoji-based routing definitions for the Protocol Router.
+# Description: Shared constants and emoji-based routing definitions for the Protocol Router.
 
 from oaConfiguration.FileReaders.config_reader import Config
 

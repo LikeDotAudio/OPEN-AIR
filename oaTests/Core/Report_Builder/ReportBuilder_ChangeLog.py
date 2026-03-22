@@ -1,3 +1,9 @@
+# Report_Builder/ReportBuilder_ChangeLog.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import os
 
 def build_tab(data_dir):

@@ -1,10 +1,8 @@
-# text_label_from_config/dynamic_guimake_text_label_from_config.py
-#
-# A mixin class for the DynamicGuiBuilder that handles creating a label from a config dictionary.
-#
+# text_label_from_config/text_label_from_config.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260221.Proxy.1
+# Version: 20260221.Proxy.1
+#
+# Description: A mixin class for the DynamicGuiBuilder that handles creating a label from a config dictionary.
 
 import os
 import inspect

@@ -1,18 +1,9 @@
 # text_table/table_editing_inplace_mixin.py
-#
-# A mixin for in-place editing of cells within a Tkinter Treeview widget.
-#
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
+# Description: text_table/table_editing_inplace_mixin.py
+
 import tkinter as tk
 from tkinter import ttk
 import orjson
@@ -64,7 +55,6 @@ class TableEditingInplaceMixin:
 
     # Starts an in-place editing session for a specified cell.
     # This method creates and places an Entry widget over the target cell, pre-populates it
-    # with the cell's current value, and binds events for committing or canceling the edit.
     # Inputs:
     #     row_id: The ID of the Treeview row to edit.
     #     col: The identifier of the Treeview column to edit.

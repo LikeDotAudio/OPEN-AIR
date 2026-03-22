@@ -1,3 +1,9 @@
+# Core/mdp_ltp_component.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 import math
 from .mdp_math import MDPMath

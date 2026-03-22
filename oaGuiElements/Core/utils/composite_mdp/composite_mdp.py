@@ -1,6 +1,8 @@
 # composite_mdp/composite_mdp.py
-# Modularized Motion Draggable Potentiometer (MDP).
-# Version 20260315.Modular.1
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Motion Draggable Potentiometer (MDP).
 
 import tkinter as tk
 from loguru import logger

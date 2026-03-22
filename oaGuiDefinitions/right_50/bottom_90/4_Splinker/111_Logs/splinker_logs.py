@@ -1,9 +1,8 @@
-# oaGuiDefinitions/right_50/bottom_90/4_Splinker/111_Logs/gui_splinker_logs.py
-#
-# Log viewer for Splinker activity.
-#
+# 111_Logs/splinker_logs.py
 # Author: Anthony P. Kuzub(Splinker Protocol)
-# Version 20260311.Logs.1
+# Version: 20260311.Logs.1
+#
+# Description: Log viewer for Splinker activity.
 
 import tkinter as tk
 from tkinter import ttk

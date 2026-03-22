@@ -1,6 +1,8 @@
-# core/gui_widget_factory.py
-# Modularized GUI Widget Factory.
-# Version 20260315.Modular.1
+# factory/gui_widget_factory.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized GUI Widget Factory.
 
 import importlib
 from loguru import logger
@@ -42,5 +44,7 @@ class GuiWidgetFactoryMixin:
         def wrapper(parent_widget, config_data, context: WidgetContext = None, **kwargs):
             module = importlib.import_module(module_path)
             method = getattr(getattr(module, class_name), method_name)
+            # Ensure context isn't passed twice if it's already in kwargs
+            kwargs.pop("context", None)
             return method(self, parent_widget, config_data, context=context, **kwargs)
         return wrapper

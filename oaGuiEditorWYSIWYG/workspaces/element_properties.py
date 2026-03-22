@@ -1,6 +1,8 @@
-# workers/wysiwyg_editor/workspaces/element_properties.py
-# Modularized Element Properties Workspace.
-# Version 20260315.Modular.1
+# workspaces/element_properties.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Element Properties Workspace.
 
 import tkinter as tk
 from tkinter import ttk, messagebox

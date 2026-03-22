@@ -1,18 +1,8 @@
-# A plug-and-play GUI wrapper that dynamically resolves its config.
-# Decoupled from MQTT requirements for initial render to prevent stalling.
-# Includes robust error handling, forced rendering, and graceful failure modes.
-#
+# 2_Graphing_2/Graphing_Cont.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20251229.1715.2
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20251229.1715.2
+# Description: A plug-and-play GUI wrapper that dynamically resolves its config.
 
 import os
 import pathlib

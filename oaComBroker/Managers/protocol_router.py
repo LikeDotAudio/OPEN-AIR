@@ -1,11 +1,8 @@
-# workers/Command_Router/protocol_router.py
+# Managers/protocol_router.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# BACKWARD COMPATIBILITY PROXY
-# This file is preserved to support existing imports while the core logic
-# has been moved to the modular 'protocol_router' package.
-#
-# Original Author: Anthony Peter Kuzub
-# Modularized: Saturday, March 14, 2026
+# Description: BACKWARD COMPATIBILITY PROXY
 
 from ..Core.protocol_router.router import ProtocolRouter
 

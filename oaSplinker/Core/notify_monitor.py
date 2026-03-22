@@ -1,3 +1,9 @@
+# Core/notify_monitor.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from ..Constants.constants import splinker_logger
 
 def notify_monitor(self, msg_type, data):

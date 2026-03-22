@@ -1,3 +1,9 @@
+# Core/config_builder.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 """
 config_builder.py - Default Configuration Generator for OPEN-AIR.
 

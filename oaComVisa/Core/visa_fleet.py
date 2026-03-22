@@ -1,6 +1,8 @@
-# managers/Visa_Fleet/visa_fleet.py
-# Modularized VISA Fleet Manager.
-# Version 20260315.Modular.1
+# Core/visa_fleet.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized VISA Fleet Manager.
 
 import threading
 from loguru import logger

@@ -1,6 +1,8 @@
-# configini/config_reader.py
-# Modularized Configuration Manager.
-# Version 20260316.1
+# FileReaders/config_reader.py
+# Author: Anthony Peter Kuzub
+# Version: 20260316.1
+#
+# Description: Modularized Configuration Manager.
 
 import threading
 from loguru import logger

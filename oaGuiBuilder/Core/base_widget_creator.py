@@ -1,4 +1,9 @@
-# workers/builder/core/base_widget_creator.py
+# Core/base_widget_creator.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 from loguru import logger
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin

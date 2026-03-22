@@ -1,4 +1,8 @@
-# workers/Splinker/handlers/base_handler.py
+# Methods/base_handler.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
 
 class BaseHandler:
     def __init__(self, params):

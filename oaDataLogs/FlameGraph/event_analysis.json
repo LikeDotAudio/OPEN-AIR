@@ -1,0 +1,6158 @@
+[
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 323,
+        "funcname": "wait",
+        "ncalls": 38,
+        "tottime": 0.041825445,
+        "cumtime": 3.0110607930000004,
+        "per_call": 0.001100669605263158,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/queue.py",
+        "lineno": 154,
+        "funcname": "get",
+        "ncalls": 56,
+        "tottime": 0.064709126,
+        "cumtime": 2.7113383150000003,
+        "per_call": 0.0011555201071428572,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/OpenAir.py",
+        "lineno": 53,
+        "funcname": "main",
+        "ncalls": 2,
+        "tottime": 1.3615000000000001e-05,
+        "cumtime": 0.093245058,
+        "per_call": 6.8075000000000005e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/OpenAir.py",
+        "lineno": 93,
+        "funcname": "log",
+        "ncalls": 8,
+        "tottime": 1.7164e-05,
+        "cumtime": 0.035055406000000004,
+        "per_call": 2.1455e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.print> (via log)",
+        "ncalls": 8,
+        "tottime": 3.1684000000000004e-05,
+        "cumtime": 0.03419135,
+        "per_call": 3.9605000000000005e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_logger.py",
+        "lineno": 237,
+        "funcname": "add",
+        "ncalls": 3,
+        "tottime": 5.2317e-05,
+        "cumtime": 0.010662863,
+        "per_call": 1.7439e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_better_exceptions.py",
+        "lineno": 136,
+        "funcname": "__init__",
+        "ncalls": 3,
+        "tottime": 1.1380000000000001e-05,
+        "cumtime": 0.010183778000000001,
+        "per_call": 3.7933333333333336e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_better_exceptions.py",
+        "lineno": 162,
+        "funcname": "_get_lib_dirs",
+        "ncalls": 3,
+        "tottime": 4.9001e-05,
+        "cumtime": 0.010160384000000001,
+        "per_call": 1.6333666666666666e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/sysconfig.py",
+        "lineno": 667,
+        "funcname": "get_path",
+        "ncalls": 132,
+        "tottime": 3.7468e-05,
+        "cumtime": 0.010076611000000001,
+        "per_call": 2.8384848484848486e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/sysconfig.py",
+        "lineno": 655,
+        "funcname": "get_paths",
+        "ncalls": 132,
+        "tottime": 0.000152442,
+        "cumtime": 0.010039143,
+        "per_call": 1.1548636363636363e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/sysconfig.py",
+        "lineno": 290,
+        "funcname": "_expand_vars",
+        "ncalls": 132,
+        "tottime": 0.0006405580000000001,
+        "cumtime": 0.009886701000000001,
+        "per_call": 4.852712121212122e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/sysconfig.py",
+        "lineno": 282,
+        "funcname": "_extend_dict",
+        "ncalls": 132,
+        "tottime": 0.005526667000000001,
+        "cumtime": 0.0055549200000000005,
+        "per_call": 4.18686893939394e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_logger.py",
+        "lineno": 2042,
+        "funcname": "info",
+        "ncalls": 3,
+        "tottime": 1.3023e-05,
+        "cumtime": 0.003243053,
+        "per_call": 4.3410000000000005e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 911,
+        "funcname": "_load_unlocked",
+        "ncalls": 10,
+        "tottime": 2.2245e-05,
+        "cumtime": 0.003210362,
+        "per_call": 2.2245e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 480,
+        "funcname": "_call_with_frames_removed",
+        "ncalls": 37,
+        "tottime": 1.3736e-05,
+        "cumtime": 0.0030837660000000004,
+        "per_call": 3.7124324324324324e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 1349,
+        "funcname": "_find_and_load",
+        "ncalls": 12,
+        "tottime": 3.5768e-05,
+        "cumtime": 0.003052416,
+        "per_call": 2.9806666666666667e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaLogging/Core/logger.py",
+        "lineno": 245,
+        "funcname": "set_log_directory",
+        "ncalls": 2,
+        "tottime": 1.593e-05,
+        "cumtime": 0.0030229310000000004,
+        "per_call": 7.965e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaLogging/Core/logger.py",
+        "lineno": 155,
+        "funcname": "initialize_logging",
+        "ncalls": 2,
+        "tottime": 3.1076e-05,
+        "cumtime": 0.0030091650000000003,
+        "per_call": 1.5538e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 1304,
+        "funcname": "_find_and_load_unlocked",
+        "ncalls": 11,
+        "tottime": 2.2610000000000002e-05,
+        "cumtime": 0.0030085140000000003,
+        "per_call": 2.0554545454545456e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 989,
+        "funcname": "exec_module",
+        "ncalls": 10,
+        "tottime": 1.9332e-05,
+        "cumtime": 0.002595111,
+        "per_call": 1.9332e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/sysconfig.py",
+        "lineno": 273,
+        "funcname": "_subst_vars",
+        "ncalls": 1020,
+        "tottime": 0.002056505,
+        "cumtime": 0.002354273,
+        "per_call": 2.0161813725490197e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1062,
+        "funcname": "get_code",
+        "ncalls": 10,
+        "tottime": 3.8811000000000005e-05,
+        "cumtime": 0.002001321,
+        "per_call": 3.881100000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.exec> (via _call_with_frames_removed)",
+        "ncalls": 10,
+        "tottime": 1.1102000000000001e-05,
+        "cumtime": 0.001752527,
+        "per_call": 1.1102000000000002e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaWatchdog/Managers/watchdog.py",
+        "lineno": 1,
+        "funcname": "<module>",
+        "ncalls": 1,
+        "tottime": 6.651e-06,
+        "cumtime": 0.001666916,
+        "per_call": 6.651e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1054,
+        "funcname": "source_to_code",
+        "ncalls": 10,
+        "tottime": 5.22e-06,
+        "cumtime": 0.0016522000000000002,
+        "per_call": 5.22e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.compile> (via _call_with_frames_removed)",
+        "ncalls": 10,
+        "tottime": 0.0016431310000000001,
+        "cumtime": 0.0016431310000000001,
+        "per_call": 0.0001643131,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_logger.py",
+        "lineno": 1906,
+        "funcname": "_log",
+        "ncalls": 11,
+        "tottime": 0.000151712,
+        "cumtime": 0.001164578,
+        "per_call": 1.3792e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.__import__> (via _call_with_frames_removed)",
+        "ncalls": 6,
+        "tottime": 4.498e-06,
+        "cumtime": 0.0010569350000000002,
+        "per_call": 7.496666666666667e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_io.py",
+        "lineno": 30,
+        "funcname": "write",
+        "ncalls": 27,
+        "tottime": 6.6561e-05,
+        "cumtime": 0.0009943970000000002,
+        "per_call": 2.465222222222222e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_net_command.py",
+        "lineno": 107,
+        "funcname": "send",
+        "ncalls": 31,
+        "tottime": 0.000144338,
+        "cumtime": 0.0008611500000000001,
+        "per_call": 4.6560645161290326e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/subprocess.py",
+        "lineno": 807,
+        "funcname": "__init__",
+        "ncalls": 2,
+        "tottime": 1.9166000000000003e-05,
+        "cumtime": 0.0008478050000000001,
+        "per_call": 9.583000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_logger.py",
+        "lineno": 2038,
+        "funcname": "debug",
+        "ncalls": 8,
+        "tottime": 5.778e-06,
+        "cumtime": 0.000845949,
+        "per_call": 7.2225e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/subprocess.py",
+        "lineno": 1791,
+        "funcname": "_execute_child",
+        "ncalls": 2,
+        "tottime": 2.0948e-05,
+        "cumtime": 0.000817538,
+        "per_call": 1.0474e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_handler.py",
+        "lineno": 127,
+        "funcname": "emit",
+        "ncalls": 29,
+        "tottime": 8.2323e-05,
+        "cumtime": 0.0007051630000000001,
+        "per_call": 2.8387241379310347e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen posixpath>",
+        "lineno": 405,
+        "funcname": "normpath",
+        "ncalls": 1033,
+        "tottime": 0.00037214800000000004,
+        "cumtime": 0.000699856,
+        "per_call": 3.6025943852855766e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_io.py",
+        "lineno": 96,
+        "funcname": "write",
+        "ncalls": 27,
+        "tottime": 4.4015000000000005e-05,
+        "cumtime": 0.000632863,
+        "per_call": 1.6301851851851853e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen posixpath>",
+        "lineno": 256,
+        "funcname": "expanduser",
+        "ncalls": 1020,
+        "tottime": 0.000354855,
+        "cumtime": 0.000621883,
+        "per_call": 3.4789705882352943e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 1240,
+        "funcname": "_find_spec",
+        "ncalls": 11,
+        "tottime": 3.6509e-05,
+        "cumtime": 0.0006042710000000001,
+        "per_call": 3.319e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaLogging/Core/logger.py",
+        "lineno": 1,
+        "funcname": "<module>",
+        "ncalls": 1,
+        "tottime": 1.1210000000000001e-05,
+        "cumtime": 0.000567511,
+        "per_call": 1.1210000000000001e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py",
+        "lineno": 1768,
+        "funcname": "process_internal_commands",
+        "ncalls": 8,
+        "tottime": 0.00017924800000000002,
+        "cumtime": 0.000527035,
+        "per_call": 2.2406000000000002e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1520,
+        "funcname": "find_spec",
+        "ncalls": 11,
+        "tottime": 8.818000000000001e-06,
+        "cumtime": 0.0005102230000000001,
+        "per_call": 8.016363636363637e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1491,
+        "funcname": "_get_spec",
+        "ncalls": 11,
+        "tottime": 1.6867e-05,
+        "cumtime": 0.0004934200000000001,
+        "per_call": 1.5333636363636363e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1207,
+        "funcname": "_cache_bytecode",
+        "ncalls": 10,
+        "tottime": 8.363000000000001e-06,
+        "cumtime": 0.00047772200000000003,
+        "per_call": 8.363000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_net_command_factory_json.py",
+        "lineno": 353,
+        "funcname": "make_io_message",
+        "ncalls": 27,
+        "tottime": 6.714500000000001e-05,
+        "cumtime": 0.000445289,
+        "per_call": 2.4868518518518524e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1212,
+        "funcname": "set_data",
+        "ncalls": 10,
+        "tottime": 3.0229e-05,
+        "cumtime": 0.00043458300000000005,
+        "per_call": 3.0229000000000003e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_net_command.py",
+        "lineno": 58,
+        "funcname": "__init__",
+        "ncalls": 30,
+        "tottime": 0.00010359300000000001,
+        "cumtime": 0.00042629500000000004,
+        "per_call": 3.4531000000000004e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_simple_sinks.py",
+        "lineno": 15,
+        "funcname": "write",
+        "ncalls": 20,
+        "tottime": 1.7691e-05,
+        "cumtime": 0.00039296400000000004,
+        "per_call": 8.845500000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1593,
+        "funcname": "find_spec",
+        "ncalls": 19,
+        "tottime": 9.6383e-05,
+        "cumtime": 0.000390911,
+        "per_call": 5.0727894736842105e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py",
+        "lineno": 867,
+        "funcname": "new_fork_exec",
+        "ncalls": 2,
+        "tottime": 7.0275e-05,
+        "cumtime": 0.000304169,
+        "per_call": 3.51375e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'format' of 'str' objects> (via find_spec, _subst_vars)",
+        "ncalls": 1025,
+        "tottime": 0.000301153,
+        "cumtime": 0.000301153,
+        "per_call": 2.938078048780488e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.isinstance> (via fsencode, splitroot)",
+        "ncalls": 2966,
+        "tottime": 0.00025399900000000003,
+        "cumtime": 0.00027011,
+        "per_call": 8.56368846931895e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen genericpath>",
+        "lineno": 16,
+        "funcname": "exists",
+        "ncalls": 4,
+        "tottime": 5.7000000000000005e-06,
+        "cumtime": 0.000239919,
+        "per_call": 1.4250000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'sendall' of '_socket.socket' objects> (via send, get_data)",
+        "ncalls": 62,
+        "tottime": 0.000239878,
+        "cumtime": 0.000239878,
+        "per_call": 3.8690000000000006e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 195,
+        "funcname": "_write_atomic",
+        "ncalls": 10,
+        "tottime": 3.4994000000000004e-05,
+        "cumtime": 0.000236302,
+        "per_call": 3.4994000000000003e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/json/__init__.py",
+        "lineno": 183,
+        "funcname": "dumps",
+        "ncalls": 30,
+        "tottime": 1.5869e-05,
+        "cumtime": 0.000200532,
+        "per_call": 5.289666666666666e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py",
+        "lineno": 1622,
+        "funcname": "check_output_redirect",
+        "ncalls": 16,
+        "tottime": 2.0998e-05,
+        "cumtime": 0.000187948,
+        "per_call": 1.312375e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/json/encoder.py",
+        "lineno": 183,
+        "funcname": "encode",
+        "ncalls": 30,
+        "tottime": 3.8236000000000005e-05,
+        "cumtime": 0.000184663,
+        "per_call": 1.2745333333333334e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 140,
+        "funcname": "_path_stat",
+        "ncalls": 96,
+        "tottime": 2.8169e-05,
+        "cumtime": 0.00018063,
+        "per_call": 2.9342708333333336e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_process_net_command_json.py",
+        "lineno": 150,
+        "funcname": "process_net_command_json",
+        "ncalls": 1,
+        "tottime": 1.0700000000000001e-05,
+        "cumtime": 0.00017713100000000002,
+        "per_call": 1.0700000000000001e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix._path_normpath> (via normpath)",
+        "ncalls": 1033,
+        "tottime": 0.00017546300000000002,
+        "cumtime": 0.00017546300000000002,
+        "per_call": 1.6985769603097776e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1183,
+        "funcname": "get_data",
+        "ncalls": 20,
+        "tottime": 2.9656000000000002e-05,
+        "cumtime": 0.00017524,
+        "per_call": 1.4828e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen os>",
+        "lineno": 812,
+        "funcname": "fsencode",
+        "ncalls": 414,
+        "tottime": 0.000101997,
+        "cumtime": 0.00017478600000000002,
+        "per_call": 2.4636956521739134e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_colorizer.py",
+        "lineno": 355,
+        "funcname": "prepare_format",
+        "ncalls": 3,
+        "tottime": 5.5880000000000005e-06,
+        "cumtime": 0.000173053,
+        "per_call": 1.8626666666666668e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_colorizer.py",
+        "lineno": 435,
+        "funcname": "_parse_without_formatting",
+        "ncalls": 24,
+        "tottime": 7.175000000000001e-05,
+        "cumtime": 0.00016702400000000002,
+        "per_call": 2.989583333333334e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.fspath> (via realpath, dirname)",
+        "ncalls": 2571,
+        "tottime": 0.000148865,
+        "cumtime": 0.00016690000000000002,
+        "per_call": 5.7901594710229484e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py",
+        "lineno": 314,
+        "funcname": "can_exit",
+        "ncalls": 8,
+        "tottime": 2.9309000000000003e-05,
+        "cumtime": 0.000163465,
+        "per_call": 3.6636250000000004e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.stat> (via exists, stat)",
+        "ncalls": 103,
+        "tottime": 0.000155899,
+        "cumtime": 0.000162601,
+        "per_call": 1.5135825242718448e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen os>",
+        "lineno": 719,
+        "funcname": "copy",
+        "ncalls": 1,
+        "tottime": 2.4882e-05,
+        "cumtime": 0.00016031900000000002,
+        "per_call": 2.4882e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_comm.py",
+        "lineno": 377,
+        "funcname": "add_command",
+        "ncalls": 32,
+        "tottime": 2.1518000000000003e-05,
+        "cumtime": 0.00015907100000000002,
+        "per_call": 6.724375000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_colorama.py",
+        "lineno": 5,
+        "funcname": "should_colorize",
+        "ncalls": 3,
+        "tottime": 7.833000000000001e-06,
+        "cumtime": 0.000144489,
+        "per_call": 2.6110000000000005e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'startswith' of 'str' objects> (via get_internal_queue_and_event, _fill_cache)",
+        "ncalls": 1096,
+        "tottime": 0.000141407,
+        "cumtime": 0.000141407,
+        "per_call": 1.2902098540145984e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_io.py",
+        "lineno": 204,
+        "funcname": "redirect_stream_to_pydb_io_messages",
+        "ncalls": 32,
+        "tottime": 6.3315e-05,
+        "cumtime": 0.000139903,
+        "per_call": 1.97859375e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py",
+        "lineno": 1712,
+        "funcname": "notify_thread_created",
+        "ncalls": 29,
+        "tottime": 6.4752e-05,
+        "cumtime": 0.00013943,
+        "per_call": 2.2328275862068966e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_datetime.py",
+        "lineno": 88,
+        "funcname": "aware_now",
+        "ncalls": 11,
+        "tottime": 6.2921e-05,
+        "cumtime": 0.00013874000000000002,
+        "per_call": 5.720090909090909e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_daemon_thread.py",
+        "lineno": 108,
+        "funcname": "new_threading_enumerate",
+        "ncalls": 17,
+        "tottime": 9.130000000000001e-05,
+        "cumtime": 0.00013845600000000002,
+        "per_call": 5.370588235294118e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/queue.py",
+        "lineno": 122,
+        "funcname": "put",
+        "ncalls": 32,
+        "tottime": 4.7654e-05,
+        "cumtime": 0.000137553,
+        "per_call": 1.4891875e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'format_map' of 'str' objects> (via emit)",
+        "ncalls": 20,
+        "tottime": 5.7371000000000003e-05,
+        "cumtime": 0.000136451,
+        "per_call": 2.8685500000000003e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/json/encoder.py",
+        "lineno": 205,
+        "funcname": "iterencode",
+        "ncalls": 30,
+        "tottime": 0.000130417,
+        "cumtime": 0.000130417,
+        "per_call": 4.347233333333333e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaTests/Core/FlameGraph/flame_manager.py",
+        "lineno": 53,
+        "funcname": "stop_profiling",
+        "ncalls": 1,
+        "tottime": 3.086e-06,
+        "cumtime": 0.000129442,
+        "per_call": 3.086e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/subprocess.py",
+        "lineno": 1233,
+        "funcname": "poll",
+        "ncalls": 12,
+        "tottime": 1.2462e-05,
+        "cumtime": 0.00012347,
+        "per_call": 1.0385e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py",
+        "lineno": 2857,
+        "funcname": "_init_stdout_redirect",
+        "ncalls": 16,
+        "tottime": 1.8964e-05,
+        "cumtime": 0.000122878,
+        "per_call": 1.18525e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/subprocess.py",
+        "lineno": 1973,
+        "funcname": "_internal_poll",
+        "ncalls": 14,
+        "tottime": 3.3042e-05,
+        "cumtime": 0.00011126900000000001,
+        "per_call": 2.360142857142857e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.getattr> (via _get_apply_arg_patching, redirect_stream_to_pydb_io_messages)",
+        "ncalls": 351,
+        "tottime": 0.000107318,
+        "cumtime": 0.00011031200000000001,
+        "per_call": 3.057492877492878e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 806,
+        "funcname": "module_from_spec",
+        "ncalls": 10,
+        "tottime": 9.932e-06,
+        "cumtime": 0.000110308,
+        "per_call": 9.932e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_process_net_command_json.py",
+        "lineno": 295,
+        "funcname": "on_threads_request",
+        "ncalls": 1,
+        "tottime": 2.435e-06,
+        "cumtime": 0.000109054,
+        "per_call": 2.435e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_api.py",
+        "lineno": 173,
+        "funcname": "list_threads",
+        "ncalls": 1,
+        "tottime": 3.526e-06,
+        "cumtime": 0.000106619,
+        "per_call": 3.526e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py",
+        "lineno": 1469,
+        "funcname": "has_user_threads_alive",
+        "ncalls": 8,
+        "tottime": 2.8885000000000002e-05,
+        "cumtime": 0.00010446600000000001,
+        "per_call": 3.6106250000000003e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 150,
+        "funcname": "_path_is_mode_type",
+        "ncalls": 51,
+        "tottime": 2.9693000000000002e-05,
+        "cumtime": 0.00010358800000000001,
+        "per_call": 5.822156862745099e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_net_command_factory_json.py",
+        "lineno": 167,
+        "funcname": "make_list_threads_message",
+        "ncalls": 1,
+        "tottime": 2.9479e-05,
+        "cumtime": 0.00010309300000000001,
+        "per_call": 2.9479e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py",
+        "lineno": 1203,
+        "funcname": "pydev_start_new_thread",
+        "ncalls": 2,
+        "tottime": 3.486e-06,
+        "cumtime": 0.000100668,
+        "per_call": 1.743e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py",
+        "lineno": 366,
+        "funcname": "patch_args",
+        "ncalls": 2,
+        "tottime": 2.4492000000000002e-05,
+        "cumtime": 0.000100327,
+        "per_call": 1.2246000000000001e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 416,
+        "funcname": "__enter__",
+        "ncalls": 11,
+        "tottime": 6.289e-06,
+        "cumtime": 9.917500000000001e-05,
+        "per_call": 5.717272727272728e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _thread.start_new_thread> (via pydev_start_new_thread)",
+        "ncalls": 2,
+        "tottime": 9.685100000000001e-05,
+        "cumtime": 9.685100000000001e-05,
+        "per_call": 4.8425500000000006e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1469,
+        "funcname": "_path_importer_cache",
+        "ncalls": 20,
+        "tottime": 8.311e-06,
+        "cumtime": 9.684400000000001e-05,
+        "per_call": 4.1555000000000004e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.mkdir> (via set_data, makedirs)",
+        "ncalls": 9,
+        "tottime": 9.5771e-05,
+        "cumtime": 9.5771e-05,
+        "per_call": 1.0641222222222222e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 764,
+        "funcname": "_code_to_timestamp_pyc",
+        "ncalls": 10,
+        "tottime": 1.7060000000000003e-05,
+        "cumtime": 9.487800000000001e-05,
+        "per_call": 1.7060000000000003e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 733,
+        "funcname": "_init_module_attrs",
+        "ncalls": 10,
+        "tottime": 1.8339000000000002e-05,
+        "cumtime": 9.381500000000001e-05,
+        "per_call": 1.8339000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1456,
+        "funcname": "_path_hooks",
+        "ncalls": 6,
+        "tottime": 1.7359e-05,
+        "cumtime": 8.8533e-05,
+        "per_call": 2.8931666666666667e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 126,
+        "funcname": "_path_join",
+        "ncalls": 118,
+        "tottime": 5.5901000000000006e-05,
+        "cumtime": 8.636e-05,
+        "per_call": 4.7373728813559326e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaLogging/Core/logger.py",
+        "lineno": 51,
+        "funcname": "__init__",
+        "ncalls": 4,
+        "tottime": 1.1712e-05,
+        "cumtime": 8.563e-05,
+        "per_call": 2.928e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen os>",
+        "lineno": 680,
+        "funcname": "__getitem__",
+        "ncalls": 101,
+        "tottime": 2.8804e-05,
+        "cumtime": 8.533000000000001e-05,
+        "per_call": 2.851881188118812e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'write' of '_io.TextIOWrapper' objects> (via write)",
+        "ncalls": 27,
+        "tottime": 8.458e-05,
+        "cumtime": 8.458e-05,
+        "per_call": 3.132592592592593e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 973,
+        "funcname": "start",
+        "ncalls": 4,
+        "tottime": 1.542e-05,
+        "cumtime": 8.422800000000001e-05,
+        "per_call": 3.855e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 482,
+        "funcname": "cache_from_source",
+        "ncalls": 20,
+        "tottime": 2.7154e-05,
+        "cumtime": 8.262800000000001e-05,
+        "per_call": 1.3577000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaLogging/Core/logger.py",
+        "lineno": 130,
+        "funcname": "ptp_patcher",
+        "ncalls": 9,
+        "tottime": 3.4376000000000004e-05,
+        "cumtime": 8.2614e-05,
+        "per_call": 3.819555555555556e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_utils.py",
+        "lineno": 139,
+        "funcname": "get_non_pydevd_threads",
+        "ncalls": 9,
+        "tottime": 1.8879e-05,
+        "cumtime": 8.237500000000001e-05,
+        "per_call": 2.097666666666667e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 394,
+        "funcname": "notify",
+        "ncalls": 67,
+        "tottime": 2.9932e-05,
+        "cumtime": 8.097700000000001e-05,
+        "per_call": 4.467462686567164e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/OpenAir.py",
+        "lineno": 1,
+        "funcname": "<module>",
+        "ncalls": 1,
+        "tottime": 1.038e-05,
+        "cumtime": 8.0701e-05,
+        "per_call": 1.038e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 311,
+        "funcname": "_acquire_restore",
+        "ncalls": 37,
+        "tottime": 4.3228e-05,
+        "cumtime": 7.8044e-05,
+        "per_call": 1.1683243243243243e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1644,
+        "funcname": "_fill_cache",
+        "ncalls": 7,
+        "tottime": 1.4669000000000001e-05,
+        "cumtime": 7.6563e-05,
+        "per_call": 2.0955714285714288e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 302,
+        "funcname": "__exit__",
+        "ncalls": 115,
+        "tottime": 5.8688000000000005e-05,
+        "cumtime": 7.584200000000001e-05,
+        "per_call": 5.103304347826088e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _io.open_code> (via get_data)",
+        "ncalls": 20,
+        "tottime": 7.4131e-05,
+        "cumtime": 7.4131e-05,
+        "per_call": 3.70655e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_colorizer.py",
+        "lineno": 216,
+        "funcname": "feed",
+        "ncalls": 54,
+        "tottime": 4.8087e-05,
+        "cumtime": 7.3898e-05,
+        "per_call": 8.905000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 159,
+        "funcname": "_path_isfile",
+        "ncalls": 28,
+        "tottime": 6.8280000000000005e-06,
+        "cumtime": 7.2402e-05,
+        "per_call": 2.438571428571429e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 1032,
+        "funcname": "to_dict",
+        "ncalls": 27,
+        "tottime": 2.2092e-05,
+        "cumtime": 7.1253e-05,
+        "per_call": 8.182222222222223e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 314,
+        "funcname": "_is_owned",
+        "ncalls": 104,
+        "tottime": 3.2125e-05,
+        "cumtime": 6.977e-05,
+        "per_call": 3.088942307692308e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.open> (via _write_atomic)",
+        "ncalls": 10,
+        "tottime": 6.961200000000001e-05,
+        "cumtime": 6.961200000000001e-05,
+        "per_call": 6.961200000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 304,
+        "funcname": "acquire",
+        "ncalls": 11,
+        "tottime": 2.2123e-05,
+        "cumtime": 6.7928e-05,
+        "per_call": 2.0111818181818184e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'encode' of 'str' objects> (via encode, _get_char)",
+        "ncalls": 582,
+        "tottime": 6.616200000000001e-05,
+        "cumtime": 6.616200000000001e-05,
+        "per_call": 1.1368041237113403e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_datetime.py",
+        "lineno": 13,
+        "funcname": "__format__",
+        "ncalls": 2,
+        "tottime": 2.8373e-05,
+        "cumtime": 6.5443e-05,
+        "per_call": 1.41865e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 632,
+        "funcname": "cached",
+        "ncalls": 20,
+        "tottime": 4.360000000000001e-06,
+        "cumtime": 6.5294e-05,
+        "per_call": 2.1800000000000002e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'write' of '_io.FileIO' objects> (via _write_atomic)",
+        "ncalls": 10,
+        "tottime": 6.1635e-05,
+        "cumtime": 6.1635e-05,
+        "per_call": 6.1635e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 611,
+        "funcname": "_get_cached",
+        "ncalls": 10,
+        "tottime": 8.206e-06,
+        "cumtime": 6.0934e-05,
+        "per_call": 8.206e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 299,
+        "funcname": "__enter__",
+        "ncalls": 115,
+        "tottime": 3.4787000000000004e-05,
+        "cumtime": 6.0558000000000005e-05,
+        "per_call": 3.024956521739131e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 1230,
+        "funcname": "resolve",
+        "ncalls": 1,
+        "tottime": 2.4330000000000003e-06,
+        "cumtime": 6.0212000000000006e-05,
+        "per_call": 2.4330000000000003e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.waitpid> (via _internal_poll)",
+        "ncalls": 10,
+        "tottime": 5.6956e-05,
+        "cumtime": 5.6956e-05,
+        "per_call": 5.6956e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.listdir> (via _fill_cache)",
+        "ncalls": 7,
+        "tottime": 5.6394e-05,
+        "cumtime": 5.6394e-05,
+        "per_call": 8.056285714285715e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/queue.py",
+        "lineno": 209,
+        "funcname": "_qsize",
+        "ncalls": 82,
+        "tottime": 3.3818e-05,
+        "cumtime": 5.5285000000000003e-05,
+        "per_call": 4.1241463414634146e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method marshal.dumps> (via _code_to_timestamp_pyc)",
+        "ncalls": 10,
+        "tottime": 5.4812e-05,
+        "cumtime": 5.4812e-05,
+        "per_call": 5.4812e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 637,
+        "funcname": "wait",
+        "ncalls": 22,
+        "tottime": 0.00036292800000000005,
+        "cumtime": 5.2769e-05,
+        "per_call": 1.6496727272727273e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_net_command_factory_json.py",
+        "lineno": 139,
+        "funcname": "make_thread_created_message",
+        "ncalls": 2,
+        "tottime": 9.679e-06,
+        "cumtime": 5.2698e-05,
+        "per_call": 4.8395e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/subprocess.py",
+        "lineno": 2208,
+        "funcname": "terminate",
+        "ncalls": 1,
+        "tottime": 3.0360000000000002e-06,
+        "cumtime": 5.1136000000000006e-05,
+        "per_call": 3.0360000000000002e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.replace> (via _write_atomic)",
+        "ncalls": 10,
+        "tottime": 5.0213e-05,
+        "cumtime": 5.0213e-05,
+        "per_call": 5.0213000000000005e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_handler.py",
+        "lineno": 32,
+        "funcname": "__init__",
+        "ncalls": 3,
+        "tottime": 1.5059000000000001e-05,
+        "cumtime": 4.9332e-05,
+        "per_call": 5.019666666666667e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'strftime' of 'datetime.date' objects> (via initialize_logging, __getitem__)",
+        "ncalls": 12,
+        "tottime": 4.9191000000000004e-05,
+        "cumtime": 4.9191000000000004e-05,
+        "per_call": 4.099250000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.next> (via __exit__, __enter__)",
+        "ncalls": 46,
+        "tottime": 1.8579e-05,
+        "cumtime": 4.9068000000000005e-05,
+        "per_call": 4.0389130434782605e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 132,
+        "funcname": "_path_split",
+        "ncalls": 37,
+        "tottime": 1.9247e-05,
+        "cumtime": 4.9002e-05,
+        "per_call": 5.201891891891892e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/subprocess.py",
+        "lineno": 2176,
+        "funcname": "send_signal",
+        "ncalls": 1,
+        "tottime": 2.7160000000000003e-06,
+        "cumtime": 4.8100000000000004e-05,
+        "per_call": 2.7160000000000003e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen _collections_abc>",
+        "lineno": 868,
+        "funcname": "__iter__",
+        "ncalls": 102,
+        "tottime": 1.1662000000000001e-05,
+        "cumtime": 4.7943000000000005e-05,
+        "per_call": 1.1433333333333335e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaTests/Core/FlameGraph/flame_capture.py",
+        "lineno": 51,
+        "funcname": "stop",
+        "ncalls": 1,
+        "tottime": 3.677e-06,
+        "cumtime": 4.7178e-05,
+        "per_call": 3.677e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen posixpath>",
+        "lineno": 428,
+        "funcname": "realpath",
+        "ncalls": 1,
+        "tottime": 3.176e-06,
+        "cumtime": 4.6297e-05,
+        "per_call": 3.176e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 15393,
+        "funcname": "to_dict",
+        "ncalls": 27,
+        "tottime": 2.4577000000000002e-05,
+        "cumtime": 4.5933e-05,
+        "per_call": 9.102592592592593e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen os>",
+        "lineno": 766,
+        "funcname": "decode",
+        "ncalls": 202,
+        "tottime": 2.4343e-05,
+        "cumtime": 4.5724000000000005e-05,
+        "per_call": 1.20509900990099e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 164,
+        "funcname": "_path_isdir",
+        "ncalls": 23,
+        "tottime": 6.532e-06,
+        "cumtime": 4.4546000000000003e-05,
+        "per_call": 2.84e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py",
+        "lineno": 2861,
+        "funcname": "_init_stderr_redirect",
+        "ncalls": 16,
+        "tottime": 8.083e-06,
+        "cumtime": 4.4072e-05,
+        "per_call": 5.051875e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.kill> (via send_signal)",
+        "ncalls": 1,
+        "tottime": 4.3551000000000004e-05,
+        "cumtime": 4.3551000000000004e-05,
+        "per_call": 4.3551000000000004e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'disable' of '_lsprof.Profiler' objects> (via stop)",
+        "ncalls": 1,
+        "tottime": 4.3501e-05,
+        "cumtime": 4.3501e-05,
+        "per_call": 4.3501e-05,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_constants.py",
+        "lineno": 481,
+        "funcname": "__enter__",
+        "ncalls": 65,
+        "tottime": 2.5356000000000003e-05,
+        "cumtime": 4.3354000000000005e-05,
+        "per_call": 3.9009230769230774e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1685,
+        "funcname": "path_hook_for_FileFinder",
+        "ncalls": 6,
+        "tottime": 6.522e-06,
+        "cumtime": 4.1188e-05,
+        "per_call": 1.0870000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/contextlib.py",
+        "lineno": 132,
+        "funcname": "__enter__",
+        "ncalls": 23,
+        "tottime": 1.0612000000000001e-05,
+        "cumtime": 4.0044000000000005e-05,
+        "per_call": 4.6139130434782614e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_comm.py",
+        "lineno": 167,
+        "funcname": "_from_json",
+        "ncalls": 1,
+        "tottime": 3.1560000000000004e-06,
+        "cumtime": 3.8783000000000005e-05,
+        "per_call": 3.1560000000000004e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_command_line_handling.py",
+        "lineno": 109,
+        "funcname": "setup_to_argv",
+        "ncalls": 2,
+        "tottime": 1.426e-05,
+        "cumtime": 3.6949e-05,
+        "per_call": 7.13e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen os>",
+        "lineno": 703,
+        "funcname": "__iter__",
+        "ncalls": 102,
+        "tottime": 1.4614000000000001e-05,
+        "cumtime": 3.6281e-05,
+        "per_call": 1.4327450980392157e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_base_schema.py",
+        "lineno": 112,
+        "funcname": "from_json",
+        "ncalls": 1,
+        "tottime": 6.372e-06,
+        "cumtime": 3.5627e-05,
+        "per_call": 6.372e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/contextlib.py",
+        "lineno": 299,
+        "funcname": "helper",
+        "ncalls": 23,
+        "tottime": 1.4354e-05,
+        "cumtime": 3.5616e-05,
+        "per_call": 6.240869565217391e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.len> (via _read, dirname)",
+        "ncalls": 193,
+        "tottime": 3.5514e-05,
+        "cumtime": 3.5514e-05,
+        "per_call": 1.8401036269430053e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_constants.py",
+        "lineno": 484,
+        "funcname": "__exit__",
+        "ncalls": 65,
+        "tottime": 2.2889e-05,
+        "cumtime": 3.5069e-05,
+        "per_call": 3.5213846153846155e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'append' of 'list' objects> (via _parse_without_formatting, acquire)",
+        "ncalls": 394,
+        "tottime": 3.3503e-05,
+        "cumtime": 3.3503e-05,
+        "per_call": 8.503299492385787e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/contextlib.py",
+        "lineno": 141,
+        "funcname": "__exit__",
+        "ncalls": 23,
+        "tottime": 1.2885000000000001e-05,
+        "cumtime": 3.2521e-05,
+        "per_call": 5.602173913043479e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen os>",
+        "lineno": 762,
+        "funcname": "encode",
+        "ncalls": 101,
+        "tottime": 1.9882e-05,
+        "cumtime": 3.2469000000000004e-05,
+        "per_call": 1.9685148514851485e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 623,
+        "funcname": "_calc_mode",
+        "ncalls": 10,
+        "tottime": 6.291e-06,
+        "cumtime": 3.2040000000000005e-05,
+        "per_call": 6.291e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1588,
+        "funcname": "_get_spec",
+        "ncalls": 10,
+        "tottime": 8.136e-06,
+        "cumtime": 3.184e-05,
+        "per_call": 8.135999999999999e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 162,
+        "funcname": "__enter__",
+        "ncalls": 11,
+        "tottime": 6.9470000000000006e-06,
+        "cumtime": 3.1717e-05,
+        "per_call": 6.315454545454546e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.max> (via _path_split, patch_args)",
+        "ncalls": 39,
+        "tottime": 1.4971000000000001e-05,
+        "cumtime": 3.0587000000000004e-05,
+        "per_call": 3.838717948717949e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_handler.py",
+        "lineno": 110,
+        "funcname": "_protected_lock",
+        "ncalls": 42,
+        "tottime": 2.0511e-05,
+        "cumtime": 3.0099e-05,
+        "per_call": 4.883571428571428e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen zipimport>",
+        "lineno": 64,
+        "funcname": "__init__",
+        "ncalls": 6,
+        "tottime": 9.016e-06,
+        "cumtime": 2.9986e-05,
+        "per_call": 1.5026666666666666e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'acquire' of '_thread.lock' objects> (via _acquire_restore, wait)",
+        "ncalls": 225,
+        "tottime": 1.2949446,
+        "cumtime": 2.9717e-05,
+        "per_call": 0.005755309333333333,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen os>",
+        "lineno": 200,
+        "funcname": "makedirs",
+        "ncalls": 2,
+        "tottime": 6.6020000000000005e-06,
+        "cumtime": 2.9676000000000002e-05,
+        "per_call": 3.3010000000000002e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method '__exit__' of '_thread.lock' objects> (via can_exit, process_internal_commands)",
+        "ncalls": 189,
+        "tottime": 2.9671e-05,
+        "cumtime": 2.9671e-05,
+        "per_call": 1.56989417989418e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_simple_sinks.py",
+        "lineno": 9,
+        "funcname": "__init__",
+        "ncalls": 3,
+        "tottime": 4.378e-06,
+        "cumtime": 2.9455000000000002e-05,
+        "per_call": 1.4593333333333334e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen posixpath>",
+        "lineno": 413,
+        "funcname": "abspath",
+        "ncalls": 13,
+        "tottime": 7.382000000000001e-06,
+        "cumtime": 2.9164e-05,
+        "per_call": 5.678461538461538e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.hasattr> (via global_settings, _load_unlocked)",
+        "ncalls": 149,
+        "tottime": 2.9161e-05,
+        "cumtime": 2.9161e-05,
+        "per_call": 1.9571140939597316e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_comm.py",
+        "lineno": 438,
+        "funcname": "empty",
+        "ncalls": 8,
+        "tottime": 8.406e-06,
+        "cumtime": 2.8394000000000003e-05,
+        "per_call": 1.05075e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method '__enter__' of '_thread.lock' objects> (via __enter__)",
+        "ncalls": 121,
+        "tottime": 2.7634e-05,
+        "cumtime": 2.7634e-05,
+        "per_call": 2.283801652892562e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 15349,
+        "funcname": "__init__",
+        "ncalls": 27,
+        "tottime": 2.0589000000000002e-05,
+        "cumtime": 2.6298e-05,
+        "per_call": 7.625555555555556e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'items' of 'dict' objects> (via send, _extend_dict)",
+        "ncalls": 267,
+        "tottime": 2.5896e-05,
+        "cumtime": 2.5896e-05,
+        "per_call": 9.698876404494382e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 420,
+        "funcname": "__exit__",
+        "ncalls": 11,
+        "tottime": 4.12e-06,
+        "cumtime": 2.5779000000000002e-05,
+        "per_call": 3.745454545454546e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen posixpath>",
+        "lineno": 117,
+        "funcname": "splitext",
+        "ncalls": 11,
+        "tottime": 9.415e-06,
+        "cumtime": 2.5637000000000002e-05,
+        "per_call": 8.55909090909091e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen posixpath>",
+        "lineno": 71,
+        "funcname": "join",
+        "ncalls": 11,
+        "tottime": 1.3470000000000001e-05,
+        "cumtime": 2.5409e-05,
+        "per_call": 1.2245454545454547e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen posixpath>",
+        "lineno": 169,
+        "funcname": "basename",
+        "ncalls": 13,
+        "tottime": 1.5481e-05,
+        "cumtime": 2.4997e-05,
+        "per_call": 1.1908461538461539e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 426,
+        "funcname": "_get_module_lock",
+        "ncalls": 11,
+        "tottime": 1.6262e-05,
+        "cumtime": 2.4958e-05,
+        "per_call": 1.4783636363636365e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 447,
+        "funcname": "__fspath__",
+        "ncalls": 6,
+        "tottime": 2.634e-06,
+        "cumtime": 2.4807e-05,
+        "per_call": 4.39e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1567,
+        "funcname": "__init__",
+        "ncalls": 6,
+        "tottime": 9.826e-06,
+        "cumtime": 2.4787000000000002e-05,
+        "per_call": 1.6376666666666668e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_utils.py",
+        "lineno": 248,
+        "funcname": "notify_about_gevent_if_needed",
+        "ncalls": 35,
+        "tottime": 1.8077e-05,
+        "cumtime": 2.4077e-05,
+        "per_call": 5.164857142857143e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'release' of '_thread.lock' objects> (via notify, _release_save)",
+        "ncalls": 54,
+        "tottime": 2.3592e-05,
+        "cumtime": 2.3592e-05,
+        "per_call": 4.368888888888889e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen posixpath>",
+        "lineno": 437,
+        "funcname": "_joinrealpath",
+        "ncalls": 1,
+        "tottime": 7.985e-06,
+        "cumtime": 2.3434000000000003e-05,
+        "per_call": 7.985e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 124,
+        "funcname": "setdefault",
+        "ncalls": 11,
+        "tottime": 9.671000000000001e-06,
+        "cumtime": 2.3276000000000002e-05,
+        "per_call": 8.791818181818183e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_io.py",
+        "lineno": 50,
+        "funcname": "flush",
+        "ncalls": 11,
+        "tottime": 1.018e-05,
+        "cumtime": 2.3134000000000002e-05,
+        "per_call": 9.254545454545456e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 802,
+        "funcname": "spec_from_file_location",
+        "ncalls": 10,
+        "tottime": 1.3859e-05,
+        "cumtime": 2.2623e-05,
+        "per_call": 1.3859000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 437,
+        "funcname": "__str__",
+        "ncalls": 7,
+        "tottime": 5.7220000000000004e-06,
+        "cumtime": 2.2244000000000003e-05,
+        "per_call": 8.174285714285714e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'decode' of 'bytes' objects> (via decode, process_net_command_json)",
+        "ncalls": 203,
+        "tottime": 2.2132e-05,
+        "cumtime": 2.2132e-05,
+        "per_call": 1.0902463054187193e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 1483,
+        "funcname": "current_thread",
+        "ncalls": 19,
+        "tottime": 1.8192e-05,
+        "cumtime": 2.1772e-05,
+        "per_call": 9.574736842105264e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 372,
+        "funcname": "release",
+        "ncalls": 11,
+        "tottime": 1.4965000000000002e-05,
+        "cumtime": 2.1659e-05,
+        "per_call": 1.3604545454545455e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'remove' of 'collections.deque' objects> (via wait, <method 'acquire' of '_thread.lock' objects>)",
+        "ncalls": 37,
+        "tottime": 2.1634e-05,
+        "cumtime": 2.1634e-05,
+        "per_call": 5.847027027027027e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method '__exit__' of '_io._IOBase' objects> (via get_code, get_data)",
+        "ncalls": 20,
+        "tottime": 2.1601000000000002e-05,
+        "cumtime": 2.1601000000000002e-05,
+        "per_call": 1.0800500000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/contextlib.py",
+        "lineno": 104,
+        "funcname": "__init__",
+        "ncalls": 23,
+        "tottime": 1.7043000000000003e-05,
+        "cumtime": 2.1262e-05,
+        "per_call": 7.410000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 882,
+        "funcname": "__init__",
+        "ncalls": 2,
+        "tottime": 9.826e-06,
+        "cumtime": 2.0838000000000003e-05,
+        "per_call": 4.913e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'join' of 'str' objects> (via encode, _format_parsed_parts)",
+        "ncalls": 171,
+        "tottime": 2.0617000000000003e-05,
+        "cumtime": 2.0617000000000003e-05,
+        "per_call": 1.2056725146198832e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method time.monotonic> (via get, wait)",
+        "ncalls": 80,
+        "tottime": 2.0597000000000003e-05,
+        "cumtime": 2.0597000000000003e-05,
+        "per_call": 2.5746250000000005e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method time.localtime> (via aware_now)",
+        "ncalls": 11,
+        "tottime": 2.0421e-05,
+        "cumtime": 2.0421e-05,
+        "per_call": 1.8564545454545455e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_handler.py",
+        "lineno": 241,
+        "funcname": "update_format",
+        "ncalls": 8,
+        "tottime": 3.6640000000000004e-06,
+        "cumtime": 2.0106e-05,
+        "per_call": 4.5800000000000005e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/asyncio/coroutines.py",
+        "lineno": 20,
+        "funcname": "iscoroutinefunction",
+        "ncalls": 3,
+        "tottime": 2.8440000000000002e-06,
+        "cumtime": 2.0066e-05,
+        "per_call": 9.480000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/queue.py",
+        "lineno": 97,
+        "funcname": "empty",
+        "ncalls": 8,
+        "tottime": 1.1195e-05,
+        "cumtime": 1.9988000000000002e-05,
+        "per_call": 1.399375e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _thread.allocate_lock> (via __init__, wait)",
+        "ncalls": 55,
+        "tottime": 1.997e-05,
+        "cumtime": 1.997e-05,
+        "per_call": 3.630909090909091e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'read' of '_io.BufferedReader' objects> (via get_code, get_data)",
+        "ncalls": 10,
+        "tottime": 1.9948000000000003e-05,
+        "cumtime": 1.9948000000000003e-05,
+        "per_call": 1.9948000000000004e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'extend' of 'list' objects> (via _parse_without_formatting, __init__)",
+        "ncalls": 51,
+        "tottime": 1.5811e-05,
+        "cumtime": 1.9709e-05,
+        "per_call": 3.100196078431373e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/_distutils_hack/__init__.py",
+        "lineno": 89,
+        "funcname": "find_spec",
+        "ncalls": 11,
+        "tottime": 9.31e-06,
+        "cumtime": 1.9705000000000002e-05,
+        "per_call": 8.463636363636364e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_daemon_thread.py",
+        "lineno": 36,
+        "funcname": "py_db",
+        "ncalls": 41,
+        "tottime": 1.9417e-05,
+        "cumtime": 1.9417e-05,
+        "per_call": 4.7358536585365856e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method '__exit__' of '_thread.RLock' objects> (via acquire, write)",
+        "ncalls": 111,
+        "tottime": 1.9413000000000002e-05,
+        "cumtime": 1.9413000000000002e-05,
+        "per_call": 1.7489189189189192e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'rstrip' of 'str' objects> (via _path_join, dirname)",
+        "ncalls": 260,
+        "tottime": 1.9002000000000002e-05,
+        "cumtime": 1.9002000000000002e-05,
+        "per_call": 7.308461538461539e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method now> (via initialize_logging, aware_now)",
+        "ncalls": 12,
+        "tottime": 1.8705e-05,
+        "cumtime": 1.8705e-05,
+        "per_call": 1.5587500000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'keys' of 'dict' objects> (via remove, _extend_dict)",
+        "ncalls": 141,
+        "tottime": 1.8687000000000003e-05,
+        "cumtime": 1.8687000000000003e-05,
+        "per_call": 1.3253191489361705e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_constants.py",
+        "lineno": 648,
+        "funcname": "get_current_thread_id",
+        "ncalls": 10,
+        "tottime": 5.968e-06,
+        "cumtime": 1.8412000000000003e-05,
+        "per_call": 5.968e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 11798,
+        "funcname": "to_dict",
+        "ncalls": 27,
+        "tottime": 1.3116000000000001e-05,
+        "cumtime": 1.8332e-05,
+        "per_call": 4.857777777777778e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'get' of 'dict' objects> (via initialize_logging, <lambda>)",
+        "ncalls": 134,
+        "tottime": 1.8208000000000003e-05,
+        "cumtime": 1.8208000000000003e-05,
+        "per_call": 1.358805970149254e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 308,
+        "funcname": "_release_save",
+        "ncalls": 37,
+        "tottime": 1.2417000000000002e-05,
+        "cumtime": 1.7964e-05,
+        "per_call": 3.355945945945946e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py",
+        "lineno": 1587,
+        "funcname": "get_internal_queue_and_event",
+        "ncalls": 8,
+        "tottime": 1.3532e-05,
+        "cumtime": 1.7631e-05,
+        "per_call": 1.6915e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/json/__init__.py",
+        "lineno": 299,
+        "funcname": "loads",
+        "ncalls": 1,
+        "tottime": 3.8080000000000002e-06,
+        "cumtime": 1.7453e-05,
+        "per_call": 3.8080000000000002e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 79,
+        "funcname": "_pack_uint32",
+        "ncalls": 30,
+        "tottime": 1.2615e-05,
+        "cumtime": 1.7423000000000002e-05,
+        "per_call": 4.205e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/inspect.py",
+        "lineno": 420,
+        "funcname": "iscoroutinefunction",
+        "ncalls": 3,
+        "tottime": 3.006e-06,
+        "cumtime": 1.6992000000000003e-05,
+        "per_call": 1.002e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1202,
+        "funcname": "path_stats",
+        "ncalls": 10,
+        "tottime": 3.7750000000000003e-06,
+        "cumtime": 1.6841e-05,
+        "per_call": 3.7750000000000004e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_logger.py",
+        "lineno": 1013,
+        "funcname": "remove",
+        "ncalls": 1,
+        "tottime": 7.293e-06,
+        "cumtime": 1.6461e-05,
+        "per_call": 7.293e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_colorizer.py",
+        "lineno": 337,
+        "funcname": "colorize",
+        "ncalls": 8,
+        "tottime": 3.0770000000000004e-06,
+        "cumtime": 1.6442e-05,
+        "per_call": 3.8462500000000004e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method '__enter__' of '_thread.RLock' objects> (via __enter__)",
+        "ncalls": 59,
+        "tottime": 1.6135e-05,
+        "cumtime": 1.6135e-05,
+        "per_call": 2.7347457627118644e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen abc>",
+        "lineno": 117,
+        "funcname": "__instancecheck__",
+        "ncalls": 5,
+        "tottime": 1.694e-06,
+        "cumtime": 1.6111000000000002e-05,
+        "per_call": 3.388e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/subprocess.py",
+        "lineno": 1282,
+        "funcname": "_close_pipe_fds",
+        "ncalls": 2,
+        "tottime": 8.976e-06,
+        "cumtime": 1.5639e-05,
+        "per_call": 4.488e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'replace' of 'datetime.time' objects> (via aware_now)",
+        "ncalls": 11,
+        "tottime": 1.5619e-05,
+        "cumtime": 1.5619e-05,
+        "per_call": 1.419909090909091e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 134,
+        "funcname": "<genexpr>",
+        "ncalls": 74,
+        "tottime": 9.974000000000001e-06,
+        "cumtime": 1.5616e-05,
+        "per_call": 1.347837837837838e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py",
+        "lineno": 277,
+        "funcname": "is_python",
+        "ncalls": 2,
+        "tottime": 6.344000000000001e-06,
+        "cumtime": 1.544e-05,
+        "per_call": 3.1720000000000003e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 8318,
+        "funcname": "to_dict",
+        "ncalls": 1,
+        "tottime": 6.241e-06,
+        "cumtime": 1.5388000000000002e-05,
+        "per_call": 6.241e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 551,
+        "funcname": "drive",
+        "ncalls": 3,
+        "tottime": 1.955e-06,
+        "cumtime": 1.5119e-05,
+        "per_call": 6.516666666666666e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_io.py",
+        "lineno": 89,
+        "funcname": "get_pydb",
+        "ncalls": 27,
+        "tottime": 8.575e-06,
+        "cumtime": 1.4826000000000002e-05,
+        "per_call": 3.175925925925926e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _abc._abc_instancecheck> (via __instancecheck__)",
+        "ncalls": 5,
+        "tottime": 3.7970000000000002e-06,
+        "cumtime": 1.4417000000000001e-05,
+        "per_call": 7.594000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/queue.py",
+        "lineno": 217,
+        "funcname": "_get",
+        "ncalls": 33,
+        "tottime": 9.931e-06,
+        "cumtime": 1.4376000000000001e-05,
+        "per_call": 3.0093939393939396e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen genericpath>",
+        "lineno": 133,
+        "funcname": "_splitext",
+        "ncalls": 11,
+        "tottime": 1.0722e-05,
+        "cumtime": 1.4245000000000002e-05,
+        "per_call": 9.747272727272727e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'rfind' of 'str' objects> (via dirname, split)",
+        "ncalls": 76,
+        "tottime": 1.3812000000000001e-05,
+        "cumtime": 1.3812000000000001e-05,
+        "per_call": 1.8173684210526316e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'update' of 'dict' objects> (via configure, to_dict)",
+        "ncalls": 91,
+        "tottime": 1.3671e-05,
+        "cumtime": 1.3671e-05,
+        "per_call": 1.5023076923076923e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_recattrs.py",
+        "lineno": 16,
+        "funcname": "__format__",
+        "ncalls": 20,
+        "tottime": 6.703e-06,
+        "cumtime": 1.3637e-05,
+        "per_call": 3.3515e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/queue.py",
+        "lineno": 213,
+        "funcname": "_put",
+        "ncalls": 32,
+        "tottime": 9.060000000000001e-06,
+        "cumtime": 1.3616000000000001e-05,
+        "per_call": 2.8312500000000004e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/multiprocessing/process.py",
+        "lineno": 234,
+        "funcname": "ident",
+        "ncalls": 11,
+        "tottime": 7.622000000000001e-06,
+        "cumtime": 1.3444e-05,
+        "per_call": 6.92909090909091e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_colorizer.py",
+        "lineno": 184,
+        "funcname": "colorize",
+        "ncalls": 8,
+        "tottime": 1.3365000000000002e-05,
+        "cumtime": 1.3365000000000002e-05,
+        "per_call": 1.6706250000000002e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method time.sleep> (via get_code, log)",
+        "ncalls": 37,
+        "tottime": 0.19759679600000002,
+        "cumtime": 1.3187000000000001e-05,
+        "per_call": 0.005340453945945947,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 407,
+        "funcname": "_load_parts",
+        "ncalls": 2,
+        "tottime": 2.6140000000000003e-06,
+        "cumtime": 1.3164000000000001e-05,
+        "per_call": 1.3070000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/json/decoder.py",
+        "lineno": 332,
+        "funcname": "decode",
+        "ncalls": 1,
+        "tottime": 5.859e-06,
+        "cumtime": 1.3064e-05,
+        "per_call": 5.859e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 616,
+        "funcname": "set",
+        "ncalls": 2,
+        "tottime": 2.2140000000000003e-06,
+        "cumtime": 1.2904e-05,
+        "per_call": 1.1070000000000002e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method combine> (via aware_now)",
+        "ncalls": 11,
+        "tottime": 1.2763000000000001e-05,
+        "cumtime": 1.2763000000000001e-05,
+        "per_call": 1.1602727272727274e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'sub' of 're.Pattern' objects> (via __format__)",
+        "ncalls": 2,
+        "tottime": 7.449e-06,
+        "cumtime": 1.2755e-05,
+        "per_call": 3.7245e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen posixpath>",
+        "lineno": 60,
+        "funcname": "isabs",
+        "ncalls": 14,
+        "tottime": 6.415e-06,
+        "cumtime": 1.2584e-05,
+        "per_call": 4.5821428571428574e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaLogging/Core/logger.py",
+        "lineno": 64,
+        "funcname": "write",
+        "ncalls": 9,
+        "tottime": 9.134000000000001e-06,
+        "cumtime": 1.2554e-05,
+        "per_call": 1.014888888888889e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'append' of 'collections.deque' objects> (via write, _put)",
+        "ncalls": 78,
+        "tottime": 1.2505000000000001e-05,
+        "cumtime": 1.2505000000000001e-05,
+        "per_call": 1.6032051282051285e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_constants.py",
+        "lineno": 629,
+        "funcname": "_get_or_compute_thread_id_with_lock",
+        "ncalls": 2,
+        "tottime": 6.6820000000000006e-06,
+        "cumtime": 1.2444000000000001e-05,
+        "per_call": 3.3410000000000003e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py",
+        "lineno": 976,
+        "funcname": "send_process_created_message",
+        "ncalls": 2,
+        "tottime": 2.233e-06,
+        "cumtime": 1.2393000000000001e-05,
+        "per_call": 1.1165e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 627,
+        "funcname": "clear",
+        "ncalls": 8,
+        "tottime": 7.031e-06,
+        "cumtime": 1.2302e-05,
+        "per_call": 8.78875e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_command_line_handling.py",
+        "lineno": 16,
+        "funcname": "to_argv",
+        "ncalls": 20,
+        "tottime": 8.743e-06,
+        "cumtime": 1.2109e-05,
+        "per_call": 4.3715e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/sysconfig.py",
+        "lineno": 746,
+        "funcname": "get_config_vars",
+        "ncalls": 132,
+        "tottime": 1.1955000000000002e-05,
+        "cumtime": 1.1955000000000002e-05,
+        "per_call": 9.056818181818183e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'values' of 'dict' objects> (via new_threading_enumerate, remove)",
+        "ncalls": 46,
+        "tottime": 1.1795000000000001e-05,
+        "cumtime": 1.1795000000000001e-05,
+        "per_call": 2.564130434782609e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen posixpath>",
+        "lineno": 41,
+        "funcname": "_get_sep",
+        "ncalls": 44,
+        "tottime": 7.748000000000001e-06,
+        "cumtime": 1.178e-05,
+        "per_call": 1.760909090909091e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaGuiShowtime/Methods/ptp_time.py",
+        "lineno": 23,
+        "funcname": "get_ptp_time",
+        "ncalls": 9,
+        "tottime": 4.276e-06,
+        "cumtime": 1.1721e-05,
+        "per_call": 4.751111111111111e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_constants.py",
+        "lineno": 668,
+        "funcname": "get_thread_id",
+        "ncalls": 29,
+        "tottime": 1.1710000000000001e-05,
+        "cumtime": 1.1710000000000001e-05,
+        "per_call": 4.037931034482759e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py",
+        "lineno": 46,
+        "funcname": "_get_setup_updated_with_protocol_and_ppid",
+        "ncalls": 2,
+        "tottime": 8.910000000000001e-06,
+        "cumtime": 1.1563000000000001e-05,
+        "per_call": 4.4550000000000005e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_better_exceptions.py",
+        "lineno": 178,
+        "funcname": "_get_char",
+        "ncalls": 6,
+        "tottime": 4.8490000000000005e-06,
+        "cumtime": 1.1352e-05,
+        "per_call": 8.081666666666667e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen posixpath>",
+        "lineno": 179,
+        "funcname": "dirname",
+        "ncalls": 4,
+        "tottime": 7.113e-06,
+        "cumtime": 1.115e-05,
+        "per_call": 1.77825e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen abc>",
+        "lineno": 121,
+        "funcname": "__subclasscheck__",
+        "ncalls": 3,
+        "tottime": 9.62e-07,
+        "cumtime": 1.062e-05,
+        "per_call": 3.206666666666667e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 937,
+        "funcname": "to_dict",
+        "ncalls": 2,
+        "tottime": 2.543e-06,
+        "cumtime": 1.0499e-05,
+        "per_call": 1.2715e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 387,
+        "funcname": "_parse_path",
+        "ncalls": 2,
+        "tottime": 6.002e-06,
+        "cumtime": 1.026e-05,
+        "per_call": 3.001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/calendar.py",
+        "lineno": 102,
+        "funcname": "__getitem__",
+        "ncalls": 4,
+        "tottime": 2.054e-06,
+        "cumtime": 1.0158e-05,
+        "per_call": 5.135e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.__build_class__> (via <module>)",
+        "ncalls": 1,
+        "tottime": 9.208e-06,
+        "cumtime": 9.969e-06,
+        "per_call": 9.208e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/inspect.py",
+        "lineno": 384,
+        "funcname": "_has_code_flag",
+        "ncalls": 3,
+        "tottime": 5.714000000000001e-06,
+        "cumtime": 9.919000000000001e-06,
+        "per_call": 1.904666666666667e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/subprocess.py",
+        "lineno": 1961,
+        "funcname": "_handle_exitstatus",
+        "ncalls": 2,
+        "tottime": 8.726e-06,
+        "cumtime": 9.898e-06,
+        "per_call": 4.363e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py",
+        "lineno": 2020,
+        "funcname": "send_process_created_message",
+        "ncalls": 2,
+        "tottime": 2.454e-06,
+        "cumtime": 9.779e-06,
+        "per_call": 1.227e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _posixsubprocess.fork_exec> (via new_fork_exec)",
+        "ncalls": 2,
+        "tottime": 9.748e-06,
+        "cumtime": 9.748e-06,
+        "per_call": 4.874e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 445,
+        "funcname": "cb",
+        "ncalls": 11,
+        "tottime": 6.001000000000001e-06,
+        "cumtime": 9.678000000000001e-06,
+        "per_call": 5.455454545454546e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _abc._abc_subclasscheck> (via __subclasscheck__)",
+        "ncalls": 3,
+        "tottime": 4.84e-06,
+        "cumtime": 9.658000000000001e-06,
+        "per_call": 1.6133333333333335e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/subprocess.py",
+        "lineno": 1688,
+        "funcname": "_get_handles",
+        "ncalls": 2,
+        "tottime": 3.135e-06,
+        "cumtime": 9.508000000000001e-06,
+        "per_call": 1.5675e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 74,
+        "funcname": "__new__",
+        "ncalls": 11,
+        "tottime": 7.163000000000001e-06,
+        "cumtime": 9.377e-06,
+        "per_call": 6.511818181818183e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_is_thread_alive.py",
+        "lineno": 20,
+        "funcname": "is_thread_alive",
+        "ncalls": 35,
+        "tottime": 9.377e-06,
+        "cumtime": 9.377e-06,
+        "per_call": 2.6791428571428573e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 185,
+        "funcname": "_path_abspath",
+        "ncalls": 16,
+        "tottime": 3.2070000000000004e-06,
+        "cumtime": 9.339e-06,
+        "per_call": 2.0043750000000002e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 424,
+        "funcname": "notify_all",
+        "ncalls": 2,
+        "tottime": 1.1630000000000001e-06,
+        "cumtime": 9.027e-06,
+        "per_call": 5.815000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 16689,
+        "funcname": "to_dict",
+        "ncalls": 1,
+        "tottime": 4.079e-06,
+        "cumtime": 8.957e-06,
+        "per_call": 4.079e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 1128,
+        "funcname": "find_spec",
+        "ncalls": 11,
+        "tottime": 3.1330000000000003e-06,
+        "cumtime": 8.915e-06,
+        "per_call": 2.8481818181818184e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 1222,
+        "funcname": "__enter__",
+        "ncalls": 44,
+        "tottime": 5.513e-06,
+        "cumtime": 8.889e-06,
+        "per_call": 1.2529545454545456e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_constants.py",
+        "lineno": 818,
+        "funcname": "get_protocol",
+        "ncalls": 63,
+        "tottime": 8.804e-06,
+        "cumtime": 8.804e-06,
+        "per_call": 1.3974603174603175e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 1226,
+        "funcname": "__exit__",
+        "ncalls": 44,
+        "tottime": 5.744e-06,
+        "cumtime": 8.658e-06,
+        "per_call": 1.3054545454545456e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 491,
+        "funcname": "_verbose_message",
+        "ncalls": 91,
+        "tottime": 8.619e-06,
+        "cumtime": 8.619e-06,
+        "per_call": 9.471428571428572e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py",
+        "lineno": 249,
+        "funcname": "_get_str_type_compatible",
+        "ncalls": 8,
+        "tottime": 6.736e-06,
+        "cumtime": 8.498e-06,
+        "per_call": 8.42e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'finditer' of 're.Pattern' objects> (via feed)",
+        "ncalls": 21,
+        "tottime": 8.494e-06,
+        "cumtime": 8.494e-06,
+        "per_call": 4.044761904761905e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_base_schema.py",
+        "lineno": 84,
+        "funcname": "from_dict",
+        "ncalls": 1,
+        "tottime": 5.431e-06,
+        "cumtime": 8.436e-06,
+        "per_call": 5.431e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 837,
+        "funcname": "stat",
+        "ncalls": 1,
+        "tottime": 2.2e-07,
+        "cumtime": 8.416e-06,
+        "per_call": 2.2e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'copy' of 'dict' objects> (via add, remove)",
+        "ncalls": 28,
+        "tottime": 8.371e-06,
+        "cumtime": 8.371e-06,
+        "per_call": 2.9896428571428574e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_logger.py",
+        "lineno": 1385,
+        "funcname": "bind",
+        "ncalls": 10,
+        "tottime": 7.0540000000000006e-06,
+        "cumtime": 8.336000000000001e-06,
+        "per_call": 7.054000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_command_line_handling.py",
+        "lineno": 44,
+        "funcname": "to_argv",
+        "ncalls": 20,
+        "tottime": 6.802e-06,
+        "cumtime": 8.316000000000001e-06,
+        "per_call": 3.4010000000000003e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'flush' of '_io.TextIOWrapper' objects> (via flush)",
+        "ncalls": 11,
+        "tottime": 8.126e-06,
+        "cumtime": 8.126e-06,
+        "per_call": 7.387272727272727e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'rpartition' of 'str' objects> (via parent, cache_from_source)",
+        "ncalls": 60,
+        "tottime": 8.124e-06,
+        "cumtime": 8.124e-06,
+        "per_call": 1.354e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/signal.py",
+        "lineno": 56,
+        "funcname": "signal",
+        "ncalls": 1,
+        "tottime": 3.6560000000000002e-06,
+        "cumtime": 8.065e-06,
+        "per_call": 3.6560000000000002e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_locks_machinery.py",
+        "lineno": 47,
+        "funcname": "create_handler_lock",
+        "ncalls": 3,
+        "tottime": 3.717e-06,
+        "cumtime": 7.995e-06,
+        "per_call": 1.2390000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 15278,
+        "funcname": "to_dict",
+        "ncalls": 2,
+        "tottime": 2.9060000000000002e-06,
+        "cumtime": 7.735000000000001e-06,
+        "per_call": 1.4530000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_constants.py",
+        "lineno": 834,
+        "funcname": "get_global_debugger",
+        "ncalls": 31,
+        "tottime": 7.454e-06,
+        "cumtime": 7.454e-06,
+        "per_call": 2.404516129032258e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaGuiShowtime/Methods/ptp_time.py",
+        "lineno": 18,
+        "funcname": "<lambda>",
+        "ncalls": 9,
+        "tottime": 3.946e-06,
+        "cumtime": 7.445000000000001e-06,
+        "per_call": 4.3844444444444446e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/string.py",
+        "lineno": 287,
+        "funcname": "parse",
+        "ncalls": 24,
+        "tottime": 5.178e-06,
+        "cumtime": 7.362000000000001e-06,
+        "per_call": 2.1575e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 1016,
+        "funcname": "__init__",
+        "ncalls": 27,
+        "tottime": 7.184e-06,
+        "cumtime": 7.184e-06,
+        "per_call": 2.660740740740741e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 588,
+        "funcname": "__init__",
+        "ncalls": 2,
+        "tottime": 3.0550000000000004e-06,
+        "cumtime": 7.0930000000000005e-06,
+        "per_call": 1.5275000000000002e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.pipe> (via _execute_child)",
+        "ncalls": 2,
+        "tottime": 6.964000000000001e-06,
+        "cumtime": 6.964000000000001e-06,
+        "per_call": 3.4820000000000003e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method '__format__' of 'str' objects> (via __format__)",
+        "ncalls": 20,
+        "tottime": 6.934e-06,
+        "cumtime": 6.934e-06,
+        "per_call": 3.467e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'enable' of '_lsprof.Profiler' objects>",
+        "ncalls": 2,
+        "tottime": 6.912e-06,
+        "cumtime": 6.912e-06,
+        "per_call": 3.456e-06,
+        "roots": [
+            "~"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.close> (via send, _execute_child)",
+        "ncalls": 4,
+        "tottime": 6.864000000000001e-06,
+        "cumtime": 6.864000000000001e-06,
+        "per_call": 1.7160000000000002e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 1159,
+        "funcname": "__init__",
+        "ncalls": 3,
+        "tottime": 2.9350000000000003e-06,
+        "cumtime": 6.853e-06,
+        "per_call": 9.783333333333334e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_handler.py",
+        "lineno": 212,
+        "funcname": "stop",
+        "ncalls": 1,
+        "tottime": 2.025e-06,
+        "cumtime": 6.763e-06,
+        "per_call": 2.025e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 232,
+        "funcname": "__init__",
+        "ncalls": 11,
+        "tottime": 5.129e-06,
+        "cumtime": 6.441000000000001e-06,
+        "per_call": 4.662727272727273e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _thread.get_ident> (via _set_ident, release)",
+        "ncalls": 43,
+        "tottime": 6.329000000000001e-06,
+        "cumtime": 6.329000000000001e-06,
+        "per_call": 1.4718604651162792e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/sysconfig.py",
+        "lineno": 645,
+        "funcname": "get_scheme_names",
+        "ncalls": 3,
+        "tottime": 2.314e-06,
+        "cumtime": 6.2520000000000004e-06,
+        "per_call": 7.713333333333334e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 643,
+        "funcname": "_check_name_wrapper",
+        "ncalls": 10,
+        "tottime": 5.6320000000000005e-06,
+        "cumtime": 6.234000000000001e-06,
+        "per_call": 5.632000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'timestamp' of 'datetime.datetime' objects> (via aware_now, __format__)",
+        "ncalls": 13,
+        "tottime": 6.220000000000001e-06,
+        "cumtime": 6.220000000000001e-06,
+        "per_call": 4.784615384615385e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_colorizer.py",
+        "lineno": 334,
+        "funcname": "strip",
+        "ncalls": 2,
+        "tottime": 2.3260000000000003e-06,
+        "cumtime": 6.172e-06,
+        "per_call": 1.1630000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 180,
+        "funcname": "_path_isabs",
+        "ncalls": 16,
+        "tottime": 3.496e-06,
+        "cumtime": 6.132000000000001e-06,
+        "per_call": 2.185e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method fromtimestamp> (via ptp_patcher)",
+        "ncalls": 3,
+        "tottime": 6.1110000000000004e-06,
+        "cumtime": 6.1110000000000004e-06,
+        "per_call": 2.037e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_base_schema.py",
+        "lineno": 17,
+        "funcname": "_translate_id_to_dap",
+        "ncalls": 5,
+        "tottime": 4.768e-06,
+        "cumtime": 6.102e-06,
+        "per_call": 9.536e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 982,
+        "funcname": "find_spec",
+        "ncalls": 11,
+        "tottime": 2.725e-06,
+        "cumtime": 6.071e-06,
+        "per_call": 2.477272727272727e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _imp.acquire_lock> (via _get_module_lock, cb)",
+        "ncalls": 66,
+        "tottime": 6.041e-06,
+        "cumtime": 6.041e-06,
+        "per_call": 9.153030303030304e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaLogging/Core/logger.py",
+        "lineno": 205,
+        "funcname": "<lambda>",
+        "ncalls": 9,
+        "tottime": 4.6470000000000006e-06,
+        "cumtime": 5.9820000000000005e-06,
+        "per_call": 5.163333333333334e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/calendar.py",
+        "lineno": 121,
+        "funcname": "__getitem__",
+        "ncalls": 4,
+        "tottime": 1.091e-06,
+        "cumtime": 5.91e-06,
+        "per_call": 2.7275e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'get' of '_contextvars.ContextVar' objects> (via _log)",
+        "ncalls": 11,
+        "tottime": 5.9090000000000005e-06,
+        "cumtime": 5.9090000000000005e-06,
+        "per_call": 5.371818181818182e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen genericpath>",
+        "lineno": 39,
+        "funcname": "isdir",
+        "ncalls": 2,
+        "tottime": 2.074e-06,
+        "cumtime": 5.860000000000001e-06,
+        "per_call": 1.037e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 82,
+        "funcname": "remove",
+        "ncalls": 11,
+        "tottime": 4.216e-06,
+        "cumtime": 5.831000000000001e-06,
+        "per_call": 3.8327272727272725e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 1043,
+        "funcname": "_set_tstate_lock",
+        "ncalls": 2,
+        "tottime": 3.816e-06,
+        "cumtime": 5.711e-06,
+        "per_call": 1.908e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 11753,
+        "funcname": "__init__",
+        "ncalls": 27,
+        "tottime": 5.709000000000001e-06,
+        "cumtime": 5.709000000000001e-06,
+        "per_call": 2.1144444444444448e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.getpid> (via get_pid, _get_setup_updated_with_protocol_and_ppid)",
+        "ncalls": 15,
+        "tottime": 5.662e-06,
+        "cumtime": 5.662e-06,
+        "per_call": 3.774666666666667e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.lstat> (via _joinrealpath)",
+        "ncalls": 5,
+        "tottime": 5.621e-06,
+        "cumtime": 5.621e-06,
+        "per_call": 1.1242e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'endswith' of 'str' objects> (via is_python, _is_managed_arg)",
+        "ncalls": 37,
+        "tottime": 5.616e-06,
+        "cumtime": 5.616e-06,
+        "per_call": 1.517837837837838e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'extend' of 'bytearray' objects> (via _code_to_timestamp_pyc)",
+        "ncalls": 40,
+        "tottime": 5.583000000000001e-06,
+        "cumtime": 5.583000000000001e-06,
+        "per_call": 1.39575e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen posixpath>",
+        "lineno": 100,
+        "funcname": "split",
+        "ncalls": 2,
+        "tottime": 3.5890000000000003e-06,
+        "cumtime": 5.53e-06,
+        "per_call": 1.7945000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/_weakrefset.py",
+        "lineno": 85,
+        "funcname": "add",
+        "ncalls": 5,
+        "tottime": 4.228e-06,
+        "cumtime": 5.4e-06,
+        "per_call": 8.456e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_datetime.py",
+        "lineno": 79,
+        "funcname": "get",
+        "ncalls": 14,
+        "tottime": 3.5330000000000003e-06,
+        "cumtime": 5.3060000000000005e-06,
+        "per_call": 2.523571428571429e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 380,
+        "funcname": "with_segments",
+        "ncalls": 2,
+        "tottime": 1.3830000000000001e-06,
+        "cumtime": 5.240000000000001e-06,
+        "per_call": 6.915000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.sorted> (via send, get_scheme_names)",
+        "ncalls": 5,
+        "tottime": 5.230000000000001e-06,
+        "cumtime": 5.230000000000001e-06,
+        "per_call": 1.0460000000000002e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 48,
+        "funcname": "_new_module",
+        "ncalls": 10,
+        "tottime": 4.998e-06,
+        "cumtime": 4.998e-06,
+        "per_call": 4.998000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/OpenAir.py",
+        "lineno": 114,
+        "funcname": "get_host_guid",
+        "ncalls": 1,
+        "tottime": 3.215e-06,
+        "cumtime": 4.859e-06,
+        "per_call": 3.215e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen os>",
+        "lineno": 1087,
+        "funcname": "__subclasshook__",
+        "ncalls": 3,
+        "tottime": 2.132e-06,
+        "cumtime": 4.818e-06,
+        "per_call": 7.106666666666667e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'to_bytes' of 'int' objects> (via _pack_uint32)",
+        "ncalls": 30,
+        "tottime": 4.808e-06,
+        "cumtime": 4.808e-06,
+        "per_call": 1.6026666666666667e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _imp.release_lock> (via _get_module_lock, __exit__)",
+        "ncalls": 66,
+        "tottime": 4.768e-06,
+        "cumtime": 4.768e-06,
+        "per_call": 7.224242424242424e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 731,
+        "funcname": "parent",
+        "ncalls": 1,
+        "tottime": 1.3630000000000001e-06,
+        "cumtime": 4.599e-06,
+        "per_call": 1.3630000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 1234,
+        "funcname": "daemon",
+        "ncalls": 10,
+        "tottime": 4.548e-06,
+        "cumtime": 4.548e-06,
+        "per_call": 4.548e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'group' of 're.Match' objects> (via feed, get)",
+        "ncalls": 38,
+        "tottime": 4.5380000000000004e-06,
+        "cumtime": 4.5380000000000004e-06,
+        "per_call": 1.1942105263157897e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'popleft' of 'collections.deque' objects> (via _get)",
+        "ncalls": 33,
+        "tottime": 4.445000000000001e-06,
+        "cumtime": 4.445000000000001e-06,
+        "per_call": 1.346969696969697e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py",
+        "lineno": 294,
+        "funcname": "remove_quotes_from_args",
+        "ncalls": 2,
+        "tottime": 3.214e-06,
+        "cumtime": 4.238e-06,
+        "per_call": 1.607e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 79,
+        "funcname": "__init__",
+        "ncalls": 11,
+        "tottime": 4.228e-06,
+        "cumtime": 4.228e-06,
+        "per_call": 3.8436363636363637e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 1196,
+        "funcname": "ident",
+        "ncalls": 11,
+        "tottime": 4.1660000000000004e-06,
+        "cumtime": 4.1660000000000004e-06,
+        "per_call": 3.7872727272727277e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 11694,
+        "funcname": "update_dict_ids_to_dap",
+        "ncalls": 3,
+        "tottime": 2.373e-06,
+        "cumtime": 4.157e-06,
+        "per_call": 7.91e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/json/decoder.py",
+        "lineno": 343,
+        "funcname": "raw_decode",
+        "ncalls": 1,
+        "tottime": 4.148e-06,
+        "cumtime": 4.148e-06,
+        "per_call": 4.148e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py",
+        "lineno": 1529,
+        "funcname": "dap_messages_listeners",
+        "ncalls": 32,
+        "tottime": 4.145e-06,
+        "cumtime": 4.145e-06,
+        "per_call": 1.2953125e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/contextlib.py",
+        "lineno": 567,
+        "funcname": "__exit__",
+        "ncalls": 2,
+        "tottime": 3.0870000000000003e-06,
+        "cumtime": 4.128e-06,
+        "per_call": 1.5435000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaGuiShowtime/Methods/ptp_time.py",
+        "lineno": 1,
+        "funcname": "<module>",
+        "ncalls": 1,
+        "tottime": 3.4260000000000003e-06,
+        "cumtime": 4.087e-06,
+        "per_call": 3.4260000000000003e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/inspect.py",
+        "lineno": 405,
+        "funcname": "_has_coroutine_mark",
+        "ncalls": 3,
+        "tottime": 2.143e-06,
+        "cumtime": 4.067e-06,
+        "per_call": 7.143333333333334e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 173,
+        "funcname": "__exit__",
+        "ncalls": 11,
+        "tottime": 2.487e-06,
+        "cumtime": 3.928e-06,
+        "per_call": 2.260909090909091e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.locals> (via find_spec)",
+        "ncalls": 5,
+        "tottime": 3.927e-06,
+        "cumtime": 3.927e-06,
+        "per_call": 7.853999999999999e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 357,
+        "funcname": "__init__",
+        "ncalls": 3,
+        "tottime": 2.634e-06,
+        "cumtime": 3.9180000000000004e-06,
+        "per_call": 8.78e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_io.py",
+        "lineno": 44,
+        "funcname": "isatty",
+        "ncalls": 1,
+        "tottime": 1.3040000000000001e-06,
+        "cumtime": 3.9080000000000005e-06,
+        "per_call": 1.3040000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1573,
+        "funcname": "<genexpr>",
+        "ncalls": 48,
+        "tottime": 3.898000000000001e-06,
+        "cumtime": 3.898000000000001e-06,
+        "per_call": 8.120833333333335e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 1180,
+        "funcname": "name",
+        "ncalls": 14,
+        "tottime": 3.8960000000000005e-06,
+        "cumtime": 3.8960000000000005e-06,
+        "per_call": 2.7828571428571433e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method time.clock_gettime> (via <lambda>, <module>)",
+        "ncalls": 10,
+        "tottime": 3.8690000000000006e-06,
+        "cumtime": 3.8690000000000006e-06,
+        "per_call": 3.8690000000000006e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_colorizer.py",
+        "lineno": 176,
+        "funcname": "strip",
+        "ncalls": 2,
+        "tottime": 3.846e-06,
+        "cumtime": 3.846e-06,
+        "per_call": 1.923e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method sys._getframe> (via _log)",
+        "ncalls": 11,
+        "tottime": 3.7250000000000003e-06,
+        "cumtime": 3.7250000000000003e-06,
+        "per_call": 3.386363636363637e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_logger.py",
+        "lineno": 1666,
+        "funcname": "configure",
+        "ncalls": 1,
+        "tottime": 2.967e-06,
+        "cumtime": 3.687e-06,
+        "per_call": 2.967e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 11681,
+        "funcname": "to_dict",
+        "ncalls": 3,
+        "tottime": 2.9570000000000002e-06,
+        "cumtime": 3.6470000000000004e-06,
+        "per_call": 9.856666666666667e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 277,
+        "funcname": "__init__",
+        "ncalls": 2,
+        "tottime": 2.635e-06,
+        "cumtime": 3.6470000000000004e-06,
+        "per_call": 1.3175e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaLogging/Core/logger.py",
+        "lineno": 229,
+        "funcname": "<lambda>",
+        "ncalls": 9,
+        "tottime": 2.4340000000000003e-06,
+        "cumtime": 3.6170000000000003e-06,
+        "per_call": 2.704444444444445e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.min> (via add, remove)",
+        "ncalls": 4,
+        "tottime": 3.3970000000000003e-06,
+        "cumtime": 3.537e-06,
+        "per_call": 8.492500000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'timetuple' of 'datetime.datetime' objects> (via __format__)",
+        "ncalls": 2,
+        "tottime": 3.4160000000000004e-06,
+        "cumtime": 3.4160000000000004e-06,
+        "per_call": 1.7080000000000002e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'pop' of 'dict' objects> (via get_code, _load_unlocked)",
+        "ncalls": 17,
+        "tottime": 3.4140000000000003e-06,
+        "cumtime": 3.4140000000000003e-06,
+        "per_call": 2.0082352941176472e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'pop' of 'list' objects> (via _find_and_load_unlocked, find_spec)",
+        "ncalls": 29,
+        "tottime": 3.3810000000000003e-06,
+        "cumtime": 3.3810000000000003e-06,
+        "per_call": 1.1658620689655174e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _imp.is_builtin> (via find_spec)",
+        "ncalls": 11,
+        "tottime": 3.3460000000000002e-06,
+        "cumtime": 3.3460000000000002e-06,
+        "per_call": 3.041818181818182e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _imp.find_frozen> (via _call_with_frames_removed)",
+        "ncalls": 11,
+        "tottime": 3.278e-06,
+        "cumtime": 3.278e-06,
+        "per_call": 2.98e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_colorizer.py",
+        "lineno": 171,
+        "funcname": "__init__",
+        "ncalls": 24,
+        "tottime": 3.215e-06,
+        "cumtime": 3.215e-06,
+        "per_call": 1.3395833333333333e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_io.py",
+        "lineno": 55,
+        "funcname": "__getattr__",
+        "ncalls": 4,
+        "tottime": 1.7720000000000001e-06,
+        "cumtime": 3.1550000000000003e-06,
+        "per_call": 4.4300000000000004e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 1390,
+        "funcname": "_handle_fromlist",
+        "ncalls": 4,
+        "tottime": 1.9930000000000002e-06,
+        "cumtime": 3.0760000000000003e-06,
+        "per_call": 4.982500000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.read> (via send, _execute_child)",
+        "ncalls": 2,
+        "tottime": 3.075e-06,
+        "cumtime": 3.075e-06,
+        "per_call": 1.5375e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 420,
+        "funcname": "_from_parsed_parts",
+        "ncalls": 1,
+        "tottime": 5.310000000000001e-07,
+        "cumtime": 3.056e-06,
+        "per_call": 5.310000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'time' of 'datetime.datetime' objects> (via aware_now)",
+        "ncalls": 11,
+        "tottime": 2.9920000000000003e-06,
+        "cumtime": 2.9920000000000003e-06,
+        "per_call": 2.7200000000000005e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'lower' of 'str' objects> (via is_python, _get_lib_dirs)",
+        "ncalls": 15,
+        "tottime": 2.883e-06,
+        "cumtime": 2.883e-06,
+        "per_call": 1.9220000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_comm.py",
+        "lineno": 170,
+        "funcname": "_on_dict_loaded",
+        "ncalls": 1,
+        "tottime": 2.053e-06,
+        "cumtime": 2.7950000000000003e-06,
+        "per_call": 2.053e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.setattr> (via find_spec, _find_and_load)",
+        "ncalls": 6,
+        "tottime": 2.7160000000000003e-06,
+        "cumtime": 2.7160000000000003e-06,
+        "per_call": 4.526666666666667e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method __new__ of type object at 0xa43b40> (via __new__)",
+        "ncalls": 14,
+        "tottime": 2.695e-06,
+        "cumtime": 2.695e-06,
+        "per_call": 1.925e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen _collections_abc>",
+        "lineno": 104,
+        "funcname": "_check_methods",
+        "ncalls": 3,
+        "tottime": 2.686e-06,
+        "cumtime": 2.686e-06,
+        "per_call": 8.953333333333334e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py",
+        "lineno": 42,
+        "funcname": "_get_apply_arg_patching",
+        "ncalls": 2,
+        "tottime": 7.100000000000001e-07,
+        "cumtime": 2.684e-06,
+        "per_call": 3.5500000000000004e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py",
+        "lineno": 223,
+        "funcname": "_is_managed_arg",
+        "ncalls": 2,
+        "tottime": 1.02e-06,
+        "cumtime": 2.5740000000000003e-06,
+        "per_call": 5.1e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/signal.py",
+        "lineno": 36,
+        "funcname": "_enum_to_int",
+        "ncalls": 2,
+        "tottime": 2.555e-06,
+        "cumtime": 2.555e-06,
+        "per_call": 1.2775e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_colorizer.py",
+        "lineno": 266,
+        "funcname": "done",
+        "ncalls": 24,
+        "tottime": 2.5230000000000002e-06,
+        "cumtime": 2.5230000000000002e-06,
+        "per_call": 1.0512500000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'date' of 'datetime.datetime' objects> (via aware_now)",
+        "ncalls": 11,
+        "tottime": 2.4840000000000003e-06,
+        "cumtime": 2.4840000000000003e-06,
+        "per_call": 2.2581818181818185e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'match' of 're.Pattern' objects> (via decode)",
+        "ncalls": 2,
+        "tottime": 2.395e-06,
+        "cumtime": 2.395e-06,
+        "per_call": 1.1975e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 921,
+        "funcname": "__init__",
+        "ncalls": 2,
+        "tottime": 2.3940000000000003e-06,
+        "cumtime": 2.3940000000000003e-06,
+        "per_call": 1.1970000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 645,
+        "funcname": "parent",
+        "ncalls": 10,
+        "tottime": 1.8140000000000001e-06,
+        "cumtime": 2.336e-06,
+        "per_call": 1.8140000000000002e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'isatty' of '_io.TextIOWrapper' objects> (via isatty)",
+        "ncalls": 1,
+        "tottime": 2.324e-06,
+        "cumtime": 2.324e-06,
+        "per_call": 2.324e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/subprocess.py",
+        "lineno": 1120,
+        "funcname": "__del__",
+        "ncalls": 2,
+        "tottime": 2.054e-06,
+        "cumtime": 2.3150000000000003e-06,
+        "per_call": 1.027e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_logger.py",
+        "lineno": 1515,
+        "funcname": "level",
+        "ncalls": 3,
+        "tottime": 2.023e-06,
+        "cumtime": 2.294e-06,
+        "per_call": 6.743333333333333e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/multiprocessing/process.py",
+        "lineno": 37,
+        "funcname": "current_process",
+        "ncalls": 11,
+        "tottime": 2.294e-06,
+        "cumtime": 2.294e-06,
+        "per_call": 2.0854545454545454e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_command_line_handling.py",
+        "lineno": 98,
+        "funcname": "get_pydevd_file",
+        "ncalls": 2,
+        "tottime": 1.6740000000000002e-06,
+        "cumtime": 2.2640000000000003e-06,
+        "per_call": 8.370000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/inspect.py",
+        "lineno": 299,
+        "funcname": "ismethod",
+        "ncalls": 6,
+        "tottime": 1.5160000000000002e-06,
+        "cumtime": 2.206e-06,
+        "per_call": 2.526666666666667e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _string.formatter_parser> (via parse)",
+        "ncalls": 24,
+        "tottime": 2.184e-06,
+        "cumtime": 2.184e-06,
+        "per_call": 9.100000000000001e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen _collections_abc>",
+        "lineno": 819,
+        "funcname": "keys",
+        "ncalls": 1,
+        "tottime": 1.553e-06,
+        "cumtime": 2.164e-06,
+        "per_call": 1.553e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'find' of 'bytes' objects> (via _read_line, <method 'acquire' of '_thread.lock' objects>)",
+        "ncalls": 3,
+        "tottime": 2.0840000000000003e-06,
+        "cumtime": 2.0840000000000003e-06,
+        "per_call": 6.946666666666668e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.repr> (via add)",
+        "ncalls": 2,
+        "tottime": 2.0440000000000003e-06,
+        "cumtime": 2.0440000000000003e-06,
+        "per_call": 1.0220000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 599,
+        "funcname": "__init__",
+        "ncalls": 11,
+        "tottime": 2.0330000000000003e-06,
+        "cumtime": 2.0330000000000003e-06,
+        "per_call": 1.8481818181818184e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 1040,
+        "funcname": "_set_native_id",
+        "ncalls": 2,
+        "tottime": 1.243e-06,
+        "cumtime": 1.9940000000000003e-06,
+        "per_call": 6.215e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/_weakrefset.py",
+        "lineno": 39,
+        "funcname": "_remove",
+        "ncalls": 1,
+        "tottime": 1.543e-06,
+        "cumtime": 1.974e-06,
+        "per_call": 1.543e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/contextlib.py",
+        "lineno": 481,
+        "funcname": "__init__",
+        "ncalls": 2,
+        "tottime": 1.964e-06,
+        "cumtime": 1.964e-06,
+        "per_call": 9.82e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method sys.intern> (via _parse_path)",
+        "ncalls": 10,
+        "tottime": 1.942e-06,
+        "cumtime": 1.942e-06,
+        "per_call": 1.9420000000000003e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 8224,
+        "funcname": "__init__",
+        "ncalls": 1,
+        "tottime": 1.8430000000000002e-06,
+        "cumtime": 1.8430000000000002e-06,
+        "per_call": 1.8430000000000002e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.id> (via _write_atomic, _get_or_compute_thread_id_with_lock)",
+        "ncalls": 14,
+        "tottime": 1.7720000000000001e-06,
+        "cumtime": 1.7720000000000001e-06,
+        "per_call": 1.265714285714286e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 11664,
+        "funcname": "__init__",
+        "ncalls": 3,
+        "tottime": 1.732e-06,
+        "cumtime": 1.732e-06,
+        "per_call": 5.773333333333334e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_constants.py",
+        "lineno": 599,
+        "funcname": "get_pid",
+        "ncalls": 2,
+        "tottime": 8.620000000000001e-07,
+        "cumtime": 1.7040000000000001e-06,
+        "per_call": 4.3100000000000003e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 8290,
+        "funcname": "__init__",
+        "ncalls": 1,
+        "tottime": 1.6930000000000001e-06,
+        "cumtime": 1.6930000000000001e-06,
+        "per_call": 1.6930000000000001e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'end' of 're.Match' objects> (via feed, decode)",
+        "ncalls": 14,
+        "tottime": 1.675e-06,
+        "cumtime": 1.675e-06,
+        "per_call": 1.1964285714285715e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 1354,
+        "funcname": "_make_invoke_excepthook",
+        "ncalls": 2,
+        "tottime": 1.6740000000000002e-06,
+        "cumtime": 1.6740000000000002e-06,
+        "per_call": 8.370000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/functools.py",
+        "lineno": 421,
+        "funcname": "_unwrap_partial",
+        "ncalls": 6,
+        "tottime": 1.221e-06,
+        "cumtime": 1.6710000000000002e-06,
+        "per_call": 2.0350000000000002e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen posixpath>",
+        "lineno": 138,
+        "funcname": "splitroot",
+        "ncalls": 2,
+        "tottime": 1.274e-06,
+        "cumtime": 1.644e-06,
+        "per_call": 6.37e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _weakref._remove_dead_weakref> (via remove)",
+        "ncalls": 11,
+        "tottime": 1.615e-06,
+        "cumtime": 1.615e-06,
+        "per_call": 1.4681818181818182e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 429,
+        "funcname": "_format_parsed_parts",
+        "ncalls": 3,
+        "tottime": 1.051e-06,
+        "cumtime": 1.5630000000000001e-06,
+        "per_call": 3.503333333333333e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/multiprocessing/process.py",
+        "lineno": 99,
+        "funcname": "_check_closed",
+        "ncalls": 11,
+        "tottime": 1.4930000000000001e-06,
+        "cumtime": 1.4930000000000001e-06,
+        "per_call": 1.3572727272727275e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_constants.py",
+        "lineno": 702,
+        "funcname": "__enter__",
+        "ncalls": 24,
+        "tottime": 1.481e-06,
+        "cumtime": 1.481e-06,
+        "per_call": 6.170833333333334e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'add' of 'set' objects> (via add, send)",
+        "ncalls": 7,
+        "tottime": 1.443e-06,
+        "cumtime": 1.443e-06,
+        "per_call": 2.0614285714285714e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'remove' of 'list' objects> (via __exit__)",
+        "ncalls": 11,
+        "tottime": 1.441e-06,
+        "cumtime": 1.441e-06,
+        "per_call": 1.31e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_recattrs.py",
+        "lineno": 23,
+        "funcname": "__init__",
+        "ncalls": 11,
+        "tottime": 1.4200000000000002e-06,
+        "cumtime": 1.4200000000000002e-06,
+        "per_call": 1.290909090909091e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.callable> (via add, __init__)",
+        "ncalls": 14,
+        "tottime": 1.4030000000000002e-06,
+        "cumtime": 1.4030000000000002e-06,
+        "per_call": 1.0021428571428572e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 1166,
+        "funcname": "__new__",
+        "ncalls": 3,
+        "tottime": 9.11e-07,
+        "cumtime": 1.3920000000000002e-06,
+        "per_call": 3.036666666666667e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 1036,
+        "funcname": "_set_ident",
+        "ncalls": 2,
+        "tottime": 1.012e-06,
+        "cumtime": 1.3830000000000001e-06,
+        "per_call": 5.06e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaConfiguration/FileReaders/config_reader.py",
+        "lineno": 43,
+        "funcname": "global_settings",
+        "ncalls": 1,
+        "tottime": 1.133e-06,
+        "cumtime": 1.373e-06,
+        "per_call": 1.133e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_colorizer.py",
+        "lineno": 275,
+        "funcname": "_get_ansicode",
+        "ncalls": 4,
+        "tottime": 1.362e-06,
+        "cumtime": 1.362e-06,
+        "per_call": 3.405e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _signal.signal> (via signal)",
+        "ncalls": 1,
+        "tottime": 1.343e-06,
+        "cumtime": 1.343e-06,
+        "per_call": 1.343e-06,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 15261,
+        "funcname": "__init__",
+        "ncalls": 2,
+        "tottime": 1.322e-06,
+        "cumtime": 1.322e-06,
+        "per_call": 6.61e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'startswith' of 'bytes' objects> (via wait)",
+        "ncalls": 2,
+        "tottime": 1.3130000000000002e-06,
+        "cumtime": 1.3130000000000002e-06,
+        "per_call": 6.565000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_constants.py",
+        "lineno": 705,
+        "funcname": "__exit__",
+        "ncalls": 24,
+        "tottime": 1.3130000000000002e-06,
+        "cumtime": 1.3130000000000002e-06,
+        "per_call": 5.470833333333334e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_logger.py",
+        "lineno": 230,
+        "funcname": "__init__",
+        "ncalls": 10,
+        "tottime": 1.2820000000000002e-06,
+        "cumtime": 1.2820000000000002e-06,
+        "per_call": 1.2820000000000002e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'start' of 're.Match' objects> (via feed)",
+        "ncalls": 12,
+        "tottime": 1.281e-06,
+        "cumtime": 1.281e-06,
+        "per_call": 1.0675000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/multiprocessing/process.py",
+        "lineno": 189,
+        "funcname": "name",
+        "ncalls": 11,
+        "tottime": 1.281e-06,
+        "cumtime": 1.281e-06,
+        "per_call": 1.1645454545454546e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_colorizer.py",
+        "lineno": 272,
+        "funcname": "current_color_tokens",
+        "ncalls": 3,
+        "tottime": 1.233e-06,
+        "cumtime": 1.233e-06,
+        "per_call": 4.11e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_comm.py",
+        "lineno": 217,
+        "funcname": "_read_line",
+        "ncalls": 1,
+        "tottime": 9.61e-07,
+        "cumtime": 1.212e-06,
+        "per_call": 9.61e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 412,
+        "funcname": "__init__",
+        "ncalls": 11,
+        "tottime": 1.192e-06,
+        "cumtime": 1.192e-06,
+        "per_call": 1.0836363636363636e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_recattrs.py",
+        "lineno": 8,
+        "funcname": "__init__",
+        "ncalls": 11,
+        "tottime": 1.182e-06,
+        "cumtime": 1.182e-06,
+        "per_call": 1.0745454545454546e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_recattrs.py",
+        "lineno": 51,
+        "funcname": "__init__",
+        "ncalls": 11,
+        "tottime": 1.131e-06,
+        "cumtime": 1.131e-06,
+        "per_call": 1.0281818181818182e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_recattrs.py",
+        "lineno": 37,
+        "funcname": "__init__",
+        "ncalls": 11,
+        "tottime": 1.102e-06,
+        "cumtime": 1.102e-06,
+        "per_call": 1.0018181818181818e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 71,
+        "funcname": "_relax_case",
+        "ncalls": 19,
+        "tottime": 1.0930000000000002e-06,
+        "cumtime": 1.0930000000000002e-06,
+        "per_call": 5.752631578947369e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'rfind' of 'bytes' objects> (via dirname)",
+        "ncalls": 2,
+        "tottime": 1.092e-06,
+        "cumtime": 1.092e-06,
+        "per_call": 5.46e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1153,
+        "funcname": "__init__",
+        "ncalls": 10,
+        "tottime": 1.0810000000000001e-06,
+        "cumtime": 1.0810000000000001e-06,
+        "per_call": 1.0810000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 124,
+        "funcname": "RLock",
+        "ncalls": 2,
+        "tottime": 1.072e-06,
+        "cumtime": 1.072e-06,
+        "per_call": 5.36e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/inspect.py",
+        "lineno": 2133,
+        "funcname": "_signature_is_functionlike",
+        "ncalls": 3,
+        "tottime": 8.11e-07,
+        "cumtime": 1.051e-06,
+        "per_call": 2.7033333333333333e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method sys.exc_info> (via __exit__)",
+        "ncalls": 2,
+        "tottime": 1.041e-06,
+        "cumtime": 1.041e-06,
+        "per_call": 5.205e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_io.py",
+        "lineno": 93,
+        "funcname": "flush",
+        "ncalls": 11,
+        "tottime": 9.61e-07,
+        "cumtime": 9.61e-07,
+        "per_call": 8.736363636363636e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.urandom> (via get_host_guid)",
+        "ncalls": 1,
+        "tottime": 9.12e-07,
+        "cumtime": 9.12e-07,
+        "per_call": 9.12e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _thread._set_sentinel> (via _set_tstate_lock)",
+        "ncalls": 2,
+        "tottime": 8.920000000000001e-07,
+        "cumtime": 8.920000000000001e-07,
+        "per_call": 4.4600000000000005e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/subprocess.py",
+        "lineno": 268,
+        "funcname": "_cleanup",
+        "ncalls": 2,
+        "tottime": 8.91e-07,
+        "cumtime": 8.91e-07,
+        "per_call": 4.455e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 158,
+        "funcname": "__init__",
+        "ncalls": 11,
+        "tottime": 8.830000000000001e-07,
+        "cumtime": 8.830000000000001e-07,
+        "per_call": 8.027272727272728e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'split' of 'bytes' objects> (via wait)",
+        "ncalls": 1,
+        "tottime": 8.520000000000001e-07,
+        "cumtime": 8.520000000000001e-07,
+        "per_call": 8.520000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'insert' of 'list' objects> (via wait, <module>)",
+        "ncalls": 2,
+        "tottime": 8.310000000000001e-07,
+        "cumtime": 8.310000000000001e-07,
+        "per_call": 4.1550000000000003e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.WIFSTOPPED> (via _handle_exitstatus)",
+        "ncalls": 2,
+        "tottime": 8.210000000000001e-07,
+        "cumtime": 8.210000000000001e-07,
+        "per_call": 4.1050000000000003e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/inspect.py",
+        "lineno": 371,
+        "funcname": "isfunction",
+        "ncalls": 3,
+        "tottime": 5.91e-07,
+        "cumtime": 7.91e-07,
+        "per_call": 1.97e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'partition' of 'str' objects> (via _joinrealpath)",
+        "ncalls": 5,
+        "tottime": 7.81e-07,
+        "cumtime": 7.81e-07,
+        "per_call": 1.562e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaLogging/Core/logger.py",
+        "lineno": 46,
+        "funcname": "BatchLogSink",
+        "ncalls": 1,
+        "tottime": 7.61e-07,
+        "cumtime": 7.61e-07,
+        "per_call": 7.61e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method time.time> (via wait, <module>)",
+        "ncalls": 3,
+        "tottime": 7.520000000000001e-07,
+        "cumtime": 7.520000000000001e-07,
+        "per_call": 2.506666666666667e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _thread.get_native_id> (via _set_native_id)",
+        "ncalls": 2,
+        "tottime": 7.510000000000001e-07,
+        "cumtime": 7.510000000000001e-07,
+        "per_call": 3.7550000000000005e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.divmod> (via __format__)",
+        "ncalls": 2,
+        "tottime": 7.32e-07,
+        "cumtime": 7.32e-07,
+        "per_call": 3.66e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_comm.py",
+        "lineno": 196,
+        "funcname": "_read",
+        "ncalls": 1,
+        "tottime": 5.91e-07,
+        "cumtime": 6.91e-07,
+        "per_call": 5.91e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'rstrip' of 'bytes' objects> (via dirname)",
+        "ncalls": 2,
+        "tottime": 6.81e-07,
+        "cumtime": 6.81e-07,
+        "per_call": 3.405e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'split' of 'str' objects> (via _parse_path)",
+        "ncalls": 2,
+        "tottime": 6.720000000000001e-07,
+        "cumtime": 6.720000000000001e-07,
+        "per_call": 3.3600000000000004e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_better_exceptions.py",
+        "lineno": 56,
+        "funcname": "__init__",
+        "ncalls": 3,
+        "tottime": 6.620000000000001e-07,
+        "cumtime": 6.620000000000001e-07,
+        "per_call": 2.2066666666666668e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 986,
+        "funcname": "create_module",
+        "ncalls": 10,
+        "tottime": 6.61e-07,
+        "cumtime": 6.61e-07,
+        "per_call": 6.61e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_colorama.py",
+        "lineno": 40,
+        "funcname": "should_wrap",
+        "ncalls": 1,
+        "tottime": 6.310000000000001e-07,
+        "cumtime": 6.310000000000001e-07,
+        "per_call": 6.310000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'total_seconds' of 'datetime.timedelta' objects> (via __format__)",
+        "ncalls": 2,
+        "tottime": 6.22e-07,
+        "cumtime": 6.22e-07,
+        "per_call": 3.11e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaLogging/Core/logger.py",
+        "lineno": 97,
+        "funcname": "_get_cached_config",
+        "ncalls": 1,
+        "tottime": 6.210000000000001e-07,
+        "cumtime": 6.210000000000001e-07,
+        "per_call": 6.210000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_error_interceptor.py",
+        "lineno": 6,
+        "funcname": "__init__",
+        "ncalls": 3,
+        "tottime": 6.210000000000001e-07,
+        "cumtime": 6.210000000000001e-07,
+        "per_call": 2.0700000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap>",
+        "lineno": 653,
+        "funcname": "has_location",
+        "ncalls": 10,
+        "tottime": 6.12e-07,
+        "cumtime": 6.12e-07,
+        "per_call": 6.12e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen _collections_abc>",
+        "lineno": 845,
+        "funcname": "__init__",
+        "ncalls": 1,
+        "tottime": 6.110000000000001e-07,
+        "cumtime": 6.110000000000001e-07,
+        "per_call": 6.110000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "<frozen importlib._bootstrap_external>",
+        "lineno": 1178,
+        "funcname": "get_filename",
+        "ncalls": 10,
+        "tottime": 6.02e-07,
+        "cumtime": 6.02e-07,
+        "per_call": 6.02e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaWatchdog/Managers/watchdog.py",
+        "lineno": 120,
+        "funcname": "register_panic_callback",
+        "ncalls": 1,
+        "tottime": 4.81e-07,
+        "cumtime": 6.01e-07,
+        "per_call": 4.81e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method builtins.abs> (via __format__)",
+        "ncalls": 4,
+        "tottime": 5.72e-07,
+        "cumtime": 5.72e-07,
+        "per_call": 1.43e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'find' of 'str' objects> (via is_python)",
+        "ncalls": 2,
+        "tottime": 5.2e-07,
+        "cumtime": 5.2e-07,
+        "per_call": 2.6e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/signal.py",
+        "lineno": 24,
+        "funcname": "_int_to_enum",
+        "ncalls": 1,
+        "tottime": 4.2e-07,
+        "cumtime": 5.110000000000001e-07,
+        "per_call": 4.2e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaConfiguration/FileReaders/config_reader.py",
+        "lineno": 36,
+        "funcname": "get_instance",
+        "ncalls": 2,
+        "tottime": 5.01e-07,
+        "cumtime": 5.01e-07,
+        "per_call": 2.505e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _stat.S_ISLNK> (via _joinrealpath)",
+        "ncalls": 5,
+        "tottime": 4.71e-07,
+        "cumtime": 4.71e-07,
+        "per_call": 9.420000000000001e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py",
+        "lineno": 359,
+        "funcname": "quote_args",
+        "ncalls": 2,
+        "tottime": 4.51e-07,
+        "cumtime": 4.51e-07,
+        "per_call": 2.255e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'strip' of 'bytes' objects> (via wait)",
+        "ncalls": 1,
+        "tottime": 4.4100000000000004e-07,
+        "cumtime": 4.4100000000000004e-07,
+        "per_call": 4.4100000000000004e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method sys.audit> (via _execute_child)",
+        "ncalls": 2,
+        "tottime": 4.4100000000000004e-07,
+        "cumtime": 4.4100000000000004e-07,
+        "per_call": 2.2050000000000002e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _thread.daemon_threads_allowed> (via __init__)",
+        "ncalls": 2,
+        "tottime": 4.4100000000000004e-07,
+        "cumtime": 4.4100000000000004e-07,
+        "per_call": 2.2050000000000002e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_colorizer.py",
+        "lineno": 330,
+        "funcname": "__init__",
+        "ncalls": 3,
+        "tottime": 4.4100000000000004e-07,
+        "cumtime": 4.4100000000000004e-07,
+        "per_call": 1.47e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/_debug_adapter/pydevd_schema.py",
+        "lineno": 16679,
+        "funcname": "__init__",
+        "ncalls": 1,
+        "tottime": 4.4100000000000004e-07,
+        "cumtime": 4.4100000000000004e-07,
+        "per_call": 4.4100000000000004e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'discard' of 'set' objects> (via _remove)",
+        "ncalls": 1,
+        "tottime": 4.3100000000000003e-07,
+        "cumtime": 4.3100000000000003e-07,
+        "per_call": 4.3100000000000003e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_net_command_factory_json.py",
+        "lineno": 459,
+        "funcname": "make_process_created_message",
+        "ncalls": 2,
+        "tottime": 4.21e-07,
+        "cumtime": 4.21e-07,
+        "per_call": 2.105e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'hex' of 'bytes' objects> (via get_host_guid)",
+        "ncalls": 1,
+        "tottime": 4.01e-07,
+        "cumtime": 4.01e-07,
+        "per_call": 4.01e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/subprocess.py",
+        "lineno": 1311,
+        "funcname": "_on_error_fd_closer",
+        "ncalls": 4,
+        "tottime": 3.9e-07,
+        "cumtime": 3.9e-07,
+        "per_call": 9.75e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py",
+        "lineno": 243,
+        "funcname": "_on_set_trace_for_new_thread",
+        "ncalls": 2,
+        "tottime": 3.8100000000000004e-07,
+        "cumtime": 3.8100000000000004e-07,
+        "per_call": 1.9050000000000002e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method posix.waitstatus_to_exitcode> (via _handle_exitstatus)",
+        "ncalls": 2,
+        "tottime": 3.51e-07,
+        "cumtime": 3.51e-07,
+        "per_call": 1.755e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'upper' of 'str' objects> (via get_host_guid)",
+        "ncalls": 1,
+        "tottime": 3.3100000000000004e-07,
+        "cumtime": 3.3100000000000004e-07,
+        "per_call": 3.3100000000000004e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py",
+        "lineno": 1099,
+        "funcname": "__init__",
+        "ncalls": 2,
+        "tottime": 3.3100000000000004e-07,
+        "cumtime": 3.3100000000000004e-07,
+        "per_call": 1.6550000000000002e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_log.py",
+        "lineno": 217,
+        "funcname": "debug",
+        "ncalls": 2,
+        "tottime": 3.3100000000000004e-07,
+        "cumtime": 3.3100000000000004e-07,
+        "per_call": 1.6550000000000002e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/_distutils_hack/__init__.py",
+        "lineno": 96,
+        "funcname": "<lambda>",
+        "ncalls": 5,
+        "tottime": 3.3e-07,
+        "cumtime": 3.3e-07,
+        "per_call": 6.600000000000001e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'tzname' of 'datetime.timezone' objects> (via __format__)",
+        "ncalls": 2,
+        "tottime": 3.2100000000000003e-07,
+        "cumtime": 3.2100000000000003e-07,
+        "per_call": 1.6050000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <built-in method _stat.S_ISDIR> (via isdir)",
+        "ncalls": 2,
+        "tottime": 2.9000000000000003e-07,
+        "cumtime": 2.9000000000000003e-07,
+        "per_call": 1.4500000000000001e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'utcoffset' of 'datetime.timezone' objects> (via __format__)",
+        "ncalls": 2,
+        "tottime": 2.5000000000000004e-07,
+        "cumtime": 2.5000000000000004e-07,
+        "per_call": 1.2500000000000002e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaOchestration/Core/path_initializer.py",
+        "lineno": 23,
+        "funcname": "initialize_paths",
+        "ncalls": 1,
+        "tottime": 2.5000000000000004e-07,
+        "cumtime": 2.5000000000000004e-07,
+        "per_call": 2.5000000000000004e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/threading.py",
+        "lineno": 601,
+        "funcname": "is_set",
+        "ncalls": 2,
+        "tottime": 2.4000000000000003e-07,
+        "cumtime": 2.4000000000000003e-07,
+        "per_call": 1.2000000000000002e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_simple_sinks.py",
+        "lineno": 20,
+        "funcname": "stop",
+        "ncalls": 1,
+        "tottime": 2.3000000000000002e-07,
+        "cumtime": 2.3000000000000002e-07,
+        "per_call": 2.3000000000000002e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_net_command.py",
+        "lineno": 21,
+        "funcname": "send",
+        "ncalls": 2,
+        "tottime": 1.91e-07,
+        "cumtime": 1.91e-07,
+        "per_call": 9.55e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 560,
+        "funcname": "root",
+        "ncalls": 3,
+        "tottime": 1.91e-07,
+        "cumtime": 1.91e-07,
+        "per_call": 6.366666666666667e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py",
+        "lineno": 538,
+        "funcname": "is_authenticated",
+        "ncalls": 1,
+        "tottime": 1.9e-07,
+        "cumtime": 1.9e-07,
+        "per_call": 1.9e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/pathlib.py",
+        "lineno": 569,
+        "funcname": "_tail",
+        "ncalls": 3,
+        "tottime": 1.8000000000000002e-07,
+        "cumtime": 1.8000000000000002e-07,
+        "per_call": 6.000000000000001e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3.12/contextlib.py",
+        "lineno": 564,
+        "funcname": "__enter__",
+        "ncalls": 2,
+        "tottime": 1.7000000000000001e-07,
+        "cumtime": 1.7000000000000001e-07,
+        "per_call": 8.500000000000001e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "~",
+        "lineno": 0,
+        "funcname": "built-in: <method 'clear' of 'dict' objects> (via configure)",
+        "ncalls": 1,
+        "tottime": 1.6e-07,
+        "cumtime": 1.6e-07,
+        "per_call": 1.6e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/usr/lib/python3/dist-packages/loguru/_logger.py",
+        "lineno": 1056,
+        "funcname": "<genexpr>",
+        "ncalls": 1,
+        "tottime": 1.4e-07,
+        "cumtime": 1.4e-07,
+        "per_call": 1.4e-07,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaGuiShowtime/__init__.py",
+        "lineno": 1,
+        "funcname": "<module>",
+        "ncalls": 1,
+        "tottime": 8.100000000000001e-08,
+        "cumtime": 8.100000000000001e-08,
+        "per_call": 8.100000000000001e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaLogging/Core/__init__.py",
+        "lineno": 1,
+        "funcname": "<module>",
+        "ncalls": 1,
+        "tottime": 7e-08,
+        "cumtime": 7e-08,
+        "per_call": 7e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaGuiShowtime/Methods/__init__.py",
+        "lineno": 1,
+        "funcname": "<module>",
+        "ncalls": 1,
+        "tottime": 7e-08,
+        "cumtime": 7e-08,
+        "per_call": 7e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaWatchdog/__init__.py",
+        "lineno": 1,
+        "funcname": "<module>",
+        "ncalls": 1,
+        "tottime": 6.000000000000001e-08,
+        "cumtime": 6.000000000000001e-08,
+        "per_call": 6.000000000000001e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaWatchdog/Managers/__init__.py",
+        "lineno": 1,
+        "funcname": "<module>",
+        "ncalls": 1,
+        "tottime": 6.000000000000001e-08,
+        "cumtime": 6.000000000000001e-08,
+        "per_call": 6.000000000000001e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/Documents/OPEN-AIR/oaLogging/__init__.py",
+        "lineno": 1,
+        "funcname": "<module>",
+        "ncalls": 1,
+        "tottime": 6.000000000000001e-08,
+        "cumtime": 6.000000000000001e-08,
+        "per_call": 6.000000000000001e-08,
+        "roots": [
+            "THREADING"
+        ]
+    },
+    {
+        "filename": "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py",
+        "lineno": 1104,
+        "funcname": "__call__",
+        "ncalls": 1,
+        "tottime": 1.1261000000000001e-05,
+        "cumtime": 0.0,
+        "per_call": 1.1261000000000001e-05,
+        "roots": [
+            "THREADING"
+        ]
+    }
+]

@@ -1,3 +1,9 @@
+# Core/factory_mapping.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 def get_core_factory_mapping(self):
     """Returns the core dictionary mapping JSON keys to creator methods."""
     return {
@@ -84,6 +90,13 @@ def get_core_factory_mapping(self):
         "_FaderWithBarGraph": self._lazy_wrap("oaGuiElements.Core.faders.fader_bar_graph.fader_bar_graph", "BuilderFaderBarGraphCreator", "make_fader_bar_graph"),
         "_MDP": self._lazy_wrap("oaGuiElements.Core.utils.composite_mdp.composite_mdp", "BuilderCompositeMdpCreator", "make_composite_mdp"),
         "_CMDP": self._lazy_wrap("oaGuiElements.Core.utils.circular_motion_displacement_potentiometer.circular_motion_displacement_potentiometer", "BuilderCircularMotionDisplacementPotentiometerCreator", "make_circular_motion_displacement_potentiometer"),
+        "HeaderStatusLight": self._lazy_wrap("oaGuiElements.Core.utils.status_light.status_light", "BuilderStatusLightCreator", "make_status_light"),
         # Complex Adapters (Some might be missing - need to verify paths)
         "OcaArray": self._lazy_wrap("oaGuiManager.Core.array.array", "BuilderArrayCreator", "make_array"),
+        "OcaCollapsibleBlock": self._lazy_wrap("oaGuiManager.Core.array.array", "BuilderArrayCreator", "make_array"),
+        "OcaBlock": self._lazy_wrap("oaGuiManager.Core.array.array", "BuilderArrayCreator", "make_array"),
+        "OcaBin": self._lazy_wrap("oaGuiManager.Core.array.array", "BuilderArrayCreator", "make_array"),
+        "Block": self._lazy_wrap("oaGuiManager.Core.array.array", "BuilderArrayCreator", "make_array"),
+        "Array": self._lazy_wrap("oaGuiManager.Core.array.array", "BuilderArrayCreator", "make_array"),
+        "Bin": self._lazy_wrap("oaGuiManager.Core.array.array", "BuilderArrayCreator", "make_array"),
     }

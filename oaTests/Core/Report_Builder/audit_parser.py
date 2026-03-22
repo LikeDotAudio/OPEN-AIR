@@ -1,3 +1,9 @@
+# Report_Builder/audit_parser.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import os
 import re
 import glob
@@ -84,6 +90,13 @@ def parse_audit_log(file_path):
     return results
 
 def get_latest_audit_results(data_dir):
+    # Prioritize combined session logs
+    session_files = glob.glob(os.path.join(data_dir, "AuditSession_*.md"))
+    if session_files:
+        session_files.sort(key=os.path.getmtime, reverse=True)
+        return parse_audit_log(session_files[0])
+
+    # Fallback to individual audit files or old .txt logs
     audit_files = glob.glob(os.path.join(data_dir, "*.md")) + glob.glob(os.path.join(data_dir, "*.txt"))
     if not audit_files:
         return []

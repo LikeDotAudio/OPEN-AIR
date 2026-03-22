@@ -1,18 +1,9 @@
-# handlers/widget_event_binder.py
-#
-# This module provides utility functions for binding callbacks to Tkinter variables, enabling real-time event handling.
-#
+# Methods/widget_event_binder.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
+# Description: handlers/widget_event_binder.py
+
 import tkinter as tk
 
 # --- Standard Debug Logging Setup ---
@@ -45,7 +36,6 @@ def bind_variable_trace(tk_var: tk.Variable, callback):
         # The callback will receive three arguments from the trace, which we ignore with a lambda.
         tk_var.trace_add("write", lambda *args: callback())
         # ⚡ OPTIMIZATION: Disabled logging for trace addition as it spams thousands of lines during GUI build.
-        # if LOCAL_DEBUG:
         #     logger.debug(f"Trace added for variable {tk_var}")
     except Exception as e:
         if LOCAL_DEBUG:

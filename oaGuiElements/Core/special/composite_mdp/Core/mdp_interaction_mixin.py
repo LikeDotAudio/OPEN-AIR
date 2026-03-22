@@ -1,3 +1,9 @@
+# Core/mdp_interaction_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import math
 from .mdp_math import MDPMath
 

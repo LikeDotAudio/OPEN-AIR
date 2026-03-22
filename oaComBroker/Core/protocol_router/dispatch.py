@@ -1,6 +1,8 @@
-# workers/Command_Router/protocol_router/dispatch.py
+# protocol_router/dispatch.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Logic for outbound message dispatch to transport managers.
+# Description: Logic for outbound message dispatch to transport managers.
 
 import orjson
 from .constants import LOCAL_DEBUG

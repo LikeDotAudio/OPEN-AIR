@@ -1,3 +1,9 @@
+# Core/work_stealing_pool.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import collections
 import threading
 import time

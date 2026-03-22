@@ -1,7 +1,8 @@
-# workers/importers/formats/from_ias_html.py
+# FileReaders/from_ias_html.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Logic for converting IAS HTML frequency coordination reports into standardized marker format.
-#
+# Description: Logic for converting IAS HTML frequency coordination reports into standardized marker format.
 
 import re
 import numpy as np

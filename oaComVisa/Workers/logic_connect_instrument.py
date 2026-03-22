@@ -1,21 +1,9 @@
-# managers/VisaScipi/manager_logic_connect_instrument.py
-#
-# This file provides the logic for connecting to a VISA instrument.
-# It manages the lifecycle of the connection, including resource allocation
-# through PyVISA and instrument identification via SCPI *IDN? queries.
-#
-# Primary Responsibilities:
-# - Establish low-level VISA communication links.
-# - Coordinate instrument-specific initialization (timeouts, terminations).
-# - Extract and broadcast hardware metadata (manufacturer, model, etc.).
-#
-# Assumptions and Constraints:
-# - Requires a valid VISA backend (e.g., NI-VISA, Keysight, or PyVISA-py).
-# - Assumes instruments support standard IEEE 488.2 SCPI *IDN? queries.
-# - Networked instruments must be reachable via the local system's I/O layer.
-#
+# oaComVisa/Workers/logic_connect_instrument.py
 # Author: Anthony Peter Kuzub
+# Version: 20260322.1130.1
 #
+# Description: Provides the logic for connecting to a VISA instrument, managing the lifecycle of the connection through PyVISA and instrument identification via SCPI *IDN? queries.
+
 import pyvisa
 import inspect
 import datetime

@@ -1,6 +1,8 @@
 # circular_motion_displacement_potentiometer/circular_motion_displacement_potentiometer.py
-# Modularized Circular Motion Draggable Potentiometer (CMDP).
-# Version 20260315.Modular.1
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Circular Motion Draggable Potentiometer (CMDP).
 
 import tkinter as tk
 from tkinter import ttk

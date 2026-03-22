@@ -1,3 +1,9 @@
+# Core/delete_splink.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 def delete_splink(self, splink_id):
     self.splinks = [s for s in self.splinks if s["id"] != splink_id]
     if splink_id in self.splink_states:

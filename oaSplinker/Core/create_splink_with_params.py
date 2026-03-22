@@ -1,3 +1,9 @@
+# Core/create_splink_with_params.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import time
 from ..Methods.pipeline import SplinkPipeline
 from ..Constants.constants import Splinker_debug_enabled, splinker_logger

@@ -1,21 +1,8 @@
-# Proxy/yak_manager/yak_translator.py
-#
-# This file defines the `YakTranslator` class, which acts as the intermediary (translation layer)
-# between the application's logic/GUI and the low-level VISA Proxy. It loads YAK (JSON) command
-# definitions, processes triggers, builds SCPI commands with substitutions, and publishes them
-# to the Proxy's MQTT Tx_Inbox.
-#
+# Managers/yak_translator.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20260221.Partition.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20260221.Partition.1
+# Description: Proxy/yak_manager/yak_translator.py
 
 import os
 import inspect

@@ -1,9 +1,8 @@
-# workers/OSC/osc_tx_client.py
-#
-# Dedicated OSC transmitter using python-osc.
-#
+# Workers/osc_tx_client.py
 # Author: Gemini Agent
+# Version: 1.0.0
 #
+# Description: Dedicated OSC transmitter using python-osc.
 
 from typing import Any
 

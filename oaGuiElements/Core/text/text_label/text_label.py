@@ -1,10 +1,8 @@
-# text_label/dynamic_guimake_text_label.py
-#
-# A mixin class for the DynamicGuiBuilder that handles the creation of a label widget.
-#
+# text_label/text_label.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260221.Standardized.1
+# Version: 20260221.Standardized.1
+#
+# Description: A mixin class for the DynamicGuiBuilder that handles the creation of a label widget.
 
 import os
 import tkinter as tk

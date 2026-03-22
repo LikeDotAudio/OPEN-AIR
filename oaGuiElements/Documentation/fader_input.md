@@ -11,7 +11,6 @@ A simple entry field that syncs with a DoubleVar (used by faders/knobs for
 numerical display).
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20250821.200641.1
 
 ## ⚙️ Assumptions & Constraints

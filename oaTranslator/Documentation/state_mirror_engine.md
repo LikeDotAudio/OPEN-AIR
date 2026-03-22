@@ -13,7 +13,6 @@ Optimized: Global outbound throttle, Change-only filtering, and Variable
 lifetime safety.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260222.Optimized.2
 
 ## ⚙️ Assumptions & Constraints

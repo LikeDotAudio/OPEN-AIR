@@ -1,13 +1,9 @@
-# workers/builder/meter_bar/meter_bar.py
-#
-# A modern bar-style meter widget with ballistics and peak hold.
-# Renamed from bar_graph to meter_bar.
-#
+# meter_bar/meter_bar.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260223.Modernized.1
+# Version: 20260223.Modernized.1
+#
+# Description: A modern bar-style meter widget with ballistics and peak hold.
 
-# --- Standard Debug Logging Setup ---
 BUILDER_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger

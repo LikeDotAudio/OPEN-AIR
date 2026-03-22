@@ -1,3 +1,9 @@
+# Core/fader_bar_interaction_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 
 class FaderBarInteractionMixin:

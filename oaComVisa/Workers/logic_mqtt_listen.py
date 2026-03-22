@@ -1,21 +1,9 @@
-# managers/VisaScipi/manager_visa_mqtt_listen.py
-#
-# This manager handles listening to MQTT topics for device connection and control.
-# It acts as the bridge between external MQTT commands (GUI or automation)
-# and the underlying VISA instrument management logic.
-#
-# Primary Responsibilities:
-# - Monitor MQTT topics for device search, selection, and connection triggers.
-# - Coordinate resource discovery and session management.
-# - Offload blocking connection operations to background threads.
-#
-# Assumptions and Constraints:
-# - Assumes a functional MQTT broker is reachable via the subscriber_router.
-# - Payloads are expected to be JSON-encoded (orjson).
-# - Threaded operations must not exceed system resource limits.
-#
+# Workers/logic_mqtt_listen.py
 # Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
+# Description: This manager handles listening to MQTT topics for device connection and control.
+
 import orjson
 import threading
 

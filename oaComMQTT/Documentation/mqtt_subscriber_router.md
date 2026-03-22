@@ -13,7 +13,6 @@ Optimized for high-throughput with wildcard-based routing and hash-map dispatch.
 Updated for aiomqtt (asyncio) compatibility.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260218.AioMqtt.1
 
 ## ⚙️ Assumptions & Constraints

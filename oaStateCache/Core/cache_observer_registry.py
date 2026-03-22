@@ -1,3 +1,9 @@
+# Core/cache_observer_registry.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 class CacheObserverRegistry:
     """Manages the registration and notification of state change observers."""
 

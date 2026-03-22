@@ -11,7 +11,6 @@ Manages the overall state cache system, orchestrating I/O, traffic control, and
 GUI restoration.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260222.Optimized.1
 
 ## ⚙️ Assumptions & Constraints

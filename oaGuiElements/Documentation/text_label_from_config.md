@@ -11,7 +11,6 @@ A mixin class for the DynamicGuiBuilder that handles creating a label from a
 config dictionary.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260221.Proxy.1
 
 ## ⚙️ Assumptions & Constraints

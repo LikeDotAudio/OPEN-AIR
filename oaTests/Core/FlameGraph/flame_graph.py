@@ -1,4 +1,9 @@
-# oaTests/Core/make_graph.py
+# FlameGraph/flame_graph.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import io
 import sys
 import re

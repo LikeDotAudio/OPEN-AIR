@@ -1,11 +1,8 @@
-# core/gui_file_loader.py
-#
-# Handles File I/O and Hash Verification.
-# Now delegates to the standalone BlueprintLoader.
-#
+# FileReaders/gui_file_loader.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260222.Adapter.1
+# Version: 20260222.Adapter.1
+#
+# Description: Handles File I/O and Hash Verification.
 
 from pathlib import Path
 from loguru import logger
@@ -51,9 +48,7 @@ class GuiFileLoaderMixin:
         # ⚡ AUTO-PUBLISH: Announce this GUI and all its initial widget states to MQTT
         # This populates the OID tree and SNMP bridge immediately on load.
         # ⚡ ICE: User requested to stop GUI from announcing itself
-        # if hasattr(self, "_publish_json_to_topic"):
         #     self._publish_json_to_topic(self.config_data)
-        # if hasattr(self, "_publish_initial_widget_states"):
         #     self._publish_initial_widget_states(self.config_data)
 
         self._rebuild_gui()

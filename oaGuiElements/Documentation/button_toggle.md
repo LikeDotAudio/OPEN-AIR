@@ -12,7 +12,6 @@ photorealistic
 toggle button widgets in the GUI using the shared CanvasButton base.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260217.1
 
 ## ⚙️ Assumptions & Constraints

@@ -1,4 +1,9 @@
-# workers/wysiwyg_editor/workspaces/layout_overlays/colors.py
+# layout_overlays/colors.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 from tkinter import colorchooser
 from ...Core.state import state_manager

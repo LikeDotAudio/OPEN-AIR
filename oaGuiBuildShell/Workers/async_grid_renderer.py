@@ -1,6 +1,8 @@
-# managers/Display/builder/async_grid_renderer.py
-# Modularized Asynchronous Grid Layout Engine.
-# Version 20260315.Modular.1
+# Workers/async_grid_renderer.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Asynchronous Grid Layout Engine.
 
 import tkinter as tk
 from loguru import logger

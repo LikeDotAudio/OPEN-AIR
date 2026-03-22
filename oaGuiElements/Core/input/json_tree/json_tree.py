@@ -1,6 +1,8 @@
-# workers/builder/json_tree/json_tree.py
-# Modularized JSON Tree Viewer.
-# Version 20260315.Modular.1
+# json_tree/json_tree.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized JSON Tree Viewer.
 
 import tkinter as tk
 from tkinter import ttk, filedialog

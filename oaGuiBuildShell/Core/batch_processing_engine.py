@@ -1,3 +1,9 @@
+# Core/batch_processing_engine.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from loguru import logger
 
 class BatchProcessingEngine:

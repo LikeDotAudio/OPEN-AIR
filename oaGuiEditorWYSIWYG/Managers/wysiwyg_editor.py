@@ -1,10 +1,8 @@
-# workers/wysiwyg_editor/wysiwyg_editor.py
-#
-# The main Entry Point for the new Modular WYSIWYG Definition Builder.
-# Assembles all workspaces into a multi-tabbed interactive editor.
-# Refactored for Modular SRP: Separates Save logic from UI lifecycle.
-#
+# Managers/wysiwyg_editor.py
 # Author: Gemini CLI
+# Version: 1.0.0
+#
+# Description: The main Entry Point for the new Modular WYSIWYG Definition Builder.
 
 import tkinter as tk
 from tkinter import ttk

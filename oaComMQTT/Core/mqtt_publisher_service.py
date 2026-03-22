@@ -1,11 +1,8 @@
-# mqtt/mqtt_publisher_service.py
-#
-# Provides functions for publishing messages to the MQTT broker.
-# Simplified to leverage the built-in queuing in MqttConnectionManager.
-#
+# Core/mqtt_publisher_service.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260316.1
+# Version: 20260316.1
+#
+# Description: Provides functions for publishing messages to the MQTT broker.
 
 from ..Managers.mqtt_connection import MqttConnectionManager
 import orjson

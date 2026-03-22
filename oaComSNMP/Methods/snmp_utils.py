@@ -1,4 +1,9 @@
-# managers/SNMP/snmp_utils.py
+# Methods/snmp_utils.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import zlib
 import re
 import os

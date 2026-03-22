@@ -1,11 +1,8 @@
-# core/asset_cache_manager.py
-#
-# Utility to cache procedurally generated assets (panels, screws, etc) to disk and memory.
-# Prevents expensive PIL re-generation and redundant disk I/O.
-#
+# factory/asset_cache.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260218.Optimization.1
+# Version: 20260218.Optimization.1
+#
+# Description: Utility to cache procedurally generated assets (panels, screws, etc) to disk and memory.
 
 import os
 import hashlib

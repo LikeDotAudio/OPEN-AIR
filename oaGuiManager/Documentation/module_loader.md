@@ -12,7 +12,6 @@ Updated to wrap pure Python modules in a DynamicGuiBuilder for background
 inheritance.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260218.Optimization.2
 
 ## ⚙️ Assumptions & Constraints

@@ -1,6 +1,8 @@
 # fader_bar_graph/fader_bar_graph.py
-# Modularized Fader with Dual Bar Graphs.
-# Version 20260315.Modular.1
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Fader with Dual Bar Graphs.
 
 import tkinter as tk
 from loguru import logger

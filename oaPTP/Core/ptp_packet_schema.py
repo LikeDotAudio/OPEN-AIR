@@ -1,4 +1,9 @@
-# core/ptp_packet_schema.py
+# Core/ptp_packet_schema.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 try:
     from scapy.all import UDP, Packet, ByteField, ShortField, XShortField, LongField, StrFixedLenField, BitField, bind_layers
     try:

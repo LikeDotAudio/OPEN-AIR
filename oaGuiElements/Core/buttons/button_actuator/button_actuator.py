@@ -1,6 +1,8 @@
 # button_actuator/button_actuator.py
-# Modularized dynamic Momentary Actuator Button.
-# Version 20260315.Modular.1
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized dynamic Momentary Actuator Button.
 
 import tkinter as tk
 from loguru import logger

@@ -1,4 +1,9 @@
-# workers/builder/circular_motion_displacement_potentiometer/cmdp_group_handler.py
+# circular_motion_displacement_potentiometer/cmdp_group_handler.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 from tkinter import colorchooser, simpledialog
 

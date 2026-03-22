@@ -1,4 +1,8 @@
-# workers/builder/fader/core/cap.py
+# Core/cap.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
 
 import math
 import numpy as np

@@ -1,5 +1,8 @@
-# oaComMQTT/Workers/mqtt_async_worker.py
-# Background worker for handling asynchronous aiomqtt operations.
+# Workers/mqtt_async_worker.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Background worker for handling asynchronous aiomqtt operations.
 
 import asyncio
 import aiomqtt

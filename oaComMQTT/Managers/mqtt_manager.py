@@ -1,11 +1,8 @@
-# managers/Mqtt_Manager/mqtt_manager.py
-#
-# Manages MQTT-related system operations: Broker Monitoring, Topic Management, and Service Control.
-# Serves as the backend for the JSON-defined MQTT Dashboard and System Status.
-#
+# Managers/mqtt_manager.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260219.Performance.1
+# Version: 20260219.Performance.1
+#
+# Description: Manages MQTT-related system operations: Broker Monitoring, Topic Management, and Service Control.
 
 import time
 import orjson
@@ -119,11 +116,8 @@ class MqttManager:
             
             time.sleep(5) 
 
-    # def _on_stats_updated(self, stats):
     #     """Called by BrokerMonitor. Enqueues stats for async publishing."""
     #     formatted_stats = {}
-    #     for key, val in stats.items():
-    #         if key == "uptime":
     #             try:
     #                 seconds = int(float(val))
     #                 val = time.strftime("%H:%M:%S", time.gmtime(seconds))

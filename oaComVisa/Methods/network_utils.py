@@ -1,5 +1,8 @@
-# oaComVisa/Methods/network_utils.py
-# Reusable network and string cleaning utilities for VISA modules.
+# Methods/network_utils.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Reusable network and string cleaning utilities for VISA modules.
 
 import socket
 import string

@@ -1,3 +1,9 @@
+# button_wink_toggler/test_button_wink_toggler.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
@@ -7,6 +13,11 @@ class TestButtonWinkToggler(unittest.TestCase):
 
     def setUp(self):
         self.patchers = []
+        
+        # Always patch PIL and ImageTk to avoid issues with display/image registration
+        self.patchers.append(patch('PIL.Image.open', return_value=MagicMock()))
+        self.patchers.append(patch('PIL.ImageTk.PhotoImage', return_value=MagicMock()))
+        
         try:
             self.root = tk.Tk()
             self.root.withdraw()
@@ -17,9 +28,9 @@ class TestButtonWinkToggler(unittest.TestCase):
             mock_canvas = MagicMock()
             mock_canvas.winfo_exists.return_value = True
             self.patchers.append(patch('tkinter.Canvas', return_value=mock_canvas))
-            self.patchers.append(patch('PIL.ImageTk.PhotoImage', return_value=MagicMock()))
-            for p in self.patchers:
-                p.start()
+            
+        for p in self.patchers:
+            p.start()
         self.config = {'label_active': 'Test Wink Toggler', 'path': 'test/wink_toggler', 'options': {'A': {'label_active': 'A', 'val': 1}, 'B': {'label_active': 'B', 'val': 2}}}
         self.mirror_engine = MagicMock()
         self.router = MagicMock()

@@ -1,4 +1,9 @@
-# workers/builder/circular_motion_displacement_potentiometer/cmdp_channel_handler.py
+# circular_motion_displacement_potentiometer/cmdp_channel_handler.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 import math
 from loguru import logger

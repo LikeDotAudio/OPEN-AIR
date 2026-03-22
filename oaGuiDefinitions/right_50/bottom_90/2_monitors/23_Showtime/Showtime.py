@@ -1,7 +1,8 @@
-# oaGuiDefinitions/right_50/bottom_90/2_monitors/23_Showtime/gui_Showtime.py
+# 23_Showtime/Showtime.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Unified entry point for the Showtime tab.
-# Bridges the Framework ModuleLoader to the refactored Showtime logic.
+# Description: Unified entry point for the Showtime tab.
 
 from oaGuiShowtime.Core.tab import ShowtimeTab
 

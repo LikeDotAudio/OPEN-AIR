@@ -1,18 +1,9 @@
-# core/gui_mqtt_manager.py
-#
-# Handles MQTT Context and Command Transmission.
-#
+# Managers/gui_mqtt.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
+# Description: Handles MQTT Context and Command Transmission.
+
 import time
 import orjson
 from pathlib import Path
@@ -108,7 +99,6 @@ class GuiMqttManagerMixin:
     def _publish_json_to_topic(self, json_data):
         """Publishes the entire JSON data to the base topic."""
         # ⚡ ICE: User requested to stop GUI from announcing itself
-        # if self.state_mirror_engine and self.base_mqtt_topic_from_path:
         #     payload = {
         #         "val": json_data,
         #         "source": "GUI-INIT",
@@ -117,7 +107,6 @@ class GuiMqttManagerMixin:
         #     }
         #     # ⚡ CONSISTENCY: Use engine to calculate absolute topic
         #     full_topic = self.state_mirror_engine.calculate_topic("", self.base_mqtt_topic_from_path)
-        #     if LOCAL_DEBUG: logger.debug(f"📡 MQTT: Auto-publishing config for '{self.tab_name}' to {full_topic}")
         #     self.state_mirror_engine.publish_command(full_topic, orjson.dumps(payload).decode())
         pass
 
@@ -127,8 +116,6 @@ class GuiMqttManagerMixin:
         This ensures all topics exist in the broker/SNMP bridge immediately on load.
         """
         # ⚡ ICE: User requested to stop initial widget state announcements
-        # if not self.state_mirror_engine or not self.base_mqtt_topic_from_path:
-        #     return
         # ... (implementation kept in comments if needed later)
         pass
 

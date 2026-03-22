@@ -1,10 +1,8 @@
-# workers/Command_Router/OSC/osc.py
-#
-# Dedicated orchestrator for OSC (Open Sound Control) traffic.
-# Logic-heavy architecture for Centralized Command Hub.
-#
+# Managers/osc_manager.py
 # Author: Anthony P. Kuzub(Refactored)
-# Version 20260309.Harden.3
+# Version: 20260309.Harden.3
+#
+# Description: Dedicated orchestrator for OSC (Open Sound Control) traffic.
 
 import threading
 import time

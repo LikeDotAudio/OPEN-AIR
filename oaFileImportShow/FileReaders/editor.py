@@ -1,6 +1,8 @@
-# importers/worker_importer_editor.py
-# Modularized Importer Editor Logic.
-# Version 20260315.Modular.1
+# FileReaders/editor.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Importer Editor Logic.
 
 import os
 import tkinter as tk

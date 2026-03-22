@@ -1,20 +1,8 @@
-#!/usr/bin/env python3
-# /OpenAir.py
-#
-# The Supervisor Entry Point for OPEN-AIR.
-#
+# Core/OpenAir.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20260314.120000.REV01
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/catego
-# ry/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20260314.120000.REV01
+# Description: The Supervisor Entry Point for OPEN-AIR.
 
 """
 OpenAir.py - The Multi-Process Supervisor for the OPEN-AIR System.

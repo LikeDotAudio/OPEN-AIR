@@ -1,7 +1,8 @@
-# workers/logic/manifest/ghost_lock.py
+# manifest/ghost_lock.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Manages the "Ghost Touch Lock" logic for interaction priority.
-# Prevents network updates from fighting user interaction.
+# Description: Manages the "Ghost Touch Lock" logic for interaction priority.
 
 from typing import Dict, Any
 

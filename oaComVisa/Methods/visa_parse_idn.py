@@ -1,9 +1,8 @@
-# managers/STATE_VISA_FLEET_Manager/manager_visa_parse_idn.py
-#
-# Dedicated module for parsing the *IDN? string of VISA instruments.
-#
+# Methods/visa_parse_idn.py
 # Author: Gemini Agent
+# Version: 1.0.0
 #
+# Description: Dedicated module for parsing the *IDN? string of VISA instruments.
 
 import re  # Potentially needed for future IDN parsing, though not used in current simple version.
 

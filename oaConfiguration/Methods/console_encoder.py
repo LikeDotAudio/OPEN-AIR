@@ -1,3 +1,9 @@
+# Methods/console_encoder.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 """
 console_encoder.py - Console Output Encoding Configuration for OPEN-AIR.
 

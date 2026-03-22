@@ -1,19 +1,8 @@
-# markers/worker_marker_logic.py
-#
-# A utility module to contain core business logic functions related to marker data
-# processing and calculation, ensuring separation of concerns (DOP 6.2).
-#
+# Methods/marker_logic.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
+# Description: A utility module to contain core business logic functions related to marker data
 
 import os
 import inspect
@@ -45,7 +34,6 @@ current_file = f"{os.path.basename(__file__)}"
 
 # Calculates the minimum and maximum frequencies from a list of marker dictionaries.
 # This function iterates through a list of marker data, extracts the 'FREQ_MHZ' value
-# from each, and determines the overall minimum and maximum frequencies.
 # Inputs:
 #     marker_data_list (list): A list of dictionaries, where each dictionary represents a marker.
 # Outputs:

@@ -12,7 +12,6 @@ memory.
 Prevents expensive PIL re-generation and redundant disk I/O.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260218.Optimization.1
 
 ## ⚙️ Assumptions & Constraints

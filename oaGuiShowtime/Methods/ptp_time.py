@@ -1,10 +1,8 @@
-# workers/Showtime/ptp_time.py
-#
-# Provides Precision Time Protocol (PTP) synchronized time using CLOCK_TAI.
-# Optimized: Performs clock discovery at load time to ensure zero-overhead retrieval.
-#
+# Methods/ptp_time.py
 # Author: Anthony Peter Kuzub
-# Version 20260222.Optimized.1
+# Version: 20260222.Optimized.1
+#
+# Description: Provides Precision Time Protocol (PTP) synchronized time using CLOCK_TAI.
 
 import time
 from datetime import datetime

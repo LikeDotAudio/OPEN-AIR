@@ -1,8 +1,8 @@
-# workers/wysiwyg_editor/grab_bag/grab_bag_loader.py
-#
-# Scans the builder directories for sample.json files to populate the Grab Bag palette.
-#
+# FileReaders/grab_bag_loader.py
 # Author: Gemini CLI
+# Version: 1.0.0
+#
+# Description: Scans the builder directories for sample.json files to populate the Grab Bag palette.
 
 import orjson
 import os

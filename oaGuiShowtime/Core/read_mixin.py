@@ -1,3 +1,9 @@
+# Core/read_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from loguru import logger
 from oaFileImportShow.FileReaders.loader import maker_file_check_for_markers_file
 

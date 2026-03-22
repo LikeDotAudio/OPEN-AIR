@@ -1,4 +1,8 @@
-# workers/builder/meter_bar/renderers/tk_canvas_renderer.py
+# renderers/tk_canvas_renderer.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
 
 import tkinter as tk
 

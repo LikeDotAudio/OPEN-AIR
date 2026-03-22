@@ -1,6 +1,8 @@
-# assets/SUB APP - CSV to json APP/csvtojson.py
-# Modularized CSV to JSON Converter.
-# Version 20260315.Modular.1
+# SUB_APP_CSV_to_json_APP/csvtojson.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized CSV to JSON Converter.
 
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk

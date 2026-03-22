@@ -1,9 +1,8 @@
-# workers/wysiwyg_editor/workspaces/json_editor.py
-#
-# The Code-level JSON Editor Workspace.
-# Provides a text area with syntax highlighting for direct JSON manipulation.
-#
+# workspaces/json_editor.py
 # Author: Gemini CLI
+# Version: 1.0.0
+#
+# Description: The Code-level JSON Editor Workspace.
 
 import tkinter as tk
 from tkinter import ttk

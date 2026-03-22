@@ -1,10 +1,8 @@
-# Installation/Setup.py
-#
-# Primary installation orchestrator for the OPEN-AIR system environment.
-#
+# Managers/Setup.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260314.002500.REV01
+# Version: 20260314.002500.REV01
+#
+# Description: Primary installation orchestrator for the OPEN-AIR system environment.
 
 """
 Primary Purpose:

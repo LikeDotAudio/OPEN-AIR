@@ -1,11 +1,8 @@
-# managers/Display/telemetry/ui_tracking_service.py
-#
-# Centralized Telemetry Service for UI Visibility and Geometry.
-# Replaces HiddenVisibilityManagerMixin and HiddenGeometryManagerMixin.
-#
+# telemetry/ui_tracking_service.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio
-# Version 20260222.Telemetry.1
+# Version: 20260222.Telemetry.1
+#
+# Description: Centralized Telemetry Service for UI Visibility and Geometry.
 
 import time
 import orjson

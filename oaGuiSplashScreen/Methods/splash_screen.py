@@ -1,6 +1,8 @@
-# splash_screen/splash_screen.py
-# Modularized Application Splash Screen.
-# Version 20260315.Modular.1
+# Methods/splash_screen.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Application Splash Screen.
 
 import tkinter as tk
 from tkinter import ttk

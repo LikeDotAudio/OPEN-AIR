@@ -1,8 +1,8 @@
-# workers/wysiwyg_editor/core/event_bus.py
-#
-# A simple Publisher/Subscriber (Pub/Sub) event bus to decouple modular editor components.
-#
+# Core/event_bus.py
 # Author: Gemini CLI
+# Version: 1.0.0
+#
+# Description: A simple Publisher/Subscriber (Pub/Sub) event bus to decouple modular editor components.
 
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger

@@ -1,9 +1,8 @@
-# workers/wysiwyg_editor/core/state_manager.py
-#
-# The Central State Manager for the modular WYSIWYG editor.
-# Manages the master JSON schema and broadcasts updates to subscribers.
-#
+# Core/state.py
 # Author: Gemini CLI
+# Version: 1.0.0
+#
+# Description: The Central State Manager for the modular WYSIWYG editor.
 
 import orjson
 import copy

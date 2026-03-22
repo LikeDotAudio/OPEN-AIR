@@ -1,13 +1,8 @@
-# oaTests/Core/CleanupUtilities/DeleteCache.py
-#
-# Master Cache Purge Script.
-# 1. Wipes local state and persistent caches.
-# 2. Excludes logs already handled by the report sweeper.
-#
-# Usage: python3 DeleteCache.py
-#
+# CleanupUtilities/DeleteCache.py
 # Author: Anthony Peter Kuzub
-# Version 20260321.CacheClear.1
+# Version: 20260321.CacheClear.1
+#
+# Description: Master Cache Purge Script.
 
 import os
 import shutil

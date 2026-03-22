@@ -1,3 +1,9 @@
+# Core/shutdown_coordinator.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import sys
 import threading
 from loguru import logger

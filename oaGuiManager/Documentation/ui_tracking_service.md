@@ -11,7 +11,6 @@ Centralized Telemetry Service for UI Visibility and Geometry.
 Replaces HiddenVisibilityManagerMixin and HiddenGeometryManagerMixin.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio
 Version 20260222.Telemetry.1
 
 ## ⚙️ Assumptions & Constraints

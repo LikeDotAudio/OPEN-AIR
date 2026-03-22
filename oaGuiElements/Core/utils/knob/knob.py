@@ -1,6 +1,8 @@
 # knob/knob.py
-# Modularized Rotary Knob Widget.
-# Version 20260315.Modular.1
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Rotary Knob Widget.
 
 import tkinter as tk
 from loguru import logger

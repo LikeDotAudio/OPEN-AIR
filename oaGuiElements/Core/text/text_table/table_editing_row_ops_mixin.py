@@ -1,18 +1,9 @@
 # text_table/table_editing_row_ops_mixin.py
-#
-# A mixin for providing row-level operations (add, delete, import) for a Tkinter Treeview widget.
-#
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
+# Description: text_table/table_editing_row_ops_mixin.py
+
 import tkinter as tk
 import inspect
 import orjson
@@ -42,7 +33,6 @@ class TableEditingRowOpsMixin:
 
     # Adds a new empty row to the Treeview table.
     # This method generates a unique key for the new row, creates an empty row
-    # with default values based on headers, inserts it into the Treeview,
     # adds the action to the undo stack, and publishes the new row via MQTT.
     # Inputs:
     #     None.
@@ -108,7 +98,6 @@ class TableEditingRowOpsMixin:
     # Deletes the currently selected rows from the Treeview table.
     # This method iterates through selected rows, stores their data for undo purposes,
     # publishes a "clear" payload to MQTT for each deleted row, and then removes them
-    # from the Treeview.
     # Inputs:
     #     event: The tkinter event object (optional).
     # Outputs:

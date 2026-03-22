@@ -1,3 +1,9 @@
+# oaPTP/Entry.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 """
 oaPTP/Entry.py - The sole orchestrator for the PTP Module.
 

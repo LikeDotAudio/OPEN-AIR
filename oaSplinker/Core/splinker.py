@@ -1,10 +1,8 @@
-# workers/Splinker/splinker.py
-#
-# The Central Broker for decoupled control.
-# Splice Control, Link Feedback.
-#
+# Core/splinker.py
 # Author: Anthony P. Kuzub(Splinker Protocol)
-# Version 20260309.Pipeline.Modularized
+# Version: 20260309.Pipeline.Modularized
+#
+# Description: The Central Broker for decoupled control.
 
 import threading
 from pathlib import Path

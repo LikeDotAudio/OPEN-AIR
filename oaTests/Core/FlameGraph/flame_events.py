@@ -1,9 +1,9 @@
+# FlameGraph/flame_events.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
 
-
-#####################################
-### File: OPEN-AIR/oaTests/Core/handle_events.py
-#####################################
-# oaTests/Core/handle_events.py
 import os
 import html
 from collections import deque, defaultdict
@@ -43,11 +43,19 @@ def process_stats_for_ui(ps):
         'yak': 'YAK', 'manager': 'MANAGER', 'ptp': 'PTP'
     }
 
+    MAX_LABEL_LENGTH = 10
+
+    def _format_root_label(file_path):
+        """Cleans and formats a file path into a standardized root label."""
+        base = os.path.basename(file_path)
+        clean = base.replace('.py', '').replace('gui_', '').replace('manager_', '')
+        return clean.upper()[:MAX_LABEL_LENGTH]
+
     def get_root_label(f):
         desc = f"{f[0]} {f[2]}".lower()
         for pattern, label in root_naming_map.items():
             if pattern in desc: return label
-        return os.path.basename(f[0]).replace('.py', '').replace('gui_', '').replace('manager_', '').upper()[:10]
+        return _format_root_label(f[0])
 
     for root_func in roots_to_analyze:
         label = get_root_label(root_func)

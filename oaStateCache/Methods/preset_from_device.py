@@ -1,22 +1,17 @@
-# presets/preset_from_device.py
+# Methods/preset_from_device.py
+# Author: Anthony Peter Kuzub
+# Version: 20250821.200641.1
 #
-# A worker module to handle the logic for querying, parsing, and presenting
-# presets stored on the connected instrument via MQTT.
-#
+# Description: A worker module to handle the logic for querying, parsing, and presenting
+
 ... User modified the `new_string` content to be: # presets/preset_from_device.py
 #
 # A worker module to handle the logic for querying, parsing, and presenting
 # presets stored on the connected instrument via MQTT.
 #
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
 #
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
 #
 # Version 20250821.200641.1
 
@@ -184,7 +179,6 @@ class PresetFromDeviceWorker:
 
     # Publishes a list of preset filenames to the MQTT preset repository.
     # This method iterates through a list of preset filenames, creates a dictionary
-    # for each preset with default empty values for instrument settings, and then
     # publishes this entire dictionary as a JSON blob to a unique topic in the repository.
     # Inputs:
     #     preset_list (list): A list of preset filenames to publish.

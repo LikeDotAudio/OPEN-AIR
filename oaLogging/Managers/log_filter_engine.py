@@ -1,10 +1,9 @@
-# workers/logger/log_filter_engine.py
-#
-# Dynamic Runtime Log Filtering Engine for OPEN-AIR.
-#
+# Managers/log_filter_engine.py
 # Author: Gemini CLI
+# Version: 20260315.150000.REV01
 #
-# Version 20260315.150000.REV01
+# Description: Dynamic Runtime Log Filtering Engine for OPEN-AIR.
+
 """
 Dynamic Runtime Log Filtering Engine.
 
@@ -114,7 +113,6 @@ class LogFilterEngine:
         # Example of how one might *conceptually* do this if sinks were managed centrally:
         # logger.remove() # Remove all existing sinks
         # self.base_logger_configurator() # Re-initialize with base settings (e.g., console, file)
-        # for module, level in self.active_filters.items():
         #     # Add sinks with specific filters for the module
         #     # This requires a more sophisticated logger setup function
         #     pass

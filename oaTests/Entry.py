@@ -1,3 +1,9 @@
+# oaTests/Entry.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import os
 import sys
 import time
@@ -135,7 +141,8 @@ class UnifiedOrchestrator:
         print(f"   - HTML: {self.html_path}")
 
         # 5. clear_logs.py
-        clear_logs.cleanup_logs(self.html_path)
+        # [DISABLED] Do not delete source audits or logs as they are needed for historical analysis.
+        # clear_logs.cleanup_logs(self.html_path)
 
         # 6. Optional Cleanup Prompts
         mqtt_path = os.path.join(self.project_root, "oaTests", "Core", "CleanupUtilities", "ClearMQTT.py")

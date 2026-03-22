@@ -1,3 +1,9 @@
+# Core/handle_panic.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from ..Constants.constants import splinker_logger
 
 def handle_panic(self, trigger_splink_id=None):

@@ -1,3 +1,9 @@
+# Tests/test_ui_and_data.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import unittest
 import os
 import shutil

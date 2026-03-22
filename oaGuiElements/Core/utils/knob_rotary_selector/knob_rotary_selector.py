@@ -1,11 +1,8 @@
-# workers/builder/knob_rotary_selector/knob_rotary_selector.py
-#
-# A specialized knob for multi-position rotary switching.
-# Supports Industrial Transparency and procedural rendering.
-#
+# knob_rotary_selector/knob_rotary_selector.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260223.Modernized.1
+# Version: 20260223.Modernized.1
+#
+# Description: A specialized knob for multi-position rotary switching.
 
 import tkinter as tk
 import math

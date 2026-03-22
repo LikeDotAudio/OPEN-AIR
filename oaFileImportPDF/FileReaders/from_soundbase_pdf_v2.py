@@ -1,7 +1,8 @@
-# workers/importers/formats/from_soundbase_pdf_v2.py
+# FileReaders/from_soundbase_pdf_v2.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Logic for converting Sound Base PDF files (version 2) into standardized marker format.
-#
+# Description: Logic for converting Sound Base PDF files (version 2) into standardized marker format.
 
 import os
 import re

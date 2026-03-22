@@ -1,4 +1,8 @@
-# workers/builder/images_progress_bar/dynamic_guimake_images_progress_bar.py
+# images_progress_bar/images_progress_bar.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
 
 import tkinter as tk
 from tkinter import ttk

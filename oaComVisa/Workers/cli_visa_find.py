@@ -1,5 +1,8 @@
-# oaComVisa/Workers/cli_visa_find.py
-# Thin CLI wrapper for the modular VISA discovery system.
+# Workers/cli_visa_find.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Thin CLI wrapper for the modular VISA discovery system.
 
 import os
 from ..Managers.discovery_orchestrator import DiscoveryOrchestrator

@@ -1,3 +1,9 @@
+# Core/wink_events.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger

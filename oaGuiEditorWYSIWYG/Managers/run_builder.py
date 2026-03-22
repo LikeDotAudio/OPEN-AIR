@@ -1,9 +1,8 @@
-# workers/wysiwyg_editor/run_builder.py
-#
-# Standalone entry point for the Modular WYSIWYG Definition Builder.
-# Runs as its own process to isolate heavy rendering and avoid UI lag.
-#
+# Managers/run_builder.py
 # Author: Gemini CLI
+# Version: 1.0.0
+#
+# Description: Standalone entry point for the Modular WYSIWYG Definition Builder.
 
 import sys
 import pathlib

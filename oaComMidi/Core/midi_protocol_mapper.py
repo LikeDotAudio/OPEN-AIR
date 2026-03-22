@@ -1,3 +1,9 @@
+# Core/midi_protocol_mapper.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import re
 
 class MIDIProtocolMapper:

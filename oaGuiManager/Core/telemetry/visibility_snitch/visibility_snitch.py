@@ -1,4 +1,9 @@
-# managers/Display/visibility_snitch/visibility_snitch.py
+# visibility_snitch/visibility_snitch.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import time
 import orjson
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic
@@ -51,7 +56,6 @@ class HiddenVisibilityManagerMixin:
 
     def _publish_visibility(self, is_visible: bool):
         # 🧊 [ON ICE] Visibility telemetry is currently suspended for re-architecture.
-        # if not is_connected():
         #     return
 
         # payload = {

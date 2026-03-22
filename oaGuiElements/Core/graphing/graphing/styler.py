@@ -1,4 +1,9 @@
-# styler.py
+# graphing/styler.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: styler.py
+
 from typing import Dict, Any
 from loguru import logger
 from oaLogging.Core.logger import builder_logger

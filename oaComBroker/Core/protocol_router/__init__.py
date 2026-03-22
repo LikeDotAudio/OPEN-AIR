@@ -1,5 +1,7 @@
-# workers/Command_Router/protocol_router/init.py
+# protocol_router/__init__.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Modular Protocol Router Package.
+# Description: Modular Protocol Router Package.
 
 from .router import ProtocolRouter

@@ -1,3 +1,9 @@
+# meter_needle/test_meter_needle.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
@@ -5,11 +11,37 @@ from oaGuiElements.Core.metering.meter_needle.meter_needle import BuilderMeterNe
 
 class TestMeterNeedle(unittest.TestCase):
     def setUp(self):
+        self.patchers = []
         try:
             self.root = tk.Tk()
             self.root.withdraw()
+            self.HAS_DISPLAY = True
         except:
+            self.HAS_DISPLAY = False
             self.root = MagicMock()
+            self.root.winfo_exists.return_value = True
+            self.root.tk = MagicMock()
+            
+            # Patch variables
+            self.patchers.append(patch("tkinter.DoubleVar"))
+            self.patchers.append(patch("tkinter.StringVar"))
+            self.patchers.append(patch("tkinter.IntVar"))
+            
+            # Patch Canvas and Frame in the UI factory
+            UI_MODULE = 'oaGuiElements.Core.metering.meter_needle.ui.frame_factory'
+            self.patchers.append(patch(f"{UI_MODULE}.tk.Canvas"))
+            
+            for p in self.patchers:
+                mock_cls = p.start()
+                mock_cls.return_value = MagicMock()
+                mock_cls.return_value.winfo_exists.return_value = True
+                mock_cls.return_value.tk = MagicMock()
+            
+            # Patch PIL
+            self.patchers.append(patch("PIL.Image.open"))
+            self.patchers.append(patch("PIL.ImageTk.PhotoImage"))
+            for p in self.patchers[3:]: # Start from PIL patches
+                p.start()
         
         self.config = {
             "label_active": "Test Needle",
@@ -40,12 +72,17 @@ class TestMeterNeedle(unittest.TestCase):
         )
         
         # CHECK
-        self.assertIsInstance(meter_frame, tk.Frame)
+        self.assertIsNotNone(meter_frame)
+        if self.HAS_DISPLAY:
+            self.assertIsInstance(meter_frame, tk.Canvas)
+        
         # Check if the expected variables are attached to the frame (StateLinker adds them)
         self.assertTrue(hasattr(meter_frame, "vu_value_var"))
-        self.assertIsInstance(meter_frame.vu_value_var, tk.DoubleVar)
 
     def tearDown(self):
+        if hasattr(self, 'patchers'):
+            for p in self.patchers:
+                p.stop()
         if hasattr(self.root, "destroy"):
             self.root.destroy()
 

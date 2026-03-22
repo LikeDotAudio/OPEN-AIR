@@ -1,6 +1,8 @@
-# workers/builder/fader_ganged_controlled_array/fader_ganged_controlled_array.py
-# Modularized Ganged Controlled Array (GCA) Fader.
-# Version 20260315.Modular.1
+# fader_ganged_controlled_array/fader_ganged_controlled_array.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Ganged Controlled Array (GCA) Fader.
 
 import tkinter as tk
 from tkinter import ttk

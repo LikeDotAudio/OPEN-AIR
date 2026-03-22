@@ -1,3 +1,9 @@
+# radar/test_radar.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk

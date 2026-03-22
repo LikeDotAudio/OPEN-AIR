@@ -1,7 +1,8 @@
-# Installation/dependancy/dependancy_checker.py
+# Managers/dependancy_checker.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Automated validation and repair of Python library requirements.
-#
+# Description: Automated validation and repair of Python library requirements.
 
 """
 Primary Purpose:

@@ -1,6 +1,8 @@
-# managers/PTP/ptp.py
-# Modularized Precision Time Protocol (PTP) Monitor.
-# Version 20260315.Modular.1
+# Core/ptp.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Precision Time Protocol (PTP) Monitor.
 
 import threading
 import time

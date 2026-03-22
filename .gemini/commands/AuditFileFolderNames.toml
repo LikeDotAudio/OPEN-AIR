@@ -19,6 +19,7 @@ You are the Structural Architect for OPEN-AIR. Your mission is to audit the code
     - **Missing Orchestrator**: Flag any `oa*` module that lacks an `Entry.py`.
     - **Structural Gaps**: Flag any `oa*` module missing any of the 12 standard subfolders.
     - **Under-Populated Folders**: Identify standard subfolders that are empty (missing their `__init__.py` or logic).
+    - **Zero-File Folders**: List any folders (at any level within `oa*` modules) that contain zero files. Suggest these can be deleted as part of a structural cleanup procedure.
     - **Naming Violations**: Flag files/folders that don't reveal their intention or use "noise words" (e.g., `info`, `data`).
 3.  **Analyze**: Evaluate which modules are the furthest from the "Encapsulated Module" standard.
 4.  **Report**: Create/Update the Markdown report named `Structural_Audit.md` in `oaDataAudits/`. (If that path doesn't exist, use `oaDataAudits/`).

@@ -1,3 +1,9 @@
+# Tests/test_midi.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import unittest
 from unittest.mock import MagicMock, patch
 from oaComMidi.Managers.midi_manager import MidiManager

@@ -1,6 +1,8 @@
-# data_graphing/graph_interactor.py
-# Modularized Graph Interactor Engine.
-# Version 20260315.Modular.1
+# graphing/graph_interactor.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Graph Interactor Engine.
 
 from typing import Dict, Any
 

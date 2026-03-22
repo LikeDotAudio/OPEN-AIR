@@ -1,3 +1,9 @@
+# Tests/test_config_validator.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import unittest
 from oaConfiguration.Methods.config_validator import validate_configuration
 

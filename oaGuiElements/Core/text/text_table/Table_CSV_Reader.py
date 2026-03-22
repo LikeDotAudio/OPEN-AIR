@@ -1,18 +1,9 @@
 # text_table/Table_CSV_Reader.py
-#
-# This module provides functionality to read data from CSV files into a list of dictionaries.
-#
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
+# Description: This module provides functionality to read data from CSV files into a list of dictionaries.
+
 import csv
 import os
 

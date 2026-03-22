@@ -1,4 +1,9 @@
-# managers/SNMP/snmp_tester.py
+# Workers/snmp_tester.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import subprocess
 import os
 import re

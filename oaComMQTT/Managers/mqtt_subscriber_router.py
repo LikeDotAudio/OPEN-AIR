@@ -1,12 +1,8 @@
-# mqtt/mqtt_subscriber_router.py
-#
-# Manages MQTT subscriptions and dispatches incoming messages to registered callbacks.
-# Optimized for high-throughput with wildcard-based routing and hash-map dispatch.
-# Updated for aiomqtt (asyncio) compatibility.
-#
+# Managers/mqtt_subscriber_router.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260218.AioMqtt.1
+# Version: 20260218.AioMqtt.1
+#
+# Description: Manages MQTT subscriptions and dispatches incoming messages to registered callbacks.
 
 import paho.mqtt.client as mqtt # Still needed for topic_matches_sub logic
 import threading

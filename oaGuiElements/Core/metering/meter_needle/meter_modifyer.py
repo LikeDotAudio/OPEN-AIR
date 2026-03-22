@@ -1,7 +1,10 @@
-# workers/builder/meter_needle/meter_modifyer.py
+# meter_needle/meter_modifyer.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
 
 import tkinter as tk
-# from oaGuiElements.Core.metering.meter_needle.cosmetics.background import BezelBackground
 from oaGuiElements.Core.metering.meter_needle.cosmetics.lens import BezelLens
 from oaGuiElements.Core.metering.meter_needle.cosmetics.mask import BezelMask
 from oaGuiElements.Core.metering.meter_needle.cosmetics.bezel import BezelOverlay
@@ -132,15 +135,20 @@ class MeterModifier:
             # ⚡ OPTIMIZATION: putalpha uses mask directly
             chassis_img.putalpha(mask)
             
-            canvas.chassis_mask_cache[cache_key] = ImageTk.PhotoImage(chassis_img)
+            try:
+                canvas.chassis_mask_cache[cache_key] = ImageTk.PhotoImage(chassis_img)
+            except (RuntimeError, ValueError, tk.TclError):
+                canvas.chassis_mask_cache[cache_key] = None
 
         # 3. Draw onto background layer (above panel slice, but below needles)
         # Use tag 'nextgen_background' to match z-ordering logic in meter_needle.py
-        mask_id = canvas.create_image(0, 0, image=canvas.chassis_mask_cache[cache_key], anchor="nw", tags="nextgen_background")
-        # Ensure it's below needles but above the base patina slice
-        canvas.tag_lower(mask_id)
-        # If there's a base slice, make sure the mask is ABOVE it
-        try: canvas.tag_raise(mask_id, "panel_bg_slice")
-        except: pass
+        img_obj = canvas.chassis_mask_cache[cache_key]
+        if img_obj:
+            mask_id = canvas.create_image(0, 0, image=img_obj, anchor="nw", tags="nextgen_background")
+            # Ensure it's below needles but above the base patina slice
+            canvas.tag_lower(mask_id)
+            # If there's a base slice, make sure the mask is ABOVE it
+            try: canvas.tag_raise(mask_id, "panel_bg_slice")
+            except: pass
 
     

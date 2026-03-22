@@ -1,3 +1,9 @@
+# Core/dropdown.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 class DropdownDataManager:
     """Manages parsing, sorting, and initial state selection for Dropdown options."""
 

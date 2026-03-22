@@ -1,12 +1,8 @@
-# workers/worker_visa_pre_flight_check.py
-#
-# A standalone utility script to scan all available VISA resources (USB, TCP/IP, Serial, etc.)
-# and list them for diagnostic purposes.
-#
+# Methods/visa_pre_flight_check.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20251013.202759.4
 #
-# Version 20251013.202759.4
+# Description: A standalone utility script to scan all available VISA resources (USB, TCP/IP, Serial, etc.)
 
 import os
 import inspect

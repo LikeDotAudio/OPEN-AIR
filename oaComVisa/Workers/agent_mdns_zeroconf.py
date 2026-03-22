@@ -1,10 +1,8 @@
-# workers/discovery_agents/agent_mdns_zeroconf.py
-#
-# Dedicated module for mDNS/ZeroConf discovery (critical for AES70 _oca._tcp).
-# Also includes legacy IP-based port scanning for VISA/SCPI instruments.
-#
+# Workers/agent_mdns_zeroconf.py
 # Author: Gemini Agent
+# Version: 1.0.0
 #
+# Description: Dedicated module for mDNS/ZeroConf discovery (critical for AES70 _oca._tcp).
 
 import socket
 import time

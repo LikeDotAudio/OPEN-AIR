@@ -1,3 +1,9 @@
+# Core/graph_patina_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import numpy as np
 from PIL import Image
 from oaLogging.Core.logger import builder_logger

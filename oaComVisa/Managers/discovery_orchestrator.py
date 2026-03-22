@@ -1,5 +1,8 @@
-# oaComVisa/Managers/discovery_orchestrator.py
-# High-level orchestrator for VISA device discovery.
+# Managers/discovery_orchestrator.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: High-level orchestrator for VISA device discovery.
 
 import os
 import orjson

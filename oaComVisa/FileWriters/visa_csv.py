@@ -1,20 +1,8 @@
-# managers/Visa_Fleet/visa_csv.py
+# FileWriters/visa_csv.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Generates CSV representations of the VISA fleet inventory from JSON state.
-#
-# Primary Responsibilities:
-# - Recursively traversing the fleet JSON structure to identify data tables.
-# - Converting JSON-based instrument metadata into flat CSV files.
-# - Sanitizing MQTT topic paths for use as valid filesystem filenames.
-# - Providing an automated export mechanism for external tool integration.
-#
-# Assumptions and Constraints:
-# - Assumes the existence of a source JSON file (STATE_VISA_FLEET.json).
-# - Clears the target CSV directory before each build to ensure consistency.
-# - Uses the keys of the first data row to dynamically determine CSV headers.
-# - Requires write permissions in the target output directory.
-#
-# Author: Gemini Agent / Anthony Peter Kuzub
+# Description: Generates CSV representations of the VISA fleet inventory from JSON state.
 
 import orjson
 import os

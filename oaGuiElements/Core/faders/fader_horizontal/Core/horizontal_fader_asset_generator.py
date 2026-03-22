@@ -1,3 +1,9 @@
+# Core/horizontal_fader_asset_generator.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import numpy as np
 from PIL import Image, ImageDraw, ImageTk, ImageFilter
 from oaLogging.Core.logger import builder_logger

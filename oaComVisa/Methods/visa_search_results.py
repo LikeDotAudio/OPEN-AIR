@@ -1,9 +1,9 @@
-# managers/VisaScipi/manager_visa_search.py
-#
-# This manager handles VISA device discovery and validation against yak_config.
-#
+# Methods/visa_search_results.py
 # Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
+# Description: This manager handles VISA device discovery and validation against yak_config.
+
 import orjson
 import pathlib
 import re

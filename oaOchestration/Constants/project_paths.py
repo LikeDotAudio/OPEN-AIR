@@ -1,11 +1,8 @@
-# setup/worker_project_paths.py
-#
-# This module defines all application file paths relative to the project root,
-# ensuring consistent file access across all sub-modules.
-#
+# Constants/project_paths.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20250821.200641.1
+# Version: 20250821.200641.1
+#
+# Description: This module defines all application file paths relative to the project root,
 
 import os
 import inspect

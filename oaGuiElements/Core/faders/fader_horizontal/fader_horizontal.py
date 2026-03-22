@@ -1,6 +1,8 @@
 # fader_horizontal/fader_horizontal.py
-# Modularized Horizontal Fader.
-# Version 20260315.Modular.1
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Horizontal Fader.
 
 import tkinter as tk
 from loguru import logger

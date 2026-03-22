@@ -1,3 +1,9 @@
+# Core/fader_bar_renderer_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 from .fader_bar_asset_generator import FaderBarAssetGenerator
 from oaGuiBuilder.Core.ui_geometry_math import UIGeometryMath

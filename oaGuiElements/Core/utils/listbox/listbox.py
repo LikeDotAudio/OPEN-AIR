@@ -1,6 +1,8 @@
 # listbox/listbox.py
-# Modularized dynamic Listbox widget.
-# Version 20260315.Modular.1
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized dynamic Listbox widget.
 
 import tkinter as tk
 from tkinter import ttk

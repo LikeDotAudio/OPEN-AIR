@@ -1,3 +1,9 @@
+# layout/preview_engine.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
 from oaTranslator.Core.state_mirror_engine import StateMirrorEngine
 from loguru import logger

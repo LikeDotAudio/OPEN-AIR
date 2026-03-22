@@ -1,10 +1,8 @@
-# Installation/list_fonts.py
-#
-# Utility to enumerate and display all available system font families.
-#
+# Methods/list_fonts.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260314.003500.REV01
+# Version: 20260314.003500.REV01
+#
+# Description: Utility to enumerate and display all available system font families.
 
 """
 Primary Purpose:

@@ -1,4 +1,9 @@
-# data_graphing/dynamic_bar_graph.py
+# graphing/dynamic_bar_graph.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 from tkinter import simpledialog
 from collections import deque

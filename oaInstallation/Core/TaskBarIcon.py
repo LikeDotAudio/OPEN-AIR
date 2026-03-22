@@ -1,10 +1,8 @@
-# Installation/TaskBarIcon.py
-#
-# Configures and installs the OPEN-AIR desktop entry and GNOME favorites icon.
-#
+# Core/TaskBarIcon.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260314.002000.REV01
+# Version: 20260314.002000.REV01
+#
+# Description: Configures and installs the OPEN-AIR desktop entry and GNOME favorites icon.
 
 """
 Primary Purpose:

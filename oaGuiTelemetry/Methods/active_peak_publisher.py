@@ -1,8 +1,8 @@
-# workers/active/active_peak_publisher.py
+# Methods/active_peak_publisher.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Event-driven worker that transforms flat marker data into a hierarchical
-# topic structure based on frequency.
-#
+# Description: Event-driven worker that transforms flat marker data into a hierarchical
 
 import os
 import orjson

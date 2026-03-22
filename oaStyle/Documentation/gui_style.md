@@ -10,7 +10,6 @@ core/gui_style_manager.py
 Configures and applies global TTK styles for the application.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20250821.200641.1
 
 ## ⚙️ Assumptions & Constraints

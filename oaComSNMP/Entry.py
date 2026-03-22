@@ -1,3 +1,9 @@
+# oaComSNMP/Entry.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 """
 oaComSNMP/Entry.py - The sole orchestrator for the SNMP Communication Module.
 """

@@ -1,5 +1,8 @@
-# oaComVisa/Constants/visa_devices.py
-# Standard knowledge base for VISA model identification.
+# Constants/visa_devices.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Standard knowledge base for VISA model identification.
 
 KNOWN_DEVICES = {
     "33220A": {"type": "Function Generator", "notes": "20 MHz Arbitrary Waveform"},

@@ -1,3 +1,9 @@
+# Core/save_splink.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import orjson
 from ..Constants.constants import Splinker_debug_enabled, splinker_logger
 

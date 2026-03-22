@@ -1,3 +1,9 @@
+# Core/knob_config.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 
 def extract_knob_config(config_data):
@@ -33,7 +39,12 @@ def extract_knob_config(config_data):
     min_val = float(primary_domain.get("min", c.get("min", 0.0)))
     max_val = float(primary_domain.get("max", c.get("max", 100.0)))
     reff_point = float(primary_domain.get("reff_point", (min_val + max_val) / 2.0))
-    value_default = float(primary_domain.get("value_default", c.get("value_default", 0.0)))
+    
+    val_def_raw = primary_domain.get("value_default", c.get("value_default", 0.0))
+    try:
+        value_default = float(val_def_raw)
+    except (ValueError, TypeError):
+        value_default = val_def_raw # Keep as string/other if not a float
     
     # 4. Interaction
     infinity = interaction.get("infinity", c.get("infinity", False))

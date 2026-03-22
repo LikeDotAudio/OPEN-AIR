@@ -1,12 +1,8 @@
-# Showtime/worker_showtime_group.py
-#
-# This module processes and groups marker data by Zone, Group, and Device for display in the Showtime tab.
-# Refactored for Modular SRP: Separates Grouping logic from Sorting logic.
-#
+# Methods/group.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.1
 #
-# Version 20250821.200641.1
+# Description: This module processes and groups marker data by Zone, Group, and Device for display in the Showtime tab.
 
 import inspect
 from collections import defaultdict

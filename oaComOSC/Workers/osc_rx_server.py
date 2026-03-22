@@ -1,10 +1,8 @@
-# workers/OSC/osc_rx_server.py
-#
-# Dedicated OSC receiver using python-osc.
-# Runs in a background thread to prevent blocking the main loop.
-#
+# Workers/osc_rx_server.py
 # Author: Gemini Agent
+# Version: 1.0.0
 #
+# Description: Dedicated OSC receiver using python-osc.
 
 import threading
 import time

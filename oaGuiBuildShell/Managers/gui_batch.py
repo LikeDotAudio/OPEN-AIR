@@ -1,13 +1,8 @@
-# core/gui_batch_builder.py
-#
-# Handles recursive JSON parsing and Grid layout with a "Skeleton-First" rendering system.
-# Pass 1: Structural Elements (OcaBlock, containers) are built immediately.
-# Pass 2: Functional Elements (Knobs, Faders, etc.) are deferred to keep UI responsive.
-# Grid coordinates are shared and pre-calculated to prevent overlaps.
-#
+# Managers/gui_batch.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260222.Adapter.1
+# Version: 20260222.Adapter.1
+#
+# Description: Handles recursive JSON parsing and Grid layout with a "Skeleton-First" rendering system.
 
 import tkinter as tk
 from loguru import logger

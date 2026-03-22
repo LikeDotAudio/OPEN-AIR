@@ -1,3 +1,9 @@
+# Core/cmdp_renderer_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 class CMDPRendererMixin:
     """Handles canvas-level static UI rendering and resize logic for the CMDP widget."""
 

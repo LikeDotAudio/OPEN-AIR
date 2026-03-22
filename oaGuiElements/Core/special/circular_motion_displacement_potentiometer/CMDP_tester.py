@@ -1,6 +1,8 @@
-# workers/builder/circular_motion_displacement_potentiometer/CMDP_tester.py
-# Modularized CMPD Tester Application.
-# Version 20260315.Modular.1
+# circular_motion_displacement_potentiometer/CMDP_tester.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized CMPD Tester Application.
 
 import tkinter as tk
 from tkinter import ttk

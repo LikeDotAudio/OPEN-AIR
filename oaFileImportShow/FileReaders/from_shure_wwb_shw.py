@@ -1,7 +1,8 @@
-# workers/importers/formats/from_shure_wwb_shw.py
+# FileReaders/from_shure_wwb_shw.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Logic for converting Shure Wireless Workbench .shw (XML) files into standardized marker format.
-#
+# Description: Logic for converting Shure Wireless Workbench .shw (XML) files into standardized marker format.
 
 import os
 import xml.etree.ElementTree as ET

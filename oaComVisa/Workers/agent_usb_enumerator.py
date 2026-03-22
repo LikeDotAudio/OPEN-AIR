@@ -1,9 +1,8 @@
-# managers/STATE_VISA_FLEET_Manager/manager_visa_USB.py
-#
-# Dedicated module for USB/Local bus VISA device discovery.
-#
+# Workers/agent_usb_enumerator.py
 # Author: Gemini Agent
+# Version: 1.0.0
 #
+# Description: Dedicated module for USB/Local bus VISA device discovery.
 
 import pyvisa
 

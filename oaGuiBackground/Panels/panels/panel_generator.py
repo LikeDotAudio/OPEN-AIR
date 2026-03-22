@@ -1,3 +1,9 @@
+# panels/panel_generator.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from PIL import Image, ImageDraw, ImageFilter, ImageChops, ImageTk
 import random
 import math

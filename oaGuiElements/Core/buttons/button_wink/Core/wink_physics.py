@@ -1,3 +1,9 @@
+# Core/wink_physics.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 def update_physics(canvas, state, config, draw_visuals_callback):
     """Smoothly interpolates current position to target position."""
     current = state["current_open"]

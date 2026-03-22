@@ -1,10 +1,8 @@
-# mqtt/mqtt_message.py
-#
-# Defines the standardized MqttMessage dataclass for the application.
-# Enforces strict typing for all MQTT traffic between partitions.
-#
+# Core/mqtt_message.py
 # Author: Anthony P. Kuzub(Refactored)
-# Version 20260221.1
+# Version: 20260221.1
+#
+# Description: Defines the standardized MqttMessage dataclass for the application.
 
 from dataclasses import dataclass, field
 from typing import Any, Dict, Optional, Union, List
@@ -26,7 +24,7 @@ class MqttMessage:
         if isinstance(self.payload, bytes):
             return self.payload.decode("utf-8")
         if isinstance(self.payload, (dict, list)):
-            return orjson.dumps(self.payload).decode().decode("utf-8")
+            return orjson.dumps(self.payload).decode("utf-8")
         return str(self.payload)
 
     def get_json_payload(self) -> Union[Dict[str, Any], List[Any]]:

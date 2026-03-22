@@ -1,114 +1,106 @@
+# Core/bootstrap_sequence.py
+# Author: Anthony Peter Kuzub
+# Version: 20260322.Modular.1
+#
+# Description: Non-blocking initialization sequence for UI and Comms.
+
 import tkinter as tk
 import traceback
 from loguru import logger
-from unittest.mock import MagicMock, patch
-
-# --- Framework Imports ---
-from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
-from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
-from oaStateCache.Core.state_cache import StateRegistry
-from oaTranslator.Core.state_mirror_engine import StateMirrorEngine
-from oaComBroker.Core.protocol_router import ProtocolRouter
-
-# --- External Managers ---
-from oaComOSC.Managers.osc_manager import OSCManager
-from oaComSNMP.Managers.snmp_manager import SNMPManager
-from oaComMidi.Managers.midi_manager import MidiManager
-from oaSplinker.Core.splinker import ControlBroker
-
-# Mock Tkinter to prevent display errors in headless environments
-# Mock Tk() to return a mock object that can be configured and used.
-mock_tk_instance = MagicMock()
-mock_tk_instance.mainloop = MagicMock() # Mock mainloop to prevent blocking
-mock_tk_instance.after = MagicMock() # Mock after to prevent errors
-mock_tk_instance.update = MagicMock()
-mock_tk_instance.update_idletasks = MagicMock()
-mock_tk_instance.winfo_exists = MagicMock(return_value=True)
-mock_tk_instance.cget = MagicMock(return_value="#2b2b2b") # Mock for background color
-
-# Create a mock Toplevel class that returns a mock instance
-mock_toplevel_instance = MagicMock()
-mock_toplevel_instance.overrideredirect = MagicMock()
-mock_toplevel_instance.configure = MagicMock()
-mock_toplevel_instance.winfo_exists = MagicMock(return_value=True)
-mock_toplevel_instance.destroy = MagicMock()
-
-# Mock Toplevel to be a callable class that returns our mock instance
-mock_toplevel_class = MagicMock(return_value=mock_toplevel_instance)
-
-# Patch Tk and Toplevel to use our mocks
-patcher_tk = patch('tkinter.Tk', return_value=mock_tk_instance)
-patcher_toplevel = patch('tkinter.Toplevel', mock_toplevel_class)
-
-patcher_tk.start()
-patcher_toplevel.start()
 
 class AsyncBootstrapEngine:
-    """Manages the non-blocking initialization sequence for UI and Comms."""
+    """
+    Manages the non-blocking initialization sequence for UI and Comms.
+    Consumes services provided by the Composition Root.
+    """
 
-    def __init__(self, root, splash, shared_instances, app_constants, shutdown_coordinator):
+    def __init__(self, root, splash, services, app_constants, shutdown_coordinator):
         self.root = root
         self.splash = splash
-        self.shared_instances = shared_instances
+        self.services = services
         self.app_constants = app_constants
         self.shutdown_coordinator = shutdown_coordinator
 
     def run(self):
+        """
+        Executes the async startup sequence using injected services.
+        """
         try:
-            self.app_constants.SCAN_OSC = False
+            services = self.services
+            
+            # Phase 1: Communication
+            self._connect_communication_services(
+                mqtt_conn=services["mqtt_conn"], 
+                sub_router=services["sub_router"], 
+                state_cache=services["state_cache"]
+            )
 
-            self.splash.set_status("Initializing Comms...")
-            mqtt_conn = MqttConnectionManager()
-            self.shared_instances["mqtt_conn"] = mqtt_conn
-            sub_router = MqttSubscriberRouter()
+            # Phase 2: Protocols
+            self._start_protocol_services(protocol_router=services["protocol_router"])
 
-            self.splash.set_status("Loading State Cache...")
-            state_cache = StateRegistry(mqtt_conn)
-            state_cache.subscriber_router = sub_router
-            self.shared_instances["state_cache"] = state_cache
+            # Phase 3: External
+            self._start_optional_services()
 
-            mirror_engine = StateMirrorEngine(base_topic="OPEN-AIR", subscriber_router=sub_router, root=self.root, state_cache_manager=state_cache)
-            state_cache.state_mirror_engine = mirror_engine
-            self.shared_instances["mirror_engine"] = mirror_engine
+            # Phase 4: Control Links
+            self._setup_control_links(
+                sub_router=services["sub_router"], 
+                splinker=services["splinker_manager"]
+            )
 
-            self.splash.set_status("Connecting to Broker...")
-            mqtt_conn.connect_to_broker(on_message_callback=state_cache.handle_incoming_mqtt, subscriber_router=sub_router)
-            state_cache.subscribe_to_all_topics()
-
-            if self.app_constants.SCAN_OSC:
-                self.splash.set_status("Starting OSC...")
-                osc = OSCManager(state_cache, mqtt_conn, run_bridge=False)
-                osc.start(); self.shared_instances["osc_manager"] = osc
-
-            if self.app_constants.SCAN_SNMP:
-                self.splash.set_status("Starting SNMP...")
-                snmp = SNMPManager(state_cache, mqtt_conn, run_bridge=False)
-                snmp.start(); self.shared_instances["snmp_manager"] = snmp
-
-            self.splash.set_status("Starting MIDI...")
-            midi = MidiManager(state_cache, run_bridge=False)
-            midi.start(); self.shared_instances["midi_manager"] = midi
-
-            self.splash.set_status("Starting Splinker...")
-            protocol_router = ProtocolRouter.get_instance()
-            self.shared_instances["protocol_router"] = protocol_router
-            protocol_router.set_mqtt_manager(mqtt_conn)
-            protocol_router.start()
-
-            splinker = ControlBroker.get_instance(state_cache, mqtt_conn)
-            protocol_router.set_splinker_manager(splinker)
-            self.shared_instances["splinker_manager"] = splinker
-
-            def splinker_mqtt_wrapper(msg): splinker.handle_mqtt_command(msg.topic, msg.payload)
-            sub_router.subscribe_to_topic("OPEN-AIR/System/Control/Splinker/#", splinker_mqtt_wrapper)
-
-            self.root.after(1, lambda: self._launch_app(mqtt_conn, sub_router, mirror_engine, state_cache))
+            # Phase 5: Launch
+            self.root.after(1, lambda: self._launch_app(
+                mqtt_conn=services["mqtt_conn"], 
+                sub_router=services["sub_router"], 
+                mirror_engine=services["mirror_engine"], 
+                state_cache=services["state_cache"]
+            ))
 
         except Exception:
             logger.exception(f"🖥️🎨 [UI] Bootstrap Failure:{traceback.format_exc()}")
             self.root.after(0, self.shutdown_coordinator.on_closing)
 
+    def _connect_communication_services(self, mqtt_conn, sub_router, state_cache):
+        """Initializes the connection to the MQTT broker and sets up state subscriptions."""
+        self.splash.set_status(status="Connecting to Broker...")
+        mqtt_conn.connect_to_broker(
+            on_message_callback=state_cache.handle_incoming_mqtt, 
+            subscriber_router=sub_router
+        )
+        state_cache.subscribe_to_all_topics()
+
+    def _start_protocol_services(self, protocol_router):
+        """Starts the main protocol routing services."""
+        self.splash.set_status(status="Starting Protocol Services...")
+        protocol_router.start()
+
+    def _start_optional_services(self):
+        """Starts conditional services like OSC, SNMP, and MIDI if configured."""
+        service_map = {
+            "osc_manager": "OSC",
+            "snmp_manager": "SNMP",
+            "midi_manager": "MIDI"
+        }
+        
+        for key, display_name in service_map.items():
+            service = self.services.get(key)
+            if service:
+                self.splash.set_status(status=f"Starting {display_name}...")
+                service.start()
+
+    def _setup_control_links(self, sub_router, splinker):
+        """Sets up specialized MQTT control topics for internal systems like Splinker."""
+        def splinker_mqtt_wrapper(msg): 
+            splinker.handle_mqtt_command(topic=msg.topic, payload=msg.payload)
+        
+        sub_router.subscribe_to_topic(
+            topic="OPEN-AIR/System/Control/Splinker/#", 
+            callback=splinker_mqtt_wrapper
+        )
+
     def _launch_app(self, mqtt_conn, sub_router, mirror_engine, state_cache):
+        """
+        Final phase: Build the Workspace and reveal.
+        """
         try:
             self.splash.set_status("Building Workspace...")
             from oaGuiBuildShell.Entry import Application
@@ -122,12 +114,21 @@ class AsyncBootstrapEngine:
                         mirror_engine._schedule_queue_processing()
                     self.root.after(1, _finish)
 
-                app = Application(parent=self.root, root=self.root, mqtt_connection_manager=mqtt_conn, subscriber_router=sub_router, state_mirror_engine=mirror_engine, state_cache_manager=state_cache, on_complete=_on_ignition_complete)
+                app = Application(
+                    parent=self.root, 
+                    root=self.root, 
+                    mqtt_connection_manager=mqtt_conn, 
+                    subscriber_router=sub_router, 
+                    state_mirror_engine=mirror_engine, 
+                    state_cache_manager=state_cache, 
+                    on_complete=_on_ignition_complete
+                )
                 app.pack(fill=tk.BOTH, expand=True)
-                self.shared_instances["app"] = app
+                
+                # Register main app back to services
+                self.services["app"] = app
                 self.root.update()
+                
         except Exception:
             logger.exception(f"🖥️🎨 [UI] App Launch Failure:{traceback.format_exc()}")
             self.shutdown_coordinator.on_closing()
-
-

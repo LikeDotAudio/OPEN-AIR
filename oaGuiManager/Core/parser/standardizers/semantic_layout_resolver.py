@@ -1,3 +1,9 @@
+# standardizers/semantic_layout_resolver.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 class SemanticLayoutResolver:
     """
     Translates high-level layout intent (Align, Anchor, Stretch) into Tkinter sticky strings.

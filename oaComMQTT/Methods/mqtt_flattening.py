@@ -1,20 +1,8 @@
-# mqtt/mqtt_flattening.py
-#
-# A utility module to process and flatten nested MQTT payloads into a format
-# suitable for display in a flat table or export to CSV. It buffers incoming
-# messages until a complete set is received, then pivots the data.
-#
+# Methods/mqtt_flattening.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
+# Description: A utility module to process and flatten nested MQTT payloads into a format
 
 import os
 import inspect
@@ -67,7 +55,6 @@ class MqttDataFlattenerUtility:
 
     # Processes an incoming MQTT message, buffering it and triggering data flattening when a new data set is detected.
     # This method stores messages in an internal buffer, identifies unique data set identifiers
-    # from the topic, and, upon detecting a new data set or a manual flush command,
     # flushes the buffer to produce flattened, pivoted data.
     # Inputs:
     #     topic (str): The MQTT topic of the incoming message.

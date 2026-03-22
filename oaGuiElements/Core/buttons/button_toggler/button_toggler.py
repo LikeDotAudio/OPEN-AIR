@@ -1,11 +1,8 @@
 # button_toggler/button_toggler.py
-#
-# This file provides the BuilderButtonTogglerCreator class for creating groups of radio-style buttons in the GUI.
-# Updated to support WYSIWYG resizing via the first button in the group.
-#
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260220.Modular.1
+# Version: 20260220.Modular.1
+#
+# Description: This file provides the BuilderButtonTogglerCreator class for creating groups of radio-style buttons in the GUI.
 
 import os
 import tkinter as tk

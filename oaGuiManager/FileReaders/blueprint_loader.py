@@ -1,18 +1,8 @@
-# managers/Display/loader/blueprint_loader.py
-#
-# Standalone File I/O, Caching, and Merging of GUI Blueprints for OPEN-AIR.
-#
+# FileReaders/blueprint_loader.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20260314.120000.REV01
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20260314.120000.REV01
+# Description: managers/Display/loader/blueprint_loader.py
 
 """
 blueprint_loader.py - High-Performance GUI Configuration Loader.

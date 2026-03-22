@@ -1,6 +1,8 @@
-# oaTests/Core/make_html.py
-# Modularized HTML Report Generator for FlameGraphs.
-# Version 20260315.Modular.1
+# FlameGraph/flame_html.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized HTML Report Generator for FlameGraphs.
 
 import os
 from pathlib import Path

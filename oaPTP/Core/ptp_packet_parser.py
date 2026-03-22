@@ -1,3 +1,9 @@
+# Core/ptp_packet_parser.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import time
 from scapy.all import IP, UDP
 

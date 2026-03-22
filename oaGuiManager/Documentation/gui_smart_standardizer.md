@@ -11,7 +11,6 @@ A mixin that normalizes "Universal Rhyme" schema into the flat schema
 expected by concrete widget creators.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio
 Version 20260118.4
 --- Standard Debug Logging Setup ---
 

@@ -1,4 +1,9 @@
-# workers/Command_Router/SNMP/snmp_tree.py
+# Core/snmp_tree.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import os
 import stat
 from loguru import logger

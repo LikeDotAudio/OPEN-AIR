@@ -1,4 +1,9 @@
-# oaTests/Core/FlameGraph/flame_wall_pity.py
+# FlameGraph/flame_wall_pity.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import os
 import html
 

@@ -11,7 +11,6 @@ A high-performance, photorealistic horizontal fader widget.
 Refactored to use single-canvas tagging for zero-flicker surgical updates.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260220.Modular.5
 
 ## ⚙️ Assumptions & Constraints

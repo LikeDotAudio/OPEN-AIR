@@ -1,4 +1,9 @@
-# update_graph.py
+# graphing/update_graph.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: update_graph.py
+
 from collections import deque
 from typing import List, Any, Dict
 import numpy as np

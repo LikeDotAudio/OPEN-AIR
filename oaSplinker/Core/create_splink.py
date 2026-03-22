@@ -1,3 +1,9 @@
+# Core/create_splink.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import time
 
 def create_splink(self):

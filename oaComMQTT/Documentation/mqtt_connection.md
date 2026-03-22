@@ -13,7 +13,6 @@ Bridges the async MQTT loop with the synchronous Tkinter application using a
 background thread.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260218.AioMqtt.2
 
 ## ⚙️ Assumptions & Constraints

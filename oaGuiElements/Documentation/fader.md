@@ -12,7 +12,6 @@ Includes mousewheel support and middle-click reset.
 OPTIMIZED: Decoupled movement from heavy static rendering.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260220.Modular.5
 
 ## ⚙️ Assumptions & Constraints

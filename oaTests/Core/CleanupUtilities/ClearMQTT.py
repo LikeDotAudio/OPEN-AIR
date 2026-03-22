@@ -1,13 +1,8 @@
-# oaTests/Core/ClearMQTT.py
-#
-# Standalone maintenance script to wipe the OPEN-AIR MQTT topic tree.
-# Discovers active topics and clears them with retained null messages.
-#
-# Dependencies: paho-mqtt
-# Usage: python3 ClearMQTT.py [--host localhost] [--port 1883] [--topic OPEN-AIR]
-#
+# CleanupUtilities/ClearMQTT.py
 # Author: Anthony Peter Kuzub
-# Version 20260222.Standalone.1
+# Version: 20260222.Standalone.1
+#
+# Description: Standalone maintenance script to wipe the OPEN-AIR MQTT topic tree.
 
 import socket
 import time

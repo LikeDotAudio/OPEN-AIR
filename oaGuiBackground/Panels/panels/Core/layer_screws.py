@@ -1,3 +1,9 @@
+# Core/layer_screws.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from PIL import Image
 import random
 from oaGuiBackground.Panels.panel_screw.screw_generator import ScrewGenerator

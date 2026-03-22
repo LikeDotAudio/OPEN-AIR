@@ -1,12 +1,9 @@
-# managers/Display/builder/gui_display.py
-#
-# This file defines the main Application class, which orchestrates the GUI build process.
-#
+# Managers/gui_display.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260315.Modular.1
+# Version: 20260315.Modular.1
+#
+# Description: This file defines the main Application class, which orchestrates the GUI build process.
 
-# --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True    
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger

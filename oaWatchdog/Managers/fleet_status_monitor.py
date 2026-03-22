@@ -1,18 +1,9 @@
-# monitoring/fleet_status_monitor.py
-#
-# Monitors the status of the device fleet and controls a GUI status light (Traffic Light).
-#
+# Managers/fleet_status_monitor.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
+# Description: monitoring/fleet_status_monitor.py
+
 import time
 import orjson
 import os
@@ -42,7 +33,6 @@ class FleetStatusMonitor:
 
     # Initializes the FleetStatusMonitor.
     # This constructor sets up the monitor to subscribe to scan start and complete events
-    # from the Visa Fleet Manager, defaulting the status to RED (scanning/uninitialized)
     # and publishing this initial state to the GUI status light.
     # Inputs:
     #     state_mirror_engine: The state mirror engine for MQTT synchronization.

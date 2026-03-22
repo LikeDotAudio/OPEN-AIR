@@ -14,7 +14,6 @@ within.
 The purpose is to provide clear documentation and versioning.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260218.1
 
 ## ⚙️ Assumptions & Constraints

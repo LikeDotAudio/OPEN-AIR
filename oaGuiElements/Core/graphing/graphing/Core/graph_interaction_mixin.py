@@ -1,3 +1,9 @@
+# Core/graph_interaction_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 from tkinter import simpledialog
 from loguru import logger

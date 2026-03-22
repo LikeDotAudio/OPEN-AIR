@@ -1,6 +1,8 @@
 # fader_dual/fader_dual.py
-# Modularized High-performance Dual Fader Widget.
-# Version 20260315.Modular.1
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized High-performance Dual Fader Widget.
 
 import tkinter as tk
 from loguru import logger

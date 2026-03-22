@@ -12,7 +12,6 @@ photorealistic
 actuator buttons in the GUI using the shared CanvasButton base.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260208.2345
 
 ## ⚙️ Assumptions & Constraints

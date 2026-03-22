@@ -1,11 +1,8 @@
-# oaGuiDefinitions/module_loader.py
-#
-# Handles dynamic loading of Python modules and instantiation of GUI classes.
-# Refactored for Modular SRP: Separates Dynamic Importing from UI Instantiation.
-#
+# FileReaders/module_loader.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260218.Optimization.2
+# Version: 20260218.Optimization.2
+#
+# Description: Handles dynamic loading of Python modules and instantiation of GUI classes.
 
 import os
 import inspect
@@ -26,7 +23,7 @@ app_constants = Config.get_instance()
 
 from oaComMQTT.Methods.mqtt_topic_utils import generate_topic_path_from_filepath
 from oaGuiManager.Core.loader.gui_from_json import UniversalGuiLoader
-from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
+from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
 from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
 
 # Globals for Versioning

@@ -11,7 +11,6 @@ A modern bar-style meter widget with ballistics and peak hold.
 Renamed from bar_graph to meter_bar.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260223.Modernized.1
 --- Standard Debug Logging Setup ---
 

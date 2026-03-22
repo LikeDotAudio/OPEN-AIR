@@ -12,7 +12,6 @@ the flat schema expected by concrete widget creators.
 Decoupled from DynamicGuiBuilder inheritance.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio
 Version 20260222.Normalized.1
 
 ## ⚙️ Assumptions & Constraints

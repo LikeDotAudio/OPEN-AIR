@@ -1,6 +1,8 @@
-# data_graphing/Meter_to_display_units.py
-# Modularized Tkinter meter widgets.
-# Version 20260315.Modular.1
+# graphing/Meter_to_display_units.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Tkinter meter widgets.
 
 from loguru import logger
 # --- EXTRACTED CORE MODULES ---

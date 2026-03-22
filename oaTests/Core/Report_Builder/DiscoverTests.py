@@ -1,4 +1,9 @@
-# oaTests/Core/Report_Builder/DiscoverTests.py
+# Report_Builder/DiscoverTests.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import os
 import glob
 

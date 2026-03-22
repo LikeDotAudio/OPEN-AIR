@@ -15,7 +15,6 @@ Column 1: Knob (Span Rows 0-1) (20%)
 Column 2: Value Entry (Row 0), Units (Row 1) (20%)
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260307.Grid.4
 
 ## ⚙️ Assumptions & Constraints

@@ -7,7 +7,6 @@ from oaGuiElements.Core.Knobs.knob.knob import BuilderKnobCreator, CustomKnobFra
 from oaGuiElements.Tests.utils.test_utils import load_sample_config
 
 class TestKnobWidget(unittest.TestCase):
-
     def setUp(self):
         self.patchers = []
         try:
@@ -20,15 +19,24 @@ class TestKnobWidget(unittest.TestCase):
             self.root = MagicMock()
             self.root.winfo_exists.return_value = True
             self.root.cget.return_value = "#2b2b2b"
+            self.root.tk = MagicMock()
             
-            # Patch DoubleVar to return a mock
-            self.patchers.append(patch('tkinter.DoubleVar', return_value=MagicMock()))
-            # Patch Canvas and Frame to avoid ANY internal Tkinter calls
-            self.patchers.append(patch('tkinter.Canvas', return_value=MagicMock()))
-            self.patchers.append(patch('tkinter.Frame', return_value=MagicMock()))
+            # Patch classes in the TARGET module
+            KNOB_MODULE = 'oaGuiElements.Core.Knobs.knob.knob'
+            self.patchers.append(patch(f'{KNOB_MODULE}.tk.DoubleVar'))
+            self.patchers.append(patch(f'{KNOB_MODULE}.tk.Canvas'))
+            self.patchers.append(patch(f'{KNOB_MODULE}.tk.Frame'))
+            
+            # Patch after() to avoid delayed callbacks
+            self.patchers.append(patch(f'{KNOB_MODULE}.CustomKnobFrame.after'))
             
             for p in self.patchers:
-                p.start()
+                mock_cls = p.start()
+                if hasattr(mock_cls, 'return_value'):
+                    mock_cls.return_value.winfo_exists.return_value = True
+                    mock_cls.return_value.cget.return_value = "#2b2b2b"
+                    mock_cls.return_value.tk = MagicMock()
+                    mock_cls.return_value.__str__.return_value = "mock_widget"
 
         component_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'Core', 'Knobs', 'knob')
         self.config = load_sample_config(component_dir)
@@ -44,7 +52,7 @@ class TestKnobWidget(unittest.TestCase):
     def test_creation_via_builder(self):
         try:
             """Verify that the Knob initializes correctly."""
-            frame, canvas = BuilderKnobCreator.make(self.root, self.config, context=self.context)
+            frame = BuilderKnobCreator.make(self.root, self.config, context=self.context)
             self.assertIsNotNone(frame, "Expected frame to be not None")
         except Exception as e:
             self.fail(f'Test creation via builder crashed. Error: {str(e)}')
@@ -52,7 +60,7 @@ class TestKnobWidget(unittest.TestCase):
     def test_broadcast_notifies_engine(self):
         try:
             """Verify that interaction triggers the mirror engine."""
-            frame, canvas = BuilderKnobCreator.make(self.root, self.config, context=self.context)
+            frame = BuilderKnobCreator.make(self.root, self.config, context=self.context)
             # frame is a CustomKnobFrame (or mock of it)
             if hasattr(frame, '_broadcast_cb'):
                 frame._broadcast_cb()

@@ -1,3 +1,9 @@
+# Managers/protocol_guard.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import functools
 from oaLogging.Core.logger import router_logger
 

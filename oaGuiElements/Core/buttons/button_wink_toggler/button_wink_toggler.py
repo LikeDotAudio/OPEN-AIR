@@ -1,4 +1,9 @@
-# button_wink_toggler/dynamic_guimake_button_wink_toggler.py
+# button_wink_toggler/button_wink_toggler.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 from tkinter import ttk
 

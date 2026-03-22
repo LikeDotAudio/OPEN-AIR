@@ -1,6 +1,8 @@
-# workers/wysiwyg_editor/workspaces/interactive_layout.py
-# Modularized Interactive Layout Workspace.
-# Version 20260315.Modular.1
+# workspaces/interactive_layout.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized Interactive Layout Workspace.
 
 import tkinter as tk
 from tkinter import ttk

@@ -1,4 +1,9 @@
-# workers/Splinker/handlers/invert_handler.py
+# Methods/invert_handler.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from .base_handler import BaseHandler
 
 class InvertHandler(BaseHandler):

@@ -1,4 +1,9 @@
-# managers/core/mqtt_subscriber_mixin.py
+# Core/mqtt_subscriber_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from loguru import logger
 
 class MqttSubscriberMixin:

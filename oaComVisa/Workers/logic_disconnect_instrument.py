@@ -1,29 +1,8 @@
-# managers/VisaScipi/manager_visa_disconnect_instrument.py
-#
-# This file provides a utility function and manager logic for disconnecting
-# from a VISA (Virtual Instrument Software Architecture) resource.
-# It ensures that communication sessions are gracefully terminated and
-# that the system state is updated to reflect the absence of an instrument.
-#
-# Primary Responsibilities:
-# - Gracefully close PyVISA instrument sessions.
-# - Reset the global instrument proxy.
-# - Broadcast disconnection status and clear device metadata in the UI.
-#
-# Assumptions and Constraints:
-# - Assumes the provided instrument object is a valid PyVISA resource.
-# - Blocking I/O may occur during the closing handshake.
-#
+# Workers/logic_disconnect_instrument.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 1.0.0
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
+# Description: Brief summary of purpose
 
 import inspect
 

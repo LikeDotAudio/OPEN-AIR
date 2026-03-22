@@ -1,8 +1,8 @@
-# managers/STATE_VISA_FLEET_Manager/manager_visa_json_builder.py
-#
-# Manages the construction and augmentation of JSON data for VISA devices.
-#
+# FileWriters/visa_json.py
 # Author: Gemini Agent
+# Version: 1.0.0
+#
+# Description: Manages the construction and augmentation of JSON data for VISA devices.
 
 import orjson
 import os

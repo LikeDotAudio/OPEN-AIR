@@ -1,7 +1,8 @@
-# oaTests/Core/FlameGraph/Entry.py
+# FlameGraph/Entry.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
 #
-# Unified Entry Point for FlameGraph Performance Profiling.
-# Version 20260315.Modular.1
+# Description: Unified Entry Point for FlameGraph Performance Profiling.
 
 import sys
 import os

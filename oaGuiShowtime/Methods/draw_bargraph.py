@@ -1,3 +1,9 @@
+# Methods/draw_bargraph.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import os
 from PIL import Image, ImageDraw, ImageFont
 import oaOchestration.Constants.project_paths as project_paths

@@ -1,6 +1,9 @@
-# workers/builder/meter_needle/constants.py
+# meter_needle/constants.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Colors
 
-# Colors
 COLOR_WHITE = "#ffffff"
 COLOR_BLACK = "#000000"
 COLOR_DANGER_RED = "#FF4500"

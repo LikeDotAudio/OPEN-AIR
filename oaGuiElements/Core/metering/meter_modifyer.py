@@ -1,4 +1,8 @@
-# workers/builder/meter_needle/meter_modifyer.py
+# oaGuiElements/Core/metering/meter_modifyer.py
+# Author: Anthony Peter Kuzub
+# Version: 20260322.1130.1
+#
+# Description: Provides utility functions for modifying meter appearance and geometry.
 
 import tkinter as tk
 try:
@@ -11,8 +15,6 @@ import math
 from loguru import logger
 
 # --- Specialized Modules ---
-# Removed commented out import as BezelBackground will be defined locally for now
-# from oaGuiElements.Core.metering.meter_needle.cosmetics.background import BezelBackground 
 from oaGuiElements.Core.metering.meter_needle.cosmetics.lens import BezelLens
 from oaGuiElements.Core.metering.meter_needle.cosmetics.mask import BezelMask
 from oaGuiElements.Core.metering.meter_needle.cosmetics.bezel import BezelOverlay

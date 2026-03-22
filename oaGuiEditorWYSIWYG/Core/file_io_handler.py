@@ -1,9 +1,8 @@
-# workers/wysiwyg_editor/core/file_io_handler.py
-#
-# Handles loading and saving of GUI definition files.
-# Manages backups and provides integration with the State Manager.
-#
+# Core/file_io_handler.py
 # Author: Gemini CLI
+# Version: 1.0.0
+#
+# Description: Handles loading and saving of GUI definition files.
 
 import orjson
 import shutil

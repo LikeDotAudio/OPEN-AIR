@@ -1,4 +1,9 @@
 # adapters/meter_adapter.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from oaGuiElements.Core.graphing.graphing.Meter_to_display_units import (
     HorizontalMeterWithText,
     VerticalMeter,

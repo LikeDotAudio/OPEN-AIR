@@ -1,3 +1,9 @@
+# Core/dual_fader_interaction_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 class DualFaderInteractionMixin:
     """Handles mouse click and drag input for the Dual Fader."""
 

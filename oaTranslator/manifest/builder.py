@@ -1,7 +1,8 @@
-# workers/logic/manifest/builder.py
+# manifest/builder.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Robust Builder for the Splinker "Shipping Manifest" (JSON Payload).
-# Ensures strict type enforcement and immutable core attributes.
+# Description: Robust Builder for the Splinker "Shipping Manifest" (JSON Payload).
 
 import time
 import uuid

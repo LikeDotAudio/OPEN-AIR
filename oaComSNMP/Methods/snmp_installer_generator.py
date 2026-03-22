@@ -1,4 +1,8 @@
-# managers/SNMP/snmp_manager.py
+# Methods/snmp_installer_generator.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
 
 import os
 

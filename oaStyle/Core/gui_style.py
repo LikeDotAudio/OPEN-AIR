@@ -1,10 +1,8 @@
-# core/gui_style_manager.py
-#
-# Configures and applies global TTK styles for the application.
-#
+# Core/gui_style.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20250821.200641.1
+# Version: 20250821.200641.1
+#
+# Description: Configures and applies global TTK styles for the application.
 
 import tkinter as tk
 from tkinter import ttk

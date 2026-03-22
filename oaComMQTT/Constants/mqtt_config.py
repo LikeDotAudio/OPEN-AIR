@@ -1,5 +1,8 @@
-# oaComMQTT/Constants/mqtt_config.py
-# Standard MQTT configuration defaults and state constants.
+# Constants/mqtt_config.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Standard MQTT configuration defaults and state constants.
 
 DEFAULT_MQTT_KEEPALIVE = 60
 DEFAULT_MQTT_TIMEOUT = 10

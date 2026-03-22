@@ -1,10 +1,8 @@
-# workers/wysiwyg_editor/workspaces/tree_refactor.py
-#
-# A hierarchical Treeview for refactoring the GUI structure.
-# Allows moving items, reordering, and deleting elements.
-# Includes Drag and Drop support.
-#
+# workspaces/tree_refactor.py
 # Author: Gemini CLI
+# Version: 1.0.0
+#
+# Description: A hierarchical Treeview for refactoring the GUI structure.
 
 import tkinter as tk
 from tkinter import ttk

@@ -1,4 +1,9 @@
-# core/widget_context.py
+# context/widget_context.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from dataclasses import dataclass
 from typing import Any, Optional, Callable
 

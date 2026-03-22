@@ -15,7 +15,6 @@ responsive.
 Grid coordinates are shared and pre-calculated to prevent overlaps.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260222.Adapter.1
 
 ## ⚙️ Assumptions & Constraints

@@ -1,3 +1,9 @@
+# Core/config_defaults.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 class ConfigDefaults:
     """Standardized default values for the OPEN-AIR configuration schema."""
     

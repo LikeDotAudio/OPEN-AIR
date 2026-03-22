@@ -1,7 +1,8 @@
-# active/active_marker_tune_and_collect.py
+# Methods/active_marker_tune_and_collect.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
 #
-# Modularized Marker Go-Getter Worker.
-# Version 20260315.Modular.1
+# Description: Modularized Marker Go-Getter Worker.
 
 import os
 import orjson

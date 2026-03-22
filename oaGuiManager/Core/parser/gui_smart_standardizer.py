@@ -1,3 +1,9 @@
+# parser/gui_smart_standardizer.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from oaGuiManager.Core.parser.standardizers.lexicon_expander import LexiconExpander
 from oaGuiManager.Core.parser.standardizers.semantic_layout_resolver import SemanticLayoutResolver
 from oaGuiManager.Core.parser.standardizers.widget_type_resolver import WidgetTypeResolver

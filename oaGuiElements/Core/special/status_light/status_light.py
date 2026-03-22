@@ -1,12 +1,9 @@
-# status_light/header_status_light.py
-#
-# Adds a status indicator circle to the GUI.
-# Now a standalone widget compatible with grid-based layout.
-#
+# status_light/status_light.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.4
 #
-# Version 20250821.200641.4
+# Description: Adds a status indicator circle to the GUI.
+
 import tkinter as tk
 from tkinter import ttk
 import orjson

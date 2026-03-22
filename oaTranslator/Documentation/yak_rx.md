@@ -12,7 +12,6 @@ publishes the parsed output values to MQTT.
 REFACTORED for Partitioned Architecture (Core Only).
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260221.Partition.1
 
 ## ⚙️ Assumptions & Constraints

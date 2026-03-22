@@ -1,3 +1,9 @@
+# Methods/config_validator.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 """
 config_validator.py - Configuration Integrity Validator for OPEN-AIR.
 

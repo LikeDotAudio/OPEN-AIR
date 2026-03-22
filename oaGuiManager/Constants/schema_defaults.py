@@ -1,7 +1,9 @@
-# oaGuiManager/Constants/schema_defaults.py
-# Default schema mappings, lexicons, and structural constants.
+# Constants/schema_defaults.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Default schema mappings, lexicons, and structural constants.
 
-# Abbreviation Expansion Lexicon
 LEXICON = {
     "lbl": "label", 
     "w": "width", 

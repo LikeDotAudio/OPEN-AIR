@@ -1,6 +1,13 @@
+# cosmetics/lighting_overlay.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from PIL import Image, ImageDraw, ImageFilter, ImageChops, ImageTk
 import math
 import numpy as np
+import tkinter as tk
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
@@ -221,7 +228,15 @@ class VintageLightingGenerator:
             pil_img = VintageLightingGenerator.create_lighting_overlay(
                 width, height, bezel_shape, bezel_width, pivot_x, pivot_y, lighting_config
             )
+            # ⚡ SAFETY: Ensure width/height are positive before creating PhotoImage
+            if width <= 0 or height <= 0:
+                return None
             return ImageTk.PhotoImage(pil_img)
+        except (RuntimeError, ValueError, tk.TclError) as e:
+            # Handle headless environments or mock failures gracefully
+            if LOCAL_DEBUG:
+                logger.debug(f"ℹ️ Skipping PhotoImage creation (Headless/Mock): {e}")
+            return None
         except Exception as e:
             if LOCAL_DEBUG:
                 logger.exception("Error generating glass overlay")

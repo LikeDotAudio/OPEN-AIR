@@ -11,7 +11,6 @@ Adds a status indicator circle to the GUI.
 Now a standalone widget compatible with grid-based layout.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 
 Version 20250821.200641.4
 

@@ -1,9 +1,8 @@
-# managers/STATE_VISA_FLEET_Manager/manager_visa_Gateway.py
-#
-# Dedicated module for Gateway-based VISA device discovery (VXI-11 HTML scraping).
-#
+# Workers/agent_static_ip_prober.py
 # Author: Gemini Agent
+# Version: 1.0.0
 #
+# Description: Dedicated module for Gateway-based VISA device discovery (VXI-11 HTML scraping).
 
 import urllib.request
 import urllib.parse

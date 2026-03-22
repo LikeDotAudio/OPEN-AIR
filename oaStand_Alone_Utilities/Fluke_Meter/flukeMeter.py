@@ -1,3 +1,9 @@
+# Fluke_Meter/flukeMeter.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import serial
 import serial.tools.list_ports
 import time

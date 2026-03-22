@@ -1,11 +1,8 @@
 # button_toggle/button_toggle.py
-#
-# This file provides the BuilderButtonToggleCreator class for creating photorealistic
-# toggle button widgets in the GUI using the shared CanvasButton base.
-#
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20260217.1
+# Version: 20260217.1
+#
+# Description: This file provides the BuilderButtonToggleCreator class for creating photorealistic
 
 import os
 import tkinter as tk

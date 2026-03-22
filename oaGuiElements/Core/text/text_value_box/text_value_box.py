@@ -1,18 +1,8 @@
-# text_value_box/dynamic_guimake_text_value_box.py
-#
-# This file provides the BuilderTextValueBoxCreator class for creating editable text box widgets in the GUI.
-#
+# text_value_box/text_value_box.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20260110.2220.2
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20260110.2220.2
+# Description: text_value_box/dynamic_guimake_text_value_box.py
 
 import os
 import tkinter as tk

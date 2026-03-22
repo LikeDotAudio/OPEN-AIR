@@ -13,16 +13,11 @@ JSON configuration in the system and rendering it via the DynamicGuiBuilder.
 It eliminates the need for individual python wrappers for every instrument.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 
-Professional services for customizing and tailoring this software to your
 specific
 application can be negotiated. There is no charge to use, modify, or fork this
 software.
 
-Build Log: https://like.audio/category/software/spectrum-scanner/
-Source Code: https://github.com/APKaudio/
-Feature Requests can be emailed to i @ like . audio
 
 Version 20260111.1510.1
 

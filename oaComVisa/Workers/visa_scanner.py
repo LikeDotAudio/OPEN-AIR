@@ -1,5 +1,8 @@
-# oaComVisa/Workers/visa_scanner.py
-# Core scanning and probing logic for VISA device discovery.
+# Workers/visa_scanner.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Core scanning and probing logic for VISA device discovery.
 
 import pyvisa
 import urllib.request

@@ -1,5 +1,8 @@
-# This file acts as the public API and orchestrator for the module.
-# It conforms to the OPEN-AIR Encapsulated Module standard.
+# oaInstallation/Entry.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: This file acts as the public API and orchestrator for the module.
 
 def main():
     pass

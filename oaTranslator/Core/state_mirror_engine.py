@@ -1,7 +1,8 @@
-# workers/logic/state_mirror_engine.py
+# Core/state_mirror_engine.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
 #
-# facilitators bidirectional synchronization between local UI and MQTT.
-# Version 20260315.Modular.1
+# Description: facilitators bidirectional synchronization between local UI and MQTT.
 
 import orjson
 import time

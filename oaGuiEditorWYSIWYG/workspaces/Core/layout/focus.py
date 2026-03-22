@@ -1,3 +1,9 @@
+# layout/focus.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from loguru import logger
 from ....Core.event_bus import event_bus
 from ....Core.state import state_manager

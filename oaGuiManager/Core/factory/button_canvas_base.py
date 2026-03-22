@@ -1,6 +1,8 @@
-# managers/Display/factory/button_canvas_base.py
-# Shared Base Class for photorealistic Canvas-based buttons.
-# Version 20260315.Modular.1
+# factory/button_canvas_base.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Shared Base Class for photorealistic Canvas-based buttons.
 
 import tkinter as tk
 from PIL import Image, ImageTk, ImageDraw, ImageFont
@@ -170,7 +172,6 @@ class CanvasButton(tk.Canvas):
 
         # Implementation of photorealistic drawing would go here.
         # For now, we use a simple representation to satisfy the test requirements
-        # while keeping the core logic intact.
         
         self.img = self._create_button_image(w, h, self.text, self.is_active, self.is_hovered, self.is_pressed)
         self.create_image(0, 0, image=self.img, anchor="nw", tags="button_img")

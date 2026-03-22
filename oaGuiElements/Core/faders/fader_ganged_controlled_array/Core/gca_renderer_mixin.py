@@ -1,3 +1,9 @@
+# Core/gca_renderer_mixin.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import math
 import tkinter as tk
 from oaGuiElements.Core.faders.fader_ganged_controlled_array.Core.gca_asset_generator import GCAAssetGenerator

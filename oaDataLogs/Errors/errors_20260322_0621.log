@@ -1,0 +1,4 @@
+062142.697 | ERROR    | UI   | SYSTEM     | oaComMQTT.Workers.mqtt_async_worker | 🚀🚫🛑 [MQTT] Worker failure: can't register atexit after shutdown
+062142.724 | WARNING  | UI   | ROUTER     | oaComBroker.Core.protocol_router.router | ⚠️ [ROUTER] ThreadPoolExecutor failed (atexit after shutdown). Falling back to single-threaded dispatch.
+062142.725 | ERROR    | UI   | ROUTER     | oaOchestration.Managers.protocol_guard | MQTT🚫🛑 [ERROR] Dispatch Failure: Event loop is closed
+062142.775 | ERROR    | UI   | ROUTER     | oaOchestration.Managers.protocol_guard | MQTT🚫🛑 [ERROR] Dispatch Failure: Event loop is closed

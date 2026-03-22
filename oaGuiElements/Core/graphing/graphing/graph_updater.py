@@ -1,4 +1,9 @@
-# data_graphing/graph_updater.py
+# graphing/graph_updater.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 from collections import deque
 from typing import List, Any, Dict
 import numpy as np

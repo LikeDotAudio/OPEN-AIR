@@ -11,7 +11,6 @@ A mixin class for the DynamicGuiBuilder that handles the creation of a label
 widget.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260221.Standardized.1
 
 ## ⚙️ Assumptions & Constraints

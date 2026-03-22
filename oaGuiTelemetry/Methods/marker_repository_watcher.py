@@ -1,3 +1,9 @@
+# Methods/marker_repository_watcher.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import orjson
 from loguru import logger
 

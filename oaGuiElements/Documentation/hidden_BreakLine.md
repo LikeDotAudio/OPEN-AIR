@@ -10,7 +10,6 @@ break_line/hidden_BreakLine.py
 A mixin for creating a horizontal break line (Separator).
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260214.2
 
 ## ⚙️ Assumptions & Constraints

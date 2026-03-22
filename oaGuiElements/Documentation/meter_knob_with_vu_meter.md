@@ -11,16 +11,11 @@ A composite widget combining a Needle VU Meter and a Rotary Knob.
 The Knob is positioned at the pivot point of the VU Meter.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 
-Professional services for customizing and tailoring this software to your
 specific
 application can be negotiated. There is no charge to use, modify, or fork this
 software.
 
-Build Log: https://like.audio/category/software/spectrum-scanner/
-Source Code: https://github.com/APKaudio/
-Feature Requests can be emailed to i @ like . audio
 
 Version 20260115.Composite.1
 

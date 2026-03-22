@@ -1,4 +1,9 @@
-#!/usr/bin/env python3
+# OSC_monitor/OSC_monitor.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: !/usr/bin/env python3
+
 import tkinter as tk
 from tkinter import ttk, messagebox
 import threading

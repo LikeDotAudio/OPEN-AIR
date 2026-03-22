@@ -1,3 +1,9 @@
+# Core/publish_splinks.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import time
 import orjson
 from ..Constants.constants import app_constants

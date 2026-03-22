@@ -11,7 +11,6 @@ A mixin for creating an editable table widget with CSV functionality,
 synchronized via MQTT.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260220.Industrial.1
 
 ## ⚙️ Assumptions & Constraints

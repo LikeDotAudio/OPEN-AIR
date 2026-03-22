@@ -1,8 +1,8 @@
-# workers/Command_Router/protocol_router/dpi.py
+# protocol_router/dpi.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Deep Packet Inspection (DPI) and Message Enrichment.
-#
-# Analyzes packets to add contextual metadata for debugging and monitoring.
+# Description: Deep Packet Inspection (DPI) and Message Enrichment.
 
 def investigate_packet(msg, mib_cache=None):
     """

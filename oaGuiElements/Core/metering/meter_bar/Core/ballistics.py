@@ -1,4 +1,8 @@
-# workers/builder/meter_bar/core/ballistics.py
+# Core/ballistics.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
 
 import time
 

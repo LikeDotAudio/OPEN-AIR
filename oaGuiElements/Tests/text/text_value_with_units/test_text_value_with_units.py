@@ -1,3 +1,9 @@
+# text_value_with_units/test_text_value_with_units.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import unittest
 from unittest.mock import MagicMock, patch
 import tkinter as tk
@@ -30,11 +36,12 @@ class TestTextValueBox(unittest.TestCase):
         creator = BuilderTextValueBoxCreator()
         
         # OPERATE
-        box_widget = creator.make_text_value_box(
-            parent_widget=self.root,
-            config_data=self.config,
-            context=self.context
-        )
+        with patch('tkinter.ttk.Style'):
+            box_widget = creator.make_text_value_box(
+                parent_widget=self.root,
+                config_data=self.config,
+                context=self.context
+            )
         
         # CHECK
         self.assertIsInstance(box_widget, tk.Canvas)

@@ -1,3 +1,9 @@
+# Core/ptp_meter_panel.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 import datetime
 from loguru import logger

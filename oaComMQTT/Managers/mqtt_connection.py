@@ -1,5 +1,8 @@
-# oaComMQTT/Managers/mqtt_connection.py
-# High-level singleton manager for MQTT client lifecycle.
+# Managers/mqtt_connection.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: High-level singleton manager for MQTT client lifecycle.
 
 import asyncio
 import threading

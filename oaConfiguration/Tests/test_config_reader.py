@@ -1,3 +1,9 @@
+# Tests/test_config_reader.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import unittest
 import configparser
 from unittest.mock import patch, MagicMock

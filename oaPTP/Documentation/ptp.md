@@ -16,7 +16,6 @@ Monitors Precision Time Protocol (PTP) traffic on the network.
 - Providing a system heartbeat based on PTP traffic activity.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20260218.Optimization.1
 
 ## ⚙️ Assumptions & Constraints

@@ -1,10 +1,8 @@
-# core/gui_rebuilder.py
-#
-# Handles the destruction and re-initialization of the GUI Frame.
-#
+# Managers/gui_re.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-# Version 20250821.200641.1
+# Version: 20250821.200641.1
+#
+# Description: Handles the destruction and re-initialization of the GUI Frame.
 
 import tkinter as tk
 from loguru import logger

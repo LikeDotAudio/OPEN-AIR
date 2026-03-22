@@ -1,21 +1,9 @@
-# managers/VisaScipi/manager_visa_transmit.py
-#
-# This manager handles publishing device status and information to the MQTT broker.
-# It synchronizes the internal VISA state with the external GUI and monitoring
-# layers by formatting and dispatching telemetry updates.
-#
-# Primary Responsibilities:
-# - Update the GUI list of discovered VISA instruments.
-# - Broadcast real-time instrument connection and metadata status.
-# - Maintain proxy-level connectivity status for system-wide health monitoring.
-#
-# Assumptions and Constraints:
-# - Assumes the mqtt_controller provides a valid, connected paho-mqtt client.
-# - Supports a fixed maximum of 40 GUI device slots (MAX_GUI_DEVICE_SLOTS).
-# - Dispatches messages with QoS 0 to minimize latency.
-#
+# Workers/logic_mqtt_publisher.py
 # Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
+# Description: This manager handles publishing device status and information to the MQTT broker.
+
 import orjson
 import time
 import random

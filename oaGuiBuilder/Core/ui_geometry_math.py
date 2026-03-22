@@ -1,4 +1,9 @@
-# workers/builder/core/ui_geometry_math.py
+# Core/ui_geometry_math.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import math
 
 class UIGeometryMath:

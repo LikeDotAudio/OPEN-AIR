@@ -1,3 +1,9 @@
+# Tests/test_config_reader_old.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import unittest
 from oaConfiguration.FileReaders.config_reader import Config
 

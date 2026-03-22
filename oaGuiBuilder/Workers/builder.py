@@ -1,11 +1,8 @@
-# builder/builder.py
-#
-# This file defines the main DynamicGuiBuilder class, which is responsible for constructing the application's GUI from a JSON configuration.
-#
+# Workers/builder.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20260315.Modular.1
 #
-# Version 20260315.Modular.1
+# Description: Defines the main DynamicGuiBuilder class, which is responsible for constructing the application's GUI from a JSON configuration.
 
 import os
 import time
@@ -26,10 +23,10 @@ from oaStyle.Core.style import DEFAULT_THEME, THEMES
 # --- 1. CORE MIXINS ---
 from oaStyle.Core.gui_style import GuiStyleMixin
 from oaGuiManager.Core.factory.gui_widget_factory import GuiWidgetFactoryMixin
-from oaGuiBuild.Managers.gui_mqtt import GuiMqttManagerMixin
+from oaGuiBuildShell.Managers.gui_mqtt import GuiMqttManagerMixin
 from oaGuiManager.FileReaders.gui_file_loader import GuiFileLoaderMixin
-from oaGuiBuild.Managers.gui_re import GuiRebuilderMixin
-from oaGuiBuild.Managers.gui_batch import GuiBatchBuilderMixin
+from oaGuiBuildShell.Managers.gui_re import GuiRebuilderMixin
+from oaGuiBuildShell.Managers.gui_batch import GuiBatchBuilderMixin
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 # --- EXTRACTED CORE MODULES ---
@@ -162,13 +159,13 @@ class DynamicGuiBuilder(
             self.scrollbar_v.set(*args)
             if getattr(self, '_is_rebuilding', False) or self._resize_timer: return
             if not self._scroll_timer:
-                self._scroll_timer = self.after(50, _on_scroll_sync)
+                self.after(50, _on_scroll_sync)
         
         def _on_scroll_h(*args):
             self.scrollbar_h.set(*args)
             if getattr(self, '_is_rebuilding', False) or self._resize_timer: return
             if not self._scroll_timer:
-                self._scroll_timer = self.after(50, _on_scroll_sync)
+                self.after(50, _on_scroll_sync)
 
         self.canvas.configure(yscrollcommand=_on_scroll_v, xscrollcommand=_on_scroll_h)
 

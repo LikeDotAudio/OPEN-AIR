@@ -1,8 +1,8 @@
-# workers/Command_Router/protocol_router/monitor.py
+# protocol_router/monitor.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Monitoring and Firehose Management for the Protocol Router.
-#
-# Provides a rolling buffer of traffic and investigative report generation.
+# Description: Monitoring and Firehose Management for the Protocol Router.
 
 import threading
 import orjson

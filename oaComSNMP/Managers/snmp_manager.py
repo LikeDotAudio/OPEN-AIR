@@ -1,10 +1,8 @@
-# workers/Command_Router/SNMP/snmp.py
-#
-# Dedicated orchestrator for SNMP traffic.
-# Logic-heavy architecture for Centralized Command Hub.
-#
+# Managers/snmp_manager.py
 # Author: Anthony P. Kuzub(Refactored)
-# Version 20260308.Harden.1
+# Version: 20260308.Harden.1
+#
+# Description: Dedicated orchestrator for SNMP traffic.
 
 import os
 import time

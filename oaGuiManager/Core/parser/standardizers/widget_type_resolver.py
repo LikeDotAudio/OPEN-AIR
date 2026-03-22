@@ -1,3 +1,9 @@
+# standardizers/widget_type_resolver.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 class WidgetTypeResolver:
     """
     Maps "Smart" and aliased widget types to concrete implementations.

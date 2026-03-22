@@ -1,3 +1,9 @@
+# oaStyle/Entry.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 """
 oaStyle/Entry.py - The sole orchestrator for the Styling Module.
 

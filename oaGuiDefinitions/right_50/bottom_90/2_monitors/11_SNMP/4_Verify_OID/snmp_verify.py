@@ -1,3 +1,9 @@
+# 4_Verify_OID/snmp_verify.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 from tkinter import ttk
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin

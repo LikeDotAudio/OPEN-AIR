@@ -1,6 +1,8 @@
 # button_trapezoid/button_trapezoid.py
-# Modularized dynamic, theme-aware trapezoidal button.
-# Version 20260315.Modular.1
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: Modularized dynamic, theme-aware trapezoidal button.
 
 import tkinter as tk
 from loguru import logger

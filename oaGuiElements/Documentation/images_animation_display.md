@@ -10,7 +10,6 @@ images_animation_oaGuiDefinitions/dynamic_guimake_images_animation_display.py
 A mixin for creating an animation display widget from a GIF file.
 
 Author: Anthony Peter Kuzub
-Blog: www.Like.audio (Contributor to this project)
 Version 20250821.200641.1
 
 ## ⚙️ Assumptions & Constraints

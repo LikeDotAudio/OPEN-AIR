@@ -1,9 +1,8 @@
-# managers/STATE_VISA_FLEET_Manager/manager_visa_Search.py
-#
-# Dedicated module for probing VISA devices and parsing their identification.
-#
+# Methods/visa_Search.py
 # Author: Anthony Peter Kuzub (Refactored)
+# Version: 1.0.0
 #
+# Description: Dedicated module for probing VISA devices and parsing their identification.
 
 import pyvisa
 import time

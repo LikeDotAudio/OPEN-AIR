@@ -1,7 +1,8 @@
-#!/usr/bin/env python3
-# managers/Display/open_air_ui.py
-# Modularized Dynamic UI Partition for OPEN-AIR.
-# Version 20260315.Modular.1
+# Managers/open_air_ui.py
+# Author: Anthony Peter Kuzub
+# Version: 20260315.Modular.1
+#
+# Description: !/usr/bin/env python3
 
 import sys
 import pathlib
@@ -24,6 +25,7 @@ from oaGuiSplashScreen.Methods.splash_screen import SplashScreen
 from oaGuiManager.Core.ui_window import UIWindowManager
 from oaGuiManager.Core.shutdown_coordinator import ShutdownCoordinator
 from oaGuiManager.Core.bootstrap_sequence import AsyncBootstrapEngine
+from oaGuiManager.Core.composition_root import UICompositionRoot
 
 LOCAL_DEBUG = True
 
@@ -40,32 +42,28 @@ def main():
     # 2. Tkinter Environment Setup
     root = UIWindowManager.create_root_window()
 
-    # 3. Splash Screen Initiation
-    splash = SplashScreen(root, app_constants.CURRENT_VERSION, app_constants.global_settings["debug_enabled"])
-    # root.update() # This might be needed to ensure splash screen is drawn immediately
+    # 3. Composition Root (Orchestrates service creation)
+    composition_root = UICompositionRoot(root, app_constants)
+    shared_services = composition_root.build_services()
 
-    # MODIFICATION: Reveal the main window after creation and before mainloop
+    # 4. Splash Screen Initiation
+    splash = SplashScreen(root, app_constants.CURRENT_VERSION, app_constants.global_settings["debug_enabled"])
+
+    # Reveal the main window after creation and before mainloop
     UIWindowManager.reveal_main_window(root, splash, app_constants.global_settings["debug_enabled"])
 
-    # Shared Manager Registry
-    shared_instances = {
-        "app": None, "mqtt_conn": None, "state_cache": None,
-        "mirror_engine": None, "osc_manager": None, "snmp_manager": None,
-        "midi_manager": None, "splinker_manager": None, "protocol_router": None
-    }
-
-    # 4. Shutdown Coordinator
-    shutdown_coordinator = ShutdownCoordinator(root, shared_instances, LOCAL_DEBUG)
+    # 5. Shutdown Coordinator
+    shutdown_coordinator = ShutdownCoordinator(root, shared_services, LOCAL_DEBUG)
     shutdown_coordinator.attach_to_root()
 
-    # 5. Resource Management
+    # 6. Resource Management
     def _periodic_gc():
         import gc; gc.collect()
         if not getattr(root, '_shutdown', False): root.after(30000, _periodic_gc)
     _periodic_gc()
 
-    # 6. Bootstrap Engine
-    bootstrap_engine = AsyncBootstrapEngine(root, splash, shared_instances, app_constants, shutdown_coordinator)
+    # 7. Bootstrap Engine (Consumes injected services)
+    bootstrap_engine = AsyncBootstrapEngine(root, splash, shared_services, app_constants, shutdown_coordinator)
     threading.Thread(target=bootstrap_engine.run, daemon=True).start()
     
     if LOCAL_DEBUG: logger.debug("🖥️🎨 [UI] Entering Tkinter MainLoop.")

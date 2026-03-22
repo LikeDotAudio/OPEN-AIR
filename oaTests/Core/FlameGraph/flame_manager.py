@@ -1,13 +1,14 @@
-# oaTests/Core/FlameGraph/flame_manager.py
+# FlameGraph/flame_manager.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Main manager for the OpenAir Performance Intelligence Engine.
-# Orchestrates multi-threaded profiling and modular report generation.
-#
+# Description: Main manager for the OpenAir Performance Intelligence Engine.
 
 import sys
 import pathlib
 import os
 import threading
+import json
 from loguru import logger
 
 # 1. Setup Environment
@@ -38,7 +39,7 @@ class FlameManager:
         if output_dir:
             self.data_dir = pathlib.Path(output_dir)
         else:
-            self.data_dir = self.project_root / "oaDataLogs" / "Reports" / "FlameGraph"
+            self.data_dir = self.project_root / "oaDataLogs" / "FlameGraph"
         
         self.data_dir.mkdir(parents=True, exist_ok=True)
         self.mtp = MultiThreadProfiler()
@@ -78,11 +79,35 @@ class FlameManager:
         wall_of_shame_text = generate_wall_of_shame(stats_list, ps)
         wall_of_pity_text = generate_wall_of_pity(stats_list, ps)
         
+        # F. Generate JSON Outputs
+        try:
+            # 1. Event Analysis Engine Data
+            with open(self.data_dir / "event_analysis.json", "w") as f:
+                # Sanitize stats_list for JSON (remove non-serializable raw_key if present)
+                serializable_stats = []
+                for s in stats_list:
+                    s_copy = s.copy()
+                    if 'raw_key' in s_copy: del s_copy['raw_key']
+                    serializable_stats.append(s_copy)
+                json.dump(serializable_stats, f, indent=4)
+            
+            # 2. Wall of Shame Data
+            with open(self.data_dir / "wall_of_shame.json", "w") as f:
+                json.dump({"report": wall_of_shame_text}, f, indent=4)
+                
+            # 3. Wall of Pity Data
+            with open(self.data_dir / "wall_of_pity.json", "w") as f:
+                json.dump({"report": wall_of_pity_text}, f, indent=4)
+                
+            logger.debug(f"🔥 [FLAME] JSON components saved to {self.data_dir}")
+        except Exception as e:
+            logger.error(f"🔥 [FLAME] Failed to save JSON components: {e}")
+
         # Extract unique roots for the filter buttons
         all_roots = sorted(list(set(r for s in stats_list for r in s['roots'])))
         root_buttons = "".join([f'<button class="filter-btn active" id="btn-root-{l}" onclick="toggleRoot(\'{l}\')">{l}</button>' for l in all_roots])
         
-        # F. Assemble Final Report
+        # G. Assemble Final Report
         success = generate_final_html(
             svg_content=svg_content,
             table_rows=table_rows,

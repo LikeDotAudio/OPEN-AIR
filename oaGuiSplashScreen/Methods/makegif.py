@@ -1,18 +1,8 @@
-# splash_screen/makegif.py
-#
-# This script generates a GIF animation of a dynamic wave pattern using Matplotlib, intended for splash screen display.
-#
+# Methods/makegif.py
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20250821.200641.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20250821.200641.1
+# Description: This script generates a GIF animation of a dynamic wave pattern using Matplotlib, intended for splash screen display.
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -119,7 +109,6 @@ def calculate_wave_height(time_phase, offset_x, offset_t):
 
 # Updates the animation for each frame.
 # This function is the core of the animation logic. It calculates the wave heights
-# for multiple layers based on the current frame progress, and then updates the
 # heights of the bars and the data of the lines for each layer.
 # Inputs:
 #     frame (int): The current frame number in the animation sequence.

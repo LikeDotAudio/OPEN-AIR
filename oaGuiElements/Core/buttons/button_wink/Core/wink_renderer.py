@@ -1,3 +1,9 @@
+# Core/wink_renderer.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 import tkinter as tk
 from PIL import Image, ImageDraw, ImageTk, ImageFilter
 

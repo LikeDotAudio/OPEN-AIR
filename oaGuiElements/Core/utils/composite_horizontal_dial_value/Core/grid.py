@@ -1,3 +1,9 @@
+# Core/grid.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
 class GridManager:
     """Calculates and configures column and row weights for the composite widget."""
 

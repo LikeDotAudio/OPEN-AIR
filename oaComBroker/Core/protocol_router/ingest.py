@@ -1,6 +1,8 @@
-# workers/Command_Router/protocol_router/ingest.py
+# protocol_router/ingest.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
 #
-# Logic for data normalization and unified message schema creation.
+# Description: Logic for data normalization and unified message schema creation.
 
 import time
 import random

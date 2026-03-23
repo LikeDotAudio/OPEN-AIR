@@ -1,138 +1,152 @@
 # Managers/Setup.py
 # Author: Anthony Peter Kuzub
-# Version: 20260314.002500.REV01
+# Version: 20260323.1830.1
 #
 # Description: Primary installation orchestrator for the OPEN-AIR system environment.
-
-"""
-Primary Purpose:
-This script acts as the master setup utility, coordinating the installation of
-system-level dependencies (Mosquitto, SNMP), Python packages, and desktop
-integration components.
-"""
+# This script ensures all Python dependencies and system infrastructure are present.
 
 import os
 import sys
 import subprocess
 import shutil
 
-# --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
-from loguru import logger
-
-# Specialized logger instance bound to the 'SETUP' subsystem.
-setup_logger = logger.bind(subsystem="SETUP")
-
-# --- Constants ---
-VERSION = "20260314.002500.REV01"
-EXIT_CODE_CRITICAL = 1
-
-# Stage Indicators for logging/process tracking
-STAGE_PYTHON_DEPS = 1
-STAGE_MQTT_INFRA = 2
-STAGE_SNMP_INFRA = 3
-STAGE_DESKTOP_INTEG = 4
-
-def main():
-    """
-    Orchestrates the multi-stage installation and configuration sequence.
-    """
-    # Establish the logical root of the project for relative importing.
+# --- Path Injection ---
+# We resolve the project root and inject it into sys.path immediately to ensure
+# that internal modules can be imported regardless of
+# how or where this script is executed.
+def _inject_project_root():
+    """Calculates and injects the project root into sys.path."""
+    # Current file: project_root/oaInstallation/Managers/Setup.py
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.dirname(current_dir)
+    project_root = os.path.dirname(os.path.dirname(current_dir))
     
-    # Inject project root into the path to enable 'oaDependencies' 
-    # imports.
     if project_root not in sys.path:
         sys.path.insert(0, project_root)
+    return project_root
 
-    if LOCAL_DEBUG:
-        logger.debug(f"🛠️⚙️📦 [SETUP] Project root resolved: {project_root}")
+PROJECT_ROOT = _inject_project_root()
 
-    # --- 1. Run Dependency Check ---
-    if LOCAL_DEBUG:
-        logger.info(f"🛠️⚙️📦 [SETUP] --- Stage {STAGE_PYTHON_DEPS}: Python Dependencies ---")
-    try:
-        from oaDependencies import dependancy_checker
+# Now we can safely import loguru and other internal modules
+from loguru import logger
+
+# --- Constants ---
+VERSION = "20260323.1830.1"
+EXIT_CODE_CRITICAL = 1
+
+# Stage Indicators for consistent logging
+STAGE_PYTHON_DEPS = "Python Dependencies"
+STAGE_MQTT_INFRA = "MQTT Infrastructure"
+STAGE_SNMP_INFRA = "SNMP Infrastructure"
+STAGE_DESKTOP_INTEG = "Desktop Integration"
+
+class SetupManager:
+    """
+    Core manager for the OPEN-AIR installation process.
+    Orchestrates dependency checks and system infrastructure deployment.
+    """
+    def __init__(self, debug=True):
+        self.debug = debug
+        self.project_root = PROJECT_ROOT
+
+    def check_dependencies(self, callback=None, auto_install=True, clean_install=False):
+        """
+        Invokes the automated dependency checker.
+        """
+        try:
+            # Import DependencyManager from the local Managers directory
+            from oaInstallation.Managers import DependencyManager as dependancy_checker
+            
+            def log_proxy(message, **kwargs):
+                if callback: callback(message)
+                elif self.debug: logger.debug(f"🛠️⚙️📦 [SETUP] {message}")
+
+            # Run the pre-check which validates and repairs missing packages
+            success = dependancy_checker.run_interactive_pre_check(
+                lambda m: callback(m) if callback else logger.info(m),
+                log_proxy,
+                should_clean_install=clean_install,
+                auto_install=auto_install
+            )
+            return success
+        except Exception as e:
+            logger.error(f"🛠️⚙️📦 [SETUP] Dependency check failed: {e}")
+            return False
+
+    def setup_mqtt(self, callback=None):
+        """Ensures Mosquitto broker is installed and available."""
+        if shutil.which('mosquitto'):
+            if callback: callback("Mosquitto broker is active.")
+            return True
         
-        # Define a zero-cost debug proxy for the dependency engine
-        def setup_debug_log(message, **kwargs):
-            if LOCAL_DEBUG:
-                logger.debug(f"🛠️⚙️📦 [SETUP] {message}")
+        if callback: callback("Mosquitto missing. Attempting install...")
+        try:
+            # We use check=False for update as it might fail on some networks but
+            # still allow the install to proceed.
+            subprocess.run(['sudo', 'apt-get', 'update'], check=False)
+            subprocess.run(['sudo', 'apt-get', 'install', 'mosquitto', '-y'], check=True)
+            if callback: callback("Mosquitto deployed successfully.")
+            return True
+        except Exception as e:
+            if callback: callback(f"Mosquitto install failed: {e}")
+            return False
 
-        # Execute interactive check; allows for automated repair if needed.
-        dependancy_checker.run_interactive_pre_check(
-            logger.info, 
-            setup_debug_log, 
-            should_clean_install=False
-        )
+    def setup_snmp(self, callback=None):
+        """Ensures SNMP daemon and utilities are installed."""
+        if shutil.which('snmpd'):
+            if callback: callback("SNMP daemon is active.")
+            return True
         
-    except ImportError as import_error:
-        # Gravity of Errors: Critical failure if internal setup modules are lost.
-        logger.error(f"🛠️⚙️📦 [SETUP] CRITICAL: Setup modules missing: {import_error}")
-        sys.exit(EXIT_CODE_CRITICAL)
-    except Exception:
-        # Capture full forensic report for unexpected installation logic errors.
-        logger.exception("🛠️⚙️📦 [SETUP] CRITICAL: Dependency check crashed.")
-        sys.exit(EXIT_CODE_CRITICAL)
-
-    # --- 1.5 Check for Mosquitto Broker ---
-    if LOCAL_DEBUG:
-        logger.info(f"🛠️⚙️📦 [SETUP] --- Stage {STAGE_MQTT_INFRA}: MQTT Infrastructure ---")
-    
-    if shutil.which('mosquitto'):
-        if LOCAL_DEBUG:
-            logger.success("✅✅✅ [SUCCESS] Mosquitto broker is active.")
-    else:
-        logger.warning("🛠️⚙️📦 [SETUP] Mosquitto missing. Attempting install...")
-        try:
-            # APT-GET utilized for standardized Debian package management.
-            subprocess.run(['sudo', 'apt-get', 'update'], check=False)
-            subprocess.run(['sudo', 'apt-get', 'install', 'mosquitto', '-y'], 
-                           check=True)
-            logger.success("✅✅✅ [SUCCESS] Mosquitto deployed.")
-        except subprocess.CalledProcessError as process_error:
-            logger.error(f"🛠️⚙️📦 [SETUP] ERROR: Mosquitto failure ({process_error.returncode}).")
-        except FileNotFoundError:
-            logger.error("🛠️⚙️📦 [SETUP] ERROR: 'apt-get' binary not found.")
-
-    # --- 1.6 Check for SNMP Daemon ---
-    if LOCAL_DEBUG:
-        logger.info(f"🛠️⚙️📦 [SETUP] --- Stage {STAGE_SNMP_INFRA}: SNMP Infrastructure ---")
-    if shutil.which('snmpd'):
-        if LOCAL_DEBUG:
-            logger.success("✅✅✅ [SUCCESS] SNMP daemon is active.")
-    else:
-        logger.warning("🛠️⚙️📦 [SETUP] SNMP missing. Attempting install...")
+        if callback: callback("SNMP missing. Attempting install...")
         try:
             subprocess.run(['sudo', 'apt-get', 'update'], check=False)
-            subprocess.run(['sudo', 'apt-get', 'install', 'snmpd', 'snmp', '-y'], 
-                           check=True)
-            logger.success("✅✅✅ [SUCCESS] SNMP deployed.")
-        except subprocess.CalledProcessError as process_error:
-            logger.error(f"🛠️⚙️📦 [SETUP] ERROR: SNMP failure ({process_error.returncode}).")
-        except FileNotFoundError:
-            logger.error("🛠️⚙️📦 [SETUP] ERROR: 'apt-get' binary not found.")
+            subprocess.run(['sudo', 'apt-get', 'install', 'snmpd', 'snmp', '-y'], check=True)
+            if callback: callback("SNMP deployed successfully.")
+            return True
+        except Exception as e:
+            if callback: callback(f"SNMP install failed: {e}")
+            return False
 
-    # --- 2. Run TaskBar Icon Setup ---
-    if LOCAL_DEBUG:
-        logger.info(f"🛠️⚙️📦 [SETUP] --- Stage {STAGE_DESKTOP_INTEG}: Desktop Integration ---")
-    taskbar_script = os.path.join(current_dir, 'TaskBarIcon.py')
-    
-    if os.path.exists(taskbar_script):
-        if LOCAL_DEBUG:
-            logger.debug(f"🛠️⚙️📦 [SETUP] Executing {taskbar_script}...")
+    def setup_desktop(self, callback=None):
+        """
+        Installs the application's desktop entry and pins it to the taskbar.
+        """
+        # TaskBarIcon.py is located in the sibling Core directory
+        taskbar_script = os.path.join(self.project_root, "oaInstallation", "Core", "TaskBarIcon.py")
+        
+        if not os.path.exists(taskbar_script):
+            error_msg = f"Error: {taskbar_script} not found."
+            if callback: callback(error_msg)
+            logger.error(f"🛠️⚙️📦 [SETUP] {error_msg}")
+            return False
+
         try:
-            # Subprocess isolation used to prevent script state leakage.
+            # Run the taskbar icon installer as a separate process
             subprocess.run([sys.executable, taskbar_script], check=True)
-            logger.success("✅✅✅ [SUCCESS] Desktop integration complete.")
-        except subprocess.CalledProcessError as process_error:
-            logger.error(f"🛠️⚙️📦 [SETUP] ERROR: Icon setup failed ({process_error.returncode}).")
-    else:
-        logger.error(f"🛠️⚙️📦 [SETUP] ERROR: {taskbar_script} not found.")
+            if callback: callback("Desktop integration complete.")
+            return True
+        except Exception as e:
+            if callback: callback(f"Desktop integration failed: {e}")
+            return False
 
-    if LOCAL_DEBUG:
-        logger.success("✅✅✅ [SUCCESS] Setup sequence complete. Launch via ./OpenAir.py")
+def main():
+    """Primary entry point for the Setup utility."""
+    manager = SetupManager()
+    
+    logger.info(f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_PYTHON_DEPS}")
+    if not manager.check_dependencies():
+        logger.error("🛑 [CRITICAL] Dependency check failed. Setup aborted.")
+        sys.exit(EXIT_CODE_CRITICAL)
+
+    logger.info(f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_MQTT_INFRA}")
+    manager.setup_mqtt()
+
+    logger.info(f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_SNMP_INFRA}")
+    manager.setup_snmp()
+
+    logger.info(f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_DESKTOP_INTEG}")
+    manager.setup_desktop()
+
+    logger.success("✅✅✅ [SUCCESS] Setup complete.")
 
 if __name__ == "__main__":
     main()

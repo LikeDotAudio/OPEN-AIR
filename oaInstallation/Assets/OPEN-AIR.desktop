@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=OPEN-AIR
+Comment=Multi-Process Supervisor for the OPEN-AIR System
+Exec=python3 /home/anthony/Documents/OPEN-AIR/OpenAir.py
+Icon=/home/anthony/Documents/OPEN-AIR/oaGuiSplashScreen/Assets/OPEN_AIR_LOGO.png
+Terminal=false
+Categories=Utility;Engineering;
+StartupNotify=true

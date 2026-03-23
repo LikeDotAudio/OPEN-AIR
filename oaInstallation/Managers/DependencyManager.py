@@ -1,13 +1,13 @@
-# Managers/dependancy_checker.py
+# Managers/DependencyManager.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260323.1855.1
 #
 # Description: Automated validation and repair of Python library requirements.
 
 """
 Primary Purpose:
 This module manages the identification, verification, and automated installation
- of third-party Python packages required for the OPEN-AIR platform.
+of third-party Python packages required for the OPEN-AIR platform.
 """
 
 import os
@@ -19,7 +19,7 @@ LOCAL_DEBUG = True
 from loguru import logger
 
 # --- Constants ---
-VERSION = "20260314.004000.REV01"
+VERSION = "20260323.1855.1"
 EXIT_CODE_DEPENDENCY_FAILURE = 1
 
 # EXTERNAL_PACKAGES: Maps human-friendly names to actual Python import paths.
@@ -46,6 +46,7 @@ EXTERNAL_PACKAGES = {
     "python-osc": "pythonosc",
     "mido": "mido",
     "python-rtmidi": "rtmidi",
+    "textual": "textual",
 }
 
 # BUILTIN_PACKAGES: Standard library modules verified for baseline environment.
@@ -97,98 +98,91 @@ def _execute_pip_command(action, package_name, console_print_func,
                     return True 
             # Gravity of Errors: Critical reporting if the repair fails.
             logger.error(f"🔍📦🔗 [DEPENDENCY] ERROR: Pip {action} failed "
-                         f"for {package_name}: {result.stderr.strip()}")
+                         f"for {package_name}: {result.stderr}")
             return False
-    except Exception:
-        # Capture forensic details for unexpected OS-level failures.
-        logger.exception(f"🔍📦🔗 [DEPENDENCY] CRITICAL: Unexpected error "
-                         f"during pip {action} for {package_name}.")
+    except Exception as e:
+        logger.error(f"🔍📦🔗 [DEPENDENCY] ERROR: Pip execution error: {e}")
         return False
 
 def action_check_dependancies(console_print_func, debug_log_func, 
-                              should_clean_install=False):
+                              should_clean_install=False, auto_install=True):
     """
-    Iterates through all required packages and verifies their availability.
+    Validates all listed packages and optionally repairs them via pip.
     """
     missing_packages = []
+    installed_count = 0
+    
     if LOCAL_DEBUG:
-        logger.info(f"🔍📦🔗 [DEPENDENCY] Checking dependencies. "
-                    f"Clean Mode: {should_clean_install}")
+        console_print_func("🧐 [INSPECT] Scanning the environment for elite Python modules...")
 
     for friendly_name, import_name in EXTERNAL_PACKAGES.items():
         # Derive the PyPI package name from the import name unless overridden.
         package_name_for_pip = import_name.split(".")[0]
         
         # --- Package Name Overrides ---
-        # Some libraries have import names that differ from their PyPI name.
         if friendly_name == "paho-mqtt": package_name_for_pip = "paho-mqtt"
-        elif friendly_name == "python-usbtmc": 
-            package_name_for_pip = "python-usbtmc"
-        elif friendly_name == "python-vxi11": 
-            package_name_for_pip = "python-vxi11"
-        elif friendly_name == "pyserial": 
-            package_name_for_pip = "pyserial"
-        elif friendly_name == "beautifulsoup4 (bs4)": 
-            package_name_for_pip = "beautifulsoup4"
-        elif friendly_name == "Pillow (for support)": 
-            package_name_for_pip = "Pillow"
-        elif friendly_name == "python-osc": 
-            package_name_for_pip = "python-osc"
-        elif friendly_name == "python-rtmidi": 
-            package_name_for_pip = "python-rtmidi"
+        elif friendly_name == "python-usbtmc": package_name_for_pip = "python-usbtmc"
+        elif friendly_name == "python-vxi11": package_name_for_pip = "python-vxi11"
+        elif friendly_name == "pyserial": package_name_for_pip = "pyserial"
+        elif friendly_name == "beautifulsoup4 (bs4)": package_name_for_pip = "beautifulsoup4"
+        elif friendly_name == "Pillow (for support)": package_name_for_pip = "Pillow"
+        elif friendly_name == "python-osc": package_name_for_pip = "python-osc"
+        elif friendly_name == "python-rtmidi": package_name_for_pip = "python-rtmidi"
 
         try:
-            # Use __import__ for light verification without complex namespace side effects.
             module = __import__(import_name)
             is_installed = True
-            
-            # Implementation Note: rtmidi has a common name collision.
-            # 'python-rtmidi' contains 'MidiIn', while the bare 'rtmidi' does not.
             if import_name == "rtmidi":
                 if not hasattr(module, "MidiIn"):
                     is_installed = False
-                    if LOCAL_DEBUG:
-                        logger.warning("🔍📦🔗 [DEPENDENCY] WARNING: "
-                                       "Need 'python-rtmidi' (collision).")
         except ImportError:
             is_installed = False
 
-        if is_installed and should_clean_install:
-            _execute_pip_command(ACTION_UNINSTALL, package_name_for_pip, 
-                                 console_print_func, debug_log_func)
-            if not _execute_pip_command(ACTION_INSTALL, package_name_for_pip, 
-                                        console_print_func, debug_log_func):
-                missing_packages.append(friendly_name)
+        if is_installed:
+            installed_count += 1
+            if not should_clean_install:
+                console_print_func(f"🌟 [GLORIOUS] Found {friendly_name}! It's here and it's perfect.")
+            
+            if should_clean_install and auto_install:
+                console_print_func(f"🔄 [REFRESH] Re-polishing {friendly_name}...")
+                _execute_pip_command(ACTION_UNINSTALL, package_name_for_pip, 
+                                     console_print_func, debug_log_func)
+                if not _execute_pip_command(ACTION_INSTALL, package_name_for_pip, 
+                                            console_print_func, debug_log_func):
+                    missing_packages.append(friendly_name)
         elif not is_installed:
-            if not _execute_pip_command(ACTION_INSTALL, package_name_for_pip, 
-                                        console_print_func, debug_log_func):
+            if auto_install:
+                console_print_func(f"🛠️ [REPAIR] {friendly_name} is missing! Deploying the engineering team...")
+                if not _execute_pip_command(ACTION_INSTALL, package_name_for_pip, 
+                                            console_print_func, debug_log_func):
+                    missing_packages.append(friendly_name)
+            else:
+                console_print_func(f"⚠️ [WARNING] {friendly_name} is NOT present in this realm!")
                 missing_packages.append(friendly_name)
 
     # Verification of standard library availability.
     for friendly_name, import_name in BUILTIN_PACKAGES.items():
         try:
             __import__(import_name)
+            console_print_func(f"💎 [SOLID] {friendly_name} is baked into the core. Excellent.")
         except ImportError:
             missing_packages.append(friendly_name)
 
     if missing_packages:
-        logger.error(f"🔍📦🔗 [DEPENDENCY] {CRITICAL_FAILURE_MESSAGE}")
-        for pkg in missing_packages: 
-            logger.error(f"🔍📦🔗 [DEPENDENCY]  - {pkg}")
-        if LOCAL_DEBUG:
-            logger.info(MANUAL_INSTALL_INSTRUCTION)
-        return False
-    return True
+        return False, missing_packages
+    
+    console_print_func(f"🎉 [TRIUMPH] All {installed_count} dependencies are standing by! We are ready for greatness.")
+    return True, []
 
 def run_interactive_pre_check(console_print_func, debug_log_func, 
-                              should_clean_install=False):
+                              should_clean_install=False, auto_install=True):
     """
-    Orchestrates the dependency check and triggers process exit on failure.
+    Orchestrates the dependency check and returns True on success, or False on failure.
     """
-    if LOCAL_DEBUG:
-        logger.info("🔍📦🔗 [DEPENDENCY] Starting dependency check...")
-    if not action_check_dependancies(console_print_func, debug_log_func, 
-                                     should_clean_install):
-        sys.exit(EXIT_CODE_DEPENDENCY_FAILURE)
-    if LOCAL_DEBUG:
-        logger.success("✅✅✅ [SUCCESS] Dependencies verified.")
+    success, missing = action_check_dependancies(console_print_func, debug_log_func, 
+                                                should_clean_install, auto_install)
+    return success
+
+if __name__ == "__main__":
+    # If run as a script, perform a standard pre-check.
+    run_interactive_pre_check(print, logger.debug)

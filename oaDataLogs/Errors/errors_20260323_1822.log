@@ -1,0 +1,3 @@
+182233.037 | WARNING  | ⚙️ CORE   | SYSTEM             | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+182236.060 | WARNING  | 🎨 UI      | 📡 OSC              | oaComOSC.Managers.osc_manager | Bridge Offline.
+182236.060 | WARNING  | 🎨 UI      | 🔌 SNMP             | oaComSNMP.Managers.snmp_manager | SNMP Bridge Offline.

@@ -28,8 +28,10 @@ def install_icon():
     Deploys the application's desktop entry and updates GNOME favorites.
     """
     # Define local pathing relative to the script's execution context.
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    source_desktop_file = os.path.join(current_dir, DESKTOP_FILENAME)
+    # The .desktop file is stored in the module's Assets directory.
+    core_dir = os.path.dirname(os.path.abspath(__file__))
+    assets_dir = os.path.abspath(os.path.join(core_dir, "..", "Assets"))
+    source_desktop_file = os.path.join(assets_dir, DESKTOP_FILENAME)
     
     # Standard location for per-user desktop entries on Linux.
     user_applications_dir = os.path.expanduser('~/.local/share/applications')

@@ -1,0 +1,6 @@
+161534.231 | WARNING  | ⚙️ CORE   | SYSTEM             | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+161549.606 | WARNING  | 🎨 UI      | 📡 OSC              | oaComOSC.Managers.osc_manager | Bridge Offline.
+161549.606 | WARNING  | 🎨 UI      | 🔌 SNMP             | oaComSNMP.Managers.snmp_manager | SNMP Bridge Offline.
+161556.484 | WARNING  | ⚙️ CORE   | SYSTEM             | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+161605.206 | WARNING  | 🎨 UI      | 📡 OSC              | oaComOSC.Managers.osc_manager | Bridge Offline.
+161605.206 | WARNING  | 🎨 UI      | 🔌 SNMP             | oaComSNMP.Managers.snmp_manager | SNMP Bridge Offline.

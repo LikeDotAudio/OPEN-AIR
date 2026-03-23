@@ -4,9 +4,12 @@
 #
 # Description: Brief summary of purpose
 
-from loguru import logger
-from ....Core.event_bus import event_bus
-from ....Core.state import state_manager
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = True
+from oaLogging.Core.logger import GUI_LOGGER as logger
+
+from ....event_bus import event_bus
+from ....state import state_manager
 
 class FocusManager:
     """Handles path logic, array redirection, and event publishing for widget focus."""

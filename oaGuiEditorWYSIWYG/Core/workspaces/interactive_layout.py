@@ -6,13 +6,12 @@
 
 import tkinter as tk
 from tkinter import ttk
-from loguru import logger
-
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
+from oaLogging.Core.logger import GUI_LOGGER as logger
 
-from ..Core.event_bus import event_bus
-from ..Core.state import state_manager
+from ..event_bus import event_bus
+from ..state import state_manager
 
 # --- EXTRACTED CORE MODULES ---
 from .Core.layout.preview_engine import PreviewEngine
@@ -25,7 +24,7 @@ class InteractiveLayout(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         kwargs.pop("bg", None)
         super().__init__(parent, bg="#1a1a1a", *args, **kwargs)
-        if LOCAL_DEBUG: logger.debug("📐 InteractiveLayout: Initializing workspace...")
+        if LOCAL_DEBUG: logger.debug("InteractiveLayout: Initializing workspace...")
         
         # Display Toggles
         self.show_structure = tk.BooleanVar(value=True)

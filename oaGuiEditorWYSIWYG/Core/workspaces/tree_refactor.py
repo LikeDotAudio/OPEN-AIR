@@ -6,9 +6,12 @@
 
 import tkinter as tk
 from tkinter import ttk
-from ..Core.event_bus import event_bus
-from ..Core.state import state_manager
-from loguru import logger
+from ..event_bus import event_bus
+from ..state import state_manager
+
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+from oaLogging.Core.logger import GUI_LOGGER as logger
 
 class TreeRefactor(ttk.Frame):
     """Hierarchical tree view for GUI structure refactoring."""

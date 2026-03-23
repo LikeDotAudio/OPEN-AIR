@@ -6,7 +6,7 @@
 
 import tkinter as tk
 from tkinter import ttk
-from ...Core.state import state_manager
+from ...state import state_manager
 from .leaf_editor_factory import LeafEditorFactory
 
 class PropertyRendererMixin:

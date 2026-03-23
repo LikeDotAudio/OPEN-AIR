@@ -1,6 +1,6 @@
 # OpenAir.py
 # Author: Anthony Peter Kuzub
-# Version: 20260314.120000.REV01
+# Version: 20260323.1700.1
 #
 # Description: The Multi-Process Supervisor for the OPEN-AIR System.
 
@@ -25,10 +25,8 @@ Responsibilities:
 
 Constraints:
     - Requires a Python 3.x environment.
-    - Assumes the presence of 'managers/System_Core/open_air_core.py' and 
-      'managers/Display/open_air_ui.py'.
-    - Relies on 'subprocess.Popen' for process isolation; behaviors may 
-      vary slightly between Linux and Windows process management.
+    - Assumes the presence of 'oaComBroker/Core/open_air_core.py' and 
+      'oaGuiManager/Managers/open_air_ui.py'.
 """
 
 import sys
@@ -42,33 +40,15 @@ import signal
 current_dir = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(current_dir))
 
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = True
+from oaLogging.Core.logger import initialize_logging, set_log_directory, SYSTEM_LOGGER as logger
 from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
 from oaConfiguration.FileReaders.config_reader import Config
-
-# _DEBUG: Internal flag to toggle verbose supervisor logging.
-_DEBUG = True
 
 def main():
     """
     Executes the supervisor lifecycle: Setup -> Spawn -> Monitor -> Shutdown.
-
-    Lead with action: Orchestrates the dual-partition boot sequence. It 
-    first resolves system paths, then launches the UI and Core as 
-    subprocesses, and finally enters a monitoring loop.
-
-    Inputs:
-        sys.argv: Accepts '--core' or '--ui' to bypass the supervisor and
-                 launch a specific partition directly (for debugging).
-
-    Outputs:
-        None. Process terminates on child exit or manual interrupt.
-
-    Side Effects:
-        - Spawns multiple child processes.
-        - Modifies the system environment for child processes.
-        - Writes logs to the 'oaDataLogs' directory.
     """
     # Handle direct partition launching for developer convenience.
     if len(sys.argv) > 1:
@@ -90,13 +70,8 @@ def main():
     app_config = Config.get_instance()
     is_mission_critical = app_config.MISSION_CRITICAL_MODE
 
-    def log(msg):
-        """Internal helper for consistent supervisor console output."""
-        print(f"[SUPERVISOR] {msg}")
-        if _DEBUG: 
-            logger.debug(f"🚀 SUPERVISOR: {msg}")
-
-    log(f"Launching OPEN-AIR Partitions... (Mission Critical: {is_mission_critical})")
+    if LOCAL_DEBUG:
+        logger.info(f"Launching OPEN-AIR Partitions... (Mission Critical: {is_mission_critical})")
 
     python_executable = sys.executable
     
@@ -108,7 +83,6 @@ def main():
     # UI Partition (Display & Interaction)
     ui_script = os.path.join(current_dir, "oaGuiManager", "Managers", "open_air_ui.py")
     if not os.path.exists(ui_script):
-        # Fallback for old structure just in case, though we are refactoring
         ui_script = os.path.join(current_dir, "oaGuiManager", "open_air_ui.py")
 
     def get_host_guid():
@@ -116,7 +90,8 @@ def main():
         return os.urandom(8).hex().upper()
 
     session_guid = get_host_guid()
-    log(f"Session Identity established (Randomized): {session_guid}")
+    if LOCAL_DEBUG:
+        logger.debug(f"Session Identity established (Randomized): {session_guid}")
     
     # Clone the current environment and inject the session GUID.
     child_env = os.environ.copy()
@@ -136,67 +111,65 @@ def main():
     # Use a flag for graceful shutdown instead of catching KeyboardInterrupt
     shutdown_requested = [False]
     def signal_handler(sig, frame):
-        log("🛑 Keyboard Interrupt (Signal). Initiating graceful shutdown...")
+        if LOCAL_DEBUG:
+            logger.info("Keyboard Interrupt (Signal). Initiating graceful shutdown...")
         shutdown_requested[0] = True
 
     signal.signal(signal.SIGINT, signal_handler)
 
     # 1. Launch UI Partition (Handles User Feedback/Splash Screen).
-    log("Spawning Partition B (UI)...")
+    if LOCAL_DEBUG: logger.debug("Spawning Partition B (UI)...")
     p_ui = subprocess.Popen([python_executable, ui_script], env=ui_env)
     processes.append(p_ui)
     
     # 2. Launch Core Partition (Handles Hardware/Logic).
-    log("Spawning Partition A (Core)...")
+    if LOCAL_DEBUG: logger.debug("Spawning Partition A (Core)...")
     p_core = subprocess.Popen([python_executable, core_script], env=core_env)
-    # Core is prioritized in the monitoring list at index 0.
     processes.insert(0, p_core)
     
-    log("System Running. Monitoring child processes...")
+    if LOCAL_DEBUG:
+        logger.success("System Running. Monitoring child processes...")
 
     # --- Monitoring Loop ---
     while not shutdown_requested[0]:
-        time.sleep(0.5) # Throttle loop to minimize CPU impact.
+        time.sleep(0.5) 
         
         # Check Core partition liveness.
         if p_core.poll() is not None:
             if is_mission_critical and not shutdown_requested[0]:
-                log(f"❌ Core died (Code {p_core.returncode}). Restarting in 1s...")
-                time.sleep(1.0) # ⚡ OPTIMIZATION: Throttled restart backoff
-                p_core = subprocess.Popen([python_executable, core_script], 
-                                            env=core_env)
+                logger.error(f"Core died (Code {p_core.returncode}). Restarting in 1s...")
+                time.sleep(1.0) 
+                p_core = subprocess.Popen([python_executable, core_script], env=core_env)
                 processes[0] = p_core
             else:
-                log(f"🛑 Core exited (Code {p_core.returncode}). Shutting down.")
+                if LOCAL_DEBUG: logger.info(f"Core exited (Code {p_core.returncode}). Shutting down.")
                 break
         
         # Check UI partition liveness.
         if p_ui.poll() is not None:
             if is_mission_critical and not shutdown_requested[0]:
-                log(f"⚠️ UI exited (Code {p_ui.returncode}). Restarting in 1s...")
-                time.sleep(1.0) # ⚡ OPTIMIZATION: Throttled restart backoff
-                p_ui = subprocess.Popen([python_executable, ui_script], 
-                                            env=ui_env)
+                logger.warning(f"UI exited (Code {p_ui.returncode}). Restarting in 1s...")
+                time.sleep(1.0) 
+                p_ui = subprocess.Popen([python_executable, ui_script], env=ui_env)
                 processes[1] = p_ui
             else:
-                log(f"👋 UI exited (Code {p_ui.returncode}). System complete.")
+                if LOCAL_DEBUG: logger.info(f"UI exited (Code {p_ui.returncode}). System complete.")
                 break
 
     # --- Finalization and Cleanup ---
-    log("Terminating child processes...")
+    if LOCAL_DEBUG: logger.debug("Terminating child processes...")
     for p in processes:
         if p and p.poll() is None:
             p.terminate()
-            # Polling instead of p.wait(timeout=2) to avoid exception
             start_wait = time.time()
             while p.poll() is None and (time.time() - start_wait) < 2:
                 time.sleep(0.1)
             
             if p.poll() is None:
-                # Force-kill if the process refuses to terminate within 2s.
                 p.kill()
-                p.wait() # Final wait to clean up zombie
-    log("Supervisor shutdown complete. Goodbye.")
+                p.wait()
+    if LOCAL_DEBUG:
+        logger.success("Supervisor shutdown complete. Goodbye.")
 
 if __name__ == "__main__":
     main()

@@ -1,6 +1,6 @@
 # oaLogging/Constants/subsystem_emojis.py
 # Author: Gemini (Collaborator)
-# Version: 20260323.1630.1
+# Version: 20260323.1710.1
 #
 # Description: Subsystem Emoji Mapping for OPEN-AIR Logging.
 
@@ -18,4 +18,5 @@ SUBSYSTEM_EMOJIS = {
     "TEST": "🧪", "AUDIT": "📋", "CLEANUP": "🧹", "UI": "🎨", "LAYOUT": "🏗️",
     "FACTORY": "🏭", "PARSER": "🌀", "TABLE": "📊", "CACHE": "💾", "LAYER": "🥞",
     "FAILURE": "🚨🔴",
+    "SNMP": "🔌", "MIDI": "🎹", "OSC": "📡",
 }

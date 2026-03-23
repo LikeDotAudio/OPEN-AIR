@@ -1,0 +1,19 @@
+160812.242 | WARNING  | ❓ SUP     | SYSTEM             | oaTests.Core.FlameGraph.flame_capture | FlameGraph: Profiler enable failed, running thread without profiling: Another profiling tool is already active
+160812.242 | WARNING  | ❓ SUP     | SYSTEM             | oaTests.Core.FlameGraph.flame_capture | FlameGraph: Profiler enable failed, running thread without profiling: Another profiling tool is already active
+160813.041 | WARNING  | ⚙️ CORE   | SYSTEM             | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+161136.226 | ERROR    | 🎨 UI      | 🚨🔴 BUILDER         | oaLogging.Methods.error_handling | ❌🔴 [VOCAL CAPTURE] Failed to load module from /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/2_monitors/1588_PTP_Monitor/ptp_monitor.py
+
+🕵️ FORENSIC TRACE:
+Traceback (most recent call last):
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/FileReaders/module_loader.py", line 56, in load_module_from_path
+    spec.loader.exec_module(module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/2_monitors/1588_PTP_Monitor/ptp_monitor.py", line 15, in <module>
+    from .Core.ptp_processor import PTPDataProcessor
+ImportError: attempted relative import with no known parent package
+
+161213.346 | ERROR    | 🎨 UI      | 🛰️ MQTT            | oaComMQTT.Workers.mqtt_async_worker | Subscribe Error: '<' not supported between instances of 'method' and 'int'
+161213.349 | ERROR    | 🎨 UI      | 🛰️ MQTT            | oaComMQTT.Workers.mqtt_async_worker | Subscribe Error: '<' not supported between instances of 'method' and 'int'
+161608.830 | WARNING  | 🎨 UI      | 📡 OSC              | oaComOSC.Managers.osc_manager | Bridge Offline.
+161608.830 | WARNING  | 🎨 UI      | 🔌 SNMP             | oaComSNMP.Managers.snmp_manager | SNMP Bridge Offline.

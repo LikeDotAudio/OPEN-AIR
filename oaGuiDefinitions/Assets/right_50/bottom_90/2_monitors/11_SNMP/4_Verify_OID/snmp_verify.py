@@ -52,7 +52,7 @@ class SnmpVerifyOid(tk.Frame, TransparencyMixin):
         filter_frame = tk.Frame(btn_frame, bg=self.cget("bg"))
         filter_frame.pack(side=tk.LEFT, padx=10)
         ttk.Label(filter_frame, text="Filter Prefix:", background=self.cget("bg")).pack(side=tk.LEFT)
-        self.filter_var = tk.StringVar(value=".1.3.6.1.4.1.25030.")
+        self.filter_var = tk.StringVar(value=".1.3.6.1.4.1.65300.")
         # Use tk.Entry for explicit color control
         self.filter_entry = tk.Entry(filter_frame, textvariable=self.filter_var, width=40, bg="#000000", fg="#888888", insertbackground="white", bd=1, relief="flat")
         self.filter_entry.pack(side=tk.LEFT, padx=5)

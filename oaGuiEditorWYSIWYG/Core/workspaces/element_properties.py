@@ -6,17 +6,17 @@
 
 import tkinter as tk
 from tkinter import ttk, messagebox
-from ..Core.event_bus import event_bus
-from ..Core.state import state_manager
-from ..FileReaders.grab_bag_loader import GrabBagLoader
-from loguru import logger
+from ..event_bus import event_bus
+from ..state import state_manager
+from ...FileReaders.grab_bag_loader import GrabBagLoader
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = True
+from oaLogging.Core.logger import GUI_LOGGER as logger
 
 # --- EXTRACTED CORE MODULES ---
 from .Core.structural_mixin import StructuralManagerMixin
 from .Core.layout_tools_mixin import LayoutToolsMixin
 from .Core.property_renderer_mixin import PropertyRendererMixin
-
-LOCAL_DEBUG = True
 
 class AutoScrollbar(ttk.Scrollbar):
     def set(self, lo, hi):

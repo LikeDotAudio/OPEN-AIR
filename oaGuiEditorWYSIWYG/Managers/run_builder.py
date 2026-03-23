@@ -16,8 +16,7 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from oaGuiEditorWYSIWYG.Managers.wysiwyg_editor import WysiwygEditor
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
+from oaLogging.Core.logger import GUI_LOGGER as logger
 
 from oaStyle.Managers.theme_applier import apply_theme
 from oaOchestration.Core.path_initializer import initialize_paths
@@ -26,11 +25,11 @@ LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 def main():
     """Main entry point for the standalone editor program."""
-    # ⚡ MANDATORY: Initialize paths so Config reader can find config.ini
+    # MANDATORY: Initialize paths so Config reader can find config.ini
     initialize_paths()
 
     if len(sys.argv) < 2:
-        logger.error("🏗️🚫🛑 [BUILDER] Usage: python run_builder.py <json_file_path>")
+        logger.error("Usage: python run_builder.py <json_file_path>")
         sys.exit(1)
 
     json_filepath = pathlib.Path(sys.argv[1])
@@ -39,14 +38,14 @@ def main():
     root = tk.Tk()
     root.title(f"OPEN-AIR: WYSIWYG Editor - {json_filepath.name}")
     
-    # ⚡ APPLY THEME: Crucial for visual consistency in standalone process
-    if LOCAL_DEBUG: logger.debug("🚀 Standalone Builder: Applying system theme...")
+    # APPLY THEME: Crucial for visual consistency in standalone process
+    if LOCAL_DEBUG: logger.debug("Standalone Builder: Applying system theme...")
     apply_theme(root)
 
-    if LOCAL_DEBUG: logger.info(f"🚀 Standalone Builder: Starting for {json_filepath}")
+    if LOCAL_DEBUG: logger.info(f"Standalone Builder: Starting for {json_filepath}")
 
     if not json_filepath.exists():
-        logger.error(f"❌ Standalone Builder: File not found: {json_filepath}")
+        logger.error(f"Standalone Builder: File not found: {json_filepath}")
         sys.exit(1)
 
     # Load Initial Data
@@ -54,15 +53,15 @@ def main():
         with open(json_filepath, 'rb') as f:
             config_data = orjson.loads(f.read())
     except Exception as e:
-        logger.exception("❌ Standalone Builder: Failed to read JSON")
+        logger.exception("Standalone Builder: Failed to read JSON")
         sys.exit(1)
 
     def on_test(new_data):
         """Publishes the new config to MQTT to trigger a live rebuild in the main application."""
-        if LOCAL_DEBUG: logger.info(f"🏗️ Standalone Builder: 'Test' triggered for {json_filepath.name}")
+        if LOCAL_DEBUG: logger.info(f"Standalone Builder: 'Test' triggered for {json_filepath.name}")
         
         try:
-            # 🛡️ LOCAL IMPORT: Avoid dependency requirement if not testing
+            # LOCAL IMPORT: Avoid dependency requirement if not testing
             import paho.mqtt.client as mqtt
             from oaConfiguration.FileReaders.config_reader import Config
             
@@ -72,7 +71,7 @@ def main():
             user = getattr(app_config, "MQTT_USERNAME", None)
             pw = getattr(app_config, "MQTT_PASSWORD", None)
             
-            # ⚡ VERSION 2 API: Suppress deprecation warnings
+            # VERSION 2 API: Suppress deprecation warnings
             client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
             if user and pw:
                 client.username_pw_set(user, pw)
@@ -89,14 +88,13 @@ def main():
             client.publish(rebuild_topic, orjson.dumps(payload))
             client.disconnect()
             
-            if LOCAL_DEBUG: logger.success("📡 Standalone Builder: Rebuild request published to MQTT.")
+            if LOCAL_DEBUG: logger.success("Standalone Builder: Rebuild request published to MQTT.")
         except ImportError:
-            logger.error("❌ Standalone Builder: 'paho-mqtt' library not found. Cannot push to main UI.")
+            logger.error("Standalone Builder: 'paho-mqtt' library not found. Cannot push to main UI.")
         except Exception as e:
-            logger.error(f"❌ Standalone Builder: Failed to publish rebuild request: {e}")
-
+            logger.error(f"Standalone Builder: Failed to publish rebuild request: {e}")
     def on_save():
-        if LOCAL_DEBUG: logger.info("🏗️ Standalone Builder: 'Save' operation completed.")
+        if LOCAL_DEBUG: logger.info("Standalone Builder: 'Save' operation completed.")
         pass
 
     # Launch the builder using 'root' as the primary window
@@ -111,7 +109,7 @@ def main():
 
     # Lifecycle Management
     def on_close():
-        if LOCAL_DEBUG: logger.info("🏗️ Standalone Builder: Program exiting.")
+        if LOCAL_DEBUG: logger.info("Standalone Builder: Program exiting.")
         try:
             app._close_editor()
             root.quit()
@@ -119,7 +117,7 @@ def main():
         except tk.TclError:
             pass
         except Exception as e:
-            logger.warning(f"⚠️ Standalone Builder: Error during shutdown: {e}")
+            logger.warning(f"Standalone Builder: Error during shutdown: {e}")
 
     root.protocol("WM_DELETE_WINDOW", on_close)
 

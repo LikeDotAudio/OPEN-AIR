@@ -1,6 +1,6 @@
 # Core/logger.py
 # Author: Anthony Peter Kuzub
-# Version: 20260323.1600.1
+# Version: 20260323.1700.1
 #
 # Description: High-Performance Logging Framework for OPEN-AIR.
 
@@ -215,10 +215,11 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
     )
     
     # JSON Lines format for structured logging.
+    # ⚡ FIX: Escaped curly braces for literal interpretation in format_map
     jsonl_format = (
-        '{"timestamp": "{extra[ptp_time]}", "level": "{level}", "partition": "{extra[partition]}", '
+        '{{"timestamp": "{extra[ptp_time]}", "level": "{level}", "partition": "{extra[partition]}", '
         '"category": "{extra[category]}", "name": "{name}", "message": "{message}", '
-        '"process_id": "{process}", "thread_id": "{thread}"}'
+        '"process_id": "{process}", "thread_id": "{thread}"}}'
     )
 
     # 1. --- Console Sink ---
@@ -301,7 +302,9 @@ def get_logger(category: str, emoji_prefix: str = None):
         emoji_prefix (str, optional): Explicit emoji to use. If None, uses mapping.
     """
     emoji = emoji_prefix if emoji_prefix else get_emoji(category)
-    padded_category = f"{emoji} {category}".ljust(18)[:18] 
+    # ⚡ REFINEMENT: Ensure padding doesn't truncate important text
+    full_category = f"{emoji} {category}"
+    padded_category = full_category.ljust(18)
     return logger.bind(category=padded_category)
 
 # --- Subsystem-Specific Bound Instances ---

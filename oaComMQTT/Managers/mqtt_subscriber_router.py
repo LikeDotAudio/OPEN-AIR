@@ -1,6 +1,6 @@
 # Managers/mqtt_subscriber_router.py
 # Author: Anthony Peter Kuzub
-# Version: 20260218.AioMqtt.1
+# Version: 20260323.1700.1
 #
 # Description: Manages MQTT subscriptions and dispatches incoming messages to registered callbacks.
 
@@ -27,12 +27,15 @@ class ThreadSafeMatchCache:
 
     def get_cached_callbacks(self, topic: str):
         with self._lock:
-            return self._cache.get(topic)
+            # Return a copy to avoid mutation issues outside the cache
+            callbacks = self._cache.get(topic)
+            return list(callbacks) if callbacks is not None else None
 
     def cache_callbacks(self, topic: str, callbacks: List[Callable[[MqttMessage], None]]):
         with self._lock:
             if len(self._cache) < self._limit:
-                self._cache[topic] = callbacks
+                # Store a copy
+                self._cache[topic] = list(callbacks)
 
     def clear(self):
         with self._lock:
@@ -152,30 +155,36 @@ class MqttSubscriberRouter:
             from oaTranslator.Managers.yak_trigger_handler import handle_yak_monitor_traffic
             handle_yak_monitor_traffic(msg)
 
+        callbacks_to_invoke = []
+
         with self._lock:
             # 2. FAST DISPATCH: Exact Topic Match (O(1))
             if topic in self._exact_subscribers:
-                for callback_func in self._exact_subscribers[topic]:
-                    callback_func(msg)
+                callbacks_to_invoke.extend(self._exact_subscribers[topic])
 
             # 3. PATTERN DISPATCH: Wildcard Filters with Match Caching
             cached_callbacks = self._match_cache.get_cached_callbacks(topic)
             if cached_callbacks is not None:
-                for callback_func in cached_callbacks:
-                    callback_func(msg)
-                return
+                callbacks_to_invoke.extend(cached_callbacks)
+            else:
+                # Cache Miss: Resolve wildcards
+                matched_callbacks = []
+                for entry in self._wildcard_subscribers:
+                    topic_filter, callbacks = entry
+                    if mqtt.topic_matches_sub(topic_filter, topic):
+                        matched_callbacks.extend(callbacks)
+                
+                # Store in cache
+                self._match_cache.cache_callbacks(topic, matched_callbacks)
+                callbacks_to_invoke.extend(matched_callbacks)
 
-            # Cache Miss: Resolve wildcards
-            matched_callbacks = []
-            for entry in self._wildcard_subscribers:
-                topic_filter, callbacks = entry
-                if mqtt.topic_matches_sub(topic_filter, topic):
-                    for cb in callbacks:
-                        matched_callbacks.append(cb)
-                        cb(msg)
-            
-            # Store in cache
-            self._match_cache.cache_callbacks(topic, matched_callbacks)
+        # ⚡ THREAD SAFETY: Call callbacks OUTSIDE the lock to prevent deadlocks
+        # and allow callbacks to subscribe/unsubscribe without blocking the router.
+        for callback_func in callbacks_to_invoke:
+            try:
+                callback_func(msg)
+            except Exception:
+                MQTT_LOGGER.exception(f"Error in MQTT callback for topic {topic}")
 
     def get_on_message_callback(self):
         return self._on_message

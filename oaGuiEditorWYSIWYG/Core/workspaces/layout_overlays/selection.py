@@ -5,7 +5,7 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
-from ...Core.event_bus import event_bus
+from ...event_bus import event_bus
 
 def apply(layout, widget, path, is_focused, design_elements):
     """Handles the selection target (emoji) and focus highlight."""

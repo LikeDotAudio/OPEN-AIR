@@ -46,13 +46,23 @@ class ModuleLoader:
             type: The first suitable class reference found, or None.
         """
         try:
-            module_name = path.stem
-            spec = importlib.util.spec_from_file_location(module_name, path)
+            # ⚡ OPTIMIZATION: Derive package name to support relative imports
+            # Example: 'oaGuiDefinitions.Assets.right_50.bottom_90.2_monitors.1588_PTP_Monitor.ptp_monitor'
+            try:
+                rel_path = path.resolve().relative_to(GLOBAL_PROJECT_ROOT)
+                package_parts = list(rel_path.with_suffix("").parts)
+                module_full_name = ".".join(package_parts)
+            except ValueError:
+                # Fallback if path is outside project root
+                module_full_name = path.stem
+
+            spec = importlib.util.spec_from_file_location(module_full_name, path)
             if not spec or not spec.loader:
                 return None
                 
             module = importlib.util.module_from_spec(spec)
-            sys.modules[module_name] = module
+            # ⚡ ESSENTIAL: Register the full module name so relative imports work
+            sys.modules[module_full_name] = module
             spec.loader.exec_module(module)
 
             # Find a suitable class (inherits from Frame)

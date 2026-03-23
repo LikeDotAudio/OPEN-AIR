@@ -43,7 +43,7 @@ class SNMPManager:
         self._running = False
         
         self.state_file = str(SNMP_STATE_FILE)
-        self.base_oid = ".1.3.6.1.4.1.25030"
+        self.base_oid = ".1.3.6.1.4.1.65300"
         self._socket_info = "None"
         
         self.tree_builder = SNMPTreeBuilder(base_oid=self.base_oid)

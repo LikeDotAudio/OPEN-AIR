@@ -5,7 +5,7 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
-from ...Core.state import state_manager
+from ...state import state_manager
 
 class LayoutToolsMixin:
     """Provides Quick Alignment and Sticky UI tools for the properties panel."""

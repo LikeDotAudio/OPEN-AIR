@@ -5,7 +5,7 @@
 # Description: Brief summary of purpose
 
 from tkinter import messagebox
-from ...Core.state import state_manager
+from ...state import state_manager
 
 class StructuralManagerMixin:
     """Handles structural operations on the JSON tree (Delete, Reorder, Nesting)."""

@@ -6,7 +6,7 @@
 
 import tkinter as tk
 from tkinter import colorchooser
-from ...Core.state import state_manager
+from ...state import state_manager
 
 def apply(layout, widget, path, is_focused, design_elements):
     """Handles the 🎨 color palette button."""

@@ -1,0 +1,5 @@
+134617.347 | WARNING  | ❓ SUP     | SYSTEM             | oaTests.Core.FlameGraph.flame_capture | FlameGraph: Profiler enable failed, running thread without profiling: Another profiling tool is already active
+134617.347 | WARNING  | ❓ SUP     | SYSTEM             | oaTests.Core.FlameGraph.flame_capture | FlameGraph: Profiler enable failed, running thread without profiling: Another profiling tool is already active
+134618.137 | WARNING  | ⚙️ CORE   | SYSTEM             | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+145421.027 | WARNING  | 🎨 UI      | 📡 OSC              | oaComOSC.Managers.osc_manager | Bridge Offline.
+145421.027 | WARNING  | 🎨 UI      | 🔌 SNMP             | oaComSNMP.Managers.snmp_manager | SNMP Bridge Offline.

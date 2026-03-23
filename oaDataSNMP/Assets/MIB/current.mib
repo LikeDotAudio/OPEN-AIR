@@ -11,7 +11,7 @@ openAirMIB MODULE-IDENTITY
     DESCRIPTION "MQTT-Aligned OID Tree for OPEN-AIR."
     REVISION "202603230817Z"
     DESCRIPTION "Strictly unique path-aligned generation."
-    ::= { enterprises 25030 }
+    ::= { enterprises 65300 }
 
 v1 OBJECT IDENTIFIER ::= { openAirMIB 1 }
 

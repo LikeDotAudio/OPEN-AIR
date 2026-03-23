@@ -1,6 +1,6 @@
 # Managers/fleet_status_monitor.py
 # Author: Anthony Peter Kuzub
-# Version: 20250821.200641.1
+# Version: 20260323.1700.1
 #
 # Description: monitoring/fleet_status_monitor.py
 
@@ -11,6 +11,7 @@ import os
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from loguru import logger
+from oaLogging.Core.logger import SYSTEM_LOGGER as sys_logger
 from oaConfiguration.FileReaders.config_reader import Config
 from oaComMQTT.Core.mqtt_message import MqttMessage
 
@@ -20,7 +21,7 @@ from oaComMQTT.Core.mqtt_publisher_service import publish_payload
 from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
 
 # Static context for this module
-VERSION = "20250821.200641.1"
+VERSION = "20260323.1700.1"
 MODULE_NAME = __name__
 
 
@@ -68,7 +69,7 @@ class FleetStatusMonitor:
     def _on_scan_start(self, msg: MqttMessage):
         self.current_state = "RED"
         self._publish_color("red")
-        if LOCAL_DEBUG: logger.debug("🔴 Fleet Scan Started - Status Red")
+        if LOCAL_DEBUG: sys_logger.debug("Fleet Scan Started - Status Red")
 
     # Callback for when a device fleet scan completes.
     # This method processes the scan completion payload, checks the number of devices found,
@@ -89,14 +90,17 @@ class FleetStatusMonitor:
             if num_devices > 0:
                 self.current_state = "GREEN"
                 self._publish_color("green")
-                logger.debug("🟢 Fleet Scan Complete - {} devices found. Status Green", num_devices
-                )
+                if LOCAL_DEBUG: sys_logger.debug(f"Fleet Scan Complete - {num_devices} devices found. Status Green")
             else:
                 self.current_state = "RED"
                 self._publish_color("red")
-                if LOCAL_DEBUG: logger.debug("🔴 Fleet Scan Complete - No devices found. Status Red")
-        except Exception as e:
-            logger.exception("Error processing scan complete payload")
+                if LOCAL_DEBUG: sys_logger.debug("Fleet Scan Complete - No devices found. Status Red")
+        except orjson.JSONDecodeError as e:
+            sys_logger.warning(f"Malformed scan complete payload received: {e}")
+            self.current_state = "RED"
+            self._publish_color("red")
+        except Exception:
+            sys_logger.exception("Error processing scan complete payload")
             self.current_state = "RED"
             self._publish_color("red")
 

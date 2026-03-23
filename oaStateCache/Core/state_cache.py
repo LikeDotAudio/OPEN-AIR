@@ -1,6 +1,6 @@
 # Core/state_cache.py
 # Author: Anthony Peter Kuzub
-# Version: 20260316.1
+# Version: 20260323.1700.1
 #
 # Description: Modularized State Cache Management.
 
@@ -12,7 +12,7 @@ from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
-from oaLogging.Core.logger import data_logger, logger
+from oaLogging.Core.logger import data_logger
 from oaConfiguration.FileReaders.config_reader import Config
 from oaComMQTT.Core.mqtt_message import MqttMessage
 app_constants = Config.get_instance()
@@ -39,11 +39,11 @@ class StateRegistry:
         try: 
             self.cache = cache_io_handler.load_cache()
         except FileNotFoundError:
-            if LOCAL_DEBUG: data_logger.info("💾✨ First boot detected. Starting with fresh cache.")
+            if LOCAL_DEBUG: data_logger.info("First boot detected. Starting with fresh cache.")
         except CacheLoadError as e:
-            if LOCAL_DEBUG: data_logger.error(f"💥💾 Critical Cache Corruption: {e}. Starting fresh.")
+            if LOCAL_DEBUG: data_logger.error(f"Critical Cache Corruption: {e}. Starting fresh.")
         except Exception:
-            if LOCAL_DEBUG: data_logger.exception("💥💾 Unexpected error loading cache.")
+            if LOCAL_DEBUG: data_logger.exception("Unexpected error loading cache.")
             
         self.search_engine = CacheSearchEngine()
         self.search_engine.rebuild(self.cache)
@@ -53,7 +53,7 @@ class StateRegistry:
         self.observers = CacheObserverRegistry()
         
         self._last_log_time, self._updates_since_last_log = time.time(), 0
-        if LOCAL_DEBUG: data_logger.debug(f"🧠💾 [CACHE] Initialized with {len(self.cache)} entries.")
+        if LOCAL_DEBUG: data_logger.debug(f"Initialized with {len(self.cache)} entries.")
 
     def check_prefix_exists(self, prefix: str) -> bool: return self.search_engine.exists(prefix)
     def register_cache_observer(self, callback: Any): self.observers.register_observer(callback)
@@ -69,9 +69,9 @@ class StateRegistry:
             path = DATA_RUNNING_DIR / "presets" / f"{name}.preset.json"
             os.makedirs(os.path.dirname(path), exist_ok=True)
             with open(path, "wb") as f: f.write(orjson.dumps(self.cache, option=orjson.OPT_INDENT_2))
-            if LOCAL_DEBUG: data_logger.success(f"📸💾 Preset saved: {name}")
+            if LOCAL_DEBUG: data_logger.success(f"Preset saved: {name}")
             return True
-        except Exception as e: data_logger.error(f"🧠💾 Preset failed: {e}"); return False
+        except Exception as e: data_logger.error(f"Preset failed: {e}"); return False
 
     def shutdown(self): self.save_engine.shutdown()
 
@@ -79,7 +79,7 @@ class StateRegistry:
         """Subscribes to the root application topic filter."""
         if self.mqtt:
             root = f"{app_constants.MQTT_BASE_TOPIC}/#"
-            if LOCAL_DEBUG: data_logger.debug(f"🚀📤📥 [CACHE] Subscribing to root: {root}")
+            if LOCAL_DEBUG: data_logger.debug(f"Subscribing to root: {root}")
             self.mqtt.subscribe(root)
 
     def initialize_state(self) -> None:
@@ -87,13 +87,13 @@ class StateRegistry:
             self.cache = cache_io_handler.load_cache()
             self.search_engine.rebuild(self.cache)
         except FileNotFoundError:
-            if LOCAL_DEBUG: data_logger.info("💾✨ No cache to initialize.")
+            if LOCAL_DEBUG: data_logger.info("No cache to initialize.")
             self.cache = {}
         except CacheLoadError as e:
-            if LOCAL_DEBUG: data_logger.error(f"💥💾 Critical Cache Corruption during init: {e}.")
+            if LOCAL_DEBUG: data_logger.error(f"Critical Cache Corruption during init: {e}.")
             self.cache = {}
         except Exception: 
-            data_logger.exception("🧠💾 State initialization failed")
+            data_logger.exception("State initialization failed")
             self.cache = {}
 
         if self.cache:
@@ -105,6 +105,7 @@ class StateRegistry:
             gui_state_restorer.restore_timeline(self.cache, self.state_mirror_engine)
 
     def handle_external_update(self, topic: str, value: Any, source: str = "EXTERNAL", metadata: dict = None):
+        # ⚡ FIX: Corrected import path to include .Core
         from oaTranslator.Core.manifest.builder import create_manifest
         payload = create_manifest(value, topic, source, metadata)
         
@@ -150,7 +151,7 @@ class StateRegistry:
         self._updates_since_last_log += 1
         
         if time.time() - self._last_log_time >= 5.0:
-            if LOCAL_DEBUG: data_logger.success(f"🧠⚓ State synced: {self._updates_since_last_log} variables.")
+            if LOCAL_DEBUG: data_logger.success(f"State synced: {self._updates_since_last_log} variables.")
             self._last_log_time, self._updates_since_last_log = time.time(), 0
 
     def handle_incoming_mqtt(self, client, userdata, msg: MqttMessage) -> None:
@@ -170,4 +171,4 @@ class StateRegistry:
                 self._update_cache_entry(topic, new_payload)
                 
         except Exception: 
-            data_logger.exception(f"🧠💾 Error handling MQTT for {topic}")
+            data_logger.exception(f"Error handling MQTT for {topic}")

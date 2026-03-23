@@ -1,0 +1,6 @@
+235514.799 | WARNING  | CORE | SYSTEM     | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
+235607.563 | ERROR    | UI   | SYSTEM     | oaGuiManager.FileReaders.module_loader | ❌ [IMPORT] Failed to load module /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90/2_monitors/23_Showtime/Showtime.py: No module named 'oaFileImportCSV.from_csv_unknown'
+235609.193 | WARNING  | UI   | SYSTEM     | OSC                  | 🅾️ OscDashboard: Could not find OSCManager. Monitor will be inactive.
+235632.267 | ERROR    | UI   | SYSTEM     | oaGuiManager.FileReaders.module_loader | ❌ [IMPORT] Failed to load module /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/right_50/bottom_90/2_monitors/1588_PTP_Monitor/ptp_monitor.py: attempted relative import with no known parent package
+235658.461 | WARNING  | UI   | OSC        | oaComOSC.Managers.osc_manager | 🅾️📡🛑 [OSC] Bridge Offline.
+235658.461 | WARNING  | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🌐 SNMP Bridge Offline.

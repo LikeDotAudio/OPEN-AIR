@@ -52,21 +52,21 @@ class RotarySelectorSwitch(CustomKnobFrame):
         sel_text = str(self.positions[idx])
         
         colors = {
-            "fg": self.config["fg_color"],
-            "accent": self.config["accent_color"],
-            "indicator": self.config["indicator_color"],
-            "secondary": self.config["secondary_color"]
+            "fg": self.widget_config["fg_color"],
+            "accent": self.widget_config["accent_color"],
+            "indicator": self.widget_config["indicator_color"],
+            "secondary": self.widget_config["secondary_color"]
         }
         
         options = {
-            "shape": self.config["shape"],
-            "pointer_style": self.config["pointer_style"],
-            "knob_style": self.config["knob_style"],
-            "no_center": self.config["no_center"],
+            "shape": self.widget_config["shape"],
+            "pointer_style": self.widget_config["pointer_style"],
+            "knob_style": self.widget_config["knob_style"],
+            "no_center": self.widget_config["no_center"],
             "continuous": self.continuous,
             "main_label": self.label_text,
             "selection_text": sel_text,
-            "show_label": self.config["show_label"]
+            "show_label": self.widget_config["show_label"]
         }
         
         self._draw_selector(self.canvas, self.winfo_width(), self.winfo_height(), idx, self.positions, colors, options)

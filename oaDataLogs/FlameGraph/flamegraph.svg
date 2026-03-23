@@ -3,513 +3,503 @@
 <style type="text/css">
     .func_g:hover { stroke:black; stroke-width:0.5; cursor:pointer; }
 </style>
-<svg class="func_g" x="0.0" y="360" width="5999.000000000003" height="23"><g>
-    <title>&lt;virtual&gt;:0:total_execution 100.00% (1 1 0 4.112034964000002)</title>
+<svg class="func_g" x="0.0" y="360" width="5999.000000000001" height="23"><g>
+    <title>&lt;virtual&gt;:0:total_execution 100.00% (1 1 0 113.62817987200002)</title>
     <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">total_execution</text>
 </g></svg>
-<svg class="func_g" x="0.0" y="336" width="5988.147265431666" height="23"><g>
-    <title>OpenAir.py:53:main 99.82% (1 2 0.00010299400000000001 4.10459716)</title>
+<svg class="func_g" x="0.0" y="336" width="5998.595587766592" height="23"><g>
+    <title>OpenAir.py:53:main 99.99% (1 2 0.001228079 113.62052110100001)</title>
     <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">main</text>
 </g></svg>
-<svg class="func_g" x="0.0" y="312" width="5996.254896395867" height="23"><g>
-    <title>logger.py:245:set_log_directory 99.95% (1 1 2.345e-06 4.110153637000001)</title>
+<svg class="func_g" x="0.0" y="312" width="5998.929260751963" height="23"><g>
+    <title>logger.py:245:set_log_directory 100.00% (1 1 2.1340000000000002e-06 113.62684021000001)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">set_log_directory</text>
 </g></svg>
-<svg class="func_g" x="0.0014591315619951523" y="288" width="5996.250481063759" height="23"><g>
-    <title>logger.py:155:initialize_logging 99.95% (1 1 2.1202e-05 4.110150611)</title>
+<svg class="func_g" x="5.2803802778139065e-05" y="288" width="5998.929120557866" height="23"><g>
+    <title>logger.py:155:initialize_logging 100.00% (1 1 2.3576000000000003e-05 113.62683755500001)</title>
     <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">initialize_logging</text>
 </g></svg>
-<svg class="func_g" x="4.126457617348217" y="264" width="5992.083129825254" height="23"><g>
-    <title>logger.py:51:__init__ 99.88% (1 1 5.721e-06 4.107294562)</title>
+<svg class="func_g" x="0.14855267433672475" y="264" width="5998.778993326934" height="23"><g>
+    <title>logger.py:51:__init__ 100.00% (1 1 5.609e-06 113.62399444100001)</title>
     <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__init__</text>
 </g></svg>
-<svg class="func_g" x="4.151233632845738" y="240" width="5992.050006118092" height="23"><g>
-    <title>threading.py:973:start 99.88% (2 1 6.450989995150607e-06 4.107271861026335)</title>
+<svg class="func_g" x="0.14970427239264134" y="240" width="5998.777545552348" height="23"><g>
+    <title>threading.py:973:start 100.00% (2 1 4.969999659609404e-06 113.6239670230015)</title>
     <rect height="100%" width="100%" fill="rgb(99, 206, 42)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">start</text>
 </g></svg>
-<svg class="func_g" x="4.152692754953374" y="216" width="5991.951820285954" height="23"><g>
-    <title>threading.py:637:wait 99.88% (2 1 1.6068895881833903e-05 4.107204570430548)</title>
+<svg class="func_g" x="0.1497570761773524" y="216" width="5998.773173293294" height="23"><g>
+    <title>threading.py:637:wait 100.00% (2 1 1.4195995142770352e-05 113.62388422102846)</title>
     <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">wait</text>
 </g></svg>
-<svg class="func_g" x="4.152692754953374" y="192" width="5701.753606425349" height="23"><g>
-    <title>flame_manager.py:53:stop_profiling 95.05% (36705 36705 0.16366795828612993 3.9083203701163556)</title>
+<svg class="func_g" x="0.1497570761773524" y="192" width="5648.281164827117" height="23"><g>
+    <title>flame_manager.py:53:stop_profiling 94.15% (1398276 1398276 4.287112792231752 106.98625605741292)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">stop_profiling</text>
 </g></svg>
-<svg class="func_g" x="4.152692754953374" y="168" width="4096.84827701634" height="23"><g>
-    <title>_logger.py:2042:info 68.30% (36705 36705 0.038246694894404 2.8084158987097245)</title>
+<svg class="func_g" x="0.1497570761773524" y="168" width="3870.7212202005458" height="23"><g>
+    <title>_logger.py:2042:info 64.53% (1398276 1398276 1.3297600343810814 73.32277253719784)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">info</text>
 </g></svg>
-<svg class="func_g" x="4.152692754953374" y="144" width="4041.0413173539164" height="23"><g>
-    <title>_logger.py:1906:_log 67.37% (33238 33238 0.42041087738033234 2.7701692038153207)</title>
+<svg class="func_g" x="0.1497570761773524" y="144" width="3800.504833602836" height="23"><g>
+    <title>_logger.py:1906:_log 63.36% (929322 929322 12.007767232403287 71.99301250281675)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_log</text>
 </g></svg>
-<svg class="func_g" x="4.152692754953374" y="120" width="127.61938889239406" height="23"><g>
-    <title>&lt;frozen posixpath&gt;:117:splitext 2.14% (36111 36111 0.03276944538442546 0.08814790402897295)</title>
+<svg class="func_g" x="0.1497570761773524" y="120" width="117.44012570613766" height="23"><g>
+    <title>&lt;frozen posixpath&gt;:117:splitext 1.97% (964703 964703 0.8890178533088414 2.243022651299884)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">splitext</text>
 </g></svg>
-<svg class="func_g" x="4.152692754953374" y="96" width="68.60860124735068" height="23"><g>
-    <title>&lt;frozen genericpath&gt;:133:_splitext 1.16% (35901 35901 0.03551231780476905 0.04770550035404)</title>
+<svg class="func_g" x="0.1497570761773524" y="96" width="61.11660839962438" height="23"><g>
+    <title>&lt;frozen genericpath&gt;:133:_splitext 1.04% (957386 957386 0.895678046932302 1.1763661920451844)</title>
     <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_splitext</text>
 </g></svg>
-<svg class="func_g" x="4.152692754953374" y="72" width="16.79145749880975" height="23"><g>
-    <title>~:0:&lt;method 'rfind' of 'str' objects&gt; 0.30% (71801 71801 0.012193182549270945 0.012193182549270945)</title>
+<svg class="func_g" x="0.1497570761773524" y="72" width="13.821401456702322" height="23"><g>
+    <title>~:0:&lt;method 'rfind' of 'str' objects&gt; 0.25% (1914772 1914772 0.2806881451128824 0.2806881451128824)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'rfind' of 'str' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="73.76129400230404" y="96" width="5.433688190816908" height="23"><g>
-    <title>~:0:&lt;built-in method builtins.isinstance&gt; 0.11% (35901 35901 0.0044092584646855055 0.0044092584646855055)</title>
-    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
-    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.isinstance&gt;</text>
-</g></svg>
-<svg class="func_g" x="132.77208164734745" y="120" width="120.89406685578757" height="23"><g>
-    <title>&lt;frozen posixpath&gt;:169:basename 2.03% (36111 36111 0.04496524678726463 0.08353877746919201)</title>
+<svg class="func_g" x="118.58988278231503" y="120" width="118.23201112589642" height="23"><g>
+    <title>&lt;frozen posixpath&gt;:169:basename 1.99% (964703 964703 1.2524478606198641 2.2580194011189443)</title>
     <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">basename</text>
 </g></svg>
-<svg class="func_g" x="132.77208164734745" y="96" width="28.98612247090935" height="23"><g>
-    <title>&lt;frozen posixpath&gt;:41:_get_sep 0.50% (36111 36111 0.010656143029237132 0.020550664005860888)</title>
+<svg class="func_g" x="118.58988278231503" y="96" width="28.35533143772313" height="23"><g>
+    <title>&lt;frozen posixpath&gt;:41:_get_sep 0.49% (964703 964703 0.25818965770358376 0.5559321468012968)</title>
     <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_get_sep</text>
 </g></svg>
-<svg class="func_g" x="132.77208164734745" y="72" width="13.437407847814821" height="23"><g>
-    <title>~:0:&lt;built-in method builtins.isinstance&gt; 0.24% (80568 80568 0.009894520976623756 0.009894520976623756)</title>
+<svg class="func_g" x="118.58988278231503" y="72" width="14.72193567298786" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.isinstance&gt; 0.26% (2233866 2233866 0.297742489097713 0.297742489097713)</title>
     <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.isinstance&gt;</text>
 </g></svg>
-<svg class="func_g" x="162.75820411825677" y="96" width="5.380433727036941" height="23"><g>
-    <title>~:0:&lt;built-in method posix.fspath&gt; 0.11% (36111 36111 0.004372761095176789 0.004372761095176789)</title>
+<svg class="func_g" x="147.94521422003814" y="96" width="5.626830617981038" height="23"><g>
+    <title>~:0:&lt;built-in method posix.fspath&gt; 0.11% (964703 964703 0.12549911690687107 0.12549911690687107)</title>
     <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method posix.fspath&gt;</text>
 </g></svg>
-<svg class="func_g" x="169.13863784529372" y="96" width="18.917299877642343" height="23"><g>
-    <title>~:0:&lt;method 'rfind' of 'str' objects&gt; 0.33% (36111 36111 0.013650105580889709 0.013650105580889709)</title>
+<svg class="func_g" x="154.5720448380192" y="96" width="16.115839248118736" height="23"><g>
+    <title>~:0:&lt;method 'rfind' of 'str' objects&gt; 0.29% (964703 964703 0.32414027679091223 0.32414027679091223)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'rfind' of 'str' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="254.666148503135" y="120" width="599.85770677052" height="23"><g>
-    <title>_datetime.py:88:aware_now 10.01% (36111 36111 0.19215527416214942 0.4117913164382064)</title>
+<svg class="func_g" x="237.82189390821145" y="120" width="608.1219696055331" height="23"><g>
+    <title>_datetime.py:88:aware_now 10.15% (964703 964703 5.397075929034833 11.535570121054073)</title>
     <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">aware_now</text>
 </g></svg>
-<svg class="func_g" x="254.666148503135" y="96" width="59.66202156095782" height="23"><g>
-    <title>~:0:&lt;built-in method combine&gt; 1.01% (36111 36111 0.04157405894093007 0.04157405894093007)</title>
+<svg class="func_g" x="237.82189390821145" y="96" width="50.87544135752871" height="23"><g>
+    <title>~:0:&lt;built-in method combine&gt; 0.86% (964703 964703 0.9824186635854435 0.9824186635854435)</title>
     <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method combine&gt;</text>
 </g></svg>
-<svg class="func_g" x="315.3281700640929" y="96" width="62.57920184606705" height="23"><g>
-    <title>~:0:&lt;built-in method now&gt; 1.06% (36111 36111 0.04357331682904018 0.04357331682904018)</title>
+<svg class="func_g" x="289.69733526574015" y="96" width="68.83410602316845" height="23"><g>
+    <title>~:0:&lt;built-in method now&gt; 1.16% (964703 964703 1.3225203934001506 1.3225203934001506)</title>
     <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method now&gt;</text>
 </g></svg>
-<svg class="func_g" x="378.90737191015995" y="96" width="85.18854658451626" height="23"><g>
-    <title>~:0:&lt;built-in method time.localtime&gt; 1.44% (36111 36111 0.05906838617531228 0.05906838617531228)</title>
+<svg class="func_g" x="359.5314412889086" y="96" width="100.66234280680483" height="23"><g>
+    <title>~:0:&lt;built-in method time.localtime&gt; 1.69% (964703 964703 1.9252844957767579 1.9252844957767579)</title>
     <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method time.localtime&gt;</text>
 </g></svg>
-<svg class="func_g" x="465.0959184946762" y="96" width="8.690403475822619" height="23"><g>
-    <title>~:0:&lt;method 'date' of 'datetime.datetime' objects&gt; 0.16% (36111 36111 0.006641212984641623 0.006641212984641623)</title>
+<svg class="func_g" x="461.19378409571345" y="96" width="7.854297792857961" height="23"><g>
+    <title>~:0:&lt;method 'date' of 'datetime.datetime' objects&gt; 0.15% (964703 964703 0.16768295704118621 0.16768295704118621)</title>
     <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'date' of 'datetime.datetime' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="474.7863219704988" y="96" width="67.78126718207464" height="23"><g>
-    <title>~:0:&lt;method 'replace' of 'datetime.time' objects&gt; 1.15% (36111 36111 0.04713849592015278 0.04713849592015278)</title>
+<svg class="func_g" x="470.0480818885715" y="96" width="59.31295735051365" height="23"><g>
+    <title>~:0:&lt;method 'replace' of 'datetime.time' objects&gt; 1.01% (964703 964703 1.1422085944060718 1.1422085944060718)</title>
     <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'replace' of 'datetime.time' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="543.5675891525734" y="96" width="10.419635139081128" height="23"><g>
-    <title>~:0:&lt;method 'time' of 'datetime.datetime' objects&gt; 0.19% (36111 36111 0.007826323161337434 0.007826323161337434)</title>
+<svg class="func_g" x="530.3610392390851" y="96" width="9.956730427772982" height="23"><g>
+    <title>~:0:&lt;method 'time' of 'datetime.datetime' objects&gt; 0.18% (964703 964703 0.207498889309334 0.207498889309334)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'time' of 'datetime.datetime' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="554.9872242916546" y="96" width="19.156805648176757" height="23"><g>
-    <title>~:0:&lt;method 'timestamp' of 'datetime.datetime' objects&gt; 0.34% (36111 36111 0.013814248264642587 0.013814248264642587)</title>
+<svg class="func_g" x="541.3177696668581" y="96" width="19.639960911489506" height="23"><g>
+    <title>~:0:&lt;method 'timestamp' of 'datetime.datetime' objects&gt; 0.34% (964703 964703 0.39088019850029654 0.39088019850029654)</title>
     <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'timestamp' of 'datetime.datetime' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="855.5238552736552" y="120" width="2057.2359501262317" height="23"><g>
-    <title>_handler.py:127:emit 34.30% (95203 95203 0.2296651602533581 1.4105896985134712)</title>
+<svg class="func_g" x="846.9438635137445" y="120" width="1795.6815065281696" height="23"><g>
+    <title>_handler.py:127:emit 29.94% (2543308 2543308 5.765767953826226 34.02560823274647)</title>
     <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">emit</text>
 </g></svg>
-<svg class="func_g" x="855.5238552736552" y="96" width="495.8643012044751" height="23"><g>
-    <title>_simple_sinks.py:15:write 8.28% (65657 65657 0.051274891550725434 0.34052056315270485)</title>
+<svg class="func_g" x="846.9438635137445" y="96" width="323.2469784834355" height="23"><g>
+    <title>_simple_sinks.py:15:write 5.40% (1754006 1754006 1.3665459396525956 6.140598999011388)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">write</text>
 </g></svg>
-<svg class="func_g" x="855.5238552736552" y="72" width="86.2950632443853" height="23"><g>
-    <title>logger.py:64:write 1.45% (29546 29546 0.04502762100709072 0.05982672537425061)</title>
+<svg class="func_g" x="846.9438635137445" y="72" width="71.4320459090436" height="23"><g>
+    <title>logger.py:64:write 1.21% (789303 789303 0.948127849671686 1.371720256841628)</title>
     <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">write</text>
 </g></svg>
-<svg class="func_g" x="855.5238552736552" y="48" width="6.10374115405089" height="23"><g>
-    <title>~:0:&lt;built-in method builtins.len&gt; 0.12% (29546 29546 0.004868472000110495 0.004868472000110495)</title>
+<svg class="func_g" x="846.9438635137445" y="48" width="7.400468721885115" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.len&gt; 0.14% (789303 789303 0.159088328489912 0.159088328489912)</title>
     <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.len&gt;</text>
 </g></svg>
-<svg class="func_g" x="862.627596427706" y="48" width="5.950457460908861" height="23"><g>
-    <title>~:0:&lt;method '__exit__' of '_thread.RLock' objects&gt; 0.12% (29546 29546 0.00476342068250865 0.00476342068250865)</title>
+<svg class="func_g" x="855.3443322356296" y="48" width="5.0387051892713295" height="23"><g>
+    <title>~:0:&lt;method '__exit__' of '_thread.RLock' objects&gt; 0.10% (789303 789303 0.11436117990675042 0.11436117990675042)</title>
     <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method '__exit__' of '_thread.RLock' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="869.5780538886149" y="48" width="6.539641656423535" height="23"><g>
-    <title>~:0:&lt;method 'append' of 'collections.deque' objects&gt; 0.13% (29546 29546 0.0051672116845407415 0.0051672116845407415)</title>
+<svg class="func_g" x="861.383037424901" y="48" width="6.928116015362358" height="23"><g>
+    <title>~:0:&lt;method 'append' of 'collections.deque' objects&gt; 0.13% (789303 789303 0.1501428987732797 0.1501428987732797)</title>
     <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'append' of 'collections.deque' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="942.8189185180404" y="72" width="14.222986775167717" height="23"><g>
-    <title>~:0:&lt;method 'flush' of '_io.TextIOWrapper' objects&gt; 0.25% (36111 36111 0.010432908979333211 0.010432908979333211)</title>
+<svg class="func_g" x="919.375909422788" y="72" width="10.609688580907376" height="23"><g>
+    <title>~:0:&lt;method 'flush' of '_io.TextIOWrapper' objects&gt; 0.19% (964703 964703 0.219864630388208 0.219864630388208)</title>
     <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'flush' of '_io.TextIOWrapper' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="958.0419052932082" y="72" width="318.52943858538003" height="23"><g>
-    <title>~:0:&lt;method 'write' of '_io.TextIOWrapper' objects&gt; 5.33% (36111 36111 0.2189860372483956 0.2189860372483956)</title>
+<svg class="func_g" x="930.9855980036956" y="72" width="167.0464217088021" height="23"><g>
+    <title>~:0:&lt;method 'write' of '_io.TextIOWrapper' objects&gt; 2.80% (964703 964703 3.1824681721289556 3.1824681721289556)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'write' of '_io.TextIOWrapper' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="1352.3881564781302" y="96" width="195.52885506972345" height="23"><g>
-    <title>contextlib.py:132:__enter__ 3.28% (65657 65657 0.03471617761373465 0.13468892058026524)</title>
+<svg class="func_g" x="1171.19084199718" y="96" width="192.65071694766806" height="23"><g>
+    <title>contextlib.py:132:__enter__ 3.23% (1754006 1754006 0.7711486617485095 3.6673630829452315)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__enter__</text>
 </g></svg>
-<svg class="func_g" x="1352.3881564781302" y="72" width="144.87338460169366" height="23"><g>
-    <title>~:0:&lt;built-in method builtins.next&gt; 2.43% (70240 70240 0.025530673607044106 0.0999727429665306)</title>
+<svg class="func_g" x="1171.19084199718" y="72" width="151.93113510007387" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.next&gt; 2.55% (1897318 1897318 0.9490713753131187 2.896214421196722)</title>
     <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.next&gt;</text>
 </g></svg>
-<svg class="func_g" x="1352.3881564781302" y="48" width="104.61737823650797" height="23"><g>
-    <title>_handler.py:110:_protected_lock 1.76% (86450 86450 0.04788737332435032 0.07238372535242224)</title>
+<svg class="func_g" x="1171.19084199718" y="48" width="98.80908209629744" height="23"><g>
+    <title>_handler.py:110:_protected_lock 1.66% (2392138 2392138 1.2437976375817161 1.8901873888828837)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_protected_lock</text>
 </g></svg>
-<svg class="func_g" x="1352.3881564781302" y="24" width="24.45677352933634" height="23"><g>
-    <title>~:0:&lt;built-in method builtins.getattr&gt; 0.42% (43225 43225 0.017446523803876783 0.017446523803876783)</title>
+<svg class="func_g" x="1171.19084199718" y="24" width="24.996616314833975" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.getattr&gt; 0.43% (1196069 1196069 0.4923246991142209 0.4923246991142209)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.getattr&gt;</text>
 </g></svg>
-<svg class="func_g" x="1377.8449300074665" y="24" width="9.286626868567362" height="23"><g>
-    <title>~:0:&lt;method '__exit__' of '_thread.lock' objects&gt; 0.17% (43225 43225 0.0070498282241951375 0.0070498282241951375)</title>
+<svg class="func_g" x="1197.1874583120139" y="24" width="7.135220630683239" height="23"><g>
+    <title>~:0:&lt;method '__exit__' of '_thread.lock' objects&gt; 0.14% (1196069 1196069 0.15406505218694674 0.15406505218694674)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method '__exit__' of '_thread.lock' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="1548.9170115478535" y="96" width="144.41832363767827" height="23"><g>
-    <title>contextlib.py:141:__exit__ 2.42% (65657 65657 0.03398410124419679 0.09966087186740014)</title>
+<svg class="func_g" x="1364.8415589448482" y="96" width="124.18272904630564" height="23"><g>
+    <title>contextlib.py:141:__exit__ 2.09% (1754006 1754006 0.8444661053083586 2.370714275490243)</title>
     <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__exit__</text>
 </g></svg>
-<svg class="func_g" x="1548.9170115478535" y="72" width="94.83104890623203" height="23"><g>
-    <title>~:0:&lt;built-in method builtins.next&gt; 1.60% (70128 70128 0.031521191026122386 0.06567677062320335)</title>
+<svg class="func_g" x="1364.8415589448482" y="72" width="79.59170736877985" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.next&gt; 1.34% (1848926 1848926 0.7091836804669011 1.5262481701818842)</title>
     <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.next&gt;</text>
 </g></svg>
-<svg class="func_g" x="1548.9170115478535" y="48" width="47.45946385197234" height="23"><g>
-    <title>_handler.py:110:_protected_lock 0.81% (39665 39665 0.021971729229831573 0.033211168282667396)</title>
+<svg class="func_g" x="1364.8415589448482" y="48" width="40.88210871529728" height="23"><g>
+    <title>_handler.py:110:_protected_lock 0.70% (1003794 1003794 0.5219251272821775 0.7931646304200763)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_protected_lock</text>
 </g></svg>
-<svg class="func_g" x="1548.9170115478535" y="24" width="10.680100540559557" height="23"><g>
-    <title>~:0:&lt;built-in method builtins.getattr&gt; 0.19% (19833 19833 0.008004830300969367 0.008004830300969367)</title>
+<svg class="func_g" x="1364.8415589448482" y="24" width="9.908757879140314" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.getattr&gt; 0.18% (501897 501897 0.20659038374517552 0.20659038374517552)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.getattr&gt;</text>
 </g></svg>
-<svg class="func_g" x="1694.335335185532" y="96" width="160.37898818609202" height="23"><g>
-    <title>contextlib.py:299:helper 2.69% (65657 65657 0.048428657414450446 0.11059934031269222)</title>
+<svg class="func_g" x="1490.0242879911539" y="96" width="152.06543145781077" height="23"><g>
+    <title>contextlib.py:299:helper 2.55% (1754006 1754006 1.3452347688570894 2.8987577296455687)</title>
     <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">helper</text>
 </g></svg>
-<svg class="func_g" x="1694.335335185532" y="72" width="89.71520564761683" height="23"><g>
-    <title>contextlib.py:104:__init__ 1.51% (68476 68476 0.04883861135249297 0.06217068289824178)</title>
+<svg class="func_g" x="1490.0242879911539" y="72" width="81.03192003278554" height="23"><g>
+    <title>contextlib.py:104:__init__ 1.37% (1808342 1808342 1.179117558729937 1.5535229607884793)</title>
     <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__init__</text>
 </g></svg>
-<svg class="func_g" x="1694.335335185532" y="48" width="18.45324637917958" height="23"><g>
-    <title>~:0:&lt;built-in method builtins.getattr&gt; 0.32% (68476 68476 0.013332071545748806 0.013332071545748806)</title>
+<svg class="func_g" x="1490.0242879911539" y="48" width="18.770029009369132" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.getattr&gt; 0.33% (1808342 1808342 0.3744054020585424 0.3744054020585424)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.getattr&gt;</text>
 </g></svg>
-<svg class="func_g" x="1855.7143233716235" y="96" width="27.36227334668598" height="23"><g>
-    <title>logger.py:205:&lt;lambda&gt; 0.47% (29546 29546 0.013646822727214649 0.019437776610016343)</title>
+<svg class="func_g" x="1643.0897194489648" y="96" width="21.779440817504344" height="23"><g>
+    <title>logger.py:205:&lt;lambda&gt; 0.38% (789303 789303 0.3085296249324754 0.4313977330991605)</title>
     <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;lambda&gt;</text>
 </g></svg>
-<svg class="func_g" x="1855.7143233716235" y="72" width="7.449763584454329" height="23"><g>
-    <title>~:0:&lt;method 'get' of 'dict' objects&gt; 0.14% (29546 29546 0.005790953882801694 0.005790953882801694)</title>
+<svg class="func_g" x="1643.0897194489648" y="72" width="5.4879033513567" height="23"><g>
+    <title>~:0:&lt;method 'get' of 'dict' objects&gt; 0.11% (789303 789303 0.12286810816668514 0.12286810816668514)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'get' of 'dict' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="1884.07659671831" y="96" width="17.27429029177622" height="23"><g>
-    <title>logger.py:229:&lt;lambda&gt; 0.30% (29546 29546 0.00920512170486165 0.012524086770344932)</title>
+<svg class="func_g" x="1665.869160266469" y="96" width="16.162148336993514" height="23"><g>
+    <title>logger.py:229:&lt;lambda&gt; 0.29% (789303 789303 0.23521218137262623 0.3250172797043075)</title>
     <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;lambda&gt;</text>
 </g></svg>
-<svg class="func_g" x="1902.3508870100861" y="96" width="24.445093061576753" height="23"><g>
-    <title>~:0:&lt;method 'copy' of 'dict' objects&gt; 0.42% (65657 65657 0.017438518721906236 0.017438518721906236)</title>
+<svg class="func_g" x="1683.0313086034625" y="96" width="20.066004529137476" height="23"><g>
+    <title>~:0:&lt;method 'copy' of 'dict' objects&gt; 0.35% (1754006 1754006 0.3989486253035334 0.3989486253035334)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'copy' of 'dict' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="1927.7959800716626" y="96" width="649.8521413118749" height="23"><g>
-    <title>~:0:&lt;method 'format_map' of 'str' objects&gt; 10.85% (65657 65657 0.1980020365574271 0.4460544602447831)</title>
+<svg class="func_g" x="1704.0973131326004" y="96" width="634.0735830109596" height="23"><g>
+    <title>~:0:&lt;method 'format_map' of 'str' objects&gt; 10.58% (1754006 1754006 4.4515790881033315 12.02704255372081)</title>
     <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'format_map' of 'str' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="1927.7959800716626" y="72" width="294.0950598754586" height="23"><g>
-    <title>_datetime.py:13:__format__ 4.92% (6566 6566 0.08634890021504138 0.20224020065192655)</title>
+<svg class="func_g" x="1704.0973131326004" y="72" width="334.85666706434273" height="23"><g>
+    <title>_datetime.py:13:__format__ 5.60% (175401 175401 2.659686735454002 6.360463629399594)</title>
     <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__format__</text>
 </g></svg>
-<svg class="func_g" x="1927.7959800716626" y="48" width="40.4733685617635" height="23"><g>
-    <title>calendar.py:102:__getitem__ 0.69% (12060 12060 0.006428187749601664 0.028423323600138318)</title>
+<svg class="func_g" x="1704.0973131326004" y="48" width="55.32253704235333" height="23"><g>
+    <title>calendar.py:102:__getitem__ 0.94% (329082 329082 0.22665541077340567 1.0666378949826514)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__getitem__</text>
 </g></svg>
-<svg class="func_g" x="1931.841586642933" y="24" width="27.04819035861859" height="23"><g>
-    <title>~:0:&lt;method 'strftime' of 'datetime.date' objects&gt; 0.47% (11090 11090 0.01922252323859456 0.01922252323859456)</title>
+<svg class="func_g" x="1708.1973565263213" y="24" width="39.25422603955508" height="23"><g>
+    <title>~:0:&lt;method 'strftime' of 'datetime.date' objects&gt; 0.67% (310587 310587 0.7623357395051187 0.7623357395051187)</title>
     <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'strftime' of 'datetime.date' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="1969.2693486334263" y="48" width="24.82461795455094" height="23"><g>
-    <title>calendar.py:121:__getitem__ 0.43% (12060 12060 0.00368143397854767 0.017698621993509273)</title>
+<svg class="func_g" x="1760.4198501749534" y="48" width="28.288588101777567" height="23"><g>
+    <title>calendar.py:121:__getitem__ 0.49% (329082 329082 0.11698874559701737 0.5546681595042835)</title>
     <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__getitem__</text>
 </g></svg>
-<svg class="func_g" x="1973.1081101655302" y="24" width="15.614159910946551" height="23"><g>
-    <title>~:0:&lt;method 'strftime' of 'datetime.date' objects&gt; 0.28% (10523 10523 0.011386334408549892 0.011386334408549892)</title>
+<svg class="func_g" x="1764.24619743522" y="24" width="18.284790191744094" height="23"><g>
+    <title>~:0:&lt;method 'strftime' of 'datetime.date' objects&gt; 0.32% (289854 289854 0.3652159347835466 0.3652159347835466)</title>
     <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'strftime' of 'datetime.date' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="2008.2922381150045" y="48" width="51.009988664173974" height="23"><g>
-    <title>~:0:&lt;method 'sub' of 're.Pattern' objects&gt; 0.87% (6030 6030 0.021443373018371032 0.03564448197738784)</title>
+<svg class="func_g" x="1802.7410345842559" y="48" width="53.319861409763675" height="23"><g>
+    <title>~:0:&lt;method 'sub' of 're.Pattern' objects&gt; 0.91% (164541 164541 0.6178519545946557 1.0287111638151232)</title>
     <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'sub' of 're.Pattern' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="2008.2922381150045" y="24" width="19.72128629743355" height="23"><g>
-    <title>_datetime.py:79:get 0.35% (42211 42211 0.009177956618099186 0.014201108959016811)</title>
+<svg class="func_g" x="1802.7410345842559" y="24" width="20.69492865325974" height="23"><g>
+    <title>_datetime.py:79:get 0.36% (1151788 1151788 0.2798844673143833 0.4108592092204675)</title>
     <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">get</text>
 </g></svg>
-<svg class="func_g" x="2008.2922381150045" y="0" width="6.329440121342739" height="23"><g>
-    <title>~:0:&lt;method 'group' of 're.Match' objects&gt; 0.12% (42211 42211 0.005023152340917625 0.005023152340917625)</title>
+<svg class="func_g" x="1802.7410345842559" y="0" width="5.915964440526534" height="23"><g>
+    <title>~:0:&lt;method 'group' of 're.Match' objects&gt; 0.12% (1151788 1151788 0.13097474190608416 0.13097474190608416)</title>
     <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'group' of 're.Match' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="2060.3022267791785" y="48" width="8.339976817293298" height="23"><g>
-    <title>~:0:&lt;method 'timestamp' of 'datetime.datetime' objects&gt; 0.16% (6030 6030 0.006401051872609913 0.006401051872609913)</title>
+<svg class="func_g" x="1857.0608959940198" y="48" width="11.011709596768759" height="23"><g>
+    <title>~:0:&lt;method 'timestamp' of 'datetime.datetime' objects&gt; 0.20% (164541 164541 0.2274781164386449 0.2274781164386449)</title>
     <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'timestamp' of 'datetime.datetime' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="2069.642203596472" y="48" width="13.056159176284542" height="23"><g>
-    <title>~:0:&lt;method 'timetuple' of 'datetime.datetime' objects&gt; 0.23% (6030 6030 0.009633236332071913 0.009633236332071913)</title>
+<svg class="func_g" x="1869.0726055907887" y="48" width="16.407204468084057" height="23"><g>
+    <title>~:0:&lt;method 'timetuple' of 'datetime.datetime' objects&gt; 0.29% (164541 164541 0.32965816006135623 0.32965816006135623)</title>
     <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'timetuple' of 'datetime.datetime' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="2222.8910399471215" y="72" width="65.84606055615654" height="23"><g>
-    <title>_recattrs.py:16:__format__ 1.11% (65657 65657 0.021240063277622998 0.045812223035429506)</title>
+<svg class="func_g" x="2039.9539801969431" y="72" width="63.156611727120364" height="23"><g>
+    <title>_recattrs.py:16:__format__ 1.07% (1754006 1754006 0.5104156955960791 1.214999836217883)</title>
     <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__format__</text>
 </g></svg>
-<svg class="func_g" x="2222.8910399471215" y="48" width="34.854013849002634" height="23"><g>
-    <title>~:0:&lt;method '__format__' of 'str' objects&gt; 0.60% (65657 65657 0.024572159757806508 0.024572159757806508)</title>
+<svg class="func_g" x="2039.9539801969431" y="48" width="36.20472200199834" height="23"><g>
+    <title>~:0:&lt;method '__format__' of 'str' objects&gt; 0.62% (1754006 1754006 0.704584140621804 0.704584140621804)</title>
     <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method '__format__' of 'str' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="2913.7598053998872" y="120" width="6.7312462728510685" height="23"><g>
-    <title>_recattrs.py:8:__init__ 0.13% (36111 36111 0.005298525831543046 0.005298525831543046)</title>
+<svg class="func_g" x="2643.6253700419143" y="120" width="6.043612417854059" height="23"><g>
+    <title>_recattrs.py:8:__init__ 0.12% (964703 964703 0.133392143127429 0.133392143127429)</title>
     <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__init__</text>
 </g></svg>
-<svg class="func_g" x="2921.491051672738" y="120" width="7.061764236188566" height="23"><g>
-    <title>_recattrs.py:23:__init__ 0.13% (36111 36111 0.005525042735122024 0.005525042735122024)</title>
+<svg class="func_g" x="2650.6689824597684" y="120" width="7.25227963748582" height="23"><g>
+    <title>_recattrs.py:23:__init__ 0.14% (964703 964703 0.15628191916704698 0.15628191916704698)</title>
     <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__init__</text>
 </g></svg>
-<svg class="func_g" x="2934.3429313196157" y="120" width="5.2942116496445495" height="23"><g>
-    <title>_recattrs.py:51:__init__ 0.10% (36111 36111 0.004313669729025751 0.004313669729025751)</title>
-    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
-    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__init__</text>
-</g></svg>
-<svg class="func_g" x="2940.6371429692604" y="120" width="301.1940109140987" height="23"><g>
-    <title>logger.py:130:ptp_patcher 5.04% (29546 29546 0.10501848906509421 0.20710538979836193)</title>
+<svg class="func_g" x="2668.673956214283" y="120" width="299.2171922663121" height="23"><g>
+    <title>logger.py:130:ptp_patcher 5.00% (789303 789303 2.899371631684946 5.685522187250554)</title>
     <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">ptp_patcher</text>
 </g></svg>
-<svg class="func_g" x="2940.6371429692604" y="96" width="45.68925490797978" height="23"><g>
-    <title>ptp_time.py:23:get_ptp_time 0.78% (29546 29546 0.01095159985999232 0.03199797477078691)</title>
+<svg class="func_g" x="2668.673956214283" y="96" width="43.66974712861291" height="23"><g>
+    <title>ptp_time.py:23:get_ptp_time 0.74% (789303 789303 0.3100205298852474 0.8459570102611307)</title>
     <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">get_ptp_time</text>
 </g></svg>
-<svg class="func_g" x="2940.6371429692604" y="72" width="29.709429897923297" height="23"><g>
-    <title>ptp_time.py:18:&lt;lambda&gt; 0.51% (29546 29546 0.011673827668505003 0.021046374910794592)</title>
+<svg class="func_g" x="2668.673956214283" y="72" width="27.299484211378136" height="23"><g>
+    <title>ptp_time.py:18:&lt;lambda&gt; 0.47% (789303 789303 0.30677561910568474 0.5359364803758833)</title>
     <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;lambda&gt;</text>
 </g></svg>
-<svg class="func_g" x="2940.6371429692604" y="48" width="12.675779497515366" height="23"><g>
-    <title>~:0:&lt;built-in method time.clock_gettime&gt; 0.23% (29546 29546 0.00937254724228959 0.00937254724228959)</title>
+<svg class="func_g" x="2668.673956214283" y="48" width="11.10056492298005" height="23"><g>
+    <title>~:0:&lt;built-in method time.clock_gettime&gt; 0.20% (789303 789303 0.22916086127019852 0.22916086127019852)</title>
     <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method time.clock_gettime&gt;</text>
 </g></svg>
-<svg class="func_g" x="2987.3263978772397" y="96" width="12.436273726980946" height="23"><g>
-    <title>~:0:&lt;built-in method fromtimestamp&gt; 0.22% (6566 6566 0.009208404558536708 0.009208404558536708)</title>
+<svg class="func_g" x="2713.3437033428954" y="96" width="15.240597468385388" height="23"><g>
+    <title>~:0:&lt;built-in method fromtimestamp&gt; 0.27% (175401 175401 0.3075649217277405 0.3075649217277405)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method fromtimestamp&gt;</text>
 </g></svg>
-<svg class="func_g" x="3000.7626716042205" y="96" width="87.83269029121627" height="23"><g>
-    <title>~:0:&lt;method 'strftime' of 'datetime.date' objects&gt; 1.48% (6566 6566 0.06088052140394411 0.06088052140394411)</title>
+<svg class="func_g" x="2729.584300811281" y="96" width="85.20899984929069" height="23"><g>
+    <title>~:0:&lt;method 'strftime' of 'datetime.date' objects&gt; 1.44% (175401 175401 1.6326286235767375 1.6326286235767375)</title>
     <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'strftime' of 'datetime.date' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="3242.8311538833586" y="120" width="7.444973469043639" height="23"><g>
-    <title>process.py:37:current_process 0.14% (36111 36111 0.005787671029126636 0.005787671029126636)</title>
+<svg class="func_g" x="2968.891148480595" y="120" width="12.554670313648145" height="23"><g>
+    <title>process.py:37:current_process 0.23% (964703 964703 0.2566987527508117 0.2566987527508117)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">current_process</text>
 </g></svg>
-<svg class="func_g" x="3251.276127352403" y="120" width="5.3995941886796945" height="23"><g>
-    <title>process.py:189:name 0.11% (36111 36111 0.00438589250987702 0.00438589250987702)</title>
+<svg class="func_g" x="2982.445818794243" y="120" width="6.089921506728838" height="23"><g>
+    <title>process.py:189:name 0.12% (964703 964703 0.1342691460408243 0.1342691460408243)</title>
     <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">name</text>
 </g></svg>
-<svg class="func_g" x="3257.6757215410826" y="120" width="59.47520705994098" height="23"><g>
-    <title>process.py:234:ident 1.01% (36111 36111 0.02359058650896427 0.04144602764760283)</title>
+<svg class="func_g" x="2989.535740300972" y="120" width="58.3543592108057" height="23"><g>
+    <title>process.py:234:ident 0.99% (964703 964703 0.6345993081328575 1.1240546340987885)</title>
     <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">ident</text>
 </g></svg>
-<svg class="func_g" x="3257.6757215410826" y="96" width="6.486950386905963" height="23"><g>
-    <title>process.py:99:_check_closed 0.12% (36111 36111 0.005131100294115108 0.005131100294115108)</title>
+<svg class="func_g" x="2989.535740300972" y="96" width="5.909316060117194" height="23"><g>
+    <title>process.py:99:_check_closed 0.12% (964703 964703 0.13084883467858252 0.13084883467858252)</title>
     <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_check_closed</text>
 </g></svg>
-<svg class="func_g" x="3265.1626719279884" y="96" width="17.566487331828217" height="23"><g>
-    <title>~:0:&lt;built-in method posix.getpid&gt; 0.31% (36111 36111 0.01272434084452345 0.01272434084452345)</title>
+<svg class="func_g" x="2996.445056361089" y="96" width="17.93578644089759" height="23"><g>
+    <title>~:0:&lt;built-in method posix.getpid&gt; 0.32% (964703 964703 0.35860649128734845 0.35860649128734845)</title>
     <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method posix.getpid&gt;</text>
 </g></svg>
-<svg class="func_g" x="3318.1509286010237" y="120" width="7.05697412077788" height="23"><g>
-    <title>threading.py:1180:name 0.13% (36111 36111 0.005521759881446967 0.005521759881446967)</title>
+<svg class="func_g" x="3048.8900995117774" y="120" width="10.382774045420957" height="23"><g>
+    <title>threading.py:1180:name 0.19% (964703 964703 0.21556731611257096 0.21556731611257096)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">name</text>
 </g></svg>
-<svg class="func_g" x="3326.207902721802" y="120" width="18.48618949068039" height="23"><g>
-    <title>threading.py:1196:ident 0.32% (36111 36111 0.013354648750134517 0.013354648750134517)</title>
+<svg class="func_g" x="3060.2728735571986" y="120" width="16.727119221265834" height="23"><g>
+    <title>threading.py:1196:ident 0.30% (964703 964703 0.33571671524773056 0.33571671524773056)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">ident</text>
 </g></svg>
-<svg class="func_g" x="3345.694092212482" y="120" width="38.254995790591394" height="23"><g>
-    <title>threading.py:1483:current_thread 0.65% (36111 36111 0.02029460141920639 0.02690298586709744)</title>
+<svg class="func_g" x="3077.9999927784643" y="120" width="35.51008566887666" height="23"><g>
+    <title>threading.py:1483:current_thread 0.61% (964703 964703 0.5105910961787584 0.6914290969208746)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">current_thread</text>
 </g></svg>
-<svg class="func_g" x="3345.694092212482" y="96" width="8.642502321715739" height="23"><g>
-    <title>~:0:&lt;built-in method _thread.get_ident&gt; 0.16% (36111 36111 0.006608384447891049 0.006608384447891049)</title>
+<svg class="func_g" x="3077.9999927784643" y="96" width="8.548934125979669" height="23"><g>
+    <title>~:0:&lt;built-in method _thread.get_ident&gt; 0.16% (964703 964703 0.1808380007421162 0.1808380007421162)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method _thread.get_ident&gt;</text>
 </g></svg>
-<svg class="func_g" x="3384.949088003074" y="120" width="13.360766001243809" height="23"><g>
-    <title>~:0:&lt;built-in method sys._getframe&gt; 0.24% (36111 36111 0.009841995317822835 0.009841995317822835)</title>
+<svg class="func_g" x="3114.510078447341" y="120" width="18.64431550068173" height="23"><g>
+    <title>~:0:&lt;built-in method sys._getframe&gt; 0.33% (964703 964703 0.372024635862297 0.372024635862297)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method sys._getframe&gt;</text>
 </g></svg>
-<svg class="func_g" x="3399.309854004318" y="120" width="20.545939117276397" height="23"><g>
-    <title>~:0:&lt;method 'get' of '_contextvars.ContextVar' objects&gt; 0.36% (36111 36111 0.014766275830409308 0.014766275830409308)</title>
+<svg class="func_g" x="3134.154393948023" y="120" width="21.54789537313045" height="23"><g>
+    <title>~:0:&lt;method 'get' of '_contextvars.ContextVar' objects&gt; 0.38% (964703 964703 0.4270127185321839 0.4270127185321839)</title>
     <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'get' of '_contextvars.ContextVar' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="3420.855793121594" y="120" width="10.903436795560662" height="23"><g>
-    <title>~:0:&lt;method 'values' of 'dict' objects&gt; 0.20% (36111 36111 0.00815789138251826 0.00815789138251826)</title>
+<svg class="func_g" x="3156.7022893211533" y="120" width="9.896528612235766" height="23"><g>
+    <title>~:0:&lt;method 'values' of 'dict' objects&gt; 0.18% (964703 964703 0.20635878552192005 0.20635878552192005)</title>
     <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'values' of 'dict' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="4102.000969771293" y="168" width="1365.0922457864124" height="23"><g>
-    <title>flame_capture.py:51:stop 22.77% (36705 36705 0.16950406624026648 0.9362365131205017)</title>
+<svg class="func_g" x="3871.870977276723" y="168" width="1550.1840862579288" height="23"><g>
+    <title>flame_capture.py:51:stop 25.85% (1398276 1398276 4.804474740413665 29.37637072798332)</title>
     <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">stop</text>
 </g></svg>
-<svg class="func_g" x="4102.000969771293" y="144" width="1117.7635128487227" height="23"><g>
-    <title>~:0:&lt;method 'disable' of '_lsprof.Profiler' objects&gt; 18.65% (36705 36705 0.7667324468802352 0.7667324468802352)</title>
+<svg class="func_g" x="3871.870977276723" y="144" width="1296.4895496125748" height="23"><g>
+    <title>~:0:&lt;method 'disable' of '_lsprof.Profiler' objects&gt; 21.62% (1398276 1398276 24.571895987569654 24.571895987569654)</title>
     <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'disable' of '_lsprof.Profiler' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="5706.906299180303" y="192" width="149.22890772850144" height="23"><g>
-    <title>subprocess.py:1120:__del__ 2.50% (73410 73410 0.09268033071820543 0.10295775353052129)</title>
+<svg class="func_g" x="5649.430921903295" y="192" width="156.56232281757437" height="23"><g>
+    <title>subprocess.py:1120:__del__ 2.63% (2796551 2796551 2.7308321210791293 2.983919993027579)</title>
     <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__del__</text>
 </g></svg>
-<svg class="func_g" x="5706.906299180303" y="168" width="13.996112001419055" height="23"><g>
-    <title>subprocess.py:1973:_internal_poll 0.25% (20555 20555 0.0028776783874484417 0.010277422812315862)</title>
+<svg class="func_g" x="5649.430921903295" y="168" width="12.364002075904853" height="23"><g>
+    <title>subprocess.py:1973:_internal_poll 0.22% (506176 506176 0.0458089048226694 0.2530878719484497)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_internal_poll</text>
 </g></svg>
-<svg class="func_g" x="5707.905647265683" y="144" width="6.272441397449038" height="23"><g>
-    <title>~:0:&lt;built-in method posix.waitpid&gt; 0.12% (1391 1391 0.004984088883325245 0.004984088883325245)</title>
+<svg class="func_g" x="5649.508428057028" y="144" width="6.360300037434996" height="23"><g>
+    <title>~:0:&lt;built-in method posix.waitpid&gt; 0.12% (61613 61613 0.13938958276092536 0.13938958276092536)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method posix.waitpid&gt;</text>
 </g></svg>
-<svg class="func_g" x="5857.135206908804" y="192" width="85.3883166367461" height="23"><g>
-    <title>threading.py:299:__enter__ 1.44% (73410 73410 0.04338540630056192 0.05920529641523381)</title>
+<svg class="func_g" x="5806.993244720869" y="192" width="118.09467043333996" height="23"><g>
+    <title>threading.py:299:__enter__ 1.98% (2796551 2796551 1.596830661685799 2.2554184389660192)</title>
     <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__enter__</text>
 </g></svg>
-<svg class="func_g" x="5857.135206908804" y="168" width="22.083300973612868" height="23"><g>
-    <title>~:0:&lt;method '__enter__' of '_thread.lock' objects&gt; 0.38% (63280 63280 0.012038936377265311 0.015819890114671893)</title>
+<svg class="func_g" x="5806.993244720869" y="168" width="33.77593910359772" height="23"><g>
+    <title>~:0:&lt;method '__enter__' of '_thread.lock' objects&gt; 0.58% (2634351 2634351 0.4945994207374455 0.6585877772802202)</title>
     <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method '__enter__' of '_thread.lock' objects&gt;</text>
 </g></svg>
-<svg class="func_g" x="5943.52352354555" y="192" width="52.557542862210845" height="23"><g>
-    <title>threading.py:323:wait 0.89% (36705 0 0.08860606667475165 0.036705081472556605)</title>
+<svg class="func_g" x="5926.087915154209" y="192" width="72.834265612734" height="23"><g>
+    <title>threading.py:323:wait 1.23% (1398276 0 4.31368002740866 1.3982755356267942)</title>
     <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">wait</text>
 </g></svg>
-<svg class="func_g" x="15.663848815464503" y="408" width="5981.997538053035" height="23"><g>
-    <title>~:0:&lt;built-in method time.sleep&gt; 99.72% (0 13 4.100382511 4.100382511)</title>
+<svg class="func_g" x="0.7643471372843992" y="408" width="5998.160980312213" height="23"><g>
+    <title>~:0:&lt;built-in method time.sleep&gt; 99.99% (0 340 113.61229049200001 113.61229049200001)</title>
     <rect height="100%" width="100%" fill="rgb(230, 230, 255)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method time.sleep&gt;</text>
 </g></svg>
-<svg class="func_g" x="15.663848815464503" y="432" width="5981.997538053035" height="23"><g>
-    <title>threading.py:323:wait 99.72% (13 13 4.100382511 4.100382511)</title>
+<svg class="func_g" x="0.7643471372843992" y="432" width="5998.160980312213" height="23"><g>
+    <title>threading.py:323:wait 99.99% (340 340 113.61229049200001 113.61229049200001)</title>
     <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">wait</text>
 </g></svg>
-<svg class="func_g" x="15.663848815464503" y="456" width="5981.997538053035" height="23"><g>
-    <title>threading.py:637:wait 0.00% (1 0 2.414e-06 1e-06)</title>
+<svg class="func_g" x="0.7643471372843992" y="456" width="5998.160980312213" height="23"><g>
+    <title>threading.py:637:wait 0.00% (1 0 3.085e-06 1e-06)</title>
     <rect height="100%" width="100%" fill="rgb(225, 225, 225)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">wait</text>
 </g></svg>
-<svg class="func_g" x="15.663848815464503" y="480" width="5981.997538053035" height="23"><g>
-    <title>threading.py:973:start 0.00% (2 1 1.6069e-05 4.107231183000001)</title>
+<svg class="func_g" x="0.7643471372843992" y="480" width="5998.160980312213" height="23"><g>
+    <title>threading.py:973:start 0.00% (2 1 1.4196000000000001e-05 113.623923098)</title>
     <rect height="100%" width="100%" fill="rgb(232, 232, 232)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">start</text>
 </g></svg>
-<svg class="func_g" x="15.663848815464503" y="504" width="5981.997538053035" height="23"><g>
-    <title>logger.py:51:__init__ 0.00% (2 1 6.451000000000001e-06 4.1072782310000004)</title>
+<svg class="func_g" x="0.7643471372843992" y="504" width="5998.160980312213" height="23"><g>
+    <title>logger.py:51:__init__ 0.00% (2 1 4.970000000000001e-06 113.623974805)</title>
     <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__init__</text>
 </g></svg>
-<svg class="func_g" x="15.663848815464503" y="528" width="5981.936739926705" height="23"><g>
-    <title>logger.py:155:initialize_logging 0.00% (1 1 5.721e-06 4.107294562)</title>
+<svg class="func_g" x="0.7643471372843992" y="528" width="5998.158844302374" height="23"><g>
+    <title>logger.py:155:initialize_logging 0.00% (1 1 5.609e-06 113.62399444100001)</title>
     <rect height="100%" width="100%" fill="rgb(225, 225, 225)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">initialize_logging</text>
 </g></svg>
-<svg class="func_g" x="15.663848815464503" y="552" width="5981.936739926705" height="23"><g>
-    <title>logger.py:245:set_log_directory 0.00% (1 1 2.1202e-05 4.110150611)</title>
+<svg class="func_g" x="0.7643471372843992" y="552" width="5998.158844302374" height="23"><g>
+    <title>logger.py:245:set_log_directory 0.00% (1 1 2.3576000000000003e-05 113.62683755500001)</title>
     <rect height="100%" width="100%" fill="rgb(232, 232, 232)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">set_log_directory</text>
 </g></svg>
-<svg class="func_g" x="15.663848815464503" y="576" width="5981.936739926705" height="23"><g>
-    <title>OpenAir.py:53:main 0.00% (1 1 2.345e-06 4.110153637000001)</title>
+<svg class="func_g" x="0.7643471372843992" y="576" width="5998.158844302374" height="23"><g>
+    <title>OpenAir.py:53:main 0.00% (1 1 2.1340000000000002e-06 113.62684021000001)</title>
     <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">main</text>
 </g></svg>
-<svg class="func_g" x="15.663848815464503" y="600" width="5981.936739926705" height="23"><g>
-    <title>&lt;virtual&gt;:0:total_execution 0.00% (1 2 0.00010299400000000001 4.10459716)</title>
+<svg class="func_g" x="0.7643471372843992" y="600" width="5998.158844302374" height="23"><g>
+    <title>&lt;virtual&gt;:0:total_execution 0.00% (1 2 0.001228079 113.62052110100001)</title>
     <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
     <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">total_execution</text>
 </g></svg>

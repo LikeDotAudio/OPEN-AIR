@@ -137,7 +137,22 @@ class UnifiedOrchestrator:
         # 8. Auto-Open
         print(f"🌐 Launching report...")
         webbrowser.open('file://' + os.path.realpath(self.html_path))
+        
+        # 9. Force Exit
+        # On some systems, the browser process or select timeouts can cause a hang.
+        # We'll give the browser a brief moment to start, then kill the process.
+        print("\n👋 Exiting test suite. Goodbye!")
+        time.sleep(1)
+        # Use os._exit for a hard termination to prevent any hang from stray threads.
+        os._exit(0)
 
 if __name__ == "__main__":
-    orchestrator = UnifiedOrchestrator(project_root)
-    orchestrator.execute()
+    try:
+        orchestrator = UnifiedOrchestrator(project_root)
+        orchestrator.execute()
+    except KeyboardInterrupt:
+        print("\n🛑 Execution interrupted by user.")
+        os._exit(1)
+    except Exception as e:
+        print(f"\n❌ Execution failed: {e}")
+        os._exit(1)

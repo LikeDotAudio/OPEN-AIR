@@ -79,7 +79,14 @@ class MidiManager:
 
                     self._notify_monitor("RX", msg)
                     if self.state_cache_manager:
-                        pld = {"val": val}; hasattr(msg, "note") and pld.update({"note": msg.note})
+                        pld = {
+                            "val": val,
+                            "channel": getattr(msg, 'channel', 0),
+                            "note": getattr(msg, 'note', 0),
+                            "velocity": getattr(msg, 'velocity', 0),
+                            "type": msg.type,
+                            "raw": str(msg)
+                        }
                         self.state_cache_manager.handle_external_update(topic, pld, source="MIDI", metadata=meta)
             except Exception as e: midi_logger.error(f"❌ Listen Error on {port.name}: {e}")
             time.sleep(0.001)
@@ -106,5 +113,6 @@ class MidiManager:
         if topic == "OPEN-AIR/System/Status/MIDI/ActiveInputs": self._active_in_names = val.get("val", val) if isinstance(val, (dict, list)) else []
         elif topic == "OPEN-AIR/System/Status/MIDI/ActiveOutputs": self._active_out_names = val.get("val", val) if isinstance(val, (dict, list)) else []
         elif not self.run_bridge and msg.get("logical_source") == "MIDI":
-            tgt = val if (isinstance(val, dict) and "raw" in val) else msg.get("meta", {})
-            if isinstance(tgt, dict) and "raw" in tgt: self._notify_monitor("RX", tgt)
+            # In UI mode, we receive enriched pld from CORE
+            if isinstance(val, dict) and "raw" in val:
+                self._notify_monitor("RX", val)

@@ -1,3 +1,0 @@
-064510.508 | WARNING  | CORE | SYSTEM     | oaPTP.Core.ptp       | ⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.
-064518.017 | WARNING  | UI   | OSC        | oaComOSC.Managers.osc_manager | 🅾️📡🛑 [OSC] Bridge Offline.
-064518.017 | WARNING  | UI   | SYSTEM     | oaComSNMP.Managers.snmp_manager | 🌐 SNMP Bridge Offline.

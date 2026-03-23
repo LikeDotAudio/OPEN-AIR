@@ -121,6 +121,9 @@ class AsyncBootstrapEngine:
                     subscriber_router=sub_router, 
                     state_mirror_engine=mirror_engine, 
                     state_cache_manager=state_cache, 
+                    osc_manager=self.services.get("osc_manager"),
+                    snmp_manager=self.services.get("snmp_manager"),
+                    midi_manager=self.services.get("midi_manager"),
                     on_complete=_on_ignition_complete
                 )
                 app.pack(fill=tk.BOTH, expand=True)

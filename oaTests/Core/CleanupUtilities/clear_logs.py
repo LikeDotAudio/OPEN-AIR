@@ -12,15 +12,17 @@ def cleanup_logs(report_path):
     Finalizes the report generation by confirming the file location
     and purging the source log directories that have now been ingested.
     """
-    print(f"\n✨ The report was generated perfectly, and is stored here:")
-    print(f"   📍 {os.path.realpath(report_path)}")
+    if report_path:
+        print(f"\n✨ The report was generated perfectly, and is stored here:")
+        print(f"   📍 {os.path.realpath(report_path)}")
 
     project_root = os.getcwd()
     targets = [
         os.path.join(project_root, "oaDataAudits"),
         os.path.join(project_root, "oaDataLogs", "ApplicationRunLog"),
         os.path.join(project_root, "oaDataLogs", "BugLog"),
-        os.path.join(project_root, "oaDataLogs", "ChangeLog")
+        os.path.join(project_root, "oaDataLogs", "ChangeLog"),
+        os.path.join(project_root, "oaDataLogs", "Errors")
     ]
 
     print(f"\n🧹 Starting report sweeper (Log Cleanup)...")
@@ -51,5 +53,5 @@ def cleanup_logs(report_path):
     print(f"🏁 Log cleanup complete.\n")
 
 if __name__ == "__main__":
-    # If run directly for some reason, we'd need a path, but usually called from Entry.py
-    print("This script is intended to be called by oaTests/Entry.py")
+    # If run directly, we'll perform the cleanup without the specific report path message.
+    cleanup_logs(None)

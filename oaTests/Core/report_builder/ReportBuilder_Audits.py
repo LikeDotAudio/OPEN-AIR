@@ -6,6 +6,7 @@
 
 import os
 import glob
+import html
 from datetime import datetime
 
 def build_tab(data_dir):
@@ -19,21 +20,23 @@ def build_tab(data_dir):
     # Sort by modification time (newest first)
     audit_files.sort(key=os.path.getmtime, reverse=True)
 
-    html = "<h3>Latest Audit Reports</h3>"
+    tab_html = "<h3>Latest Audit Reports</h3>"
     for file_path in audit_files[:5]: # Show latest 5
         filename = os.path.basename(file_path)
         mtime = datetime.fromtimestamp(os.path.getmtime(file_path)).strftime('%Y-%m-%d %H:%M:%S')
         
-        with open(file_path, 'r') as f:
+        with open(file_path, 'r', encoding="utf-8") as f:
             content = f.read()
         
-        html += f"""
+        escaped_content = html.escape(content)
+        
+        tab_html += f"""
         <div class="log-entry">
             <div class="log-header">
                 <span class="log-filename">{filename}</span>
                 <span class="log-time">{mtime}</span>
             </div>
-            <pre class="log-content">{content}</pre>
+            <div class="markdown-content" style="padding: 15px; background: #1a1a1a; color: #ccc;">{escaped_content}</div>
         </div>
         """
-    return html
+    return tab_html

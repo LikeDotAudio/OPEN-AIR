@@ -164,6 +164,13 @@ class MidiKeyboard(tk.Canvas):
                     self.note_on(note, color)
                 else:
                     self.note_off(note)
+            elif m_type == "pitchwheel":
+                # Pitchwheel doesn't visually affect keys, but we handle it to prevent 'unknown' errors
+                # and allow future expansion (e.g. a pitch slider)
+                pass
+            elif m_type == "control_change":
+                # CC handled similarly
+                pass
         except Exception as e:
             logger.error(f"🎹 Keyboard Visualizer Error: {e}")
 

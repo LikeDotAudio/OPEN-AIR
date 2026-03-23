@@ -7,23 +7,15 @@
 # They need to be rewritten.
 #
 # -----------------------------------------------------------------
-#import unittest
-#import tkinter as tk
-#from unittest.mock import MagicMock, patch
-#from oaGuiEditorWYSIWYG.workspaces.interactive_layout import InteractiveLayout
 #
-#class TestInteractiveLayout(unittest.TestCase):
 #
-#    def setUp(self):
 #        self.root = tk.Tk()
 #        self.root.withdraw()
 #        self.mock_event_bus = MagicMock()
 #
-#    def tearDown(self):
 #        self.root.destroy()
 #
 #    @patch('oaGuiEditorWYSIWYG.workspaces.interactive_layout.DynamicGuiBuilder')
-#    def test_layout_creation_and_gui_build(self, MockGuiBuilder):
 #        """Test that the layout view is created and builds the initial GUI."""
 #        mock_builder_instance = MockGuiBuilder.return_value
 #        layout_view = InteractiveLayout(self.root, self.mock_event_bus)
@@ -35,7 +27,6 @@
 #        mock_builder_instance.build_gui.assert_called_once()
 #
 #    @patch('oaGuiEditorWYSIWYG.workspaces.interactive_layout.DynamicGuiBuilder')
-#    def test_on_json_updated_rebuilds_gui(self, MockGuiBuilder):
 #        """Test that receiving a 'json_updated' event triggers a GUI rebuild."""
 #        mock_builder_instance = MockGuiBuilder.return_value
 #        layout_view = InteractiveLayout(self.root, self.mock_event_bus)
@@ -50,7 +41,6 @@
 #        mock_builder_instance.build_gui.assert_called_with(new_json_data)
 #        self.assertEqual(mock_builder_instance.build_gui.call_count, 2) # Once on init, once on update
 #
-#    def test_widget_selection_publishes_event(self):
 #        """Test that clicking on a widget in the layout publishes a selection event."""
 #        # This test is more complex as it requires a real builder and widgets.
 #        # We can mock the builder's output to simulate a built GUI.
@@ -78,5 +68,4 @@
 #
 #        self.mock_event_bus.publish.assert_called_with("widget_selected", {"id": "label1", "type": "label"})
 #
-#if __name__ == '__main__':
 #    unittest.main()

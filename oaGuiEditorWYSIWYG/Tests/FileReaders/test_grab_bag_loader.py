@@ -7,16 +7,11 @@
 # They need to be rewritten.
 #
 # -----------------------------------------------------------------
-#import unittest
-#from unittest.mock import patch, mock_open
-#from oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader import GrabBagLoader
 #
-#class TestGrabBagLoader(unittest.TestCase):
 #
 #    @patch('os.path.isdir')
 #    @patch('os.listdir')
 #    @patch('builtins.open', new_callable=mock_open, read_data='{"name": "Test Widget"}')
-#    def test_load_grab_bag_items(self, mock_file, mock_listdir, mock_isdir):
 #        """
 #        Test that grab bag items are loaded correctly from a directory.
 #        """
@@ -35,7 +30,6 @@
 #        self.assertEqual(mock_file.call_count, 2)
 #
 #    @patch('os.path.isdir')
-#    def test_load_from_nonexistent_directory(self, mock_isdir):
 #        """
 #        Test that loading from a non-existent directory returns an empty dict.
 #        """
@@ -46,7 +40,6 @@
 #
 #    @patch('os.path.isdir')
 #    @patch('os.listdir')
-#    def test_load_from_empty_directory(self, mock_listdir, mock_isdir):
 #        """
 #        Test that loading from an empty directory returns an empty dict.
 #        """
@@ -56,5 +49,4 @@
 #        items = loader.load_items("empty_dir")
 #        self.assertEqual(items, {})
 #
-#if __name__ == '__main__':
 #    unittest.main()

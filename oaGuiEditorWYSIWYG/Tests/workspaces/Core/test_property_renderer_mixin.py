@@ -7,14 +7,8 @@
 # They need to be rewritten.
 #
 # -----------------------------------------------------------------
-#import unittest
-#import tkinter as tk
-#from unittest.mock import MagicMock, patch
-#from oaGuiEditorWYSIWYG.workspaces.Core.property_renderer_mixin import PropertyRendererMixin
 #
 ## Dummy host class for the mixin
-#class DummyRenderer(PropertyRendererMixin):
-#    def __init__(self, parent, event_bus):
 #        self.frame = tk.Frame(parent)
 #        self.event_bus = event_bus
 #        # The mixin may expect a factory
@@ -22,18 +16,14 @@
 #        self.property_entries = {}
 #        self.selected_widget_id = None
 #
-#class TestPropertyRendererMixin(unittest.TestCase):
 #    
-#    def setUp(self):
 #        self.root = tk.Tk()
 #        self.root.withdraw()
 #        self.mock_event_bus = MagicMock()
 #        self.renderer = DummyRenderer(self.root, self.mock_event_bus)
 #
-#    def tearDown(self):
 #        self.root.destroy()
 #        
-#    def test_render_properties(self):
 #        """Test that render_properties creates editors for a widget's data."""
 #        widget_data = {
 #            "id": "label1",
@@ -58,7 +48,6 @@
 #        self.assertEqual(len(self.renderer.property_entries), len(widget_data))
 #        self.assertIn("text", self.renderer.property_entries)
 #
-#    def test_clear_properties(self):
 #        """Test that the property view can be cleared."""
 #        widget_data = {"id": "w1", "text": "abc"}
 #        self.renderer.render_properties(widget_data)
@@ -72,7 +61,6 @@
 #        self.assertEqual(len(self.renderer.property_entries), 0)
 #
 #    @patch.object(tk.Entry, 'get')
-#    def test_on_property_change_publishes_event(self, mock_get):
 #        """Test that changing a property publishes an event."""
 #        # Setup the state as if a widget is selected and rendered
 #        self.renderer.selected_widget_id = "button1"
@@ -89,5 +77,4 @@
 #            {"id": "button1", "property": "text", "value": "New Button Text"}
 #        )
 #
-#if __name__ == '__main__':
 #    unittest.main()

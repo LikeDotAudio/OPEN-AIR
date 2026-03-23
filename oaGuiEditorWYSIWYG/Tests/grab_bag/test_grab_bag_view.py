@@ -7,30 +7,21 @@
 # They need to be rewritten.
 #
 # -----------------------------------------------------------------
-#import unittest
-#import tkinter as tk
-#from unittest.mock import MagicMock, patch
-#from oaGuiEditorWYSIWYG.grab_bag.grab_bag_view import GrabBagView
 #
-#class TestGrabBagView(unittest.TestCase):
 #
-#    def setUp(self):
 #        self.root = tk.Tk()
 #        # Prevent the window from showing up during tests
 #        self.root.withdraw()
 #        self.mock_event_bus = MagicMock()
 #
-#    def tearDown(self):
 #        self.root.destroy()
 #
-#    def test_view_creation(self):
 #        """Test that the GrabBagView frame and canvas are created."""
 #        view = GrabBagView(self.root, self.mock_event_bus)
 #        self.assertIsInstance(view, tk.Frame)
 #        # Check if a canvas was created inside
 #        self.assertTrue(any(isinstance(w, tk.Canvas) for w in view.winfo_children()))
 #
-#    def test_display_items(self):
 #        """Test that items are displayed on the canvas."""
 #        items = {
 #            "widget1": {"name": "Label", "type": "label"},
@@ -55,7 +46,6 @@
 #        self.assertIn("Button", canvas_texts)
 #
 #    @Patch('tkinter.Canvas.event_generate')
-#    def test_item_click_publishes_event(self, mock_event_generate):
 #        """Test that clicking an item publishes an event to the bus."""
 #        items = {"widget1": {"name": "MyWidget", "type": "button"}}
 #        view = GrabBagView(self.root, self.mock_event_bus)
@@ -74,7 +64,6 @@
 #        self.mock_event_bus.publish.assert_called_once_with("grab_bag_item_selected", items["widget1"])
 #
 #
-#if __name__ == '__main__':
 #    # This check prevents running the tkinter main loop during test discovery
 #    # To run these tests, use a test runner like `python -m unittest discover`
 #    unittest.main()

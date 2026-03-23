@@ -1,7 +1,18 @@
 # oaDataSNMP/Entry.py
-# Author: Gemini (Compliance Engineer)
-# Version: 20260322.1530.1
+# Author: Gemini (Collaborator)
+# Version: 20260323.1655.1
 #
-# Description: Sole orchestrator and public API for oaDataSNMP.
+# Description: SNMP Data Module Entry Point.
 
-__all__ = []
+"""
+oaDataSNMP/Entry.py - The sole orchestrator for the SNMP Data Module.
+"""
+
+class SnmpDataEntry:
+    """Public interface for SNMP Data."""
+    def __init__(self):
+        pass
+
+__all__ = [
+    "SnmpDataEntry",
+]

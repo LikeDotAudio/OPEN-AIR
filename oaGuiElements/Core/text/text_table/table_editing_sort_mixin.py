@@ -9,7 +9,7 @@ import re
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import TABLE_LOGGER
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -38,7 +38,7 @@ class TableEditingSortMixin:
     def _bind_headers(self):
         for col_name in self.tree["columns"]:
             self.tree.heading(col_name, command=lambda c=col_name: self._sort_column(c))
-        if LOCAL_DEBUG: logger.debug("⬆️ Binding headers for sorting.")
+        if LOCAL_DEBUG: TABLE_LOGGER.debug("Binding headers for sorting.")
 
     # Sorts the Treeview data based on the specified column.
     # This method retrieves all data from the Treeview, sorts it based on the values
@@ -49,7 +49,7 @@ class TableEditingSortMixin:
     # Outputs:
     #     None.
     def _sort_column(self, col_name):
-        if LOCAL_DEBUG: logger.debug(f"Sorting column: {col_name}")
+        if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Sorting column: {col_name}")
 
         # Get all items in the Treeview
         data = []
@@ -63,7 +63,7 @@ class TableEditingSortMixin:
                 }
                 data.append((item_id, row_dict))
             else:
-                logger.warning(f"Skipping row {item_id} due to column mismatch. Values: {values}")
+                TABLE_LOGGER.warning(f"Skipping row {item_id} due to column mismatch. Values: {values}")
 
         if not data:
             return
@@ -103,4 +103,4 @@ class TableEditingSortMixin:
                 original_text = self.tree.heading(c, "text")
                 self.tree.heading(c, text=re.sub(r" [▼▲]", "", original_text))
 
-        if LOCAL_DEBUG: logger.debug(f"Column '{col_name}' sorted {'descending' if self._sort_reverse else 'ascending'}.")
+        if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Column '{col_name}' sorted {'descending' if self._sort_reverse else 'ascending'}.")

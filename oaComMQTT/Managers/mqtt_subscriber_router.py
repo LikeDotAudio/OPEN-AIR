@@ -10,7 +10,7 @@ from typing import Any, Callable, Dict, List, Set, Union
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -76,7 +76,7 @@ class MqttSubscriberRouter:
                           callback_func: Callable[[MqttMessage], None]):
         """Registers a callback for a topic filter."""
         if LOCAL_DEBUG:
-            logger.debug(f"🚀📤📥 [MQTT] Subscribing to {topic_filter}")
+            MQTT_LOGGER.debug(f"Subscribing to {topic_filter}")
             
         # ⚡ Invalidate cache when subscriptions change
         self._match_cache.clear()
@@ -203,5 +203,4 @@ class MqttSubscriberRouter:
                     self._active_broker_subscriptions.add(topic_filter)
         
         if LOCAL_DEBUG:
-            logger.debug("🚀📤📥 [MQTT] aiomqtt: Resubscribed to root and "
-                         "external filters.")
+            MQTT_LOGGER.debug("aiomqtt: Resubscribed to root and external filters.")

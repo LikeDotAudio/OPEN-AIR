@@ -1,6 +1,6 @@
 # Managers/midi_manager.py
 # Author: Anthony Peter Kuzub
-# Version: 20260315.Modular.1
+# Version: 20260323.1700.1
 #
 # Description: Modularized MIDI Orchestrator.
 
@@ -13,7 +13,7 @@ from loguru import logger
 LOCAL_DEBUG = True
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
-midi_logger = logger.bind(category="MIDI")
+from oaLogging.Core.logger import MIDI_LOGGER as midi_logger
 
 # --- EXTRACTED CORE MODULES ---
 from ..Core.midi_port_controller import MIDIPortController
@@ -27,6 +27,9 @@ class MidiManager:
         self.run_bridge, self.state_cache_manager = run_bridge, state_cache_manager
         self._running = False
         
+        # ⚡ THREAD SAFETY: Protect shared mutable state
+        self._monitor_lock = threading.Lock()
+        
         self.ports = MIDIPortController(midi_logger)
         self.lock_manager = MIDIHardwareLock()
         self.mapper = MIDIProtocolMapper()
@@ -37,9 +40,26 @@ class MidiManager:
         from oaComBroker.Managers.protocol_router import ProtocolRouter
         ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
 
-    def add_monitor_callback(self, cb): self._monitor_callbacks.append(cb)
-    def remove_monitor_callback(self, cb): (cb in self._monitor_callbacks) and self._monitor_callbacks.remove(cb)
-    def _notify_monitor(self, d, m): [cb(d, m) for cb in self._monitor_callbacks]
+    def add_monitor_callback(self, cb):
+        with self._monitor_lock:
+            if cb not in self._monitor_callbacks:
+                self._monitor_callbacks.append(cb)
+
+    def remove_monitor_callback(self, cb):
+        with self._monitor_lock:
+            if cb in self._monitor_callbacks:
+                self._monitor_callbacks.remove(cb)
+
+    def _notify_monitor(self, direction, msg):
+        # Take a snapshot to avoid holding lock during callback execution
+        with self._monitor_lock:
+            callbacks = list(self._monitor_callbacks)
+            
+        for cb in callbacks:
+            try:
+                cb(direction, msg)
+            except Exception:
+                pass # Silently skip failed callbacks in hot path
 
     def get_port_info(self):
         return self.ports.get_port_info(self.run_bridge, self._active_in_names, self._active_out_names)
@@ -88,7 +108,9 @@ class MidiManager:
                             "raw": str(msg)
                         }
                         self.state_cache_manager.handle_external_update(topic, pld, source="MIDI", metadata=meta)
-            except Exception as e: midi_logger.error(f"❌ Listen Error on {port.name}: {e}")
+            except Exception as e:
+                midi_logger.error(f"Listen Error on {port.name}: {e}")
+            
             time.sleep(0.001)
 
     def publish(self, topic, val, meta=None):
@@ -101,8 +123,11 @@ class MidiManager:
         midi_msg = self.mapper.topic_to_midi(topic, rv)
         if midi_msg:
             for p in self.ports.outports:
-                try: p.send(midi_msg); self._notify_monitor("TX", f"[{p.name}] {str(midi_msg)}")
-                except Exception as e: midi_logger.error(f"❌ TX Error on {p.name}: {e}")
+                try:
+                    p.send(midi_msg)
+                    self._notify_monitor("TX", f"[{p.name}] {str(midi_msg)}")
+                except Exception as e:
+                    midi_logger.error(f"TX Error on {p.name}: {e}")
             
             from oaComBroker.Managers.protocol_router import ProtocolRouter
             ProtocolRouter.get_instance().ingest("MIDI-TX", topic, rv, {"midi_raw": str(midi_msg), "msg_type": meta.get("msg_type"), "origin_source": meta.get("origin_source")})

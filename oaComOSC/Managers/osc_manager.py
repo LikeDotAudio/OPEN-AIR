@@ -1,6 +1,6 @@
 # Managers/osc_manager.py
-# Author: Anthony P. Kuzub(Refactored)
-# Version: 20260309.Harden.3
+# Author: Anthony P. Kuzub (Refactored)
+# Version: 20260323.1700.1
 #
 # Description: Dedicated orchestrator for OSC (Open Sound Control) traffic.
 
@@ -12,14 +12,13 @@ import os
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
 from loguru import logger
+from oaLogging.Core.logger import OSC_LOGGER as logger
 from oaConfiguration.FileReaders.config_reader import Config
 from ..Workers.osc_rx_server import OscRxServer
 from ..Workers.osc_tx_client import OscTxClient
 from oaOchestration.Methods.network_utils import get_local_ip
 
 app_constants = Config.get_instance()
-# ⚡ SUBSYSTEM: OSC_BRIDGE
-osc_logger = logger.bind(category="OSC")
 
 class OSCManager:
     """
@@ -31,8 +30,7 @@ class OSCManager:
                  run_bridge=True):
         self.run_bridge = run_bridge
         if LOCAL_DEBUG:
-            osc_logger.info(f"🅾️📡💻 [OSC] Initializing Bridge "
-                             f"(Bridge={run_bridge})...")
+            logger.info(f"Initializing Bridge (Bridge={run_bridge})...")
         
         self.state_cache_manager = state_cache_manager
         self.mqtt_connection_manager = mqtt_connection_manager
@@ -52,6 +50,9 @@ class OSCManager:
         
         # Monitor callbacks for GUI
         self._monitor_callbacks = []
+        
+        # ⚡ THREAD SAFETY: Protect shared mutable state
+        self._state_lock = threading.RLock()
 
         # Protocol Router Sync Logic: Listen for remote/local activity
         from oaComBroker.Managers.protocol_router import ProtocolRouter
@@ -59,7 +60,10 @@ class OSCManager:
 
     def _broadcast_status_loop(self):
         """Periodically publishes OSC bridge status to MQTT for UI sync."""
-        while self._running:
+        while True:
+            with self._state_lock:
+                if not self._running: break
+                
             if self.run_bridge and self.state_cache_manager:
                 status = self.get_status()
                 self.state_cache_manager.handle_external_update(
@@ -71,29 +75,40 @@ class OSCManager:
 
     def get_status(self):
         """Returns a logic-only status report for the UI."""
-        return {
-            "running": self._running,
-            "rx_socket": self._rx_addr,
-            "tx_socket": self._tx_addr,
-            "routes_count": len(self.osc_to_topic),
-            "bridge_mode": self.run_bridge
-        }
+        with self._state_lock:
+            return {
+                "running": self._running,
+                "rx_socket": self._rx_addr,
+                "tx_socket": self._tx_addr,
+                "routes_count": len(self.osc_to_topic),
+                "bridge_mode": self.run_bridge
+            }
 
     def add_monitor_callback(self, callback):
-        self._monitor_callbacks.append(callback)
+        with self._state_lock:
+            if callback not in self._monitor_callbacks:
+                self._monitor_callbacks.append(callback)
 
     def remove_monitor_callback(self, callback):
-        if callback in self._monitor_callbacks:
-            self._monitor_callbacks.remove(callback)
+        with self._state_lock:
+            if callback in self._monitor_callbacks:
+                self._monitor_callbacks.remove(callback)
 
     def _notify_monitor(self, direction, address, value, topic=None):
-        for cb in self._monitor_callbacks:
-            try: cb(direction, address, value, topic)
-            except: pass
+        # Take snapshot to avoid holding lock during callback execution
+        with self._state_lock:
+            callbacks = list(self._monitor_callbacks)
+            
+        for cb in callbacks:
+            try:
+                cb(direction, address, value, topic)
+            except Exception:
+                pass
 
     def start(self):
-        if self._running: return
-        self._running = True
+        with self._state_lock:
+            if self._running: return
+            self._running = True
         
         rx_port = getattr(app_constants, "OSC_RX_PORT", 8888)
         tx_host = getattr(app_constants, "OSC_REMOTE_IP", "127.0.0.1")
@@ -105,43 +120,49 @@ class OSCManager:
                 self.rx_server = OscRxServer("0.0.0.0", rx_port, 
                                              self.handle_incoming_osc)
                 self.rx_server.start()
-                self._rx_addr = f"{get_local_ip()}:{rx_port}"
+                
+                with self._state_lock:
+                    self._rx_addr = f"{get_local_ip()}:{rx_port}"
+                    
                 if LOCAL_DEBUG:
-                    osc_logger.success(f"🅾️📡✅ [OSC] RX SERVER ACTIVE: "
-                                       f"{self._rx_addr}")
+                    logger.success(f"RX SERVER ACTIVE: {self._rx_addr}")
 
                 # TX Client
                 self.tx_client = OscTxClient(tx_host, tx_port)
                 self.tx_client.start()
-                self._tx_addr = f"{tx_host}:{tx_port}"
+                
+                with self._state_lock:
+                    self._tx_addr = f"{tx_host}:{tx_port}"
+                    
                 if LOCAL_DEBUG:
-                    osc_logger.success(f"🅾️📡✅ [OSC] TX CLIENT ACTIVE: "
-                                       f"{self._tx_addr}")
+                    logger.success(f"TX CLIENT ACTIVE: {self._tx_addr}")
 
                 # ⚡ STATUS MONITOR: Start periodic broadcast
                 threading.Thread(target=self._broadcast_status_loop, 
-                                 daemon=True).start()
+                                 daemon=True, name="OSC-StatusBroadcast").start()
 
             except Exception as e:
-                osc_logger.error(f"❌🚫🛑 [OSC] Bridge Start Failed: {e}")
+                logger.error(f"Bridge Start Failed: {e}")
         else:
             if LOCAL_DEBUG:
-                osc_logger.info("🅾️📡💻 [OSC] Bridge: Observer mode active.")
+                logger.info("Bridge: Observer mode active.")
 
     def stop(self):
-        self._running = False
+        with self._state_lock:
+            self._running = False
+            
         if self.rx_server: self.rx_server.stop()
         if self.tx_client: self.tx_client.stop()
-        osc_logger.warning("🅾️📡🛑 [OSC] Bridge Offline.")
+        logger.warning("Bridge Offline.")
 
     def handle_incoming_osc(self, address, value):
         # 1. Route Map
-        topic = self.osc_to_topic.get(address, f"OPEN-AIR/OSC{address}")
+        with self._state_lock:
+            topic = self.osc_to_topic.get(address, f"OPEN-AIR/OSC{address}")
         
         # ⚡ LOGGING: High-signal Firehose style
         if LOCAL_DEBUG:
-            osc_logger.debug(f"📥📡📥 [OSC] RX: {address} -> {value} "
-                             f"(Topic: {topic})")
+            logger.debug(f"RX: {address} -> {value} (Topic: {topic})")
         
         # ⚡ ANTI-FEEDBACK SPEC: Define identity at transport ingress
         meta = {
@@ -186,7 +207,10 @@ class OSCManager:
         Explicit publication method called by ProtocolRouter.
         Handles Internal -> External OSC Sync (OSC Out).
         """
-        if not self._running or not self.run_bridge or not self.tx_client:
+        with self._state_lock:
+            running = self._running
+            
+        if not running or not self.run_bridge or not self.tx_client:
             return
 
         meta = meta or {}
@@ -202,7 +226,7 @@ class OSCManager:
 
         # ⚡ LOGGING
         if LOCAL_DEBUG:
-            osc_logger.debug(f"📤📡📤 [OSC] TX: {address} <- {value}")
+            logger.debug(f"TX: {address} <- {value}")
         
         self.tx_client.send_message(address, value)
         
@@ -242,7 +266,8 @@ class OSCManager:
 
     def _on_protocol_event(self, msg):
         """Callback for all router traffic. Handles OSC status and monitor updates."""
-        if not self._running: return
+        with self._state_lock:
+            if not self._running: return
         
         source = msg.get("source", "UNKNOWN").upper()
         logical_source = msg.get("logical_source", source).upper()
@@ -265,13 +290,10 @@ class OSCManager:
                 self._notify_monitor("TX", meta.get("osc_address", topic), val, topic)
             return
 
-        # --- CASE 2: Internal -> External Sync ---
-        # ⚡ DEPRECATED: Now handled by explicit send() method.
-        pass
-
     def register_route(self, osc_address: str, topic: str):
-        self.osc_to_topic[osc_address] = topic
-        self.topic_to_osc[topic] = osc_address
+        with self._state_lock:
+            self.osc_to_topic[osc_address] = topic
+            self.topic_to_osc[topic] = osc_address
+            
         if LOCAL_DEBUG:
-            osc_logger.info(f"🗺️📡💻 [OSC] Route Registered: "
-                             f"{osc_address} <-> {topic}")
+            logger.info(f"Route Registered: {osc_address} <-> {topic}")

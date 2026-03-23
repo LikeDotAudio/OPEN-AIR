@@ -8,6 +8,10 @@ import asyncio
 import threading
 import queue
 from typing import Optional, Callable
+
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = True
+from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -97,7 +101,7 @@ class MqttConnectionManager:
         try:
             loop.run_until_complete(self._worker.run())
         except Exception as e:
-            logger.error(f"🚀🚫🛑 [MQTT] Thread Error: {e}")
+            MQTT_LOGGER.error(f"Thread Error: {e}")
         finally:
             loop.close()
             self._connected = False
@@ -106,4 +110,5 @@ class MqttConnectionManager:
         """Gracefully signals the worker to stop."""
         if self._worker and self._worker.loop and self._worker.stop_event:
             self._worker.loop.call_soon_threadsafe(self._worker.stop_event.set)
-        logger.debug("📡🔗👋 [MQTT] Disconnection initiated.")
+        if LOCAL_DEBUG:
+            MQTT_LOGGER.debug("Disconnection initiated.")

@@ -39,7 +39,7 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 from oaConfiguration.FileReaders.config_reader import Config
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import initialize_logging, set_log_directory, CORE_LOGGER
 from loguru import logger
 
 from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
@@ -86,7 +86,7 @@ def main():
     app_constants = Config.get_instance()
     
     if LOCAL_DEBUG:
-        logger.debug("⚡🛡️⚙️ [CORE] Starting OpenAir Core Service...")
+        CORE_LOGGER.debug("Starting OpenAir Core Service...")
 
     # 2. --- Liveness Monitoring ---
     # The heartbeat thread ensures the system can be reset by hardware if the
@@ -101,8 +101,7 @@ def main():
     managers = launch_core_managers(state_cache_manager, mqtt_connection_manager)
     
     if not managers:
-        logger.error("⚡🛡️⚙️ [CORE] CRITICAL: Manager launch failed. "
-                     "Core partition aborting.")
+        CORE_LOGGER.error("CRITICAL: Manager launch failed. Core partition aborting.")
         return
 
     # 4. --- Network Service Activation ---
@@ -111,7 +110,7 @@ def main():
         start_network_services()
 
     if LOCAL_DEBUG:
-        logger.success("✅ [SUCCESS] CORE: Service Operational. Watchdog Active.")
+        CORE_LOGGER.success("CORE: Service Operational. Watchdog Active.")
 
     # 5. --- Primary Execution Loop ---
     try:
@@ -123,23 +122,23 @@ def main():
             
     except KeyboardInterrupt:
         if LOCAL_DEBUG:
-            logger.debug("🛑 [CORE] Keyboard interrupt. Stopping...")
-    except Exception as e:
-        logger.exception("⚡ [CORE] CRITICAL: Unhandled exception in loop.")
+            CORE_LOGGER.debug("Keyboard interrupt. Stopping...")
+    except Exception:
+        CORE_LOGGER.exception("CRITICAL: Unhandled exception in loop.")
     finally:
         # 6. --- Graceful Finalization ---
         if LOCAL_DEBUG:
-            logger.debug("🔌 [CORE] Initiating teardown sequence...")
+            CORE_LOGGER.debug("Initiating teardown sequence...")
         
         # Stop all registered managers to ensure clean socket/thread closure.
         if managers:
             for name, manager in managers.items():
                 if manager and hasattr(manager, "stop") and callable(manager.stop):
                     if LOCAL_DEBUG:
-                        logger.debug(f"🔌 [CORE] Stopping '{name}'...")
+                        CORE_LOGGER.debug(f"Stopping '{name}'...")
                     try:
                         manager.stop()
-                    except Exception as shutdown_err:
+                    except Exception:
                         # Silently skip failed shutdowns during finalization.
                         pass
                     
@@ -150,7 +149,7 @@ def main():
         shutdown_publisher_worker()
         
         if LOCAL_DEBUG:
-            logger.success("👋 [SUCCESS] CORE: Shutdown sequence complete.")
+            CORE_LOGGER.success("CORE: Shutdown sequence complete.")
 
 if __name__ == "__main__":
     main()

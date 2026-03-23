@@ -95,6 +95,13 @@ class Config(ConfigDefaults):
         self.SCAN_OSC = self._s_get(config, "ScanSettings", "scan_osc", self.SCAN_OSC, "bool")
         self.SCAN_SNMP = self._s_get(config, "ScanSettings", "scan_snmp", self.SCAN_SNMP, "bool")
 
+    def _parse_visa_settings(self, config):
+        self.VISA_PROBE_PROTOCOL = self._s_get(config, "VISA", "probe_protocol", self.VISA_PROBE_PROTOCOL)
+        self.VISA_PROBE_PATH = self._s_get(config, "VISA", "probe_path", self.VISA_PROBE_PATH)
+
+    def _parse_snmp_settings(self, config):
+        self.SNMP_PORT = self._s_get(config, "SNMP", "snmp_port", self.SNMP_PORT, "int")
+
     def _parse_osc_settings(self, config):
         self.OSC_RX_PORT = self._s_get(config, "OSC", "osc_rx_port", self.OSC_RX_PORT, "int")
         self.OSC_TX_PORT = self._s_get(config, "OSC", "osc_tx_port", self.OSC_TX_PORT, "int")
@@ -119,6 +126,8 @@ class Config(ConfigDefaults):
         self._parse_font_settings(config)
         self._parse_mqtt_settings(config)
         self._parse_scan_settings(config)
+        self._parse_visa_settings(config)
+        self._parse_snmp_settings(config)
         self._parse_osc_settings(config)
 
         if LOCAL_DEBUG:

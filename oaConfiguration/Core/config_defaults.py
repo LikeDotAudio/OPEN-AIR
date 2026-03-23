@@ -49,6 +49,13 @@ class ConfigDefaults:
     SCAN_OSC = True
     SCAN_SNMP = True
 
+    # VISA Settings
+    VISA_PROBE_PROTOCOL = "http"
+    VISA_PROBE_PATH = "html/instrumentspage.html"
+
+    # SNMP Settings
+    SNMP_PORT = 161
+
     # OSC Settings
     OSC_RX_PORT = 8000
     OSC_TX_PORT = 9000

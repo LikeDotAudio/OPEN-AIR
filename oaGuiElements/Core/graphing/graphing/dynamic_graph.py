@@ -168,7 +168,9 @@ class FluxPlotter(
                 obj = self.ax.axvline(x=val, color=col, linewidth=1, label=label, picker=5) if m_type == 'x' else self.ax.axhline(y=val, color=col, linewidth=1, label=label, picker=5)
                 self.marker_objects.append(obj)
             self.canvas.draw_idle()
-        except Exception: pass
+        except Exception:
+            from oaLogging.Entry import vocal_capture
+            vocal_capture("GRAPH", "Failed to parse or update markers from marker_var.")
 
     def _update_marker_value(self, l, v):
         d = self.marker_var.get()

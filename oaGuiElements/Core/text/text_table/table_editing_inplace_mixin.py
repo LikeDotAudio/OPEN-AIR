@@ -11,7 +11,7 @@ import re
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import TABLE_LOGGER
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -92,7 +92,7 @@ class TableEditingInplaceMixin:
         # Bind Shift-Return for auto-incrementing and committing
         self.editing_entry.bind("<Shift-Return>", self._on_entry_commit)
 
-        if LOCAL_DEBUG: logger.debug(f"📝 Starting edit for row {row_id}, col {col} with value '{current_value}'")
+        if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Starting edit for row {row_id}, col {col} with value '{current_value}'")
 
     # Commits the changes made in the in-place editor to the Treeview and MQTT.
     # This method updates the Treeview cell with the new value, records the change
@@ -146,9 +146,9 @@ class TableEditingInplaceMixin:
             self.state_mirror_engine.publish_command(
                 field_topic, orjson.dumps(row_data).decode()
             )  # publish_payload from state_mirror_engine
-            if LOCAL_DEBUG: logger.debug(f"MQTT Updated: topic='{field_topic}', payload='{row_data}'")
+            if LOCAL_DEBUG: TABLE_LOGGER.debug(f"MQTT Updated: topic='{field_topic}', payload='{row_data}'")
 
-        if LOCAL_DEBUG: logger.debug(f"💾 Committed edit: row {self.active_row}, col {display_col_name}, new value {new_value}")
+        if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Committed edit: row {self.active_row}, col {display_col_name}, new value {new_value}")
         self.destroy_entry()
 
     # Handles the commit of the in-place editor entry.
@@ -166,7 +166,7 @@ class TableEditingInplaceMixin:
 
         if event and event.keysym == "Return" and (event.state & 0x0001):
             new_value = self._increment_string_with_trailing_digits(new_value)
-            if LOCAL_DEBUG: logger.debug(f"Auto-incremented value to: {new_value}")
+            if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Auto-incremented value to: {new_value}")
 
         self.commit_edit(new_value)
 
@@ -183,7 +183,7 @@ class TableEditingInplaceMixin:
             self.editing_entry = None
             self.active_row = None
             self.active_col = None
-            if LOCAL_DEBUG: logger.debug("📝 Editing entry destroyed.")
+            if LOCAL_DEBUG: TABLE_LOGGER.debug("Editing entry destroyed.")
 
     # Increments any trailing digits in a string.
     # This helper function is used for auto-incrementing cell values. If the string

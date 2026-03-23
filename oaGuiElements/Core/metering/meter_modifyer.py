@@ -206,5 +206,8 @@ class MeterModifier:
         # Ensure it's below needles but above the base patina slice
         canvas.tag_lower(mask_id)
         # If there's a base slice, make sure the mask is ABOVE it
-        try: canvas.tag_raise(mask_id, "panel_bg_slice")
-        except: pass
+        try: 
+            canvas.tag_raise(mask_id, "panel_bg_slice")
+        except Exception as e:
+            from oaLogging.Entry import logger
+            logger.trace(f"MeterModifier: Failed to raise mask above panel_bg_slice: {e}")

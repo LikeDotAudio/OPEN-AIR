@@ -7,6 +7,10 @@
 import asyncio
 import aiomqtt
 import queue
+
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = True
+from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
 from ..Core.mqtt_message import MqttMessage
 from ..Constants.mqtt_config import TOPIC_STATUS, PAYLOAD_OFFLINE, WORKER_KICK_TIMEOUT
@@ -44,7 +48,8 @@ class MqttAsyncWorker:
                 self.client = client
                 self.manager.client = client
                 self.manager._connected = True
-                logger.success("🚀🆗✅ [SUCCESS] aiomqtt: Connected to broker.")
+                if LOCAL_DEBUG:
+                    MQTT_LOGGER.success("aiomqtt: Connected to broker.")
                 
                 if self.manager.subscriber_router:
                     await self.manager.subscriber_router.resubscribe_all_topics(client)
@@ -63,7 +68,7 @@ class MqttAsyncWorker:
                 await asyncio.gather(*pending, return_exceptions=True)
                 
         except Exception as e:
-            logger.error(f"🚀🚫🛑 [MQTT] Worker failure: {e}")
+            MQTT_LOGGER.error(f"Worker failure: {e}")
         finally:
             self.manager._connected = False
             self.manager.client = None
@@ -99,7 +104,7 @@ class MqttAsyncWorker:
                     try:
                         await client.subscribe(job["topic"], qos=job["qos"])
                     except Exception as e:
-                        logger.error(f"🚀🚫🛑 [MQTT] Subscribe Error: {e}")
+                        MQTT_LOGGER.error(f"Subscribe Error: {e}")
                     finally:
                         with self.manager._pending_lock:
                             self.manager._pending_subscriptions.discard(job["topic"])
@@ -111,7 +116,7 @@ class MqttAsyncWorker:
                     try:
                         await client.publish(topic, payload=payload, qos=qos, retain=retain)
                     except Exception as e:
-                        logger.error(f"🚀🚫🛑 [MQTT] Publish Error: {e}")
+                        MQTT_LOGGER.error(f"Publish Error: {e}")
         except asyncio.CancelledError: pass
 
     def _parse_publish_item(self, item):

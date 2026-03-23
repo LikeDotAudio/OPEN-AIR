@@ -1,0 +1,18 @@
+OPENAIR-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    MODULE-IDENTITY, OBJECT-TYPE, enterprises FROM SNMPv2-SMI
+    DisplayString FROM SNMPv2-TC;
+
+openAirMIB MODULE-IDENTITY
+    LAST-UPDATED "202603230817Z"
+    ORGANIZATION "OPEN-AIR Project"
+    CONTACT-INFO "Anthony Peter Kuzub"
+    DESCRIPTION "MQTT-Aligned OID Tree for OPEN-AIR."
+    REVISION "202603230817Z"
+    DESCRIPTION "Strictly unique path-aligned generation."
+    ::= { enterprises 25030 }
+
+v1 OBJECT IDENTIFIER ::= { openAirMIB 1 }
+
+END

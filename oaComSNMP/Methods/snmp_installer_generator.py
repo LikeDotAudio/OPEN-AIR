@@ -13,6 +13,9 @@ class InstallerGenerator:
         Generates a complete Bash Installer Script for the SNMP Manager.
         Updated to ensure path references are relative to the project root.
         """
+        from oaConfiguration.FileReaders.config_reader import Config
+        cfg = Config.get_instance()
+
         # Construct the relative path for the master script.
         # We assume master_script_path is provided relative to the project root.
         # Ensure it's prefixed with './' if it doesn't start with '.' or '/'.
@@ -46,7 +49,7 @@ class InstallerGenerator:
             "# Inject Fresh Master Bridge",
             "sudo tee -a $CONF_FILE > /dev/null <<EOT",
             "# --- BEGIN OPEN-AIR ---",
-            "agentAddress udp:161",
+            f"agentAddress udp:{cfg.SNMP_PORT}",
             "view   all   included   .1",
             "rocommunity public default -V all",
             "rwcommunity private default -V all",

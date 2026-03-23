@@ -67,8 +67,8 @@ class ModuleLoader:
                     return obj
             return None
         except Exception as e:
-            if LOCAL_DEBUG:
-                logger.error(f"❌ [IMPORT] Failed to load module {path}: {e}")
+            from oaLogging.Entry import vocal_capture
+            vocal_capture("BUILDER", f"Failed to load module from {path}")
             return None
 
     def instantiate_widget(self, widget_class, parent_widget, path_ref):
@@ -124,7 +124,10 @@ class ModuleLoader:
                 if found_json: json_path = sorted(found_json)[0]
                 elif found_py: python_path = sorted(found_py)[0]
                 else: return None
-            except (FileNotFoundError, PermissionError): return None
+            except (FileNotFoundError, PermissionError) as e: 
+                from oaLogging.Entry import logger
+                logger.warning(f"ModuleLoader: Cannot access directory {path_str}: {e}")
+                return None
 
         elif path.is_file():
             if path.suffix == ".json" and path.name != "layout.json": json_path = path
@@ -159,7 +162,8 @@ class ModuleLoader:
                 if LOCAL_DEBUG: logger.success(f"🏗️🪟✨{json_path}!")
                 return instance
             except Exception as e:
-                if LOCAL_DEBUG: logger.exception(f"❌ Error instantiating UniversalGuiLoader for '{json_path}'")
+                from oaLogging.Entry import vocal_capture
+                vocal_capture("UI", f"Error instantiating UniversalGuiLoader for '{json_path}'")
                 return None
 
         return None

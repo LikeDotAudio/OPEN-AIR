@@ -5,6 +5,7 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
+from oaLogging.Core.logger import BUILDER_LOGGER
 from loguru import logger
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
@@ -56,7 +57,7 @@ class BaseWidgetCreator(TransparencyMixin):
             return widget
 
         except Exception as e:
-            logger.exception(f"❌ {cls.__name__}: Error building widget '{label}' at {path}: {e}")
+            BUILDER_LOGGER.exception(f"{cls.__name__}: Error building widget '{label}' at {path}: {e}")
             return None
 
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):

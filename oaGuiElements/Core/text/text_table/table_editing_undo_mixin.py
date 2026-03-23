@@ -10,7 +10,7 @@ import orjson
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import TABLE_LOGGER
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -70,9 +70,9 @@ class TableEditingUndoMixin:
                 mqtt_publisher_service.publish_payload(
                     field_topic, orjson.dumps(row_data_after_undo).decode()
                 )
-                if LOCAL_DEBUG: logger.debug(f"MQTT Reverted: topic='{field_topic}', payload='{row_data_after_undo}'")
+                if LOCAL_DEBUG: TABLE_LOGGER.debug(f"MQTT Reverted: topic='{field_topic}', payload='{row_data_after_undo}'")
 
-            if LOCAL_DEBUG: logger.success("⏪ Undo successful!")
+            if LOCAL_DEBUG: TABLE_LOGGER.success("Undo successful!")
         elif last_action["action"] == "delete":
             # Revert Tree: Re-insert the row
             device_key = last_action["device_key"]
@@ -93,8 +93,8 @@ class TableEditingUndoMixin:
                 mqtt_publisher_service.publish_payload(
                     field_topic, orjson.dumps(old_row_data).decode()
                 )
-                if LOCAL_DEBUG: logger.debug(f"MQTT Restored (Undo Delete): topic='{field_topic}', payload='{old_row_data}'")
-            if LOCAL_DEBUG: logger.debug(f"⏪ Undo: Re-inserted row for device {device_key}.")
+                if LOCAL_DEBUG: TABLE_LOGGER.debug(f"MQTT Restored (Undo Delete): topic='{field_topic}', payload='{old_row_data}'")
+            if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Undo: Re-inserted row for device {device_key}.")
         elif last_action["action"] == "add":
             item_id = last_action["item_id"]
             device_key = last_action["device_key"]
@@ -107,5 +107,5 @@ class TableEditingUndoMixin:
                     mqtt_publisher_service.publish_payload(
                         field_topic, orjson.dumps({}).decode()
                     )  # Publish empty dict for clear
-                    if LOCAL_DEBUG: logger.debug(f"MQTT Removed (Undo Add): topic='{field_topic}', payload='{{}}'")
-                if LOCAL_DEBUG: logger.debug(f"⏪ Undo: Removed added row with item_id: {item_id}, device_key: {device_key}.")
+                    if LOCAL_DEBUG: TABLE_LOGGER.debug(f"MQTT Removed (Undo Add): topic='{field_topic}', payload='{{}}'")
+                if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Undo: Removed added row with item_id: {item_id}, device_key: {device_key}.")

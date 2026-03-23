@@ -61,8 +61,12 @@ class SplashScreen:
             self.status_label.place(relx=0.5, rely=0.8, anchor="center")
         
         self.status_label.config(text=message)
-        try: self.win.update(); self.win.update_idletasks()
-        except: pass
+        try: 
+            self.win.update()
+            self.win.update_idletasks()
+        except Exception as e:
+            from oaLogging.Entry import logger
+            logger.trace(f"SplashScreen: Silently ignoring update error (possibly destroyed): {e}")
 
     def hide(self):
         """Safely dismisses the splash screen."""

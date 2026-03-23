@@ -78,7 +78,9 @@ class VisaScanner:
 
     def get_gateway_inventory(self, ip):
         """Scrapes a VXI-11 gateway (like E5810A) for its instrument list."""
-        url = f"http://{ip}/html/instrumentspage.html"
+        from oaConfiguration.FileReaders.config_reader import Config
+        cfg = Config.get_instance()
+        url = f"{cfg.VISA_PROBE_PROTOCOL}://{ip}/{cfg.VISA_PROBE_PATH}"
         params = {"whichbutton": "find", "timeout": "5"}
         full_url = f"{url}?{urllib.parse.urlencode(params)}"
         targets = []

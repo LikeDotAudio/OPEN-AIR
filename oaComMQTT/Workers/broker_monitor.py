@@ -5,7 +5,7 @@
 # Description: Monitors the Mosquitto broker's $SYS topics to provide real-time statistics.
 
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -27,7 +27,7 @@ class BrokerMonitor:
         # We subscribe to wildcard to catch everything useful
         self.subscriber_router.subscribe_to_topic("$SYS/broker/#", self._on_sys_message)
         
-        if LOCAL_DEBUG: logger.debug("🕵️ BrokerMonitor initialized and listening to $SYS/broker/#")
+        if LOCAL_DEBUG: MQTT_LOGGER.debug("BrokerMonitor initialized and listening to $SYS/broker/#")
 
     def register_observer(self, callback):
         """Register a GUI callback to receive stats updates."""
@@ -53,9 +53,8 @@ class BrokerMonitor:
         for callback in self._observers:
             try:
                 callback(self._stats)
-            except Exception as e:
-                if LOCAL_DEBUG:
-                    logger.exception("❌ Error notifying BrokerMonitor observer")
+            except Exception:
+                MQTT_LOGGER.exception("Error notifying BrokerMonitor observer")
 
     def get_stats(self):
         return self._stats

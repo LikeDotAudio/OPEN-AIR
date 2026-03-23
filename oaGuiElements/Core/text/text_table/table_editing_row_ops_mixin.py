@@ -10,7 +10,7 @@ import orjson
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import TABLE_LOGGER
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -39,7 +39,7 @@ class TableEditingRowOpsMixin:
     # Outputs:
     #     None.
     def add_row(self):
-        if LOCAL_DEBUG: logger.debug("➕ Adding new row.")
+        if LOCAL_DEBUG: TABLE_LOGGER.debug("Adding new row.")
 
         # Determine next available device_key (simple incremental for now)
         next_device_num = 1
@@ -85,9 +85,9 @@ class TableEditingRowOpsMixin:
             mqtt_publisher_service.publish_payload(
                 field_topic, orjson.dumps(new_row_data).decode()
             )
-            if LOCAL_DEBUG: logger.debug(f"MQTT Added: topic='{field_topic}', payload='{new_row_data}'")
+            if LOCAL_DEBUG: TABLE_LOGGER.debug(f"MQTT Added: topic='{field_topic}', payload='{new_row_data}'")
 
-        if LOCAL_DEBUG: logger.debug(f"➕ Added new row with item_id: {new_item_id}, device_key: {device_key}")
+        if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Added new row with item_id: {new_item_id}, device_key: {device_key}")
 
         # Select the new row and start editing the first cell
         self.tree.selection_set(new_item_id)
@@ -105,7 +105,7 @@ class TableEditingRowOpsMixin:
     def delete_selection(self, event=None):
         selected_items = self.tree.selection()
         if not selected_items:
-            if LOCAL_DEBUG: logger.debug("🗑️ No items selected for deletion.")
+            if LOCAL_DEBUG: TABLE_LOGGER.debug("No items selected for deletion.")
             return
 
         for item_id in selected_items:
@@ -134,13 +134,13 @@ class TableEditingRowOpsMixin:
                     mqtt_publisher_service.publish_payload(
                         field_topic, orjson.dumps({}).decode()
                     )  # Publish empty dict for clear
-                if LOCAL_DEBUG: logger.debug(f"MQTT Deleted: topic='{field_topic}', payload='{{}}'")
+                if LOCAL_DEBUG: TABLE_LOGGER.debug(f"MQTT Deleted: topic='{field_topic}', payload='{{}}'")
 
             # Delete from Treeview
             self.tree.delete(item_id)
-            if LOCAL_DEBUG: logger.debug(f"🗑️ Deleted row {item_id} (Device Key: {device_key}).")
+            if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Deleted row {item_id} (Device Key: {device_key}).")
 
-        if LOCAL_DEBUG: logger.debug("🗑️ Delete selection completed.")
+        if LOCAL_DEBUG: TABLE_LOGGER.debug("Delete selection completed.")
 
     # Imports data from a list of dictionaries into the Treeview table.
     # This method processes a list of dictionaries (e.g., from a CSV import),
@@ -151,7 +151,7 @@ class TableEditingRowOpsMixin:
     # Outputs:
     #     None.
     def import_data(self, data_list):
-        if LOCAL_DEBUG: logger.debug(f"➕ Importing {len(data_list)} new rows.")
+        if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Importing {len(data_list)} new rows.")
 
         headers = self.tree["columns"]
 
@@ -194,5 +194,5 @@ class TableEditingRowOpsMixin:
                 mqtt_publisher_service.publish_payload(
                     field_topic, orjson.dumps(row_data_dict).decode()
                 )
-                if LOCAL_DEBUG: logger.debug(f"MQTT Imported: topic='{field_topic}', payload='{row_data_dict}'")
-        if LOCAL_DEBUG: logger.debug(f"➕ Finished importing {len(data_list)} rows.")
+                if LOCAL_DEBUG: TABLE_LOGGER.debug(f"MQTT Imported: topic='{field_topic}', payload='{row_data_dict}'")
+        if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Finished importing {len(data_list)} rows.")

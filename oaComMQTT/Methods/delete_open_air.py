@@ -8,8 +8,8 @@ import time
 import threading
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+LOCAL_DEBUG = True
+from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -27,7 +27,7 @@ class OpenAirTerminator:
         Starts the process: Subscribe -> Collect -> Delete.
         Runs in a background thread to avoid blocking GUI.
         """
-        if LOCAL_DEBUG: logger.debug("⚠️ INITIATING OPEN-AIR TOPIC DELETION SEQUENCE ⚠️")
+        if LOCAL_DEBUG: MQTT_LOGGER.debug("INITIATING OPEN-AIR TOPIC DELETION SEQUENCE")
         threading.Thread(target=self._execution_thread, daemon=True).start()
 
     def _execution_thread(self):
@@ -67,14 +67,13 @@ class OpenAirTerminator:
                 try:
                     self.client.publish(topic, payload=None, qos=1, retain=True)
                     count += 1
-                except Exception as e:
-                    if LOCAL_DEBUG:
-                        logger.exception("❌ Error deleting topic {topic}")
+                except Exception:
+                    MQTT_LOGGER.exception(f"Error deleting topic {topic}")
             # Sleep slightly to avoid flooding if massive
             if count % 100 == 0:
                 time.sleep(0.1)
         
-        if LOCAL_DEBUG: logger.debug(f"🗑️ Deleted {count} topics from OPEN-AIR tree.")
+        if LOCAL_DEBUG: MQTT_LOGGER.debug(f"Deleted {count} topics from OPEN-AIR tree.")
 
 # Standalone function for easy import
 def delete_open_air_tree(mqtt_connection_manager, state_cache_manager=None):
@@ -84,7 +83,7 @@ def delete_open_air_tree(mqtt_connection_manager, state_cache_manager=None):
     """
     client = mqtt_connection_manager.get_client_instance()
     if not client:
-        logger.error("❌ Cannot delete: No MQTT Client connected.")
+        MQTT_LOGGER.error("Cannot delete: No MQTT Client connected.")
         return
 
     topics = []
@@ -92,9 +91,9 @@ def delete_open_air_tree(mqtt_connection_manager, state_cache_manager=None):
         # Get all known topics from the cache
         # state_cache_manager.cache is a dict of topic->value
         topics = list(state_cache_manager.cache.keys())
-        if LOCAL_DEBUG: logger.debug(f"📋 Sourced {len(topics)} topics from State Cache for deletion.")
+        if LOCAL_DEBUG: MQTT_LOGGER.debug(f"Sourced {len(topics)} topics from State Cache for deletion.")
     else:
-        if LOCAL_DEBUG: logger.debug("⚠️ No State Cache provided. Cannot determine topics to delete.")
+        if LOCAL_DEBUG: MQTT_LOGGER.debug("No State Cache provided. Cannot determine topics to delete.")
         # Fallback or error? For safety, we won't blindly guess.
         return
 

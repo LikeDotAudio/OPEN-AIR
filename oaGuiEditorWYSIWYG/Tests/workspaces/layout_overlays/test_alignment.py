@@ -7,23 +7,15 @@
 # They need to be rewritten.
 #
 # -----------------------------------------------------------------
-#import unittest
-#import tkinter as tk
-#from unittest.mock import MagicMock
-#from oaGuiEditorWYSIWYG.workspaces.layout_overlays.alignment import AlignmentOverlay
 #
-#class TestAlignmentOverlay(unittest.TestCase):
 #
-#    def setUp(self):
 #        self.root = tk.Tk()
 #        self.root.withdraw()
 #        self.canvas = MagicMock(spec=tk.Canvas)
 #        self.overlay = AlignmentOverlay(self.canvas)
 #
-#    def tearDown(self):
 #        self.root.destroy()
 #        
-#    def test_draw_alignment_guides(self):
 #        """Test drawing alignment guides for a selected widget."""
 #        # Bounding box of the selected widget
 #        widget_bbox = (50, 50, 150, 100)
@@ -43,10 +35,8 @@
 #        self.assertEqual(args[1], 75) # y-coordinate of horizontal line
 #        self.assertEqual(kwargs['tags'], 'alignment_guide')
 #
-#    def test_clear_guides(self):
 #        """Test clearing the alignment guides."""
 #        self.overlay.clear()
 #        self.canvas.delete.assert_called_once_with('alignment_guide')
 #
-#if __name__ == '__main__':
 #    unittest.main()

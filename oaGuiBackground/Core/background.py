@@ -26,8 +26,10 @@ class BuilderBackgroundManagerMixin:
         """Removes the generated panel background and restores the theme default."""
         if LOCAL_DEBUG: builder_logger.trace(f"🎨🧹✨ [BUILDER] Clearing panel background for '{getattr(self, 'tab_name', 'Unknown')}'")
         if hasattr(self, 'panel_bg_label') and self.panel_bg_label:
-            try: self.panel_bg_label.destroy()
-            except: pass
+            try: 
+                self.panel_bg_label.destroy()
+            except Exception as e:
+                builder_logger.trace(f"🎨 Clean: Label already gone or failed to destroy: {e}")
             self.panel_bg_label = None
         
         self.panel_bg_image = None

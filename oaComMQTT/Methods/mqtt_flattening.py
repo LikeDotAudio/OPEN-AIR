@@ -9,12 +9,10 @@ import inspect
 import orjson
 
 # --- Module Imports ---
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = True
+from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
-
-
-# --- Global Scope Variables ---
-LOCAL_DEBUG = True   
 
 
 class MqttDataFlattenerUtility:
@@ -49,7 +47,7 @@ class MqttDataFlattenerUtility:
         Clears the internal data buffer.
         """
         if LOCAL_DEBUG:
-            logger.debug("🟢️️️🔍 The data buffer has been wiped clean. A fresh start for our experiments!")
+            MQTT_LOGGER.debug("The data buffer has been wiped clean.")
         self.data_buffer = {}
         self.last_unique_identifier = None
 
@@ -86,7 +84,7 @@ class MqttDataFlattenerUtility:
                 return self._flush_buffer()
             else:
                 if LOCAL_DEBUG:
-                    logger.debug("🟢️️️🟡 Flush command received, but buffer is empty. Nothing to do.")
+                    MQTT_LOGGER.debug("Flush command received, but buffer is empty. Nothing to do.")
                 return []
 
         try:
@@ -98,12 +96,12 @@ class MqttDataFlattenerUtility:
                 and isinstance(data, dict)
                 and data.get("value") == "false"
             ):
-                if LOCAL_DEBUG: logger.debug(f"🟡 Skipping transaction for '{topic}' because 'Active' is false.")
+                if LOCAL_DEBUG: MQTT_LOGGER.debug(f"Skipping transaction for '{topic}' because 'Active' is false.")
                 self.clear_buffer()
                 return []
 
             if LOCAL_DEBUG:
-                logger.debug(f"🟢️️️🔵 Received data for '{topic}'. Storing in buffer. Payload: {payload}")
+                MQTT_LOGGER.debug(f"Received data for '{topic}'. Storing in buffer.")
 
             # Extract the unique data set identifier (the second-to-last node)
             relative_topic = topic.replace(f"{topic_prefix}/", "", 1)
@@ -128,15 +126,11 @@ class MqttDataFlattenerUtility:
             return []
 
         except orjson.JSONDecodeError as e:
-            logger.error(f"❌ Error decoding JSON payload for topic '{topic}': {e}")
-            if LOCAL_DEBUG:
-                logger.error(f"❌ The JSON be a-sailing to its doom! The error be: {e}")
+            MQTT_LOGGER.error(f"Error decoding JSON payload for topic '{topic}': {e}")
             self.clear_buffer()
             return []
-        except Exception as e:
-            logger.exception("❌ Error in {current_function_name}")
-            if LOCAL_DEBUG:
-                logger.exception("❌ Arrr, the code be capsized! The error be")
+        except Exception:
+            MQTT_LOGGER.exception(f"Error in {current_function_name}")
             self.clear_buffer()
             return []
 
@@ -157,7 +151,7 @@ class MqttDataFlattenerUtility:
         current_function_name = inspect.currentframe().f_code.co_name
 
         if LOCAL_DEBUG:
-            logger.debug("🟢️️️🟢 Processing buffer and commencing pivoting and flattening!")
+            MQTT_LOGGER.debug("Processing buffer and commencing pivoting and flattening.")
 
         flattened_data = {}
         flattened_data["Parameter"] = self.last_unique_identifier
@@ -184,7 +178,7 @@ class MqttDataFlattenerUtility:
             self.last_unique_identifier = new_identifier
 
         if LOCAL_DEBUG:
-            logger.success("🟢️️️✅ Behold! I have transmogrified the data! The final payload is below.")
+            MQTT_LOGGER.success("Data transmogrification complete.")
 
-        if LOCAL_DEBUG: logger.debug(orjson.dumps(flattened_data, indent=2))
+        if LOCAL_DEBUG: MQTT_LOGGER.debug(orjson.dumps(flattened_data, indent=2).decode())
         return [flattened_data]

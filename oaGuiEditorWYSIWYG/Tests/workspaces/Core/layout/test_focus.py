@@ -7,14 +7,8 @@
 # They need to be rewritten.
 #
 # -----------------------------------------------------------------
-#import unittest
-#import tkinter as tk
-#from unittest.mock import MagicMock
-#from oaGuiEditorWYSIWYG.workspaces.Core.layout.focus import FocusManager
 #
-#class TestFocusManager(unittest.TestCase):
 #
-#    def setUp(self):
 #        self.root = tk.Tk()
 #        self.root.withdraw()
 #        self.canvas = tk.Canvas(self.root)
@@ -24,10 +18,8 @@
 #        self.item1 = self.canvas.create_rectangle(10, 10, 20, 20, tags=("widget1",))
 #        self.item2 = self.canvas.create_rectangle(30, 30, 40, 40, tags=("widget2",))
 #
-#    def tearDown(self):
 #        self.root.destroy()
 #        
-#    def test_set_focus(self):
 #        """Test setting focus on a canvas item."""
 #        self.focus_manager.set_focus(self.item1)
 #        
@@ -44,7 +36,6 @@
 #        # Ring coords should be slightly larger than item coords
 #        self.assertTrue(ring_coords[0] < item_coords[0])
 #
-#    def test_clear_focus(self):
 #        """Test clearing focus from an item."""
 #        self.focus_manager.set_focus(self.item1)
 #        self.assertIsNotNone(self.focus_manager.get_focused_item())
@@ -54,7 +45,6 @@
 #        self.assertIsNone(self.focus_manager.get_focused_item())
 #        self.assertEqual(len(self.canvas.find_withtag("focus_ring")), 0)
 #        
-#    def test_focus_change(self):
 #        """Test moving focus from one item to another."""
 #        self.focus_manager.set_focus(self.item1)
 #        initial_ring = self.canvas.find_withtag("focus_ring")[0]
@@ -69,5 +59,4 @@
 #        self.assertNotEqual(initial_ring, new_ring)
 #        self.assertEqual(self.focus_manager.get_focused_item(), self.item2)
 #
-#if __name__ == '__main__':
 #    unittest.main()

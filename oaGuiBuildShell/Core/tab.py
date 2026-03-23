@@ -73,6 +73,7 @@ class TabManagerMixin:
 
     def _on_notebook_right_click(self, event):
         """Handles right-click on notebook tabs."""
+        from oaLogging.Entry import vocal_capture
         try:
             notebook = event.widget
             index = notebook.index(f"@{event.x},{event.y}")
@@ -80,7 +81,7 @@ class TabManagerMixin:
             tab_frame = notebook.nametowidget(tab_id)
             self._trigger_wysiwyg_editor(tab_frame)
         except Exception:
-            pass
+            vocal_capture("UI", "Failed to trigger WYSIWYG editor from right-click.")
 
     def _trigger_wysiwyg_editor(self, widget):
         """Traverses widget hierarchy to find and invoke editor."""

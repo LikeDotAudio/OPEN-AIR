@@ -7,29 +7,20 @@
 # They need to be rewritten.
 #
 # -----------------------------------------------------------------
-#import unittest
-#import tkinter as tk
-#from unittest.mock import MagicMock
-#from oaGuiEditorWYSIWYG.workspaces.element_properties import ElementProperties
 #
-#class TestElementProperties(unittest.TestCase):
 #
-#    def setUp(self):
 #        self.root = tk.Tk()
 #        self.root.withdraw()
 #        self.mock_event_bus = MagicMock()
 #
-#    def tearDown(self):
 #        self.root.destroy()
 #
-#    def test_properties_view_creation(self):
 #        """Test the creation of the properties view."""
 #        props_view = ElementProperties(self.root, self.mock_event_bus)
 #        self.assertIsInstance(props_view, tk.Frame)
 #        # Check for a label since it's a simple initial state
 #        self.assertTrue(any(isinstance(w, tk.Label) for w in props_view.winfo_children()))
 #
-#    def test_on_widget_selected_displays_properties(self):
 #        """Test that selecting a widget displays its properties in entry fields."""
 #        props_view = ElementProperties(self.root, self.mock_event_bus)
 #        
@@ -46,8 +37,6 @@
 #        entries = {w.cget("text"): w for w in props_view.winfo_children() if isinstance(w, tk.Label)}
 #        # find the entry that corresponds to the 'text' property
 #        text_entry = None
-#        for child in props_view.winfo_children():
-#            if isinstance(child, tk.Entry):
 #                # This is fragile, depends on layout. A better way is to store refs to entries.
 #                # Assuming entry is placed and we can find it
 #                text_entry = child
@@ -59,7 +48,6 @@
 #        self.assertFalse(any(w.cget("text") == "Select a widget to see its properties." for w in props_view.winfo_children()))
 #        self.assertGreater(len(props_view.winfo_children()), 1)
 #
-#    def test_update_property_publishes_event(self):
 #        """Test that updating a property entry and hitting enter publishes an event."""
 #        props_view = ElementProperties(self.root, self.mock_event_bus)
 #        
@@ -82,5 +70,4 @@
 #            {"id": "btn1", "property": "text", "value": "New Text"}
 #        )
 #
-#if __name__ == '__main__':
 #    unittest.main()

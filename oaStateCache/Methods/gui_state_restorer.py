@@ -55,7 +55,9 @@ def restore_timeline(cache_data: Dict[str, Any], state_mirror_engine: Any) -> No
                 
                 if isinstance(data, dict) and "val" in data:
                     val_str = f" Val={data['val']}"
-            except: pass
+            except Exception as e:
+                # ⚡ VOCAL: Cosmetic failure (just for cleaner logging), so trace is sufficient
+                logger.trace(f"Cosmetic: Failed to extract 'val' for replaying log: {e}")
 
             if LOCAL_DEBUG: logger.trace(f"⏪🔄 Topic='{topic}'{val_str}")
             # ⚡ REFACTORED: Wrap in MqttMessage for Partitioned Architecture compatibility

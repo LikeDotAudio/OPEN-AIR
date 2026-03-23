@@ -7,23 +7,15 @@
 # They need to be rewritten.
 #
 # -----------------------------------------------------------------
-#import unittest
-#import tkinter as tk
-#from unittest.mock import MagicMock
-#from oaGuiEditorWYSIWYG.workspaces.layout_overlays.colors import ColorsOverlay
 #
-#class TestColorsOverlay(unittest.TestCase):
 #
-#    def setUp(self):
 #        self.root = tk.Tk()
 #        self.root.withdraw()
 #        self.canvas = MagicMock(spec=tk.Canvas)
 #        self.overlay = ColorsOverlay(self.canvas)
 #
-#    def tearDown(self):
 #        self.root.destroy()
 #        
-#    def test_draw_color_swatches(self):
 #        """Test drawing color swatches next to widgets."""
 #        widget_tree = {
 #            "id": "root", "bbox": (0, 0, 400, 400), "background": "#ffffff",
@@ -43,10 +35,8 @@
 #        self.assertEqual(kwargs['fill'], '#ff0000')
 #        self.assertEqual(kwargs['tags'], 'color_overlay')
 #
-#    def test_clear_colors(self):
 #        """Test clearing the color swatches."""
 #        self.overlay.clear()
 #        self.canvas.delete.assert_called_once_with('color_overlay')
 #
-#if __name__ == '__main__':
 #    unittest.main()

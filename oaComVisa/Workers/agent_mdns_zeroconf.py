@@ -80,7 +80,8 @@ def _check_host(ip):
         if result == 0:
             is_gateway = False
             try:
-                url = f"http://{ip}/html/instrumentspage.html"
+                cfg = Config.get_instance()
+                url = f"{cfg.VISA_PROBE_PROTOCOL}://{ip}/{cfg.VISA_PROBE_PATH}"
                 with urllib.request.urlopen(url, timeout=1) as resp:
                     if "E5810" in resp.read().decode("utf-8", errors="ignore"):
                         is_gateway = True

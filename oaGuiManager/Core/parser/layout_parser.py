@@ -13,7 +13,7 @@ from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import LAYOUT_LOGGER
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -162,7 +162,7 @@ class LayoutParser:
              return self._parse_directory_listing(source_path)
 
 
-        if LOCAL_DEBUG: logger.debug(f"🗺️ Parsed layout data for '{source_path}': Type='{layout_type}', Data={orjson.dumps(parsed_data, default=str).decode()}")
+        if LOCAL_DEBUG: LAYOUT_LOGGER.debug(f"Parsed layout data for '{source_path}': Type='{layout_type}', Data={orjson.dumps(parsed_data, default=str).decode()}")
         return {"type": layout_type, "data": parsed_data}
 
     def _parse_directory_listing(self, path: pathlib.Path) -> dict:
@@ -171,11 +171,11 @@ class LayoutParser:
         This handles the case where no layout.json is present.
         It uses a chain of responsibility: checks for splits, then notebooks, then defaults.
         """
-        if LOCAL_DEBUG: logger.debug(f"📂 Parsing directory listing via naming convention for: '{path}'")
+        if LOCAL_DEBUG: LAYOUT_LOGGER.debug(f"Parsing directory listing via naming convention for: '{path}'")
         try:
             sub_dirs = sorted([d for d in path.iterdir() if d.is_dir() and not d.name.startswith('.') and not d.name.startswith('__')])
         except FileNotFoundError:
-            logger.error(f"❌ Error: Directory not found for parsing: {path}")
+            LAYOUT_LOGGER.error(f"Error: Directory not found for parsing: {path}")
             return {"type": "error", "data": {"error_message": "Directory not found."}}
 
         # 1. Check for Split-Pane Layout
@@ -210,7 +210,7 @@ class LayoutParser:
                 parsed_data["panels"].append({"path": sub_dir, "weight": percentage})
                 parsed_data["panel_percentages"].append(percentage)
             
-            if LOCAL_DEBUG: logger.debug(f"🗺️ Parsed '{layout_type}' from dir names '{path}'")
+            if LOCAL_DEBUG: LAYOUT_LOGGER.debug(f"Parsed '{layout_type}' from dir names '{path}'")
             return {"type": layout_type, "data": parsed_data}
 
         # 2. Check for Notebook Layout (Numerical Prefix)
@@ -230,7 +230,7 @@ class LayoutParser:
                     display_name = " ".join(parts[1:]).title() if len(parts) > 1 else tab_dir.name
                     parsed_data["tabs"].append({"path": tab_dir, "display_name": display_name})
 
-                if LOCAL_DEBUG: logger.debug(f"🗺️ Parsed 'notebook' layout from dir names '{path}'")
+                if LOCAL_DEBUG: LAYOUT_LOGGER.debug(f"Parsed 'notebook' layout from dir names '{path}'")
                 return {"type": layout_type, "data": parsed_data}
 
         # 3. Fallback to simple directory listing
@@ -239,7 +239,7 @@ class LayoutParser:
         )
         content_dirs = [d for d in sub_dirs if d not in layout_dirs and d not in potential_tab_dirs]
 
-        if LOCAL_DEBUG: logger.debug(f"🗺️ Parsed 'directory_listing' as fallback for '{path}'")
+        if LOCAL_DEBUG: LAYOUT_LOGGER.debug(f"Parsed 'directory_listing' as fallback for '{path}'")
         return {
             "type": "directory_listing",
             "data": {

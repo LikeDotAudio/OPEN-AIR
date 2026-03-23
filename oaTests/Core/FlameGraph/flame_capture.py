@@ -19,7 +19,9 @@ def kill_all_profilers():
             if isinstance(obj, cProfile.Profile):
                 obj.disable()
                 count += 1
-        except: pass
+        except Exception as e:
+            from oaLogging.Entry import logger
+            logger.trace(f"FlameGraph: Failed to disable profiler object: {e}")
     if count > 0:
         print(f"? Watchdog: Killed {count} active profiler(s).")
 
@@ -43,7 +45,10 @@ class MultiThreadProfiler:
                     outer_self.profilers.append(p)
                 try: original_run(self_thread)
                 finally: p.disable()
-            except ValueError: original_run(self_thread)
+            except ValueError as e: 
+                from oaLogging.Entry import logger
+                logger.warning(f"FlameGraph: Profiler enable failed, running thread without profiling: {e}")
+                original_run(self_thread)
             
         threading.Thread.run = patched_run
         self.main_profiler.enable()

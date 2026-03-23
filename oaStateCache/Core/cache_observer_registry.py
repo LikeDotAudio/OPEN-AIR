@@ -17,6 +17,9 @@ class CacheObserverRegistry:
         if callback in self._observers: self._observers.remove(callback)
 
     def notify(self, topic, payload):
+        from oaLogging.Entry import vocal_capture
         for cb in self._observers:
-            try: cb(topic, payload)
-            except: pass
+            try: 
+                cb(topic, payload)
+            except Exception:
+                vocal_capture("CACHE", f"Observer callback '{cb.__name__}' failed during notification on topic '{topic}'")

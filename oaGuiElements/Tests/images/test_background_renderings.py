@@ -6,8 +6,8 @@
 
 import pytest
 from PIL import Image, ImageChops
-from oaGuiBackground.Panels.panels.panel_generator import PanelGenerator
-from oaGuiBackground.Panels.panels.tiled_panel_generator import TiledPanelGenerator
+from oaGuiBackground.Interface.panels.panel_generator import PanelGenerator
+from oaGuiBackground.Interface.panels.tiled_panel_generator import TiledPanelGenerator
 
 # Test configurations representing the 6 sample styles identified in the 1_Demo directory
 BACKGROUND_STYLES = [

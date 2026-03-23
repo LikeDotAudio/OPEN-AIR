@@ -31,7 +31,8 @@ def discover_gateway_devices(gateway_ips):
     gateway_resources = []
     for ip in gateway_ips:
         if LOCAL_DEBUG: logger.debug(f"   👉 Scraping Gateway {ip}...")
-        url = f"http://{ip}/html/instrumentspage.html"
+        cfg = Config.get_instance()
+        url = f"{cfg.VISA_PROBE_PROTOCOL}://{ip}/{cfg.VISA_PROBE_PATH}"
         params = {"whichbutton": "find", "timeout": "5"}
         full_url = f"{url}?{urllib.parse.urlencode(params)}"
         targets = []

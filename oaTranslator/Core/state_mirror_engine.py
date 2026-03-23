@@ -176,7 +176,7 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
         if self.state_cache_manager:
             self.state_cache_manager.handle_external_update(widget_info["topic"], current_val, source="GUI", metadata=metadata)
         else:
-            from oaTranslator.manifest.builder import create_manifest
+            from oaTranslator.Core.manifest.builder import create_manifest
             payload = create_manifest(current_val, widget_info["topic"], "GUI", metadata)
             mqtt_publisher_service.publish_payload(widget_info["topic"], orjson.dumps(payload).decode())
 
@@ -186,14 +186,14 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
             data = msg.payload if isinstance(msg.payload, (dict, list)) else orjson.loads(msg.payload)
             if not isinstance(data, dict): return
             
-            from oaTranslator.manifest.echo_canceller import is_echo
+            from oaTranslator.Core.manifest.echo_canceller import is_echo
             if is_echo(data): return
 
             widget_id = self.topic_to_widget_id.get(msg.topic)
             widget_info = self._get_widget_info(widget_id) if widget_id else None
             if not widget_info: return
             
-            from oaTranslator.manifest.ghost_lock import is_ghost_touch_locked
+            from oaTranslator.Core.manifest.ghost_lock import is_ghost_touch_locked
             if is_ghost_touch_locked(data, widget_info.get("instance")): return
                 
             raw_val = ValueProcessor.extract_value(data, widget_info["config"])

@@ -1,0 +1,111 @@
+100328.939 | DEBUG    | 🎨 UI      | SYSTEM             | oaConfiguration.Methods.console_encoder | ⏩ Not on Windows ('nt'), skipping console encoding reconfiguration.
+100328.940 | SUCCESS  | 🎨 UI      | SYSTEM             | oaConfiguration.Methods.console_encoder | ✅ Exiting configure_console_encoding.
+100328.940 | DEBUG    | 🎨 UI      | SYSTEM             | __main__             | 🖥️🎨 [UI] Starting OpenAir UI Service...
+100329.054 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.ui_window | Enforced minimum window size: 800x600
+100329.055 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.ui_window | Attempting to set window maximization attributes...
+100329.055 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.ui_window | Set '-zoomed' attribute for Linux.
+100329.073 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.composition_root | 🏗️ [ROOT] Composing UI Services...
+100329.073 | DEBUG    | 🎨 UI      | SYSTEM             | oaStateCache.FileReaders.cache_io_handler | 💾📖 Reading Cache.
+100329.074 | DEBUG    | 🎨 UI      | SYSTEM             | oaStateCache.FileReaders.cache_io_handler | 💾📄 No cache file found.
+100329.074 | INFO     | 🎨 UI      | 💾 DATA             | oaStateCache.Core.state_cache | 💾✨ First boot detected. Starting with fresh cache.
+100329.075 | DEBUG    | 🎨 UI      | 💾 DATA             | oaStateCache.Core.state_cache | 🧠💾 [CACHE] Initialized with 0 entries.
+100329.076 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SPLINKER on OPEN-AIR/System/Status/Splinker/List: []
+100329.076 | INFO     | 🎨 UI      | ❓ OSC              | oaComOSC.Managers.osc_manager | Initializing Bridge (Bridge=False)...
+100329.077 | INFO     | 🎨 UI      | ❓ SNMP             | oaComSNMP.Managers.snmp_manager | Initializing SNMP Bridge...
+100329.077 | SUCCESS  | 🎨 UI      | SYSTEM             | oaGuiManager.Core.composition_root | ✅ [ROOT] UI Service Graph Composed.
+100329.125 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiSplashScreen.Methods.splash_screen | ✅ SplashScreen materialised.
+100329.125 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.ui_window | 🖥️🎨 [UI] Reveal main window.
+100329.126 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.settle | ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for OPEN-AIR/System/Status/Splinker/List
+100329.127 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+100329.140 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiSplashScreen.Methods.splash_screen | 👋 SplashScreen dismissed.
+100329.153 | DEBUG    | 🎨 UI      | SYSTEM             | __main__             | 🖥️🎨 [UI] Entering Tkinter MainLoop.
+100329.157 | ERROR    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.bootstrap_sequence | 🖥️🎨 [UI] Bootstrap Failure:Traceback (most recent call last):
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 32, in run
+    self._connect_communication_services(
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 64, in _connect_communication_services
+    self.splash.set_status(message="Connecting to Broker...")
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiSplashScreen/Methods/splash_screen.py", line 56, in set_status
+    if self.debug_enabled: logger.debug(f"🔬 SPLASH: {message}")
+                           ^^^^^^
+UnboundLocalError: cannot access local variable 'logger' where it is not associated with a value
+
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydev_bundle/pydev_monkey.py", line 1134, in __call__
+    ret = self.original_func(*self.args, **self.kwargs)
+          |    |              |    |       |    -> {}
+          |    |              |    |       -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7510318fa540>
+          |    |              |    -> ()
+          |    |              -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7510318fa540>
+          |    -> <bound method Thread._bootstrap of <Thread(Thread-8 (run), started daemon 128712032900800)>>
+          -> <_pydev_bundle.pydev_monkey._NewThreadStartupWithTrace object at 0x7510318fa540>
+
+  File "/usr/lib/python3.12/threading.py", line 1030, in _bootstrap
+    self._bootstrap_inner()
+    |    -> <function Thread._bootstrap_inner at 0x75103a04bd80>
+    -> <Thread(Thread-8 (run), started daemon 128712032900800)>
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+    |    -> <function Thread.run at 0x75103a04ba60>
+    -> <Thread(Thread-8 (run), started daemon 128712032900800)>
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+    |    |        |    |        |    -> {}
+    |    |        |    |        -> <Thread(Thread-8 (run), started daemon 128712032900800)>
+    |    |        |    -> ()
+    |    |        -> <Thread(Thread-8 (run), started daemon 128712032900800)>
+    |    -> <bound method AsyncBootstrapEngine.run of <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x751038577950>>
+    -> <Thread(Thread-8 (run), started daemon 128712032900800)>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 32, in run
+    self._connect_communication_services(
+    |    -> <function AsyncBootstrapEngine._connect_communication_services at 0x7510322b54e0>
+    -> <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x751038577950>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/bootstrap_sequence.py", line 64, in _connect_communication_services
+    self.splash.set_status(message="Connecting to Broker...")
+    |    |      -> <function SplashScreen.set_status at 0x751038397e20>
+    |    -> <oaGuiSplashScreen.Methods.splash_screen.SplashScreen object at 0x751039d05970>
+    -> <oaGuiManager.Core.bootstrap_sequence.AsyncBootstrapEngine object at 0x751038577950>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiSplashScreen/Methods/splash_screen.py", line 56, in set_status
+    if self.debug_enabled: logger.debug(f"🔬 SPLASH: {message}")
+       |    |              |      |                  -> 'Connecting to Broker...'
+       |    |              |      -> <function Logger.debug at 0x75103847de40>
+       |    |              -> <loguru.logger handlers=[(id=1, level=5, sink=<stderr>), (id=2, level=5, sink=<oaLogging.Core.logger.BatchLogSink object at 0...
+       |    -> True
+       -> <oaGuiSplashScreen.Methods.splash_screen.SplashScreen object at 0x751039d05970>
+
+UnboundLocalError: cannot access local variable 'logger' where it is not associated with a value
+100329.164 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.shutdown_coordinator | 🖥️🎨 [UI] Initiating shutdown...
+100329.165 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: mqtt_conn
+100329.165 | DEBUG    | 🎨 UI      | 🛰️ MQTT            | oaComMQTT.Managers.mqtt_connection | Disconnection initiated.
+100329.166 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: sub_router
+100329.166 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: state_cache
+100329.169 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: mirror_engine
+100329.170 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: osc_manager
+100329.170 | WARNING  | 🎨 UI      | ❓ OSC              | oaComOSC.Managers.osc_manager | Bridge Offline.
+100329.170 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: snmp_manager
+100329.171 | WARNING  | 🎨 UI      | ❓ SNMP             | oaComSNMP.Managers.snmp_manager | SNMP Bridge Offline.
+100329.171 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: midi_manager
+100329.171 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: splinker_manager
+100329.171 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.shutdown_coordinator | 🛑 Stopping manager: protocol_router
+100329.172 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.shutdown_coordinator | 🖥️🎨 [UI] Managers signaled to stop. Quitting mainloop...
+100329.173 | DEBUG    | 🎨 UI      | SYSTEM             | __main__             | 🖥️🎨 [UI] MainLoop exited. Destroying root...
+100327.965 | DEBUG    | ❓ SUP     | SYSTEM             | OpenAir              | 🚀 SUPERVISOR: Launching OPEN-AIR Partitions... (Mission Critical: False)
+100327.966 | DEBUG    | ❓ SUP     | SYSTEM             | OpenAir              | 🚀 SUPERVISOR: Session Identity established (Randomized): 2AB0B1E8D53EDCEF
+100327.967 | DEBUG    | ❓ SUP     | SYSTEM             | OpenAir              | 🚀 SUPERVISOR: Spawning Partition B (UI)...
+100327.969 | DEBUG    | ❓ SUP     | SYSTEM             | OpenAir              | 🚀 SUPERVISOR: Spawning Partition A (Core)...
+100327.971 | DEBUG    | ❓ SUP     | SYSTEM             | OpenAir              | 🚀 SUPERVISOR: System Running. Monitoring child processes...
+100327.971 | WARNING  | ❓ SUP     | SYSTEM             | oaTests.Core.FlameGraph.flame_capture | FlameGraph: Profiler enable failed, running thread without profiling: Another profiling tool is already active
+100327.971 | WARNING  | ❓ SUP     | SYSTEM             | oaTests.Core.FlameGraph.flame_capture | FlameGraph: Profiler enable failed, running thread without profiling: Another profiling tool is already active
+100329.972 | DEBUG    | ❓ SUP     | SYSTEM             | OpenAir              | 🚀 SUPERVISOR: 👋 UI exited (Code 0). System complete.
+100329.973 | DEBUG    | ❓ SUP     | SYSTEM             | OpenAir              | 🚀 SUPERVISOR: Terminating child processes...
+100330.074 | DEBUG    | ❓ SUP     | SYSTEM             | OpenAir              | 🚀 SUPERVISOR: Supervisor shutdown complete. Goodbye.
+100330.074 | INFO     | ❓ SUP     | SYSTEM             | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] Stopping Profiler...
+100330.075 | INFO     | ❓ SUP     | SYSTEM             | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] Synthesizing Intelligence Report...
+100330.124 | DEBUG    | ❓ SUP     | SYSTEM             | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] JSON components saved to /home/anthony/Documents/OPEN-AIR/oaDataLogs/FlameGraph
+100330.133 | SUCCESS  | ❓ SUP     | SYSTEM             | oaTests.Core.FlameGraph.flame_html | ? Standalone Performance Report generated: /home/anthony/Documents/OPEN-AIR/oaDataLogs/FlameGraph/flamegraph.html
+100330.135 | SUCCESS  | ❓ SUP     | SYSTEM             | oaTests.Core.FlameGraph.flame_manager | 🔥 [FLAME] Intelligence Report: /home/anthony/Documents/OPEN-AIR/oaDataLogs/FlameGraph/flamegraph.html
+100330.136 | SUCCESS  | ❓ SUP     | SYSTEM             | __main__             | 🔥 [ENTRY] Performance profiling session complete.
+100330.138 | INFO     | ❓ SUP     | SYSTEM             | __main__             | 🔥 [ENTRY] Report: /home/anthony/Documents/OPEN-AIR/oaDataLogs/FlameGraph/flamegraph.html

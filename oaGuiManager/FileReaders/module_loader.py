@@ -14,8 +14,7 @@ from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
+from oaLogging.Entry import logger, vocal_capture, set_log_directory
 
 from oaConfiguration.FileReaders.config_reader import Config
 
@@ -67,7 +66,6 @@ class ModuleLoader:
                     return obj
             return None
         except Exception as e:
-            from oaLogging.Entry import vocal_capture
             vocal_capture("BUILDER", f"Failed to load module from {path}")
             return None
 
@@ -125,7 +123,6 @@ class ModuleLoader:
                 elif found_py: python_path = sorted(found_py)[0]
                 else: return None
             except (FileNotFoundError, PermissionError) as e: 
-                from oaLogging.Entry import logger
                 logger.warning(f"ModuleLoader: Cannot access directory {path_str}: {e}")
                 return None
 
@@ -162,7 +159,6 @@ class ModuleLoader:
                 if LOCAL_DEBUG: logger.success(f"🏗️🪟✨{json_path}!")
                 return instance
             except Exception as e:
-                from oaLogging.Entry import vocal_capture
                 vocal_capture("UI", f"Error instantiating UniversalGuiLoader for '{json_path}'")
                 return None
 

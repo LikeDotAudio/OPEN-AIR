@@ -21,7 +21,7 @@ class TestStateCache(unittest.TestCase):
         self.registry.observers = MagicMock()
         
         with patch("oaComBroker.Managers.protocol_router.ProtocolRouter.get_instance"), \
-             patch("oaTranslator.manifest.builder.create_manifest", return_value={"val": 42}):
+             patch("oaTranslator.Core.manifest.builder.create_manifest", return_value={"val": 42}):
             
             self.registry.handle_external_update("TEST/TOPIC", 42, source="GUI")
             

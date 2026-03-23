@@ -105,7 +105,7 @@ class StateRegistry:
             gui_state_restorer.restore_timeline(self.cache, self.state_mirror_engine)
 
     def handle_external_update(self, topic: str, value: Any, source: str = "EXTERNAL", metadata: dict = None):
-        from oaTranslator.manifest.builder import create_manifest
+        from oaTranslator.Core.manifest.builder import create_manifest
         payload = create_manifest(value, topic, source, metadata)
         
         self.cache[topic] = payload

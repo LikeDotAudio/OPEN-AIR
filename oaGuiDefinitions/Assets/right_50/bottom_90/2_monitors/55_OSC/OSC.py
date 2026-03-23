@@ -10,7 +10,7 @@ import datetime
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
-from loguru import logger
+from oaLogging.Entry import logger
 
 class OscDashboard(tk.Frame):
     """
@@ -205,9 +205,9 @@ class OscDashboard(tk.Frame):
 
     def destroy(self):
         if self.osc_manager:
-            try: self.osc_manager.remove_monitor_callback(self.on_osc_activity)
+            try: 
+                self.osc_manager.remove_monitor_callback(self.on_osc_activity)
             except Exception as e:
-                from oaLogging.Entry import logger
                 logger.trace(f"OscDashboard: Failed to remove monitor callback: {e}")
         super().destroy()
 

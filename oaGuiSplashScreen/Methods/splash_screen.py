@@ -6,7 +6,7 @@
 
 import tkinter as tk
 from tkinter import ttk
-from loguru import logger
+from oaLogging.Entry import logger, vocal_capture
 
 # --- EXTRACTED CORE MODULES ---
 from ..Core.gif_animator import GifAnimator
@@ -65,8 +65,8 @@ class SplashScreen:
             self.win.update()
             self.win.update_idletasks()
         except Exception as e:
-            from oaLogging.Entry import logger
-            logger.trace(f"SplashScreen: Silently ignoring update error (possibly destroyed): {e}")
+            # 🔬 SPLASH: Silently ignoring update error (possibly destroyed) but vocalizing it
+            vocal_capture("UI", f"SplashScreen: Update failure: {e}")
 
     def hide(self):
         """Safely dismisses the splash screen."""

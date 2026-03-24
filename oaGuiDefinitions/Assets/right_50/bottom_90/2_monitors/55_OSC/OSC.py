@@ -9,7 +9,7 @@ from tkinter import ttk
 import datetime
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 from oaLogging.Entry import logger
 
 class OscDashboard(tk.Frame):

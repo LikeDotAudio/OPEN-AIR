@@ -12,7 +12,7 @@ from ...Core.event_bus import event_bus
 from ...Core.state import state_manager
 from oaLogging.Core.logger import GUI_LOGGER as logger
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
 
 
 class AutoScrollbar(ttk.Scrollbar):

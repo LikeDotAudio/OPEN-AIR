@@ -12,7 +12,7 @@ import tkinter as tk
 from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import LAYOUT_LOGGER
 from loguru import logger
 

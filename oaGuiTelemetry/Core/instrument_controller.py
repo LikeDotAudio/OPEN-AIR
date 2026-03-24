@@ -7,7 +7,7 @@
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
 HZ_TO_MHZ = 1_000_000
 
 # YAK Frequency Topics

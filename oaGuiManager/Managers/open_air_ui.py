@@ -27,7 +27,7 @@ from oaGuiManager.Core.shutdown_coordinator import ShutdownCoordinator
 from oaGuiManager.Core.bootstrap_sequence import AsyncBootstrapEngine
 from oaGuiManager.Core.composition_root import UICompositionRoot
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 def main():
     """Orchestrates the startup, execution, and shutdown of the OPEN-AIR UI."""

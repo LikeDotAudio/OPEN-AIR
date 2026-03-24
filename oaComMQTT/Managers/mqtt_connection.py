@@ -10,7 +10,7 @@ import queue
 from typing import Optional, Callable
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
 

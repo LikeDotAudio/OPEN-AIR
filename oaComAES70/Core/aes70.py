@@ -7,7 +7,7 @@
 import threading
 import time
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 

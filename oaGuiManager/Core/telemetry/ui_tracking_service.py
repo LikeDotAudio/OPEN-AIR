@@ -11,7 +11,7 @@ from loguru import logger
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaComMQTT.Core.mqtt_publisher_service import is_connected
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
 
 class UITrackingService:
     """

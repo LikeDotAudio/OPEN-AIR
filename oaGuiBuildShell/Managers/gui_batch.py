@@ -8,7 +8,7 @@ import tkinter as tk
 from loguru import logger
 from ..Workers.async_grid_renderer import AsyncGridRenderer
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
 
 class GuiBatchBuilderMixin:
     """

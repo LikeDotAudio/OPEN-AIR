@@ -20,7 +20,7 @@ current_version_hash = Current_Date * Current_Time * Current_iteration
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
 
 
 # The wrapper functions debug_log and _switch are removed

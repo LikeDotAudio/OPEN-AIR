@@ -6,7 +6,7 @@ import tkinter as tk
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 

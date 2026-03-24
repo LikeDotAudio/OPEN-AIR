@@ -13,7 +13,7 @@ import tkinter as tk
 from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
 from oaLogging.Entry import logger, vocal_capture, set_log_directory
 
 from oaConfiguration.FileReaders.config_reader import Config

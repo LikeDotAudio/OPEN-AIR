@@ -6,7 +6,7 @@
 
 current_version = "20250810.134500.1"  # this variable should always be defined below the header to make the debugging better
 current_version_hash = 20250810 * 134500 * 1  # Example hash, adjust as needed
-LOCAL_DEBUG = True   
+LOCAL_DEBUG = False   
 
 import csv
 import os

@@ -7,7 +7,7 @@
 import orjson
 import traceback
 from loguru import logger
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 class FleetScanMixin:
     """Manages the discovery scan sequence and MQTT status broadcasting."""

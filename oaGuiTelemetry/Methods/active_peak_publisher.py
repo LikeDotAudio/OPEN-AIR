@@ -20,7 +20,7 @@ TOPIC_MARKER_PEAK_WILDCARD = "OPEN-AIR/yak/Markers/nab/NAB_all_marker_settings/O
 TOPIC_MARKER_FREQ_WILDCARD = "OPEN-AIR/yak/Markers/nab/NAB_all_marker_settings/Outputs/+/value"
 TOPIC_MEASUREMENTS_ROOT = "OPEN-AIR/measurements"
 TOPIC_DELIMITER = "/"
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 class ActivePeakPublisher:
     """

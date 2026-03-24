@@ -11,7 +11,7 @@ import datetime
 from oaGuiElements.Core.utils.midi_keyboard.midi_keyboard import MidiKeyboard, get_midi_color
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 from loguru import logger
 
 class MidiDashboard(tk.Frame):

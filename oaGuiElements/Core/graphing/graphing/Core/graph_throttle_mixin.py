@@ -9,7 +9,7 @@ from oaLogging.Core.logger import builder_logger
 from oaGuiElements.Core.graphing.graphing import graph_updater
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True
+BUILDER_DEBUG = False
 
 class GraphThrottleMixin:
     """Implements 30 FPS throttling and redundancy filtering for graph updates."""

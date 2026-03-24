@@ -15,7 +15,7 @@ from typing import Coroutine, Any
 from datetime import datetime
 import threading
 
-# Import moved components
+# Import worker logic
 from oaTests.Workers.run_test import TestRunner
 from oaTests.Workers.collate_data import collate_extra_tabs
 from oaTests.Workers.run_report_builder import ReportGenerator
@@ -30,6 +30,11 @@ from oaTests.Managers.AuditRunner import run_all_audits
 from oaTests.Methods.DebugToggler import force_debug_on, force_debug_off
 
 from oaInstallation.Core.SystemStats import SystemStatsProvider
+
+# Import new panel modules
+from .left_panel import LeftPanel # This now contains the original RightPanel code (Test/Maintenance buttons)
+from .center_panel import CenterPanel
+from .right_panel import RightPanel # This now contains the original LeftPanel code (Debug buttons, System Metrics)
 
 class TestsApp(App):
     """A Textual app to manage the OPEN-AIR test suite."""
@@ -139,43 +144,13 @@ class TestsApp(App):
     def compose(self) -> ComposeResult:
         yield Header()
         with Horizontal():
-            with Vertical(id="sidebar"):
-                yield Label("Test Controls", classes="status-label")
-                yield Button("RUN UNIT TESTS", id="btn_unit", variant="primary")
-                yield Button("RUN FLAME GRAPH", id="btn_flame", variant="primary")
-                yield Button("RUN ALL AUDITS", id="btn_audits", variant="primary")
-                yield Button("CANCEL AUDITS", id="btn_cancel_audits", variant="error")
-                yield Button("GENERATE REPORT", id="btn_report", variant="success", disabled=False)
-                
-                yield Label("Maintenance (CLEAR)", classes="status-label")
-                yield Button("CLEAR LOGS", id="btn_clear_logs", variant="warning")
-                yield Button("CLEAR AUDITS", id="btn_clear_audits", variant="warning")
-                yield Button("CLEAR REPORTS", id="btn_clear_reports", variant="warning")
-                yield Button("CLEAR MQTT", id="btn_clear_mqtt", variant="warning")
-                yield Button("CLEAR FLAMEGRAPH", id="btn_clear_flame", variant="warning")
-                yield Button("DELETE CACHE", id="btn_clear_cache", variant="error")
-
-                yield Label("Set Debug Flags", classes="status-label")
-                with Horizontal():
-                    yield Button("FORCE DEBUG ON", id="btn_debug_on", variant="warning")
-                    yield Button("FORCE DEBUG OFF", id="btn_debug_off", variant="warning")
-
-            with Vertical(id="main-content"):
-                yield Label("Execution Log")
-                self.installation_log = Log()
-                yield self.installation_log
-
-            with Vertical(id="stats-sidebar"):
-                yield Label("System Metrics", classes="status-label")
-                self.cpu_label = Label("CPU: -- MHz", classes="status-item")
-                yield self.cpu_label
-                self.cores_label = Label("Cores: --", classes="status-item")
-                yield self.cores_label
-                self.ram_label = Label("RAM: --%", classes="status-item")
-                yield self.ram_label
-                self.disk_label = Label("Disk: -- GB free", classes="status-item")
-                yield self.disk_label
-
+            # Swapping LeftPanel and RightPanel assignments to match desired layout:
+            # Left sidebar (id="sidebar") should have Test Controls/Maintenance buttons (original RightPanel code, now in left_panel.py)
+            yield LeftPanel(id="sidebar")
+            # Center remains the log
+            yield CenterPanel(id="main-content")
+            # Right sidebar (id="stats-sidebar") should have Debug buttons and System Metrics (original LeftPanel code, now in right_panel.py)
+            yield RightPanel(id="stats-sidebar")
         yield Footer()
 
     def on_mount(self) -> None:
@@ -184,13 +159,18 @@ class TestsApp(App):
 
     def update_stats(self) -> None:
         stats = self.stats_provider.get_all_stats()
-        self.cpu_label.update(f"⚡ CPU Speed: [bold #F4902C]{stats['cpu_mhz']:.0f} MHz[/]")
-        self.cores_label.update(f"💻 CPU Cores: [bold #F4902C]{stats['cpu_cores']}[/]")
-        self.ram_label.update(f"🧠 RAM Usage: [bold #F4902C]{stats['ram_percent']}%[/] ({stats['ram_used_gb']:.1f}/{stats['ram_total_gb']:.1f} GB)")
-        self.disk_label.update(f"💿 Disk Free: [bold #F4902C]{stats['disk_free_gb']:.1f} GB[/] ({stats['disk_percent']:.1f}%)")
+        # Querying by ID, so it should find the widgets regardless of which panel instance they are in.
+        # The LeftPanel class (now in right_panel.py) defines the system metric labels with IDs.
+        # This LeftPanel code is now yielded as RightPanel(id="stats-sidebar").
+        # The query_one("#cpu_label", Label) should find the widget if it's correctly composed.
+        self.query_one("#cpu_label", Label).update(f"⚡ CPU Speed: [bold #F4902C]{stats['cpu_mhz']:.0f} MHz[/]")
+        self.query_one("#cores_label", Label).update(f"💻 CPU Cores: [bold #F4902C]{stats['cpu_cores']}[/]")
+        self.query_one("#ram_label", Label).update(f"🧠 RAM Usage: [bold #F4902C]{stats['ram_percent']}%[/] ({stats['ram_used_gb']:.1f}/{stats['ram_total_gb']:.1f} GB)")
+        self.query_one("#disk_label", Label).update(f"💿 Disk Free: [bold #F4902C]{stats['disk_free_gb']:.1f} GB[/] ({stats['disk_percent']:.1f}%)")
 
     def write_log(self, message: str) -> None:
-        self.installation_log.write_line(message)
+        center_panel = self.query_one(CenterPanel)
+        center_panel.log_widget.write_line(message)
         self.log_lines.append(message)
 
     def _start_report_flashing(self):
@@ -247,7 +227,7 @@ class TestsApp(App):
                 elif status == "skipped": self.summary["skipped"] += 1
                 
                 description = getattr(test, "_testMethodDoc", "") or "No description provided."
-                description = description.strip().replace("\n", "<br>")
+                description = description.strip().replace("", "<br>")
 
                 self.test_results.append({
                     "classname": test.__class__.__name__, "name": str(test), "status": status,
@@ -255,7 +235,7 @@ class TestsApp(App):
                     "duration": f"{duration:.4f}s"
                 })
                 emoji = "✅" if status == "passed" else "❌"
-                self.call_from_thread(self.write_log, f"   {emoji} {test}: [bold]{status}[/]")
+                selfself.call_from_thread(self.write_log, f"   {emoji} {test}: [bold]{status}[/]")
 
             found_dirs = DiscoverTests.identify_test_directories(self.project_root)
             self.call_from_thread(self.write_log, f"📂 Discovery identified {len(found_dirs)} test-containing root folders.")
@@ -385,7 +365,7 @@ class TestsApp(App):
 
         # If the other button is in its confirm state, this button acts as CANCEL
         if getattr(self, "_debug_on_confirm", False):
-            self._debug_on_confirm = False
+            self._debug_off_confirm = False
             btn_on.label = "FORCE DEBUG ON"
             btn_off.label = "FORCE DEBUG OFF"
             btn_on.variant = "warning"

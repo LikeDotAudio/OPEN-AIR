@@ -100,4 +100,4 @@ class UniversalGuiLoader(tk.Frame):
         if LOCAL_DEBUG: logger.debug(f"🖥️🔵 Tab '{self.module_name}' focused. Systems nominal.")
 
 # Local Debug Flag
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False

@@ -23,18 +23,22 @@ class TestMqttAsyncWorker(unittest.IsolatedAsyncioTestCase):
         self.mock_manager.password = None
         self.mock_manager._connected = False
         self.mock_manager.subscriber_router = AsyncMock()
-        self.mock_manager._subscribe_queue = queue.Queue()
-        self.mock_manager._publish_queue = queue.Queue()
-        self.mock_manager._pending_subscriptions = set()
-        self.mock_manager._pending_lock = MagicMock() # Lock context manager won't directly work with standard mock, we can just replace the lock with a dummy context manager
-
-        # Fake lock context manager
-        class DummyLock:
-            def __enter__(self): pass
-            def __exit__(self, exc_type, exc_val, exc_tb): pass
-        self.mock_manager._pending_lock = DummyLock()
         
-        self.worker = MqttAsyncWorker(self.mock_manager)
+        self.mock_queue_manager = MagicMock()
+        self.mock_queue_manager._subscribe_queue = queue.Queue()
+        self.mock_queue_manager._publish_queue = queue.Queue()
+        self.mock_queue_manager._pending_subscriptions = set()
+        
+        # MqttQueueManager methods
+        self.mock_queue_manager.get_subscribe_request.side_effect = lambda: self.mock_queue_manager._subscribe_queue.get_nowait() if not self.mock_queue_manager._subscribe_queue.empty() else None
+        self.mock_queue_manager.get_publish_message.side_effect = lambda: self.mock_queue_manager._publish_queue.get_nowait() if not self.mock_queue_manager._publish_queue.empty() else None
+        
+        def remove_sub(topic):
+            if topic in self.mock_queue_manager._pending_subscriptions:
+                self.mock_queue_manager._pending_subscriptions.remove(topic)
+        self.mock_queue_manager.remove_pending_subscription.side_effect = remove_sub
+
+        self.worker = MqttAsyncWorker(self.mock_manager, self.mock_queue_manager)
 
     def test_parse_publish_item(self):
         """Test the _parse_publish_item method correctly parses different formats."""
@@ -97,8 +101,8 @@ class TestMqttAsyncWorker(unittest.IsolatedAsyncioTestCase):
         self.worker.kick_event = asyncio.Event()
 
         # Add a subscription job
-        self.mock_manager._subscribe_queue.put({"topic": "test/sub", "qos": 1})
-        self.mock_manager._pending_subscriptions.add("test/sub")
+        self.mock_queue_manager._subscribe_queue.put({"topic": "test/sub", "qos": 1})
+        self.mock_queue_manager._pending_subscriptions.add("test/sub")
         
         self.worker.kick_event.set() # Kick to process
 
@@ -109,7 +113,7 @@ class TestMqttAsyncWorker(unittest.IsolatedAsyncioTestCase):
         await task
 
         mock_client.subscribe.assert_called_once_with("test/sub", qos=1)
-        self.assertNotIn("test/sub", self.mock_manager._pending_subscriptions)
+        self.assertNotIn("test/sub", self.mock_queue_manager._pending_subscriptions)
 
     async def test_queue_task_publications(self):
         """Test _queue_task processes publications."""
@@ -118,7 +122,7 @@ class TestMqttAsyncWorker(unittest.IsolatedAsyncioTestCase):
         self.worker.kick_event = asyncio.Event()
 
         # Add a publication job
-        self.mock_manager._publish_queue.put({"topic": "test/pub", "payload": b"data", "qos": 0, "retain": False})
+        self.mock_queue_manager._publish_queue.put({"topic": "test/pub", "payload": b"data", "qos": 0, "retain": False})
         
         self.worker.kick_event.set() # Kick to process
 

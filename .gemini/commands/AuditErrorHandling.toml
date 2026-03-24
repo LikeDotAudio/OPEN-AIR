@@ -15,16 +15,13 @@ You are the Reliability Engineer for the OPEN-AIR project. Your mission is to id
 
 ### Your Task:
 
-1. **Research & Cleanup**: 
-   - Read the existing audit report (`oaDataAudits/Bad_Error_Handling_Audit.md`).
-   - Verify if previously flagged "silent failures" or "bad practices" have been corrected.
-   - Eliminate any items that are already resolved or no longer present in the code.
+1. **Initialize Report**: Before starting, create an empty file named `Bad_Error_Handling_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for poor error handling patterns.
    - Use `grep_search` to find `except: pass`, `return None` in error contexts, and generic `except Exception:`.
    - Analyze `try-except` blocks for lack of logging or muddled intent.
 3. **Analyze**: Identify the most dangerous silent failures and convoluted error handling logic.
-4. **Report**: Create a detailed Markdown report named `Bad_Error_Handling_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Error_Handling_Audit.md`.
+4. **Report**: Create your detailed Markdown report.
+5. **Save**: Write the results to the pre-created `Bad_Error_Handling_Audit_YYYYMMDD.md` file.
 
 The report should include:
 - A summary of the robustness of the system's error management.

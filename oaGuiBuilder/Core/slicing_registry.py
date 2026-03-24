@@ -7,6 +7,12 @@
 import time
 import tkinter as tk
 from loguru import logger
+from oaGuiBuilder.Constants.builder_constants import (
+    SLICING_REGEN_THRESHOLD, 
+    SLICING_POSITION_EPSILON, 
+    SLICING_DELAY_REBUILD, 
+    SLICING_DELAY_NORMAL
+)
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
@@ -52,7 +58,7 @@ class BuilderSlicingRegistryMixin:
                 self.after_cancel(self._reslice_trigger_id)
             except Exception as e:
                 logger.trace(f"Failed to cancel reslice trigger: {e}")
-        delay = 150 if getattr(self, '_is_rebuilding', False) else 50
+        delay = SLICING_DELAY_REBUILD if getattr(self, '_is_rebuilding', False) else SLICING_DELAY_NORMAL
         self._reslice_trigger_id = self.after(delay, self._perform_batch_reslice)
 
     def _clear_coord_cache(self):
@@ -109,12 +115,12 @@ class BuilderSlicingRegistryMixin:
             needs_update = len(folds_detected) != len(existing_creases)
             if not needs_update and folds_detected:
                 for f, e in zip(folds_detected, existing_creases):
-                    if abs(f["position_pct"] - float(e["position_pct"])) > 0.005:
+                    if abs(f["position_pct"] - float(e["position_pct"])) > SLICING_POSITION_EPSILON:
                         needs_update = True
                         break
             
             if needs_update:
-                if self._bg_regen_count > 3:
+                if self._bg_regen_count > SLICING_REGEN_THRESHOLD:
                     if LOCAL_DEBUG: builder_logger.warning(f"🛑 [BUILDER] '{getattr(self, 'tab_name', 'Unknown')}': Background regeneration loop detected and suppressed.")
                     self._bg_regen_count = 0
                 else:

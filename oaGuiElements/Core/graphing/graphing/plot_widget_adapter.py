@@ -21,13 +21,15 @@ app_constants = Config.get_instance()
 class BuilderGraphingCreator:
     """Factory for creating Plot/Graph widgets."""
 
-    def make(self, parent_widget, config_data, context=None, **kwargs):
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
         """Unified entry point for graphing widgets."""
+        creator = BuilderGraphingCreator()
         w_type = config_data.get("type")
         if w_type in ["plot_widget", "_GuiGraph", "DynamicGraph"]:
-            return self._create_plot_widget(parent_widget, config_data, context, **kwargs)
+            return creator._create_plot_widget(parent_widget, config_data, context, **kwargs)
         elif w_type in ["bar_graph", "DynamicBarGraph"]:
-            return self._create_bar_graph_widget(parent_widget, config_data, context, **kwargs)
+            return creator._create_bar_graph_widget(parent_widget, config_data, context, **kwargs)
         return None
 
     def _create_plot_widget(self, parent_widget, config_data, context=None, **kwargs):

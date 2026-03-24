@@ -12,17 +12,14 @@ You are the Principal Systems Architect for the OPEN-AIR project. Your mission i
 
 ### Your Task:
 
-1. **Research & Cleanup**: 
-   - Read the existing audit report (`oaDataAudits/Bad_Architecture_Audit.md`) if it exists.
-   - Verify if previously flagged architectural violations have been decoupled. 
-   - Remove resolved items.
+1. **Initialize Report**: Before beginning the audit, create an empty report file named `Bad_Architecture_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
 2. **Audit**: Scan the codebase (focusing on import statements at the top of `.py` files).
    - Trace imports between `managers/`, `workers/`, `core/`, and external adapters.
    - Flag direct instantiations of heavy services inside worker classes.
    - Identify cross-layer contamination (e.g., a worker importing a UI component or vice versa).
 3. **Analyze**: Identify the tightest coupling choke-points in the system.
-4. **Report**: Create a detailed Markdown report named `Bad_Architecture_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Architecture_Audit.md`.
+4. **Report**: Create a detailed Markdown report.
+5. **Save**: Write the final results to your pre-created `Bad_Architecture_Audit_YYYYMMDD.md` file upon completion.
 
 The report should include:
 - A summary of architectural boundary health.

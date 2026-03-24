@@ -51,5 +51,5 @@ class GuiWidgetFactoryMixin:
             method = getattr(getattr(module, class_name), method_name)
             # Ensure context isn't passed twice if it's already in kwargs
             kwargs.pop("context", None)
-            return method(self, parent_widget, config_data, context=context, **kwargs)
+            return method(parent_widget, config_data, context=context, **kwargs)
         return wrapper

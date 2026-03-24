@@ -1,5 +1,40 @@
 # OPEN-AIR Changelog
 
+## [2026.03.24] - 16:45
+### UI Optimization & Syntax Correction
+- **Responsive Layout**: Implemented media queries in `oaTests/Interface/TestsUI.py` to reduce button height and label margins when terminal height is below 40 lines.
+- **Bug Fix**: Corrected a `NameError` in `oaTests/Interface/TestsUI.py` by renaming `selfself` to `self` in the `record_result` callback.
+- **Hygiene**: Ensured proper scaling of sidebar padding and log margins in compact display modes.
+
+## [2026.03.24] - 15:15
+### Comment Audit & Hygiene Remediation
+- **Audit Analysis**: Conducted a project-wide review of "Bad Comments" as reported by the automated audit.
+- **Header Standards Reaffirmation**: Verified and reaffirmed the use of Mandatory File Headers (FolderName/Filename, Author, Version) in alignment with Rule 45 and Rule 46 of the project mandates.
+- **Dead Code Cleanup**: 
+    - Audited `oaTests/Interface/TestsUI.py`, `oaTests/Methods/FlameGraph/flame_wall_shame.py`, and `oaTests/Methods/FlameGraph/flame_manager.py`.
+    - Removed minor legacy commented-out artifacts while preserving functional documentation and disabled feature flags.
+- **Deep Search Validation**: Executed a systemic grep search across all local modules to identify and eliminate blocks of dead code (commented-out keywords: `def`, `class`, `if`, etc.).
+
+## [2026.03.24] - 14:30
+### MQTT Infrastructure Refactoring & Simplification
+- **Architectural Decomposition**: Refactored the MQTT communication layer to resolve high-complexity "God Class" and "Singleton" patterns identified in the system audit.
+- **MqttConnectionManager Optimization**:
+    - Simplified the Singleton facade to focus strictly on the synchronous/asynchronous bridge.
+    - Implemented delegated properties for `loop` and `kick_event` to clean up the interaction with the background worker.
+    - Removed redundant internal queues and logic, delegating to specialized managers.
+- **MqttAsyncWorker Refactoring**:
+    - Decoupled the worker from the manager's internals.
+    - Implemented explicit dependency on `MqttQueueManager` for outbound traffic.
+    - Optimized the `_queue_task` to use non-blocking `get_nowait()` calls, eliminating event loop stalls.
+- **MqttQueueManager Consolidation**:
+    - Standardized as the single source of truth for all MQTT message queuing (Publish/Subscribe).
+    - Optimized for cross-thread safety and asynchronous worker signaling.
+- **MqttManager Rewrite**:
+    - Performed a complete structural rewrite to fix corrupted logic and broken method references.
+    - Eliminated the redundant `AsyncPublisher` and its associated worker thread/queue, reducing system overhead.
+    - Standardized periodic system status publishing and control command handling.
+- **Redundancy Elimination**: Deleted `oaComMQTT/Core/async_publisher.py` and consolidated all publishing logic into the core connection manager.
+
 ## [2026.03.22] - 11:00
 **************************************
 Commit: 769b277e1324ab37f16d6a20db23c62cdc6b47e0

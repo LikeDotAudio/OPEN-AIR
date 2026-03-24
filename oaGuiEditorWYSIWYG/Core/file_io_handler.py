@@ -58,8 +58,8 @@ class FileIOHandler:
             # 1. Create and Verify Backup
             if path.exists():
                 ts = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-                # ⚡ REQUIREMENT: Backup should not have the .json extension (archive style)
-                backup_path = path.with_name(f"{ts}_{path.stem}")
+                # ⚡ REQUIREMENT: Backup should have the .old extension (archive style)
+                backup_path = path.with_name(f"{ts}_{path.stem}.old")
                 if LOCAL_DEBUG: logger.debug(f"📦 FileIOHandler: Creating backup copy: {backup_path.name}")
                 
                 # Copy original to backup

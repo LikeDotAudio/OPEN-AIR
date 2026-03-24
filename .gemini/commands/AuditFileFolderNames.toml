@@ -22,7 +22,7 @@ You are the Structural Architect for OPEN-AIR. Your mission is to audit the code
     - **Zero-File Folders**: List any folders (at any level within `oa*` modules) that contain zero files. Suggest these can be deleted as part of a structural cleanup procedure.
     - **Naming Violations**: Flag files/folders that don't reveal their intention or use "noise words" (e.g., `info`, `data`).
 3.  **Analyze**: Evaluate which modules are the furthest from the "Encapsulated Module" standard.
-4.  **Report**: Create/Update the Markdown report named `Structural_Audit.md` in `oaDataAudits/`. (If that path doesn't exist, use `oaDataAudits/`).
+4.  **Report**: Before scanning, create an empty file named `Structural_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`. Write your final detailed Markdown report to this file.
 
 ### 📋 REPORT STRUCTURE:
 - **Executive Summary**: Overall health of the module encapsulation.

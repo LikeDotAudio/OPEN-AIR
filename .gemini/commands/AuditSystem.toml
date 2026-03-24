@@ -18,9 +18,10 @@ If in 'Whole Thing' mode, you are directed to run these commands (or simulate th
 - `AuditTests` (Coverage, Mock quality)
 - `AuditConfiguration` (Defaults, Validators)
 
-### 📊 REPORTING:
-- **Standard Audit**: Save to `oaDataAudits/audit_Code_review.md`.
-- **Whole Thing Audit**: Consolidate all specialized findings into a single master report: `oaDataAudits/System_Master_Audit.md`. This report must include an Executive Summary of all subsystems.
+### 📋 REPORTING:
+- **Initialization**: Before executing the scan(s), create an empty report file in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+- **Standard Audit**: Name the file `Audit_Code_Review_YYYYMMDD.md` and save your findings there.
+- **Whole Thing Audit**: Name the file `System_Master_Audit_YYYYMMDD.md`. Consolidate all specialized findings into this single master report, and save it at the end. This report must include an Executive Summary of all subsystems.
 
 ---
 

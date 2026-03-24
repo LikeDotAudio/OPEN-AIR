@@ -17,11 +17,15 @@ from oaOchestration.Constants.project_paths import (
     SNMP_CURRENT_MIB
 )
 
+from oaComSNMP.Core.oid_map_converter import OidMapConverter
+from oaComSNMP.Core.snmp_state_persister import SnmpStatePersister
+from oaComSNMP.Core.snmp_log_monitor import SnmpLogMonitor
 # --- Specialized Logic Workers ---
 from oaComSNMP.Methods.snmp_mib_generator import MibGenerator
 from oaComSNMP.Methods.snmp_installer_generator import InstallerGenerator
 from oaComSNMP.Workers.snmp_tester import SnmpTester
 from oaComSNMP.Methods.snmp_utils import get_snmp_node_id, get_snmp_descriptor, initialize_oid_map
+from oaComSNMP.Constants.snmp_constants import BASE_OID, STATE_SYNC_INTERVAL
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
@@ -43,7 +47,7 @@ class SNMPManager:
         self._running = False
         
         self.state_file = str(SNMP_STATE_FILE)
-        self.base_oid = ".1.3.6.1.4.1.65300"
+        self.base_oid = BASE_OID
         self._socket_info = "None"
         
         self.tree_builder = SNMPTreeBuilder(base_oid=self.base_oid)
@@ -53,6 +57,27 @@ class SNMPManager:
         
         # ⚡ THREAD SAFETY: Protect shared mutable state
         self._state_lock = threading.RLock()
+        
+        # Instantiate the OID Map Converter
+        self.oid_map_converter = OidMapConverter(self.base_oid, self.state_cache_manager, self._state_lock)
+        
+        # Instantiate the State Persister
+        self.state_persister = SnmpStatePersister(
+            state_cache_manager=self.state_cache_manager,
+            thread_lock=self._state_lock,
+            notify_monitor_callback=self._notify_monitor,
+            run_bridge=self.run_bridge,
+            base_oid=self.base_oid,
+            oid_map_converter=self.oid_map_converter
+        )
+        
+        # Instantiate the Log Monitor
+        self.log_monitor = SnmpLogMonitor(
+            state_cache_manager=self.state_cache_manager,
+            thread_lock=self._state_lock,
+            notify_monitor_callback=self._notify_monitor,
+            running_flag_getter=lambda: self._running # Function to get running state
+        )
 
     def get_status(self):
         """Returns a logic-only status report for the UI."""
@@ -117,6 +142,12 @@ class SNMPManager:
         self._flat_file_thread = threading.Thread(target=self._state_to_file_loop, daemon=True, name="SNMP-FlatFileLoop")
         self._flat_file_thread.start()
 
+        # Start the SnmpStatePersister thread
+        self.state_persister.start()
+
+        # Start the SnmpLogMonitor thread
+        self.log_monitor.start()
+
         if self.run_bridge:
             try:
                 self.tree_builder.generate_master_script()
@@ -125,9 +156,6 @@ class SNMPManager:
                 from oaComBroker.Managers.protocol_router import ProtocolRouter
                 ProtocolRouter.get_instance().register_cache_observer(self.handle_protocol_event)
                     
-                self._log_monitor_thread = threading.Thread(target=self._file_to_sql_loop, daemon=True, name="SNMP-LogMonitorLoop")
-                self._log_monitor_thread.start()
-                
                 # Initial MIB Sync
                 self.save_current_mib()
                 if LOCAL_DEBUG:
@@ -142,6 +170,9 @@ class SNMPManager:
         with self._state_lock:
             self._running = False
         snmp_logger.warning("SNMP Bridge Offline.")
+        
+        # Stop the SnmpStatePersister thread
+        self.state_persister.stop()
 
     def publish(self, topic, val, meta=None):
         """
@@ -157,9 +188,12 @@ class SNMPManager:
     def get_mib_content(self):
         if LOCAL_DEBUG:
             snmp_logger.debug("Generating dynamic MIB content.")
-        self._update_oid_map()
+        # Updated to use the new OidMapConverter
+        oid_map_data = self.oid_map_converter.build_oid_map()
         with self._state_lock:
-            return MibGenerator.generate(self.base_oid, self.oid_map)
+            # The build_oid_map method now updates self.oid_map_converter.oid_map directly
+            # We retrieve it here to pass to MibGenerator
+            return MibGenerator.generate(self.base_oid, self.oid_map_converter.oid_map)
 
     def save_current_mib(self):
         try:
@@ -191,76 +225,7 @@ class SNMPManager:
         mib_content = self.get_mib_content()
         return SnmpTester.verify_oid_tree(self.base_oid, mib_content=mib_content)
 
-    def _update_oid_map(self):
-        """
-        ⚡ THREAD SAFE: Updates internal OID map from the state cache.
-        """
-        if not self.state_cache_manager: return {}
-        
-        # Cache access needs to be safe if the cache itself isn't internally locked
-        # Based on Audit, direct access to .cache is risky.
-        # Assuming state_cache_manager.get_cache_snapshot() exists or we lock here.
-        
-        # ⚡ FIX: Audit suggests direct access to .cache is risky.
-        # We'll wrap the iteration in the state lock if cache doesn't provide a thread-safe view.
-        with self._state_lock:
-            # Check if cache supports thread-safe iteration or take a shallow copy
-            try:
-                # If it's a dict, dict.copy() is a shallow copy, safe from concurrent size changes during iteration
-                cache_snapshot = self.state_cache_manager.cache.copy()
-            except AttributeError:
-                # Fallback if it's not a standard dict
-                cache_snapshot = dict(self.state_cache_manager.cache)
 
-        new_oid_map = {}
-        
-        if LOCAL_DEBUG:
-            snmp_logger.debug(f"Updating OID map. Cache size: {len(cache_snapshot)}")
-
-        for topic, payload in cache_snapshot.items():
-            # ⚡ FILTER: Skip System control/status, Router, and large Blobs
-            if any(x in topic for x in ["/System/", "/Control/", "/Status/", "/Router/"]):
-                continue
-                
-            # ⚡ FILTER: Skip GUI Initialization and Discovery metadata
-            source = str(payload.get("source", "")).upper() if isinstance(payload, dict) else ""
-            if source in ["GUI-INIT", "GUI-LOAD", "SYSTEM-CONFIG"]:
-                continue
-                
-            val = payload.get("val") if isinstance(payload, dict) else payload
-            val_str = str(val) if val is not None else ""
-            
-            # ⚡ PERFORMANCE: Skip massive blobs and nested structures
-            if len(val_str) > 1000 or "{" in val_str or "[" in val_str:
-                continue
-
-            parts = topic.split('/')
-            if parts[0] == "OPEN-AIR": parts = parts[1:]
-            
-            oid_nodes = ["1"]
-            path_acc = []
-            for p in parts:
-                path_acc.append(p)
-                oid_nodes.append(get_snmp_node_id(path_acc))
-            
-            full_oid = f"{self.base_oid}.{'.'.join(oid_nodes)}"
-            descriptor = get_snmp_descriptor(path_acc)
-            
-            new_oid_map[full_oid] = {
-                "topic": topic, 
-                "val": val_str, 
-                "descriptor": descriptor,
-                "path_parts": parts
-            }
-        
-        with self._state_lock:
-            self.oid_map = new_oid_map
-            count = len(self.oid_map)
-        
-        if LOCAL_DEBUG:
-            snmp_logger.debug(f"OID map updated. Active objects: {count}")
-            
-        return new_oid_map
 
     def _state_to_file_loop(self):
         while True:
@@ -270,11 +235,13 @@ class SNMPManager:
             try:
                 if self.state_cache_manager:
                     # 1. Update the OID map (Safe call)
-                    self._update_oid_map()
+                    # Updated to use the new OidMapConverter
+                    self.oid_map_converter.build_oid_map()
                     
                     with self._state_lock:
                         # 2. Get OID map data for processing
-                        oid_data_items = list(self.oid_map.items())
+                        # The build_oid_map method updates self.oid_map_converter.oid_map directly
+                        oid_data_items = list(self.oid_map_converter.oid_map.items())
                         # Take a cache snapshot for consistent processing in this loop
                         try:
                             cache_snapshot = self.state_cache_manager.cache.copy()
@@ -306,7 +273,7 @@ class SNMPManager:
                     
                     if self.run_bridge:
                         with self._state_lock:
-                            current_count = len(self.oid_map)
+                            current_count = len(self.oid_map_converter.oid_map)
                         
                         if current_count > 0 and current_count != self._last_topic_count:
                             if LOCAL_DEBUG:
@@ -332,42 +299,6 @@ class SNMPManager:
             except Exception as e:
                 snmp_logger.error(f"State-to-File error: {e}")
             
-            time.sleep(5)
+            time.sleep(STATE_SYNC_INTERVAL)
 
-    def _file_to_sql_loop(self):
-        log_file = str(SNMP_SET_LOG)
-        while True:
-            with self._state_lock:
-                if not self._running: break
-                
-            try:
-                if os.path.isfile(log_file) and os.path.getsize(log_file) > 0:
-                    with open(log_file, "r+", encoding="utf-8") as f:
-                        lines = f.readlines()
-                        for line in lines:
-                            parts = line.split()
-                            if len(parts) >= 4 and parts[0] == "-s":
-                                oid, val = parts[1], parts[3]
-                                
-                                if LOCAL_DEBUG:
-                                    snmp_logger.debug(f"RX SET: {oid} -> {val}")
-                                
-                                # ⚡ ANTI-FEEDBACK SPEC: Define identity at transport ingress
-                                meta = {
-                                    "msg_type": "SPLICE_ACTION",
-                                    "origin_source": "SNMP"
-                                }
 
-                                from oaComBroker.Managers.protocol_router import ProtocolRouter
-                                ProtocolRouter.get_instance().ingest("SNMP", oid, val, meta)
-
-                                self._notify_monitor("RX_SET", oid, val)
-                                if self.state_cache_manager:
-                                    topic = f"OPEN-AIR/SNMP/{oid}"
-                                    self.state_cache_manager.handle_external_update(topic, val, source="SNMP", metadata=meta)
-                        f.seek(0)
-                        f.truncate()
-            except Exception as e:
-                snmp_logger.error(f"SET monitor error: {e}")
-            
-            time.sleep(0.5)

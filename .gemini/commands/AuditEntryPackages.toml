@@ -27,13 +27,13 @@ You are the Systems Compliance Engineer for the OPEN-AIR project. Your goal is t
    - Ensure the proposal uses the `__all__` list to explicitly export the public API.
 
 4. **Forensic Reporting**:
-   - Generate a report named `Audit_Entry_Packages.md`.
-   - Save the report to `oaDataAudits/`.
+   - Before beginning the audit, create an empty file named `Audit_Entry_Packages_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+   - Generate the report and save it to this pre-created file upon completion.
    - The report must list:
      - **Green Modules**: Fully compliant with the Entry.py standard.
      - **Structural Violations**: Missing `Entry.py` or missing 12-subfolders.
      - **Logic Leaks**: Root `__init__.py` files containing code that should be in `Entry.py`.
      - **Clean Entry Proposals**: Specific code snippets for refactoring the violators.
 
-Execute the audit now and save the findings to `oaDataAudits/Audit_Entry_Packages.md`.
+Execute the audit now and save the findings to the pre-created `Audit_Entry_Packages_YYYYMMDD.md` file.
 """

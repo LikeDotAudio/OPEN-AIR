@@ -18,8 +18,16 @@ from ..Constants.mqtt_config import TOPIC_STATUS, PAYLOAD_OFFLINE, WORKER_KICK_T
 class MqttAsyncWorker:
     """Handles the async MQTT loop and traffic management."""
 
-    def __init__(self, manager):
+    def __init__(self, manager, queue_manager):
+        """
+        Initializes the async worker.
+        
+        Args:
+            manager: The MqttConnectionManager instance (facade).
+            queue_manager: The MqttQueueManager instance for inbound/outbound traffic.
+        """
         self.manager = manager
+        self.queue_manager = queue_manager
         self.loop = None
         self.stop_event = None
         self.kick_event = None
@@ -99,24 +107,31 @@ class MqttAsyncWorker:
                 if self.stop_event.is_set(): break
 
                 # 1. Subscriptions
-                while not self.manager._subscribe_queue.empty():
-                    job = self.manager._subscribe_queue.get_nowait()
+                while True:
+                    job = self.queue_manager.get_subscribe_request()
+                    if job is None: break
+                    
                     try:
                         await client.subscribe(job["topic"], qos=job["qos"])
                     except Exception as e:
-                        MQTT_LOGGER.error(f"Subscribe Error: {e}")
+                        MQTT_LOGGER.error(f"aiomqtt: Subscribe Error: {e}")
                     finally:
-                        with self.manager._pending_lock:
-                            self.manager._pending_subscriptions.discard(job["topic"])
+                        self.queue_manager.task_done("subscribe")
+                        self.queue_manager.remove_pending_subscription(job["topic"])
                 
                 # 2. Publications
-                while not self.manager._publish_queue.empty():
-                    item = self.manager._publish_queue.get_nowait()
+                while True:
+                    item = self.queue_manager.get_publish_message()
+                    if item is None: break
+                    
                     topic, payload, qos, retain = self._parse_publish_item(item)
                     try:
                         await client.publish(topic, payload=payload, qos=qos, retain=retain)
                     except Exception as e:
-                        MQTT_LOGGER.error(f"Publish Error: {e}")
+                        MQTT_LOGGER.error(f"aiomqtt: Publish Error: {e}")
+                    finally:
+                        self.queue_manager.task_done("publish")
+
         except asyncio.CancelledError: pass
 
     def _parse_publish_item(self, item):

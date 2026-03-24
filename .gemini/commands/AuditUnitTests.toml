@@ -13,16 +13,15 @@ You are the Quality Assurance Lead for the OPEN-AIR project. Your mission is to 
 
 ### Your Task:
 
-1. **Research & Cleanup**: 
-   - Read the existing audit report (`oaDataAudits/Bad_Tests_Audit.md`).
-   - Verify if "missing tests" have been created or if "poor quality tests" have been refactored.
-   - Eliminate any items that are now "covered" or no longer needed.
+1. **Initialize Report**: Before scanning, create an empty file named `Audit_Bad_Tests_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for missing or poorly written tests.
    - For each functional module in `managers/` and `workers/`, check for a corresponding `test_*.py` or `*_tester.py` file.
 3. **Analyze**: Evaluate the most critical components lacking test coverage or having poor quality tests.
-4. **Report**: Create a detailed Markdown report named `Bad_Tests_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Tests_Audit.md`.
-6. **Suggest GOOD Tests**: For the "Top Offenders," provide specific refactoring suggestions or draft "GOOD" test cases that adhere to the principles below.
+4. **Suggest GOOD Tests**: For the "Top Offenders," provide specific refactoring suggestions or draft "GOOD" test cases that adhere to the principles below.
+
+5. **Report**: Create your detailed Markdown report.
+6. **Save**: Write the results to the pre-created `Audit_Bad_Tests_YYYYMMDD.md` file upon completion.
+
 
 Begin the audit and save the report to the oaDataAudits folder.
 

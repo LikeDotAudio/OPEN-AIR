@@ -1,6 +1,6 @@
 # Constants/mqtt_config.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 1.1.0
 #
 # Description: Standard MQTT configuration defaults and state constants.
 
@@ -17,3 +17,9 @@ PAYLOAD_ONLINE = "ONLINE"
 # Worker Settings
 WORKER_KICK_TIMEOUT = 5.0
 MAX_PUBLISH_BATCH = 100
+ASYNC_JOIN_TIMEOUT = 2.0
+QUEUE_GET_TIMEOUT = 0.1
+MATCH_CACHE_LIMIT = 1000
+BOOTSTRAP_WAIT_TIME = 2.0
+BROKER_CONNECT_TIMEOUT = 60
+LOG_FLUSH_INTERVAL = 0.01

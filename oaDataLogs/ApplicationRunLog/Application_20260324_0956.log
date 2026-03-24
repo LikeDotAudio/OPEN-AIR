@@ -1,0 +1,1096 @@
+095651.682 | INFO     | ⚙️ CORE   | ❓ LOG_FILTER       | oaLogging.Managers.log_filter_engine | Setting up MQTT subscription for dynamic log filtering on topic: OPEN-AIR/system/logger/filter/set
+095651.682 | INFO     | ⚙️ CORE   | SYSTEM             | oaLogging.Managers.log_filter_engine | LogFilterEngine initialized and subscribed to MQTT topic.
+095651.684 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SPLINKER on OPEN-AIR/System/Status/Splinker/List: []
+095651.735 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+095652.081 | INFO     | ⚙️ CORE   | 🔌 SNMP             | oaComSNMP.Core.snmp_state_persister | SnmpStatePersister: Started background persistence thread.
+095652.081 | INFO     | ⚙️ CORE   | 🔌 SNMP             | oaComSNMP.Core.snmp_log_monitor | SnmpLogMonitor: Started background log monitoring thread.
+095652.087 | SUCCESS  | ⚙️ CORE   | 🎹 MIDI             | oaComMidi.Core.midi_port_controller | 🎹 INPUT READY: Arturia MicroLab:Arturia MicroLab  32:0
+095652.087 | SUCCESS  | ⚙️ CORE   | 🎹 MIDI             | oaComMidi.Core.midi_port_controller | 🎹 INPUT READY: Mbox 2:Mbox 2 MIDI 1 28:0
+095652.088 | SUCCESS  | ⚙️ CORE   | 🎹 MIDI             | oaComMidi.Core.midi_port_controller | 🎹 INPUT READY: Midi Through:Midi Through Port-0 14:0
+095652.088 | SUCCESS  | ⚙️ CORE   | 🎹 MIDI             | oaComMidi.Core.midi_port_controller | 🎹 OUTPUT READY: Midi Through:Midi Through Port-0 14:0
+095652.088 | SUCCESS  | ⚙️ CORE   | 🎹 MIDI             | oaComMidi.Core.midi_port_controller | 🎹 OUTPUT READY: Mbox 2:Mbox 2 MIDI 1 28:0
+095652.089 | SUCCESS  | ⚙️ CORE   | 🎹 MIDI             | oaComMidi.Core.midi_port_controller | 🎹 OUTPUT READY: Arturia MicroLab:Arturia MicroLab  32:0
+095652.089 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MIDI on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.090 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MIDI on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.091 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+095652.094 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+095652.094 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.094 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.094 | SUCCESS  | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.router | ▶️▶️▶️ [START] Protocol Router Active (GUID: 69AE65A25B8404EA).
+095652.095 | WARNING  | ⚙️ CORE   | 🛰️ MQTT            | oaComMQTT.Managers.mqtt_connection | MQTT: Connection attempt while already running.
+095652.138 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/status: OFFLINE
+095652.140 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.141 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.141 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.141 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.142 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.142 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.144 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/status: OFFLINE
+095652.145 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Broker/Connection: OFFLINE
+095652.147 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Paths: {'root': '/home/anthony/Documents/OPEN-AIR', 'markers': '/home/anthony/Documents/OPEN-AIR/.pytest_ca...
+095652.147 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774360611.7609403}
+095652.148 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.149 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.150 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+095652.150 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+095652.151 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.152 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.152 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.193 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.193 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+095652.193 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+095652.195 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/status: OFFLINE
+095652.195 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/status: OFFLINE
+095652.195 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Broker/Connection: OFFLINE
+095652.195 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/status: OFFLINE
+095652.196 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Broker/Connection: OFFLINE
+095652.196 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Broker/Connection: OFFLINE
+095652.197 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Paths: {'root': '/home/anthony/Documents/OPEN-AIR', 'markers': '/home/anthony/Documents/OPEN-AIR/.pytest_ca...
+095652.197 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Paths: {'root': '/home/anthony/Documents/OPEN-AIR', 'markers': '/home/anthony/Documents/OPEN-AIR/.pytest_ca...
+095652.197 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Paths: {'root': '/home/anthony/Documents/OPEN-AIR', 'markers': '/home/anthony/Documents/OPEN-AIR/.pytest_ca...
+095652.080 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.ui_window | Enforced minimum window size: 800x600
+095652.080 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.ui_window | Attempting to set window maximization attributes...
+095652.081 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.ui_window | Set '-zoomed' attribute for Linux.
+095652.084 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.composition_root | 🏗️ [ROOT] Composing UI Services...
+095652.086 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SPLINKER on OPEN-AIR/System/Status/Splinker/List: []
+095652.086 | SUCCESS  | 🎨 UI      | SYSTEM             | oaGuiManager.Core.composition_root | ✅ [ROOT] UI Service Graph Composed.
+095652.100 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiSplashScreen.Methods.splash_screen | ✅ SplashScreen materialised.
+095652.100 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.ui_window | 🖥️🎨 [UI] Reveal main window.
+095652.105 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiSplashScreen.Methods.splash_screen | 👋 SplashScreen dismissed.
+095652.116 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Connecting to Broker...
+095652.117 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Starting Protocol Services...
+095652.122 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+095652.123 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/status: OFFLINE
+095652.123 | SUCCESS  | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.router | ▶️▶️▶️ [START] Protocol Router Active (GUID: 69AE65A25B8404EA).
+095652.123 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Starting OSC...
+095652.123 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Starting SNMP...
+095652.136 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+095652.136 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+095652.162 | INFO     | 🎨 UI      | 🔌 SNMP             | oaComSNMP.Core.snmp_state_persister | SnmpStatePersister: Started background persistence thread.
+095652.162 | INFO     | 🎨 UI      | 🔌 SNMP             | oaComSNMP.Core.snmp_log_monitor | SnmpLogMonitor: Started background log monitoring thread.
+095652.162 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Starting MIDI...
+095652.163 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Building Workspace...
+095652.166 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/status: OFFLINE
+095652.166 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Broker/Connection: OFFLINE
+095652.167 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Paths: {'root': '/home/anthony/Documents/OPEN-AIR', 'markers': '/home/anthony/Documents/OPEN-AIR/.pytest_ca...
+095652.168 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774360611.7609403}
+095652.168 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.168 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.169 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+095652.171 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+095652.172 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.175 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.175 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.179 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.179 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+095652.179 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+095652.213 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/status: OFFLINE
+095652.213 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Broker/Connection: OFFLINE
+095652.213 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Paths: {'root': '/home/anthony/Documents/OPEN-AIR', 'markers': '/home/anthony/Documents/OPEN-AIR/.pytest_ca...
+095652.214 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774360611.7609403}
+095652.214 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.214 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.219 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/status: OFFLINE
+095652.219 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Broker/Connection: OFFLINE
+095652.219 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774360611.7609403}
+095652.219 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Paths: {'root': '/home/anthony/Documents/OPEN-AIR', 'markers': '/home/anthony/Documents/OPEN-AIR/.pytest_ca...
+095652.219 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/status: OFFLINE
+095652.219 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Broker/Connection: OFFLINE
+095652.220 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774360611.7609403}
+095652.221 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Paths: {'root': '/home/anthony/Documents/OPEN-AIR', 'markers': '/home/anthony/Documents/OPEN-AIR/.pytest_ca...
+095652.198 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774360611.7609403}
+095652.198 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774360611.7609403}
+095652.198 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774360611.7609403}
+095652.201 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.202 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.202 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.202 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.202 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.202 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.203 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.203 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.243 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+095652.243 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+095652.244 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/status: OFFLINE
+095652.244 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Broker/Connection: OFFLINE
+095652.244 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774360611.7609403}
+095652.244 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Paths: {'root': '/home/anthony/Documents/OPEN-AIR', 'markers': '/home/anthony/Documents/OPEN-AIR/.pytest_ca...
+095652.245 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.245 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.245 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+095652.245 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+095652.537 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/visible: {'visible': True, 'ts': 1774360612.536932, 'tab_name': 'START_PAUSE_STOP'}
+095652.587 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/visibility/visible: {'visible': True, 'ts': 1774360612.536932, 'tab_name': 'START_PAUSE_STOP'}
+095652.588 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/visibility/visible: {'visible': True, 'ts': 1774360612.536932, 'tab_name': 'START_PAUSE_STOP'}
+095652.588 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/visible: {'visible': True, 'ts': 1774360612.536932, 'tab_name': 'START_PAUSE_STOP'}
+095652.606 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/visible: {'visible': True, 'ts': 1774360612.536932, 'tab_name': 'START_PAUSE_STOP'}
+095652.614 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': True, 'ts': 1774360612.6136837, 'tab_name': 'SCAN'}
+095652.664 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': True, 'ts': 1774360612.6136837, 'tab_name': 'SCAN'}
+095652.664 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': True, 'ts': 1774360612.6136837, 'tab_name': 'SCAN'}
+095652.665 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': True, 'ts': 1774360612.6136837, 'tab_name': 'SCAN'}
+095652.668 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': True, 'ts': 1774360612.6136837, 'tab_name': 'SCAN'}
+095652.677 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.678 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.678 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.678 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.678 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.678 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.703 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7025604, 'tab_name': '20260323203138_FREQUENCY'}
+095652.728 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.728 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.729 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.729 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.729 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.729 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.729 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.729 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MIDI >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.730 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.730 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] SNMP >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.753 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7025604, 'tab_name': '20260323203138_FREQUENCY'}
+095652.753 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7025604, 'tab_name': '20260323203138_FREQUENCY'}
+095652.223 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/status: OFFLINE
+095652.225 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.225 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.225 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Broker/Connection: OFFLINE
+095652.226 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.226 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.226 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: {'color': 'red', 'ts': 1774360611.7609403}
+095652.229 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Splinker/List: []
+095652.230 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Paths: {'root': '/home/anthony/Documents/OPEN-AIR', 'markers': '/home/anthony/Documents/OPEN-AIR/.pytest_ca...
+095652.230 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+095652.231 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095652.233 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095652.234 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+095652.276 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+095652.509 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.factory.Core.widget_discovery_engine | 🧩 Merging 50 widgets from Registry into Factory.
+095652.537 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/visible: {'visible': True, 'ts': 1774360612.536932, 'tab_name': 'START_PAUSE_STOP'}
+095652.557 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiSplashScreen.Methods.splash_screen | 🔬 SPLASH: Ignition Complete!
+095652.558 | DEBUG    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.ui_window | 🖥️🎨 [UI] Reveal main window.
+095652.601 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/visibility/visible: {'visible': True, 'ts': 1774360612.536932, 'tab_name': 'START_PAUSE_STOP'}
+095652.602 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/visible: {'visible': True, 'ts': 1774360612.536932, 'tab_name': 'START_PAUSE_STOP'}
+095652.603 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/visibility/visible: {'visible': True, 'ts': 1774360612.536932, 'tab_name': 'START_PAUSE_STOP'}
+095652.606 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/visible: {'visible': True, 'ts': 1774360612.536932, 'tab_name': 'START_PAUSE_STOP'}
+095652.603 | ERROR    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.factory.Core.widget_discovery_engine | ❌ Failed to instantiate widget of type <class 'oaGuiElements.Core.graphing.graphing.plot_widget_adapter.BuilderGraphingCreator'> at scan.blocks.multi_dataset_graph: 'WidgetContext' object has no attribute 'get'
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 3729, in <module>
+    main()
+    -> <function main at 0x71fcc22f7060>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 3714, in main
+    globals = debugger.run(setup["file"], None, None, is_module)
+              |        |   |                          -> False
+              |        |   -> {'port': 47375, 'ppid': 138219, 'vm_type': None, 'client': '127.0.0.1', 'access-token': None, 'client-access-token': 'd20a6d2...
+              |        -> <function PyDB.run at 0x71fcc22f4fe0>
+              -> <__main__.PyDB object at 0x71fcc275b470>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 2698, in run
+    return self._exec(is_module, entry_point_fn, module_name, file, globals, locals)
+           |    |     |          |               |            |     |        -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |    |     |          |               |            |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |    |     |          |               |            -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+           |    |     |          |               -> None
+           |    |     |          -> ''
+           |    |     -> False
+           |    -> <function PyDB._exec at 0x71fcc22f5080>
+           -> <__main__.PyDB object at 0x71fcc275b470>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 2706, in _exec
+    globals = pydevd_runpy.run_path(file, globals, "__main__")
+              |            |        |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+              |            |        -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+              |            -> <function run_path at 0x71fcc29179c0>
+              -> <module '_pydevd_bundle.pydevd_runpy' from '/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/li...
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 310, in run_path
+    return _run_module_code(code, init_globals, run_name, pkg_name=pkg_name, script_name=fname)
+           |                |     |             |                  |                     -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+           |                |     |             |                  -> ''
+           |                |     |             -> '__main__'
+           |                |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |                -> <code object <module> at 0x26e2570, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+           -> <function _run_module_code at 0x71fcc2917600>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 127, in _run_module_code
+    _run_code(code, mod_globals, init_globals, mod_name, mod_spec, pkg_name, script_name)
+    |         |     |            |             |         |         |         -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+    |         |     |            |             |         |         -> ''
+    |         |     |            |             |         -> None
+    |         |     |            |             -> '__main__'
+    |         |     |            -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+    |         |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': None, '__spec__': None, '__file__': '/home/anthony...
+    |         -> <code object <module> at 0x26e2570, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+    -> <function _run_code at 0x71fcc29171a0>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 118, in _run_code
+    exec(code, run_globals)
+         |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': None, '__spec__': None, '__file__': '/home/anthony...
+         -> <code object <module> at 0x26e2570, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 81, in <module>
+    main()
+    -> <function main at 0x71fcc235efc0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 70, in main
+    root.mainloop()
+    |    -> <function Misc.mainloop at 0x71fcb3f97a60>
+    -> <tkinter.Tk object .>
+
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1504, in mainloop
+    self.tk.mainloop(n)
+    |    |  |        -> 0
+    |    |  -> <method 'mainloop' of '_tkinter.tkapp' objects>
+    |    -> <_tkinter.tkapp object at 0x71fcb2df0e30>
+    -> <tkinter.Tk object .>
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1967, in __call__
+    return self.func(*args)
+           |    |     -> ()
+           |    -> <function Misc.after.<locals>.callit at 0x71fc5ac672e0>
+           -> <tkinter.CallWrapper object at 0x71fc5ac36e10>
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 861, in callit
+    func(*args)
+    |     -> ()
+    -> <function TabManagerMixin._on_tab_change.<locals>._populate at 0x71fc5adbf380>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Core/tab.py", line 46, in _populate
+    self._build_from_directory(path=build_path, parent_widget=selected_tab_frame)
+    |    |                          |                         -> <tkinter.Frame object .!application.!panedwindow.!frame.!panedwindow.!frame.!notebook.!frame.!notebook.!frame>
+    |    |                          -> PosixPath('/home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/left_50/top_100/0_Spectrum/3_Instrument')
+    |    -> <function DirectoryBuilderMixin._build_from_directory at 0x71fc97b8d940>
+    -> <oaGuiBuildShell.Managers.gui_display.Application object .!application>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Core/directory.py", line 64, in _build_from_directory
+    if hasattr(self, 'root') and self.root: self.root.update()
+               |                 |    |     |    |    -> <function Misc.update at 0x71fcb3f97380>
+               |                 |    |     |    -> <tkinter.Tk object .>
+               |                 |    |     -> <oaGuiBuildShell.Managers.gui_display.Application object .!application>
+               |                 |    -> <tkinter.Tk object .>
+               |                 -> <oaGuiBuildShell.Managers.gui_display.Application object .!application>
+               -> <oaGuiBuildShell.Managers.gui_display.Application object .!application>
+
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1372, in update
+    self.tk.call('update')
+    |    |  -> <method 'call' of '_tkinter.tkapp' objects>
+    |    -> <_tkinter.tkapp object at 0x71fcb2df0e30>
+    -> <tkinter.Tk object .>
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1967, in __call__
+    return self.func(*args)
+           |    |     -> ()
+           |    -> <function Misc.after.<locals>.callit at 0x71fc5ac50fe0>
+           -> <tkinter.CallWrapper object at 0x71fc5ac9e600>
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 861, in callit
+    func(*args)
+    |     -> ()
+    -> <bound method UniversalGuiLoader._construct_dynamic_gui of <oaGuiManager.Core.loader.gui_from_json.UniversalGuiLoader object ...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/loader/gui_from_json.py", line 65, in _construct_dynamic_gui
+    self._instantiate_builder()
+    |    -> <function UniversalGuiLoader._instantiate_builder at 0x71fc97b8c900>
+    -> <oaGuiManager.Core.loader.gui_from_json.UniversalGuiLoader object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!no...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/loader/gui_from_json.py", line 79, in _instantiate_builder
+    self.dynamic_gui = DynamicGuiBuilder(
+    |                  -> <class 'oaGuiBuilder.Workers.builder.DynamicGuiBuilder'>
+    -> <oaGuiManager.Core.loader.gui_from_json.UniversalGuiLoader object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!no...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuilder/Workers/builder.py", line 203, in __init__
+    self._load_and_build_from_file()
+    |    -> <function GuiFileLoaderMixin._load_and_build_from_file at 0x71fcb2c62840>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/FileReaders/gui_file_loader.py", line 54, in _load_and_build_from_file
+    self._rebuild_gui()
+    |    -> <function GuiRebuilderMixin._rebuild_gui at 0x71fcb2cc5260>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Managers/gui_re.py", line 98, in _rebuild_gui
+    self._create_dynamic_widgets(self.scroll_frame, self.config_data, on_complete=on_build_complete)
+    |    |                       |    |             |    |                        -> <function GuiRebuilderMixin._rebuild_gui.<locals>.on_build_complete at 0x71fc7c7a3f60>
+    |    |                       |    |             |    -> {'background': {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'color...
+    |    |                       |    |             -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+    |    |                       |    -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame.!universalguiloader.!dynamicgu...
+    |    |                       -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+    |    -> <function GuiBatchBuilderMixin._create_dynamic_widgets at 0x71fcb2cc6200>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Managers/gui_batch.py", line 70, in _create_dynamic_widgets
+    self._async_renderer.render(
+    |    |               -> <function AsyncGridRenderer.render at 0x71fcb2cc5ee0>
+    |    -> <oaGuiBuildShell.Workers.async_grid_renderer.AsyncGridRenderer object at 0x71fc5ac63b60>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Workers/async_grid_renderer.py", line 85, in render
+    self._process_fields(parent_frame, all_fields, path_prefix, num_cols, on_complete, eff_bg, data, context)
+    |    |               |             |           |            |         |            |       |     -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+    |    |               |             |           |            |         |            |       -> {'background': {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'color...
+    |    |               |             |           |            |         |            -> None
+    |    |               |             |           |            |         -> <function GuiRebuilderMixin._rebuild_gui.<locals>.on_build_complete at 0x71fc7c7a3f60>
+    |    |               |             |           |            -> 1
+    |    |               |             |           -> ''
+    |    |               |             -> [('background', {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'colo...
+    |    |               -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame.!universalguiloader.!dynamicgu...
+    |    -> <function AsyncGridRenderer._process_fields at 0x71fcb2cc60c0>
+    -> <oaGuiBuildShell.Workers.async_grid_renderer.AsyncGridRenderer object at 0x71fc5ac63b60>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Workers/async_grid_renderer.py", line 157, in _process_fields
+    self.render(inner, val, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context)
+    |    |      |      |    |                              |     |                  |                     |                             |               -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+    |    |      |      |    |                              |     |                  |                     |                             -> None
+    |    |      |      |    |                              |     |                  |                     -> <function AsyncGridRenderer._process_fields.<locals>._check_done at 0x71fc5ac51440>
+    |    |      |      |    |                              |     |                  -> {'pending': 1, 'loop_done': False, 'aborted': False}
+    |    |      |      |    |                              |     -> <method 'update' of 'dict' objects>
+    |    |      |      |    |                              -> {'pending': 1, 'loop_done': False, 'aborted': False}
+    |    |      |      |    -> 'scan'
+    |    |      |      -> {'type': 'OcaBin', 'id': '50.90.1', 'blocks': {'multi_dataset_graph': {'type': 'plot_widget', 'id': 'multi_dataset_plot', 'tr...
+    |    |      -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame.!universalguiloader.!dynamicgu...
+    |    -> <function AsyncGridRenderer.render at 0x71fcb2cc5ee0>
+    -> <oaGuiBuildShell.Workers.async_grid_renderer.AsyncGridRenderer object at 0x71fc5ac63b60>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Workers/async_grid_renderer.py", line 85, in render
+    self._process_fields(parent_frame, all_fields, path_prefix, num_cols, on_complete, eff_bg, data, context)
+    |    |               |             |           |            |         |            |       |     -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+    |    |               |             |           |            |         |            |       -> {'type': 'OcaBin', 'id': '50.90.1', 'blocks': {'multi_dataset_graph': {'type': 'plot_widget', 'id': 'multi_dataset_plot', 'tr...
+    |    |               |             |           |            |         |            -> None
+    |    |               |             |           |            |         -> <function AsyncGridRenderer._process_fields.<locals>.<lambda> at 0x71fc5acad260>
+    |    |               |             |           |            -> 1
+    |    |               |             |           -> 'scan'
+    |    |               |             -> [('multi_dataset_graph', {'type': 'plot_widget', 'id': 'multi_dataset_plot', 'transparent': True, 'layout': {'height': 1000, ...
+    |    |               -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame.!universalguiloader.!dynamicgu...
+    |    -> <function AsyncGridRenderer._process_fields at 0x71fcb2cc60c0>
+    -> <oaGuiBuildShell.Workers.async_grid_renderer.AsyncGridRenderer object at 0x71fc5ac63b60>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Workers/async_grid_renderer.py", line 175, in _process_fields
+    if deferred and not state["aborted"]: self.batch_engine.process(parent, deferred, 25, context, state, _check_done)
+       |                |                 |    |            |       |       |             |        |      -> <function AsyncGridRenderer._process_fields.<locals>._check_done at 0x71fc5acad1c0>
+       |                |                 |    |            |       |       |             |        -> {'pending': 1, 'loop_done': True, 'aborted': False}
+       |                |                 |    |            |       |       |             -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+       |                |                 |    |            |       |       -> [{'r': 0, 'c': 0, 'val': {'type': 'plot_widget', 'id': 'multi_dataset_plot', 'transparent': True, 'layout': {'height': 1000, ...
+       |                |                 |    |            |       -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame.!universalguiloader.!dynamicgu...
+       |                |                 |    |            -> <function BatchProcessingEngine.process at 0x71fcb2cc6020>
+       |                |                 |    -> <oaGuiBuildShell.Core.batch_processing_engine.BatchProcessingEngine object at 0x71fc5ac36960>
+       |                |                 -> <oaGuiBuildShell.Workers.async_grid_renderer.AsyncGridRenderer object at 0x71fc5ac63b60>
+       |                -> {'pending': 1, 'loop_done': True, 'aborted': False}
+       -> [{'r': 0, 'c': 0, 'val': {'type': 'plot_widget', 'id': 'multi_dataset_plot', 'transparent': True, 'layout': {'height': 1000, ...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Core/batch_processing_engine.py", line 29, in process
+    widget = creator(parent_widget=parent, config_data=wd, context=context)
+             |                     |                   |           -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+             |                     |                   -> {'type': 'plot_widget', 'id': 'multi_dataset_plot', 'transparent': True, 'layout': {'height': 1000, 'sticky': '', 'weight_y':...
+             |                     -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame.!universalguiloader.!dynamicgu...
+             -> <function WidgetDiscoveryEngine._make_wrapper.<locals>.wrapper at 0x71fc5ac65760>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/factory/Core/widget_discovery_engine.py", line 36, in wrapper
+    return cls_ref.make(parent_widget, config_data, context, **kwargs)
+           |       |    |              |            |          -> {}
+           |       |    |              |            -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+           |       |    |              -> {'type': 'plot_widget', 'id': 'multi_dataset_plot', 'transparent': True, 'layout': {'height': 1000, 'sticky': '', 'weight_y':...
+           |       |    -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame.!universalguiloader.!dynamicgu...
+           |       -> <function BuilderGraphingCreator.make at 0x71fc7c85b560>
+           -> <class 'oaGuiElements.Core.graphing.graphing.plot_widget_adapter.BuilderGraphingCreator'>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiElements/Core/graphing/graphing/plot_widget_adapter.py", line 26, in make
+    w_type = config_data.get("type")
+             -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+
+AttributeError: 'WidgetContext' object has no attribute 'get'
+095652.614 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': True, 'ts': 1774360612.6136837, 'tab_name': 'SCAN'}
+095652.667 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': True, 'ts': 1774360612.6136837, 'tab_name': 'SCAN'}
+095652.667 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': True, 'ts': 1774360612.6136837, 'tab_name': 'SCAN'}
+095652.667 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': True, 'ts': 1774360612.6136837, 'tab_name': 'SCAN'}
+095652.668 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': True, 'ts': 1774360612.6136837, 'tab_name': 'SCAN'}
+095652.677 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] GUI on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.677 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.677 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.678 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.703 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7025604, 'tab_name': '20260323203138_FREQUENCY'}
+095652.728 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.728 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.729 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.753 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7025604, 'tab_name': '20260323203138_FREQUENCY'}
+095652.754 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7025604, 'tab_name': '20260323203138_FREQUENCY'}
+095652.754 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 0.0
+095652.754 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7025604, 'tab_name': '20260323203138_FREQUENCY'}
+095652.796 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7025604, 'tab_name': '20260323203138_FREQUENCY'}
+095652.799 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7990732, 'tab_name': 'FREQUENCY'}
+095652.849 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7990732, 'tab_name': 'FREQUENCY'}
+095652.850 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7990732, 'tab_name': 'FREQUENCY'}
+095652.850 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7990732, 'tab_name': 'FREQUENCY'}
+095652.851 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7990732, 'tab_name': 'FREQUENCY'}
+095653.090 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.0901163, 'tab_name': 'START_PAUSE_...
+095653.114 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.1138682, 'tab_name': 'SCAN'}
+095653.140 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.0901163, 'tab_name': 'START_PAUSE_...
+095653.141 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.0901163, 'tab_name': 'START_PAUSE_...
+095651.344 | WARNING  | ❓ SUP     | SYSTEM             | oaTests.Methods.FlameGraph.flame_capture | FlameGraph: Profiler enable failed, running thread without profiling: Another profiling tool is already active
+095651.344 | WARNING  | ❓ SUP     | SYSTEM             | oaTests.Methods.FlameGraph.flame_capture | FlameGraph: Profiler enable failed, running thread without profiling: Another profiling tool is already active
+095653.142 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.0901163, 'tab_name': 'START_PAUSE_...
+095653.164 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.1138682, 'tab_name': 'SCAN'}
+095653.164 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.1138682, 'tab_name': 'SCAN'}
+095653.165 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.0901163, 'tab_name': 'START_PAUSE_...
+095653.206 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.1138682, 'tab_name': 'SCAN'}
+095653.206 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.1138682, 'tab_name': 'SCAN'}
+095653.341 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.341277, 'tab_name': '2026032320313...
+095653.342 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.3414555, 'tab_name': 'FREQUENCY'}
+095653.392 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.3414555, 'tab_name': 'FREQUENCY'}
+095653.392 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.3414555, 'tab_name': 'FREQUENCY'}
+095653.393 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.3414555, 'tab_name': 'FREQUENCY'}
+095653.393 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.3414555, 'tab_name': 'FREQUENCY'}
+095653.557 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095653.558 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095653.558 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/System/Status/Broker/Connection: ONLINE
+095653.558 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/System/Status/Paths: {'root': '/home/anthony/Documents/OPEN-AIR', 'markers': '/home/anthony/Documents/OPEN-AIR/.pytest_ca...
+095653.558 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095653.558 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095653.558 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/GUI/Global/Header/StatusLight: 
+095653.559 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Paths: {'root': '/home/anthony/Documents/OPEN-AIR', 'markers': '/home/anthony/Documents/OPEN-AIR/.pytest_ca...
+095653.559 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Broker/Connection: ONLINE
+095653.559 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095653.559 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/System/Status/Splinker/List: []
+095653.559 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/GUI/Global/Header/StatusLight: 
+095653.560 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/oaGuiDefinitions/Assets/visibility/visible: 
+095653.560 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095653.560 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: 
+095653.560 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Splinker/List: []
+095653.560 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/visibility/visible: 
+095653.560 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+095653.560 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Broker/Connection: ONLINE
+095653.561 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: 
+095653.561 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: 
+095653.561 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+095653.561 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Paths: {'root': '/home/anthony/Documents/OPEN-AIR', 'markers': '/home/anthony/Documents/OPEN-AIR/.pytest_ca...
+095653.561 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz: 0.0
+095653.561 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: 
+095653.561 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/Assets/right_top/blocks/Control_Buttons/Pause: False
+095653.562 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz: 0.0
+095653.562 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: 
+095653.562 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+095653.562 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Assets/right_top/blocks/Control_Buttons/Pause: False
+095653.562 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 600.0
+095653.562 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+095653.562 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+095653.562 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Quick Span/Span: UNSELECTED
+095653.562 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 600.0
+095653.563 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/visible: 
+095653.563 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry: 
+095653.563 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Quick Span/Span: UNSELECTED
+095652.754 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7025604, 'tab_name': '20260323203138_FREQUENCY'}
+095652.796 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7025604, 'tab_name': '20260323203138_FREQUENCY'}
+095652.799 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7990732, 'tab_name': 'FREQUENCY'}
+095652.849 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7990732, 'tab_name': 'FREQUENCY'}
+095652.850 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7990732, 'tab_name': 'FREQUENCY'}
+095652.850 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7990732, 'tab_name': 'FREQUENCY'}
+095652.850 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: {'visible': True, 'ts': 1774360612.7990732, 'tab_name': 'FREQUENCY'}
+095653.090 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.0901163, 'tab_name': 'START_PAUSE_...
+095653.114 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.1138682, 'tab_name': 'SCAN'}
+095653.140 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.0901163, 'tab_name': 'START_PAUSE_...
+095653.141 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.0901163, 'tab_name': 'START_PAUSE_...
+095653.141 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.0901163, 'tab_name': 'START_PAUSE_...
+095653.142 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.0901163, 'tab_name': 'START_PAUSE_...
+095653.164 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.1138682, 'tab_name': 'SCAN'}
+095653.164 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.1138682, 'tab_name': 'SCAN'}
+095653.165 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.1138682, 'tab_name': 'SCAN'}
+095653.207 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.1138682, 'tab_name': 'SCAN'}
+095653.341 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.341277, 'tab_name': '2026032320313...
+095653.342 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.3414555, 'tab_name': 'FREQUENCY'}
+095653.392 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.3414555, 'tab_name': 'FREQUENCY'}
+095653.392 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.3414555, 'tab_name': 'FREQUENCY'}
+095653.393 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.3414555, 'tab_name': 'FREQUENCY'}
+095653.393 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: {'width': 1920, 'height': 1163, 'x': 0, 'y': 37, 'ts': 1774360613.3414555, 'tab_name': 'FREQUENCY'}
+095653.558 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveInputs: ['Arturia MicroLab:Arturia MicroLab  32:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Midi Through:Midi Through ...
+095653.559 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/MIDI/ActiveOutputs: ['Midi Through:Midi Through Port-0 14:0', 'Mbox 2:Mbox 2 MIDI 1 28:0', 'Arturia MicroLab:Arturia Mic...
+095653.560 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Broker/Connection: ONLINE
+095653.560 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Paths: {'root': '/home/anthony/Documents/OPEN-AIR', 'markers': '/home/anthony/Documents/OPEN-AIR/.pytest_ca...
+095653.561 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/GUI/Global/Header/StatusLight: 
+095653.562 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Splinker/List: []
+095653.562 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/visible: 
+095653.563 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: 
+095653.563 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+095653.564 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: 
+095653.565 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz: 0.0
+095653.565 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/right_top/blocks/Control_Buttons/Pause: False
+095653.566 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+095653.567 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 600.0
+095653.567 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Quick Span/Span: UNSELECTED
+095653.568 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry: 
+095653.568 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/geometry: 
+095653.568 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: 
+095653.569 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/status: 
+095653.569 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/dial_config: 500.0
+095653.569 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/bandwidth/visibility/visible: 
+095653.570 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/fader_config: 0.0
+095653.570 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/bandwidth/visibility/geometry: 
+095653.563 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/geometry: 
+095653.563 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: 
+095653.563 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry: 
+095653.564 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: 
+095653.564 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/geometry: 
+095653.564 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/status: 
+095653.564 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: 
+095653.564 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/dial_config: 500.0
+095653.564 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/status: 
+095653.564 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/bandwidth/visibility/visible: 
+095653.564 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/dial_config: 500.0
+095653.565 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/fader_config: 0.0
+095653.565 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/bandwidth/visibility/visible: 
+095653.565 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] DISK on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/bandwidth/visibility/geometry: 
+095653.565 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/fader_config: 0.0
+095653.565 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/bandwidth/visibility/geometry: 
+095653.565 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz: 0.0
+095653.565 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/visible: 
+095653.566 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz: 0.0
+095653.567 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/right_top/blocks/Control_Buttons/Pause: False
+095653.567 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz: 0.0
+095653.567 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz: 600.0
+095653.568 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Quick Span/Span: UNSELECTED
+095653.568 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry: 
+095653.568 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/geometry: 
+095653.569 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/frequency/visibility/geometry: 
+095653.569 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/status: 
+095653.569 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/dial_config: 500.0
+095653.570 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/bandwidth/visibility/visible: 
+095653.570 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/fader_config: 0.0
+095653.570 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/Spectrum/Instrument/bandwidth/visibility/geometry: 
+095654.861 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': False, 'ts': 1774360614.860692, 'tab_name': 'SCAN'}
+095654.911 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': False, 'ts': 1774360614.860692, 'tab_name': 'SCAN'}
+095654.912 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': False, 'ts': 1774360614.860692, 'tab_name': 'SCAN'}
+095654.912 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9117668, 'tab_name': '1_TOP'}
+095654.912 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': False, 'ts': 1774360614.860692, 'tab_name': 'SCAN'}
+095654.953 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': False, 'ts': 1774360614.860692, 'tab_name': 'SCAN'}
+095654.962 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9117668, 'tab_name': '1_TOP'}
+095654.963 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9117668, 'tab_name': '1_TOP'}
+095654.963 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9117668, 'tab_name': '1_TOP'}
+095655.005 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9117668, 'tab_name': '1_TOP'}
+095655.005 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9779685, 'tab_name': '2_MIDDLE'}
+095655.046 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9779685, 'tab_name': '2_MIDDLE'}
+095655.055 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9779685, 'tab_name': '2_MIDDLE'}
+095655.056 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9779685, 'tab_name': '2_MIDDLE'}
+095655.056 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9779685, 'tab_name': '2_MIDDLE'}
+095655.260 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360615.260058, 'tab_name': '3_BOTTOM'}
+095655.310 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360615.260058, 'tab_name': '3_BOTTOM'}
+095655.311 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360615.260058, 'tab_name': '3_BOTTOM'}
+095655.311 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360615.260058, 'tab_name': '3_BOTTOM'}
+095655.311 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360615.260058, 'tab_name': '3_BOTTOM'}
+095654.861 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': False, 'ts': 1774360614.860692, 'tab_name': 'SCAN'}
+095654.906 | ERROR    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.factory.Core.widget_discovery_engine | ❌ Failed to instantiate widget of type <class 'oaGuiElements.Core.graphing.graphing.plot_widget_adapter.BuilderGraphingCreator'> at monitors: 'WidgetContext' object has no attribute 'get'
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 3729, in <module>
+    main()
+    -> <function main at 0x71fcc22f7060>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 3714, in main
+    globals = debugger.run(setup["file"], None, None, is_module)
+              |        |   |                          -> False
+              |        |   -> {'port': 47375, 'ppid': 138219, 'vm_type': None, 'client': '127.0.0.1', 'access-token': None, 'client-access-token': 'd20a6d2...
+              |        -> <function PyDB.run at 0x71fcc22f4fe0>
+              -> <__main__.PyDB object at 0x71fcc275b470>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 2698, in run
+    return self._exec(is_module, entry_point_fn, module_name, file, globals, locals)
+           |    |     |          |               |            |     |        -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |    |     |          |               |            |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |    |     |          |               |            -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+           |    |     |          |               -> None
+           |    |     |          -> ''
+           |    |     -> False
+           |    -> <function PyDB._exec at 0x71fcc22f5080>
+           -> <__main__.PyDB object at 0x71fcc275b470>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 2706, in _exec
+    globals = pydevd_runpy.run_path(file, globals, "__main__")
+              |            |        |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+              |            |        -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+              |            -> <function run_path at 0x71fcc29179c0>
+              -> <module '_pydevd_bundle.pydevd_runpy' from '/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/li...
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 310, in run_path
+    return _run_module_code(code, init_globals, run_name, pkg_name=pkg_name, script_name=fname)
+           |                |     |             |                  |                     -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+           |                |     |             |                  -> ''
+           |                |     |             -> '__main__'
+           |                |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |                -> <code object <module> at 0x26e2570, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+           -> <function _run_module_code at 0x71fcc2917600>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 127, in _run_module_code
+    _run_code(code, mod_globals, init_globals, mod_name, mod_spec, pkg_name, script_name)
+    |         |     |            |             |         |         |         -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+    |         |     |            |             |         |         -> ''
+    |         |     |            |             |         -> None
+    |         |     |            |             -> '__main__'
+    |         |     |            -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+    |         |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': None, '__spec__': None, '__file__': '/home/anthony...
+    |         -> <code object <module> at 0x26e2570, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+    -> <function _run_code at 0x71fcc29171a0>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 118, in _run_code
+    exec(code, run_globals)
+         |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': None, '__spec__': None, '__file__': '/home/anthony...
+         -> <code object <module> at 0x26e2570, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 81, in <module>
+    main()
+    -> <function main at 0x71fcc235efc0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 70, in main
+    root.mainloop()
+    |    -> <function Misc.mainloop at 0x71fcb3f97a60>
+    -> <tkinter.Tk object .>
+
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1504, in mainloop
+    self.tk.mainloop(n)
+    |    |  |        -> 0
+    |    |  -> <method 'mainloop' of '_tkinter.tkapp' objects>
+    |    -> <_tkinter.tkapp object at 0x71fcb2df0e30>
+    -> <tkinter.Tk object .>
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1967, in __call__
+    return self.func(*args)
+           |    |     -> ()
+           |    -> <function Misc.after.<locals>.callit at 0x71fc5aa44540>
+           -> <tkinter.CallWrapper object at 0x71fc5aa96bd0>
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 861, in callit
+    func(*args)
+    |     -> ()
+    -> <bound method UniversalGuiLoader._construct_dynamic_gui of <oaGuiManager.Core.loader.gui_from_json.UniversalGuiLoader object ...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/loader/gui_from_json.py", line 65, in _construct_dynamic_gui
+    self._instantiate_builder()
+    |    -> <function UniversalGuiLoader._instantiate_builder at 0x71fc97b8c900>
+    -> <oaGuiManager.Core.loader.gui_from_json.UniversalGuiLoader object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!no...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/loader/gui_from_json.py", line 79, in _instantiate_builder
+    self.dynamic_gui = DynamicGuiBuilder(
+    |                  -> <class 'oaGuiBuilder.Workers.builder.DynamicGuiBuilder'>
+    -> <oaGuiManager.Core.loader.gui_from_json.UniversalGuiLoader object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!no...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuilder/Workers/builder.py", line 203, in __init__
+    self._load_and_build_from_file()
+    |    -> <function GuiFileLoaderMixin._load_and_build_from_file at 0x71fcb2c62840>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/FileReaders/gui_file_loader.py", line 54, in _load_and_build_from_file
+    self._rebuild_gui()
+    |    -> <function GuiRebuilderMixin._rebuild_gui at 0x71fcb2cc5260>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Managers/gui_re.py", line 98, in _rebuild_gui
+    self._create_dynamic_widgets(self.scroll_frame, self.config_data, on_complete=on_build_complete)
+    |    |                       |    |             |    |                        -> <function GuiRebuilderMixin._rebuild_gui.<locals>.on_build_complete at 0x71fc5abd6160>
+    |    |                       |    |             |    -> {'background': {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'color...
+    |    |                       |    |             -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+    |    |                       |    -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+    |    |                       -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+    |    -> <function GuiBatchBuilderMixin._create_dynamic_widgets at 0x71fcb2cc6200>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Managers/gui_batch.py", line 70, in _create_dynamic_widgets
+    self._async_renderer.render(
+    |    |               -> <function AsyncGridRenderer.render at 0x71fcb2cc5ee0>
+    |    -> <oaGuiBuildShell.Workers.async_grid_renderer.AsyncGridRenderer object at 0x71fc5aa14860>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Workers/async_grid_renderer.py", line 85, in render
+    self._process_fields(parent_frame, all_fields, path_prefix, num_cols, on_complete, eff_bg, data, context)
+    |    |               |             |           |            |         |            |       |     -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+    |    |               |             |           |            |         |            |       -> {'background': {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'color...
+    |    |               |             |           |            |         |            -> None
+    |    |               |             |           |            |         -> <function GuiRebuilderMixin._rebuild_gui.<locals>.on_build_complete at 0x71fc5abd6160>
+    |    |               |             |           |            -> 1
+    |    |               |             |           -> ''
+    |    |               |             -> [('background', {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'colo...
+    |    |               -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+    |    -> <function AsyncGridRenderer._process_fields at 0x71fcb2cc60c0>
+    -> <oaGuiBuildShell.Workers.async_grid_renderer.AsyncGridRenderer object at 0x71fc5aa14860>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Workers/async_grid_renderer.py", line 175, in _process_fields
+    if deferred and not state["aborted"]: self.batch_engine.process(parent, deferred, 25, context, state, _check_done)
+       |                |                 |    |            |       |       |             |        |      -> <function AsyncGridRenderer._process_fields.<locals>._check_done at 0x71fc5abd6840>
+       |                |                 |    |            |       |       |             |        -> {'pending': 1, 'loop_done': True, 'aborted': False}
+       |                |                 |    |            |       |       |             -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+       |                |                 |    |            |       |       -> [{'r': 0, 'c': 0, 'val': {'type': 'plot_widget', 'id': '50.90.2.1', 'transparent': True, 'layout': {'height': 300, 'sticky': ...
+       |                |                 |    |            |       -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+       |                |                 |    |            -> <function BatchProcessingEngine.process at 0x71fcb2cc6020>
+       |                |                 |    -> <oaGuiBuildShell.Core.batch_processing_engine.BatchProcessingEngine object at 0x71fc5aa27830>
+       |                |                 -> <oaGuiBuildShell.Workers.async_grid_renderer.AsyncGridRenderer object at 0x71fc5aa14860>
+       |                -> {'pending': 1, 'loop_done': True, 'aborted': False}
+       -> [{'r': 0, 'c': 0, 'val': {'type': 'plot_widget', 'id': '50.90.2.1', 'transparent': True, 'layout': {'height': 300, 'sticky': ...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Core/batch_processing_engine.py", line 29, in process
+    widget = creator(parent_widget=parent, config_data=wd, context=context)
+             |                     |                   |           -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+             |                     |                   -> {'type': 'plot_widget', 'id': '50.90.2.1', 'transparent': True, 'layout': {'height': 300, 'sticky': 'NS', 'weight_y': 1}, 'pl...
+             |                     -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+             -> <function WidgetDiscoveryEngine._make_wrapper.<locals>.wrapper at 0x71fc5ac65760>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/factory/Core/widget_discovery_engine.py", line 36, in wrapper
+    return cls_ref.make(parent_widget, config_data, context, **kwargs)
+           |       |    |              |            |          -> {}
+           |       |    |              |            -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+           |       |    |              -> {'type': 'plot_widget', 'id': '50.90.2.1', 'transparent': True, 'layout': {'height': 300, 'sticky': 'NS', 'weight_y': 1}, 'pl...
+           |       |    -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+           |       -> <function BuilderGraphingCreator.make at 0x71fc7c85b560>
+           -> <class 'oaGuiElements.Core.graphing.graphing.plot_widget_adapter.BuilderGraphingCreator'>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiElements/Core/graphing/graphing/plot_widget_adapter.py", line 26, in make
+    w_type = config_data.get("type")
+             -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+
+AttributeError: 'WidgetContext' object has no attribute 'get'
+095654.911 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': False, 'ts': 1774360614.860692, 'tab_name': 'SCAN'}
+095654.912 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': False, 'ts': 1774360614.860692, 'tab_name': 'SCAN'}
+095654.912 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9117668, 'tab_name': '1_TOP'}
+095654.913 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': False, 'ts': 1774360614.860692, 'tab_name': 'SCAN'}
+095654.913 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/scan/visibility/visible: {'visible': False, 'ts': 1774360614.860692, 'tab_name': 'SCAN'}
+095654.947 | ERROR    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.factory.Core.widget_discovery_engine | ❌ Failed to instantiate widget of type <class 'oaGuiElements.Core.graphing.graphing.plot_widget_adapter.BuilderGraphingCreator'> at monitors: 'WidgetContext' object has no attribute 'get'
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 3729, in <module>
+    main()
+    -> <function main at 0x71fcc22f7060>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 3714, in main
+    globals = debugger.run(setup["file"], None, None, is_module)
+              |        |   |                          -> False
+              |        |   -> {'port': 47375, 'ppid': 138219, 'vm_type': None, 'client': '127.0.0.1', 'access-token': None, 'client-access-token': 'd20a6d2...
+              |        -> <function PyDB.run at 0x71fcc22f4fe0>
+              -> <__main__.PyDB object at 0x71fcc275b470>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 2698, in run
+    return self._exec(is_module, entry_point_fn, module_name, file, globals, locals)
+           |    |     |          |               |            |     |        -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |    |     |          |               |            |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |    |     |          |               |            -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+           |    |     |          |               -> None
+           |    |     |          -> ''
+           |    |     -> False
+           |    -> <function PyDB._exec at 0x71fcc22f5080>
+           -> <__main__.PyDB object at 0x71fcc275b470>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 2706, in _exec
+    globals = pydevd_runpy.run_path(file, globals, "__main__")
+              |            |        |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+              |            |        -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+              |            -> <function run_path at 0x71fcc29179c0>
+              -> <module '_pydevd_bundle.pydevd_runpy' from '/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/li...
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 310, in run_path
+    return _run_module_code(code, init_globals, run_name, pkg_name=pkg_name, script_name=fname)
+           |                |     |             |                  |                     -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+           |                |     |             |                  -> ''
+           |                |     |             -> '__main__'
+           |                |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |                -> <code object <module> at 0x26e2570, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+           -> <function _run_module_code at 0x71fcc2917600>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 127, in _run_module_code
+    _run_code(code, mod_globals, init_globals, mod_name, mod_spec, pkg_name, script_name)
+    |         |     |            |             |         |         |         -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+    |         |     |            |             |         |         -> ''
+    |         |     |            |             |         -> None
+    |         |     |            |             -> '__main__'
+    |         |     |            -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+    |         |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': None, '__spec__': None, '__file__': '/home/anthony...
+    |         -> <code object <module> at 0x26e2570, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+    -> <function _run_code at 0x71fcc29171a0>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 118, in _run_code
+    exec(code, run_globals)
+         |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': None, '__spec__': None, '__file__': '/home/anthony...
+         -> <code object <module> at 0x26e2570, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 81, in <module>
+    main()
+    -> <function main at 0x71fcc235efc0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 70, in main
+    root.mainloop()
+    |    -> <function Misc.mainloop at 0x71fcb3f97a60>
+    -> <tkinter.Tk object .>
+
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1504, in mainloop
+    self.tk.mainloop(n)
+    |    |  |        -> 0
+    |    |  -> <method 'mainloop' of '_tkinter.tkapp' objects>
+    |    -> <_tkinter.tkapp object at 0x71fcb2df0e30>
+    -> <tkinter.Tk object .>
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1967, in __call__
+    return self.func(*args)
+           |    |     -> ()
+           |    -> <function Misc.after.<locals>.callit at 0x71fc5abb7560>
+           -> <tkinter.CallWrapper object at 0x71fc7c993410>
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 861, in callit
+    func(*args)
+    |     -> ()
+    -> <bound method UniversalGuiLoader._construct_dynamic_gui of <oaGuiManager.Core.loader.gui_from_json.UniversalGuiLoader object ...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/loader/gui_from_json.py", line 65, in _construct_dynamic_gui
+    self._instantiate_builder()
+    |    -> <function UniversalGuiLoader._instantiate_builder at 0x71fc97b8c900>
+    -> <oaGuiManager.Core.loader.gui_from_json.UniversalGuiLoader object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!no...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/loader/gui_from_json.py", line 79, in _instantiate_builder
+    self.dynamic_gui = DynamicGuiBuilder(
+    |                  -> <class 'oaGuiBuilder.Workers.builder.DynamicGuiBuilder'>
+    -> <oaGuiManager.Core.loader.gui_from_json.UniversalGuiLoader object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!no...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuilder/Workers/builder.py", line 203, in __init__
+    self._load_and_build_from_file()
+    |    -> <function GuiFileLoaderMixin._load_and_build_from_file at 0x71fcb2c62840>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/FileReaders/gui_file_loader.py", line 54, in _load_and_build_from_file
+    self._rebuild_gui()
+    |    -> <function GuiRebuilderMixin._rebuild_gui at 0x71fcb2cc5260>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Managers/gui_re.py", line 98, in _rebuild_gui
+    self._create_dynamic_widgets(self.scroll_frame, self.config_data, on_complete=on_build_complete)
+    |    |                       |    |             |    |                        -> <function GuiRebuilderMixin._rebuild_gui.<locals>.on_build_complete at 0x71fc5abf84a0>
+    |    |                       |    |             |    -> {'background': {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'color...
+    |    |                       |    |             -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+    |    |                       |    -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+    |    |                       -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+    |    -> <function GuiBatchBuilderMixin._create_dynamic_widgets at 0x71fcb2cc6200>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Managers/gui_batch.py", line 70, in _create_dynamic_widgets
+    self._async_renderer.render(
+    |    |               -> <function AsyncGridRenderer.render at 0x71fcb2cc5ee0>
+    |    -> <oaGuiBuildShell.Workers.async_grid_renderer.AsyncGridRenderer object at 0x71fc5abf3620>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Workers/async_grid_renderer.py", line 85, in render
+    self._process_fields(parent_frame, all_fields, path_prefix, num_cols, on_complete, eff_bg, data, context)
+    |    |               |             |           |            |         |            |       |     -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+    |    |               |             |           |            |         |            |       -> {'background': {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'color...
+    |    |               |             |           |            |         |            -> None
+    |    |               |             |           |            |         -> <function GuiRebuilderMixin._rebuild_gui.<locals>.on_build_complete at 0x71fc5abf84a0>
+    |    |               |             |           |            -> 1
+    |    |               |             |           -> ''
+    |    |               |             -> [('background', {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'colo...
+    |    |               -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+    |    -> <function AsyncGridRenderer._process_fields at 0x71fcb2cc60c0>
+    -> <oaGuiBuildShell.Workers.async_grid_renderer.AsyncGridRenderer object at 0x71fc5abf3620>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Workers/async_grid_renderer.py", line 175, in _process_fields
+    if deferred and not state["aborted"]: self.batch_engine.process(parent, deferred, 25, context, state, _check_done)
+       |                |                 |    |            |       |       |             |        |      -> <function AsyncGridRenderer._process_fields.<locals>._check_done at 0x71fc7c7a3f60>
+       |                |                 |    |            |       |       |             |        -> {'pending': 1, 'loop_done': True, 'aborted': False}
+       |                |                 |    |            |       |       |             -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+       |                |                 |    |            |       |       -> [{'r': 0, 'c': 0, 'val': {'type': 'plot_widget', 'id': '50.90.2.2', 'transparent': True, 'layout': {'height': 300, 'sticky': ...
+       |                |                 |    |            |       -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+       |                |                 |    |            -> <function BatchProcessingEngine.process at 0x71fcb2cc6020>
+       |                |                 |    -> <oaGuiBuildShell.Core.batch_processing_engine.BatchProcessingEngine object at 0x71fc5abf3f50>
+       |                |                 -> <oaGuiBuildShell.Workers.async_grid_renderer.AsyncGridRenderer object at 0x71fc5abf3620>
+       |                -> {'pending': 1, 'loop_done': True, 'aborted': False}
+       -> [{'r': 0, 'c': 0, 'val': {'type': 'plot_widget', 'id': '50.90.2.2', 'transparent': True, 'layout': {'height': 300, 'sticky': ...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Core/batch_processing_engine.py", line 29, in process
+    widget = creator(parent_widget=parent, config_data=wd, context=context)
+             |                     |                   |           -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+             |                     |                   -> {'type': 'plot_widget', 'id': '50.90.2.2', 'transparent': True, 'layout': {'height': 300, 'sticky': '', 'weight_y': 1}, 'titl...
+             |                     -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+             -> <function WidgetDiscoveryEngine._make_wrapper.<locals>.wrapper at 0x71fc5ac65760>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/factory/Core/widget_discovery_engine.py", line 36, in wrapper
+    return cls_ref.make(parent_widget, config_data, context, **kwargs)
+           |       |    |              |            |          -> {}
+           |       |    |              |            -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+           |       |    |              -> {'type': 'plot_widget', 'id': '50.90.2.2', 'transparent': True, 'layout': {'height': 300, 'sticky': '', 'weight_y': 1}, 'titl...
+           |       |    -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+           |       -> <function BuilderGraphingCreator.make at 0x71fc7c85b560>
+           -> <class 'oaGuiElements.Core.graphing.graphing.plot_widget_adapter.BuilderGraphingCreator'>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiElements/Core/graphing/graphing/plot_widget_adapter.py", line 26, in make
+    w_type = config_data.get("type")
+             -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+
+AttributeError: 'WidgetContext' object has no attribute 'get'
+095654.963 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9117668, 'tab_name': '1_TOP'}
+095654.964 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9117668, 'tab_name': '1_TOP'}
+095654.971 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9117668, 'tab_name': '1_TOP'}
+095654.972 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9117668, 'tab_name': '1_TOP'}
+095654.978 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9779685, 'tab_name': '2_MIDDLE'}
+095655.035 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9779685, 'tab_name': '2_MIDDLE'}
+095655.044 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9779685, 'tab_name': '2_MIDDLE'}
+095655.048 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9779685, 'tab_name': '2_MIDDLE'}
+095655.056 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360614.9779685, 'tab_name': '2_MIDDLE'}
+095655.253 | ERROR    | 🎨 UI      | SYSTEM             | oaGuiManager.Core.factory.Core.widget_discovery_engine | ❌ Failed to instantiate widget of type <class 'oaGuiElements.Core.graphing.graphing.plot_widget_adapter.BuilderGraphingCreator'> at monitors: 'WidgetContext' object has no attribute 'get'
+Traceback (most recent call last):
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 3729, in <module>
+    main()
+    -> <function main at 0x71fcc22f7060>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 3714, in main
+    globals = debugger.run(setup["file"], None, None, is_module)
+              |        |   |                          -> False
+              |        |   -> {'port': 47375, 'ppid': 138219, 'vm_type': None, 'client': '127.0.0.1', 'access-token': None, 'client-access-token': 'd20a6d2...
+              |        -> <function PyDB.run at 0x71fcc22f4fe0>
+              -> <__main__.PyDB object at 0x71fcc275b470>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 2698, in run
+    return self._exec(is_module, entry_point_fn, module_name, file, globals, locals)
+           |    |     |          |               |            |     |        -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |    |     |          |               |            |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |    |     |          |               |            -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+           |    |     |          |               -> None
+           |    |     |          -> ''
+           |    |     -> False
+           |    -> <function PyDB._exec at 0x71fcc22f5080>
+           -> <__main__.PyDB object at 0x71fcc275b470>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/pydevd.py", line 2706, in _exec
+    globals = pydevd_runpy.run_path(file, globals, "__main__")
+              |            |        |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+              |            |        -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+              |            -> <function run_path at 0x71fcc29179c0>
+              -> <module '_pydevd_bundle.pydevd_runpy' from '/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/li...
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 310, in run_path
+    return _run_module_code(code, init_globals, run_name, pkg_name=pkg_name, script_name=fname)
+           |                |     |             |                  |                     -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+           |                |     |             |                  -> ''
+           |                |     |             -> '__main__'
+           |                |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+           |                -> <code object <module> at 0x26e2570, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+           -> <function _run_module_code at 0x71fcc2917600>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 127, in _run_module_code
+    _run_code(code, mod_globals, init_globals, mod_name, mod_spec, pkg_name, script_name)
+    |         |     |            |             |         |         |         -> '/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py'
+    |         |     |            |             |         |         -> ''
+    |         |     |            |             |         -> None
+    |         |     |            |             -> '__main__'
+    |         |     |            -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader objec...
+    |         |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': None, '__spec__': None, '__file__': '/home/anthony...
+    |         -> <code object <module> at 0x26e2570, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+    -> <function _run_code at 0x71fcc29171a0>
+
+  File "/home/anthony/.vscode/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/libs/debugpy/_vendored/pydevd/_pydevd_bundle/pydevd_runpy.py", line 118, in _run_code
+    exec(code, run_globals)
+         |     -> {'__name__': '__main__', '__doc__': None, '__package__': '', '__loader__': None, '__spec__': None, '__file__': '/home/anthony...
+         -> <code object <module> at 0x26e2570, file "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 1>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 81, in <module>
+    main()
+    -> <function main at 0x71fcc235efc0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Managers/open_air_ui.py", line 70, in main
+    root.mainloop()
+    |    -> <function Misc.mainloop at 0x71fcb3f97a60>
+    -> <tkinter.Tk object .>
+
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1504, in mainloop
+    self.tk.mainloop(n)
+    |    |  |        -> 0
+    |    |  -> <method 'mainloop' of '_tkinter.tkapp' objects>
+    |    -> <_tkinter.tkapp object at 0x71fcb2df0e30>
+    -> <tkinter.Tk object .>
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 1967, in __call__
+    return self.func(*args)
+           |    |     -> ()
+           |    -> <function Misc.after.<locals>.callit at 0x71fc7fe0e980>
+           -> <tkinter.CallWrapper object at 0x71fc5aa94890>
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 861, in callit
+    func(*args)
+    |     -> ()
+    -> <bound method UniversalGuiLoader._construct_dynamic_gui of <oaGuiManager.Core.loader.gui_from_json.UniversalGuiLoader object ...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/loader/gui_from_json.py", line 65, in _construct_dynamic_gui
+    self._instantiate_builder()
+    |    -> <function UniversalGuiLoader._instantiate_builder at 0x71fc97b8c900>
+    -> <oaGuiManager.Core.loader.gui_from_json.UniversalGuiLoader object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!no...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/loader/gui_from_json.py", line 79, in _instantiate_builder
+    self.dynamic_gui = DynamicGuiBuilder(
+    |                  -> <class 'oaGuiBuilder.Workers.builder.DynamicGuiBuilder'>
+    -> <oaGuiManager.Core.loader.gui_from_json.UniversalGuiLoader object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!no...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuilder/Workers/builder.py", line 203, in __init__
+    self._load_and_build_from_file()
+    |    -> <function GuiFileLoaderMixin._load_and_build_from_file at 0x71fcb2c62840>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/FileReaders/gui_file_loader.py", line 54, in _load_and_build_from_file
+    self._rebuild_gui()
+    |    -> <function GuiRebuilderMixin._rebuild_gui at 0x71fcb2cc5260>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Managers/gui_re.py", line 98, in _rebuild_gui
+    self._create_dynamic_widgets(self.scroll_frame, self.config_data, on_complete=on_build_complete)
+    |    |                       |    |             |    |                        -> <function GuiRebuilderMixin._rebuild_gui.<locals>.on_build_complete at 0x71fc5acad8a0>
+    |    |                       |    |             |    -> {'background': {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'color...
+    |    |                       |    |             -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+    |    |                       |    -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+    |    |                       -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+    |    -> <function GuiBatchBuilderMixin._create_dynamic_widgets at 0x71fcb2cc6200>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Managers/gui_batch.py", line 70, in _create_dynamic_widgets
+    self._async_renderer.render(
+    |    |               -> <function AsyncGridRenderer.render at 0x71fcb2cc5ee0>
+    |    -> <oaGuiBuildShell.Workers.async_grid_renderer.AsyncGridRenderer object at 0x71fc5aa5d5e0>
+    -> <oaGuiBuilder.Workers.builder.DynamicGuiBuilder object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!fra...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Workers/async_grid_renderer.py", line 85, in render
+    self._process_fields(parent_frame, all_fields, path_prefix, num_cols, on_complete, eff_bg, data, context)
+    |    |               |             |           |            |         |            |       |     -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+    |    |               |             |           |            |         |            |       -> {'background': {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'color...
+    |    |               |             |           |            |         |            -> None
+    |    |               |             |           |            |         -> <function GuiRebuilderMixin._rebuild_gui.<locals>.on_build_complete at 0x71fc5acad8a0>
+    |    |               |             |           |            -> 1
+    |    |               |             |           -> ''
+    |    |               |             -> [('background', {'type': 'layered_industrial', 'parameters': {'random_seed': 303, 'global_blur': 0.8, 'base_material': {'colo...
+    |    |               -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+    |    -> <function AsyncGridRenderer._process_fields at 0x71fcb2cc60c0>
+    -> <oaGuiBuildShell.Workers.async_grid_renderer.AsyncGridRenderer object at 0x71fc5aa5d5e0>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Workers/async_grid_renderer.py", line 175, in _process_fields
+    if deferred and not state["aborted"]: self.batch_engine.process(parent, deferred, 25, context, state, _check_done)
+       |                |                 |    |            |       |       |             |        |      -> <function AsyncGridRenderer._process_fields.<locals>._check_done at 0x71fc5aa47ec0>
+       |                |                 |    |            |       |       |             |        -> {'pending': 1, 'loop_done': True, 'aborted': False}
+       |                |                 |    |            |       |       |             -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+       |                |                 |    |            |       |       -> [{'r': 0, 'c': 0, 'val': {'type': 'plot_widget', 'id': '50.90.2.3', 'transparent': True, 'layout': {'height': 300, 'sticky': ...
+       |                |                 |    |            |       -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+       |                |                 |    |            -> <function BatchProcessingEngine.process at 0x71fcb2cc6020>
+       |                |                 |    -> <oaGuiBuildShell.Core.batch_processing_engine.BatchProcessingEngine object at 0x71fc5aa5e390>
+       |                |                 -> <oaGuiBuildShell.Workers.async_grid_renderer.AsyncGridRenderer object at 0x71fc5aa5d5e0>
+       |                -> {'pending': 1, 'loop_done': True, 'aborted': False}
+       -> [{'r': 0, 'c': 0, 'val': {'type': 'plot_widget', 'id': '50.90.2.3', 'transparent': True, 'layout': {'height': 300, 'sticky': ...
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiBuildShell/Core/batch_processing_engine.py", line 29, in process
+    widget = creator(parent_widget=parent, config_data=wd, context=context)
+             |                     |                   |           -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+             |                     |                   -> {'type': 'plot_widget', 'id': '50.90.2.3', 'transparent': True, 'layout': {'height': 300, 'sticky': 'NS', 'weight_y': 1}, 'pl...
+             |                     -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+             -> <function WidgetDiscoveryEngine._make_wrapper.<locals>.wrapper at 0x71fc5ac65760>
+
+> File "/home/anthony/Documents/OPEN-AIR/oaGuiManager/Core/factory/Core/widget_discovery_engine.py", line 36, in wrapper
+    return cls_ref.make(parent_widget, config_data, context, **kwargs)
+           |       |    |              |            |          -> {}
+           |       |    |              |            -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+           |       |    |              -> {'type': 'plot_widget', 'id': '50.90.2.3', 'transparent': True, 'layout': {'height': 300, 'sticky': 'NS', 'weight_y': 1}, 'pl...
+           |       |    -> <tkinter.Frame object .!application.!panedwindow.!frame2.!panedwindow.!frame2.!notebook.!frame2.!notebook.!frame.!universalgu...
+           |       -> <function BuilderGraphingCreator.make at 0x71fc7c85b560>
+           -> <class 'oaGuiElements.Core.graphing.graphing.plot_widget_adapter.BuilderGraphingCreator'>
+
+  File "/home/anthony/Documents/OPEN-AIR/oaGuiElements/Core/graphing/graphing/plot_widget_adapter.py", line 26, in make
+    w_type = config_data.get("type")
+             -> WidgetContext(state_mirror_engine=<oaTranslator.Core.state_mirror_engine.StateMirrorEngine object at 0x71fcb2c3c6e0>, subscri...
+
+AttributeError: 'WidgetContext' object has no attribute 'get'
+095655.260 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360615.260058, 'tab_name': '3_BOTTOM'}
+095655.310 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360615.260058, 'tab_name': '3_BOTTOM'}
+095655.310 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360615.260058, 'tab_name': '3_BOTTOM'}
+095655.311 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360615.260058, 'tab_name': '3_BOTTOM'}
+095655.311 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/oaGuiDefinitions/Assets/monitors/Graphs/visibility/visible: {'visible': True, 'ts': 1774360615.260058, 'tab_name': '3_BOTTOM'}
+095656.685 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Broker/Connection: ONLINE
+095656.736 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Broker/Connection: ONLINE
+095656.736 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Broker/Connection: ONLINE
+095656.737 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Broker/Connection: ONLINE
+095656.738 | DEBUG    | ⚙️ CORE   | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Broker/Connection: ONLINE
+095656.685 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Broker/Connection: ONLINE
+095656.736 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] SYSTEM on OPEN-AIR/System/Status/Broker/Connection: ONLINE
+095656.736 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.dispatch | 📡📤📤 [OUTBOUND] MQTT >> OPEN-AIR/System/Status/Broker/Connection: ONLINE
+095656.737 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Broker/Connection: ONLINE
+095656.737 | DEBUG    | 🎨 UI      | 🕸️ ROUTER          | oaComBroker.Core.protocol_router.ingest | 📡📥📥 [INBOUND] MQTT on OPEN-AIR/System/Status/Broker/Connection: ONLINE

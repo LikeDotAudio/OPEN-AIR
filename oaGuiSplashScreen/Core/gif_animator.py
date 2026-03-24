@@ -6,6 +6,7 @@
 
 from pathlib import Path
 from loguru import logger
+from oaGuiSplashScreen.Constants.splash_constants import DEFAULT_GIF_DURATION, MIN_GIF_DURATION
 
 try:
     from PIL import Image, ImageTk
@@ -19,7 +20,7 @@ class GifAnimator:
     def __init__(self, splash_window, label_widget):
         self.win, self.lbl = splash_window, label_widget
         self.frames, self.index, self.job = [], 0, None
-        self.duration = 50
+        self.duration = DEFAULT_GIF_DURATION
 
     def load(self, filename):
         if not PIL_AVAILABLE: return False
@@ -31,7 +32,7 @@ class GifAnimator:
                 for i in range(img.n_frames):
                     img.seek(i)
                     self.frames.append(ImageTk.PhotoImage(img.copy().convert("RGBA")))
-                self.duration = max(20, img.info.get("duration", 50))
+                self.duration = max(MIN_GIF_DURATION, img.info.get("duration", DEFAULT_GIF_DURATION))
                 self.lbl.photo_images = self.frames # GC Protection
             return True
         except Exception as e:

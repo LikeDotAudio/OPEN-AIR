@@ -6,6 +6,11 @@
 
 import math
 from loguru import logger
+from oaGuiElements.Constants.gui_constants import (
+    DEFAULT_DECIMAL_PLACES,
+    DIAL_MAX_VALUE,
+    DIAL_WRAP_THRESHOLD
+)
 
 class CompositeStateSync:
     """Manages the synchronization math between the main value, fader (coarse), and dial (fine)."""
@@ -19,7 +24,7 @@ class CompositeStateSync:
             decimal_places = len(str(float(step)).split('.')[-1])
         except Exception as e:
             logger.debug(f"Failed to calculate decimal places for step {step}: {e}")
-            decimal_places = 2
+            decimal_places = DEFAULT_DECIMAL_PLACES
         return f"{{:.{decimal_places}f}}"
 
     @staticmethod
@@ -28,7 +33,7 @@ class CompositeStateSync:
         if numerical_step < step_coarse:
             fine_part = initial_value % step_coarse
             eff_range = step_coarse - numerical_step if (step_coarse - numerical_step) > 0 else step_coarse
-            scaled_initial_fine = (fine_part / eff_range) * 999.0
+            scaled_initial_fine = (fine_part / eff_range) * DIAL_MAX_VALUE
         return round(scaled_initial_fine)
 
     @staticmethod
@@ -40,7 +45,7 @@ class CompositeStateSync:
             if numerical_step < step_coarse:
                 fine_part = main_val % step_coarse
                 eff_range = step_coarse - numerical_step if (step_coarse - numerical_step) > 0 else step_coarse
-                dial_disp = (fine_part / eff_range) * 999.0
+                dial_disp = (fine_part / eff_range) * DIAL_MAX_VALUE
                 dial_widget.variable.set(round(dial_disp))
                 dial_widget._prev_dial_val_for_wrap_detection = round(dial_disp)
             else:
@@ -75,15 +80,15 @@ class CompositeStateSync:
 
             if numerical_step < step_coarse:
                 if hasattr(dial_widget, '_prev_dial_val_for_wrap_detection'):
-                    if dial_widget._prev_dial_val_for_wrap_detection == 999 and curr_dial == 0:
+                    if dial_widget._prev_dial_val_for_wrap_detection == DIAL_WRAP_THRESHOLD and curr_dial == 0:
                         fader_var.set(fader_var.get() + step_coarse)
-                    elif dial_widget._prev_dial_val_for_wrap_detection == 0 and curr_dial == 999:
+                    elif dial_widget._prev_dial_val_for_wrap_detection == 0 and curr_dial == DIAL_WRAP_THRESHOLD:
                         fader_var.set(fader_var.get() - step_coarse)
                 dial_widget._prev_dial_val_for_wrap_detection = curr_dial
                 
                 base = math.floor(main_val / step_coarse) * step_coarse
                 eff_range = step_coarse - numerical_step if (step_coarse - numerical_step) > 0 else step_coarse
-                new_fine = round(((curr_dial / 999.0) * eff_range) / numerical_step) * numerical_step
+                new_fine = round(((curr_dial / DIAL_MAX_VALUE) * eff_range) / numerical_step) * numerical_step
                 return max(min_val, min(max_val, round((base + new_fine) / numerical_step) * numerical_step))
         except Exception as e:
             logger.error(f"Error in calc_from_dial: {e}")

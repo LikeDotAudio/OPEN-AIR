@@ -12,16 +12,14 @@ You are the Release Engineer for the OPEN-AIR project. Your mission is to identi
 
 ### Your Task:
 
-1. **Research & Cleanup**: 
-   - Read the existing audit report (`oaDataAudits/Bad_Configuration_Audit.md`) if it exists.
-   - Verify if previously flagged hardcoded configs have been extracted to `.env` or config classes.
+1. **Initialize Report**: Before starting the scan, create an empty report file named `Bad_Configuration_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for configuration anti-patterns.
    - Use `grep_search` to find `http://`, `https://`, IP addresses (e.g., `127.0.0.1`), and port numbers inside logic files.
    - Search for deep, scattered usages of `os.environ.get()` inside `managers/` or `workers/`.
    - Flag environment branching (`if env ==`, `if is_prod:`).
 3. **Analyze**: Identify the most rigid, environment-locked components in the system.
-4. **Report**: Create a detailed Markdown report named `Bad_Configuration_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Configuration_Audit.md`.
+4. **Report**: Compile your findings into a detailed Markdown report.
+5. **Save**: Write this report to the pre-created `Bad_Configuration_Audit_YYYYMMDD.md` file.
 
 The report should include:
 - A summary of the 12-Factor configuration compliance.

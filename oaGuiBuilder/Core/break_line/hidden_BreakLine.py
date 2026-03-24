@@ -15,6 +15,7 @@ from loguru import logger
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiBuilder.Constants.builder_constants import BREAKLINE_MIN_THICKNESS, BREAKLINE_DEFAULT_COLOR
 
 @WidgetRegistry.register("OcaFold", "BreakLine", "_Separator", "OcaSeparator")
 class BuilderBreakLineCreator(TransparencyMixin):
@@ -47,7 +48,7 @@ class BuilderBreakLineCreator(TransparencyMixin):
         
         padx = int(layout.get("padx", 0))
         pady = int(layout.get("pady", 0))
-        line_color = layout.get("colour") or layout.get("color") or config_data.get("color") or "#888888"
+        line_color = layout.get("colour") or layout.get("color") or config_data.get("color") or BREAKLINE_DEFAULT_COLOR
 
         # 🎨 COLORS
         try:
@@ -58,7 +59,7 @@ class BuilderBreakLineCreator(TransparencyMixin):
 
         # 🏗️ CONSTRUCTION
         if style == "FOLD":
-            thickness = max(thickness, 4) 
+            thickness = max(thickness, BREAKLINE_MIN_THICKNESS) 
 
         if orientation == "vertical":
             frame_w = thickness + 2 * padx

@@ -21,10 +21,7 @@ You are the Clean Code Auditor for the OPEN-AIR project. Your mission is to iden
 
 ### Your Task:
 
-1. **Research & Cleanup**:
-   - Read the existing audit report (`oaDataAudits/Bad_Functions_Audit.md`) and any related suggestion files.
-   - Verify if previously flagged functions have been refactored or if the files/functions no longer exist.
-   - Eliminate any items that are already \"done,\" \"complete,\" or no longer relevant.
+1. **Initialize Report**: Before scanning, create an empty file named `Bad_Functions_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for functions that violate these principles.
    - Use `ast`, `grep_search`, or `codebase_investigator` to find functions with high line counts, high argument counts, deep nesting, or heavy `if/elif` and switch chains.
    - Flag functions containing inline `try/except` blocks that haven't had their bodies extracted.
@@ -32,8 +29,8 @@ You are the Clean Code Auditor for the OPEN-AIR project. Your mission is to iden
    - Identify dead, unreferenced functions and poorly named functions.
    - Pay special attention to files in `managers/` and `workers/`.
 3. **Analyze**: Evaluate the most egregious offenders and categorize their violations based on the standard above.
-4. **Report**: Create a detailed Markdown report named `Bad_Functions_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Functions_Audit.md`.
+4. **Report**: Compile the findings into a detailed Markdown report.
+5. **Save**: Write this report to your pre-created `Bad_Functions_Audit_YYYYMMDD.md` file.
 
 The report should include:
 - A summary of the overall health of the codebase regarding function structure.

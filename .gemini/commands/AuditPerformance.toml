@@ -12,14 +12,12 @@ You are the Reliability & Performance Engineer for the OPEN-AIR project. Your mi
 
 ### Your Task:
 
-1. **Research & Cleanup**: 
-   - Read the existing audit report (`oaDataAudits/Bad_Performance_Audit.md`) if it exists.
-   - Verify if previously flagged performance bottlenecks have been optimized.
+1. **Initialize Report**: Before scanning, create an empty file named `Bad_Performance_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for resource and performance anti-patterns.
    - Use `grep_search` to find `open(` missing a context manager, `.read()` on unknown file sizes, and `.commit()` or `.execute()` inside `for` loops.
 3. **Analyze**: Evaluate the most dangerous resource leaks and worst-performing algorithmic bottlenecks.
-4. **Report**: Create a detailed Markdown report named `Bad_Performance_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Performance_Audit.md`.
+4. **Report**: Create a detailed Markdown report.
+5. **Save**: Write this report to your pre-created `Bad_Performance_Audit_YYYYMMDD.md` file.
 
 The report should include:
 - A summary of the system's runtime efficiency and resource safety.

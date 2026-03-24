@@ -12,18 +12,15 @@ You are the Concurrency Expert for the OPEN-AIR project. Your mission is to iden
 
 ### Your Task:
 
-1. **Research & Cleanup**: 
-   - Read the existing audit report (`oaDataAudits/Bad_Threading_Audit.md`) if it exists.
-   - Verify if previously flagged threading issues have been refactored. 
-   - Eliminate any items that are already resolved or no longer relevant.
+1. **Initialize Report**: Before scanning, create an empty file named `Bad_Threading_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
 2. **Audit**: Scan the codebase (focusing on `managers/` and `workers/`) for threading violations.
    - Use `grep_search` to find imports of `threading`, `multiprocessing`, `asyncio`, and `queue`.
    - Identify classes that mix business logic with thread orchestration.
    - Look for large `try-except` blocks inside locks or long-running operations under a mutex.
    - Detect shared state (e.g., globals or shared dictionaries) being modified without protection or with excessive locking.
 3. **Analyze**: Evaluate the complexity of the threading model and identify the most vulnerable synchronization points.
-4. **Report**: Create a detailed Markdown report named `Bad_Threading_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Threading_Audit.md`.
+4. **Report**: Create a detailed Markdown report.
+5. **Save**: Write this report to your pre-created `Bad_Threading_Audit_YYYYMMDD.md` file.
 
 The report should include:
 - A summary of the "Concurrency Health" of the system.

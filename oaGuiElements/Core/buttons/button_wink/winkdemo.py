@@ -5,11 +5,18 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
+from oaGuiElements.Constants.gui_constants import (
+    WINK_OPEN_SPEED_DEFAULT,
+    WINK_CLOSE_SPEED_DEFAULT,
+    WINK_MASK_THICKNESS,
+    WINK_FRAME_THICKNESS
+)
 
 class WinkSwitch:
     def __init__(self, canvas, x, y, width, height, shape="rect", 
                  bg_color="#39FF14", housing_color="#000000", 
-                 radius=0, open_speed=0.08, close_speed=0.15):
+                 radius=0, open_speed=WINK_OPEN_SPEED_DEFAULT, 
+                 close_speed=WINK_CLOSE_SPEED_DEFAULT):
         
         self.canvas = canvas
         self.x = x
@@ -85,7 +92,7 @@ class WinkSwitch:
             # THE FIX: A Pure Black "Donut"
             # We draw a very thick outline around the circle. 
             # This creates the black housing and hides the rectangular shutter corners.
-            mask_thickness = 200 
+            mask_thickness = WINK_MASK_THICKNESS 
             bezel = self.canvas.create_oval(
                 self.x - mask_thickness/2, 
                 self.y - mask_thickness/2, 
@@ -107,7 +114,7 @@ class WinkSwitch:
             # For rectangle, we just need top/bottom bars if we want to frame it, 
             # but usually, the shutters form the whole face. 
             # Let's add a thick black frame to represent the housing thickness.
-            frame_thickness = 4
+            frame_thickness = WINK_FRAME_THICKNESS
             frame = self.canvas.create_rectangle(
                 self.x - frame_thickness, self.y - frame_thickness,
                 self.x + self.width + frame_thickness, self.y + self.height + frame_thickness,

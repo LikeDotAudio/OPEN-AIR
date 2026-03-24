@@ -27,8 +27,8 @@ class TestMqttConnectionManager(unittest.TestCase):
         """Verify the initial state of the manager."""
         self.assertFalse(self.manager.is_connected())
         self.assertIsNone(self.manager.client)
-        self.assertIsInstance(self.manager._publish_queue, queue.Queue)
-        self.assertIsInstance(self.manager._subscribe_queue, queue.Queue)
+        self.assertIsInstance(self.manager.queue_manager._publish_queue, queue.Queue)
+        self.assertIsInstance(self.manager.queue_manager._subscribe_queue, queue.Queue)
 
     @patch('oaComMQTT.Managers.mqtt_connection.MqttAsyncWorker')
     @patch('threading.Thread')
@@ -71,8 +71,8 @@ class TestMqttConnectionManager(unittest.TestCase):
         
         self.manager.publish("test/topic", payload=b"data", qos=1, retain=True)
         
-        self.assertEqual(self.manager._publish_queue.qsize(), 1)
-        item = self.manager._publish_queue.get()
+        self.assertEqual(self.manager.queue_manager._publish_queue.qsize(), 1)
+        item = self.manager.queue_manager._publish_queue.get()
         self.assertEqual(item, ("test/topic", b"data", 1, True))
         
         # Verify worker kick
@@ -91,14 +91,14 @@ class TestMqttConnectionManager(unittest.TestCase):
         
         self.manager.subscribe("test/sub", qos=0)
         
-        self.assertIn("test/sub", self.manager._pending_subscriptions)
-        self.assertEqual(self.manager._subscribe_queue.qsize(), 1)
-        item = self.manager._subscribe_queue.get()
+        self.assertIn("test/sub", self.manager.queue_manager._pending_subscriptions)
+        self.assertEqual(self.manager.queue_manager._subscribe_queue.qsize(), 1)
+        item = self.manager.queue_manager._subscribe_queue.get()
         self.assertEqual(item, {"topic": "test/sub", "qos": 0})
         
         # Duplicate subscribe should be ignored
         self.manager.subscribe("test/sub", qos=0)
-        self.assertEqual(self.manager._subscribe_queue.qsize(), 0)
+        self.assertEqual(self.manager.queue_manager._subscribe_queue.qsize(), 0)
 
     def test_disconnect_signals_worker(self):
         """

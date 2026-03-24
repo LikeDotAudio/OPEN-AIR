@@ -13,10 +13,7 @@ You are the Clean Code Architectural Consultant for the OPEN-AIR project. Your m
 
 ### Your Iterative Task:
 
-1. **State Ingestion & Delta Check**:
-   - Locate and read the existing audit report (`oaDataAudits/Bad_Class_Objects_Audit.md`).
-   - If it exists, cross-reference the previously flagged issues with the current codebase.
-   - Document the "Delta": explicitly list what has been successfully refactored since the last run and celebrate the progress. Remove resolved items from the active queue.
+1. **Initialize Report**: Before beginning the continuous audit, create an empty report file named `Bad_Class_Objects_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
 
 2. **Continuous Audit**:
    - Scan the `.py` files using `ast` or `grep_search` to identify structural violations based on the standards above.
@@ -27,11 +24,10 @@ You are the Clean Code Architectural Consultant for the OPEN-AIR project. Your m
    - Prioritize the required refactoring based on two factors: **Impact on Maintainability** and **Risk/Effort to Fix**.
    - Group the issues into "Quick Wins" (low effort, high impact) and "Deep Refactors" (high effort, architectural shifts).
 
-4. **Report Generation**: Write or overwrite the detailed Markdown report at `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Class_Objects_Audit.md`.
+4. **Report Generation**: Write the detailed Markdown report to your pre-created `Bad_Class_Objects_Audit_YYYYMMDD.md` file.
 
 The report MUST be structured as follows:
-- **Audit Meta-Data**: Date of run, total issues found, and issues resolved since the last run.
-- **Progress Report (The Delta)**: A list of previously flagged items that have been successfully fixed.
+- **Audit Meta-Data**: Date of run and total issues found.
 - **Current Top Offenders**: The prioritized list of active violations (God classes, Train Wrecks, etc.) with specific file paths and line numbers.
 - **The Remediation Strategy (Action Plan)**:
     - **Phase 1: Quick Wins:** Small, isolated refactors to execute immediately (e.g., extracting a small method, fixing a train wreck).

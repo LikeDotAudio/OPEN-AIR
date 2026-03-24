@@ -48,6 +48,11 @@ from oaGuiElements.Core.input.input_mousewheel_mixin.input_mousewheel_mixin impo
 from oaGuiElements.Core.utils.panels.panel_generator import PanelGenerator
 from PIL import ImageTk
 from oaGuiManager.Core.context.widget_context import WidgetContext
+from oaGuiBuilder.Constants.builder_constants import (
+    SCROLL_SYNC_DELAY, 
+    RESIZE_THROTTLE_DELAY, 
+    RESIZE_WIDTH_THRESHOLD
+)
 
 class AutoScrollbar(ttk.Scrollbar):
     """A scrollbar that hides itself when it's not needed."""
@@ -159,13 +164,13 @@ class DynamicGuiBuilder(
             self.scrollbar_v.set(*args)
             if getattr(self, '_is_rebuilding', False) or self._resize_timer: return
             if not self._scroll_timer:
-                self.after(50, _on_scroll_sync)
+                self.after(SCROLL_SYNC_DELAY, _on_scroll_sync)
         
         def _on_scroll_h(*args):
             self.scrollbar_h.set(*args)
             if getattr(self, '_is_rebuilding', False) or self._resize_timer: return
             if not self._scroll_timer:
-                self.after(50, _on_scroll_sync)
+                self.after(SCROLL_SYNC_DELAY, _on_scroll_sync)
 
         self.canvas.configure(yscrollcommand=_on_scroll_v, xscrollcommand=_on_scroll_h)
 
@@ -207,11 +212,11 @@ class DynamicGuiBuilder(
         if getattr(self, '_is_rebuilding', False): return
         width = event.width if event else self.canvas.winfo_width()
         last_w = getattr(self, '_last_reported_width', 0)
-        if abs(width - last_w) < 20: return
+        if abs(width - last_w) < RESIZE_WIDTH_THRESHOLD: return
         self._last_reported_width = width
         if self._resize_timer:
             self.after_cancel(self._resize_timer)
-        self._resize_timer = self.after(150, self._perform_canvas_resize, width)
+        self._resize_timer = self.after(RESIZE_THROTTLE_DELAY, self._perform_canvas_resize, width)
 
     def _perform_canvas_resize(self, width):
         self._resize_timer = None

@@ -14,16 +14,13 @@ You are the Clean Code Architect for the OPEN-AIR project. Your mission is to id
 
 ### Your Task:
 
-1. **Research & Cleanup**: 
-   - Read the existing audit report (`oaDataAudits/Bad_Names_Audit.md`) if it exists.
-   - Verify if previously flagged issues have been refactored or if the files/variables no longer exist. 
-   - Eliminate any items that are already "done," "complete," or no longer relevant.
+1. **Initialize Report**: Before scanning, create an empty file named `Bad_Names_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for naming violations.
    - Use `grep_search` to find single-letter variables, magic numbers (raw literals), and noise words like "Data" or "Info".
    - Evaluate function names for clarity and verb usage.
 3. **Analyze**: Identify the most confusing or misleading names and categorize their violations.
-4. **Report**: Create a detailed Markdown report named `Bad_Names_Audit.md`.
-5. **Save**: Write this report to `/home/anthony/Documents/OPEN-AIR/oaDataAudits/Bad_Names_Audit.md`.
+4. **Report**: Create a detailed Markdown report.
+5. **Save**: Write this report to your pre-created `Bad_Names_Audit_YYYYMMDD.md` file.
 
 The report should include:
 - A summary of the naming health of the codebase.

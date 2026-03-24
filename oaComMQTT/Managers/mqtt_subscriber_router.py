@@ -14,13 +14,14 @@ from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
+from oaComMQTT.Constants.mqtt_config import MATCH_CACHE_LIMIT
 from ..Core.mqtt_message import MqttMessage
 
 app_constants = Config.get_instance()
 
 class ThreadSafeMatchCache:
     """Encapsulates a thread-safe cache for MQTT wildcard matches."""
-    def __init__(self, limit=1000):
+    def __init__(self, limit=MATCH_CACHE_LIMIT):
         self._cache: Dict[str, List[Callable[[MqttMessage], None]]] = {}
         self._lock = threading.Lock()
         self._limit = limit
@@ -60,7 +61,7 @@ class MqttSubscriberRouter:
         self._lock = threading.RLock()
 
         # ⚡ OPTIMIZATION: Cache for wildcard matches to avoid redundant pattern matching
-        self._match_cache = ThreadSafeMatchCache(limit=1000)
+        self._match_cache = ThreadSafeMatchCache(limit=MATCH_CACHE_LIMIT)
         
         self._client = None
         

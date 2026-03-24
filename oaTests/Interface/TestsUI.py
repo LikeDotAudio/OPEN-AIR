@@ -227,7 +227,7 @@ class TestsApp(App):
                 elif status == "skipped": self.summary["skipped"] += 1
                 
                 description = getattr(test, "_testMethodDoc", "") or "No description provided."
-                description = description.strip().replace("", "<br>")
+                description = description.strip()
 
                 self.test_results.append({
                     "classname": test.__class__.__name__, "name": str(test), "status": status,
@@ -235,7 +235,7 @@ class TestsApp(App):
                     "duration": f"{duration:.4f}s"
                 })
                 emoji = "✅" if status == "passed" else "❌"
-                selfself.call_from_thread(self.write_log, f"   {emoji} {test}: [bold]{status}[/]")
+                self.call_from_thread(self.write_log, f"   {emoji} {test}: [bold]{status}[/]")
 
             found_dirs = DiscoverTests.identify_test_directories(self.project_root)
             self.call_from_thread(self.write_log, f"📂 Discovery identified {len(found_dirs)} test-containing root folders.")
@@ -365,7 +365,7 @@ class TestsApp(App):
 
         # If the other button is in its confirm state, this button acts as CANCEL
         if getattr(self, "_debug_on_confirm", False):
-            self._debug_off_confirm = False
+            self._debug_on_confirm = False
             btn_on.label = "FORCE DEBUG ON"
             btn_off.label = "FORCE DEBUG OFF"
             btn_on.variant = "warning"

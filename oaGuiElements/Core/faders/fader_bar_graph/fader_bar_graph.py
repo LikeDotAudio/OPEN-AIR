@@ -51,8 +51,9 @@ class FaderWithBarGraphFrame(
         self.fader_grip_color = config.get("cap_colour", colors.get("fg", "#dcdcdc"))
         
         # 2. State
-        self.fader_var = tk.DoubleVar(value=float(config.get("value_default", self.min_val)))
-        self.left_var, self.right_var = tk.DoubleVar(value=self.min_val), tk.DoubleVar(value=self.min_val)
+        self.fader_var = tk.DoubleVar(master=master, value=float(config.get("value_default", self.min_val)))
+        self.left_var = tk.DoubleVar(master=master, value=self.min_val)
+        self.right_var = tk.DoubleVar(master=master, value=self.min_val)
         self._register_vars()
 
         # 3. UI

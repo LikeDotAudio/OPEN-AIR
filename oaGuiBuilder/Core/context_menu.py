@@ -36,6 +36,11 @@ class BuilderContextMenuMixin:
         if hasattr(self, 'scroll_frame'):
             self.scroll_frame.bind("<Button-3>", self._on_right_click)
 
+    def bind_to_widget(self, widget):
+        """Binds the context menu to a specific widget."""
+        if hasattr(self, 'context_menu') and self.context_menu:
+            widget.bind("<Button-3>", self._on_right_click, add="+")
+
     def _on_right_click(self, event):
         """Displays context menu on right click."""
         try:
@@ -104,7 +109,7 @@ class BuilderContextMenuMixin:
     def _check_dependencies(self):
         """Manually triggers the Installation/Setup script to verify dependencies."""
         from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
-        setup_path = GLOBAL_PROJECT_ROOT / "oaInstallation" / "Setup.py"
+        setup_path = GLOBAL_PROJECT_ROOT / "oaInstallation" / "Entry.py"
         
         if not setup_path.exists():
             builder_logger.error(f"🏗️🚫🛑 [BUILDER] Setup script not found at {setup_path}")

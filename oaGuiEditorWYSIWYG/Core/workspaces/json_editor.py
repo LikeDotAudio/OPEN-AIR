@@ -30,6 +30,12 @@ class JsonEditor(tk.Frame):
         event_bus.subscribe("STATE_UPDATED", self._on_state_updated)
         event_bus.subscribe("FOCUS_REQUESTED", self._on_focus_requested)
         
+        # ⚡ INITIAL SYNC: Ensure code loads even if the initial broadcast was missed
+        current_state = state_manager.get_state()
+        if current_state:
+            if LOCAL_DEBUG: logger.debug("JsonEditor: Performing initial state sync...")
+            self._on_state_updated(current_state)
+
         self.bind("<Destroy>", self._on_destroy)
 
     def _on_destroy(self, event):

@@ -13,27 +13,27 @@ def test_python_environment():
     try:
         import loguru
         import textual
-        return True, "Python environment validated."
+        return True, "Python environment is pristine and fully loaded."
     except ImportError as e:
         return False, f"Missing Python dependency: {e}"
 
 def test_mosquitto_reachable():
     """Verify Mosquitto is in PATH and runnable."""
     if shutil.which('mosquitto'):
-        return True, "Mosquitto broker binary found."
+        return True, "Mosquitto broker binary is secured and ready."
     return False, "Mosquitto broker not found in system path."
 
 def test_snmp_reachable():
     """Verify SNMP daemon is in PATH."""
     if shutil.which('snmpd'):
-        return True, "SNMP daemon binary found."
+        return True, "SNMP daemon binary is locked and loaded."
     return False, "SNMP daemon not found in system path."
 
 def test_desktop_entry():
     """Verify the .desktop file exists in the local applications directory."""
     target = os.path.expanduser('~/.local/share/applications/OPEN-AIR.desktop')
     if os.path.exists(target):
-        return True, f"Desktop entry found at {target}"
+        return True, f"Desktop entry shines brightly at {target}"
     return False, "Desktop entry missing."
 
 def run_all_tests(callback=None):
@@ -50,7 +50,7 @@ def run_all_tests(callback=None):
         success, message = func()
         results.append((name, success, message))
         if callback:
-            status = "✅" if success else "❌"
+            status = "💎 [VERIFIED]" if success else "💀 [FAILED]"
             callback(f"{status} {name}: {message}")
             
     return all(r[1] for r in results)

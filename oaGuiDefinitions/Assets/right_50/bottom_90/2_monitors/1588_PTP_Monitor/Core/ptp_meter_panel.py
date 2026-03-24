@@ -28,8 +28,17 @@ class PTPMeterPanel:
                               "style_overrides": {"bezel_shape": "squircle", "bezel_width": 4, "overlay_style": "aperture_mask", "Pointer_Style": "knife-edge", "sub_ticks": 2 if v_max < 100 else 4, "tick_length": 5, "label_radius_offset": 5},
                               "labels": [{"text": short, "x": 0, "y": -55, "size": 9, "font": "Arial", "weight": "bold"}, {"value_overlay": True, "x": 0, "y": -40, "size": 9, "weight": "bold", "color": "#000000", "sig_fig": 0}]}
             }
-            mf = self.builder.make_meter_needle(self.stack, cfg)
-            if mf: mf.pack(side=tk.LEFT, padx=2); self.meters[label] = mf
+            cfg["path"] = f"ptp_monitor.meter.{label}" # Synthetic path for context
+            creator = self.builder.widget_factory.get("_NeedleVUMeter")
+            if not creator:
+                logger.error("Failed to find '_NeedleVUMeter' in widget factory.")
+                continue
+            
+            context = self.builder._get_widget_context()
+            mf = creator(parent_widget=self.stack, config_data=cfg, context=context)
+            if mf: 
+                mf.pack(side=tk.LEFT, padx=2)
+                self.meters[label] = mf
 
     def update(self, ts):
         if not self.meters: return

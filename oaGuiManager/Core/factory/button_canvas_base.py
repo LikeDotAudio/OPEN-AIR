@@ -110,25 +110,50 @@ class CanvasButton(tk.Canvas):
         # Determine colors
         if is_active:
             bg = self.active_bg_color
-            border = self.active_color
+            border = None  # ⚡ REMOVE BORDER WHEN ACTIVE
         else:
             bg = self.bg_color
             border = "#333333"
 
         if is_pressed:
             bg = "#000000"
+            border = None # ⚡ REMOVE BORDER WHEN PRESSED
 
         # Draw Base Rounded Rect
         r = self.corner_radius
         draw.rounded_rectangle([0, 0, width-1, height-1], r, fill=bg, outline=border, width=1)
 
-        # Glow Effect if active
+        # Glow Effect if active: Radiating light behind text
         if is_active and self.glow_intensity > 0:
             glow_color = self.active_color
-            # Simple glow simulation
-            for i in range(1, 4):
-                alpha = int(50 * self.glow_intensity / i)
-                draw.rounded_rectangle([i, i, width-1-i, height-1-i], r, outline=glow_color, width=1)
+            
+            # ⚡ RADIATING LIGHT: Create a soft radial glow centered behind the text
+            try:
+                # Parse hex color to RGB
+                r_c = int(glow_color[1:3], 16)
+                g_c = int(glow_color[3:5], 16)
+                b_c = int(glow_color[5:7], 16)
+                
+                center_x, center_y = width / 2, height / 2
+                # ⚡ SCALED GLOW: Intensity scale 0-10. Radius and opacity now map to this scale.
+                # max_radius scales from 0% to ~80% of button size based on intensity (0-10)
+                max_radius = min(width, height) * 0.8 * (self.glow_intensity / 10.0)
+                
+                # ⚡ SOFTER GRADIENT: steps scale with intensity for smoothness
+                num_steps = max(10, int(30 * (self.glow_intensity / 10.0)))
+                for i in range(num_steps, 0, -1):
+                    radius = (max_radius / num_steps) * i
+                    # Smooth quadratic falloff. Max alpha ~100 at intensity 10.
+                    alpha_factor = (1 - (i / (num_steps + 1)))**2
+                    alpha = int(100 * alpha_factor * (self.glow_intensity / 10.0))
+                    
+                    if alpha > 0:
+                        draw.ellipse(
+                            [center_x - radius, center_y - radius, center_x + radius, center_y + radius],
+                            fill=(r_c, g_c, b_c, alpha)
+                        )
+            except Exception as e:
+                logger.error(f"Failed to render radiating glow: {e}")
 
         # Draw Text
         try:

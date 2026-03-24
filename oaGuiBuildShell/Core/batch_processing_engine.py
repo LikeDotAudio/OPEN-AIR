@@ -29,6 +29,8 @@ class BatchProcessingEngine:
                     widget = creator(parent_widget=parent, config_data=wd, context=context)
                     if widget:
                         widget._oca_path = w["path"]; lay = wd.get("layout", {})
+                        if hasattr(self.builder, 'bind_to_widget'):
+                            self.builder.bind_to_widget(widget)
                         widget.grid(row=lay.get("row", w["r"]), column=lay.get("column", w["c"]),
                                     columnspan=lay.get("col_span", 1), rowspan=lay.get("row_span", 1),
                                     padx=w["padx"], pady=w["pady"], sticky=w["sticky"])

@@ -37,13 +37,16 @@ class TestButtonTrapezoidToggler(unittest.TestCase):
 
     def test_builder_creator_make(self):
         """Goal: Verify that BuilderButtonTrapezoidTogglerCreator creates a group."""
+        from oaGuiElements.Core.buttons.button_trapezoid.button_trapezoid import TrapezoidButton
         creator = BuilderButtonTrapezoidTogglerCreator()
-        widget = creator.make_button_trapezoid_toggler(
-            parent_widget=self.root,
-            config_data=self.config,
-            context=self.context
-        )
-        self.assertIsInstance(widget, tk.Canvas)
+        with patch.object(TrapezoidButton, 'winfo_width', return_value=80), \
+             patch.object(TrapezoidButton, 'winfo_height', return_value=50):
+            widget = creator.make_button_trapezoid_toggler(
+                parent_widget=self.root,
+                config_data=self.config,
+                context=self.context
+            )
+            self.assertIsInstance(widget, tk.Canvas)
 
     def tearDown(self):
         if hasattr(self.root, "destroy"):

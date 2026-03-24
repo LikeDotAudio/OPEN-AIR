@@ -75,35 +75,61 @@ class SetupManager:
     def setup_mqtt(self, callback=None):
         """Ensures Mosquitto broker is installed and available."""
         if shutil.which('mosquitto'):
-            if callback: callback("Mosquitto broker is active.")
+            if callback: callback("⚡ [POWER] Mosquitto broker is buzzing with energy!")
             return True
         
-        if callback: callback("Mosquitto missing. Attempting install...")
+        if callback: callback("📡 [SEARCH] Mosquitto missing. Attempting heroic install...")
         try:
             # We use check=False for update as it might fail on some networks but
             # still allow the install to proceed.
             subprocess.run(['sudo', 'apt-get', 'update'], check=False)
             subprocess.run(['sudo', 'apt-get', 'install', 'mosquitto', '-y'], check=True)
-            if callback: callback("Mosquitto deployed successfully.")
+            if callback: callback("✨ [SUCCESS] Mosquitto deployed magnificently.")
             return True
         except Exception as e:
-            if callback: callback(f"Mosquitto install failed: {e}")
+            if callback: callback(f"💀 [FAILURE] Mosquitto install failed catastrophically: {e}")
             return False
 
     def setup_snmp(self, callback=None):
-        """Ensures SNMP daemon and utilities are installed."""
+        """Ensures SNMP daemon is installed and CONFIGURED."""
         if shutil.which('snmpd'):
-            if callback: callback("SNMP daemon is active.")
-            return True
+            # Check if our 'pass' configuration exists in snmpd.conf
+            try:
+                with open('/etc/snmp/snmpd.conf', 'r') as f:
+                    if 'pass .1.3.6.1.4.1.65300' in f.read():
+                        if callback: callback("📡 [RADAR] SNMP daemon is active and configured!")
+                        return True
+            except Exception:
+                pass # Proceed to install/re-config
         
-        if callback: callback("SNMP missing. Attempting install...")
+        if callback: callback("🛠️ [REPAIR] SNMP missing or unconfigured. Initiating deployment sequence...")
         try:
+            # 1. Ensure packages are present
             subprocess.run(['sudo', 'apt-get', 'update'], check=False)
-            subprocess.run(['sudo', 'apt-get', 'install', 'snmpd', 'snmp', '-y'], check=True)
-            if callback: callback("SNMP deployed successfully.")
+            subprocess.run(['sudo', 'apt-get', 'install', 'snmpd', 'snmp', 'snmp-mibs-downloader', '-y'], check=True)
+            
+            # 2. Use SNMPManager to generate the master installer script
+            from oaComSNMP.Managers.snmp_manager import SNMPManager
+            snmp_mgr = SNMPManager(run_bridge=True)
+            snmp_mgr.tree_builder.generate_master_script()
+            installer_bash = snmp_mgr.get_installer_script()
+            
+            installer_path = os.path.join(self.project_root, "oaDataSNMP", "snmp_install_tmp.sh")
+            os.makedirs(os.path.dirname(installer_path), exist_ok=True)
+            
+            with open(installer_path, "w") as f:
+                f.write(installer_bash)
+            os.chmod(installer_path, 0o755)
+            
+            # 3. Execute the installer
+            if callback: callback("⚙️ [CONFIG] Applying master OID tree configuration...")
+            # We must run this as root since it touches /etc/snmp/
+            subprocess.run(['sudo', installer_path], cwd=self.project_root, check=True)
+            
+            if callback: callback("✨ [SUCCESS] SNMP infrastructure deployed and configured.")
             return True
         except Exception as e:
-            if callback: callback(f"SNMP install failed: {e}")
+            if callback: callback(f"💀 [FAILURE] SNMP deployment failed: {e}")
             return False
 
     def setup_desktop(self, callback=None):
@@ -115,17 +141,17 @@ class SetupManager:
         
         if not os.path.exists(taskbar_script):
             error_msg = f"Error: {taskbar_script} not found."
-            if callback: callback(error_msg)
+            if callback: callback(f"💀 [MISSING] {error_msg}")
             logger.error(f"🛠️⚙️📦 [SETUP] {error_msg}")
             return False
 
         try:
             # Run the taskbar icon installer as a separate process
             subprocess.run([sys.executable, taskbar_script], check=True)
-            if callback: callback("Desktop integration complete.")
+            if callback: callback("🎨 [AESTHETICS] Desktop integration completed with flawless style.")
             return True
         except Exception as e:
-            if callback: callback(f"Desktop integration failed: {e}")
+            if callback: callback(f"💀 [FAILURE] Desktop integration crashed: {e}")
             return False
 
 def main():

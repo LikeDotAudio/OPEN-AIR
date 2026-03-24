@@ -82,7 +82,7 @@ class BuilderFaderHorizontalCreator(TransparencyMixin):
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
         
-        val_var = tk.DoubleVar(value=float(config_data.get("value_default", config_data.get("value", 50.0))))
+        val_var = tk.DoubleVar(master=parent_widget, value=float(config_data.get("value_default", config_data.get("value", 50.0))))
         frame = CustomHorizontalFaderFrame(parent_widget, val_var, config_data, config_data.get("path"), ctx.state_mirror_engine)
         
         if hasattr(b_inst, '_apply_transparency'):

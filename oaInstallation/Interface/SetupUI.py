@@ -35,14 +35,14 @@ class SetupApp(App):
     }
 
     #sidebar {
-        width: 30;
+        width: 45;
         background: #2b2b2b;
         border-right: solid #F4902C;
         padding: 1;
     }
 
     #stats-sidebar {
-        width: 35;
+        width: 42;
         background: #2b2b2b;
         border-left: solid #F4902C;
         padding: 1;
@@ -207,14 +207,19 @@ class SetupApp(App):
         self.query_one("#btn_clean").label = "Clean Installation"
 
         self.write_log("🌪️ [PURGE] Initiating full environmental scrub...")
-        success = await asyncio.to_thread(self.manager.check_dependencies, self.write_log, auto_install=True, clean_install=True)
-        
-        if success:
-            self.dep_status.update(f"📦 {STAGE_PYTHON_DEPS}: [green]Refreshed[/]")
-            self.write_log("✨ [POLISHED] All dependencies have been purged and perfectly re-installed!")
-        else:
-            self.dep_status.update(f"📦 {STAGE_PYTHON_DEPS}: [red]Repair Failed[/]")
-            self.write_log("💀 [FAILURE] The purge was successful, but the re-population failed!")
+        try:
+            success = await asyncio.to_thread(self.manager.check_dependencies, self.write_log, auto_install=True, clean_install=True)
+            
+            if success:
+                self.dep_status.update(f"📦 {STAGE_PYTHON_DEPS}: [green]Refreshed[/]")
+                self.write_log("✨ [POLISHED] All dependencies have been purged and perfectly re-installed!")
+            else:
+                self.dep_status.update(f"📦 {STAGE_PYTHON_DEPS}: [red]Repair Failed[/]")
+                self.write_log("💀 [FAILURE] The purge was successful, but the re-population failed!")
+        except Exception as e:
+            self.write_log(f"💥 [CRITICAL ERROR] The scrub process crashed: {e}")
+            self.dep_status.update(f"📦 {STAGE_PYTHON_DEPS}: [red]CRASHED[/]")
+            success = False
         
         return success
 

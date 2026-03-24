@@ -97,6 +97,11 @@ class AsyncGridRenderer:
             if state["loop_done"] and state["pending"] <= 0:
                 if parent.winfo_exists() and prefix == "" and hasattr(self.builder, '_trigger_reslice_all'):
                     self.builder._trigger_reslice_all()
+                
+                # ⚡ Z-ORDER FIX: Ensure background is behind newly created elements
+                if prefix == "" and hasattr(self.builder, '_force_background_to_back'):
+                    self.builder._force_background_to_back()
+
                 if on_complete:
                     try:
                         parent.after(1, on_complete)
@@ -135,6 +140,8 @@ class AsyncGridRenderer:
                 if w_type == "OcaBlock":
                     target = StructuralAssembler.create_block(parent, val, self.builder)
                     target._oca_path = cur_path
+                    if hasattr(self.builder, 'bind_to_widget'):
+                        self.builder.bind_to_widget(target)
                     target.grid(row=cr, column=cc, columnspan=cs, rowspan=rs, sticky=st)
                     state["pending"] += 1
                     self.render(target, val, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context)
@@ -142,6 +149,9 @@ class AsyncGridRenderer:
                     hull, inner = StructuralAssembler.create_bin(parent, val, self.builder)
                     hull._oca_path = cur_path
                     inner._oca_path = f"{cur_path}.fields"
+                    if hasattr(self.builder, 'bind_to_widget'):
+                        self.builder.bind_to_widget(hull)
+                        self.builder.bind_to_widget(inner)
                     hull.grid(row=cr, column=cc, columnspan=cs, rowspan=rs, sticky=st)
                     state["pending"] += 1
                     self.render(inner, val, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context)

@@ -1,0 +1,1323 @@
+{
+    "summary": {
+        "total": 164,
+        "passed": 163,
+        "failed": 0,
+        "errors": 1,
+        "skipped": 0
+    },
+    "details": [
+        {
+            "classname": "TestProtocolRouter",
+            "name": "test_ingest_puts_to_queue (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_ingest_puts_to_queue)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
+        },
+        {
+            "classname": "TestProtocolRouter",
+            "name": "test_router_stop_stops_threads (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_router_stop_stops_threads)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0010s"
+        },
+        {
+            "classname": "TestProtocolRouter",
+            "name": "test_singleton (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_singleton)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0001s"
+        },
+        {
+            "classname": "TestBrokerMonitor",
+            "name": "test_initialization_and_subscription (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_initialization_and_subscription)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0003s"
+        },
+        {
+            "classname": "TestBrokerMonitor",
+            "name": "test_observer_exception_handled (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_observer_exception_handled)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0011s"
+        },
+        {
+            "classname": "TestBrokerMonitor",
+            "name": "test_on_sys_message_notifies_observers (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_on_sys_message_notifies_observers)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0004s"
+        },
+        {
+            "classname": "TestBrokerMonitor",
+            "name": "test_on_sys_message_updates_stats (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_on_sys_message_updates_stats)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0002s"
+        },
+        {
+            "classname": "TestBrokerMonitor",
+            "name": "test_register_and_unregister_observer (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_register_and_unregister_observer)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0003s"
+        },
+        {
+            "classname": "TestMqttAsyncWorker",
+            "name": "test_parse_publish_item (oaComMQTT.Tests.test_mqtt_async_worker.TestMqttAsyncWorker.test_parse_publish_item)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0030s"
+        },
+        {
+            "classname": "TestMqttAsyncWorker",
+            "name": "test_queue_task_publications (oaComMQTT.Tests.test_mqtt_async_worker.TestMqttAsyncWorker.test_queue_task_publications)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "5.0070s"
+        },
+        {
+            "classname": "TestMqttAsyncWorker",
+            "name": "test_queue_task_subscriptions (oaComMQTT.Tests.test_mqtt_async_worker.TestMqttAsyncWorker.test_queue_task_subscriptions)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "5.0059s"
+        },
+        {
+            "classname": "TestMqttAsyncWorker",
+            "name": "test_receiver_task (oaComMQTT.Tests.test_mqtt_async_worker.TestMqttAsyncWorker.test_receiver_task)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.1019s"
+        },
+        {
+            "classname": "TestMqttConnectionManager",
+            "name": "test_connect_to_broker (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_connect_to_broker)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0007s"
+        },
+        {
+            "classname": "TestMqttConnectionManager",
+            "name": "test_disconnect_signals_worker (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_disconnect_signals_worker)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
+        },
+        {
+            "classname": "TestMqttConnectionManager",
+            "name": "test_initialization (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestMqttConnectionManager",
+            "name": "test_publish_queues_message (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_publish_queues_message)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0005s"
+        },
+        {
+            "classname": "TestMqttConnectionManager",
+            "name": "test_singleton_behavior (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_singleton_behavior)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestMqttConnectionManager",
+            "name": "test_subscribe_queues_message (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_subscribe_queues_message)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
+        },
+        {
+            "classname": "_FailedTest",
+            "name": "oaComMQTT.Tests.test_mqtt_logic (unittest.loader._FailedTest.oaComMQTT.Tests.test_mqtt_logic)",
+            "status": "error",
+            "message": "Failed to import test module: oaComMQTT.Tests.test_mqtt_logic\nTraceback (most recent call last):\n  File \"/usr/lib/python3.12/unittest/loader.py\", line 394, in _find_test_path\n    module = self._get_module_from_name(name)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/unittest/loader.py\", line 337, in _get_module_from_name\n    __import__(name)\n  File \"/home/anthony/Documents/OPEN-AIR/oaComMQTT/Tests/test_mqtt_logic.py\", line 18, in <module>\n    from ClearMQTT import MQTTSweeper\nModuleNotFoundError: No module named 'ClearMQTT'\n",
+            "cause": "Failed to import test module: oaComMQTT.Tests.test_mqtt_logic\nTraceback (most recent call last):\n  File \"/usr/lib/python3.12/unittest/loader.py\", line 394, in _find_test_path\n    module = self._get_module_from_name(name)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/unittest/loader.py\", line 337, in _get_module_from_name\n    __import__(name)\n  File \"/home/anthony/Documents/OPEN-AIR/oaComMQTT/Tests/test_mqtt_logic.py\", line 18, in <module>\n    from ClearMQTT import MQTTSweeper\nModuleNotFoundError: No module named 'ClearMQTT'\n<br><small><i>At loader.py:33 in testFailure -> raise self._exception</i></small>",
+            "duration": "0.0004s"
+        },
+        {
+            "classname": "TestMqttManager",
+            "name": "test_handle_delete_command (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_handle_delete_command)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0008s"
+        },
+        {
+            "classname": "TestMqttManager",
+            "name": "test_initialization (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0010s"
+        },
+        {
+            "classname": "TestMqttManager",
+            "name": "test_on_fleet_scan_complete_logging (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_on_fleet_scan_complete_logging)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0011s"
+        },
+        {
+            "classname": "TestMqttManager",
+            "name": "test_publish_async (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_publish_async)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0009s"
+        },
+        {
+            "classname": "TestMqttManager",
+            "name": "test_publish_worker_loop (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_publish_worker_loop)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0018s"
+        },
+        {
+            "classname": "TestMqttManager",
+            "name": "test_system_status_loop_iteration (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_system_status_loop_iteration)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0021s"
+        },
+        {
+            "classname": "TestMqttSubscriberRouter",
+            "name": "test_match_cache (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_match_cache)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0004s"
+        },
+        {
+            "classname": "TestMqttSubscriberRouter",
+            "name": "test_multiple_subscribers (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_multiple_subscribers)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0007s"
+        },
+        {
+            "classname": "TestMqttSubscriberRouter",
+            "name": "test_subscribe_exact_topic (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_exact_topic)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0004s"
+        },
+        {
+            "classname": "TestMqttSubscriberRouter",
+            "name": "test_subscribe_wildcard_topic (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_wildcard_topic)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0004s"
+        },
+        {
+            "classname": "TestMidiManager",
+            "name": "test_status_broadcast (oaComMidi.Tests.test_midi.TestMidiManager.test_status_broadcast)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0010s"
+        },
+        {
+            "classname": "TestOSCManager",
+            "name": "test_handle_incoming_osc (oaComOSC.Tests.test_osc.TestOSCManager.test_handle_incoming_osc)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0008s"
+        },
+        {
+            "classname": "TestOSCManager",
+            "name": "test_initialization (oaComOSC.Tests.test_osc.TestOSCManager.test_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0004s"
+        },
+        {
+            "classname": "TestOSCManager",
+            "name": "test_monitor_callbacks (oaComOSC.Tests.test_osc.TestOSCManager.test_monitor_callbacks)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0009s"
+        },
+        {
+            "classname": "TestOSCManager",
+            "name": "test_register_route (oaComOSC.Tests.test_osc.TestOSCManager.test_register_route)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0005s"
+        },
+        {
+            "classname": "TestSNMPManager",
+            "name": "test_add_monitor_callback (oaComSNMP.Tests.test_snmp_manager.TestSNMPManager.test_add_monitor_callback)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0005s"
+        },
+        {
+            "classname": "TestSNMPManager",
+            "name": "test_initialization (oaComSNMP.Tests.test_snmp_manager.TestSNMPManager.test_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0060s"
+        },
+        {
+            "classname": "TestSNMPManager",
+            "name": "test_start_sequence (oaComSNMP.Tests.test_snmp_manager.TestSNMPManager.test_start_sequence)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0591s"
+        },
+        {
+            "classname": "TestAgentMdnsZeroconf",
+            "name": "test_aes70_discovery_listener (oaComVisa.Tests.test_agent_mdns_zeroconf.TestAgentMdnsZeroconf.test_aes70_discovery_listener)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0005s"
+        },
+        {
+            "classname": "TestAgentMdnsZeroconf",
+            "name": "test_check_host_dedicated (oaComVisa.Tests.test_agent_mdns_zeroconf.TestAgentMdnsZeroconf.test_check_host_dedicated)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
+        },
+        {
+            "classname": "TestAgentMdnsZeroconf",
+            "name": "test_discover_aes70_devices (oaComVisa.Tests.test_agent_mdns_zeroconf.TestAgentMdnsZeroconf.test_discover_aes70_devices)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0007s"
+        },
+        {
+            "classname": "TestAgentMdnsZeroconf",
+            "name": "test_discover_ip_devices (oaComVisa.Tests.test_agent_mdns_zeroconf.TestAgentMdnsZeroconf.test_discover_ip_devices)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0008s"
+        },
+        {
+            "classname": "TestAgentStaticIpProber",
+            "name": "test_discover_gateway_devices_exception (oaComVisa.Tests.test_agent_static_ip_prober.TestAgentStaticIpProber.test_discover_gateway_devices_exception)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0013s"
+        },
+        {
+            "classname": "TestAgentStaticIpProber",
+            "name": "test_discover_gateway_devices_success (oaComVisa.Tests.test_agent_static_ip_prober.TestAgentStaticIpProber.test_discover_gateway_devices_success)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0009s"
+        },
+        {
+            "classname": "TestAgentUsbEnumerator",
+            "name": "test_discover_usb_devices_empty (oaComVisa.Tests.test_agent_usb_enumerator.TestAgentUsbEnumerator.test_discover_usb_devices_empty)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0004s"
+        },
+        {
+            "classname": "TestAgentUsbEnumerator",
+            "name": "test_discover_usb_devices_exception (oaComVisa.Tests.test_agent_usb_enumerator.TestAgentUsbEnumerator.test_discover_usb_devices_exception)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0004s"
+        },
+        {
+            "classname": "TestAgentUsbEnumerator",
+            "name": "test_discover_usb_devices_success (oaComVisa.Tests.test_agent_usb_enumerator.TestAgentUsbEnumerator.test_discover_usb_devices_success)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0003s"
+        },
+        {
+            "classname": "TestCliVisaFind",
+            "name": "test_main (oaComVisa.Tests.test_cli_visa_find.TestCliVisaFind.test_main)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0521s"
+        },
+        {
+            "classname": "TestDiscoveryOrchestrator",
+            "name": "test_run_discovery_success (oaComVisa.Tests.test_discovery_orchestrator.TestDiscoveryOrchestrator.test_run_discovery_success)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0012s"
+        },
+        {
+            "classname": "TestDiscoveryOrchestrator",
+            "name": "test_run_discovery_unresponsive (oaComVisa.Tests.test_discovery_orchestrator.TestDiscoveryOrchestrator.test_run_discovery_unresponsive)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0009s"
+        },
+        {
+            "classname": "TestDiscoveryOrchestrator",
+            "name": "test_save_inventory (oaComVisa.Tests.test_discovery_orchestrator.TestDiscoveryOrchestrator.test_save_inventory)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0015s"
+        },
+        {
+            "classname": "TestDiscoveryOrchestrator",
+            "name": "test_save_inventory_empty (oaComVisa.Tests.test_discovery_orchestrator.TestDiscoveryOrchestrator.test_save_inventory_empty)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
+        },
+        {
+            "classname": "TestVisaConnector",
+            "name": "test_connect_instrument_logic_query_failure (oaComVisa.Tests.test_logic_connect_instrument.TestVisaConnector.test_connect_instrument_logic_query_failure)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0036s"
+        },
+        {
+            "classname": "TestVisaConnector",
+            "name": "test_connect_instrument_logic_setup_failure (oaComVisa.Tests.test_logic_connect_instrument.TestVisaConnector.test_connect_instrument_logic_setup_failure)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0008s"
+        },
+        {
+            "classname": "TestVisaConnector",
+            "name": "test_connect_instrument_logic_success (oaComVisa.Tests.test_logic_connect_instrument.TestVisaConnector.test_connect_instrument_logic_success)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0011s"
+        },
+        {
+            "classname": "TestVisaConnector",
+            "name": "test_setup_visa_instrument_failure (oaComVisa.Tests.test_logic_connect_instrument.TestVisaConnector.test_setup_visa_instrument_failure)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0007s"
+        },
+        {
+            "classname": "TestVisaConnector",
+            "name": "test_setup_visa_instrument_success (oaComVisa.Tests.test_logic_connect_instrument.TestVisaConnector.test_setup_visa_instrument_success)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
+        },
+        {
+            "classname": "TestVisaDisconnector",
+            "name": "test_disconnect_instrument_failure (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_failure)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0004s"
+        },
+        {
+            "classname": "TestVisaDisconnector",
+            "name": "test_disconnect_instrument_logic_no_inst (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_logic_no_inst)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0003s"
+        },
+        {
+            "classname": "TestVisaDisconnector",
+            "name": "test_disconnect_instrument_logic_with_inst (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_logic_with_inst)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0012s"
+        },
+        {
+            "classname": "TestVisaDisconnector",
+            "name": "test_disconnect_instrument_none (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_none)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0002s"
+        },
+        {
+            "classname": "TestVisaDisconnector",
+            "name": "test_disconnect_instrument_success (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_success)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0004s"
+        },
+        {
+            "classname": "TestVisaMqttListener",
+            "name": "test_initialization_and_subscriptions (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_initialization_and_subscriptions)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0007s"
+        },
+        {
+            "classname": "TestVisaMqttListener",
+            "name": "test_on_connect_request_direct (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_connect_request_direct)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0010s"
+        },
+        {
+            "classname": "TestVisaMqttListener",
+            "name": "test_on_device_select (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_device_select)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
+        },
+        {
+            "classname": "TestVisaMqttListener",
+            "name": "test_on_gui_connect_request (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_gui_connect_request)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0008s"
+        },
+        {
+            "classname": "TestVisaMqttListener",
+            "name": "test_on_gui_disconnect_request (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_gui_disconnect_request)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0016s"
+        },
+        {
+            "classname": "TestVisaMqttListener",
+            "name": "test_on_search_request_valid (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_search_request_valid)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0013s"
+        },
+        {
+            "classname": "TestVisaGuiPublisher",
+            "name": "test_initialization (oaComVisa.Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.test_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0004s"
+        },
+        {
+            "classname": "TestVisaGuiPublisher",
+            "name": "test_publish_proxy_status (oaComVisa.Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.test_publish_proxy_status)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
+        },
+        {
+            "classname": "TestVisaGuiPublisher",
+            "name": "test_publish_status (oaComVisa.Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.test_publish_status)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0008s"
+        },
+        {
+            "classname": "TestVisaGuiPublisher",
+            "name": "test_update_found_devices_gui (oaComVisa.Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.test_update_found_devices_gui)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0031s"
+        },
+        {
+            "classname": "TestVisaFleet",
+            "name": "test_inventory_notification (oaComVisa.Tests.test_visa_fleet.TestVisaFleet.test_inventory_notification)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0020s"
+        },
+        {
+            "classname": "TestVisaLogic",
+            "name": "test_visa_library_error (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_library_error)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0002s"
+        },
+        {
+            "classname": "TestVisaLogic",
+            "name": "test_visa_proxy_init_fail (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_proxy_init_fail)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0001s"
+        },
+        {
+            "classname": "TestVisaLogic",
+            "name": "test_visa_proxy_init_success (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_proxy_init_success)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0007s"
+        },
+        {
+            "classname": "TestVisaLogic",
+            "name": "test_visa_resource_lister (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_resource_lister)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0268s"
+        },
+        {
+            "classname": "TestVisaManagerOrchestrator",
+            "name": "test_initialization (oaComVisa.Tests.test_visa_manager.TestVisaManagerOrchestrator.test_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0016s"
+        },
+        {
+            "classname": "TestVisaScanner",
+            "name": "test_augment_device_details (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_augment_device_details)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0003s"
+        },
+        {
+            "classname": "TestVisaScanner",
+            "name": "test_get_gateway_inventory (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_get_gateway_inventory)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0007s"
+        },
+        {
+            "classname": "TestVisaScanner",
+            "name": "test_hunt_for_devices (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_hunt_for_devices)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0991s"
+        },
+        {
+            "classname": "TestVisaScanner",
+            "name": "test_initialization (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0002s"
+        },
+        {
+            "classname": "TestVisaScanner",
+            "name": "test_parse_idn (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_parse_idn)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0002s"
+        },
+        {
+            "classname": "TestVisaScanner",
+            "name": "test_parse_resource_details_tcpip (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_parse_resource_details_tcpip)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0002s"
+        },
+        {
+            "classname": "TestVisaScanner",
+            "name": "test_parse_resource_details_usb (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_parse_resource_details_usb)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0001s"
+        },
+        {
+            "classname": "TestVisaScanner",
+            "name": "test_query_device_safe_failure (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_query_device_safe_failure)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0003s"
+        },
+        {
+            "classname": "TestVisaScanner",
+            "name": "test_query_device_safe_success (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_query_device_safe_success)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
+        },
+        {
+            "classname": "TestConfigGenerator",
+            "name": "test_create_default_config_ini (oaConfiguration.Tests.test_config.TestConfigGenerator.test_create_default_config_ini)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
+        },
+        {
+            "classname": "TestConfigReader",
+            "name": "test_config_loading_from_file (oaConfiguration.Tests.test_config_reader.TestConfigReader.test_config_loading_from_file)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
+        },
+        {
+            "classname": "TestConfigReader",
+            "name": "test_singleton_integrity (oaConfiguration.Tests.test_config_reader.TestConfigReader.test_singleton_integrity)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestConfigReader",
+            "name": "test_default_values (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_default_values)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestConfigReader",
+            "name": "test_global_settings_property (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_global_settings_property)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestConfigReader",
+            "name": "test_singleton (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_singleton)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestConfigValidator",
+            "name": "test_validate_configuration (oaConfiguration.Tests.test_config_validator.TestConfigValidator.test_validate_configuration)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0001s"
+        },
+        {
+            "classname": "TestAsyncGridRenderer",
+            "name": "test_render_functional_widget_trigger (oaGuiBuildShell.Tests.test_async_grid_renderer.TestAsyncGridRenderer.test_render_functional_widget_trigger)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.1015s"
+        },
+        {
+            "classname": "TestAsyncGridRenderer",
+            "name": "test_render_initialization (oaGuiBuildShell.Tests.test_async_grid_renderer.TestAsyncGridRenderer.test_render_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0073s"
+        },
+        {
+            "classname": "TestKnobWidget",
+            "name": "test_broadcast_notifies_engine (oaGuiElements.Tests.Knobs.knob.test_knob.TestKnobWidget.test_broadcast_notifies_engine)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0167s"
+        },
+        {
+            "classname": "TestKnobWidget",
+            "name": "test_creation_via_builder (oaGuiElements.Tests.Knobs.knob.test_knob.TestKnobWidget.test_creation_via_builder)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0178s"
+        },
+        {
+            "classname": "TestKnobWidget",
+            "name": "test_visualization_gear_config (oaGuiElements.Tests.Knobs.knob.test_knob.TestKnobWidget.test_visualization_gear_config)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0175s"
+        },
+        {
+            "classname": "TestRotarySelector",
+            "name": "test_01_initialization (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_01_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0167s"
+        },
+        {
+            "classname": "TestRotarySelector",
+            "name": "test_02_value_change (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_02_value_change)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0146s"
+        },
+        {
+            "classname": "TestRotarySelector",
+            "name": "test_03_position_text (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_03_position_text)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0158s"
+        },
+        {
+            "classname": "TestRotarySelector",
+            "name": "test_04_builder_creation (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_04_builder_creation)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0181s"
+        },
+        {
+            "classname": "TestButtonActuator",
+            "name": "test_actuator_button_initialization (oaGuiElements.Tests.buttons.button_actuator.test_button_actuator.TestButtonActuator.test_actuator_button_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0145s"
+        },
+        {
+            "classname": "TestButtonActuator",
+            "name": "test_builder_creator_make (oaGuiElements.Tests.buttons.button_actuator.test_button_actuator.TestButtonActuator.test_builder_creator_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0172s"
+        },
+        {
+            "classname": "TestButtonToggle",
+            "name": "test_builder_creator_make (oaGuiElements.Tests.buttons.button_toggle.test_button_toggle.TestButtonToggle.test_builder_creator_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0733s"
+        },
+        {
+            "classname": "TestButtonToggle",
+            "name": "test_toggle_registration (oaGuiElements.Tests.buttons.button_toggle.test_button_toggle.TestButtonToggle.test_toggle_registration)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0086s"
+        },
+        {
+            "classname": "TestButtonToggler",
+            "name": "test_builder_creator_make (oaGuiElements.Tests.buttons.button_toggler.test_button_toggler.TestButtonToggler.test_builder_creator_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0189s"
+        },
+        {
+            "classname": "TestButtonTrapezoid",
+            "name": "test_trapezoid_button_initialization (oaGuiElements.Tests.buttons.button_trapezoid.test_button_trapezoid.TestButtonTrapezoid.test_trapezoid_button_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0221s"
+        },
+        {
+            "classname": "TestButtonTrapezoid",
+            "name": "test_trapezoid_registration (oaGuiElements.Tests.buttons.button_trapezoid.test_button_trapezoid.TestButtonTrapezoid.test_trapezoid_registration)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0099s"
+        },
+        {
+            "classname": "TestButtonTrapezoidToggler",
+            "name": "test_builder_creator_make (oaGuiElements.Tests.buttons.button_trapezoid_toggler.test_button_trapezoid_toggler.TestButtonTrapezoidToggler.test_builder_creator_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0234s"
+        },
+        {
+            "classname": "TestButtonWink",
+            "name": "test_builder_creator_make (oaGuiElements.Tests.buttons.button_wink.test_button_wink.TestButtonWink.test_builder_creator_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0173s"
+        },
+        {
+            "classname": "TestButtonWinkToggler",
+            "name": "test_builder_creator_make (oaGuiElements.Tests.buttons.button_wink_toggler.test_button_wink_toggler.TestButtonWinkToggler.test_builder_creator_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0186s"
+        },
+        {
+            "classname": "TestFader",
+            "name": "test_builder_creator_make (oaGuiElements.Tests.faders.fader.test_fader.TestFader.test_builder_creator_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0180s"
+        },
+        {
+            "classname": "TestFader",
+            "name": "test_fader_initialization (oaGuiElements.Tests.faders.fader.test_fader.TestFader.test_fader_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0138s"
+        },
+        {
+            "classname": "TestFaderBarGraph",
+            "name": "test_builder_creator_make (oaGuiElements.Tests.faders.fader_bar_graph.test_fader_bar_graph.TestFaderBarGraph.test_builder_creator_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0167s"
+        },
+        {
+            "classname": "TestFaderBarGraph",
+            "name": "test_fader_bar_graph_initialization (oaGuiElements.Tests.faders.fader_bar_graph.test_fader_bar_graph.TestFaderBarGraph.test_fader_bar_graph_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0188s"
+        },
+        {
+            "classname": "TestFaderDual",
+            "name": "test_builder_creator_make (oaGuiElements.Tests.faders.fader_dual.test_fader_dual.TestFaderDual.test_builder_creator_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0155s"
+        },
+        {
+            "classname": "TestFaderDual",
+            "name": "test_dual_fader_initialization (oaGuiElements.Tests.faders.fader_dual.test_fader_dual.TestFaderDual.test_dual_fader_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0164s"
+        },
+        {
+            "classname": "TestFaderHorizontal",
+            "name": "test_builder_creator_make (oaGuiElements.Tests.faders.fader_horizontal.test_fader_horizontal.TestFaderHorizontal.test_builder_creator_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0178s"
+        },
+        {
+            "classname": "TestFaderHorizontal",
+            "name": "test_horizontal_fader_initialization (oaGuiElements.Tests.faders.fader_horizontal.test_fader_horizontal.TestFaderHorizontal.test_horizontal_fader_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0117s"
+        },
+        {
+            "classname": "TestFaderLinearTravellingPotentiometer",
+            "name": "test_builder_creator_make (oaGuiElements.Tests.faders.fader_linear_travelling_potentiometer.test_fader_linear_travelling_potentiometer.TestFaderLinearTravellingPotentiometer.test_builder_creator_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0182s"
+        },
+        {
+            "classname": "TestFaderLinearTravellingPotentiometer",
+            "name": "test_ltp_initialization (oaGuiElements.Tests.faders.fader_linear_travelling_potentiometer.test_fader_linear_travelling_potentiometer.TestFaderLinearTravellingPotentiometer.test_ltp_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0179s"
+        },
+        {
+            "classname": "TestFluxPlotter",
+            "name": "test_creation (oaGuiElements.Tests.graphing.graphing.test_graphing.TestFluxPlotter.test_creation)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.1706s"
+        },
+        {
+            "classname": "TestRadarWidget",
+            "name": "test_creation (oaGuiElements.Tests.graphing.radar.test_radar.TestRadarWidget.test_creation)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0146s"
+        },
+        {
+            "classname": "TestFluxPlotter",
+            "name": "test_creation (oaGuiElements.Tests.graphing.test_flux_plotter.TestFluxPlotter.test_creation)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0173s"
+        },
+        {
+            "classname": "TestMousewheelScrollMixin",
+            "name": "test_import (oaGuiElements.Tests.input.input_mousewheel_mixin.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_import)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestMousewheelScrollMixin",
+            "name": "test_replace_backslash (oaGuiElements.Tests.input.input_mousewheel_mixin.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_replace_backslash)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestJsonTree",
+            "name": "test_builder_creator_make (oaGuiElements.Tests.input.json_tree.test_json_tree.TestJsonTree.test_builder_creator_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0258s"
+        },
+        {
+            "classname": "TestJsonTree",
+            "name": "test_json_tree_initialization (oaGuiElements.Tests.input.json_tree.test_json_tree.TestJsonTree.test_json_tree_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0148s"
+        },
+        {
+            "classname": "TestMeterBar",
+            "name": "test_builder_creator_make (oaGuiElements.Tests.metering.meter_bar.test_meter_bar.TestMeterBar.test_builder_creator_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0193s"
+        },
+        {
+            "classname": "TestMeterBar",
+            "name": "test_smart_meter_initialization (oaGuiElements.Tests.metering.meter_bar.test_meter_bar.TestMeterBar.test_smart_meter_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0137s"
+        },
+        {
+            "classname": "TestMeterNeedle",
+            "name": "test_builder_creator_make (oaGuiElements.Tests.metering.meter_needle.test_meter_needle.TestMeterNeedle.test_builder_creator_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0214s"
+        },
+        {
+            "classname": "TestMeterNeedle",
+            "name": "test_tilted_meter_config_extraction (oaGuiElements.Tests.metering.meter_needle.test_meter_needle.TestMeterNeedle.test_tilted_meter_config_extraction)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0164s"
+        },
+        {
+            "classname": "TestMeterNeedleBatch",
+            "name": "test_batch_creation (oaGuiElements.Tests.metering.meter_needle.test_meter_needle_batch.TestMeterNeedleBatch.test_batch_creation)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.1789s"
+        },
+        {
+            "classname": "TestFluxPlotter",
+            "name": "test_creation (oaGuiElements.Tests.text.test_flux_plotter.TestFluxPlotter.test_creation)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0149s"
+        },
+        {
+            "classname": "TestTextLabel",
+            "name": "test_make_text_label (oaGuiElements.Tests.text.text_label.test_text_label.TestTextLabel.test_make_text_label)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0111s"
+        },
+        {
+            "classname": "TestTextLabel",
+            "name": "test_static_make (oaGuiElements.Tests.text.text_label.test_text_label.TestTextLabel.test_static_make)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0199s"
+        },
+        {
+            "classname": "TestTextTable",
+            "name": "test_make_text_table (oaGuiElements.Tests.text.text_table.test_text_table.TestTextTable.test_make_text_table)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0202s"
+        },
+        {
+            "classname": "TestTextValueBox",
+            "name": "test_make_text_value_box (oaGuiElements.Tests.text.text_value_box.test_text_value_box.TestTextValueBox.test_make_text_value_box)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0244s"
+        },
+        {
+            "classname": "TestTextValueBox",
+            "name": "test_make_text_value_box (oaGuiElements.Tests.text.text_value_with_units.test_text_value_with_units.TestTextValueBox.test_make_text_value_box)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0174s"
+        },
+        {
+            "classname": "TestMousewheelScrollMixin",
+            "name": "test_import (oaGuiElements.Tests.utils.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_import)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestMousewheelScrollMixin",
+            "name": "test_replace_backslash (oaGuiElements.Tests.utils.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_replace_backslash)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestUIAndData",
+            "name": "test_file_io_load (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_file_io_load)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0009s"
+        },
+        {
+            "classname": "TestUIAndData",
+            "name": "test_layout_parser_scan (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_layout_parser_scan)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
+        },
+        {
+            "classname": "TestUIAndData",
+            "name": "test_marker_logic_grouping (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_marker_logic_grouping)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0002s"
+        },
+        {
+            "classname": "TestUIAndData",
+            "name": "test_state_manager_update (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_state_manager_update)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0009s"
+        },
+        {
+            "classname": "TestStateMirrorEngine",
+            "name": "test_broadcast_gui_change (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_broadcast_gui_change)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0180s"
+        },
+        {
+            "classname": "TestStateMirrorEngine",
+            "name": "test_calculate_topic (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_calculate_topic)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0160s"
+        },
+        {
+            "classname": "TestStateMirrorEngine",
+            "name": "test_register_widget (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_register_widget)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0851s"
+        },
+        {
+            "classname": "TestSplinker",
+            "name": "test_add_monitor_callback (oaSplinker.Tests.test_splinker.TestSplinker.test_add_monitor_callback)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0012s"
+        },
+        {
+            "classname": "TestSplinker",
+            "name": "test_initialization (oaSplinker.Tests.test_splinker.TestSplinker.test_initialization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0003s"
+        },
+        {
+            "classname": "TestSplinker",
+            "name": "test_singleton (oaSplinker.Tests.test_splinker.TestSplinker.test_singleton)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0003s"
+        },
+        {
+            "classname": "TestStateCache",
+            "name": "test_handle_external_update (oaStateCache.Tests.test_state_cache.TestStateCache.test_handle_external_update)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0022s"
+        },
+        {
+            "classname": "TestLauncher",
+            "name": "test_dynamic_snmp_loading (oaThreadManager.Tests.Workers.test_launcher.TestLauncher.test_dynamic_snmp_loading)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0078s"
+        },
+        {
+            "classname": "TestLauncher",
+            "name": "test_launch_core_managers_structure (oaThreadManager.Tests.Workers.test_launcher.TestLauncher.test_launch_core_managers_structure)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0044s"
+        },
+        {
+            "classname": "TestEntry",
+            "name": "test_placeholder (oaThreadManager.Tests.test_Entry.TestEntry.test_placeholder)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestFleetStatusMonitor",
+            "name": "test_initialization_and_subscription (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_initialization_and_subscription)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
+        },
+        {
+            "classname": "TestFleetStatusMonitor",
+            "name": "test_on_scan_complete_malformed_payload (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_complete_malformed_payload)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0007s"
+        },
+        {
+            "classname": "TestFleetStatusMonitor",
+            "name": "test_on_scan_complete_no_devices (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_complete_no_devices)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0007s"
+        },
+        {
+            "classname": "TestFleetStatusMonitor",
+            "name": "test_on_scan_complete_with_devices (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_complete_with_devices)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0010s"
+        },
+        {
+            "classname": "TestFleetStatusMonitor",
+            "name": "test_on_scan_start (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_start)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
+        },
+        {
+            "classname": "TestWatchdogFunctions",
+            "name": "test_kick_watchdog (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_kick_watchdog)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0101s"
+        },
+        {
+            "classname": "TestWatchdogFunctions",
+            "name": "test_register_panic_callback (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_register_panic_callback)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0001s"
+        },
+        {
+            "classname": "TestWatchdogFunctions",
+            "name": "test_start_heartbeat (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_start_heartbeat)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0005s"
+        }
+    ]
+}

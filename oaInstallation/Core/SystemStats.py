@@ -21,6 +21,11 @@ class SystemStatsProvider:
         return 0.0
 
     @staticmethod
+    def get_cpu_cores():
+        """Returns the number of logical CPU cores."""
+        return os.cpu_count()
+
+    @staticmethod
     def get_ram_usage():
         """Returns RAM usage as a percentage and used/total in GB."""
         ram = psutil.virtual_memory()
@@ -40,11 +45,13 @@ class SystemStatsProvider:
     def get_all_stats(self):
         """Aggregates all system metrics into a dictionary."""
         cpu = self.get_cpu_speed()
+        cores = self.get_cpu_cores()
         ram_p, ram_u, ram_t = self.get_ram_usage()
         disk_p, disk_f, disk_t = self.get_disk_space()
         
         return {
             "cpu_mhz": cpu,
+            "cpu_cores": cores,
             "ram_percent": ram_p,
             "ram_used_gb": ram_u,
             "ram_total_gb": ram_t,

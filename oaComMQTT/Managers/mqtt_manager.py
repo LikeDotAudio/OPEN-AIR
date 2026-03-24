@@ -146,9 +146,8 @@ class MqttManager:
         except: pass
 
     def _on_fleet_scan_complete(self, msg: MqttMessage):
-        if LOCAL_DEBUG:
-            logger.success("✅✅✅ [SUCCESS] MqttManager: Fleet Scan Complete "
-                           "detected.")
+        logger.success("✅✅✅ [SUCCESS] MqttManager: Fleet Scan Complete "
+                       "detected.")
         # Rebuilding logic would go here if needed in this context
         # Rebuilding logic would go here if needed in this context
 

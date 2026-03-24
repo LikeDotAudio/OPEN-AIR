@@ -130,13 +130,22 @@ class BuilderBackgroundManagerMixin:
                 if not hasattr(self, 'panel_bg_label') or not self.panel_bg_label:
                     self.panel_bg_label = tk.Label(self.scroll_frame, image=self.panel_bg_image, bd=0)
                     self.panel_bg_label.place(x=0, y=0, width=width, height=height)
-                    self.panel_bg_label.lower()
                 else:
                     self.panel_bg_label.config(image=self.panel_bg_image)
                     self.panel_bg_label.place(x=0, y=0, width=width, height=height)
+                
+                self._force_background_to_back()
             
             # --- Trigger reslice for all registered widgets ---
             self._trigger_reslice_all()
+
+    def _force_background_to_back(self):
+        """Ensures the background label is at the bottom of the Z-stack."""
+        if hasattr(self, 'panel_bg_label') and self.panel_bg_label:
+            try:
+                self.panel_bg_label.lower()
+            except Exception:
+                pass
 
     def _trigger_background_sync(self, force=False):
         """Calculates settled dimensions and triggers background regeneration with debouncing."""

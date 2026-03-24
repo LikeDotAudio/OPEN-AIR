@@ -36,32 +36,36 @@ class TestButtonTrapezoid(unittest.TestCase):
 
     def test_trapezoid_button_initialization(self):
         """Goal: Verify that TrapezoidButton initializes correctly."""
-        button = TrapezoidButton(
-            parent=self.root,
-            variable=self.variable,
-            config=self.config,
-            label="Test Trapezoid",
-            path="test/trapezoid",
-            state_mirror_engine=self.mirror_engine,
-            base_mqtt_topic_from_path="test/topic",
-            subscriber_router=self.router
-        )
-        self.assertEqual(button.path, "test/trapezoid")
-        self.assertEqual(button.label, "Test Trapezoid")
+        with patch.object(TrapezoidButton, 'winfo_width', return_value=80), \
+             patch.object(TrapezoidButton, 'winfo_height', return_value=50):
+            button = TrapezoidButton(
+                parent=self.root,
+                variable=self.variable,
+                config=self.config,
+                label="Test Trapezoid",
+                path="test/trapezoid",
+                state_mirror_engine=self.mirror_engine,
+                base_mqtt_topic_from_path="test/topic",
+                subscriber_router=self.router
+            )
+            self.assertEqual(button.path, "test/trapezoid")
+            self.assertEqual(button.label, "Test Trapezoid")
 
     def test_trapezoid_registration(self):
         """Goal: Verify that TrapezoidButton registers with state mirror engine."""
-        TrapezoidButton(
-            parent=self.root,
-            variable=self.variable,
-            config=self.config,
-            label="Test Trapezoid",
-            path="test/trapezoid",
-            state_mirror_engine=self.mirror_engine,
-            base_mqtt_topic_from_path="test/topic",
-            subscriber_router=self.router
-        )
-        self.mirror_engine.register_widget.assert_called()
+        with patch.object(TrapezoidButton, 'winfo_width', return_value=80), \
+             patch.object(TrapezoidButton, 'winfo_height', return_value=50):
+            TrapezoidButton(
+                parent=self.root,
+                variable=self.variable,
+                config=self.config,
+                label="Test Trapezoid",
+                path="test/trapezoid",
+                state_mirror_engine=self.mirror_engine,
+                base_mqtt_topic_from_path="test/topic",
+                subscriber_router=self.router
+            )
+            self.mirror_engine.register_widget.assert_called()
 
     def tearDown(self):
         if hasattr(self.root, "destroy"):

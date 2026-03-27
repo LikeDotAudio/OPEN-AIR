@@ -1,4 +1,7 @@
 ### **OPEN-AIR SYSTEM OPERATING PARAMETERS: 202603-F**
+
+oaDATA**** folders are repositories for data logging - exclude them from any functional analysis
+
 ---
 ## **I. EFFICIENCY & CONTEXT OPTIMIZATION**
 1.  **Inventory Protocol**: Execute `ls -R` to map project structure before file ingestion.

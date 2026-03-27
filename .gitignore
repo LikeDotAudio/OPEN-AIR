@@ -4,4 +4,5 @@
 /__pycache__/
 .crawler/
 
-oaComMidi/Core/Human User interface
+# Ignore all Open-Air Data directories
+oaData*/

@@ -82,30 +82,31 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     #     )
 
     osc_manager = _load_protocol_manager(
-        "oaComOSC.Entry", "OSCManager",
+        "oaComOSC.Entry", "get_manager",
         state_cache_manager=state_cache_manager, mqtt_connection_manager=mqtt_connection_manager, run_bridge=True
     )
 
     snmp_manager = None
     if getattr(app_constants, "SCAN_SNMP", False):
-        import oaComSNMP.Entry as snmp_entry
-        snmp_manager = snmp_entry.get_manager(
+        snmp_manager = _load_protocol_manager(
+            "oaComSNMP.Entry", "get_manager",
             state_cache_manager=state_cache_manager, 
             mqtt_connection_manager=mqtt_connection_manager, 
             subscriber_router=subscriber_router,
             run_bridge=True
         )
-        snmp_manager.start()
+        if snmp_manager:
+            snmp_manager.start()
 
     # MIDI bridge is always on for core
     midi_manager = _load_protocol_manager(
-        "oaComMidi.Entry", "MidiManager",
+        "oaComMidi.Entry", "get_manager",
         state_cache_manager=state_cache_manager, run_bridge=True
     )
 
     # REST API for external control
     rest_manager = _load_protocol_manager(
-        "oaComREST.Entry", "RESTManager",
+        "oaComREST.Entry", "get_manager",
         state_cache_manager=state_cache_manager, protocol_router=protocol_router
     )
     

@@ -33,4 +33,20 @@ def stop():
     if _manager:
         _manager.stop()
 
-__all__ = ["RESTManager", "get_manager", "start", "stop"]
+def get_status():
+    """Convenience function to get the current REST service status."""
+    if _manager:
+        return _manager.get_status()
+    return {"running": False}
+
+def add_monitor_callback(callback):
+    """Registers a callback for real-time activity monitoring."""
+    if _manager:
+        _manager.add_monitor_callback(callback)
+
+def remove_monitor_callback(callback):
+    """Removes a previously registered monitor callback."""
+    if _manager:
+        _manager.remove_monitor_callback(callback)
+
+__all__ = ["RESTManager", "get_manager", "start", "stop", "get_status", "add_monitor_callback", "remove_monitor_callback"]

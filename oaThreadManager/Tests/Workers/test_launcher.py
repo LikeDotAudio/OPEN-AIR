@@ -67,7 +67,8 @@ class TestLauncher(unittest.TestCase):
         
         mock_snmp_module = MagicMock()
         mock_snmp_manager_class = MagicMock()
-        mock_snmp_module.SNMPManager = mock_snmp_manager_class
+        mock_snmp_module.get_manager = mock_snmp_manager_class
+        mock_snmp_module.SNMPManager = MagicMock() # Keep this just in case but get_manager is used now
         # This setup is complex because of the dynamic import logic
         # We need to mock both find_spec and import_module to simulate module presence
         def import_side_effect(module_path):

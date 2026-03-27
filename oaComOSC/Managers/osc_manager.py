@@ -240,20 +240,22 @@ class OSCManager:
             )
             
             # 3. Update Monitor Feed (UI Decoration)
-            monitor_payload = {
-                "val": value,
-                "source": "OSC",
-                "address": address,
-                "direction": "RX"
-            }
-            # Propagate spec fields to monitor payload
-            monitor_payload.update(meta)
+            # Skip monitor topics from self-reporting to prevent recursion
+            if "/Monitor/" not in address:
+                monitor_payload = {
+                    "val": value,
+                    "source": "OSC",
+                    "address": address,
+                    "direction": "RX"
+                }
+                # Propagate spec fields to monitor payload
+                monitor_payload.update(meta)
 
-            self.state_cache_manager.handle_external_update(
-                "OPEN-AIR/System/Monitor/OSC/Activity", 
-                monitor_payload, 
-                source="OSC"
-            )
+                self.state_cache_manager.handle_external_update(
+                    "OPEN-AIR/System/Monitor/OSC/Activity", 
+                    monitor_payload, 
+                    source="OSC"
+                )
         else:
             # Fallback if no state manager
             from oaComBroker.Managers.protocol_router import ProtocolRouter

@@ -149,9 +149,9 @@ class MqttAsyncWorker:
         # ⚡ PROTOCOL ALIGNMENT: aiomqtt expects str, bytes, or None
         if isinstance(payload, (dict, list)):
             import orjson
-            payload = orjson.dumps(payload).decode("utf-8")
+            payload = orjson.dumps(payload)
         elif isinstance(payload, bytes):
-            payload = payload.decode("utf-8")
+            pass
         elif payload is not None and not isinstance(payload, str):
             payload = str(payload)
             

@@ -33,6 +33,7 @@ class RESTManager:
         self.router = protocol_router
         self.app = None
         self.worker = None
+        self.monitor_callbacks = []
 
         if not FASTAPI_AVAILABLE:
             logger.warning("⚠️ [REST] FastAPI or dependencies not found. REST API will be disabled.")
@@ -54,7 +55,18 @@ class RESTManager:
             allow_headers=["*"],
         )
         
-        # 3. Inject Routes
+        # 3. Add Activity Middleware
+        @self.app.middleware("http")
+        async def activity_log_middleware(request, call_next):
+            response = await call_next(request)
+            self.notify_activity(
+                method=request.method,
+                path=request.url.path,
+                status_code=response.status_code
+            )
+            return response
+
+        # 4. Inject Routes
         api_router = create_router(self.state_cache, self.router)
         self.app.include_router(api_router)
         
@@ -79,3 +91,46 @@ class RESTManager:
             self.worker.join(timeout=2.0)
             return True
         return False
+
+    def is_running(self):
+        """Checks if the REST API service is currently active."""
+        return self.worker is not None and self.worker.is_alive()
+
+    def get_status(self):
+        """Returns a comprehensive status report for the REST service."""
+        status = {
+            "running": self.is_running(),
+            "host": REST_HOST,
+            "port": REST_PORT,
+            "url": f"http://{REST_HOST}:{REST_PORT}",
+            "docs_url": f"http://{REST_HOST}:{REST_PORT}/docs",
+            "routes": []
+        }
+        
+        if self.app:
+            for route in self.app.routes:
+                if hasattr(route, "path"):
+                    status["routes"].append({
+                        "path": route.path,
+                        "methods": list(route.methods) if hasattr(route, "methods") else []
+                    })
+        
+        return status
+
+    def add_monitor_callback(self, callback):
+        """Registers a callback for real-time API activity monitoring."""
+        if callback not in self.monitor_callbacks:
+            self.monitor_callbacks.append(callback)
+
+    def remove_monitor_callback(self, callback):
+        """Removes a previously registered monitor callback."""
+        if callback in self.monitor_callbacks:
+            self.monitor_callbacks.remove(callback)
+
+    def notify_activity(self, method, path, status_code, payload=None):
+        """Dispatches activity updates to all registered listeners."""
+        for cb in self.monitor_callbacks:
+            try:
+                cb(method, path, status_code, payload)
+            except Exception as e:
+                logger.error(f"❌ [REST] Callback notification failed: {e}")

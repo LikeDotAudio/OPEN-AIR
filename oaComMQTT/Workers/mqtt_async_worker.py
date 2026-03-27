@@ -135,6 +135,24 @@ class MqttAsyncWorker:
         except asyncio.CancelledError: pass
 
     def _parse_publish_item(self, item):
-        if isinstance(item, tuple): return item
-        if isinstance(item, MqttMessage): return item.topic, item.payload, item.qos, item.retain
-        return item.get("topic"), item.get("payload"), item.get("qos", 0), item.get("retain", False)
+        """Standardizes publish items and encodes payloads for aiomqtt."""
+        if isinstance(item, tuple):
+            topic, payload, qos, retain = item
+        elif isinstance(item, MqttMessage):
+            topic, payload, qos, retain = item.topic, item.payload, item.qos, item.retain
+        else:
+            topic = item.get("topic")
+            payload = item.get("payload")
+            qos = item.get("qos", 0)
+            retain = item.get("retain", False)
+            
+        # ⚡ PROTOCOL ALIGNMENT: aiomqtt expects str, bytes, or None
+        if isinstance(payload, (dict, list)):
+            import orjson
+            payload = orjson.dumps(payload).decode("utf-8")
+        elif isinstance(payload, bytes):
+            payload = payload.decode("utf-8")
+        elif payload is not None and not isinstance(payload, str):
+            payload = str(payload)
+            
+        return topic, payload, qos, retain

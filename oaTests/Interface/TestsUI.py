@@ -8,10 +8,9 @@ from textual.app import App, ComposeResult
 from textual.widgets import Header, Footer, Static, Button, Log, Label
 from textual.containers import Container, Vertical, Horizontal
 from textual.binding import Binding
-import asyncio
 import os
 import webbrowser
-from typing import Coroutine, Any
+from typing import Any
 from datetime import datetime
 import threading
 
@@ -136,7 +135,7 @@ class TestsApp(App):
         self.stats_provider = SystemStatsProvider()
         self.log_lines = []
         self.test_results = []
-        self.audit_cancel_event = asyncio.Event()
+        self.audit_cancel_event = threading.Event()
         self.summary = {
             "total": 0, "passed": 0, "failed": 0, "errors": 0, "skipped": 0
         }
@@ -276,8 +275,13 @@ class TestsApp(App):
         
         self.write_log("🕵️ [AUDIT] Starting all system audits...")
         def task():
-            self.call_from_thread(lambda: self.query_one("#btn_audits").set(label="RUN ALL AUDITS", variant="primary"))
-            self.call_from_thread(lambda: self.query_one("#btn_cancel_audits").set_styles(display="block"))
+            def ui_pre_audit():
+                btn = self.query_one("#btn_audits")
+                btn.label = "RUN ALL AUDITS"
+                btn.variant = "primary"
+                self.query_one("#btn_cancel_audits").styles.display = "block"
+
+            self.call_from_thread(ui_pre_audit)
             self.audit_cancel_event.clear()
             self._audit_confirm = False
 
@@ -290,7 +294,9 @@ class TestsApp(App):
             except Exception as e:
                 self.call_from_thread(self.write_log, f"💥 [ERROR] Audit engine failure: {e}")
             finally:
-                self.call_from_thread(lambda: self.query_one("#btn_cancel_audits").set_styles(display="none"))
+                def ui_post_audit():
+                    self.query_one("#btn_cancel_audits").styles.display = "none"
+                self.call_from_thread(ui_post_audit)
         self.run_in_daemon_thread(task)
 
     def cancel_audits(self):

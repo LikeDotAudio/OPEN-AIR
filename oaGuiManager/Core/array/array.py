@@ -73,12 +73,14 @@ class ViewManager:
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 class BuilderArrayCreator(TransparencyMixin):
-    def make_array(self, parent_widget, config_data, context: WidgetContext = None, **kwargs):
+    @staticmethod
+    def make_array(parent_widget, config_data, context: WidgetContext = None, **kwargs):
         if LOCAL_DEBUG: logger.trace(f"🔬 Entering make_array with config: {config_data}")
         """
         Generates a grid of widgets based on a blueprint and a data array.
         Supports collapsible rows (OcaCollapsibleBlock) managed by a ViewManager.
         """
+        self = BuilderArrayCreator()
         # ⚡ HARDENED INTERFACE: Extract from context if available
         on_complete = context.on_complete if context else kwargs.get("on_complete")
         builder_instance = context.builder_instance if context else kwargs.get("builder_instance") or self

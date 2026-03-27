@@ -32,8 +32,28 @@ class OSCManager:
         if LOCAL_DEBUG:
             logger.info(f"Initializing Bridge (Bridge={run_bridge})...")
         
+        # ⚡ STANDALONE: Fallback to global singletons if not injected
+        from oaComBroker.Core.protocol_router import ProtocolRouter
+        self.protocol_router = ProtocolRouter.get_instance()
+        
         self.state_cache_manager = state_cache_manager
         self.mqtt_connection_manager = mqtt_connection_manager
+        
+        # ⚡ STANDALONE: Attempt to deduce managers if missing
+        if not self.state_cache_manager:
+            try:
+                from oaStateCache.Core.state_cache import StateRegistry
+                # ProtocolRouter might already have it
+                self.state_cache_manager = getattr(self.protocol_router, "state_cache_manager", None)
+            except Exception:
+                pass
+
+        if not self.mqtt_connection_manager:
+            try:
+                self.mqtt_connection_manager = getattr(self.protocol_router, "mqtt_manager", None)
+            except Exception:
+                pass
+
         self._running = False
 
         # Routing Table
@@ -105,44 +125,84 @@ class OSCManager:
             except Exception:
                 pass
 
+    def set_bridge_mode(self, enabled):
+        """Toggles bridge mode. If transitioning to enabled while running, starts workers."""
+        with self._state_lock:
+            if self.run_bridge == enabled:
+                return
+            self.run_bridge = enabled
+            running = self._running
+            
+        if running:
+            if enabled:
+                # If we were running in observer mode, now we need to start workers
+                self._start_workers()
+            else:
+                # If we were bridging, now we stop workers but keep the manager 'running'
+                self._stop_workers()
+        
+        logger.info(f"OSC Bridge Mode: {'ENABLED' if enabled else 'DISABLED'}")
+        self._notify_monitor("STATUS_UPDATE", "BRIDGE_MODE", enabled)
+
+    def _start_workers(self):
+        """Internal helper to start RX/TX workers."""
+        rx_port = getattr(app_constants, "OSC_RX_PORT", 8888)
+        tx_host = getattr(app_constants, "OSC_REMOTE_IP", "127.0.0.1")
+        tx_port = getattr(app_constants, "OSC_TX_PORT", 9000)
+
+        try:
+            # RX Server
+            if not self.rx_server:
+                self.rx_server = OscRxServer("0.0.0.0", rx_port, 
+                                             self.handle_incoming_osc)
+                self.rx_server.start()
+                
+            with self._state_lock:
+                self._rx_addr = f"{get_local_ip()}:{rx_port}"
+                
+            if LOCAL_DEBUG:
+                logger.success(f"RX SERVER ACTIVE: {self._rx_addr}")
+
+            # TX Client
+            if not self.tx_client:
+                self.tx_client = OscTxClient(tx_host, tx_port)
+                self.tx_client.start()
+            
+            with self._state_lock:
+                self._tx_addr = f"{tx_host}:{tx_port}"
+                
+            if LOCAL_DEBUG:
+                logger.success(f"TX CLIENT ACTIVE: {self._tx_addr}")
+
+            # ⚡ STATUS MONITOR: Start periodic broadcast
+            threading.Thread(target=self._broadcast_status_loop, 
+                             daemon=True, name="OSC-StatusBroadcast").start()
+
+        except Exception as e:
+            logger.error(f"Bridge Workers Start Failed: {e}")
+
+    def _stop_workers(self):
+        """Internal helper to stop RX/TX workers."""
+        if self.rx_server: 
+            self.rx_server.stop()
+            self.rx_server = None
+        if self.tx_client: 
+            self.tx_client.stop()
+            self.tx_client = None
+        
+        with self._state_lock:
+            self._rx_addr = "None"
+            self._tx_addr = "None"
+        
+        logger.warning("OSC Workers Offline.")
+
     def start(self):
         with self._state_lock:
             if self._running: return
             self._running = True
         
-        rx_port = getattr(app_constants, "OSC_RX_PORT", 8888)
-        tx_host = getattr(app_constants, "OSC_REMOTE_IP", "127.0.0.1")
-        tx_port = getattr(app_constants, "OSC_TX_PORT", 9000)
-
         if self.run_bridge:
-            try:
-                # RX Server
-                self.rx_server = OscRxServer("0.0.0.0", rx_port, 
-                                             self.handle_incoming_osc)
-                self.rx_server.start()
-                
-                with self._state_lock:
-                    self._rx_addr = f"{get_local_ip()}:{rx_port}"
-                    
-                if LOCAL_DEBUG:
-                    logger.success(f"RX SERVER ACTIVE: {self._rx_addr}")
-
-                # TX Client
-                self.tx_client = OscTxClient(tx_host, tx_port)
-                self.tx_client.start()
-                
-                with self._state_lock:
-                    self._tx_addr = f"{tx_host}:{tx_port}"
-                    
-                if LOCAL_DEBUG:
-                    logger.success(f"TX CLIENT ACTIVE: {self._tx_addr}")
-
-                # ⚡ STATUS MONITOR: Start periodic broadcast
-                threading.Thread(target=self._broadcast_status_loop, 
-                                 daemon=True, name="OSC-StatusBroadcast").start()
-
-            except Exception as e:
-                logger.error(f"Bridge Start Failed: {e}")
+            self._start_workers()
         else:
             if LOCAL_DEBUG:
                 logger.info("Bridge: Observer mode active.")
@@ -151,8 +211,7 @@ class OSCManager:
         with self._state_lock:
             self._running = False
             
-        if self.rx_server: self.rx_server.stop()
-        if self.tx_client: self.tx_client.stop()
+        self._stop_workers()
         logger.warning("Bridge Offline.")
 
     def handle_incoming_osc(self, address, value):
@@ -231,7 +290,8 @@ class OSCManager:
         self.tx_client.send_message(address, value)
         
         # ⚡ BROADCAST activity back to UI monitor (as a TX event)
-        if self.run_bridge and self.state_cache_manager: 
+        # Skip monitor topics from self-reporting to prevent recursion
+        if self.run_bridge and self.state_cache_manager and "/Monitor/" not in address: 
             monitor_payload = {
                 "val": value,
                 "source": "OSC",
@@ -275,8 +335,12 @@ class OSCManager:
         val = msg.get("val")
         meta = msg.get("meta", {})
         
+        # ⚡ LOOP PREVENTION: Never mirror our own reflection from MQTT
+        if source == "MQTT" and msg.get("full_id") == app_constants.FULL_INSTANCE_ID:
+            return
+
         # --- CASE 1: Monitor UI Update (UI Only) ---
-        # Dashboard needs to see OSC events (RX or TX)
+        # Dashboard needs to see OSC events (RX or TX) and MQTT events
         if not self.run_bridge:
             if logical_source == "OSC":
                 # RX or Remote Sync Event
@@ -288,6 +352,29 @@ class OSCManager:
             elif source == "OSC-TX":
                 # Local TX Event from Core
                 self._notify_monitor("TX", meta.get("osc_address", topic), val, topic)
+            elif logical_source == "MQTT" or source == "MQTT":
+                # All MQTT elements published here as well
+                self._notify_monitor("MQTT", topic, val, topic)
+            return
+
+        # --- CASE 2: Core Bridge Mirroring (Bridge Mode) ---
+        # "All mqtt elements should be published here as well"
+        if self.run_bridge:
+            # We mirror MQTT traffic out to OSC
+            if logical_source == "MQTT" or source == "MQTT":
+                # EXCLUDE MONITOR TOPICS FROM MIRRORING
+                if "/Monitor/" in topic:
+                    return
+                # Loop prevention is handled inside self.send() via metadata
+                # Translate topic to OSC address
+                osc_address = "/" + topic.replace("OPEN-AIR/", "")
+                
+                # Extract value if it's a manifest-style dict
+                real_val = val
+                if isinstance(val, dict) and "val" in val:
+                    real_val = val["val"]
+                
+                self.send(osc_address, real_val, meta)
             return
 
     def register_route(self, osc_address: str, topic: str):

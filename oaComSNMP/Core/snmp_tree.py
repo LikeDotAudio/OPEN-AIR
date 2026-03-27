@@ -30,8 +30,10 @@ class SNMPTreeBuilder:
     def generate_master_script(self):
         """Generates a single master script to handle the entire OPEN-AIR OID tree."""
         if self._verbose_logging_enabled(): snmp_logger.debug(f"📜 SNMP: Generating Master Bridge script at {self.master_script_path}...")
-        flat_file = str(SNMP_STATE_FILE)
-        log_file = str(SNMP_SET_LOG)
+        
+        # ⚡ SYSTEM ACCESS: Use absolute paths for snmpd visibility
+        flat_file = os.path.abspath(str(SNMP_STATE_FILE))
+        log_file = os.path.abspath(str(SNMP_SET_LOG))
         debug_log = os.path.join(os.path.dirname(flat_file), "bridge_debug.log")
         
         lines = [

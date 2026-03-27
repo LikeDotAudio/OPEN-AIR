@@ -1,0 +1,60 @@
+# oaComREST/Workers/uvicorn_worker.py
+# Author: Anthony Peter Kuzub
+# Version: 20260326.1200.1
+#
+# Description: Background thread for running the Uvicorn ASGI server.
+
+import threading
+try:
+    import uvicorn
+    UVICORN_AVAILABLE = True
+except ImportError:
+    UVICORN_AVAILABLE = False
+
+from loguru import logger
+from ..Constants.rest_constants import LOCAL_DEBUG
+
+class UvicornWorker(threading.Thread):
+    """
+    A dedicated thread to run the FastAPI application via Uvicorn.
+    """
+    def __init__(self, app, host="0.0.0.0", port=8000):
+        """
+        Initializes the Uvicorn worker thread.
+        
+        Inputs:
+            app (FastAPI): The FastAPI application instance.
+            host (str): The host interface to bind to.
+            port (int): The port to listen on.
+        """
+        super().__init__(name="UvicornWorker", daemon=True)
+        self.app = app
+        self.host = host
+        self.port = port
+        self.server = None
+
+    def run(self):
+        """Executes the Uvicorn server loop."""
+        if not UVICORN_AVAILABLE:
+            logger.error("🛑 [REST] Uvicorn not found. Worker thread exiting.")
+            return
+
+        if LOCAL_DEBUG:
+            logger.debug(f"🚀 [REST] Starting Uvicorn on {self.host}:{self.port}")
+        
+        config = uvicorn.Config(
+            app=self.app, 
+            host=self.host, 
+            port=self.port, 
+            log_level="info" if LOCAL_DEBUG else "error",
+            loop="asyncio"
+        )
+        self.server = uvicorn.Server(config)
+        self.server.run()
+
+    def stop(self):
+        """Signals the Uvicorn server to shut down."""
+        if self.server:
+            if LOCAL_DEBUG:
+                logger.debug("🛑 [REST] Stopping Uvicorn server...")
+            self.server.should_exit = True

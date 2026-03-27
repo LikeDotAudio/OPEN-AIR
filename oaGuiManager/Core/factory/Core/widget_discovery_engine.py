@@ -30,9 +30,12 @@ class WidgetDiscoveryEngine:
                     return None
                 
                 # Ensure builder instance is passed if missing from context
-                if context and not hasattr(context, 'app_instance'): kwargs['builder_instance'] = builder_instance
-                elif not context: kwargs['builder_instance'] = builder_instance
+                if context and not hasattr(context, 'builder_instance'):
+                    kwargs['builder_instance'] = builder_instance
+                elif not context:
+                    kwargs['builder_instance'] = builder_instance
                 
+                # Registry widgets use static make(parent, config, context, **kwargs)
                 return cls_ref.make(parent_widget, config_data, context, **kwargs)
             except Exception as e:
                 logger.exception(f"❌ Failed to instantiate widget of type {cls_ref} at {config_data.get('path', 'unknown')}: {e}")

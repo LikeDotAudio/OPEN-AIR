@@ -17,6 +17,7 @@ class ConfigDefaults:
     MIDI_DEBUG_ENABLE = False
     OSC_DEBUG_ENABLE = False
     AES70_DEBUG_ENABLE = False
+    REST_DEBUG_ENABLE = False
     
     # UI Layout
     UI_LAYOUT_SPLIT_EQUAL = 50
@@ -60,3 +61,8 @@ class ConfigDefaults:
     OSC_RX_PORT = 8000
     OSC_TX_PORT = 9000
     OSC_REMOTE_IP = "127.0.0.1"
+
+    # REST Settings
+    REST_HOST = "0.0.0.0"
+    REST_PORT = 8000
+    REST_CORS_ORIGINS = "*"

@@ -20,6 +20,7 @@ from oaOchestration.Constants.project_paths import (
 from oaComSNMP.Core.oid_map_converter import OidMapConverter
 from oaComSNMP.Core.snmp_state_persister import SnmpStatePersister
 from oaComSNMP.Core.snmp_log_monitor import SnmpLogMonitor
+from oaDataSNMP.Entry import SnmpDataEntry
 # --- Specialized Logic Workers ---
 from oaComSNMP.Methods.snmp_mib_generator import MibGenerator
 from oaComSNMP.Methods.snmp_installer_generator import InstallerGenerator
@@ -37,20 +38,27 @@ class SNMPManager:
     Centralizes all SNMP logic away from the UI.
     """
 
-    def __init__(self, state_cache_manager=None, mqtt_connection_manager=None, run_bridge=True):
+    def __init__(self, state_cache_manager=None, mqtt_connection_manager=None, subscriber_router=None, run_bridge=True):
         self.run_bridge = run_bridge
         if LOCAL_DEBUG:
             snmp_logger.info("Initializing SNMP Bridge...")
         
         self.state_cache_manager = state_cache_manager
         self.mqtt_connection_manager = mqtt_connection_manager
+        self.subscriber_router = subscriber_router
         self._running = False
         
-        self.state_file = str(SNMP_STATE_FILE)
+        # ⚡ DATA ARCHITECTURE: Use oaDataSNMP for all state/config paths
+        self.data_manager = SnmpDataEntry()
+        self.state_file = self.data_manager.get_state_path()
+        self.mib_path = self.data_manager.get_mib_path()
         self.base_oid = BASE_OID
         self._socket_info = "None"
         
+        # Initialize tree builder with the correct script path from data_manager
         self.tree_builder = SNMPTreeBuilder(base_oid=self.base_oid)
+        self.tree_builder.master_script_path = self.data_manager.get_master_script_path()
+        
         self.oid_map = {}
         self._last_topic_count = 0
         self._monitor_callbacks = []
@@ -86,9 +94,9 @@ class SNMPManager:
                 "running": self._running,
                 "socket": self._socket_info,
                 "base_oid": self.base_oid,
-                "object_count": len(self.oid_map),
+                "object_count": len(self.oid_map_converter.oid_map),
                 "bridge_mode": self.run_bridge,
-                "mib_path": str(SNMP_CURRENT_MIB)
+                "mib_path": self.mib_path
             }
 
     def add_monitor_callback(self, callback):
@@ -136,7 +144,8 @@ class SNMPManager:
         self._socket_info = f"{get_local_ip()}:{cfg.SNMP_PORT} (System Daemon Bridge)"
         
         # ⚡ CRAWLER: Build the metadata map from folders
-        initialize_oid_map("oaGuiDefinitions")
+        from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
+        initialize_oid_map(os.path.join(str(GLOBAL_PROJECT_ROOT), "oaGuiDefinitions"))
 
         # 🟢 Start Background Monitor
         self._flat_file_thread = threading.Thread(target=self._state_to_file_loop, daemon=True, name="SNMP-FlatFileLoop")
@@ -154,7 +163,20 @@ class SNMPManager:
                 
                 # Protocol Router Sync Logic: Listen for remote/local activity
                 from oaComBroker.Managers.protocol_router import ProtocolRouter
-                ProtocolRouter.get_instance().register_cache_observer(self.handle_protocol_event)
+                router = ProtocolRouter.get_instance()
+                router.register_cache_observer(self.handle_protocol_event)
+                
+                # ⚡ MODULARITY: Register self as the active SNMP manager
+                if hasattr(router, "set_snmp_manager"):
+                    router.set_snmp_manager(self)
+                
+                # 📡 MQTT BRIDGE: Support UI-to-Core communication
+                if self.mqtt_connection_manager and self.subscriber_router:
+                    # Subscribe to UI commands
+                    self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Control/SNMP/GenerateScript", self._handle_mqtt_command)
+                    # Start periodic status updates
+                    self._status_update_thread = threading.Thread(target=self._mqtt_status_loop, daemon=True, name="SNMP-MqttStatus")
+                    self._status_update_thread.start()
                     
                 # Initial MIB Sync
                 self.save_current_mib()
@@ -165,6 +187,31 @@ class SNMPManager:
         else:
             if LOCAL_DEBUG:
                 snmp_logger.info("SNMP Bridge: Running in Observer mode.")
+
+    def _handle_mqtt_command(self, msg):
+        """Processes commands sent from the UI via MQTT."""
+        topic = msg.topic
+        if "GenerateScript" in topic:
+            if LOCAL_DEBUG: snmp_logger.info("📡📥 [INBOUND] SNMP command: GenerateScript")
+            self.tree_builder.generate_master_script()
+            self._publish_status(force_script=True)
+
+    def _mqtt_status_loop(self):
+        """Periodically publishes bridge status to MQTT for UI consumption."""
+        while self._running:
+            self._publish_status()
+            time.sleep(5)
+
+    def _publish_status(self, force_script=False):
+        """Publishes the current bridge status to MQTT."""
+        if not self.mqtt_connection_manager: return
+        
+        status = self.get_status()
+        # Add the installer script if requested
+        if force_script:
+            status["installer_script"] = self.get_installer_script()
+            
+        self.mqtt_connection_manager.publish("OPEN-AIR/System/Status/SNMP/Bridge", status)
 
     def stop(self):
         with self._state_lock:
@@ -209,7 +256,8 @@ class SNMPManager:
             return False
 
     def get_installer_script(self):
-        return InstallerGenerator.generate(self.base_oid, self.tree_builder.master_script_path)
+        # Pass the path of the master script to the generator
+        return InstallerGenerator.generate(self.base_oid, self.data_manager.get_master_script_path())
 
     def run_verification(self, mib_path=None, force_raw=True):
         if mib_path:

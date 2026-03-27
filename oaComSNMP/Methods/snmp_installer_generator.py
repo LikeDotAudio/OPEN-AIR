@@ -11,17 +11,17 @@ class InstallerGenerator:
     def generate(base_oid, master_script_path):
         """
         Generates a complete Bash Installer Script for the SNMP Manager.
-        Updated to ensure path references are relative to the project root.
+        Ensures path references are absolute and robust for snmpd access.
         """
         from oaConfiguration.FileReaders.config_reader import Config
+        from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
+        from oaOchestration.Constants.project_paths import DATA_SNMP_DIR
         cfg = Config.get_instance()
 
-        # Construct the relative path for the master script.
-        # We assume master_script_path is provided relative to the project root.
-        # Ensure it's prefixed with './' if it doesn't start with '.' or '/'.
-        relative_master_path = master_script_path
-        if not relative_master_path.startswith('.') and not relative_master_path.startswith('/'):
-             relative_master_path = './' + relative_master_path
+        # We must use absolute paths for the snmpd.conf 'pass' command 
+        # because snmpd runs as a system service and won't know the project root.
+        abs_master_path = os.path.abspath(master_script_path)
+        abs_data_dir = os.path.abspath(DATA_SNMP_DIR)
         
         installer_lines = [
             "#!/bin/bash",
@@ -34,10 +34,9 @@ class InstallerGenerator:
             "# 2. Permission Fix (Traverse home to access project)",
             'echo "[SNMP] Adjusting folder permissions for system access..."',
             "sudo chmod o+x /home /home/anthony",
-            "sudo chmod -R o+rwx ./oaDataSNMP",
+            f"sudo chmod -R o+rwx {abs_data_dir}",
 
-            "# 3. Master Configuration"
-,
+            "# 3. Master Configuration",
             "CONF_FILE='/etc/snmp/snmpd.conf'",
             'echo "[SNMP] Configuring Master Bridge at $CONF_FILE..."',
             "",
@@ -53,7 +52,7 @@ class InstallerGenerator:
             "view   all   included   .1",
             "rocommunity public default -V all",
             "rwcommunity private default -V all",
-            f"pass {base_oid.lstrip('.')} {relative_master_path}",
+            f"pass {base_oid.lstrip('.')} {abs_master_path}",
             "# --- END OPEN-AIR ---",
             "EOT",
             "",

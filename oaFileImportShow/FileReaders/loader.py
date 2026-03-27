@@ -21,19 +21,19 @@ app_constants = Config.get_instance()  # Get the singleton instance
 from oaFileImportCSV.FileReaders.from_csv_unknown import (
     Marker_convert_csv_unknow_report_to_csv,
 )
-from oaFileImportHTML.from_ias_html import (
+from oaFileImportHTML.FileReaders.from_ias_html import (
     Marker_convert_IAShtml_report_to_csv,
 )
-from oaFileImportShow.from_shure_wwb_shw import (
+from oaFileImportShow.FileReaders.from_shure_wwb_shw import (
     Marker_convert_WWB_SHW_File_report_to_csv,
 )
-from oaFileImportPDF.from_soundbase_pdf_v1 import (
+from oaFileImportPDF.FileReaders.from_soundbase_pdf_v1 import (
     Marker_convert_SB_PDF_File_report_to_csv,
 )
-from oaFileImportShow.from_shure_wwb_zip import (
+from oaFileImportShow.FileReaders.from_shure_wwb_zip import (
     Marker_convert_wwb_zip_report_to_csv,
 )
-from oaFileImportPDF.from_soundbase_pdf_v2 import (
+from oaFileImportPDF.FileReaders.from_soundbase_pdf_v2 import (
     Marker_convert_SB_v2_PDF_File_report_to_csv,
 )
 from oaFileImportShow.FileReaders.saver import save_markers_file_internally

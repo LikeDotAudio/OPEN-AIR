@@ -66,6 +66,7 @@ class Config(ConfigDefaults):
         self.MIDI_DEBUG_ENABLE = self._s_get(config, "Debug", "MIDI_DEBUG_ENABLE", self.MIDI_DEBUG_ENABLE, "bool")
         self.OSC_DEBUG_ENABLE = self._s_get(config, "Debug", "OSC_DEBUG_ENABLE", self.OSC_DEBUG_ENABLE, "bool")
         self.AES70_DEBUG_ENABLE = self._s_get(config, "Debug", "AES70_DEBUG_ENABLE", self.AES70_DEBUG_ENABLE, "bool")
+        self.REST_DEBUG_ENABLE = self._s_get(config, "Debug", "REST_DEBUG_ENABLE", self.REST_DEBUG_ENABLE, "bool")
 
     def _parse_ui_settings(self, config):
         self.UI_LAYOUT_SPLIT_EQUAL = self._s_get(config, "UI", "LAYOUT_SPLIT_EQUAL", self.UI_LAYOUT_SPLIT_EQUAL, "int")
@@ -107,6 +108,11 @@ class Config(ConfigDefaults):
         self.OSC_TX_PORT = self._s_get(config, "OSC", "osc_tx_port", self.OSC_TX_PORT, "int")
         self.OSC_REMOTE_IP = self._s_get(config, "OSC", "osc_remote_ip", self.OSC_REMOTE_IP)
 
+    def _parse_rest_settings(self, config):
+        self.REST_HOST = self._s_get(config, "REST", "rest_host", self.REST_HOST)
+        self.REST_PORT = self._s_get(config, "REST", "rest_port", self.REST_PORT, "int")
+        self.REST_CORS_ORIGINS = self._s_get(config, "REST", "rest_cors_origins", self.REST_CORS_ORIGINS)
+
     def read_config(self):
         from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT, initialize_paths
         if not GLOBAL_PROJECT_ROOT: initialize_paths()
@@ -129,6 +135,7 @@ class Config(ConfigDefaults):
         self._parse_visa_settings(config)
         self._parse_snmp_settings(config)
         self._parse_osc_settings(config)
+        self._parse_rest_settings(config)
 
         if LOCAL_DEBUG:
             logger.debug(f"📜 [CONFIG] Loaded: Version {self.CURRENT_VERSION}, Debug: {self.ENABLE_DEBUG_MODE}")

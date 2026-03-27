@@ -1,18 +1,19 @@
 # 0_Status/snmp_status.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260324.2230.1
 #
-# Description: Brief summary of purpose
+# Description: Passive SNMP Status Display. 
+# Communicates with CORE partition via MQTT.
 
 import tkinter as tk
 from tkinter import ttk
-import datetime
+import json
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 class SnmpStatus(tk.Frame, TransparencyMixin):
     """
-    Combined SNMP Status & Installer Interface.
-    Provides live bridge diagnostics and automated setup tools.
+    Passive SNMP Status & Installer Interface.
+    Observes CORE status via MQTT and sends control commands.
     """
     def __init__(self, parent, **kwargs):
         # Extract non-Tkinter arguments
@@ -20,26 +21,32 @@ class SnmpStatus(tk.Frame, TransparencyMixin):
         self.json_path = kwargs.pop("json_path", None)
         
         super().__init__(parent, **kwargs)
-        self.snmp_manager = self._find_snmp_manager(parent)
+        self.mqtt_client, self.subscriber_router = self._find_mqtt_services(parent)
         
         self._flash_state = False
-        self._is_offline = False
+        self._is_offline = True
+        self._last_status = {}
         
         self._setup_ui()
         
-        if self.snmp_manager:
-            self._refresh_ui()
-            self._start_monitor_loop()
+        if self.subscriber_router:
+            # Subscribe to SNMP bridge status updates from CORE
+            self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Status/SNMP/Bridge", self._on_status_received)
+            # Initial request for a script generate to populate UI
+            self.refresh_script()
 
-    def _find_snmp_manager(self, widget):
+    def _find_mqtt_services(self, widget):
         from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
         curr = widget
         while curr:
             if isinstance(curr, DynamicGuiBuilder) and hasattr(curr, 'app_instance'):
-                return getattr(curr.app_instance, 'snmp_manager', None)
+                app = curr.app_instance
+                mqtt_conn = getattr(app, 'mqtt_connection_manager', None)
+                sub_router = getattr(app, 'subscriber_router', None)
+                return mqtt_conn, sub_router
             try: curr = curr.master
             except: break
-        return None
+        return None, None
 
     def _setup_ui(self):
         self.pack(fill=tk.BOTH, expand=True)
@@ -48,7 +55,7 @@ class SnmpStatus(tk.Frame, TransparencyMixin):
         # 1. Header
         header = tk.Frame(self, bg="#2b2b2b")
         header.pack(side=tk.TOP, fill=tk.X, pady=10)
-        tk.Label(header, text="🌐 SNMP BRIDGE STATUS & SETUP", font=("Helvetica", 14, "bold"), fg="#ffffff", bg="#2b2b2b").pack(side=tk.LEFT, padx=20)
+        tk.Label(header, text="🌐 SNMP BRIDGE (REMOTE STATUS)", font=("Helvetica", 14, "bold"), fg="#ffffff", bg="#2b2b2b").pack(side=tk.LEFT, padx=20)
         
         self.re_setup_btn = tk.Button(
             header, 
@@ -84,7 +91,7 @@ class SnmpStatus(tk.Frame, TransparencyMixin):
         tool_bar = tk.Frame(install_frame, bg="#2b2b2b")
         tool_bar.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
         
-        ttk.Button(tool_bar, text="Generate Script", command=self.refresh_script).pack(side=tk.LEFT, padx=5)
+        ttk.Button(tool_bar, text="Request Script", command=self.refresh_script).pack(side=tk.LEFT, padx=5)
         ttk.Button(tool_bar, text="Copy to Clipboard", command=self.copy_script).pack(side=tk.LEFT, padx=5)
         tk.Label(tool_bar, text="Paste this into your Linux Terminal", font=("Courier", 9), fg="#666666", bg="#2b2b2b").pack(side=tk.RIGHT, padx=10)
 
@@ -96,48 +103,48 @@ class SnmpStatus(tk.Frame, TransparencyMixin):
         self.text_area.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         scroll.pack(side=tk.RIGHT, fill=tk.Y)
 
-    def _start_monitor_loop(self):
-        """Periodic background checks for bridge health."""
-        self._refresh_ui()
-        self._flash_button()
-        self.after(5000, self._start_monitor_loop)
+    def _on_status_received(self, msg):
+        """Callback for MQTT status updates from CORE."""
+        payload = msg.payload
+        if not isinstance(payload, dict):
+            try:
+                import json
+                payload = json.loads(payload)
+            except:
+                return
 
-    def _flash_button(self):
-        """Logic for highlighting the setup button if something is wrong."""
-        if self._is_offline:
-            self._flash_state = not self._flash_state
-            color = "#FFFF00" if self._flash_state else "#2b2b2b"
-            text_color = "#000000" if self._flash_state else "#888888"
-            self.re_setup_btn.configure(bg=color, fg=text_color)
-        else:
-            self.re_setup_btn.configure(bg="#2b2b2b", fg="#888888")
+        self._last_status = payload
+        # Use .after() to update UI from MQTT thread safely
+        self.after(0, self._refresh_ui)
 
     def _refresh_ui(self):
-        """Update diagnostics from the SNMP Manager worker."""
-        if not self.snmp_manager: return
-        
-        status = self.snmp_manager.get_status()
+        """Update diagnostics from the last received MQTT status."""
+        status = self._last_status
+        if not status: return
         
         # ⚡ HEALTH CHECK
-        self._is_offline = not status["running"] or not status["bridge_mode"] or status["object_count"] == 0
+        self._is_offline = not status.get("running", False) or status.get("object_count", 0) == 0
         
         for item in self.tree.get_children():
             self.tree.delete(item)
             
-        self.tree.insert("", "end", text="Bridge Status", values=("ACTIVE" if status["running"] else "OFFLINE",))
-        self.tree.insert("", "end", text="Socket Address", values=(status["socket"],))
-        self.tree.insert("", "end", text="Root OID", values=(status["base_oid"],))
-        self.tree.insert("", "end", text="Variables Active", values=(status["object_count"],))
-        self.tree.insert("", "end", text="Operating Mode", values=("MASTER HUB" if status["bridge_mode"] else "OBSERVER ONLY",))
-        self.tree.insert("", "end", text="Active MIB", values=(status["mib_path"],))
+        self.tree.insert("", "end", text="Bridge Status", values=("ACTIVE" if status.get("running") else "OFFLINE",))
+        self.tree.insert("", "end", text="Socket Address", values=(status.get("socket", "Unknown"),))
+        self.tree.insert("", "end", text="Root OID", values=(status.get("base_oid", "Unknown"),))
+        self.tree.insert("", "end", text="Variables Active", values=(status.get("object_count", 0),))
+        self.tree.insert("", "end", text="Operating Mode", values=("MASTER HUB" if status.get("bridge_mode") else "OBSERVER ONLY",))
+        self.tree.insert("", "end", text="Active MIB", values=(status.get("mib_path", "Unknown"),))
+
+        # Update script area if provided in the status message
+        if "installer_script" in status:
+            self.text_area.delete("1.0", tk.END)
+            self.text_area.insert("1.0", status["installer_script"])
+            self.text_area.see("1.0")
 
     def refresh_script(self):
-        if not self.snmp_manager: return
-        script = self.snmp_manager.get_installer_script()
-        self.text_area.delete("1.0", tk.END)
-        self.text_area.insert("1.0", script)
-        # Scroll to top
-        self.text_area.see("1.0")
+        """Sends a command to CORE to regenerate and publish the installer script."""
+        if self.mqtt_client:
+            self.mqtt_client.publish("OPEN-AIR/System/Control/SNMP/GenerateScript", {"request": "generate"})
 
     def copy_script(self):
         content = self.text_area.get("1.0", tk.END).strip()

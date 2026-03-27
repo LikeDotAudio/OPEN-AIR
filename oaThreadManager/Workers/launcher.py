@@ -81,24 +81,32 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     #         state_cache=state_cache_manager, run_bridge=True
     #     )
 
-    osc_manager = None
-    # 🅾️🔌🛑 [DISABLED] OSC Feature is currently suspended.
-    #     osc_manager = _load_protocol_manager(
-    #         "oaComOSC.Entry", "OSCManager",
-    #         state_cache_manager=state_cache_manager, mqtt_connection_manager=mqtt_connection_manager, run_bridge=True
-    #     )
+    osc_manager = _load_protocol_manager(
+        "oaComOSC.Entry", "OSCManager",
+        state_cache_manager=state_cache_manager, mqtt_connection_manager=mqtt_connection_manager, run_bridge=True
+    )
 
     snmp_manager = None
     if getattr(app_constants, "SCAN_SNMP", False):
-        snmp_manager = _load_protocol_manager(
-            "oaComSNMP.Entry", "SNMPManager",
-            state_cache_manager=state_cache_manager, mqtt_connection_manager=mqtt_connection_manager, run_bridge=True
+        import oaComSNMP.Entry as snmp_entry
+        snmp_manager = snmp_entry.get_manager(
+            state_cache_manager=state_cache_manager, 
+            mqtt_connection_manager=mqtt_connection_manager, 
+            subscriber_router=subscriber_router,
+            run_bridge=True
         )
+        snmp_manager.start()
 
     # MIDI bridge is always on for core
     midi_manager = _load_protocol_manager(
         "oaComMidi.Entry", "MidiManager",
         state_cache_manager=state_cache_manager, run_bridge=True
+    )
+
+    # REST API for external control
+    rest_manager = _load_protocol_manager(
+        "oaComREST.Entry", "RESTManager",
+        state_cache_manager=state_cache_manager, protocol_router=protocol_router
     )
     
     # Fleet & Yak (Loaded dynamically to avoid import loops)
@@ -160,7 +168,6 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     
     if hasattr(protocol_router, "set_osc_manager") and osc_manager: protocol_router.set_osc_manager(osc_manager)
     if hasattr(protocol_router, "set_midi_manager") and midi_manager: protocol_router.set_midi_manager(midi_manager)
-    if hasattr(protocol_router, "set_snmp_manager") and snmp_manager: protocol_router.set_snmp_manager(snmp_manager)
     
     def splinker_mqtt_wrapper(msg):
         splinker_manager.handle_mqtt_command(msg.topic, msg.payload)
@@ -171,8 +178,8 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
 
     if aes70_manager: aes70_manager.start()
     if osc_manager: osc_manager.start()
-    if snmp_manager: snmp_manager.start()
     if midi_manager: midi_manager.start()
+    if rest_manager: rest_manager.start()
     
     if hasattr(STATE_VISA_FLEET_manager, "start"):
         STATE_VISA_FLEET_manager.start()
@@ -211,6 +218,7 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
         "osc_manager": osc_manager,
         "snmp_manager": snmp_manager,
         "midi_manager": midi_manager,
+        "rest_manager": rest_manager,
         "STATE_VISA_FLEET_manager": STATE_VISA_FLEET_manager,
         "yak_translator": yak_translator,
         "yak_rx_manager": yak_rx_manager,

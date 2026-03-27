@@ -25,3 +25,10 @@ class WidgetContext:
     
     on_focus_widget: Optional[Callable[[str], None]] = None
     on_complete: Optional[Callable[[], None]] = None
+
+    def get(self, key: str, default: Any = None) -> Any:
+        """
+        Safe-access fallback for when a WidgetContext is passed to a method 
+        expecting a dictionary (e.g. during refactoring or signature shifts).
+        """
+        return getattr(self, key, default)

@@ -33,6 +33,7 @@ class BuilderCompositeHorizontalDialValueCreator(
 ):
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
+        """Unified entry point for composite horizontal dial value."""
         creator = BuilderCompositeHorizontalDialValueCreator()
         return creator.make_composite_horizontal_dial_value(parent_widget, config_data, context, **kwargs)
 

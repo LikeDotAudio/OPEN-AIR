@@ -17,6 +17,7 @@ SINK_STRATEGIES = {
     "MIDI": "🎹 🚀 💾 Ⓖ",
     "SNMP": "Ⓢ 🚀 💾 Ⓖ",
     "MQTT": "Ⓜ️ 🚀 💾 Ⓖ",
+    "REST": "Ⓜ️ 🚀 💾 Ⓖ",
     "DISK": "💾 🚀 Ⓖ",
     "OSC-TX": "💾 Ⓖ",
     "SPLINKER": "🔗 🚀 💾 Ⓖ"
@@ -39,6 +40,7 @@ EMOJI_TO_WORD = {
 SOURCE_DESCRIPTIONS = {
     "GUI": "Ⓖ [Local User Interface] - User action.",
     "MQTT": "Ⓜ️ [MQTT Broker] - External network data.",
+    "REST": "🌐 [REST API] - Web command or external integration.",
     "OSC": "🅾️ [OSC Device] - Remote control command.",
     "MIDI": "🎹 [MIDI Device] - Note or CC received.",
     "MIDI-TX": "🎹 [MIDI Output] - Hardware command sent.",

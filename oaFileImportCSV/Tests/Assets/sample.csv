@@ -1,0 +1,3 @@
+zone,group,device,name,freq,peak
+Zone1,Group1,Device1,Name1,500.5,-10.5
+Zone2,Group2,Device2,Name2,600.0,-5.0

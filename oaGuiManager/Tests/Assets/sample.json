@@ -1,0 +1,18 @@
+{
+  "tab_name": "TestTab",
+  "background": {
+    "type": "flat",
+    "parameters": {
+      "base_material": {
+        "color": "#111111"
+      }
+    }
+  },
+  "fields": [
+    {
+      "type": "OcaText",
+      "name": "Title",
+      "value": "Welcome to OPEN-AIR"
+    }
+  ]
+}

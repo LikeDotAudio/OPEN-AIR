@@ -53,7 +53,6 @@ def _dispatch_mqtt(mqtt_manager, topic, msg, val_str):
     
     # --- Namespace Split: Publish to TX namespace ---
     tx_topic = topic
-    from .constants import app_constants
     base = app_constants.MQTT_BASE_TOPIC
     if base in topic and f"{base}/Cmd/" not in topic and f"{base}/Tx/" not in topic:
         tx_topic = topic.replace(base, f"{base}/Tx")

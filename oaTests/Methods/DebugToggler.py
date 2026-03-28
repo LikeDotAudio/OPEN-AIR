@@ -1,31 +1,72 @@
-# Methods/DebugToggler.py
-# Author: Anthony Peter Kuzub
-# Version: 20260323.2105.1
+# oaTests/Methods/DebugToggler.py
 #
-# Description: Global utility to toggle, force on, or force off LOCAL_DEBUG 
-# and BUILDER_DEBUG flags across the codebase.
+# Global utility to toggle or force debug flags across the OPEN-AIR project.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260327.1415.1
+
+"""
+DebugToggler.py - State Management for Conditional Debug Gates.
+
+This utility provides a centralized mechanism to recursively scan the project
+tree and modify Python debug constants (LOCAL_DEBUG, BUILDER_DEBUG, DEBUG). 
+It is essential for enabling high-velocity forensic analysis without 
+manual file traversal.
+
+Responsibilities:
+    - Core: Identifies and flips boolean debug gates.
+    - Automation: Provides force-on, force-off, and toggle functionality.
+"""
 
 import os
 import re
 from pathlib import Path
+from loguru import logger
 
 def _set_debug_state(project_root, target_state: bool, console_print_func=None):
     """
     Scans the codebase and forces all debug flags to the specified state.
+
+    Inputs:
+        project_root (Path): The starting directory for the recursive scan.
+        target_state (bool): The desired value (True/False) for debug flags.
+        console_print_func (callable, optional): Custom output handler.
+
+    Outputs:
+        bool: True if flags were changed, False if no modifications occurred.
+
+    Side Effects:
+        - Performs recursive file I/O across the target directory.
+        - Directly modifies source code on disk.
     """
     def log(msg):
         if console_print_func: console_print_func(msg)
-        else: print(msg)
+        else: logger.info(msg)
 
     target_state_str = str(target_state)
     action = "ENABLING" if target_state else "DISABLING"
-    log(f"⚙️ [CONFIG] Forcing all debug gates to {target_state_str.upper()}...")
+    log(f"🛠️ [CONFIG] Forcing all debug gates to {target_state_str.upper()}...")
 
-    pattern = re.compile(r'^(\s*[A-Z_]+DEBUG\s*=\s*)(True|False)(.*)$', re.MULTILINE)
+    # Pattern captures: LOCAL_DEBUG, BUILDER_DEBUG, or generic DEBUG assignments
+    pattern = re.compile(
+        r'^(\s*(?:LOCAL_|BUILDER_)?[A-Z_]*DEBUG\s*=\s*)(True|False)(.*)$', 
+        re.MULTILINE
+    )
     
     py_files = []
     for root, dirs, files in os.walk(project_root):
-        dirs[:] = [d for d in dirs if not d.startswith('.') and d not in ['venv', 'node_modules', '__pycache__']]
+        # Respect project boundaries and ignore hidden/temporary directories
+        dirs[:] = [d for d in dirs if not d.startswith('.') and 
+                  d not in ['venv', 'node_modules', '__pycache__', 'oaDataLogs']]
         for file in files:
             if file.endswith('.py'):
                 py_files.append(Path(root) / file)
@@ -45,11 +86,11 @@ def _set_debug_state(project_root, target_state: bool, console_print_func=None):
             def replacement(match):
                 nonlocal replacements_made
                 current_value = match.group(2)
-                # Only replace if the state is different
+                # Only replace if the state is different to avoid disk churn
                 if current_value != target_state_str:
                     replacements_made += 1
                     return f"{match.group(1)}{target_state_str}{match.group(3)}"
-                return match.group(0) # Return original match if no change
+                return match.group(0)
 
             new_content = pattern.sub(replacement, content)
             
@@ -59,36 +100,39 @@ def _set_debug_state(project_root, target_state: bool, console_print_func=None):
                 files_modified += 1
                 flags_changed += replacements_made
         except Exception as e:
-            log(f"   ⚠️ Failed to process {file_path.name}: {e}")
+            logger.error(f"⚠️ [CONFIG] Failed to process {file_path.name}: {e}")
 
     if files_modified > 0:
-        log(f"✨ [SUCCESS] {action} complete. Changed {flags_changed} flags across {files_modified} files.")
-    else:
-        log(f"ℹ️ No state change needed. All debug flags were already {target_state_str.upper()}.")
+        logger.success(f"🚀 [DEPLOY] {action} complete. "
+                       f"Changed {flags_changed} flags across {files_modified} files.")
+        return True
+    
+    logger.info(f"🛌 [SLEEPING] No state change needed. "
+                f"All flags already {target_state_str.upper()}.")
+    return False
 
 def force_debug_on(project_root, console_print_func=None):
-    """Forces all debug flags to True."""
-    _set_debug_state(project_root, True, console_print_func)
+    """Forces all recognized debug flags to True."""
+    return _set_debug_state(project_root, True, console_print_func)
 
 def force_debug_off(project_root, console_print_func=None):
-    """Forces all debug flags to False."""
-    _set_debug_state(project_root, False, console_print_func)
+    """Forces all recognized debug flags to False."""
+    return _set_debug_state(project_root, False, console_print_func)
 
 def toggle_debug_flags(project_root, console_print_func=None):
     """
-    Searches the codebase for debug flag assignments and toggles them.
-    The toggle direction is determined by the state of the first flag found.
-    """
-    def log(msg):
-        if console_print_func: console_print_func(msg)
-        else: print(msg)
+    Toggles all debug flags based on the state of the first flag encountered.
 
-    log("🔍 [SCAN] Scanning for debug gates to determine current state...")
-    pattern = re.compile(r'^\s*[A-Z_]+DEBUG\s*=\s*(True|False)', re.MULTILINE)
+    This implements a 'Flip-Flop' logic: if the first file scanned has 
+    debug enabled, the entire project is set to disabled, and vice-versa.
+    """
+    pattern = re.compile(r'^\s*(?:LOCAL_|BUILDER_)?[A-Z_]*DEBUG\s*=\s*(True|False)', 
+                        re.MULTILINE)
     
     current_state_found = None
     for root, dirs, files in os.walk(project_root):
-        dirs[:] = [d for d in dirs if not d.startswith('.') and d not in ['venv', 'node_modules', '__pycache__']]
+        dirs[:] = [d for d in dirs if not d.startswith('.') and 
+                  d not in ['venv', 'node_modules', '__pycache__']]
         for file in files:
             if file.endswith('.py'):
                 try:
@@ -97,7 +141,6 @@ def toggle_debug_flags(project_root, console_print_func=None):
                     match = pattern.search(content)
                     if match:
                         current_state_found = (match.group(1) == "True")
-                        log(f"🔎 Found state reference: DEBUG is {'ON' if current_state_found else 'OFF'}")
                         break
                 except Exception:
                     continue
@@ -105,24 +148,11 @@ def toggle_debug_flags(project_root, console_print_func=None):
             break
 
     if current_state_found is None:
-        log("🤔 No debug flags found. Assuming OFF state, toggling to ON.")
-        force_debug_on(project_root, console_print_func)
-    elif current_state_found:
-        log("🔄 [TOGGLE] Current state is ON. Forcing all flags to OFF.")
-        force_debug_off(project_root, console_print_func)
-    else:
-        log("🔄 [TOGGLE] Current state is OFF. Forcing all flags to ON.")
-        force_debug_on(project_root, console_print_func)
-
+        return force_debug_on(project_root, console_print_func)
+    
+    return _set_debug_state(project_root, not current_state_found, console_print_func)
 
 if __name__ == "__main__":
+    # Resolve the project root relative to this utility's location
     project_root_path = Path(__file__).resolve().parents[2]
-    # Example: force everything ON
-    print("--- Forcing ON ---")
-    force_debug_on(project_root_path)
-    print("\n--- Forcing OFF ---")
-    force_debug_off(project_root_path)
-    print("\n--- Toggling (will turn ON) ---")
-    toggle_debug_flags(project_root_path)
-    print("\n--- Toggling (will turn OFF) ---")
     toggle_debug_flags(project_root_path)

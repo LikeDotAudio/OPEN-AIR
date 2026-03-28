@@ -33,7 +33,7 @@ class OSCManager:
             logger.info(f"Initializing Bridge (Bridge={run_bridge})...")
         
         # ⚡ STANDALONE: Fallback to global singletons if not injected
-        from oaComBroker.Core.protocol_router import ProtocolRouter
+        from oaComBroker.Managers.protocol_router import ProtocolRouter
         self.protocol_router = ProtocolRouter.get_instance()
         
         self.state_cache_manager = state_cache_manager

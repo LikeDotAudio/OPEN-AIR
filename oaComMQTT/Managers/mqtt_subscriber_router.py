@@ -67,7 +67,8 @@ class MqttSubscriberRouter:
         
         # ⚡ OPTIMIZATION: Use configured base topic
         self._base_topic = app_constants.MQTT_BASE_TOPIC
-        self._root_topic = f"{self._base_topic}/#"
+        # --- Namespace Split: Default to CMD namespace ---
+        self._root_topic = f"{self._base_topic}/Cmd/#"
         
         # Track what we've actually asked the broker for to avoid spamming aiomqtt
         self._active_broker_subscriptions: Set[str] = set()

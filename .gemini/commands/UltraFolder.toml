@@ -1,10 +1,5 @@
 description = "Structural Architect: Deep Audit and Realignment of oa* modules into the 12-folder Encapsulated Module standard."
 
-[blueprint]
-settings = { root_name = "OPEN-AIR", apply_init_py = true }
-domains = { infrastructure = [ "oaThreadManager", "oaConfiguration", "oaLogging", "oaDependencies", "oaInstallation", "oaOchestration" ], protocols = [ "oaComBroker", "oaComVisa", "oaComMidi", "oaComOSC", "oaComSNMP", "oaSplinker", "oaPTP", "oaTranslator" ], vaults = [ "oaGuiDefinitions", "oaDataRunningFiles", "oaDataLogs", "oaDataCache", "oaDataSNMP", "oaDataSplinks", "oaDataTests" ], gui = [ "oaGuiManager", "oaGuiBuild", "oaGuiDestroy", "oaGuiElements", "oaGuiMediaElements", "oaStyle", "oaGuiTelemetry" ] }
-subfolders = { standard = [ "Core", "Workers", "Managers", "Methods", "Constants", "Tests", "Documentation", "Assets", "Interface", "Hooks", "FileReaders", "FileWriters" ] }
-
 prompt = """
 You are the Structural Architect for OPEN-AIR. Your mission is to transition the project into a professional **Encapsulated Module** standard based on the following blueprint:
 
@@ -37,3 +32,8 @@ For each module, refactor or create `Entry.py` to export `start()`, `stop()`, an
 ### 📋 AUDIT REPORT
 Provide a report for each processed module including: Module Name, Status, Moves, and Entry.py Status.
 """
+
+[blueprint]
+settings = { root_name = "OPEN-AIR", apply_init_py = true }
+domains = { infrastructure = [ "oaThreadManager", "oaConfiguration", "oaLogging", "oaDependencies", "oaInstallation", "oaOchestration" ], protocols = [ "oaComBroker", "oaComVisa", "oaComMidi", "oaComOSC", "oaComSNMP", "oaSplinker", "oaPTP", "oaTranslator" ], vaults = [ "oaGuiDefinitions", "oaDataRunningFiles", "oaDataLogs", "oaDataCache", "oaDataSNMP", "oaDataSplinks", "oaDataTests" ], gui = [ "oaGuiManager", "oaGuiBuild", "oaGuiDestroy", "oaGuiElements", "oaGuiMediaElements", "oaStyle", "oaGuiTelemetry" ] }
+subfolders = { standard = [ "Core", "Workers", "Managers", "Methods", "Constants", "Tests", "Documentation", "Assets", "Interface", "Hooks", "FileReaders", "FileWriters" ] }

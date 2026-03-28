@@ -97,6 +97,9 @@ def main():
     mqtt_connection_manager = MqttConnectionManager()
     state_cache_manager = StateRegistry(mqtt_connection_manager)
     
+    from oaComBroker.Managers.protocol_router import ProtocolRouter
+    ProtocolRouter.get_instance().set_state_cache(state_cache_manager)
+    
     # launch_core_managers returns a registry of active services.
     managers = launch_core_managers(state_cache_manager, mqtt_connection_manager)
     

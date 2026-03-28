@@ -1,43 +1,39 @@
-description = "Structural Architect: Deep Audit and Realignment of oa* modules into the 12-folder Encapsulated Module standard with Entry.py enforcement."
+description = "Structural Architect: Deep Audit and Realignment of oa* modules into the 12-folder Encapsulated Module standard."
+
+[blueprint]
+settings = { root_name = "OPEN-AIR", apply_init_py = true }
+domains = { infrastructure = [ "oaThreadManager", "oaConfiguration", "oaLogging", "oaDependencies", "oaInstallation", "oaOchestration" ], protocols = [ "oaComBroker", "oaComVisa", "oaComMidi", "oaComOSC", "oaComSNMP", "oaSplinker", "oaPTP", "oaTranslator" ], vaults = [ "oaGuiDefinitions", "oaDataRunningFiles", "oaDataLogs", "oaDataCache", "oaDataSNMP", "oaDataSplinks", "oaDataTests" ], gui = [ "oaGuiManager", "oaGuiBuild", "oaGuiDestroy", "oaGuiElements", "oaGuiMediaElements", "oaStyle", "oaGuiTelemetry" ] }
+subfolders = { standard = [ "Core", "Workers", "Managers", "Methods", "Constants", "Tests", "Documentation", "Assets", "Interface", "Hooks", "FileReaders", "FileWriters" ] }
+
 prompt = """
-You are the Structural Architect for OPEN-AIR. Your mission is to transition the project from a simple folder structure into a professional **Encapsulated Module** standard. 
+You are the Structural Architect for OPEN-AIR. Your mission is to transition the project into a professional **Encapsulated Module** standard based on the following blueprint:
+
+### 🏗️ THE ARCHITECTURAL BLUEPRINT
+- **Standard Subfolders**: Core, Workers, Managers, Methods, Constants, Tests, Documentation, Assets, Interface, Hooks, FileReaders, FileWriters.
+- **Infrastructure Modules**: oaThreadManager, oaConfiguration, oaLogging, oaDependencies, oaInstallation, oaOchestration.
+- **Protocol Modules**: oaComBroker, oaComVisa, oaComMidi, oaComOSC, oaComSNMP, oaSplinker, oaPTP, oaTranslator.
+- **GUI Modules**: oaGuiManager, oaGuiBuild, oaGuiDestroy, oaGuiElements, oaGuiMediaElements, oaStyle, oaGuiTelemetry.
+- **Vaults (Flat)**: oaGuiDefinitions, oaDataRunningFiles, oaDataLogs, oaDataCache, oaDataSNMP, oaDataSplinks, oaDataTests.
 
 ### 🏗️ THE ARCHITECTURAL MANDATE
-1.  **Isolation**: Every `oa*` module (excluding Data Vaults) must strictly follow the **12-subfolder hierarchy**: 
-    - `Core`, `Workers`, `Managers`, `Methods`, `Constants`, `Tests`, `Documentation`, `Assets`, `Interface`, `Hooks`.
-    - `FileReaders`: Logic for pulling data from disk (JSON/CSV/Log parsing).
-    - `FileWriters`: Logic for pushing data to disk (Reporting/State saving).
+1.  **Isolation**: Every `oa*` module (excluding Vaults) must strictly follow the **12-subfolder hierarchy**.
 2.  **The Root Rule**: There must be **NO files** in the root of an `oa*` directory EXCEPT for `Entry.py`.
-3.  **The Gatekeeper (Entry.py)**: This file acts as the module's public API. It is the sole orchestrator that imports internal logic (Managers/Workers) and exports them to the rest of the system.
-4.  **Black Box Design**: The supervisor tree should only interact with `Entry.py`. The internal mess of a module is hidden from the outside.
+3.  **The Gatekeeper (Entry.py)**: This file acts as the module's public API. It is the sole orchestrator that imports internal logic and exports it via `__all__`.
 
 ### 🛠️ EXECUTION STRATEGY: CLASSIFY & MOVE
-For every module identified, apply the following mapping logic to clean the module root:
-
-| Original File Type | New Destination | Architectural Reasoning |
-| :--- | :--- | :--- |
-| `*_worker.py`, `*_loop.py` | `Workers/` | Pure execution; no state management. |
-| `*_manager.py`, `heartbeat.py` | `Managers/` | Lifecycle, restarts, and health monitoring. |
-| `utils.py`, `parsers.py` | `Methods/` | Stateless "Skills" used by the worker. |
-| `config.json`, `oids.json` | `Constants/` | Immutable values; the module's "Rules." |
-| `*_reader.py`, `*_loader.py` | `FileReaders/` | Disk I/O: Pulling data/parsing from files. |
-| `*_writer.py`, `*_saver.py` | `FileWriters/` | Disk I/O: Writing data/reports/state to files. |
-| `test_*.py` | `Tests/` | Unit and integration testing. |
-| `README.md`, `TOPICS.md` | `Documentation/` | Knowledge base for the supervisor. |
+Apply the mapping logic to clean module roots:
+- `*_worker.py`, `*_loop.py` ➡️ `Workers/`
+- `*_manager.py`, `heartbeat.py` ➡️ `Managers/`
+- `utils.py`, `parsers.py` ➡️ `Methods/`
+- `config.json`, `oids.json` ➡️ `Constants/`
+- `*_reader.py`, `*_loader.py` ➡️ `FileReaders/`
+- `*_writer.py`, `*_saver.py` ➡️ `FileWriters/`
+- `test_*.py` ➡️ `Tests/`
+- `README.md`, `TOPICS.md` ➡️ `Documentation/`
 
 ### 🔄 BOOTSTRAP ENTRY.PY
-For each module, refactor or create `Entry.py`. It must:
-- Import the primary Manager from `Managers/`.
-- Import the primary Worker from `Workers/`.
-- Export standard methods: `start()`, `stop()`, and `status()`.
-- Update all internal relative imports to reflect the new nested structure.
+For each module, refactor or create `Entry.py` to export `start()`, `stop()`, and `status()`.
 
 ### 📋 AUDIT REPORT
-Provide a report for each processed module in this format:
-**Module**: [Name]
-**Status**: ✅ Realignment Complete
-**Moves**:
-- [file] ➡️ [destination]
-**Entry.py Status**: [Created/Refactored]. Now exports [methods].
-**Judgment Calls**: [Any ambiguous files and why you chose their destination].
+Provide a report for each processed module including: Module Name, Status, Moves, and Entry.py Status.
 """

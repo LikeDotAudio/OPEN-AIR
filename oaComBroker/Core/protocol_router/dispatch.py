@@ -5,7 +5,7 @@
 # Description: Logic for outbound message dispatch to transport managers.
 
 import orjson
-from .constants import LOCAL_DEBUG
+from .constants import LOCAL_DEBUG, app_constants
 from oaLogging.Core.logger import router_logger
 from oaOchestration.Managers.protocol_guard import protocol_guard
 
@@ -22,25 +22,25 @@ def dispatch_message(msg, managers):
     # --- MQTT Dispatch ---
     if "🚀" in strategy or "Ⓜ️" in strategy:
         mqtt_manager = managers.get("mqtt")
-        if mqtt_manager and msg["source"] != "MQTT":
+        if mqtt_manager and msg["source"] != "MQTT" and msg.get("logical_source") != "MQTT":
             _dispatch_mqtt(mqtt_manager, topic, msg, val_str)
 
     # --- OSC Dispatch ---
     if "🅾️" in strategy:
         osc_manager = managers.get("osc")
-        if osc_manager and msg["source"] != "OSC":
+        if osc_manager and msg["source"] != "OSC" and msg.get("logical_source") != "OSC":
             _dispatch_osc(osc_manager, topic, val, msg, val_str)
 
     # --- MIDI Dispatch ---
     if "🎹" in strategy:
         midi_manager = managers.get("midi")
-        if midi_manager and msg["source"] != "MIDI":
+        if midi_manager and msg["source"] != "MIDI" and msg.get("logical_source") != "MIDI":
             _dispatch_midi(midi_manager, topic, val, msg, val_str)
 
     # --- SNMP Dispatch ---
     if "Ⓢ" in strategy:
         snmp_manager = managers.get("snmp")
-        if snmp_manager and msg["source"] != "SNMP":
+        if snmp_manager and msg["source"] != "SNMP" and msg.get("logical_source") != "SNMP":
             _dispatch_snmp(snmp_manager, topic, val, val_str)
 
 @protocol_guard("MQTT")
@@ -50,8 +50,16 @@ def _dispatch_mqtt(mqtt_manager, topic, msg, val_str):
         "ts": msg["ts"], "GUID": msg["guid"], "partition": msg["partition"]
     }
     if isinstance(msg.get("meta"), dict): payload.update(msg["meta"])
-    mqtt_manager.publish(topic, orjson.dumps(payload).decode())
-    router_logger.debug(f"📡📤📤 [OUTBOUND] MQTT >> {topic}: {val_str}")
+    
+    # --- Namespace Split: Publish to TX namespace ---
+    tx_topic = topic
+    from .constants import app_constants
+    base = app_constants.MQTT_BASE_TOPIC
+    if base in topic and f"{base}/Cmd/" not in topic and f"{base}/Tx/" not in topic:
+        tx_topic = topic.replace(base, f"{base}/Tx")
+        
+    mqtt_manager.publish(tx_topic, orjson.dumps(payload).decode())
+    router_logger.debug(f"📡📤📤 [OUTBOUND] MQTT >> {tx_topic}: {val_str}")
 
 @protocol_guard("OSC")
 def _dispatch_osc(osc_manager, topic, val, msg, val_str):

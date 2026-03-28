@@ -52,6 +52,9 @@ class ProtocolRouter:
         self.osc_manager = None
         self.midi_manager = None
         self.snmp_manager = None
+        
+        # State Cache Reference
+        self.state_cache = None
 
     @property
     def firehose(self):
@@ -126,6 +129,7 @@ class ProtocolRouter:
     def set_osc_manager(self, m): self.osc_manager = m
     def set_midi_manager(self, m): self.midi_manager = m
     def set_snmp_manager(self, m): self.snmp_manager = m
+    def set_state_cache(self, c): self.state_cache = c
 
     # --- Observation APIs ---
     def register_cache_observer(self, cb): self.monitor.register_cache_observer(cb)
@@ -135,7 +139,7 @@ class ProtocolRouter:
         normalize_and_ingest(
             transport_source, topic, value, metadata, 
             self.GUID, self.settle_manager, self.inbound_queue,
-            self._ingest_silent
+            self._ingest_silent, self.state_cache
         )
 
     def _ingest_silent(self, transport_source, topic, value, meta):

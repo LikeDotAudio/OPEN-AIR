@@ -38,6 +38,14 @@ class ResourceError(VocalError):
     """Raised when required assets, files, or hardware resources are unavailable."""
     pass
 
+class HardwareError(VocalError):
+    """Raised during physical device communication failures (MIDI, VISA, etc.)."""
+    pass
+
+class CriticalModuleMissingError(ConfigurationError):
+    """Raised when a mandatory system module (oa*.Entry) cannot be loaded."""
+    pass
+
 class UIConstructionError(VocalError):
     """Raised when the GUI builder fails to assemble a panel or widget."""
     pass

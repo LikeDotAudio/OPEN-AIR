@@ -1,0 +1,19 @@
+*.log
+*.zip
+*.pyc
+/__pycache__/
+.crawler/
+
+# Ignore version control and IDE settings
+.git/
+.vscode/
+
+# Ignore all Open-Air Data directories
+oaData*/
+oaDataAudits/
+oaDataCache/
+oaDataLogs/
+oaDataSNMP/
+oaDataSplinks/
+oaDataRunningFiles/
+.pytest_cache/

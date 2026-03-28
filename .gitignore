@@ -6,3 +6,6 @@
 
 # Ignore all Open-Air Data directories
 oaData*/
+oaDataAudits/
+oaDataLogs/
+.pytest_cache/

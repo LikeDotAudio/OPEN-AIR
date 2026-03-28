@@ -76,10 +76,11 @@ class StateRegistry:
     def shutdown(self): self.save_engine.shutdown()
 
     def subscribe_to_all_topics(self):
-        """Subscribes to the root application topic filter."""
+        """Subscribes to the root command topic filter."""
         if self.mqtt:
-            root = f"{app_constants.MQTT_BASE_TOPIC}/#"
-            if LOCAL_DEBUG: data_logger.debug(f"Subscribing to root: {root}")
+            # --- Namespace Split: Subscribe only to CMD namespace ---
+            root = f"{app_constants.MQTT_BASE_TOPIC}/Cmd/#"
+            if LOCAL_DEBUG: data_logger.debug(f"Subscribing to command root: {root}")
             self.mqtt.subscribe(root)
 
     def initialize_state(self) -> None:
@@ -117,7 +118,13 @@ class StateRegistry:
 
         if self.mqtt:
             if "/System/Monitor/" not in topic and (source == "GUI" or (source in ["MIDI", "SNMP", "OSC", "VISA"] and not self.state_mirror_engine)):
-                self.mqtt.publish(topic, orjson.dumps(payload).decode())
+                # --- Namespace Split: Publish to TX namespace ---
+                tx_topic = topic
+                base = app_constants.MQTT_BASE_TOPIC
+                if base in topic and f"{base}/Cmd/" not in topic and f"{base}/Tx/" not in topic:
+                    tx_topic = topic.replace(base, f"{base}/Tx")
+                
+                self.mqtt.publish(tx_topic, orjson.dumps(payload).decode())
         self.observers.notify(topic, payload)
 
     def _parse_mqtt_payload(self, msg: MqttMessage):
@@ -156,6 +163,19 @@ class StateRegistry:
 
     def handle_incoming_mqtt(self, client, userdata, msg: MqttMessage) -> None:
         topic = msg.topic
+        
+        # --- Namespace Split: Strip CMD from incoming topic ---
+        base = app_constants.MQTT_BASE_TOPIC
+        if f"{base}/Cmd/" in topic:
+            topic = topic.replace(f"{base}/Cmd/", f"{base}/")
+            # Create a NEW MqttMessage with the stripped topic for downstream consumption
+            msg = MqttMessage(
+                topic=topic,
+                payload=msg.payload,
+                qos=msg.qos,
+                retain=msg.retain
+            )
+            
         if self.subscriber_router: 
             self.subscriber_router._on_message(client, userdata, msg)
             

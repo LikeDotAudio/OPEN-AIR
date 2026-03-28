@@ -5,11 +5,11 @@ IMPORTS
     DisplayString FROM SNMPv2-TC;
 
 openAirMIB MODULE-IDENTITY
-    LAST-UPDATED "202603270016Z"
+    LAST-UPDATED "202603272144Z"
     ORGANIZATION "OPEN-AIR Project"
     CONTACT-INFO "Anthony Peter Kuzub"
     DESCRIPTION "MQTT-Aligned OID Tree for OPEN-AIR."
-    REVISION "202603270016Z"
+    REVISION "202603272144Z"
     DESCRIPTION "Strictly unique path-aligned generation."
     ::= { enterprises 65300 }
 
@@ -556,5 +556,16 @@ pausef081 OBJECT-TYPE
     STATUS      current
     DESCRIPTION "Source: OPEN-AIR/Assets/right_top/blocks/Control_Buttons/Pause"
     ::= { controlButtons30e5 26413 }
+
+oaGuiDefinitionsa30c OBJECT IDENTIFIER ::= { v1 38698 }
+assets9d0a OBJECT IDENTIFIER ::= { oaGuiDefinitionsa30c 20965 }
+visibilityedf8 OBJECT IDENTIFIER ::= { assets9d0a 10406 }
+-- MQTT: OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry
+geometryb577 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/oaGuiDefinitions/Assets/visibility/geometry"
+    ::= { visibilityedf8 30329 }
 
 END

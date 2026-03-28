@@ -49,6 +49,8 @@ class MIDIPortController:
 
     def close_all(self):
         for p in self.inports + self.outports:
-            try: p.close()
-            except: pass
+            try:
+                p.close()
+            except Exception as e:
+                self.logger.warning(f"🎹 Warning: Failed to close MIDI port {p.name if hasattr(p, 'name') else 'unknown'}: {e}")
         self.inports.clear(); self.outports.clear()

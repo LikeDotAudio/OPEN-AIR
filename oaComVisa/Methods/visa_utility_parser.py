@@ -93,18 +93,20 @@ class VisaUtilityParser:
 
             raw_idn = inst.query("*IDN?")
             idn = VisaUtilityParser.clean_string_for_display(raw_idn)
-            return idn if idn else None
+            if not idn:
+                raise HardwareError(f"💳⚠️ [VISA] Device at {resource_str} returned empty IDN.")
+            return idn
 
         except pyvisa.errors.VisaIOError as e:
-            logger.debug(f"      💳⚠️ [VISA] IO Error for {resource_str}: {e.description}")
-            return None
+            raise HardwareError(f"💳⚠️ [VISA] IO Error for {resource_str}: {e.description}")
         except Exception as e:
-            logger.debug(f"      💳⚠️ [VISA] Unexpected error probing {resource_str}: {e}")
-            return None
+            if isinstance(e, HardwareError): raise
+            raise HardwareError(f"💳⚠️ [VISA] Unexpected error probing {resource_str}: {e}")
         finally:
             if inst:
                 try: inst.close()
-                except: pass
+                except Exception as close_err:
+                    logger.warning(f"💳⚠️ [VISA] Failed to close resource {resource_str}: {close_err}")
 
     @staticmethod
     def get_local_ip():
@@ -115,7 +117,8 @@ class VisaUtilityParser:
         try:
             s.connect(("10.255.255.255", 1))
             IP = s.getsockname()[0]
-        except:
+        except Exception as e:
+            logger.warning(f"🌐 [NETWORK] Failed to auto-detect IP, falling back to localhost: {e}")
             IP = "127.0.0.1"
         finally:
             s.close()

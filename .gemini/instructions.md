@@ -1,18 +1,18 @@
-### **OPEN-AIR SYSTEM OPERATING PARAMETERS: 202603-F**
+### **OPEN-AIR SYSTEM OPERATING PARAMETERS: 202603-F (LINUX OPTIMIZED)**
 
-oaDATA**** folders are repositories for data logging - exclude them from any functional analysis
+oaDATA**** folders are repositories for data logging - exclude them from any functional analysis.
 
 ---
 ## **I. EFFICIENCY & CONTEXT OPTIMIZATION**
-1.  **Inventory Protocol**: Execute `ls -R` to map project structure before file ingestion.
-2.  **Targeted Retrieval**: Utilize `grep` to isolate specific logic blocks; do not read unrelated utility files.
+1.  **Inventory Protocol**: Execute `ls -R` or use `glob` to map project structure before file ingestion.
+2.  **Targeted Retrieval**: Utilize `grep_search` to isolate specific logic blocks; do not read unrelated utility files.
 3.  **Dependency Mapping**: Identify linked modules via imports or `package.json` to restrict processing scope.
-4.  **Chunked Ingestion**: Read only identified lines (+/- 10 lines) to minimize token noise.
-5.  **Execution Sequence**: Follow mandatory logic: **Locate** (grep) -> **Isolate** (context) -> **Validate** (fix).
+4.  **Chunked Ingestion**: Read only identified lines (+/- 10 lines) using `read_file` to minimize token noise.
+5.  **Execution Sequence**: Follow mandatory logic: **Locate** (`grep_search`) -> **Isolate** (context) -> **Validate** (fix).
 6.  **Selective Caching**: Explicitly categorize files as "Core Context" (in memory) or "Auxiliary" (on-demand).
 7.  **Summarization Rule**: Generate a brief summary of a file's exports and "forget" raw text if only structure matters.
 8.  **TTL Awareness**: Treat files with a virtual "Time To Live" to save costs over long sessions.
-9.  **Systemic Retrieval**: Prioritize systemic search before any large codebase ingestion.
+9.  **Systemic Retrieval**: Prioritize `grep_search` and `glob` before any large codebase ingestion.
 10. **Pre-Analysis Requirement**: Inventory the directory before accepting or processing multiple files.
 
 ## **II. LOGGING & FORENSIC ARCHITECTURE**
@@ -60,46 +60,42 @@ oaDATA**** folders are repositories for data logging - exclude them from any fun
 46. **Versioning Standard**: Use W.X.Y format where W=Date, X=Time (no leading zero), Y=Revision.
 47. **Error Acknowledgement**: If corrected by Anthony, state: “Damn, you’re right, Anthony. My apologies.”.
 48. **No Message Boxes**: Handle user alerts via console output, not intrusive pop-up message boxes.
-49. **Health Reminders**: Remind Anthony to breathe before compilation
+49. **Health Reminders**: Remind Anthony to breathe before compilation.
 50. **Approval Recognition**: Understand that a “thumbs up” icon signifies user approval (where applicable).
 
-## **VI. TASKLOCAL TOOLS & COMMANDTOKENS**
-51. **Data Cleaning Token**: Execute `python -c "import pandas as pd; ..."` for **High Reduction** of raw datasets before ingestion.
-52. **File Searching Token**: Use `grep -rnE "pattern" ./oa_core` for **Medium Reduction** to isolate logic without manual file traversal.
-53. **Log Analysis Token**: Use `powershell "Get-Content log.txt | Select-Object -Last 20"` for rapid forensic tailing of the last 20 events.
-54. **Bulk Rename Token**: Utilize `ls | Rename-Item -NewName ...` for batch architectural alignment of `oa*` modules.
+## **VI. CLI-NATIVE ACCELERATION (LINUX)**
+51. **Data Reduction Token**: Use `python3 -c` with `pandas` or `json` modules to pre-process large `oaData*` files locally before sharing results.
+52. **Fast Context Token**: Use `grep_search` with `--names_only` first to map distribution, then targeted `read_file` for logic.
+53. **Log Tail Token**: Use `run_shell_command` with `tail -n 50` or `awk` to isolate specific error timestamps in `oaDataLogs`.
+54. **Structure Sync**: Use `python3 UltraFolder.py` immediately when a module is flagged for "Realignment."
 55. **Export Protocol**: All structured data from `JSON Lines Sinks` or analysis must be formatted for **Export to Sheets** compatibility.
 
 ---
 
-to minimize token usage, use this script to handle heavy data processing or file system tasks locally. Instead of uploading large datasets, you will only share the [OUTBOUND] results or specific error traces.
+To minimize token usage, use this script to handle heavy data processing or file system tasks locally. Instead of uploading large datasets, you will only share the [OUTBOUND] results or specific error traces.
 
-PowerShell EXAMPLE:
-                    # oa_Utility/TempRunner.ps1
-                    # Author: Gemini (Collaborator)
-                    # Version: 20260321.1955.1
+### **LINUX TASK-RUNNER (Python 3)**
+```python
+# .gemini/TempScripts/tmp_runner.py
+# Author: Gemini (Collaborator)
+# Version: 20260321.1955.1
 
-                    function Invoke-OpenAirTask {
-                        param (
-                            [Parameter(Mandatory=$true)]
-                            [string]$TaskName,
-                            [Parameter(Mandatory=$true)]
-                            [scriptblock]$Logic
-                        )
+import sys, os, json, traceback
 
-                        $tempDir = Join-Path $env:TEMP "OpenAir_Scratchpad\$TaskName"
-                        if (!(Test-Path $tempDir)) { New-Item -ItemType Directory -Path $tempDir -Force | Out-Null }
-                        
-                        Write-Host "📡📥📥 [INBOUND] Executing: $TaskName" -ForegroundColor Cyan
-                        
-                        try {
-                            Set-Location $tempDir
-                            $result = & $Logic
-                            Write-Host "📡📤📤 [OUTBOUND] Task Complete." -ForegroundColor Green
-                            return $result
-                        }
-                        catch {
-                            Write-Host "🛑 [ERROR] Task Failed: $_" -ForegroundColor Red
-                            $_.Exception | Select-Object * | Out-File (Join-Path $tempDir "forensic_log.txt")
-                        }
-                    }
+def run_task(name, logic_fn):
+    print(f"📡📥📥 [INBOUND] Executing Task: {name}")
+    try:
+        # Create scratchpad in the dedicated TempScripts directory
+        temp_dir = f"/home/anthony/Documents/OPEN-AIR/.gemini/TempScripts/{name}"
+        os.makedirs(temp_dir, exist_ok=True)
+        os.chdir(temp_dir)
+...
+        result = logic_fn()
+        print(f"📡📤📤 [OUTBOUND] Task Complete.")
+        return result
+    except Exception as e:
+        print(f"🛑 [ERROR] Task Failed: {e}")
+        with open(f"{temp_dir}/forensic_log.txt", "w") as f:
+            f.write(traceback.format_exc())
+        return None
+```

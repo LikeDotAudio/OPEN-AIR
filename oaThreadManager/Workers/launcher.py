@@ -66,8 +66,7 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
         splinker_entry = importlib.import_module(splinker_entry_path)
         splinker_manager = splinker_entry.get_broker(state_cache_manager, mqtt_connection_manager)
     else:
-        logger.critical("❌ Critical module missing: oaSplinker.Entry")
-        return None
+        raise CriticalModuleMissingError("❌ Critical module missing: oaSplinker.Entry")
     
     mqtt_manager = MqttManager(subscriber_router=subscriber_router, mqtt_client=mqtt_connection_manager, state_cache_manager=state_cache_manager)
 
@@ -122,8 +121,7 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
             aes70_manager=aes70_manager
         )
     else:
-        logger.critical("❌ Critical module missing: oaComVisa.Entry")
-        return None
+        raise CriticalModuleMissingError("❌ Critical module missing: oaComVisa.Entry")
     
     yak_entry_path = "oaTranslator.Entry"
     if importlib.util.find_spec(yak_entry_path):
@@ -139,24 +137,21 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
             state_cache_manager=state_cache_manager
         )
     else:
-        logger.critical("❌ Critical module missing: oaTranslator.Entry")
-        return None
+        raise CriticalModuleMissingError("❌ Critical module missing: oaTranslator.Entry")
     
     watchdog_entry_path = "oaWatchdog.Entry"
     if importlib.util.find_spec(watchdog_entry_path):
         watchdog_entry = importlib.import_module(watchdog_entry_path)
         fleet_status_monitor = watchdog_entry.FleetStatusMonitor(state_mirror_engine=None, subscriber_router=subscriber_router)
     else:
-        logger.critical("❌ Critical module missing: oaWatchdog.Entry")
-        return None
+        raise CriticalModuleMissingError("❌ Critical module missing: oaWatchdog.Entry")
     
     ptp_entry_path = "oaPTP.Entry"
     if importlib.util.find_spec(ptp_entry_path):
         ptp_entry = importlib.import_module(ptp_entry_path)
         ptp_manager = ptp_entry.get_manager(mqtt_connection_manager=mqtt_connection_manager, subscriber_router=subscriber_router)
     else:
-        logger.critical("❌ Critical module missing: oaPTP.Entry")
-        return None
+        raise CriticalModuleMissingError("❌ Critical module missing: oaPTP.Entry")
 
     # --- 2. Linking Phase ---
     if LOCAL_DEBUG: logger.debug("🚀⚙️🔗 [LAUNCHER] Linking cross-dependent managers...")
@@ -227,5 +222,8 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
         "ptp_manager": ptp_manager,
         "mqtt_manager": mqtt_manager,
         "protocol_router": protocol_router,
+        "start_network_services": start_network_services,
+    }
+protocol_router,
         "start_network_services": start_network_services,
     }

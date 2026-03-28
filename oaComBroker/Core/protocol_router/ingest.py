@@ -17,7 +17,8 @@ def normalize_and_ingest(
     local_guid, 
     settle_manager, 
     inbound_queue,
-    silent_ingest_callback
+    silent_ingest_callback,
+    state_cache=None
 ):
     """
     Normalizes raw data into the Unified Message Schema and appends to queue.
@@ -30,6 +31,14 @@ def normalize_and_ingest(
         return
 
     meta = metadata or {}
+
+    # --- STATE DELTA CHECK (Loop Prevention) ---
+    if state_cache and not meta.get("boot"):
+        cached_val = state_cache.get_cached_value(topic)
+        if cached_val == value:
+            if LOCAL_DEBUG:
+                router_logger.trace(f"📉🚫📉 [ROUTER] DEAD-BAND: Dropping identical value for {topic}")
+            return
     
     # Boot sequence messages are ingested silently.
     if meta.get("boot"):

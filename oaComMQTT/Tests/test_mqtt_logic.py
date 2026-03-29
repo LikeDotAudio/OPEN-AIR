@@ -14,7 +14,7 @@ import os
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
-from oaTests.Workers.ClearMQTT import MQTTSweeper
+from oaTests.Workers.CleanupApps.ClearMQTT import MQTTSweeper
 
 class TestMQTTLogic(unittest.TestCase):
     def test_topic_calculator_calculate(self):

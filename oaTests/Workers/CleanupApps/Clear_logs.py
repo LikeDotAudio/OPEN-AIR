@@ -1,4 +1,4 @@
-# Report_Builder/clear_logs.py
+# oaTests/Workers/CleanupApps/Clear_logs.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #

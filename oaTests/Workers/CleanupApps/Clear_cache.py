@@ -1,4 +1,4 @@
-# CleanupUtilities/Clear_cache.py
+# oaTests/Workers/CleanupApps/Clear_cache.py
 # Author: Anthony Peter Kuzub
 # Version: 20260323.CacheClear.1
 #
@@ -25,9 +25,9 @@ def purge_cache():
     Deletes the local cache and running state files.
     Excludes log directories handled by clear_logs.py.
     """
-    # Current script: project_root/oaTests/Workers/DeleteCache.py
+    # Current script: project_root/oaTests/Workers/CleanupApps/Clear_cache.py
     current_script_dir = Path(__file__).resolve().parent
-    project_root = current_script_dir.parents[1]
+    project_root = current_script_dir.parents[2]
     
     # Target non-log data directories
     data_dirs = [

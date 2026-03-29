@@ -17,15 +17,19 @@ class TestMeterNeedleBatch(unittest.TestCase):
         try:
             self.root = tk.Tk()
             self.root.withdraw()
-        except:
+            # Verify we can actually create widgets (not just initialize Tcl)
+            tk.Frame(self.root).destroy()
+        except Exception:
             self.root = MagicMock()
             self.root.winfo_exists.return_value = True
             self.root.cget.return_value = '#2b2b2b'
             
             # Patch variables and widgets
             self.patchers.append(patch('tkinter.DoubleVar', return_value=MagicMock()))
-            self.patchers.append(patch('tkinter.Canvas', return_value=MagicMock()))
+            self.patchers.append(patch('tkinter.StringVar', return_value=MagicMock()))
             self.patchers.append(patch('tkinter.Frame', return_value=MagicMock()))
+            self.patchers.append(patch('tkinter.Canvas', return_value=MagicMock()))
+            self.patchers.append(patch('tkinter.Label', return_value=MagicMock()))
             
             for p in self.patchers:
                 p.start()

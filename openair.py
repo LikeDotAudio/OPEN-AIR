@@ -1,11 +1,11 @@
-# Core/OpenAir.py
+# openair.py
 # Author: Anthony Peter Kuzub
-# Version: 20260314.120000.REV01
+# Version: 20260328.0.1
 #
 # Description: The Supervisor Entry Point for OPEN-AIR.
 
 """
-OpenAir.py - The Multi-Process Supervisor for the OPEN-AIR System.
+openair.py - The Multi-Process Supervisor for the OPEN-AIR System.
 
 Purpose:
     Acts as the master process (Supervisor) that orchestrates the execution
@@ -25,10 +25,8 @@ Responsibilities:
 
 Constraints:
     - Requires a Python 3.x environment.
-    - Assumes the presence of 'managers/System_Core/open_air_core.py' and 
-      'managers/Display/open_air_ui.py'.
-    - Relies on 'subprocess.Popen' for process isolation; behaviors may 
-      vary slightly between Linux and Windows process management.
+    - Assumes the presence of 'oaComBroker/Core/open_air_core.py' and 
+      'oaGuiManager/Managers/open_air_ui.py'.
 """
 
 import sys
@@ -39,8 +37,8 @@ import pathlib
 import signal
 
 # Ensure the root directory is in the search path for local module imports.
-current_dir = pathlib.Path(__file__).resolve().parent
-project_root = current_dir.parent
+# Since this script is in the project root, project_root IS the parent directory.
+project_root = pathlib.Path(__file__).resolve().parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
@@ -101,10 +99,8 @@ def main():
     log(f"Launching OPEN-AIR Partitions... (Mission Critical: {is_mission_critical})")
 
     python_executable = sys.executable
-    core_script = os.path.join(project_root, "oaComBroker", 
-                               "open_air_core.py")
-    ui_script = os.path.join(project_root, "oaGuiManager", 
-                             "open_air_ui.py")
+    core_script = os.path.join(project_root, "oaComBroker", "Core", "open_air_core.py")
+    ui_script = os.path.join(project_root, "oaGuiManager", "Managers", "open_air_ui.py")
 
     def get_host_guid():
         """Generates a non-persistent, 64-bit session identifier."""

@@ -58,17 +58,27 @@ class TestLauncher(unittest.TestCase):
 
     @patch('oaThreadManager.Workers.launcher.MqttConnectionManager')
     @patch('oaThreadManager.Workers.launcher.MqttSubscriberRouter')
+    @patch('oaThreadManager.Workers.launcher.MqttManager')
+    @patch('oaThreadManager.Workers.launcher.ProtocolRouter')
+    @patch('oaThreadManager.Workers.launcher.initialize_filter_engine')
     @patch('oaThreadManager.Workers.launcher.Config')
     @patch('oaThreadManager.Workers.launcher.importlib')
-    def test_dynamic_snmp_loading(self, mock_importlib, mock_config, mock_sub_router,
+    def test_dynamic_snmp_loading(self, mock_importlib, mock_config, mock_init_filter,
+                                mock_proto_router, mock_mqtt_manager, mock_sub_router,
                                 mock_conn_manager, mock_logger_add):
         """Test that the SNMP manager is loaded when the config flag is True."""
         mock_config.get_instance.return_value.SCAN_SNMP = True
         
+        # Ensure ProtocolRouter mock works as expected
+        mock_proto_router.get_instance.return_value = MagicMock()
+        
         mock_snmp_module = MagicMock()
-        mock_snmp_manager_class = MagicMock()
-        mock_snmp_module.get_manager = mock_snmp_manager_class
-        mock_snmp_module.SNMPManager = MagicMock() # Keep this just in case but get_manager is used now
+        mock_snmp_manager_inst = MagicMock()
+        
+        # The launcher calls getattr(module, class_name)(**kwargs)
+        # class_name is "get_manager" which returns the manager instance
+        mock_snmp_module.get_manager.return_value = mock_snmp_manager_inst
+        
         # This setup is complex because of the dynamic import logic
         # We need to mock both find_spec and import_module to simulate module presence
         def import_side_effect(module_path):
@@ -82,8 +92,8 @@ class TestLauncher(unittest.TestCase):
         managers = launch_core_managers(MagicMock(), MagicMock())
         
         # Check that the SNMP manager was instantiated and started
-        mock_snmp_manager_class.assert_called_once()
-        mock_snmp_manager_class.return_value.start.assert_called_once()
+        mock_snmp_module.get_manager.assert_called()
+        mock_snmp_manager_inst.start.assert_called_once()
         self.assertIsNotNone(managers['snmp_manager'])
 
 

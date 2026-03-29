@@ -10,6 +10,7 @@ from textual.containers import Container, Vertical, Horizontal
 from textual.binding import Binding
 import os
 import webbrowser
+import time
 from typing import Any
 from datetime import datetime
 import threading
@@ -19,14 +20,23 @@ from oaTests.Workers.TestRunner.TestRunner import TestRunner
 from oaTests.Workers.collate_data import collate_extra_tabs
 from oaTests.Workers.run_report_builder import ReportGenerator
 from oaTests.Workers.TestRunner import DiscoverTests
-from oaTests.Workers.Clear_logs import cleanup_logs
-from oaTests.Workers.ClearMQTT import MQTTSweeper
-from oaTests.Workers.Clear_flamegraph import cleanup_flamegraph
-from oaTests.Workers.Clear_audits import cleanup_audits
-from oaTests.Workers.Clear_reports import cleanup_reports
-from oaTests.Workers.Clear_cache import purge_cache
+from oaTests.Workers.CleanupApps.Clear_logs import cleanup_logs
+from oaTests.Workers.CleanupApps.ClearMQTT import MQTTSweeper
+from oaTests.Workers.CleanupApps.Clear_flamegraph import cleanup_flamegraph
+from oaTests.Workers.CleanupApps.Clear_audits import cleanup_audits
+from oaTests.Workers.CleanupApps.Clear_reports import cleanup_reports
+from oaTests.Workers.CleanupApps.Clear_cache import purge_cache
+from oaTests.Workers.CleanupApps.Clear_JsonLines import cleanup_jsonlines
 from oaTests.Managers.AuditRunner import run_all_audits
 from oaTests.Methods.DebugToggler import force_debug_on, force_debug_off
+import asyncio
+
+from oaInstallation.Managers.Setup import (
+    SetupManager, STAGE_PYTHON_DEPS, STAGE_MQTT_INFRA, 
+    STAGE_SNMP_INFRA, STAGE_DESKTOP_INTEG
+)
+from oaInstallation.FileWriters.LogWriter import InstallationLogWriter
+from oaInstallation.Tests.test_installation_validator import run_all_tests as run_installation_tests
 
 from oaInstallation.Core.SystemStats import SystemStatsProvider
 
@@ -104,17 +114,20 @@ class TestsApp(App):
         display: none;
     }
 
-    /* Maintenance Buttons: Orange with Red Text */
-    #btn_debug_on, #btn_debug_off, #btn_clear_logs, #btn_clear_audits, #btn_clear_reports, #btn_clear_mqtt, #btn_clear_flame, #btn_clear_cache {
+    /* Maintenance & Installation Buttons: Orange with Red Text */
+    #btn_debug_on, #btn_debug_off, #btn_clear_logs, #btn_clear_audits, #btn_clear_reports, #btn_clear_jsonlines, #btn_clear_mqtt, #btn_clear_flame, #btn_clear_cache,
+    #btn_deps, #btn_clean, #btn_infra, #btn_desktop, #btn_tests_install, #btn_full {
         background: #F4902C;
         color: #ff0000;
         text-style: bold;
     }
 
-    #btn_debug_on:hover, #btn_debug_off:hover, #btn_clear_logs:hover, #btn_clear_audits:hover, #btn_clear_reports:hover, #btn_clear_mqtt:hover, #btn_clear_flame:hover, #btn_clear_cache:hover {
+    #btn_debug_on:hover, #btn_debug_off:hover, #btn_clear_logs:hover, #btn_clear_audits:hover, #btn_clear_reports:hover, #btn_clear_jsonlines:hover, #btn_clear_mqtt:hover, #btn_clear_flame:hover, #btn_clear_cache:hover,
+    #btn_deps:hover, #btn_clean:hover, #btn_infra:hover, #btn_desktop:hover, #btn_tests_install:hover, #btn_full:hover {
         background: #ff0000;
         color: #F4902C;
     }
+
 
     Log {
         background: #000000;
@@ -133,6 +146,8 @@ class TestsApp(App):
         super().__init__()
         self.project_root = project_root
         self.stats_provider = SystemStatsProvider()
+        self.setup_manager = SetupManager()
+        self.installation_log_writer = InstallationLogWriter()
         self.log_lines = []
         self.test_results = []
         self.audit_cancel_event = threading.Event()
@@ -204,12 +219,27 @@ class TestsApp(App):
             self.perform_clear_audits()
         elif event.button.id == "btn_clear_reports":
             self.perform_clear_reports()
+        elif event.button.id == "btn_clear_jsonlines":
+            self.perform_clear_jsonlines()
         elif event.button.id == "btn_clear_mqtt":
             self.perform_clear_mqtt()
         elif event.button.id == "btn_clear_flame":
             self.perform_clear_flamegraph()
         elif event.button.id == "btn_clear_cache":
             self.perform_clear_cache()
+        # Installation Handlers
+        elif event.button.id == "btn_deps":
+            self.run_in_daemon_thread(self.perform_dep_check)
+        elif event.button.id == "btn_clean":
+            self.run_in_daemon_thread(self.perform_clean_install)
+        elif event.button.id == "btn_infra":
+            self.run_in_daemon_thread(self.perform_infra_setup)
+        elif event.button.id == "btn_desktop":
+            self.run_in_daemon_thread(self.perform_desktop_setup)
+        elif event.button.id == "btn_tests_install":
+            self.run_in_daemon_thread(self.perform_install_validation)
+        elif event.button.id == "btn_full":
+            self.run_in_daemon_thread(self.perform_full_installation)
 
     def perform_unit_tests(self):
         self.write_log("🔬 [SCAN] Starting Deep Test Discovery...")
@@ -229,13 +259,39 @@ class TestsApp(App):
                 description = description.strip()
 
                 self.test_results.append({
-                    "classname": test.__class__.__name__, "name": str(test), "status": status,
+                    "classname": test.__class__.__name__ if hasattr(test, "__class__") else "ManualTest", 
+                    "name": str(test), "status": status,
                     "message": message, "cause": cause, "description": description,
                     "duration": f"{duration:.4f}s"
                 })
                 emoji = "✅" if status == "passed" else "❌"
                 self.call_from_thread(self.write_log, f"   {emoji} {test}: [bold]{status}[/]")
 
+            # 1. First Test: Dependency Check
+            self.call_from_thread(self.write_log, "📦 [DEPS] Starting initial dependency validation...")
+            start_deps = time.time()
+            # Capture output from dependency check
+            dep_logs = []
+            def dep_callback(m): dep_logs.append(m)
+            
+            deps_success = self.setup_manager.check_dependencies(dep_callback, auto_install=False)
+            dep_duration = time.time() - start_deps
+            
+            # Create a mock test object for the report
+            class DependencyTest:
+                def __init__(self):
+                    self._testMethodDoc = "Validates all essential Python library requirements."
+                def __str__(self): return "System Dependency Validation"
+            
+            record_result(
+                DependencyTest(), 
+                "passed" if deps_success else "failed", 
+                message="Dependency check complete.",
+                cause="\n".join(dep_logs) if not deps_success else "",
+                duration=dep_duration
+            )
+
+            # 2. Continue with Discovered Tests
             found_dirs = DiscoverTests.identify_test_directories(self.project_root)
             self.call_from_thread(self.write_log, f"📂 Discovery identified {len(found_dirs)} test-containing root folders.")
             
@@ -412,6 +468,9 @@ class TestsApp(App):
 
     def perform_clear_reports(self):
         self._cleanup_task(cleanup_reports, "🧹 [CLEANUP] Purging old reports (preserving latest)...", "✨ [SUCCESS] Report cleanup complete.")
+
+    def perform_clear_jsonlines(self):
+        self._cleanup_task(cleanup_jsonlines, "🧹 [CLEANUP] Purging all JSON Lines logs...", "✨ [SUCCESS] JsonLines cleared.")
         
     def perform_clear_mqtt(self):
         self.write_log("🧹 [CLEANUP] Wiping the MQTT topic tree...")
@@ -426,6 +485,130 @@ class TestsApp(App):
 
     def perform_clear_cache(self):
         self._cleanup_task(purge_cache, "🌪️ [PURGE] Nuking local cache and running state...", "✨ [SUCCESS] Cache purged and structure re-initialized.")
+
+    # --- Installation Management Methods ---
+    def perform_dep_check(self):
+        def task():
+            self.call_from_thread(self.write_log, "🕵️ [MISSION] Initiating deep scan for legendary dependencies...")
+            
+            # Use a wrapper for write_log to ensure it's called from the UI thread
+            ui_write_log = lambda msg: self.call_from_thread(self.write_log, msg)
+            
+            # Logic from SetupUI.py adapted for Test UI
+            # First check without auto-installing
+            success = self.setup_manager.check_dependencies(ui_write_log, auto_install=False)
+            
+            if success:
+                ui_write_log("🎆 [CELEBRATION] Every single package is in place! This environment is impeccable.")
+            else:
+                ui_write_log("😲 [SCANDAL] We are missing some essential components!")
+                ui_write_log("🤔 [INQUIRY] Should I deploy the engineering team to install the missing pieces?")
+                ui_write_log("💡 Tip: Click 'Run Dependency Check' again to attempt auto-repair.")
+                
+                # Check for second click (re-use SetupUI logic)
+                if hasattr(self, "_dep_check_failed") and self._dep_check_failed:
+                    ui_write_log("🏗️ [CONSTRUCTION] Engineering team deployed! Repairing the environment...")
+                    success = self.setup_manager.check_dependencies(ui_write_log, auto_install=True)
+                    if success:
+                        ui_write_log("🏆 [TRIUMPH] Environment restored to its former glory!")
+                    else:
+                        ui_write_log("💀 [DISASTER] Even our best engineers couldn't fix this. Manual intervention required.")
+                    self._dep_check_failed = False
+                else:
+                    self._dep_check_failed = True
+        
+        task()
+
+    def perform_clean_install(self):
+        def task():
+            ui_write_log = lambda msg: self.call_from_thread(self.write_log, msg)
+            
+            if not hasattr(self, "_clean_confirm") or not self._clean_confirm:
+                ui_write_log("🚨 [CRITICAL] YOU HAVE REQUESTED A CLEAN INSTALLATION!")
+                ui_write_log("🛑 [WARNING] This will UNINSTALL and RE-INSTALL all elite packages.")
+                ui_write_log("🤔 [CONFIRM] Are you absolutely sure? Click 'Clean Installation' again to proceed.")
+                self._clean_confirm = True
+                return
+
+            self._clean_confirm = False
+            ui_write_log("🌪️ [PURGE] Initiating full environmental scrub...")
+            try:
+                success = self.setup_manager.check_dependencies(ui_write_log, auto_install=True, clean_install=True)
+                if success:
+                    ui_write_log("✨ [POLISHED] All dependencies have been purged and perfectly re-installed!")
+                else:
+                    ui_write_log("💀 [FAILURE] The purge was successful, but the re-population failed!")
+            except Exception as e:
+                ui_write_log(f"💥 [CRITICAL ERROR] The scrub process crashed: {e}")
+
+        task()
+
+    def perform_infra_setup(self):
+        def task():
+            ui_write_log = lambda msg: self.call_from_thread(self.write_log, msg)
+            ui_write_log("🚀 [MISSION] Provisioning world-class infrastructure...")
+            
+            mqtt_success = self.setup_manager.setup_mqtt(ui_write_log)
+            snmp_success = self.setup_manager.setup_snmp(ui_write_log)
+            
+            if mqtt_success and snmp_success:
+                ui_write_log("💎 [ELITE] Infrastructure is robust and ready for traffic.")
+        
+        task()
+
+    def perform_desktop_setup(self):
+        def task():
+            ui_write_log = lambda msg: self.call_from_thread(self.write_log, msg)
+            ui_write_log("🚀 [MISSION] Integrating with the master desktop environment...")
+            success = self.setup_manager.setup_desktop(ui_write_log)
+            if success:
+                ui_write_log("🎨 [STYLISH] The OPEN-AIR icon is now a permanent fixture of your workspace.")
+        
+        task()
+
+    def perform_install_validation(self):
+        def task():
+            ui_write_log = lambda msg: self.call_from_thread(self.write_log, msg)
+            ui_write_log("🚀 [MISSION] Performing final high-stakes validation...")
+            success = run_installation_tests(ui_write_log)
+            if success:
+                ui_write_log("🥇 [PRESTIGE] All systems have passed rigorous testing. We are GO for launch.")
+            else:
+                ui_write_log("⚠️ [ANOMALY] Validation failed! Minor adjustments may be needed.")
+        
+        task()
+
+    def perform_full_installation(self):
+        def task():
+            ui_write_log = lambda msg: self.call_from_thread(self.write_log, msg)
+            ui_write_log("🔥 [IGNITION] Starting FULL INSTALLATION process...")
+            
+            # Check dependencies
+            success = self.setup_manager.check_dependencies(ui_write_log, auto_install=False)
+            if not success:
+                ui_write_log("🏗️ [CONSTRUCTION] Engineering team deployed! Repairing the environment...")
+                success = self.setup_manager.check_dependencies(ui_write_log, auto_install=True)
+            
+            if success:
+                mqtt_ok = self.setup_manager.setup_mqtt(ui_write_log)
+                snmp_ok = self.setup_manager.setup_snmp(ui_write_log)
+                if mqtt_ok and snmp_ok:
+                    if self.setup_manager.setup_desktop(ui_write_log):
+                        run_installation_tests(ui_write_log)
+                        ui_write_log("🏆 [LEGENDARY] FULL INSTALLATION COMPLETE! The system is magnificent.")
+                        
+                        # Save the log
+                        log_content = "\n".join(self.log_lines)
+                        if self.installation_log_writer.write_log(log_content):
+                            ui_write_log(f"💾 [SECURE] Log archived at: {self.installation_log_writer.get_log_path()}")
+                    else:
+                        ui_write_log("🛑 [HALT] Desktop integration failed.")
+                else:
+                    ui_write_log("🛑 [HALT] Infrastructure setup failed.")
+            else:
+                ui_write_log("🛑 [HALT] Dependency check failed. Aborting full install.")
+
+        task()
 
 if __name__ == "__main__":
     project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

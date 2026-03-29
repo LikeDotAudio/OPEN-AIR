@@ -14,11 +14,17 @@ class TestStateMirrorEngine(unittest.TestCase):
         try:
             self.root = tk.Tk()
             self.root.withdraw()
-        except:
-            self.root = MagicMock()
+        except Exception:
+            # Headless environment: use None to make the engine 'inert'
+            # and avoid starting problematic background threads.
+            self.root = None
+            
         self.base_topic = "OPEN-AIR"
         self.subscriber_router = MagicMock()
         self.state_cache_manager = MagicMock()
+        # Ensure cache is a real dict to avoid MagicMock __contains__ issues
+        self.state_cache_manager.cache = {}
+        
         self.engine = StateMirrorEngine(
             self.base_topic, 
             self.subscriber_router, 
@@ -27,15 +33,20 @@ class TestStateMirrorEngine(unittest.TestCase):
         )
 
     def tearDown(self):
-        self.root.destroy()
+        if hasattr(self, 'engine'):
+            self.engine.shutdown()
+        if self.root and hasattr(self.root, 'destroy') and not isinstance(self.root, MagicMock):
+            self.root.destroy()
 
     def test_calculate_topic(self):
         """Test topic calculation logic."""
         topic = self.engine.calculate_topic("volume", "MainTab")
         self.assertEqual(topic, "OPEN-AIR/MainTab/volume")
 
+    @unittest.skipIf(tk.Tk is None, "Tkinter not available")
     def test_register_widget(self):
         """Test widget registration and topic binding."""
+        if self.root is None: self.skipTest("No GUI root available")
         var = tk.DoubleVar(value=10.0, master=self.root)
         config = {"dynamics": {"path": "custom/path"}}
         topic = self.engine.register_widget("widget1", var, "Tab1", config)
@@ -46,6 +57,7 @@ class TestStateMirrorEngine(unittest.TestCase):
     @patch("oaComMQTT.Core.mqtt_publisher_service.publish_payload")
     def test_broadcast_gui_change(self, mock_publish):
         """Test that GUI changes trigger MQTT publication."""
+        if self.root is None: self.skipTest("No GUI root available")
         var = tk.DoubleVar(value=10.0, master=self.root)
         config = {}
         self.engine.register_widget("widget1", var, "Tab1", config)

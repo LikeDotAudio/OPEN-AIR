@@ -265,6 +265,7 @@ class HTMLGenerator:
             <button class="tab-btn" onclick="openTab(event, 'ErrorLogs')">Error Logs</button>
             <button class="tab-btn" onclick="openTab(event, 'RunLogs')">Application Run Logs</button>
             <button class="tab-btn" onclick="openTab(event, 'FlameGraph')">Flame Graph</button>
+            <button class="tab-btn" onclick="openTab(event, 'Dependencies')">Dependencies</button>
         </div>
 
         <!-- TAB 1: Test Results -->
@@ -321,6 +322,11 @@ class HTMLGenerator:
         <div id="FlameGraph" class="tab-content">
             {flamegraph_html}
         </div>
+
+        <!-- TAB 7: Dependencies -->
+        <div id="Dependencies" class="tab-content">
+            {dependencies_html}
+        </div>
     </div>
 </body>
 </html>
@@ -355,7 +361,8 @@ class HTMLGenerator:
             buglog_html=extra_tabs.get("buglog", ""),
             error_html=extra_tabs.get("error", ""),
             runlog_html=extra_tabs.get("runlog", ""),
-            flamegraph_html=extra_tabs.get("flamegraph", "No FlameGraph data available.")
+            flamegraph_html=extra_tabs.get("flamegraph", "No FlameGraph data available."),
+            dependencies_html=extra_tabs.get("dependencies", "No Dependency data available.")
         )
         
         with open(html_path, "w") as f:

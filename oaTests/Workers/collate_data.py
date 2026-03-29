@@ -18,7 +18,8 @@ def collate_extra_tabs(project_root):
             ReportBuilder_ErrorLog, 
             ReportBuilder_RunLog, 
             ReportBuilder_FlameGraph,
-            ReportBuilder_BugLog
+            ReportBuilder_BugLog,
+            ReportBuilder_Dependencies
         )
         
         audit_html = ReportBuilder_Audits.build_tab(os.path.join(project_root, "oaDataAudits"))
@@ -27,6 +28,7 @@ def collate_extra_tabs(project_root):
         runlog_html = ReportBuilder_RunLog.build_tab(os.path.join(project_root, "oaDataLogs", "ApplicationRunLog"))
         buglog_html = ReportBuilder_BugLog.build_tab(os.path.join(project_root, "oaDataLogs", "BugLog"))
         flamegraph_html = ReportBuilder_FlameGraph.build_tab(project_root)
+        dependencies_html = ReportBuilder_Dependencies.build_tab()
         
         return {
             "audit": audit_html,
@@ -34,7 +36,8 @@ def collate_extra_tabs(project_root):
             "error": error_html,
             "runlog": runlog_html,
             "buglog": buglog_html,
-            "flamegraph": flamegraph_html
+            "flamegraph": flamegraph_html,
+            "dependencies": dependencies_html
         }
     except Exception as e:
         print(f"⚠️ Error during data collation: {e}")

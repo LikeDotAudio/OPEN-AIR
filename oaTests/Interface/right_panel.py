@@ -15,6 +15,7 @@ class RightPanel(Vertical):
         yield Button("CLEAR LOGS", id="btn_clear_logs", variant="warning")
         yield Button("CLEAR AUDITS", id="btn_clear_audits", variant="warning")
         yield Button("CLEAR REPORTS", id="btn_clear_reports", variant="warning")
+        yield Button("CLEAR JSON LINES", id="btn_clear_jsonlines", variant="warning")
         yield Button("CLEAR MQTT", id="btn_clear_mqtt", variant="warning")
         yield Button("CLEAR FLAMEGRAPH", id="btn_clear_flame", variant="warning")
         yield Button("DELETE CACHE", id="btn_clear_cache", variant="error")

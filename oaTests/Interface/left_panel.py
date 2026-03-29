@@ -4,7 +4,16 @@ from textual.containers import Vertical, Horizontal
 
 class LeftPanel(Vertical):
     def compose(self):
+        yield Label("Installation Controls", classes="status-label")
+        yield Button("RUN DEPENDENCY CHECK", id="btn_deps", variant="primary")
+        yield Button("CLEAN INSTALLATION", id="btn_clean", variant="error")
+        yield Button("SETUP MQTT/SNMP", id="btn_infra", variant="primary")
+        yield Button("SETUP DESKTOP ICON", id="btn_desktop", variant="primary")
+        yield Button("RUN VALIDATION TESTS", id="btn_tests_install", variant="primary")
+        yield Button("FULL INSTALLATION", id="btn_full", variant="success")
+
         yield Label("Debug Flags", classes="status-label")
+
 
         yield Button("FORCE DEBUG ON", id="btn_debug_on", variant="warning")
         yield Button("FORCE DEBUG OFF", id="btn_debug_off", variant="warning")

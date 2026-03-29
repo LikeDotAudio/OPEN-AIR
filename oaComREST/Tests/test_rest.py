@@ -10,7 +10,7 @@ from unittest.mock import MagicMock
 # Note: These tests require 'fastapi' and 'httpx' to be installed.
 try:
     from fastapi.testclient import TestClient
-    from ..Interface.routes import create_router
+    from oaComREST.Interface.routes import create_router
     DEPENDENCIES_AVAILABLE = True
 except ImportError:
     DEPENDENCIES_AVAILABLE = False

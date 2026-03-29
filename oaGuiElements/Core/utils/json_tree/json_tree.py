@@ -9,7 +9,7 @@ from tkinter import ttk, filedialog
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = False    
+BUILDER_DEBUG = True    
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -158,6 +158,12 @@ class JsonTreeWidget(
 
 @WidgetRegistry.register("_DataJsonTree")
 class BuilderDataJsonTreeCreator(TransparencyMixin):
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderDataJsonTreeCreator()
+        return creator.make_data_json_tree(parent_widget, config_data, context, **kwargs)
+
     def make_data_json_tree(self, parent_widget, config_data, context=None, **kwargs):
         if context:
             state_mirror_engine = context.state_mirror_engine
@@ -170,8 +176,8 @@ class BuilderDataJsonTreeCreator(TransparencyMixin):
 
         widget = JsonTreeWidget(parent_widget, config_data, state_mirror_engine, base_mqtt_topic)
         
-        if hasattr(builder_instance, '_apply_transparency'):
-            TransparencyManager.apply_transparency(widget, None, config_data, builder_instance)
+        if hasattr(self, '_apply_transparency'):
+            self._apply_transparency(widget, None, config_data, builder_instance)
         
         path = config_data.get("path")
         if path and state_mirror_engine:

@@ -33,7 +33,11 @@ def normalize_and_ingest(
     meta = metadata or {}
 
     # --- STATE DELTA CHECK (Loop Prevention) ---
-    if state_cache and not meta.get("boot"):
+    # ⚡ EXCEPTION: Monitor and Firehose topics are event streams, not state. 
+    # They should NEVER be dropped by dead-band.
+    is_event_stream = any(x in str(topic) for x in ["/Monitor/", "/Firehose/"])
+    
+    if state_cache and not meta.get("boot") and not is_event_stream:
         cached_val = state_cache.get_cached_value(topic)
         if cached_val == value:
             if LOCAL_DEBUG:

@@ -18,7 +18,7 @@ from oaComSNMP.Constants.snmp_constants import THREAD_JOIN_TIMEOUT, LOG_POLLING_
 from oaComBroker.Managers.protocol_router import ProtocolRouter # Assuming this import path is correct
 
 # LOCAL_DEBUG can be set or passed if needed
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 
 class SnmpLogMonitor:
     """
@@ -90,9 +90,9 @@ class SnmpLogMonitor:
                                 ProtocolRouter.get_instance().ingest("SNMP", oid, val, meta)
 
                                 # Notify monitors and update state cache
-                                self._notify_monitor("RX_SET", oid, val)
+                                topic = f"OPEN-AIR/SNMP/{oid}" # Construct topic
+                                self._notify_monitor("RX_SET", oid, val, topic, meta)
                                 if self.state_cache_manager:
-                                    topic = f"OPEN-AIR/SNMP/{oid}" # Construct topic
                                     self.state_cache_manager.handle_external_update(topic, val, source="SNMP", metadata=meta)
                         f.seek(0) # Rewind to beginning of file
                         f.truncate() # Clear the file content after processing

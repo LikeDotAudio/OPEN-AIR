@@ -10,7 +10,7 @@ from tkinter import ttk
 import inspect
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -36,6 +36,14 @@ class BuilderSliderValueCreator(TransparencyMixin):
     A mixin class that provides the functionality for creating a
     slider widget combined with a text entry box.
     """
+
+    def __init__(self):
+        self.topic_widgets = {}
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderSliderValueCreator()
+        return creator.make_slider_value(parent_widget, config_data, context, **kwargs)
 
     # Creates a composite widget consisting of a slider and a text entry box.
     # This method sets up a slider for adjusting a numerical value, along with a text entry
@@ -209,7 +217,8 @@ class BuilderSliderValueCreator(TransparencyMixin):
             entry_value.trace_add("write", _update_slider_from_entry_var)
 
             if path:
-                self.topic_widgets[path] = (entry_value, slider)
+                if hasattr(builder_instance, "topic_widgets"):
+                    builder_instance.topic_widgets[path] = (entry_value, slider)
 
                 # --- New MQTT Wiring ---
                 widget_id = path

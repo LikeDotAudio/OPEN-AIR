@@ -10,7 +10,7 @@ from .event_bus import event_bus
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 # Specialized logger for StateManager to allow categorized filtering
 sm_logger = logger.bind(category="STATE_MANAGER")
@@ -30,7 +30,7 @@ class StateManager:
     def initialize(self, initial_data, file_path=None):
         """Initializes the state with starting JSON data."""
         sm_logger.info(f"🧠 StateManager: Initialization started. Path: {file_path}")
-        self._json_data = copy.deepcopy(initial_data)
+        self._json_data = copy.deepcopy(initial_data) if initial_data is not None else {}
         self._file_path = file_path
         
         root_keys = list(self._json_data.keys())

@@ -8,7 +8,7 @@ import tkinter as tk
 import math
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -52,21 +52,21 @@ class RotarySelectorSwitch(CustomKnobFrame):
         sel_text = str(self.positions[idx])
         
         colors = {
-            "fg": self.widget_config["fg_color"],
-            "accent": self.widget_config["accent_color"],
-            "indicator": self.widget_config["indicator_color"],
-            "secondary": self.widget_config["secondary_color"]
+            "fg": self.widget_config.get("fg_color", self.theme_colors.get("fg", "white")),
+            "accent": self.widget_config.get("accent_color", self.theme_colors.get("accent", "cyan")),
+            "indicator": self.widget_config.get("indicator_color", "yellow"),
+            "secondary": self.widget_config.get("secondary_color", self.theme_colors.get("secondary", "gray"))
         }
         
         options = {
-            "shape": self.widget_config["shape"],
-            "pointer_style": self.widget_config["pointer_style"],
-            "knob_style": self.widget_config["knob_style"],
-            "no_center": self.widget_config["no_center"],
+            "shape": self.widget_config.get("shape", "circle"),
+            "pointer_style": self.widget_config.get("pointer_style", "line"),
+            "knob_style": self.widget_config.get("knob_style", "standard"),
+            "no_center": self.widget_config.get("no_center", False),
             "continuous": self.continuous,
             "main_label": self.label_text,
             "selection_text": sel_text,
-            "show_label": self.widget_config["show_label"]
+            "show_label": self.widget_config.get("show_label", True)
         }
         
         self._draw_selector(self.canvas, self.winfo_width(), self.winfo_height(), idx, self.positions, colors, options)

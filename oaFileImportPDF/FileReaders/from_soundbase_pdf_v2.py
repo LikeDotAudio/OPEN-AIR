@@ -10,7 +10,7 @@ import numpy as np
 import pdfplumber
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 
@@ -21,6 +21,18 @@ VERSION = "20251129.120000.1"
 HEADERS = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
 
 def convert_soundbase_pdf_v2_to_markers(pdf_file_path):
+    """
+    Standardized entry point for SoundBase PDF V2 conversion.
+    """
+    return _internal_convert_soundbase_pdf_v2_to_markers(pdf_file_path)
+
+def Marker_convert_SB_v2_PDF_File_report_to_csv(pdf_file_path):
+    """
+    Backward compatibility alias.
+    """
+    return convert_soundbase_pdf_v2_to_markers(pdf_file_path)
+
+def _internal_convert_soundbase_pdf_v2_to_markers(pdf_file_path):
     """
     Parses a PDF file (Sound Base v2 format) and extracts frequency data, converting it
     into a standardized marker format.

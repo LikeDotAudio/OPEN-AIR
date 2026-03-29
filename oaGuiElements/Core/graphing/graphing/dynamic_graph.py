@@ -10,7 +10,7 @@ import time
 from typing import Dict, Any
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = False
+BUILDER_DEBUG = True
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -134,6 +134,11 @@ class FluxPlotter(
             return
 
         if BUILDER_DEBUG: builder_logger.trace(f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' resize event: {event.width}x{event.height}")
+        
+        # 🛡️ ZERO-DIMENSION GUARD: Ignore events where one or both dimensions are 1px (common during layout initialization).
+        if event.width <= 1 or event.height <= 1:
+            return
+
         last_w, last_h = getattr(self, "_last_resize_dim", (0, 0))
         
         # 🛡️ JITTER FILTER: Increased threshold to 10px to stop minor rounding-error vibrations.

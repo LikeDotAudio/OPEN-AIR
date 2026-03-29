@@ -11,7 +11,7 @@ import time
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    
+LOCAL_DEBUG = True    
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 

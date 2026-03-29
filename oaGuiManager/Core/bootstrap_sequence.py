@@ -74,11 +74,12 @@ class AsyncBootstrapEngine:
         protocol_router.start()
 
     def _start_optional_services(self):
-        """Starts conditional services like OSC, SNMP, and MIDI if configured."""
+        """Starts conditional services like OSC, SNMP, MIDI, and REST if configured."""
         service_map = {
             "osc_manager": "OSC",
             "snmp_manager": "SNMP",
-            "midi_manager": "MIDI"
+            "midi_manager": "MIDI",
+            "rest_manager": "REST API"
         }
         
         for key, display_name in service_map.items():

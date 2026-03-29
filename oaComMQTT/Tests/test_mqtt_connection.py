@@ -115,5 +115,33 @@ class TestMqttConnectionManager(unittest.TestCase):
         
         mock_worker.loop.call_soon_threadsafe.assert_called_with(mock_worker.stop_event.set)
 
+    @patch('oaComMQTT.Managers.mqtt_connection.MQTT_LOGGER')
+    @patch('threading.Thread')
+    def test_multiple_connections_are_handled(self, MockThread, MockLogger):
+        """
+        BUILD: Mock threading.Thread and the module's logger.
+        OPERATE: Call connect_to_broker twice, with the mock thread 'alive'.
+        CHECK: Assert that the thread is only started once and a warning is logged.
+        """
+        # --- First call ---
+        self.manager.connect_to_broker(address="1.2.3.4", port=1883)
+        
+        # Assert the first call starts the thread
+        MockThread.assert_called_once()
+        MockThread.return_value.start.assert_called_once()
+
+        # --- Second call ---
+        # Simulate the thread being alive
+        self.manager._thread = MockThread.return_value
+        MockThread.return_value.is_alive.return_value = True
+
+        self.manager.connect_to_broker(address="1.2.3.4", port=1883)
+        
+        # Assert start was NOT called again
+        MockThread.return_value.start.assert_called_once()
+        
+        # Assert that the warning was logged
+        MockLogger.warning.assert_called_once_with("MQTT: Connection attempt while already running.")
+
 if __name__ == '__main__':
     unittest.main()

@@ -50,7 +50,7 @@ from oaOchestration.Core.path_initializer import initialize_paths
 from oaConfiguration.FileReaders.config_reader import Config
 
 # _DEBUG: Internal flag to toggle verbose supervisor logging.
-_DEBUG = False
+_DEBUG = True
 
 def main():
     """

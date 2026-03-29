@@ -1,74 +1,168 @@
 # oaComREST/Interface/routes.py
 # Author: Anthony Peter Kuzub
-# Version: 20260326.1200.1
+# Version: 20260328.1400.1
 #
-# Description: API endpoint definitions for FastAPI.
+# Description: Dynamic API routes with an interactive HTML Tree Explorer.
 
 try:
-    from fastapi import APIRouter, HTTPException, Path, Body
+    from fastapi import APIRouter, HTTPException, Path, Body, Request
+    from fastapi.responses import HTMLResponse, JSONResponse
 except ImportError:
     pass
 
-from typing import Any, Dict
+from typing import Any, Dict, List
 from ..Constants.rest_constants import LOCAL_DEBUG
 from loguru import logger
 
 def create_router(state_cache_manager, protocol_router):
     """
-    Creates and configures the FastAPI router with system dependencies.
+    Creates dynamic routes that mirror the system's MQTT topic tree.
+    Includes a Visual Tree Explorer for human interaction.
     """
-    router = APIRouter(prefix="/api/v1")
+    router = APIRouter()
 
-    @router.get("/state/{topic_path:path}")
-    async def get_state(topic_path: str = Path(..., description="The MQTT-style topic path")):
-        """Fetches the current state for a given topic from the cache."""
-        # Normalize the topic to ensure it starts with the system root.
-        full_topic = topic_path
-        if not full_topic.startswith("OPEN-AIR"):
-            full_topic = f"OPEN-AIR/{topic_path}"
-            
-        value = state_cache_manager.get_cached_value(full_topic)
-        if value is None:
-            raise HTTPException(status_code=404, detail=f"Topic '{full_topic}' not found in cache.")
+    def get_children(prefix: str) -> List[str]:
+        """Helper to find immediate sub-topics/children for a given prefix."""
+        if prefix and not prefix.endswith('/'): prefix += '/'
         
-        return {"topic": full_topic, "val": value}
+        children = set()
+        for topic in state_cache_manager.cache.keys():
+            if topic.startswith(prefix):
+                relative = topic[len(prefix):]
+                parts = relative.split('/')
+                if parts[0]:
+                    children.add(parts[0])
+        return sorted(list(children))
 
-    @router.post("/state/{topic_path:path}")
-    async def set_state(
-        topic_path: str = Path(..., description="The MQTT-style topic path"),
-        payload: Dict[str, Any] = Body(..., description="The new state value and optional metadata")
-    ):
-        """Injects a new state value into the protocol router."""
-        full_topic = topic_path
-        if not full_topic.startswith("OPEN-AIR"):
-            full_topic = f"OPEN-AIR/{topic_path}"
-            
-        val = payload.get("val")
-        if val is None and "val" not in payload:
-             # If the payload is just a single value (not a dict with 'val'), treat the whole thing as 'val'
-             val = payload
-             
-        # Log the REST command.
-        if LOCAL_DEBUG:
-            logger.debug(f"📡📥📥 [REST] POST to {full_topic}: {val}")
-            
-        # Pushes to ProtocolRouter for propagation.
-        protocol_router.ingest(
-            transport_source="REST",
-            topic=full_topic,
-            value=val,
-            metadata=payload.get("meta")
-        )
+    @router.get("/", response_class=HTMLResponse)
+    async def root_explorer(request: Request):
+        """Interactive HTML Tree Explorer for the OPEN-AIR System."""
         
-        return {"status": "success", "topic": full_topic, "val": val}
+        # If client wants JSON (e.g. scripts), give them the raw root data
+        if "text/html" not in request.headers.get("Accept", ""):
+            roots = set()
+            for topic in state_cache_manager.cache.keys():
+                roots.add(topic.split('/')[0])
+            return JSONResponse({
+                "system": "OPEN-AIR",
+                "root_namespaces": sorted(list(roots)),
+                "links": {"docs": "/docs", "explorer": "/"}
+            })
 
-    @router.get("/system/status")
+        # Generate HTML Explorer
+        roots = sorted(list(set(topic.split('/')[0] for topic in state_cache_manager.cache.keys())))
+        
+        html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>OPEN-AIR | API Explorer</title>
+            <style>
+                body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1a1a1a; color: #dcdcdc; margin: 0; padding: 20px; }}
+                .container {{ max-width: 900px; margin: auto; background: #2b2b2b; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }}
+                h1 {{ color: #f4902c; border-bottom: 1px solid #444; padding-bottom: 10px; display: flex; align-items: center; }}
+                .nav-bar {{ margin-bottom: 20px; display: flex; gap: 10px; }}
+                .btn {{ background: #444; color: #fff; padding: 8px 15px; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: bold; border: 1px solid #555; }}
+                .btn:hover {{ background: #555; border-color: #f4902c; }}
+                .btn-primary {{ background: #f4902c; color: #1a1a1a; }}
+                .tree-node {{ margin-left: 20px; border-left: 1px solid #444; padding-left: 15px; margin-top: 5px; }}
+                .folder {{ font-weight: bold; color: #33A1FD; cursor: pointer; }}
+                .leaf {{ color: #6a9955; }}
+                .topic-link {{ text-decoration: none; color: inherit; }}
+                .topic-link:hover {{ text-decoration: underline; }}
+                .meta {{ font-size: 11px; color: #888; font-family: monospace; }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>🌐 OPEN-AIR SYSTEM EXPLORER</h1>
+                <div class="nav-bar">
+                    <a href="/" class="btn btn-primary">🏠 ROOT INDEX</a>
+                    <a href="/docs" class="btn">📚 API DOCS (SWAGGER)</a>
+                    <a href="/api/v1/system/status" class="btn">🚦 SYSTEM STATUS</a>
+                </div>
+                <p>Browsing the live MQTT Topic Tree. Click any folder to descend or a leaf to see data.</p>
+                
+                <div class="tree-root">
+                    <strong>/ (Root)</strong>
+                    {"".join([f'<div class="tree-node"><span class="folder">📁</span> <a class="topic-link folder" href="/{r}">{r}</a></div>' for r in roots])}
+                </div>
+                
+                <div style="margin-top: 40px; font-size: 10px; color: #555; text-align: center; border-top: 1px solid #333; padding-top: 10px;">
+                    OPEN-AIR PARTITIONED ARCHITECTURE | REST-TO-MQTT BRIDGE v1.0
+                </div>
+            </div>
+        </body>
+        </html>
+        """
+        return HTMLResponse(content=html_content)
+
+    @router.get("/{topic_path:path}")
+    async def dynamic_get(request: Request, topic_path: str = Path(..., description="The MQTT topic path")):
+        """
+        Dynamic Resolver:
+        - If LEAF: Returns data (JSON or HTML view).
+        - If FOLDER: Returns children (JSON or HTML Tree).
+        """
+        is_html = "text/html" in request.headers.get("Accept", "")
+        
+        # 1. Check for Exact Match (Leaf Node)
+        value = state_cache_manager.get_cached_value(topic_path)
+        if value is not None:
+            if not is_html:
+                return {"type": "leaf", "topic": topic_path, "val": value}
+            
+            # Simple HTML Leaf View
+            return HTMLResponse(f"""
+                <body style="background:#1a1a1a; color:#dcdcdc; font-family:sans-serif; padding:40px;">
+                    <div style="max-width:600px; margin:auto; background:#2b2b2b; padding:20px; border-radius:8px; border-left: 5px solid #6a9955;">
+                        <h2 style="color:#6a9955;">🍃 LEAF TOPIC</h2>
+                        <code style="display:block; background:#111; padding:15px; color:#f4902c; font-size:1.2em;">{topic_path}</code>
+                        <hr style="border:0; border-top:1px solid #444; margin:20px 0;">
+                        <pre style="font-size:1.5em; color:#fff;">{value}</pre>
+                        <a href="/{topic_path.rsplit('/', 1)[0] if '/' in topic_path else ''}" style="color:#33A1FD; text-decoration:none;">⬅️ Back to folder</a>
+                    </div>
+                </body>
+            """)
+
+        # 2. Check for Prefix (Folder Node)
+        if state_cache_manager.check_prefix_exists(topic_path):
+            children = get_children(topic_path)
+            if not is_html:
+                return {
+                    "type": "folder",
+                    "path": topic_path,
+                    "children": children,
+                    "child_urls": [f"/{topic_path.rstrip('/')}/{c}" for c in children]
+                }
+
+            # HTML Folder View
+            child_html = "".join([f'<div style="margin:10px 0; padding-left:20px; border-left:1px solid #444;">📁 <a href="/{topic_path.rstrip("/")}/{c}" style="color:#33A1FD; text-decoration:none; font-weight:bold;">{c}</a></div>' for c in children])
+            return HTMLResponse(f"""
+                <body style="background:#1a1a1a; color:#dcdcdc; font-family:sans-serif; padding:40px;">
+                    <div style="max-width:800px; margin:auto; background:#2b2b2b; padding:20px; border-radius:8px; border-left: 5px solid #33A1FD;">
+                        <h2 style="color:#33A1FD;">📂 FOLDER: {topic_path}</h2>
+                        <div style="margin:20px 0;">
+                            <a href="/{topic_path.rsplit('/', 1)[0] if '/' in topic_path else ''}" style="background:#444; color:#fff; padding:5px 10px; text-decoration:none; border-radius:4px; font-size:12px;">⬆️ LEVEL UP</a>
+                            <a href="/" style="background:#444; color:#fff; padding:5px 10px; text-decoration:none; border-radius:4px; font-size:12px; margin-left:10px;">🏠 ROOT</a>
+                        </div>
+                        <div style="background:#111; padding:15px; border-radius:4px;">
+                            {child_html if children else "<i>Empty Namespace</i>"}
+                        </div>
+                    </div>
+                </body>
+            """)
+
+        raise HTTPException(status_code=404, detail=f"Path '{topic_path}' not found.")
+
+    @router.post("/{topic_path:path}")
+    async def dynamic_post(topic_path: str = Path(...), payload: Any = Body(...)):
+        val = payload.get("val", payload) if isinstance(payload, dict) else payload
+        protocol_router.ingest(transport_source="REST", topic=topic_path, value=val)
+        return {"status": "success", "topic": topic_path, "val": val}
+
+    @router.get("/api/v1/system/status")
     async def get_system_status():
-        """Returns high-level system health metrics."""
-        return {
-            "status": "operational",
-            "partition": "CORE",
-            "active_protocols": ["MQTT", "REST"] # Simplified for now
-        }
+        return {"status": "operational", "partition": "CORE", "active_protocols": ["MQTT", "REST", "OSC", "SNMP", "MIDI"]}
 
     return router

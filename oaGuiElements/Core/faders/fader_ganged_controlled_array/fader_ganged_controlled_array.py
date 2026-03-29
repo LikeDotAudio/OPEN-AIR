@@ -9,7 +9,7 @@ from tkinter import ttk
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = False    
+BUILDER_DEBUG = True    
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -108,12 +108,10 @@ class CompositeFaderFrame(
         self.canvas.bind("<Button-1>", self._on_press)
         self.canvas.bind("<B1-Motion>", self._on_drag)
         self.canvas.bind("<ButtonRelease-1>", self._on_release)
-        self.canvas.bind("<Button-3>", self._toggle_mode) 
-        self.canvas.bind("<Double-Button-1>", self._toggle_mode) 
+        self.canvas.bind("<Double-Button-1>", self._toggle_mode)
         self.canvas.bind("<Configure>", self._on_resize)
         self.canvas.bind("<Enter>", self._bind_mousewheel)
         self.canvas.bind("<Leave>", self._unbind_mousewheel)
-
         self._draw()
 
 @WidgetRegistry.register("_CompositeFader")

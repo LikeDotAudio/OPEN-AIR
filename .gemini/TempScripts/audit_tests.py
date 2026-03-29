@@ -18,7 +18,7 @@ for mod in modules:
     if has_test_dir:
         test_files = list(test_dir.glob('test_*.py')) + list(test_dir.glob('*_tester.py'))
     
-    readers = list(reader_dir.glob('*.py')) if reader_dir.exists() else []
+    readers = [f for f in reader_dir.glob('*.py') if f.name != '__init__.py'] if reader_dir.exists() else []
     
     sample_assets = []
     if has_test_dir:

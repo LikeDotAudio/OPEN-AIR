@@ -100,8 +100,8 @@ class SnmpLog(tk.Frame, TransparencyMixin):
         ttk.Button(btn_frame, text="Clear Tracker", command=self.clear_log).pack(side=tk.LEFT, padx=10)
 
     def on_snmp_traffic(self, direction, oid, value, topic, metadata=None):
-        # We only care about TX_DUMP (Current state) for the delta monitor
-        if direction != "TX_DUMP": return
+        # Handle both periodic dumps and real-time changes
+        if direction not in ["TX_DUMP", "RX", "RX_SET"]: return
         
         self.after(0, lambda: self._update_oid_state(oid, value, topic, metadata))
 

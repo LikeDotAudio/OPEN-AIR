@@ -15,7 +15,7 @@ import sys
 import subprocess
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from loguru import logger
 
 # --- Constants ---
@@ -47,6 +47,8 @@ EXTERNAL_PACKAGES = {
     "mido": "mido",
     "python-rtmidi": "rtmidi",
     "textual": "textual",
+    "fastapi": "fastapi",
+    "uvicorn": "uvicorn",
 }
 
 # BUILTIN_PACKAGES: Standard library modules verified for baseline environment.

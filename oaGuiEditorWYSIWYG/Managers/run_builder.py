@@ -21,7 +21,7 @@ from oaLogging.Core.logger import GUI_LOGGER as logger
 from oaStyle.Managers.theme_applier import apply_theme
 from oaOchestration.Core.path_initializer import initialize_paths
 
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 def main():
     """Main entry point for the standalone editor program."""

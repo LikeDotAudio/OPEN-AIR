@@ -11,7 +11,7 @@ from tkinter import ttk
 from pathlib import Path
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import builder_logger
 
 class BuilderContextMenuMixin:
@@ -43,8 +43,12 @@ class BuilderContextMenuMixin:
 
     def _on_right_click(self, event):
         """Displays context menu on right click."""
+        if LOCAL_DEBUG:
+            builder_logger.debug(f"🍔🔽🖱️ Right-click detected on widget: {event.widget}")
         try:
             self.context_menu.tk_popup(event.x_root, event.y_root)
+        except Exception as e:
+            builder_logger.exception(f"🍔🔽🖱️💥 Failed to show context menu: {e}")
         finally:
             self.context_menu.grab_release()
 

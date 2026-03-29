@@ -35,16 +35,80 @@ import time
 import subprocess
 import pathlib
 import signal
+import psutil
 
 # Ensure the root directory is in the search path for local module imports.
 current_dir = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(current_dir))
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory, SYSTEM_LOGGER as logger
-from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
+from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR, DATA_RUNNING_DIR
 from oaConfiguration.FileReaders.config_reader import Config
+
+def perform_preflight_checks():
+    """
+    Verifies system integrity before launching partitions.
+    Checks for lingering processes and improper previous shutdowns.
+    """
+    logger.info("🔍 [SUPERVISOR] Performing pre-flight integrity checks...")
+    
+    # 1. Check for improper shutdown (Lock File)
+    lock_file = DATA_RUNNING_DIR / "SYSTEM.lock"
+    if lock_file.exists():
+        logger.warning("⚠️ [INTEGRITY] Found leftover lock-file from previous session.")
+        logger.warning("⚠️ [INTEGRITY] System was likely not destroyed properly.")
+        try:
+            lock_file.unlink()
+            logger.info("🧹 [INTEGRITY] Stale lock-file cleared.")
+        except Exception as e:
+            logger.error(f"❌ [INTEGRITY] Failed to clear lock-file: {e}")
+    else:
+        logger.success("✅ [INTEGRITY] Previous session was destroyed properly.")
+
+    # 2. Check for lingering child processes
+    current_pid = os.getpid()
+    zombies_found = False
+    for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+        try:
+            # Skip ourselves
+            if proc.info['pid'] == current_pid:
+                continue
+            
+            cmdline = proc.info['cmdline']
+            if cmdline and any(s in ' '.join(cmdline) for s in ["open_air_core.py", "open_air_ui.py"]):
+                logger.warning(f"🕵️ [INTEGRITY] Found lingering process: {proc.info['name']} (PID: {proc.info['pid']})")
+                proc.terminate()
+                zombies_found = True
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            continue
+    
+    if zombies_found:
+        logger.info("🧹 [INTEGRITY] Lingering processes signaled to terminate.")
+        time.sleep(1.0)
+    else:
+        logger.success("✅ [INTEGRITY] No lingering child processes detected.")
+
+def create_system_lock():
+    """Creates an ephemeral lock-file for the current session."""
+    lock_file = DATA_RUNNING_DIR / "SYSTEM.lock"
+    try:
+        with open(lock_file, "w") as f:
+            f.write(str(os.getpid()))
+        logger.debug(f"🔒 [SUPERVISOR] System lock established (PID: {os.getpid()})")
+    except Exception as e:
+        logger.error(f"❌ [SUPERVISOR] Failed to create system lock: {e}")
+
+def release_system_lock():
+    """Removes the current session's lock-file."""
+    lock_file = DATA_RUNNING_DIR / "SYSTEM.lock"
+    if lock_file.exists():
+        try:
+            lock_file.unlink()
+            logger.debug("🔓 [SUPERVISOR] System lock released.")
+        except Exception as e:
+            logger.error(f"❌ [SUPERVISOR] Failed to release system lock: {e}")
 
 def main():
     """
@@ -66,6 +130,10 @@ def main():
     initialize_paths()
     log_dir = DATA_LOGS_DIR
     set_log_directory(log_dir, partition="SUP")
+    
+    # ⚡ INTEGRITY: Verify previous session and establish current lock
+    perform_preflight_checks()
+    create_system_lock()
     
     app_config = Config.get_instance()
     is_mission_critical = app_config.MISSION_CRITICAL_MODE
@@ -168,6 +236,10 @@ def main():
             if p.poll() is None:
                 p.kill()
                 p.wait()
+    
+    # ⚡ INTEGRITY: Final step is to release the session lock
+    release_system_lock()
+
     if LOCAL_DEBUG:
         logger.success("Supervisor shutdown complete. Goodbye.")
 

@@ -7,7 +7,7 @@
 from .transparency import TransparencyManager
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import GUI_LOGGER
 from loguru import logger
 

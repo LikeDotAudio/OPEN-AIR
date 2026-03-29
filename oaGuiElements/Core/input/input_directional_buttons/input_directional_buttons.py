@@ -11,7 +11,7 @@ import orjson
 import time
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = False    # Set to False in production, True for dev on this file
+BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -33,9 +33,15 @@ class BuilderInputDirectionalButtonsCreator(TransparencyMixin):
     #     **kwargs: Additional keyword arguments.
     # Outputs:
     #     tk.Frame: The created frame containing the directional buttons.
-        def make_input_directional_buttons(
-            self, parent_widget, config_data, context=None, **kwargs
-        ):  # Updated signature
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderInputDirectionalButtonsCreator()
+        return creator.make_input_directional_buttons(parent_widget, config_data, context, **kwargs)
+
+    def make_input_directional_buttons(
+        self, parent_widget, config_data, context=None, **kwargs
+    ):  # Updated signature
             """Creates a set of directional buttons (up, down, left, right)."""
             if BUILDER_DEBUG: 
                 builder_logger.trace(f"🔬🏗️🕹️ [BUILDER] Entering make_input_directional_buttons")

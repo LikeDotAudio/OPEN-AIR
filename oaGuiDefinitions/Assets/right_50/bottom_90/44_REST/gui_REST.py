@@ -1,9 +1,8 @@
 # 44_REST/gui_REST.py
 # Author: Anthony Peter Kuzub
-# Version: 20260326.1300.1
+# Version: 20260328.1430.1
 #
-# Description: Advanced REST API Monitor & Control Hub.
-# Provides service management, route inspection, and live traffic logging.
+# Description: Advanced REST API Monitor & Control Hub with Payload Logging.
 
 import tkinter as tk
 from tkinter import ttk
@@ -26,7 +25,7 @@ if str(root_path) not in sys.path:
 import oaComREST.Entry as REST_MODULE
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaLogging.Entry import logger
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
@@ -88,8 +87,12 @@ class RestDashboard(tk.Frame, TransparencyMixin):
                                  command=self._stop_service, width=10, relief="raised", bd=2)
         self.btn_stop.pack(side=tk.LEFT, padx=5, pady=5)
 
-        self.btn_browser = tk.Button(ctrl_bar, text="🌍 OPEN API DOCS", bg="#333344", fg="#ffffff", font=("Helvetica", 9, "bold"), 
-                                    command=self._open_browser, width=15, relief="raised", bd=2)
+        self.btn_explorer = tk.Button(ctrl_bar, text="🔭 EXPLORER", bg="#1a3a4a", fg="#ffffff", font=("Helvetica", 9, "bold"), 
+                                     command=self._open_explorer, width=12, relief="raised", bd=2)
+        self.btn_explorer.pack(side=tk.RIGHT, padx=5, pady=5)
+
+        self.btn_browser = tk.Button(ctrl_bar, text="🌍 API DOCS", bg="#333344", fg="#ffffff", font=("Helvetica", 9, "bold"), 
+                                    command=self._open_browser, width=12, relief="raised", bd=2)
         self.btn_browser.pack(side=tk.RIGHT, padx=5, pady=5)
 
         # 3. Split View (Monitor + Info)
@@ -102,7 +105,8 @@ class RestDashboard(tk.Frame, TransparencyMixin):
 
         tk.Label(monitor_frame, text="📡 LIVE TRAFFIC", font=("Helvetica", 8, "bold"), fg="#888888", bg="#2b2b2b").pack(anchor="w")
 
-        cols = ("Time", "Method", "Path", "Status")
+        # ⚡ ADDED 'Payload' column
+        cols = ("Time", "Method", "Path", "Status", "Payload")
         self.tree = ttk.Treeview(monitor_frame, columns=cols, show="headings", height=8)
         for col in cols:
             self.tree.heading(col, text=col)
@@ -110,13 +114,14 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         
         self.tree.column("Time", width=100)
         self.tree.column("Method", width=80)
-        self.tree.column("Path", width=300, anchor="w")
+        self.tree.column("Path", width=250, anchor="w")
         self.tree.column("Status", width=80)
+        self.tree.column("Payload", width=200, anchor="w")
 
         # Tags for status codes
-        self.tree.tag_configure("2xx", foreground="#00ff00") # Green
-        self.tree.tag_configure("4xx", foreground="#ffaa00") # Orange
-        self.tree.tag_configure("5xx", foreground="#ff0000") # Red
+        self.tree.tag_configure("2xx", foreground="#00ff00")
+        self.tree.tag_configure("4xx", foreground="#ffaa00")
+        self.tree.tag_configure("5xx", foreground="#ff0000")
 
         vsb = ttk.Scrollbar(monitor_frame, orient="vertical", command=self.tree.yview)
         self.tree.configure(yscrollcommand=vsb.set)
@@ -130,7 +135,6 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         tabs = ttk.Notebook(info_frame)
         tabs.pack(fill=tk.BOTH, expand=True)
 
-        # Tab 1: API Routes
         self.routes_frame = tk.Frame(tabs, bg="#1a1a1a")
         tabs.add(self.routes_frame, text=" API ROUTES ")
         
@@ -141,7 +145,6 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         self.routes_tree.column("Methods", width=150)
         self.routes_tree.pack(fill=tk.BOTH, expand=True)
 
-        # Tab 2: Tutorial / Documentation
         tutorial_frame = tk.Frame(tabs, bg="#1a1a1a")
         tabs.add(tutorial_frame, text=" QUICK START GUIDE ")
         
@@ -150,15 +153,10 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         help_text.insert(tk.END, "OPEN-AIR REST API TUTORIAL\n", "bold")
         help_text.insert(tk.END, "==========================\n\n")
         help_text.insert(tk.END, "1. GETTING STATE:\n")
-        help_text.insert(tk.END, "   GET /api/v1/state/PATH/TO/TOPIC\n")
-        help_text.insert(tk.END, "   Returns: { \"topic\": \"...\", \"val\": ... }\n\n")
+        help_text.insert(tk.END, "   GET http://HOST:PORT/PATH/TO/TOPIC\n\n")
         help_text.insert(tk.END, "2. SETTING STATE:\n")
-        help_text.insert(tk.END, "   POST /api/v1/state/PATH/TO/TOPIC\n")
+        help_text.insert(tk.END, "   POST http://HOST:PORT/PATH/TO/TOPIC\n")
         help_text.insert(tk.END, "   Body: { \"val\": NEW_VALUE }\n\n")
-        help_text.insert(tk.END, "3. SYSTEM STATUS:\n")
-        help_text.insert(tk.END, "   GET /api/v1/system/status\n\n")
-        help_text.insert(tk.END, "4. INTERACTIVE DOCS:\n")
-        help_text.insert(tk.END, "   Click 'OPEN API DOCS' to launch Swagger UI.\n")
         help_text.tag_configure("bold", foreground="#ffffff", font=("Courier", 10, "bold"))
         help_text.configure(state="disabled")
 
@@ -181,10 +179,15 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         if status.get("docs_url"):
             webbrowser.open(status["docs_url"])
 
+    def _open_explorer(self):
+        status = REST_MODULE.get_status()
+        if status.get("url"):
+            webbrowser.open(status["url"])
+
     def _refresh_ui(self):
         status = REST_MODULE.get_status()
         
-        if status["running"]:
+        if status.get("running"):
             self.status_lbl.configure(text=f"ACTIVE: {status['host']}:{status['port']}", fg="#00ff00")
             self.btn_start.configure(state="disabled")
             self.btn_stop.configure(state="normal")
@@ -204,9 +207,9 @@ class RestDashboard(tk.Frame, TransparencyMixin):
 
     def on_rest_activity(self, method, path, status_code, payload=None):
         """Callback for real-time traffic."""
-        self.after(0, lambda: self._add_log_entry(method, path, status_code))
+        self.after(0, lambda: self._add_log_entry(method, path, status_code, payload))
 
-    def _add_log_entry(self, method, path, status_code):
+    def _add_log_entry(self, method, path, status_code, payload=None):
         now = datetime.datetime.now()
         ts = now.strftime("%H:%M:%S.%f")[:-3]
         
@@ -214,19 +217,18 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         if 400 <= status_code < 500: tag = "4xx"
         elif status_code >= 500: tag = "5xx"
         
-        self.tree.insert("", 0, values=(ts, method, path, status_code), tags=(tag,))
+        display_payload = str(payload) if payload else "-"
+        self.tree.insert("", 0, values=(ts, method, path, status_code, display_payload), tags=(tag,))
         
         if len(self.tree.get_children()) > 50:
             self.tree.delete(self.tree.get_children()[-1])
 
-    def render(self):
-        pass
+    def render(self): pass
 
     def destroy(self):
         try: 
             REST_MODULE.remove_monitor_callback(self.on_rest_activity)
-        except Exception:
-            pass
+        except Exception: pass
         super().destroy()
 
 def get_gui_class():

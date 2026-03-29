@@ -8,7 +8,7 @@ import tkinter as tk
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 app_constants = Config.get_instance()
 
@@ -20,7 +20,7 @@ class GuiRebuilderMixin:
         if LOCAL_DEBUG: logger.info(f"♻️ Rebuilder: FORCING GUI rebuild for '{getattr(self, 'tab_name', 'Unknown')}'")
         
         # ⚡ OPTIMIZATION: Clear the default config cache to allow editing default_panel.json
-        from oaGuiManager.loader.blueprint_loader import BlueprintLoader
+        from oaGuiManager.Core.loader.blueprint_loader import BlueprintLoader
         from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
         BlueprintLoader.invalidate_cache()
         AssetCacheManager.invalidate_cache()

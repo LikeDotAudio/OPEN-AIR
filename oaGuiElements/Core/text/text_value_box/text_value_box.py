@@ -11,7 +11,7 @@ import tkinter.font as tkFont
 import inspect
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = False    # Set to False in production, True for dev on this file
+BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -36,6 +36,11 @@ class BuilderTextValueBoxCreator(TransparencyMixin):
     A mixin class that provides the functionality for creating an
     editable text box widget.
     """
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderTextValueBoxCreator()
+        return creator.make_text_value_box(parent_widget, config_data, context, **kwargs)
 
     # Creates an editable text box widget for displaying and modifying a single value.
     # This method sets up a Label (optional), an Entry box, and a Units label (optional).

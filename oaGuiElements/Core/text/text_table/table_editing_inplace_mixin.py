@@ -10,7 +10,7 @@ import orjson
 import re
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import TABLE_LOGGER
 from loguru import logger
 

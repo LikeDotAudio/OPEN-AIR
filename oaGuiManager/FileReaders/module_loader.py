@@ -13,7 +13,7 @@ import tkinter as tk
 from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Entry import logger, vocal_capture, set_log_directory
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -45,6 +45,10 @@ class ModuleLoader:
         Returns:
             type: The first suitable class reference found, or None.
         """
+        # 핫픽스 (Hotfix): Ensure project root is in sys.path for reliable imports.
+        if str(GLOBAL_PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(GLOBAL_PROJECT_ROOT))
+
         try:
             # ⚡ OPTIMIZATION: Derive package name to support relative imports
             # Example: 'oaGuiDefinitions.Assets.right_50.bottom_90.2_monitors.1588_PTP_Monitor.ptp_monitor'

@@ -29,7 +29,7 @@ from oaComSNMP.Methods.snmp_utils import get_snmp_node_id, get_snmp_descriptor, 
 from oaComSNMP.Constants.snmp_constants import BASE_OID, STATE_SYNC_INTERVAL
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger
 
 class SNMPManager:
@@ -112,27 +112,77 @@ class SNMPManager:
     def _notify_monitor(self, direction, oid, value, topic=None, metadata=None):
         """
         Notify all registered callbacks of SNMP activity.
-        
-        Vocal Policy: Logs callback failures without stopping the notification loop.
+        And broadcast to the system-wide monitor topic if in Bridge mode.
         """
-        from oaLogging.Entry import vocal_capture
-        
-        # Take a snapshot of callbacks to avoid holding lock during execution
+        # 1. Local Notifications
         with self._state_lock:
             callbacks = list(self._monitor_callbacks)
-            
+
         for cb in callbacks:
             try: 
-                # Try full signature first
                 cb(direction, oid, value, topic, metadata)
-            except TypeError:
-                try: 
-                    # Fallback for legacy callbacks
-                    cb(direction, oid, value, topic)
-                except Exception:
-                    vocal_capture("SNMP", f"Callback {cb.__name__} failed (Legacy Signature)")
-            except Exception:
-                vocal_capture("SNMP", f"Callback {cb.__name__} failed (Full Signature)")
+            except Exception: pass
+
+        # 2. System-wide Broadcast (Bridge Mode -> Network)
+        # We only broadcast individual changes or periodic dumps to the network monitor
+        if self.run_bridge and self.state_cache_manager:
+            # Skip recursion: Don't report on the monitor topic itself
+            if topic and "Monitor/SNMP" in topic:
+                return
+
+            monitor_payload = {
+                "val": value,
+                "source": "SNMP",
+                "oid": oid,
+                "topic": topic,
+                "direction": direction,
+                "ts": time.time(),
+                "metadata": metadata
+            }
+
+            # Use a throttled or specific topic for the monitor feed
+            self.state_cache_manager.handle_external_update(
+                "OPEN-AIR/System/Monitor/SNMP/Activity",
+                monitor_payload,
+                source="SNMP"
+            )
+
+    def handle_protocol_event(self, msg):
+        """
+        Callback for all router traffic. 
+        In UI mode, this is our primary way of seeing what CORE is doing.
+        """
+        with self._state_lock:
+            if not self._running: return
+
+        source = msg.get("source", "UNKNOWN").upper()
+        logical_source = msg.get("logical_source", source).upper()
+        topic = str(msg.get("topic", ""))
+        val = msg.get("val")
+        meta = msg.get("meta", {})
+
+        # --- CASE 1: Monitor UI Update (UI Only) ---
+        if not self.run_bridge:
+            if logical_source == "SNMP":
+                # This could be a direct OID update or a monitor packet
+                if topic == "OPEN-AIR/System/Monitor/SNMP/Activity":
+                    # Unpack the monitor payload
+                    direction = val.get("direction", "RX")
+                    oid = val.get("oid", "unknown")
+                    real_val = val.get("val")
+                    real_topic = val.get("topic")
+                    metadata = val.get("metadata")
+                    self._notify_monitor(direction, oid, real_val, real_topic, metadata)
+                else:
+                    # Direct OID update (logical source is SNMP)
+                    oid = meta.get("oid", topic.split("/")[-1])
+                    self._notify_monitor("RX", oid, val, topic, meta)
+            return
+
+        # --- CASE 2: Core Bridge Mirroring (Bridge Mode) ---
+        # Currently SNMP is primarily a 'Pull' protocol via file sync, 
+        # but we handle protocol events for future 'Push' trap support.
+        pass
 
     def start(self):
         with self._state_lock:
@@ -148,23 +198,28 @@ class SNMPManager:
         initialize_oid_map(os.path.join(str(GLOBAL_PROJECT_ROOT), "oaGuiDefinitions"))
 
         # 🟢 Start Background Monitor
-        self._flat_file_thread = threading.Thread(target=self._state_to_file_loop, daemon=True, name="SNMP-FlatFileLoop")
-        self._flat_file_thread.start()
-
         # Start the SnmpStatePersister thread
         self.state_persister.start()
 
         # Start the SnmpLogMonitor thread
         self.log_monitor.start()
 
+        # Protocol Router Sync Logic: Listen for remote/local activity
+        from oaComBroker.Managers.protocol_router import ProtocolRouter
+        router = ProtocolRouter.get_instance()
+        router.register_cache_observer(self.handle_protocol_event)
+
+        # ⚡ NETWORK SYNC: In UI mode, we need to listen for traffic from CORE
+        if not self.run_bridge and self.subscriber_router:
+            snmp_logger.info("📡 [SNMP] Linking to system SNMP activity (Monitor/SNMP/Activity)")
+            self.subscriber_router.subscribe_to_topic(
+                "OPEN-AIR/System/Monitor/SNMP/Activity",
+                self._handle_network_activity
+            )
+
         if self.run_bridge:
             try:
                 self.tree_builder.generate_master_script()
-                
-                # Protocol Router Sync Logic: Listen for remote/local activity
-                from oaComBroker.Managers.protocol_router import ProtocolRouter
-                router = ProtocolRouter.get_instance()
-                router.register_cache_observer(self.handle_protocol_event)
                 
                 # ⚡ MODULARITY: Register self as the active SNMP manager
                 if hasattr(router, "set_snmp_manager"):
@@ -195,6 +250,25 @@ class SNMPManager:
             if LOCAL_DEBUG: snmp_logger.info("📡📥 [INBOUND] SNMP command: GenerateScript")
             self.tree_builder.generate_master_script()
             self._publish_status(force_script=True)
+
+    def _handle_network_activity(self, msg):
+        """Shim to ingest network SNMP activity into the local event handler."""
+        try:
+            import orjson
+            # msg.payload can be bytes or str depending on the client
+            payload = msg.payload.decode() if isinstance(msg.payload, bytes) else msg.payload
+            data = orjson.loads(payload)
+            # Create a synthetic router message for the internal event handler
+            synthetic_msg = {
+                "source": "MQTT",
+                "logical_source": "SNMP",
+                "topic": msg.topic,
+                "val": data,
+                "meta": data.get("metadata", {})
+            }
+            self.handle_protocol_event(synthetic_msg)
+        except Exception as e:
+            if LOCAL_DEBUG: snmp_logger.error(f"❌ [SNMP-UI] Failed to parse network activity: {e}")
 
     def _mqtt_status_loop(self):
         """Periodically publishes bridge status to MQTT for UI consumption."""
@@ -273,80 +347,5 @@ class SNMPManager:
         mib_content = self.get_mib_content()
         return SnmpTester.verify_oid_tree(self.base_oid, mib_content=mib_content)
 
-
-
-    def _state_to_file_loop(self):
-        while True:
-            with self._state_lock:
-                if not self._running: break
-            
-            try:
-                if self.state_cache_manager:
-                    # 1. Update the OID map (Safe call)
-                    # Updated to use the new OidMapConverter
-                    self.oid_map_converter.build_oid_map()
-                    
-                    with self._state_lock:
-                        # 2. Get OID map data for processing
-                        # The build_oid_map method updates self.oid_map_converter.oid_map directly
-                        oid_data_items = list(self.oid_map_converter.oid_map.items())
-                        # Take a cache snapshot for consistent processing in this loop
-                        try:
-                            cache_snapshot = self.state_cache_manager.cache.copy()
-                        except AttributeError:
-                            cache_snapshot = dict(self.state_cache_manager.cache)
-
-                    sorted_items = sorted(oid_data_items, key=lambda x: x[1]['topic'])
-                    lines = []
-                    for oid, data in sorted_items:
-                        topic = data['topic']
-                        payload = cache_snapshot.get(topic, {})
-                        
-                        # ⚡ ANTI-FEEDBACK SPEC: The Golden Rule for Transports
-                        msg_type = payload.get("msg_type")
-                        origin_source = payload.get("origin_source")
-                        is_settled = payload.get("is_settled", False)
-                        
-                        # 1. If it's LINK_FEEDBACK, we only push to SNMP if it's SETTLED (confirmed state)
-                        if msg_type == "LINK_FEEDBACK" and not is_settled:
-                            continue
-                            
-                        # 2. If the origin_source is SNMP, don't send it back to SNMP
-                        if origin_source == "SNMP":
-                            continue
-
-                        val_str = data['val']
-                        lines.append(f"{oid}:{val_str}")
-                        self._notify_monitor("TX_DUMP", oid, val_str, topic, data)
-                    
-                    if self.run_bridge:
-                        with self._state_lock:
-                            current_count = len(self.oid_map_converter.oid_map)
-                        
-                        if current_count > 0 and current_count != self._last_topic_count:
-                            if LOCAL_DEBUG:
-                                snmp_logger.info(f"Tree Expansion ({self._last_topic_count} -> {current_count}). Syncing MIB...")
-                            self.save_current_mib()
-                            with self._state_lock:
-                                self._last_topic_count = current_count
-
-                        if lines:
-                            def oid_key(oid_line):
-                                oid_str = oid_line.split(':')[0]
-                                return [int(x) for x in oid_str.strip('.').split('.')]
-                            lines.sort(key=oid_key)
-                            
-                            os.makedirs(os.path.dirname(self.state_file), exist_ok=True)
-                            temp_path = self.state_file + ".tmp"
-                            with open(temp_path, "w", encoding="utf-8") as f:
-                                f.write("\n".join(lines) + "\n")
-                            
-                            if os.path.exists(temp_path):
-                                os.replace(temp_path, self.state_file)
-                                os.chmod(self.state_file, 0o644)
-            except Exception as e:
-                snmp_logger.error(f"State-to-File error: {e}")
-            
-            time.sleep(STATE_SYNC_INTERVAL)
 
 

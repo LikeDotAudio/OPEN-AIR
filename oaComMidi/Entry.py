@@ -12,6 +12,7 @@ from .Managers.midi_manager import MidiManager
 from .Core.midi_port_controller import MIDIPortController
 from .Core.midi_hardware_lock import MIDIHardwareLock
 from .Core.midi_protocol_mapper import MIDIProtocolMapper
+from .Interface.midi_dashboard import MidiDashboard
 
 _instance = None
 
@@ -42,12 +43,8 @@ __all__ = [
     "MIDIHardwareLock",
     "MIDIProtocolMapper",
     "MidiDashboard",
-    "get_gui_class",
     "get_manager",
     "start",
     "stop",
-    "status"
-]
-  "stop",
     "status"
 ]

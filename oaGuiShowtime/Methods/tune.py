@@ -8,7 +8,7 @@ import inspect
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -16,7 +16,7 @@ from oaConfiguration.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
-from oaGuiTelemetry.marker_logic import calculate_frequency_range
+from oaGuiTelemetry.Methods.marker_logic import calculate_frequency_range
 
 
 # Tunes the instrument based on the current marker selections in the Showtime tab.

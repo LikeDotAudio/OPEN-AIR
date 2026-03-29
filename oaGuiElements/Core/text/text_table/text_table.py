@@ -10,7 +10,7 @@ import orjson
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = False
+BUILDER_DEBUG = True
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -26,6 +26,11 @@ from .Core.table_sync_engine import TableSyncEngine
 
 class BuilderTextTableCreator(TransparencyMixin):
     """Mixin for creating an editable table widget with CSV backup and MQTT sync."""
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderTextTableCreator()
+        return creator.make_text_table(parent_widget, config_data, context, **kwargs)
 
     def make_text_table(self, parent_widget, config_data, context=None, **kwargs):
         if BUILDER_DEBUG: builder_logger.trace(f"🔬🏗️📑 [BUILDER] Creating Table widget.")

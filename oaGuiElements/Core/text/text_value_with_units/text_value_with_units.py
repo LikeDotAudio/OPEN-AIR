@@ -9,7 +9,7 @@ from tkinter import ttk
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -34,6 +34,12 @@ class BuilderTextValueWithUnitsCreator(TransparencyMixin):
     #     **kwargs: Additional keyword arguments.
     # Outputs:
     #     tk.Canvas: The created canvas containing the text input widget, or None on failure.
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderTextValueWithUnitsCreator()
+        return creator.make_text_value_with_units(parent_widget, config_data, context, **kwargs)
+
     def make_text_value_with_units(
         self, parent_widget, config_data, context=None, **kwargs
     ):  # Updated signature

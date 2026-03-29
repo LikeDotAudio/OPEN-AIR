@@ -18,6 +18,7 @@ from oaComBroker.Managers.protocol_router import ProtocolRouter
 from oaComOSC.Managers.osc_manager import OSCManager
 from oaComSNMP.Managers.snmp_manager import SNMPManager
 from oaComMidi.Managers.midi_manager import MidiManager
+from oaComREST.Managers.rest_manager import RESTManager
 from oaSplinker.Core.splinker import ControlBroker
 
 class UICompositionRoot:
@@ -83,7 +84,7 @@ class UICompositionRoot:
 
         # 5. Optional Managers (Conditional based on config)
         if self.app_constants.SCAN_OSC:
-            self.services["osc_manager"] = OSCManager(state_cache, mqtt_conn, run_bridge=False)
+            self.services["osc_manager"] = OSCManager(state_cache, mqtt_conn, run_bridge=True)
         
         if self.app_constants.SCAN_SNMP:
             import oaComSNMP.Entry as snmp_entry
@@ -95,6 +96,7 @@ class UICompositionRoot:
             )
             
         self.services["midi_manager"] = MidiManager(state_cache, run_bridge=False)
+        self.services["rest_manager"] = RESTManager(state_cache, protocol_router)
 
         logger.success("✅ [ROOT] UI Service Graph Composed.")
         return self.services

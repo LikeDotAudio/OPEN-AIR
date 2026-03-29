@@ -161,8 +161,10 @@ class MidiKeyboard(tk.Canvas):
                 color = get_midi_color(channel)
                 
                 if m_type == "note_on" and velocity > 0:
+                    logger.trace(f"🎹 [KEYBOARD] Note ON: {note} (Ch: {channel})")
                     self.note_on(note, color)
                 else:
+                    logger.trace(f"🎹 [KEYBOARD] Note OFF: {note}")
                     self.note_off(note)
             elif m_type == "pitchwheel":
                 # Pitchwheel doesn't visually affect keys, but we handle it to prevent 'unknown' errors

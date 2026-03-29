@@ -11,7 +11,7 @@ from typing import Any
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import data_logger
 from oaConfiguration.FileReaders.config_reader import Config
 from oaComMQTT.Core.mqtt_message import MqttMessage
@@ -76,12 +76,15 @@ class StateRegistry:
     def shutdown(self): self.save_engine.shutdown()
 
     def subscribe_to_all_topics(self):
-        """Subscribes to the root command topic filter."""
+        """Subscribes to the root command and transmission topic filters."""
         if self.mqtt:
-            # --- Namespace Split: Subscribe only to CMD namespace ---
-            root = f"{app_constants.MQTT_BASE_TOPIC}/Cmd/#"
-            if LOCAL_DEBUG: data_logger.debug(f"Subscribing to command root: {root}")
-            self.mqtt.subscribe(root)
+            base = app_constants.MQTT_BASE_TOPIC
+            # --- Namespace Split: Subscribe to both Cmd and Tx namespaces ---
+            roots = [f"{base}/Cmd/#", f"{base}/Tx/#", f"{base}/System/Status/#", f"{base}/System/Monitor/#"]
+            
+            for root in roots:
+                if LOCAL_DEBUG: data_logger.debug(f"Subscribing to system root: {root}")
+                self.mqtt.subscribe(root)
 
     def initialize_state(self) -> None:
         try:
@@ -114,17 +117,9 @@ class StateRegistry:
         self.save_engine.schedule_save(topic, payload); self.search_engine.add_topic(topic)
         
         from oaComBroker.Managers.protocol_router import ProtocolRouter
+        # The ProtocolRouter is responsible for outbound dispatch (MQTT, OSC, etc.)
         ProtocolRouter.get_instance().ingest(source, topic, value, payload)
 
-        if self.mqtt:
-            if "/System/Monitor/" not in topic and (source == "GUI" or (source in ["MIDI", "SNMP", "OSC", "VISA"] and not self.state_mirror_engine)):
-                # --- Namespace Split: Publish to TX namespace ---
-                tx_topic = topic
-                base = app_constants.MQTT_BASE_TOPIC
-                if base in topic and f"{base}/Cmd/" not in topic and f"{base}/Tx/" not in topic:
-                    tx_topic = topic.replace(base, f"{base}/Tx")
-                
-                self.mqtt.publish(tx_topic, orjson.dumps(payload).decode())
         self.observers.notify(topic, payload)
 
     def _parse_mqtt_payload(self, msg: MqttMessage):
@@ -164,10 +159,17 @@ class StateRegistry:
     def handle_incoming_mqtt(self, client, userdata, msg: MqttMessage) -> None:
         topic = msg.topic
         
-        # --- Namespace Split: Strip CMD from incoming topic ---
+        # --- Namespace Split: Strip CMD or TX from incoming topic ---
         base = app_constants.MQTT_BASE_TOPIC
+        normalized = False
         if f"{base}/Cmd/" in topic:
             topic = topic.replace(f"{base}/Cmd/", f"{base}/")
+            normalized = True
+        elif f"{base}/Tx/" in topic:
+            topic = topic.replace(f"{base}/Tx/", f"{base}/")
+            normalized = True
+
+        if normalized:
             # Create a NEW MqttMessage with the stripped topic for downstream consumption
             msg = MqttMessage(
                 topic=topic,

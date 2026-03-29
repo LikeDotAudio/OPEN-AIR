@@ -12,7 +12,7 @@ from ..Core.config_defaults import ConfigDefaults
 from ..Core.identity import IdentityManager
 from ..Core.config_loader import ConfigLoader
 
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 
 class Config(ConfigDefaults):
     """

@@ -10,7 +10,7 @@ import orjson
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = False
+BUILDER_DEBUG = True
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -26,6 +26,11 @@ from .Core.listbox_sync_engine import ListboxSyncEngine
 
 class BuilderListboxCreator(TransparencyMixin):
     """Mixin for creating a dynamic Listbox with MQTT sync and industrial transparency."""
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderListboxCreator()
+        return creator.make_listbox(parent_widget, config_data, context, **kwargs)
 
     def make_listbox(self, parent_widget, config_data, context=None, **kwargs):
         if BUILDER_DEBUG: builder_logger.trace(f"🔬🏗️📑 [BUILDER] Creating Listbox widget.")

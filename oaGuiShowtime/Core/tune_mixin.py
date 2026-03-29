@@ -5,7 +5,7 @@
 # Description: Brief summary of purpose
 
 from loguru import logger
-from oaGuiTelemetry.marker_logic import calculate_frequency_range
+from oaGuiTelemetry.Methods.marker_logic import calculate_frequency_range
 
 class ShowtimeTuneMixin:
     """

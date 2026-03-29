@@ -1,10 +1,11 @@
 # oaComREST/Workers/uvicorn_worker.py
 # Author: Anthony Peter Kuzub
-# Version: 20260326.1200.1
+# Version: 20260328.1200.1
 #
 # Description: Background thread for running the Uvicorn ASGI server.
 
 import threading
+import sys
 try:
     import uvicorn
     UVICORN_AVAILABLE = True
@@ -36,11 +37,11 @@ class UvicornWorker(threading.Thread):
     def run(self):
         """Executes the Uvicorn server loop."""
         if not UVICORN_AVAILABLE:
-            logger.error("🛑 [REST] Uvicorn not found. Worker thread exiting.")
+            logger.error("📡⚙️🛑 [REST] Uvicorn not found. Worker thread exiting.")
             return
 
         if LOCAL_DEBUG:
-            logger.debug(f"🚀 [REST] Starting Uvicorn on {self.host}:{self.port}")
+            logger.debug(f"📡⚙️🚀 [REST] Starting Uvicorn on {self.host}:{self.port}")
         
         config = uvicorn.Config(
             app=self.app, 
@@ -50,11 +51,17 @@ class UvicornWorker(threading.Thread):
             loop="asyncio"
         )
         self.server = uvicorn.Server(config)
-        self.server.run()
+        try:
+            self.server.run()
+        except (OSError, SystemExit) as e:
+            logger.error(f"📡⚙️❌ [REST] Uvicorn failed to start on {self.host}:{self.port}. "
+                         f"The port may already be in use. Error: {e}")
+            # Ensure the server knows it shouldn't be running
+            self.server.should_exit = True
 
     def stop(self):
         """Signals the Uvicorn server to shut down."""
         if self.server:
             if LOCAL_DEBUG:
-                logger.debug("🛑 [REST] Stopping Uvicorn server...")
+                logger.debug("📡⚙️🛑 [REST] Stopping Uvicorn server...")
             self.server.should_exit = True

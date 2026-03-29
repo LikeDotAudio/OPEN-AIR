@@ -21,7 +21,7 @@ from ..cosmetics.geometry import BezelGeometry
 from ..constants import SCALE_TICK_LENGTH, SCALE_SUB_TICK_LENGTH, SCALE_TEXT_OFFSET, NUMBER_FONT_FAMILY
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = False
+BUILDER_DEBUG = True
 
 @dataclass
 class RenderContext:

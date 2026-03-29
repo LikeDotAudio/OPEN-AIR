@@ -15,10 +15,10 @@ from datetime import datetime
 import threading
 
 # Import worker logic
-from oaTests.Workers.run_test import TestRunner
+from oaTests.Workers.TestRunner.TestRunner import TestRunner
 from oaTests.Workers.collate_data import collate_extra_tabs
 from oaTests.Workers.run_report_builder import ReportGenerator
-from oaTests.Workers import DiscoverTests
+from oaTests.Workers.TestRunner import DiscoverTests
 from oaTests.Workers.Clear_logs import cleanup_logs
 from oaTests.Workers.ClearMQTT import MQTTSweeper
 from oaTests.Workers.Clear_flamegraph import cleanup_flamegraph
@@ -240,7 +240,7 @@ class TestsApp(App):
             self.call_from_thread(self.write_log, f"📂 Discovery identified {len(found_dirs)} test-containing root folders.")
             
             runner = TestRunner(record_result)
-            runner.run([self.project_root], top_level_dir=self.project_root)
+            runner.run(found_dirs, top_level_dir=self.project_root)
             
             self.call_from_thread(self.write_log, f"🏁 [COMPLETE] Tests finished. Passed: {self.summary['passed']}, Failed: {self.summary['failed']}")
         self.run_in_daemon_thread(task)

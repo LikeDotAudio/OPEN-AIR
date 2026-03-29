@@ -1,13 +1,13 @@
 # Core/event_bus.py
 # Author: Gemini CLI
-# Version: 1.0.0
+# Version: 1.1.0
 #
 # Description: A simple Publisher/Subscriber (Pub/Sub) event bus to decouple modular editor components.
 
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 
 class EventBus:
@@ -18,7 +18,13 @@ class EventBus:
         if cls._instance is None:
             cls._instance = super(EventBus, cls).__new__(cls)
             cls._instance._subscribers = {}
+            cls._instance.raise_exceptions = False
         return cls._instance
+
+    def reset(self):
+        """Clears all subscribers."""
+        self._subscribers = {}
+        if LOCAL_DEBUG: logger.debug("🧹 EventBus: Reset complete. All subscribers cleared.")
 
     def subscribe(self, event_type, callback):
         """Subscribes a callback to an event type."""
@@ -48,7 +54,9 @@ class EventBus:
                 try:
                     callback(**kwargs)
                 except Exception as e:
-                    logger.exception("❌ EventBus Error: Callback failed for '{event_type}'")
+                    logger.exception(f"❌ EventBus Error: Callback failed for '{event_type}'")
+                    if self.raise_exceptions:
+                        raise e
 
 # Global instance
 event_bus = EventBus()

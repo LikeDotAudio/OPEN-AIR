@@ -10,7 +10,7 @@ from ..event_bus import event_bus
 from ..state import state_manager
 from ...FileReaders.grab_bag_loader import GrabBagLoader
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import GUI_LOGGER as logger
 
 # --- EXTRACTED CORE MODULES ---

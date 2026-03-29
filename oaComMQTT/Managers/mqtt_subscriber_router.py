@@ -9,7 +9,7 @@ import threading
 from typing import Any, Callable, Dict, List, Set, Union
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
 
@@ -67,8 +67,17 @@ class MqttSubscriberRouter:
         
         # ⚡ OPTIMIZATION: Use configured base topic
         self._base_topic = app_constants.MQTT_BASE_TOPIC
-        # --- Namespace Split: Default to CMD namespace ---
-        self._root_topic = f"{self._base_topic}/Cmd/#"
+        
+        # --- Namespace Split: Default global roots ---
+        self._roots = {
+            "Cmd": f"{self._base_topic}/Cmd/#",
+            "Tx": f"{self._base_topic}/Tx/#",
+            "Status": f"{self._base_topic}/System/Status/#",
+            "Monitor": f"{self._base_topic}/System/Monitor/#",
+            "Control": f"{self._base_topic}/System/Control/#"
+        }
+        # Legacy compatibility
+        self._root_topic = self._roots["Cmd"]
         
         # Track what we've actually asked the broker for to avoid spamming aiomqtt
         self._active_broker_subscriptions: Set[str] = set()
@@ -105,11 +114,21 @@ class MqttSubscriberRouter:
                     self._exact_subscribers[topic_filter].append(callback_func)
             
             # ⚡ aiomqtt Optimization: Avoid redundant broker subscriptions
-            if topic_filter.startswith(f"{self._base_topic}/") or topic_filter == self._root_topic:
-                if self._root_topic not in self._active_broker_subscriptions:
-                    self._active_broker_subscriptions.add(self._root_topic)
+            # If the topic starts with the base topic (e.g. OPEN-AIR/), 
+            # we check if it's one of our global root subscriptions.
+            if topic_filter.startswith(f"{self._base_topic}/"):
+                # Determine which root to use based on namespace
+                root_to_use = self._roots["Cmd"] # Default
+                
+                if "/Tx/" in topic_filter: root_to_use = self._roots["Tx"]
+                elif "/Status/" in topic_filter: root_to_use = self._roots["Status"]
+                elif "/Monitor/" in topic_filter: root_to_use = self._roots["Monitor"]
+                elif "/Control/" in topic_filter: root_to_use = self._roots["Control"]
+                
+                if root_to_use not in self._active_broker_subscriptions:
+                    self._active_broker_subscriptions.add(root_to_use)
                     from .mqtt_connection import MqttConnectionManager
-                    MqttConnectionManager().subscribe(self._root_topic)
+                    MqttConnectionManager().subscribe(root_to_use)
                 return
 
             if topic_filter in self._active_broker_subscriptions:
@@ -199,9 +218,12 @@ class MqttSubscriberRouter:
             self._active_broker_subscriptions.clear()
             self._match_cache.clear()
 
-            await client.subscribe(self._root_topic)
-            self._active_broker_subscriptions.add(self._root_topic)
+            # ⚡ GLOBAL ROOTS: Cmd, Tx, Status, Monitor, Control
+            for name, root in self._roots.items():
+                await client.subscribe(root)
+                self._active_broker_subscriptions.add(root)
             
+            # Resubscribe to external topics
             for topic_filter in self._exact_subscribers:
                 if not topic_filter.startswith(f"{self._base_topic}/"):
                     await client.subscribe(topic_filter)

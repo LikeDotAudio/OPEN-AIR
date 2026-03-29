@@ -134,5 +134,40 @@ class TestMqttAsyncWorker(unittest.IsolatedAsyncioTestCase):
 
         mock_client.publish.assert_called_once_with("test/pub", payload=b"data", qos=0, retain=False)
 
+    async def test_subscribe_error_logged(self):
+        """
+        Test that subscribe errors are caught and logged.
+        """
+        mock_client = AsyncMock()
+        self.worker.stop_event = asyncio.Event()
+        self.worker.kick_event = asyncio.Event()
+        
+        # Configure mock_client.subscribe to raise the specific error
+        mock_client.subscribe.side_effect = TypeError("'<' not supported between instances of 'method' and 'int'")
+        
+        # Mock the logger
+        with patch('oaComMQTT.Workers.mqtt_async_worker.MQTT_LOGGER') as MockLogger:
+            # Add a subscription job
+            self.mock_queue_manager._subscribe_queue.put({"topic": "test/sub", "qos": 1})
+            self.mock_queue_manager._pending_subscriptions.add("test/sub")
+            
+            self.worker.kick_event.set() # Kick to process
+
+            # Run for a tiny bit
+            task = asyncio.create_task(self.worker._queue_task(mock_client))
+            await asyncio.sleep(0.1)
+            self.worker.stop_event.set()
+            await task
+
+            # Assert that the error was logged
+            MockLogger.error.assert_called_once()
+            # Check that the log message contains the expected error description
+            logged_message = MockLogger.error.call_args[0][0]
+            self.assertIn("aiomqtt: Subscribe Error:", logged_message)
+            self.assertIn("method' and 'int'", logged_message) # Check for a core part of the error message
+
+            # Assert that the subscription was removed from pending
+            self.assertNotIn("test/sub", self.mock_queue_manager._pending_subscriptions)
+
 if __name__ == '__main__':
     unittest.main()

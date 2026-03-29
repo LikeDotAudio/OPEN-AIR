@@ -26,7 +26,7 @@ if str(root_path) not in sys.path:
 import oaComOSC.Entry as OSC_MODULE
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaLogging.Entry import logger
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
@@ -67,6 +67,13 @@ class OscDashboard(tk.Frame, TransparencyMixin):
             logger.error(f"OscDashboard: Failed to register callback: {e}")
             
         self._refresh_ui()
+        self._schedule_refresh()
+
+    def _schedule_refresh(self):
+        """Schedules a periodic status check."""
+        self._refresh_ui()
+        if not getattr(self, '_destroyed', False):
+            self.after(2000, self._schedule_refresh)
 
     def _find_builder_instance(self, widget):
         """Recursively searches for a DynamicGuiBuilder in the parent hierarchy."""
@@ -294,6 +301,7 @@ class OscDashboard(tk.Frame, TransparencyMixin):
         pass
 
     def destroy(self):
+        self._destroyed = True
         # Unregister via the Entry point
         try: 
             OSC_MODULE.remove_monitor_callback(self.on_osc_activity)

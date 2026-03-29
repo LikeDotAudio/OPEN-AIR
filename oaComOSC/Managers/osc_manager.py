@@ -10,7 +10,7 @@ import orjson
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from loguru import logger
 from oaLogging.Core.logger import OSC_LOGGER as logger
 from oaConfiguration.FileReaders.config_reader import Config

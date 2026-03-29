@@ -7,7 +7,7 @@
 import importlib
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import FACTORY_LOGGER
 from loguru import logger
 from oaGuiManager.Core.context.widget_context import WidgetContext
@@ -46,13 +46,30 @@ class GuiWidgetFactoryMixin:
         self.widget_factory = factory
 
     def _lazy_wrap(self, module_path, class_name, method_name):
+        # Capture the builder instance (self) for context injection
+        builder_instance = self
+        
         def wrapper(parent_widget, config_data, context: WidgetContext = None, **kwargs):
             module = importlib.import_module(module_path)
-            method = getattr(getattr(module, class_name), method_name)
+            cls_ref = getattr(module, class_name)
+            
             # Ensure context isn't passed twice if it's already in kwargs
             kwargs.pop("context", None)
             
-            # ⚡ CONSISTENCY FIX: Lazy-wrapped methods now use the same signature as registry widgets:
-            # make(parent_widget, config_data, context, **kwargs)
-            return method(parent_widget, config_data, context=context, **kwargs)
+            # ⚡ CONTEXT INJECTION: Pass builder instance if missing
+            if context and not hasattr(context, 'builder_instance'):
+                kwargs['builder_instance'] = builder_instance
+            elif not context:
+                kwargs['builder_instance'] = builder_instance
+
+            # ⚡ STANDARDIZED FACTORY PATTERN: Prefer static 'make' if available.
+            # This avoids 'Data Trampolining' and ensures correct 'self' handling.
+            if hasattr(cls_ref, 'make'):
+                return cls_ref.make(parent_widget, config_data, context=context, **kwargs)
+            
+            # ⚡ FALLBACK: Call the specified method directly. 
+            # Note: We pass builder_instance as the first argument (self) to support Mixin-style creators.
+            method = getattr(cls_ref, method_name)
+            return method(builder_instance, parent_widget, config_data, context=context, **kwargs)
+            
         return wrapper

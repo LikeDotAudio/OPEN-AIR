@@ -7,7 +7,7 @@
 from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
 from oaTranslator.Core.state_mirror_engine import StateMirrorEngine
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import GUI_LOGGER as logger
 import copy
 

@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageTk, ImageFilter
 from oaLogging.Core.logger import builder_logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = False
+BUILDER_DEBUG = True
 _FADER_BAR_ASSET_CACHE = {}
 
 class FaderBarAssetGenerator:

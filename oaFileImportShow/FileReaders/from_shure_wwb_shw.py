@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 import numpy as np
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 
@@ -20,6 +20,19 @@ VERSION = "20251129.120000.1"
 HEADERS = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
 
 def convert_shure_wwb_shw_to_markers(xml_file_path):
+    """
+    Parses a Shure Wireless Workbench 6 XML (.shw) report and returns
+    a list of dictionaries in the standardized marker format.
+    """
+    return _internal_convert_shure_wwb_shw_to_markers(xml_file_path)
+
+def Marker_convert_WWB_SHW_File_report_to_csv(xml_file_path):
+    """
+    Backward compatibility alias.
+    """
+    return convert_shure_wwb_shw_to_markers(xml_file_path)
+
+def _internal_convert_shure_wwb_shw_to_markers(xml_file_path):
     """
     Parses an SHW (XML) file and extracts frequency data, converting it
     into a standardized marker format. All frequencies are converted to MHz for consistency.

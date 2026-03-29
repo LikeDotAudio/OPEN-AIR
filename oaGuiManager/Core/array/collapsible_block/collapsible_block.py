@@ -9,7 +9,7 @@ from tkinter import ttk
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -71,7 +71,6 @@ class CollapsibleBlockCreatorMixin(TransparencyMixin):
         if view_manager:
             def show_global_menu(event):
                 view_manager.show_menu(event)
-                return "break"
 
             wrapper.bind("<Button-3>", show_global_menu)
             content_frame.bind("<Button-3>", show_global_menu)

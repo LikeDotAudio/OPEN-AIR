@@ -12,7 +12,7 @@ import tkinter as tk
 from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import LAYOUT_LOGGER
 from loguru import logger
 
@@ -88,9 +88,25 @@ class LayoutParser:
     #     dict: A dictionary describing the layout structure and relevant data.
     def parse_directory(self, path: pathlib.Path) -> dict:
         """
-        Parses a directory to determine its layout type and gather relevant data.
-        If a layout.json exists, it is used. Otherwise, defaults to directory listing.
+        Parses a path to determine its layout type and gather relevant data.
+        If it's a file, it's treated as a single GUI component.
+        If a directory, it looks for layout.json or uses naming conventions.
         """
+        if not path.exists():
+            return {"type": "error", "data": {"error_message": f"Path not found: {path}"}}
+
+        if path.is_file():
+            # If it's a direct GUI file, treat it as a single-item listing
+            if path.suffix in [".json", ".py"]:
+                return {
+                    "type": "directory_listing",
+                    "data": {
+                        "sub_dirs": [],
+                        "gui_files": [path],
+                    },
+                }
+            return {"type": "error", "data": {"error_message": f"Not a valid GUI file: {path}"}}
+
         layout_file = path / "layout.json"
         if layout_file.is_file():
             try:
@@ -233,10 +249,31 @@ class LayoutParser:
                 if LOCAL_DEBUG: LAYOUT_LOGGER.debug(f"Parsed 'notebook' layout from dir names '{path}'")
                 return {"type": layout_type, "data": parsed_data}
 
-        # 3. Fallback to simple directory listing
+        # 3. Check for Split-Pane Files (Numerical Prefix in files)
         gui_files = sorted(
             [f for f in path.iterdir() if f.is_file() and (f.suffix == ".json" or f.suffix == ".py") and f.name != "layout.json" and not f.name.startswith("__")]
         )
+        numerical_files = [f for f in gui_files if f.name and f.name[0].isdigit()]
+        
+        if numerical_files and len(numerical_files) > 1:
+            # If we have multiple numerical files, treat them as a vertical split
+            layout_type = "vertical_split"
+            parsed_data = {
+                "panels": [],
+                "panel_percentages": [],
+                "orientation": tk.VERTICAL
+            }
+            
+            # Use 100/count as default weight for equal splitting
+            weight = 100 // len(numerical_files)
+            for f in numerical_files:
+                parsed_data["panels"].append({"path": f, "weight": weight})
+                parsed_data["panel_percentages"].append(weight)
+            
+            if LOCAL_DEBUG: LAYOUT_LOGGER.debug(f"Parsed '{layout_type}' from file names in '{path}' for equal splitting.")
+            return {"type": layout_type, "data": parsed_data}
+
+        # 4. Fallback to simple directory listing
         content_dirs = [d for d in sub_dirs if d not in layout_dirs and d not in potential_tab_dirs]
 
         if LOCAL_DEBUG: LAYOUT_LOGGER.debug(f"Parsed 'directory_listing' as fallback for '{path}'")

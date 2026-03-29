@@ -36,7 +36,7 @@ from pathlib import Path
 from loguru import logger
 
 # LOCAL_DEBUG: Toggles verbose tracing for blueprint loading and merging.
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 
 # --- Module-Level Caches ---
 _DEFAULT_CONFIG_CACHE = None

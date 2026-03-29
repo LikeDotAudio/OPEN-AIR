@@ -12,7 +12,7 @@ import os
 import numpy as np
 
 # --- Standard Debug Logging Setup ---
-RADAR_BUILDER_DEBUG = False    # Set to False in production, True for dev on this file
+RADAR_BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -29,6 +29,11 @@ class BuilderDataRadarCreator(TransparencyMixin):
     Mixin for creating a Radar Eye widget.
     FIXED: Restored Background, Interaction, Grid, and Sweep.
     """
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderDataRadarCreator()
+        return creator.make_data_radar(parent_widget, config_data, context, **kwargs)
 
     def make_data_radar(self, parent_widget, config_data, context=None, **kwargs):
         """Creates a hierarchical radar eye widget."""

@@ -27,8 +27,8 @@ class SplinkerEditor(tk.Frame):
         self._setup_ui()
         
         if self.mqtt_manager:
-            self.mqtt_manager.subscribe("OPEN-AIR/System/Status/Splinker/List", self.handle_splinker_status)
-            self.mqtt_manager.subscribe("OPEN-AIR/System/Status/Splinker/Panic", self.handle_panic_status)
+            self.mqtt_manager.subscribe("OPEN-AIR/System/Status/Splinker/List", qos=0, on_message_callback=self.handle_splinker_status)
+            self.mqtt_manager.subscribe("OPEN-AIR/System/Status/Splinker/Panic", qos=0, on_message_callback=self.handle_panic_status)
         
         self.refresh_splink_list()
         self.selected_splink_id = None

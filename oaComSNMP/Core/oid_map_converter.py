@@ -16,7 +16,7 @@ from oaComSNMP.Constants.snmp_constants import OID_MAP_STR_LIMIT
 from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger 
 
 # LOCAL_DEBUG can be set or passed if needed
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 
 class OidMapConverter:
     """

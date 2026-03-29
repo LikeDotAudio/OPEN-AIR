@@ -15,7 +15,7 @@ from oaConfiguration.FileReaders.config_reader import Config
 from oaComMQTT.Core.mqtt_message import MqttMessage
 import oaOchestration.Constants.project_paths as app_paths
 
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 app_constants = Config.get_instance()
 
 class MqttManager:

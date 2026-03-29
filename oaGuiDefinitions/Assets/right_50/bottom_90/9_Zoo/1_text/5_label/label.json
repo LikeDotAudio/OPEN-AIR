@@ -52,7 +52,7 @@
             "domain": {
               "primary": {
                 "value_default": 23.5,
-                "units": "\u00b0C"
+                "units": "°C"
               }
             },
             "interaction": {

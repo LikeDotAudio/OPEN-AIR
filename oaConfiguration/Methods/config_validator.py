@@ -25,7 +25,7 @@ Assumptions and Constraints:
 from ..FileReaders.config_reader import Config
 from loguru import logger
 
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 app_constants = Config.get_instance()  # Get the singleton instance
 

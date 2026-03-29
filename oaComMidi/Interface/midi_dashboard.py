@@ -11,7 +11,7 @@ import datetime
 from oaGuiElements.Core.utils.midi_keyboard.midi_keyboard import MidiKeyboard, get_midi_color
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from loguru import logger
 
 class MidiDashboard(tk.Frame):
@@ -48,9 +48,7 @@ class MidiDashboard(tk.Frame):
                 if m: return m
             try:
                 curr = curr.master
-            except Exception as e:
-                logger.trace(f"End of widget tree reached: {e}")
-                break
+            except Exception: break
         return None
 
     def _setup_ui(self):
@@ -124,6 +122,9 @@ class MidiDashboard(tk.Frame):
         self.after(0, lambda: self._process_activity(direction, msg))
 
     def _process_activity(self, direction, msg):
+        if LOCAL_DEBUG:
+            logger.debug(f"🎹 [MIDI-DASH] Processing {direction} activity for UI update.")
+        
         # 1. Update Keyboard
         self.keyboard.handle_midi(msg)
         

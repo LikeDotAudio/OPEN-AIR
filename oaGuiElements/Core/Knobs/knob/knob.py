@@ -6,10 +6,11 @@ import tkinter as tk
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
+from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
@@ -69,6 +70,7 @@ class CustomKnobFrame(tk.Frame, KnobInteractionMixin, KnobRendererMixin):
         self.path = path
         self.state_mirror_engine = state_mirror_engine
         self.label_text = str(label_text) if label_text is not None else ""
+        self.theme_colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         
         self.min_val, self.max_val = config["min"], config["max"]
         self.reff_point = config["reff_point"]

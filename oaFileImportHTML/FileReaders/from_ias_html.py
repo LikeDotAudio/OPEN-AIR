@@ -9,7 +9,7 @@ import numpy as np
 from bs4 import BeautifulSoup
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 
@@ -20,6 +20,18 @@ VERSION = "20251129.120000.1"
 HEADERS = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
 
 def convert_ias_html_to_markers(html_content):
+    """
+    Standardized entry point for HTML conversion.
+    """
+    return _internal_convert_ias_html_to_markers(html_content)
+
+def Marker_convert_IAShtml_report_to_csv(html_content):
+    """
+    Backward compatibility alias.
+    """
+    return convert_ias_html_to_markers(html_content)
+
+def _internal_convert_ias_html_to_markers(html_content):
     """
     Converts the HTML frequency coordination report into a list of dictionaries
     suitable for standardized marker format, handling multiple zones.

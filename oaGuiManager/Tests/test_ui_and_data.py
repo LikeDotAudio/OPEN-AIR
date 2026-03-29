@@ -18,14 +18,19 @@ from oaGuiEditorWYSIWYG.Core.state import StateManager
 # --- Data & Processing Utilities ---
 from oaGuiShowtime.Methods.group import group_markers
 from oaGuiEditorWYSIWYG.Core.file_io_handler import FileIOHandler
+from oaGuiEditorWYSIWYG.Core.event_bus import event_bus
 
 class TestUIAndData(unittest.TestCase):
     def setUp(self):
         self.test_dir = tempfile.mkdtemp()
         self.test_path = pathlib.Path(self.test_dir)
+        # Reset event bus to avoid cross-test side effects
+        event_bus.reset()
+        event_bus.raise_exceptions = True
 
     def tearDown(self):
         shutil.rmtree(self.test_dir)
+        event_bus.raise_exceptions = False
 
     # --- 4. UI & Widget Construction ---
     def test_layout_parser_scan(self):

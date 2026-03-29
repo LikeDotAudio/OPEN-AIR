@@ -30,11 +30,18 @@ class TableCSVService:
 
     def load(self):
         """Reads from CSV and returns a dictionary structured for the table update."""
-        headers, data = self.reader.read_from_csv(self.csv_path)
-        if not data: return None
+        from loguru import logger
+        try:
+            headers, data = self.reader.read_from_csv(self.csv_path)
+        except FileNotFoundError:
+            logger.debug(f"📜 CSV file not found at {self.csv_path}. This is normal if no data has been saved yet.")
+            return None
+
+        if not data: 
+            return None
         
         data_dict = {}
-        kp = ["gpib_address", "serial_number", "resource_string", "model", "id"]
+        kp = ["id", "gpib_address", "serial_number", "resource_string", "model"]
         for i, row in enumerate(data):
             key = next((row[k] for k in kp if k in row and row[k]), f"row_{i}")
             data_dict[key] = row

@@ -9,7 +9,7 @@ import re
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 
@@ -32,7 +32,7 @@ def Marker_convert_csv_unknow_report_to_csv(file_path):
         "group": ["group", "channel_group"],
         "device": ["device", "dev_type", "model"],
         "name": ["name", "alias", "description"],
-        "FREQ_MHZ": ["freq", "frequency", "frequency_mhz", "FREQ_MHZ"],
+        "freq_mhz": ["freq", "frequency", "frequency_mhz", "FREQ_MHZ"],
         "peak": ["peak", "peak_level", "max_level", "dbm"],
     }
 
@@ -60,7 +60,7 @@ def Marker_convert_csv_unknow_report_to_csv(file_path):
             for std_header, index in header_map.items():
                 if index < len(row):
                     value = row[index].strip()
-                    if std_header.lower() == "FREQ_MHZ" and value:
+                    if std_header == "FREQ_MHZ" and value:
                         try:
                             # Attempt to convert to MHz if needed
                             match = re.search(
@@ -76,7 +76,6 @@ def Marker_convert_csv_unknow_report_to_csv(file_path):
                                 elif unit and unit.lower() == "g":
                                     val *= 1000
                                 new_row[std_header] = val
-
                             else:
                                 new_row[std_header] = float(value)
                         except ValueError:

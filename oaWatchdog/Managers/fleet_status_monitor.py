@@ -9,7 +9,7 @@ import orjson
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from loguru import logger
 from oaLogging.Core.logger import SYSTEM_LOGGER as sys_logger
 from oaConfiguration.FileReaders.config_reader import Config

@@ -16,7 +16,7 @@ except ImportError:
     HAS_OSC = False
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -53,7 +53,12 @@ class OscRxServer:
         dispatcher.map("/*", self._msg_handler)
 
         try:
-            self.server = BlockingOSCUDPServer((self.host, self.port), 
+            # ⚡ OPTIMIZATION: Allow immediate reuse of the port after shutdown
+            # This prevents [Errno 98] Address already in use during rapid restarts.
+            class ReusableOSCServer(BlockingOSCUDPServer):
+                allow_reuse_address = True
+
+            self.server = ReusableOSCServer((self.host, self.port), 
                                                dispatcher)
             self._thread = threading.Thread(target=self.server.serve_forever, 
                                             daemon=True)

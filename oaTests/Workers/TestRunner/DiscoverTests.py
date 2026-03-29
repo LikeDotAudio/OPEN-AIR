@@ -1,8 +1,8 @@
-# Report_Builder/DiscoverTests.py
+# oaTests/Workers/TestRunner/DiscoverTests.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 1.1.0
 #
-# Description: Brief summary of purpose
+# Description: Logic for discovering test directories within the project.
 
 import os
 import glob

@@ -11,7 +11,7 @@ import inspect
 import orjson
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -171,5 +171,10 @@ class BuilderCheckboxCreator(TransparencyMixin):
 
         except Exception as e:
             if LOCAL_DEBUG:
-                logger.exception("❌ Error in {current_function_name} for '{label}'")
+                logger.exception("❌ Error in make_checkbox for '{label}'")
             return None
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderCheckboxCreator()
+        return creator.make_checkbox(parent_widget, config_data, context, **kwargs)

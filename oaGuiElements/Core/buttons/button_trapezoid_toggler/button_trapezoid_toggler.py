@@ -8,7 +8,7 @@ import tkinter as tk
 from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = False    # Set to False in production, True for dev on this file
+BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -232,3 +232,8 @@ class BuilderButtonTrapezoidTogglerCreator(BuilderButtonTrapezoidCreator):
         redraw_group_labels()
         if BUILDER_DEBUG: builder_logger.success(f"✅🆗🔘 [SUCCESS] The trapezoid toggler group '{label}' has materialized!")
         return container
+
+    @staticmethod
+    def make(parent_widget, config_data, context=None, **kwargs):
+        creator = BuilderButtonTrapezoidTogglerCreator()
+        return creator.make_button_trapezoid_toggler(parent_widget, config_data, context, **kwargs)

@@ -21,7 +21,7 @@ class SplinkerEditor(tk.Frame):
         self.mqtt_manager = app.mqtt_connection_manager if app else None
         self.state_cache_manager = app.state_cache_manager if app else None
         
-        from oaComBroker.Managers.protocol_router import ProtocolRouter
+        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         self.router = ProtocolRouter.get_instance()
         
         self._setup_ui()

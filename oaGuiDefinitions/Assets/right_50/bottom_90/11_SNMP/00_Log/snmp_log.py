@@ -16,7 +16,14 @@ class SnmpLog(tk.Frame, TransparencyMixin):
     """
     def __init__(self, parent, json_path=None, config=None, **kwargs):
         super().__init__(parent, **kwargs)
-        self.snmp_manager = self._find_snmp_manager(parent)
+        self.config = config or {}
+        
+        # ⚡ DEPENDENCY INJECTION: Use the app_instance from the config if available
+        self.app_instance = self.config.get("app_instance")
+        if self.app_instance:
+            self.snmp_manager = getattr(self.app_instance, 'snmp_manager', None)
+        else:
+            self.snmp_manager = self._find_snmp_manager(parent)
         
         # State tracking: { OID: last_value }
         self._last_values = {}
@@ -34,10 +41,13 @@ class SnmpLog(tk.Frame, TransparencyMixin):
         from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
         curr = widget
         while curr:
-            if isinstance(curr, DynamicGuiBuilder) and hasattr(curr, 'app_instance'):
-                return getattr(curr.app_instance, 'snmp_manager', None)
+            if isinstance(curr, DynamicGuiBuilder):
+                manager = getattr(curr.app_instance, 'snmp_manager', None)
+                print(f"📡 [DEBUG] SnmpLog: Found DynamicGuiBuilder. App instance has snmp_manager: {manager is not None}")
+                return manager
             try: curr = curr.master
             except: break
+        print(f"📡 [DEBUG] SnmpLog: Failed to find snmp_manager in ancestor chain.")
         return None
 
     def _setup_ui(self):
@@ -101,33 +111,49 @@ class SnmpLog(tk.Frame, TransparencyMixin):
 
     def on_snmp_traffic(self, direction, oid, value, topic, metadata=None):
         # Handle both periodic dumps and real-time changes
+        print(f"📡 [DEBUG] SnmpLog: Traffic Received! Dir: {direction}, OID: {oid}, Val: {value}")
         if direction not in ["TX_DUMP", "RX", "RX_SET"]: return
         
         self.after(0, lambda: self._update_oid_state(oid, value, topic, metadata))
 
     def _update_oid_state(self, oid, value, topic, metadata):
         prev_val = self._last_values.get(oid, None)
+        
+        # ⚡ OPTIMIZATION: If value hasn't changed, don't update 'Previous Value' 
+        # unless it's a new discovery. This keeps the delta meaningful.
         has_changed = (prev_val is not None and str(prev_val) != str(value))
         is_new = (prev_val is None)
         
+        if not is_new and not has_changed:
+            # If nothing changed, we just refresh the "stale" tag to show it's still alive
+            if oid in self._oid_to_item:
+                item_id = self._oid_to_item[oid]
+                self.tree.item(item_id, tags=("stale",))
+            return
+
         # Update State
-        self._last_values[oid] = value
+        if has_changed:
+            # We only store the "old" value when a REAL change occurs.
+            # This prevents periodic TX_DUMP from overwriting the meaningful history.
+            self._last_values[oid] = value
+        elif is_new:
+            self._last_values[oid] = value
+
         if metadata:
             self._oid_metadata[oid] = metadata
         
         # Update UI
         if oid in self._oid_to_item:
             item_id = self._oid_to_item[oid]
-            # Update columns
+            
+            # If changed, we show the transition. If it's a redundant TX_DUMP,
+            # this part is skipped by the 'not has_changed' check above.
             self.tree.item(item_id, values=(oid, value, prev_val or "-", topic or "-"))
             
             if has_changed:
                 # ⚡ MOVE TO TOP and highlight green on change
                 self.tree.move(item_id, "", 0)
                 self.tree.item(item_id, tags=("changed",))
-            else:
-                # Dim to yellow if no change
-                self.tree.item(item_id, tags=("stale",))
         else:
             # ⚡ NEW DISCOVERY: First Cycle Highlight (Yellow BG, Red Text)
             item_id = self.tree.insert("", 0, values=(oid, value, "-", topic or "-"), tags=("new_discovery",))

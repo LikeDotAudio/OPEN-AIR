@@ -33,7 +33,7 @@ class OSCManager:
             logger.info(f"Initializing Bridge (Bridge={run_bridge})...")
         
         # ⚡ STANDALONE: Fallback to global singletons if not injected
-        from oaComBroker.Managers.protocol_router import ProtocolRouter
+        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         self.protocol_router = ProtocolRouter.get_instance()
         
         self.state_cache_manager = state_cache_manager
@@ -75,7 +75,7 @@ class OSCManager:
         self._state_lock = threading.RLock()
 
         # Protocol Router Sync Logic: Listen for remote/local activity
-        from oaComBroker.Managers.protocol_router import ProtocolRouter
+        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
 
     def _broadcast_status_loop(self):
@@ -258,7 +258,7 @@ class OSCManager:
                 )
         else:
             # Fallback if no state manager
-            from oaComBroker.Managers.protocol_router import ProtocolRouter
+            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
             ProtocolRouter.get_instance().ingest("OSC", topic, value, meta)
         
         self._notify_monitor("RX", address, value, topic)
@@ -314,7 +314,7 @@ class OSCManager:
                 source="OSC"
             )
 
-        from oaComBroker.Managers.protocol_router import ProtocolRouter
+        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         # Ingest the TX event back into the router for forensics
         ProtocolRouter.get_instance().ingest("OSC-TX", f"OPEN-AIR/OSC{address}", value, {
             "osc_address": address, 

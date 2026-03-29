@@ -1,8 +1,28 @@
-# FlameGraph/flame_wall_shame.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# oaTests/Methods/FlameGraph/flame_wall_shame.py
 #
-# Description: Brief summary of purpose
+# Metrics-focused performance report for rapid bottleneck identification.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260329.0045.1
+#
+# Description:
+# The 'Wall of Shame' provides a concise, high-density view of the top 
+# performance offenders. It is optimized for rapid scanning by lead 
+# developers to identify immediate hotspots in the code that require
+# micro-optimization or refactoring.
+#
+# Architectural Role:
+# - Performance Auditor: Highlights the heaviest functions by raw metrics.
+# - Rapid Triage Tool: Identifies high-frequency and high-latency offenders.
 
 import html
 

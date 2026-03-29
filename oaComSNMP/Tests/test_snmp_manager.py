@@ -11,7 +11,7 @@ from oaComSNMP.Managers.snmp_manager import SNMPManager
 class TestSNMPManager(unittest.TestCase):
     def setUp(self):
         self.state_cache = MagicMock()
-        with patch("oaComBroker.Managers.protocol_router.ProtocolRouter.get_instance"):
+        with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance"):
             self.manager = SNMPManager(self.state_cache, run_bridge=True)
 
     def test_initialization(self):

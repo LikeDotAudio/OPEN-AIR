@@ -1,8 +1,28 @@
-# protocol_router/monitor.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Core/protocol_router/monitor.py
 #
-# Description: Monitoring and Firehose Management for the Protocol Router.
+# Monitoring and Firehose Management for the Protocol Router.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260328.1430.1
+#
+# Description:
+# The Monitor class provides deep observability into the ProtocolRouter's
+# traffic. It maintains a rolling "firehose" buffer for forensic analysis
+# and implements a broadcast system for UI and telemetry observers.
+#
+# Architectural Role:
+# - Serves as the primary data source for system-wide telemetry.
+# - Provides forensic reporting via Deep Packet Inspection (DPI).
+# - Correlates patched "Splink" relationships across network sessions.
 
 import threading
 import orjson
@@ -10,32 +30,65 @@ from .constants import SOURCE_DESCRIPTIONS, EMOJI_TO_WORD, app_constants
 
 class Monitor:
     """
-    Manages the firehose buffer and provides investigation tools.
+    Manages the firehose buffer and provides forensic investigation tools.
+    
+    The Monitor acts as a passive observer within the router, capturing 
+    every normalized packet for auditing and UI visualization.
     """
     def __init__(self, local_guid):
+        """
+        Initializes the monitor with a rolling buffer.
+        
+        Args:
+            local_guid (str): The unique ID of the local router instance.
+        """
         self.local_guid = local_guid
         self.firehose = []
         self._firehose_lock = threading.Lock()
         self._observers = []
 
     def register_cache_observer(self, callback):
-        """Registers a callback for UI/Monitoring broadcast."""
+        """
+        Registers a callback for real-time telemetry broadcast.
+        
+        Args:
+            callback (fn): A function to receive every processed message.
+        """
         self._observers.append(callback)
 
     def remove_observer(self, callback):
-        """Unregisters a callback."""
+        """
+        Unregisters a telemetry observer.
+        """
         if callback in self._observers:
             self._observers.remove(callback)
 
     def append_to_firehose(self, msg):
-        """Maintains the firehose rolling buffer."""
+        """
+        Maintains the rolling "firehose" buffer (last 2000 packets).
+        
+        Args:
+            msg (dict): The normalized message packet to store.
+        """
         with self._firehose_lock:
             self.firehose.insert(0, msg)
             if len(self.firehose) > 2000:
                 self.firehose.pop()
 
     def get_splink_relationship(self, msg_ts):
-        """Correlates a message with its Splink partner."""
+        """
+        Correlates a message with its connected "Splink" partner.
+        
+        Splinks represent logical patches between topics (e.g., Fader A
+        controls EQ Gain B). This method identifies the partner message
+        in the firehose based on the metadata links.
+        
+        Args:
+            msg_ts (float/str): The timestamp of the message to investigate.
+            
+        Returns:
+            tuple: (source_ts, dest_ts) or (None, None).
+        """
         with self._firehose_lock:
             match = next((m for m in self.firehose if 
                           f"{m['ts']:.6f}" == msg_ts or m['ts'] == msg_ts), None)
@@ -69,7 +122,18 @@ class Monitor:
             return partner["ts"], match["ts"]
 
     def get_dpi_report(self, msg_ts):
-        """Generates a human-readable investigation report for a specific packet."""
+        """
+        Generates a human-readable forensic report for a specific packet.
+        
+        Constructs a visual ASCII report detailing the packet's origin,
+        session ID, routing strategy, and DPI-enriched metadata.
+        
+        Args:
+            msg_ts (float/str): The timestamp of the packet to report on.
+            
+        Returns:
+            str: The formatted report.
+        """
         match = None
         with self._firehose_lock:
             match = next((m for m in self.firehose if 
@@ -143,7 +207,9 @@ class Monitor:
         return "\n".join(report)
 
     def broadcast_to_observers(self, msg):
-        """Notifies all registered observers about a new message."""
+        """
+        Notifies all registered observers about a new message.
+        """
         for cb in self._observers:
             try:
                 cb(msg)

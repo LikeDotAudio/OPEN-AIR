@@ -21,7 +21,13 @@ class SnmpStatus(tk.Frame, TransparencyMixin):
         self.json_path = kwargs.pop("json_path", None)
         
         super().__init__(parent, **kwargs)
-        self.mqtt_client, self.subscriber_router = self._find_mqtt_services(parent)
+        
+        # ⚡ DEPENDENCY INJECTION: Prioritize injected config
+        self.mqtt_client = self.config_data.get("mqtt_connection_manager")
+        self.subscriber_router = self.config_data.get("subscriber_router")
+        
+        if not self.mqtt_client or not self.subscriber_router:
+            self.mqtt_client, self.subscriber_router = self._find_mqtt_services(parent)
         
         self._flash_state = False
         self._is_offline = True
@@ -57,13 +63,15 @@ class SnmpStatus(tk.Frame, TransparencyMixin):
         header.pack(side=tk.TOP, fill=tk.X, pady=10)
         tk.Label(header, text="🌐 SNMP BRIDGE (REMOTE STATUS)", font=("Helvetica", 14, "bold"), fg="#ffffff", bg="#2b2b2b").pack(side=tk.LEFT, padx=20)
         
+        # ⚡ VISIBILITY: Use a more contrasting color for the setup button
         self.re_setup_btn = tk.Button(
             header, 
             text="⚠️ RE-SETUP BRIDGE", 
             command=self.refresh_script,
             font=("Helvetica", 10, "bold"),
-            bg="#2b2b2b",
-            fg="#888888",
+            bg="#ffaa00",
+            fg="#000000",
+            activebackground="#ffcc00",
             padx=15,
             bd=1,
             relief="raised"
@@ -122,17 +130,18 @@ class SnmpStatus(tk.Frame, TransparencyMixin):
         status = self._last_status
         if not status: return
         
-        # ⚡ HEALTH CHECK
-        self._is_offline = not status.get("running", False) or status.get("object_count", 0) == 0
+        # ⚡ HEALTH CHECK: Only show offline if it's explicitly not running.
+        is_running = status.get("running", False)
+        self._is_offline = not is_running
         
         for item in self.tree.get_children():
             self.tree.delete(item)
             
-        self.tree.insert("", "end", text="Bridge Status", values=("ACTIVE" if status.get("running") else "OFFLINE",))
+        self.tree.insert("", "end", text="Bridge Status", values=("ACTIVE" if is_running else "OFFLINE",))
         self.tree.insert("", "end", text="Socket Address", values=(status.get("socket", "Unknown"),))
         self.tree.insert("", "end", text="Root OID", values=(status.get("base_oid", "Unknown"),))
         self.tree.insert("", "end", text="Variables Active", values=(status.get("object_count", 0),))
-        self.tree.insert("", "end", text="Operating Mode", values=("MASTER HUB" if status.get("bridge_mode") else "OBSERVER ONLY",))
+        self.tree.insert("", "end", text="Operating Mode", values=("MASTER HUB" if status.get("bridge_mode") == True else "OBSERVER ONLY",))
         self.tree.insert("", "end", text="Active MIB", values=(status.get("mib_path", "Unknown"),))
 
         # Update script area if provided in the status message

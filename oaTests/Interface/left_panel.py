@@ -4,6 +4,10 @@ from textual.containers import Vertical, Horizontal
 
 class LeftPanel(Vertical):
     def compose(self):
+        yield Label("System Identity", classes="status-label")
+        yield Label("GUID: --", classes="status-item", id="guid_label")
+        yield Label("ROLE: INITIALIZING", classes="status-item", id="role_label")
+
         yield Label("Installation Controls", classes="status-label")
         yield Button("RUN DEPENDENCY CHECK", id="btn_deps", variant="primary")
         yield Button("CLEAN INSTALLATION", id="btn_clean", variant="error")

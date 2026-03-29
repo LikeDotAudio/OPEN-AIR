@@ -1,8 +1,29 @@
-# Interface/TestsUI.py
-# Author: Anthony Peter Kuzub
-# Version: 20260323.2015.1
+# oaTests/Interface/TestsUI.py
 #
-# Description: Textual UI for the OPEN-AIR testing and maintenance suite.
+# High-fidelity Textual TUI for the OPEN-AIR testing and maintenance suite.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260328.1630.1
+#
+# Description:
+# This module implements the main Textual application for managing the 
+# OPEN-AIR test suite, system audits, and maintenance utilities. It 
+# follows the Partitioned Architecture by serving as the UI layer that 
+# orchestrates various Core workers and Managers.
+#
+# Architectural Role:
+# - UI Orchestrator: Bridges user interaction with background test workers.
+# - System Monitor: Provides real-time metrics and HA role status via MQTT.
+# - Maintenance Hub: Centralizes logs, cache, and audit cleanup tools.
 
 from textual.app import App, ComposeResult
 from textual.widgets import Header, Footer, Static, Button, Log, Label
@@ -30,6 +51,8 @@ from oaTests.Workers.CleanupApps.Clear_JsonLines import cleanup_jsonlines
 from oaTests.Managers.AuditRunner import run_all_audits
 from oaTests.Methods.DebugToggler import force_debug_on, force_debug_off
 import asyncio
+import orjson
+from oaComMQTT.Entry import get_connection_manager
 
 from oaInstallation.Managers.Setup import (
     SetupManager, STAGE_PYTHON_DEPS, STAGE_MQTT_INFRA, 
@@ -154,6 +177,7 @@ class TestsApp(App):
         self.summary = {
             "total": 0, "passed": 0, "failed": 0, "errors": 0, "skipped": 0
         }
+        self.mqtt_client = get_connection_manager()
 
     def compose(self) -> ComposeResult:
         yield Header()
@@ -170,6 +194,34 @@ class TestsApp(App):
     def on_mount(self) -> None:
         self.set_interval(2.0, self.update_stats)
         self.write_log("🚀 [READY] Test Suite initialized and standing by.")
+        
+        # Initial UI Labels
+        from oaConfiguration.FileReaders.config_reader import Config
+        guid = Config.get_instance().INSTANCE_GUID
+        self.query_one("#guid_label", Label).update(f"GUID: [bold #F4902C]{guid}[/]")
+        
+        # Monitor HA Status
+        self._start_ha_monitoring()
+
+    def _start_ha_monitoring(self):
+        def on_msg(client, userdata, msg):
+            if "System/Failover/Status/" in msg.topic:
+                try:
+                    data = msg.get_json_payload()
+                    role = data.get("role", "UNKNOWN")
+                    # Update role if it matches this instance
+                    from oaConfiguration.FileReaders.config_reader import Config
+                    if data.get("guid") == Config.get_instance().INSTANCE_GUID:
+                        color = "#00ff00" if role == "PRIMARY" else "#33A1FD"
+                        self.call_from_thread(
+                            lambda: self.query_one("#role_label", Label).update(
+                                f"ROLE: [bold {color}]{role}[/]"
+                            )
+                        )
+                except Exception: pass
+
+        self.mqtt_client.connect_to_broker(on_message_callback=on_msg)
+        self.mqtt_client.subscribe("OPEN-AIR/System/Failover/Status/#")
 
     def update_stats(self) -> None:
         stats = self.stats_provider.get_all_stats()

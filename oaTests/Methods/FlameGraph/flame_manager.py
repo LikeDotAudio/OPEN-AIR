@@ -1,8 +1,28 @@
-# FlameGraph/flame_manager.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# oaTests/Methods/FlameGraph/flame_manager.py
 #
-# Description: Main manager for the OpenAir Performance Intelligence Engine.
+# Main manager for the OpenAir Performance Intelligence Engine.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260329.0015.1
+#
+# Description:
+# The FlameManager coordinates the lifecycle of a performance profiling
+# session. It handles the installation of multi-threaded hooks, collection
+# of call-stack statistics, and synthesis of the final intelligence report
+# including SVG flame graphs and forensic analysis tables.
+#
+# Architectural Role:
+# - Performance Lifecycle Manager: Controls start/stop of profiling hooks.
+# - Intelligence Synthesizer: Aggregates raw stats into human-readable reports.
 
 import sys
 import pathlib

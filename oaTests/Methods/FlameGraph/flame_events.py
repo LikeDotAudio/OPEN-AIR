@@ -1,8 +1,28 @@
-# FlameGraph/flame_events.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# oaTests/Methods/FlameGraph/flame_events.py
 #
-# Description: Brief summary of purpose
+# Statistical processing and event enrichment for profiling data.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260329.0030.1
+#
+# Description:
+# This module provides the logic for transforming raw Python profile
+# statistics into a rich, structured dataset. It performs root attribution
+# (identifying which subsystem triggered a call) and applies layer tagging
+# (APP, LIB, CORE) to simplify forensic analysis.
+#
+# Architectural Role:
+# - Data Normalizer: Converts pstats into a unified dictionary-based schema.
+# - Subsystem Classifier: Maps call stacks back to logical architectural roots.
 
 import os
 import html
@@ -38,7 +58,7 @@ def process_stats_for_ui(ps):
             
     func_to_roots = defaultdict(set)
     root_naming_map = {
-        'OpenAir.py': 'MAIN', 'mqtt': 'MQTT', 'watchdog': 'WATCHDOG', 
+        'openair.py': 'MAIN', 'mqtt': 'MQTT', 'watchdog': 'WATCHDOG', 
         'gui': 'UI', 'worker': 'WORKER', 'visa': 'VISA', 
         'yak': 'YAK', 'manager': 'MANAGER', 'ptp': 'PTP'
     }

@@ -82,7 +82,7 @@ class Application(
         self.visa_proxy = visa_proxy
 
         # ⚡ PROTOCOL ROUTER
-        from oaComBroker.Managers.protocol_router import ProtocolRouter
+        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         ProtocolRouter.get_instance().start()
 
         # Utility classes

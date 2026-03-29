@@ -21,7 +21,8 @@ For detailed information, please refer to the modular documentation:
 
 - **[User Manual](oaDocumentation/Manual/01_Introduction.md)**: Start here to learn how to use the software.
 - **[Installation Guide](oaDocumentation/Landmarks/Installation_Guide.md)**: Setup, dependencies, and environment configuration.
-- **[Documentation Map](oaDocumentation/Landmarks/Documentation_Map.md)**: Deep dive into the project structure and modules.
+- **[Documentation Map](oaDocumentation/Project_Map/Documentation_Map.md)**: Deep dive into the project structure and modules.
+- **[Communication Broker](oaComBroker/Documentation/README.md)**: Details on the Protocol Router and Unified Message Schema.
 - **[Patent Details](oaDocumentation/Patent/01_abstract.md)**: Technical descriptions of the novel architecture.
 
 ---

@@ -91,6 +91,7 @@ class ModuleLoader:
             "theme_colors": self.theme_colors,
             "state_mirror_engine": self.state_mirror_engine,
             "subscriber_router": self.subscriber_router,
+            "mqtt_connection_manager": getattr(self.app_instance, 'mqtt_connection_manager', None),
             "app_instance": self.app_instance,
         }
         

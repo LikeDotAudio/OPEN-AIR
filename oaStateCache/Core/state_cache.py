@@ -101,7 +101,7 @@ class StateRegistry:
             self.cache = {}
 
         if self.cache:
-            from oaComBroker.Managers.protocol_router import ProtocolRouter
+            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
             router = ProtocolRouter.get_instance()
             for topic, payload in self.cache.items():
                 val = payload.get("val") if isinstance(payload, dict) else payload
@@ -116,7 +116,7 @@ class StateRegistry:
         self.cache[topic] = payload
         self.save_engine.schedule_save(topic, payload); self.search_engine.add_topic(topic)
         
-        from oaComBroker.Managers.protocol_router import ProtocolRouter
+        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         # The ProtocolRouter is responsible for outbound dispatch (MQTT, OSC, etc.)
         ProtocolRouter.get_instance().ingest(source, topic, value, payload)
 
@@ -184,7 +184,7 @@ class StateRegistry:
         try:
             source, value, metadata, raw_payload = self._parse_mqtt_payload(msg)
 
-            from oaComBroker.Managers.protocol_router import ProtocolRouter
+            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
             ProtocolRouter.get_instance().ingest("MQTT", topic, value, metadata)
             self.observers.notify(topic, raw_payload)
 

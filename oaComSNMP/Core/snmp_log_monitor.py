@@ -15,7 +15,7 @@ from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger
 from oaComSNMP.Constants.snmp_constants import THREAD_JOIN_TIMEOUT, LOG_POLLING_INTERVAL, MIN_LOG_PARTS
 
 # Import ProtocolRouter and other dependencies
-from oaComBroker.Managers.protocol_router import ProtocolRouter # Assuming this import path is correct
+from oaComBroker.Core.protocol_router.manager import ProtocolRouter 
 
 # LOCAL_DEBUG can be set or passed if needed
 LOCAL_DEBUG = True
@@ -81,9 +81,12 @@ class SnmpLogMonitor:
                                     snmp_logger.debug(f"SnmpLogMonitor: RX SET: {oid} -> {val}")
                                 
                                 # ⚡ ANTI-FEEDBACK SPEC: Define identity at transport ingress
+                                # We use SNMP_SET instead of SNMP to distinguish from 
+                                # mirrored state and allow it to pass through the persister 
+                                # filter if necessary, or just to avoid self-reflection loops.
                                 meta = {
                                     "msg_type": "SPLICE_ACTION",
-                                    "origin_source": "SNMP"
+                                    "origin_source": "SNMP_SET"
                                 }
 
                                 # Ingest the command via Protocol Router

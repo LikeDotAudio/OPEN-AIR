@@ -1,8 +1,18 @@
-# Managers/midi_manager.py
-# Author: Anthony Peter Kuzub
-# Version: 20260323.1700.1
+# oaComMidi/Managers/midi_manager.py
 #
-# Description: Modularized MIDI Orchestrator.
+# Main orchestrator for bidirectional MIDI communication.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260328.1405.1
 
 import threading
 import time
@@ -37,7 +47,7 @@ class MidiManager:
         self._active_in_names, self._active_out_names = [], []
         self._monitor_callbacks = []
 
-        from oaComBroker.Managers.protocol_router import ProtocolRouter
+        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         ProtocolRouter.get_instance().register_cache_observer(self._on_protocol_event)
 
     def add_monitor_callback(self, cb):
@@ -134,7 +144,7 @@ class MidiManager:
                         self.state_cache_manager.handle_external_update(topic, pld, source="MIDI", metadata=meta)
                     else:
                         # Fallback if no state manager (Standalone mode)
-                        from oaComBroker.Managers.protocol_router import ProtocolRouter
+                        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
                         ProtocolRouter.get_instance().ingest("MIDI", topic, val, meta)
                         
             except Exception as e:
@@ -158,7 +168,7 @@ class MidiManager:
                 except Exception as e:
                     midi_logger.error(f"TX Error on {p.name}: {e}")
             
-            from oaComBroker.Managers.protocol_router import ProtocolRouter
+            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
             ProtocolRouter.get_instance().ingest("MIDI-TX", topic, rv, {"midi_raw": str(midi_msg), "msg_type": meta.get("msg_type"), "origin_source": meta.get("origin_source")})
 
     def _on_protocol_event(self, msg):

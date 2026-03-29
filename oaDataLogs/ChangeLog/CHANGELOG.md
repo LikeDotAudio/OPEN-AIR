@@ -1,5 +1,33 @@
 # OPEN-AIR Changelog
 
+## [2026.03.28] - 23:55
+### Communication Broker Refactoring & SNMP GUI Fixes
+- **Refactoring**: Relocated failover_manager.py to Managers/Failover/Manager.py and protocol_router.py proxy to Core/protocol_router/manager.py for better encapsulation.
+- **Documentation**: Generated comprehensive narrative 'play-by-play' event lifecycle documentation with Mermaid sequence and block diagrams.
+- **Bug Fix**: Resolved project-wide ModuleNotFoundError issues by synchronizing all 25+ ProtocolRouter import references.
+- **SNMP GUI**: Optimized the SNMP Delta Monitor to correctly track current vs previous OID values and prevent redundant state refreshes from overwriting history.
+- **Loop Prevention**: Refined the Protocol Router strategy to exempt status and monitor topics from reflection rejection, ensuring critical CORE-to-UI telemetry is preserved.
+
+## [2026.03.28] - 17:30
+**************************************
+Commit: c7f56967f4663fc28d04021025c32005acb6638c
+Date: 2026-03-28 23:30:07
+Message: Relocation & Structural Alignment
+**************************************
+
+**************************************
+Commit: 4f454f4fd702a1718df1d8afe60240b1425219f8
+Date: 2026-03-28 22:37:32
+Message: Structural Audit & Code Hygiene
+**************************************
+
+### Structural Audit & Code Hygiene
+- **Structural Audit**: Conducted a comprehensive "Bad Class & Objects" audit identifying God Classes and dispatch map violations.
+- **Top Offender Identified**: `LayoutParser` in `oaGuiManager` flagged for SRP violations due to multi-strategy layout logic.
+- **Quick Win Strategy**: Proposed a dispatch map refactor for `TestsUI` button handling.
+- **Cleanup**: Recursively removed all `__pycache__` directories to ensure clean build state.
+- **Relocation**: Moved `CHANGELOG.md` from `oaDocumentation/Documentation/` to the mandated `oaDataLogs/ChangeLog/` directory.
+
 ## [2026.03.24] - 16:45
 ### UI Optimization & Syntax Correction
 - **Responsive Layout**: Implemented media queries in `oaTests/Interface/TestsUI.py` to reduce button height and label margins when terminal height is below 40 lines.

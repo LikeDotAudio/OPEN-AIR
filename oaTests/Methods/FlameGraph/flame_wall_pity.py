@@ -1,8 +1,29 @@
-# FlameGraph/flame_wall_pity.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# oaTests/Methods/FlameGraph/flame_wall_pity.py
 #
-# Description: Brief summary of purpose
+# Categorical performance report focusing on architectural empathy.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260329.0040.1
+#
+# Description:
+# The 'Wall of Pity' is a detailed forensic report designed to provide
+# deep context on performance bottlenecks. Unlike the concise Wall of Shame,
+# it provides descriptive narratives for each category of offender, helping
+# developers understand *why* a specific architectural pattern is heavy.
+#
+# Architectural Role:
+# - Forensic Narrator: Translates raw metrics into architectural insights.
+# - Bottleneck Identifier: Groups offenders by Cumulative Time, Self-Time, 
+#   and Call Frequency.
 
 import os
 import html

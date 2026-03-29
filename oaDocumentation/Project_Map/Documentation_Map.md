@@ -2,6 +2,19 @@
 
 This document provides a comprehensive mapping of the OPEN-AIR project structure and its key modules.
 
+## Infrastructure & Protocols
+These modules provide the foundational communication and orchestration layers for the OPEN-AIR ecosystem.
+
+├-----**oaComBroker/**<br>
+     ├----> [oaComBroker](oaComBroker/Documentation/README.md) — *Communication Broker & Protocol Router*<br>
+     ├----> [Summary](oaComBroker/Documentation/Summary.md) — *The Unified Nerve Center Narrative*<br>
+├-----**oaComMidi/**<br>
+     ├----> [oaComMidi](oaComMidi/Documentation/README.md) — *MIDI Communication Module*<br>
+     ├----> [Summary](oaComMidi/Documentation/Summary.md) — *Narrative of Tactile Harmony*<br>
+├-----**oaTests/**<br>
+     ├----> [oaTests](oaTests/Documentation/README.md) — *Validation & Maintenance Suite*<br>
+     ├----> [Summary](oaTests/Documentation/Summary.md) — *Narrative of System Integrity*<br>
+
 ## Managers
 Managers are passive components that handle state and control logic.
 

@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import MagicMock, patch
 import queue
 import time
-from oaComBroker.Managers.protocol_router import ProtocolRouter
+from oaComBroker.Core.protocol_router.manager import ProtocolRouter
 
 class TestProtocolRouter(unittest.TestCase):
     def setUp(self):

@@ -1,8 +1,28 @@
-# FlameGraph/flame_capture.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# oaTests/Methods/FlameGraph/flame_capture.py
 #
-# Description: Brief summary of purpose
+# Low-level Multi-threaded Profiling Hooks.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260329.0020.1
+#
+# Description:
+# This module provides the core capture mechanism for the performance profiler.
+# it monkey-patches the 'threading.Thread.run' method to automatically install
+# cProfile hooks into every spawned child thread, ensuring a unified view of
+# system-wide performance.
+#
+# Architectural Role:
+# - Instrumentation Layer: Injects profiling logic into the Python runtime.
+# - Statistics Aggregator: Consolidates profile data from multiple threads.
 
 import cProfile
 import pstats

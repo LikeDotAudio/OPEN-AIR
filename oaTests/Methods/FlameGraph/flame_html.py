@@ -1,8 +1,28 @@
-# FlameGraph/flame_html.py
-# Author: Anthony Peter Kuzub
-# Version: 20260315.Modular.1
+# oaTests/Methods/FlameGraph/flame_html.py
 #
-# Description: Modularized HTML Report Generator for FlameGraphs.
+# High-fidelity HTML report generator for performance intelligence.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260329.0035.1
+#
+# Description:
+# This module assembles the various components of a profiling session—SVG
+# flame graphs, forensic tables, and categorical 'Walls'—into a standalone,
+# interactive HTML report. It uses a template-based system to ensure a
+# consistent visual identity for OPEN-AIR forensic assets.
+#
+# Architectural Role:
+# - Report Orchestrator: Final stage of the FlameGraph pipeline.
+# - UI Component Assembler: Merges SVG and statistical data into a single file.
 
 import os
 from pathlib import Path

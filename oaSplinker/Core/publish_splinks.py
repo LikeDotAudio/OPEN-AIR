@@ -9,7 +9,7 @@ import orjson
 from ..Constants.constants import app_constants
 
 def publish_splinks(self):
-    from oaComBroker.Managers.protocol_router import ProtocolRouter
+    from oaComBroker.Core.protocol_router.manager import ProtocolRouter
     router = ProtocolRouter.get_instance()
     
     # ⚡ INGEST: Pass the status update to the router for broadcast

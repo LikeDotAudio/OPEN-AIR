@@ -205,7 +205,7 @@ class SNMPManager:
         self.log_monitor.start()
 
         # Protocol Router Sync Logic: Listen for remote/local activity
-        from oaComBroker.Managers.protocol_router import ProtocolRouter
+        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         router = ProtocolRouter.get_instance()
         router.register_cache_observer(self.handle_protocol_event)
 

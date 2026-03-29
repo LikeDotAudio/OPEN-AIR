@@ -20,7 +20,7 @@ class TestStateCache(unittest.TestCase):
         self.registry.save_engine = MagicMock()
         self.registry.observers = MagicMock()
         
-        with patch("oaComBroker.Managers.protocol_router.ProtocolRouter.get_instance") as mock_router_get:
+        with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance") as mock_router_get:
             mock_router = mock_router_get.return_value
             with patch("oaTranslator.Core.manifest.builder.create_manifest", return_value={"val": 42}):
                 

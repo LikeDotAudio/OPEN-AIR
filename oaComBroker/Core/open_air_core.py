@@ -1,31 +1,32 @@
-# Core/open_air_core.py
-# Author: Anthony Peter Kuzub
-# Version: 20260314.120000.REV01
+# oaComBroker/Core/open_air_core.py
 #
-# Description: managers/System_Core/open_air_core.py
-
-"""
-open_air_core.py - Safety-Critical Core Partition for OPEN-AIR.
-
-Purpose:
-    Serves as the central orchestration point for the OPEN-AIR hardware-facing
-    logic. It is responsible for initializing system paths, logging, 
-    configuration, and launching the core managers that handle MQTT 
-    communication and state synchronization.
-
-Primary Responsibilities:
-    - Execute system initialization and high-priority path resolution.
-    - Manage the hardware watchdog to ensure system liveness (heartbeat).
-    - Orchestrate the lifecycle of MQTT and State Cache managers.
-    - Implement a graceful shutdown sequence for all background services.
-
-Assumptions and Constraints:
-    - Assumes a POSIX-compliant environment for file and path handling.
-    - Requires network access for MQTT communication if configured.
-    - Expects 'config.ini' to be present and structurally valid.
-    - Designed to run as a headless, statically allocated service.
-    - Requires write permissions for the log and data directories.
-"""
+# Safety-Critical Core Partition for the Communication Broker.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260328.1630.1
+#
+# Description:
+# This module serves as the central orchestration point for the OPEN-AIR 
+# hardware-facing logic. It initializes system paths, logging, configuration, 
+# and launches the core managers for MQTT and state synchronization.
+#
+# Partitioned Architecture (Core vs UI):
+# This is the 'Core' partition. It is designed to run headless and statically 
+# allocated, providing the foundational services required for communication.
+#
+# Constraints & Dependencies:
+# - Assumes a POSIX-compliant environment.
+# - Requires network access for MQTT.
+# - Depends on 'config.ini' presence.
 
 import sys
 import os
@@ -47,8 +48,8 @@ from oaConfiguration.Methods.console_encoder import configure_console_encoding
 import oaWatchdog.Managers.watchdog as watchdog
 from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
 from oaStateCache.Core.state_cache import StateRegistry
+from oaComBroker.Managers.Failover.Manager import FailoverManager
 from oaComMQTT.Core.mqtt_publisher_service import shutdown_publisher_worker
-
 # LOCAL_DEBUG: Toggles verbose tracing for the core boot sequence.
 LOCAL_DEBUG = True
 
@@ -96,10 +97,9 @@ def main():
     # 3. --- Core Manager Lifecycle ---
     mqtt_connection_manager = MqttConnectionManager()
     state_cache_manager = StateRegistry(mqtt_connection_manager)
-    
-    from oaComBroker.Managers.protocol_router import ProtocolRouter
+
+    from oaComBroker.Core.protocol_router.manager import ProtocolRouter
     ProtocolRouter.get_instance().set_state_cache(state_cache_manager)
-    
     # launch_core_managers returns a registry of active services.
     managers = launch_core_managers(state_cache_manager, mqtt_connection_manager)
     
@@ -111,6 +111,10 @@ def main():
     start_network_services = managers.get("start_network_services")
     if start_network_services:
         start_network_services()
+
+    # 4.5 --- High Availability Failover ---
+    failover_mgr = FailoverManager(ProtocolRouter.get_instance(), mqtt_connection_manager)
+    failover_mgr.start()
 
     if LOCAL_DEBUG:
         CORE_LOGGER.success("CORE: Service Operational. Watchdog Active.")

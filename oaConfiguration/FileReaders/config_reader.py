@@ -47,7 +47,7 @@ class Config(ConfigDefaults):
         self._cached_global_settings = {
             "general_debug_enabled": self.ENABLE_DEBUG_MODE,
             "debug_enabled": ds_enabled,
-            "debug_to_file": self.ENABLE_DEBUG_MODE,
+            "debug_to_file": self.ENABLE_LOG_TO_FILE,
             "debug_to_terminal": ds_enabled,
         }
         return self._cached_global_settings
@@ -62,6 +62,7 @@ class Config(ConfigDefaults):
     def _parse_debug_settings(self, config):
         self.ENABLE_DEBUG_MODE = self._s_get(config, "Debug", "ENABLE_DEBUG_MODE", self.ENABLE_DEBUG_MODE, "bool")
         self.ENABLE_DEBUG_SCREEN = self._s_get(config, "Debug", "ENABLE_DEBUG_SCREEN", self.ENABLE_DEBUG_SCREEN, "bool")
+        self.ENABLE_LOG_TO_FILE = self._s_get(config, "Debug", "ENABLE_LOG_TO_FILE", self.ENABLE_LOG_TO_FILE, "bool")
         self.SNMP_DEBUG_ENABLE = self._s_get(config, "Debug", "SNMP_DEBUG_ENABLE", self.SNMP_DEBUG_ENABLE, "bool")
         self.MIDI_DEBUG_ENABLE = self._s_get(config, "Debug", "MIDI_DEBUG_ENABLE", self.MIDI_DEBUG_ENABLE, "bool")
         self.OSC_DEBUG_ENABLE = self._s_get(config, "Debug", "OSC_DEBUG_ENABLE", self.OSC_DEBUG_ENABLE, "bool")

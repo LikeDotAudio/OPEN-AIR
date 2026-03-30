@@ -2,7 +2,7 @@
 from textual.app import ComposeResult
 from textual.screen import Screen
 from textual.widgets import Label, Checkbox, Button, Footer
-from textual.containers import Vertical, Container
+from textual.containers import Vertical, Container, ScrollableContainer
 from oaTests.Managers.configIniEditor.manager import ConfigIniEditor
 
 class DebugMatrixScreen(Screen):
@@ -14,8 +14,8 @@ class DebugMatrixScreen(Screen):
     }
 
     #dialog {
-        width: 60;
-        height: auto;
+        width: 70;
+        height: 45;
         background: #2b2b2b;
         border: thick #F4902C;
         padding: 1;
@@ -25,6 +25,14 @@ class DebugMatrixScreen(Screen):
         text-style: bold;
         color: #F4902C;
         margin-bottom: 1;
+        text-align: center;
+    }
+
+    .section-label {
+        text-style: bold underline;
+        color: #F4902C;
+        margin-top: 1;
+        margin-bottom: 0;
     }
 
     .matrix-item {
@@ -36,6 +44,7 @@ class DebugMatrixScreen(Screen):
         margin-top: 1;
         background: #F4902C;
         color: black;
+        width: 100%;
     }
 
     Checkbox {
@@ -47,11 +56,6 @@ class DebugMatrixScreen(Screen):
         color: #2ecc71; /* Bright Green for True */
         text-style: bold;
     }
-
-    Checkbox > .checkbox--toggle {
-        /* [X] or [ ] will automatically follow the parent color in Textual */
-        text-style: bold;
-    }
     """
 
     def compose(self) -> ComposeResult:
@@ -59,22 +63,30 @@ class DebugMatrixScreen(Screen):
         setup = editor.get_all_debug_sections()
 
         with Container(id="dialog"):
-            yield Label("DEBUG MATRIX CONFIGURATION", classes="matrix-label")
+            yield Label("SYSTEM CONFIGURATION & DEBUG MATRIX", classes="matrix-label")
             
-            # 1. Master Switch
-            yield Checkbox("MASTER DEBUG ENABLE", value=setup["master"], id="chk_master_debug")
-            
-            # 2. Systems
-            yield Label("  [u]Systems[/]", classes="matrix-item")
-            for sys_name, val in setup["systems"].items():
-                chk_id = f"chk_sys_{sys_name.lower()}"
-                yield Checkbox(f"  {sys_name}", value=val, id=chk_id)
+            with ScrollableContainer():
+                # 1. Global Debug Section
+                yield Label("GLOBAL DEBUG SETTINGS [Debug]", classes="section-label")
+                for key, val in setup["debug"].items():
+                    chk_id = f"chk_dbg_{key.lower()}"
+                    yield Checkbox(f"  {key.upper().replace('_', ' ')}", value=val, id=chk_id)
 
-            # 3. Elements
-            yield Label("  [u]Elements[/]", classes="matrix-item")
-            for el_name, val in setup["elements"].items():
-                chk_id = f"chk_el_{el_name.lower()}"
-                yield Checkbox(f"  {el_name}", value=val, id=chk_id)
+                # 2. Matrix Master Switch
+                yield Label("DEBUG MATRIX CONTROL", classes="section-label")
+                yield Checkbox("  MASTER MATRIX ENABLE", value=setup["master"], id="chk_master_debug")
+                
+                # 3. Systems
+                yield Label("  [u]Systems[/]", classes="matrix-item")
+                for sys_name, val in setup["systems"].items():
+                    chk_id = f"chk_sys_{sys_name.lower()}"
+                    yield Checkbox(f"  {sys_name}", value=val, id=chk_id)
+
+                # 4. Elements
+                yield Label("  [u]Elements[/]", classes="matrix-item")
+                for el_name, val in setup["elements"].items():
+                    chk_id = f"chk_el_{el_name.lower()}"
+                    yield Checkbox(f"  {el_name}", value=val, id=chk_id)
             
             yield Button("CLOSE & RETURN", id="btn_close", variant="success")
         yield Footer()
@@ -88,7 +100,15 @@ class DebugMatrixScreen(Screen):
         cid = event.checkbox.id
         if not cid: return
         
-        # Map UI ID back to config.ini key
+        editor = ConfigIniEditor()
+
+        # Handle [Debug] section
+        if cid.startswith("chk_dbg_"):
+            config_key = cid.replace("chk_dbg_", "")
+            editor.set_config_flag("Debug", config_key, event.value)
+            return
+
+        # Handle [DEBUG_MATRIX] section
         key_map = {
             "chk_master_debug": "master_debug_enable",
             "chk_sys_comms": "sys_comms",
@@ -105,8 +125,4 @@ class DebugMatrixScreen(Screen):
         
         if cid in key_map:
             config_key = key_map[cid]
-            editor = ConfigIniEditor()
-            if editor.set_debug_flag(config_key, event.value):
-                # We can't easily write to the main app log from here without 
-                # custom events, but the change is saved to disk.
-                pass
+            editor.set_debug_flag(config_key, event.value)

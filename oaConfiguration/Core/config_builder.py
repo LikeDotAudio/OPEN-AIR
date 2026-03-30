@@ -49,6 +49,8 @@ current_version = 20251225
 enable_debug_mode = True
 # Display debug info on the application screen
 enable_debug_screen = True
+# Toggle background file logging to /oaDataLogs
+enable_log_to_file = True
 # Individual protocol debug toggles
 snmp_debug_enable = True
 midi_debug_enable = True

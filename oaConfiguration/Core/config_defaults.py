@@ -13,6 +13,7 @@ class ConfigDefaults:
     # Debugging
     ENABLE_DEBUG_MODE = False
     ENABLE_DEBUG_SCREEN = False
+    ENABLE_LOG_TO_FILE = True
     SNMP_DEBUG_ENABLE = False
     MIDI_DEBUG_ENABLE = False
     OSC_DEBUG_ENABLE = False

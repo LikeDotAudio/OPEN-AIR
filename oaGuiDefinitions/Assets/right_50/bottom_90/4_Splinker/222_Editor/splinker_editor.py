@@ -19,6 +19,7 @@ class SplinkerEditor(tk.Frame):
         self.splinker_manager = ControlBroker.get_instance()
         app = self.config_data.get("app_instance")
         self.mqtt_manager = app.mqtt_connection_manager if app else None
+        self.subscriber_router = self.config_data.get("subscriber_router")
         self.state_cache_manager = app.state_cache_manager if app else None
         
         from oaComBroker.Core.protocol_router.manager import ProtocolRouter
@@ -26,9 +27,9 @@ class SplinkerEditor(tk.Frame):
         
         self._setup_ui()
         
-        if self.mqtt_manager:
-            self.mqtt_manager.subscribe("OPEN-AIR/System/Status/Splinker/List", qos=0, on_message_callback=self.handle_splinker_status)
-            self.mqtt_manager.subscribe("OPEN-AIR/System/Status/Splinker/Panic", qos=0, on_message_callback=self.handle_panic_status)
+        if self.subscriber_router:
+            self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Status/Splinker/List", self.handle_splinker_status)
+            self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Status/Splinker/Panic", self.handle_panic_status)
         
         self.refresh_splink_list()
         self.selected_splink_id = None
@@ -127,9 +128,9 @@ class SplinkerEditor(tk.Frame):
         
         ttk.Button(controls_frame, text="Delete", command=self.delete_selected_splink).pack(side=tk.RIGHT, padx=5)
 
-    def handle_splinker_status(self, payload):
+    def handle_splinker_status(self, msg):
         try:
-            data = orjson.loads(payload)
+            data = msg.get_json_payload()
             splinks = data.get("val", data) if isinstance(data, dict) else data
             if isinstance(splinks, list):
                 self.splinker_manager.splinks = splinks
@@ -137,9 +138,9 @@ class SplinkerEditor(tk.Frame):
         except Exception as e:
             logger.debug(f"Failed to handle splinker status: {e}")
 
-    def handle_panic_status(self, payload):
+    def handle_panic_status(self, msg):
         try:
-            data = orjson.loads(payload)
+            data = msg.get_json_payload()
             is_panic = data.get("val", False)
             if is_panic:
                 self.panic_btn.config(text="🆘 PANIC ACTIVE!", bg="#ff0000", state=tk.DISABLED)

@@ -80,9 +80,16 @@ class MqttConnectionManager:
         """Thread-safe non-blocking publish (enqueues message)."""
         self.queue_manager.put_publish_message(topic, payload, qos, retain)
 
-    def subscribe(self, topic, qos=0):
+    def subscribe(self, topic, qos=0, on_message_callback=None):
         """Thread-safe non-blocking subscribe (enqueues request)."""
-        self.queue_manager.put_subscribe_request(topic, qos)
+        if on_message_callback:
+            if self.subscriber_router:
+                self.subscriber_router.subscribe_to_topic(topic, on_message_callback)
+            else:
+                MQTT_LOGGER.warning(f"MQTT: Subscribe with callback for {topic} but no subscriber_router set.")
+                self.queue_manager.put_subscribe_request(topic, qos)
+        else:
+            self.queue_manager.put_subscribe_request(topic, qos)
 
     def connect_to_broker(self, address=None, port=None, on_message_callback=None, subscriber_router=None):
         """Starts the background worker thread and connects to the broker."""
@@ -92,6 +99,12 @@ class MqttConnectionManager:
         
         self.broker_address = address or app_constants.MQTT_BROKER_ADDRESS
         self.broker_port = port or app_constants.MQTT_BROKER_PORT
+        
+        # ⚡ ARCHITECTURAL FIX: If sub_router is provided but no callback is set, 
+        # use the router's callback by default to ensure messages are routed.
+        if subscriber_router and not on_message_callback:
+            on_message_callback = subscriber_router.get_on_message_callback()
+            
         self.on_message_callback = on_message_callback
         self.subscriber_router = subscriber_router
 

@@ -1,8 +1,29 @@
 # Managers/snmp_manager.py
-# Author: Anthony P. Kuzub (Refactored)
-# Version: 20260323.1700.1
 #
-# Description: Dedicated orchestrator for SNMP traffic.
+# Dedicated orchestrator for SNMP traffic and bridge management.
+#
+# Author: Anthony P. Kuzub (Refactored)
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260329.1005.1
+#
+# Description:
+# The SNMPManager serves as the central hub for the SNMP communication layer. 
+# It orchestrates the synchronization between the internal MQTT-based state 
+# cache and the external SNMP daemon (snmpd). It manages OID mapping, state 
+# persistence, and log monitoring for incoming SET commands.
+#
+# Architectural Role:
+# - Bridge Orchestrator: Connects Core partition logic with SNMP protocols.
+# - Lifecycle Manager: Controls background persistence and monitoring threads.
+# - Protocol Translator: Maps hierarchical MQTT topics to numerical OID trees.
 
 import os
 import time
@@ -288,35 +309,70 @@ class SNMPManager:
         self.mqtt_connection_manager.publish("OPEN-AIR/System/Status/SNMP/Bridge", status)
 
     def stop(self):
+        """
+        Signals the SNMP bridge and all associated workers to stop.
+        
+        Side Effects:
+            - Transitions the 'running' state to False.
+            - Stops the background persistence and log monitoring threads.
+            - Unregisters from the Protocol Router to prevent duplicate observers.
+            - Logs a warning that the bridge is offline.
+        """
         with self._state_lock:
+            if not self._running:
+                return
             self._running = False
+        
         snmp_logger.warning("SNMP Bridge Offline.")
         
-        # Stop the SnmpStatePersister thread
+        # 1. Unregister from Protocol Router to stop receiving events
+        try:
+            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+            router = ProtocolRouter.get_instance()
+            if hasattr(router, "unregister_cache_observer"):
+                router.unregister_cache_observer(self.handle_protocol_event)
+            
+            # Clear self as the active SNMP manager in the router
+            if self.run_bridge and hasattr(router, "set_snmp_manager"):
+                router.set_snmp_manager(None)
+        except Exception as e:
+            snmp_logger.error(f"Failed to unregister SNMP Manager from router: {e}")
+
+        # 2. Stop background worker threads.
         self.state_persister.stop()
+        self.log_monitor.stop()
 
     def publish(self, topic, val, meta=None):
         """
-        Explicit publication method called by ProtocolRouter.
+        Placeholder for explicit data publication (Traps).
+        
+        Note:
+            The current SNMP implementation uses a 'Pull' model via file 
+            synchronization with the snmpd daemon.
         """
-        pass
-
-    def handle_protocol_event(self, msg):
-        """Callback for all router traffic. No direct action needed as SNMP syncs via file loop."""
         pass
 
     # --- Worker Delegations ---
     def get_mib_content(self):
+        """
+        Generates dynamic MIB file content based on the current OID map.
+        
+        Returns:
+            str: Complete SMIv2 MIB definition.
+        """
         if LOCAL_DEBUG:
             snmp_logger.debug("Generating dynamic MIB content.")
-        # Updated to use the new OidMapConverter
         oid_map_data = self.oid_map_converter.build_oid_map()
         with self._state_lock:
-            # The build_oid_map method now updates self.oid_map_converter.oid_map directly
-            # We retrieve it here to pass to MibGenerator
             return MibGenerator.generate(self.base_oid, self.oid_map_converter.oid_map)
 
     def save_current_mib(self):
+        """
+        Serializes the dynamic MIB to the configured system path.
+        
+        Returns:
+            bool: True on success, False on failure.
+        """
         try:
             os.makedirs(os.path.dirname(SNMP_CURRENT_MIB), exist_ok=True)
             content = self.get_mib_content()
@@ -330,10 +386,25 @@ class SNMPManager:
             return False
 
     def get_installer_script(self):
-        # Pass the path of the master script to the generator
+        """
+        Retrieves the full bash installation script for system deployment.
+        
+        Returns:
+            str: Bash installer content.
+        """
         return InstallerGenerator.generate(self.base_oid, self.data_manager.get_master_script_path())
 
     def run_verification(self, mib_path=None, force_raw=True):
+        """
+        Executes a diagnostic snmpwalk to verify tree availability.
+        
+        Args:
+            mib_path (str, optional): Path to a specific MIB file.
+            force_raw (bool): If True, returns numerical OIDs only.
+            
+        Returns:
+            str: Diagnostic report from the snmpwalk command.
+        """
         if mib_path:
             if LOCAL_DEBUG:
                 snmp_logger.debug(f"Verifying with MIB: {mib_path}")

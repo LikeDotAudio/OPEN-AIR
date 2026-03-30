@@ -1,5 +1,18 @@
 # OPEN-AIR Changelog
 
+## [2026.03.29] - 22:00
+**************************************
+Commit: 23c00473d7f36df4cadaeeec9cfcd84f3a600f39
+Date: 2026-03-29 20:59:36
+Message: SNMP Bridge Reliability & OSC Syntax Fixes
+**************************************
+### SNMP Bridge Reliability & OSC Syntax Fixes
+- **Bug Fix**: Resolved a `SyntaxError` in `oaComOSC/Managers/osc_manager.py` caused by redundant and malformed code appended to the file.
+- **SNMP Bridge**: Fixed sporadic "flickering" behavior by enforcing partition-aware initialization (only CORE/STANDALONE runs the active bridge) and ensuring full worker thread cleanup on stop.
+- **Persistence Sync**: Fixed SNMP state file updates by ensuring the OID map is refreshed from the latest state cache in every persistence loop.
+- **Protocol Router**: Added `unregister_cache_observer` to allow transport managers to cleanly detach during shutdown.
+
+
 ## [2026.03.28] - 23:55
 ### Communication Broker Refactoring & SNMP GUI Fixes
 - **Refactoring**: Relocated failover_manager.py to Managers/Failover/Manager.py and protocol_router.py proxy to Core/protocol_router/manager.py for better encapsulation.
@@ -145,3 +158,6 @@ Commit: 24d142473c50ae3cf4073103135171b85c4c98c1
 Date: 2026-03-17 00:40:32
 Message: ## [2026.03.16] - 23:00 ### Fixed - Fixed  in background panel generation by updating  calls to . - Fixed  in  graph initialization by correctly referencing the  module. - Resolved multiple thread failures occurring during dynamic GUI building.
 **************************************
+2026-03-29 00:05:00: Fixed SyntaxError in oaComOSC/Managers/osc_manager.py caused by redundant/broken code at the end of the file.
+2026-03-29 21:30:00: Fixed SNMP Bridge 'flickering' and resource conflict by enforcing partition-aware initialization and ensuring full worker cleanup on stop.
+2026-03-29 21:45:00: Fixed SNMP persistence sync by ensuring OID map is refreshed from state cache in the persistence loop.

@@ -1,8 +1,18 @@
-# Core/snmp_state_persister.py
-# Author: Gemini (Refactored from SNMPManager)
-# Version: 20260324.1.1
+# oaComSNMP/Core/snmp_state_persister.py
 #
-# Description: Manages the periodic persistence of SNMP state to a file.
+# Manages the periodic persistence of SNMP state to a file.
+#
+# Author: Anthony Peter Kuzub (Contributor to this project)
+# Blog: www.Like.audio
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260329.1020.1
 
 import os
 import time
@@ -80,29 +90,34 @@ class SnmpStatePersister:
 
                 # Safely get OID map data for processing from the converter
                 oid_map_data = []
-                # Accessing oid_map_converter.oid_map requires the lock
+                cache_snapshot = {}
+
+                # Accessing state and converter requires the lock
                 with self._state_lock: # Use the lock provided by the manager
                     if not self.state_cache_manager.cache: # Skip if cache is empty
                         time.sleep(STATE_SYNC_INTERVAL)
                         continue
-                    
-                    # Get the OID map data from the converter
-                    oid_map_data = list(self.oid_map_converter.oid_map.items())
 
-                sorted_items = sorted(oid_map_data, key=lambda x: x[1]['topic'])
-                lines = []
-                
-                # Retrieve cache snapshot for filtering logic
-                cache_snapshot = {}
-                with self._state_lock:
+                    # 1. Create a snapshot of the current state cache
                     try:
                         cache_snapshot = self.state_cache_manager.cache.copy()
                     except AttributeError:
                         cache_snapshot = dict(self.state_cache_manager.cache)
 
+                    # 2. ⚡ REFRESH: Rebuild the OID map from this specific snapshot
+                    self.oid_map_converter.build_oid_map(cache_snapshot=cache_snapshot)
+
+                    # 3. Extract the items for iteration outside the lock
+                    oid_map_data = list(self.oid_map_converter.oid_map.items())
+
+                sorted_items = sorted(oid_map_data, key=lambda x: x[1]['topic'])
+                lines = []
+
                 for oid, data in sorted_items:
                     topic = data['topic']
-                    payload = cache_snapshot.get(topic, {}) # Get payload for filtering if needed
+                    # Use the snapshot we took inside the lock for consistency
+                    payload = cache_snapshot.get(topic, {}) 
+ # Get payload for filtering if needed
 
                     # ⚡ ANTI-FEEDBACK SPEC: The Golden Rule for Transports
                     msg_type = payload.get("msg_type")

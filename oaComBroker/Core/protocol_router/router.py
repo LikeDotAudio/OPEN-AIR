@@ -225,6 +225,7 @@ class ProtocolRouter:
 
     # --- Observation APIs ---
     def register_cache_observer(self, cb): self.monitor.register_cache_observer(cb)
+    def unregister_cache_observer(self, cb): self.monitor.remove_observer(cb)
     def remove_observer(self, cb): self.monitor.remove_observer(cb)
 
     def ingest(self, transport_source, topic, value, metadata=None):

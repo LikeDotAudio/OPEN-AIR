@@ -1,8 +1,18 @@
-# Core/oid_map_converter.py
-# Author: Gemini (Refactored from SNMPManager)
-# Version: 20260324.1.0
+# oaComSNMP/Core/oid_map_converter.py
 #
-# Description: Converts MQTT topics and payloads into SNMP OID map data.
+# Converts MQTT topics and payloads into SNMP OID map data.
+#
+# Author: Anthony Peter Kuzub (Contributor to this project)
+# Blog: www.Like.audio
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260329.1010.1
 
 import os
 import time
@@ -37,7 +47,7 @@ class OidMapConverter:
         self._state_lock = thread_lock # Use the provided lock for external state access
         self.oid_map = {}
         
-    def build_oid_map(self):
+    def build_oid_map(self, cache_snapshot=None):
         """
         Updates the internal OID map from the state cache by processing MQTT topics.
         This method is designed to be called in a thread-safe context by the caller.
@@ -47,9 +57,8 @@ class OidMapConverter:
             snmp_logger.warning("OidMapConverter: State cache manager is not available.")
             return {}
         
-        # Use the provided lock to access the state cache safely
-        cache_snapshot = {}
-        with self._state_lock: # Use the provided lock from the caller (SNMPManager)
+        # Use provided snapshot or create one if not provided (caller MUST have lock)
+        if cache_snapshot is None:
             try:
                 # If it's a dict, dict.copy() is a shallow copy, safe from concurrent size changes during iteration
                 cache_snapshot = self.state_cache_manager.cache.copy()

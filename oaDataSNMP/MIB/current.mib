@@ -5,11 +5,11 @@ IMPORTS
     DisplayString FROM SNMPv2-TC;
 
 openAirMIB MODULE-IDENTITY
-    LAST-UPDATED "202603290009Z"
+    LAST-UPDATED "202603292053Z"
     ORGANIZATION "OPEN-AIR Project"
     CONTACT-INFO "Anthony Peter Kuzub"
     DESCRIPTION "MQTT-Aligned OID Tree for OPEN-AIR."
-    REVISION "202603290009Z"
+    REVISION "202603292053Z"
     DESCRIPTION "Strictly unique path-aligned generation."
     ::= { enterprises 65300 }
 
@@ -67,6 +67,14 @@ notee417 OBJECT-TYPE
     DESCRIPTION "Source: OPEN-AIR/OSC/MIDI/32_0/ch11/note63"
     ::= { ch3b69 28757 }
 
+-- MQTT: OPEN-AIR/OSC/MIDI/32_0/ch11/note50
+note5633 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/OSC/MIDI/32_0/ch11/note50"
+    ::= { ch3b69 29228 }
+
 -- MQTT: OPEN-AIR/OSC/MIDI/32_0/ch11/note66
 note947d OBJECT-TYPE
     SYNTAX      DisplayString
@@ -99,6 +107,14 @@ notee37a OBJECT-TYPE
     DESCRIPTION "Source: OPEN-AIR/OSC/MIDI/32_0/ch11/note67"
     ::= { ch3b69 46156 }
 
+-- MQTT: OPEN-AIR/OSC/MIDI/32_0/ch11/note54
+note515e OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/OSC/MIDI/32_0/ch11/note54"
+    ::= { ch3b69 46645 }
+
 -- MQTT: OPEN-AIR/OSC/MIDI/32_0/ch11/note59
 note2fef OBJECT-TYPE
     SYNTAX      DisplayString
@@ -107,6 +123,14 @@ note2fef OBJECT-TYPE
     DESCRIPTION "Source: OPEN-AIR/OSC/MIDI/32_0/ch11/note59"
     ::= { ch3b69 51848 }
 
+-- MQTT: OPEN-AIR/OSC/MIDI/32_0/ch11/note48
+note41f3 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/OSC/MIDI/32_0/ch11/note48"
+    ::= { ch3b69 52063 }
+
 -- MQTT: OPEN-AIR/OSC/MIDI/32_0/ch11/note65
 noted74d OBJECT-TYPE
     SYNTAX      DisplayString
@@ -114,6 +138,14 @@ noted74d OBJECT-TYPE
     STATUS      current
     DESCRIPTION "Source: OPEN-AIR/OSC/MIDI/32_0/ch11/note65"
     ::= { ch3b69 54624 }
+
+-- MQTT: OPEN-AIR/OSC/MIDI/32_0/ch11/pitchwheel
+pitchwheel75d8 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/OSC/MIDI/32_0/ch11/pitchwheel"
+    ::= { ch3b69 58488 }
 
 -- MQTT: OPEN-AIR/OSC/MIDI/32_0/ch11/note64
 note7a73 OBJECT-TYPE
@@ -130,6 +162,14 @@ notec857 OBJECT-TYPE
     STATUS      current
     DESCRIPTION "Source: OPEN-AIR/OSC/MIDI/32_0/ch11/note57"
     ::= { ch3b69 59279 }
+
+-- MQTT: OPEN-AIR/OSC/MIDI/32_0/ch11/cc1
+cc4030 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/OSC/MIDI/32_0/ch11/cc1"
+    ::= { ch3b69 60220 }
 
 assetsa5ca OBJECT IDENTIFIER ::= { oSC6c63 64155 }
 spectrum26e9 OBJECT IDENTIFIER ::= { assetsa5ca 938 }
@@ -190,6 +230,15 @@ faderconfig134e OBJECT-TYPE
 frequency859c OBJECT IDENTIFIER ::= { instrumentf0bf 30451 }
 spectrumInstrumentfrequency41d2 OBJECT IDENTIFIER ::= { frequency859c 3403 }
 blocksf1b9 OBJECT IDENTIFIER ::= { spectrumInstrumentfrequency41d2 33772 }
+quickSpan7d80 OBJECT IDENTIFIER ::= { blocksf1b9 3935 }
+-- MQTT: OPEN-AIR/OSC/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Quick Span/Span
+span50df OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/OSC/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Quick Span/Span"
+    ::= { quickSpan7d80 33872 }
+
 startStop971f OBJECT IDENTIFIER ::= { blocksf1b9 20369 }
 -- MQTT: OPEN-AIR/OSC/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz
 stopfreqMHza149 OBJECT-TYPE
@@ -989,13 +1038,22 @@ rotationcc9c OBJECT-TYPE
     DESCRIPTION "Source: OPEN-AIR/Assets/Zoo/Faders/LTP/Zoo_Faders_LTP/blocks/LTP_Freestyle_Console/CH6/rotation"
     ::= { cHdade 19502 }
 
--- MQTT: OPEN-AIR/Assets/Zoo/Faders/LTP/Zoo_Faders_LTP/blocks/LTP_Freestyle_Console/CH7
-cHadd9 OBJECT-TYPE
+cHadd9 OBJECT IDENTIFIER ::= { lTPFreestyleConsolec0ad 9086 }
+-- MQTT: OPEN-AIR/Assets/Zoo/Faders/LTP/Zoo_Faders_LTP/blocks/LTP_Freestyle_Console/CH7/rotation
+rotation235e OBJECT-TYPE
     SYNTAX      DisplayString
     MAX-ACCESS  read-write
     STATUS      current
-    DESCRIPTION "Source: OPEN-AIR/Assets/Zoo/Faders/LTP/Zoo_Faders_LTP/blocks/LTP_Freestyle_Console/CH7"
-    ::= { lTPFreestyleConsolec0ad 9086 }
+    DESCRIPTION "Source: OPEN-AIR/Assets/Zoo/Faders/LTP/Zoo_Faders_LTP/blocks/LTP_Freestyle_Console/CH7/rotation"
+    ::= { cHadd9 10000 }
+
+-- MQTT: OPEN-AIR/Assets/Zoo/Faders/LTP/Zoo_Faders_LTP/blocks/LTP_Freestyle_Console/CH8
+cH3d66 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Zoo/Faders/LTP/Zoo_Faders_LTP/blocks/LTP_Freestyle_Console/CH8"
+    ::= { lTPFreestyleConsolec0ad 16111 }
 
 cH43d7 OBJECT IDENTIFIER ::= { lTPFreestyleConsolec0ad 16978 }
 -- MQTT: OPEN-AIR/Assets/Zoo/Faders/LTP/Zoo_Faders_LTP/blocks/LTP_Freestyle_Console/CH5/rotation

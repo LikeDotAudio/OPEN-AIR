@@ -1,16 +1,23 @@
 # oaComOSC/Entry.py
-# Author: Anthony Peter Kuzub
-# Version: 20260325.1200.1
 #
-# Description: The sole orchestrator and public API for the OSC Communication Module.
-
-"""
-oaComOSC/Entry.py - The Heart and Soul of the OSC Module.
-
-This file serves as the gatekeeper and primary interface for all OSC-related
-operations. It manages the singleton OSCManager and exposes high-level 
-methods for control and interaction.
-"""
+# The sole orchestrator and public gatekeeper for the OSC Communication Module.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260329.1105.1
+#
+# Description:
+# This file serves as the gatekeeper and primary interface for all OSC-related
+# operations. It manages the singleton OSCManager and exposes high-level 
+# methods for control and interaction.
 
 from .Managers.osc_manager import OSCManager
 from .Workers.osc_rx_server import OscRxServer

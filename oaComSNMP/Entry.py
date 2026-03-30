@@ -1,8 +1,18 @@
 # oaComSNMP/Entry.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
 #
-# Description: Brief summary of purpose
+# The sole orchestrator and public gatekeeper for the SNMP Communication Module.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260329.1045.1
 
 """
 oaComSNMP/Entry.py - The sole orchestrator for the SNMP Communication Module.
@@ -27,12 +37,24 @@ from .Methods.snmp_installer_generator import InstallerGenerator
 
 _instance = None
 
-def get_manager(state_cache_manager=None, mqtt_connection_manager=None, subscriber_router=None, run_bridge=True):
+def get_manager(state_cache_manager=None, mqtt_connection_manager=None, subscriber_router=None, run_bridge=None):
     """
     Singleton getter for the SNMP Manager.
     If managers are not provided, it attempts to resolve them from global instances.
     """
     global _instance
+    
+    # ⚡ AUTONOMY: Determine run_bridge based on partition if not explicitly provided
+    if run_bridge is None:
+        try:
+            from oaConfiguration.Core.identity import IdentityManager
+            ident = IdentityManager.initialize()
+            partition = ident.get("PARTITION_ID", "STANDALONE")
+            # Only CORE or STANDALONE partitions run the active bridge logic
+            run_bridge = (partition in ["CORE", "STANDALONE"])
+        except Exception:
+            run_bridge = True # Default to True for safety if identity fails
+
     if _instance is None:
         # ⚡ AUTONOMY: Try to resolve dependencies if not provided
         if state_cache_manager is None:

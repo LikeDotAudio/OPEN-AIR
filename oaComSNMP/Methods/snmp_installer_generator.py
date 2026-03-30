@@ -1,8 +1,18 @@
-# Methods/snmp_installer_generator.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# oaComSNMP/Methods/snmp_installer_generator.py
 #
-# Description: Brief summary of purpose
+# Generates a complete Bash Installer Script for the SNMP Manager.
+#
+# Author: Anthony Peter Kuzub (Contributor to this project)
+# Blog: www.Like.audio
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260329.1030.1
 
 import os
 

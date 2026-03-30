@@ -363,6 +363,11 @@ class OSCManager:
         # "All mqtt elements should be published here as well"
         if self.run_bridge:
             # We mirror MQTT traffic out to OSC
+            # ⚡ EXCEPTION: Never mirror SYSTEM source messages (e.g. Status/SNMP/Bridge).
+            # These are internal telemetry and often too bulky for OSC transports.
+            if source == "SYSTEM":
+                return
+
             if logical_source == "MQTT" or source == "MQTT":
                 # EXCLUDE MONITOR TOPICS FROM MIRRORING
                 if "/Monitor/" in topic:

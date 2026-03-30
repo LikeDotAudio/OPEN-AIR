@@ -11,6 +11,14 @@ These modules provide the foundational communication and orchestration layers fo
 ├-----**oaComMidi/**<br>
      ├----> [oaComMidi](oaComMidi/Documentation/README.md) — *MIDI Communication Module*<br>
      ├----> [Summary](oaComMidi/Documentation/Summary.md) — *Narrative of Tactile Harmony*<br>
+├-----**oaComMQTT/**<br>
+     ├----> [oaComMQTT](oaComMQTT/Documentation/README.md) — *MQTT Communication Module*<br>
+├-----**oaComOSC/**<br>
+     ├----> [oaComOSC](oaComOSC/Documentation/README.md) — *OSC Communication Module*<br>
+     ├----> [Summary](oaComOSC/Documentation/Summary.md) — *Narrative of Reactive Bridging*<br>
+├-----**oaComSNMP/**<br>
+     ├----> [oaComSNMP](oaComSNMP/Documentation/README.md) — *SNMP Communication Module*<br>
+     ├----> [Summary](oaComSNMP/Documentation/Summary.md) — *Narrative of Legacy Integration*<br>
 ├-----**oaTests/**<br>
      ├----> [oaTests](oaTests/Documentation/README.md) — *Validation & Maintenance Suite*<br>
      ├----> [Summary](oaTests/Documentation/Summary.md) — *Narrative of System Integrity*<br>

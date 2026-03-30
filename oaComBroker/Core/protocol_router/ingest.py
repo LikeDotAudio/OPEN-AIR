@@ -171,7 +171,12 @@ def normalize_and_ingest(
     # TERMINAL SETTLING:
     # If this is a primary action, lock the parameter and schedule a 
     # settling event to confirm final state.
-    if msg_type == "SPLICE_ACTION":
+    # ⚡ EXCEPTION: Command topics (/Control/) and Telemetry (/Status/)
+    # represent transient events or periodic heartbeats. They must NOT
+    # be settled to prevent recursive feedback loops.
+    is_settleable = not any(x in str(topic) for x in ["/Control/", "/Status/"])
+    
+    if msg_type == "SPLICE_ACTION" and is_settleable:
         settle_manager.lock_parameter(topic, full_id)
         settle_manager.schedule_settling(topic, msg)
 

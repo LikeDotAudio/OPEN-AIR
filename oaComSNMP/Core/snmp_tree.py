@@ -1,8 +1,18 @@
-# Core/snmp_tree.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# oaComSNMP/Core/snmp_tree.py
 #
-# Description: Brief summary of purpose
+# Master tree builder for the OPEN-AIR SNMP OID structure.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260329.1025.1
 
 import os
 import stat

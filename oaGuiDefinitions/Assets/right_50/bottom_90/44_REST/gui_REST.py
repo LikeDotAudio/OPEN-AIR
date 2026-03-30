@@ -25,7 +25,7 @@ if str(root_path) not in sys.path:
 import oaComREST.Entry as REST_MODULE
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaLogging.Entry import logger
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 

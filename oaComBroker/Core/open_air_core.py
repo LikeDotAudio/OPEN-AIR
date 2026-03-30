@@ -51,7 +51,7 @@ from oaStateCache.Core.state_cache import StateRegistry
 from oaComBroker.Managers.Failover.Manager import FailoverManager
 from oaComMQTT.Core.mqtt_publisher_service import shutdown_publisher_worker
 # LOCAL_DEBUG: Toggles verbose tracing for the core boot sequence.
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 
 def main():
     """

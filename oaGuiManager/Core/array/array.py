@@ -10,7 +10,7 @@ import orjson
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -99,16 +99,6 @@ class BuilderArrayCreator(TransparencyMixin):
         try: p_bg = parent_widget.cget("bg")
         except: pass
         main_container = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", bg=p_bg)
-        
-        # ⚡ VISIBILITY: Grid the container into the parent
-        lay = config_data.get("layout", {})
-        main_container.grid(
-            row=lay.get("row", 0), 
-            column=lay.get("column", 0), 
-            columnspan=lay.get("col_span", 1), 
-            rowspan=lay.get("row_span", 1), 
-            sticky=lay.get("sticky", "nsew")
-        )
         
         # ⚡ DIMENSION ENFORCEMENT: Ensure main container respects explicit sizes
         geom = config_data.get("geometry", {})

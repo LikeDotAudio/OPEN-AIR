@@ -171,3 +171,5 @@ Message: ## [2026.03.16] - 23:00 ### Fixed - Fixed  in background panel generati
 2026-03-29 22:45:00: Fixed GrabBagLoader path resolution by updating it to use GLOBAL_PROJECT_ROOT and scan recursively in oaGuiElements.
 2026-03-29 22:50:00: Gated repetitive MIDI listen heartbeat logs with LOCAL_DEBUG to reduce console noise.
 2026-03-29 22:55:00: Fixed GUI rendering and editor tree view population for complex JSON definitions.
+2026-03-29 23:10:00: Fixed GUI visibility by ensuring all structural and deferred widgets are correctly gridded into the parent layout.
+2026-03-29 23:30:00: Comprehensive gating of high-velocity and initialization logs with LOCAL_DEBUG across multiple modules to minimize console noise.

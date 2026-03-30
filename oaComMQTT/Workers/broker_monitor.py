@@ -4,7 +4,7 @@
 #
 # Description: Monitors the Mosquitto broker's $SYS topics to provide real-time statistics.
 
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
 

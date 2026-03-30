@@ -8,6 +8,9 @@ import tkinter as tk
 from tkinter import ttk
 from oaLogging.Entry import logger, vocal_capture
 
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = False
+
 # --- EXTRACTED CORE MODULES ---
 from ..Core.gif_animator import GifAnimator
 from ..Core.lyric import LyricManager
@@ -49,7 +52,8 @@ class SplashScreen:
         else:
             tk.Label(vis, text="[Animation Offline]", fg="#333", bg="black").pack(expand=True)
 
-        logger.debug("✅ SplashScreen materialised.")
+        if LOCAL_DEBUG:
+            logger.debug("✅ SplashScreen materialised.")
 
     def set_status(self, message):
         """Updates the startup status text and pumps the Tkinter event loop."""
@@ -72,4 +76,5 @@ class SplashScreen:
         """Safely dismisses the splash screen."""
         if self.win and self.win.winfo_exists():
             self.animator.stop(); self.win.destroy(); self.win = None
-            logger.debug("👋 SplashScreen dismissed.")
+            if LOCAL_DEBUG:
+                logger.debug("👋 SplashScreen dismissed.")

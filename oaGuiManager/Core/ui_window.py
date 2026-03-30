@@ -6,7 +6,11 @@
 
 import sys
 import tkinter as tk
+import traceback
 from loguru import logger
+
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = True
 
 class UIWindowManager:
     """Handles the creation and styling configuration of the main Tkinter root window."""
@@ -35,17 +39,21 @@ class UIWindowManager:
         # ⚡ ENFORCE MINIMUM SIZE: Prevent the window from collapsing (e.g., when moving between screens)
         WINDOW_MIN_WIDTH, WINDOW_MIN_HEIGHT = 800, 600
         root.minsize(WINDOW_MIN_WIDTH, WINDOW_MIN_HEIGHT)
-        logger.debug(f"Enforced minimum window size: {WINDOW_MIN_WIDTH}x{WINDOW_MIN_HEIGHT}")
+        if LOCAL_DEBUG:
+            logger.debug(f"Enforced minimum window size: {WINDOW_MIN_WIDTH}x{WINDOW_MIN_HEIGHT}")
         
         # Apply OS-specific window maximization logic and handle errors gracefully
-        logger.debug("Attempting to set window maximization attributes...")
+        if LOCAL_DEBUG:
+            logger.debug("Attempting to set window maximization attributes...")
         try:
             if sys.platform.startswith("linux"):
                 root.attributes("-zoomed", True)
-                logger.debug("Set '-zoomed' attribute for Linux.")
+                if LOCAL_DEBUG:
+                    logger.debug("Set '-zoomed' attribute for Linux.")
             else:
                 root.state("zoomed")
-                logger.debug("Set 'zoomed' state for non-Linux.")
+                if LOCAL_DEBUG:
+                    logger.debug("Set 'zoomed' state for non-Linux.")
             
             # Ensure window is updated after setting state/attributes
             root.update_idletasks()
@@ -56,17 +64,20 @@ class UIWindowManager:
             logger.error(f"Traceback: {traceback.format_exc()}")
             
             # Fallback to setting geometry if maximization fails
-            logger.debug("Maximization failed. Falling back to setting window geometry...")
+            if LOCAL_DEBUG:
+                logger.debug("Maximization failed. Falling back to setting window geometry...")
             sw, sh = root.winfo_screenwidth(), root.winfo_screenheight()
             root.geometry(f"{sw}x{sh}+0+0")
-            logger.debug(f"Set fallback geometry to {sw}x{sh}+0+0.")
+            if LOCAL_DEBUG:
+                logger.debug(f"Set fallback geometry to {sw}x{sh}+0+0.")
         except Exception as e: # Catch any other unexpected errors
             logger.error(f"🖥️🎨 [UI] Unexpected error during window attribute/geometry setting: {e}")
             logger.error(f"Traceback: {traceback.format_exc()}")
             # Fallback geometry as a last resort
             sw, sh = root.winfo_screenwidth(), root.winfo_screenheight()
             root.geometry(f"{sw}x{sh}+0+0")
-            logger.debug(f"Set fallback geometry due to unexpected error to {sw}x{sh}+0+0.")
+            if LOCAL_DEBUG:
+                logger.debug(f"Set fallback geometry due to unexpected error to {sw}x{sh}+0+0.")
         
         root.withdraw()
         return root

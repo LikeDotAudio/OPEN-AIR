@@ -30,7 +30,7 @@ from oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
 current_version = "20250919.231000.1"
 current_version_hash = 20250919 * 231000 * 1
 current_file = f"{os.path.basename(__file__)}"
-LOCAL_DEBUG = False   
+LOCAL_DEBUG = True   
 
 HZ_TO_MHZ = 1_000_000
 

@@ -11,7 +11,7 @@ from tkinter import ttk
 from pathlib import Path
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    
+LOCAL_DEBUG = True    
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 

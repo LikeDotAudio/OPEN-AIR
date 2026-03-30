@@ -7,6 +7,9 @@
 import tkinter as tk
 from loguru import logger
 
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = False
+
 # --- Framework Imports ---
 from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
 from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
@@ -47,7 +50,8 @@ class UICompositionRoot:
         """
         Instantiates concrete service implementations and maps their dependencies.
         """
-        logger.debug("🏗️ [ROOT] Composing UI Services...")
+        if LOCAL_DEBUG:
+            logger.debug("🏗️ [ROOT] Composing UI Services...")
 
         # 1. Base Communication Layer
         mqtt_conn = MqttConnectionManager()

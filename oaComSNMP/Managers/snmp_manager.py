@@ -50,7 +50,7 @@ from oaComSNMP.Methods.snmp_utils import get_snmp_node_id, get_snmp_descriptor, 
 from oaComSNMP.Constants.snmp_constants import BASE_OID, STATE_SYNC_INTERVAL
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger
 
 class SNMPManager:
@@ -232,7 +232,8 @@ class SNMPManager:
 
         # ⚡ NETWORK SYNC: In UI mode, we need to listen for traffic from CORE
         if not self.run_bridge and self.subscriber_router:
-            snmp_logger.info("📡 [SNMP] Linking to system SNMP activity (Monitor/SNMP/Activity)")
+            if LOCAL_DEBUG:
+                snmp_logger.info("📡 [SNMP] Linking to system SNMP activity (Monitor/SNMP/Activity)")
             self.subscriber_router.subscribe_to_topic(
                 "OPEN-AIR/System/Monitor/SNMP/Activity",
                 self._handle_network_activity

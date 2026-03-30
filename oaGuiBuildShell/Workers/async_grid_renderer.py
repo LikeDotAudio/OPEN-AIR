@@ -12,7 +12,7 @@ from ..Core.grid_topology_configurator import GridTopologyConfigurator
 from ..Core.structural_assembler import StructuralAssembler
 from ..Core.batch_processing_engine import BatchProcessingEngine
 
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 renderer_logger = logger.bind(subsystem="RENDERER")
 
 class AsyncGridRenderer:
@@ -161,11 +161,16 @@ class AsyncGridRenderer:
                         target = creator(parent_widget=parent, config_data=val, context=context)
                         if target: 
                             target._oca_path = cur_path
+                            if hasattr(self.builder, 'bind_to_widget'):
+                                self.builder.bind_to_widget(target)
                             target.grid(row=cr, column=cc, columnspan=cs, rowspan=rs, sticky=st)
                     state["pending"] -= 1; _check_done()
             else:
                 state["pending"] += 1
-                deferred.append({"r": r, "c": c, "val": val, "path": cur_path, "sticky": st, "padx": lay.get("padx", 0), "pady": lay.get("pady", 0)})
+                deferred.append({
+                    "r": cr, "c": cc, "val": val, "path": cur_path, "sticky": st, 
+                    "padx": lay.get("padx", 0), "pady": lay.get("pady", 0)
+                })
 
             c += cs
             if c >= max_cols: c = 0; r += rs

@@ -25,7 +25,7 @@ from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger
 from oaComSNMP.Constants.snmp_constants import THREAD_JOIN_TIMEOUT, LOG_POLLING_INTERVAL, STATE_SYNC_INTERVAL
 
 # LOCAL_DEBUG can be set or passed if needed
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 
 class SnmpStatePersister:
     """
@@ -67,17 +67,20 @@ class SnmpStatePersister:
         self._running = True
         self._thread = threading.Thread(target=self._persistence_loop, daemon=True, name="SNMP-StatePersistenceLoop")
         self._thread.start()
-        snmp_logger.info("SnmpStatePersister: Started background persistence thread.")
+        if LOCAL_DEBUG:
+            snmp_logger.info("SnmpStatePersister: Started background persistence thread.")
 
     def stop(self):
         """Signals the background thread to stop and waits for it to terminate."""
         self._running = False
         if self._thread and self._thread.is_alive():
-            snmp_logger.info("SnmpStatePersister: Stopping background persistence thread...")
+            if LOCAL_DEBUG:
+                snmp_logger.info("SnmpStatePersister: Stopping background persistence thread...")
             self._thread.join(timeout=THREAD_JOIN_TIMEOUT) # Wait for thread to finish
             if self._thread.is_alive():
                 snmp_logger.warning("SnmpStatePersister: Thread did not terminate gracefully.")
-        snmp_logger.info("SnmpStatePersister: Stopped.")
+        if LOCAL_DEBUG:
+            snmp_logger.info("SnmpStatePersister: Stopped.")
 
     def _persistence_loop(self):
         """The main loop for periodically saving SNMP state to a file."""

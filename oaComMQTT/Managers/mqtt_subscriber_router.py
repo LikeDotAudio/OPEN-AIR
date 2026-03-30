@@ -9,7 +9,7 @@ import threading
 from typing import Any, Callable, Dict, List, Set, Union
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
 

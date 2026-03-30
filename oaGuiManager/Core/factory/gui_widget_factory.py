@@ -7,7 +7,7 @@
 import importlib
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import FACTORY_LOGGER
 from loguru import logger
 from oaGuiManager.Core.context.widget_context import WidgetContext

@@ -18,7 +18,7 @@ from .ptp_packet_parser import PTPPacketParser
 from .ptp_observer_registry import PTPObserverRegistry
 from oaComMQTT.Core.mqtt_message import MqttMessage
 
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 
 def register_ptp_callback(cb): PTPObserverRegistry.register(cb)
 def unregister_ptp_callback(cb): PTPObserverRegistry.unregister(cb)

@@ -10,7 +10,7 @@ from oaGuiElements.Core.graphing.graphing.Meter_to_display_units import (
 )
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = False    # Set to False in production, True for dev on this file
+BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 

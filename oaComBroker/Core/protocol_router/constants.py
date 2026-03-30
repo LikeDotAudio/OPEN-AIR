@@ -32,7 +32,7 @@ app_constants = Config.get_instance()
 
 # --- Standard Debug Logging Setup ---
 # When enabled, the router will emit high-velocity trace logs to the console.
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 
 # --- Default Routing Strategy Map ---
 # Each protocol is assigned a set of emoji tokens that dictate where a message 

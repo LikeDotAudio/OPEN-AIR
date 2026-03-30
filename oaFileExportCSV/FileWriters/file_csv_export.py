@@ -23,7 +23,7 @@ REVISION_NUMBER = 1
 current_version = f"{CURRENT_DATE}.{CURRENT_TIME}.{REVISION_NUMBER}"
 current_version_hash = int(CURRENT_DATE) * CURRENT_TIME_HASH * REVISION_NUMBER
 current_file = f"{os.path.basename(__file__)}"
-LOCAL_DEBUG = False   
+LOCAL_DEBUG = True   
 
 
 class CsvExportUtility:

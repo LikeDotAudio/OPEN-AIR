@@ -8,6 +8,9 @@ import tkinter as tk
 from loguru import logger
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = False
+
 class WidgetDiscoveryEngine:
     """Handles merging auto-discovered widgets from the Registry into the Factory."""
 
@@ -16,7 +19,8 @@ class WidgetDiscoveryEngine:
         registry_items = WidgetRegistry._registry
         if not registry_items: return factory
 
-        logger.debug(f"🧩 Merging {len(registry_items)} widgets from Registry into Factory.")
+        if LOCAL_DEBUG:
+            logger.debug(f"🧩 Merging {len(registry_items)} widgets from Registry into Factory.")
         for widget_type, creator_class in registry_items.items():
             factory[widget_type] = WidgetDiscoveryEngine._make_wrapper(creator_class, builder_instance)
         return factory

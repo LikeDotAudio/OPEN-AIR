@@ -15,7 +15,7 @@ import sys
 import subprocess
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from loguru import logger
 
 # --- Constants ---

@@ -8,7 +8,7 @@ import tkinter as tk
 from oaLogging.Core.logger import builder_logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = False
+BUILDER_DEBUG = True
 
 class FaderBarStateMixin:
     """Handles multi-variable registration and MQTT synchronization for fader/meters."""

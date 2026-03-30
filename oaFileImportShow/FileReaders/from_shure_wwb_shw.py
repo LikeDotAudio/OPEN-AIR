@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 import numpy as np
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 

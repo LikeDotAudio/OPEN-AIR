@@ -8,7 +8,7 @@ from loguru import logger
 import inspect
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    
+LOCAL_DEBUG = True    
 HZ_TO_MHZ = 1_000_000
 
 # Topics for Center/Span Tuning

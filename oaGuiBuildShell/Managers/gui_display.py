@@ -4,7 +4,7 @@
 #
 # Description: This file defines the main Application class, which orchestrates the GUI build process.
 
-LOCAL_DEBUG = False    
+LOCAL_DEBUG = True    
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 

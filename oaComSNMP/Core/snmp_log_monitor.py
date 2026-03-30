@@ -28,7 +28,7 @@ from oaComSNMP.Constants.snmp_constants import THREAD_JOIN_TIMEOUT, LOG_POLLING_
 from oaComBroker.Core.protocol_router.manager import ProtocolRouter 
 
 # LOCAL_DEBUG can be set or passed if needed
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 
 class SnmpLogMonitor:
     """
@@ -63,16 +63,19 @@ class SnmpLogMonitor:
 
         self._thread = threading.Thread(target=self._log_monitoring_loop, daemon=True, name="SNMP-LogMonitorLoop")
         self._thread.start()
-        snmp_logger.info("SnmpLogMonitor: Started background log monitoring thread.")
+        if LOCAL_DEBUG:
+            snmp_logger.info("SnmpLogMonitor: Started background log monitoring thread.")
 
     def stop(self):
         """Signals the background thread to stop and waits for it to terminate."""
         if self._thread and self._thread.is_alive():
-            snmp_logger.info("SnmpLogMonitor: Stopping background log monitoring thread...")
+            if LOCAL_DEBUG:
+                snmp_logger.info("SnmpLogMonitor: Stopping background log monitoring thread...")
             self._thread.join(timeout=THREAD_JOIN_TIMEOUT) # Wait for thread to finish
             if self._thread.is_alive():
                 snmp_logger.warning("SnmpLogMonitor: Thread did not terminate gracefully.")
-        snmp_logger.info("SnmpLogMonitor: Stopped.")
+        if LOCAL_DEBUG:
+            snmp_logger.info("SnmpLogMonitor: Stopped.")
 
     def _log_monitoring_loop(self):
         """The main loop for monitoring the SNMP SET log file."""

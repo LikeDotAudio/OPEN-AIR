@@ -9,7 +9,7 @@ from tkinter import ttk
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 
 class SnmpLog(tk.Frame, TransparencyMixin):
     """

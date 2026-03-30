@@ -8,7 +8,7 @@ import tkinter as tk
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
+LOCAL_DEBUG = True
 
 # Resistor Color Code Mapping & MIDI Channel Logic
 # 1: Brown, 2: Red, 3: Orange, 4: Yellow, 5: Green, 6: Blue, 7: Violet, 8: Gray, 9: White

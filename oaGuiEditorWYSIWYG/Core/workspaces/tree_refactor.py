@@ -10,7 +10,7 @@ from ..event_bus import event_bus
 from ..state import state_manager
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import GUI_LOGGER as logger
 
 class TreeRefactor(ttk.Frame):

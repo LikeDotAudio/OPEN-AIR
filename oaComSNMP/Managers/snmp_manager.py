@@ -50,8 +50,8 @@ from oaComSNMP.Methods.snmp_utils import get_snmp_node_id, get_snmp_descriptor, 
 from oaComSNMP.Constants.snmp_constants import BASE_OID, STATE_SYNC_INTERVAL
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
-from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger
+from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger, is_debug_allowed
+LOCAL_DEBUG = is_debug_allowed(system="Comms", element="SNMP")
 
 class SNMPManager:
     """

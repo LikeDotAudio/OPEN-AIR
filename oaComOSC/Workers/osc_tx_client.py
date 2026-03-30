@@ -23,7 +23,10 @@ except ImportError:
     HAS_OSC = False
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+from oaLogging.Methods.matrix_gate import is_debug_allowed
+def _is_debug():
+    return is_debug_allowed(system="UI", element="OSC")
+
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -47,7 +50,7 @@ class OscTxClient:
 
         try:
             self.client = SimpleUDPClient(self.host, self.port)
-            if LOCAL_DEBUG:
+            if _is_debug():
                 osc_logger.success(f"📤📡✅ [OSC] TX Client ready: "
                                    f"{self.host}:{self.port}")
         except Exception as e:
@@ -58,7 +61,7 @@ class OscTxClient:
         if self.client:
             try:
                 self.client.send_message(address, value)
-                if LOCAL_DEBUG:
+                if _is_debug():
                     osc_logger.debug(f"📤📡📤 [OSC] TX: {address} -> {value}")
             except Exception as e:
                 osc_logger.error(f"❌🚫🛑 [OSC] TX Error: {e}")
@@ -66,5 +69,5 @@ class OscTxClient:
     def stop(self):
         """Stops the OSC client."""
         self.client = None
-        if LOCAL_DEBUG:
+        if _is_debug():
             osc_logger.debug("🛑📡👋 [OSC] TX Client stopped.")

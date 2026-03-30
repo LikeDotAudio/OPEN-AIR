@@ -15,88 +15,118 @@ the system has sensible defaults to fall back on.
 
 Primary Responsibilities:
 - Define the default structure and values for the system configuration.
-- Write the configuration to a specified filesystem path.
+- Write the configuration to a specified filesystem path using a 
+  comment-rich template.
 
 Assumptions and Constraints:
 - Assumes the caller has write permissions to the destination directory.
-- Requires the 'configparser' and 'pathlib' modules.
+- Requires the 'pathlib' module.
 - The generated file follows the standard INI format.
 """
 
-import configparser
 import pathlib
 
 
 def create_default_config_ini(config_path: pathlib.Path, silent: bool = False):
     """
-    Creates a default config.ini file with predefined settings.
+    Creates a default config.ini file with predefined settings and descriptive comments.
 
     Parameters:
         config_path (pathlib.Path): The absolute or relative path where the 
             config.ini file should be created. Must be a valid path object.
         silent (bool): If True, suppresses all console output during the 
             creation process. Defaults to False.
-
-    Returns:
-        None. Success is indicated by the successful creation of the file 
-        at the specified location. Failure to write will raise an OSError.
-
-    Side Effects and Thread-Safety:
-        - Performs a synchronous write operation to the filesystem.
-        - This function is not thread-safe if multiple threads attempt to write 
-          to the same 'config_path' simultaneously.
     """
-    config = configparser.ConfigParser()
+    config_content = """# OPEN-AIR Configuration File
+# This file controls the behavior of the core system, debugging, and communication protocols.
 
-    # Define the initial version for configuration tracking.
-    config["Version"] = {"CURRENT_VERSION": "20251225"}
+[Version]
+# The current system version (Format: YYYYMMDD)
+current_version = 20251225
 
-    # Debug settings are enabled by default in the builder to assist in early 
-    # setup.
-    config["Debug"] = {
-        "ENABLE_DEBUG_MODE": "True",
-        "ENABLE_DEBUG_SCREEN": "True",
-        "SNMP_DEBUG_ENABLE": "True",
-        "MIDI_DEBUG_ENABLE": "True",
-        "OSC_DEBUG_ENABLE": "True",
-        "AES70_DEBUG_ENABLE": "True",
-    }
+[Debug]
+# Global master toggle for debug mode
+enable_debug_mode = True
+# Display debug info on the application screen
+enable_debug_screen = True
+# Individual protocol debug toggles
+snmp_debug_enable = True
+midi_debug_enable = True
+osc_debug_enable = True
+aes70_debug_enable = True
+rest_debug_enable = True
 
-    # UI layout defaults use a 50/50 split for balanced visibility.
-    config["UI"] = {
-        "LAYOUT_SPLIT_EQUAL": "50",
-        "LAYOUT_FULL_WEIGHT": "100",
-        "RELOAD_CONFIG_DISPLAYED": "False",
-    }
+[DEBUG_MATRIX]
+# Global Killswitch - If True, overrides all other debug settings
+master_debug_enable = False
 
-    # Default MQTT broker is set to localhost to encourage local-first 
-    # connectivity.
-    config["MQTT"] = {
-        "BROKER_ADDRESS": "localhost",
-        "BROKER_PORT": "1883",
-        "MQTT_USERNAME": "guest",
-        "MQTT_PASSWORD": "guest",
-        "MQTT_RETAIN_BEHAVIOR": "True",
-    }
+# System Level Toggles - Enable tracing for specific subsystems
+sys_comms = False
+sys_gui = False
+sys_data = False
+sys_router = False
+sys_core = False
 
-    # Enable all scan agents by default to ensure maximum device discovery.
-    config["ScanSettings"] = {
-        "scan_gateways": "True",
-        "scan_usb": "True",
-        "scan_ip_direct": "True",
-        "scan_aes70": "True",
-        "scan_osc": "True",
-        "scan_snmp": "True",
-    }
+# Element Level Overrides - Fine-grained control for specific protocol modules
+element_mqtt = False
+element_snmp = False
+element_midi = False
+element_osc = False
+element_gui_builder = False
 
-    # OSC defaults use standard ports 8000/9000.
-    config["OSC"] = {
-        "osc_rx_port": "8000",
-        "osc_tx_port": "9000",
-        "osc_remote_ip": "127.0.0.1",
-    }
+# Function Level Exclusions/Inclusions (Comma separated)
+# Functions listed here will have their logs suppressed
+mute_functions = update_canvas, poll_buffer, heart_beat
+# Functions listed here will always log, regardless of other debug states
+force_functions = initialize_connection, critical_state_change
 
-    # Standard file write operation. Raises OSError if permissions are 
-    # insufficient.
+[UI]
+# Percentage split for the main UI layout
+layout_split_equal = 50
+# Total weight for full-screen layout calculations
+layout_full_weight = 100
+# If True, shows a notification when the config file is reloaded
+reload_config_displayed = False
+
+[MQTT]
+# IP address or hostname of the MQTT Broker
+broker_address = localhost
+# Port for the MQTT Broker (Default: 1883)
+broker_port = 1883
+# Authentication credentials
+mqtt_username = guest
+mqtt_password = guest
+# Persistent message behavior
+mqtt_retain_behavior = True
+
+[ScanSettings]
+# Toggle automatic discovery for different hardware and protocols
+scan_gateways = True
+scan_usb = True
+scan_ip_direct = True
+scan_aes70 = True
+scan_osc = True
+scan_snmp = True
+
+[OSC]
+# Listening port for incoming OSC messages
+osc_rx_port = 8000
+# Destination port for outgoing OSC messages
+osc_tx_port = 9000
+# Destination IP address for OSC commands
+osc_remote_ip = 127.0.0.1
+
+[REST]
+# Host interface for the REST API (0.0.0.0 to listen on all interfaces)
+rest_host = 0.0.0.0
+# Port for the REST API server
+rest_port = 44845
+# Cross-Origin Resource Sharing (CORS) allowed origins (* for all)
+rest_cors_origins = *
+"""
+    
     with open(config_path, "w") as configfile:
-        config.write(configfile)
+        configfile.write(config_content)
+    
+    if not silent:
+        print(f"📡📤📤 [CONFIG] Created default config.ini at {config_path}")

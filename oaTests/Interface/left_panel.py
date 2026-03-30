@@ -1,9 +1,13 @@
 # oaTests/Interface/left_panel.py
-from textual.widgets import Label, Button
+from textual.widgets import Label, Button, Checkbox, Static
 from textual.containers import Vertical, Horizontal
+from oaTests.Managers.configIniEditor.manager import ConfigIniEditor
 
 class LeftPanel(Vertical):
     def compose(self):
+        editor = ConfigIniEditor()
+        setup = editor.get_all_debug_sections()
+
         yield Label("System Identity", classes="status-label")
         yield Label("GUID: --", classes="status-item", id="guid_label")
         yield Label("ROLE: INITIALIZING", classes="status-item", id="role_label")
@@ -16,11 +20,8 @@ class LeftPanel(Vertical):
         yield Button("RUN VALIDATION TESTS", id="btn_tests_install", variant="primary")
         yield Button("FULL INSTALLATION", id="btn_full", variant="success")
 
-        yield Label("Debug Flags", classes="status-label")
-
-
-        yield Button("FORCE DEBUG ON", id="btn_debug_on", variant="warning")
-        yield Button("FORCE DEBUG OFF", id="btn_debug_off", variant="warning")
+        yield Label("Debug Management", classes="status-label")
+        yield Button("CONFIGURE DEBUG", id="btn_debug_matrix", variant="warning")
         
         yield Label("System Metrics", classes="status-label")
         yield Label("CPU: -- MHz", classes="status-item", id="cpu_label")

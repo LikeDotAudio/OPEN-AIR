@@ -10,7 +10,10 @@ import orjson
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+from oaLogging.Methods.matrix_gate import is_debug_allowed
+def _is_debug():
+    return is_debug_allowed(system="UI", element="OSC")
+
 from loguru import logger
 from oaLogging.Core.logger import OSC_LOGGER as logger
 from oaConfiguration.FileReaders.config_reader import Config
@@ -29,7 +32,7 @@ class OSCManager:
     def __init__(self, state_cache_manager=None, mqtt_connection_manager=None, 
                  run_bridge=True):
         self.run_bridge = run_bridge
-        if LOCAL_DEBUG:
+        if _is_debug():
             logger.info(f"Initializing Bridge (Bridge={run_bridge})...")
         
         # ⚡ STANDALONE: Fallback to global singletons if not injected
@@ -160,7 +163,7 @@ class OSCManager:
             with self._state_lock:
                 self._rx_addr = f"{get_local_ip()}:{rx_port}"
                 
-            if LOCAL_DEBUG:
+            if _is_debug():
                 logger.success(f"RX SERVER ACTIVE: {self._rx_addr}")
 
             # TX Client
@@ -171,7 +174,7 @@ class OSCManager:
             with self._state_lock:
                 self._tx_addr = f"{tx_host}:{tx_port}"
                 
-            if LOCAL_DEBUG:
+            if _is_debug():
                 logger.success(f"TX CLIENT ACTIVE: {self._tx_addr}")
 
             # ⚡ STATUS MONITOR: Start periodic broadcast
@@ -204,7 +207,7 @@ class OSCManager:
         if self.run_bridge:
             self._start_workers()
         else:
-            if LOCAL_DEBUG:
+            if _is_debug():
                 logger.info("Bridge: Observer mode active.")
 
     def stop(self):
@@ -220,7 +223,7 @@ class OSCManager:
             topic = self.osc_to_topic.get(address, f"OPEN-AIR/OSC{address}")
         
         # ⚡ LOGGING: High-signal Firehose style
-        if LOCAL_DEBUG:
+        if _is_debug():
             logger.debug(f"RX: {address} -> {value} (Topic: {topic})")
         
         # ⚡ ANTI-FEEDBACK SPEC: Define identity at transport ingress
@@ -286,7 +289,7 @@ class OSCManager:
             return
 
         # ⚡ LOGGING
-        if LOCAL_DEBUG:
+        if _is_debug():
             logger.debug(f"TX: {address} <- {value}")
         
         self.tx_client.send_message(address, value)
@@ -389,5 +392,5 @@ class OSCManager:
             self.osc_to_topic[osc_address] = topic
             self.topic_to_osc[topic] = osc_address
             
-        if LOCAL_DEBUG:
+        if _is_debug():
             logger.info(f"Route Registered: {osc_address} <-> {topic}")

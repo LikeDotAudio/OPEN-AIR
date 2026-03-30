@@ -26,12 +26,15 @@
 # - Maintenance Hub: Centralizes logs, cache, and audit cleanup tools.
 
 from textual.app import App, ComposeResult
-from textual.widgets import Header, Footer, Static, Button, Log, Label
+from textual.widgets import Header, Footer, Static, Button, Log, Label, Checkbox
 from textual.containers import Container, Vertical, Horizontal
 from textual.binding import Binding
 import os
+import sys
 import webbrowser
 import time
+import subprocess
+import signal
 from typing import Any
 from datetime import datetime
 import threading
@@ -49,7 +52,7 @@ from oaTests.Workers.CleanupApps.Clear_reports import cleanup_reports
 from oaTests.Workers.CleanupApps.Clear_cache import purge_cache
 from oaTests.Workers.CleanupApps.Clear_JsonLines import cleanup_jsonlines
 from oaTests.Managers.AuditRunner import run_all_audits
-from oaTests.Methods.DebugToggler import force_debug_on, force_debug_off
+from oaTests.Managers.configIniEditor.manager import ConfigIniEditor
 import asyncio
 import orjson
 from oaComMQTT.Entry import get_connection_manager
@@ -63,10 +66,12 @@ from oaInstallation.Tests.test_installation_validator import run_all_tests as ru
 
 from oaInstallation.Core.SystemStats import SystemStatsProvider
 
-# Import new panel modules
-from .left_panel import LeftPanel # This now contains the original RightPanel code (Test/Maintenance buttons)
+# Import panel modules
+from .left_panel import LeftPanel
 from .center_panel import CenterPanel
-from .right_panel import RightPanel # This now contains the original LeftPanel code (Debug buttons, System Metrics)
+from .right_panel import RightPanel
+from .debug_matrix_screen import DebugMatrixScreen
+from .maintenance_clear_screen import MaintenanceClearScreen
 
 class TestsApp(App):
     """A Textual app to manage the OPEN-AIR test suite."""
@@ -87,6 +92,23 @@ class TestsApp(App):
         background: #2b2b2b;
         border-right: solid #F4902C;
         padding: 1;
+    }
+
+    #process-controls {
+        height: 3;
+        background: #2b2b2b;
+        border-bottom: solid #F4902C;
+        padding: 0 1;
+        align: left middle;
+    }
+
+    #process-controls Label {
+        margin-top: 1;
+    }
+
+    #process-controls Button {
+        width: 25;
+        margin: 0 1;
     }
 
     #stats-sidebar {
@@ -178,6 +200,7 @@ class TestsApp(App):
             "total": 0, "passed": 0, "failed": 0, "errors": 0, "skipped": 0
         }
         self.mqtt_client = get_connection_manager()
+        self.openair_process = None
 
     def compose(self) -> ComposeResult:
         yield Header()
@@ -251,7 +274,11 @@ class TestsApp(App):
         thread.start()
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
-        if event.button.id == "btn_unit":
+        if event.button.id == "btn_start_oa":
+            self.perform_start_openair()
+        elif event.button.id == "btn_stop_oa":
+            self.perform_stop_openair()
+        elif event.button.id == "btn_unit":
             self.perform_unit_tests()
         elif event.button.id == "btn_flame":
             self.run_in_daemon_thread(self.perform_flame_graph)
@@ -261,10 +288,10 @@ class TestsApp(App):
             self.cancel_audits()
         elif event.button.id == "btn_report":
             self.perform_report_generation()
-        elif event.button.id == "btn_debug_on":
-            self.perform_force_debug_on()
-        elif event.button.id == "btn_debug_off":
-            self.perform_force_debug_off()
+        elif event.button.id == "btn_debug_matrix":
+            self.push_screen(DebugMatrixScreen())
+        elif event.button.id == "btn_clear_menu":
+            self.push_screen(MaintenanceClearScreen())
         elif event.button.id == "btn_clear_logs":
             self.perform_clear_logs()
         elif event.button.id == "btn_clear_audits":
@@ -292,6 +319,45 @@ class TestsApp(App):
             self.run_in_daemon_thread(self.perform_install_validation)
         elif event.button.id == "btn_full":
             self.run_in_daemon_thread(self.perform_full_installation)
+
+    def perform_start_openair(self):
+        if self.openair_process and self.openair_process.poll() is None:
+            self.write_log("⚠️ [ALREADY RUNNING] OPEN-AIR is already active.")
+            return
+
+        self.write_log("🚀 [LAUNCH] Starting main OPEN-AIR system...")
+        oa_path = os.path.join(self.project_root, "openair.py")
+        
+        try:
+            # Launch as a new process group so we can kill all children later
+            self.openair_process = subprocess.Popen(
+                [sys.executable, oa_path],
+                cwd=self.project_root,
+                preexec_fn=os.setsid
+            )
+            self.write_log(f"✅ [SUCCESS] OPEN-AIR started (PID: {self.openair_process.pid})")
+        except Exception as e:
+            self.write_log(f"💥 [ERROR] Failed to start OPEN-AIR: {e}")
+
+    def perform_stop_openair(self):
+        if not self.openair_process or self.openair_process.poll() is not None:
+            self.write_log("ℹ️ [IDLE] OPEN-AIR is not currently running.")
+            # Check for zombie processes just in case
+            return
+
+        self.write_log("🛑 [KILL] Terminating OPEN-AIR process tree...")
+        try:
+            # Kill the entire process group
+            os.killpg(os.getpgid(self.openair_process.pid), signal.SIGTERM)
+            self.openair_process.wait(timeout=5)
+            self.write_log("✨ [TERMINATED] OPEN-AIR has been stopped.")
+        except subprocess.TimeoutExpired:
+            self.write_log("⚠️ [FORCE] Process group refused to exit. Sending SIGKILL...")
+            os.killpg(os.getpgid(self.openair_process.pid), signal.SIGKILL)
+        except Exception as e:
+            self.write_log(f"💥 [ERROR] Error during shutdown: {e}")
+        finally:
+            self.openair_process = None
 
     def perform_unit_tests(self):
         self.write_log("🔬 [SCAN] Starting Deep Test Discovery...")
@@ -437,76 +503,6 @@ class TestsApp(App):
             self.call_from_thread(self.write_log, f"✅ [SUCCESS] Reports generated at: {html_path}")
             webbrowser.open('file://' + os.path.realpath(html_path))
         self.run_in_daemon_thread(task)
-
-    def perform_force_debug_on(self):
-        btn_on = self.query_one("#btn_debug_on")
-        btn_off = self.query_one("#btn_debug_off")
-
-        # If the other button is in its confirm state, this button acts as CANCEL
-        if getattr(self, "_debug_off_confirm", False):
-            self._debug_off_confirm = False
-            btn_on.label = "FORCE DEBUG ON"
-            btn_off.label = "FORCE DEBUG OFF"
-            btn_on.variant = "warning"
-            btn_off.variant = "warning"
-            self.write_log("ℹ️ Action cancelled.")
-            return
-
-        # Standard execution path
-        if not getattr(self, "_debug_on_confirm", False):
-            # Entering confirmation state
-            self.write_log("🚨 [SYSTEM] PREPARING TO FORCE ALL DEBUG FLAGS ON!")
-            self.write_log("🤔 [CONFIRM] This will scan and enable debug mode. Are you sure? Click again to proceed.")
-            self._debug_on_confirm = True
-            btn_on.label = "CONFIRM: FORCE ON"
-            btn_off.label = "CANCEL"
-            btn_on.variant = "success"
-            btn_off.variant = "error"
-            return
-
-        # Executing the action after confirmation
-        self._debug_on_confirm = False
-        btn_on.label = "FORCE DEBUG ON"
-        btn_off.label = "FORCE DEBUG OFF"
-        btn_on.variant = "warning"
-        btn_off.variant = "warning"
-        self.write_log("🔼 [REWIRE] Forcing all debug gates to ON...")
-        self.run_in_daemon_thread(force_debug_on, self.project_root, lambda msg: self.call_from_thread(self.write_log, msg))
-
-    def perform_force_debug_off(self):
-        btn_on = self.query_one("#btn_debug_on")
-        btn_off = self.query_one("#btn_debug_off")
-
-        # If the other button is in its confirm state, this button acts as CANCEL
-        if getattr(self, "_debug_on_confirm", False):
-            self._debug_on_confirm = False
-            btn_on.label = "FORCE DEBUG ON"
-            btn_off.label = "FORCE DEBUG OFF"
-            btn_on.variant = "warning"
-            btn_off.variant = "warning"
-            self.write_log("ℹ️ Action cancelled.")
-            return
-
-        # Standard execution path
-        if not getattr(self, "_debug_off_confirm", False):
-            # Entering confirmation state
-            self.write_log("🚨 [SYSTEM] PREPARING TO FORCE ALL DEBUG FLAGS OFF!")
-            self.write_log("🤔 [CONFIRM] This will scan and disable debug mode. Are you sure? Click again to proceed.")
-            self._debug_off_confirm = True
-            btn_off.label = "CONFIRM: FORCE OFF"
-            btn_on.label = "CANCEL"
-            btn_off.variant = "success"
-            btn_on.variant = "error"
-            return
-
-        # Executing the action after confirmation
-        self._debug_off_confirm = False
-        btn_on.label = "FORCE DEBUG ON"
-        btn_off.label = "FORCE DEBUG OFF"
-        btn_off.variant = "warning"
-        btn_on.variant = "warning"
-        self.write_log("🔽 [REWIRE] Forcing all debug gates to OFF...")
-        self.run_in_daemon_thread(force_debug_off, self.project_root, lambda msg: self.call_from_thread(self.write_log, msg))
 
     def _cleanup_task(self, task_func, start_msg, end_msg, *args):
         self.write_log(start_msg)

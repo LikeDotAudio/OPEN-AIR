@@ -66,3 +66,15 @@ class ConfigDefaults:
     REST_HOST = "0.0.0.0"
     REST_PORT = 8000
     REST_CORS_ORIGINS = "*"
+
+    # Debug Matrix Defaults
+    DEBUG_MATRIX = {
+        "MASTER_DEBUG_ENABLE": False,
+        "SYS_COMMS": False,
+        "SYS_GUI": False,
+        "SYS_DATA": False,
+        "SYS_ROUTER": False,
+        "SYS_CORE": False
+    }
+    MUTE_FUNCTIONS = ""
+    FORCE_FUNCTIONS = ""

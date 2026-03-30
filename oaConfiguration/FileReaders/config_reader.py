@@ -113,6 +113,20 @@ class Config(ConfigDefaults):
         self.REST_PORT = self._s_get(config, "REST", "rest_port", self.REST_PORT, "int")
         self.REST_CORS_ORIGINS = self._s_get(config, "REST", "rest_cors_origins", self.REST_CORS_ORIGINS)
 
+    def _parse_debug_matrix(self, config):
+        if "DEBUG_MATRIX" in config:
+            section = config["DEBUG_MATRIX"]
+            for key in section:
+                # ⚡ FIX: Skip known string-based keys to avoid ValueError
+                if key.lower() in ["mute_functions", "force_functions"]:
+                    continue
+                # Store all keys in uppercase for consistent matrix lookup
+                self.DEBUG_MATRIX[key.upper()] = section.getboolean(key, False)
+            
+            # Special case for comma-separated strings
+            self.MUTE_FUNCTIONS = section.get("mute_functions", "")
+            self.FORCE_FUNCTIONS = section.get("force_functions", "")
+
     def read_config(self):
         from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT, initialize_paths
         if not GLOBAL_PROJECT_ROOT: initialize_paths()
@@ -136,6 +150,7 @@ class Config(ConfigDefaults):
         self._parse_snmp_settings(config)
         self._parse_osc_settings(config)
         self._parse_rest_settings(config)
+        self._parse_debug_matrix(config)
 
         if LOCAL_DEBUG:
             logger.debug(f"📜 [CONFIG] Loaded: Version {self.CURRENT_VERSION}, Debug: {self.ENABLE_DEBUG_MODE}")

@@ -1,7 +1,7 @@
 {
     "summary": {
-        "total": 204,
-        "passed": 204,
+        "total": 231,
+        "passed": 231,
         "failed": 0,
         "errors": 0,
         "skipped": 0
@@ -14,7 +14,169 @@
             "message": "Dependency check complete.",
             "cause": "",
             "description": "Validates all essential Python library requirements.",
-            "duration": "0.0010s"
+            "duration": "0.4023s"
+        },
+        {
+            "classname": "TestConfigGenerator",
+            "name": "test_create_default_config_ini (oaConfiguration.Tests.test_config.TestConfigGenerator.test_create_default_config_ini)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Test that the default config.ini is created with expected sections.",
+            "duration": "0.0003s"
+        },
+        {
+            "classname": "TestConfigReader",
+            "name": "test_config_loading_from_file (oaConfiguration.Tests.test_config_reader.TestConfigReader.test_config_loading_from_file)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "BUILD: Mock ConfigParser content. OPERATE: Load. CHECK: Assert specific value.",
+            "duration": "0.0056s"
+        },
+        {
+            "classname": "TestConfigReader",
+            "name": "test_singleton_integrity (oaConfiguration.Tests.test_config_reader.TestConfigReader.test_singleton_integrity)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "BUILD: Request two instances. CHECK: Assert they are identical.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestConfigReader",
+            "name": "test_default_values (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_default_values)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Test that default values are present after initialization.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestConfigReader",
+            "name": "test_global_settings_property (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_global_settings_property)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Test the global_settings property.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestConfigReader",
+            "name": "test_singleton (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_singleton)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Test that the Config class acts as a singleton.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestConfigValidator",
+            "name": "test_validate_configuration (oaConfiguration.Tests.test_config_validator.TestConfigValidator.test_validate_configuration)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Test that validation returns True with a dummy printer.",
+            "duration": "0.0001s"
+        },
+        {
+            "classname": "TestLoggingMatrixManager",
+            "name": "test_element_override (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_element_override)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: Element overrides parent system state.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestLoggingMatrixManager",
+            "name": "test_function_level_precision (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_function_level_precision)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: Function inclusions/exclusions have highest priority.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestLoggingMatrixManager",
+            "name": "test_hot_update (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_hot_update)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Operate: Update matrix at runtime.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestLoggingMatrixManager",
+            "name": "test_master_killswitch (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_master_killswitch)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: Master False overrides everything.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestLoggingMatrixManager",
+            "name": "test_system_level_gating (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_system_level_gating)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: System flags are respected.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestConfigReader",
+            "name": "test_config_loader (oaConfiguration.Tests.test_readers.TestConfigReader.test_config_loader)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "OPERATE & CHECK: Verify that the config loader correctly reads the mock file.",
+            "duration": "0.0003s"
+        },
+        {
+            "classname": "TestInitialization",
+            "name": "test_module_loads (oaLogging.Tests.test_entry.TestInitialization.test_module_loads)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "No description provided.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestMatrixGate",
+            "name": "test_debug_matrix_decorator (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_debug_matrix_decorator)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: Decorator only allows execution of logic if allowed.",
+            "duration": "0.0002s"
+        },
+        {
+            "classname": "TestMatrixGate",
+            "name": "test_failsafe_behavior (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_failsafe_behavior)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: If manager is missing or broken, default to False (Silent).",
+            "duration": "0.0002s"
+        },
+        {
+            "classname": "TestMatrixGate",
+            "name": "test_is_debug_allowed_delegation (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_is_debug_allowed_delegation)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: is_debug_allowed correctly delegates to the manager.",
+            "duration": "0.0002s"
+        },
+        {
+            "classname": "TestMatrixGate",
+            "name": "test_matrix_log_proxy (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_matrix_log_proxy)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: matrix_log only triggers the underlying logger if allowed.",
+            "duration": "0.0005s"
         },
         {
             "classname": "TestInitialization",
@@ -32,7 +194,7 @@
             "message": "",
             "cause": "",
             "description": "Test that ingest puts messages into the inbound queue with the correct schema.",
-            "duration": "0.0034s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestProtocolRouter",
@@ -41,7 +203,7 @@
             "message": "",
             "cause": "",
             "description": "Test that stop() correctly resets the running flag.",
-            "duration": "0.0008s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestProtocolRouter",
@@ -68,7 +230,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Instantiate BrokerMonitor with mock router (done in setUp).\n        OPERATE: Check initialization state.\n        CHECK: Assert it subscribed to $SYS/broker/#",
-            "duration": "0.0006s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestBrokerMonitor",
@@ -77,7 +239,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Register an observer that raises an Exception.\n        OPERATE: Call _on_sys_message.\n        CHECK: Assert the exception was caught and logged, not propagated.",
-            "duration": "0.0009s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestBrokerMonitor",
@@ -86,7 +248,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Register a mock observer and create a message.\n        OPERATE: Call _on_sys_message.\n        CHECK: Assert the observer was called with the updated stats.",
-            "duration": "0.0004s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestBrokerMonitor",
@@ -104,7 +266,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: A mock observer callback.\n        OPERATE: Register, then unregister.\n        CHECK: Assert it's in the list when registered and not when unregistered.",
-            "duration": "0.0003s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestMqttAsyncWorker",
@@ -113,7 +275,7 @@
             "message": "",
             "cause": "",
             "description": "Test the _parse_publish_item method correctly parses different formats.",
-            "duration": "0.0015s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestMqttAsyncWorker",
@@ -122,7 +284,7 @@
             "message": "",
             "cause": "",
             "description": "Test _queue_task processes publications.",
-            "duration": "5.0071s"
+            "duration": "5.0069s"
         },
         {
             "classname": "TestMqttAsyncWorker",
@@ -131,7 +293,7 @@
             "message": "",
             "cause": "",
             "description": "Test _queue_task processes subscriptions.",
-            "duration": "5.0064s"
+            "duration": "5.0068s"
         },
         {
             "classname": "TestMqttAsyncWorker",
@@ -140,7 +302,7 @@
             "message": "",
             "cause": "",
             "description": "Test _receiver_task consumes messages and calls manager's callback.",
-            "duration": "0.1017s"
+            "duration": "0.1016s"
         },
         {
             "classname": "TestMqttAsyncWorker",
@@ -149,7 +311,7 @@
             "message": "",
             "cause": "",
             "description": "Test that subscribe errors are caught and logged.",
-            "duration": "5.0065s"
+            "duration": "5.0068s"
         },
         {
             "classname": "TestMqttConnectionManager",
@@ -158,7 +320,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock MqttAsyncWorker and threading.Thread.\n        OPERATE: Call connect_to_broker.\n        CHECK: Assert the background thread is started with correct parameters.",
-            "duration": "0.0008s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestMqttConnectionManager",
@@ -167,7 +329,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock worker with stop_event.\n        OPERATE: Call disconnect.\n        CHECK: Assert stop_event is set via loop.",
-            "duration": "0.0012s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestMqttConnectionManager",
@@ -185,7 +347,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock threading.Thread and the module's logger.\n        OPERATE: Call connect_to_broker twice, with the mock thread 'alive'.\n        CHECK: Assert that the thread is only started once and a warning is logged.",
-            "duration": "0.0006s"
+            "duration": "0.0008s"
         },
         {
             "classname": "TestMqttConnectionManager",
@@ -194,7 +356,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock worker with loop and event.\n        OPERATE: Call publish.\n        CHECK: Assert message is added to the queue and worker is 'kicked'.",
-            "duration": "0.0006s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestMqttConnectionManager",
@@ -212,7 +374,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock worker.\n        OPERATE: Call subscribe.\n        CHECK: Assert topic is added to pending and queue, and worker is kicked.",
-            "duration": "0.0006s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestMQTTIntegration",
@@ -221,7 +383,7 @@
             "message": "",
             "cause": "",
             "description": "Flow: \n        1. Subscribe to test topic.\n        2. Publish test messages.\n        3. Verify messages are received.\n        4. Use MQTTSweeper to clear the topics.\n        5. Verify topics are cleared.",
-            "duration": "5.0898s"
+            "duration": "5.0897s"
         },
         {
             "classname": "TestMQTTLogic",
@@ -248,7 +410,7 @@
             "message": "",
             "cause": "",
             "description": "Verify _handle_delete_command calls delete_open_air_tree.",
-            "duration": "0.0007s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestMqttManager",
@@ -266,7 +428,7 @@
             "message": "",
             "cause": "",
             "description": "Verify scan complete logic executes without error.",
-            "duration": "0.0006s"
+            "duration": "0.0007s"
         },
         {
             "classname": "TestMqttManager",
@@ -293,7 +455,7 @@
             "message": "",
             "cause": "",
             "description": "Test multiple subscribers for the same topic.",
-            "duration": "0.0006s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestMqttSubscriberRouter",
@@ -329,7 +491,7 @@
             "message": "",
             "cause": "",
             "description": "Test handling of incoming OSC messages.",
-            "duration": "0.0007s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestOSCManager",
@@ -338,7 +500,7 @@
             "message": "",
             "cause": "",
             "description": "Test OSCManager initialization.",
-            "duration": "0.0004s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestOSCManager",
@@ -347,7 +509,7 @@
             "message": "",
             "cause": "",
             "description": "Test that monitor callbacks are triggered.",
-            "duration": "0.0009s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestOSCManager",
@@ -356,7 +518,7 @@
             "message": "",
             "cause": "",
             "description": "Test registering a route between OSC and MQTT.",
-            "duration": "0.0006s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestSNMPManager",
@@ -365,7 +527,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that GUI monitor callbacks can be registered.",
-            "duration": "0.0006s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestSNMPManager",
@@ -374,7 +536,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that SNMPManager initializes with correct default state.",
-            "duration": "0.0005s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestSNMPManager",
@@ -383,7 +545,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that starting the manager sets the running flag.",
-            "duration": "0.0487s"
+            "duration": "0.0318s"
         },
         {
             "classname": "TestAgentMdnsZeroconf",
@@ -392,7 +554,7 @@
             "message": "",
             "cause": "",
             "description": "Test the AES70DiscoveryListener callbacks.",
-            "duration": "0.0013s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestAgentMdnsZeroconf",
@@ -401,7 +563,7 @@
             "message": "",
             "cause": "",
             "description": "Test _check_host for a dedicated device (Port 5025).",
-            "duration": "0.0004s"
+            "duration": "0.0007s"
         },
         {
             "classname": "TestAgentMdnsZeroconf",
@@ -410,7 +572,7 @@
             "message": "",
             "cause": "",
             "description": "Test discover_aes70_devices function.",
-            "duration": "0.0005s"
+            "duration": "0.0007s"
         },
         {
             "classname": "TestAgentMdnsZeroconf",
@@ -428,7 +590,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock urlopen to raise an exception for one gateway.\n        OPERATE: Call discover_gateway_devices.\n        CHECK: Assert it continues and returns resources from other gateways if available.",
-            "duration": "0.0010s"
+            "duration": "0.0017s"
         },
         {
             "classname": "TestAgentStaticIpProber",
@@ -437,7 +599,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock urllib.request.urlopen to return sample HTML for two gateways.\n        OPERATE: Call discover_gateway_devices.\n        CHECK: Assert the correctly formatted TCPIP resource strings are returned.",
-            "duration": "0.0005s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestAgentUsbEnumerator",
@@ -455,7 +617,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock RM to raise an exception.\n        OPERATE: Call discover_usb_devices.\n        CHECK: Assert it handles the error and returns an empty list.",
-            "duration": "0.0001s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestAgentUsbEnumerator",
@@ -473,7 +635,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock DiscoveryOrchestrator and filesystem tools.\n        OPERATE: Call main().\n        CHECK: Assert the orchestrator is run, report is printed, and inventory is saved.",
-            "duration": "0.0009s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestDiscoveryOrchestrator",
@@ -482,7 +644,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Configure mock scanner to return some dummy IP/USB devices and successful responses.\n        OPERATE: Call run_discovery.\n        CHECK: Verify that the scanner methods were called and the inventory is built correctly.",
-            "duration": "0.0005s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestDiscoveryOrchestrator",
@@ -500,7 +662,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Populate the orchestrator's inventory.\n        OPERATE: Call save_inventory.\n        CHECK: Verify the file is opened for writing and the content is saved.",
-            "duration": "0.0009s"
+            "duration": "0.0007s"
         },
         {
             "classname": "TestDiscoveryOrchestrator",
@@ -518,7 +680,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock instrument query to raise exception.\n        OPERATE: Call connect_instrument_logic.\n        CHECK: Assert it handles the exception and returns False.",
-            "duration": "0.0028s"
+            "duration": "0.0021s"
         },
         {
             "classname": "TestVisaConnector",
@@ -527,7 +689,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock setup_visa_instrument to return None.\n        OPERATE: Call connect_instrument_logic.\n        CHECK: Assert it updates proxy with None and publishes failure status.",
-            "duration": "0.0005s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestVisaConnector",
@@ -536,7 +698,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock setup_visa_instrument and the instrument's query response.\n        OPERATE: Call connect_instrument_logic.\n        CHECK: Assert it updates proxy, queries *IDN?, and publishes status updates.",
-            "duration": "0.0008s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestVisaConnector",
@@ -545,7 +707,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock open_resource to raise an exception.\n        OPERATE: Call setup_visa_instrument.\n        CHECK: Assert it returns None on failure.",
-            "duration": "0.0006s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestVisaConnector",
@@ -554,7 +716,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock pyvisa.ResourceManager and open_resource.\n        OPERATE: Call setup_visa_instrument.\n        CHECK: Assert the instrument is returned and configured with correct parameters.",
-            "duration": "0.0016s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestVisaDisconnector",
@@ -563,7 +725,7 @@
             "message": "",
             "cause": "",
             "description": "Test the standalone disconnect_instrument function when close raises an exception.",
-            "duration": "0.0005s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestVisaDisconnector",
@@ -572,7 +734,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: No instrument (None).\n        OPERATE: Call disconnect_instrument_logic.\n        CHECK: Assert it resets the proxy and publishes disconnected status.",
-            "duration": "0.0004s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestVisaDisconnector",
@@ -581,7 +743,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock a valid instrument.\n        OPERATE: Call disconnect_instrument_logic.\n        CHECK: Assert it closes the instrument, resets the proxy, and publishes status updates.",
-            "duration": "0.0012s"
+            "duration": "0.0056s"
         },
         {
             "classname": "TestVisaDisconnector",
@@ -590,7 +752,7 @@
             "message": "",
             "cause": "",
             "description": "Test the standalone disconnect_instrument function with None.",
-            "duration": "0.0049s"
+            "duration": "0.0001s"
         },
         {
             "classname": "TestVisaDisconnector",
@@ -599,7 +761,7 @@
             "message": "",
             "cause": "",
             "description": "Test the standalone disconnect_instrument function with a valid instrument.",
-            "duration": "0.0009s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestVisaMqttListener",
@@ -608,7 +770,7 @@
             "message": "",
             "cause": "",
             "description": "Verify that all topics are subscribed to during initialization.",
-            "duration": "0.0823s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestVisaMqttListener",
@@ -617,7 +779,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Create a direct connect request payload.\n        OPERATE: Call _on_connect_request.\n        CHECK: Assert a thread is started for the specific resource.",
-            "duration": "0.0012s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestVisaMqttListener",
@@ -626,7 +788,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Populate found_resources.\n        OPERATE: Call _on_device_select with a specific index.\n        CHECK: Assert the correct resource is selected.",
-            "duration": "0.0018s"
+            "duration": "0.0829s"
         },
         {
             "classname": "TestVisaMqttListener",
@@ -635,7 +797,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Set selected_device_resource.\n        OPERATE: Call _on_gui_connect_request.\n        CHECK: Assert a thread is started to handle the connection.",
-            "duration": "0.0018s"
+            "duration": "0.0011s"
         },
         {
             "classname": "TestVisaMqttListener",
@@ -644,7 +806,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Set active instrument.\n        OPERATE: Call _on_gui_disconnect_request.\n        CHECK: Assert a thread is started to handle the disconnection.",
-            "duration": "0.0015s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestVisaMqttListener",
@@ -653,7 +815,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock searcher to return resources.\n        OPERATE: Call _on_search_request with val=True.\n        CHECK: Assert searcher is called and GUI is updated.",
-            "duration": "0.0011s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestVisaGuiPublisher",
@@ -671,7 +833,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock MQTT utility.\n        OPERATE: Call _publish_proxy_status.\n        CHECK: Assert the proxy status and timestamp are published correctly.",
-            "duration": "0.0005s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestVisaGuiPublisher",
@@ -680,7 +842,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock MQTT utility.\n        OPERATE: Call _publish_status.\n        CHECK: Assert the correct topic and payload (with GUID and origin) are published.",
-            "duration": "0.0007s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestVisaGuiPublisher",
@@ -689,7 +851,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: A list of 2 resources.\n        OPERATE: Call _update_found_devices_gui.\n        CHECK: Assert 2 slots are populated, remaining (up to 40) are cleared, and first is selected.",
-            "duration": "0.0038s"
+            "duration": "0.0016s"
         },
         {
             "classname": "TestVisaFleet",
@@ -698,7 +860,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that the fleet correctly notifies and persists new inventory data.",
-            "duration": "0.0016s"
+            "duration": "0.0015s"
         },
         {
             "classname": "TestVisaLogic",
@@ -725,7 +887,7 @@
             "message": "",
             "cause": "",
             "description": "Check thread-safe command queue initialization.",
-            "duration": "0.0008s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestVisaLogic",
@@ -734,7 +896,7 @@
             "message": "",
             "cause": "",
             "description": "Confirm the backend library loads and returns available hardware identifiers.",
-            "duration": "0.0286s"
+            "duration": "0.0200s"
         },
         {
             "classname": "TestVisaManagerOrchestrator",
@@ -743,7 +905,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock all the dependent classes. Create mock MQTT connection and subscriber router.\n        OPERATE: Instantiate VisaManagerOrchestrator.\n        CHECK: Verify that all internal managers are instantiated correctly and get_managers returns them.",
-            "duration": "0.0014s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestVisaScanner",
@@ -761,7 +923,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock urllib.request.urlopen to return sample HTML.\n        OPERATE: Call get_gateway_inventory.\n        CHECK: Assert it parses the instrument options from the HTML.",
-            "duration": "0.0006s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestVisaScanner",
@@ -770,7 +932,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock network tools and ThreadPoolExecutor.\n        OPERATE: Call hunt_for_devices.\n        CHECK: Assert it processes targets and returns lists of dedicated/gateway IPs.",
-            "duration": "0.1383s"
+            "duration": "0.1162s"
         },
         {
             "classname": "TestVisaScanner",
@@ -797,7 +959,7 @@
             "message": "",
             "cause": "",
             "description": "Test parse_resource_details for TCPIP resources.",
-            "duration": "0.0002s"
+            "duration": "0.0001s"
         },
         {
             "classname": "TestVisaScanner",
@@ -815,7 +977,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock RM.open_resource to raise an exception.\n        OPERATE: Call query_device_safe.\n        CHECK: Assert it returns None.",
-            "duration": "0.0001s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestVisaScanner",
@@ -833,7 +995,7 @@
             "message": "",
             "cause": "",
             "description": "Test that the default config.ini is created with expected sections.",
-            "duration": "0.0006s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestConfigReader",
@@ -890,13 +1052,58 @@
             "duration": "0.0001s"
         },
         {
+            "classname": "TestLoggingMatrixManager",
+            "name": "test_element_override (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_element_override)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: Element overrides parent system state.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestLoggingMatrixManager",
+            "name": "test_function_level_precision (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_function_level_precision)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: Function inclusions/exclusions have highest priority.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestLoggingMatrixManager",
+            "name": "test_hot_update (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_hot_update)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Operate: Update matrix at runtime.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestLoggingMatrixManager",
+            "name": "test_master_killswitch (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_master_killswitch)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: Master False overrides everything.",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestLoggingMatrixManager",
+            "name": "test_system_level_gating (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_system_level_gating)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: System flags are respected.",
+            "duration": "0.0000s"
+        },
+        {
             "classname": "TestConfigReader",
             "name": "test_config_loader (oaConfiguration.Tests.test_readers.TestConfigReader.test_config_loader)",
             "status": "passed",
             "message": "",
             "cause": "",
             "description": "OPERATE & CHECK: Verify that the config loader correctly reads the mock file.",
-            "duration": "0.0002s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestInitialization",
@@ -923,7 +1130,7 @@
             "message": "",
             "cause": "",
             "description": "CHECK: Ensure the real-world IAS report HTML is present.",
-            "duration": "0.0000s"
+            "duration": "0.0001s"
         },
         {
             "classname": "TestPDFReaderAsset",
@@ -932,7 +1139,7 @@
             "message": "",
             "cause": "",
             "description": "CHECK: Ensure the real-world SoundBase PDF is present.",
-            "duration": "0.0000s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestShowReaderAsset",
@@ -941,7 +1148,7 @@
             "message": "",
             "cause": "",
             "description": "CHECK: Ensure the real-world WWB venue file is present.",
-            "duration": "0.0000s"
+            "duration": "0.0001s"
         },
         {
             "classname": "TestInitialization",
@@ -959,7 +1166,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that functional widgets are passed to the batch engine.",
-            "duration": "0.1097s"
+            "duration": "0.0920s"
         },
         {
             "classname": "TestAsyncGridRenderer",
@@ -968,7 +1175,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that AsyncGridRenderer initializes with a builder and batch engine.",
-            "duration": "0.0077s"
+            "duration": "0.0073s"
         },
         {
             "classname": "TestInitialization",
@@ -995,7 +1202,7 @@
             "message": "",
             "cause": "",
             "description": "OPERATE & CHECK: Verify the module can be loaded and initialized.",
-            "duration": "0.0597s"
+            "duration": "0.0607s"
         },
         {
             "classname": "TestKnobWidget",
@@ -1004,7 +1211,7 @@
             "message": "",
             "cause": "",
             "description": "No description provided.",
-            "duration": "0.0184s"
+            "duration": "0.0100s"
         },
         {
             "classname": "TestKnobWidget",
@@ -1013,7 +1220,7 @@
             "message": "",
             "cause": "",
             "description": "No description provided.",
-            "duration": "0.0124s"
+            "duration": "0.0085s"
         },
         {
             "classname": "TestKnobWidget",
@@ -1022,7 +1229,7 @@
             "message": "",
             "cause": "",
             "description": "Verify that a visualization of 'gear' maps to the shape 'gear'.",
-            "duration": "0.0106s"
+            "duration": "0.0136s"
         },
         {
             "classname": "TestRotarySelector",
@@ -1031,7 +1238,7 @@
             "message": "",
             "cause": "",
             "description": "Verify the selector initializes with the correct number of positions.",
-            "duration": "0.0075s"
+            "duration": "0.0143s"
         },
         {
             "classname": "TestRotarySelector",
@@ -1040,7 +1247,7 @@
             "message": "",
             "cause": "",
             "description": "Verify the selector updates its value correctly.",
-            "duration": "0.0114s"
+            "duration": "0.0154s"
         },
         {
             "classname": "TestRotarySelector",
@@ -1049,7 +1256,7 @@
             "message": "",
             "cause": "",
             "description": "Verify the selector returns correct position text.",
-            "duration": "0.0233s"
+            "duration": "0.0162s"
         },
         {
             "classname": "TestRotarySelector",
@@ -1058,7 +1265,7 @@
             "message": "",
             "cause": "",
             "description": "Verify the Builder can create a RotarySelectorSwitch instance.",
-            "duration": "0.0227s"
+            "duration": "0.0147s"
         },
         {
             "classname": "TestButtonActuator",
@@ -1067,7 +1274,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that the ActuatorButton initializes correctly.",
-            "duration": "0.0084s"
+            "duration": "0.0129s"
         },
         {
             "classname": "TestButtonActuator",
@@ -1076,7 +1283,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderButtonActuatorCreator creates an ActuatorButton.",
-            "duration": "0.0174s"
+            "duration": "0.0082s"
         },
         {
             "classname": "TestButtonToggle",
@@ -1085,7 +1292,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderButtonToggleCreator creates a toggle button widget.",
-            "duration": "0.0220s"
+            "duration": "0.0164s"
         },
         {
             "classname": "TestButtonToggle",
@@ -1094,7 +1301,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that the toggle button registers itself with the mirror engine.",
-            "duration": "0.0099s"
+            "duration": "0.0105s"
         },
         {
             "classname": "TestButtonToggler",
@@ -1103,7 +1310,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderButtonTogglerCreator creates a toggler group.",
-            "duration": "0.0167s"
+            "duration": "0.0147s"
         },
         {
             "classname": "TestButtonTrapezoid",
@@ -1112,7 +1319,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that TrapezoidButton initializes correctly.",
-            "duration": "0.0237s"
+            "duration": "0.0145s"
         },
         {
             "classname": "TestButtonTrapezoid",
@@ -1121,7 +1328,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that TrapezoidButton registers with state mirror engine.",
-            "duration": "0.0127s"
+            "duration": "0.0155s"
         },
         {
             "classname": "TestButtonTrapezoidToggler",
@@ -1130,7 +1337,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderButtonTrapezoidTogglerCreator creates a group.",
-            "duration": "0.0133s"
+            "duration": "0.0157s"
         },
         {
             "classname": "TestButtonWink",
@@ -1139,7 +1346,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderButtonWinkCreator creates a wink button.",
-            "duration": "0.0129s"
+            "duration": "0.0180s"
         },
         {
             "classname": "TestButtonWinkToggler",
@@ -1148,7 +1355,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderButtonWinkTogglerCreator creates a group.",
-            "duration": "0.0235s"
+            "duration": "0.0164s"
         },
         {
             "classname": "TestFader",
@@ -1157,7 +1364,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderFaderCreator creates a fader frame.",
-            "duration": "0.1157s"
+            "duration": "0.0993s"
         },
         {
             "classname": "TestFader",
@@ -1166,7 +1373,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that CustomFaderFrame initializes correctly.",
-            "duration": "0.0086s"
+            "duration": "0.0070s"
         },
         {
             "classname": "TestFaderBarGraph",
@@ -1175,7 +1382,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderFaderBarGraphCreator creates a fader bar graph frame.",
-            "duration": "0.0094s"
+            "duration": "0.0090s"
         },
         {
             "classname": "TestFaderBarGraph",
@@ -1184,7 +1391,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that FaderWithBarGraphFrame initializes correctly.",
-            "duration": "0.0226s"
+            "duration": "0.0153s"
         },
         {
             "classname": "TestFaderDual",
@@ -1193,7 +1400,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderFaderDualCreator creates a dual fader frame.",
-            "duration": "0.0127s"
+            "duration": "0.0144s"
         },
         {
             "classname": "TestFaderDual",
@@ -1202,7 +1409,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that CustomDualFaderFrame initializes correctly.",
-            "duration": "0.0141s"
+            "duration": "0.0142s"
         },
         {
             "classname": "TestFaderHorizontal",
@@ -1211,7 +1418,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderFaderHorizontalCreator creates a horizontal fader frame.",
-            "duration": "0.0085s"
+            "duration": "0.0141s"
         },
         {
             "classname": "TestFaderHorizontal",
@@ -1220,7 +1427,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that CustomHorizontalFaderFrame initializes correctly.",
-            "duration": "0.0103s"
+            "duration": "0.0079s"
         },
         {
             "classname": "TestFaderLinearTravellingPotentiometer",
@@ -1229,7 +1436,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderFaderLinearTravellingPotentiometerCreator creates an LTP frame.",
-            "duration": "0.0199s"
+            "duration": "0.0107s"
         },
         {
             "classname": "TestFaderLinearTravellingPotentiometer",
@@ -1238,7 +1445,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that CustomLTPFrame initializes correctly.",
-            "duration": "0.0213s"
+            "duration": "0.0139s"
         },
         {
             "classname": "TestFluxPlotter",
@@ -1247,7 +1454,7 @@
             "message": "",
             "cause": "",
             "description": "No description provided.",
-            "duration": "0.1495s"
+            "duration": "0.1089s"
         },
         {
             "classname": "TestRadarWidget",
@@ -1256,7 +1463,7 @@
             "message": "",
             "cause": "",
             "description": "No description provided.",
-            "duration": "0.0186s"
+            "duration": "0.0108s"
         },
         {
             "classname": "TestFluxPlotter",
@@ -1265,7 +1472,7 @@
             "message": "",
             "cause": "",
             "description": "No description provided.",
-            "duration": "0.0275s"
+            "duration": "0.0133s"
         },
         {
             "classname": "TestMousewheelScrollMixin",
@@ -1292,7 +1499,7 @@
             "message": "",
             "cause": "",
             "description": "No description provided.",
-            "duration": "0.0330s"
+            "duration": "0.0189s"
         },
         {
             "classname": "TestJsonTree",
@@ -1301,7 +1508,7 @@
             "message": "",
             "cause": "",
             "description": "No description provided.",
-            "duration": "0.0146s"
+            "duration": "0.0187s"
         },
         {
             "classname": "TestMeterBar",
@@ -1310,7 +1517,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderMeterBarCreator creates a SmartMeter.",
-            "duration": "0.0215s"
+            "duration": "0.0148s"
         },
         {
             "classname": "TestMeterBar",
@@ -1319,7 +1526,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that SmartMeter initializes correctly.",
-            "duration": "0.0095s"
+            "duration": "0.0145s"
         },
         {
             "classname": "TestMeterNeedle",
@@ -1328,7 +1535,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderMeterNeedleCreator creates a needle meter.",
-            "duration": "0.0124s"
+            "duration": "0.0181s"
         },
         {
             "classname": "TestMeterNeedle",
@@ -1337,7 +1544,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that tilt and crop commands are extracted from style_overrides and pointer.",
-            "duration": "0.0072s"
+            "duration": "0.0134s"
         },
         {
             "classname": "TestMeterNeedleBatch",
@@ -1346,7 +1553,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify all 20 meter variations in the composite JSON can be built.",
-            "duration": "0.2153s"
+            "duration": "0.1619s"
         },
         {
             "classname": "TestInitialization",
@@ -1364,7 +1571,7 @@
             "message": "",
             "cause": "",
             "description": "Tests that BuilderDataJsonTreeCreator.make() does not raise a NameError.\n        This test ensures that all necessary modules like TransparencyManager (or its mixin)\n        are correctly imported and used.",
-            "duration": "0.0199s"
+            "duration": "0.0122s"
         },
         {
             "classname": "TestSliderValueCreator",
@@ -1373,7 +1580,7 @@
             "message": "",
             "cause": "",
             "description": "Tests that BuilderSliderValueCreator.make() does not raise an AttributeError\n        and correctly populates the topic_widgets dictionary on the builder_instance.\n        This test replicates the conditions that caused the original error.",
-            "duration": "0.0171s"
+            "duration": "0.0176s"
         },
         {
             "classname": "TestTableCSVService",
@@ -1391,7 +1598,7 @@
             "message": "",
             "cause": "",
             "description": "Tests that TableCSVService.load() correctly parses data returned by the reader.",
-            "duration": "0.0004s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestFluxPlotter",
@@ -1400,7 +1607,7 @@
             "message": "",
             "cause": "",
             "description": "Verify that FluxPlotter initializes without error.",
-            "duration": "0.1033s"
+            "duration": "0.0169s"
         },
         {
             "classname": "TestTextLabel",
@@ -1409,7 +1616,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderTextLabelCreator creates a label widget (canvas).",
-            "duration": "0.0128s"
+            "duration": "0.0092s"
         },
         {
             "classname": "TestTextLabel",
@@ -1418,7 +1625,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify the static make method.",
-            "duration": "0.0230s"
+            "duration": "0.0152s"
         },
         {
             "classname": "TestTextTable",
@@ -1427,7 +1634,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderTextTableCreator creates a table widget.",
-            "duration": "0.0216s"
+            "duration": "0.0191s"
         },
         {
             "classname": "TestTextValueBox",
@@ -1436,7 +1643,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderTextValueBoxCreator creates a value box widget.",
-            "duration": "0.0263s"
+            "duration": "0.0171s"
         },
         {
             "classname": "TestTextValueBox",
@@ -1445,7 +1652,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that BuilderTextValueBoxCreator creates a value box widget.",
-            "duration": "0.0251s"
+            "duration": "0.0157s"
         },
         {
             "classname": "TestMousewheelScrollMixin",
@@ -1490,7 +1697,7 @@
             "message": "",
             "cause": "",
             "description": "Load and parse JSON configuration files.",
-            "duration": "0.0010s"
+            "duration": "0.0008s"
         },
         {
             "classname": "TestUIAndData",
@@ -1499,7 +1706,7 @@
             "message": "",
             "cause": "",
             "description": "Recursively find valid UI definition files.",
-            "duration": "0.0004s"
+            "duration": "0.0023s"
         },
         {
             "classname": "TestUIAndData",
@@ -1508,7 +1715,7 @@
             "message": "",
             "cause": "",
             "description": "Transform a flat list of marker data into a nested Zone/Group dictionary.",
-            "duration": "0.0019s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestUIAndData",
@@ -1517,7 +1724,7 @@
             "message": "",
             "cause": "",
             "description": "Validate that UI changes correctly update the master data state.",
-            "duration": "0.0008s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestInitialization",
@@ -1535,7 +1742,7 @@
             "message": "",
             "cause": "",
             "description": "No description provided.",
-            "duration": "0.0001s"
+            "duration": "0.0000s"
         },
         {
             "classname": "TestInitialization",
@@ -1553,7 +1760,7 @@
             "message": "",
             "cause": "",
             "description": "Test that GUI changes trigger MQTT publication.",
-            "duration": "0.0300s"
+            "duration": "0.0156s"
         },
         {
             "classname": "TestStateMirrorEngine",
@@ -1562,7 +1769,7 @@
             "message": "",
             "cause": "",
             "description": "Test topic calculation logic.",
-            "duration": "0.0167s"
+            "duration": "0.0122s"
         },
         {
             "classname": "TestStateMirrorEngine",
@@ -1571,7 +1778,7 @@
             "message": "",
             "cause": "",
             "description": "Test widget registration and topic binding.",
-            "duration": "0.0155s"
+            "duration": "0.0077s"
         },
         {
             "classname": "TestInitialization",
@@ -1598,7 +1805,7 @@
             "message": "",
             "cause": "",
             "description": "Verify Mosquitto broker is in PATH.",
-            "duration": "0.0001s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestInstallation",
@@ -1616,7 +1823,7 @@
             "message": "",
             "cause": "",
             "description": "Verify SNMP daemon (snmpd) is in PATH.",
-            "duration": "0.0002s"
+            "duration": "0.0072s"
         },
         {
             "classname": "TestInitialization",
@@ -1628,13 +1835,49 @@
             "duration": "0.0000s"
         },
         {
+            "classname": "TestMatrixGate",
+            "name": "test_debug_matrix_decorator (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_debug_matrix_decorator)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: Decorator only allows execution of logic if allowed.",
+            "duration": "0.0002s"
+        },
+        {
+            "classname": "TestMatrixGate",
+            "name": "test_failsafe_behavior (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_failsafe_behavior)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: If manager is missing or broken, default to False (Silent).",
+            "duration": "0.0002s"
+        },
+        {
+            "classname": "TestMatrixGate",
+            "name": "test_is_debug_allowed_delegation (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_is_debug_allowed_delegation)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: is_debug_allowed correctly delegates to the manager.",
+            "duration": "0.0003s"
+        },
+        {
+            "classname": "TestMatrixGate",
+            "name": "test_matrix_log_proxy (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_matrix_log_proxy)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "description": "Check: matrix_log only triggers the underlying logger if allowed.",
+            "duration": "0.0005s"
+        },
+        {
             "classname": "TestApplicationInitializer",
             "name": "test_initialize_app_exception (oaOchestration.Tests.test_application_initializer.TestApplicationInitializer.test_initialize_app_exception)",
             "status": "passed",
             "message": "",
             "cause": "",
             "description": "BUILD: Mock the logger and force an exception during initialization.\n        OPERATE: Call initialize_app().\n        CHECK: Assert it handles the exception, logs the error, and returns False.",
-            "duration": "0.0005s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestApplicationInitializer",
@@ -1643,7 +1886,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Mock the logger to capture log calls.\n        OPERATE: Call initialize_app().\n        CHECK: Assert it returns True and logs the success message.",
-            "duration": "0.0004s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestProtocolGuard",
@@ -1652,7 +1895,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Create a mock function decorated with protocol_guard that raises an Exception.\n        OPERATE: Call the function.\n        CHECK: Assert the exception is caught, an error is logged with the protocol name, and None is returned.",
-            "duration": "0.0003s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestProtocolGuard",
@@ -1679,7 +1922,7 @@
             "message": "",
             "cause": "",
             "description": "Test adding a monitor callback.",
-            "duration": "0.0011s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestSplinker",
@@ -1688,7 +1931,7 @@
             "message": "",
             "cause": "",
             "description": "Test broker initialization.",
-            "duration": "0.0003s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestSplinker",
@@ -1697,7 +1940,7 @@
             "message": "",
             "cause": "",
             "description": "Test that ControlBroker is a singleton.",
-            "duration": "0.0003s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestInitialization",
@@ -1715,7 +1958,7 @@
             "message": "",
             "cause": "",
             "description": "No description provided.",
-            "duration": "0.0001s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestStateCache",
@@ -1724,7 +1967,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that external updates are correctly cached, persisted, and broadcast.",
-            "duration": "0.0020s"
+            "duration": "0.0072s"
         },
         {
             "classname": "TestInitialization",
@@ -1742,7 +1985,7 @@
             "message": "",
             "cause": "",
             "description": "Test that the SNMP manager is loaded when the config flag is True.",
-            "duration": "0.0058s"
+            "duration": "0.0039s"
         },
         {
             "classname": "TestLauncher",
@@ -1751,7 +1994,7 @@
             "message": "",
             "cause": "",
             "description": "Test the overall structure and return value of launch_core_managers.",
-            "duration": "0.0032s"
+            "duration": "0.0030s"
         },
         {
             "classname": "TestEntry",
@@ -1778,7 +2021,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Instantiate FleetStatusMonitor (done in setUp).\n        OPERATE: Check initialization state.\n        CHECK: Assert subscriptions to Start and Complete topics and initial RED publish.",
-            "duration": "0.0005s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestFleetStatusMonitor",
@@ -1787,7 +2030,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Monitor in GREEN state.\n        OPERATE: Call _on_scan_complete with invalid JSON.\n        CHECK: Assert it defaults back to RED safely.",
-            "duration": "0.0005s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestFleetStatusMonitor",
@@ -1796,7 +2039,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Monitor in GREEN state.\n        OPERATE: Call _on_scan_complete with num_devices == 0.\n        CHECK: Assert state changes to RED and publishes red.",
-            "duration": "0.0012s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestFleetStatusMonitor",
@@ -1805,7 +2048,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Monitor in RED state.\n        OPERATE: Call _on_scan_complete with num_devices > 0.\n        CHECK: Assert state changes to GREEN and publishes green.",
-            "duration": "0.0005s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestFleetStatusMonitor",
@@ -1814,7 +2057,7 @@
             "message": "",
             "cause": "",
             "description": "BUILD: Monitor in GREEN state.\n        OPERATE: Call _on_scan_start.\n        CHECK: Assert state changes to RED and publishes red.",
-            "duration": "0.0004s"
+            "duration": "0.0007s"
         },
         {
             "classname": "TestWatchdogFunctions",
@@ -1823,7 +2066,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that kick_watchdog updates the timestamp.",
-            "duration": "0.0101s"
+            "duration": "0.0131s"
         },
         {
             "classname": "TestWatchdogFunctions",
@@ -1841,7 +2084,7 @@
             "message": "",
             "cause": "",
             "description": "Goal: Verify that start_heartbeat spawns a thread and sets running flag.",
-            "duration": "0.0005s"
+            "duration": "0.0004s"
         }
     ]
 }

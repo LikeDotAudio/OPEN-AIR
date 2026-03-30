@@ -26,13 +26,19 @@
 # - Houses global debug gates and application constant proxies.
 
 from oaConfiguration.FileReaders.config_reader import Config
+from oaLogging.Methods.matrix_gate import is_debug_allowed
 
 # Proxy for globally loaded application settings (GUIDs, Base Topics, etc.)
 app_constants = Config.get_instance()
 
 # --- Standard Debug Logging Setup ---
-# When enabled, the router will emit high-velocity trace logs to the console.
-LOCAL_DEBUG = True
+# The router respects the hierarchical debug matrix. 
+# It is classified under the 'ROUTER' element within the 'CORE' system.
+def GET_LOCAL_DEBUG(func_name=None):
+    return is_debug_allowed(system="CORE", element="ROUTER", func_name=func_name)
+
+# Legacy compatibility (defaults to checking the system/element level)
+LOCAL_DEBUG = GET_LOCAL_DEBUG()
 
 # --- Default Routing Strategy Map ---
 # Each protocol is assigned a set of emoji tokens that dictate where a message 

@@ -396,3 +396,6 @@ def failure_log(message: str, *args, **kwargs):
 
 # Standard aliases for cross-module compatibility.
 debug_log = debug_logger
+
+# --- Matrix-Aware Logging APIs ---
+from oaLogging.Methods.matrix_gate import is_debug_allowed, debug_matrix, matrix_log

@@ -26,7 +26,10 @@ except ImportError:
     HAS_OSC = False
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+from oaLogging.Methods.matrix_gate import is_debug_allowed
+def _is_debug():
+    return is_debug_allowed(system="UI", element="OSC")
+
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -46,7 +49,7 @@ class OscRxServer:
 
     def _msg_handler(self, address, *args):
         """Dispatches incoming OSC messages to the state manager."""
-        if LOCAL_DEBUG:
+        if _is_debug():
             osc_logger.debug(f"📥📡📥 [OSC] RX: {address} -> {args}")
         # Typically OSC values are single floats or ints
         val = args[0] if args else None
@@ -73,7 +76,7 @@ class OscRxServer:
             self._thread = threading.Thread(target=self.server.serve_forever, 
                                             daemon=True)
             self._thread.start()
-            if LOCAL_DEBUG:
+            if _is_debug():
                 osc_logger.success(f"📡🆗✅ [OSC] RX Server listening on "
                                    f"{self.host}:{self.port}")
         except Exception as e:
@@ -85,5 +88,5 @@ class OscRxServer:
             self.server.shutdown()
             if self._thread:
                 self._thread.join(timeout=2.0)
-            if LOCAL_DEBUG:
+            if _is_debug():
                 osc_logger.debug("🛑📡👋 [OSC] RX Server stopped.")

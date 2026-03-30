@@ -5,7 +5,7 @@
 # Description: Brief summary of purpose
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 from oaLogging.Core.logger import GUI_LOGGER as logger
 
 from ....event_bus import event_bus

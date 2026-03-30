@@ -7,6 +7,9 @@
 import tkinter as tk
 from loguru import logger
 
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = False
+
 # Resistor Color Code Mapping & MIDI Channel Logic
 # 1: Brown, 2: Red, 3: Orange, 4: Yellow, 5: Green, 6: Blue, 7: Violet, 8: Gray, 9: White
 # Channels 10-16: ROYGBIVW (Red, Orange, Yellow, Green, Blue, Indigo, Violet, White)
@@ -161,10 +164,12 @@ class MidiKeyboard(tk.Canvas):
                 color = get_midi_color(channel)
                 
                 if m_type == "note_on" and velocity > 0:
-                    logger.trace(f"🎹 [KEYBOARD] Note ON: {note} (Ch: {channel})")
+                    if LOCAL_DEBUG:
+                        logger.trace(f"🎹 [KEYBOARD] Note ON: {note} (Ch: {channel})")
                     self.note_on(note, color)
                 else:
-                    logger.trace(f"🎹 [KEYBOARD] Note OFF: {note}")
+                    if LOCAL_DEBUG:
+                        logger.trace(f"🎹 [KEYBOARD] Note OFF: {note}")
                     self.note_off(note)
             elif m_type == "pitchwheel":
                 # Pitchwheel doesn't visually affect keys, but we handle it to prevent 'unknown' errors

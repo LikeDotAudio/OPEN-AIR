@@ -10,7 +10,7 @@ import orjson
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -74,22 +74,41 @@ from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 class BuilderArrayCreator(TransparencyMixin):
     @staticmethod
-    def make_array(parent_widget, config_data, context: WidgetContext = None, **kwargs):
+    def make(parent_widget, config_data, context: WidgetContext = None, **kwargs):
+        """Standardized factory entry point."""
+        # Use existing instance if passed, otherwise create creator instance
+        builder_inst = context.builder_instance if context else kwargs.get("builder_instance")
+        return BuilderArrayCreator().make_array(parent_widget, config_data, context=context, **kwargs)
+
+    def make_array(self, parent_widget, config_data, context: WidgetContext = None, **kwargs):
         if LOCAL_DEBUG: logger.trace(f"🔬 Entering make_array with config: {config_data}")
         """
         Generates a grid of widgets based on a blueprint and a data array.
         Supports collapsible rows (OcaCollapsibleBlock) managed by a ViewManager.
         """
-        self = BuilderArrayCreator()
         # ⚡ HARDENED INTERFACE: Extract from context if available
         on_complete = context.on_complete if context else kwargs.get("on_complete")
-        builder_instance = context.builder_instance if context else kwargs.get("builder_instance") or self
+        builder_instance = context.builder_instance if context else kwargs.get("builder_instance")
+        
+        # Fallback to self if no builder provided (unlikely in normal flow)
+        if not builder_instance:
+            builder_instance = self
 
         # 1. Main Container
         p_bg = "#2b2b2b"
         try: p_bg = parent_widget.cget("bg")
         except: pass
         main_container = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", bg=p_bg)
+        
+        # ⚡ VISIBILITY: Grid the container into the parent
+        lay = config_data.get("layout", {})
+        main_container.grid(
+            row=lay.get("row", 0), 
+            column=lay.get("column", 0), 
+            columnspan=lay.get("col_span", 1), 
+            rowspan=lay.get("row_span", 1), 
+            sticky=lay.get("sticky", "nsew")
+        )
         
         # ⚡ DIMENSION ENFORCEMENT: Ensure main container respects explicit sizes
         geom = config_data.get("geometry", {})
@@ -188,7 +207,7 @@ class BuilderArrayCreator(TransparencyMixin):
         
         current_path = config_data.get("path", "")
         if LOCAL_DEBUG: logger.debug(f"🚀 ArrayCreator: Handing off synthetic container '{current_path}' to BatchBuilder...")
-        self._create_dynamic_widgets(
+        builder_instance._create_dynamic_widgets(
             grid_container, container_config, 
             path_prefix=current_path, 
             on_complete=on_complete,

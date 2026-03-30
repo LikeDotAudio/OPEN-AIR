@@ -10,7 +10,7 @@ from ..event_bus import event_bus
 from ..state import state_manager
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import GUI_LOGGER as logger
 
 class TreeRefactor(ttk.Frame):
@@ -24,6 +24,13 @@ class TreeRefactor(ttk.Frame):
         # Subscribe to state updates
         event_bus.subscribe("STATE_UPDATED", self._on_state_updated)
         
+        # ⚡ INITIALIZATION: Populate tree with current state if available
+        # This covers the case where the editor loaded data before this tab was created.
+        current_state = state_manager.get_state()
+        if current_state:
+            if LOCAL_DEBUG: logger.debug("🌳 TreeRefactor: Initializing tree with current state_manager data.")
+            self._on_state_updated(current_state)
+
         # Internal state
         self._dragging_item = None
 
@@ -129,7 +136,7 @@ class TreeRefactor(ttk.Frame):
                 
                 # Heuristic: try to find an id or description for the list item
                 if isinstance(val, dict):
-                    node_type = val.get("id", val.get("type", "Item"))
+                    node_type = val.get("type", val.get("id", "Item"))
                     node_text = f"[{i}] {val.get('description', val.get('id', 'Item'))}"
 
                 # Path construction for list item
@@ -140,7 +147,7 @@ class TreeRefactor(ttk.Frame):
                 
                 full_path = f"{parent_path}.{i}" if parent_path else str(i)
                 
-                node_id = self.tree.insert(parent_node, "end", text=node_text, values=(full_path, node_type))
+                node_id = self.tree.insert(parent_node, "end", text=node_text, values=(full_path, node_type), open=True)
                 if isinstance(val, (dict, list)):
                     self._populate_tree(node_id, val)
             return
@@ -151,24 +158,34 @@ class TreeRefactor(ttk.Frame):
         items = []
         
         # Standard Container Keys
-        container_keys = ["fields", "items", "blueprint", "data"]
+        container_keys = ["fields", "items", "blocks", "blueprint", "data"]
         
-        # If it's the root, just iterate everything
+        # ⚡ IMPROVED ROOT HANDLING: 
+        # If it's the root, and there's a single key that is a container, 
+        # use that key as the starting point.
         if parent_node == "":
-            for k, v in data.items():
-                items.append((k, v, k))
+            root_keys = list(data.keys())
+            # If it's a structural container (single root key with type/blocks/fields)
+            if len(root_keys) == 1 and isinstance(data[root_keys[0]], dict):
+                k = root_keys[0]
+                items.append((k, data[k], k))
+            else:
+                for k, v in data.items():
+                    items.append((k, v, k))
         else:
             # Check for standard containers
+            found_standard = False
             for ck in container_keys:
                 if ck in data:
                     val = data[ck]
                     items.append((ck, val, ck))
+                    found_standard = True
             
             # If NO standard container keys found, and it's not a leaf (widgets might be leaves)
             # This is a fallback for custom structures
-            if not items and any(isinstance(v, (dict, list)) for v in data.values()):
+            if not found_standard and any(isinstance(v, (dict, list)) for v in data.values()):
                 # Exclude internal metadata if any
-                exclude = ["type", "description", "layout", "geometry", "domain", "dynamics", "cosmetics"]
+                exclude = ["type", "description", "layout", "geometry", "domain", "dynamics", "cosmetics", "behavior"]
                 for k, v in data.items():
                     if k not in exclude and isinstance(v, (dict, list)):
                         items.append((k, v, k))
@@ -189,7 +206,7 @@ class TreeRefactor(ttk.Frame):
             
             full_path = f"{parent_path}.{relative_path}" if parent_path else relative_path
 
-            node_id = self.tree.insert(parent_node, "end", text=node_text, values=(full_path, node_type))
+            node_id = self.tree.insert(parent_node, "end", text=node_text, values=(full_path, node_type), open=True)
             
             # Recurse if it's a container
             if isinstance(val, (dict, list)):

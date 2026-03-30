@@ -25,7 +25,7 @@ from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger
 from oaComSNMP.Constants.snmp_constants import THREAD_JOIN_TIMEOUT, LOG_POLLING_INTERVAL, STATE_SYNC_INTERVAL
 
 # LOCAL_DEBUG can be set or passed if needed
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 class SnmpStatePersister:
     """

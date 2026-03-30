@@ -161,3 +161,13 @@ Message: ## [2026.03.16] - 23:00 ### Fixed - Fixed  in background panel generati
 2026-03-29 00:05:00: Fixed SyntaxError in oaComOSC/Managers/osc_manager.py caused by redundant/broken code at the end of the file.
 2026-03-29 21:30:00: Fixed SNMP Bridge 'flickering' and resource conflict by enforcing partition-aware initialization and ensuring full worker cleanup on stop.
 2026-03-29 21:45:00: Fixed SNMP persistence sync by ensuring OID map is refreshed from state cache in the persistence loop.
+2026-03-29 21:55:00: Gated high-velocity ProtocolRouter debug logs (INBOUND/OUTBOUND) with LOCAL_DEBUG to prevent console flooding.
+2026-03-29 22:15:00: Gated ungated print statements in SnmpLog UI widget with LOCAL_DEBUG to prevent console flooding.
+2026-03-29 22:20:00: Gated MIDI keyboard TRACE logs with LOCAL_DEBUG to prevent console noise.
+2026-03-29 22:25:00: Fixed ModuleNotFoundError in oaGuiShowtime by correcting the import path for draw_bargraph utility.
+2026-03-29 22:30:00: Fixed TypeError in CommandRouter by correcting keyword arguments in ProtocolRouter.publish_splink call.
+2026-03-29 22:35:00: Fixed TypeError in BuilderArrayCreator by correctly handling the 'self' parameter and aligning with the standardized factory pattern.
+2026-03-29 22:40:00: Fixed AttributeError in BuilderArrayCreator by correctly using the builder_instance for dynamic widget creation.
+2026-03-29 22:45:00: Fixed GrabBagLoader path resolution by updating it to use GLOBAL_PROJECT_ROOT and scan recursively in oaGuiElements.
+2026-03-29 22:50:00: Gated repetitive MIDI listen heartbeat logs with LOCAL_DEBUG to reduce console noise.
+2026-03-29 22:55:00: Fixed GUI rendering and editor tree view population for complex JSON definitions.

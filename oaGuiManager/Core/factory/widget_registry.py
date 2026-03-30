@@ -30,7 +30,7 @@ from typing import Dict, Any, Type, Callable, Optional
 from loguru import logger
 
 # LOCAL_DEBUG: Toggles verbose tracing for widget discovery and registration.
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 class WidgetRegistry:
     """

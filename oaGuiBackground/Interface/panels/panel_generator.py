@@ -20,7 +20,7 @@ from .Core.layer_screws import ScrewLayer
 from .Core.layer_metal_fold import MetalFoldLayer
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
+BUILDER_DEBUG = False    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 from oaGuiManager.Core.factory.asset_cache import AssetCacheManager

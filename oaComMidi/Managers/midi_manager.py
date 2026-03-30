@@ -20,7 +20,7 @@ import orjson
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 from oaLogging.Core.logger import MIDI_LOGGER as midi_logger
@@ -106,7 +106,8 @@ class MidiManager:
             try:
                 # Periodic heartbeat to prove loop is alive (every 30s)
                 if time.time() - last_heartbeat > 30:
-                    midi_logger.debug(f"💓 [MIDI-LISTEN] Loop active for {port.name}")
+                    if LOCAL_DEBUG:
+                        midi_logger.debug(f"💓 [MIDI-LISTEN] Loop active for {port.name}")
                     last_heartbeat = time.time()
 
                 for msg in port.iter_pending():

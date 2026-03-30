@@ -8,7 +8,7 @@ import orjson
 import threading
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 from oaLogging.Core.logger import VISA_LOGGER as logger
 from oaConfiguration.FileReaders.config_reader import Config
 

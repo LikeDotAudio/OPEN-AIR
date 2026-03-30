@@ -8,6 +8,9 @@ import tkinter as tk
 from tkinter import ttk
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
+# --- Standard Debug Logging Setup ---
+LOCAL_DEBUG = False
+
 class SnmpLog(tk.Frame, TransparencyMixin):
     """
     Advanced SNMP Monitor with Change Tracking and Smart Sorting.
@@ -43,11 +46,13 @@ class SnmpLog(tk.Frame, TransparencyMixin):
         while curr:
             if isinstance(curr, DynamicGuiBuilder):
                 manager = getattr(curr.app_instance, 'snmp_manager', None)
-                print(f"📡 [DEBUG] SnmpLog: Found DynamicGuiBuilder. App instance has snmp_manager: {manager is not None}")
+                if LOCAL_DEBUG:
+                    print(f"📡 [DEBUG] SnmpLog: Found DynamicGuiBuilder. App instance has snmp_manager: {manager is not None}")
                 return manager
             try: curr = curr.master
             except: break
-        print(f"📡 [DEBUG] SnmpLog: Failed to find snmp_manager in ancestor chain.")
+        if LOCAL_DEBUG:
+            print(f"📡 [DEBUG] SnmpLog: Failed to find snmp_manager in ancestor chain.")
         return None
 
     def _setup_ui(self):
@@ -111,7 +116,8 @@ class SnmpLog(tk.Frame, TransparencyMixin):
 
     def on_snmp_traffic(self, direction, oid, value, topic, metadata=None):
         # Handle both periodic dumps and real-time changes
-        print(f"📡 [DEBUG] SnmpLog: Traffic Received! Dir: {direction}, OID: {oid}, Val: {value}")
+        if LOCAL_DEBUG:
+            print(f"📡 [DEBUG] SnmpLog: Traffic Received! Dir: {direction}, OID: {oid}, Val: {value}")
         if direction not in ["TX_DUMP", "RX", "RX_SET"]: return
         
         self.after(0, lambda: self._update_oid_state(oid, value, topic, metadata))

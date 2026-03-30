@@ -7,7 +7,7 @@
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
-from .draw_bargraph import create_bar_graph_image
+from oaGuiShowtime.Methods.draw_bargraph import create_bar_graph_image
 
 class ShowtimeUIMixin:
     """

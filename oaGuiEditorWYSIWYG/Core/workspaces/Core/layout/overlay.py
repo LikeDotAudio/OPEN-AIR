@@ -7,7 +7,7 @@
 import tkinter as tk
 from tkinter import ttk
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 from oaLogging.Core.logger import GUI_LOGGER as logger
 from ...layout_overlays import selection, structure, blocks, columns, sizing, sticky, alignment, colors
 

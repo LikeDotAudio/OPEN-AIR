@@ -9,7 +9,7 @@ from tkinter import ttk
 import time
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 from oaComBroker.Core.protocol_router.manager import ProtocolRouter
@@ -268,7 +268,7 @@ class CommandRouter(tk.Frame):
             return
         
         logger.debug(f"🔗 CommandRouter: Calling router.publish_splink...")
-        if self.router.publish_splink(src, dest, source_val=src_val, dest_val=dest_val):
+        if self.router.publish_splink(src, dest, s_val=src_val, d_val=dest_val):
             logger.success(f"🔗 CommandRouter: Splink command published successfully.")
             # Visual feedback
             self.splink_btn.configure(text="✅ CREATED", fg="#00ff00")

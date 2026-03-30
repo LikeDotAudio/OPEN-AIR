@@ -9,7 +9,7 @@ from loguru import logger
 from PIL import ImageTk
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
 
 # Dimension and Coordinate Constants
 MIN_WIDGET_DIMENSION = 1

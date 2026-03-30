@@ -11,7 +11,7 @@ from tkinter import ttk
 from PIL import ImageTk
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = False    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import builder_logger
 
 from oaStyle.Core.style import DEFAULT_THEME, THEMES

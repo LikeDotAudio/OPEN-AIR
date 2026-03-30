@@ -82,21 +82,39 @@ def get_snmp_node_id(path_parts):
 
 def get_snmp_descriptor(path_parts):
     """
-    Builds a unique, non-redundant SMIv2 descriptor from a clean path.
-    Name + 4-char path hash (e.g. right3a1b).
+    Builds a unique, descriptive SMIv2 descriptor from a clean path.
+    Uses camelCase path parts to stay under 64 characters.
+    Example: OPEN-AIR/Mixing/Faders/Level -> mixingFadersLevela1b2
     """
     if not path_parts: return "v1"
-    p = path_parts[-1]
     
-    # Clean string: letters only
-    clean = re.sub(r"[^a-zA-Z]", "", p)
-    if not clean: clean = "node"
+    # ⚡ SMIv2 REQUIREMENT: Must start with lowercase letter, use only [a-zA-Z0-9]
+    # Max length is technically 64 characters.
     
-    # Ensure lowercase start for SMIv2 compliance
-    base = clean[0].lower() + clean[1:]
+    clean_parts = []
+    for p in path_parts:
+        # Strip everything but alphanumeric
+        c = re.sub(r"[^a-zA-Z0-9]", "", p)
+        if not c: continue
+        # CamelCase: first part lowercase, others capitalized
+        if not clean_parts:
+            clean_parts.append(c[0].lower() + c[1:])
+        else:
+            clean_parts.append(c[0].upper() + c[1:])
     
-    # 4-character deterministic path hash for uniqueness
+    if not clean_parts:
+        clean_parts = ["node"]
+        
+    # Join parts to form the base name
+    base_name = "".join(clean_parts)
+    
+    # 4-character deterministic path hash for global uniqueness
     full_path = "/".join(path_parts).lower()
     h_str = hex(zlib.crc32(full_path.encode()) & 0xffffffff)[2:6].zfill(4)
     
-    return f"{base}{h_str}"
+    # Enforce SMIv2 length limit (64 chars)
+    # [BASE_NAME][HASH] = max 64. So base_name max 60.
+    if len(base_name) > 60:
+        base_name = base_name[:60]
+        
+    return f"{base_name}{h_str}"

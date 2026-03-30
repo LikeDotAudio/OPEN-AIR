@@ -21,7 +21,7 @@ from oaConfiguration.FileReaders.config_reader import Config
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 app_constants = Config.get_instance()
 
 class PtpMonitor(tk.Frame, TransparencyMixin):

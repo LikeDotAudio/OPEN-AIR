@@ -28,7 +28,7 @@ from oaComSNMP.Constants.snmp_constants import THREAD_JOIN_TIMEOUT, LOG_POLLING_
 from oaComBroker.Core.protocol_router.manager import ProtocolRouter 
 
 # LOCAL_DEBUG can be set or passed if needed
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 class SnmpLogMonitor:
     """

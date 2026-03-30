@@ -36,7 +36,7 @@ current_time = datetime.datetime.now().strftime("%H%M%S")
 current_version = f"{current_date}.{current_time}.3"
 current_version_hash = int(current_date) * int(current_time) * 3
 current_file = f"{os.path.basename(__file__)}"
-LOCAL_DEBUG = True   
+LOCAL_DEBUG = False   
 
 # --- MQTT Topic Constants (No Magic Numbers) ---
 ROOT_TOPIC = "OPEN-AIR/yak/Memory"

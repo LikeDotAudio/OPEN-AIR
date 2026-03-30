@@ -12,7 +12,7 @@ from ..Core.grid_topology_configurator import GridTopologyConfigurator
 from ..Core.structural_assembler import StructuralAssembler
 from ..Core.batch_processing_engine import BatchProcessingEngine
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 renderer_logger = logger.bind(subsystem="RENDERER")
 
 class AsyncGridRenderer:

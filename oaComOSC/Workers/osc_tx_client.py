@@ -23,7 +23,7 @@ except ImportError:
     HAS_OSC = False
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()

@@ -61,8 +61,9 @@ def normalize_and_ingest(
         - May drop packets due to dead-band or interaction locks.
         - Injects a new dictionary into the inbound_queue.
     """
-    val_str = str(value)[:100] + ("..." if len(str(value)) > 100 else "")
-    router_logger.debug(f"📡📥📥 [INBOUND] {transport_source} on {topic}: {val_str}")
+    if LOCAL_DEBUG:
+        val_str = str(value)[:100] + ("..." if len(str(value)) > 100 else "")
+        router_logger.debug(f"📡📥📥 [INBOUND] {transport_source} on {topic}: {val_str}")
         
     # Ignore traffic intended for the router's own monitoring/telemetry topics.
     if any(x in str(topic) for x in ["/System/Router/", "/Firehose/"]):

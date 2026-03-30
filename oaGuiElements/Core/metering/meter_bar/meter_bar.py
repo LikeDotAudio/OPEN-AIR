@@ -4,7 +4,7 @@
 #
 # Description: A modern bar-style meter widget with ballistics and peak hold.
 
-BUILDER_DEBUG = True
+BUILDER_DEBUG = False
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 

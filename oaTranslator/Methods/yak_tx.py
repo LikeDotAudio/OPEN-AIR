@@ -12,7 +12,7 @@ from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
-LOCAL_DEBUG = True   
+LOCAL_DEBUG = False   
 
 class YakTxManager:
     """

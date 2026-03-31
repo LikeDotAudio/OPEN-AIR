@@ -1,10 +1,11 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Workers/broker_monitor.py
 # Author: Anthony Peter Kuzub
 # Version: 20260124.000000.1
 #
 # Description: Monitors the Mosquitto broker's $SYS topics to provide real-time statistics.
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
 
@@ -27,7 +28,7 @@ class BrokerMonitor:
         # We subscribe to wildcard to catch everything useful
         self.subscriber_router.subscribe_to_topic("$SYS/broker/#", self._on_sys_message)
         
-        if LOCAL_DEBUG: MQTT_LOGGER.debug("BrokerMonitor initialized and listening to $SYS/broker/#")
+        matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "BrokerMonitor initialized and listening to $SYS/broker/#", "DEBUG")
 
     def register_observer(self, callback):
         """Register a GUI callback to receive stats updates."""

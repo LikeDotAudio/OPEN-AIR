@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Managers/mqtt_connection.py
 # Author: Anthony Peter Kuzub
 # Version: 1.1.0
@@ -137,4 +139,4 @@ class MqttConnectionManager:
         if self.loop and self.stop_event:
             self.loop.call_soon_threadsafe(self.stop_event.set)
         if LOCAL_DEBUG:
-            MQTT_LOGGER.debug("MQTT: Disconnection initiated.")
+            matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "MQTT: Disconnection initiated.", "DEBUG")

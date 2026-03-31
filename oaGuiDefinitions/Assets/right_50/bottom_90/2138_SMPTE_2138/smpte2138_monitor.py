@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # 2138_SMPTE_2138/smpte2138_monitor.py
 #
 # Elite GUI monitor for the SMPTE ST 2138 protocol. 
@@ -26,6 +28,7 @@ from oaComMQTT.Core import mqtt_publisher_service
 
 LOCAL_DEBUG = True
 
+
 class SMPTE2138Monitor(tk.Frame, TransparencyMixin):
     """
     ST 2138 Monitor GUI with remote bridge lifecycle control.
@@ -52,7 +55,7 @@ class SMPTE2138Monitor(tk.Frame, TransparencyMixin):
         self._update_status_loop()
         
         if LOCAL_DEBUG: 
-            logger.debug("🖥️ [UI] Elite ST 2138 Monitor Online.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🖥️ [UI] Elite ST 2138 Monitor Online.", "DEBUG")
 
     def _find_builder(self, widget):
         from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
@@ -179,7 +182,7 @@ class SMPTE2138Monitor(tk.Frame, TransparencyMixin):
         payload = {"active": active}
         mqtt_publisher_service.publish_payload(topic, orjson.dumps(payload).decode())
         if LOCAL_DEBUG:
-            logger.info(f"📡 [UI] Sent remote command: BRIDGE={'START' if active else 'STOP'}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡 [UI] Sent remote command: BRIDGE={'START' if active else 'STOP'}", "INFO")
 
     def _update_status_loop(self):
         """Periodic UI task to update status indicators."""

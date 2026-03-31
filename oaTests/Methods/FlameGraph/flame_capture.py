@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Methods/FlameGraph/flame_capture.py
 #
 # Low-level Multi-threaded Profiling Hooks.
@@ -41,7 +43,7 @@ def kill_all_profilers():
                 count += 1
         except Exception as e:
             from oaLogging.Entry import logger
-            logger.trace(f"FlameGraph: Failed to disable profiler object: {e}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"FlameGraph: Failed to disable profiler object: {e}", "TRACE")
     if count > 0:
         print(f"? Watchdog: Killed {count} active profiler(s).")
 

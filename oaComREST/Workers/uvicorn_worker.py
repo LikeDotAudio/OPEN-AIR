@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # oaComREST/Workers/uvicorn_worker.py
 # Author: Anthony Peter Kuzub
 # Version: 20260328.1200.1
@@ -41,7 +43,7 @@ class UvicornWorker(threading.Thread):
             return
 
         if LOCAL_DEBUG:
-            logger.debug(f"📡⚙️🚀 [REST] Starting Uvicorn on {self.host}:{self.port}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡⚙️🚀 [REST] Starting Uvicorn on {self.host}:{self.port}", "DEBUG")
         
         config = uvicorn.Config(
             app=self.app, 
@@ -63,5 +65,5 @@ class UvicornWorker(threading.Thread):
         """Signals the Uvicorn server to shut down."""
         if self.server:
             if LOCAL_DEBUG:
-                logger.debug("📡⚙️🛑 [REST] Stopping Uvicorn server...")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡⚙️🛑 [REST] Stopping Uvicorn server...", "DEBUG")
             self.server.should_exit = True

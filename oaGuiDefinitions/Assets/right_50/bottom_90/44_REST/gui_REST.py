@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # 44_REST/gui_REST.py
 # Author: Anthony Peter Kuzub
 # Version: 20260328.1430.1
@@ -25,7 +27,6 @@ if str(root_path) not in sys.path:
 import oaComREST.Entry as REST_MODULE
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaLogging.Entry import logger
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
@@ -49,7 +50,7 @@ class RestDashboard(tk.Frame, TransparencyMixin):
                              (getattr(self.config_data.get("app_instance"), "protocol_router", None) if self.config_data.get("app_instance") else None)
             
             REST_MODULE.get_manager(state_cache_manager=state_cache, protocol_router=protocol_router)
-            if LOCAL_DEBUG: logger.info("🌐 RestDashboard: RESTManager linked successfully.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🌐 RestDashboard: RESTManager linked successfully.", "INFO")
         except Exception as e:
             logger.error(f"🌐 RestDashboard: Standalone setup failed: {e}")
 
@@ -165,7 +166,7 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         self.footer_lbl.pack(side=tk.BOTTOM, fill=tk.X, padx=10, pady=2)
 
     def _start_service(self):
-        logger.info("🌐 REST: Starting service...")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🌐 REST: Starting service...", "INFO")
         REST_MODULE.start()
         self.after(500, self._refresh_ui)
 

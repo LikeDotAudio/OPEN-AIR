@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/console_encoder.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -28,8 +30,9 @@ Assumptions and Constraints:
 import os
 import sys
 
+LOCAL_DEBUG = True
+
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -59,29 +62,29 @@ def configure_console_encoding():
     # fail when encountering UTF-8 symbols used throughout the app.
     if os.name == "nt":
         try:
-            if LOCAL_DEBUG: logger.debug("▶️ Entering configure_console_encoding.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "▶️ Entering configure_console_encoding.", "DEBUG")
 
-            if LOCAL_DEBUG: logger.debug("⚙️ Attempting to reconfigure stdout encoding to UTF-8.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⚙️ Attempting to reconfigure stdout encoding to UTF-8.", "DEBUG")
 
             # UTF-8 reconfiguration prevents 'UnicodeEncodeError' when logging 
             # stylized status indicators.
             sys.stdout.reconfigure(encoding="utf-8")
-            if LOCAL_DEBUG: logger.success("✅ Successfully reconfigured stdout encoding.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Successfully reconfigured stdout encoding.", "SUCCESS")
 
-            if LOCAL_DEBUG: logger.debug("⚙️ Attempting to reconfigure stderr encoding to UTF-8.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⚙️ Attempting to reconfigure stderr encoding to UTF-8.", "DEBUG")
             sys.stderr.reconfigure(encoding="utf-8")
-            if LOCAL_DEBUG: logger.success("✅ Successfully reconfigured stderr encoding.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Successfully reconfigured stderr encoding.", "SUCCESS")
         except AttributeError:
             # Older Python versions (pre-3.7) do not support .reconfigure().
-            if LOCAL_DEBUG: logger.debug("🟡 sys.stdout/stderr.reconfigure not available. Skipping.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟡 sys.stdout/stderr.reconfigure not available. Skipping.", "DEBUG")
             pass
         except Exception as e:
             if LOCAL_DEBUG:
-                logger.debug(f"⚠️ Exception during console encoding reconfiguration: {e}")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"⚠️ Exception during console encoding reconfiguration: {e}", "DEBUG")
 
     else:
         # POSIX systems typically default to UTF-8, making reconfiguration 
         # unnecessary and potentially disruptive.
-        if LOCAL_DEBUG: logger.debug("⏩ Not on Windows ('nt'), skipping console encoding reconfiguration.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⏩ Not on Windows ('nt').", "DEBUG")
 
-    if LOCAL_DEBUG: logger.success("✅ Exiting configure_console_encoding.")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Exiting configure_console_encoding.", "SUCCESS")

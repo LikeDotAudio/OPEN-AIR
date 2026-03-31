@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Workers/mqtt_async_worker.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -57,7 +59,7 @@ class MqttAsyncWorker:
                 self.manager.client = client
                 self.manager._connected = True
                 if LOCAL_DEBUG:
-                    MQTT_LOGGER.success("aiomqtt: Connected to broker.")
+                    matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "aiomqtt: Connected to broker.", "SUCCESS")
                 
                 if self.manager.subscriber_router:
                     await self.manager.subscriber_router.resubscribe_all_topics(client)

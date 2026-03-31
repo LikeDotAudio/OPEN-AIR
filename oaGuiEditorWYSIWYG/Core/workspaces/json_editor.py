@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # workspaces/json_editor.py
 # Author: Gemini CLI
 # Version: 1.0.0
@@ -12,7 +14,6 @@ from ..event_bus import event_bus
 from ..state import state_manager
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import GUI_LOGGER as logger
 
 
@@ -22,18 +23,18 @@ class JsonEditor(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         kwargs.pop("bg", None)
         super().__init__(parent, bg="#1e1e1e", *args, **kwargs)
-        if LOCAL_DEBUG: logger.debug("JsonEditor: Initializing workspace...")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "JsonEditor: Initializing workspace...", "DEBUG")
         self._build_ui()
         
         # Subscribe to state updates
-        if LOCAL_DEBUG: logger.debug("JsonEditor: Subscribing to EventBus...")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "JsonEditor: Subscribing to EventBus...", "DEBUG")
         event_bus.subscribe("STATE_UPDATED", self._on_state_updated)
         event_bus.subscribe("FOCUS_REQUESTED", self._on_focus_requested)
         
         # ⚡ INITIAL SYNC: Ensure code loads even if the initial broadcast was missed
         current_state = state_manager.get_state()
         if current_state:
-            if LOCAL_DEBUG: logger.debug("JsonEditor: Performing initial state sync...")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "JsonEditor: Performing initial state sync...", "DEBUG")
             self._on_state_updated(current_state)
 
         self.bind("<Destroy>", self._on_destroy)
@@ -41,13 +42,13 @@ class JsonEditor(tk.Frame):
     def _on_destroy(self, event):
         """Unsubscribe from event bus when widget is destroyed."""
         if event.widget == self:
-            if LOCAL_DEBUG: logger.info("JsonEditor: Workspace destroyed. Cleaning up subscriptions.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "JsonEditor: Workspace destroyed. Cleaning up subscriptions.", "INFO")
             event_bus.unsubscribe("STATE_UPDATED", self._on_state_updated)
             event_bus.unsubscribe("FOCUS_REQUESTED", self._on_focus_requested)
 
     def _build_ui(self):
         """Builds the JSON editor UI."""
-        if LOCAL_DEBUG: logger.debug("JsonEditor: Creating Editor UI components...")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "JsonEditor: Creating Editor UI components...", "DEBUG")
         header = tk.Frame(self, bg="#333333", height=35)
         header.pack(side="top", fill="x")
         
@@ -74,39 +75,39 @@ class JsonEditor(tk.Frame):
         self.text_area.tag_configure("search_highlight", background="#444400")
 
         self.text_area.bind("<KeyRelease>", self._on_key_release)
-        if LOCAL_DEBUG: logger.debug("JsonEditor: Editor UI built.")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "JsonEditor: Editor UI built.", "DEBUG")
 
     def _on_state_updated(self, json_data, source=None):
         """Updates the text area when the master state changes elsewhere."""
         if source == self or not self.winfo_exists():
             return
         
-        if LOCAL_DEBUG: logger.info(f"JsonEditor: Remote state update from {source.__class__.__name__ if source else 'External'}. Syncing text area.")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"JsonEditor: Remote state update from {source.__class__.__name__ if source else 'External'}. Syncing text area.", "INFO")
         # Check if text_area exists (should be true if _build_ui finished)
         if hasattr(self, 'text_area'):
             self.text_area.delete("1.0", "end")
             self.text_area.insert("1.0", orjson.dumps(json_data, option=orjson.OPT_INDENT_2).decode())
-            if LOCAL_DEBUG: logger.debug("JsonEditor: Applying syntax highlighting after sync...")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "JsonEditor: Applying syntax highlighting after sync...", "DEBUG")
             self._apply_highlight()
 
     def _on_focus_requested(self, path, source=None):
         """Locates and highlights the specified path in the JSON text."""
         if not path or not self.winfo_exists() or not hasattr(self, 'text_area'): return
         
-        if LOCAL_DEBUG: logger.info(f"JsonEditor: Focus synchronization for path: {path} (Source: {source.__class__.__name__ if source else 'Unknown'})")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"JsonEditor: Focus synchronization for path: {path} (Source: {source.__class__.__name__ if source else 'Unknown'})", "INFO")
         # Convert dot-path to last key for simple text search
         search_key = f'"{path.split(".")[-1]}"'
         
         pos = self.text_area.search(search_key, "1.0", stopindex="end")
         if pos:
-            if LOCAL_DEBUG: logger.debug(f"JsonEditor: Found search key '{search_key}' at position {pos}. Highlighting line.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"JsonEditor: Found search key '{search_key}' at position {pos}. Highlighting line.", "DEBUG")
             self.text_area.tag_remove("search_highlight", "1.0", "end")
             self.text_area.tag_add("search_highlight", f"{pos} linestart", f"{pos} lineend")
             self.text_area.see(pos)
             self.text_area.mark_set("insert", pos)
             self.text_area.focus_set()
         else:
-             if LOCAL_DEBUG: logger.debug(f"JsonEditor: Search key '{search_key}' NOT FOUND in text area.")
+             matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"JsonEditor: Search key '{search_key}' NOT FOUND in text area.", "DEBUG")
 
     def _on_key_release(self, event):
         """Updates highlighting on key release."""
@@ -116,26 +117,26 @@ class JsonEditor(tk.Frame):
 
     def _apply_changes(self):
         """Parses the text and updates the master state_manager."""
-        if LOCAL_DEBUG: logger.info("JsonEditor: 'Apply Changes' manual trigger.")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "JsonEditor: 'Apply Changes' manual trigger.", "INFO")
         try:
             raw_text = self.text_area.get("1.0", "end-1c")
             new_data = orjson.loads(raw_text)
-            if LOCAL_DEBUG: logger.success("JsonEditor: Successfully parsed JSON. Pushing to StateManager...")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "JsonEditor: Successfully parsed JSON. Pushing to StateManager...", "SUCCESS")
             state_manager.update_state(new_data, source=self)
-            if LOCAL_DEBUG: logger.success("JsonEditor: Manual changes applied successfully.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "JsonEditor: Manual changes applied successfully.", "SUCCESS")
         except Exception as e:
             logger.error(f"❌ JsonEditor: JSON Syntax Error during apply: {e}")
 
     def _format_json(self):
         """Beautifies the JSON text."""
-        if LOCAL_DEBUG: logger.info("JsonEditor: 'Format JSON' manual trigger.")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "JsonEditor: 'Format JSON' manual trigger.", "INFO")
         try:
             raw_text = self.text_area.get("1.0", "end-1c")
             data = orjson.loads(raw_text)
             formatted = orjson.dumps(data, option=orjson.OPT_INDENT_2).decode()
             self.text_area.delete("1.0", "end")
             self.text_area.insert("1.0", formatted)
-            if LOCAL_DEBUG: logger.debug("JsonEditor: JSON beautified. Applying highlights and syncing state_manager...")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "JsonEditor: JSON beautified. Applying highlights and syncing state_manager...", "DEBUG")
             self._apply_highlight()
             self._apply_changes()
         except Exception as e:

@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Methods/FlameGraph/flame_html.py
 #
 # High-fidelity HTML report generator for performance intelligence.
@@ -58,7 +60,7 @@ def generate_final_html(svg_content, table_rows, root_buttons, wall_of_shame, wa
         with open(output_file, 'w', encoding="utf-8") as f:
             f.write(content)
             
-        logger.success(f"? Standalone Performance Report generated: {output_file}")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"? Standalone Performance Report generated: {output_file}", "SUCCESS")
         return True
 
     except Exception as e:

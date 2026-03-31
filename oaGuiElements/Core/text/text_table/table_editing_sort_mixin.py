@@ -39,7 +39,7 @@ class TableEditingSortMixin:
     def _bind_headers(self):
         for col_name in self.tree["columns"]:
             self.tree.heading(col_name, command=lambda c=col_name: self._sort_column(c))
-        if LOCAL_DEBUG: TABLE_LOGGER.debug("Binding headers for sorting.")
+        matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Binding headers for sorting.", "DEBUG")
 
     # Sorts the Treeview data based on the specified column.
     # This method retrieves all data from the Treeview, sorts it based on the values
@@ -50,7 +50,7 @@ class TableEditingSortMixin:
     # Outputs:
     #     None.
     def _sort_column(self, col_name):
-        if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Sorting column: {col_name}")
+        matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Sorting column: {col_name}", "DEBUG")
 
         # Get all items in the Treeview
         data = []
@@ -104,4 +104,4 @@ class TableEditingSortMixin:
                 original_text = self.tree.heading(c, "text")
                 self.tree.heading(c, text=re.sub(r" [▼▲]", "", original_text))
 
-        if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Column '{col_name}' sorted {'descending' if self._sort_reverse else 'ascending'}.")
+        matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Column '{col_name}' sorted {'descending' if self._sort_reverse else 'ascending'}.", "DEBUG")

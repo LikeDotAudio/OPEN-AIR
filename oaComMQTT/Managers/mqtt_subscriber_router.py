@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Managers/mqtt_subscriber_router.py
 # Author: Anthony Peter Kuzub
 # Version: 20260323.1700.1
@@ -9,9 +11,10 @@ import threading
 from typing import Any, Callable, Dict, List, Set, Union
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
+
+LOCAL_DEBUG = True
 
 from oaConfiguration.FileReaders.config_reader import Config
 from oaComMQTT.Constants.mqtt_config import MATCH_CACHE_LIMIT
@@ -90,7 +93,7 @@ class MqttSubscriberRouter:
                           callback_func: Callable[[MqttMessage], None]):
         """Registers a callback for a topic filter."""
         if LOCAL_DEBUG:
-            MQTT_LOGGER.debug(f"Subscribing to {topic_filter}")
+            matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Subscribing to {topic_filter}", "DEBUG")
             
         # ⚡ Invalidate cache when subscriptions change
         self._match_cache.clear()
@@ -236,4 +239,4 @@ class MqttSubscriberRouter:
                     self._active_broker_subscriptions.add(topic_filter)
         
         if LOCAL_DEBUG:
-            MQTT_LOGGER.debug("aiomqtt: Resubscribed to root and external filters.")
+            matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "aiomqtt: Resubscribed to root and external filters.", "DEBUG")

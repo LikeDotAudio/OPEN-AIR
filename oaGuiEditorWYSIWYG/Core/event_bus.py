@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Core/event_bus.py
 # Author: Gemini CLI
 # Version: 1.1.0
@@ -7,7 +9,7 @@
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 
 
 class EventBus:
@@ -24,7 +26,7 @@ class EventBus:
     def reset(self):
         """Clears all subscribers."""
         self._subscribers = {}
-        if LOCAL_DEBUG: logger.debug("🧹 EventBus: Reset complete. All subscribers cleared.")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🧹 EventBus: Reset complete. All subscribers cleared.", "DEBUG")
 
     def subscribe(self, event_type, callback):
         """Subscribes a callback to an event type."""
@@ -32,14 +34,16 @@ class EventBus:
             self._subscribers[event_type] = []
         if callback not in self._subscribers[event_type]:
             self._subscribers[event_type].append(callback)
-            if LOCAL_DEBUG: logger.debug(f"🔔 EventBus: Subscribed '{callback.__name__ if hasattr(callback, '__name__') else 'lambda'}' to '{event_type}'.")
+            cb_name = callback.__name__ if hasattr(callback, '__name__') else str(callback)
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔔 EventBus: Subscribed '{cb_name}' to '{event_type}'.", "DEBUG")
 
     def unsubscribe(self, event_type, callback):
         """Unsubscribes a callback from an event type."""
         if event_type in self._subscribers:
             if callback in self._subscribers[event_type]:
                 self._subscribers[event_type].remove(callback)
-                if LOCAL_DEBUG: logger.debug(f"🔕 EventBus: Unsubscribed '{callback.__name__ if hasattr(callback, '__name__') else 'lambda'}' from '{event_type}'.")
+                cb_name = callback.__name__ if hasattr(callback, '__name__') else str(callback)
+                matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔕 EventBus: Unsubscribed '{cb_name}' from '{event_type}'.", "DEBUG")
 
     def publish(self, event_type, **kwargs):
         """Publishes an event to all subscribers."""
@@ -47,7 +51,7 @@ class EventBus:
         source_name = source.__class__.__name__ if not isinstance(source, str) else source
         
         subscriber_count = len(self._subscribers.get(event_type, []))
-        if LOCAL_DEBUG: logger.debug(f"📢 EventBus: Publishing '{event_type}' from {source_name} to {subscriber_count} subscribers.")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📢 EventBus: Publishing '{event_type}' from {source_name} to {subscriber_count} subscribers.", "DEBUG")
         
         if event_type in self._subscribers:
             for callback in self._subscribers[event_type]:

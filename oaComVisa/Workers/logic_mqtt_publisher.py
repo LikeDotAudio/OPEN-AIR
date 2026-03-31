@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Workers/logic_mqtt_publisher.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -9,7 +11,7 @@ import time
 import random
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -131,9 +133,9 @@ class VisaGuiPublisher:
                     qos=0,
                     retain=False,
                 )
-                if LOCAL_DEBUG: logger.success("💳 ✅ First device automatically selected after search.")
+                matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 ✅ First device automatically selected after search.", "SUCCESS")
 
-            if LOCAL_DEBUG: logger.success("💳 ✅ GUI device list updated with search results (up to 40 slots used).")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 ✅ GUI device list updated with search results (up to 40 slots used).", "SUCCESS")
         except Exception as e:
             if LOCAL_DEBUG:
                 logger.exception("💳 ❌ Error in _update_found_devices_gui")
@@ -170,7 +172,7 @@ class VisaGuiPublisher:
             self.mqtt_util.get_client_instance().publish(
                 topic=full_topic, payload=orjson.dumps(payload_data).decode(), qos=0, retain=True
             )
-            if LOCAL_DEBUG: logger.debug(f"💳 MQTT: Published status '{topic_suffix}' with value '{value}' to '{full_topic}'")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 MQTT: Published status '{topic_suffix}' with value '{value}' to '{full_topic}'", "DEBUG")
 
     def _publish_proxy_status(self, status: str):
         """Publishes the high-level proxy connection status.
@@ -186,4 +188,4 @@ class VisaGuiPublisher:
         self.mqtt_util.get_client_instance().publish(
             topic=topic, payload=orjson.dumps(payload_data).decode(), qos=0, retain=True
         )
-        if LOCAL_DEBUG: logger.debug(f"💳 MQTT: Published Proxy Status '{status}' to '{topic}'")
+        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 MQTT: Published Proxy Status '{status}' to '{topic}'", "DEBUG")

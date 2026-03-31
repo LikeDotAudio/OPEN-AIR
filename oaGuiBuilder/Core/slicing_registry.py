@@ -27,7 +27,6 @@ from oaGuiBuilder.Constants.builder_constants import (
 )
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaLogging.Core.logger import builder_logger
 from oaLogging.Methods.matrix_gate import matrix_log
 

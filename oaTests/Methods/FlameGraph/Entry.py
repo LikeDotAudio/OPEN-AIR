@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Methods/FlameGraph/Entry.py
 #
 # Unified Entry Point for FlameGraph Performance Profiling.
@@ -42,7 +44,7 @@ def main():
     """
     Orchestrates a full profiling session of the OpenAir application.
     """
-    logger.info("🔥 [ENTRY] Initializing Performance Profiling Session...")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔥 [ENTRY] Initializing Performance Profiling Session...", "INFO")
     
     manager = FlameManager()
     
@@ -54,21 +56,21 @@ def main():
         from oaWatchdog.Managers.watchdog import register_panic_callback
         # Register a callback to ensure report is generated on critical failure
         register_panic_callback(lambda: manager.generate_report())
-        logger.info("🔥 [ENTRY] Panic callback registered with Watchdog.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔥 [ENTRY] Panic callback registered with Watchdog.", "INFO")
     except ImportError:
         logger.warning("🔥 [ENTRY] Watchdog not found. Panic callbacks disabled.")
     except Exception as e:
         logger.error(f"🔥 [ENTRY] Failed to register panic callback: {e}")
 
     # 3. Launch the Application
-    logger.info("🔥 [ENTRY] Launching OpenAir Application...")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔥 [ENTRY] Launching OpenAir Application...", "INFO")
     try:
         import openair
         # Assuming openair has a main() entry point that starts the app
         # and blocking until the app is closed.
         openair.main()
     except KeyboardInterrupt:
-        logger.info("🔥 [ENTRY] Session interrupted by user (KeyboardInterrupt).")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔥 [ENTRY] Session interrupted by user (KeyboardInterrupt).", "INFO")
     except Exception as e:
         logger.exception(f"🔥 [ENTRY] Application crashed during profiling: {e}")
     finally:
@@ -77,8 +79,8 @@ def main():
         report_path = manager.generate_report()
         
         if report_path:
-            logger.success(f"🔥 [ENTRY] Performance profiling session complete.")
-            logger.info(f"🔥 [ENTRY] Report: {report_path}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔥 [ENTRY] Performance profiling session complete.", "SUCCESS")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔥 [ENTRY] Report: {report_path}", "INFO")
         else:
             logger.error("🔥 [ENTRY] Failed to synthesize final report.")
 

@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # 3_MIB/snmp_mib.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -102,7 +104,7 @@ class SnmpMib(tk.Frame, TransparencyMixin):
         self.status_var.set("Status: Refreshing...")
         if self.snmp_manager.save_current_mib():
             self.load_mib_from_disk()
-            logger.success("💾 SNMP UI: current.mib refreshed.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💾 SNMP UI: current.mib refreshed.", "SUCCESS")
             self.status_var.set("Status: Refreshed")
 
     def save_mib_as(self):
@@ -117,7 +119,7 @@ class SnmpMib(tk.Frame, TransparencyMixin):
             try:
                 with open(file_path, 'w') as f:
                     f.write(mib_content)
-                logger.success(f"💾 SNMP: MIB saved to {file_path}")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💾 SNMP: MIB saved to {file_path}", "SUCCESS")
             except Exception as e:
                 logger.error(f"❌ SNMP: Failed to save MIB: {e}")
 

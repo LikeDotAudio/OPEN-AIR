@@ -1,3 +1,4 @@
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/marker_logic.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
@@ -8,7 +9,7 @@ import os
 import inspect
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -43,10 +44,10 @@ def calculate_frequency_range(marker_data_list):
     current_function_name = inspect.currentframe().f_code.co_name
 
     # [A brief, one-sentence description of the function's purpose.]
-    if LOCAL_DEBUG: logger.debug(f"🟢️️️🟢 ➡️➡️ {current_function_name} to divine the full spectral range from {len(marker_data_list)} markers.")
+    matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 ➡️➡️ {current_function_name} to divine the full spectral range from {len(marker_data_list)} markers.", "DEBUG")
 
     if not marker_data_list:
-        if LOCAL_DEBUG: logger.debug("🟢️️️🟡 The marker list is an empty void! Returning null range.")
+        matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟢️️️🟡 The marker list is an empty void! Returning null range.", "DEBUG")
         return None, None
 
     if not NUMPY_AVAILABLE:
@@ -66,10 +67,10 @@ def calculate_frequency_range(marker_data_list):
             min_freq = np.min(freqs)
             max_freq = np.max(freqs)
 
-            if LOCAL_DEBUG: logger.success(f"✅ Calculated range: {min_freq} MHz to {max_freq} MHz.")
+            matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Calculated range: {min_freq} MHz to {max_freq} MHz.", "SUCCESS")
             return min_freq, max_freq
 
-        if LOCAL_DEBUG: logger.debug("🟡 No valid frequencies found in marker data.")
+        matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟡 No valid frequencies found in marker data.", "DEBUG")
         return None, None
 
     except Exception as e:

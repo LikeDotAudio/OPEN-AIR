@@ -1,3 +1,4 @@
+from oaLogging.Methods.matrix_gate import matrix_log
 # FileReaders/cache_io_handler.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
@@ -12,7 +13,7 @@ import inspect
 from typing import Dict, Any
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -44,20 +45,20 @@ def load_cache() -> Dict[str, Any]:
     Raises FileNotFoundError if the file doesn't exist, and CacheLoadError if it's corrupted.
     """
     if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
-        if LOCAL_DEBUG: logger.debug("💾📖 Reading Cache.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💾📖 Reading Cache.", "DEBUG")
         
     if not app_constants.DEVICE_STATE_CACHE_PATH.exists():
         if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
-            if LOCAL_DEBUG: logger.debug("💾📄 No cache file found.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💾📄 No cache file found.", "DEBUG")
         raise FileNotFoundError(f"Cache file missing: {app_constants.DEVICE_STATE_CACHE_PATH}")
 
     try:
         if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
-            if LOCAL_DEBUG: logger.debug("💾⏳ Cache file exists. Reading...")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💾⏳ Cache file exists. Reading...", "DEBUG")
         with open(app_constants.DEVICE_STATE_CACHE_PATH, "rb") as f:
             data = orjson.loads(f.read())
             if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
-                if LOCAL_DEBUG: logger.success("💾✅ Cache loaded successfully.")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💾✅ Cache loaded successfully.", "SUCCESS")
             return data
     except Exception as e:
         from ..Core.cache_recovery_handler import recover_corrupted_cache
@@ -82,7 +83,7 @@ def save_cache(data: Dict[str, Any]) -> bool:
         if not temp_dir.exists():
             temp_dir.mkdir(parents=True, exist_ok=True)
             if LOCAL_DEBUG and app_config.global_settings["debug_enabled"]:
-                if LOCAL_DEBUG: logger.debug(f"📁 Created missing directory: {temp_dir}")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📁 Created missing directory: {temp_dir}", "DEBUG")
 
         with tempfile.NamedTemporaryFile(
             mode="wb", dir=temp_dir, delete=False, suffix=".tmp"

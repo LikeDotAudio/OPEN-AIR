@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/marker_repository_watcher.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -41,5 +43,5 @@ class MarkerRepositoryWatcher:
                     self.marker_frequencies[device_id] = float(value)
                     return device_id
         except Exception as e:
-            logger.debug(f"🟡 Warning: Could not process marker data update: {e}")
+            matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟡 Warning: Could not process marker data update: {e}", "DEBUG")
         return None

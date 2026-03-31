@@ -9,7 +9,6 @@ from tkinter import ttk
 import datetime
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from loguru import logger
 
 class Aes70Dashboard(tk.Frame):

@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # FileReaders/from_ias_html.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -9,7 +11,6 @@ import numpy as np
 from bs4 import BeautifulSoup
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 
@@ -38,7 +39,7 @@ def _internal_convert_ias_html_to_markers(html_content):
     All frequencies are converted to MHz for consistency.
     """
 
-    logger.debug("▶️ Starting HTML report conversion.")
+    matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "▶️ Starting HTML report conversion.", "DEBUG")
 
     soup = BeautifulSoup(html_content, "html.parser")
     data_rows = []
@@ -55,7 +56,7 @@ def _internal_convert_ias_html_to_markers(html_content):
 
     if first_zone_p:
         main_content_container = first_zone_p.find_parent("span")
-        logger.debug(f"🔍 Found main content container based on first zone paragraph.")
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔍 Found main content container based on first zone paragraph.", "DEBUG")
 
     if not main_content_container:
         main_table = soup.find("table", class_="MainTable")
@@ -69,10 +70,10 @@ def _internal_convert_ias_html_to_markers(html_content):
                         main_content_container = potential_span_wrapper
                     else:
                         main_content_container = second_tr_td
-                    logger.debug(f"🔍 Found main content container based on MainTable structure.")
+                    matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔍 Found main content container based on MainTable structure.", "DEBUG")
 
     if not main_content_container:
-        logger.debug("⚠️ Could not find the main content container. No data will be extracted.")
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⚠️ Could not find the main content container. No data will be extracted.", "DEBUG")
         return HEADERS, data_rows
 
     current_zone_type = ""
@@ -87,7 +88,7 @@ def _internal_convert_ias_html_to_markers(html_content):
             zone_text = element.get_text(strip=True)
             if zone_text.startswith("Zone:"):
                 current_zone_type = zone_text.replace("Zone:", "").strip()
-                logger.debug(f"▶️ Processing Zone: {current_zone_type}")
+                matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"▶️ Processing Zone: {current_zone_type}", "DEBUG")
 
         elif element.name == "table" and "Assignment" in element.get("class", []):
             table = element
@@ -95,13 +96,13 @@ def _internal_convert_ias_html_to_markers(html_content):
             current_group_name = (
                 device_name_tag.get_text(strip=True) if device_name_tag else ""
             )
-            logger.debug(f"▶️ Processing Group: {current_group_name}")
+            matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"▶️ Processing Group: {current_group_name}", "DEBUG")
 
             rows_in_table = table.find_all("tr")[
                 1:
             ]  # Skip the first row as it contains the <th> (device_name)
 
-            if LOCAL_DEBUG: logger.debug(f"🔍 Found {len(rows_in_table)} rows in current table.")
+            matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔍 Found {len(rows_in_table)} rows in current table.", "DEBUG")
 
             for row in rows_in_table:
                 data_spans = row.find_all("span")
@@ -142,10 +143,10 @@ def _internal_convert_ias_html_to_markers(html_content):
                                             freq_MHz = value / 1000  # kHz to MHz
                                     else:
                                         freq_MHz = value
-                                    if LOCAL_DEBUG: logger.debug(f"↔️ HTML Freq conversion: '{channel_frequency_str}' -> {freq_MHz} MHz")
+                                    matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"↔️ HTML Freq conversion: '{channel_frequency_str}' -> {freq_MHz} MHz", "DEBUG")
                                 else:
                                     freq_MHz = float(channel_frequency_str)
-                                    if LOCAL_DEBUG: logger.debug(f"↔️ HTML Freq conversion (fallback): '{channel_frequency_str}' -> {freq_MHz} MHz")
+                                    matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"↔️ HTML Freq conversion (fallback): '{channel_frequency_str}' -> {freq_MHz} MHz", "DEBUG")
                             except ValueError:
                                 logger.error(f"❌ HTML Freq conversion error: '{channel_frequency_str}'")
                                 freq_MHz = "Invalid Frequency"
@@ -160,7 +161,7 @@ def _internal_convert_ias_html_to_markers(html_content):
                             }
                             if band_type or channel_frequency_str or channel_name:
                                 data_rows.append(row_data)
-                                if LOCAL_DEBUG: logger.success(f"✅ Added HTML row: {row_data}")
+                                matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Added HTML row: {row_data}", "SUCCESS")
                 else:
                     cells = row.find_all("td")
                     if len(cells) >= 4:
@@ -196,10 +197,10 @@ def _internal_convert_ias_html_to_markers(html_content):
                                         freq_MHz = value / 1000
                                 else:
                                     freq_MHz = value
-                                if LOCAL_DEBUG: logger.debug(f"↔️ HTML Freq conversion (direct td): '{channel_frequency_str}' -> {freq_MHz} MHz")
+                                matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"↔️ HTML Freq conversion (direct td): '{channel_frequency_str}' -> {freq_MHz} MHz", "DEBUG")
                             else:
                                 freq_MHz = float(channel_frequency_str)
-                                if LOCAL_DEBUG: logger.debug(f"↔️ HTML Freq conversion (direct td, fallback): '{channel_frequency_str}' -> {freq_MHz} MHz")
+                                matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"↔️ HTML Freq conversion (direct td, fallback): '{channel_frequency_str}' -> {freq_MHz} MHz", "DEBUG")
                         except ValueError:
                             logger.error(f"❌ HTML Freq conversion error (direct td): '{channel_frequency_str}'")
                             freq_MHz = "Invalid Frequency"
@@ -214,7 +215,7 @@ def _internal_convert_ias_html_to_markers(html_content):
                         }
                         if band_type or channel_frequency_str or channel_name:
                             data_rows.append(row_data)
-                            if LOCAL_DEBUG: logger.success(f"✅ Added HTML row (direct td): {row_data}")
+                            matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Added HTML row (direct td): {row_data}", "SUCCESS")
 
-    if LOCAL_DEBUG: logger.success(f"✅ Finished HTML report conversion. Extracted {len(data_rows)} rows.")
+    matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Finished HTML report conversion. Extracted {len(data_rows)} rows.", "SUCCESS")
     return HEADERS, data_rows

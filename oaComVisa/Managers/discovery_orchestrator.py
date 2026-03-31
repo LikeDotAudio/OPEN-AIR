@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Managers/discovery_orchestrator.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -110,5 +112,5 @@ class DiscoveryOrchestrator:
 
     def shutdown(self):
         """Shutdown the orchestrator."""
-        logger.debug("💳🔍 [DISCOVERY] Discovery Orchestrator shutting down.")
+        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🔍 [DISCOVERY] Discovery Orchestrator shutting down.", "DEBUG")
         pass

@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Managers/log_filter_engine.py
 # Author: Gemini CLI
 # Version: 20260315.150000.REV01
@@ -133,7 +135,7 @@ def initialize_filter_engine(mqtt_router, logger_reconfigurator_callable):
     global _log_filter_engine
     if MqttSubscriberRouter and mqtt_router:
         _log_filter_engine = LogFilterEngine(mqtt_router, logger_reconfigurator_callable)
-        logger.info("LogFilterEngine initialized and subscribed to MQTT topic.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "LogFilterEngine initialized and subscribed to MQTT topic.", "INFO")
     else:
         logger.warning("LogFilterEngine could not be initialized: MQTT router unavailable.")
 

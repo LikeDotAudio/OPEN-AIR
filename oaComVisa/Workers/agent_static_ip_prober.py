@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Workers/agent_static_ip_prober.py
 # Author: Gemini Agent
 # Version: 1.0.0
@@ -10,7 +12,7 @@ import re
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -30,7 +32,7 @@ def discover_gateway_devices(gateway_ips):
     """
     gateway_resources = []
     for ip in gateway_ips:
-        if LOCAL_DEBUG: logger.debug(f"   👉 Scraping Gateway {ip}...")
+        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   👉 Scraping Gateway {ip}...", "DEBUG")
         cfg = Config.get_instance()
         url = f"{cfg.VISA_PROBE_PROTOCOL}://{ip}/{cfg.VISA_PROBE_PATH}"
         params = {"whichbutton": "find", "timeout": "5"}
@@ -53,9 +55,9 @@ def discover_gateway_devices(gateway_ips):
                 logger.error(
                     f"   ❌ Error scraping gateway {ip}: {e}")
 
-        if LOCAL_DEBUG: logger.debug(f"   ✅ Found {len(targets)} resources from gateway {ip}: {targets}")
+        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   ✅ Found {len(targets)} resources from gateway {ip}: {targets}", "DEBUG")
         for t in targets:
             visa_res = f"TCPIP::{ip}::{t}::INSTR"
             gateway_resources.append(visa_res)
-            if LOCAL_DEBUG: logger.debug(f"     ➕ Added gateway resource: {visa_res}")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"     ➕ Added gateway resource: {visa_res}", "DEBUG")
     return gateway_resources

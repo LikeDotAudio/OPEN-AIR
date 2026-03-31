@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/visa_Search.py
 # Author: Anthony Peter Kuzub (Refactored)
 # Version: 1.0.0
@@ -48,7 +50,7 @@ def probe_devices(resource_manager, potential_targets):
     Returns:
         dict: A dictionary of probed device entries, keyed by device identifier (serial number or sanitized resource).
     """
-    if LOCAL_DEBUG: logger.debug(f"💳 🔍 manager_visa_Search: Received {len(potential_targets)} potential targets for probing: {potential_targets}")
+    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 🔍 manager_visa_Search: Received {len(potential_targets)} potential targets for probing: {potential_targets}", "DEBUG")
     device_collection = {}
 
     try:
@@ -56,7 +58,7 @@ def probe_devices(resource_manager, potential_targets):
             raw_res = target["Resource"]
             display_res = VisaUtilityParser.clean_string_for_display(raw_res)
 
-            if LOCAL_DEBUG: logger.debug(f"   🎯 Probing {display_res} ... ")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   🎯 Probing {display_res} ... ", "DEBUG")
 
             conn_details = VisaUtilityParser.parse_resource_details(display_res)
             
@@ -85,7 +87,7 @@ def probe_devices(resource_manager, potential_targets):
             }
 
             if idn:
-                if LOCAL_DEBUG: logger.success(f"SUCCESS")
+                matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"SUCCESS", "SUCCESS")
                 mfg, model, serial_num, firm = VisaUtilityParser.parse_idn(
                     idn
                 )  # Use VisaUtilityParser for basic parsing
@@ -131,7 +133,7 @@ def probe_devices(resource_manager, potential_targets):
 
                     device_identifier = "-".join(sanitized_parts)
 
-                    if LOCAL_DEBUG: logger.debug(f"      Generated new device_identifier for empty/0 serial: {device_identifier}")
+                    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"      Generated new device_identifier for empty/0 serial: {device_identifier}", "DEBUG")
 
                 # Ensure the device_identifier is unique across the collection
                 original_identifier = device_identifier
@@ -174,7 +176,7 @@ def probe_devices(resource_manager, potential_targets):
             logger.error(
                 f"💳 🔍 CRITICAL manager_visa_Search: Exception in probe_devices loop: {e}")
 
-    if LOCAL_DEBUG: logger.debug(f"💳 🔍 manager_visa_Search: Finished probing. Returning {len(device_collection)} probed devices: {device_collection}")
+    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 🔍 manager_visa_Search: Finished probing. Returning {len(device_collection)} probed devices: {device_collection}", "DEBUG")
     return device_collection
 
 

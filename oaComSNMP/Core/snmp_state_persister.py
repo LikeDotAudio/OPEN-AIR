@@ -26,7 +26,6 @@ from oaComSNMP.Constants.snmp_constants import THREAD_JOIN_TIMEOUT, LOG_POLLING_
 from oaLogging.Methods.matrix_gate import matrix_log
 
 # LOCAL_DEBUG can be set or passed if needed
-LOCAL_DEBUG = True
 
 class SnmpStatePersister:
     """

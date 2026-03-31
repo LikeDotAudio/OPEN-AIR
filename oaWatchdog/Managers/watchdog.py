@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Managers/watchdog.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -230,6 +232,6 @@ def _heartbeat_loop(app_constants_instance):
         if counter % 5 == 0:
             try:
                 if LOCAL_DEBUG:
-                    logger.debug(f"🐕💓🐕 [WATCHDOG] Heartbeat {counter}")
+                    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🐕💓🐕 [WATCHDOG] Heartbeat {counter}", "DEBUG")
             except:
                 pass

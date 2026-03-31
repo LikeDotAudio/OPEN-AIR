@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Workers/CleanupApps/Clear_cache.py
 # Author: Anthony Peter Kuzub
 # Version: 20260323.CacheClear.1
@@ -10,7 +12,8 @@ import logging
 import sys
 from pathlib import Path
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
+
 
 # Configure standard logging
 logging.basicConfig(
@@ -37,22 +40,22 @@ def purge_cache():
         project_root / "DATA" # Legacy compatibility
     ]
 
-    if LOCAL_DEBUG: logger.info(f"📡📤📤 [CLEAR_CACHE] Starting local cache and state purge...")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡📤📤 [CLEAR_CACHE] Starting local cache and state purge...", "INFO")
 
     for data_dir in data_dirs:
         if data_dir.exists():
-            if LOCAL_DEBUG: logger.info(f"🗑️  Nuking: {data_dir.name}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🗑️  Nuking: {data_dir.name}", "INFO")
             try:
                 # To delete CONTENTS and not the dir itself, we iterate
                 items_purged = 0
                 for item in data_dir.iterdir():
                     try:
                         if item.is_file() or item.is_symlink():
-                            logger.info(f"  Deleting cache file: {item}")
+                            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  Deleting cache file: {item}", "INFO")
                             item.unlink()
                             items_purged += 1
                         elif item.is_dir():
-                            logger.info(f"  Deleting cache directory: {item}")
+                            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  Deleting cache directory: {item}", "INFO")
                             shutil.rmtree(item)
                             items_purged += 1
                     except Exception as e:
@@ -60,26 +63,26 @@ def purge_cache():
                 
                 if LOCAL_DEBUG: 
                     if items_purged > 0:
-                        logger.info(f"  └─ 💥 Purged {items_purged} items from {data_dir.name}.")
+                        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  └─ 💥 Purged {items_purged} items from {data_dir.name}.", "INFO")
                     else:
-                        logger.info(f"  └─ ℹ️ {data_dir.name} was already empty.")
+                        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  └─ ℹ️ {data_dir.name} was already empty.", "INFO")
             except Exception as e:
                 logger.error(f"  └─ ❌ Failed to access {data_dir.name}: {e}")
         else:
-            if LOCAL_DEBUG: logger.info(f"  └─ 🤷 {data_dir.name} directory not found.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  └─ 🤷 {data_dir.name} directory not found.", "INFO")
 
     # Recreate structure via path_initializer to ensure sanity
-    if LOCAL_DEBUG: logger.info("🌱 Re-initializing directory structure integrity...")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🌱 Re-initializing directory structure integrity...", "INFO")
     try:
         if str(project_root) not in sys.path:
             sys.path.insert(0, str(project_root))
         from oaOchestration.Core.path_initializer import initialize_paths
         initialize_paths()
-        if LOCAL_DEBUG: logger.info("✨ Directory structure integrity verified.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✨ Directory structure integrity verified.", "INFO")
     except Exception as e:
         logger.error(f"❌ Failed to initialize paths: {e}")
 
-    if LOCAL_DEBUG: logger.info("📡📤📤 [CLEAR_CACHE] Cache purge complete.")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡📤📤 [CLEAR_CACHE] Cache purge complete.", "INFO")
 
 if __name__ == "__main__":
     purge_cache()

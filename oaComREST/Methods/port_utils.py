@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/port_utils.py
 # Author: Gemini (Collaborator)
 # Version: 20260327.1700.1
@@ -51,7 +53,7 @@ def zap_port(port):
         return False
 
     if is_friendly_process(proc):
-        logger.debug(f"ℹ️ [PORT] Port {port} is held by a friendly/sibling process ({proc.pid}). Skipping zap.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"ℹ️ [PORT] Port {port} is held by a friendly/sibling process ({proc.pid}). Skipping zap.", "DEBUG")
         return False
 
     try:

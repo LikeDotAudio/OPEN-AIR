@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Workers/visa_scanner.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -27,7 +29,7 @@ class VisaScanner:
         try:
             self.rm = resource_manager or pyvisa.ResourceManager("@py")
         except Exception as e:
-            logger.debug(f"PyVISA-py fallback: {e}")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"PyVISA-py fallback: {e}", "DEBUG")
             self.rm = pyvisa.ResourceManager()
 
     def hunt_for_devices(self):
@@ -66,7 +68,7 @@ class VisaScanner:
             inst.close()
             return clean_string_for_display(idn)
         except Exception as e:
-            logger.trace(f"Error querying device {resource_str}: {e}")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error querying device {resource_str}: {e}", "TRACE")
             if inst:
                 try:
                     inst.close()
@@ -93,7 +95,7 @@ class VisaScanner:
                     if "COM" not in m:
                         targets.append(m)
         except Exception as e:
-            logger.trace(f"Error getting gateway inventory from {ip}: {e}")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error getting gateway inventory from {ip}: {e}", "TRACE")
         return targets
 
     @staticmethod

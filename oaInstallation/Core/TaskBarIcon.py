@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Core/TaskBarIcon.py
 # Author: Anthony Peter Kuzub
 # Version: 20260314.002000.REV01
@@ -61,7 +63,7 @@ def install_icon():
         # Ensure the file is executable so the desktop environment can launch it.
         os.chmod(dest_desktop_file, 0o755)
         if LOCAL_DEBUG:
-            logger.success("✅✅✅ [SUCCESS] Desktop file installed.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅✅✅ [SUCCESS] Desktop file installed.", "SUCCESS")
     except Exception as install_error:
         logger.error(f"🖥️🖱️🎨 [DESKTOP] ERROR: File install failed: {install_error}")
         return
@@ -107,7 +109,7 @@ def install_icon():
                             "favorites.")
         else:
             if LOCAL_DEBUG:
-                logger.debug("🖥️🖱️🎨 [DESKTOP] Adding to GNOME favorites...")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🖥️🖱️🎨 [DESKTOP] Adding to GNOME favorites...", "DEBUG")
             current_favorites.append(DESKTOP_FILENAME)
             # Re-serialize the list back to the format gsettings expects.
             new_favorites_str = str(current_favorites)
@@ -118,7 +120,7 @@ def install_icon():
                 check=True
             )
             if LOCAL_DEBUG:
-                logger.success("✅✅✅ [SUCCESS] Added to GNOME taskbar.")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅✅✅ [SUCCESS] Added to GNOME taskbar.", "SUCCESS")
             
     except subprocess.CalledProcessError as process_error:
         logger.error(f"🖥️🖱️🎨 [DESKTOP] ERROR: gsettings failure: {process_error}")

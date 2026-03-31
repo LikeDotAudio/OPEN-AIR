@@ -23,8 +23,8 @@ from oaLogging.Methods.matrix_gate import matrix_log
 from ..Core.grid_topology_configurator import GridTopologyConfigurator
 from ..Core.structural_assembler import StructuralAssembler
 from ..Core.batch_processing_engine import BatchProcessingEngine
-
 LOCAL_DEBUG = True
+
 renderer_logger = logger.bind(subsystem="RENDERER")
 
 class AsyncGridRenderer:

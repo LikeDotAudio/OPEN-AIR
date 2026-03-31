@@ -6,7 +6,6 @@
 
 current_version = "20250810.134500.1"  # this variable should always be defined below the header to make the debugging better
 current_version_hash = 20250810 * 134500 * 1  # Example hash, adjust as needed
-LOCAL_DEBUG = True   
 
 import csv
 import os
@@ -17,6 +16,7 @@ app_constants = Config.get_instance()  # Get the singleton instance
 # Updated imports for new logging functions
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
+LOCAL_DEBUG = True
 
 
 # Writes spectrum scan data (frequency and amplitude) to a CSV file.

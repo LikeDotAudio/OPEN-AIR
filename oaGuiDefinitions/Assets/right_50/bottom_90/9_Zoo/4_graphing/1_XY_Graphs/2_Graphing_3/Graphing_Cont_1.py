@@ -1,3 +1,4 @@
+from oaLogging.Methods.matrix_gate import matrix_log
 # 2_Graphing_3/Graphing_Cont_1.py
 # Author: Anthony Peter Kuzub
 # Version: 20251229.1715.2
@@ -18,8 +19,8 @@ from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
+LOCAL_DEBUG = True
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 
 # Globals
@@ -77,7 +78,7 @@ class GenericInstrumentGui(ttk.Frame):
         current_function_name = inspect.currentframe().f_code.co_name
 
         if LOCAL_DEBUG:
-            logger.debug(f"🧪  Entering '{current_function_name}' for module '{module_name}'! Target JSON: {self.json_path}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🧪  Entering '{current_function_name}' for module '{module_name}'! Target JSON: {self.json_path}", "DEBUG")
 
         # Create a status label for feedback during loading
         # Make it BIG and clear so we know it's trying to do something
@@ -99,14 +100,14 @@ class GenericInstrumentGui(ttk.Frame):
         # Defer construction to allow the frame to render first (avoids UI freezing)
         # This also isolates the builder crash from the main thread loop
         if LOCAL_DEBUG:
-            logger.debug(f"⏳ UI Placeholder rendered. Scheduling construction in 50ms...")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"⏳ UI Placeholder rendered. Scheduling construction in 50ms...", "DEBUG")
 
         self.after(50, self._construct_dynamic_gui)
 
     def _construct_dynamic_gui(self):
         try:
             if LOCAL_DEBUG:
-                logger.debug(f"🏗️ Starting construction sequence for {module_name}...")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🏗️ Starting construction sequence for {module_name}...", "DEBUG")
 
             # 1. Validate File Existence
             if not self.json_path.exists():
@@ -117,7 +118,7 @@ class GenericInstrumentGui(ttk.Frame):
             processed_path = str(self.json_path)
 
             if LOCAL_DEBUG:
-                logger.debug(f"🚀 [Liftoff] Validated path. Passing control to DynamicGuiBuilder...")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🚀 [Liftoff] Validated path. Passing control to DynamicGuiBuilder...", "DEBUG")
 
             # --- The Main Event: Dynamic Builder ---
             self.dynamic_gui = DynamicGuiBuilder(
@@ -128,12 +129,12 @@ class GenericInstrumentGui(ttk.Frame):
 
             # If we reach here, the builder succeeded!
             if LOCAL_DEBUG:
-                logger.success(f"✅ Builder returned success! Destroying status label...")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Builder returned success! Destroying status label...", "SUCCESS")
 
             self.status_label.destroy()
 
             if LOCAL_DEBUG:
-                logger.success(f"✅ It works! {module_name} is online and functioning within normal parameters!")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ It works! {module_name} is online and functioning within normal parameters!", "SUCCESS")
 
         except Exception as e:
             # --- GRACEFUL FAILURE PROTOCOL ---
@@ -164,6 +165,6 @@ class GenericInstrumentGui(ttk.Frame):
         current_function_name = inspect.currentframe().f_code.co_name
 
         if LOCAL_DEBUG:
-            logger.debug(f"🖥️🔵 Tab '{module_name}' activated! Stand back, I'm checking the data flow!")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🖥️🔵 Tab '{module_name}' activated! Stand back, I'm checking the data flow!", "DEBUG")
         # Add logic here if specific refresh actions are needed on tab focus
         pass

@@ -21,7 +21,6 @@ from loguru import logger
 from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 
 class TabManagerMixin:
     """

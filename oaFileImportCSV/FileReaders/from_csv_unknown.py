@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # FileReaders/from_csv_unknown.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -23,7 +25,7 @@ def Marker_convert_csv_unknow_report_to_csv(file_path):
     Performs a 'best-effort' conversion of a CSV file with unknown headers
     to the standardized marker report format.
     """
-    logger.debug(f"▶️ Starting best-effort CSV conversion for: {file_path}")
+    matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"▶️ Starting best-effort CSV conversion for: {file_path}", "DEBUG")
 
     # Standardized headers and their common aliases
     standard_headers = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
@@ -84,7 +86,7 @@ def Marker_convert_csv_unknow_report_to_csv(file_path):
                         new_row[std_header] = value
             processed_data.append(new_row)
 
-        logger.success(f"✅ Finished best-effort conversion. Headers mapped: {header_map}")
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Finished best-effort conversion. Headers mapped: {header_map}", "SUCCESS")
         return standard_headers, processed_data
 
     except FileNotFoundError:

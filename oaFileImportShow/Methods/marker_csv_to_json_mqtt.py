@@ -1,3 +1,4 @@
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/marker_csv_to_json_mqtt.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
@@ -10,7 +11,7 @@ import csv
 import orjson
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -70,7 +71,7 @@ def csv_to_json_and_publish(mqtt_util: MqttControllerUtility):
     MODIFIED: Uses the new nested structure with an 'IDENTITY' blob.
     """
     if LOCAL_DEBUG:
-        logger.debug(f"🟢️️️🟢 Initiating device-centric CSV to JSON conversion and MQTT publish. Applying new nested structure.")
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 Initiating device-centric CSV to JSON conversion and MQTT publish. Applying new nested structure.", "DEBUG")
 
     if not MARKERS_CSV_PATH.is_file():
         logger.error(f"❌ {MARKERS_CSV_PATH} not found. Aborting operation.")
@@ -134,7 +135,7 @@ def csv_to_json_and_publish(mqtt_util: MqttControllerUtility):
                 }
                 # --- END NEW STRUCTURE IMPLEMENTATION ---
 
-        if LOCAL_DEBUG: logger.success("✅ Successfully read CSV and generated nested JSON structure with summary data.")
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Successfully read CSV and generated nested JSON structure with summary data.", "SUCCESS")
     except Exception as e:
         if LOCAL_DEBUG:
             logger.exception("❌ Error processing CSV file")
@@ -146,7 +147,7 @@ def csv_to_json_and_publish(mqtt_util: MqttControllerUtility):
         MARKERS_JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
         with open(MARKERS_JSON_PATH, 'w') as f:
             f.write(orjson.dumps(json_state).decode())
-        if LOCAL_DEBUG: logger.success(f"✅ Saved generated structure to {MARKERS_JSON_PATH}.")
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Saved generated structure to {MARKERS_JSON_PATH}.", "SUCCESS")
     except Exception as e:
         if LOCAL_DEBUG:
             logger.exception("❌ Error saving to {MARKERS_JSON_PATH}")
@@ -157,12 +158,12 @@ def csv_to_json_and_publish(mqtt_util: MqttControllerUtility):
         # First, clear any old data under the base topic by publishing a null, retained message.
         # This will remove all the old topics (Device-001/Name, Device-001/active, etc.)
         mqtt_util.purge_branch(MQTT_BASE_TOPIC)
-        if LOCAL_DEBUG: logger.debug(f"🗑️ Cleared old data under topic: {MQTT_BASE_TOPIC}/#")
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🗑️ Cleared old data under topic: {MQTT_BASE_TOPIC}/#", "DEBUG")
 
         # Now, publish the new, complete structure recursively.
         _publish_recursive(mqtt_util, MQTT_BASE_TOPIC, json_state)
 
-        if LOCAL_DEBUG: logger.success("✅ Successfully published the full marker set to MQTT.")
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Successfully published the full marker set to MQTT.", "SUCCESS")
     except Exception as e:
         if LOCAL_DEBUG:
             logger.exception("❌ Error publishing to MQTT")

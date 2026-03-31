@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # openair.py
 # Author: Anthony Peter Kuzub
 # Version: 20260328.0.1
@@ -94,7 +96,7 @@ def main():
         """Internal helper for consistent supervisor console output."""
         print(f"[SUPERVISOR] {msg}")
         if _DEBUG: 
-            logger.debug(f"🚀 SUPERVISOR: {msg}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🚀 SUPERVISOR: {msg}", "DEBUG")
 
     log(f"Launching OPEN-AIR Partitions... (Mission Critical: {is_mission_critical})")
 
@@ -112,6 +114,8 @@ def main():
     # Clone the current environment and inject the session GUID.
     child_env = os.environ.copy()
     child_env["OPEN_AIR_INSTANCE_GUID"] = session_guid
+    # ⚡ CRITICAL: Ensure the project root is in the child's PYTHONPATH.
+    child_env["PYTHONPATH"] = os.pathsep.join([str(project_root), child_env.get("PYTHONPATH", "")])
 
     # Define partition-specific environment variables.
     core_env = child_env.copy()

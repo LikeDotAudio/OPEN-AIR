@@ -9,7 +9,6 @@ import sys
 import pathlib
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from loguru import logger
 
 # ⚡ CACHE: Store resolved paths as module-level constants to avoid recalculation

@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Managers/configIniEditor/manager.py
 # Author: Anthony Peter Kuzub
 # Version: 20260330.0030.1
@@ -110,7 +112,7 @@ class ConfigIniEditor:
         try:
             with open(self.config_path, 'w') as f:
                 f.writelines(new_lines)
-            logger.success(f"💾 [CONFIG] Surgically updated [{section}] {key} to {value}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💾 [CONFIG] Surgically updated [{section}] {key} to {value}", "SUCCESS")
             
             # Sync the internal configparser for immediate read consistency
             self.config.read(self.config_path)

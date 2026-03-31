@@ -5,10 +5,13 @@
 # Description: Brief summary of purpose
 
 from PIL import Image, ImageDraw, ImageFilter, ImageChops, ImageTk
-from oaLogging.Methods.matrix_gate import matrix_log
+from oaLogging.Methods.matrix_gate import matrix_log, is_debug_allowed
 import inspect
 import random
 import math
+
+def _is_debug():
+    return is_debug_allowed(system="UI", element="GUI_BUILDER")
 
 # --- Imports for the new modular architecture ---
 from oaGuiElements.Methods.utils import PanelUtils
@@ -74,10 +77,10 @@ class PanelGenerator:
         Includes disk caching to prevent redundant generation.
         """
         # --- 0. Check Cache First ---
-        if BUILDER_DEBUG: BUILDER_LOGGER.trace(f"Checking for procedural panel in cache: {width}x{height}")
+        matrix_log("ui", "gui_builder", "generate_procedural_panel", f"Checking for procedural panel in cache: {width}x{height}", "TRACE")
         cached_image = AssetCacheManager.load_from_cache("panel", width, height, configuration_data)
         if cached_image:
-            if BUILDER_DEBUG: BUILDER_LOGGER.debug("Retaining procedural panel from disk cache.")
+            matrix_log("ui", "gui_builder", "generate_procedural_panel", "Retaining procedural panel from disk cache.", "DEBUG")
             return cached_image
 
         # --- 1. Extract Parameters ---
@@ -88,7 +91,7 @@ class PanelGenerator:
             random_seed = random.randint(1, MAX_RANDOM_SEED)
         random.seed(random_seed)
         
-        if BUILDER_DEBUG: BUILDER_LOGGER.info(f"Generating NEW Procedural Panel ({width}x{height}) Seed: {random_seed}")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, f"Generating NEW Procedural Panel ({width}x{height}) Seed: {random_seed}", "info".upper())
 
         # --- 2. Layer Configs ---
         base_material_settings = settings.get("base_material", {})
@@ -104,7 +107,7 @@ class PanelGenerator:
 
         # --- Layer 1: The Substrate (The Metal Panel) ---
         substrate_color_hex = base_material_settings.get("color", "#2a2a2a")
-        if BUILDER_DEBUG: BUILDER_LOGGER.trace(f"Layer 1. Substrate: {substrate_color_hex}")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, f"Layer 1. Substrate: {substrate_color_hex}", "trace".upper())
         substrate_color_rgba = PanelUtils.hex_to_rgba(substrate_color_hex)
         panel_image = Image.new('RGBA', (width, height), substrate_color_rgba)
         
@@ -112,26 +115,26 @@ class PanelGenerator:
         grain_intensity = float(base_material_settings.get("grain_intensity", DEFAULT_GRAIN_INTENSITY))
         
         if texture_type == "hammered":
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Applying hammered texture.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Applying hammered texture.", "trace".upper())
             hammered_texture = SubstrateFactory.generate_hammered(width, height, grain_intensity).convert("RGBA")
             panel_image = ImageChops.multiply(panel_image, hammered_texture)
         elif texture_type == "wrinkle":
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Applying wrinkle noise texture.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Applying wrinkle noise texture.", "trace".upper())
             wrinkle_texture = Image.effect_noise((width, height), sigma=WRINKLE_SIGMA).convert("RGBA")
             panel_image = ImageChops.multiply(panel_image, wrinkle_texture)
         elif texture_type == "crosshatch":
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Weaving crosshatch streaks.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Weaving crosshatch streaks.", "trace".upper())
             horizontal_streaks = SubstrateFactory.generate_streaks(width, height, vertical=False, sigma=STREAK_SIGMA_CROSSHATCH)
             vertical_streaks = SubstrateFactory.generate_streaks(width, height, vertical=True, sigma=STREAK_SIGMA_CROSSHATCH)
             crosshatch_weave = ImageChops.multiply(horizontal_streaks, vertical_streaks).convert("RGBA")
             panel_image = ImageChops.multiply(panel_image, crosshatch_weave)
         elif texture_type == "enamel":
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Applying enamel peel texture.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Applying enamel peel texture.", "trace".upper())
             peel_texture = Image.effect_noise((width // ENAMEL_RESIZE_FACTOR, height // ENAMEL_RESIZE_FACTOR), sigma=STREAK_SIGMA_CROSSHATCH).resize((width, height), Image.BICUBIC).convert("RGBA")
             panel_image = ImageChops.soft_light(panel_image, peel_texture)
         else:
             streak_sigma = STREAK_SIGMA_BRUSHED if texture_type == "brushed" else STREAK_SIGMA_DEFAULT
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace(f"Applying {texture_type} streak texture.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, f"Applying {texture_type} streak texture.", "trace".upper())
             is_vertical = (base_material_settings.get("grain_direction") == "vertical")
             directional_streaks = SubstrateFactory.generate_streaks(width, height, vertical=is_vertical, sigma=streak_sigma).convert("RGBA")
             panel_image = ImageChops.multiply(panel_image, directional_streaks)
@@ -139,11 +142,11 @@ class PanelGenerator:
         # --- Layer 2: The Paint Layer ---
         paint_color_rgb = PanelUtils.hex_to_rgb(paint_layer_settings.get("color", "#4a5a6a"))
         paint_opacity = float(paint_layer_settings.get("opacity", DEFAULT_PAINT_OPACITY))
-        if BUILDER_DEBUG: BUILDER_LOGGER.trace(f"Layer 2. Paint: {paint_layer_settings.get('color')} (Opacity: {paint_opacity})")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, f"Layer 2. Paint: {paint_layer_settings.get('color')} (Opacity: {paint_opacity})", "trace".upper())
         paint_mask_image = Image.new('L', (width, height), MAX_OPACITY_VALUE)
         
         if edge_wear_settings.get("enabled", False):
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Etching edge wear scratches.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Etching edge wear scratches.", "trace".upper())
             scratch_depth_limit = int(edge_wear_settings.get("scratch_depth", DEFAULT_EDGE_SCRATCH_DEPTH))
             edge_scratch_mask = Image.new('L', (width, height), 0)
             edge_scratch_draw = ImageDraw.Draw(edge_scratch_mask)
@@ -167,7 +170,7 @@ class PanelGenerator:
 
         surface_scratch_count = int(panel_scratch_settings.get("count", 0))
         if surface_scratch_count > 0 and panel_scratch_settings.get("reveals_substrate", False):
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Carving deep substrate-revealing scratches.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Carving deep substrate-revealing scratches.", "trace".upper())
             substrate_reveal_mask = Image.new('L', (width, height), 0)
             substrate_reveal_draw = ImageDraw.Draw(substrate_reveal_mask)
             for _ in range(surface_scratch_count):
@@ -185,20 +188,20 @@ class PanelGenerator:
 
         gradient_intensity = float(paint_layer_settings.get("gradient_intensity", DEFAULT_GRADIENT_INTENSITY))
         if gradient_intensity > 0:
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Applying linear lighting gradient.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Applying linear lighting gradient.", "trace".upper())
             lighting_gradient = VignetteLayer.generate_linear_gradient(width, height, gradient_intensity)
             panel_image = ImageChops.multiply(panel_image, lighting_gradient)
 
         # --- Layer 3: Studio Haze ---
         if haze_settings.get("enabled", False):
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Layer 3. Infusing warm studio haze.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Layer 3. Infusing warm studio haze.", "trace".upper())
             haze_alpha = int(MAX_OPACITY_VALUE * float(haze_settings.get("intensity", DEFAULT_HAZE_INTENSITY)))
             studio_haze_layer = Image.new('RGBA', (width, height), STUDIO_HAZE_COLOR + (haze_alpha,))
             panel_image = ImageChops.multiply(panel_image, studio_haze_layer)
 
         # --- Layer 4: Rust ---
         if rust_settings.get("enabled", False):
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Layer 4. Spawning rust oxidation spots.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Layer 4. Spawning rust oxidation spots.", "trace".upper())
             rust_intensity = float(rust_settings.get("intensity", 0.5))
             rust_layer_image = RustLayer.generate_rust_spots(width, height, rust_intensity)
             panel_image = Image.alpha_composite(panel_image, rust_layer_image)
@@ -206,44 +209,44 @@ class PanelGenerator:
         # --- Layer 5: Edge Fade ---
         vignette_intensity_value = float(edge_wear_settings.get("vignette_intensity", 0))
         if edge_wear_settings.get("enabled", False) and vignette_intensity_value > 0:
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Layer 5. Applying vignette edge fade.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Layer 5. Applying vignette edge fade.", "trace".upper())
             fade_depth_limit = min(int(edge_wear_settings.get("fade_depth", DEFAULT_FADE_DEPTH)), min(width, height) // 2)
             vignette_layer_image = VignetteLayer.generate_vignette(width, height, vignette_intensity_value, fade_depth_limit)
             panel_image = ImageChops.multiply(panel_image, vignette_layer_image)
 
         # --- Layer 6: Scratches ---
         if int(panel_scratch_settings.get("count", 0)) > 0:
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Layer 6. Adding surface micro-scratches.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Layer 6. Adding surface micro-scratches.", "trace".upper())
             scratch_layer_image = ScratchLayer.generate_scratches(width, height, panel_scratch_settings)
             panel_image = Image.alpha_composite(panel_image, scratch_layer_image)
 
         # --- Layer 7: Stains ---
         if int(grime_settings.get("stain_count", 0)) > 0:
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Layer 7. Adding grease and coffee stains.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Layer 7. Adding grease and coffee stains.", "trace".upper())
             stains_layer_image = StainsLayer.generate_stains(width, height, grime_settings)
             panel_image = Image.alpha_composite(panel_image, stains_layer_image)
 
         # --- Layer 8: Details ---
         if screws_settings.get("enabled", False):
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Layer 8. Drilling screws into the panel.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Layer 8. Drilling screws into the panel.", "trace".upper())
             screws_layer_image = ScrewLayer.generate_screws(width, height, screws_settings, fold_settings)
             panel_image = Image.alpha_composite(panel_image, screws_layer_image)
         if fold_settings.get("enabled", False):
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Layer 8. Folding metal creases.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Layer 8. Folding metal creases.", "trace".upper())
             fold_layer_image = MetalFoldLayer.generate_metal_fold(width, height, fold_settings)
             panel_image = Image.alpha_composite(panel_image, fold_layer_image)
         if dust_settings.get("enabled", False):
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace("Layer 8. Settling fine dust particles.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Layer 8. Settling fine dust particles.", "trace".upper())
             dust_intensity = float(dust_settings.get("intensity", 0.3))
             dust_layer_image = DustLayer.generate_dust(width, height, dust_intensity)
             panel_image = Image.alpha_composite(panel_image, dust_layer_image)
 
         blur_radius_value = float(settings.get("global_blur", DEFAULT_GLOBAL_BLUR))
         if blur_radius_value > 0:
-            if BUILDER_DEBUG: BUILDER_LOGGER.trace(f"Applying global Gaussian blur: {blur_radius_value}")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, f"Applying global Gaussian blur: {blur_radius_value}", "trace".upper())
             panel_image = panel_image.filter(ImageFilter.GaussianBlur(radius=blur_radius_value))
 
-        if BUILDER_DEBUG: BUILDER_LOGGER.success("Procedural panel generation complete. Saving to disk cache.")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name, "Procedural panel generation complete. Saving to disk cache.", "success".upper())
         AssetCacheManager.save_to_cache("panel", width, height, configuration_data, panel_image)
         return panel_image
 

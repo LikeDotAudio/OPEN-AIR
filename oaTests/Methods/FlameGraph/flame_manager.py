@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Methods/FlameGraph/flame_manager.py
 #
 # Main manager for the OpenAir Performance Intelligence Engine.
@@ -67,12 +69,12 @@ class FlameManager:
 
     def start_profiling(self):
         """Starts the multi-threaded profiler."""
-        logger.info("🔥 [FLAME] Starting Multi-Thread Profiling...")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔥 [FLAME] Starting Multi-Thread Profiling...", "INFO")
         self.mtp.install()
 
     def stop_profiling(self):
         """Stops the profiler."""
-        logger.info("🔥 [FLAME] Stopping Profiler...")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔥 [FLAME] Stopping Profiler...", "INFO")
         self.mtp.stop()
 
     def generate_report(self):
@@ -84,7 +86,7 @@ class FlameManager:
                 return None
             self.report_generated = True
 
-        logger.info("🔥 [FLAME] Synthesizing Intelligence Report...")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔥 [FLAME] Synthesizing Intelligence Report...", "INFO")
         
         ps = self.mtp.get_stats()
         svg_file = self.data_dir / "flamegraph.svg"
@@ -119,7 +121,7 @@ class FlameManager:
             with open(self.data_dir / "wall_of_pity.json", "w") as f:
                 json.dump({"report": wall_of_pity_text}, f, indent=4)
                 
-            logger.debug(f"🔥 [FLAME] JSON components saved to {self.data_dir}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔥 [FLAME] JSON components saved to {self.data_dir}", "DEBUG")
         except Exception as e:
             logger.error(f"🔥 [FLAME] Failed to save JSON components: {e}")
 
@@ -138,7 +140,7 @@ class FlameManager:
         )
         
         if success:
-            logger.success(f"🔥 [FLAME] Intelligence Report: {html_file}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔥 [FLAME] Intelligence Report: {html_file}", "SUCCESS")
             return str(html_file)
         else:
             logger.error("🔥 [FLAME] Failed to generate HTML report.")

@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # workspaces/interactive_layout.py
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
@@ -7,7 +9,6 @@
 import tkinter as tk
 from tkinter import ttk
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaLogging.Core.logger import GUI_LOGGER as logger
 
 from ..event_bus import event_bus
@@ -24,7 +25,7 @@ class InteractiveLayout(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         kwargs.pop("bg", None)
         super().__init__(parent, bg="#1a1a1a", *args, **kwargs)
-        if LOCAL_DEBUG: logger.debug("InteractiveLayout: Initializing workspace...")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "InteractiveLayout: Initializing workspace...", "DEBUG")
         
         # Display Toggles
         self.show_structure = tk.BooleanVar(value=True)

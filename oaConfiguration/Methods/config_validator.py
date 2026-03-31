@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/config_validator.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -25,7 +27,7 @@ Assumptions and Constraints:
 from ..FileReaders.config_reader import Config
 from loguru import logger
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
@@ -48,7 +50,7 @@ def validate_configuration(print_func):
     """
     if LOCAL_DEBUG:
         # Debugging log to track the start of the validation process.
-        logger.debug("Commencing the configuration validation experiment.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Commencing the configuration validation experiment.", "DEBUG")
 
     # REFACTORED: Stripped try/except for core safety mandates.
     # Logic is simplified here to serve as a hook for future rigorous 

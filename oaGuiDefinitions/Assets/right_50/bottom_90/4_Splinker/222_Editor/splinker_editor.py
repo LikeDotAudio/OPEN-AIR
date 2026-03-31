@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # 222_Editor/splinker_editor.py
 # Author: Anthony P. Kuzub(Splinker Protocol)
 # Version: 20260311.Editor.1
@@ -136,7 +138,7 @@ class SplinkerEditor(tk.Frame):
                 self.splinker_manager.splinks = splinks
                 self.refresh_splink_list()
         except Exception as e:
-            logger.debug(f"Failed to handle splinker status: {e}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Failed to handle splinker status: {e}", "DEBUG")
 
     def handle_panic_status(self, msg):
         try:
@@ -150,7 +152,7 @@ class SplinkerEditor(tk.Frame):
                 self.panic_btn.config(text="🆘 PANIC", bg="#880000", state=tk.NORMAL)
                 self.reset_btn.pack_forget()
         except Exception as e:
-            logger.debug(f"Failed to handle panic status: {e}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Failed to handle panic status: {e}", "DEBUG")
 
     def trigger_panic(self):
         if self.router: self.router.ingest("GUI", "OPEN-AIR/System/Control/Splinker/Panic", "")

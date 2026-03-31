@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # oaComBroker/Core/open_air_core.py
 #
 # Safety-Critical Core Partition for the Communication Broker.
@@ -43,6 +45,8 @@ from oaConfiguration.FileReaders.config_reader import Config
 from oaLogging.Core.logger import initialize_logging, set_log_directory, CORE_LOGGER
 from loguru import logger
 
+LOCAL_DEBUG = True
+
 from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
 from oaConfiguration.Methods.console_encoder import configure_console_encoding
 import oaWatchdog.Managers.watchdog as watchdog
@@ -51,7 +55,6 @@ from oaStateCache.Core.state_cache import StateRegistry
 from oaComBroker.Managers.Failover.Manager import FailoverManager
 from oaComMQTT.Core.mqtt_publisher_service import shutdown_publisher_worker
 # LOCAL_DEBUG: Toggles verbose tracing for the core boot sequence.
-LOCAL_DEBUG = True
 
 def main():
     """
@@ -87,7 +90,7 @@ def main():
     app_constants = Config.get_instance()
     
     if LOCAL_DEBUG:
-        CORE_LOGGER.debug("Starting OpenAir Core Service...")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Starting OpenAir Core Service...", "DEBUG")
 
     # 2. --- Liveness Monitoring ---
     # The heartbeat thread ensures the system can be reset by hardware if the
@@ -117,7 +120,7 @@ def main():
     failover_mgr.start()
 
     if LOCAL_DEBUG:
-        CORE_LOGGER.success("CORE: Service Operational. Watchdog Active.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "CORE: Service Operational. Watchdog Active.", "SUCCESS")
 
     # 5. --- Primary Execution Loop ---
     try:
@@ -129,20 +132,20 @@ def main():
             
     except KeyboardInterrupt:
         if LOCAL_DEBUG:
-            CORE_LOGGER.debug("Keyboard interrupt. Stopping...")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Keyboard interrupt. Stopping...", "DEBUG")
     except Exception:
         CORE_LOGGER.exception("CRITICAL: Unhandled exception in loop.")
     finally:
         # 6. --- Graceful Finalization ---
         if LOCAL_DEBUG:
-            CORE_LOGGER.debug("Initiating teardown sequence...")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Initiating teardown sequence...", "DEBUG")
         
         # Stop all registered managers to ensure clean socket/thread closure.
         if managers:
             for name, manager in managers.items():
                 if manager and hasattr(manager, "stop") and callable(manager.stop):
                     if LOCAL_DEBUG:
-                        CORE_LOGGER.debug(f"Stopping '{name}'...")
+                        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Stopping '{name}'...", "DEBUG")
                     try:
                         manager.stop()
                     except Exception:
@@ -156,7 +159,7 @@ def main():
         shutdown_publisher_worker()
         
         if LOCAL_DEBUG:
-            CORE_LOGGER.success("CORE: Shutdown sequence complete.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "CORE: Shutdown sequence complete.", "SUCCESS")
 
 if __name__ == "__main__":
     main()

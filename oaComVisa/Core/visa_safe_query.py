@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Core/visa_safe_query.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -8,7 +10,6 @@ import orjson
 import time
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -19,7 +20,7 @@ app_constants = Config.get_instance()
 
 def query_safe(proxy, command, correlation_id="N/A"):
     # Safely queries the instrument with a SCPI command and returns the response.
-    if LOCAL_DEBUG: logger.debug(f"💳 ℹ️ Proxy Log: 💳💳⬆️⬆️ Send Visa Command: Querying command: {command}")
+    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: 💳💳⬆️⬆️ Send Visa Command: Querying command: {command}", "DEBUG")
 
     # ⚡ DEFENSIVE CHECK: Ensure session is still valid
     if not proxy.inst or not proxy.inst.session:
@@ -57,8 +58,8 @@ def query_safe(proxy, command, correlation_id="N/A"):
 
     response = proxy.inst.read().strip()
     
-    if LOCAL_DEBUG: logger.success(f"💳 ℹ️ Proxy Log: ✅ Sent query: {command}")
-    if LOCAL_DEBUG: logger.debug(f"💳 ℹ️ Proxy Log: 💳💳⬇️⬇️ RX Visa Response: Received response: {response}")
+    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: ✅ Sent query: {command}", "SUCCESS")
+    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: 💳💳⬇️⬇️ RX Visa Response: Received response: {response}", "DEBUG")
 
     topic = "OPEN-AIR/Proxy/Rx_Outbox"
     payload = orjson.dumps(

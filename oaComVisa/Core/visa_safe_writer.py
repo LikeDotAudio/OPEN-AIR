@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Core/visa_safe_writer.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -8,7 +10,6 @@ import orjson
 import time
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -19,7 +20,7 @@ app_constants = Config.get_instance()
 
 def write_safe(proxy, command):
     # Safely writes a SCPI command to the instrument.
-    if LOCAL_DEBUG: logger.debug(f"💳 ℹ️ Proxy Log: 💳💳⬆️⬆️ Send Visa Command: Transmitting command: {command}")
+    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: 💳💳⬆️⬆️ Send Visa Command: Transmitting command: {command}", "DEBUG")
 
     # ⚡ DEFENSIVE CHECK: Ensure session is still valid
     if not proxy.inst or not proxy.inst.session:
@@ -42,5 +43,5 @@ def write_safe(proxy, command):
 
     # ⚡ DIRECT CALL: Assuming hardware state is validated or fatal if not
     proxy.inst.write(command)
-    if LOCAL_DEBUG: logger.success(f"💳 ℹ️ Proxy Log: ✅ Sent command: {command}")
+    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: ✅ Sent command: {command}", "SUCCESS")
     return True

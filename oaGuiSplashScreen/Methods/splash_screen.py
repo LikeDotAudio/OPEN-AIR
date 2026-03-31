@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/splash_screen.py
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
@@ -8,8 +10,9 @@ import tkinter as tk
 from tkinter import ttk
 from oaLogging.Entry import logger, vocal_capture
 
+LOCAL_DEBUG = True
+
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
 
 # --- EXTRACTED CORE MODULES ---
 from ..Core.gif_animator import GifAnimator
@@ -53,11 +56,11 @@ class SplashScreen:
             tk.Label(vis, text="[Animation Offline]", fg="#333", bg="black").pack(expand=True)
 
         if LOCAL_DEBUG:
-            logger.debug("✅ SplashScreen materialised.")
+            matrix_log("ui", "gui_manager", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ SplashScreen materialised.", "DEBUG")
 
     def set_status(self, message):
         """Updates the startup status text and pumps the Tkinter event loop."""
-        if self.debug_enabled: logger.debug(f"🔬 SPLASH: {message}")
+        matrix_log("ui", "gui_manager", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔬 SPLASH: {message}", "DEBUG")
         if not self.win or not self.win.winfo_exists(): return
         
         if not self.status_label:
@@ -77,4 +80,4 @@ class SplashScreen:
         if self.win and self.win.winfo_exists():
             self.animator.stop(); self.win.destroy(); self.win = None
             if LOCAL_DEBUG:
-                logger.debug("👋 SplashScreen dismissed.")
+                matrix_log("ui", "gui_manager", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "👋 SplashScreen dismissed.", "DEBUG")

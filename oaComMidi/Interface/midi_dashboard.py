@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # oaComMidi/Interface/midi_dashboard.py
 #
 # MIDI Port & Activity Dashboard Plugin for OPEN-AIR.
@@ -38,7 +40,7 @@ class MidiDashboard(tk.Frame):
         self._setup_ui()
         
         if self.midi_manager:
-            if LOCAL_DEBUG: logger.debug("🎹 [MIDI-DASH] MidiManager found. Registering callback.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🎹 [MIDI-DASH] MidiManager found. Registering callback.", "DEBUG")
             # Add a local callback for the dashboard monitor
             self.midi_manager.add_monitor_callback(self.on_midi_activity)
             self._refresh_ui()
@@ -132,7 +134,7 @@ class MidiDashboard(tk.Frame):
 
     def _process_activity(self, direction, msg):
         if LOCAL_DEBUG:
-            logger.debug(f"🎹 [MIDI-DASH] Processing {direction} activity for UI update.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🎹 [MIDI-DASH] Processing {direction} activity for UI update.", "DEBUG")
         
         # 1. Update Keyboard
         self.keyboard.handle_midi(msg)
@@ -176,7 +178,7 @@ class MidiDashboard(tk.Frame):
             try:
                 self.midi_manager.remove_monitor_callback(self.on_midi_activity)
             except Exception as e:
-                logger.trace(f"Failed to remove MIDI monitor callback: {e}")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Failed to remove MIDI monitor callback: {e}", "TRACE")
         super().destroy()
 
 def get_gui_class():

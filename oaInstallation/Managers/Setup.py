@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Managers/Setup.py
 # Author: Anthony Peter Kuzub
 # Version: 20260323.1830.1
@@ -158,21 +160,21 @@ def main():
     """Primary entry point for the Setup utility."""
     manager = SetupManager()
     
-    logger.info(f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_PYTHON_DEPS}")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_PYTHON_DEPS}", "INFO")
     if not manager.check_dependencies():
         logger.error("🛑 [CRITICAL] Dependency check failed. Setup aborted.")
         sys.exit(EXIT_CODE_CRITICAL)
 
-    logger.info(f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_MQTT_INFRA}")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_MQTT_INFRA}", "INFO")
     manager.setup_mqtt()
 
-    logger.info(f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_SNMP_INFRA}")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_SNMP_INFRA}", "INFO")
     manager.setup_snmp()
 
-    logger.info(f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_DESKTOP_INTEG}")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_DESKTOP_INTEG}", "INFO")
     manager.setup_desktop()
 
-    logger.success("✅✅✅ [SUCCESS] Setup complete.")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅✅✅ [SUCCESS] Setup complete.", "SUCCESS")
 
 if __name__ == "__main__":
     main()

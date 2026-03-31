@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Managers/run_builder.py
 # Author: Gemini CLI
 # Version: 1.0.0
@@ -21,7 +23,6 @@ from oaLogging.Core.logger import GUI_LOGGER as logger
 from oaStyle.Managers.theme_applier import apply_theme
 from oaOchestration.Core.path_initializer import initialize_paths
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 def main():
     """Main entry point for the standalone editor program."""
@@ -39,10 +40,10 @@ def main():
     root.title(f"OPEN-AIR: WYSIWYG Editor - {json_filepath.name}")
     
     # APPLY THEME: Crucial for visual consistency in standalone process
-    if LOCAL_DEBUG: logger.debug("Standalone Builder: Applying system theme...")
+    matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Standalone Builder: Applying system theme...", "DEBUG")
     apply_theme(root)
 
-    if LOCAL_DEBUG: logger.info(f"Standalone Builder: Starting for {json_filepath}")
+    matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Standalone Builder: Starting for {json_filepath}", "INFO")
 
     if not json_filepath.exists():
         logger.error(f"Standalone Builder: File not found: {json_filepath}")
@@ -58,7 +59,7 @@ def main():
 
     def on_test(new_data):
         """Publishes the new config to MQTT to trigger a live rebuild in the main application."""
-        if LOCAL_DEBUG: logger.info(f"Standalone Builder: 'Test' triggered for {json_filepath.name}")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Standalone Builder: 'Test' triggered for {json_filepath.name}", "INFO")
         
         try:
             # LOCAL IMPORT: Avoid dependency requirement if not testing
@@ -88,13 +89,13 @@ def main():
             client.publish(rebuild_topic, orjson.dumps(payload))
             client.disconnect()
             
-            if LOCAL_DEBUG: logger.success("Standalone Builder: Rebuild request published to MQTT.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Standalone Builder: Rebuild request published to MQTT.", "SUCCESS")
         except ImportError:
             logger.error("Standalone Builder: 'paho-mqtt' library not found. Cannot push to main UI.")
         except Exception as e:
             logger.error(f"Standalone Builder: Failed to publish rebuild request: {e}")
     def on_save():
-        if LOCAL_DEBUG: logger.info("Standalone Builder: 'Save' operation completed.")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Standalone Builder: 'Save' operation completed.", "INFO")
         pass
 
     # Launch the builder using 'root' as the primary window
@@ -109,7 +110,7 @@ def main():
 
     # Lifecycle Management
     def on_close():
-        if LOCAL_DEBUG: logger.info("Standalone Builder: Program exiting.")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Standalone Builder: Program exiting.", "INFO")
         try:
             app._close_editor()
             root.quit()

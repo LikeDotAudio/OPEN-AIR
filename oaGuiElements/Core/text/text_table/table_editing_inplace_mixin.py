@@ -93,7 +93,7 @@ class TableEditingInplaceMixin:
         # Bind Shift-Return for auto-incrementing and committing
         self.editing_entry.bind("<Shift-Return>", self._on_entry_commit)
 
-        if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Starting edit for row {row_id}, col {col} with value '{current_value}'")
+        matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Starting edit for row {row_id}, col {col} with value '{current_value}'", "DEBUG")
 
     # Commits the changes made in the in-place editor to the Treeview and MQTT.
     # This method updates the Treeview cell with the new value, records the change
@@ -147,9 +147,9 @@ class TableEditingInplaceMixin:
             self.state_mirror_engine.publish_command(
                 field_topic, orjson.dumps(row_data).decode()
             )  # publish_payload from state_mirror_engine
-            if LOCAL_DEBUG: TABLE_LOGGER.debug(f"MQTT Updated: topic='{field_topic}', payload='{row_data}'")
+            matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"MQTT Updated: topic='{field_topic}', payload='{row_data}'", "DEBUG")
 
-        if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Committed edit: row {self.active_row}, col {display_col_name}, new value {new_value}")
+        matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Committed edit: row {self.active_row}, col {display_col_name}, new value {new_value}", "DEBUG")
         self.destroy_entry()
 
     # Handles the commit of the in-place editor entry.
@@ -167,7 +167,7 @@ class TableEditingInplaceMixin:
 
         if event and event.keysym == "Return" and (event.state & 0x0001):
             new_value = self._increment_string_with_trailing_digits(new_value)
-            if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Auto-incremented value to: {new_value}")
+            matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Auto-incremented value to: {new_value}", "DEBUG")
 
         self.commit_edit(new_value)
 
@@ -184,7 +184,7 @@ class TableEditingInplaceMixin:
             self.editing_entry = None
             self.active_row = None
             self.active_col = None
-            if LOCAL_DEBUG: TABLE_LOGGER.debug("Editing entry destroyed.")
+            matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Editing entry destroyed.", "DEBUG")
 
     # Increments any trailing digits in a string.
     # This helper function is used for auto-incrementing cell values. If the string

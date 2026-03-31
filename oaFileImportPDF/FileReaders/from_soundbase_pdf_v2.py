@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # FileReaders/from_soundbase_pdf_v2.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -39,7 +41,7 @@ def _internal_convert_soundbase_pdf_v2_to_markers(pdf_file_path):
     """
 
     if LOCAL_DEBUG:
-        logger.debug(f"▶️ Starting PDF (Sound Base v2) report conversion for: {os.path.basename(pdf_file_path)}")
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"▶️ Starting PDF (Sound Base v2) report conversion for: {os.path.basename(pdf_file_path)}", "DEBUG")
 
     marker_data = []
 
@@ -50,7 +52,7 @@ def _internal_convert_soundbase_pdf_v2_to_markers(pdf_file_path):
             # Use regex to find the ZONE
             zone_match = re.search(r"ZONE: (.+)", text)
             zone = zone_match.group(1).strip() if zone_match else "N/A"
-            logger.debug(f"🔍 Found ZONE: {zone}")
+            matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔍 Found ZONE: {zone}", "DEBUG")
 
             # The pattern to find all groups
             group_pattern = re.compile(
@@ -69,7 +71,7 @@ def _internal_convert_soundbase_pdf_v2_to_markers(pdf_file_path):
                 group_match = group_pattern.search(line)
                 if group_match:
                     current_group = group_match.group(1).strip()
-                    logger.debug(f"🔍 Found new GROUP: {current_group}")
+                    matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔍 Found new GROUP: {current_group}", "DEBUG")
                     continue
 
                 # Regex to find all frequency-device pairs on the current line
@@ -95,7 +97,7 @@ def _internal_convert_soundbase_pdf_v2_to_markers(pdf_file_path):
                             )
 
             if LOCAL_DEBUG:
-                logger.success(f"✅ Finished conversion. Extracted {len(marker_data)} rows.")
+                matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Finished conversion. Extracted {len(marker_data)} rows.", "SUCCESS")
             return HEADERS, marker_data
 
     except FileNotFoundError:

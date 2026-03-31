@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Core/mqtt_subscriber_mixin.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -25,6 +27,6 @@ class MqttSubscriberMixin:
         for topic, callback in topic_map.items():
             try:
                 router.subscribe_to_topic(topic_filter=topic, callback_func=callback)
-                logger.trace(f"✅ {self.__class__.__name__}: Subscribed to '{topic}'")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ {self.__class__.__name__}: Subscribed to '{topic}'", "TRACE")
             except Exception as e:
                 logger.error(f"❌ {self.__class__.__name__}: Failed to subscribe to '{topic}': {e}")

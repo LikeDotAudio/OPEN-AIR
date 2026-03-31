@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # 55_OSC/gui_OSC.py
 # Author: Anthony Peter Kuzub
 # Version: 20260326.1000.1
@@ -26,7 +28,6 @@ if str(root_path) not in sys.path:
 import oaComOSC.Entry as OSC_MODULE
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaLogging.Entry import logger
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
@@ -56,7 +57,7 @@ class OscDashboard(tk.Frame, TransparencyMixin):
             
             # This will initialize or update the singleton instance
             OSC_MODULE.get_manager(state_cache_manager=state_cache, mqtt_connection_manager=mqtt_conn)
-            if LOCAL_DEBUG: logger.info("🅾️ OscDashboard: OSCManager linked successfully.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🅾️ OscDashboard: OSCManager linked successfully.", "INFO")
         except Exception as e:
             logger.error(f"🅾️ OscDashboard: Standalone setup failed: {e}")
 
@@ -181,7 +182,7 @@ class OscDashboard(tk.Frame, TransparencyMixin):
         self.info_tree.pack(fill=tk.X, expand=True, padx=5, pady=5)
 
     def _start_service(self):
-        logger.info("📡 OSC: Starting service...")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡 OSC: Starting service...", "INFO")
         OSC_MODULE.start()
         self._refresh_ui()
 
@@ -191,14 +192,14 @@ class OscDashboard(tk.Frame, TransparencyMixin):
         self._refresh_ui()
 
     def _restart_service(self):
-        logger.info("📡 OSC: Restarting service...")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡 OSC: Restarting service...", "INFO")
         OSC_MODULE.stop()
         self.after(500, OSC_MODULE.start)
         self.after(600, self._refresh_ui)
 
     def _toggle_bridge(self):
         enabled = self.bridge_var.get()
-        logger.info(f"📡 OSC: Setting bridge mode to {enabled}")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡 OSC: Setting bridge mode to {enabled}", "INFO")
         OSC_MODULE.set_bridge_mode(enabled)
         self._refresh_ui()
 
@@ -306,7 +307,7 @@ class OscDashboard(tk.Frame, TransparencyMixin):
         try: 
             OSC_MODULE.remove_monitor_callback(self.on_osc_activity)
         except Exception as e:
-            logger.trace(f"OscDashboard: Failed to remove monitor callback: {e}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"OscDashboard: Failed to remove monitor callback: {e}", "TRACE")
         super().destroy()
 
 def get_gui_class():

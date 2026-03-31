@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Core/directory.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -10,7 +12,7 @@ import pathlib
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 
 class DirectoryBuilderMixin:
     """
@@ -59,7 +61,7 @@ class DirectoryBuilderMixin:
 
     def _build_from_directory(self, path: pathlib.Path, parent_widget, on_complete=None, layout_override=None):
         """Recursively builds the GUI."""
-        if LOCAL_DEBUG: logger.debug(f"🏗️ [BUILDER] Starting build for: {path}")
+        matrix_log("ui", "gui_shell", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🏗️ [BUILDER] Starting build for: {path}", "DEBUG")
         if isinstance(path, str): path = pathlib.Path(path)
         if hasattr(self, 'root') and self.root: self.root.update()
 

@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # workspaces/tree_refactor.py
 # Author: Gemini CLI
 # Version: 1.0.0
@@ -10,7 +12,6 @@ from ..event_bus import event_bus
 from ..state import state_manager
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import GUI_LOGGER as logger
 
 class TreeRefactor(ttk.Frame):
@@ -28,7 +29,7 @@ class TreeRefactor(ttk.Frame):
         # This covers the case where the editor loaded data before this tab was created.
         current_state = state_manager.get_state()
         if current_state:
-            if LOCAL_DEBUG: logger.debug("🌳 TreeRefactor: Initializing tree with current state_manager data.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🌳 TreeRefactor: Initializing tree with current state_manager data.", "DEBUG")
             self._on_state_updated(current_state)
 
         # Internal state
@@ -288,7 +289,7 @@ class TreeRefactor(ttk.Frame):
             target_parent_path = ".".join(target_parent_path.split(".")[:-1])
 
         if target_parent_path == source_parent_path:
-            logger.info("🌳 TreeRefactor: Drop target is same as source parent. Use UP/DOWN buttons for reordering.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🌳 TreeRefactor: Drop target is same as source parent. Use UP/DOWN buttons for reordering.", "INFO")
         else:
             # Perform Move
             # Note: We need to append '.fields' if target is a Block to match our schema

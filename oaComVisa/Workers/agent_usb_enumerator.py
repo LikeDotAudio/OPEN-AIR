@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Workers/agent_usb_enumerator.py
 # Author: Gemini Agent
 # Version: 1.0.0
@@ -7,7 +9,7 @@
 import pyvisa
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -22,14 +24,14 @@ def discover_usb_devices(resource_manager):
     Returns a list of resource strings.
     """
     usb_resources = []
-    if LOCAL_DEBUG: logger.debug(f"   👉 Scanning USB/Local Bus...")
+    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   👉 Scanning USB/Local Bus...", "DEBUG")
     try:
         local_res = resource_manager.list_resources("?*")
         for res in local_res:
             # Filter out TCPIP and ASRL from local_res if they are handled by other discovery modules
             if "TCPIP" not in res and "ASRL" not in res:  # ASRL is serial port
                 usb_resources.append(res)
-        if LOCAL_DEBUG: logger.debug(f"   ✅ Found {len(usb_resources)} USB/local resources: {usb_resources}")
+        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   ✅ Found {len(usb_resources)} USB/local resources: {usb_resources}", "DEBUG")
     except Exception as e:
         if LOCAL_DEBUG:
             logger.error(

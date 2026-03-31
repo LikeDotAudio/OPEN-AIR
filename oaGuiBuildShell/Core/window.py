@@ -1,3 +1,4 @@
+from oaLogging.Methods.matrix_gate import matrix_log
 # Core/window.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
@@ -10,7 +11,7 @@ import inspect
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -69,7 +70,7 @@ class WindowManager:
             # Ensure the tab is designed for lazy loading and has a build path
             build_path = getattr(original_tab_frame, "build_path", None)
             if not build_path:
-                if LOCAL_DEBUG: logger.debug(f"🖥️🟡 Tab '{tab_text}' is not designed to be torn off (no build_path).")
+                matrix_log("ui", "gui_shell", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🖥️🟡 Tab '{tab_text}' is not designed to be torn off (no build_path).", "DEBUG")
                 return
 
             # Store details needed to re-attach the tab later
@@ -124,7 +125,7 @@ class WindowManager:
 
             tear_off_window.after(1, set_protocol)
 
-            if LOCAL_DEBUG: logger.success(f"🖥️✅ Tab '{tab_text}' has been liberated into its own Toplevel window!")
+            matrix_log("ui", "gui_shell", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🖥️✅ Tab '{tab_text}' has been liberated into its own Toplevel window!", "SUCCESS")
 
         except Exception as e:
             if LOCAL_DEBUG:
@@ -156,7 +157,7 @@ class WindowManager:
             # but it is ready to be lazy-loaded again if clicked.
             original_notebook.insert("end", original_tab_frame, text=tab_text)
 
-            if LOCAL_DEBUG: logger.debug(f"🖥️🟢 Tab '{tab_text}' re-attached to its original notebook.")
+            matrix_log("ui", "gui_shell", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🖥️🟢 Tab '{tab_text}' re-attached to its original notebook.", "DEBUG")
 
             top_level_window.destroy()
         else:
@@ -176,7 +177,7 @@ class WindowManager:
         Re-attaches a torn-off tab back to its original notebook or a new one.
         This is a placeholder and requires significant logic to implement fully.
         """
-        if LOCAL_DEBUG: logger.debug("🖥️🟡 Re-attaching tab functionality is currently a theoretical construct. Implementation pending further research!")
+        matrix_log("ui", "gui_shell", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🖥️🟡 Re-attaching tab functionality is currently a theoretical construct. Implementation pending further research!", "DEBUG")
 
 
 # Example of how to integrate into gui_display.py:

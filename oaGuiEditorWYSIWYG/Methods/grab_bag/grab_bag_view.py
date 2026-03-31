@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # grab_bag/grab_bag_view.py
 # Author: Gemini CLI
 # Version: 1.0.0
@@ -12,7 +14,6 @@ from ...Core.event_bus import event_bus
 from ...Core.state import state_manager
 from oaLogging.Core.logger import GUI_LOGGER as logger
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 
 class AutoScrollbar(ttk.Scrollbar):
@@ -30,25 +31,25 @@ class GrabBagView(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         kwargs.pop("bg", None)
         super().__init__(parent, bg="#2b2b2b", *args, **kwargs)
-        if LOCAL_DEBUG: logger.debug("GrabBagView: Initializing palette...")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBagView: Initializing palette...", "DEBUG")
         self.loader = GrabBagLoader()
         self.last_focused_path = None
         self._build_ui()
         
         # Track selection to know where to insert
-        if LOCAL_DEBUG: logger.debug("GrabBagView: Subscribing to FOCUS_REQUESTED...")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBagView: Subscribing to FOCUS_REQUESTED...", "DEBUG")
         event_bus.subscribe("FOCUS_REQUESTED", self._on_focus_requested)
         
         self.bind("<Destroy>", self._on_destroy)
 
     def _on_destroy(self, event):
         if event.widget == self:
-            if LOCAL_DEBUG: logger.info("GrabBagView: Workspace destroyed. Cleaning up subscriptions and bindings.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBagView: Workspace destroyed. Cleaning up subscriptions and bindings.", "INFO")
             event_bus.unsubscribe("FOCUS_REQUESTED", self._on_focus_requested)
             
             # CRITICAL: Cleanup bind_all to prevent memory leaks and crashes on relaunch
             try:
-                if LOCAL_DEBUG: logger.debug("GrabBagView: Unbinding global mousewheel events...")
+                matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBagView: Unbinding global mousewheel events...", "DEBUG")
                 self.canvas.unbind_all("<MouseWheel>")
                 self.canvas.unbind_all("<Button-4>")
                 self.canvas.unbind_all("<Button-5>")
@@ -60,7 +61,7 @@ class GrabBagView(tk.Frame):
 
     def _build_ui(self):
         """Builds the Grab Bag UI."""
-        if LOCAL_DEBUG: logger.debug("GrabBagView: Building Palette UI...")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBagView: Building Palette UI...", "DEBUG")
         header = tk.Frame(self, bg="#333333", height=35)
         header.pack(side="top", fill="x")
         
@@ -83,7 +84,7 @@ class GrabBagView(tk.Frame):
         self.canvas.bind("<Configure>", self._on_canvas_configure)
         
         # Mousewheel bindings
-        if LOCAL_DEBUG: logger.debug("GrabBagView: Binding global mousewheel...")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBagView: Binding global mousewheel...", "DEBUG")
         self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
         self.canvas.bind_all("<Button-4>", self._on_mousewheel)
         self.canvas.bind_all("<Button-5>", self._on_mousewheel)
@@ -105,12 +106,12 @@ class GrabBagView(tk.Frame):
 
     def _refresh_library(self):
         """Reloads components from disk and rebuilds the UI."""
-        if LOCAL_DEBUG: logger.info("GrabBag: Refreshing component library from disk...")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBag: Refreshing component library from disk...", "INFO")
         for child in self.scroll_frame.winfo_children():
             child.destroy()
             
         library = self.loader.scan_library()
-        if LOCAL_DEBUG: logger.info(f"GrabBag: Scan complete. Found {len(library)} component templates.")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"GrabBag: Scan complete. Found {len(library)} component templates.", "INFO")
         
         for name, info in library.items():
             comp_frame = tk.Frame(self.scroll_frame, bg="#333333", bd=1, relief="raised", padx=10, pady=10)
@@ -125,7 +126,7 @@ class GrabBagView(tk.Frame):
 
     def _add_component(self, name):
         """Adds the selected component to the master JSON state after the focused item."""
-        if LOCAL_DEBUG: logger.info(f"GrabBag: Component addition sequence started for '{name}'")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"GrabBag: Component addition sequence started for '{name}'", "INFO")
         component = self.loader.get_component(name)
         if not component: 
             logger.error(f"GrabBag: Failed to load template for '{name}'")
@@ -141,9 +142,9 @@ class GrabBagView(tk.Frame):
             parts = self.last_focused_path.split(".")
             target_field_key = parts[-1]
             parent_path_parts = parts[:-1] # Usually ends in ".fields"
-            if LOCAL_DEBUG: logger.debug(f"GrabBag: Insertion point identified: {target_field_key} within {'.'.join(parent_path_parts)}")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"GrabBag: Insertion point identified: {target_field_key} within {'.'.join(parent_path_parts)}", "DEBUG")
         else:
-            if LOCAL_DEBUG: logger.debug("GrabBag: No insertion point selected. Adding to root.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBag: No insertion point selected. Adding to root.", "DEBUG")
         
         # 2. Resolve the parent dictionary
         parent_dict = current_state
@@ -161,22 +162,22 @@ class GrabBagView(tk.Frame):
                 new_key = f"{base_key}_{counter}"
                 counter += 1
             
-            if LOCAL_DEBUG: logger.debug(f"GrabBag: Generated unique key: '{new_key}'")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"GrabBag: Generated unique key: '{new_key}'", "DEBUG")
 
             inserted = False
             for k, v in parent_dict.items():
                 new_fields[k] = v
                 if k == target_field_key:
-                    if LOCAL_DEBUG: logger.debug(f"GrabBag: Splicing '{new_key}' after '{k}'")
+                    matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"GrabBag: Splicing '{new_key}' after '{k}'", "DEBUG")
                     new_fields[new_key] = copy.deepcopy(component['schema'])
                     inserted = True
             
             if not inserted:
-                if LOCAL_DEBUG: logger.debug(f"GrabBag: Appending '{new_key}' to end of dictionary.")
+                matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"GrabBag: Appending '{new_key}' to end of dictionary.", "DEBUG")
                 new_fields[new_key] = copy.deepcopy(component['schema'])
             
             # 4. Update the state at the parent level
             state_manager.update_state(new_fields, path=parent_path_parts if parent_path_parts else None, source=self)
-            if LOCAL_DEBUG: logger.success(f"GrabBag: Successfully inserted '{new_key}'.")
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"GrabBag: Successfully inserted '{new_key}'.", "SUCCESS")
         else:
             logger.error("GrabBag Error: Resolved parent container is not a dictionary.")

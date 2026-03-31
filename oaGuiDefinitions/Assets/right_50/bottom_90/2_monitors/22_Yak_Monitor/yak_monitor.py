@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # 22_Yak_Monitor/yak_monitor.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -33,7 +35,6 @@ from oaConfiguration.FileReaders.config_reader import Config
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 class YakMonitor(tk.Frame, TransparencyMixin):
     """
@@ -62,7 +63,7 @@ class YakMonitor(tk.Frame, TransparencyMixin):
         # Register for updates
         register_monitor_callback(self.on_yak_traffic)
         
-        if LOCAL_DEBUG: logger.debug("🖥️ Yak Monitor Initialized.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🖥️ Yak Monitor Initialized.", "DEBUG")
 
     def _find_builder_instance(self, widget):
         """Recursively searches for a DynamicGuiBuilder in the parent hierarchy."""
@@ -74,7 +75,7 @@ class YakMonitor(tk.Frame, TransparencyMixin):
             try:
                 curr = curr.master
             except Exception as e:
-                logger.trace(f"End of parent hierarchy reached for {widget}: {e}")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"End of parent hierarchy reached for {widget}: {e}", "TRACE")
                 break
         return None
 
@@ -229,7 +230,7 @@ class YakMonitor(tk.Frame, TransparencyMixin):
             elif "message" in payload:
                 tags = ("orange_row")
         except Exception as e:
-            logger.debug(f"Payload not JSON or error parsing for topic {topic}: {e}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Payload not JSON or error parsing for topic {topic}: {e}", "DEBUG")
             if "message" in payload:
                 tags = ("orange_row")
 
@@ -270,7 +271,7 @@ class YakMonitor(tk.Frame, TransparencyMixin):
             data = orjson.loads(payload)
             self._populate_dissector("", data)
         except Exception as e:
-            logger.debug(f"Selected payload not JSON or error parsing: {e}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Selected payload not JSON or error parsing: {e}", "DEBUG")
             # Not JSON or error parsing, show as raw string
             self.dissector_tree.insert("", "end", text="Raw Payload", values=(payload))
 
@@ -301,7 +302,7 @@ class YakMonitor(tk.Frame, TransparencyMixin):
                         self.on_log_select()
                         return
                 except Exception as e:
-                    logger.trace(f"Skipping log entry in jump_to_latest_val_msg: {e}")
+                    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Skipping log entry in jump_to_latest_val_msg: {e}", "TRACE")
                     continue
 
     def _populate_dissector(self, parent, data):

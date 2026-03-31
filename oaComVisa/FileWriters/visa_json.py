@@ -1,3 +1,4 @@
+from oaLogging.Methods.matrix_gate import matrix_log
 # FileWriters/visa_json.py
 # Author: Gemini Agent
 # Version: 1.0.0
@@ -11,7 +12,7 @@ import inspect
 import tempfile
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -32,7 +33,7 @@ from oaComVisa.Constants.visa_known_types import KNOWN_DEVICES
 
 class VisaJsonBuilder:
     def __init__(self):
-        if LOCAL_DEBUG: logger.debug(f"🛠️ VisaJsonBuilder initialized with {len(KNOWN_DEVICES)} known devices.")
+        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🛠️ VisaJsonBuilder initialized with {len(KNOWN_DEVICES)} known devices.", "DEBUG")
         self.known_devices = KNOWN_DEVICES
 
     def augment_device_details(self, device_entry):
@@ -81,7 +82,7 @@ class VisaJsonBuilder:
         if temp_path and os.path.exists(temp_path) and os.path.getsize(temp_path) > 0:
             # Atomically rename the temp file to the final destination
             os.rename(temp_path, filepath)
-            if LOCAL_DEBUG: logger.debug(f"✅ Atomically saved fleet inventory to {filepath}")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Atomically saved fleet inventory to {filepath}", "DEBUG")
         else:
             logger.error(f"❌ Failed to save inventory: Temp file {temp_path} is invalid.")
             if temp_path and os.path.exists(temp_path):
@@ -91,12 +92,12 @@ class VisaJsonBuilder:
         """Loads fleet inventory from a JSON file if it exists, is not empty, and flattens it."""
         filepath = STATE_VISA_FLEET_JSON_PATH
         if not os.path.exists(filepath):
-            if LOCAL_DEBUG: logger.debug(f"ℹ️ No existing inventory file found at {filepath}. Initializing empty inventory and creating file.")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"ℹ️ No existing inventory file found at {filepath}. Initializing empty inventory and creating file.", "DEBUG")
             self.save_inventory_to_json([])  # Create the file with an empty inventory
             return []
 
         if os.path.getsize(filepath) == 0:  # Check if file is empty
-            if LOCAL_DEBUG: logger.debug(f"ℹ️ Inventory file {filepath} is empty. Initializing empty inventory.")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"ℹ️ Inventory file {filepath} is empty. Initializing empty inventory.", "DEBUG")
             return []  # Treat empty file as empty inventory
 
         with open(filepath, "rb") as f:
@@ -110,7 +111,7 @@ class VisaJsonBuilder:
 
         grouped_inventory = orjson.loads(raw_data)
         flat_inventory = self._flatten_grouped_inventory(grouped_inventory)
-        if LOCAL_DEBUG: logger.debug(f"✅ Loaded and flattened fleet inventory from {filepath} with {len(flat_inventory)} devices.")
+        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Loaded and flattened fleet inventory from {filepath} with {len(flat_inventory)} devices.", "DEBUG")
         return flat_inventory
 
     def load_grouped_inventory_from_json(self):
@@ -120,12 +121,12 @@ class VisaJsonBuilder:
         """
         filepath = STATE_VISA_FLEET_JSON_PATH
         if not os.path.exists(filepath):
-            if LOCAL_DEBUG: logger.debug(f"ℹ️ No existing grouped inventory file found at {filepath}. Initializing empty grouped inventory and creating file.")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"ℹ️ No existing grouped inventory file found at {filepath}. Initializing empty grouped inventory and creating file.", "DEBUG")
             self.save_inventory_to_json([])  # Create the file with an empty inventory
             return {}
 
         if os.path.getsize(filepath) == 0:  # Check if file is empty
-            if LOCAL_DEBUG: logger.debug(f"ℹ️ Grouped inventory file {filepath} is empty. Returning empty dictionary.")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"ℹ️ Grouped inventory file {filepath} is empty. Returning empty dictionary.", "DEBUG")
             return {}
 
         with open(filepath, "rb") as f:
@@ -138,7 +139,7 @@ class VisaJsonBuilder:
             return {}
 
         grouped_inventory = orjson.loads(raw_data)
-        if LOCAL_DEBUG: logger.debug(f"✅ Loaded raw grouped fleet inventory from {filepath}.")
+        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Loaded raw grouped fleet inventory from {filepath}.", "DEBUG")
         return grouped_inventory
 
     def save_query_response_to_json(self, serial, response, command, corr_id):
@@ -166,7 +167,7 @@ class VisaJsonBuilder:
         if LOCAL_DEBUG: 
             # Final validation: check if file was written
             if os.path.exists(filepath):
-                logger.debug(f"✅ Saved query response for {serial} to {filepath}")
+                matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Saved query response for {serial} to {filepath}", "DEBUG")
             else:
                 logger.error(f"❌ Failed to save query response for {serial} to {filepath}")
 

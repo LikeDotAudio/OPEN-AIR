@@ -1,3 +1,4 @@
+from oaLogging.Methods.matrix_gate import matrix_log
 # FileReaders/saver.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
@@ -10,7 +11,7 @@ import csv
 from tkinter import filedialog
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -53,7 +54,7 @@ def save_intermediate_file(tree_headers, tree_data):
             writer.writeheader()
             writer.writerows(tree_data)
 
-        if LOCAL_DEBUG: logger.debug(f"💾 Intermediate file saved as {target_path}")
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💾 Intermediate file saved as {target_path}", "DEBUG")
     except Exception as e:
         if LOCAL_DEBUG:
             logger.exception("❌ Failed to save intermediate MARKERS.csv file. ")
@@ -75,7 +76,7 @@ def save_open_air_file(tree_headers, tree_data):
         if LOCAL_DEBUG: logger.debug("🟢️️️🟡 'Save Open Air' action aborted: no data in treeview.", file=os.path.basename(__file__),
             function=f"{current_function}",
         )
-        if LOCAL_DEBUG: logger.debug("▶️ Action: Save Markers as Open Air.csv. No data to save.")
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "▶️ Action: Save Markers as Open Air.csv. No data to save.", "DEBUG")
         return
 
     file_path = filedialog.asksaveasfilename(
@@ -102,7 +103,7 @@ def save_open_air_file(tree_headers, tree_data):
             writer.writeheader()
             writer.writerows(tree_data)
 
-        if LOCAL_DEBUG: logger.success(f"✅ File saved successfully to {file_path}")
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ File saved successfully to {file_path}", "SUCCESS")
         if LOCAL_DEBUG: logger.success("✅ File saved successfully.", file=os.path.basename(__file__),
             function=f"{current_function}",
         )

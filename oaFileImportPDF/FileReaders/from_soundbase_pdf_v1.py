@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # FileReaders/from_soundbase_pdf_v1.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -39,7 +41,7 @@ def _internal_convert_soundbase_pdf_v1_to_markers(pdf_file_path):
     """
 
     if LOCAL_DEBUG:
-        logger.debug(f"▶️ Starting PDF report conversion for '{os.path.basename(pdf_file_path)}'.")
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"▶️ Starting PDF report conversion for '{os.path.basename(pdf_file_path)}'.", "DEBUG")
 
     marker_data = []
 
@@ -48,10 +50,10 @@ def _internal_convert_soundbase_pdf_v1_to_markers(pdf_file_path):
             last_known_group = "Uncategorized"  # Default group if not found
 
             if LOCAL_DEBUG:
-                logger.debug(f"📄 Opened PDF with {len(pdf.pages)} pages.")
+                matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📄 Opened PDF with {len(pdf.pages)} pages.", "DEBUG")
 
             for page_num, page in enumerate(pdf.pages):
-                logger.debug(f"▶️ Processing Page {page_num + 1}...")
+                matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"▶️ Processing Page {page_num + 1}...", "DEBUG")
                 
                 # Extract text for group headers
                 lines = page.extract_text().splitlines()
@@ -65,7 +67,7 @@ def _internal_convert_soundbase_pdf_v1_to_markers(pdf_file_path):
 
                 tables = page.extract_tables()
                 if LOCAL_DEBUG:
-                    logger.debug(f"🔍 Found {len(tables)} tables on Page {page_num + 1}.")
+                    matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔍 Found {len(tables)} tables on Page {page_num + 1}.", "DEBUG")
 
                 group_index = 0
                 for table_num, table in enumerate(tables):
@@ -75,7 +77,7 @@ def _internal_convert_soundbase_pdf_v1_to_markers(pdf_file_path):
 
                     current_zone = last_known_group
 
-                    logger.debug(f"▶️ Processing Table {table_num + 1} for Zone: {current_zone}")
+                    matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"▶️ Processing Table {table_num + 1} for Zone: {current_zone}", "DEBUG")
 
                     for row_num, row in enumerate(table):
                         if not row or all(
@@ -86,7 +88,7 @@ def _internal_convert_soundbase_pdf_v1_to_markers(pdf_file_path):
                         if (
                             "Model" in row[0] and "Frequency" in row[-1]
                         ):  # Skip header rows
-                            logger.debug(f"⏩ Skipping header row: {row}")
+                            matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"⏩ Skipping header row: {row}", "DEBUG")
                             continue
 
                         clean_row = [
@@ -109,7 +111,7 @@ def _internal_convert_soundbase_pdf_v1_to_markers(pdf_file_path):
                         if (
                             model_pdf.strip() == current_zone.strip()
                         ):  # Skip rows that mistakenly repeat the group name
-                            logger.debug(f"⏩ Skipping duplicate group name row: {row}")
+                            matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"⏩ Skipping duplicate group name row: {row}", "DEBUG")
                             continue
 
                         # Map PDF fields to standard fields
@@ -130,7 +132,7 @@ def _internal_convert_soundbase_pdf_v1_to_markers(pdf_file_path):
                             # The frequency is already in MHz, so no conversion needed
                             freq_MHz_standard = float(frequency_pdf_str)
                             if LOCAL_DEBUG:
-                                logger.debug(f"↔️ PDF Freq conversion: '{frequency_pdf_str}' -> {freq_MHz_standard} MHz")
+                                matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"↔️ PDF Freq conversion: '{frequency_pdf_str}' -> {freq_MHz_standard} MHz", "DEBUG")
                         except ValueError:
                             logger.error(f"❌ PDF Freq conversion error: '{frequency_pdf_str}'")
                             freq_MHz_standard = "Invalid Frequency"
@@ -146,10 +148,10 @@ def _internal_convert_soundbase_pdf_v1_to_markers(pdf_file_path):
                             }
                         )
                         if LOCAL_DEBUG:
-                            logger.success(f"✅ Added PDF row: {marker_data[-1]}")
+                            matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Added PDF row: {marker_data[-1]}", "SUCCESS")
 
         if LOCAL_DEBUG:
-            logger.success(f"✅ Finished PDF report conversion. Extracted {len(marker_data)} rows.")
+            matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Finished PDF report conversion. Extracted {len(marker_data)} rows.", "SUCCESS")
         return HEADERS, marker_data
 
     except FileNotFoundError:

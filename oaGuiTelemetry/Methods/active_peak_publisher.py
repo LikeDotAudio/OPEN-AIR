@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/active_peak_publisher.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -11,6 +13,7 @@ import math
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 from oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
+LOCAL_DEBUG = True
 
 app_constants = Config.get_instance()
 
@@ -20,7 +23,6 @@ TOPIC_MARKER_PEAK_WILDCARD = "OPEN-AIR/yak/Markers/nab/NAB_all_marker_settings/O
 TOPIC_MARKER_FREQ_WILDCARD = "OPEN-AIR/yak/Markers/nab/NAB_all_marker_settings/Outputs/+/value"
 TOPIC_MEASUREMENTS_ROOT = "OPEN-AIR/measurements"
 TOPIC_DELIMITER = "/"
-LOCAL_DEBUG = True
 
 class ActivePeakPublisher:
     """
@@ -29,12 +31,12 @@ class ActivePeakPublisher:
 
     def __init__(self, mqtt_util: MqttControllerUtility):
         if LOCAL_DEBUG:
-            logger.debug("🟢 Initializing ActivePeakPublisher.")
+            matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟢 Initializing ActivePeakPublisher.", "DEBUG")
         self.mqtt_util = mqtt_util
         self.marker_data_buffer = {}
         self._setup_subscriptions()
         if LOCAL_DEBUG:
-            logger.success("✅ ActivePeakPublisher online.")
+            matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ ActivePeakPublisher online.", "SUCCESS")
 
     def _setup_subscriptions(self):
         self.mqtt_util.add_subscriber(TOPIC_MARKER_PEAK_WILDCARD, self._on_marker_message)
@@ -54,7 +56,7 @@ class ActivePeakPublisher:
         numeric_value = self._parse_marker_payload(payload)
         if numeric_value is None:
             if LOCAL_DEBUG:
-                logger.debug(f"⚠️ Unparsable payload: {payload}")
+                matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"⚠️ Unparsable payload: {payload}", "DEBUG")
             return
 
         is_frequency = "freq" in topic
@@ -118,7 +120,7 @@ class ActivePeakPublisher:
             )
 
             if LOCAL_DEBUG:
-                logger.success(f"✅ Reposted {marker_id} ({round(freq_mhz, 3)} MHz) to {full_topic}")
+                matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Reposted {marker_id} ({round(freq_mhz, 3)} MHz) to {full_topic}", "SUCCESS")
 
         except Exception:
             if LOCAL_DEBUG:

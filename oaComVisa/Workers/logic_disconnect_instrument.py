@@ -1,3 +1,4 @@
+from oaLogging.Methods.matrix_gate import matrix_log
 # Workers/logic_disconnect_instrument.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -7,7 +8,7 @@
 import inspect
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -32,12 +33,12 @@ def disconnect_instrument(inst):
     - Does not modify global state; only affects the provided object.
     """
     current_function = inspect.currentframe().f_code.co_name
-    if LOCAL_DEBUG: logger.debug("💳 Disconnecting instrument... Saying goodbye!")
+    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 Disconnecting instrument... Saying goodbye!", "DEBUG")
     if inst:
         try:
             inst.close()
 
-            if LOCAL_DEBUG: logger.debug("💳 Instrument connection closed. All done!")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 Instrument connection closed. All done!", "DEBUG")
             return True
         except Exception as e:
             error_msg = f"💳 ❌ An unexpected error occurred while disconnecting instrument: {e}."
@@ -45,7 +46,7 @@ def disconnect_instrument(inst):
             if LOCAL_DEBUG:
                 logger.debug(error_msg)
             return False
-    if LOCAL_DEBUG: logger.debug("💳 No instrument to disconnect. Already gone!")
+    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 No instrument to disconnect. Already gone!", "DEBUG")
     return False
 
 

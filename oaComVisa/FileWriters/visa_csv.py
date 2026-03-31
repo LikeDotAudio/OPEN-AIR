@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # FileWriters/visa_csv.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -10,7 +12,7 @@ import csv
 import re
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -45,8 +47,8 @@ class VisaCsvBuilder:
         self.json_path = json_path
         self.csv_dir = csv_dir
         if LOCAL_DEBUG:
-            logger.debug(f"Initializing with JSON Path: {self.json_path}")
-            logger.debug(f"CSV Output Directory: {self.csv_dir}")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Initializing with JSON Path: {self.json_path}", "DEBUG")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"CSV Output Directory: {self.csv_dir}", "DEBUG")
 
     def build_csvs_from_json(self):
         """
@@ -61,7 +63,7 @@ class VisaCsvBuilder:
         - Performs significant disk I/O (read/write).
         """
         if LOCAL_DEBUG:
-            logger.debug("Starting CSV build process (per table)...")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Starting CSV build process (per table)...", "DEBUG")
             
         if not os.path.exists(self.json_path):
             logger.error(f"JSON file not found at {self.json_path}")
@@ -71,7 +73,7 @@ class VisaCsvBuilder:
 
         # Clear existing CSV files to prevent stale data from lingering.
         if LOCAL_DEBUG:
-            logger.debug(f"Clearing existing CSV files from {self.csv_dir}...")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Clearing existing CSV files from {self.csv_dir}...", "DEBUG")
             
         for filename in os.listdir(self.csv_dir):
             if filename.endswith(".csv"):
@@ -79,7 +81,7 @@ class VisaCsvBuilder:
                 if os.path.exists(file_path):
                     os.remove(file_path)
                     if LOCAL_DEBUG:
-                        logger.debug(f"  Removed old file: {filename}")
+                        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  Removed old file: {filename}", "DEBUG")
 
         with open(self.json_path, "rb") as f:
             raw_data = f.read()
@@ -95,7 +97,7 @@ class VisaCsvBuilder:
         # Start the recursive traversal from the root node.
         self._traverse_and_build(data, ["OPEN-AIR"])
         if LOCAL_DEBUG:
-            logger.debug("CSV build process complete.")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "CSV build process complete.", "DEBUG")
 
     def _traverse_and_build(self, node, current_path):
         """
@@ -168,7 +170,7 @@ class VisaCsvBuilder:
         
         if LOCAL_DEBUG:
             if os.path.exists(csv_filepath):
-                logger.success(f"  Successfully wrote {len(data_list)} rows to {csv_filepath}")
+                matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  Successfully wrote {len(data_list)} rows to {csv_filepath}", "SUCCESS")
             else:
                 logger.error(f"  Failed to write CSV file {csv_filepath}")
 

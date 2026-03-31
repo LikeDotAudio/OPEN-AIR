@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # oaComSNMP/Entry.py
 #
 # The sole orchestrator and public gatekeeper for the SNMP Communication Module.
@@ -106,7 +108,7 @@ def main():
     initialize_paths()
     cfg = Config.get_instance()
     
-    SNMP_LOGGER.info("🚀 [SNMP] Launching Standalone SNMP Module...")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🚀 [SNMP] Launching Standalone SNMP Module...", "INFO")
     
     # In standalone mode, we might need to initialize the MQTT connection manually
     from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager

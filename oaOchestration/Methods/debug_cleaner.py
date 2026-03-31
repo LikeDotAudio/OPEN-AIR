@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/debug_cleaner.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
@@ -7,7 +9,7 @@
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -25,21 +27,21 @@ app_constants = Config.get_instance()  # Get the singleton instance
 def clear_debug_directory():
     """Clears all files within the refactored log directory."""
     from ..Core.path_initializer import DATA_LOGS_DIR
-    if LOCAL_DEBUG: logger.debug("▶️ Entering clear_debug_directory.")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "▶️ Entering clear_debug_directory.", "DEBUG")
 
     if DATA_LOGS_DIR.exists():
-        if LOCAL_DEBUG: logger.debug(f"🔍 Log directory found: {DATA_LOGS_DIR}. Proceeding to clear contents.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔍 Log directory found: {DATA_LOGS_DIR}. Proceeding to clear contents.", "DEBUG")
         try:
             for item in DATA_LOGS_DIR.iterdir():
                 try:
                     if item.is_file():
                         item.unlink()
-                        if LOCAL_DEBUG: logger.success(f"🗑️ Successfully deleted: {item}")
+                        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🗑️ Successfully deleted: {item}", "SUCCESS")
                 except Exception as e:
                     if LOCAL_DEBUG: logger.error(f"❌ Failed to delete {item}: {e}")
-            if LOCAL_DEBUG: logger.debug("🧹 Finished clearing log directory.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🧹 Finished clearing log directory.", "DEBUG")
         except Exception as e:
             if LOCAL_DEBUG: logger.error(f"❌ Error clearing log directory: {e}")
     else:
-        if LOCAL_DEBUG: logger.debug(f"⏩ Log directory not found: {DATA_LOGS_DIR}. Skipping clear.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"⏩ Log directory not found: {DATA_LOGS_DIR}. Skipping clear.", "DEBUG")
 

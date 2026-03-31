@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # FileReaders/editor.py
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
@@ -10,7 +12,6 @@ from tkinter import ttk
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
@@ -62,7 +63,7 @@ def sort_treeview(tab, column_name, ascending):
     """Sorts the data model and refreshes the display."""
     TreeSortingEngine.sort(tab.tree_data, column_name, ascending)
     populate_marker_tree(tab)
-    logger.success(f"✅ Sorted by '{column_name}' {'Asc' if ascending else 'Desc'}")
+    matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Sorted by '{column_name}' {'Asc' if ascending else 'Desc'}", "SUCCESS")
 
 def populate_marker_tree(tab):
     """Re-populates the treeview from the internal data model."""
@@ -84,5 +85,5 @@ def delete_selected_row(tab, event):
         idx = tab.marker_tree.index(item)
         if idx < len(tab.tree_data):
             tab.marker_tree.delete(item); del tab.tree_data[idx]
-            if LOCAL_DEBUG: logger.success(f"✅ Deleted row {idx+1}")
+            matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Deleted row {idx+1}", "SUCCESS")
     save_markers_file_internally(tab)

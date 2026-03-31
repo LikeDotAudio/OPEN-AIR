@@ -1,3 +1,4 @@
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/preset_pusher.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
@@ -25,12 +26,12 @@ from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
+LOCAL_DEBUG = True
 
 # --- Global Scope Variables ---
 current_version = "20250919.231000.1"
 current_version_hash = 20250919 * 231000 * 1
 current_file = f"{os.path.basename(__file__)}"
-LOCAL_DEBUG = True   
 
 HZ_TO_MHZ = 1_000_000
 
@@ -87,7 +88,7 @@ class PresetPusherWorker:
         current_function_name = inspect.currentframe().f_code.co_name
         self.mqtt_controller = mqtt_controller
         if LOCAL_DEBUG:
-            logger.debug(f"🟢️️️🟢 The preset pusher has been summoned!")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 The preset pusher has been summoned!", "DEBUG")
 
     # Configures the instrument based on a selected preset.
     # This method takes a list of preset values, maps them to specific instrument
@@ -106,7 +107,7 @@ class PresetPusherWorker:
         """
         current_function_name = inspect.currentframe().f_code.co_name
         if LOCAL_DEBUG:
-            logger.debug(f"🟢️️️🟢 Attuning the instrument to the selected preset. Ready the coils!")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 Attuning the instrument to the selected preset. Ready the coils!", "DEBUG")
 
         # Mapping the input list to readable variables
         keys = [
@@ -152,7 +153,7 @@ class PresetPusherWorker:
             self.mqtt_controller.publish_message(
                 topic=FREQ_TRIGGER, subtopic="", value=False
             )
-            if LOCAL_DEBUG: logger.success("✅ Start/Stop frequencies set.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Start/Stop frequencies set.", "SUCCESS")
         except Exception as e:
             logger.exception("❌ Error setting Start/Stop frequencies")
             if LOCAL_DEBUG:
@@ -176,7 +177,7 @@ class PresetPusherWorker:
             self.mqtt_controller.publish_message(
                 topic=RBW_TRIGGER, subtopic="", value=False
             )
-            if LOCAL_DEBUG: logger.success("✅ Resolution Bandwidth (RBW) set.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Resolution Bandwidth (RBW) set.", "SUCCESS")
 
         # --- Conditional: Set VBW ---
         if (
@@ -192,7 +193,7 @@ class PresetPusherWorker:
             self.mqtt_controller.publish_message(
                 topic=VBW_TRIGGER, subtopic="", value=False
             )
-            if LOCAL_DEBUG: logger.success("✅ Video Bandwidth (VBW) set.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Video Bandwidth (VBW) set.", "SUCCESS")
 
         # --- Conditional: Set Amplitude Rig ---
         ref_level = preset_dict.get("RefLevel")
@@ -241,10 +242,10 @@ class PresetPusherWorker:
             self.mqtt_controller.publish_message(
                 topic=TRACE_TRIGGER, subtopic="", value=False
             )
-            if LOCAL_DEBUG: logger.success("✅ Trace modes set.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Trace modes set.", "SUCCESS")
 
         if LOCAL_DEBUG:
-            logger.success(f"🟢️️️✅ The tuning sequence is complete! All command triggers have been sent.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️✅ The tuning sequence is complete! All command triggers have been sent.", "SUCCESS")
 
 
 if __name__ == "__main__":

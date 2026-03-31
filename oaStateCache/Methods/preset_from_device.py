@@ -1,3 +1,4 @@
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/preset_from_device.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
@@ -27,6 +28,7 @@ import time
 from oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
+LOCAL_DEBUG = True
 
 
 # --- Global Scope Variables (as per your instructions) ---
@@ -36,7 +38,6 @@ current_time = datetime.datetime.now().strftime("%H%M%S")
 current_version = f"{current_date}.{current_time}.3"
 current_version_hash = int(current_date) * int(current_time) * 3
 current_file = f"{os.path.basename(__file__)}"
-LOCAL_DEBUG = True   
 
 # --- MQTT Topic Constants (No Magic Numbers) ---
 ROOT_TOPIC = "OPEN-AIR/yak/Memory"
@@ -73,7 +74,7 @@ class PresetFromDeviceWorker:
         self.preset_list_event = threading.Event()
 
         if LOCAL_DEBUG:
-            logger.debug(f"🟢️️️🟢 Initializing preset worker and subscribing to root topic.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 Initializing preset worker and subscribing to root topic.", "DEBUG")
 
         # Subscribe to the master topic and all its sub-levels
         self.mqtt_util.add_subscriber(
@@ -118,7 +119,7 @@ class PresetFromDeviceWorker:
         """
         current_function_name = inspect.currentframe().f_code.co_name
         if LOCAL_DEBUG:
-            logger.debug(f"🟢️️️🟢 Triggering device to send preset catalog.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 Triggering device to send preset catalog.", "DEBUG")
 
         try:
             # Set the trigger to true
@@ -132,7 +133,7 @@ class PresetFromDeviceWorker:
                 topic=NAB_TRIGGER_TOPIC, subtopic="", value=False, retain=False
             )
 
-            if LOCAL_DEBUG: logger.success("✅ TRIGGER sent. Awaiting preset catalog response...")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ TRIGGER sent. Awaiting preset catalog response...", "SUCCESS")
             return True
 
         except Exception as e:
@@ -156,7 +157,7 @@ class PresetFromDeviceWorker:
         """
         current_function_name = inspect.currentframe().f_code.co_name
         if LOCAL_DEBUG:
-            logger.debug(f"🟢️️️🟢 Parsing raw preset string for valid '.STA' files.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 Parsing raw preset string for valid '.STA' files.", "DEBUG")
 
         if not raw_preset_string:
             return []
@@ -174,7 +175,7 @@ class PresetFromDeviceWorker:
             if filename.upper().endswith(".STA"):
                 valid_presets.append(filename)
 
-        if LOCAL_DEBUG: logger.success(f"✅ Found {len(valid_presets)} valid presets.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Found {len(valid_presets)} valid presets.", "SUCCESS")
         return valid_presets
 
     # Publishes a list of preset filenames to the MQTT preset repository.
@@ -191,7 +192,7 @@ class PresetFromDeviceWorker:
         """
         current_function_name = inspect.currentframe().f_code.co_name
         if LOCAL_DEBUG:
-            logger.debug(f"🟢️️️🟢 Publishing {len(preset_list)} presets as monolithic JSON blobs to repository.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 Publishing {len(preset_list)} presets as monolithic JSON blobs to repository.", "DEBUG")
 
         num_published = 0
         for i, filename in enumerate(preset_list):
@@ -248,7 +249,7 @@ class PresetFromDeviceWorker:
         """
         current_function_name = inspect.currentframe().f_code.co_name
         if LOCAL_DEBUG:
-            logger.debug(f"🟢️️️🟢 Pushing preset filename '{preset_filename}' to device and triggering save.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 Pushing preset filename '{preset_filename}' to device and triggering save.", "DEBUG")
 
         try:
             # 1. Push the filename value via MQTT
@@ -269,7 +270,7 @@ class PresetFromDeviceWorker:
                 topic=SET_TRIGGER_TOPIC, subtopic="", value=False, retain=False
             )
 
-            if LOCAL_DEBUG: logger.success("✅ Preset filename sent and save triggered.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Preset filename sent and save triggered.", "SUCCESS")
             return True
 
         except Exception as e:

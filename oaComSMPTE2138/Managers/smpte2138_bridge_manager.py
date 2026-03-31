@@ -39,7 +39,9 @@ from oaConfiguration.FileReaders.config_reader import Config
 from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
 from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
 
-LOCAL_DEBUG = True
+def _is_debug():
+    from oaLogging.Methods.matrix_gate import is_debug_allowed
+    return is_debug_allowed(system="CORE", element="SMPTE2138")
 
 class SMPTE2138BridgeManager:
     """
@@ -167,3 +169,38 @@ class SMPTE2138BridgeManager:
             retain=False
         )
         matrix_log("core", "smpte2138", "_publish_command", f"🚀📤📤 [SMPTE2138] Published COMMAND to {smpte2138_topic} ({value})", "INFO")
+
+    def _on_remote_control(self, msg):
+        """Processes remote start/stop commands."""
+        try:
+            payload = msg.payload
+            data = orjson.loads(payload) if isinstance(payload, (bytes, str)) else payload
+            
+            if "active" in data:
+                new_state = bool(data["active"])
+                if new_state != self.bridge_enabled:
+                    self.bridge_enabled = new_state
+                    status_msg = "ENABLED" if self.bridge_enabled else "DISABLED"
+                    matrix_log("core", "smpte2138", "_on_remote_control", f"🔄 [BRIDGE] Bridge translation is now {status_msg}.", "INFO")
+                    self._publish_bridge_status()
+        except Exception as e:
+            SMPTE2138_LOGGER.error(f"❌ [BRIDGE] Remote control failure: {e}")
+
+    def _publish_bridge_status(self):
+        """Publishes the current operational status of the bridge."""
+        status_payload = {
+            "active": self.bridge_enabled,
+            "status": "RUNNING" if self.bridge_enabled else "STOPPED",
+            "ts": time.time()
+        }
+        self.mqtt.publish(
+            topic="OPEN-AIR/System/Status/SMPTE2138/Bridge",
+            payload=orjson.dumps(status_payload).decode(),
+            qos=0,
+            retain=True
+        )
+
+    def _on_internal_action(self, msg):
+        """Fallback handler for raw MQTT actions."""
+        if not self.bridge_enabled: return
+        self.handle_router_event(msg.topic, msg.payload)

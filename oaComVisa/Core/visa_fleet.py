@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Core/visa_fleet.py
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
@@ -8,7 +10,6 @@ import threading
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -28,7 +29,7 @@ class FleetOrchestrator(FleetCommandQueueMixin, FleetInventoryMixin, FleetScanMi
     """Commander for the VISA instrument fleet, managing discovery and communication."""
     
     def __init__(self, mqtt_connection_manager=None, subscriber_router=None, aes70_manager=None):
-        if LOCAL_DEBUG: logger.debug("💳🚢🔍 [VISA] Initializing FleetOrchestrator.")
+        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🚢🔍 [VISA] Initializing FleetOrchestrator.", "DEBUG")
 
         self.json_builder = VisaJsonBuilder()
         self.csv_builder = VisaCsvBuilder()
@@ -50,7 +51,7 @@ class FleetOrchestrator(FleetCommandQueueMixin, FleetInventoryMixin, FleetScanMi
         self._running = False
         self.initial_scan_complete_event = threading.Event()
 
-        if LOCAL_DEBUG: logger.success("✅ [SUCCESS] FleetOrchestrator initialized.")
+        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ [SUCCESS] FleetOrchestrator initialized.", "SUCCESS")
 
     def set_callbacks(self, on_inventory_update, on_device_response, on_device_error, on_proxy_status):
         self.cb_inventory = on_inventory_update
@@ -60,10 +61,10 @@ class FleetOrchestrator(FleetCommandQueueMixin, FleetInventoryMixin, FleetScanMi
 
     def start(self):
         self._running = True
-        if LOCAL_DEBUG: logger.debug("💳🚢🔍 [VISA] FleetOrchestrator Started.")
+        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🚢🔍 [VISA] FleetOrchestrator Started.", "DEBUG")
 
     def stop(self):
         self._running = False
         if self.discovery_orchestrator: self.discovery_orchestrator.shutdown()
         if self.mqtt_bridge: self.mqtt_bridge.disconnect()
-        if LOCAL_DEBUG: logger.debug("💳🚢🔍 [VISA] FleetOrchestrator Stopped.")
+        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🚢🔍 [VISA] FleetOrchestrator Stopped.", "DEBUG")

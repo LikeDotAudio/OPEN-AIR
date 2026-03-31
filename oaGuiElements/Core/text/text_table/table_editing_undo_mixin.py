@@ -71,9 +71,9 @@ class TableEditingUndoMixin:
                 mqtt_publisher_service.publish_payload(
                     field_topic, orjson.dumps(row_data_after_undo).decode()
                 )
-                if LOCAL_DEBUG: TABLE_LOGGER.debug(f"MQTT Reverted: topic='{field_topic}', payload='{row_data_after_undo}'")
+                matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"MQTT Reverted: topic='{field_topic}', payload='{row_data_after_undo}'", "DEBUG")
 
-            if LOCAL_DEBUG: TABLE_LOGGER.success("Undo successful!")
+            matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Undo successful!", "SUCCESS")
         elif last_action["action"] == "delete":
             # Revert Tree: Re-insert the row
             device_key = last_action["device_key"]
@@ -94,8 +94,8 @@ class TableEditingUndoMixin:
                 mqtt_publisher_service.publish_payload(
                     field_topic, orjson.dumps(old_row_data).decode()
                 )
-                if LOCAL_DEBUG: TABLE_LOGGER.debug(f"MQTT Restored (Undo Delete): topic='{field_topic}', payload='{old_row_data}'")
-            if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Undo: Re-inserted row for device {device_key}.")
+                matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"MQTT Restored (Undo Delete): topic='{field_topic}', payload='{old_row_data}'", "DEBUG")
+            matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Undo: Re-inserted row for device {device_key}.", "DEBUG")
         elif last_action["action"] == "add":
             item_id = last_action["item_id"]
             device_key = last_action["device_key"]
@@ -108,5 +108,5 @@ class TableEditingUndoMixin:
                     mqtt_publisher_service.publish_payload(
                         field_topic, orjson.dumps({}).decode()
                     )  # Publish empty dict for clear
-                    if LOCAL_DEBUG: TABLE_LOGGER.debug(f"MQTT Removed (Undo Add): topic='{field_topic}', payload='{{}}'")
-                if LOCAL_DEBUG: TABLE_LOGGER.debug(f"Undo: Removed added row with item_id: {item_id}, device_key: {device_key}.")
+                    matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"MQTT Removed (Undo Add): topic='{field_topic}', payload='{{}}'", "DEBUG")
+                matrix_log("ui", "gui_elements", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Undo: Removed added row with item_id: {item_id}, device_key: {device_key}.", "DEBUG")

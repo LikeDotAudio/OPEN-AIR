@@ -1,3 +1,4 @@
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/visa_list_visa_resources.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -8,7 +9,7 @@ import pyvisa
 import inspect
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -29,7 +30,7 @@ def list_visa_resources():
     - Performs blocking I/O to scan system hardware buses and network segments.
     """
     current_function = inspect.currentframe().f_code.co_name
-    if LOCAL_DEBUG: logger.debug("💳 Listing VISA resources... Let's find some devices!")
+    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 Listing VISA resources... Let's find some devices!", "DEBUG")
     try:
         rm = pyvisa.ResourceManager()
 
@@ -55,7 +56,7 @@ def list_visa_resources():
         # USB is typically most stable for local use.
         resources = usb_resources + tcpip_resources + other_resources
 
-        if LOCAL_DEBUG: logger.debug(f"💳 Found VISA resources (Reordered): {resources}.")
+        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 Found VISA resources (Reordered): {resources}.", "DEBUG")
         return list(resources)
     except Exception as e:
         error_msg = f"💳 ❌ Error listing VISA resources: {e}."

@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # 3_Command_Router/command_router.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -9,7 +11,6 @@ from tkinter import ttk
 import time
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 from oaComBroker.Core.protocol_router.manager import ProtocolRouter
@@ -261,15 +262,15 @@ class CommandRouter(tk.Frame):
         src_val = self._get_val_from_utp(self._src_utp) if self._src_utp else None
         dest_val = self._get_val_from_utp(self._dest_utp) if self._dest_utp else None
 
-        logger.info(f"🔗 CommandRouter: SPLINK button clicked. Source='{src}' ({src_val}), Dest='{dest}' ({dest_val})")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔗 CommandRouter: SPLINK button clicked. Source='{src}' ({src_val}), Dest='{dest}' ({dest_val})", "INFO")
         
         if not src or not dest: 
             logger.warning("🔗 CommandRouter: Cannot splink, source or destination is empty!")
             return
         
-        logger.debug(f"🔗 CommandRouter: Calling router.publish_splink...")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔗 CommandRouter: Calling router.publish_splink...", "DEBUG")
         if self.router.publish_splink(src, dest, s_val=src_val, d_val=dest_val):
-            logger.success(f"🔗 CommandRouter: Splink command published successfully.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔗 CommandRouter: Splink command published successfully.", "SUCCESS")
             # Visual feedback
             self.splink_btn.configure(text="✅ CREATED", fg="#00ff00")
             

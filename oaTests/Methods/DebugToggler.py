@@ -31,6 +31,7 @@ import os
 import re
 from pathlib import Path
 from loguru import logger
+LOCAL_DEBUG = True
 
 def _set_debug_state(project_root, target_state: bool, console_print_func=None):
     """

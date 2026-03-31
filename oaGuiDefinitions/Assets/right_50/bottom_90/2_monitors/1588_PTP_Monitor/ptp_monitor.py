@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # 1588_PTP_Monitor/ptp_monitor.py
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
@@ -21,7 +23,6 @@ from oaConfiguration.FileReaders.config_reader import Config
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
-LOCAL_DEBUG = True
 app_constants = Config.get_instance()
 
 class PtpMonitor(tk.Frame, TransparencyMixin):
@@ -48,7 +49,7 @@ class PtpMonitor(tk.Frame, TransparencyMixin):
         self.meter_panel = PTPMeterPanel(self.meter_container, builder) if builder else None
         
         register_ptp_callback(self.on_ptp_packet)
-        if LOCAL_DEBUG: logger.debug("🖥️ PTP Monitor Initialized.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🖥️ PTP Monitor Initialized.", "DEBUG")
 
     def _find_builder(self, widget):
         from oaGuiBuilder.Workers.builder import DynamicGuiBuilder

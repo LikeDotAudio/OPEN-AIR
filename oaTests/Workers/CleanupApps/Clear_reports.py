@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Workers/CleanupApps/Clear_reports.py
 # Author: Anthony Peter Kuzub
 # Version: 20260323.2045.1
@@ -24,7 +26,7 @@ def cleanup_reports():
     project_root = os.getcwd()
     target = os.path.join(project_root, "oaReports")
     
-    logger.info(f"📡📤📤 [CLEAR_REPORTS] Starting Reports cleanup...")
+    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡📤📤 [CLEAR_REPORTS] Starting Reports cleanup...", "INFO")
     
     if not os.path.exists(target):
         logger.warning(f"   ⚠️ Directory not found: {os.path.relpath(target, project_root)}")
@@ -36,7 +38,7 @@ def cleanup_reports():
                  if os.path.isfile(os.path.join(target, f))]
         
         if not files:
-            logger.info(f"   ℹ️ {os.path.relpath(target, project_root)} is already empty.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   ℹ️ {os.path.relpath(target, project_root)} is already empty.", "INFO")
             return
 
         # Sort files by modification time (newest first)
@@ -45,12 +47,12 @@ def cleanup_reports():
         latest_report = files[0]
         old_reports = files[1:]
         
-        logger.info(f"   💎 Preserving latest report: {os.path.basename(latest_report)}")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   💎 Preserving latest report: {os.path.basename(latest_report)}", "INFO")
         
         files_purged = 0
         for file_path in old_reports:
             try:
-                logger.info(f"  Deleting old report: {file_path}")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  Deleting old report: {file_path}", "INFO")
                 os.unlink(file_path)
                 files_purged += 1
             except Exception as e:
@@ -61,16 +63,16 @@ def cleanup_reports():
             item_path = os.path.join(target, item)
             if os.path.isdir(item_path):
                 try:
-                    logger.info(f"  Deleting old report directory: {item_path}")
+                    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  Deleting old report directory: {item_path}", "INFO")
                     shutil.rmtree(item_path)
                     files_purged += 1
                 except Exception as e:
                     logger.error(f"   ⚠️ Failed to delete directory {item_path}. Reason: {e}")
 
         if files_purged > 0:
-            logger.info(f"   ✅ Purged {files_purged} old items from: {os.path.relpath(target, project_root)}")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   ✅ Purged {files_purged} old items from: {os.path.relpath(target, project_root)}", "INFO")
         else:
-            logger.info("   ℹ️ No old reports required purging.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "   ℹ️ No old reports required purging.", "INFO")
 
     except Exception as e:
         logger.error(f"   💥 CRITICAL: Error during report cleanup: {e}")

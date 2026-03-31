@@ -18,6 +18,8 @@ from pathlib import Path
 from loguru import logger
 from typing import Callable, List
 
+LOCAL_DEBUG = True
+
 # --- Path Guard for Protobuf Imports ---
 interface_path = Path(__file__).resolve().parents[2] / "oaComSMPTE2138" / "Interface"
 if str(interface_path) not in sys.path:
@@ -32,7 +34,9 @@ from oaLogging.Core.logger import SMPTE2138_LOGGER
 from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
 from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
 
-LOCAL_DEBUG = True
+def _is_debug():
+    from oaLogging.Methods.matrix_gate import is_debug_allowed
+    return is_debug_allowed(system="UI", element="SMPTE2138")
 
 class SMPTE2138MonitorManager:
     """

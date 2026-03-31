@@ -1,3 +1,4 @@
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/marker_peak_re_publisher.py
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
@@ -26,7 +27,6 @@ import time
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 
 # --- Global Scope Variables ---
@@ -65,13 +65,13 @@ class MarkerPeakPublisher:
     def __init__(self, mqtt_util: MqttControllerUtility, starting_device_id: str):
         current_function_name = inspect.currentframe().f_code.co_name
 
-        if LOCAL_DEBUG: logger.debug(f"🟢️️️🟢 Initializing Peak Publisher for batch starting with {starting_device_id}. STARTING MAP GENERATION.")
+        matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🟢 Initializing Peak Publisher for batch starting with {starting_device_id}. STARTING MAP GENERATION.", "DEBUG")
 
         self.mqtt_util = mqtt_util
         self.starting_device_id = starting_device_id
 
         self.marker_to_device_map = self._generate_device_map(starting_device_id)
-        if LOCAL_DEBUG: logger.debug(f"🟢️️️🔍 Generated Map: {self.marker_to_device_map}")
+        matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🟢️️️🔍 Generated Map: {self.marker_to_device_map}", "DEBUG")
 
         # Register Subscription
         self._setup_subscriptions()
@@ -142,7 +142,7 @@ class MarkerPeakPublisher:
         """
         current_function_name = inspect.currentframe().f_code.co_name
 
-        if LOCAL_DEBUG: logger.debug(f"🐐🟢 PUBLISHER HANDLER FIRED for topic: {topic}")
+        matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🐐🟢 PUBLISHER HANDLER FIRED for topic: {topic}", "DEBUG")
 
         try:
             # 1. Extract Marker ID and Peak Value
@@ -168,9 +168,9 @@ class MarkerPeakPublisher:
                         final_peak_topic, "", float_peak_value, retain=True
                     )
 
-                    if LOCAL_DEBUG: logger.success(f"🐐💾 REPUBLISH SUCCESS: {device_id} ({marker_id}) peak: {float_peak_value} dBm. Final Topic: {final_peak_topic}")
+                    matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🐐💾 REPUBLISH SUCCESS: {device_id} ({marker_id}) peak: {float_peak_value} dBm. Final Topic: {final_peak_topic}", "SUCCESS")
                 else:
-                    if LOCAL_DEBUG: logger.debug(f"🐐🟡 REPUBLISH WARNING: Peak received for {marker_id} but no Device-ID found in batch map.")
+                    matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🐐🟡 REPUBLISH WARNING: Peak received for {marker_id} but no Device-ID found in batch map.", "DEBUG")
 
             except ValueError:
                 # This block handles "nan" or non-numeric strings, which is your requested error spot.

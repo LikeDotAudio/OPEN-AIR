@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/active_marker_tune_and_collect.py
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
@@ -11,7 +13,6 @@ import time
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
@@ -38,7 +39,7 @@ class MarkerGoGetterWorker:
     """
 
     def __init__(self, mqtt_util: MqttControllerUtility):
-        if LOCAL_DEBUG: logger.debug("🟢️️️🟢 Initializing the tireless Marker Go-Getter!")
+        matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟢️️️🟢 Initializing the tireless Marker Go-Getter!", "DEBUG")
 
         self.mqtt_util = mqtt_util
         self.stop_event = threading.Event()
@@ -65,7 +66,7 @@ class MarkerGoGetterWorker:
         self.mqtt_util.add_subscriber(TOPIC_DEVICE_FREQ_WILDCARD, self._on_marker_data_update)
         self.mqtt_util.add_subscriber(TOPIC_MARKER_NAB_OUTPUT_WILDCARD, lambda t, p: self.peaks_received_event.set())
 
-        logger.success("✅ Go-Getter is now listening for commands and marker data.")
+        matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Go-Getter is now listening for commands and marker data.", "SUCCESS")
 
     def _on_marker_data_update(self, topic, payload):
         self.repository.on_marker_update(topic, payload)
@@ -78,13 +79,13 @@ class MarkerGoGetterWorker:
                 is_start_command = str(payload).lower() == "true"
 
             if is_start_command and (self.processing_thread is None or not self.processing_thread.is_alive()):
-                logger.debug("🟢 START command received. Beginning peak hunter loop.")
+                matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟢 START command received. Beginning peak hunter loop.", "DEBUG")
                 self.stop_event.clear()
                 self.first_run = True
                 self.processing_thread = threading.Thread(target=self._processing_loop, daemon=True)
                 self.processing_thread.start()
             elif not is_start_command:
-                logger.debug("🔴 STOP command received. Halting loop.")
+                matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔴 STOP command received. Halting loop.", "DEBUG")
                 self.stop_event.set()
                 if self.processing_thread: self.processing_thread.join(timeout=0.5)
                 self.processing_thread = None
@@ -106,7 +107,7 @@ class MarkerGoGetterWorker:
 
     def _processing_loop(self):
         """Orchestrates the batch marker query sequence."""
-        if LOCAL_DEBUG: logger.success("✅ Peak Hunter loop started.")
+        matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Peak Hunter loop started.", "SUCCESS")
 
         while not self.stop_event.is_set():
             self._set_instrument_frequency_span()
@@ -123,7 +124,7 @@ class MarkerGoGetterWorker:
                 
                 # 2. Query NAB
                 self.instrument.trigger_nab_query()
-                logger.success(f"✅ Batch {i//6 + 1} processed.")
+                matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Batch {i//6 + 1} processed.", "SUCCESS")
 
-            if LOCAL_DEBUG: logger.success("✅ Full marker pass finished.")
+            matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Full marker pass finished.", "SUCCESS")
             time.sleep(1.0)

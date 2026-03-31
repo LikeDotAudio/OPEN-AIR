@@ -20,7 +20,6 @@ import orjson
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 from oaLogging.Core.logger import MIDI_LOGGER as midi_logger

@@ -1,3 +1,13 @@
+import inspect
+import importlib
+import os
+import sys
+import pathlib
+from typing import Dict, Any, Type, Callable, Optional
+from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
+from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
+
 # factory/widget_registry.py
 # Author: Anthony Peter Kuzub
 # Version: 20260314.120000.REV01
@@ -18,8 +28,6 @@ Responsibilities:
       creator classes.
     - Provide a decorator-based interface for self-registration of widgets.
     - Implement an automated discovery mechanism to scan and import widget
-from oaLogging.Methods.matrix_gate import matrix_log
-import inspect
       modules from the 'workers/builder' directory.
 
 Constraints:
@@ -27,9 +35,6 @@ Constraints:
       resolve the project root.
     - Assumes that widget modules are structured as importable Python files.
 """
-
-from typing import Dict, Any, Type, Callable, Optional
-from loguru import logger
 
 # LOCAL_DEBUG: Toggles verbose tracing for widget discovery and registration.
 
@@ -110,11 +115,6 @@ class WidgetRegistry:
         if cls._initialized:
             return
 
-        import os
-        import importlib
-        import sys
-        from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
-        
         # ⚡ AUTO-DISCOVERY: Resolve absolute path to ensure consistent discovery.
         base_path = GLOBAL_PROJECT_ROOT / "oaGuiElements"
         
@@ -150,5 +150,4 @@ class WidgetRegistry:
                         pass
         
         cls._initialized = True
-        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"✅ WidgetRegistry: Discovered {len(cls._registry, level="DEBUG")
-                     f"types from {count} modules.")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"✅ WidgetRegistry: Discovered {len(cls._registry)} types from {count} modules.", level="DEBUG")

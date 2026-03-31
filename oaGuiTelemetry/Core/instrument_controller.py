@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Core/instrument_controller.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -7,7 +9,6 @@
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 HZ_TO_MHZ = 1_000_000
 
 # YAK Frequency Topics
@@ -32,12 +33,12 @@ class InstrumentController:
 
     def set_span(self, min_freq_mhz, max_freq_mhz):
         """Sets the instrument start/stop frequencies in Hz."""
-        if LOCAL_DEBUG: logger.debug(f"🔵 Setting instrument span from {min_freq_mhz} MHz to {max_freq_mhz} MHz.")
+        matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔵 Setting instrument span from {min_freq_mhz} MHz to {max_freq_mhz} MHz.", "DEBUG")
         self.mqtt_util.publish_message(TOPIC_FREQ_START_INPUT, "", int(min_freq_mhz * HZ_TO_MHZ), retain=True)
         self.mqtt_util.publish_message(TOPIC_FREQ_STOP_INPUT, "", int(max_freq_mhz * HZ_TO_MHZ), retain=True)
         self.mqtt_util.publish_message(TOPIC_FREQ_TRIGGER, "", True, retain=False)
         self.mqtt_util.publish_message(TOPIC_FREQ_TRIGGER, "", False, retain=False)
-        if LOCAL_DEBUG: logger.success("✅ Instrument span set successfully.")
+        matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Instrument span set successfully.", "SUCCESS")
 
     def place_markers_batch(self, batch_frequencies_mhz):
         """
@@ -47,16 +48,16 @@ class InstrumentController:
             marker_topic = f"{TOPIC_MARKER_PLACE_BASE}/marker_{j}_freq_hz/value"
             freq_hz = int(freq_mhz * HZ_TO_MHZ)
             self.mqtt_util.publish_message(topic=marker_topic, subtopic="", value=freq_hz, retain=True)
-            if LOCAL_DEBUG: logger.debug(f"🐐🔵 Place Marker {j}: {freq_mhz} MHz -> {freq_hz} Hz.")
+            matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🐐🔵 Place Marker {j}: {freq_mhz} MHz -> {freq_hz} Hz.", "DEBUG")
 
         # Trigger placement
         self.mqtt_util.publish_message(TOPIC_MARKER_PLACE_TRIGGER, "", True, retain=False)
         self.mqtt_util.publish_message(TOPIC_MARKER_PLACE_TRIGGER, "", False, retain=False)
-        if LOCAL_DEBUG: logger.debug("🟠 Marker placement command triggered.")
+        matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🟠 Marker placement command triggered.", "DEBUG")
 
     def trigger_nab_query(self):
         """Triggers NAB to collect marker peak data."""
-        if LOCAL_DEBUG: logger.debug("🔵 Sending NAB query to retrieve current peaks...")
+        matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔵 Sending NAB query to retrieve current peaks...", "DEBUG")
         self.mqtt_util.publish_message(TOPIC_MARKER_NAB_TRIGGER, "", True, retain=False)
         self.mqtt_util.publish_message(TOPIC_MARKER_NAB_TRIGGER, "", False, retain=False)
-        if LOCAL_DEBUG: logger.success("✅ NAB peak retrieval initiated.")
+        matrix_log("ui", "telemetry", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ NAB peak retrieval initiated.", "SUCCESS")

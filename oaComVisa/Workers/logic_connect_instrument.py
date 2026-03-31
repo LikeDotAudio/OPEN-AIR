@@ -1,3 +1,4 @@
+from oaLogging.Methods.matrix_gate import matrix_log
 # oaComVisa/Workers/logic_connect_instrument.py
 # Author: Anthony Peter Kuzub
 # Version: 20260322.1130.1
@@ -9,7 +10,7 @@ import inspect
 import datetime
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -57,7 +58,7 @@ class VisaConnector:
         - Configures instrument timeout (5s) and termination characters.
         """
         current_function = inspect.currentframe().f_code.co_name
-        if LOCAL_DEBUG: logger.debug(f"💳 Connecting to instrument: {resource_name}. Fingers crossed!")
+        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 Connecting to instrument: {resource_name}. Fingers crossed!", "DEBUG")
         try:
             rm = pyvisa.ResourceManager()
             inst = rm.open_resource(resource_name)
@@ -68,7 +69,7 @@ class VisaConnector:
             inst.write_termination = "\n"
             inst.query_delay = 0.1
 
-            if LOCAL_DEBUG: logger.success(f"💳 Connection successful to {resource_name}. We're in!")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 Connection successful to {resource_name}. We're in!", "SUCCESS")
             return inst
         except Exception as e:
             error_msg = f"💳 ❌ An unexpected error occurred while connecting to {resource_name}: {e}."

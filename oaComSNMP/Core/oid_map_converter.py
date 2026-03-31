@@ -27,7 +27,6 @@ from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger
 from oaLogging.Methods.matrix_gate import matrix_log
 
 # LOCAL_DEBUG can be set or passed if needed
-LOCAL_DEBUG = True
 
 class OidMapConverter:
     """

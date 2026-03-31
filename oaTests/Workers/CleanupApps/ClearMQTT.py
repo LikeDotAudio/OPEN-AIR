@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Workers/CleanupApps/ClearMQTT.py
 # Author: Anthony Peter Kuzub
 # Version: 20260323.2030.1
@@ -11,7 +13,6 @@ import argparse
 import logging
 import paho.mqtt.client as mqtt
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 # Configure standard logging
 logging.basicConfig(
@@ -49,7 +50,7 @@ class MQTTSweeper:
 
     def sweep(self):
         """Discovers and deletes all topics (including retained) under the configured base topic."""
-        if LOCAL_DEBUG: logger.info(f"📡📤📤 [CLEAR_MQTT] Starting MQTT Deep Sweep on {self.host}:{self.port} (Root: {self.base_topic})...")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡📤📤 [CLEAR_MQTT] Starting MQTT Deep Sweep on {self.host}:{self.port} (Root: {self.base_topic})...", "INFO")
         
         # ⚡ PRECONDITION VALIDATION: Verify port is open before connect()
         if not check_mqtt_port(self.host, self.port):
@@ -68,7 +69,7 @@ class MQTTSweeper:
         self.client.subscribe([(self.base_topic, 0), (wildcard, 0)])
         
         # 1. Discovery Phase
-        if LOCAL_DEBUG: logger.info(f"  └─ 🕵️ Discovery: Scanning for active/retained topics under {self.base_topic}...")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  └─ 🕵️ Discovery: Scanning for active/retained topics under {self.base_topic}...", "INFO")
         self.client.loop_start()
         
         # Wait for retained messages to arrive. 
@@ -78,11 +79,11 @@ class MQTTSweeper:
         self.client.loop_stop()
         
         if not self.topics:
-            if LOCAL_DEBUG: logger.info(f"✨ No topics found under {self.base_topic}. Broker is already clean.")
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✨ No topics found under {self.base_topic}. Broker is already clean.", "INFO")
             self.client.disconnect()
             return
 
-        if LOCAL_DEBUG: logger.info(f"  └─ 📋 Found {len(self.topics)} topics to clear.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  └─ 📋 Found {len(self.topics)} topics to clear.", "INFO")
 
         # 2. Deletion Phase
         self.client.loop_start() # Restart loop to handle PUBACKs
@@ -93,15 +94,15 @@ class MQTTSweeper:
         # Sort reverse to potentially delete children before parents
         for topic in sorted(list(self.topics), reverse=True):
             # To delete a retained topic, publish a zero-length payload with retain=True
-            logger.info(f"  Deleting MQTT topic: {topic}") # Log each topic being cleared
+            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  Deleting MQTT topic: {topic}", "INFO")
             msg_info = self.client.publish(topic, payload=None, qos=1, retain=True)
             publish_handles.append(msg_info)
             count += 1
             if count % 100 == 0:
-                if LOCAL_DEBUG: logger.info(f"    ├─ Sent clear command for {count} topics...")
+                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"    ├─ Sent clear command for {count} topics...", "INFO")
         
         # Wait for all deletion messages to be acknowledged by the broker
-        if LOCAL_DEBUG: logger.info("  └─ ⏳ Finalizing: Waiting for broker acknowledgments...")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "  └─ ⏳ Finalizing: Waiting for broker acknowledgments...", "INFO")
         for handle in publish_handles:
             # wait_for_publish can still raise if the loop is not running or other state issues.
             # but we assume the loop is running and we are within timeout.
@@ -111,7 +112,7 @@ class MQTTSweeper:
                 time.sleep(0.01)
         
         self.client.loop_stop()
-        if LOCAL_DEBUG: logger.info(f"✨ Successfully wiped {count} topics (and cleared retained state) from {self.base_topic} tree.")
+        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✨ Successfully wiped {count} topics (and cleared retained state) from {self.base_topic} tree.", "INFO")
         self.client.disconnect()
 
 

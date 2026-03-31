@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/delete_open_air.py
 # Author: Anthony Peter Kuzub
 # Version: 20260124.000000.1
@@ -8,7 +10,6 @@ import time
 import threading
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
 
@@ -27,7 +28,7 @@ class OpenAirTerminator:
         Starts the process: Subscribe -> Collect -> Delete.
         Runs in a background thread to avoid blocking GUI.
         """
-        if LOCAL_DEBUG: MQTT_LOGGER.debug("INITIATING OPEN-AIR TOPIC DELETION SEQUENCE")
+        matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "INITIATING OPEN-AIR TOPIC DELETION SEQUENCE", "DEBUG")
         threading.Thread(target=self._execution_thread, daemon=True).start()
 
     def _execution_thread(self):
@@ -73,7 +74,7 @@ class OpenAirTerminator:
             if count % 100 == 0:
                 time.sleep(0.1)
         
-        if LOCAL_DEBUG: MQTT_LOGGER.debug(f"Deleted {count} topics from OPEN-AIR tree.")
+        matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Deleted {count} topics from OPEN-AIR tree.", "DEBUG")
 
 # Standalone function for easy import
 def delete_open_air_tree(mqtt_connection_manager, state_cache_manager=None):
@@ -91,9 +92,9 @@ def delete_open_air_tree(mqtt_connection_manager, state_cache_manager=None):
         # Get all known topics from the cache
         # state_cache_manager.cache is a dict of topic->value
         topics = list(state_cache_manager.cache.keys())
-        if LOCAL_DEBUG: MQTT_LOGGER.debug(f"Sourced {len(topics)} topics from State Cache for deletion.")
+        matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Sourced {len(topics)} topics from State Cache for deletion.", "DEBUG")
     else:
-        if LOCAL_DEBUG: MQTT_LOGGER.debug("No State Cache provided. Cannot determine topics to delete.")
+        matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "No State Cache provided. Cannot determine topics to delete.", "DEBUG")
         # Fallback or error? For safety, we won't blindly guess.
         return
 

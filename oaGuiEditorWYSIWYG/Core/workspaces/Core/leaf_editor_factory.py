@@ -1,3 +1,5 @@
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
 # Core/leaf_editor_factory.py
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
@@ -88,7 +90,7 @@ class LeafEditorFactory:
                 if final != old_val: state_manager.update_state(final, path=full_path, source=source)
             except Exception as e:
                 from oaLogging.Entry import logger
-                logger.trace(f"LeafEditorFactory: Silently ignoring conversion error for '{v}': {e}")
+                matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"LeafEditorFactory: Silently ignoring conversion error for '{v}': {e}", "TRACE")
 
         entry.bind("<FocusIn>", focus_in)
         entry.bind("<FocusOut>", focus_out)

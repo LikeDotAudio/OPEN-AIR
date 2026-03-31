@@ -29,7 +29,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 from oaComBroker.Core.protocol_router.manager import ProtocolRouter 
 
 # LOCAL_DEBUG can be set or passed if needed
-LOCAL_DEBUG = True
 
 class SnmpLogMonitor:
     """

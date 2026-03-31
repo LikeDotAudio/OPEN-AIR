@@ -5,10 +5,11 @@
 # Description: Showtime/worker_showtime_clear_group_buttons.py
 
 import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -25,6 +26,6 @@ app_constants = Config.get_instance()  # Get the singleton instance
 # Outputs:
 #     None.
 def clear_group_buttons(showtime_tab_instance):
-    if LOCAL_DEBUG: logger.debug("🟢️️️🔵 Clearing group buttons.")
+    matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, "🟢️️️🔵 Clearing group buttons.", level="DEBUG")
     for widget in showtime_tab_instance.group_frame.winfo_children():
         widget.destroy()

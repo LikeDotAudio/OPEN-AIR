@@ -1,14 +1,26 @@
 # oaComREST/Managers/rest_manager.py
-# Author: Anthony Peter Kuzub
-# Version: 20260327.1830.1
 #
-# Description: Orchestrator for the REST API service with deep activity tracking.
+# Orchestrator for the REST API service. Manages the lifecycle of the 
+# FastAPI application and uvicorn worker thread.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260330.1600.1
 
 import importlib
 import threading
 import time
 import os
 from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 def check_fastapi_availability():
     """Checks if FastAPI and its required dependencies are installed."""
@@ -17,7 +29,7 @@ def check_fastapi_availability():
         importlib.import_module("uvicorn")
         return True
     except ImportError as e:
-        logger.error(f"❌ [REST] Dependency check failed: {e}")
+        matrix_log("core", "rest", "check_fastapi_availability", f"❌ [REST] Dependency check failed: {e}", "ERROR")
         return False
 
 from ..Constants.rest_constants import LOCAL_DEBUG, REST_HOST, REST_PORT, REST_CORS_ORIGINS
@@ -28,7 +40,6 @@ from ..Methods.port_utils import zap_port, get_process_on_port, is_friendly_proc
 class RESTManager:
     """
     Manages the lifecycle of the FastAPI REST service.
-    Features a sibling-aware health monitor and detailed traffic capturing.
     """
     STATE_TOPIC = "OPEN-AIR/System/Config/REST/Enabled"
 
@@ -61,7 +72,7 @@ class RESTManager:
         value = payload.get("val") if isinstance(payload, dict) else payload
         new_state = bool(value)
         if new_state != self._should_run:
-            logger.info(f"📡⚙️🔄 [REST] Global state toggle: {new_state}")
+            matrix_log("core", "rest", "_on_global_state_change", f"📡⚙️🔄 [REST] Global state toggle: {new_state}", "INFO")
             self._should_run = new_state
             if not new_state: self._shutdown_local_worker()
             else: self._launch_instance()
@@ -81,7 +92,6 @@ class RESTManager:
                 payload = None
                 if request.method == "POST":
                     try:
-                        # Peek at the body for logging
                         body = await request.body()
                         payload = body.decode()[:100]
                     except: pass
@@ -98,10 +108,10 @@ class RESTManager:
 
             api_router = create_router(self.state_cache, self.router)
             self.app.include_router(api_router)
-            logger.success("📡⚙️✅ [REST] FastAPI Application initialized.")
+            matrix_log("core", "rest", "_try_initialize", "📡⚙️✅ [REST] FastAPI Application initialized.", "SUCCESS")
             return True
         except Exception as e:
-            logger.error(f"❌ [REST] Initialization crash: {e}")
+            matrix_log("core", "rest", "_try_initialize", f"❌ [REST] Initialization crash: {e}", "ERROR")
             return False
 
     def _start_health_monitor(self):
@@ -123,7 +133,8 @@ class RESTManager:
                         self._launch_instance()
                 else:
                     if self.is_running(): self._shutdown_local_worker()
-            except Exception as e: logger.error(f"❌ [REST] Health loop error: {e}")
+            except Exception as e: 
+                matrix_log("core", "rest", "_health_loop", f"❌ [REST] Health loop error: {e}", "ERROR")
             time.sleep(10.0)
 
     def _launch_instance(self):
@@ -137,13 +148,14 @@ class RESTManager:
 
         try:
             self.worker = UvicornWorker(self.app, host=REST_HOST, port=REST_PORT)
-            if LOCAL_DEBUG: logger.info(f"🌐 [REST] Launching API Service on {REST_HOST}:{REST_PORT}...")
+            matrix_log("core", "rest", "_launch_instance", f"🌐 [REST] Launching API Service on {REST_HOST}:{REST_PORT}...", "INFO")
             self.worker.start()
-        except Exception as e: logger.error(f"❌ [REST] Launch failed: {e}")
+        except Exception as e: 
+            matrix_log("core", "rest", "_launch_instance", f"❌ [REST] Launch failed: {e}", "ERROR")
 
     def _shutdown_local_worker(self):
         if self.worker and self.worker.is_alive():
-            if LOCAL_DEBUG: logger.info("🌐 [REST] Shutting down local instance.")
+            matrix_log("core", "rest", "_shutdown_local_worker", "🌐 [REST] Shutting down local instance.", "INFO")
             self.worker.stop()
             self.worker.join(timeout=2.0)
 
@@ -195,4 +207,5 @@ class RESTManager:
     def notify_activity(self, method, path, status_code, payload=None):
         for cb in self.monitor_callbacks:
             try: cb(method, path, status_code, payload)
-            except Exception as e: logger.error(f"❌ [REST] Callback failed: {e}")
+            except Exception as e: 
+                matrix_log("core", "rest", "notify_activity", f"❌ [REST] Callback failed: {e}", "ERROR")

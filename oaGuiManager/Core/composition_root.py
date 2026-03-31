@@ -5,10 +5,11 @@
 # Description: Composition Root for the UI Partition.
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = False
 
 # --- Framework Imports ---
 from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
@@ -50,8 +51,7 @@ class UICompositionRoot:
         """
         Instantiates concrete service implementations and maps their dependencies.
         """
-        if LOCAL_DEBUG:
-            logger.debug("🏗️ [ROOT] Composing UI Services...")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "🏗️ [ROOT] Composing UI Services...", level="DEBUG")
 
         # 1. Base Communication Layer
         mqtt_conn = MqttConnectionManager()
@@ -102,7 +102,11 @@ class UICompositionRoot:
         self.services["midi_manager"] = MidiManager(state_cache, run_bridge=False)
         self.services["rest_manager"] = RESTManager(state_cache, protocol_router)
 
-        logger.success("✅ [ROOT] UI Service Graph Composed.")
+        # ST 2138 SMPTE2138 Monitor Logic
+        import oaComSMPTE2138.Entry as smpte2138_monitor_entry
+        self.services["smpte2138_monitor_manager"] = smpte2138_monitor_entry.start_monitor(mqtt_conn, sub_router)
+
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "✅ [ROOT] UI Service Graph Composed.", level="SUCCESS")
         return self.services
 
     def get_bootstrap_dependencies(self):

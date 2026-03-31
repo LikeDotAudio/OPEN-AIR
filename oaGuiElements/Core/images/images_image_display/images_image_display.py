@@ -5,12 +5,13 @@
 # Description: images_image_oaGuiDefinitions/dynamic_guimake_images_image_display.py
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 from PIL import Image, ImageTk
 import os
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -42,9 +43,8 @@ class BuilderImagesImageDisplayCreator(TransparencyMixin):
         **kwargs
     ):  # Updated signature
         """Creates an image display widget that is state-aware."""
-        if BUILDER_DEBUG: 
-            builder_logger.trace(f"🔬🏗️🖼️ [BUILDER] Entering make_images_image_display")
-            builder_logger.debug(f"📜📑💻 [CONFIG] Raw config received: {config_data}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🖼️ [BUILDER] Entering make_images_image_display", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
 
         current_function_name = "make_images_image_display"
 
@@ -54,27 +54,27 @@ class BuilderImagesImageDisplayCreator(TransparencyMixin):
         path = config_data.get("path")
 
         # ⚡ HARDENED INTERFACE: Extract from context if available
-        if BUILDER_DEBUG: builder_logger.trace("🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...", level="TRACE")
         if context:
             state_mirror_engine = context.state_mirror_engine
             subscriber_router = context.subscriber_router
             base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
             builder_instance = context.builder_instance
-            if BUILDER_DEBUG: builder_logger.debug("✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.", level="DEBUG")
         else:
             state_mirror_engine = self.state_mirror_engine
             subscriber_router = self.subscriber_router
             base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
             builder_instance = kwargs.get("builder_instance") or self
-            if BUILDER_DEBUG: builder_logger.debug("⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.", level="DEBUG")
 
-        if BUILDER_DEBUG: builder_logger.debug(f"🔬⚡️🖼️ [BUILDER] Forging image display frame for '{label}' at path '{path}'.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️🖼️ [BUILDER] Forging image display frame for '{label}' at path '{path}'.", level="DEBUG")
 
         frame = tk.Frame(parent_widget)  # Use parent_widget here
         
         # Apply Industrial Transparency
         if hasattr(self, '_apply_transparency'):
-            if BUILDER_DEBUG: builder_logger.trace(f"👻🌀🪟 [ALPHA] Applying industrial transparency to image frame.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to image frame.", level="TRACE")
             self._apply_transparency(frame, None, config_data, builder_instance)
 
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
@@ -88,7 +88,7 @@ class BuilderImagesImageDisplayCreator(TransparencyMixin):
         image_label.pack(side=tk.LEFT)
         
         def sync_bg():
-            if BUILDER_DEBUG: builder_logger.trace(f"🔄👻🎨 [SYNC] Syncing image frame labels to background.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄👻🎨 [SYNC] Syncing image frame labels to background.", level="TRACE")
             bg = frame.cget("bg")
             for child in frame.winfo_children():
                 if isinstance(child, tk.Label):
@@ -100,11 +100,11 @@ class BuilderImagesImageDisplayCreator(TransparencyMixin):
             """Loads and displays the image from the path in the StringVar."""
             image_path_relative = image_path_var.get()
             if not image_path_relative:
-                if BUILDER_DEBUG: builder_logger.debug(f"🖼️⏳🌀 [DATA] No image path provided for '{label}'.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖼️⏳🌀 [DATA] No image path provided for '{label}'.", level="DEBUG")
                 image_label.config(image=None, text="No image path provided.")
                 return
 
-            if BUILDER_DEBUG: builder_logger.info(f"🔄📂🖼️ [DATA] Updating image for '{label}': {image_path_relative}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄📂🖼️ [DATA] Updating image for '{label}': {image_path_relative}", level="INFO")
             image_path_absolute = os.path.join(GLOBAL_PROJECT_ROOT, image_path_relative)
 
             try:
@@ -114,7 +114,7 @@ class BuilderImagesImageDisplayCreator(TransparencyMixin):
                 tk_image = ImageTk.PhotoImage(pil_image)
                 image_label.config(image=tk_image, text="")
                 image_label.image = tk_image  # Keep a reference
-                if BUILDER_DEBUG: builder_logger.debug(f"🖼️🆗✅ [DATA] Image '{image_path_relative}' loaded successfully.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖼️🆗✅ [DATA] Image '{image_path_relative}' loaded successfully.", level="DEBUG")
             except FileNotFoundError:
                 error_text = f"Image not found:\n{image_path_relative}"
                 image_label.config(image=None, text=error_text)
@@ -122,14 +122,13 @@ class BuilderImagesImageDisplayCreator(TransparencyMixin):
             except Exception as e:
                 error_text = f"Error loading image:\n{e}"
                 image_label.config(image=None, text=error_text)
-                if BUILDER_DEBUG:
-                    builder_logger.error(f"❌🚫🛑 [ERROR] failure loading image for '{label}': {e}")
+                builder_logger.error(f"❌🚫🛑 [ERROR] failure loading image for '{label}': {e}")
 
         image_path_var.trace_add("write", update_image)
         update_image()  # Initial update
 
         if path:
-            if BUILDER_DEBUG: builder_logger.trace(f"📡📶🔗 [MQTT] Registering image display at path '{path}'")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡📶🔗 [MQTT] Registering image display at path '{path}'", level="TRACE")
             widget_id = path
             topic = state_mirror_engine.register_widget(
                 widget_id,
@@ -140,15 +139,15 @@ class BuilderImagesImageDisplayCreator(TransparencyMixin):
 
             # Subscribe to the topic for incoming messages
             if subscriber_router and topic:
-                if BUILDER_DEBUG: builder_logger.debug(f"📥📶🔄 [MQTT] Subscribing to topic: {topic}")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📥📶🔄 [MQTT] Subscribing to topic: {topic}", level="DEBUG")
                 subscriber_router.subscribe_to_topic(
                     topic,
                     state_mirror_engine.sync_incoming_mqtt_to_gui,
                 )
             
             # Initialize state from cache or broadcast
-            if BUILDER_DEBUG: builder_logger.trace(f"🔄⏳🔋 [STATE] Initializing image state from cache/broker.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄⏳🔋 [STATE] Initializing image state from cache/broker.", level="TRACE")
             state_mirror_engine.initialize_widget_state(path)
 
-        if BUILDER_DEBUG: builder_logger.success(f"✅🆗🖼️ [SUCCESS] The image display '{label}' has materialized!")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🖼️ [SUCCESS] The image display '{label}' has materialized!", level="SUCCESS")
         return frame

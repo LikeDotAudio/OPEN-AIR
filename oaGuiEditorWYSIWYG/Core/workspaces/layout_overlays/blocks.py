@@ -6,7 +6,7 @@
 
 import tkinter as tk
 
-def apply(layout, widget, path, is_focused, design_elements):
+def apply_design_overlay(layout, widget, path, is_focused, design_elements):
     """Handles tiered block shading using a background overlay."""
     
     bg_overlay = tk.Frame(widget.master, bd=0, highlightthickness=0)

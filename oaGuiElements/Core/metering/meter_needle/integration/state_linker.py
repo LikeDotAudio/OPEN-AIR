@@ -5,10 +5,11 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import random
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -86,7 +87,7 @@ class StateLinker:
                     topic_2, self.state_mirror_engine.sync_incoming_mqtt_to_gui
                 )
 
-        if LOCAL_DEBUG: logger.debug(f"🔬 Widget '{self.config.label}' ({self.config.path}) registered with StateMirrorEngine.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 Widget '{self.config.label}' ({self.config.path}) registered with StateMirrorEngine.", level="DEBUG")
         
         # Initialize state
         self.state_mirror_engine.initialize_widget_state(self.config.path)

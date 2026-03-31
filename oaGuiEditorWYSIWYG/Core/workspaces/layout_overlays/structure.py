@@ -6,7 +6,7 @@
 
 import tkinter as tk
 
-def apply(layout, widget, path, is_focused, design_elements):
+def apply_design_overlay(layout, widget, path, is_focused, design_elements):
     """Handles the basic structure outline (#444444 border) using an overlay."""
     
     border = tk.Frame(widget.master, bg="#444444", bd=0, highlightthickness=0)

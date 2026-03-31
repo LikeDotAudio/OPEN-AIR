@@ -5,13 +5,14 @@
 # Description: Centralized Telemetry Service for UI Visibility and Geometry.
 
 import time
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import orjson
 import tkinter as tk
 from loguru import logger
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaComMQTT.Core.mqtt_publisher_service import is_connected
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 class UITrackingService:
     """
@@ -59,7 +60,7 @@ class UITrackingService:
         widget.bind("<Destroy>", lambda e: self._on_destroy(widget, e), add="+")
         widget.bind("<Configure>", lambda e: self._on_geometry_change(widget, e), add="+")
         
-        if LOCAL_DEBUG: logger.trace(f"📡 UITrackingService: Tracking '{tab_name}'")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"📡 UITrackingService: Tracking '{tab_name}'", level="TRACE")
 
     def _on_visible(self, widget, event):
         meta = self._tracked_widgets.get(widget)
@@ -68,7 +69,7 @@ class UITrackingService:
         # ⚡ VISIBILITY FLAG: Set local attribute for child widgets to check
         widget.is_visible = True
         
-        if LOCAL_DEBUG: logger.debug(f"👁️ UITrackingService: VISIBLE for {meta['tab_name']}")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"👁️ UITrackingService: VISIBLE for {meta['tab_name']}", level="DEBUG")
         self._publish_visibility(meta, True)
         # Force geometry update on show
         self._on_geometry_change(widget, event)
@@ -80,14 +81,14 @@ class UITrackingService:
         # ⚡ VISIBILITY FLAG: Set local attribute for child widgets to check
         widget.is_visible = False
         
-        if LOCAL_DEBUG: logger.debug(f"👁️ UITrackingService: HIDDEN for {meta['tab_name']}")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"👁️ UITrackingService: HIDDEN for {meta['tab_name']}", level="DEBUG")
         self._publish_visibility(meta, False)
 
     def _on_destroy(self, widget, event):
         if event.widget == widget:
             meta = self._tracked_widgets.pop(widget, None)
             if meta:
-                if LOCAL_DEBUG: logger.debug(f"👁️ UITrackingService: DESTROYED {meta['tab_name']}")
+                matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"👁️ UITrackingService: DESTROYED {meta['tab_name']}", level="DEBUG")
                 self._publish_visibility(meta, False)
 
     def _on_geometry_change(self, widget, event):
@@ -117,7 +118,7 @@ class UITrackingService:
                 "tab_name": meta["tab_name"],
             }
             meta["engine"].publish_command(meta["geo_topic"], orjson.dumps(payload).decode())
-            if LOCAL_DEBUG: logger.debug(f"📏 UITrackingService: Published geometry for {meta['tab_name']}")
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"📏 UITrackingService: Published geometry for {meta['tab_name']}", level="DEBUG")
         except Exception:
             pass
 

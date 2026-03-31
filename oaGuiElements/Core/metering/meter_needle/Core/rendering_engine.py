@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 import time
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import tkinter as tk
 from dataclasses import dataclass
 from typing import Optional, List, Tuple
@@ -21,7 +23,6 @@ from ..cosmetics.geometry import BezelGeometry
 from ..constants import SCALE_TICK_LENGTH, SCALE_SUB_TICK_LENGTH, SCALE_TEXT_OFFSET, NUMBER_FONT_FAMILY
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True
 
 @dataclass
 class RenderContext:
@@ -72,7 +73,7 @@ class MeterRenderingEngine:
     @staticmethod
     def render(canvas, config, val1, val2, peak_on, center_x, center_y, full_redraw=False):
         if BUILDER_DEBUG and full_redraw: 
-            builder_logger.trace(f"🔄 Rendering full meter: {config.label}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄 Rendering full meter: {config.label}", level="TRACE")
         
         ctx = RenderContext.from_config(config, center_x, center_y)
 

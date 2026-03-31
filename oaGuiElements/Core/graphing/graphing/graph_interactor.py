@@ -5,9 +5,10 @@
 # Description: Modularized Graph Interactor Engine.
 
 from typing import Dict, Any
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import builder_logger
 from loguru import logger
 
@@ -19,9 +20,8 @@ from .Core.graph_context_menu import GraphContextMenu
 def setup_interaction(fig: object, ax: object, interaction_config: Dict[str, Any], callbacks: Dict[str, Any] = None):
     """Initializes interactive features (Zoom, Pan, Hover, Context Menu) for a figure."""
     try:
-        if BUILDER_DEBUG:
-            builder_logger.debug("🔬🏗️📊 [BUILDER] graph_interactor: Initializing interaction protocols.")
-            
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔬🏗️📊 [BUILDER] graph_interactor: Initializing interaction protocols.", level="DEBUG")
+        
         nav_cfg = interaction_config.get("Navigation", interaction_config)
         
         # 1. Hover Annotations

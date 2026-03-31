@@ -29,7 +29,7 @@ software.
 ## 📚 API Reference
 
 ### Global Functions
-#### `fill_scpi_placeholders(scpi_command_template, Input)`
+#### `render_scpi_command(scpi_command_template, Input)`
 Takes an SCPI command template and replaces placeholders with values from
 inputs.
 

@@ -5,10 +5,11 @@
 # Description: This module provides functions for applying visual styles and themes to Matplotlib graphs.
 
 from typing import Dict, Any
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -33,8 +34,7 @@ def apply_style(
     Applies colors, grid visibility, and axis visibility.
     Supports nested 'style' and 'axis' configurations.
     """
-    if BUILDER_DEBUG:
-        builder_logger.debug(f"🔬🏗️📊 [BUILDER] graph_styler: Applying visual styles to axis.")
+    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] graph_styler: Applying visual styles to axis.", level="DEBUG")
 
     # Resolve 'style' dictionary
     nested_style = style_config.get("style", {})
@@ -60,7 +60,7 @@ def apply_style(
         ax.patch.set_visible(False)
         try: ax.patch.set_alpha(0.0)
         except Exception as e:
-            logger.trace(f"Error setting alpha 0.0: {e}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Error setting alpha 0.0: {e}", level="TRACE")
     else:
         # Standard hex or named color
         fig.patch.set_facecolor(bg_color)
@@ -69,7 +69,7 @@ def apply_style(
         ax.patch.set_visible(True)
         try: ax.patch.set_alpha(1.0)
         except Exception as e:
-            logger.trace(f"Error setting alpha 1.0: {e}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Error setting alpha 1.0: {e}", level="TRACE")
 
     # Resolve 'axis' dictionary
     axis_config = style_config.get("axis", {})

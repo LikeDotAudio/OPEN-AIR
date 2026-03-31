@@ -5,13 +5,14 @@
 # Description: input_directional_buttons/dynamic_guimake_input_directional_buttons.py
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 import os
 import orjson
 import time
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -43,10 +44,9 @@ class BuilderInputDirectionalButtonsCreator(TransparencyMixin):
         self, parent_widget, config_data, context=None, **kwargs
     ):  # Updated signature
             """Creates a set of directional buttons (up, down, left, right)."""
-            if BUILDER_DEBUG: 
-                builder_logger.trace(f"🔬🏗️🕹️ [BUILDER] Entering make_input_directional_buttons")
-                builder_logger.debug(f"📜📑💻 [CONFIG] Raw config received: {config_data}")
-    
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🕹️ [BUILDER] Entering make_input_directional_buttons", level="TRACE")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
+
             current_function_name = "make_input_directional_buttons"
     
             # Extract only widget-specific config from config_data
@@ -55,34 +55,34 @@ class BuilderInputDirectionalButtonsCreator(TransparencyMixin):
             path = config_data.get("path")
     
             # ⚡ HARDENED INTERFACE: Extract from context if available
-            if BUILDER_DEBUG: builder_logger.trace("🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...", level="TRACE")
             if context:
                 state_mirror_engine = context.state_mirror_engine
                 subscriber_router = context.subscriber_router
                 base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
                 builder_instance = context.builder_instance
-                if BUILDER_DEBUG: builder_logger.debug("✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.", level="DEBUG")
             else:
                 state_mirror_engine = self.state_mirror_engine
                 subscriber_router = self.subscriber_router
                 base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
                 builder_instance = kwargs.get("builder_instance") or self
-                if BUILDER_DEBUG: builder_logger.debug("⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.", level="DEBUG")
     
-            if BUILDER_DEBUG: builder_logger.debug(f"🔬⚡️🕹️ [BUILDER] Spawning directional buttons for '{label}' at path '{path}'.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️🕹️ [BUILDER] Spawning directional buttons for '{label}' at path '{path}'.", level="DEBUG")
     
             frame = tk.Frame(parent_widget)  # Use parent_widget here
             
             # Apply Industrial Transparency
             if hasattr(self, '_apply_transparency'):
-                if BUILDER_DEBUG: builder_logger.trace(f"👻🌀🪟 [ALPHA] Applying industrial transparency to directional frame.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to directional frame.", level="TRACE")
                 self._apply_transparency(frame, None, config_data, builder_instance)
     
             if label:
                 tk.Label(frame, text=label, fg="white").grid(row=0, column=1, pady=(0, 5))
     
             def sync_bg():
-                if BUILDER_DEBUG: builder_logger.trace(f"🔄👻🎨 [SYNC] Syncing labels to background for directional frame.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄👻🎨 [SYNC] Syncing labels to background for directional frame.", level="TRACE")
                 bg = frame.cget("bg")
                 for child in frame.winfo_children():
                     if isinstance(child, tk.Label):
@@ -91,7 +91,7 @@ class BuilderInputDirectionalButtonsCreator(TransparencyMixin):
             frame._draw = sync_bg
     
             # Create buttons
-            if BUILDER_DEBUG: builder_logger.trace(f"🏗️🔳🕹️ [CONSTRUCT] Instantiating directional ttk.Buttons.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🔳🕹️ [CONSTRUCT] Instantiating directional ttk.Buttons.", level="TRACE")
             up_button = ttk.Button(frame, text="⬆")
             down_button = ttk.Button(frame, text="⬇")
             left_button = ttk.Button(frame, text="⬅")
@@ -114,31 +114,31 @@ class BuilderInputDirectionalButtonsCreator(TransparencyMixin):
                     "ts": time.time(),
                     "GUID": self.state_mirror_engine.GUID,
                 }
-                if BUILDER_DEBUG: builder_logger.debug(f"📡🔴📡 [MQTT] Publishing directional command '{action}' to topic: {topic}")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡🔴📡 [MQTT] Publishing directional command '{action}' to topic: {topic}", level="DEBUG")
                 self.state_mirror_engine.publish_command(topic, orjson.dumps(payload_data).decode())
     
             def _move_up():
-                if BUILDER_DEBUG: builder_logger.info(f"🖱️👆⬆️ [INPUT] User clicked UP for '{path}'")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️👆⬆️ [INPUT] User clicked UP for '{path}'", level="INFO")
                 _publish_command("up")
     
             def _move_down():
-                if BUILDER_DEBUG: builder_logger.info(f"🖱️👆⬇️ [INPUT] User clicked DOWN for '{path}'")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️👆⬇️ [INPUT] User clicked DOWN for '{path}'", level="INFO")
                 _publish_command("down")
     
             def _move_left():
-                if BUILDER_DEBUG: builder_logger.info(f"🖱️👆⬅️ [INPUT] User clicked LEFT for '{path}'")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️👆⬅️ [INPUT] User clicked LEFT for '{path}'", level="INFO")
                 _publish_command("left")
     
             def _move_right():
-                if BUILDER_DEBUG: builder_logger.info(f"🖱️👆➡ [INPUT] User clicked RIGHT for '{path}'")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️👆➡ [INPUT] User clicked RIGHT for '{path}'", level="INFO")
                 _publish_command("right")
     
-            if BUILDER_DEBUG: builder_logger.trace("🖱️👆🔗 [EVENTS] Binding command logic to directional buttons.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🖱️👆🔗 [EVENTS] Binding command logic to directional buttons.", level="TRACE")
             up_button.config(command=_move_up)
             down_button.config(command=_move_down)
             left_button.config(command=_move_left)
             right_button.config(command=_move_right)
     
-            if BUILDER_DEBUG: builder_logger.success(f"✅🆗🕹️ [SUCCESS] The directional buttons for '{label}' has materialized!")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🕹️ [SUCCESS] The directional buttons for '{label}' has materialized!", level="SUCCESS")
             return frame
     

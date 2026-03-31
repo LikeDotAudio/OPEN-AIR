@@ -5,11 +5,12 @@
 # Description: Brief summary of purpose
 
 import numpy as np
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from PIL import Image, ImageDraw, ImageTk, ImageFilter
 from oaLogging.Core.logger import builder_logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True
 _HORIZONTAL_FADER_ASSET_CACHE = {}
 
 class HorizontalFaderAssetGenerator:
@@ -20,7 +21,7 @@ class HorizontalFaderAssetGenerator:
         cache_key = (width, height, body_color, track_color, highlight_color, "v23_vectorized")
         if cache_key in _HORIZONTAL_FADER_ASSET_CACHE: return _HORIZONTAL_FADER_ASSET_CACHE[cache_key]
 
-        if BUILDER_DEBUG: builder_logger.trace(f"🏗️🖼️🎨 [ASSET] Generating NEW 3D horizontal fader cap: {width}x{height}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🖼️🎨 [ASSET] Generating NEW 3D horizontal fader cap: {width}x{height}", level="TRACE")
         UPSCALE_FACTOR = 2
         upscaled_width, upscaled_height = int(width * UPSCALE_FACTOR), int(height * UPSCALE_FACTOR)
         if upscaled_width < 1: upscaled_width = 1

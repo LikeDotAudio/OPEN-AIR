@@ -5,10 +5,11 @@
 # Description: Showtime/worker_showtime_tune.py
 
 import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -31,16 +32,16 @@ def on_tune_request_from_selection(showtime_tab_instance):
     """
     Tunes the instrument based on the current selections.
     """
-    if LOCAL_DEBUG: logger.debug("🟢️️️🟢 Initiating tuning request based on current selection.")
+    matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, "🟢️️️🟢 Initiating tuning request based on current selection.", level="DEBUG")
 
     if showtime_tab_instance.selected_device_button:
         # Case 1: A specific device is selected
         marker_data = showtime_tab_instance.selected_device_button.marker_data
-        if LOCAL_DEBUG: logger.debug(f"🔍 Device button selected. Tuning to center frequency of {marker_data.get('NAME', 'N/A')}.")
+        matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, f"🔍 Device button selected. Tuning to center frequency of {marker_data.get('NAME', 'N/A')}.", level="DEBUG")
         ## Push_Marker_to_Center_Freq(mqtt_controller=showtime_tab_instance.mqtt_util, marker_data=marker_data)
     elif showtime_tab_instance.selected_group:
         # Case 2: A group is selected, but no device
-        if LOCAL_DEBUG: logger.debug(f"🔍 No device selected. Tuning to start/stop frequency of selected Group: {showtime_tab_instance.selected_group}.")
+        matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, f"🔍 No device selected. Tuning to start/stop frequency of selected Group: {showtime_tab_instance.selected_group}.", level="DEBUG")
         group_devices = showtime_tab_instance.grouped_markers[
             showtime_tab_instance.selected_zone
         ][showtime_tab_instance.selected_group]
@@ -55,7 +56,7 @@ def on_tune_request_from_selection(showtime_tab_instance):
 
     elif showtime_tab_instance.selected_zone:
         # Case 3: A zone is selected, but no group or device
-        if LOCAL_DEBUG: logger.debug(f"🔍 No group selected. Tuning to start/stop frequency of selected Zone: {showtime_tab_instance.selected_zone}.")
+        matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, f"🔍 No group selected. Tuning to start/stop frequency of selected Zone: {showtime_tab_instance.selected_zone}.", level="DEBUG")
         all_zone_devices = []
         for group_name in showtime_tab_instance.grouped_markers[
             showtime_tab_instance.selected_zone
@@ -75,7 +76,7 @@ def on_tune_request_from_selection(showtime_tab_instance):
             logger.error("❌ Failed to tune: No valid frequencies found in selected zone.")
     else:
         # Case 4: No filters selected, tune to all markers
-        if LOCAL_DEBUG: logger.debug("🔍 No filters selected. Tuning to start/stop frequency of all markers.")
+        matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, "🔍 No filters selected. Tuning to start/stop frequency of all markers.", level="DEBUG")
         # UPDATED: Use the imported utility function
         min_freq, max_freq = calculate_frequency_range(
             showtime_tab_instance.marker_data

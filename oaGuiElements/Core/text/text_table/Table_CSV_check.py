@@ -5,10 +5,11 @@
 # Description: This module provides functionality to check for and initialize CSV files for table widgets, seeding MQTT with existing data or creating new files.
 
 import os
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import orjson
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -43,7 +44,7 @@ class TableCsvCheck:
         writer = TableCsvWriter()
 
         if os.path.exists(csv_path):
-            if LOCAL_DEBUG: logger.debug(f"Found existing CSV at {csv_path}. Publishing contents to seed state cache.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Found existing CSV at {csv_path}. Publishing contents to seed state cache.", level="DEBUG")
             _headers, data_list = reader.read_from_csv(csv_path)
 
             if not data_list:
@@ -65,6 +66,6 @@ class TableCsvCheck:
                 mqtt_publisher_service.publish_payload(field_topic, orjson.dumps(row).decode())
         else:
             if headers:  # Only create file if headers are known
-                if LOCAL_DEBUG: logger.debug(f"No CSV found at {csv_path}. Creating blank file with headers.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"No CSV found at {csv_path}. Creating blank file with headers.", level="DEBUG")
                 # Create a blank file with just the headers
                 writer.write_to_csv(csv_path, headers, [])

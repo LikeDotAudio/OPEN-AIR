@@ -5,12 +5,13 @@
 # Description: input_mousewheel_mixin/mousewheel_mixin.py
 
 import sys
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import inspect
 import pathlib
 import os
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -25,7 +26,7 @@ project_root = current_file_path.parent.parent.parent
 current_file = str(current_file_path.relative_to(project_root)).replace("\\", "/")
 
 # Replace old print with debug_log
-if BUILDER_DEBUG: builder_logger.debug(f"📐🏗️💻 [BUILDER] Loading mousewheel_mixin.py from: {current_file_path}")
+matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📐🏗️💻 [BUILDER] Loading mousewheel_mixin.py from: {current_file_path}", level="DEBUG")
 
 
 class MousewheelScrollMixin:
@@ -42,7 +43,7 @@ class MousewheelScrollMixin:
     # Outputs:
     #     None.
     def _on_mousewheel(self, event):
-        if BUILDER_DEBUG: builder_logger.trace(f"🖱️🔄📏 [SCROLL] Mousewheel event detected: {event.num}. Scrolling canvas.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️🔄📏 [SCROLL] Mousewheel event detected: {event.num}. Scrolling canvas.", level="TRACE")
         # Platform-specific mouse wheel scrolling
         if sys.platform == "linux":
             if event.num == 4:  # Scroll up
@@ -60,7 +61,7 @@ class MousewheelScrollMixin:
     # Outputs:
     #     None.
     def _bind_mousewheel(self, event):
-        if BUILDER_DEBUG: builder_logger.trace(f"🖱️👆🔗 [EVENTS] Binding mousewheel scrolling for canvas.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️👆🔗 [EVENTS] Binding mousewheel scrolling for canvas.", level="TRACE")
         # Bind mousewheel scrolling when the mouse enters the scrollable area
         self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
         self.canvas.bind_all("<Button-4>", self._on_mousewheel)  # Linux scroll up
@@ -74,7 +75,7 @@ class MousewheelScrollMixin:
     # Outputs:
     #     None.
     def _unbind_mousewheel(self, event):
-        if BUILDER_DEBUG: builder_logger.trace("🖱️❌🧹 [EVENTS] Unbinding mousewheel scrolling for canvas.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🖱️❌🧹 [EVENTS] Unbinding mousewheel scrolling for canvas.", level="TRACE")
         # Unbind mousewheel scrolling when the mouse leaves the scrollable area
         self.canvas.unbind_all("<MouseWheel>")
         self.canvas.unbind_all("<Button-4>")

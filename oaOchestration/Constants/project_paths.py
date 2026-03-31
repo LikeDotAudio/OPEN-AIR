@@ -1,18 +1,27 @@
 # Constants/project_paths.py
-# Author: Anthony Peter Kuzub
-# Version: 20250821.200641.1
 #
-# Description: This module defines all application file paths relative to the project root,
+# Defines all application file paths relative to the project root.
+# Provides a centralized repository for path management and directory creation.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260330.1600.1
 
 import os
 import inspect
 import pathlib
 import sys
-
-# --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from loguru import logger
 
+# --- Standard Debug Logging Setup ---
 from oaConfiguration.FileReaders.config_reader import Config
 # ⚡ OPTIMIZATION: Use static path cache
 from ..Core.path_initializer import (
@@ -25,12 +34,6 @@ from ..Core.path_initializer import (
 )
 
 app_constants_config = Config.get_instance()  # Get the singleton instance
-
-
-# --- Global Scope Variables ---
-current_version = "20251013.212800.2"
-current_version_hash = 20251013 * 212800 * 2
-current_file = f"{os.path.basename(__file__)}"
 
 # --- Core Project Paths (Relative to GLOBAL_PROJECT_ROOT) ---
 
@@ -68,5 +71,5 @@ def get_absolute_path(relative_path: str):
         # Use simple joining with the cached root
         return GLOBAL_PROJECT_ROOT / relative_path
     except Exception as e:
-        print(f"❌ Error resolving path: {e}")
+        logger.error(f"❌ Error resolving path: {e}")
         return pathlib.Path(relative_path)  # Return a relative path as a fallback

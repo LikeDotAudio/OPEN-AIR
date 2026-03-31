@@ -5,6 +5,8 @@
 # Description: styler.py
 
 from typing import Dict, Any
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from loguru import logger
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
@@ -20,7 +22,7 @@ class GraphStyler:
         Applies colors, grid visibility, and axis visibility.
         Pushes elements of styling from JSON to the plot.
         """
-        builder_logger.debug(f"🔬🏗️📊 [GRAPH] styler: Applying visual styles.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [GRAPH] styler: Applying visual styles.", level="DEBUG")
 
         # 1. Background & Transparency
         style_block = config.get("style", {})

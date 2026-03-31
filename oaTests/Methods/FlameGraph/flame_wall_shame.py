@@ -26,7 +26,11 @@
 
 import html
 
-def generate_wall_of_shame(stats_list, ps):
+# --- Architectural Limits ---
+MAX_OFFENDERS_PER_CATEGORY = 50
+MAX_SUBSYSTEM_BREAKDOWN_ITEMS = 20
+
+def generate_wall_of_shame(performance_stats, ps):
     """
     Generates a concise, metrics-focused performance report.
     Focuses on raw numbers for quick identification of top offenders.
@@ -44,8 +48,8 @@ def generate_wall_of_shame(stats_list, ps):
     
     for title, sort_key in categories:
         shame_lines.append(f"\n>>> {title}")
-        # INCREASED TO 50 ITEMS PER CATEGORY
-        by_metric = sorted(stats_list, key=sort_key, reverse=True)[:50]
+        # USE CONSTANT
+        by_metric = sorted(performance_stats, key=sort_key, reverse=True)[:MAX_OFFENDERS_PER_CATEGORY]
         
         for i, s in enumerate(by_metric, 1):
             # Sanitize Function Name for HTML Display (remove <method ...>)
@@ -68,12 +72,12 @@ def generate_wall_of_shame(stats_list, ps):
             shame_lines.append(f" {i:2}. {val_str} | {safe_funcname}")
 
     # 3. Add Subsystem Breakdown
-    shame_lines.append("\n>>> CATEGORY 5: SUBSYSTEM BREAKDOWN (Worst 20 per Root Process)")
-    all_roots = sorted(list(set(r for s in stats_list for r in s['roots'])))
+    shame_lines.append(f"\n>>> CATEGORY 5: SUBSYSTEM BREAKDOWN (Worst {MAX_SUBSYSTEM_BREAKDOWN_ITEMS} per Root Process)")
+    all_roots = sorted(list(set(r for s in performance_stats for r in s['roots'])))
     for root in all_roots:
         shame_lines.append(f"  [ ROOT SUBSYSTEM: {root} ]")
-        root_stats = [s for s in stats_list if root in s['roots']]
-        root_offenders = sorted(root_stats, key=lambda x: x['cumtime'], reverse=True)[:20]
+        root_stats = [s for s in performance_stats if root in s['roots']]
+        root_offenders = sorted(root_stats, key=lambda x: x['cumtime'], reverse=True)[:MAX_SUBSYSTEM_BREAKDOWN_ITEMS]
         for i, s in enumerate(root_offenders, 1):
             raw_name = s['funcname']
             if raw_name.startswith("<") and raw_name.endswith(">"):
@@ -83,9 +87,9 @@ def generate_wall_of_shame(stats_list, ps):
             shame_lines.append(f"    {i:2}. {s['cumtime']:8.4f}s cum | {safe_funcname}")
 
     # 4. Add Framework Overhead
-    shame_lines.append("\n>>> CATEGORY 6: THE FRAMEWORK OVERHEAD (Top 20 Built-in Spammers)")
-    builtins = [s for s in stats_list if s['filename'] == "~"]
-    builtin_spammers = sorted(builtins, key=lambda x: x['ncalls'], reverse=True)[:20]
+    shame_lines.append(f"\n>>> CATEGORY 6: THE FRAMEWORK OVERHEAD (Top {MAX_SUBSYSTEM_BREAKDOWN_ITEMS} Built-in Spammers)")
+    builtins = [s for s in performance_stats if s['filename'] == "~"]
+    builtin_spammers = sorted(builtins, key=lambda x: x['ncalls'], reverse=True)[:MAX_SUBSYSTEM_BREAKDOWN_ITEMS]
     for i, s in enumerate(builtin_spammers, 1):
         shame_lines.append(f"    {i:2}. {s['ncalls']:10} calls | {s['tottime']:8.4f}s self | {html.escape(s['funcname'])}")
 

@@ -5,12 +5,13 @@
 # Description: Modularized FluxPlotter Graph Component.
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from collections import deque
 import time
 from typing import Dict, Any
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -94,9 +95,8 @@ class FluxPlotter(
 
     def _init_plot_elements(self):
         graph_styler.apply_style(self.ax, self.fig, self.widget_config, graph_styler.get_theme_style("dark"))
-        if BUILDER_DEBUG:
-            builder_logger.success(f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' visual styles applied.")
-            
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' visual styles applied.", level="SUCCESS")
+        
         graph_interactor.setup_interaction(self.fig, self.ax, self.widget_config, {"on_view_change": lambda x, y: None, "on_setting_change": lambda n, v: None, "on_add_marker": self._on_add_marker})
         for ds in self.widget_config.get("datasets", []):
             ds_id = ds.get("id")
@@ -104,8 +104,7 @@ class FluxPlotter(
                 line, = self.ax.plot([], [], color=ds.get("style", {}).get("line_color") or "cyan", linewidth=1, label=ds.get("label", ds_id))
                 self.lines[ds_id], self.x_data[ds_id], self.y_data[ds_id] = line, deque(maxlen=self.widget_config.get("buffer_size", 100)), deque(maxlen=self.widget_config.get("buffer_size", 100))
         
-        if BUILDER_DEBUG:
-            builder_logger.success(f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' plot elements initialized.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' plot elements initialized.", level="SUCCESS")
 
     def _init_dataset_config(self):
         for ds in self.widget_config.get("datasets", []):
@@ -130,10 +129,10 @@ class FluxPlotter(
         # 🛡️ GLOBAL RESIZE GUARD: Don't process local resizes if the whole app is resizing.
         # This prevents "vibration" where the container and child fight for priority.
         if getattr(self.instance, "global_resizing", False):
-            if BUILDER_DEBUG: builder_logger.trace(f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' skipping resize (global lock).")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' skipping resize (global lock).", level="TRACE")
             return
 
-        if BUILDER_DEBUG: builder_logger.trace(f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' resize event: {event.width}x{event.height}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' resize event: {event.width}x{event.height}", level="TRACE")
         
         # 🛡️ ZERO-DIMENSION GUARD: Ignore events where one or both dimensions are 1px (common during layout initialization).
         if event.width <= 1 or event.height <= 1:
@@ -150,7 +149,7 @@ class FluxPlotter(
         self._resize_timer = self.after(350, lambda: self._perform_resize(event.width, event.height))
 
     def _perform_resize(self, w, h):
-        if BUILDER_DEBUG: builder_logger.debug(f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' performing resize to {w}x{h}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' performing resize to {w}x{h}", level="DEBUG")
         self._resize_timer = None
         if hasattr(self, "fig") and w > 1 and h > 1:
             # ⚡ FIX: Use forward=False to prevent Matplotlib from pushing size changes back to Tkinter

@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import simpledialog
 from loguru import logger
 
@@ -59,7 +61,7 @@ class GraphInteractionMixin:
             if 'color' in self.saved_style: m.set_color(self.saved_style['color'])
             if 'linewidth' in self.saved_style: m.set_linewidth(self.saved_style['linewidth'])
         except Exception as e:
-            logger.trace(f"Error restoring marker style: {e}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Error restoring marker style: {e}", level="TRACE")
         self.saved_style = {}
 
     def _apply_highlight(self, m):
@@ -67,4 +69,4 @@ class GraphInteractionMixin:
             m.set_color('yellow')
             if hasattr(m, 'set_linewidth'): m.set_linewidth(m.get_linewidth() + 2)
         except Exception as e:
-            logger.trace(f"Error applying marker highlight: {e}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Error applying marker highlight: {e}", level="TRACE")

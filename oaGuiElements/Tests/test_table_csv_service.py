@@ -1,4 +1,6 @@
 import unittest
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from unittest.mock import patch, MagicMock
 import os
 
@@ -54,7 +56,7 @@ class TestTableCSVService(unittest.TestCase):
         # 2. CHECK: The reader's read_from_csv method was called
         self.mock_reader_instance.read_from_csv.assert_called_once_with(service.csv_path)
         
-        print("✅ Test passed: 'test_load_handles_file_not_found_gracefully' confirmed the fix.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "✅ Test passed: 'test_load_handles_file_not_found_gracefully' confirmed the fix.", level="INFO")
 
     def test_load_parses_valid_csv_data(self):
         """
@@ -88,7 +90,7 @@ class TestTableCSVService(unittest.TestCase):
         self.assertEqual(result["1"], data[0])
         self.assertEqual(result["2"], data[1])
         
-        print("✅ Test passed: 'test_load_parses_valid_csv_data' works as expected.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "✅ Test passed: 'test_load_parses_valid_csv_data' works as expected.", level="INFO")
 
 
 if __name__ == "__main__":

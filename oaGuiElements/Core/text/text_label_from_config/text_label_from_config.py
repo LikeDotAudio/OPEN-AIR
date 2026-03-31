@@ -5,10 +5,11 @@
 # Description: A mixin class for the DynamicGuiBuilder that handles creating a label from a config dictionary.
 
 import os
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import inspect
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -30,12 +31,11 @@ class BuilderTextLabelFromConfigCreator(TransparencyMixin):
 
     def make_text_label_from_config(self, parent_widget, config_data, context: WidgetContext = None, **kwargs):
         """Standardized factory wrapper for creating label widgets."""
-        if BUILDER_DEBUG: 
-            builder_logger.trace(f"🔬🏗️🔡 [BUILDER] Entering make_text_label_from_config")
-        
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔡 [BUILDER] Entering make_text_label_from_config", level="TRACE")
+    
         # ⚡ PROXY: Directly call the standardized implementation
         # Uses the static make method of the concrete label creator
-        if BUILDER_DEBUG: builder_logger.trace(f"🔄🚀🔡 [PROXY] Routing label creation to BuilderTextLabelCreator.make")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄🚀🔡 [PROXY] Routing label creation to BuilderTextLabelCreator.make", level="TRACE")
         return BuilderTextLabelCreator.make(parent_widget, config_data, context=context, **kwargs)
 
     @staticmethod

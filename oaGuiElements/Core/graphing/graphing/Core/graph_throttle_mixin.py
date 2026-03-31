@@ -5,11 +5,12 @@
 # Description: Brief summary of purpose
 
 import time
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from oaLogging.Core.logger import builder_logger
 from oaGuiElements.Core.graphing.graphing import graph_updater
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True
 
 class GraphThrottleMixin:
     """Implements 30 FPS throttling and redundancy filtering for graph updates."""

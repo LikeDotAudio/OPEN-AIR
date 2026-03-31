@@ -5,10 +5,11 @@
 # Description: Brief summary of purpose
 
 from PIL import Image, ImageDraw, ImageTk, ImageFilter
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from oaLogging.Core.logger import builder_logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    
 
 _GCA_ASSET_CACHE = {}
 
@@ -21,7 +22,7 @@ class GCAAssetGenerator:
         if cache_key in _GCA_ASSET_CACHE:
             return _GCA_ASSET_CACHE[cache_key]
 
-        if BUILDER_DEBUG: builder_logger.trace(f"🏗️🖼️🎨 [ASSET] Generating NEW 3D GCA bridge: {w}x{h}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🖼️🎨 [ASSET] Generating NEW 3D GCA bridge: {w}x{h}", level="TRACE")
         pad = 15
         full_w, full_h = w + pad*2, h + pad*2
         base = Image.new("RGBA", (full_w, full_h), (0,0,0,0))

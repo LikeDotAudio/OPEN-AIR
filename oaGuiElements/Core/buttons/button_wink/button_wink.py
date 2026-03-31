@@ -5,10 +5,11 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -36,9 +37,8 @@ class BuilderButtonWinkCreator(TransparencyMixin):
 
     def make_button_wink(self, parent_widget, config_data, context=None, **kwargs):
         """Creates a Wink Button widget."""
-        if LOCAL_DEBUG: 
-            builder_logger.trace(f"🔬🏗️🔘 [BUILDER] Entering make_button_wink")
-            builder_logger.debug(f"📜📑💻 [CONFIG] Raw config received: {config_data}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔘 [BUILDER] Entering make_button_wink", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
 
         # 1. Extract Config
         config = extract_wink_config(config_data)
@@ -46,37 +46,37 @@ class BuilderButtonWinkCreator(TransparencyMixin):
         label = config_data.get("label_active")
         
         # ⚡ HARDENED INTERFACE: Extract from context if available
-        if LOCAL_DEBUG: builder_logger.trace("🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...", level="TRACE")
         if context:
             state_mirror_engine = context.state_mirror_engine
             subscriber_router = context.subscriber_router
             base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
             app_instance = context.app_instance
             builder_instance = context.builder_instance or app_instance
-            if LOCAL_DEBUG: builder_logger.debug("✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.", level="DEBUG")
         else:
             state_mirror_engine = self.state_mirror_engine
             subscriber_router = self.subscriber_router
             base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
             builder_instance = kwargs.get("builder_instance") or self
             app_instance = kwargs.get("app_instance")
-            if LOCAL_DEBUG: builder_logger.debug("⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.", level="DEBUG")
 
-        if LOCAL_DEBUG: builder_logger.debug(f"🔬⚡️🔳 [BUILDER] Spawning wink button for '{label}' at path '{path}'.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️🔳 [BUILDER] Spawning wink button for '{label}' at path '{path}'.", level="DEBUG")
 
         # 2. Variable Management
         value_var = kwargs.get("variable")
         if value_var is None:
             initial_state = bool(config.get("value_default", False))
             value_var = tk.BooleanVar(master=parent_widget, value=initial_state)
-        if LOCAL_DEBUG: builder_logger.debug(f"🔋🔘✨ [STATE] Initial state for '{label}': {value_var.get()}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔋🔘✨ [STATE] Initial state for '{label}': {value_var.get()}", level="DEBUG")
 
         # 3. Create State
         state = create_wink_state(config, value_var.get())
 
         # 4. Container Frame
         # ⚡ HIGH-FIDELITY: Use tk.Canvas for container to ensure no grey corners
-        if LOCAL_DEBUG: builder_logger.trace(f"🏗️🪟🖼️ [CONSTRUCT] Creating canvas container for wink '{label}'")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🪟🖼️ [CONSTRUCT] Creating canvas container for wink '{label}'", level="TRACE")
         frame = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", width=config["width"], height=config["height"])
         frame.is_locked = False # ⚡ INTERACTION LOCK
         
@@ -94,7 +94,7 @@ class BuilderButtonWinkCreator(TransparencyMixin):
         
         # Apply Industrial Transparency to both container and inner canvas
         if hasattr(builder_instance, '_apply_transparency'):
-            if LOCAL_DEBUG: builder_logger.trace(f"👻🌀🪟 [ALPHA] Applying industrial transparency to wink '{label}'")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to wink '{label}'", level="TRACE")
             # 1. Slices the patina onto the inner drawing canvas
             builder_instance._apply_transparency(frame, canvas, config_data, builder_instance)
             # 2. Also slices onto the outer container frame to handle padding/margins
@@ -104,10 +104,10 @@ class BuilderButtonWinkCreator(TransparencyMixin):
             # ⚡ VISIBILITY GUARD: Stop rendering and physics if tab is hidden.
             # This significantly reduces CPU overhead for background animations.
             if hasattr(builder_instance, "is_visible") and not builder_instance.is_visible:
-                if LOCAL_DEBUG: builder_logger.trace(f"🙈🚫🎨 [REDRAW] Redraw ABORTED for hidden wink '{label}'")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🙈🚫🎨 [REDRAW] Redraw ABORTED for hidden wink '{label}'", level="TRACE")
                 return
 
-            if LOCAL_DEBUG: builder_logger.trace(f"🔄✨🎨 [REDRAW] Rendering wink visuals for '{label}' (Open: {state.get('current_open'):.2f})")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄✨🎨 [REDRAW] Rendering wink visuals for '{label}' (Open: {state.get('current_open'):.2f})", level="TRACE")
             draw_wink_visuals(canvas, state, config, label)
             
         def sync_bg():
@@ -118,7 +118,7 @@ class BuilderButtonWinkCreator(TransparencyMixin):
         # 8. MQTT and State Mirroring
         def broadcast_locked(is_locked):
             if state_mirror_engine and path:
-                 if LOCAL_DEBUG: builder_logger.debug(f"⚡🔴📡 [MQTT] Broadcasting wink lock state change for '{label}': {is_locked}")
+                 matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚡🔴📡 [MQTT] Broadcasting wink lock state change for '{label}': {is_locked}", level="DEBUG")
                  extra = {"LOCKED": is_locked}
                  state_mirror_engine.broadcast_gui_change_to_mqtt(path, extra_payload=extra)
 
@@ -126,7 +126,7 @@ class BuilderButtonWinkCreator(TransparencyMixin):
 
         def on_value_change(*args):
             new_val = value_var.get()
-            if LOCAL_DEBUG: builder_logger.info(f"⚡🔄✨ [EVENT] Wink value change detected for '{label}': {new_val}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚡🔄✨ [EVENT] Wink value change detected for '{label}': {new_val}", level="INFO")
             
             # Purity check: only act if state actually changed or we need to stop an animation
             if new_val == state["_last_value"] and not state["animating"]:
@@ -135,7 +135,7 @@ class BuilderButtonWinkCreator(TransparencyMixin):
 
             if config["blink_interval"] > 0 and new_val:
                 if not state.get("is_blinking_active"):
-                    if LOCAL_DEBUG: builder_logger.debug(f"🌀⏳✨ [ANIM] Starting blink loop for '{label}'")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🌀⏳✨ [ANIM] Starting blink loop for '{label}'", level="DEBUG")
                     state["is_blinking_active"] = True
                     state["blink_open"] = True
                     state["target_open"] = 1.0
@@ -149,12 +149,12 @@ class BuilderButtonWinkCreator(TransparencyMixin):
                 state["is_latched"] = new_val
 
             if not state.get("animating"):
-                if LOCAL_DEBUG: builder_logger.trace(f"🌀⏳🌀 [ANIM] Starting physics update for '{label}'")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🌀⏳🌀 [ANIM] Starting physics update for '{label}'", level="TRACE")
                 state["animating"] = True
                 update_physics(canvas, state, config, draw_visuals_callback)
 
             if state_mirror_engine and path:
-                 if LOCAL_DEBUG: builder_logger.debug(f"⚡🔴📡 [MQTT] Broadcasting wink value change for '{label}' to '{path}'")
+                 matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚡🔴📡 [MQTT] Broadcasting wink value change for '{label}' to '{path}'", level="DEBUG")
                  extra = {"LOCKED": state["is_locked"]}
                  state_mirror_engine.broadcast_gui_change_to_mqtt(path, extra_payload=extra)
 
@@ -168,30 +168,30 @@ class BuilderButtonWinkCreator(TransparencyMixin):
 
         def _update_from_mqtt(data):
             if "LOCKED" in data:
-                if LOCAL_DEBUG: builder_logger.debug(f"📥📶🔄 [MQTT] Incoming lock state for '{label}': {data['LOCKED']}")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📥📶🔄 [MQTT] Incoming lock state for '{label}': {data['LOCKED']}", level="DEBUG")
                 state["is_locked"] = data["LOCKED"]
                 draw_visuals_callback()
 
         if path and state_mirror_engine:
-            if LOCAL_DEBUG: builder_logger.trace(f"📡📶🔗 [MQTT] Registering wink at path '{path}'")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡📶🔗 [MQTT] Registering wink at path '{path}'", level="TRACE")
             topic = state_mirror_engine.register_widget(
                 path, value_var, base_mqtt_topic_from_path, config_data, update_callback=_update_from_mqtt, instance=frame
             )
             if subscriber_router and topic:
-                if LOCAL_DEBUG: builder_logger.debug(f"📥📶🔄 [MQTT] Subscribing to topic: {topic}")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📥📶🔄 [MQTT] Subscribing to topic: {topic}", level="DEBUG")
                 subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
             
-            if LOCAL_DEBUG: builder_logger.trace(f"🔄⏳🔋 [STATE] Initializing widget state from cache/broker for '{path}'")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄⏳🔋 [STATE] Initializing widget state from cache/broker for '{path}'", level="TRACE")
             state_mirror_engine.initialize_widget_state(path)
 
         # 9. Events
-        if LOCAL_DEBUG: builder_logger.trace(f"🖱️👆🕹️ [EVENTS] Binding input protocols for wink '{label}'")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️👆🕹️ [EVENTS] Binding input protocols for wink '{label}'", level="TRACE")
         bind_wink_events(canvas, state, config, value_var, draw_visuals_callback, broadcast_locked)
         
         # Initial Draw
         draw_visuals_callback()
 
-        if LOCAL_DEBUG: builder_logger.success(f"✅🆗🔳 [SUCCESS] The wink button '{label}' has materialized!")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🔳 [SUCCESS] The wink button '{label}' has materialized!", level="SUCCESS")
         return frame
 
     @staticmethod

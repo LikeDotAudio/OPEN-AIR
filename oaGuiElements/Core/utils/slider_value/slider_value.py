@@ -5,12 +5,13 @@
 # Description: slider_value/gui_slider_value.py
 
 import os
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import tkinter as tk
 from tkinter import ttk
 import inspect
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -56,7 +57,7 @@ class BuilderSliderValueCreator(TransparencyMixin):
     #     tk.Frame: The created frame containing the composite widget, or None on failure.
     def make_slider_value(self, parent_widget, config_data, context=None, **kwargs):
         # Creates a slider and an entry box for a numerical value.
-        if LOCAL_DEBUG: logger.trace(f"🔬 Entering make_slider_value with config: {config_data}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 Entering make_slider_value with config: {config_data}", level="TRACE")
         current_function_name = inspect.currentframe().f_code.co_name
 
         # Extract only widget-specific config from config_data
@@ -77,7 +78,7 @@ class BuilderSliderValueCreator(TransparencyMixin):
             base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
             builder_instance = kwargs.get("builder_instance") or self
 
-        if LOCAL_DEBUG: logger.debug(f"🔬⚡️ Entering '{current_function_name}' to assemble a slider for '{label}'.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️ Entering '{current_function_name}' to assemble a slider for '{label}'.", level="DEBUG")
 
         try:
             sub_frame = tk.Frame(parent_widget, bd=0, highlightthickness=0, relief="flat")  # Use parent_widget here
@@ -188,7 +189,7 @@ class BuilderSliderValueCreator(TransparencyMixin):
                     if min_val <= new_val <= max_val:
                         slider.set(new_val)
                 except ValueError:
-                    if LOCAL_DEBUG: logger.debug("Invalid input, please enter a number.")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "Invalid input, please enter a number.", level="DEBUG")
 
             slider.config(command=on_slider_move)
             entry.bind("<FocusOut>", on_entry_change)
@@ -197,7 +198,7 @@ class BuilderSliderValueCreator(TransparencyMixin):
             # --- New Logic: Trace for external updates ---
             def _update_slider_from_entry_var(*args):
                 if not entry_value.get():  # Check for empty string
-                    if LOCAL_DEBUG: logger.debug("Empty string in entry_value for slider. Ignoring update.")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "Empty string in entry_value for slider. Ignoring update.", level="DEBUG")
                     return  # Exit early if the string is empty
 
                 try:
@@ -211,7 +212,7 @@ class BuilderSliderValueCreator(TransparencyMixin):
                         slider.set(max_val)
                 except (ValueError, tk.TclError):
                     # Handle cases where entry_value might not be a valid float
-                    if LOCAL_DEBUG: logger.debug(f"Invalid value in entry_value for slider: {entry_value.get()}")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Invalid value in entry_value for slider: {entry_value.get()}", level="DEBUG")
 
             # Bind the trace to the entry_value
             entry_value.trace_add("write", _update_slider_from_entry_var)
@@ -243,10 +244,9 @@ class BuilderSliderValueCreator(TransparencyMixin):
                 # 4. Initialize the widget state from cache or broadcast initial state
                 state_mirror_engine.initialize_widget_state(widget_id)
 
-            if LOCAL_DEBUG: logger.success(f"✅ SUCCESS! The slider '{label}' has materialized!")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ SUCCESS! The slider '{label}' has materialized!", level="SUCCESS")
             return sub_frame
 
         except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("💥 KABOOM! The slider contraption for '{label}' has malfunctioned! Error")
+            logger.exception("💥 KABOOM! The slider contraption for '{label}' has malfunctioned! Error")
             return None

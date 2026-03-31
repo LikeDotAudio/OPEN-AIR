@@ -5,10 +5,11 @@
 # Description: Modularized High-performance Dual Fader Widget.
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()

@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 import time
 import math
@@ -75,4 +77,4 @@ class HorizontalMeterRenderer(ttk.Frame):
                 topic = get_topic(self.state_mirror_engine.base_topic, self.base_mqtt_topic, self.widget_id)
                 payload = {"val": val, "ts": time.time(), "GUID": self.GUID, "src": "HorizontalMeter"}
                 publish_payload(topic, orjson.dumps(payload).decode(), retain=True)
-        except Exception as e: logger.debug(f"❌ Publishing error: {e}")
+        except Exception as e: matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"❌ Publishing error: {e}", level="DEBUG")

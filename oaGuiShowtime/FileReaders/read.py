@@ -5,10 +5,11 @@
 # Description: Showtime/worker_showtime_read.py
 
 import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -28,14 +29,14 @@ from oaFileImportShow.FileReaders.loader import maker_file_check_for_markers_fil
 # Outputs:
 #     None.
 def load_marker_data(showtime_tab_instance):
-    if LOCAL_DEBUG: logger.debug("🟢️️️🟢 Loading raw marker data from file.")
+    matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, "🟢️️️🟢 Loading raw marker data from file.", level="DEBUG")
 
     raw_headers, raw_data = maker_file_check_for_markers_file()
 
     if not raw_data:
         showtime_tab_instance.marker_data = []
         showtime_tab_instance.column_headers = []
-        if LOCAL_DEBUG: logger.debug("🟡 No marker data found in MARKERS.csv. No buttons will be created.")
+        matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, "🟡 No marker data found in MARKERS.csv. No buttons will be created.", level="DEBUG")
         return
 
     showtime_tab_instance.marker_data = [
@@ -43,4 +44,4 @@ def load_marker_data(showtime_tab_instance):
     ]
     showtime_tab_instance.column_headers = raw_headers
 
-    if LOCAL_DEBUG: logger.success(f"✅ Loaded {len(showtime_tab_instance.marker_data)} rows. Converted to dictionaries for sorting and display.")
+    matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, f"✅ Loaded {len(showtime_tab_instance.marker_data)} rows. Converted to dictionaries for sorting and display.", level="SUCCESS")

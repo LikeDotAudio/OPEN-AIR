@@ -5,10 +5,11 @@
 # Description: Showtime/worker_showtime_on_group_toggle.py
 
 import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -29,13 +30,13 @@ from oaGuiShowtime.Methods.tune import on_tune_request_from_selection
 # Outputs:
 #     None.
 def on_group_toggle(showtime_tab_instance, group_name):
-    if LOCAL_DEBUG: logger.debug(f"🟢️️️🔵 Group toggle clicked for: {group_name}. Current selection: {showtime_tab_instance.selected_group}.")
+    matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, f"🟢️️️🔵 Group toggle clicked for: {group_name}. Current selection: {showtime_tab_instance.selected_group}.", level="DEBUG")
     if showtime_tab_instance.selected_group == group_name:
         showtime_tab_instance.selected_group = None
-        if LOCAL_DEBUG: logger.debug("🟢️️️🟡 Deselected Group. Showing all devices for the current Zone.")
+        matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, "🟢️️️🟡 Deselected Group. Showing all devices for the current Zone.", level="DEBUG")
     else:
         showtime_tab_instance.selected_group = group_name
-        if LOCAL_DEBUG: logger.debug(f"🟢️️️🟢 Selected new Group: {showtime_tab_instance.selected_group}.")
+        matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, f"🟢️️️🟢 Selected new Group: {showtime_tab_instance.selected_group}.", level="DEBUG")
 
     showtime_tab_instance._create_group_buttons()
     showtime_tab_instance._create_device_buttons()

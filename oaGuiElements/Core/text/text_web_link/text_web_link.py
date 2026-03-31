@@ -5,12 +5,13 @@
 # Description: text_web_link/dynamic_guimake_text_web_link.py
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 import webbrowser
 import os
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -41,10 +42,9 @@ class BuilderTextWebLinkCreator(TransparencyMixin):
         self, parent_widget, config_data, context=None, **kwargs
     ):  # Updated signature
             """Creates a web link widget."""
-            if BUILDER_DEBUG: 
-                builder_logger.trace(f"🔬🏗️📑 [BUILDER] Entering make_text_web_link")
-                builder_logger.debug(f"📜📑💻 [CONFIG] Raw config received: {config_data}")
-    
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📑 [BUILDER] Entering make_text_web_link", level="TRACE")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
+
             current_function_name = "make_text_web_link"
     
             # Extract only widget-specific config from config_data
@@ -53,21 +53,21 @@ class BuilderTextWebLinkCreator(TransparencyMixin):
             path = config_data.get("path")
     
             # ⚡ HARDENED INTERFACE: Extract from context if available
-            if BUILDER_DEBUG: builder_logger.trace("🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...", level="TRACE")
             if context:
                 state_mirror_engine = context.state_mirror_engine
                 subscriber_router = context.subscriber_router
                 base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
                 builder_instance = context.builder_instance
-                if BUILDER_DEBUG: builder_logger.debug("✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.", level="DEBUG")
             else:
                 state_mirror_engine = self.state_mirror_engine
                 subscriber_router = self.subscriber_router
                 base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
                 builder_instance = kwargs.get("builder_instance") or self
-                if BUILDER_DEBUG: builder_logger.debug("⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.", level="DEBUG")
     
-            if BUILDER_DEBUG: builder_logger.debug(f"🔬⚡️📑 [BUILDER] Opening portal (web link) for '{label}' at path '{path}'.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️📑 [BUILDER] Opening portal (web link) for '{label}' at path '{path}'.", level="DEBUG")
     
             # ⚡ HIGH-FIDELITY: Use tk.Canvas for transparency support
             try:
@@ -76,7 +76,7 @@ class BuilderTextWebLinkCreator(TransparencyMixin):
             except:
                 p_bg = "#2b2b2b"
     
-            if BUILDER_DEBUG: builder_logger.trace(f"🏗️🪟🎨 [CONSTRUCT] Creating canvas for web link '{label}'")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🪟🎨 [CONSTRUCT] Creating canvas for web link '{label}'", level="TRACE")
             canvas = tk.Canvas(
                 parent_widget,
                 bd=0,
@@ -88,7 +88,7 @@ class BuilderTextWebLinkCreator(TransparencyMixin):
             
             # Apply Industrial Transparency
             if hasattr(self, '_apply_transparency'):
-                if BUILDER_DEBUG: builder_logger.trace(f"👻🌀🪟 [ALPHA] Applying industrial transparency to link canvas.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to link canvas.", level="TRACE")
                 self._apply_transparency(canvas, canvas, config, builder_instance)
     
             try:
@@ -96,13 +96,13 @@ class BuilderTextWebLinkCreator(TransparencyMixin):
                 font_size = layout_config.get("font", 10)
                 custom_font = ("Helvetica", font_size, "underline")
                 custom_colour = layout_config.get("colour", "blue")
-                if BUILDER_DEBUG: builder_logger.debug(f"📐📏🎨 [STYLE] Link style: Font size {font_size}, Color: {custom_colour}")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📐📏🎨 [STYLE] Link style: Font size {font_size}, Color: {custom_colour}", level="DEBUG")
     
                 url = config.get("url", "#")
                 
                 def redraw_link(*args):
                     if not canvas.winfo_exists(): return
-                    if BUILDER_DEBUG: builder_logger.trace(f"🔄🎨🔤 [REDRAW] Redrawing link text for '{label}'")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄🎨🔤 [REDRAW] Redrawing link text for '{label}'", level="TRACE")
                     canvas.delete("industrial_text")
                     w, h = canvas.winfo_width(), canvas.winfo_height()
                     if w <= 1: return
@@ -122,19 +122,17 @@ class BuilderTextWebLinkCreator(TransparencyMixin):
     
                 def _open_url(event):
                     try:
-                        if BUILDER_DEBUG: builder_logger.info(f"🖱️🚀📑 [INPUT] User clicked link '{label}'. Opening URL: {url}")
+                        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️🚀📑 [INPUT] User clicked link '{label}'. Opening URL: {url}", level="INFO")
                         webbrowser.open_new(url)
                     except Exception as e:
-                        if BUILDER_DEBUG:
-                            builder_logger.exception(f"❌🚫🛑 [ERROR] failure opening URL '{url}' for '{label}': {e}")
-    
-                if BUILDER_DEBUG: builder_logger.trace("🖱️👆🔗 [EVENTS] Binding link activation protocols.")
+                        builder_logger.exception(f"❌🚫🛑 [ERROR] failure opening URL '{url}' for '{label}': {e}")
+
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🖱️👆🔗 [EVENTS] Binding link activation protocols.", level="TRACE")
                 canvas.bind("<Button-1>", _open_url)
     
-                if BUILDER_DEBUG: builder_logger.success(f"✅🆗📑 [SUCCESS] The web link portal for '{label}' has materialized!")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗📑 [SUCCESS] The web link portal for '{label}' has materialized!", level="SUCCESS")
                 return canvas
             except Exception as e:
-                if BUILDER_DEBUG:
-                    builder_logger.exception(f"❌🚫🛑 [ERROR] Critical failure creating web link '{label}'")
+                builder_logger.exception(f"❌🚫🛑 [ERROR] Critical failure creating web link '{label}'")
                 return None
     

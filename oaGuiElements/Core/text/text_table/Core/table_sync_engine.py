@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 import orjson
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import tkinter as tk
 from loguru import logger
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic
@@ -51,7 +53,7 @@ class TableSyncEngine:
         try:
             data = payload if isinstance(payload, (dict, list)) else orjson.loads(payload)
         except Exception as e:
-            logger.debug(f"Failed to decode payload in incremental update: {e}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Failed to decode payload in incremental update: {e}", level="DEBUG")
             return
 
         # 1. Handle Pulse (Radar Sync)
@@ -65,7 +67,7 @@ class TableSyncEngine:
                         try:
                             if abs(float(idat.get(ac)) - float(pa)) < 1.0: tid = iid; break
                         except Exception as e:
-                            logger.trace(f"Error checking pulse match: {e}")
+                            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Error checking pulse match: {e}", level="TRACE")
             if tid: self.tree.selection_set(tid); self.tree.see(tid)
             return
 

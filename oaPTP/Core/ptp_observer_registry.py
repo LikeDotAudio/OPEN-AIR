@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 
 class PTPObserverRegistry:
     """Manages the registration and notification of PTP data observers."""
@@ -15,7 +17,7 @@ class PTPObserverRegistry:
     def register(cls, callback):
         if callback not in cls._observers:
             cls._observers.append(callback)
-            logger.success("✅ PTP Observer registered.")
+            matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, "✅ PTP Observer registered.", level="SUCCESS")
 
     @classmethod
     def unregister(cls, callback):

@@ -72,7 +72,7 @@ Looks up and returns the inputs for a given command node.
 **Side Effects & Thread-Safety:**
 - [TODO: Note any global state changes, locks, I/O operations, or reentrancy limitations.]
 
-#### `lookup_outputs(command_node, command_path)`
+#### `retrieve_command_outputs(command_node, command_path)`
 Looks up and returns the outputs for a given command node.
 
 **Parameters:**

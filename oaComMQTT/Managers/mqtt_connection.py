@@ -76,6 +76,10 @@ class MqttConnectionManager:
         """Returns True if the worker is currently connected to the broker."""
         return self._connected
 
+    def get_client_instance(self):
+        """shim for backward compatibility. Returns self because we implement publish()."""
+        return self
+
     def publish(self, topic, payload=None, qos=0, retain=False):
         """Thread-safe non-blocking publish (enqueues message)."""
         self.queue_manager.put_publish_message(topic, payload, qos, retain)

@@ -1,8 +1,19 @@
 # Managers/open_air_ui.py
-# Author: Anthony Peter Kuzub
-# Version: 20260315.Modular.1
 #
-# Description: !/usr/bin/env python3
+# Orchestrates the startup, execution, and shutdown of the OPEN-AIR UI service.
+# Manages the Tkinter main loop and coordinates the bootstrap sequence.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260330.1600.1
 
 import sys
 import pathlib
@@ -20,14 +31,14 @@ from oaLogging.Core.logger import set_log_directory
 from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
 from oaConfiguration.Methods.console_encoder import configure_console_encoding
 from oaGuiSplashScreen.Methods.splash_screen import SplashScreen
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 
 # --- EXTRACTED CORE MODULES ---
 from oaGuiManager.Core.ui_window import UIWindowManager
 from oaGuiManager.Core.shutdown_coordinator import ShutdownCoordinator
 from oaGuiManager.Core.bootstrap_sequence import AsyncBootstrapEngine
 from oaGuiManager.Core.composition_root import UICompositionRoot
-
-LOCAL_DEBUG = True
 
 def main():
     """Orchestrates the startup, execution, and shutdown of the OPEN-AIR UI."""
@@ -37,7 +48,7 @@ def main():
     configure_console_encoding()
     app_constants = Config.get_instance()
     
-    if LOCAL_DEBUG: logger.debug("🖥️🎨 [UI] Starting OpenAir UI Service...")
+    matrix_log("ui", "system", "main", "🖥️🎨 [UI] Starting OpenAir UI Service...", "DEBUG")
 
     # 2. Tkinter Environment Setup
     root = UIWindowManager.create_root_window()
@@ -53,7 +64,7 @@ def main():
     UIWindowManager.reveal_main_window(root, splash, app_constants.global_settings["debug_enabled"])
 
     # 5. Shutdown Coordinator
-    shutdown_coordinator = ShutdownCoordinator(root, shared_services, LOCAL_DEBUG)
+    shutdown_coordinator = ShutdownCoordinator(root, shared_services, True)
     shutdown_coordinator.attach_to_root()
 
     # 6. Resource Management
@@ -66,14 +77,14 @@ def main():
     bootstrap_engine = AsyncBootstrapEngine(root, splash, shared_services, app_constants, shutdown_coordinator)
     threading.Thread(target=bootstrap_engine.run, daemon=True).start()
     
-    if LOCAL_DEBUG: logger.debug("🖥️🎨 [UI] Entering Tkinter MainLoop.")
+    matrix_log("ui", "system", "main", "🖥️🎨 [UI] Entering Tkinter MainLoop.", "DEBUG")
     root.mainloop()
     
-    if LOCAL_DEBUG: logger.debug("🖥️🎨 [UI] MainLoop exited. Destroying root...")
+    matrix_log("ui", "system", "main", "🖥️🎨 [UI] MainLoop exited. Destroying root...", "DEBUG")
     try:
         root.destroy()
     except Exception as e:
-        logger.trace(f"Error during root.destroy(): {e}")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Error during root.destroy(): {e}", level="TRACE")
     
     sys.exit(0)
 

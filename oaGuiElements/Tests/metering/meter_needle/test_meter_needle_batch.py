@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 import unittest
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import json
 import os
 import tkinter as tk
@@ -68,7 +70,7 @@ class TestMeterNeedleBatch(unittest.TestCase):
                 )
                 
                 self.assertIsNotNone(meter_frame, f"Failed to create meter for {key}")
-                # logger.success(f"Successfully built meter: {key}")
+                # matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Successfully built meter: {key}", level="SUCCESS")
             except Exception as e:
                 self.fail(f"Meter creation failed for '{key}' with error: {str(e)}")
 

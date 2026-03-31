@@ -153,8 +153,8 @@ class MqttDataFlattenerUtility:
         if LOCAL_DEBUG:
             MQTT_LOGGER.debug("Processing buffer and commencing pivoting and flattening.")
 
-        flattened_data = {}
-        flattened_data["Parameter"] = self.last_unique_identifier
+        flattened_payload = {}
+        flattened_payload["Parameter"] = self.last_unique_identifier
 
         for t, p in self.data_buffer.items():
             data_key = t.rsplit("/", 1)[-1]
@@ -169,7 +169,7 @@ class MqttDataFlattenerUtility:
                 value = value.strip('"')
 
             if value is not None:
-                flattened_data[data_key] = value
+                flattened_payload[data_key] = value
 
         self.clear_buffer()
 
@@ -180,5 +180,5 @@ class MqttDataFlattenerUtility:
         if LOCAL_DEBUG:
             MQTT_LOGGER.success("Data transmogrification complete.")
 
-        if LOCAL_DEBUG: MQTT_LOGGER.debug(orjson.dumps(flattened_data, indent=2).decode())
-        return [flattened_data]
+        if LOCAL_DEBUG: MQTT_LOGGER.debug(orjson.dumps(flattened_payload, indent=2).decode())
+        return [flattened_payload]

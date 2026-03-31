@@ -5,12 +5,13 @@
 # Description: data_graphing/meter_widget_adapter.py
 
 from oaGuiElements.Core.graphing.graphing.Meter_to_display_units import (
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
     HorizontalMeterWithText,
     VerticalMeter,
 )
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -34,9 +35,8 @@ class MeterWidgetAdapterMixin:
     def _create_horizontal_meter(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
-        if BUILDER_DEBUG:
-            builder_logger.debug(f"🔬🏗️📊 [BUILDER] meter_adapter: Instantiating HorizontalMeter '{config_data.get('id', 'Unknown')}'.")
-            
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] meter_adapter: Instantiating HorizontalMeter '{config_data.get('id', 'Unknown')}'.", level="DEBUG")
+        
         # Extract arguments from config_data
         config = config_data  # config_data is the config
         base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
@@ -45,9 +45,8 @@ class MeterWidgetAdapterMixin:
 
         widget_id = config.get("id", "h_meter")
         
-        if BUILDER_DEBUG:
-            builder_logger.trace(f"🔬🏗️📊 [BUILDER] Spawning HorizontalMeterWithText core for '{widget_id}'")
-            
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] Spawning HorizontalMeterWithText core for '{widget_id}'", level="TRACE")
+        
         return HorizontalMeterWithText(
             parent=parent_widget,  # Use parent_widget here
             config=config,
@@ -69,9 +68,8 @@ class MeterWidgetAdapterMixin:
     def _create_vertical_meter(
         self, parent_widget, config_data, **kwargs
     ):  # Updated signature
-        if BUILDER_DEBUG:
-            builder_logger.debug(f"🔬🏗️📊 [BUILDER] meter_adapter: Instantiating VerticalMeter '{config_data.get('id', 'Unknown')}'.")
-            
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] meter_adapter: Instantiating VerticalMeter '{config_data.get('id', 'Unknown')}'.", level="DEBUG")
+        
         # Extract arguments from config_data
         config = config_data  # config_data is the config
         base_mqtt_topic_from_path = config_data.get("base_mqtt_topic_from_path")
@@ -80,9 +78,8 @@ class MeterWidgetAdapterMixin:
 
         widget_id = config.get("id", "v_meter")
         
-        if BUILDER_DEBUG:
-            builder_logger.trace(f"🔬🏗️📊 [BUILDER] Spawning VerticalMeter core for '{widget_id}'")
-            
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] Spawning VerticalMeter core for '{widget_id}'", level="TRACE")
+        
         return VerticalMeter(
             parent=parent_widget,  # Use parent_widget here
             config=config,

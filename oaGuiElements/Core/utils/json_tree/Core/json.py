@@ -5,11 +5,12 @@
 # Description: Brief summary of purpose
 
 import orjson
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from pathlib import Path
 from oaLogging.Core.logger import builder_logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    
 
 class JsonDataManager:
     """

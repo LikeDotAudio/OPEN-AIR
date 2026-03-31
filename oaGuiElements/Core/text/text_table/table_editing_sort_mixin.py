@@ -5,10 +5,11 @@
 # Description: text_table/table_editing_sort_mixin.py
 
 import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import re
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import TABLE_LOGGER
 from loguru import logger
 

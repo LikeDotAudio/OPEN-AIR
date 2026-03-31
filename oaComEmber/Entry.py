@@ -8,18 +8,34 @@
 oaComEmber/Entry.py - The sole orchestrator for the Ember Communication Module.
 
 Purpose:
-This file is the public entry point for 'oaComEmber'. It manages the 
+This file is the public entry point for 'oaComEmber'. It manages the
 lifecycle of the Ember+ connection.
 """
-
-# Placeholder for actual entry class if it were a Python implementation
-# Given Ember is likely C++ based on the directory structure, 
-# this would be the Python binding entry point.
 
 class EmberComEntry:
     """Entry point for Ember communication."""
     def __init__(self):
+        print("📡📥📥 [INBOUND] Initializing EmberComEntry...")
+        # Placeholder for actual initialization logic
         pass
+
+    def start(self):
+        """Starts the Ember+ communication service."""
+        print("🚀 [EMBER] Starting Ember+ service...")
+        # Placeholder for actual start logic
+        pass
+
+    def stop(self):
+        """Stops the Ember+ communication service."""
+        print("🛑 [EMBER] Stopping Ember+ service...")
+        # Placeholder for actual stop logic
+        pass
+
+    def status(self):
+        """Returns the current status of the Ember+ communication service."""
+        print("ℹ️ [EMBER] Checking Ember+ service status...")
+        # Placeholder for actual status check logic
+        return "idle" # Example status
 
 __all__ = [
     "EmberComEntry",

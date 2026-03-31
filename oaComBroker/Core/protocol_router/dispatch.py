@@ -12,18 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260328.1415.1
-#
-# Description:
-# This module implements the egress logic for the ProtocolRouter. It interprets
-# the emoji-based strategy strings calculated during ingestion and routes the
-# normalized message payloads to the appropriate transport managers (MQTT, OSC,
-# MIDI, SNMP).
-#
-# Architectural Role:
-# - Acts as the final stage of the ProtocolRouter pipeline.
-# - Enforces loop prevention by checking the origin source before dispatch.
-# - Utilizes @protocol_guard decorators to ensure transport-level isolation.
+# Version 20260330.1600.1
 
 import orjson
 from .constants import LOCAL_DEBUG, app_constants
@@ -33,55 +22,52 @@ from oaOchestration.Managers.protocol_guard import protocol_guard
 def dispatch_message(msg, managers):
     """
     Executes transport-specific publication based on the routing strategy.
-    
-    Args:
-        msg (dict): The normalized message packet.
-        managers (dict): Map of active protocol managers.
-        
-    Side Effects:
-        - Triggers network I/O via registered managers.
-        - Logs outbound activity to the router_logger.
     """
     strategy = msg.get("strategy", "")
     topic = msg["topic"]
     val = msg["val"]
     val_str = str(val)[:100] + ("..." if len(str(val)) > 100 else "")
 
-    # --- MQTT Dispatch: Broadcasts state to the network ---
+    # --- MQTT Dispatch ---
     if "🚀" in strategy or "Ⓜ️" in strategy:
         mqtt_manager = managers.get("mqtt")
-        # Prevent reflection: Do not send back to the source transport.
         if mqtt_manager and msg["source"] != "MQTT" and msg.get("logical_source") != "MQTT":
             _dispatch_mqtt(mqtt_manager, topic, msg, val_str)
 
-    # --- OSC Dispatch: Routes to external control surfaces ---
+    # --- OSC Dispatch ---
     if "🅾️" in strategy:
         osc_manager = managers.get("osc")
         if osc_manager and msg["source"] != "OSC" and msg.get("logical_source") != "OSC":
             _dispatch_osc(osc_manager, topic, val, msg, val_str)
 
-    # --- MIDI Dispatch: Routes to physical hardware controllers ---
+    # --- MIDI Dispatch ---
     if "🎹" in strategy:
         midi_manager = managers.get("midi")
         if midi_manager and msg["source"] != "MIDI" and msg.get("logical_source") != "MIDI":
             _dispatch_midi(midi_manager, topic, val, msg, val_str)
 
-    # --- SNMP Dispatch: Routes to network infrastructure ---
+    # --- SNMP Dispatch ---
     if "Ⓢ" in strategy:
         snmp_manager = managers.get("snmp")
         if snmp_manager and msg["source"] != "SNMP" and msg.get("logical_source") != "SNMP":
             _dispatch_snmp(snmp_manager, topic, val, val_str)
 
+    # --- SMPTE 2138 Dispatch ---
+    # We use the 🔗 emoji or explicit flag if needed. 
+    # For now, we dispatch if it's an Action strategy.
+    if "🔗" in strategy or "🚀" in strategy:
+        smpte_manager = managers.get("smpte2138")
+        if smpte_manager and msg["source"] != "SMPTE2138" and msg.get("logical_source") != "SMPTE2138":
+            _dispatch_smpte2138(smpte_manager, topic, val, msg, val_str)
+
 @protocol_guard("MQTT")
 def _dispatch_mqtt(mqtt_manager, topic, msg, val_str):
-    """Encapsulates the MQTT-specific publication logic."""
     payload = {
         "val": msg["val"], "source": msg.get("logical_source", msg["source"]),
         "ts": msg["ts"], "GUID": msg["guid"], "partition": msg["partition"]
     }
     if isinstance(msg.get("meta"), dict): payload.update(msg["meta"])
     
-    # --- Namespace Split: Publish to TX (Transmit) namespace ---
     tx_topic = topic
     base = app_constants.MQTT_BASE_TOPIC
     if base in topic and f"{base}/Cmd/" not in topic and f"{base}/Tx/" not in topic:
@@ -93,7 +79,6 @@ def _dispatch_mqtt(mqtt_manager, topic, msg, val_str):
 
 @protocol_guard("OSC")
 def _dispatch_osc(osc_manager, topic, val, msg, val_str):
-    """Encapsulates the OSC-specific publication logic."""
     osc_address = msg["meta"].get("osc_address", "/" + topic.replace("OPEN-AIR/", ""))
     osc_manager.send(osc_address, val)
     if LOCAL_DEBUG:
@@ -101,14 +86,20 @@ def _dispatch_osc(osc_manager, topic, val, msg, val_str):
 
 @protocol_guard("MIDI")
 def _dispatch_midi(midi_manager, topic, val, msg, val_str):
-    """Encapsulates the MIDI-specific publication logic."""
     midi_manager.publish(topic, val, msg["meta"])
     if LOCAL_DEBUG:
         router_logger.debug(f"📡📤📤 [MIDI] >> {topic}: {val_str}")
 
 @protocol_guard("SNMP")
 def _dispatch_snmp(snmp_manager, topic, val, val_str):
-    """Encapsulates the SNMP-specific publication logic."""
     snmp_manager.publish(topic, val)
     if LOCAL_DEBUG:
         router_logger.debug(f"📡📤📤 [SNMP] >> {topic}: {val_str}")
+
+@protocol_guard("SMPTE2138")
+def _dispatch_smpte2138(smpte_manager, topic, val, msg, val_str):
+    """Routes normalized internal actions to the SMPTE 2138 bridge."""
+    # The manager's ingest method handles OID mapping and Protobuf encoding.
+    smpte_manager.handle_router_event(topic, val, msg.get("meta", {}))
+    if LOCAL_DEBUG:
+        router_logger.debug(f"📡📤📤 [SMPTE2138] >> {topic}: {val_str}")

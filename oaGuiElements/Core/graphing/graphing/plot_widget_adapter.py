@@ -5,10 +5,11 @@
 # Description: Brief summary of purpose
 
 from oaGuiElements.Core.graphing.graphing.dynamic_graph import FluxPlotter
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from oaGuiElements.Core.graphing.graphing.dynamic_bar_graph import DynamicBarGraph
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -33,9 +34,8 @@ class BuilderGraphingCreator:
         return None
 
     def _create_plot_widget(self, parent_widget, config_data, context=None, **kwargs):
-        if BUILDER_DEBUG:
-            builder_logger.debug(f"🔬🏗️📊 [BUILDER] plot_adapter: Spawning FluxPlotter '{config_data.get('path', 'Unknown')}'.")
-        
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] plot_adapter: Spawning FluxPlotter '{config_data.get('path', 'Unknown')}'.", level="DEBUG")
+    
         # ⚡ HARDENED INTERFACE
         if context:
             state_mirror_engine = context.state_mirror_engine
@@ -60,9 +60,8 @@ class BuilderGraphingCreator:
         )
 
     def _create_bar_graph_widget(self, parent_widget, config_data, context=None, **kwargs):
-        if BUILDER_DEBUG:
-            builder_logger.debug(f"🔬🏗️📊 [BUILDER] plot_adapter: Spawning DynamicBarGraph '{config_data.get('path', 'Unknown')}'.")
-        
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] plot_adapter: Spawning DynamicBarGraph '{config_data.get('path', 'Unknown')}'.", level="DEBUG")
+    
         if context:
             state_mirror_engine = context.state_mirror_engine
             subscriber_router = context.subscriber_router

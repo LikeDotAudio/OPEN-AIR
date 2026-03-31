@@ -5,10 +5,11 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -24,39 +25,38 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
 
     def make_button_wink_toggler(self, parent_widget, config_data, context=None, **kwargs):
         """Creates a group of Wink buttons where only one can be active."""
-        if BUILDER_DEBUG: 
-            builder_logger.trace(f"🔬🏗️🔘 [BUILDER] Entering make_button_wink_toggler")
-            builder_logger.debug(f"📜📑💻 [CONFIG] Raw config received: {config_data}")
-        
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔘 [BUILDER] Entering make_button_wink_toggler", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
+    
         # Extract config
         label = config_data.get("label_active") or config_data.get("label", "")
         config = config_data
         path = config_data.get("path")
 
         # ⚡ HARDENED INTERFACE: Extract from context if available
-        if BUILDER_DEBUG: builder_logger.trace("🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...", level="TRACE")
         if context:
             state_mirror_engine = context.state_mirror_engine
             subscriber_router = context.subscriber_router
             base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
             app_instance = context.app_instance
             builder_instance = context.builder_instance or app_instance
-            if BUILDER_DEBUG: builder_logger.debug("✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.", level="DEBUG")
         else:
             state_mirror_engine = self.state_mirror_engine
             subscriber_router = self.subscriber_router
             base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
             builder_instance = kwargs.get("builder_instance") or self
             app_instance = kwargs.get("app_instance")
-            if BUILDER_DEBUG: builder_logger.debug("⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.", level="DEBUG")
 
-        if BUILDER_DEBUG: builder_logger.debug(f"🔬⚡️🔘 [BUILDER] Spawning wink toggler group for '{label}' at path '{path}'.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️🔘 [BUILDER] Spawning wink toggler group for '{label}' at path '{path}'.", level="DEBUG")
 
         # 1. Root Container (Use Canvas for transparency)
-        if BUILDER_DEBUG: builder_logger.trace(f"🏗️🪟🎨 [CONSTRUCT] Creating main canvas container for wink toggler '{label}'")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🪟🎨 [CONSTRUCT] Creating main canvas container for wink toggler '{label}'", level="TRACE")
         container = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat")
         if hasattr(builder_instance, '_apply_transparency'):
-            if BUILDER_DEBUG: builder_logger.trace(f"👻🌀🪟 [ALPHA] Applying industrial transparency to toggler container '{label}'")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to toggler container '{label}'", level="TRACE")
             builder_instance._apply_transparency(container, container, config, builder_instance)
         
         # 2. Group Frame (standard tk.Frame since container canvas handles the main bg)
@@ -82,7 +82,7 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
             if w <= 1: return
             container._last_redraw_size = (w, h)
             
-            if BUILDER_DEBUG: builder_logger.trace(f"🔄🎨🔤 [REDRAW] Redrawing labels for wink toggler '{label}'")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄🎨🔤 [REDRAW] Redrawing labels for wink toggler '{label}'", level="TRACE")
             container.delete("industrial_text")
             if label:
                 container.create_text(
@@ -105,7 +105,7 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
         
         # Normalize options to dict if list
         if isinstance(options, list):
-            if BUILDER_DEBUG: builder_logger.debug(f"⚠️🔔🔡 [CONFIG] Options for wink toggler '{label}' is a list, converting to dict.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚠️🔔🔡 [CONFIG] Options for wink toggler '{label}' is a list, converting to dict.", level="DEBUG")
             options_dict = {}
             for item in options:
                 options_dict[item] = {"label_active": str(item)}
@@ -115,10 +115,10 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
         value_default = config.get(
             "value_default", next(iter(options.keys())) if options else None
         )
-        if BUILDER_DEBUG: builder_logger.debug(f"🔋🔘✨ [STATE] Initial selected wink key for '{label}': {value_default}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔋🔘✨ [STATE] Initial selected wink key for '{label}': {value_default}", level="DEBUG")
         
         layout_columns = int(config.get("layout_columns", 1))
-        if BUILDER_DEBUG: builder_logger.debug(f"📐📏🔳 [LAYOUT] Columns: {layout_columns}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📐📏🔳 [LAYOUT] Columns: {layout_columns}", level="DEBUG")
 
         # Main Group Variable (Strings for Radio behavior)
         group_var = kwargs.get("variable") or tk.StringVar(master=parent_widget, value=value_default)
@@ -129,7 +129,7 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
 
         row, col = 0, 0
         
-        if BUILDER_DEBUG: builder_logger.trace(f"🏗️🔳🕹️ [CONSTRUCT] Iterating through options to create Wink buttons for '{label}' group.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🔳🕹️ [CONSTRUCT] Iterating through options to create Wink buttons for '{label}' group.", level="TRACE")
         for key, button_config in options.items():
             
             # Merge configs: Parent config is base, button_config overrides
@@ -146,14 +146,14 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
             def sync_from_group(var_name, index, mode, k=key, bv=bool_var):
                 is_selected = (group_var.get() == str(k))
                 if bv.get() != is_selected:
-                    if BUILDER_DEBUG: builder_logger.trace(f"🔄✨🔘 [SYNC] Syncing wink '{k}' from group variable: {is_selected}")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄✨🔘 [SYNC] Syncing wink '{k}' from group variable: {is_selected}", level="TRACE")
                     bv.set(is_selected)
             group_var.trace_add("write", sync_from_group)
             
             def sync_from_bool(var_name, index, mode, k=key, bv=bool_var):
                 if bv.get():
                     if group_var.get() != str(k):
-                        if BUILDER_DEBUG: builder_logger.debug(f"⚡🔄🔋 [STATE] Wink '{k}' selected. Updating group variable.")
+                        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚡🔄🔋 [STATE] Wink '{k}' selected. Updating group variable.", level="DEBUG")
                         group_var.set(k)
             bool_var.trace_add("write", sync_from_bool)
 
@@ -194,21 +194,21 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
 
         # --- MQTT for the Group ---
         if path and state_mirror_engine:
-            if BUILDER_DEBUG: builder_logger.trace(f"📡📶🔗 [MQTT] Registering wink toggler group at path '{path}'")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡📶🔗 [MQTT] Registering wink toggler group at path '{path}'", level="TRACE")
             widget_id = path
             topic = state_mirror_engine.register_widget(
                 widget_id, group_var, base_mqtt_topic_from_path, config
             )
             
             if subscriber_router and topic:
-                if BUILDER_DEBUG: builder_logger.debug(f"📥📶🔄 [MQTT] Subscribing to group topic: {topic}")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📥📶🔄 [MQTT] Subscribing to group topic: {topic}", level="DEBUG")
                 subscriber_router.subscribe_to_topic(
                     topic, state_mirror_engine.sync_incoming_mqtt_to_gui
                 )
             
-            if BUILDER_DEBUG: builder_logger.trace(f"🔄⏳🔋 [STATE] Initializing group state from cache/broker for '{path}'")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄⏳🔋 [STATE] Initializing group state from cache/broker for '{path}'", level="TRACE")
             state_mirror_engine.initialize_widget_state(path)
 
         redraw_group_labels()
-        if BUILDER_DEBUG: builder_logger.success(f"✅🆗🔘 [SUCCESS] The wink toggler group '{label}' has materialized!")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🔘 [SUCCESS] The wink toggler group '{label}' has materialized!", level="SUCCESS")
         return container

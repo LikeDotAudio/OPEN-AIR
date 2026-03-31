@@ -13,6 +13,7 @@ OPEN-AIR was created to bridge the gap between raw hardware capabilities and hig
 1.  **Freedom from Vendor Lock-in:** Use one interface to control multiple brands of hardware through the YAK command abstraction.
 2.  **Your Folders are Your Interface:** No complex UI designers. Reorganizing your `oaGuiDefinitions/` folders instantly redraws your dashboard.
 3.  **Photorealistic "Next Gen" Visuals:** High-fidelity vintage meters and industrial aesthetics provide a tactile, professional monitoring experience.
+4.  **Hierarchical Forensic Observability:** A refined, matrix-based logging system that allows for surgical debugging and dynamic runtime control.
 
 ---
 
@@ -20,8 +21,10 @@ OPEN-AIR was created to bridge the gap between raw hardware capabilities and hig
 For detailed information, please refer to the modular documentation:
 
 - **[User Manual](oaDocumentation/Manual/01_Introduction.md)**: Start here to learn how to use the software.
+- **[Logging Matrix](oaConfiguration/Documentation/logging_matrix.md)**: Learn how the hierarchical debug system works.
 - **[Installation Guide](oaDocumentation/Landmarks/Installation_Guide.md)**: Setup, dependencies, and environment configuration.
 - **[Documentation Map](oaDocumentation/Project_Map/Documentation_Map.md)**: Deep dive into the project structure and modules.
+- **[SMPTE2138 Bridge](oaComSMPTE2138/Documentation/Summary.md)**: Details on the SMPTE ST 2138 (SMPTE2138) Protobuf interface.
 - **[Communication Broker](oaComBroker/Documentation/README.md)**: Details on the Protocol Router and Unified Message Schema.
 - **[Patent Details](oaDocumentation/Patent/01_abstract.md)**: Technical descriptions of the novel architecture.
 

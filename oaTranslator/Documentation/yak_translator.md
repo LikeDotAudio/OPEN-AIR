@@ -99,7 +99,7 @@ Navigates the yak_repository to find the command declaration.
 **Side Effects & Thread-Safety:**
 - [TODO: Note any locks, I/O, or global state.]
 
-##### `_fill_scpi_placeholders(self, scpi_template, params)`
+##### `_render_scpi_command(self, scpi_template, params)`
 Fills placeholders in an SCPI command template.
 
 **Parameters:**

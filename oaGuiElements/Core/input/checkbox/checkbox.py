@@ -5,13 +5,14 @@
 # Description: checkbox/dynamic_guimake_checkbox.py
 
 import os
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import tkinter as tk
 from tkinter import ttk
 import inspect
 import orjson
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -68,7 +69,7 @@ class BuilderCheckboxCreator(TransparencyMixin):
             base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
             builder_instance = kwargs.get("builder_instance") or self
 
-        if LOCAL_DEBUG: logger.debug(f"🔬⚡️ Entering '{current_function_name}' to spawn a checkbox for '{label}'.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️ Entering '{current_function_name}' to spawn a checkbox for '{label}'.", level="DEBUG")
 
         try:
             # Use tk.Canvas for transparency support
@@ -160,16 +161,15 @@ class BuilderCheckboxCreator(TransparencyMixin):
                         topic, state_mirror_engine.sync_incoming_mqtt_to_gui
                     )
 
-                if LOCAL_DEBUG: logger.debug(f"🔬 Widget '{label}' ({path}) registered with StateMirrorEngine (BooleanVar: {state_var.get()}).")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 Widget '{label}' ({path}) registered with StateMirrorEngine (BooleanVar: {state_var.get()}).", level="DEBUG")
                 # Initialize state from cache or broadcast
                 state_mirror_engine.initialize_widget_state(path)
 
             redraw_checkbox()
 
-            if LOCAL_DEBUG: logger.success(f"✅ SUCCESS! The checkbox '{label}' has been successfully instantiated.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ SUCCESS! The checkbox '{label}' has been successfully instantiated.", level="SUCCESS")
             return canvas
 
         except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("❌ Error in {current_function_name} for '{label}'")
+            logger.exception("❌ Error in {current_function_name} for '{label}'")
             return None

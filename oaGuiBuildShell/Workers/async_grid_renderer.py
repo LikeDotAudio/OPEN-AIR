@@ -1,11 +1,23 @@
 # Workers/async_grid_renderer.py
-# Author: Anthony Peter Kuzub
-# Version: 20260315.Modular.1
 #
-# Description: Modularized Asynchronous Grid Layout Engine.
+# Modularized Asynchronous Grid Layout Engine. Orchestrates recursive 
+# Grid layout using a modular Skeleton-First strategy.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260330.1600.1
 
 import tkinter as tk
 from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- EXTRACTED CORE MODULES ---
 from ..Core.grid_topology_configurator import GridTopologyConfigurator
@@ -17,7 +29,7 @@ renderer_logger = logger.bind(subsystem="RENDERER")
 
 class AsyncGridRenderer:
     """
-    Orchestrates recursive Grid layout using a modular Skeleton-First strategy.
+    Asynchronous recursive Grid renderer.
     """
 
     def __init__(self, builder_instance):
@@ -25,15 +37,23 @@ class AsyncGridRenderer:
         self.batch_engine = BatchProcessingEngine(builder_instance, renderer_logger, LOCAL_DEBUG)
 
     def render(self, parent_frame, data, path_prefix="", override_cols=None, 
-               on_complete=None, parent_bg_pil=None, context=None):
+               on_complete=None, parent_bg_pil=None, context=None, 
+               bin_id=None, block_name=None):
         try:
             if not isinstance(data, dict):
                 if on_complete: on_complete()
                 return
 
-            if LOCAL_DEBUG: renderer_logger.debug(f"🏗️ Rendering branch '{path_prefix}'")
+            matrix_log("ui", "gui_shell", "render", f"🏗️ Rendering branch '{path_prefix}' (Bin: {bin_id}, Block: {block_name})", "DEBUG")
+            
+            # Extract Bin/Block Identity if this is a structural node
+            w_type = data.get("type", data.get("widget_type"))
+            if w_type == "OcaBin":
+                bin_id = data.get("id") or bin_id
+            elif w_type == "OcaBlock":
+                # If we have a label or specific identity on the block, use it
+                block_name = data.get("id") or data.get("label") or block_name
 
-            # 1. Topology & Geometry
             geom = data.get("geometry", {})
             if any(data.get(k) or geom.get(k) for k in ["width", "height"]):
                 try:
@@ -43,12 +63,10 @@ class AsyncGridRenderer:
                     if w: parent_frame.config(width=w)
                     if h: parent_frame.config(height=h)
                 except Exception as e:
-                    renderer_logger.trace(f"Geometry configuration skipped: {e}")
+                    matrix_log("ui", "gui_shell", "render", f"Geometry configuration skipped: {e}", "TRACE")
 
             fields = data.get("fields", data.get("blocks"))
             
-            # ⚡ SAFETY: If no fields/blocks found, and data itself has no 'type',
-            # it might be a raw dict of widgets. Otherwise, stop recursion.
             if fields is None:
                 if not data.get("type"):
                     fields = data
@@ -56,18 +74,15 @@ class AsyncGridRenderer:
                     if on_complete: on_complete()
                     return
             
-            # Robust Field Parsing: handle dict (default) or list of dicts (presets/OcaBin)
             if isinstance(fields, dict):
                 all_fields = list(fields.items())
             elif isinstance(fields, list):
                 all_fields = []
                 for item in fields:
                     if isinstance(item, dict):
-                        # Handle list of single-keyed dicts (presets style)
                         if len(item) == 1 and not any(k in ["type", "widget_type"] for k in item.keys()):
                             all_fields.extend(item.items())
                         else:
-                            # Handle list of widget configs (items style)
                             item_key = item.get("id") or item.get("label") or item.get("label_active")
                             all_fields.append((item_key, item))
                     else:
@@ -81,14 +96,13 @@ class AsyncGridRenderer:
             if context is None and hasattr(self.builder, '_get_widget_context'):
                 context = self.builder._get_widget_context()
 
-            # 2. Batch Orchestration
-            self._process_fields(parent_frame, all_fields, path_prefix, num_cols, on_complete, eff_bg, data, context)
+            self._process_fields(parent_frame, all_fields, path_prefix, num_cols, on_complete, eff_bg, data, context, bin_id, block_name)
             
         except Exception as e:
-            renderer_logger.exception(f"❌ Synchronized build error in '{path_prefix}': {e}")
+            matrix_log("ui", "gui_shell", "render", f"❌ Synchronized build error in '{path_prefix}': {e}", "ERROR")
             if on_complete: on_complete()
 
-    def _process_fields(self, parent, field_list, prefix, max_cols, on_complete, bg_pil, parent_data, context):
+    def _process_fields(self, parent, field_list, prefix, max_cols, on_complete, bg_pil, parent_data, context, bin_id, block_name):
         i = c = r = 0
         STRUCT = ["OcaBlock", "OcaBin", "OcaArray", "OcaBreakLine"]
         deferred = []; state = {"pending": 0, "loop_done": False, "aborted": False}
@@ -98,7 +112,6 @@ class AsyncGridRenderer:
                 if parent.winfo_exists() and prefix == "" and hasattr(self.builder, '_trigger_reslice_all'):
                     self.builder._trigger_reslice_all()
                 
-                # ⚡ Z-ORDER FIX: Ensure background is behind newly created elements
                 if prefix == "" and hasattr(self.builder, '_force_background_to_back'):
                     self.builder._force_background_to_back()
 
@@ -106,21 +119,19 @@ class AsyncGridRenderer:
                     try:
                         parent.after(1, on_complete)
                     except Exception as e:
-                        renderer_logger.trace(f"Deferred completion callback failed, executing immediately: {e}")
+                        matrix_log("ui", "gui_shell", "_process_fields", 
+                                   f"Deferred completion callback failed: {e}", "TRACE")
                         on_complete()
 
         while i < len(field_list):
             if not parent.winfo_exists(): state["aborted"] = True; break
             key, val = field_list[i]
             
-            # Metadata filter
             if key in ["layout", "type", "geometry", "column_sizing", "background"] or not isinstance(val, dict):
                 i += 1; continue
             
-            # Resolve unique path key
             path_key = key or val.get("id") or val.get("label") or f"item_{i}"
             
-            # ⚡ FIX: Correct path segment identification to prevent double dots.
             p_sfx = ""
             if parent_data:
                 if "fields" in parent_data: p_sfx = "fields"
@@ -131,6 +142,12 @@ class AsyncGridRenderer:
             
             w_type = val.get("type", val.get("widget_type"))
             if not w_type: i += 1; continue
+
+            # Inject Identity Metadata for leaf widgets
+            if w_type not in STRUCT:
+                val["bin_id"] = bin_id
+                val["block_name"] = block_name
+                val["field_name"] = key or path_key
 
             lay = val.get("layout", {}); cs, rs = int(lay.get("col_span", 1)), int(lay.get("row_span", 1))
             st = lay.get("sticky", "nsew" if w_type in STRUCT else "")
@@ -144,7 +161,8 @@ class AsyncGridRenderer:
                         self.builder.bind_to_widget(target)
                     target.grid(row=cr, column=cc, columnspan=cs, rowspan=rs, sticky=st)
                     state["pending"] += 1
-                    self.render(target, val, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context)
+                    # Pass the key of this block as the block_name for its children
+                    self.render(target, val, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context, bin_id=bin_id, block_name=key or path_key)
                 elif w_type == "OcaBin":
                     hull, inner = StructuralAssembler.create_bin(parent, val, self.builder)
                     hull._oca_path = cur_path
@@ -154,7 +172,8 @@ class AsyncGridRenderer:
                         self.builder.bind_to_widget(inner)
                     hull.grid(row=cr, column=cc, columnspan=cs, rowspan=rs, sticky=st)
                     state["pending"] += 1
-                    self.render(inner, val, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context)
+                    # A Bin resets or updates the bin_id for its children
+                    self.render(inner, val, cur_path, on_complete=lambda: (state.update({"pending": state["pending"]-1}), _check_done()), parent_bg_pil=bg_pil, context=context, bin_id=val.get("id") or bin_id, block_name=block_name)
                 else:
                     state["pending"] += 1; creator = self.builder.widget_factory.get(w_type)
                     if creator:

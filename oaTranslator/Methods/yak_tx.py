@@ -5,6 +5,8 @@
 # Description: This file (manager_yak_tx.py) is responsible for transmitting the final SCPI command to the device via the ScpiDispatcher.
 
 import os
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import inspect
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
@@ -12,7 +14,6 @@ from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
-LOCAL_DEBUG = True   
 
 class YakTxManager:
     """
@@ -32,10 +33,8 @@ class YakTxManager:
         
         # Check if the command string contains a '?' to identify it as a query
         if '?' in cleaned_command:
-            if LOCAL_DEBUG:
-                logger.debug(f"🐐🐐🐐🚀 Engaging the '{command_type}' API! Dispatching query command now!")
+            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"🐐🐐🐐🚀 Engaging the '{command_type}' API! Dispatching query command now!", level="DEBUG")
             return self.dispatcher.query_safe(cleaned_command)
         else:
-            if LOCAL_DEBUG:
-                logger.debug(f"🐐🐐🐐🚀 Engaging the '{command_type}' API! Dispatching write command now!")
+            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"🐐🐐🐐🚀 Engaging the '{command_type}' API! Dispatching write command now!", level="DEBUG")
             return self.dispatcher.write_safe(cleaned_command)

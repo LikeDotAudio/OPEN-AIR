@@ -1,4 +1,6 @@
 import unittest
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from unittest.mock import MagicMock, patch
 import tkinter as tk
 import os
@@ -110,7 +112,7 @@ class TestJsonTreeWidget(unittest.TestCase):
                         break
             self.assertTrue(label_found, "The label for the JSON tree should have been created.")
 
-        print("✅ Test passed: 'test_make_json_tree_prevents_name_error' confirmed the fix.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "✅ Test passed: 'test_make_json_tree_prevents_name_error' confirmed the fix.", level="INFO")
 
 
 if __name__ == "__main__":

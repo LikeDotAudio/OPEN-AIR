@@ -19,4 +19,5 @@ SUBSYSTEM_EMOJIS = {
     "FACTORY": "🏭", "PARSER": "🌀", "TABLE": "📊", "CACHE": "💾", "LAYER": "🥞",
     "FAILURE": "🚨🔴",
     "SNMP": "🔌", "MIDI": "🎹", "OSC": "📡",
+    "SMPTE2138": "🔗",
 }

@@ -8,7 +8,10 @@ import tkinter as tk
 from loguru import logger
 from ..Workers.async_grid_renderer import AsyncGridRenderer
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
+def _is_debug():
+    return is_debug_allowed(system="UI", element="GUI_BUILDER")
 
 class GuiBatchBuilderMixin:
     """
@@ -56,7 +59,7 @@ class GuiBatchBuilderMixin:
 
     def _clear_coord_cache(self):
         """Clears the coordinate cache (call on resize)."""
-        if LOCAL_DEBUG: logger.trace("🧩 BatchBuilder: Clearing coordinate cache.")
+        matrix_log("ui", "gui_builder", "_clear_coord_cache", "🧩 BatchBuilder: Clearing coordinate cache.", "TRACE")
         self._coord_cache = {}
 
     def _create_dynamic_widgets(self, parent_frame, data, path_prefix="", override_cols=None, on_complete=None, parent_bg_pil=None, context=None):

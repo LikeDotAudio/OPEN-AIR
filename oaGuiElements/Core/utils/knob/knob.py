@@ -5,10 +5,11 @@
 # Description: Modularized Rotary Knob Widget.
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 

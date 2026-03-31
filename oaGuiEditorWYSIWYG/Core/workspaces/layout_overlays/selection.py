@@ -7,7 +7,7 @@
 import tkinter as tk
 from ...event_bus import event_bus
 
-def apply(layout, widget, path, is_focused, design_elements):
+def apply_design_overlay(layout, widget, path, is_focused, design_elements):
     """Handles the selection target (emoji) and focus highlight."""
     
     # 1. SELECTION HIGHLIGHT (Yellow Dotted via 4-Frame Construction)

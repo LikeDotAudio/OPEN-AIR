@@ -1,158 +1,138 @@
-# Methods/yak_rx.py
-# Author: Anthony Peter Kuzub
-# Version: 20260221.Partition.1
+# oaTranslator/Methods/yak_rx.py
 #
-# Description: Processes the response from an SCPI query and publishes the parsed output values to MQTT.
+# Processes responses from SCPI queries and publishes the parsed output 
+# values to MQTT. Maps instrument data back to the YAK hierarchy.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260330.1200.1
 
 import os
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import inspect
 import orjson
 from typing import Any
 from oaComMQTT.Core.mqtt_message import MqttMessage
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
-
 app_constants = Config.get_instance()
 
 class YakRxManager:
     """
-    Processes responses from the instrument and publishes outputs to MQTT.
+    Handles instrument responses and dispatches data to the MQTT broker.
+    
+    This manager correlates incoming instrument responses with previously 
+    issued commands, parses the payload based on YAK definitions, and 
+    updates the system state.
     """
 
-    def __init__(self, mqtt_connection_manager, subscriber_router, yak_translator, state_cache_manager=None):
+    def __init__(self, mqtt_connection_manager, subscriber_router, 
+                 yak_translator, state_cache_manager=None):
+        """
+        Initializes the YakRxManager and establishes proxy subscriptions.
+        """
         self.mqtt_util = mqtt_connection_manager
         self.subscriber_router = subscriber_router
         self.yak_translator = yak_translator
         self.state_cache_manager = state_cache_manager
+        
+        # Hardcoded path for bandwidth trigger corrections
         self.NAB_BANDWIDTH_TRIGGER_PATH = [
-            "yak",
-            "Bandwidth",
-            "nab",
-            "NAB_bandwidth_settings",
-            "scpi_details",
-            "Execute Command",
-            "trigger",
+            "yak", "Bandwidth", "nab", "NAB_bandwidth_settings",
+            "scpi_details", "Execute Command", "trigger",
         ]
         self._setup_mqtt_subscriptions()
 
     def _setup_mqtt_subscriptions(self):
-        # Subscribes to MQTT topics for receiving responses from the proxy.
+        """
+        Subscribes to the Proxy outbox for receiving instrument responses.
+        """
         topic = "OPEN-AIR/Proxy/Rx_Outbox"
-        self.subscriber_router.subscribe_to_topic(topic, 
-                                                  self._on_rx_outbox_message)
-        if LOCAL_DEBUG:
-            logger.success(f"✅✅✅ [SUCCESS] YakRxManager subscribed to "
-                           f"'{topic}' for proxy responses.")
+        self.subscriber_router.subscribe_to_topic(topic, self._on_rx_outbox_message)
+        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"✅ [INIT] YakRxManager listening on '{topic}'", level="SUCCESS")
 
     def _on_rx_outbox_message(self, msg: MqttMessage):
-        # Handles incoming MQTT messages from the Proxy's Rx_Outbox.
-        if LOCAL_DEBUG:
-            logger.debug(f"🐐🚜📡 [YAK] Rx_Outbox message received on "
-                         f"Topic: '{msg.topic}'")
-
-        # Leverage hardened messaging interface
+        """
+        Callback for processing messages from the instrument proxy.
+        
+        Args:
+            msg: The MQTT message containing response, command, and correlation ID.
+        """
         try:
             payload_data = msg.get_json_payload()
-        except Exception:
-            # Gravity of Errors: Non-gated failure reporting.
-            import traceback
-            logger.error(f"🐐🚜📡 [YAK] ERROR: Failed to parse JSON payload "
-                         f"from {msg.topic}. Forensic Report:\n"
-                         f"{traceback.format_exc()}")
+        except Exception as e:
+            logger.error(f"❌ [RX] Payload parse failure: {e}")
             return
             
         response_value = payload_data.get("response")
-        command_sent = payload_data.get("command")
         correlation_id = payload_data.get("correlation_id")
 
         if correlation_id and response_value:
-            command_context = self.yak_translator.retrieve_command_context(
-                correlation_id)
+            command_context = self.yak_translator.retrieve_command_context(correlation_id)
             if command_context:
                 path_parts = command_context.get("path_parts")
                 command_details = command_context.get("command_details")
 
                 if path_parts and command_details:
-                    self.process_response(
-                        path_parts, {"Outputs": command_details}, response_value
-                    )
+                    self.process_response(path_parts, {"Outputs": command_details}, 
+                                         response_value)
                 else:
-                    logger.error(f"🐐🚜📡 [YAK] ERROR: Incomplete command "
-                                 f"context for {correlation_id}")
+                    logger.error(f"❌ [RX] Incomplete context for {correlation_id}")
             else:
-                logger.error(f"🐐🚜📡 [YAK] ERROR: No command context found "
-                             f"for {correlation_id}.")
+                logger.error(f"❌ [RX] Unknown correlation ID: {correlation_id}")
         else:
-            logger.error(f"🐐🚜📡 [YAK] ERROR: Missing 'response' or "
-                         f"'correlation_id' in Rx_Outbox payload.")
+            logger.error("❌ [RX] Missing response or correlation ID.")
 
     def process_response(self, path_parts: list, command_details: dict, 
                          response: str):
         """
-        Parses the response and publishes the results to MQTT topics.
+        Parses an instrument response and publishes values to the MQTT broker.
+        
+        Args:
+            path_parts: The hierarchical path to the command in the YAK repo.
+            command_details: The expected output structure.
+            response: The raw string response from the instrument.
         """
-        if LOCAL_DEBUG:
-            logger.debug(f"🐐🚜📡 [YAK] The agent reports back! "
-                         f"Response from device: '{response}'")
-
         outputs = command_details.get("Outputs", {})
-        if LOCAL_DEBUG:
-            logger.debug(f"🐐🚜📡 [YAK] Received response from device.")
-            logger.debug(f"🐐🚜📡 [YAK] Path Parts: {path_parts}")
-            logger.trace(f"🐐🚜📡 [YAK] Raw Response: {response}")
-
-        # Split the response into individual parts
         response_parts = [p.strip() for p in response.split(";")]
         output_keys = list(outputs.keys())
 
-        # --- NAB_bandwidth_settings Order Correction ---
+        # Correct for legacy bandwidth setting key-order discrepancies
         if path_parts == self.NAB_BANDWIDTH_TRIGGER_PATH and len(output_keys) >= 5:
-            if output_keys[3].endswith("Time_s") and output_keys[4].endswith("On"):
-                temp_keys = list(output_keys)
-                key_at_index_3 = output_keys[3]
-                key_at_index_4 = output_keys[4]
-
-                if (key_at_index_3.startswith("Sweep_Time_s") and 
-                    key_at_index_4.startswith("Continuous_Mode_On")):
-                    temp_keys[3], temp_keys[4] = temp_keys[4], temp_keys[3]
-                    output_keys = temp_keys
-                    if LOCAL_DEBUG:
-                        logger.debug("🐐🚜📡 [YAK] Corrected YAK key swap.")
+            if (output_keys[3].startswith("Sweep_Time_s") and 
+                output_keys[4].startswith("Continuous_Mode_On")):
+                output_keys[3], output_keys[4] = output_keys[4], output_keys[3]
+                matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, "🔄 [CORRECT] Key swap applied for bandwidth path.", level="DEBUG")
 
         if len(response_parts) != len(output_keys):
-            logger.error(f"🐐🚜📡 [YAK] ERROR: Mismatched response length! "
-                         f"Expected {len(output_keys)}, got "
-                         f"{len(response_parts)}.")
+            logger.error(f"❌ [RX] Length mismatch! Expected {len(output_keys)}, "
+                         f"got {len(response_parts)}.")
             return
 
-        # Construction of the base output topic
-        base_output_topic_parts = ["OPEN-AIR", "yak"] + path_parts[:4] + ["Outputs"]
-        base_output_topic = "/".join(base_output_topic_parts)
+        base_output_topic = "/".join(["OPEN-AIR", "yak"] + path_parts[:4] + ["Outputs"])
 
-        # Match and publish each part of the response
         for i, key in enumerate(output_keys):
             raw_value = response_parts[i]
             output_topic = f"{base_output_topic}/{key}/value"
 
             if self.state_cache_manager:
                 self.state_cache_manager.handle_external_update(
-                    output_topic, 
-                    raw_value, 
-                    source="VISA"
-                )
+                    output_topic, raw_value, source="VISA")
             else:
                 self.mqtt_util.get_client_instance().publish(
-                    topic=output_topic, payload=raw_value, qos=0, retain=True
-                )
+                    topic=output_topic, payload=raw_value, qos=0, retain=True)
             
-            if LOCAL_DEBUG:
-                logger.debug(f"🐐🚜📡 [YAK] Published to '{output_topic}' "
-                             f"value: '{raw_value}'.")
-
-        if LOCAL_DEBUG:
-            logger.success("✅✅✅ [SUCCESS] Response processed and published.")
+            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"📡📤📤 [STATE] {output_topic} -> {raw_value}", level="DEBUG")

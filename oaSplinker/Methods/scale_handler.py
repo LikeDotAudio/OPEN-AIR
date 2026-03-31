@@ -5,6 +5,7 @@
 # Description: Brief summary of purpose
 
 from .base_handler import BaseHandler
+from ..Constants.constants import splinker_logger, Splinker_debug_enabled
 
 class ScaleHandler(BaseHandler):
     """
@@ -17,8 +18,6 @@ class ScaleHandler(BaseHandler):
         d_min = self.params.get("dest_min", 0)
         d_max = self.params.get("dest_max", 255)
         
-        from ..Constants.constants import splinker_logger, Splinker_debug_enabled
-
         try:
             val_float = float(value)
             

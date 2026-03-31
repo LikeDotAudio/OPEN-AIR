@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from oaFileImportShow.FileReaders.loader import maker_file_check_for_markers_file
 
 class ShowtimeReadMixin:
@@ -17,14 +19,14 @@ class ShowtimeReadMixin:
         ⚡ DATA LOADER: Reads MARKERS.csv and populates internal state.
         Updates: self.marker_data, self.column_headers
         """
-        logger.debug("🟢️️️🟢 Loading raw marker data from file.")
+        matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, "🟢️️️🟢 Loading raw marker data from file.", level="DEBUG")
 
         raw_headers, raw_data = maker_file_check_for_markers_file()
 
         if not raw_data:
             self.marker_data = []
             self.column_headers = []
-            logger.debug("🟡 No marker data found in MARKERS.csv. No buttons will be created.")
+            matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, "🟡 No marker data found in MARKERS.csv. No buttons will be created.", level="DEBUG")
             return
 
         self.marker_data = [
@@ -32,4 +34,4 @@ class ShowtimeReadMixin:
         ]
         self.column_headers = raw_headers
 
-        logger.success(f"✅ Loaded {len(self.marker_data)} rows. Converted to dictionaries for sorting and display.")
+        matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, f"✅ Loaded {len(self.marker_data)} rows. Converted to dictionaries for sorting and display.", level="SUCCESS")

@@ -18,6 +18,8 @@ Responsibilities:
       creator classes.
     - Provide a decorator-based interface for self-registration of widgets.
     - Implement an automated discovery mechanism to scan and import widget
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
       modules from the 'workers/builder' directory.
 
 Constraints:
@@ -30,7 +32,6 @@ from typing import Dict, Any, Type, Callable, Optional
 from loguru import logger
 
 # LOCAL_DEBUG: Toggles verbose tracing for widget discovery and registration.
-LOCAL_DEBUG = True
 
 class WidgetRegistry:
     """
@@ -121,8 +122,7 @@ class WidgetRegistry:
             logger.error(f"❌ WidgetRegistry: Path not found: {base_path}")
             return
 
-        if LOCAL_DEBUG: 
-            logger.debug(f"🔍 WidgetRegistry: Scanning {base_path}...")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🔍 WidgetRegistry: Scanning {base_path}...", level="DEBUG")
 
         count = 0
         base_path_str = str(base_path)
@@ -150,6 +150,5 @@ class WidgetRegistry:
                         pass
         
         cls._initialized = True
-        if LOCAL_DEBUG: 
-            logger.debug(f"✅ WidgetRegistry: Discovered {len(cls._registry)} "
-                         f"types from {count} modules.")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"✅ WidgetRegistry: Discovered {len(cls._registry, level="DEBUG")
+                     f"types from {count} modules.")

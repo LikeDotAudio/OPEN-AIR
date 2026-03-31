@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 from PIL import Image, ImageDraw, ImageFilter, ImageChops, ImageTk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import random
 import math
 
@@ -20,7 +22,6 @@ from .Core.layer_screws import ScrewLayer
 from .Core.layer_metal_fold import MetalFoldLayer
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import BUILDER_LOGGER
 from oaConfiguration.FileReaders.config_reader import Config
 from oaGuiManager.Core.factory.asset_cache import AssetCacheManager

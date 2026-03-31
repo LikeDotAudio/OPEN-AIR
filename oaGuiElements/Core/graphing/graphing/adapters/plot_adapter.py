@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 from oaGuiElements.Core.graphing.graphing.dynamic_graph import FluxPlotter
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from oaLogging.Core.logger import builder_logger
 
 class PlotAdapter:
@@ -25,7 +27,7 @@ class PlotAdapter:
 
         widget_id = config_data.get("path", config_data.get("id", "plot_widget"))
         
-        builder_logger.debug(f"🔬🏗️📊 [BUILDER] plot_adapter: Spawning FluxPlotter '{widget_id}'.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] plot_adapter: Spawning FluxPlotter '{widget_id}'.", level="DEBUG")
         
         return FluxPlotter(
             parent=parent_widget,

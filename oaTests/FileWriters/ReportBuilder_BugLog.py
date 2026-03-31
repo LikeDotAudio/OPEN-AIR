@@ -24,11 +24,16 @@ def build_tab(data_dir):
         filename = os.path.basename(file_path)
         mtime = datetime.fromtimestamp(os.path.getmtime(file_path)).strftime('%Y-%m-%d %H:%M:%S')
         
-        with open(file_path, 'r', errors='replace') as f:
-            content = f.read()
-            lines = content.splitlines()
-            if len(lines) > 500:
-                content = "... [truncated] ...\n" + "\n".join(lines[-500:])
+        from collections import deque
+        try:
+            with open(file_path, 'r', errors='replace') as f:
+                # Use deque to efficiently keep only the last 500 lines
+                lines = deque(f, maxlen=500)
+                content = "".join(lines)
+                if len(lines) == 500:
+                    content = "... [truncated for performance] ...\n" + content
+        except Exception as e:
+            content = f"Error reading log: {e}"
         
         html += f"""
         <div class="log-entry bug-log">

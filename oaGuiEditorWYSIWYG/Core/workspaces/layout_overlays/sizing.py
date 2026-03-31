@@ -7,7 +7,7 @@
 import tkinter as tk
 from ...state import state_manager
 
-def apply(layout, widget, path, is_focused, design_elements):
+def apply_design_overlay(layout, widget, path, is_focused, design_elements):
     """Handles sizing handles and resize tooltips."""
     
     res_diag = tk.Label(widget.master, text="⤡", bg="#FF9900", fg="black", font=("Arial", 8), cursor="sizing")

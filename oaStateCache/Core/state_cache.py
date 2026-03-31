@@ -1,8 +1,19 @@
 # Core/state_cache.py
-# Author: Anthony Peter Kuzub
-# Version: 20260323.1700.1
 #
-# Description: Modularized State Cache Management.
+# Modularized State Cache Management. Acts as the central orchestrator 
+# for application state caching, persistence, and distribution.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260330.1600.1
 
 import time
 import orjson
@@ -13,6 +24,7 @@ from loguru import logger
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
 from oaLogging.Core.logger import data_logger
+from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfiguration.FileReaders.config_reader import Config
 from oaComMQTT.Core.mqtt_message import MqttMessage
 app_constants = Config.get_instance()
@@ -39,11 +51,11 @@ class StateRegistry:
         try: 
             self.cache = cache_io_handler.load_cache()
         except FileNotFoundError:
-            if LOCAL_DEBUG: data_logger.info("First boot detected. Starting with fresh cache.")
+            matrix_log("core", "data", "__init__", "First boot detected. Starting with fresh cache.", "INFO")
         except CacheLoadError as e:
-            if LOCAL_DEBUG: data_logger.error(f"Critical Cache Corruption: {e}. Starting fresh.")
+            matrix_log("core", "data", "__init__", f"Critical Cache Corruption: {e}. Starting fresh.", "ERROR")
         except Exception:
-            if LOCAL_DEBUG: data_logger.exception("Unexpected error loading cache.")
+            matrix_log("core", "data", "__init__", "Unexpected error loading cache.", "ERROR")
             
         self.search_engine = CacheSearchEngine()
         self.search_engine.rebuild(self.cache)
@@ -53,7 +65,7 @@ class StateRegistry:
         self.observers = CacheObserverRegistry()
         
         self._last_log_time, self._updates_since_last_log = time.time(), 0
-        if LOCAL_DEBUG: data_logger.debug(f"Initialized with {len(self.cache)} entries.")
+        matrix_log("core", "data", "__init__", f"Initialized with {len(self.cache)} entries.", "DEBUG")
 
     def check_prefix_exists(self, prefix: str) -> bool: return self.search_engine.exists(prefix)
     def register_cache_observer(self, callback: Any): self.observers.register_observer(callback)
@@ -69,9 +81,11 @@ class StateRegistry:
             path = DATA_RUNNING_DIR / "presets" / f"{name}.preset.json"
             os.makedirs(os.path.dirname(path), exist_ok=True)
             with open(path, "wb") as f: f.write(orjson.dumps(self.cache, option=orjson.OPT_INDENT_2))
-            if LOCAL_DEBUG: data_logger.success(f"Preset saved: {name}")
+            matrix_log("core", "data", "save_preset", f"Preset saved: {name}", "SUCCESS")
             return True
-        except Exception as e: data_logger.error(f"Preset failed: {e}"); return False
+        except Exception as e: 
+            matrix_log("core", "data", "save_preset", f"Preset failed: {e}", "ERROR")
+            return False
 
     def shutdown(self): self.save_engine.shutdown()
 
@@ -79,11 +93,10 @@ class StateRegistry:
         """Subscribes to the root command and transmission topic filters."""
         if self.mqtt:
             base = app_constants.MQTT_BASE_TOPIC
-            # --- Namespace Split: Subscribe to both Cmd and Tx namespaces ---
             roots = [f"{base}/Cmd/#", f"{base}/Tx/#", f"{base}/System/Status/#", f"{base}/System/Monitor/#"]
             
             for root in roots:
-                if LOCAL_DEBUG: data_logger.debug(f"Subscribing to system root: {root}")
+                matrix_log("core", "data", "subscribe_to_all_topics", f"Subscribing to system root: {root}", "DEBUG")
                 self.mqtt.subscribe(root)
 
     def initialize_state(self) -> None:
@@ -91,13 +104,13 @@ class StateRegistry:
             self.cache = cache_io_handler.load_cache()
             self.search_engine.rebuild(self.cache)
         except FileNotFoundError:
-            if LOCAL_DEBUG: data_logger.info("No cache to initialize.")
+            matrix_log("core", "data", "initialize_state", "No cache to initialize.", "INFO")
             self.cache = {}
         except CacheLoadError as e:
-            if LOCAL_DEBUG: data_logger.error(f"Critical Cache Corruption during init: {e}.")
+            matrix_log("core", "data", "initialize_state", f"Critical Cache Corruption during init: {e}.", "ERROR")
             self.cache = {}
         except Exception: 
-            data_logger.exception("State initialization failed")
+            matrix_log("core", "data", "initialize_state", "State initialization failed", "ERROR")
             self.cache = {}
 
         if self.cache:
@@ -109,7 +122,6 @@ class StateRegistry:
             gui_state_restorer.restore_timeline(self.cache, self.state_mirror_engine)
 
     def handle_external_update(self, topic: str, value: Any, source: str = "EXTERNAL", metadata: dict = None):
-        # ⚡ FIX: Corrected import path to include .Core
         from oaTranslator.Core.manifest.builder import create_manifest
         payload = create_manifest(value, topic, source, metadata)
         
@@ -117,7 +129,6 @@ class StateRegistry:
         self.save_engine.schedule_save(topic, payload); self.search_engine.add_topic(topic)
         
         from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-        # The ProtocolRouter is responsible for outbound dispatch (MQTT, OSC, etc.)
         ProtocolRouter.get_instance().ingest(source, topic, value, payload)
 
         self.observers.notify(topic, payload)
@@ -128,17 +139,13 @@ class StateRegistry:
         source, value, metadata = "MQTT", raw, {}
         
         if isinstance(raw, dict):
-            # Check if this follows the standard Unified Message Schema (Splinker Manifest)
             if "val" in raw or "value" in raw:
                 source = str(raw.get("source", "MQTT")).upper()
                 value = raw.get("val") if "val" in raw else raw.get("value")
                 metadata = raw.copy()
-                # Preserve standard fields
                 for field in ["msg_type", "msg_guid", "origin_source", "is_settled", "full_id", "boot"]:
                     if field in raw: metadata[field] = raw[field]
             else:
-                # This is a raw JSON dictionary (e.g. device inventory blob)
-                # Treat the entire dictionary as the value.
                 value = raw
                 source = "MQTT"
                 metadata = {}
@@ -153,13 +160,11 @@ class StateRegistry:
         self._updates_since_last_log += 1
         
         if time.time() - self._last_log_time >= 5.0:
-            if LOCAL_DEBUG: data_logger.success(f"State synced: {self._updates_since_last_log} variables.")
+            matrix_log("core", "data", "_update_cache_entry", f"State synced: {self._updates_since_last_log} variables.", "SUCCESS")
             self._last_log_time, self._updates_since_last_log = time.time(), 0
 
     def handle_incoming_mqtt(self, client, userdata, msg: MqttMessage) -> None:
         topic = msg.topic
-        
-        # --- Namespace Split: Strip CMD or TX from incoming topic ---
         base = app_constants.MQTT_BASE_TOPIC
         normalized = False
         if f"{base}/Cmd/" in topic:
@@ -170,7 +175,6 @@ class StateRegistry:
             normalized = True
 
         if normalized:
-            # Create a NEW MqttMessage with the stripped topic for downstream consumption
             msg = MqttMessage(
                 topic=topic,
                 payload=msg.payload,
@@ -193,4 +197,4 @@ class StateRegistry:
                 self._update_cache_entry(topic, new_payload)
                 
         except Exception: 
-            data_logger.exception(f"Error handling MQTT for {topic}")
+            matrix_log("core", "data", "handle_incoming_mqtt", f"Error handling MQTT for {topic}", "ERROR")

@@ -49,6 +49,8 @@ EXTERNAL_PACKAGES = {
     "textual": "textual",
     "fastapi": "fastapi",
     "uvicorn": "uvicorn",
+    "protobuf": "google.protobuf",
+    "grpcio-tools": "grpc_tools.protoc",
 }
 
 # BUILTIN_PACKAGES: Standard library modules verified for baseline environment.
@@ -133,6 +135,8 @@ def action_check_dependancies(console_print_func, debug_log_func,
         elif friendly_name == "Pillow (for support)": package_name_for_pip = "Pillow"
         elif friendly_name == "python-osc": package_name_for_pip = "python-osc"
         elif friendly_name == "python-rtmidi": package_name_for_pip = "python-rtmidi"
+        elif friendly_name == "protobuf": package_name_for_pip = "protobuf"
+        elif friendly_name == "grpcio-tools": package_name_for_pip = "grpcio-tools"
 
         try:
             module = __import__(import_name)

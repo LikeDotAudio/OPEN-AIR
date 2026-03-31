@@ -5,12 +5,13 @@
 # Description: This module provides functions for creating the base Matplotlib plot within a Tkinter application.
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from typing import Dict, Any
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -33,8 +34,7 @@ def create_base_plot(parent_frame: tk.Frame, config: Dict[str, Any]) -> tuple:
     Creates the FigureCanvasTkAgg and basic Axis.
     Returns (figure, axis, canvas).
     """
-    if BUILDER_DEBUG:
-        builder_logger.debug(f"🔬🏗️📊 [BUILDER] graph_builder: Creating base Matplotlib plot for '{config.get('path', 'Unknown')}'.")
+    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] graph_builder: Creating base Matplotlib plot for '{config.get('path', 'Unknown')}'.", level="DEBUG")
 
     layout_config = config.get("layout", {})
     # ⚡ Enable transparency at the Figure level

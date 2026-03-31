@@ -5,10 +5,11 @@
 # Description: Showtime/worker_showtime_on_marker_button_click.py
 
 import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -29,13 +30,13 @@ from oaGuiShowtime.Methods.tune import on_tune_request_from_selection
 # Outputs:
 #     None.
 def on_marker_button_click(showtime_tab_instance, button):
-    if LOCAL_DEBUG: logger.debug("🟢️️️🔵 Device button clicked. Toggling selection.")
+    matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, "🟢️️️🔵 Device button clicked. Toggling selection.", level="DEBUG")
     marker_data = button.marker_data
 
     if showtime_tab_instance.selected_device_button == button:
         showtime_tab_instance.selected_device_button.config(style="Custom.TButton")
         showtime_tab_instance.selected_device_button = None
-        if LOCAL_DEBUG: logger.debug(f"🟡 Deselected device: {marker_data.get('NAME', 'N/A')}.")
+        matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, f"🟡 Deselected device: {marker_data.get('NAME', 'N/A')}.", level="DEBUG")
     else:
         if showtime_tab_instance.selected_device_button:
             showtime_tab_instance.selected_device_button.config(style="Custom.TButton")
@@ -44,6 +45,6 @@ def on_marker_button_click(showtime_tab_instance, button):
         showtime_tab_instance.selected_device_button.config(
             style="Custom.Selected.TButton"
         )
-        if LOCAL_DEBUG: logger.success(f"✅ Selected device: {marker_data.get('NAME', 'N/A')} at {marker_data.get('FREQ_MHZ', 'N/A')} MHz.")
+        matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, f"✅ Selected device: {marker_data.get('NAME', 'N/A')} at {marker_data.get('FREQ_MHZ', 'N/A')} MHz.", level="SUCCESS")
 
     on_tune_request_from_selection(showtime_tab_instance)

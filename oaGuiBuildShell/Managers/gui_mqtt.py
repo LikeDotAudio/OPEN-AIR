@@ -8,10 +8,10 @@ import time
 import orjson
 from pathlib import Path
 
-# --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
+from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
+def _is_debug():
+    return is_debug_allowed(system="UI", element="MQTT")
 
 from oaConfiguration.FileReaders.config_reader import Config
 
@@ -75,7 +75,7 @@ class GuiMqttManagerMixin:
             
             # Check if this builder instance is for the requested file
             if target_path and str(Path(target_path).resolve()) == str(self.json_filepath.resolve()):
-                if LOCAL_DEBUG: logger.info(f"♻️ MQTT: Rebuild request received for '{self.tab_name}'. Injecting new config...")
+                matrix_log("ui", "gui_shell", "_handle_rebuild_request", f"♻️ MQTT: Rebuild request received for '{self.tab_name}'. Injecting new config...", "INFO")
                 
                 # 1. Update config data
                 if new_config:

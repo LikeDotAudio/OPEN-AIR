@@ -5,13 +5,14 @@
 # Description: Utility to cache procedurally generated assets (panels, screws, etc) to disk and memory.
 
 import os
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import hashlib
 import orjson
 from pathlib import Path
 from PIL import Image
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -42,7 +43,7 @@ class AssetCacheManager:
         """Clears the in-memory asset cache."""
         global _MEMORY_ASSET_CACHE
         _MEMORY_ASSET_CACHE.clear()
-        if LOCAL_DEBUG: logger.info("♻️ AssetCacheManager: Memory cache cleared.")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "♻️ AssetCacheManager: Memory cache cleared.", level="INFO")
 
     @classmethod
     def get_asset_hash(cls, key_prefix, width, height, config):
@@ -78,8 +79,7 @@ class AssetCacheManager:
                 return img
             except Exception as e:
                 # If the image is corrupted (truncated, empty, etc), delete it!
-                if LOCAL_DEBUG:
-                    logger.exception("❌ Corrupted cache file detected and removed: {} ({})", cache_path.name, str(e))
+                logger.exception("❌ Corrupted cache file detected and removed: {} ({})", cache_path.name, str(e))
                 try:
                     os.remove(cache_path)
                 except:

@@ -30,14 +30,19 @@ def build_tab(project_root):
         svg_content = "<!-- SVG Missing -->"
         if os.path.exists(svg_path):
             with open(svg_path, 'r', encoding="utf-8") as f:
-                svg_content = f.read()
+                # ⚡ OPTIMIZATION: Limit SVG read to 1MB. 
+                # Large profiler sessions can generate massive SVGs.
+                svg_content = f.read(1000000)
+                if f.read(1):
+                    svg_content = "<!-- SVG Truncated for Performance (Too Large) -->"
+                
                 # Ensure it doesn't have the XML declaration if embedding
                 if '<?xml' in svg_content:
                     svg_content = svg_content[svg_content.find('<svg'):]
 
         # 2. Load JSON components
         with open(event_json_path, 'r') as f:
-            stats_list = json.load(f)
+            performance_stats = json.load(f)
         
         with open(shame_json_path, 'r') as f:
             shame_report = json.load(f).get("report", "")
@@ -46,9 +51,9 @@ def build_tab(project_root):
             pity_report = json.load(f).get("report", "")
 
         # 3. Generate Table Rows and Buttons
-        table_rows = generate_table_rows(stats_list)
+        table_rows = generate_table_rows(performance_stats)
         
-        all_roots = sorted(list(set(r for s in stats_list for r in s.get('roots', []))))
+        all_roots = sorted(list(set(r for s in performance_stats for r in s.get('roots', []))))
         root_buttons = "".join([f'<button class="filter-btn active" id="btn-root-{l}" onclick="toggleRoot(\'{l}\')">{l}</button>' for l in all_roots])
 
         # 4. Load Template

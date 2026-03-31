@@ -5,12 +5,13 @@
 # Description: Brief summary of purpose
 
 import time
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import orjson
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaComMQTT.Core.mqtt_publisher_service import is_connected
 from loguru import logger
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 class HiddenGeometryManagerMixin:
     """
@@ -31,7 +32,7 @@ class HiddenGeometryManagerMixin:
             "visibility/geometry",
         )
 
-        if LOCAL_DEBUG: logger.trace(f"📏 GeometrySnitch: Monitoring toplevel for {self.tab_name}")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"📏 GeometrySnitch: Monitoring toplevel for {self.tab_name}", level="TRACE")
         self.bind("<Configure>", self._on_geometry_change)
 
     def _on_geometry_change(self, event):
@@ -45,12 +46,12 @@ class HiddenGeometryManagerMixin:
         toplevel = self.winfo_toplevel()
         if toplevel:
             w, h, x, y = toplevel.winfo_width(), toplevel.winfo_height(), toplevel.winfo_x(), toplevel.winfo_y()
-            if LOCAL_DEBUG: logger.trace(f"📏 GeometrySnitch: GALLOP detected for {self.tab_name} ({w}x{h} @ {x},{y}). Debouncing...")
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"📏 GeometrySnitch: GALLOP detected for {self.tab_name} ({w}x{h} @ {x},{y}). Debouncing...", level="TRACE")
             self._geometry_timer = self.after(500, lambda: self._perform_geometry_publish(w, h, x, y))
 
     def _perform_geometry_publish(self, w, h, x, y):
         self._geometry_timer = None
-        if LOCAL_DEBUG: logger.debug(f"📏 GeometrySnitch: SETTLED. Publishing for {self.tab_name} ({w}x{h})")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"📏 GeometrySnitch: SETTLED. Publishing for {self.tab_name} ({w}x{h})", level="DEBUG")
         self._publish_geometry(w, h, x, y)
 
     def _publish_geometry(self, width, height, x, y):

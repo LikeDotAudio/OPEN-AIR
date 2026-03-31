@@ -1,16 +1,33 @@
 # Core/ptp.py
-# Author: Anthony Peter Kuzub
-# Version: 20260315.Modular.1
 #
-# Description: Modularized Precision Time Protocol (PTP) Monitor.
+# Modularized Precision Time Protocol (PTP) Monitor.
+# Handles raw packet sniffing and distribution of timing telemetry.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260330.1600.1
 
 import threading
 import time
 import orjson
-from scapy.all import sniff, UDP
-from loguru import logger
-
 import os
+from loguru import logger
+try:
+    from scapy.all import sniff, UDP
+except ImportError:
+    pass
+
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 
 # --- EXTRACTED CORE MODULES ---
 from .ptp_packet_schema import PTP, SCAPY_AVAILABLE
@@ -18,7 +35,6 @@ from .ptp_packet_parser import PTPPacketParser
 from .ptp_observer_registry import PTPObserverRegistry
 from oaComMQTT.Core.mqtt_message import MqttMessage
 
-LOCAL_DEBUG = True
 
 def register_ptp_callback(cb): PTPObserverRegistry.register(cb)
 def unregister_ptp_callback(cb): PTPObserverRegistry.unregister(cb)
@@ -41,16 +57,16 @@ class PtpManager:
             self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/PTP/Capture", self._on_external_data)
         
         if not SCAPY_AVAILABLE:
-            if LOCAL_DEBUG: logger.warning("⚠️ Scapy not available. Local sniffing disabled.")
+            matrix_log("core", "ptp", "start", "⚠️ Scapy not available. Local sniffing disabled.", "WARNING")
             return
         
         if self.permission_error_reported:
-            if LOCAL_DEBUG: logger.warning("⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.")
+            matrix_log("core", "ptp", "start", "⏱️ PTP Sniffer: [PERMISSION DENIED] Run as root/sudo for raw capture. Sniffer disabled.", "WARNING")
             return
 
         self.sniffer_thread = threading.Thread(target=self._run_sniffer, daemon=True, name="PTP_Sniffer")
         self.sniffer_thread.start()
-        if LOCAL_DEBUG: logger.debug("⏱️ [PTP] Sniffer worker started.")
+        matrix_log("core", "ptp", "start", "⏱️ [PTP] Sniffer worker started.", "DEBUG")
 
     def stop(self):
         self.stop_event.set()
@@ -61,11 +77,9 @@ class PtpManager:
         payload = msg.payload
         if not payload: return
 
-        # ⚡ PRE-VALIDATION: Structural integrity check
         data = None
         if isinstance(payload, (bytes, str)):
             stripped = payload.strip() if isinstance(payload, str) else payload.strip()
-            # Simple check for JSON-like structure
             if stripped and (stripped[0] in (ord('{'), ord('[')) if isinstance(stripped, bytes) else stripped[0] in ('{', '[')):
                 data = orjson.loads(payload)
         else:
@@ -79,9 +93,6 @@ class PtpManager:
 
     def _run_sniffer(self):
         """Background loop for raw packet capture."""
-        # ⚡ PRIVILEGE VALIDATION: Already checked in __init__ and start()
-        # sniff() will be called only if we are root. 
-        # Fatal if it fails for other reasons (e.g. interface down).
         sniff(filter="udp port 319 or udp port 320", 
                 prn=self._process_packet, 
                 stop_filter=lambda x: self.stop_event.is_set(),
@@ -104,7 +115,6 @@ class PtpManager:
         data = PTPPacketParser.tear_apart(pkt, ptp_layer)
         self._handle_heartbeat(data)
         PTPObserverRegistry.notify(data)
-
 
     def _handle_heartbeat(self, data):
         """Publishes activity status to MQTT at 1Hz."""

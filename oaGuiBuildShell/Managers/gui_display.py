@@ -4,9 +4,10 @@
 #
 # Description: This file defines the main Application class, which orchestrates the GUI build process.
 
-LOCAL_DEBUG = True    
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
+from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
+def _is_debug():
+    return is_debug_allowed(system="UI", element="GUI_SHELL")
 
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -68,7 +69,7 @@ class Application(
         self.cache_manager = LayoutCacheManager(LAYOUT_CACHE_PATH)
         self._layout_cache = self.cache_manager.load()
 
-        if LOCAL_DEBUG: logger.debug("🖥️🚦 The grand orchestrator is waking up!")
+        matrix_log("ui", "gui_shell", "__init__", "🖥️🚦 The grand orchestrator is waking up!", "DEBUG")
 
         # Dependency Injection
         self.mqtt_connection_manager = mqtt_connection_manager
@@ -120,7 +121,7 @@ class Application(
             logger.exception(f"🖥️🏗️🎨 [DISPLAY] CRITICAL: App initialization failed: {e}")
 
     def _on_initial_build_complete(self):
-        if LOCAL_DEBUG: logger.debug("🖥️🏗️🎨 [DISPLAY] Initial build pass finished.")
+        matrix_log("ui", "gui_shell", "_on_initial_build_complete", "🖥️🏗️🎨 [DISPLAY] Initial build pass finished.", "DEBUG")
         self.after(500, self._trigger_initial_tab_selection)
         if self.state_cache_manager:
             self.after(1000, self.state_cache_manager.initialize_state)
@@ -143,7 +144,7 @@ class Application(
         except: pass
 
     def shutdown(self):
-        if LOCAL_DEBUG: logger.debug("Initiating application shutdown...")
+        matrix_log("ui", "gui_shell", "shutdown", "Initiating application shutdown...", "DEBUG")
         if self.mqtt_connection_manager: self.mqtt_connection_manager.disconnect()
         if self.visa_proxy: self.visa_proxy.shutdown()
 
@@ -152,4 +153,4 @@ class Application(
         return apply_theme(self, theme_name)
     
     def print_to_console(self, message: str):
-        if LOCAL_DEBUG: logger.debug(f"🖥️💬 Observer's Log: {message}")
+        matrix_log("ui", "gui_shell", "print_to_console", f"🖥️💬 Observer's Log: {message}", "DEBUG")

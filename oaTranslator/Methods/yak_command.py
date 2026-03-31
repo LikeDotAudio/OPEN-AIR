@@ -5,13 +5,14 @@
 # Description: Brief summary of purpose
 
 import os
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import inspect
 import orjson
 import pathlib
 import tkinter as tk
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -23,14 +24,14 @@ from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
 from oaGuiManager.Core.loader.gui_from_json import UniversalGuiLoader
 
 
-def fill_scpi_placeholders(scpi_command_template: str, Input: dict):
+def render_scpi_command(scpi_command_template: str, Input: dict):
     """
     Takes an SCPI command template and replaces placeholders with values from inputs.
     """
     current_function_name = inspect.currentframe().f_code.co_name
-    if LOCAL_DEBUG: logger.debug(f"🔍🔵 Entering {current_function_name} to fill SCPI placeholders.")
+    matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"🔍🔵 Entering {current_function_name} to render SCPI command.", level="DEBUG")
 
-    filled_command = scpi_command_template
+    rendered_command = scpi_command_template
 
     if Input:
         for key, details in Input.items():
@@ -38,23 +39,23 @@ def fill_scpi_placeholders(scpi_command_template: str, Input: dict):
             value_to_substitute = str(details.get("value", ""))
 
             # --- NEW FIX: Replace the placeholder value with a single double quote for the path terminator ---
-            filled_command = filled_command.replace('"', '"')
+            rendered_command = rendered_command.replace('"', '"')
 
-            if placeholder == "<path_terminator>" and placeholder in filled_command:
-                filled_command = filled_command.replace(placeholder, '"')
+            if placeholder == "<path_terminator>" and placeholder in rendered_command:
+                rendered_command = rendered_command.replace(placeholder, '"')
                 value_to_substitute = '"'
 
-            if placeholder == "<path_starter>" and placeholder in filled_command:
-                filled_command = filled_command.replace(placeholder, '"')
+            if placeholder == "<path_starter>" and placeholder in rendered_command:
+                rendered_command = rendered_command.replace(placeholder, '"')
                 value_to_substitute = '"'
 
-            if placeholder in filled_command:
-                filled_command = filled_command.replace(
+            if placeholder in rendered_command:
+                rendered_command = rendered_command.replace(
                     placeholder, value_to_substitute
                 )
-                if LOCAL_DEBUG: logger.debug(f"🔁 Replaced placeholder '{placeholder}' with value '{value_to_substitute}'.")
-    if LOCAL_DEBUG: logger.success(f"✅ Filled SCPI Command: {filled_command}")
-    return filled_command
+                matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"🔁 Replaced placeholder '{placeholder}' with value '{value_to_substitute}'.", level="DEBUG")
+    matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"✅ Rendered SCPI Command: {rendered_command}", level="SUCCESS")
+    return rendered_command
 
 
 import oaOchestration.Constants.project_paths as app_paths
@@ -77,18 +78,18 @@ class YakFleetCommandBuilder:
             with open(self.fleet_path, "rb") as f:
                 fleet_data = orjson.loads(f.read())
             
-            if LOCAL_DEBUG: logger.debug(f"🚀 YakFleetCommandBuilder: Processing fleet data from {self.fleet_path}...")
+            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"🚀 YakFleetCommandBuilder: Processing fleet data from {self.fleet_path}...", level="DEBUG")
 
             # Iterate categories (e.g., Spectrum, DMM)
             for category, cat_data in fleet_data.items():
-                if LOCAL_DEBUG: logger.debug(f"📂 Processing Category: {category}")
+                matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"📂 Processing Category: {category}", level="DEBUG")
                 yak_data = cat_data.get("YAK", {})
                 
                 # Iterate Models (e.g., 34401A, N9340B)
                 for model, model_data in yak_data.items():
                     if model == "Unknown": continue
                     
-                    if LOCAL_DEBUG: logger.debug(f"🔍 Searching for YAK tabs for Model: {model}...")
+                    matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"🔍 Searching for YAK tabs for Model: {model}...", level="DEBUG")
 
                     # Search for the specific device directory
                     # Structure: oaGuiDefinitions/left_50/top_100/<Category>/10_YAK/<Any_Number>_<Model>
@@ -97,18 +98,17 @@ class YakFleetCommandBuilder:
                     found_dirs = list(GLOBAL_PROJECT_ROOT.glob(search_pattern))
                     
                     if not found_dirs:
-                        if LOCAL_DEBUG: logger.debug(f"⚠️ No YAK directory found for model {model}")
+                        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"⚠️ No YAK directory found for model {model}", level="DEBUG")
                         continue
                     
                     for device_dir in found_dirs:
-                        if LOCAL_DEBUG: logger.success(f"✅ Found device directory: {device_dir}")
+                        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"✅ Found device directory: {device_dir}", level="SUCCESS")
                         self._load_tabs_for_device(device_dir, model)
             
-            if LOCAL_DEBUG: logger.debug("🏁 YakFleetCommandBuilder: Fleet processing complete.")
+            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, "🏁 YakFleetCommandBuilder: Fleet processing complete.", level="DEBUG")
 
         except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("❌ Error processing fleet")
+            logger.exception("❌ Error processing fleet")
 
     def _load_tabs_for_device(self, device_dir, model):
         """
@@ -118,13 +118,13 @@ class YakFleetCommandBuilder:
         json_files = sorted(list(device_dir.rglob("*.json")))
         
         if not json_files:
-             if LOCAL_DEBUG: logger.debug(f"⚠️ No JSON tabs found in {device_dir}")
+             matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"⚠️ No JSON tabs found in {device_dir}", level="DEBUG")
              return
 
         if self.app_instance and hasattr(self.app_instance, 'root'):
             parent = self.app_instance.root
         else:
-            if LOCAL_DEBUG: logger.debug("⚠️ No app_instance root found, skipping staggered GUI load.")
+            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, "⚠️ No app_instance root found, skipping staggered GUI load.", level="DEBUG")
             return
 
         hidden_window = tk.Toplevel(parent)
@@ -138,13 +138,13 @@ class YakFleetCommandBuilder:
         """Processes the next JSON file in the queue ONLY after the previous one completes."""
         if not queue:
             # All tabs loaded for this device. Schedule cleanup.
-            if LOCAL_DEBUG: logger.success(f"✅ Serial load complete for {model}.")
+            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"✅ Serial load complete for {model}.", level="SUCCESS")
             hidden_window.after(5000, lambda: self._cleanup_window(hidden_window, model))
             return
 
         json_path = queue.pop(0)
         try:
-            if LOCAL_DEBUG: logger.debug(f"🐂 Serial Loading: {json_path.name}")
+            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"🐂 Serial Loading: {json_path.name}", level="DEBUG")
             
             # Define completion callback to trigger next item in queue
             def on_tab_complete():
@@ -162,11 +162,10 @@ class YakFleetCommandBuilder:
                 }
             )
         except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("❌ Failed to load tab {json_path.name}")
+            logger.exception("❌ Failed to load tab {json_path.name}")
             # Continue queue on failure
             hidden_window.after(100, lambda: self._process_staggered_queue(hidden_window, queue, model))
 
     def _cleanup_window(self, window, model):
         window.destroy()
-        if LOCAL_DEBUG: logger.debug(f"🧹 Cleaned up builder window for {model}")
+        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"🧹 Cleaned up builder window for {model}", level="DEBUG")

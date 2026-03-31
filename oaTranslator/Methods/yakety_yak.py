@@ -5,10 +5,11 @@
 # Description: Proxy/yak_manager/manager_yakety_yak.py
 
 import os
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import inspect
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 

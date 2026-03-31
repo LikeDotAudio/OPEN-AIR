@@ -26,7 +26,7 @@
 # - Exports the FailoverManager for redundancy control.
 # - Manages high-level status and lifecycle hooks.
 
-from .Core.protocol_router.manager import ProtocolRouter
+from .Core.protocol_router.router import ProtocolRouter
 from .Managers.Failover.Manager import FailoverManager
 from .Core import open_air_core
 

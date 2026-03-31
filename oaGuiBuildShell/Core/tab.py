@@ -1,34 +1,51 @@
 # Core/tab.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
 #
-# Description: Brief summary of purpose
+# Handles notebook tab changes, visibility events, and context menu actions.
+# Manages the lifecycle of tab populations and inter-widget communication.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260330.1600.1
 
 import tkinter as tk
 import pathlib
 from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 
 class TabManagerMixin:
     """
-    Handles notebook tab changes, visibility events, and context menu actions.
+    Mixin for managing Tkinter Notebook tab events and visibility.
     """
 
     def _trigger_initial_tab_selection(self):
         """Triggers _on_tab_change for initially selected tabs."""
-        if LOCAL_DEBUG: logger.debug("🔍🔵 Triggering initial tab selection for all notebooks.")
+        matrix_log("ui", "gui_shell", "_trigger_initial_tab_selection", 
+                   "🔍🔵 Triggering initial tab selection for all notebooks.", "DEBUG")
+        
         notebooks = getattr(self, '_notebooks', {})
         for notebook_path, notebook_widget in list(notebooks.items()):
             try:
                 dummy_event = type("Event", (object,), {"widget": notebook_widget})()
                 self._on_tab_change(dummy_event)
             except Exception:
-                logger.exception(f"❌🔴 Error during initial tab selection for {notebook_path}")
+                matrix_log("ui", "gui_shell", "_trigger_initial_tab_selection", 
+                           f"❌🔴 Error during initial tab selection for {notebook_path}", "ERROR")
 
     def _on_tab_change(self, event):
-        if LOCAL_DEBUG: logger.debug("▶️ _on_tab_change detected.")
+        """Processes tab selection changes and populates lazy-loaded frames."""
+        matrix_log("ui", "gui_shell", "_on_tab_change", "▶️ _on_tab_change detected.", "DEBUG")
+        
         try:
             notebook = event.widget
             selected_tab_id = notebook.select()
@@ -36,7 +53,8 @@ class TabManagerMixin:
             selected_tab_frame = notebook.nametowidget(selected_tab_id)
             newly_selected_tab_name = notebook.tab(selected_tab_id, "text")
 
-            if not getattr(selected_tab_frame, "is_populated", False) and not getattr(selected_tab_frame, "is_populating", False):
+            if not getattr(selected_tab_frame, "is_populated", False) and \
+               not getattr(selected_tab_frame, "is_populating", False):
                 selected_tab_frame.is_populating = True
                 build_path = getattr(selected_tab_frame, "build_path", None)
                 if build_path:
@@ -52,12 +70,14 @@ class TabManagerMixin:
             self.last_selected_tab_name = newly_selected_tab_name
             if selected_tab_frame.winfo_children():
                 content_widget = selected_tab_frame.winfo_children()[0]
-                if hasattr(content_widget, "_on_tab_selected") and callable(getattr(content_widget, "_on_tab_selected")):
+                if hasattr(content_widget, "_on_tab_selected") and \
+                   callable(getattr(content_widget, "_on_tab_selected")):
                     content_widget._on_tab_selected(event)
         except Exception as e:
-            if LOCAL_DEBUG: logger.exception("❌ Error in _on_tab_change")
+            matrix_log("ui", "gui_shell", "_on_tab_change", f"❌ Error in _on_tab_change: {e}", "ERROR")
 
     def _handle_tab_visibility(self, event):
+        """Dispatches visibility events to child widgets."""
         notebook = event.widget
         selected_tab_id = notebook.select()
         for tab_id in notebook.tabs():
@@ -72,7 +92,7 @@ class TabManagerMixin:
                         content_widget._on_gui_hidden(event)
 
     def _on_notebook_right_click(self, event):
-        """Handles right-click on notebook tabs."""
+        """Handles right-click on notebook tabs to trigger editor."""
         from oaLogging.Entry import vocal_capture
         try:
             notebook = event.widget
@@ -84,7 +104,7 @@ class TabManagerMixin:
             vocal_capture("UI", "Failed to trigger WYSIWYG editor from right-click.")
 
     def _trigger_wysiwyg_editor(self, widget):
-        """Traverses widget hierarchy to find and invoke editor."""
+        """Traverses widget hierarchy to find and invoke the editor."""
         queue = [widget]
         while queue:
             curr = queue.pop(0)

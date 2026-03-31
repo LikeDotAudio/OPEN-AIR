@@ -50,7 +50,7 @@ class OverlayManager:
 
             modules = [selection, structure, blocks, columns, sizing, sticky, alignment, colors]
             for mod in modules:
-                sync_fn = mod.apply(self.workspace, widget, path, is_focused, design_elements)
+                sync_fn = mod.apply_design_overlay(self.workspace, widget, path, is_focused, design_elements)
                 if sync_fn: sync_funcs.append(sync_fn)
 
             def _sync_pos(event=None):

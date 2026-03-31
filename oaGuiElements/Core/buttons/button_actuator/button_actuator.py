@@ -5,10 +5,11 @@
 # Description: Modularized dynamic Momentary Actuator Button.
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -77,7 +78,7 @@ class BuilderButtonActuatorCreator(TransparencyMixin):
     """Factory for creating Actuator Buttons."""
 
     def make_button_actuator(self, parent_widget, config_data, context=None, **kwargs):
-        if BUILDER_DEBUG: builder_logger.trace(f"🔬🏗️🔘 [BUILDER] Creating ActuatorButton.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔘 [BUILDER] Creating ActuatorButton.", level="TRACE")
         
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
@@ -99,7 +100,7 @@ class BuilderButtonActuatorCreator(TransparencyMixin):
                 sticky=lay.get("sticky", "")
             )
 
-        if BUILDER_DEBUG: builder_logger.success(f"✅🆗🔘 [SUCCESS] The actuator '{config_data.get('label')}' has materialized!")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🔘 [SUCCESS] The actuator '{config_data.get('label')}' has materialized!", level="SUCCESS")
         return button
 
     @staticmethod

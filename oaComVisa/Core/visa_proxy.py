@@ -14,10 +14,9 @@ import threading
 import _queue
 from oaComMQTT.Core.mqtt_message import MqttMessage
 
-# --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+# --- Standard OPEN-AIR Logging ---
 from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 from oaConfiguration.FileReaders.config_reader import Config
 
@@ -44,7 +43,7 @@ class VisaProxy:
         - Initializes an internal command queue and state variables.
         """
         current_function_name = inspect.currentframe().f_code.co_name
-        if LOCAL_DEBUG: logger.debug(f"💳 🟢️️️🟢 ➡️➡️ {current_function_name}. The grand SCPI experiment begins!")
+        matrix_log("CORE", "VISA", current_function_name, f"💳 🟢️️️🟢 ➡️➡️ {current_function_name}. The grand SCPI experiment begins!", "DEBUG")
         
         # ⚡ PRECONDITION VALIDATION
         if not mqtt_controller or not subscriber_router:
@@ -75,7 +74,7 @@ class VisaProxy:
         - Resets thread and flag state to None.
         """
         if self.worker_thread and self.worker_thread.is_alive():
-            if LOCAL_DEBUG: logger.debug("💳 ℹ️ Proxy Log: Shutting down VisaProxy command processor worker.")
+            matrix_log("CORE", "VISA", "shutdown", "💳 ℹ️ Proxy Log: Shutting down VisaProxy command processor worker.", "DEBUG")
             if self.shutdown_flag:
                 self.shutdown_flag.set()
             # Unblock the queue.get() call.
@@ -88,7 +87,7 @@ class VisaProxy:
             self.worker_thread = None
             self.shutdown_flag = None
         else:
-            if LOCAL_DEBUG: logger.debug("💳 ℹ️ Proxy Log: VisaProxy worker thread not active or already shut down.")
+            matrix_log("CORE", "VISA", "shutdown", "💳 ℹ️ Proxy Log: VisaProxy worker thread not active or already shut down.", "DEBUG")
 
     def _command_processor_worker(self):
         """Background worker loop that executes queued SCPI commands.
@@ -131,7 +130,7 @@ class VisaProxy:
             finally:
                 self.command_queue.task_done()
             
-        if LOCAL_DEBUG: logger.debug("💳 ℹ️ Proxy Log: VisaProxy command processor worker terminated.")
+        matrix_log("CORE", "VISA", "_command_processor_worker", "💳 ℹ️ Proxy Log: VisaProxy command processor worker terminated.", "DEBUG")
 
 
     def _setup_mqtt_subscriptions(self):
@@ -142,7 +141,7 @@ class VisaProxy:
         """
         topic = "OPEN-AIR/Proxy/Tx_Inbox"
         self.subscriber_router.subscribe_to_topic(topic, self._on_tx_inbox_message)
-        if LOCAL_DEBUG: logger.debug(f"💳 ℹ️ Proxy Log: 💳Subscribed to '{topic}' for inbound proxy commands.")
+        matrix_log("CORE", "VISA", "_setup_mqtt_subscriptions", f"💳 ℹ️ Proxy Log: 💳Subscribed to '{topic}' for inbound proxy commands.", "DEBUG")
 
     def _on_tx_inbox_message(self, msg: MqttMessage):
         """Handles inbound MQTT messages intended for instrument execution.
@@ -157,7 +156,7 @@ class VisaProxy:
         - Enqueues command information for the background worker thread.
         """
         current_function_name = inspect.currentframe().f_code.co_name
-        if LOCAL_DEBUG: logger.trace(f"💳 📡📡⬇️⬇️ PROXY IN: Tx_Inbox message received on Topic: '{msg.topic}', Payload: '{msg.payload}'. Proxy will process this as a raw SCPI command.")
+        matrix_log("CORE", "VISA", current_function_name, f"💳 📡📡⬇️⬇️ PROXY IN: Tx_Inbox message received on Topic: '{msg.topic}', Payload: '{msg.payload}'. Proxy will process this as a raw SCPI command.", "TRACE")
 
         # Extract command parameters from the hardened messaging interface.
         payload_data = msg.get_json_payload()
@@ -173,7 +172,7 @@ class VisaProxy:
                     "correlation_id": correlation_id,
                 }
             )
-            if LOCAL_DEBUG: logger.trace(f"💳 ℹ️ Proxy Log: 💳Command '{command}' enqueued. Query: {query}")
+            matrix_log("CORE", "VISA", current_function_name, f"💳 ℹ️ Proxy Log: 💳Command '{command}' enqueued. Query: {query}", "TRACE")
         else:
             self._publish_proxy_error(
                 message="Received empty command in Tx_Inbox.", command=msg.decode_payload()
@@ -204,7 +203,7 @@ class VisaProxy:
         Returns:
         - None.
         """
-        if LOCAL_DEBUG: logger.trace(f"💳 📡📡⬆️⬆️ Proxy Response: {response} (Command: {command}, CorrID: {correlation_id})")
+        matrix_log("CORE", "VISA", "_publish_proxy_response", f"💳 📡📡⬆️⬆️ Proxy Response: {response} (Command: {command}, CorrID: {correlation_id})", "TRACE")
 
     def set_instrument_instance(self, inst):
         """Links a physical instrument session to the proxy and starts worker.
@@ -220,11 +219,11 @@ class VisaProxy:
         - Manages the lifecycle of the background worker thread.
         """
         current_function_name = inspect.currentframe().f_code.co_name
-        if LOCAL_DEBUG: logger.debug(f"💳 🟢️️️🔵 Received new instrument instance. It's now my time to shine!")
+        matrix_log("CORE", "VISA", current_function_name, f"💳 🟢️️️🔵 Received new instrument instance. It's now my time to shine!", "DEBUG")
         self.inst = inst
         if self.inst:
             self.inst.timeout = 5000
-            if LOCAL_DEBUG: logger.success("💳 ℹ️ Proxy Log: ✅ VisaProxy is now linked to an instrument.")
+            matrix_log("CORE", "VISA", current_function_name, "💳 ℹ️ Proxy Log: ✅ VisaProxy is now linked to an instrument.", "SUCCESS")
 
             # Start the worker thread if it's not already running.
             if self.worker_thread is None or not self.worker_thread.is_alive():
@@ -233,7 +232,7 @@ class VisaProxy:
                     target=self._command_processor_worker, daemon=True
                 )
                 self.worker_thread.start()
-                if LOCAL_DEBUG: logger.debug("💳 ℹ️ Proxy Log: Command processor worker thread started on connection.")
+                matrix_log("CORE", "VISA", current_function_name, "💳 ℹ️ Proxy Log: Command processor worker thread started on connection.", "DEBUG")
         else:
             # Cleanly shut down if the instrument is disconnected.
             self.shutdown()
@@ -247,13 +246,13 @@ class VisaProxy:
         - False if communication failed.
         """
         current_function_name = inspect.currentframe().f_code.co_name
-        if LOCAL_DEBUG: logger.debug(f"💳 ℹ️ Proxy Log: Attempting a system-wide reset!")
+        matrix_log("CORE", "VISA", current_function_name, "💳 ℹ️ Proxy Log: Attempting a system-wide reset!", "DEBUG")
         
         logger.warning("💳 ℹ️ Proxy Log: ⚠️ Command failed. Attempting to reset the instrument with '*RST'...")
         reset_success = self.write_safe(command="*RST")
 
         if reset_success:
-            if LOCAL_DEBUG: logger.success("💳 ℹ️ Proxy Log: ✅ Success! The device reset command was sent successfully.")
+            matrix_log("CORE", "VISA", current_function_name, "💳 ℹ️ Proxy Log: ✅ Success! The device reset command was sent successfully.", "SUCCESS")
         else:
             self._publish_proxy_error(
                 message="❌ Failure! The device did not respond to the reset command.",

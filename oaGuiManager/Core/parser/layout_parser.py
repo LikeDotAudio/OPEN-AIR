@@ -5,6 +5,8 @@
 # Description: oaGuiDefinitions/layout_parser.py
 
 import orjson
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import os
 import inspect
 import pathlib
@@ -12,7 +14,6 @@ import tkinter as tk
 from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import LAYOUT_LOGGER
 from loguru import logger
 
@@ -178,7 +179,7 @@ class LayoutParser:
              return self._parse_directory_listing(source_path)
 
 
-        if LOCAL_DEBUG: LAYOUT_LOGGER.debug(f"Parsed layout data for '{source_path}': Type='{layout_type}', Data={orjson.dumps(parsed_data, default=str).decode()}")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Parsed layout data for '{source_path}': Type='{layout_type}', Data={orjson.dumps(parsed_data, default=str).decode()}", level="DEBUG")
         return {"type": layout_type, "data": parsed_data}
 
     def _parse_directory_listing(self, path: pathlib.Path) -> dict:
@@ -187,7 +188,7 @@ class LayoutParser:
         This handles the case where no layout.json is present.
         It uses a chain of responsibility: checks for splits, then notebooks, then defaults.
         """
-        if LOCAL_DEBUG: LAYOUT_LOGGER.debug(f"Parsing directory listing via naming convention for: '{path}'")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Parsing directory listing via naming convention for: '{path}'", level="DEBUG")
         try:
             sub_dirs = sorted([d for d in path.iterdir() if d.is_dir() and not d.name.startswith('.') and not d.name.startswith('__')])
         except FileNotFoundError:
@@ -226,7 +227,7 @@ class LayoutParser:
                 parsed_data["panels"].append({"path": sub_dir, "weight": percentage})
                 parsed_data["panel_percentages"].append(percentage)
             
-            if LOCAL_DEBUG: LAYOUT_LOGGER.debug(f"Parsed '{layout_type}' from dir names '{path}'")
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Parsed '{layout_type}' from dir names '{path}'", level="DEBUG")
             return {"type": layout_type, "data": parsed_data}
 
         # 2. Check for Notebook Layout (Numerical Prefix)
@@ -246,7 +247,7 @@ class LayoutParser:
                     display_name = " ".join(parts[1:]).title() if len(parts) > 1 else tab_dir.name
                     parsed_data["tabs"].append({"path": tab_dir, "display_name": display_name})
 
-                if LOCAL_DEBUG: LAYOUT_LOGGER.debug(f"Parsed 'notebook' layout from dir names '{path}'")
+                matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Parsed 'notebook' layout from dir names '{path}'", level="DEBUG")
                 return {"type": layout_type, "data": parsed_data}
 
         # 3. Check for Split-Pane Files (Numerical Prefix in files)
@@ -270,13 +271,13 @@ class LayoutParser:
                 parsed_data["panels"].append({"path": f, "weight": weight})
                 parsed_data["panel_percentages"].append(weight)
             
-            if LOCAL_DEBUG: LAYOUT_LOGGER.debug(f"Parsed '{layout_type}' from file names in '{path}' for equal splitting.")
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Parsed '{layout_type}' from file names in '{path}' for equal splitting.", level="DEBUG")
             return {"type": layout_type, "data": parsed_data}
 
         # 4. Fallback to simple directory listing
         content_dirs = [d for d in sub_dirs if d not in layout_dirs and d not in potential_tab_dirs]
 
-        if LOCAL_DEBUG: LAYOUT_LOGGER.debug(f"Parsed 'directory_listing' as fallback for '{path}'")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Parsed 'directory_listing' as fallback for '{path}'", level="DEBUG")
         return {
             "type": "directory_listing",
             "data": {

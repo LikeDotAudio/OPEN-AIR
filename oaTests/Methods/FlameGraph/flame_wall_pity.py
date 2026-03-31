@@ -28,7 +28,11 @@
 import os
 import html
 
-def generate_wall_of_pity(stats_list, ps):
+# --- Architectural Limits ---
+MAX_OFFENDERS_PER_CATEGORY = 50
+MAX_SUBSYSTEM_BREAKDOWN_ITEMS = 20
+
+def generate_wall_of_pity(performance_stats, ps):
     """
     Generates a highly detailed, descriptive performance report.
     Designed to provide a 'blind coder' with full context on architectural bottlenecks.
@@ -125,8 +129,8 @@ def generate_wall_of_pity(stats_list, ps):
         report.append(f"CONTEXT: {cat['description']}")
         report.append("")
         
-        # 50 items
-        by_metric = sorted(stats_list, key=cat['sort_key'], reverse=True)[:50]
+        # USE CONSTANT
+        by_metric = sorted(performance_stats, key=cat['sort_key'], reverse=True)[:MAX_OFFENDERS_PER_CATEGORY]
         
         for i, s in enumerate(by_metric, 1):
             # Safe Fallback for Metadata
@@ -160,17 +164,17 @@ def generate_wall_of_pity(stats_list, ps):
             report.append("")
 
     # --- CATEGORY 5: SUBSYSTEM BREAKDOWN ---
-    report.append("\n>>> CATEGORY 5: SUBSYSTEM BREAKDOWN (Worst 20 per Root Process)")
+    report.append(f"\n>>> CATEGORY 5: SUBSYSTEM BREAKDOWN (Worst {MAX_SUBSYSTEM_BREAKDOWN_ITEMS} per Root Process)")
     report.append("-" * 65)
     report.append("CONTEXT: Performance offenders grouped by their origin process or root subsystem. This identifies which 'partition' of the app is causing the most cumulative lag.")
     report.append("")
 
     # Extract unique roots
-    all_roots = sorted(list(set(r for s in stats_list for r in s['roots'])))
+    all_roots = sorted(list(set(r for s in performance_stats for r in s['roots'])))
     for root in all_roots:
         report.append(f"  [ ROOT SUBSYSTEM: {root} ]")
-        root_stats = [s for s in stats_list if root in s['roots']]
-        root_offenders = sorted(root_stats, key=lambda x: x['cumtime'], reverse=True)[:20]
+        root_stats = [s for s in performance_stats if root in s['roots']]
+        root_offenders = sorted(root_stats, key=lambda x: x['cumtime'], reverse=True)[:MAX_SUBSYSTEM_BREAKDOWN_ITEMS]
         
         for i, s in enumerate(root_offenders, 1):
             raw_name = s['funcname']
@@ -182,13 +186,13 @@ def generate_wall_of_pity(stats_list, ps):
         report.append("")
 
     # --- CATEGORY 6: THE FRAMEWORK OVERHEAD (Built-ins) ---
-    report.append("\n>>> CATEGORY 6: THE FRAMEWORK OVERHEAD (Top 20 Built-in Spammers)")
+    report.append(f"\n>>> CATEGORY 6: THE FRAMEWORK OVERHEAD (Top {MAX_SUBSYSTEM_BREAKDOWN_ITEMS} Built-in Spammers)")
     report.append("-" * 65)
     report.append("CONTEXT: These are internal Python built-ins or methods triggered by the app. High volume here often indicates overhead from libraries, debuggers, or inefficient use of language features (e.g., constant isinstance checks or lock contention).")
     report.append("")
 
-    builtins = [s for s in stats_list if s['filename'] == "~"]
-    builtin_spammers = sorted(builtins, key=lambda x: x['ncalls'], reverse=True)[:20]
+    builtins = [s for s in performance_stats if s['filename'] == "~"]
+    builtin_spammers = sorted(builtins, key=lambda x: x['ncalls'], reverse=True)[:MAX_SUBSYSTEM_BREAKDOWN_ITEMS]
     for i, s in enumerate(builtin_spammers, 1):
         report.append(f"    {i:2}. {s['ncalls']:10} calls | {s['tottime']:8.4f}s self | {html.escape(s['funcname'])}")
 

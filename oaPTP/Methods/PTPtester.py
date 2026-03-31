@@ -25,6 +25,8 @@ Assumptions and Constraints:
 """
 
 import sys
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import orjson
 import time
 import argparse
@@ -84,8 +86,8 @@ if MQTT_AVAILABLE:
 # ⚡ DEPENDENCY RESOLUTION: Scapy check
 SCAPY_SPEC = importlib.util.find_spec("scapy")
 if SCAPY_SPEC is None:
-    print("Error: Scapy not installed. Run 'pip install scapy' "
-          "(might need sudo/--break-system-packages)")
+    matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, "Error: Scapy not installed. Run 'pip install scapy' "
+          "(might need sudo/--break-system-packages)", level="INFO")
     if mqtt_client:
         mqtt_client.loop_stop()
         mqtt_client.disconnect()
@@ -155,7 +157,7 @@ def packet_callback(pkt):
                 ptp_layer = PTP(payload)
 
     if ptp_layer:
-        print(f"\n[+] Captured PTP Packet from {src} on port {dport}")
+        matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"\n[+] Captured PTP Packet from {src} on port {dport}", level="INFO")
         ptp_layer.show()
         
         # Relay the captured metrics to the system-wide MQTT bus.
@@ -182,24 +184,24 @@ def packet_callback(pkt):
             mqtt_client.publish(MQTT_TOPIC, orjson.dumps(data).decode())
     elif pkt.haslayer(UDP):
         # Provide diagnostic feedback for unexpected traffic on PTP ports.
-        print(f"\n[+] Captured UDP Packet from {src} on port {dport}")
+        matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"\n[+] Captured UDP Packet from {src} on port {dport}", level="INFO")
         payload = bytes(pkt[UDP].payload)
-        print(f"Raw Payload (Hex): {payload.hex()}")
-        print(f"Raw Payload (Length): {len(payload)} bytes")
+        matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"Raw Payload (Hex): {payload.hex()}", level="INFO")
+        matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"Raw Payload (Length): {len(payload)} bytes", level="INFO")
 
 # ⚡ PRIVILEGE VALIDATION: Root check
 if os.geteuid() != 0:
-    print("Error: Permission denied. Packet sniffing requires root privileges. "
-          "Try 'sudo python3 managers/PTP/PTPtester.py'")
+    matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, "Error: Permission denied. Packet sniffing requires root privileges. "
+          "Try 'sudo python3 managers/PTP/PTPtester.py'", level="INFO")
     if mqtt_client:
         mqtt_client.loop_stop()
         mqtt_client.disconnect()
     sys.exit(1)
 
 # Notify the user of the sniffer's current operational state.
-print("Listening for PTP traffic (UDP 319/320)...")
-print(f"Scapy PTP Layer Status: {'Available' if HAS_PTP else 'Not Available'}")
-print(f"MQTT Feedback: {'Active (' + MQTT_TOPIC + ')' if mqtt_client else 'Disabled'}")
+matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, "Listening for PTP traffic (UDP 319/320)...", level="INFO")
+matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"Scapy PTP Layer Status: {'Available' if HAS_PTP else 'Not Available'}", level="INFO")
+matrix_log("CORE", "PTP", inspect.currentframe().f_code.co_name, f"MQTT Feedback: {'Active (' + MQTT_TOPIC + ', level="INFO")' if mqtt_client else 'Disabled'}")
 
 # Execute the packet capture engine with a filter for PTP ports.
 sniff(filter="udp port 319 or udp port 320", prn=packet_callback, store=0)

@@ -5,11 +5,12 @@
 # Description: Brief summary of purpose
 
 from PIL import Image, ImageDraw, ImageFilter, ImageChops, ImageOps
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import random
 import math
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -63,14 +64,14 @@ class ScrewGenerator:
         Includes disk caching to prevent redundant generation.
         """
         # --- 0. Check Cache First ---
-        if BUILDER_DEBUG: builder_logger.trace(f"📦🔍✨ [CACHE] Checking for procedural screw in cache: {size_pixels}px")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📦🔍✨ [CACHE] Checking for procedural screw in cache: {size_pixels}px", level="TRACE")
         cached_image = AssetCacheManager.load_from_cache("screw", size_pixels, size_pixels, configuration_data)
         if cached_image:
-            if BUILDER_DEBUG: builder_logger.debug(f"📦🆗✅ [CACHE] Retaining procedural screw from disk cache.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📦🆗✅ [CACHE] Retaining procedural screw from disk cache.", level="DEBUG")
             return cached_image
 
         # --- 1. Procedural Generation ---
-        if BUILDER_DEBUG: builder_logger.info(f"🔩🏗️🌀 [BUILDER] Generating NEW Procedural Screw ({size_pixels}px)")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔩🏗️🌀 [BUILDER] Generating NEW Procedural Screw ({size_pixels}px)", level="INFO")
         # Canvas setup (padding for drop shadow)
         padding_amount = int(size_pixels * CANVAS_PADDING_RATIO)
         canvas_dimension = size_pixels + (padding_amount * 2)
@@ -88,10 +89,10 @@ class ScrewGenerator:
         damage_intensity = float(configuration_data.get("damage", 0.0))
         rust_intensity = float(configuration_data.get("rust", 0.0))
         rotation_angle_degrees = float(configuration_data.get("angle", random.randint(0, ROTATION_RANGE_MAX)))
-        if BUILDER_DEBUG: builder_logger.debug(f"⚙️🔘✅ [CONFIG] Type: {screw_head_type}, Finish: {material_finish}, Rotation: {rotation_angle_degrees:.1f}°")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚙️🔘✅ [CONFIG] Type: {screw_head_type}, Finish: {material_finish}, Rotation: {rotation_angle_degrees:.1f}°", level="DEBUG")
 
         # --- 1. Drop Shadow (The External Cast) ---
-        if BUILDER_DEBUG: builder_logger.trace("👻🌀🔳 [LAYER] 1. Casting external drop shadow.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "👻🌀🔳 [LAYER] 1. Casting external drop shadow.", level="TRACE")
         shadow_layer_image = Image.new('RGBA', (canvas_dimension, canvas_dimension), (0,0,0,0))
         shadow_draw_context = ImageDraw.Draw(shadow_layer_image)
         
@@ -112,7 +113,7 @@ class ScrewGenerator:
         screw_image = Image.alpha_composite(shadow_layer_image, screw_image)
 
         # --- 2. The Head Geometry ---
-        if BUILDER_DEBUG: builder_logger.trace(f"🎨🖌️🔘 [LAYER] 2. Lathe-turning screw head: {base_color_hex}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🎨🖌️🔘 [LAYER] 2. Lathe-turning screw head: {base_color_hex}", level="TRACE")
         head_layer_image = Image.new('RGBA', (canvas_dimension, canvas_dimension), (0,0,0,0))
         head_draw_context = ImageDraw.Draw(head_layer_image)
         
@@ -154,7 +155,7 @@ class ScrewGenerator:
         screw_image = Image.alpha_composite(screw_image, head_layer_image)
 
         # --- 3. The Robertson Void (Square Drive) ---
-        if BUILDER_DEBUG: builder_logger.trace("🔳📐🕳️ [LAYER] 3. Punching Robertson square drive void.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔳📐🕳️ [LAYER] 3. Punching Robertson square drive void.", level="TRACE")
         drive_size_pixels = screw_radius * DRIVE_SIZE_RATIO
         
         drive_layer_image = Image.new('RGBA', (canvas_dimension, canvas_dimension), (0,0,0,0))
@@ -191,7 +192,7 @@ class ScrewGenerator:
 
         # --- 4. Damage & Wear (Cam-out & Scratches) ---
         if damage_intensity > 0:
-            if BUILDER_DEBUG: builder_logger.trace(f"🗡️🎨✨ [LAYER] 4. Applying screwdriver slippage wear (Int: {damage_intensity})")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🗡️🎨✨ [LAYER] 4. Applying screwdriver slippage wear (Int: {damage_intensity})", level="TRACE")
             scratch_layer_image = Image.new('RGBA', (canvas_dimension, canvas_dimension), (0,0,0,0))
             scratch_draw_context = ImageDraw.Draw(scratch_layer_image)
             
@@ -214,7 +215,7 @@ class ScrewGenerator:
 
         # --- 5. Rust (Accumulation) ---
         if rust_intensity > 0:
-            if BUILDER_DEBUG: builder_logger.trace(f"🟠🎨✨ [LAYER] 5. Accumulating iron oxide rust (Int: {rust_intensity})")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🟠🎨✨ [LAYER] 5. Accumulating iron oxide rust (Int: {rust_intensity})", level="TRACE")
             
             # Noise texture for rust
             noise_dimension = int(drive_size_pixels)
@@ -231,7 +232,7 @@ class ScrewGenerator:
             screw_image.paste(rust_composite_texture, (rust_offset_coordinate, rust_offset_coordinate), rust_composite_texture)
 
         # --- 6. Save to Cache ---
-        if BUILDER_DEBUG: builder_logger.success(f"🎨🆗💾 [SUCCESS] Procedural screw generation complete. Saving to cache.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🎨🆗💾 [SUCCESS] Procedural screw generation complete. Saving to cache.", level="SUCCESS")
         AssetCacheManager.save_to_cache("screw", size_pixels, size_pixels, configuration_data, screw_image)
 
         return screw_image

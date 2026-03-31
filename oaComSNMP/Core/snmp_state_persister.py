@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260329.1020.1
+# Version 20260330.1600.1
 
 import os
 import time
@@ -23,6 +23,7 @@ from loguru import logger
 from oaOchestration.Constants.project_paths import SNMP_STATE_FILE
 from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger 
 from oaComSNMP.Constants.snmp_constants import THREAD_JOIN_TIMEOUT, LOG_POLLING_INTERVAL, STATE_SYNC_INTERVAL
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # LOCAL_DEBUG can be set or passed if needed
 LOCAL_DEBUG = True
@@ -67,26 +68,26 @@ class SnmpStatePersister:
         self._running = True
         self._thread = threading.Thread(target=self._persistence_loop, daemon=True, name="SNMP-StatePersistenceLoop")
         self._thread.start()
-        if LOCAL_DEBUG:
-            snmp_logger.info("SnmpStatePersister: Started background persistence thread.")
+        matrix_log("comms", "snmp", "start", 
+                   "SnmpStatePersister: Started background persistence thread.", "INFO")
 
     def stop(self):
         """Signals the background thread to stop and waits for it to terminate."""
         self._running = False
         if self._thread and self._thread.is_alive():
-            if LOCAL_DEBUG:
-                snmp_logger.info("SnmpStatePersister: Stopping background persistence thread...")
+            matrix_log("comms", "snmp", "stop", 
+                       "SnmpStatePersister: Stopping background persistence thread...", "INFO")
             self._thread.join(timeout=THREAD_JOIN_TIMEOUT) # Wait for thread to finish
             if self._thread.is_alive():
                 snmp_logger.warning("SnmpStatePersister: Thread did not terminate gracefully.")
-        if LOCAL_DEBUG:
-            snmp_logger.info("SnmpStatePersister: Stopped.")
+        matrix_log("comms", "snmp", "stop", "SnmpStatePersister: Stopped.", "INFO")
 
     def _persistence_loop(self):
         """The main loop for periodically saving SNMP state to a file."""
         while self._running:
             try:
                 if not self.state_cache_manager:
+                    # Non-matrix log for critical misconfiguration
                     snmp_logger.warning("SnmpStatePersister: State cache manager is not available. Skipping persistence.")
                     time.sleep(STATE_SYNC_INTERVAL)
                     continue
@@ -147,14 +148,9 @@ class SnmpStatePersister:
                         current_count = len(self.oid_map_converter.oid_map) 
                     
                     # Check if OID map has grown and sync MIB if necessary
-                    # This logic might need re-evaluation if MIB sync should be separate.
-                    # Keeping it here for structural extraction.
                     if current_count > 0 and current_count != self._last_topic_count:
-                        if LOCAL_DEBUG:
-                            snmp_logger.info(f"SnmpStatePersister: Tree Expansion ({self._last_topic_count} -> {current_count}). MIB sync might be needed.")
-                        # Note: MIB saving logic (`save_current_mib`) requires SNMPManager context,
-                        # so it cannot be called directly here. It's called in SNMPManager.start and
-                        # potentially elsewhere. This extraction might need further refinement.
+                        matrix_log("comms", "snmp", "_persistence_loop", 
+                                   f"SnmpStatePersister: Tree Expansion ({self._last_topic_count} -> {current_count}). MIB sync might be needed.", "INFO")
                         with self._state_lock:
                             self._last_topic_count = current_count
 
@@ -173,8 +169,8 @@ class SnmpStatePersister:
                     if os.path.exists(temp_path):
                         os.replace(temp_path, self.state_file)
                         os.chmod(self.state_file, 0o644) # Set appropriate permissions
-                        if LOCAL_DEBUG:
-                            snmp_logger.debug(f"SnmpStatePersister: State persisted to {self.state_file}")
+                        matrix_log("comms", "snmp", "_persistence_loop", 
+                                   f"SnmpStatePersister: State persisted to {self.state_file}", "DEBUG")
 
             except Exception as e:
                 snmp_logger.error(f"SnmpStatePersister: Persistence loop error: {e}")

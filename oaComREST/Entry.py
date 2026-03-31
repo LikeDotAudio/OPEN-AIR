@@ -1,44 +1,46 @@
 # oaComREST/Entry.py
-# Author: Anthony Peter Kuzub
-# Version: 20260328.1200.1
 #
-# Description: Public entry point for the REST API module.
+# Public entry point for the REST API module. Orchestrates the lifecycle 
+# of the REST manager and exposes the public monitoring API.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260330.1600.1
 
 from loguru import logger
 from .Managers.rest_manager import RESTManager
 from .Constants.rest_constants import LOCAL_DEBUG
+from oaLogging.Methods.matrix_gate import matrix_log
 
 _manager = None
 
 def get_manager(state_cache_manager=None, protocol_router=None):
     """
     Singleton accessor for the RESTManager.
-    
-    Inputs:
-        state_cache_manager (StateRegistry): The system state cache.
-        protocol_router (ProtocolRouter): The system command router.
-        
-    Outputs:
-        RESTManager: The active manager instance.
     """
     global _manager
     if _manager is None:
-        if LOCAL_DEBUG:
-            logger.debug("📡⚙️🔗 [REST] Creating singleton RESTManager instance.")
+        matrix_log("core", "rest", "get_manager", "📡⚙️🔗 [REST] Creating singleton RESTManager instance.", "DEBUG")
         _manager = RESTManager(state_cache_manager, protocol_router)
     return _manager
 
 def start(state_cache_manager=None, protocol_router=None):
     """Convenience function to start the REST service."""
-    if LOCAL_DEBUG:
-        logger.debug("📡⚙️🚀 [REST] Manual service start initiated via Entry.")
+    matrix_log("core", "rest", "start", "📡⚙️🚀 [REST] Manual service start initiated via Entry.", "DEBUG")
     return get_manager(state_cache_manager, protocol_router).start()
 
 def stop():
     """Convenience function to stop the REST service."""
     if _manager:
-        if LOCAL_DEBUG:
-            logger.debug("📡⚙️🛑 [REST] Manual service stop initiated via Entry.")
+        matrix_log("core", "rest", "stop", "📡⚙️🛑 [REST] Manual service stop initiated via Entry.", "DEBUG")
         _manager.stop()
 
 def get_status():

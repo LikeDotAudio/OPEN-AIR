@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 import sys
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import threading
 from loguru import logger
 
@@ -23,7 +25,7 @@ class ShutdownCoordinator:
             return
         self._shutdown_in_progress = True
         
-        if self.debug_enabled: logger.debug("🖥️🎨 [UI] Initiating shutdown...")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "🖥️🎨 [UI] Initiating shutdown...", level="DEBUG")
         self.root._shutdown = True
         
         # ⚡ THREADED SHUTDOWN: Run manager stops in a separate thread to prevent UI hang
@@ -31,7 +33,7 @@ class ShutdownCoordinator:
             for name, instance in self.shared_instances.items():
                 if instance:
                     try:
-                        if self.debug_enabled: logger.debug(f"🛑 Stopping manager: {name}")
+                        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🛑 Stopping manager: {name}", level="DEBUG")
                         if hasattr(instance, "stop"): instance.stop()
                         elif hasattr(instance, "shutdown"): instance.shutdown()
                         elif hasattr(instance, "disconnect"): instance.disconnect()
@@ -39,7 +41,7 @@ class ShutdownCoordinator:
                         logger.warning(f"⚠️ Error shutting down {name}: {e}")
             
             # After managers are signaled to stop, quit the mainloop
-            if self.debug_enabled: logger.debug("🖥️🎨 [UI] Managers signaled to stop. Quitting mainloop...")
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "🖥️🎨 [UI] Managers signaled to stop. Quitting mainloop...", level="DEBUG")
             self.root.after(0, self.root.quit)
 
         threading.Thread(target=_stop_managers, daemon=True).start()

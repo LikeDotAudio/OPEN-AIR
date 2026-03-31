@@ -5,9 +5,10 @@
 # Description: Modularized GUI Widget Factory.
 
 import importlib
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaLogging.Core.logger import FACTORY_LOGGER
 from loguru import logger
 from oaGuiManager.Core.context.widget_context import WidgetContext
@@ -29,9 +30,8 @@ class GuiWidgetFactoryMixin:
             self.widget_factory = GuiWidgetFactoryMixin._WIDGET_FACTORY_CACHE
             return
 
-        if LOCAL_DEBUG:
-            FACTORY_LOGGER.debug("Initializing GuiWidgetFactory...")
-        
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "Initializing GuiWidgetFactory...", level="DEBUG")
+    
         # Pull the dynamically built registry instead of hardcoding 40 imports
         factory = WidgetRegistry.get_registry()
         

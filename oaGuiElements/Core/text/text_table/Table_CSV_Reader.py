@@ -5,10 +5,11 @@
 # Description: This module provides functionality to read data from CSV files into a list of dictionaries.
 
 import csv
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -47,7 +48,7 @@ class TableCsvReader:
                      headers = [] # Handle empty files gracefully
                 data = [row for row in reader]
 
-            if LOCAL_DEBUG: logger.success(f"✅ Successfully read {len(data)} rows from {file_path}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ Successfully read {len(data)} rows from {file_path}", level="SUCCESS")
             return headers, data
         except Exception as e:
             from oaOchestration.safe_file_io import handle_file_read_error

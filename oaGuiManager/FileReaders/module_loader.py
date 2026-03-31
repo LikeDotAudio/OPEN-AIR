@@ -5,6 +5,8 @@
 # Description: Handles dynamic loading of Python modules and instantiation of GUI classes.
 
 import os
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import inspect
 import sys
 import importlib.util
@@ -13,7 +15,6 @@ import tkinter as tk
 from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Entry import logger, vocal_capture, set_log_directory
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -171,7 +172,7 @@ class ModuleLoader:
                 config_dict["base_mqtt_topic_from_path"] = base_topic
                 
                 instance = UniversalGuiLoader(parent=parent_widget, json_path=str(json_path), config=config_dict)
-                if LOCAL_DEBUG: logger.success(f"🏗️🪟✨{json_path}!")
+                matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🏗️🪟✨{json_path}!", level="SUCCESS")
                 return instance
             except Exception as e:
                 vocal_capture("UI", f"Error instantiating UniversalGuiLoader for '{json_path}'")

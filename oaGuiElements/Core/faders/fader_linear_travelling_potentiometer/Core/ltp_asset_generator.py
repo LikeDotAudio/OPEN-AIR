@@ -5,11 +5,12 @@
 # Description: Brief summary of purpose
 
 import math
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from PIL import Image, ImageDraw, ImageTk, ImageFilter
 from oaLogging.Core.logger import builder_logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True
 _LTP_ASSET_CACHE = {}
 
 class LTPAssetGenerator:
@@ -21,7 +22,7 @@ class LTPAssetGenerator:
         if cache_key in _LTP_ASSET_CACHE:
             return _LTP_ASSET_CACHE[cache_key]
 
-        if BUILDER_DEBUG: builder_logger.trace(f"🏗️🖼️🎨 [ASSET] Generating NEW 3D LTP knob asset: {radius}px")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🖼️🎨 [ASSET] Generating NEW 3D LTP knob asset: {radius}px", level="TRACE")
         
         def hex_to_rgb(hex_str):
             if not isinstance(hex_str, str) or not hex_str.startswith("#"): return (40,40,40)

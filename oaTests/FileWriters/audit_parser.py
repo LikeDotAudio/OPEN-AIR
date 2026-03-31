@@ -18,7 +18,8 @@ def parse_audit_log(file_path):
         return []
 
     with open(file_path, 'r', encoding="utf-8") as f:
-        content = f.read()
+        # ⚡ OPTIMIZATION: Limit read to 2MB.
+        content = f.read(2000000)
 
     # Split by "## File: "
     sections = re.split(r'## File: ', content)

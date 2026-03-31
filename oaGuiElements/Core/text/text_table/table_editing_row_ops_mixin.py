@@ -5,11 +5,12 @@
 # Description: text_table/table_editing_row_ops_mixin.py
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import inspect
 import orjson
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import TABLE_LOGGER
 from loguru import logger
 

@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260328.1405.1
+# Version 20260330.1600.1
 
 import threading
 import time
@@ -24,6 +24,7 @@ LOCAL_DEBUG = True
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 from oaLogging.Core.logger import MIDI_LOGGER as midi_logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # --- EXTRACTED CORE MODULES ---
 from ..Core.midi_port_controller import MIDIPortController
@@ -65,15 +66,15 @@ class MidiManager:
         with self._monitor_lock:
             callbacks = list(self._monitor_callbacks)
             
-        if LOCAL_DEBUG:
-            logger.trace(f"🎹 [MIDI-MGR] Notifying {len(callbacks)} monitors of {direction} activity.")
+        matrix_log("comms", "midi", "_notify_monitor", 
+                   f"🎹 [MIDI-MGR] Notifying {len(callbacks)} monitors of {direction} activity.", "TRACE")
 
         for cb in callbacks:
             try:
                 cb(direction, msg)
             except Exception as e:
-                if LOCAL_DEBUG:
-                    logger.error(f"❌ [MIDI-MGR] Monitor callback failed: {e}")
+                matrix_log("comms", "midi", "_notify_monitor", 
+                           f"❌ [MIDI-MGR] Monitor callback failed: {e}", "ERROR")
 
     def get_port_info(self):
         return self.ports.get_port_info(self.run_bridge, self._active_in_names, self._active_out_names)
@@ -83,8 +84,8 @@ class MidiManager:
         self._running = True
         if self.run_bridge:
             info = self.get_port_info()
-            if LOCAL_DEBUG:
-                midi_logger.info(f"🎹 [MIDI-MGR] Starting bridge. Found {len(info.get('inputs', []))} inputs, {len(info.get('outputs', []))} outputs.")
+            matrix_log("comms", "midi", "start", 
+                       f"🎹 [MIDI-MGR] Starting bridge. Found {len(info.get('inputs', []))} inputs, {len(info.get('outputs', []))} outputs.", "INFO")
             self.ports.open_all(info, self._midi_listen_loop)
             self._broadcast_status()
 
@@ -98,21 +99,21 @@ class MidiManager:
                 self.state_cache_manager.handle_external_update(f"OPEN-AIR/System/Status/MIDI/Active{p}", n, source="MIDI")
 
     def _midi_listen_loop(self, port):
-        if LOCAL_DEBUG:
-            midi_logger.debug(f"▶️ [MIDI-LISTEN] Started listening on port: {port.name}")
+        matrix_log("comms", "midi", "_midi_listen_loop", 
+                   f"▶️ [MIDI-LISTEN] Started listening on port: {port.name}", "DEBUG")
         
         last_heartbeat = 0
         while self._running:
             try:
                 # Periodic heartbeat to prove loop is alive (every 30s)
                 if time.time() - last_heartbeat > 30:
-                    if LOCAL_DEBUG:
-                        midi_logger.debug(f"💓 [MIDI-LISTEN] Loop active for {port.name}")
+                    matrix_log("comms", "midi", "_midi_listen_loop", 
+                               f"💓 [MIDI-LISTEN] Loop active for {port.name}", "DEBUG")
                     last_heartbeat = time.time()
 
                 for msg in port.iter_pending():
-                    if LOCAL_DEBUG:
-                        midi_logger.trace(f"🎹 [MIDI-LISTEN] Incoming: {msg} on {port.name}")
+                    matrix_log("comms", "midi", "_midi_listen_loop", 
+                               f"🎹 [MIDI-LISTEN] Incoming: {msg} on {port.name}", "TRACE")
                     
                     topic, val = self.mapper.midi_to_topic(msg, port.name)
                     meta = {
@@ -187,8 +188,8 @@ class MidiManager:
         is_midi_source = msg.get("logical_source") in ["MIDI", "MIDI-TX"]
         
         if is_midi_topic or is_midi_source:
-            if LOCAL_DEBUG:
-                logger.trace(f"🎹 [MIDI-MGR] MIDI event detected on {topic} (Source: {msg.get('logical_source')})")
+            matrix_log("comms", "midi", "_on_protocol_event", 
+                       f"🎹 [MIDI-MGR] MIDI event detected on {topic} (Source: {msg.get('logical_source')})", "TRACE")
             
             # Determine direction
             direction = "TX" if msg.get("logical_source") == "MIDI-TX" else "RX"

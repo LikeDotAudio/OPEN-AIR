@@ -1,12 +1,25 @@
 # Managers/wysiwyg_editor.py
-# Author: Gemini CLI
-# Version: 20260323.1700.1
 #
-# Description: The main Entry Point for the new Modular WYSIWYG Definition Builder.
+# Main Entry Point for the modular WYSIWYG Definition Builder.
+# Orchestrates interactive layout, property editing, and JSON serialization.
+#
+# Author: Gemini CLI (Contributor to this project)
+# Blog: www.Like.audio
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260330.1600.1
 
 import tkinter as tk
 from tkinter import ttk
 import pathlib
+from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # Import Modular Components
 from ..Core.event_bus import event_bus
@@ -18,12 +31,7 @@ from ..Core.workspaces.tree_refactor import TreeRefactor
 from ..Core.workspaces.element_properties import ElementProperties
 from ..Methods.grab_bag.grab_bag_view import GrabBagView
 
-# --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from oaLogging.Core.logger import GUI_LOGGER as logger
-
 from oaConfiguration.FileReaders.config_reader import Config
-
 app_constants = Config.get_instance()
 
 class WysiwygEditor:
@@ -39,11 +47,11 @@ class WysiwygEditor:
             inst = cls._instance
             inst.window.lift()
             inst.window.focus_set()
-            if LOCAL_DEBUG: logger.info(f"WysiwygEditor: Switching context to new data in existing instance: {json_filepath}")
+            matrix_log("ui", "gui_builder", "launch", f"WysiwygEditor: Switching context to new data in existing instance: {json_filepath}", "INFO")
             state_manager.initialize(config_data, pathlib.Path(json_filepath) if json_filepath else None)
             return
 
-        if LOCAL_DEBUG: logger.info(f"WysiwygEditor: Launching new editor instance for {json_filepath} (Standalone: {is_standalone})")
+        matrix_log("ui", "gui_builder", "launch", f"WysiwygEditor: Launching new editor instance for {json_filepath} (Standalone: {is_standalone})", "INFO")
         return cls(parent_window, json_filepath, config_data, on_test_callback, on_save_callback, is_standalone)
 
     def __init__(self, parent_window, json_filepath=None, config_data=None, on_test_callback=None, on_save_callback=None, is_standalone=False):
@@ -66,7 +74,7 @@ class WysiwygEditor:
 
     def _build_ui(self):
         """Builds the main interface with 20/80 split."""
-        if LOCAL_DEBUG: logger.debug("WysiwygEditor: Starting UI build...")
+        matrix_log("ui", "gui_builder", "_build_ui", "WysiwygEditor: Starting UI build...", "DEBUG")
         
         if self.is_standalone:
             self.window = self.parent
@@ -80,7 +88,7 @@ class WysiwygEditor:
         self.window.protocol("WM_DELETE_WINDOW", self.close_window)
         
         # Main Toolbar
-        if LOCAL_DEBUG: logger.debug("WysiwygEditor: Creating Toolbar...")
+        matrix_log("ui", "gui_builder", "_build_ui", "WysiwygEditor: Creating Toolbar...", "DEBUG")
         toolbar = ttk.Frame(self.window)
         toolbar.pack(side="top", fill="x", padx=5, pady=5)
         
@@ -94,12 +102,12 @@ class WysiwygEditor:
         self.status_lbl.pack(side="right", padx=10)
 
         # PANED WINDOW FOR 20/80 SPLIT
-        if LOCAL_DEBUG: logger.debug("WysiwygEditor: Initializing PanedWindow...")
+        matrix_log("ui", "gui_builder", "_build_ui", "WysiwygEditor: Initializing PanedWindow...", "DEBUG")
         self.main_pane = tk.PanedWindow(self.window, orient=tk.HORIZONTAL, bg="#2b2b2b", sashwidth=6, bd=0)
         self.main_pane.pack(fill="both", expand=True, padx=5, pady=5)
 
         # LEFT SIDE (~25%): Tools Notebook
-        if LOCAL_DEBUG: logger.debug("WysiwygEditor: Initializing Left Notebook (Code/Props/Library)...")
+        matrix_log("ui", "gui_builder", "_build_ui", "WysiwygEditor: Initializing Left Notebook (Code/Props/Library)...", "DEBUG")
         self.left_notebook = ttk.Notebook(self.main_pane)
         self.main_pane.add(self.left_notebook, width=430)
         
@@ -120,34 +128,34 @@ class WysiwygEditor:
         self.left_notebook.add(self.grab_tab, text=" Library ")
 
         # RIGHT SIDE (80%): Visual Layout
-        if LOCAL_DEBUG: logger.debug("WysiwygEditor: Initializing Interactive Layout Canvas...")
+        matrix_log("ui", "gui_builder", "_build_ui", "WysiwygEditor: Initializing Interactive Layout Canvas...", "DEBUG")
         self.layout_container = tk.Frame(self.main_pane, bg="#1a1a1a")
         self.main_pane.add(self.layout_container)
         
         self.layout_view = InteractiveLayout(self.layout_container)
         self.layout_view.pack(fill="both", expand=True)
         
-        if LOCAL_DEBUG: logger.info("WysiwygEditor: UI Build Complete.")
+        matrix_log("ui", "gui_builder", "_build_ui", "WysiwygEditor: UI Build Complete.", "INFO")
 
     def close_window(self):
         """Explicitly cleans up and destroys the UI window."""
-        if LOCAL_DEBUG: logger.info("WysiwygEditor: Shutdown Sequence Initiated.")
+        matrix_log("ui", "gui_builder", "close_window", "WysiwygEditor: Shutdown Sequence Initiated.", "INFO")
         event_bus.unsubscribe("FOCUS_REQUESTED", self._on_focus_requested)
         
         # Reset State Manager to avoid cross-pollination on relaunch
-        if LOCAL_DEBUG: logger.debug("WysiwygEditor: Resetting StateManager...")
+        matrix_log("ui", "gui_builder", "close_window", "WysiwygEditor: Resetting StateManager...", "DEBUG")
         state_manager.reset()
 
         # Destroy window
         try:
-            if LOCAL_DEBUG: logger.debug("WysiwygEditor: Destroying Window...")
+            matrix_log("ui", "gui_builder", "close_window", "WysiwygEditor: Destroying Window...", "DEBUG")
             self.window.destroy()
         except:
             pass
             
         # Reset instance
         WysiwygEditor._instance = None
-        if LOCAL_DEBUG: logger.info("WysiwygEditor: Editor Closed.")
+        matrix_log("ui", "gui_builder", "close_window", "WysiwygEditor: Editor Closed.", "INFO")
 
     def _on_focus_requested(self, path, source=None):
         """Optionally switches tabs when an element is focused."""
@@ -157,12 +165,12 @@ class WysiwygEditor:
         self.status_lbl.config(text=f"Focused: {path}")
         # Switch to Props tab (index 2) if focus comes from layout
         if source == self.layout_view:
-            if LOCAL_DEBUG: logger.debug(f"WysiwygEditor: Focus Event - Switching to Props tab for element at path: {path}")
+            matrix_log("ui", "gui_builder", "_on_focus_requested", f"WysiwygEditor: Focus Event - Switching to Props tab for element at path: {path}", "DEBUG")
             self.left_notebook.select(2)
 
     def save_workspace(self):
         """Triggers the File IO handler to serialize the workspace to disk."""
-        if LOCAL_DEBUG: logger.info(f"WysiwygEditor: Manual Save Triggered for file: {state_manager.get_file_path()}")
+        matrix_log("ui", "gui_builder", "save_workspace", f"WysiwygEditor: Manual Save Triggered for file: {state_manager.get_file_path()}", "INFO")
         
         # Attempt Save
         if FileIOHandler.save_file(on_save_callback=self.on_save):
@@ -176,14 +184,13 @@ class WysiwygEditor:
 
     def _save_and_close(self):
         """Saves the file and then closes the editor."""
-        if LOCAL_DEBUG: logger.info("WysiwygEditor: 'SAVE AND CLOSE' triggered.")
-        # SRP REFACTOR: Orchestrate modular actions
+        matrix_log("ui", "gui_builder", "_save_and_close", "WysiwygEditor: 'SAVE AND CLOSE' triggered.", "INFO")
         if self.save_workspace():
             self.close_window()
 
     def _test_config(self):
         """Triggers the test callback with current master state_manager."""
-        if LOCAL_DEBUG: logger.info("WysiwygEditor: Rebuilding main UI with current editor state_manager...")
+        matrix_log("ui", "gui_builder", "_test_config", "WysiwygEditor: Rebuilding main UI with current editor state_manager...", "INFO")
         if self.on_test:
             self.on_test(state_manager.get_state())
             if self.status_lbl.winfo_exists():

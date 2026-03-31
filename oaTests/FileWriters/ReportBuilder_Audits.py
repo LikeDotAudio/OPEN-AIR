@@ -26,7 +26,10 @@ def build_tab(data_dir):
         mtime = datetime.fromtimestamp(os.path.getmtime(file_path)).strftime('%Y-%m-%d %H:%M:%S')
         
         with open(file_path, 'r', encoding="utf-8") as f:
-            content = f.read()
+            # ⚡ OPTIMIZATION: Limit read to 100KB per file
+            content = f.read(100000)
+            if f.read(1): # Check if there's more
+                content += "\n\n... (Report Truncated for Performance) ..."
         
         escaped_content = html.escape(content)
         

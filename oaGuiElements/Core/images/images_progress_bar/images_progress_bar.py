@@ -5,10 +5,11 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -54,7 +55,7 @@ class BuilderImagesProgressBarCreator(TransparencyMixin):
             base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
             builder_instance = kwargs.get("builder_instance") or self
 
-        if LOCAL_DEBUG: logger.debug(f"🔬⚡️ Entering '{current_function_name}' to construct a progress indicator for '{label}'.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️ Entering '{current_function_name}' to construct a progress indicator for '{label}'.", level="DEBUG")
 
         # Use tk.Canvas for transparency support
         canvas = tk.Canvas(
@@ -130,13 +131,12 @@ class BuilderImagesProgressBarCreator(TransparencyMixin):
                         topic, state_mirror_engine.sync_incoming_mqtt_to_gui
                     )
 
-                if LOCAL_DEBUG: logger.debug(f"🔬 Widget '{label}' ({path}) registered with StateMirrorEngine.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 Widget '{label}' ({path}) registered with StateMirrorEngine.", level="DEBUG")
                 # Initialize state from cache or broadcast
                 state_mirror_engine.initialize_widget_state(path)
 
-            if LOCAL_DEBUG: logger.success(f"✅ SUCCESS! The progress bar '{label}' has been successfully rendered!")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ SUCCESS! The progress bar '{label}' has been successfully rendered!", level="SUCCESS")
             return canvas
         except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("❌ The progress bar '{label}' has failed to materialize! Error")
+            logger.exception("❌ The progress bar '{label}' has failed to materialize! Error")
             return None

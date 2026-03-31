@@ -5,12 +5,13 @@
 # Description: Modularized Vertical Fader Widget.
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 import sys
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaLogging.Core.logger import builder_logger
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
@@ -92,7 +93,7 @@ class BuilderFaderCreator(TransparencyMixin):
     
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
-        if LOCAL_DEBUG: logger.trace(f"🔬 BuilderFaderCreator.make: {config_data.get('path')}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 BuilderFaderCreator.make: {config_data.get('path')}", level="TRACE")
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
         

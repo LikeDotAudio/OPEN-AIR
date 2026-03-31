@@ -5,6 +5,8 @@
 # Description: This script generates the application icon as an SVG file.
 
 import os
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import pathlib
 
 def generate_icon():
@@ -34,7 +36,7 @@ def generate_icon():
     with open(output_path, "w") as f:
         f.write(svg_content)
     
-    print(f"✅ Icon generated and saved to: {output_path}")
+    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ Icon generated and saved to: {output_path}", level="INFO")
 
 if __name__ == "__main__":
     generate_icon()

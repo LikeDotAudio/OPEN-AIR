@@ -4,8 +4,9 @@
 #
 # Description: managers/yak/yak_trigger_handler.py
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -22,7 +23,7 @@ def register_monitor_callback(callback_func):
     """
     if callback_func not in _gui_observers:
         _gui_observers.append(callback_func)
-        if LOCAL_DEBUG: logger.success("✅ Yak Monitor GUI registered.")
+        matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, "✅ Yak Monitor GUI registered.", level="SUCCESS")
 
 def unregister_monitor_callback(callback_func):
     """
@@ -44,5 +45,4 @@ def handle_yak_monitor_traffic(msg: MqttMessage):
         try:
             callback(topic, payload)
         except Exception as e:
-             if LOCAL_DEBUG:
-                 logger.exception("❌ Error updating Yak Monitor GUI")
+             logger.exception("❌ Error updating Yak Monitor GUI")

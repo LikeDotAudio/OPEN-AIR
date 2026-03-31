@@ -5,11 +5,12 @@
 # Description: Modularized Composite Horizontal Fader & Dial.
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -38,7 +39,7 @@ class BuilderCompositeHorizontalDialValueCreator(
         return creator.make_composite_horizontal_dial_value(parent_widget, config_data, context, **kwargs)
 
     def make_composite_horizontal_dial_value(self, parent_widget, config_data, context=None, **kwargs):
-        if BUILDER_DEBUG: builder_logger.trace(f"🔬🏗️🔀 [BUILDER] Creating composite horizontal dial value.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔀 [BUILDER] Creating composite horizontal dial value.", level="TRACE")
         
         label, path = config_data.get("label_active", config_data.get("label", "Composite")), config_data.get("path", "")
         

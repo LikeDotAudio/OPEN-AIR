@@ -5,11 +5,12 @@
 # Description: text_value_with_units/dynamic_guimake_text_value_with_units.py
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -63,7 +64,7 @@ class BuilderTextValueWithUnitsCreator(TransparencyMixin):
             base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
             builder_instance = kwargs.get("builder_instance") or self
 
-        if LOCAL_DEBUG: logger.debug(f"🔬⚡️ Entering '{current_function_name}' to forge a text input field for '{label}'.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️ Entering '{current_function_name}' to forge a text input field for '{label}'.", level="DEBUG")
 
         # Robust Background Inheritance
         try:
@@ -146,13 +147,12 @@ class BuilderTextValueWithUnitsCreator(TransparencyMixin):
 
             def _on_text_change(*args):
                 try:
-                    if LOCAL_DEBUG: logger.debug(f"Text changed for {label}: {text_var.get()}")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Text changed for {label}: {text_var.get()}", level="DEBUG")
                     state_mirror_engine.broadcast_gui_change_to_mqtt(path)
                 except Exception as e:
-                    if LOCAL_DEBUG:
-                        logger.debug(f"🔴 ERROR in _on_text_change: {e}",
-                            file=os.path.basename(__file__),
-                        )
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔴 ERROR in _on_text_change: {e}",
+                        file=os.path.basename(__file__, level="DEBUG"),
+                    )
 
             text_var.trace_add(
                 "write", _on_text_change
@@ -170,22 +170,21 @@ class BuilderTextValueWithUnitsCreator(TransparencyMixin):
                         topic, state_mirror_engine.sync_incoming_mqtt_to_gui
                     )
 
-                if LOCAL_DEBUG: logger.debug(f"🔬 Widget '{label}' ({path}) registered with StateMirrorEngine (StringVar: {text_var.get()}).")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 Widget '{label}' ({path}) registered with StateMirrorEngine (StringVar: {text_var.get()}).", level="DEBUG")
                 # Initialize state from cache or broadcast
                 state_mirror_engine.initialize_widget_state(path)
 
-            if LOCAL_DEBUG: logger.success(f"✅ SUCCESS! The text input '{label}' has been successfully forged!",
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ SUCCESS! The text input '{label}' has been successfully forged!",
                 file=os.path.basename(__file__),
                 version=app_constants.CURRENT_VERSION,
                 function=f"{self.__class__.__name__}.{current_function_name}",
-            )
+            , level="SUCCESS")
             return canvas
         except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("❌ The text input '{label}' has disintegrated! Error",
-                    file=os.path.basename(__file__),
-                    version=app_constants.CURRENT_VERSION,
-                    function=current_function_name,
-                )
+            logger.exception("❌ The text input '{label}' has disintegrated! Error",
+                file=os.path.basename(__file__),
+                version=app_constants.CURRENT_VERSION,
+                function=current_function_name,
+            )
             return None
 

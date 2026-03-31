@@ -5,10 +5,11 @@
 # Description: input_inc_dec_buttons/dynamic_guimake_input_inc_dec_buttons.py
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -40,10 +41,9 @@ class BuilderInputIncDecButtonsCreator(TransparencyMixin):
         self, parent_widget, config_data, context=None, **kwargs
     ):  # Updated signature
             """Creates increment/decrement buttons."""
-            if BUILDER_DEBUG: 
-                builder_logger.trace(f"🔬🏗️🕹️ [BUILDER] Entering make_input_inc_dec_buttons")
-                builder_logger.debug(f"📜📑💻 [CONFIG] Raw config received: {config_data}")
-    
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🕹️ [BUILDER] Entering make_input_inc_dec_buttons", level="TRACE")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
+
             current_function_name = "make_input_inc_dec_buttons"
     
             # Extract only widget-specific config from config_data
@@ -52,27 +52,27 @@ class BuilderInputIncDecButtonsCreator(TransparencyMixin):
             path = config_data.get("path")
     
             # ⚡ HARDENED INTERFACE: Extract from context if available
-            if BUILDER_DEBUG: builder_logger.trace("🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...", level="TRACE")
             if context:
                 state_mirror_engine = context.state_mirror_engine
                 subscriber_router = context.subscriber_router
                 base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
                 builder_instance = context.builder_instance
-                if BUILDER_DEBUG: builder_logger.debug("✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.", level="DEBUG")
             else:
                 state_mirror_engine = self.state_mirror_engine
                 subscriber_router = self.subscriber_router
                 base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
                 builder_instance = kwargs.get("builder_instance") or self
-                if BUILDER_DEBUG: builder_logger.debug("⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.", level="DEBUG")
     
-            if BUILDER_DEBUG: builder_logger.debug(f"🔬⚡️🕹️ [BUILDER] Forging inc/dec buttons for '{label}' at path '{path}'.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️🕹️ [BUILDER] Forging inc/dec buttons for '{label}' at path '{path}'.", level="DEBUG")
     
             frame = tk.Frame(parent_widget)  # Use parent_widget here
             
             # Apply Industrial Transparency
             if hasattr(self, '_apply_transparency'):
-                if BUILDER_DEBUG: builder_logger.trace(f"👻🌀🪟 [ALPHA] Applying industrial transparency to inc/dec frame.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to inc/dec frame.", level="TRACE")
                 self._apply_transparency(frame, None, config_data, builder_instance)
     
             if label:
@@ -81,7 +81,7 @@ class BuilderInputIncDecButtonsCreator(TransparencyMixin):
             # Initial value and range (optional, can be used for boundary checks)
             value_default = config.get("value_default", 0)
             increment_amount = config.get("increment", 1)
-            if BUILDER_DEBUG: builder_logger.debug(f"📐📏✨ [STATE] Default value: {value_default}, Step: {increment_amount}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📐📏✨ [STATE] Default value: {value_default}, Step: {increment_amount}", level="DEBUG")
     
             current_value = tk.IntVar(value=value_default)
     
@@ -89,7 +89,7 @@ class BuilderInputIncDecButtonsCreator(TransparencyMixin):
             value_display.pack(side=tk.RIGHT, padx=(10, 0))
             
             def sync_bg():
-                if BUILDER_DEBUG: builder_logger.trace(f"🔄👻🎨 [SYNC] Syncing labels to background for inc/dec frame.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄👻🎨 [SYNC] Syncing labels to background for inc/dec frame.", level="TRACE")
                 bg = frame.cget("bg")
                 for child in frame.winfo_children():
                     if isinstance(child, tk.Label):
@@ -99,15 +99,15 @@ class BuilderInputIncDecButtonsCreator(TransparencyMixin):
     
             def _increment():
                 new_val = current_value.get() + increment_amount
-                if BUILDER_DEBUG: builder_logger.info(f"🖱️👆🆙 [INPUT] Increment clicked for '{label}'. New: {new_val}")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️👆🆙 [INPUT] Increment clicked for '{label}'. New: {new_val}", level="INFO")
                 current_value.set(new_val)
     
             def _decrement():
                 new_val = current_value.get() - increment_amount
-                if BUILDER_DEBUG: builder_logger.info(f"🖱️👆⬇️ [INPUT] Decrement clicked for '{label}'. New: {new_val}")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️👆⬇️ [INPUT] Decrement clicked for '{label}'. New: {new_val}", level="INFO")
                 current_value.set(new_val)
     
-            if BUILDER_DEBUG: builder_logger.trace(f"🏗️🔳🕹️ [CONSTRUCT] Instantiating inc/dec ttk.Buttons.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🔳🕹️ [CONSTRUCT] Instantiating inc/dec ttk.Buttons.", level="TRACE")
             dec_button = ttk.Button(frame, text="⬇", command=_decrement)
             dec_button.pack(side=tk.RIGHT)
     
@@ -116,7 +116,7 @@ class BuilderInputIncDecButtonsCreator(TransparencyMixin):
     
             # --- New MQTT Wiring for Inc/Dec Buttons ---
             if path:  # state_mirror_engine and subscriber_router are now explicitly passed
-                if BUILDER_DEBUG: builder_logger.trace(f"📡📶🔗 [MQTT] Registering inc/dec buttons at path '{path}'")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡📶🔗 [MQTT] Registering inc/dec buttons at path '{path}'", level="TRACE")
                 widget_id = path
     
                 # 1. Register widget
@@ -126,7 +126,7 @@ class BuilderInputIncDecButtonsCreator(TransparencyMixin):
     
                 # 2. Subscribe to this widget's topic to receive updates
                 if subscriber_router and topic:
-                    if BUILDER_DEBUG: builder_logger.debug(f"📥📶🔄 [MQTT] Subscribing to topic: {topic}")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📥📶🔄 [MQTT] Subscribing to topic: {topic}", level="DEBUG")
                     subscriber_router.subscribe_to_topic(
                         topic, state_mirror_engine.sync_incoming_mqtt_to_gui
                     )
@@ -134,15 +134,15 @@ class BuilderInputIncDecButtonsCreator(TransparencyMixin):
                 # 3. Bind variable trace for outgoing messages
                 # Use a lambda that calls broadcast_gui_change_to_mqtt
                 def on_gui_change(*args):
-                    if BUILDER_DEBUG: builder_logger.debug(f"⚡🔴📡 [EVENT] Value change for inc/dec '{label}'. Broadcasting.")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚡🔴📡 [EVENT] Value change for inc/dec '{label}'. Broadcasting.", level="DEBUG")
                     state_mirror_engine.broadcast_gui_change_to_mqtt(widget_id)
                 
                 current_value.trace_add("write", on_gui_change)
     
                 # 4. Initialize state from cache or broadcast
-                if BUILDER_DEBUG: builder_logger.trace(f"🔄⏳🔋 [STATE] Initializing state from cache/broker.")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄⏳🔋 [STATE] Initializing state from cache/broker.", level="TRACE")
                 state_mirror_engine.initialize_widget_state(widget_id)
     
-            if BUILDER_DEBUG: builder_logger.success(f"✅🆗🕹️ [SUCCESS] The increment/decrement buttons for '{label}' has materialized!")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🕹️ [SUCCESS] The increment/decrement buttons for '{label}' has materialized!", level="SUCCESS")
             return frame
     

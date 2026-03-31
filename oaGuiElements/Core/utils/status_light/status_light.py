@@ -5,11 +5,12 @@
 # Description: Adds a status indicator circle to the GUI.
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 import orjson
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -28,9 +29,8 @@ class StatusLightWidget(tk.Frame):
     def __init__(self, parent, config, state_mirror_engine, subscriber_router, base_topic_path):
         # Use theme-compatible background
         super().__init__(parent, bd=0, highlightthickness=0, relief="flat")
-        if BUILDER_DEBUG: 
-            builder_logger.trace(f"🔬🏗️🔴 [BUILDER] Initializing StatusLightWidget")
-            builder_logger.debug(f"📜📑💻 [CONFIG] Raw config received: {config}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔴 [BUILDER] Initializing StatusLightWidget", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config}", level="DEBUG")
 
         self.widget_config = config
         self.state_mirror_engine = state_mirror_engine
@@ -39,11 +39,11 @@ class StatusLightWidget(tk.Frame):
         
         # 1. Orientation Logic
         self.orientation = config.get("Orientation", "horizontal").lower()
-        if BUILDER_DEBUG: builder_logger.debug(f"📐📏🔳 [LAYOUT] Orientation: {self.orientation}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📐📏🔳 [LAYOUT] Orientation: {self.orientation}", level="DEBUG")
         
         # 3. Canvas for the Label and Dot
         # Increase size to fit label if needed
-        if BUILDER_DEBUG: builder_logger.trace(f"🏗️🪟🎨 [CONSTRUCT] Creating status light canvas.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🪟🎨 [CONSTRUCT] Creating status light canvas.", level="TRACE")
         self.status_canvas = tk.Canvas(
             self, width=120, height=30, highlightthickness=0, bd=0, relief="flat"
         )
@@ -59,7 +59,7 @@ class StatusLightWidget(tk.Frame):
         if self.state_mirror_engine and self.subscriber_router:
             # Global topic
             global_topic = "OPEN-AIR/GUI/Global/Header/StatusLight"
-            if BUILDER_DEBUG: builder_logger.trace(f"📡📶🔄 [MQTT] Subscribing to GLOBAL status topic: {global_topic}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡📶🔄 [MQTT] Subscribing to GLOBAL status topic: {global_topic}", level="TRACE")
             self.subscriber_router.subscribe_to_topic(
                 global_topic, self._update_status_light
             )
@@ -68,7 +68,7 @@ class StatusLightWidget(tk.Frame):
             widget_path = config.get("path")
             if widget_path:
                 topic = self.state_mirror_engine.calculate_topic(widget_path, self.base_topic_path)
-                if BUILDER_DEBUG: builder_logger.trace(f"📡📶🔄 [MQTT] Subscribing to INSTANCE status topic: {topic}")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡📶🔄 [MQTT] Subscribing to INSTANCE status topic: {topic}", level="TRACE")
                 self.subscriber_router.subscribe_to_topic(topic, self._update_status_light)
 
     def _update_status_light(self, msg: MqttMessage):
@@ -76,7 +76,7 @@ class StatusLightWidget(tk.Frame):
         try:
             topic = msg.topic
             payload = msg.payload
-            if BUILDER_DEBUG: builder_logger.trace(f"📥📶🔄 [MQTT] Incoming status light update on: {topic}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📥📶🔄 [MQTT] Incoming status light update on: {topic}", level="TRACE")
 
             if isinstance(payload, bytes):
                 data = orjson.loads(payload)
@@ -87,7 +87,7 @@ class StatusLightWidget(tk.Frame):
 
             # Support both 'color' and 'val' keys for status
             color_val = data.get("color", data.get("val", "red"))
-            if BUILDER_DEBUG: builder_logger.debug(f"🔋🔄✨ [STATE] Status light color command: {color_val}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔋🔄✨ [STATE] Status light color command: {color_val}", level="DEBUG")
 
             # Determine final hex color
             if color_val in ["green", True, 1, "1", "online"]:
@@ -100,7 +100,7 @@ class StatusLightWidget(tk.Frame):
             # Schedule the GUI update on the main Tkinter thread
             def update_gui():
                 if self.status_canvas.winfo_exists():
-                    if BUILDER_DEBUG: builder_logger.trace(f"✨🔄🎨 [SYNC] Updating status light dot to color: {fill_color}")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✨🔄🎨 [SYNC] Updating status light dot to color: {fill_color}", level="TRACE")
                     self.status_canvas.itemconfig(self.status_light_id, fill=fill_color)
 
             if self.state_mirror_engine and self.state_mirror_engine.root:
@@ -109,8 +109,7 @@ class StatusLightWidget(tk.Frame):
                 update_gui()
 
         except Exception as e:
-            if BUILDER_DEBUG:
-                builder_logger.exception(f"❌🚫🛑 [ERROR] failure updating status light for topic '{topic}'")
+            builder_logger.exception(f"❌🚫🛑 [ERROR] failure updating status light for topic '{topic}'")
             pass
 
     def _draw(self):

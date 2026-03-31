@@ -5,12 +5,13 @@
 # Description: A mixin for creating an animation display widget from a GIF file.
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 from PIL import Image, ImageTk, ImageSequence
 import os
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -40,9 +41,8 @@ class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
         self, parent_widget, config_data, context=None, **kwargs
     ):  # Updated signature
         """Creates an animation display widget."""
-        if BUILDER_DEBUG: 
-            builder_logger.trace(f"🔬🏗️🎞️ [BUILDER] Entering make_images_animation_display")
-            builder_logger.debug(f"📜📑💻 [CONFIG] Raw config received: {config_data}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🎞️ [BUILDER] Entering make_images_animation_display", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
 
         current_function_name = "make_images_animation_display"
 
@@ -52,27 +52,27 @@ class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
         path = config_data.get("path")
 
         # ⚡ HARDENED INTERFACE: Extract from context if available
-        if BUILDER_DEBUG: builder_logger.trace("🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...", level="TRACE")
         if context:
             state_mirror_engine = context.state_mirror_engine
             subscriber_router = context.subscriber_router
             base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
             builder_instance = context.builder_instance
-            if BUILDER_DEBUG: builder_logger.debug("✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.", level="DEBUG")
         else:
             state_mirror_engine = self.state_mirror_engine
             subscriber_router = self.subscriber_router
             base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
             builder_instance = kwargs.get("builder_instance") or self
-            if BUILDER_DEBUG: builder_logger.debug("⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "⚠️🔔🖱️ [CONTEXT] Context missing; fell back to self/kwargs.", level="DEBUG")
 
-        if BUILDER_DEBUG: builder_logger.debug(f"🔬⚡️🎞️ [BUILDER] Animating display for '{label}' at path '{path}'.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️🎞️ [BUILDER] Animating display for '{label}' at path '{path}'.", level="DEBUG")
 
         frame = tk.Frame(parent_widget)  # Use parent_widget here
         
         # Apply Industrial Transparency
         if hasattr(self, '_apply_transparency'):
-            if BUILDER_DEBUG: builder_logger.trace(f"👻🌀🪟 [ALPHA] Applying industrial transparency to animation frame.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to animation frame.", level="TRACE")
             self._apply_transparency(frame, None, config_data, builder_instance)
 
         if label:
@@ -81,13 +81,13 @@ class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
         gif_path_relative = config.get("gif_path", "")
         gif_path_absolute = os.path.join(GLOBAL_PROJECT_ROOT, gif_path_relative)
 
-        if BUILDER_DEBUG: builder_logger.info(f"🔄📂🎞️ [DATA] Loading GIF animation: {gif_path_relative}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄📂🎞️ [DATA] Loading GIF animation: {gif_path_relative}", level="INFO")
         frames = []
         try:
             with Image.open(gif_path_absolute) as im:
                 for frame_img in ImageSequence.Iterator(im):
                     frames.append(ImageTk.PhotoImage(frame_img.copy()))
-            if BUILDER_DEBUG: builder_logger.debug(f"🎞️🆗✅ [DATA] Successfully extracted {len(frames)} frames from GIF.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🎞️🆗✅ [DATA] Successfully extracted {len(frames)} frames from GIF.", level="DEBUG")
         except FileNotFoundError:
             if BUILDER_DEBUG: builder_logger.error(f"🎞️❌🚫 [ERROR] GIF not found at {gif_path_absolute}. Creating placeholder.")
             try:
@@ -102,7 +102,7 @@ class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
                 # Load the placeholder as a single frame
                 placeholder_tk_image = ImageTk.PhotoImage(placeholder_image)
                 frames.append(placeholder_tk_image)
-                if BUILDER_DEBUG: builder_logger.info(f"☑️🖼️✨ [DATA] Created placeholder image at {placeholder_filename}")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"☑️🖼️✨ [DATA] Created placeholder image at {placeholder_filename}", level="INFO")
             except Exception as e_placeholder:
                 if BUILDER_DEBUG: builder_logger.error(f"🎞️❌🚫 [ERROR] failure creating placeholder image: {e_placeholder}")
                 # If even placeholder creation fails, create a generic error label
@@ -132,7 +132,7 @@ class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
         anim_label.pack(side=tk.LEFT)
         
         def sync_bg():
-            if BUILDER_DEBUG: builder_logger.trace(f"🔄👻🎨 [SYNC] Syncing animation frame labels to background.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄👻🎨 [SYNC] Syncing animation frame labels to background.", level="TRACE")
             bg = frame.cget("bg")
             for child in frame.winfo_children():
                 if isinstance(child, tk.Label):
@@ -145,13 +145,13 @@ class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
 
         # Introduce a tk.IntVar to hold the current frame index
         frame_index_var = tk.IntVar(value=config.get("value_default", 0))
-        if BUILDER_DEBUG: builder_logger.debug(f"🔋🎞️✨ [STATE] Initial frame index for '{label}': {frame_index_var.get()}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔋🎞️✨ [STATE] Initial frame index for '{label}': {frame_index_var.get()}", level="DEBUG")
 
         def _update_frame(*args):  # Add *args to accept trace arguments
             try:
                 frame_index = frame_index_var.get()
                 if 0 <= frame_index < len(frames):
-                    if BUILDER_DEBUG: builder_logger.trace(f"🔄✨🎞️ [SYNC] Updating animation '{label}' to frame index: {frame_index}")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄✨🎞️ [SYNC] Updating animation '{label}' to frame index: {frame_index}", level="TRACE")
                     anim_label.config(image=frames[frame_index])
             except (ValueError, TypeError) as e:
                 if BUILDER_DEBUG: builder_logger.error(f"🎞️❌🚫 [ERROR] failure updating animation frame for '{label}': {e}")
@@ -161,7 +161,7 @@ class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
         )  # Bind _update_frame to the trace
 
         if path:
-            if BUILDER_DEBUG: builder_logger.trace(f"📡📶🔗 [MQTT] Registering animation at path '{path}'")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡📶🔗 [MQTT] Registering animation at path '{path}'", level="TRACE")
             widget_id = path
             # Register the IntVar with the StateMirrorEngine
             topic = state_mirror_engine.register_widget(
@@ -170,16 +170,16 @@ class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
 
             # Subscribe to the topic for incoming messages
             if subscriber_router and topic:
-                if BUILDER_DEBUG: builder_logger.debug(f"📥📶🔄 [MQTT] Subscribing to topic: {topic}")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📥📶🔄 [MQTT] Subscribing to topic: {topic}", level="DEBUG")
                 subscriber_router.subscribe_to_topic(
                     topic, state_mirror_engine.sync_incoming_mqtt_to_gui
                 )
 
             # Initialize state from cache or broadcast
-            if BUILDER_DEBUG: builder_logger.trace(f"🔄⏳🔋 [STATE] Initializing animation state from cache/broker.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄⏳🔋 [STATE] Initializing animation state from cache/broker.", level="TRACE")
             state_mirror_engine.initialize_widget_state(path)
             
-        if BUILDER_DEBUG: builder_logger.success(f"✅🆗🎞️ [SUCCESS] The animation for '{label}' has materialized!")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🎞️ [SUCCESS] The animation for '{label}' has materialized!", level="SUCCESS")
         return frame
 
     # Callback function for updating the animation frame via incoming MQTT messages.

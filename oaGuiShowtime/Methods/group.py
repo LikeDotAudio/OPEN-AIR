@@ -5,11 +5,12 @@
 # Description: This module processes and groups marker data by Zone, Group, and Device for display in the Showtime tab.
 
 import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from collections import defaultdict
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -25,7 +26,7 @@ def group_markers(raw_marker_data):
     Returns:
         defaultdict: Nested structure {zone: {group: [markers]}}
     """
-    if LOCAL_DEBUG: logger.debug("🟢 [DATA] Grouping marker data by Zone and Group.")
+    matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, "🟢 [DATA] Grouping marker data by Zone and Group.", level="DEBUG")
     grouped = defaultdict(lambda: defaultdict(list))
     for row in raw_marker_data:
         zone = row.get("ZONE", "N/A")
@@ -39,7 +40,7 @@ def sort_markers(grouped_markers):
     Inputs:
         grouped_markers (dict): The nested structure to sort.
     """
-    if LOCAL_DEBUG: logger.debug("🔵 [DATA] Sorting markers by Device Name.")
+    matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, "🔵 [DATA] Sorting markers by Device Name.", level="DEBUG")
     for zone, groups in grouped_markers.items():
         for group, devices in groups.items():
             devices.sort(key=lambda x: x.get("NAME", ""))
@@ -49,7 +50,7 @@ def process_and_sort_markers(showtime_tab_instance):
     ⚡ ORCHESTRATOR: Coordinates the grouping and sorting pipeline.
     Refactored for Modular SRP.
     """
-    if LOCAL_DEBUG: logger.info("🟢️️️🔵 Starting marker processing pipeline.")
+    matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, "🟢️️️🔵 Starting marker processing pipeline.", level="INFO")
 
     # SRP REFACTOR: Step 1 - Grouping
     showtime_tab_instance.grouped_markers = group_markers(showtime_tab_instance.marker_data)
@@ -57,4 +58,4 @@ def process_and_sort_markers(showtime_tab_instance):
     # SRP REFACTOR: Step 2 - Sorting
     sort_markers(showtime_tab_instance.grouped_markers)
 
-    if LOCAL_DEBUG: logger.success("✅ Markers grouped and sorted successfully.")
+    matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, "✅ Markers grouped and sorted successfully.", level="SUCCESS")

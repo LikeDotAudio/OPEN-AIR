@@ -5,12 +5,13 @@
 # Description: Brief summary of purpose
 
 import numpy as np
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from PIL import Image
 from oaLogging.Core.logger import builder_logger
 from oaGuiElements.Core.graphing.graphing import graph_updater
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True
 
 class GraphPatinaMixin:
     """Injects high-fidelity patina textures from the parent GUI builder into the Matplotlib figure."""
@@ -19,7 +20,7 @@ class GraphPatinaMixin:
         # 🛡️ REBUILD GUARD
         if getattr(self.instance, '_is_rebuilding', False): return
 
-        if BUILDER_DEBUG: builder_logger.debug(f"📈💹🎨 [SYNC] Injecting patina into FluxPlotter '{self.widget_id}'")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📈💹🎨 [SYNC] Injecting patina into FluxPlotter '{self.widget_id}'", level="DEBUG")
         tk_canvas = self.canvas.get_tk_widget()
         
         # 0. Clear Blit Cache

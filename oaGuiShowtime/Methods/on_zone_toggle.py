@@ -5,10 +5,11 @@
 # Description: Showtime/worker_showtime_on_zone_toggle.py
 
 import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -29,15 +30,15 @@ from oaGuiShowtime.Methods.tune import on_tune_request_from_selection
 # Outputs:
 #     None.
 def on_zone_toggle(showtime_tab_instance, zone_name):
-    if LOCAL_DEBUG: logger.debug(f"🟢️️️🔵 Zone toggle clicked for: {zone_name}. Current selection: {showtime_tab_instance.selected_zone}.")
+    matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, f"🟢️️️🔵 Zone toggle clicked for: {zone_name}. Current selection: {showtime_tab_instance.selected_zone}.", level="DEBUG")
     if showtime_tab_instance.selected_zone == zone_name:
         showtime_tab_instance.selected_zone = None
         showtime_tab_instance.selected_group = None
-        if LOCAL_DEBUG: logger.debug("🟢️️️🟡 Deselected Zone. Clearing Group selection.")
+        matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, "🟢️️️🟡 Deselected Zone. Clearing Group selection.", level="DEBUG")
     else:
         showtime_tab_instance.selected_zone = zone_name
         showtime_tab_instance.selected_group = None
-        if LOCAL_DEBUG: logger.debug(f"🟢️️️🟢 Selected new Zone: {showtime_tab_instance.selected_zone}. Clearing Group selection.")
+        matrix_log("UI", "SHOWTIME", inspect.currentframe().f_code.co_name, f"🟢️️️🟢 Selected new Zone: {showtime_tab_instance.selected_zone}. Clearing Group selection.", level="DEBUG")
 
     showtime_tab_instance._create_zone_buttons()
     showtime_tab_instance._create_group_buttons()

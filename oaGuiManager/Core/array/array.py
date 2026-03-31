@@ -5,12 +5,13 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 import orjson
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -81,7 +82,7 @@ class BuilderArrayCreator(TransparencyMixin):
         return BuilderArrayCreator().make_array(parent_widget, config_data, context=context, **kwargs)
 
     def make_array(self, parent_widget, config_data, context: WidgetContext = None, **kwargs):
-        if LOCAL_DEBUG: logger.trace(f"🔬 Entering make_array with config: {config_data}")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🔬 Entering make_array with config: {config_data}", level="TRACE")
         """
         Generates a grid of widgets based on a blueprint and a data array.
         Supports collapsible rows (OcaCollapsibleBlock) managed by a ViewManager.
@@ -163,11 +164,11 @@ class BuilderArrayCreator(TransparencyMixin):
         # ⚡ OPTIMIZATION: Use orjson for deep copy of blueprint
         blueprint_json = orjson.dumps(blueprint).decode()
 
-        if LOCAL_DEBUG: logger.debug(f"🧱 ArrayCreator: Expanding blueprint for {len(data_array)} elements in {config_data.get('path', 'root')}")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🧱 ArrayCreator: Expanding blueprint for {len(data_array)} elements in {config_data.get('path', 'root')}", level="DEBUG")
 
         for idx, item in enumerate(data_array):
             item_id = item.get("id", f"item_{idx}")
-            if LOCAL_DEBUG: logger.trace(f"  └─ 💠 Processing Array Element [{idx}]: ID='{item_id}'")
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"  └─ 💠 Processing Array Element [{idx}]: ID='{item_id}'", level="TRACE")
             
             try:
                 item_config = orjson.loads(blueprint_json)
@@ -176,14 +177,14 @@ class BuilderArrayCreator(TransparencyMixin):
                 continue
             
             # Inject generic data
-            if LOCAL_DEBUG: logger.trace(f"    ├─ 💉 Injecting data contexts into element '{item_id}'")
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"    ├─ 💉 Injecting data contexts into element '{item_id}'", level="TRACE")
             creator_instance._inject_data(item_config, item)
             
             # Pass ViewManager reference via a special key
             creator_instance._inject_view_manager(item_config, view_manager)
 
             synthetic_fields[str(item_id)] = item_config
-            if LOCAL_DEBUG: logger.trace(f"    └─ ✅ Element '{item_id}' ready for batch build.")
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"    └─ ✅ Element '{item_id}' ready for batch build.", level="TRACE")
 
         # 6. Create configuration for batch builder
         container_config = {
@@ -196,7 +197,7 @@ class BuilderArrayCreator(TransparencyMixin):
         }
         
         current_path = config_data.get("path", "")
-        if LOCAL_DEBUG: logger.debug(f"🚀 ArrayCreator: Handing off synthetic container '{current_path}' to BatchBuilder...")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🚀 ArrayCreator: Handing off synthetic container '{current_path}' to BatchBuilder...", level="DEBUG")
         builder_instance._create_dynamic_widgets(
             grid_container, container_config, 
             path_prefix=current_path, 

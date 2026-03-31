@@ -1,8 +1,19 @@
 # Core/background.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
 #
-# Description: Brief summary of purpose
+# Manages the generation and application of procedural patina backgrounds 
+# for the builder panel. Uses background threads for heavy image processing.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260330.1600.1
 
 import os
 import time
@@ -11,83 +22,79 @@ from tkinter import ttk
 from PIL import ImageTk
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import builder_logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
 from oaGuiElements.Core.utils.panels.panel_generator import PanelGenerator
 
 class BuilderBackgroundManagerMixin:
     """
-    Manages the generation and application of procedural patina backgrounds for the builder panel.
+    Mixin for managing procedural patina backgrounds in the GUI.
     """
     
     def _clear_panel_background(self):
         """Removes the generated panel background and restores the theme default."""
-        if LOCAL_DEBUG: builder_logger.trace(f"🎨🧹✨ [BUILDER] Clearing panel background for '{getattr(self, 'tab_name', 'Unknown')}'")
+        matrix_log("ui", "gui_builder", "_clear_panel_background", 
+                   f"🎨🧹✨ [BUILDER] Clearing panel background for '{getattr(self, 'tab_name', 'Unknown')}'", "TRACE")
+        
         if hasattr(self, 'panel_bg_label') and self.panel_bg_label:
             try: 
                 self.panel_bg_label.destroy()
             except Exception as e:
-                builder_logger.trace(f"🎨 Clean: Label already gone or failed to destroy: {e}")
+                matrix_log("ui", "gui_builder", "_clear_panel_background", 
+                           f"🎨 Clean: Label already gone or failed to destroy: {e}", "TRACE")
             self.panel_bg_label = None
         
         self.panel_bg_image = None
         self.panel_bg_pil = None
         if hasattr(self, '_last_bg_size'): del self._last_bg_size
         
-        # Restore default background color
         if hasattr(self, 'scroll_frame'):
             colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
             self.scroll_frame.configure(bg=colors["bg"])
             self._trigger_reslice_all()
 
     def _apply_panel_background(self, panel_config, width=None, height=None):
-        """
-        Generates and applies a procedural patina panel to the whole tab.
-        Moves heavy PIL generation to a background thread.
-        """
+        """Generates and applies a procedural patina panel via background thread."""
         import threading
         
-        # ⚡ ROBUSTNESS: Handle 'none' explicitly
         if panel_config == "none":
             self._clear_panel_background()
             return
         
-        # ⚡ OPTIMIZATION: Prevent 'Guess' backgrounds during build.
         if width is None or height is None:
             if hasattr(self, 'canvas'):
                 w = self.canvas.winfo_width()
                 h = self.canvas.winfo_height()
                 if w <= 1 or h <= 1:
-                    if LOCAL_DEBUG: builder_logger.trace(f"🎨📐🔳 [BUILDER] Skipping bg regen for '{getattr(self, 'tab_name', 'Unknown')}': Canvas not yet sized.")
+                    matrix_log("ui", "gui_builder", "_apply_panel_background", 
+                               f"🎨📐🔳 [BUILDER] Skipping bg regen for '{getattr(self, 'tab_name', 'Unknown')}': Canvas not yet sized.", "TRACE")
                     return
                 width, height = w, h
             else:
                 return
             
-        # ⚡ FINAL SAFETY: Never request 0x0 or negative
         width = max(50, width)
         height = max(50, height)
 
-        if LOCAL_DEBUG: builder_logger.info(f"🎨🏗️🌀 [BUILDER] Spawning background generation thread for '{getattr(self, 'tab_name', 'Unknown')}' ({width}x{height})")
+        matrix_log("ui", "gui_builder", "_apply_panel_background", 
+                   f"🎨🏗️🌀 [BUILDER] Spawning background generation thread for '{getattr(self, 'tab_name', 'Unknown')}' ({width}x{height})", "INFO")
 
-        # ⚡ RACE CONDITION PROTECTION: Track the latest task ID
         if not hasattr(self, "_bg_task_id"): self._bg_task_id = 0
         self._bg_task_id += 1
         current_task_id = self._bg_task_id
 
         def _bg_worker():
             try:
-                # 1. Generate (or Load from Cache) in background
                 panel_bg_pil = PanelGenerator.generate_procedural_panel(width, height, panel_config)
                 
-                # 2. Schedule UI update on main thread (only if this is still the active task)
                 if self.winfo_exists() and self._bg_task_id == current_task_id:
                     self.after(0, lambda: self._apply_generated_background(panel_bg_pil, width, height, current_task_id))
             except Exception as e:
-                if LOCAL_DEBUG: builder_logger.exception(f"❌🚫🛑 [ERROR] failure in background panel generation for '{getattr(self, 'tab_name', 'Unknown')}'")
-                # ⚡ FALLBACK: Trigger reslice anyway so widgets can update their theme-matched colors
+                matrix_log("ui", "gui_builder", "_bg_worker", 
+                           f"❌🚫🛑 [ERROR] failure in background panel generation for '{getattr(self, 'tab_name', 'Unknown')}': {e}", "ERROR")
                 if self.winfo_exists() and self._bg_task_id == current_task_id:
                     self.after(0, self._trigger_reslice_all)
 
@@ -98,35 +105,32 @@ class BuilderBackgroundManagerMixin:
         if not panel_bg_pil or not self.winfo_exists():
             return
 
-        # ⚡ RACE CONDITION PROTECTION: Verify task ID still matches
         if task_id is not None and hasattr(self, "_bg_task_id") and self._bg_task_id != task_id:
-            if LOCAL_DEBUG: builder_logger.debug(f"⚠️🗑️🌀 [BUILDER] Background Task {task_id} discarded (superseded by {self._bg_task_id})")
+            matrix_log("ui", "gui_builder", "_apply_generated_background", 
+                       f"⚠️🗑️🌀 [BUILDER] Background Task {task_id} discarded (superseded by {self._bg_task_id})", "DEBUG")
             return
 
-        if LOCAL_DEBUG: builder_logger.success(f"🎨🆗✨ [BUILDER] Applying generated background ({width}x{height}) to '{getattr(self, 'tab_name', 'Unknown')}' UI.")
+        matrix_log("ui", "gui_builder", "_apply_generated_background", 
+                   f"🎨🆗✨ [BUILDER] Applying generated background ({width}x{height}) to '{getattr(self, 'tab_name', 'Unknown')}' UI.", "SUCCESS")
+        
         self.panel_bg_pil = panel_bg_pil
         self.panel_bg_image = ImageTk.PhotoImage(self.panel_bg_pil)
         
         if self.panel_bg_image and hasattr(self, 'scroll_frame') and hasattr(self, 'canvas'):
-            # Extract base color from PIL (center pixel) for fallback
             try:
                 base_rgb = self.panel_bg_pil.getpixel((width//2, height//2))
                 base_hex = '#%02x%02x%02x' % base_rgb[:3]
                 self.scroll_frame.configure(bg=base_hex)
-                # ⚡ MANDATORY: Update canvas background too to avoid borders
                 self.canvas.configure(bg=base_hex)
             except Exception as e:
-                if LOCAL_DEBUG: builder_logger.warning(f"⚠️ Could not extract base color from background: {e}")
-                pass
+                matrix_log("ui", "gui_builder", "_apply_generated_background", 
+                           f"⚠️ Could not extract base color from background: {e}", "WARNING")
 
-            # ⚡ CRITICAL FIX: If scroll_frame is a canvas, draw the image directly on it.
-            # This is much more robust for Z-ordering than a Label with place().
             if isinstance(self.scroll_frame, tk.Canvas):
                 self.scroll_frame.delete("panel_procedural_bg")
                 self.scroll_frame.create_image(0, 0, image=self.panel_bg_image, anchor="nw", tags="panel_procedural_bg")
                 self.scroll_frame.tag_lower("panel_procedural_bg")
             else:
-                # Fallback for non-canvas scroll frames
                 if not hasattr(self, 'panel_bg_label') or not self.panel_bg_label:
                     self.panel_bg_label = tk.Label(self.scroll_frame, image=self.panel_bg_image, bd=0)
                     self.panel_bg_label.place(x=0, y=0, width=width, height=height)
@@ -136,7 +140,6 @@ class BuilderBackgroundManagerMixin:
                 
                 self._force_background_to_back()
             
-            # --- Trigger reslice for all registered widgets ---
             self._trigger_reslice_all()
 
     def _force_background_to_back(self):
@@ -148,15 +151,14 @@ class BuilderBackgroundManagerMixin:
                 pass
 
     def _trigger_background_sync(self, force=False):
-        """Calculates settled dimensions and triggers background regeneration with debouncing."""
+        """Calculates settled dimensions and triggers background regeneration."""
         if not self.winfo_exists(): return
         
-        # 🛡️ LOCK: Never trigger during the rebuild or mapping phase, unless FORCED.
         if not force and getattr(self, '_is_rebuilding', False):
-            if LOCAL_DEBUG: builder_logger.trace(f"🎨📐🔳 [LAYOUT] BG Sync BLOCKED for '{getattr(self, 'tab_name', 'Unknown')}': Rebuild in progress.")
+            matrix_log("ui", "gui_builder", "_trigger_background_sync", 
+                       f"🎨📐🔳 [LAYOUT] BG Sync BLOCKED for '{getattr(self, 'tab_name', 'Unknown')}': Rebuild in progress.", "TRACE")
             return
 
-        # ⚡ DEBOUNCE: Prevent rapid-fire syncs from triggering multiple threads
         if hasattr(self, '_bg_sync_timer') and self._bg_sync_timer:
             self.after_cancel(self._bg_sync_timer)
         
@@ -168,41 +170,26 @@ class BuilderBackgroundManagerMixin:
     def _perform_background_sync(self, force=False):
         """Internal execution logic for background sync."""
         self._bg_sync_timer = None
-        if not self.winfo_exists(): return
-        
-        if not self.winfo_ismapped():
+        if not self.winfo_exists() or not self.winfo_ismapped():
             return
             
         if not hasattr(self, 'canvas') or not hasattr(self, 'scroll_frame'):
             return
 
-        canv_w = self.canvas.winfo_width()
-        canv_h = self.canvas.winfo_height()
-        req_w = self.scroll_frame.winfo_reqwidth()
-        req_h = self.scroll_frame.winfo_reqheight()
-        
-        w = max(canv_w, req_w)
-        h = max(canv_h, req_h)
+        w = max(self.canvas.winfo_width(), self.scroll_frame.winfo_reqwidth())
+        h = max(self.canvas.winfo_height(), self.scroll_frame.winfo_reqheight())
         
         if w <= 1 or h <= 1: return
         
         last_w, last_h = getattr(self, '_last_bg_size', (0, 0))
         
-        needs_regen = False
-        if force:
-            needs_regen = True
-        elif w > last_w or h > last_h:
-            dw = max(0, w - last_w)
-            dh = max(0, h - last_h)
-            if dw > 50 or dh > 50:
-                needs_regen = True
+        needs_regen = force or (w > last_w or h > last_h) and (max(0, w-last_w) > 50 or max(0, h-last_h) > 50)
         
         if not needs_regen:
             self._trigger_reslice_all()
             return
 
         self._last_bg_size = (w, h)
-        
         if hasattr(self, 'canvas_window_id') and self.canvas_window_id:
             self.canvas.itemconfig(self.canvas_window_id, width=w, height=h)
 

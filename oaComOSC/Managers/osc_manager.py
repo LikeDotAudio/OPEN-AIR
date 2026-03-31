@@ -1,6 +1,6 @@
 # Managers/osc_manager.py
 # Author: Anthony P. Kuzub (Refactored)
-# Version: 20260323.1700.1
+# Version: 20260330.1600.1
 #
 # Description: Dedicated orchestrator for OSC (Open Sound Control) traffic.
 
@@ -10,12 +10,9 @@ import orjson
 import os
 
 # --- Standard Debug Logging Setup ---
-from oaLogging.Methods.matrix_gate import is_debug_allowed
-def _is_debug():
-    return is_debug_allowed(system="UI", element="OSC")
-
 from loguru import logger
-from oaLogging.Core.logger import OSC_LOGGER as logger
+from oaLogging.Core.logger import OSC_LOGGER as osc_logger
+from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfiguration.FileReaders.config_reader import Config
 from ..Workers.osc_rx_server import OscRxServer
 from ..Workers.osc_tx_client import OscTxClient
@@ -32,8 +29,9 @@ class OSCManager:
     def __init__(self, state_cache_manager=None, mqtt_connection_manager=None, 
                  run_bridge=True):
         self.run_bridge = run_bridge
-        if _is_debug():
-            logger.info(f"Initializing Bridge (Bridge={run_bridge})...")
+        
+        matrix_log("ui", "osc", "__init__", 
+                   f"Initializing Bridge (Bridge={run_bridge})...", "INFO")
         
         # ⚡ STANDALONE: Fallback to global singletons if not injected
         from oaComBroker.Core.protocol_router.manager import ProtocolRouter
@@ -46,7 +44,6 @@ class OSCManager:
         if not self.state_cache_manager:
             try:
                 from oaStateCache.Core.state_cache import StateRegistry
-                # ProtocolRouter might already have it
                 self.state_cache_manager = getattr(self.protocol_router, "state_cache_manager", None)
             except Exception:
                 pass
@@ -138,13 +135,11 @@ class OSCManager:
             
         if running:
             if enabled:
-                # If we were running in observer mode, now we need to start workers
                 self._start_workers()
             else:
-                # If we were bridging, now we stop workers but keep the manager 'running'
                 self._stop_workers()
         
-        logger.info(f"OSC Bridge Mode: {'ENABLED' if enabled else 'DISABLED'}")
+        osc_logger.info(f"OSC Bridge Mode: {'ENABLED' if enabled else 'DISABLED'}")
         self._notify_monitor("STATUS_UPDATE", "BRIDGE_MODE", enabled)
 
     def _start_workers(self):
@@ -163,8 +158,8 @@ class OSCManager:
             with self._state_lock:
                 self._rx_addr = f"{get_local_ip()}:{rx_port}"
                 
-            if _is_debug():
-                logger.success(f"RX SERVER ACTIVE: {self._rx_addr}")
+            matrix_log("ui", "osc", "_start_workers", 
+                       f"RX SERVER ACTIVE: {self._rx_addr}", "SUCCESS")
 
             # TX Client
             if not self.tx_client:
@@ -174,15 +169,15 @@ class OSCManager:
             with self._state_lock:
                 self._tx_addr = f"{tx_host}:{tx_port}"
                 
-            if _is_debug():
-                logger.success(f"TX CLIENT ACTIVE: {self._tx_addr}")
+            matrix_log("ui", "osc", "_start_workers", 
+                       f"TX CLIENT ACTIVE: {self._tx_addr}", "SUCCESS")
 
             # ⚡ STATUS MONITOR: Start periodic broadcast
             threading.Thread(target=self._broadcast_status_loop, 
                              daemon=True, name="OSC-StatusBroadcast").start()
 
         except Exception as e:
-            logger.error(f"Bridge Workers Start Failed: {e}")
+            osc_logger.error(f"Bridge Workers Start Failed: {e}")
 
     def _stop_workers(self):
         """Internal helper to stop RX/TX workers."""
@@ -197,7 +192,7 @@ class OSCManager:
             self._rx_addr = "None"
             self._tx_addr = "None"
         
-        logger.warning("OSC Workers Offline.")
+        osc_logger.warning("OSC Workers Offline.")
 
     def start(self):
         with self._state_lock:
@@ -207,24 +202,22 @@ class OSCManager:
         if self.run_bridge:
             self._start_workers()
         else:
-            if _is_debug():
-                logger.info("Bridge: Observer mode active.")
+            matrix_log("ui", "osc", "start", "Bridge: Observer mode active.", "INFO")
 
     def stop(self):
         with self._state_lock:
             self._running = False
             
         self._stop_workers()
-        logger.warning("Bridge Offline.")
+        osc_logger.warning("Bridge Offline.")
 
     def handle_incoming_osc(self, address, value):
         # 1. Route Map
         with self._state_lock:
             topic = self.osc_to_topic.get(address, f"OPEN-AIR/OSC{address}")
         
-        # ⚡ LOGGING: High-signal Firehose style
-        if _is_debug():
-            logger.debug(f"RX: {address} -> {value} (Topic: {topic})")
+        matrix_log("ui", "osc", "handle_incoming_osc", 
+                   f"RX: {address} -> {value} (Topic: {topic})", "DEBUG")
         
         # ⚡ ANTI-FEEDBACK SPEC: Define identity at transport ingress
         meta = {
@@ -243,7 +236,6 @@ class OSCManager:
             )
             
             # 3. Update Monitor Feed (UI Decoration)
-            # Skip monitor topics from self-reporting to prevent recursion
             if "/Monitor/" not in address:
                 monitor_payload = {
                     "val": value,
@@ -251,7 +243,6 @@ class OSCManager:
                     "address": address,
                     "direction": "RX"
                 }
-                # Propagate spec fields to monitor payload
                 monitor_payload.update(meta)
 
                 self.state_cache_manager.handle_external_update(
@@ -260,7 +251,6 @@ class OSCManager:
                     source="OSC"
                 )
         else:
-            # Fallback if no state manager
             from oaComBroker.Core.protocol_router.manager import ProtocolRouter
             ProtocolRouter.get_instance().ingest("OSC", topic, value, meta)
         
@@ -278,24 +268,18 @@ class OSCManager:
             return
 
         meta = meta or {}
-        # ⚡ ANTI-FEEDBACK SPEC: Unified Fields
         msg_type = meta.get("msg_type", "SPLICE_ACTION")
         origin_source = meta.get("origin_source", "UNKNOWN")
 
-        # ⚡ ANTI-FEEDBACK SPEC: The Golden Rule for Transports
         if msg_type == "LINK_FEEDBACK" and not meta.get("is_settled"):
             return
         if origin_source == "OSC":
             return
 
-        # ⚡ LOGGING
-        if _is_debug():
-            logger.debug(f"TX: {address} <- {value}")
+        matrix_log("ui", "osc", "send", f"TX: {address} <- {value}", "DEBUG")
         
         self.tx_client.send_message(address, value)
         
-        # ⚡ BROADCAST activity back to UI monitor (as a TX event)
-        # Skip monitor topics from self-reporting to prevent recursion
         if self.run_bridge and self.state_cache_manager and "/Monitor/" not in address: 
             monitor_payload = {
                 "val": value,
@@ -306,7 +290,6 @@ class OSCManager:
                 "GUID": app_constants.INSTANCE_GUID,
                 "partition": app_constants.PARTITION_ID
             }
-            # ⚡ ANTI-FEEDBACK SPEC: Preserve identity in monitor log
             monitor_payload["msg_guid"] = meta.get("msg_guid")
             monitor_payload["msg_type"] = meta.get("msg_type")
             monitor_payload["origin_source"] = origin_source
@@ -318,7 +301,6 @@ class OSCManager:
             )
 
         from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-        # Ingest the TX event back into the router for forensics
         ProtocolRouter.get_instance().ingest("OSC-TX", f"OPEN-AIR/OSC{address}", value, {
             "osc_address": address, 
             "partition": app_constants.PARTITION_ID,
@@ -340,46 +322,29 @@ class OSCManager:
         val = msg.get("val")
         meta = msg.get("meta", {})
         
-        # ⚡ LOOP PREVENTION: Never mirror our own reflection from MQTT
         if source == "MQTT" and msg.get("full_id") == app_constants.FULL_INSTANCE_ID:
             return
 
-        # --- CASE 1: Monitor UI Update (UI Only) ---
-        # Dashboard needs to see OSC events (RX or TX) and MQTT events
         if not self.run_bridge:
             if logical_source == "OSC":
-                # RX or Remote Sync Event
                 direction = meta.get("direction", "RX")
                 address = meta.get("address", meta.get("osc_address", topic))
-                # For sync traffic via MQTT, the value might be the raw value or the monitor dict
                 real_val = val.get("val") if isinstance(val, dict) and "val" in val and "address" in val else val
                 self._notify_monitor(direction, address, real_val, topic)
             elif source == "OSC-TX":
-                # Local TX Event from Core
                 self._notify_monitor("TX", meta.get("osc_address", topic), val, topic)
             elif logical_source == "MQTT" or source == "MQTT":
-                # All MQTT elements published here as well
                 self._notify_monitor("MQTT", topic, val, topic)
             return
 
-        # --- CASE 2: Core Bridge Mirroring (Bridge Mode) ---
-        # "All mqtt elements should be published here as well"
         if self.run_bridge:
-            # We mirror MQTT traffic out to OSC
-            # ⚡ EXCEPTION: Never mirror SYSTEM source messages (e.g. Status/SNMP/Bridge).
-            # These are internal telemetry and often too bulky for OSC transports.
             if source == "SYSTEM":
                 return
 
             if logical_source == "MQTT" or source == "MQTT":
-                # EXCLUDE MONITOR TOPICS FROM MIRRORING
                 if "/Monitor/" in topic:
                     return
-                # Loop prevention is handled inside self.send() via metadata
-                # Translate topic to OSC address
                 osc_address = "/" + topic.replace("OPEN-AIR/", "")
-                
-                # Extract value if it's a manifest-style dict
                 real_val = val
                 if isinstance(val, dict) and "val" in val:
                     real_val = val["val"]
@@ -392,5 +357,5 @@ class OSCManager:
             self.osc_to_topic[osc_address] = topic
             self.topic_to_osc[topic] = osc_address
             
-        if _is_debug():
-            logger.info(f"Route Registered: {osc_address} <-> {topic}")
+        matrix_log("ui", "osc", "register_route", 
+                   f"Route Registered: {osc_address} <-> {topic}", "INFO")

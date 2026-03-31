@@ -42,17 +42,18 @@ class SnmpLog(tk.Frame, TransparencyMixin):
 
     def _find_snmp_manager(self, widget):
         from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
+        from oaLogging.Methods.matrix_gate import matrix_log
         curr = widget
         while curr:
             if isinstance(curr, DynamicGuiBuilder):
                 manager = getattr(curr.app_instance, 'snmp_manager', None)
                 if LOCAL_DEBUG:
-                    print(f"📡 [DEBUG] SnmpLog: Found DynamicGuiBuilder. App instance has snmp_manager: {manager is not None}")
+                    matrix_log("ui", "snmp", "_find_snmp_manager", f"📡 [DEBUG] SnmpLog: Found DynamicGuiBuilder. App instance has snmp_manager: {manager is not None}")
                 return manager
             try: curr = curr.master
             except: break
         if LOCAL_DEBUG:
-            print(f"📡 [DEBUG] SnmpLog: Failed to find snmp_manager in ancestor chain.")
+            matrix_log("ui", "snmp", "_find_snmp_manager", "📡 [DEBUG] SnmpLog: Failed to find snmp_manager in ancestor chain.", "WARNING")
         return None
 
     def _setup_ui(self):
@@ -117,7 +118,10 @@ class SnmpLog(tk.Frame, TransparencyMixin):
     def on_snmp_traffic(self, direction, oid, value, topic, metadata=None):
         # Handle both periodic dumps and real-time changes
         if LOCAL_DEBUG:
-            print(f"📡 [DEBUG] SnmpLog: Traffic Received! Dir: {direction}, OID: {oid}, Val: {value}")
+            from oaLogging.Methods.matrix_gate import matrix_log
+            # ⚡ SAFETY: Use repr() to ensure non-printable chars (like \r, \n, \b) are escaped
+            matrix_log("ui", "snmp", "on_snmp_traffic", f"📡 [TRAFFIC] Dir: {direction}, OID: {oid}, Val: {repr(value)[:100]}")
+        
         if direction not in ["TX_DUMP", "RX", "RX_SET"]: return
         
         self.after(0, lambda: self._update_oid_state(oid, value, topic, metadata))

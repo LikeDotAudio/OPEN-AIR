@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 from oaGuiElements.Core.graphing.graphing.dynamic_bar_graph import DynamicBarGraph
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from oaLogging.Core.logger import builder_logger
 
 class BarGraphAdapter:
@@ -25,7 +27,7 @@ class BarGraphAdapter:
 
         widget_id = config_data.get("path", config_data.get("id", "bar_graph"))
         
-        builder_logger.debug(f"🔬🏗️📊 [BUILDER] bar_graph_adapter: Spawning DynamicBarGraph '{widget_id}'.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] bar_graph_adapter: Spawning DynamicBarGraph '{widget_id}'.", level="DEBUG")
         
         return DynamicBarGraph(
             parent=parent_widget,

@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 import os
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import re
 from ..Table_CSV_Writer import TableCsvWriter
 from ..Table_CSV_Reader import TableCsvReader
@@ -34,7 +36,7 @@ class TableCSVService:
         try:
             headers, data = self.reader.read_from_csv(self.csv_path)
         except FileNotFoundError:
-            logger.debug(f"📜 CSV file not found at {self.csv_path}. This is normal if no data has been saved yet.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜 CSV file not found at {self.csv_path}. This is normal if no data has been saved yet.", level="DEBUG")
             return None
 
         if not data: 

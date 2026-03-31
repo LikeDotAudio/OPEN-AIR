@@ -5,11 +5,12 @@
 # Description: Modularized dynamic Text Dropdown (Combobox).
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -40,7 +41,7 @@ class BuilderTextGuiDropdownOptionCreator(TransparencyMixin):
             base_mqtt_topic = kwargs.get("base_mqtt_topic_from_path")
             builder_instance = kwargs.get("builder_instance") or self
 
-        if LOCAL_DEBUG: logger.debug(f"🧪🏗️🖥️ Dropdown for '{label}'...")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🧪🏗️🖥️ Dropdown for '{label}'...", level="DEBUG")
 
         try:
             sub_frame = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", height=30)

@@ -5,11 +5,12 @@
 # Description: Modularized Needle VU Meter.
 
 import time
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import tkinter as tk
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -37,7 +38,7 @@ class BuilderMeterNeedleCreator(TransparencyMixin):
         )
 
     def make_meter_needle(self, parent_widget, config_data, context=None, **kwargs):
-        if BUILDER_DEBUG: builder_logger.trace(f"🔬🏗️📶 [BUILDER] Creating MeterNeedle.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📶 [BUILDER] Creating MeterNeedle.", level="TRACE")
         
         # 1. Config & Context
         config = MeterConfig(config_data)

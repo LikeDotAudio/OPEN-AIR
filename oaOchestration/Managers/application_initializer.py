@@ -1,48 +1,37 @@
 # Managers/application_initializer.py
-# Author: Anthony Peter Kuzub
-# Version: 20250821.200641.1
 #
-# Description: This module provides a function to initialize the main components of the application after core setup tasks are complete.
+# Provides a function to initialize the main components of the application 
+# after core setup tasks are complete. Orchestrates the final startup sequence.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260330.1600.1
 
 import os
-
-# --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
-
+from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfiguration.FileReaders.config_reader import Config
 
-app_constants = Config.get_instance()  # Get the singleton instance
+app_constants = Config.get_instance()
 
-
-# Initializes the application's core components.
-# This function is responsible for orchestrating the startup sequence after paths and
-# logging are configured. It performs final setup tasks and logs the completion status.
-# Inputs:
-#     None.
-# Outputs:
-#     bool: True if application initialization completes successfully, False otherwise.
-def initialize_app():  # Removed console_print_func, debug_log_func, data_dir arguments
+def initialize_app():
     """Initializes the application's components after paths and logger are set up."""
-    if LOCAL_DEBUG:
-        logger.debug(
-            f"🚀🏗️🔋 [BOOT] Continuing initialization sequence for version "
-            f"{app_constants.CURRENT_VERSION}."
-        )
+    matrix_log("core", "system", "initialize_app", 
+               f"🚀🏗️🔋 [BOOT] Continuing initialization sequence for version {app_constants.CURRENT_VERSION}.", "DEBUG")
 
     try:
-        # NOTE: Path, logger, debug directory clearing, and console encoding
-        # are now handled in main.py before this function is called.
-        # Removed redundant calls to debug_cleaner.clear_debug_directory and console_encoder.configure_console_encoding
-
-        if LOCAL_DEBUG:
-            logger.success(
-                "🚀🏗️✅ [SUCCESS] Application initialization completed."
-            )
+        matrix_log("core", "system", "initialize_app", 
+                   "🚀🏗️✅ [SUCCESS] Application initialization completed.", "SUCCESS")
         return True
     except Exception as e:
-        logger.exception(
-            f"🚀🏗️❌ [ERROR] Error during application initialization: {e}"
-        )
+        # matrix_log does not support exception() directly, but we use ERROR level for forensic integrity
+        matrix_log("core", "system", "initialize_app", 
+                   f"🚀🏗️❌ [ERROR] Error during application initialization: {e}", "ERROR")
         return False

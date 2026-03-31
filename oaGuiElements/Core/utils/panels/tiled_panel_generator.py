@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 from PIL import Image, ImageDraw, ImageFilter, ImageChops, ImageTk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import random
 import math
 from oaGuiElements.Methods.utils import PanelUtils
@@ -48,7 +50,7 @@ class TiledPanelGenerator:
         params = config.get("parameters", config)
         base_seed = params.get("random_seed", random.randint(1, 1000000))
         
-        builder_logger.info(f"🧩🏗️🌀 [STEALING] Processing {cols*rows} tiles ({width}x{height}) via Work-Stealing Pool.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🧩🏗️🌀 [STEALING] Processing {cols*rows} tiles ({width}x{height}) via Work-Stealing Pool.", level="INFO")
         start_time = math.perf_counter()
 
         for r in range(rows):
@@ -77,7 +79,7 @@ class TiledPanelGenerator:
             final_img.paste(tile_img, (x, y))
             
         end_time = math.perf_counter()
-        builder_logger.success(f"🧩🆗✨ [STEALING] Tiled render complete in {(end_time - start_time)*1000:.2f}ms.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🧩🆗✨ [STEALING] Tiled render complete in {(end_time - start_time)*1000:.2f}ms.", level="SUCCESS")
         
         return final_img
 

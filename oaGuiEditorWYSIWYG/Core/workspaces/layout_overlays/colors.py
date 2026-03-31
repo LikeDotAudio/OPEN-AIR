@@ -8,7 +8,7 @@ import tkinter as tk
 from tkinter import colorchooser
 from ...state import state_manager
 
-def apply(layout, widget, path, is_focused, design_elements):
+def apply_design_overlay(layout, widget, path, is_focused, design_elements):
     """Handles the 🎨 color palette button."""
     
     # 1. Setup Button

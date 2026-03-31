@@ -12,9 +12,10 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260328.1420.1
+# Version 20260330.1600.1
 
 from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 try: import mido
 except ImportError: mido = None
@@ -47,14 +48,17 @@ class MIDIPortController:
                 p = mido.open_input(name); self.inports.append(p)
                 import threading
                 t = threading.Thread(target=listen_loop_cb, args=(p,), daemon=True); t.start()
-                threads.append(t); self.logger.success(f"🎹 INPUT READY: {name}")
-            except Exception as e: self.logger.error(f"❌ FAILED INPUT {name}: {e}")
+                threads.append(t)
+                matrix_log("core", "midi", "open_all", f"🎹 INPUT READY: {name}", "SUCCESS")
+            except Exception as e: 
+                self.logger.error(f"❌ FAILED INPUT {name}: {e}")
 
         for name in info["outputs"]:
             try:
                 p = mido.open_output(name); self.outports.append(p)
-                self.logger.success(f"🎹 OUTPUT READY: {name}")
-            except Exception as e: self.logger.error(f"❌ FAILED OUTPUT {name}: {e}")
+                matrix_log("core", "midi", "open_all", f"🎹 OUTPUT READY: {name}", "SUCCESS")
+            except Exception as e: 
+                self.logger.error(f"❌ FAILED OUTPUT {name}: {e}")
         return threads
 
     def close_all(self):

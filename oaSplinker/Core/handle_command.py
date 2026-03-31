@@ -1,11 +1,24 @@
 # Core/handle_command.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
 #
-# Description: Brief summary of purpose
+# Unified command handler for both MQTT and internal Router events.
+# Processes Splinker-specific control messages and dispatches them 
+# to the appropriate internal logic.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260330.1600.1
 
 import orjson
 from ..Constants.constants import splinker_logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 def handle_command(self, topic, payload):
     """Unified command handler for both MQTT and internal Router events."""
@@ -18,8 +31,8 @@ def handle_command(self, topic, payload):
         return
 
     command = parts[-1]
-    splinker_logger.info(f"🔗 Splinker: Command '{command}' received on topic {topic}")
-    splinker_logger.debug(f"🔗 Splinker: Raw Payload type={type(payload)}, value={payload}")
+    matrix_log("core", "splinker", "handle_command", f"🔗 Splinker: Command '{command}' received on topic {topic}", "INFO")
+    matrix_log("core", "splinker", "handle_command", f"🔗 Splinker: Raw Payload type={type(payload)}, value={payload}", "DEBUG")
 
     # 1. Global Commands (No Splink ID required)
     global_handlers = {
@@ -46,7 +59,7 @@ def handle_command(self, topic, payload):
     if command in instance_handlers:
         instance_handlers[command]()
     else:
-        splinker_logger.warning(f"⚠️ Splinker: Unknown command '{command}' received.")
+        matrix_log("core", "splinker", "handle_command", f"⚠️ Splinker: Unknown command '{command}' received.", "WARNING")
 
 def _unwrap_payload(self, payload):
     """Safely extracts data from MQTT bytes/str or direct dicts."""
@@ -73,7 +86,7 @@ def _process_direct_create(self, payload):
             dest_val=data.get("dest_val")
         )
     else:
-        splinker_logger.warning(f"⚠️ Splinker: DirectCreate received with invalid or empty payload: {data}")
+        matrix_log("core", "splinker", "_process_direct_create", f"⚠️ Splinker: DirectCreate received with invalid or empty payload: {data}", "WARNING")
 
 def _process_update_command(self, splink_id, payload):
     """Specific logic for Update command."""
@@ -81,4 +94,4 @@ def _process_update_command(self, splink_id, payload):
     if data:
         self.update_splink(splink_id, data)
     else:
-        splinker_logger.warning(f"⚠️ Splinker: Update for {splink_id} received with empty/None payload.")
+        matrix_log("core", "splinker", "_process_update_command", f"⚠️ Splinker: Update for {splink_id} received with empty/None payload.", "WARNING")

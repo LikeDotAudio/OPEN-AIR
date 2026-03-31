@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 import math
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from loguru import logger
 from oaGuiElements.Constants.gui_constants import (
     DEFAULT_DECIMAL_PLACES,
@@ -23,7 +25,7 @@ class CompositeStateSync:
         try:
             decimal_places = len(str(float(step)).split('.')[-1])
         except Exception as e:
-            logger.debug(f"Failed to calculate decimal places for step {step}: {e}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Failed to calculate decimal places for step {step}: {e}", level="DEBUG")
             decimal_places = DEFAULT_DECIMAL_PLACES
         return f"{{:.{decimal_places}f}}"
 

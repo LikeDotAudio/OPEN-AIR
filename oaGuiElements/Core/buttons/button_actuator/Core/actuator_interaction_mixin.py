@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 import orjson
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import time
 from loguru import logger
 
@@ -13,7 +15,7 @@ class ActuatorInteractionMixin:
 
     def _on_press(self, event):
         """Handles the button press event."""
-        logger.info(f"🖱️👆🔘 [INPUT] Press detected on actuator '{self.label}'")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️👆🔘 [INPUT] Press detected on actuator '{self.label}'", level="INFO")
         
         # 1. Local Feedback
         self.set_active(True)
@@ -32,7 +34,7 @@ class ActuatorInteractionMixin:
 
     def _on_release(self, event):
         """Handles the button release event."""
-        logger.info(f"🖱️🔙🔘 [INPUT] Release detected on actuator '{self.label}'")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🖱️🔙🔘 [INPUT] Release detected on actuator '{self.label}'", level="INFO")
         
         # 1. Local Feedback
         self.set_active(False)
@@ -53,7 +55,7 @@ class ActuatorInteractionMixin:
     def _handle_maintenance_command(self, scpi_msg):
         """Checks if a command is a maintenance command and copies to clipboard if so."""
         if self._is_maintenance(scpi_msg):
-            logger.debug(f"📋⌨️✨ [MAINT] Maintenance command detected. Copying: {scpi_msg}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📋⌨️✨ [MAINT] Maintenance command detected. Copying: {scpi_msg}", level="DEBUG")
             try:
                 self.master.clipboard_clear()
                 self.master.clipboard_append(scpi_msg)

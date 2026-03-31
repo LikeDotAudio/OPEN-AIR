@@ -32,7 +32,7 @@ MQTT_BASE_TOPIC = "OPEN-AIR/repository/markers"
 
 # Recursively publishes all key-value pairs of a nested dictionary to MQTT.
 # This function traverses a dictionary structure. For each non-dictionary value,
-# it constructs a full MQTT topic path by concatenating keys and publishes the value.
+# it constructs a full MQTT topic path by consmpte2138ting keys and publishes the value.
 # Inputs:
 #     mqtt_util (MqttControllerUtility): The MQTT utility for publishing messages.
 #     base_topic (str): The current base topic path for the recursion.

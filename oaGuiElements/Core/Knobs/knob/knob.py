@@ -3,10 +3,11 @@
 # Version 20260315.Modular.1
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
@@ -49,7 +50,7 @@ class CustomKnobFrame(tk.Frame, KnobInteractionMixin, KnobRendererMixin):
         try:
             super().__init__(parent, bd=0, highlightthickness=0, relief="flat", bg=p_bg, width=width, height=height)
         except Exception as e:
-            if LOCAL_DEBUG: logger.debug(f"⚠️ CustomKnobFrame: super().__init__ failed (mock environment?): {e}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚠️ CustomKnobFrame: super().__init__ failed (mock environment?): {e}", level="DEBUG")
             # ⚡ MOCK PROTECTION: Ensure essential Tkinter attributes exist for mixins/manager
             if not hasattr(self, 'tk'): 
                 from unittest.mock import MagicMock
@@ -89,7 +90,7 @@ class CustomKnobFrame(tk.Frame, KnobInteractionMixin, KnobRendererMixin):
             # Initial Render
             self.after(50, self._draw_visuals)
         except:
-            if LOCAL_DEBUG: logger.debug("⚠️ CustomKnobFrame: Canvas creation or bindings failed (mock environment?)")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "⚠️ CustomKnobFrame: Canvas creation or bindings failed (mock environment?)", level="DEBUG")
 
     def _bind_knob_events(self):
         """Binds all input events to the internal Canvas."""

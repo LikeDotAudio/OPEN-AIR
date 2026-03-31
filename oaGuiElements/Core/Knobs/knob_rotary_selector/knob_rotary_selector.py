@@ -5,10 +5,11 @@
 # Description: A specialized knob for multi-position rotary switching.
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import math
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
@@ -168,36 +169,35 @@ class BuilderKnobRotarySelectorCreator:
     @staticmethod
     def make_knob_rotary_selector(parent_widget, config_data, context=None, **kwargs):
         """Main entry point for creating a rotary selector."""
-        if LOCAL_DEBUG: 
-            builder_logger.trace(f"🔬🏗️🎛️ [BUILDER] Entering make_knob_rotary_selector")
-            builder_logger.debug(f"📜📑💻 [CONFIG] Raw config received: {config_data}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🎛️ [BUILDER] Entering make_knob_rotary_selector", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
 
         label = config_data.get("label_active")
         path = config_data.get("path")
         
         # ⚡ HARDENED INTERFACE: Extract from context if available
-        if LOCAL_DEBUG: builder_logger.trace("🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...", level="TRACE")
         if context:
             state_mirror_engine = context.state_mirror_engine
             subscriber_router = context.subscriber_router
             base_mqtt_topic_from_path = context.base_mqtt_topic_from_path
             builder_instance = context.builder_instance
-            if LOCAL_DEBUG: builder_logger.debug("✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.", level="DEBUG")
         else:
             state_mirror_engine = kwargs.get("state_mirror_engine")
             subscriber_router = kwargs.get("subscriber_router")
             base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
             builder_instance = kwargs.get("builder_instance")
-            if LOCAL_DEBUG: builder_logger.debug("⚠️🔔🖱️ [CONTEXT] Context missing; fell back to kwargs.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "⚠️🔔🖱️ [CONTEXT] Context missing; fell back to kwargs.", level="DEBUG")
 
         positions = config_data.get("positions", ["OFF", "ON"])
         continuous = config_data.get("continuous", False)
         num_pos = len(positions)
-        if LOCAL_DEBUG: builder_logger.debug(f"🎛️🔀🔢 [STATE] Positions: {positions}, Continuous: {continuous}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🎛️🔀🔢 [STATE] Positions: {positions}, Continuous: {continuous}", level="DEBUG")
         
         width = config_data.get("width", 120)
         height = config_data.get("height", 140)
-        if LOCAL_DEBUG: builder_logger.debug(f"📐📏🔳 [LAYOUT] Dimensions: {width}x{height}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📐📏🔳 [LAYOUT] Dimensions: {width}x{height}", level="DEBUG")
         
         # Value Handling
         val_def = config_data.get("value_default", 0)
@@ -205,7 +205,7 @@ class BuilderKnobRotarySelectorCreator:
             val_def = positions.index(val_def)
             
         knob_value_var = tk.DoubleVar(master=parent_widget, value=float(val_def))
-        if LOCAL_DEBUG: builder_logger.debug(f"🔋🔢✨ [STATE] Initial position value: {val_def}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔋🔢✨ [STATE] Initial position value: {val_def}", level="DEBUG")
         
         # 1. Container frame background
         try:
@@ -223,7 +223,7 @@ class BuilderKnobRotarySelectorCreator:
         
         knob_state = create_knob_state(knob_config)
 
-        if LOCAL_DEBUG: builder_logger.trace(f"🏗️🪟🎨 [CONSTRUCT] Creating RotarySelectorSwitch for '{label}'")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🏗️🪟🎨 [CONSTRUCT] Creating RotarySelectorSwitch for '{label}'", level="TRACE")
         frame = RotarySelectorSwitch(
             parent_widget, knob_value_var, positions, continuous, path,
             state_mirror_engine=state_mirror_engine,
@@ -235,21 +235,21 @@ class BuilderKnobRotarySelectorCreator:
 
         # ⚡ INDUSTRIAL TRANSPARENCY: Apply via Manager
         if hasattr(builder_instance, '_apply_transparency'):
-            if LOCAL_DEBUG: builder_logger.trace(f"👻🌀🪟 [ALPHA] Applying industrial transparency to rotary selector '{label}'")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"👻🌀🪟 [ALPHA] Applying industrial transparency to rotary selector '{label}'", level="TRACE")
             TransparencyManager.apply_transparency(frame, frame.canvas, config_data, builder_instance)
             TransparencyManager.apply_transparency(frame, frame, config_data, builder_instance)
 
         # 4. MQTT Registration
         if path and state_mirror_engine:
-            if LOCAL_DEBUG: builder_logger.trace(f"📡📶🔗 [MQTT] Registering rotary selector at path '{path}'")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡📶🔗 [MQTT] Registering rotary selector at path '{path}'", level="TRACE")
             # ⚡ LOCK REGISTRATION: Pass 'frame' as instance
             topic = state_mirror_engine.register_widget(path, knob_value_var, base_mqtt_topic_from_path, config_data, instance=frame)
             if subscriber_router and topic:
-                if LOCAL_DEBUG: builder_logger.debug(f"📥📶🔄 [MQTT] Subscribing to topic: {topic}")
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📥📶🔄 [MQTT] Subscribing to topic: {topic}", level="DEBUG")
                 subscriber_router.subscribe_to_topic(topic, state_mirror_engine.sync_incoming_mqtt_to_gui)
             
-            if LOCAL_DEBUG: builder_logger.trace(f"🔄⏳🔋 [STATE] Initializing state from cache/broker for '{path}'")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔄⏳🔋 [STATE] Initializing state from cache/broker for '{path}'", level="TRACE")
             state_mirror_engine.initialize_widget_state(path)
 
-        if LOCAL_DEBUG: builder_logger.success(f"✅🆗🎛️ [SUCCESS] The rotary selector switch '{label}' has materialized!")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🎛️ [SUCCESS] The rotary selector switch '{label}' has materialized!", level="SUCCESS")
         return frame

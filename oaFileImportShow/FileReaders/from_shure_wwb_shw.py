@@ -8,9 +8,11 @@ import os
 import xml.etree.ElementTree as ET
 import numpy as np
 
-# --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
-from loguru import logger
+from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+
+def _is_debug():
+    return is_debug_allowed(system="UI", element="IMPORTER")
+
 from oaConfiguration.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
@@ -38,8 +40,8 @@ def _internal_convert_shure_wwb_shw_to_markers(xml_file_path):
     into a standardized marker format. All frequencies are converted to MHz for consistency.
     """
 
-    if LOCAL_DEBUG:
-        logger.debug(f"▶️ Starting SHW report conversion for '{os.path.basename(xml_file_path)}'.")
+    matrix_log("ui", "importer", "_internal_convert_shure_wwb_shw_to_markers", 
+               f"▶️ Starting SHW report conversion for '{os.path.basename(xml_file_path)}'.", "DEBUG")
 
     marker_data = []
 
@@ -48,12 +50,12 @@ def _internal_convert_shure_wwb_shw_to_markers(xml_file_path):
             tree = ET.parse(xml_file)
         root = tree.getroot()
 
-        logger.success("✅ XML file parsed successfully.")
+        matrix_log("ui", "importer", "_internal_convert_shure_wwb_shw_to_markers", "✅ XML file parsed successfully.", "SUCCESS")
 
         # Iterate through 'freq_entry' elements
         for i, freq_entry in enumerate(root.findall(".//freq_entry")):
             if i % 100 == 0:  # Print progress every 100 entries
-                logger.debug(f"▶️ Processing SHW entry {i}...")
+                matrix_log("ui", "importer", "_internal_convert_shure_wwb_shw_to_markers", f"▶️ Processing SHW entry {i}...", "DEBUG")
 
             zone_element = freq_entry.find("compat_key/zone")
             zone = zone_element.text if zone_element is not None else "N/A"
@@ -87,8 +89,8 @@ def _internal_convert_shure_wwb_shw_to_markers(xml_file_path):
                 try:
                     # Convert kHz to MHz
                     freq_MHz = float(freq_str) / 1000.0
-                    if LOCAL_DEBUG:
-                        logger.debug(f"↔️ SHW Freq conversion: '{freq_str}' kHz -> {freq_MHz} MHz")
+                    matrix_log("ui", "importer", "_internal_convert_shure_wwb_shw_to_markers", 
+                               f"↔️ SHW Freq conversion: '{freq_str}' kHz -> {freq_MHz} MHz", "DEBUG")
                 except ValueError:
                     logger.error(f"❌ SHW Freq conversion error: '{freq_str}'")
                     freq_MHz = "Invalid Frequency"
@@ -104,8 +106,8 @@ def _internal_convert_shure_wwb_shw_to_markers(xml_file_path):
                 }
             )
 
-        if LOCAL_DEBUG:
-            logger.success(f"✅ Finished SHW report conversion. Extracted {len(marker_data)} rows.")
+        matrix_log("ui", "importer", "_internal_convert_shure_wwb_shw_to_markers", 
+                   f"✅ Finished SHW report conversion. Extracted {len(marker_data)} rows.", "SUCCESS")
         return HEADERS, marker_data
 
     except FileNotFoundError:

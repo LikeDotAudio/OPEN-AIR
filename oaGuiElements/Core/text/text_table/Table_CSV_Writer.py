@@ -5,10 +5,11 @@
 # Description: This module provides functionality to write a list of dictionaries to a CSV file.
 
 import csv
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import os
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -49,7 +50,7 @@ class TableCsvWriter:
                 for row_data in data:
                     writer.writerow(row_data)
 
-            if LOCAL_DEBUG: logger.success(f"✅ Successfully wrote table data to {file_path}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ Successfully wrote table data to {file_path}", level="SUCCESS")
             return True
         except Exception as e:
             from oaOchestration.safe_file_io import handle_file_write_error

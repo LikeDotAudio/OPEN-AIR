@@ -5,12 +5,13 @@
 # Description: text_table/table_editing_manager.py
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 import orjson
 import inspect
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -69,4 +70,4 @@ class TableEditingManager(
         if allow_sort:
             self._bind_headers()
 
-        if LOCAL_DEBUG: logger.debug(f"📊 TableEditingManager initialized for tree {tree}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📊 TableEditingManager initialized for tree {tree}", level="DEBUG")

@@ -5,6 +5,8 @@
 # Description: Provides utility functions for modifying meter appearance and geometry.
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 try:
     from PIL import Image, ImageDraw, ImageTk
 except ImportError:
@@ -210,4 +212,4 @@ class MeterModifier:
             canvas.tag_raise(mask_id, "panel_bg_slice")
         except Exception as e:
             from oaLogging.Entry import logger
-            logger.trace(f"MeterModifier: Failed to raise mask above panel_bg_slice: {e}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"MeterModifier: Failed to raise mask above panel_bg_slice: {e}", level="TRACE")

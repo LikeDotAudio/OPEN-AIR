@@ -5,6 +5,8 @@
 # Description: Universal GUI Loader - Host for Dynamic GUI components.
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from loguru import logger
 import pathlib
 from typing import Optional, Any, Dict
@@ -59,13 +61,13 @@ class UniversalGuiLoader(tk.Frame):
             if not self.json_path.exists():
                 raise FileNotFoundError(f"Blueprint missing! {self.json_path}")
 
-            if LOCAL_DEBUG: logger.debug(f"🏗️ Constructing '{self.module_name}' via DynamicGuiBuilder...")
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🏗️ Constructing '{self.module_name}' via DynamicGuiBuilder...", level="DEBUG")
 
             # 2. Execution
             self._instantiate_builder()
 
             # 3. Success
-            if LOCAL_DEBUG: logger.success(f"✅ It works! {self.module_name} is fully operational!")
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"✅ It works! {self.module_name} is fully operational!", level="SUCCESS")
 
         except Exception as e:
             # 4. Catastrophic Failure Handling
@@ -97,7 +99,6 @@ class UniversalGuiLoader(tk.Frame):
 
     def _on_tab_selected(self, event):
         """Optional hook for tab selection events."""
-        if LOCAL_DEBUG: logger.debug(f"🖥️🔵 Tab '{self.module_name}' focused. Systems nominal.")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🖥️🔵 Tab '{self.module_name}' focused. Systems nominal.", level="DEBUG")
 
 # Local Debug Flag
-LOCAL_DEBUG = True

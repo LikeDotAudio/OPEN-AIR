@@ -12,7 +12,7 @@
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260329.1010.1
+# Version 20260330.1600.1
 
 import os
 import time
@@ -24,6 +24,7 @@ from oaComSNMP.Methods.snmp_utils import get_snmp_node_id, get_snmp_descriptor
 from oaComSNMP.Constants.snmp_constants import OID_MAP_STR_LIMIT
 # Assuming SNMP_LOGGER is available and configured in the logging setup
 from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger 
+from oaLogging.Methods.matrix_gate import matrix_log
 
 # LOCAL_DEBUG can be set or passed if needed
 LOCAL_DEBUG = True
@@ -68,8 +69,8 @@ class OidMapConverter:
 
         new_oid_map = {}
         
-        if LOCAL_DEBUG:
-            snmp_logger.debug(f"OidMapConverter: Updating OID map. Cache size: {len(cache_snapshot)}")
+        matrix_log("comms", "snmp", "build_oid_map", 
+                   f"OidMapConverter: Updating OID map. Cache size: {len(cache_snapshot)}", "DEBUG")
 
         for topic, payload in cache_snapshot.items():
             # ⚡ FILTER: Skip System control/status, Router, and large Blobs
@@ -111,7 +112,7 @@ class OidMapConverter:
         
         self.oid_map = new_oid_map # Update internal map
         
-        if LOCAL_DEBUG:
-            snmp_logger.debug(f"OidMapConverter: OID map built. Active objects: {len(self.oid_map)}")
+        matrix_log("comms", "snmp", "build_oid_map", 
+                   f"OidMapConverter: OID map built. Active objects: {len(self.oid_map)}", "DEBUG")
             
         return self.oid_map

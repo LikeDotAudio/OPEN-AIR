@@ -1,8 +1,20 @@
 # Core/slicing_registry.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
 #
-# Description: Brief summary of purpose
+# Manages the registry of transparent widgets and handles bulk reslicing
+# when the background or scroll position changes. Optimized for 
+# high-performance UI synchronization.
+#
+# Author: Anthony Peter Kuzub
+# Blog: www.Like.audio (Contributor to this project)
+#
+# Professional services for customizing and tailoring this software to your specific
+# application can be negotiated. There is no charge to use, modify, or fork this software.
+#
+# Build Log: https://like.audio/category/software/spectrum-scanner/
+# Source Code: https://github.com/APKaudio/
+# Feature Requests can be emailed to i @ like . audio
+#
+# Version 20260330.1600.1
 
 import time
 import tkinter as tk
@@ -15,13 +27,13 @@ from oaGuiBuilder.Constants.builder_constants import (
 )
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
+LOCAL_DEBUG = True
 from oaLogging.Core.logger import builder_logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 class BuilderSlicingRegistryMixin:
     """
-    Manages the registry of transparent widgets and handles bulk reslicing
-    when the background or scroll position changes.
+    Registry for widgets requiring background-aware transparency slicing.
     """
 
     def register_for_slicing(self, callback):
@@ -30,14 +42,12 @@ class BuilderSlicingRegistryMixin:
             self._slicing_registry = []
             
         if callback not in self._slicing_registry:
-            if LOCAL_DEBUG: builder_logger.trace(f"👻🔗✨ [ALPHA] Registering widget for transparency slicing in '{getattr(self, 'tab_name', 'Unknown')}'")
+            matrix_log("ui", "gui_builder", "register_for_slicing", 
+                       f"👻🔗✨ [ALPHA] Registering widget for transparency slicing in '{getattr(self, 'tab_name', 'Unknown')}'", "TRACE")
             self._slicing_registry.append(callback)
             
-            # ⚡ OPTIMIZATION: If background already exists, slice immediately 
-            # so the widget doesn't stay 'grey' until the next global event.
             if hasattr(self, 'panel_bg_pil') and self.panel_bg_pil:
                 try:
-                    # Use root coords if available
                     rx, ry = None, None
                     if hasattr(self, 'scroll_frame') and self.scroll_frame:
                         rx, ry = self.scroll_frame.winfo_rootx(), self.scroll_frame.winfo_rooty()
@@ -49,15 +59,18 @@ class BuilderSlicingRegistryMixin:
                         scroll_root_y=ry
                     )
                 except Exception as e:
-                    logger.debug(f"Immediate slice failed: {e}")
+                    matrix_log("ui", "gui_builder", "register_for_slicing", 
+                               f"Immediate slice failed: {e}", "DEBUG")
 
     def _trigger_reslice_all(self):
-        """⚡ BATCH RESLICE ENGINE"""
+        """Triggers a batched reslice operation with debouncing."""
         if hasattr(self, '_reslice_trigger_id') and self._reslice_trigger_id:
             try:
                 self.after_cancel(self._reslice_trigger_id)
             except Exception as e:
-                logger.trace(f"Failed to cancel reslice trigger: {e}")
+                matrix_log("ui", "gui_builder", "_trigger_reslice_all", 
+                           f"Failed to cancel reslice trigger: {e}", "TRACE")
+        
         delay = SLICING_DELAY_REBUILD if getattr(self, '_is_rebuilding', False) else SLICING_DELAY_NORMAL
         self._reslice_trigger_id = self.after(delay, self._perform_batch_reslice)
 
@@ -70,10 +83,7 @@ class BuilderSlicingRegistryMixin:
         self._reslice_trigger_id = None
         if not self.winfo_exists(): return
         
-        # 🛡️ RECURSION GUARD: Prevent infinite background generation loops
         if not hasattr(self, "_bg_regen_count"): self._bg_regen_count = 0
-        
-        # ⚡ OPTIMIZATION: Clear the coordinate cache once before the batch
         self._clear_coord_cache()
 
         folds_detected = []
@@ -83,7 +93,6 @@ class BuilderSlicingRegistryMixin:
             scroll_ry = self.scroll_frame.winfo_rooty()
             wh = self.scroll_frame.winfo_height()
             
-            # Search ONLY direct children of the scroll_frame (Top-Level)
             for child in self.scroll_frame.winfo_children():
                 is_fold = False
                 if hasattr(child, '_oca_path'):
@@ -101,11 +110,11 @@ class BuilderSlicingRegistryMixin:
                             if 0.0 <= pos_pct <= 1.0:
                                 folds_detected.append({"position_pct": pos_pct, "orientation": "horizontal"})
                     except Exception as e:
-                        logger.trace(f"Failed to calculate fold position for child: {e}")
+                        matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
+                                   f"Failed to calculate fold position: {e}", "TRACE")
 
         folds_detected.sort(key=lambda x: x["position_pct"])
 
-        # Check if we need to regenerate the background for folds
         bg_config = getattr(self, 'config_data', {}).get("background")
         if bg_config and isinstance(bg_config, dict):
             params = bg_config.get("parameters", bg_config)
@@ -121,11 +130,13 @@ class BuilderSlicingRegistryMixin:
             
             if needs_update:
                 if self._bg_regen_count > SLICING_REGEN_THRESHOLD:
-                    if LOCAL_DEBUG: builder_logger.warning(f"🛑 [BUILDER] '{getattr(self, 'tab_name', 'Unknown')}': Background regeneration loop detected and suppressed.")
+                    matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
+                               f"🛑 [BUILDER] '{getattr(self, 'tab_name', 'Unknown')}': Background regeneration loop detected and suppressed.", "WARNING")
                     self._bg_regen_count = 0
                 else:
                     self._bg_regen_count += 1
-                    if LOCAL_DEBUG: builder_logger.info(f"📐📏🔄 [BUILDER] '{getattr(self, 'tab_name', 'Unknown')}': Injecting {len(folds_detected)} OcaFold positions into background config.")
+                    matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
+                               f"📐📏🔄 [BUILDER] '{getattr(self, 'tab_name', 'Unknown')}': Injecting {len(folds_detected)} OcaFold positions into background config.", "INFO")
                     fold_params["enabled"] = True
                     v_creases = [c for c in fold_params.get("creases", []) if c.get('orientation') == 'vertical']
                     fold_params["creases"] = v_creases + folds_detected
@@ -149,19 +160,20 @@ class BuilderSlicingRegistryMixin:
                 root_x = scroll_ref.winfo_rootx()
                 root_y = scroll_ref.winfo_rooty()
             except Exception as e:
-                logger.error(f"🧩🚫🛑 [ERROR] Batch Reslice: Error updating root coords: {e}")
+                matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
+                           f"🧩🚫🛑 [ERROR] Batch Reslice: Error updating root coords: {e}", "ERROR")
 
-        # If we're still generating a background, defer batch reslice
         if bg_pil is None and getattr(self, '_bg_task_id', 0) > 0:
-            if LOCAL_DEBUG: builder_logger.trace(f"🧩⏳🌀 [SYNC] Batch reslice for '{getattr(self, 'tab_name', 'Unknown')}' deferred: Background generation in progress.")
+            matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
+                       f"🧩⏳🌀 [SYNC] Batch reslice for '{getattr(self, 'tab_name', 'Unknown')}' deferred: Background generation in progress.", "TRACE")
             return
 
         registry = getattr(self, '_slicing_registry', [])
-        if LOCAL_DEBUG: builder_logger.debug(f"🧩🏗️✨ [SYNC] Executing batch reslice for {len(registry)} widgets in '{getattr(self, 'tab_name', 'Unknown')}'")
+        matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
+                   f"🧩🏗️✨ [SYNC] Executing batch reslice for {len(registry)} widgets in '{getattr(self, 'tab_name', 'Unknown')}'", "DEBUG")
         
         skipped = 0
         processed = 0
-        count = 0
         
         for callback in registry:
             try:
@@ -173,9 +185,9 @@ class BuilderSlicingRegistryMixin:
                 )
                 if work_done is False: skipped += 1
                 else: processed += 1
-                count += 1
             except Exception as e:
-                logger.error(f"🧩🚫🛑 [ERROR] Batch Reslice: Error in callback: {e}")
+                matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
+                           f"🧩🚫🛑 [ERROR] Batch Reslice: Error in callback: {e}", "ERROR")
         
-        if LOCAL_DEBUG:
-            builder_logger.info(f"🧩🆗✅ [BUILDER] Reslice COMPLETE: {processed} updated, {skipped} skipped (Jitter Filter) for '{getattr(self, 'tab_name', 'Unknown')}'.")
+        matrix_log("ui", "gui_builder", "_perform_batch_reslice", 
+                   f"🧩🆗✅ [BUILDER] Reslice COMPLETE: {processed} updated, {skipped} skipped (Jitter Filter) for '{getattr(self, 'tab_name', 'Unknown')}'.", "INFO")

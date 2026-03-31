@@ -5,10 +5,11 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 
 # Resistor Color Code Mapping & MIDI Channel Logic
 # 1: Brown, 2: Red, 3: Orange, 4: Yellow, 5: Green, 6: Blue, 7: Violet, 8: Gray, 9: White
@@ -164,12 +165,10 @@ class MidiKeyboard(tk.Canvas):
                 color = get_midi_color(channel)
                 
                 if m_type == "note_on" and velocity > 0:
-                    if LOCAL_DEBUG:
-                        logger.trace(f"🎹 [KEYBOARD] Note ON: {note} (Ch: {channel})")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🎹 [KEYBOARD] Note ON: {note} (Ch: {channel})", level="TRACE")
                     self.note_on(note, color)
                 else:
-                    if LOCAL_DEBUG:
-                        logger.trace(f"🎹 [KEYBOARD] Note OFF: {note}")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🎹 [KEYBOARD] Note OFF: {note}", level="TRACE")
                     self.note_off(note)
             elif m_type == "pitchwheel":
                 # Pitchwheel doesn't visually affect keys, but we handle it to prevent 'unknown' errors

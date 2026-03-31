@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 from oaGuiElements.Core.graphing.graphing.Meter_to_display_units import (
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
     HorizontalMeterWithText,
     VerticalMeter,
 )
@@ -16,7 +18,7 @@ class MeterAdapter:
     @staticmethod
     def create_horizontal(parent_widget, config_data, **kwargs):
         widget_id = config_data.get("id", "h_meter")
-        builder_logger.debug(f"🔬🏗️📊 [BUILDER] meter_adapter: Instantiating HorizontalMeter '{widget_id}'.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] meter_adapter: Instantiating HorizontalMeter '{widget_id}'.", level="DEBUG")
         
         return HorizontalMeterWithText(
             parent=parent_widget,
@@ -30,7 +32,7 @@ class MeterAdapter:
     @staticmethod
     def create_vertical(parent_widget, config_data, **kwargs):
         widget_id = config_data.get("id", "v_meter")
-        builder_logger.debug(f"🔬🏗️📊 [BUILDER] meter_adapter: Instantiating VerticalMeter '{widget_id}'.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] meter_adapter: Instantiating VerticalMeter '{widget_id}'.", level="DEBUG")
         
         return VerticalMeter(
             parent=parent_widget,

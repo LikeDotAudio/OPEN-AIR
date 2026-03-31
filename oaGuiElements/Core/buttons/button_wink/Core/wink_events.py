@@ -5,10 +5,11 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 
 def bind_wink_events(canvas, state, config, value_var, draw_visuals_callback, broadcast_callback):

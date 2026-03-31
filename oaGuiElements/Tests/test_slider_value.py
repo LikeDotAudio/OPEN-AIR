@@ -1,4 +1,6 @@
 import unittest
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from unittest.mock import MagicMock, patch
 import tkinter as tk
 from tkinter import ttk
@@ -107,7 +109,7 @@ class TestSliderValueCreator(unittest.TestCase):
         if not isinstance(string_var, MagicMock):
             self.assertEqual(string_var.get(), str(config_data["value"]))
         
-        print("✅ Test passed: 'test_make_slider_value_prevents_attribute_error' confirmed the fix.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "✅ Test passed: 'test_make_slider_value_prevents_attribute_error' confirmed the fix.", level="INFO")
 
 
 if __name__ == "__main__":

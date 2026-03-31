@@ -5,17 +5,18 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from oaLogging.Core.logger import builder_logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True
 
 class FaderBarStateMixin:
     """Handles multi-variable registration and MQTT synchronization for fader/meters."""
 
     def _register_vars(self):
         if not self.path: return
-        if BUILDER_DEBUG: builder_logger.trace(f"📡 Registering multi-state for '{self.path}'")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📡 Registering multi-state for '{self.path}'", level="TRACE")
         self._register_comp(self.fader_var, f"{self.path}/fader")
         self._register_comp(self.left_var, f"{self.path}/left_meter")
         self._register_comp(self.right_var, f"{self.path}/right_meter")

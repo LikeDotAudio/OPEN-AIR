@@ -5,12 +5,13 @@
 # Description: meter_knob_with_vu_meter/VU_Meter_Knob.py
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 import copy
 import math
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -37,7 +38,7 @@ class BuilderMeterKnobWithVuMeterCreator(TransparencyMixin):
         )
 
     def make_meter_knob_with_vu_meter(self, parent_widget, config_data, context=None, **kwargs):
-        if LOCAL_DEBUG: logger.trace(f"🔬 Entering make_meter_knob_with_vu_meter with config: {config_data}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 Entering make_meter_knob_with_vu_meter with config: {config_data}", level="TRACE")
         """
         Creates a Needle VU Meter with a Knob at its pivot point.
         """
@@ -70,7 +71,7 @@ class BuilderMeterKnobWithVuMeterCreator(TransparencyMixin):
             if "knob_label_active" not in config_data:
                 knob_config["show_label"] = False
 
-            if LOCAL_DEBUG: logger.debug(f"🛠️ VUMeterKnob: Building for '{vu_config.get('label_active')}'.")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🛠️ VUMeterKnob: Building for '{vu_config.get('label_active')}'.", level="DEBUG")
 
             # 2. Create VU Meter (This now returns a Canvas or transparent Frame)
             from oaGuiElements.Core.metering.meter_needle.meter_needle import BuilderMeterNeedleCreator
@@ -152,6 +153,5 @@ class BuilderMeterKnobWithVuMeterCreator(TransparencyMixin):
             return vu_widget
 
         except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("❌ VUMeterKnob creation failed")
+            logger.exception("❌ VUMeterKnob creation failed")
             return None

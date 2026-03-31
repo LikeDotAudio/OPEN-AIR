@@ -5,12 +5,13 @@
 # Description: Brief summary of purpose
 
 from PIL import Image, ImageDraw, ImageFilter, ImageChops, ImageTk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import math
 import numpy as np
 import tkinter as tk
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -234,10 +235,8 @@ class VintageLightingGenerator:
             return ImageTk.PhotoImage(pil_img)
         except (RuntimeError, ValueError, tk.TclError) as e:
             # Handle headless environments or mock failures gracefully
-            if LOCAL_DEBUG:
-                logger.debug(f"ℹ️ Skipping PhotoImage creation (Headless/Mock): {e}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"ℹ️ Skipping PhotoImage creation (Headless/Mock): {e}", level="DEBUG")
             return None
         except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("Error generating glass overlay")
+            logger.exception("Error generating glass overlay")
             return None

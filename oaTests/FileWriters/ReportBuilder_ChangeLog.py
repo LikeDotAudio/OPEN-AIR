@@ -14,14 +14,14 @@ def build_tab(data_dir):
     if not os.path.exists(changelog_path):
         return "<h3>No Change Logs Found</h3><p>Ensure CHANGELOG.md exists in the data directory.</p>"
 
-    with open(changelog_path, 'r') as f:
-        content = f.read()
-
-    # Show only the last 1000 lines or so for readability if very large
-    lines = content.splitlines()
-    if len(lines) > 1000:
-        lines = lines[:1000] # Usually newest at top or bottom?
-        content = "\n".join(lines)
+    from collections import deque
+    try:
+        with open(changelog_path, 'r') as f:
+            # Use deque to efficiently keep only the last 1000 lines
+            lines = deque(f, maxlen=1000)
+            content = "".join(lines)
+    except Exception as e:
+        return f"<h3>Error Reading Change Log</h3><p>{e}</p>"
 
     html = f"""
     <h3>Latest Change Logs</h3>

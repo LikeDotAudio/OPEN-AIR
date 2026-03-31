@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 import orjson
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import pathlib
 from datetime import datetime
 from tkinter import filedialog
@@ -12,7 +14,6 @@ from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
 
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 
 
 class CMDPFileHandler:

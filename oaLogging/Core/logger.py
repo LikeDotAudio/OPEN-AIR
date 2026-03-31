@@ -358,6 +358,7 @@ CACHE_LOGGER     = get_logger("CACHE")
 LAYER_LOGGER     = get_logger("LAYER")
 FACTORY_LOGGER   = get_logger("FACTORY")
 PARSER_LOGGER    = get_logger("PARSER")
+SMPTE2138_LOGGER    = get_logger("SMPTE2138")
 FAILURE_LOGGER   = get_logger("FAILURE")
 
 # Legacy aliases for compatibility

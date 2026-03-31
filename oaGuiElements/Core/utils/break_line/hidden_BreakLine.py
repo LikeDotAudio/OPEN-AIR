@@ -5,10 +5,11 @@
 # Description: A mixin for creating a horizontal break line (Separator).
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
 from oaLogging.Core.logger import builder_logger
 from loguru import logger
 

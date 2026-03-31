@@ -5,12 +5,13 @@
 # Description: A mixin class for the DynamicGuiBuilder that handles the creation of a label widget.
 
 import os
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import tkinter as tk
 from tkinter import ttk
 import inspect
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True    # Set to False in production, True for dev on this file
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
@@ -31,7 +32,7 @@ class BuilderTextLabelCreator(TransparencyMixin):
     """
 
     def make_text_label(self, parent_widget, config_data, context: WidgetContext = None, **kwargs):
-        if LOCAL_DEBUG: logger.trace(f"🔬 Entering make_text_label with config: {config_data}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬 Entering make_text_label with config: {config_data}", level="TRACE")
         """Creates a Tkinter label widget."""
         # ⚡ HARDENED INTERFACE: Standardize extraction
         config = config_data
@@ -51,7 +52,7 @@ class BuilderTextLabelCreator(TransparencyMixin):
             base_mqtt_topic_from_path = kwargs.get("base_mqtt_topic_from_path")
             builder_instance = kwargs.get("builder_instance") or self
 
-        if LOCAL_DEBUG: logger.debug(f"🔬⚡️ Creating new label: '{label}' at {path}.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬⚡️ Creating new label: '{label}' at {path}.", level="DEBUG")
         try:
             # Robust Background Inheritance
             try:
@@ -138,8 +139,7 @@ class BuilderTextLabelCreator(TransparencyMixin):
             return sub_frame
 
         except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("💥 Label creation for '{label}' has exploded! Error")
+            logger.exception("💥 Label creation for '{label}' has exploded! Error")
             return None
 
     @staticmethod

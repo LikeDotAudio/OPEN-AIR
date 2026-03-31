@@ -5,6 +5,8 @@
 # Description: Brief summary of purpose
 
 import unittest
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import os
 import sys
 from io import StringIO
@@ -173,34 +175,34 @@ class GuiElementEntry:
 
 # If this script is run directly, execute the tests
 if __name__ == '__main__':
-    print("Initializing GUI Element Test Runner...")
+    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "Initializing GUI Element Test Runner...", level="INFO")
     entry_manager = GuiElementEntry()
-    print(f"Discovering tests in: {entry_manager.tests_path}")
+    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Discovering tests in: {entry_manager.tests_path}", level="INFO")
     
     results_data = entry_manager.discover_and_run_gui_tests()
     
     import json
-    print("--- Test Execution Results ---")
+    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "--- Test Execution Results ---", level="INFO")
     
     if results_data.get("status") == "completed":
         summary = results_data['summary']
-        print(f"Total Tests Run: {summary['total_run']}")
-        print(f"Passed: {summary['passed']}")
-        print(f"Failed: {summary['failed']}")
-        print(f"Errors: {summary['errors']}")
-        print(f"Skipped: {summary['skipped']}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Total Tests Run: {summary['total_run']}", level="INFO")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Passed: {summary['passed']}", level="INFO")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Failed: {summary['failed']}", level="INFO")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Errors: {summary['errors']}", level="INFO")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Skipped: {summary['skipped']}", level="INFO")
         
         if summary['failed'] > 0 or summary['errors'] > 0:
-            print("--- Failing/Errored Tests ---")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "--- Failing/Errored Tests ---", level="INFO")
             for result in results_data['results']:
                 if result['status'] in ('FAILURE', 'ERROR'):
-                    print(f"Test: {result['test_name']}")
-                    print(f"Status: {result['status']}")
-                    print(f"Message: {result['message']}")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Test: {result['test_name']}", level="INFO")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Status: {result['status']}", level="INFO")
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Message: {result['message']}", level="INFO")
                     if result['traceback']:
-                        print(f"Traceback:{result['traceback']}")
+                        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Traceback:{result['traceback']}", level="INFO")
         
     elif results_data.get("status") == "error":
-        print(f"Error: {results_data.get('message', 'An unknown error occurred.')}")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Error: {results_data.get('message', 'An unknown error occurred.')}", level="INFO")
     else:
-        print("No results to display.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "No results to display.", level="INFO")

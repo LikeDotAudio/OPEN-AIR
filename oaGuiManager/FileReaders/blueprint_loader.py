@@ -30,13 +30,14 @@ Constraints:
 """
 
 import hashlib
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 import orjson
 import copy
 from pathlib import Path
 from loguru import logger
 
 # LOCAL_DEBUG: Toggles verbose tracing for blueprint loading and merging.
-LOCAL_DEBUG = True
 
 # --- Module-Level Caches ---
 _DEFAULT_CONFIG_CACHE = None
@@ -57,8 +58,7 @@ class BlueprintLoader:
         """
         global _DEFAULT_CONFIG_CACHE
         _DEFAULT_CONFIG_CACHE = None
-        if LOCAL_DEBUG: 
-            logger.info("♻️ BlueprintLoader: Global cache invalidated.")
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "♻️ BlueprintLoader: Global cache invalidated.", level="INFO")
 
     @staticmethod
     def load_blueprint(json_filepath: Path, tab_name: str, last_hash: str = None):

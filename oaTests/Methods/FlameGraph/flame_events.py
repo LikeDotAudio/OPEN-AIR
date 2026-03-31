@@ -89,8 +89,8 @@ def process_stats_for_ui(ps):
                     visited.add(child)
                     queue.append(child)
 
-    # 2. Build final flattened stats list
-    stats_list = []
+    # 2. Build final flattened performance stats
+    performance_stats = []
     for func, (cc, nc, tt, ct, callers) in stats.items():
         if func == vroot: continue
         fname = func[2]
@@ -102,7 +102,7 @@ def process_stats_for_ui(ps):
             else:
                 fname = f"built-in: {fname}"
                 
-        stats_list.append({
+        performance_stats.append({
             'filename': func[0], 'lineno': func[1], 'funcname': fname or "<unknown>", 
             'ncalls': nc, 'tottime': tt, 'cumtime': ct, 
             'per_call': tt/nc if nc > 0 else 0,
@@ -110,16 +110,16 @@ def process_stats_for_ui(ps):
             'raw_key': func
         })
         
-    return stats_list
+    return performance_stats
 
-def generate_table_rows(stats_list):
+def generate_table_rows(performance_stats):
     """Generates HTML table rows with data attributes for filtering/sorting."""
     rows = []
-    stats_list.sort(key=lambda x: x['cumtime'], reverse=True)
-    max_cumtime = max(s['cumtime'] for s in stats_list) if stats_list else 1
+    performance_stats.sort(key=lambda x: x['cumtime'], reverse=True)
+    max_cumtime = max(s['cumtime'] for s in performance_stats) if performance_stats else 1
     
     # ⚡ NO LIMIT: All events displayed
-    for stat in stats_list:
+    for stat in performance_stats:
         contrib = (stat['cumtime'] / max_cumtime) * 100
         filename = stat['filename']
         layer = "LIB" if any(p in filename for p in ["site-packages", "lib/python"]) else "CORE" if (filename == "~" or "/usr/lib" in filename) else "APP"

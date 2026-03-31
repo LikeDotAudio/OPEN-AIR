@@ -5,11 +5,12 @@
 # Description: Brief summary of purpose
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from loguru import logger
 from oaLogging.Core.logger import builder_logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True
 
 class GraphStateMixin:
     """Handles MQTT topic registration and state synchronization for datasets, markers, and settings."""
@@ -49,7 +50,7 @@ class GraphStateMixin:
                 if len(ps) >= 2: x.append(float(ps[0])); y.append(float(ps[1]))
             self._pending_data[ds_id] = (x, y); self._schedule_update()
         except Exception as e:
-            logger.trace(f"Error parsing dataset variable change: {e}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Error parsing dataset variable change: {e}", level="TRACE")
 
     def _on_setting_var_change(self, s):
         v = self.settings_vars[s].get()
@@ -64,4 +65,4 @@ class GraphStateMixin:
             elif s == "y_label": self.ax.set_ylabel(v)
             self._force_redraw = True; self._schedule_update()
         except Exception as e:
-            logger.trace(f"Error applying setting change '{s}': {e}")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Error applying setting change '{s}': {e}", level="TRACE")

@@ -5,12 +5,13 @@
 # Description: Modularized Editable Table Widget.
 
 import tkinter as tk
+from oaLogging.Methods.matrix_gate import matrix_log
+import inspect
 from tkinter import ttk
 import orjson
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-BUILDER_DEBUG = True
 from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -33,7 +34,7 @@ class BuilderTextTableCreator(TransparencyMixin):
         return creator.make_text_table(parent_widget, config_data, context, **kwargs)
 
     def make_text_table(self, parent_widget, config_data, context=None, **kwargs):
-        if BUILDER_DEBUG: builder_logger.trace(f"🔬🏗️📑 [BUILDER] Creating Table widget.")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📑 [BUILDER] Creating Table widget.", level="TRACE")
         
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance

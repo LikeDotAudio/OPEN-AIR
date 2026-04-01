@@ -24,6 +24,10 @@ from oaComMQTT.Methods.mqtt_topic_utils import get_topic  # Import get_topic
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import is_debug_allowed
+BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
+
 
 class BuilderImagesImageDisplayCreator(TransparencyMixin):
     # Creates an image display widget that loads and displays images dynamically.

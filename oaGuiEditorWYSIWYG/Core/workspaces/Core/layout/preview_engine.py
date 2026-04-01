@@ -41,6 +41,7 @@ class PreviewEngine:
                 "is_editor": True
             }
             self.preview_builder = DynamicGuiBuilder(self.render_area, config=builder_config, tab_name="InteractivePreview")
+            self.preview_builder.start()
             self.preview_builder.pack(fill="both", expand=True)
             self.preview_builder._is_rebuilding = True
             try:

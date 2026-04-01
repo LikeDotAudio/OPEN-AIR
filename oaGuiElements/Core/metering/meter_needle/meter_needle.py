@@ -12,6 +12,9 @@ from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
+from oaLogging.Methods.matrix_gate import is_debug_allowed
+BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
+
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 

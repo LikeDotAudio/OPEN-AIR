@@ -12,6 +12,9 @@ from pathlib import Path
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
+from oaLogging.Methods.matrix_gate import is_debug_allowed
+BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
+
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -84,7 +87,12 @@ class DynamicGuiBuilder(
         config = kwargs.pop("config", {})
         super().__init__(master=parent)
 
-        # State Initialization
+        self._init_state(json_path, tab_name, config)
+        self._init_services(config)
+        self._init_scaffolding(use_grid)
+        self._setup_context_menu()
+
+    def _init_state(self, json_path, tab_name, config):
         self.tab_name = tab_name
         self.on_complete_callback = config.get("on_complete")
         self.state_mirror_engine = config.get("state_mirror_engine")
@@ -103,10 +111,10 @@ class DynamicGuiBuilder(
         self.panel_bg_label = None
         self._slicing_registry = []
         self.is_visible = False
-        
+
+    def _init_services(self, config):
         self.tracking_service = UITrackingService()
 
-        # 1. Initialize Core Components
         self._initialize_mqtt_context(
             self.json_filepath,
             app_constants,
@@ -121,7 +129,7 @@ class DynamicGuiBuilder(
             self.base_mqtt_topic_from_path
         )
 
-        # 2. GUI Scaffolding
+    def _init_scaffolding(self, use_grid):
         self.config(style="Dark.TFrame")
         if not use_grid:
             self.pack(fill=tk.BOTH, expand=True)
@@ -138,11 +146,9 @@ class DynamicGuiBuilder(
         self.canvas = tk.Canvas(
             self.main_content_frame, background=colors["bg"], bd=0, highlightthickness=0
         )
-        # ⚡ FIX: scroll_frame MUST be a Frame for grid propagation to work with Canvas scrolling.
         self.scroll_frame = tk.Frame(self.canvas, bd=0, highlightthickness=0, bg=colors["bg"])
 
         TransparencyManager.apply_transparency(self, self.scroll_frame, {"transparent": True}, self)
-
 
         self.scrollbar_v = AutoScrollbar(
             self.main_content_frame, orient=tk.VERTICAL, command=self.canvas.yview
@@ -153,7 +159,6 @@ class DynamicGuiBuilder(
 
         self.canvas_window_id = self.canvas.create_window((0, 0), window=self.scroll_frame, anchor="nw")
         
-        # Scroll sync internal handlers
         def _on_scroll_sync():
             self._scroll_timer = None
             if getattr(self, '_is_rebuilding', False): return
@@ -184,20 +189,17 @@ class DynamicGuiBuilder(
         self.scrollbar_v.grid(row=0, column=1, sticky="ns")
         self.scrollbar_h.grid(row=1, column=0, sticky="ew")
         
-        # 3. Reload Button
         if app_constants.RELOAD_CONFIG_DISPLAYED:
             self.button_frame = ttk.Frame(self)
-            self.button_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=(5, 10), padx=10)
+            self.button_frame.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(5, 10), padx=10)
             ttk.Button(
                 self.button_frame, text="Reload Config", command=self._force_rebuild_gui
             ).pack(side=tk.LEFT, pady=10)
         else:
             self.button_frame = None
 
-        # 4. Context Menu via Mixin
-        self._setup_context_menu()
-
-        # 5. Trigger Build
+    def start(self):
+        """Starts the building process."""
         if self.json_filepath:
             self._load_and_build_from_file()
         else:

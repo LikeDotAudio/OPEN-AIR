@@ -73,11 +73,15 @@ def load_cache() -> Dict[str, Any]:
 #     data (Dict[str, Any]): The dictionary containing the state cache data to be saved.
 # Outputs:
 #     bool: True if the cache was saved successfully, False otherwise.
-def save_cache(data: Dict[str, Any]) -> bool:
+def save_cache(data: Any) -> bool:
     """
     Writes the dictionary to disk. Use a temp file + rename (atomic write)
     """
     try:
+        # If it's the Rust core, we need to convert to dict first
+        if hasattr(data, "to_dict"):
+            data = data.to_dict()
+
         temp_dir = app_constants.DEVICE_STATE_CACHE_PATH.parent
         # Ensure the DATA directory exists
         if not temp_dir.exists():

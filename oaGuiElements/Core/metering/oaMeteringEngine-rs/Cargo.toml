@@ -1,0 +1,11 @@
+[package]
+name = "oameteringengine_rs"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "oameteringengine_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = "0.27.0"

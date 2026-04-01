@@ -25,6 +25,10 @@ from oaOchestration.Core.path_initializer import (
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic  # Import get_topic
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import is_debug_allowed
+BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
+
 
 class BuilderImagesAnimationDisplayCreator(TransparencyMixin):
     # Creates an animation display widget from a GIF file.

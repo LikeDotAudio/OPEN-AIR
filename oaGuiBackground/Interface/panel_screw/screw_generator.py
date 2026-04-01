@@ -14,6 +14,10 @@ from loguru import logger
 
 from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
 
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import is_debug_allowed
+BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
+
 # Sizing and Geometry Constants
 CANVAS_PADDING_RATIO = 0.4
 CENTER_DIVISOR = 2

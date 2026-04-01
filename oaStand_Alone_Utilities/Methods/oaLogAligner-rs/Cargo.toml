@@ -1,0 +1,9 @@
+[package]
+name = "oalogaligner"
+version = "2026.3.31"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.4", features = ["derive"] }
+regex = "1.10"
+walkdir = "2.4"

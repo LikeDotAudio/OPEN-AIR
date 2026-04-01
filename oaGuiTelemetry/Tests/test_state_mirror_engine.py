@@ -23,7 +23,8 @@ class TestStateMirrorEngine(unittest.TestCase):
         self.subscriber_router = MagicMock()
         self.state_cache_manager = MagicMock()
         # Ensure cache is a real dict to avoid MagicMock __contains__ issues
-        self.state_cache_manager.cache = {}
+        self.state_cache_manager.rust_cache = MagicMock()
+        self.state_cache_manager.rust_cache.get.return_value = None
         
         self.engine = StateMirrorEngine(
             self.base_topic, 

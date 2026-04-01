@@ -1,98 +1,37 @@
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
 # FileReaders/from_csv_unknown.py
-# Author: Anthony Peter Kuzub
-# Version: 1.0.0
 #
-# Description: Best-effort conversion of CSV files with unknown headers into standard marker format.
+# Best-effort CSV parser for unknown header formats.
+#
+# Author: Anthony Peter Kuzub
+# Version: 20260331.2240.1
 
-import csv
-import re
 import os
-
-# --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+import csv
+import inspect
 from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfiguration.FileReaders.config_reader import Config
 
-app_constants = Config.get_instance()
-
 # --- Constants ---
-VERSION = "20251129.120000.1"
+VERSION = "20260331.2240.1"
+
+try:
+    from oacsvparser_rs import convert_csv_unknown as rust_convert_csv_unknown
+except ImportError as e:
+    logger.critical("🚀❌ [FATAL] Rust CSV Parser module missing. Pure Rust mode is mandatory.")
+    raise e
 
 def Marker_convert_csv_unknow_report_to_csv(file_path):
     """
     Performs a 'best-effort' conversion of a CSV file with unknown headers
-    to the standardized marker report format.
+    to the standardized marker report format using the mandatory Rust parser.
     """
     matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"▶️ Starting best-effort CSV conversion for: {file_path}", "DEBUG")
 
-    # Standardized headers and their common aliases
-    standard_headers = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
-    header_aliases = {
-        "zone": ["zone", "area", "location"],
-        "group": ["group", "channel_group"],
-        "device": ["device", "dev_type", "model"],
-        "name": ["name", "alias", "description"],
-        "freq_mhz": ["freq", "frequency", "frequency_mhz", "FREQ_MHZ"],
-        "peak": ["peak", "peak_level", "max_level", "dbm"],
-    }
-
     try:
-        with open(file_path, "r", newline="") as csvfile:
-            reader = csv.reader(csvfile)
-            try:
-                input_headers = [h.strip().lower() for h in next(reader)]
-            except StopIteration:
-                return [], []
-            data = list(reader)
-
-        header_map = {}
-        for std_header in standard_headers:
-            aliases = header_aliases.get(std_header.lower(), [std_header.lower()])
-            for alias in aliases:
-                if alias in input_headers:
-                    header_map[std_header] = input_headers.index(alias)
-                    break
-
-        processed_data = []
-        for row in data:
-            new_row = {header: None for header in standard_headers}
-
-            for std_header, index in header_map.items():
-                if index < len(row):
-                    value = row[index].strip()
-                    if std_header == "FREQ_MHZ" and value:
-                        try:
-                            # Attempt to convert to MHz if needed
-                            match = re.search(
-                                r"(\d+(?:\.\d+)?)\s*(?:(k|m|g)?hz)?",
-                                value,
-                                re.IGNORECASE,
-                            )
-                            if match:
-                                val = float(match.group(1))
-                                unit = match.group(2)
-                                if unit and unit.lower() == "k":
-                                    val /= 1000
-                                elif unit and unit.lower() == "g":
-                                    val *= 1000
-                                new_row[std_header] = val
-                            else:
-                                new_row[std_header] = float(value)
-                        except ValueError:
-                            new_row[std_header] = value
-                    else:
-                        new_row[std_header] = value
-            processed_data.append(new_row)
-
-        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Finished best-effort conversion. Headers mapped: {header_map}", "SUCCESS")
+        standard_headers, processed_data = rust_convert_csv_unknown(file_path)
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🚀 Using HIGH-PERFORMANCE RUST CSV parser.", "DEBUG")
         return standard_headers, processed_data
-
-    except FileNotFoundError:
-        logger.error(f"❌ The file '{file_path}' was not found.")
-        return [], []
-    except Exception:
-        if LOCAL_DEBUG:
-            logger.exception("❌ Error during best-effort CSV conversion")
-        return [], []
+    except Exception as e:
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🚀❌ [FATAL] Rust CSV conversion failed: {e}", "ERROR")
+        raise e

@@ -1,0 +1,1 @@
+/home/anthony/Documents/OPEN-AIR/oaStand_Alone_Utilities/Methods/oaLogAligner-rs/target/release/oalogaligner: /home/anthony/Documents/OPEN-AIR/oaStand_Alone_Utilities/Methods/oaLogAligner-rs/src/main.rs

@@ -12,6 +12,9 @@ from dataclasses import dataclass
 from typing import Optional, List, Tuple
 
 from oaLogging.Core.logger import builder_logger
+from oaLogging.Methods.matrix_gate import is_debug_allowed
+BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
+
 from .scale import ScaleDrawer
 from .number import NumberDrawer
 from .needle import NeedleDrawer

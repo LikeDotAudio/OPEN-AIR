@@ -24,6 +24,10 @@ from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
 
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import is_debug_allowed
+BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
+
 # Random Seed Constants
 MAX_RANDOM_SEED = 1000000
 

@@ -15,7 +15,7 @@ singleton and its associated functions to the rest of the project.
 
 from .FileReaders.config_reader import Config
 from .Methods.config_validator import validate_configuration
-from .Methods.console_encoder import ConsoleEncoder
+# from .Methods.console_encoder import ConsoleEncoder
 
 class ConfigurationEntry:
     """Entry point for configuration management services."""
@@ -68,7 +68,7 @@ def validate(output_func=None):
 
 def get_encoder():
     """Returns the ConsoleEncoder for output formatting."""
-    return ConsoleEncoder()
+    return None
 
 # Standardized exports
 __all__ = [

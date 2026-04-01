@@ -59,12 +59,7 @@ class OidMapConverter:
         
         # Use provided snapshot or create one if not provided (caller MUST have lock)
         if cache_snapshot is None:
-            try:
-                # If it's a dict, dict.copy() is a shallow copy, safe from concurrent size changes during iteration
-                cache_snapshot = self.state_cache_manager.cache.copy()
-            except AttributeError:
-                # Fallback if it's not a standard dict
-                cache_snapshot = dict(self.state_cache_manager.cache)
+            cache_snapshot = self.state_cache_manager.rust_cache.to_dict()
 
         new_oid_map = {}
         

@@ -27,7 +27,10 @@ class TestStateCache(unittest.TestCase):
                 self.registry.handle_external_update("TEST/TOPIC", 42, source="GUI")
                 
                 # CHECK: Cached
-                self.assertEqual(self.registry.cache["TEST/TOPIC"]["val"], 42)
+                cached_manifest = self.registry.rust_cache.get("TEST/TOPIC")
+                
+                self.assertIsNotNone(cached_manifest)
+                self.assertEqual(cached_manifest["val"], 42)
                 # CHECK: Persisted
                 self.registry.save_engine.schedule_save.assert_called()
                 # CHECK: Observers notified

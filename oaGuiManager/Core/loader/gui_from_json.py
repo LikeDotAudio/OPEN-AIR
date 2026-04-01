@@ -86,6 +86,7 @@ class UniversalGuiLoader(tk.Frame):
             use_grid=True
         )
         self.dynamic_gui.grid(row=0, column=0, sticky="nsew")
+        self.dynamic_gui.start()
 
     def _handle_build_error(self, e):
         """Cleanly displays an error state in the UI."""

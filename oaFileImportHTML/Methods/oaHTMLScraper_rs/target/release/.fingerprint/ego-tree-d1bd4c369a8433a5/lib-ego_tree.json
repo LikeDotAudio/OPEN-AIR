@@ -1,0 +1,1 @@
+{"rustc":5391851738765093524,"features":"[]","declared_features":"[\"serde\"]","target":1254327799633640465,"profile":2040997289075261528,"path":9876810007236202761,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/ego-tree-d1bd4c369a8433a5/dep-lib-ego_tree","checksum":false}}],"rustflags":[],"config":8247474407144887393,"compile_kind":0}

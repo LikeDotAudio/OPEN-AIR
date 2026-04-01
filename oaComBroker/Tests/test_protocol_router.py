@@ -15,6 +15,7 @@ class TestProtocolRouter(unittest.TestCase):
         # Reset singleton for testing
         ProtocolRouter._instance = None
         self.router = ProtocolRouter.get_instance()
+        self.router.rust_router = None  # Force Python queue for testing
         self.mqtt_manager = MagicMock()
         self.router.set_mqtt_manager(self.mqtt_manager)
 

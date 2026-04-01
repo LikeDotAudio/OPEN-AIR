@@ -107,9 +107,9 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
         if not widget_info or not self.state_cache_manager: return False
         
         full_topic = widget_info["topic"]
-        if full_topic not in self.state_cache_manager.cache: return False
+        cached = self.state_cache_manager.rust_cache.get(full_topic)
+        if cached is None: return False
         
-        cached = self.state_cache_manager.cache[full_topic]
         try:
             data = cached if isinstance(cached, (dict, list)) else orjson.loads(cached)
             raw_val = ValueProcessor.extract_value(data, widget_info["config"])

@@ -10,6 +10,7 @@ import time
 LOCAL_DEBUG = True
 from loguru import logger
 from oaConfiguration.FileReaders.config_reader import Config
+from oaComAES70.Methods.aes70_parser import OcaParser
 
 app_constants = Config.get_instance()
 # ⚡ SUBSYSTEM: AES70_BRIDGE
@@ -26,6 +27,7 @@ class AES70Manager:
         self.state_cache_manager = state_cache_manager
         self._running = False
         self._discovered_devices = []
+        self._parser = OcaParser()
         
         # Monitor callbacks for GUI
         self._monitor_callbacks = []
@@ -83,6 +85,35 @@ class AES70Manager:
         self._running = False
         if LOCAL_DEBUG:
             aes_logger.warning("📻🔌🛑 [AES70] AES70 Bridge Offline.")
+
+    def ingest_pdu(self, raw_data):
+        """Processes raw bytes from the network socket using the high-performance parser."""
+        if not raw_data: return None
+        
+        pdu = self._parser.decode(raw_data)
+        if not pdu:
+            if LOCAL_DEBUG:
+                aes_logger.error("📻🚫🛑 [AES70] Malformed OCP.1 PDU.")
+            return None
+        
+        if LOCAL_DEBUG:
+            aes_logger.debug(f"📻📡📥 [AES70] Inbound PDU: Version {pdu['version']}, {pdu['message_count']} messages.")
+        
+        # Process individual messages (Dispatching to state cache, etc.)
+        for msg in pdu['messages']:
+            self._handle_message(msg)
+            
+        return pdu
+
+    def _handle_message(self, msg):
+        """Dispatches an OcaMessage to the appropriate handler."""
+        # This is where the MethodID and ONo mapping happens
+        if LOCAL_DEBUG:
+            aes_logger.debug(f"📻📡📥 [AES70] MSG: Handle {msg['handle']} -> ONo {msg['target_ono']} Method {msg['method_id']}")
+        
+        # ⚡ Example: Handle specific method/ONo combinations
+        # If ONo is 1 (DeviceManager) and Method is some Set property...
+        pass
 
     def trigger_scan(self):
         """Logic-only network scan for OCA devices."""

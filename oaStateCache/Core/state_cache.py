@@ -6,22 +6,21 @@
 # Author: Anthony Peter Kuzub
 # Blog: www.Like.audio (Contributor to this project)
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20260330.1600.1
+# Version: 20260331.2225.1
 
 import time
-import orjson
 import os
 from typing import Any
 from loguru import logger
+import orjson
 
 LOCAL_DEBUG = True
+
+try:
+    from oastateregistry_rs import StateRegistryCore as RustStateRegistry
+except ImportError as e:
+    logger.critical("🚀❌ [FATAL] Rust State Registry module missing. Pure Rust mode is mandatory.")
+    raise e
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import data_logger
@@ -48,40 +47,40 @@ class StateRegistry:
         self.subscriber_router = None
         
         # 1. Initialize Cache & Search
-        self.cache = {}
-        try: 
-            self.cache = cache_io_handler.load_cache()
-        except FileNotFoundError:
-            matrix_log("core", "data", "__init__", "First boot detected. Starting with fresh cache.", "INFO")
-        except CacheLoadError as e:
-            matrix_log("core", "data", "__init__", f"Critical Cache Corruption: {e}. Starting fresh.", "ERROR")
-        except Exception:
-            matrix_log("core", "data", "__init__", "Unexpected error loading cache.", "ERROR")
+        try:
+            self.rust_cache = RustStateRegistry()
+            matrix_log("core", "data", "__init__", "🚀 Using HIGH-PERFORMANCE RUST state cache.", "DEBUG")
+        except Exception as e:
+            matrix_log("core", "data", "__init__", f"🚀❌ [FATAL] Rust Cache init failed: {e}", "ERROR")
+            raise e
+
+        self.initialize_state()
             
         self.search_engine = CacheSearchEngine()
-        self.search_engine.rebuild(self.cache)
+        self.search_engine.rebuild(self.rust_cache.to_dict())
         
         # 2. Specialized Engines
-        self.save_engine = CacheSaveEngine(self.cache, data_logger, LOCAL_DEBUG)
+        self.save_engine = CacheSaveEngine(self.rust_cache, data_logger, LOCAL_DEBUG)
         self.observers = CacheObserverRegistry()
         
         self._last_log_time, self._updates_since_last_log = time.time(), 0
-        matrix_log("core", "data", "__init__", f"Initialized with {len(self.cache)} entries.", "DEBUG")
+        cache_len = self.rust_cache.len()
+        matrix_log("core", "data", "__init__", f"Initialized with {cache_len} entries.", "DEBUG")
 
     def check_prefix_exists(self, prefix: str) -> bool: return self.search_engine.exists(prefix)
     def register_cache_observer(self, callback: Any): self.observers.register_observer(callback)
     
     def get_cached_value(self, topic: str) -> Any:
-        """Retrieves the cached value for a given topic."""
-        entry = self.cache.get(topic)
+        """Retrieves a value from the cache."""
+        entry = self.rust_cache.get(topic)
         return entry.get("val") if isinstance(entry, dict) else entry
 
     def save_preset(self, name: str):
         try:
-            from oaOchestration.Core.path_initializer import DATA_RUNNING_DIR
-            path = DATA_RUNNING_DIR / "presets" / f"{name}.preset.json"
+            path = os.path.join(app_constants.PRESET_REPO_PATH, f"{name}.json")
             os.makedirs(os.path.dirname(path), exist_ok=True)
-            with open(path, "wb") as f: f.write(orjson.dumps(self.cache, option=orjson.OPT_INDENT_2))
+            export_cache = self.rust_cache.to_dict()
+            with open(path, "wb") as f: f.write(orjson.dumps(export_cache, option=orjson.OPT_INDENT_2))
             matrix_log("core", "data", "save_preset", f"Preset saved: {name}", "SUCCESS")
             return True
         except Exception as e: 
@@ -102,31 +101,34 @@ class StateRegistry:
 
     def initialize_state(self) -> None:
         try:
-            self.cache = cache_io_handler.load_cache()
-            self.search_engine.rebuild(self.cache)
+            loaded_cache = cache_io_handler.load_cache()
+            self.rust_cache.clear()
+            self.rust_cache.update(loaded_cache)
         except FileNotFoundError:
             matrix_log("core", "data", "initialize_state", "No cache to initialize.", "INFO")
-            self.cache = {}
+            self.rust_cache.clear()
         except CacheLoadError as e:
             matrix_log("core", "data", "initialize_state", f"Critical Cache Corruption during init: {e}.", "ERROR")
-            self.cache = {}
-        except Exception: 
-            matrix_log("core", "data", "initialize_state", "State initialization failed", "ERROR")
-            self.cache = {}
+            self.rust_cache.clear()
+        except Exception as e: 
+            matrix_log("core", "data", "initialize_state", f"State initialization failed: {e}", "ERROR")
+            self.rust_cache.clear()
 
-        if self.cache:
+        current_cache = self.rust_cache.to_dict()
+        if current_cache:
             from oaComBroker.Core.protocol_router.manager import ProtocolRouter
             router = ProtocolRouter.get_instance()
-            for topic, payload in self.cache.items():
+            for topic, payload in current_cache.items():
                 val = payload.get("val") if isinstance(payload, dict) else payload
                 router.ingest("DISK", topic, val, {"msg_type": "LINK_FEEDBACK", "is_settled": True, "origin_source": "DISK", "boot": True})
-            gui_state_restorer.restore_timeline(self.cache, self.state_mirror_engine)
+            gui_state_restorer.restore_timeline(current_cache, self.state_mirror_engine)
 
     def handle_external_update(self, topic: str, value: Any, source: str = "EXTERNAL", metadata: dict = None):
         from oaTranslator.Core.manifest.builder import create_manifest
         payload = create_manifest(value, topic, source, metadata)
         
-        self.cache[topic] = payload
+        self.rust_cache.set(topic, payload)
+        
         self.save_engine.schedule_save(topic, payload); self.search_engine.add_topic(topic)
         
         from oaComBroker.Core.protocol_router.manager import ProtocolRouter
@@ -155,7 +157,8 @@ class StateRegistry:
 
     def _update_cache_entry(self, topic, payload):
         """Updates internal cache and schedules persistence."""
-        self.cache[topic] = payload
+        self.rust_cache.set(topic, payload)
+        
         self.search_engine.add_topic(topic)
         self.save_engine.schedule_save(topic, payload)
         self._updates_since_last_log += 1
@@ -193,7 +196,7 @@ class StateRegistry:
             ProtocolRouter.get_instance().ingest("MQTT", topic, value, metadata)
             self.observers.notify(topic, raw_payload)
 
-            should_process, new_payload = cache_traffic_controller.process_traffic(msg, self.cache)
+            should_process, new_payload = cache_traffic_controller.process_traffic(msg, self.rust_cache)
             if should_process:
                 self._update_cache_entry(topic, new_payload)
                 

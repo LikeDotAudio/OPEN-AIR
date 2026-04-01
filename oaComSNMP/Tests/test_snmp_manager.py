@@ -6,13 +6,14 @@
 
 import unittest
 from unittest.mock import MagicMock, patch
-from oaComSNMP.Managers.snmp_manager import SNMPManager
+from oaComSNMP.Managers.snmp_manager import SNMPManager, BridgeContext
 
 class TestSNMPManager(unittest.TestCase):
     def setUp(self):
         self.state_cache = MagicMock()
         with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance"):
-            self.manager = SNMPManager(self.state_cache, run_bridge=True)
+            context = BridgeContext(state_cache_manager=self.state_cache)
+            self.manager = SNMPManager.create(context, run_bridge=True)
 
     def test_initialization(self):
         """Goal: Verify that SNMPManager initializes with correct default state."""

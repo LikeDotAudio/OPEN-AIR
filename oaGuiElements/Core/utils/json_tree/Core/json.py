@@ -11,6 +11,10 @@ from pathlib import Path
 from oaLogging.Core.logger import builder_logger
 
 # --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import is_debug_allowed
+BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
+
+# --- Standard Debug Logging Setup ---
 
 class JsonDataManager:
     """

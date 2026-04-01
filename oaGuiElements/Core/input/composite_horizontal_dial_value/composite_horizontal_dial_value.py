@@ -28,6 +28,10 @@ from .Core.grid import GridManager
 from .Core.state_sync import CompositeStateSync
 from .Core.ui_components import CompositeUIComponents
 
+# --- Standard Debug Logging Setup ---
+from oaLogging.Methods.matrix_gate import is_debug_allowed
+BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
+
 @WidgetRegistry.register("_Horizontal_with_dial_Value", "OcaCompositeFaderKnob")
 class BuilderCompositeHorizontalDialValueCreator(
     BuilderFaderHorizontalCreator, BuilderKnobCreator, TransparencyMixin

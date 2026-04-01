@@ -97,15 +97,10 @@ class SnmpStatePersister:
 
                 # Accessing state and converter requires the lock
                 with self._state_lock: # Use the lock provided by the manager
-                    if not self.state_cache_manager.cache: # Skip if cache is empty
+                    cache_snapshot = self.state_cache_manager.rust_cache.to_dict()
+                    if not cache_snapshot: # Skip if cache is empty
                         time.sleep(STATE_SYNC_INTERVAL)
                         continue
-
-                    # 1. Create a snapshot of the current state cache
-                    try:
-                        cache_snapshot = self.state_cache_manager.cache.copy()
-                    except AttributeError:
-                        cache_snapshot = dict(self.state_cache_manager.cache)
 
                     # 2. ⚡ REFRESH: Rebuild the OID map from this specific snapshot
                     self.oid_map_converter.build_oid_map(cache_snapshot=cache_snapshot)

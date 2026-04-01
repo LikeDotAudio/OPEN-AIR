@@ -32,7 +32,7 @@ project_root = current_dir.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from .Managers.snmp_manager import SNMPManager
+from .Managers.snmp_manager import SNMPManager, BridgeContext
 from .Workers.snmp_tester import SnmpTester
 from .Methods.snmp_mib_generator import MibGenerator
 from .Methods.snmp_installer_generator import InstallerGenerator
@@ -42,23 +42,19 @@ _instance = None
 def get_manager(state_cache_manager=None, mqtt_connection_manager=None, subscriber_router=None, run_bridge=None):
     """
     Singleton getter for the SNMP Manager.
-    If managers are not provided, it attempts to resolve them from global instances.
     """
     global _instance
     
-    # ⚡ AUTONOMY: Determine run_bridge based on partition if not explicitly provided
     if run_bridge is None:
         try:
             from oaConfiguration.Core.identity import IdentityManager
             ident = IdentityManager.initialize()
             partition = ident.get("PARTITION_ID", "STANDALONE")
-            # Only CORE or STANDALONE partitions run the active bridge logic
             run_bridge = (partition in ["CORE", "STANDALONE"])
         except Exception:
-            run_bridge = True # Default to True for safety if identity fails
+            run_bridge = True
 
     if _instance is None:
-        # ⚡ AUTONOMY: Try to resolve dependencies if not provided
         if state_cache_manager is None:
             from oaSplinker.Core.splinker import ControlBroker
             broker = ControlBroker.get_instance()
@@ -70,15 +66,15 @@ def get_manager(state_cache_manager=None, mqtt_connection_manager=None, subscrib
             
         if subscriber_router is None:
             from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
-            # Note: We don't use a singleton for router, but we can check the MQTT manager
             subscriber_router = getattr(mqtt_connection_manager, 'subscriber_router', None)
 
-        _instance = SNMPManager(
-            state_cache_manager=state_cache_manager, 
-            mqtt_connection_manager=mqtt_connection_manager, 
-            subscriber_router=subscriber_router,
-            run_bridge=run_bridge
+        context = BridgeContext(
+            state_cache_manager=state_cache_manager,
+            mqtt_connection_manager=mqtt_connection_manager,
+            subscriber_router=subscriber_router
         )
+        _instance = SNMPManager.create(context, run_bridge)
+        
     return _instance
 
 def start():
@@ -127,6 +123,11 @@ def main():
     )
     
     # Initialize the manager with our fresh services
+    context = BridgeContext(
+        state_cache_manager=state_cache,
+        mqtt_connection_manager=mqtt_conn,
+        subscriber_router=sub_router
+    )
     manager = get_manager(
         state_cache_manager=state_cache,
         mqtt_connection_manager=mqtt_conn,

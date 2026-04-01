@@ -26,7 +26,7 @@ def create_router(state_cache_manager, protocol_router):
         if prefix and not prefix.endswith('/'): prefix += '/'
         
         children = set()
-        for topic in state_cache_manager.cache.keys():
+        for topic in state_cache_manager.rust_cache.keys():
             if topic.startswith(prefix):
                 relative = topic[len(prefix):]
                 parts = relative.split('/')
@@ -41,7 +41,7 @@ def create_router(state_cache_manager, protocol_router):
         # If client wants JSON (e.g. scripts), give them the raw root data
         if "text/html" not in request.headers.get("Accept", ""):
             roots = set()
-            for topic in state_cache_manager.cache.keys():
+            for topic in state_cache_manager.rust_cache.keys():
                 roots.add(topic.split('/')[0])
             return JSONResponse({
                 "system": "OPEN-AIR",
@@ -50,7 +50,7 @@ def create_router(state_cache_manager, protocol_router):
             })
 
         # Generate HTML Explorer
-        roots = sorted(list(set(topic.split('/')[0] for topic in state_cache_manager.cache.keys())))
+        roots = sorted(list(set(topic.split('/')[0] for topic in state_cache_manager.rust_cache.keys())))
         
         html_content = f"""
         <!DOCTYPE html>

@@ -158,6 +158,24 @@ class Config(ConfigDefaults):
         if LOCAL_DEBUG:
             logger.debug(f"📜 [CONFIG] Loaded: Version {self.CURRENT_VERSION}, Debug: {self.ENABLE_DEBUG_MODE}")
 
+    def get(self, section, key, default=None):
+        """Returns a string value from the configuration."""
+        from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
+        config_path = GLOBAL_PROJECT_ROOT / "config.ini"
+        setup_path = GLOBAL_PROJECT_ROOT / "oaInstallation" / "Setup.py"
+        config = ConfigLoader.load(config_path, setup_path, LOCAL_DEBUG)
+        if not config: return default
+        return self._s_get(config, section, key, default)
+
+    def get_boolean(self, section, key, default=False):
+        """Returns a boolean value from the configuration."""
+        from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
+        config_path = GLOBAL_PROJECT_ROOT / "config.ini"
+        setup_path = GLOBAL_PROJECT_ROOT / "oaInstallation" / "Setup.py"
+        config = ConfigLoader.load(config_path, setup_path, LOCAL_DEBUG)
+        if not config: return default
+        return self._s_get(config, section, key, default, "bool")
+
     def get_mqtt_base_topic(self):
         """Returns the MQTT root topic for the application."""
         return self.MQTT_BASE_TOPIC

@@ -90,8 +90,7 @@ def delete_open_air_tree(mqtt_connection_manager, state_cache_manager=None):
     topics = []
     if state_cache_manager:
         # Get all known topics from the cache
-        # state_cache_manager.cache is a dict of topic->value
-        topics = list(state_cache_manager.cache.keys())
+        topics = list(state_cache_manager.rust_cache.keys())
         matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Sourced {len(topics)} topics from State Cache for deletion.", "DEBUG")
     else:
         matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "No State Cache provided. Cannot determine topics to delete.", "DEBUG")

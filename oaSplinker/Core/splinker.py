@@ -54,14 +54,8 @@ class ControlBroker:
         self.storage_path = SPLINKER_STORAGE_PATH
         self._monitor_callbacks = []
         
-        # ⚡ LOOP PREVENTION: Track processed events to break feedback cycles
-        self.processed_events = {}
-        self._cache_lock = threading.Lock()
-        
         # ⚡ PANIC MODE: Emergency stop for feedback loops
         self.panic_active = False
-        self.event_counters = {} # splink_id -> [timestamps]
-        self._counter_lock = threading.Lock()
         
         self._load_splinks()
 

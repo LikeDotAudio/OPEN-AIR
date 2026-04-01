@@ -1,14 +1,13 @@
 # oaSplinker/Tests/test_pipeline_rust.py
 #
-# Tests for the SplinkPipeline (Python vs Rust).
+# Tests for the SplinkPipeline (Rust implementation).
 #
 # Author: Anthony Peter Kuzub
-# Version: 20260331.1500.1
+# Version: 20260401.1100.1
 
 import unittest
 from unittest.mock import MagicMock, patch
 from oaSplinker.Methods.pipeline import SplinkPipeline
-from oaConfiguration.Entry import Config
 
 class TestPipelineRust(unittest.TestCase):
     def setUp(self):
@@ -32,34 +31,27 @@ class TestPipelineRust(unittest.TestCase):
             ]
         }
 
-    @patch("oaConfiguration.Entry.Config.get_boolean")
-    def test_compare_python_vs_rust_scale(self, mock_get_boolean):
-        # 1. Test Python
-        mock_get_boolean.return_value = False
-        pipeline_py = SplinkPipeline(self.splink_config, self.splinker_manager)
-        self.assertIsNone(pipeline_py.rust_pipeline)
-        
-        state = {}
-        out_py = pipeline_py.process(50, state)
-        self.assertEqual(out_py, 128) # round(0 + (50/100)*255) = 127.5 -> 128
-
-        # 2. Test Rust
-        mock_get_boolean.return_value = True
-        pipeline_rs = SplinkPipeline(self.splink_config, self.splinker_manager)
-        
-        # If Rust is available, this should be set
+    def test_rust_scale(self):
+        """Test the Rust SplinkPipeline with scale handler."""
         try:
             from oasplinkcore_rs import SplinkPipeline as RustSplinkPipeline
-            self.assertIsNotNone(pipeline_rs.rust_pipeline)
-            out_rs = pipeline_rs.process(50, state)
-            self.assertEqual(out_rs, 128)
-            self.assertEqual(out_py, out_rs)
         except ImportError:
             self.skipTest("Rust oasplinkcore_rs not installed.")
 
-    @patch("oaConfiguration.Entry.Config.get_boolean")
-    def test_deadband_state_rust(self, mock_get_boolean):
-        mock_get_boolean.return_value = True
+        pipeline = SplinkPipeline(self.splink_config, self.splinker_manager)
+        self.assertIsNotNone(pipeline.rust_pipeline)
+        
+        # Test scale (50 / 100 * 255 = 127.5 -> 128)
+        out = pipeline.process(50, {})
+        self.assertEqual(out, 128)
+
+    def test_deadband_state_rust(self):
+        """Test the Rust SplinkPipeline with deadband handler."""
+        try:
+            from oasplinkcore_rs import SplinkPipeline as RustSplinkPipeline
+        except ImportError:
+            self.skipTest("Rust oasplinkcore_rs not installed.")
+
         self.splink_config["handlers"] = [
             {
                 "type": "deadband",
@@ -71,26 +63,21 @@ class TestPipelineRust(unittest.TestCase):
             }
         ]
         
-        try:
-            pipeline = SplinkPipeline(self.splink_config, self.splinker_manager)
-            if not pipeline.rust_pipeline:
-                self.skipTest("Rust oasplinkcore_rs not installed or failed to init.")
-            
-            state = {}
-            # First value passes
-            self.assertEqual(pipeline.process(50, state), 50)
-            self.assertEqual(state.get("last_deadband_value"), 50)
-            
-            # Change by 5% (less than 10%) -> should drop (None)
-            self.assertIsNone(pipeline.process(54, state))
-            self.assertEqual(state.get("last_deadband_value"), 50)
-            
-            # Change by 15% (more than 10%) -> should pass
-            self.assertEqual(pipeline.process(66, state), 66)
-            self.assertEqual(state.get("last_deadband_value"), 66)
-            
-        except ImportError:
-            self.skipTest("Rust oasplinkcore_rs not installed.")
+        pipeline = SplinkPipeline(self.splink_config, self.splinker_manager)
+        self.assertIsNotNone(pipeline.rust_pipeline)
+        
+        state = {}
+        # First value passes
+        self.assertEqual(pipeline.process(50, state), 50)
+        self.assertEqual(state.get("last_deadband_value"), 50)
+        
+        # Change by 4% (less than 10%) -> should drop (return None)
+        self.assertIsNone(pipeline.process(54, state))
+        self.assertEqual(state.get("last_deadband_value"), 50)
+        
+        # Change by 15% (more than 10%) -> should pass
+        self.assertEqual(pipeline.process(66, state), 66)
+        self.assertEqual(state.get("last_deadband_value"), 66)
 
 if __name__ == "__main__":
     unittest.main()

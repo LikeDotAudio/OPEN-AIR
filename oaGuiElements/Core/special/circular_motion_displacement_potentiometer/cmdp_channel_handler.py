@@ -8,6 +8,12 @@ import tkinter as tk
 import math
 from loguru import logger
 
+try:
+    from oacmdpmath_rs import CMDPMath
+    cmdp_math_rs = CMDPMath()
+except ImportError:
+    cmdp_math_rs = None
+
 # --- Constants ---
 PERCENT_MAX = 100.0
 HITBOX_WIDTH = 60
@@ -94,43 +100,90 @@ class CMDP_LTPObject:
         self.canvas.delete(self.tag_root)
         if not self.visible or self.mute_var.get(): return
         
-        center_x, center_y = self.x, self.y
         try:
             ang, val_curr, rot_curr = float(self.angle_var.get()), float(self.val_var.get()), float(self.rot_var.get())
         except Exception as e:
             logger.error(f"Failed to get float values for rendering: {e}")
             ang, val_curr, rot_curr = 0.0, 0.0, 0.0
+
+        if cmdp_math_rs:
+            # ⚡ OFF-LOAD to RUST
+            geo = cmdp_math_rs.calculate_fader_geometry({
+                "center_x": self.x, "center_y": self.y, "track_length": self.track_len,
+                "angle": ang, "val_curr": val_curr, "val_min": self.val_min, "val_max": self.val_max,
+                "rot_curr": rot_curr, "hitbox_width": HITBOX_WIDTH, "hitbox_padding": HITBOX_PADDING,
+                "tick_count": TICK_COUNT, "tick_inner_offset": TICK_INNER_OFFSET, "tick_outer_offset": TICK_OUTER_OFFSET,
+                "cap_radius": CAP_RADIUS, "global_center_x": self.widget_ref.center_x, "global_center_y": self.widget_ref.center_y,
+                "far_radius": self.widget_ref.far_radius, "label_offset_base": LABEL_OFFSET_BASE, "label_offset_step": LABEL_OFFSET_STEP,
+                "widget_id": self.widget_id
+            })
             
+            # Hitbox
+            self.canvas.create_polygon(geo["hitbox"], fill="", outline="", tags=(self.tag_root, "hitbox"))
+            
+            # Track & Ticks
+            self.canvas.create_line(geo["track"], fill="#000000", width=TRACK_WIDTH_OUTER, capstyle=tk.ROUND, tags=self.tag_root)
+            self.canvas.create_line(geo["track"], fill="#222222", width=TRACK_WIDTH_INNER, capstyle=tk.ROUND, tags=self.tag_root)
+            
+            ticks = geo["ticks"]
+            for i in range(0, len(ticks), 4):
+                self.canvas.create_line(ticks[i], ticks[i+1], ticks[i+2], ticks[i+3], fill="#888888", width=TRACK_WIDTH_INNER, tags=self.tag_root)
+                
+            # Cap & Potentiometer
+            cap_center_x, cap_center_y = geo["cap_center"]
+            radius = CAP_RADIUS
+            is_active = self.dragging or self.hovered
+            outline_color, fill_color = (self.cap_outline_hover if is_active else self.cap_outline_normal), ("#555555" if is_active else self.cap_color)
+            self.canvas.create_oval(cap_center_x-radius, cap_center_y-radius, cap_center_x+radius, cap_center_y+radius, fill=fill_color, outline=outline_color, width=2, tags=(self.tag_root, "cap"))
+            
+            self.canvas.create_arc(cap_center_x-radius+5, cap_center_y-radius+5, cap_center_x+radius-5, cap_center_y+radius-5, 
+                                  start=POTENTIOMETER_START_ANGLE, extent=-(POTENTIOMETER_START_ANGLE - geo["pot_degree"]), 
+                                  style=tk.ARC, outline=self.color_highlight, width=4, tags=self.tag_root)
+            
+            self.canvas.create_line(geo["pointer"], fill=self.color_highlight, width=3, tags=self.tag_root)
+            
+            # Label
+            label_x, label_y = geo["label_pos"]
+            if is_active:
+                label_x, label_y = self.widget_ref.center_x, self.widget_ref.center_y
+                font_spec = ("Arial", 12, "bold")
+            else:
+                font_spec = ("Arial", 10)
+            
+            self.canvas.create_text(label_x, label_y, text=self.label, fill=self.color_highlight, font=font_spec, tags=self.tag_root)
+            return
+
+        center_x, center_y = self.x, self.y
         track_length, t_ang_rad = self.track_len, math.radians(ang + 90)
         cos_t, sin_t = math.cos(t_ang_rad), math.sin(t_ang_rad)
         
         # Hitbox (for click detection)
         hitbox_width = HITBOX_WIDTH
-        hitbox_points = [self.calculate_rotated_point(center_x - hitbox_width/2, center_y - track_length/2 - HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
-               self.calculate_rotated_point(center_x + hitbox_width/2, center_y - track_length/2 - HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
-               self.calculate_rotated_point(center_x + hitbox_width/2, center_y + track_length/2 + HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
-               self.calculate_rotated_point(center_x - hitbox_width/2, center_y + track_length/2 + HITBOX_PADDING, center_x, center_y, cos_t, sin_t)]
+        hitbox_points = [self.calculate_rotated_point(center_x - hitbox_width/2.0, center_y - track_length/2.0 - HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
+               self.calculate_rotated_point(center_x + hitbox_width/2.0, center_y - track_length/2.0 - HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
+               self.calculate_rotated_point(center_x + hitbox_width/2.0, center_y + track_length/2.0 + HITBOX_PADDING, center_x, center_y, cos_t, sin_t),
+               self.calculate_rotated_point(center_x - hitbox_width/2.0, center_y + track_length/2.0 + HITBOX_PADDING, center_x, center_y, cos_t, sin_t)]
         
         flat_hitbox_points = [coord for point in hitbox_points for coord in point]
         self.canvas.create_polygon(flat_hitbox_points, fill="", outline="", tags=(self.tag_root, "hitbox"))
 
         # Track & Ticks
-        track_start = self.calculate_rotated_point(center_x, center_y - track_length/2, center_x, center_y, cos_t, sin_t)
-        track_end = self.calculate_rotated_point(center_x, center_y + track_length/2, center_x, center_y, cos_t, sin_t)
+        track_start = self.calculate_rotated_point(center_x, center_y - track_length/2.0, center_x, center_y, cos_t, sin_t)
+        track_end = self.calculate_rotated_point(center_x, center_y + track_length/2.0, center_x, center_y, cos_t, sin_t)
         self.canvas.create_line(track_start, track_end, fill="#000000", width=TRACK_WIDTH_OUTER, capstyle=tk.ROUND, tags=self.tag_root)
         self.canvas.create_line(track_start, track_end, fill="#222222", width=TRACK_WIDTH_INNER, capstyle=tk.ROUND, tags=self.tag_root)
         
         # Batch draw ticks (Reduced complexity)
         for i in range(TICK_COUNT):
-            local_y = (-track_length/2) + ((i/TICK_DIVISOR) * track_length)
+            local_y = (-track_length/2.0) + ((i/TICK_DIVISOR) * track_length)
             tick_start = self.calculate_rotated_point(center_x - TICK_INNER_OFFSET, center_y + local_y, center_x, center_y, cos_t, sin_t)
             tick_end = self.calculate_rotated_point(center_x - TICK_OUTER_OFFSET, center_y + local_y, center_x, center_y, cos_t, sin_t)
             self.canvas.create_line(tick_start, tick_end, fill="#888888", width=TRACK_WIDTH_INNER, tags=self.tag_root)
 
         # Cap & Potentiometer
         denom = (self.val_max - self.val_min)
-        v_norm = (val_curr - self.val_min) / denom if denom != 0 else 0
-        cap_center_x, cap_center_y = self.calculate_rotated_point(center_x, center_y + (-track_length/2) + (v_norm * track_length), center_x, center_y, cos_t, sin_t)
+        v_norm = (val_curr - self.val_min) / denom if denom != 0.0 else 0
+        cap_center_x, cap_center_y = self.calculate_rotated_point(center_x, center_y + (-track_length/2.0) + (v_norm * track_length), center_x, center_y, cos_t, sin_t)
         radius = CAP_RADIUS
         
         is_active = self.dragging or self.hovered
@@ -163,7 +216,3 @@ class CMDP_LTPObject:
 
     def raise_fader_to_top(self):
         self.canvas.tag_raise(self.tag_root)
-
-    def render(self):
-        """Public alias for render_fader_visuals, required by the reslice engine."""
-        self.render_fader_visuals()

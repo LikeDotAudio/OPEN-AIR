@@ -128,26 +128,27 @@ class WidgetRegistry:
         base_path_str = str(base_path)
         root_path_str = str(GLOBAL_PROJECT_ROOT)
 
-        # Walk the builder directory to find all eligible widget modules.
-        for root, dirs, files in os.walk(base_path_str):
-            for file in files:
-                # Filter for valid Python modules, excluding non-widget files.
-                if (file.endswith(".py") and 
-                    not file.startswith("__") and 
-                    not file.startswith("create_")):
-                    
-                    # Calculate the dot-notation module path relative to root.
-                    rel_path = os.path.relpath(os.path.join(root, file), 
-                                               root_path_str)
-                    module_path = rel_path.replace(os.path.sep, ".")[:-3]
-                    
-                    try:
-                        # Importing the module triggers self-registration.
-                        importlib.import_module(module_path)
-                        count += 1
-                    except Exception as e:
-                        # Silently skip modules that fail to import.
-                        pass
+        from ..fast_scanner import FastScanner
+        scanner = FastScanner()
+        
+        # High-performance recursive scan
+        files = scanner.scan_directory(base_path_str, ".py")
+
+        for file_path in files:
+            file = os.path.basename(file_path)
+            # Filter for valid Python modules, excluding non-widget files.
+            if not file.startswith("__") and not file.startswith("create_"):
+                # Calculate the dot-notation module path relative to root.
+                rel_path = os.path.relpath(file_path, root_path_str)
+                module_path = rel_path.replace(os.path.sep, ".")[:-3]
+                
+                try:
+                    # Importing the module triggers self-registration.
+                    importlib.import_module(module_path)
+                    count += 1
+                except Exception:
+                    # Silently skip modules that fail to import.
+                    pass
         
         cls._initialized = True
         matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"✅ WidgetRegistry: Discovered {len(cls._registry)} types from {count} modules.", level="DEBUG")

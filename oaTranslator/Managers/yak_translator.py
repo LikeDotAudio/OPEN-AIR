@@ -16,8 +16,24 @@
 # Version 20260330.1200.1
 
 import os
+import sys
 from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
+
+# Add the hyphenated directory to sys.path temporarily to import compiler_hook
+_rs_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Core", "oaTranslatorCore-rs")
+if _rs_dir not in sys.path:
+    sys.path.insert(0, _rs_dir)
+
+import compiler_hook
+compiler_hook.ensure_compiled()
+
+try:
+    import oatranslatorcore_rs
+except ImportError as e:
+    from loguru import logger
+    logger.critical("🚀❌ [FATAL] Rust Translator Core module missing. Pure Rust mode is mandatory.")
+    raise e
 import inspect
 import orjson
 import pathlib

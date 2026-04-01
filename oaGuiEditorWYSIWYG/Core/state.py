@@ -10,45 +10,51 @@ from .event_bus import event_bus
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
+from .oaEditorState_rs.compiler_hook import ensure_compiled
+ensure_compiled()
+from .oaEditorState_rs.oaeditorstate_rs import EditorState as RustEditorState
 
 # Specialized logger for StateManager to allow categorized filtering
 sm_logger = logger.bind(category="STATE_MANAGER")
 
 class StateManager:
-    """Manages the central JSON state of the GUI definition."""
+    """Manages the central JSON state of the GUI definition (RUST OPTIMIZED)."""
     _instance = None
 
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(StateManager, cls).__new__(cls)
-            cls._instance._json_data = {}
+            cls._instance._rust_state = RustEditorState()
             cls._instance._file_path = None
-            sm_logger.trace("🧠 StateManager: Singleton Instance Created.")
+            sm_logger.trace("🧠 StateManager: Singleton Instance Created (RUST).")
         return cls._instance
 
     def initialize(self, initial_data, file_path=None):
         """Initializes the state with starting JSON data."""
         sm_logger.info(f"🧠 StateManager: Initialization started. Path: {file_path}")
-        self._json_data = copy.deepcopy(initial_data) if initial_data is not None else {}
+        initial_str = orjson.dumps(initial_data if initial_data is not None else {}).decode()
+        self._rust_state.initialize(initial_str)
         self._file_path = file_path
         
-        root_keys = list(self._json_data.keys())
+        # We need to broadcast the parsed data, so we fetch it back
+        parsed_data = self.get_state()
+        root_keys = list(parsed_data.keys())
         sm_logger.info(f"🧠 StateManager: State loaded with {len(root_keys)} root elements.")
-        sm_logger.trace(f"🧠 StateManager: Root keys: {root_keys}")
         
         sm_logger.trace("🧠 StateManager: Broadcasting initial STATE_UPDATED event...")
-        event_bus.publish("STATE_UPDATED", json_data=self._json_data)
+        event_bus.publish("STATE_UPDATED", json_data=parsed_data)
         sm_logger.success("✅ StateManager: Initialization complete.")
 
     def reset(self):
         """Resets the state manager to an empty state_manager."""
         sm_logger.info("🧠 StateManager: Wiping internal state memory (Reset).")
-        self._json_data = {}
+        self._rust_state.reset()
         self._file_path = None
 
     def get_state(self):
         """Returns the current master JSON data."""
-        return copy.deepcopy(self._json_data)
+        state_str = self._rust_state.get_state()
+        return orjson.loads(state_str)
 
     def update_state(self, new_data, path=None, source=None):
         """
@@ -58,35 +64,21 @@ class StateManager:
         source_name = source.__class__.__name__ if source else "Unknown"
         sm_logger.info(f"🔄 StateManager: Update requested from {source_name}. Path: {path}")
         
-        # ⚡ ROBUSTNESS: Treat empty list or None as full state update
-        if path is None or (isinstance(path, (list, tuple)) and len(path) == 0):
-            self._json_data = copy.deepcopy(new_data)
-            sm_logger.info(f"📝 StateManager: FULL JSON state overwritten by {source_name}.")
-        else:
+        new_data_str = orjson.dumps(new_data).decode()
+        path_list = []
+        if path is not None and not (isinstance(path, (list, tuple)) and len(path) == 0):
             if isinstance(path, str):
-                path = path.split(".")
-            
-            # Navigate to the parent of the target key
-            current = self._json_data
-            try:
-                for i, part in enumerate(path[:-1]):
-                    if part not in current:
-                        sm_logger.trace(f"🧠 StateManager: Creating missing path segment: '{part}'")
-                        current[part] = {}
-                    current = current[part]
+                path_list = path.split(".")
+            else:
+                path_list = list(path)
                 
-                target_key = path[-1]
-                old_val = current.get(target_key, "MISSING")
-                current[target_key] = copy.deepcopy(new_data)
-                
-                sm_logger.info(f"📝 StateManager: Modified '{'.'.join(path)}' (Source: {source_name}).")
-                sm_logger.trace(f"   ↳ Old: {str(old_val)[:100]}...")
-                sm_logger.trace(f"   ↳ New: {str(new_data)[:100]}...")
-            except Exception:
-                sm_logger.exception(f"❌ StateManager Error: Failed to update path {path}.")
+        try:
+            self._rust_state.update_state(path_list, new_data_str)
+        except Exception as e:
+            sm_logger.exception(f"❌ StateManager Error: Failed to update path {path}: {e}")
             
         sm_logger.trace("🧠 StateManager: Broadcasting STATE_UPDATED event to subscribers.")
-        event_bus.publish("STATE_UPDATED", json_data=self._json_data, source=source)
+        event_bus.publish("STATE_UPDATED", json_data=self.get_state(), source=source)
 
     def batch_update(self, updates, source=None):
         """
@@ -96,23 +88,20 @@ class StateManager:
         source_name = source.__class__.__name__ if source else "Unknown"
         sm_logger.info(f"🔄 StateManager: Batch update started from {source_name} ({len(updates)} changes).")
         for i, (new_data, path) in enumerate(updates):
-            if isinstance(path, str):
-                path = path.split(".")
-            
-            current = self._json_data
+            new_data_str = orjson.dumps(new_data).decode()
+            path_list = []
+            if path is not None and not (isinstance(path, (list, tuple)) and len(path) == 0):
+                if isinstance(path, str):
+                    path_list = path.split(".")
+                else:
+                    path_list = list(path)
             try:
-                for part in path[:-1]:
-                    if part not in current: current[part] = {}
-                    current = current[part]
-                
-                target_key = path[-1]
-                current[target_key] = copy.deepcopy(new_data)
-                sm_logger.trace(f"  ↳ [{i+1}/{len(updates)}] Batch Part Update: '{'.'.join(path)}'")
-            except Exception:
-                sm_logger.exception(f"❌ StateManager Error in batch component '{path}'")
+                self._rust_state.update_state(path_list, new_data_str)
+            except Exception as e:
+                sm_logger.error(f"❌ StateManager Batch Error: Failed to update path {path}: {e}")
         
-        sm_logger.trace("🧠 StateManager: Batch complete. Broadcasting STATE_UPDATED.")
-        event_bus.publish("STATE_UPDATED", json_data=self._json_data, source=source)
+        sm_logger.info(f"✅ StateManager: Batch update complete.")
+        event_bus.publish("STATE_UPDATED", json_data=self.get_state(), source=source)
 
     def reorder_element(self, path, direction, source=None):
         """Moves an element up or down within its sibling list."""

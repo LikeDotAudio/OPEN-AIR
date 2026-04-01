@@ -84,8 +84,10 @@ class ProtocolRouter:
         return app_constants.FULL_INSTANCE_ID
 
     @classmethod
-    def get_instance(cls):
+    def get_instance(cls, force_reload=False):
         with cls._lock:
+            if force_reload:
+                cls._instance = None
             if cls._instance is None:
                 cls._instance = cls()
             return cls._instance

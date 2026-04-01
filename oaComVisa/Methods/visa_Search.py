@@ -12,6 +12,23 @@ import re
 import string
 import threading
 import socket
+import sys
+import os
+
+# Add the hyphenated directory to sys.path temporarily to import compiler_hook
+_rs_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Core", "oaVisaCore-rs")
+if _rs_dir not in sys.path:
+    sys.path.insert(0, _rs_dir)
+
+import compiler_hook
+compiler_hook.ensure_compiled()
+
+try:
+    import oavisacore_rs
+except ImportError as e:
+    from loguru import logger
+    logger.critical("🚀❌ [FATAL] Rust VISA Core module missing. Pure Rust mode is mandatory.")
+    raise e
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True

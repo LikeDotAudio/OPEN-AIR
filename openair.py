@@ -61,7 +61,8 @@ def main():
     subprocesses, and finally enters a monitoring loop.
 
     Inputs:
-        sys.argv: Accepts '--core' or '--ui' to bypass the supervisor and
+        sys.argv: Accepts '--core' o
+        r '--ui' to bypass the supervisor and
                  launch a specific partition directly (for debugging).
 
     Outputs:

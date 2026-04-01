@@ -142,6 +142,48 @@ class CommandRouter(tk.Frame):
         self.inspect_text_dest = tk.Text(col2, bg="#000000", fg="#ffff00", font=("Courier", 9), bd=0, highlightthickness=0)
         self.inspect_text_dest.pack(fill=tk.BOTH, expand=True, padx=5, pady=2)
 
+        # --- KEY / LEGEND (Right Sidebar) ---
+        self.legend_frame = tk.Frame(self.inspect_split, bg="#1a1a1a", bd=1, relief="raised", width=200)
+        self.legend_frame.pack(side=tk.RIGHT, fill=tk.Y)
+        self.legend_frame.pack_propagate(False)
+        
+        tk.Label(self.legend_frame, text="🗝️ SYMBOL KEY", font=("Helvetica", 9, "bold"), fg="#ffffff", bg="#333333").pack(fill=tk.X)
+        
+        symbols = [
+            ("🚀", "PUSH", "Network Out"),
+            ("💾", "CACHE", "State Registry"),
+            ("Ⓖ", "GUI", "Local Interface"),
+            ("🅾️", "OSC", "OSC Protocol"),
+            ("🎹", "MIDI", "MIDI Hardware"),
+            ("Ⓜ️", "MQTT", "Broker Reflect"),
+            ("Ⓢ", "SNMP", "Network Infra"),
+            ("🔗", "LINK", "Splink Active")
+        ]
+        for sym, name, desc in symbols:
+            f = tk.Frame(self.legend_frame, bg="#1a1a1a")
+            f.pack(fill=tk.X, padx=5, pady=1)
+            tk.Label(f, text=sym, font=("Helvetica", 10), fg="#00ff00", bg="#1a1a1a", width=2).pack(side=tk.LEFT)
+            tk.Label(f, text=f"{name: <6}", font=("Courier", 8, "bold"), fg="#888888", bg="#1a1a1a").pack(side=tk.LEFT)
+            tk.Label(f, text=desc, font=("Helvetica", 7), fg="#666666", bg="#1a1a1a").pack(side=tk.LEFT, padx=5)
+
+        tk.Label(self.legend_frame, text="🎨 COLOR KEY", font=("Helvetica", 9, "bold"), fg="#ffffff", bg="#333333").pack(fill=tk.X, pady=(10, 0))
+        
+        colors = [
+            ("HERE", "#00ff00", None, "This Machine"),
+            ("REMOTE", "yellow", "#440000", "Other Machine"),
+            ("MUTATION", "red", "#440000", "Hardware Ctrl"),
+            ("MIDI", "#ff00ff", None, "MIDI Traffic"),
+            ("OSC", "#00ffff", None, "OSC Traffic"),
+            ("SYSTEM", "#888888", None, "Internal/Init"),
+            ("SPLINK", "#a0a0a0", "#1a1a1a", "Brokered Link")
+        ]
+        for name, fg, bg, desc in colors:
+            f = tk.Frame(self.legend_frame, bg="#1a1a1a")
+            f.pack(fill=tk.X, padx=5, pady=1)
+            lbl = tk.Label(f, text=name, font=("Courier", 8, "bold"), fg=fg, bg=bg if bg else "#1a1a1a", width=8)
+            lbl.pack(side=tk.LEFT)
+            tk.Label(f, text=desc, font=("Helvetica", 7), fg="#666666", bg="#1a1a1a").pack(side=tk.LEFT, padx=5)
+
         # 3. Footer
         btn_frame = tk.Frame(self, bg="#2b2b2b")
         btn_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=5)

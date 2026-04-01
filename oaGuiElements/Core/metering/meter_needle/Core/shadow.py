@@ -8,6 +8,12 @@ import tkinter as tk
 import math
 from .needle import NeedleConfig
 
+try:
+    from oaneedlegeometry_rs import NeedleGeometry
+    needle_geo_rs = NeedleGeometry()
+except ImportError:
+    needle_geo_rs = None
+
 class ShadowDrawer:
     """
     Draws a cast shadow for the needle with perspective.
@@ -39,6 +45,46 @@ class ShadowDrawer:
     @staticmethod
     def draw_with_config(canvas, cx, cy, config: NeedleConfig):
         """Unified entry point for drawing the shadow."""
+        if needle_geo_rs:
+            # ⚡ OFF-LOAD to RUST
+            geo = needle_geo_rs.calculate_shadow_geometry(cx, cy, config.__dict__)
+            
+            # 2. Try Optimization (Update existing)
+            existing = canvas.find_withtag(config.tag)
+            if existing:
+                g_type = geo.get("type")
+                if g_type == "teardrop":
+                    # Teardrop has 3 parts in Python, but we use a single tag
+                    # If we find 3 items with this tag, we can update them
+                    if len(existing) == 3:
+                        canvas.coords(existing[0], *geo["line1"])
+                        canvas.coords(existing[1], *geo["poly"])
+                        canvas.coords(existing[2], *geo["line2"])
+                        return
+                elif g_type in ["polygon", "line"] and len(existing) == 1:
+                    canvas.coords(existing[0], *geo["coords"])
+                    return
+
+            # 3. Full redraw
+            if existing:
+                canvas.delete(config.tag)
+
+            g_type = geo.get("type")
+            if g_type == "teardrop":
+                canvas.create_line(*geo["line1"], width=config.thick, fill=ShadowDrawer.FILL_COLOR, 
+                                   capstyle=tk.ROUND, tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
+                canvas.create_polygon(geo["poly"], fill=ShadowDrawer.FILL_COLOR, 
+                                       outline="", smooth=True, tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
+                canvas.create_line(*geo["line2"], width=config.thick, fill=ShadowDrawer.FILL_COLOR, 
+                                   capstyle=tk.ROUND, tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
+            elif g_type == "polygon":
+                canvas.create_polygon(geo["coords"], fill=ShadowDrawer.FILL_COLOR, 
+                                       outline="", tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
+            else: # line
+                canvas.create_line(*geo["coords"], width=config.thick, fill=ShadowDrawer.FILL_COLOR, 
+                                   capstyle=tk.ROUND, tags=(config.tag, "vu_shadow"), stipple=ShadowDrawer.STIPPLE_PATTERN)
+            return
+
         # 1. Prepare values
         val = max(min(config.val, config.max_val), config.min_val)
         range_val = config.max_val - config.min_val

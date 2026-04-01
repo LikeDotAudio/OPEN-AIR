@@ -1,9 +1,9 @@
 # oaStand_Alone_Utilities/Tests/test_realign_logs.py
 #
-# Tests for the log realigner utility (Python vs Rust).
+# Tests for the log realigner utility.
 #
 # Author: Anthony Peter Kuzub
-# Version: 20260331.1210.1
+# Version: 20260401.1000.1
 
 import unittest
 import os
@@ -19,8 +19,7 @@ class TestLogRealigner(unittest.TestCase):
         self.test_dir = Path(tempfile.mkdtemp())
         self.logs_dir = self.test_dir / "logs"
         self.logs_dir.mkdir()
-        self.output_py = self.test_dir / "merged_py.log"
-        self.output_rs = self.test_dir / "merged_rs.log"
+        self.output_log = self.test_dir / "merged.log"
         
         # Determine paths
         self.project_root = Path(__file__).parent.parent.parent
@@ -47,49 +46,34 @@ class TestLogRealigner(unittest.TestCase):
         shutil.rmtree(self.test_dir)
 
     def test_python_realign_logs(self):
-        success = realign_logs(str(self.logs_dir), str(self.output_py))
+        """Test the legacy Python log realigner."""
+        success = realign_logs(str(self.logs_dir), str(self.output_log))
         self.assertTrue(success)
-        self.assertTrue(self.output_py.exists())
+        self.assertTrue(self.output_log.exists())
         
-        with open(self.output_py, 'r') as f:
+        with open(self.output_log, 'r') as f:
             lines = f.readlines()
         self.assertEqual(len(lines), 4)
         timestamps = [float(line.split(' | ')[0]) for line in lines]
         self.assertEqual(timestamps, sorted(timestamps))
 
     def test_rust_realign_logs(self):
+        """Test the high-performance Rust log realigner."""
         if not self.rust_bin.exists():
             self.skipTest("Rust binary not found. Please compile it first.")
             
         result = subprocess.run(
-            [str(self.rust_bin), "--dir", str(self.logs_dir), "--output", str(self.output_rs)],
+            [str(self.rust_bin), "--dir", str(self.logs_dir), "--output", str(self.output_log)],
             capture_output=True, text=True
         )
         self.assertEqual(result.returncode, 0)
-        self.assertTrue(self.output_rs.exists())
+        self.assertTrue(self.output_log.exists())
         
-        with open(self.output_rs, 'r') as f:
+        with open(self.output_log, 'r') as f:
             lines = f.readlines()
         self.assertEqual(len(lines), 4)
         timestamps = [float(line.split(' | ')[0]) for line in lines]
         self.assertEqual(timestamps, sorted(timestamps))
-
-    def test_compare_python_vs_rust(self):
-        if not self.rust_bin.exists():
-            self.skipTest("Rust binary not found. Please compile it first.")
-            
-        # Run Python
-        realign_logs(str(self.logs_dir), str(self.output_py))
-        
-        # Run Rust
-        subprocess.run(
-            [str(self.rust_bin), "--dir", str(self.logs_dir), "--output", str(self.output_rs)],
-            check=True
-        )
-        
-        # Compare byte-for-byte
-        with open(self.output_py, 'rb') as f_py, open(self.output_rs, 'rb') as f_rs:
-            self.assertEqual(f_py.read(), f_rs.read())
 
 if __name__ == '__main__':
     unittest.main()

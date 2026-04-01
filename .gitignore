@@ -1,11 +1,36 @@
+# General
 *.log
 *.zip
 *.pyc
-/__pycache__/
+__pycache__/
 .crawler/
+.DS_Store
 
-# Ignore all Open-Air Data directories
+# IDEs
+.vscode/
+.idea/
+
+# Open-Air Data (Vaults)
 oaData*/
 oaDataAudits/
 oaDataLogs/
+oaDataCache/
+oaDataSNMP/
+oaDataSplinks/
+oaDataRunningFiles/
+
+# Python
+dist/
+build/
+*.egg-info/
+venv/
+.venv/
+env/
 .pytest_cache/
+
+# Rust / Compiled Libraries
+target/
+*.so
+*.dylib
+*.dll
+*.pyd

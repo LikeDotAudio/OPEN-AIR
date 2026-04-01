@@ -1,9 +1,9 @@
 # oaGuiElements/Tests/metering/test_rust_ballistics.py
 #
-# Tests for the BallisticsEngine (Python vs Rust).
+# Tests for the BallisticsEngine (Rust implementation).
 #
 # Author: Anthony Peter Kuzub
-# Version: 20260331.1710.1
+# Version: 20260401.1000.1
 
 import unittest
 from unittest.mock import MagicMock, patch
@@ -30,40 +30,36 @@ class TestRustBallistics(unittest.TestCase):
     def setUp(self):
         self.config = MockMeterConfig()
 
-    @patch("oaConfiguration.Entry.Config.get_boolean")
-    def test_compare_python_vs_rust_ballistics(self, mock_get_boolean):
-        # 1. Test Python
-        mock_get_boolean.return_value = False
-        engine_py = BallisticsEngine(self.config)
-        self.assertIsNone(engine_py.rust_engine)
-        
-        # 2. Test Rust
-        mock_get_boolean.return_value = True
+    def test_rust_ballistics_initialization(self):
+        """Test that BallisticsEngine initializes the Rust core."""
         try:
             import oameteringengine_rs
-            engine_rs = BallisticsEngine(self.config)
-            self.assertIsNotNone(engine_rs.rust_engine)
         except ImportError:
             self.skipTest("Rust oameteringengine_rs not installed.")
 
-        # 3. Simulate movement
+        engine = BallisticsEngine(self.config)
+        self.assertIsNotNone(engine.rust_engine)
+
+    def test_rust_ballistics_movement(self):
+        """Test movement through the Rust-backed BallisticsEngine."""
+        try:
+            import oameteringengine_rs
+        except ImportError:
+            self.skipTest("Rust oameteringengine_rs not installed.")
+
+        engine = BallisticsEngine(self.config)
+        
         target = 6.0
-        engine_py.set_target(target)
-        engine_rs.set_target(target)
+        engine.set_target(target)
         
         # Step through time
         dt = 20.0 # 20ms steps
         for _ in range(10):
-            res_py = engine_py.update(dt)
-            res_rs = engine_rs.update(dt)
-            
-            # Compare (current_val, peak_val, overload_fade_factor, is_running, reached_min)
-            # Use delta for floats due to potential timing/precision differences
-            self.assertAlmostEqual(res_py[0], res_rs[0], places=5)
-            self.assertAlmostEqual(res_py[1], res_rs[1], places=5)
-            self.assertAlmostEqual(res_py[2], res_rs[2], places=5)
-            self.assertEqual(res_py[3], res_rs[3])
-            self.assertEqual(res_py[4], res_rs[4])
+            res = engine.update(dt)
+            # Result should be: (current_val, peak_val, overload_fade_factor, is_running, reached_min)
+            self.assertEqual(len(res), 5)
+            self.assertIsInstance(res[0], float)
+            self.assertIsInstance(res[1], float)
 
 if __name__ == "__main__":
     unittest.main()

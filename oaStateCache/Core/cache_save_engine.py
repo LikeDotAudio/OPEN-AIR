@@ -8,6 +8,13 @@ import threading
 import queue
 import time
 from ..FileReaders import cache_io_handler
+import oaOchestration.Constants.project_paths as app_constants
+
+try:
+    from oadiskflusher_rs import DiskFlusher
+    flusher_instance = DiskFlusher()
+except ImportError:
+    flusher_instance = None
 
 class CacheSaveEngine:
     """Implements a debounced, write-behind persistence engine for the state cache."""
@@ -53,6 +60,12 @@ class CacheSaveEngine:
                     if self.pending_deltas and (now - self.last_activity_time >= self.debounce_delay or now - last_commit >= self.max_stale_time):
                         cnt = len(self.pending_deltas)
                         self.cache.update(self.pending_deltas); self.pending_deltas.clear()
-                        cache_io_handler.save_cache(self.cache); last_commit = now
+                        
+                        if flusher_instance:
+                            flusher_instance.flush_async(self.cache, str(app_constants.DEVICE_STATE_CACHE_PATH))
+                        else:
+                            cache_io_handler.save_cache(self.cache)
+                            
+                        last_commit = now
                         if self.debug: self.logger.success(f"💾✍️ [CACHE] Debounced Commit: {cnt} deltas saved.")
             except Exception: self.logger.exception("🧠💾❌ [ERROR] State cache save worker failed")

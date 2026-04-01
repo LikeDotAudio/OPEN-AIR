@@ -1,21 +1,20 @@
 # Tests/test_protocol_router.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 1.0.1
 #
-# Description: Brief summary of purpose
+# Description: Unit tests for the Protocol Router with Rust core.
 
 import unittest
 from unittest.mock import MagicMock, patch
-import queue
-import time
 from oaComBroker.Core.protocol_router.manager import ProtocolRouter
 
 class TestProtocolRouter(unittest.TestCase):
-    def setUp(self):
+    @patch("oaComBroker.Core.protocol_router.router.RustCoreRouter")
+    def setUp(self, mock_rust_router):
         # Reset singleton for testing
         ProtocolRouter._instance = None
-        self.router = ProtocolRouter.get_instance()
-        self.router.rust_router = None  # Force Python queue for testing
+        self.mock_rust = mock_rust_router.return_value
+        self.router = ProtocolRouter.get_instance(force_reload=True)
         self.mqtt_manager = MagicMock()
         self.router.set_mqtt_manager(self.mqtt_manager)
 
@@ -28,12 +27,14 @@ class TestProtocolRouter(unittest.TestCase):
         instance2 = ProtocolRouter.get_instance()
         self.assertIs(instance1, instance2)
 
-    def test_ingest_puts_to_queue(self):
-        """Test that ingest puts messages into the inbound queue with the correct schema."""
+    def test_ingest_pushes_to_rust_router(self):
+        """Test that ingest pushes messages into the rust router with the correct schema."""
         self.router.ingest("MQTT", "test/topic", "test_value")
-        self.assertFalse(self.router.inbound_queue.empty())
         
-        msg = self.router.inbound_queue.get()
+        # Verify push_inbound was called
+        self.assertTrue(self.mock_rust.push_inbound.called)
+        msg = self.mock_rust.push_inbound.call_args[0][0]
+        
         self.assertEqual(msg["topic"], "test/topic")
         self.assertEqual(msg["val"], "test_value")
         self.assertEqual(msg["source"], "MQTT")

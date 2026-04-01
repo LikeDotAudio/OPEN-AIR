@@ -3,8 +3,7 @@
 # Version: 20260314.120000.REV01
 #
 # Description: managers/Display/loader/blueprint_loader.py
-
-"""
+\"\"\"
 blueprint_loader.py - High-Performance GUI Configuration Loader.
 
 Purpose:
@@ -18,6 +17,25 @@ Responsibilities:
     - Implement MD5-based hash verification to detect configuration changes
       and optimize re-renders.
     - Recursively merge specific tab configurations with the global
+\"\"\"
+
+import sys
+import os
+
+# Add the hyphenated directory to sys.path temporarily to import compiler_hook
+_rs_dir = os.path.join(os.path.dirname(__file__), "oaBlueprintParser-rs")
+if _rs_dir not in sys.path:
+    sys.path.insert(0, _rs_dir)
+
+import compiler_hook
+compiler_hook.ensure_compiled()
+
+try:
+    import oablueprintparser_rs
+except ImportError as e:
+    from loguru import logger
+    logger.critical("🚀❌ [FATAL] Rust Blueprint Parser module missing. Pure Rust mode is mandatory.")
+    raise e
       'default_panel.json' to ensure consistent industrial styling.
     - Pre-normalize the entire configuration tree to "flatten" widget
       metadata, reducing overhead during the grid-rendering phase.

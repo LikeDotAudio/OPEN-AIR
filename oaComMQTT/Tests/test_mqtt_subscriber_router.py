@@ -1,16 +1,19 @@
 # Tests/test_mqtt_subscriber_router.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 1.0.1
 #
-# Description: Brief summary of purpose
+# Description: Unit tests for the Mqtt Subscriber Router with Rust core.
 
 import unittest
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
 from oaComMQTT.Core.mqtt_message import MqttMessage
 
 class TestMqttSubscriberRouter(unittest.TestCase):
-    def setUp(self):
+    @patch("oaComMQTT.Managers.mqtt_subscriber_router.MqttRouter")
+    @patch("oaComMQTT.Managers.mqtt_connection.MqttConnectionManager")
+    def setUp(self, mock_conn, mock_router):
+        self.mock_router = mock_router.return_value
         self.router = MqttSubscriberRouter()
 
     def test_subscribe_exact_topic(self):
@@ -19,8 +22,13 @@ class TestMqttSubscriberRouter(unittest.TestCase):
         topic = "test/exact"
         self.router.subscribe_to_topic(topic, callback)
         
+        # Verify Rust router was called
+        self.mock_router.subscribe.assert_called_once_with(topic, callback)
+        
         # Simulate message
         msg = MqttMessage(topic=topic, payload="hello", qos=0, retain=False)
+        self.mock_router.match_topic.return_value = [callback]
+        
         self.router._on_message(None, None, msg)
         
         callback.assert_called_once_with(msg)
@@ -33,6 +41,8 @@ class TestMqttSubscriberRouter(unittest.TestCase):
         
         # Simulate message matching wildcard
         msg = MqttMessage(topic="test/anything", payload="hello", qos=0, retain=False)
+        self.mock_router.match_topic.return_value = [callback]
+        
         self.router._on_message(None, None, msg)
         
         callback.assert_called_once_with(msg)
@@ -46,27 +56,12 @@ class TestMqttSubscriberRouter(unittest.TestCase):
         self.router.subscribe_to_topic(topic, cb2)
         
         msg = MqttMessage(topic=topic, payload="data", qos=0, retain=False)
+        self.mock_router.match_topic.return_value = [cb1, cb2]
+        
         self.router._on_message(None, None, msg)
         
         cb1.assert_called_once_with(msg)
         cb2.assert_called_once_with(msg)
-
-    def test_match_cache(self):
-        """Test that matching results are cached."""
-        callback = MagicMock()
-        filter = "sensors/+/temp"
-        self.router.subscribe_to_topic(filter, callback)
-        
-        topic = "sensors/room1/temp"
-        msg = MqttMessage(topic=topic, payload="22", qos=0, retain=False)
-        
-        # First call (cache miss)
-        self.router._on_message(None, None, msg)
-        self.assertEqual(len(self.router._match_cache), 1)
-        
-        # Second call (cache hit)
-        self.router._on_message(None, None, msg)
-        self.assertEqual(callback.call_count, 2)
 
 if __name__ == "__main__":
     unittest.main()

@@ -8,6 +8,12 @@ import math
 from dataclasses import dataclass
 from typing import List, Tuple
 
+try:
+    from oaneedlegeometry_rs import NeedleGeometry
+    needle_geo_rs = NeedleGeometry()
+except ImportError:
+    needle_geo_rs = None
+
 from oaGuiElements.Core.metering.meter_needle.constants import (
     SAFE_MARGIN, SHAPE_MULTIPLIERS, SHAPE_Y_SHIFTS,
     SQUIRCLE_N, SQUIRCLE_WIDTH_FACTOR, SQUIRCLE_HEIGHT_FACTOR, 
@@ -62,6 +68,9 @@ class BezelGeometry:
 
     @staticmethod
     def get_bezel_points(cx, cy, w, h, shape, line_width, shrink_px=0):
+        if needle_geo_rs:
+            return needle_geo_rs.get_bezel_points(cx, cy, w, h, shape, line_width, shrink_px)
+
         req = BezelRequest(cx, cy, w, h, shape, line_width, shrink_px)
         return BezelGeometry._calculate_points(req)
 

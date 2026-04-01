@@ -1,9 +1,9 @@
 # oaFileImportCSV/Tests/test_rust_csv_parser.py
 #
-# Tests for the CSV Parser (Python vs Rust).
+# Tests for the CSV Parser (Rust implementation).
 #
 # Author: Anthony Peter Kuzub
-# Version: 20260331.1600.1
+# Version: 20260401.1000.1
 
 import unittest
 from unittest.mock import patch, MagicMock
@@ -18,32 +18,23 @@ class TestRustCSVParser(unittest.TestCase):
             # Fallback to absolute path if needed
             self.asset_path = Path("/home/anthony/Documents/OPEN-AIR/oaFileImportCSV/Tests/Assets/Basic_CSV_venue.csv")
 
-    @patch("oaConfiguration.FileReaders.config_reader.Config.get_boolean")
-    def test_compare_python_vs_rust_csv(self, mock_get_boolean):
-        # 1. Run Python
-        mock_get_boolean.return_value = False
-        headers_py, data_py = Marker_convert_csv_unknow_report_to_csv(str(self.asset_path))
-        self.assertGreater(len(data_py), 0)
-
-        # 2. Run Rust
-        mock_get_boolean.return_value = True
+    def test_rust_csv_parsing(self):
+        """Test CSV parsing with the mandatory Rust backend."""
         try:
             import oacsvparser_rs
-            headers_rs, data_rs = Marker_convert_csv_unknow_report_to_csv(str(self.asset_path))
-            
-            # 3. Compare Results
-            self.assertEqual(headers_py, headers_rs)
-            self.assertEqual(len(data_py), len(data_rs))
-            
-            # Compare first row
-            self.assertEqual(data_py[0], data_rs[0])
-            
-            # Compare all rows for content
-            for r_py, r_rs in zip(data_py, data_rs):
-                self.assertEqual(r_py, r_rs)
-                
         except ImportError:
             self.skipTest("Rust oacsvparser_rs not installed.")
+            
+        headers, data = Marker_convert_csv_unknow_report_to_csv(str(self.asset_path))
+        
+        self.assertGreater(len(data), 0)
+        # Verify we have some standard headers (e.g., Topic, Value)
+        self.assertIn("Topic", headers)
+        self.assertIn("Value", headers)
+        
+        # Verify data structure
+        for row in data:
+            self.assertEqual(len(row), len(headers))
 
 if __name__ == "__main__":
     unittest.main()

@@ -5,6 +5,23 @@
 # Description: Brief summary of purpose
 
 import math
+import sys
+import os
+
+# Add the hyphenated directory to sys.path temporarily to import compiler_hook
+_rs_dir = os.path.join(os.path.dirname(__file__), "oaGeometryMath-rs")
+if _rs_dir not in sys.path:
+    sys.path.insert(0, _rs_dir)
+
+import compiler_hook
+compiler_hook.ensure_compiled()
+
+try:
+    import oageometrymath_rs
+except ImportError as e:
+    from loguru import logger
+    logger.critical("🚀❌ [FATAL] Rust Geometry Math module missing. Pure Rust mode is mandatory.")
+    raise e
 
 class UIGeometryMath:
     """Centralized math utilities for UI coordinate and value transformations."""

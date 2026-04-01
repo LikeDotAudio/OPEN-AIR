@@ -1,46 +1,46 @@
 # Core/ptp_packet_parser.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260401.1200.1
 #
-# Description: Brief summary of purpose
+# Description: Wrapper for High-Performance Rust PTP Packet Parser
 
 import time
+import sys
+import os
 from scapy.all import IP, UDP
+from loguru import logger
+
+# Add the hyphenated directory to sys.path temporarily to import compiler_hook
+_rs_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Methods", "oaPtpParser-rs")
+if _rs_dir not in sys.path:
+    sys.path.insert(0, _rs_dir)
+
+import compiler_hook
+compiler_hook.ensure_compiled()
+
+try:
+    import oaptpparser_rs
+except ImportError as e:
+    logger.critical("🚀❌ [FATAL] Rust PTP Parser module missing. Pure Rust mode is mandatory.")
+    raise e
 
 class PTPPacketParser:
-    """Standardizes the extraction of PTP header fields into structured data."""
-
-    MSG_TYPES = {
-        0: "Sync", 1: "Delay_Req", 2: "Pdelay_Req", 3: "Pdelay_Resp",
-        8: "Follow_Up", 9: "Delay_Resp", 10: "Pdelay_Resp_Follow_Up",
-        11: "Announce", 12: "Signaling", 13: "Management"
-    }
+    """Standardizes the extraction of PTP header fields into structured data using Rust."""
 
     @classmethod
-    def tear_apart(cls, pkt, ptp_layer):
-        """Extracts PTP fields, IPs, and timestamps into a flat dictionary."""
-        try: m_id = ptp_layer.messageType
-        except: m_id = -1
+    def tear_apart(cls, pkt, ptp_layer=None):
+        """
+        Extracts PTP fields, IPs, and timestamps into a flat dictionary via Rust.
+        If `ptp_layer` is provided, we can still parse it, but we prefer raw bytes.
+        """
+        # If we didn't extract raw payload in ptp.py, do it here
+        if pkt.haslayer(UDP):
+            payload = bytes(pkt[UDP].payload)
+            src_ip = pkt[IP].src if pkt.haslayer(IP) else "Unknown"
+            dst_ip = pkt[IP].dst if pkt.haslayer(IP) else "Unknown"
+            udp_port = pkt[UDP].dport
+            
+            # Offload heavy lifting to Rust
+            return oaptpparser_rs.parse_packet(payload, src_ip, dst_ip, udp_port)
         
-        m_type = cls.MSG_TYPES.get(m_id, f"Unknown ({m_id})")
-        domain = getattr(ptp_layer, "domainNumber", 0)
-        seq_id = getattr(ptp_layer, "sequenceId", 0)
-        port_id = getattr(ptp_layer, "sourcePortIdentity", b"")
-
-        return {
-            "timestamp": time.time(),
-            "source_ip": pkt[IP].src if IP in pkt else "Unknown",
-            "dest_ip": pkt[IP].dst if IP in pkt else "Unknown",
-            "udp_port": pkt[UDP].dport,
-            "message_type": m_type,
-            "domain": domain,
-            "sequence_id": seq_id,
-            "clock_identity": cls.format_clock_id(port_id),
-        }
-
-    @staticmethod
-    def format_clock_id(raw):
-        """Converts raw sourcePortIdentity bytes into a readable clock string."""
-        if isinstance(raw, bytes) and len(raw) >= 10:
-            return f"{raw[:8].hex(':')} (Port {int.from_bytes(raw[8:], 'big')})"
-        return str(raw)
+        return None

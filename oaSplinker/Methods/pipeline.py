@@ -42,8 +42,10 @@ class SplinkPipeline:
                        f"🚀❌ [FATAL] Rust SplinkPipeline init failed for {self.splink['id']}: {e}", "ERROR")
             raise e
 
-    def process(self, value):
+    def process(self, value, state=None, direction="FORWARD"):
         """Processes a value through the pipeline."""
+        if state is None: state = {}
         if self.rust_pipeline:
-            return self.rust_pipeline.process(value)
+            # Rust signature: process(value, _splink, state, direction)
+            return self.rust_pipeline.process(value, self.splink, state, direction)
         return value

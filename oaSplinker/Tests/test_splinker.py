@@ -1,8 +1,8 @@
 # Tests/test_splinker.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 1.0.1
 #
-# Description: Brief summary of purpose
+# Description: Unit tests for the Control Broker.
 
 import unittest
 from unittest.mock import MagicMock
@@ -10,6 +10,8 @@ from oaSplinker.Core.splinker import ControlBroker
 
 class TestSplinker(unittest.TestCase):
     def setUp(self):
+        # Reset singleton for testing
+        ControlBroker._instance = None
         self.state_cache_manager = MagicMock()
         self.mqtt_manager = MagicMock()
         self.broker = ControlBroker.get_instance(
@@ -25,8 +27,8 @@ class TestSplinker(unittest.TestCase):
 
     def test_initialization(self):
         """Test broker initialization."""
-        self.assertTrue(hasattr(self.broker, "splinks"))
-        self.assertIsInstance(self.broker.splinks, list)
+        self.assertTrue(hasattr(self.broker, "registry"))
+        self.assertIsInstance(self.broker.registry.all_splinks(), list)
         self.assertFalse(self.broker.panic_active)
 
     def test_add_monitor_callback(self):

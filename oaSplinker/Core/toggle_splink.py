@@ -2,11 +2,12 @@
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
-# Description: Brief summary of purpose
+# Description: Toggles the active state of a splink.
 
 def toggle_splink(self, splink_id):
-    for s in self.splinks:
-        if s["id"] == splink_id:
-            s["active"] = not s["active"]
-            self._save_splink(s)
-            break
+    s = self.registry.get_splink_by_id(splink_id)
+    if s:
+        s["active"] = not s.get("active", False)
+        self.registry.update_splink(splink_id, s)
+        self._save_splink(s)
+        self.publish_splinks()

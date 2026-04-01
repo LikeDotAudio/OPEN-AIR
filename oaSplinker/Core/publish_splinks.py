@@ -14,4 +14,4 @@ def publish_splinks(self):
     
     # ⚡ INGEST: Pass the status update to the router for broadcast
     # This ensures it's wrapped with GUID and Partition correctly.
-    router.ingest("SPLINKER", "OPEN-AIR/System/Status/Splinker/List", self.splinks)
+    router.ingest("SPLINKER", "OPEN-AIR/System/Status/Splinker/List", self.registry.all_splinks())

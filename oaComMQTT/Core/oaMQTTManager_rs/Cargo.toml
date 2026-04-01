@@ -1,0 +1,15 @@
+[package]
+name = "oamqttmanager-rs"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "oamqttmanager_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.21.0", features = ["extension-module"] }
+dashmap = "5.4"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+regex = "1.10"

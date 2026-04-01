@@ -9,10 +9,10 @@ import time
 def create_splink(self):
     new_id = f"SPLINK_{int(time.time() * 1000)}"
     splink = {
-        "id": new_id, "source": None, "dest": None, "mode": "BOTH",
+        "id": new_id, "source": "", "dest": None, "mode": "BOTH",
         "active": True, "label": f"New Splink ({new_id})", "handlers": []
     }
-    self.splinks.append(splink)
+    self.registry.add_splink(splink["source"], splink)
     self._save_splink(splink)
     
     # ⚡ FIREHOSE: Ingest creation event for visibility

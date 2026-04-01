@@ -40,9 +40,11 @@ class ControlBroker:
         self._initialized = True
         
         from ..Constants.constants import SPLINKER_STORAGE_PATH
+        from .splink_registry import SplinkRegistry
+        
         self.state_cache_manager = state_cache_manager
         self.mqtt_manager = mqtt_manager
-        self.splinks = []
+        self.registry = SplinkRegistry()
         self.splink_states = {}
         
         self.learning_source = False
@@ -53,13 +55,8 @@ class ControlBroker:
         self._monitor_callbacks = []
         
         # ⚡ LOOP PREVENTION: Track processed events to break feedback cycles
-        # (ts, topic, splink_id, direction) -> bool
         self.processed_events = {}
         self._cache_lock = threading.Lock()
-        
-        # ⚡ EXECUTION LOCKS: Prevent re-entry per splink
-        self.execution_locks = {} # splink_id -> threading.Lock
-        self._exec_registry_lock = threading.Lock()
         
         # ⚡ PANIC MODE: Emergency stop for feedback loops
         self.panic_active = False

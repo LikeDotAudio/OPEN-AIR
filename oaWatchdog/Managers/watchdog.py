@@ -1,3 +1,5 @@
+import sys
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Managers/watchdog.py
@@ -8,7 +10,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 import threading
 import time
-import sys
 import os as _os
 import traceback
 

@@ -1,3 +1,5 @@
+import os
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Managers/discovery_orchestrator.py
@@ -6,7 +8,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 # Description: High-level orchestrator for VISA device discovery.
 
-import os
 import orjson
 from loguru import logger
 from ..Workers.visa_scanner import VisaScanner

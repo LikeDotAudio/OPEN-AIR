@@ -1,3 +1,7 @@
+import sys
+    sys.path.insert(0, str(root_path))
+
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # 44_REST/gui_REST.py
@@ -9,7 +13,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 import tkinter as tk
 from tkinter import ttk
 import datetime
-import sys
 import webbrowser
 from pathlib import Path
 
@@ -22,8 +25,6 @@ for parent in current_path.parents:
         break
 
 if str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
-
 import oaComREST.Entry as REST_MODULE
 
 # --- Standard Debug Logging Setup ---

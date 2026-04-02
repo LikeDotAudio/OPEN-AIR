@@ -1,3 +1,5 @@
+import os
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Workers/agent_static_ip_prober.py
@@ -9,7 +11,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 import urllib.request
 import urllib.parse
 import re
-import os
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True

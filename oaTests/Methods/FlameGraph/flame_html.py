@@ -1,3 +1,5 @@
+import os
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Methods/FlameGraph/flame_html.py
@@ -26,7 +28,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # - Report Orchestrator: Final stage of the FlameGraph pipeline.
 # - UI Component Assembler: Merges SVG and statistical data into a single file.
 
-import os
 from pathlib import Path
 from loguru import logger
 

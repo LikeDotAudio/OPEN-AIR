@@ -1,3 +1,11 @@
+import pathlib
+import os
+import sys
+project_root = pathlib.Path(__file__).resolve().parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # openair.py
@@ -31,19 +39,12 @@ Constraints:
       'oaGuiManager/Managers/open_air_ui.py'.
 """
 
-import sys
-import os
 import time
 import subprocess
-import pathlib
 import signal
 
 # Ensure the root directory is in the search path for local module imports.
 # Since this script is in the project root, project_root IS the parent directory.
-project_root = pathlib.Path(__file__).resolve().parent
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
-
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 from oaOchestration.Core.path_initializer import initialize_paths

@@ -1,3 +1,5 @@
+import sys
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Workers/CleanupApps/ClearMQTT.py
@@ -8,7 +10,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 import socket
 import time
-import sys
 import argparse
 import logging
 import paho.mqtt.client as mqtt

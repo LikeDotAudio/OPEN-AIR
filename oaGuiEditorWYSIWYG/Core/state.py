@@ -26,13 +26,15 @@ class StateManager:
             cls._instance = super(StateManager, cls).__new__(cls)
             cls._instance._rust_state = RustEditorState()
             cls._instance._file_path = None
+            cls._instance._original_state = {}
             sm_logger.trace("🧠 StateManager: Singleton Instance Created (RUST).")
         return cls._instance
 
     def initialize(self, initial_data, file_path=None):
         """Initializes the state with starting JSON data."""
         sm_logger.info(f"🧠 StateManager: Initialization started. Path: {file_path}")
-        initial_str = orjson.dumps(initial_data if initial_data is not None else {}).decode()
+        self._original_state = copy.deepcopy(initial_data if initial_data is not None else {})
+        initial_str = orjson.dumps(self._original_state).decode()
         self._rust_state.initialize(initial_str)
         self._file_path = file_path
         
@@ -55,6 +57,10 @@ class StateManager:
         """Returns the current master JSON data."""
         state_str = self._rust_state.get_state()
         return orjson.loads(state_str)
+
+    def get_original_state(self):
+        """Returns the original JSON data loaded during initialization."""
+        return copy.deepcopy(self._original_state)
 
     def update_state(self, new_data, path=None, source=None):
         """

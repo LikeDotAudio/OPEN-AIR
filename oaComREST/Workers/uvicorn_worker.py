@@ -1,3 +1,5 @@
+import sys
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # oaComREST/Workers/uvicorn_worker.py
@@ -7,7 +9,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # Description: Background thread for running the Uvicorn ASGI server.
 
 import threading
-import sys
 import time
 try:
     import uvicorn

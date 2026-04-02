@@ -1,3 +1,5 @@
+import sys
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # 1588_PTP_Monitor/ptp_monitor.py
@@ -9,7 +11,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 import tkinter as tk
 from tkinter import ttk
 import datetime
-import sys
 from pathlib import Path
 from loguru import logger
 

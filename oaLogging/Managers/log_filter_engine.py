@@ -1,3 +1,5 @@
+import sys
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Managers/log_filter_engine.py
@@ -26,7 +28,6 @@ Dependencies:
 """
 
 import json
-import sys
 from loguru import logger
 from ..Core.logger import initialize_logging, get_logger, quarantine_logger # Assuming logger module is accessible
 # We need to import the MQTT router to subscribe to topics.

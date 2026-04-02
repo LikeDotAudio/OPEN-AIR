@@ -1,3 +1,12 @@
+import pathlib
+import os
+import sys
+current_dir = pathlib.Path(__file__).resolve().parent
+project_root = current_dir.parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # oaComBroker/Core/open_air_core.py
@@ -30,17 +39,9 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # - Requires network access for MQTT.
 # - Depends on 'config.ini' presence.
 
-import sys
-import os
 import time
-import pathlib
 
 # Ensure the root directory is in the search path for local module imports.
-current_dir = pathlib.Path(__file__).resolve().parent
-project_root = current_dir.parent.parent
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
-
 from oaConfiguration.FileReaders.config_reader import Config
 from oaLogging.Core.logger import initialize_logging, set_log_directory, CORE_LOGGER
 from loguru import logger

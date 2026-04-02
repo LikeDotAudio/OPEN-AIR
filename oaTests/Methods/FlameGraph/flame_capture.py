@@ -1,3 +1,5 @@
+import sys
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Methods/FlameGraph/flame_capture.py
@@ -30,7 +32,6 @@ import cProfile
 import pstats
 import threading
 import gc
-import sys
 
 def kill_all_profilers():
     """Safety cleanup: stops any dangling profilers in the environment."""

@@ -1,3 +1,5 @@
+import os
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/active_marker_tune_and_collect.py
@@ -6,7 +8,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 # Description: Modularized Marker Go-Getter Worker.
 
-import os
 import orjson
 import threading
 import time

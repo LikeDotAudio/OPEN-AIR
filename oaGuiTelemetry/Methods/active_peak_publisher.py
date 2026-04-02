@@ -1,3 +1,5 @@
+import os
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/active_peak_publisher.py
@@ -6,7 +8,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 # Description: Event-driven worker that transforms flat marker data into a hierarchical
 
-import os
 import orjson
 import datetime
 import math

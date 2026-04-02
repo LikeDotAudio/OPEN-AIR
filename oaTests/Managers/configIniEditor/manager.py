@@ -1,3 +1,5 @@
+import pathlib
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Managers/configIniEditor/manager.py
@@ -8,7 +10,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # Handles multiple sections while preserving comments and formatting.
 
 import configparser
-import pathlib
 from loguru import logger
 
 class ConfigIniEditor:

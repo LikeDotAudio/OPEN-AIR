@@ -1,3 +1,6 @@
+import os
+    project_root = os.getcwd()
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Workers/CleanupApps/Clear_flamegraph.py
@@ -6,7 +9,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 # Description: Standalone maintenance script to wipe the OPEN-AIR Flame Graph data.
 
-import os
 import shutil
 import logging
 
@@ -20,7 +22,6 @@ logger = logging.getLogger("FlameGraphCleanup")
 
 def cleanup_flamegraph():
     """Purges the flame graph data files."""
-    project_root = os.getcwd()
     target = os.path.join(project_root, "oaDataLogs", "FlameGraph")
     
     matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡📤📤 [CLEAR_FLAMEGRAPH] Starting Flame Graph cleanup...", "INFO")

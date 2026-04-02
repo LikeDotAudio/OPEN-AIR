@@ -1,3 +1,5 @@
+import os
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # 3_MIB/snmp_mib.py
@@ -8,7 +10,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 import tkinter as tk
 from tkinter import ttk
-import os
 from loguru import logger
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaOchestration.Constants.project_paths import SNMP_CURRENT_MIB

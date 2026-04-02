@@ -1,3 +1,5 @@
+import os
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # FileReaders/from_soundbase_pdf_v2.py
@@ -6,7 +8,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 # Description: Logic for converting Sound Base PDF files (version 2) into standardized marker format.
 
-import os
 import re
 import numpy as np
 import pdfplumber

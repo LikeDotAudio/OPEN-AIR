@@ -1,20 +1,21 @@
 // oaOchestration/Core/oaSafetyCore_rs/src/lib.rs
 // Author: Gemini Iron Oxide Architect
-// Version: 20260401.2355.3
+// Version: 20260401.2355.4
 
 use pyo3::prelude::*;
 use pyo3::types::PyDict;
 use serde_json::Value;
+use pythonize::depythonize_bound;
 
 #[pyfunction]
-fn validate_json(data: &Bound<'_, PyDict>) -> PyResult<bool> {
-    // 1. Convert PyDict to JSON string (clone the bound reference for pythonize)
-    let json_str: String = pythonize::depythonize_bound(data.as_any().clone())
+fn validate_json(data: Bound<'_, PyDict>) -> PyResult<bool> {
+    // 1. Convert PyDict to serde_json::Value (The correct way to validate structure)
+    let val: Value = depythonize_bound(data.into_any())
         .map_err(|e| PyErr::new::<pyo3::exceptions::PyTypeError, _>(format!("Serialization error: {}", e)))?;
 
-    // 2. Parse into Serde Value to ensure strict JSON compliance
-    let _: Value = serde_json::from_str(&json_str)
-        .map_err(|e| PyErr::new::<pyo3::exceptions::PyValueError, _>(format!("Invalid JSON structure: {}", e)))?;
+    // 2. val is now a strictly compliant Serde Value. 
+    // If it reached here, it's valid JSON data.
+    let _ = val;
 
     Ok(true)
 }

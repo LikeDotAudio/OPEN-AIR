@@ -1,3 +1,5 @@
+import os
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # FileWriters/visa_csv.py
@@ -7,7 +9,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # Description: Generates CSV representations of the VISA fleet inventory from JSON state.
 
 import orjson
-import os
 import csv
 import re
 

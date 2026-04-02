@@ -1,3 +1,9 @@
+import sys
+import os
+    project_root = current_script_dir.parents[2]
+    
+            sys.path.insert(0, str(project_root))
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Workers/CleanupApps/Clear_cache.py
@@ -6,10 +12,8 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 # Description: Master Cache Purge Script.
 
-import os
 import shutil
 import logging
-import sys
 from pathlib import Path
 
 LOCAL_DEBUG = True
@@ -30,8 +34,6 @@ def purge_cache():
     """
     # Current script: project_root/oaTests/Workers/CleanupApps/Clear_cache.py
     current_script_dir = Path(__file__).resolve().parent
-    project_root = current_script_dir.parents[2]
-    
     # Target non-log data directories
     data_dirs = [
         project_root / "oaDataCache",
@@ -75,7 +77,6 @@ def purge_cache():
     matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🌱 Re-initializing directory structure integrity...", "INFO")
     try:
         if str(project_root) not in sys.path:
-            sys.path.insert(0, str(project_root))
         from oaOchestration.Core.path_initializer import initialize_paths
         initialize_paths()
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✨ Directory structure integrity verified.", "INFO")

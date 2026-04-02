@@ -1,3 +1,6 @@
+import os
+    project_root = os.getcwd()
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Workers/CleanupApps/Clear_audits.py
@@ -6,7 +9,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 # Description: Maintenance script to purge all system audit logs.
 
-import os
 import shutil
 import logging
 
@@ -20,7 +22,6 @@ logger = logging.getLogger("AuditCleanup")
 
 def cleanup_audits():
     """Purges all files from the audit data directory."""
-    project_root = os.getcwd()
     target = os.path.join(project_root, "oaDataAudits")
     
     matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡📤📤 [CLEAR_AUDITS] Starting System Audit cleanup...", "INFO")

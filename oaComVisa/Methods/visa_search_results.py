@@ -1,3 +1,5 @@
+import pathlib
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/visa_search_results.py
@@ -7,7 +9,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # Description: This manager handles VISA device discovery and validation against yak_config.
 
 import orjson
-import pathlib
 import re
 
 # --- Standard Debug Logging Setup ---

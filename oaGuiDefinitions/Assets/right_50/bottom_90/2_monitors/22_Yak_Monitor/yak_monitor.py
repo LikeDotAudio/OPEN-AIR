@@ -1,3 +1,8 @@
+import os
+import sys
+    sys.path.insert(0, str(root_path))
+
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # 22_Yak_Monitor/yak_monitor.py
@@ -10,8 +15,6 @@ import tkinter as tk
 from tkinter import ttk
 import datetime
 import orjson
-import sys
-import os
 from pathlib import Path
 
 # --- Path Guard: Ensure project root is in sys.path ---
@@ -23,8 +26,6 @@ for parent in current_path.parents:
         break
 
 if str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
-
 from oaTranslator.Managers.yak_trigger_handler import register_monitor_callback, unregister_monitor_callback
 
 # --- Protocol: Integration Layer ---

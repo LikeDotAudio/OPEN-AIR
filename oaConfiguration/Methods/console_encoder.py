@@ -1,3 +1,6 @@
+import sys
+import os
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/console_encoder.py
@@ -27,8 +30,6 @@ Assumptions and Constraints:
   older versions.
 """
 
-import os
-import sys
 
 LOCAL_DEBUG = True
 

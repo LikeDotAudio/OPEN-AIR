@@ -1,3 +1,15 @@
+import pathlib
+import os
+import sys
+# 1. Setup Environment
+current_dir = pathlib.Path(__file__).resolve().parent
+project_root = current_dir.parent.parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+
+        self.project_root = project_root
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Methods/FlameGraph/flame_manager.py
@@ -26,18 +38,9 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # - Performance Lifecycle Manager: Controls start/stop of profiling hooks.
 # - Intelligence Synthesizer: Aggregates raw stats into human-readable reports.
 
-import sys
-import pathlib
-import os
 import threading
 import json
 from loguru import logger
-
-# 1. Setup Environment
-current_dir = pathlib.Path(__file__).resolve().parent
-project_root = current_dir.parent.parent.parent
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
 
 # 2. Import Modular Core (using new naming convention)
 from oaTests.Methods.FlameGraph.flame_capture import MultiThreadProfiler
@@ -57,7 +60,6 @@ report_generated = False
 class FlameManager:
     """Manages the lifecycle of a profiling session."""
     def __init__(self, output_dir=None):
-        self.project_root = project_root
         if output_dir:
             self.data_dir = pathlib.Path(output_dir)
         else:

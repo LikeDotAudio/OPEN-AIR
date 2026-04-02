@@ -1,11 +1,3 @@
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
-# Managers/run_builder.py
-# Author: Gemini CLI
-# Version: 1.0.0
-#
-# Description: Standalone entry point for the Modular WYSIWYG Definition Builder.
-
 import sys
 import pathlib
 import orjson
@@ -16,6 +8,10 @@ current_dir = pathlib.Path(__file__).resolve().parent
 project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
+
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
+# Managers/run_builder.py
 
 from oaGuiEditorWYSIWYG.Managers.wysiwyg_editor import WysiwygEditor
 from oaLogging.Core.logger import GUI_LOGGER as logger
@@ -110,15 +106,15 @@ def main():
 
     # Lifecycle Management
     def on_close():
-        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Standalone Builder: Program exiting.", "INFO")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Standalone Builder: Program exiting (Close requested).", "INFO")
         try:
-            app._close_editor()
-            root.quit()
-            root.destroy()
-        except tk.TclError:
-            pass
+            # ⚡ CONSISTENCY: Call abandon_changes to ensure original state is restored if 'TEST UI' was used
+            app.abandon_changes()
+            # Explicitly kill process just in case
+            sys.exit(0)
         except Exception as e:
             logger.warning(f"Standalone Builder: Error during shutdown: {e}")
+            sys.exit(1)
 
     root.protocol("WM_DELETE_WINDOW", on_close)
 

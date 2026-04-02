@@ -1,3 +1,6 @@
+import os
+    project_root = os.getcwd()
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Workers/CleanupApps/Clear_reports.py
@@ -6,7 +9,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 # Description: Maintenance script to purge old reports while preserving the latest one.
 
-import os
 import shutil
 import logging
 from pathlib import Path
@@ -23,7 +25,6 @@ def cleanup_reports():
     """
     Purges all files from the oaReports directory except for the most recently modified one.
     """
-    project_root = os.getcwd()
     target = os.path.join(project_root, "oaReports")
     
     matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡📤📤 [CLEAR_REPORTS] Starting Reports cleanup...", "INFO")

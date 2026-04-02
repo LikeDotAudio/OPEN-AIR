@@ -1,3 +1,12 @@
+import pathlib
+import os
+import sys
+current_dir = pathlib.Path(__file__).resolve().parent
+project_root = current_dir.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # oaComSNMP/Entry.py
@@ -20,18 +29,10 @@ from oaLogging.Methods.matrix_gate import matrix_log
 oaComSNMP/Entry.py - The sole orchestrator for the SNMP Communication Module.
 """
 
-import sys
-import os
-import pathlib
 import threading
 import time
 
 # Ensure the root directory is in the search path for local module imports.
-current_dir = pathlib.Path(__file__).resolve().parent
-project_root = current_dir.parent
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
-
 from .Managers.snmp_manager import SNMPManager, BridgeContext
 from .Workers.snmp_tester import SnmpTester
 from .Methods.snmp_mib_generator import MibGenerator

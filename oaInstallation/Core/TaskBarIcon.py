@@ -1,3 +1,5 @@
+import os
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Core/TaskBarIcon.py
@@ -12,7 +14,6 @@ Provides automated installation of the OPEN-AIR application icon into the Linux
 desktop environment.
 """
 
-import os
 import shutil
 import subprocess
 import ast

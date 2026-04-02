@@ -1,3 +1,5 @@
+import sys
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # 2138_SMPTE_2138/smpte2138_monitor.py
@@ -14,7 +16,6 @@ import tkinter as tk
 from tkinter import ttk
 import datetime
 import orjson
-import sys
 from pathlib import Path
 from loguru import logger
 

@@ -1,3 +1,12 @@
+import sys
+import os
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(os.path.dirname(current_dir))
+    
+        sys.path.insert(0, project_root)
+        self.project_root = PROJECT_ROOT
+
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Managers/Setup.py
@@ -7,8 +16,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # Description: Primary installation orchestrator for the OPEN-AIR system environment.
 # This script ensures all Python dependencies and system infrastructure are present.
 
-import os
-import sys
 import subprocess
 import shutil
 
@@ -19,11 +26,7 @@ import shutil
 def _inject_project_root():
     """Calculates and injects the project root into sys.path."""
     # Current file: project_root/oaInstallation/Managers/Setup.py
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.dirname(os.path.dirname(current_dir))
-    
     if project_root not in sys.path:
-        sys.path.insert(0, project_root)
     return project_root
 
 PROJECT_ROOT = _inject_project_root()
@@ -48,8 +51,6 @@ class SetupManager:
     """
     def __init__(self, debug=True):
         self.debug = debug
-        self.project_root = PROJECT_ROOT
-
     def check_dependencies(self, callback=None, auto_install=True, clean_install=False):
         """
         Invokes the automated dependency checker.

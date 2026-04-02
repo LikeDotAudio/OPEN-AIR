@@ -1,42 +1,18 @@
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
-# oaTests/Methods/FlameGraph/Entry.py
-#
-# Unified Entry Point for FlameGraph Performance Profiling.
-#
-# Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
-#
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20260329.0010.1
-#
-# Description:
-# This module serves as the primary orchestrator for performance profiling
-# sessions using the FlameGraph engine. It initializes the Multi-Threaded
-# Profiler, launches the target application (openair.py), and synthesizes
-# a forensic HTML report upon completion or critical failure.
-#
-# Architectural Role:
-# - Profiling Orchestrator: Wraps the application lifecycle in a profiling context.
-# - Forensic Integrator: Connects the FlameManager with the System Watchdog.
-
 import sys
 import os
 import pathlib
 import threading
 from loguru import logger
 
-# 1. Setup Environment
+# 1. Setup Environment: MUST BE FIRST to allow internal imports
 current_dir = pathlib.Path(__file__).resolve().parent
 project_root = current_dir.parent.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
+
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
+# oaTests/Methods/FlameGraph/Entry.py
 
 from oaTests.Methods.FlameGraph.flame_manager import FlameManager
 

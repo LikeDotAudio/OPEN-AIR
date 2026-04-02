@@ -1,3 +1,5 @@
+import os
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/debug_cleaner.py
@@ -6,7 +8,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 # Description: This module provides a function to clear the debug directory of log files.
 
-import os
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
@@ -44,4 +45,3 @@ def clear_debug_directory():
             if LOCAL_DEBUG: logger.error(f"❌ Error clearing log directory: {e}")
     else:
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"⏩ Log directory not found: {DATA_LOGS_DIR}. Skipping clear.", "DEBUG")
-

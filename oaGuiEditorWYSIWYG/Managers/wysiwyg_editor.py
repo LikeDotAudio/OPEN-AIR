@@ -96,6 +96,7 @@ class WysiwygEditor:
         ttk.Separator(toolbar, orient=tk.VERTICAL).pack(side="left", fill="y", padx=10)
         
         ttk.Button(toolbar, text="TEST UI", command=self._test_config).pack(side="left", padx=2)
+        ttk.Button(toolbar, text="ABANDON CHANGES", command=self.abandon_changes).pack(side="left", padx=2)
         ttk.Button(toolbar, text="SAVE & CLOSE", command=self._save_and_close).pack(side="left", padx=2)
         
         self.status_lbl = ttk.Label(toolbar, text="Modular Editor Active", foreground="#33A1FD")
@@ -187,6 +188,20 @@ class WysiwygEditor:
         matrix_log("ui", "gui_builder", "_save_and_close", "WysiwygEditor: 'SAVE AND CLOSE' triggered.", "INFO")
         if self.save_workspace():
             self.close_window()
+
+    def abandon_changes(self):
+        """Discards all changes, restores original state in the main UI, and closes."""
+        matrix_log("ui", "gui_builder", "abandon_changes", "WysiwygEditor: 'ABANDON CHANGES' triggered.", "INFO")
+        
+        # 1. Restore original state in main UI if possible
+        if self.on_test:
+            orig = state_manager.get_original_state()
+            if orig:
+                matrix_log("ui", "gui_builder", "abandon_changes", "WysiwygEditor: Restoring original state in main application...", "DEBUG")
+                self.on_test(orig)
+        
+        # 2. Close window
+        self.close_window()
 
     def _test_config(self):
         """Triggers the test callback with current master state_manager."""

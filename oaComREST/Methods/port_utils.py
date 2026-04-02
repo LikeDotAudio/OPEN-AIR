@@ -1,3 +1,5 @@
+import os
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/port_utils.py
@@ -7,7 +9,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # Description: Utilities for port monitoring and sibling-aware conflict resolution.
 
 import psutil
-import os
 from loguru import logger
 
 def get_process_on_port(port):

@@ -1,3 +1,5 @@
+import os
+
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # FileReaders/editor.py
@@ -6,7 +8,6 @@ from oaLogging.Methods.matrix_gate import matrix_log
 #
 # Description: Modularized Importer Editor Logic.
 
-import os
 import tkinter as tk
 from tkinter import ttk
 from loguru import logger

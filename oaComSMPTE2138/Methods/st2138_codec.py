@@ -8,13 +8,16 @@ from .oaST2138Codec_rs.compiler_hook import ensure_compiled
 ensure_compiled()
 from .oaST2138Codec_rs.oast2138codec_rs import St2138Codec as RustSt2138Codec
 
+LOCAL_DEBUG = False
+
 class St2138Codec:
     """
     Handles encoding/decoding of SMPTE 2138 Protobuf messages.
     MANDATORY Rust implementation for speed.
     """
     def __init__(self):
-        print("📽️🛠️🔗 [ST2138] Using PURE RUST codec.")
+        if LOCAL_DEBUG:
+            print("📽️🛠️🔗 [ST2138] Using PURE RUST codec.")
         self._codec = RustSt2138Codec()
 
     def encode_param(self, name: str, value: float):

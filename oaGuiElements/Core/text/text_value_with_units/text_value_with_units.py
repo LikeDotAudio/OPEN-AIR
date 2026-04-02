@@ -177,8 +177,7 @@ class BuilderTextValueWithUnitsCreator(TransparencyMixin):
             matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ SUCCESS! The text input '{label}' has been successfully forged!",
                 file=os.path.basename(__file__),
                 version=app_constants.CURRENT_VERSION,
-                function=f"{self.__class__.__name__}.{current_function_name}",
-            , level="SUCCESS")
+                function=f"{self.__class__.__name__}.{current_function_name}", level="SUCCESS")
             return canvas
         except Exception as e:
             logger.exception("❌ The text input '{label}' has disintegrated! Error",

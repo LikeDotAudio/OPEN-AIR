@@ -9,6 +9,8 @@ from .oaShowfileUnpacker_rs.compiler_hook import ensure_compiled
 ensure_compiled()
 from .oaShowfileUnpacker_rs import oashowfileunpacker_rs
 
+LOCAL_DEBUG = False
+
 class ShowfileUnpacker:
     """
     High-performance secure showfile unpacker using Rust.
@@ -16,7 +18,8 @@ class ShowfileUnpacker:
     """
     @staticmethod
     def unpack(file_path: str):
-        print("📦🛠️🔗 [SHOW] Using PURE RUST unpacker.")
+        if LOCAL_DEBUG:
+            print("📦🛠️🔗 [SHOW] Using PURE RUST unpacker.")
         raw_dict = oashowfileunpacker_rs.unpack_showfile(file_path)
         # Post-process strings into dictionaries if they are JSON
         processed = {}

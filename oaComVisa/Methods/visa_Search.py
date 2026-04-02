@@ -1,7 +1,5 @@
 import os
 import sys
-    sys.path.insert(0, _rs_dir)
-
 
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log

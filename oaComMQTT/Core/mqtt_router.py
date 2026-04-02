@@ -4,6 +4,8 @@
 #
 # Description: Python wrapper for the Rust MQTT Router.
 
+LOCAL_DEBUG = True
+
 import logging
 from .oaMQTTManager_rs.compiler_hook import ensure_compiled
 
@@ -21,7 +23,8 @@ class MqttRouter:
     """
     def __init__(self):
         if HAS_RUST:
-            print("📡🛠️🔗 [MQTT] Using PURE RUST router.")
+            if LOCAL_DEBUG:
+                print("📡🛠️🔗 [MQTT] Using PURE RUST router.")
             self._router = RustMqttRouter()
         else:
             self._router = None

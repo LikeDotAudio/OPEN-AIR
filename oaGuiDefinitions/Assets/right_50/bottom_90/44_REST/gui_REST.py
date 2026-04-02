@@ -1,6 +1,14 @@
 import sys
-    sys.path.insert(0, str(root_path))
+import pathlib
+from pathlib import Path
 
+# 1. Setup Environment
+current_path = Path(__file__).resolve()
+# project_root/oaGuiDefinitions/Assets/right_50/bottom_90/44_REST/gui_REST.py
+# -> project_root is 6 levels up
+root_path = current_path.parents[5]
+if str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
 
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log

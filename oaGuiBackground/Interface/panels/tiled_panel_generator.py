@@ -13,6 +13,8 @@ from .panel_generator import PanelGenerator
 from oaTranslator.Core.work_stealing_pool import WorkStealingPool
 from oaLogging.Core.logger import builder_logger
 
+LOCAL_DEBUG = False
+
 # ⚡ PERSISTENCE: The pool lives for the duration of the application.
 _GLOBAL_STEALING_POOL = None
 
@@ -78,7 +80,8 @@ class TiledPanelGenerator:
             final_img.paste(tile_img, (x, y))
             
         end_time = time.perf_counter()
-        builder_logger.success(f"🧩🆗✨ [STEALING] Tiled render complete in {(end_time - start_time)*1000:.2f}ms.")
+        if LOCAL_DEBUG:
+            builder_logger.success(f"🧩🆗✨ [STEALING] Tiled render complete in {(end_time - start_time)*1000:.2f}ms.")
         
         return final_img
 

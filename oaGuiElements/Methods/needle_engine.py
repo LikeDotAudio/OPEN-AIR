@@ -15,6 +15,8 @@ except Exception as e:
     logging.error(f"oaGuiElements: Failed to load Rust Needle Engine: {e}")
     HAS_RUST = False
 
+LOCAL_DEBUG = False
+
 class NeedleEngine:
     """
     High-performance trigonometric geometry calculator using Rust.
@@ -22,7 +24,8 @@ class NeedleEngine:
     """
     def __init__(self):
         if HAS_RUST:
-            print("🏗️🛠️🔗 [NEEDLE] Using PURE RUST geometry engine.")
+            if LOCAL_DEBUG:
+                print("🏗️🛠️🔗 [NEEDLE] Using PURE RUST geometry engine.")
             self._engine = RustNeedleEngine()
         else:
             self._engine = None

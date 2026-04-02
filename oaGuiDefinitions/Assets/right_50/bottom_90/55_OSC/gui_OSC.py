@@ -1,7 +1,15 @@
 import os
 import sys
-    sys.path.insert(0, str(root_path))
+import pathlib
+from pathlib import Path
 
+# 1. Setup Environment
+current_dir = pathlib.Path(__file__).resolve().parent
+# project_root/oaGuiDefinitions/Assets/right_50/bottom_90/55_OSC/gui_OSC.py
+# -> project_root is 6 levels up
+root_path = current_dir.parents[5]
+if str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
 
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
@@ -26,6 +34,8 @@ for parent in current_path.parents:
         break
 
 if str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
+
 import oaComOSC.Entry as OSC_MODULE
 
 # --- Standard Debug Logging Setup ---

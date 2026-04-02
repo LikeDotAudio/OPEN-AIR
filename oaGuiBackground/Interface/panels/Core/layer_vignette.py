@@ -1,16 +1,21 @@
 # Core/layer_vignette.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260402.0015.1
 #
-# Description: Brief summary of purpose
+# Description: High-performance vignettes using Rust.
 
 from PIL import Image, ImageDraw, ImageFilter
 import math
+import logging
+from oaGuiBackground.Methods.pattern_engine import PatternEngine
+
+_engine = PatternEngine()
 
 class VignetteLayer:
     @staticmethod
     def generate_linear_gradient(width, height, intensity):
         """Creates a soft vertical gradient simulating overhead lighting (Top to Bottom)."""
+        # Linear gradient can also be moved to Rust if needed, but for now we keep it or use Rust's vignette if applicable
         base = Image.new('L', (width, height), 255)
         draw = ImageDraw.Draw(base)
         for y in range(height):
@@ -23,6 +28,15 @@ class VignetteLayer:
     @staticmethod
     def generate_vignette(width, height, intensity, depth=110):
         """Creates a robust 4-sided vignette fading from all edges."""
+        img = _engine.generate_vignette(width, height, intensity, depth)
+        if img:
+            # Note: We apply GaussianBlur in Python for now to match exactly if needed, 
+            # or we could move it to Rust. Python implementation below does it too.
+            vig = img.convert("L")
+            blur_radius = max(2, depth // 2)
+            return vig.filter(ImageFilter.GaussianBlur(radius=blur_radius)).convert("RGBA")
+
+        # --- Python Fallback ---
         if depth <= 0:
             return Image.new('RGBA', (width, height), (255, 255, 255, 255))
             

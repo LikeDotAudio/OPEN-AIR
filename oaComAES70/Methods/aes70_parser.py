@@ -8,13 +8,16 @@ from .oaAES70Core_rs.compiler_hook import ensure_compiled
 ensure_compiled()
 from .oaAES70Core_rs.oaaes70core_rs import OcaParser as RustOcaParser
 
+LOCAL_DEBUG = False
+
 class OcaParser:
     """
     Handles decoding of AES70 OCP.1 (TCP/IP) packets.
     MANDATORY Rust implementation for high performance.
     """
     def __init__(self):
-        print("📻🛠️🔗 [AES70] Using PURE RUST parser.")
+        if LOCAL_DEBUG:
+            print("📻🛠️🔗 [AES70] Using PURE RUST parser.")
         self._parser = RustOcaParser()
 
     def decode(self, data: bytes):

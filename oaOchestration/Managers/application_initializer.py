@@ -24,7 +24,7 @@ from oaConfiguration.FileReaders.config_reader import Config
 # Explicitly assign logger to ensure it's found as a module attribute by unittest.mock
 logger = loguru.logger
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 app_constants = Config.get_instance()
 
 def initialize_app():

@@ -81,7 +81,6 @@ def purge_cache():
     # Recreate structure via path_initializer to ensure sanity
     matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🌱 Re-initializing directory structure integrity...", "INFO")
     try:
-        if str(project_root) not in sys.path:
         from oaOchestration.Core.path_initializer import initialize_paths
         initialize_paths()
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✨ Directory structure integrity verified.", "INFO")

@@ -25,6 +25,23 @@ impl CMDPMath {
         )
     }
 
+    fn calculate_position(&self, angle_deg: f64, distance: f64, center_x: f64, center_y: f64) -> (f64, f64) {
+        let rad = angle_deg * PI / 180.0;
+        (
+            center_x + distance * rad.cos(),
+            center_y + distance * rad.sin()
+        )
+    }
+
+    fn calculate_angle(&self, px: f64, py: f64, cx: f64, cy: f64) -> f64 {
+        (py - cy).atan2(px - cx) * 180.0 / PI
+    }
+
+    fn calculate_projection(&self, dx: f64, dy: f64, angle_deg: f64) -> f64 {
+        let rad = angle_deg * PI / 180.0;
+        dx * rad.cos() + dy * rad.sin()
+    }
+
     fn calculate_fader_geometry<'py>(&self, py: Python<'py>, config: &Bound<'py, PyDict>) -> PyResult<Bound<'py, PyDict>> {
         let center_x: f64 = config.get_item("center_x")?.unwrap().extract()?;
         let center_y: f64 = config.get_item("center_y")?.unwrap().extract()?;

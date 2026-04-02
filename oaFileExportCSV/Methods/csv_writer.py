@@ -8,6 +8,8 @@ from .oaCSVWriter_rs.compiler_hook import ensure_compiled
 ensure_compiled()
 from .oaCSVWriter_rs import oacsvwriter_rs
 
+LOCAL_DEBUG = False
+
 class CSVWriter:
     """
     High-performance asynchronous CSV writer using Rust.
@@ -19,5 +21,6 @@ class CSVWriter:
         Asynchronously writes a list of dictionaries to a CSV file.
         Non-blocking for the Python main thread.
         """
-        print("📝🛠️🔗 [CSV] Using PURE RUST async writer.")
+        if LOCAL_DEBUG:
+            print("📝🛠️🔗 [CSV] Using PURE RUST async writer.")
         oacsvwriter_rs.dump_async(data_list, filepath)

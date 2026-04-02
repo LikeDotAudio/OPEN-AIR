@@ -16,13 +16,16 @@ except Exception as e:
     logging.error(f"oaGuiBackground: Failed to load Rust Pattern Engine: {e}")
     HAS_RUST = False
 
+LOCAL_DEBUG = False
+
 class PatternEngine:
     """
     High-performance procedural asset generator using Rust.
     """
     def __init__(self):
         if HAS_RUST:
-            print("🎨🛠️🔗 [PATTERNS] Using PURE RUST engine.")
+            if LOCAL_DEBUG:
+                print("🎨🛠️🔗 [PATTERNS] Using PURE RUST engine.")
             self._engine = RustPatternEngine()
         else:
             self._engine = None
@@ -47,4 +50,22 @@ class PatternEngine:
             padding = int(size * 0.4)
             canvas_dim = size + padding * 2
             return Image.frombytes("RGBA", (canvas_dim, canvas_dim), raw_bytes)
+        return None
+
+    def generate_metal_fold(self, width: int, height: int, config: dict):
+        if self._engine:
+            raw_bytes = self._engine.generate_metal_fold(width, height, config)
+            return Image.frombytes("RGBA", (width, height), raw_bytes)
+        return None
+
+    def generate_vignette(self, width: int, height: int, intensity: float, depth: int):
+        if self._engine:
+            raw_bytes = self._engine.generate_vignette(width, height, intensity, depth)
+            return Image.frombytes("RGBA", (width, height), raw_bytes)
+        return None
+
+    def generate_scratches(self, width: int, height: int, config: dict):
+        if self._engine:
+            raw_bytes = self._engine.generate_scratches(width, height, config)
+            return Image.frombytes("RGBA", (width, height), raw_bytes)
         return None

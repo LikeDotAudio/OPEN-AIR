@@ -14,7 +14,7 @@ from typing import Any
 from loguru import logger
 import orjson
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 try:
     from oastateregistry_rs import StateRegistryCore as RustStateRegistry

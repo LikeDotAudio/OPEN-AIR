@@ -1,7 +1,14 @@
 import os
 import sys
-    sys.path.insert(0, str(root_path))
+import pathlib
 
+# 1. Setup Environment
+current_dir = pathlib.Path(__file__).resolve().parent
+# project_root/oaGuiDefinitions/Assets/right_50/bottom_90/2_monitors/22_Yak_Monitor/yak_monitor.py
+# -> project_root is 7 levels up
+root_path = current_dir.parents[6]
+if str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
 
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log

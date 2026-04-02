@@ -1,11 +1,15 @@
 # Core/layer_metal_fold.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260402.0015.1
 #
-# Description: Brief summary of purpose
+# Description: High-performance 3D panel folds using Rust.
 
 from PIL import Image, ImageDraw
 import math
+import logging
+from oaGuiBackground.Methods.pattern_engine import PatternEngine
+
+_engine = PatternEngine()
 
 class MetalFoldLayer:
     @staticmethod
@@ -14,6 +18,11 @@ class MetalFoldLayer:
         Generates 3D panel folds (creases) and edge shadows.
         Now supports 'Segmented Panel' logic: each horizontal fold creates a new visual panel.
         """
+        img = _engine.generate_metal_fold(width, height, config)
+        if img:
+            return img
+
+        # --- Python Fallback ---
         layer = Image.new('RGBA', (width, height), (0,0,0,0))
         draw = ImageDraw.Draw(layer)
         thickness = int(config.get("width_px", 20))

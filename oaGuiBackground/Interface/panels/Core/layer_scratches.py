@@ -1,16 +1,25 @@
 # Core/layer_scratches.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260402.0015.1
 #
-# Description: Brief summary of purpose
+# Description: High-performance scratches using Rust.
 
 from PIL import Image, ImageDraw
 import random
 import math
+import logging
+from oaGuiBackground.Methods.pattern_engine import PatternEngine
+
+_engine = PatternEngine()
 
 class ScratchLayer:
     @staticmethod
     def generate_scratches(width, height, config):
+        img = _engine.generate_scratches(width, height, config)
+        if img:
+            return img
+
+        # --- Python Fallback ---
         layer = Image.new('RGBA', (width, height), (0,0,0,0))
         draw = ImageDraw.Draw(layer)
         s_int, s_width, count = float(config.get("intensity", 0.4)), int(config.get("width_px", 1)), int(config.get("count", 25))

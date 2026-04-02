@@ -1,20 +1,31 @@
 # panel_screw/screw_generator.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260402.0010.1
 #
-# Description: Brief summary of purpose
+# Description: High-performance procedural screw generation using Rust.
 
 from PIL import Image, ImageDraw, ImageFilter, ImageChops, ImageOps
 from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 import random
 import math
+import logging
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
 from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
+from oaGuiElements.Methods.oaScrewGenerator_rs.compiler_hook import ensure_compiled
+
+try:
+    ensure_compiled()
+    from oaGuiElements.Methods.oaScrewGenerator_rs.oascrewgenerator_rs import ScrewGenerator as RustScrewGenerator
+    _rust_engine = RustScrewGenerator()
+    HAS_RUST = True
+except Exception as e:
+    logging.warning(f"oaGuiElements: Failed to load Rust ScrewGenerator, falling back to Python: {e}")
+    HAS_RUST = False
 
 # Sizing and Geometry Constants
 CANVAS_PADDING_RATIO = 0.4
@@ -72,6 +83,20 @@ class ScrewGenerator:
 
         # --- 1. Procedural Generation ---
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔩🏗️🌀 [BUILDER] Generating NEW Procedural Screw ({size_pixels}px)", level="INFO")
+        
+        if HAS_RUST:
+            try:
+                raw_bytes, canvas_dim = _rust_engine.generate_screw(size_pixels, configuration_data)
+                screw_image = Image.frombytes("RGBA", (canvas_dim, canvas_dim), raw_bytes)
+                
+                # Save to Cache
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🎨🆗💾 [SUCCESS] Rust-based procedural screw generation complete. Saving to cache.", level="SUCCESS")
+                AssetCacheManager.save_to_cache("screw", size_pixels, size_pixels, configuration_data, screw_image)
+                return screw_image
+            except Exception as e:
+                matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"⚠️🛑 [ERROR] Rust ScrewGenerator failed: {e}. Falling back to Python.", level="WARNING")
+
+        # --- Python Fallback ---
         # Canvas setup (padding for drop shadow)
         padding_amount = int(size_pixels * CANVAS_PADDING_RATIO)
         canvas_dimension = size_pixels + (padding_amount * 2)

@@ -8,13 +8,16 @@ from .oaMidiEngine_rs.compiler_hook import ensure_compiled
 ensure_compiled()
 from .oaMidiEngine_rs.oamidiengine_rs import MidiEngine as RustMidiEngine
 
+LOCAL_DEBUG = False
+
 class MidiEngine:
     """
     High-performance MIDI Engine using Rust midir backend.
     MANDATORY Rust implementation.
     """
     def __init__(self):
-        print("🎹🛠️🔗 [MIDI] Using PURE RUST engine.")
+        if LOCAL_DEBUG:
+            print("🎹🛠️🔗 [MIDI] Using PURE RUST engine.")
         self._engine = RustMidiEngine()
 
     def list_inputs(self):

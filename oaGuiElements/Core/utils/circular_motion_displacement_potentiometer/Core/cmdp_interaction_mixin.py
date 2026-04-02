@@ -18,11 +18,11 @@ class CMDPInteractionMixin:
     def on_drag(self, e):
         f = self.active_fader
         if f and f.dragging:
+            from .cmdp_math import CircularMath
             if (e.state & 0x0008) or (e.state & 0x20000): # Alt
-                f.angle_var.set(math.degrees(math.atan2(e.y-self.center_y, e.x-self.center_x)))
+                f.angle_var.set(CircularMath.get_angle(e.x, e.y, self.center_x, self.center_y))
             else:
-                rad = math.radians(float(f.angle_var.get()))
-                proj = (e.x-f.start_x)*math.cos(rad) + (e.y-f.start_y)*math.sin(rad)
+                proj = CircularMath.calculate_projection(e.x - f.start_x, e.y - f.start_y, float(f.angle_var.get()))
                 f.val_var.set(max(0, min(100, f.start_val - (proj/f.track_len)*100)))
             self.update_tree(f)
 

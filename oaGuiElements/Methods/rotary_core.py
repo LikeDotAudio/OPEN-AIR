@@ -15,6 +15,8 @@ except Exception as e:
     logging.error(f"oaGuiElements: Failed to load Rust Rotary Core: {e}")
     HAS_RUST = False
 
+LOCAL_DEBUG = False
+
 class RotaryCore:
     """
     High-performance rotary calculation engine using Rust.
@@ -22,7 +24,8 @@ class RotaryCore:
     """
     def __init__(self):
         if HAS_RUST:
-            print("🎡🛠️🔗 [ROTARY] Using PURE RUST rotary core.")
+            if LOCAL_DEBUG:
+                print("🎡🛠️🔗 [ROTARY] Using PURE RUST rotary core.")
             self._engine = RustRotaryCore()
         else:
             self._engine = None

@@ -8,13 +8,16 @@ from .oaFastAPI_rs.compiler_hook import ensure_compiled
 ensure_compiled()
 from .oaFastAPI_rs.oafastapi_rs import RestServer as RustRestServer
 
+LOCAL_DEBUG = False
+
 class RestServer:
     """
     High-performance REST server using Rust Axum.
     MANDATORY Rust backend.
     """
     def __init__(self):
-        print("🚀🛠️🔗 [REST] Using PURE RUST server (Axum).")
+        if LOCAL_DEBUG:
+            print("🚀🛠️🔗 [REST] Using PURE RUST server (Axum).")
         self._server = RustRestServer()
 
     def add_route(self, path: str, callback):

@@ -113,14 +113,23 @@ class ModuleLoader:
         config_dict["builder_instance"] = builder
         
         # Instantiate the actual Python GUI
-        instance = widget_class(builder.scroll_frame, config=config_dict, json_path=None)
+        try:
+            # 🔍 FORENSIC: Log instantiation attempt for debugging
+            matrix_log("ui", "gui_builder", "instantiate_widget", 
+                       f"🔨 Instantiating {widget_class.__name__} (Parent: {parent_widget})", "DEBUG")
+
+            instance = widget_class(builder.scroll_frame, config=config_dict, json_path=None)
+
+            # Pack the instance into the builder's scrollable area
+            if hasattr(instance, "pack"):
+                instance.pack(fill=tk.BOTH, expand=True)
+            elif hasattr(instance, "grid"):
+                instance.grid(row=0, column=0, sticky="nsew")
+        except Exception as e:
+            matrix_log("ui", "gui_builder", "instantiate_widget", 
+                       f"🛑 [ERROR] Failed to instantiate {widget_class.__name__}: {e}", "ERROR")
+            # We return the builder even on failure so the UI skeleton remains intact
         
-        # Pack the instance into the builder's scrollable area
-        if hasattr(instance, "pack"):
-            instance.pack(fill=tk.BOTH, expand=True)
-        elif hasattr(instance, "grid"):
-            instance.grid(row=0, column=0, sticky="nsew")
-            
         return builder
 
     def load_and_instantiate_gui(

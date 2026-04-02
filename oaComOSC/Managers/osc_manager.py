@@ -20,6 +20,8 @@ from oaOchestration.Methods.network_utils import get_local_ip
 
 app_constants = Config.get_instance()
 
+LOCAL_DEBUG = False
+
 class OSCManager:
     """
     Manages bidirectional OSC communication.
@@ -158,8 +160,9 @@ class OSCManager:
             with self._state_lock:
                 self._rx_addr = f"{get_local_ip()}:{rx_port}"
                 
-            matrix_log("ui", "osc", "_start_workers", 
-                       f"RX SERVER ACTIVE: {self._rx_addr}", "SUCCESS")
+            if LOCAL_DEBUG:
+                matrix_log("ui", "osc", "_start_workers", 
+                           f"RX SERVER ACTIVE: {self._rx_addr}", "SUCCESS")
 
             # TX Client
             if not self.tx_client:
@@ -169,8 +172,9 @@ class OSCManager:
             with self._state_lock:
                 self._tx_addr = f"{tx_host}:{tx_port}"
                 
-            matrix_log("ui", "osc", "_start_workers", 
-                       f"TX CLIENT ACTIVE: {self._tx_addr}", "SUCCESS")
+            if LOCAL_DEBUG:
+                matrix_log("ui", "osc", "_start_workers", 
+                           f"TX CLIENT ACTIVE: {self._tx_addr}", "SUCCESS")
 
             # ⚡ STATUS MONITOR: Start periodic broadcast
             threading.Thread(target=self._broadcast_status_loop, 

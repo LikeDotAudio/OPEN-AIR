@@ -28,9 +28,10 @@ class TestRustCSVParser(unittest.TestCase):
         headers, data = Marker_convert_csv_unknow_report_to_csv(str(self.asset_path))
         
         self.assertGreater(len(data), 0)
-        # Verify we have some standard headers (e.g., Topic, Value)
-        self.assertIn("Topic", headers)
-        self.assertIn("Value", headers)
+        # Verify we have some standard headers (e.g., ZONE, NAME, FREQ_MHZ)
+        self.assertIn("ZONE", headers)
+        self.assertIn("NAME", headers)
+        self.assertIn("FREQ_MHZ", headers)
         
         # Verify data structure
         for row in data:

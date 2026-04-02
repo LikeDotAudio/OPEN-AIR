@@ -28,6 +28,7 @@ def _inject_project_root():
     """Calculates and injects the project root into sys.path."""
     # Current file: project_root/oaInstallation/Managers/Setup.py
     if project_root not in sys.path:
+        sys.path.insert(0, project_root)
     return project_root
 
 PROJECT_ROOT = _inject_project_root()

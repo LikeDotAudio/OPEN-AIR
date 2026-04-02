@@ -15,13 +15,16 @@ except Exception as e:
     logging.error(f"oaSplinker: Failed to load Rust Splink Registry: {e}")
     HAS_RUST = False
 
+LOCAL_DEBUG = False
+
 class SplinkRegistry:
     """
     High-performance concurrent registry for Splinks using Rust DashMap.
     """
     def __init__(self):
         if HAS_RUST:
-            print("🔗🛠️🔗 [SPLINKER] Using PURE RUST registry.")
+            if LOCAL_DEBUG:
+                print("🔗🛠️🔗 [SPLINKER] Using PURE RUST registry.")
             self._registry = RustSplinkRegistry()
         else:
             self._registry = None

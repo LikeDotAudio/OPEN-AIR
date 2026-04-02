@@ -28,7 +28,7 @@ import time
 from oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 
 # --- Global Scope Variables (as per your instructions) ---
@@ -97,8 +97,8 @@ class PresetFromDeviceWorker:
         if topic == NAB_OUTPUT_TOPIC:
             self.last_preset_list = payload
             self.preset_list_event.set()
-            logger.success("✅ A new preset catalog has been received! Time to parse the data."
-            )
+            if LOCAL_DEBUG:
+                logger.success("✅ A new preset catalog has been received! Time to parse the data.")
 
             valid_presets = self.parse_presets_from_device(self.last_preset_list)
             if valid_presets:
@@ -233,8 +233,8 @@ class PresetFromDeviceWorker:
 
             num_published = i + 1
 
-        logger.success(f"✅ Successfully published {num_published} presets as monolithic nodes to the repository."
-        )
+        if LOCAL_DEBUG:
+            logger.success(f"✅ Successfully published {num_published} presets as monolithic nodes to the repository.")
 
     # Pushes a specified preset filename to the device and triggers the device to store it.
     # This function publishes an MQTT message containing the preset filename to the device

@@ -27,7 +27,7 @@ from oaComSNMP.Methods.snmp_utils import get_snmp_node_id, get_snmp_descriptor, 
 from oaComSNMP.Constants.snmp_constants import BASE_OID, STATE_SYNC_INTERVAL
 
 from oaLogging.Core.logger import SNMP_LOGGER as snmp_logger, is_debug_allowed
-LOCAL_DEBUG = is_debug_allowed(system="Comms", element="SNMP")
+LOCAL_DEBUG = False # Forced False to silence success logs as requested
 
 @dataclass
 class BridgeContext:

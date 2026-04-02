@@ -23,7 +23,8 @@ def save_splink(self, splink):
         with open(file_path, "wb") as f:
             f.write(orjson.dumps(splink, option=orjson.OPT_INDENT_2))
             
-        splinker_logger.success(f"✅ Splinker: File saved successfully: {file_path.name}")
+        if Splinker_debug_enabled:
+            splinker_logger.success(f"✅ Splinker: File saved successfully: {file_path.name}")
         self.publish_splinks()
     except Exception as e:
         splinker_logger.error(f"❌ Splinker: Save failed for {splink['id']}: {e}")

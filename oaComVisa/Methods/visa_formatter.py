@@ -8,13 +8,16 @@ from .oaVisaFormat_rs.compiler_hook import ensure_compiled
 ensure_compiled()
 from .oaVisaFormat_rs.oavisaformat_rs import VisaFormatter as RustVisaFormatter
 
+LOCAL_DEBUG = False
+
 class VisaFormatter:
     """
     High-performance VISA SCPI command formatter.
     MANDATORY Rust implementation.
     """
     def __init__(self):
-        print("💳🛠️🔗 [VISA] Using PURE RUST formatter.")
+        if LOCAL_DEBUG:
+            print("💳🛠️🔗 [VISA] Using PURE RUST formatter.")
         self._formatter = RustVisaFormatter()
 
     def format_command(self, cmd: str, value: float):

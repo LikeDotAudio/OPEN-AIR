@@ -208,7 +208,7 @@ class StateManager:
         if isinstance(path, str):
             path = path.split(".")
         
-        current = self._json_data
+        current = self.get_state()
         try:
             for part in path:
                 current = current[part]

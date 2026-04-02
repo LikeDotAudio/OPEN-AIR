@@ -16,6 +16,8 @@ except Exception as e:
     logging.error(f"oaTranslator: Failed to load Rust Task Pool: {e}")
     HAS_RUST = False
 
+LOCAL_DEBUG = False
+
 class TaskPool:
     """
     High-performance work-stealing task pool using Rust Rayon.
@@ -25,7 +27,8 @@ class TaskPool:
             num_threads = multiprocessing.cpu_count()
             
         if HAS_RUST:
-            print(f"⚙️🛠️🔗 [TRANSLATOR] Using PURE RUST task pool ({num_threads} threads).")
+            if LOCAL_DEBUG:
+                print(f"⚙️🛠️🔗 [TRANSLATOR] Using PURE RUST task pool ({num_threads} threads).")
             self._pool = RustTaskPool(num_threads)
         else:
             self._pool = None

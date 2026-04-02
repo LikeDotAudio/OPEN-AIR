@@ -4,6 +4,8 @@
 #
 # Description: Python wrapper for the Rust Fast Scanner.
 
+LOCAL_DEBUG = True
+
 import logging
 from .oaFastScanner_rs.compiler_hook import ensure_compiled
 
@@ -17,11 +19,12 @@ except Exception as e:
 
 class FastScanner:
     """
-    High-performance concurrent directory scanner using Rust.
+    High-performance directory scanner using Rust.
     """
     def __init__(self):
         if HAS_RUST:
-            print("📂🛠️🔗 [GUI_MANAGER] Using PURE RUST fast scanner.")
+            if LOCAL_DEBUG:
+                print("📂🛠️🔗 [GUI_MANAGER] Using PURE RUST fast scanner.")
             self._scanner = RustFastScanner()
         else:
             self._scanner = None

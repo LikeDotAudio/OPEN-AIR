@@ -7,9 +7,6 @@ project_root = current_dir.parent.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-
-        self.project_root = project_root
-
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Methods/FlameGraph/flame_manager.py
@@ -63,7 +60,7 @@ class FlameManager:
         if output_dir:
             self.data_dir = pathlib.Path(output_dir)
         else:
-            self.data_dir = self.project_root / "oaDataLogs" / "FlameGraph"
+            self.data_dir = project_root / "oaDataLogs" / "FlameGraph"
         
         self.data_dir.mkdir(parents=True, exist_ok=True)
         self.mtp = MultiThreadProfiler()

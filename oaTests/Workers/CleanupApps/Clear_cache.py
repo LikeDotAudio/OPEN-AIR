@@ -1,8 +1,13 @@
 import sys
 import os
-    project_root = current_script_dir.parents[2]
-    
-            sys.path.insert(0, str(project_root))
+import pathlib
+from pathlib import Path
+
+# 1. Setup Environment
+current_script_dir = Path(__file__).resolve().parent
+project_root = current_script_dir.parents[2]
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
 
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log

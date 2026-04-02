@@ -19,6 +19,12 @@ import time
 from typing import Any
 
 try:
+    from oaosccore_rs import OscServer
+    HAS_OSC_RS = True
+except ImportError:
+    HAS_OSC_RS = False
+
+try:
     from pythonosc.dispatcher import Dispatcher
     from pythonosc.osc_server import BlockingOSCUDPServer
     HAS_OSC = True
@@ -38,6 +44,7 @@ osc_logger = logger.bind(category="OSC")
 class OscRxServer:
     """
     Receives OSC messages and routes them to the state manager.
+    Leverages Pure Rust for high-frequency data ingestion if available.
     """
     def __init__(self, host: str, port: int, state_callback: Any):
         self.host = host
@@ -46,28 +53,54 @@ class OscRxServer:
         self.server = None
         self._thread = None
         self._stop_event = threading.Event()
+        self._use_rust = HAS_OSC_RS
 
-    def _msg_handler(self, address, *args):
+    def _msg_handler(self, address, args):
         """Dispatches incoming OSC messages to the state manager."""
         if _is_debug():
-            osc_logger.debug(f"📥📡📥 [OSC] RX: {address} -> {args}")
+            osc_logger.debug(f"📥📡📥 [OSC-RS] RX: {address} -> {args}")
         # Typically OSC values are single floats or ints
         val = args[0] if args else None
         self.state_callback(address, val)
 
+    def _legacy_msg_handler(self, address, *args):
+        """Legacy handler for python-osc."""
+        if _is_debug():
+            osc_logger.debug(f"📥📡📥 [OSC-PY] RX: {address} -> {args}")
+        val = args[0] if args else None
+        self.state_callback(address, val)
+
     def start(self):
-        """Starts the OSC server in a background thread."""
+        """Starts the OSC server."""
+        if self._use_rust:
+            self._start_rust()
+        else:
+            self._start_legacy()
+
+    def _start_rust(self):
+        """Starts the Pure Rust OSC server."""
+        try:
+            self.server = OscServer()
+            self.server.start(self.host, self.port, self._msg_handler)
+            if _is_debug():
+                osc_logger.success(f"📡🆗✅ [OSC] Pure Rust RX Server listening on "
+                                   f"{self.host}:{self.port}")
+        except Exception as e:
+            osc_logger.error(f"❌🚫🛑 [OSC] Failed to start Rust RX Server: {e}. Falling back to legacy.")
+            self._use_rust = False
+            self._start_legacy()
+
+    def _start_legacy(self):
+        """Starts the legacy python-osc server in a background thread."""
         if not HAS_OSC:
             osc_logger.error(f"❌🚫🛑 [OSC] RX Server: python-osc not installed. "
                              f"Please run 'Check Dependencies'.")
             return
 
         dispatcher = Dispatcher()
-        dispatcher.map("/*", self._msg_handler)
+        dispatcher.map("/*", self._legacy_msg_handler)
 
         try:
-            # ⚡ OPTIMIZATION: Allow immediate reuse of the port after shutdown
-            # This prevents [Errno 98] Address already in use during rapid restarts.
             class ReusableOSCServer(BlockingOSCUDPServer):
                 allow_reuse_address = True
 
@@ -77,16 +110,19 @@ class OscRxServer:
                                             daemon=True)
             self._thread.start()
             if _is_debug():
-                osc_logger.success(f"📡🆗✅ [OSC] RX Server listening on "
+                osc_logger.success(f"📡🆗✅ [OSC] Legacy RX Server listening on "
                                    f"{self.host}:{self.port}")
         except Exception as e:
-            osc_logger.error(f"❌🚫🛑 [OSC] Failed to start RX Server: {e}")
+            osc_logger.error(f"❌🚫🛑 [OSC] Failed to start Legacy RX Server: {e}")
 
     def stop(self):
         """Stops the OSC server."""
         if self.server:
-            self.server.shutdown()
-            if self._thread:
-                self._thread.join(timeout=2.0)
+            if self._use_rust:
+                self.server.stop()
+            else:
+                self.server.shutdown()
+                if self._thread:
+                    self._thread.join(timeout=2.0)
             if _is_debug():
                 osc_logger.debug("🛑📡👋 [OSC] RX Server stopped.")

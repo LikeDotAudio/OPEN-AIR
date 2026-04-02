@@ -30,6 +30,13 @@ except ImportError as e:
     logger.critical("🚀❌ [FATAL] Rust VISA Core module missing. Pure Rust mode is mandatory.")
     raise e
 
+try:
+    from oavisascanner_rs import VisaScanner
+    scanner_rs = VisaScanner()
+    HAS_SCANNER_RS = True
+except ImportError:
+    HAS_SCANNER_RS = False
+
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
 from loguru import logger
@@ -69,6 +76,40 @@ def probe_devices(resource_manager, potential_targets):
     """
     matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 🔍 manager_visa_Search: Received {len(potential_targets)} potential targets for probing: {potential_targets}", "DEBUG")
     device_collection = {}
+
+    if HAS_SCANNER_RS:
+        # ⚡ PURE RUST PRE-PROBE: Concurrently check for TCP reachability
+        matrix_log("core", "visa", "probe_devices", "⚡ Starting concurrent reachability scan...", "DEBUG")
+        tcp_map = {}
+        probe_list = []
+        for target in potential_targets:
+            res = target["Resource"]
+            if "TCPIP" in res:
+                parts = res.split("::")
+                if len(parts) > 1:
+                    ip = parts[1]
+                    tcp_map[ip] = target
+                    probe_list.append((ip, 111))
+                    probe_list.append((ip, 5025))
+                    probe_list.append((ip, 4880))
+        
+        if probe_list:
+            reachability = scanner_rs.check_reachability(probe_list, 1000)
+            reachable_ips = {r["ip"] for r in reachability if r["reachable"]}
+            
+            filtered = []
+            for target in potential_targets:
+                res = target["Resource"]
+                if "TCPIP" in res:
+                    parts = res.split("::")
+                    if len(parts) > 1 and parts[1] in reachable_ips:
+                        filtered.append(target)
+                    else:
+                        matrix_log("core", "visa", "probe_devices", f"   ⏭️ Skipping unreachable host: {res}", "DEBUG")
+                else:
+                    filtered.append(target)
+            potential_targets = filtered
+            matrix_log("core", "visa", "probe_devices", f"⚡ Reachability scan complete. {len(potential_targets)} targets remaining.", "SUCCESS")
 
     try:
         for idx, target in enumerate(potential_targets):

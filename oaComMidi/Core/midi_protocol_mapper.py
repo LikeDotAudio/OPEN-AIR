@@ -27,8 +27,14 @@ class MIDIProtocolMapper:
         else:
             dev_id = "unknown"
             if port_name:
-                m = re.search(r"(\d+:\d+)", port_name)
-                dev_id = m.group(1).replace(":", "_") if m else re.sub(r'[^a-zA-Z0-9]', '_', port_name).lower().strip('_')
+                # Try to extract the name before the colon (ALSA style)
+                # E.g., 'Arturia MicroLab:Arturia MicroLab  32:0' -> 'Arturia MicroLab'
+                name_part = port_name.split(':')[0]
+                # Sanitize: lowercase and replace non-alphanumeric with underscore
+                dev_id = re.sub(r'[^a-zA-Z0-9]', '_', name_part).lower().strip('_')
+                # Collapse multiple underscores
+                dev_id = re.sub(r'_{2,}', '_', dev_id)
+                
             self._dev_id_cache[port_name] = dev_id
         
         ch = msg.channel if hasattr(msg, 'channel') else 0
@@ -39,5 +45,30 @@ class MIDIProtocolMapper:
         return f"{base}/{msg.type}", 0
 
     def topic_to_midi(self, topic, val):
-        """Logic for reverse mapping Internal -> MIDI (To be implemented)."""
-        return None
+        """Logic for reverse mapping Internal -> MIDI."""
+        if "/MIDI/" not in topic: return None
+        
+        try:
+            parts = topic.split('/')
+            # OPEN-AIR / MIDI / dev_id / chX / type
+            if len(parts) < 5: return None
+            
+            ch_str = parts[3] # e.g. "ch0"
+            type_str = parts[4] # e.g. "cc7" or "note60"
+            
+            channel = int(re.search(r"\d+", ch_str).group(0))
+            
+            import mido
+            if "cc" in type_str:
+                control = int(re.search(r"\d+", type_str).group(0))
+                return mido.Message('control_change', channel=channel, control=control, value=int(val))
+            
+            if "note" in type_str:
+                note = int(re.search(r"\d+", type_str).group(0))
+                velocity = int(val)
+                m_type = 'note_on' if velocity > 0 else 'note_off'
+                return mido.Message(m_type, channel=channel, note=note, velocity=velocity)
+                
+            return None
+        except Exception:
+            return None

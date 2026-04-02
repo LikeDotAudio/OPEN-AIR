@@ -18,6 +18,9 @@ if _rs_dir not in sys.path:
 import compiler_hook
 compiler_hook.ensure_compiled()
 
+import importlib
+importlib.invalidate_caches()
+
 try:
     import oaptpparser_rs
 except ImportError as e:

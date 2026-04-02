@@ -5,14 +5,630 @@ IMPORTS
     DisplayString FROM SNMPv2-TC;
 
 openAirMIB MODULE-IDENTITY
-    LAST-UPDATED "202604010845Z"
+    LAST-UPDATED "202604012324Z"
     ORGANIZATION "OPEN-AIR Project"
     CONTACT-INFO "Anthony Peter Kuzub"
     DESCRIPTION "MQTT-Aligned OID Tree for OPEN-AIR."
-    REVISION "202604010845Z"
+    REVISION "202604012324Z"
     DESCRIPTION "Strictly unique path-aligned generation."
     ::= { enterprises 65300 }
 
 v1 OBJECT IDENTIFIER ::= { openAirMIB 1 }
+
+assets79d1 OBJECT IDENTIFIER ::= { v1 32142 }
+assetsSpectrum9965 OBJECT IDENTIFIER ::= { assets79d1 0 }
+assetsSpectrumInstrument5d2b OBJECT IDENTIFIER ::= { assetsSpectrum9965 3 }
+assetsSpectrumInstrumentFrequencyf29b OBJECT IDENTIFIER ::= { assetsSpectrumInstrument5d2b 1 }
+assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequency1a26 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentFrequencyf29b 33369 }
+assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequency4fa6 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequency1a26 54840 }
+assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequency5ff2 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequency4fa6 36210 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz
+assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequencyf074 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz"
+    ::= { assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequency5ff2 31728 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz
+assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequencya7ab OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz"
+    ::= { assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequency5ff2 48513 }
+
+assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequency5766 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequency4fa6 36959 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Quick Span/Span
+assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequencyc087 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Quick Span/Span"
+    ::= { assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequency5766 64492 }
+
+assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequencyc7a1 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequency4fa6 53393 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz
+assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequency6298 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz"
+    ::= { assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequencyc7a1 2369 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz
+assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequency7735 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/stop_freq_MHz"
+    ::= { assetsSpectrumInstrumentFrequencySpectrumInstrumentfrequencyc7a1 38481 }
+
+assetsSpectrumInstrumentBandwidth5eed OBJECT IDENTIFIER ::= { assetsSpectrumInstrument5d2b 2 }
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth88b1 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentBandwidth5eed 5104 }
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth3908 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth88b1 16720 }
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth9ba3 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth3908 1893 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth892b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/Resolution Band Width"
+    ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth9ba3 17396 }
+
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthfc8a OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth9ba3 34210 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/dial_config
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthb398 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/dial_config"
+    ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthfc8a 25960 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/fader_config
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth4905 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Resolution Bandwidth/RBW/fader_config"
+    ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthfc8a 31626 }
+
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth1a75 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth3908 43407 }
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthcee7 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth1a75 22849 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Sweep Time/sweep_time_setting/fader_config
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthf4a6 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Sweep Time/sweep_time_setting/fader_config"
+    ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthcee7 6490 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Sweep Time/sweep_time_setting/dial_config
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthad08 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Sweep Time/sweep_time_setting/dial_config"
+    ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthcee7 43416 }
+
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthe565 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth3908 45850 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width 
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth4021 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/Video Band Width "
+    ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthe565 504 }
+
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth4e7c OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthe565 18590 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/vbw_MHz/fader_config
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthf1b8 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/vbw_MHz/fader_config"
+    ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth4e7c 139 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/vbw_MHz/dial_config
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthb346 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/vbw_MHz/dial_config"
+    ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidth4e7c 27487 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/VBW_Automatic
+assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthdc93 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/bandwidth/Spectrum_Instrument_bandwidth/blocks/Video Bandwidth/VBW_Automatic"
+    ::= { assetsSpectrumInstrumentBandwidthSpectrumInstrumentbandwidthe565 26832 }
+
+assetsSpectrumInstrumentAmplitudebf49 OBJECT IDENTIFIER ::= { assetsSpectrumInstrument5d2b 3 }
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude398c OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentAmplitudebf49 38833 }
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitudea4e2 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude398c 10887 }
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude3b4d OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitudea4e2 10366 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Pre Amp/preamp_on
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitudeb56b OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Pre Amp/preamp_on"
+    ::= { assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude3b4d 10352 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Pre Amp/high_sensitivity_on
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude12e7 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Pre Amp/high_sensitivity_on"
+    ::= { assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude3b4d 48061 }
+
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude7fff OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitudea4e2 33806 }
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitudeed73 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude7fff 13085 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Attenuation/power_attenuation_dB/fader_config
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitudef526 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Attenuation/power_attenuation_dB/fader_config"
+    ::= { assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitudeed73 22020 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Attenuation/power_attenuation_dB/dial_config
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitudef636 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Attenuation/power_attenuation_dB/dial_config"
+    ::= { assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitudeed73 61913 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Attenuation/POWER_ATTENUATION
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude5e94 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Attenuation/POWER_ATTENUATION"
+    ::= { assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude7fff 18603 }
+
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude6721 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitudea4e2 45561 }
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude86bf OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude6721 5605 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Reference Level/ref_level_dBm/fader_config
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude5d72 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Reference Level/ref_level_dBm/fader_config"
+    ::= { assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude86bf 40042 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Reference Level/ref_level_dBm/dial_config
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitudec523 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Reference Level/ref_level_dBm/dial_config"
+    ::= { assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude86bf 51828 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Reference Level/REFERENCE_LEVEL_dropdown
+assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude3ffc OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/amplitude/Spectrum_Instrument_amplitude/blocks/Reference Level/REFERENCE_LEVEL_dropdown"
+    ::= { assetsSpectrumInstrumentAmplitudeSpectrumInstrumentamplitude6721 40848 }
+
+assetsSpectrumInstrumentMarkers4ec1 OBJECT IDENTIFIER ::= { assetsSpectrumInstrument5d2b 4 }
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkers5808 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentMarkers4ec1 427 }
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc6b8f OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkers5808 39533 }
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBlocbbe1 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc6b8f 5250 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 3/Active
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloca17d OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 3/Active"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBlocbbe1 16776 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 3/Y_dBm
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc3c62 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 3/Y_dBm"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBlocbbe1 44783 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 3/X_MHz
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc77ef OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 3/X_MHz"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBlocbbe1 53661 }
+
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc7cb9 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc6b8f 9236 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 2/Active
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc6dd7 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 2/Active"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc7cb9 16662 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 2/Y_dBm
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc9a15 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 2/Y_dBm"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc7cb9 42331 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 2/X_MHz
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBlocd198 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 2/X_MHz"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc7cb9 55849 }
+
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloce5b0 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc6b8f 30126 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 1/Active
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloce358 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 1/Active"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloce5b0 18165 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 1/Y_dBm
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBlocabfd OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 1/Y_dBm"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloce5b0 49094 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 1/X_MHz
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloce070 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 1/X_MHz"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloce5b0 49332 }
+
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc9d39 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc6b8f 32336 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/All Marker On/All_Markers_On
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc1001 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/All Marker On/All_Markers_On"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc9d39 31212 }
+
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc95da OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc6b8f 33057 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 4/Active
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBlocabb8 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 4/Active"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc95da 18577 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 4/Y_dBm
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBlocf9c5 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 4/Y_dBm"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc95da 36961 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 4/X_MHz
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBlocb248 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 4/X_MHz"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc95da 61203 }
+
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloce2dd OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc6b8f 45495 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 5/Active
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc6712 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 5/Active"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloce2dd 18447 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 5/Y_dBm
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc5fb2 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 5/Y_dBm"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloce2dd 39893 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 5/X_MHz
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc143f OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 5/X_MHz"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloce2dd 58535 }
+
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc7bd4 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc6b8f 57357 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 6/Active
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloce99d OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 6/Active"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc7bd4 20460 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 6/Y_dBm
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc6e5a OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 6/Y_dBm"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc7bd4 33096 }
+
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 6/X_MHz
+assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc25d7 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/markers/Spectrum_Instrument_markers/blocks/Marker 6/X_MHz"
+    ::= { assetsSpectrumInstrumentMarkersSpectrumInstrumentmarkersBloc7bd4 65082 }
+
+assetsSpectrumInstrumentTracesf27c OBJECT IDENTIFIER ::= { assetsSpectrumInstrument5d2b 5 }
+assetsSpectrumInstrumentTracesSpectrumInstrumenttraces8aee OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentTracesf27c 21678 }
+assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocks4e3d OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentTracesSpectrumInstrumenttraces8aee 28643 }
+assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocks33b8 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocks4e3d 12535 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/traces/Spectrum_Instrument_traces/blocks/Trace 1/TRACE_MODE_1
+assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocks20c0 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/traces/Spectrum_Instrument_traces/blocks/Trace 1/TRACE_MODE_1"
+    ::= { assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocks33b8 30529 }
+
+assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocksddb6 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocks4e3d 20955 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/traces/Spectrum_Instrument_traces/blocks/Trace 3/TRACE_MODE_3
+assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocks2fa0 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/traces/Spectrum_Instrument_traces/blocks/Trace 3/TRACE_MODE_3"
+    ::= { assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocksddb6 53952 }
+
+assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocksaab1 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocks4e3d 24909 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/traces/Spectrum_Instrument_traces/blocks/Trace 2/TRACE_MODE_2
+assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocksc5a8 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/traces/Spectrum_Instrument_traces/blocks/Trace 2/TRACE_MODE_2"
+    ::= { assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocksaab1 800 }
+
+assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocksdb61 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocks4e3d 37350 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/traces/Spectrum_Instrument_traces/blocks/Averaging/AVERAGING
+assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocksdc05 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/traces/Spectrum_Instrument_traces/blocks/Averaging/AVERAGING"
+    ::= { assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocksdb61 64952 }
+
+assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocks43d2 OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocks4e3d 50296 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/traces/Spectrum_Instrument_traces/blocks/Trace 4/TRACE_MODE_4
+assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocksd409 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/traces/Spectrum_Instrument_traces/blocks/Trace 4/TRACE_MODE_4"
+    ::= { assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocks43d2 60835 }
+
+assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocksea2a OBJECT IDENTIFIER ::= { assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocks4e3d 63091 }
+-- MQTT: OPEN-AIR/Assets/Spectrum/Instrument/traces/Spectrum_Instrument_traces/blocks/Continuous/CONTINUOUS_MODE
+assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocks5044 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Spectrum/Instrument/traces/Spectrum_Instrument_traces/blocks/Continuous/CONTINUOUS_MODE"
+    ::= { assetsSpectrumInstrumentTracesSpectrumInstrumenttracesBlocksea2a 1453 }
+
+assetsScan8571 OBJECT IDENTIFIER ::= { assets79d1 1 }
+assetsScanScan39a8 OBJECT IDENTIFIER ::= { assetsScan8571 27445 }
+assetsScanScanBlocks8eaa OBJECT IDENTIFIER ::= { assetsScanScan39a8 46272 }
+assetsScanScanBlocksMultidatasetgraphc492 OBJECT IDENTIFIER ::= { assetsScanScanBlocks8eaa 19071 }
+assetsScanScanBlocksMultidatasetgraphOaDataRunningFilesfdbd OBJECT IDENTIFIER ::= { assetsScanScanBlocksMultidatasetgraphc492 9507 }
+-- MQTT: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/MARKERS
+assetsScanScanBlocksMultidatasetgraphOaDataRunningFilesMARKE651d OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/MARKERS"
+    ::= { assetsScanScanBlocksMultidatasetgraphOaDataRunningFilesfdbd 18452 }
+
+-- MQTT: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear
+assetsScanScanBlocksMultidatasetgraphOaDataRunningFilesRefli8ee1 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/oaDataRunningFiles/ref_linear"
+    ::= { assetsScanScanBlocksMultidatasetgraphOaDataRunningFilesfdbd 30162 }
+
+assetsScanScanBlocksMultidatasetgraphSettings5e4f OBJECT IDENTIFIER ::= { assetsScanScanBlocksMultidatasetgraphc492 53222 }
+-- MQTT: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/settings/x_label
+assetsScanScanBlocksMultidatasetgraphSettingsXlabela969 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/settings/x_label"
+    ::= { assetsScanScanBlocksMultidatasetgraphSettings5e4f 9887 }
+
+-- MQTT: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/settings/ylim
+assetsScanScanBlocksMultidatasetgraphSettingsYlim8331 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/settings/ylim"
+    ::= { assetsScanScanBlocksMultidatasetgraphSettings5e4f 10649 }
+
+-- MQTT: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/settings/y_label
+assetsScanScanBlocksMultidatasetgraphSettingsYlabelf1e2 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/settings/y_label"
+    ::= { assetsScanScanBlocksMultidatasetgraphSettings5e4f 11563 }
+
+-- MQTT: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/settings/xlim
+assetsScanScanBlocksMultidatasetgraphSettingsXlim3b8d OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/settings/xlim"
+    ::= { assetsScanScanBlocksMultidatasetgraphSettings5e4f 20220 }
+
+-- MQTT: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/settings/title
+assetsScanScanBlocksMultidatasetgraphSettingsTitlea421 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/settings/title"
+    ::= { assetsScanScanBlocksMultidatasetgraphSettings5e4f 21874 }
+
+-- MQTT: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/settings/show_grid
+assetsScanScanBlocksMultidatasetgraphSettingsShowgrid97d7 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/scan/scan/blocks/multi_dataset_graph/settings/show_grid"
+    ::= { assetsScanScanBlocksMultidatasetgraphSettings5e4f 55413 }
+
+assetsMonitorse005 OBJECT IDENTIFIER ::= { assets79d1 2 }
+assetsMonitorsGraphs5c0a OBJECT IDENTIFIER ::= { assetsMonitorse005 00 }
+assetsMonitorsGraphsMonitors7920 OBJECT IDENTIFIER ::= { assetsMonitorsGraphs5c0a 33517 }
+assetsMonitorsGraphsMonitorsSettings2d1a OBJECT IDENTIFIER ::= { assetsMonitorsGraphsMonitors7920 43006 }
+-- MQTT: OPEN-AIR/Assets/monitors/Graphs/monitors/settings/show_grid
+assetsMonitorsGraphsMonitorsSettingsShowgrid9a6a OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/monitors/Graphs/monitors/settings/show_grid"
+    ::= { assetsMonitorsGraphsMonitorsSettings2d1a 8149 }
+
+-- MQTT: OPEN-AIR/Assets/monitors/Graphs/monitors/settings/y_label
+assetsMonitorsGraphsMonitorsSettingsYlabelc296 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/monitors/Graphs/monitors/settings/y_label"
+    ::= { assetsMonitorsGraphsMonitorsSettings2d1a 20686 }
+
+-- MQTT: OPEN-AIR/Assets/monitors/Graphs/monitors/settings/x_label
+assetsMonitorsGraphsMonitorsSettingsXlabel64e1 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/monitors/Graphs/monitors/settings/x_label"
+    ::= { assetsMonitorsGraphsMonitorsSettings2d1a 23418 }
+
+-- MQTT: OPEN-AIR/Assets/monitors/Graphs/monitors/settings/title
+assetsMonitorsGraphsMonitorsSettingsTitledadf OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/monitors/Graphs/monitors/settings/title"
+    ::= { assetsMonitorsGraphsMonitorsSettings2d1a 43083 }
+
+-- MQTT: OPEN-AIR/Assets/monitors/Graphs/monitors/settings/ylim
+assetsMonitorsGraphsMonitorsSettingsYlimccb0 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/monitors/Graphs/monitors/settings/ylim"
+    ::= { assetsMonitorsGraphsMonitorsSettings2d1a 44436 }
+
+-- MQTT: OPEN-AIR/Assets/monitors/Graphs/monitors/settings/xlim
+assetsMonitorsGraphsMonitorsSettingsXlim740c OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/monitors/Graphs/monitors/settings/xlim"
+    ::= { assetsMonitorsGraphsMonitorsSettings2d1a 51953 }
+
+assetsMonitorsGraphsMonitorsOaDataRunningFilesf000 OBJECT IDENTIFIER ::= { assetsMonitorsGraphsMonitors7920 57987 }
+-- MQTT: OPEN-AIR/Assets/monitors/Graphs/monitors/oaDataRunningFiles/MARKERS
+assetsMonitorsGraphsMonitorsOaDataRunningFilesMARKERS982e OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/monitors/Graphs/monitors/oaDataRunningFiles/MARKERS"
+    ::= { assetsMonitorsGraphsMonitorsOaDataRunningFilesf000 51847 }
+
+assetsPowercaa0 OBJECT IDENTIFIER ::= { assets79d1 5 }
+assetsPowerInstrument6618 OBJECT IDENTIFIER ::= { assetsPowercaa0 1 }
+assetsPowerInstrumentOneinstrument503f OBJECT IDENTIFIER ::= { assetsPowerInstrument6618 1 }
+assetsPowerInstrumentOneinstrumentPowerInstrumentOneinstrumeb526 OBJECT IDENTIFIER ::= { assetsPowerInstrumentOneinstrument503f 8273 }
+assetsPowerInstrumentOneinstrumentPowerInstrumentOneinstrume3d95 OBJECT IDENTIFIER ::= { assetsPowerInstrumentOneinstrumentPowerInstrumentOneinstrumeb526 8681 }
+assetsPowerInstrumentOneinstrumentPowerInstrumentOneinstrume7d44 OBJECT IDENTIFIER ::= { assetsPowerInstrumentOneinstrumentPowerInstrumentOneinstrume3d95 4225 }
+assetsPowerInstrumentOneinstrumentPowerInstrumentOneinstrume8822 OBJECT IDENTIFIER ::= { assetsPowerInstrumentOneinstrumentPowerInstrumentOneinstrume7d44 3368 }
+-- MQTT: OPEN-AIR/Assets/Power/Instrument/One_instrument/Power_Instrument_One_instrument/blocks/PSU_Reactor_Interface/Analog_Telemetry_Deck/Meter_Current
+assetsPowerInstrumentOneinstrumentPowerInstrumentOneinstrume59a5 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Power/Instrument/One_instrument/Power_Instrument_One_instrument/blocks/PSU_Reactor_Interface/Analog_Telemetry_Deck/Meter_Current"
+    ::= { assetsPowerInstrumentOneinstrumentPowerInstrumentOneinstrume8822 36085 }
+
+assetsZoo5f4e OBJECT IDENTIFIER ::= { assets79d1 9 }
+assetsZooFadersee8d OBJECT IDENTIFIER ::= { assetsZoo5f4e 0 }
+assetsZooFadersLTP268f OBJECT IDENTIFIER ::= { assetsZooFadersee8d 0 }
+assetsZooFadersLTPZooFadersLTP9bbe OBJECT IDENTIFIER ::= { assetsZooFadersLTP268f 48599 }
+assetsZooFadersLTPZooFadersLTPBlocksd630 OBJECT IDENTIFIER ::= { assetsZooFadersLTPZooFadersLTP9bbe 20320 }
+assetsZooFadersLTPZooFadersLTPBlocksLTPFreestyleConsolec0ad OBJECT IDENTIFIER ::= { assetsZooFadersLTPZooFadersLTPBlocksd630 12292 }
+assetsZooFadersLTPZooFadersLTPBlocksLTPFreestyleConsoleCH2ddb3 OBJECT IDENTIFIER ::= { assetsZooFadersLTPZooFadersLTPBlocksLTPFreestyleConsolec0ad 55281 }
+-- MQTT: OPEN-AIR/Assets/Zoo/Faders/LTP/Zoo_Faders_LTP/blocks/LTP_Freestyle_Console/CH2/rotation
+assetsZooFadersLTPZooFadersLTPBlocksLTPFreestyleConsoleCH2Roc577 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Zoo/Faders/LTP/Zoo_Faders_LTP/blocks/LTP_Freestyle_Console/CH2/rotation"
+    ::= { assetsZooFadersLTPZooFadersLTPBlocksLTPFreestyleConsoleCH2ddb3 60500 }
+
+assetsZooFadersVertical9813 OBJECT IDENTIFIER ::= { assetsZooFadersee8d 1 }
+assetsZooFadersVerticalExperimental1feb OBJECT IDENTIFIER ::= { assetsZooFadersVertical9813 3 }
+assetsZooFadersVerticalExperimentalZooFadersVerticalExperimee011 OBJECT IDENTIFIER ::= { assetsZooFadersVerticalExperimental1feb 5174 }
+assetsZooFadersVerticalExperimentalZooFadersVerticalExperime3bd8 OBJECT IDENTIFIER ::= { assetsZooFadersVerticalExperimentalZooFadersVerticalExperimee011 36159 }
+assetsZooFadersVerticalExperimentalZooFadersVerticalExperimee481 OBJECT IDENTIFIER ::= { assetsZooFadersVerticalExperimentalZooFadersVerticalExperime3bd8 42854 }
+-- MQTT: OPEN-AIR/Assets/Zoo/Faders/Vertical/Experimental/Zoo_Faders_Vertical_Experimental/blocks/Experimental_Fader_Riot/exp_4
+assetsZooFadersVerticalExperimentalZooFadersVerticalExperime17a3 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/Zoo/Faders/Vertical/Experimental/Zoo_Faders_Vertical_Experimental/blocks/Experimental_Fader_Riot/exp_4"
+    ::= { assetsZooFadersVerticalExperimentalZooFadersVerticalExperimee481 48531 }
+
+assetsRighttopd258 OBJECT IDENTIFIER ::= { assets79d1 65245 }
+assetsRighttopBlocksba04 OBJECT IDENTIFIER ::= { assetsRighttopd258 19748 }
+assetsRighttopBlocksControlButtons30e5 OBJECT IDENTIFIER ::= { assetsRighttopBlocksba04 19809 }
+-- MQTT: OPEN-AIR/Assets/right_top/blocks/Control_Buttons/Pause
+assetsRighttopBlocksControlButtonsPausef081 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: OPEN-AIR/Assets/right_top/blocks/Control_Buttons/Pause"
+    ::= { assetsRighttopBlocksControlButtons30e5 26413 }
+
+tESTd87f OBJECT IDENTIFIER ::= { v1 32268 }
+tESTRUST1d99 OBJECT IDENTIFIER ::= { tESTd87f 18592 }
+-- MQTT: TEST/RUST/TOPIC
+tESTRUSTTOPICb973 OBJECT-TYPE
+    SYNTAX      DisplayString
+    MAX-ACCESS  read-write
+    STATUS      current
+    DESCRIPTION "Source: TEST/RUST/TOPIC"
+    ::= { tESTRUST1d99 41773 }
 
 END

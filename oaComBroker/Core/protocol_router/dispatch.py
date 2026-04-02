@@ -73,9 +73,12 @@ def _dispatch_mqtt(mqtt_manager, topic, msg, val_str):
     if base in topic and f"{base}/Cmd/" not in topic and f"{base}/Tx/" not in topic:
         tx_topic = topic.replace(base, f"{base}/Tx")
         
-    mqtt_manager.publish(tx_topic, orjson.dumps(payload).decode())
+    # ⚡ OPTIMIZATION: Retain status and monitor topics for late-joining observers
+    retain = ("/Status/" in topic or "/Monitor/" in topic)
+    
+    mqtt_manager.publish(tx_topic, orjson.dumps(payload).decode(), retain=retain)
     if LOCAL_DEBUG:
-        router_logger.debug(f"📡📤📤 [OUTBOUND] MQTT >> {tx_topic}: {val_str}")
+        router_logger.debug(f"📡📤📤 [OUTBOUND] MQTT >> {tx_topic} (Retain={retain}): {val_str}")
 
 @protocol_guard("OSC")
 def _dispatch_osc(osc_manager, topic, val, msg, val_str):

@@ -1,0 +1,60 @@
+// oaStateCache/Core/oaTrie_rs/src/lib.rs
+// Author: Gemini Iron Oxide Architect
+// Version: 20260401.2300.1
+
+use pyo3::prelude::*;
+use std::collections::HashMap;
+
+#[derive(Default)]
+struct TrieNode {
+    children: HashMap<String, TrieNode>,
+    is_terminal: bool,
+}
+
+#[pyclass]
+struct TopicTrie {
+    root: TrieNode,
+}
+
+#[pymethods]
+impl TopicTrie {
+    #[new]
+    fn new() -> Self {
+        TopicTrie {
+            root: TrieNode::default(),
+        }
+    }
+
+    fn insert(&mut self, topic: String) {
+        let mut current = &mut self.root;
+        for part in topic.split('/') {
+            if part.is_empty() { continue; }
+            current = current.children.entry(part.to_string()).or_insert_with(TrieNode::default);
+        }
+        current.is_terminal = true;
+    }
+
+    fn exists(&self, prefix: String) -> bool {
+        let mut current = &self.root;
+        for part in prefix.split('/') {
+            if part.is_empty() { continue; }
+            if let Some(next) = current.children.get(part) {
+                current = next;
+            } else {
+                return false;
+            }
+        }
+        // If we found the node, the prefix exists in the tree
+        true
+    }
+
+    fn clear(&mut self) {
+        self.root = TrieNode::default();
+    }
+}
+
+#[pymodule]
+fn oatrie_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+    m.add_class::<TopicTrie>()?;
+    Ok(())
+}

@@ -1,58 +1,58 @@
 {
   "right_top": {
-    "type": "OcaBin",
-    "id": "50.10",
+    "behavior": {
+      "fluid_ew": true,
+      "overflow_ew": "auto",
+      "overflow_ns": "auto"
+    },
+    "blocks": {
+      "Control_Buttons": {
+        "fields": {
+          "Pause": {
+            "handler": "pause_button_clicked",
+            "label": "Pause",
+            "layout": {
+              "height": 40,
+              "width": 80
+            },
+            "style": {
+              "active_color": "#ffff00"
+            },
+            "type": "_GuiButtonToggle"
+          },
+          "Start": {
+            "handler": "start_button_clicked",
+            "label": "Start",
+            "layout": {
+              "height": 40,
+              "width": 80
+            },
+            "style": {
+              "active_color": "#00ff00"
+            },
+            "type": "_GuiActuator"
+          },
+          "Stop": {
+            "handler": "stop_button_clicked",
+            "label": "Stop",
+            "layout": {
+              "height": 40,
+              "width": 80
+            },
+            "style": {
+              "active_color": "#ff0000"
+            },
+            "type": "_GuiActuator"
+          }
+        },
+        "type": "OcaBlock"
+      }
+    },
     "description": "Root container locked to window edges with smart auto-scrolling.",
     "geometry": {
       "anchor": "NSEW"
     },
-    "behavior": {
-      "overflow_ns": "auto",
-      "overflow_ew": "auto",
-      "fluid_ew": true
-    },
-    "blocks": {
-      "Control_Buttons": {
-        "type": "OcaBlock",
-        "fields": {
-          "Start": {
-            "type": "_GuiActuator",
-            "label": "Start",
-            "handler": "start_button_clicked",
-            "layout": {
-              "width": 80,
-              "height": 40
-            },
-            "style": {
-              "active_color": "#00ff00"
-            }
-          },
-          "Pause": {
-            "type": "_GuiButtonToggle",
-            "label": "Pause",
-            "handler": "pause_button_clicked",
-            "layout": {
-              "width": 80,
-              "height": 40
-            },
-            "style": {
-              "active_color": "#ffff00"
-            }
-          },
-          "Stop": {
-            "type": "_GuiActuator",
-            "label": "Stop",
-            "handler": "stop_button_clicked",
-            "layout": {
-              "width": 80,
-              "height": 40
-            },
-            "style": {
-              "active_color": "#ff0000"
-            }
-          }
-        }
-      }
-    }
+    "id": "50.10",
+    "type": "OcaBin"
   }
 }

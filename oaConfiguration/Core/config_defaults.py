@@ -50,6 +50,7 @@ class ConfigDefaults:
     SCAN_AES70 = True
     SCAN_OSC = True
     SCAN_SNMP = True
+    SCAN_MIDI = True
 
     # VISA Settings
     VISA_PROBE_PROTOCOL = "http"

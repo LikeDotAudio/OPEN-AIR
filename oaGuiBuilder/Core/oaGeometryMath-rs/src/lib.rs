@@ -1,12 +1,55 @@
 use pyo3::prelude::*;
 
 #[pyfunction]
-fn hello() -> PyResult<String> {
-    Ok("Hello from oageometrymath_rs".to_string())
+fn normalize_value(val: f64, min_val: f64, max_val: f64) -> f64 {
+    if (max_val - min_val).abs() < f64::EPSILON {
+        return 0.0;
+    }
+    (val - min_val) / (max_val - min_val)
+}
+
+#[pyfunction]
+fn value_to_pixel(val: f64, min_val: f64, max_val: f64, pixel_length: f64, reverse: bool) -> f64 {
+    let norm = normalize_value(val, min_val, max_val);
+    if reverse {
+        (1.0 - norm) * pixel_length
+    } else {
+        norm * pixel_length
+    }
+}
+
+#[pyfunction]
+fn rotate_point(px: f64, py: f64, cx: f64, cy: f64, angle_deg: f64) -> (f64, f64) {
+    let rad = angle_deg.to_radians();
+    let cos_a = rad.cos();
+    let sin_a = rad.sin();
+    
+    let nx = cos_a * (px - cx) - sin_a * (py - cy) + cx;
+    let ny = sin_a * (px - cx) + cos_a * (py - cy) + cy;
+    
+    (nx, ny)
+}
+
+#[pyfunction]
+fn get_position(angle_deg: f64, distance: f64, center_x: f64, center_y: f64) -> (f64, f64) {
+    let rad = angle_deg.to_radians();
+    let x = center_x + distance * rad.cos();
+    let y = center_y + distance * rad.sin();
+    (x, y)
+}
+
+#[pyfunction]
+fn get_angle(px: f64, py: f64, cx: f64, cy: f64) -> f64 {
+    let angle_rad = (py - cy).atan2(px - cx);
+    angle_rad.to_degrees()
 }
 
 #[pymodule]
 fn oageometrymath_rs(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(hello, m)?)?;
+    m.add_function(wrap_pyfunction!(normalize_value, m)?)?;
+    m.add_function(wrap_pyfunction!(value_to_pixel, m)?)?;
+    m.add_function(wrap_pyfunction!(rotate_point, m)?)?;
+    m.add_function(wrap_pyfunction!(get_position, m)?)?;
+    m.add_function(wrap_pyfunction!(get_angle, m)?)?;
     Ok(())
 }

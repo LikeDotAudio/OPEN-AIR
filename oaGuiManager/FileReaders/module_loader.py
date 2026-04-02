@@ -51,6 +51,7 @@ class ModuleLoader:
             sys.path.insert(0, str(GLOBAL_PROJECT_ROOT))
 
         try:
+            matrix_log("ui", "gui_builder", "load_module_from_path", f"📂 Loading GUI module from: {path.name}", "DEBUG")
             # ⚡ OPTIMIZATION: Derive package name to support relative imports
             # Example: 'oaGuiDefinitions.Assets.right_50.bottom_90.2_monitors.1588_PTP_Monitor.ptp_monitor'
             try:
@@ -63,6 +64,7 @@ class ModuleLoader:
 
             spec = importlib.util.spec_from_file_location(module_full_name, path)
             if not spec or not spec.loader:
+                matrix_log("ui", "gui_builder", "load_module_from_path", f"❌ Failed to create spec for {path.name}", "ERROR")
                 return None
                 
             module = importlib.util.module_from_spec(spec)
@@ -70,15 +72,24 @@ class ModuleLoader:
             sys.modules[module_full_name] = module
             spec.loader.exec_module(module)
 
-            # Find a suitable class (inherits from Frame)
+            # ⚡ ENHANCEMENT: Prioritize explicit factory function
+            if hasattr(module, "get_gui_class"):
+                matrix_log("ui", "gui_builder", "load_module_from_path", f"✅ Found get_gui_class() in {path.name}", "SUCCESS")
+                return getattr(module, "get_gui_class")()
+
+            # Fallback: Find a suitable class (inherits from Frame)
             for name, obj in inspect.getmembers(module):
                 if (
                     inspect.isclass(obj)
                     and (issubclass(obj, tk.Frame) or issubclass(obj, ttk.Frame))
                     and obj is not tk.Frame
                     and obj is not ttk.Frame
+                    and obj.__module__ == module_full_name  # Ensure it's defined in THIS module
                 ):
+                    matrix_log("ui", "gui_builder", "load_module_from_path", f"✅ Found class {name} in {path.name}", "SUCCESS")
                     return obj
+            
+            matrix_log("ui", "gui_builder", "load_module_from_path", f"⚠️ No suitable GUI class found in {path.name}", "WARNING")
             return None
         except Exception as e:
             vocal_capture("BUILDER", f"Failed to load module from {path}")

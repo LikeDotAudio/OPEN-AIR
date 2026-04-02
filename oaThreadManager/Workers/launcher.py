@@ -87,10 +87,12 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
         )
         if snmp_manager: snmp_manager.start()
 
-    midi_manager = _load_protocol_manager(
-        "oaComMidi.Entry", "get_manager",
-        state_cache_manager=state_cache_manager, run_bridge=True
-    )
+    midi_manager = None
+    if getattr(app_constants, "SCAN_MIDI", False):
+        midi_manager = _load_protocol_manager(
+            "oaComMidi.Entry", "get_manager",
+            state_cache_manager=state_cache_manager, run_bridge=True
+        )
 
     rest_manager = _load_protocol_manager(
         "oaComREST.Entry", "get_manager",

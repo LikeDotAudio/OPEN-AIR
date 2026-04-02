@@ -56,7 +56,7 @@ class StateMirrorEngine(RegistryMixin, SyncQueueMixin):
         self._initialize_queues()
 
         self.is_inert = (root is None)
-        self.GUID = app_constants.INSTANCE_GUID
+        self.GUID = app_constants.FULL_INSTANCE_ID
         
         self._silent_update = False
         self._suppress_broadcast = False

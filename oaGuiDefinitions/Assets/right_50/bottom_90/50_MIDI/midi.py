@@ -15,3 +15,6 @@ class MidiMonitor(MidiDashboard):
     """
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)
+
+def get_gui_class():
+    return MidiMonitor

@@ -1,43 +1,23 @@
 # Report_Builder/ReportBuilder_RunLog.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260401.2330.1
 #
-# Description: Brief summary of purpose
+# Description: High-performance log processing for Unified Intelligence Reports.
+# Optimized with native Rust oalogprocessor_rs for rapid HTML generation.
 
 import os
 import glob
 import html
 from datetime import datetime
+from loguru import logger
 
-def parse_log_line(line):
-    """Parses a pipe-separated log line and returns a grid-aligned HTML row."""
-    parts = [p.strip() for p in line.split('|')]
-    
-    if len(parts) < 5:
-        return f'<div class="log-line-raw" style="color: #666; padding: 5px 15px;">{html.escape(line)}</div>'
-    
-    # Extract columns
-    timestamp = parts[0]
-    level = parts[1]
-    system = parts[2]
-    element = parts[3]
-    module = parts[4]
-    message = " | ".join(parts[5:]) if len(parts) > 5 else ""
-    
-    # Assign color classes based on content
-    level_class = f"log-level-{level.lower()}"
-    system_class = f"log-system-{system.lower()}"
-    
-    return (
-        f'<div class="log-line">'
-        f'<span class="log-col log-timestamp">{html.escape(timestamp)}</span>'
-        f'<span class="log-col log-type {level_class}">{html.escape(level)}</span>'
-        f'<span class="log-col log-system {system_class}">{html.escape(system)}</span>'
-        f'<span class="log-col log-element">{html.escape(element)}</span>'
-        f'<span class="log-col log-module" title="{html.escape(module)}">{html.escape(module)}</span>'
-        f'<span class="log-col log-col-message log-message">{html.escape(message)}</span>'
-        f'</div>'
-    )
+# --- Native Rust Optimization ---
+try:
+    import oalogprocessor_rs
+    RUST_ENABLED = True
+except ImportError:
+    RUST_ENABLED = False
+    logger.warning("⚠️ [REPORTING] oalogprocessor_rs not found. Falling back to slow Python parsing.")
 
 def build_tab(data_dir):
     """
@@ -88,14 +68,17 @@ def build_tab(data_dir):
         filename = os.path.basename(file_path)
         mtime = datetime.fromtimestamp(os.path.getmtime(file_path)).strftime('%Y-%m-%d %H:%M:%S')
         
-        with open(file_path, 'r', encoding='utf-8', errors='replace') as f:
-            lines = f.readlines()
+        if RUST_ENABLED:
+            processed_lines = oalogprocessor_rs.process_log_file(file_path, 2000)
+        else:
+            # Fallback to slow Python parsing
+            with open(file_path, 'r', encoding='utf-8', errors='replace') as f:
+                lines = f.readlines()
+            if len(lines) > 2000:
+                lines = lines[-2000:]
             
-        # Show latest 2000 lines for the browser
-        if len(lines) > 2000:
-            lines = lines[-2000:]
-            
-        processed_lines = "".join([parse_log_line(line) for line in lines])
+            from .ReportBuilder_RunLog import parse_log_line # Import self for fallback if needed
+            processed_lines = "".join([parse_log_line(line) for line in lines])
         
         tab_html += f"""
         <div class="log-entry">
@@ -117,3 +100,25 @@ def build_tab(data_dir):
         </div>
         """
     return tab_html
+
+def parse_log_line(line):
+    """Parses a pipe-separated log line and returns a grid-aligned HTML row (Python Fallback)."""
+    parts = [p.strip() for p in line.split('|')]
+    if len(parts) < 5:
+        return f'<div class="log-line-raw" style="color: #666; padding: 5px 15px;">{html.escape(line)}</div>'
+    
+    timestamp, level, system, element, module = parts[0], parts[1], parts[2], parts[3], parts[4]
+    message = " | ".join(parts[5:]) if len(parts) > 5 else ""
+    level_class = f"log-level-{level.lower()}"
+    system_class = f"log-system-{system.lower()}"
+    
+    return (
+        f'<div class="log-line">'
+        f'<span class="log-col log-timestamp">{html.escape(timestamp)}</span>'
+        f'<span class="log-col log-type {level_class}">{html.escape(level)}</span>'
+        f'<span class="log-col log-system {system_class}">{html.escape(system)}</span>'
+        f'<span class="log-col log-element">{html.escape(element)}</span>'
+        f'<span class="log-col log-module" title="{html.escape(module)}">{html.escape(module)}</span>'
+        f'<span class="log-col log-col-message log-message">{html.escape(message)}</span>'
+        f'</div>'
+    )

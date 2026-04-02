@@ -98,6 +98,7 @@ class Config(ConfigDefaults):
         self.SCAN_AES70 = self._s_get(config, "ScanSettings", "scan_aes70", self.SCAN_AES70, "bool")
         self.SCAN_OSC = self._s_get(config, "ScanSettings", "scan_osc", self.SCAN_OSC, "bool")
         self.SCAN_SNMP = self._s_get(config, "ScanSettings", "scan_snmp", self.SCAN_SNMP, "bool")
+        self.SCAN_MIDI = self._s_get(config, "ScanSettings", "scan_midi", self.SCAN_MIDI, "bool")
 
     def _parse_visa_settings(self, config):
         self.VISA_PROBE_PROTOCOL = self._s_get(config, "VISA", "probe_protocol", self.VISA_PROBE_PROTOCOL)

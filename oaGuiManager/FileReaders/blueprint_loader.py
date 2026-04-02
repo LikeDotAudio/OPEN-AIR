@@ -3,7 +3,7 @@
 # Version: 20260314.120000.REV01
 #
 # Description: managers/Display/loader/blueprint_loader.py
-\"\"\"
+"""
 blueprint_loader.py - High-Performance GUI Configuration Loader.
 
 Purpose:
@@ -17,7 +17,16 @@ Responsibilities:
     - Implement MD5-based hash verification to detect configuration changes
       and optimize re-renders.
     - Recursively merge specific tab configurations with the global
-\"\"\"
+      'default_panel.json' to ensure consistent industrial styling.
+    - Pre-normalize the entire configuration tree to "flatten" widget
+      metadata, reducing overhead during the grid-rendering phase.
+
+Constraints:
+    - Expects 'default_panel.json' to exist in the parent 'managers/Display/'
+      directory.
+    - Uses module-level caching for the default configuration to minimize
+      disk I/O on hot paths.
+"""
 
 import sys
 import os
@@ -36,16 +45,6 @@ except ImportError as e:
     from loguru import logger
     logger.critical("🚀❌ [FATAL] Rust Blueprint Parser module missing. Pure Rust mode is mandatory.")
     raise e
-      'default_panel.json' to ensure consistent industrial styling.
-    - Pre-normalize the entire configuration tree to "flatten" widget
-      metadata, reducing overhead during the grid-rendering phase.
-
-Constraints:
-    - Expects 'default_panel.json' to exist in the parent 'managers/Display/'
-      directory.
-    - Uses module-level caching for the default configuration to minimize
-      disk I/O on hot paths.
-"""
 
 import hashlib
 from oaLogging.Methods.matrix_gate import matrix_log

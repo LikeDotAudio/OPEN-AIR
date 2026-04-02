@@ -1,10 +1,9 @@
 # Core/ui_geometry_math.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260401.1200.1
 #
-# Description: Brief summary of purpose
+# Description: Wrapper for High-Performance Rust Geometry Math
 
-import math
 import sys
 import os
 
@@ -16,6 +15,9 @@ if _rs_dir not in sys.path:
 import compiler_hook
 compiler_hook.ensure_compiled()
 
+import importlib
+importlib.invalidate_caches()
+
 try:
     import oageometrymath_rs
 except ImportError as e:
@@ -24,44 +26,44 @@ except ImportError as e:
     raise e
 
 class UIGeometryMath:
-    """Centralized math utilities for UI coordinate and value transformations."""
+    """Centralized math utilities for UI coordinate and value transformations using Rust."""
 
     @staticmethod
     def normalize_value(val, min_val, max_val):
-        """Normalizes a value to a 0.0 - 1.0 range."""
+        """Normalizes a value to a 0.0 - 1.0 range via Rust."""
         try:
-            if max_val == min_val:
-                return 0.0
-            return (val - min_val) / (max_val - min_val)
-        except (ZeroDivisionError, TypeError, ValueError):
+            return oageometrymath_rs.normalize_value(float(val), float(min_val), float(max_val))
+        except (TypeError, ValueError):
             return 0.0
 
     @staticmethod
     def value_to_pixel(val, min_val, max_val, pixel_length, reverse=False):
-        """Maps a value to a pixel position within a given length."""
-        norm = UIGeometryMath.normalize_value(val, min_val, max_val)
-        if reverse:
-            return (1.0 - norm) * pixel_length
-        return norm * pixel_length
+        """Maps a value to a pixel position within a given length via Rust."""
+        try:
+            return oageometrymath_rs.value_to_pixel(float(val), float(min_val), float(max_val), float(pixel_length), bool(reverse))
+        except (TypeError, ValueError):
+            return 0.0
 
     @staticmethod
     def rotate_point(px, py, cx, cy, angle_deg):
-        """Rotates a point around a center by a given angle in degrees."""
-        rad = math.radians(angle_deg)
-        cos_a, sin_a = math.cos(rad), math.sin(rad)
-        nx = cos_a * (px - cx) - sin_a * (py - cy) + cx
-        ny = sin_a * (px - cx) + cos_a * (py - cy) + cy
-        return nx, ny
+        """Rotates a point around a center by a given angle in degrees via Rust."""
+        try:
+            return oageometrymath_rs.rotate_point(float(px), float(py), float(cx), float(cy), float(angle_deg))
+        except (TypeError, ValueError):
+            return px, py
 
     @staticmethod
     def get_position(angle_deg, distance, center_x=0, center_y=0):
-        """Calculates X, Y coordinates for a given angle and distance from a center."""
-        rad = math.radians(angle_deg)
-        x = center_x + distance * math.cos(rad)
-        y = center_y + distance * math.sin(rad)
-        return x, y
+        """Calculates X, Y coordinates for a given angle and distance from a center via Rust."""
+        try:
+            return oageometrymath_rs.get_position(float(angle_deg), float(distance), float(center_x), float(center_y))
+        except (TypeError, ValueError):
+            return center_x, center_y
 
     @staticmethod
     def get_angle(px, py, cx=0, cy=0):
-        """Calculates the angle in degrees from a center to a point."""
-        return math.degrees(math.atan2(py - cy, px - cx))
+        """Calculates the angle in degrees from a center to a point via Rust."""
+        try:
+            return oageometrymath_rs.get_angle(float(px), float(py), float(cx), float(cy))
+        except (TypeError, ValueError):
+            return 0.0

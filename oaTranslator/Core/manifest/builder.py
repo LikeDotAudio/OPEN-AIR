@@ -51,7 +51,7 @@ def create_manifest(
         "val": value, 
         "source": source, 
         "ts": now, 
-        "GUID": app_constants.INSTANCE_GUID,
+        "GUID": app_constants.FULL_INSTANCE_ID,
         "partition": app_constants.PARTITION_ID,
         "full_id": app_constants.FULL_INSTANCE_ID
     }

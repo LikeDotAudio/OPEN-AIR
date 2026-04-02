@@ -56,7 +56,7 @@ SINK_STRATEGIES = {
     "OSC": "🅾️ 🚀 💾 Ⓖ",
     "MIDI": "🎹 🚀 💾 Ⓖ",
     "SNMP": "Ⓢ 🚀 💾 Ⓖ",
-    "MQTT": "Ⓜ️ 🚀 💾 Ⓖ",
+    "MQTT": "Ⓜ️ 🚀 💾 Ⓖ 🎹",
     "REST": "Ⓜ️ 🚀 💾 Ⓖ",
     "DISK": "💾 🚀 Ⓖ",
     "OSC-TX": "💾 Ⓖ",

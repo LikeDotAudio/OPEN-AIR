@@ -17,6 +17,7 @@
 import threading
 import time
 import orjson
+import re
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
@@ -81,12 +82,20 @@ class MidiManager:
     def start(self):
         if self._running: return
         self._running = True
+        
+        mode = "BRIDGE" if self.run_bridge else "OBSERVER"
+        matrix_log("comms", "midi", "start", f"🎹 [MIDI-MGR] Starting manager in {mode} mode.", "INFO")
+        
         if self.run_bridge:
             info = self.get_port_info()
             matrix_log("comms", "midi", "start", 
-                       f"🎹 [MIDI-MGR] Starting bridge. Found {len(info.get('inputs', []))} inputs, {len(info.get('outputs', []))} outputs.", "INFO")
+                       f"🎹 [MIDI-MGR] Found {len(info.get('inputs', []))} inputs, {len(info.get('outputs', []))} outputs.", "INFO")
             self.ports.open_all(info, self._midi_listen_loop)
             self._broadcast_status()
+        else:
+            # In Observer mode, we rely on Core to broadcast status over MQTT.
+            # We already registered as a cache observer in __init__.
+            matrix_log("comms", "midi", "start", "🎹 [MIDI-MGR] Observer mode active. Waiting for Core status broadcast...", "DEBUG")
 
     def stop(self):
         self._running = False
@@ -113,6 +122,9 @@ class MidiManager:
                 for msg in port.iter_pending():
                     matrix_log("comms", "midi", "_midi_listen_loop", 
                                f"🎹 [MIDI-LISTEN] Incoming: {msg} on {port.name}", "TRACE")
+                    
+                    # ⚡ LOCAL FIRST: Notify internal monitors (Dashboard) immediately
+                    self._notify_monitor("RX", msg)
                     
                     topic, val = self.mapper.midi_to_topic(msg, port.name)
                     meta = {
@@ -174,12 +186,14 @@ class MidiManager:
 
     def _on_protocol_event(self, msg):
         topic, val = str(msg.get("topic", "")), msg.get("val")
+        meta = msg.get("meta", {})
         
         # 1. Hardware Status Updates
+        # ⚡ FIX: Handle list types correctly without calling .get()
         if topic == "OPEN-AIR/System/Status/MIDI/ActiveInputs": 
-            self._active_in_names = val.get("val", val) if isinstance(val, (dict, list)) else []
+            self._active_in_names = val if isinstance(val, list) else (val.get("val", []) if isinstance(val, dict) else [])
         elif topic == "OPEN-AIR/System/Status/MIDI/ActiveOutputs": 
-            self._active_out_names = val.get("val", val) if isinstance(val, (dict, list)) else []
+            self._active_out_names = val if isinstance(val, list) else (val.get("val", []) if isinstance(val, dict) else [])
         
         # 2. Activity Monitoring
         # We listen for any MIDI topic traffic to update the visualizers.
@@ -193,10 +207,22 @@ class MidiManager:
             # Determine direction
             direction = "TX" if msg.get("logical_source") == "MIDI-TX" else "RX"
             
-            # We expect enriched payload (dict) from CORE
-            if isinstance(val, dict) and "raw" in val:
+            # ⚡ ENHANCEMENT: Prefer enriched metadata from MQTT if available
+            # This ensures the UI dashboard gets full MIDI details (raw, note, channel)
+            if isinstance(meta, dict) and "raw" in meta:
+                self._notify_monitor(direction, meta)
+            elif isinstance(val, dict) and "raw" in val:
                 self._notify_monitor(direction, val)
             elif isinstance(val, (int, float, dict)) and is_midi_topic:
                 # Fallback for simple values or manifests on MIDI topics
                 real_val = val.get("val") if isinstance(val, dict) else val
-                self._notify_monitor(direction, {"val": real_val, "topic": topic, "type": "note_on" if real_val > 0 else "note_off"})
+                # Try to derive note from topic if possible
+                note_match = re.search(r"note(\d+)", topic)
+                note = int(note_match.group(1)) if note_match else 0
+                
+                self._notify_monitor(direction, {
+                    "val": real_val, 
+                    "topic": topic, 
+                    "note": note,
+                    "type": "note_on" if real_val > 0 else "note_off"
+                })

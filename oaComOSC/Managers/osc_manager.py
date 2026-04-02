@@ -287,7 +287,7 @@ class OSCManager:
                 "address": address,
                 "direction": "TX",
                 "ts": time.time(),
-                "GUID": app_constants.INSTANCE_GUID,
+                "GUID": app_constants.FULL_INSTANCE_ID,
                 "partition": app_constants.PARTITION_ID
             }
             monitor_payload["msg_guid"] = meta.get("msg_guid")

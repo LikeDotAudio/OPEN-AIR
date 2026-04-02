@@ -38,7 +38,8 @@ def restore_timeline(cache_data: Dict[str, Any], state_mirror_engine: Any) -> No
     """
     matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⏪ Restoring State.", "INFO")
     if not state_mirror_engine:
-        logger.error("⏪❌ State Mirror Engine not available for restoration!")
+        # Use debug instead of error to reduce noise during early boot partitions
+        logger.debug("⏪ℹ️ State Mirror Engine not available for restoration (skipping GUI replay).")
         return
 
     matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⏪ Restoring GUI state from cache.", "INFO")

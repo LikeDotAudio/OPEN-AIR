@@ -130,6 +130,26 @@ class ProtocolRouter:
     def set_smpte2138_manager(self, m): self.smpte2138_manager = m
     def set_state_cache(self, c): self.state_cache = c
 
+    def get_dpi_report(self, utp):
+        """
+        Placeholder method to get DPI report.
+        Implement actual logic for retrieving DPI report for a given UTP.
+        """
+        # In a real fix, this would fetch and return relevant data.
+        # For now, it prevents the AttributeError.
+        print(f"DEBUG: ProtocolRouter.get_dpi_report called for UTP: {utp}") # For debugging
+        return {"report": "placeholder_dpi_report_data", "utp": utp} # Example placeholder return
+
+    def publish_splink(self, src, dest, s_val=None, d_val=None):
+        """
+        Placeholder method to publish a splink.
+        Implement actual logic for publishing splink with provided parameters.
+        """
+        # In a real fix, this would establish or manage the splink connection.
+        # For now, it prevents the AttributeError.
+        print(f"DEBUG: ProtocolRouter.publish_splink called: src={src}, dest={dest}, s_val={s_val}, d_val={d_val}") # For debugging
+        return True # Example placeholder return
+
     def register_cache_observer(self, cb): self.monitor.register_cache_observer(cb)
     def unregister_cache_observer(self, cb): self.monitor.remove_observer(cb)
     def remove_observer(self, cb): self.monitor.remove_observer(cb)

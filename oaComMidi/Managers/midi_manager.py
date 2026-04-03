@@ -110,6 +110,12 @@ class MidiManager:
         matrix_log("comms", "midi", "_midi_listen_loop", 
                    f"▶️ [MIDI-LISTEN] Started listening on port: {port.name}", "DEBUG")
         
+        # ⚡ SAFETY: Skip loop if real MIDI is disabled to avoid environmental crashes
+        import os
+        if os.environ.get("OPEN_AIR_SKIP_REAL_MIDI") == "1":
+            matrix_log("comms", "midi", "_midi_listen_loop", "⚠️ [MIDI-LISTEN] Safety skip active. Exiting loop.", "WARNING")
+            return
+
         last_heartbeat = 0
         while self._running:
             try:
@@ -163,7 +169,7 @@ class MidiManager:
             except Exception as e:
                 midi_logger.error(f"Listen Error on {port.name}: {e}")
             
-            time.sleep(0.001)
+            time.sleep(0.005)
 
     def publish(self, topic, val, meta=None):
         if not self._running or not self.run_bridge: return
@@ -182,7 +188,7 @@ class MidiManager:
                     midi_logger.error(f"TX Error on {p.name}: {e}")
             
             from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-            ProtocolRouter.get_instance().ingest("MIDI-TX", topic, rv, {"midi_raw": str(midi_msg), "msg_type": meta.get("msg_type"), "origin_source": meta.get("origin_source")})
+            ProtocolRouter.get_instance().ingest("MIDI", topic, rv, {"midi_raw": str(midi_msg), "msg_type": meta.get("msg_type"), "origin_source": meta.get("origin_source")})
 
     def _on_protocol_event(self, msg):
         topic, val = str(msg.get("topic", "")), msg.get("val")
@@ -205,7 +211,9 @@ class MidiManager:
                        f"🎹 [MIDI-MGR] MIDI event detected on {topic} (Source: {msg.get('logical_source')})", "TRACE")
             
             # Determine direction
-            direction = "TX" if msg.get("logical_source") == "MIDI-TX" else "RX"
+            # If it comes from MIDI but it's a feedback or acknowledgement, it's TX
+            is_tx = msg.get("logical_source") == "MIDI-TX" or meta.get("midi_raw") is not None
+            direction = "TX" if is_tx else "RX"
             
             # ⚡ ENHANCEMENT: Prefer enriched metadata from MQTT if available
             # This ensures the UI dashboard gets full MIDI details (raw, note, channel)

@@ -26,12 +26,18 @@ current_version_hash = 20251230 * 230100 * 1
 # Outputs:
 #     bool: True if the cache should be updated with the incoming payload, False otherwise.
 def should_update(
-    incoming_topic: str, incoming_payload: Any, cached_state: Dict
+    incoming_topic: str, incoming_payload: Any, cached_state: Any
 ) -> bool:
     """
     Compare timestamps (ts). If incoming > cached, return True.
     If ts is missing (or in cache missing), compare the entire payload for parity.
+    Supports Rust-backed StateRegistryCore for high-speed comparison.
     """
+    # 1. Use Rust if available
+    if hasattr(cached_state, "should_update"):
+        return cached_state.should_update(incoming_topic, incoming_payload)
+
+    # --- Python Fallback ---
     # Normalize incoming_payload to a dict if it's a primitive
     if not isinstance(incoming_payload, dict):
         incoming_payload = {"val": incoming_payload}

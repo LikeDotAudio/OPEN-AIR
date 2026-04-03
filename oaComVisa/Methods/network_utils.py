@@ -37,10 +37,9 @@ def check_host(ip):
     """
     # 1. Port 111 (VXI-11)
     try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(0.3)
-        result = sock.connect_ex((ip, 111))
-        sock.close()
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(0.3)
+            result = sock.connect_ex((ip, 111))
         if result == 0:
             is_gateway = False
             try:

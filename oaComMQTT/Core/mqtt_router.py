@@ -11,10 +11,13 @@ from .oaMQTTManager_rs.compiler_hook import ensure_compiled
 
 try:
     ensure_compiled()
-    from .oaMQTTManager_rs.oamqttmanager_rs import MqttRouter as RustMqttRouter
+    from oamqttmanager_rs import MqttRouter as RustMqttRouter
     HAS_RUST = True
+except ImportError:
+    logging.warning("⚠️ [MQTT] oamqttmanager_rs not found. Using fallback logic (if any).")
+    HAS_RUST = False
 except Exception as e:
-    logging.error(f"oaComMQTT: Failed to load Rust MQTT Router: {e}")
+    logging.error(f"❌ [MQTT] Failed to initialize Rust MQTT Router: {e}")
     HAS_RUST = False
 
 class MqttRouter:

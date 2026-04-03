@@ -16,7 +16,9 @@ from oaLogging.Core.logger import router_logger, logger
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfiguration.Entry import Config
 
+from oaComBroker.Methods.oaCoreRouter_rs.compiler_hook import ensure_compiled
 try:
+    ensure_compiled()
     from oacorerouter_rs import CoreRouter as RustCoreRouter
 except ImportError as e:
     logger.critical("🚀❌ [FATAL] Rust Core Router module missing. Pure Rust mode is mandatory.")
@@ -197,9 +199,18 @@ class ProtocolRouter:
                     time.sleep(0.001)
                     continue
                 
+                # Prepare manager registry for the dispatcher
+                managers = {
+                    "mqtt": self.mqtt_manager,
+                    "osc": self.osc_manager,
+                    "midi": self.midi_manager,
+                    "snmp": self.snmp_manager,
+                    "smpte2138": self.smpte2138_manager
+                }
+                
                 self._executor.submit(
                     dispatch_message, 
-                    msg, self.mqtt_manager, self.osc_manager, self.midi_manager
+                    msg, managers
                 )
             except Exception as e:
                 matrix_log("core", "router", "_dispatch_loop", f"📤🚫🛑 [ERROR] Dispatch Loop Error: {e}", "ERROR")

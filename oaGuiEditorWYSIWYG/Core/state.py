@@ -11,31 +11,53 @@ from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from .oaEditorState_rs.compiler_hook import ensure_compiled
-ensure_compiled()
-from .oaEditorState_rs.oaeditorstate_rs import EditorState as RustEditorState
+
+try:
+    ensure_compiled()
+    from oaeditorstate_rs import EditorState as RustEditorState
+    HAS_RUST = True
+except ImportError:
+    sm_logger.warning("⚠️ [WYSIWYG] oaeditorstate_rs not found. Falling back to slow Python state management.")
+    HAS_RUST = False
+except Exception as e:
+    sm_logger.error(f"❌ [WYSIWYG] Failed to initialize Rust Editor State: {e}")
+    HAS_RUST = False
 
 # Specialized logger for StateManager to allow categorized filtering
 sm_logger = logger.bind(category="STATE_MANAGER")
 
 class StateManager:
-    """Manages the central JSON state of the GUI definition (RUST OPTIMIZED)."""
+    """Manages the central JSON state of the GUI definition (RUST OPTIMIZED with Python fallback)."""
     _instance = None
 
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(StateManager, cls).__new__(cls)
-            cls._instance._rust_state = RustEditorState()
+            if HAS_RUST:
+                try:
+                    cls._instance._rust_state = RustEditorState()
+                except Exception as e:
+                    sm_logger.error(f"❌ StateManager: Rust state instantiation failed: {e}")
+                    cls._instance._rust_state = None
+            else:
+                cls._instance._rust_state = None
+            
+            cls._instance._json_data = {} # Python fallback
             cls._instance._file_path = None
             cls._instance._original_state = {}
-            sm_logger.trace("🧠 StateManager: Singleton Instance Created (RUST).")
+            sm_logger.trace(f"🧠 StateManager: Singleton Instance Created ({'RUST' if HAS_RUST else 'PYTHON'}).")
         return cls._instance
 
     def initialize(self, initial_data, file_path=None):
         """Initializes the state with starting JSON data."""
         sm_logger.info(f"🧠 StateManager: Initialization started. Path: {file_path}")
         self._original_state = copy.deepcopy(initial_data if initial_data is not None else {})
-        initial_str = orjson.dumps(self._original_state).decode()
-        self._rust_state.initialize(initial_str)
+        self._json_data = copy.deepcopy(self._original_state)
+        
+        if self._rust_state:
+            initial_str = orjson.dumps(self._original_state).decode()
+            self._rust_state.initialize(initial_str)
+        
         self._file_path = file_path
         
         # We need to broadcast the parsed data, so we fetch it back
@@ -50,13 +72,17 @@ class StateManager:
     def reset(self):
         """Resets the state manager to an empty state_manager."""
         sm_logger.info("🧠 StateManager: Wiping internal state memory (Reset).")
-        self._rust_state.reset()
+        if self._rust_state:
+            self._rust_state.reset()
+        self._json_data = {}
         self._file_path = None
 
     def get_state(self):
         """Returns the current master JSON data."""
-        state_str = self._rust_state.get_state()
-        return orjson.loads(state_str)
+        if self._rust_state:
+            state_str = self._rust_state.get_state()
+            return orjson.loads(state_str)
+        return copy.deepcopy(self._json_data)
 
     def get_original_state(self):
         """Returns the original JSON data loaded during initialization."""
@@ -70,21 +96,34 @@ class StateManager:
         source_name = source.__class__.__name__ if source else "Unknown"
         sm_logger.info(f"🔄 StateManager: Update requested from {source_name}. Path: {path}")
         
-        new_data_str = orjson.dumps(new_data).decode()
         path_list = []
         if path is not None and not (isinstance(path, (list, tuple)) and len(path) == 0):
             if isinstance(path, str):
                 path_list = path.split(".")
             else:
                 path_list = list(path)
+
+        # Update Python fallback
+        if not path_list:
+            self._json_data = copy.deepcopy(new_data)
+        else:
+            current = self._json_data
+            for part in path_list[:-1]:
+                if part not in current or not isinstance(current[part], dict):
+                    current[part] = {}
+                current = current[part]
+            current[path_list[-1]] = copy.deepcopy(new_data)
                 
-        try:
-            self._rust_state.update_state(path_list, new_data_str)
-        except Exception as e:
-            sm_logger.exception(f"❌ StateManager Error: Failed to update path {path}: {e}")
+        if self._rust_state:
+            try:
+                new_data_str = orjson.dumps(new_data).decode()
+                self._rust_state.update_state(path_list, new_data_str)
+            except Exception as e:
+                sm_logger.exception(f"❌ StateManager Error: Failed to update path {path} in Rust: {e}")
             
         sm_logger.trace("🧠 StateManager: Broadcasting STATE_UPDATED event to subscribers.")
         event_bus.publish("STATE_UPDATED", json_data=self.get_state(), source=source)
+
 
     def batch_update(self, updates, source=None):
         """

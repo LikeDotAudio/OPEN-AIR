@@ -103,7 +103,7 @@ class AsyncGridRenderer:
             if on_complete: on_complete()
 
     def _process_fields(self, parent, field_list, prefix, max_cols, on_complete, bg_pil, parent_data, context, bin_id, block_name):
-        i = c = r = 0
+        field_idx = col_idx = row_idx = 0
         STRUCT = ["OcaBlock", "OcaBin", "OcaArray", "OcaBreakLine"]
         deferred = []; state = {"pending": 0, "loop_done": False, "aborted": False}
 
@@ -123,14 +123,14 @@ class AsyncGridRenderer:
                                    f"Deferred completion callback failed: {e}", "TRACE")
                         on_complete()
 
-        while i < len(field_list):
+        while field_idx < len(field_list):
             if not parent.winfo_exists(): state["aborted"] = True; break
-            key, val = field_list[i]
+            key, val = field_list[field_idx]
             
             if key in ["layout", "type", "geometry", "column_sizing", "background"] or not isinstance(val, dict):
-                i += 1; continue
+                field_idx += 1; continue
             
-            path_key = key or val.get("id") or val.get("label") or f"item_{i}"
+            path_key = key or val.get("id") or val.get("label") or f"item_{field_idx}"
             
             p_sfx = ""
             if parent_data:
@@ -141,7 +141,7 @@ class AsyncGridRenderer:
             cur_path = ".".join([part for part in raw_path.split(".") if part])
             
             w_type = val.get("type", val.get("widget_type"))
-            if not w_type: i += 1; continue
+            if not w_type: field_idx += 1; continue
 
             # Inject Identity Metadata for leaf widgets
             if w_type not in STRUCT:
@@ -151,7 +151,7 @@ class AsyncGridRenderer:
 
             lay = val.get("layout", {}); cs, rs = int(lay.get("col_span", 1)), int(lay.get("row_span", 1))
             st = lay.get("sticky", "nsew" if w_type in STRUCT else "")
-            cr, cc = lay.get("row", r), lay.get("column", c)
+            cr, cc = lay.get("row", row_idx), lay.get("column", col_idx)
 
             if w_type in STRUCT:
                 if w_type == "OcaBlock":
@@ -191,9 +191,9 @@ class AsyncGridRenderer:
                     "padx": lay.get("padx", 0), "pady": lay.get("pady", 0)
                 })
 
-            c += cs
-            if c >= max_cols: c = 0; r += rs
-            i += 1
+            col_idx += cs
+            if col_idx >= max_cols: col_idx = 0; row_idx += rs
+            field_idx += 1
 
         state["loop_done"] = True
         if deferred and not state["aborted"]: self.batch_engine.process(parent, deferred, 25, context, state, _check_done)

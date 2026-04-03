@@ -94,7 +94,7 @@ class CMDPWidget(
         def sync_bg():
             bg = self.canvas.cget("bg")
             for f in [self.sidebar, self.sidebar_controls, self.groups_pane, self.groups_container, self.ctrl_bar]: f.config(bg=bg)
-            self.draw_static_ui(); [f.render() for f in self.faders]
+            self.draw_static_ui(); [f.render_fader_visuals() for f in self.faders]
         self._draw = sync_bg; self.draw_static_ui()
 
     def add_group_ui(self, n, c, initial_visible=True): self.gh.add_group_ui(n, c, initial_visible)

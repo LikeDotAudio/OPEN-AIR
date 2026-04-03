@@ -1,0 +1,853 @@
+2026-04-03 00:07:55.419 | DEBUG    | oaConfiguration.FileReaders.config_reader:read_config:160 - 📜 [CONFIG] Loaded: Version 20251225, Debug: False
+00:07:55 | WARNING | ⚠️ [SNMP] oasnmpagent_rs not found. SNMP functionality will be restricted.
+2026-04-03 00:07:55.789 | DEBUG    | oaGuiElements.Core.input.input_mousewheel_mixin.input_mousewheel_mixin:<module>:29 - 📐🏗️💻 [BUILDER] Loading mousewheel_mixin.py from: /home/anthony/Documents/OPEN-AIR/oaGuiElements/Core/input/input_mousewheel_mixin/input_mousewheel_mixin.py
+WARNING: Skipping oaptpclock_rs as it is not installed.
+00:07:56 | WARNING | ⚠️ [PTP] oaptpclock_rs not found. PTP Clock will be disabled.
+2026-04-03 00:07:56.338 | DEBUG    | oaComBroker.Core.protocol_router.router:__init__:55 - 🚀 Using HIGH-PERFORMANCE RUST core router.
+2026-04-03 00:07:56.339 | DEBUG    | oaComBroker.Core.protocol_router.ingest:normalize_and_ingest:66 - 📡📥📥 [INBOUND] MQTT on test/topic: test_value
+2026-04-03 00:07:56.339 | WARNING  | oaComBroker.Core.protocol_router.router:stop:110 - ⏹️ [STOP] Protocol Router Offline.
+2026-04-03 00:07:56.339 | DEBUG    | oaComBroker.Core.protocol_router.router:__init__:55 - 🚀 Using HIGH-PERFORMANCE RUST core router.
+2026-04-03 00:07:56.339 | SUCCESS  | oaComBroker.Core.protocol_router.router:start:105 - ▶️▶️▶️ [START] Protocol Router Active (GUID: 9A11B8EFA43335BB:STANDALONE:2862528).
+2026-04-03 00:07:56.339 | WARNING  | oaComBroker.Core.protocol_router.router:stop:110 - ⏹️ [STOP] Protocol Router Offline.
+2026-04-03 00:07:56.339 | WARNING  | oaComBroker.Core.protocol_router.router:stop:110 - ⏹️ [STOP] Protocol Router Offline.
+2026-04-03 00:07:56.340 | DEBUG    | oaComBroker.Core.protocol_router.router:__init__:55 - 🚀 Using HIGH-PERFORMANCE RUST core router.
+2026-04-03 00:07:56.340 | WARNING  | oaComBroker.Core.protocol_router.router:stop:110 - ⏹️ [STOP] Protocol Router Offline.
+2026-04-03 00:07:56.340 | DEBUG    | oaComBroker.Core.protocol_router.router:__init__:55 - 🚀 Using HIGH-PERFORMANCE RUST core router.
+2026-04-03 00:07:56.340 | DEBUG    | oaComBroker.Core.protocol_router.ingest:normalize_and_ingest:66 - 📡📥📥 [INBOUND] MQTT on test/rs: 200
+2026-04-03 00:07:56.340 | DEBUG    | oaComMQTT.Workers.broker_monitor:__init__:31 - BrokerMonitor initialized and listening to $SYS/broker/#
+2026-04-03 00:07:56.340 | DEBUG    | oaComMQTT.Workers.broker_monitor:__init__:31 - BrokerMonitor initialized and listening to $SYS/broker/#
+2026-04-03 00:07:56.341 | DEBUG    | oaComMQTT.Workers.broker_monitor:__init__:31 - BrokerMonitor initialized and listening to $SYS/broker/#
+2026-04-03 00:07:56.341 | DEBUG    | oaComMQTT.Workers.broker_monitor:__init__:31 - BrokerMonitor initialized and listening to $SYS/broker/#
+2026-04-03 00:07:56.341 | DEBUG    | oaComMQTT.Workers.broker_monitor:__init__:31 - BrokerMonitor initialized and listening to $SYS/broker/#
+2026-04-03 00:07:56.389 | DEBUG    | oaComBroker.Core.protocol_router.settle:_fire_settled:126 - ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for test/topic
+2026-04-03 00:07:56.389 | DEBUG    | oaComBroker.Core.protocol_router.ingest:normalize_and_ingest:66 - 📡📥📥 [INBOUND] SYSTEM on test/topic: test_value
+2026-04-03 00:07:56.390 | DEBUG    | oaComBroker.Core.protocol_router.settle:_fire_settled:126 - ⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for test/rs
+2026-04-03 00:07:56.390 | DEBUG    | oaComBroker.Core.protocol_router.ingest:normalize_and_ingest:66 - 📡📥📥 [INBOUND] SYSTEM on test/rs: 200
+2026-04-03 00:08:11.465 | DEBUG    | oaComMQTT.Managers.mqtt_connection:disconnect:142 - MQTT: Disconnection initiated.
+2026-04-03 00:08:11.503 | INFO     | oaTests.Workers.CleanupApps.ClearMQTT:sweep:54 - 📡📤📤 [CLEAR_MQTT] Starting MQTT Deep Sweep on localhost:1883 (Root: OPEN-AIR/INTEGRATION-TEST)...
+2026-04-03 00:08:11.504 | INFO     | oaTests.Workers.CleanupApps.ClearMQTT:sweep:73 -   └─ 🕵️ Discovery: Scanning for active/retained topics under OPEN-AIR/INTEGRATION-TEST...
+2026-04-03 00:08:13.506 | INFO     | oaTests.Workers.CleanupApps.ClearMQTT:sweep:83 - ✨ No topics found under OPEN-AIR/INTEGRATION-TEST. Broker is already clean.
+2026-04-03 00:08:14.508 | INFO     | oaTests.Workers.CleanupApps.ClearMQTT:sweep:54 - 📡📤📤 [CLEAR_MQTT] Starting MQTT Deep Sweep on localhost:1883 (Root: OPEN-AIR/INTEGRATION-TEST)...
+2026-04-03 00:08:14.508 | INFO     | oaTests.Workers.CleanupApps.ClearMQTT:sweep:73 -   └─ 🕵️ Discovery: Scanning for active/retained topics under OPEN-AIR/INTEGRATION-TEST...
+2026-04-03 00:08:16.551 | INFO     | oaTests.Workers.CleanupApps.ClearMQTT:sweep:87 -   └─ 📋 Found 2 topics to clear.
+2026-04-03 00:08:16.551 | INFO     | oaTests.Workers.CleanupApps.ClearMQTT:sweep:98 -   Deleting MQTT topic: OPEN-AIR/INTEGRATION-TEST/sensor2
+2026-04-03 00:08:16.551 | INFO     | oaTests.Workers.CleanupApps.ClearMQTT:sweep:98 -   Deleting MQTT topic: OPEN-AIR/INTEGRATION-TEST/sensor1
+2026-04-03 00:08:16.551 | INFO     | oaTests.Workers.CleanupApps.ClearMQTT:sweep:106 -   └─ ⏳ Finalizing: Waiting for broker acknowledgments...
+2026-04-03 00:08:17.594 | INFO     | oaTests.Workers.CleanupApps.ClearMQTT:sweep:116 - ✨ Successfully wiped 2 topics (and cleared retained state) from OPEN-AIR/INTEGRATION-TEST tree.
+2026-04-03 00:08:19.597 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.598 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.599 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.600 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.600 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.601 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.602 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.603 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.603 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.604 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.605 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.605 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.605 | INFO     | oaComMQTT.Managers.mqtt_manager:stop:69 - MQTT: MqttManager stopped.
+2026-04-03 00:08:19.606 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.607 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.608 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.608 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.609 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.610 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.611 | DEBUG    | oaComMQTT.Managers.mqtt_manager:__init__:52 - 🚀 [MQTT] MqttManager initialized.
+2026-04-03 00:08:19.611 | DEBUG    | oaComMQTT.Managers.mqtt_subscriber_router:subscribe_to_topic:52 - Subscribing to test/multi
+2026-04-03 00:08:19.611 | DEBUG    | oaComMQTT.Managers.mqtt_subscriber_router:subscribe_to_topic:52 - Subscribing to test/multi
+2026-04-03 00:08:19.612 | DEBUG    | oaComMQTT.Managers.mqtt_subscriber_router:subscribe_to_topic:52 - Subscribing to test/exact
+2026-04-03 00:08:19.612 | DEBUG    | oaComMQTT.Managers.mqtt_subscriber_router:subscribe_to_topic:52 - Subscribing to test/#
+2026-04-03 00:08:19.615 | INFO     | oaComOSC.Managers.osc_manager:__init__:43 - Initializing Bridge (Bridge=True)...
+2026-04-03 00:08:19.615 | INFO     | oaComOSC.Managers.osc_manager:register_route:372 - Route Registered: /test/osc <-> OPEN-AIR/test/topic
+2026-04-03 00:08:19.615 | DEBUG    | oaComOSC.Managers.osc_manager:handle_incoming_osc:231 - RX: /test/osc -> 0.5 (Topic: OPEN-AIR/test/topic)
+2026-04-03 00:08:19.615 | INFO     | oaComOSC.Managers.osc_manager:__init__:43 - Initializing Bridge (Bridge=True)...
+2026-04-03 00:08:19.615 | INFO     | oaComOSC.Managers.osc_manager:__init__:43 - Initializing Bridge (Bridge=True)...
+2026-04-03 00:08:19.615 | DEBUG    | oaComOSC.Managers.osc_manager:handle_incoming_osc:231 - RX: /test/osc -> 0.75 (Topic: OPEN-AIR/OSC/test/osc)
+2026-04-03 00:08:19.616 | INFO     | oaComOSC.Managers.osc_manager:__init__:43 - Initializing Bridge (Bridge=True)...
+2026-04-03 00:08:19.616 | INFO     | oaComOSC.Managers.osc_manager:register_route:372 - Route Registered: /test/osc <-> OPEN-AIR/test/topic
+
+============================================================
+🚀 OPEN-AIR STANDALONE TEST RUNNER
+============================================================
+📂 Project Root: /home/anthony/Documents/OPEN-AIR
+
+🔍 Discovering tests...
+📂 Discovery identified 44 test-containing folders.
+
+🔬 Executing test suite...
+------------------------------------------------------------
+✅ test_module_loads (oaComAES70.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+✅ test_ingest_pushes_to_rust_router (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_ingest_pushes_to_rust_router): passed (0.0009s)
+✅ test_router_stop_stops_threads (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_router_stop_stops_threads): passed (0.0005s)
+✅ test_singleton (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_singleton): passed (0.0003s)
+✅ test_rust_router_ingest (oaComBroker.Tests.test_rust_router.TestRustRouter.test_rust_router_ingest): passed (0.0002s)
+✅ test_module_loads (oaComEmber.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+✅ test_initialization_and_subscription (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_initialization_and_subscription): passed (0.0002s)
+✅ test_observer_exception_handled (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_observer_exception_handled): passed (0.0003s)
+✅ test_on_sys_message_notifies_observers (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_on_sys_message_notifies_observers): passed (0.0002s)
+✅ test_on_sys_message_updates_stats (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_on_sys_message_updates_stats): passed (0.0002s)
+✅ test_register_and_unregister_observer (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_register_and_unregister_observer): passed (0.0002s)
+✅ test_parse_publish_item (oaComMQTT.Tests.test_mqtt_async_worker.TestMqttAsyncWorker.test_parse_publish_item): passed (0.0013s)
+✅ test_queue_task_publications (oaComMQTT.Tests.test_mqtt_async_worker.TestMqttAsyncWorker.test_queue_task_publications): passed (5.0065s)
+✅ test_queue_task_subscriptions (oaComMQTT.Tests.test_mqtt_async_worker.TestMqttAsyncWorker.test_queue_task_subscriptions): passed (5.0068s)
+✅ test_receiver_task (oaComMQTT.Tests.test_mqtt_async_worker.TestMqttAsyncWorker.test_receiver_task): passed (0.1017s)
+✅ test_subscribe_error_logged (oaComMQTT.Tests.test_mqtt_async_worker.TestMqttAsyncWorker.test_subscribe_error_logged): passed (5.0059s)
+✅ test_connect_to_broker (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_connect_to_broker): passed (0.0006s)
+✅ test_disconnect_signals_worker (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_disconnect_signals_worker): passed (0.0005s)
+✅ test_initialization (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_initialization): passed (0.0000s)
+✅ test_multiple_connections_are_handled (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_multiple_connections_are_handled): passed (0.0010s)
+✅ test_publish_queues_message (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_publish_queues_message): passed (0.0363s)
+✅ test_singleton_behavior (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_singleton_behavior): passed (0.0000s)
+✅ test_subscribe_queues_message (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_subscribe_queues_message): passed (0.0004s)
+✅ test_publish_subscribe_clear (oaComMQTT.Tests.test_mqtt_integration.TestMQTTIntegration.test_publish_subscribe_clear): passed (8.0928s)
+✅ test_mqtt_sweeper_on_message_filter (oaComMQTT.Tests.test_mqtt_logic.TestMQTTLogic.test_mqtt_sweeper_on_message_filter): passed (0.0003s)
+✅ test_topic_calculator_calculate (oaComMQTT.Tests.test_mqtt_logic.TestMQTTLogic.test_topic_calculator_calculate): passed (0.0000s)
+✅ test_attempt_reconnect_failed_connection (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_attempt_reconnect_failed_connection): passed (0.0009s)
+✅ test_attempt_reconnect_failed_loop_start (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_attempt_reconnect_failed_loop_start): passed (0.0008s)
+✅ test_attempt_reconnect_successful (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_attempt_reconnect_successful): passed (0.0008s)
+✅ test_handle_delete_command (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_handle_delete_command): passed (0.0010s)
+✅ test_handle_service_command_no_payload (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_handle_service_command_no_payload): passed (0.0007s)
+✅ test_handle_service_command_register (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_handle_service_command_register): passed (0.0007s)
+✅ test_handle_service_command_reregister_all (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_handle_service_command_reregister_all): passed (0.0007s)
+✅ test_initialization (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_initialization): passed (0.0006s)
+✅ test_on_fleet_scan_complete_logging (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_on_fleet_scan_complete_logging): passed (0.0008s)
+✅ test_publish_status_offline (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_publish_status_offline): passed (0.0006s)
+✅ test_publish_status_online (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_publish_status_online): passed (0.0006s)
+✅ test_start_already_running (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_start_already_running): passed (0.0008s)
+✅ test_start_and_stop (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_start_and_stop): passed (0.0008s)
+✅ test_stop_not_running (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_stop_not_running): passed (0.0008s)
+✅ test_sync_state_on_reconnect (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_sync_state_on_reconnect): passed (0.0008s)
+✅ test_system_status_loop_no_reconnect_if_already_connected (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_system_status_loop_no_reconnect_if_already_connected): passed (0.0007s)
+✅ test_system_status_loop_reconnect_logic (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_system_status_loop_reconnect_logic): passed (0.0007s)
+✅ test_system_status_loop_when_connected (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_system_status_loop_when_connected): passed (0.0008s)
+✅ test_system_status_loop_when_disconnected (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_system_status_loop_when_disconnected): passed (0.0006s)
+✅ test_multiple_subscribers (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_multiple_subscribers): passed (0.0005s)
+✅ test_subscribe_exact_topic (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_exact_topic): passed (0.0004s)
+✅ test_subscribe_wildcard_topic (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_wildcard_topic): passed (0.0004s)
+✅ test_status_broadcast (oaComMidi.Tests.test_midi.TestMidiManager.test_status_broadcast): passed (0.0005s)
+❌ test_monitor_notification_no_mqtt (oaComMidi.Tests.test_midi_standalone.TestMidiStandalone.test_monitor_notification_no_mqtt): skipped (0.0002s)
+   [MSG] Skipping real MIDI test in safety mode
+✅ test_publish_cc_to_midi (oaComMidi.Tests.test_midi_tx.TestMidiTx.test_publish_cc_to_midi): passed (0.0007s)
+✅ test_publish_note_to_midi (oaComMidi.Tests.test_midi_tx.TestMidiTx.test_publish_note_to_midi): passed (0.0008s)
+✅ test_handle_incoming_osc (oaComOSC.Tests.test_osc.TestOSCManager.test_handle_incoming_osc): passed (0.0005s)
+✅ test_initialization (oaComOSC.Tests.test_osc.TestOSCManager.test_initialization): passed (0.0002s)
+✅ test_monitor_callbacks (oaComOSC.Tests.test_osc.TestOSCManager.test_monitor_callbacks): passed (0.0004s)
+✅ test_register_route (oaComOSC.Tests.test_osc.TestOSCManager.test_register_route): passed (0.0003s)
+2026-04-03 00:08:19.639 | INFO     | oaComSNMP.Core.snmp_state_persister:start:70 - SnmpStatePersister: Started background persistence thread.
+2026-04-03 00:08:19.639 | INFO     | oaComSNMP.Core.snmp_log_monitor:start:59 - SnmpLogMonitor: Started background log monitoring thread.
+2026-04-03 00:08:19.640 | DEBUG    | oaComSNMP.Core.oid_map_converter:build_oid_map:66 - OidMapConverter: Updating OID map. Cache size: 0
+2026-04-03 00:08:19.640 | DEBUG    | oaComSNMP.Core.oid_map_converter:build_oid_map:109 - OidMapConverter: OID map built. Active objects: 0
+2026-04-03 00:08:19.640 | DEBUG    | oaComVisa.Workers.agent_static_ip_prober:discover_gateway_devices:36 -    👉 Scraping Gateway 192.168.1.1...
+2026-04-03 00:08:19.640 | ERROR    | oaComVisa.Workers.agent_static_ip_prober:discover_gateway_devices:56 -    ❌ Error scraping gateway 192.168.1.1: Network error
+2026-04-03 00:08:19.640 | DEBUG    | oaComVisa.Workers.agent_static_ip_prober:discover_gateway_devices:59 -    ✅ Found 0 resources from gateway 192.168.1.1: []
+2026-04-03 00:08:19.640 | DEBUG    | oaComVisa.Workers.agent_static_ip_prober:discover_gateway_devices:36 -    👉 Scraping Gateway 192.168.1.2...
+2026-04-03 00:08:19.641 | ERROR    | oaComVisa.Workers.agent_static_ip_prober:discover_gateway_devices:56 -    ❌ Error scraping gateway 192.168.1.2: expected string or bytes-like object, got 'MagicMock'
+2026-04-03 00:08:19.641 | DEBUG    | oaComVisa.Workers.agent_static_ip_prober:discover_gateway_devices:59 -    ✅ Found 0 resources from gateway 192.168.1.2: []
+2026-04-03 00:08:19.641 | DEBUG    | oaComVisa.Workers.agent_static_ip_prober:discover_gateway_devices:36 -    👉 Scraping Gateway 192.168.1.1...
+2026-04-03 00:08:19.641 | DEBUG    | oaComVisa.Workers.agent_static_ip_prober:discover_gateway_devices:59 -    ✅ Found 2 resources from gateway 192.168.1.1: ['GPIB0,1', 'GPIB0,2']
+2026-04-03 00:08:19.641 | DEBUG    | oaComVisa.Workers.agent_static_ip_prober:discover_gateway_devices:63 -      ➕ Added gateway resource: TCPIP::192.168.1.1::GPIB0,1::INSTR
+2026-04-03 00:08:19.641 | DEBUG    | oaComVisa.Workers.agent_static_ip_prober:discover_gateway_devices:63 -      ➕ Added gateway resource: TCPIP::192.168.1.1::GPIB0,2::INSTR
+2026-04-03 00:08:19.641 | DEBUG    | oaComVisa.Workers.agent_static_ip_prober:discover_gateway_devices:36 -    👉 Scraping Gateway 192.168.1.2...
+2026-04-03 00:08:19.641 | DEBUG    | oaComVisa.Workers.agent_static_ip_prober:discover_gateway_devices:59 -    ✅ Found 2 resources from gateway 192.168.1.2: ['GPIB0,1', 'GPIB0,2']
+2026-04-03 00:08:19.641 | DEBUG    | oaComVisa.Workers.agent_static_ip_prober:discover_gateway_devices:63 -      ➕ Added gateway resource: TCPIP::192.168.1.2::GPIB0,1::INSTR
+2026-04-03 00:08:19.641 | DEBUG    | oaComVisa.Workers.agent_static_ip_prober:discover_gateway_devices:63 -      ➕ Added gateway resource: TCPIP::192.168.1.2::GPIB0,2::INSTR
+2026-04-03 00:08:19.642 | DEBUG    | oaComVisa.Workers.logic_disconnect_instrument:disconnect_instrument:36 - 💳 Disconnecting instrument... Saying goodbye!
+2026-04-03 00:08:19.642 | DEBUG    | oaComVisa.Workers.logic_disconnect_instrument:disconnect_instrument:47 - 💳 ❌ An unexpected error occurred while disconnecting instrument: Close error.
+2026-04-03 00:08:19.642 | DEBUG    | oaComVisa.Workers.logic_disconnect_instrument:disconnect_instrument:36 - 💳 Disconnecting instrument... Saying goodbye!
+2026-04-03 00:08:19.642 | DEBUG    | oaComVisa.Workers.logic_disconnect_instrument:disconnect_instrument:41 - 💳 Instrument connection closed. All done!
+2026-04-03 00:08:19.643 | DEBUG    | oaComVisa.Workers.logic_disconnect_instrument:disconnect_instrument:36 - 💳 Disconnecting instrument... Saying goodbye!
+2026-04-03 00:08:19.643 | DEBUG    | oaComVisa.Workers.logic_disconnect_instrument:disconnect_instrument:49 - 💳 No instrument to disconnect. Already gone!
+2026-04-03 00:08:19.643 | DEBUG    | oaComVisa.Workers.logic_disconnect_instrument:disconnect_instrument:36 - 💳 Disconnecting instrument... Saying goodbye!
+2026-04-03 00:08:19.643 | DEBUG    | oaComVisa.Workers.logic_disconnect_instrument:disconnect_instrument:41 - 💳 Instrument connection closed. All done!
+2026-04-03 00:08:19.643 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:59 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Search_For_devices/trigger
+2026-04-03 00:08:19.643 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:65 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/+/selected
+2026-04-03 00:08:19.643 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:71 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Connect_to_Device/trigger
+2026-04-03 00:08:19.643 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:77 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Disconnect_device/trigger
+2026-04-03 00:08:19.643 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:83 - Subscribed to: OPEN-AIR/commands/instrument/connect
+2026-04-03 00:08:19.643 | SUCCESS  | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:85 - VisaMqttListener subscribed to all necessary GUI and command topics.
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:59 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Search_For_devices/trigger
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:65 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/+/selected
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:71 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Connect_to_Device/trigger
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:77 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Disconnect_device/trigger
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:83 - Subscribed to: OPEN-AIR/commands/instrument/connect
+2026-04-03 00:08:19.644 | SUCCESS  | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:85 - VisaMqttListener subscribed to all necessary GUI and command topics.
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_on_connect_request:212 - Trigger received for Direct Connect Request on topic: topic
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_on_connect_request:221 - Processing Direct Connect Request for resource: GPIB0::7::INSTR
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:59 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Search_For_devices/trigger
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:65 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/+/selected
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:71 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Connect_to_Device/trigger
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:77 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Disconnect_device/trigger
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:83 - Subscribed to: OPEN-AIR/commands/instrument/connect
+2026-04-03 00:08:19.644 | SUCCESS  | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:85 - VisaMqttListener subscribed to all necessary GUI and command topics.
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_on_device_select:115 - Trigger received for Device Select on topic: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/2/selected
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_on_device_select:123 - Processing Device Select, value is 'true'.
+2026-04-03 00:08:19.644 | SUCCESS  | oaComVisa.Workers.logic_mqtt_listen:_on_device_select:132 - Device selected: RES2
+2026-04-03 00:08:19.644 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:59 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Search_For_devices/trigger
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:65 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/+/selected
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:71 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Connect_to_Device/trigger
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:77 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Disconnect_device/trigger
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:83 - Subscribed to: OPEN-AIR/commands/instrument/connect
+2026-04-03 00:08:19.645 | SUCCESS  | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:85 - VisaMqttListener subscribed to all necessary GUI and command topics.
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_on_gui_connect_request:142 - Trigger received for GUI Connect Request on topic: topic
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_on_gui_connect_request:150 - Processing GUI Connect Request, value is 'true'.
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_on_gui_connect_request:156 - Initiating connection to TCPIP::1.2.3.4::INSTR...
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:59 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Search_For_devices/trigger
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:65 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/+/selected
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:71 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Connect_to_Device/trigger
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:77 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Disconnect_device/trigger
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:83 - Subscribed to: OPEN-AIR/commands/instrument/connect
+2026-04-03 00:08:19.645 | SUCCESS  | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:85 - VisaMqttListener subscribed to all necessary GUI and command topics.
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_on_gui_disconnect_request:180 - Trigger received for GUI Disconnect Request on topic: topic
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_on_gui_disconnect_request:188 - Processing GUI Disconnect Request, value is 'true'.
+2026-04-03 00:08:19.645 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_on_gui_disconnect_request:195 - Initiating disconnection...
+2026-04-03 00:08:19.646 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:59 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Search_For_devices/trigger
+2026-04-03 00:08:19.646 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:65 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/+/selected
+2026-04-03 00:08:19.646 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:71 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Connect_to_Device/trigger
+2026-04-03 00:08:19.646 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:77 - Subscribed to: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Disconnect_device/trigger
+2026-04-03 00:08:19.646 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:83 - Subscribed to: OPEN-AIR/commands/instrument/connect
+2026-04-03 00:08:19.646 | SUCCESS  | oaComVisa.Workers.logic_mqtt_listen:_setup_mqtt_subscriptions:85 - VisaMqttListener subscribed to all necessary GUI and command topics.
+2026-04-03 00:08:19.646 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_on_search_request:91 - Trigger received for Search Request on topic: OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Search_For_devices/trigger
+2026-04-03 00:08:19.646 | DEBUG    | oaComVisa.Workers.logic_mqtt_listen:_on_search_request:99 - Processing Search for devices initiated from GUI.
+2026-04-03 00:08:19.646 | DEBUG    | oaComVisa.Workers.logic_mqtt_publisher:_publish_proxy_status:191 - 💳 MQTT: Published Proxy Status 'CONNECTED' to 'OPEN-AIR/Proxy/Status'
+2026-04-03 00:08:19.646 | DEBUG    | oaComVisa.Workers.logic_mqtt_publisher:_publish_status:175 - 💳 MQTT: Published status 'connected' with value 'True' to 'OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Device_status/connected'
+2026-04-03 00:08:19.648 | SUCCESS  | oaComVisa.Workers.logic_mqtt_publisher:_update_found_devices_gui:136 - 💳 ✅ First device automatically selected after search.
+2026-04-03 00:08:19.648 | SUCCESS  | oaComVisa.Workers.logic_mqtt_publisher:_update_found_devices_gui:138 - 💳 ✅ GUI device list updated with search results (up to 40 slots used).
+✅ test_add_monitor_callback (oaComSNMP.Tests.test_snmp_manager.TestSNMPManager.test_add_monitor_callback): passed (0.0002s)
+✅ test_initialization (oaComSNMP.Tests.test_snmp_manager.TestSNMPManager.test_initialization): passed (0.0001s)
+✅ test_start_sequence (oaComSNMP.Tests.test_snmp_manager.TestSNMPManager.test_start_sequence): passed (0.0236s)
+❌ oaComVisa.Tests.test_agent_mdns_zeroconf (unittest.loader._FailedTest.oaComVisa.Tests.test_agent_mdns_zeroconf): error (0.0000s)
+   [MSG] Failed to import test module: oaComVisa.Tests.test_agent_mdns_zeroconf
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Tests/test_agent_mdns_zeroconf.py", line 11, in <module>
+    from oaComVisa.Workers.agent_mdns_zeroconf import AES70DiscoveryListener, discover_aes70_devices, discover_ip_devices
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Workers/agent_mdns_zeroconf.py", line 13, in <module>
+    from zeroconf import Zeroconf, ServiceBrowser, ServiceListener, ServiceInfo
+ModuleNotFoundError: No module named 'zeroconf'
+
+✅ test_discover_gateway_devices_exception (oaComVisa.Tests.test_agent_static_ip_prober.TestAgentStaticIpProber.test_discover_gateway_devices_exception): passed (0.0007s)
+✅ test_discover_gateway_devices_success (oaComVisa.Tests.test_agent_static_ip_prober.TestAgentStaticIpProber.test_discover_gateway_devices_success): passed (0.0005s)
+❌ oaComVisa.Tests.test_agent_usb_enumerator (unittest.loader._FailedTest.oaComVisa.Tests.test_agent_usb_enumerator): error (0.0000s)
+   [MSG] Failed to import test module: oaComVisa.Tests.test_agent_usb_enumerator
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Tests/test_agent_usb_enumerator.py", line 10, in <module>
+    from oaComVisa.Workers.agent_usb_enumerator import discover_usb_devices
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Workers/agent_usb_enumerator.py", line 9, in <module>
+    import pyvisa
+ModuleNotFoundError: No module named 'pyvisa'
+
+❌ oaComVisa.Tests.test_cli_visa_find (unittest.loader._FailedTest.oaComVisa.Tests.test_cli_visa_find): error (0.0000s)
+   [MSG] Failed to import test module: oaComVisa.Tests.test_cli_visa_find
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Tests/test_cli_visa_find.py", line 11, in <module>
+    from oaComVisa.Workers.cli_visa_find import main
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Workers/cli_visa_find.py", line 8, in <module>
+    from ..Managers.discovery_orchestrator import DiscoveryOrchestrator
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Managers/discovery_orchestrator.py", line 13, in <module>
+    from ..Workers.visa_scanner import VisaScanner
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Workers/visa_scanner.py", line 9, in <module>
+    import pyvisa
+ModuleNotFoundError: No module named 'pyvisa'
+
+❌ oaComVisa.Tests.test_discovery_orchestrator (unittest.loader._FailedTest.oaComVisa.Tests.test_discovery_orchestrator): error (0.0000s)
+   [MSG] Failed to import test module: oaComVisa.Tests.test_discovery_orchestrator
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Tests/test_discovery_orchestrator.py", line 12, in <module>
+    from oaComVisa.Managers.discovery_orchestrator import DiscoveryOrchestrator
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Managers/discovery_orchestrator.py", line 13, in <module>
+    from ..Workers.visa_scanner import VisaScanner
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Workers/visa_scanner.py", line 9, in <module>
+    import pyvisa
+ModuleNotFoundError: No module named 'pyvisa'
+
+❌ oaComVisa.Tests.test_logic_connect_instrument (unittest.loader._FailedTest.oaComVisa.Tests.test_logic_connect_instrument): error (0.0000s)
+   [MSG] Failed to import test module: oaComVisa.Tests.test_logic_connect_instrument
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Tests/test_logic_connect_instrument.py", line 9, in <module>
+    import pyvisa
+ModuleNotFoundError: No module named 'pyvisa'
+
+✅ test_disconnect_instrument_failure (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_failure): passed (0.0003s)
+✅ test_disconnect_instrument_logic_no_inst (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_logic_no_inst): passed (0.0002s)
+✅ test_disconnect_instrument_logic_with_inst (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_logic_with_inst): passed (0.0005s)
+✅ test_disconnect_instrument_none (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_none): passed (0.0004s)
+✅ test_disconnect_instrument_success (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_success): passed (0.0002s)
+✅ test_initialization_and_subscriptions (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_initialization_and_subscriptions): passed (0.0003s)
+✅ test_on_connect_request_direct (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_connect_request_direct): passed (0.0005s)
+✅ test_on_device_select (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_device_select): passed (0.0004s)
+✅ test_on_gui_connect_request (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_gui_connect_request): passed (0.0005s)
+✅ test_on_gui_disconnect_request (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_gui_disconnect_request): passed (0.0007s)
+✅ test_on_search_request_valid (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_search_request_valid): passed (0.0004s)
+✅ test_initialization (oaComVisa.Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.test_initialization): passed (0.0002s)
+✅ test_publish_proxy_status (oaComVisa.Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.test_publish_proxy_status): passed (0.0002s)
+✅ test_publish_status (oaComVisa.Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.test_publish_status): passed (0.0002s)
+✅ test_update_found_devices_gui (oaComVisa.Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.test_update_found_devices_gui): passed (0.0017s)
+❌ oaComVisa.Tests.test_visa_fleet (unittest.loader._FailedTest.oaComVisa.Tests.test_visa_fleet): error (0.0000s)
+2026-04-03 00:08:19.649 | DEBUG    | oaConfiguration.FileReaders.config_reader:read_config:160 - 📜 [CONFIG] Loaded: Version 20251225, Debug: False
+2026-04-03 00:08:19.649 | DEBUG    | oaConfiguration.Methods.config_validator:validate_configuration:51 - Commencing the configuration validation experiment.
+2026-04-03 00:08:19.649 | DEBUG    | oaFileImportCSV.FileReaders.from_csv_unknown:Marker_convert_csv_unknow_report_to_csv:31 - ▶️ Starting best-effort CSV conversion for: /home/anthony/Documents/OPEN-AIR/oaFileImportCSV/Tests/Assets/Basic_CSV_venue.csv
+2026-04-03 00:08:19.650 | DEBUG    | oaFileImportCSV.FileReaders.from_csv_unknown:Marker_convert_csv_unknow_report_to_csv:35 - 🚀 Using HIGH-PERFORMANCE RUST CSV parser.
+2026-04-03 00:08:19.735 | DEBUG    | oaGuiBuildShell.Workers.async_grid_renderer:render:47 - 🏗️ Rendering branch '' (Bin: None, Block: None)
+2026-04-03 00:08:19.749 | INFO     | oaGuiEditorWYSIWYG.Managers.wysiwyg_editor:launch:54 - WysiwygEditor: Launching new editor instance for None (Standalone: True)
+2026-04-03 00:08:19.749 | INFO     | oaGuiEditorWYSIWYG.Core.state:initialize:53 - 🧠 StateManager: Initialization started. Path: None
+2026-04-03 00:08:19.749 | INFO     | oaGuiEditorWYSIWYG.Core.state:initialize:66 - 🧠 StateManager: State loaded with 0 root elements.
+2026-04-03 00:08:19.749 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:publish:54 - 📢 EventBus: Publishing 'STATE_UPDATED' from Unknown to 0 subscribers.
+2026-04-03 00:08:19.749 | SUCCESS  | oaGuiEditorWYSIWYG.Core.state:initialize:70 - ✅ StateManager: Initialization complete.
+2026-04-03 00:08:19.749 | DEBUG    | oaGuiEditorWYSIWYG.Managers.wysiwyg_editor:_build_ui:77 - WysiwygEditor: Starting UI build...
+2026-04-03 00:08:19.749 | DEBUG    | oaGuiEditorWYSIWYG.Managers.wysiwyg_editor:_build_ui:91 - WysiwygEditor: Creating Toolbar...
+2026-04-03 00:08:19.754 | DEBUG    | oaGuiEditorWYSIWYG.Managers.wysiwyg_editor:_build_ui:106 - WysiwygEditor: Initializing PanedWindow...
+2026-04-03 00:08:19.754 | DEBUG    | oaGuiEditorWYSIWYG.Managers.wysiwyg_editor:_build_ui:111 - WysiwygEditor: Initializing Left Notebook (Code/Props/Library)...
+2026-04-03 00:08:19.757 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:subscribe:38 - 🔔 EventBus: Subscribed '_on_state_updated' to 'STATE_UPDATED'.
+2026-04-03 00:08:19.771 | DEBUG    | oaGuiEditorWYSIWYG.Core.workspaces.json_editor:__init__:26 - JsonEditor: Initializing workspace...
+2026-04-03 00:08:19.771 | DEBUG    | oaGuiEditorWYSIWYG.Core.workspaces.json_editor:_build_ui:51 - JsonEditor: Creating Editor UI components...
+2026-04-03 00:08:19.774 | DEBUG    | oaGuiEditorWYSIWYG.Core.workspaces.json_editor:_build_ui:78 - JsonEditor: Editor UI built.
+2026-04-03 00:08:19.774 | DEBUG    | oaGuiEditorWYSIWYG.Core.workspaces.json_editor:__init__:30 - JsonEditor: Subscribing to EventBus...
+2026-04-03 00:08:19.774 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:subscribe:38 - 🔔 EventBus: Subscribed '_on_state_updated' to 'STATE_UPDATED'.
+2026-04-03 00:08:19.774 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:subscribe:38 - 🔔 EventBus: Subscribed '_on_focus_requested' to 'FOCUS_REQUESTED'.
+2026-04-03 00:08:19.774 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:__init__:31 - 🎒 GrabBagLoader: Initialized. Scanning root: /home/anthony/Documents/OPEN-AIR/oaGuiElements
+2026-04-03 00:08:19.774 | INFO     | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:42 - 🎒 GrabBagLoader: Starting library scan in /home/anthony/Documents/OPEN-AIR/oaGuiElements...
+2026-04-03 00:08:19.775 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Break Line' (Type: OcaBreakLine)
+2026-04-03 00:08:19.775 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Status Light' (Type: _SmartLight)
+2026-04-03 00:08:19.775 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Listbox' (Type: _SmartList)
+2026-04-03 00:08:19.775 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Circular Motion Displacement Potentiometer' (Type: _CMDP)
+2026-04-03 00:08:19.775 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Knob' (Type: _SmartKnob)
+2026-04-03 00:08:19.775 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Json Tree' (Type: _JsonTree)
+2026-04-03 00:08:19.775 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Checkbox' (Type: _SmartCheckbox)
+2026-04-03 00:08:19.775 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Knob Rotary Selector' (Type: SelectorSwitch)
+2026-04-03 00:08:19.775 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Composite Mdp' (Type: _MDP)
+2026-04-03 00:08:19.775 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Composite Horizontal Dial Value' (Type: _Horizontal_with_dial_Value)
+2026-04-03 00:08:19.775 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Slider Value' (Type: _sliderValue)
+2026-04-03 00:08:19.775 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Images Image Display' (Type: _GuiImage)
+2026-04-03 00:08:19.775 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Images Animation Display' (Type: AnimationDisplay)
+2026-04-03 00:08:19.775 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Images Progress Bar' (Type: _SmartProgress)
+2026-04-03 00:08:19.776 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Meter Needle' (Type: _NeedleVUMeter)
+2026-04-03 00:08:19.776 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Meter Bar' (Type: DynamicBarGraph)
+2026-04-03 00:08:19.776 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Meter Knob With Vu Meter' (Type: _Meter_Knob_With_Vu_Meter)
+2026-04-03 00:08:19.777 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Graphing' (Type: OcaBin)
+2026-04-03 00:08:19.777 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Radar' (Type: _Radar)
+2026-04-03 00:08:19.777 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Knob' (Type: _SmartKnob)
+2026-04-03 00:08:19.777 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Knob Rotary Selector' (Type: SelectorSwitch)
+2026-04-03 00:08:19.777 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Status Light' (Type: _SmartLight)
+2026-04-03 00:08:19.777 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Circular Motion Displacement Potentiometer' (Type: _CMDP)
+2026-04-03 00:08:19.777 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Composite Mdp' (Type: _MDP)
+2026-04-03 00:08:19.777 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Fader' (Type: _SmartFader)
+2026-04-03 00:08:19.777 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Fader Horizontal' (Type: _CustomHorizontalFader)
+2026-04-03 00:08:19.777 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Fader Dual' (Type: _CustomDualHorizontalFader)
+2026-04-03 00:08:19.777 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Fader Ganged Controlled Array' (Type: _CompositeFader)
+2026-04-03 00:08:19.777 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Fader Linear Travelling Potentiometer' (Type: _CustomLTP)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Fader Bar Graph' (Type: _FaderWithBarGraph)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Text Value Box' (Type: _GuiValue)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Text Table' (Type: OcaTable)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Text Gui Dropdown Option' (Type: _GuiDropDownOption)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Text Label From Config' (Type: _SmartLabel)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Text Value With Units' (Type: _SmartInput)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Text Web Link' (Type: _SmartLink)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Listbox' (Type: _SmartList)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Input Directional Buttons' (Type: _SmartNav)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Input Inc Dec Buttons' (Type: _SmartIncDec)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Json Tree' (Type: _JsonTree)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Checkbox' (Type: _SmartCheckbox)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Composite Horizontal Dial Value' (Type: _Horizontal_with_dial_Value)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Slider Value' (Type: _sliderValue)
+2026-04-03 00:08:19.778 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Button Wink Toggler' (Type: _WinkButtonToggler)
+2026-04-03 00:08:19.779 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Button Trapezoid Toggler' (Type: _TrapezoidButtonToggler)
+2026-04-03 00:08:19.779 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Button Actuator' (Type: _GuiActuator)
+2026-04-03 00:08:19.779 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Button Trapezoid' (Type: _TrapezoidButton)
+2026-04-03 00:08:19.779 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Button Toggle' (Type: _SmartToggle)
+2026-04-03 00:08:19.779 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Button Toggler' (Type: _SmartToggler)
+2026-04-03 00:08:19.779 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Button Wink' (Type: _WinkButton)
+2026-04-03 00:08:19.785 | SUCCESS  | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:83 - ✅ GrabBagLoader: Scan complete. Found 40 valid components.
+2026-04-03 00:08:19.787 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:subscribe:38 - 🔔 EventBus: Subscribed '_on_focus_requested' to 'FOCUS_REQUESTED'.
+2026-04-03 00:08:19.787 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:subscribe:38 - 🔔 EventBus: Subscribed '_on_state_updated' to 'STATE_UPDATED'.
+2026-04-03 00:08:19.787 | DEBUG    | oaGuiEditorWYSIWYG.Methods.grab_bag.grab_bag_view:__init__:34 - GrabBagView: Initializing palette...
+2026-04-03 00:08:19.787 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:__init__:31 - 🎒 GrabBagLoader: Initialized. Scanning root: /home/anthony/Documents/OPEN-AIR/oaGuiElements
+2026-04-03 00:08:19.787 | DEBUG    | oaGuiEditorWYSIWYG.Methods.grab_bag.grab_bag_view:_build_ui:64 - GrabBagView: Building Palette UI...
+2026-04-03 00:08:19.787 | DEBUG    | oaGuiEditorWYSIWYG.Methods.grab_bag.grab_bag_view:_build_ui:87 - GrabBagView: Binding global mousewheel...
+2026-04-03 00:08:19.787 | INFO     | oaGuiEditorWYSIWYG.Methods.grab_bag.grab_bag_view:_refresh_library:109 - GrabBag: Refreshing component library from disk...
+2026-04-03 00:08:19.787 | INFO     | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:42 - 🎒 GrabBagLoader: Starting library scan in /home/anthony/Documents/OPEN-AIR/oaGuiElements...
+2026-04-03 00:08:19.787 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Break Line' (Type: OcaBreakLine)
+2026-04-03 00:08:19.787 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Status Light' (Type: _SmartLight)
+2026-04-03 00:08:19.787 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Listbox' (Type: _SmartList)
+2026-04-03 00:08:19.788 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Circular Motion Displacement Potentiometer' (Type: _CMDP)
+2026-04-03 00:08:19.788 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Knob' (Type: _SmartKnob)
+2026-04-03 00:08:19.788 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Json Tree' (Type: _JsonTree)
+2026-04-03 00:08:19.788 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Checkbox' (Type: _SmartCheckbox)
+2026-04-03 00:08:19.788 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Knob Rotary Selector' (Type: SelectorSwitch)
+2026-04-03 00:08:19.788 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Composite Mdp' (Type: _MDP)
+2026-04-03 00:08:19.788 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Composite Horizontal Dial Value' (Type: _Horizontal_with_dial_Value)
+2026-04-03 00:08:19.788 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Slider Value' (Type: _sliderValue)
+2026-04-03 00:08:19.788 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Images Image Display' (Type: _GuiImage)
+2026-04-03 00:08:19.788 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Images Animation Display' (Type: AnimationDisplay)
+2026-04-03 00:08:19.788 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Images Progress Bar' (Type: _SmartProgress)
+2026-04-03 00:08:19.788 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Meter Needle' (Type: _NeedleVUMeter)
+2026-04-03 00:08:19.788 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Meter Bar' (Type: DynamicBarGraph)
+2026-04-03 00:08:19.788 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Meter Knob With Vu Meter' (Type: _Meter_Knob_With_Vu_Meter)
+2026-04-03 00:08:19.789 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Graphing' (Type: OcaBin)
+2026-04-03 00:08:19.789 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Radar' (Type: _Radar)
+2026-04-03 00:08:19.789 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Knob' (Type: _SmartKnob)
+2026-04-03 00:08:19.789 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Knob Rotary Selector' (Type: SelectorSwitch)
+2026-04-03 00:08:19.789 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Status Light' (Type: _SmartLight)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Circular Motion Displacement Potentiometer' (Type: _CMDP)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Composite Mdp' (Type: _MDP)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Fader' (Type: _SmartFader)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Fader Horizontal' (Type: _CustomHorizontalFader)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Fader Dual' (Type: _CustomDualHorizontalFader)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Fader Ganged Controlled Array' (Type: _CompositeFader)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Fader Linear Travelling Potentiometer' (Type: _CustomLTP)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Fader Bar Graph' (Type: _FaderWithBarGraph)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Text Value Box' (Type: _GuiValue)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Text Table' (Type: OcaTable)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Text Gui Dropdown Option' (Type: _GuiDropDownOption)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Text Label From Config' (Type: _SmartLabel)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Text Value With Units' (Type: _SmartInput)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Text Web Link' (Type: _SmartLink)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Listbox' (Type: _SmartList)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Input Directional Buttons' (Type: _SmartNav)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Input Inc Dec Buttons' (Type: _SmartIncDec)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Json Tree' (Type: _JsonTree)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Checkbox' (Type: _SmartCheckbox)
+2026-04-03 00:08:19.790 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Composite Horizontal Dial Value' (Type: _Horizontal_with_dial_Value)
+2026-04-03 00:08:19.791 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Slider Value' (Type: _sliderValue)
+2026-04-03 00:08:19.791 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Button Wink Toggler' (Type: _WinkButtonToggler)
+2026-04-03 00:08:19.791 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Button Trapezoid Toggler' (Type: _TrapezoidButtonToggler)
+2026-04-03 00:08:19.791 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Button Actuator' (Type: _GuiActuator)
+2026-04-03 00:08:19.791 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Button Trapezoid' (Type: _TrapezoidButton)
+2026-04-03 00:08:19.791 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Button Toggle' (Type: _SmartToggle)
+2026-04-03 00:08:19.791 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Button Toggler' (Type: _SmartToggler)
+2026-04-03 00:08:19.791 | DEBUG    | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:79 -   ↳ Found Component: 'Button Wink' (Type: _WinkButton)
+2026-04-03 00:08:19.797 | SUCCESS  | oaGuiEditorWYSIWYG.FileReaders.grab_bag_loader:scan_library:83 - ✅ GrabBagLoader: Scan complete. Found 40 valid components.
+2026-04-03 00:08:19.797 | INFO     | oaGuiEditorWYSIWYG.Methods.grab_bag.grab_bag_view:_refresh_library:114 - GrabBag: Scan complete. Found 40 component templates.
+2026-04-03 00:08:19.800 | DEBUG    | oaGuiEditorWYSIWYG.Methods.grab_bag.grab_bag_view:__init__:40 - GrabBagView: Subscribing to FOCUS_REQUESTED...
+2026-04-03 00:08:19.800 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:subscribe:38 - 🔔 EventBus: Subscribed '_on_focus_requested' to 'FOCUS_REQUESTED'.
+2026-04-03 00:08:19.800 | DEBUG    | oaGuiEditorWYSIWYG.Managers.wysiwyg_editor:_build_ui:132 - WysiwygEditor: Initializing Interactive Layout Canvas...
+2026-04-03 00:08:19.800 | DEBUG    | oaGuiEditorWYSIWYG.Core.workspaces.interactive_layout:__init__:28 - InteractiveLayout: Initializing workspace...
+2026-04-03 00:08:19.800 | DEBUG    | oaGuiManager.Core.factory.widget_registry:scan_widgets:126 - 🔍 WidgetRegistry: Scanning /home/anthony/Documents/OPEN-AIR/oaGuiElements...
+2026-04-03 00:08:19.815 | DEBUG    | oaGuiManager.Core.factory.widget_registry:scan_widgets:155 - ✅ WidgetRegistry: Discovered 50 types from 261 modules.
+2026-04-03 00:08:19.815 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:subscribe:38 - 🔔 EventBus: Subscribed '_on_state_updated' to 'STATE_UPDATED'.
+2026-04-03 00:08:19.815 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:subscribe:38 - 🔔 EventBus: Subscribed '_on_external_focus' to 'FOCUS_REQUESTED'.
+2026-04-03 00:08:19.815 | INFO     | oaGuiEditorWYSIWYG.Managers.wysiwyg_editor:_build_ui:139 - WysiwygEditor: UI Build Complete.
+2026-04-03 00:08:19.815 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:subscribe:38 - 🔔 EventBus: Subscribed '_on_focus_requested' to 'FOCUS_REQUESTED'.
+2026-04-03 00:08:19.818 | INFO     | oaGuiEditorWYSIWYG.Core.workspaces.json_editor:_on_destroy:45 - JsonEditor: Workspace destroyed. Cleaning up subscriptions.
+2026-04-03 00:08:19.818 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:unsubscribe:46 - 🔕 EventBus: Unsubscribed '_on_state_updated' from 'STATE_UPDATED'.
+2026-04-03 00:08:19.818 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:unsubscribe:46 - 🔕 EventBus: Unsubscribed '_on_focus_requested' from 'FOCUS_REQUESTED'.
+2026-04-03 00:08:19.818 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:unsubscribe:46 - 🔕 EventBus: Unsubscribed '_on_focus_requested' from 'FOCUS_REQUESTED'.
+2026-04-03 00:08:19.818 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:unsubscribe:46 - 🔕 EventBus: Unsubscribed '_on_state_updated' from 'STATE_UPDATED'.
+2026-04-03 00:08:19.819 | INFO     | oaGuiEditorWYSIWYG.Methods.grab_bag.grab_bag_view:_on_destroy:47 - GrabBagView: Workspace destroyed. Cleaning up subscriptions and bindings.
+2026-04-03 00:08:19.819 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:unsubscribe:46 - 🔕 EventBus: Unsubscribed '_on_focus_requested' from 'FOCUS_REQUESTED'.
+2026-04-03 00:08:19.819 | DEBUG    | oaGuiEditorWYSIWYG.Methods.grab_bag.grab_bag_view:_on_destroy:52 - GrabBagView: Unbinding global mousewheel events...
+2026-04-03 00:08:19.819 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:unsubscribe:46 - 🔕 EventBus: Unsubscribed '_on_state_updated' from 'STATE_UPDATED'.
+2026-04-03 00:08:19.819 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:unsubscribe:46 - 🔕 EventBus: Unsubscribed '_on_external_focus' from 'FOCUS_REQUESTED'.
+2026-04-03 00:08:19.827 | DEBUG    | oaGuiManager.Core.transparency.transparency_mixin:register_for_bg_sync:29 - parent is .
+2026-04-03 00:08:19.837 | DEBUG    | oaGuiManager.Core.transparency.transparency_mixin:register_for_bg_sync:29 - parent is .
+2026-04-03 00:08:19.877 | DEBUG    | oaGuiElements.Core.Knobs.knob_rotary_selector.knob_rotary_selector:make_knob_rotary_selector:173 - 📜📑💻 [CONFIG] Raw config received: {'type': 'SelectorSwitch', 'label_active': 'Multimeter Mode', 'positions': ['OFF', 'VAC', 'VDC', 'OHM', 'AMP'], 'continuous': False, 'value_default': 'OFF', 'indicator_color': '#FFFF00', 'shape': 'circle', 'pointer_style': 'line', 'layout': {'sticky': 'ew', 'padx': 5, 'pady': 5, 'width': 100, 'height': 50}, 'cosmetics': {'colors': {'primary': '#FF9900', 'secondary': '#444444', 'background': '#2b2b2b'}}}
+2026-04-03 00:08:19.877 | DEBUG    | oaGuiElements.Core.Knobs.knob_rotary_selector.knob_rotary_selector:make_knob_rotary_selector:185 - ✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.
+2026-04-03 00:08:19.877 | DEBUG    | oaGuiElements.Core.Knobs.knob_rotary_selector.knob_rotary_selector:make_knob_rotary_selector:196 - 🎛️🔀🔢 [STATE] Positions: ['OFF', 'VAC', 'VDC', 'OHM', 'AMP'], Continuous: False
+2026-04-03 00:08:19.877 | DEBUG    | oaGuiElements.Core.Knobs.knob_rotary_selector.knob_rotary_selector:make_knob_rotary_selector:200 - 📐📏🔳 [LAYOUT] Dimensions: 120x140
+2026-04-03 00:08:19.877 | DEBUG    | oaGuiElements.Core.Knobs.knob_rotary_selector.knob_rotary_selector:make_knob_rotary_selector:208 - 🔋🔢✨ [STATE] Initial position value: 0
+2026-04-03 00:08:19.877 | SUCCESS  | oaGuiElements.Core.Knobs.knob_rotary_selector.knob_rotary_selector:make_knob_rotary_selector:254 - ✅🆗🎛️ [SUCCESS] The rotary selector switch 'Multimeter Mode' has materialized!
+   [MSG] Failed to import test module: oaComVisa.Tests.test_visa_fleet
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Tests/test_visa_fleet.py", line 9, in <module>
+    from oaComVisa.Core.visa_fleet import FleetOrchestrator
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Core/visa_fleet.py", line 18, in <module>
+    from ..Managers.discovery_orchestrator import DiscoveryOrchestrator
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Managers/discovery_orchestrator.py", line 13, in <module>
+    from ..Workers.visa_scanner import VisaScanner
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Workers/visa_scanner.py", line 9, in <module>
+    import pyvisa
+ModuleNotFoundError: No module named 'pyvisa'
+
+❌ oaComVisa.Tests.test_visa_logic (unittest.loader._FailedTest.oaComVisa.Tests.test_visa_logic): error (0.0000s)
+   [MSG] Failed to import test module: oaComVisa.Tests.test_visa_logic
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Tests/test_visa_logic.py", line 9, in <module>
+    import pyvisa
+ModuleNotFoundError: No module named 'pyvisa'
+
+❌ oaComVisa.Tests.test_visa_manager (unittest.loader._FailedTest.oaComVisa.Tests.test_visa_manager): error (0.0000s)
+   [MSG] Failed to import test module: oaComVisa.Tests.test_visa_manager
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Tests/test_visa_manager.py", line 10, in <module>
+    from oaComVisa.Managers.visa_manager import VisaManagerOrchestrator
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Managers/visa_manager.py", line 8, in <module>
+    from ..Core.visa_proxy import VisaProxy
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Core/visa_proxy.py", line 9, in <module>
+    import pyvisa
+ModuleNotFoundError: No module named 'pyvisa'
+
+❌ oaComVisa.Tests.test_visa_scanner (unittest.loader._FailedTest.oaComVisa.Tests.test_visa_scanner): error (0.0000s)
+   [MSG] Failed to import test module: oaComVisa.Tests.test_visa_scanner
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 394, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/loader.py", line 337, in _get_module_from_name
+    __import__(name)
+  File "/home/anthony/Documents/OPEN-AIR/oaComVisa/Tests/test_visa_scanner.py", line 9, in <module>
+    import pyvisa
+ModuleNotFoundError: No module named 'pyvisa'
+
+✅ test_create_default_config_ini (oaConfiguration.Tests.test_config.TestConfigGenerator.test_create_default_config_ini): passed (0.0003s)
+✅ test_config_loading_from_file (oaConfiguration.Tests.test_config_reader.TestConfigReader.test_config_loading_from_file): passed (0.0003s)
+✅ test_singleton_integrity (oaConfiguration.Tests.test_config_reader.TestConfigReader.test_singleton_integrity): passed (0.0000s)
+✅ test_default_values (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_default_values): passed (0.0000s)
+✅ test_global_settings_property (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_global_settings_property): passed (0.0000s)
+✅ test_singleton (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_singleton): passed (0.0000s)
+✅ test_validate_configuration (oaConfiguration.Tests.test_config_validator.TestConfigValidator.test_validate_configuration): passed (0.0000s)
+✅ test_element_override (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_element_override): passed (0.0000s)
+✅ test_function_level_precision (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_function_level_precision): passed (0.0000s)
+✅ test_hot_update (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_hot_update): passed (0.0000s)
+✅ test_master_killswitch (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_master_killswitch): passed (0.0000s)
+✅ test_system_level_gating (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_system_level_gating): passed (0.0000s)
+✅ test_config_loader (oaConfiguration.Tests.test_readers.TestConfigReader.test_config_loader): passed (0.0002s)
+✅ test_module_loads (oaFileExportCSV.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+✅ test_sample_csv_exists (oaFileImportCSV.Tests.test_readers.TestCSVReaderAsset.test_sample_csv_exists): passed (0.0000s)
+✅ test_rust_csv_parsing (oaFileImportCSV.Tests.test_rust_csv_parser.TestRustCSVParser.test_rust_csv_parsing): passed (0.0006s)
+✅ test_sample_html_exists (oaFileImportHTML.Tests.test_readers.TestHTMLReaderAsset.test_sample_html_exists): passed (0.0000s)
+✅ test_sample_pdf_exists (oaFileImportPDF.Tests.test_readers.TestPDFReaderAsset.test_sample_pdf_exists): passed (0.0000s)
+✅ test_sample_shw_exists (oaFileImportShow.Tests.test_readers.TestShowReaderAsset.test_sample_shw_exists): passed (0.0000s)
+✅ test_module_loads (oaGuiBackground.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+✅ test_render_functional_widget_trigger (oaGuiBuildShell.Tests.test_async_grid_renderer.TestAsyncGridRenderer.test_render_functional_widget_trigger): passed (0.0855s)
+✅ test_render_initialization (oaGuiBuildShell.Tests.test_async_grid_renderer.TestAsyncGridRenderer.test_render_initialization): passed (0.0065s)
+✅ test_module_loads (oaGuiBuilder.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+✅ test_rust_get_angle (oaGuiBuilder.Tests.test_geometry_math_rust.TestGeometryMathRust.test_rust_get_angle): passed (0.0000s)
+✅ test_rust_get_position (oaGuiBuilder.Tests.test_geometry_math_rust.TestGeometryMathRust.test_rust_get_position): passed (0.0000s)
+✅ test_rust_normalize_value (oaGuiBuilder.Tests.test_geometry_math_rust.TestGeometryMathRust.test_rust_normalize_value): passed (0.0000s)
+✅ test_rust_rotate_point (oaGuiBuilder.Tests.test_geometry_math_rust.TestGeometryMathRust.test_rust_rotate_point): passed (0.0000s)
+✅ test_module_loads (oaGuiDefinitions.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+📂🛠️🔗 [GUI_MANAGER] Using PURE RUST fast scanner.
+✅ test_module_loads_correctly (oaGuiEditorWYSIWYG.Tests.test_Entry.TestWysiwygEditorEntry.test_module_loads_correctly): passed (0.0770s)
+✅ test_broadcast_notifies_engine (oaGuiElements.Tests.Knobs.knob.test_knob.TestKnobWidget.test_broadcast_notifies_engine): passed (0.0080s)
+✅ test_creation_via_builder (oaGuiElements.Tests.Knobs.knob.test_knob.TestKnobWidget.test_creation_via_builder): passed (0.0096s)
+✅ test_visualization_gear_config (oaGuiElements.Tests.Knobs.knob.test_knob.TestKnobWidget.test_visualization_gear_config): passed (0.0069s)
+✅ test_01_initialization (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_01_initialization): passed (0.0071s)
+✅ test_02_value_change (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_02_value_change): passed (0.0094s)
+✅ test_03_position_text (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_03_position_text): passed (0.0091s)
+2026-04-03 00:08:19.892 | SUCCESS  | oaGuiElements.Core.buttons.button_actuator.button_actuator:make_button_actuator:103 - ✅🆗🔘 [SUCCESS] The actuator 'Test Actuator' has materialized!
+2026-04-03 00:08:19.941 | DEBUG    | oaGuiElements.Core.buttons.button_trapezoid_toggler.button_trapezoid_toggler:make_button_trapezoid_toggler:40 - 📜📑💻 [CONFIG] Raw config received: {'label': 'Test Trapezoid Toggler', 'path': 'test/trapezoid_toggler', 'options': {'A': {'label_active': 'A', 'val': 1}, 'B': {'label_active': 'B', 'val': 2}}}
+2026-04-03 00:08:19.941 | DEBUG    | oaGuiElements.Core.buttons.button_trapezoid_toggler.button_trapezoid_toggler:make_button_trapezoid_toggler:54 - ✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.
+2026-04-03 00:08:19.941 | DEBUG    | oaGuiElements.Core.buttons.button_trapezoid_toggler.button_trapezoid_toggler:make_button_trapezoid_toggler:62 - 🔬⚡️🔳 [BUILDER] Spawning trapezoid toggler group for 'Test Trapezoid Toggler' at path 'test/trapezoid_toggler'.
+2026-04-03 00:08:19.942 | DEBUG    | oaGuiElements.Core.buttons.button_trapezoid_toggler.button_trapezoid_toggler:make_button_trapezoid_toggler:134 - 🔋🔘✨ [STATE] Initial selected trapezoid key for 'Test Trapezoid Toggler': A
+2026-04-03 00:08:19.942 | DEBUG    | oaGuiElements.Core.buttons.button_trapezoid_toggler.button_trapezoid_toggler:make_button_trapezoid_toggler:137 - 📐📏🔳 [LAYOUT] Grid columns: 4
+2026-04-03 00:08:19.942 | DEBUG    | oaGuiElements.Core.buttons.button_trapezoid_toggler.button_trapezoid_toggler:make_button_trapezoid_toggler:166 - 📥📶🔄 [MQTT] Subscribing to topic: <MagicMock name='mock.state_mirror_engine.register_widget()' id='138028979863872'>
+2026-04-03 00:08:19.943 | SUCCESS  | oaGuiElements.Core.buttons.button_trapezoid_toggler.button_trapezoid_toggler:make_button_trapezoid_toggler:233 - ✅🆗🔘 [SUCCESS] The trapezoid toggler group 'Test Trapezoid Toggler' has materialized!
+2026-04-03 00:08:19.951 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:41 - 📜📑💻 [CONFIG] Raw config received: {'label_active': 'Test Wink', 'path': 'test/wink', 'width': 100, 'height': 50}
+2026-04-03 00:08:19.951 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:56 - ✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.
+2026-04-03 00:08:19.951 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:65 - 🔬⚡️🔳 [BUILDER] Spawning wink button for 'Test Wink' at path 'test/wink'.
+2026-04-03 00:08:19.951 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:72 - 🔋🔘✨ [STATE] Initial state for 'Test Wink': False
+2026-04-03 00:08:19.952 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:181 - 📥📶🔄 [MQTT] Subscribing to topic: <MagicMock name='mock.state_mirror_engine.register_widget()' id='138028980152720'>
+2026-04-03 00:08:19.952 | SUCCESS  | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:194 - ✅🆗🔳 [SUCCESS] The wink button 'Test Wink' has materialized!
+2026-04-03 00:08:19.959 | DEBUG    | oaGuiElements.Core.buttons.button_wink_toggler.button_wink_toggler:make_button_wink_toggler:29 - 📜📑💻 [CONFIG] Raw config received: {'label_active': 'Test Wink Toggler', 'path': 'test/wink_toggler', 'options': {'A': {'label_active': 'A', 'val': 1}, 'B': {'label_active': 'B', 'val': 2}}}
+2026-04-03 00:08:19.959 | DEBUG    | oaGuiElements.Core.buttons.button_wink_toggler.button_wink_toggler:make_button_wink_toggler:44 - ✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.
+2026-04-03 00:08:19.959 | DEBUG    | oaGuiElements.Core.buttons.button_wink_toggler.button_wink_toggler:make_button_wink_toggler:53 - 🔬⚡️🔘 [BUILDER] Spawning wink toggler group for 'Test Wink Toggler' at path 'test/wink_toggler'.
+2026-04-03 00:08:19.960 | DEBUG    | oaGuiElements.Core.buttons.button_wink_toggler.button_wink_toggler:make_button_wink_toggler:118 - 🔋🔘✨ [STATE] Initial selected wink key for 'Test Wink Toggler': A
+2026-04-03 00:08:19.960 | DEBUG    | oaGuiElements.Core.buttons.button_wink_toggler.button_wink_toggler:make_button_wink_toggler:121 - 📐📏🔳 [LAYOUT] Columns: 1
+2026-04-03 00:08:19.960 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:41 - 📜📑💻 [CONFIG] Raw config received: {'label_active': 'A', 'path': 'test/wink_toggler/A', 'options': {'A': {'label_active': 'A', 'val': 1}, 'B': {'label_active': 'B', 'val': 2}}, 'val': 1, 'latching': True}
+2026-04-03 00:08:19.960 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:56 - ✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.
+2026-04-03 00:08:19.960 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:65 - 🔬⚡️🔳 [BUILDER] Spawning wink button for 'A' at path 'test/wink_toggler/A'.
+2026-04-03 00:08:19.960 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:72 - 🔋🔘✨ [STATE] Initial state for 'A': True
+2026-04-03 00:08:19.960 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:181 - 📥📶🔄 [MQTT] Subscribing to topic: <MagicMock name='mock.state_mirror_engine.register_widget()' id='138028988276928'>
+2026-04-03 00:08:20.012 | SUCCESS  | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:194 - ✅🆗🔳 [SUCCESS] The wink button 'A' has materialized!
+2026-04-03 00:08:20.012 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:41 - 📜📑💻 [CONFIG] Raw config received: {'label_active': 'B', 'path': 'test/wink_toggler/B', 'options': {'A': {'label_active': 'A', 'val': 1}, 'B': {'label_active': 'B', 'val': 2}}, 'val': 2, 'latching': True}
+2026-04-03 00:08:20.012 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:56 - ✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.
+2026-04-03 00:08:20.012 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:65 - 🔬⚡️🔳 [BUILDER] Spawning wink button for 'B' at path 'test/wink_toggler/B'.
+2026-04-03 00:08:20.012 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:72 - 🔋🔘✨ [STATE] Initial state for 'B': False
+2026-04-03 00:08:20.013 | DEBUG    | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:181 - 📥📶🔄 [MQTT] Subscribing to topic: <MagicMock name='mock.state_mirror_engine.register_widget()' id='138028988276928'>
+2026-04-03 00:08:20.013 | SUCCESS  | oaGuiElements.Core.buttons.button_wink.button_wink:make_button_wink:194 - ✅🆗🔳 [SUCCESS] The wink button 'B' has materialized!
+2026-04-03 00:08:20.013 | DEBUG    | oaGuiElements.Core.buttons.button_wink_toggler.button_wink_toggler:make_button_wink_toggler:204 - 📥📶🔄 [MQTT] Subscribing to group topic: <MagicMock name='mock.state_mirror_engine.register_widget()' id='138028988276928'>
+2026-04-03 00:08:20.013 | SUCCESS  | oaGuiElements.Core.buttons.button_wink_toggler.button_wink_toggler:make_button_wink_toggler:213 - ✅🆗🔘 [SUCCESS] The wink toggler group 'Test Wink Toggler' has materialized!
+2026-04-03 00:08:20.095 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph:create_base_plot:37 - 🔬🏗️📊 [BUILDER] graph_builder: Creating base Matplotlib plot for 'test/graph'.
+2026-04-03 00:08:20.103 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph_styler:apply_style:37 - 🔬🏗️📊 [BUILDER] graph_styler: Applying visual styles to axis.
+2026-04-03 00:08:20.104 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:98 - 🔬🏗️📊 [BUILDER] FluxPlotter 'test/graph' visual styles applied.
+2026-04-03 00:08:20.104 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph_interactor:setup_interaction:23 - 🔬🏗️📊 [BUILDER] graph_interactor: Initializing interaction protocols.
+2026-04-03 00:08:20.106 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:107 - 🔬🏗️📊 [BUILDER] FluxPlotter 'test/graph' plot elements initialized.
+2026-04-03 00:08:20.192 | DEBUG    | oaGuiElements.Core.graphing.radar.radar:make_data_radar:42 - 📜📑💻 [CONFIG] Raw config received: {'type': '_Radar', 'label_active': 'Radar Eye 01', 'app_settings': {'title': 'Radar Eye v1.0', 'window_size': [100, 100], 'background_color': '', 'refresh_rate_ms': 100, 'mode': 'data_driven'}, 'data_parameters': {'min_value': 0, 'max_value': 100, 'points_per_revolution': 360, 'history_buffer_size': 360, 'clockwise': True, 'start_angle': 90}, 'visuals': {'plot_style': 'area', 'center_x': 50, 'center_y': 50, 'radius': 40}, 'grid_system': {'show_grid': True, 'grid_color': '#86c0db', 'ring_interval': 20, 'spoke_interval': 30, 'labels': {'show_values': True, 'show_time_scale': True, 'font': 'Consolas 6'}}, 'color_thresholds': {'mid_point': 50, 'upper_point': 80, 'colors': {'safe': '#0c75ec', 'warning': '#2f6988', 'critical': '#455594'}}, 'connectivity': {'mqtt_enabled': False, 'mqtt_topic': '', 'log_to_file': False}, 'show_label': True, 'notes': '', 'layout': {'sticky': 'ew', 'padx': 5, 'pady': 5, 'width': 100, 'height': 50}, 'cosmetics': {'colors': {'primary': '#FF9900', 'secondary': '#444444', 'background': '#2b2b2b'}}, 'path': 'test/radar'}
+2026-04-03 00:08:20.193 | DEBUG    | oaGuiElements.Core.graphing.radar.radar:make_data_radar:55 - ✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.
+2026-04-03 00:08:20.193 | DEBUG    | oaGuiElements.Core.graphing.radar.radar:make_data_radar:74 - 📐📏🔳 [LAYOUT] Radar dimensions: 100x100, Mode: data_driven
+2026-04-03 00:08:20.193 | DEBUG    | oaGuiElements.Core.graphing.radar.radar:make_data_radar:81 - 📐🔢✨ [STATE] Points: 360, Range: 0-100, Dir: CW
+2026-04-03 00:08:20.193 | DEBUG    | oaGuiElements.Core.graphing.radar.radar:make_data_radar:267 - 📥📶🔄 [MQTT] Subscribing to topic: <MagicMock name='mock.state_mirror_engine.register_widget()' id='138028978258672'>
+2026-04-03 00:08:20.193 | SUCCESS  | oaGuiElements.Core.graphing.radar.radar:make_data_radar:277 - ✅🆗📶 [SUCCESS] The Radar Eye 'Radar Eye 01' has materialized!
+2026-04-03 00:08:20.200 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph:create_base_plot:37 - 🔬🏗️📊 [BUILDER] graph_builder: Creating base Matplotlib plot for 'test/graph'.
+2026-04-03 00:08:20.206 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph_styler:apply_style:37 - 🔬🏗️📊 [BUILDER] graph_styler: Applying visual styles to axis.
+2026-04-03 00:08:20.206 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:98 - 🔬🏗️📊 [BUILDER] FluxPlotter 'test/graph' visual styles applied.
+2026-04-03 00:08:20.206 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph_interactor:setup_interaction:23 - 🔬🏗️📊 [BUILDER] graph_interactor: Initializing interaction protocols.
+2026-04-03 00:08:20.206 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:107 - 🔬🏗️📊 [BUILDER] FluxPlotter 'test/graph' plot elements initialized.
+2026-04-03 00:08:20.236 | DEBUG    | oaGuiElements.Core.metering.meter_bar.meter_bar:make_meter_bar:31 - 📜📑💻 [CONFIG] Raw config received: {'label_active': 'Test Meter', 'path': 'test/meter', 'meter_config': {'min_val': -60.0, 'max_val': 12.0}}
+2026-04-03 00:08:20.236 | DEBUG    | oaGuiElements.Core.metering.meter_bar.meter_bar:make_meter_bar:43 - ✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.
+2026-04-03 00:08:20.236 | DEBUG    | oaGuiElements.Core.metering.meter_bar.meter_bar:make_meter_bar:51 - 🔬⚡️📊 [BUILDER] Instantiating SmartMeter for 'Test Meter' at path 'test/meter'.
+2026-04-03 00:08:20.237 | DEBUG    | oaGuiElements.Core.metering.meter_bar.meter_bar:make_meter_bar:74 - 📥📶🔄 [MQTT] Subscribing to topic: <MagicMock name='mock.state_mirror_engine.register_widget()' id='138028977292592'>
+2026-04-03 00:08:20.237 | SUCCESS  | oaGuiElements.Core.metering.meter_bar.meter_bar:make_meter_bar:82 - ✅🆗📊 [SUCCESS] The meter bar 'Test Meter' has materialized!
+2026-04-03 00:08:20.253 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'Test Needle' (test/needle) registered with StateMirrorEngine.
+2026-04-03 00:08:20.271 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_1) registered with StateMirrorEngine.
+2026-04-03 00:08:20.282 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_2) registered with StateMirrorEngine.
+2026-04-03 00:08:20.288 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_3) registered with StateMirrorEngine.
+2026-04-03 00:08:20.293 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_4) registered with StateMirrorEngine.
+2026-04-03 00:08:20.300 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_5) registered with StateMirrorEngine.
+2026-04-03 00:08:20.307 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_6) registered with StateMirrorEngine.
+2026-04-03 00:08:20.313 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_7) registered with StateMirrorEngine.
+2026-04-03 00:08:20.318 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_8) registered with StateMirrorEngine.
+2026-04-03 00:08:20.324 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_9) registered with StateMirrorEngine.
+2026-04-03 00:08:20.330 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_10) registered with StateMirrorEngine.
+2026-04-03 00:08:20.336 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_11) registered with StateMirrorEngine.
+2026-04-03 00:08:20.341 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_12) registered with StateMirrorEngine.
+2026-04-03 00:08:20.347 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_13) registered with StateMirrorEngine.
+2026-04-03 00:08:20.353 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_14) registered with StateMirrorEngine.
+2026-04-03 00:08:20.360 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_15) registered with StateMirrorEngine.
+2026-04-03 00:08:20.365 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_16) registered with StateMirrorEngine.
+2026-04-03 00:08:20.370 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_17) registered with StateMirrorEngine.
+2026-04-03 00:08:20.376 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_18) registered with StateMirrorEngine.
+2026-04-03 00:08:20.384 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_19) registered with StateMirrorEngine.
+2026-04-03 00:08:20.395 | DEBUG    | oaGuiElements.Core.metering.meter_needle.integration.state_linker:_register_with_engine:90 - 🔬 Widget 'None' (test/needle/Meter_20) registered with StateMirrorEngine.
+2026-04-03 00:08:20.421 | INFO     | oaGuiElements.Tests.test_json_tree:test_make_json_tree_prevents_name_error:115 - ✅ Test passed: 'test_make_json_tree_prevents_name_error' confirmed the fix.
+2026-04-03 00:08:20.428 | DEBUG    | oaGuiElements.Core.utils.slider_value.slider_value:make_slider_value:81 - 🔬⚡️ Entering 'make_slider_value' to assemble a slider for 'Test Slider'.
+2026-04-03 00:08:20.430 | SUCCESS  | oaGuiElements.Core.utils.slider_value.slider_value:make_slider_value:247 - ✅ SUCCESS! The slider 'Test Slider' has materialized!
+2026-04-03 00:08:20.430 | INFO     | oaGuiElements.Tests.test_slider_value:test_make_slider_value_prevents_attribute_error:112 - ✅ Test passed: 'test_make_slider_value_prevents_attribute_error' confirmed the fix.
+2026-04-03 00:08:20.431 | DEBUG    | oaGuiElements.Core.text.text_table.Core.table_csv_service:load:39 - 📜 CSV file not found at /home/anthony/Documents/OPEN-AIR/oaDataCache/Tables/TestTable.csv. This is normal if no data has been saved yet.
+2026-04-03 00:08:20.431 | INFO     | oaGuiElements.Tests.test_table_csv_service:test_load_handles_file_not_found_gracefully:59 - ✅ Test passed: 'test_load_handles_file_not_found_gracefully' confirmed the fix.
+2026-04-03 00:08:20.432 | INFO     | oaGuiElements.Tests.test_table_csv_service:test_load_parses_valid_csv_data:93 - ✅ Test passed: 'test_load_parses_valid_csv_data' works as expected.
+2026-04-03 00:08:20.438 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph:create_base_plot:37 - 🔬🏗️📊 [BUILDER] graph_builder: Creating base Matplotlib plot for 'test/graph'.
+2026-04-03 00:08:20.444 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph_styler:apply_style:37 - 🔬🏗️📊 [BUILDER] graph_styler: Applying visual styles to axis.
+2026-04-03 00:08:20.444 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:98 - 🔬🏗️📊 [BUILDER] FluxPlotter 'test/graph' visual styles applied.
+2026-04-03 00:08:20.444 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph_interactor:setup_interaction:23 - 🔬🏗️📊 [BUILDER] graph_interactor: Initializing interaction protocols.
+2026-04-03 00:08:20.444 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:107 - 🔬🏗️📊 [BUILDER] FluxPlotter 'test/graph' plot elements initialized.
+2026-04-03 00:08:20.451 | DEBUG    | oaGuiElements.Core.text.text_label.text_label:make_text_label:55 - 🔬⚡️ Creating new label: 'Test Label' at test/label.
+2026-04-03 00:08:20.458 | DEBUG    | oaGuiElements.Core.text.text_label.text_label:make_text_label:55 - 🔬⚡️ Creating new label: 'Test Label' at test/label.
+2026-04-03 00:08:20.467 | DEBUG    | oaGuiElements.Core.text.text_table.table_editing_sort_mixin:_bind_headers:42 - Binding headers for sorting.
+2026-04-03 00:08:20.467 | DEBUG    | oaGuiElements.Core.text.text_table.table_editing:__init__:73 - 📊 TableEditingManager initialized for tree .!canvas.!treeview
+2026-04-03 00:08:20.474 | DEBUG    | oaGuiElements.Core.text.text_value_box.text_value_box:make_text_value_box:60 - 📜📑💻 [CONFIG] Raw config received: {'label_active': 'Test Box', 'path': 'test/box', 'value': '123', 'units': 'V'}
+2026-04-03 00:08:20.475 | DEBUG    | oaGuiElements.Core.text.text_value_box.text_value_box:make_text_value_box:77 - ✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.
+2026-04-03 00:08:20.475 | DEBUG    | oaGuiElements.Core.text.text_value_box.text_value_box:make_text_value_box:85 - 🔬⚡️📝 [BUILDER] Forging value box for 'Test Box' at path 'test/box'.
+2026-04-03 00:08:20.475 | DEBUG    | oaGuiElements.Core.text.text_value_box.text_value_box:make_text_value_box:128 - 🧐📐🎨 [LAYOUT] Analysis for 'Test Box': H=None, W=None, Font=10, Colour=None
+2026-04-03 00:08:20.475 | DEBUG    | oaGuiElements.Core.text.text_value_box.text_value_box:make_text_value_box:143 - 🔋📝✨ [STATE] Initial value for 'Test Box': '123'
+2026-04-03 00:08:20.477 | DEBUG    | oaGuiElements.Core.text.text_value_box.text_value_box:make_text_value_box:243 - 📥📶🔄 [MQTT] Subscribing to topic: <MagicMock name='mock.state_mirror_engine.register_widget()' id='138028738962416'>
+2026-04-03 00:08:20.478 | SUCCESS  | oaGuiElements.Core.text.text_value_box.text_value_box:make_text_value_box:251 - ✅🆗📝 [SUCCESS] The text value box 'Test Box' has materialized!
+2026-04-03 00:08:20.485 | DEBUG    | oaGuiElements.Core.text.text_value_box.text_value_box:make_text_value_box:60 - 📜📑💻 [CONFIG] Raw config received: {'label_active': 'Test Box', 'path': 'test/box', 'value': '123', 'units': 'V'}
+2026-04-03 00:08:20.485 | DEBUG    | oaGuiElements.Core.text.text_value_box.text_value_box:make_text_value_box:77 - ✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.
+2026-04-03 00:08:20.485 | DEBUG    | oaGuiElements.Core.text.text_value_box.text_value_box:make_text_value_box:85 - 🔬⚡️📝 [BUILDER] Forging value box for 'Test Box' at path 'test/box'.
+2026-04-03 00:08:20.485 | DEBUG    | oaGuiElements.Core.text.text_value_box.text_value_box:make_text_value_box:128 - 🧐📐🎨 [LAYOUT] Analysis for 'Test Box': H=None, W=None, Font=10, Colour=None
+2026-04-03 00:08:20.486 | DEBUG    | oaGuiElements.Core.text.text_value_box.text_value_box:make_text_value_box:143 - 🔋📝✨ [STATE] Initial value for 'Test Box': '123'
+2026-04-03 00:08:20.488 | DEBUG    | oaGuiElements.Core.text.text_value_box.text_value_box:make_text_value_box:243 - 📥📶🔄 [MQTT] Subscribing to topic: <MagicMock name='mock.state_mirror_engine.register_widget()' id='138028738103632'>
+2026-04-03 00:08:20.488 | SUCCESS  | oaGuiElements.Core.text.text_value_box.text_value_box:make_text_value_box:251 - ✅🆗📝 [SUCCESS] The text value box 'Test Box' has materialized!
+2026-04-03 00:08:20.488 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:reset:29 - 🧹 EventBus: Reset complete. All subscribers cleared.
+2026-04-03 00:08:20.489 | INFO     | oaGuiEditorWYSIWYG.Core.file_io_handler:load_file:26 - 📁 FileIOHandler: Load operation started for: /tmp/tmp0auf99ae/test.json
+2026-04-03 00:08:20.489 | DEBUG    | oaGuiEditorWYSIWYG.Core.file_io_handler:load_file:33 - 📁 FileIOHandler: Reading file content (45 bytes)...
+2026-04-03 00:08:20.489 | SUCCESS  | oaGuiEditorWYSIWYG.Core.file_io_handler:load_file:37 - 📁 FileIOHandler: File parsed successfully. Initializing StateManager...
+2026-04-03 00:08:20.489 | SUCCESS  | oaGuiEditorWYSIWYG.Core.file_io_handler:load_file:39 - ✅ FileIOHandler: Successfully loaded and initialized state from test.json
+2026-04-03 00:08:20.489 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:reset:29 - 🧹 EventBus: Reset complete. All subscribers cleared.
+2026-04-03 00:08:20.489 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:reset:29 - 🧹 EventBus: Reset complete. All subscribers cleared.
+2026-04-03 00:08:20.489 | DEBUG    | oaGuiShowtime.Methods.group:group_markers:29 - 🟢 [DATA] Grouping marker data by Zone and Group.
+2026-04-03 00:08:20.489 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:reset:29 - 🧹 EventBus: Reset complete. All subscribers cleared.
+2026-04-03 00:08:20.489 | INFO     | oaGuiEditorWYSIWYG.Core.state:reset:74 - 🧠 StateManager: Wiping internal state memory (Reset).
+2026-04-03 00:08:20.489 | INFO     | oaGuiEditorWYSIWYG.Core.state:initialize:53 - 🧠 StateManager: Initialization started. Path: None
+2026-04-03 00:08:20.489 | INFO     | oaGuiEditorWYSIWYG.Core.state:initialize:66 - 🧠 StateManager: State loaded with 1 root elements.
+2026-04-03 00:08:20.489 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:publish:54 - 📢 EventBus: Publishing 'STATE_UPDATED' from Unknown to 0 subscribers.
+2026-04-03 00:08:20.489 | SUCCESS  | oaGuiEditorWYSIWYG.Core.state:initialize:70 - ✅ StateManager: Initialization complete.
+2026-04-03 00:08:20.489 | INFO     | oaGuiEditorWYSIWYG.Core.state:update_state:97 - 🔄 StateManager: Update requested from Unknown. Path: ui.button.color
+2026-04-03 00:08:20.489 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:publish:54 - 📢 EventBus: Publishing 'STATE_UPDATED' from NoneType to 0 subscribers.
+2026-04-03 00:08:20.489 | INFO     | oaGuiEditorWYSIWYG.Core.state:update_state:97 - 🔄 StateManager: Update requested from Unknown. Path: ui.knob.value
+2026-04-03 00:08:20.489 | DEBUG    | oaGuiEditorWYSIWYG.Core.event_bus:publish:54 - 📢 EventBus: Publishing 'STATE_UPDATED' from NoneType to 0 subscribers.
+✅ test_04_builder_creation (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_04_builder_creation): passed (0.0075s)
+✅ test_actuator_button_initialization (oaGuiElements.Tests.buttons.button_actuator.test_button_actuator.TestButtonActuator.test_actuator_button_initialization): passed (0.0077s)
+✅ test_builder_creator_make (oaGuiElements.Tests.buttons.button_actuator.test_button_actuator.TestButtonActuator.test_builder_creator_make): passed (0.0071s)
+✅ test_builder_creator_make (oaGuiElements.Tests.buttons.button_toggle.test_button_toggle.TestButtonToggle.test_builder_creator_make): passed (0.0082s)
+✅ test_toggle_registration (oaGuiElements.Tests.buttons.button_toggle.test_button_toggle.TestButtonToggle.test_toggle_registration): passed (0.0089s)
+✅ test_builder_creator_make (oaGuiElements.Tests.buttons.button_toggler.test_button_toggler.TestButtonToggler.test_builder_creator_make): passed (0.0088s)
+✅ test_trapezoid_button_initialization (oaGuiElements.Tests.buttons.button_trapezoid.test_button_trapezoid.TestButtonTrapezoid.test_trapezoid_button_initialization): passed (0.0086s)
+✅ test_trapezoid_registration (oaGuiElements.Tests.buttons.button_trapezoid.test_button_trapezoid.TestButtonTrapezoid.test_trapezoid_registration): passed (0.0080s)
+✅ test_builder_creator_make (oaGuiElements.Tests.buttons.button_trapezoid_toggler.test_button_trapezoid_toggler.TestButtonTrapezoidToggler.test_builder_creator_make): passed (0.0088s)
+✅ test_builder_creator_make (oaGuiElements.Tests.buttons.button_wink.test_button_wink.TestButtonWink.test_builder_creator_make): passed (0.0088s)
+✅ test_builder_creator_make (oaGuiElements.Tests.buttons.button_wink_toggler.test_button_wink_toggler.TestButtonWinkToggler.test_builder_creator_make): passed (0.0609s)
+✅ test_builder_creator_make (oaGuiElements.Tests.faders.fader.test_fader.TestFader.test_builder_creator_make): passed (0.0081s)
+✅ test_fader_initialization (oaGuiElements.Tests.faders.fader.test_fader.TestFader.test_fader_initialization): passed (0.0067s)
+✅ test_builder_creator_make (oaGuiElements.Tests.faders.fader_bar_graph.test_fader_bar_graph.TestFaderBarGraph.test_builder_creator_make): passed (0.0077s)
+✅ test_fader_bar_graph_initialization (oaGuiElements.Tests.faders.fader_bar_graph.test_fader_bar_graph.TestFaderBarGraph.test_fader_bar_graph_initialization): passed (0.0075s)
+✅ test_builder_creator_make (oaGuiElements.Tests.faders.fader_dual.test_fader_dual.TestFaderDual.test_builder_creator_make): passed (0.0081s)
+✅ test_dual_fader_initialization (oaGuiElements.Tests.faders.fader_dual.test_fader_dual.TestFaderDual.test_dual_fader_initialization): passed (0.0070s)
+✅ test_builder_creator_make (oaGuiElements.Tests.faders.fader_horizontal.test_fader_horizontal.TestFaderHorizontal.test_builder_creator_make): passed (0.0080s)
+✅ test_horizontal_fader_initialization (oaGuiElements.Tests.faders.fader_horizontal.test_fader_horizontal.TestFaderHorizontal.test_horizontal_fader_initialization): passed (0.0069s)
+✅ test_builder_creator_make (oaGuiElements.Tests.faders.fader_linear_travelling_potentiometer.test_fader_linear_travelling_potentiometer.TestFaderLinearTravellingPotentiometer.test_builder_creator_make): passed (0.0075s)
+✅ test_ltp_initialization (oaGuiElements.Tests.faders.fader_linear_travelling_potentiometer.test_fader_linear_travelling_potentiometer.TestFaderLinearTravellingPotentiometer.test_ltp_initialization): passed (0.0073s)
+✅ test_creation (oaGuiElements.Tests.graphing.graphing.test_graphing.TestFluxPlotter.test_creation): passed (0.0964s)
+✅ test_creation (oaGuiElements.Tests.graphing.radar.test_radar.TestRadarWidget.test_creation): passed (0.0087s)
+✅ test_creation (oaGuiElements.Tests.graphing.test_flux_plotter.TestFluxPlotter.test_creation): passed (0.0130s)
+✅ test_import (oaGuiElements.Tests.input.input_mousewheel_mixin.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_import): passed (0.0000s)
+✅ test_replace_backslash (oaGuiElements.Tests.input.input_mousewheel_mixin.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_replace_backslash): passed (0.0000s)
+✅ test_builder_creator_make (oaGuiElements.Tests.input.json_tree.test_json_tree.TestJsonTree.test_builder_creator_make): passed (0.0119s)
+✅ test_json_tree_initialization (oaGuiElements.Tests.input.json_tree.test_json_tree.TestJsonTree.test_json_tree_initialization): passed (0.0101s)
+✅ test_builder_creator_make (oaGuiElements.Tests.metering.meter_bar.test_meter_bar.TestMeterBar.test_builder_creator_make): passed (0.0089s)
+✅ test_smart_meter_initialization (oaGuiElements.Tests.metering.meter_bar.test_meter_bar.TestMeterBar.test_smart_meter_initialization): passed (0.0079s)
+✅ test_builder_creator_make (oaGuiElements.Tests.metering.meter_needle.test_meter_needle.TestMeterNeedle.test_builder_creator_make): passed (0.0099s)
+✅ test_tilted_meter_config_extraction (oaGuiElements.Tests.metering.meter_needle.test_meter_needle.TestMeterNeedle.test_tilted_meter_config_extraction): passed (0.0067s)
+✅ test_batch_creation (oaGuiElements.Tests.metering.meter_needle.test_meter_needle_batch.TestMeterNeedleBatch.test_batch_creation): passed (0.1459s)
+✅ test_rust_ballistics_initialization (oaGuiElements.Tests.metering.test_rust_ballistics.TestRustBallistics.test_rust_ballistics_initialization): passed (0.0000s)
+✅ test_rust_ballistics_movement (oaGuiElements.Tests.metering.test_rust_ballistics.TestRustBallistics.test_rust_ballistics_movement): passed (0.0000s)
+✅ test_module_loads (oaGuiElements.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+✅ test_make_json_tree_prevents_name_error (oaGuiElements.Tests.test_json_tree.TestJsonTreeWidget.test_make_json_tree_prevents_name_error): passed (0.0125s)
+✅ test_make_slider_value_prevents_attribute_error (oaGuiElements.Tests.test_slider_value.TestSliderValueCreator.test_make_slider_value_prevents_attribute_error): passed (0.0094s)
+✅ test_load_handles_file_not_found_gracefully (oaGuiElements.Tests.test_table_csv_service.TestTableCSVService.test_load_handles_file_not_found_gracefully): passed (0.0005s)
+✅ test_load_parses_valid_csv_data (oaGuiElements.Tests.test_table_csv_service.TestTableCSVService.test_load_parses_valid_csv_data): passed (0.0007s)
+✅ test_creation (oaGuiElements.Tests.text.test_flux_plotter.TestFluxPlotter.test_creation): passed (0.0128s)
+✅ test_make_text_label (oaGuiElements.Tests.text.text_label.test_text_label.TestTextLabel.test_make_text_label): passed (0.0072s)
+✅ test_static_make (oaGuiElements.Tests.text.text_label.test_text_label.TestTextLabel.test_static_make): passed (0.0071s)
+✅ test_make_text_table (oaGuiElements.Tests.text.text_table.test_text_table.TestTextTable.test_make_text_table): passed (0.0091s)
+✅ test_make_text_value_box (oaGuiElements.Tests.text.text_value_box.test_text_value_box.TestTextValueBox.test_make_text_value_box): passed (0.0099s)
+✅ test_make_text_value_box (oaGuiElements.Tests.text.text_value_with_units.test_text_value_with_units.TestTextValueBox.test_make_text_value_box): passed (0.0102s)
+✅ test_import (oaGuiElements.Tests.utils.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_import): passed (0.0000s)
+✅ test_replace_backslash (oaGuiElements.Tests.utils.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_replace_backslash): passed (0.0000s)
+✅ test_module_loads (oaGuiFolderParser.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+✅ test_asset_exists (oaGuiManager.Tests.test_readers.TestReaders.test_asset_exists): passed (0.0000s)
+✅ test_file_io_load (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_file_io_load): passed (0.0006s)
+✅ test_layout_parser_scan (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_layout_parser_scan): passed (0.0002s)
+✅ test_marker_logic_grouping (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_marker_logic_grouping): passed (0.0001s)
+✅ test_state_manager_update (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_state_manager_update): passed (0.0002s)
+2026-04-03 00:08:20.496 | INFO     | oaTranslator.Core.state_mirror_engine:shutdown:71 - ⏹️ [STOPPED] StateMirrorEngine shutdown complete.
+2026-04-03 00:08:20.503 | INFO     | oaTranslator.Core.state_mirror_engine:shutdown:71 - ⏹️ [STOPPED] StateMirrorEngine shutdown complete.
+2026-04-03 00:08:20.510 | INFO     | oaTranslator.Core.state_mirror_engine:shutdown:71 - ⏹️ [STOPPED] StateMirrorEngine shutdown complete.
+2026-04-03 00:08:20.536 | DEBUG    | oaOchestration.Managers.application_initializer:initialize_app:34 - 🚀🏗️🔋 [BOOT] Continuing initialization sequence for version 20251225.
+2026-04-03 00:08:20.537 | ERROR    | oaOchestration.Managers.application_initializer:initialize_app:47 - 🚀🏗️❌ [ERROR] Error during application initialization: Forced error
+2026-04-03 00:08:20.537 | DEBUG    | oaOchestration.Managers.application_initializer:initialize_app:34 - 🚀🏗️🔋 [BOOT] Continuing initialization sequence for version 20251225.
+2026-04-03 00:08:20.537 | SUCCESS  | oaOchestration.Managers.application_initializer:initialize_app:41 - 🚀🏗️✅ [SUCCESS] Application initialization completed.
+2026-04-03 00:08:20.538 | DEBUG    | oaSplinker.Methods.pipeline:_build_pipeline:38 - 🚀 SplinkPipeline: Using HIGH-PERFORMANCE RUST core for test_splink.
+2026-04-03 00:08:20.538 | DEBUG    | oaSplinker.Methods.pipeline:_build_pipeline:38 - 🚀 SplinkPipeline: Using HIGH-PERFORMANCE RUST core for test_splink.
+2026-04-03 00:08:20.538 | DEBUG    | oaComBroker.Core.protocol_router.ingest:normalize_and_ingest:66 - 📡📥📥 [INBOUND] SPLINKER on OPEN-AIR/System/Status/Splinker/List: []
+2026-04-03 00:08:20.539 | DEBUG    | oaComBroker.Core.protocol_router.ingest:normalize_and_ingest:66 - 📡📥📥 [INBOUND] SPLINKER on OPEN-AIR/System/Status/Splinker/List: []
+2026-04-03 00:08:20.539 | DEBUG    | oaComBroker.Core.protocol_router.ingest:normalize_and_ingest:66 - 📡📥📥 [INBOUND] SPLINKER on OPEN-AIR/System/Status/Splinker/List: []
+2026-04-03 00:08:20.541 | DEBUG    | oaStateCache.Core.state_cache:__init__:73 - 🚀 Using HIGH-PERFORMANCE RUST state cache.
+2026-04-03 00:08:20.541 | DEBUG    | oaStateCache.Core.state_cache:__init__:92 - Initialized with 0 entries.
+2026-04-03 00:08:20.541 | DEBUG    | oaStateCache.Core.state_cache:__init__:73 - 🚀 Using HIGH-PERFORMANCE RUST state cache.
+2026-04-03 00:08:20.541 | DEBUG    | oaStateCache.Core.state_cache:__init__:92 - Initialized with 0 entries.
+2026-04-03 00:08:20.542 | DEBUG    | oaStateCache.Core.state_cache:__init__:73 - 🚀 Using HIGH-PERFORMANCE RUST state cache.
+2026-04-03 00:08:20.542 | DEBUG    | oaStateCache.Core.state_cache:__init__:92 - Initialized with 0 entries.
+2026-04-03 00:08:20.543 | SUCCESS  | oaTests.Managers.configIniEditor.manager:set_config_flag:116 - 💾 [CONFIG] Surgically updated [DEBUG_MATRIX] sys_data to True
+2026-04-03 00:08:20.545 | DEBUG    | oaThreadManager.Workers.launcher:launch_core_managers:53 - 🚀⚙️🔗 [LAUNCHER] Beginning CORE manager launch sequence...
+2026-04-03 00:08:20.546 | DEBUG    | oaThreadManager.Workers.launcher:launch_core_managers:71 - 🚀⚙️🔗 [LAUNCHER] Injecting dynamic protocols...
+2026-04-03 00:08:20.547 | DEBUG    | oaThreadManager.Workers.launcher:launch_core_managers:147 - 🚀⚙️🔗 [LAUNCHER] Linking cross-dependent managers...
+2026-04-03 00:08:20.548 | DEBUG    | oaThreadManager.Workers.launcher:launch_core_managers:164 - 🚀⚙️🔗 [LAUNCHER] Starting all manager services...
+2026-04-03 00:08:20.548 | DEBUG    | oaThreadManager.Workers.launcher:start_network_services:176 - 🚀⚙️🔗 [LAUNCHER] Connecting CORE MQTT Client to broker and running scans...
+2026-04-03 00:08:20.549 | SUCCESS  | oaThreadManager.Workers.launcher:launch_core_managers:188 - ✅✅✅ [SUCCESS] All CORE managers have been successfully launched!
+2026-04-03 00:08:20.549 | DEBUG    | oaThreadManager.Workers.launcher:launch_core_managers:53 - 🚀⚙️🔗 [LAUNCHER] Beginning CORE manager launch sequence...
+2026-04-03 00:08:20.550 | DEBUG    | oaThreadManager.Workers.launcher:launch_core_managers:71 - 🚀⚙️🔗 [LAUNCHER] Injecting dynamic protocols...
+2026-04-03 00:08:20.550 | DEBUG    | oaThreadManager.Workers.launcher:launch_core_managers:147 - 🚀⚙️🔗 [LAUNCHER] Linking cross-dependent managers...
+2026-04-03 00:08:20.551 | DEBUG    | oaThreadManager.Workers.launcher:launch_core_managers:164 - 🚀⚙️🔗 [LAUNCHER] Starting all manager services...
+2026-04-03 00:08:20.551 | DEBUG    | oaThreadManager.Workers.launcher:start_network_services:176 - 🚀⚙️🔗 [LAUNCHER] Connecting CORE MQTT Client to broker and running scans...
+2026-04-03 00:08:20.612 | SUCCESS  | oaThreadManager.Workers.launcher:launch_core_managers:188 - ✅✅✅ [SUCCESS] All CORE managers have been successfully launched!
+2026-04-03 00:08:20.613 | WARNING  | oaWatchdog.Managers.fleet_status_monitor:_on_scan_complete:99 - Malformed scan complete payload received: unexpected character: line 1 column 1 (char 0)
+2026-04-03 00:08:20.613 | DEBUG    | oaWatchdog.Managers.fleet_status_monitor:_on_scan_complete:97 - Fleet Scan Complete - No devices found. Status Red
+2026-04-03 00:08:20.613 | DEBUG    | oaWatchdog.Managers.fleet_status_monitor:_on_scan_complete:93 - Fleet Scan Complete - 5 devices found. Status Green
+2026-04-03 00:08:20.614 | DEBUG    | oaWatchdog.Managers.fleet_status_monitor:_on_scan_start:72 - Fleet Scan Started - Status Red
+2026-04-03 00:08:20.624 | DEBUG    | oaWatchdog.Managers.watchdog:start_heartbeat:128 - 🐕⏳🔋 [WATCHDOG] Started (Timeout: 120.0s)
+2026-04-03 00:08:20.624 | WARNING  | oaComBroker.Core.protocol_router.router:stop:110 - ⏹️ [STOP] Protocol Router Offline.
+2026-04-03 00:08:20.624 | DEBUG    | oaComMQTT.Managers.mqtt_connection:disconnect:142 - MQTT: Disconnection initiated.
+Exception ignored in: <function Variable.__del__ at 0x7d898e575a80>
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/tkinter/__init__.py", line 410, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: main thread is not in main loop
+✅ test_module_loads (oaGuiMediaElements.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+✅ test_asset_exists (oaGuiShowtime.Tests.test_readers.TestReaders.test_asset_exists): passed (0.0000s)
+✅ test_module_loads (oaGuiSplashScreen.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+✅ test_broadcast_gui_change (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_broadcast_gui_change): passed (0.0072s)
+✅ test_calculate_topic (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_calculate_topic): passed (0.0067s)
+✅ test_register_widget (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_register_widget): passed (0.0067s)
+✅ test_module_loads (oaInstallation.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+✅ test_desktop_entry (oaInstallation.Tests.test_installation_validator.TestInstallation.test_desktop_entry): passed (0.0000s)
+✅ test_mosquitto_reachable (oaInstallation.Tests.test_installation_validator.TestInstallation.test_mosquitto_reachable): passed (0.0000s)
+✅ test_python_environment (oaInstallation.Tests.test_installation_validator.TestInstallation.test_python_environment): passed (0.0253s)
+✅ test_snmp_reachable (oaInstallation.Tests.test_installation_validator.TestInstallation.test_snmp_reachable): passed (0.0000s)
+✅ test_module_loads (oaLogging.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+✅ test_debug_matrix_decorator (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_debug_matrix_decorator): passed (0.0001s)
+✅ test_failsafe_behavior (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_failsafe_behavior): passed (0.0001s)
+✅ test_is_debug_allowed_delegation (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_is_debug_allowed_delegation): passed (0.0002s)
+✅ test_matrix_log_proxy (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_matrix_log_proxy): passed (0.0004s)
+✅ test_initialize_app_exception (oaOchestration.Tests.test_application_initializer.TestApplicationInitializer.test_initialize_app_exception): passed (0.0004s)
+✅ test_initialize_app_success (oaOchestration.Tests.test_application_initializer.TestApplicationInitializer.test_initialize_app_success): passed (0.0003s)
+✅ test_protocol_guard_exception (oaOchestration.Tests.test_protocol_guard.TestProtocolGuard.test_protocol_guard_exception): passed (0.0001s)
+✅ test_protocol_guard_success (oaOchestration.Tests.test_protocol_guard.TestProtocolGuard.test_protocol_guard_success): passed (0.0001s)
+✅ test_module_loads (oaPTP.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+✅ test_rust_ptp_parsing_announce (oaPTP.Tests.test_ptp_parser_rust.TestPtpParserRust.test_rust_ptp_parsing_announce): passed (0.0001s)
+✅ test_rust_ptp_parsing_sync (oaPTP.Tests.test_ptp_parser_rust.TestPtpParserRust.test_rust_ptp_parsing_sync): passed (0.0002s)
+✅ test_deadband_state_rust (oaSplinker.Tests.test_pipeline_rust.TestPipelineRust.test_deadband_state_rust): passed (0.0001s)
+✅ test_rust_scale (oaSplinker.Tests.test_pipeline_rust.TestPipelineRust.test_rust_scale): passed (0.0001s)
+✅ test_add_monitor_callback (oaSplinker.Tests.test_splinker.TestSplinker.test_add_monitor_callback): passed (0.0007s)
+✅ test_initialization (oaSplinker.Tests.test_splinker.TestSplinker.test_initialization): passed (0.0005s)
+✅ test_singleton (oaSplinker.Tests.test_splinker.TestSplinker.test_singleton): passed (0.0001s)
+✅ test_module_loads (oaStand_Alone_Utilities.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+🦀 Using Rust LogAligner for high-speed merge...
+✅ Processed 4 lines.
+✅ test_python_realign_logs (oaStand_Alone_Utilities.Tests.test_realign_logs.TestLogRealigner.test_python_realign_logs): passed (0.0009s)
+🦀 Using Rust LogAligner for high-speed merge...
+✅ Processed 4 lines.
+✅ test_rust_realign_logs (oaStand_Alone_Utilities.Tests.test_realign_logs.TestLogRealigner.test_rust_realign_logs): passed (0.0004s)
+✅ test_asset_exists (oaStateCache.Tests.test_readers.TestReaders.test_asset_exists): passed (0.0000s)
+✅ test_rust_state_cache_initialization (oaStateCache.Tests.test_rust_state_cache.TestRustStateCache.test_rust_state_cache_initialization): passed (0.0004s)
+✅ test_rust_state_cache_update (oaStateCache.Tests.test_rust_state_cache.TestRustStateCache.test_rust_state_cache_update): passed (0.0010s)
+✅ test_handle_external_update (oaStateCache.Tests.test_state_cache.TestStateCache.test_handle_external_update): passed (0.0007s)
+✅ test_module_loads (oaStyle.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+✅ test_read_flags (oaTests.Tests.test_config_editor.TestConfigIniEditor.test_read_flags): passed (0.0002s)
+✅ test_set_flag (oaTests.Tests.test_config_editor.TestConfigIniEditor.test_set_flag): passed (0.0016s)
+✅ test_dynamic_snmp_loading (oaThreadManager.Tests.Workers.test_launcher.TestLauncher.test_dynamic_snmp_loading): passed (0.0043s)
+✅ test_launch_core_managers_structure (oaThreadManager.Tests.Workers.test_launcher.TestLauncher.test_launch_core_managers_structure): passed (0.0634s)
+✅ test_placeholder (oaThreadManager.Tests.test_Entry.TestEntry.test_placeholder): passed (0.0000s)
+✅ test_module_loads (oaTranslator.Tests.test_entry.TestInitialization.test_module_loads): passed (0.0000s)
+✅ test_initialization_and_subscription (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_initialization_and_subscription): passed (0.0003s)
+✅ test_on_scan_complete_malformed_payload (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_complete_malformed_payload): passed (0.0003s)
+✅ test_on_scan_complete_no_devices (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_complete_no_devices): passed (0.0002s)
+✅ test_on_scan_complete_with_devices (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_complete_with_devices): passed (0.0002s)
+✅ test_on_scan_start (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_start): passed (0.0002s)
+✅ test_kick_watchdog (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_kick_watchdog): passed (0.0101s)
+✅ test_register_panic_callback (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_register_panic_callback): passed (0.0001s)
+✅ test_start_heartbeat (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_start_heartbeat): passed (0.0003s)
+------------------------------------------------------------
+
+🧹 Commencing post-test cleanup...
+
+🏁 [COMPLETE] Test Run Finished.
+📊 Summary:
+   ✅ Passed:  214
+   ❌ Failed:  0
+   💥 Errors:  9
+   ⏭️ Skipped: 1
+   📈 Total:   224
+============================================================
+

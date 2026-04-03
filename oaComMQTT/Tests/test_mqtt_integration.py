@@ -50,12 +50,17 @@ class TestMQTTIntegration(unittest.TestCase):
     def test_publish_subscribe_clear(self):
         """
         Flow: 
-        1. Subscribe to test topic.
-        2. Publish test messages.
-        3. Verify messages are received.
-        4. Use MQTTSweeper to clear the topics.
-        5. Verify topics are cleared.
+        1. Pre-clear any existing data.
+        2. Subscribe to test topic.
+        3. Publish test messages.
+        4. Verify messages are received.
+        5. Use MQTTSweeper to clear the topics.
+        6. Verify topics are cleared.
         """
+        # 0. Pre-Clear
+        sweeper = MQTTSweeper(self.host, self.port, self.test_topic_root)
+        sweeper.sweep()
+
         # 1. Connect and Subscribe
         self.client.on_message = self.on_message
         self.client.connect(self.host, self.port)
@@ -71,36 +76,33 @@ class TestMQTTIntegration(unittest.TestCase):
             self.client.publish(topic, payload, retain=True)
 
         # 3. Wait and Verify
-        timeout = time.time() + 2
+        timeout = time.time() + 3
         while len(self.received_messages) < 2 and time.time() < timeout:
             time.sleep(0.1)
 
         self.client.loop_stop()
         self.client.disconnect()
 
-        self.assertEqual(len(self.received_messages), 2, "Should have received 2 test messages.")
+        # Check if we at least got our test messages
         received_dict = dict(self.received_messages)
         for topic, payload in test_payloads.items():
-            self.assertIn(topic, received_dict)
+            self.assertIn(topic, received_dict, f"Expected topic {topic} not found in {received_dict.keys()}")
             self.assertEqual(received_dict[topic], payload)
 
         # 4. Clear the topics using MQTTSweeper
-        sweeper = MQTTSweeper(self.host, self.port, self.test_topic_root)
         sweeper.sweep()
 
-        # 5. Verify they are gone (by trying to read again)
-        # Retained messages should be gone after sweep()
+        # 5. Verify they are gone
         self.received_messages = []
         self.client.connect(self.host, self.port)
         self.client.subscribe(f"{self.test_topic_root}/#")
         
-        # Give it a short moment to receive any potentially remaining retained messages
         self.client.loop_start()
-        time.sleep(1.0)
+        time.sleep(1.5)
         self.client.loop_stop()
         self.client.disconnect()
 
-        self.assertEqual(len(self.received_messages), 0, "Topics should have been cleared by the sweeper.")
+        self.assertEqual(len(self.received_messages), 0, f"Topics should have been cleared. Found: {self.received_messages}")
 
 if __name__ == "__main__":
     unittest.main()

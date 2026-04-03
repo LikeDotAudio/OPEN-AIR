@@ -27,6 +27,17 @@ Assumptions and Constraints:
 from ..FileReaders.config_reader import Config
 from loguru import logger
 
+# --- Native Rust Optimization ---
+from oaConfiguration.Methods.oaConfigEngine_rs.compiler_hook import ensure_compiled
+try:
+    ensure_compiled()
+    from oaconfigengine_rs.oaconfigengine_rs import ConfigValidator
+    _rust_validator = ConfigValidator()
+    HAS_RUST = True
+except Exception as e:
+    logger.warning(f"oaConfiguration: Rust ConfigValidator unavailable: {e}")
+    HAS_RUST = False
+
 LOCAL_DEBUG = True
 
 app_constants = Config.get_instance()  # Get the singleton instance
@@ -35,25 +46,27 @@ app_constants = Config.get_instance()  # Get the singleton instance
 def validate_configuration(print_func):
     """
     Validates the application's configuration settings.
-
-    Parameters:
-        print_func (callable): A function used to output validation messages. 
-            Must accept a single string argument.
-
-    Returns:
-        bool: True if the configuration is valid, False otherwise. Currently 
-        always returns True as a placeholder for more rigorous checks.
-
-    Side Effects and Thread-Safety:
-        - Invokes 'print_func', which may perform I/O.
-        - This function is thread-safe as it only reads from the configuration.
     """
     if LOCAL_DEBUG:
-        # Debugging log to track the start of the validation process.
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Commencing the configuration validation experiment.", "DEBUG")
 
-    # REFACTORED: Stripped try/except for core safety mandates.
-    # Logic is simplified here to serve as a hook for future rigorous 
-    # validation rules.
+    if HAS_RUST:
+        try:
+            # Prepare dictionary for Rust validation
+            config_data = {
+                "partition_id": str(getattr(app_constants, "PARTITION_ID", "")),
+                "mqtt_port": int(getattr(app_constants, "MQTT_PORT", 1883)),
+                "mqtt_broker": str(getattr(app_constants, "MQTT_BROKER_ADDRESS", ""))
+            }
+            _rust_validator.validate_config(config_data)
+            print_func("✅ [RUST] Configuration validated against strict schema.")
+            return True
+        except ValueError as e:
+            print_func(f"❌ [RUST] Schema Validation Failed: {e}")
+            return False
+        except Exception as e:
+            logger.error(f"Config validation error: {e}")
+
+    # Fallback/Legacy
     print_func("✅ Excellent! The configuration is quite, quite brilliant.")
     return True

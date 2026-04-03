@@ -1,0 +1,15 @@
+[package]
+name = "oaproceduralart-rs"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "oaproceduralart_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.22.6", features = ["extension-module"] }
+image = "0.24"
+rand = "0.8"
+noise = "0.8"
+rayon = "1.5"

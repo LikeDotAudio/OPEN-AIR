@@ -13,6 +13,22 @@ import time
 import os as _os
 import traceback
 
+# --- Native Rust Optimization ---
+from oaWatchdog.Methods.oaClockSync_rs.compiler_hook import ensure_compiled
+try:
+    ensure_compiled()
+    from oaclocksync_rs.oaclocksync_rs import SystemClock
+    _rust_clock = SystemClock()
+    HAS_RUST_CLOCK = True
+except Exception:
+    HAS_RUST_CLOCK = False
+
+def get_precise_time():
+    """Returns the current Unix timestamp with the best available precision."""
+    if HAS_RUST_CLOCK:
+        return _rust_clock.get_micros() / 1_000_000.0
+    return time.time()
+
 # --- Standard Debug Logging Setup ---
 # LOCAL_DEBUG: Toggles verbose watchdog state reporting to the terminal.
 LOCAL_DEBUG = True
@@ -28,7 +44,7 @@ app_constants = Config.get_instance()
 # WATCHDOG_RUNNING: Controls the execution of the background monitoring loop.
 WATCHDOG_RUNNING = True
 # LAST_HEARTBEAT_TIME: Unix timestamp of the most recent 'kick'.
-LAST_HEARTBEAT_TIME = time.time()
+LAST_HEARTBEAT_TIME = get_precise_time()
 # TIMEOUT_THRESHOLD: Duration (seconds) of silence before triggering a panic.
 TIMEOUT_THRESHOLD = 120.0
 # PANIC_CALLBACKS: List of functions to execute immediately before termination.
@@ -80,7 +96,7 @@ def kick_watchdog():
         a Tkinter '.after()' callback or a main 'while' loop).
     """
     global LAST_HEARTBEAT_TIME
-    LAST_HEARTBEAT_TIME = time.time()
+    LAST_HEARTBEAT_TIME = get_precise_time()
 
 def start_heartbeat(app_constants_instance=None):
     """
@@ -99,7 +115,7 @@ def start_heartbeat(app_constants_instance=None):
     """
     global WATCHDOG_RUNNING, LAST_HEARTBEAT_TIME
     WATCHDOG_RUNNING = True
-    LAST_HEARTBEAT_TIME = time.time()
+    LAST_HEARTBEAT_TIME = get_precise_time()
 
     thread = threading.Thread(
         target=_heartbeat_loop,
@@ -158,7 +174,7 @@ def _heartbeat_loop(app_constants_instance):
         time.sleep(10.0)
         counter += 1
         
-        current_time = time.time()
+        current_time = get_precise_time()
         elapsed = current_time - LAST_HEARTBEAT_TIME
 
         # CRITICAL FAILURE DETECTED:

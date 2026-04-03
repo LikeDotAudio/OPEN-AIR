@@ -42,15 +42,13 @@ class VisaGuiPublisher:
 
         This method populates the first N slots with found resource names
         and explicitly clears any remaining slots up to MAX_GUI_DEVICE_SLOTS.
+        Publishes a single bulk JSON array to options/all instead of individual topics.
 
         Parameters:
         - resources: A list of strings containing VISA resource addresses.
 
         Returns:
         - None.
-
-        Side effects and thread-safety:
-        - Performs multiple non-blocking MQTT publish operations.
         """
         try:
             base_topic = (
@@ -58,68 +56,31 @@ class VisaGuiPublisher:
             )
 
             num_resources_to_show = min(len(resources), MAX_GUI_DEVICE_SLOTS)
+            options_array = []
 
-            # Populate active slots with discovered resource addresses.
-            for i in range(1, num_resources_to_show + 1):
-                option_topic_prefix = f"{base_topic}/options/{i}"
-                device_name = resources[i - 1]
+            for i in range(1, MAX_GUI_DEVICE_SLOTS + 1):
+                if i <= num_resources_to_show:
+                    device_name = resources[i - 1]
+                    options_array.append({
+                        "index": i,
+                        "active": {"val": True, "src": "system", "ts": time.time(), "GUID": self.GUID},
+                        "label_active": {"val": device_name, "src": "system", "ts": time.time(), "GUID": self.GUID},
+                        "label_inactive": {"val": device_name, "src": "system", "ts": time.time(), "GUID": self.GUID}
+                    })
+                else:
+                    options_array.append({
+                        "index": i,
+                        "active": {"val": False, "src": "system", "ts": time.time(), "GUID": self.GUID},
+                        "label_active": {"val": "", "src": "system", "ts": time.time(), "GUID": self.GUID},
+                        "label_inactive": {"val": "", "src": "system", "ts": time.time(), "GUID": self.GUID}
+                    })
 
-                payload_active_true = orjson.dumps(
-                    {"val": True, "src": "system", "ts": time.time(), "GUID": self.GUID}
-                )
-                self.mqtt_util.get_client_instance().publish(
-                    topic=f"{option_topic_prefix}/active",
-                    payload=payload_active_true,
-                    qos=0,
-                    retain=False,
-                )
-                self.mqtt_util.get_client_instance().publish(
-                    topic=f"{option_topic_prefix}/label_active",
-                    payload=device_name,
-                    qos=0,
-                    retain=False,
-                )
-                self.mqtt_util.get_client_instance().publish(
-                    topic=f"{option_topic_prefix}/label_inactive",
-                    payload=device_name,
-                    qos=0,
-                    retain=False,
-                )
-
-            # Clear unused slots to ensure the GUI list reflects the current search.
-            for i in range(num_resources_to_show + 1, MAX_GUI_DEVICE_SLOTS + 1):
-                option_topic_prefix = f"{base_topic}/options/{i}"
-
-                payload_active_false = orjson.dumps(
-                    {
-                        "val": False,
-                        "src": "system",
-                        "ts": time.time(),
-                        "GUID": self.GUID,
-                    }
-                )
-                payload_empty_label = orjson.dumps(
-                    {"val": "", "src": "system", "ts": time.time(), "GUID": self.GUID}
-                )
-
-                self.mqtt_util.get_client_instance().publish(
-                    topic=f"{option_topic_prefix}/active",
-                    payload=payload_active_false,
-                    qos=0,
-                    retain=False,
-                )
-                self.mqtt_util.get_client_instance().publish(
-                    topic=f"{option_topic_prefix}/label_active",
-                    payload=payload_empty_label,
-                    qos=0,
-                    retain=False,
-                )
-                self.mqtt_util.get_client_instance().publish(
-                    topic=f"{option_topic_prefix}/label_inactive",
-                    payload=payload_empty_label,
-                    qos=0,
-                    retain=False,
-                )
+            self.mqtt_util.get_client_instance().publish(
+                topic=f"{base_topic}/options/all",
+                payload=orjson.dumps(options_array),
+                qos=0,
+                retain=False,
+            )
 
             # Auto-select the first device for user convenience.
             if resources:
@@ -135,7 +96,7 @@ class VisaGuiPublisher:
                 )
                 matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 ✅ First device automatically selected after search.", "SUCCESS")
 
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 ✅ GUI device list updated with search results (up to 40 slots used).", "SUCCESS")
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 ✅ GUI device list updated with bulk search results.", "SUCCESS")
         except Exception as e:
             if LOCAL_DEBUG:
                 logger.exception("💳 ❌ Error in _update_found_devices_gui")

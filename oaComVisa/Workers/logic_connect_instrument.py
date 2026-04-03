@@ -11,7 +11,7 @@ import datetime
 
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
-from oaLogging.Core.logger import initialize_logging, set_log_directory
+from oaLogging.Core.logger import initialize_logging, set_log_directory, visa_logger
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
@@ -57,8 +57,8 @@ class VisaConnector:
         - Performs blocking I/O to initialize the hardware interface.
         - Configures instrument timeout (5s) and termination characters.
         """
-        current_function = inspect.currentframe().f_code.co_name
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 Connecting to instrument: {resource_name}. Fingers crossed!", "DEBUG")
+        if LOCAL_DEBUG:
+            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Connecting to instrument: {resource_name}.", "DEBUG")
         try:
             rm = pyvisa.ResourceManager()
             inst = rm.open_resource(resource_name)
@@ -69,13 +69,12 @@ class VisaConnector:
             inst.write_termination = "\n"
             inst.query_delay = 0.1
 
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 Connection successful to {resource_name}. We're in!", "SUCCESS")
+            if LOCAL_DEBUG:
+                matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Connection successful to {resource_name}.", "SUCCESS")
             return inst
         except Exception as e:
-            error_msg = f"💳 ❌ An unexpected error occurred while connecting to {resource_name}: {e}."
-
-            if LOCAL_DEBUG:
-                logger.debug(error_msg)
+            # ⚡ NON-GATED GRAVITY: Errors must remain outside debug gates.
+            visa_logger.error(f"Unexpected error while connecting to {resource_name}: {e}.")
             return None
 
     def connect_instrument_logic(self, resource_name):
@@ -134,6 +133,6 @@ class VisaConnector:
 
             return self.inst
         except Exception as e:
-            if LOCAL_DEBUG:
-                logger.exception("💳 ❌ Error during connection logic")
+            # ⚡ OPTIMIZATION: Downgrade from exception() to error() to prevent massive tracebacks during expected query failures.
+            visa_logger.error(f"Error during connection logic for {resource_name}: {e}")
             return False

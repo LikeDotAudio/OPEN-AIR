@@ -10,7 +10,7 @@ from oaGuiElements.Methods.oaCMDPMath_rs.compiler_hook import ensure_compiled
 
 try:
     ensure_compiled()
-    from oaGuiElements.Methods.oaCMDPMath_rs.oacmdpmath_rs import CMDPMath
+    from oacmdpmath_rs import CMDPMath
     _rust_engine = CMDPMath()
     HAS_RUST = True
 except Exception as e:

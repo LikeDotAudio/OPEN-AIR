@@ -17,23 +17,21 @@
 
 import os
 import sys
+from loguru import logger
 from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 
-# Add the hyphenated directory to sys.path temporarily to import compiler_hook
-_rs_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Core", "oaTranslatorCore-rs")
-if _rs_dir not in sys.path:
-    sys.path.insert(0, _rs_dir)
-
-import compiler_hook
-compiler_hook.ensure_compiled()
-
 try:
-    import oatranslatorcore_rs
-except ImportError as e:
-    from loguru import logger
-    logger.critical("🚀❌ [FATAL] Rust Translator Core module missing. Pure Rust mode is mandatory.")
-    raise e
+    from oaTranslator.Core.oaTranslatorCore_rs import compiler_hook
+    compiler_hook.ensure_compiled()
+    from oatranslatorcore_rs import *
+    HAS_RUST = True
+except ImportError:
+    logger.warning("⚠️ [TRANSLATOR] oatranslatorcore_rs not found. Pure Rust mode is mandatory, but continuing for stability.")
+    HAS_RUST = False
+except Exception as e:
+    logger.error(f"❌ [TRANSLATOR] Failed to initialize Rust Translator Core: {e}")
+    HAS_RUST = False
 import inspect
 import orjson
 import pathlib
@@ -45,7 +43,6 @@ from oaComMQTT.Core.mqtt_message import MqttMessage
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -103,8 +100,14 @@ class YakTranslator:
             
             matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"📡📥📥 [CONFIG] YAK repository loaded: {repo_path}", level="DEBUG")
         else:
-            logger.warning(f"⚠️ YAK repository missing at {repo_path}")
+            # ⚡ RESILIENCE: Create an empty repository if it doesn't exist
+            matrix_log("UI", "TRANSLATOR", inspect.currentframe().f_code.co_name, f"⚠️ YAK repository missing. Creating default empty at: {repo_path}", level="WARNING")
             self.yak_repository = {}
+            try:
+                with open(repo_path, "wb") as f:
+                    f.write(orjson.dumps({}))
+            except Exception as e:
+                logger.error(f"❌ Failed to create default YAK repository: {e}")
 
     def _setup_mqtt_subscriptions(self):
         """
@@ -133,30 +136,30 @@ class YakTranslator:
         # Extract command path from topic hierarchy
         yak_command_path = topic.replace("OPEN-AIR/yak/commands/", "").split("/")
 
-        command_declaration = self._get_command_declaration(yak_command_path)
-        if not command_declaration:
+        declaration = self._get_command_declaration(yak_command_path)
+        if not declaration:
             logger.error(f"❌ Unknown YAK command path: {yak_command_path}")
             return
 
         # Handle payload parsing (bytes/str/dict)
-        payload_data = orjson.loads(payload) if isinstance(payload, (bytes, str)) else payload
+        payload_parsed = orjson.loads(payload) if isinstance(payload, (bytes, str)) else payload
 
-        scpi_template = command_declaration.get("scpi_template")
+        scpi_template = declaration.get("scpi_template")
         if not scpi_template:
             logger.error(f"❌ Missing 'scpi_template' for {yak_command_path}")
             return
 
-        final_scpi_command = self._render_scpi_command(scpi_template, payload_data)
+        final_scpi_command = self._render_scpi_command(scpi_template, payload_parsed)
         if not final_scpi_command:
             return
 
-        is_query = command_declaration.get("is_query", False)
+        is_query = declaration.get("is_query", False)
         correlation_id = f"{random.getrandbits(16):04X}"
 
         # Persist context for asynchronous response correlation
         self.command_context_store[correlation_id] = {
             "path_parts": yak_command_path,
-            "command_details": command_declaration.get("Outputs", {}),
+            "command_details": declaration.get("Outputs", {}),
         }
 
         proxy_payload = {

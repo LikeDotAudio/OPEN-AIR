@@ -30,11 +30,11 @@ class BallisticsEngine:
 
     def update(self, dt_ms):
         """Processes the ballistic state for one time step."""
-        self.rust_engine.update(dt_ms)
+        return self.rust_engine.update(dt_ms)
 
     @property
     def overload_fade_factor(self):
-        return self.rust_engine.get_overload_fade_factor()
+        return self.rust_engine.overload_fade_factor
 
     def reset(self):
         """Resets the engine to default values."""
@@ -54,4 +54,4 @@ class BallisticsEngine:
 
     @property
     def overload_fade(self):
-        return self.rust_engine.overload_fade
+        return self.rust_engine.overload_fade_factor

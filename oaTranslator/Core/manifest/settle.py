@@ -5,7 +5,17 @@
 # Description: Logic for managing the 'is_settled' flag and debounce logic.
 
 import threading
+import logging
 from typing import Callable, Any
+from ..oaTranslatorCore_rs.compiler_hook import ensure_compiled
+
+try:
+    ensure_compiled()
+    from ..oaTranslatorCore_rs.oatranslatorcore_rs import SettleLock as RustSettleLock
+    HAS_RUST = True
+except Exception as e:
+    logging.warning(f"oaTranslator: Failed to load Rust SettleLock: {e}")
+    HAS_RUST = False
 
 class SettleManager:
     """
@@ -17,7 +27,10 @@ class SettleManager:
     def __init__(self, debounce_ms: int = 50):
         self.debounce_ms = debounce_ms
         self._timer = None
-        self._lock = threading.Lock()
+        if HAS_RUST:
+            self._lock = RustSettleLock()
+        else:
+            self._lock = threading.Lock()
 
     def mark_in_motion(self, callback: Callable):
         """

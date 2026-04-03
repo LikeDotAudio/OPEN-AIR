@@ -66,17 +66,15 @@ class VisaUtilityParser:
             ip = details["IP"]
             if ip != "Unknown":
                 # Check 5025 (Raw) or 111 (RPC/VXI-11)
-                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                sock.settimeout(1.0)
-                # connect_ex returns 0 on success, no exception
-                res_5025 = sock.connect_ex((ip, 5025))
-                sock.close()
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                    sock.settimeout(1.0)
+                    # connect_ex returns 0 on success, no exception
+                    res_5025 = sock.connect_ex((ip, 5025))
                 
                 if res_5025 != 0:
-                    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                    sock.settimeout(1.0)
-                    res_111 = sock.connect_ex((ip, 111))
-                    sock.close()
+                    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                        sock.settimeout(1.0)
+                        res_111 = sock.connect_ex((ip, 111))
                     if res_111 != 0:
                         logger.warning(f"      💳⚠️ [VISA] Network host {ip} is unreachable (5025/111 closed).")
                         return None

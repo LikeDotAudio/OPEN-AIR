@@ -7,6 +7,7 @@
 
 import unittest
 from unittest.mock import MagicMock
+from scapy.all import IP, UDP
 from oaPTP.Core.ptp_packet_parser import PTPPacketParser
 
 class MockPkt:
@@ -17,11 +18,9 @@ class MockPkt:
         self.dport = dport
 
     def haslayer(self, layer_type):
-        from scapy.all import IP, UDP
         return layer_type in [IP, UDP]
 
     def __getitem__(self, layer_type):
-        from scapy.all import IP, UDP
         if layer_type == IP:
             return MagicMock(src=self.src_ip, dst=self.dst_ip)
         if layer_type == UDP:

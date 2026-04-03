@@ -62,9 +62,16 @@ class CacheSaveEngine:
                         self.cache.update(self.pending_deltas); self.pending_deltas.clear()
                         
                         if flusher_instance:
-                            flusher_instance.flush_async(self.cache, str(app_constants.DEVICE_STATE_CACHE_PATH))
+                            # ⚡ FIX: Explicitly convert to dict and ensure it's a PyDict-compatible object
+                            if hasattr(self.cache, 'to_dict'):
+                                cache_dict = self.cache.to_dict()
+                            else:
+                                cache_dict = dict(self.cache.items()) if hasattr(self.cache, 'items') else dict(self.cache)
+                                
+                            flusher_instance.flush_async(cache_dict, str(app_constants.DEVICE_STATE_CACHE_PATH))
                         else:
-                            cache_io_handler.save_cache(self.cache)
+                            cache_dict = self.cache.to_dict() if hasattr(self.cache, 'to_dict') else self.cache
+                            cache_io_handler.save_cache(cache_dict)
                             
                         last_commit = now
                         if self.debug: self.logger.success(f"💾✍️ [CACHE] Debounced Commit: {cnt} deltas saved.")

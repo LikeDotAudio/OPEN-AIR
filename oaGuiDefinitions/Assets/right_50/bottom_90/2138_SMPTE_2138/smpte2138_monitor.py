@@ -52,7 +52,9 @@ class SMPTE2138Monitor(tk.Frame, TransparencyMixin):
         if builder:
             self._apply_transparency(self, None, {}, builder)
         
-        SMPTE2138MonitorManager.register_callback(self.on_smpte2138_traffic)
+        from oaGuiEditorWYSIWYG.Core.event_bus import event_bus
+        event_bus.subscribe("SMPTE2138_TRAFFIC", self._on_bus_update)
+        
         self._update_status_loop()
         
         if LOCAL_DEBUG: 
@@ -189,6 +191,10 @@ class SMPTE2138Monitor(tk.Frame, TransparencyMixin):
         """Periodic UI task to update status indicators."""
         self.after(1000, self._update_status_loop)
 
+    def _on_bus_update(self, topic, data):
+        """Standard event bus handler."""
+        self.on_smpte2138_traffic(topic, data)
+
     def on_smpte2138_traffic(self, topic, data):
         """Callback for new decoded packets and telemetry."""
         self.after(0, lambda: self._update_gui(topic, data))
@@ -253,5 +259,6 @@ class SMPTE2138Monitor(tk.Frame, TransparencyMixin):
         self.style.configure("SMPTE.TLabel", background=bg)
 
     def destroy(self):
-        SMPTE2138MonitorManager.unregister_callback(self.on_smpte2138_traffic)
+        from oaGuiEditorWYSIWYG.Core.event_bus import event_bus
+        event_bus.unsubscribe("SMPTE2138_TRAFFIC", self._on_bus_update)
         super().destroy()

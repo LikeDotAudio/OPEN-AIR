@@ -71,6 +71,15 @@ oaDATA**** folders are repositories for data logging - exclude them from any fun
 55. **Export Protocol**: All structured data from `JSON Lines Sinks` or analysis must be formatted for **Export to Sheets** compatibility.
 
 ---
+## **VII. RUST NATIVE ACCELERATION (PYO3)**
+56. **Native Naming**: All Rust crates must follow the `oa[Name]_rs` naming convention and reside in `oaModuleName/[Core|Methods]/`.
+57. **FFI Strategy**: Utilize PyO3 for all high-performance bindings; prefer `maturin develop --release` for JIT compilation.
+58. **Loop Inversion**: To eliminate FFI overhead, move high-iteration loops (e.g., coordinate calculation, pixel processing) into Rust. Python hands "Control Parameters" once; Rust executes the loop internally and returns the final batch.
+59. **Zero-Copy Mandate**: For high-volume data paths (Audio, Video, Massive JSON), utilize **Zero-Copy Buffers**. Use PyO3 to map Rust slices directly to Python's `numpy` arrays, `memoryviews`, or `bytearrays` to bypass serialization.
+60. **Lock-Free Concurrency**: Offload GIL-bound state management to Rust utilizing `DashMap` or atomic primitives.
+61. **Safety First**: Use Rust for all critical binary parsing and schema validation to ensure memory safety.
+
+---
 
 To minimize token usage, use this script to handle heavy data processing or file system tasks locally. Instead of uploading large datasets, you will only share the [OUTBOUND] results or specific error traces.
 

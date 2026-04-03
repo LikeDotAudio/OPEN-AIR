@@ -150,9 +150,7 @@ class BuilderTextValueWithUnitsCreator(TransparencyMixin):
                     matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"Text changed for {label}: {text_var.get()}", level="DEBUG")
                     state_mirror_engine.broadcast_gui_change_to_mqtt(path)
                 except Exception as e:
-                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔴 ERROR in _on_text_change: {e}",
-                        file=os.path.basename(__file__, level="DEBUG"),
-                    )
+                    matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔴 ERROR in _on_text_change: {e}", level="DEBUG")
 
             text_var.trace_add(
                 "write", _on_text_change
@@ -174,16 +172,9 @@ class BuilderTextValueWithUnitsCreator(TransparencyMixin):
                 # Initialize state from cache or broadcast
                 state_mirror_engine.initialize_widget_state(path)
 
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ SUCCESS! The text input '{label}' has been successfully forged!",
-                file=os.path.basename(__file__),
-                version=app_constants.CURRENT_VERSION,
-                function=f"{self.__class__.__name__}.{current_function_name}", level="SUCCESS")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅ SUCCESS! The text input '{label}' has been successfully forged!", level="SUCCESS")
             return canvas
         except Exception as e:
-            logger.exception("❌ The text input '{label}' has disintegrated! Error",
-                file=os.path.basename(__file__),
-                version=app_constants.CURRENT_VERSION,
-                function=current_function_name,
-            )
+            logger.exception(f"❌ The text input '{label}' has disintegrated! Error: {e}")
             return None
 

@@ -8,25 +8,45 @@
 #
 # Version: 20260331.2225.1
 
+from __future__ import annotations
 import time
 import os
 from typing import Any
 from loguru import logger
 import orjson
+import logging
+from oaStateCache.Methods.oaStateRegistry_rs.compiler_hook import ensure_compiled
 
 LOCAL_DEBUG = False
 
 try:
+    ensure_compiled()
     from oastateregistry_rs import StateRegistryCore as RustStateRegistry
-except ImportError as e:
-    logger.critical("🚀❌ [FATAL] Rust State Registry module missing. Pure Rust mode is mandatory.")
-    raise e
+    HAS_RUST = True
+except ImportError:
+    logging.warning("⚠️ [STATE_CACHE] oastateregistry_rs not found. Falling back to slow Python state registry.")
+    HAS_RUST = False
+except Exception as e:
+    logging.error(f"❌ [STATE_CACHE] Failed to initialize Rust State Registry: {e}")
+    HAS_RUST = False
+
+# --- Python Fallback for StateRegistryCore ---
+class PythonStateRegistry:
+    def __init__(self): self._data = {}
+    def set(self, k, v): self._data[k] = v
+    def get(self, k): return self._data.get(k)
+    def len(self): return len(self._data)
+    def clear(self): self._data.clear()
+    def update(self, d): self._data.update(d)
+    def to_dict(self): return copy.deepcopy(self._data)
+    def items(self): return self._data.items()
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import data_logger
 from oaLogging.Methods.matrix_gate import matrix_log
 from oaConfiguration.FileReaders.config_reader import Config
 from oaComMQTT.Core.mqtt_message import MqttMessage
+import copy
 app_constants = Config.get_instance()
 
 # --- EXTRACTED CORE MODULES ---
@@ -47,14 +67,18 @@ class StateRegistry:
         self.subscriber_router = None
         
         # 1. Initialize Cache & Search
-        try:
-            self.rust_cache = RustStateRegistry()
-            matrix_log("core", "data", "__init__", "🚀 Using HIGH-PERFORMANCE RUST state cache.", "DEBUG")
-        except Exception as e:
-            matrix_log("core", "data", "__init__", f"🚀❌ [FATAL] Rust Cache init failed: {e}", "ERROR")
-            raise e
+        if HAS_RUST:
+            try:
+                self.rust_cache = RustStateRegistry()
+                matrix_log("core", "data", "__init__", "🚀 Using HIGH-PERFORMANCE RUST state cache.", "DEBUG")
+            except Exception as e:
+                matrix_log("core", "data", "__init__", f"🚀❌ [FATAL] Rust Cache init failed: {e}. Falling back to Python.", "ERROR")
+                self.rust_cache = PythonStateRegistry()
+        else:
+            self.rust_cache = PythonStateRegistry()
 
         self.initialize_state()
+
             
         self.search_engine = CacheSearchEngine()
         self.search_engine.rebuild(self.rust_cache.to_dict())

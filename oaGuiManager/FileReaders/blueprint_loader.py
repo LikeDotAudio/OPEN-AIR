@@ -30,21 +30,19 @@ Constraints:
 
 import sys
 import os
-
-# Add the hyphenated directory to sys.path temporarily to import compiler_hook
-_rs_dir = os.path.join(os.path.dirname(__file__), "oaBlueprintParser-rs")
-if _rs_dir not in sys.path:
-    sys.path.insert(0, _rs_dir)
-
-import compiler_hook
-compiler_hook.ensure_compiled()
+from loguru import logger
+from .oaBlueprintParser_rs.compiler_hook import ensure_compiled
 
 try:
-    import oablueprintparser_rs
-except ImportError as e:
-    from loguru import logger
-    logger.critical("🚀❌ [FATAL] Rust Blueprint Parser module missing. Pure Rust mode is mandatory.")
-    raise e
+    ensure_compiled()
+    from oablueprintparser_rs.oablueprintparser_rs import BlueprintParser as RustBlueprintParser
+    HAS_RUST = True
+except ImportError:
+    logger.warning("⚠️ [GUI_MANAGER] oablueprintparser_rs not found. Pure Rust mode is mandatory, but continuing for stability.")
+    HAS_RUST = False
+except Exception as e:
+    logger.error(f"❌ [GUI_MANAGER] Failed to initialize Rust Blueprint Parser: {e}")
+    HAS_RUST = False
 
 import hashlib
 from oaLogging.Methods.matrix_gate import matrix_log
@@ -52,7 +50,6 @@ import inspect
 import orjson
 import copy
 from pathlib import Path
-from loguru import logger
 
 # LOCAL_DEBUG: Toggles verbose tracing for blueprint loading and merging.
 

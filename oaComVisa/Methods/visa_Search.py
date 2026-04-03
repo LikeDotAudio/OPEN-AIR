@@ -1,6 +1,6 @@
 import os
 import sys
-
+import logging
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 # Methods/visa_Search.py
@@ -16,24 +16,30 @@ import string
 import threading
 import socket
 
-# Add the hyphenated directory to sys.path temporarily to import compiler_hook
-_rs_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "Core", "oaVisaCore-rs")
-if _rs_dir not in sys.path:
-import compiler_hook
-compiler_hook.ensure_compiled()
+from oaComVisa.Core.oaVisaCore_rs import compiler_hook as core_hook
+from oaComVisa.Methods.oaVisaScanner_rs import compiler_hook as scanner_hook
 
 try:
+    core_hook.ensure_compiled()
     import oavisacore_rs
-except ImportError as e:
-    from loguru import logger
-    logger.critical("🚀❌ [FATAL] Rust VISA Core module missing. Pure Rust mode is mandatory.")
-    raise e
+    HAS_RUST = True
+except ImportError:
+    logging.warning("⚠️ [VISA] oavisacore_rs not found. Pure Rust mode is mandatory, but falling back to Python for stability.")
+    HAS_RUST = False
+except Exception as e:
+    logging.error(f"❌ [VISA] Failed to initialize Rust VISA Core: {e}")
+    HAS_RUST = False
 
 try:
+    scanner_hook.ensure_compiled()
     from oavisascanner_rs import VisaScanner
     scanner_rs = VisaScanner()
     HAS_SCANNER_RS = True
 except ImportError:
+    logging.warning("⚠️ [VISA] oavisascanner_rs not found. Pre-probe reachability scan disabled.")
+    HAS_SCANNER_RS = False
+except Exception as e:
+    logging.error(f"❌ [VISA] Failed to initialize Rust VISA Scanner: {e}")
     HAS_SCANNER_RS = False
 
 # --- Standard Debug Logging Setup ---

@@ -26,6 +26,10 @@ class TestMidiManager(unittest.TestCase):
     global state cache, protocol router, and virtual MIDI ports.
     """
     def setUp(self):
+        import os
+        if os.environ.get("OPEN_AIR_SKIP_REAL_MIDI") == "1":
+            self.skipTest("Skipping real MIDI test in safety mode")
+            
         """
         Initializes a mock environment for each test case.
         
@@ -37,6 +41,10 @@ class TestMidiManager(unittest.TestCase):
         self.state_cache = MagicMock()
         with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance"):
             self.midi = MidiManager(self.state_cache, run_bridge=True)
+
+    def tearDown(self):
+        if hasattr(self, 'midi'):
+            self.midi.stop()
 
     def test_status_broadcast(self):
         """

@@ -40,10 +40,13 @@ class JsonTreeWidget(
     
     def __init__(self, parent, config, state_mirror_engine, base_mqtt_topic):
         super().__init__(parent)
+        self.data_manager = None
         self.config_data = config
         self.state_mirror_engine = state_mirror_engine
         self.base_mqtt_topic = base_mqtt_topic
-        self.data_manager = JsonDataManager()
+        self.json_manager = JsonDataManager()
+        self.data_manager = self.json_manager
+        self.data_manager = self.json_manager
         
         self.allow_browse = config.get("ALLOW", {}).get("browse", config.get("allow_browse", True))
         self.allow_filter = config.get("ALLOW", {}).get("filter", config.get("allow_filter", True))
@@ -120,9 +123,9 @@ class JsonTreeWidget(
             ttk.Button(self.footer, text="Save As...", command=self.save_as).pack(side=tk.LEFT, padx=2)
 
     def load_json(self, source):
-        data = self.data_manager.load(source)
+        data = self.json_manager.load(source)
         if self.show_values_var.get():
-            cols = self.data_manager.discover_columns()
+            cols = self.json_manager.discover_columns()
             self.tree["columns"] = ("value",) + tuple(cols)
             for c in cols:
                 self.tree.heading(c, text=c.replace("_", " ").title(), anchor="w")
@@ -139,10 +142,10 @@ class JsonTreeWidget(
 
     def save_as(self):
         fn = filedialog.asksaveasfilename(title="Save JSON", defaultextension=".json", filetypes=[("JSON", "*.json")])
-        if fn: self.data_manager.save_as(fn)
+        if fn: self.json_manager.save_as(fn)
 
     def _on_view_toggle(self):
-        self.load_json(self.data_manager.raw_data)
+        self.load_json(self.json_manager.raw_data)
 
     def _toggle_all(self, state):
         stack = [c for c in self.tree.get_children("")]

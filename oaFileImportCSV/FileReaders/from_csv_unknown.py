@@ -15,7 +15,9 @@ from oaConfiguration.FileReaders.config_reader import Config
 # --- Constants ---
 VERSION = "20260331.2240.1"
 
+from oaFileImportCSV.Methods.oaCSVParser_rs.compiler_hook import ensure_compiled
 try:
+    ensure_compiled()
     from oacsvparser_rs import convert_csv_unknown as rust_convert_csv_unknown
 except ImportError as e:
     logger.critical("🚀❌ [FATAL] Rust CSV Parser module missing. Pure Rust mode is mandatory.")

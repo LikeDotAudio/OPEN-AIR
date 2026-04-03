@@ -16,15 +16,15 @@ from oaLogging.Core.logger import initialize_logging, set_log_directory, builder
 from loguru import logger
 
 from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
-from oaGuiElements.Methods.oaScrewGenerator_rs.compiler_hook import ensure_compiled
+from oaGuiElements.Methods.oaProceduralArt_rs.compiler_hook import ensure_compiled
 
 try:
     ensure_compiled()
-    from oaGuiElements.Methods.oaScrewGenerator_rs.oascrewgenerator_rs import ScrewGenerator as RustScrewGenerator
-    _rust_engine = RustScrewGenerator()
+    from oaproceduralart_rs.oaproceduralart_rs import ProceduralArtEngine
+    _rust_engine = ProceduralArtEngine()
     HAS_RUST = True
 except Exception as e:
-    logging.warning(f"oaGuiElements: Failed to load Rust ScrewGenerator, falling back to Python: {e}")
+    logging.warning(f"oaGuiElements: Failed to load Rust ProceduralArtEngine, falling back to Python: {e}")
     HAS_RUST = False
 
 # Sizing and Geometry Constants

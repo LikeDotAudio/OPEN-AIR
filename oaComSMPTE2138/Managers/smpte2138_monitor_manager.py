@@ -33,6 +33,7 @@ from oaComSMPTE2138.Interface import device_pb2
 from oaLogging.Core.logger import SMPTE2138_LOGGER
 from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
 from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
+from oaGuiEditorWYSIWYG.Core.event_bus import event_bus
 
 def _is_debug():
     from oaLogging.Methods.matrix_gate import is_debug_allowed
@@ -43,7 +44,6 @@ class SMPTE2138MonitorManager:
     Decodes binary ST 2138 traffic and broadcasts it for GUI visualization.
     Tracks throughput and engine health to demonstrate system performance.
     """
-    _callbacks: List[Callable] = []
 
     def __init__(self, mqtt_connection: MqttConnectionManager, 
                  subscriber_router: MqttSubscriberRouter):
@@ -175,22 +175,6 @@ class SMPTE2138MonitorManager:
             "status": self.stats["status"]
         }
 
-    @classmethod
-    def register_callback(cls, callback: Callable):
-        """Registers a listener for decoded SMPTE2138 traffic."""
-        if callback not in cls._callbacks:
-            cls._callbacks.append(callback)
-
-    @classmethod
-    def unregister_callback(cls, callback: Callable):
-        """Removes a listener."""
-        if callback in cls._callbacks:
-            cls._callbacks.remove(callback)
-
     def _broadcast(self, topic, data):
         """Notifies all registered observers of the decoded packet and stats."""
-        for cb in self._callbacks:
-            try:
-                cb(topic, data)
-            except Exception as e:
-                SMPTE2138_LOGGER.error(f"❌ [MONITOR] Callback failure: {e}")
+        event_bus.publish("SMPTE2138_TRAFFIC", topic=topic, data=data)

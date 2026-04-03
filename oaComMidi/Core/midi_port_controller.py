@@ -20,6 +20,11 @@ from oaLogging.Methods.matrix_gate import matrix_log
 try: import mido
 except ImportError: mido = None
 
+import os
+# ⚡ SAFETY: Skip real hardware in restricted environments
+if os.environ.get("OPEN_AIR_SKIP_REAL_MIDI") == "1":
+    mido = None
+
 class MIDIPortController:
     """Manages discovery and lifecycle of MIDI input and output ports."""
 

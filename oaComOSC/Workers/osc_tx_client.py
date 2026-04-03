@@ -17,6 +17,12 @@
 from typing import Any
 
 try:
+    from oaosccore_rs import OscClient as RustOscClient
+    HAS_OSC_RS = True
+except ImportError:
+    HAS_OSC_RS = False
+
+try:
     from pythonosc.udp_client import SimpleUDPClient
     HAS_OSC = True
 except ImportError:
@@ -35,14 +41,34 @@ osc_logger = logger.bind(category="OSC")
 class OscTxClient:
     """
     Transmits OSC messages to target devices.
+    Leverages Pure Rust for high-throughput transmission if available.
     """
     def __init__(self, host: str, port: int):
         self.host = host
         self.port = port
         self.client = None
+        self._use_rust = HAS_OSC_RS
 
     def start(self):
         """Initializes the OSC client."""
+        if self._use_rust:
+            self._start_rust()
+        else:
+            self._start_legacy()
+
+    def _start_rust(self):
+        try:
+            self.client = RustOscClient(self.host, self.port)
+            self.client.start()
+            if _is_debug():
+                osc_logger.success(f"📤📡✅ [OSC] Pure Rust TX Client ready: "
+                                   f"{self.host}:{self.port}")
+        except Exception as e:
+            osc_logger.error(f"❌🚫🛑 [OSC] Failed to start Rust TX Client: {e}. Falling back to legacy.")
+            self._use_rust = False
+            self._start_legacy()
+
+    def _start_legacy(self):
         if not HAS_OSC:
             osc_logger.error(f"❌🚫🛑 [OSC] TX Client: python-osc not installed. "
                              f"Please run 'Check Dependencies'.")
@@ -51,10 +77,10 @@ class OscTxClient:
         try:
             self.client = SimpleUDPClient(self.host, self.port)
             if _is_debug():
-                osc_logger.success(f"📤📡✅ [OSC] TX Client ready: "
+                osc_logger.success(f"📤📡✅ [OSC] Legacy TX Client ready: "
                                    f"{self.host}:{self.port}")
         except Exception as e:
-            osc_logger.error(f"❌🚫🛑 [OSC] Failed to start TX Client: {e}")
+            osc_logger.error(f"❌🚫🛑 [OSC] Failed to start Legacy TX Client: {e}")
 
     def send_message(self, address: str, value: Any):
         """Sends an OSC message."""
@@ -68,6 +94,9 @@ class OscTxClient:
 
     def stop(self):
         """Stops the OSC client."""
-        self.client = None
+        if self.client:
+            if self._use_rust:
+                self.client.stop()
+            self.client = None
         if _is_debug():
             osc_logger.debug("🛑📡👋 [OSC] TX Client stopped.")

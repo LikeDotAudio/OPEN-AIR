@@ -5,10 +5,24 @@
 # Description: The Central Broker for decoupled control.
 
 import threading
+import logging
 from pathlib import Path
+from oaTranslator.Core.oaTranslatorCore_rs.compiler_hook import ensure_compiled
+
+try:
+    ensure_compiled()
+    from oatranslatorcore_rs import SplinkerLock as RustSplinkerLock
+    HAS_RUST = True
+except Exception as e:
+    logging.warning(f"oaSplinker: Failed to load Rust SplinkerLock: {e}")
+    HAS_RUST = False
+
 class ControlBroker:
     _instance = None
-    _lock = threading.Lock()
+    if HAS_RUST:
+        _lock = RustSplinkerLock()
+    else:
+        _lock = threading.Lock()
 
     # --- Import methods from core/ sub-package ---
     from .add_monitor_callback import add_monitor_callback, add_monitor_callback as _add_monitor_callback

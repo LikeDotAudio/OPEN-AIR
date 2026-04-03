@@ -6,10 +6,21 @@
 
 import tkinter as tk
 import math
+import logging
 from oaGuiElements.Core.metering.meter_needle.constants import (
     SCALE_DEFAULT_STEPS, SCALE_SUB_TICK_DOT_RADIUS, 
     SCALE_SUB_TICK_WIDTH, SCALE_MAIN_TICK_WIDTH
 )
+
+from oaGuiElements.Methods.oaProceduralArt_rs.compiler_hook import ensure_compiled
+try:
+    ensure_compiled()
+    from oaproceduralart_rs.oaproceduralart_rs import ProceduralArtEngine
+    _rust_engine = ProceduralArtEngine()
+    HAS_RUST = True
+except Exception as e:
+    logging.warning(f"oaGuiElements: ScaleDrawer fallback to Python: {e}")
+    HAS_RUST = False
 
 class ScaleDrawer:
     @staticmethod
@@ -48,6 +59,51 @@ class ScaleDrawer:
             steps = SCALE_DEFAULT_STEPS
             tick_values = [min_val + (i / (steps - 1.0) * (max_val - min_val)) for i in range(steps)]
 
+        # ⚡ OPTIMIZATION: Offload Coordinate Math to Rust
+        if HAS_RUST and ticks_visible:
+            # 1. Main Ticks
+            coords = _rust_engine.calculate_circular_ticks(
+                float(center_x), float(center_y),
+                tick_values,
+                float(min_val), float(max_val),
+                float(start_angle_deg), float(end_angle_deg), float(extent_deg),
+                float(tick_start_radius), float(tick_length),
+                counter_clockwise
+            )
+            for x_start, y_start, x_end, y_end in coords:
+                canvas.create_line(x_start, y_start, x_end, y_end, fill=fg_color, width=SCALE_MAIN_TICK_WIDTH, tags=("vu_element", "tick"))
+
+            # 2. Sub-Ticks
+            if sub_ticks > 0:
+                all_sub_values = []
+                for i in range(len(tick_values) - 1):
+                    v1, v2 = tick_values[i], tick_values[i+1]
+                    for j in range(1, sub_ticks + 1):
+                        all_sub_values.append(v1 + (j * (v2 - v1) / (sub_ticks + 1)))
+                
+                sub_coords = _rust_engine.calculate_circular_ticks(
+                    float(center_x), float(center_y),
+                    all_sub_values,
+                    float(min_val), float(max_val),
+                    float(start_angle_deg), float(end_angle_deg), float(extent_deg),
+                    float(tick_start_radius), float(sub_tick_length),
+                    counter_clockwise
+                )
+                
+                for k, (sx_start, sy_start, sx_end, sy_end) in enumerate(sub_coords):
+                    if sub_tick_style == "dot":
+                        dot_r = SCALE_SUB_TICK_DOT_RADIUS
+                        canvas.create_oval(
+                            sx_start - dot_r, sy_start - dot_r,
+                            sx_start + dot_r, sy_start + dot_r,
+                            fill=fg_color, outline=fg_color, tags=("vu_element", "tick")
+                        )
+                    else:
+                        canvas.create_line(sx_start, sy_start, sx_end, sy_end, fill=fg_color, width=SCALE_SUB_TICK_WIDTH, tags=("vu_element", "tick"))
+            
+            return tick_values
+
+        # --- Python Fallback ---
         for i, tick_val in enumerate(tick_values):
             # Calculate normalized position (0.0 to 1.0)
             range_val = max_val - min_val

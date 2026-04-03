@@ -1,0 +1,13 @@
+[package]
+name = "oaclocksync-rs"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "oaclocksync_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.22.6", features = ["extension-module"] }
+chrono = "0.4"
+nix = "0.27"

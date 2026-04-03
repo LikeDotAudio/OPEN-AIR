@@ -123,11 +123,16 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
         raise CriticalModuleMissingError("❌ Critical module missing: oaWatchdog.Entry")
     
     ptp_entry_path = "oaPTP.Entry"
+    ptp_manager = None
     if importlib.util.find_spec(ptp_entry_path):
-        ptp_entry = importlib.import_module(ptp_entry_path)
-        ptp_manager = ptp_entry.get_manager(mqtt_connection_manager=mqtt_connection_manager, subscriber_router=subscriber_router)
+        try:
+            ptp_entry = importlib.import_module(ptp_entry_path)
+            ptp_manager = ptp_entry.get_manager(mqtt_connection_manager=mqtt_connection_manager, subscriber_router=subscriber_router)
+        except Exception as e:
+            matrix_log("core", "launcher", "launch_core_managers", f"⚠️ [LAUNCHER] Failed to load PTP manager: {e}. System will continue without PTP support.", "WARNING")
     else:
-        raise CriticalModuleMissingError("❌ Critical module missing: oaPTP.Entry")
+        matrix_log("core", "launcher", "launch_core_managers", "⚠️ [LAUNCHER] oaPTP.Entry not found. System will continue without PTP support.", "WARNING")
+
 
     # SMPTE2138 Bridge (Internal Actions -> External st2138 Protobuf)
     smpte2138_entry_path = "oaComSMPTE2138.Entry"
@@ -164,7 +169,7 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
     if rest_manager: rest_manager.start()
     
     if hasattr(STATE_VISA_FLEET_manager, "start"): STATE_VISA_FLEET_manager.start()
-    ptp_manager.start()
+    if ptp_manager: ptp_manager.start()
     protocol_router.start() 
 
     def start_network_services():

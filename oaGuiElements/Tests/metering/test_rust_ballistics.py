@@ -55,11 +55,10 @@ class TestRustBallistics(unittest.TestCase):
         # Step through time
         dt = 20.0 # 20ms steps
         for _ in range(10):
-            res = engine.update(dt)
-            # Result should be: (current_val, peak_val, overload_fade_factor, is_running, reached_min)
-            self.assertEqual(len(res), 5)
-            self.assertIsInstance(res[0], float)
-            self.assertIsInstance(res[1], float)
+            engine.update(dt)
+            self.assertIsInstance(engine.current_value, float)
+            self.assertIsInstance(engine.peak_value, float)
+            self.assertIsInstance(engine.overload_fade, float)
 
 if __name__ == "__main__":
     unittest.main()

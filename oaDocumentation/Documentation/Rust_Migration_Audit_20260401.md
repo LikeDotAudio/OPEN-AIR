@@ -55,6 +55,16 @@ Maintain the standard distributed binary structure:
 - **Mandate**: Pure Rust implementation with PyO3 bindings; no Python fallbacks in production.
 - **Build**: `maturin develop --release` via `compiler_hook.py`.
 
+### 🔄 THE RUST FIX: LOOP INVERSION
+To eliminate FFI (Foreign Function Interface) overhead, you must **Invert the Loop**.
+- **Requirement**: Instead of Python iterating and calling Rust for individual coordinates or pixels, Python will hand Rust the raw "control parameters" (e.g., angle, radius, intensity) once per frame. 
+- **Implementation**: Rust will execute the entire high-iteration loop internally, generate the final data array (utilizing Zero-Copy where possible), and pass the completed set back to Python in a single transaction.
+
+### 🏆 THE HOLY GRAIL: ZERO-COPY MEMORY
+The ultimate goal for the OPEN-AIR architecture is to utilize **Zero-Copy Buffers** for all high-volume data paths (Audio, Video, and Massive JSON Manifests).
+- **Technique**: Utilize PyO3 to map Rust slices directly to Python's memory (e.g., `numpy` arrays, `memoryview`, or `bytearray`).
+- **Benefit**: Rust modifies Python's data directly in RAM at the speed of C, bypassing expensive FFI serialization and memory allocation cycles.
+
 ## 📈 SYSTEM PERFORMANCE FORECAST
 | Metric | Improvement | Primary Driver |
 | :--- | :--- | :--- |

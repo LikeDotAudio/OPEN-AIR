@@ -12,6 +12,16 @@ import re
 import numpy as np
 import pdfplumber
 
+# --- Native Rust Optimization ---
+from ..Methods.oaPDFParser_rs.compiler_hook import ensure_compiled
+try:
+    ensure_compiled()
+    from oapdfparser_rs.oapdfparser_rs import PDFEngine
+    HAS_RUST_PARSER = True
+    rust_pdf_engine = PDFEngine()
+except Exception:
+    HAS_RUST_PARSER = False
+
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
 from loguru import logger
@@ -20,7 +30,7 @@ from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 # --- Constants ---
-VERSION = "20251129.120000.1"
+VERSION = "20260402.0010.1"
 HEADERS = ["ZONE", "GROUP", "DEVICE", "NAME", "FREQ_MHZ", "PEAK"]
 
 def convert_soundbase_pdf_v2_to_markers(pdf_file_path):
@@ -47,13 +57,31 @@ def _internal_convert_soundbase_pdf_v2_to_markers(pdf_file_path):
     marker_data = []
 
     try:
-        with pdfplumber.open(pdf_file_path) as pdf:
-            text = pdf.pages[0].extract_text()
+        text = ""
+        # 1. Attempt High-Performance Rust Extraction
+        if HAS_RUST_PARSER:
+            try:
+                text = rust_pdf_engine.extract_text(str(pdf_file_path))
+                if LOCAL_DEBUG:
+                    matrix_log("ui", "importer", "pdf_v2", "🦀 [RUST] Successfully extracted PDF text natively.", "DEBUG")
+            except Exception as e:
+                logger.warning(f"⚠️ [RUST] Native extraction failed, falling back to pdfplumber: {e}")
 
-            # Use regex to find the ZONE
-            zone_match = re.search(r"ZONE: (.+)", text)
-            zone = zone_match.group(1).strip() if zone_match else "N/A"
-            matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔍 Found ZONE: {zone}", "DEBUG")
+        # 2. Fallback to pdfplumber if Rust failed or is unavailable
+        if not text:
+            with pdfplumber.open(pdf_file_path) as pdf:
+                text = pdf.pages[0].extract_text()
+                if LOCAL_DEBUG:
+                    matrix_log("ui", "importer", "pdf_v2", "🐍 [PYTHON] Extracted PDF text via pdfplumber.", "DEBUG")
+
+        if not text:
+            logger.error(f"❌ BlueprintLoader: Failed to extract text from {pdf_file_path}")
+            return [], []
+
+        # Use regex to find the ZONE
+        zone_match = re.search(r"ZONE: (.+)", text)
+        zone = zone_match.group(1).strip() if zone_match else "N/A"
+        matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔍 Found ZONE: {zone}", "DEBUG")
 
             # The pattern to find all groups
             group_pattern = re.compile(

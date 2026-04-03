@@ -146,8 +146,74 @@ fn dispatch_message(addr: String, args: Vec<OscType>, callback: &PyObject) {
     });
 }
 
+#[pyclass]
+struct OscClient {
+    socket: Option<UdpSocket>,
+    target_addr: String,
+}
+
+#[pymethods]
+impl OscClient {
+    #[new]
+    fn new(host: String, port: u16) -> Self {
+        OscClient {
+            socket: None,
+            target_addr: format!("{}:{}", host, port),
+        }
+    }
+
+    fn start(&mut self) -> PyResult<()> {
+        let socket = UdpSocket::bind("0.0.0.0:0").map_err(|e| {
+            PyErr::new::<pyo3::exceptions::PyIOError, _>(format!("Failed to bind local socket for TX: {}", e))
+        })?;
+        socket.connect(&self.target_addr).map_err(|e| {
+            PyErr::new::<pyo3::exceptions::PyIOError, _>(format!("Failed to connect to {}: {}", self.target_addr, e))
+        })?;
+        self.socket = Some(socket);
+        Ok(())
+    }
+
+    fn send_message(&self, address: String, value: PyObject, py: Python<'_>) -> PyResult<()> {
+        if let Some(socket) = &self.socket {
+            let mut args = Vec::new();
+            
+            // Extract value based on type
+            if let Ok(i) = value.extract::<i32>(py) {
+                args.push(OscType::Int(i));
+            } else if let Ok(f) = value.extract::<f32>(py) {
+                args.push(OscType::Float(f));
+            } else if let Ok(s) = value.extract::<String>(py) {
+                args.push(OscType::String(s));
+            } else if let Ok(b) = value.extract::<bool>(py) {
+                args.push(OscType::Bool(b));
+            } else if value.is_none(py) {
+                args.push(OscType::Nil);
+            }
+            
+            let packet = OscPacket::Message(rosc::OscMessage {
+                addr: address,
+                args,
+            });
+            
+            let msg_buf = rosc::encoder::encode(&packet).map_err(|e| {
+                PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(format!("OSC Encode error: {:?}", e))
+            })?;
+            
+            socket.send(&msg_buf).map_err(|e| {
+                PyErr::new::<pyo3::exceptions::PyIOError, _>(format!("OSC Send error: {}", e))
+            })?;
+        }
+        Ok(())
+    }
+
+    fn stop(&mut self) {
+        self.socket = None;
+    }
+}
+
 #[pymodule]
 fn oaosccore_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<OscServer>()?;
+    m.add_class::<OscClient>()?;
     Ok(())
 }

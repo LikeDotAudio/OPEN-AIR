@@ -51,10 +51,21 @@ def get_emoji(key: str) -> str:
     """Safely retrieves an emoji for a given key, defaulting to a generic one."""
     return SUBSYSTEM_EMOJIS.get(key.upper(), "❓")
 
+# --- Native Rust Optimization ---
+from oaLogging.Core.oaAsyncSink_rs.compiler_hook import ensure_compiled
+try:
+    ensure_compiled()
+    from oaasyncsink_rs.oaasyncsink_rs import AsyncSink
+    _rust_async_sink = AsyncSink()
+    HAS_RUST_SINK = True
+except Exception:
+    HAS_RUST_SINK = False
+
 class BatchLogSink:
     """
     ⚡ HIGH PERFORMANCE SINK: Caches logs in memory and writes in batches.
     Reduces I/O overhead and lock contention on the hot path.
+    Now supports Native Rust Asynchronous offloading.
     """
     def __init__(self, file_path, format_str, batch_size=50, interval=2):
         self.file_path = file_path
@@ -65,12 +76,18 @@ class BatchLogSink:
         self._lock = threading.RLock() # ⚡ FIX: Use RLock to prevent deadlock on flush
         self._is_running = True
         
-        # Start the background flusher thread.
-        self._flush_thread = threading.Thread(target=self._flush_loop, daemon=True, name=f"LogBatchFlusher-{os.path.basename(file_path)}")
-        self._flush_thread.start()
+        if not HAS_RUST_SINK:
+            # Start the background flusher thread if Rust is unavailable.
+            self._flush_thread = threading.Thread(target=self._flush_loop, daemon=True, name=f"LogBatchFlusher-{os.path.basename(file_path)}")
+            self._flush_thread.start()
 
     def write(self, message):
         """Standard Loguru sink write method."""
+        if HAS_RUST_SINK:
+            # Direct handoff to Rust for non-blocking I/O
+            _rust_async_sink.write(str(self.file_path), str(message))
+            return
+
         with self._lock:
             self.buffer.append(message)
             if len(self.buffer) >= self.batch_size:

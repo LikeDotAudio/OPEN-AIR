@@ -33,6 +33,8 @@ for parent in current_path.parents:
         break
 
 if str(root_path) not in sys.path:
+    sys.path.insert(0, str(root_path))
+
 import oaComREST.Entry as REST_MODULE
 
 # --- Standard Debug Logging Setup ---

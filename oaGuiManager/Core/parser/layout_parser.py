@@ -18,6 +18,7 @@ from oaLogging.Core.logger import LAYOUT_LOGGER
 from loguru import logger
 
 from oaConfiguration.FileReaders.config_reader import Config
+from oaGuiManager.Constants.schema_defaults import DEFAULT_PANEL_PERCENTAGE
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
@@ -223,7 +224,7 @@ class LayoutParser:
                 try:
                     percentage = int(sub_dir.name.split("_")[1])
                 except (IndexError, ValueError):
-                    percentage = 50
+                    percentage = DEFAULT_PANEL_PERCENTAGE
                 parsed_data["panels"].append({"path": sub_dir, "weight": percentage})
                 parsed_data["panel_percentages"].append(percentage)
             

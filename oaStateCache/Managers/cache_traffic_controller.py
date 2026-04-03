@@ -32,7 +32,7 @@ current_version_hash = 20251230 * 230300 * 1
 #     Tuple[bool, Optional[Dict]]: A tuple indicating whether an update is needed (True/False)
 #                                  and the new payload (if an update is needed, None otherwise).
 def process_traffic(
-    msg: MqttMessage, current_cache: Dict
+    msg: MqttMessage, current_cache: Any
 ) -> Tuple[bool, Optional[Dict]]:
     """
     Decodes payload and determines if update is needed.
@@ -51,11 +51,14 @@ def process_traffic(
         # 2. Extraction for Comparison (Purity Check)
         if "val" in full_payload:
             compare_val = {"val": full_payload["val"]}
+            # Carry timestamp if present for high-speed Rust comparison
+            if "ts" in full_payload: compare_val["ts"] = full_payload["ts"]
         elif "pos" in full_payload:
             compare_val = {"val": full_payload["pos"]}
+            if "ts" in full_payload: compare_val["ts"] = full_payload["ts"]
         else:
             # Complex state: strip noise for comparison only
-            keys_to_exclude = {"ts", "GUID", "type", "AES70", "source", "src"}
+            keys_to_exclude = {"GUID", "type", "AES70", "source", "src"} # Keep 'ts' for comparison
             compare_val = {k: v for k, v in full_payload.items() if k not in keys_to_exclude}
 
         # 3. Decision: Only update if the VALUE changed

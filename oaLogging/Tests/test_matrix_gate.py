@@ -10,6 +10,14 @@ from oaLogging.Methods.matrix_gate import is_debug_allowed, debug_matrix, matrix
 
 class TestMatrixGate(unittest.TestCase):
     
+    def setUp(self):
+        # Force Rust off for these logic tests to ensure we hit the Python manager mocks
+        self.rust_patch = patch("oaLogging.Methods.matrix_gate.RUST_ENABLED", False)
+        self.rust_patch.start()
+
+    def tearDown(self):
+        self.rust_patch.stop()
+    
     @patch("oaConfiguration.Managers.LoggingManager.manager.LoggingMatrixManager.get_instance")
     def test_is_debug_allowed_delegation(self, mock_get_manager):
         """Check: is_debug_allowed correctly delegates to the manager."""

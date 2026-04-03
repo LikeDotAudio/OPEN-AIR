@@ -2,10 +2,10 @@ import os
 import subprocess
 
 CRATES = [
-    {"dir": "oaComVisa/Core/oaVisaCore-rs", "name": "oavisacore_rs"},
-    {"dir": "oaGuiBuilder/Core/oaGeometryMath-rs", "name": "oageometrymath_rs"},
-    {"dir": "oaTranslator/Core/oaTranslatorCore-rs", "name": "oatranslatorcore_rs"},
-    {"dir": "oaGuiManager/FileReaders/oaBlueprintParser-rs", "name": "oablueprintparser_rs"},
+    {"dir": "oaComVisa/Core/oaVisaCore_rs", "name": "oavisacore_rs"},
+    {"dir": "oaGuiBuilder/Core/oaGeometryMath_rs", "name": "oageometrymath_rs"},
+    {"dir": "oaTranslator/Core/oaTranslatorCore_rs", "name": "oatranslatorcore_rs"},
+    {"dir": "oaGuiManager/FileReaders/oaBlueprintParser_rs", "name": "oablueprintparser_rs"},
 ]
 
 CARGO_TOML_TPL = """[package]

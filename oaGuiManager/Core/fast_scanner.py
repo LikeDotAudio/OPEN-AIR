@@ -11,10 +11,13 @@ from .oaFastScanner_rs.compiler_hook import ensure_compiled
 
 try:
     ensure_compiled()
-    from .oaFastScanner_rs.oafastscanner_rs import FastScanner as RustFastScanner
+    from oafastscanner_rs import FastScanner as RustFastScanner
     HAS_RUST = True
+except ImportError:
+    logging.warning("⚠️ [GUI_MANAGER] oafastscanner_rs not found. Falling back to slow Python directory scanning (if implemented).")
+    HAS_RUST = False
 except Exception as e:
-    logging.error(f"oaGuiManager: Failed to load Rust Fast Scanner: {e}")
+    logging.error(f"❌ [GUI_MANAGER] Failed to initialize Rust Fast Scanner: {e}")
     HAS_RUST = False
 
 class FastScanner:
@@ -22,15 +25,24 @@ class FastScanner:
     High-performance directory scanner using Rust.
     """
     def __init__(self):
-        if HAS_RUST:
-            if LOCAL_DEBUG:
-                print("📂🛠️🔗 [GUI_MANAGER] Using PURE RUST fast scanner.")
+        self._scanner = None
+        if not HAS_RUST:
+            return
+
+        if LOCAL_DEBUG:
+            print("📂🛠️🔗 [GUI_MANAGER] Using PURE RUST fast scanner.")
+        try:
             self._scanner = RustFastScanner()
-        else:
+        except Exception as e:
+            logging.error(f"❌ [GUI_MANAGER] Rust scanner instantiation failed: {e}")
             self._scanner = None
-            logging.error("oaGuiManager: Missing mandatory Rust fast scanner.")
 
     def scan_directory(self, root_path: str, suffix: str):
         if self._scanner:
-            return self._scanner.scan_directory(root_path, suffix)
+            try:
+                return self._scanner.scan_directory(root_path, suffix)
+            except Exception as e:
+                logging.error(f"❌ [GUI_MANAGER] Rust scanning failed: {e}")
+                return []
         return []
+

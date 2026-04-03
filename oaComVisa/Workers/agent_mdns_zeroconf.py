@@ -96,10 +96,9 @@ def _check_host(ip):
 
     # 2. Port 5025 (SCPI)
     try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(0.3)
-        result = sock.connect_ex((ip, 5025))
-        sock.close()
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(0.3)
+            result = sock.connect_ex((ip, 5025))
         if result == 0:
             return (ip, "DEDICATED")
     except Exception as e:

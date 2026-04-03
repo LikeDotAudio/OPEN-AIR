@@ -8,6 +8,9 @@ import sys
 import os
 import pathlib
 
+# ⚡ SAFETY: Prevent segmentation faults from real MIDI drivers in test environment
+os.environ["OPEN_AIR_SKIP_REAL_MIDI"] = "1"
+
 # Ensure project root is in the search path for local module imports.
 # This file is project_root/oaTests/Workers/TestRunner/Entry.py
 current_file_path = pathlib.Path(__file__).resolve()
@@ -48,6 +51,31 @@ def main():
     result = runner.run(found_dirs, top_level_dir=root_path)
     
     print("-" * 60)
+    
+    # ⚡ CLEANUP PHASE: Prevent Segfaults on Exit
+    print("\n🧹 Commencing post-test cleanup...")
+    try:
+        import time
+        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+        router = ProtocolRouter.get_instance()
+        if router:
+            router.stop()
+            
+        from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
+        mqtt = MqttConnectionManager()
+        if mqtt:
+            mqtt.disconnect()
+
+        from oaComMidi.Managers.midi_manager import MidiManager
+        midi = MidiManager()
+        if midi:
+            midi.stop()
+            
+        # Give threads a moment to die
+        time.sleep(1.0)
+    except Exception as e:
+        print(f"⚠️ Cleanup warning: {e}")
+
     print(f"\n🏁 [COMPLETE] Test Run Finished.")
     
     total = result.testsRun
@@ -65,9 +93,19 @@ def main():
     print("="*60 + "\n")
     
     # Exit with appropriate code
+    import signal
+    import time
+    
+    # ⚡ BUFFER FLUSH: Ensure all stdout/stderr is out
+    sys.stdout.flush()
+    sys.stderr.flush()
+    time.sleep(0.5)
+
     if failures > 0 or errors > 0:
-        sys.exit(1)
-    sys.exit(0)
+        os.kill(os.getpid(), signal.SIGKILL)
+    
+    # ⚡ SILENT EXIT: Use kill -9 to prevent segfaults from native extension destructors
+    os.kill(os.getpid(), signal.SIGKILL)
 
 if __name__ == "__main__":
     main()

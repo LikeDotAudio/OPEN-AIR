@@ -92,6 +92,89 @@ class LTPFader:
         if not self.is_visible: 
             return
 
+        # Prepare config for batch calculation (RUST OPTIMIZED)
+        # Some values are hardcoded in the original script or based on constants
+        TICK_INNER_OFFSET = 15
+        TICK_OUTER_OFFSET_MAJOR = TICK_INNER_OFFSET + 10
+        TICK_OUTER_OFFSET_MINOR = TICK_INNER_OFFSET + 5
+        
+        config = {
+            "center_x": float(self.center_x),
+            "center_y": float(self.center_y),
+            "track_length": float(self.track_length),
+            "angle": float(self.angle),
+            "val_curr": float(self.value_current),
+            "val_min": float(self.value_min),
+            "val_max": float(self.value_max),
+            "rot_curr": float(self.rotation_current),
+            "hitbox_width": 40.0, # Approximate
+            "hitbox_padding": 10.0,
+            "tick_count": TICK_COUNT,
+            "tick_inner_offset": float(TICK_INNER_OFFSET),
+            "tick_outer_offset": float(TICK_OUTER_OFFSET_MAJOR), # We handle minor ticks below
+            "cap_radius": float(CAP_RADIUS),
+            "global_center_x": 600.0, # Default from CMDP
+            "global_center_y": 450.0,
+            "far_radius": float(FAR_RADIUS),
+            "label_offset_base": float(LABEL_FAR_RADIUS_OFFSET),
+            "label_offset_step": float(LABEL_STAGGER_OFFSET),
+            "widget_id": self.widget_id
+        }
+        
+        geo = CircularMath.calculate_fader_geometry(config)
+        
+        if geo:
+            # 1. Track
+            self.canvas.create_line(*geo["track"], fill=TRACK_BACKGROUND_COLOR, width=6, capstyle=tk.ROUND, tags=self.tag_root)
+            self.canvas.create_line(*geo["track"], fill=TRACK_FOREGROUND_COLOR, width=2, capstyle=tk.ROUND, tags=self.tag_root)
+            
+            # 2. Ticks
+            tick_pts = geo["ticks"]
+            for i in range(TICK_COUNT):
+                # Major/Minor logic
+                if i % MAJOR_TICK_INTERVAL != 0:
+                    # Recalculate end point for minor tick if Rust gave us major for all
+                    # (In a real scenario, we'd adjust Rust to handle both)
+                    p1x, p1y = tick_pts[i*4], tick_pts[i*4+1]
+                    p2x, p2y = tick_pts[i*4+2], tick_pts[i*4+3]
+                    # Simple interpolation to shorten minor ticks
+                    p2x = p1x + (p2x - p1x) * (MINOR_TICK_LENGTH / MAJOR_TICK_LENGTH)
+                    p2y = p1y + (p2y - p1y) * (MINOR_TICK_LENGTH / MAJOR_TICK_LENGTH)
+                    self.canvas.create_line(p1x, p1y, p2x, p2y, fill=TICK_COLOR, width=2, tags=self.tag_root)
+                else:
+                    self.canvas.create_line(tick_pts[i*4], tick_pts[i*4+1], tick_pts[i*4+2], tick_pts[i*4+3], fill=TICK_COLOR, width=2, tags=self.tag_root)
+
+            # 3. Cap
+            cx, cy = geo["cap_center"]
+            cap_fill = CAP_HOVER_COLOR if self.is_hovered else CAP_NORMAL_COLOR
+            cap_outline = CAP_HOVER_OUTLINE if self.is_hovered else CAP_NORMAL_OUTLINE
+            cap_outline_width = CAP_HOVER_WIDTH if self.is_hovered else CAP_NORMAL_WIDTH
+            self.canvas.create_oval(cx - CAP_RADIUS, cy - CAP_RADIUS, cx + CAP_RADIUS, cy + CAP_RADIUS, 
+                                    fill=cap_fill, outline=cap_outline, width=cap_outline_width, tags=(self.tag_root, "cap"))
+            
+            # 4. Sweep & Pointer
+            pot_deg = geo["pot_degree"]
+            self.canvas.create_arc(cx - CAP_RADIUS + CAP_INNER_PADDING, cy - CAP_RADIUS + CAP_INNER_PADDING, 
+                                   cx + CAP_RADIUS - CAP_INNER_PADDING, cy + CAP_RADIUS - CAP_INNER_PADDING, 
+                                   start=SWEEP_START_ANGLE, extent=-(SWEEP_START_ANGLE - pot_deg), 
+                                   style=tk.ARC, outline=self.color_highlight, width=4, tags=self.tag_root)
+            
+            self.canvas.create_line(*geo["pointer"], fill=self.color_highlight, width=POINTER_WIDTH, tags=self.tag_root)
+            
+            # 5. Values & Label
+            self.canvas.create_text(cx, cy + ROTATION_VALUE_Y_OFFSET, text=str(int(self.rotation_current)), fill=self.color_highlight, font=("Arial", 9, "bold"), tags=self.tag_root)
+            self.canvas.create_text(cx, cy - CURRENT_VALUE_Y_OFFSET, text=str(int(self.value_current)), fill=VALUE_TEXT_COLOR, font=("Arial", 8), tags=self.tag_root)
+            
+            is_interaction_active = self.is_dragging or self.is_hovered
+            label_x, label_y = (ACTIVE_LABEL_X, ACTIVE_LABEL_Y) if is_interaction_active else geo["label_pos"]
+            label_font = ("Arial", 12 if is_interaction_active else 10, "bold" if is_interaction_active else "normal")
+            self.canvas.create_text(label_x, label_y, text=self.label, fill=self.color_highlight, font=label_font, tags=self.tag_root)
+
+        else:
+            # Fallback to old rendering if Rust is missing
+            self._render_fallback()
+
+    def _render_fallback(self):
         base_x, base_y = self.center_x, self.center_y
         track_angle = self.angle + ANGLE_90_DEGREES
         half_length = self.track_length / RADIUS_DIVISOR

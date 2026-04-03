@@ -5,15 +5,11 @@ import tkinter as tk
 from loguru import logger
 from PIL import ImageTk
 from oaLogging.Methods.matrix_gate import matrix_log
-
-# Constants
-MIN_WIDGET_DIMENSION = 1
-PRE_LAYOUT_DIMENSION_LIMIT = 1
-JITTER_THRESHOLD_PIXELS = 5
-CENTER_SAMPLE_DIVISOR = 2
-STRUCTURAL_WIDGET_TYPES = ["OcaBlock", "OcaBin", "OcaArray", "OcaCollapsibleBlock", "Block", "Array", "Bin"]
-THEME_BACKGROUND_COLORS = ["#2b2b2b", "#3c3f41", "#4e5254", "#1a1a1a", "#000000", "#dcdcdc", "#f0f0f0"]
-DEFAULT_THEME_BACKGROUND = "#2b2b2b"
+from oaStyle.Constants.geometry import (
+    MIN_WIDGET_DIMENSION, PRE_LAYOUT_DIMENSION_LIMIT, JITTER_THRESHOLD_PIXELS,
+    CENTER_SAMPLE_DIVISOR, STRUCTURAL_WIDGET_TYPES, THEME_BACKGROUND_COLORS,
+    DEFAULT_THEME_BACKGROUND
+)
 
 class TransparencyConfig:
     @staticmethod

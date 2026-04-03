@@ -11,11 +11,19 @@ from oaComMidi.Managers.midi_manager import MidiManager
 
 class TestMidiTx(unittest.TestCase):
     def setUp(self):
+        import os
+        if os.environ.get("OPEN_AIR_SKIP_REAL_MIDI") == "1":
+            self.skipTest("Skipping real MIDI test in safety mode")
+            
         self.state_cache = MagicMock()
         # Mock ProtocolRouter to avoid actual network/threading
         with patch("oaComBroker.Core.protocol_router.manager.ProtocolRouter.get_instance"):
             self.midi = MidiManager(self.state_cache, run_bridge=True)
             self.midi._running = True
+
+    def tearDown(self):
+        if hasattr(self, 'midi'):
+            self.midi.stop()
 
     def test_publish_cc_to_midi(self):
         """Test that a system CC topic is correctly translated and sent to MIDI ports."""

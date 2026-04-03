@@ -30,6 +30,14 @@ class OSCManager:
 
     def __init__(self, state_cache_manager=None, mqtt_connection_manager=None, 
                  run_bridge=True):
+        # ⚡ ARCHITECTURAL GATE: Only CORE partition should run the hardware bridge
+        partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "CORE")
+        if partition_id == "UI":
+            if run_bridge:
+                matrix_log("ui", "osc", "__init__", 
+                           "⚠️ OSC Bridge disabled in UI partition to prevent port conflicts.", "WARNING")
+            run_bridge = False
+
         self.run_bridge = run_bridge
         
         matrix_log("ui", "osc", "__init__", 

@@ -20,6 +20,7 @@ LEXICON = {
 STRUCT_TYPES = ["OcaBlock", "OcaBin", "OcaArray", "Block", "Array"]
 
 # Semantic Layout Constants
+DEFAULT_PANEL_PERCENTAGE = 50
 ANCHOR_MAP = {
     "top": "n", 
     "bottom": "s", 

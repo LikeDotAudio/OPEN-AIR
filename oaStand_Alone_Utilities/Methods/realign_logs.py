@@ -14,10 +14,26 @@ LOG_PATTERN = re.compile(
     r"^(?P<timestamp>\d+\.\d+)\s+\|\s+(?P<level>\w+)\s+\|\s+(?P<partition>\w+)\s+\|\s+(?P<process>\w+)\s+\|\s+(?P<function>[\w\.]+)\s+\|\s+(?P<message>.*)$"
 )
 
+from .oaLogAligner_rs.compiler_hook import ensure_compiled
+try:
+    ensure_compiled()
+    from oalogaligner_rs.oalogaligner_rs import LogAligner
+    _rust_aligner = LogAligner()
+    HAS_RUST = True
+except Exception as e:
+    print(f"Warning: Rust LogAligner unavailable, using Python fallback: {e}")
+    HAS_RUST = False
+
 def realign_logs(input_dir, output_file):
     """
     Ingests all .log files in the input_dir, sorts them by timestamp, and merges them.
     """
+    if HAS_RUST:
+        print(f"🦀 Using Rust LogAligner for high-speed merge...")
+        count = _rust_aligner.realign(str(input_dir), str(output_file))
+        print(f"✅ Processed {count} lines.")
+        return True
+
     all_log_lines = []
     
     input_path = Path(input_dir)

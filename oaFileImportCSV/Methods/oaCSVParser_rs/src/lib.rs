@@ -1,45 +1,12 @@
-// oaFileImportCSV/Methods/oaCSVParser-rs/src/lib.rs
+// oaFileImportCSV/Methods/oaCSVParser_rs/src/lib.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2150.2
+// Version: 20260402.0010.1
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList};
 use std::collections::HashMap;
 use csv::ReaderBuilder;
 use regex::Regex;
-use polars::prelude::*;
-
-#[pyfunction]
-fn load_large_csv(py: Python<'_>, file_path: String) -> PyResult<PyObject> {
-    let df = CsvReadOptions::default()
-        .with_has_header(true)
-        .try_into_reader_with_file_path(Some(file_path.into()))
-        .map_err(|e| PyErr::new::<pyo3::exceptions::PyIOError, _>(e.to_string()))?
-        .finish()
-        .map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e.to_string()))?;
-
-    let height = df.height();
-    let columns = df.get_column_names();
-    let list = PyList::empty_bound(py);
-    
-    for i in 0..height {
-        let dict = PyDict::new_bound(py);
-        for col_name in &columns {
-            let series = df.column(col_name).unwrap();
-            let val = series.get(i).unwrap();
-            match val {
-                AnyValue::String(s) => { let _ = dict.set_item(col_name.to_string(), s); },
-                AnyValue::Int64(v) => { let _ = dict.set_item(col_name.to_string(), v); },
-                AnyValue::Float64(v) => { let _ = dict.set_item(col_name.to_string(), v); },
-                AnyValue::Boolean(v) => { let _ = dict.set_item(col_name.to_string(), v); },
-                _ => { let _ = dict.set_item(col_name.to_string(), val.to_string()); },
-            }
-        }
-        let _ = list.append(dict);
-    }
-    
-    Ok(list.into())
-}
 
 #[pyfunction]
 fn convert_csv_unknown(py: Python<'_>, file_path: String) -> PyResult<(Vec<String>, Py<PyList>)> {
@@ -119,9 +86,14 @@ fn convert_csv_unknown(py: Python<'_>, file_path: String) -> PyResult<(Vec<Strin
     Ok((std_headers_vec, processed_data.unbind()))
 }
 
+#[pyfunction]
+fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
+    Ok((a + b).to_string())
+}
+
 #[pymodule]
 fn oacsvparser_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(convert_csv_unknown, m)?)?;
-    m.add_function(wrap_pyfunction!(load_large_csv, m)?)?;
+    m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     Ok(())
 }

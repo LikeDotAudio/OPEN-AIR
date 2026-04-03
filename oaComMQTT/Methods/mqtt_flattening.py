@@ -16,14 +16,14 @@ from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
 
 
-class MqttDataFlattenerUtility:
+class MqttFlattener:
     """
     Manages the buffering and flattening of incoming MQTT messages based on dynamic
     topic identifiers.
     """
 
-    # Initializes the MqttDataFlattenerUtility.
-    # This sets up an empty data buffer and state variables for tracking unique identifiers,
+    # Initializes the MqttFlattener.
+    # This sets up an empty buffer and state variables for tracking unique identifiers,
     # which are used to manage incoming MQTT messages and trigger the flattening process.
     # Inputs:
     #     print_to_gui_func (function): A function to print messages to the GUI console.
@@ -31,13 +31,13 @@ class MqttDataFlattenerUtility:
     #     None.
     def __init__(self, print_to_gui_func):
         self._print_to_gui_console = print_to_gui_func
-        self.data_buffer = {}
+        self.buffer = {}
         self.current_class_name = self.__class__.__name__
         self.last_unique_identifier = None
         self.FLUSH_COMMAND = "FLUSH_BUFFER"
 
-    # Clears the internal data buffer.
-    # This method empties the `data_buffer` and resets the `last_unique_identifier`,
+    # Clears the internal buffer.
+    # This method empties the `buffer` and resets the `last_unique_identifier`,
     # preparing the utility for processing a new set of incoming MQTT messages.
     # Inputs:
     #     None.
@@ -45,11 +45,11 @@ class MqttDataFlattenerUtility:
     #     None.
     def clear_buffer(self):
         """
-        Clears the internal data buffer.
+        Clears the internal buffer.
         """
         if LOCAL_DEBUG:
-            matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "The data buffer has been wiped clean.", "DEBUG")
-        self.data_buffer = {}
+            matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "The buffer has been wiped clean.", "DEBUG")
+        self.buffer = {}
         self.last_unique_identifier = None
 
     # Processes an incoming MQTT message, buffering it and triggering data flattening when a new data set is detected.
@@ -81,7 +81,7 @@ class MqttDataFlattenerUtility:
 
         # Check for the manual flush command
         if payload == self.FLUSH_COMMAND:
-            if self.data_buffer:
+            if self.buffer:
                 return self._flush_buffer()
             else:
                 if LOCAL_DEBUG:
@@ -122,7 +122,7 @@ class MqttDataFlattenerUtility:
                 self.last_unique_identifier = identifier_path
 
             # Add the message to the buffer
-            self.data_buffer[topic] = data
+            self.buffer[topic] = data
 
             return []
 
@@ -135,7 +135,7 @@ class MqttDataFlattenerUtility:
             self.clear_buffer()
             return []
 
-    # Processes and flattens the current data buffer.
+    # Processes and flattens the current buffer.
     # This method takes the buffered MQTT messages, extracts key-value pairs,
     # and transforms them into a flattened, pivoted list of dictionaries,
     # suitable for display in a table or export to CSV.
@@ -157,7 +157,7 @@ class MqttDataFlattenerUtility:
         flattened_payload = {}
         flattened_payload["Parameter"] = self.last_unique_identifier
 
-        for t, p in self.data_buffer.items():
+        for t, p in self.buffer.items():
             data_key = t.rsplit("/", 1)[-1]
 
             value = None
@@ -175,7 +175,7 @@ class MqttDataFlattenerUtility:
         self.clear_buffer()
 
         if new_topic and new_data:
-            self.data_buffer[new_topic] = new_data
+            self.buffer[new_topic] = new_data
             self.last_unique_identifier = new_identifier
 
         if LOCAL_DEBUG:

@@ -37,19 +37,19 @@ def dispatch_message(msg, managers):
     # --- OSC Dispatch ---
     if "🅾️" in strategy:
         osc_manager = managers.get("osc")
-        if osc_manager and msg["source"] != "OSC" and msg.get("logical_source") != "OSC":
+        if osc_manager and msg["source"] not in ["OSC", "OSC-TX"] and msg.get("logical_source") not in ["OSC", "OSC-TX"]:
             _dispatch_osc(osc_manager, topic, val, msg, val_str)
 
     # --- MIDI Dispatch ---
     if "🎹" in strategy:
         midi_manager = managers.get("midi")
-        if midi_manager and msg["source"] != "MIDI" and msg.get("logical_source") != "MIDI":
+        if midi_manager and msg["source"] not in ["MIDI", "MIDI-TX"] and msg.get("logical_source") not in ["MIDI", "MIDI-TX"]:
             _dispatch_midi(midi_manager, topic, val, msg, val_str)
 
     # --- SNMP Dispatch ---
     if "Ⓢ" in strategy:
         snmp_manager = managers.get("snmp")
-        if snmp_manager and msg["source"] != "SNMP" and msg.get("logical_source") != "SNMP":
+        if snmp_manager and msg["source"] not in ["SNMP", "SNMP-TX"] and msg.get("logical_source") not in ["SNMP", "SNMP-TX"]:
             _dispatch_snmp(snmp_manager, topic, val, val_str)
 
     # --- SMPTE 2138 Dispatch ---

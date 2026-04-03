@@ -14,6 +14,11 @@ class TestProtocolRouter(unittest.TestCase):
         # Reset singleton for testing
         ProtocolRouter._instance = None
         self.mock_rust = mock_rust_router.return_value
+        
+        # ⚡ OPTIMIZATION: Prevent infinite MagicMock ingest loops
+        self.mock_rust.pop_inbound.return_value = None
+        self.mock_rust.pop_outbound.return_value = None
+        
         self.router = ProtocolRouter.get_instance(force_reload=True)
         self.mqtt_manager = MagicMock()
         self.router.set_mqtt_manager(self.mqtt_manager)

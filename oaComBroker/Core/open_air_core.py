@@ -112,9 +112,8 @@ def main():
         return
 
     # 4. --- Network Service Activation ---
-    start_network_services = managers.get("start_network_services")
-    if start_network_services:
-        start_network_services()
+    # NOTE: start_network_services() is already called inside launch_core_managers()
+    # No need to call it again here.
 
     # 4.5 --- High Availability Failover ---
     failover_mgr = FailoverManager(ProtocolRouter.get_instance(), mqtt_connection_manager)

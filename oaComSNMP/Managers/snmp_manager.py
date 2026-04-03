@@ -49,14 +49,14 @@ class SNMPManager:
         self._running = False
         self.run_bridge = False
         
-        self.data_manager = SnmpDataEntry()
-        self.state_file = self.data_manager.get_state_path()
-        self.mib_path = self.data_manager.get_mib_path()
+        self.manager = SnmpDataEntry()
+        self.state_file = self.manager.get_state_path()
+        self.mib_path = self.manager.get_mib_path()
         self.base_oid = BASE_OID
         self._socket_info = "None"
         
         self.tree_builder = SNMPTreeBuilder(base_oid=self.base_oid)
-        self.tree_builder.master_script_path = self.data_manager.get_master_script_path()
+        self.tree_builder.master_script_path = self.manager.get_master_script_path()
         
         self.oid_map = {}
         self._monitor_callbacks = []
@@ -199,7 +199,7 @@ class SNMPManager:
             return False
 
     def get_installer_script(self):
-        return InstallerGenerator.generate(self.base_oid, self.data_manager.get_master_script_path())
+        return InstallerGenerator.generate(self.base_oid, self.manager.get_master_script_path())
 
     def run_verification(self, mib_path=None, force_raw=True):
         if mib_path: return SnmpTester.verify_oid_tree(self.base_oid, mib_path=mib_path)
@@ -224,14 +224,14 @@ class SNMPObserver(SNMPManager):
         meta = msg.get("meta", {})
 
         if logical_source == "SNMP":
-            if topic == "OPEN-AIR/System/Monitor/SNMP/Activity":
+            if topic == "OPEN-AIR/System/Monitor/SNMP/Activity" and isinstance(val, dict):
                 direction = val.get("direction", "RX")
                 oid = val.get("oid", "unknown")
                 real_val = val.get("val")
                 real_topic = val.get("topic")
                 metadata = val.get("metadata")
                 self._notify_monitor(direction, oid, real_val, real_topic, metadata)
-            else:
+            elif topic != "OPEN-AIR/System/Monitor/SNMP/Activity":
                 oid = meta.get("oid", topic.split("/")[-1])
                 self._notify_monitor("RX", oid, val, topic, meta)
 

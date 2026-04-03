@@ -10,13 +10,18 @@ from typing import Any, Callable
 from loguru import logger
 
 # --- Native Rust Optimization ---
+from .oaLoggingGate_rs.compiler_hook import build
 try:
+    build()
     import oalogginggate_rs
     RUST_ENABLED = True
 except ImportError:
     # ⚠️ Fallback to Python if Rust is not compiled (not recommended for production)
     RUST_ENABLED = False
     logger.warning("⚠️ [LOGGING] oalogginggate_rs not found. Falling back to slow Python matrix checks.")
+except Exception as e:
+    RUST_ENABLED = False
+    logger.error(f"❌ [LOGGING] Rust gate initialization failed: {e}")
 
 def is_debug_allowed(system: str, element: str = None, func_name: str = None) -> bool:
     """

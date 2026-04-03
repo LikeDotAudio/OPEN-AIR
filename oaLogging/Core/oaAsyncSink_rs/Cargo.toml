@@ -1,0 +1,14 @@
+[package]
+name = "oaasyncsink-rs"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "oaasyncsink_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.22.6", features = ["extension-module"] }
+crossbeam-channel = "0.5"
+once_cell = "1.18"
+chrono = "0.4"

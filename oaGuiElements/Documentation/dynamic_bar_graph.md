@@ -15,7 +15,7 @@ data_graphing/dynamic_bar_graph.py
 ### Classes
 #### `class DynamicBarGraph`
 A bar-chart version of the dynamic graph widget.
-Inherits most functionality from FluxPlotter but overrides data rendering.
+Inherits most functionality from GraphPlotter but overrides data rendering.
 
 ##### `_initialize_plot_elements(self)`
 Initializes plot elements like bars, styles, and interactions.

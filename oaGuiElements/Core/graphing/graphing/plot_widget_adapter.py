@@ -4,7 +4,7 @@
 #
 # Description: Brief summary of purpose
 
-from oaGuiElements.Core.graphing.graphing.dynamic_graph import FluxPlotter
+from oaGuiElements.Core.graphing.graphing.dynamic_graph import GraphPlotter
 from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 from oaGuiElements.Core.graphing.graphing.dynamic_bar_graph import DynamicBarGraph
@@ -34,7 +34,7 @@ class BuilderGraphingCreator:
         return None
 
     def _create_plot_widget(self, parent_widget, config_data, context=None, **kwargs):
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] plot_adapter: Spawning FluxPlotter '{config_data.get('path', 'Unknown')}'.", level="DEBUG")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] plot_adapter: Spawning GraphPlotter '{config_data.get('path', 'Unknown')}'.", level="DEBUG")
     
         # ⚡ HARDENED INTERFACE
         if context:
@@ -49,7 +49,7 @@ class BuilderGraphingCreator:
             builder_instance = kwargs.get("builder_instance")
 
         widget_id = config_data.get("path", "plot_widget")
-        return FluxPlotter(
+        return GraphPlotter(
             parent=parent_widget,
             config=config_data,
             base_mqtt_topic_from_path=base_mqtt_topic_from_path,

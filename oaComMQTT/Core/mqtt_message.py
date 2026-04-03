@@ -20,9 +20,16 @@ class MqttMessage:
     retain: bool = False
     
     def decode_payload(self) -> str:
-        """Helper to ensure payload is a string."""
+        """
+        Helper to ensure payload is a string.
+        ⚡ STABILITY: Uses a tiered fallback for non-UTF-8 byte sequences.
+        """
         if isinstance(self.payload, bytes):
-            return self.payload.decode("utf-8")
+            try:
+                return self.payload.decode("utf-8")
+            except UnicodeDecodeError:
+                # Fallback to latin-1 which accepts all byte values
+                return self.payload.decode("latin-1")
         if isinstance(self.payload, (dict, list)):
             return orjson.dumps(self.payload).decode("utf-8")
         return str(self.payload)

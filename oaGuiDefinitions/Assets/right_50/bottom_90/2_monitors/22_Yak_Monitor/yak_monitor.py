@@ -33,6 +33,8 @@ for parent in current_path.parents:
         break
 
 if str(root_path) not in sys.path:
+    sys.path.append(str(root_path))
+
 from oaTranslator.Managers.yak_trigger_handler import register_monitor_callback, unregister_monitor_callback
 
 # --- Protocol: Integration Layer ---

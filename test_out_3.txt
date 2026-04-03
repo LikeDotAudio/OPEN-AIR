@@ -497,9 +497,9 @@ WARNING: Skipping oaptpclock_rs as it is not installed.
 2026-04-03 00:12:54.145 | SUCCESS  | oaGuiElements.Core.buttons.button_wink_toggler.button_wink_toggler:make_button_wink_toggler:213 - ✅🆗🔘 [SUCCESS] The wink toggler group 'Test Wink Toggler' has materialized!
 2026-04-03 00:12:54.226 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph:create_base_plot:37 - 🔬🏗️📊 [BUILDER] graph_builder: Creating base Matplotlib plot for 'test/graph'.
 2026-04-03 00:12:54.234 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph_styler:apply_style:37 - 🔬🏗️📊 [BUILDER] graph_styler: Applying visual styles to axis.
-2026-04-03 00:12:54.235 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:98 - 🔬🏗️📊 [BUILDER] FluxPlotter 'test/graph' visual styles applied.
+2026-04-03 00:12:54.235 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:98 - 🔬🏗️📊 [BUILDER] GraphPlotter 'test/graph' visual styles applied.
 2026-04-03 00:12:54.235 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph_interactor:setup_interaction:23 - 🔬🏗️📊 [BUILDER] graph_interactor: Initializing interaction protocols.
-2026-04-03 00:12:54.237 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:107 - 🔬🏗️📊 [BUILDER] FluxPlotter 'test/graph' plot elements initialized.
+2026-04-03 00:12:54.237 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:107 - 🔬🏗️📊 [BUILDER] GraphPlotter 'test/graph' plot elements initialized.
 2026-04-03 00:12:54.323 | DEBUG    | oaGuiElements.Core.graphing.radar.radar:make_data_radar:42 - 📜📑💻 [CONFIG] Raw config received: {'type': '_Radar', 'label_active': 'Radar Eye 01', 'app_settings': {'title': 'Radar Eye v1.0', 'window_size': [100, 100], 'background_color': '', 'refresh_rate_ms': 100, 'mode': 'data_driven'}, 'data_parameters': {'min_value': 0, 'max_value': 100, 'points_per_revolution': 360, 'history_buffer_size': 360, 'clockwise': True, 'start_angle': 90}, 'visuals': {'plot_style': 'area', 'center_x': 50, 'center_y': 50, 'radius': 40}, 'grid_system': {'show_grid': True, 'grid_color': '#86c0db', 'ring_interval': 20, 'spoke_interval': 30, 'labels': {'show_values': True, 'show_time_scale': True, 'font': 'Consolas 6'}}, 'color_thresholds': {'mid_point': 50, 'upper_point': 80, 'colors': {'safe': '#0c75ec', 'warning': '#2f6988', 'critical': '#455594'}}, 'connectivity': {'mqtt_enabled': False, 'mqtt_topic': '', 'log_to_file': False}, 'show_label': True, 'notes': '', 'layout': {'sticky': 'ew', 'padx': 5, 'pady': 5, 'width': 100, 'height': 50}, 'cosmetics': {'colors': {'primary': '#FF9900', 'secondary': '#444444', 'background': '#2b2b2b'}}, 'path': 'test/radar'}
 2026-04-03 00:12:54.323 | DEBUG    | oaGuiElements.Core.graphing.radar.radar:make_data_radar:55 - ✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.
 2026-04-03 00:12:54.324 | DEBUG    | oaGuiElements.Core.graphing.radar.radar:make_data_radar:74 - 📐📏🔳 [LAYOUT] Radar dimensions: 100x100, Mode: data_driven
@@ -508,9 +508,9 @@ WARNING: Skipping oaptpclock_rs as it is not installed.
 2026-04-03 00:12:54.324 | SUCCESS  | oaGuiElements.Core.graphing.radar.radar:make_data_radar:277 - ✅🆗📶 [SUCCESS] The Radar Eye 'Radar Eye 01' has materialized!
 2026-04-03 00:12:54.333 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph:create_base_plot:37 - 🔬🏗️📊 [BUILDER] graph_builder: Creating base Matplotlib plot for 'test/graph'.
 2026-04-03 00:12:54.338 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph_styler:apply_style:37 - 🔬🏗️📊 [BUILDER] graph_styler: Applying visual styles to axis.
-2026-04-03 00:12:54.338 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:98 - 🔬🏗️📊 [BUILDER] FluxPlotter 'test/graph' visual styles applied.
+2026-04-03 00:12:54.338 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:98 - 🔬🏗️📊 [BUILDER] GraphPlotter 'test/graph' visual styles applied.
 2026-04-03 00:12:54.338 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph_interactor:setup_interaction:23 - 🔬🏗️📊 [BUILDER] graph_interactor: Initializing interaction protocols.
-2026-04-03 00:12:54.338 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:107 - 🔬🏗️📊 [BUILDER] FluxPlotter 'test/graph' plot elements initialized.
+2026-04-03 00:12:54.338 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:107 - 🔬🏗️📊 [BUILDER] GraphPlotter 'test/graph' plot elements initialized.
 ✅ test_global_settings_property (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_global_settings_property): passed (0.0000s)
 ✅ test_singleton (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_singleton): passed (0.0000s)
 ✅ test_validate_configuration (oaConfiguration.Tests.test_config_validator.TestConfigValidator.test_validate_configuration): passed (0.0000s)
@@ -564,9 +564,9 @@ WARNING: Skipping oaptpclock_rs as it is not installed.
 ✅ test_horizontal_fader_initialization (oaGuiElements.Tests.faders.fader_horizontal.test_fader_horizontal.TestFaderHorizontal.test_horizontal_fader_initialization): passed (0.0075s)
 ✅ test_builder_creator_make (oaGuiElements.Tests.faders.fader_linear_travelling_potentiometer.test_fader_linear_travelling_potentiometer.TestFaderLinearTravellingPotentiometer.test_builder_creator_make): passed (0.0079s)
 ✅ test_ltp_initialization (oaGuiElements.Tests.faders.fader_linear_travelling_potentiometer.test_fader_linear_travelling_potentiometer.TestFaderLinearTravellingPotentiometer.test_ltp_initialization): passed (0.0069s)
-✅ test_creation (oaGuiElements.Tests.graphing.graphing.test_graphing.TestFluxPlotter.test_creation): passed (0.0959s)
+✅ test_creation (oaGuiElements.Tests.graphing.graphing.test_graphing.TestGraphPlotter.test_creation): passed (0.0959s)
 ✅ test_creation (oaGuiElements.Tests.graphing.radar.test_radar.TestRadarWidget.test_creation): passed (0.0090s)
-✅ test_creation (oaGuiElements.Tests.graphing.test_flux_plotter.TestFluxPlotter.test_creation): passed (0.0140s)
+✅ test_creation (oaGuiElements.Tests.graphing.test_flux_plotter.TestGraphPlotter.test_creation): passed (0.0140s)
 2026-04-03 00:12:54.367 | DEBUG    | oaGuiElements.Core.metering.meter_bar.meter_bar:make_meter_bar:31 - 📜📑💻 [CONFIG] Raw config received: {'label_active': 'Test Meter', 'path': 'test/meter', 'meter_config': {'min_val': -60.0, 'max_val': 12.0}}
 2026-04-03 00:12:54.368 | DEBUG    | oaGuiElements.Core.metering.meter_bar.meter_bar:make_meter_bar:43 - ✅🆗💻 [CONTEXT] Successfully extracted from WidgetContext object.
 2026-04-03 00:12:54.368 | DEBUG    | oaGuiElements.Core.metering.meter_bar.meter_bar:make_meter_bar:51 - 🔬⚡️📊 [BUILDER] Instantiating SmartMeter for 'Test Meter' at path 'test/meter'.
@@ -602,9 +602,9 @@ WARNING: Skipping oaptpclock_rs as it is not installed.
 2026-04-03 00:12:54.558 | INFO     | oaGuiElements.Tests.test_table_csv_service:test_load_parses_valid_csv_data:93 - ✅ Test passed: 'test_load_parses_valid_csv_data' works as expected.
 2026-04-03 00:12:54.565 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph:create_base_plot:37 - 🔬🏗️📊 [BUILDER] graph_builder: Creating base Matplotlib plot for 'test/graph'.
 2026-04-03 00:12:54.571 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph_styler:apply_style:37 - 🔬🏗️📊 [BUILDER] graph_styler: Applying visual styles to axis.
-2026-04-03 00:12:54.572 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:98 - 🔬🏗️📊 [BUILDER] FluxPlotter 'test/graph' visual styles applied.
+2026-04-03 00:12:54.572 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:98 - 🔬🏗️📊 [BUILDER] GraphPlotter 'test/graph' visual styles applied.
 2026-04-03 00:12:54.572 | DEBUG    | oaGuiElements.Core.graphing.graphing.graph_interactor:setup_interaction:23 - 🔬🏗️📊 [BUILDER] graph_interactor: Initializing interaction protocols.
-2026-04-03 00:12:54.572 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:107 - 🔬🏗️📊 [BUILDER] FluxPlotter 'test/graph' plot elements initialized.
+2026-04-03 00:12:54.572 | SUCCESS  | oaGuiElements.Core.graphing.graphing.dynamic_graph:_init_plot_elements:107 - 🔬🏗️📊 [BUILDER] GraphPlotter 'test/graph' plot elements initialized.
 2026-04-03 00:12:54.579 | DEBUG    | oaGuiElements.Core.text.text_label.text_label:make_text_label:55 - 🔬⚡️ Creating new label: 'Test Label' at test/label.
 2026-04-03 00:12:54.587 | DEBUG    | oaGuiElements.Core.text.text_label.text_label:make_text_label:55 - 🔬⚡️ Creating new label: 'Test Label' at test/label.
 2026-04-03 00:12:54.595 | DEBUG    | oaGuiElements.Core.text.text_table.table_editing_sort_mixin:_bind_headers:42 - Binding headers for sorting.
@@ -669,7 +669,7 @@ WARNING: Skipping oaptpclock_rs as it is not installed.
 ✅ test_make_slider_value_prevents_attribute_error (oaGuiElements.Tests.test_slider_value.TestSliderValueCreator.test_make_slider_value_prevents_attribute_error): passed (0.0092s)
 ✅ test_load_handles_file_not_found_gracefully (oaGuiElements.Tests.test_table_csv_service.TestTableCSVService.test_load_handles_file_not_found_gracefully): passed (0.0005s)
 ✅ test_load_parses_valid_csv_data (oaGuiElements.Tests.test_table_csv_service.TestTableCSVService.test_load_parses_valid_csv_data): passed (0.0004s)
-✅ test_creation (oaGuiElements.Tests.text.test_flux_plotter.TestFluxPlotter.test_creation): passed (0.0142s)
+✅ test_creation (oaGuiElements.Tests.text.test_flux_plotter.TestGraphPlotter.test_creation): passed (0.0142s)
 ✅ test_make_text_label (oaGuiElements.Tests.text.text_label.test_text_label.TestTextLabel.test_make_text_label): passed (0.0076s)
 ✅ test_static_make (oaGuiElements.Tests.text.text_label.test_text_label.TestTextLabel.test_static_make): passed (0.0075s)
 ✅ test_make_text_table (oaGuiElements.Tests.text.text_table.test_text_table.TestTextTable.test_make_text_table): passed (0.0090s)

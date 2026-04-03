@@ -147,6 +147,8 @@ class ConfigIniEditor:
                 "SNMP": self.config.getboolean("DEBUG_MATRIX", "element_snmp", fallback=False),
                 "MIDI": self.config.getboolean("DEBUG_MATRIX", "element_midi", fallback=False),
                 "OSC": self.config.getboolean("DEBUG_MATRIX", "element_osc", fallback=False),
+                "AES70": self.config.getboolean("DEBUG_MATRIX", "element_aes70", fallback=False),
+                "REST": self.config.getboolean("DEBUG_MATRIX", "element_rest", fallback=False),
                 "BUILDER": self.config.getboolean("DEBUG_MATRIX", "element_gui_builder", fallback=False),
             }
         }

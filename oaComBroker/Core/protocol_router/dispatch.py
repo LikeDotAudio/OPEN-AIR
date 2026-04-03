@@ -76,7 +76,13 @@ def _dispatch_mqtt(mqtt_manager, topic, msg, val_str):
     # ⚡ OPTIMIZATION: Retain status and monitor topics for late-joining observers
     retain = ("/Status/" in topic or "/Monitor/" in topic)
     
-    mqtt_manager.publish(tx_topic, orjson.dumps(payload).decode(), retain=retain)
+    try:
+        encoded_payload = orjson.dumps(payload).decode()
+    except Exception as e:
+        matrix_log("core", "router", "_dispatch_mqtt", f"❌ [ERROR] Failed to serialize MQTT payload for {topic}: {e}", "ERROR")
+        return
+
+    mqtt_manager.publish(tx_topic, encoded_payload, retain=retain)
     if LOCAL_DEBUG:
         router_logger.debug(f"📡📤📤 [OUTBOUND] MQTT >> {tx_topic} (Retain={retain}): {val_str}")
 

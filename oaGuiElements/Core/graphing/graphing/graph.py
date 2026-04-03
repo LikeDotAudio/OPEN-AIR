@@ -37,12 +37,18 @@ def create_base_plot(parent_frame: tk.Frame, config: Dict[str, Any]) -> tuple:
     matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] graph_builder: Creating base Matplotlib plot for '{config.get('path', 'Unknown')}'.", level="DEBUG")
 
     layout_config = config.get("layout", {})
+    # ⚡ DIMENSION ENFORCEMENT: Use explicit geometry or layout, fallback to 500x400
+    geom = config.get("geometry", {})
+    width = config.get("width") or geom.get("width") or layout_config.get("width") or 500
+    height = config.get("height") or geom.get("height") or layout_config.get("height") or 400
+    
+    # Ensure we don't start with 0 or 1 which triggers the "pixel wide" bug
+    width = max(width, 100)
+    height = max(height, 50)
+
     # ⚡ Enable transparency at the Figure level
     fig = Figure(
-        figsize=(
-            layout_config.get("width", 500) / 100,
-            layout_config.get("height", 400) / 100,
-        ),
+        figsize=(width / 100, height / 100),
         dpi=100,
         facecolor='none'
     )

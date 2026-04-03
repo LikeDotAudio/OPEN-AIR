@@ -9,9 +9,9 @@ from unittest.mock import MagicMock, patch
 import tkinter as tk
 import matplotlib
 matplotlib.use('Agg')
-from oaGuiElements.Core.graphing.graphing.dynamic_graph import FluxPlotter
+from oaGuiElements.Core.graphing.graphing.dynamic_graph import GraphPlotter
 
-class TestFluxPlotter(unittest.TestCase):
+class TestGraphPlotter(unittest.TestCase):
 
     def setUp(self):
         self.patchers = []
@@ -50,9 +50,9 @@ class TestFluxPlotter(unittest.TestCase):
 
     def test_creation(self):
         try:
-            'Verify that FluxPlotter initializes without error.'
-            plotter = FluxPlotter(self.parent, self.config, 'OPEN-AIR/test', 'test/graph', context=self.mock_context, state_mirror_engine=self.mock_context.state_mirror_engine, subscriber_router=self.mock_context.subscriber_router)
-            self.assertIsInstance(plotter, FluxPlotter, f'Expected instance of FluxPlotter, got {type(plotter)}')
+            'Verify that GraphPlotter initializes without error.'
+            plotter = GraphPlotter(self.parent, self.config, 'OPEN-AIR/test', 'test/graph', context=self.mock_context, state_mirror_engine=self.mock_context.state_mirror_engine, subscriber_router=self.mock_context.subscriber_router)
+            self.assertIsInstance(plotter, GraphPlotter, f'Expected instance of GraphPlotter, got {type(plotter)}')
             self.assertIsNotNone(plotter.fig, 'Expected plotter.fig to be not None')
             self.assertIsNotNone(plotter.ax, 'Expected plotter.ax to be not None')
             self.assertIsNotNone(plotter.canvas, 'Expected plotter.canvas to be not None')

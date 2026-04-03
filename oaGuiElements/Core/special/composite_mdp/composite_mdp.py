@@ -14,7 +14,7 @@ from oaLogging.Core.logger import builder_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
-from oaGuiElements.Core.graphing.graphing.dynamic_graph import FluxPlotter
+from oaGuiElements.Core.graphing.graphing.dynamic_graph import GraphPlotter
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 
@@ -41,7 +41,7 @@ class BuilderCompositeMdpCreator(TransparencyMixin, MDPInteractionMixin):
         
         # 1. Graph Background
         g_cfg = config_data.get("graph", {"show_grid": True, "xlim": [0, 10], "ylim": [0, 10]})
-        plotter = FluxPlotter(mdp_frame, g_cfg, ctx.base_mqtt_topic_from_path, f"{config_data.get('path')}/graph", 
+        plotter = GraphPlotter(mdp_frame, g_cfg, ctx.base_mqtt_topic_from_path, f"{config_data.get('path')}/graph", 
                               subscriber_router=ctx.subscriber_router, state_mirror_engine=ctx.state_mirror_engine, builder_instance=b_inst)
         plotter.pack(fill=tk.BOTH, expand=True)
         

@@ -51,12 +51,6 @@ enable_debug_mode = True
 enable_debug_screen = True
 # Toggle background file logging to /oaDataLogs
 enable_log_to_file = True
-# Individual protocol debug toggles
-snmp_debug_enable = True
-midi_debug_enable = True
-osc_debug_enable = True
-aes70_debug_enable = True
-rest_debug_enable = True
 
 [DEBUG_MATRIX]
 # Global Killswitch - If True, overrides all other debug settings
@@ -74,6 +68,8 @@ element_mqtt = False
 element_snmp = False
 element_midi = False
 element_osc = False
+element_aes70 = False
+element_rest = False
 element_gui_builder = False
 
 # Function Level Exclusions/Inclusions (Comma separated)

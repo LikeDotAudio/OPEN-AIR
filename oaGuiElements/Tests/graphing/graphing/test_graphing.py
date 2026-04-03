@@ -10,10 +10,10 @@ import tkinter as tk
 import matplotlib
 matplotlib.use('Agg')
 import os
-from oaGuiElements.Core.graphing.graphing.dynamic_graph import FluxPlotter
+from oaGuiElements.Core.graphing.graphing.dynamic_graph import GraphPlotter
 from oaGuiElements.Tests.utils.test_utils import load_sample_config
 
-class TestFluxPlotter(unittest.TestCase):
+class TestGraphPlotter(unittest.TestCase):
 
     def setUp(self):
         self.patchers = []
@@ -42,13 +42,13 @@ class TestFluxPlotter(unittest.TestCase):
 
     def test_creation(self):
         try:
-            'Verify that FluxPlotter initializes correctly from sample.json.'
-            plotter = FluxPlotter(self.root, self.config, 'OPEN-AIR/test', 'test/graph', context=self.mock_context, state_mirror_engine=self.mock_context.state_mirror_engine, subscriber_router=self.mock_context.subscriber_router)
+            'Verify that GraphPlotter initializes correctly from sample.json.'
+            plotter = GraphPlotter(self.root, self.config, 'OPEN-AIR/test', 'test/graph', context=self.mock_context, state_mirror_engine=self.mock_context.state_mirror_engine, subscriber_router=self.mock_context.subscriber_router)
             
             # ⚡ FORCE SYNC: Ensure scheduled updates (which create lines) run immediately
             plotter._perform_scheduled_update()
             
-            self.assertIsInstance(plotter, FluxPlotter, f'Expected instance of FluxPlotter, got {type(plotter)}')
+            self.assertIsInstance(plotter, GraphPlotter, f'Expected instance of GraphPlotter, got {type(plotter)}')
             self.assertIsNotNone(plotter.fig, 'Expected plotter.fig to be not None')
             self.assertIsNotNone(plotter.ax, 'Expected plotter.ax to be not None')
             self.assertIsNotNone(plotter.canvas, 'Expected plotter.canvas to be not None')

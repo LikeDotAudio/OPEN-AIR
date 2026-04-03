@@ -83,47 +83,47 @@ def _internal_convert_soundbase_pdf_v2_to_markers(pdf_file_path):
         zone = zone_match.group(1).strip() if zone_match else "N/A"
         matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔍 Found ZONE: {zone}", "DEBUG")
 
-            # The pattern to find all groups
-            group_pattern = re.compile(
-                r"^\s*([A-Z\s&]+ IEM\'S|[A-Z\s&]+ MICS & BACKLINE)\s*$", re.MULTILINE
+        # The pattern to find all groups
+        group_pattern = re.compile(
+            r"^\s*([A-Z\s&]+ IEM\'S|[A-Z\s&]+ MICS & BACKLINE)\s*$", re.MULTILINE
+        )
+
+        lines = text.split("\n")
+        current_group = None
+
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+
+            # Check if the line is a new group header
+            group_match = group_pattern.search(line)
+            if group_match:
+                current_group = group_match.group(1).strip()
+                matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔍 Found new GROUP: {current_group}", "DEBUG")
+                continue
+
+            # Regex to find all frequency-device pairs on the current line
+            device_matches = re.findall(
+                r"(\d+\.\d+)\s+([\w\s-]+?(?=\s*\d+\.\d+|$))", line
             )
 
-            lines = text.split("\n")
-            current_group = None
+            if device_matches:
+                for freq, device in device_matches:
+                    device_clean = device.strip()
+                    freq_clean = freq.strip()
 
-            for line in lines:
-                line = line.strip()
-                if not line:
-                    continue
-
-                # Check if the line is a new group header
-                group_match = group_pattern.search(line)
-                if group_match:
-                    current_group = group_match.group(1).strip()
-                    matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔍 Found new GROUP: {current_group}", "DEBUG")
-                    continue
-
-                # Regex to find all frequency-device pairs on the current line
-                device_matches = re.findall(
-                    r"(\d+\.\d+)\s+([\w\s-]+?(?=\s*\d+\.\d+|$))", line
-                )
-
-                if device_matches:
-                    for freq, device in device_matches:
-                        device_clean = device.strip()
-                        freq_clean = freq.strip()
-
-                        if current_group:
-                            marker_data.append(
-                                {
-                                    "ZONE": zone,
-                                    "GROUP": current_group,
-                                    "DEVICE": device_clean,
-                                    "NAME": device_clean,
-                                    "FREQ_MHZ": freq_clean,
-                                    "PEAK": np.nan,
-                                }
-                            )
+                    if current_group:
+                        marker_data.append(
+                            {
+                                "ZONE": zone,
+                                "GROUP": current_group,
+                                "DEVICE": device_clean,
+                                "NAME": device_clean,
+                                "FREQ_MHZ": freq_clean,
+                                "PEAK": np.nan,
+                            }
+                        )
 
             if LOCAL_DEBUG:
                 matrix_log("ui", "importer", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Finished conversion. Extracted {len(marker_data)} rows.", "SUCCESS")

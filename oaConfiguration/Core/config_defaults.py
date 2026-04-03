@@ -14,11 +14,6 @@ class ConfigDefaults:
     ENABLE_DEBUG_MODE = False
     ENABLE_DEBUG_SCREEN = False
     ENABLE_LOG_TO_FILE = True
-    SNMP_DEBUG_ENABLE = False
-    MIDI_DEBUG_ENABLE = False
-    OSC_DEBUG_ENABLE = False
-    AES70_DEBUG_ENABLE = False
-    REST_DEBUG_ENABLE = False
     
     # UI Layout
     UI_LAYOUT_SPLIT_EQUAL = 50
@@ -76,7 +71,14 @@ class ConfigDefaults:
         "SYS_GUI": False,
         "SYS_DATA": False,
         "SYS_ROUTER": False,
-        "SYS_CORE": False
+        "SYS_CORE": False,
+        "ELEMENT_MQTT": False,
+        "ELEMENT_SNMP": False,
+        "ELEMENT_MIDI": False,
+        "ELEMENT_OSC": False,
+        "ELEMENT_AES70": False,
+        "ELEMENT_REST": False,
+        "ELEMENT_GUI_BUILDER": False
     }
     MUTE_FUNCTIONS = ""
     FORCE_FUNCTIONS = ""

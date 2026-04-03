@@ -67,21 +67,20 @@ class TestVisaGuiPublisher(unittest.TestCase):
         """
         BUILD: A list of 2 resources.
         OPERATE: Call _update_found_devices_gui.
-        CHECK: Assert 2 slots are populated, remaining (up to 40) are cleared, and first is selected.
+        CHECK: Assert bulk publish to options/all and first device auto-selection.
         """
         resources = ["TCPIP::1.1.1.1::INSTR", "USB::1234::5678::INSTR"]
         self.publisher._update_found_devices_gui(resources)
         
-        # Each active slot gets 3 publishes (active, label_active, label_inactive)
-        # Each inactive slot gets 3 publishes
-        # Plus 1 for auto-selection
-        total_expected_calls = (MAX_GUI_DEVICE_SLOTS * 3) + 1
+        # 1. Check bulk publish call
+        # 2. Check auto-selection call
+        total_expected_calls = 2
         self.assertEqual(self.mock_client.publish.call_count, total_expected_calls)
         
-        # Check first device population
+        # Check bulk population
         self.mock_client.publish.assert_any_call(
-            topic="OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/1/label_active",
-            payload="TCPIP::1.1.1.1::INSTR",
+            topic="OPEN-AIR/Device/Instrument_Connection/Search_and_Connect/Found_devices/options/all",
+            payload=unittest.mock.ANY,
             qos=0,
             retain=False
         )

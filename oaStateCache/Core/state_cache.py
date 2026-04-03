@@ -145,6 +145,8 @@ class StateRegistry:
             for topic, payload in current_cache.items():
                 val = payload.get("val") if isinstance(payload, dict) else payload
                 router.ingest("DISK", topic, val, {"msg_type": "LINK_FEEDBACK", "is_settled": True, "origin_source": "DISK", "boot": True})
+                # ⚡ STABILITY: Throttle ingestion to prevent overwhelming the router dispatch threads during boot.
+                time.sleep(0.001) 
             gui_state_restorer.restore_timeline(current_cache, self.state_mirror_engine)
 
     def handle_external_update(self, topic: str, value: Any, source: str = "EXTERNAL", metadata: dict = None):
@@ -213,6 +215,10 @@ class StateRegistry:
         if self.subscriber_router: 
             self.subscriber_router._on_message(client, userdata, msg)
             
+        # ⚡ EXCLUSION: Skip state ingestion for binary protocol namespaces
+        if topic.startswith("st2138/"):
+            return
+
         try:
             source, value, metadata, raw_payload = self._parse_mqtt_payload(msg)
 
@@ -224,5 +230,7 @@ class StateRegistry:
             if should_process:
                 self._update_cache_entry(topic, new_payload)
                 
-        except Exception: 
-            matrix_log("core", "data", "handle_incoming_mqtt", f"Error handling MQTT for {topic}", "ERROR")
+        except Exception as e:
+            import traceback
+            error_msg = f"Error handling MQTT for {topic}: {e}\n{traceback.format_exc()}"
+            matrix_log("core", "data", "handle_incoming_mqtt", error_msg, "ERROR")

@@ -123,6 +123,7 @@ class GenericInstrumentGui(ttk.Frame):
                 parent=self,
                 json_path=processed_path,
                 config=self.config_data,  # Pass the full config dictionary here
+                use_grid=True,
             )
 
             # If we reach here, the builder succeeded!
@@ -130,6 +131,7 @@ class GenericInstrumentGui(ttk.Frame):
                 matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ Builder returned success! Destroying status label...", "SUCCESS")
 
             self.status_label.destroy()
+            self.dynamic_gui.grid(row=0, column=0, sticky="nsew")
 
             if LOCAL_DEBUG:
                 matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ It works! {module_name} is online and functioning within normal parameters!", "SUCCESS")

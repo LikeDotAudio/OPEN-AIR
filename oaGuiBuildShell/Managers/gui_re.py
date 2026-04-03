@@ -31,7 +31,7 @@ class GuiRebuilderMixin:
         matrix_log("ui", "gui_re", "_force_rebuild_gui", 
                    f"♻️ Rebuilder: FORCING GUI rebuild for '{getattr(self, 'tab_name', 'Unknown')}'", "INFO")
         
-        from oaGuiManager.Core.loader.blueprint_loader import BlueprintLoader
+        from oaGuiManager.FileReaders.blueprint_loader import BlueprintLoader
         from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
         BlueprintLoader.invalidate_cache()
         AssetCacheManager.invalidate_cache()

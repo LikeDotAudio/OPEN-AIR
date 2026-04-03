@@ -24,7 +24,7 @@ class GraphPatinaMixin:
         # 🛡️ REBUILD GUARD
         if getattr(self.instance, '_is_rebuilding', False): return
 
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📈💹🎨 [SYNC] Injecting patina into FluxPlotter '{self.widget_id}'", level="DEBUG")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📈💹🎨 [SYNC] Injecting patina into GraphPlotter '{self.widget_id}'", level="DEBUG")
         tk_canvas = self.canvas.get_tk_widget()
         
         # 0. Clear Blit Cache
@@ -68,7 +68,7 @@ class GraphPatinaMixin:
                     self.fig.patch.set_visible(False)
                     self.ax.patch.set_visible(False)
             except Exception as e:
-                if BUILDER_DEBUG: builder_logger.error(f"❌ FluxPlotter patina failed: {e}")
+                if BUILDER_DEBUG: builder_logger.error(f"❌ GraphPlotter patina failed: {e}")
 
         # 3. Redraw
         self._force_redraw = True; self._schedule_update()

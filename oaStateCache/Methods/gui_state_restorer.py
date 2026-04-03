@@ -64,6 +64,11 @@ def restore_timeline(cache_data: Dict[str, Any], state_mirror_engine: Any) -> No
             # ⚡ REFACTORED: Wrap in MqttMessage for Partitioned Architecture compatibility
             msg = MqttMessage(topic=topic, payload=payload)
             state_mirror_engine.sync_incoming_mqtt_to_gui(msg)
+            
+            # ⚡ STABILITY: Replaying state directly into the GUI is expensive (redraws, reslices).
+            # Throttle to 2ms per message to prevent overwhelming the main thread.
+            import time
+            time.sleep(0.002)
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⏪✅ Timeline restored!", "SUCCESS")
     except Exception:
         logger.exception("⏪❌ Error restoring timeline")

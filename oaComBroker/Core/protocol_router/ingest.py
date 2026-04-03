@@ -41,11 +41,12 @@ def normalize_and_ingest(
     settle_manager, 
     inbound_queue,
     silent_ingest_callback,
-    state_cache=None
+    state_cache=None,
+    rust_router=None
 ):
     """
     Normalizes raw data into the Unified Message Schema and appends to queue.
-    
+
     Args:
         transport_source (str): Origin (e.g., 'MQTT', 'OSC', 'MIDI').
         topic (str): The logical address or key.
@@ -56,6 +57,8 @@ def normalize_and_ingest(
         inbound_queue (Queue): Target queue for processed messages.
         silent_ingest_callback (fn): Handler for boot-time traffic.
         state_cache (Cache, optional): Global state for dead-band checks.
+        rust_router (CoreRouter, optional): High-performance Rust router.
+
         
     Side Effects:
         - May drop packets due to dead-band or interaction locks.
@@ -65,7 +68,12 @@ def normalize_and_ingest(
         val_str = str(value)[:100] + ("..." if len(str(value)) > 100 else "")
         router_logger.debug(f"📡📥📥 [INBOUND] {transport_source} on {topic}: {val_str}")
         
-    # Ignore traffic intended for the router's own monitoring/telemetry topics.
+    # Standardize None to empty string or keep as None depending on protocol?
+    # For OPEN-AIR, None is a valid 'Reset' state for many parameters, 
+    # but we must ensure it doesn't crash consumers.
+    if value is None:
+        if LOCAL_DEBUG:
+            router_logger.trace(f"⚠️ [ROUTER] Received 'None' for {topic}. Propagating as Reset state.")
     if any(x in str(topic) for x in ["/System/Router/", "/Firehose/"]):
         return
 
@@ -169,6 +177,10 @@ def normalize_and_ingest(
     
     inbound_queue.put(msg)
     
+    # ⚡ RUST NATIVE ACCELERATION: Push to Rust router for high-speed numeric paths
+    if rust_router:
+        rust_router.push_inbound(msg)
+    
     # TERMINAL SETTLING:
     # If this is a primary action, lock the parameter and schedule a 
     # settling event to confirm final state.
@@ -181,16 +193,21 @@ def normalize_and_ingest(
         settle_manager.lock_parameter(topic, full_id)
         settle_manager.schedule_settling(topic, msg)
 
-def create_silent_msg(transport_source, topic, value, meta, local_guid):
+def create_silent_msg(transport_source, topic, value, meta, local_guid, rust_router=None):
     """
     Internal helper for low-priority/boot ingestion.
     
     Allocates a pre-settled message that bypasses the normal processing loops.
     """
-    return {
+    msg = {
         "ts": time.time(), "source": transport_source, "topic": topic,
         "val": value, "meta": meta, "guid": local_guid,
         "partition": app_constants.PARTITION_ID,
         "full_id": app_constants.FULL_INSTANCE_ID,
         "msg_type": "LINK_FEEDBACK", "is_settled": True
     }
+    
+    if rust_router:
+        rust_router.push_inbound(msg)
+        
+    return msg

@@ -13,7 +13,7 @@ data_graphing/dynamic_graph.py
 ## 📚 API Reference
 
 ### Classes
-#### `class FluxPlotter`
+#### `class GraphPlotter`
 A Tkinter-compatible Matplotlib graph widget that dynamically renders
 plots with multiple datasets.
 OPTIMIZED: 30 FPS throttle and redundancy filter.

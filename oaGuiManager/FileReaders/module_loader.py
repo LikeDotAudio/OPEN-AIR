@@ -89,7 +89,8 @@ class ModuleLoader:
                     matrix_log("ui", "gui_builder", "load_module_from_path", f"✅ Found class {name} in {path.name}", "SUCCESS")
                     return obj
             
-            matrix_log("ui", "gui_builder", "load_module_from_path", f"⚠️ No suitable GUI class found in {path.name}", "WARNING")
+            if path.name not in ["Entry.py", "__init__.py"] and not path.name.startswith("test_"):
+                matrix_log("ui", "gui_builder", "load_module_from_path", f"⚠️ No suitable GUI class found in {path.name}", "WARNING")
             return None
         except Exception as e:
             vocal_capture("BUILDER", f"Failed to load module from {path}")

@@ -11,17 +11,34 @@ class GridTopologyConfigurator:
     def configure(parent_frame, data, all_fields):
         """Calculates grid dimensions and configures row/column weights."""
         max_r, max_c = 0, 0
+        num_cols = int(data.get("layout_columns", 0))
+
         if all_fields:
+            if num_cols <= 0:
+                for item in all_fields:
+                    val = item[1] if isinstance(item, tuple) and len(item) == 2 else item
+                    if isinstance(val, dict):
+                        lay = val.get("layout", {})
+                        max_c = max(max_c, lay.get("column", 0) + lay.get("col_span", 1) - 1)
+                num_cols = max_c + 1
+
+            r, c = 0, 0
             for item in all_fields:
-                # Handle both (key, val) pairs and raw values (if list was processed)
                 val = item[1] if isinstance(item, tuple) and len(item) == 2 else item
-                
                 if isinstance(val, dict):
                     lay = val.get("layout", {})
-                    max_r = max(max_r, lay.get("row", 0) + lay.get("row_span", 1) - 1)
-                    max_c = max(max_c, lay.get("column", 0) + lay.get("col_span", 1) - 1)
-        
-        num_cols = int(data.get("layout_columns", max_c + 1))
+                    cr = lay.get("row", r)
+                    cc = lay.get("column", c)
+                    cs = int(lay.get("col_span", 1))
+                    rs = int(lay.get("row_span", 1))
+                    
+                    max_r = max(max_r, cr + rs - 1)
+                    
+                    c = cc + cs
+                    if c >= num_cols:
+                        c = 0
+                        r = cr + rs
+
         num_rows = max_r + 1
 
         # 1. Configure Rows

@@ -72,26 +72,24 @@ def _get_local_ip():
 def _check_host(ip):
     """Legacy: Checks for Port 111 (VXI-11) and Port 5025 (SCPI)."""
     import urllib.request
+    
     # 1. Port 111 (VXI-11)
     try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(0.3)
-        result = sock.connect_ex((ip, 111))
-        sock.close()
-        if result == 0:
-            is_gateway = False
-            try:
-                cfg = Config.get_instance()
-                url = f"{cfg.VISA_PROBE_PROTOCOL}://{ip}/{cfg.VISA_PROBE_PATH}"
-                with urllib.request.urlopen(url, timeout=1) as resp:
-                    if "E5810" in resp.read().decode("utf-8", errors="ignore"):
-                        is_gateway = True
-            except Exception as e:
-                matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error checking instruments page for {ip}: {e}", "TRACE")
-                pass
-            return (ip, "GATEWAY" if is_gateway else "DEDICATED")
-    except Exception as e:
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error connecting to Port 111 on {ip}: {e}", "TRACE")
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(0.3)
+            result = sock.connect_ex((ip, 111))
+            if result == 0:
+                is_gateway = False
+                try:
+                    cfg = Config.get_instance()
+                    url = f"{cfg.VISA_PROBE_PROTOCOL}://{ip}/{cfg.VISA_PROBE_PATH}"
+                    with urllib.request.urlopen(url, timeout=1) as resp:
+                        if "E5810" in resp.read().decode("utf-8", errors="ignore"):
+                            is_gateway = True
+                except Exception:
+                    pass
+                return (ip, "GATEWAY" if is_gateway else "DEDICATED")
+    except Exception:
         pass
 
     # 2. Port 5025 (SCPI)
@@ -99,10 +97,9 @@ def _check_host(ip):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.settimeout(0.3)
             result = sock.connect_ex((ip, 5025))
-        if result == 0:
-            return (ip, "DEDICATED")
-    except Exception as e:
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error connecting to Port 5025 on {ip}: {e}", "TRACE")
+            if result == 0:
+                return (ip, "DEDICATED")
+    except Exception:
         pass
     return None
 

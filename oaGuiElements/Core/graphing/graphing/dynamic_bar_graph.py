@@ -23,12 +23,12 @@ from . import graph
 from . import graph_styler
 from . import graph_interactor
 from . import graph_updater
-from .dynamic_graph import FluxPlotter
+from .dynamic_graph import GraphPlotter
 
-class DynamicBarGraph(FluxPlotter):
+class DynamicBarGraph(GraphPlotter):
     """
     A bar-chart version of the dynamic graph widget.
-    Inherits most functionality from FluxPlotter but overrides data rendering.
+    Inherits most functionality from GraphPlotter but overrides data rendering.
     """
     
     def _initialize_plot_elements(self):

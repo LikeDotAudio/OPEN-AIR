@@ -86,9 +86,17 @@ class TestAgentMdnsZeroconf(unittest.TestCase):
         """Test _check_host for a dedicated device (Port 5025)."""
         from oaComVisa.Workers.agent_mdns_zeroconf import _check_host
         
-        mock_socket = mock_socket_cls.return_value
-        # Simulate Port 111 failure, Port 5025 success
-        mock_socket.connect_ex.side_effect = [1, 0] 
+        # We need two different mock socket instances because they are created sequentially
+        mock_sock1 = MagicMock()
+        mock_sock1.__enter__.return_value = mock_sock1
+        mock_sock1.connect_ex.return_value = 1 # Port 111 Fail
+        
+        mock_sock2 = MagicMock()
+        mock_sock2.__enter__.return_value = mock_sock2
+        mock_sock2.connect_ex.return_value = 0 # Port 5025 Success
+        
+        # When socket.socket() is called twice, return these two mocks
+        mock_socket_cls.side_effect = [mock_sock1, mock_sock2]
         
         result = _check_host("192.168.1.100")
         self.assertEqual(result, ("192.168.1.100", "DEDICATED"))

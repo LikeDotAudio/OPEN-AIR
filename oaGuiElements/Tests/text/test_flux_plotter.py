@@ -9,9 +9,9 @@ from unittest.mock import MagicMock, patch
 import tkinter as tk
 import matplotlib
 matplotlib.use('Agg')
-from oaGuiElements.Core.graphing.graphing.dynamic_graph import FluxPlotter
+from oaGuiElements.Core.graphing.graphing.dynamic_graph import GraphPlotter
 
-class TestFluxPlotter(unittest.TestCase):
+class TestGraphPlotter(unittest.TestCase):
     def setUp(self):
         self.root = tk.Tk()
         self.root.withdraw()
@@ -34,15 +34,15 @@ class TestFluxPlotter(unittest.TestCase):
         }
 
     def test_creation(self):
-        """Verify that FluxPlotter initializes without error."""
-        plotter = FluxPlotter(
+        """Verify that GraphPlotter initializes without error."""
+        plotter = GraphPlotter(
             self.parent, 
             self.config, 
             "OPEN-AIR/test", 
             "test/graph",
             context=self.mock_context
         )
-        self.assertIsInstance(plotter, FluxPlotter)
+        self.assertIsInstance(plotter, GraphPlotter)
         self.assertIsNotNone(plotter.fig)
         self.assertIsNotNone(plotter.ax)
         self.assertIsNotNone(plotter.canvas)

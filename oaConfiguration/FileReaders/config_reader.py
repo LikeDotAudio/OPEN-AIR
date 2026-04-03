@@ -65,11 +65,6 @@ class Config(ConfigDefaults):
         self.ENABLE_DEBUG_MODE = self._s_get(config, "Debug", "ENABLE_DEBUG_MODE", self.ENABLE_DEBUG_MODE, "bool")
         self.ENABLE_DEBUG_SCREEN = self._s_get(config, "Debug", "ENABLE_DEBUG_SCREEN", self.ENABLE_DEBUG_SCREEN, "bool")
         self.ENABLE_LOG_TO_FILE = self._s_get(config, "Debug", "ENABLE_LOG_TO_FILE", self.ENABLE_LOG_TO_FILE, "bool")
-        self.SNMP_DEBUG_ENABLE = self._s_get(config, "Debug", "SNMP_DEBUG_ENABLE", self.SNMP_DEBUG_ENABLE, "bool")
-        self.MIDI_DEBUG_ENABLE = self._s_get(config, "Debug", "MIDI_DEBUG_ENABLE", self.MIDI_DEBUG_ENABLE, "bool")
-        self.OSC_DEBUG_ENABLE = self._s_get(config, "Debug", "OSC_DEBUG_ENABLE", self.OSC_DEBUG_ENABLE, "bool")
-        self.AES70_DEBUG_ENABLE = self._s_get(config, "Debug", "AES70_DEBUG_ENABLE", self.AES70_DEBUG_ENABLE, "bool")
-        self.REST_DEBUG_ENABLE = self._s_get(config, "Debug", "REST_DEBUG_ENABLE", self.REST_DEBUG_ENABLE, "bool")
 
     def _parse_ui_settings(self, config):
         self.UI_LAYOUT_SPLIT_EQUAL = self._s_get(config, "UI", "LAYOUT_SPLIT_EQUAL", self.UI_LAYOUT_SPLIT_EQUAL, "int")

@@ -39,23 +39,18 @@ class ProtocolRouter:
     _instance = None
     _lock = threading.Lock()
 
-    class QueueBridge:
-        def __init__(self, rust_router):
-            self.rust_router = rust_router
-        def put(self, msg):
-            self.rust_router.push_inbound(msg)
-
     def __init__(self):
         if hasattr(self, "_initialized"):
             return
         self._initialized = True
         
-        try:
-            self.rust_router = RustCoreRouter()
-            matrix_log("core", "router", "__init__", "🚀 Using HIGH-PERFORMANCE RUST core router.", "DEBUG")
-        except Exception as e:
-            matrix_log("core", "router", "__init__", f"🚀❌ [FATAL] Rust Router init failed: {e}", "ERROR")
-            raise e
+        # ⚡ STABILITY OVERRIDE: Use Python native queues for complex object passing
+        # Rust core router is reserved for high-speed numeric/primitive paths.
+        self.inbound_queue = queue.Queue()
+        self.outbound_queue = queue.Queue()
+        
+        # ⚡ RUST NATIVE ACCELERATION: Initialize the Rust core router if available
+        self.rust_router = RustCoreRouter()
 
         self._running = False
         self._dispatch_threads = 4
@@ -140,22 +135,21 @@ class ProtocolRouter:
     def remove_observer(self, cb): self.monitor.remove_observer(cb)
 
     def ingest(self, transport_source, topic, value, metadata=None):
-        bridge = self.QueueBridge(self.rust_router)
-
         normalize_and_ingest(
             transport_source, topic, value, metadata, 
-            self.GUID, self.settle_manager, bridge,
-            self._ingest_silent, self.state_cache
+            self.GUID, self.settle_manager, self.inbound_queue,
+            self._ingest_silent, self.state_cache, self.rust_router
         )
 
     def _ingest_silent(self, transport_source, topic, value, meta):
-        msg = create_silent_msg(transport_source, topic, value, meta, self.GUID)
-        self.rust_router.push_inbound(msg)
+        msg = create_silent_msg(transport_source, topic, value, meta, self.GUID, self.rust_router)
+        self.inbound_queue.put(msg)
 
     def _fetch_next_inbound(self):
-        msg = self.rust_router.pop_inbound()
-        if msg is None: time.sleep(0.001)
-        return msg
+        try:
+            return self.inbound_queue.get(timeout=0.1)
+        except queue.Empty:
+            return None
 
     def _process_message_pipeline(self, msg):
         investigate_packet(msg, self.mib_cache)
@@ -180,7 +174,7 @@ class ProtocolRouter:
 
     def _dispatch_by_strategy(self, strategy, msg):
         if "IGNORE" not in strategy:
-            self.rust_router.push_outbound(msg)
+            self.outbound_queue.put(msg)
 
     def _ingest_loop(self):
         while self._running:
@@ -194,9 +188,9 @@ class ProtocolRouter:
     def _dispatch_loop(self):
         while self._running:
             try:
-                msg = self.rust_router.pop_outbound()
-                if msg is None:
-                    time.sleep(0.001)
+                try:
+                    msg = self.outbound_queue.get(timeout=0.1)
+                except queue.Empty:
                     continue
                 
                 # Prepare manager registry for the dispatcher

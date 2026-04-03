@@ -2,7 +2,7 @@
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
-# Description: Modularized FluxPlotter Graph Component.
+# Description: Modularized GraphPlotter Graph Component.
 
 import tkinter as tk
 from oaLogging.Methods.matrix_gate import matrix_log
@@ -27,7 +27,7 @@ from .Core.graph_throttle_mixin import GraphThrottleMixin
 from .Core.graph_interaction_mixin import GraphInteractionMixin
 from .Core.graph_state_mixin import GraphStateMixin
 
-class FluxPlotter(
+class GraphPlotter(
     tk.Frame,
     TransparencyMixin,
     GraphPatinaMixin,
@@ -47,6 +47,14 @@ class FluxPlotter(
             self.subscriber_router = self.subscriber_router or context.subscriber_router
             self.state_mirror_engine = self.state_mirror_engine or context.state_mirror_engine
             builder_instance = builder_instance or context.builder_instance
+
+        layout_config = config.get("layout", {})
+        geom = config.get("geometry", {})
+        w = config.get("width") or geom.get("width") or layout_config.get("width") or 500
+        h = config.get("height") or geom.get("height") or layout_config.get("height") or 400
+        
+        kwargs["width"] = max(int(float(w)), 100)
+        kwargs["height"] = max(int(float(h)), 50)
 
         super().__init__(parent, **kwargs)
         
@@ -95,7 +103,7 @@ class FluxPlotter(
 
     def _init_plot_elements(self):
         graph_styler.apply_style(self.ax, self.fig, self.widget_config, graph_styler.get_theme_style("dark"))
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' visual styles applied.", level="SUCCESS")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] GraphPlotter '{self.widget_id}' visual styles applied.", level="SUCCESS")
         
         graph_interactor.setup_interaction(self.fig, self.ax, self.widget_config, {"on_view_change": lambda x, y: None, "on_setting_change": lambda n, v: None, "on_add_marker": self._on_add_marker})
         for ds in self.widget_config.get("datasets", []):
@@ -104,7 +112,7 @@ class FluxPlotter(
                 line, = self.ax.plot([], [], color=ds.get("style", {}).get("line_color") or "cyan", linewidth=1, label=ds.get("label", ds_id))
                 self.lines[ds_id], self.x_data[ds_id], self.y_data[ds_id] = line, deque(maxlen=self.widget_config.get("buffer_size", 100)), deque(maxlen=self.widget_config.get("buffer_size", 100))
         
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' plot elements initialized.", level="SUCCESS")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] GraphPlotter '{self.widget_id}' plot elements initialized.", level="SUCCESS")
 
     def _init_dataset_config(self):
         for ds in self.widget_config.get("datasets", []):
@@ -129,29 +137,30 @@ class FluxPlotter(
         # 🛡️ GLOBAL RESIZE GUARD: Don't process local resizes if the whole app is resizing.
         # This prevents "vibration" where the container and child fight for priority.
         if getattr(self.instance, "global_resizing", False):
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' skipping resize (global lock).", level="TRACE")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] GraphPlotter '{self.widget_id}' skipping resize (global lock).", level="TRACE")
             return
 
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' resize event: {event.width}x{event.height}", level="TRACE")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] GraphPlotter '{self.widget_id}' resize event: {event.width}x{event.height}", level="TRACE")
         
-        # 🛡️ ZERO-DIMENSION GUARD: Ignore events where one or both dimensions are 1px (common during layout initialization).
-        if event.width <= 1 or event.height <= 1:
+        # 🛡️ ZERO-DIMENSION GUARD: Ignore events where one or both dimensions are 0.
+        # Allowing 1px allows it to "wake up" from initialization states.
+        if event.width <= 0 or event.height <= 0:
             return
 
         last_w, last_h = getattr(self, "_last_resize_dim", (0, 0))
         
-        # 🛡️ JITTER FILTER: Increased threshold to 10px to stop minor rounding-error vibrations.
-        if abs(event.width - last_w) <= 10 and abs(event.height - last_h) <= 10: return
+        # 🛡️ JITTER FILTER: Threshold to stop minor rounding-error vibrations.
+        if abs(event.width - last_w) <= 2 and abs(event.height - last_h) <= 2: return
         
         self._last_resize_dim = (event.width, event.height)
         if hasattr(self, "_resize_timer") and self._resize_timer: self.after_cancel(self._resize_timer)
-        # Increased debounce to 350ms
-        self._resize_timer = self.after(350, lambda: self._perform_resize(event.width, event.height))
+        # ⚡ DEBOUNCE: Use 100ms for responsiveness while avoiding vibration
+        self._resize_timer = self.after(100, lambda: self._perform_resize(event.width, event.height))
 
     def _perform_resize(self, w, h):
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] FluxPlotter '{self.widget_id}' performing resize to {w}x{h}", level="DEBUG")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] GraphPlotter '{self.widget_id}' performing resize to {w}x{h}", level="DEBUG")
         self._resize_timer = None
-        if hasattr(self, "fig") and w > 1 and h > 1:
+        if hasattr(self, "fig") and w > 0 and h > 0:
             # ⚡ FIX: Use forward=False to prevent Matplotlib from pushing size changes back to Tkinter
             dpi = self.fig.get_dpi()
             self.fig.set_size_inches(w / dpi, h / dpi, forward=False)

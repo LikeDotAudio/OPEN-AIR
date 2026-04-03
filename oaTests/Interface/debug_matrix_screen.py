@@ -2,7 +2,7 @@
 from textual.app import ComposeResult
 from textual.screen import Screen
 from textual.widgets import Label, Checkbox, Button, Footer
-from textual.containers import Vertical, Container, ScrollableContainer
+from textual.containers import Vertical, Container, ScrollableContainer, Grid
 from oaTests.Managers.configIniEditor.manager import ConfigIniEditor
 
 class DebugMatrixScreen(Screen):
@@ -14,7 +14,7 @@ class DebugMatrixScreen(Screen):
     }
 
     #dialog {
-        width: 70;
+        width: 80;
         height: 45;
         background: #2b2b2b;
         border: thick #F4902C;
@@ -32,12 +32,21 @@ class DebugMatrixScreen(Screen):
         text-style: bold underline;
         color: #F4902C;
         margin-top: 1;
-        margin-bottom: 0;
+        margin-bottom: 1;
     }
 
     .matrix-item {
         margin-left: 2;
         color: #aaaaaa;
+        text-style: bold italic;
+        margin-top: 1;
+    }
+
+    .matrix-grid {
+        grid-size: 2;
+        grid-gutter: 1;
+        height: auto;
+        padding-left: 2;
     }
 
     #btn_close {
@@ -50,6 +59,7 @@ class DebugMatrixScreen(Screen):
     Checkbox {
         color: #e74c3c; /* Bright Red for False */
         background: transparent;
+        width: 100%;
     }
 
     Checkbox.-on {
@@ -68,25 +78,28 @@ class DebugMatrixScreen(Screen):
             with ScrollableContainer():
                 # 1. Global Debug Section
                 yield Label("GLOBAL DEBUG SETTINGS [Debug]", classes="section-label")
-                for key, val in setup["debug"].items():
-                    chk_id = f"chk_dbg_{key.lower()}"
-                    yield Checkbox(f"  {key.upper().replace('_', ' ')}", value=val, id=chk_id)
+                with Grid(classes="matrix-grid"):
+                    for key, val in setup["debug"].items():
+                        chk_id = f"chk_dbg_{key.lower()}"
+                        yield Checkbox(f"{key.upper().replace('_', ' ')}", value=val, id=chk_id)
 
                 # 2. Matrix Master Switch
                 yield Label("DEBUG MATRIX CONTROL", classes="section-label")
-                yield Checkbox("  MASTER MATRIX ENABLE", value=setup["master"], id="chk_master_debug")
+                yield Checkbox("MASTER MATRIX ENABLE", value=setup["master"], id="chk_master_debug")
                 
                 # 3. Systems
-                yield Label("  [u]Systems[/]", classes="matrix-item")
-                for sys_name, val in setup["systems"].items():
-                    chk_id = f"chk_sys_{sys_name.lower()}"
-                    yield Checkbox(f"  {sys_name}", value=val, id=chk_id)
+                yield Label("Systems", classes="matrix-item")
+                with Grid(classes="matrix-grid"):
+                    for sys_name, val in setup["systems"].items():
+                        chk_id = f"chk_sys_{sys_name.lower()}"
+                        yield Checkbox(f"{sys_name}", value=val, id=chk_id)
 
                 # 4. Elements
-                yield Label("  [u]Elements[/]", classes="matrix-item")
-                for el_name, val in setup["elements"].items():
-                    chk_id = f"chk_el_{el_name.lower()}"
-                    yield Checkbox(f"  {el_name}", value=val, id=chk_id)
+                yield Label("Elements", classes="matrix-item")
+                with Grid(classes="matrix-grid"):
+                    for el_name, val in setup["elements"].items():
+                        chk_id = f"chk_el_{el_name.lower()}"
+                        yield Checkbox(f"{el_name}", value=val, id=chk_id)
             
             yield Button("CLOSE & RETURN", id="btn_close", variant="success")
         yield Footer()
@@ -120,6 +133,8 @@ class DebugMatrixScreen(Screen):
             "chk_el_snmp": "element_snmp",
             "chk_el_midi": "element_midi",
             "chk_el_osc": "element_osc",
+            "chk_el_aes70": "element_aes70",
+            "chk_el_rest": "element_rest",
             "chk_el_builder": "element_gui_builder"
         }
         

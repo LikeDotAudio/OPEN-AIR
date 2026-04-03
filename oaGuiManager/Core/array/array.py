@@ -20,6 +20,7 @@ from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaGuiManager.Core.context.widget_context import WidgetContext
+from oaGuiBuildShell.Workers.async_grid_renderer import AsyncGridRenderer
 
 class ViewManager:
     def __init__(self, root_widget):
@@ -136,6 +137,7 @@ class BuilderArrayCreator(TransparencyMixin):
         # Get Data and Blueprint
         blueprint = config_data.get("blueprint", {})
         data_array = config_data.get("data", [])
+        blocks = config_data.get("blocks") or config_data.get("fields")
         layout_cols = config_data.get("layout_columns", 8)
         
         # ⚡ COMPOSITION FIX: Ensure we use an instance of this creator for internal helpers
@@ -160,31 +162,40 @@ class BuilderArrayCreator(TransparencyMixin):
 
         # 5. Construct fields and Inject Data
         synthetic_fields = {}
-        
-        # ⚡ OPTIMIZATION: Use orjson for deep copy of blueprint
-        blueprint_json = orjson.dumps(blueprint).decode()
+        current_path = config_data.get("path", "")
 
-        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🧱 ArrayCreator: Expanding blueprint for {len(data_array)} elements in {config_data.get('path', 'root')}", level="DEBUG")
+        if data_array:
+            # ⚡ OPTIMIZATION: Use orjson for deep copy of blueprint
+            blueprint_json = orjson.dumps(blueprint).decode()
 
-        for idx, item in enumerate(data_array):
-            item_id = item.get("id", f"item_{idx}")
-            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"  └─ 💠 Processing Array Element [{idx}]: ID='{item_id}'", level="TRACE")
-            
-            try:
-                item_config = orjson.loads(blueprint_json)
-            except Exception as e:
-                logger.error(f"  └─ ❌ FAILED to deep-copy blueprint for element {idx}: {e}")
-                continue
-            
-            # Inject generic data
-            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"    ├─ 💉 Injecting data contexts into element '{item_id}'", level="TRACE")
-            creator_instance._inject_data(item_config, item)
-            
-            # Pass ViewManager reference via a special key
-            creator_instance._inject_view_manager(item_config, view_manager)
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🧱 ArrayCreator: Expanding blueprint for {len(data_array)} elements in {config_data.get('path', 'root')}", level="DEBUG")
 
-            synthetic_fields[str(item_id)] = item_config
-            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"    └─ ✅ Element '{item_id}' ready for batch build.", level="TRACE")
+            for idx, item in enumerate(data_array):
+                item_id = item.get("id", f"item_{idx}")
+                matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"  └─ 💠 Processing Array Element [{idx}]: ID='{item_id}'", level="TRACE")
+                
+                try:
+                    item_config = orjson.loads(blueprint_json)
+                except Exception as e:
+                    logger.error(f"  └─ ❌ FAILED to deep-copy blueprint for element {idx}: {e}")
+                    continue
+                
+                # Inject generic data
+                matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"    ├─ 💉 Injecting data contexts into element '{item_id}'", level="TRACE")
+                creator_instance._inject_data(item_config, item)
+                
+                # Pass ViewManager reference via a special key
+                creator_instance._inject_view_manager(item_config, view_manager)
+
+                synthetic_fields[str(item_id)] = item_config
+                matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"    └─ ✅ Element '{item_id}' ready for batch build.", level="TRACE")
+        elif blocks:
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🧱 ArrayCreator: No data array, but found 'blocks' or 'fields' in {current_path}. Using structural render.", level="DEBUG")
+            synthetic_fields = blocks
+        else:
+             matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🧱 ArrayCreator: No data and no blocks found in {current_path}.", level="WARNING")
+             if on_complete: on_complete()
+             return main_container
 
         # 6. Create configuration for batch builder
         container_config = {
@@ -196,7 +207,6 @@ class BuilderArrayCreator(TransparencyMixin):
             "layout": config_data.get("layout", {}) 
         }
         
-        current_path = config_data.get("path", "")
         matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🚀 ArrayCreator: Handing off synthetic container '{current_path}' to BatchBuilder...", level="DEBUG")
         builder_instance._create_dynamic_widgets(
             grid_container, container_config, 

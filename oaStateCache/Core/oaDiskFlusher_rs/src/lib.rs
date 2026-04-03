@@ -17,19 +17,23 @@ struct DiskFlusher {
 impl DiskFlusher {
     /// Recursively converts a Python object to a serde_json::Value.
     /// This MUST be called while holding the GIL.
-    fn py_to_value(&self, obj: &Bound<'_, PyAny>) -> PyResult<Value> {
+    fn py_to_value(&self, obj: &Bound<'_, PyAny>, depth: usize) -> PyResult<Value> {
+        if depth > 100 {
+            return Ok(Value::String("<RECURSION_LIMIT>".to_string()));
+        }
+
         if let Ok(dict) = obj.downcast::<PyDict>() {
             let mut map = Map::new();
             for (key, val) in dict.iter() {
                 let k_str = key.to_string();
-                let v_val = self.py_to_value(&val)?;
+                let v_val = self.py_to_value(&val, depth + 1)?;
                 map.insert(k_str, v_val);
             }
             Ok(Value::Object(map))
         } else if let Ok(list) = obj.downcast::<PyList>() {
             let mut vec = Vec::new();
             for item in list.iter() {
-                vec.push(self.py_to_value(&item)?);
+                vec.push(self.py_to_value(&item, depth + 1)?);
             }
             Ok(Value::Array(vec))
         } else if let Ok(s) = obj.downcast::<PyString>() {
@@ -71,7 +75,7 @@ impl DiskFlusher {
     /// Asynchronously diffs, serializes, and flushes the state to disk.
     fn flush_async(&mut self, _py: Python<'_>, data: Bound<'_, PyDict>, filepath: String) -> PyResult<()> {
         // 1. Convert PyDict to Value (GIL required)
-        let new_state = self.py_to_value(&data.as_any())?;
+        let new_state = self.py_to_value(&data.as_any(), 0)?;
 
         // 2. Diffing logic
         if let Some(ref last) = self.last_state {

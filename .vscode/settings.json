@@ -4,5 +4,139 @@
         "."
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "folder-customization.folders": [
+        {
+            "path": "OPEN-AIR/oaConfiguration/",
+            "color": "foldercustomization.AnsiColor19"
+        },
+        {
+            "path": "OPEN-AIR/oaComAES70/",
+            "badge": "☎️"
+        },
+        {
+            "path": "OPEN-AIR/oaComBroker/",
+            "badge": "☎️"
+        },
+        {
+            "path": "OPEN-AIR/oaComEmber/",
+            "badge": "☎️"
+        },
+        {
+            "path": "OPEN-AIR/oaComMidi/",
+            "badge": "☎️"
+        },
+        {
+            "path": "OPEN-AIR/oaComMQTT/",
+            "badge": "☎️"
+        },
+        {
+            "path": "OPEN-AIR/oaComOSC/",
+            "badge": "☎️"
+        },
+        {
+            "path": "OPEN-AIR/oaComREST/",
+            "badge": "☎️"
+        },
+        {
+            "path": "OPEN-AIR/oaComSMPTE2138/",
+            "badge": "☎️"
+        },
+        {
+            "path": "OPEN-AIR/oaComSNMP/",
+            "badge": "☎️"
+        },
+        {
+            "path": "OPEN-AIR/oaComVisa/",
+            "badge": "☎️"
+        },
+        {
+            "path": "OPEN-AIR/oaGuiBackground/",
+            "badge": "🪟"
+        },
+        {
+            "path": "OPEN-AIR/oaGuiDefinitions/",
+            "badge": "🪟"
+        },
+        {
+            "path": "OPEN-AIR/oaGuiBuildShell/",
+            "badge": "🪟"
+        },
+        {
+            "path": "OPEN-AIR/oaGuiBuilder/",
+            "badge": "🪟"
+        },
+        {
+            "path": "OPEN-AIR/oaGuiEditorWYSIWYG/",
+            "badge": "🪟"
+        },
+        {
+            "path": "OPEN-AIR/oaGuiElements/",
+            "badge": "🪟"
+        },
+        {
+            "path": "OPEN-AIR/oaGuiFolderParser/",
+            "badge": "🪟"
+        },
+        {
+            "path": "OPEN-AIR/oaGuiManager/",
+            "badge": "🪟"
+        },
+        {
+            "path": "OPEN-AIR/oaGuiMediaElements/",
+            "badge": "🪟"
+        },
+        {
+            "path": "OPEN-AIR/oaGuiShowtime/",
+            "badge": "🪟"
+        },
+        {
+            "path": "OPEN-AIR/oaGuiTelemetry/",
+            "badge": "🪟"
+        },
+        {
+            "path": "OPEN-AIR/oaGuiSplashScreen/",
+            "badge": "🪟"
+        },
+        {
+            "path": "OPEN-AIR/oaConfiguration/__pycache__/",
+            "color": "foldercustomization.AnsiColor19"
+        },
+        {
+            "path": "OPEN-AIR/oaConfiguration/Assets/",
+            "color": "foldercustomization.AnsiColor19"
+        },
+        {
+            "path": "OPEN-AIR/oaConfiguration/Constants/",
+            "color": "foldercustomization.AnsiColor19"
+        },
+        {
+            "path": "OPEN-AIR/oaConfiguration/Core/",
+            "color": "foldercustomization.AnsiColor19"
+        },
+        {
+            "path": "OPEN-AIR/oaConfiguration/Documentation/",
+            "color": "foldercustomization.AnsiColor19"
+        },
+        {
+            "path": "OPEN-AIR/oaConfiguration/FileReaders/",
+            "color": "foldercustomization.AnsiColor19"
+        },
+        {
+            "path": "OPEN-AIR/oaConfiguration/FileWriters/",
+            "color": "foldercustomization.AnsiColor19"
+        },
+        {
+            "path": "OPEN-AIR/oaConfiguration/Hooks/",
+            "color": "foldercustomization.AnsiColor19"
+        },
+        {
+            "path": "OPEN-AIR/oaConfiguration/Interface/",
+            "color": "foldercustomization.AnsiColor19"
+        },
+        {
+            "path": "OPEN-AIR/oaConfiguration/Managers/",
+            "color": "foldercustomization.AnsiColor19"
+        }
+    ]
 }

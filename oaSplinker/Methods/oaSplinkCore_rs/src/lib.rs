@@ -4,7 +4,7 @@
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList, PyInt};
-use pyo3::IntoPyObjectExt;
+use pyo3::IntoPyAnyExt;
 
 #[derive(Clone, Debug)]
 enum HandlerType {
@@ -89,7 +89,7 @@ impl SplinkPipeline {
         Ok(SplinkPipeline { handlers })
     }
 
-    fn process(&self, mut value: PyObject, _splink: &Bound<'_, PyDict>, state: &Bound<'_, PyDict>, direction: String) -> PyResult<Option<PyObject>> {
+    fn process(&self, mut value: Py<PyAny>, _splink: &Bound<'_, PyDict>, state: &Bound<'_, PyDict>, direction: String) -> PyResult<Option<Py<PyAny>>> {
         let py = state.py();
 
         for handler in &self.handlers {

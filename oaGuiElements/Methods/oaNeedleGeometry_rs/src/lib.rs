@@ -119,7 +119,7 @@ impl NeedleGeometry {
             _ => (Vec::new(), false),
         };
 
-        let flat_pts = PyList::empty_bound(py);
+        let flat_pts = PyList::empty(py);
         for (px, py_val) in pts {
             let _ = flat_pts.append(cx + px);
             let _ = flat_pts.append(cy - py_val);
@@ -159,8 +159,8 @@ impl NeedleGeometry {
         let tip_x = cx + length * angle_rad.cos();
         let tip_y = cy - length * angle_rad.sin();
 
-        let result = PyDict::new_bound(py);
-        let coords_list = PyList::empty_bound(py);
+        let result = PyDict::new(py);
+        let coords_list = PyList::empty(py);
         
         let get_shadow_pt = |px: f64, py_val: f64| -> (f64, f64) {
             let d = ((px - cx).powi(2) + (py_val - cy).powi(2)).sqrt();

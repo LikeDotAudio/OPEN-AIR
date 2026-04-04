@@ -30,8 +30,8 @@ fn get_message_type(m_id: u8) -> &'static str {
 }
 
 #[pyfunction]
-fn parse_packet(py: Python, payload: &[u8], src_ip: String, dst_ip: String, udp_port: u16) -> PyResult<PyObject> {
-    let dict = PyDict::new_bound(py);
+fn parse_packet(py: Python, payload: &[u8], src_ip: String, dst_ip: String, udp_port: u16) -> PyResult<Py<PyAny>> {
+    let dict = PyDict::new(py);
     
     let now = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs_f64();
     dict.set_item("timestamp", now)?;

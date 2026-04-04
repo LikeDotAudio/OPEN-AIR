@@ -7,17 +7,17 @@ use pyo3::types::{PyDict, PyList};
 use scraper::{Html, Selector};
 
 #[pyfunction]
-fn scrape_tables(py: Python<'_>, html_content: String) -> PyResult<PyObject> {
+fn scrape_tables(py: Python<'_>, html_content: String) -> PyResult<Py<PyAny>> {
     let document = Html::parse_document(&html_content);
     let table_selector = Selector::parse("table").unwrap();
     let row_selector = Selector::parse("tr").unwrap();
     let cell_selector = Selector::parse("th, td").unwrap();
 
-    let all_tables = PyList::empty_bound(py);
+    let all_tables = PyList::empty(py);
 
     for table in document.select(&table_selector) {
         let mut headers = Vec::new();
-        let rows_list = PyList::empty_bound(py);
+        let rows_list = PyList::empty(py);
         
         for (i, row) in table.select(&row_selector).enumerate() {
             let cells: Vec<_> = row.select(&cell_selector).collect();
@@ -29,7 +29,7 @@ fn scrape_tables(py: Python<'_>, html_content: String) -> PyResult<PyObject> {
                     headers.push(cell.text().collect::<Vec<_>>().join(" ").trim().to_string());
                 }
             } else {
-                let row_dict = PyDict::new_bound(py);
+                let row_dict = PyDict::new(py);
                 for (j, cell) in cells.iter().enumerate() {
                     let text = cell.text().collect::<Vec<_>>().join(" ").trim().to_string();
                     let header = headers.get(j).cloned().unwrap_or_else(|| format!("col_{}", j));

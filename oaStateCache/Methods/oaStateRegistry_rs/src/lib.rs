@@ -5,7 +5,7 @@
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList};
 use dashmap::DashMap;
-use pyo3::IntoPyObjectExt;
+use pyo3::IntoPyAnyExt;
 
 #[pyclass]
 struct StateRegistryCore {

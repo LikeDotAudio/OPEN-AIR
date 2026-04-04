@@ -51,8 +51,10 @@ class SetupManager:
     Core manager for the OPEN-AIR installation process.
     Orchestrates dependency checks and system infrastructure deployment.
     """
-    def __init__(self, debug=True):
+    def __init__(self, project_root=None, debug=True):
         self.debug = debug
+        self.project_root = project_root or PROJECT_ROOT
+        matrix_log("core", "setup", "__init__", f"🛠️⚙️📦 [SETUP] SetupManager initialized with project_root: {self.project_root}", "DEBUG")
     def check_dependencies(self, callback=None, auto_install=True, clean_install=False):
         """
         Invokes the automated dependency checker.
@@ -119,7 +121,7 @@ class SetupManager:
             snmp_mgr.tree_builder.generate_master_script()
             installer_bash = snmp_mgr.get_installer_script()
             
-            installer_path = os.path.join(self.project_root, "oaDataSNMP", "snmp_install_tmp.sh")
+            installer_path = os.path.join(getattr(self, 'project_root', PROJECT_ROOT), "oaDataSNMP", "snmp_install_tmp.sh")
             os.makedirs(os.path.dirname(installer_path), exist_ok=True)
             
             with open(installer_path, "w") as f:
@@ -129,7 +131,7 @@ class SetupManager:
             # 3. Execute the installer
             if callback: callback("⚙️ [CONFIG] Applying master OID tree configuration...")
             # We must run this as root since it touches /etc/snmp/
-            subprocess.run(['sudo', installer_path], cwd=self.project_root, check=True)
+            subprocess.run(['sudo', installer_path], cwd=getattr(self, 'project_root', PROJECT_ROOT), check=True)
             
             if callback: callback("✨ [SUCCESS] SNMP infrastructure deployed and configured.")
             return True
@@ -142,7 +144,7 @@ class SetupManager:
         Installs the application's desktop entry and pins it to the taskbar.
         """
         # TaskBarIcon.py is located in the sibling Core directory
-        taskbar_script = os.path.join(self.project_root, "oaInstallation", "Core", "TaskBarIcon.py")
+        taskbar_script = os.path.join(getattr(self, 'project_root', PROJECT_ROOT), "oaInstallation", "Core", "TaskBarIcon.py")
         
         if not os.path.exists(taskbar_script):
             error_msg = f"Error: {taskbar_script} not found."
@@ -161,7 +163,7 @@ class SetupManager:
 
 def main():
     """Primary entry point for the Setup utility."""
-    manager = SetupManager()
+    manager = SetupManager(project_root=PROJECT_ROOT)
     
     matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🛠️⚙️📦 [SETUP] Starting Stage: {STAGE_PYTHON_DEPS}", "INFO")
     if not manager.check_dependencies():

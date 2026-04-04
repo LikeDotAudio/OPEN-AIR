@@ -31,23 +31,26 @@ import os
 import re
 from pathlib import Path
 from loguru import logger
+
+# --- Native Rust Acceleration ---
+from .oaDebugToggler_rs.compiler_hook import ensure_compiled
+try:
+    ensure_compiled()
+    from oadebugtoggler_rs import toggle_debug_flags_rs as toggle_debug_flags_rs_native
+    RUST_ENABLED = True
+except ImportError:
+    RUST_ENABLED = False
+    logger.warning("⚠️ [CONFIG] oadebugtoggler_rs not found. Falling back to slow Python traversal.")
+except Exception as e:
+    RUST_ENABLED = False
+    logger.error(f"❌ [CONFIG] Rust debug toggler initialization failed: {e}")
+
 LOCAL_DEBUG = True
 
 def _set_debug_state(project_root, target_state: bool, console_print_func=None):
     """
     Scans the codebase and forces all debug flags to the specified state.
-
-    Inputs:
-        project_root (Path): The starting directory for the recursive scan.
-        target_state (bool): The desired value (True/False) for debug flags.
-        console_print_func (callable, optional): Custom output handler.
-
-    Outputs:
-        bool: True if flags were changed, False if no modifications occurred.
-
-    Side Effects:
-        - Performs recursive file I/O across the target directory.
-        - Directly modifies source code on disk.
+    Utilizes Rust-native acceleration if available.
     """
     def log(msg):
         if console_print_func: console_print_func(msg)
@@ -57,6 +60,19 @@ def _set_debug_state(project_root, target_state: bool, console_print_func=None):
     action = "ENABLING" if target_state else "DISABLING"
     log(f"🛠️ [CONFIG] Forcing all debug gates to {target_state_str.upper()}...")
 
+    if RUST_ENABLED:
+        try:
+            # Call the Rust implementation
+            modified = toggle_debug_flags_rs_native(str(project_root), target_state)
+            if modified:
+                log(f"🚀 [DEPLOY] {action} complete (Native Rust accelerated).")
+                return True
+            log(f"🛌 [SLEEPING] No state change needed (Native Rust accelerated).")
+            return False
+        except Exception as e:
+            logger.error(f"⚠️ [CONFIG] Rust execution failed: {e}. Falling back to Python...")
+
+    # --- Python Fallback Implementation ---
     # Pattern captures: LOCAL_DEBUG, BUILDER_DEBUG, or generic DEBUG assignments
     pattern = re.compile(
         r'^(\s*(?:LOCAL_|BUILDER_)?[A-Z_]*DEBUG\s*=\s*)(True|False)(.*)$', 
@@ -84,7 +100,7 @@ def _set_debug_state(project_root, target_state: bool, console_print_func=None):
                 continue
 
             replacements_made = 0
-            def replacement(match):
+            def _debug_mode_wrapper(match):
                 nonlocal replacements_made
                 current_value = match.group(2)
                 # Only replace if the state is different to avoid disk churn
@@ -93,7 +109,7 @@ def _set_debug_state(project_root, target_state: bool, console_print_func=None):
                     return f"{match.group(1)}{target_state_str}{match.group(3)}"
                 return match.group(0)
 
-            new_content = pattern.sub(replacement, content)
+            new_content = pattern.sub(_debug_mode_wrapper, content)
             
             if replacements_made > 0:
                 with open(file_path, 'w', encoding='utf-8') as f:

@@ -62,7 +62,7 @@ class DirectoryBuilderMixin:
 
     def _build_from_directory(self, path: pathlib.Path, parent_widget, on_complete=None, layout_override=None):
         """Recursively builds the GUI."""
-        matrix_log("ui", "gui_shell", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🏗️ [BUILDER] Starting build for: {path}", "DEBUG")
+        matrix_log("gui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🏗️ [BUILDER] Starting build for: {path}", "DEBUG")
         if isinstance(path, str): path = pathlib.Path(path)
         if hasattr(self, 'root') and self.root: self.root.update()
 
@@ -74,6 +74,8 @@ class DirectoryBuilderMixin:
         
         layout_type = layout_info["type"]
         layout_data = layout_info["data"]
+        
+        matrix_log("gui", "gui_builder", "_build_from_directory", f"🏗️ [BUILDER] Path: {path} | Type: {layout_type}", "INFO")
 
         if layout_type == "error":
             logger.error(f"❌🔴 Layout parsing failed for {path}: {layout_data.get('error_message')}")
@@ -83,14 +85,17 @@ class DirectoryBuilderMixin:
         try:
             if layout_type in ["horizontal_split", "vertical_split"]:
                 orientation = layout_data.get("orientation", tk.HORIZONTAL if layout_type == "horizontal_split" else tk.VERTICAL)
+                matrix_log("gui", "gui_builder", "_build_from_directory", f"🏗️ [BUILDER] Creating SplitPane (Orient: {orientation})", "DEBUG")
                 paned_window = ttk.PanedWindow(parent_widget, orient=orientation)
                 paned_window.pack(fill=tk.BOTH, expand=True)
 
                 panels = layout_data.get("panels", [])
                 panel_frames = [tk.Frame(paned_window, borderwidth=0, relief="flat", bg=self.theme_colors["bg"]) for _ in panels]
                 for i, frame in enumerate(panel_frames):
-                    weight = panels[i].get("weight", 1)
-                    paned_window.add(frame, weight=weight)
+                    weight = int(panels[i].get("weight", 1))
+                    matrix_log("gui", "gui_builder", "_build_from_directory", f"  ├─ Adding Panel {i}: Path={panels[i]['path']}, Weight={weight}", "TRACE")
+                    paned_window.add(frame)
+                    paned_window.pane(frame, weight=weight)
 
                 def _process_panels(idx=0):
                     if idx >= len(panels):
@@ -99,6 +104,7 @@ class DirectoryBuilderMixin:
                     if hasattr(self, 'root') and self.root: self.root.update()
                     panel_path = panels[idx]["path"]
                     frame = panel_frames[idx]
+                    matrix_log("gui", "gui_builder", "_build_from_directory", f"  └─ Building Panel Content: {panel_path}", "DEBUG")
                     self._build_from_directory(path=panel_path, parent_widget=frame, on_complete=lambda: _process_panels(idx + 1))
 
                 self.after(1, lambda: _process_panels(0))

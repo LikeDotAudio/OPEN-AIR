@@ -8,7 +8,7 @@ name = "oafastapi_rs"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = { version = "0.21.0", features = ["extension-module"] }
+pyo3 = { version = "0.27.0", features = ["extension-module"] }
 axum = "0.7"
 tokio = { version = "1.0", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }

@@ -8,6 +8,6 @@ name = "oamidimapper_rs"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = { version = "0.23.3", features = ["extension-module"] }
+pyo3 = { version = "0.27.0", features = ["extension-module"] }
 regex = "1.10"
 once_cell = "1.19"

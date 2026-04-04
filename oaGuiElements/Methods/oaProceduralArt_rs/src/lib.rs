@@ -22,7 +22,7 @@ impl ProceduralArtEngine {
 
     /// Generates a high-fidelity procedural Robertson screw head.
     /// Returns raw RGBA bytes.
-    fn generate_screw(&self, py: Python<'_>, size: u32, config: &Bound<'_, PyDict>) -> PyResult<(PyObject, u32)> {
+    fn generate_screw(&self, py: Python<'_>, size: u32, config: &Bound<'_, PyDict>) -> PyResult<(Py<PyAny>, u32)> {
         let padding = (size as f64 * 0.4) as u32;
         let canvas_dim = size + padding * 2;
         let center = canvas_dim as f64 / 2.0;
@@ -137,7 +137,7 @@ impl ProceduralArtEngine {
             }
         }
 
-        Ok((PyBytes::new_bound(py, img.as_raw()).into(), canvas_dim))
+        Ok((PyBytes::new(py, img.as_raw()).into(), canvas_dim))
     }
 
     /// Calculates coordinates for circular scale ticks using native trig math.
@@ -149,7 +149,7 @@ impl ProceduralArtEngine {
                                 min_val: f64, max_val: f64,
                                 start_angle_deg: f64, end_angle_deg: f64, extent_deg: f64,
                                 tick_start_radius: f64, tick_length: f64,
-                                counter_clockwise: bool) -> PyResult<PyObject> {
+                                counter_clockwise: bool) -> PyResult<Py<PyAny>> {
         
         let range_val = max_val - min_val;
         let mut results = Vec::new();
@@ -176,7 +176,7 @@ impl ProceduralArtEngine {
             results.push((x_start, y_start, x_end, y_end));
         }
 
-        Ok(results.into_py(py))
+        Ok(results.into_py_any(py)?)
     }
 
     fn convert_hex_to_rgb(&self, hex_string: &str) -> [u8; 3] {
@@ -192,5 +192,8 @@ impl ProceduralArtEngine {
 #[pymodule]
 fn oaproceduralart_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<ProceduralArtEngine>()?;
+    Ok(())
+}
+>()?;
     Ok(())
 }

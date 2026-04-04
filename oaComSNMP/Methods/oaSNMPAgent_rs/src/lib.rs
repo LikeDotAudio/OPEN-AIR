@@ -33,14 +33,14 @@ impl SnmpAgent {
         tree.get(&parsed_oid).cloned()
     }
 
-    fn get_next(&self, py: Python<'_>, oid: String) -> Option<PyObject> {
+    fn get_next(&self, py: Python<'_>, oid: String) -> Option<Py<PyAny>> {
         let tree = self.tree.lock().unwrap();
         let parsed_oid = parse_oid(&oid);
         
         // Find the first OID strictly greater than the target
         for (o, v) in tree.range(parsed_oid.clone()..) {
             if o > &parsed_oid {
-                let dict = PyDict::new_bound(py);
+                let dict = PyDict::new(py);
                 let _ = dict.set_item("oid", format_oid(o));
                 let _ = dict.set_item("value", v);
                 return Some(dict.into());

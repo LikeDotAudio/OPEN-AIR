@@ -8,7 +8,8 @@
     "folder-customization.folders": [
         {
             "path": "OPEN-AIR/oaConfiguration/",
-            "color": "foldercustomization.AnsiColor19"
+            "color": "foldercustomization.AnsiColor19",
+            "badge": "📂"
         },
         {
             "path": "OPEN-AIR/oaComAES70/",
@@ -137,6 +138,70 @@
         {
             "path": "OPEN-AIR/oaConfiguration/Managers/",
             "color": "foldercustomization.AnsiColor19"
+        },
+        {
+            "path": "OPEN-AIR/oaDataLogs/",
+            "badge": "📂"
+        },
+        {
+            "path": "OPEN-AIR/oaDataCache/",
+            "badge": "📂"
+        },
+        {
+            "path": "OPEN-AIR/oaDataAudits/",
+            "badge": "📂"
+        },
+        {
+            "path": "OPEN-AIR/oaTests/",
+            "badge": "🧪"
+        },
+        {
+            "path": "OPEN-AIR/oaTests/Assets/",
+            "badge": "🧪"
+        },
+        {
+            "path": "OPEN-AIR/oaTests/Constants/",
+            "badge": "🧪"
+        },
+        {
+            "path": "OPEN-AIR/oaTests/Core/",
+            "badge": "🧪"
+        },
+        {
+            "path": "OPEN-AIR/oaTests/Documentation/",
+            "badge": "🧪"
+        },
+        {
+            "path": "OPEN-AIR/oaTests/FileReaders/",
+            "badge": "🧪"
+        },
+        {
+            "path": "OPEN-AIR/oaTests/FileWriters/",
+            "badge": "🧪"
+        },
+        {
+            "path": "OPEN-AIR/oaTests/Hooks/",
+            "badge": "🧪"
+        },
+        {
+            "path": "OPEN-AIR/oaTests/Interface/",
+            "badge": "🧪"
+        },
+        {
+            "path": "OPEN-AIR/oaTests/Managers/",
+            "badge": "🧪"
+        },
+        {
+            "path": "OPEN-AIR/oaTests/Methods/",
+            "badge": "🧪"
+        },
+        {
+            "path": "OPEN-AIR/oaTests/Tests/",
+            "badge": "🧪"
+        },
+        {
+            "path": "OPEN-AIR/oaTests/Workers/",
+            "badge": "🧪"
         }
     ]
 }

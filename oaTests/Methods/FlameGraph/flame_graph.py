@@ -29,6 +29,14 @@ import sys
 import re
 import importlib.util
 
+# --- Constants for Magic Numbers ---
+DEFAULT_RECURSION_LIMIT = 50000
+MIN_EXECUTION_TIME = 0.000001
+DEFAULT_THRESHOLD = 0.001
+FLAMEGRAPH_STANDARD_WIDTH = 1200 # Standard width for flame graphs
+FLAMEGRAPH_WIDTH_MULTIPLIER = 5  # Multiplier for high-resolution graphs
+# --- End Constants ---
+
 # Check if flameprof is available without exceptions
 _flameprof_spec = importlib.util.find_spec("flameprof")
 if _flameprof_spec:
@@ -49,7 +57,7 @@ def generate_flamegraph_with_flameprof(ps, output_svg):
 
     ps.strip_dirs()
     old_limit = sys.getrecursionlimit()
-    sys.setrecursionlimit(50000)
+    sys.setrecursionlimit(DEFAULT_RECURSION_LIMIT)
 
     stats = ps.stats
     total_tottime = 0
@@ -70,17 +78,17 @@ def generate_flamegraph_with_flameprof(ps, output_svg):
         new_callers = {}
         for c_func, c_data in callers.items():
             c_cc, c_nc, c_tt, c_ct = c_data
-            new_callers[c_func] = (c_cc, c_nc, c_tt, max(c_ct, 0.000001))
+            new_callers[c_func] = (c_cc, c_nc, c_tt, max(c_ct, MIN_EXECUTION_TIME))
         
         if not new_callers or func in roots:
-            new_callers[vroot] = (cc, nc, tt, max(ct, 0.000001))
+            new_callers[vroot] = (cc, nc, tt, max(ct, MIN_EXECUTION_TIME))
         stats[func] = (cc, nc, tt, ct, new_callers)
     
-    stats[vroot] = (1, 1, 0, max(total_tottime, 0.000001), {})
+    stats[vroot] = (1, 1, 0, max(total_tottime, MIN_EXECUTION_TIME), {})
 
     out = io.StringIO()
     # Increased width to 6000 (5x standard) for better resolution
-    flameprof.render(ps.stats, out, width=6000, threshold=0.001)
+    flameprof.render(ps.stats, out, width=FLAMEGRAPH_STANDARD_WIDTH * FLAMEGRAPH_WIDTH_MULTIPLIER, threshold=DEFAULT_THRESHOLD)
     svg_content = out.getvalue()
     
     if not svg_content.strip(): 

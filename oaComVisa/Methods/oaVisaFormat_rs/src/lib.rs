@@ -15,16 +15,16 @@ impl VisaFormatter {
         VisaFormatter
     }
 
-    fn format_command(&self, py: Python<'_>, cmd: String, value: f64) -> PyObject {
+    fn format_command(&self, py: Python<'_>, cmd: String, value: f64) -> Py<PyAny> {
         // SCPI commands usually end with a newline \n
         let formatted = format!("{} {:e}\n", cmd, value);
-        PyBytes::new_bound(py, formatted.as_bytes()).into()
+        PyBytes::new(py, formatted.as_bytes()).into()
     }
 
-    fn format_bool(&self, py: Python<'_>, cmd: String, value: bool) -> PyObject {
+    fn format_bool(&self, py: Python<'_>, cmd: String, value: bool) -> Py<PyAny> {
         let val_str = if value { "1" } else { "0" };
         let formatted = format!("{} {}\n", cmd, val_str);
-        PyBytes::new_bound(py, formatted.as_bytes()).into()
+        PyBytes::new(py, formatted.as_bytes()).into()
     }
 }
 

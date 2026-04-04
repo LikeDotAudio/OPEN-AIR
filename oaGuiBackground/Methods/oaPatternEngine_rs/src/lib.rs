@@ -1,9 +1,9 @@
 // oaGuiBackground/Methods/oaPatternEngine_rs/src/lib.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2300.3
+// Version: 20260331.2300.4
 
 use pyo3::prelude::*;
-use pyo3::types::{PyBytes, PyDict};
+use pyo3::types::{PyBytes, PyDict, PyList};
 use image::{Rgba, RgbaImage, GrayImage, Luma, imageops};
 use rand::{Rng, SeedableRng};
 use rand::rngs::StdRng;
@@ -22,7 +22,7 @@ impl PatternEngine {
     }
 
     /// Generates directional streaks (brushed metal effect).
-    fn generate_streaks(&self, py: Python<'_>, width: u32, height: u32, vertical: bool, sigma: f64, seed: u32) -> PyObject {
+    fn generate_streaks(&self, py: Python<'_>, width: u32, height: u32, vertical: bool, sigma: f64, seed: u32) -> Py<PyAny> {
         let perlin = Perlin::new(seed);
 
         let (src_w, src_h) = if vertical {
@@ -46,11 +46,11 @@ impl PatternEngine {
             *pixel = Rgba([gray, gray, gray, 255]);
         }
 
-        PyBytes::new_bound(py, rgba.as_raw()).into()
+        PyBytes::new(py, rgba.as_raw()).into()
     }
 
     /// Generates a hammered metal texture.
-    fn generate_hammered(&self, py: Python<'_>, width: u32, height: u32, seed: u32) -> PyObject {
+    fn generate_hammered(&self, py: Python<'_>, width: u32, height: u32, seed: u32) -> Py<PyAny> {
         let raw_pixels: Vec<u8> = (0..height).into_par_iter().flat_map(|y| {
             let mut row = Vec::with_capacity((width * 4) as usize);
             let perlin_inner = Perlin::new(seed);
@@ -68,10 +68,10 @@ impl PatternEngine {
             row
         }).collect();
 
-        PyBytes::new_bound(py, &raw_pixels).into()
+        PyBytes::new(py, &raw_pixels).into()
     }
 
-    fn generate_vignette(&self, py: Python<'_>, width: u32, height: u32, intensity: f64, depth: u32) -> PyObject {
+    fn generate_vignette(&self, py: Python<'_>, width: u32, height: u32, intensity: f64, depth: u32) -> Py<PyAny> {
         let mut img = RgbaImage::new(width, height);
         let depth_f = depth as f64;
         
@@ -98,10 +98,10 @@ impl PatternEngine {
             }
         }
 
-        PyBytes::new_bound(py, img.as_raw()).into()
+        PyBytes::new(py, img.as_raw()).into()
     }
 
-    fn generate_scratches(&self, py: Python<'_>, width: u32, height: u32, config: &Bound<'_, PyDict>) -> PyResult<PyObject> {
+    fn generate_scratches(&self, py: Python<'_>, width: u32, height: u32, config: &Bound<'_, PyDict>) -> PyResult<Py<PyAny>> {
         let intensity: f64 = config.get_item("intensity")?.and_then(|v| v.extract().ok()).unwrap_or(0.4);
         let count: u32 = config.get_item("count")?.and_then(|v| v.extract().ok()).unwrap_or(25);
         let min_len: u32 = config.get_item("min_length_px")?.and_then(|v| v.extract().ok()).unwrap_or(20);
@@ -112,64 +112,34 @@ impl PatternEngine {
         let mut rng = StdRng::from_entropy();
         
         for _ in 0..count {
-            let x1 = rng.gen_range(0..width) as f64;
-            let y1 = rng.gen_range(0..height) as f64;
-            let length = rng.gen_range(min_len..max_len) as f64;
+            let x1 = rng.gen_range(0.0..(width as f64));
+            let y1 = rng.gen_range(0.0..(height as f64));
+            let length = rng.gen_range((min_len as f64)..(max_len as f64));
             let angle = rng.gen_range(0.0..(2.0 * PI));
             
             let x2 = x1 + length * angle.cos();
             let y2 = y1 + length * angle.sin();
             
-            // Draw line (simple implementation without a full drawing lib for now, 
-            // or we could use the 'imageproc' crate)
-            self.draw_line(&mut img, x1, y1, x2, y2, [0, 0, 0, (255.0 * intensity) as u8]);
-            self.draw_line(&mut img, x1 + 1.0, y1 + 1.0, x2 + 1.0, y2 + 1.0, [255, 255, 255, (255.0 * intensity * depth_highlight) as u8]);
+            self.internal_draw_line(&mut img, x1, y1, x2, y2, [0, 0, 0, (255.0 * intensity) as u8]);
+            self.internal_draw_line(&mut img, x1 + 1.0, y1 + 1.0, x2 + 1.0, y2 + 1.0, [255, 255, 255, (255.0 * intensity * depth_highlight) as u8]);
         }
 
-        Ok(PyBytes::new_bound(py, img.as_raw()).into())
+        Ok(PyBytes::new(py, img.as_raw()).into())
     }
 
-    fn draw_line(&self, img: &mut RgbaImage, x1: f64, y1: f64, x2: f64, y2: f64, color: [u8; 4]) {
-        let dx = (x2 - x1).abs();
-        let dy = (y2 - y1).abs();
-        let sx = if x1 < x2 { 1.0 } else { -1.0 };
-        let sy = if y1 < y2 { 1.0 } else { -1.0 };
-        let mut err = dx - dy;
-
-        let mut x = x1;
-        let mut y = y1;
-
-        loop {
-            if x >= 0.0 && x < img.width() as f64 && y >= 0.0 && y < img.height() as f64 {
-                img.put_pixel(x as u32, y as u32, Rgba(color));
-            }
-
-            if (x - x2).abs() < 0.1 && (y - y2).abs() < 0.1 { break; }
-            let e2 = 2.0 * err;
-            if e2 > -dy {
-                err -= dy;
-                x += sx;
-            }
-            if e2 < dx {
-                err += dx;
-                y += sy;
-            }
-        }
-    }
-
-    fn generate_metal_fold(&self, py: Python<'_>, width: u32, height: u32, config: &Bound<'_, PyDict>) -> PyResult<PyObject> {
+    fn generate_metal_fold(&self, py: Python<'_>, width: u32, height: u32, config: &Bound<'_, PyDict>) -> PyResult<Py<PyAny>> {
         let mut img = RgbaImage::new(width, height);
         let thickness: u32 = config.get_item("width_px")?.and_then(|v| v.extract().ok()).unwrap_or(20);
         
-        let creases: Bound<'_, PyList> = config.get_item("creases")?.and_then(|v| v.downcast_into::<PyList>().ok()).unwrap_or_else(|| PyList::empty_bound(py));
+        let creases = config.get_item("creases")?.and_then(|v| v.downcast_into::<PyList>().ok()).unwrap_or_else(|| PyList::empty(py));
         
         let mut h_creases: Vec<f64> = Vec::new();
         let mut v_creases: Vec<f64> = Vec::new();
         
         for item in creases.iter() {
             let dict = item.downcast::<PyDict>()?;
-            let orientation: String = dict.get_item("orientation")?.and_then(|v| v.extract().ok()).unwrap_or_else(|| "horizontal".to_string());
-            let pos: f64 = dict.get_item("position_pct")?.and_then(|v| v.extract().ok()).unwrap_or(0.5);
+            let orientation: String = dict.get_item("orientation")?.and_then(|v| v.extract::<String>().ok()).unwrap_or_else(|| "horizontal".to_string());
+            let pos: f64 = dict.get_item("position_pct")?.and_then(|v| v.extract::<f64>().ok()).unwrap_or(0.5);
             if orientation == "horizontal" {
                 h_creases.push(pos);
             } else {
@@ -197,28 +167,28 @@ impl PatternEngine {
                 // Bottom Shadow
                 if y_end > j {
                     for x in 0..width {
-                        self.blend_pixel(img.get_pixel_mut(x, y_end - 1 - j), [0, 0, 0, shadow_alpha]);
+                        self.internal_blend_pixel(img.get_pixel_mut(x, y_end - 1 - j), [0, 0, 0, shadow_alpha]);
                     }
                 }
                 
                 // Top Highlight
                 if y_start + j < height {
                     for x in 0..width {
-                        self.blend_pixel(img.get_pixel_mut(x, y_start + j), [255, 255, 255, highlight_alpha]);
+                        self.internal_blend_pixel(img.get_pixel_mut(x, y_start + j), [255, 255, 255, highlight_alpha]);
                     }
                 }
                 
                 // Left Highlight
                 if j < width {
                     for y in y_start..y_end {
-                        self.blend_pixel(img.get_pixel_mut(j, y), [255, 255, 255, highlight_alpha]);
+                        self.internal_blend_pixel(img.get_pixel_mut(j, y), [255, 255, 255, highlight_alpha]);
                     }
                 }
                 
                 // Right Shadow
                 if width > 1 + j {
                     for y in y_start..y_end {
-                        self.blend_pixel(img.get_pixel_mut(width - 1 - j, y), [0, 0, 0, shadow_alpha]);
+                        self.internal_blend_pixel(img.get_pixel_mut(width - 1 - j, y), [0, 0, 0, shadow_alpha]);
                     }
                 }
             }
@@ -230,7 +200,7 @@ impl PatternEngine {
                     for x in 0..width {
                         img.put_pixel(x, y, Rgba([0, 0, 0, 255]));
                         if y + 1 < height {
-                            self.blend_pixel(img.get_pixel_mut(x, y + 1), [255, 255, 255, 40]);
+                            self.internal_blend_pixel(img.get_pixel_mut(x, y + 1), [255, 255, 255, 40]);
                         }
                     }
                 }
@@ -241,7 +211,7 @@ impl PatternEngine {
             let x = (width as f64 * pos) as u32;
             if x > 0 && x < width - 1 {
                 for y in 0..height {
-                    self.blend_pixel(img.get_pixel_mut(x - 1, y), [255, 255, 255, 60]);
+                    self.internal_blend_pixel(img.get_pixel_mut(x - 1, y), [255, 255, 255, 60]);
                     img.put_pixel(x, y, Rgba([0, 0, 0, 100]));
                     if x + 1 < width {
                         img.put_pixel(x + 1, y, Rgba([0, 0, 0, 100]));
@@ -250,24 +220,11 @@ impl PatternEngine {
             }
         }
 
-        Ok(PyBytes::new_bound(py, img.as_raw()).into())
-    }
-
-    fn blend_pixel(&self, pixel: &mut Rgba<u8>, src: [u8; 4]) {
-        let alpha_src = src[3] as f32 / 255.0;
-        let alpha_dst = pixel[3] as f32 / 255.0;
-        
-        let out_alpha = alpha_src + alpha_dst * (1.0 - alpha_src);
-        if out_alpha > 0.0 {
-            pixel[0] = ((src[0] as f32 * alpha_src + pixel[0] as f32 * alpha_dst * (1.0 - alpha_src)) / out_alpha) as u8;
-            pixel[1] = ((src[1] as f32 * alpha_src + pixel[1] as f32 * alpha_dst * (1.0 - alpha_src)) / out_alpha) as u8;
-            pixel[2] = ((src[2] as f32 * alpha_src + pixel[2] as f32 * alpha_dst * (1.0 - alpha_src)) / out_alpha) as u8;
-            pixel[3] = (out_alpha * 255.0) as u8;
-        }
+        Ok(PyBytes::new(py, img.as_raw()).into())
     }
 
     /// Generates a high-fidelity procedural Robertson screw head.
-    fn generate_screw(&self, py: Python<'_>, size: u32, config: &Bound<'_, PyDict>) -> PyResult<PyObject> {
+    fn generate_screw(&self, py: Python<'_>, size: u32, config: &Bound<'_, PyDict>) -> PyResult<Py<PyAny>> {
         let padding = (size as f64 * 0.4) as u32;
         let canvas_dim = size + padding * 2;
         let center = canvas_dim as f64 / 2.0;
@@ -367,7 +324,7 @@ impl PatternEngine {
                     }
 
                     // Composite
-                    let mut pixel = img.get_pixel(x, y).0;
+                    let pixel = img.get_pixel(x, y).0;
                     if pixel[3] == 0 {
                         img.put_pixel(x, y, Rgba([r, g, b, 255]));
                     } else {
@@ -380,7 +337,50 @@ impl PatternEngine {
             }
         }
 
-        Ok(PyBytes::new_bound(py, img.as_raw()).into())
+        Ok(PyBytes::new(py, img.as_raw()).into())
+    }
+}
+
+impl PatternEngine {
+    fn internal_draw_line(&self, img: &mut RgbaImage, x1: f64, y1: f64, x2: f64, y2: f64, color: [u8; 4]) {
+        let dx = (x2 - x1).abs();
+        let dy = (y2 - y1).abs();
+        let sx = if x1 < x2 { 1.0 } else { -1.0 };
+        let sy = if y1 < y2 { 1.0 } else { -1.0 };
+        let mut err = dx - dy;
+
+        let mut x = x1;
+        let mut y = y1;
+
+        loop {
+            if x >= 0.0 && x < img.width() as f64 && y >= 0.0 && y < img.height() as f64 {
+                img.put_pixel(x as u32, y as u32, Rgba(color));
+            }
+
+            if (x - x2).abs() < 0.1 && (y - y2).abs() < 0.1 { break; }
+            let e2 = 2.0 * err;
+            if e2 > -dy {
+                err -= dy;
+                x += sx;
+            }
+            if e2 < dx {
+                err += dx;
+                y += sy;
+            }
+        }
+    }
+
+    fn internal_blend_pixel(&self, pixel: &mut Rgba<u8>, src: [u8; 4]) {
+        let alpha_src = src[3] as f32 / 255.0;
+        let alpha_dst = pixel[3] as f32 / 255.0;
+        
+        let out_alpha = alpha_src + alpha_dst * (1.0 - alpha_src);
+        if out_alpha > 0.0 {
+            pixel[0] = ((src[0] as f32 * alpha_src + pixel[0] as f32 * alpha_dst * (1.0 - alpha_src)) / out_alpha) as u8;
+            pixel[1] = ((src[1] as f32 * alpha_src + pixel[1] as f32 * alpha_dst * (1.0 - alpha_src)) / out_alpha) as u8;
+            pixel[2] = ((src[2] as f32 * alpha_src + pixel[2] as f32 * alpha_dst * (1.0 - alpha_src)) / out_alpha) as u8;
+            pixel[3] = (out_alpha * 255.0) as u8;
+        }
     }
 
     fn convert_hex_to_rgb(&self, hex_string: &str) -> [u8; 3] {

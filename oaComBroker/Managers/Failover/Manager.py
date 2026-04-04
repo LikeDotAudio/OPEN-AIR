@@ -64,7 +64,7 @@ class FailoverManager:
         threading.Thread(target=self._heartbeat_loop, daemon=True).start()
         threading.Thread(target=self._monitor_loop, daemon=True).start()
         
-        matrix_log("core", "failover", "start", 
+        matrix_log("core", "router", "start", 
                    f"🛡️ [FAILOVER] Manager active. Instance: {self.guid}", "INFO")
 
     def _heartbeat_loop(self):
@@ -102,7 +102,7 @@ class FailoverManager:
                               if (now - p["ts"]) > self.FAILOVER_TIMEOUT]
                 for g in dead_peers:
                     del self._peers[g]
-                    matrix_log("core", "failover", "_monitor_loop", 
+                    matrix_log("core", "router", "_monitor_loop", 
                                f"💀 [FAILOVER] Peer {g} lost.", "WARNING")
 
                 candidates = [{"guid": self.guid, "start_ts": self._start_ts}]
@@ -131,11 +131,11 @@ class FailoverManager:
         except Exception: pass
 
         if become_active:
-            matrix_log("core", "failover", "_transition_state", 
+            matrix_log("core", "router", "_transition_state", 
                        "👑 [FAILOVER] Promoted to MASTER.", "SUCCESS")
             self._set_router_state(True)
         else:
-            matrix_log("core", "failover", "_transition_state", 
+            matrix_log("core", "router", "_transition_state", 
                        "💤 [FAILOVER] Entering passive SHADOW mode.", "INFO")
             self._set_router_state(False)
 

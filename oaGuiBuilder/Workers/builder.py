@@ -12,8 +12,8 @@ from pathlib import Path
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
-from oaLogging.Methods.matrix_gate import is_debug_allowed
-BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
+from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
+BUILDER_DEBUG = is_debug_allowed(system="gui", element="gui_builder")
 
 from loguru import logger
 
@@ -228,6 +228,10 @@ class DynamicGuiBuilder(
             canvas_height = self.canvas.winfo_height()
             new_width = max(width, req_width)
             new_height = max(canvas_height, req_height)
+            
+            if BUILDER_DEBUG:
+                matrix_log("gui", "gui_builder", "_perform_canvas_resize", f"📐 [RESIZE] {self.tab_name}: Canvas={width}x{canvas_height}, Req={req_width}x{req_height} -> New={new_width}x{new_height}", "DEBUG")
+            
             self.canvas.itemconfig(self.canvas_window_id, width=new_width, height=new_height)
             self._trigger_background_sync()
 

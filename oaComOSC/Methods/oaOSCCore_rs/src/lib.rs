@@ -26,7 +26,7 @@ impl OscServer {
         }
     }
 
-    fn start(&mut self, host: String, port: u16, callback: PyObject) -> PyResult<()> {
+    fn start(&mut self, host: String, port: u16, callback: Py<PyAny>) -> PyResult<()> {
         if self.running.load(Ordering::SeqCst) {
             return Err(PyErr::new::<pyo3::exceptions::PyRuntimeError, _>("Server already running"));
         }
@@ -88,7 +88,7 @@ impl OscServer {
     }
 }
 
-fn handle_packet(packet: OscPacket, callback: &PyObject) {
+fn handle_packet(packet: OscPacket, callback: &Py<PyAny>) {
     match packet {
         OscPacket::Message(msg) => {
             dispatch_message(msg.addr, msg.args, callback);
@@ -101,20 +101,20 @@ fn handle_packet(packet: OscPacket, callback: &PyObject) {
     }
 }
 
-fn dispatch_message(addr: String, args: Vec<OscType>, callback: &PyObject) {
+fn dispatch_message(addr: String, args: Vec<OscType>, callback: &Py<PyAny>) {
     Python::with_gil(|py| {
-        let py_args = pyo3::types::PyList::empty_bound(py);
+        let py_args = pyo3::types::PyList::empty(py);
         for arg in args {
             match arg {
                 OscType::Int(i) => { let _ = py_args.append(i); }
                 OscType::Float(f) => { let _ = py_args.append(f); }
                 OscType::String(s) => { let _ = py_args.append(s); }
-                OscType::Blob(b) => { let _ = py_args.append(pyo3::types::PyBytes::new_bound(py, &b)); }
+                OscType::Blob(b) => { let _ = py_args.append(pyo3::types::PyBytes::new(py, &b)); }
                 OscType::Long(l) => { let _ = py_args.append(l); }
                 OscType::Double(d) => { let _ = py_args.append(d); }
                 OscType::Char(c) => { let _ = py_args.append(c.to_string()); }
                 OscType::Color(c) => {
-                    let dict = PyDict::new_bound(py);
+                    let dict = PyDict::new(py);
                     let _ = dict.set_item("r", c.red);
                     let _ = dict.set_item("g", c.green);
                     let _ = dict.set_item("b", c.blue);
@@ -122,7 +122,7 @@ fn dispatch_message(addr: String, args: Vec<OscType>, callback: &PyObject) {
                     let _ = py_args.append(dict);
                 }
                 OscType::Midi(m) => {
-                    let dict = PyDict::new_bound(py);
+                    let dict = PyDict::new(py);
                     let _ = dict.set_item("port", m.port);
                     let _ = dict.set_item("status", m.status);
                     let _ = dict.set_item("data1", m.data1);
@@ -133,7 +133,7 @@ fn dispatch_message(addr: String, args: Vec<OscType>, callback: &PyObject) {
                 OscType::Nil => { let _ = py_args.append(py.None()); }
                 OscType::Inf => { let _ = py_args.append("INFINITY"); }
                 OscType::Time(t) => {
-                    let dict = PyDict::new_bound(py);
+                    let dict = PyDict::new(py);
                     let _ = dict.set_item("seconds", t.seconds);
                     let _ = dict.set_item("fraction", t.fractional);
                     let _ = py_args.append(dict);
@@ -173,7 +173,7 @@ impl OscClient {
         Ok(())
     }
 
-    fn send_message(&self, address: String, value: PyObject, py: Python<'_>) -> PyResult<()> {
+    fn send_message(&self, address: String, value: Py<PyAny>, py: Python<'_>) -> PyResult<()> {
         if let Some(socket) = &self.socket {
             let mut args = Vec::new();
             

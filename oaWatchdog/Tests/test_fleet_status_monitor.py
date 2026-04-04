@@ -19,6 +19,11 @@ class TestFleetStatusMonitor(unittest.TestCase):
         self.mock_sme = MagicMock()
         self.mock_router = MagicMock()
         
+        # Patch app_constants used in mqtt_publisher_service
+        self.patcher_const = patch('oaComMQTT.Core.mqtt_publisher_service.app_constants')
+        self.mock_const = self.patcher_const.start()
+        self.mock_const.MQTT_RETAIN_BEHAVIOR = False
+        
         # Patch publish_payload before instantiation as __init__ calls _publish_color
         self.patcher = patch('oaWatchdog.Managers.fleet_status_monitor.publish_payload')
         self.mock_publish = self.patcher.start()
@@ -30,6 +35,7 @@ class TestFleetStatusMonitor(unittest.TestCase):
 
     def tearDown(self):
         self.patcher.stop()
+        self.patcher_const.stop()
 
     def test_initialization_and_subscription(self):
         """

@@ -1,16 +1,16 @@
-// oaComBroker/Methods/oaCoreRouter-rs/src/lib.rs
+// oaComBroker/Methods/oaCoreRouter_rs/src/lib.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260402.0015.1
+// Version: 20260402.0015.2
 
 use pyo3::prelude::*;
 use crossbeam_channel::{unbounded, Receiver, Sender};
 
 #[pyclass]
 struct CoreRouter {
-    inbound_tx: Sender<PyObject>,
-    inbound_rx: Receiver<PyObject>,
-    outbound_tx: Sender<PyObject>,
-    outbound_rx: Receiver<PyObject>,
+    inbound_tx: Sender<Py<PyAny>>,
+    inbound_rx: Receiver<Py<PyAny>>,
+    outbound_tx: Sender<Py<PyAny>>,
+    outbound_rx: Receiver<Py<PyAny>>,
 }
 
 #[pymethods]
@@ -27,20 +27,20 @@ impl CoreRouter {
         }
     }
 
-    fn push_inbound(&self, msg: PyObject) {
+    fn push_inbound(&self, msg: Py<PyAny>) {
         let _ = self.inbound_tx.send(msg);
     }
 
-    fn pop_inbound(&self, _py: Python<'_>) -> Option<PyObject> {
-        self.inbound_rx.try_recv().ok()
+    fn pop_inbound(&self, py: Python<'_>) -> Option<Py<PyAny>> {
+        self.inbound_rx.try_recv().ok().map(|msg| msg.clone_ref(py))
     }
 
-    fn push_outbound(&self, msg: PyObject) {
+    fn push_outbound(&self, msg: Py<PyAny>) {
         let _ = self.outbound_tx.send(msg);
     }
 
-    fn pop_outbound(&self, _py: Python<'_>) -> Option<PyObject> {
-        self.outbound_rx.try_recv().ok()
+    fn pop_outbound(&self, py: Python<'_>) -> Option<Py<PyAny>> {
+        self.outbound_rx.try_recv().ok().map(|msg| msg.clone_ref(py))
     }
 
     fn inbound_len(&self) -> usize {

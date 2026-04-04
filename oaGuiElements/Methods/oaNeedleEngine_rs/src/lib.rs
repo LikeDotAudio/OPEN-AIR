@@ -48,12 +48,12 @@ impl NeedleEngine {
         let tip_x = cx + length * angle_rad.cos();
         let tip_y = cy - length * angle_rad.sin();
 
-        let result = PyDict::new_bound(py);
+        let result = PyDict::new(py);
         result.set_item("tip_x", tip_x)?;
         result.set_item("tip_y", tip_y)?;
         result.set_item("angle_rad", angle_rad)?;
 
-        let coords_list = PyList::empty_bound(py);
+        let coords_list = PyList::empty(py);
         let mut draw_type = "line";
 
         match style.as_str() {

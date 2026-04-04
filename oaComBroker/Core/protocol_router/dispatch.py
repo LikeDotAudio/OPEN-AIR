@@ -16,7 +16,7 @@
 
 import orjson
 from .constants import LOCAL_DEBUG, app_constants
-from oaLogging.Core.logger import router_logger
+from oaLogging.Methods.matrix_gate import matrix_log
 from oaOchestration.Managers.protocol_guard import protocol_guard
 
 def dispatch_message(msg, managers):
@@ -83,32 +83,27 @@ def _dispatch_mqtt(mqtt_manager, topic, msg, val_str):
         return
 
     mqtt_manager.publish(tx_topic, encoded_payload, retain=retain)
-    if LOCAL_DEBUG:
-        router_logger.debug(f"📡📤📤 [OUTBOUND] MQTT >> {tx_topic} (Retain={retain}): {val_str}")
+    matrix_log("core", "router", "_dispatch_mqtt", f"📡📤📤 [OUTBOUND] MQTT >> {tx_topic} (Retain={retain}): {val_str}", "DEBUG")
 
 @protocol_guard("OSC")
 def _dispatch_osc(osc_manager, topic, val, msg, val_str):
     osc_address = msg["meta"].get("osc_address", "/" + topic.replace("OPEN-AIR/", ""))
     osc_manager.send(osc_address, val)
-    if LOCAL_DEBUG:
-        router_logger.debug(f"📡📤📤 [OUTBOUND] OSC >> {osc_address}: {val_str}")
+    matrix_log("core", "router", "_dispatch_osc", f"📡📤📤 [OUTBOUND] OSC >> {osc_address}: {val_str}", "DEBUG")
 
 @protocol_guard("MIDI")
 def _dispatch_midi(midi_manager, topic, val, msg, val_str):
     midi_manager.publish(topic, val, msg["meta"])
-    if LOCAL_DEBUG:
-        router_logger.debug(f"📡📤📤 [MIDI] >> {topic}: {val_str}")
+    matrix_log("core", "router", "_dispatch_midi", f"📡📤📤 [MIDI] >> {topic}: {val_str}", "DEBUG")
 
 @protocol_guard("SNMP")
 def _dispatch_snmp(snmp_manager, topic, val, val_str):
     snmp_manager.publish(topic, val)
-    if LOCAL_DEBUG:
-        router_logger.debug(f"📡📤📤 [SNMP] >> {topic}: {val_str}")
+    matrix_log("core", "router", "_dispatch_snmp", f"📡📤📤 [SNMP] >> {topic}: {val_str}", "DEBUG")
 
 @protocol_guard("SMPTE2138")
 def _dispatch_smpte2138(smpte_manager, topic, val, msg, val_str):
     """Routes normalized internal actions to the SMPTE 2138 bridge."""
     # The manager's ingest method handles OID mapping and Protobuf encoding.
     smpte_manager.handle_router_event(topic, val, msg.get("meta", {}))
-    if LOCAL_DEBUG:
-        router_logger.debug(f"📡📤📤 [SMPTE2138] >> {topic}: {val_str}")
+    matrix_log("core", "router", "_dispatch_smpte2138", f"📡📤📤 [SMPTE2138] >> {topic}: {val_str}", "DEBUG")

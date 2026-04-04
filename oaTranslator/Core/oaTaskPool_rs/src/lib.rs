@@ -23,7 +23,7 @@ impl TaskPool {
         TaskPool { pool }
     }
 
-    fn spawn(&self, callback: PyObject) {
+    fn spawn(&self, callback: Py<PyAny>) {
         self.pool.spawn(move || {
             Python::with_gil(|py| {
                 if let Err(e) = callback.call0(py) {
@@ -33,7 +33,7 @@ impl TaskPool {
         });
     }
 
-    fn par_map(&self, _py: Python<'_>, data: Vec<PyObject>, callback: PyObject) -> Vec<PyObject> {
+    fn par_map(&self, _py: Python<'_>, data: Vec<Py<PyAny>>, callback: Py<PyAny>) -> Vec<Py<PyAny>> {
         self.pool.install(|| {
             data.into_par_iter()
                 .map(|item| {

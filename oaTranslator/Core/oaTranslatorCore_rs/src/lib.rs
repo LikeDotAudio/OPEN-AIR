@@ -43,7 +43,7 @@ impl SplinkerLock {
         }
     }
 
-    fn __exit__(&self, _ty: PyObject, _value: PyObject, _traceback: PyObject) {
+    fn __exit__(&self, _ty: Py<PyAny>, _value: Py<PyAny>, _traceback: Py<PyAny>) {
         self.release();
     }
 }
@@ -84,7 +84,7 @@ impl SettleLock {
         }
     }
 
-    fn __exit__(&self, _ty: PyObject, _value: PyObject, _traceback: PyObject) {
+    fn __exit__(&self, _ty: Py<PyAny>, _value: Py<PyAny>, _traceback: Py<PyAny>) {
         self.release();
     }
 }
@@ -135,7 +135,7 @@ impl WidgetRegistry {
     }
 
     fn all_widgets(&self, py: Python<'_>) -> PyResult<Py<PyDict>> {
-        let result = PyDict::new_bound(py);
+        let result = PyDict::new(py);
         for entry in self.widgets.iter() {
             result.set_item(entry.key(), entry.value().clone_ref(py))?;
         }
@@ -143,7 +143,7 @@ impl WidgetRegistry {
     }
 
     fn all_topics(&self, py: Python<'_>) -> PyResult<Py<PyDict>> {
-        let result = PyDict::new_bound(py);
+        let result = PyDict::new(py);
         for entry in self.topic_map.iter() {
             result.set_item(entry.key(), entry.value().clone())?;
         }
@@ -188,7 +188,7 @@ impl JSONDiffer {
         let mut diffs = HashMap::new();
         internal_diff_values("", &old_val, &new_val, &mut diffs);
         
-        let result = PyDict::new_bound(py);
+        let result = PyDict::new(py);
         for (key, val) in diffs {
             result.set_item(key, pythonize(py, &val).map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e.to_string()))?)?;
         }

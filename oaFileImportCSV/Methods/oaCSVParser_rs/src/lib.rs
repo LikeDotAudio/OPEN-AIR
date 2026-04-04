@@ -4,6 +4,7 @@
 
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList};
+use pyo3::IntoPyAnyExt;
 use std::collections::HashMap;
 use csv::ReaderBuilder;
 use regex::Regex;
@@ -44,11 +45,11 @@ fn convert_csv_unknown(py: Python<'_>, file_path: String) -> PyResult<(Vec<Strin
     }
 
     let freq_regex = Regex::new(r"(?i)(?P<val>\d+(?:\.\d+)?)\s*(?:(?P<unit>k|m|g)?hz)?").unwrap();
-    let processed_data = PyList::empty_bound(py);
+    let processed_data = PyList::empty(py);
 
     for result in reader.records() {
         let record = result.map_err(|e| PyErr::new::<pyo3::exceptions::PyIOError, _>(e.to_string()))?;
-        let row_dict = PyDict::new_bound(py);
+        let row_dict = PyDict::new(py);
 
         for std_header in &standard_headers {
             let mut value_obj = py.None();
@@ -64,16 +65,16 @@ fn convert_csv_unknown(py: Python<'_>, file_path: String) -> PyResult<(Vec<Strin
                                 if u == "k" { mhz_val /= 1000.0; }
                                 else if u == "g" { mhz_val *= 1000.0; }
                             }
-                            value_obj = mhz_val.into_py(py);
+                            value_obj = mhz_val.into_py_any(py)?;
                         } else {
                             if let Ok(val) = trimmed.parse::<f64>() {
-                                value_obj = val.into_py(py);
+                                value_obj = val.into_py_any(py)?;
                             } else {
-                                value_obj = trimmed.into_py(py);
+                                value_obj = trimmed.into_py_any(py)?;
                             }
                         }
                     } else {
-                        value_obj = trimmed.into_py(py);
+                        value_obj = trimmed.into_py_any(py)?;
                     }
                 }
             }

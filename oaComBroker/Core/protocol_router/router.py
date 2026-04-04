@@ -49,7 +49,7 @@ class ProtocolRouter:
         self.inbound_queue = queue.Queue()
         self.outbound_queue = queue.Queue()
         
-        # ⚡ RUST NATIVE ACCELERATION: Initialize the Rust core router if available
+        # ⚡ NATIVE ACCELERATION: Rust core router for high-speed paths.
         self.rust_router = RustCoreRouter()
 
         self._running = False
@@ -101,7 +101,8 @@ class ProtocolRouter:
 
     def stop(self):
         self._running = False
-        if self._executor: self._executor.shutdown(wait=False)
+        # ⚡ STABILITY: Wait for pending dispatch tasks to finish before closing native resources
+        if self._executor: self._executor.shutdown(wait=True)
         matrix_log("core", "router", "stop", "⏹️ [STOP] Protocol Router Offline.", "WARNING")
 
     def set_active_state(self, active):
@@ -166,10 +167,17 @@ class ProtocolRouter:
         self.inbound_queue.put(msg)
 
     def _fetch_next_inbound(self):
+        # ⚡ DRAIN: If messages are in the Rust router, we must drain them to prevent leaks.
+        # For now, we still use the Python inbound_queue as the primary source of truth.
+        if self.rust_router and self.rust_router.inbound_len() > 0:
+            while self.rust_router.inbound_len() > 0:
+                self.rust_router.pop_inbound()
+
         try:
             return self.inbound_queue.get(timeout=0.1)
         except queue.Empty:
             return None
+
 
     def _process_message_pipeline(self, msg):
         investigate_packet(msg, self.mib_cache)
@@ -222,10 +230,17 @@ class ProtocolRouter:
                     "smpte2138": self.smpte2138_manager
                 }
                 
-                self._executor.submit(
-                    dispatch_message, 
-                    msg, managers
-                )
+                if self._running:
+                    self._executor.submit(
+                        dispatch_message, 
+                        msg, managers
+                    )
+            except RuntimeError as e:
+                # ⚡ TEARDOWN SAFETY: Ignore executor shutdown errors during exit
+                if "after shutdown" in str(e).lower():
+                    pass
+                else:
+                    matrix_log("core", "router", "_dispatch_loop", f"📤🚫🛑 [ERROR] Dispatch Loop Error: {e}", "ERROR")
             except Exception as e:
                 matrix_log("core", "router", "_dispatch_loop", f"📤🚫🛑 [ERROR] Dispatch Loop Error: {e}", "ERROR")
 

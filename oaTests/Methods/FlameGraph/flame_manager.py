@@ -87,19 +87,20 @@ class FlameManager:
 
         matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🔥 [FLAME] Synthesizing Intelligence Report...", "INFO")
         
-        ps = self.mtp.get_stats()
+        profile_stats = self.mtp.get_stats()
         svg_file = self.data_dir / "flamegraph.svg"
         html_file = self.data_dir / "flamegraph.html"
-        
+
         # D. Process Stats
-        performance_stats = process_stats_for_ui(ps)
-        
+        performance_stats = process_stats_for_ui(profile_stats)
+
         # E. Generate Components
-        svg_content = generate_flamegraph_with_flameprof(ps, svg_file) or "<!-- SVG Failed -->"
+        svg_content = generate_flamegraph_with_flameprof(profile_stats, svg_file) or "<!-- SVG Failed -->"
         table_rows = generate_table_rows(performance_stats)
-        wall_of_shame_text = generate_wall_of_shame(performance_stats, ps)
-        wall_of_pity_text = generate_wall_of_pity(performance_stats, ps)
-        
+        wall_of_shame_text = generate_wall_of_shame(performance_stats, profile_stats)
+
+        wall_of_pity_text = generate_wall_of_pity(performance_stats, profile_stats)
+
         # F. Generate JSON Outputs
         try:
             # 1. Event Analysis Engine Data
@@ -111,15 +112,15 @@ class FlameManager:
                     if 'raw_key' in s_copy: del s_copy['raw_key']
                     serializable_stats.append(s_copy)
                 json.dump(serializable_stats, f, indent=4)
-            
+
             # 2. Wall of Shame Data
             with open(self.data_dir / "wall_of_shame.json", "w") as f:
                 json.dump({"report": wall_of_shame_text}, f, indent=4)
-                
+
             # 3. Wall of Pity Data
             with open(self.data_dir / "wall_of_pity.json", "w") as f:
                 json.dump({"report": wall_of_pity_text}, f, indent=4)
-                
+
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔥 [FLAME] JSON components saved to {self.data_dir}", "DEBUG")
         except Exception as e:
             logger.error(f"🔥 [FLAME] Failed to save JSON components: {e}")
@@ -127,7 +128,7 @@ class FlameManager:
         # Extract unique roots for the filter buttons
         all_roots = sorted(list(set(r for s in performance_stats for r in s['roots'])))
         root_buttons = "".join([f'<button class="filter-btn active" id="btn-root-{l}" onclick="toggleRoot(\'{l}\')">{l}</button>' for l in all_roots])
-        
+
         # G. Assemble Final Report
         success = generate_final_html(
             svg_content=svg_content,
@@ -137,7 +138,7 @@ class FlameManager:
             wall_of_pitty=wall_of_pity_text,
             output_file=html_file
         )
-        
+
         if success:
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔥 [FLAME] Intelligence Report: {html_file}", "SUCCESS")
             return str(html_file)

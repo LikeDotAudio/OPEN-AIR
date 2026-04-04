@@ -63,7 +63,7 @@ impl CMDPMath {
         let cos_t = t_ang_rad.cos();
         let sin_t = t_ang_rad.sin();
 
-        let result = PyDict::new_bound(py);
+        let result = PyDict::new(py);
 
         // 1. Hitbox Points
         let mut hitbox_pts = Vec::with_capacity(8);

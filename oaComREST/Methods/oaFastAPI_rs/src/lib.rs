@@ -17,7 +17,7 @@ use serde_json::Value;
 #[pyclass]
 struct RestServer {
     runtime: Option<Runtime>,
-    routes: Arc<Mutex<HashMap<String, PyObject>>>,
+    routes: Arc<Mutex<HashMap<String, Py<PyAny>>>>,
 }
 
 #[pymethods]
@@ -30,7 +30,7 @@ impl RestServer {
         }
     }
 
-    fn add_route(&self, path: String, callback: PyObject) {
+    fn add_route(&self, path: String, callback: Py<PyAny>) {
         let mut routes = self.routes.lock().unwrap();
         routes.insert(path, callback);
     }
@@ -57,7 +57,7 @@ impl RestServer {
 
 async fn handle_get(
     Path(path): Path<String>,
-    State(routes): State<Arc<Mutex<HashMap<String, PyObject>>>>,
+    State(routes): State<Arc<Mutex<HashMap<String, Py<PyAny>>>>>,
 ) -> Json<Value> {
     let full_path = format!("/api/{}", path);
     let routes = routes.lock().unwrap();

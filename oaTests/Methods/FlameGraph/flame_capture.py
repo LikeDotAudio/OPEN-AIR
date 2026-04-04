@@ -73,8 +73,7 @@ class MultiThreadProfiler:
                 logger.warning(f"FlameGraph: Profiler enable failed, running thread without profiling: {e}")
                 original_run(self_thread)
             
-        threading.Thread.run = patched_run
-        self.main_profiler.enable()
+        threading.Thread.run = _run_with_capture
 
     def stop(self):
         self.main_profiler.disable()

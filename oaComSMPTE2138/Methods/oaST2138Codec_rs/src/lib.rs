@@ -21,7 +21,7 @@ impl St2138Codec {
         St2138Codec
     }
 
-    fn encode_param(&self, py: Python<'_>, name: String, _value_f32: f32) -> PyResult<PyObject> {
+    fn encode_param(&self, py: Python<'_>, name: String, _value_f32: f32) -> PyResult<Py<PyAny>> {
         let mut param = st2138::Param::default();
         let mut poly_text = st2138::PolyglotText::default();
         let mut display_strings = HashMap::new();
@@ -33,13 +33,13 @@ impl St2138Codec {
         let mut buf = Vec::new();
         param.encode(&mut buf).map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e.to_string()))?;
         
-        Ok(PyBytes::new_bound(py, &buf).into())
+        Ok(PyBytes::new(py, &buf).into())
     }
 
     fn decode_param<'py>(&self, py: Python<'py>, data: &[u8]) -> PyResult<Bound<'py, PyDict>> {
         let param = st2138::Param::decode(data).map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e.to_string()))?;
         
-        let dict = PyDict::new_bound(py);
+        let dict = PyDict::new(py);
         if let Some(name) = param.name {
             if let Some(en_text) = name.display_strings.get("en") {
                 dict.set_item("name", en_text)?;

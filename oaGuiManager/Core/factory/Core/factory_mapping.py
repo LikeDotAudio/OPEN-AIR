@@ -99,4 +99,5 @@ def get_core_factory_mapping(self):
         "Block": self._lazy_wrap("oaGuiManager.Core.array.array", "BuilderArrayCreator", "make"),
         "Array": self._lazy_wrap("oaGuiManager.Core.array.array", "BuilderArrayCreator", "make"),
         "Bin": self._lazy_wrap("oaGuiManager.Core.array.array", "BuilderArrayCreator", "make"),
+        "OcaFold": self._lazy_wrap("oaGuiElements.Core.utils.break_line.hidden_BreakLine", "BuilderBreakLineCreator", "make"),
     }

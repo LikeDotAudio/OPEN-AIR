@@ -1,6 +1,6 @@
 # oaGuiManager/Core/fast_scanner.py
 # Author: Anthony Peter Kuzub
-# Version: 20260331.2350.1
+# Version: 20260331.2350.2
 #
 # Description: Python wrapper for the Rust Fast Scanner.
 
@@ -28,21 +28,26 @@ class FastScanner:
         self._scanner = None
         if not HAS_RUST:
             return
-
-        if LOCAL_DEBUG:
-            print("📂🛠️🔗 [GUI_MANAGER] Using PURE RUST fast scanner.")
+        
         try:
             self._scanner = RustFastScanner()
         except Exception as e:
-            logging.error(f"❌ [GUI_MANAGER] Rust scanner instantiation failed: {e}")
+            logging.error(f"❌ [GUI_MANAGER] Failed to instantiate Rust Fast Scanner: {e}")
             self._scanner = None
 
-    def scan_directory(self, root_path: str, suffix: str):
+    def scan_directory(self, root_path: str, extension: str = None) -> list:
+        """
+        Scans a directory for files with a specific extension.
+        """
         if self._scanner:
             try:
-                return self._scanner.scan_directory(root_path, suffix)
+                return self._scanner.scan_directory(root_path, extension or "")
             except Exception as e:
                 logging.error(f"❌ [GUI_MANAGER] Rust scanning failed: {e}")
-                return []
-        return []
-
+        
+        # Python fallback (Simple recursive scan)
+        import pathlib
+        path = pathlib.Path(root_path)
+        if extension:
+            return [str(f) for f in path.rglob(f"*{extension}")]
+        return [str(f) for f in path.rglob("*")]

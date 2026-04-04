@@ -3,6 +3,7 @@ requires = ["maturin>=1.0,<2.0"]
 build-backend = "maturin"
 
 [project]
+dynamic = ["version"]
 name = "oaFastDir_rs"
 requires-python = ">=3.8"
 classifiers = [

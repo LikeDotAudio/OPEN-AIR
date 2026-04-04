@@ -9,11 +9,11 @@ use std::io::Read;
 use zip::ZipArchive;
 
 #[pyfunction]
-fn unpack_showfile(py: Python<'_>, file_path: String) -> PyResult<PyObject> {
+fn unpack_showfile(py: Python<'_>, file_path: String) -> PyResult<Py<PyAny>> {
     let file = File::open(&file_path).map_err(|e| PyErr::new::<pyo3::exceptions::PyIOError, _>(e.to_string()))?;
     let mut archive = ZipArchive::new(file).map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e.to_string()))?;
 
-    let dict = PyDict::new_bound(py);
+    let dict = PyDict::new(py);
 
     for i in 0..archive.len() {
         let mut file = archive.by_index(i).map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e.to_string()))?;

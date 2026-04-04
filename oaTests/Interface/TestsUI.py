@@ -191,7 +191,7 @@ class TestsApp(App):
         super().__init__()
         self.project_root = project_root
         self.stats_provider = SystemStatsProvider()
-        self.setup_manager = SetupManager()
+        self.setup_manager = SetupManager(project_root=self.project_root)
         self.installation_log_writer = InstallationLogWriter()
         self.log_lines = []
         self.test_results = []

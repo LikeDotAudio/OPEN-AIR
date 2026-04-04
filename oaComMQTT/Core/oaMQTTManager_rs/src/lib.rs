@@ -1,19 +1,17 @@
 // oaComMQTT/Core/oaMQTTManager_rs/src/lib.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2350.1
+// Version: 20260331.2350.2
 
 use pyo3::prelude::*;
-use pyo3::types::{PyDict, PyList};
-use std::collections::HashMap;
 use dashmap::DashMap;
 use std::sync::Arc;
 
 #[pyclass]
 struct MqttRouter {
     // Exact matches: topic -> list of callbacks
-    exact_matches: Arc<DashMap<String, Vec<PyObject>>>,
+    exact_matches: Arc<DashMap<String, Vec<Py<PyAny>>>>,
     // Wildcard matches: filter -> (regex, list of callbacks)
-    wildcard_matches: Arc<DashMap<String, (String, Vec<PyObject>)>>,
+    wildcard_matches: Arc<DashMap<String, (String, Vec<Py<PyAny>>)>>,
 }
 
 #[pymethods]
@@ -26,7 +24,7 @@ impl MqttRouter {
         }
     }
 
-    fn subscribe(&self, filter: String, callback: PyObject) {
+    fn subscribe(&self, filter: String, callback: Py<PyAny>) {
         if filter.contains('+') || filter.contains('#') {
             let mut entry = self.wildcard_matches.entry(filter.clone()).or_insert_with(|| {
                 (mqtt_filter_to_regex(&filter), Vec::new())
@@ -43,21 +41,23 @@ impl MqttRouter {
         self.wildcard_matches.remove(&filter);
     }
 
-    fn match_topic(&self, topic: String) -> Vec<PyObject> {
+    fn match_topic(&self, py: Python<'_>, topic: String) -> Vec<Py<PyAny>> {
         let mut matches = Vec::new();
 
         // 1. Exact match
         if let Some(callbacks) = self.exact_matches.get(&topic) {
-            matches.extend(callbacks.clone());
+            for cb in callbacks.iter() {
+                matches.push(cb.clone_ref(py));
+            }
         }
 
         // 2. Wildcard matches (Iterate and check regex)
-        // In a high-performance Trie impl, this would be faster.
         for r in self.wildcard_matches.iter() {
             let (regex_str, callbacks) = r.value();
-            // Simple match for now. Real MQTT matching is more complex.
             if matches_mqtt(regex_str, &topic) {
-                matches.extend(callbacks.clone());
+                for cb in callbacks.iter() {
+                    matches.push(cb.clone_ref(py));
+                }
             }
         }
 
@@ -78,8 +78,6 @@ fn mqtt_filter_to_regex(filter: &str) -> String {
 }
 
 fn matches_mqtt(regex_str: &str, topic: &str) -> bool {
-    // Simple regex matching for POC.
-    // Real implementation should use a specialized MQTT Trie.
     if let Ok(re) = regex::Regex::new(regex_str) {
         re.is_match(topic)
     } else {

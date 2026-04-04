@@ -1,6 +1,6 @@
 // oaSplinker/Core/oaSplinkRegistry_rs/src/lib.rs
 // Author: Anthony Peter Kuzub (via Gemini)
-// Version: 20260331.2340.3
+// Version: 20260331.2340.4
 
 use pyo3::prelude::*;
 use pyo3::types::PyDict;
@@ -11,7 +11,7 @@ use std::time::{SystemTime, UNIX_EPOCH};
 #[pyclass]
 struct SplinkRegistry {
     // topic -> list of splinks
-    registry: Arc<DashMap<String, Vec<PyObject>>>,
+    registry: Arc<DashMap<String, Vec<Py<PyAny>>>>,
     // splink_id -> is_currently_processing (Atomic lock replacement)
     processing_state: Arc<DashMap<String, bool>>,
     // (timestamp_ms, topic, splink_id) -> seen
@@ -32,99 +32,92 @@ impl SplinkRegistry {
         }
     }
 
-    fn add_splink(&self, topic: String, splink: PyObject) {
+    fn add_splink(&self, topic: String, splink: Py<PyAny>) {
         let mut entry = self.registry.entry(topic).or_insert_with(Vec::new);
         entry.push(splink);
     }
 
-    fn get_splinks_for_topic(&self, topic: String) -> Vec<PyObject> {
-        self.registry.get(&topic).map(|v| v.clone()).unwrap_or_default()
+    fn get_splinks_for_topic(&self, py: Python<'_>, topic: String) -> Vec<Py<PyAny>> {
+        self.registry.get(&topic)
+            .map(|v| v.iter().map(|s| s.clone_ref(py)).collect())
+            .unwrap_or_default()
     }
 
-    fn all_splinks(&self) -> Vec<PyObject> {
+    fn all_splinks(&self, py: Python<'_>) -> Vec<Py<PyAny>> {
         let mut all = Vec::new();
         for r in self.registry.iter() {
-            all.extend(r.value().clone());
+            all.extend(r.value().iter().map(|s| s.clone_ref(py)));
         }
         all
     }
 
-    fn get_splink_by_id(&self, splink_id: String) -> Option<PyObject> {
+    fn get_splink_by_id(&self, py: Python<'_>, splink_id: String) -> Option<Py<PyAny>> {
         for r in self.registry.iter() {
             for s in r.value() {
-                let found = Python::with_gil(|py| {
-                    if let Ok(dict) = s.bind(py).downcast::<PyDict>() {
-                        if let Ok(Some(id)) = dict.get_item("id") {
-                            if let Ok(id_str) = id.extract::<String>() {
-                                return id_str == splink_id;
+                if let Ok(dict) = s.downcast_bound::<PyDict>(py) {
+                    if let Ok(Some(id)) = dict.get_item("id") {
+                        if let Ok(id_str) = id.extract::<String>() {
+                            if id_str == splink_id {
+                                return Some(s.clone_ref(py));
                             }
                         }
                     }
-                    false
-                });
-                if found { return Some(s.clone()); }
+                }
             }
         }
         None
     }
 
-    fn update_splink(&self, splink_id: String, new_data: PyObject) {
+    fn update_splink(&self, py: Python<'_>, splink_id: String, new_data: Py<PyAny>) {
         let mut target_topic = None;
         for r in self.registry.iter() {
             for s in r.value() {
-                let found = Python::with_gil(|py| {
-                    if let Ok(dict) = s.bind(py).downcast::<PyDict>() {
-                        if let Ok(Some(id)) = dict.get_item("id") {
-                            if let Ok(id_str) = id.extract::<String>() {
-                                return id_str == splink_id;
+                if let Ok(dict) = s.downcast_bound::<PyDict>(py) {
+                    if let Ok(Some(id)) = dict.get_item("id") {
+                        if let Ok(id_str) = id.extract::<String>() {
+                            if id_str == splink_id {
+                                target_topic = Some(r.key().clone());
+                                break;
                             }
                         }
                     }
-                    false
-                });
-                if found {
-                    target_topic = Some(r.key().clone());
-                    break;
                 }
             }
             if target_topic.is_some() { break; }
         }
 
         if let Some(topic) = target_topic {
-            let mut entry = self.registry.entry(topic).or_insert_with(Vec::new);
-            for s in entry.iter_mut() {
-                let found = Python::with_gil(|py| {
-                    if let Ok(dict) = s.bind(py).downcast::<PyDict>() {
+            if let Some(mut entry) = self.registry.get_mut(&topic) {
+                for s in entry.iter_mut() {
+                    let found = if let Ok(dict) = s.downcast_bound::<PyDict>(py) {
                         if let Ok(Some(id)) = dict.get_item("id") {
                             if let Ok(id_str) = id.extract::<String>() {
-                                return id_str == splink_id;
-                            }
-                        }
+                                id_str == splink_id
+                            } else { false }
+                        } else { false }
+                    } else { false };
+
+                    if found {
+                        *s = new_data.clone_ref(py);
+                        break;
                     }
-                    false
-                });
-                if found {
-                    *s = new_data.clone();
-                    break;
                 }
             }
         }
     }
 
-    fn delete_splink(&self, splink_id: String) {
+    fn delete_splink(&self, py: Python<'_>, splink_id: String) {
         let mut target_topic = None;
         for r in self.registry.iter() {
             for s in r.value() {
-                let found = Python::with_gil(|py| {
-                    if let Ok(dict) = s.bind(py).downcast::<PyDict>() {
-                        if let Ok(Some(id)) = dict.get_item("id") {
-                            if let Ok(id_str) = id.extract::<String>() {
-                                return id_str == splink_id;
-                            }
-                        }
-                    }
-                    false
-                });
+                let found = if let Ok(dict) = s.downcast_bound::<PyDict>(py) {
+                    if let Ok(Some(id)) = dict.get_item("id") {
+                        if let Ok(id_str) = id.extract::<String>() {
+                            id_str == splink_id
+                        } else { false }
+                    } else { false }
+                } else { false };
+
                 if found {
                     target_topic = Some(r.key().clone());
                     break;
@@ -134,10 +127,9 @@ impl SplinkRegistry {
         }
 
         if let Some(topic) = target_topic {
-            let mut entry = self.registry.entry(topic).or_insert_with(Vec::new);
-            entry.retain(|s| {
-                Python::with_gil(|py| {
-                    if let Ok(dict) = s.bind(py).downcast::<PyDict>() {
+            if let Some(mut entry) = self.registry.get_mut(&topic) {
+                entry.retain(|s| {
+                    if let Ok(dict) = s.downcast_bound::<PyDict>(py) {
                         if let Ok(Some(id)) = dict.get_item("id") {
                             if let Ok(id_str) = id.extract::<String>() {
                                 return id_str != splink_id;
@@ -145,8 +137,8 @@ impl SplinkRegistry {
                         }
                     }
                     true
-                })
-            });
+                });
+            }
         }
     }
 

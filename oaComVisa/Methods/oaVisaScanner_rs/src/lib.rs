@@ -39,10 +39,10 @@ impl VisaScanner {
             join_all(futures).await
         });
 
-        let py_results = PyList::empty_bound(py);
+        let py_results = PyList::empty(py);
         for res in results {
             if let Some((ip, port, reachable)) = res {
-                let dict = PyDict::new_bound(py);
+                let dict = PyDict::new(py);
                 let _ = dict.set_item("ip", ip);
                 let _ = dict.set_item("port", port);
                 let _ = dict.set_item("reachable", reachable);

@@ -28,7 +28,7 @@
 import threading
 import time
 from .constants import LOCAL_DEBUG
-from oaLogging.Core.logger import router_logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 class SettleManager:
     """
@@ -122,11 +122,7 @@ class SettleManager:
             settled_meta["msg_type"] = "LINK_FEEDBACK"
             settled_meta["is_settled"] = True
             
-            if LOCAL_DEBUG:
-                router_logger.debug(
-                    f"⏳⏳🔄 [ROUTER] Settling: Firing final "
-                    f"LINK_FEEDBACK for {topic}"
-                )
+            matrix_log("core", "router", "schedule_settling", f"⏳⏳🔄 [ROUTER] Settling: Firing final LINK_FEEDBACK for {topic}", "DEBUG")
             
             # Unlock the parameter before re-ingesting to allow the feedback 
             # packet to pass through the router's filters.

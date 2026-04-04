@@ -1,6 +1,6 @@
 # oaTests/Workers/TestRunner/Entry.py
 # Author: Anthony Peter Kuzub
-# Version: 1.1.0
+# Version: 1.1.1
 #
 # Description: Standalone CLI entry point for the OPEN-AIR Test Runner.
 
@@ -32,18 +32,21 @@ def main():
     """
     Executes the standalone CLI test runner.
     """
-    print("\n" + "="*60)
+    print("
+" + "="*60)
     print("🚀 OPEN-AIR STANDALONE TEST RUNNER")
     print("="*60)
     
     root_path = str(project_root)
     print(f"📂 Project Root: {root_path}")
     
-    print("\n🔍 Discovering tests...")
+    print("
+🔍 Discovering tests...")
     found_dirs = identify_test_directories(root_path)
     print(f"📂 Discovery identified {len(found_dirs)} test-containing folders.")
     
-    print("\n🔬 Executing test suite...")
+    print("
+🔬 Executing test suite...")
     print("-" * 60)
     
     # Initialize runner without callback to use default console output
@@ -53,7 +56,8 @@ def main():
     print("-" * 60)
     
     # ⚡ CLEANUP PHASE: Prevent Segfaults on Exit
-    print("\n🧹 Commencing post-test cleanup...")
+    print("
+🧹 Commencing post-test cleanup...")
     try:
         import time
         from oaComBroker.Core.protocol_router.manager import ProtocolRouter
@@ -76,7 +80,8 @@ def main():
     except Exception as e:
         print(f"⚠️ Cleanup warning: {e}")
 
-    print(f"\n🏁 [COMPLETE] Test Run Finished.")
+    print(f"
+🏁 [COMPLETE] Test Run Finished.")
     
     total = result.testsRun
     failures = len(result.failures)
@@ -88,9 +93,19 @@ def main():
     print(f"   ✅ Passed:  {passed}")
     print(f"   ❌ Failed:  {failures}")
     print(f"   💥 Errors:  {errors}")
-    print(f"   ⏭️ Skipped: {skipped}")
+    
+    # Report skipped tests with details
+    print(f"   ⏭️ Skipped: {skipped}", end="")
+    if skipped > 0:
+        print(":")
+        for test, reason in result.skipped:
+            print(f"     - {test.id()}: {reason}")
+    else:
+        print() # Newline if no skipped tests
+
     print(f"   📈 Total:   {total}")
-    print("="*60 + "\n")
+    print("="*60 + "
+")
     
     # Exit with appropriate code
     import signal

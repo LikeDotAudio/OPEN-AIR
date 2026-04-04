@@ -1,6 +1,6 @@
 # oaGuiManager/Tests/test_bootstrap_sequence.py
 # Author: Gemini CLI
-# Version: 20260404.1.4
+# Version: 20260404.1.6
 #
 # Description: Unit tests for bootstrap_sequence.py
 
@@ -23,6 +23,8 @@ class TestAsyncBootstrapEngine(unittest.TestCase):
 
     def setUp(self):
         """Build mock services and root."""
+        # Access root from class variable to ensure it's available to instance methods
+        self.mock_root = self.__class__.root
         self.mock_splash = MagicMock()
         self.mock_shutdown = MagicMock()
         

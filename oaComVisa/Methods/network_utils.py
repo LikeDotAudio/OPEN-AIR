@@ -24,7 +24,7 @@ def get_local_ip():
         s.connect(("10.255.255.255", 1))
         IP = s.getsockname()[0]
     except Exception as e:
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error getting local IP: {e}", "TRACE")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error getting local IP: {e}", "TRACE")
         IP = "127.0.0.1"
     finally:
         s.close()
@@ -50,11 +50,11 @@ def check_host(ip):
                     if "E5810" in resp.read().decode("utf-8", errors="ignore"):
                         is_gateway = True
             except Exception as e:
-                matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error checking instruments page for {ip}: {e}", "TRACE")
+                matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error checking instruments page for {ip}: {e}", "TRACE")
                 pass
             return (ip, "GATEWAY" if is_gateway else "DEDICATED")
     except Exception as e:
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error connecting to Port 111 on {ip}: {e}", "TRACE")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error connecting to Port 111 on {ip}: {e}", "TRACE")
         pass
 
     # 2. Port 5025 (SCPI)
@@ -66,6 +66,6 @@ def check_host(ip):
         if result == 0:
             return (ip, "DEDICATED")
     except Exception as e:
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error connecting to Port 5025 on {ip}: {e}", "TRACE")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error connecting to Port 5025 on {ip}: {e}", "TRACE")
         pass
     return None

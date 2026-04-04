@@ -28,7 +28,7 @@ app_constants = Config.get_instance()
 
 def _write_safe_fleet(proxy_instance, command):
     # Safely writes a SCPI command to the instrument for the fleet proxy.
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): 💳💳⬆️⬆️ Send Visa Command: Transmitting command: {command}", "TRACE")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): 💳💳⬆️⬆️ Send Visa Command: Transmitting command: {command}", "TRACE")
 
     if not proxy_instance.inst or not proxy_instance.inst.session:
         error_msg = f"Instrument {proxy_instance.device_serial} not connected. Cannot write command."
@@ -46,13 +46,13 @@ def _write_safe_fleet(proxy_instance, command):
 
     # ⚡ DIRECT CALL: Assuming hardware state is validated or fatal if not
     proxy_instance.inst.write(command)
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): ✅ Sent command: {command}", "SUCCESS")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): ✅ Sent command: {command}", "SUCCESS")
     return True
 
 
 def _query_safe_fleet(proxy_instance, command, correlation_id="N/A"):
     # Safely queries the instrument with a SCPI command and returns the response for the fleet proxy.
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): 💳💳⬆️⬆️ Send Visa Command: Querying command: {command}", "TRACE")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): 💳💳⬆️⬆️ Send Visa Command: Querying command: {command}", "TRACE")
 
     if not proxy_instance.inst or not proxy_instance.inst.session:
         error_msg = f"Instrument {proxy_instance.device_serial} not connected. Cannot query command."
@@ -84,8 +84,8 @@ def _query_safe_fleet(proxy_instance, command, correlation_id="N/A"):
 
     response = proxy_instance.inst.read().strip()
     
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): ✅ Sent query: {command}", "SUCCESS")
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): 💳💳⬇️⬇️ RX Visa Response: Received response: {response}", "TRACE")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): ✅ Sent query: {command}", "SUCCESS")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({proxy_instance.device_serial}): 💳💳⬇️⬇️ RX Visa Response: Received response: {response}", "TRACE")
 
     # Notify the manager of the response
     proxy_instance.manager._notify_response(
@@ -118,7 +118,7 @@ class VisaProxyFleet:
         self.instrument_model = instrument_model  # e.g., 'TDS2024C'
         self.manufacturer = manufacturer  # Stored for inventory details
 
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 🟢️️️🟢 ➡️➡️ __init__ for {self.device_serial} ({self.resource_name}). Initializing proxy.", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 🟢️️️🟢 ➡️➡️ __init__ for {self.device_serial} ({self.resource_name}). Initializing proxy.", "DEBUG")
 
         self.inst = None  # The actual pyvisa instrument instance
 
@@ -133,11 +133,11 @@ class VisaProxyFleet:
             target=self._command_processor_worker, daemon=True
         )
         self.worker_thread.start()
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Command processor worker thread started.", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Command processor worker thread started.", "DEBUG")
 
     def shutdown(self):
         """Shuts down the proxy, stopping the worker thread and clearing resources."""
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Shutting down proxy.", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Shutting down proxy.", "DEBUG")
         if self.worker_thread and self.worker_thread.is_alive():
             if self.shutdown_flag:
                 self.shutdown_flag.set()
@@ -150,13 +150,13 @@ class VisaProxyFleet:
                     command="shutdown",
                 )
         else:
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Worker thread not active or already shut down.", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Worker thread not active or already shut down.", "DEBUG")
 
         # Ensure connection is closed if proxy is shut down
         if self.inst:
             # We assume close() is safe or fatal if not
             self.inst.close()
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Closed PyVISA instrument instance during shutdown.", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Closed PyVISA instrument instance during shutdown.", "DEBUG")
             self.inst = None
             self.is_connected = False
             self.manager._notify_status(
@@ -186,21 +186,21 @@ class VisaProxyFleet:
 
             self.command_queue.task_done()
             
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Command processor worker terminated.", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Command processor worker terminated.", "DEBUG")
 
     def enqueue_command(self, command, query=False, correlation_id="N/A"):
         """Public method for the manager to enqueue a command to this proxy."""
         self.command_queue.put(
             {"command": command, "query": query, "correlation_id": correlation_id}
         )
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Command '{command}' enqueued. Query: {query}", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Command '{command}' enqueued. Query: {query}", "DEBUG")
 
     def set_instrument_instance(self, inst):
         """Sets the PyVISA instrument instance and updates connection status."""
         self.inst = inst
         if self.inst:
             self.inst.timeout = 5000  # Default timeout
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Proxy is now linked to instrument instance.", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Proxy is now linked to instrument instance.", "DEBUG")
             self.is_connected = True
             self.manager._notify_status(serial=self.device_serial, status="CONNECTED")
         else:
@@ -216,14 +216,14 @@ class VisaProxyFleet:
 
     def _reset_device_fleet(self):
         """Attempts to reset the connected instrument using standard SCPI commands."""
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Attempting a system-wide reset for the device.", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Attempting a system-wide reset for the device.", "DEBUG")
         logger.warning(
             f"💳 ℹ️ FleetProxy Log ({self.device_serial}): Instrument instance is None. Connection lost."
         )
         reset_success = _write_safe_fleet(self, command="*RST")
 
         if reset_success:
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): ✅ Success! The device reset command was sent.", "SUCCESS")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ FleetProxy Log ({self.device_serial}): ✅ Success! The device reset command was sent.", "SUCCESS")
         else:
             self.manager._notify_error(
                 serial=self.device_serial,

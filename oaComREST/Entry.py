@@ -28,19 +28,19 @@ def get_manager(state_cache_manager=None, protocol_router=None):
     """
     global _manager
     if _manager is None:
-        matrix_log("core", "rest", "get_manager", "📡⚙️🔗 [REST] Creating singleton RESTManager instance.", "DEBUG")
+        matrix_log("comms", "rest", "get_manager", "📡⚙️🔗 [REST] Creating singleton RESTManager instance.", "DEBUG")
         _manager = RESTManager(state_cache_manager, protocol_router)
     return _manager
 
 def start(state_cache_manager=None, protocol_router=None):
     """Convenience function to start the REST service."""
-    matrix_log("core", "rest", "start", "📡⚙️🚀 [REST] Manual service start initiated via Entry.", "DEBUG")
+    matrix_log("comms", "rest", "start", "📡⚙️🚀 [REST] Manual service start initiated via Entry.", "DEBUG")
     return get_manager(state_cache_manager, protocol_router).start()
 
 def stop():
     """Convenience function to stop the REST service."""
     if _manager:
-        matrix_log("core", "rest", "stop", "📡⚙️🛑 [REST] Manual service stop initiated via Entry.", "DEBUG")
+        matrix_log("comms", "rest", "stop", "📡⚙️🛑 [REST] Manual service stop initiated via Entry.", "DEBUG")
         _manager.stop()
 
 def get_status():

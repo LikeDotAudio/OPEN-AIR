@@ -24,7 +24,7 @@ class TransparencyConfig:
         is_virtual_container = is_structural_type and isinstance(widget, tk.Canvas)
         
         background_string = str(background_color).lower() if background_color else ""
-        is_explicitly_solid = (background_color and str(background_color).startswith("#") and background_string not in THEME_BACKGROUND_COLORS)
+        is_explicitly_solid = (background_color and background_string not in THEME_BACKGROUND_COLORS)
         
         is_explicitly_transparent = (background_string in ["transparent", "none", "match_theme"]) or \
                                     (configuration.get("transparent") is True) or \

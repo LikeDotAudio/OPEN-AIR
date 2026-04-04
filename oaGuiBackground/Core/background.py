@@ -132,14 +132,20 @@ class BuilderBackgroundManagerMixin:
             else:
                 if not hasattr(self, 'panel_bg_label') or not self.panel_bg_label:
                     self.panel_bg_label = tk.Label(self.scroll_frame, image=self.panel_bg_image, bd=0)
-                    self.panel_bg_label.place(x=0, y=0, width=width, height=height)
                 else:
                     self.panel_bg_label.config(image=self.panel_bg_image)
-                    self.panel_bg_label.place(x=0, y=0, width=width, height=height)
                 
-                self._force_background_to_back()
+                # This prevents the canvas from being unnecessarily stretched by a large background image.
+                final_w = max(width, self.scroll_frame.winfo_reqwidth())
+                final_h = max(height, self.scroll_frame.winfo_reqheight())
+                matrix_log("gui", "gui_builder", "_apply_generated_background", f"🎨📏✨ [BG] Sizing background label to {final_w}x{final_h}", "TRACE")
+                self.panel_bg_label.place(x=0, y=0, width=final_w, height=final_h)
+                
+                # ⚡ Z-STACK FIX: Force the background to the bottom and update the UI *before* reslicing
+                self.panel_bg_label.lower()
+                self.scroll_frame.update_idletasks()
             
-            self._trigger_reslice_all()
+            self._trigger_reslice_all(force=True)
 
     def _force_background_to_back(self):
         """Ensures the background label is at the bottom of the Z-stack."""

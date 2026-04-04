@@ -34,13 +34,13 @@ class OSCManager:
         partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "CORE")
         if partition_id == "UI":
             if run_bridge:
-                matrix_log("ui", "osc", "__init__", 
+                matrix_log("comms", "osc", "__init__", 
                            "⚠️ OSC Bridge disabled in UI partition to prevent port conflicts.", "WARNING")
             run_bridge = False
 
         self.run_bridge = run_bridge
         
-        matrix_log("ui", "osc", "__init__", 
+        matrix_log("comms", "osc", "__init__", 
                    f"Initializing Bridge (Bridge={run_bridge})...", "INFO")
         
         # ⚡ STANDALONE: Fallback to global singletons if not injected
@@ -169,7 +169,7 @@ class OSCManager:
                 self._rx_addr = f"{get_local_ip()}:{rx_port}"
                 
             if LOCAL_DEBUG:
-                matrix_log("ui", "osc", "_start_workers", 
+                matrix_log("comms", "osc", "_start_workers", 
                            f"RX SERVER ACTIVE: {self._rx_addr}", "SUCCESS")
 
             # TX Client
@@ -181,7 +181,7 @@ class OSCManager:
                 self._tx_addr = f"{tx_host}:{tx_port}"
                 
             if LOCAL_DEBUG:
-                matrix_log("ui", "osc", "_start_workers", 
+                matrix_log("comms", "osc", "_start_workers", 
                            f"TX CLIENT ACTIVE: {self._tx_addr}", "SUCCESS")
 
             # ⚡ STATUS MONITOR: Start periodic broadcast
@@ -214,7 +214,7 @@ class OSCManager:
         if self.run_bridge:
             self._start_workers()
         else:
-            matrix_log("ui", "osc", "start", "Bridge: Observer mode active.", "INFO")
+            matrix_log("comms", "osc", "start", "Bridge: Observer mode active.", "INFO")
 
     def stop(self):
         with self._state_lock:
@@ -228,7 +228,7 @@ class OSCManager:
         with self._state_lock:
             topic = self.osc_to_topic.get(address, f"OPEN-AIR/OSC{address}")
         
-        matrix_log("ui", "osc", "handle_incoming_osc", 
+        matrix_log("comms", "osc", "handle_incoming_osc", 
                    f"RX: {address} -> {value} (Topic: {topic})", "DEBUG")
         
         # ⚡ ANTI-FEEDBACK SPEC: Define identity at transport ingress
@@ -288,7 +288,7 @@ class OSCManager:
         if origin_source == "OSC":
             return
 
-        matrix_log("ui", "osc", "send", f"TX: {address} <- {value}", "DEBUG")
+        matrix_log("comms", "osc", "send", f"TX: {address} <- {value}", "DEBUG")
         
         self.tx_client.send_message(address, value)
         
@@ -369,5 +369,5 @@ class OSCManager:
             self.osc_to_topic[osc_address] = topic
             self.topic_to_osc[topic] = osc_address
             
-        matrix_log("ui", "osc", "register_route", 
+        matrix_log("comms", "osc", "register_route", 
                    f"Route Registered: {osc_address} <-> {topic}", "INFO")

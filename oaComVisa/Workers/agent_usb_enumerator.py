@@ -24,14 +24,14 @@ def discover_usb_devices(resource_manager):
     Returns a list of resource strings.
     """
     usb_resources = []
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   👉 Scanning USB/Local Bus...", "DEBUG")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   👉 Scanning USB/Local Bus...", "DEBUG")
     try:
         local_res = resource_manager.list_resources("?*")
         for res in local_res:
             # Filter out TCPIP and ASRL from local_res if they are handled by other discovery modules
             if "TCPIP" not in res and "ASRL" not in res:  # ASRL is serial port
                 usb_resources.append(res)
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   ✅ Found {len(usb_resources)} USB/local resources: {usb_resources}", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   ✅ Found {len(usb_resources)} USB/local resources: {usb_resources}", "DEBUG")
     except Exception as e:
         if LOCAL_DEBUG:
             logger.error(

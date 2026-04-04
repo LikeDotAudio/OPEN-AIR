@@ -41,7 +41,7 @@ from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
 
 def _is_debug():
     from oaLogging.Methods.matrix_gate import is_debug_allowed
-    return is_debug_allowed(system="CORE", element="SMPTE2138")
+    return is_debug_allowed(system="comms", element="smpte2138")
 
 class SMPTE2138BridgeManager:
     """
@@ -73,17 +73,21 @@ class SMPTE2138BridgeManager:
         self._setup_subscriptions()
         self._publish_bridge_status()
         
-        matrix_log("core", "smpte2138", "__init__", "✅ [BRIDGE] SMPTE2138 Protocol Bridge initialized and active.", "SUCCESS")
+        matrix_log("comms", "smpte2138", "__init__", "✅ [BRIDGE] SMPTE2138 Protocol Bridge initialized and active.", "SUCCESS")
 
     def _setup_subscriptions(self):
         """Registers listeners for internal actions and remote control."""
         # 1. Action Triggers (Raw MQTT fallback)
         self.router.subscribe_to_topic("oa/action/#", self._on_internal_action)
         
-        # 2. Remote Bridge Control (from GUI)
+        # 2. MIDI Triggers (Direct MQTT bridge)
+        self.router.subscribe_to_topic("OPEN-AIR/MIDI/#", self._on_internal_action)
+        
+        # 3. Remote Bridge Control (from GUI)
         self.router.subscribe_to_topic("OPEN-AIR/System/Control/SMPTE2138/Bridge", self._on_remote_control)
         
-        matrix_log("core", "smpte2138", "_setup_subscriptions", "👂 [LISTEN] Bridge active and listening for control.", "DEBUG")
+        matrix_log("comms", "smpte2138", "_setup_subscriptions", "👂 [LISTEN] Bridge active and listening for control (Actions & MIDI).", "DEBUG")
+
 
     def handle_router_event(self, topic, val, meta=None):
         """
@@ -92,6 +96,16 @@ class SMPTE2138BridgeManager:
         """
         if not self.bridge_enabled: return
         
+        # ⚡ ENHANCEMENT: Handle enriched payloads (e.g., from MIDI or REST)
+        # If val is a dict, extract the primary numeric or boolean value.
+        real_val = val
+        if isinstance(val, dict) and "val" in val:
+            real_val = val["val"]
+            # Merge dictionary into metadata if it's not already there
+            meta = meta or {}
+            for k, v in val.items():
+                if k != "val": meta[k] = v
+
         meta = meta or {}
         bin_id = meta.get("bin_id")
         block_name = meta.get("block_name")
@@ -102,22 +116,32 @@ class SMPTE2138BridgeManager:
         if bin_id:
             slot = self._derive_slot(bin_id)
 
-        # 2. Resolve OID (Default to mapping if not in meta)
+        # 2. Resolve OID
         oid = self.topic_to_oid.get(topic)
         
         # ⚡ ARCHITECT'S CHOICE: Mirror the builder hierarchy if structural metadata is present
         if block_name and field_name:
             oid = f"{block_name}/{field_name}"
         
-        if not oid: return
+        # ⚡ MIDI FALLBACK: If it's a MIDI topic, generate a dynamic OID based on path
+        if not oid and "OPEN-AIR/MIDI/" in topic:
+            oid = topic.replace("OPEN-AIR/", "")
+        
+        if not oid: 
+            # Silent skip for unmapped non-MIDI topics
+            return
         
         try:
-            if isinstance(val, (int, float)):
-                self._publish_parameter(oid, float(val), slot_override=slot)
+            if isinstance(real_val, (int, float, bool)):
+                # Convert bool to float for ST2138 standard
+                f_val = float(real_val) if not isinstance(real_val, bool) else (1.0 if real_val else 0.0)
+                self._publish_parameter(oid, f_val, slot_override=slot)
             else:
-                self._publish_command(oid, str(val), slot_override=slot)
+                self._publish_command(oid, str(real_val), slot_override=slot)
         except Exception as e:
             SMPTE2138_LOGGER.error(f"❌ [BRIDGE] Router Event Translation failure: {e}")
+
+
 
     def _derive_slot(self, bin_id: str) -> int:
         """
@@ -149,7 +173,7 @@ class SMPTE2138BridgeManager:
             qos=0,
             retain=False
         )
-        matrix_log("core", "smpte2138", "_publish_parameter", f"📡📤📤 [SMPTE2138] Published FLOAT32 to {smpte2138_topic} ({value})", "INFO")
+        matrix_log("comms", "smpte2138", "_publish_parameter", f"📡📤📤 [SMPTE2138] Published FLOAT32 to {smpte2138_topic} ({value})", "INFO")
 
     def _publish_command(self, oid: str, value: str, slot_override=None):
         slot = slot_override or self.slot
@@ -168,7 +192,7 @@ class SMPTE2138BridgeManager:
             qos=0,
             retain=False
         )
-        matrix_log("core", "smpte2138", "_publish_command", f"🚀📤📤 [SMPTE2138] Published COMMAND to {smpte2138_topic} ({value})", "INFO")
+        matrix_log("comms", "smpte2138", "_publish_command", f"🚀📤📤 [SMPTE2138] Published COMMAND to {smpte2138_topic} ({value})", "INFO")
 
     def _on_remote_control(self, msg):
         """Processes remote start/stop commands."""
@@ -181,7 +205,7 @@ class SMPTE2138BridgeManager:
                 if new_state != self.bridge_enabled:
                     self.bridge_enabled = new_state
                     status_msg = "ENABLED" if self.bridge_enabled else "DISABLED"
-                    matrix_log("core", "smpte2138", "_on_remote_control", f"🔄 [BRIDGE] Bridge translation is now {status_msg}.", "INFO")
+                    matrix_log("comms", "smpte2138", "_on_remote_control", f"🔄 [BRIDGE] Bridge translation is now {status_msg}.", "INFO")
                     self._publish_bridge_status()
         except Exception as e:
             SMPTE2138_LOGGER.error(f"❌ [BRIDGE] Remote control failure: {e}")

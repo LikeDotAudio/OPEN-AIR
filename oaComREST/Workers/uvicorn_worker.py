@@ -50,7 +50,7 @@ class UvicornWorker(threading.Thread):
 
         for attempt in range(max_retries):
             if LOCAL_DEBUG:
-                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡⚙️🚀 [REST] Starting Uvicorn on {self.host}:{current_port} (Attempt {attempt + 1})", "DEBUG")
+                matrix_log("comms", "rest", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡⚙️🚀 [REST] Starting Uvicorn on {self.host}:{current_port} (Attempt {attempt + 1})", "DEBUG")
             
             config = uvicorn.Config(
                 app=self.app, 
@@ -85,5 +85,5 @@ class UvicornWorker(threading.Thread):
         """Signals the Uvicorn server to shut down."""
         if self.server:
             if LOCAL_DEBUG:
-                matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡⚙️🛑 [REST] Stopping Uvicorn server...", "DEBUG")
+                matrix_log("comms", "rest", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡⚙️🛑 [REST] Stopping Uvicorn server...", "DEBUG")
             self.server.should_exit = True

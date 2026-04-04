@@ -52,17 +52,58 @@ def debug_matrix(system: str, element: str = None):
         return wrapper
     return decorator
 
-def matrix_log(system: str, element: str, func_name: str, message: str, level: str = "DEBUG"):
+def matrix_log(system: str, element: str = None, func_name: str = None, 
+               message: str = "", level: str = "DEBUG"):
     """
-    Explicitly logs a message only if the matrix allows it.
+    Surgical entry point for the Hierarchical Debug Matrix.
     """
-    if is_debug_allowed(system, element, func_name):
-        from oaLogging.Core.logger import get_logger
+    gravity = level.upper()
+    
+    # 1. Master Logic: Check if the matrix allows this context
+    allowed = is_debug_allowed(system, element, func_name)
+    
+    # 2. Gatekeeper: Allow if matrix permits, OR if it's a critical log (WARNING+)
+    # ⚡ REFINEMENT: INFO/SUCCESS logs are only allowed if the system is NOT explicitly muted.
+    if allowed or gravity in ["WARNING", "ERROR", "CRITICAL"]:
+        pass
+    elif gravity in ["INFO", "SUCCESS"]:
+        # Check if the system is explicitly False in the matrix (Master Partition Muting)
+        # We don't use 'allowed' here because 'allowed' might be False just because 
+        # Master Debug is off. We want INFO logs to show by default.
+        # But if sys_core is EXPLICITLY False, we mute INFO too.
+        try:
+            from oaConfiguration.Managers.LoggingManager.manager import LoggingMatrixManager
+            matrix = LoggingMatrixManager.get_instance().get_matrix()
+            if matrix.get(f"SYS_{system.upper()}") is False:
+                return
+        except Exception:
+            pass
+    else:
+        # Debug/Trace and not allowed
+        return
+
+    from oaLogging.Core.logger import get_logger
+    
+    # ⚡ STANDARDIZATION: If system is "comms", ensure 📡 emoji and unified naming
+    if system.lower() == "comms":
+        category = element.upper() if element else "COMMS"
+        # We don't need to specify 'COMM: ' here as get_logger adds it for comms elements
+        context_logger = get_logger(category, emoji_prefix="📡")
+    else:
         context_logger = get_logger(element.upper() if element else system.upper())
-        log_func = getattr(context_logger.opt(depth=1), level.lower(), context_logger.debug)
-        log_func(message)
+
+        
+    log_func = getattr(context_logger.opt(depth=1), level.lower(), context_logger.debug)
+    log_func(message)
+
+
 
 # --- State Sync (Rust <-> Python) ---
+def set_master_toggle(enabled: bool):
+    """Updates the global master toggle in Rust."""
+    if RUST_ENABLED:
+        oalogginggate_rs.set_master_toggle(enabled)
+
 def sync_gate_to_rust(system: str, element: str = None, enabled: bool = True):
     """Updates the Rust gate state."""
     if RUST_ENABLED:

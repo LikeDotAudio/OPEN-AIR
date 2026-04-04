@@ -29,7 +29,7 @@ def check_fastapi_availability():
         importlib.import_module("uvicorn")
         return True
     except ImportError as e:
-        matrix_log("core", "rest", "check_fastapi_availability", f"❌ [REST] Dependency check failed: {e}", "ERROR")
+        matrix_log("comms", "rest", "check_fastapi_availability", f"❌ [REST] Dependency check failed: {e}", "ERROR")
         return False
 
 from ..Constants.rest_constants import LOCAL_DEBUG, REST_HOST, REST_PORT, REST_CORS_ORIGINS
@@ -72,7 +72,7 @@ class RESTManager:
         value = payload.get("val") if isinstance(payload, dict) else payload
         new_state = bool(value)
         if new_state != self._should_run:
-            matrix_log("core", "rest", "_on_global_state_change", f"📡⚙️🔄 [REST] Global state toggle: {new_state}", "INFO")
+            matrix_log("comms", "rest", "_on_global_state_change", f"📡⚙️🔄 [REST] Global state toggle: {new_state}", "INFO")
             self._should_run = new_state
             if not new_state: self._shutdown_local_worker()
             else: self._launch_instance()
@@ -108,10 +108,10 @@ class RESTManager:
 
             api_router = create_router(self.state_cache, self.router)
             self.app.include_router(api_router)
-            matrix_log("core", "rest", "_try_initialize", "📡⚙️✅ [REST] FastAPI Application initialized.", "SUCCESS")
+            matrix_log("comms", "rest", "_try_initialize", "📡⚙️✅ [REST] FastAPI Application initialized.", "SUCCESS")
             return True
         except Exception as e:
-            matrix_log("core", "rest", "_try_initialize", f"❌ [REST] Initialization crash: {e}", "ERROR")
+            matrix_log("comms", "rest", "_try_initialize", f"❌ [REST] Initialization crash: {e}", "ERROR")
             return False
 
     def _start_health_monitor(self):
@@ -134,7 +134,7 @@ class RESTManager:
                 else:
                     if self.is_running(): self._shutdown_local_worker()
             except Exception as e: 
-                matrix_log("core", "rest", "_health_loop", f"❌ [REST] Health loop error: {e}", "ERROR")
+                matrix_log("comms", "rest", "_health_loop", f"❌ [REST] Health loop error: {e}", "ERROR")
             time.sleep(10.0)
 
     def _launch_instance(self):
@@ -148,14 +148,14 @@ class RESTManager:
 
         try:
             self.worker = UvicornWorker(self.app, host=REST_HOST, port=REST_PORT)
-            matrix_log("core", "rest", "_launch_instance", f"🌐 [REST] Launching API Service on {REST_HOST}:{REST_PORT}...", "INFO")
+            matrix_log("comms", "rest", "_launch_instance", f"🌐 [REST] Launching API Service on {REST_HOST}:{REST_PORT}...", "INFO")
             self.worker.start()
         except Exception as e: 
-            matrix_log("core", "rest", "_launch_instance", f"❌ [REST] Launch failed: {e}", "ERROR")
+            matrix_log("comms", "rest", "_launch_instance", f"❌ [REST] Launch failed: {e}", "ERROR")
 
     def _shutdown_local_worker(self):
         if self.worker and self.worker.is_alive():
-            matrix_log("core", "rest", "_shutdown_local_worker", "🌐 [REST] Shutting down local instance.", "INFO")
+            matrix_log("comms", "rest", "_shutdown_local_worker", "🌐 [REST] Shutting down local instance.", "INFO")
             self.worker.stop()
             self.worker.join(timeout=2.0)
 
@@ -208,4 +208,4 @@ class RESTManager:
         for cb in self.monitor_callbacks:
             try: cb(method, path, status_code, payload)
             except Exception as e: 
-                matrix_log("core", "rest", "notify_activity", f"❌ [REST] Callback failed: {e}", "ERROR")
+                matrix_log("comms", "rest", "notify_activity", f"❌ [REST] Callback failed: {e}", "ERROR")

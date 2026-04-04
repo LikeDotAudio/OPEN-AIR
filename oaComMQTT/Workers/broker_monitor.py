@@ -28,7 +28,7 @@ class BrokerMonitor:
         # We subscribe to wildcard to catch everything useful
         self.subscriber_router.subscribe_to_topic("$SYS/broker/#", self._on_sys_message)
         
-        matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "BrokerMonitor initialized and listening to $SYS/broker/#", "DEBUG")
+        matrix_log("comms", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "BrokerMonitor initialized and listening to $SYS/broker/#", "DEBUG")
 
     def register_observer(self, callback):
         """Register a GUI callback to receive stats updates."""

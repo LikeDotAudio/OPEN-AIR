@@ -1,33 +1,15 @@
 // oaAudioMixer/Core/oaAudioMixer_rs/src/windows_backend.rs
 #[cfg(target_os = "windows")]
-pub struct WindowsAudioManager {
-    // You would store COM pointers to WASAPI interfaces here
-}
-
+pub struct WindowsAudioManager {}
 #[cfg(target_os = "windows")]
-impl WindowsAudioManager {
-    pub fn new() -> Self {
-        // Initialize COM library and CoreAudio endpoints here
-        WindowsAudioManager {}
-    }
-}
-
+impl WindowsAudioManager { pub fn new() -> Self { WindowsAudioManager {} } }
 #[cfg(target_os = "windows")]
 impl crate::manager::AudioConnectionManager for WindowsAudioManager {
-    fn get_master_volume(&self) -> Result<f32, String> {
-        // TODO: Call IAudioEndpointVolume::GetMasterVolumeLevelScalar
-        Ok(0.75) // Mock value
-    }
-
-    fn set_master_volume(&mut self, _level: f32) -> Result<(), String> {
-        // TODO: Call IAudioEndpointVolume::SetMasterVolumeLevelScalar
-        Ok(())
-    }
-
-    fn get_connected_software(&self) -> Result<Vec<crate::manager::AudioApp>, String> {
-        // TODO: Enumerate IAudioSessionManager2 -> IAudioSessionControl
-        Ok(vec![
-            crate::manager::AudioApp { name: "Spotify.exe".to_string(), is_active: true },
-        ])
-    }
+    fn get_master_volume(&self) -> Result<f32, String> { Ok(0.75) }
+    fn set_master_volume(&mut self, _l: f32) -> Result<(), String> { Ok(()) }
+    fn set_device_volume(&mut self, _i: String, _l: f32) -> Result<(), String> { Ok(()) }
+    fn set_app_volume(&mut self, _i: u32, _l: f32) -> Result<(), String> { Ok(()) }
+    fn get_connected_software(&self) -> Result<Vec<crate::manager::AudioApp>, String> { Ok(vec![]) }
+    fn get_available_devices(&self) -> Result<Vec<crate::manager::AudioDevice>, String> { Ok(vec![]) }
+    fn get_available_sources(&self) -> Result<Vec<crate::manager::AudioDevice>, String> { Ok(vec![]) }
 }

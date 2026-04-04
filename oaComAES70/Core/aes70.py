@@ -8,13 +8,13 @@ import threading
 import time
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
-from loguru import logger
+from oaLogging.Core.logger import get_logger
 from oaConfiguration.FileReaders.config_reader import Config
 from oaComAES70.Methods.aes70_parser import OcaParser
 
 app_constants = Config.get_instance()
 # ⚡ SUBSYSTEM: AES70_BRIDGE
-aes_logger = logger.bind(subsystem="AES70_BRIDGE", category="COMM")
+aes_logger = get_logger("AES70")
 
 class AES70Manager:
     """

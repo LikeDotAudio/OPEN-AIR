@@ -113,5 +113,5 @@ class DiscoveryOrchestrator:
 
     def shutdown(self):
         """Shutdown the orchestrator."""
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🔍 [DISCOVERY] Discovery Orchestrator shutting down.", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🔍 [DISCOVERY] Discovery Orchestrator shutting down.", "DEBUG")
         pass

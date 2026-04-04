@@ -39,6 +39,10 @@ class ModuleLoader:
         self.state_mirror_engine = state_mirror_engine
         self.subscriber_router = subscriber_router
         self.app_instance = app_instance
+        self.builders = []
+
+    def get_all_builders(self):
+        return [b for b in self.builders if b and b.winfo_exists()]
 
     def load_module_from_path(self, path: pathlib.Path):
         """
@@ -110,6 +114,7 @@ class ModuleLoader:
         
         # ⚡ OPTIMIZATION: Wrap pure Python modules in a DynamicGuiBuilder
         builder = DynamicGuiBuilder(parent_widget, json_path=None, config=config_dict)
+        self.builders.append(builder)
         builder.start()
         config_dict["builder_instance"] = builder
         
@@ -194,6 +199,7 @@ class ModuleLoader:
                 config_dict["base_mqtt_topic_from_path"] = base_topic
                 
                 instance = UniversalGuiLoader(parent=parent_widget, json_path=str(json_path), config=config_dict)
+                self.builders.append(instance)
                 matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🏗️🪟✨{json_path}!", level="SUCCESS")
                 return instance
             except Exception as e:

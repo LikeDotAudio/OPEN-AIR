@@ -33,12 +33,12 @@ def disconnect_instrument(inst):
     - Does not modify global state; only affects the provided object.
     """
     current_function = inspect.currentframe().f_code.co_name
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 Disconnecting instrument... Saying goodbye!", "DEBUG")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 Disconnecting instrument... Saying goodbye!", "DEBUG")
     if inst:
         try:
             inst.close()
 
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 Instrument connection closed. All done!", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 Instrument connection closed. All done!", "DEBUG")
             return True
         except Exception as e:
             error_msg = f"💳 ❌ An unexpected error occurred while disconnecting instrument: {e}."
@@ -46,7 +46,7 @@ def disconnect_instrument(inst):
             if LOCAL_DEBUG:
                 logger.debug(error_msg)
             return False
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 No instrument to disconnect. Already gone!", "DEBUG")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 No instrument to disconnect. Already gone!", "DEBUG")
     return False
 
 

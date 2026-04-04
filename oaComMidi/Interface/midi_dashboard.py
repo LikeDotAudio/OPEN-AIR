@@ -36,20 +36,20 @@ class MidiDashboard(tk.Frame):
         self.json_path = kwargs.pop("json_path", None)
 
         logger.info("🎹 [MIDI-DASH] __init__ called. Instantiating dashboard...")
-        matrix_log("ui", "midi", "__init__", "🎹 [MIDI-DASH] Instantiating MidiDashboard...", "INFO")
+        matrix_log("comms", "midi", "__init__", "🎹 [MIDI-DASH] Instantiating MidiDashboard...", "INFO")
         super().__init__(parent, **kwargs)
         self.midi_manager = self._find_midi_manager(parent)
         self._setup_ui()
 
         if self.midi_manager:
             logger.info("🎹 [MIDI-DASH] MidiManager found successfully.")
-            matrix_log("ui", "midi", "__init__", "🎹 [MIDI-DASH] MidiManager found. Registering callback.", "SUCCESS")
+            matrix_log("comms", "midi", "__init__", "🎹 [MIDI-DASH] MidiManager found. Registering callback.", "SUCCESS")
             # Add a local callback for the dashboard monitor
             self.midi_manager.add_monitor_callback(self.on_midi_activity)
             self._refresh_ui()
         else:
             logger.error("🎹 [MIDI-DASH] ❌ CRITICAL: MidiManager NOT found in widget tree.")
-            matrix_log("ui", "midi", "__init__", "🎹 [MIDI-DASH] ❌ CRITICAL: MidiManager NOT found in widget tree.", "ERROR")
+            matrix_log("comms", "midi", "__init__", "🎹 [MIDI-DASH] ❌ CRITICAL: MidiManager NOT found in widget tree.", "ERROR")
             if LOCAL_DEBUG: logger.warning("🎹 [MIDI-DASH] MidiManager NOT found in widget tree.")
 
     def _find_midi_manager(self, widget):
@@ -60,7 +60,7 @@ class MidiDashboard(tk.Frame):
             if hasattr(curr, 'midi_manager'):
                 m = getattr(curr, 'midi_manager', None)
                 if m: 
-                    matrix_log("ui", "midi", "_find_midi_manager", f"🎹 [MIDI-DASH] Found manager at depth {depth} (Direct hit).", "DEBUG")
+                    matrix_log("comms", "midi", "_find_midi_manager", f"🎹 [MIDI-DASH] Found manager at depth {depth} (Direct hit).", "DEBUG")
                     return m
             
             # 2. Check for the grand orchestrator (Application instance)
@@ -68,7 +68,7 @@ class MidiDashboard(tk.Frame):
             if app and hasattr(app, 'midi_manager'):
                 m = getattr(app, 'midi_manager', None)
                 if m: 
-                    matrix_log("ui", "midi", "_find_midi_manager", f"🎹 [MIDI-DASH] Found manager at depth {depth} (via app_instance).", "DEBUG")
+                    matrix_log("comms", "midi", "_find_midi_manager", f"🎹 [MIDI-DASH] Found manager at depth {depth} (via app_instance).", "DEBUG")
                     return m
                 
             try:
@@ -76,7 +76,7 @@ class MidiDashboard(tk.Frame):
                 depth += 1
             except Exception: break
         
-        matrix_log("ui", "midi", "_find_midi_manager", f"🎹 [MIDI-DASH] ❌ Failed to find MidiManager after traversing {depth} levels.", "WARNING")
+        matrix_log("comms", "midi", "_find_midi_manager", f"🎹 [MIDI-DASH] ❌ Failed to find MidiManager after traversing {depth} levels.", "WARNING")
         return None
 
     def on_midi_activity(self, direction, msg):
@@ -153,7 +153,7 @@ class MidiDashboard(tk.Frame):
 
     def _process_activity(self, direction, msg):
         if LOCAL_DEBUG:
-            matrix_log("ui", "midi", "_process_activity", f"🎹 [MIDI-DASH] Processing {direction} activity for UI update.", "DEBUG")
+            matrix_log("comms", "midi", "_process_activity", f"🎹 [MIDI-DASH] Processing {direction} activity for UI update.", "DEBUG")
         
         # 1. Update Keyboard
         self.keyboard.handle_midi(msg)
@@ -197,7 +197,7 @@ class MidiDashboard(tk.Frame):
             try:
                 self.midi_manager.remove_monitor_callback(self.on_midi_activity)
             except Exception as e:
-                matrix_log("ui", "midi", "destroy", f"Failed to remove MIDI monitor callback: {e}", "TRACE")
+                matrix_log("comms", "midi", "destroy", f"Failed to remove MIDI monitor callback: {e}", "TRACE")
         super().destroy()
 
 def get_gui_class():

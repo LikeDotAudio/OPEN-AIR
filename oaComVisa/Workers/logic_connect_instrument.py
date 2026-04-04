@@ -58,7 +58,7 @@ class VisaConnector:
         - Configures instrument timeout (5s) and termination characters.
         """
         if LOCAL_DEBUG:
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Connecting to instrument: {resource_name}.", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Connecting to instrument: {resource_name}.", "DEBUG")
         try:
             rm = pyvisa.ResourceManager()
             inst = rm.open_resource(resource_name)
@@ -70,7 +70,7 @@ class VisaConnector:
             inst.query_delay = 0.1
 
             if LOCAL_DEBUG:
-                matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Connection successful to {resource_name}.", "SUCCESS")
+                matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Connection successful to {resource_name}.", "SUCCESS")
             return inst
         except Exception as e:
             # ⚡ NON-GATED GRAVITY: Errors must remain outside debug gates.

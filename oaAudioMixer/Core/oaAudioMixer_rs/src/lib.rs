@@ -7,51 +7,55 @@ use crate::manager::AudioConnectionManager;
 mod manager;
 mod factory;
 
-#[cfg(target_os = "windows")]
-mod windows_backend;
-
-#[cfg(target_os = "linux")]
-mod linux_backend;
-
-#[cfg(target_os = "macos")]
-mod macos_backend;
+#[cfg(target_os = "windows")] mod windows_backend;
+#[cfg(target_os = "linux")] mod linux_backend;
+#[cfg(target_os = "macos")] mod macos_backend;
 
 #[pyclass]
-struct AudioMixer {
-    manager: Box<dyn AudioConnectionManager>,
-}
+struct AudioMixer { manager: Box<dyn AudioConnectionManager> }
 
 #[pymethods]
 impl AudioMixer {
-    #[new]
-    fn new() -> PyResult<Self> {
-        let manager = get_os_manager();
-        Ok(AudioMixer { manager })
-    }
+    #[new] fn new() -> PyResult<Self> { Ok(AudioMixer { manager: get_os_manager() }) }
 
-    fn get_master_volume(&self) -> PyResult<f32> {
-        self.manager.get_master_volume().map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e))
-    }
-
-    fn set_master_volume(&mut self, level: f32) -> PyResult<()> {
-        self.manager.set_master_volume(level).map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e))
-    }
+    fn get_master_volume(&self) -> PyResult<f32> { self.manager.get_master_volume().map_err(PyErr::new::<pyo3::exceptions::PyRuntimeError, _>) }
+    fn set_master_volume(&mut self, level: f32) -> PyResult<()> { self.manager.set_master_volume(level).map_err(PyErr::new::<pyo3::exceptions::PyRuntimeError, _>) }
+    fn set_device_volume(&mut self, id: String, level: f32) -> PyResult<()> { self.manager.set_device_volume(id, level).map_err(PyErr::new::<pyo3::exceptions::PyRuntimeError, _>) }
+    fn set_app_volume(&mut self, id: u32, level: f32) -> PyResult<()> { self.manager.set_app_volume(id, level).map_err(PyErr::new::<pyo3::exceptions::PyRuntimeError, _>) }
 
     fn get_connected_software<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyList>> {
-        let apps = self.manager.get_connected_software().map_err(|e| PyErr::new::<pyo3::exceptions::PyRuntimeError, _>(e))?;
-        let py_list = PyList::empty(py);
-        for app in apps {
-            let app_dict = pyo3::types::PyDict::new(py);
-            app_dict.set_item("name", app.name)?;
-            app_dict.set_item("is_active", app.is_active)?;
-            py_list.append(app_dict)?;
+        let apps = self.manager.get_connected_software().map_err(PyErr::new::<pyo3::exceptions::PyRuntimeError, _>)?;
+        let list = PyList::empty(py);
+        for a in apps {
+            let d = pyo3::types::PyDict::new(py);
+            d.set_item("name", a.name)?; d.set_item("pid", a.pid)?; d.set_item("driver", a.driver)?;
+            d.set_item("volume", a.volume)?; d.set_item("is_active", a.is_active)?;
+            list.append(d)?;
         }
-        Ok(py_list)
+        Ok(list)
+    }
+
+    fn get_available_devices<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyList>> {
+        self.get_devices_list(py, self.manager.get_available_devices().map_err(PyErr::new::<pyo3::exceptions::PyRuntimeError, _>)?)
+    }
+
+    fn get_available_sources<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyList>> {
+        self.get_devices_list(py, self.manager.get_available_sources().map_err(PyErr::new::<pyo3::exceptions::PyRuntimeError, _>)?)
     }
 }
 
-#[pymodule]
-fn oaaudiomixer_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_class::<AudioMixer>()?;
-    Ok(())
+impl AudioMixer {
+    fn get_devices_list<'py>(&self, py: Python<'py>, devices: Vec<crate::manager::AudioDevice>) -> PyResult<Bound<'py, PyList>> {
+        let list = PyList::empty(py);
+        for d in devices {
+            let dict = pyo3::types::PyDict::new(py);
+            dict.set_item("name", d.name)?; dict.set_item("description", d.description)?;
+            dict.set_item("sample_rate", d.sample_rate)?; dict.set_item("channels", d.channels)?;
+            dict.set_item("volume", d.volume)?; dict.set_item("is_default", d.is_default)?;
+            list.append(dict)?;
+        }
+        Ok(list)
+    }
 }
+
+#[pymodule] fn oaaudiomixer_rs(m: &Bound<'_, PyModule>) -> PyResult<()> { m.add_class::<AudioMixer>()?; Ok(()) }

@@ -20,7 +20,7 @@ app_constants = Config.get_instance()
 
 def query_safe(proxy, command, correlation_id="N/A"):
     # Safely queries the instrument with a SCPI command and returns the response.
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: 💳💳⬆️⬆️ Send Visa Command: Querying command: {command}", "DEBUG")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: 💳💳⬆️⬆️ Send Visa Command: Querying command: {command}", "DEBUG")
 
     # ⚡ DEFENSIVE CHECK: Ensure session is still valid
     if not proxy.inst or not proxy.inst.session:
@@ -58,8 +58,8 @@ def query_safe(proxy, command, correlation_id="N/A"):
 
     response = proxy.inst.read().strip()
     
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: ✅ Sent query: {command}", "SUCCESS")
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: 💳💳⬇️⬇️ RX Visa Response: Received response: {response}", "DEBUG")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: ✅ Sent query: {command}", "SUCCESS")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: 💳💳⬇️⬇️ RX Visa Response: Received response: {response}", "DEBUG")
 
     topic = "OPEN-AIR/Proxy/Rx_Outbox"
     payload = orjson.dumps(

@@ -43,11 +43,11 @@ class AES70DiscoveryListener(ServiceListener):
                 "server": info.server,
                 "properties": {k.decode(): v.decode() if isinstance(v, bytes) else v for k, v in info.properties.items()}
             }
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📻 AES70 Found: {name} at {ip}:{port}", "SUCCESS")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📻 AES70 Found: {name} at {ip}:{port}", "SUCCESS")
 
 def discover_aes70_devices(timeout: float = 2.0) -> Dict[str, dict]:
     """Scans for AES70 devices using mDNS."""
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡 Starting mDNS scan for AES70 (_oca._tcp)...", "DEBUG")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "📡 Starting mDNS scan for AES70 (_oca._tcp)...", "DEBUG")
     zc = Zeroconf()
     listener = AES70DiscoveryListener()
     browser = ServiceBrowser(zc, "_oca._tcp.local.", listener)
@@ -63,7 +63,7 @@ def _get_local_ip():
         s.connect(("10.255.255.255", 1))
         IP = s.getsockname()[0]
     except Exception as e:
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error getting local IP: {e}", "TRACE")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error getting local IP: {e}", "TRACE")
         IP = "127.0.0.1"
     finally:
         s.close()
@@ -108,7 +108,7 @@ def discover_ip_devices() -> Tuple[List[str], List[str]]:
     Legacy: Hunts the local network for VISA/SCPI devices.
     Renamed internally to avoid conflict, but exported for orchestrator.
     """
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🌐 Scanning network for VISA devices (Port Scan)...", "DEBUG")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🌐 Scanning network for VISA devices (Port Scan)...", "DEBUG")
     my_ip = _get_local_ip()
     if my_ip == "127.0.0.1":
         logger.warning("Could not determine local IP. Skipping network hunt.")
@@ -130,7 +130,7 @@ def discover_ip_devices() -> Tuple[List[str], List[str]]:
                     if type_ == "GATEWAY": gateways.append(ip)
                     else: dedicated.append(ip)
             except Exception as e:
-                matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error getting scan result: {e}", "TRACE")
+                matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Error getting scan result: {e}", "TRACE")
                 pass
 
     # Also trigger AES70 discovery here and merge if needed, 
@@ -141,5 +141,5 @@ def discover_ip_devices() -> Tuple[List[str], List[str]]:
         if data["ip"] not in dedicated:
             dedicated.append(data["ip"])
 
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ IP/mDNS Scan complete. Dedicated: {len(dedicated)}, Gateways: {len(gateways)}, AES70: {len(aes70_devices)}", "SUCCESS")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"✅ IP/mDNS Scan complete. Dedicated: {len(dedicated)}, Gateways: {len(gateways)}, AES70: {len(aes70_devices)}", "SUCCESS")
     return dedicated, gateways

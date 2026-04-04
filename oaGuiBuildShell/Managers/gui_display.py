@@ -121,7 +121,18 @@ class Application(
             logger.exception(f"🖥️🏗️🎨 [DISPLAY] CRITICAL: App initialization failed: {e}")
 
     def _on_initial_build_complete(self):
-        matrix_log("ui", "gui_shell", "_on_initial_build_complete", "🖥️🏗️🎨 [DISPLAY] Initial build pass finished.", "DEBUG")
+        matrix_log("ui", "gui_builder", "_on_initial_build_complete", "✅🏗️ [BUILDER] Initial GUI build complete. Performing final settle...", "INFO")
+        
+        # ⚡ FINAL SETTLE: After all widgets are created and the layout has had a moment 
+        # to calculate, trigger a final, forced reslice and background sync on all builders.
+        def _final_settle():
+            for loader_instance in self.module_loader.get_all_builders():
+                if loader_instance and hasattr(loader_instance, 'dynamic_gui') and loader_instance.dynamic_gui.winfo_exists():
+                    builder = loader_instance.dynamic_gui
+                    builder._trigger_reslice_all(force=True)
+                    builder._trigger_background_sync(force=True)
+
+        self.after(250, _final_settle)
         self.after(500, self._trigger_initial_tab_selection)
         if self.state_cache_manager:
             self.after(1000, self.state_cache_manager.initialize_state)

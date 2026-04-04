@@ -32,32 +32,27 @@ def initialize_paths():
         return GLOBAL_PROJECT_ROOT, DATA_RUNNING_DIR
 
     # --- GLOBAL PATH ANCHOR ---
-    # Determine the absolute, true root path of the project.
-    # Since this file is in oaOchestration/Core/, the root is 3 levels up.
     GLOBAL_PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
-
-    # Add project root to sys.path if not already present
     root_str = str(GLOBAL_PROJECT_ROOT)
     if root_str not in sys.path:
         sys.path.insert(0, str(root_str))
 
-    # --- Set Data Directories (Consumable & Refactored Structure) ---
-    # Running state is now ephemeral and stored in a hidden cache directory.
-    DATA_RUNNING_DIR = GLOBAL_PROJECT_ROOT / ".pytest_cache" / "oaDataState"
-    DATA_LOGS_DIR = GLOBAL_PROJECT_ROOT / "oaDataLogs"
-    DATA_CACHE_DIR = GLOBAL_PROJECT_ROOT / "oaDataCache"
-    DATA_SNMP_DIR = GLOBAL_PROJECT_ROOT / "oaDataSNMP"
-    DATA_SPLINKS_DIR = GLOBAL_PROJECT_ROOT / "oaDataSplinks"
-    DATA_REPORTS_DIR = GLOBAL_PROJECT_ROOT / "oaReports"
+    # --- INSTANCE-SPECIFIC & EPHEMERAL DATA DIRECTORIES ---
+    instance_guid = os.environ.get("OPEN_AIR_INSTANCE_GUID", "standalone")
+    temp_base_dir = GLOBAL_PROJECT_ROOT / ".pytest_cache" / "RUN" / instance_guid
+
+    DATA_RUNNING_DIR = temp_base_dir / "oaDataState"
+    DATA_LOGS_DIR = temp_base_dir / "oaDataLogs"
+    DATA_CACHE_DIR = temp_base_dir / "oaDataCache"
+    DATA_SNMP_DIR = temp_base_dir / "oaDataSNMP"
+    DATA_SPLINKS_DIR = temp_base_dir / "oaDataSplinks"
+    DATA_REPORTS_DIR = temp_base_dir / "oaReports"
 
     # Ensure directories exist (Auto-generation)
     DATA_RUNNING_DIR.mkdir(parents=True, exist_ok=True)
-    DATA_LOGS_DIR.mkdir(parents=True, exist_ok=True)
-    DATA_CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    DATA_SNMP_DIR.mkdir(parents=True, exist_ok=True)
-    DATA_SPLINKS_DIR.mkdir(parents=True, exist_ok=True)
-    DATA_REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-
+    # The other directories are created on-demand by their respective managers
+    # to keep the temp folder clean.
+    
     return GLOBAL_PROJECT_ROOT, DATA_RUNNING_DIR
 
 

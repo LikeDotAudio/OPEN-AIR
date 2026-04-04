@@ -20,7 +20,7 @@ app_constants = Config.get_instance()
 
 def write_safe(proxy, command):
     # Safely writes a SCPI command to the instrument.
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: 💳💳⬆️⬆️ Send Visa Command: Transmitting command: {command}", "DEBUG")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: 💳💳⬆️⬆️ Send Visa Command: Transmitting command: {command}", "DEBUG")
 
     # ⚡ DEFENSIVE CHECK: Ensure session is still valid
     if not proxy.inst or not proxy.inst.session:
@@ -43,5 +43,5 @@ def write_safe(proxy, command):
 
     # ⚡ DIRECT CALL: Assuming hardware state is validated or fatal if not
     proxy.inst.write(command)
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: ✅ Sent command: {command}", "SUCCESS")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ℹ️ Proxy Log: ✅ Sent command: {command}", "SUCCESS")
     return True

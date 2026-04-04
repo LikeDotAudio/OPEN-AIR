@@ -31,12 +31,12 @@ except ImportError:
 # --- Standard Debug Logging Setup ---
 from oaLogging.Methods.matrix_gate import is_debug_allowed
 def _is_debug():
-    return is_debug_allowed(system="UI", element="OSC")
+    return is_debug_allowed(system="comms", element="osc")
 
-from loguru import logger
+from oaLogging.Core.logger import get_logger
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
-osc_logger = logger.bind(category="OSC")
+osc_logger = get_logger("OSC")
 
 class OscTxClient:
     """

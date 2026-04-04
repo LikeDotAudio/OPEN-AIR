@@ -28,7 +28,7 @@ class OpenAirTerminator:
         Starts the process: Subscribe -> Collect -> Delete.
         Runs in a background thread to avoid blocking GUI.
         """
-        matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "INITIATING OPEN-AIR TOPIC DELETION SEQUENCE", "DEBUG")
+        matrix_log("comms", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "INITIATING OPEN-AIR TOPIC DELETION SEQUENCE", "DEBUG")
         threading.Thread(target=self._execution_thread, daemon=True).start()
 
     def _execution_thread(self):
@@ -74,7 +74,7 @@ class OpenAirTerminator:
             if count % 100 == 0:
                 time.sleep(0.1)
         
-        matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Deleted {count} topics from OPEN-AIR tree.", "DEBUG")
+        matrix_log("comms", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Deleted {count} topics from OPEN-AIR tree.", "DEBUG")
 
 # Standalone function for easy import
 def delete_open_air_tree(mqtt_connection_manager, state_cache_manager=None):
@@ -91,9 +91,9 @@ def delete_open_air_tree(mqtt_connection_manager, state_cache_manager=None):
     if state_cache_manager:
         # Get all known topics from the cache
         topics = list(state_cache_manager.rust_cache.keys())
-        matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Sourced {len(topics)} topics from State Cache for deletion.", "DEBUG")
+        matrix_log("comms", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Sourced {len(topics)} topics from State Cache for deletion.", "DEBUG")
     else:
-        matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "No State Cache provided. Cannot determine topics to delete.", "DEBUG")
+        matrix_log("comms", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "No State Cache provided. Cannot determine topics to delete.", "DEBUG")
         # Fallback or error? For safety, we won't blindly guess.
         return
 

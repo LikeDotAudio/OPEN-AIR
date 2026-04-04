@@ -94,9 +94,9 @@ class VisaGuiPublisher:
                     qos=0,
                     retain=False,
                 )
-                matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 ✅ First device automatically selected after search.", "SUCCESS")
+                matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 ✅ First device automatically selected after search.", "SUCCESS")
 
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 ✅ GUI device list updated with bulk search results.", "SUCCESS")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 ✅ GUI device list updated with bulk search results.", "SUCCESS")
         except Exception as e:
             if LOCAL_DEBUG:
                 logger.exception("💳 ❌ Error in _update_found_devices_gui")
@@ -133,7 +133,7 @@ class VisaGuiPublisher:
             self.mqtt_util.get_client_instance().publish(
                 topic=full_topic, payload=orjson.dumps(payload_data).decode(), qos=0, retain=True
             )
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 MQTT: Published status '{topic_suffix}' with value '{value}' to '{full_topic}'", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 MQTT: Published status '{topic_suffix}' with value '{value}' to '{full_topic}'", "DEBUG")
 
     def _publish_proxy_status(self, status: str):
         """Publishes the high-level proxy connection status.
@@ -149,4 +149,4 @@ class VisaGuiPublisher:
         self.mqtt_util.get_client_instance().publish(
             topic=topic, payload=orjson.dumps(payload_data).decode(), qos=0, retain=True
         )
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 MQTT: Published Proxy Status '{status}' to '{topic}'", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 MQTT: Published Proxy Status '{status}' to '{topic}'", "DEBUG")

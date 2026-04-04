@@ -33,9 +33,9 @@ app_constants = Config.get_instance()
 
 # --- Standard Debug Logging Setup ---
 # The router respects the hierarchical debug matrix. 
-# It is classified under the 'ROUTER' element within the 'CORE' system.
+# It is classified under the 'ROUTER' element within the 'router' system.
 def GET_LOCAL_DEBUG(func_name=None):
-    return is_debug_allowed(system="CORE", element="ROUTER", func_name=func_name)
+    return is_debug_allowed(system="comms", element="broker", func_name=func_name)
 
 # Legacy compatibility (defaults to checking the system/element level)
 LOCAL_DEBUG = GET_LOCAL_DEBUG()

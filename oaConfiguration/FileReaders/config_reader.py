@@ -107,24 +107,45 @@ class Config(ConfigDefaults):
         self.OSC_TX_PORT = self._s_get(config, "OSC", "osc_tx_port", self.OSC_TX_PORT, "int")
         self.OSC_REMOTE_IP = self._s_get(config, "OSC", "osc_remote_ip", self.OSC_REMOTE_IP)
 
+        if self._s_get(config, "System", "randomize_ports", False, "bool"):
+            import random
+            offset = random.randint(1, 100)
+            self.OSC_RX_PORT += offset
+            self.OSC_TX_PORT += offset
+
     def _parse_rest_settings(self, config):
         self.REST_HOST = self._s_get(config, "REST", "rest_host", self.REST_HOST)
         self.REST_PORT = self._s_get(config, "REST", "rest_port", self.REST_PORT, "int")
         self.REST_CORS_ORIGINS = self._s_get(config, "REST", "rest_cors_origins", self.REST_CORS_ORIGINS)
+        
+        # ⚡ MULTI-INSTANCE: Randomize port if enabled to avoid conflicts
+        if self._s_get(config, "System", "randomize_ports", False, "bool"):
+            import random
+            self.REST_PORT += random.randint(1, 100)
 
     def _parse_debug_matrix(self, config):
+        # ⚡ GRANULAR CONTROLS: Parse all DEBUG_* sections into the matrix
+        debug_sections = [
+            "DEBUG_MATRIX", "DEBUG_CORE_ORCHESTRATION", "DEBUG_STATE_DATA",
+            "DEBUG_TRANSLATOR", "DEBUG_COMMS_PROTOCOLS", "DEBUG_GUI", 
+            "DEBUG_RUST_FFI", "DEBUG_ROUTER", "DEBUG_FILE_IO"
+        ]
+        
+        for section_name in debug_sections:
+            if section_name in config:
+                section = config[section_name]
+                for key in section:
+                    # ⚡ FIX: Skip known string-based keys to avoid ValueError
+                    if key.lower() in ["mute_functions", "force_functions"]:
+                        continue
+                    # Store all keys in uppercase for consistent matrix lookup
+                    self.DEBUG_MATRIX[key.upper()] = section.getboolean(key, False)
+        
+        # Special case for comma-separated strings (usually in DEBUG_MATRIX)
         if "DEBUG_MATRIX" in config:
-            section = config["DEBUG_MATRIX"]
-            for key in section:
-                # ⚡ FIX: Skip known string-based keys to avoid ValueError
-                if key.lower() in ["mute_functions", "force_functions"]:
-                    continue
-                # Store all keys in uppercase for consistent matrix lookup
-                self.DEBUG_MATRIX[key.upper()] = section.getboolean(key, False)
-            
-            # Special case for comma-separated strings
-            self.MUTE_FUNCTIONS = section.get("mute_functions", "")
-            self.FORCE_FUNCTIONS = section.get("force_functions", "")
+            self.MUTE_FUNCTIONS = config["DEBUG_MATRIX"].get("mute_functions", "")
+            self.FORCE_FUNCTIONS = config["DEBUG_MATRIX"].get("force_functions", "")
+
 
     def read_config(self):
         from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT, initialize_paths
@@ -150,6 +171,21 @@ class Config(ConfigDefaults):
         self._parse_osc_settings(config)
         self._parse_rest_settings(config)
         self._parse_debug_matrix(config)
+        self._parse_debug_router(config)
+
+    def _parse_debug_router(self, config):
+        if "DEBUG_ROUTER" in config:
+            self.ROUTER_INGEST_LOGS = self._s_get(config, "DEBUG_ROUTER", "router_ingest", True, "bool")
+            self.ROUTER_DISPATCH_LOGS = self._s_get(config, "DEBUG_ROUTER", "router_dispatch", True, "bool")
+            self.ROUTER_SETTLE_LOGS = self._s_get(config, "DEBUG_ROUTER", "router_settle", True, "bool")
+            self.ROUTER_FAILOVER_LOGS = self._s_get(config, "DEBUG_ROUTER", "router_failover", True, "bool")
+        else:
+            # Set defaults if the section is missing
+            self.ROUTER_INGEST_LOGS = True
+            self.ROUTER_DISPATCH_LOGS = True
+            self.ROUTER_SETTLE_LOGS = True
+            self.ROUTER_FAILOVER_LOGS = True
+
 
         if LOCAL_DEBUG:
             logger.debug(f"📜 [CONFIG] Loaded: Version {self.CURRENT_VERSION}, Debug: {self.ENABLE_DEBUG_MODE}")

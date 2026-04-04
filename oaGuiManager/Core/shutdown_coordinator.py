@@ -25,7 +25,11 @@ class ShutdownCoordinator:
             return
         self._shutdown_in_progress = True
         
-        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "🖥️🎨 [UI] Initiating shutdown...", level="DEBUG")
+        # ⚡ DEBUG: Identify who called on_closing
+        stack = inspect.stack()
+        caller_info = "\n".join([f"  - {s.filename}:{s.lineno} in {s.function}" for s in stack[1:5]])
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🖥️🎨 [UI] Initiating shutdown... Caller stack:\n{caller_info}", level="DEBUG")
+        
         self.root._shutdown = True
         
         # ⚡ THREADED SHUTDOWN: Run manager stops in a separate thread to prevent UI hang

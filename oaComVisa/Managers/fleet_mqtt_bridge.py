@@ -39,14 +39,14 @@ class MqttFleetBridge:
         
         self.on_scan_trigger: Optional[Callable[[], None]] = None
         
-        matrix_log("core", "visa", "__init__", f"Initializing MqttFleetBridge. Prefix: {self.topic_prefix}", "DEBUG")
+        matrix_log("comms", "visa", "__init__", f"Initializing MqttFleetBridge. Prefix: {self.topic_prefix}", "DEBUG")
         self._setup_subscriptions()
 
     def _setup_subscriptions(self):
         if self.subscriber_router:
             scan_topic = f"{self.topic_prefix}/System/Control/Fleet/Scan"
             self.subscriber_router.subscribe_to_topic(scan_topic, self._on_scan_message)
-            matrix_log("core", "visa", "_setup_subscriptions", f"MqttFleetBridge subscribed to: {scan_topic}", "DEBUG")
+            matrix_log("comms", "visa", "_setup_subscriptions", f"MqttFleetBridge subscribed to: {scan_topic}", "DEBUG")
 
     @property
     def is_connected(self) -> bool:
@@ -55,19 +55,19 @@ class MqttFleetBridge:
     def _on_scan_message(self, msg: MqttMessage):
         payload = msg.decode_payload()
         if payload == "TRIGGER":
-            matrix_log("core", "visa", "_on_scan_message", "MQTT Bridge received Scan Trigger!", "DEBUG")
+            matrix_log("comms", "visa", "_on_scan_message", "MQTT Bridge received Scan Trigger!", "DEBUG")
             if self.on_scan_trigger:
                 self.on_scan_trigger()
 
     def publish_inventory(self, inventory_data):
         if not self.mqtt_manager: return
         
-        matrix_log("core", "visa", "publish_inventory", f"Fleet Bridge: Publishing inventory. Size: {len(str(inventory_data))} chars.", "DEBUG")
+        matrix_log("comms", "visa", "publish_inventory", f"Fleet Bridge: Publishing inventory. Size: {len(str(inventory_data))} chars.", "DEBUG")
 
         try:
             self._publish_flattened_dict(inventory_data, self.topic_prefix)
         except Exception as e:
-            matrix_log("core", "visa", "publish_inventory", f"MQTT Bridge Error publishing flattened message: {e}", "ERROR")
+            matrix_log("comms", "visa", "publish_inventory", f"MQTT Bridge Error publishing flattened message: {e}", "ERROR")
 
     def _publish_flattened_dict(self, data, base_topic):
         if not self.mqtt_manager: return
@@ -79,7 +79,7 @@ class MqttFleetBridge:
                     payload = orjson.dumps(data, option=orjson.OPT_INDENT_2).decode()
                     self.mqtt_manager.publish(base_topic, payload)
                 except Exception as e:
-                    matrix_log("core", "visa", "_publish_flattened_dict", f"MQTT Bridge Error publishing device BLOB {base_topic}: {e}", "ERROR")
+                    matrix_log("comms", "visa", "_publish_flattened_dict", f"MQTT Bridge Error publishing device BLOB {base_topic}: {e}", "ERROR")
                 return
 
             for key, value in data.items():
@@ -95,7 +95,7 @@ class MqttFleetBridge:
             try:
                 self.mqtt_manager.publish(base_topic, str(data))
             except Exception as e:
-                matrix_log("core", "visa", "_publish_flattened_dict", f"MQTT Bridge Error publishing leaf node {base_topic}: {e}", "ERROR")
+                matrix_log("comms", "visa", "_publish_flattened_dict", f"MQTT Bridge Error publishing leaf node {base_topic}: {e}", "ERROR")
 
     def disconnect(self):
         pass

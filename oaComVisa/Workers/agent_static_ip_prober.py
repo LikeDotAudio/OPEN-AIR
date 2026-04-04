@@ -33,7 +33,7 @@ def discover_gateway_devices(gateway_ips):
     """
     gateway_resources = []
     for ip in gateway_ips:
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   👉 Scraping Gateway {ip}...", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   👉 Scraping Gateway {ip}...", "DEBUG")
         cfg = Config.get_instance()
         url = f"{cfg.VISA_PROBE_PROTOCOL}://{ip}/{cfg.VISA_PROBE_PATH}"
         params = {"whichbutton": "find", "timeout": "5"}
@@ -56,9 +56,9 @@ def discover_gateway_devices(gateway_ips):
                 logger.error(
                     f"   ❌ Error scraping gateway {ip}: {e}")
 
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   ✅ Found {len(targets)} resources from gateway {ip}: {targets}", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   ✅ Found {len(targets)} resources from gateway {ip}: {targets}", "DEBUG")
         for t in targets:
             visa_res = f"TCPIP::{ip}::{t}::INSTR"
             gateway_resources.append(visa_res)
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"     ➕ Added gateway resource: {visa_res}", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"     ➕ Added gateway resource: {visa_res}", "DEBUG")
     return gateway_resources

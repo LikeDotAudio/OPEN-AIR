@@ -16,14 +16,14 @@
 
 import datetime
 import zlib
-from loguru import logger
+from oaLogging.Core.logger import get_logger
 from oaConfiguration.FileReaders.config_reader import Config
 from oaComSNMP.Methods.snmp_utils import get_snmp_node_id, get_snmp_descriptor
 
 # --- Standard Debug Logging Setup ---
 snmp_mib_generator_verbose_logging_enabled = False
 app_constants = Config.get_instance()
-snmp_logger = logger.bind(subsystem="SNMP")
+snmp_logger = get_logger("SNMP")
 
 class MibGenerator:
     @staticmethod

@@ -16,7 +16,7 @@ class FleetScanMixin:
     def trigger_scan(self):
         """Initiates a comprehensive network scan for VISA instruments."""
         self.initial_scan_complete_event.clear()
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🚢🔍 [VISA] Scan Triggered via API.", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🚢🔍 [VISA] Scan Triggered via API.", "DEBUG")
             
         self._publish_scan_status("Start", {"status": "scanning"})
         try:
@@ -29,12 +29,12 @@ class FleetScanMixin:
 
     def wait_for_initial_scan(self, timeout=None):
         """Blocks the calling thread until the first device scan completes."""
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⏳ Waiting for initial VISA fleet scan to complete...", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⏳ Waiting for initial VISA fleet scan to complete...", "DEBUG")
         completed = self.initial_scan_complete_event.wait(timeout=timeout)
         if completed:
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Initial VISA fleet scan complete.", "SUCCESS")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ Initial VISA fleet scan complete.", "SUCCESS")
         else:
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⚠️ Timed out waiting for initial VISA fleet scan.", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "⚠️ Timed out waiting for initial VISA fleet scan.", "DEBUG")
         return completed
 
     def _publish_scan_status(self, status, payload):
@@ -42,4 +42,4 @@ class FleetScanMixin:
         if self.mqtt_bridge and self.mqtt_bridge.is_connected:
             topic = f"OPEN-AIR/System/Status/Fleet/{status}"
             self.mqtt_bridge.mqtt_manager.publish(topic, orjson.dumps(payload).decode())
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Published scan status '{status}' to '{topic}'", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Published scan status '{status}' to '{topic}'", "DEBUG")

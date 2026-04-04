@@ -141,7 +141,7 @@ class TestMqttManager(unittest.TestCase):
         """Verify scan complete logic executes without error and logs correctly."""
         msg = MqttMessage("OPEN-AIR/System/Status/Fleet/Complete", b"{}")
         self.manager._on_fleet_scan_complete(msg)
-        self.mock_matrix_log.assert_called_with("core", "mqtt", "_on_fleet_scan_complete", "✅ [MQTT] MqttManager: Fleet Scan Complete detected.", "INFO")
+        self.mock_matrix_log.assert_called_with("comms", "mqtt", "_on_fleet_scan_complete", "✅ [MQTT] MqttManager: Fleet Scan Complete detected.", "INFO")
 
     def test_system_status_loop_when_connected(self):
         """Test _system_status_loop when client is connected."""

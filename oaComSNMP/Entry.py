@@ -105,7 +105,7 @@ def main():
     initialize_paths()
     cfg = Config.get_instance()
     
-    matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🚀 [SNMP] Launching Standalone SNMP Module...", "INFO")
+    matrix_log("comms", "snmp", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🚀 [SNMP] Launching Standalone SNMP Module...", "INFO")
     
     # In standalone mode, we might need to initialize the MQTT connection manually
     from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager

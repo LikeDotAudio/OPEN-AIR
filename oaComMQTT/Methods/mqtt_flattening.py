@@ -48,7 +48,7 @@ class MqttFlattener:
         Clears the internal buffer.
         """
         if LOCAL_DEBUG:
-            matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "The buffer has been wiped clean.", "DEBUG")
+            matrix_log("comms", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "The buffer has been wiped clean.", "DEBUG")
         self.buffer = {}
         self.last_unique_identifier = None
 
@@ -85,7 +85,7 @@ class MqttFlattener:
                 return self._flush_buffer()
             else:
                 if LOCAL_DEBUG:
-                    matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Flush command received, but buffer is empty. Nothing to do.", "DEBUG")
+                    matrix_log("comms", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Flush command received, but buffer is empty. Nothing to do.", "DEBUG")
                 return []
 
         try:
@@ -97,12 +97,12 @@ class MqttFlattener:
                 and isinstance(data, dict)
                 and data.get("value") == "false"
             ):
-                matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Skipping transaction for '{topic}' because 'Active' is false.", "DEBUG")
+                matrix_log("comms", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Skipping transaction for '{topic}' because 'Active' is false.", "DEBUG")
                 self.clear_buffer()
                 return []
 
             if LOCAL_DEBUG:
-                matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Received data for '{topic}'. Storing in buffer.", "DEBUG")
+                matrix_log("comms", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Received data for '{topic}'. Storing in buffer.", "DEBUG")
 
             # Extract the unique data set identifier (the second-to-last node)
             relative_topic = topic.replace(f"{topic_prefix}/", "", 1)
@@ -152,7 +152,7 @@ class MqttFlattener:
         current_function_name = inspect.currentframe().f_code.co_name
 
         if LOCAL_DEBUG:
-            matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Processing buffer and commencing pivoting and flattening.", "DEBUG")
+            matrix_log("comms", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Processing buffer and commencing pivoting and flattening.", "DEBUG")
 
         flattened_payload = {}
         flattened_payload["Parameter"] = self.last_unique_identifier
@@ -179,7 +179,7 @@ class MqttFlattener:
             self.last_unique_identifier = new_identifier
 
         if LOCAL_DEBUG:
-            matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Data transmogrification complete.", "SUCCESS")
+            matrix_log("comms", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Data transmogrification complete.", "SUCCESS")
 
         if LOCAL_DEBUG: MQTT_LOGGER.debug(orjson.dumps(flattened_payload, indent=2).decode())
         return [flattened_payload]

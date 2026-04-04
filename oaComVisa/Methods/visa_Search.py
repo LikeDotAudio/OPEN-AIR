@@ -79,12 +79,12 @@ def probe_devices(resource_manager, potential_targets):
     Returns:
         dict: A dictionary of probed device entries, keyed by device identifier (serial number or sanitized resource).
     """
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 🔍 manager_visa_Search: Received {len(potential_targets)} potential targets for probing: {potential_targets}", "DEBUG")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 🔍 manager_visa_Search: Received {len(potential_targets)} potential targets for probing: {potential_targets}", "DEBUG")
     device_collection = {}
 
     if HAS_SCANNER_RS:
         # ⚡ PURE RUST PRE-PROBE: Concurrently check for TCP reachability
-        matrix_log("core", "visa", "probe_devices", "⚡ Starting concurrent reachability scan...", "DEBUG")
+        matrix_log("comms", "visa", "probe_devices", "⚡ Starting concurrent reachability scan...", "DEBUG")
         tcp_map = {}
         probe_list = []
         for target in potential_targets:
@@ -110,18 +110,18 @@ def probe_devices(resource_manager, potential_targets):
                     if len(parts) > 1 and parts[1] in reachable_ips:
                         filtered.append(target)
                     else:
-                        matrix_log("core", "visa", "probe_devices", f"   ⏭️ Skipping unreachable host: {res}", "DEBUG")
+                        matrix_log("comms", "visa", "probe_devices", f"   ⏭️ Skipping unreachable host: {res}", "DEBUG")
                 else:
                     filtered.append(target)
             potential_targets = filtered
-            matrix_log("core", "visa", "probe_devices", f"⚡ Reachability scan complete. {len(potential_targets)} targets remaining.", "SUCCESS")
+            matrix_log("comms", "visa", "probe_devices", f"⚡ Reachability scan complete. {len(potential_targets)} targets remaining.", "SUCCESS")
 
     try:
         for idx, target in enumerate(potential_targets):
             raw_res = target["Resource"]
             display_res = VisaUtilityParser.clean_string_for_display(raw_res)
 
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   🎯 Probing {display_res} ... ", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"   🎯 Probing {display_res} ... ", "DEBUG")
 
             conn_details = VisaUtilityParser.parse_resource_details(display_res)
             
@@ -150,7 +150,7 @@ def probe_devices(resource_manager, potential_targets):
             }
 
             if idn:
-                matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"SUCCESS", "SUCCESS")
+                matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"SUCCESS", "SUCCESS")
                 mfg, model, serial_num, firm = VisaUtilityParser.parse_idn(
                     idn
                 )  # Use VisaUtilityParser for basic parsing
@@ -196,7 +196,7 @@ def probe_devices(resource_manager, potential_targets):
 
                     device_identifier = "-".join(sanitized_parts)
 
-                    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"      Generated new device_identifier for empty/0 serial: {device_identifier}", "DEBUG")
+                    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"      Generated new device_identifier for empty/0 serial: {device_identifier}", "DEBUG")
 
                 # Ensure the device_identifier is unique across the collection
                 original_identifier = device_identifier
@@ -239,7 +239,7 @@ def probe_devices(resource_manager, potential_targets):
             logger.error(
                 f"💳 🔍 CRITICAL manager_visa_Search: Exception in probe_devices loop: {e}")
 
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 🔍 manager_visa_Search: Finished probing. Returning {len(device_collection)} probed devices: {device_collection}", "DEBUG")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 🔍 manager_visa_Search: Finished probing. Returning {len(device_collection)} probed devices: {device_collection}", "DEBUG")
     return device_collection
 
 

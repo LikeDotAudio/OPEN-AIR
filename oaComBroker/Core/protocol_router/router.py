@@ -97,20 +97,20 @@ class ProtocolRouter:
         threading.Thread(target=self._ingest_loop, daemon=True, name="Router-Ingest").start()
         threading.Thread(target=self._dispatch_loop, daemon=True, name="Router-Dispatch-Master").start()
         
-        matrix_log("core", "router", "start", f"▶️▶️▶️ [START] Protocol Router Active (GUID: {self.GUID}).", "SUCCESS")
+        matrix_log("comms", "broker", "start", f"▶️▶️▶️ [START] Protocol Router Active (GUID: {self.GUID}).", "SUCCESS")
 
     def stop(self):
         self._running = False
         # ⚡ STABILITY: Wait for pending dispatch tasks to finish before closing native resources
         if self._executor: self._executor.shutdown(wait=True)
-        matrix_log("core", "router", "stop", "⏹️ [STOP] Protocol Router Offline.", "WARNING")
+        matrix_log("comms", "broker", "stop", "⏹️ [STOP] Protocol Router Offline.", "WARNING")
 
     def set_active_state(self, active):
         if self.is_active == active: return
         self.is_active = active
         
         state_label = "PRIMARY" if active else "SHADOW"
-        matrix_log("core", "router", "set_active_state", f"🔄 [FAILOVER] Protocol Router transitioning to {state_label} mode.", "INFO")
+        matrix_log("comms", "broker", "set_active_state", f"🔄 [FAILOVER] Protocol Router transitioning to {state_label} mode.", "INFO")
         
         managers = [self.osc_manager, self.midi_manager, self.snmp_manager, self.smpte2138_manager]
         for mgr in managers:
@@ -121,7 +121,7 @@ class ProtocolRouter:
                 else:
                     if hasattr(mgr, "stop"): mgr.stop()
             except Exception as e:
-                matrix_log("core", "router", "set_active_state", f"❌ [FAILOVER] Error transitioning manager: {e}", "ERROR")
+                matrix_log("comms", "broker", "set_active_state", f"❌ [FAILOVER] Error transitioning manager: {e}", "ERROR")
 
     def set_mqtt_manager(self, m): self.mqtt_manager = m
     def set_splinker_manager(self, m): self.splinker_manager = m
@@ -188,7 +188,7 @@ class ProtocolRouter:
         if self.splinker_manager:
             try: self.splinker_manager.process_router_event(msg)
             except Exception as e: 
-                matrix_log("core", "router", "_process_pipeline", f"🔗🚫🛑 [ROUTER] Splinker Error: {e}", "ERROR")
+                matrix_log("comms", "broker", "_process_pipeline", f"🔗🚫🛑 [ROUTER] Splinker Error: {e}", "ERROR")
 
         msg["ui_tags"] = calculate_ui_tags(msg, self.GUID)
         
@@ -196,7 +196,7 @@ class ProtocolRouter:
         self.monitor.broadcast_to_observers(msg)
         
         val_str = str(msg['val'])[:100] + ("..." if len(str(msg['val'])) > 100 else "")
-        matrix_log("core", "router", "_process_pipeline", f"📥📡📤 [ROUTER] {strategy} >> {msg['topic']}: {val_str}", "DEBUG")
+        matrix_log("comms", "broker", "_process_pipeline", f"📥📡📤 [ROUTER] {strategy} >> {msg['topic']}: {val_str}", "DEBUG")
         
         self._dispatch_by_strategy(strategy, msg)
 
@@ -211,7 +211,7 @@ class ProtocolRouter:
                 if msg is None: continue
                 self._process_message_pipeline(msg)
             except Exception as e: 
-                matrix_log("core", "router", "_ingest_loop", f"📥🚫🛑 [ROUTER] Ingest Error: {e}", "ERROR")
+                matrix_log("comms", "broker", "_ingest_loop", f"📥🚫🛑 [ROUTER] Ingest Error: {e}", "ERROR")
 
     def _dispatch_loop(self):
         while self._running:
@@ -240,11 +240,11 @@ class ProtocolRouter:
                 if "after shutdown" in str(e).lower():
                     pass
                 else:
-                    matrix_log("core", "router", "_dispatch_loop", f"📤🚫🛑 [ERROR] Dispatch Loop Error: {e}", "ERROR")
+                    matrix_log("comms", "broker", "_dispatch_loop", f"📤🚫🛑 [ERROR] Dispatch Loop Error: {e}", "ERROR")
             except Exception as e:
-                matrix_log("core", "router", "_dispatch_loop", f"📤🚫🛑 [ERROR] Dispatch Loop Error: {e}", "ERROR")
+                matrix_log("comms", "broker", "_dispatch_loop", f"📤🚫🛑 [ERROR] Dispatch Loop Error: {e}", "ERROR")
 
     def publish_splinker_direct(self, s_topic, d_topic, s_val=None, d_val=None):
         payload = {"source": s_topic, "dest": d_topic, "source_val": s_val, "dest_val": d_val}
-        self.ingest("GUI", "OPEN-AIR/System/Control/Splinker/DirectCreate", payload)
+        self.ingest("comms", "broker", payload)
         return True

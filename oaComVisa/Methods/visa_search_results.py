@@ -44,24 +44,24 @@ class VisaDeviceSearcher:
         }
 
     def search_resources(self):
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 GUI command received: initiating VISA resource search.", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 GUI command received: initiating VISA resource search.", "DEBUG")
         all_resources = list_visa_resources()
         validated_resources = []
 
         expected_devices = self.yak_config.get("expected_devices", [])
         if not expected_devices:
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 🟡 No expected devices configured in connection_yak.json. Returning all found resources.", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 🟡 No expected devices configured in connection_yak.json. Returning all found resources.", "DEBUG")
             self.last_search_results = all_resources  # Store results
             return all_resources
 
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 🔍 Validating {len(all_resources)} resources against {len(expected_devices)} expected device patterns.", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 🔍 Validating {len(all_resources)} resources against {len(expected_devices)} expected device patterns.", "DEBUG")
 
         for resource_name in all_resources:
             is_valid = False
             for device_spec in expected_devices:
                 pattern = device_spec.get("resource_pattern")
                 if pattern and re.match(pattern, resource_name):
-                    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ✅ Resource '{resource_name}' matched expected device pattern: '{pattern}'.", "SUCCESS")
+                    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 ✅ Resource '{resource_name}' matched expected device pattern: '{pattern}'.", "SUCCESS")
                     validated_resources.append(resource_name)
                     is_valid = True
                     break
@@ -69,7 +69,7 @@ class VisaDeviceSearcher:
                 logger.error(f"💳 ❌ Resource '{resource_name}' did not match any expected device pattern.")
 
         if not validated_resources:
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 🟡 No valid resources found matching any expected device patterns.", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 🟡 No valid resources found matching any expected device patterns.", "DEBUG")
 
         self.last_search_results = validated_resources  # Store results
         return validated_resources

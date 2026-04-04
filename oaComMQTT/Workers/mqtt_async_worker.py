@@ -59,7 +59,7 @@ class MqttAsyncWorker:
                 self.manager.client = client
                 self.manager._connected = True
                 if LOCAL_DEBUG:
-                    matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "aiomqtt: Connected to broker.", "SUCCESS")
+                    matrix_log("comms", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "aiomqtt: Connected to broker.", "SUCCESS")
                 
                 if self.manager.subscriber_router:
                     await self.manager.subscriber_router.resubscribe_all_topics(client)

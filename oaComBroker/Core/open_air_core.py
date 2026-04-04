@@ -91,7 +91,7 @@ def main():
     app_constants = Config.get_instance()
     
     if LOCAL_DEBUG:
-        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Starting OpenAir Core Service...", "DEBUG")
+        matrix_log("comms", "broker", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Starting OpenAir Core Service...", "DEBUG")
 
     # 2. --- Liveness Monitoring ---
     # The heartbeat thread ensures the system can be reset by hardware if the
@@ -120,7 +120,7 @@ def main():
     failover_mgr.start()
 
     if LOCAL_DEBUG:
-        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "CORE: Service Operational. Watchdog Active.", "SUCCESS")
+        matrix_log("comms", "broker", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "CORE: Service Operational. Watchdog Active.", "SUCCESS")
 
     # 5. --- Primary Execution Loop ---
     try:
@@ -132,20 +132,20 @@ def main():
             
     except KeyboardInterrupt:
         if LOCAL_DEBUG:
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Keyboard interrupt. Stopping...", "DEBUG")
+            matrix_log("comms", "broker", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Keyboard interrupt. Stopping...", "DEBUG")
     except Exception:
         CORE_LOGGER.exception("CRITICAL: Unhandled exception in loop.")
     finally:
         # 6. --- Graceful Finalization ---
         if LOCAL_DEBUG:
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Initiating teardown sequence...", "DEBUG")
+            matrix_log("comms", "broker", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Initiating teardown sequence...", "DEBUG")
         
         # Stop all registered managers to ensure clean socket/thread closure.
         if managers:
             for name, manager in managers.items():
                 if manager and hasattr(manager, "stop") and callable(manager.stop):
                     if LOCAL_DEBUG:
-                        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Stopping '{name}'...", "DEBUG")
+                        matrix_log("comms", "broker", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Stopping '{name}'...", "DEBUG")
                     try:
                         manager.stop()
                     except Exception:
@@ -159,7 +159,7 @@ def main():
         shutdown_publisher_worker()
         
         if LOCAL_DEBUG:
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "CORE: Shutdown sequence complete.", "SUCCESS")
+            matrix_log("comms", "broker", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "CORE: Shutdown sequence complete.", "SUCCESS")
 
 if __name__ == "__main__":
     main()

@@ -126,46 +126,48 @@ class MidiManager:
                     last_heartbeat = time.time()
 
                 for msg in port.iter_pending():
-                    matrix_log("comms", "midi", "_midi_listen_loop", 
-                               f"🎹 [MIDI-LISTEN] Incoming: {msg} on {port.name}", "TRACE")
-                    
-                    # ⚡ LOCAL FIRST: Notify internal monitors (Dashboard) immediately
-                    self._notify_monitor("RX", msg)
-                    
-                    topic, val = self.mapper.midi_to_topic(msg, port.name)
-                    meta = {
-                        "midi_type": msg.type, 
-                        "guid": f"{topic.split('/')[2]}/{getattr(msg, 'channel', 0)}", 
-                        "msg_type": "SPLICE_ACTION", 
-                        "origin_source": "MIDI"
-                    }
-
-                    # Hardware Locking
-                    if msg.type in ['control_change', 'pitchwheel', 'aftertouch', 'note_on']: 
-                        self.lock_manager.lock(topic)
-                    elif msg.type == 'note_off': 
-                        self.lock_manager.unlock(topic)
-
-                    if msg.type == 'control_change': 
-                        self.lock_manager.delayed_unlock(topic)
-
-                    # ⚡ CENTRAL ORCHESTRATION: 
-                    # handle_external_update updates cache, notifies router, and triggers MQTT publish.
-                    if self.state_cache_manager:
-                        pld = {
-                            "val": val,
-                            "channel": getattr(msg, 'channel', 0),
-                            "note": getattr(msg, 'note', 0),
-                            "velocity": getattr(msg, 'velocity', 0),
-                            "type": msg.type,
-                            "raw": str(msg)
-                        }
-                        self.state_cache_manager.handle_external_update(topic, pld, source="MIDI", metadata=meta)
-                    else:
-                        # Fallback if no state manager (Standalone mode)
-                        from oaComBroker.Core.protocol_router.manager import ProtocolRouter
-                        ProtocolRouter.get_instance().ingest("MIDI", topic, val, meta)
+                    try:
+                        matrix_log("comms", "midi", "_midi_listen_loop", 
+                                   f"🎹 [MIDI-LISTEN] Incoming: {msg} on {port.name}", "TRACE")
                         
+                        # ⚡ LOCAL FIRST: Notify internal monitors (Dashboard) immediately
+                        self._notify_monitor("RX", msg)
+                        
+                        topic, val = self.mapper.midi_to_topic(msg, port.name)
+                        meta = {
+                            "midi_type": msg.type, 
+                            "guid": f"{topic.split('/')[2]}/{getattr(msg, 'channel', 0)}", 
+                            "msg_type": "SPLICE_ACTION", 
+                            "origin_source": "MIDI"
+                        }
+
+                        # Hardware Locking
+                        if msg.type in ['control_change', 'pitchwheel', 'aftertouch', 'note_on']: 
+                            self.lock_manager.lock(topic)
+                        elif msg.type == 'note_off': 
+                            self.lock_manager.unlock(topic)
+
+                        if msg.type == 'control_change': 
+                            self.lock_manager.delayed_unlock(topic)
+
+                        # ⚡ CENTRAL ORCHESTRATION: 
+                        if self.state_cache_manager:
+                            pld = {
+                                "val": val,
+                                "channel": getattr(msg, 'channel', 0),
+                                "note": getattr(msg, 'note', 0),
+                                "velocity": getattr(msg, 'velocity', 0),
+                                "type": msg.type,
+                                "raw": str(msg)
+                            }
+                            self.state_cache_manager.handle_external_update(topic, pld, source="MIDI", metadata=meta)
+                        else:
+                            # Fallback if no state manager (Standalone mode)
+                            from oaComBroker.Core.protocol_router.manager import ProtocolRouter
+                            ProtocolRouter.get_instance().ingest("MIDI", topic, val, meta)
+                    except Exception as loop_e:
+                         midi_logger.error(f"FATAL: Unhandled exception in MIDI processing loop for {port.name}: {loop_e}")
+
             except Exception as e:
                 midi_logger.error(f"Listen Error on {port.name}: {e}")
             

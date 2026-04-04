@@ -139,4 +139,4 @@ class MqttConnectionManager:
         if self.loop and self.stop_event:
             self.loop.call_soon_threadsafe(self.stop_event.set)
         if LOCAL_DEBUG:
-            matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "MQTT: Disconnection initiated.", "DEBUG")
+            matrix_log("comms", "mqtt", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "MQTT: Disconnection initiated.", "DEBUG")

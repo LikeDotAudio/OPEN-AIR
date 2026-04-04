@@ -53,23 +53,11 @@ class StructuralAssembler:
         inner = tk.Frame(viewport, bg="#2b2b2b", bd=0, highlightthickness=0, width=w, height=h)
         inner_id = viewport.create_window((0, 0), window=inner, anchor="nw")
         
-        # ⚡ DYNAMIC SYNC: Optimized for fluidity without clipping
-        def _sync_dimensions(event):
-            if viewport.winfo_exists():
-                vw, vh = event.width, event.height
-                req_w = inner.winfo_reqwidth()
-                req_h = inner.winfo_reqheight()
-                
-                # Only force-stretch if the viewport is LARGER than the content
-                # This keeps the background consistent but allows scrolling if content is huge
-                new_w = max(vw, req_w)
-                new_h = max(vh, req_h)
-                
-                viewport.itemconfig(inner_id, width=new_w, height=new_h)
-                viewport.configure(scrollregion=(0, 0, new_w, new_h))
+        # When the outer hull resizes, force the viewport canvas to match
+        hull.bind("<Configure>", lambda e: viewport.config(width=e.width, height=e.height))
         
-        viewport.bind("<Configure>", _sync_dimensions, add="+")
-        inner.bind("<Configure>", lambda e: _sync_dimensions(None) if viewport.winfo_exists() else None)
+        # When the inner content resizes, just update the scrollable area
+        inner.bind("<Configure>", lambda e: viewport.configure(scrollregion=viewport.bbox("all")))
         
         TransparencyManager.apply_transparency(hull, viewport, value, builder)
         TransparencyManager.apply_transparency(hull, inner, value, builder)

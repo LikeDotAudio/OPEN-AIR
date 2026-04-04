@@ -48,8 +48,8 @@ class VisaCsvBuilder:
         self.json_path = json_path
         self.csv_dir = csv_dir
         if LOCAL_DEBUG:
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Initializing with JSON Path: {self.json_path}", "DEBUG")
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"CSV Output Directory: {self.csv_dir}", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Initializing with JSON Path: {self.json_path}", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"CSV Output Directory: {self.csv_dir}", "DEBUG")
 
     def build_csvs_from_json(self):
         """
@@ -64,7 +64,7 @@ class VisaCsvBuilder:
         - Performs significant disk I/O (read/write).
         """
         if LOCAL_DEBUG:
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Starting CSV build process (per table)...", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "Starting CSV build process (per table)...", "DEBUG")
             
         if not os.path.exists(self.json_path):
             logger.error(f"JSON file not found at {self.json_path}")
@@ -74,7 +74,7 @@ class VisaCsvBuilder:
 
         # Clear existing CSV files to prevent stale data from lingering.
         if LOCAL_DEBUG:
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Clearing existing CSV files from {self.csv_dir}...", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Clearing existing CSV files from {self.csv_dir}...", "DEBUG")
             
         for filename in os.listdir(self.csv_dir):
             if filename.endswith(".csv"):
@@ -82,7 +82,7 @@ class VisaCsvBuilder:
                 if os.path.exists(file_path):
                     os.remove(file_path)
                     if LOCAL_DEBUG:
-                        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  Removed old file: {filename}", "DEBUG")
+                        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  Removed old file: {filename}", "DEBUG")
 
         with open(self.json_path, "rb") as f:
             raw_data = f.read()
@@ -98,7 +98,7 @@ class VisaCsvBuilder:
         # Start the recursive traversal from the root node.
         self._traverse_and_build(data, ["OPEN-AIR"])
         if LOCAL_DEBUG:
-            matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "CSV build process complete.", "DEBUG")
+            matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "CSV build process complete.", "DEBUG")
 
     def _traverse_and_build(self, node, current_path):
         """
@@ -171,7 +171,7 @@ class VisaCsvBuilder:
         
         if LOCAL_DEBUG:
             if os.path.exists(csv_filepath):
-                matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  Successfully wrote {len(data_list)} rows to {csv_filepath}", "SUCCESS")
+                matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"  Successfully wrote {len(data_list)} rows to {csv_filepath}", "SUCCESS")
             else:
                 logger.error(f"  Failed to write CSV file {csv_filepath}")
 

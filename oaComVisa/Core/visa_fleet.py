@@ -29,7 +29,7 @@ class FleetOrchestrator(FleetCommandQueueMixin, FleetInventoryMixin, FleetScanMi
     """Commander for the VISA instrument fleet, managing discovery and communication."""
     
     def __init__(self, mqtt_connection_manager=None, subscriber_router=None, aes70_manager=None):
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🚢🔍 [VISA] Initializing FleetOrchestrator.", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🚢🔍 [VISA] Initializing FleetOrchestrator.", "DEBUG")
 
         self.json_builder = VisaJsonBuilder()
         self.csv_builder = VisaCsvBuilder()
@@ -51,7 +51,7 @@ class FleetOrchestrator(FleetCommandQueueMixin, FleetInventoryMixin, FleetScanMi
         self._running = False
         self.initial_scan_complete_event = threading.Event()
 
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ [SUCCESS] FleetOrchestrator initialized.", "SUCCESS")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "✅ [SUCCESS] FleetOrchestrator initialized.", "SUCCESS")
 
     def set_callbacks(self, on_inventory_update, on_device_response, on_device_error, on_proxy_status):
         self.cb_inventory = on_inventory_update
@@ -61,10 +61,10 @@ class FleetOrchestrator(FleetCommandQueueMixin, FleetInventoryMixin, FleetScanMi
 
     def start(self):
         self._running = True
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🚢🔍 [VISA] FleetOrchestrator Started.", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🚢🔍 [VISA] FleetOrchestrator Started.", "DEBUG")
 
     def stop(self):
         self._running = False
         if self.discovery_orchestrator: self.discovery_orchestrator.shutdown()
         if self.mqtt_bridge: self.mqtt_bridge.disconnect()
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🚢🔍 [VISA] FleetOrchestrator Stopped.", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳🚢🔍 [VISA] FleetOrchestrator Stopped.", "DEBUG")

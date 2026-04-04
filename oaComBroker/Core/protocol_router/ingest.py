@@ -65,14 +65,16 @@ def normalize_and_ingest(
         - Injects a new dictionary into the inbound_queue.
     """
     val_str = str(value)[:100] + ("..." if len(str(value)) > 100 else "")
-    matrix_log("core", "router", "normalize_and_ingest", f"📡📥📥 [INBOUND] {transport_source} on {topic}: {val_str}", "DEBUG")
+    if app_constants.ROUTER_INGEST_LOGS:
+        matrix_log("comms", "broker", "normalize_and_ingest", f"📡📥📥 [INBOUND] {transport_source} on {topic}: {val_str}", "DEBUG")
+
         
     # Standardize None to empty string or keep as None depending on protocol?
     # For OPEN-AIR, None is a valid 'Reset' state for many parameters, 
     # but we must ensure it doesn't crash consumers.
     if value is None:
-        matrix_log("core", "router", "normalize_and_ingest", f"⚠️ [ROUTER] Received 'None' for {topic}. Propagating as Reset state.", "TRACE")
-    if any(x in str(topic) for x in ["/System/Router/", "/Firehose/"]):
+        if app_constants.ROUTER_INGEST_LOGS:
+            matrix_log("comms", "broker", "normalize_and_ingest", f"⚠️ [ROUTER] Received 'None' for {topic}. Propagating as Reset state.", "TRACE")
         return
 
     meta = metadata or {}
@@ -85,12 +87,14 @@ def normalize_and_ingest(
     if state_cache and not meta.get("boot") and not is_event_stream:
         cached_val = state_cache.get_cached_value(topic)
         if cached_val == value:
-            matrix_log("core", "router", "normalize_and_ingest", f"📉🚫📉 [ROUTER] DEAD-BAND: Dropping identical value for {topic}", "TRACE")
+            if app_constants.ROUTER_INGEST_LOGS:
+                matrix_log("comms", "broker", "normalize_and_ingest", f"📉🚫📉 [ROUTER] DEAD-BAND: Dropping identical value for {topic}", "TRACE")
             return
     
     # Boot sequence messages are ingested silently to prevent console flood.
     if meta.get("boot"):
-        matrix_log("core", "router", "normalize_and_ingest", f"👢🤫👢 [BOOT] Silent ingestion for {topic}", "DEBUG")
+        if app_constants.ROUTER_INGEST_LOGS:
+            matrix_log("comms", "broker", "normalize_and_ingest", f"👢🤫👢 [BOOT] Silent ingestion for {topic}", "DEBUG")
         silent_ingest_callback(transport_source, topic, value, meta)
         return
 
@@ -137,7 +141,8 @@ def normalize_and_ingest(
     # modified by a user on this instance.
     if msg_type == "LINK_FEEDBACK":
         if settle_manager.is_parameter_locked(topic, full_id):
-            matrix_log("core", "router", "normalize_and_ingest", f"🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter {topic}", "TRACE")
+            if app_constants.ROUTER_INGEST_LOGS:
+                matrix_log("comms", "broker", "normalize_and_ingest", f"🔒🚫🔒 [ROUTER] BLOCKADE: Rejecting self-reflection for locked parameter {topic}", "TRACE")
             return
 
     # Final Normalized Packet Construction.

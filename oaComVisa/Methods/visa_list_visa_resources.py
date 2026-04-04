@@ -30,7 +30,7 @@ def list_visa_resources():
     - Performs blocking I/O to scan system hardware buses and network segments.
     """
     current_function = inspect.currentframe().f_code.co_name
-    matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 Listing VISA resources... Let's find some devices!", "DEBUG")
+    matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "💳 Listing VISA resources... Let's find some devices!", "DEBUG")
     try:
         rm = pyvisa.ResourceManager()
 
@@ -56,7 +56,7 @@ def list_visa_resources():
         # USB is typically most stable for local use.
         resources = usb_resources + tcpip_resources + other_resources
 
-        matrix_log("core", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 Found VISA resources (Reordered): {resources}.", "DEBUG")
+        matrix_log("comms", "visa", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"💳 Found VISA resources (Reordered): {resources}.", "DEBUG")
         return list(resources)
     except Exception as e:
         error_msg = f"💳 ❌ Error listing VISA resources: {e}."

@@ -1,10 +1,11 @@
 [Desktop Entry]
 Version=1.0
-Type=Application
 Name=OPEN-AIR
-Comment=Multi-Process Supervisor for the OPEN-AIR System
-Exec=python3 /home/anthony/Documents/OPEN-AIR/OpenAir.py
-Icon=/home/anthony/Documents/OPEN-AIR/oaGuiSplashScreen/Assets/OPEN_AIR_LOGO.png
+Comment=OPEN-AIR Digital Audio Workstation
+Exec=/home/anthony/Documents/OPEN-AIR/openair.py
+Icon=/home/anthony/Documents/OPEN-AIR/oaGuiManager/Assets/logo_256.png
 Terminal=false
-Categories=Utility;Engineering;
+Type=Application
+Categories=AudioVideo;Audio;
 StartupNotify=true
+StartupWMClass=OPEN-AIR

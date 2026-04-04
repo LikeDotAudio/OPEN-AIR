@@ -1,6 +1,16 @@
 import os
-
+import sys
 import inspect
+
+# --- Path Injection ---
+# We must calculate the project root and add it to sys.path to ensure that
+# this script can be executed directly while still finding project modules.
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Assumes Core/ is inside oaInstallation/, and oaInstallation/ is at the root.
+project_root = os.path.dirname(os.path.dirname(current_dir))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 from oaLogging.Methods.matrix_gate import matrix_log
 # Core/TaskBarIcon.py
 # Author: Anthony Peter Kuzub

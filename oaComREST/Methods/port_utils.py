@@ -54,7 +54,7 @@ def zap_port(port):
         return False
 
     if is_friendly_process(proc):
-        matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"ℹ️ [PORT] Port {port} is held by a friendly/sibling process ({proc.pid}). Skipping zap.", "DEBUG")
+        matrix_log("comms", "rest", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"ℹ️ [PORT] Port {port} is held by a friendly/sibling process ({proc.pid}). Skipping zap.", "DEBUG")
         return False
 
     try:

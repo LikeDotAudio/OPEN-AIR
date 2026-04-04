@@ -61,7 +61,7 @@ class BuilderSlicingRegistryMixin:
                     matrix_log("ui", "gui_builder", "register_for_slicing", 
                                f"Immediate slice failed: {e}", "DEBUG")
 
-    def _trigger_reslice_all(self):
+    def _trigger_reslice_all(self, force=False):
         """Triggers a batched reslice operation with debouncing."""
         if hasattr(self, '_reslice_trigger_id') and self._reslice_trigger_id:
             try:

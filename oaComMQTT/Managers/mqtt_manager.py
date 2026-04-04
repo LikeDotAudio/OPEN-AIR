@@ -18,18 +18,18 @@ import oaOchestration.Constants.project_paths as app_paths
 from oaLogging.Methods.matrix_gate import matrix_log, is_debug_allowed
 
 def _is_debug():
-    return is_debug_allowed(system="CORE", element="MQTT")
+    return is_debug_allowed(system="comms", element="mqtt")
 
 app_constants = Config.get_instance()
 
 def register_service(mqtt_client, state_cache, broker_address, broker_port, client_id, service_name, data):
     """Placeholder for service registration logic."""
-    matrix_log("core", "mqtt", "register_service", f"🔧 [MQTT] Registering service: {service_name}", "INFO")
+    matrix_log("comms", "mqtt", "register_service", f"🔧 [MQTT] Registering service: {service_name}", "INFO")
     # Implementation logic for registering a service
 
 def re_register_all_services(mqtt_client, state_cache):
     """Placeholder for re-registering all services."""
-    matrix_log("core", "mqtt", "re_register_all_services", "🔧 [MQTT] Re-registering all services", "INFO")
+    matrix_log("comms", "mqtt", "re_register_all_services", "🔧 [MQTT] Re-registering all services", "INFO")
     # Implementation logic for re-registering all services
 
 class MqttManager:
@@ -49,7 +49,7 @@ class MqttManager:
         self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Control/Broker/Service/#", self._handle_service_command)
         self.subscriber_router.subscribe_to_topic("OPEN-AIR/System/Status/Fleet/Complete", self._on_fleet_scan_complete)
         
-        matrix_log("core", "mqtt", "__init__", "🚀 [MQTT] MqttManager initialized.", "DEBUG")
+        matrix_log("comms", "mqtt", "__init__", "🚀 [MQTT] MqttManager initialized.", "DEBUG")
 
     def start(self):
         """Starts the MQTT manager background threads."""
@@ -59,14 +59,14 @@ class MqttManager:
         self._is_running = True
         self._thread = threading.Thread(target=self._system_status_loop, daemon=True, name="MQTT-StatusPoller")
         self._thread.start()
-        matrix_log("core", "mqtt", "start", "🚀 [MQTT] MqttManager started.", "INFO")
+        matrix_log("comms", "mqtt", "start", "🚀 [MQTT] MqttManager started.", "INFO")
 
     def stop(self):
         """Stops the background threads and cleans up."""
         self._is_running = False
         if self._thread:
             self._thread.join(timeout=1.0)
-        matrix_log("core", "mqtt", "stop", "MQTT: MqttManager stopped.", "INFO")
+        matrix_log("comms", "mqtt", "stop", "MQTT: MqttManager stopped.", "INFO")
 
     def _publish_status(self, status: str):
         """Publishes the connection status to the broker."""
@@ -101,13 +101,13 @@ class MqttManager:
                     self._attempt_reconnect()
 
             except Exception as e:
-                matrix_log("core", "mqtt", "_system_status_loop", f"🚀 [MQTT] ERROR: Status loop failed: {e}", "ERROR")
+                matrix_log("comms", "mqtt", "_system_status_loop", f"🚀 [MQTT] ERROR: Status loop failed: {e}", "ERROR")
             
             time.sleep(5)
 
     def _attempt_reconnect(self):
         """Attempts to reconnect the MQTT client if disconnected."""
-        matrix_log("core", "mqtt", "_attempt_reconnect", "📡 [MQTT] Attempting to reconnect...", "INFO")
+        matrix_log("comms", "mqtt", "_attempt_reconnect", "📡 [MQTT] Attempting to reconnect...", "INFO")
         try:
             res = self.mqtt_client.connect(
                 app_constants.MQTT_BROKER_ADDRESS,
@@ -121,14 +121,14 @@ class MqttManager:
             else:
                 self._publish_status("OFFLINE")
         except Exception as e:
-            matrix_log("core", "mqtt", "_attempt_reconnect", f"📡 [MQTT] Reconnect failed: {e}", "ERROR")
+            matrix_log("comms", "mqtt", "_attempt_reconnect", f"📡 [MQTT] Reconnect failed: {e}", "ERROR")
             self._publish_status("OFFLINE")
             self.mqtt_client.disconnect()
             raise e
 
     def _sync_state_on_reconnect(self):
         """Synchronizes state and re-subscribes after a successful reconnection."""
-        matrix_log("core", "mqtt", "_sync_state_on_reconnect", "📡 [MQTT] Synchronizing state on reconnect.", "INFO")
+        matrix_log("comms", "mqtt", "_sync_state_on_reconnect", "📡 [MQTT] Synchronizing state on reconnect.", "INFO")
         self.state_cache_manager.sync_state_from_all_sources()
         if hasattr(self.subscriber_router, 'resubscribe_all'):
             self.subscriber_router.resubscribe_all()
@@ -140,7 +140,7 @@ class MqttManager:
                 self.mqtt_client.subscribe(topic, qos)
 
     def _handle_delete_command(self, msg: MqttMessage):
-        matrix_log("core", "mqtt", "_handle_delete_command", "🧨 [MQTT] MqttManager: Executing Topic Deletion.", "DEBUG")
+        matrix_log("comms", "mqtt", "_handle_delete_command", "🧨 [MQTT] MqttManager: Executing Topic Deletion.", "DEBUG")
         delete_open_air_tree(self.mqtt_client, self.state_cache_manager)
 
     def _handle_service_command(self, msg: MqttMessage):
@@ -150,7 +150,7 @@ class MqttManager:
             action = data.get("action")
             service_name = data.get("service")
             
-            matrix_log("core", "mqtt", "_handle_service_command", f"🔧 [MQTT] MqttManager: Requested service {action}.", "DEBUG")
+            matrix_log("comms", "mqtt", "_handle_service_command", f"🔧 [MQTT] MqttManager: Requested service {action}.", "DEBUG")
             
             if action == "register" and service_name:
                 register_service(
@@ -164,11 +164,11 @@ class MqttManager:
                 self._update_service_status(service_name, data.get("status", "UNKNOWN"))
                 
         except Exception as e:
-            matrix_log("core", "mqtt", "_handle_service_command", f"MQTT: Service command parse error: {e}", "ERROR")
+            matrix_log("comms", "mqtt", "_handle_service_command", f"MQTT: Service command parse error: {e}", "ERROR")
 
     def _update_service_status(self, service: str, status: str):
         """Placeholder for updating service status."""
-        matrix_log("core", "mqtt", "_update_service_status", f"🔧 [MQTT] Updating status for {service} to {status}", "INFO")
+        matrix_log("comms", "mqtt", "_update_service_status", f"🔧 [MQTT] Updating status for {service} to {status}", "INFO")
 
     def _on_fleet_scan_complete(self, msg: MqttMessage):
-        matrix_log("core", "mqtt", "_on_fleet_scan_complete", "✅ [MQTT] MqttManager: Fleet Scan Complete detected.", "INFO")
+        matrix_log("comms", "mqtt", "_on_fleet_scan_complete", "✅ [MQTT] MqttManager: Fleet Scan Complete detected.", "INFO")

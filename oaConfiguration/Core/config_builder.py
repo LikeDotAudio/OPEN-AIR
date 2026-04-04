@@ -44,39 +44,92 @@ def create_default_config_ini(config_path: pathlib.Path, silent: bool = False):
 # The current system version (Format: YYYYMMDD)
 current_version = 20251225
 
+[System]
+# If True, network ports will be randomized to allow multiple instances.
+randomize_ports = True
+
 [Debug]
 # Global master toggle for debug mode
-enable_debug_mode = True
+enable_debug_mode = False
 # Display debug info on the application screen
 enable_debug_screen = True
 # Toggle background file logging to /oaDataLogs
 enable_log_to_file = True
 
 [DEBUG_MATRIX]
-# Global Killswitch - If True, overrides all other debug settings
-master_debug_enable = False
+master_debug_enable = True
+enable_log_to_file = True
 
-# System Level Toggles - Enable tracing for specific subsystems
-sys_comms = False
-sys_gui = False
-sys_data = False
-sys_router = False
+# Master Partition Toggles - Set to False to mute entire process output (except ERRORS)
+sys_sup = True
 sys_core = False
+sys_ui = True
 
-# Element Level Overrides - Fine-grained control for specific protocol modules
-element_mqtt = False
-element_snmp = False
-element_midi = False
-element_osc = False
-element_aes70 = False
-element_rest = False
-element_gui_builder = False
+
+[DEBUG_CORE_ORCHESTRATION]
+sys_orchestration = False
+sys_watchdog = False
+sys_ptp = False
+sys_taskpool = False
+sys_audio = False
+
+[DEBUG_STATE_DATA]
+data_state_cache = True
+data_splinker = False
+data_audits = False
+
+[DEBUG_FILE_IO]
+file_import = False
+file_export = False
+
+[DEBUG_TRANSLATOR]
+trans_yak = False
+trans_manifest = False
+trans_state_mirror = False
+trans_visa = False
+
+
+[DEBUG_COMMS_PROTOCOLS]
+comms_mqtt = False
+comms_osc = False
+comms_aes70 = False
+comms_smpte2138 = True
+comms_snmp = False
+comms_midi = False
+comms_rest = False
+comms_ember = False
+comms_visa = False
+comms_broker = False
+
+
+[DEBUG_GUI]
+gui_manager = False
+gui_builder = False
+gui_elements = False
+gui_style = False
+gui_telemetry = False
+
+[DEBUG_RUST_FFI]
+rust_trie_search = False
+rust_disk_flusher = False
+rust_pattern_engine = False
+rust_st2138_codec = False
+
+[DEBUG_ROUTER]
+# Controls specific log groups within the Protocol Router
+router_ingest = False
+router_dispatch = False
+router_settle = False
+router_failover = False
 
 # Function Level Exclusions/Inclusions (Comma separated)
 # Functions listed here will have their logs suppressed
-mute_functions = update_canvas, poll_buffer, heart_beat
+mute_functions = 
+#update_canvas, poll_buffer, heart_beat
+
 # Functions listed here will always log, regardless of other debug states
-force_functions = initialize_connection, critical_state_change
+force_functions = 
+
 
 [UI]
 # Percentage split for the main UI layout

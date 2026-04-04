@@ -54,14 +54,14 @@ class MIDIPortController:
                 import threading
                 t = threading.Thread(target=listen_loop_cb, args=(p,), daemon=True); t.start()
                 threads.append(t)
-                matrix_log("core", "midi", "open_all", f"🎹 INPUT READY: {name}", "SUCCESS")
+                matrix_log("comms", "midi", "open_all", f"🎹 INPUT READY: {name}", "SUCCESS")
             except Exception as e: 
                 self.logger.error(f"❌ FAILED INPUT {name}: {e}")
 
         for name in info["outputs"]:
             try:
                 p = mido.open_output(name); self.outports.append(p)
-                matrix_log("core", "midi", "open_all", f"🎹 OUTPUT READY: {name}", "SUCCESS")
+                matrix_log("comms", "midi", "open_all", f"🎹 OUTPUT READY: {name}", "SUCCESS")
             except Exception as e: 
                 self.logger.error(f"❌ FAILED OUTPUT {name}: {e}")
         return threads

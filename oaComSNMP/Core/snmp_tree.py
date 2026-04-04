@@ -16,7 +16,7 @@
 
 import os
 import stat
-from loguru import logger
+from oaLogging.Core.logger import get_logger
 from oaConfiguration.FileReaders.config_reader import Config
 from oaOchestration.Constants.project_paths import SNMP_STATE_FILE, SNMP_SET_LOG
 from oaComSNMP.Constants.snmp_constants import BASE_OID
@@ -24,7 +24,7 @@ from oaComSNMP.Constants.snmp_constants import BASE_OID
 # --- Standard Debug Logging Setup ---
 snmp_tree_builder_verbose_logging_enabled = False
 app_constants = Config.get_instance()
-snmp_logger = logger.bind(subsystem="SNMP")
+snmp_logger = get_logger("SNMP")
 
 class SNMPTreeBuilder:
     def __init__(self, base_oid=BASE_OID):

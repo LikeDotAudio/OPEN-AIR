@@ -214,6 +214,15 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
     console_level = "TRACE" if debug_enabled else "INFO"
     file_level = "TRACE" if debug_enabled else "INFO"
     
+    # ⚡ PARTITION MUTING: Check if this entire partition is suppressed in the matrix.
+    # If sys_core = False, we elevate the console level to WARNING to hide INFO/SUCCESS.
+    if hasattr(config, "DEBUG_MATRIX"):
+        partition_toggle = config.DEBUG_MATRIX.get(f"SYS_{partition.upper()}")
+        # We explicitly check for False, as None/Missing should default to showing logs.
+        if partition_toggle is False:
+            console_level = "WARNING"
+
+    
     # --- Log Formats ---
     # Primary format for colorized terminal output. Includes emojis for partition and category.
     log_format_console = (
@@ -318,11 +327,26 @@ def get_logger(category: str, emoji_prefix: str = None):
         category (str): The subsystem identifier (e.g., 'MQTT').
         emoji_prefix (str, optional): Explicit emoji to use. If None, uses mapping.
     """
-    emoji = emoji_prefix if emoji_prefix else get_emoji(category)
+    # ⚡ STANDARDIZATION: Comms elements should always use the 📡 emoji
+    comms_elements = {
+        "MQTT", "OSC", "MIDI", "SNMP", "VISA", "AES70", "REST", 
+        "EMBER", "SMPTE2138", "ROUTER", "BROKER", "COMM", "COMMS"
+    }
+    
+    if emoji_prefix is None and category.upper() in comms_elements:
+        emoji = "📡"
+        # ⚡ BRANDING: Comms logs should explicitly state they are comms
+        cat_name = f"COMM: {category.upper()}"
+    else:
+        emoji = emoji_prefix if emoji_prefix else get_emoji(category)
+        cat_name = category.upper()
+        
     # ⚡ REFINEMENT: Ensure padding doesn't truncate important text
-    full_category = f"{emoji} {category}"
+    full_category = f"{emoji} {cat_name}"
     padded_category = full_category.ljust(18)
     return logger.bind(category=padded_category)
+
+
 
 # --- Subsystem-Specific Bound Instances ---
 SYSTEM_LOGGER    = get_logger("SYSTEM")

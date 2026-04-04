@@ -37,7 +37,7 @@ from oaGuiEditorWYSIWYG.Core.event_bus import event_bus
 
 def _is_debug():
     from oaLogging.Methods.matrix_gate import is_debug_allowed
-    return is_debug_allowed(system="UI", element="SMPTE2138")
+    return is_debug_allowed(system="comms", element="smpte2138")
 
 class SMPTE2138MonitorManager:
     """
@@ -58,18 +58,34 @@ class SMPTE2138MonitorManager:
             "start_time": time.time(),
             "last_msg_ts": 0,
             "throughput_msg_sec": 0.0,
-            "status": "STOPPED" # Default status
+            "status": "STOPPED"
         }
         
         self._setup_subscriptions()
+        self._is_running = False
+        self._heartbeat_thread = None
+        self._observers = [] # For lazy loading
+
+    def start(self):
+        """Lazy start: thread is started by the first observer."""
+        pass
+
+    def stop(self):
+        """Stops the heartbeat thread."""
+        self._is_running = False
+        if self._heartbeat_thread and self._heartbeat_thread.is_alive():
+            self._heartbeat_thread.join(timeout=1.0)
+        self.stats["status"] = "STOPPED"
         
-        # Heartbeat thread to keep UI alive
-        self._is_running = True
-        self._heartbeat_thread = threading.Thread(target=self._heartbeat_loop, daemon=True, name="SMPTE2138-MonitorHeartbeat")
-        self._heartbeat_thread.start()
-        
-        if LOCAL_DEBUG:
-            SMPTE2138_LOGGER.success("✅ [MONITOR] SMPTE2138 Monitor Engine is active and elite.")
+    def add_observer(self, callback: callable):
+        """Adds an observer and starts the thread if it's the first one."""
+        if callback not in self._observers:
+            self._observers.append(callback)
+            if not self._is_running:
+                self._is_running = True
+                self._heartbeat_thread = threading.Thread(target=self._heartbeat_loop, daemon=True, name="SMPTE2138-MonitorHeartbeat")
+                self._heartbeat_thread.start()
+                if LOCAL_DEBUG: SMPTE2138_LOGGER.success("✅ [MONITOR] SMPTE2138 Monitor thread started on first observer.")
 
     def _setup_subscriptions(self):
         """

@@ -40,10 +40,12 @@ try:
     RUST_ENABLED = True
 except ImportError:
     RUST_ENABLED = False
-    logger.warning("⚠️ [CONFIG] oadebugtoggler_rs not found. Falling back to slow Python traversal.")
+    if matrix_log(system="CONFIG", element="DEBUG_TOGGLER", func_name="toggle_debug_flags", message="⚠️ [CONFIG] oadebugtoggler_rs not found. Falling back to slow Python traversal.", level="WARNING"):
+        pass
 except Exception as e:
     RUST_ENABLED = False
-    logger.error(f"❌ [CONFIG] Rust debug toggler initialization failed: {e}")
+    if matrix_log(system="CONFIG", element="DEBUG_TOGGLER", func_name="toggle_debug_flags", message=f"❌ [CONFIG] Rust debug toggler initialization failed: {e}", level="ERROR"):
+        pass
 
 LOCAL_DEBUG = True
 
@@ -172,4 +174,11 @@ def toggle_debug_flags(project_root, console_print_func=None):
 if __name__ == "__main__":
     # Resolve the project root relative to this utility's location
     project_root_path = Path(__file__).resolve().parents[2]
+    toggle_debug_flags(project_root_path)
+oot_path)
+ect_root_path = Path(__file__).resolve().parents[2]
+    toggle_debug_flags(project_root_path)
+oot_path)
+ct_root_path)
+= Path(__file__).resolve().parents[2]
     toggle_debug_flags(project_root_path)

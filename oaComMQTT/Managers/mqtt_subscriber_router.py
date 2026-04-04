@@ -48,8 +48,7 @@ class MqttSubscriberRouter:
 
     def subscribe_to_topic(self, topic_filter: str, callback_func: Callable[[MqttMessage], None]):
         """Registers a callback for a topic filter via Rust Router."""
-        if LOCAL_DEBUG:
-            matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name, f"Subscribing to {topic_filter}", "DEBUG")
+        matrix_log("comms", "mqtt", "subscribe_to_topic", f"Subscribing to {topic_filter}", "DEBUG")
             
         self.router.subscribe(topic_filter, callback_func)
         
@@ -114,5 +113,4 @@ class MqttSubscriberRouter:
             # Note: We'd need to track external filters separately if we wanted 
             # to resubscribe them here. For now, focus on core roots.
         
-        if LOCAL_DEBUG:
-            matrix_log("core", "mqtt", inspect.currentframe().f_code.co_name, "aiomqtt: Resubscribed to global roots.", "DEBUG")
+        matrix_log("comms", "mqtt", "resubscribe_all_topics", "aiomqtt: Resubscribed to global roots.", "DEBUG")

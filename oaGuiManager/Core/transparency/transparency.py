@@ -24,9 +24,15 @@ class TransparencyConfig:
         is_virtual_container = is_structural_type and isinstance(widget, tk.Canvas)
         
         background_string = str(background_color).lower() if background_color else ""
-        is_explicitly_solid = (background_color and background_string not in THEME_BACKGROUND_COLORS)
         
-        is_explicitly_transparent = (background_string in ["transparent", "none", "match_theme"]) or \
+        # Keywords that explicitly signal transparency
+        trans_keywords = ["transparent", "none", "match_theme"]
+        
+        is_explicitly_solid = (background_color and 
+                               background_string not in THEME_BACKGROUND_COLORS and 
+                               background_string not in trans_keywords)
+        
+        is_explicitly_transparent = (background_string in trans_keywords) or \
                                     (configuration.get("transparent") is True) or \
                                     is_virtual_container or \
                                     is_structural_type
@@ -130,8 +136,13 @@ class BackgroundSlicer:
         
         if crop_x2 > crop_x1 and crop_y2 > crop_y1:
             image_slice = background_source.crop((crop_x1, crop_y1, crop_x2, crop_y2))
-            center_color_rgb = image_slice.getpixel(((crop_x2 - crop_x1) // CENTER_SAMPLE_DIVISOR, (crop_y2 - crop_y1) // CENTER_SAMPLE_DIVISOR))
-            hex_background_color = '#%02x%02x%02x' % center_color_rgb[:3]
+            pixel_val = image_slice.getpixel(((crop_x2 - crop_x1) // CENTER_SAMPLE_DIVISOR, (crop_y2 - crop_y1) // CENTER_SAMPLE_DIVISOR))
+            
+            # ⚡ ROBUSTNESS: Handle both RGB/RGBA tuples and grayscale integers
+            if isinstance(pixel_val, tuple):
+                hex_background_color = '#%02x%02x%02x' % pixel_val[:3]
+            else:
+                hex_background_color = '#%02x%02x%02x' % (pixel_val, pixel_val, pixel_val)
             
             try:
                 if self.widget.winfo_exists() and self.widget.cget("bg") != hex_background_color:
@@ -184,10 +195,13 @@ class TransparencyManager:
     def _register_widget_for_slicing(widget, canvas, configuration, builder, widget_name):
         bg_string, is_solid, is_transparent = TransparencyConfig.parse_configuration(configuration, widget)
 
-        if configuration.get("transparent") is False or (is_solid and not is_transparent):
+        # ⚡ OPTIMIZATION: Only register if transparency is explicitly requested or expected.
+        # Avoids redundant slicing for standard widgets with default backgrounds.
+        if not is_transparent or (is_solid and not is_transparent):
             return
 
         slicer = BackgroundSlicer(widget, canvas, builder, widget_name)
+
         widget._perform_background_slice = slicer.perform_slice
         
         if hasattr(builder, 'register_for_slicing'):

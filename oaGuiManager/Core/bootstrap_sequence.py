@@ -6,6 +6,7 @@
 
 import tkinter as tk
 import traceback
+import time
 from loguru import logger
 
 class AsyncBootstrapEngine:
@@ -20,6 +21,8 @@ class AsyncBootstrapEngine:
         self.services = services
         self.app_constants = app_constants
         self.shutdown_coordinator = shutdown_coordinator
+        self.start_time = time.time()
+        self.MIN_SPLASH_TIME = 10.0 # Minimum splash screen duration in seconds
 
     def run(self):
         """
@@ -56,7 +59,7 @@ class AsyncBootstrapEngine:
             ))
 
         except Exception:
-            logger.exception(f"🖥️🎨 [UI] Bootstrap Failure:{traceback.format_exc()}")
+            logger.exception("🖥️🎨 [UI] Bootstrap Failure")
             self.root.after(0, self.shutdown_coordinator.on_closing)
 
     def _connect_communication_services(self, mqtt_conn, sub_router, state_cache):
@@ -109,11 +112,28 @@ class AsyncBootstrapEngine:
 
             with mirror_engine.suspend_bindings():
                 def _on_ignition_complete():
-                    self.splash.set_status(message="Ignition Complete!")
+                    # Calculate remaining time to fulfill the 10-second minimum
+                    elapsed_time = time.time() - self.start_time
+                    remaining_time = max(0, self.MIN_SPLASH_TIME - elapsed_time)
+                    
                     def _finish():
+                        self.splash.set_status(message="Ignition Complete!")
                         UIWindowManager.reveal_main_window(self.root, self.splash, self.app_constants.global_settings["debug_enabled"])
                         mirror_engine._schedule_queue_processing()
-                    self.root.after(1, _finish)
+                    
+                    # Split the remaining time into 3 "Ignition" phases for visual feedback
+                    phase_duration = remaining_time / 3.0
+                    
+                    def _phase_2():
+                        self.splash.set_status(message="Ignition Phase 2: Building systems...")
+                        self.root.after(int(phase_duration * 1000), _phase_3)
+
+                    def _phase_3():
+                        self.splash.set_status(message="Ignition Phase 3: Finalizing...")
+                        self.root.after(int(phase_duration * 1000), _finish)
+
+                    self.splash.set_status(message="Ignition Phase 1: Warming up...")
+                    self.root.after(int(phase_duration * 1000), _phase_2)
 
                 app = Application(
                     parent=self.root, 
@@ -131,8 +151,8 @@ class AsyncBootstrapEngine:
                 
                 # Register main app back to services
                 self.services["app"] = app
-                self.root.update()
+                self.root.update_idletasks()
                 
         except Exception:
-            logger.exception(f"🖥️🎨 [UI] App Launch Failure:{traceback.format_exc()}")
-            self.shutdown_coordinator.on_closing()
+            logger.exception("🖥️🎨 [UI] App Launch Failure")
+            self.root.after(0, self.shutdown_coordinator.on_closing)

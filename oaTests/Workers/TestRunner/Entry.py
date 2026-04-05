@@ -9,7 +9,8 @@ import os
 import pathlib
 
 # ⚡ SAFETY: Prevent segmentation faults from real MIDI drivers in test environment
-os.environ["OPEN_AIR_SKIP_REAL_MIDI"] = "1"
+if os.environ.get("OPEN_AIR_SKIP_REAL_MIDI") is None:
+    os.environ["OPEN_AIR_SKIP_REAL_MIDI"] = "1"
 
 # Ensure project root is in the search path for local module imports.
 # This file is project_root/oaTests/Workers/TestRunner/Entry.py
@@ -32,21 +33,18 @@ def main():
     """
     Executes the standalone CLI test runner.
     """
-    print("
-" + "="*60)
+    print("" + "="*60)
     print("🚀 OPEN-AIR STANDALONE TEST RUNNER")
     print("="*60)
     
     root_path = str(project_root)
     print(f"📂 Project Root: {root_path}")
     
-    print("
-🔍 Discovering tests...")
+    print("🔍 Discovering tests...")
     found_dirs = identify_test_directories(root_path)
     print(f"📂 Discovery identified {len(found_dirs)} test-containing folders.")
     
-    print("
-🔬 Executing test suite...")
+    print("🔬 Executing test suite...")
     print("-" * 60)
     
     # Initialize runner without callback to use default console output
@@ -56,8 +54,7 @@ def main():
     print("-" * 60)
     
     # ⚡ CLEANUP PHASE: Prevent Segfaults on Exit
-    print("
-🧹 Commencing post-test cleanup...")
+    print("🧹 Commencing post-test cleanup...")
     try:
         import time
         from oaComBroker.Core.protocol_router.manager import ProtocolRouter
@@ -80,8 +77,7 @@ def main():
     except Exception as e:
         print(f"⚠️ Cleanup warning: {e}")
 
-    print(f"
-🏁 [COMPLETE] Test Run Finished.")
+    print(f"🏁 [COMPLETE] Test Run Finished.")
     
     total = result.testsRun
     failures = len(result.failures)
@@ -104,8 +100,7 @@ def main():
         print() # Newline if no skipped tests
 
     print(f"   📈 Total:   {total}")
-    print("="*60 + "
-")
+    print("="*60 + "")
     
     # Exit with appropriate code
     import signal

@@ -1,0 +1,3151 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OPEN-AIR Unified Intelligence Report</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #1e1e1e; color: #dcdcdc; }
+        .header { background: #2b2b2b; padding: 20px 40px; border-bottom: 2px solid #33A1FD; }
+        h1 { color: #ffffff; margin: 0; font-size: 1.8em; }
+        .container { padding: 30px 40px; }
+        
+        /* Markdown Styling */
+        .markdown-content { line-height: 1.6; }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 { color: #33A1FD; border-bottom: 1px solid #444; padding-bottom: 5px; margin-top: 20px; }
+        .markdown-content code { background: #333; padding: 2px 5px; border-radius: 3px; font-family: 'Consolas', monospace; color: #e74c3c; }
+        .markdown-content pre { background: #000; padding: 15px; border-radius: 5px; overflow-x: auto; border: 1px solid #444; }
+        .markdown-content pre code { background: transparent; color: #2ecc71; padding: 0; }
+        .markdown-content ul, .markdown-content ol { padding-left: 25px; }
+        .markdown-content blockquote { border-left: 4px solid #33A1FD; margin: 0; padding-left: 15px; color: #888; font-style: italic; }
+        .markdown-content table { width: auto; margin: 20px 0; }
+        .markdown-content th, .markdown-content td { border: 1px solid #444; padding: 8px 12px; }
+
+        /* Tabs Styling */
+        .tab-box { display: flex; border-bottom: 1px solid #444; margin-bottom: 20px; }
+        .tab-btn { padding: 12px 25px; cursor: pointer; background: #2b2b2b; border: none; color: #888; border-radius: 5px 5px 0 0; margin-right: 5px; transition: 0.3s; font-weight: 600; }
+        .tab-btn:hover { background: #333; color: #fff; }
+        .tab-btn.active { background: #33A1FD; color: white; }
+        .tab-content { display: none; background: #2b2b2b; padding: 25px; border-radius: 0 0 8px 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .tab-content.active { display: block; }
+
+        /* Summary Stats */
+        .summary-box { display: flex; gap: 20px; margin-bottom: 30px; }
+        .stat { flex: 1; padding: 15px; border-radius: 6px; text-align: center; color: white; font-weight: bold; font-size: 1.1em; }
+        .total { background: #444; }
+        .passed { background: #27ae60; }
+        .failed { background: #e74c3c; }
+        .errors { background: #f39c12; }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; table-layout: auto; background: #333; }
+        th, td { border: 1px solid #444; padding: 12px; text-align: left; vertical-align: top; word-wrap: break-word; }
+        th { background-color: #3d3d3d; color: #aaa; font-weight: 600; text-transform: uppercase; font-size: 0.8em; letter-spacing: 0.05em; }
+        tr:nth-child(even) { background-color: #383838; }
+        tr:hover { background-color: #404040; }
+        .status-passed { color: #2ecc71; font-weight: bold; }
+        .status-failed { color: #e74c3c; font-weight: bold; }
+        .status-error { color: #f39c12; font-weight: bold; }
+        .description { font-size: 0.9em; color: #bbb; line-height: 1.4; white-space: pre-wrap; max-height: 300px; overflow-y: auto; }
+        .test-name { font-family: 'Consolas', monospace; font-size: 0.85em; color: #33A1FD; white-space: pre-wrap; word-break: break-all; }
+
+        /* Log Browser Styling */
+        .log-entry { background: #252525; border: 1px solid #333; border-radius: 8px; margin-bottom: 25px; overflow: hidden; }
+        .log-header { background: #333; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #444; }
+        .log-filename { font-weight: bold; color: #33A1FD; font-family: 'Consolas', monospace; }
+        .log-time { color: #888; font-size: 0.85em; }
+        
+        .log-controls { 
+            background: #2b2b2b; 
+            padding: 10px 15px; 
+            display: flex; 
+            gap: 15px; 
+            align-items: center; 
+            border-bottom: 1px solid #444;
+            flex-wrap: wrap;
+        }
+        .log-search { 
+            background: #111; 
+            border: 1px solid #444; 
+            color: #eee; 
+            padding: 5px 10px; 
+            border-radius: 4px; 
+            flex-grow: 1;
+            min-width: 200px;
+        }
+        .log-filter-select {
+            background: #111;
+            border: 1px solid #444;
+            color: #eee;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .log-content-scrollable { 
+            padding: 0; 
+            background: #000; 
+            color: #bbb; 
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace; 
+            font-size: 0.85em; 
+            max-height: 700px; 
+            overflow-y: auto; 
+            line-height: 1.2;
+        }
+        
+        .log-table-header {
+            display: grid;
+            grid-template-columns: 100px 80px 70px 100px 250px 1fr;
+            background: #222;
+            color: #888;
+            font-weight: bold;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            padding: 8px 15px;
+            border-bottom: 2px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .log-line { 
+            display: grid;
+            grid-template-columns: 100px 80px 70px 100px 250px 1fr;
+            padding: 4px 15px;
+            border-bottom: 1px solid #111;
+            align-items: center;
+        }
+        .log-line:hover { background: #111; }
+        
+        .log-col { 
+            padding: 0 5px; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            white-space: nowrap;
+        }
+        .log-col-message { white-space: pre-wrap; overflow: visible; text-overflow: clip; }
+        
+        .log-timestamp { color: #555; font-size: 0.9em; }
+        .log-type { font-weight: bold; border-radius: 3px; text-align: center; padding: 1px 4px; }
+        .log-system { font-weight: bold; text-align: center; border-radius: 3px; border: 1px solid transparent; }
+        .log-element { color: #f39c12; font-weight: bold; }
+        .log-module { color: #666; font-size: 0.85em; }
+        .log-message { color: #ddd; }
+        
+        /* Level Colors */
+        .log-level-debug { color: #7f8c8d; }
+        .log-level-info { color: #3498db; }
+        .log-level-success { color: #2ecc71; }
+        .log-level-warning { color: #f1c40f; background: rgba(241, 196, 15, 0.1); }
+        .log-level-error { color: #e74c3c; background: rgba(231, 76, 60, 0.1); }
+        .log-level-critical { color: #ffffff; background: #e74c3c; }
+        .log-level-trace { color: #9b59b6; }
+
+        /* System Colors */
+        .log-system-core { color: #e67e22; border: 1px solid rgba(230, 126, 34, 0.3); }
+        .log-system-ui { color: #33A1FD; border: 1px solid rgba(51, 161, 253, 0.3); }
+        .log-system-sup { color: #1abc9c; border: 1px solid rgba(26, 188, 156, 0.3); }
+
+        /* Subsystem Colors */
+        .log-subsys-system { color: #f39c12; }
+        .log-subsys-router { color: #3498db; }
+        .log-subsys-data { color: #2ecc71; }
+        .log-subsys-comm { color: #e74c3c; }
+        .log-subsys-builder { color: #9b59b6; }
+        
+        .log-message { color: #ddd; }
+        .error-log { border-left: 5px solid #e74c3c; }
+    </style>
+    <script>
+        function renderMarkdown() {
+            if (typeof marked === 'undefined') return;
+            document.querySelectorAll('.markdown-content').forEach(el => {
+                if (el.getAttribute('data-rendered')) return;
+                const raw = el.textContent;
+                el.innerHTML = marked.parse(raw);
+                el.setAttribute('data-rendered', 'true');
+            });
+        }
+
+        function filterLogs(containerId) {
+            const container = document.getElementById(containerId);
+            const searchTerm = container.querySelector('.log-search').value.toLowerCase();
+            const levelFilter = container.querySelector('.filter-level').value.toLowerCase();
+            const systemFilter = container.querySelector('.filter-system').value.toLowerCase();
+            const elementFilter = container.querySelector('.filter-element') ? container.querySelector('.filter-element').value.toLowerCase() : "";
+            const moduleFilter = container.querySelector('.filter-module') ? container.querySelector('.filter-module').value.toLowerCase() : "";
+            
+            const logEntries = container.querySelectorAll('.log-entry');
+            logEntries.forEach(entry => {
+                const lines = entry.querySelectorAll('.log-line, .log-line-raw');
+                lines.forEach(line => {
+                    let show = true;
+                    const text = line.textContent.toLowerCase();
+                    
+                    if (searchTerm && !text.includes(searchTerm)) show = false;
+                    
+                    if (show && levelFilter) {
+                        const levelCol = line.querySelector('.log-type');
+                        if (levelCol && !levelCol.textContent.toLowerCase().includes(levelFilter)) show = false;
+                        else if (!levelCol) show = false;
+                    }
+                    
+                    if (show && systemFilter) {
+                        const systemCol = line.querySelector('.log-system');
+                        if (systemCol && !systemCol.textContent.toLowerCase().includes(systemFilter)) show = false;
+                        else if (!systemCol) show = false;
+                    }
+
+                    if (show && elementFilter) {
+                        const elementCol = line.querySelector('.log-element');
+                        if (elementCol && !elementCol.textContent.toLowerCase().includes(elementFilter)) show = false;
+                        else if (!elementCol) show = false;
+                    }
+
+                    if (show && moduleFilter) {
+                        const moduleCol = line.querySelector('.log-module');
+                        if (moduleCol && !moduleCol.textContent.toLowerCase().includes(moduleFilter)) show = false;
+                        else if (!moduleCol) show = false;
+                    }
+                    
+                    line.style.display = show ? 'grid' : 'none'; // Use 'grid' for aligned lines
+                });
+            });
+        }
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+            
+            // Re-render markdown if switching to a tab that might have hidden content
+            renderMarkdown();
+        }
+
+        window.onload = function() {
+            renderMarkdown();
+        };
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1>OPEN-AIR Unified Intelligence Report</h1>
+        <p style="color: #666; margin: 5px 0 0 0;">Generated on: <strong>2026-04-04 22:30:50</strong></p>
+    </div>
+
+    <div class="container">
+        <div class="tab-box">
+            <button class="tab-btn active" onclick="openTab(event, 'TestResults')">Test Results</button>
+            <button class="tab-btn" onclick="openTab(event, 'AuditReports')">Audit Reports</button>
+            <button class="tab-btn" onclick="openTab(event, 'ChangeLogs')">Change Logs</button>
+            <button class="tab-btn" onclick="openTab(event, 'BugLogs')">Bug Logs</button>
+            <button class="tab-btn" onclick="openTab(event, 'ErrorLogs')">Error Logs</button>
+            <button class="tab-btn" onclick="openTab(event, 'RunLogs')">Application Run Logs</button>
+            <button class="tab-btn" onclick="openTab(event, 'FlameGraph')">Flame Graph</button>
+            <button class="tab-btn" onclick="openTab(event, 'Dependencies')">Dependencies</button>
+        </div>
+
+        <!-- TAB 1: Test Results -->
+        <div id="TestResults" class="tab-content active">
+            <div class="summary-box">
+                <div class="stat total">Total: 316</div>
+                <div class="stat passed">Passed: 316</div>
+                <div class="stat failed">Failed: 0</div>
+                <div class="stat errors">Errors: 0</div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test Case</th>
+                        <th>Goal & Achievement</th>
+                        <th>Failure Cause</th>
+                        <th>Status</th>
+                        <th>Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                <tr>
+                    <td class="test-name">test_01_initialization (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_01_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0178s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_02_value_change (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_02_value_change)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0213s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_03_position_text (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_03_position_text)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0158s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_04_builder_creation (oaGuiElements.Tests.Knobs.knob_rotary_selector.test_knob_selector.TestRotarySelector.test_04_builder_creation)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0124s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_actuator_button_initialization (oaGuiElements.Tests.buttons.button_actuator.test_button_actuator.TestButtonActuator.test_actuator_button_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0155s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_add_component_request_handler (oaGuiEditorWYSIWYG.Tests.test_core_components.TestStateManager.test_add_component_request_handler)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0011s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_add_monitor_callback (oaSplinker.Tests.test_splinker.TestSplinker.test_add_monitor_callback)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0011s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_aes70_discovery_listener (oaComVisa.Tests.test_agent_mdns_zeroconf.TestAgentMdnsZeroconf.test_aes70_discovery_listener)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_anchor_map (oaGuiManager.Tests.test_schema_defaults.TestSchemaDefaults.test_anchor_map)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_apply_transparency_registration (oaGuiManager.Tests.test_transparency.TestTransparency.test_apply_transparency_registration)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0019s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_asset_exists (oaGuiManager.Tests.test_readers.TestReaders.test_asset_exists)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_asset_exists (oaGuiShowtime.Tests.test_readers.TestReaders.test_asset_exists)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_asset_exists (oaStateCache.Tests.test_readers.TestReaders.test_asset_exists)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_attach_to_root (oaGuiManager.Tests.test_shutdown_coordinator.TestShutdownCoordinator.test_attach_to_root)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0009s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_attempt_reconnect_failed_connection (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_attempt_reconnect_failed_connection)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0015s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_attempt_reconnect_failed_loop_start (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_attempt_reconnect_failed_loop_start)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0012s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_attempt_reconnect_successful (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_attempt_reconnect_successful)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0016s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_augment_device_details (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_augment_device_details)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_background_slicer_perform_slice (oaGuiManager.Tests.test_transparency.TestTransparency.test_background_slicer_perform_slice)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0037s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_batch_creation (oaGuiElements.Tests.metering.meter_needle.test_meter_needle_batch.TestMeterNeedleBatch.test_batch_creation)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.1821s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_broadcast_gui_change (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_broadcast_gui_change)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0218s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_broadcast_notifies_engine (oaGuiElements.Tests.Knobs.knob.test_knob.TestKnobWidget.test_broadcast_notifies_engine)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0199s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_build_services_wires_all_layers (oaGuiManager.Tests.test_composition_root.TestUICompositionRoot.test_build_services_wires_all_layers)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0589s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.buttons.button_actuator.test_button_actuator.TestButtonActuator.test_builder_creator_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0086s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.buttons.button_toggle.test_button_toggle.TestButtonToggle.test_builder_creator_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0229s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.buttons.button_toggler.test_button_toggler.TestButtonToggler.test_builder_creator_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0244s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.buttons.button_trapezoid_toggler.test_button_trapezoid_toggler.TestButtonTrapezoidToggler.test_builder_creator_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0253s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.buttons.button_wink.test_button_wink.TestButtonWink.test_builder_creator_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0109s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.buttons.button_wink_toggler.test_button_wink_toggler.TestButtonWinkToggler.test_builder_creator_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0122s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.faders.fader.test_fader.TestFader.test_builder_creator_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0196s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.faders.fader_bar_graph.test_fader_bar_graph.TestFaderBarGraph.test_builder_creator_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0104s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.faders.fader_dual.test_fader_dual.TestFaderDual.test_builder_creator_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0199s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.faders.fader_horizontal.test_fader_horizontal.TestFaderHorizontal.test_builder_creator_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0128s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.faders.fader_linear_travelling_potentiometer.test_fader_linear_travelling_potentiometer.TestFaderLinearTravellingPotentiometer.test_builder_creator_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0111s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.input.json_tree.test_json_tree.TestJsonTree.test_builder_creator_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0273s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.metering.meter_bar.test_meter_bar.TestMeterBar.test_builder_creator_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0184s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_builder_creator_make (oaGuiElements.Tests.metering.meter_needle.test_meter_needle.TestMeterNeedle.test_builder_creator_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0206s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_button_toggle_creation (oaGuiManager.Tests.test_gui_elements.TestGuiElements.test_button_toggle_creation)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0027s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_calculate_topic (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_calculate_topic)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0104s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_check_host_dedicated (oaComVisa.Tests.test_agent_mdns_zeroconf.TestAgentMdnsZeroconf.test_check_host_dedicated)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0012s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_config_loader (oaConfiguration.Tests.test_readers.TestConfigReader.test_config_loader)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_config_loading_from_file (oaConfiguration.Tests.test_config_reader.TestConfigReader.test_config_loading_from_file)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_connect_instrument_logic_query_failure (oaComVisa.Tests.test_logic_connect_instrument.TestVisaConnector.test_connect_instrument_logic_query_failure)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_connect_instrument_logic_setup_failure (oaComVisa.Tests.test_logic_connect_instrument.TestVisaConnector.test_connect_instrument_logic_setup_failure)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_connect_instrument_logic_success (oaComVisa.Tests.test_logic_connect_instrument.TestVisaConnector.test_connect_instrument_logic_success)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_connect_to_broker (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_connect_to_broker)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_create_default_config_ini (oaConfiguration.Tests.test_config.TestConfigGenerator.test_create_default_config_ini)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_create_event_blocker (oaGuiEditorWYSIWYG.Tests.test_core_components.TestOverlayManager.test_create_event_blocker)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0012s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_create_root_window_configures_styling (oaGuiManager.Tests.test_ui_window.TestUIWindowManager.test_create_root_window_configures_styling)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0009s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_create_root_window_maximizes_on_linux (oaGuiManager.Tests.test_ui_window.TestUIWindowManager.test_create_root_window_maximizes_on_linux)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0008s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_creation (oaGuiElements.Tests.graphing.graphing.test_graphing.TestGraphPlotter.test_creation)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.1460s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_creation (oaGuiElements.Tests.graphing.radar.test_radar.TestRadarWidget.test_creation)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0101s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_creation (oaGuiElements.Tests.graphing.test_flux_plotter.TestGraphPlotter.test_creation)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0166s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_creation (oaGuiElements.Tests.text.test_flux_plotter.TestGraphPlotter.test_creation)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0272s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_creation_via_builder (oaGuiElements.Tests.Knobs.knob.test_knob.TestKnobWidget.test_creation_via_builder)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0224s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_deadband_state_rust (oaSplinker.Tests.test_pipeline_rust.TestPipelineRust.test_deadband_state_rust)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_debug_matrix_decorator (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_debug_matrix_decorator)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_default_colors (oaGuiManager.Tests.test_schema_defaults.TestSchemaDefaults.test_default_colors)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_default_values (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_default_values)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_desktop_entry (oaInstallation.Tests.test_installation_validator.TestInstallation.test_desktop_entry)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_disconnect_instrument_failure (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_failure)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_disconnect_instrument_logic_no_inst (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_logic_no_inst)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0004s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_disconnect_instrument_logic_with_inst (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_logic_with_inst)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0009s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_disconnect_instrument_none (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_none)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_disconnect_instrument_success (oaComVisa.Tests.test_logic_disconnect_instrument.TestVisaDisconnector.test_disconnect_instrument_success)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0004s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_disconnect_signals_worker (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_disconnect_signals_worker)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_discover_aes70_devices (oaComVisa.Tests.test_agent_mdns_zeroconf.TestAgentMdnsZeroconf.test_discover_aes70_devices)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0009s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_discover_gateway_devices_exception (oaComVisa.Tests.test_agent_static_ip_prober.TestAgentStaticIpProber.test_discover_gateway_devices_exception)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0018s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_discover_gateway_devices_success (oaComVisa.Tests.test_agent_static_ip_prober.TestAgentStaticIpProber.test_discover_gateway_devices_success)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_discover_ip_devices (oaComVisa.Tests.test_agent_mdns_zeroconf.TestAgentMdnsZeroconf.test_discover_ip_devices)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0016s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_discover_usb_devices_empty (oaComVisa.Tests.test_agent_usb_enumerator.TestAgentUsbEnumerator.test_discover_usb_devices_empty)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_discover_usb_devices_exception (oaComVisa.Tests.test_agent_usb_enumerator.TestAgentUsbEnumerator.test_discover_usb_devices_exception)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_discover_usb_devices_success (oaComVisa.Tests.test_agent_usb_enumerator.TestAgentUsbEnumerator.test_discover_usb_devices_success)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_draw_calls_pil (oaGuiManager.Tests.test_button_canvas_base.TestCanvasButton.test_draw_calls_pil)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0015s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_dual_fader_initialization (oaGuiElements.Tests.faders.fader_dual.test_fader_dual.TestFaderDual.test_dual_fader_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0198s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_dynamic_snmp_loading (oaThreadManager.Tests.Workers.test_launcher.TestLauncher.test_dynamic_snmp_loading)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0087s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_element_override (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_element_override)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_fader_bar_graph_initialization (oaGuiElements.Tests.faders.fader_bar_graph.test_fader_bar_graph.TestFaderBarGraph.test_fader_bar_graph_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0182s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_fader_initialization (oaGuiElements.Tests.faders.fader.test_fader.TestFader.test_fader_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0113s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_failsafe_behavior (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_failsafe_behavior)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_failure_triggers_shutdown (oaGuiManager.Tests.test_bootstrap_sequence.TestAsyncBootstrapEngine.test_failure_triggers_shutdown)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0043s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_file_io_load (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_file_io_load)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0014s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_function_level_precision (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_function_level_precision)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_geometry_publish (oaGuiManager.Tests.test_ui_tracking_service.TestUITrackingService.test_geometry_publish)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0020s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_get_asset_hash (oaGuiManager.Tests.test_asset_cache.TestAssetCacheManager.test_get_asset_hash)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_get_gateway_inventory (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_get_gateway_inventory)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0008s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_get_state_returns_deep_copy (oaGuiEditorWYSIWYG.Tests.test_core_components.TestStateManager.test_get_state_returns_deep_copy)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0009s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_global_setting_modification_triggers_global_rebuild (oaGuiEditorWYSIWYG.Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.test_global_setting_modification_triggers_global_rebuild)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_global_settings_property (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_global_settings_property)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_handle_delete_command (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_handle_delete_command)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0011s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_handle_external_update (oaStateCache.Tests.test_state_cache.TestStateCache.test_handle_external_update)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_handle_incoming_osc (oaComOSC.Tests.test_osc.TestOSCManager.test_handle_incoming_osc)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0013s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_handle_service_command_no_payload (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_handle_service_command_no_payload)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_handle_service_command_register (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_handle_service_command_register)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0012s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_handle_service_command_reregister_all (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_handle_service_command_reregister_all)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0011s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_horizontal_fader_initialization (oaGuiElements.Tests.faders.fader_horizontal.test_fader_horizontal.TestFaderHorizontal.test_horizontal_fader_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0152s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_hot_update (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_hot_update)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_hunt_for_devices (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_hunt_for_devices)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.1718s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_import (oaGuiElements.Tests.input.input_mousewheel_mixin.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_import)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_import (oaGuiElements.Tests.utils.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_import)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_ingest_pushes_to_rust_router (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_ingest_pushes_to_rust_router)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0013s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0016s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (oaComOSC.Tests.test_osc.TestOSCManager.test_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (oaComVisa.Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.test_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (oaComVisa.Tests.test_visa_manager.TestVisaManagerOrchestrator.test_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0012s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (oaGuiEditorWYSIWYG.Tests.test_core_components.TestStateManager.test_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization (oaSplinker.Tests.test_splinker.TestSplinker.test_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization_and_build (oaGuiManager.Tests.test_gui_from_json.TestUniversalGuiLoader.test_initialization_and_build)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0012s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization_and_subscription (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_initialization_and_subscription)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization_and_subscription (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_initialization_and_subscription)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0008s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialization_and_subscriptions (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_initialization_and_subscriptions)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialize_app_exception (oaOchestration.Tests.test_application_initializer.TestApplicationInitializer.test_initialize_app_exception)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_initialize_app_success (oaOchestration.Tests.test_application_initializer.TestApplicationInitializer.test_initialize_app_success)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_interaction_events (oaGuiManager.Tests.test_button_canvas_base.TestCanvasButton.test_interaction_events)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_invalid_path (oaGuiManager.Tests.test_fast_scanner.TestFastScanner.test_invalid_path)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_inventory_notification (oaComVisa.Tests.test_visa_fleet.TestVisaFleet.test_inventory_notification)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0022s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_is_debug_allowed_delegation (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_is_debug_allowed_delegation)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0004s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_json_tree_initialization (oaGuiElements.Tests.input.json_tree.test_json_tree.TestJsonTree.test_json_tree_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0182s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_kick_watchdog (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_kick_watchdog)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0119s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_launch_core_managers_structure (oaThreadManager.Tests.Workers.test_launcher.TestLauncher.test_launch_core_managers_structure)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0090s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_layout_parser_scan (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_layout_parser_scan)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_lazy_wrap_instantiation (oaGuiManager.Tests.test_gui_widget_factory.TestGuiWidgetFactory.test_lazy_wrap_instantiation)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0109s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_lazy_wrap_with_static_make (oaGuiManager.Tests.test_gui_widget_factory.TestGuiWidgetFactory.test_lazy_wrap_with_static_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0160s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_lexicon_mapping (oaGuiManager.Tests.test_schema_defaults.TestSchemaDefaults.test_lexicon_mapping)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_load_from_memory_first (oaGuiManager.Tests.test_asset_cache.TestAssetCacheManager.test_load_from_memory_first)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0009s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_load_handles_file_not_found_gracefully (oaGuiElements.Tests.test_table_csv_service.TestTableCSVService.test_load_handles_file_not_found_gracefully)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_load_parses_valid_csv_data (oaGuiElements.Tests.test_table_csv_service.TestTableCSVService.test_load_parses_valid_csv_data)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_ltp_initialization (oaGuiElements.Tests.faders.fader_linear_travelling_potentiometer.test_fader_linear_travelling_potentiometer.TestFaderLinearTravellingPotentiometer.test_ltp_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0111s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_main (oaComVisa.Tests.test_cli_visa_find.TestCliVisaFind.test_main)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_make_json_tree_prevents_name_error (oaGuiElements.Tests.test_json_tree.TestJsonTreeWidget.test_make_json_tree_prevents_name_error)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0173s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_make_slider_value_prevents_attribute_error (oaGuiElements.Tests.test_slider_value.TestSliderValueCreator.test_make_slider_value_prevents_attribute_error)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0212s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_make_text_label (oaGuiElements.Tests.text.text_label.test_text_label.TestTextLabel.test_make_text_label)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0201s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_make_text_table (oaGuiElements.Tests.text.text_table.test_text_table.TestTextTable.test_make_text_table)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0200s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_make_text_value_box (oaGuiElements.Tests.text.text_value_box.test_text_value_box.TestTextValueBox.test_make_text_value_box)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0245s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_make_text_value_box (oaGuiElements.Tests.text.text_value_with_units.test_text_value_with_units.TestTextValueBox.test_make_text_value_box)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0181s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_manual_registration (oaGuiManager.Tests.test_widget_registry.TestWidgetRegistry.test_manual_registration)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_marker_logic_grouping (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_marker_logic_grouping)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_master_killswitch (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_master_killswitch)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_matrix_log_proxy (oaLogging.Tests.test_matrix_gate.TestMatrixGate.test_matrix_log_proxy)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_missing_blueprint_error (oaGuiManager.Tests.test_gui_from_json.TestUniversalGuiLoader.test_missing_blueprint_error)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0024s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaComAES70.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaComEmber.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaFileExportCSV.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaGuiBackground.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaGuiBuilder.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaGuiDefinitions.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaGuiElements.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaGuiFolderParser.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaGuiMediaElements.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaGuiSplashScreen.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaInstallation.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaLogging.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaPTP.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaStand_Alone_Utilities.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaStyle.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads (oaTranslator.Tests.test_entry.TestInitialization.test_module_loads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_module_loads_correctly (oaGuiEditorWYSIWYG.Tests.test_Entry.TestWysiwygEditorEntry.test_module_loads_correctly)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>1.6896s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_monitor_callbacks (oaComOSC.Tests.test_osc.TestOSCManager.test_monitor_callbacks)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0087s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_monitor_notification_no_mqtt (oaComMidi.Tests.test_midi_standalone.TestMidiStandalone.test_monitor_notification_no_mqtt)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0018s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_mosquitto_reachable (oaInstallation.Tests.test_installation_validator.TestInstallation.test_mosquitto_reachable)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_mqtt_sweeper_on_message_filter (oaComMQTT.Tests.test_mqtt_logic.TestMQTTLogic.test_mqtt_sweeper_on_message_filter)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0004s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_multiple_connections_are_handled (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_multiple_connections_are_handled)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_multiple_subscribers (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_multiple_subscribers)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0013s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_multiple_subscribers (oaGuiEditorWYSIWYG.Tests.test_core_components.TestEventBus.test_multiple_subscribers)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_multiple_types_registration (oaGuiManager.Tests.test_widget_registry.TestWidgetRegistry.test_multiple_types_registration)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_observer_exception_handled (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_observer_exception_handled)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0009s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_on_closing_multiple_calls (oaGuiManager.Tests.test_shutdown_coordinator.TestShutdownCoordinator.test_on_closing_multiple_calls)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0642s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_on_closing_stops_managers (oaGuiManager.Tests.test_shutdown_coordinator.TestShutdownCoordinator.test_on_closing_stops_managers)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0034s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_on_connect_request_direct (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_connect_request_direct)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0014s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_on_device_select (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_device_select)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0008s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_on_fleet_scan_complete_logging (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_on_fleet_scan_complete_logging)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0016s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_on_gui_connect_request (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_gui_connect_request)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0013s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_on_gui_disconnect_request (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_gui_disconnect_request)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0068s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_on_scan_complete_malformed_payload (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_complete_malformed_payload)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_on_scan_complete_no_devices (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_complete_no_devices)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_on_scan_complete_with_devices (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_complete_with_devices)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0008s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_on_scan_start (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_start)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_on_search_request_valid (oaComVisa.Tests.test_logic_mqtt_listen.TestVisaMqttListener.test_on_search_request_valid)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0014s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_on_sys_message_notifies_observers (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_on_sys_message_notifies_observers)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_on_sys_message_updates_stats (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_on_sys_message_updates_stats)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_overlay_intercepts_click_event (oaGuiEditorWYSIWYG.Tests.workspaces.Core.layout.test_overlay.TestDesignModeOverlay.test_overlay_intercepts_click_event)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_overlay_intercepts_keypress_event (oaGuiEditorWYSIWYG.Tests.workspaces.Core.layout.test_overlay.TestDesignModeOverlay.test_overlay_intercepts_keypress_event)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0011s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_overlay_intercepts_mousedown_event (oaGuiEditorWYSIWYG.Tests.workspaces.Core.layout.test_overlay.TestDesignModeOverlay.test_overlay_intercepts_mousedown_event)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_overlay_intercepts_mousemove_event (oaGuiEditorWYSIWYG.Tests.workspaces.Core.layout.test_overlay.TestDesignModeOverlay.test_overlay_intercepts_mousemove_event)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_overlay_intercepts_mouseup_event (oaGuiEditorWYSIWYG.Tests.workspaces.Core.layout.test_overlay.TestDesignModeOverlay.test_overlay_intercepts_mouseup_event)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0004s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_overlay_passes_event_when_inactive (oaGuiEditorWYSIWYG.Tests.workspaces.Core.layout.test_overlay.TestDesignModeOverlay.test_overlay_passes_event_when_inactive)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_parse_idn (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_parse_idn)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_parse_publish_item (oaComMQTT.Tests.test_mqtt_async_worker.TestMqttAsyncWorker.test_parse_publish_item)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0082s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_parse_resource_details_tcpip (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_parse_resource_details_tcpip)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_parse_resource_details_usb (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_parse_resource_details_usb)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_pillars (oaGuiManager.Tests.test_schema_defaults.TestSchemaDefaults.test_pillars)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder (oaThreadManager.Tests.test_Entry.TestEntry.test_placeholder)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder_method (oaComAES70.Tests.test_aes70_worker.TestAes70Worker.test_placeholder_method)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder_method (oaComBroker.Tests.test_broker_worker.TestBrokerWorker.test_placeholder_method)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder_method (oaComEmber.Tests.test_ember_worker.TestEmberWorker.test_placeholder_method)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder_method (oaComMQTT.Tests.test_mqtt_worker.TestMqttWorker.test_placeholder_method)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder_method (oaComMidi.Tests.test_midi_worker.TestMidiWorker.test_placeholder_method)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder_method (oaComOSC.Tests.test_osc_worker.TestOscWorker.test_placeholder_method)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder_method (oaComREST.Tests.test_rest_worker.TestRestWorker.test_placeholder_method)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder_method (oaComSNMP.Tests.test_snmp_manager.TestSnmpManager.test_placeholder_method)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder_method (oaGuiManager.Tests.test_gui_worker.TestGuiWorker.test_placeholder_method)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder_method (oaInstallation.Tests.test_installation_worker.TestInstallationWorker.test_placeholder_method)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder_method (oaLogging.Tests.test_logging_worker.TestLoggingWorker.test_placeholder_method)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder_method (oaOchestration.Tests.test_orchestration_worker.TestOrchestrationWorker.test_placeholder_method)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder_method (oaThreadManager.Tests.test_thread_worker.TestThreadWorker.test_placeholder_method)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_placeholder_method (oaTranslator.Tests.test_translator_worker.TestTranslatorWorker.test_placeholder_method)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_protocol_guard_exception (oaOchestration.Tests.test_protocol_guard.TestProtocolGuard.test_protocol_guard_exception)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_protocol_guard_success (oaOchestration.Tests.test_protocol_guard.TestProtocolGuard.test_protocol_guard_success)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_publish_cc_to_midi (oaComMidi.Tests.test_midi_tx.TestMidiTx.test_publish_cc_to_midi)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_publish_no_subscribers (oaGuiEditorWYSIWYG.Tests.test_core_components.TestEventBus.test_publish_no_subscribers)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_publish_note_to_midi (oaComMidi.Tests.test_midi_tx.TestMidiTx.test_publish_note_to_midi)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0008s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_publish_proxy_status (oaComVisa.Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.test_publish_proxy_status)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_publish_queues_message (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_publish_queues_message)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_publish_status (oaComVisa.Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.test_publish_status)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_publish_status_offline (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_publish_status_offline)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0014s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_publish_status_online (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_publish_status_online)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0014s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_publish_subscribe_clear (oaComMQTT.Tests.test_mqtt_integration.TestMQTTIntegration.test_publish_subscribe_clear)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>8.0939s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_python_environment (oaInstallation.Tests.test_installation_validator.TestInstallation.test_python_environment)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_python_realign_logs (oaStand_Alone_Utilities.Tests.test_realign_logs.TestLogRealigner.test_python_realign_logs)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0012s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_query_device_safe_failure (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_query_device_safe_failure)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_query_device_safe_success (oaComVisa.Tests.test_visa_scanner.TestVisaScanner.test_query_device_safe_success)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_queue_task_publications (oaComMQTT.Tests.test_mqtt_async_worker.TestMqttAsyncWorker.test_queue_task_publications)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>5.0072s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_queue_task_subscriptions (oaComMQTT.Tests.test_mqtt_async_worker.TestMqttAsyncWorker.test_queue_task_subscriptions)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>5.0069s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_read_flags (oaTests.Tests.test_config_editor.TestConfigIniEditor.test_read_flags)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_receiver_task (oaComMQTT.Tests.test_mqtt_async_worker.TestMqttAsyncWorker.test_receiver_task)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.1025s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_register_and_unregister_observer (oaComMQTT.Tests.test_broker_monitor.TestBrokerMonitor.test_register_and_unregister_observer)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_register_panic_callback (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_register_panic_callback)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_register_route (oaComOSC.Tests.test_osc.TestOSCManager.test_register_route)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_register_widget (oaGuiTelemetry.Tests.test_state_mirror_engine.TestStateMirrorEngine.test_register_widget)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0202s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_render_functional_widget_trigger (oaGuiBuildShell.Tests.test_async_grid_renderer.TestAsyncGridRenderer.test_render_functional_widget_trigger)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.1029s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_render_initialization (oaGuiBuildShell.Tests.test_async_grid_renderer.TestAsyncGridRenderer.test_render_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0073s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_replace_backslash (oaGuiElements.Tests.input.input_mousewheel_mixin.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_replace_backslash)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_replace_backslash (oaGuiElements.Tests.utils.test_dynamic_gui_mousewheel_mixin.TestMousewheelScrollMixin.test_replace_backslash)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_reveal_main_window (oaGuiManager.Tests.test_ui_window.TestUIWindowManager.test_reveal_main_window)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_router_stop_stops_threads (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_router_stop_stops_threads)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0062s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_run_discovery_success (oaComVisa.Tests.test_discovery_orchestrator.TestDiscoveryOrchestrator.test_run_discovery_success)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_run_discovery_unresponsive (oaComVisa.Tests.test_discovery_orchestrator.TestDiscoveryOrchestrator.test_run_discovery_unresponsive)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_run_executes_phases (oaGuiManager.Tests.test_bootstrap_sequence.TestAsyncBootstrapEngine.test_run_executes_phases)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0020s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_rust_ballistics_initialization (oaGuiElements.Tests.metering.test_rust_ballistics.TestRustBallistics.test_rust_ballistics_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_rust_ballistics_movement (oaGuiElements.Tests.metering.test_rust_ballistics.TestRustBallistics.test_rust_ballistics_movement)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_rust_csv_parsing (oaFileImportCSV.Tests.test_rust_csv_parser.TestRustCSVParser.test_rust_csv_parsing)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_rust_get_angle (oaGuiBuilder.Tests.test_geometry_math_rust.TestGeometryMathRust.test_rust_get_angle)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_rust_get_position (oaGuiBuilder.Tests.test_geometry_math_rust.TestGeometryMathRust.test_rust_get_position)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_rust_normalize_value (oaGuiBuilder.Tests.test_geometry_math_rust.TestGeometryMathRust.test_rust_normalize_value)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_rust_ptp_parsing_announce (oaPTP.Tests.test_ptp_parser_rust.TestPtpParserRust.test_rust_ptp_parsing_announce)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_rust_ptp_parsing_sync (oaPTP.Tests.test_ptp_parser_rust.TestPtpParserRust.test_rust_ptp_parsing_sync)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_rust_realign_logs (oaStand_Alone_Utilities.Tests.test_realign_logs.TestLogRealigner.test_rust_realign_logs)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_rust_rotate_point (oaGuiBuilder.Tests.test_geometry_math_rust.TestGeometryMathRust.test_rust_rotate_point)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_rust_router_ingest (oaComBroker.Tests.test_rust_router.TestRustRouter.test_rust_router_ingest)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_rust_scale (oaSplinker.Tests.test_pipeline_rust.TestPipelineRust.test_rust_scale)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_rust_state_cache_initialization (oaStateCache.Tests.test_rust_state_cache.TestRustStateCache.test_rust_state_cache_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_rust_state_cache_update (oaStateCache.Tests.test_rust_state_cache.TestRustStateCache.test_rust_state_cache_update)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0015s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_sample_csv_exists (oaFileImportCSV.Tests.test_readers.TestCSVReaderAsset.test_sample_csv_exists)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_sample_html_exists (oaFileImportHTML.Tests.test_readers.TestHTMLReaderAsset.test_sample_html_exists)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_sample_pdf_exists (oaFileImportPDF.Tests.test_readers.TestPDFReaderAsset.test_sample_pdf_exists)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_sample_shw_exists (oaFileImportShow.Tests.test_readers.TestShowReaderAsset.test_sample_shw_exists)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_save_inventory (oaComVisa.Tests.test_discovery_orchestrator.TestDiscoveryOrchestrator.test_save_inventory)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0009s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_save_inventory_empty (oaComVisa.Tests.test_discovery_orchestrator.TestDiscoveryOrchestrator.test_save_inventory_empty)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_save_to_cache (oaGuiManager.Tests.test_asset_cache.TestAssetCacheManager.test_save_to_cache)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0014s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_scan_all_files (oaGuiManager.Tests.test_fast_scanner.TestFastScanner.test_scan_all_files)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_scan_python_files (oaGuiManager.Tests.test_fast_scanner.TestFastScanner.test_scan_python_files)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0004s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_scan_widgets_discovery (oaGuiManager.Tests.test_widget_registry.TestWidgetRegistry.test_scan_widgets_discovery)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0154s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_set_flag (oaTests.Tests.test_config_editor.TestConfigIniEditor.test_set_flag)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0069s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_setup_visa_instrument_failure (oaComVisa.Tests.test_logic_connect_instrument.TestVisaConnector.test_setup_visa_instrument_failure)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_setup_visa_instrument_success (oaComVisa.Tests.test_logic_connect_instrument.TestVisaConnector.test_setup_visa_instrument_success)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0009s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_show_event_blocker (oaGuiEditorWYSIWYG.Tests.test_core_components.TestOverlayManager.test_show_event_blocker)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton (oaComBroker.Tests.test_protocol_router.TestProtocolRouter.test_singleton)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0009s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton (oaConfiguration.Tests.test_config_reader_old.TestConfigReader.test_singleton)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton (oaSplinker.Tests.test_splinker.TestSplinker.test_singleton)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton_behavior (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_singleton_behavior)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_singleton_integrity (oaConfiguration.Tests.test_config_reader.TestConfigReader.test_singleton_integrity)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_smart_meter_initialization (oaGuiElements.Tests.metering.meter_bar.test_meter_bar.TestMeterBar.test_smart_meter_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0187s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_snmp_reachable (oaInstallation.Tests.test_installation_validator.TestInstallation.test_snmp_reachable)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_start_already_running (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_start_already_running)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0022s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_start_and_stop (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_start_and_stop)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0024s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_start_heartbeat (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_start_heartbeat)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_state_changes (oaGuiManager.Tests.test_button_canvas_base.TestCanvasButton.test_state_changes)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0008s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_state_manager_update (oaGuiManager.Tests.test_ui_and_data.TestUIAndData.test_state_manager_update)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0008s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_static_make (oaGuiElements.Tests.text.text_label.test_text_label.TestTextLabel.test_static_make)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0160s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_status_broadcast (oaComMidi.Tests.test_midi.TestMidiManager.test_status_broadcast)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0010s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_stop_not_running (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_stop_not_running)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0015s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_structural_types (oaGuiManager.Tests.test_schema_defaults.TestSchemaDefaults.test_structural_types)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_sub_node_modification_does_not_trigger_global_rebuild (oaGuiEditorWYSIWYG.Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.test_sub_node_modification_does_not_trigger_global_rebuild)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_subscribe_and_publish (oaGuiEditorWYSIWYG.Tests.test_core_components.TestEventBus.test_subscribe_and_publish)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0003s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_subscribe_error_logged (oaComMQTT.Tests.test_mqtt_async_worker.TestMqttAsyncWorker.test_subscribe_error_logged)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>5.0953s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_subscribe_exact_topic (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_exact_topic)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_subscribe_queues_message (oaComMQTT.Tests.test_mqtt_connection.TestMqttConnectionManager.test_subscribe_queues_message)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0005s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_subscribe_wildcard_topic (oaComMQTT.Tests.test_mqtt_subscriber_router.TestMqttSubscriberRouter.test_subscribe_wildcard_topic)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_sync_state_on_reconnect (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_sync_state_on_reconnect)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0019s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_system_level_gating (oaConfiguration.Tests.test_logging_matrix.TestLoggingMatrixManager.test_system_level_gating)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_system_status_loop_no_reconnect_if_already_connected (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_system_status_loop_no_reconnect_if_already_connected)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0071s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_system_status_loop_reconnect_logic (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_system_status_loop_reconnect_logic)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0017s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_system_status_loop_when_connected (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_system_status_loop_when_connected)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0016s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_system_status_loop_when_disconnected (oaComMQTT.Tests.test_mqtt_manager.TestMqttManager.test_system_status_loop_when_disconnected)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0039s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_tilted_meter_config_extraction (oaGuiElements.Tests.metering.meter_needle.test_meter_needle.TestMeterNeedle.test_tilted_meter_config_extraction)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0119s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_toggle_button_logic (oaGuiManager.Tests.test_gui_elements.TestGuiElements.test_toggle_button_logic)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0019s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_toggle_registration (oaGuiElements.Tests.buttons.button_toggle.test_button_toggle.TestButtonToggle.test_toggle_registration)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0259s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_topic_calculator_calculate (oaComMQTT.Tests.test_mqtt_logic.TestMQTTLogic.test_topic_calculator_calculate)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0000s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_track_registers_events (oaGuiManager.Tests.test_ui_tracking_service.TestUITrackingService.test_track_registers_events)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0019s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_transparency_config_parsing (oaGuiManager.Tests.test_transparency.TestTransparency.test_transparency_config_parsing)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0013s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_trapezoid_button_initialization (oaGuiElements.Tests.buttons.button_trapezoid.test_button_trapezoid.TestButtonTrapezoid.test_trapezoid_button_initialization)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0148s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_trapezoid_registration (oaGuiElements.Tests.buttons.button_trapezoid.test_button_trapezoid.TestButtonTrapezoid.test_trapezoid_registration)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0205s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_unsubscribe (oaGuiEditorWYSIWYG.Tests.test_core_components.TestEventBus.test_unsubscribe)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_update_found_devices_gui (oaComVisa.Tests.test_logic_mqtt_publisher.TestVisaGuiPublisher.test_update_found_devices_gui)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_update_state_adds_new_node (oaGuiEditorWYSIWYG.Tests.test_core_components.TestStateManager.test_update_state_adds_new_node)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0006s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_update_state_broadcasts_state_updated (oaGuiEditorWYSIWYG.Tests.test_core_components.TestStateManager.test_update_state_broadcasts_state_updated)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0015s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_update_state_modifies_existing_node (oaGuiEditorWYSIWYG.Tests.test_core_components.TestStateManager.test_update_state_modifies_existing_node)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0007s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_validate_configuration (oaConfiguration.Tests.test_config_validator.TestConfigValidator.test_validate_configuration)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_library_error (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_library_error)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0002s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_proxy_init_fail (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_proxy_init_fail)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0001s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_proxy_init_success (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_proxy_init_success)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0060s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visa_resource_lister (oaComVisa.Tests.test_visa_logic.TestVisaLogic.test_visa_resource_lister)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0223s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visibility_publish (oaGuiManager.Tests.test_ui_tracking_service.TestUITrackingService.test_visibility_publish)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0012s</td>
+                </tr>
+            
+                <tr>
+                    <td class="test-name">test_visualization_gear_config (oaGuiElements.Tests.Knobs.knob.test_knob.TestKnobWidget.test_visualization_gear_config)</td>
+                    <td class="description markdown-content">No description provided.</td>
+                    <td class="description markdown-content"></td>
+                    <td class="status-passed">Passed</td>
+                    <td>0.0084s</td>
+                </tr>
+            
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TAB 2: Audit Reports -->
+        <div id="AuditReports" class="tab-content">
+            <h3>Latest Audit Reports</h3>
+        <div class="log-entry">
+            <div class="log-header">
+                <span class="log-filename">ZeroizePipeline_Audit_20260404_2159.md</span>
+                <span class="log-time">2026-04-04 22:00:03</span>
+            </div>
+            <div class="markdown-content" style="padding: 15px; background: #1a1a1a; color: #ccc;"># Zeroize Pipeline Audit Report (Final)
+**Date**: 2026-04-04 22:25
+**Target**: OPEN-AIR / oaComEmber
+**Status**: COMPLETED - CRITICAL FINDINGS
+
+---
+## Phase 0-2: Discovery &amp; Analysis (Completed)
+- [x] Preflight: 236 TUs identified.
+- [x] Symbol Resolution: `StreamBuffer` and `ClientConnection` audited.
+- [x] Source Analysis: Identified ZR-001 and ZR-002.
+
+## Phase 5: PoC Verification (Confirmed)
+- **PoC ID**: [POC-ZR-001]
+- **Result**: **VULNERABILITY CONFIRMED**.
+- **Evidence**: `Leaked bytes from previous stack frame: 1290 / 1290`.
+- **Method**: Simulated stack reuse with `0xAA` pattern. Verified that the 1290-byte stack buffer in `ClientConnection::read` retains all data from previous frames because it lacks a zeroize call.
+
+---
+## Findings Summary
+
+### [ZR-001] CRITICAL: Stack Retention in ClientConnection
+- **Location**: `oaComEmber/Core/src/communication/connection/ClientConnection.cpp:52`
+- **Impact**: Network data (which may include credentials or sensitive messages) remains on the stack after the `read()` function returns. Other functions reusing the same stack space can leak this data.
+- **Remediation**: Use `std::memset(buffer, 0, sizeof(buffer))` or a secure variant like `explicit_bzero` before returning from `read()`.
+
+### [ZR-002] MEDIUM: Lack of Heap Wipe in StreamBuffer
+- **Location**: `oaComEmber/Core/subprojects/libember/Headers/ember/util/StreamBuffer.hpp:278`
+- **Impact**: `clear()` deallocates memory nodes without zeroing their contents. Fragments of previous communications remain in unallocated heap memory until overwritten.
+- **Remediation**: In the destructor and `clear()` method, explicitly zeroize the data buffer of each node before `deallocate(current)`.
+
+---
+## Phase 6: Test Generation
+- **Recommendation**: Integrate a MemorySanitizer (MSan) check into the CI pipeline to detect uninitialized reads that could expose leaked stack data.
+
+**Report saved to**: `oaDataAudits/ZeroizePipeline_Audit_20260404_2159.md`
+**Artifact generated**: `oaDataAudits/findings_20260404_2159.json`
+</div>
+        </div>
+        
+        <div class="log-entry">
+            <div class="log-header">
+                <span class="log-filename">Bad_Security_Audit_20260404.md</span>
+                <span class="log-time">2026-04-04 21:41:38</span>
+            </div>
+            <div class="markdown-content" style="padding: 15px; background: #1a1a1a; color: #ccc;"># 🛡️ Bad Security Audit - 20260404
+
+## Executive Summary
+The OPEN-AIR codebase demonstrates a strong commitment to modularity and performance through its **oa*** module standard and the integration of Rust for high-performance tasks. However, the audit identified areas of concern regarding file-level bloat, incomplete documentation, and default security configurations. While no critical vulnerabilities (e.g., remote code execution or injection) were found, several structural and security &quot;best practice&quot; improvements are recommended to maintain system integrity and LLM focus.
+
+---
+
+## Phase 1: Structural Integrity Recommendations
+### Monolithic Orchestrators
+- **File: `oaTests/Interface/TestsUI.py` (664 lines)**
+  - **Issue**: This file serves as a heavy orchestrator, importing and managing diverse subsystems (Cleanup, Audits, Setup, SystemStats). It exceeds the 500-line threshold for effective LLM attention and architectural clarity.
+  - **Recommendation**: Decompose the `TestsApp` class further. Extract specific sub-managers (e.g., `MaintenanceManager`, `InstallationManager`) into their own classes/files and use composition in the main UI app.
+
+### Documentation Debt
+- **File: `oaGuiElements/Documentation/meter_config.md` (894 lines)**
+  - **Issue**: This file is excessively long due to redundant [TODO] templates. It lacks actual descriptive content.
+  - **Recommendation**: Clean up the templates. Implement a &quot;Progressive Disclosure&quot; strategy by splitting the API reference into a separate `references/meter_config_api.md` file.
+
+---
+
+## Phase 2: Security Findings
+### Default Credentials
+- **File: `oaConfiguration/Core/config_builder.py:149`**
+  - **Pattern**: `mqtt_username = guest`, `mqtt_password = guest`
+  - **Severity**: **MEDIUM**
+  - **Finding**: Default credentials for the MQTT broker are hardcoded in the configuration builder. 
+  - **Recommendation**: These should be explicitly documented as &quot;test-only&quot; defaults. In production deployments, these must be randomized or sourced from a secure secrets manager.
+
+### Subprocess Safety
+- **Findings**: The codebase uses `subprocess` extensively, primarily for building Rust modules and system setup. 
+- **Assessment**: All observed calls use list-based commands (e.g., `[sys.executable, &quot;-m&quot;, &quot;pip&quot;, ...]`), which are safe from shell injection. 
+- **Recommendation**: Continue enforcing the ban on `shell=True` for any command that accepts external or non-hardcoded input.
+
+---
+
+## Phase 3: Performance Bottlenecks
+### Observation
+- The project&#x27;s strategy of offloading high-iteration tasks to Rust (via PyO3) is excellent for performance.
+- No unbounded loops or O(n^2) logic paths were identified in the primary Python logic.
+- **Recommendation**: Ensure that all `compiler_hook.py` calls remain idempotent and avoid redundant builds during development.
+
+---
+
+## Phase 4: Segmentation Plan (The 500-Line Rule)
+### Oversized Files Identified:
+1. **`oaGuiElements/Documentation/meter_config.md`** (894 lines)
+2. **`oaTests/Interface/TestsUI.py`** (664 lines)
+
+### Segmentation Strategy:
+- **Phase 1 (Immediate)**: Refactor `TestsUI.py` by extracting the `Maintenance` and `Cleanup` logic into an `oaTests/Managers/MaintenanceManager.py`.
+- **Phase 2 (Immediate)**: Trim `meter_config.md` by removing empty templates and moving detailed class/method references to a subfolder: `oaGuiElements/Documentation/references/`.
+- **Phase 3 (Ongoing)**: Set a linter or pre-commit hook to flag any new file exceeding 450 lines to trigger immediate review for segmentation.
+
+---
+
+**Audit Complete.**
+*Author: Gemini CLI Auditor*
+*Date: 2026-04-04*
+</div>
+        </div>
+        
+        </div>
+
+        <!-- TAB 3: Change Logs -->
+        <div id="ChangeLogs" class="tab-content">
+            <h3>No Change Logs Found</h3><p>Ensure CHANGELOG.md exists in the data directory.</p>
+        </div>
+
+        <!-- TAB 3.5: Bug Logs -->
+        <div id="BugLogs" class="tab-content">
+            <h3>No Bug Logs Found</h3><p>Excellent. No active bug reports in the queue.</p>
+        </div>
+
+        <!-- TAB 4: Error Logs -->
+        <div id="ErrorLogs" class="tab-content">
+            <h3>No Error Logs Found</h3><p>Everything seems to be running correctly. Error logs will appear here if a crash occurs.</p>
+        </div>
+
+        <!-- TAB 5: Application Run Logs -->
+        <div id="RunLogs" class="tab-content">
+            <h3>No Application Run Logs Found</h3><p>Application logs will appear here after the system is launched.</p>
+        </div>
+
+        <!-- TAB 6: Flame Graph -->
+        <div id="FlameGraph" class="tab-content">
+            <h3>No FlameGraph Data Found</h3><p>Run the Flame Test (profiling session) to generate performance data.</p>
+        </div>
+
+        <!-- TAB 7: Dependencies -->
+        <div id="Dependencies" class="tab-content">
+            
+    <div class="markdown-content">
+        <h2>System Dependency Status</h2>
+        <p>Verification of essential Python libraries required for the OPEN-AIR platform.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Package (Friendly Name)</th>
+                    <th>Import Path</th>
+                    <th>Status</th>
+                    <th>Version</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr>
+                    <td>numpy</td>
+                    <td><code>numpy</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>1.26.4</td>
+                </tr>
+        
+                <tr>
+                    <td>pandas</td>
+                    <td><code>pandas</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>3.0.1</td>
+                </tr>
+        
+                <tr>
+                    <td>matplotlib</td>
+                    <td><code>matplotlib</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>3.10.8</td>
+                </tr>
+        
+                <tr>
+                    <td>Pillow</td>
+                    <td><code>PIL</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>10.2.0</td>
+                </tr>
+        
+                <tr>
+                    <td>pdfplumber</td>
+                    <td><code>pdfplumber</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>0.11.9</td>
+                </tr>
+        
+                <tr>
+                    <td>beautifulsoup4 (bs4)</td>
+                    <td><code>bs4</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>4.12.3</td>
+                </tr>
+        
+                <tr>
+                    <td>pyvisa</td>
+                    <td><code>pyvisa</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>1.11.3</td>
+                </tr>
+        
+                <tr>
+                    <td>pyusb</td>
+                    <td><code>usb.core</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>Unknown</td>
+                </tr>
+        
+                <tr>
+                    <td>python-usbtmc</td>
+                    <td><code>usbtmc</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>0.8</td>
+                </tr>
+        
+                <tr>
+                    <td>python-vxi11</td>
+                    <td><code>vxi11</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>0.9</td>
+                </tr>
+        
+                <tr>
+                    <td>pyserial</td>
+                    <td><code>serial</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>3.5</td>
+                </tr>
+        
+                <tr>
+                    <td>psutil</td>
+                    <td><code>psutil</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>5.9.8</td>
+                </tr>
+        
+                <tr>
+                    <td>zeroconf</td>
+                    <td><code>zeroconf</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>0.148.0</td>
+                </tr>
+        
+                <tr>
+                    <td>scapy</td>
+                    <td><code>scapy</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>2.7.0</td>
+                </tr>
+        
+                <tr>
+                    <td>paho-mqtt</td>
+                    <td><code>paho.mqtt.client</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>Unknown</td>
+                </tr>
+        
+                <tr>
+                    <td>aiomqtt</td>
+                    <td><code>aiomqtt</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>2.5.1</td>
+                </tr>
+        
+                <tr>
+                    <td>orjson</td>
+                    <td><code>orjson</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>3.11.7</td>
+                </tr>
+        
+                <tr>
+                    <td>flameprof</td>
+                    <td><code>flameprof</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>Unknown</td>
+                </tr>
+        
+                <tr>
+                    <td>loguru</td>
+                    <td><code>loguru</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>0.7.2</td>
+                </tr>
+        
+                <tr>
+                    <td>python-osc</td>
+                    <td><code>pythonosc</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>Unknown</td>
+                </tr>
+        
+                <tr>
+                    <td>mido</td>
+                    <td><code>mido</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>Unknown</td>
+                </tr>
+        
+                <tr>
+                    <td>python-rtmidi</td>
+                    <td><code>rtmidi</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>1.5.8</td>
+                </tr>
+        
+                <tr>
+                    <td>textual</td>
+                    <td><code>textual</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>8.1.1</td>
+                </tr>
+        
+                <tr>
+                    <td>fastapi</td>
+                    <td><code>fastapi</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>0.135.2</td>
+                </tr>
+        
+                <tr>
+                    <td>uvicorn</td>
+                    <td><code>uvicorn</code></td>
+                    <td class="status-passed">PASSED</td>
+                    <td>0.42.0</td>
+                </tr>
+        
+            </tbody>
+        </table>
+    </div>
+    
+        </div>
+    </div>
+</body>
+</html>

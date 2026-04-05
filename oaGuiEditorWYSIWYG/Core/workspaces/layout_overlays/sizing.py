@@ -15,8 +15,9 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
     res_vert = tk.Label(widget.master, text="↕", bg="#FF9900", fg="black", font=("Arial", 8), cursor="sb_v_double_arrow")
     pad_x_handle = tk.Label(widget.master, text="PX", bg="#33A1FD", fg="white", font=("Arial", 6, "bold"), cursor="sb_h_double_arrow")
     pad_y_handle = tk.Label(widget.master, text="PY", bg="#33A1FD", fg="white", font=("Arial", 6, "bold"), cursor="sb_v_double_arrow")
+    breath_handle = tk.Label(widget.master, text="BR", bg="#33A1FD", fg="white", font=("Arial", 6, "bold"), cursor="fleur")
     
-    handles = [res_diag, res_horiz, res_vert, pad_x_handle, pad_y_handle]
+    handles = [res_diag, res_horiz, res_vert, pad_x_handle, pad_y_handle, breath_handle]
     for h in handles:
         h._is_design_overlay = True
         design_elements.append(h)
@@ -50,9 +51,20 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
         if mode == "padx":
             pv = max(0, int(dx // 5))
             _show_resize_tooltip(event, event.x_root, event.y_root, pv, None, label1="PAD-X", label2=None)
+            # Visualize the padding being added to the right
+            current_w, current_h = widget.winfo_width(), widget.winfo_height()
+            _show_ghost_box(current_w + pv, current_h) # Show widget + padding width
         elif mode == "pady":
             pv = max(0, int(dy // 5))
             _show_resize_tooltip(event, event.x_root, event.y_root, pv, None, label1="PAD-Y", label2=None)
+            # Visualize the padding being added below
+            current_w, current_h = widget.winfo_width(), widget.winfo_height()
+            _show_ghost_box(current_w, current_h + pv) # Show widget + padding height
+        elif mode == "breath":
+            bpv = max(0, int(dx // 5)) # Breath Padding Value
+            _show_resize_tooltip(event, event.x_root, event.y_root, bpv, None, label1="BREATH", label2=None)
+            current_w, current_h = widget.winfo_width(), widget.winfo_height()
+            _show_ghost_box(current_w + bpv * 2, current_h + bpv * 2) # Visualize breath padding around the widget
         else:
             nw, nh = max(20, dx), max(20, dy)
             if mode == "horiz": nh = widget.winfo_height()
@@ -75,6 +87,8 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
             state_manager.update_state(max(0, int(dx // 5)), path=f"{path}.layout.padx", source=layout)
         elif mode == "pady": 
             state_manager.update_state(max(0, int(dy // 5)), path=f"{path}.layout.pady", source=layout)
+        elif mode == "breath": 
+            state_manager.update_state(max(0, int(dx // 5)), path=f"{path}.layout.breath_padding", source=layout)
         else:
             nw, nh = max(20, dx), max(20, dy)
             updates = []
@@ -87,7 +101,7 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
             state_manager.batch_update(updates, source=layout)
 
     # Bind Events
-    for m, h in [("diag", res_diag), ("horiz", res_horiz), ("vert", res_vert), ("padx", pad_x_handle), ("pady", pad_y_handle)]:
+    for m, h in [("diag", res_diag), ("horiz", res_horiz), ("vert", res_vert), ("padx", pad_x_handle), ("pady", pad_y_handle), ("breath", breath_handle)]:
         h.bind("<Button-1>", lambda e, mode=m: _on_drag(e, mode))
         h.bind("<B1-Motion>", lambda e, mode=m: _on_drag(e, mode))
         h.bind("<ButtonRelease-1>", lambda e, mode=m: _on_release(e, mode))
@@ -99,6 +113,7 @@ def apply_design_overlay(layout, widget, path, is_focused, design_elements):
             res_vert.place(x=x + (w//2) - 10, y=y + h - 20, width=20, height=20)
             pad_x_handle.place(x=x + w - 40, y=y, width=18, height=12)
             pad_y_handle.place(x=x + w - 20, y=y, width=18, height=12)
+            breath_handle.place(x=x + w - 60, y=y, width=18, height=12) # Place breath handle
         else:
             for hdl in handles: hdl.place_forget()
 

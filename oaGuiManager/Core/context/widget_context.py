@@ -5,7 +5,7 @@
 # Description: Brief summary of purpose
 
 from dataclasses import dataclass
-from typing import Any, Optional, Callable
+from typing import Any, Optional, Callable, Dict
 
 @dataclass(frozen=True)
 class WidgetContext:
@@ -32,3 +32,16 @@ class WidgetContext:
         expecting a dictionary (e.g. during refactoring or signature shifts).
         """
         return getattr(self, key, default)
+
+    @staticmethod
+    def sanitize_geometry(geometry: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        ⚡ SANITIZATION: Enforce a minimum pixel size of 1x1 for all materialized containers.
+        This prevents the 0x0 value from ever reaching the X11 backend (BadValue).
+        """
+        if not isinstance(geometry, dict):
+            return {"width": 1, "height": 1}
+            
+        geometry["width"] = max(1, int(geometry.get("width", 1)))
+        geometry["height"] = max(1, int(geometry.get("height", 1)))
+        return geometry

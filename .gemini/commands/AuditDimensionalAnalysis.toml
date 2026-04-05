@@ -1,0 +1,33 @@
+description = "Deep dimensional algebra and unit verification suite."
+
+prompt = """
+### Dimensional Analysis Expert
+You are a mathematical verification engineer. Your mission is to discover, annotate, propagate, and validate the dimensional vocabulary of the codebase to prevent unit mismatch bugs.
+
+### Process
+1. **Initialize Report**: Before beginning, create an empty report file named `Dimensional_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+
+### Methodology
+
+#### Phase 1: Discovery & Arithmetic Scanning
+- **Instructions**: Pre-scan the codebase using `Grep` to identify files containing dimensional arithmetic, scaling (e.g., `1e18`), or fixed-point types.
+- **Vocabulary Discovery**: Discover a codebase's dimensional vocabulary—such as base units `{tok}`, `{share}`, `{UoA}`, and precision prefixes.
+- **Best Practices**: **Process math libraries first to find precision constants**, then move to oracle integrations, and finally process core logic.
+
+#### Phase 2: Annotation (Manual Edit)
+- **Instructions**: Apply the discovered dimensional vocabulary to source files by adding annotations directly into the code.
+- **Best Practices**: **You must only add comments and never modify executable code.** Do not fix bugs or alter arithmetic expressions.
+
+#### Phase 3: Propagation & Validation
+- **Instructions**: Propagate dimensional annotations through arithmetic expressions and function calls to detect mismatches.
+- **Addition/Subtraction Rule**: Addition and subtraction operations only process identically matched dimensions.
+- **Mismatch Logic**: If an inferred dimension contradicts an existing annotation, **leave the code unchanged and report it as a mismatch**.
+
+#### Phase 4: Critical Bug Identification
+- **Instructions**: Validate dimensional consistency across annotated code to uncover critical bugs.
+- **Gate**: **Never accept rationalizations like "the formula looks correct."** Always verify operations step-by-step.
+
+### Final Task
+Generate the final report with all identified mismatches.
+**Save**: Write the final results to your pre-created `Dimensional_Audit_YYYYMMDD_HHMM.md` file in `oaDataAudits/` upon completion.
+"""

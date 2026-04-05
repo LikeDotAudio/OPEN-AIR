@@ -132,52 +132,9 @@ class GrabBagView(tk.Frame):
             logger.error(f"GrabBag: Failed to load template for '{name}'")
             return
         
-        current_state = state_manager.get_state()
-        
-        # 1. Determine parent container and target insertion index
-        parent_path_parts = []
-        target_field_key = None
-        
-        if self.last_focused_path:
-            parts = self.last_focused_path.split(".")
-            target_field_key = parts[-1]
-            parent_path_parts = parts[:-1] # Usually ends in ".fields"
-            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"GrabBag: Insertion point identified: {target_field_key} within {'.'.join(parent_path_parts)}", "DEBUG")
-        else:
-            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "GrabBag: No insertion point selected. Adding to root.", "DEBUG")
-        
-        # 2. Resolve the parent dictionary
-        parent_dict = current_state
-        if parent_path_parts:
-            for part in parent_path_parts:
-                parent_dict = parent_dict.get(part, {})
-        
-        # 3. Create a NEW dictionary with the item inserted in the correct position
-        if isinstance(parent_dict, dict):
-            new_fields = {}
-            base_key = f"new_{component['folder'].replace('builder_', '')}"
-            new_key = base_key
-            counter = 1
-            while new_key in parent_dict:
-                new_key = f"{base_key}_{counter}"
-                counter += 1
-            
-            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"GrabBag: Generated unique key: '{new_key}'", "DEBUG")
-
-            inserted = False
-            for k, v in parent_dict.items():
-                new_fields[k] = v
-                if k == target_field_key:
-                    matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"GrabBag: Splicing '{new_key}' after '{k}'", "DEBUG")
-                    new_fields[new_key] = copy.deepcopy(component['schema'])
-                    inserted = True
-            
-            if not inserted:
-                matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"GrabBag: Appending '{new_key}' to end of dictionary.", "DEBUG")
-                new_fields[new_key] = copy.deepcopy(component['schema'])
-            
-            # 4. Update the state at the parent level
-            state_manager.update_state(new_fields, path=parent_path_parts if parent_path_parts else None, source=self)
-            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"GrabBag: Successfully inserted '{new_key}'.", "SUCCESS")
-        else:
-            logger.error("GrabBag Error: Resolved parent container is not a dictionary.")
+        matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"GrabBag: Publishing ADD_COMPONENT_REQUESTED event for '{name}' to path '{self.last_focused_path}'", "INFO")
+        event_bus.publish("ADD_COMPONENT_REQUESTED", 
+                          component_name=name, 
+                          component_schema=component['schema'], 
+                          target_path=self.last_focused_path,
+                          source=self)

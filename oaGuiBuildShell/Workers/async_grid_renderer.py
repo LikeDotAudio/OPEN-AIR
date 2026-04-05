@@ -60,8 +60,8 @@ class AsyncGridRenderer:
                     parent_frame.grid_propagate(False)
                     if hasattr(parent_frame, 'pack_propagate'): parent_frame.pack_propagate(False)
                     w, h = data.get("width") or geom.get("width"), data.get("height") or geom.get("height")
-                    if w: parent_frame.config(width=w)
-                    if h: parent_frame.config(height=h)
+                    if w and int(w) > 0: parent_frame.config(width=int(w))
+                    if h and int(h) > 0: parent_frame.config(height=int(h))
                 except Exception as e:
                     matrix_log("ui", "gui_shell", "render", f"Geometry configuration skipped: {e}", "TRACE")
 

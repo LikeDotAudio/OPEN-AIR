@@ -138,6 +138,13 @@ class BuilderBackgroundManagerMixin:
                 # This prevents the canvas from being unnecessarily stretched by a large background image.
                 final_w = max(width, self.scroll_frame.winfo_reqwidth())
                 final_h = max(height, self.scroll_frame.winfo_reqheight())
+                
+                # ⚡ ROBUSTNESS: Prevent X11 BadValue (0x0) errors by avoiding place()
+                # with zero dimensions.
+                if final_w <= 1 or final_h <= 1:
+                    matrix_log("gui", "gui_builder", "_apply_generated_background", f"🎨📐🔳 [BG] Skipping place for background label: Invalid dimensions {final_w}x{final_h}", "TRACE")
+                    return
+
                 matrix_log("gui", "gui_builder", "_apply_generated_background", f"🎨📏✨ [BG] Sizing background label to {final_w}x{final_h}", "TRACE")
                 self.panel_bg_label.place(x=0, y=0, width=final_w, height=final_h)
                 
@@ -196,7 +203,12 @@ class BuilderBackgroundManagerMixin:
 
         self._last_bg_size = (w, h)
         if hasattr(self, 'canvas_window_id') and self.canvas_window_id:
-            self.canvas.itemconfig(self.canvas_window_id, width=w, height=h)
+            # ⚡ ROBUSTNESS: Ensure dimensions are valid before updating canvas item.
+            if w > 1 and h > 1:
+                try:
+                    self.canvas.itemconfig(self.canvas_window_id, width=w, height=h)
+                except tk.TclError:
+                    pass
 
         bg_config = getattr(self, 'config_data', {}).get("background")
         if bg_config and bg_config != "none":

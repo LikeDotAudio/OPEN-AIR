@@ -12,6 +12,7 @@ import pathlib
 from typing import Optional, Any, Dict
 
 from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
+from oaGuiManager.Core.context.widget_context import WidgetContext
 
 # Globals
 current_version = "20260111.1510.1"
@@ -69,24 +70,40 @@ class UniversalGuiLoader(tk.Frame):
             # 3. Success
             matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"✅ It works! {self.module_name} is fully operational!", level="SUCCESS")
 
+        except FileNotFoundError as e:
+            # 4a. Expected Validation Failure - No noisy traceback
+            logger.error(f"❌ Blueprint missing! Module: {self.module_name} | Path: {self.json_path}")
+            self._handle_build_error(e)
+
         except Exception as e:
-            # 4. Catastrophic Failure Handling
+            # 4b. Catastrophic Failure Handling - Full traceback for unexpected errors
             logger.exception(f"💥 The Flux Capacitocracked while building {self.module_name}! Error: {e}")
             self._handle_build_error(e)
 
     def _instantiate_builder(self):
         """Creates the DynamicGuiBuilder instance."""
         builder_config = self.config_data.copy()
+
+        # ⚡ SANITIZATION: Enforce 1x1 minimum to prevent X11 BadValue crashes
+        # during the initial geometry configuration of the top-level container.
+        if "geometry" in builder_config:
+            builder_config["geometry"] = WidgetContext.sanitize_geometry(builder_config["geometry"])
         
-        self.dynamic_gui = DynamicGuiBuilder(
-            parent=self,
-            json_path=str(self.json_path),
-            tab_name=self.module_name,
-            config=builder_config,
-            use_grid=True
-        )
-        self.dynamic_gui.grid(row=0, column=0, sticky="nsew")
-        self.dynamic_gui.start()
+        try:
+            self.dynamic_gui = DynamicGuiBuilder(
+                parent=self,
+                json_path=str(self.json_path),
+                tab_name=self.module_name,
+                config=builder_config,
+                use_grid=True
+            )
+            self.dynamic_gui.grid(row=0, column=0, sticky="nsew")
+            self.dynamic_gui.start()
+        except tk.TclError as e:
+            # 🛡️ RECURSION GUARD EXPANSION: Catch TclErrors during initial configuration 
+            # to prevent a hard crash if X11 rejects transient 0x0 geometries.
+            logger.error(f"🖥️🎨 [UI] TclError during builder instantiation for {self.module_name}: {e}")
+            matrix_log("UI", "GUI_MANAGER", "_instantiate_builder", f"⚠️ Geometry initialization failed for {self.module_name}. Proceeding with fallback.", level="WARNING")
 
     def _handle_build_error(self, e):
         """Cleanly displays an error state in the UI."""

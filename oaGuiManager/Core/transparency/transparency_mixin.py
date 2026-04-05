@@ -30,6 +30,14 @@ class TransparencyMixin:
 
         def perform_sync(event=None):
             if not widget.winfo_exists(): return
+            
+            # ⚡ ROBUSTNESS: Prevent X11 BadValue (0x0) errors by avoiding configuration 
+            # of widgets that have not yet been realized or have zero dimensions.
+            try:
+                w, h = widget.winfo_width(), widget.winfo_height()
+                if w <= 1 or h <= 1: return
+            except tk.TclError: return
+
             try:
                 p_bg = parent.cget("bg")
                 matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"p_bg is {p_bg}", level="DEBUG")

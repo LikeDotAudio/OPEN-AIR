@@ -6,9 +6,9 @@
 
 import orjson
 import copy
+import inspect
 from .event_bus import event_bus
-from oaLogging.Core.logger import initialize_logging, set_log_directory
-from loguru import logger
+from oaLogging.Methods.matrix_gate import matrix_log
 
 from .oaEditorState_rs.compiler_hook import ensure_compiled
 
@@ -17,14 +17,37 @@ try:
     from oaeditorstate_rs import EditorState as RustEditorState
     HAS_RUST = True
 except ImportError:
-    sm_logger.warning("⚠️ [WYSIWYG] oaeditorstate_rs not found. Falling back to slow Python state management.")
+    matrix_log(
+        system='UI',
+        element='STATE_MANAGER',
+        level='warning',
+        message="🧠💡🔄 [STATE_MANAGER] oaeditorstate_rs not found. Falling back to slow Python state management.",
+        func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+    )
     HAS_RUST = False
 except Exception as e:
-    sm_logger.error(f"❌ [WYSIWYG] Failed to initialize Rust Editor State: {e}")
+    matrix_log(
+        system='UI',
+        element='STATE_MANAGER',
+        level='error',
+        message=f"🧠💡🔄 [STATE_MANAGER] Failed to initialize Rust Editor State: {e}",
+        func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+    )
     HAS_RUST = False
 
-# Specialized logger for StateManager to allow categorized filtering
-sm_logger = logger.bind(category="STATE_MANAGER")
+class SMLogger:
+    def info(self, msg):
+        matrix_log(system='UI', element='STATE_MANAGER', level='info', message=f"🧠💡🔄 {msg}", func_name=inspect.currentframe().f_code.co_name)
+    def success(self, msg):
+        matrix_log(system='UI', element='STATE_MANAGER', level='success', message=f"🧠💡🔄 {msg}", func_name=inspect.currentframe().f_code.co_name)
+    def warning(self, msg):
+        matrix_log(system='UI', element='STATE_MANAGER', level='warning', message=f"🧠💡🔄 {msg}", func_name=inspect.currentframe().f_code.co_name)
+    def error(self, msg):
+        matrix_log(system='UI', element='STATE_MANAGER', level='error', message=f"🧠💡🔄 {msg}", func_name=inspect.currentframe().f_code.co_name)
+    def trace(self, msg):
+        matrix_log(system='UI', element='STATE_MANAGER', level='trace', message=f"🧠💡🔄 {msg}", func_name=inspect.currentframe().f_code.co_name)
+
+sm_logger = SMLogger()
 
 class StateManager:
     """Manages the central JSON state of the GUI definition (RUST OPTIMIZED with Python fallback)."""
@@ -37,7 +60,13 @@ class StateManager:
                 try:
                     cls._instance._rust_state = RustEditorState()
                 except Exception as e:
-                    sm_logger.error(f"❌ StateManager: Rust state instantiation failed: {e}")
+                    matrix_log(
+                        system='UI',
+                        element='STATE_MANAGER',
+                        level='error',
+                        message=f"🧠💡🔄 [STATE_MANAGER] Rust state instantiation failed: {e}",
+                        func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+                    )
                     cls._instance._rust_state = None
             else:
                 cls._instance._rust_state = None
@@ -45,12 +74,26 @@ class StateManager:
             cls._instance._json_data = {} # Python fallback
             cls._instance._file_path = None
             cls._instance._original_state = {}
-            sm_logger.trace(f"🧠 StateManager: Singleton Instance Created ({'RUST' if HAS_RUST else 'PYTHON'}).")
+            # Subscribe to the event bus for component addition requests
+            event_bus.subscribe("ADD_COMPONENT_REQUESTED", cls._instance._handle_add_component_request)
+            matrix_log(
+                system='UI',
+                element='STATE_MANAGER',
+                level='trace',
+                message=f"🧠💡🔄 [STATE_MANAGER] Singleton Instance Created ({'RUST' if HAS_RUST else 'PYTHON'}).",
+                func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+            )
         return cls._instance
 
     def initialize(self, initial_data, file_path=None):
         """Initializes the state with starting JSON data."""
-        sm_logger.info(f"🧠 StateManager: Initialization started. Path: {file_path}")
+        matrix_log(
+            system='UI',
+            element='STATE_MANAGER',
+            level='info',
+            message=f"🧠💡🔄 [STATE_MANAGER] Initialization started. Path: {file_path}",
+            func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+        )
         self._original_state = copy.deepcopy(initial_data if initial_data is not None else {})
         self._json_data = copy.deepcopy(self._original_state)
         
@@ -63,15 +106,39 @@ class StateManager:
         # We need to broadcast the parsed data, so we fetch it back
         parsed_data = self.get_state()
         root_keys = list(parsed_data.keys())
-        sm_logger.info(f"🧠 StateManager: State loaded with {len(root_keys)} root elements.")
+        matrix_log(
+            system='UI',
+            element='STATE_MANAGER',
+            level='info',
+            message=f"🧠💡🔄 [STATE_MANAGER] State loaded with {len(root_keys)} root elements.",
+            func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+        )
         
-        sm_logger.trace("🧠 StateManager: Broadcasting initial STATE_UPDATED event...")
+        matrix_log(
+            system='UI',
+            element='STATE_MANAGER',
+            level='debug',
+            message="🧠💡🔄 [STATE_MANAGER] Broadcasting initial STATE_UPDATED event...",
+            func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+        )
         event_bus.publish("STATE_UPDATED", json_data=parsed_data)
-        sm_logger.success("✅ StateManager: Initialization complete.")
+        matrix_log(
+            system='UI',
+            element='STATE_MANAGER',
+            level='success',
+            message="✅ StateManager: Initialization complete.",
+            func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+        )
 
     def reset(self):
         """Resets the state manager to an empty state_manager."""
-        sm_logger.info("🧠 StateManager: Wiping internal state memory (Reset).")
+        matrix_log(
+            system='UI',
+            element='STATE_MANAGER',
+            level='info',
+            message="🧠💡🔄 [STATE_MANAGER] Wiping internal state memory (Reset).",
+            func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+        )
         if self._rust_state:
             self._rust_state.reset()
         self._json_data = {}
@@ -94,7 +161,13 @@ class StateManager:
         If path is provided (as a dot-notated string or list), updates a specific branch.
         """
         source_name = source.__class__.__name__ if source else "Unknown"
-        sm_logger.info(f"🔄 StateManager: Update requested from {source_name}. Path: {path}")
+        matrix_log(
+            system='UI',
+            element='STATE_MANAGER',
+            level='info',
+            message=f"🧠💡🔄 [STATE_MANAGER] Update requested from {source_name}. Path: {path}",
+            func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+        )
         
         path_list = []
         if path is not None and not (isinstance(path, (list, tuple)) and len(path) == 0):
@@ -119,9 +192,21 @@ class StateManager:
                 new_data_str = orjson.dumps(new_data).decode()
                 self._rust_state.update_state(path_list, new_data_str)
             except Exception as e:
-                sm_logger.exception(f"❌ StateManager Error: Failed to update path {path} in Rust: {e}")
+                matrix_log(
+                    system='UI',
+                    element='STATE_MANAGER',
+                    level='exception',
+                    message=f"🧠💡🔄 [STATE_MANAGER] Failed to update path {path} in Rust: {e}",
+                    func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown",
+                )
             
-        sm_logger.trace("🧠 StateManager: Broadcasting STATE_UPDATED event to subscribers.")
+        matrix_log(
+            system='UI',
+            element='STATE_MANAGER',
+            level='trace',
+            message="🧠💡🔄 [STATE_MANAGER] Broadcasting STATE_UPDATED event to subscribers.",
+            func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+        )
         event_bus.publish("STATE_UPDATED", json_data=self.get_state(), source=source)
 
 
@@ -131,7 +216,13 @@ class StateManager:
         'updates' should be a list of (new_data, path) tuples.
         """
         source_name = source.__class__.__name__ if source else "Unknown"
-        sm_logger.info(f"🔄 StateManager: Batch update started from {source_name} ({len(updates)} changes).")
+        matrix_log(
+            system='UI',
+            element='STATE_MANAGER',
+            level='info',
+            message=f"🧠💡🔄 [STATE_MANAGER] Batch update started from {source_name} ({len(updates)} changes).",
+            func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+        )
         for i, (new_data, path) in enumerate(updates):
             new_data_str = orjson.dumps(new_data).decode()
             path_list = []
@@ -143,14 +234,32 @@ class StateManager:
             try:
                 self._rust_state.update_state(path_list, new_data_str)
             except Exception as e:
-                sm_logger.error(f"❌ StateManager Batch Error: Failed to update path {path}: {e}")
+                matrix_log(
+                    system='UI',
+                    element='STATE_MANAGER',
+                    level='error',
+                    message=f"🧠💡🔄 [STATE_MANAGER] Batch Error: Failed to update path {path}: {e}",
+                    func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+                )
         
-        sm_logger.info(f"✅ StateManager: Batch update complete.")
+        matrix_log(
+            system='UI',
+            element='STATE_MANAGER',
+            level='info',
+            message=f"🧠💡🔄 [STATE_MANAGER] Batch update complete.",
+            func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+        )
         event_bus.publish("STATE_UPDATED", json_data=self.get_state(), source=source)
 
     def reorder_element(self, path, direction, source=None):
         """Moves an element up or down within its sibling list."""
-        sm_logger.info(f"↕️ StateManager: Reorder requested for '{path}' direction: {direction}")
+        matrix_log(
+            system='UI',
+            element='STATE_MANAGER',
+            level='info',
+            message=f"🧠💡🔄 [STATE_MANAGER] Reorder requested for '{path}' direction: {direction}",
+            func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+        )
         if isinstance(path, str): path = path.split(".")
         if len(path) < 1: return
         
@@ -162,7 +271,13 @@ class StateManager:
             parent = parent.get(part, {})
             
         if not isinstance(parent, dict): 
-            sm_logger.warning(f"❌ StateManager: Cannot reorder. Parent at '{'.'.join(parent_path)}' is not a dict.")
+            matrix_log(
+                system='UI',
+                element='STATE_MANAGER',
+                level='warning',
+                message=f"🧠💡🔄 [STATE_MANAGER] Cannot reorder. Parent at '{'.'.join(parent_path)}' is not a dict.",
+                func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown"
+            )
             return
         
         keys = list(parent.keys())
@@ -263,6 +378,19 @@ class StateManager:
     def get_file_path(self):
         """Returns the current file path."""
         return self._file_path
+
+    def _handle_add_component_request(self, component_name, component_schema, target_path, source=None):
+        """
+        Handles the ADD_COMPONENT_REQUESTED event by updating the state manager
+        with the new component schema at the specified target path.
+        """
+        source_name = source.__class__.__name__ if source else "Unknown"
+        sm_logger.info(f"➕ StateManager: Handling ADD_COMPONENT_REQUESTED for '{component_name}' from {source_name} at path '{target_path}'.")
+        
+        # Use the existing update_state method to add the component.
+        # The update_state method already handles broadcasting STATE_UPDATED.
+        self.update_state(new_data=component_schema, path=target_path, source=source)
+        sm_logger.success(f"➕ StateManager: Component '{component_name}' successfully added to state at '{target_path}'.")
 
 # Global instance
 state_manager = StateManager()

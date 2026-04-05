@@ -15,6 +15,41 @@ class OverlayManager:
 
     def __init__(self, workspace):
         self.workspace = workspace
+        self.event_blocker_canvas = None
+        self.mouse_event_bindings = [
+            "<Button-1>", "<Button-2>", "<Button-3>", "<Button-4>", "<Button-5>",
+            "<Motion>", "<Enter>", "<Leave>", "<MouseWheel>"
+        ]
+
+    def create_event_blocker(self, parent_widget):
+        """Creates and places a transparent canvas to block mouse events."""
+        if self.event_blocker_canvas:
+            self.event_blocker_canvas.destroy() # Ensure no duplicate canvas
+        
+        self.event_blocker_canvas = tk.Canvas(parent_widget, highlightthickness=0, bd=0)
+        
+        # ⚡ ROBUSTNESS: Only place if the parent has valid dimensions.
+        # Otherwise, X11 may throw a BadValue error (0x0).
+        if parent_widget.winfo_width() > 1 and parent_widget.winfo_height() > 1:
+            self.event_blocker_canvas.place(x=0, y=0, relwidth=1, relheight=1)
+        
+        # Bind mouse events to absorb them
+        for event in self.mouse_event_bindings:
+            self.event_blocker_canvas.bind(event, lambda e: "break")
+        
+        self.show_event_blocker(False) # Initially hidden
+
+    def show_event_blocker(self, show=True):
+        """Controls the visibility of the event blocking canvas."""
+        if not self.event_blocker_canvas: return
+        
+        if show:
+            # ⚡ ROBUSTNESS: Ensure parent has valid dimensions before placing.
+            parent = self.event_blocker_canvas.master
+            if parent.winfo_width() > 1 and parent.winfo_height() > 1:
+                self.event_blocker_canvas.place(x=0, y=0, relwidth=1, relheight=1)
+        else:
+            self.event_blocker_canvas.place_forget()
 
     def apply_outlines(self, container):
         if not container or not container.winfo_exists(): return
@@ -68,3 +103,4 @@ class OverlayManager:
                 
         except Exception:
             logger.exception(f"❌ Error injecting handles for {getattr(widget, '_oca_path', 'unknown')}")
+

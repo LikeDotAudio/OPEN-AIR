@@ -30,6 +30,7 @@ from ..Core.workspaces.json_editor import JsonEditor
 from ..Core.workspaces.tree_refactor import TreeRefactor
 from ..Core.workspaces.element_properties import ElementProperties
 from ..Methods.grab_bag.grab_bag_view import GrabBagView
+from .palette_manager import PaletteManager # Added PaletteManager import
 
 from oaConfiguration.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -107,26 +108,83 @@ class WysiwygEditor:
         self.main_pane = tk.PanedWindow(self.window, orient=tk.HORIZONTAL, bg="#2b2b2b", sashwidth=6, bd=0)
         self.main_pane.pack(fill="both", expand=True, padx=5, pady=5)
 
-        # LEFT SIDE (~25%): Tools Notebook
-        matrix_log("ui", "gui_builder", "_build_ui", "WysiwygEditor: Initializing Left Notebook (Code/Props/Library)...", "DEBUG")
-        self.left_notebook = ttk.Notebook(self.main_pane)
-        self.main_pane.add(self.left_notebook, width=430)
+        # LEFT SIDE (~25%): Tool Palettes Manager
+        matrix_log("ui", "gui_builder", "_build_ui", "WysiwygEditor: Initializing Palette Manager (Tree/JSON/Props/Library)...", "DEBUG")
         
-        # 1. Tree Refactor Tab
-        self.tree_tab = TreeRefactor(self.left_notebook)
-        self.left_notebook.add(self.tree_tab, text=" Structure ")
+        # Create instances of the widgets that will be managed by the PaletteManager
+        self.tree_tab = TreeRefactor(self.main_pane) # Parent needs to be the main_pane for potential undocking
+        self.code_tab = JsonEditor(self.main_pane)   # Parent needs to be the main_pane for potential undocking
+        self.props_tab = ElementProperties(self.main_pane) # Parent needs to be the main_pane for potential undocking
+        self.grab_tab = GrabBagView(self.main_pane)  # Parent needs to be the main_pane for potential undocking
+
+        # Instantiate and configure the Palette Manager
+        # This is a conceptual replacement. A full PaletteManager implementation would be needed.
+        # For now, we'll place them directly in a frame and simulate the palette behavior.
+        # A proper PaletteManager would handle dropdowns, expansion, collapse, and undocking.
+
+        self.palette_frame = ttk.Frame(self.main_pane, style="Dark.TFrame") # Use a dark theme style if available
+        self.main_pane.add(self.palette_frame, width=430)
         
-        # 2. JSON Code Tab
-        self.code_tab = JsonEditor(self.left_notebook)
-        self.left_notebook.add(self.code_tab, text=" JSON Code ")
+        # Simplified representation: pack widgets into the frame.
+        # A real PaletteManager would manage the visibility and docking of these.
+        # For now, we'll assume they are visible or managed by the PaletteManager's internal logic.
         
-        # 3. Properties Tab
-        self.props_tab = ElementProperties(self.left_notebook)
-        self.left_notebook.add(self.props_tab, text=" Properties ")
+        # Example of how a PaletteManager might organize them (e.g., using buttons for dropdowns)
+        # This part would be heavily customized based on PaletteManager implementation.
         
-        # 4. Grab Bag Tab
-        self.grab_tab = GrabBagView(self.left_notebook)
-        self.left_notebook.add(self.grab_tab, text=" Library ")
+        # For now, let's just pack them for visibility, acknowledging this is a placeholder
+        # for the actual PaletteManager logic.
+        
+        # In a real implementation, you'd have a structure for collapsible/expandable sections
+        # managed by the PaletteManager. For example:
+        
+        # self.palette_manager = PaletteManager(self.main_pane, [
+        #     {"widget": self.tree_tab, "name": "Structure", "icon": "structure.png"},
+        #     {"widget": self.code_tab, "name": "JSON Code", "icon": "json.png"},
+        #     {"widget": self.props_tab, "name": "Properties", "icon": "props.png"},
+        #     {"widget": self.grab_tab, "name": "Library", "icon": "library.png"},
+        # ])
+        # self.main_pane.add(self.palette_manager.get_widget(), width=430) # Add the manager's widget
+
+        # --- Placeholder for Palette Manager functionality ---
+        # Since PaletteManager class is not defined, we'll use a simplified approach for now
+        # by packing the widgets into the palette_frame. A full implementation would require
+        # defining the PaletteManager class itself.
+        
+        # Example: Add buttons to expand/collapse or to undock (conceptually)
+        
+        # Placeholder for structure tab
+        structure_header = ttk.Frame(self.palette_frame, style="DarkHeader.TFrame")
+        structure_header.pack(fill='x', pady=(0,1))
+        ttk.Label(structure_header, text="Structure", style="DarkLabel.TLabel").pack(side='left', padx=5)
+        ttk.Button(structure_header, text="[-]", width=2, command=lambda: self.tree_tab.pack_forget() if self.tree_tab.winfo_ismapped() else self.tree_tab.pack(fill='both', expand=True)).pack(side='right', padx=2)
+        
+        self.tree_tab.pack(fill='both', expand=True)
+
+        # Placeholder for JSON Code tab
+        json_header = ttk.Frame(self.palette_frame, style="DarkHeader.TFrame")
+        json_header.pack(fill='x', pady=(0,1))
+        ttk.Label(json_header, text="JSON Code", style="DarkLabel.TLabel").pack(side='left', padx=5)
+        ttk.Button(json_header, text="[-]", width=2, command=lambda: self.code_tab.pack_forget() if self.code_tab.winfo_ismapped() else self.code_tab.pack(fill='both', expand=True)).pack(side='right', padx=2)
+        
+        self.code_tab.pack(fill='both', expand=True)
+        
+        # Placeholder for Properties tab
+        props_header = ttk.Frame(self.palette_frame, style="DarkHeader.TFrame")
+        props_header.pack(fill='x', pady=(0,1))
+        ttk.Label(props_header, text="Properties", style="DarkLabel.TLabel").pack(side='left', padx=5)
+        ttk.Button(props_header, text="[-]", width=2, command=lambda: self.props_tab.pack_forget() if self.props_tab.winfo_ismapped() else self.props_tab.pack(fill='both', expand=True)).pack(side='right', padx=2)
+        
+        self.props_tab.pack(fill='both', expand=True)
+        
+        # Placeholder for Library tab
+        grab_header = ttk.Frame(self.palette_frame, style="DarkHeader.TFrame")
+        grab_header.pack(fill='x', pady=(0,1))
+        ttk.Label(grab_header, text="Library", style="DarkLabel.TLabel").pack(side='left', padx=5)
+        ttk.Button(grab_header, text="[-]", width=2, command=lambda: self.grab_tab.pack_forget() if self.grab_tab.winfo_ismapped() else self.grab_tab.pack(fill='both', expand=True)).pack(side='right', padx=2)
+        
+        self.grab_tab.pack(fill='both', expand=True)
+        # --- End of Placeholder ---
 
         # RIGHT SIDE (80%): Visual Layout
         matrix_log("ui", "gui_builder", "_build_ui", "WysiwygEditor: Initializing Interactive Layout Canvas...", "DEBUG")

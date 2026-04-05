@@ -167,9 +167,12 @@ class SetupApp(App):
         self.disk_label.update(f"💿 Disk Free: [bold #F4902C]{stats['disk_free_gb']:.1f} GB[/] ({stats['disk_percent']:.1f}%)")
 
     def write_log(self, message: str) -> None:
-        """Helper to write to UI log and local buffer."""
-        self.installation_log.write_line(message)
-        self.log_lines.append(message)
+        """Thread-safe helper to write to UI log and local buffer."""
+        if threading.get_ident() == getattr(self, "_thread_id", None):
+            self.installation_log.write_line(message)
+            self.log_lines.append(message)
+        else:
+            self.call_from_thread(self.write_log, message)
 
     def run_task(self, coro: Coroutine[Any, Any, Any], group: str = "default") -> None:
         """Helper to run a coroutine as a Textual background task."""

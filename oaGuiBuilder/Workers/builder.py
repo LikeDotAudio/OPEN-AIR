@@ -143,10 +143,18 @@ class DynamicGuiBuilder(
         self.main_content_frame.grid_columnconfigure(0, weight=1)
 
         colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
+        # Determine initial background color based on toggle
+        initial_bg_color = colors["bg"]
+        
+        # ⚡ ROBUSTNESS: Use getattr to safely check for show_background_var on app_instance
+        show_bg_toggle = getattr(self.app_instance, 'show_background_var', None)
+        if show_bg_toggle and not show_bg_toggle.get():
+            initial_bg_color = "" # Use empty string for Tkinter transparency/default to parent
+
         self.canvas = tk.Canvas(
-            self.main_content_frame, background=colors["bg"], bd=0, highlightthickness=0
+            self.main_content_frame, background=initial_bg_color, bd=0, highlightthickness=0
         )
-        self.scroll_frame = tk.Frame(self.canvas, bd=0, highlightthickness=0, bg=colors["bg"])
+        self.scroll_frame = tk.Frame(self.canvas, bd=0, highlightthickness=0, bg=initial_bg_color)
 
         TransparencyManager.apply_transparency(self, self.scroll_frame, {"transparent": True}, self)
 
@@ -229,11 +237,19 @@ class DynamicGuiBuilder(
             new_width = max(width, req_width)
             new_height = max(canvas_height, req_height)
             
+            # ⚡ ROBUSTNESS: Prevent X11 BadValue (0x0) errors by avoiding configuration 
+            # of windows with zero dimensions.
+            if new_width <= 1 or new_height <= 1:
+                return
+
             if BUILDER_DEBUG:
                 matrix_log("gui", "gui_builder", "_perform_canvas_resize", f"📐 [RESIZE] {self.tab_name}: Canvas={width}x{canvas_height}, Req={req_width}x{req_height} -> New={new_width}x{new_height}", "DEBUG")
             
-            self.canvas.itemconfig(self.canvas_window_id, width=new_width, height=new_height)
-            self._trigger_background_sync()
+            try:
+                self.canvas.itemconfig(self.canvas_window_id, width=new_width, height=new_height)
+                self._trigger_background_sync()
+            except tk.TclError:
+                pass
 
     def _on_visibility(self, event=None):
         if not self.winfo_exists(): return
@@ -253,3 +269,29 @@ class DynamicGuiBuilder(
             transparency_manager=TransparencyManager,
             on_focus_widget=self.on_focus_widget
         )
+
+    def _update_background(self):
+        """
+        Updates the background of the canvas and scroll_frame based on the
+        show_background_var from the app_instance.
+        """
+        colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
+        target_bg_color = colors["bg"]
+
+        # ⚡ ROBUSTNESS: Use getattr to safely check for show_background_var on app_instance
+        show_bg_toggle = getattr(self.app_instance, 'show_background_var', None)
+        if show_bg_toggle and not show_bg_toggle.get():
+            target_bg_color = "" # Set to transparent/default to parent
+        
+        try:
+            if self.canvas.cget("background") != target_bg_color:
+                self.canvas.configure(background=target_bg_color)
+        except tk.TclError: pass
+
+        try:
+            if self.scroll_frame.cget("bg") != target_bg_color:
+                self.scroll_frame.configure(bg=target_bg_color)
+        except tk.TclError: pass
+
+        # Force a reslice if background changes, to ensure widgets adapt.
+        self._trigger_reslice_all()

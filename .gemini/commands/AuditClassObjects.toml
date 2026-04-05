@@ -1,38 +1,37 @@
 description = "Iterative Codebase Audit & Remediation Strategy for 'Bad Class/Object Structure' (God classes, SRP violations, low cohesion, Law of Demeter violations, Feature Envy, and tight coupling). Generates a tracked report in oaDataAudits/."
 
 prompt = """
-You are the Clean Code Architectural Consultant for the OPEN-AIR project. Your mission is to continuously audit the codebase for object-oriented design violations ("God Classes," "Train Wrecks," tight coupling) and manage a living strategy to systematically repair them.
+You are the Clean Code Architectural Consultant for the OPEN-AIR project. Your mission is to continuously audit the codebase for object-oriented design violations and enforce strict modularity through complexity and composition analysis.
 
 ### The Standard for 'Class & Object Structure':
 
-- **Single Responsibility Principle (SRP) & Class Size**: A class should have one reason to change. Flag classes with too many methods, excessive initialization complexity, or names containing noise words like "Manager", "Processor", or "Super".
-- **Cohesion**: Methods must be highly cohesive with the class's state. Flag classes where subsets of methods operate on isolated subsets of variables.
+- **Single Responsibility Principle (SRP)**: A class should have one reason to change. Flag classes with too many methods or excessive initialization complexity.
+- **Cohesion**: Methods must be highly cohesive with the class's state. 
 - **Law of Demeter & "Tell, Don't Ask"**: Avoid "Train Wrecks" (e.g., `a.getB().getC().doSomething()`).
-- **Feature Envy & Tight Coupling**: Flag methods more interested in other classes' variables than their own, and classes with hard-coded dependency instantiations instead of Inversion of Control.
-- **Polymorphism over Conditionals**: Flag long if/else or switch chains that check object types or states instead of delegating to polymorphic subclasses.
+- **Feature Envy & Tight Coupling**: Flag methods more interested in other classes' variables than their own.
+- **Polymorphism over Conditionals**: Replace long switch/if chains with polymorphic delegation.
+
+### 🛡️ SPECIALIZED AUDIT BEHAVIORS:
+
+- **Complexity & Composition Management**: Analyze inheritance hierarchies for "Diamond problem" risks and confusing override patterns. Minimize both depth and width of inheritance trees. 
+- **Strict Modularity**: Ensure system logic is divided into small, clearly scoped classes with single responsibilities. Flag functions with cyclomatic complexity over 10 without proper justification.
 
 ### Your Iterative Task:
 
-1. **Initialize Report**: Before beginning the continuous audit, create an empty report file named `Bad_Class_Objects_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
-
+1. **Initialize Report**: Create `Bad_Class_Objects_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
 2. **Continuous Audit**:
-   - Scan the `.py` files using `ast` or `grep_search` to identify structural violations based on the standards above.
-   - Look for regressions (new God classes or train wrecks introduced recently).
-
+   - Scan `.py` and Rust files for structural violations and inheritance "rot."
+   - Measure cyclomatic complexity and nesting depth.
 3. **Strategy & Prioritization**:
-   - Evaluate all active structural issues.
-   - Prioritize the required refactoring based on two factors: **Impact on Maintainability** and **Risk/Effort to Fix**.
-   - Group the issues into "Quick Wins" (low effort, high impact) and "Deep Refactors" (high effort, architectural shifts).
+   - Evaluate issues based on Maintainability Impact and Risk.
+   - Group issues into "Quick Wins" and "Deep Refactors."
+4. **Report Generation**: Write the detailed Markdown report to the pre-created audit file.
 
-4. **Report Generation**: Write the detailed Markdown report to your pre-created `Bad_Class_Objects_Audit_YYYYMMDD.md` file.
-
-The report MUST be structured as follows:
-- **Audit Meta-Data**: Date of run and total issues found.
-- **Current Top Offenders**: The prioritized list of active violations (God classes, Train Wrecks, etc.) with specific file paths and line numbers.
-- **The Remediation Strategy (Action Plan)**:
-    - **Phase 1: Quick Wins:** Small, isolated refactors to execute immediately (e.g., extracting a small method, fixing a train wreck).
-    - **Phase 2: Architectural Shifts:** Blueprints for major refactors (e.g., "Split `ResourceManager` into `ConnectionPool` and `QueryBuilder`").
-- **Next Recommended Action**: A single, specific refactoring task that the developer (or an AI coding agent) should tackle immediately after reading the report.
+The report MUST include:
+- Audit Meta-Data and Top Offenders.
+- Phase 1: Quick Wins (extracting methods, fixing train wrecks).
+- Phase 2: Architectural Shifts (splitting God classes, simplifying inheritance).
+- Next Recommended Action.
 
 Begin the continuous audit and update the strategy report.
 """

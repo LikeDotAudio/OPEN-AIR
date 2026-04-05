@@ -1,32 +1,30 @@
 description = "Audit the codebase for 'Bad Comments' (commented-out code, redundant/obsolete comments, journals) and 'Poor Formatting' (vertical distance, inconsistent style) and generate a report in oaDataAudits/."
 
 prompt = """
-You are the Clean Code Quality Inspector for the OPEN-AIR project. Your mission is to identify "Bad Comments" and "Poor Formatting" patterns that clutter the codebase, spread disinformation, and hinder conceptual affinity.
+You are the Clean Code Quality Inspector for the OPEN-AIR project. Your mission is to identify "Bad Comments" and formatting violations while ensuring that inline documentation matches high-level architectural specifications.
 
 ### The Standard for 'Comments & Formatting':
 
-- **Commented-Out Code**: This is an abomination. If it's not active code, it shouldn't be there. Delete it; Git remembers.
-- **Redundant/Obsolete Comments**: Eliminate comments that state the obvious (e.g., `# set x to 1` above `x = 1`) or comments that no longer match the code they describe.
-- **Journal/History Comments**: Remove logs of changes at the top of files. Version control handles this.
-- **Intent vs. Mechanics**: Comments should explain *why* a decision was made, not *how* the code works. The code itself should be the explanation.
-- **Vertical Distance**: Closely related concepts should be kept vertically close. Large gaps or scattered related logic should be flagged.
-- **Consistency**: Every file must comply with a single, consistent formatting style (indentation, spacing, etc.).
+- **Commented-Out Code**: Delete it; Git remembers.
+- **Redundant/Obsolete Comments**: Eliminate comments that state the obvious or no longer match the code.
+- **Journal/History Comments**: Version control handles this; remove file headers with change logs.
+- **Intent vs. Mechanics**: Comments should explain *why*, not *how*.
+- **Consistency**: Files must comply with project-wide indentation and spacing styles.
+
+### 🛡️ SPECIALIZED AUDIT BEHAVIORS:
+
+- **Architecture Documentation Alignment**: Identify disconnects between inline NatSpec/docstring comments and the high-level specification documents. Ensure every module has a clear purpose statement and all assumptions are documented.
+- **Documentation Completeness**: Verify that documentation exists for both developers and end-users, and that user stories cover all implemented operations.
 
 ### Your Task:
 
-1. **Initialize Report**: Before scanning, create an empty report file named `Bad_Comments_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
-2. **Audit**: Scan the codebase (focusing on `.py` files) for comment and formatting violations.
-   - Use `grep_search` to find blocks of commented-out code (heuristic: `#` followed by Python keywords like `def`, `if`, `self`).
-   - Identify files with "Journal" headers or excessively redundant comments.
-   - Check for vertical distance issues (classes/functions that are too far from their related helpers).
-3. **Analyze**: Identify the most cluttered modules and characterize their "rot."
-4. **Report**: Create a detailed Markdown report summarizing the findings.
-5. **Save**: Write this report to the pre-created `Bad_Comments_Audit_YYYYMMDD.md` file.
-
-The report should include:
-- A summary of the "Comment Density" and "Formatting Health" of the project.
-- A list of "Top Offenders" (files with the most commented-out code or journal noise).
-- Specific cleanup recommendations (e.g., "Strip headers from these 10 files").
+1. **Initialize Report**: Create `Bad_Comments_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+2. **Audit**: Scan `.py`, `.rs`, and `.md` files for clutter and disinformation.
+   - Identify obsolete comments that contradict current logic.
+   - Flag missing purpose statements in core modules.
+3. **Analyze**: Identify cluttered modules and characterize documentation "rot."
+4. **Report**: Create a Markdown report with "Top Offenders" and cleanup recommendations.
+5. **Save**: Write the report to the pre-created audit file.
 
 Begin the audit and save the report to the oaDataAudits folder.
 """

@@ -8,7 +8,6 @@
     "folder-customization.folders": [
         {
             "path": "OPEN-AIR/oaConfiguration/",
-            "color": "foldercustomization.AnsiColor19",
             "badge": "📂"
         },
         {
@@ -100,44 +99,34 @@
             "badge": "🪟"
         },
         {
-            "path": "OPEN-AIR/oaConfiguration/__pycache__/",
-            "color": "foldercustomization.AnsiColor19"
+            "path": "OPEN-AIR/oaConfiguration/__pycache__/"
         },
         {
-            "path": "OPEN-AIR/oaConfiguration/Assets/",
-            "color": "foldercustomization.AnsiColor19"
+            "path": "OPEN-AIR/oaConfiguration/Assets/"
         },
         {
-            "path": "OPEN-AIR/oaConfiguration/Constants/",
-            "color": "foldercustomization.AnsiColor19"
+            "path": "OPEN-AIR/oaConfiguration/Constants/"
         },
         {
-            "path": "OPEN-AIR/oaConfiguration/Core/",
-            "color": "foldercustomization.AnsiColor19"
+            "path": "OPEN-AIR/oaConfiguration/Core/"
         },
         {
-            "path": "OPEN-AIR/oaConfiguration/Documentation/",
-            "color": "foldercustomization.AnsiColor19"
+            "path": "OPEN-AIR/oaConfiguration/Documentation/"
         },
         {
-            "path": "OPEN-AIR/oaConfiguration/FileReaders/",
-            "color": "foldercustomization.AnsiColor19"
+            "path": "OPEN-AIR/oaConfiguration/FileReaders/"
         },
         {
-            "path": "OPEN-AIR/oaConfiguration/FileWriters/",
-            "color": "foldercustomization.AnsiColor19"
+            "path": "OPEN-AIR/oaConfiguration/FileWriters/"
         },
         {
-            "path": "OPEN-AIR/oaConfiguration/Hooks/",
-            "color": "foldercustomization.AnsiColor19"
+            "path": "OPEN-AIR/oaConfiguration/Hooks/"
         },
         {
-            "path": "OPEN-AIR/oaConfiguration/Interface/",
-            "color": "foldercustomization.AnsiColor19"
+            "path": "OPEN-AIR/oaConfiguration/Interface/"
         },
         {
-            "path": "OPEN-AIR/oaConfiguration/Managers/",
-            "color": "foldercustomization.AnsiColor19"
+            "path": "OPEN-AIR/oaConfiguration/Managers/"
         },
         {
             "path": "OPEN-AIR/oaDataLogs/",
@@ -202,6 +191,12 @@
         {
             "path": "OPEN-AIR/oaTests/Workers/",
             "badge": "🧪"
+        },
+        {
+            "path": "OPEN-AIR/oaConfiguration/Managers/__pycache__/"
+        },
+        {
+            "path": "OPEN-AIR/oaConfiguration/Managers/LoggingManager/"
         }
     ]
 }

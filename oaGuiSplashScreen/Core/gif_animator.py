@@ -24,7 +24,7 @@ class GifAnimator:
 
     def load(self, filename):
         if not PIL_AVAILABLE: return False
-        p = Path(__file__).parent.parent / filename
+        p = Path(__file__).parent.parent / "Assets" / filename
         if not p.exists(): return False
         
         try:

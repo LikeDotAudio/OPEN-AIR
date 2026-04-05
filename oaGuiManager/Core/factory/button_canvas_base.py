@@ -104,6 +104,7 @@ class CanvasButton(tk.Canvas):
         return None
 
     def _create_button_image(self, width, height, text, is_active, is_hovered, is_pressed):
+        width, height = max(1, int(width)), max(1, int(height))
         image = Image.new("RGBA", (width, height), (0, 0, 0, 0))
         draw = ImageDraw.Draw(image)
         

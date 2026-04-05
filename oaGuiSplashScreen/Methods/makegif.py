@@ -22,7 +22,7 @@ from oaStyle.Constants.geometry import (
 
 # --- Configuration ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-FILENAME = os.path.join(SCRIPT_DIR, "splash_logo.gif")
+FILENAME = os.path.join(SCRIPT_DIR, "..", "Assets", "splash_logo.gif")
 
 BG_COLOR = "black"
 

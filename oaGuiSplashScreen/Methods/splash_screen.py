@@ -29,7 +29,7 @@ class SplashScreen:
         self.win = tk.Toplevel(parent); self.win.overrideredirect(True); self.win.configure(bg="black")
         
         w, h = 600, 470
-        sw, sh = parent.winfo_screenwidth(), parent.winfo_screenheight()
+        sw, sh = max(1, parent.winfo_screenwidth()), max(1, parent.winfo_screenheight())
         self.win.geometry(f"{w}x{h}+{(sw//2)-(w//2)}+{(sh//2)-(h//2)+200}")
 
         # 2. UI Layout
@@ -63,17 +63,20 @@ class SplashScreen:
         matrix_log("ui", "gui_manager", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🔬 SPLASH: {message}", "DEBUG")
         if not self.win or not self.win.winfo_exists(): return
         
-        if not self.status_label:
-            self.status_label = tk.Label(self.win, bg="black", fg="#33A1FD", font=("Arial", 10, "bold"))
-            self.status_label.place(relx=0.5, rely=0.8, anchor="center")
-        
-        self.status_label.config(text=message)
-        try: 
-            self.win.update()
-            self.win.update_idletasks()
-        except Exception as e:
-            # 🔬 SPLASH: Silently ignoring update error (possibly destroyed) but vocalizing it
-            vocal_capture("UI", f"SplashScreen: Update failure: {e}")
+        def _update_ui():
+            if not self.win or not self.win.winfo_exists(): return
+            if not self.status_label:
+                self.status_label = tk.Label(self.win, bg="black", fg="#33A1FD", font=("Arial", 10, "bold"))
+                self.status_label.place(relx=0.5, rely=0.8, anchor="center")
+            
+            self.status_label.config(text=message)
+            try: 
+                self.win.update_idletasks()
+            except Exception as e:
+                vocal_capture("UI", f"SplashScreen: Update failure: {e}")
+
+        # Schedule the update on the main thread
+        self.win.after(0, _update_ui)
 
     def hide(self):
         """Safely dismisses the splash screen."""

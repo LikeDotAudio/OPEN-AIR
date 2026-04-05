@@ -18,17 +18,25 @@ class PreviewEngine:
         self.on_focus_callback = on_focus_callback
         self.preview_builder = None
 
-    def refresh(self, json_data):
+    def refresh(self, json_data, render_tier=None):
         if not self.render_area.winfo_exists(): return None
-        
+
         render_data = copy.deepcopy(json_data)
-        self._strip_constraints(render_data)
+        self._strip_constraints(render_data) # Call to _strip_constraints
 
         if self.preview_builder:
             self.preview_builder._is_rebuilding = True
             try:
                 self.preview_builder._last_reported_width = 0
                 self.preview_builder.config_data = render_data
+                # --- Render Tier Logic ---
+                if render_tier == 'ghost':
+                    self.preview_builder._render_tier = 'ghost'
+                elif render_tier == 'fast':
+                    self.preview_builder._render_tier = 'fast'
+                else: # high_res or None
+                    self.preview_builder._render_tier = 'high_res'
+                # --- End Render Tier Logic ---
                 self.preview_builder._rebuild_gui()
             finally:
                 self.preview_builder.after(100, lambda: setattr(self.preview_builder, '_is_rebuilding', False))
@@ -46,10 +54,18 @@ class PreviewEngine:
             self.preview_builder._is_rebuilding = True
             try:
                 self.preview_builder.config_data = render_data
+                # --- Render Tier Logic ---
+                if render_tier == 'ghost':
+                    self.preview_builder._render_tier = 'ghost'
+                elif render_tier == 'fast':
+                    self.preview_builder._render_tier = 'fast'
+                else: # high_res or None
+                    self.preview_builder._render_tier = 'high_res'
+                # --- End Render Tier Logic ---
                 self.preview_builder._rebuild_gui()
             finally:
                 self.preview_builder.after(100, lambda: setattr(self.preview_builder, '_is_rebuilding', False))
-                
+
         return self.preview_builder
 
     def _strip_constraints(self, data):

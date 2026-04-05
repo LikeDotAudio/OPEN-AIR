@@ -51,14 +51,15 @@ class GridTopologyConfigurator:
         if num_cols == 0: num_cols = 1
 
         # 1. Configure Rows
-        for i in range(num_rows): parent_frame.grid_rowconfigure(i, weight=1)
+        for i in range(num_rows): parent_frame.grid_rowconfigure(i, weight=1, minsize=1)
 
         # 2. Configure Columns
         from oaLogging.Methods.matrix_gate import matrix_log
         col_sizing = data.get("column_sizing", [])
         for i in range(num_cols):
             sz = col_sizing[i] if i < len(col_sizing) else {}
-            weight, minw = sz.get("weight", 1), sz.get("minwidth", 0)
+            weight, minw = sz.get("weight", 1), sz.get("minwidth", 1)
+            if minw <= 0: minw = 1
             if sz.get("maxwidth", 0) > 0: minw, weight = sz["maxwidth"], 0
             parent_frame.grid_columnconfigure(i, weight=weight, minsize=minw)
             matrix_log("gui", "gui_builder", "grid_config", f"  ├─ Col {i}: weight={weight}, min={minw}", "TRACE")

@@ -57,6 +57,13 @@ class GraphPlotter(
         kwargs["height"] = max(int(float(h)), 50)
 
         super().__init__(parent, **kwargs)
+
+        # ⚡ SANITIZATION: Force a 1px floor if the parent hasn't rendered yet 
+        # to prevent X11 BadValue (0x0) crashes during initialization.
+        parent_w = parent.winfo_width()
+        parent_h = parent.winfo_height()
+        if parent_w <= 1 or parent_h <= 1:
+            self.config(width=1, height=1)
         
         # ⚡ FIX: Prevent geometry propagation to stop "vibrating" resize loops.
         # This ensures the frame size is determined by its container (e.g. PanedWindow or Grid)
@@ -142,9 +149,8 @@ class GraphPlotter(
 
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] GraphPlotter '{self.widget_id}' resize event: {event.width}x{event.height}", level="TRACE")
         
-        # 🛡️ ZERO-DIMENSION GUARD: Ignore events where one or both dimensions are 0.
-        # Allowing 1px allows it to "wake up" from initialization states.
-        if event.width <= 0 or event.height <= 0:
+        # 🛡️ ZERO-DIMENSION GUARD: Ignore events where dimensions are too small.
+        if event.width <= 10 or event.height <= 10:
             return
 
         last_w, last_h = getattr(self, "_last_resize_dim", (0, 0))
@@ -160,7 +166,7 @@ class GraphPlotter(
     def _perform_resize(self, w, h):
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] GraphPlotter '{self.widget_id}' performing resize to {w}x{h}", level="DEBUG")
         self._resize_timer = None
-        if hasattr(self, "fig") and w > 0 and h > 0:
+        if hasattr(self, "fig") and w >= 10 and h >= 10:
             # ⚡ FIX: Use forward=False to prevent Matplotlib from pushing size changes back to Tkinter
             dpi = self.fig.get_dpi()
             self.fig.set_size_inches(w / dpi, h / dpi, forward=False)

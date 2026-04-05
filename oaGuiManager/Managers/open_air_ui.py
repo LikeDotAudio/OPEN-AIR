@@ -60,9 +60,6 @@ def main():
     # 4. Splash Screen Initiation
     splash = SplashScreen(root, app_constants.CURRENT_VERSION, app_constants.global_settings["debug_enabled"])
 
-    # Reveal the main window after creation and before mainloop
-    UIWindowManager.reveal_main_window(root, splash, app_constants.global_settings["debug_enabled"])
-
     # 5. Shutdown Coordinator
     shutdown_coordinator = ShutdownCoordinator(root, shared_services, True)
     shutdown_coordinator.attach_to_root()

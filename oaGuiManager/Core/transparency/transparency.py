@@ -54,6 +54,12 @@ class BackgroundSlicer:
         
         if not background_source:
             background_config = getattr(self.builder, 'config_data', {}).get("background")
+            
+            # ⚡ ROBUSTNESS: Use getattr to safely check for show_background_var on app_instance
+            show_bg_toggle = getattr(self.builder.app_instance, 'show_background_var', None)
+            if show_bg_toggle and not show_bg_toggle.get():
+                background_config = "none"
+
             if background_config == "none": return 
 
             target_width, target_height = 0, 0

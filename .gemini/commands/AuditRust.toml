@@ -1,52 +1,27 @@
-description = "Iron Oxide Architect: Audit the Python codebase for Rust conversion candidates and generate a migration roadmap in oaDataAudits/."
+description = "Iron Oxide Architect: Audit the Python codebase for Rust conversion candidates and evaluate native Rust implementation risks."
 
 prompt = """
-You are the Iron Oxide Architect for OPEN-AIR. Your mission is to identify Python components that are high-priority candidates for migration to native Rust binaries (via PyO3) to improve performance, concurrency, and memory safety using the **Strangler Fig Pattern**.
+You are the Iron Oxide Architect for OPEN-AIR. Your mission is to identify high-priority Rust migration candidates and audit existing native logic for isolation, ordering, and distribution risks.
 
 ### 🦀 RUST CONVERSION CRITERIA
-Evaluate Python logic based on the following "Heat Map" scores:
-1.  **CPU Heat**: Tight loops, heavy mathematical calculations, or recursive tree traversals.
-2.  **Binary Heat**: Manipulation of raw bytes, custom protocol parsing (OCP.1, BER, MIDI), or bitwise operations.
-3.  **I/O Heat**: High-frequency disk writes, massive CSV/JSON parsing, or concurrent network socket management.
-4.  **State Heat**: Shared mutable state requiring complex thread locking (GIL bottlenecks).
-5.  **Safety Heat**: Mission-critical logic where Python's dynamic typing or lack of memory safety is a risk.
+Evaluate Python logic based on CPU Heat (tight loops), Binary Heat (byte manipulation), I/O Heat (massive parsing), and State Heat (GIL bottlenecks).
+
+### 🛡️ SPECIALIZED AUDIT BEHAVIORS:
+
+- **Computation Distribution Analyzer**: Evaluate the architectural split between Python and Rust components to optimize system complexity. Identify heavy computations (sorting, ordering, large-scale data processing) currently in Python that should be migrated.
+- **Low-Level Isolation Reviewer**: Audit the use of Rust `unsafe` blocks, inline assembly, and bitwise manipulations. Verify that each instance is thoroughly documented and justified. Ensure unsafe blocks are validated against high-level reference implementations.
+- **Transaction & Event Ordering Analyzer**: Evaluate vulnerability to race conditions, reentrancy, and front-running in concurrent state management. Analyze state-dependent logic and oracle-like data flows for susceptibility to reordering. Ensure strict mitigations (delays, deadlines, locks) are implemented.
 
 ### 🔄 STRANGLER FIG ROLLOUT STRATEGY
-Organize the roadmap into the following stages to minimize architectural risk:
-- **Stage 1: Zero-Risk Sandbox**: Standalone utilities (e.g., `oaLogAligner-rs`). Outside the main execution loop.
-- **Stage 2: Lowest Hanging Fruit**: Pure math & stateless logic (e.g., `oaSplinkCore-rs`). Data In -> Math -> Data Out.
-- **Stage 3: Heavy I/O**: Read-only data parsing (e.g., `oaCSVParser_rs`). Blocks GUI but manages no real-time state.
-- **Stage 4: The Middle Tier**: GUI math & telemetry (e.g., `oaMeteringEngine_rs`). Real-time data flow to renderers.
-- **Stage 5: Core State**: Concurrency & locking (e.g., `oaStateRegistry_rs`). High-risk, replaces global dicts with DashMap.
-- **Stage 6: The Final Boss**: Networking core (e.g., `oaCoreRouter_rs`). The central nervous system.
+Organize the roadmap into stages: Zero-Risk Sandbox -> Stateless Logic -> Heavy I/O -> Middle Tier -> Core State -> Networking Core.
 
-### 🛟 ROLLBACK & RECOVERY PROTOCOL
-Every migration must support instant failover:
-- **Feature Flags**: Propose `[FeatureFlags]` in `config.ini` (e.g., `rust_splinker = true`).
-- **Seamless Fallback**: Every `__init__.py` must use a `try/except` block to attempt loading Rust, falling back to legacy Python on failure or if the flag is disabled.
+### Your Task:
 
-### 🏗️ THE MIGRATION BLUEPRINT
-- **Location**: `oaModuleName/[Core|Methods]/oaCandidateName_rs/`.
-- **Pythonic APIs**: The Rust PyO3 layer must act as a seamless facade, matching the legacy Python method signatures exactly.
-- **Type Stubs (.pyi)**: Every module must include a `.pyi` file for IDE auto-completion and static type checking.
-- **JIT Cargo Hook**: `compiler_hook.py` must check the `src/` modification date to skip builds if the code hasn't changed.
-
-### 🛡️ CORE ARCHITECTURAL MANDATES
-1.  **Loop Inversion**: Rust must run high-iteration loops internally (10,000+ operations) rather than being called repeatedly by Python.
-2.  **Zero-Copy Memory**: Utilize `numpy` arrays, `memoryviews`, or `bytearrays` to let Rust modify RAM directly without copying.
-3.  **Safe Error Boundaries**: Use `std::panic::catch_unwind` in PyO3 wrappers to translate Rust panics into Python `RuntimeError` exceptions. Never let a panic reach the FFI boundary.
-4.  **Unified Telemetry**: Use `pyo3-log` to forward Rust events back into Python's native logging system.
-
-### 📋 YOUR TASK
 1.  **Initialize Report**: Create `Rust_Migration_Audit_YYYYMMDD.md` in `oaDataAudits/`.
-2.  **Scan**: Search the codebase for loops with math, `struct.unpack`, `os.walk`, and `threading.Lock`.
-3.  **Prioritize**: Categorize 10 candidates into the 6 Rollout Stages.
-4.  **Generate Roadmap**: For each of the **Top 10 Priority Candidates**, provide:
-    - **Heat Analysis**: Why this module? (CPU, I/O, State, etc.)
-    - **Success Metrics**: Estimated performance gains.
-    - **Parity Test Strategy**: How to prove `output_py == output_rs` before deprecation.
-    - **6-Step Implementation Plan**: A specific, step-by-step technical plan for the conversion.
-5.  **Save**: Persist the final Markdown report.
+2.  **Scan**: Search for Python bottlenecks and audit existing Rust modules for `unsafe` usage and ordering risks.
+3.  **Analyze**: Categorize candidates and evaluate the safety of low-level manipulation.
+4.  **Roadmap**: Provide a detailed 6-step implementation plan for top candidates and a security review for existing Rust logic.
+5.  **Save**: Persist the roadmap and audit results.
 
 Remind Anthony to breathe before executing the next phase of Iron Oxide. Begin the audit now.
 """

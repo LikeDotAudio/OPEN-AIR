@@ -64,7 +64,7 @@ class DirectoryBuilderMixin:
         """Recursively builds the GUI."""
         matrix_log("gui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"🏗️ [BUILDER] Starting build for: {path}", "DEBUG")
         if isinstance(path, str): path = pathlib.Path(path)
-        if hasattr(self, 'root') and self.root: self.root.update()
+        if hasattr(self, 'root') and self.root: self.root.update_idletasks()
 
         layout_info = None
         if layout_override:
@@ -90,7 +90,7 @@ class DirectoryBuilderMixin:
                 paned_window.pack(fill=tk.BOTH, expand=True)
 
                 panels = layout_data.get("panels", [])
-                panel_frames = [tk.Frame(paned_window, borderwidth=0, relief="flat", bg=self.theme_colors["bg"]) for _ in panels]
+                panel_frames = [tk.Frame(paned_window, borderwidth=0, relief="flat", bg=self.theme_colors["bg"], width=1, height=1) for _ in panels]
                 for i, frame in enumerate(panel_frames):
                     weight = int(panels[i].get("weight", 1))
                     matrix_log("gui", "gui_builder", "_build_from_directory", f"  ├─ Adding Panel {i}: Path={panels[i]['path']}, Weight={weight}", "TRACE")
@@ -101,7 +101,7 @@ class DirectoryBuilderMixin:
                     if idx >= len(panels):
                         if on_complete: on_complete()
                         return
-                    if hasattr(self, 'root') and self.root: self.root.update()
+                    if hasattr(self, 'root') and self.root: self.root.update_idletasks()
                     panel_path = panels[idx]["path"]
                     frame = panel_frames[idx]
                     matrix_log("gui", "gui_builder", "_build_from_directory", f"  └─ Building Panel Content: {panel_path}", "DEBUG")
@@ -112,18 +112,32 @@ class DirectoryBuilderMixin:
                 def configure_sash(event=None):
                     if not paned_window.winfo_exists(): return
                     w, h = paned_window.winfo_width(), paned_window.winfo_height()
-                    if w <= 1 or h <= 1: return
-                    total_weight = sum(p["weight"] for p in panels)
+                    if w <= 20 or h <= 20: return
+                    total_weight = sum(max(1, p.get("weight", 1)) for p in panels)
                     if total_weight == 0: return
                     cumulative_size = 0
-                    for i in range(len(panels) - 1):
-                        weight = panels[i]["weight"]
-                        if orientation == tk.HORIZONTAL:
-                            cumulative_size += (w * weight) / total_weight
-                            paned_window.sashpos(i, int(cumulative_size))
-                        else:
-                            cumulative_size += (h * weight) / total_weight
-                            paned_window.sashpos(i, int(cumulative_size))
+                    last_pos = 0
+                    
+                    try:
+                        for i in range(len(panels) - 1):
+                            weight = max(1, panels[i].get("weight", 1))
+                            if orientation == tk.HORIZONTAL:
+                                cumulative_size += (w * weight) / total_weight
+                                pos = max(last_pos + 1, min(int(w) - (len(panels) - i), int(cumulative_size)))
+                                # ⚡ HARDENING: Ensure pos is at least 1 and within bounds before calling sashpos
+                                pos = max(1, int(pos))
+                                paned_window.sashpos(i, pos)
+                            else:
+                                cumulative_size += (h * weight) / total_weight
+                                pos = max(last_pos + 1, min(int(h) - (len(panels) - i), int(cumulative_size)))
+                                # ⚡ HARDENING: Ensure pos is at least 1 and within bounds before calling sashpos
+                                pos = max(1, int(pos))
+                                paned_window.sashpos(i, pos)
+                            last_pos = pos
+                    except tk.TclError as e:
+                        # 🛡️ RECURSION GUARD: Catch TclErrors to prevent X11 BadValue (0x0) crashes 
+                        # during rapid layout changes or initial settling.
+                        matrix_log("gui", "gui_builder", "configure_sash", f"⚠️ Sash positioning skipped: {e}", "TRACE")
                 
                 paned_window.bind("<Configure>", configure_sash, add="+")
                 self.after(50, configure_sash)
@@ -169,7 +183,7 @@ class DirectoryBuilderMixin:
                         if idx >= len(all_items):
                             if on_complete: on_complete()
                             return
-                        if hasattr(self, 'root') and self.root: self.root.update()
+                        if hasattr(self, 'root') and self.root: self.root.update_idletasks()
                         item = all_items[idx]
                         slot = slots[idx]
                         if isinstance(item, dict):
@@ -198,7 +212,7 @@ class DirectoryBuilderMixin:
         gui_files = layout_info["data"].get("gui_files", [])
 
         def _process_items(dir_idx=0, file_idx=0):
-            if hasattr(self, 'root') and self.root: self.root.update()
+            if hasattr(self, 'root') and self.root: self.root.update_idletasks()
             if dir_idx < len(sub_dirs):
                 sub_dir_path = sub_dirs[dir_idx]["path"]
                 self._build_from_directory(path=sub_dir_path, parent_widget=parent_widget, on_complete=lambda: _process_items(dir_idx + 1, file_idx))

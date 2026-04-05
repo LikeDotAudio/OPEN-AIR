@@ -14,64 +14,146 @@ class LeafEditorFactory:
     """Spawns specialized editor widgets for leaf JSON properties."""
 
     @staticmethod
-    def create(parent, key, value, full_path, source_instance):
-        f = tk.Frame(parent, bg="#2b2b2b")
-        f.pack(fill="x", pady=2)
-        
-        lbl = tk.Label(f, text=f"{key}:", bg="#2b2b2b", fg="#cccccc", width=15, anchor="e")
-        lbl.pack(side="left")
-        
+    def create(parent, key, value, full_path, source_instance, existing_widget=None):
         is_color = "color" in key.lower() or "colour" in key.lower() or (isinstance(value, str) and value.startswith("#") and len(value) in [4, 7])
 
         if is_color:
-            editor = LeafEditorFactory._create_color_editor(f, key, value, full_path, source_instance)
+            editor = LeafEditorFactory._create_color_editor(parent, key, value, full_path, source_instance, existing_widget)
         else:
-            editor = LeafEditorFactory._create_text_editor(f, key, value, full_path, lbl, source_instance)
+            editor = LeafEditorFactory._create_text_editor(parent, key, value, full_path, source_instance, existing_widget)
             
-        return f
+        return editor
 
-    @staticmethod
-    def _create_color_editor(parent, key, value, full_path, source):
-        bg = str(value).lower()
-        if bg == "transparent" or not bg.startswith("#"): bg = "#2b2b2b"
-        
-        swatch = tk.Canvas(parent, width=25, height=18, bg=bg, highlightthickness=1, cursor="hand2")
-        swatch.pack(side="left", padx=(10, 5))
-        
-        entry = ttk.Entry(parent, style="Property.TEntry")
-        entry.insert(0, str(value))
-        entry.pack(side="left", fill="x", expand=True)
+    
+    class _ColorEditorWidget(tk.Frame):
+        def __init__(self, parent, key, value, full_path, source):
+            super().__init__(parent, bg="#2b2b2b")
+            self.key = key
+            self.full_path = full_path
+            self.source = source
 
-        def pick(e):
-            res = colorchooser.askcolor(title=f"Color: {key}", initialcolor=entry.get() or "#fff")
+            self.pack(fill="x", pady=2) # This frame contains the swatch and entry
+
+            bg_color = str(value).lower()
+            if not bg_color.startswith("#"): bg_color = "#2b2b2b" # Default for invalid colors
+
+            self.swatch = tk.Canvas(self, width=25, height=18, bg=bg_color, highlightthickness=1, cursor="hand2")
+            self.swatch.pack(side="left", padx=(10, 5))
+
+            self.entry = ttk.Entry(self, style="Property.TEntry")
+            self.entry.insert(0, str(value))
+            self.entry.pack(side="left", fill="x", expand=True)
+
+            self.swatch.bind("<Button-1>", self._pick_color)
+            self.entry.bind("<Return>", self._update_state_from_entry)
+            self.entry.bind("<FocusOut>", self._update_state_from_entry)
+
+        def _pick_color(self, e):
+            res = colorchooser.askcolor(title=f"Color: {self.key}", initialcolor=self.entry.get() or "#fff")
             if res[1]:
-                swatch.config(bg=res[1]); entry.delete(0, tk.END); entry.insert(0, res[1])
-                state_manager.update_state(res[1], path=full_path, source=source)
-        swatch.bind("<Button-1>", pick)
-        LeafEditorFactory._bind_entry_focus(parent, entry, lbl=None, full_path=full_path, old_val=value, source=source)
-        return entry
+                self.set_value(res[1])
+                state_manager.update_state(res[1], path=self.full_path, source=self.source)
+        
+        def _update_state_from_entry(self, e):
+            current_value = self.entry.get()
+            self.set_value(current_value) # Update internal swatch too
+            state_manager.update_state(current_value, path=self.full_path, source=self.source)
+
+        def set_value(self, new_value):
+            if isinstance(new_value, str):
+                self.entry.delete(0, tk.END)
+                self.entry.insert(0, new_value)
+                bg_color = new_value.lower()
+                if not bg_color.startswith("#"): bg_color = "#2b2b2b"
+                self.swatch.config(bg=bg_color)
+            # Add validation or error handling for invalid new_value types
 
     @staticmethod
-    def _create_text_editor(parent, key, value, full_path, lbl, source):
-        entry = ttk.Entry(parent, style="Property.TEntry")
-        entry.insert(0, str(value))
-        entry.pack(side="left", fill="x", expand=True, padx=(10, 0))
-        
-        if isinstance(value, (int, float)):
-            lbl.config(cursor="sb_h_double_arrow")
-            def start_scrub(e):
-                source.scrub_start_val = value
-                source.scrub_start_x = e.x_root
-            def scrub(e):
-                delta = (e.x_root - source.scrub_start_x) // 2
-                new_v = source.scrub_start_val + (delta * 0.1 if isinstance(value, float) else delta)
-                entry.delete(0, tk.END); entry.insert(0, f"{new_v:.3f}".rstrip('0').rstrip('.') if isinstance(value, float) else str(int(new_v)))
-                state_manager.update_state(new_v, path=full_path, source=source)
-            lbl.bind("<Button-1>", start_scrub)
-            lbl.bind("<B1-Motion>", scrub)
+    def _create_color_editor(parent, key, value, full_path, source, existing_widget=None):
+        if existing_widget and isinstance(existing_widget, LeafEditorFactory._ColorEditorWidget):
+            existing_widget.set_value(value)
+            return existing_widget
+        else:
+            return LeafEditorFactory._ColorEditorWidget(parent, key, value, full_path, source)
 
-        LeafEditorFactory._bind_entry_focus(parent, entry, lbl, full_path, value, source)
-        return entry
+    
+    class _TextEditorWidget(tk.Frame):
+        def __init__(self, parent, key, value, full_path, source): # Removed lbl
+            super().__init__(parent, bg="#2b2b2b")
+            self.key = key
+            self.full_path = full_path
+            self.source = source
+            
+            # Create the label internally
+            self.lbl = tk.Label(self, text=f"{key}:", bg="#2b2b2b", fg="#cccccc", width=15, anchor="e")
+            self.lbl.pack(side="left")
+
+            self.pack(side="left", fill="x", expand=True, padx=(10, 0)) # This frame contains the entry
+
+            self.entry = ttk.Entry(self, style="Property.TEntry")
+            self.entry.insert(0, str(value))
+            self.entry.pack(side="left", fill="x", expand=True)
+
+            self.entry.bind("<Return>", self._update_state_from_entry)
+            self.entry.bind("<FocusOut>", self._update_state_from_entry)
+
+            self.is_numeric = isinstance(value, (int, float))
+            if self.is_numeric:
+                self.lbl.config(cursor="sb_h_double_arrow")
+                self.lbl.bind("<Button-1>", self._start_scrub)
+                self.lbl.bind("<B1-Motion>", self._scrub)
+                self.lbl.bind("<ButtonRelease-1>", self._stop_scrub)
+
+                self.scrub_start_val = value
+                self.scrub_start_x = 0
+
+        def _update_state_from_entry(self, e):
+            current_value_str = self.entry.get()
+            try:
+                if self.is_numeric:
+                    new_value = float(current_value_str) if isinstance(self.scrub_start_val, float) else int(current_value_str)
+                else:
+                    new_value = current_value_str
+                state_manager.update_state(new_value, path=self.full_path, source=self.source)
+            except ValueError:
+                matrix_log("ui", "gui_builder", "LeafEditorFactory", f"Invalid numeric input: {current_value_str}", "WARNING")
+            self.set_value(new_value) # Ensure entry and internal state are consistent
+
+        def _start_scrub(self, e):
+            self.scrub_start_val = float(self.entry.get()) if isinstance(self.scrub_start_val, float) else int(self.entry.get())
+            self.scrub_start_x = e.x_root
+
+        def _scrub(self, e):
+            delta = (e.x_root - self.scrub_start_x) // 2
+            new_v = self.scrub_start_val + (delta * 0.1 if isinstance(self.scrub_start_val, float) else delta)
+            self.set_value(new_v)
+            # Update state continuously during scrub
+            state_manager.update_state(new_v, path=self.full_path, source=self.source)
+
+        def _stop_scrub(self, e):
+            # Final state update already handled by _scrub
+            pass
+
+        def set_value(self, new_value):
+            if self.is_numeric:
+                if isinstance(new_value, float):
+                    formatted_value = f"{new_value:.3f}".rstrip('0').rstrip('.')
+                else:
+                    formatted_value = str(int(new_value))
+                self.entry.delete(0, tk.END)
+                self.entry.insert(0, formatted_value)
+            else:
+                self.entry.delete(0, tk.END)
+                self.entry.insert(0, str(new_value))
+            # Add validation or error handling for invalid new_value types
+
+    @staticmethod
+    def _create_text_editor(parent, key, value, full_path, source, existing_widget=None): # Removed lbl
+        if existing_widget and isinstance(existing_widget, LeafEditorFactory._TextEditorWidget):
+            existing_widget.set_value(value)
+            return existing_widget
+        else:
+            return LeafEditorFactory._TextEditorWidget(parent, key, value, full_path, source) # Removed lbl
 
     @staticmethod
     def _bind_entry_focus(frame, entry, lbl, full_path, old_val, source):

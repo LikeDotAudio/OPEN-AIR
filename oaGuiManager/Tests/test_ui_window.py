@@ -36,22 +36,27 @@ class TestUIWindowManager(unittest.TestCase):
 
     @patch('tkinter.Tk')
     @patch('sys.platform', 'linux')
-    def test_create_root_window_maximizes_on_linux(self, mock_tk_class):
-        """OPERATE: Create window on Linux. CHECK: Verify zoomed attribute is set."""
+    def test_create_root_window_does_not_maximize_immediately_on_linux(self, mock_tk_class):
+        """OPERATE: Create window on Linux. CHECK: Verify zoomed attribute is NOT set yet."""
         mock_root = MagicMock()
         mock_tk_class.return_value = mock_root
         
         UIWindowManager.create_root_window()
         
-        mock_root.attributes.assert_called_with("-zoomed", True)
+        # Should NOT be called in create_root_window anymore
+        for call in mock_root.attributes.call_args_list:
+            if "-zoomed" in str(call):
+                self.fail("attributes('-zoomed', True) should not be called in create_root_window")
 
-    def test_reveal_main_window(self):
-        """OPERATE: Reveal window. CHECK: Verify deiconify and splash hide."""
+    @patch('sys.platform', 'linux')
+    def test_reveal_main_window_maximizes_on_linux(self):
+        """OPERATE: Reveal window on Linux. CHECK: Verify zoomed attribute is set."""
         mock_root = MagicMock()
         mock_splash = MagicMock()
         
         UIWindowManager.reveal_main_window(mock_root, mock_splash, False)
         
+        mock_root.attributes.assert_called_with("-zoomed", True)
         mock_root.deiconify.assert_called_once()
         mock_splash.hide.assert_called_once()
 

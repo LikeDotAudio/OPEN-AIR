@@ -36,7 +36,7 @@ def draw_circular_mask(canvas, width, height):
         
         # 1. High-Quality Rendering (Upscale)
         UPSCALE_FACTOR = 4
-        upscale_width, upscale_height = int(width * UPSCALE_FACTOR), int(height * UPSCALE_FACTOR)
+        upscale_width, upscale_height = max(1, int(width * UPSCALE_FACTOR)), max(1, int(height * UPSCALE_FACTOR))
         
         # Prepare Background from the correctly positioned slice
         background_pil = canvas.panel_bg_pil_slice.resize((upscale_width, upscale_height), Image.Resampling.LANCZOS).convert("RGBA")
@@ -86,7 +86,7 @@ def draw_rounded_mask(canvas, width, height, radius):
         canvas.last_rmask_bg_id = id(canvas.panel_bg_pil_slice)
         
         UPSCALE_FACTOR = 4
-        upscale_width, upscale_height = int(width * UPSCALE_FACTOR), int(height * UPSCALE_FACTOR)
+        upscale_width, upscale_height = max(1, int(width * UPSCALE_FACTOR)), max(1, int(height * UPSCALE_FACTOR))
         upscale_radius = int(radius * UPSCALE_FACTOR)
         
         # Prepare Background from the correctly positioned slice
@@ -123,7 +123,7 @@ def draw_glass_lens(canvas, width, height, shape_type, radius, border_color, bor
         canvas.last_lens_color = border_color
         
         UPSCALE_FACTOR = 2
-        upscale_width, upscale_height = int(width * UPSCALE_FACTOR), int(height * UPSCALE_FACTOR)
+        upscale_width, upscale_height = max(1, int(width * UPSCALE_FACTOR)), max(1, int(height * UPSCALE_FACTOR))
         upscale_radius = radius * UPSCALE_FACTOR
         
         lens_img = Image.new("RGBA", (upscale_width, upscale_height), (0, 0, 0, 0))

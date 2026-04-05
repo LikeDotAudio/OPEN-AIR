@@ -101,6 +101,9 @@ class Application(
         self._notebooks = {}
         self._frames_by_path = {}
         self.last_selected_tab_name = None
+
+        # Display Toggles
+        self.show_background_var = tk.BooleanVar(value=True) # Toggle for background visibility
         
         # Resize Debouncing
         self.global_resizing = False
@@ -125,6 +128,7 @@ class Application(
         
         # ⚡ FINAL SETTLE: After all widgets are created and the layout has had a moment 
         # to calculate, trigger a final, forced reslice and background sync on all builders.
+        # DELAY INCREASED: To 500ms to allow X11 window manager to assign geometry.
         def _final_settle():
             for loader_instance in self.module_loader.get_all_builders():
                 if loader_instance and hasattr(loader_instance, 'dynamic_gui') and loader_instance.dynamic_gui.winfo_exists():
@@ -132,11 +136,11 @@ class Application(
                     builder._trigger_reslice_all(force=True)
                     builder._trigger_background_sync(force=True)
 
-        self.after(250, _final_settle)
-        self.after(500, self._trigger_initial_tab_selection)
+        self.after(500, _final_settle)
+        self.after(750, self._trigger_initial_tab_selection)
         if self.state_cache_manager:
-            self.after(1000, self.state_cache_manager.initialize_state)
-        self.after(2000, lambda: self.cache_manager.save(self._layout_cache))
+            self.after(1250, self.state_cache_manager.initialize_state)
+        self.after(2250, lambda: self.cache_manager.save(self._layout_cache))
         if self.on_complete_callback:
             self.on_complete_callback()
 

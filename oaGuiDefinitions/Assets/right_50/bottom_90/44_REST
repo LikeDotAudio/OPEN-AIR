@@ -1,0 +1,27 @@
+# /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/44_REST
+# This file acts as a pointer to the actual implementation of gui_REST.py
+# located in the oaComREST module's Interface directory.
+
+try:
+    from oaComREST.Interface.gui_REST import RestDashboard as OriginalRestDashboard
+    from oaComREST.Entry import get_manager as original_get_manager
+    
+    # Re-export the class and relevant functions to maintain import path functionality
+    class RestDashboard(OriginalRestDashboard):
+        pass
+
+    # Also re-export the manager function if it was intended to be called from here
+    def get_manager(*args, **kwargs):
+        return original_get_manager(*args, **kwargs)
+    
+except ImportError as e:
+    print(f"Error importing RestDashboard from oaComREST.Interface: {e}")
+    print("Ensure oaComREST module and its Interface directory are correctly set up.")
+    
+    # Fallback or error handling if import fails
+    class RestDashboard:
+        def __init__(self, *args, **kwargs):
+            raise NotImplementedError("RestDashboard could not be loaded. Please check module paths.")
+            
+    def get_manager():
+        raise NotImplementedError("RestDashboard could not be loaded.")

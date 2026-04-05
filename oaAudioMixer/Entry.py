@@ -109,3 +109,79 @@ if __name__ == '__main__':
         main()
     else:
         tui()
+
+def run_tests():
+    print("🔍 Discovering and running tests for oaAudioMixer...")
+    test_dir = Path(__file__).parent / "Tests"
+    if not test_dir.is_dir():
+        print("❌ No 'Tests/' directory found.")
+        return
+
+    test_files = sorted([f for f in test_dir.glob("test_*.py")])
+    if not test_files:
+        print("❌ No test files found (expected pattern: test_*.py).")
+        return
+
+    print(f"Found {len(test_files)} test files. Executing...")
+    
+    # Use a subprocess to run tests, similar to how pytest would be invoked
+    # This is a simplified approach; a full pytest integration would be more robust.
+    import subprocess
+    
+    all_tests_passed = True
+    for test_file in test_files:
+        print(f"\n--- Running: {test_file.name} ---")
+        try:
+            # Construct command to run the specific test file
+            # Using 'python -m unittest <module_path>' is a standard way
+            # We need to specify the module path relative to the project root or Python path
+            # For simplicity here, we'll try to run it directly, assuming it's in the path
+            # A more robust solution might involve explicitly setting up sys.path for subprocess
+            
+            # Get the module path relative to the project root for the test runner
+            relative_test_file_path = test_file.relative_to(Path(__file__).parent.parent.parent) # Path from OPEN-AIR root
+            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3] # Remove .py extension
+
+            # Ensure the current directory is the project root so Python can find modules
+            original_cwd = os.getcwd()
+            os.chdir(Path(__file__).parent.parent.parent) 
+
+            result = subprocess.run(
+                [sys.executable, "-m", "unittest", module_path_for_runner],
+                capture_output=True,
+                text=True,
+                check=False # Do not raise an exception on non-zero exit codes
+            )
+            
+            print(result.stdout)
+            if result.stderr:
+                print(result.stderr)
+            
+            if result.returncode != 0:
+                all_tests_passed = False
+                print(f"❌ Test failed for {test_file.name} with exit code {result.returncode}")
+            else:
+                print(f"✅ Tests passed for {test_file.name}")
+
+        except Exception as e:
+            print(f"❌ An error occurred while running tests for {test_file.name}: {e}")
+            all_tests_passed = False
+        finally:
+            # Restore the original working directory
+            os.chdir(original_cwd)
+
+    if all_tests_passed:
+        print("\n🎉 All tests for oaAudioMixer passed!")
+    else:
+        print("\n💔 Some tests for oaAudioMixer failed.")
+
+if __name__ == '__main__':
+    # Check if specific commands are given, otherwise run tests
+    if "--discovery" in sys.argv:
+        main()
+    elif "--tui" in sys.argv:
+        tui()
+    else:
+        # Default behavior: run tests if no specific command is provided
+        run_tests()
+

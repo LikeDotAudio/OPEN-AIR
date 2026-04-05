@@ -82,8 +82,8 @@ class WidgetSchemaNormalizer:
             if is_struct: config["transparent"] = True
 
         # 4. Geometry and Space
-        if "width" in geometry: config["width"] = geometry["width"]
-        if "height" in geometry: config["height"] = geometry["height"]
+        if "width" in geometry: config["width"] = max(1, int(float(geometry["width"])))
+        if "height" in geometry: config["height"] = max(1, int(float(geometry["height"])))
         
         final_sticky = calculate_sticky(geometry)
         if "layout" not in config: config["layout"] = {}

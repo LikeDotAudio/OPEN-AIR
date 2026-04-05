@@ -47,7 +47,8 @@ class ToggleButton(CanvasButton):
         # Super initialization (CanvasButton)
         super().__init__(
             parent, text=self.off_text, command=self._on_toggle,
-            width=config.get("width", 100), height=config.get("height", 50),
+            width=config.get("layout", {}).get("width", 100),
+            height=config.get("layout", {}).get("height", 50),
             corner_radius=config.get("layout", {}).get("corner_radius", 6),
             bg_color=config.get("bg_color", "#1a1a1a"),
             active_color=config.get("active_color", "#FF9900"),
@@ -101,8 +102,8 @@ class BuilderButtonToggleCreator(TransparencyMixin):
 
         # Main Canvas Container (if label exists)
         if label:
-            btn_w = config_data.get("width", 100)
-            btn_h = config_data.get("height", 50)
+            btn_w = max(1, int(config_data.get("layout", {}).get("width", 100)))
+            btn_h = max(1, int(config_data.get("layout", {}).get("height", 50)))
             container = tk.Canvas(
                 parent_widget, bd=0, highlightthickness=0, relief="flat",
                 width=btn_w + 10, height=btn_h + 25

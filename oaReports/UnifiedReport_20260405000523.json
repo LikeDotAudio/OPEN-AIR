@@ -1,9 +1,9 @@
 {
     "summary": {
-        "total": 302,
-        "passed": 299,
-        "failed": 0,
-        "errors": 3,
+        "total": 324,
+        "passed": 323,
+        "failed": 1,
+        "errors": 0,
         "skipped": 0
     },
     "details": [
@@ -37,7 +37,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0020s"
+            "duration": "0.0013s"
         },
         {
             "classname": "TestProtocolRouter",
@@ -45,7 +45,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0013s"
+            "duration": "0.0021s"
         },
         {
             "classname": "TestProtocolRouter",
@@ -53,7 +53,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0006s"
+            "duration": "0.0011s"
         },
         {
             "classname": "TestRustRouter",
@@ -61,7 +61,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0004s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestEmberWorker",
@@ -93,7 +93,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0008s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestBrokerMonitor",
@@ -109,7 +109,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0013s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestBrokerMonitor",
@@ -117,7 +117,23 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0004s"
+            "duration": "0.0005s"
+        },
+        {
+            "classname": "TestLearningThirdParty",
+            "name": "test_paho_mqtt_client_callbacks (oaComMQTT.Tests.test_learning.TestLearningThirdParty.test_paho_mqtt_client_callbacks)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0002s"
+        },
+        {
+            "classname": "TestLearningThirdParty",
+            "name": "test_paho_mqtt_topic_matching (oaComMQTT.Tests.test_learning.TestLearningThirdParty.test_paho_mqtt_topic_matching)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
         },
         {
             "classname": "TestMqttAsyncWorker",
@@ -125,7 +141,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0034s"
+            "duration": "0.0017s"
         },
         {
             "classname": "TestMqttAsyncWorker",
@@ -133,7 +149,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "5.0075s"
+            "duration": "5.0077s"
         },
         {
             "classname": "TestMqttAsyncWorker",
@@ -141,7 +157,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "5.0157s"
+            "duration": "5.0073s"
         },
         {
             "classname": "TestMqttAsyncWorker",
@@ -149,7 +165,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.1026s"
+            "duration": "0.1021s"
         },
         {
             "classname": "TestMqttAsyncWorker",
@@ -157,7 +173,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "5.0068s"
+            "duration": "5.0074s"
         },
         {
             "classname": "TestMqttConnectionManager",
@@ -165,7 +181,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0007s"
+            "duration": "0.0008s"
         },
         {
             "classname": "TestMqttConnectionManager",
@@ -173,7 +189,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0007s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestMqttConnectionManager",
@@ -189,7 +205,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0005s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestMqttConnectionManager",
@@ -197,7 +213,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0005s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestMqttConnectionManager",
@@ -205,7 +221,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0000s"
+            "duration": "0.0001s"
         },
         {
             "classname": "TestMqttConnectionManager",
@@ -213,7 +229,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0006s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestMQTTIntegration",
@@ -221,7 +237,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "8.0934s"
+            "duration": "8.0959s"
         },
         {
             "classname": "TestMQTTLogic",
@@ -245,7 +261,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0022s"
+            "duration": "0.0013s"
         },
         {
             "classname": "TestMqttManager",
@@ -253,7 +269,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.1024s"
+            "duration": "0.0016s"
         },
         {
             "classname": "TestMqttManager",
@@ -261,7 +277,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0015s"
+            "duration": "0.0012s"
         },
         {
             "classname": "TestMqttManager",
@@ -277,7 +293,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0010s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestMqttManager",
@@ -285,7 +301,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0016s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestMqttManager",
@@ -293,7 +309,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0026s"
+            "duration": "0.0024s"
         },
         {
             "classname": "TestMqttManager",
@@ -301,7 +317,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0013s"
+            "duration": "0.0015s"
         },
         {
             "classname": "TestMqttManager",
@@ -309,7 +325,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0020s"
+            "duration": "0.0015s"
         },
         {
             "classname": "TestMqttManager",
@@ -333,7 +349,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0084s"
+            "duration": "0.0024s"
         },
         {
             "classname": "TestMqttManager",
@@ -349,7 +365,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0016s"
+            "duration": "0.0014s"
         },
         {
             "classname": "TestMqttManager",
@@ -357,7 +373,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0020s"
+            "duration": "0.1099s"
         },
         {
             "classname": "TestMqttManager",
@@ -365,7 +381,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0021s"
+            "duration": "0.0015s"
         },
         {
             "classname": "TestMqttManager",
@@ -373,7 +389,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0016s"
+            "duration": "0.0012s"
         },
         {
             "classname": "TestMqttManager",
@@ -389,7 +405,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0010s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestMqttSubscriberRouter",
@@ -397,7 +413,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0012s"
+            "duration": "0.0011s"
         },
         {
             "classname": "TestMqttSubscriberRouter",
@@ -405,7 +421,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0007s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestMqttSubscriberRouter",
@@ -413,7 +429,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0008s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestMqttWorker",
@@ -429,7 +445,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0009s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestMidiStandalone",
@@ -437,7 +453,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0018s"
+            "duration": "0.0014s"
         },
         {
             "classname": "TestMidiTx",
@@ -445,7 +461,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0015s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestMidiTx",
@@ -453,7 +469,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0013s"
+            "duration": "0.0008s"
         },
         {
             "classname": "TestMidiWorker",
@@ -469,7 +485,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0010s"
+            "duration": "0.0011s"
         },
         {
             "classname": "TestOSCManager",
@@ -477,7 +493,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0006s"
+            "duration": "0.0007s"
         },
         {
             "classname": "TestOSCManager",
@@ -485,7 +501,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0010s"
+            "duration": "0.0013s"
         },
         {
             "classname": "TestOSCManager",
@@ -493,7 +509,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0006s"
+            "duration": "0.0007s"
         },
         {
             "classname": "TestOscWorker",
@@ -525,7 +541,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0006s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestAgentMdnsZeroconf",
@@ -541,7 +557,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0014s"
+            "duration": "0.0007s"
         },
         {
             "classname": "TestAgentMdnsZeroconf",
@@ -549,7 +565,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0015s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestAgentStaticIpProber",
@@ -557,7 +573,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0082s"
+            "duration": "0.0015s"
         },
         {
             "classname": "TestAgentStaticIpProber",
@@ -565,7 +581,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0009s"
+            "duration": "0.0011s"
         },
         {
             "classname": "TestAgentUsbEnumerator",
@@ -581,7 +597,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0004s"
+            "duration": "0.0056s"
         },
         {
             "classname": "TestAgentUsbEnumerator",
@@ -589,7 +605,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0003s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestCliVisaFind",
@@ -597,7 +613,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0008s"
+            "duration": "0.0007s"
         },
         {
             "classname": "TestDiscoveryOrchestrator",
@@ -605,7 +621,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0011s"
+            "duration": "0.0008s"
         },
         {
             "classname": "TestDiscoveryOrchestrator",
@@ -613,7 +629,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0014s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestDiscoveryOrchestrator",
@@ -621,7 +637,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0015s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestDiscoveryOrchestrator",
@@ -637,7 +653,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0011s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestVisaConnector",
@@ -645,7 +661,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0006s"
+            "duration": "0.0007s"
         },
         {
             "classname": "TestVisaConnector",
@@ -661,7 +677,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0008s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestVisaConnector",
@@ -669,7 +685,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0010s"
+            "duration": "0.0011s"
         },
         {
             "classname": "TestVisaDisconnector",
@@ -677,7 +693,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0006s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestVisaDisconnector",
@@ -685,7 +701,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0006s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestVisaDisconnector",
@@ -693,7 +709,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0014s"
+            "duration": "0.0013s"
         },
         {
             "classname": "TestVisaDisconnector",
@@ -701,7 +717,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0003s"
+            "duration": "0.0026s"
         },
         {
             "classname": "TestVisaDisconnector",
@@ -709,7 +725,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0011s"
+            "duration": "0.0008s"
         },
         {
             "classname": "TestVisaMqttListener",
@@ -717,7 +733,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0008s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestVisaMqttListener",
@@ -725,7 +741,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0012s"
+            "duration": "0.0017s"
         },
         {
             "classname": "TestVisaMqttListener",
@@ -733,7 +749,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0009s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestVisaMqttListener",
@@ -741,7 +757,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0012s"
+            "duration": "0.0071s"
         },
         {
             "classname": "TestVisaMqttListener",
@@ -749,7 +765,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0062s"
+            "duration": "0.0017s"
         },
         {
             "classname": "TestVisaMqttListener",
@@ -757,7 +773,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0009s"
+            "duration": "0.0013s"
         },
         {
             "classname": "TestVisaGuiPublisher",
@@ -765,7 +781,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0002s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestVisaGuiPublisher",
@@ -789,7 +805,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0018s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestVisaFleet",
@@ -797,7 +813,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0023s"
+            "duration": "0.0030s"
         },
         {
             "classname": "TestVisaLogic",
@@ -821,7 +837,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0060s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestVisaLogic",
@@ -829,7 +845,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.1329s"
+            "duration": "0.0400s"
         },
         {
             "classname": "TestVisaManagerOrchestrator",
@@ -837,7 +853,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0017s"
+            "duration": "0.0018s"
         },
         {
             "classname": "TestVisaScanner",
@@ -845,7 +861,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0002s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestVisaScanner",
@@ -861,7 +877,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0728s"
+            "duration": "0.1782s"
         },
         {
             "classname": "TestVisaScanner",
@@ -869,7 +885,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0004s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestVisaScanner",
@@ -877,7 +893,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0002s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestVisaScanner",
@@ -893,7 +909,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0003s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestVisaScanner",
@@ -909,7 +925,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0005s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestConfigGenerator",
@@ -917,7 +933,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0006s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestConfigReader",
@@ -925,7 +941,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0013s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestConfigReader",
@@ -965,7 +981,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0002s"
+            "duration": "0.0001s"
         },
         {
             "classname": "TestLoggingMatrixManager",
@@ -1024,6 +1040,22 @@
             "duration": "0.0000s"
         },
         {
+            "classname": "TestNegativePaths",
+            "name": "test_csv_ingestion_malformed_data (oaFileImportCSV.Tests.test_negative_paths.TestNegativePaths.test_csv_ingestion_malformed_data)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0005s"
+        },
+        {
+            "classname": "TestNegativePaths",
+            "name": "test_csv_ingestion_missing_file (oaFileImportCSV.Tests.test_negative_paths.TestNegativePaths.test_csv_ingestion_missing_file)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0002s"
+        },
+        {
             "classname": "TestCSVReaderAsset",
             "name": "test_sample_csv_exists (oaFileImportCSV.Tests.test_readers.TestCSVReaderAsset.test_sample_csv_exists)",
             "status": "passed",
@@ -1053,7 +1085,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0000s"
+            "duration": "0.0001s"
         },
         {
             "classname": "TestShowReaderAsset",
@@ -1061,7 +1093,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0000s"
+            "duration": "0.0001s"
         },
         {
             "classname": "TestInitialization",
@@ -1077,7 +1109,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.1016s"
+            "duration": "0.1000s"
         },
         {
             "classname": "TestAsyncGridRenderer",
@@ -1085,7 +1117,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0076s"
+            "duration": "0.0083s"
         },
         {
             "classname": "TestInitialization",
@@ -1138,9 +1170,9 @@
         {
             "classname": "TestWYSIWYGEditorInteractions",
             "name": "test_global_setting_modification_triggers_global_rebuild (oaGuiEditorWYSIWYG.Tests.Managers.test_wysiwyg_editor.TestWYSIWYGEditorInteractions.test_global_setting_modification_triggers_global_rebuild)",
-            "status": "error",
-            "message": "'DummyEditor' object has no attribute 'global_rebuild_event_name'",
-            "cause": "'DummyEditor' object has no attribute 'global_rebuild_event_name'<br><small><i>At test_wysiwyg_editor.py:52 in update_global_setting -> self.event_bus.emit(self.global_rebuild_event_name, {\"setting\": setting_name, \"value\": value})</i></small>",
+            "status": "passed",
+            "message": "",
+            "cause": "",
             "duration": "0.0007s"
         },
         {
@@ -1149,15 +1181,15 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0003s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestWysiwygEditorEntry",
             "name": "test_module_loads_correctly (oaGuiEditorWYSIWYG.Tests.test_Entry.TestWysiwygEditorEntry.test_module_loads_correctly)",
-            "status": "error",
-            "message": "cannot access local variable 'render_tier_frame' where it is not associated with a value",
-            "cause": "cannot access local variable 'render_tier_frame' where it is not associated with a value<br><small><i>At interactive_layout.py:135 in _build_ui -> render_tier_frame.pack(side=\"left\", padx=10)</i></small>",
-            "duration": "0.2387s"
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "2.1521s"
         },
         {
             "classname": "TestEventBus",
@@ -1165,7 +1197,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0006s"
+            "duration": "0.0013s"
         },
         {
             "classname": "TestEventBus",
@@ -1173,7 +1205,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0001s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestEventBus",
@@ -1181,7 +1213,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0002s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestEventBus",
@@ -1189,7 +1221,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0001s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestOverlayManager",
@@ -1197,7 +1229,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0009s"
+            "duration": "0.0011s"
         },
         {
             "classname": "TestOverlayManager",
@@ -1205,15 +1237,15 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0005s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestStateManager",
             "name": "test_add_component_request_handler (oaGuiEditorWYSIWYG.Tests.test_core_components.TestStateManager.test_add_component_request_handler)",
-            "status": "error",
-            "message": "name 'sm_logger' is not defined",
-            "cause": "name 'sm_logger' is not defined<br><small><i>At state.py:376 in _handle_add_component_request -> sm_logger.info(f\"\u2795 StateManager: Handling ADD_COMPONENT_REQUESTED for '{component_name}' from {source_name} at path '{target_path}'.\")</i></small>",
-            "duration": "0.0006s"
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0010s"
         },
         {
             "classname": "TestStateManager",
@@ -1221,7 +1253,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0004s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestStateManager",
@@ -1229,7 +1261,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0002s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestStateManager",
@@ -1237,7 +1269,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0002s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestStateManager",
@@ -1269,7 +1301,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0008s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestDesignModeOverlay",
@@ -1277,7 +1309,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0007s"
+            "duration": "0.0013s"
         },
         {
             "classname": "TestDesignModeOverlay",
@@ -1285,7 +1317,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0006s"
+            "duration": "0.0007s"
         },
         {
             "classname": "TestDesignModeOverlay",
@@ -1309,7 +1341,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0155s"
+            "duration": "0.0203s"
         },
         {
             "classname": "TestKnobWidget",
@@ -1317,7 +1349,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0087s"
+            "duration": "0.0230s"
         },
         {
             "classname": "TestKnobWidget",
@@ -1325,7 +1357,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0116s"
+            "duration": "0.0186s"
         },
         {
             "classname": "TestRotarySelector",
@@ -1333,7 +1365,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0165s"
+            "duration": "0.0150s"
         },
         {
             "classname": "TestRotarySelector",
@@ -1341,7 +1373,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0176s"
+            "duration": "0.0277s"
         },
         {
             "classname": "TestRotarySelector",
@@ -1349,7 +1381,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0200s"
+            "duration": "0.0199s"
         },
         {
             "classname": "TestRotarySelector",
@@ -1357,7 +1389,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0192s"
+            "duration": "0.0184s"
         },
         {
             "classname": "TestButtonActuator",
@@ -1365,7 +1397,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0088s"
+            "duration": "0.0177s"
         },
         {
             "classname": "TestButtonActuator",
@@ -1373,7 +1405,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0165s"
+            "duration": "0.0168s"
         },
         {
             "classname": "TestButtonToggle",
@@ -1381,7 +1413,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0201s"
+            "duration": "0.0233s"
         },
         {
             "classname": "TestButtonToggle",
@@ -1389,7 +1421,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0202s"
+            "duration": "0.0106s"
         },
         {
             "classname": "TestButtonToggler",
@@ -1397,7 +1429,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0211s"
+            "duration": "0.0202s"
         },
         {
             "classname": "TestButtonTrapezoid",
@@ -1405,7 +1437,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0193s"
+            "duration": "0.0212s"
         },
         {
             "classname": "TestButtonTrapezoid",
@@ -1413,7 +1445,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0163s"
+            "duration": "0.0167s"
         },
         {
             "classname": "TestButtonTrapezoidToggler",
@@ -1421,7 +1453,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0261s"
+            "duration": "0.0232s"
         },
         {
             "classname": "TestButtonWink",
@@ -1429,7 +1461,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0214s"
+            "duration": "0.0139s"
         },
         {
             "classname": "TestButtonWinkToggler",
@@ -1437,7 +1469,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0203s"
+            "duration": "0.0234s"
         },
         {
             "classname": "TestFader",
@@ -1445,7 +1477,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0192s"
+            "duration": "0.0213s"
         },
         {
             "classname": "TestFader",
@@ -1453,7 +1485,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0105s"
+            "duration": "0.0141s"
         },
         {
             "classname": "TestFaderBarGraph",
@@ -1461,7 +1493,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0176s"
+            "duration": "0.0192s"
         },
         {
             "classname": "TestFaderBarGraph",
@@ -1469,7 +1501,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0175s"
+            "duration": "0.0141s"
         },
         {
             "classname": "TestFaderDual",
@@ -1477,7 +1509,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0129s"
+            "duration": "0.0200s"
         },
         {
             "classname": "TestFaderDual",
@@ -1485,7 +1517,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0097s"
+            "duration": "0.0159s"
         },
         {
             "classname": "TestFaderHorizontal",
@@ -1493,7 +1525,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0176s"
+            "duration": "0.0187s"
         },
         {
             "classname": "TestFaderHorizontal",
@@ -1501,7 +1533,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0178s"
+            "duration": "0.0192s"
         },
         {
             "classname": "TestFaderLinearTravellingPotentiometer",
@@ -1509,7 +1541,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0145s"
+            "duration": "0.0118s"
         },
         {
             "classname": "TestFaderLinearTravellingPotentiometer",
@@ -1517,7 +1549,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0166s"
+            "duration": "0.0167s"
         },
         {
             "classname": "TestGraphPlotter",
@@ -1525,7 +1557,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.1490s"
+            "duration": "0.1505s"
         },
         {
             "classname": "TestRadarWidget",
@@ -1533,7 +1565,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.1125s"
+            "duration": "0.0100s"
         },
         {
             "classname": "TestGraphPlotter",
@@ -1541,7 +1573,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0189s"
+            "duration": "0.0238s"
         },
         {
             "classname": "TestMousewheelScrollMixin",
@@ -1565,7 +1597,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0254s"
+            "duration": "0.0204s"
         },
         {
             "classname": "TestJsonTree",
@@ -1573,7 +1605,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0229s"
+            "duration": "0.0138s"
         },
         {
             "classname": "TestMeterBar",
@@ -1581,7 +1613,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0199s"
+            "duration": "0.1499s"
         },
         {
             "classname": "TestMeterBar",
@@ -1589,7 +1621,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0080s"
+            "duration": "0.0094s"
         },
         {
             "classname": "TestMeterNeedle",
@@ -1597,7 +1629,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0209s"
+            "duration": "0.0238s"
         },
         {
             "classname": "TestMeterNeedle",
@@ -1605,7 +1637,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0115s"
+            "duration": "0.0157s"
         },
         {
             "classname": "TestMeterNeedleBatch",
@@ -1613,7 +1645,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.1900s"
+            "duration": "0.2153s"
         },
         {
             "classname": "TestRustBallistics",
@@ -1645,7 +1677,39 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0176s"
+            "duration": "0.0177s"
+        },
+        {
+            "classname": "TestRobustness",
+            "name": "test_accessibility_tab_navigation (oaGuiElements.Tests.test_robustness.TestRobustness.test_accessibility_tab_navigation)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0108s"
+        },
+        {
+            "classname": "TestRobustness",
+            "name": "test_fader_boundary_conditions (oaGuiElements.Tests.test_robustness.TestRobustness.test_fader_boundary_conditions)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "5.0095s"
+        },
+        {
+            "classname": "TestRobustness",
+            "name": "test_text_value_box_injection_sanitization (oaGuiElements.Tests.test_robustness.TestRobustness.test_text_value_box_injection_sanitization)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0126s"
+        },
+        {
+            "classname": "TestRobustness",
+            "name": "test_ui_rendering_performance_baseline (oaGuiElements.Tests.test_robustness.TestRobustness.test_ui_rendering_performance_baseline)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0353s"
         },
         {
             "classname": "TestSliderValueCreator",
@@ -1653,7 +1717,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0175s"
+            "duration": "0.0223s"
         },
         {
             "classname": "TestTableCSVService",
@@ -1669,7 +1733,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0005s"
+            "duration": "0.0014s"
         },
         {
             "classname": "TestGraphPlotter",
@@ -1677,7 +1741,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0287s"
+            "duration": "0.0310s"
         },
         {
             "classname": "TestTextLabel",
@@ -1685,7 +1749,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0168s"
+            "duration": "0.0094s"
         },
         {
             "classname": "TestTextLabel",
@@ -1693,7 +1757,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0150s"
+            "duration": "0.0192s"
         },
         {
             "classname": "TestTextTable",
@@ -1701,7 +1765,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0178s"
+            "duration": "0.0157s"
         },
         {
             "classname": "TestTextValueBox",
@@ -1709,7 +1773,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0191s"
+            "duration": "0.0135s"
         },
         {
             "classname": "TestTextValueBox",
@@ -1717,7 +1781,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0205s"
+            "duration": "0.0189s"
         },
         {
             "classname": "TestMousewheelScrollMixin",
@@ -1749,7 +1813,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0003s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestAssetCacheManager",
@@ -1757,7 +1821,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0008s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestAssetCacheManager",
@@ -1765,7 +1829,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0013s"
+            "duration": "0.0015s"
         },
         {
             "classname": "TestAsyncBootstrapEngine",
@@ -1773,7 +1837,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0033s"
+            "duration": "0.0072s"
         },
         {
             "classname": "TestAsyncBootstrapEngine",
@@ -1781,7 +1845,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0014s"
+            "duration": "0.0015s"
         },
         {
             "classname": "TestCanvasButton",
@@ -1797,7 +1861,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0016s"
+            "duration": "0.0017s"
         },
         {
             "classname": "TestCanvasButton",
@@ -1805,7 +1869,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0007s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestUICompositionRoot",
@@ -1813,7 +1877,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0523s"
+            "duration": "0.0542s"
         },
         {
             "classname": "TestFastScanner",
@@ -1821,7 +1885,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0025s"
+            "duration": "0.0059s"
         },
         {
             "classname": "TestFastScanner",
@@ -1829,7 +1893,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0004s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestFastScanner",
@@ -1845,7 +1909,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0026s"
+            "duration": "0.0021s"
         },
         {
             "classname": "TestGuiElements",
@@ -1853,7 +1917,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0027s"
+            "duration": "0.0026s"
         },
         {
             "classname": "TestUniversalGuiLoader",
@@ -1861,7 +1925,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0009s"
+            "duration": "0.0026s"
         },
         {
             "classname": "TestUniversalGuiLoader",
@@ -1869,7 +1933,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0021s"
+            "duration": "0.0060s"
         },
         {
             "classname": "TestGuiWidgetFactory",
@@ -1877,7 +1941,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0098s"
+            "duration": "0.0189s"
         },
         {
             "classname": "TestGuiWidgetFactory",
@@ -1885,7 +1949,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0205s"
+            "duration": "0.0154s"
         },
         {
             "classname": "TestGuiWorker",
@@ -1949,7 +2013,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0009s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestShutdownCoordinator",
@@ -1957,7 +2021,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0604s"
+            "duration": "0.0643s"
         },
         {
             "classname": "TestShutdownCoordinator",
@@ -1965,7 +2029,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0088s"
+            "duration": "0.0087s"
         },
         {
             "classname": "TestTransparency",
@@ -1981,7 +2045,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0028s"
+            "duration": "0.0033s"
         },
         {
             "classname": "TestTransparency",
@@ -1989,7 +2053,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0009s"
+            "duration": "0.0015s"
         },
         {
             "classname": "TestUIAndData",
@@ -1997,7 +2061,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0010s"
+            "duration": "0.0015s"
         },
         {
             "classname": "TestUIAndData",
@@ -2005,7 +2069,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0003s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestUIAndData",
@@ -2013,7 +2077,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0002s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestUIAndData",
@@ -2021,7 +2085,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0011s"
+            "duration": "0.0007s"
         },
         {
             "classname": "TestUITrackingService",
@@ -2029,7 +2093,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0019s"
+            "duration": "0.0022s"
         },
         {
             "classname": "TestUITrackingService",
@@ -2037,7 +2101,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0015s"
+            "duration": "0.0028s"
         },
         {
             "classname": "TestUITrackingService",
@@ -2045,19 +2109,19 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0019s"
+            "duration": "0.0024s"
         },
         {
             "classname": "TestUIWindowManager",
             "name": "test_create_root_window_configures_styling (oaGuiManager.Tests.test_ui_window.TestUIWindowManager.test_create_root_window_configures_styling)",
-            "status": "passed",
-            "message": "",
-            "cause": "",
-            "duration": "0.0014s"
+            "status": "failed",
+            "message": "Expected 'withdraw' to have been called once. Called 0 times.",
+            "cause": "Expected 'withdraw' to have been called once. Called 0 times.<br><small><i>At mock.py:923 in assert_called_once -> raise AssertionError(msg)</i></small>",
+            "duration": "0.0020s"
         },
         {
             "classname": "TestUIWindowManager",
-            "name": "test_create_root_window_maximizes_on_linux (oaGuiManager.Tests.test_ui_window.TestUIWindowManager.test_create_root_window_maximizes_on_linux)",
+            "name": "test_create_root_window_does_not_maximize_immediately_on_linux (oaGuiManager.Tests.test_ui_window.TestUIWindowManager.test_create_root_window_does_not_maximize_immediately_on_linux)",
             "status": "passed",
             "message": "",
             "cause": "",
@@ -2065,11 +2129,11 @@
         },
         {
             "classname": "TestUIWindowManager",
-            "name": "test_reveal_main_window (oaGuiManager.Tests.test_ui_window.TestUIWindowManager.test_reveal_main_window)",
+            "name": "test_reveal_main_window_maximizes_on_linux (oaGuiManager.Tests.test_ui_window.TestUIWindowManager.test_reveal_main_window_maximizes_on_linux)",
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0004s"
+            "duration": "0.0012s"
         },
         {
             "classname": "TestWidgetRegistry",
@@ -2093,7 +2157,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0121s"
+            "duration": "0.0197s"
         },
         {
             "classname": "TestInitialization",
@@ -2125,7 +2189,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0130s"
+            "duration": "0.0208s"
         },
         {
             "classname": "TestStateMirrorEngine",
@@ -2133,7 +2197,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0141s"
+            "duration": "0.0196s"
         },
         {
             "classname": "TestStateMirrorEngine",
@@ -2141,7 +2205,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0116s"
+            "duration": "0.0163s"
         },
         {
             "classname": "TestInitialization",
@@ -2157,7 +2221,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0066s"
+            "duration": "0.0000s"
         },
         {
             "classname": "TestInstallation",
@@ -2181,7 +2245,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0000s"
+            "duration": "0.0001s"
         },
         {
             "classname": "TestInstallationWorker",
@@ -2229,7 +2293,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0005s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestMatrixGate",
@@ -2237,7 +2301,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0012s"
+            "duration": "0.0008s"
         },
         {
             "classname": "TestApplicationInitializer",
@@ -2245,7 +2309,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0008s"
+            "duration": "0.0014s"
         },
         {
             "classname": "TestApplicationInitializer",
@@ -2253,7 +2317,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0008s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestOrchestrationWorker",
@@ -2269,7 +2333,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0006s"
+            "duration": "0.0009s"
         },
         {
             "classname": "TestProtocolGuard",
@@ -2277,7 +2341,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0001s"
+            "duration": "0.0002s"
         },
         {
             "classname": "TestInitialization",
@@ -2301,7 +2365,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0002s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestPipelineRust",
@@ -2325,7 +2389,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0010s"
+            "duration": "0.0012s"
         },
         {
             "classname": "TestSplinker",
@@ -2333,7 +2397,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0002s"
+            "duration": "0.0003s"
         },
         {
             "classname": "TestSplinker",
@@ -2341,7 +2405,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0003s"
+            "duration": "0.0004s"
         },
         {
             "classname": "TestInitialization",
@@ -2357,7 +2421,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0010s"
+            "duration": "0.0011s"
         },
         {
             "classname": "TestLogRealigner",
@@ -2365,7 +2429,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0009s"
+            "duration": "0.0005s"
         },
         {
             "classname": "TestReaders",
@@ -2389,7 +2453,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0020s"
+            "duration": "0.0017s"
         },
         {
             "classname": "TestStateCache",
@@ -2397,7 +2461,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0017s"
+            "duration": "0.0010s"
         },
         {
             "classname": "TestInitialization",
@@ -2413,7 +2477,7 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0004s"
+            "duration": "0.0006s"
         },
         {
             "classname": "TestConfigIniEditor",
@@ -2421,7 +2485,119 @@
             "status": "passed",
             "message": "",
             "cause": "",
-            "duration": "0.0073s"
+            "duration": "0.0019s"
+        },
+        {
+            "classname": "TestLauncher",
+            "name": "test_dynamic_snmp_loading (oaThreadManager.Tests.Workers.test_launcher.TestLauncher.test_dynamic_snmp_loading)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0097s"
+        },
+        {
+            "classname": "TestLauncher",
+            "name": "test_launch_core_managers_structure (oaThreadManager.Tests.Workers.test_launcher.TestLauncher.test_launch_core_managers_structure)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0078s"
+        },
+        {
+            "classname": "TestEntry",
+            "name": "test_placeholder (oaThreadManager.Tests.test_Entry.TestEntry.test_placeholder)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestThreadWorker",
+            "name": "test_placeholder_method (oaThreadManager.Tests.test_thread_worker.TestThreadWorker.test_placeholder_method)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestInitialization",
+            "name": "test_module_loads (oaTranslator.Tests.test_entry.TestInitialization.test_module_loads)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestTranslatorWorker",
+            "name": "test_placeholder_method (oaTranslator.Tests.test_translator_worker.TestTranslatorWorker.test_placeholder_method)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0000s"
+        },
+        {
+            "classname": "TestFleetStatusMonitor",
+            "name": "test_initialization_and_subscription (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_initialization_and_subscription)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0007s"
+        },
+        {
+            "classname": "TestFleetStatusMonitor",
+            "name": "test_on_scan_complete_malformed_payload (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_complete_malformed_payload)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0009s"
+        },
+        {
+            "classname": "TestFleetStatusMonitor",
+            "name": "test_on_scan_complete_no_devices (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_complete_no_devices)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0007s"
+        },
+        {
+            "classname": "TestFleetStatusMonitor",
+            "name": "test_on_scan_complete_with_devices (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_complete_with_devices)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0010s"
+        },
+        {
+            "classname": "TestFleetStatusMonitor",
+            "name": "test_on_scan_start (oaWatchdog.Tests.test_fleet_status_monitor.TestFleetStatusMonitor.test_on_scan_start)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0007s"
+        },
+        {
+            "classname": "TestWatchdogFunctions",
+            "name": "test_kick_watchdog (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_kick_watchdog)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0147s"
+        },
+        {
+            "classname": "TestWatchdogFunctions",
+            "name": "test_register_panic_callback (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_register_panic_callback)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0002s"
+        },
+        {
+            "classname": "TestWatchdogFunctions",
+            "name": "test_start_heartbeat (oaWatchdog.Tests.test_watchdog.TestWatchdogFunctions.test_start_heartbeat)",
+            "status": "passed",
+            "message": "",
+            "cause": "",
+            "duration": "0.0006s"
         }
     ]
 }

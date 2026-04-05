@@ -110,8 +110,12 @@ class Config(ConfigDefaults):
         if self._s_get(config, "System", "randomize_ports", False, "bool"):
             import random
             offset = random.randint(1, 100)
+            # Apply randomization to the ports read from config.ini (8000, 9000)
             self.OSC_RX_PORT += offset
             self.OSC_TX_PORT += offset
+            logger.info(f"🔊 [CONFIG] Randomized OSC ports: RX={self.OSC_RX_PORT}, TX={self.OSC_TX_PORT}")
+        else:
+            logger.debug(f"🔊 [CONFIG] Using configured OSC ports: RX={self.OSC_RX_PORT}, TX={self.OSC_TX_PORT}")
 
     def _parse_rest_settings(self, config):
         self.REST_HOST = self._s_get(config, "REST", "rest_host", self.REST_HOST)
@@ -156,7 +160,9 @@ class Config(ConfigDefaults):
         setup_path = GLOBAL_PROJECT_ROOT / "oaInstallation" / "Setup.py"
         
         config = ConfigLoader.load(config_path, setup_path, LOCAL_DEBUG)
-        if not config: return
+        if not config: 
+            logger.error(f"❌ [CONFIG] Failed to load configuration from {config_path} or {setup_path}.")
+            return
 
         self.CURRENT_VERSION = self._s_get(config, "Version", "CURRENT_VERSION", self.CURRENT_VERSION)
         self.MISSION_CRITICAL_MODE = self._s_get(config, "System", "MISSION_CRITICAL_MODE", self.MISSION_CRITICAL_MODE, "bool")

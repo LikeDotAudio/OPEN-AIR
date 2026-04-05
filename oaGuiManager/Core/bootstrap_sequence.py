@@ -51,7 +51,9 @@ class AsyncBootstrapEngine:
             )
 
             # Phase 5: Launch
-            self.root.after(1, lambda: self._launch_app(
+            # INCREASED DELAY: Give X11 200ms to stabilize and process destruction events
+            # of any transient windows before the heavy GUI build begins.
+            self.root.after(200, lambda: self._launch_app(
                 mqtt_conn=services["mqtt_conn"], 
                 sub_router=services["sub_router"], 
                 mirror_engine=services["mirror_engine"], 
@@ -110,6 +112,11 @@ class AsyncBootstrapEngine:
             from oaGuiBuildShell.Entry import Application
             from .ui_window import UIWindowManager
 
+            # ⚡ SANITIZATION: Destroy the splash screen BEFORE building the application 
+            # GUI to prevent X11 display handle race conditions (Matplotlib vs. Splash).
+            self.splash.hide()
+            self.root.update_idletasks()
+
             with mirror_engine.suspend_bindings():
                 def _on_ignition_complete():
                     # Calculate remaining time to fulfill the 10-second minimum
@@ -135,19 +142,24 @@ class AsyncBootstrapEngine:
                     self.splash.set_status(message="Ignition Phase 1: Warming up...")
                     self.root.after(int(phase_duration * 1000), _phase_2)
 
-                app = Application(
-                    parent=self.root, 
-                    root=self.root, 
-                    mqtt_connection_manager=mqtt_conn, 
-                    subscriber_router=sub_router, 
-                    state_mirror_engine=mirror_engine, 
-                    state_cache_manager=state_cache, 
-                    osc_manager=self.services.get("osc_manager"),
-                    snmp_manager=self.services.get("snmp_manager"),
-                    midi_manager=self.services.get("midi_manager"),
-                    on_complete=_on_ignition_complete
-                )
-                app.pack(fill=tk.BOTH, expand=True)
+                try:
+                    app = Application(
+                        parent=self.root, 
+                        root=self.root, 
+                        mqtt_connection_manager=mqtt_conn, 
+                        subscriber_router=sub_router, 
+                        state_mirror_engine=mirror_engine, 
+                        state_cache_manager=state_cache, 
+                        osc_manager=self.services.get("osc_manager"),
+                        snmp_manager=self.services.get("snmp_manager"),
+                        midi_manager=self.services.get("midi_manager"),
+                        on_complete=_on_ignition_complete
+                    )
+                    app.pack(fill=tk.BOTH, expand=True)
+                except tk.TclError as e:
+                    logger.error(f"🖥️🎨 [UI] TclError during Application build: {e}")
+                    # Attempt a final rescue deiconify
+                    self.root.deiconify()
                 
                 # Register main app back to services
                 self.services["app"] = app

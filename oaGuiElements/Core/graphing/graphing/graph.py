@@ -43,8 +43,8 @@ def create_base_plot(parent_frame: tk.Frame, config: Dict[str, Any]) -> tuple:
     height = config.get("height") or geom.get("height") or layout_config.get("height") or 400
     
     # Ensure we don't start with 0 or 1 which triggers the "pixel wide" bug
-    width = max(width, 100)
-    height = max(height, 50)
+    width = max(1, int(float(width)))
+    height = max(1, int(float(height)))
 
     # ⚡ Enable transparency at the Figure level
     fig = Figure(
@@ -60,7 +60,10 @@ def create_base_plot(parent_frame: tk.Frame, config: Dict[str, Any]) -> tuple:
 
     # ⚡ Ensure the Tkinter widget itself is configured for transparency
     # (Though it still needs the Industrial Transparency slice to look perfect)
-    canvas_widget.configure(highlightthickness=0, bd=0)
-    canvas_widget.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+    try:
+        canvas_widget.configure(highlightthickness=0, bd=0)
+        canvas_widget.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+    except tk.TclError as e:
+        matrix_log("UI", "GUI_ELEMENTS", "create_base_plot", f"⚠️ Canvas widget configuration skipped: {e}", "TRACE")
 
     return fig, ax, canvas

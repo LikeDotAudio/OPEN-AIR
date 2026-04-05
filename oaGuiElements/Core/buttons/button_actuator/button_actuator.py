@@ -40,7 +40,8 @@ class ActuatorButton(CanvasButton, ActuatorInteractionMixin, ActuatorStateMixin)
         # Super initialization (CanvasButton)
         super().__init__(
             parent, text=self.text_inactive, command=None,
-            width=config.get("width", 100), height=config.get("height", 50),
+            width=config.get("layout", {}).get("width", 100),
+            height=config.get("layout", {}).get("height", 50),
             corner_radius=config.get("layout", {}).get("corner_radius", 6),
             bg_color=config.get("bg_color", "#1a1a1a"),
             active_color=config.get("active_color", "#FF9900"),

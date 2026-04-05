@@ -130,6 +130,13 @@ class LayoutParser:
         layout_type = layout_data.get("type", "unknown")
         parsed_data = {}
 
+        # Extract behavior properties for overflow handling
+        behavior_data = layout_data.get("behavior", {})
+        parsed_data["overflow_ew"] = behavior_data.get("overflow_ew", "auto") # Default to auto if not specified
+        parsed_data["overflow_ns"] = behavior_data.get("overflow_ns", "auto") # Default to auto if not specified
+        parsed_data["fluid_ew"] = behavior_data.get("fluid_ew", False) # Default fluid to False
+        parsed_data["fluid_ns"] = behavior_data.get("fluid_ns", False)
+
         if layout_type in ["horizontal_split", "vertical_split"]:
             orientation = tk.HORIZONTAL if layout_type == "horizontal_split" else tk.VERTICAL
             parsed_data["orientation"] = orientation
@@ -189,6 +196,29 @@ class LayoutParser:
         This handles the case where no layout.json is present.
         It uses a chain of responsibility: checks for splits, then notebooks, then defaults.
         """
+        # --- Robustness Improvement ---
+        # If path is a file, treat it as a single GUI component.
+        # This prevents errors if _parse_directory_listing is mistakenly called with a file.
+        if path.is_file():
+            LAYOUT_LOGGER.warning(f"Warning: _parse_directory_listing called with a file path: {path}. Treating as single GUI file.")
+            if path.suffix in [".json", ".py"]:
+                return {
+                    "type": "directory_listing",
+                    "data": {
+                        "sub_dirs": [],
+                        "gui_files": [path],
+                    },
+                }
+            return {"type": "error", "data": {"error_message": f"Not a valid GUI file passed to _parse_directory_listing: {path}"}}
+        # --- End Robustness Improvement ---
+
+        # Original check: if path is not a directory, raise error.
+        # This check is now less likely to be hit for files due to the above block.
+        # It would still catch non-existent paths or other non-directory types.
+        if not path.is_dir():
+            LAYOUT_LOGGER.error(f"Error: Expected a directory but got a file for parsing: {path}")
+            return {"type": "error", "data": {"error_message": f"Expected a directory but got a file: {path}"}}
+
         matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Parsing directory listing via naming convention for: '{path}'", level="DEBUG")
         try:
             sub_dirs = sorted([d for d in path.iterdir() if d.is_dir() and not d.name.startswith('.') and not d.name.startswith('__')])

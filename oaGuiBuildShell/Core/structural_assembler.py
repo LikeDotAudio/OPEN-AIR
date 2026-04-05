@@ -12,7 +12,7 @@ class StructuralAssembler:
 
     @staticmethod
     def create_block(parent, value, builder):
-        target = tk.Canvas(parent, bd=0, relief="flat", highlightthickness=0, bg="#2b2b2b", width=1, height=1)
+        target = tk.Canvas(parent, bd=0, relief="flat", highlightthickness=0, bg="#2b2b2b", width=10, height=10)
         if builder and hasattr(builder, 'show_structure') and builder.show_structure.get():
             target.config(highlightbackground="red", highlightthickness=1)
         TransparencyManager.apply_transparency(target, target, value, builder)
@@ -52,9 +52,6 @@ class StructuralAssembler:
         # ⚡ Inner frame holds the children
         inner = tk.Frame(viewport, bg="#2b2b2b", bd=0, highlightthickness=0, width=w, height=h)
         inner_id = viewport.create_window((0, 0), window=inner, anchor="nw")
-        
-        # When the outer hull resizes, force the viewport canvas to match
-        hull.bind("<Configure>", lambda e: viewport.config(width=max(1, e.width), height=max(1, e.height)))
         
         # When the inner content resizes, just update the scrollable area
         inner.bind("<Configure>", lambda e: viewport.configure(scrollregion=viewport.bbox("all")))

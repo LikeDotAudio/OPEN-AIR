@@ -31,8 +31,8 @@ class TestUIWindowManager(unittest.TestCase):
         # Verify minimum size
         mock_root.minsize.assert_called_with(800, 600)
         
-        # Verify it starts withdrawn
-        mock_root.withdraw.assert_called_once()
+        # Verify withdraw is not called
+        mock_root.withdraw.assert_not_called()
 
     @patch('tkinter.Tk')
     @patch('sys.platform', 'linux')

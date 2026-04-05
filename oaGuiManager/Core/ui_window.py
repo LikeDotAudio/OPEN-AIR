@@ -42,7 +42,7 @@ class UIWindowManager:
         root.minsize(WINDOW_MIN_WIDTH, WINDOW_MIN_HEIGHT)
         matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Enforced minimum window size: {WINDOW_MIN_WIDTH}x{WINDOW_MIN_HEIGHT}", level="DEBUG")
     
-        root.withdraw()
+        # root.withdraw() # Removed as per BUG_20260404_225000.md to fix X11 BadValue error.
         return root
 
     @staticmethod
@@ -69,9 +69,12 @@ class UIWindowManager:
             
             # Fallback to setting geometry if maximization fails
             matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "Maximization failed. Falling back to setting window geometry...", level="DEBUG")
-            sw, sh = max(1, root.winfo_screenwidth()), max(1, root.winfo_screenheight())
-            root.geometry(f"{sw}x{sh}+0+0")
-            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Set fallback geometry to {sw}x{sh}+0+0.", level="DEBUG")
+            try:
+                sw, sh = max(1, root.winfo_screenwidth()), max(1, root.winfo_screenheight())
+                root.geometry(f"{sw}x{sh}+0+0")
+                matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Set fallback geometry to {sw}x{sh}+0+0.", level="DEBUG")
+            except tk.TclError as e:
+                logger.error(f"🖥️🎨 [UI] TclError during fallback geometry setting: {e}")
         except Exception as e: # Catch any other unexpected errors
             logger.error(f"🖥️🎨 [UI] Unexpected error during window attribute/geometry setting: {e}")
             logger.error(f"Traceback: {traceback.format_exc()}")
@@ -80,5 +83,11 @@ class UIWindowManager:
             root.geometry(f"{sw}x{sh}+0+0")
             matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"Set fallback geometry due to unexpected error to {sw}x{sh}+0+0.", level="DEBUG")
 
-        root.deiconify()
+        # ⚡ SPLASH DISMISSAL: Destroy the splash screen BEFORE revealing the main window 
+        # to ensure X11 display handles are correctly transferred and to avoid 
+        # geometry calculation conflicts.
         splash.hide()
+        root.update_idletasks()
+
+        root.deiconify()
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "🖥️🎨 [UI] Main window deiconified.", level="DEBUG")

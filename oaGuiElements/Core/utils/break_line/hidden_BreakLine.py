@@ -61,14 +61,18 @@ class BuilderBreakLineCreator(TransparencyMixin):
         if style == "FOLD":
             thickness = max(thickness, 4) 
 
-        if orientation == "vertical":
-            frame_w = thickness + 2 * padx
-            frame_h = int(length) if length else 1
-            frame = tk.Canvas(parent_widget, width=frame_w, height=frame_h, bd=0, highlightthickness=0, relief="flat", bg=p_bg)
-        else:
-            frame_h = thickness + 2 * pady
-            frame_w = int(length) if length else 1
-            frame = tk.Canvas(parent_widget, width=frame_w, height=frame_h, bd=0, highlightthickness=0, relief="flat", bg=p_bg)
+        try:
+            if orientation == "vertical":
+                frame_w = max(10, thickness + 2 * padx)
+                frame_h = max(10, int(length) if length else 1)
+                frame = tk.Canvas(parent_widget, width=frame_w, height=frame_h, bd=0, highlightthickness=0, relief="flat", bg=p_bg)
+            else:
+                frame_h = max(10, thickness + 2 * pady)
+                frame_w = max(10, int(length) if length else 1)
+                frame = tk.Canvas(parent_widget, width=frame_w, height=frame_h, bd=0, highlightthickness=0, relief="flat", bg=p_bg)
+        except tk.TclError as e:
+            matrix_log("ui", "gui_elements", "make_break_line", f"⚠️ Break line canvas creation failed: {e}. Falling back to 10x10.", "TRACE")
+            frame = tk.Canvas(parent_widget, width=10, height=10, bd=0, highlightthickness=0, relief="flat", bg=p_bg)
 
         # ⚡ AUTO-STRETCH
         if not layout.get("sticky"):

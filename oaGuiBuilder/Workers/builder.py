@@ -246,10 +246,13 @@ class DynamicGuiBuilder(
                 matrix_log("gui", "gui_builder", "_perform_canvas_resize", f"📐 [RESIZE] {self.tab_name}: Canvas={width}x{canvas_height}, Req={req_width}x{req_height} -> New={new_width}x{new_height}", "DEBUG")
             
             try:
-                self.canvas.itemconfig(self.canvas_window_id, width=new_width, height=new_height)
+                # ⚡ HARDENING: Ensure we never send 0x0 to X11 configuration
+                w_cfg = max(1, int(new_width))
+                h_cfg = max(1, int(new_height))
+                self.canvas.itemconfig(self.canvas_window_id, width=w_cfg, height=h_cfg)
                 self._trigger_background_sync()
-            except tk.TclError:
-                pass
+            except tk.TclError as e:
+                matrix_log("gui", "gui_builder", "_perform_canvas_resize", f"⚠️ Canvas item configuration skipped: {e}", "TRACE")
 
     def _on_visibility(self, event=None):
         if not self.winfo_exists(): return

@@ -66,12 +66,16 @@ class SplashScreen:
         def _update_ui():
             if not self.win or not self.win.winfo_exists(): return
             if not self.status_label:
-                self.status_label = tk.Label(self.win, bg="black", fg="#33A1FD", font=("Arial", 10, "bold"))
-                self.status_label.place(relx=0.5, rely=0.8, anchor="center")
+                self.status_label = tk.Label(self.win, bg="black", fg="#33A1FD", font=("Arial", 10, "bold"), width=1, height=1)
+                try:
+                    self.status_label.place(relx=0.5, rely=0.8, anchor="center")
+                except tk.TclError: pass
             
-            self.status_label.config(text=message)
-            try: 
+            try:
+                self.status_label.config(text=message)
                 self.win.update_idletasks()
+            except tk.TclError as e:
+                matrix_log("ui", "gui_manager", "set_status", f"⚠️ Splash status update skipped: {e}", "TRACE")
             except Exception as e:
                 vocal_capture("UI", f"SplashScreen: Update failure: {e}")
 
@@ -81,6 +85,14 @@ class SplashScreen:
     def hide(self):
         """Safely dismisses the splash screen."""
         if self.win and self.win.winfo_exists():
-            self.animator.stop(); self.win.destroy(); self.win = None
+            # ⚡ FORCE SYNCHRONOUS DESTRUCTION: Ensure the splash screen is fully 
+            # purged from the X server's memory before the main GUI settles.
+            self.win.withdraw()          # Hide immediately
+            self.win.update_idletasks() # Flush geometry events
+            
+            self.animator.stop()
+            self.win.destroy()
+            self.win = None
+            
             if LOCAL_DEBUG:
                 matrix_log("ui", "gui_manager", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "👋 SplashScreen dismissed.", "DEBUG")

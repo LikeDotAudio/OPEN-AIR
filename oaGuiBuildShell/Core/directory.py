@@ -87,57 +87,130 @@ class DirectoryBuilderMixin:
                 orientation = layout_data.get("orientation", tk.HORIZONTAL if layout_type == "horizontal_split" else tk.VERTICAL)
                 matrix_log("gui", "gui_builder", "_build_from_directory", f"🏗️ [BUILDER] Creating SplitPane (Orient: {orientation})", "DEBUG")
                 paned_window = ttk.PanedWindow(parent_widget, orient=orientation)
-                paned_window.pack(fill=tk.BOTH, expand=True)
+                
+                try:
+                    paned_window.pack(fill=tk.BOTH, expand=True)
+                except tk.TclError as e:
+                    matrix_log("gui", "gui_builder", "_build_from_directory", f"⚠️ PanedWindow pack skipped: {e}", "TRACE")
 
                 panels = layout_data.get("panels", [])
-                panel_frames = [tk.Frame(paned_window, borderwidth=0, relief="flat", bg=self.theme_colors["bg"], width=1, height=1) for _ in panels]
-                for i, frame in enumerate(panel_frames):
-                    weight = int(panels[i].get("weight", 1))
-                    matrix_log("gui", "gui_builder", "_build_from_directory", f"  ├─ Adding Panel {i}: Path={panels[i]['path']}, Weight={weight}", "TRACE")
-                    paned_window.add(frame)
-                    paned_window.pane(frame, weight=weight)
+                
+                # Retrieve overflow settings for the current split pane
+                # These are now parsed by LayoutParser and available in layout_data
+                panel_overflow_ew = layout_data.get("overflow_ew", "auto")
+                panel_overflow_ns = layout_data.get("overflow_ns", "auto")
 
-                def _process_panels(idx=0):
-                    if idx >= len(panels):
+                panel_widget_containers = [] # To store the widget that will contain the panel's content
+                panel_frames = [] # Keep track of the base frames for each panel
+                
+                for i, panel_data in enumerate(panels):
+                    # Create a base frame for the panel within the PanedWindow
+                    base_frame = tk.Frame(paned_window, borderwidth=0, relief="flat", bg=self.theme_colors["bg"], width=10, height=10)
+                    panel_frames.append(base_frame) # Keep track of the base frame
+                    weight = int(panel_data.get("weight", 1))
+                    matrix_log("gui", "gui_builder", "_build_from_directory", f"  ├─ Adding Panel {i}: Path={panel_data['path']}, Weight={weight}", "TRACE")
+                    
+                    widget_to_build_into = base_frame # Default: build directly into the frame
+                    
+                    # If overflow is 'auto' horizontally or vertically, create a scrollable canvas
+                    if panel_overflow_ew == "auto" or panel_overflow_ns == "auto":
+                        from oaGuiBuilder.Workers.builder import AutoScrollbar
+                        # Create a canvas that will hold the scrollable content
+                        canvas = tk.Canvas(base_frame, borderwidth=0, highlightthickness=0, relief="flat", bg=self.theme_colors["bg"])
+                        
+                        base_frame.grid_rowconfigure(0, weight=1)
+                        base_frame.grid_columnconfigure(0, weight=1)
+                        
+                        h_scrollbar = None
+                        if panel_overflow_ew == "auto":
+                            h_scrollbar = AutoScrollbar(base_frame, orient=tk.HORIZONTAL, command=canvas.xview)
+                            canvas.configure(xscrollcommand=h_scrollbar.set)
+                        
+                        v_scrollbar = None
+                        if panel_overflow_ns == "auto":
+                            v_scrollbar = AutoScrollbar(base_frame, orient=tk.VERTICAL, command=canvas.yview)
+                            canvas.configure(yscrollcommand=v_scrollbar.set)
+
+                        canvas.grid(row=0, column=0, sticky="nsew")
+                        if h_scrollbar: h_scrollbar.grid(row=1, column=0, sticky="ew")
+                        if v_scrollbar: v_scrollbar.grid(row=0, column=1, sticky="ns")
+
+                        widget_to_build_into = canvas # Content will be built into the canvas
+                    
+                    panel_widget_containers.append(widget_to_build_into) # Store the widget to build into for this panel
+
+                    try:
+                        paned_window.add(base_frame) # Add the base frame to the PanedWindow
+                        paned_window.pane(base_frame, weight=weight)
+                    except tk.TclError as e:
+                        matrix_log("gui", "gui_builder", "_build_from_directory", f"⚠️ Panel addition skipped: {e}", "TRACE")
+
+                # Define _process_panels to recursively build content into the appropriate widget
+                def _process_panels(panel_index=0):
+                    if panel_index >= len(panels):
                         if on_complete: on_complete()
                         return
+                    
                     if hasattr(self, 'root') and self.root: self.root.update_idletasks()
-                    panel_path = panels[idx]["path"]
-                    frame = panel_frames[idx]
-                    matrix_log("gui", "gui_builder", "_build_from_directory", f"  └─ Building Panel Content: {panel_path}", "DEBUG")
-                    self._build_from_directory(path=panel_path, parent_widget=frame, on_complete=lambda: _process_panels(idx + 1))
+                    
+                    panel_data = panels[panel_index]
+                    panel_path = panel_data["path"]
+                    
+                    # Use the correct widget to build into (frame or canvas)
+                    widget_to_build_into = panel_widget_containers[panel_index]
+                    
+                    # Pass down the overflow behavior settings for potential use by child widgets
+                    behavior_override_for_panel = {
+                        "behavior": {
+                            "overflow_ew": panel_overflow_ew,
+                            "overflow_ns": panel_overflow_ns
+                        }
+                    }
+                    
+                    self._build_from_directory(path=panel_path, parent_widget=widget_to_build_into, 
+                                               on_complete=lambda: _process_panels(panel_index + 1), 
+                                               layout_override=behavior_override_for_panel) # Pass override
 
+                # Initial call to start processing panels
                 self.after(1, lambda: _process_panels(0))
+
+                paned_window.sash_config_in_progress = False
 
                 def configure_sash(event=None):
                     if not paned_window.winfo_exists(): return
-                    w, h = paned_window.winfo_width(), paned_window.winfo_height()
-                    if w <= 20 or h <= 20: return
-                    total_weight = sum(max(1, p.get("weight", 1)) for p in panels)
-                    if total_weight == 0: return
-                    cumulative_size = 0
-                    last_pos = 0
+                    if getattr(paned_window, "sash_config_in_progress", False): return
                     
+                    paned_window.sash_config_in_progress = True
                     try:
-                        for i in range(len(panels) - 1):
-                            weight = max(1, panels[i].get("weight", 1))
-                            if orientation == tk.HORIZONTAL:
-                                cumulative_size += (w * weight) / total_weight
-                                pos = max(last_pos + 1, min(int(w) - (len(panels) - i), int(cumulative_size)))
-                                # ⚡ HARDENING: Ensure pos is at least 1 and within bounds before calling sashpos
-                                pos = max(1, int(pos))
-                                paned_window.sashpos(i, pos)
-                            else:
-                                cumulative_size += (h * weight) / total_weight
-                                pos = max(last_pos + 1, min(int(h) - (len(panels) - i), int(cumulative_size)))
-                                # ⚡ HARDENING: Ensure pos is at least 1 and within bounds before calling sashpos
-                                pos = max(1, int(pos))
-                                paned_window.sashpos(i, pos)
-                            last_pos = pos
-                    except tk.TclError as e:
-                        # 🛡️ RECURSION GUARD: Catch TclErrors to prevent X11 BadValue (0x0) crashes 
-                        # during rapid layout changes or initial settling.
-                        matrix_log("gui", "gui_builder", "configure_sash", f"⚠️ Sash positioning skipped: {e}", "TRACE")
+                        w, h = paned_window.winfo_width(), paned_window.winfo_height()
+                        if w <= 20 or h <= 20: return
+                        total_weight = sum(max(1, p.get("weight", 1)) for p in panels)
+                        if total_weight == 0: return
+                        cumulative_size = 0
+                        last_pos = 0
+                        
+                        try:
+                            for i in range(len(panels) - 1):
+                                weight = max(1, panels[i].get("weight", 1))
+                                if orientation == tk.HORIZONTAL:
+                                    cumulative_size += (w * weight) / total_weight
+                                    pos = max(last_pos + 1, min(int(w) - (len(panels) - i), int(cumulative_size)))
+                                    # ⚡ HARDENING: Ensure pos is at least 1 and within bounds before calling sashpos
+                                    pos = max(1, int(pos))
+                                    paned_window.sashpos(i, pos)
+                                else:
+                                    cumulative_size += (h * weight) / total_weight
+                                    pos = max(last_pos + 1, min(int(h) - (len(panels) - i), int(cumulative_size)))
+                                    # ⚡ HARDENING: Ensure pos is at least 1 and within bounds before calling sashpos
+                                    pos = max(1, int(pos))
+                                    paned_window.sashpos(i, pos)
+                                last_pos = pos
+                        except tk.TclError as e:
+                            # 🛡️ RECURSION GUARD: Catch TclErrors to prevent X11 BadValue (0x0) crashes 
+                            # during rapid layout changes or initial settling.
+                            matrix_log("gui", "gui_builder", "configure_sash", f"⚠️ Sash positioning skipped: {e}", "TRACE")
+                    finally:
+                        paned_window.sash_config_in_progress = False
                 
                 paned_window.bind("<Configure>", configure_sash, add="+")
                 self.after(50, configure_sash)

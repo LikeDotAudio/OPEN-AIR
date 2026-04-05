@@ -46,7 +46,7 @@ class CanvasButton(tk.Canvas):
         self.config_data = config
         self.transparency_applicator = transparency_applicator
 
-        super().__init__(parent, width=width, height=height, 
+        super().__init__(parent, width=max(1, int(width)), height=max(1, int(height)), 
                          bg=parent.cget("bg") if not transparency_applicator else "#2b2b2b", 
                          highlightthickness=0, bd=0, relief="flat", **kwargs)
 

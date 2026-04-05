@@ -12,7 +12,7 @@ class CMDPInteractionMixin:
     def on_click(self, e):
         f = self.get_fader_at(e.x, e.y)
         if f:
-            self.active_fader = f; f.dragging = True; f.lift()
+            self.active_fader = f; f.dragging = True; self.canvas.lift(f.widget_id)
             f.start_val, f.start_x, f.start_y = float(f.val_var.get()), e.x, e.y
 
     def on_drag(self, e):
@@ -48,7 +48,7 @@ class CMDPInteractionMixin:
     def on_scroll(self, e):
         f = self.get_fader_at(e.x, e.y)
         if f:
-            f.lift(); delta = 1 if (e.num == 4 or (hasattr(e, 'delta') and e.delta > 0)) else -1
+            self.canvas.lift(f.widget_id); delta = 1 if (e.num == 4 or (hasattr(e, 'delta') and e.delta > 0)) else -1
             is_alt = (e.state & 0x0008) or (e.state & 0x20000)
             if is_alt: f.angle_var.set(float(f.angle_var.get()) + delta * 3)
             else: f.rot_var.set(max(0, min(100, float(f.rot_var.get()) + delta * 5)))

@@ -88,7 +88,7 @@ def main():
 
     # --- Supervisor Setup ---
     GLOBAL_PROJECT_ROOT, data_dir = initialize_paths()
-    log_dir = pathlib.Path(data_dir) / "debug"
+    log_dir = pathlib.Path(data_dir) / "oaDataLogs"
     set_log_directory(log_dir, partition="SUP")
     
     app_config = Config.get_instance()

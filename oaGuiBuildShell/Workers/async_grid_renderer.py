@@ -59,11 +59,18 @@ class AsyncGridRenderer:
                 try:
                     parent_frame.grid_propagate(False)
                     if hasattr(parent_frame, 'pack_propagate'): parent_frame.pack_propagate(False)
-                    w, h = data.get("width") or geom.get("width"), data.get("height") or geom.get("height")
-                    if w and int(w) > 0: parent_frame.config(width=int(w))
-                    if h and int(h) > 0: parent_frame.config(height=int(h))
-                except Exception as e:
-                    matrix_log("ui", "gui_shell", "render", f"Geometry configuration skipped: {e}", "TRACE")
+                    w = data.get("width") or geom.get("width")
+                    h = data.get("height") or geom.get("height")
+                    # ⚡ HARDENING: Enforce 1px floor and handle type conversion safely
+                    if w:
+                        w_val = max(1, int(float(w)))
+                        parent_frame.config(width=w_val)
+                    if h:
+                        h_val = max(1, int(float(h)))
+                        parent_frame.config(height=h_val)
+                except (tk.TclError, ValueError, TypeError) as e:
+                    # 🛡️ Catching TclError (X11) and conversion errors
+                    matrix_log("ui", "gui_shell", "render", f"⚠️ Geometry configuration skipped: {e}", "TRACE")
 
             fields = data.get("fields", data.get("blocks"))
             

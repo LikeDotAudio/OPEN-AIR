@@ -1,3 +1,8 @@
+# /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/2_monitors/1588_PTP_Monitor/ptp_monitor.py
+# This file contains the actual implementation of PtpMonitor.py.
+# It is now located here for GUI discovery purposes, but the primary
+# implementation logic resides in oaPTP.Interface.ptp_monitor.
+
 import sys
 
 import inspect
@@ -86,6 +91,7 @@ class PtpMonitor(tk.Frame, TransparencyMixin):
         
         sy = ttk.Scrollbar(self.list_container, orient=tk.VERTICAL, command=self.packet_tree.yview)
         self.packet_tree.configure(yscrollcommand=sy.set); self.packet_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True); sy.pack(side=tk.RIGHT, fill=tk.Y)
+        
         self.packet_tree.bind("<<TreeviewSelect>>", self.on_packet_select)
 
         # 2. MIDDLE: Meters
@@ -98,7 +104,7 @@ class PtpMonitor(tk.Frame, TransparencyMixin):
         ttk.Label(self.dissect_container, text="Packet Dissector", font=("Arial", 10, "bold"), style="Dark.TLabel").pack(anchor="w", pady=(5,0))
         
         self.dissector_tree = ttk.Treeview(self.dissect_container, columns=("Value"), show="tree headings", style="Ptp.Treeview")
-        self.dissector_tree.heading("#0", text="Field"); self.dissector_tree.heading("Value", text="Value")
+        self.dissector_tree.heading("#0", text="Field"); self.dissector_tree.heading("Value", text="Protobuf Content")
         dsy = ttk.Scrollbar(self.dissect_container, orient=tk.VERTICAL, command=self.dissector_tree.yview)
         self.dissector_tree.configure(yscrollcommand=dsy.set); self.dissector_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True); dsy.pack(side=tk.RIGHT, fill=tk.Y)
 

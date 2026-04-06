@@ -1,28 +1,13 @@
-import os
-import sys
-import pathlib
-from pathlib import Path
-
-# 1. Setup Environment
-current_dir = pathlib.Path(__file__).resolve().parent
-# project_root/oaGuiDefinitions/Assets/right_50/bottom_90/55_OSC/gui_OSC.py
-# -> project_root is 6 levels up
-root_path = current_dir.parents[5]
-if str(root_path) not in sys.path:
-    sys.path.insert(0, str(root_path))
-
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
-# 55_OSC/gui_OSC.py
+# /home/anthony/Documents/OPEN-AIR/oaComOSC/Interface/gui_OSC.py
 # Author: Anthony Peter Kuzub
 # Version: 20260326.1000.1
 #
 # Description: Advanced OSC Monitor & Control Hub. 
-# Provides service management, bridge toggling, and live traffic inspection.
+# This file contains the primary implementation logic for the OSC GUI.
 
-import tkinter as tk
-from tkinter import ttk
-import datetime
+import os
+import sys
+import pathlib
 from pathlib import Path
 
 # --- Path Guard: Ensure project root is in sys.path ---
@@ -36,16 +21,25 @@ for parent in current_path.parents:
 if str(root_path) not in sys.path:
     sys.path.insert(0, str(root_path))
 
+import inspect
+from oaLogging.Methods.matrix_gate import matrix_log
+from loguru import logger
+from oaLogging.Entry import logger as logger_oa
+from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+import tkinter as tk
+from tkinter import ttk
+import datetime
+from pathlib import Path
+
+# --- Import the OSC Entry point for manager access ---
 import oaComOSC.Entry as OSC_MODULE
 
-# --- Standard Debug Logging Setup ---
-from oaLogging.Entry import logger
-from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
-
-class OscDashboard(tk.Frame, TransparencyMixin):
+# --- Define the actual GUI class ---
+class OscDashboardImplementation(tk.Frame, TransparencyMixin):
     """
     OSC Status, Control & Monitor.
     Manages the OSC Bridge lifecycle and provides deep inspection of traffic.
+    This class contains the full implementation.
     """
     def __init__(self, parent, **kwargs):
         # Extract non-Tkinter arguments
@@ -63,8 +57,7 @@ class OscDashboard(tk.Frame, TransparencyMixin):
         # ⚡ STANDALONE: Ensure the OSC manager is initialized with GUI-provided managers if possible.
         try:
             state_cache = self.config_data.get("state_cache_manager")
-            mqtt_conn = self.config_data.get("mqtt_connection_manager") or 
-                        (getattr(self.config_data.get("app_instance"), "mqtt_connection_manager", None) if self.config_data.get("app_instance") else None)
+            mqtt_conn = self.config_data.get("mqtt_connection_manager") or  (getattr(self.config_data.get("app_instance"), "mqtt_connection_manager", None) if self.config_data.get("app_instance") else None)
             
             # This will initialize or update the singleton instance
             OSC_MODULE.get_manager(state_cache_manager=state_cache, mqtt_connection_manager=mqtt_conn)
@@ -146,10 +139,10 @@ class OscDashboard(tk.Frame, TransparencyMixin):
         self.paned.add(monitor_frame, weight=3)
 
         cols = ("Time", "Dir", "Address", "Value", "Topic")
-        self.tree = ttk.Treeview(monitor_frame, columns=cols, show="headings", height=10)
+        self.tree = ttk.Treeview(monitor_frame, columns=cols, show="headings", style="SMPTE.Treeview")
         for col in cols:
             self.tree.heading(col, text=col)
-            self.tree.column(col, width=80, anchor="center")
+            self.tree.column(col, width=100 if col!="Value" and col!="Address" else 200)
         
         self.tree.column("Time", width=120)
         self.tree.column("Address", width=250, anchor="w")
@@ -290,34 +283,23 @@ class OscDashboard(tk.Frame, TransparencyMixin):
         if not data: return
         
         self.inspect_text.delete("1.0", tk.END)
-        self.inspect_text.insert(tk.END, "╔════════════ OSC MESSAGE DISSECTION ════════════╗
-", "header")
-        self.inspect_text.insert(tk.END, f"  TIME       : {data['ts']}
-")
-        self.inspect_text.insert(tk.END, f"  DIRECTION  : {data['direction']} ({'Incoming' if data['direction'] == 'RX' else 'Outgoing'})
-")
-        self.inspect_text.insert(tk.END, "╟──────────────────────────────────────────────────╢
-")
-        self.inspect_text.insert(tk.END, f"  OSC ADDR   : {data['address']}
-")
-        self.inspect_text.insert(tk.END, f"  VALUE      : {data['value']}
-")
-        self.inspect_text.insert(tk.END, f"  TYPE       : {type(data['value']).__name__}
-")
+        self.inspect_text.insert(tk.END, "╔════════════ OSC MESSAGE DISSECTION ════════════╗", "header")
+        self.inspect_text.insert(tk.END, f"  TIME       : {data['ts']}")
+        self.inspect_text.insert(tk.END, f"  DIRECTION  : {data['direction']} ({'Incoming' if data['direction'] == 'RX' else 'Outgoing'})")
+        self.inspect_text.insert(tk.END, "╟──────────────────────────────────────────────────╢")
+        self.inspect_text.insert(tk.END, f"  OSC ADDR   : {data['address']}")
+        self.inspect_text.insert(tk.END, f"  VALUE      : {data['value']}")
+        self.inspect_text.insert(tk.END, f"  TYPE       : {type(data['value']).__name__}")
         
         if data['topic']:
-            self.inspect_text.insert(tk.END, "╟── ROUTING ───────────────────────────────────────╢
-")
-            self.inspect_text.insert(tk.END, f"  MQTT TOPIC : {data['topic']}
-")
+            self.inspect_text.insert(tk.END, "╟── ROUTING ───────────────────────────────────────╢")
+            self.inspect_text.insert(tk.END, f"  MQTT TOPIC : {data['topic']}")
             
             # Deduce if it's a standard mapping
             is_std = data['topic'].startswith("OPEN-AIR/")
-            self.inspect_text.insert(tk.END, f"  MAPPING    : {'Standard Auto-Map' if is_std else 'Manual User Route'}
-")
+            self.inspect_text.insert(tk.END, f"  MAPPING    : {'Standard Auto-Map' if is_std else 'Manual User Route'}")
 
-        self.inspect_text.insert(tk.END, "╚═════════════════════ END ════════════════════════╝
-")
+        self.inspect_text.insert(tk.END, "╚═════════════════════ END ════════════════════════╝")
 
     def render(self):
         """Required by TransparencyMixin to sync background colors."""
@@ -331,6 +313,3 @@ class OscDashboard(tk.Frame, TransparencyMixin):
         except Exception as e:
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"OscDashboard: Failed to remove monitor callback: {e}", "TRACE")
         super().destroy()
-
-def get_gui_class():
-    return OscDashboard

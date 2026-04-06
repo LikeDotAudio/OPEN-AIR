@@ -1,0 +1,34 @@
+{
+  "HP_4263A_CONFIG": {
+    "type": "OcaBin",
+    "id": "4263A.CONF.001",
+    "blocks": {
+      "Signal_Setup": {
+        "type": "OcaBlock",
+        "description": "Test Signal & Timing",
+        "fields": {
+          "Frequency": {
+            "type": "_GuiActuator",
+            "label_inactive": "1 kHz",
+            "message": ":FREQ 1KHZ"
+          },
+          "Level": {
+            "type": "_GuiActuator",
+            "label_inactive": "1V Level",
+            "message": ":VOLT 1V"
+          },
+          "Speed_Fast": {
+            "type": "_GuiActuator",
+            "label_inactive": "Fast (Short)",
+            "message": ":APER SHOR"
+          },
+          "DC_Bias": {
+            "type": "_GuiActuator",
+            "label_inactive": "Bias ON",
+            "message": ":BIAS:STAT ON"
+          }
+        }
+      }
+    }
+  }
+}

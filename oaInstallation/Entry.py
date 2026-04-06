@@ -39,4 +39,11 @@ def main():
         sys.exit(1)
 
 if __name__ == '__main__':
-    main()
+    # If no command-line arguments are provided, default to running tests.
+    # Otherwise, assume specific commands are intended (e.g., main).
+    if len(sys.argv) > 1:
+        print("Executing command...")
+        main() 
+    else:
+        run_tests()
+

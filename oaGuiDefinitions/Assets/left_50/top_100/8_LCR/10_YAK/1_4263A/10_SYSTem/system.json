@@ -1,0 +1,35 @@
+{
+  "HP_4263A_SYSTEM": {
+    "type": "OcaBin",
+    "id": "4263A.SYST.001",
+    "blocks": {
+      "Calibration": {
+        "type": "OcaBlock",
+        "description": "Correction & Reset",
+        "fields": {
+          "Open_Corr": {
+            "type": "_GuiActuator",
+            "label_inactive": "OPEN CORR",
+            "message": ":CORR:OPEN:EXEC"
+          },
+          "Short_Corr": {
+            "type": "_GuiActuator",
+            "label_inactive": "SHORT CORR",
+            "message": ":CORR:SHOR:EXEC"
+          },
+          "Reset_Unit": {
+            "type": "_GuiActuator",
+            "label_inactive": "Factory Reset",
+            "style": { "active_color": "#FF0000" },
+            "message": "*RST"
+          },
+          "Error_Log": {
+            "type": "_GuiActuator",
+            "label_inactive": "Read Error",
+            "message": ":SYST:ERR?"
+          }
+        }
+      }
+    }
+  }
+}

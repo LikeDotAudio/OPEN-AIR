@@ -1,18 +1,12 @@
-# /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/4_Splinker
-# This file acts as a pointer to the actual implementation of Splinker
+# /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/4_Splinker/__init__.py
+# This __init__.py file acts as a pointer to the actual implementation of Splinker
 # located in the oaSplinker module's Interface directory.
 
 try:
+    # Import the actual implementation from the new location
     # Assuming the main logic for Splinker is in __init__.py within its Interface folder
     from oaSplinker.Interface import __init__ as SplinkerInterface
     
-    # If SplinkerInterface is a module, you might want to re-export its contents
-    # or a specific class/function if it defines one.
-    # For now, we'll just indicate that the module is accessible.
-    # If there's a specific class like SplinkerManager, you'd do:
-    # from oaSplinker.Interface.__init__ import SplinkerManager as OriginalSplinkerManager
-    # class SplinkerManager(OriginalSplinkerManager): pass
-
     # For a simple __init__.py, it might just be about namespace availability.
     # If the original structure had a top-level function or class here,
     # you would need to explicitly import and re-export it.
@@ -29,4 +23,3 @@ except ImportError as e:
     class Splinker:
         def __init__(self, *args, **kwargs):
             raise NotImplementedError("Splinker interface module could not be loaded. Please check module paths.")
-

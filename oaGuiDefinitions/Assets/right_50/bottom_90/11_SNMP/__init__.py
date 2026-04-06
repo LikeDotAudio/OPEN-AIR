@@ -1,18 +1,12 @@
-# /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/11_SNMP
-# This file acts as a pointer to the actual implementation of SNMP
+# /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/11_SNMP/__init__.py
+# This __init__.py file acts as a pointer to the actual implementation of SNMP
 # located in the oaComSNMP module's Interface directory.
 
 try:
+    # Import the actual implementation from the new location
     # Assuming the main logic for SNMP is in __init__.py within its Interface folder
     from oaComSNMP.Interface import __init__ as SNMPInterface
     
-    # If SNMPInterface is a module, you might want to re-export its contents
-    # or a specific class/function if it defines one.
-    # For now, we'll just indicate that the module is accessible.
-    # If there's a specific class like SNMPManager, you'd do:
-    # from oaComSNMP.Interface.__init__ import SNMPManager as OriginalSNMPManager
-    # class SNMPManager(OriginalSNMPManager): pass
-
     # For a simple __init__.py, it might just be about namespace availability.
     # If the original structure had a top-level function or class here,
     # you would need to explicitly import and re-export it.
@@ -29,4 +23,3 @@ except ImportError as e:
     class SNMP:
         def __init__(self, *args, **kwargs):
             raise NotImplementedError("SNMP interface module could not be loaded. Please check module paths.")
-

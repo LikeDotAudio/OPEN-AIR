@@ -1,19 +1,19 @@
-# /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/50_MIDI
-# This file acts as a pointer to the actual implementation of midi.py
+# /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/50_MIDI/__init__.py
+# This __init__.py file acts as a pointer to the actual implementation of midi.py
 # located in the oaComMidi module's Interface directory.
 
 try:
-    # Import the original class from the new location
+    # Import the actual implementation from the new location
     from oaComMidi.Interface.midi import MidiMonitor as OriginalMidiMonitor
     from oaComMidi.Interface.midi import get_gui_class as original_get_gui_class
 
-    # Re-export the class to maintain the original import path functionality
+    # Re-export the class and function to maintain the original import path functionality
     class MidiMonitor(OriginalMidiMonitor):
         pass
 
     # Re-export the get_gui_class function
     def get_gui_class():
-        return OriginalMidiMonitor # or use original_get_gui_class() if it returns a class directly
+        return OriginalMidiMonitor # Return the actual class
 
 except ImportError as e:
     print(f"Error importing MidiMonitor from oaComMidi.Interface: {e}")

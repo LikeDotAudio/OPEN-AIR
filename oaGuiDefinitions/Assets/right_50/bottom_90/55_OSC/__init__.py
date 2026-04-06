@@ -1,18 +1,19 @@
-# /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/55_OSC
-# This file acts as a pointer to the actual implementation of gui_OSC.py
+# /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/55_OSC/__init__.py
+# This __init__.py file acts as a pointer to the actual implementation of gui_OSC.py
 # located in the oaComOSC module's Interface directory.
 
 try:
+    # Import the actual implementation from the new location
     from oaComOSC.Interface.gui_OSC import OscDashboard as OriginalOscDashboard
     from oaComOSC.Interface.gui_OSC import get_gui_class as original_get_gui_class
 
-    # Re-export the class to maintain the original import path functionality
+    # Re-export the class and function to maintain the original import path functionality
     class OscDashboard(OriginalOscDashboard):
         pass
 
     # Re-export the get_gui_class function
     def get_gui_class():
-        return OriginalOscDashboard # or use original_get_gui_class() if it returns a class directly
+        return OriginalOscDashboard # Return the actual class
 
 except ImportError as e:
     print(f"Error importing OscDashboard from oaComOSC.Interface: {e}")
@@ -20,7 +21,7 @@ except ImportError as e:
     
     # Fallback or error handling if import fails
     class OscDashboard:
-        def __init__(self, *args, **kwargs):
+        def __init__(Slef, *args, **kwargs):
             raise NotImplementedError("OscDashboard could not be loaded. Please check module paths.")
             
     def get_gui_class():

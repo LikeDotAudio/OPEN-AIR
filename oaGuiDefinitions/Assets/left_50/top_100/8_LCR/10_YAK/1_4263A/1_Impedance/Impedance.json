@@ -1,0 +1,31 @@
+{
+  "HP_4263A_MEASure": {
+    "type": "OcaBin",
+    "id": "4263A.MEAS.001",
+    "blocks": {
+      "Measurement": {
+        "type": "OcaBlock",
+        "description": "LCR Readback",
+        "fields": {
+          "Execute_Measure": {
+            "type": "_GuiActuator",
+            "AES70": "OcaBooleanActuator",
+            "style": {
+              "active_bg_color": "#000000",
+              "active_color": "#FF9900",
+              "bg_color": "#2b2b2b"
+            },
+            "message": ":MEAS?"
+          },
+          "Display": {
+            "type": "OcaBlock",
+            "fields": {
+              "primary": { "type": "_GuiValue", "label": "Primary (L/C/R/Z)", "units": "" },
+              "secondary": { "type": "_GuiValue", "label": "Secondary (D/Q/R/G)", "units": "" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "HP_4263A_MODE": {
+    "type": "OcaBin",
+    "id": "4263A.FUNC.001",
+    "blocks": {
+      "Function_Select": {
+        "type": "OcaBlock",
+        "description": "Measurement Type",
+        "fields": {
+          "Capacitance": {
+            "type": "_GuiActuator",
+            "label_inactive": "Cp-D",
+            "message": ":FUNC:IMP:TYPE CPD"
+          },
+          "Inductance": {
+            "type": "_GuiActuator",
+            "label_inactive": "Ls-Q",
+            "message": ":FUNC:IMP:TYPE LSQ"
+          },
+          "Impedance": {
+            "type": "_GuiActuator",
+            "label_inactive": "Z-Theta",
+            "message": ":FUNC:IMP:TYPE ZTD"
+          },
+          "Transformer_N": {
+            "type": "_GuiActuator",
+            "label_inactive": "Turns Ratio (N)",
+            "message": ":FUNC:TRNS:TYPE N"
+          }
+        }
+      }
+    }
+  }
+}

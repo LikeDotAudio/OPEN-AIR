@@ -1,19 +1,20 @@
-# /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/3_Command_Router
-# This file acts as a pointer to the actual implementation of CommandRouter
+# /home/anthony/Documents/OPEN-AIR/oaGuiDefinitions/Assets/right_50/bottom_90/3_Command_Router/__init__.py
+# This __init__.py file acts as a pointer to the actual implementation of command_router.py
 # located in the oaComBroker module's Interface directory.
 
 try:
+    # Import the actual implementation from the new location
     from oaComBroker.Interface.command_router import CommandRouter as OriginalCommandRouter
-    
-    # Re-export the class to maintain the original import path functionality
+    from oaComBroker.Interface.command_router import get_gui_class as original_get_gui_class
+
+    # Re-export the class and function to maintain the original import path functionality
     class CommandRouter(OriginalCommandRouter):
         pass
 
-    # If you need to expose specific functions or objects from the original location,
-    # you can do so here by inspecting the OriginalCommandRouter or its module.
-    # For example, if get_gui_class() was a top-level function in the original module:
-    # from oaComBroker.Interface.command_router import get_gui_class
-    
+    # Re-export the get_gui_class function
+    def get_gui_class():
+        return OriginalCommandRouter # Return the actual class
+
 except ImportError as e:
     print(f"Error importing CommandRouter from oaComBroker.Interface: {e}")
     print("Ensure oaComBroker module and its Interface directory are correctly set up.")
@@ -25,4 +26,3 @@ except ImportError as e:
             
     def get_gui_class():
         raise NotImplementedError("CommandRouter could not be loaded.")
-

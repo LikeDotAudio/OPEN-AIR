@@ -4,7 +4,7 @@
 #
 # Description: Python wrapper for the Rust MQTT Router.
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 import logging
 from .oaMQTTManager_rs.compiler_hook import ensure_compiled

@@ -92,6 +92,10 @@ class ProtocolRouter:
     def start(self):
         if self._running: return
         self._running = True
+        
+        # ⚡ LEADERSHIP: Force initial active state to ensure all managers start as PRIMARY
+        self.set_active_state(True)
+        
         self._executor = concurrent.futures.ThreadPoolExecutor(max_workers=self._dispatch_threads, thread_name_prefix="Router-Dispatch")
         
         threading.Thread(target=self._ingest_loop, daemon=True, name="Router-Ingest").start()
@@ -131,26 +135,6 @@ class ProtocolRouter:
     def set_smpte2138_manager(self, m): self.smpte2138_manager = m
     def set_state_cache(self, c): self.state_cache = c
 
-    def get_dpi_report(self, utp):
-        """
-        Placeholder method to get DPI report.
-        Implement actual logic for retrieving DPI report for a given UTP.
-        """
-        # In a real fix, this would fetch and return relevant data.
-        # For now, it prevents the AttributeError.
-        print(f"DEBUG: ProtocolRouter.get_dpi_report called for UTP: {utp}") # For debugging
-        return {"report": "placeholder_dpi_report_data", "utp": utp} # Example placeholder return
-
-    def publish_splink(self, src, dest, s_val=None, d_val=None):
-        """
-        Placeholder method to publish a splink.
-        Implement actual logic for publishing splink with provided parameters.
-        """
-        # In a real fix, this would establish or manage the splink connection.
-        # For now, it prevents the AttributeError.
-        print(f"DEBUG: ProtocolRouter.publish_splink called: src={src}, dest={dest}, s_val={s_val}, d_val={d_val}") # For debugging
-        return True # Example placeholder return
-
     def register_cache_observer(self, cb): self.monitor.register_cache_observer(cb)
     def unregister_cache_observer(self, cb): self.monitor.remove_observer(cb)
     def remove_observer(self, cb): self.monitor.remove_observer(cb)
@@ -174,7 +158,7 @@ class ProtocolRouter:
                 self.rust_router.pop_inbound()
 
         try:
-            return self.inbound_queue.get(timeout=0.1)
+            return self.inbound_queue.get(timeout=0.001)
         except queue.Empty:
             return None
 
@@ -217,7 +201,7 @@ class ProtocolRouter:
         while self._running:
             try:
                 try:
-                    msg = self.outbound_queue.get(timeout=0.1)
+                    msg = self.outbound_queue.get(timeout=0.001)
                 except queue.Empty:
                     continue
                 
@@ -243,6 +227,12 @@ class ProtocolRouter:
                     matrix_log("comms", "broker", "_dispatch_loop", f"📤🚫🛑 [ERROR] Dispatch Loop Error: {e}", "ERROR")
             except Exception as e:
                 matrix_log("comms", "broker", "_dispatch_loop", f"📤🚫🛑 [ERROR] Dispatch Loop Error: {e}", "ERROR")
+
+    def get_message_by_utp(self, utp):
+        """Retrieves a complete message from the firehose by its UTP."""
+        if not utp: return None
+        with self.monitor._firehose_lock:
+            return next((m for m in self.monitor.firehose if f"{m['ts']:.6f}" == utp), None)
 
     def publish_splinker_direct(self, s_topic, d_topic, s_val=None, d_val=None):
         payload = {"source": s_topic, "dest": d_topic, "source_val": s_val, "dest_val": d_val}

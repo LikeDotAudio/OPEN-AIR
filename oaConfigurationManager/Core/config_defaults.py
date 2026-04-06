@@ -11,9 +11,10 @@ class ConfigDefaults:
     CURRENT_VERSION = "unknown"
     
     # Debugging
-    ENABLE_DEBUG_MODE = False
-    ENABLE_DEBUG_SCREEN = False
+    ENABLE_DEBUG_MODE = True
+    ENABLE_DEBUG_SCREEN = True
     ENABLE_LOG_TO_FILE = True
+    TIMESTAMP_LOGS = False
     
     # UI Layout
     UI_LAYOUT_SPLIT_EQUAL = 50
@@ -23,6 +24,7 @@ class ConfigDefaults:
     
     # System
     MISSION_CRITICAL_MODE = False
+    LANGUAGE_SELECTION = "En"
     SYSTEM_LANGUAGE = "En"
     
     # MQTT
@@ -67,19 +69,21 @@ class ConfigDefaults:
 
     # Debug Matrix Defaults
     DEBUG_MATRIX = {
-        "MASTER_DEBUG_ENABLE": False,
-        "SYS_COMMS": False,
-        "SYS_GUI": False,
-        "SYS_DATA": False,
-        "SYS_ROUTER": False,
-        "SYS_CORE": False,
-        "ELEMENT_MQTT": False,
-        "ELEMENT_SNMP": False,
-        "ELEMENT_MIDI": False,
-        "ELEMENT_OSC": False,
-        "ELEMENT_AES70": False,
-        "ELEMENT_REST": False,
-        "ELEMENT_GUI_BUILDER": False
+        "MASTER_DEBUG_ENABLE": True,
+        "SYS_SUP": True,
+        "SYS_CORE": True,
+        "SYS_UI": True,
+        "SYS_GUI": True,
+        "SYS_COMMS": True,
+        "SYS_DATA": True,
+        "SYS_ROUTER": True,
+        "ELEMENT_MQTT": True,
+        "ELEMENT_SNMP": True,
+        "ELEMENT_OSC": True,
+        "ELEMENT_REST": True,
+        "ELEMENT_AES70": True,
+        "ELEMENT_MIDI": True,
+        "ELEMENT_GUI_BUILDER": True
     }
     MUTE_FUNCTIONS = ""
     FORCE_FUNCTIONS = ""

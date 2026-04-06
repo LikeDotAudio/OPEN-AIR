@@ -59,19 +59,11 @@ class GraphPlotter(
 
         super().__init__(parent, **kwargs)
 
-        # ⚡ SANITIZATION: Force a 1px floor if the parent hasn't rendered yet 
-        # to prevent X11 BadValue (0x0) crashes during initialization.
-        parent_w = parent.winfo_width()
-        parent_h = parent.winfo_height()
-        if parent_w <= 1 or parent_h <= 1:
-            self.config(width=1, height=1)
-        
         # ⚡ FIX: Prevent geometry propagation to stop "vibrating" resize loops.
         # This ensures the frame size is determined by its container (e.g. PanedWindow or Grid)
         # and not by the internal Matplotlib canvas changing its requested size.
         self.pack_propagate(False)
         self.grid_propagate(False)
-
         self.widget_config, self.base_mqtt_topic_from_path, self.widget_id, self.instance = config, base_mqtt_topic_from_path, widget_id, builder_instance
         self.lines, self.x_data, self.y_data, self.datasets_config = {}, {}, {}, {}
         self.dataset_vars, self.settings_vars, self.marker_objects = {}, {}, []
@@ -117,7 +109,7 @@ class GraphPlotter(
         for ds in self.widget_config.get("datasets", []):
             ds_id = ds.get("id")
             if ds_id:
-                line, = self.ax.plot([], [], color=ds.get("style", {}).get("line_color") or "cyan", linewidth=1, label=ds.get("label", ds_id))
+                line, = self.ax.plot([], [], color=ds.get("style", {}).get("line_color") or "cyan", linewidth=1, label=get_text(ds.get("label"), ds_id))
                 self.lines[ds_id], self.x_data[ds_id], self.y_data[ds_id] = line, deque(maxlen=self.widget_config.get("buffer_size", 100)), deque(maxlen=self.widget_config.get("buffer_size", 100))
         
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] GraphPlotter '{self.widget_id}' plot elements initialized.", level="SUCCESS")

@@ -1,56 +1,65 @@
-import sys
+# oaGuiElements/Methods/oaProceduralArt_rs/compiler_hook.py
+# Author: Gemini (Collaborator)
+# Version: 20260406.1300.2
+#
+# Description: Compiler hook for oaproceduralart_rs.oaproceduralart_rs. 
+#              Strictly uses system python and user site-packages. No virtual environments.
+
 import os
 import subprocess
+import sys
 import importlib
-import shutil
+import glob
 
 def ensure_compiled():
+    """Build the Rust extension and install to user site-packages."""
     try:
-        from oaproceduralart_rs.oaproceduralart_rs import ProceduralArtEngine
+        import oaproceduralart_rs.oaproceduralart_rs
         return
     except ImportError:
         pass
-    
-    # Check if we are running in the system python but have a venv available
-    venv_site = "/home/anthony/.venv/lib/python3.12/site-packages"
-    if venv_site not in sys.path:
-        sys.path.append(venv_site)
+
+    user_site = os.path.expanduser(f"~/.local/lib/python{sys.version_info.major}.{sys.version_info.minor}/site-packages")
+    if user_site not in sys.path:
+        sys.path.append(user_site)
         try:
-            from oaproceduralart_rs.oaproceduralart_rs import ProceduralArtEngine
+            import oaproceduralart_rs.oaproceduralart_rs
             return
         except ImportError:
             pass
 
-    print("🦀 Compiling oaproceduralart_rs...")
-    crate_dir = os.path.dirname(os.path.abspath(__file__))
-    
-    # Force use of the venv python for compilation to ensure it goes to the right place
-    venv_python = "/home/anthony/.venv/bin/python"
-    
+    module_dir = os.path.dirname(os.path.abspath(__file__))
     env = os.environ.copy()
     env["PIP_BREAK_SYSTEM_PACKAGES"] = "1"
-
-    # Try to uninstall the package first using venv python
-    if os.path.exists(venv_python):
-        subprocess.run([venv_python, "-m", "pip", "uninstall", "-y", "oaproceduralart_rs"], cwd=crate_dir, check=False, env=env)
-    else:
-        subprocess.run([sys.executable, "-m", "pip", "uninstall", "-y", "oaproceduralart_rs"], cwd=crate_dir, check=False, env=env)
-
-
+    
     try:
-        python_exec = venv_python if os.path.exists(venv_python) else sys.executable
-        subprocess.run([python_exec, "-m", "maturin", "develop", "--release"], cwd=crate_dir, check=True, env=env)
-        importlib.invalidate_caches()
-        # Double check import after compilation
-        from oaproceduralart_rs.oaproceduralart_rs import ProceduralArtEngine
-    except (subprocess.CalledProcessError, ImportError) as e:
-        print(f"❌ Failed to compile or import oaproceduralart_rs: {e}")
-        # Try one last fallback to just importing it if it somehow worked
-        try:
+        python_exec = sys.executable
+        # Build the wheel
+        subprocess.check_call(["maturin", "build", "--release", "--interpreter", python_exec], 
+                              cwd=module_dir, env=env, 
+                              stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        
+        # Install the wheel (handle potential name normalization)
+        wheels = glob.glob(os.path.join(module_dir, "target", "wheels", "oaproceduralart_rs.oaproceduralart_rs-*.whl"))
+        if not wheels:
+            # Try with hyphens replaced by underscores or vice versa
+            normalized = "oaproceduralart_rs.oaproceduralart_rs".replace("_", "-")
+            wheels = glob.glob(os.path.join(module_dir, "target", "wheels", f"{normalized}-*.whl"))
+        
+        if not wheels:
+            # Last resort: just look for any wheel in the target/wheels dir
+            wheels = glob.glob(os.path.join(module_dir, "target", "wheels", "*.whl"))
+
+        if wheels:
+            subprocess.check_call([python_exec, "-m", "pip", "install", "--user", "--force-reinstall", wheels[0]], 
+                                  cwd=module_dir, env=env, 
+                                  stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+            
             importlib.invalidate_caches()
-            from oaproceduralart_rs.oaproceduralart_rs import ProceduralArtEngine
-        except ImportError:
-            raise e
+            import oaproceduralart_rs.oaproceduralart_rs
+    except Exception:
+        # Graceful failure to allow parent to handle fallback
+        pass
 
 if __name__ == "__main__":
     ensure_compiled()

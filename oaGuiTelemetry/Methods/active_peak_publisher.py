@@ -14,7 +14,7 @@ import math
 from loguru import logger
 from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 app_constants = Config.get_instance()
 

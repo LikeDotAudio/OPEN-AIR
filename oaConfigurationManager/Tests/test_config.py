@@ -34,7 +34,7 @@ class TestConfigGenerator(unittest.TestCase):
             self.assertIn(section, config.sections(), f"Section {section} missing from config")
 
         # Check some specific values
-        self.assertEqual(config["Version"]["CURRENT_VERSION"], "20251225")
+        self.assertEqual(config["Version"]["CURRENT_VERSION"], "20260406")
         self.assertEqual(config["MQTT"]["BROKER_ADDRESS"], "localhost")
         self.assertEqual(config["ScanSettings"]["scan_gateways"], "True")
 

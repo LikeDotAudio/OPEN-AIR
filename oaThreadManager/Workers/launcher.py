@@ -183,7 +183,8 @@ def launch_core_managers(state_cache_manager, mqtt_connection_manager):
         elif hasattr(STATE_VISA_FLEET_manager, "scan_and_manage_fleet"):
             STATE_VISA_FLEET_manager.scan_and_manage_fleet()
 
-    start_network_services()
+    # Launch network services in the background to avoid blocking the main core thread
+    threading.Thread(target=start_network_services, daemon=True, name="Launcher-NetworkBoot").start()
 
     matrix_log("core", "launcher", "launch_core_managers", "✅✅✅ [SUCCESS] All CORE managers have been successfully launched!", "SUCCESS")
 

@@ -134,8 +134,8 @@ class LayoutParser:
 
         # Extract behavior properties for overflow handling
         behavior_data = layout_data.get("behavior", {})
-        parsed_data["overflow_ew"] = behavior_data.get("overflow_ew", "auto") # Default to auto if not specified
-        parsed_data["overflow_ns"] = behavior_data.get("overflow_ns", "auto") # Default to auto if not specified
+        parsed_data["overflow_ew"] = behavior_data.get("overflow_ew", "none") # Default to none if not specified
+        parsed_data["overflow_ns"] = behavior_data.get("overflow_ns", "none") # Default to none if not specified
         parsed_data["fluid_ew"] = behavior_data.get("fluid_ew", False) # Default fluid to False
         parsed_data["fluid_ns"] = behavior_data.get("fluid_ns", False)
 

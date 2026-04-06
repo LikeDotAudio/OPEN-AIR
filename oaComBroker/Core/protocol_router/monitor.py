@@ -213,5 +213,5 @@ class Monitor:
         for cb in self._observers:
             try:
                 cb(msg)
-            except:
-                pass
+            except Exception as e:
+                matrix_log("comms", "broker", "broadcast_to_observers", f"BROADCAST ERROR to {cb}: {e}", "ERROR")

@@ -65,7 +65,7 @@ class JsonTreeWidget(
         self.header = tk.Frame(self)
         self.header.pack(side=tk.TOP, fill=tk.X, pady=(0, 5))
         
-        label = self.get_text(config.get("label_active"))
+        label = get_text(self.config_data.get("label_active"))
         if label and self.config_data.get("show_label", True):
             self.lbl = tk.Label(self.header, text=label, font=("Helvetica", 10, "bold"), fg="white")
             self.lbl.pack(side=tk.LEFT, anchor="w")

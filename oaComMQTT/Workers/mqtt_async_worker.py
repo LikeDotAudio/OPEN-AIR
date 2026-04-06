@@ -11,7 +11,7 @@ import aiomqtt
 import queue
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 from oaLogging.Core.logger import MQTT_LOGGER
 from loguru import logger
 from ..Core.mqtt_message import MqttMessage

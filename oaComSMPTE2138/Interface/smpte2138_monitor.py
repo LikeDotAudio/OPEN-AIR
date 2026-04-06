@@ -23,7 +23,7 @@ from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaComMQTT.Core import mqtt_publisher_service
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 class SMPTE2138MonitorImplementation(tk.Frame, TransparencyMixin):
     """

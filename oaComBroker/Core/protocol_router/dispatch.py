@@ -90,7 +90,14 @@ def _dispatch_mqtt(mqtt_manager, topic, msg, val_str):
 @protocol_guard("OSC")
 def _dispatch_osc(osc_manager, topic, val, msg, val_str):
     osc_address = msg["meta"].get("osc_address", "/" + topic.replace("OPEN-AIR/", ""))
-    osc_manager.send(osc_address, val)
+    
+    # ⚡ RESILIENCE: Handle complex GUI-sourced payloads
+    if isinstance(val, dict) and "val" in val:
+        payload = val["val"]
+    else:
+        payload = val
+        
+    osc_manager.send(osc_address, payload)
     if app_constants.ROUTER_DISPATCH_LOGS:
         matrix_log("comms", "broker", "_dispatch_osc", f"📡📤📤 [OUTBOUND] OSC >> {osc_address}: {val_str}", "DEBUG")
 

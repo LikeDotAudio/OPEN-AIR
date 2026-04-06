@@ -10,7 +10,7 @@ import tkinter as tk
 from tkinter import ttk
 from oaLogging.Entry import logger, vocal_capture
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 # --- Standard Debug Logging Setup ---
 

@@ -1,14 +1,65 @@
-import os, subprocess, sys
+# oaFileExportCSV/Methods/oaCSVWriter_rs/compiler_hook.py
+# Author: Gemini (Collaborator)
+# Version: 20260406.1300.2
+#
+# Description: Compiler hook for oacsvwriter_rs. 
+#              Strictly uses system python and user site-packages. No virtual environments.
+
+import os
+import subprocess
+import sys
+import importlib
+import glob
 
 def ensure_compiled():
-    module_dir = os.path.dirname(__file__)
-    # Check if compiled lib exists
-    has_so = any(f.endswith('.so') or f.endswith('.pyd') for f in os.listdir(module_dir))
-    if not has_so:
-        print(f"[{module_dir}] Native binary not found. Compiling via Cargo...")
+    """Build the Rust extension and install to user site-packages."""
+    try:
+        import oacsvwriter_rs
+        return
+    except ImportError:
+        pass
+
+    user_site = os.path.expanduser(f"~/.local/lib/python{sys.version_info.major}.{sys.version_info.minor}/site-packages")
+    if user_site not in sys.path:
+        sys.path.append(user_site)
         try:
-            subprocess.run(["maturin", "develop", "--release"], cwd=module_dir, check=True)
-            print("Compilation successful.")
-        except subprocess.CalledProcessError:
-            print("CRITICAL: Failed to compile Rust extension. Ensure Rust/Cargo is installed.")
-            raise RuntimeError("Compilation failed")
+            import oacsvwriter_rs
+            return
+        except ImportError:
+            pass
+
+    module_dir = os.path.dirname(os.path.abspath(__file__))
+    env = os.environ.copy()
+    env["PIP_BREAK_SYSTEM_PACKAGES"] = "1"
+    
+    try:
+        python_exec = sys.executable
+        # Build the wheel
+        subprocess.check_call(["maturin", "build", "--release", "--interpreter", python_exec], 
+                              cwd=module_dir, env=env, 
+                              stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        
+        # Install the wheel (handle potential name normalization)
+        wheels = glob.glob(os.path.join(module_dir, "target", "wheels", "oacsvwriter_rs-*.whl"))
+        if not wheels:
+            # Try with hyphens replaced by underscores or vice versa
+            normalized = "oacsvwriter_rs".replace("_", "-")
+            wheels = glob.glob(os.path.join(module_dir, "target", "wheels", f"{normalized}-*.whl"))
+        
+        if not wheels:
+            # Last resort: just look for any wheel in the target/wheels dir
+            wheels = glob.glob(os.path.join(module_dir, "target", "wheels", "*.whl"))
+
+        if wheels:
+            subprocess.check_call([python_exec, "-m", "pip", "install", "--user", "--force-reinstall", wheels[0]], 
+                                  cwd=module_dir, env=env, 
+                                  stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+            
+            importlib.invalidate_caches()
+            import oacsvwriter_rs
+    except Exception:
+        # Graceful failure to allow parent to handle fallback
+        pass
+
+if __name__ == "__main__":
+    ensure_compiled()

@@ -16,7 +16,7 @@ app_constants = Config.get_instance()  # Get the singleton instance
 # Updated imports for new logging functions
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 
 # Writes spectrum scan data (frequency and amplitude) to a CSV file.

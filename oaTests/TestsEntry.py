@@ -1,6 +1,6 @@
 # Entry.py
 # Author: Anthony Peter Kuzub
-# Version: 20260323.2020.1
+# Version: 20260406.1045.1
 #
 # Description: Public API and orchestrator for the OPEN-AIR Testing Module.
 # Initializes the Textual UI for test execution and maintenance.
@@ -26,6 +26,12 @@ def main():
     project_root = _inject_project_root()
 
     try:
+        # Initialize specialized test logging
+        from oaLogging.Entry import initialize_test_logging, TEST_LOGGER
+        test_log_dir = os.path.join(project_root, "oaDataLogs", "TestLog")
+        initialize_test_logging(test_log_dir)
+        TEST_LOGGER.info("🧪 [INIT] Test Logging System Online.")
+
         # Import the Textual App from the Interface sub-module
         from oaTests.Interface.TestsUI import TestsApp
         app = TestsApp(project_root)

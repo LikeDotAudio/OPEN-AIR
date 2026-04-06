@@ -16,7 +16,7 @@ from ..Core.mqtt_message import MqttMessage
 from ..Core.mqtt_router import MqttRouter
 
 app_constants = Config.get_instance()
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 class MqttSubscriberRouter:
     """

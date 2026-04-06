@@ -32,7 +32,7 @@ class HorizontalFaderRendererMixin:
         theme_colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         accent_color = theme_colors.get("accent", "#f4902c")
         
-        label_text = self.get_text(config.get("label_active"))
+        label_text = get_text(self.config_data.get("label_active"))
         if label_text:
             DEFAULT_LABEL_FONT_SIZE = 9
             font_size = int(float(self.config_data.get("layout", {}).get("font", DEFAULT_LABEL_FONT_SIZE)))
@@ -126,7 +126,7 @@ class HorizontalFaderRendererMixin:
             
             if index % sub_tick_every == 0:
                 TICK_START_Y = center_y + 8
-                TICK_END_Y = center_y + 14
+                TICK_END_Y = center_y + 14 # Corrected line
                 color = tick_color if index % label_every == 0 else sub_tick_color
                 self.canvas.create_line(tick_x, TICK_START_Y, tick_x, TICK_END_Y, fill=color, tags="static")
             

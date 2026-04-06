@@ -38,7 +38,7 @@ except Exception as e:
     logger.warning(f"oaConfigurationManager: Rust ConfigValidator unavailable: {e}")
     HAS_RUST = False
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 app_constants = Config.get_instance()  # Get the singleton instance
 

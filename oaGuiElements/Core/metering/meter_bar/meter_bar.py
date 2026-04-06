@@ -31,7 +31,7 @@ class BuilderMeterBarCreator:
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📊 [BUILDER] Entering make_meter_bar", level="TRACE")
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
     
-        label = get_text(config.get("label_active"), get_text(config_data.get('label'), "Unknown"))
+        label = get_text(config_data.get("label_active"), get_text(config_data.get('label'), "Unknown"))
         path = config_data.get("path")
 
         # ⚡ HARDENED INTERFACE: Extract from context if available

@@ -286,14 +286,31 @@ class CommandRouter(tk.Frame):
         """Updates the text widgets based on current selection timestamps."""
         self.inspect_text_src.delete("1.0", tk.END)
         self.inspect_text_dest.delete("1.0", tk.END)
+        
+        try:
+            import orjson
+            has_orjson = True
+        except ImportError:
+            import json
+            has_orjson = False
 
         if hasattr(self, "_src_utp") and self._src_utp:
-            report_src = self.router.get_dpi_report(self._src_utp)
-            self.inspect_text_src.insert(tk.END, report_src)
+            msg_src = self.router.get_message_by_utp(self._src_utp)
+            if msg_src:
+                if has_orjson:
+                    pretty_str = orjson.dumps(msg_src, option=orjson.OPT_INDENT_2).decode()
+                else:
+                    pretty_str = json.dumps(msg_src, indent=2)
+                self.inspect_text_src.insert(tk.END, pretty_str)
             
         if hasattr(self, "_dest_utp") and self._dest_utp:
-            report_dest = self.router.get_dpi_report(self._dest_utp)
-            self.inspect_text_dest.insert(tk.END, report_dest)
+            msg_dest = self.router.get_message_by_utp(self._dest_utp)
+            if msg_dest:
+                if has_orjson:
+                    pretty_str = orjson.dumps(msg_dest, option=orjson.OPT_INDENT_2).decode()
+                else:
+                    pretty_str = json.dumps(msg_dest, indent=2)
+                self.inspect_text_dest.insert(tk.END, pretty_str)
 
     def create_direct_splink(self):
         """Sends command to Router to create the link and navigates to Splinker UI."""

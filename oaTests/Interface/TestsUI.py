@@ -35,6 +35,7 @@ from oaTests.Workers.TestRunner import DiscoverTests
 from oaTests.Managers.AuditRunner import run_all_audits
 from oaComMQTT.Entry import get_connection_manager
 from oaInstallation.Core.SystemStats import SystemStatsProvider
+from oaLogging.Entry import TEST_LOGGER
 
 # Import Managers
 from oaTests.Managers.MaintenanceManager import MaintenanceManager
@@ -138,6 +139,7 @@ class TestsApp(App):
     def write_log(self, message: str) -> None:
         self.query_one(CenterPanel).log_widget.write_line(message)
         self.log_lines.append(message)
+        TEST_LOGGER.info(message)
 
     def safe_write_log(self, message: str) -> None:
         """Thread-safe logging that works from both main and background threads."""

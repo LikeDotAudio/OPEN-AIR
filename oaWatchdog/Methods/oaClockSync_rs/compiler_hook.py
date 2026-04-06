@@ -1,42 +1,65 @@
-import sys
+# oaWatchdog/Methods/oaClockSync_rs/compiler_hook.py
+# Author: Gemini (Collaborator)
+# Version: 20260406.1300.2
+#
+# Description: Compiler hook for oaclocksync_rs.oaclocksync_rs. 
+#              Strictly uses system python and user site-packages. No virtual environments.
+
 import os
 import subprocess
+import sys
 import importlib
-import shutil
+import glob
 
 def ensure_compiled():
+    """Build the Rust extension and install to user site-packages."""
     try:
-        from oaclocksync_rs.oaclocksync_rs import SystemClock
+        import oaclocksync_rs.oaclocksync_rs
         return
     except ImportError:
         pass
-    
-    venv_site = "/home/anthony/.venv/lib/python3.12/site-packages"
-    if venv_site not in sys.path:
-        sys.path.append(venv_site)
+
+    user_site = os.path.expanduser(f"~/.local/lib/python{sys.version_info.major}.{sys.version_info.minor}/site-packages")
+    if user_site not in sys.path:
+        sys.path.append(user_site)
         try:
-            from oaclocksync_rs.oaclocksync_rs import SystemClock
+            import oaclocksync_rs.oaclocksync_rs
             return
         except ImportError:
             pass
 
-    print("🦀 Compiling oaclocksync_rs...")
-    crate_dir = os.path.dirname(os.path.abspath(__file__))
-    venv_python = "/home/anthony/.venv/bin/python"
+    module_dir = os.path.dirname(os.path.abspath(__file__))
     env = os.environ.copy()
     env["PIP_BREAK_SYSTEM_PACKAGES"] = "1"
-
-    if os.path.exists(venv_python):
-        subprocess.run([venv_python, "-m", "pip", "uninstall", "-y", "oaclocksync_rs"], cwd=crate_dir, check=False, env=env)
     
     try:
-        python_exec = venv_python if os.path.exists(venv_python) else sys.executable
-        subprocess.run([python_exec, "-m", "maturin", "develop", "--release"], cwd=crate_dir, check=True, env=env)
-        importlib.invalidate_caches()
-        from oaclocksync_rs.oaclocksync_rs import SystemClock
-    except (subprocess.CalledProcessError, ImportError) as e:
-        print(f"❌ Failed to compile or import oaclocksync_rs: {e}")
-        raise e
+        python_exec = sys.executable
+        # Build the wheel
+        subprocess.check_call(["maturin", "build", "--release", "--interpreter", python_exec], 
+                              cwd=module_dir, env=env, 
+                              stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        
+        # Install the wheel (handle potential name normalization)
+        wheels = glob.glob(os.path.join(module_dir, "target", "wheels", "oaclocksync_rs.oaclocksync_rs-*.whl"))
+        if not wheels:
+            # Try with hyphens replaced by underscores or vice versa
+            normalized = "oaclocksync_rs.oaclocksync_rs".replace("_", "-")
+            wheels = glob.glob(os.path.join(module_dir, "target", "wheels", f"{normalized}-*.whl"))
+        
+        if not wheels:
+            # Last resort: just look for any wheel in the target/wheels dir
+            wheels = glob.glob(os.path.join(module_dir, "target", "wheels", "*.whl"))
+
+        if wheels:
+            subprocess.check_call([python_exec, "-m", "pip", "install", "--user", "--force-reinstall", wheels[0]], 
+                                  cwd=module_dir, env=env, 
+                                  stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+            
+            importlib.invalidate_caches()
+            import oaclocksync_rs.oaclocksync_rs
+    except Exception:
+        # Graceful failure to allow parent to handle fallback
+        pass
 
 if __name__ == "__main__":
     ensure_compiled()

@@ -160,15 +160,15 @@ def _get_cached_config():
 def ptp_patcher(record):
     """
     Instruments log records with high-precision PTP (TAI) timestamps.
-
-    Lead with action: Injects a formatted 'ptp_time' string into the Loguru
-    extra context. Employs a time-caching strategy to minimize 'strftime' calls.
-
-    Inputs:
-        record (dict): The Loguru internal record to be modified in-place.
+    Respects the global 'timestamp_logs' setting.
     """
     global _last_ptp_second, _cached_hhmmss
     
+    config = _get_cached_config()
+    if not config.global_settings.get("timestamp_logs", True):
+        record["extra"]["ptp_time"] = "000000.000"
+        return
+
     ptp_now = get_ptp_time()
     current_second = int(ptp_now)
     
@@ -246,8 +246,13 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
     
     # --- Log Formats ---
     # Primary format for colorized terminal output. Includes emojis for partition and category.
+    # ⚡ DYNAMIC FORMATTING: Only include timestamp if enabled.
+    config = _get_cached_config()
+    show_ts = config.global_settings.get("timestamp_logs", True)
+    ts_fmt = "<green>{extra[ptp_time]}</green>|" if show_ts else ""
+
     log_format_console = (
-        "<green>{extra[ptp_time]}</green>|"
+        f"{ts_fmt}"
         "<level>{level: <8}</level>|"
         "<yellow>{extra[partition]: <9}</yellow>|"
         "<magenta>{extra[category]: <18}</magenta>|"
@@ -256,8 +261,10 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
     )
     
     # Simplified format for disk-based log files.
+    ts_fmt_plain = "{extra[ptp_time]} | " if show_ts else ""
     file_format_plain = (
-        "{extra[ptp_time]} | {level: <8} | {extra[partition]: <9} | "
+        f"{ts_fmt_plain}"
+        "{level: <8} | {extra[partition]: <9} | "
         "{extra[category]: <18} | {name: <20} | {message}"
     )
     
@@ -293,7 +300,7 @@ def initialize_logging(config, log_dir=None, partition="SYS"):
         os.makedirs(error_log_dir, exist_ok=True)
         os.makedirs(jsonl_log_dir, exist_ok=True)
         
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M")
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M") if config.global_settings.get("timestamp_logs", True) else "current"
         
         # 2. --- Application Log Sink ---
         app_log_path = os.path.join(run_log_dir, f"Application_{timestamp}.log")
@@ -340,6 +347,37 @@ def set_log_directory(directory: str, partition="SYS"):
     c = _get_cached_config()
     initialize_logging(c, log_dir=directory, partition=partition)
 
+def initialize_test_logging(log_dir: str):
+    """
+    Configures a dedicated sink for test run logs.
+
+    Inputs:
+        log_dir (str): The directory where test logs will be stored.
+    """
+    os.makedirs(log_dir, exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    test_log_path = os.path.join(log_dir, f"TestRun_{timestamp}.log")
+    
+    file_format_plain = (
+        "{extra[ptp_time]} | {level: <8} | {extra[partition]: <9} | "
+        "{extra[category]: <18} | {name: <20} | {message}"
+    )
+
+    # ⚡ FIX: Ensure ptp_patcher and default extras are active
+    logger.configure(
+        patcher=ptp_patcher,
+        extra={"partition": "🧪 TEST", "category": "TEST"}
+    )
+    
+    logger.add(
+        BatchLogSink(test_log_path, format_str=file_format_plain, batch_size=1, interval=1), # Flush immediately for tests
+        format=file_format_plain, level="TRACE",
+        filter=lambda record: "TEST" in record["extra"].get("category", ""),
+        backtrace=True, diagnose=True
+    )
+    
+    return test_log_path
+
 def get_logger(category: str, emoji_prefix: str = None):
     """
     Returns a bound logger instance for a specific subsystem, ensuring emoji prefix.
@@ -374,6 +412,7 @@ SYSTEM_LOGGER    = get_logger("SYSTEM")
 CONFIG_LOGGER    = get_logger("CONFIG")
 DEPLOY_LOGGER    = get_logger("DEPLOY")
 PIPELINE_LOGGER  = get_logger("PIPELINE")
+TEST_LOGGER      = get_logger("TEST")
 
 SENSOR_LOGGER    = get_logger("SENSOR")
 POWER_LOGGER     = get_logger("POWER")
@@ -442,6 +481,7 @@ cache_logger   = CACHE_LOGGER
 layer_logger   = LAYER_LOGGER
 factory_logger = FACTORY_LOGGER
 parser_logger  = PARSER_LOGGER
+test_logger    = TEST_LOGGER
 quarantine_logger = QUARANTINE_LOGGER
 failure_logger = FAILURE_LOGGER
 

@@ -31,7 +31,7 @@ from oaGuiBuilder.Workers.builder import DynamicGuiBuilder
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 from oaConfigurationManager.FileReaders.config_reader import Config
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 
 

@@ -34,15 +34,16 @@ class OSCManager:
         partition_id = os.environ.get("OPEN_AIR_PARTITION_ID", "CORE")
         if partition_id == "UI":
             if run_bridge:
-                matrix_log("comms", "osc", "__init__", 
-                           "⚠️ OSC Bridge disabled in UI partition to prevent port conflicts.", "WARNING")
+                if LOCAL_DEBUG:
+                    matrix_log("comms", "osc", "__init__",
+                               "⚠️ OSC Bridge disabled in UI partition to prevent port conflicts.", "WARNING")
             run_bridge = False
 
         self.run_bridge = run_bridge
-        
-        matrix_log("comms", "osc", "__init__", 
-                   f"Initializing Bridge (Bridge={run_bridge})...", "INFO")
-        
+
+        if LOCAL_DEBUG:
+            matrix_log("comms", "osc", "__init__",
+                       f"Initializing Bridge (Bridge={run_bridge})...", "INFO")
         # ⚡ STANDALONE: Fallback to global singletons if not injected
         from oaComBroker.Core.protocol_router.manager import ProtocolRouter
         self.protocol_router = ProtocolRouter.get_instance()

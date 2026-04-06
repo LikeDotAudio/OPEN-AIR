@@ -33,7 +33,7 @@ class FailoverManager:
         self.mqtt = mqtt_manager
         self.guid = app_constants.INSTANCE_GUID
         
-        self.is_active = False
+        self.is_active = True
         self._running = False
         self._peers = {} 
         self._lock = threading.Lock()

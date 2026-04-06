@@ -10,9 +10,9 @@ from typing import Any, Callable
 from loguru import logger
 
 # --- Native Rust Optimization ---
-from .oaLoggingGate_rs.compiler_hook import build
+from .oaLoggingGate_rs.compiler_hook import ensure_compiled
 try:
-    build()
+    ensure_compiled()
     import oalogginggate_rs
     RUST_ENABLED = True
 except ImportError:
@@ -63,23 +63,10 @@ def matrix_log(system: str, element: str = None, func_name: str = None,
     allowed = is_debug_allowed(system, element, func_name)
     
     # 2. Gatekeeper: Allow if matrix permits, OR if it's a critical log (WARNING+)
-    # ⚡ REFINEMENT: INFO/SUCCESS logs are only allowed if the system is NOT explicitly muted.
     if allowed or gravity in ["WARNING", "ERROR", "CRITICAL"]:
         pass
-    elif gravity in ["INFO", "SUCCESS"]:
-        # Check if the system is explicitly False in the matrix (Master Partition Muting)
-        # We don't use 'allowed' here because 'allowed' might be False just because 
-        # Master Debug is off. We want INFO logs to show by default.
-        # But if sys_core is EXPLICITLY False, we mute INFO too.
-        try:
-            from oaConfigurationManager.Managers.LoggingManager.manager import LoggingMatrixManager
-            matrix = LoggingMatrixManager.get_instance().get_matrix()
-            if matrix.get(f"SYS_{system.upper()}") is False:
-                return
-        except Exception:
-            pass
     else:
-        # Debug/Trace and not allowed
+        # INFO/SUCCESS/DEBUG/TRACE and not allowed
         return
 
     from oaLogging.Core.logger import get_logger

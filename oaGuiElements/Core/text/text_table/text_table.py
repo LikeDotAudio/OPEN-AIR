@@ -49,7 +49,7 @@ class BuilderTextTableCreator(TransparencyMixin):
         # ⚡ Path Resolution: Use config or passed kwargs
         path = config_data.get("path") or kwargs.get("path")
         abs_topic = ctx.state_mirror_engine.calculate_topic(path, ctx.base_mqtt_topic_from_path)
-        csv_svc = TableCSVService(get_text(config.get("label_active"), "Table"))
+        csv_svc = TableCSVService(get_text(config_data.get("label_active"), "Table"))
         
         # 2. Treeview
         headers = config_data.get("headers", [])

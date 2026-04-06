@@ -21,7 +21,7 @@ import shutil
 import logging
 from pathlib import Path
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 
 # Configure standard logging

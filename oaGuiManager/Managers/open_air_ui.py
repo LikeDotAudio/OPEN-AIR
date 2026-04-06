@@ -53,12 +53,14 @@ def main():
     # 2. Tkinter Environment Setup
     root = UIWindowManager.create_root_window()
 
-    # 3. Composition Root (Orchestrates service creation)
+    # 3. Splash Screen Initiation (IMMEDIATE)
+    # Launch splash screen first to provide instant user feedback.
+    splash = SplashScreen(root, app_constants.CURRENT_VERSION, app_constants.global_settings["debug_enabled"])
+    splash.set_status("Composing Service Graph...")
+
+    # 4. Composition Root (Orchestrates service creation)
     composition_root = UICompositionRoot(root, app_constants)
     shared_services = composition_root.build_services()
-
-    # 4. Splash Screen Initiation
-    splash = SplashScreen(root, app_constants.CURRENT_VERSION, app_constants.global_settings["debug_enabled"])
 
     # 5. Shutdown Coordinator
     shutdown_coordinator = ShutdownCoordinator(root, shared_services, True)

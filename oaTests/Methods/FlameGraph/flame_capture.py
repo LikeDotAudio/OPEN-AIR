@@ -1,37 +1,17 @@
-import sys
-
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
 # oaTests/Methods/FlameGraph/flame_capture.py
-#
-# Low-level Multi-threaded Profiling Hooks.
-#
 # Author: Anthony Peter Kuzub
-# Blog: www.Like.audio (Contributor to this project)
+# Version: 20260406.0040.1
 #
-# Professional services for customizing and tailoring this software to your specific
-# application can be negotiated. There is no charge to use, modify, or fork this software.
-#
-# Build Log: https://like.audio/category/software/spectrum-scanner/
-# Source Code: https://github.com/APKaudio/
-# Feature Requests can be emailed to i @ like . audio
-#
-# Version 20260329.0020.1
-#
-# Description:
-# This module provides the core capture mechanism for the performance profiler.
-# it monkey-patches the 'threading.Thread.run' method to automatically install
-# cProfile hooks into every spawned child thread, ensuring a unified view of
-# system-wide performance.
-#
-# Architectural Role:
-# - Instrumentation Layer: Injects profiling logic into the Python runtime.
-# - Statistics Aggregator: Consolidates profile data from multiple threads.
+# Description: Low-level Multi-threaded Profiling Hooks.
+# Surgical fixes for NameError and multi-thread capture.
 
+import sys
+import inspect
 import cProfile
 import pstats
 import threading
 import gc
+from oaLogging.Entry import matrix_log, TEST_LOGGER
 
 def kill_all_profilers():
     """Safety cleanup: stops any dangling profilers in the environment."""
@@ -42,11 +22,10 @@ def kill_all_profilers():
             if isinstance(obj, cProfile.Profile):
                 obj.disable()
                 count += 1
-        except Exception as e:
-            from oaLogging.Entry import logger
-            matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"FlameGraph: Failed to disable profiler object: {e}", "TRACE")
+        except Exception:
+            pass
     if count > 0:
-        print(f"? Watchdog: Killed {count} active profiler(s).")
+        TEST_LOGGER.trace(f"FlameGraph: Watchdog killed {count} active profiler(s).")
 
 class MultiThreadProfiler:
     """Orchestrates profiling across the main thread and all spawned child threads."""
@@ -54,35 +33,71 @@ class MultiThreadProfiler:
         self.profilers = []
         self.lock = threading.Lock()
         self.main_profiler = cProfile.Profile()
+        self._is_installed = False
 
     def install(self):
+        if self._is_installed:
+            return
+        
         kill_all_profilers()
-        original_run = threading.Thread.run
+        
+        # Ensure main profiler is enabled
+        self.main_profiler.enable()
+        
+        if not hasattr(threading.Thread, "_original_run"):
+            threading.Thread._original_run = threading.Thread.run
+            
+        original_run = threading.Thread._original_run
         outer_self = self
         
         def patched_run(self_thread):
+            # Clear any inherited profilers in this new thread
+            kill_all_profilers()
+            
             p = cProfile.Profile()
             try:
                 p.enable()
                 with outer_self.lock:
                     outer_self.profilers.append(p)
-                try: original_run(self_thread)
-                finally: p.disable()
-            except ValueError as e: 
-                from oaLogging.Entry import logger
-                logger.warning(f"FlameGraph: Profiler enable failed, running thread without profiling: {e}")
+                try: 
+                    original_run(self_thread)
+                finally: 
+                    p.disable()
+            except ValueError as e:
+                TEST_LOGGER.warning(f"FlameGraph: Profiler enable failed: {e}")
+                # Fallback if another profiler is active (e.g. nested calls)
                 original_run(self_thread)
             
-        threading.Thread.run = _run_with_capture
+        threading.Thread.run = patched_run
+        self._is_installed = True
 
     def stop(self):
+        if not self._is_installed:
+            return
         self.main_profiler.disable()
+        if hasattr(threading.Thread, "_original_run"):
+            threading.Thread.run = threading.Thread._original_run
+        self._is_installed = False
 
     def get_stats(self):
         self.main_profiler.disable()
-        combined_stats = pstats.Stats(self.main_profiler)
+        
+        # Initialize with main thread stats
+        try:
+            combined_stats = pstats.Stats(self.main_profiler)
+        except TypeError:
+            # Fallback to empty stats if main_profiler is somehow still empty
+            # We use an empty Profile that has been toggled to ensure it's not "empty"
+            empty_p = cProfile.Profile()
+            empty_p.enable()
+            empty_p.disable()
+            combined_stats = pstats.Stats(empty_p)
+            
         with self.lock:
             for p in self.profilers:
                 p.disable()
-                combined_stats.add(pstats.Stats(p))
+                try:
+                    combined_stats.add(pstats.Stats(p))
+                except (TypeError, ValueError, RuntimeError):
+                    continue
         return combined_stats

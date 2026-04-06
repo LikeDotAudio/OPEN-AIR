@@ -46,11 +46,13 @@ class BuilderCompositeHorizontalDialValueCreator(
     def make_composite_horizontal_dial_value(self, parent_widget, config_data, context=None, **kwargs):
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔀 [BUILDER] Creating composite horizontal dial value.", level="TRACE")
         
-        label, path = get_text(config.get("label_active"), get_text(config.get("label"), "Composite")), config_data.get("path", "")
+        label, path = get_text(config_data.get("label_active"), get_text(config_data.get("label"), "Composite")), config_data.get("path", "")
         
         # Context extraction
         if context:
-            state_mirror_engine, subscriber_router, base_mqtt_topic = context.state_mirror_engine, context.subscriber_router, context.base_mqtt_topic_from_path
+            state_mirror_engine = context.state_mirror_engine
+            subscriber_router = context.subscriber_router
+            base_mqtt_topic = context.base_mqtt_topic_from_path
             builder_instance = context.builder_instance
         else:
             state_mirror_engine = getattr(self, 'state_mirror_engine', None)

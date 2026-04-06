@@ -4,7 +4,7 @@
 #
 # Description: Python wrapper for the Rust Fast Scanner.
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 import logging
 from .oaFastScanner_rs.compiler_hook import ensure_compiled

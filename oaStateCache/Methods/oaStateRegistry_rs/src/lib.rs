@@ -5,7 +5,7 @@
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList};
 use dashmap::DashMap;
-use pyo3::IntoPyAnyExt;
+use pyo3::IntoPyObjectExt;
 
 #[pyclass]
 struct StateRegistryCore {
@@ -81,7 +81,7 @@ impl StateRegistryCore {
         let list = PyList::empty(py);
         for entry in self.cache.iter() {
             let pair = (entry.key().clone(), entry.value().clone_ref(py));
-            list.append(pair.into_py_any(py)?)?;
+            list.append(pair.into_bound_py_any(py)?)?;
         }
         Ok(list.unbind())
     }
@@ -89,7 +89,7 @@ impl StateRegistryCore {
     fn keys(&self, py: Python<'_>) -> PyResult<Py<PyList>> {
         let list = PyList::empty(py);
         for entry in self.cache.iter() {
-            list.append(entry.key().clone().into_py_any(py)?)?;
+            list.append(entry.key().clone().into_bound_py_any(py)?)?;
         }
         Ok(list.unbind())
     }

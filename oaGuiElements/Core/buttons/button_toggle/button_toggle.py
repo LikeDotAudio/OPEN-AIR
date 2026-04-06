@@ -38,8 +38,8 @@ class ToggleButton(CanvasButton):
         options_map = config.get("options", {})
         on_config = options_map.get("ON", {})
         off_config = options_map.get("OFF", {})
-        self.on_text = get_text(on_get_text(config.get("label_active")), self.label if self.label else "ON")
-        self.off_text = get_text(off_get_text(config.get("label_inactive")), self.label if self.label else "OFF")
+        self.on_text = get_text(config.get("label_active"), self.label if self.label else "ON")
+        self.off_text = get_text(config.get("label_inactive"), self.label if self.label else "OFF")
 
         # State Variable
         is_on_init = options_map.get("ON", {}).get("selected", False)
@@ -116,7 +116,7 @@ class BuilderButtonToggleCreator(TransparencyMixin):
                 if not container.winfo_exists(): return
                 container.delete("industrial_text")
                 container.create_text(
-                    (btn_w + 10)/2, 12, text=label, anchor="center",
+                    (btn_w + 11)/2, 12, text=label, anchor="center",
                     fill="white", font=("TkDefaultFont", 10, "bold"),
                     tags="industrial_text"
                 )

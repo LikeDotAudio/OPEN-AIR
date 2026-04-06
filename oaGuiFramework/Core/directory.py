@@ -14,7 +14,7 @@ from tkinter import ttk
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 class DirectoryBuilderMixin:
     """
@@ -98,8 +98,8 @@ class DirectoryBuilderMixin:
                 
                 # Retrieve overflow settings for the current split pane
                 # These are now parsed by LayoutParser and available in layout_data
-                panel_overflow_ew = layout_data.get("overflow_ew", "auto")
-                panel_overflow_ns = layout_data.get("overflow_ns", "auto")
+                panel_overflow_ew = layout_data.get("overflow_ew", "none")
+                panel_overflow_ns = layout_data.get("overflow_ns", "none")
 
                 panel_widget_containers = [] # To store the widget that will contain the panel's content
                 panel_frames = [] # Keep track of the base frames for each panel
@@ -142,7 +142,7 @@ class DirectoryBuilderMixin:
 
                     try:
                         paned_window.add(base_frame) # Add the base frame to the PanedWindow
-                        paned_window.pane(base_frame, weight=weight)
+                        paned_window.pane(base_frame, weight=weight, sticky="nsew")
                     except tk.TclError as e:
                         matrix_log("gui", "gui_builder", "_build_from_directory", f"⚠️ Panel addition skipped: {e}", "TRACE")
 

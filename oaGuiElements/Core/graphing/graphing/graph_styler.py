@@ -95,8 +95,9 @@ def apply_style(
         # Label
         label = a_conf.get("label")
         if label:
-            if axis_name == "x": ax.set_xlabel(label, color=theme.get("text", "black"))
-            else: ax.set_ylabel(label, color=theme.get("text", "black"))
+            label_text = get_text(label, "")
+            if axis_name == "x": ax.set_xlabel(label_text, color=theme.get("text", "black"))
+            else: ax.set_ylabel(label_text, color=theme.get("text", "black"))
 
         # Scale
         scale = a_conf.get("scale")

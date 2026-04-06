@@ -86,6 +86,22 @@ class BuilderButtonActuatorCreator(TransparencyMixin):
         b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
         
         label, path = get_text(config_data.get("label")), config_data.get("path")
+        b_topic = ctx.base_mqtt_topic_from_path
+        
+        button = ActuatorButton(
+            parent_widget, config_data, path, 
+            ctx.state_mirror_engine, b_topic, ctx.subscriber_router, b_inst
+        )
+
+        # Layout Application (Grid)
+        lay = config_data.get("layout", {})
+        if "row" in lay and "column" in lay:
+            button.grid(
+                row=lay["row"], column=lay["column"],
+                columnspan=lay.get("col_span", 1), rowspan=lay.get("row_span", 1),
+                padx=lay.get("padx", 5), pady=lay.get("pady", 2),
+                sticky=lay.get("sticky", "")
+            )
 
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🔘 [SUCCESS] The actuator '{get_text(config_data.get('label'), 'Unknown')}' has materialized!", level="SUCCESS")
         return button

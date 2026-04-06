@@ -47,7 +47,7 @@ except Exception as e:
     if matrix_log(system="CONFIG", element="DEBUG_TOGGLER", func_name="toggle_debug_flags", message=f"❌ [CONFIG] Rust debug toggler initialization failed: {e}", level="ERROR"):
         pass
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 def _set_debug_state(project_root, target_state: bool, console_print_func=None):
     """

@@ -4,7 +4,7 @@
 #
 # Description: Pure Rust Ember+ BER parser (No Python fallback).
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 import logging
 from .oaEmberTree_rs.compiler_hook import ensure_compiled
@@ -20,7 +20,7 @@ except Exception as e:
     logging.error(f"❌ [EMBER] Failed to initialize Rust Ember Parser: {e}")
     HAS_RUST = False
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 class EmberParser:
     """

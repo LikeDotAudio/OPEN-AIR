@@ -46,7 +46,7 @@ from oaConfigurationManager.FileReaders.config_reader import Config
 from oaLogging.Core.logger import initialize_logging, set_log_directory, CORE_LOGGER
 from loguru import logger
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
 from oaConfigurationManager.Methods.console_encoder import configure_console_encoding
@@ -128,7 +128,7 @@ def main():
             # Continually "pet" the watchdog to confirm process health.
             watchdog.kick_watchdog()
             # Sleep yields CPU to other processes while maintaining responsiveness.
-            time.sleep(0.5)
+            time.sleep(0.1)
             
     except KeyboardInterrupt:
         if LOCAL_DEBUG:

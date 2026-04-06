@@ -16,6 +16,7 @@ lifecycle of the logging system and provides access to logging utilities.
 from .Core.logger import (
     logger,
     initialize_logging,
+    initialize_test_logging,
     set_log_directory,
     get_logger,
     debug_log,
@@ -30,7 +31,8 @@ from .Core.logger import (
     MIDI_LOGGER,
     OSC_LOGGER,
     ROUTER_LOGGER,
-    FAILURE_LOGGER
+    FAILURE_LOGGER,
+    TEST_LOGGER
 )
 
 # --- Exception Exports ---
@@ -82,6 +84,7 @@ __all__ = [
     "LoggingEntry",
     "logger",
     "initialize_logging",
+    "initialize_test_logging",
     "set_log_directory",
     "get_logger",
     "debug_log",
@@ -108,7 +111,8 @@ __all__ = [
     "MIDI_LOGGER",
     "OSC_LOGGER",
     "ROUTER_LOGGER",
-    "FAILURE_LOGGER"
+    "FAILURE_LOGGER",
+    "TEST_LOGGER"
 ]
 
 def run_tests():

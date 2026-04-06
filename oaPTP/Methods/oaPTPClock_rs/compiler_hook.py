@@ -1,63 +1,65 @@
+# oaPTP/Methods/oaPTPClock_rs/compiler_hook.py
+# Author: Gemini (Collaborator)
+# Version: 20260406.1300.2
+#
+# Description: Compiler hook for oaptpclock_rs. 
+#              Strictly uses system python and user site-packages. No virtual environments.
+
 import os
-import shutil
 import subprocess
 import sys
 import importlib
+import glob
 
 def ensure_compiled():
-    """
-    Ensures the Rust extension is compiled and importable.
-    This version is hardened to not raise exceptions, allowing the 
-    parent wrapper to handle fallback logic gracefully.
-    """
+    """Build the Rust extension and install to user site-packages."""
     try:
         import oaptpclock_rs
         return
     except ImportError:
         pass
 
-    module_dir = os.path.dirname(__file__)
-    venv_site = "/home/anthony/.venv/lib/python3.12/site-packages"
-    venv_python = "/home/anthony/.venv/bin/python"
-
-    if venv_site not in sys.path:
-        sys.path.append(venv_site)
+    user_site = os.path.expanduser(f"~/.local/lib/python{sys.version_info.major}.{sys.version_info.minor}/site-packages")
+    if user_site not in sys.path:
+        sys.path.append(user_site)
         try:
             import oaptpclock_rs
             return
         except ImportError:
             pass
 
-    # Aggressively clean up corrupted installations
-    if os.path.exists(venv_site):
-        for item in os.listdir(venv_site):
-            if item.startswith("~") and "oaptpclock_rs" in item:
-                path = os.path.join(venv_site, item)
-                print(f"Removing corrupted installation artifact: {path}")
-                if os.path.isdir(path):
-                    shutil.rmtree(path)
-                else:
-                    os.remove(path)
-
+    module_dir = os.path.dirname(os.path.abspath(__file__))
     env = os.environ.copy()
     env["PIP_BREAK_SYSTEM_PACKAGES"] = "1"
+    
+    try:
+        python_exec = sys.executable
+        # Build the wheel
+        subprocess.check_call(["maturin", "build", "--release", "--interpreter", python_exec], 
+                              cwd=module_dir, env=env, 
+                              stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        
+        # Install the wheel (handle potential name normalization)
+        wheels = glob.glob(os.path.join(module_dir, "target", "wheels", "oaptpclock_rs-*.whl"))
+        if not wheels:
+            # Try with hyphens replaced by underscores or vice versa
+            normalized = "oaptpclock_rs".replace("_", "-")
+            wheels = glob.glob(os.path.join(module_dir, "target", "wheels", f"{normalized}-*.whl"))
+        
+        if not wheels:
+            # Last resort: just look for any wheel in the target/wheels dir
+            wheels = glob.glob(os.path.join(module_dir, "target", "wheels", "*.whl"))
 
-    # Try to uninstall the package first using venv python
-    if os.path.exists(venv_python):
-        subprocess.run([venv_python, "-m", "pip", "uninstall", "-y", "oaptpclock_rs"], cwd=module_dir, check=False, env=env)
-    else:
-        subprocess.run([sys.executable, "-m", "pip", "uninstall", "-y", "oaptpclock_rs"], cwd=module_dir, check=False, env=env)
-
-    has_so = any(f.endswith('.so') or f.endswith('.pyd') or f.endswith('.dylib') for f in os.listdir(module_dir))
-    if not has_so:
-        print(f"[{module_dir}] Native binary not found. Compiling via Cargo...")
-        try:
-            python_exec = venv_python if os.path.exists(venv_python) else sys.executable
-            subprocess.run([python_exec, "-m", "maturin", "develop", "--release"], cwd=module_dir, check=True, env=env)
-            print("Compilation successful.")
+        if wheels:
+            subprocess.check_call([python_exec, "-m", "pip", "install", "--user", "--force-reinstall", wheels[0]], 
+                                  cwd=module_dir, env=env, 
+                                  stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+            
             importlib.invalidate_caches()
             import oaptpclock_rs
-        except Exception as e:
-            print(f"⚠️ [RUST] Graceful failure during compilation/import of oaptpclock_rs: {e}")
-            # We do NOT raise here. Let the parent import fail and handle fallback.
-            pass
+    except Exception:
+        # Graceful failure to allow parent to handle fallback
+        pass
+
+if __name__ == "__main__":
+    ensure_compiled()

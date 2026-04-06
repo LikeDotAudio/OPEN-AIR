@@ -1,89 +1,65 @@
 # oaAudioMixer/Core/oaAudioMixer_rs/compiler_hook.py
 # Author: Gemini (Collaborator)
-# Version: 20260404.0035.36
+# Version: 20260406.1300.2
 #
-# Description: Helper to ensure the Rust PyO3 module is compiled and its path added to sys.path.
+# Description: Compiler hook for oaaudiomixer_rs. 
+#              Strictly uses system python and user site-packages. No virtual environments.
 
+import os
 import subprocess
 import sys
-import os
-import shutil
-from pathlib import Path
+import importlib
+import glob
 
 def ensure_compiled():
-    """
-    Ensures the Rust PyO3 module for oaAudioMixer_rs is compiled
-    and its path is added to sys.path if not already present.
-    Only recompiles if source files are newer than the binary.
-    """
-    rust_project_path = Path(__file__).parent
-    target_dir = rust_project_path / "target" / "release"
-    module_name = "oaaudiomixer_rs"
-    
-    # Determine the target library path
-    if sys.platform.startswith("linux"):
-        src_lib = target_dir / f"lib{module_name}.so"
-        dst_lib = target_dir / f"{module_name}.so"
-    elif sys.platform == "darwin":
-        src_lib = target_dir / f"lib{module_name}.dylib"
-        dst_lib = target_dir / f"{module_name}.so"
-    elif sys.platform == "win32":
-        src_lib = target_dir / f"{module_name}.dll"
-        dst_lib = target_dir / f"{module_name}.pyd"
-    else:
-        raise RuntimeError(f"Unsupported platform: {sys.platform}")
+    """Build the Rust extension and install to user site-packages."""
+    try:
+        import oaaudiomixer_rs
+        return
+    except ImportError:
+        pass
 
-    # Check if we need to recompile
-    needs_recompile = not dst_lib.exists()
-    
-    if not needs_recompile:
-        # Check if any source file is newer than the binary
-        bin_mtime = dst_lib.stat().st_mtime
-        
-        # Check Cargo.toml
-        if (rust_project_path / "Cargo.toml").stat().st_mtime > bin_mtime:
-            needs_recompile = True
-        
-        # Check src directory recursively
-        if not needs_recompile:
-            for root, dirs, files in os.walk(rust_project_path / "src"):
-                for file in files:
-                    if Path(os.path.join(root, file)).stat().st_mtime > bin_mtime:
-                        needs_recompile = True
-                        break
-                if needs_recompile:
-                    break
-
-    if needs_recompile:
-        print(f"📡 [RUST COMPILER] Recompiling oaAudioMixer_rs in release mode...")
+    user_site = os.path.expanduser(f"~/.local/lib/python{sys.version_info.major}.{sys.version_info.minor}/site-packages")
+    if user_site not in sys.path:
+        sys.path.append(user_site)
         try:
-            subprocess.run(
-                ["cargo", "build", "--release"],
-                cwd=rust_project_path,
-                capture_output=True,
-                text=True,
-                check=True
-            )
-            print("✅ Rust oaAudioMixer_rs built successfully.")
+            import oaaudiomixer_rs
+            return
+        except ImportError:
+            pass
+
+    module_dir = os.path.dirname(os.path.abspath(__file__))
+    env = os.environ.copy()
+    env["PIP_BREAK_SYSTEM_PACKAGES"] = "1"
+    
+    try:
+        python_exec = sys.executable
+        # Build the wheel
+        subprocess.check_call(["maturin", "build", "--release", "--interpreter", python_exec], 
+                              cwd=module_dir, env=env, 
+                              stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        
+        # Install the wheel (handle potential name normalization)
+        wheels = glob.glob(os.path.join(module_dir, "target", "wheels", "oaaudiomixer_rs-*.whl"))
+        if not wheels:
+            # Try with hyphens replaced by underscores or vice versa
+            normalized = "oaaudiomixer_rs".replace("_", "-")
+            wheels = glob.glob(os.path.join(module_dir, "target", "wheels", f"{normalized}-*.whl"))
+        
+        if not wheels:
+            # Last resort: just look for any wheel in the target/wheels dir
+            wheels = glob.glob(os.path.join(module_dir, "target", "wheels", "*.whl"))
+
+        if wheels:
+            subprocess.check_call([python_exec, "-m", "pip", "install", "--user", "--force-reinstall", wheels[0]], 
+                                  cwd=module_dir, env=env, 
+                                  stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
             
-            if src_lib.exists():
-                if src_lib != dst_lib:
-                    shutil.copy2(src_lib, dst_lib)
-            else:
-                raise FileNotFoundError(f"Could not find compiled library at {src_lib}")
+            importlib.invalidate_caches()
+            import oaaudiomixer_rs
+    except Exception:
+        # Graceful failure to allow parent to handle fallback
+        pass
 
-        except subprocess.CalledProcessError as e:
-            print(f"❌ Failed to build Rust oaAudioMixer_rs: {e}")
-            if e.stderr:
-                print("STDERR:")
-                print(e.stderr)
-            raise
-        except FileNotFoundError:
-            print("❌ 'cargo' command not found. Please install Rust and Cargo.")
-            raise
-    # else:
-    #    print(f"📡 [RUST COMPILER] oaAudioMixer_rs is up to date.")
-
-    # Add target/release to sys.path if not already present
-    if str(target_dir) not in sys.path:
-        sys.path.insert(0, str(target_dir))
+if __name__ == "__main__":
+    ensure_compiled()

@@ -1,16 +1,14 @@
-# parser/widget_schema_normalizer.py
-from oaGuiFramework.Methods.i18n_utils import get_text
+# oaGuiFramework/widget_schema_normalizer.py
 # Author: Anthony Peter Kuzub
-# Version: 1.0.0
+# Version: 20260406.0040.1
 #
-# Description: Semantic Schema Normalization for the OPEN-AIR Dynamic GUI.
+# Description: Static Translation Engine for GUI Configuration Schema.
 
-from .standardizers.widget_type_resolver import WidgetTypeResolver
+from oaGuiManager.Methods.schema_utils import deep_merge, get_styled_val, calculate_sticky, expand_abbreviations
 from oaGuiManager.Constants.schema_defaults import PILLARS, STRUCT_TYPES, DEFAULT_COLORS
-from oaGuiManager.Methods.schema_utils import (
-    deep_merge, expand_abbreviations, get_styled_val, calculate_sticky
-)
+from oaGuiFramework.Core.standardizers.widget_type_resolver import WidgetTypeResolver
 
+from oaGuiElements.Core.faders.fader_horizontal.Core.horizontal_fader_asset_generator import HorizontalFaderAssetGenerator
 class WidgetSchemaNormalizer:
     """Static Translation Engine for GUI Configuration Schema."""
 
@@ -31,8 +29,8 @@ class WidgetSchemaNormalizer:
 
         # 2. Identity and Label Mapping
         labels = config.get("labels", {})
-        if "label" in config: get_text(config["label_active"]) = get_text(config["label"])
-        if "main" in labels: get_text(config["label_active"]) = labels["main"]
+        if "label" in config: config["label_active"] = config["label"]
+        if "main" in labels: config["label_active"] = labels["main"]
         if "v1" in labels: config["label_v1"] = labels["v1"]
         if "v2" in labels: config["label_v2"] = labels["v2"]
         if "visible" in labels: 
@@ -42,7 +40,7 @@ class WidgetSchemaNormalizer:
         if "unit_text" in labels:
             config["unit_text"] = labels["unit_text"]
             config["units"] = labels["unit_text"]
-        if "notes" in config: get_text(config["description"]) = config["notes"]
+        if "notes" in config: config["description"] = config["notes"]
 
         # 3. Universal Rhyme Extraction
         geometry = config.get("geometry", config.get("layout", {}))
@@ -121,3 +119,5 @@ class WidgetSchemaNormalizer:
         if "items" in config and "fields" not in config:
             config["fields"] = config["items"]
         return config
+
+

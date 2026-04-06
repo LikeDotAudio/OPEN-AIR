@@ -26,7 +26,7 @@ from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
 from oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 # --- Global Scope Variables ---
 current_version = "20250919.231000.1"

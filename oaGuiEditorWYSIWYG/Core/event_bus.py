@@ -8,7 +8,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 
 class EventBus:

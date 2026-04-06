@@ -4,7 +4,7 @@
 #
 # Description: Pure Rust CSV parser with Polars support (No Python fallback).
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 from .oaCSVParser_rs.compiler_hook import ensure_compiled
 ensure_compiled()

@@ -48,6 +48,8 @@ class TestGraphPlotter(unittest.TestCase):
             # ⚡ FORCE SYNC: Ensure scheduled updates (which create lines) run immediately
             plotter._perform_scheduled_update()
             
+            print("sig_a data:", plotter.lines['sig_a'].get_data())
+            
             self.assertIsInstance(plotter, GraphPlotter, f'Expected instance of GraphPlotter, got {type(plotter)}')
             self.assertIsNotNone(plotter.fig, 'Expected plotter.fig to be not None')
             self.assertIsNotNone(plotter.ax, 'Expected plotter.ax to be not None')

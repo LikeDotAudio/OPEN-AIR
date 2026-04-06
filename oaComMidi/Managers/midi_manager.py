@@ -171,7 +171,7 @@ class MidiManager:
             except Exception as e:
                 midi_logger.error(f"Listen Error on {port.name}: {e}")
             
-            time.sleep(0.005)
+            time.sleep(0.001)
 
     def publish(self, topic, val, meta=None):
         if not self._running or not self.run_bridge: return

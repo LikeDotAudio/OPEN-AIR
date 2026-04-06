@@ -4,7 +4,7 @@
 #
 # Description: Pure Rust SNMP OID tree manager (No Python fallback).
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 import logging
 from .oaSNMPAgent_rs.compiler_hook import ensure_compiled
@@ -20,7 +20,7 @@ except Exception as e:
     logging.error(f"❌ [SNMP] Failed to initialize Rust SNMP Agent: {e}")
     HAS_RUST = False
 
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 
 class SnmpAgent:
     """

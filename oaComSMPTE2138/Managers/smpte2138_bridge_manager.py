@@ -67,13 +67,28 @@ class SMPTE2138BridgeManager:
             "oa/action/device/play": "play",
             # Normalized paths from GUI interactions
             "OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/span_freq_MHz": "frequency",
-            "OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz": "frequency_start"
+            "OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Start Stop/start_freq_MHz": "frequency_start",
+            "OPEN-AIR/Assets/Spectrum/Instrument/frequency/Spectrum_Instrument_frequency/blocks/Frequency/center_freq_MHz": "frequency_center"
         }
         
         self._setup_subscriptions()
         self._publish_bridge_status()
         
         matrix_log("comms", "smpte2138", "__init__", "✅ [BRIDGE] SMPTE2138 Protocol Bridge initialized and active.", "SUCCESS")
+
+    def start(self):
+        """Standardized entry point for the ProtocolRouter to activate the bridge."""
+        if not self.bridge_enabled:
+            self.bridge_enabled = True
+            matrix_log("comms", "smpte2138", "start", "▶️ [BRIDGE] SMPTE2138 Protocol Bridge started (PRIMARY).", "INFO")
+            self._publish_bridge_status()
+
+    def stop(self):
+        """Standardized entry point for the ProtocolRouter to deactivate the bridge."""
+        if self.bridge_enabled:
+            self.bridge_enabled = False
+            matrix_log("comms", "smpte2138", "stop", "⏹️ [BRIDGE] SMPTE2138 Protocol Bridge stopped (SHADOW).", "INFO")
+            self._publish_bridge_status()
 
     def _setup_subscriptions(self):
         """Registers listeners for internal actions and remote control."""

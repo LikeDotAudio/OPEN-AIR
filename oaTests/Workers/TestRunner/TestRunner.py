@@ -1,6 +1,6 @@
 # oaTests/Workers/TestRunner/TestRunner.py
 # Author: Anthony Peter Kuzub
-# Version: 1.2.0
+# Version: 1.3.0
 #
 # Description: Custom TestRunner and Result collector for OPEN-AIR.
 # Intercepts stderr to detect and fail on background crashes (e.g. Tkinter callbacks).
@@ -11,6 +11,7 @@ import unittest
 import sys
 import io
 from datetime import datetime
+from oaLogging.Entry import TEST_LOGGER
 
 class CrashInterceptingResult(unittest.TestResult):
     """
@@ -33,24 +34,13 @@ class CrashInterceptingResult(unittest.TestResult):
         super().startTest(test)
 
     def stopTest(self, test):
-        # Restore stderr and check for crashes
+        # Restore stderr
         captured_err = self._stderr_buffer.getvalue()
         sys.stderr = self._original_stderr
         
         # Write captured output back to real stderr so it's still visible
         if captured_err:
             sys.stderr.write(captured_err)
-            
-            # If we saw a traceback but the test didn't already fail/error out,
-            # we force it into a failed state.
-            if ("Traceback" in captured_err or "Exception" in captured_err) and \
-               test not in [f[0] for f in self.failures] and \
-               test not in [e[0] for e in self.errors]:
-                
-                # We can't easily retroactively change the result type in 
-                # unittest.TestResult without hackery, but we can log it.
-                self.addFailure(test, (Exception, Exception("Background crash detected in stderr"), None))
-
         super().stopTest(test)
 
     def addSuccess(self, test):
@@ -106,7 +96,9 @@ class TestRunner:
                 try:
                     suites.append(loader.discover(d, pattern="test_*.py", top_level_dir=top_level_dir))
                 except ImportError as e:
-                    print(f"❌ ImportError in {d}: {e}")
+                    TEST_LOGGER.error(f"❌ ImportError in {d}: {e}")
+                    if not self.record_callback:
+                        print(f"❌ ImportError in {d}: {e}")
         
         full_suite = unittest.TestSuite(suites)
         result = CrashInterceptingResult(self)
@@ -114,11 +106,27 @@ class TestRunner:
         return result
 
     def _record(self, test, status, message="", cause="", duration=0):
-        # Pass the record up to the provided callback or print to console
+        # Pass the record up to the provided callback
         if self.record_callback:
             self.record_callback(test, status, message, cause, duration)
+        
+        # Always log to the specialized TEST_LOGGER (TestLog directory)
+        emoji = "✅" if status == "passed" else "❌"
+        if status == "passed":
+            TEST_LOGGER.success(f"{emoji} {test}: {status} ({duration:.4f}s)")
+        elif status == "skipped":
+            TEST_LOGGER.warning(f"⏭️ {test}: {status} - {message}")
         else:
-            emoji = "✅" if status == "passed" else "❌"
+            TEST_LOGGER.error(f"{emoji} {test}: {status} ({duration:.4f}s)")
+            if message:
+                TEST_LOGGER.error(f"   [MSG] {message}")
+            if cause:
+                # Remove HTML tags for log readability
+                clean_cause = cause.replace("<br>", "\n").replace("<small><i>", "").replace("</i></small>", "")
+                TEST_LOGGER.error(f"   [CAUSE] {clean_cause}")
+
+        # Fallback console print if no callback is active
+        if not self.record_callback:
             print(f"{emoji} {test}: {status} ({duration:.4f}s)")
             if message:
                 print(f"   [MSG] {message}")

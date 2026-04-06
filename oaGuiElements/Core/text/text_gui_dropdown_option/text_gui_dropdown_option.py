@@ -12,7 +12,7 @@ from tkinter import ttk
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-LOCAL_DEBUG = True
+LOCAL_DEBUG = False
 from oaLogging.Core.logger import builder_logger
 from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
@@ -30,7 +30,7 @@ class BuilderTextGuiDropdownOptionCreator(TransparencyMixin):
     """A mixin class providing functionality for creating a dropdown (Combobox) widget."""
 
     def make_text_gui_dropdown_option(self, parent_widget, config_data, context=None, **kwargs):
-        label, path = get_text(config.get("label")), config_data.get("path")
+        label, path = get_text(config_data.get("label")), config_data.get("path")
 
         if context:
             state_mirror_engine = context.state_mirror_engine

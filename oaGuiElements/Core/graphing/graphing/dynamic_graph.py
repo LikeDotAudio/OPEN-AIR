@@ -1,4 +1,5 @@
 # graphing/dynamic_graph.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
@@ -13,7 +14,7 @@ from typing import Dict, Any
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from . import graph, graph_styler, graph_interactor, graph_updater

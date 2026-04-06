@@ -14,7 +14,12 @@
       "fields": {
         "Meter_1": {
           "type": "_NeedleVUMeter",
-          "label": "Crest 1",
+          "label": {
+            "En": "Crest 1",
+            "Fr": "Crest 1",
+            "De": "Crest 1",
+            "Es": "Crest 1"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -40,7 +45,12 @@
         },
         "Meter_2": {
           "type": "_NeedleVUMeter",
-          "label": "Crest 2",
+          "label": {
+            "En": "Crest 2",
+            "Fr": "Crest 2",
+            "De": "Crest 2",
+            "Es": "Crest 2"
+          },
           "geometry": {
             "width": 250,
             "height": 250

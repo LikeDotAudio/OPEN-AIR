@@ -13,7 +13,12 @@
     "blocks": {
       "rig": {
         "type": "OcaBlock",
-        "description": "Modulation Setup",
+        "description": {
+          "En": "Modulation Setup",
+          "Fr": "Modulation Installation",
+          "De": "Modulation Einrichtung",
+          "Es": "Modulation Configuración"
+        },
         "fields": {
           "Setup_AM": {
             "type": "OcaBlock",
@@ -46,23 +51,53 @@
                   "shape": {
                     "value": "SIN",
                     "type": "_GuiValue",
-                    "label": "Shape",
+                    "label": {
+                      "En": "Shape",
+                      "Fr": "Shape",
+                      "De": "Shape",
+                      "Es": "Shape"
+                    },
                     "units": "",
-                    "description": "SIN, SQU, TRI, RAMP"
+                    "description": {
+                      "En": "SIN, SQU, TRI, RAMP",
+                      "Fr": "SIN, SQU, TRI, RAMP",
+                      "De": "SIN, SQU, TRI, RAMP",
+                      "Es": "SIN, SQU, TRI, RAMP"
+                    }
                   },
                   "freq": {
                     "value": "100",
                     "type": "_GuiValue",
-                    "label": "Frequency",
+                    "label": {
+                      "En": "Frequency",
+                      "Fr": "Fréquence",
+                      "De": "Frequenz",
+                      "Es": "Frecuencia"
+                    },
                     "units": "Hz",
-                    "description": "Modulating Freq Hz"
+                    "description": {
+                      "En": "Modulating Freq Hz",
+                      "Fr": "Modulating Freq Hz",
+                      "De": "Modulating Freq Hz",
+                      "Es": "Modulating Freq Hz"
+                    }
                   },
                   "depth": {
                     "value": "50",
                     "type": "_GuiValue",
-                    "label": "Depth",
+                    "label": {
+                      "En": "Depth",
+                      "Fr": "Depth",
+                      "De": "Depth",
+                      "Es": "Depth"
+                    },
                     "units": "%",
-                    "description": "Depth %"
+                    "description": {
+                      "En": "Depth %",
+                      "Fr": "Profondeur %",
+                      "De": "Tiefe %",
+                      "Es": "Profundidad %"
+                    }
                   }
                 }
               }
@@ -72,14 +107,24 @@
       },
       "Do": {
         "type": "OcaBlock",
-        "description": "Modulation Control",
+        "description": {
+          "En": "Modulation Control",
+          "Fr": "Modulation Contrôle",
+          "De": "Modulation Steuerung",
+          "Es": "Modulation Control"
+        },
         "fields": {
           "Modulation_Control": {
             "type": "OcaBlock",
             "fields": {
               "AM_State_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": "AM ON",
+                "label_inactive": {
+                  "En": "AM ON",
+                  "Fr": "AM ON",
+                  "De": "AM EIN",
+                  "Es": "AM ENC"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -99,7 +144,12 @@
               },
               "AM_State_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": "AM OFF",
+                "label_inactive": {
+                  "En": "AM OFF",
+                  "Fr": "AM OFF",
+                  "De": "AM AUS",
+                  "Es": "AM DES"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -119,7 +169,12 @@
               },
               "FM_State_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": "FM ON",
+                "label_inactive": {
+                  "En": "FM ON",
+                  "Fr": "FM ACTIVÉE",
+                  "De": "FM AN",
+                  "Es": "FM ACTIVADO"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -139,7 +194,12 @@
               },
               "FM_State_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": "FM OFF",
+                "label_inactive": {
+                  "En": "FM OFF",
+                  "Fr": "FM OFF",
+                  "De": "FM OFF",
+                  "Es": "FM OFF"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",

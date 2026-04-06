@@ -13,11 +13,21 @@
     "blocks": {
       "mdp_demo": {
         "type": "OcaBlock",
-        "description": "Motion Draggable Potentiometer Demo",
+        "description": {
+          "En": "Motion Draggable Potentiometer Demo",
+          "Fr": "Motion Draggable Potentiometer Démo",
+          "De": "Motion Draggable Potentiometer Demo",
+          "Es": "Motion Draggable Potentiometer Demo"
+        },
         "fields": {
           "mdp_1": {
             "type": "_MDP",
-            "label_active": "MDP 1",
+            "label_active": {
+              "En": "MDP 1",
+              "Fr": "MDP 1",
+              "De": "MDP 1",
+              "Es": "MDP 1"
+            },
             "path": "audio/mdp/1",
             "initial_x": 210,
             "initial_y": 125,
@@ -43,12 +53,22 @@
               },
               "axis": {
                 "x": {
-                  "label": "X",
+                  "label": {
+                    "En": "X",
+                    "Fr": "X",
+                    "De": "X",
+                    "Es": "X"
+                  },
                   "color": "white",
                   "scale": "linear"
                 },
                 "y": {
-                  "label": "Y",
+                  "label": {
+                    "En": "Y",
+                    "Fr": "Y",
+                    "De": "Y",
+                    "Es": "Y"
+                  },
                   "color": "white",
                   "scale": "linear"
                 }
@@ -56,7 +76,12 @@
               "datasets": [
                 {
                   "id": "grid_ref",
-                  "label": "Grid Ref",
+                  "label": {
+                    "En": "Grid Ref",
+                    "Fr": "Grid Ref",
+                    "De": "Grid Ref",
+                    "Es": "Grid Ref"
+                  },
                   "style": {
                     "line_color": "cyan"
                   },
@@ -65,7 +90,12 @@
               ]
             },
             "ltp": {
-              "label_active": "Level",
+              "label_active": {
+                "En": "Level",
+                "Fr": "Level",
+                "De": "Level",
+                "Es": "Level"
+              },
               "value_default": -10,
               "cap_color": "#00FF00",
               "freestyle": true,

@@ -12,7 +12,12 @@
     "blocks": {
       "Instrument_Controls": {
         "type": "OcaBlock",
-        "description": "Dynamic Controls for yak_system",
+        "description": {
+          "En": "Dynamic Controls for yak_system",
+          "Fr": "Dynamic Contrôles for yak_system",
+          "De": "Dynamic Steuerungs for yak_system",
+          "Es": "Dynamic Controls for yak_system"
+        },
         "fields": {
           "Get": {
             "Get_error_information": {

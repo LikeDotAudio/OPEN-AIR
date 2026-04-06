@@ -13,7 +13,12 @@
     "blocks": {
       "Stereo_Needle_Zoo": {
         "type": "OcaBlock",
-        "description": "Stereo Needle Meter Demos (Varied Ballistics)",
+        "description": {
+          "En": "Stereo Needle Meter Demos (Varied Ballistics)",
+          "Fr": "Stereo Aiguille Meter Demos (Varied Ballistics)",
+          "De": "Stereo Nadel Meter Demos (Varied Ballistics)",
+          "Es": "Stereo Aguja Meter Demos (Varied Ballistics)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -32,7 +37,12 @@
         "fields": {
           "vu_standard": {
             "type": "_SmartMeter",
-            "label": "Standard VU",
+            "label": {
+              "En": "Standard VU",
+              "Fr": "Standard VU",
+              "De": "Standard VU",
+              "Es": "Estándar VU"
+            },
             "notes": "Classic VU response (300ms integration).",
             "geometry": {
               "width": 200,
@@ -94,7 +104,12 @@
           },
           "vu_ppm_fast": {
             "type": "_SmartMeter",
-            "label": "Fast PPM",
+            "label": {
+              "En": "Fast PPM",
+              "Fr": "Rapide PPM",
+              "De": "Schnell PPM",
+              "Es": "Rápido PPM"
+            },
             "notes": "Peak Program Meter: Instant attack, slow decay.",
             "geometry": {
               "width": 200,
@@ -156,7 +171,12 @@
           },
           "vu_broadcast": {
             "type": "_SmartMeter",
-            "label": "Broadcast Avg",
+            "label": {
+              "En": "Broadcast Avg",
+              "Fr": "Broadcast Avg",
+              "De": "Broadcast Avg",
+              "Es": "Broadcast Avg"
+            },
             "notes": "Slow averaging for loudness consistency.",
             "geometry": {
               "width": 200,
@@ -216,7 +236,12 @@
           },
           "vu_vintage": {
             "type": "_SmartMeter",
-            "label": "Vintage Damped",
+            "label": {
+              "En": "Vintage Damped",
+              "Fr": "Vintage Damped",
+              "De": "Vintage Damped",
+              "Es": "Vintage Damped"
+            },
             "notes": "Heavy physical needle damping.",
             "geometry": {
               "width": 200,
@@ -276,7 +301,12 @@
           },
           "vu_hyper_sensitive": {
             "type": "_SmartMeter",
-            "label": "Hyper Sensitive",
+            "label": {
+              "En": "Hyper Sensitive",
+              "Fr": "Hyper Sensitive",
+              "De": "Hyper Sensitive",
+              "Es": "Hyper Sensitive"
+            },
             "notes": "Tracks transients perfectly (no smoothing).",
             "geometry": {
               "width": 200,
@@ -336,7 +366,12 @@
           },
           "vu_lazy_peak": {
             "type": "_SmartMeter",
-            "label": "Lazy Peak",
+            "label": {
+              "En": "Lazy Peak",
+              "Fr": "Lazy Peak",
+              "De": "Lazy Peak",
+              "Es": "Lazy Peak"
+            },
             "notes": "Moderate attack, very long hold & decay.",
             "geometry": {
               "width": 200,
@@ -396,7 +431,12 @@
           },
           "vu_stereo_comp": {
             "type": "_SmartMeter",
-            "label": "Stereo Comp",
+            "label": {
+              "En": "Stereo Comp",
+              "Fr": "Stereo Comp",
+              "De": "Stereo Comp",
+              "Es": "Stereo Comp"
+            },
             "notes": "Compressor-style gain reduction ballistics.",
             "geometry": {
               "width": 200,
@@ -456,7 +496,12 @@
           },
           "vu_mastering": {
             "type": "_SmartMeter",
-            "label": "Mastering",
+            "label": {
+              "En": "Mastering",
+              "Fr": "Mastering",
+              "De": "Mastering",
+              "Es": "Mastering"
+            },
             "notes": "Tight range, highly damped precision.",
             "geometry": {
               "width": 200,

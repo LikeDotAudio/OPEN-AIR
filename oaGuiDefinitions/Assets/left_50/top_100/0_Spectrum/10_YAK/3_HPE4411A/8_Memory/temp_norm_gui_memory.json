@@ -12,7 +12,12 @@
     "blocks": {
       "Instrument_Controls": {
         "type": "OcaBlock",
-        "description": "Dynamic Controls for memory",
+        "description": {
+          "En": "Dynamic Controls for memory",
+          "Fr": "Dynamic Contrôles for memory",
+          "De": "Dynamic Steuerungs for memory",
+          "Es": "Dynamic Controls for memory"
+        },
         "fields": {
           "Nab": {
             "Nab_Preset_Catalog": {
@@ -82,8 +87,18 @@
               }
             },
             "Do_Load_Preset": {
-              "label_active": "Load Preset",
-              "label_inactive": "Load Preset",
+              "label_active": {
+                "En": "Load Preset",
+                "Fr": "Charger Preset",
+                "De": "Laden Preset",
+                "Es": "Cargar Preset"
+              },
+              "label_inactive": {
+                "En": "Load Preset",
+                "Fr": "Charger Preset",
+                "De": "Laden Preset",
+                "Es": "Cargar Preset"
+              },
               "message_details": {
                 "N9342CN": {
                   "type": "_GuiActuator",

@@ -40,4 +40,4 @@ python3 openair.py --tests
 ## 🛡️ Dependencies
 * **textual**: TUI Framework.
 * **oaComMQTT**: For real-time telemetry monitoring.
-* **oaConfiguration**: For GUID and path resolution.
+* **oaConfigurationManager**: For GUID and path resolution.

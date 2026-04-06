@@ -13,7 +13,12 @@
     "blocks": {
       "Parking_Meter_Variations": {
         "type": "OcaBlock",
-        "description": "Parking Meter (Arch-Top) Style",
+        "description": {
+          "En": "Parking Meter (Arch-Top) Style",
+          "Fr": "Parking Meter (Arch-Top) Style",
+          "De": "Parking Meter (Arch-Top) Style",
+          "Es": "Parking Meter (Arch-Top) Style"
+        },
         "layout_columns": 2,
         "column_sizing": [
           {
@@ -26,7 +31,12 @@
         "fields": {
           "Parking_Meter_1_Large": {
             "type": "_NeedleVUMeter",
-            "label": "Large Classic",
+            "label": {
+              "En": "Large Classic",
+              "Fr": "Large Classique",
+              "De": "Large Klassisch",
+              "Es": "Large Clásico"
+            },
             "geometry": {
               "width": 350,
               "height": 350
@@ -52,7 +62,12 @@
               },
               "labels": [
                 {
-                  "text": "VU",
+                  "text": {
+                    "En": "VU",
+                    "Fr": "VU",
+                    "De": "VU",
+                    "Es": "VU"
+                  },
                   "x": 0,
                   "y": -48,
                   "size": 32,
@@ -69,7 +84,12 @@
                 }
               ]
             },
-            "label_active": "Large Classic",
+            "label_active": {
+              "En": "Large Classic",
+              "Fr": "Large Classique",
+              "De": "Large Klassisch",
+              "Es": "Large Clásico"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -100,7 +120,12 @@
           },
           "Parking_Meter_2_Medium": {
             "type": "_NeedleVUMeter",
-            "label": "Medium Night",
+            "label": {
+              "En": "Medium Night",
+              "Fr": "Moyen Night",
+              "De": "Mittel Night",
+              "Es": "Medio Night"
+            },
             "geometry": {
               "width": 250,
               "height": 250
@@ -127,7 +152,12 @@
               },
               "labels": [
                 {
-                  "text": "LEVEL",
+                  "text": {
+                    "En": "LEVEL",
+                    "Fr": "LEVEL",
+                    "De": "LEVEL",
+                    "Es": "LEVEL"
+                  },
                   "x": 0,
                   "y": -102,
                   "size": 14,
@@ -136,7 +166,12 @@
                 }
               ]
             },
-            "label_active": "Medium Night",
+            "label_active": {
+              "En": "Medium Night",
+              "Fr": "Moyen Night",
+              "De": "Mittel Night",
+              "Es": "Medio Night"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -168,7 +203,12 @@
           },
           "Parking_Meter_3_Small": {
             "type": "_NeedleVUMeter",
-            "label": "Small Cyber",
+            "label": {
+              "En": "Small Cyber",
+              "Fr": "Small Cyber",
+              "De": "Small Cyber",
+              "Es": "Small Cyber"
+            },
             "geometry": {
               "width": 180,
               "height": 180
@@ -198,7 +238,12 @@
               },
               "labels": [
                 {
-                  "text": "CYBER",
+                  "text": {
+                    "En": "CYBER",
+                    "Fr": "CYBER",
+                    "De": "CYBER",
+                    "Es": "CYBER"
+                  },
                   "x": 0,
                   "y": -74,
                   "size": 10,
@@ -208,7 +253,12 @@
                 }
               ]
             },
-            "label_active": "Small Cyber",
+            "label_active": {
+              "En": "Small Cyber",
+              "Fr": "Small Cyber",
+              "De": "Small Cyber",
+              "Es": "Small Cyber"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -243,7 +293,12 @@
           },
           "Parking_Meter_4_Tiny": {
             "type": "_NeedleVUMeter",
-            "label": "Tiny Vintage",
+            "label": {
+              "En": "Tiny Vintage",
+              "Fr": "Tiny Vintage",
+              "De": "Tiny Vintage",
+              "Es": "Tiny Vintage"
+            },
             "geometry": {
               "width": 120,
               "height": 120
@@ -273,7 +328,12 @@
               },
               "labels": [
                 {
-                  "text": "OLD",
+                  "text": {
+                    "En": "OLD",
+                    "Fr": "OLD",
+                    "De": "OLD",
+                    "Es": "OLD"
+                  },
                   "x": 0,
                   "y": -46,
                   "size": 8,
@@ -282,7 +342,12 @@
                 }
               ]
             },
-            "label_active": "Tiny Vintage",
+            "label_active": {
+              "En": "Tiny Vintage",
+              "Fr": "Tiny Vintage",
+              "De": "Tiny Vintage",
+              "Es": "Tiny Vintage"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -315,7 +380,12 @@
           },
           "Parking_Meter_5_Tall": {
             "type": "_NeedleVUMeter",
-            "label": "Tall Danger",
+            "label": {
+              "En": "Tall Danger",
+              "Fr": "Tall Danger",
+              "De": "Tall Danger",
+              "Es": "Tall Danger"
+            },
             "geometry": {
               "width": 200,
               "height": 50,
@@ -343,7 +413,12 @@
               },
               "labels": [
                 {
-                  "text": "DANGER",
+                  "text": {
+                    "En": "DANGER",
+                    "Fr": "DANGER",
+                    "De": "DANGER",
+                    "Es": "DANGER"
+                  },
                   "x": 0,
                   "y": -167,
                   "size": 18,
@@ -352,7 +427,12 @@
                 }
               ]
             },
-            "label_active": "Tall Danger",
+            "label_active": {
+              "En": "Tall Danger",
+              "Fr": "Tall Danger",
+              "De": "Tall Danger",
+              "Es": "Tall Danger"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -384,7 +464,12 @@
           },
           "Parking_Meter_6_Wide": {
             "type": "_NeedleVUMeter",
-            "label": "Wide Royal",
+            "label": {
+              "En": "Wide Royal",
+              "Fr": "Wide Royal",
+              "De": "Wide Royal",
+              "Es": "Wide Royal"
+            },
             "geometry": {
               "width": 400,
               "height": 200
@@ -411,7 +496,12 @@
               },
               "labels": [
                 {
-                  "text": "ROYAL VU",
+                  "text": {
+                    "En": "ROYAL VU",
+                    "Fr": "ROYAL VU",
+                    "De": "ROYAL VU",
+                    "Es": "ROYAL VU"
+                  },
                   "x": 0,
                   "y": -74,
                   "size": 22,
@@ -421,7 +511,12 @@
                 }
               ]
             },
-            "label_active": "Wide Royal",
+            "label_active": {
+              "En": "Wide Royal",
+              "Fr": "Wide Royal",
+              "De": "Wide Royal",
+              "Es": "Wide Royal"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -453,7 +548,12 @@
           },
           "Parking_Meter_7_Blueprint": {
             "type": "_NeedleVUMeter",
-            "label": "Blueprint Tech",
+            "label": {
+              "En": "Blueprint Tech",
+              "Fr": "Blueprint Tech",
+              "De": "Blueprint Tech",
+              "Es": "Blueprint Tech"
+            },
             "geometry": {
               "width": 300,
               "height": 300
@@ -479,7 +579,12 @@
               },
               "labels": [
                 {
-                  "text": "SCHEMATIC",
+                  "text": {
+                    "En": "SCHEMATIC",
+                    "Fr": "SCHEMATIC",
+                    "De": "SCHEMATIC",
+                    "Es": "SCHEMATIC"
+                  },
                   "x": 0,
                   "y": -130,
                   "size": 14,
@@ -488,7 +593,12 @@
                 }
               ]
             },
-            "label_active": "Blueprint Tech",
+            "label_active": {
+              "En": "Blueprint Tech",
+              "Fr": "Blueprint Tech",
+              "De": "Blueprint Tech",
+              "Es": "Blueprint Tech"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -519,7 +629,12 @@
           },
           "Parking_Meter_8_Emerald": {
             "type": "_NeedleVUMeter",
-            "label": "Emerald Sea",
+            "label": {
+              "En": "Emerald Sea",
+              "Fr": "Emerald Sea",
+              "De": "Emerald Sea",
+              "Es": "Emerald Sea"
+            },
             "geometry": {
               "width": 280,
               "height": 280
@@ -544,7 +659,12 @@
               },
               "labels": [
                 {
-                  "text": "EMERALD",
+                  "text": {
+                    "En": "EMERALD",
+                    "Fr": "EMERALD",
+                    "De": "EMERALD",
+                    "Es": "EMERALD"
+                  },
                   "x": 0,
                   "y": -111,
                   "size": 16,
@@ -553,7 +673,12 @@
                 }
               ]
             },
-            "label_active": "Emerald Sea",
+            "label_active": {
+              "En": "Emerald Sea",
+              "Fr": "Emerald Sea",
+              "De": "Emerald Sea",
+              "Es": "Emerald Sea"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -583,7 +708,12 @@
           },
           "Parking_Meter_9_Carbon": {
             "type": "_NeedleVUMeter",
-            "label": "Carbon Fiber",
+            "label": {
+              "En": "Carbon Fiber",
+              "Fr": "Carbon Fiber",
+              "De": "Carbon Fiber",
+              "Es": "Carbon Fiber"
+            },
             "geometry": {
               "width": 320,
               "height": 320
@@ -609,7 +739,12 @@
               },
               "labels": [
                 {
-                  "text": "PRECISION",
+                  "text": {
+                    "En": "PRECISION",
+                    "Fr": "PRECISION",
+                    "De": "PRECISION",
+                    "Es": "PRECISION"
+                  },
                   "x": 0,
                   "y": -130,
                   "size": 14,
@@ -618,7 +753,12 @@
                 }
               ]
             },
-            "label_active": "Carbon Fiber",
+            "label_active": {
+              "En": "Carbon Fiber",
+              "Fr": "Carbon Fiber",
+              "De": "Carbon Fiber",
+              "Es": "Carbon Fiber"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -649,7 +789,12 @@
           },
           "Parking_Meter_10_Fire": {
             "type": "_NeedleVUMeter",
-            "label": "Fireball",
+            "label": {
+              "En": "Fireball",
+              "Fr": "Fireball",
+              "De": "Fireball",
+              "Es": "Fireball"
+            },
             "geometry": {
               "width": 260,
               "height": 260
@@ -675,7 +820,12 @@
               },
               "labels": [
                 {
-                  "text": "HOT",
+                  "text": {
+                    "En": "HOT",
+                    "Fr": "HOT",
+                    "De": "HOT",
+                    "Es": "HOT"
+                  },
                   "x": 0,
                   "y": -102,
                   "size": 28,
@@ -684,7 +834,12 @@
                 }
               ]
             },
-            "label_active": "Fireball",
+            "label_active": {
+              "En": "Fireball",
+              "Fr": "Fireball",
+              "De": "Fireball",
+              "Es": "Fireball"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",

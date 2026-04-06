@@ -14,7 +14,12 @@
       "fields": {
         "Meter_1": {
           "type": "_NeedleVUMeter",
-          "label": "Squircle 1",
+          "label": {
+            "En": "Squircle 1",
+            "Fr": "Squircle 1",
+            "De": "Squircle 1",
+            "Es": "Squircle 1"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -40,7 +45,12 @@
         },
         "Meter_2": {
           "type": "_NeedleVUMeter",
-          "label": "Hex 2",
+          "label": {
+            "En": "Hex 2",
+            "Fr": "Hex 2",
+            "De": "Hex 2",
+            "Es": "Hex 2"
+          },
           "geometry": {
             "width": 400,
             "height": 200

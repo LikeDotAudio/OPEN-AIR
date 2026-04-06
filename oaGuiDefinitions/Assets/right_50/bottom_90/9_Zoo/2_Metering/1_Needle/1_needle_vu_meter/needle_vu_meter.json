@@ -13,7 +13,12 @@
     "blocks": {
       "Standard_Variations": {
         "type": "OcaBlock",
-        "description": "Timing & Color Variations",
+        "description": {
+          "En": "Timing & Color Variations",
+          "Fr": "Timing & Color Variations",
+          "De": "Timing & Color Variationen",
+          "Es": "Timing & Color Variaciones"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -32,7 +37,12 @@
         "fields": {
           "Meter_Med": {
             "type": "_NeedleVUMeter",
-            "label": "Med (Hold 500ms)",
+            "label": {
+              "En": "Med (Hold 500ms)",
+              "Fr": "Med (Hold 500ms)",
+              "De": "Med (Hold 500ms)",
+              "Es": "Med (Hold 500ms)"
+            },
             "notes": "Standard smooth ballistics.",
             "geometry": {
               "width": 150,
@@ -95,7 +105,12 @@
           },
           "Meter_Slow": {
             "type": "_NeedleVUMeter",
-            "label": "Slow (No Hold)",
+            "label": {
+              "En": "Slow (No Hold)",
+              "Fr": "Lent (No Hold)",
+              "De": "Langsam (No Hold)",
+              "Es": "Lento (No Hold)"
+            },
             "notes": "Heavy, damped needle.",
             "geometry": {
               "width": 150,
@@ -152,7 +167,12 @@
           },
           "Meter_SuperSlow": {
             "type": "_NeedleVUMeter",
-            "label": "Super Slow (No Hold)",
+            "label": {
+              "En": "Super Slow (No Hold)",
+              "Fr": "Super Lent (No Hold)",
+              "De": "Super Langsam (No Hold)",
+              "Es": "Super Lento (No Hold)"
+            },
             "notes": "Very heavy, vintage drift.",
             "geometry": {
               "width": 150,
@@ -209,7 +229,12 @@
           },
           "Meter_Fast": {
             "type": "_NeedleVUMeter",
-            "label": "Fast (Hold 2s)",
+            "label": {
+              "En": "Fast (Hold 2s)",
+              "Fr": "Rapide (Hold 2s)",
+              "De": "Schnell (Hold 2s)",
+              "Es": "Rápido (Hold 2s)"
+            },
             "notes": "Snappy, peak-reading style with hold.",
             "geometry": {
               "width": 150,
@@ -268,7 +293,12 @@
       },
       "Large_Console_Bank": {
         "type": "OcaBlock",
-        "description": "Large Console Meters (Size 250)",
+        "description": {
+          "En": "Large Console Meters (Size 250)",
+          "Fr": "Large Console Meters (Size 250)",
+          "De": "Large Console Meters (Size 250)",
+          "Es": "Large Console Meters (Size 250)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -287,7 +317,12 @@
         "fields": {
           "Large_L": {
             "type": "_NeedleVUMeter",
-            "label": "Master Left (Hold 200ms)",
+            "label": {
+              "En": "Master Left (Hold 200ms)",
+              "Fr": "Master Gauche (Hold 200ms)",
+              "De": "Master Links (Hold 200ms)",
+              "Es": "Maestro Izquierda (Hold 200ms)"
+            },
             "notes": "Classic console look.",
             "geometry": {
               "width": 250,
@@ -345,7 +380,12 @@
           },
           "Large_R": {
             "type": "_NeedleVUMeter",
-            "label": "Master Right (Hold 200ms)",
+            "label": {
+              "En": "Master Right (Hold 200ms)",
+              "Fr": "Master Droite (Hold 200ms)",
+              "De": "Master Rechts (Hold 200ms)",
+              "Es": "Maestro Derecha (Hold 200ms)"
+            },
             "notes": "Matching right channel.",
             "geometry": {
               "width": 250,
@@ -403,7 +443,12 @@
           },
           "Large_Sub": {
             "type": "_NeedleVUMeter",
-            "label": "Subwoofer (Hold 500ms)",
+            "label": {
+              "En": "Subwoofer (Hold 500ms)",
+              "Fr": "Subwoofer (Hold 500ms)",
+              "De": "Subwoofer (Hold 500ms)",
+              "Es": "Subwoofer (Hold 500ms)"
+            },
             "notes": "Slower tracking for low frequencies.",
             "geometry": {
               "width": 250,
@@ -460,7 +505,12 @@
           },
           "Large_Amb": {
             "type": "_NeedleVUMeter",
-            "label": "Ambience (Hold 1s)",
+            "label": {
+              "En": "Ambience (Hold 1s)",
+              "Fr": "Ambience (Hold 1s)",
+              "De": "Ambience (Hold 1s)",
+              "Es": "Ambience (Hold 1s)"
+            },
             "notes": "Extremely slow average level.",
             "geometry": {
               "width": 250,
@@ -519,7 +569,12 @@
       },
       "Compact_Bridge": {
         "type": "OcaBlock",
-        "description": "Compact Bridge Meters (Size 100)",
+        "description": {
+          "En": "Compact Bridge Meters (Size 100)",
+          "Fr": "Compact Bridge Meters (Size 100)",
+          "De": "Compact Bridge Meters (Size 100)",
+          "Es": "Compact Bridge Meters (Size 100)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -550,7 +605,12 @@
         "fields": {
           "Compact_PGM1a": {
             "type": "_NeedleVUMeter",
-            "label": "PGM 1",
+            "label": {
+              "En": "PGM 1",
+              "Fr": "PGM 1",
+              "De": "PGM 1",
+              "Es": "PGM 1"
+            },
             "notes": "Fast broadcast meter.",
             "geometry": {
               "width": 100,
@@ -607,7 +667,12 @@
           },
           "Compact_PGM2a": {
             "type": "_NeedleVUMeter",
-            "label": "PGM 2",
+            "label": {
+              "En": "PGM 2",
+              "Fr": "PGM 2",
+              "De": "PGM 2",
+              "Es": "PGM 2"
+            },
             "notes": "Matching PGM 2.",
             "geometry": {
               "width": 100,
@@ -664,7 +729,12 @@
           },
           "Compact_Auda": {
             "type": "_NeedleVUMeter",
-            "label": "Audition",
+            "label": {
+              "En": "Audition",
+              "Fr": "Audition",
+              "De": "Audition",
+              "Es": "Audition"
+            },
             "notes": "Slightly relaxed audition bus.",
             "geometry": {
               "width": 100,
@@ -721,7 +791,12 @@
           },
           "Compact_Peaka": {
             "type": "_NeedleVUMeter",
-            "label": "Peak Hold (3s)",
+            "label": {
+              "En": "Peak Hold (3s)",
+              "Fr": "Peak Hold (3s)",
+              "De": "Peak Hold (3s)",
+              "Es": "Peak Hold (3s)"
+            },
             "notes": "Instant rise, long hold, glacial fall.",
             "geometry": {
               "width": 100,
@@ -778,7 +853,12 @@
           },
           "Compact_PGM1": {
             "type": "_NeedleVUMeter",
-            "label": "PGM 1",
+            "label": {
+              "En": "PGM 1",
+              "Fr": "PGM 1",
+              "De": "PGM 1",
+              "Es": "PGM 1"
+            },
             "notes": "Fast broadcast meter.",
             "geometry": {
               "width": 100,
@@ -835,7 +915,12 @@
           },
           "Compact_PGM2": {
             "type": "_NeedleVUMeter",
-            "label": "PGM 2",
+            "label": {
+              "En": "PGM 2",
+              "Fr": "PGM 2",
+              "De": "PGM 2",
+              "Es": "PGM 2"
+            },
             "notes": "Matching PGM 2.",
             "geometry": {
               "width": 100,
@@ -892,7 +977,12 @@
           },
           "Compact_Aud": {
             "type": "_NeedleVUMeter",
-            "label": "Audition",
+            "label": {
+              "En": "Audition",
+              "Fr": "Audition",
+              "De": "Audition",
+              "Es": "Audition"
+            },
             "notes": "Slightly relaxed audition bus.",
             "geometry": {
               "width": 100,
@@ -949,7 +1039,12 @@
           },
           "Compact_Peak": {
             "type": "_NeedleVUMeter",
-            "label": "Peak Hold (3s)",
+            "label": {
+              "En": "Peak Hold (3s)",
+              "Fr": "Peak Hold (3s)",
+              "De": "Peak Hold (3s)",
+              "Es": "Peak Hold (3s)"
+            },
             "notes": "Instant rise, long hold, glacial fall.",
             "geometry": {
               "width": 100,
@@ -1008,7 +1103,12 @@
       },
       "Specialty_Scales": {
         "type": "OcaBlock",
-        "description": "Specialty Scales & Colors",
+        "description": {
+          "En": "Specialty Scales & Colors",
+          "Fr": "Specialty Scales & Colors",
+          "De": "Specialty Scales & Colors",
+          "Es": "Specialty Scales & Colors"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -1027,7 +1127,12 @@
         "fields": {
           "Scale_Wide": {
             "type": "_NeedleVUMeter",
-            "label": "Wide (Hold 100ms)",
+            "label": {
+              "En": "Wide (Hold 100ms)",
+              "Fr": "Wide (Hold 100ms)",
+              "De": "Wide (Hold 100ms)",
+              "Es": "Wide (Hold 100ms)"
+            },
             "notes": "Full dynamic range monitor.",
             "geometry": {
               "width": 170,
@@ -1084,7 +1189,12 @@
           },
           "Scale_Zoom": {
             "type": "_NeedleVUMeter",
-            "label": "Zoom (-10/+3)",
+            "label": {
+              "En": "Zoom (-10/+3)",
+              "Fr": "Zoom (-10/+3)",
+              "De": "Zoom (-10/+3)",
+              "Es": "Zoom (-10/+3)"
+            },
             "notes": "Critical mastering zoom.",
             "geometry": {
               "width": 170,
@@ -1141,7 +1251,12 @@
           },
           "Scale_Neon": {
             "type": "_NeedleVUMeter",
-            "label": "Neon Slow (Hold 500ms)",
+            "label": {
+              "En": "Neon Slow (Hold 500ms)",
+              "Fr": "Neon Lent (Hold 500ms)",
+              "De": "Neon Langsam (Hold 500ms)",
+              "Es": "Neon Lento (Hold 500ms)"
+            },
             "notes": "Cyberpunk aesthetic.",
             "geometry": {
               "width": 170,
@@ -1198,7 +1313,12 @@
           },
           "Scale_Mono": {
             "type": "_NeedleVUMeter",
-            "label": "Monochrome Heavy",
+            "label": {
+              "En": "Monochrome Heavy",
+              "Fr": "Monochrome Heavy",
+              "De": "Monochrome Heavy",
+              "Es": "Monochrome Heavy"
+            },
             "notes": "High contrast, high mass.",
             "geometry": {
               "width": 170,
@@ -1257,7 +1377,12 @@
       },
       "Physics_Lab_Hold": {
         "type": "OcaBlock",
-        "description": "Physics Lab: Hold Time",
+        "description": {
+          "En": "Physics Lab: Hold Time",
+          "Fr": "Physics Lab: Hold Heure",
+          "De": "Physics Lab: Hold Zeit",
+          "Es": "Physics Lab: Hold Hora"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -1276,7 +1401,12 @@
         "fields": {
           "Hold_0": {
             "type": "_NeedleVUMeter",
-            "label": "Hold 0ms",
+            "label": {
+              "En": "Hold 0ms",
+              "Fr": "Hold 0ms",
+              "De": "Hold 0ms",
+              "Es": "Hold 0ms"
+            },
             "notes": "Instant decay.",
             "geometry": {
               "width": 160,
@@ -1333,7 +1463,12 @@
           },
           "Hold_500": {
             "type": "_NeedleVUMeter",
-            "label": "Hold 500ms",
+            "label": {
+              "En": "Hold 500ms",
+              "Fr": "Hold 500ms",
+              "De": "Hold 500ms",
+              "Es": "Hold 500ms"
+            },
             "notes": "Short retention.",
             "geometry": {
               "width": 160,
@@ -1390,7 +1525,12 @@
           },
           "Hold_2000": {
             "type": "_NeedleVUMeter",
-            "label": "Hold 2s",
+            "label": {
+              "En": "Hold 2s",
+              "Fr": "Hold 2s",
+              "De": "Hold 2s",
+              "Es": "Hold 2s"
+            },
             "notes": "Long retention.",
             "geometry": {
               "width": 160,
@@ -1447,7 +1587,12 @@
           },
           "Hold_5000": {
             "type": "_NeedleVUMeter",
-            "label": "Hold 5s",
+            "label": {
+              "En": "Hold 5s",
+              "Fr": "Hold 5s",
+              "De": "Hold 5s",
+              "Es": "Hold 5s"
+            },
             "notes": "Very long retention.",
             "geometry": {
               "width": 160,
@@ -1506,7 +1651,12 @@
       },
       "Pivot_Crop_Test": {
         "type": "OcaBlock",
-        "description": "Pivot Crop & Mask Demo",
+        "description": {
+          "En": "Pivot Crop & Mask Demo",
+          "Fr": "Pivot Crop & Mask Démo",
+          "De": "Pivot Crop & Mask Demo",
+          "Es": "Pivot Crop & Mask Demo"
+        },
         "layout_columns": 6,
         "column_sizing": [
           {
@@ -1531,7 +1681,12 @@
         "fields": {
           "Crop_0": {
             "type": "_NeedleVUMeter",
-            "label": "Crop 0%",
+            "label": {
+              "En": "Crop 0%",
+              "Fr": "Crop 0%",
+              "De": "Crop 0%",
+              "Es": "Crop 0%"
+            },
             "geometry": {
               "width": 150,
               "height": 150
@@ -1558,7 +1713,12 @@
           },
           "Crop_25": {
             "type": "_NeedleVUMeter",
-            "label": "Crop 25%",
+            "label": {
+              "En": "Crop 25%",
+              "Fr": "Crop 25%",
+              "De": "Crop 25%",
+              "Es": "Crop 25%"
+            },
             "geometry": {
               "width": 150,
               "height": 150
@@ -1585,7 +1745,12 @@
           },
           "Crop_50": {
             "type": "_NeedleVUMeter",
-            "label": "Crop 50%",
+            "label": {
+              "En": "Crop 50%",
+              "Fr": "Crop 50%",
+              "De": "Crop 50%",
+              "Es": "Crop 50%"
+            },
             "geometry": {
               "width": 150,
               "height": 150
@@ -1612,7 +1777,12 @@
           },
           "Crop_75": {
             "type": "_NeedleVUMeter",
-            "label": "Crop 75%",
+            "label": {
+              "En": "Crop 75%",
+              "Fr": "Crop 75%",
+              "De": "Crop 75%",
+              "Es": "Crop 75%"
+            },
             "geometry": {
               "width": 150,
               "height": 150
@@ -1639,7 +1809,12 @@
           },
           "Crop_100": {
             "type": "_NeedleVUMeter",
-            "label": "Crop 100%",
+            "label": {
+              "En": "Crop 100%",
+              "Fr": "Crop 100%",
+              "De": "Crop 100%",
+              "Es": "Crop 100%"
+            },
             "geometry": {
               "width": 150,
               "height": 150
@@ -1666,7 +1841,12 @@
           },
           "Mask_Test": {
             "type": "_NeedleVUMeter",
-            "label": "Mask On (No Crop)",
+            "label": {
+              "En": "Mask On (No Crop)",
+              "Fr": "Mask On (No Crop)",
+              "De": "Mask An (No Crop)",
+              "Es": "Mask Encendido (No Crop)"
+            },
             "geometry": {
               "width": 150,
               "height": 150

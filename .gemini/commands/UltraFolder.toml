@@ -8,7 +8,7 @@ You are the Structural Architect for OPEN-AIR. Your mission is to transition the
 - **Infrastructure Modules**: oaThreadManager, oaConfiguration, oaLogging, oaDependencies, oaInstallation, oaOchestration.
 - **Protocol Modules**: oaComBroker, oaComVisa, oaComMidi, oaComOSC, oaComSNMP, oaSplinker, oaPTP, oaTranslator.
 - **GUI Modules**: oaGuiManager, oaGuiBuild, oaGuiDestroy, oaGuiElements, oaGuiMediaElements, oaStyle, oaGuiTelemetry.
-- **Vaults (Flat)**: oaGuiDefinitions, oaDataRunningFiles, oaDataLogs, oaDataCache, oaDataSNMP, oaDataSplinks, oaDataTests.
+- **Vaults (Flat)**: oaGuiDefinitions, oaDataRunningFiles, oaDataLogs, oaDataCache, oaDataLogs/SNMP, oaDataSplinks, oaDataTests.
 
 ### 🏗️ THE ARCHITECTURAL MANDATE
 1.  **Isolation**: Every `oa*` module (excluding Vaults) must strictly follow the **12-subfolder hierarchy**.
@@ -35,5 +35,5 @@ Provide a report for each processed module including: Module Name, Status, Moves
 
 [blueprint]
 settings = { root_name = "OPEN-AIR", apply_init_py = true }
-domains = { infrastructure = [ "oaThreadManager", "oaConfiguration", "oaLogging", "oaDependencies", "oaInstallation", "oaOchestration" ], protocols = [ "oaComBroker", "oaComVisa", "oaComMidi", "oaComOSC", "oaComSNMP", "oaSplinker", "oaPTP", "oaTranslator" ], vaults = [ "oaGuiDefinitions", "oaDataRunningFiles", "oaDataLogs", "oaDataCache", "oaDataSNMP", "oaDataSplinks", "oaDataTests" ], gui = [ "oaGuiManager", "oaGuiBuild", "oaGuiDestroy", "oaGuiElements", "oaGuiMediaElements", "oaStyle", "oaGuiTelemetry" ] }
+domains = { infrastructure = [ "oaThreadManager", "oaConfiguration", "oaLogging", "oaDependencies", "oaInstallation", "oaOchestration" ], protocols = [ "oaComBroker", "oaComVisa", "oaComMidi", "oaComOSC", "oaComSNMP", "oaSplinker", "oaPTP", "oaTranslator" ], vaults = [ "oaGuiDefinitions", "oaDataRunningFiles", "oaDataLogs", "oaDataCache", "oaDataLogs/SNMP", "oaDataSplinks", "oaDataTests" ], gui = [ "oaGuiManager", "oaGuiBuild", "oaGuiDestroy", "oaGuiElements", "oaGuiMediaElements", "oaStyle", "oaGuiTelemetry" ] }
 subfolders = { standard = [ "Core", "Workers", "Managers", "Methods", "Constants", "Tests", "Documentation", "Assets", "Interface", "Hooks", "FileReaders", "FileWriters" ] }

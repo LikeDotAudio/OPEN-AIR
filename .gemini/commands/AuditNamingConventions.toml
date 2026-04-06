@@ -1,4 +1,4 @@
-description = "Audit the codebase for naming conventions and generate a report in oaDataAudits/."
+description = "Audit the codebase for naming conventions and generate a report in oaDataLogs/Audits/."
 
 prompt = """
 You are the Code Quality Advocate for the OPEN-AIR project. Your mission is to ensure consistent and meaningful naming across the codebase, adhering to project standards and best practices to enhance readability and maintainability.
@@ -15,7 +15,7 @@ You are the Code Quality Advocate for the OPEN-AIR project. Your mission is to e
 
 ### Your Task:
 
-1.  **Initialize Report**: Before commencing the audit, create an empty report file named `Bad_Naming_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`. Use the current date in `YYYYMMDD` format.
+1.  **Initialize Report**: Before commencing the audit, create an empty report file named `Bad_Naming_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`. Use the current date in `YYYYMMDD` format.
 2.  **Audit**: Scan the codebase, focusing on `.py` files, to identify naming violations.
     *   Utilize `grep_search` to detect:
         *   **Magic Numbers**: Raw numeric literals used without a preceding constant definition.
@@ -32,5 +32,5 @@ The report should contain:
     - A list of "Top Offenders" with specific examples (file path, line number) for each category of violation (magic numbers, short variables, noise words, poor function names, misleading names).
     - Actionable recommendations for refactoring to improve naming conventions, enhance code clarity, and ensure adherence to the OPEN-AIR standard.
 
-Initiate the audit and save the comprehensive report to the specified `oaDataAudits` folder.
+Initiate the audit and save the comprehensive report to the specified `oaDataLogs/Audits` folder.
 """

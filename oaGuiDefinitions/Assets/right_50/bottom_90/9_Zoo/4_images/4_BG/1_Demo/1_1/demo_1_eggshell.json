@@ -14,7 +14,12 @@
       "fields": {
         "Meter_1": {
           "type": "_NeedleVUMeter",
-          "label": "Hotdog 1",
+          "label": {
+            "En": "Hotdog 1",
+            "Fr": "Hotdog 1",
+            "De": "Hotdog 1",
+            "Es": "Hotdog 1"
+          },
           "geometry": {
             "width": 400,
             "height": 200

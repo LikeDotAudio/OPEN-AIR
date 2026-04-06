@@ -13,7 +13,12 @@
     "blocks": {
       "Voltage": {
         "type": "OcaBlock",
-        "description": "Constant Voltage Parameters",
+        "description": {
+          "En": "Constant Voltage Parameters",
+          "Fr": "Paramètres de tension constante",
+          "De": "Konstantspannungsparameter",
+          "Es": "Parámetros de voltaje constante"
+        },
         "fields": {
           "Set_Voltage_Level": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "value": {
                     "value": "12.0",
                     "type": "_GuiValue",
-                    "label": "Voltage",
+                    "label": {
+                      "En": "Voltage",
+                      "Fr": "Tension",
+                      "De": "Spannung",
+                      "Es": "Voltaje"
+                    },
                     "units": "V",
-                    "description": "Volts"
+                    "description": {
+                      "En": "Volts",
+                      "Fr": "Volts",
+                      "De": "Volts",
+                      "Es": "Volts"
+                    }
                   }
                 }
               }
@@ -85,9 +100,19 @@
                   "value": {
                     "value": "60",
                     "type": "_GuiValue",
-                    "label": "Range",
+                    "label": {
+                      "En": "Range",
+                      "Fr": "Plage",
+                      "De": "Bereich",
+                      "Es": "Rango"
+                    },
                     "units": "V",
-                    "description": "6, 60, etc"
+                    "description": {
+                      "En": "6, 60, etc",
+                      "Fr": "6, 60, etc",
+                      "De": "6, 60, etc",
+                      "Es": "6, 60, etc"
+                    }
                   }
                 }
               }

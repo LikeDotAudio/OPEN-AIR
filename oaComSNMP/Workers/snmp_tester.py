@@ -8,7 +8,7 @@ import subprocess
 import os
 import re
 from oaLogging.Core.logger import get_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaOchestration.Constants.project_paths import SNMP_TEMP_MIB
 
 # --- Standard Debug Logging Setup ---

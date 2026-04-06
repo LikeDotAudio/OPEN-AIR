@@ -12,14 +12,24 @@
     "title": "Monitor Gamma - Signal Analysis",
     "axis": {
       "x": {
-        "label": "Time (ms)",
+        "label": {
+          "En": "Time (ms)",
+          "Fr": "Temps (ms)",
+          "De": "Zeit (ms)",
+          "Es": "Tiempo (ms)"
+        },
         "scale": "linear",
         "min": 0,
         "max": 1,
         "color": "white"
       },
       "y": {
-        "label": "Amplitude (V)",
+        "label": {
+          "En": "Amplitude (V)",
+          "Fr": "Amplitude (V)",
+          "De": "Amplitude (V)",
+          "Es": "Amplitud (V)"
+        },
         "scale": "linear",
         "min": -1.5,
         "max": 1.5,
@@ -37,7 +47,12 @@
     "datasets": [
       {
         "id": "sig_c",
-        "label": "Signal Gamma",
+        "label": {
+          "En": "Signal Gamma",
+          "Fr": "Signal Gamma",
+          "De": "Signal Gamma",
+          "Es": "Signal Gamma"
+        },
         "style": {
           "line_color": "lime",
           "line_width": 1,

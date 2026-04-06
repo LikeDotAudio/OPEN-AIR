@@ -8,6 +8,7 @@ import tkinter as tk
 from PIL import Image, ImageTk, ImageDraw, ImageFont
 from loguru import logger
 import math
+from oaGuiFramework.Methods.i18n_utils import get_text
 
 class CanvasButton(tk.Canvas):
     """
@@ -158,6 +159,7 @@ class CanvasButton(tk.Canvas):
 
         # Draw Text
         try:
+            display_text = get_text(text)
             f_size = self.active_font_size if is_active else self.inactive_font_size
             f_style = self.active_font_style if is_active else self.inactive_font_style
             # This is a simplification; real app might use complex font loading
@@ -165,7 +167,7 @@ class CanvasButton(tk.Canvas):
             
             # Simple text centering
             text_x, text_y = width / 2, height / 2
-            draw.text((text_x, text_y), text, fill=self.active_text_color if is_active else self.text_color, anchor="mm")
+            draw.text((text_x, text_y), display_text, fill=self.active_text_color if is_active else self.text_color, anchor="mm")
         except Exception as e:
             logger.error(f"Error drawing button text: {e}")
 

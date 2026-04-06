@@ -26,7 +26,7 @@ class TestRustCompilation(unittest.TestCase):
         
         # Directories to ignore
         ignored_dirs = {
-            'oaDataAudits', 'oaDataCache', 'oaDataLogs', 'oaDataSNMP', 
+            'oaDataLogs/Audits', 'oaDataCache', 'oaDataLogs', 'oaDataLogs/SNMP', 
             'oaDataSplinks', 'oaDataRunningFiles', '.git', '.pytest_cache', 
             'target', '__pycache__'
         }

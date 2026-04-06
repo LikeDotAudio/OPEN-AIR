@@ -28,7 +28,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 state_logger = logger.bind(subsystem="STATE_ENGINE")
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComMQTT.Core.mqtt_message import MqttMessage
 app_constants = Config.get_instance()
 

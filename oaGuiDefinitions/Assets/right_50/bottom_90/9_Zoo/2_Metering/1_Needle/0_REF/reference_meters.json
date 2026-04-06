@@ -13,7 +13,12 @@
     "blocks": {
       "Averaging_Meters": {
         "type": "OcaBlock",
-        "description": "I. The Averaging Meters (Loudness)",
+        "description": {
+          "En": "I. The Averaging Meters (Loudness)",
+          "Fr": "I. The Averaging Meters (Loudness)",
+          "De": "I. The Averaging Meters (Loudness)",
+          "Es": "I. The Averaging Meters (Loudness)"
+        },
         "layout_columns": 2,
         "column_sizing": [
           {
@@ -26,7 +31,12 @@
         "fields": {
           "Standard_VU": {
             "type": "_NeedleVUMeter",
-            "label": "Standard VU",
+            "label": {
+              "En": "Standard VU",
+              "Fr": "Standard VU",
+              "De": "Standard VU",
+              "Es": "Estándar VU"
+            },
             "notes": "ANSI C16.5-1942. Philosophy: Approximates 'perceived loudness'. 0 VU = +4 dBu. Ballistics: 300ms attack/decay. Lead: 6-10 dB.",
             "geometry": {
               "width": 150,
@@ -58,7 +68,12 @@
           },
           "RMS_Meter": {
             "type": "_NeedleVUMeter",
-            "label": "RMS (Calculated)",
+            "label": {
+              "En": "RMS (Calculated)",
+              "Fr": "RMS (Calculated)",
+              "De": "RMS (Calculated)",
+              "Es": "RMS (Calculated)"
+            },
             "notes": "Mathematical calculation of average power over time. Ballistics: Variable windowing.",
             "geometry": {
               "width": 150,
@@ -97,7 +112,12 @@
       },
       "Protection_Meters": {
         "type": "OcaBlock",
-        "description": "II. The Protection Meters (Quasi-Peak)",
+        "description": {
+          "En": "II. The Protection Meters (Quasi-Peak)",
+          "Fr": "II. The Protection Meters (Quasi-Peak)",
+          "De": "II. The Protection Meters (Quasi-Peak)",
+          "Es": "II. The Protection Meters (Quasi-Peak)"
+        },
         "layout_columns": 2,
         "column_sizing": [
           {
@@ -110,7 +130,12 @@
         "fields": {
           "PPM_Type_I": {
             "type": "_NeedleVUMeter",
-            "label": "PPM Type I (DIN)",
+            "label": {
+              "En": "PPM Type I (DIN)",
+              "Fr": "PPM Type I (DIN)",
+              "De": "PPM Type I (DIN)",
+              "Es": "PPM Type I (DIN)"
+            },
             "notes": "DIN 45406. Protection: Catches peaks to prevent overload. Ballistics: 10ms attack, 1.5s decay (-20dB).",
             "geometry": {
               "width": 150,
@@ -148,7 +173,12 @@
           },
           "PPM_Type_II": {
             "type": "_NeedleVUMeter",
-            "label": "PPM Type II (BBC)",
+            "label": {
+              "En": "PPM Type II (BBC)",
+              "Fr": "PPM Type II (BBC)",
+              "De": "PPM Type II (BBC)",
+              "Es": "PPM Type II (BBC)"
+            },
             "notes": "BS 4297. Reduces operator eye fatigue. Ballistics: 10ms attack, 2.8s decay (-24dB).",
             "geometry": {
               "width": 150,
@@ -188,7 +218,12 @@
       },
       "Digital_Meters": {
         "type": "OcaBlock",
-        "description": "III. The Digital Meters",
+        "description": {
+          "En": "III. The Digital Meters",
+          "Fr": "III. The Digital Meters",
+          "De": "III. The Digital Meters",
+          "Es": "III. The Digital Meters"
+        },
         "layout_columns": 3,
         "column_sizing": [
           {
@@ -204,7 +239,12 @@
         "fields": {
           "Digital_True_Peak": {
             "type": "_NeedleVUMeter",
-            "label": "True Peak (dBTP)",
+            "label": {
+              "En": "True Peak (dBTP)",
+              "Fr": "True Peak (dBTP)",
+              "De": "True Peak (dBTP)",
+              "Es": "True Peak (dBTP)"
+            },
             "notes": "ITU-R BS.1770. 'God View'. 4x Oversampling to detect Inter-Sample Peaks. Ballistics: Instant attack, peak hold decay.",
             "geometry": {
               "width": 150,
@@ -243,7 +283,12 @@
           },
           "LUFS_Momentary": {
             "type": "_NeedleVUMeter",
-            "label": "LUFS Momentary",
+            "label": {
+              "En": "LUFS Momentary",
+              "Fr": "LUFS Momentary",
+              "De": "LUFS Momentary",
+              "Es": "LUFS Momentary"
+            },
             "notes": "ITU-R BS.1770-4. Sliding 400ms window. Perceived loudness calculation.",
             "geometry": {
               "width": 150,
@@ -280,7 +325,12 @@
           },
           "LUFS_ShortTerm": {
             "type": "_NeedleVUMeter",
-            "label": "LUFS Short-Term",
+            "label": {
+              "En": "LUFS Short-Term",
+              "Fr": "LUFS Short-Term",
+              "De": "LUFS Short-Term",
+              "Es": "LUFS Short-Term"
+            },
             "notes": "ITU-R BS.1770-4. Sliding 3s window. K-Weighted average.",
             "geometry": {
               "width": 150,
@@ -319,7 +369,12 @@
       },
       "Hardware_Scales_1": {
         "type": "OcaBlock",
-        "description": "II. Hardware Scale Markings (Part 1)",
+        "description": {
+          "En": "II. Hardware Scale Markings (Part 1)",
+          "Fr": "II. Hardware Scale Markings (Part 1)",
+          "De": "II. Hardware Scale Markings (Part 1)",
+          "Es": "II. Hardware Scale Markings (Part 1)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -338,7 +393,12 @@
         "fields": {
           "Scale_BBC": {
             "type": "_NeedleVUMeter",
-            "label": "1. Standard BBC",
+            "label": {
+              "En": "1. Standard BBC",
+              "Fr": "1. Standard BBC",
+              "De": "1. Standard BBC",
+              "Es": "1. Estándar BBC"
+            },
             "notes": "Scale 1 to 7. BS4297. White on Matte Black. Mark '4' is reference.",
             "geometry": {
               "width": 150,
@@ -379,7 +439,12 @@
           },
           "Scale_ABC_West": {
             "type": "_NeedleVUMeter",
-            "label": "2. ABC - West",
+            "label": {
+              "En": "2. ABC - West",
+              "Fr": "2. ABC - West",
+              "De": "2. ABC - West",
+              "Es": "2. ABC - West"
+            },
             "notes": "-20 to +4. Ref -8 ('R'). Yellow Caution Strip (0 to +6).",
             "geometry": {
               "width": 150,
@@ -413,7 +478,12 @@
           },
           "Scale_ABC_East": {
             "type": "_NeedleVUMeter",
-            "label": "3. ABC - East",
+            "label": {
+              "En": "3. ABC - East",
+              "Fr": "3. ABC - East",
+              "De": "3. ABC - East",
+              "Es": "3. ABC - East"
+            },
             "notes": "-20 to +4. Ref -8. Identical to Scale 2 but without 'R' or yellow markers.",
             "geometry": {
               "width": 150,
@@ -440,8 +510,13 @@
           },
           "Scale_APK": {
             "type": "_NeedleVUMeter",
-            "label": "4. APK (Canada)",
-            "notes": "-4 to +20. Ref +8. 'dBm 600 \u03a9'. Yellow Strip (+16 to +24).",
+            "label": {
+              "En": "4. APK (Canada)",
+              "Fr": "4. APK (Canada)",
+              "De": "4. APK (Canada)",
+              "Es": "4. APK (Canada)"
+            },
+            "notes": "-4 to +20. Ref +8. 'dBm 600 Ω'. Yellow Strip (+16 to +24).",
             "geometry": {
               "width": 150,
               "height": 150
@@ -472,7 +547,12 @@
       },
       "Hardware_Scales_2": {
         "type": "OcaBlock",
-        "description": "II. Hardware Scale Markings (Part 2)",
+        "description": {
+          "En": "II. Hardware Scale Markings (Part 2)",
+          "Fr": "II. Hardware Scale Markings (Part 2)",
+          "De": "II. Hardware Scale Markings (Part 2)",
+          "Es": "II. Hardware Scale Markings (Part 2)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -491,7 +571,12 @@
         "fields": {
           "Scale_dBu": {
             "type": "_NeedleVUMeter",
-            "label": "5. dBu Scale",
+            "label": {
+              "En": "5. dBu Scale",
+              "Fr": "5. dBu Scale",
+              "De": "5. dBu Scale",
+              "Es": "5. dBu Scale"
+            },
             "notes": "-8 to +16. Ref +4 ('REF'). Yellow Strip (+12 to +20).",
             "geometry": {
               "width": 150,
@@ -524,7 +609,12 @@
           },
           "Scale_Center_Zero": {
             "type": "_NeedleVUMeter",
-            "label": "6. Center Zero",
+            "label": {
+              "En": "6. Center Zero",
+              "Fr": "6. Centre Zero",
+              "De": "6. Zentrum Zero",
+              "Es": "6. Centro Zero"
+            },
             "notes": "-12 to +12. Center 0. Symmetrical. Used for phase or balance nulling.",
             "geometry": {
               "width": 150,
@@ -554,7 +644,12 @@
           },
           "Scale_Test_A": {
             "type": "_NeedleVUMeter",
-            "label": "7. Test Scale A",
+            "label": {
+              "En": "7. Test Scale A",
+              "Fr": "7. Test Scale A",
+              "De": "7. Test Scale A",
+              "Es": "7. Test Scale A"
+            },
             "notes": "-12 to +12. Marked 'TEST' above zero.",
             "geometry": {
               "width": 150,
@@ -584,7 +679,12 @@
           },
           "Scale_Test_B": {
             "type": "_NeedleVUMeter",
-            "label": "8. Test Scale B",
+            "label": {
+              "En": "8. Test Scale B",
+              "Fr": "8. Test Scale B",
+              "De": "8. Test Scale B",
+              "Es": "8. Test Scale B"
+            },
             "notes": "-20 to +4. Ref -8. Marked 'TEST'. Yellow Caution Strip (0 to +6).",
             "geometry": {
               "width": 150,
@@ -619,7 +719,12 @@
       },
       "Vintage_Aesthetics": {
         "type": "OcaBlock",
-        "description": "VI. Vintage Aesthetics & Ergonomics",
+        "description": {
+          "En": "VI. Vintage Aesthetics & Ergonomics",
+          "Fr": "VI. Vintage Aesthetics & Ergonomics",
+          "De": "VI. Vintage Aesthetics & Ergonomics",
+          "Es": "VI. Vintage Aesthetics & Ergonomics"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -638,7 +743,12 @@
         "fields": {
           "Vintage_NOS": {
             "type": "_NeedleVUMeter",
-            "label": "New Old Stock",
+            "label": {
+              "En": "New Old Stock",
+              "Fr": "New Old Stock",
+              "De": "New Old Stock",
+              "Es": "New Old Stock"
+            },
             "notes": "Dial: #F5E6C4 (Buff/Parchment). Crisp, pale almond. Original 1940 factory look.",
             "geometry": {
               "width": 150,
@@ -673,7 +783,12 @@
           },
           "Vintage_Aged": {
             "type": "_NeedleVUMeter",
-            "label": "Vintage Aged",
+            "label": {
+              "En": "Vintage Aged",
+              "Fr": "Vintage Aged",
+              "De": "Vintage Aged",
+              "Es": "Vintage Aged"
+            },
             "notes": "Dial: #E8D5A8. Slightly darkened by time and heat. RCA Console / Luxman look.",
             "geometry": {
               "width": 150,
@@ -708,7 +823,12 @@
           },
           "Vintage_Night": {
             "type": "_NeedleVUMeter",
-            "label": "Tungsten (Lit)",
+            "label": {
+              "En": "Tungsten (Lit)",
+              "Fr": "Tungsten (Lit)",
+              "De": "Tungsten (Lit)",
+              "Es": "Tungsten (Lit)"
+            },
             "notes": "Dial: #FFC680. Warm, golden amber glow. Simulates No. 47 incandescent bulbs.",
             "geometry": {
               "width": 150,
@@ -743,7 +863,12 @@
           },
           "Vintage_Bakelite": {
             "type": "_NeedleVUMeter",
-            "label": "Bakelite (Dark)",
+            "label": {
+              "En": "Bakelite (Dark)",
+              "Fr": "Bakelite (Dark)",
+              "De": "Bakelite (Dark)",
+              "Es": "Bakelite (Dark)"
+            },
             "notes": "Case: #2B2B2B. Glossy dark brownish-black housing look.",
             "geometry": {
               "width": 150,
@@ -776,7 +901,12 @@
       },
       "Pointer_Anatomy": {
         "type": "OcaBlock",
-        "description": "VIII. Anatomy of the Needle (Pointer Styles)",
+        "description": {
+          "En": "VIII. Anatomy of the Needle (Pointer Styles)",
+          "Fr": "VIII. Anatomy of the Aiguille (Pointer Styles)",
+          "De": "VIII. Anatomy of the Nadel (Pointer Styles)",
+          "Es": "VIII. Anatomy of the Aguja (Pointer Styles)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -795,7 +925,12 @@
         "fields": {
           "Pointer_Spade": {
             "type": "_NeedleVUMeter",
-            "label": "Spade (Lance)",
+            "label": {
+              "En": "Spade (Lance)",
+              "Fr": "Spade (Lance)",
+              "De": "Spade (Lance)",
+              "Es": "Spade (Lance)"
+            },
             "notes": "Classic Vintage. Wide body, fine point. Allows eye to track momentum. Best for VU.",
             "geometry": {
               "width": 150,
@@ -820,7 +955,12 @@
           },
           "Pointer_Knife": {
             "type": "_NeedleVUMeter",
-            "label": "Knife-Edge",
+            "label": {
+              "En": "Knife-Edge",
+              "Fr": "Knife-Edge",
+              "De": "Knife-Edge",
+              "Es": "Knife-Edge"
+            },
             "notes": "Scientific Instrument. Razor thin to eliminate parallax error. Best for PPM.",
             "geometry": {
               "width": 150,
@@ -845,7 +985,12 @@
           },
           "Pointer_Baton": {
             "type": "_NeedleVUMeter",
-            "label": "Baton",
+            "label": {
+              "En": "Baton",
+              "Fr": "Baton",
+              "De": "Baton",
+              "Es": "Baton"
+            },
             "notes": "Industrial Indicator. Uniform rectangular bar. High distance visibility.",
             "geometry": {
               "width": 150,
@@ -870,7 +1015,12 @@
           },
           "Pointer_Diamond": {
             "type": "_NeedleVUMeter",
-            "label": "Hollow Diamond",
+            "label": {
+              "En": "Hollow Diamond",
+              "Fr": "Hollow Diamond",
+              "De": "Hollow Diamond",
+              "Es": "Hollow Diamond"
+            },
             "notes": "Hi-Fi Luxury. Skeletonized to reduce mass and improve transient response.",
             "geometry": {
               "width": 150,
@@ -897,7 +1047,12 @@
       },
       "Technical_Reference": {
         "type": "OcaBlock",
-        "description": "VII. Technical & Physics Reference",
+        "description": {
+          "En": "VII. Technical & Physics Reference",
+          "Fr": "VII. Technical & Physics Reference",
+          "De": "VII. Technical & Physics Reference",
+          "Es": "VII. Technical & Physics Reference"
+        },
         "layout_columns": 2,
         "column_sizing": [
           {
@@ -910,15 +1065,25 @@
         "fields": {
           "Physics_Doubling": {
             "type": "_Label",
-            "label": "The Physics of 'Doubling'",
-            "notes": "\u2022 Doubling Power: +3 dB (e.g., 2 speakers playing same signal).\n\u2022 Doubling Voltage: +6 dB (Field Strength/Pressure).\n\u2022 Doubling Loudness: ~+10 dB (Psychoacoustic perception).",
+            "label": {
+              "En": "The Physics of 'Doubling'",
+              "Fr": "The Physics of 'Doubling'",
+              "De": "The Physics of 'Doubling'",
+              "Es": "The Physics of 'Doubling'"
+            },
+            "notes": "• Doubling Power: +3 dB (e.g., 2 speakers playing same signal).\n• Doubling Voltage: +6 dB (Field Strength/Pressure).\n• Doubling Loudness: ~+10 dB (Psychoacoustic perception).",
             "geometry": {
               "sticky": "nw"
             }
           },
           "Impedance_Rule": {
             "type": "_Label",
-            "label": "Impedance Rule",
+            "label": {
+              "En": "Impedance Rule",
+              "Fr": "Impedance Rule",
+              "De": "Impedance Rule",
+              "Es": "Impedance Rule"
+            },
             "notes": "Internal: 3k9. Series Resistor: 3k6. Must 'see' its own impedance for accuracy.",
             "geometry": {
               "sticky": "nw"

@@ -7,7 +7,7 @@ import threading
 from dataclasses import dataclass
 from typing import Any, Optional
 from loguru import logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComSNMP.Core.snmp_tree import SNMPTreeBuilder
 from oaOchestration.Methods.network_utils import get_local_ip
 from oaOchestration.Constants.project_paths import (
@@ -19,7 +19,6 @@ from oaOchestration.Constants.project_paths import (
 from oaComSNMP.Core.oid_map_converter import OidMapConverter
 from oaComSNMP.Core.snmp_state_persister import SnmpStatePersister
 from oaComSNMP.Core.snmp_log_monitor import SnmpLogMonitor
-from oaDataSNMP.Entry import SnmpDataEntry
 from oaComSNMP.Methods.snmp_mib_generator import MibGenerator
 from oaComSNMP.Methods.snmp_installer_generator import InstallerGenerator
 from oaComSNMP.Workers.snmp_tester import SnmpTester
@@ -49,25 +48,36 @@ class SNMPManager:
         self._running = False
         self.run_bridge = False
         
-        self.manager = SnmpDataEntry()
-        self.state_file = self.manager.get_state_path()
-        self.mib_path = self.manager.get_mib_path()
+        from oaOchestration.Constants.project_paths import (
+            SNMP_STATE_FILE, 
+            SNMP_CURRENT_MIB,
+            SNMP_BRIDGE_SCRIPT
+        )
+        self.state_file = SNMP_STATE_FILE
+        self.mib_path = SNMP_CURRENT_MIB
+        self.master_script_path = SNMP_BRIDGE_SCRIPT
         self.base_oid = BASE_OID
         self._socket_info = "None"
         
         self.tree_builder = SNMPTreeBuilder(base_oid=self.base_oid)
-        self.tree_builder.master_script_path = self.manager.get_master_script_path()
+        self.tree_builder.master_script_path = self.master_script_path
         
         self.oid_map = {}
+        self._mqtt_state = {} # ⚡ REFLECTION: Local mirror of MQTT state
         self._monitor_callbacks = []
         self._state_lock = threading.RLock()
         
         self._initialize_workers()
 
+    def get_mqtt_state(self):
+        """Returns a snapshot of the reflected MQTT state."""
+        with self._state_lock:
+            return dict(self._mqtt_state)
+
     def _initialize_workers(self):
-        self.oid_map_converter = OidMapConverter(self.base_oid, self.context.state_cache_manager, self._state_lock)
+        self.oid_map_converter = OidMapConverter(self.base_oid, self._state_lock)
         self.state_persister = SnmpStatePersister(
-            state_cache_manager=self.context.state_cache_manager,
+            state_provider=self, # Pass self as the state provider
             thread_lock=self._state_lock,
             notify_monitor_callback=self._notify_monitor,
             run_bridge=self.run_bridge,
@@ -121,7 +131,20 @@ class SNMPManager:
             )
 
     def handle_protocol_event(self, msg):
-        pass
+        """
+        Processes unified messages from the ProtocolRouter.
+        Ensures SNMP state is a direct reflection of MQTT traffic.
+        """
+        with self._state_lock:
+            if not self._running: return
+            
+            # ⚡ REFLECTION: Only update our internal state if the message originated from MQTT
+            source = msg.get("source", "UNKNOWN").upper()
+            if source == "MQTT":
+                topic = msg.get("topic")
+                if topic:
+                    # Update local state mirror with the normalized router packet
+                    self._mqtt_state[topic] = msg
 
     def start(self):
         with self._state_lock:
@@ -182,7 +205,8 @@ class SNMPManager:
         pass
 
     def get_mib_content(self):
-        oid_map_data = self.oid_map_converter.build_oid_map()
+        state_snapshot = self.get_mqtt_state()
+        oid_map_data = self.oid_map_converter.build_oid_map(state_snapshot=state_snapshot)
         with self._state_lock:
             return MibGenerator.generate(self.base_oid, self.oid_map_converter.oid_map)
 
@@ -199,7 +223,7 @@ class SNMPManager:
             return False
 
     def get_installer_script(self):
-        return InstallerGenerator.generate(self.base_oid, self.manager.get_master_script_path())
+        return InstallerGenerator.generate(self.base_oid, self.master_script_path)
 
     def run_verification(self, mib_path=None, force_raw=True):
         if mib_path: return SnmpTester.verify_oid_tree(self.base_oid, mib_path=mib_path)
@@ -214,6 +238,9 @@ class SNMPObserver(SNMPManager):
         self.run_bridge = False
         
     def handle_protocol_event(self, msg):
+        # 1. Update internal state (reflection)
+        super().handle_protocol_event(msg)
+        
         with self._state_lock:
             if not self._running: return
 
@@ -250,7 +277,8 @@ class SNMPBridge(SNMPManager):
         self.state_persister.run_bridge = True
 
     def handle_protocol_event(self, msg):
-        pass
+        # Update internal state (reflection)
+        super().handle_protocol_event(msg)
 
     def _start_specifics(self, router):
         try:

@@ -1,4 +1,5 @@
 # text_table/text_table.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
@@ -13,7 +14,7 @@ from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaComMQTT.Core import mqtt_publisher_service
@@ -48,7 +49,7 @@ class BuilderTextTableCreator(TransparencyMixin):
         # ⚡ Path Resolution: Use config or passed kwargs
         path = config_data.get("path") or kwargs.get("path")
         abs_topic = ctx.state_mirror_engine.calculate_topic(path, ctx.base_mqtt_topic_from_path)
-        csv_svc = TableCSVService(config_data.get("label_active", "Table"))
+        csv_svc = TableCSVService(get_text(config.get("label_active"), "Table"))
         
         # 2. Treeview
         headers = config_data.get("headers", [])

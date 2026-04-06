@@ -9,7 +9,7 @@
 
 from loguru import logger
 from oaLogging.Methods.matrix_gate import matrix_log, is_debug_allowed
-from oaConfiguration.Entry import Config
+from oaConfigurationManager.Entry import Config
 
 try:
     from oasplinkcore_rs import SplinkPipeline as RustSplinkPipeline

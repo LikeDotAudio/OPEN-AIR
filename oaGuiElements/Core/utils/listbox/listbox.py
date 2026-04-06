@@ -1,4 +1,5 @@
 # listbox/listbox.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
@@ -13,7 +14,7 @@ from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
@@ -38,7 +39,7 @@ class BuilderListboxCreator(TransparencyMixin):
         
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
-        label, path = config_data.get("label_active", ""), config_data.get("path")
+        label, path = get_text(config.get("label_active"), ""), config_data.get("path")
 
         # 1. Scaffolding
         sub_frame = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat", width=200, height=150)

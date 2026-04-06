@@ -13,7 +13,12 @@
     "blocks": {
       "Squircle_Variations": {
         "type": "OcaBlock",
-        "description": "Squircle (Square) Variations",
+        "description": {
+          "En": "Squircle (Square) Variations",
+          "Fr": "Squircle (Square) Variations",
+          "De": "Squircle (Square) Variationen",
+          "Es": "Squircle (Square) Variaciones"
+        },
         "layout_columns": 3,
         "column_sizing": [
           {
@@ -29,7 +34,12 @@
         "fields": {
           "Squircle_Square_1": {
             "type": "_NeedleVUMeter",
-            "label": "Standard Squircle",
+            "label": {
+              "En": "Standard Squircle",
+              "Fr": "Standard Squircle",
+              "De": "Standard Squircle",
+              "Es": "Estándar Squircle"
+            },
             "geometry": {
               "width": 300,
               "height": 300
@@ -62,7 +72,12 @@
               },
               "labels": [
                 {
-                  "text": "SQUIRCLE",
+                  "text": {
+                    "En": "SQUIRCLE",
+                    "Fr": "SQUIRCLE",
+                    "De": "SQUIRCLE",
+                    "Es": "SQUIRCLE"
+                  },
                   "x": 0,
                   "y": -150,
                   "size": 14,
@@ -80,7 +95,12 @@
                 }
               ]
             },
-            "label_active": "Standard Squircle",
+            "label_active": {
+              "En": "Standard Squircle",
+              "Fr": "Standard Squircle",
+              "De": "Standard Squircle",
+              "Es": "Estándar Squircle"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -117,7 +137,12 @@
           },
           "Squircle_Square_2_Small": {
             "type": "_NeedleVUMeter",
-            "label": "Small Blue",
+            "label": {
+              "En": "Small Blue",
+              "Fr": "Small Blue",
+              "De": "Small Blue",
+              "Es": "Small Blue"
+            },
             "geometry": {
               "width": 200,
               "height": 200
@@ -145,7 +170,12 @@
               },
               "labels": [
                 {
-                  "text": "SMALL",
+                  "text": {
+                    "En": "SMALL",
+                    "Fr": "SMALL",
+                    "De": "SMALL",
+                    "Es": "SMALL"
+                  },
                   "x": 0,
                   "y": -75,
                   "size": 10,
@@ -155,7 +185,12 @@
                 }
               ]
             },
-            "label_active": "Small Blue",
+            "label_active": {
+              "En": "Small Blue",
+              "Fr": "Small Blue",
+              "De": "Small Blue",
+              "Es": "Small Blue"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -187,7 +222,12 @@
           },
           "Squircle_Square_3_Large": {
             "type": "_NeedleVUMeter",
-            "label": "Large Red",
+            "label": {
+              "En": "Large Red",
+              "Fr": "Large Red",
+              "De": "Large Red",
+              "Es": "Large Red"
+            },
             "geometry": {
               "width": 300,
               "height": 300
@@ -215,7 +255,12 @@
               },
               "labels": [
                 {
-                  "text": "PRECISION VU METER",
+                  "text": {
+                    "En": "PRECISION VU METER",
+                    "Fr": "PRECISION VU METER",
+                    "De": "PRECISION VU METER",
+                    "Es": "PRECISION VU METER"
+                  },
                   "x": 0,
                   "y": -150,
                   "size": 18,
@@ -225,7 +270,12 @@
                 }
               ]
             },
-            "label_active": "Large Red",
+            "label_active": {
+              "En": "Large Red",
+              "Fr": "Large Red",
+              "De": "Large Red",
+              "Es": "Large Red"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -257,7 +307,12 @@
           },
           "Squircle_Square_4_Tiny": {
             "type": "_NeedleVUMeter",
-            "label": "Tiny Silver",
+            "label": {
+              "En": "Tiny Silver",
+              "Fr": "Tiny Silver",
+              "De": "Tiny Silver",
+              "Es": "Tiny Silver"
+            },
             "geometry": {
               "width": 150,
               "height": 150
@@ -284,7 +339,12 @@
                 "label_radius_offset": 5
               }
             },
-            "label_active": "Tiny Silver",
+            "label_active": {
+              "En": "Tiny Silver",
+              "Fr": "Tiny Silver",
+              "De": "Tiny Silver",
+              "Es": "Tiny Silver"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -316,7 +376,12 @@
           },
           "Squircle_Square_5_Neon": {
             "type": "_NeedleVUMeter",
-            "label": "Neon Pink",
+            "label": {
+              "En": "Neon Pink",
+              "Fr": "Neon Pink",
+              "De": "Neon Pink",
+              "Es": "Neon Pink"
+            },
             "geometry": {
               "width": 250,
               "height": 250
@@ -345,7 +410,12 @@
               },
               "labels": [
                 {
-                  "text": "NEON",
+                  "text": {
+                    "En": "NEON",
+                    "Fr": "NEON",
+                    "De": "NEON",
+                    "Es": "NEON"
+                  },
                   "x": 0,
                   "y": -100,
                   "size": 16,
@@ -355,7 +425,12 @@
                 }
               ]
             },
-            "label_active": "Neon Pink",
+            "label_active": {
+              "En": "Neon Pink",
+              "Fr": "Neon Pink",
+              "De": "Neon Pink",
+              "Es": "Neon Pink"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -388,7 +463,12 @@
           },
           "Squircle_Square_6_Vintage": {
             "type": "_NeedleVUMeter",
-            "label": "Vintage Cream",
+            "label": {
+              "En": "Vintage Cream",
+              "Fr": "Vintage Cream",
+              "De": "Vintage Cream",
+              "Es": "Vintage Cream"
+            },
             "geometry": {
               "width": 250,
               "height": 250
@@ -416,7 +496,12 @@
               },
               "labels": [
                 {
-                  "text": "VINTAGE",
+                  "text": {
+                    "En": "VINTAGE",
+                    "Fr": "VINTAGE",
+                    "De": "VINTAGE",
+                    "Es": "VINTAGE"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 14,
@@ -425,7 +510,12 @@
                 }
               ]
             },
-            "label_active": "Vintage Cream",
+            "label_active": {
+              "En": "Vintage Cream",
+              "Fr": "Vintage Cream",
+              "De": "Vintage Cream",
+              "Es": "Vintage Cream"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -457,7 +547,12 @@
           },
           "Squircle_Square_7_Cyber": {
             "type": "_NeedleVUMeter",
-            "label": "Cyber Cyan",
+            "label": {
+              "En": "Cyber Cyan",
+              "Fr": "Cyber Cyan",
+              "De": "Cyber Cyan",
+              "Es": "Cyber Cyan"
+            },
             "geometry": {
               "width": 300,
               "height": 300
@@ -486,7 +581,12 @@
               },
               "labels": [
                 {
-                  "text": "CYBER",
+                  "text": {
+                    "En": "CYBER",
+                    "Fr": "CYBER",
+                    "De": "CYBER",
+                    "Es": "CYBER"
+                  },
                   "x": 0,
                   "y": -130,
                   "size": 18,
@@ -496,7 +596,12 @@
                 }
               ]
             },
-            "label_active": "Cyber Cyan",
+            "label_active": {
+              "En": "Cyber Cyan",
+              "Fr": "Cyber Cyan",
+              "De": "Cyber Cyan",
+              "Es": "Cyber Cyan"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -529,7 +634,12 @@
           },
           "Squircle_Square_8_Blueprint": {
             "type": "_NeedleVUMeter",
-            "label": "Blueprint",
+            "label": {
+              "En": "Blueprint",
+              "Fr": "Blueprint",
+              "De": "Blueprint",
+              "Es": "Blueprint"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -557,7 +667,12 @@
               },
               "labels": [
                 {
-                  "text": "PLAN",
+                  "text": {
+                    "En": "PLAN",
+                    "Fr": "PLAN",
+                    "De": "PLAN",
+                    "Es": "PLAN"
+                  },
                   "x": 0,
                   "y": -95,
                   "size": 12,
@@ -566,7 +681,12 @@
                 }
               ]
             },
-            "label_active": "Blueprint",
+            "label_active": {
+              "En": "Blueprint",
+              "Fr": "Blueprint",
+              "De": "Blueprint",
+              "Es": "Blueprint"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -598,7 +718,12 @@
           },
           "Squircle_Square_9_Gold": {
             "type": "_NeedleVUMeter",
-            "label": "Black & Gold",
+            "label": {
+              "En": "Black & Gold",
+              "Fr": "Black & Gold",
+              "De": "Black & Gold",
+              "Es": "Black & Gold"
+            },
             "geometry": {
               "width": 300,
               "height": 300
@@ -626,7 +751,12 @@
               },
               "labels": [
                 {
-                  "text": "PRESTIGE",
+                  "text": {
+                    "En": "PRESTIGE",
+                    "Fr": "PRESTIGE",
+                    "De": "PRESTIGE",
+                    "Es": "PRESTIGE"
+                  },
                   "x": 0,
                   "y": -120,
                   "size": 18,
@@ -636,7 +766,12 @@
                 }
               ]
             },
-            "label_active": "Black & Gold",
+            "label_active": {
+              "En": "Black & Gold",
+              "Fr": "Black & Gold",
+              "De": "Black & Gold",
+              "Es": "Black & Gold"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",

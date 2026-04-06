@@ -111,5 +111,5 @@ integrity, with a strong emphasis on the **Hierarchical Logging Matrix**.
 2. **Strategy**: Define subsystem names and element IDs for the matrix, and explicitly map out the removal of `LOCAL_DEBUG` variables.
 3. **Execution**: Eradicate `LOCAL_DEBUG`. Implement `matrix_gate.is_debug_allowed` gates. Apply the 3-emoji standard and categories. Ensure all text respects the 80-column line limit.
 
-**Initialize & Execute:** Before starting the analysis, create an empty file named `Bad_Logging_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+**Initialize & Execute:** Before starting the analysis, create an empty file named `Bad_Logging_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
 """

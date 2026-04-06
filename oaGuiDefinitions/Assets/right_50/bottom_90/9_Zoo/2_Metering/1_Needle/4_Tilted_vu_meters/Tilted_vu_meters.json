@@ -13,7 +13,12 @@
     "blocks": {
       "Tilted_Meter_Petting_Zoo": {
         "type": "OcaBlock",
-        "description": "Tilted and Reversed Meter Demos",
+        "description": {
+          "En": "Tilted and Reversed Meter Demos",
+          "Fr": "Tilted and Reversed Meter Demos",
+          "De": "Tilted and Reversed Meter Demos",
+          "Es": "Tilted and Reversed Meter Demos"
+        },
         "layout_columns": 2,
         "column_sizing": [
           {
@@ -26,7 +31,12 @@
         "fields": {
           "left_meter": {
             "type": "_SmartMeter",
-            "label": "Left Meter (180-90)",
+            "label": {
+              "En": "Left Meter (180-90)",
+              "Fr": "Gauche Meter (180-90)",
+              "De": "Links Meter (180-90)",
+              "Es": "Izquierda Meter (180-90)"
+            },
             "notes": "Classic Left Tilted.",
             "geometry": {
               "width": 200,
@@ -83,7 +93,12 @@
           },
           "right_meter": {
             "type": "_SmartMeter",
-            "label": "Right Meter (0-90)",
+            "label": {
+              "En": "Right Meter (0-90)",
+              "Fr": "Droite Meter (0-90)",
+              "De": "Rechts Meter (0-90)",
+              "Es": "Derecha Meter (0-90)"
+            },
             "notes": "Classic Right Tilted (CCW).",
             "geometry": {
               "width": 200,
@@ -140,7 +155,12 @@
           },
           "rev_meter": {
             "type": "_SmartMeter",
-            "label": "Standard Reverse",
+            "label": {
+              "En": "Standard Reverse",
+              "Fr": "Standard Reverse",
+              "De": "Standard Reverse",
+              "Es": "Estándar Reverse"
+            },
             "notes": "Standard orientation, Counter-Clockwise motion.",
             "geometry": {
               "width": 200,
@@ -197,7 +217,12 @@
           },
           "ceiling_meter": {
             "type": "_SmartMeter",
-            "label": "Ceiling Mount",
+            "label": {
+              "En": "Ceiling Mount",
+              "Fr": "Ceiling Mount",
+              "De": "Ceiling Mount",
+              "Es": "Ceiling Mount"
+            },
             "notes": "Upside down (270 deg).",
             "geometry": {
               "width": 200,
@@ -254,7 +279,12 @@
           },
           "floor_meter": {
             "type": "_SmartMeter",
-            "label": "Floor Mount",
+            "label": {
+              "En": "Floor Mount",
+              "Fr": "Floor Mount",
+              "De": "Floor Mount",
+              "Es": "Floor Mount"
+            },
             "notes": "Full 180 degree floor arc.",
             "geometry": {
               "width": 200,
@@ -311,7 +341,12 @@
           },
           "sideways_L": {
             "type": "_SmartMeter",
-            "label": "Sideways Left",
+            "label": {
+              "En": "Sideways Left",
+              "Fr": "Sideways Gauche",
+              "De": "Sideways Links",
+              "Es": "Sideways Izquierda"
+            },
             "notes": "Facing Left (180 deg).",
             "geometry": {
               "width": 200,
@@ -368,7 +403,12 @@
           },
           "sideways_R": {
             "type": "_SmartMeter",
-            "label": "Sideways Right",
+            "label": {
+              "En": "Sideways Right",
+              "Fr": "Sideways Droite",
+              "De": "Sideways Rechts",
+              "Es": "Sideways Derecha"
+            },
             "notes": "Facing Right (0 deg).",
             "geometry": {
               "width": 200,
@@ -425,7 +465,12 @@
           },
           "compass_N": {
             "type": "_SmartMeter",
-            "label": "Compass North",
+            "label": {
+              "En": "Compass North",
+              "Fr": "Compass North",
+              "De": "Compass North",
+              "Es": "Compass North"
+            },
             "notes": "Extremely wide compass style.",
             "geometry": {
               "width": 200,
@@ -482,7 +527,12 @@
           },
           "tilted_stereo": {
             "type": "_SmartMeter",
-            "label": "Stereo Tilted",
+            "label": {
+              "En": "Stereo Tilted",
+              "Fr": "Stereo Tilted",
+              "De": "Stereo Tilted",
+              "Es": "Stereo Tilted"
+            },
             "notes": "Stereo pointers on a tilted meter.",
             "geometry": {
               "width": 250,
@@ -539,7 +589,12 @@
           },
           "radar_sweep": {
             "type": "_SmartMeter",
-            "label": "Radar Sweep",
+            "label": {
+              "En": "Radar Sweep",
+              "Fr": "Radar Sweep",
+              "De": "Radar Sweep",
+              "Es": "Radar Sweep"
+            },
             "notes": "Near-full circle sweep.",
             "geometry": {
               "width": 200,

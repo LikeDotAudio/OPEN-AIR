@@ -1,4 +1,5 @@
 # text_label/text_label.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260221.Standardized.1
 #
@@ -15,7 +16,7 @@ import inspect
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
@@ -36,7 +37,7 @@ class BuilderTextLabelCreator(TransparencyMixin):
         """Creates a Tkinter label widget."""
         # ⚡ HARDENED INTERFACE: Standardize extraction
         config = config_data
-        label = config.get("label_active", config.get("label", "Label"))
+        label = get_text(config.get("label_active"), get_text(config.get("label"), "Label"))
         value = config.get("value", "")
         units = config.get("units", config.get("unit_text", ""))
         path = config.get("path")

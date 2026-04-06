@@ -13,12 +13,22 @@
     "blocks": {
       "Rotary_Selector_Demonstration": {
         "type": "OcaBlock",
-        "description": "12 Examples of Rotary Selector Switches in a 3-Column Grid",
+        "description": {
+          "En": "12 Examples of Rotary Selector Switches in a 3-Column Grid",
+          "Fr": "12 Exemples of Rotary Selector Switches in a 3-Column Grid",
+          "De": "12 Beispiele of Rotary Selector Switches in a 3-Column Grid",
+          "Es": "12 Ejemplos of Rotary Selector Switches in a 3-Column Grid"
+        },
         "layout_columns": 3,
         "fields": {
           "Multimeter_Dial": {
             "type": "SelectorSwitch",
-            "label_active": "Multimeter Mode",
+            "label_active": {
+              "En": "Multimeter Mode",
+              "Fr": "Multimeter Mode",
+              "De": "Multimeter Mode",
+              "Es": "Multimeter Mode"
+            },
             "positions": [
               "OFF",
               "VAC",
@@ -34,7 +44,12 @@
           },
           "Basic_4_Way": {
             "type": "SelectorSwitch",
-            "label_active": "Basic 4-Way",
+            "label_active": {
+              "En": "Basic 4-Way",
+              "Fr": "Basic 4-Way",
+              "De": "Basic 4-Way",
+              "Es": "Basic 4-Way"
+            },
             "positions": [
               "POS 1",
               "POS 2",
@@ -48,7 +63,12 @@
           },
           "Microwave_Menu": {
             "type": "SelectorSwitch",
-            "label_active": "Microwave Select",
+            "label_active": {
+              "En": "Microwave Select",
+              "Fr": "Microwave Select",
+              "De": "Microwave Select",
+              "Es": "Microwave Select"
+            },
             "positions": [
               "Defrost",
               "Popcorn",
@@ -64,7 +84,12 @@
           },
           "Audio_Input": {
             "type": "SelectorSwitch",
-            "label_active": "Audio Source",
+            "label_active": {
+              "En": "Audio Source",
+              "Fr": "Audio Source",
+              "De": "Audio Source",
+              "Es": "Audio Source"
+            },
             "positions": [
               "Phono",
               "CD",
@@ -79,7 +104,12 @@
           },
           "Large_Industrial_Switch": {
             "type": "SelectorSwitch",
-            "label_active": "Large Power Selector",
+            "label_active": {
+              "En": "Large Power Selector",
+              "Fr": "Large Power Selector",
+              "De": "Large Power Selector",
+              "Es": "Large Power Selector"
+            },
             "positions": [
               "STANDBY",
               "LOW POWER",
@@ -95,7 +125,12 @@
           },
           "Oscilloscope_Timebase": {
             "type": "SelectorSwitch",
-            "label_active": "Time/Div",
+            "label_active": {
+              "En": "Time/Div",
+              "Fr": "Time/Div",
+              "De": "Time/Div",
+              "Es": "Time/Div"
+            },
             "positions": [
               "1ns",
               "10ns",
@@ -114,7 +149,12 @@
           },
           "Guitar_Pickup": {
             "type": "SelectorSwitch",
-            "label_active": "Pickup Select",
+            "label_active": {
+              "En": "Pickup Select",
+              "Fr": "Pickup Select",
+              "De": "Pickup Select",
+              "Es": "Pickup Select"
+            },
             "positions": [
               "Bridge",
               "Bridge+Mid",
@@ -128,7 +168,12 @@
           },
           "High_Resolution_Encoder": {
             "type": "SelectorSwitch",
-            "label_active": "20-Position Encoder",
+            "label_active": {
+              "En": "20-Position Encoder",
+              "Fr": "20-Position Encoder",
+              "De": "20-Position Encoder",
+              "Es": "20-Position Encoder"
+            },
             "positions": [
               "1",
               "2",
@@ -159,7 +204,12 @@
           },
           "Washing_Machine": {
             "type": "SelectorSwitch",
-            "label_active": "Cycle",
+            "label_active": {
+              "En": "Cycle",
+              "Fr": "Cycle",
+              "De": "Cycle",
+              "Es": "Cycle"
+            },
             "positions": [
               "Normal",
               "Heavy Duty",
@@ -174,7 +224,12 @@
           },
           "Oven_Temp": {
             "type": "SelectorSwitch",
-            "label_active": "Temp Range",
+            "label_active": {
+              "En": "Temp Range",
+              "Fr": "Temp Range",
+              "De": "Temp Range",
+              "Es": "Temp Range"
+            },
             "positions": [
               "Warm",
               "100C",
@@ -189,7 +244,12 @@
           },
           "Clock_Format": {
             "type": "SelectorSwitch",
-            "label_active": "Time Mode",
+            "label_active": {
+              "En": "Time Mode",
+              "Fr": "Heure Mode",
+              "De": "Zeit Mode",
+              "Es": "Hora Mode"
+            },
             "positions": [
               "12H",
               "24H",
@@ -202,7 +262,12 @@
           },
           "Digital_Filter": {
             "type": "SelectorSwitch",
-            "label_active": "Filter Type",
+            "label_active": {
+              "En": "Filter Type",
+              "Fr": "Type de Filtre",
+              "De": "Filtertyp",
+              "Es": "Tipo de Filtro"
+            },
             "positions": [
               "None",
               "LPF 20M",

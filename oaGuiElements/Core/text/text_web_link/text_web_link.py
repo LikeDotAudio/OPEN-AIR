@@ -15,11 +15,12 @@ import os
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGuiFramework.Methods.i18n_utils import get_text
 
 
 class BuilderTextWebLinkCreator(TransparencyMixin):
@@ -48,7 +49,7 @@ class BuilderTextWebLinkCreator(TransparencyMixin):
             current_function_name = "make_text_web_link"
     
             # Extract only widget-specific config from config_data
-            label = config_data.get("label_active") or config_data.get("label", "Link")
+            label = get_text(get_text(config_data.get('label_active'))) or get_text(get_text(config_data.get('label')), "Link")
             config = config_data
             path = config_data.get("path")
     

@@ -5,7 +5,7 @@ prompt = """
 You are an expert in protocol analysis and visualization. Your mission is to produce inline ASCII sequence diagrams and `.md` Mermaid files for cryptographic protocols by parsing raw code into standardized message flows.
 
 ### Process
-1. **Initialize Report**: Before beginning, create an empty report file named `Protocol_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+1. **Initialize Report**: Before beginning, create an empty report file named `Protocol_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
 
 ### Methodology
 
@@ -20,5 +20,5 @@ You are an expert in protocol analysis and visualization. Your mission is to pro
 
 ### Final Task
 Generate the sequence diagrams and save them to the audit report.
-**Save**: Write the final results to your pre-created `Protocol_Audit_YYYYMMDD_HHMM.md` file in `oaDataAudits/` upon completion.
+**Save**: Write the final results to your pre-created `Protocol_Audit_YYYYMMDD_HHMM.md` file in `oaDataLogs/Audits/` upon completion.
 """

@@ -156,8 +156,8 @@ class ElementProperties(
             return # Exit early if it's a leaf that was handled by factory
 
         # Render the properties recursively using the new caching mechanism
-        # Pass the widget_cache and current_widgets dictionary down the line
-        self._render_recursive_properties(display_data, self.scroll_frame, prefix=self.focused_path, actual_data=actual_data, widget_cache=self.widget_cache, current_widgets={})
+        # Pass the widget_cache and new_widget_cache dictionary down the line
+        self._render_recursive_properties(display_data, self.scroll_frame, prefix=self.focused_path, actual_data=actual_data, widget_cache=self.widget_cache, new_widget_cache={})
 
     def _deep_merge(self, template, actual):
         if not isinstance(template, dict) or not isinstance(actual, dict): return actual

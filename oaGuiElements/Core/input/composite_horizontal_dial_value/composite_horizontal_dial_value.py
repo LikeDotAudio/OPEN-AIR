@@ -1,4 +1,5 @@
 # composite_horizontal_dial_value/composite_horizontal_dial_value.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
@@ -12,7 +13,7 @@ from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaOchestration.Methods.widget_event_binder import bind_variable_trace
@@ -45,7 +46,7 @@ class BuilderCompositeHorizontalDialValueCreator(
     def make_composite_horizontal_dial_value(self, parent_widget, config_data, context=None, **kwargs):
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🔀 [BUILDER] Creating composite horizontal dial value.", level="TRACE")
         
-        label, path = config_data.get("label_active", config_data.get("label", "Composite")), config_data.get("path", "")
+        label, path = get_text(config.get("label_active"), get_text(config.get("label"), "Composite")), config_data.get("path", "")
         
         # Context extraction
         if context:

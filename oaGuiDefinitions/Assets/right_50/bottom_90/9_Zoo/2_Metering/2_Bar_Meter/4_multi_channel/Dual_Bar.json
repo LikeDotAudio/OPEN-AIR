@@ -13,12 +13,22 @@
     "blocks": {
       "Stereo_Monitoring_Station": {
         "type": "OcaBlock",
-        "description": "Stereo and Surround Monitoring",
+        "description": {
+          "En": "Stereo and Surround Monitoring",
+          "Fr": "Stereo and Surround Monitoring",
+          "De": "Stereo and Surround Monitoring",
+          "Es": "Stereo and Surround Monitoring"
+        },
         "layout_columns": 1,
         "fields": {
           "Stereo_Bank_A": {
             "type": "OcaBlock",
-            "label_active": "Stereo Pair Bridge (High-Detail Ticks)",
+            "label_active": {
+              "En": "Stereo Pair Bridge (High-Detail Ticks)",
+              "Fr": "Stereo Pair Bridge (High-Detail Ticks)",
+              "De": "Stereo Pair Bridge (High-Detail Ticks)",
+              "Es": "Stereo Pair Bridge (High-Detail Ticks)"
+            },
             "layout_columns": 4,
             "column_sizing": [
               {
@@ -37,7 +47,12 @@
             "fields": {
               "pair1_L": {
                 "type": "_SmartMeter",
-                "label": "Pair 1 L",
+                "label": {
+                  "En": "Pair 1 L",
+                  "Fr": "Pair 1 L",
+                  "De": "Pair 1 L",
+                  "Es": "Pair 1 L"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top"
@@ -97,7 +112,12 @@
               },
               "pair2_L": {
                 "type": "_SmartMeter",
-                "label": "Pair 2 L",
+                "label": {
+                  "En": "Pair 2 L",
+                  "Fr": "Pair 2 L",
+                  "De": "Pair 2 L",
+                  "Es": "Pair 2 L"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top"
@@ -157,7 +177,12 @@
               },
               "pair3_L": {
                 "type": "_SmartMeter",
-                "label": "Pair 3 L",
+                "label": {
+                  "En": "Pair 3 L",
+                  "Fr": "Pair 3 L",
+                  "De": "Pair 3 L",
+                  "Es": "Pair 3 L"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top"
@@ -217,7 +242,12 @@
               },
               "pair4_L": {
                 "type": "_SmartMeter",
-                "label": "Pair 4 L",
+                "label": {
+                  "En": "Pair 4 L",
+                  "Fr": "Pair 4 L",
+                  "De": "Pair 4 L",
+                  "Es": "Pair 4 L"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top"
@@ -277,7 +307,12 @@
               },
               "pair1_R": {
                 "type": "_SmartMeter",
-                "label": "Pair 1 R",
+                "label": {
+                  "En": "Pair 1 R",
+                  "Fr": "Pair 1 R",
+                  "De": "Pair 1 R",
+                  "Es": "Pair 1 R"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "bottom"
@@ -337,7 +372,12 @@
               },
               "pair2_R": {
                 "type": "_SmartMeter",
-                "label": "Pair 2 R",
+                "label": {
+                  "En": "Pair 2 R",
+                  "Fr": "Pair 2 R",
+                  "De": "Pair 2 R",
+                  "Es": "Pair 2 R"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "bottom"
@@ -397,7 +437,12 @@
               },
               "pair3_R": {
                 "type": "_SmartMeter",
-                "label": "Pair 3 R",
+                "label": {
+                  "En": "Pair 3 R",
+                  "Fr": "Pair 3 R",
+                  "De": "Pair 3 R",
+                  "Es": "Pair 3 R"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "bottom"
@@ -457,7 +502,12 @@
               },
               "pair4_R": {
                 "type": "_SmartMeter",
-                "label": "Pair 4 R",
+                "label": {
+                  "En": "Pair 4 R",
+                  "Fr": "Pair 4 R",
+                  "De": "Pair 4 R",
+                  "Es": "Pair 4 R"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "bottom"
@@ -519,7 +569,12 @@
           },
           "Gang_of_8": {
             "type": "OcaBlock",
-            "label_active": "8-Channel Gang (Extra Tall)",
+            "label_active": {
+              "En": "8-Channel Gang (Extra Tall)",
+              "Fr": "8-Channel Gang (Extra Tall)",
+              "De": "8-Channel Gang (Extra Tall)",
+              "Es": "8-Channel Gang (Extra Tall)"
+            },
             "layout_columns": 8,
             "column_sizing": [
               {
@@ -550,7 +605,12 @@
             "fields": {
               "G1": {
                 "type": "_SmartMeter",
-                "label": "1",
+                "label": {
+                  "En": "1",
+                  "Fr": "1",
+                  "De": "1",
+                  "Es": "1"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top",
@@ -609,7 +669,12 @@
               },
               "G2": {
                 "type": "_SmartMeter",
-                "label": "2",
+                "label": {
+                  "En": "2",
+                  "Fr": "2",
+                  "De": "2",
+                  "Es": "2"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top",
@@ -668,7 +733,12 @@
               },
               "G3": {
                 "type": "_SmartMeter",
-                "label": "3",
+                "label": {
+                  "En": "3",
+                  "Fr": "3",
+                  "De": "3",
+                  "Es": "3"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top",
@@ -727,7 +797,12 @@
               },
               "G4": {
                 "type": "_SmartMeter",
-                "label": "4",
+                "label": {
+                  "En": "4",
+                  "Fr": "4",
+                  "De": "4",
+                  "Es": "4"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top",
@@ -786,7 +861,12 @@
               },
               "G5": {
                 "type": "_SmartMeter",
-                "label": "5",
+                "label": {
+                  "En": "5",
+                  "Fr": "5",
+                  "De": "5",
+                  "Es": "5"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top",
@@ -845,7 +925,12 @@
               },
               "G6": {
                 "type": "_SmartMeter",
-                "label": "6",
+                "label": {
+                  "En": "6",
+                  "Fr": "6",
+                  "De": "6",
+                  "Es": "6"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top",
@@ -904,7 +989,12 @@
               },
               "G7": {
                 "type": "_SmartMeter",
-                "label": "7",
+                "label": {
+                  "En": "7",
+                  "Fr": "7",
+                  "De": "7",
+                  "Es": "7"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top",
@@ -963,7 +1053,12 @@
               },
               "G8": {
                 "type": "_SmartMeter",
-                "label": "8",
+                "label": {
+                  "En": "8",
+                  "Fr": "8",
+                  "De": "8",
+                  "Es": "8"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top",

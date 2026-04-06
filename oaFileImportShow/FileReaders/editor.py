@@ -13,7 +13,7 @@ from tkinter import ttk
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaFileImportShow.FileReaders.saver import save_markers_file_internally

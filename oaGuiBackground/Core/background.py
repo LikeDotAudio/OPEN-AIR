@@ -150,7 +150,6 @@ class BuilderBackgroundManagerMixin:
                 
                 # ⚡ Z-STACK FIX: Force the background to the bottom and update the UI *before* reslicing
                 self.panel_bg_label.lower()
-                self.scroll_frame.update_idletasks()
             
             self._trigger_reslice_all(force=True)
 

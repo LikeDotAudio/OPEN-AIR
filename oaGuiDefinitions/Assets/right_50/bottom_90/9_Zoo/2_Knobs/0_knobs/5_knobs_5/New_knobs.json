@@ -13,7 +13,12 @@
     "blocks": {
       "Knob_Overhaul_Showcase": {
         "type": "OcaBlock",
-        "description": "The Ultimate Knob Collection: 100 Variants of Shapes, Pointers, and Ticks",
+        "description": {
+          "En": "The Ultimate Knob Collection: 100 Variants of Shapes, Pointers, and Ticks",
+          "Fr": "The Ultimate Knob Collection: 100 Variants of Shapes, Pointers, and Ticks",
+          "De": "The Ultimate Knob Collection: 100 Variants of Shapes, Pointers, and Ticks",
+          "Es": "The Ultimate Knob Collection: 100 Variants of Shapes, Pointers, and Ticks"
+        },
         "layout_columns": 10,
         "column_sizing": [
           {
@@ -50,7 +55,12 @@
         "fields": {
           "knob_001": {
             "type": "_SmartKnob",
-            "label": "Std Circ",
+            "label": {
+              "En": "Std Circ",
+              "Fr": "Std Circ",
+              "De": "Std Circ",
+              "Es": "Std Circ"
+            },
             "notes": "Baseline",
             "geometry": {
               "width": 100,
@@ -104,7 +114,12 @@
           },
           "knob_002": {
             "type": "_SmartKnob",
-            "label": "Octagon",
+            "label": {
+              "En": "Octagon",
+              "Fr": "Octagon",
+              "De": "Octagon",
+              "Es": "Octagon"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -158,7 +173,12 @@
           },
           "knob_003": {
             "type": "_SmartKnob",
-            "label": "Gear",
+            "label": {
+              "En": "Gear",
+              "Fr": "Gear",
+              "De": "Gear",
+              "Es": "Gear"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -212,7 +232,12 @@
           },
           "knob_004": {
             "type": "_SmartKnob",
-            "label": "Tri Ptr",
+            "label": {
+              "En": "Tri Ptr",
+              "Fr": "Tri Ptr",
+              "De": "Tri Ptr",
+              "Es": "Tri Ptr"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -266,7 +291,12 @@
           },
           "knob_005": {
             "type": "_SmartKnob",
-            "label": "Notch",
+            "label": {
+              "En": "Notch",
+              "Fr": "Notch",
+              "De": "Notch",
+              "Es": "Notch"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -320,7 +350,12 @@
           },
           "knob_006": {
             "type": "_SmartKnob",
-            "label": "Num Ticks",
+            "label": {
+              "En": "Num Ticks",
+              "Fr": "Num Ticks",
+              "De": "Num Ticks",
+              "Es": "Num Ticks"
+            },
             "notes": "",
             "geometry": {
               "width": 120,
@@ -374,7 +409,12 @@
           },
           "knob_007": {
             "type": "_SmartKnob",
-            "label": "Dot Ticks",
+            "label": {
+              "En": "Dot Ticks",
+              "Fr": "Dot Ticks",
+              "De": "Dot Ticks",
+              "Es": "Dot Ticks"
+            },
             "notes": "",
             "geometry": {
               "width": 120,
@@ -428,7 +468,12 @@
           },
           "knob_008": {
             "type": "_SmartKnob",
-            "label": "Grad 1",
+            "label": {
+              "En": "Grad 1",
+              "Fr": "Grad 1",
+              "De": "Grad 1",
+              "Es": "Grad 1"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -482,7 +527,12 @@
           },
           "knob_009": {
             "type": "_SmartKnob",
-            "label": "Grad 3",
+            "label": {
+              "En": "Grad 3",
+              "Fr": "Grad 3",
+              "De": "Grad 3",
+              "Es": "Grad 3"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -536,7 +586,12 @@
           },
           "knob_010": {
             "type": "_SmartKnob",
-            "label": "Grad 5",
+            "label": {
+              "En": "Grad 5",
+              "Fr": "Grad 5",
+              "De": "Grad 5",
+              "Es": "Grad 5"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -590,7 +645,12 @@
           },
           "knob_011": {
             "type": "_SmartKnob",
-            "label": "Oct Tri",
+            "label": {
+              "En": "Oct Tri",
+              "Fr": "Oct Tri",
+              "De": "Oct Tri",
+              "Es": "Oct Tri"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -644,7 +704,12 @@
           },
           "knob_012": {
             "type": "_SmartKnob",
-            "label": "Gear Notch",
+            "label": {
+              "En": "Gear Notch",
+              "Fr": "Gear Notch",
+              "De": "Gear Notch",
+              "Es": "Gear Notch"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -698,7 +763,12 @@
           },
           "knob_013": {
             "type": "_SmartKnob",
-            "label": "Big Gear",
+            "label": {
+              "En": "Big Gear",
+              "Fr": "Big Gear",
+              "De": "Big Gear",
+              "Es": "Big Gear"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -752,7 +822,12 @@
           },
           "knob_014": {
             "type": "_SmartKnob",
-            "label": "Tiny Oct",
+            "label": {
+              "En": "Tiny Oct",
+              "Fr": "Tiny Oct",
+              "De": "Tiny Oct",
+              "Es": "Tiny Oct"
+            },
             "notes": "",
             "geometry": {
               "width": 80,
@@ -807,7 +882,12 @@
           },
           "knob_015": {
             "type": "_SmartKnob",
-            "label": "Fat Line",
+            "label": {
+              "En": "Fat Line",
+              "Fr": "Fat Line",
+              "De": "Fat Line",
+              "Es": "Fat Line"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -861,7 +941,12 @@
           },
           "knob_016": {
             "type": "_SmartKnob",
-            "label": "Thin Arc",
+            "label": {
+              "En": "Thin Arc",
+              "Fr": "Thin Arc",
+              "De": "Thin Arc",
+              "Es": "Thin Arc"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -915,7 +1000,12 @@
           },
           "knob_017": {
             "type": "_SmartKnob",
-            "label": "Long Tick",
+            "label": {
+              "En": "Long Tick",
+              "Fr": "Long Tick",
+              "De": "Long Tick",
+              "Es": "Long Tick"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -969,7 +1059,12 @@
           },
           "knob_018": {
             "type": "_SmartKnob",
-            "label": "No Ctr",
+            "label": {
+              "En": "No Ctr",
+              "Fr": "Non Ctr",
+              "De": "Nein Ctr",
+              "Es": "No Ctr"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1023,7 +1118,12 @@
           },
           "knob_019": {
             "type": "_SmartKnob",
-            "label": "Offset Ptr",
+            "label": {
+              "En": "Offset Ptr",
+              "Fr": "Offset Ptr",
+              "De": "Offset Ptr",
+              "Es": "Offset Ptr"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1077,7 +1177,12 @@
           },
           "knob_020": {
             "type": "_SmartKnob",
-            "label": "Short Ptr",
+            "label": {
+              "En": "Short Ptr",
+              "Fr": "Short Ptr",
+              "De": "Short Ptr",
+              "Es": "Short Ptr"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1131,7 +1236,12 @@
           },
           "knob_021": {
             "type": "_SmartKnob",
-            "label": "Red Gear",
+            "label": {
+              "En": "Red Gear",
+              "Fr": "Red Gear",
+              "De": "Red Gear",
+              "Es": "Red Gear"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1185,7 +1295,12 @@
           },
           "knob_022": {
             "type": "_SmartKnob",
-            "label": "Blue Oct",
+            "label": {
+              "En": "Blue Oct",
+              "Fr": "Blue Oct",
+              "De": "Blue Oct",
+              "Es": "Blue Oct"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1239,7 +1354,12 @@
           },
           "knob_023": {
             "type": "_SmartKnob",
-            "label": "Yell Tri",
+            "label": {
+              "En": "Yell Tri",
+              "Fr": "Yell Tri",
+              "De": "Yell Tri",
+              "Es": "Yell Tri"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1293,7 +1413,12 @@
           },
           "knob_024": {
             "type": "_SmartKnob",
-            "label": "Purp Dot",
+            "label": {
+              "En": "Purp Dot",
+              "Fr": "Purp Dot",
+              "De": "Purp Dot",
+              "Es": "Purp Dot"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1347,7 +1472,12 @@
           },
           "knob_025": {
             "type": "_SmartKnob",
-            "label": "Cya Num",
+            "label": {
+              "En": "Cya Num",
+              "Fr": "Cya Num",
+              "De": "Cya Num",
+              "Es": "Cya Num"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1401,7 +1531,12 @@
           },
           "knob_026": {
             "type": "_SmartKnob",
-            "label": "Org Notch",
+            "label": {
+              "En": "Org Notch",
+              "Fr": "Org Notch",
+              "De": "Org Notch",
+              "Es": "Org Notch"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1455,7 +1590,12 @@
           },
           "knob_027": {
             "type": "_SmartKnob",
-            "label": "Lime Cir",
+            "label": {
+              "En": "Lime Cir",
+              "Fr": "Lime Cir",
+              "De": "Lime Cir",
+              "Es": "Lime Cir"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1509,7 +1649,12 @@
           },
           "knob_028": {
             "type": "_SmartKnob",
-            "label": "Pink Oct",
+            "label": {
+              "En": "Pink Oct",
+              "Fr": "Pink Oct",
+              "De": "Pink Oct",
+              "Es": "Pink Oct"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1563,7 +1708,12 @@
           },
           "knob_029": {
             "type": "_SmartKnob",
-            "label": "Teal Gear",
+            "label": {
+              "En": "Teal Gear",
+              "Fr": "Teal Gear",
+              "De": "Teal Gear",
+              "Es": "Teal Gear"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1617,7 +1767,12 @@
           },
           "knob_030": {
             "type": "_SmartKnob",
-            "label": "Wht Line",
+            "label": {
+              "En": "Wht Line",
+              "Fr": "Wht Line",
+              "De": "Wht Line",
+              "Es": "Wht Line"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1671,7 +1826,12 @@
           },
           "knob_031": {
             "type": "_SmartKnob",
-            "label": "Mix 1",
+            "label": {
+              "En": "Mix 1",
+              "Fr": "Mix 1",
+              "De": "Mix 1",
+              "Es": "Mezcla 1"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1725,7 +1885,12 @@
           },
           "knob_032": {
             "type": "_SmartKnob",
-            "label": "Mix 2",
+            "label": {
+              "En": "Mix 2",
+              "Fr": "Mix 2",
+              "De": "Mix 2",
+              "Es": "Mezcla 2"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1779,7 +1944,12 @@
           },
           "knob_033": {
             "type": "_SmartKnob",
-            "label": "Mix 3",
+            "label": {
+              "En": "Mix 3",
+              "Fr": "Mix 3",
+              "De": "Mix 3",
+              "Es": "Mezcla 3"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1833,7 +2003,12 @@
           },
           "knob_034": {
             "type": "_SmartKnob",
-            "label": "Mix 4",
+            "label": {
+              "En": "Mix 4",
+              "Fr": "Mix 4",
+              "De": "Mix 4",
+              "Es": "Mezcla 4"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1887,7 +2062,12 @@
           },
           "knob_035": {
             "type": "_SmartKnob",
-            "label": "Mix 5",
+            "label": {
+              "En": "Mix 5",
+              "Fr": "Mix 5",
+              "De": "Mix 5",
+              "Es": "Mezcla 5"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1941,7 +2121,12 @@
           },
           "knob_036": {
             "type": "_SmartKnob",
-            "label": "Mix 6",
+            "label": {
+              "En": "Mix 6",
+              "Fr": "Mix 6",
+              "De": "Mix 6",
+              "Es": "Mezcla 6"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -1995,7 +2180,12 @@
           },
           "knob_037": {
             "type": "_SmartKnob",
-            "label": "Mix 7",
+            "label": {
+              "En": "Mix 7",
+              "Fr": "Mix 7",
+              "De": "Mix 7",
+              "Es": "Mezcla 7"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2049,7 +2239,12 @@
           },
           "knob_038": {
             "type": "_SmartKnob",
-            "label": "Mix 8",
+            "label": {
+              "En": "Mix 8",
+              "Fr": "Mix 8",
+              "De": "Mix 8",
+              "Es": "Mezcla 8"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2103,7 +2298,12 @@
           },
           "knob_039": {
             "type": "_SmartKnob",
-            "label": "Mix 9",
+            "label": {
+              "En": "Mix 9",
+              "Fr": "Mix 9",
+              "De": "Mix 9",
+              "Es": "Mezcla 9"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2157,7 +2357,12 @@
           },
           "knob_040": {
             "type": "_SmartKnob",
-            "label": "Mix 10",
+            "label": {
+              "En": "Mix 10",
+              "Fr": "Mix 10",
+              "De": "Mix 10",
+              "Es": "Mezcla 10"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2211,7 +2416,12 @@
           },
           "knob_041": {
             "type": "_SmartKnob",
-            "label": "Flat Gear",
+            "label": {
+              "En": "Flat Gear",
+              "Fr": "Flat Gear",
+              "De": "Flat Gear",
+              "Es": "Flat Gear"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2265,7 +2475,12 @@
           },
           "knob_042": {
             "type": "_SmartKnob",
-            "label": "Flat Oct",
+            "label": {
+              "En": "Flat Oct",
+              "Fr": "Flat Oct",
+              "De": "Flat Oct",
+              "Es": "Flat Oct"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2319,7 +2534,12 @@
           },
           "knob_043": {
             "type": "_SmartKnob",
-            "label": "Deep Gear",
+            "label": {
+              "En": "Deep Gear",
+              "Fr": "Deep Gear",
+              "De": "Deep Gear",
+              "Es": "Deep Gear"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2373,7 +2593,12 @@
           },
           "knob_044": {
             "type": "_SmartKnob",
-            "label": "Deep Oct",
+            "label": {
+              "En": "Deep Oct",
+              "Fr": "Deep Oct",
+              "De": "Deep Oct",
+              "Es": "Deep Oct"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2427,7 +2652,12 @@
           },
           "knob_045": {
             "type": "_SmartKnob",
-            "label": "Tri Only",
+            "label": {
+              "En": "Tri Only",
+              "Fr": "Tri Only",
+              "De": "Tri Only",
+              "Es": "Tri Only"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2481,7 +2711,12 @@
           },
           "knob_046": {
             "type": "_SmartKnob",
-            "label": "Notch Only",
+            "label": {
+              "En": "Notch Only",
+              "Fr": "Notch Only",
+              "De": "Notch Only",
+              "Es": "Notch Only"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2535,7 +2770,12 @@
           },
           "knob_047": {
             "type": "_SmartKnob",
-            "label": "Num Only",
+            "label": {
+              "En": "Num Only",
+              "Fr": "Num Only",
+              "De": "Num Only",
+              "Es": "Num Only"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2589,7 +2829,12 @@
           },
           "knob_048": {
             "type": "_SmartKnob",
-            "label": "Dot Only",
+            "label": {
+              "En": "Dot Only",
+              "Fr": "Dot Only",
+              "De": "Dot Only",
+              "Es": "Dot Only"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2643,7 +2888,12 @@
           },
           "knob_049": {
             "type": "_SmartKnob",
-            "label": "Big Tri",
+            "label": {
+              "En": "Big Tri",
+              "Fr": "Big Tri",
+              "De": "Big Tri",
+              "Es": "Big Tri"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -2697,7 +2947,12 @@
           },
           "knob_050": {
             "type": "_SmartKnob",
-            "label": "Big Notch",
+            "label": {
+              "En": "Big Notch",
+              "Fr": "Big Notch",
+              "De": "Big Notch",
+              "Es": "Big Notch"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -2751,7 +3006,12 @@
           },
           "knob_051": {
             "type": "_SmartKnob",
-            "label": "Fine G",
+            "label": {
+              "En": "Fine G",
+              "Fr": "Fine G",
+              "De": "Fine G",
+              "Es": "Fine G"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2805,7 +3065,12 @@
           },
           "knob_052": {
             "type": "_SmartKnob",
-            "label": "Inf Oct",
+            "label": {
+              "En": "Inf Oct",
+              "Fr": "Inf Oct",
+              "De": "Inf Oct",
+              "Es": "Inf Oct"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2859,7 +3124,12 @@
           },
           "knob_053": {
             "type": "_SmartKnob",
-            "label": "Inf Gear",
+            "label": {
+              "En": "Inf Gear",
+              "Fr": "Inf Gear",
+              "De": "Inf Gear",
+              "Es": "Inf Gear"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2913,7 +3183,12 @@
           },
           "knob_054": {
             "type": "_SmartKnob",
-            "label": "Fine Tri",
+            "label": {
+              "En": "Fine Tri",
+              "Fr": "Fine Tri",
+              "De": "Fine Tri",
+              "Es": "Fine Tri"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -2967,7 +3242,12 @@
           },
           "knob_055": {
             "type": "_SmartKnob",
-            "label": "Inf Notch",
+            "label": {
+              "En": "Inf Notch",
+              "Fr": "Inf Notch",
+              "De": "Inf Notch",
+              "Es": "Inf Notch"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3021,7 +3301,12 @@
           },
           "knob_056": {
             "type": "_SmartKnob",
-            "label": "Center Txt",
+            "label": {
+              "En": "Center Txt",
+              "Fr": "Centre Txt",
+              "De": "Zentrum Txt",
+              "Es": "Centro Txt"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3075,7 +3360,12 @@
           },
           "knob_057": {
             "type": "_SmartKnob",
-            "label": "Center Oct",
+            "label": {
+              "En": "Center Oct",
+              "Fr": "Centre Oct",
+              "De": "Zentrum Oct",
+              "Es": "Centro Oct"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3129,7 +3419,12 @@
           },
           "knob_058": {
             "type": "_SmartKnob",
-            "label": "Center Tri",
+            "label": {
+              "En": "Center Tri",
+              "Fr": "Centre Tri",
+              "De": "Zentrum Tri",
+              "Es": "Centro Tri"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3183,7 +3478,12 @@
           },
           "knob_059": {
             "type": "_SmartKnob",
-            "label": "Center Notch",
+            "label": {
+              "En": "Center Notch",
+              "Fr": "Centre Notch",
+              "De": "Zentrum Notch",
+              "Es": "Centro Notch"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3237,7 +3537,12 @@
           },
           "knob_060": {
             "type": "_SmartKnob",
-            "label": "Center Num",
+            "label": {
+              "En": "Center Num",
+              "Fr": "Centre Num",
+              "De": "Zentrum Num",
+              "Es": "Centro Num"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3291,7 +3596,12 @@
           },
           "knob_061": {
             "type": "_SmartKnob",
-            "label": "Var 61",
+            "label": {
+              "En": "Var 61",
+              "Fr": "Var 61",
+              "De": "Var 61",
+              "Es": "Var 61"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3345,7 +3655,12 @@
           },
           "knob_062": {
             "type": "_SmartKnob",
-            "label": "Var 62",
+            "label": {
+              "En": "Var 62",
+              "Fr": "Var 62",
+              "De": "Var 62",
+              "Es": "Var 62"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3399,7 +3714,12 @@
           },
           "knob_063": {
             "type": "_SmartKnob",
-            "label": "Var 63",
+            "label": {
+              "En": "Var 63",
+              "Fr": "Var 63",
+              "De": "Var 63",
+              "Es": "Var 63"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3453,7 +3773,12 @@
           },
           "knob_064": {
             "type": "_SmartKnob",
-            "label": "Var 64",
+            "label": {
+              "En": "Var 64",
+              "Fr": "Var 64",
+              "De": "Var 64",
+              "Es": "Var 64"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3507,7 +3832,12 @@
           },
           "knob_065": {
             "type": "_SmartKnob",
-            "label": "Var 65",
+            "label": {
+              "En": "Var 65",
+              "Fr": "Var 65",
+              "De": "Var 65",
+              "Es": "Var 65"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3561,7 +3891,12 @@
           },
           "knob_066": {
             "type": "_SmartKnob",
-            "label": "Var 66",
+            "label": {
+              "En": "Var 66",
+              "Fr": "Var 66",
+              "De": "Var 66",
+              "Es": "Var 66"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3615,7 +3950,12 @@
           },
           "knob_067": {
             "type": "_SmartKnob",
-            "label": "Var 67",
+            "label": {
+              "En": "Var 67",
+              "Fr": "Var 67",
+              "De": "Var 67",
+              "Es": "Var 67"
+            },
             "notes": "",
             "geometry": {
               "width": 140,
@@ -3669,7 +4009,12 @@
           },
           "knob_068": {
             "type": "_SmartKnob",
-            "label": "Var 68",
+            "label": {
+              "En": "Var 68",
+              "Fr": "Var 68",
+              "De": "Var 68",
+              "Es": "Var 68"
+            },
             "notes": "",
             "geometry": {
               "width": 140,
@@ -3723,7 +4068,12 @@
           },
           "knob_069": {
             "type": "_SmartKnob",
-            "label": "Var 69",
+            "label": {
+              "En": "Var 69",
+              "Fr": "Var 69",
+              "De": "Var 69",
+              "Es": "Var 69"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3777,7 +4127,12 @@
           },
           "knob_070": {
             "type": "_SmartKnob",
-            "label": "Var 70",
+            "label": {
+              "En": "Var 70",
+              "Fr": "Var 70",
+              "De": "Var 70",
+              "Es": "Var 70"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3831,7 +4186,12 @@
           },
           "knob_071": {
             "type": "_SmartKnob",
-            "label": "Var 71",
+            "label": {
+              "En": "Var 71",
+              "Fr": "Var 71",
+              "De": "Var 71",
+              "Es": "Var 71"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3885,7 +4245,12 @@
           },
           "knob_072": {
             "type": "_SmartKnob",
-            "label": "Var 72",
+            "label": {
+              "En": "Var 72",
+              "Fr": "Var 72",
+              "De": "Var 72",
+              "Es": "Var 72"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3939,7 +4304,12 @@
           },
           "knob_073": {
             "type": "_SmartKnob",
-            "label": "Var 73",
+            "label": {
+              "En": "Var 73",
+              "Fr": "Var 73",
+              "De": "Var 73",
+              "Es": "Var 73"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -3993,7 +4363,12 @@
           },
           "knob_074": {
             "type": "_SmartKnob",
-            "label": "Var 74",
+            "label": {
+              "En": "Var 74",
+              "Fr": "Var 74",
+              "De": "Var 74",
+              "Es": "Var 74"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -4047,7 +4422,12 @@
           },
           "knob_075": {
             "type": "_SmartKnob",
-            "label": "Var 75",
+            "label": {
+              "En": "Var 75",
+              "Fr": "Var 75",
+              "De": "Var 75",
+              "Es": "Var 75"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -4101,7 +4481,12 @@
           },
           "knob_076": {
             "type": "_SmartKnob",
-            "label": "Var 76",
+            "label": {
+              "En": "Var 76",
+              "Fr": "Var 76",
+              "De": "Var 76",
+              "Es": "Var 76"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -4155,7 +4540,12 @@
           },
           "knob_077": {
             "type": "_SmartKnob",
-            "label": "Var 77",
+            "label": {
+              "En": "Var 77",
+              "Fr": "Var 77",
+              "De": "Var 77",
+              "Es": "Var 77"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -4209,7 +4599,12 @@
           },
           "knob_078": {
             "type": "_SmartKnob",
-            "label": "Var 78",
+            "label": {
+              "En": "Var 78",
+              "Fr": "Var 78",
+              "De": "Var 78",
+              "Es": "Var 78"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -4263,7 +4658,12 @@
           },
           "knob_079": {
             "type": "_SmartKnob",
-            "label": "Var 79",
+            "label": {
+              "En": "Var 79",
+              "Fr": "Var 79",
+              "De": "Var 79",
+              "Es": "Var 79"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -4317,7 +4717,12 @@
           },
           "knob_080": {
             "type": "_SmartKnob",
-            "label": "Var 80",
+            "label": {
+              "En": "Var 80",
+              "Fr": "Var 80",
+              "De": "Var 80",
+              "Es": "Var 80"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -4371,7 +4776,12 @@
           },
           "knob_081": {
             "type": "_SmartKnob",
-            "label": "Var 81",
+            "label": {
+              "En": "Var 81",
+              "Fr": "Var 81",
+              "De": "Var 81",
+              "Es": "Var 81"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -4425,7 +4835,12 @@
           },
           "knob_082": {
             "type": "_SmartKnob",
-            "label": "Var 82",
+            "label": {
+              "En": "Var 82",
+              "Fr": "Var 82",
+              "De": "Var 82",
+              "Es": "Var 82"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -4479,7 +4894,12 @@
           },
           "knob_083": {
             "type": "_SmartKnob",
-            "label": "Var 83",
+            "label": {
+              "En": "Var 83",
+              "Fr": "Var 83",
+              "De": "Var 83",
+              "Es": "Var 83"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -4533,7 +4953,12 @@
           },
           "knob_084": {
             "type": "_SmartKnob",
-            "label": "Var 84",
+            "label": {
+              "En": "Var 84",
+              "Fr": "Var 84",
+              "De": "Var 84",
+              "Es": "Var 84"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -4587,7 +5012,12 @@
           },
           "knob_085": {
             "type": "_SmartKnob",
-            "label": "Var 85",
+            "label": {
+              "En": "Var 85",
+              "Fr": "Var 85",
+              "De": "Var 85",
+              "Es": "Var 85"
+            },
             "notes": "",
             "geometry": {
               "width": 180,
@@ -4641,7 +5071,12 @@
           },
           "knob_086": {
             "type": "_SmartKnob",
-            "label": "Var 86",
+            "label": {
+              "En": "Var 86",
+              "Fr": "Var 86",
+              "De": "Var 86",
+              "Es": "Var 86"
+            },
             "notes": "",
             "geometry": {
               "width": 180,
@@ -4695,7 +5130,12 @@
           },
           "knob_087": {
             "type": "_SmartKnob",
-            "label": "Var 87",
+            "label": {
+              "En": "Var 87",
+              "Fr": "Var 87",
+              "De": "Var 87",
+              "Es": "Var 87"
+            },
             "notes": "",
             "geometry": {
               "width": 180,
@@ -4749,7 +5189,12 @@
           },
           "knob_088": {
             "type": "_SmartKnob",
-            "label": "Var 88",
+            "label": {
+              "En": "Var 88",
+              "Fr": "Var 88",
+              "De": "Var 88",
+              "Es": "Var 88"
+            },
             "notes": "",
             "geometry": {
               "width": 180,
@@ -4803,7 +5248,12 @@
           },
           "knob_089": {
             "type": "_SmartKnob",
-            "label": "Var 89",
+            "label": {
+              "En": "Var 89",
+              "Fr": "Var 89",
+              "De": "Var 89",
+              "Es": "Var 89"
+            },
             "notes": "",
             "geometry": {
               "width": 180,
@@ -4857,7 +5307,12 @@
           },
           "knob_090": {
             "type": "_SmartKnob",
-            "label": "Var 90",
+            "label": {
+              "En": "Var 90",
+              "Fr": "Var 90",
+              "De": "Var 90",
+              "Es": "Var 90"
+            },
             "notes": "",
             "geometry": {
               "width": 180,
@@ -4911,7 +5366,12 @@
           },
           "knob_091": {
             "type": "_SmartKnob",
-            "label": "Final 1",
+            "label": {
+              "En": "Final 1",
+              "Fr": "Final 1",
+              "De": "Final 1",
+              "Es": "Final 1"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -4965,7 +5425,12 @@
           },
           "knob_092": {
             "type": "_SmartKnob",
-            "label": "Final 2",
+            "label": {
+              "En": "Final 2",
+              "Fr": "Final 2",
+              "De": "Final 2",
+              "Es": "Final 2"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -5019,7 +5484,12 @@
           },
           "knob_093": {
             "type": "_SmartKnob",
-            "label": "Final 3",
+            "label": {
+              "En": "Final 3",
+              "Fr": "Final 3",
+              "De": "Final 3",
+              "Es": "Final 3"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -5073,7 +5543,12 @@
           },
           "knob_094": {
             "type": "_SmartKnob",
-            "label": "Final 4",
+            "label": {
+              "En": "Final 4",
+              "Fr": "Final 4",
+              "De": "Final 4",
+              "Es": "Final 4"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -5127,7 +5602,12 @@
           },
           "knob_095": {
             "type": "_SmartKnob",
-            "label": "Final 5",
+            "label": {
+              "En": "Final 5",
+              "Fr": "Final 5",
+              "De": "Final 5",
+              "Es": "Final 5"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -5181,7 +5661,12 @@
           },
           "knob_096": {
             "type": "_SmartKnob",
-            "label": "Final 6",
+            "label": {
+              "En": "Final 6",
+              "Fr": "Final 6",
+              "De": "Final 6",
+              "Es": "Final 6"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -5235,7 +5720,12 @@
           },
           "knob_097": {
             "type": "_SmartKnob",
-            "label": "Final 7",
+            "label": {
+              "En": "Final 7",
+              "Fr": "Final 7",
+              "De": "Final 7",
+              "Es": "Final 7"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -5289,7 +5779,12 @@
           },
           "knob_098": {
             "type": "_SmartKnob",
-            "label": "Final 8",
+            "label": {
+              "En": "Final 8",
+              "Fr": "Final 8",
+              "De": "Final 8",
+              "Es": "Final 8"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -5343,7 +5838,12 @@
           },
           "knob_099": {
             "type": "_SmartKnob",
-            "label": "Final 9",
+            "label": {
+              "En": "Final 9",
+              "Fr": "Final 9",
+              "De": "Final 9",
+              "Es": "Final 9"
+            },
             "notes": "",
             "geometry": {
               "width": 100,
@@ -5397,7 +5897,12 @@
           },
           "knob_100": {
             "type": "_SmartKnob",
-            "label": "THE END",
+            "label": {
+              "En": "THE END",
+              "Fr": "THE END",
+              "De": "THE END",
+              "Es": "THE END"
+            },
             "notes": "",
             "geometry": {
               "width": 200,

@@ -26,10 +26,10 @@ The "Translation Engine" that transforms hierarchical MQTT topics into numerical
 
 ## 🔬 The "Pull" Bridge Architecture
 Unlike event-driven protocols, SNMP in OPEN-AIR operates on a high-speed file-sync model:
-1. **Persistence**: The system constantly writes its state to `oaDataSNMP/openair_snmp_objects.txt`.
+1. **Persistence**: The system constantly writes its state to `oaDataLogs/SNMP/openair_snmp_objects.txt`.
 2. **Master Bridge**: A generated bash script (`master_snmp_bridge.sh`) is registered with the system `snmpd` daemon using the `pass` command.
 3. **Retrieval**: When an external manager performs a GET, `snmpd` executes the master script, which uses `awk` to instantly retrieve the value from the state file.
-4. **Command**: For SET operations, the script writes the command to `oaDataSNMP/snmp_set.log`, which is then picked up by the `LogMonitor`.
+4. **Command**: For SET operations, the script writes the command to `oaDataLogs/SNMP/snmp_set.log`, which is then picked up by the `LogMonitor`.
 
 ---
 

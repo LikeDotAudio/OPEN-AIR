@@ -5,7 +5,12 @@
     "blocks": {
       "Measurement": {
         "type": "OcaBlock",
-        "description": "LCR Readback",
+        "description": {
+          "En": "LCR Readback",
+          "Fr": "LCR Readback",
+          "De": "LCR Readback",
+          "Es": "LCR Readback"
+        },
         "fields": {
           "Execute_Measure": {
             "type": "_GuiActuator",
@@ -20,8 +25,26 @@
           "Display": {
             "type": "OcaBlock",
             "fields": {
-              "primary": { "type": "_GuiValue", "label": "Primary (L/C/R/Z)", "units": "" },
-              "secondary": { "type": "_GuiValue", "label": "Secondary (D/Q/R/G)", "units": "" }
+              "primary": {
+                "type": "_GuiValue",
+                "label": {
+                  "En": "Primary (L/C/R/Z)",
+                  "Fr": "Primary (L/C/R/Z)",
+                  "De": "Primary (L/C/R/Z)",
+                  "Es": "Primary (L/C/R/Z)"
+                },
+                "units": ""
+              },
+              "secondary": {
+                "type": "_GuiValue",
+                "label": {
+                  "En": "Secondary (D/Q/R/G)",
+                  "Fr": "Secondary (D/Q/R/G)",
+                  "De": "Secondary (D/Q/R/G)",
+                  "Es": "Secondary (D/Q/R/G)"
+                },
+                "units": ""
+              }
             }
           }
         }

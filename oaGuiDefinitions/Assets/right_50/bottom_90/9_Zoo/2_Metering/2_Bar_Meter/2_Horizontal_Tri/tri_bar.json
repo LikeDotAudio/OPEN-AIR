@@ -13,12 +13,22 @@
     "blocks": {
       "Wide_Range_Horizontal": {
         "type": "OcaBlock",
-        "description": "Comprehensive Bar Graph Visual & Ballistic Demos",
+        "description": {
+          "En": "Comprehensive Bar Graph Visual & Ballistic Demos",
+          "Fr": "Comprehensive Bar Graph Visual & Ballistic Demos",
+          "De": "Comprehensive Bar Graph Visual & Ballistic Demos",
+          "Es": "Comprehensive Bar Graph Visual & Ballistic Demos"
+        },
         "layout_columns": 1,
         "fields": {
           "demo_01_standard_bottom": {
             "type": "_SmartMeter",
-            "label": "01: Classic Green (Thick)",
+            "label": {
+              "En": "01: Classic Green (Thick)",
+              "Fr": "01: Classique Green (Thick)",
+              "De": "01: Klassisch Green (Thick)",
+              "Es": "01: Clásico Green (Thick)"
+            },
             "labels": {
               "show_label": true,
               "label_position": "top"
@@ -54,7 +64,12 @@
                 "Overload_alert": "#FF0000",
                 "pointer": "white",
                 "tick": "white",
-                "label": "white",
+                "label": {
+                  "En": "white",
+                  "Fr": "white",
+                  "De": "white",
+                  "Es": "white"
+                },
                 "scale": "white"
               },
               "style_flags": {
@@ -72,7 +87,12 @@
           },
           "demo_02_scale_top": {
             "type": "_SmartMeter",
-            "label": "02: Slim Ocean (Blue/Cyan)",
+            "label": {
+              "En": "02: Slim Ocean (Blue/Cyan)",
+              "Fr": "02: Slim Ocean (Blue/Cyan)",
+              "De": "02: Slim Ocean (Blue/Cyan)",
+              "Es": "02: Slim Ocean (Blue/Cyan)"
+            },
             "labels": {
               "show_label": true,
               "label_position": "right"
@@ -108,7 +128,12 @@
                 "Overload_alert": "#FFFFFF",
                 "pointer": "cyan",
                 "tick": "cyan",
-                "label": "cyan",
+                "label": {
+                  "En": "cyan",
+                  "Fr": "cyan",
+                  "De": "cyan",
+                  "Es": "cyan"
+                },
                 "scale": "cyan"
               },
               "style_flags": {
@@ -126,7 +151,12 @@
           },
           "demo_03_no_ticks_bottom_text": {
             "type": "_SmartMeter",
-            "label": "03: Chunky Amber",
+            "label": {
+              "En": "03: Chunky Amber",
+              "Fr": "03: Chunky Amber",
+              "De": "03: Chunky Amber",
+              "Es": "03: Chunky Amber"
+            },
             "labels": {
               "show_label": true,
               "label_position": "left"
@@ -162,7 +192,12 @@
                 "Overload_alert": "#FFFFFF",
                 "pointer": "#FFD700",
                 "tick": "#FFD700",
-                "label": "#FFD700",
+                "label": {
+                  "En": "#FFD700",
+                  "Fr": "#FFD700",
+                  "De": "#FFD700",
+                  "Es": "#FFD700"
+                },
                 "scale": "#FFD700"
               },
               "style_flags": {
@@ -179,7 +214,12 @@
           },
           "demo_04_ticks_no_text": {
             "type": "_SmartMeter",
-            "label": "04: Retro Gray (Long Ticks)",
+            "label": {
+              "En": "04: Retro Gray (Long Ticks)",
+              "Fr": "04: Retro Gray (Long Ticks)",
+              "De": "04: Retro Gray (Long Ticks)",
+              "Es": "04: Retro Gray (Long Ticks)"
+            },
             "labels": {
               "show_label": true,
               "label_position": "bottom"
@@ -215,7 +255,12 @@
                 "Overload_alert": "#FF0000",
                 "pointer": "#00FF00",
                 "tick": "#FFFFFF",
-                "label": "#FFFFFF",
+                "label": {
+                  "En": "#FFFFFF",
+                  "Fr": "#FFFFFF",
+                  "De": "#FFFFFF",
+                  "Es": "#FFFFFF"
+                },
                 "scale": "#FFFFFF"
               },
               "style_flags": {
@@ -233,7 +278,12 @@
           },
           "demo_05_no_label_above": {
             "type": "_SmartMeter",
-            "label": "HIDDEN LABEL",
+            "label": {
+              "En": "HIDDEN LABEL",
+              "Fr": "HIDDEN LABEL",
+              "De": "HIDDEN LABEL",
+              "Es": "HIDDEN LABEL"
+            },
             "labels": {
               "show_label": false,
               "label_position": "top"
@@ -269,7 +319,12 @@
                 "Overload_alert": "#FF00FF",
                 "pointer": "white",
                 "tick": "#E6E6FA",
-                "label": "white",
+                "label": {
+                  "En": "white",
+                  "Fr": "white",
+                  "De": "white",
+                  "Es": "white"
+                },
                 "scale": "#E6E6FA"
               },
               "style_flags": {
@@ -287,7 +342,12 @@
           },
           "demo_06_rect_peak_top": {
             "type": "_SmartMeter",
-            "label": "06: Neon Night",
+            "label": {
+              "En": "06: Neon Night",
+              "Fr": "06: Neon Night",
+              "De": "06: Neon Night",
+              "Es": "06: Neon Night"
+            },
             "labels": {
               "show_label": true,
               "label_position": "top"
@@ -323,7 +383,12 @@
                 "Overload_alert": "#00FFFF",
                 "pointer": "#00FFFF",
                 "tick": "#00FFFF",
-                "label": "#00FFFF",
+                "label": {
+                  "En": "#00FFFF",
+                  "Fr": "#00FFFF",
+                  "De": "#00FFFF",
+                  "Es": "#00FFFF"
+                },
                 "scale": "#00FFFF"
               },
               "style_flags": {
@@ -341,7 +406,12 @@
           },
           "demo_07_minimalist_none": {
             "type": "_SmartMeter",
-            "label": "07: Matrix Green",
+            "label": {
+              "En": "07: Matrix Green",
+              "Fr": "07: Matrix Green",
+              "De": "07: Matrix Green",
+              "Es": "07: Matrix Green"
+            },
             "labels": {
               "show_label": true,
               "label_position": "left"
@@ -377,7 +447,12 @@
                 "Overload_alert": "#00FF00",
                 "pointer": "#00FF00",
                 "tick": "white",
-                "label": "#00FF00",
+                "label": {
+                  "En": "#00FF00",
+                  "Fr": "#00FF00",
+                  "De": "#00FF00",
+                  "Es": "#00FF00"
+                },
                 "scale": "white"
               },
               "style_flags": {
@@ -394,7 +469,12 @@
           },
           "demo_08_inverted_colors": {
             "type": "_SmartMeter",
-            "label": "08: Hot Pink Needle",
+            "label": {
+              "En": "08: Hot Pink Needle",
+              "Fr": "08: Hot Pink Aiguille",
+              "De": "08: Hot Pink Nadel",
+              "Es": "08: Hot Pink Aguja"
+            },
             "labels": {
               "show_label": true,
               "label_position": "right"
@@ -430,7 +510,12 @@
                 "Overload_alert": "#FFFFFF",
                 "pointer": "#FF00FF",
                 "tick": "#FF69B4",
-                "label": "#FF69B4",
+                "label": {
+                  "En": "#FF69B4",
+                  "Fr": "#FF69B4",
+                  "De": "#FF69B4",
+                  "Es": "#FF69B4"
+                },
                 "scale": "#FF69B4"
               },
               "style_flags": {
@@ -448,7 +533,12 @@
           },
           "demo_09_thick_bar_top": {
             "type": "_SmartMeter",
-            "label": "09: Heavy Industry",
+            "label": {
+              "En": "09: Heavy Industry",
+              "Fr": "09: Heavy Industry",
+              "De": "09: Heavy Industry",
+              "Es": "09: Heavy Industry"
+            },
             "labels": {
               "show_label": true,
               "label_position": "top"
@@ -484,7 +574,12 @@
                 "Overload_alert": "#FF4500",
                 "pointer": "#FF4500",
                 "tick": "#D3D3D3",
-                "label": "#D3D3D3",
+                "label": {
+                  "En": "#D3D3D3",
+                  "Fr": "#D3D3D3",
+                  "De": "#D3D3D3",
+                  "Es": "#D3D3D3"
+                },
                 "scale": "#D3D3D3"
               },
               "style_flags": {
@@ -502,7 +597,12 @@
           },
           "demo_10_ultra_fast_bottom": {
             "type": "_SmartMeter",
-            "label": "10: Ultraviolet (Fast)",
+            "label": {
+              "En": "10: Ultraviolet (Fast)",
+              "Fr": "10: Ultraviolet (Fast)",
+              "De": "10: Ultraviolet (Fast)",
+              "Es": "10: Ultraviolet (Fast)"
+            },
             "labels": {
               "show_label": true,
               "label_position": "bottom"
@@ -538,7 +638,12 @@
                 "Overload_alert": "#FFFFFF",
                 "pointer": "white",
                 "tick": "#9370DB",
-                "label": "#9370DB",
+                "label": {
+                  "En": "#9370DB",
+                  "Fr": "#9370DB",
+                  "De": "#9370DB",
+                  "Es": "#9370DB"
+                },
                 "scale": "white"
               },
               "style_flags": {

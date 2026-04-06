@@ -25,7 +25,12 @@
           "show_x_axis": true,
           "show_y_axis": true,
           "x": {
-            "label": "X-Axis",
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
@@ -62,7 +67,12 @@
           "show_x_axis": true,
           "show_y_axis": true,
           "y": {
-            "label": "Y-Axis",
+            "label": {
+              "En": "Y-Axis",
+              "Fr": "Y-Axis",
+              "De": "Y-Axis",
+              "Es": "Y-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
@@ -148,14 +158,24 @@
           "show_x_axis": true,
           "show_y_axis": true,
           "x": {
-            "label": "X-Axis",
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
             "max": "auto"
           },
           "y": {
-            "label": "Y-Axis",
+            "label": {
+              "En": "Y-Axis",
+              "Fr": "Y-Axis",
+              "De": "Y-Axis",
+              "Es": "Y-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
@@ -172,7 +192,12 @@
         "datasets": [
           {
             "id": "data1",
-            "label": "Thick Red",
+            "label": {
+              "En": "Thick Red",
+              "Fr": "Thick Red",
+              "De": "Thick Red",
+              "Es": "Thick Red"
+            },
             "initial_csv_data": "x,y\n0,1\n1,2\n2,1.5",
             "style": {
               "line_color": "red",
@@ -181,7 +206,12 @@
           },
           {
             "id": "data2",
-            "label": "Dashed Blue",
+            "label": {
+              "En": "Dashed Blue",
+              "Fr": "Dashed Blue",
+              "De": "Dashed Blue",
+              "Es": "Dashed Blue"
+            },
             "initial_csv_data": "x,y\n0,2\n1,1\n2,1.2",
             "style": {
               "line_color": "blue",
@@ -190,7 +220,12 @@
           },
           {
             "id": "data3",
-            "label": "Green Scatter",
+            "label": {
+              "En": "Green Scatter",
+              "Fr": "Green Scatter",
+              "De": "Green Scatter",
+              "Es": "Green Scatter"
+            },
             "initial_csv_data": "x,y\n0.5,1.5\n1.5,1.5",
             "style": {
               "marker": "o",
@@ -213,14 +248,24 @@
           "show_x_axis": true,
           "show_y_axis": true,
           "x": {
-            "label": "X-Axis",
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
             "max": "auto"
           },
           "y": {
-            "label": "Y-Axis",
+            "label": {
+              "En": "Y-Axis",
+              "Fr": "Y-Axis",
+              "De": "Y-Axis",
+              "Es": "Y-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
@@ -257,14 +302,24 @@
           "show_x_axis": true,
           "show_y_axis": true,
           "x": {
-            "label": "X-Axis",
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
             "max": "auto"
           },
           "y": {
-            "label": "Y-Axis",
+            "label": {
+              "En": "Y-Axis",
+              "Fr": "Y-Axis",
+              "De": "Y-Axis",
+              "Es": "Y-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
@@ -301,14 +356,24 @@
           "show_x_axis": true,
           "show_y_axis": true,
           "x": {
-            "label": "X-Axis",
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
             "max": "auto"
           },
           "y": {
-            "label": "Y-Axis",
+            "label": {
+              "En": "Y-Axis",
+              "Fr": "Y-Axis",
+              "De": "Y-Axis",
+              "Es": "Y-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
@@ -342,14 +407,24 @@
           "show_x_axis": true,
           "show_y_axis": true,
           "x": {
-            "label": "X-Axis",
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
             "max": "auto"
           },
           "y": {
-            "label": "Y-Axis",
+            "label": {
+              "En": "Y-Axis",
+              "Fr": "Y-Axis",
+              "De": "Y-Axis",
+              "Es": "Y-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
@@ -388,14 +463,24 @@
           "show_x_axis": true,
           "show_y_axis": true,
           "x": {
-            "label": "X-Axis",
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
             "max": "auto"
           },
           "y": {
-            "label": "Y-Axis",
+            "label": {
+              "En": "Y-Axis",
+              "Fr": "Y-Axis",
+              "De": "Y-Axis",
+              "Es": "Y-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
@@ -411,13 +496,23 @@
         "bg_color": "#2c3e50",
         "axis": {
           "y": {
-            "label": "Amplitude"
+            "label": {
+              "En": "Amplitude",
+              "Fr": "Amplitude",
+              "De": "Amplitude",
+              "Es": "Amplitude"
+            }
           },
           "show_grid": true,
           "show_x_axis": true,
           "show_y_axis": true,
           "x": {
-            "label": "X-Axis",
+            "label": {
+              "En": "X-Axis",
+              "Fr": "X-Axis",
+              "De": "X-Axis",
+              "Es": "X-Axis"
+            },
             "scale": "linear",
             "color": "white",
             "min": "auto",
@@ -427,7 +522,12 @@
         "datasets": [
           {
             "id": "signal",
-            "label": "Signal",
+            "label": {
+              "En": "Signal",
+              "Fr": "Signal",
+              "De": "Signal",
+              "Es": "Signal"
+            },
             "initial_csv_data": "x,y\n0,5\n1,6\n2,5\n3,4\n4,5",
             "style": {
               "line_color": "#1abc9c",
@@ -436,7 +536,12 @@
           },
           {
             "id": "noise",
-            "label": "Noise",
+            "label": {
+              "En": "Noise",
+              "Fr": "Noise",
+              "De": "Noise",
+              "Es": "Noise"
+            },
             "initial_csv_data": "x,y\n0,0.1\n1,-0.2\n2,0.3\n3,-0.1\n4,0.2",
             "style": {
               "line_color": "#f1c40f",

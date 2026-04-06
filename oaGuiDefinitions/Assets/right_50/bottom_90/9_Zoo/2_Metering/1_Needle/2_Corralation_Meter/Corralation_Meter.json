@@ -13,7 +13,12 @@
     "blocks": {
       "Correlation_Meter_Petting_Zoo": {
         "type": "OcaBlock",
-        "description": "Correlation Meter Variations",
+        "description": {
+          "En": "Correlation Meter Variations",
+          "Fr": "Correlation Meter Variations",
+          "De": "Correlation Meter Variationen",
+          "Es": "Correlation Meter Variaciones"
+        },
         "layout_columns": 2,
         "column_sizing": [
           {
@@ -35,7 +40,12 @@
         "fields": {
           "corr_standard": {
             "type": "_SmartMeter",
-            "label": "Standard",
+            "label": {
+              "En": "Standard",
+              "Fr": "Standard",
+              "De": "Standard",
+              "Es": "Estándar"
+            },
             "notes": "Standard: Fast rise, fast fall.",
             "geometry": {
               "width": 200,
@@ -99,7 +109,12 @@
           },
           "corr_slow": {
             "type": "_SmartMeter",
-            "label": "Slow/Damped",
+            "label": {
+              "En": "Slow/Damped",
+              "Fr": "Slow/Damped",
+              "De": "Slow/Damped",
+              "Es": "Slow/Damped"
+            },
             "notes": "Slow: Highly damped movement (500ms).",
             "geometry": {
               "width": 150,
@@ -161,7 +176,12 @@
           },
           "corr_peak_hold": {
             "type": "_SmartMeter",
-            "label": "Peak Hold",
+            "label": {
+              "En": "Peak Hold",
+              "Fr": "Peak Hold",
+              "De": "Peak Hold",
+              "Es": "Peak Hold"
+            },
             "notes": "Peak Hold: Instant rise, 2s hold, very slow fall.",
             "geometry": {
               "width": 250,
@@ -225,7 +245,12 @@
           },
           "corr_ballistic": {
             "type": "_SmartMeter",
-            "label": "Fast Ballistic",
+            "label": {
+              "En": "Fast Ballistic",
+              "Fr": "Rapide Ballistic",
+              "De": "Schnell Ballistic",
+              "Es": "Rápido Ballistic"
+            },
             "notes": "Ballistic: Ultra-fast tracking (20ms).",
             "geometry": {
               "width": 180,
@@ -287,7 +312,12 @@
           },
           "corr_lazy": {
             "type": "_SmartMeter",
-            "label": "Lazy/Smooth",
+            "label": {
+              "En": "Lazy/Smooth",
+              "Fr": "Lazy/Smooth",
+              "De": "Lazy/Smooth",
+              "Es": "Lazy/Smooth"
+            },
             "notes": "Lazy: Smooth tracking with slight hold.",
             "geometry": {
               "width": 220,
@@ -351,7 +381,12 @@
           },
           "APK": {
             "type": "_SmartMeter",
-            "label": "Lazy/Smooth",
+            "label": {
+              "En": "Lazy/Smooth",
+              "Fr": "Lazy/Smooth",
+              "De": "Lazy/Smooth",
+              "Es": "Lazy/Smooth"
+            },
             "notes": "Lazy: Smooth tracking with slight hold.",
             "geometry": {
               "width": 220,

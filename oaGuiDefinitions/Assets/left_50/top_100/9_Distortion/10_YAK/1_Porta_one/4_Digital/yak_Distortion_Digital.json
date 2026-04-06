@@ -13,11 +13,21 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Digital I/O Configuration",
+        "description": {
+          "En": "Digital I/O Configuration",
+          "Fr": "Digital I/O Configuration",
+          "De": "Digital I/O Konfiguration",
+          "Es": "Digital I/O Configuración"
+        },
         "fields": {
           "Digital_Input_Source": {
             "type": "OcaBlock",
-            "description": "Select Digital Input Connector",
+            "description": {
+              "En": "Select Digital Input Connector",
+              "Fr": "Sélect. Digital Input Connector",
+              "De": "Auswahl Digital Input Connector",
+              "Es": "Selec. Digital Input Connector"
+            },
             "fields": {
               "Select_DIN_XLR": {
                 "type": "OcaBlock",
@@ -131,7 +141,12 @@
           },
           "Digital_Output_Control": {
             "type": "OcaBlock",
-            "description": "Digital Output State",
+            "description": {
+              "En": "Digital Output State",
+              "Fr": "Digital Sortie State",
+              "De": "Digital Ausgang State",
+              "Es": "Digital Salida State"
+            },
             "fields": {
               "Set_DOUT_ON": {
                 "type": "OcaBlock",

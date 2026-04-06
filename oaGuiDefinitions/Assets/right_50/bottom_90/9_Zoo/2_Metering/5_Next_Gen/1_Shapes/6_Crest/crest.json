@@ -13,7 +13,12 @@
     "blocks": {
       "Crest_Variations": {
         "type": "OcaBlock",
-        "description": "Crest Meter Variations",
+        "description": {
+          "En": "Crest Meter Variations",
+          "Fr": "Crest Meter Variations",
+          "De": "Crest Meter Variationen",
+          "Es": "Crest Meter Variaciones"
+        },
         "layout_columns": 3,
         "column_sizing": [
           {
@@ -29,7 +34,12 @@
         "fields": {
           "Crest_1_Large": {
             "type": "_NeedleVUMeter",
-            "label": "Large Classic",
+            "label": {
+              "En": "Large Classic",
+              "Fr": "Large Classique",
+              "De": "Large Klassisch",
+              "Es": "Large Clásico"
+            },
             "geometry": {
               "width": 300,
               "height": 300
@@ -59,7 +69,12 @@
               },
               "labels": [
                 {
-                  "text": "CREST INSTRUMENTS",
+                  "text": {
+                    "En": "CREST INSTRUMENTS",
+                    "Fr": "CREST INSTRUMENTS",
+                    "De": "CREST INSTRUMENTS",
+                    "Es": "CREST INSTRUMENTS"
+                  },
                   "x": 0,
                   "y": -140,
                   "size": 12,
@@ -79,7 +94,12 @@
           },
           "Crest_2_Medium": {
             "type": "_NeedleVUMeter",
-            "label": "Medium Silver",
+            "label": {
+              "En": "Medium Silver",
+              "Fr": "Moyen Silver",
+              "De": "Mittel Silver",
+              "Es": "Medio Silver"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -109,7 +129,12 @@
               },
               "labels": [
                 {
-                  "text": "SILVER SERIES",
+                  "text": {
+                    "En": "SILVER SERIES",
+                    "Fr": "SILVER SERIES",
+                    "De": "SILVER SERIES",
+                    "Es": "SILVER SERIES"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 10,
@@ -121,7 +146,12 @@
           },
           "Crest_3_Small": {
             "type": "_NeedleVUMeter",
-            "label": "Small Red",
+            "label": {
+              "En": "Small Red",
+              "Fr": "Small Red",
+              "De": "Small Red",
+              "Es": "Small Red"
+            },
             "geometry": {
               "width": 150,
               "height": 150
@@ -151,7 +181,12 @@
               },
               "labels": [
                 {
-                  "text": "MINI-CREST",
+                  "text": {
+                    "En": "MINI-CREST",
+                    "Fr": "MINI-CREST",
+                    "De": "MINI-CREST",
+                    "Es": "MINI-CREST"
+                  },
                   "x": 0,
                   "y": -80,
                   "size": 8,
@@ -162,7 +197,12 @@
           },
           "Crest_4_Majestic_Blue": {
             "type": "_NeedleVUMeter",
-            "label": "Majestic Blue",
+            "label": {
+              "En": "Majestic Blue",
+              "Fr": "Majestic Blue",
+              "De": "Majestic Blue",
+              "Es": "Majestic Blue"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -188,7 +228,12 @@
               },
               "labels": [
                 {
-                  "text": "MAJESTIC",
+                  "text": {
+                    "En": "MAJESTIC",
+                    "Fr": "MAJESTIC",
+                    "De": "MAJESTIC",
+                    "Es": "MAJESTIC"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 10,
@@ -200,7 +245,12 @@
           },
           "Crest_5_Regal_Red": {
             "type": "_NeedleVUMeter",
-            "label": "Regal Red",
+            "label": {
+              "En": "Regal Red",
+              "Fr": "Regal Red",
+              "De": "Regal Red",
+              "Es": "Regal Red"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -226,7 +276,12 @@
               },
               "labels": [
                 {
-                  "text": "REGAL",
+                  "text": {
+                    "En": "REGAL",
+                    "Fr": "REGAL",
+                    "De": "REGAL",
+                    "Es": "REGAL"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 10,
@@ -238,7 +293,12 @@
           },
           "Crest_6_Steel": {
             "type": "_NeedleVUMeter",
-            "label": "Steel Flat",
+            "label": {
+              "En": "Steel Flat",
+              "Fr": "Steel Flat",
+              "De": "Steel Flat",
+              "Es": "Steel Flat"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -264,7 +324,12 @@
               },
               "labels": [
                 {
-                  "text": "STEEL",
+                  "text": {
+                    "En": "STEEL",
+                    "Fr": "STEEL",
+                    "De": "STEEL",
+                    "Es": "STEEL"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 10,
@@ -276,7 +341,12 @@
           },
           "Crest_7_Ghost": {
             "type": "_NeedleVUMeter",
-            "label": "Ghost Protocol",
+            "label": {
+              "En": "Ghost Protocol",
+              "Fr": "Ghost Protocol",
+              "De": "Ghost Protocol",
+              "Es": "Ghost Protocol"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -302,7 +372,12 @@
               },
               "labels": [
                 {
-                  "text": "GHOST-VU",
+                  "text": {
+                    "En": "GHOST-VU",
+                    "Fr": "GHOST-VU",
+                    "De": "GHOST-VU",
+                    "Es": "GHOST-VU"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 10,
@@ -314,7 +389,12 @@
           },
           "Crest_8_Emerald": {
             "type": "_NeedleVUMeter",
-            "label": "Emerald City",
+            "label": {
+              "En": "Emerald City",
+              "Fr": "Emerald City",
+              "De": "Emerald City",
+              "Es": "Emerald City"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -340,7 +420,12 @@
               },
               "labels": [
                 {
-                  "text": "EMERALD",
+                  "text": {
+                    "En": "EMERALD",
+                    "Fr": "EMERALD",
+                    "De": "EMERALD",
+                    "Es": "EMERALD"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 10,
@@ -352,7 +437,12 @@
           },
           "Crest_9_Woodgrain": {
             "type": "_NeedleVUMeter",
-            "label": "Classic Wood",
+            "label": {
+              "En": "Classic Wood",
+              "Fr": "Classique Wood",
+              "De": "Klassisch Wood",
+              "Es": "Clásico Wood"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -378,7 +468,12 @@
               },
               "labels": [
                 {
-                  "text": "WOODGRAIN",
+                  "text": {
+                    "En": "WOODGRAIN",
+                    "Fr": "WOODGRAIN",
+                    "De": "WOODGRAIN",
+                    "Es": "WOODGRAIN"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 10,

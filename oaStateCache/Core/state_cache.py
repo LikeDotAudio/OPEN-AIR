@@ -44,7 +44,7 @@ class PythonStateRegistry:
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import data_logger
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComMQTT.Core.mqtt_message import MqttMessage
 import copy
 app_constants = Config.get_instance()

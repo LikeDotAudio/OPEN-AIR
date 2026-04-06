@@ -10,10 +10,11 @@ import inspect
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiFramework.Methods.i18n_utils import get_text
 from oaGuiBuilder.Core.base_widget_creator import BaseWidgetCreator
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
@@ -108,7 +109,7 @@ class BuilderKnobCreator(BaseWidgetCreator, TransparencyMixin):
     def _assemble_ui(self, parent_widget, config_data, context, **kwargs):
         """Assembles the Knob UI elements."""
         config = extract_knob_config(config_data)
-        label = config_data.get("label_active") or config_data.get("label", "Unknown")
+        label = get_text(get_text(config_data.get('label_active'))) or get_text(get_text(config_data.get('label')), "Unknown")
         path = config_data.get("path")
         
         knob_var = kwargs.get("variable") or tk.DoubleVar(master=parent_widget, value=config["value_default"])

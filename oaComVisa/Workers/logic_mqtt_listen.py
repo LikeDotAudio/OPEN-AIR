@@ -11,7 +11,7 @@ import threading
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import VISA_LOGGER as logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 

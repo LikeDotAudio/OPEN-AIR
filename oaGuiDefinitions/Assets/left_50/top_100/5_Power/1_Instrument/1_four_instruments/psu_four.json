@@ -13,20 +13,40 @@
     "blocks": {
       "Quad_PSU_Station": {
         "type": "OcaBlock",
-        "description": "4-Channel High-Voltage Injection Matrix",
+        "description": {
+          "En": "4-Channel High-Voltage Injection Matrix",
+          "Fr": "4-Canal High-Tension Injection Matrix",
+          "De": "4-Kanal High-Spannenung Injection Matrix",
+          "Es": "4-Canal High-Voltaje Injection Matrix"
+        },
         "layout_columns": 4,
         "fields": {
           "Master_Override_Deck": {
             "type": "OcaBlock",
-            "description": "GLOBAL SAFETY INTERLOCK",
+            "description": {
+              "En": "GLOBAL SAFETY INTERLOCK",
+              "Fr": "GLOBAL SAFETY INTERLOCK",
+              "De": "GLOBAL SAFETY INTERLOCK",
+              "Es": "GLOBAL SAFETY INTERLOCK"
+            },
             "layout": {
               "col_span": 4
             },
             "fields": {
               "Global_Kill_Switch": {
                 "type": "_TrapezoidButton",
-                "label_active": "\u2622\ufe0f MASTER POWER: ACTIVE \u2622\ufe0f",
-                "label_inactive": "MASTER POWER: OFF",
+                "label_active": {
+                  "En": "☢️ MASTER POWER: ACTIVE ☢️",
+                  "Fr": "☢️ MASTER POWER: ACTIVE ☢️",
+                  "De": "☢️ MASTER POWER: ACTIVE ☢️",
+                  "Es": "☢️ MASTER POWER: ACTIVE ☢️"
+                },
+                "label_inactive": {
+                  "En": "MASTER POWER: OFF",
+                  "Fr": "MASTER POWER: OFF",
+                  "De": "MASTER POWER: OFF",
+                  "Es": "MASTER POWER: OFF"
+                },
                 "state_default": false,
                 "message_details": {
                   "PSU_MODEL": {
@@ -52,14 +72,24 @@
           },
           "Unit_1_Alpha": {
             "type": "OcaBlock",
-            "description": "CORE 1",
+            "description": {
+              "En": "CORE 1",
+              "Fr": "CORE 1",
+              "De": "CORE 1",
+              "Es": "CORE 1"
+            },
             "fields": {
               "Meters_1": {
                 "type": "OcaBlock",
                 "fields": {
                   "V_Meter_1": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "V1",
+                    "label_active": {
+                      "En": "V1",
+                      "Fr": "V1",
+                      "De": "V1",
+                      "Es": "V1"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -72,7 +102,12 @@
                   },
                   "I_Meter_1": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "A1",
+                    "label_active": {
+                      "En": "A1",
+                      "Fr": "A1",
+                      "De": "A1",
+                      "Es": "A1"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -85,7 +120,12 @@
                   },
                   "P_Meter_1": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "W1",
+                    "label_active": {
+                      "En": "W1",
+                      "Fr": "W1",
+                      "De": "W1",
+                      "Es": "W1"
+                    },
                     "min": "0",
                     "max": "1000",
                     "units": "W",
@@ -103,7 +143,12 @@
                 "fields": {
                   "Volts_Set_1": {
                     "type": "_GuiVerticalFader",
-                    "label_active": "SET V",
+                    "label_active": {
+                      "En": "SET V",
+                      "Fr": "SET V",
+                      "De": "SET V",
+                      "Es": "SET V"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -116,7 +161,12 @@
                   },
                   "Amps_Set_1": {
                     "type": "_GuiVerticalFader",
-                    "label_active": "LIM A",
+                    "label_active": {
+                      "En": "LIM A",
+                      "Fr": "LIM A",
+                      "De": "LIM A",
+                      "Es": "LIM A"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -129,8 +179,18 @@
                   },
                   "Enable_1": {
                     "type": "_GuiButtonToggle",
-                    "label_active": "CH1 ON",
-                    "label_inactive": "CH1 OFF",
+                    "label_active": {
+                      "En": "CH1 ON",
+                      "Fr": "CH1 ACTIVÉ",
+                      "De": "CH1 AN",
+                      "Es": "CH1 ACTIVADO"
+                    },
+                    "label_inactive": {
+                      "En": "CH1 OFF",
+                      "Fr": "CH 1",
+                      "De": "CH 1",
+                      "Es": "CH 1"
+                    },
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -144,14 +204,24 @@
           },
           "Unit_2_Beta": {
             "type": "OcaBlock",
-            "description": "CORE 2",
+            "description": {
+              "En": "CORE 2",
+              "Fr": "CORE 2",
+              "De": "CORE 2",
+              "Es": "CORE 2"
+            },
             "fields": {
               "Meters_2": {
                 "type": "OcaBlock",
                 "fields": {
                   "V_Meter_2": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "V2",
+                    "label_active": {
+                      "En": "V2",
+                      "Fr": "V2",
+                      "De": "V2",
+                      "Es": "V2"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -164,7 +234,12 @@
                   },
                   "I_Meter_2": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "A2",
+                    "label_active": {
+                      "En": "A2",
+                      "Fr": "A2",
+                      "De": "A2",
+                      "Es": "A2"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -177,7 +252,12 @@
                   },
                   "P_Meter_2": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "W2",
+                    "label_active": {
+                      "En": "W2",
+                      "Fr": "W2",
+                      "De": "W2",
+                      "Es": "W2"
+                    },
                     "min": "0",
                     "max": "1000",
                     "units": "W",
@@ -195,7 +275,12 @@
                 "fields": {
                   "Volts_Set_2": {
                     "type": "_GuiVerticalFader",
-                    "label_active": "SET V",
+                    "label_active": {
+                      "En": "SET V",
+                      "Fr": "SET V",
+                      "De": "SET V",
+                      "Es": "SET V"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -208,7 +293,12 @@
                   },
                   "Amps_Set_2": {
                     "type": "_GuiVerticalFader",
-                    "label_active": "LIM A",
+                    "label_active": {
+                      "En": "LIM A",
+                      "Fr": "LIM A",
+                      "De": "LIM A",
+                      "Es": "LIM A"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -221,8 +311,18 @@
                   },
                   "Enable_2": {
                     "type": "_GuiButtonToggle",
-                    "label_active": "CH2 ON",
-                    "label_inactive": "CH2 OFF",
+                    "label_active": {
+                      "En": "CH2 ON",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    },
+                    "label_inactive": {
+                      "En": "CH2 OFF",
+                      "Fr": "CH 2",
+                      "De": "CH 2",
+                      "Es": "CH 2"
+                    },
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -236,14 +336,24 @@
           },
           "Unit_3_Gamma": {
             "type": "OcaBlock",
-            "description": "CORE 3",
+            "description": {
+              "En": "CORE 3",
+              "Fr": "CORE 3",
+              "De": "CORE 3",
+              "Es": "CORE 3"
+            },
             "fields": {
               "Meters_3": {
                 "type": "OcaBlock",
                 "fields": {
                   "V_Meter_3": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "V3",
+                    "label_active": {
+                      "En": "V3",
+                      "Fr": "V3",
+                      "De": "V3",
+                      "Es": "V3"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -256,7 +366,12 @@
                   },
                   "I_Meter_3": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "A3",
+                    "label_active": {
+                      "En": "A3",
+                      "Fr": "A3",
+                      "De": "A3",
+                      "Es": "A3"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -269,7 +384,12 @@
                   },
                   "P_Meter_3": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "W3",
+                    "label_active": {
+                      "En": "W3",
+                      "Fr": "W3",
+                      "De": "W3",
+                      "Es": "W3"
+                    },
                     "min": "0",
                     "max": "1000",
                     "units": "W",
@@ -287,7 +407,12 @@
                 "fields": {
                   "Volts_Set_3": {
                     "type": "_GuiVerticalFader",
-                    "label_active": "SET V",
+                    "label_active": {
+                      "En": "SET V",
+                      "Fr": "SET V",
+                      "De": "SET V",
+                      "Es": "SET V"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -300,7 +425,12 @@
                   },
                   "Amps_Set_3": {
                     "type": "_GuiVerticalFader",
-                    "label_active": "LIM A",
+                    "label_active": {
+                      "En": "LIM A",
+                      "Fr": "LIM A",
+                      "De": "LIM A",
+                      "Es": "LIM A"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -313,8 +443,18 @@
                   },
                   "Enable_3": {
                     "type": "_GuiButtonToggle",
-                    "label_active": "CH3 ON",
-                    "label_inactive": "CH3 OFF",
+                    "label_active": {
+                      "En": "CH3 ON",
+                      "Fr": "CH 3",
+                      "De": "CH 3",
+                      "Es": "CH 3"
+                    },
+                    "label_inactive": {
+                      "En": "CH3 OFF",
+                      "Fr": "CH 3",
+                      "De": "CH 3",
+                      "Es": "CH 3"
+                    },
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",
@@ -328,14 +468,24 @@
           },
           "Unit_4_Delta": {
             "type": "OcaBlock",
-            "description": "CORE 4",
+            "description": {
+              "En": "CORE 4",
+              "Fr": "CORE 4",
+              "De": "CORE 4",
+              "Es": "CORE 4"
+            },
             "fields": {
               "Meters_4": {
                 "type": "OcaBlock",
                 "fields": {
                   "V_Meter_4": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "V4",
+                    "label_active": {
+                      "En": "V4",
+                      "Fr": "V4",
+                      "De": "V4",
+                      "Es": "V4"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -348,7 +498,12 @@
                   },
                   "I_Meter_4": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "A4",
+                    "label_active": {
+                      "En": "A4",
+                      "Fr": "A4",
+                      "De": "A4",
+                      "Es": "A4"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -361,7 +516,12 @@
                   },
                   "P_Meter_4": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "W4",
+                    "label_active": {
+                      "En": "W4",
+                      "Fr": "W4",
+                      "De": "W4",
+                      "Es": "W4"
+                    },
                     "min": "0",
                     "max": "1000",
                     "units": "W",
@@ -379,7 +539,12 @@
                 "fields": {
                   "Volts_Set_4": {
                     "type": "_GuiVerticalFader",
-                    "label_active": "SET V",
+                    "label_active": {
+                      "En": "SET V",
+                      "Fr": "SET V",
+                      "De": "SET V",
+                      "Es": "SET V"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -392,7 +557,12 @@
                   },
                   "Amps_Set_4": {
                     "type": "_GuiVerticalFader",
-                    "label_active": "LIM A",
+                    "label_active": {
+                      "En": "LIM A",
+                      "Fr": "LIM A",
+                      "De": "LIM A",
+                      "Es": "LIM A"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -405,8 +575,18 @@
                   },
                   "Enable_4": {
                     "type": "_GuiButtonToggle",
-                    "label_active": "CH4 ON",
-                    "label_inactive": "CH4 OFF",
+                    "label_active": {
+                      "En": "CH4 ON",
+                      "Fr": "CH 4",
+                      "De": "CH 4",
+                      "Es": "CH 4"
+                    },
+                    "label_inactive": {
+                      "En": "CH4 OFF",
+                      "Fr": "CH 4",
+                      "De": "CH 4",
+                      "Es": "CH 4"
+                    },
                     "message_details": {
                       "PSU_MODEL": {
                         "type": "_GuiActuator",

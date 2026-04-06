@@ -13,11 +13,21 @@
     "blocks": {
       "elements_classic": {
         "type": "OcaBlock",
-        "label_active": "Classic Toggles",
+        "label_active": {
+          "En": "Classic Toggles",
+          "Fr": "Classique Toggles",
+          "De": "Klassisch Toggles",
+          "Es": "Clásico Toggles"
+        },
         "fields": {
           "mute": {
             "type": "_SmartToggle",
-            "label": "Mute (Sticky)",
+            "label": {
+              "En": "Mute (Sticky)",
+              "Fr": "Mute (Persistant)",
+              "De": "Stumm (Sticky)",
+              "Es": "Silencio (Persistente)"
+            },
             "geometry": {
               "width": 90,
               "height": 45,
@@ -26,11 +36,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "MUTED",
+                  "label_active": {
+                    "En": "MUTED",
+                    "Fr": "MUTED",
+                    "De": "MUTED",
+                    "Es": "MUTED"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "UNMUTED"
+                  "label_inactive": {
+                    "En": "UNMUTED",
+                    "Fr": "UNMUTED",
+                    "De": "UNMUTED",
+                    "Es": "UNMUTED"
+                  }
                 }
               },
               "is_sticky": true
@@ -38,7 +58,12 @@
           },
           "record": {
             "type": "_SmartToggle",
-            "label": "Record (Momentary)",
+            "label": {
+              "En": "Record (Momentary)",
+              "Fr": "Enregistrer (Momentary)",
+              "De": "Aufnahme (Momentary)",
+              "Es": "Grabar (Momentary)"
+            },
             "geometry": {
               "width": 100,
               "height": 50,
@@ -50,10 +75,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "ARMING..."
+                  "label_active": {
+                    "En": "ARMING...",
+                    "Fr": "ARMING...",
+                    "De": "ARMING...",
+                    "Es": "ARMING..."
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "DISARMED"
+                  "label_inactive": {
+                    "En": "DISARMED",
+                    "Fr": "DISARMED",
+                    "De": "DISARMED",
+                    "Es": "DISARMED"
+                  }
                 }
               },
               "is_sticky": false
@@ -63,7 +98,12 @@
       },
       "industrial_toggle_spectrum": {
         "type": "OcaBlock",
-        "label_active": "20 Industrial Variants",
+        "label_active": {
+          "En": "20 Industrial Variants",
+          "Fr": "20 Industriel Variants",
+          "De": "20 Industriell Variants",
+          "Es": "20 Industrial Variants"
+        },
         "fields": {
           "v1": {
             "type": "_SmartToggle",
@@ -76,11 +116,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -97,11 +147,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -118,11 +178,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -139,11 +209,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -160,11 +240,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -181,11 +271,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -202,11 +302,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -223,11 +333,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -244,11 +364,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -265,11 +395,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -286,11 +426,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -307,11 +457,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -328,11 +488,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -349,11 +519,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -370,11 +550,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -391,11 +581,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -412,11 +612,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -433,11 +643,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -455,11 +675,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -476,11 +706,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PUSH",
+                  "label_active": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "PUSH"
+                  "label_inactive": {
+                    "En": "PUSH",
+                    "Fr": "PUSH",
+                    "De": "PUSH",
+                    "Es": "PUSH"
+                  }
                 }
               },
               "is_sticky": true
@@ -490,11 +730,21 @@
       },
       "elements_glow": {
         "type": "OcaBlock",
-        "label_active": "Intensity Demo (Momentary)",
+        "label_active": {
+          "En": "Intensity Demo (Momentary)",
+          "Fr": "Intensity Démo (Momentary)",
+          "De": "Intensity Demo (Momentary)",
+          "Es": "Intensity Demo (Momentary)"
+        },
         "fields": {
           "dim": {
             "type": "_SmartToggle",
-            "label": "Dim",
+            "label": {
+              "En": "Dim",
+              "Fr": "Dim",
+              "De": "Dim",
+              "Es": "Dim"
+            },
             "style": {
               "active_color": "#00FF00",
               "glow_intensity": 0.2
@@ -502,10 +752,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "LOW"
+                  "label_active": {
+                    "En": "LOW",
+                    "Fr": "LOW",
+                    "De": "LOW",
+                    "Es": "LOW"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "OFF"
+                  "label_inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "OFF",
+                    "Es": "OFF"
+                  }
                 }
               },
               "is_sticky": false
@@ -513,7 +773,12 @@
           },
           "mid": {
             "type": "_SmartToggle",
-            "label": "Mid",
+            "label": {
+              "En": "Mid",
+              "Fr": "Mid",
+              "De": "Mid",
+              "Es": "Mid"
+            },
             "style": {
               "active_color": "#00FF00",
               "glow_intensity": 1.2
@@ -521,10 +786,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "MID"
+                  "label_active": {
+                    "En": "MID",
+                    "Fr": "MID",
+                    "De": "MID",
+                    "Es": "MID"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "OFF"
+                  "label_inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "OFF",
+                    "Es": "OFF"
+                  }
                 }
               },
               "is_sticky": false
@@ -532,7 +807,12 @@
           },
           "high": {
             "type": "_SmartToggle",
-            "label": "High",
+            "label": {
+              "En": "High",
+              "Fr": "Haut",
+              "De": "Hoch",
+              "Es": "Alto"
+            },
             "style": {
               "active_color": "#00FF00",
               "glow_intensity": 2.5
@@ -540,10 +820,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "HIGH"
+                  "label_active": {
+                    "En": "HIGH",
+                    "Fr": "HIGH",
+                    "De": "HIGH",
+                    "Es": "HIGH"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "OFF"
+                  "label_inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "OFF",
+                    "Es": "OFF"
+                  }
                 }
               },
               "is_sticky": false
@@ -551,7 +841,12 @@
           },
           "ultra": {
             "type": "_SmartToggle",
-            "label": "Ultra",
+            "label": {
+              "En": "Ultra",
+              "Fr": "Ultra",
+              "De": "Ultra",
+              "Es": "Ultra"
+            },
             "style": {
               "active_color": "#00FF00",
               "glow_intensity": 4.5
@@ -559,10 +854,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "BURNING"
+                  "label_active": {
+                    "En": "BURNING",
+                    "Fr": "BURNING",
+                    "De": "BURNING",
+                    "Es": "BURNING"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "OFF"
+                  "label_inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "OFF",
+                    "Es": "OFF"
+                  }
                 }
               },
               "is_sticky": false
@@ -572,7 +877,12 @@
       },
       "elements_colors": {
         "type": "OcaBlock",
-        "label_active": "Industrial Palette (Momentary)",
+        "label_active": {
+          "En": "Industrial Palette (Momentary)",
+          "Fr": "Industriel Palette (Momentary)",
+          "De": "Industriell Palette (Momentary)",
+          "Es": "Industrial Palette (Momentary)"
+        },
         "fields": {
           "amber": {
             "type": "_SmartToggle",
@@ -582,10 +892,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "AMBER"
+                  "label_active": {
+                    "En": "AMBER",
+                    "Fr": "AMBER",
+                    "De": "AMBER",
+                    "Es": "AMBER"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "OFF"
+                  "label_inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "OFF",
+                    "Es": "OFF"
+                  }
                 }
               },
               "is_sticky": false
@@ -599,10 +919,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "CYAN"
+                  "label_active": {
+                    "En": "CYAN",
+                    "Fr": "CYAN",
+                    "De": "CYAN",
+                    "Es": "CYAN"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "OFF"
+                  "label_inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "OFF",
+                    "Es": "OFF"
+                  }
                 }
               },
               "is_sticky": false
@@ -616,10 +946,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PINK"
+                  "label_active": {
+                    "En": "PINK",
+                    "Fr": "PINK",
+                    "De": "PINK",
+                    "Es": "PINK"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "OFF"
+                  "label_inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "OFF",
+                    "Es": "OFF"
+                  }
                 }
               },
               "is_sticky": false
@@ -634,10 +974,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "WHITE"
+                  "label_active": {
+                    "En": "WHITE",
+                    "Fr": "WHITE",
+                    "De": "WHITE",
+                    "Es": "WHITE"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "OFF"
+                  "label_inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "OFF",
+                    "Es": "OFF"
+                  }
                 }
               },
               "is_sticky": false
@@ -647,7 +997,12 @@
       },
       "elements_sizes": {
         "type": "OcaBlock",
-        "label_active": "Size Variations (Momentary)",
+        "label_active": {
+          "En": "Size Variations (Momentary)",
+          "Fr": "Size Variations (Momentary)",
+          "De": "Size Variationen (Momentary)",
+          "Es": "Size Variaciones (Momentary)"
+        },
         "fields": {
           "micro": {
             "type": "_SmartToggle",
@@ -659,10 +1014,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "ON"
+                  "label_active": {
+                    "En": "ON",
+                    "Fr": "ON",
+                    "De": "ON",
+                    "Es": "ON"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "OFF"
+                  "label_inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "OFF",
+                    "Es": "OFF"
+                  }
                 }
               },
               "is_sticky": false
@@ -678,10 +1043,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "WIDE STRIP ACTIVE"
+                  "label_active": {
+                    "En": "WIDE STRIP ACTIVE",
+                    "Fr": "WIDE STRIP ACTIVE",
+                    "De": "WIDE STRIP ACTIVE",
+                    "Es": "WIDE STRIP ACTIVE"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "IDLE"
+                  "label_inactive": {
+                    "En": "IDLE",
+                    "Fr": "IDLE",
+                    "De": "IDLE",
+                    "Es": "IDLE"
+                  }
                 }
               },
               "is_sticky": false
@@ -700,10 +1075,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "V\nE\nR\nT"
+                  "label_active": {
+                    "En": "V\nE\nR\nT",
+                    "Fr": "V\nE\nR\nT",
+                    "De": "V\nE\nR\nT",
+                    "Es": "V\nE\nR\nT"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "O\nF\nF"
+                  "label_inactive": {
+                    "En": "O\nF\nF",
+                    "Fr": "O\nF\nF",
+                    "De": "O\nF\nF",
+                    "Es": "O\nF\nF"
+                  }
                 }
               },
               "is_sticky": false
@@ -723,10 +1108,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "DANGER"
+                  "label_active": {
+                    "En": "DANGER",
+                    "Fr": "DANGER",
+                    "De": "DANGER",
+                    "Es": "DANGER"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "SAFE"
+                  "label_inactive": {
+                    "En": "SAFE",
+                    "Fr": "SAFE",
+                    "De": "SAFE",
+                    "Es": "SAFE"
+                  }
                 }
               },
               "is_sticky": false
@@ -736,7 +1131,12 @@
       },
       "elements_logic": {
         "type": "OcaBlock",
-        "label_active": "State Logic (Momentary)",
+        "label_active": {
+          "En": "State Logic (Momentary)",
+          "Fr": "State Logic (Momentary)",
+          "De": "State Logic (Momentary)",
+          "Es": "State Logic (Momentary)"
+        },
         "fields": {
           "inverted": {
             "type": "_SmartToggle",
@@ -747,10 +1147,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "OFF"
+                  "label_active": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "OFF",
+                    "Es": "OFF"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "ACTIVE"
+                  "label_inactive": {
+                    "En": "ACTIVE",
+                    "Fr": "ACTIVE",
+                    "De": "ACTIVE",
+                    "Es": "ACTIVE"
+                  }
                 }
               },
               "is_sticky": false
@@ -758,7 +1168,12 @@
           },
           "hot_swap": {
             "type": "_SmartToggle",
-            "label": "Hot Swap (Sticky)",
+            "label": {
+              "En": "Hot Swap (Sticky)",
+              "Fr": "Hot Swap (Sticky)",
+              "De": "Hot Swap (Sticky)",
+              "Es": "Hot Swap (Sticky)"
+            },
             "style": {
               "active_color": "#FF0000",
               "text_color": "#FFFF00"
@@ -766,11 +1181,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "CRITICAL",
+                  "label_active": {
+                    "En": "CRITICAL",
+                    "Fr": "CRITICAL",
+                    "De": "CRITICAL",
+                    "Es": "CRITICAL"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "STANDBY"
+                  "label_inactive": {
+                    "En": "STANDBY",
+                    "Fr": "STANDBY",
+                    "De": "STANDBY",
+                    "Es": "STANDBY"
+                  }
                 }
               },
               "is_sticky": true
@@ -787,10 +1212,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "GHOST"
+                  "label_active": {
+                    "En": "GHOST",
+                    "Fr": "GHOST",
+                    "De": "GHOST",
+                    "Es": "GHOST"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "VOID"
+                  "label_inactive": {
+                    "En": "VOID",
+                    "Fr": "VOID",
+                    "De": "VOID",
+                    "Es": "VOID"
+                  }
                 }
               },
               "is_sticky": false
@@ -806,10 +1241,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "RAD"
+                  "label_active": {
+                    "En": "RAD",
+                    "Fr": "RAD",
+                    "De": "RAD",
+                    "Es": "RAD"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "COLD"
+                  "label_inactive": {
+                    "En": "COLD",
+                    "Fr": "COLD",
+                    "De": "COLD",
+                    "Es": "COLD"
+                  }
                 }
               },
               "is_sticky": false
@@ -819,7 +1264,12 @@
       },
       "elements_vibe": {
         "type": "OcaBlock",
-        "label_active": "Aesthetic Mix (Momentary)",
+        "label_active": {
+          "En": "Aesthetic Mix (Momentary)",
+          "Fr": "Aesthetic Mix (Momentary)",
+          "De": "Aesthetic Mix (Momentary)",
+          "Es": "Aesthetic Mezcla (Momentary)"
+        },
         "fields": {
           "ocean": {
             "type": "_SmartToggle",
@@ -830,10 +1280,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "DEEP"
+                  "label_active": {
+                    "En": "DEEP",
+                    "Fr": "DEEP",
+                    "De": "DEEP",
+                    "Es": "DEEP"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "SURFACE"
+                  "label_inactive": {
+                    "En": "SURFACE",
+                    "Fr": "SURFACE",
+                    "De": "SURFACE",
+                    "Es": "SURFACE"
+                  }
                 }
               },
               "is_sticky": false
@@ -848,10 +1308,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "PINE"
+                  "label_active": {
+                    "En": "PINE",
+                    "Fr": "PINE",
+                    "De": "PINE",
+                    "Es": "PINE"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "EARTH"
+                  "label_inactive": {
+                    "En": "EARTH",
+                    "Fr": "EARTH",
+                    "De": "EARTH",
+                    "Es": "EARTH"
+                  }
                 }
               },
               "is_sticky": false
@@ -866,10 +1336,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "GLOW"
+                  "label_active": {
+                    "En": "GLOW",
+                    "Fr": "GLOW",
+                    "De": "GLOW",
+                    "Es": "GLOW"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "DUSK"
+                  "label_inactive": {
+                    "En": "DUSK",
+                    "Fr": "DUSK",
+                    "De": "DUSK",
+                    "Es": "DUSK"
+                  }
                 }
               },
               "is_sticky": false
@@ -885,10 +1365,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "DARK"
+                  "label_active": {
+                    "En": "DARK",
+                    "Fr": "DARK",
+                    "De": "DARK",
+                    "Es": "DARK"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "LIGHT"
+                  "label_inactive": {
+                    "En": "LIGHT",
+                    "Fr": "LIGHT",
+                    "De": "LIGHT",
+                    "Es": "LIGHT"
+                  }
                 }
               },
               "is_sticky": false
@@ -898,11 +1388,21 @@
       },
       "circular_demos": {
         "type": "OcaBlock",
-        "label_active": "Circular Toggles",
+        "label_active": {
+          "En": "Circular Toggles",
+          "Fr": "Circular Toggles",
+          "De": "Circular Toggles",
+          "Es": "Circular Toggles"
+        },
         "fields": {
           "power_button": {
             "type": "_SmartToggle",
-            "label": "Main Power",
+            "label": {
+              "En": "Main Power",
+              "Fr": "Main Power",
+              "De": "Main Power",
+              "Es": "Main Power"
+            },
             "geometry": {
               "width": 80,
               "height": 80,
@@ -916,11 +1416,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "ON",
+                  "label_active": {
+                    "En": "ON",
+                    "Fr": "ON",
+                    "De": "ON",
+                    "Es": "ON"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "OFF"
+                  "label_inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "OFF",
+                    "Es": "OFF"
+                  }
                 }
               },
               "is_sticky": true
@@ -928,7 +1438,12 @@
           },
           "record_circle": {
             "type": "_SmartToggle",
-            "label": "Record",
+            "label": {
+              "En": "Record",
+              "Fr": "Enregistrer",
+              "De": "Aufnahme",
+              "Es": "Grabar"
+            },
             "geometry": {
               "width": 60,
               "height": 60,
@@ -941,10 +1456,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "REC"
+                  "label_active": {
+                    "En": "REC",
+                    "Fr": "REC",
+                    "De": "REC",
+                    "Es": "REC"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "REC"
+                  "label_inactive": {
+                    "En": "REC",
+                    "Fr": "REC",
+                    "De": "REC",
+                    "Es": "REC"
+                  }
                 }
               },
               "is_sticky": true
@@ -952,7 +1477,12 @@
           },
           "momentary_blip": {
             "type": "_SmartToggle",
-            "label": "Push to Talk",
+            "label": {
+              "En": "Push to Talk",
+              "Fr": "Push to Talk",
+              "De": "Push to Talk",
+              "Es": "Push to Talk"
+            },
             "geometry": {
               "width": 50,
               "height": 50,
@@ -965,10 +1495,20 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "TALK"
+                  "label_active": {
+                    "En": "TALK",
+                    "Fr": "TALK",
+                    "De": "TALK",
+                    "Es": "TALK"
+                  }
                 },
                 "OFF": {
-                  "label_inactive": "PTT"
+                  "label_inactive": {
+                    "En": "PTT",
+                    "Fr": "PTT",
+                    "De": "PTT",
+                    "Es": "PTT"
+                  }
                 }
               },
               "is_sticky": false
@@ -976,7 +1516,12 @@
           },
           "status_lamp": {
             "type": "_SmartToggle",
-            "label": "Status OK",
+            "label": {
+              "En": "Status OK",
+              "Fr": "Statut OK",
+              "De": "Status OK",
+              "Es": "Estado OK"
+            },
             "geometry": {
               "width": 40,
               "height": 40,
@@ -990,11 +1535,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "OK",
+                  "label_active": {
+                    "En": "OK",
+                    "Fr": "OK",
+                    "De": "OK",
+                    "Es": "OK"
+                  },
                   "selected": true
                 },
                 "OFF": {
-                  "label_inactive": "FAIL"
+                  "label_inactive": {
+                    "En": "FAIL",
+                    "Fr": "FAIL",
+                    "De": "FAIL",
+                    "Es": "FAIL"
+                  }
                 }
               },
               "is_sticky": true

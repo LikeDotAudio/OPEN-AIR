@@ -1,4 +1,5 @@
 # graphing/plot_widget_adapter.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -13,7 +14,7 @@ from oaGuiElements.Core.graphing.graphing.dynamic_bar_graph import DynamicBarGra
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 
 app_constants = Config.get_instance()

@@ -44,7 +44,7 @@ from oaComMQTT.Core.mqtt_message import MqttMessage
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager

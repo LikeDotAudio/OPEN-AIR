@@ -16,12 +16,13 @@ import orjson
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGuiFramework.Methods.i18n_utils import get_text
 
 # --- Global Scope Variables ---
 current_file = f"{os.path.basename(__file__)}"
@@ -53,7 +54,7 @@ class BuilderCheckboxCreator(TransparencyMixin):
         current_function_name = inspect.currentframe().f_code.co_name
 
         # Extract only widget-specific config from config_data
-        label = config_data.get("label_active") or config_data.get("label", "")
+        label = get_text(get_text(config_data.get('label_active'))) or get_text(get_text(config_data.get('label')), "")
         config = config_data
         path = config_data.get("path")
 
@@ -89,9 +90,9 @@ class BuilderCheckboxCreator(TransparencyMixin):
             def get_label_text():
                 current_state = state_var.get()
                 if current_state:
-                    return config.get("label_active", config.get("label", ""))
+                    return get_text(config.get("label_active"), get_text(config.get("label"), ""))
                 else:
-                    return config.get("label_inactive", config.get("label", ""))
+                    return get_text(config.get("label_inactive"), get_text(config.get("label"), ""))
 
             def redraw_checkbox(*args):
                 if not canvas.winfo_exists(): return

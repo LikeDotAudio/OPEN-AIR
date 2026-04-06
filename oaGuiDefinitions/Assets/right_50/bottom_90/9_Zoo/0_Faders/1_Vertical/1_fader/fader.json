@@ -13,7 +13,12 @@
     "blocks": {
       "Fader_Zoo_MASTER": {
         "type": "OcaBlock",
-        "description": "Standard Master Demos (New Defaults)",
+        "description": {
+          "En": "Standard Master Demos (New Defaults)",
+          "Fr": "Standard Master Demos (New Defaults)",
+          "De": "Standard Master Demos (New Defaults)",
+          "Es": "Estándar Maestro Demos (New Defaults)"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -44,7 +49,12 @@
         "fields": {
           "m_1": {
             "type": "_SmartFader",
-            "label": "Wide Master",
+            "label": {
+              "En": "Wide Master",
+              "Fr": "Wide Master",
+              "De": "Wide Master",
+              "Es": "Wide Maestro"
+            },
             "notes": "120x300, 60x40 cap",
             "geometry": {
               "width": 120,
@@ -68,7 +78,12 @@
           },
           "m_2": {
             "type": "_SmartFader",
-            "label": "Tall Skinny",
+            "label": {
+              "En": "Tall Skinny",
+              "Fr": "Tall Skinny",
+              "De": "Tall Skinny",
+              "Es": "Tall Skinny"
+            },
             "notes": "60x400, 30x60 cap",
             "geometry": {
               "width": 60,
@@ -91,7 +106,12 @@
           },
           "m_3": {
             "type": "_SmartFader",
-            "label": "Boxy",
+            "label": {
+              "En": "Boxy",
+              "Fr": "Boxy",
+              "De": "Boxy",
+              "Es": "Boxy"
+            },
             "notes": "100x200, 50x50 cap",
             "geometry": {
               "width": 100,
@@ -114,7 +134,12 @@
           },
           "m_4": {
             "type": "_SmartFader",
-            "label": "Stubby",
+            "label": {
+              "En": "Stubby",
+              "Fr": "Stubby",
+              "De": "Stubby",
+              "Es": "Stubby"
+            },
             "notes": "80x150, 40x30 cap",
             "geometry": {
               "width": 80,
@@ -137,7 +162,12 @@
           },
           "m_5": {
             "type": "_SmartFader",
-            "label": "Classic",
+            "label": {
+              "En": "Classic",
+              "Fr": "Classique",
+              "De": "Klassisch",
+              "Es": "Clásico"
+            },
             "notes": "100x250 (New Default)",
             "cosmetics": {
               "colors": {
@@ -152,7 +182,12 @@
           },
           "m_6": {
             "type": "_SmartFader",
-            "label": "Deep Purple",
+            "label": {
+              "En": "Deep Purple",
+              "Fr": "Deep Purple",
+              "De": "Deep Purple",
+              "Es": "Deep Purple"
+            },
             "geometry": {
               "width": 100,
               "height": 300
@@ -170,7 +205,12 @@
           },
           "m_7": {
             "type": "_SmartFader",
-            "label": "Neon Cyan",
+            "label": {
+              "En": "Neon Cyan",
+              "Fr": "Neon Cyan",
+              "De": "Neon Cyan",
+              "Es": "Neon Cyan"
+            },
             "geometry": {
               "width": 100,
               "height": 300
@@ -189,7 +229,12 @@
           },
           "m_8": {
             "type": "_SmartFader",
-            "label": "Stealth",
+            "label": {
+              "En": "Stealth",
+              "Fr": "Stealth",
+              "De": "Stealth",
+              "Es": "Stealth"
+            },
             "geometry": {
               "width": 100,
               "height": 300
@@ -210,7 +255,12 @@
       },
       "Fader_Zoo_Rainbow": {
         "type": "OcaBlock",
-        "description": "The Rainbow Collection",
+        "description": {
+          "En": "The Rainbow Collection",
+          "Fr": "The Rainbow Collection",
+          "De": "The Rainbow Collection",
+          "Es": "The Rainbow Collection"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -241,7 +291,12 @@
         "fields": {
           "r_1": {
             "type": "_SmartFader",
-            "label": "Red",
+            "label": {
+              "En": "Red",
+              "Fr": "Red",
+              "De": "Red",
+              "Es": "Red"
+            },
             "cosmetics": {
               "colors": {
                 "cap": "#FF0000"
@@ -255,7 +310,12 @@
           },
           "r_2": {
             "type": "_SmartFader",
-            "label": "Orange",
+            "label": {
+              "En": "Orange",
+              "Fr": "Orange",
+              "De": "Orange",
+              "Es": "Orange"
+            },
             "cosmetics": {
               "colors": {
                 "cap": "#FF7F00"
@@ -269,7 +329,12 @@
           },
           "r_3": {
             "type": "_SmartFader",
-            "label": "Yellow",
+            "label": {
+              "En": "Yellow",
+              "Fr": "Yellow",
+              "De": "Yellow",
+              "Es": "Yellow"
+            },
             "cosmetics": {
               "colors": {
                 "cap": "#FFFF00"
@@ -283,7 +348,12 @@
           },
           "r_4": {
             "type": "_SmartFader",
-            "label": "Green",
+            "label": {
+              "En": "Green",
+              "Fr": "Green",
+              "De": "Green",
+              "Es": "Green"
+            },
             "cosmetics": {
               "colors": {
                 "cap": "#00FF00"
@@ -297,7 +367,12 @@
           },
           "r_5": {
             "type": "_SmartFader",
-            "label": "Blue",
+            "label": {
+              "En": "Blue",
+              "Fr": "Blue",
+              "De": "Blue",
+              "Es": "Blue"
+            },
             "cosmetics": {
               "colors": {
                 "cap": "#0000FF"
@@ -311,7 +386,12 @@
           },
           "r_6": {
             "type": "_SmartFader",
-            "label": "Indigo",
+            "label": {
+              "En": "Indigo",
+              "Fr": "Indigo",
+              "De": "Indigo",
+              "Es": "Indigo"
+            },
             "cosmetics": {
               "colors": {
                 "cap": "#4B0082"
@@ -325,7 +405,12 @@
           },
           "r_7": {
             "type": "_SmartFader",
-            "label": "Violet",
+            "label": {
+              "En": "Violet",
+              "Fr": "Violet",
+              "De": "Violet",
+              "Es": "Violet"
+            },
             "cosmetics": {
               "colors": {
                 "cap": "#9400D3"
@@ -339,7 +424,12 @@
           },
           "r_8": {
             "type": "_SmartFader",
-            "label": "Pink",
+            "label": {
+              "En": "Pink",
+              "Fr": "Pink",
+              "De": "Pink",
+              "Es": "Pink"
+            },
             "cosmetics": {
               "colors": {
                 "cap": "#FF1493"

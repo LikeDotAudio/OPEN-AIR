@@ -15,7 +15,7 @@ from typing import Optional, Callable
 LOCAL_DEBUG = True
 from oaLogging.Core.logger import MQTT_LOGGER
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from ..Core.mqtt_message import MqttMessage
 from ..Workers.mqtt_async_worker import MqttAsyncWorker
 from ..Core.mqtt_queue_manager import MqttQueueManager

@@ -13,15 +13,30 @@
     "blocks": {
       "Oscilloscope_Main_Station": {
         "type": "OcaBlock",
-        "description": "Multi-Dimensional Signal Analyzer",
+        "description": {
+          "En": "Multi-Dimensional Signal Analyzer",
+          "Fr": "Multi-Dimensional Signal Analyzer",
+          "De": "Multi-Dimensional Signal Analyzer",
+          "Es": "Multi-Dimensional Signal Analyzer"
+        },
         "fields": {
           "Display_Sector": {
             "type": "OcaBlock",
-            "description": "Visual Data Stream",
+            "description": {
+              "En": "Visual Data Stream",
+              "Fr": "Visual Data Stream",
+              "De": "Visual Data Stream",
+              "Es": "Visual Data Stream"
+            },
             "fields": {
               "Device_Identity": {
                 "type": "_TextInput",
-                "label_active": "Device Name",
+                "label_active": {
+                  "En": "Device Name",
+                  "Fr": "Device Nom",
+                  "De": "Device Name",
+                  "Es": "Device Nombre"
+                },
                 "value_default": "Flux_Math_Scope_X",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -45,8 +60,18 @@
               },
               "Main_Graph_Display": {
                 "type": "_GuiGraph",
-                "label_active": "Spectral / Temporal Display",
-                "description": "Visual rendering of Time and Frequency domains",
+                "label_active": {
+                  "En": "Spectral / Temporal Display",
+                  "Fr": "Spectral / Temporal Display",
+                  "De": "Spectral / Temporal Display",
+                  "Es": "Spectral / Temporal Display"
+                },
+                "description": {
+                  "En": "Visual rendering of Time and Frequency domains",
+                  "Fr": "Rendu visuel des domaines temporel et fréquentiel",
+                  "De": "Visuelle Darstellung von Zeit- und Frequenzbereichen",
+                  "Es": "Representación visual de dominios de tiempo y frecuencia"
+                },
                 "height": 50,
                 "alpha": 0.9,
                 "message_details": {
@@ -82,12 +107,27 @@
           },
           "Vertical_Control_Deck_Ch1": {
             "type": "OcaBlock",
-            "description": "CHANNEL 1 (Yellow)",
+            "description": {
+              "En": "CHANNEL 1 (Yellow)",
+              "Fr": "Canal 1",
+              "De": "Kanal 1",
+              "Es": "Canal 1"
+            },
             "fields": {
               "Ch1_Enable": {
                 "type": "_GuiButtonToggle",
-                "label_active": "CH1 ON",
-                "label_inactive": "CH1 OFF",
+                "label_active": {
+                  "En": "CH1 ON",
+                  "Fr": "CH1 ACTIVÉ",
+                  "De": "CH1 AN",
+                  "Es": "CH1 ACTIVADO"
+                },
+                "label_inactive": {
+                  "En": "CH1 OFF",
+                  "Fr": "CH 1",
+                  "De": "CH 1",
+                  "Es": "CH 1"
+                },
                 "style": {
                   "active_text_color": "#1a1a1a",
                   "text_color": "#888888",
@@ -123,7 +163,12 @@
               },
               "Ch1_Volts_Div": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Ch1 Scale",
+                "label_active": {
+                  "En": "Ch1 Scale",
+                  "Fr": "Ch 1",
+                  "De": "Ch 1",
+                  "Es": "Ch 1"
+                },
                 "value_default": "1.0",
                 "min": "0.01",
                 "max": "100",
@@ -152,12 +197,27 @@
           },
           "Vertical_Control_Deck_Ch2": {
             "type": "OcaBlock",
-            "description": "CHANNEL 2 (Blue)",
+            "description": {
+              "En": "CHANNEL 2 (Blue)",
+              "Fr": "CANAL 2 (Bleu)",
+              "De": "KANAL 2 (Blau)",
+              "Es": "CANAL 2 (Azul)"
+            },
             "fields": {
               "Ch2_Enable": {
                 "type": "_GuiButtonToggle",
-                "label_active": "CH2 ON",
-                "label_inactive": "CH2 OFF",
+                "label_active": {
+                  "En": "CH2 ON",
+                  "Fr": "CH 2",
+                  "De": "CH 2",
+                  "Es": "CH 2"
+                },
+                "label_inactive": {
+                  "En": "CH2 OFF",
+                  "Fr": "CH 2",
+                  "De": "CH 2",
+                  "Es": "CH 2"
+                },
                 "style": {
                   "active_text_color": "#1a1a1a",
                   "text_color": "#888888",
@@ -193,7 +253,12 @@
               },
               "Ch2_Volts_Div": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Ch2 Scale",
+                "label_active": {
+                  "En": "Ch2 Scale",
+                  "Fr": "Ch 2",
+                  "De": "Ch 2",
+                  "Es": "Ch 2"
+                },
                 "value_default": "1.0",
                 "min": "0.01",
                 "max": "100",
@@ -222,12 +287,27 @@
           },
           "Math_Control_Deck": {
             "type": "OcaBlock",
-            "description": "MATH & FFT (Purple)",
+            "description": {
+              "En": "MATH & FFT (Purple)",
+              "Fr": "MATH & FFT (Purple)",
+              "De": "MATH & FFT (Purple)",
+              "Es": "MATH & FFT (Purple)"
+            },
             "fields": {
               "Math_Enable": {
                 "type": "_GuiButtonToggle",
-                "label_active": "MATH ON",
-                "label_inactive": "MATH OFF",
+                "label_active": {
+                  "En": "MATH ON",
+                  "Fr": "MATH ON",
+                  "De": "MATH ON",
+                  "Es": "MATH ON"
+                },
+                "label_inactive": {
+                  "En": "MATH OFF",
+                  "Fr": "MATH OFF",
+                  "De": "MATH OFF",
+                  "Es": "MATH OFF"
+                },
                 "style": {
                   "active_text_color": "#1a1a1a",
                   "text_color": "#888888",
@@ -263,7 +343,12 @@
               },
               "Math_Operation": {
                 "type": "_GuiDropDownOption",
-                "label_active": "Operation",
+                "label_active": {
+                  "En": "Operation",
+                  "Fr": "Operation",
+                  "De": "Operation",
+                  "Es": "Operation"
+                },
                 "options": [
                   "A+B",
                   "A-B",
@@ -293,7 +378,12 @@
               },
               "Math_Scale": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Math Scale",
+                "label_active": {
+                  "En": "Math Scale",
+                  "Fr": "Math Échelle",
+                  "De": "Math Skala",
+                  "Es": "Math Escala"
+                },
                 "value_default": "1.0",
                 "units": "U",
                 "message_details": {
@@ -318,7 +408,12 @@
               },
               "Math_Offset": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Math Offset",
+                "label_active": {
+                  "En": "Math Offset",
+                  "Fr": "Math Décalage",
+                  "De": "Math Versatz",
+                  "Es": "Math Compensación"
+                },
                 "value_default": "0.0",
                 "units": "U",
                 "message_details": {
@@ -345,11 +440,21 @@
           },
           "FFT_Special_Deck": {
             "type": "OcaBlock",
-            "description": "Spectral Parameters (FFT Only)",
+            "description": {
+              "En": "Spectral Parameters (FFT Only)",
+              "Fr": "Spectral Parameters (FFT Only)",
+              "De": "Spectral Parameters (FFT Only)",
+              "Es": "Spectral Parameters (FFT Only)"
+            },
             "fields": {
               "FFT_Window": {
                 "type": "_GuiDropDownOption",
-                "label_active": "Window",
+                "label_active": {
+                  "En": "Window",
+                  "Fr": "Window",
+                  "De": "Window",
+                  "Es": "Window"
+                },
                 "options": [
                   "RECT",
                   "HANN",
@@ -379,7 +484,12 @@
               },
               "FFT_Center": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Center Freq",
+                "label_active": {
+                  "En": "Center Freq",
+                  "Fr": "Fréq centrale",
+                  "De": "Mittenfreq",
+                  "Es": "Frec central"
+                },
                 "value_default": "1000",
                 "min": "0",
                 "max": "1000000000",
@@ -406,7 +516,12 @@
               },
               "FFT_Span": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Freq Span",
+                "label_active": {
+                  "En": "Freq Span",
+                  "Fr": "Intervalle de fréq",
+                  "De": "Freq-Spanne",
+                  "Es": "Intervalo de frec"
+                },
                 "value_default": "10000",
                 "min": "10",
                 "max": "1000000000",
@@ -435,11 +550,21 @@
           },
           "Horizontal_Control_Deck": {
             "type": "OcaBlock",
-            "description": "Timebase",
+            "description": {
+              "En": "Timebase",
+              "Fr": "Tempsbase",
+              "De": "Zeitbase",
+              "Es": "Tiempobase"
+            },
             "fields": {
               "Time_Div": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Time / Div",
+                "label_active": {
+                  "En": "Time / Div",
+                  "Fr": "Temps / Div",
+                  "De": "Zeit / Div",
+                  "Es": "Tiempo / Div"
+                },
                 "value_default": "1e-3",
                 "min": "1e-9",
                 "max": "10",
@@ -468,11 +593,21 @@
           },
           "Trigger_Systems": {
             "type": "OcaBlock",
-            "description": "Trigger",
+            "description": {
+              "En": "Trigger",
+              "Fr": "Déclencheur",
+              "De": "Trigger",
+              "Es": "Disparo"
+            },
             "fields": {
               "Trigger_Source": {
                 "type": "_GuiDropDownOption",
-                "label_active": "Source",
+                "label_active": {
+                  "En": "Source",
+                  "Fr": "Source",
+                  "De": "Quelle",
+                  "Es": "Fuente"
+                },
                 "options": [
                   "CHAN1",
                   "CHAN2",
@@ -502,7 +637,12 @@
               },
               "Trigger_Level": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Level",
+                "label_active": {
+                  "En": "Level",
+                  "Fr": "Niveau",
+                  "De": "Pegel",
+                  "Es": "Nivel"
+                },
                 "value_default": "0.5",
                 "units": "V",
                 "message_details": {
@@ -529,12 +669,27 @@
           },
           "Acquisition_Main": {
             "type": "OcaBlock",
-            "description": "Control",
+            "description": {
+              "En": "Control",
+              "Fr": "Contrôle",
+              "De": "Steuerung",
+              "Es": "Control"
+            },
             "fields": {
               "Run_Stop_Toggle": {
                 "type": "_GuiButtonToggle",
-                "label_active": "RUN",
-                "label_inactive": "STOP",
+                "label_active": {
+                  "En": "RUN",
+                  "Fr": "EXEC",
+                  "De": "AUSFÜHREN",
+                  "Es": "EJEC"
+                },
+                "label_inactive": {
+                  "En": "STOP",
+                  "Fr": "STOP",
+                  "De": "STOP",
+                  "Es": "STOP"
+                },
                 "style": {
                   "active_text_color": "#1a1a1a",
                   "text_color": "#888888",
@@ -570,7 +725,12 @@
               },
               "Single_Shot": {
                 "type": "_GuiButton",
-                "label_active": "SINGLE",
+                "label_active": {
+                  "En": "SINGLE",
+                  "Fr": "SINGLE",
+                  "De": "SINGLE",
+                  "Es": "SINGLE"
+                },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",

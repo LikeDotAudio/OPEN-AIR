@@ -13,11 +13,21 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Measurement Units & Setup",
+        "description": {
+          "En": "Measurement Units & Setup",
+          "Fr": "Mesurerment Unités & Installation",
+          "De": "Messenment Einheits & Einrichtung",
+          "Es": "Medidament Unidads & Configuración"
+        },
         "fields": {
           "Analyzer_Units": {
             "type": "OcaBlock",
-            "description": "Select Output Unit (M1/M2)",
+            "description": {
+              "En": "Select Output Unit (M1/M2)",
+              "Fr": "Sélect. Output Unit (M1/M2)",
+              "De": "Auswahl Output Unit (M1/M2)",
+              "Es": "Selec. Output Unit (M1/M2)"
+            },
             "fields": {
               "Set_Unit_Volts": {
                 "type": "OcaBlock",
@@ -158,7 +168,12 @@
           },
           "Read_Modes": {
             "type": "OcaBlock",
-            "description": "Read Commands",
+            "description": {
+              "En": "Read Commands",
+              "Fr": "Read Commands",
+              "De": "Read Commands",
+              "Es": "Read Commands"
+            },
             "fields": {
               "Read_Ch_A_Only": {
                 "type": "OcaBlock",

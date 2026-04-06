@@ -13,7 +13,12 @@
     "blocks": {
       "Status": {
         "type": "OcaBlock",
-        "description": "Status Registers",
+        "description": {
+          "En": "Status Registers",
+          "Fr": "État Registers",
+          "De": "Status Registers",
+          "Es": "Estado Registers"
+        },
         "fields": {
           "Questionable_Condition": {
             "type": "OcaBlock",
@@ -46,7 +51,12 @@
                   "condition": {
                     "value": "0",
                     "type": "_GuiValue",
-                    "label": "Condition",
+                    "label": {
+                      "En": "Condition",
+                      "Fr": "Condition",
+                      "De": "Condition",
+                      "Es": "Condition"
+                    },
                     "units": ""
                   }
                 }

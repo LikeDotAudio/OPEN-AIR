@@ -13,15 +13,30 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": "Download Progress",
+        "label_active": {
+          "En": "Download Progress",
+          "Fr": "Download Progress",
+          "De": "Download Progress",
+          "Es": "Download Progress"
+        },
         "fields": {
           "examplefields": {
             "download_progress_bar": {
               "title": "File Download",
-              "description": "Indicates the progress of a file download.",
+              "description": {
+                "En": "Indicates the progress of a file download.",
+                "Fr": "Indicates the progress of a file download.",
+                "De": "Indicates the progress of a file download.",
+                "Es": "Indicates the progress of a file download."
+              },
               "progress_bar": {
                 "type": "_SmartProgress",
-                "label": "Progress",
+                "label": {
+                  "En": "Progress",
+                  "Fr": "Progress",
+                  "De": "Progress",
+                  "Es": "Progress"
+                },
                 "notes": "Shows the progress of a download.",
                 "domain": {
                   "primary": {
@@ -39,15 +54,30 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": "Voltage Indicator",
+        "label_active": {
+          "En": "Voltage Indicator",
+          "Fr": "Voltage Indicator",
+          "De": "Voltage Indicator",
+          "Es": "Voltage Indicator"
+        },
         "fields": {
           "examplefields": {
             "voltage_progress_bar": {
               "title": "Voltage Level",
-              "description": "Displays current voltage level.",
+              "description": {
+                "En": "Displays current voltage level.",
+                "Fr": "Displays current voltage level.",
+                "De": "Displays current voltage level.",
+                "Es": "Displays current voltage level."
+              },
               "progress_bar": {
                 "type": "_SmartProgress",
-                "label": "Voltage",
+                "label": {
+                  "En": "Voltage",
+                  "Fr": "Voltage",
+                  "De": "Voltage",
+                  "Es": "Voltage"
+                },
                 "notes": "Progress bar for voltage display.",
                 "domain": {
                   "primary": {
@@ -66,11 +96,21 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": "System Load",
+        "label_active": {
+          "En": "System Load",
+          "Fr": "System Charger",
+          "De": "System Laden",
+          "Es": "System Cargar"
+        },
         "fields": {
           "examplefields": {
             "type": "ProgressBar",
-            "label_active": "System Load",
+            "label_active": {
+              "En": "System Load",
+              "Fr": "System Charger",
+              "De": "System Laden",
+              "Es": "System Cargar"
+            },
             "min": 0,
             "max": 1000,
             "value_default": 750,
@@ -81,26 +121,46 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": "Temperature Sensor",
+        "label_active": {
+          "En": "Temperature Sensor",
+          "Fr": "Temperature Sensor",
+          "De": "Temperature Sensor",
+          "Es": "Temperature Sensor"
+        },
         "fields": {
           "examplefields": {
             "type": "ProgressBar",
-            "label_active": "Temperature Sensor",
+            "label_active": {
+              "En": "Temperature Sensor",
+              "Fr": "Temperature Sensor",
+              "De": "Temperature Sensor",
+              "Es": "Temperature Sensor"
+            },
             "min": -20,
             "max": 50,
             "value_default": 18.2,
-            "units": "\u00b0C",
+            "units": "°C",
             "notes": "Displays temperature within a specific range."
           }
         }
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": "Initialization Steps",
+        "label_active": {
+          "En": "Initialization Steps",
+          "Fr": "Initialization Steps",
+          "De": "Initialization Steps",
+          "Es": "Initialization Steps"
+        },
         "fields": {
           "examplefields": {
             "type": "ProgressBar",
-            "label_active": "Initialization Steps",
+            "label_active": {
+              "En": "Initialization Steps",
+              "Fr": "Initialization Steps",
+              "De": "Initialization Steps",
+              "Es": "Initialization Steps"
+            },
             "min": 0,
             "max": 50,
             "value_default": 40,

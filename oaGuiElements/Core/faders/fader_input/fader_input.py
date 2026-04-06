@@ -13,13 +13,14 @@ from tkinter import ttk
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaOchestration.Methods.widget_event_binder import bind_variable_trace
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGuiFramework.Methods.i18n_utils import get_text
 
 
 class BuilderFaderInputCreator(TransparencyMixin):
@@ -30,7 +31,7 @@ class BuilderFaderInputCreator(TransparencyMixin):
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️📝 [BUILDER] Entering make_fader_input", level="TRACE")
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
 
-        label = config_data.get("label_active")
+        label = get_text(config_data.get('label_active'))
         path = config_data.get("path")
         variable = kwargs.get("variable")
         

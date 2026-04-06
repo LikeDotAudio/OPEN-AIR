@@ -7,7 +7,7 @@
 import time
 import uuid
 from typing import Any, Dict
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 

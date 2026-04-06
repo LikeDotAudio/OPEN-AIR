@@ -13,15 +13,30 @@
     "blocks": {
       "elements": {
         "type": "OcaBlock",
-        "label_active": "Header Status Light",
+        "label_active": {
+          "En": "Header Status Light",
+          "Fr": "Header Statut Light",
+          "De": "Header Status Light",
+          "Es": "Header Estado Light"
+        },
         "fields": {
           "examplefields": {
             "header_status_light_example": {
               "title": "Header Status Light Example",
-              "description": "Example of the HeaderStatusLight element.",
+              "description": {
+                "En": "Example of the HeaderStatusLight element.",
+                "Fr": "Example of the HeaderStatusLight element.",
+                "De": "Example of the HeaderStatusLight element.",
+                "Es": "Example of the HeaderStatusLight element."
+              },
               "status_light": {
                 "type": "_SmartLight",
-                "label": "System Status",
+                "label": {
+                  "En": "System Status",
+                  "Fr": "System Statut",
+                  "De": "System Status",
+                  "Es": "System Estado"
+                },
                 "notes": "A status light with a label.",
                 "interaction": {
                   "is_read_only": false

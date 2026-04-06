@@ -13,7 +13,12 @@
     "blocks": {
       "Hex_Variations": {
         "type": "OcaBlock",
-        "description": "Hex Meter Variations",
+        "description": {
+          "En": "Hex Meter Variations",
+          "Fr": "Hex Meter Variations",
+          "De": "Hex Meter Variationen",
+          "Es": "Hex Meter Variaciones"
+        },
         "layout_columns": 3,
         "column_sizing": [
           {
@@ -29,7 +34,12 @@
         "fields": {
           "Hex_1_Large": {
             "type": "_NeedleVUMeter",
-            "label": "Large Classic",
+            "label": {
+              "En": "Large Classic",
+              "Fr": "Large Classique",
+              "De": "Large Klassisch",
+              "Es": "Large Clásico"
+            },
             "geometry": {
               "width": 300,
               "height": 300
@@ -57,7 +67,12 @@
               },
               "labels": [
                 {
-                  "text": "HEXAGONAL VU",
+                  "text": {
+                    "En": "HEXAGONAL VU",
+                    "Fr": "HEXAGONAL VU",
+                    "De": "HEXAGONAL VU",
+                    "Es": "HEXAGONAL VU"
+                  },
                   "x": 0,
                   "y": -45,
                   "size": 12,
@@ -74,7 +89,12 @@
                 }
               ]
             },
-            "label_active": "Large Classic",
+            "label_active": {
+              "En": "Large Classic",
+              "Fr": "Large Classique",
+              "De": "Large Klassisch",
+              "Es": "Large Clásico"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -105,7 +125,12 @@
           },
           "Hex_2_Medium": {
             "type": "_NeedleVUMeter",
-            "label": "Medium Silver",
+            "label": {
+              "En": "Medium Silver",
+              "Fr": "Moyen Silver",
+              "De": "Mittel Silver",
+              "Es": "Medio Silver"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -133,14 +158,24 @@
               },
               "labels": [
                 {
-                  "text": "SILVER HEX",
+                  "text": {
+                    "En": "SILVER HEX",
+                    "Fr": "SILVER HEX",
+                    "De": "SILVER HEX",
+                    "Es": "SILVER HEX"
+                  },
                   "x": 0,
                   "y": -35,
                   "size": 10
                 }
               ]
             },
-            "label_active": "Medium Silver",
+            "label_active": {
+              "En": "Medium Silver",
+              "Fr": "Moyen Silver",
+              "De": "Mittel Silver",
+              "Es": "Medio Silver"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -171,7 +206,12 @@
           },
           "Hex_3_Small": {
             "type": "_NeedleVUMeter",
-            "label": "Small Bronze",
+            "label": {
+              "En": "Small Bronze",
+              "Fr": "Small Bronze",
+              "De": "Small Bronze",
+              "Es": "Small Bronze"
+            },
             "geometry": {
               "width": 150,
               "height": 150
@@ -200,7 +240,12 @@
               },
               "labels": [
                 {
-                  "text": "BRONZE",
+                  "text": {
+                    "En": "BRONZE",
+                    "Fr": "BRONZE",
+                    "De": "BRONZE",
+                    "Es": "BRONZE"
+                  },
                   "x": 0,
                   "y": -22,
                   "size": 8,
@@ -208,7 +253,12 @@
                 }
               ]
             },
-            "label_active": "Small Bronze",
+            "label_active": {
+              "En": "Small Bronze",
+              "Fr": "Small Bronze",
+              "De": "Small Bronze",
+              "Es": "Small Bronze"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -240,7 +290,12 @@
           },
           "Hex_4_Cobalt": {
             "type": "_NeedleVUMeter",
-            "label": "Cobalt Blue",
+            "label": {
+              "En": "Cobalt Blue",
+              "Fr": "Cobalt Blue",
+              "De": "Cobalt Blue",
+              "Es": "Cobalt Blue"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -266,7 +321,12 @@
               },
               "labels": [
                 {
-                  "text": "COBALT",
+                  "text": {
+                    "En": "COBALT",
+                    "Fr": "COBALT",
+                    "De": "COBALT",
+                    "Es": "COBALT"
+                  },
                   "x": 0,
                   "y": -35,
                   "size": 10,
@@ -274,7 +334,12 @@
                 }
               ]
             },
-            "label_active": "Cobalt Blue",
+            "label_active": {
+              "En": "Cobalt Blue",
+              "Fr": "Cobalt Blue",
+              "De": "Cobalt Blue",
+              "Es": "Cobalt Blue"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -304,7 +369,12 @@
           },
           "Hex_5_Amber": {
             "type": "_NeedleVUMeter",
-            "label": "Amber Alert",
+            "label": {
+              "En": "Amber Alert",
+              "Fr": "Amber Alert",
+              "De": "Amber Alert",
+              "Es": "Amber Alert"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -330,7 +400,12 @@
               },
               "labels": [
                 {
-                  "text": "AMBER",
+                  "text": {
+                    "En": "AMBER",
+                    "Fr": "AMBER",
+                    "De": "AMBER",
+                    "Es": "AMBER"
+                  },
                   "x": 0,
                   "y": -35,
                   "size": 10,
@@ -338,7 +413,12 @@
                 }
               ]
             },
-            "label_active": "Amber Alert",
+            "label_active": {
+              "En": "Amber Alert",
+              "Fr": "Amber Alert",
+              "De": "Amber Alert",
+              "Es": "Amber Alert"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -368,7 +448,12 @@
           },
           "Hex_6_Graphite": {
             "type": "_NeedleVUMeter",
-            "label": "Graphite Flat",
+            "label": {
+              "En": "Graphite Flat",
+              "Fr": "Graphite Flat",
+              "De": "Graphite Flat",
+              "Es": "Graphite Flat"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -394,7 +479,12 @@
               },
               "labels": [
                 {
-                  "text": "GRAPHITE",
+                  "text": {
+                    "En": "GRAPHITE",
+                    "Fr": "GRAPHITE",
+                    "De": "GRAPHITE",
+                    "Es": "GRAPHITE"
+                  },
                   "x": 0,
                   "y": -35,
                   "size": 10,
@@ -402,7 +492,12 @@
                 }
               ]
             },
-            "label_active": "Graphite Flat",
+            "label_active": {
+              "En": "Graphite Flat",
+              "Fr": "Graphite Flat",
+              "De": "Graphite Flat",
+              "Es": "Graphite Flat"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -432,7 +527,12 @@
           },
           "Hex_7_Solar": {
             "type": "_NeedleVUMeter",
-            "label": "Solar Flare",
+            "label": {
+              "En": "Solar Flare",
+              "Fr": "Solar Flare",
+              "De": "Solar Flare",
+              "Es": "Solar Flare"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -458,7 +558,12 @@
               },
               "labels": [
                 {
-                  "text": "SOLAR",
+                  "text": {
+                    "En": "SOLAR",
+                    "Fr": "SOLAR",
+                    "De": "SOLAR",
+                    "Es": "SOLAR"
+                  },
                   "x": 0,
                   "y": -35,
                   "size": 10,
@@ -466,7 +571,12 @@
                 }
               ]
             },
-            "label_active": "Solar Flare",
+            "label_active": {
+              "En": "Solar Flare",
+              "Fr": "Solar Flare",
+              "De": "Solar Flare",
+              "Es": "Solar Flare"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -496,7 +606,12 @@
           },
           "Hex_8_Arctic": {
             "type": "_NeedleVUMeter",
-            "label": "Arctic Ice",
+            "label": {
+              "En": "Arctic Ice",
+              "Fr": "Arctic Ice",
+              "De": "Arctic Ice",
+              "Es": "Arctic Ice"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -522,7 +637,12 @@
               },
               "labels": [
                 {
-                  "text": "ARCTIC",
+                  "text": {
+                    "En": "ARCTIC",
+                    "Fr": "ARCTIC",
+                    "De": "ARCTIC",
+                    "Es": "ARCTIC"
+                  },
                   "x": 0,
                   "y": -35,
                   "size": 10,
@@ -530,7 +650,12 @@
                 }
               ]
             },
-            "label_active": "Arctic Ice",
+            "label_active": {
+              "En": "Arctic Ice",
+              "Fr": "Arctic Ice",
+              "De": "Arctic Ice",
+              "Es": "Arctic Ice"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -560,7 +685,12 @@
           },
           "Hex_9_Steampunk": {
             "type": "_NeedleVUMeter",
-            "label": "Steampunk",
+            "label": {
+              "En": "Steampunk",
+              "Fr": "Steampunk",
+              "De": "Steampunk",
+              "Es": "Steampunk"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -586,7 +716,12 @@
               },
               "labels": [
                 {
-                  "text": "STEAMPUNK",
+                  "text": {
+                    "En": "STEAMPUNK",
+                    "Fr": "STEAMPUNK",
+                    "De": "STEAMPUNK",
+                    "Es": "STEAMPUNK"
+                  },
                   "x": 0,
                   "y": -35,
                   "size": 10,
@@ -594,7 +729,12 @@
                 }
               ]
             },
-            "label_active": "Steampunk",
+            "label_active": {
+              "En": "Steampunk",
+              "Fr": "Steampunk",
+              "De": "Steampunk",
+              "Es": "Steampunk"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",

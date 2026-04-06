@@ -5,7 +5,7 @@ from textual.app import ComposeResult
 from textual.screen import Screen
 from textual.widgets import Label, Button, Footer
 from textual.containers import Container
-from oaOchestration.Core.path_initializer import DATA_LOGS_DIR, GLOBAL_PROJECT_ROOT
+from oaOchestration.Core.path_initializer import DATA_LOGS_DIR, GLOBAL_PROJECT_ROOT, DATA_REPORTS_DIR
 
 class MaintenanceClearScreen(Screen):
     """A dedicated screen for system cleanup and maintenance operations with verification."""
@@ -80,7 +80,7 @@ class MaintenanceClearScreen(Screen):
         self._update_button("btn_clear_audits", "CLEAR AUDITS", audit_count)
 
         # 3. Reports
-        report_dir = GLOBAL_PROJECT_ROOT / "oaReports"
+        report_dir = DATA_REPORTS_DIR
         report_count = self._count_files(report_dir, "*.html")
         # Keep 1 report usually, but for UI we show total
         self._update_button("btn_clear_reports", "CLEAR REPORTS", report_count)

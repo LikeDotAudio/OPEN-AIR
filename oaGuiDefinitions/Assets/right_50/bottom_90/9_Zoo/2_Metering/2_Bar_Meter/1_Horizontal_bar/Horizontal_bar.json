@@ -13,12 +13,22 @@
     "blocks": {
       "Wide_Range_tribar_demo": {
         "type": "OcaBlock",
-        "description": "Comprehensive Bar Graph Visual & Ballistic Demos",
+        "description": {
+          "En": "Comprehensive Bar Graph Visual & Ballistic Demos",
+          "Fr": "Comprehensive Bar Graph Visual & Ballistic Demos",
+          "De": "Comprehensive Bar Graph Visual & Ballistic Demos",
+          "Es": "Comprehensive Bar Graph Visual & Ballistic Demos"
+        },
         "layout_columns": 1,
         "fields": {
           "demo_01_standard_bottom": {
             "type": "_SmartMeter",
-            "label": "01: Standard (Large Scale)",
+            "label": {
+              "En": "01: Standard (Large Scale)",
+              "Fr": "01: Standard (Large Scale)",
+              "De": "01: Standard (Large Scale)",
+              "Es": "01: Estándar (Large Scale)"
+            },
             "show_label": true,
             "scale_position": "bottom",
             "scale": {
@@ -63,7 +73,12 @@
                 "Peak_alert": "#FF0000",
                 "pointer": "white",
                 "tick": "white",
-                "label": "white",
+                "label": {
+                  "En": "white",
+                  "Fr": "white",
+                  "De": "white",
+                  "Es": "white"
+                },
                 "scale": "#FFFFFF"
               },
               "style_flags": {
@@ -81,7 +96,12 @@
           },
           "demo_02_scale_top": {
             "type": "_SmartMeter",
-            "label": "02: Ocean (Small Scale)",
+            "label": {
+              "En": "02: Ocean (Small Scale)",
+              "Fr": "02: Ocean (Small Scale)",
+              "De": "02: Ocean (Small Scale)",
+              "Es": "02: Ocean (Small Scale)"
+            },
             "show_label": true,
             "scale_position": "top",
             "scale": {
@@ -126,7 +146,12 @@
                 "Peak_alert": "#FF00FF",
                 "pointer": "cyan",
                 "tick": "cyan",
-                "label": "cyan",
+                "label": {
+                  "En": "cyan",
+                  "Fr": "cyan",
+                  "De": "cyan",
+                  "Es": "cyan"
+                },
                 "scale": "#00FFFF"
               },
               "style_flags": {
@@ -144,7 +169,12 @@
           },
           "demo_03_no_ticks_bottom_text": {
             "type": "_SmartMeter",
-            "label": "03: Amber (Large Font)",
+            "label": {
+              "En": "03: Amber (Large Font)",
+              "Fr": "03: Amber (Large Font)",
+              "De": "03: Amber (Large Font)",
+              "Es": "03: Amber (Large Font)"
+            },
             "show_label": true,
             "scale_position": "bottom",
             "scale": {
@@ -189,7 +219,12 @@
                 "Peak_alert": "#FFFFFF",
                 "pointer": "orange",
                 "tick": "orange",
-                "label": "orange",
+                "label": {
+                  "En": "orange",
+                  "Fr": "orange",
+                  "De": "orange",
+                  "Es": "orange"
+                },
                 "scale": "#FFA500"
               },
               "style_flags": {
@@ -207,7 +242,12 @@
           },
           "demo_04_ticks_no_text": {
             "type": "_SmartMeter",
-            "label": "04: Retro (Huge Ticks)",
+            "label": {
+              "En": "04: Retro (Huge Ticks)",
+              "Fr": "04: Retro (Huge Ticks)",
+              "De": "04: Retro (Huge Ticks)",
+              "Es": "04: Retro (Huge Ticks)"
+            },
             "show_label": true,
             "scale_position": "none",
             "scale": {
@@ -252,7 +292,12 @@
                 "Peak_alert": "#FF0000",
                 "pointer": "#AAAAAA",
                 "tick": "white",
-                "label": "#AAAAAA",
+                "label": {
+                  "En": "#AAAAAA",
+                  "Fr": "#AAAAAA",
+                  "De": "#AAAAAA",
+                  "Es": "#AAAAAA"
+                },
                 "scale": "white"
               },
               "style_flags": {
@@ -270,7 +315,12 @@
           },
           "demo_05_no_label_above": {
             "type": "_SmartMeter",
-            "label": "HIDDEN LABEL",
+            "label": {
+              "En": "HIDDEN LABEL",
+              "Fr": "HIDDEN LABEL",
+              "De": "HIDDEN LABEL",
+              "Es": "HIDDEN LABEL"
+            },
             "show_label": false,
             "scale_position": "bottom",
             "scale": {
@@ -315,7 +365,12 @@
                 "Peak_alert": "#DDA0DD",
                 "pointer": "white",
                 "tick": "white",
-                "label": "white",
+                "label": {
+                  "En": "white",
+                  "Fr": "white",
+                  "De": "white",
+                  "Es": "white"
+                },
                 "scale": "white"
               },
               "style_flags": {
@@ -333,7 +388,12 @@
           },
           "demo_06_rect_peak_top": {
             "type": "_SmartMeter",
-            "label": "06: Blue (Thick Peak)",
+            "label": {
+              "En": "06: Blue (Thick Peak)",
+              "Fr": "06: Blue (Thick Peak)",
+              "De": "06: Blue (Thick Peak)",
+              "Es": "06: Blue (Thick Peak)"
+            },
             "show_label": true,
             "scale_position": "top",
             "scale": {
@@ -378,7 +438,12 @@
                 "Peak_alert": "#FFFFFF",
                 "pointer": "white",
                 "tick": "white",
-                "label": "white",
+                "label": {
+                  "En": "white",
+                  "Fr": "white",
+                  "De": "white",
+                  "Es": "white"
+                },
                 "scale": "white"
               },
               "style_flags": {
@@ -396,7 +461,12 @@
           },
           "demo_07_minimalist_none": {
             "type": "_SmartMeter",
-            "label": "07: Minimalist (Mono)",
+            "label": {
+              "En": "07: Minimalist (Mono)",
+              "Fr": "07: Minimalist (Mono)",
+              "De": "07: Minimalist (Mono)",
+              "Es": "07: Minimalist (Mono)"
+            },
             "show_label": true,
             "scale_position": "none",
             "scale": {
@@ -441,7 +511,12 @@
                 "Peak_alert": "#32CD32",
                 "pointer": "white",
                 "tick": "white",
-                "label": "white",
+                "label": {
+                  "En": "white",
+                  "Fr": "white",
+                  "De": "white",
+                  "Es": "white"
+                },
                 "scale": "white"
               },
               "style_flags": {
@@ -459,7 +534,12 @@
           },
           "demo_08_inverted_colors": {
             "type": "_SmartMeter",
-            "label": "08: Contrast (Tiny Font)",
+            "label": {
+              "En": "08: Contrast (Tiny Font)",
+              "Fr": "08: Contrast (Tiny Font)",
+              "De": "08: Contrast (Tiny Font)",
+              "Es": "08: Contrast (Tiny Font)"
+            },
             "show_label": true,
             "scale_position": "bottom",
             "scale": {
@@ -504,7 +584,12 @@
                 "Peak_alert": "#0000FF",
                 "pointer": "#0000FF",
                 "tick": "#0000FF",
-                "label": "#0000FF",
+                "label": {
+                  "En": "#0000FF",
+                  "Fr": "#0000FF",
+                  "De": "#0000FF",
+                  "Es": "#0000FF"
+                },
                 "scale": "#0000FF"
               },
               "style_flags": {
@@ -522,7 +607,12 @@
           },
           "demo_09_thick_bar_top": {
             "type": "_SmartMeter",
-            "label": "09: Mono (Large Peak LED)",
+            "label": {
+              "En": "09: Mono (Large Peak LED)",
+              "Fr": "09: Mono (Large Peak LED)",
+              "De": "09: Mono (Large Peak LED)",
+              "Es": "09: Mono (Large Peak LED)"
+            },
             "show_label": true,
             "scale_position": "top",
             "scale": {
@@ -567,7 +657,12 @@
                 "Peak_alert": "#FFFFFF",
                 "pointer": "red",
                 "tick": "red",
-                "label": "red",
+                "label": {
+                  "En": "red",
+                  "Fr": "red",
+                  "De": "red",
+                  "Es": "red"
+                },
                 "scale": "red"
               },
               "style_flags": {
@@ -585,7 +680,12 @@
           },
           "demo_10_ultra_fast_bottom": {
             "type": "_SmartMeter",
-            "label": "10: Transient (No Scale Font)",
+            "label": {
+              "En": "10: Transient (No Scale Font)",
+              "Fr": "10: Transient (No Scale Font)",
+              "De": "10: Transient (No Scale Font)",
+              "Es": "10: Transient (No Scale Font)"
+            },
             "show_label": true,
             "scale_position": "bottom",
             "scale": {
@@ -630,7 +730,12 @@
                 "Peak_alert": "#FFFFFF",
                 "pointer": "white",
                 "tick": "white",
-                "label": "white",
+                "label": {
+                  "En": "white",
+                  "Fr": "white",
+                  "De": "white",
+                  "Es": "white"
+                },
                 "scale": "white"
               },
               "style_flags": {

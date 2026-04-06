@@ -15,7 +15,7 @@ oaData*/
 oaDataAudits/
 oaDataLogs/
 oaDataCache/
-oaDataSNMP/
+oaDataLogs/SNMP/
 oaDataSplinks/
 oaDataRunningFiles/
 

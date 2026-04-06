@@ -21,7 +21,7 @@ import os
 import csv
 from loguru import logger
 from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 def _is_debug():
     return is_debug_allowed(system="UI", element="IMPORTER")

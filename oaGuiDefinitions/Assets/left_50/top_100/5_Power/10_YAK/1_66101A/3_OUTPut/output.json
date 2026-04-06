@@ -13,14 +13,24 @@
     "blocks": {
       "Output": {
         "type": "OcaBlock",
-        "description": "Output Control",
+        "description": {
+          "En": "Output Control",
+          "Fr": "Sortie Control",
+          "De": "Ausgang Control",
+          "Es": "Salida Control"
+        },
         "fields": {
           "Output_Control": {
             "type": "OcaBlock",
             "fields": {
               "Output_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": "ON",
+                "label_inactive": {
+                  "En": "ON",
+                  "Fr": "ON",
+                  "De": "EIN",
+                  "Es": "ENC"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -40,7 +50,12 @@
               },
               "Output_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": "OFF",
+                "label_inactive": {
+                  "En": "OFF",
+                  "Fr": "OFF",
+                  "De": "AUS",
+                  "Es": "DES"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",

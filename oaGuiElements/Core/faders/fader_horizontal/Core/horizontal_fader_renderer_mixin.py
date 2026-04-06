@@ -1,4 +1,5 @@
 # Core/horizontal_fader_renderer_mixin.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -31,7 +32,7 @@ class HorizontalFaderRendererMixin:
         theme_colors = THEMES.get(DEFAULT_THEME, THEMES["dark"])
         accent_color = theme_colors.get("accent", "#f4902c")
         
-        label_text = self.config_data.get("label_active")
+        label_text = self.get_text(config.get("label_active"))
         if label_text:
             DEFAULT_LABEL_FONT_SIZE = 9
             font_size = int(float(self.config_data.get("layout", {}).get("font", DEFAULT_LABEL_FONT_SIZE)))

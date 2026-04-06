@@ -13,17 +13,37 @@
     "blocks": {
       "NAB": {
         "type": "OcaBlock",
-        "description": "NAB Frequency Monitoring",
+        "description": {
+          "En": "NAB Frequency Monitoring",
+          "Fr": "Surveillance de fréquence NAB",
+          "De": "NAB Frequenzüberwachung",
+          "Es": "Monitoreo de frecuencia NAB"
+        },
         "show_label": false,
         "fields": {
           "Frequency_settings": {
             "type": "OcaBlock",
-            "description": "Primary Frequency Monitoring",
+            "description": {
+              "En": "Primary Frequency Monitoring",
+              "Fr": "Primary Fréquence Monitoring",
+              "De": "Primary Frequenz Monitoring",
+              "Es": "Primary Frecuencia Monitoring"
+            },
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
-                "label_active": "Get Frequency Settings",
-                "label_inactive": "Get Frequency Settings",
+                "label_active": {
+                  "En": "Get Frequency Settings",
+                  "Fr": "Get Fréquence Paramètres",
+                  "De": "Get Frequenz Einstellungen",
+                  "Es": "Get Frecuencia Ajustes"
+                },
+                "label_inactive": {
+                  "En": "Get Frequency Settings",
+                  "Fr": "Get Fréquence Paramètres",
+                  "De": "Get Frequenz Einstellungen",
+                  "Es": "Get Frecuencia Ajustes"
+                },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
                   "height": 30
@@ -49,25 +69,45 @@
                 "layout_columns": 2,
                 "fields": {
                   "start_freq": {
-                    "label": "Start Frequency (Hz)",
+                    "label": {
+                      "En": "Start Frequency (Hz)",
+                      "Fr": "Démarrer Fréquence (Hz)",
+                      "De": "Start Frequenz (Hz)",
+                      "Es": "Inicio Frecuencia (Hz)"
+                    },
                     "value": "The current start frequency in Hz.",
                     "type": "_GuiValue",
                     "units": "Hz"
                   },
                   "stop_freq": {
-                    "label": "Stop Frequency (Hz)",
+                    "label": {
+                      "En": "Stop Frequency (Hz)",
+                      "Fr": "Arrêter Fréquence (Hz)",
+                      "De": "Stopp Frequenz (Hz)",
+                      "Es": "Parar Frecuencia (Hz)"
+                    },
                     "value": "The current stop frequency in Hz.",
                     "type": "_GuiValue",
                     "units": "Hz"
                   },
                   "center_freq": {
-                    "label": "Center Frequency (Hz)",
+                    "label": {
+                      "En": "Center Frequency (Hz)",
+                      "Fr": "Fréquence centrale (Hz)",
+                      "De": "Mittenfrequenz (Hz)",
+                      "Es": "Frecuencia central (Hz)"
+                    },
                     "value": "The current center frequency in Hz.",
                     "type": "_GuiValue",
                     "units": "Hz"
                   },
                   "span_freq": {
-                    "label": "Span Frequency (Hz)",
+                    "label": {
+                      "En": "Span Frequency (Hz)",
+                      "Fr": "Portée Fréquence (Hz)",
+                      "De": "Spanne Frequenz (Hz)",
+                      "Es": "Intervalo Frecuencia (Hz)"
+                    },
                     "value": "The current span frequency in Hz.",
                     "type": "_GuiValue",
                     "units": "Hz"
@@ -80,17 +120,37 @@
       },
       "RIG_Settings": {
         "type": "OcaBlock",
-        "description": "RIG Frequency commands",
+        "description": {
+          "En": "RIG Frequency commands",
+          "Fr": "RIG Fréquence commands",
+          "De": "RIG Frequenz commands",
+          "Es": "RIG Frecuencia commands"
+        },
         "fields": {
           "freq_start_stop": {
             "type": "OcaBlock",
-            "description": "Frequency Range Commands",
+            "description": {
+              "En": "Frequency Range Commands",
+              "Fr": "Fréquence Range Commands",
+              "De": "Frequenz Range Commands",
+              "Es": "Frecuencia Range Commands"
+            },
             "layout_columns": 2,
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
-                "label_active": "Set Start and Stop Frequency",
-                "label_inactive": "Set Start and Stop Frequency",
+                "label_active": {
+                  "En": "Set Start and Stop Frequency",
+                  "Fr": "Set Démarrer and Arrêter Fréquence",
+                  "De": "Set Start and Stopp Frequenz",
+                  "Es": "Set Inicio and Parar Frecuencia"
+                },
+                "label_inactive": {
+                  "En": "Set Start and Stop Frequency",
+                  "Fr": "Set Démarrer and Arrêter Fréquence",
+                  "De": "Set Start and Stopp Frequenz",
+                  "Es": "Set Inicio and Parar Frecuencia"
+                },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
                   "height": 30
@@ -115,13 +175,23 @@
                 "type": "OcaBlock",
                 "fields": {
                   "start_freq": {
-                    "label": "Start Frequency (Hz)",
+                    "label": {
+                      "En": "Start Frequency (Hz)",
+                      "Fr": "Démarrer Fréquence (Hz)",
+                      "De": "Start Frequenz (Hz)",
+                      "Es": "Inicio Frecuencia (Hz)"
+                    },
                     "value": "12345678",
                     "type": "_GuiValue",
                     "units": "Hz"
                   },
                   "stop_freq": {
-                    "label": "Stop Frequency (Hz)",
+                    "label": {
+                      "En": "Stop Frequency (Hz)",
+                      "Fr": "Arrêter Fréquence (Hz)",
+                      "De": "Stopp Frequenz (Hz)",
+                      "Es": "Parar Frecuencia (Hz)"
+                    },
                     "value": "12345678",
                     "type": "_GuiValue",
                     "units": "Hz"
@@ -160,7 +230,12 @@
                 "type": "OcaBlock",
                 "fields": {
                   "hz_value": {
-                    "label": "Span Frequency (Hz)",
+                    "label": {
+                      "En": "Span Frequency (Hz)",
+                      "Fr": "Portée Fréquence (Hz)",
+                      "De": "Spanne Frequenz (Hz)",
+                      "Es": "Intervalo Frecuencia (Hz)"
+                    },
                     "value": "12345678",
                     "type": "_GuiValue",
                     "units": "Hz"
@@ -175,7 +250,12 @@
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
-                "label": "Set Start Frequency",
+                "label": {
+                  "En": "Set Start Frequency",
+                  "Fr": "Set Démarrer Fréquence",
+                  "De": "Set Start Frequenz",
+                  "Es": "Set Inicio Frecuencia"
+                },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
                   "height": 30
@@ -200,7 +280,12 @@
                 "type": "OcaBlock",
                 "fields": {
                   "hz_value": {
-                    "label": "Start Frequency (Hz)",
+                    "label": {
+                      "En": "Start Frequency (Hz)",
+                      "Fr": "Démarrer Fréquence (Hz)",
+                      "De": "Start Frequenz (Hz)",
+                      "Es": "Inicio Frecuencia (Hz)"
+                    },
                     "value": "12345678",
                     "type": "_GuiValue",
                     "units": "Hz"
@@ -215,8 +300,18 @@
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
-                "label_active": "Set Stop Frequency",
-                "label_inactive": "Set Stop Frequency",
+                "label_active": {
+                  "En": "Set Stop Frequency",
+                  "Fr": "Set Arrêter Fréquence",
+                  "De": "Set Stopp Frequenz",
+                  "Es": "Set Parar Frecuencia"
+                },
+                "label_inactive": {
+                  "En": "Set Stop Frequency",
+                  "Fr": "Set Arrêter Fréquence",
+                  "De": "Set Stopp Frequenz",
+                  "Es": "Set Parar Frecuencia"
+                },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
                   "height": 30

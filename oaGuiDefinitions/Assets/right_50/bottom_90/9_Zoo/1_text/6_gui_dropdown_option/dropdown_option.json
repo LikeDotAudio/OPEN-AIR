@@ -13,23 +13,48 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": "Gui Dropdown 01 Audio Input",
+        "label_active": {
+          "En": "Gui Dropdown 01 Audio Input",
+          "Fr": "Gui Dropdown 01 Audio Entrée",
+          "De": "Gui Dropdown 01 Audio Eingang",
+          "Es": "Gui Dropdown 01 Audio Entrada"
+        },
         "fields": {
           "examplefields": {
             "type": "_GuiDropDownOption",
-            "label": "Input",
+            "label": {
+              "En": "Input",
+              "Fr": "Entrée",
+              "De": "Eingang",
+              "Es": "Entrada"
+            },
             "options": {
               "Mic1": {
-                "label_active": "Microphone 1",
+                "label_active": {
+                  "En": "Microphone 1",
+                  "Fr": "Microphone 1",
+                  "De": "Microphone 1",
+                  "Es": "Microphone 1"
+                },
                 "value": "MIC1_IN",
                 "selected": true
               },
               "Mic2": {
-                "label_active": "Microphone 2",
+                "label_active": {
+                  "En": "Microphone 2",
+                  "Fr": "Microphone 2",
+                  "De": "Microphone 2",
+                  "Es": "Microphone 2"
+                },
                 "value": "MIC2_IN"
               },
               "LineIn": {
-                "label_active": "Line Input",
+                "label_active": {
+                  "En": "Line Input",
+                  "Fr": "Line Entrée",
+                  "De": "Line Eingang",
+                  "Es": "Line Entrada"
+                },
                 "value": "LINE_IN"
               }
             },
@@ -39,23 +64,48 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": "Gui Dropdown 02 Sample Rate",
+        "label_active": {
+          "En": "Gui Dropdown 02 Sample Rate",
+          "Fr": "Gui Dropdown 02 Sample Rate",
+          "De": "Gui Dropdown 02 Sample Rate",
+          "Es": "Gui Dropdown 02 Sample Rate"
+        },
         "fields": {
           "examplefields": {
             "type": "_GuiDropDownOption",
-            "label": "Sample Rate",
+            "label": {
+              "En": "Sample Rate",
+              "Fr": "Sample Rate",
+              "De": "Sample Rate",
+              "Es": "Sample Rate"
+            },
             "options": {
               "44.1kHz": {
-                "label_active": "44.1 kHz",
+                "label_active": {
+                  "En": "44.1 kHz",
+                  "Fr": "44.1 kHz",
+                  "De": "44.1 kHz",
+                  "Es": "44.1 kHz"
+                },
                 "value": 44100
               },
               "48kHz": {
-                "label_active": "48 kHz",
+                "label_active": {
+                  "En": "48 kHz",
+                  "Fr": "48 kHz",
+                  "De": "48 kHz",
+                  "Es": "48 kHz"
+                },
                 "value": 48000,
                 "selected": true
               },
               "96kHz": {
-                "label_active": "96 kHz",
+                "label_active": {
+                  "En": "96 kHz",
+                  "Fr": "96 kHz",
+                  "De": "96 kHz",
+                  "Es": "96 kHz"
+                },
                 "value": 96000
               }
             },
@@ -65,20 +115,45 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": "Gui Dropdown 03 Effect Type",
+        "label_active": {
+          "En": "Gui Dropdown 03 Effect Type",
+          "Fr": "Gui Dropdown 03 Effect Type",
+          "De": "Gui Dropdown 03 Effect Type",
+          "Es": "Gui Dropdown 03 Effect Type"
+        },
         "fields": {
           "examplefields": {
             "type": "_GuiDropDownOption",
-            "label": "Effect",
+            "label": {
+              "En": "Effect",
+              "Fr": "Effect",
+              "De": "Effect",
+              "Es": "Effect"
+            },
             "options": {
               "Reverb": {
-                "label_active": "Reverb"
+                "label_active": {
+                  "En": "Reverb",
+                  "Fr": "Réverbération",
+                  "De": "Reverb",
+                  "Es": "Reverberación"
+                }
               },
               "Delay": {
-                "label_active": "Delay"
+                "label_active": {
+                  "En": "Delay",
+                  "Fr": "Delay",
+                  "De": "Delay",
+                  "Es": "Delay"
+                }
               },
               "Chorus": {
-                "label_active": "Chorus",
+                "label_active": {
+                  "En": "Chorus",
+                  "Fr": "Chorus",
+                  "De": "Chorus",
+                  "Es": "Coro"
+                },
                 "selected": true
               }
             },
@@ -88,18 +163,38 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": "Gui Dropdown 04 Units",
+        "label_active": {
+          "En": "Gui Dropdown 04 Units",
+          "Fr": "Gui Dropdown 04 Unités",
+          "De": "Gui Dropdown 04 Einheiten",
+          "Es": "Gui Dropdown 04 Unidades"
+        },
         "fields": {
           "examplefields": {
             "type": "_GuiDropDownOption",
-            "label": "Units",
+            "label": {
+              "En": "Units",
+              "Fr": "Unités",
+              "De": "Einheiten",
+              "Es": "Unidades"
+            },
             "options": {
               "Celsius": {
-                "label_active": "Celsius",
+                "label_active": {
+                  "En": "Celsius",
+                  "Fr": "Celsius",
+                  "De": "Celsius",
+                  "Es": "Celsius"
+                },
                 "value": "C"
               },
               "Fahrenheit": {
-                "label_active": "Fahrenheit",
+                "label_active": {
+                  "En": "Fahrenheit",
+                  "Fr": "Fahrenheit",
+                  "De": "Fahrenheit",
+                  "Es": "Fahrenheit"
+                },
                 "value": "F",
                 "selected": true
               }
@@ -110,22 +205,47 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": "Gui Dropdown 05 Device Mode",
+        "label_active": {
+          "En": "Gui Dropdown 05 Device Mode",
+          "Fr": "Gui Dropdown 05 Device Mode",
+          "De": "Gui Dropdown 05 Device Mode",
+          "Es": "Gui Dropdown 05 Device Mode"
+        },
         "fields": {
           "examplefields": {
             "type": "_GuiDropDownOption",
-            "label": "Mode",
+            "label": {
+              "En": "Mode",
+              "Fr": "Mode",
+              "De": "Mode",
+              "Es": "Mode"
+            },
             "options": {
               "Standard": {
-                "label_active": "Standard Mode",
+                "label_active": {
+                  "En": "Standard Mode",
+                  "Fr": "Standard Mode",
+                  "De": "Standard Mode",
+                  "Es": "Estándar Mode"
+                },
                 "value": "STANDARD"
               },
               "Performance": {
-                "label_active": "Performance Mode",
+                "label_active": {
+                  "En": "Performance Mode",
+                  "Fr": "Performance Mode",
+                  "De": "Performance Mode",
+                  "Es": "Performance Mode"
+                },
                 "value": "PERF_MODE"
               },
               "Eco": {
-                "label_active": "Eco Mode",
+                "label_active": {
+                  "En": "Eco Mode",
+                  "Fr": "Eco Mode",
+                  "De": "Eco Mode",
+                  "Es": "Eco Mode"
+                },
                 "value": "ECO_MODE",
                 "selected": true
               }

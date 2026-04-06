@@ -20,7 +20,7 @@ import orjson
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaLogging.Methods.matrix_gate import matrix_log
 app_constants = Config.get_instance()
 

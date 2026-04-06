@@ -16,7 +16,7 @@ You are the Python Junk Architect for OPEN-AIR. Your mission is to audit the cod
     - **Junk/Populated __init__.py**: List all `__init__.py` files that contain code, imports, or logic.
 3.  **Migration Strategy**: For every "Populated" file, provide a step-by-step procedure to move its contents to the corresponding module's `Entry.py`.
 4.  **Cleanup Suggestion**: Provide a list of empty `__init__.py` files that are candidates for deletion (e.g., if they are redundant or in folders that don't strictly require them for the current Python environment).
-5.  **Report**: Before scanning, create an empty file named `PythonJunk_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`. Write your final detailed Markdown report to this file.
+5.  **Report**: Before scanning, create an empty file named `PythonJunk_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`. Write your final detailed Markdown report to this file.
 
 ### 📋 REPORT STRUCTURE:
 - **Executive Summary**: Overview of `__init__.py` usage across the project.

@@ -1,4 +1,5 @@
 # graphing/graph_styler.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
@@ -12,7 +13,7 @@ from loguru import logger
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 

@@ -16,7 +16,7 @@ class InstallationLogWriter:
         # Current file: project_root/oaInstallation/FileWriters/LogWriter.py
         current_dir = os.path.dirname(os.path.abspath(__file__))
         self.project_root = os.path.dirname(os.path.dirname(current_dir))
-        self.log_dir = os.path.join(self.project_root, "oaConfiguration")
+        self.log_dir = os.path.join(self.project_root, "oaConfigurationManager")
         self.log_file = os.path.join(self.log_dir, "installation_log.txt")
 
     def ensure_log_dir(self):

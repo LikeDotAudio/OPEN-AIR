@@ -48,7 +48,7 @@ import signal
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 from oaOchestration.Core.path_initializer import initialize_paths
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 # _DEBUG: Internal flag to toggle verbose supervisor logging.
 _DEBUG = True
@@ -151,32 +151,48 @@ def main():
     
     log("System Running. Monitoring child processes...")
 
+    def interpret_exit_code(code):
+        """Returns a human-readable description of process exit reasons."""
+        if code == 0: return "The service closed gracefully."
+        if code == -11: return "The service crashed due to a critical memory error (Segmentation Fault)."
+        if code == -15: return "The service was stopped by a termination request."
+        if code == -9: return "The service was forcefully killed by the system."
+        if code == 1: return "The service failed to start or encountered a generic error."
+        return f"The service exited with an unhandled status code: {code}"
+
     # --- Monitoring Loop ---
     while not shutdown_requested[0]:
         time.sleep(0.5) # Throttle loop to minimize CPU impact.
         
         # Check Core partition liveness.
         if p_core.poll() is not None:
+            code = p_core.returncode
+            desc = interpret_exit_code(code)
             if is_mission_critical and not shutdown_requested[0]:
-                log(f"❌ Core died (Code {p_core.returncode}). Restarting in 1s...")
+                log(f"⚠️ The Core engine has stopped ({desc}). Restarting automatically...")
                 time.sleep(1.0) # ⚡ OPTIMIZATION: Throttled restart backoff
                 p_core = subprocess.Popen([python_executable, core_script], 
                                             env=core_env)
                 processes[0] = p_core
             else:
-                log(f"🛑 Core exited (Code {p_core.returncode}). Shutting down.")
+                log(f"🛑 The Core engine has exited ({desc}). Shutting down the entire system.")
                 break
         
         # Check UI partition liveness.
         if p_ui.poll() is not None:
+            code = p_ui.returncode
+            desc = interpret_exit_code(code)
             if is_mission_critical and not shutdown_requested[0]:
-                log(f"⚠️ UI exited (Code {p_ui.returncode}). Restarting in 1s...")
+                log(f"⚠️ The UI has stopped ({desc}). Restarting automatically...")
                 time.sleep(1.0) # ⚡ OPTIMIZATION: Throttled restart backoff
                 p_ui = subprocess.Popen([python_executable, ui_script], 
                                             env=ui_env)
                 processes[1] = p_ui
             else:
-                log(f"👋 UI exited (Code {p_ui.returncode}). System complete.")
+                if code == 0:
+                    log("👋 The User Interface was closed normally. System complete.")
+                else:
+                    log(f"🚨 The User Interface has exited unexpectedly ({desc}).")
                 break
 
     # --- Finalization and Cleanup ---
@@ -193,6 +209,11 @@ def main():
                 # Force-kill if the process refuses to terminate within 2s.
                 p.kill()
                 p.wait() # Final wait to clean up zombie
+    
+    # --- FINAL LOGGING FLUSH ---
+    from oaLogging.Core.logger import shutdown_logging
+    shutdown_logging()
+    
     log("Supervisor shutdown complete. Goodbye.")
 
 if __name__ == "__main__":

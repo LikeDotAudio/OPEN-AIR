@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "OUTPut Configuration",
+        "description": {
+          "En": "OUTPut Configuration",
+          "Fr": "OUTPut Configuration",
+          "De": "OUTPut Konfiguration",
+          "Es": "OUTPut Configuración"
+        },
         "fields": {
           "Set_Output_Load": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "ohms": {
                     "value": "50",
                     "type": "_GuiValue",
-                    "label": "Load",
+                    "label": {
+                      "En": "Load",
+                      "Fr": "Charger",
+                      "De": "Laden",
+                      "Es": "Cargar"
+                    },
                     "units": "Ohms",
-                    "description": "Ohms or INFinity"
+                    "description": {
+                      "En": "Ohms or INFinity",
+                      "Fr": "Ohms or INFinity",
+                      "De": "Ohms or INFinity",
+                      "Es": "Ohms or INFinity"
+                    }
                   }
                 }
               }
@@ -58,14 +73,24 @@
       },
       "Do": {
         "type": "OcaBlock",
-        "description": "Output Control",
+        "description": {
+          "En": "Output Control",
+          "Fr": "Sortie Control",
+          "De": "Ausgang Control",
+          "Es": "Salida Control"
+        },
         "fields": {
           "Output_Control": {
             "type": "OcaBlock",
             "fields": {
               "Output_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": "Output ON",
+                "label_inactive": {
+                  "En": "Output ON",
+                  "Fr": "Sortie ON",
+                  "De": "Ausgang ON",
+                  "Es": "Salida ON"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -86,7 +111,12 @@
               },
               "Output_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": "Output OFF",
+                "label_inactive": {
+                  "En": "Output OFF",
+                  "Fr": "Sortie DÉSACTIVÉE",
+                  "De": "Ausgang AUS",
+                  "Es": "Salida DESACTIVADA"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -107,7 +137,12 @@
               },
               "Sync_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": "Sync ON",
+                "label_inactive": {
+                  "En": "Sync ON",
+                  "Fr": "Sync ON",
+                  "De": "Sync ON",
+                  "Es": "Sync ON"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -128,7 +163,12 @@
               },
               "Sync_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": "Sync OFF",
+                "label_inactive": {
+                  "En": "Sync OFF",
+                  "Fr": "Sync OFF",
+                  "De": "Sync OFF",
+                  "Es": "Sync OFF"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -153,7 +193,12 @@
       },
       "nab": {
         "type": "OcaBlock",
-        "description": "Output Status",
+        "description": {
+          "En": "Output Status",
+          "Fr": "Sortie Status",
+          "De": "Ausgang Status",
+          "Es": "Salida Status"
+        },
         "fields": {
           "Get_Output_State": {
             "type": "OcaBlock",
@@ -186,7 +231,12 @@
                   "is_on": {
                     "value": "0 or 1",
                     "type": "_GuiValue",
-                    "label": "Is On",
+                    "label": {
+                      "En": "Is On",
+                      "Fr": "Is On",
+                      "De": "Is On",
+                      "Es": "Is On"
+                    },
                     "units": ""
                   }
                 }

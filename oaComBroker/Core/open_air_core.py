@@ -42,14 +42,14 @@ from oaLogging.Methods.matrix_gate import matrix_log
 import time
 
 # Ensure the root directory is in the search path for local module imports.
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaLogging.Core.logger import initialize_logging, set_log_directory, CORE_LOGGER
 from loguru import logger
 
 LOCAL_DEBUG = True
 
 from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
-from oaConfiguration.Methods.console_encoder import configure_console_encoding
+from oaConfigurationManager.Methods.console_encoder import configure_console_encoding
 import oaWatchdog.Managers.watchdog as watchdog
 from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
 from oaStateCache.Core.state_cache import StateRegistry
@@ -157,6 +157,10 @@ def main():
             
         # Ensure the MQTT publisher thread is properly joined.
         shutdown_publisher_worker()
+
+        # --- FINAL LOGGING FLUSH ---
+        from oaLogging.Core.logger import shutdown_logging
+        shutdown_logging()
         
         if LOCAL_DEBUG:
             matrix_log("comms", "broker", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "CORE: Shutdown sequence complete.", "SUCCESS")

@@ -1,4 +1,5 @@
 # fader_dual/fader_dual.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
@@ -11,7 +12,7 @@ from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
@@ -33,7 +34,7 @@ class CustomDualFaderFrame(tk.Frame, DualFaderRendererMixin, DualFaderInteractio
         self.orientation = str(orientation).lower()
         self.min_val, self.max_val = float(config.get("value_min", 0.0)), float(config.get("value_max", 100.0))
         self.log_exponent = float(config.get("log_exponent", 1.0))
-        self.label_active = config.get("label_active", "")
+        self.label_active = get_text(config.get("label_active"), "")
         self.value_highlight_color = colors.get("accent", "#f4902c")
         
         self.cap_width = int(float(config.get("cap_width", 30)))

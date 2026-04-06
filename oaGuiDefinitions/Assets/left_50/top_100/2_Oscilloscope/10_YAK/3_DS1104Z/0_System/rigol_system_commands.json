@@ -12,14 +12,24 @@
     "blocks": {
       "Do": {
         "type": "OcaBlock",
-        "description": "Actions and Toggles",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
         "fields": {
           "System_Actions": {
             "type": "OcaBlock",
             "fields": {
               "Clear": {
                 "type": "_GuiActuator",
-                "label_inactive": "Clear",
+                "label_inactive": {
+                  "En": "Clear",
+                  "Fr": "Effacer",
+                  "De": "Löschen",
+                  "Es": "Borrar"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -39,7 +49,12 @@
               },
               "Force_Trigger": {
                 "type": "_GuiActuator",
-                "label_inactive": "Force",
+                "label_inactive": {
+                  "En": "Force",
+                  "Fr": "Force",
+                  "De": "Force",
+                  "Es": "Force"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",

@@ -13,7 +13,12 @@
     "blocks": {
       "Status": {
         "type": "OcaBlock",
-        "description": "Status Registers",
+        "description": {
+          "En": "Status Registers",
+          "Fr": "État Registers",
+          "De": "Status Registers",
+          "Es": "Estado Registers"
+        },
         "fields": {
           "Status_Byte": {
             "type": "OcaBlock",
@@ -46,7 +51,12 @@
                   "status_byte": {
                     "value": "Byte Value",
                     "type": "_GuiValue",
-                    "label": "Status",
+                    "label": {
+                      "En": "Status",
+                      "Fr": "État",
+                      "De": "Status",
+                      "Es": "Estado"
+                    },
                     "units": ""
                   }
                 }

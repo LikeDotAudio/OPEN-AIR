@@ -22,7 +22,7 @@ logger = logging.getLogger("AuditCleanup")
 
 def cleanup_audits():
     """Purges all files from the audit data directory."""
-    target = os.path.join(project_root, "oaDataAudits")
+    target = os.path.join(project_root, "oaDataLogs/Audits")
     
     matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡📤📤 [CLEAR_AUDITS] Starting System Audit cleanup...", "INFO")
     

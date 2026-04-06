@@ -11,7 +11,7 @@ from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 # Note: DiscoveryOrchestrator is imported from discovery_agents

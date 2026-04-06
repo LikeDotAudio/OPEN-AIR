@@ -1,7 +1,12 @@
 {
   "VHF (System N) South America": {
     "name": "VHF (System N) South America",
-    "description": "VHF (Band I & III) for Argentina, Paraguay and Uruguay (System N 625 lines)",
+    "description": {
+      "En": "VHF (Band I & III) for Argentina, Paraguay and Uruguay (System N 625 lines)",
+      "Fr": "VHF (Band I & III) for Argentina, Paraguay and Uruguay (Système N 625 lines)",
+      "De": "VHF (Band I & III) for Argentina, Paraguay and Uruguay (System N 625 lines)",
+      "Es": "VHF (Band I & III) for Argentina, Paraguay and Uruguay (Sistema N 625 lines)"
+    },
     "country": "Argentina, Paraguay, Uruguay",
     "region": "South America",
     "type": "tv",
@@ -118,7 +123,12 @@
   },
   "VHF (System K) French Overseas Territories and former French African Colonies": {
     "name": "VHF (System K) French Overseas Territories and former French African Colonies",
-    "description": "VHF for French Overseas Territories and former French African Colonies (System K 625 lines)",
+    "description": {
+      "En": "VHF for French Overseas Territories and former French African Colonies (System K 625 lines)",
+      "Fr": "VHF for French Overseas Territories and former French African Colonies (Système K 625 lines)",
+      "De": "VHF for French Overseas Territories and former French African Colonies (System K 625 lines)",
+      "Es": "VHF for French Overseas Territories and former French African Colonies (Sistema K 625 lines)"
+    },
     "country": "French Overseas Territories and former French African Colonies",
     "region": "Africa",
     "type": "tv",
@@ -194,7 +204,12 @@
   },
   "VHF (System I) Angola, Botswana, Lesotho, South Africa": {
     "name": "VHF (System I) Angola, Botswana, Lesotho, South Africa",
-    "description": "VHF for Angola, Botswana, Lesotho, and South Africa (System I 625 lines)",
+    "description": {
+      "En": "VHF for Angola, Botswana, Lesotho, and South Africa (System I 625 lines)",
+      "Fr": "VHF for Angola, Botswana, Lesotho, and South Africa (Système I 625 lines)",
+      "De": "VHF for Angola, Botswana, Lesotho, and South Africa (System I 625 lines)",
+      "Es": "VHF for Angola, Botswana, Lesotho, and South Africa (Sistema I 625 lines)"
+    },
     "country": "Angola, Botswana, Lesotho, South Africa",
     "region": "Africa",
     "type": "tv",
@@ -309,7 +324,12 @@
   },
   "UHF System I 625 lines (Falkland Islands) South America UHF": {
     "name": "UHF System I 625 lines (Falkland Islands) South America UHF",
-    "description": "UHF System I 625 lines standard for Falkland Islands, South America (UHF)",
+    "description": {
+      "En": "UHF System I 625 lines standard for Falkland Islands, South America (UHF)",
+      "Fr": "UHF Système I 625 lines standard for Falkland Islands, South America (UHF)",
+      "De": "UHF System I 625 lines standard for Falkland Islands, South America (UHF)",
+      "Es": "UHF Sistema I 625 lines standard for Falkland Islands, South America (UHF)"
+    },
     "country": "Falkland Islands",
     "region": "South America",
     "type": "tv",
@@ -665,7 +685,12 @@
   },
   "UHF System G/H 625 lines (Most countries in Africa) Africa UHF": {
     "name": "UHF System G/H 625 lines (Most countries in Africa) Africa UHF",
-    "description": "UHF System G/H 625 lines standard for Most countries in Africa, UHF",
+    "description": {
+      "En": "UHF System G/H 625 lines standard for Most countries in Africa, UHF",
+      "Fr": "UHF Système G/H 625 lines standard for Most countries in Africa, UHF",
+      "De": "UHF System G/H 625 lines standard for Most countries in Africa, UHF",
+      "Es": "UHF Sistema G/H 625 lines standard for Most countries in Africa, UHF"
+    },
     "country": "Most countries in Africa",
     "region": "Africa",
     "type": "tv",
@@ -1105,7 +1130,12 @@
   },
   "UHF System K & L 625 lines (French overseas territories and former French African colonies) Africa UHF": {
     "name": "UHF System K & L 625 lines (French overseas territories and former French African colonies) Africa UHF",
-    "description": "UHF System K & L 625 lines standard for French overseas territories and former French African colonies, Africa (UHF)",
+    "description": {
+      "En": "UHF System K & L 625 lines standard for French overseas territories and former French African colonies, Africa (UHF)",
+      "Fr": "Système UHF K & L standard 625 lignes pour les territoires français d'outre-mer et anciennes colonies françaises, Afrique (UHF)",
+      "De": "UHF-System K & L 625 Zeilen Standard für französische Überseegebiete und ehemalige französische afrikanische Kolonien, Afrika (UHF)",
+      "Es": "Sistema UHF K & L estándar de 625 líneas para los territorios franceses de ultramar y antiguas colonias francesas, África (UHF)"
+    },
     "country": "French overseas territories and former French African colonies",
     "region": "Africa",
     "type": "tv",
@@ -1461,7 +1491,12 @@
   },
   "DVB-T/T2/DTMB/ISDB-T (Most countries in Africa) Africa UHF Digital": {
     "name": "DVB-T/T2/DTMB/ISDB-T (Most countries in Africa) Africa UHF Digital",
-    "description": "DVB-T/T2/DTMB/ISDB-T standard for Most countries in Africa, UHF Digital",
+    "description": {
+      "En": "DVB-T/T2/DTMB/ISDB-T standard for Most countries in Africa, UHF Digital",
+      "Fr": "DVB-T/T2/DTMB/ISDB-T standard for Most countries in Africa, UHF Digital",
+      "De": "DVB-T/T2/DTMB/ISDB-T standard for Most countries in Africa, UHF Digital",
+      "Es": "DVB-T/T2/DTMB/ISDB-T standard for Most countries in Africa, UHF Digital"
+    },
     "country": "Most countries in Africa",
     "region": "Africa",
     "type": "tv",

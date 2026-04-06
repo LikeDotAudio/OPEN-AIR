@@ -109,7 +109,7 @@ class AsyncBootstrapEngine:
         """
         try:
             self.splash.set_status(message="Building Workspace...")
-            from oaGuiBuildShell.Entry import Application
+            from oaGuiFramework.Entry import Application
             from .ui_window import UIWindowManager
 
             # ⚡ SANITIZATION: Destroy the splash screen BEFORE building the application 

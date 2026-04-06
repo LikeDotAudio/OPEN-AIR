@@ -13,7 +13,7 @@ from datetime import datetime
 # Directory containing the audit TOML files
 AUDIT_DIR = "/home/anthony/Documents/OPEN-AIR/.gemini/commands"
 # Directory to save the audit logs
-OUTPUT_DIR = "/home/anthony/Documents/OPEN-AIR/oaDataAudits"
+OUTPUT_DIR = "/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits"
 # Root of the project for Gemini CLI workspace context
 PROJECT_ROOT = str(pathlib.Path(__file__).resolve().parents[2])
 

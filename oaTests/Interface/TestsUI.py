@@ -109,7 +109,7 @@ class TestsApp(App):
     def on_mount(self) -> None:
         self.set_interval(2.0, self.update_stats)
         self.write_log("🚀 [READY] Test Suite initialized and standing by.")
-        from oaConfiguration.FileReaders.config_reader import Config
+        from oaConfigurationManager.FileReaders.config_reader import Config
         guid = Config.get_instance().INSTANCE_GUID
         self.query_one("#guid_label", Label).update(f"GUID: [bold #F4902C]{guid}[/]")
         self._start_ha_monitoring()
@@ -120,7 +120,7 @@ class TestsApp(App):
                 try:
                     data = msg.get_json_payload()
                     role = data.get("role", "UNKNOWN")
-                    from oaConfiguration.FileReaders.config_reader import Config
+                    from oaConfigurationManager.FileReaders.config_reader import Config
                     if data.get("guid") == Config.get_instance().INSTANCE_GUID:
                         color = "#00ff00" if role == "PRIMARY" else "#33A1FD"
                         self.call_from_thread(lambda: self.query_one("#role_label", Label).update(f"ROLE: [bold {color}]{role}[/]"))
@@ -258,7 +258,9 @@ class TestsApp(App):
             if hasattr(self, "_flash_timer"): self._flash_timer.stop(); del self._flash_timer
             self.call_from_thread(lambda: self.query_one("#btn_report").remove_class("flashing"))
             ts = datetime.now().strftime("%Y%m%d%H%M%S")
-            reports_dir = os.path.join(self.project_root, 'oaReports'); os.makedirs(reports_dir, exist_ok=True)
+            from oaOchestration.Core.path_initializer import DATA_REPORTS_DIR
+            reports_dir = str(DATA_REPORTS_DIR)
+            os.makedirs(reports_dir, exist_ok=True)
             html_path = os.path.join(reports_dir, f'UnifiedReport_{ts}.html')
             json_path = os.path.join(reports_dir, f'UnifiedReport_{ts}.json')
             extra_tabs = collate_extra_tabs(self.project_root)

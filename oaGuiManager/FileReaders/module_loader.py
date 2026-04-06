@@ -17,7 +17,7 @@ from tkinter import ttk
 # --- Standard Debug Logging Setup ---
 from oaLogging.Entry import logger, vocal_capture, set_log_directory
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 

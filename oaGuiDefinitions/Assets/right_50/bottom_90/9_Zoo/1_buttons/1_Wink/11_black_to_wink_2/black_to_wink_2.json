@@ -13,12 +13,22 @@
     "blocks": {
       "Wink_Black_to_Color_100_Demo": {
         "type": "OcaBlock",
-        "label_active": "100 Black-to-Color (Constant & Reveal)",
+        "label_active": {
+          "En": "100 Black-to-Color (Constant & Reveal)",
+          "Fr": "100 Black-to-Color (Constant & Reveal)",
+          "De": "100 Black-to-Color (Constant & Reveal)",
+          "Es": "100 Black-to-Color (Constant & Reveal)"
+        },
         "layout_columns": 10,
         "fields": {
           "Wink_Black_001": {
             "type": "_WinkButton",
-            "label_active": "01",
+            "label_active": {
+              "En": "01",
+              "Fr": "01",
+              "De": "01",
+              "Es": "01"
+            },
             "path": "audio/wink/black_demo_001",
             "width": 60,
             "height": 60,
@@ -36,7 +46,12 @@
           },
           "Wink_Black_002": {
             "type": "_WinkButton",
-            "label_active": "02",
+            "label_active": {
+              "En": "02",
+              "Fr": "02",
+              "De": "02",
+              "Es": "02"
+            },
             "path": "audio/wink/black_demo_002",
             "width": 60,
             "height": 60,
@@ -55,7 +70,12 @@
           },
           "Wink_Black_003": {
             "type": "_WinkButton",
-            "label_active": "03",
+            "label_active": {
+              "En": "03",
+              "Fr": "03",
+              "De": "03",
+              "Es": "03"
+            },
             "path": "audio/wink/black_demo_003",
             "width": 60,
             "height": 60,
@@ -73,7 +93,12 @@
           },
           "Wink_Black_004": {
             "type": "_WinkButton",
-            "label_active": "04",
+            "label_active": {
+              "En": "04",
+              "Fr": "04",
+              "De": "04",
+              "Es": "04"
+            },
             "path": "audio/wink/black_demo_004",
             "width": 60,
             "height": 60,
@@ -92,7 +117,12 @@
           },
           "Wink_Black_005": {
             "type": "_WinkButton",
-            "label_active": "05",
+            "label_active": {
+              "En": "05",
+              "Fr": "05",
+              "De": "05",
+              "Es": "05"
+            },
             "path": "audio/wink/black_demo_005",
             "width": 60,
             "height": 60,
@@ -110,7 +140,12 @@
           },
           "Wink_Black_006": {
             "type": "_WinkButton",
-            "label_active": "06",
+            "label_active": {
+              "En": "06",
+              "Fr": "06",
+              "De": "06",
+              "Es": "06"
+            },
             "path": "audio/wink/black_demo_006",
             "width": 60,
             "height": 60,
@@ -129,7 +164,12 @@
           },
           "Wink_Black_007": {
             "type": "_WinkButton",
-            "label_active": "07",
+            "label_active": {
+              "En": "07",
+              "Fr": "07",
+              "De": "07",
+              "Es": "07"
+            },
             "path": "audio/wink/black_demo_007",
             "width": 60,
             "height": 60,
@@ -147,7 +187,12 @@
           },
           "Wink_Black_008": {
             "type": "_WinkButton",
-            "label_active": "08",
+            "label_active": {
+              "En": "08",
+              "Fr": "08",
+              "De": "08",
+              "Es": "08"
+            },
             "path": "audio/wink/black_demo_008",
             "width": 60,
             "height": 60,
@@ -166,7 +211,12 @@
           },
           "Wink_Black_009": {
             "type": "_WinkButton",
-            "label_active": "09",
+            "label_active": {
+              "En": "09",
+              "Fr": "09",
+              "De": "09",
+              "Es": "09"
+            },
             "path": "audio/wink/black_demo_009",
             "width": 60,
             "height": 60,
@@ -184,7 +234,12 @@
           },
           "Wink_Black_010": {
             "type": "_WinkButton",
-            "label_active": "10",
+            "label_active": {
+              "En": "10",
+              "Fr": "10",
+              "De": "10",
+              "Es": "10"
+            },
             "path": "audio/wink/black_demo_010",
             "width": 60,
             "height": 60,
@@ -203,7 +258,12 @@
           },
           "Wink_Black_011": {
             "type": "_WinkButton",
-            "label_active": "11",
+            "label_active": {
+              "En": "11",
+              "Fr": "11",
+              "De": "11",
+              "Es": "11"
+            },
             "path": "audio/wink/black_demo_011",
             "width": 60,
             "height": 60,
@@ -221,7 +281,12 @@
           },
           "Wink_Black_012": {
             "type": "_WinkButton",
-            "label_active": "12",
+            "label_active": {
+              "En": "12",
+              "Fr": "12",
+              "De": "12",
+              "Es": "12"
+            },
             "path": "audio/wink/black_demo_012",
             "width": 60,
             "height": 60,
@@ -240,7 +305,12 @@
           },
           "Wink_Black_013": {
             "type": "_WinkButton",
-            "label_active": "13",
+            "label_active": {
+              "En": "13",
+              "Fr": "13",
+              "De": "13",
+              "Es": "13"
+            },
             "path": "audio/wink/black_demo_013",
             "width": 60,
             "height": 60,
@@ -258,7 +328,12 @@
           },
           "Wink_Black_014": {
             "type": "_WinkButton",
-            "label_active": "14",
+            "label_active": {
+              "En": "14",
+              "Fr": "14",
+              "De": "14",
+              "Es": "14"
+            },
             "path": "audio/wink/black_demo_014",
             "width": 60,
             "height": 60,
@@ -277,7 +352,12 @@
           },
           "Wink_Black_015": {
             "type": "_WinkButton",
-            "label_active": "15",
+            "label_active": {
+              "En": "15",
+              "Fr": "15",
+              "De": "15",
+              "Es": "15"
+            },
             "path": "audio/wink/black_demo_015",
             "width": 60,
             "height": 60,
@@ -295,7 +375,12 @@
           },
           "Wink_Black_016": {
             "type": "_WinkButton",
-            "label_active": "16",
+            "label_active": {
+              "En": "16",
+              "Fr": "16",
+              "De": "16",
+              "Es": "16"
+            },
             "path": "audio/wink/black_demo_016",
             "width": 60,
             "height": 60,
@@ -314,7 +399,12 @@
           },
           "Wink_Black_017": {
             "type": "_WinkButton",
-            "label_active": "17",
+            "label_active": {
+              "En": "17",
+              "Fr": "17",
+              "De": "17",
+              "Es": "17"
+            },
             "path": "audio/wink/black_demo_017",
             "width": 60,
             "height": 60,
@@ -332,7 +422,12 @@
           },
           "Wink_Black_018": {
             "type": "_WinkButton",
-            "label_active": "18",
+            "label_active": {
+              "En": "18",
+              "Fr": "18",
+              "De": "18",
+              "Es": "18"
+            },
             "path": "audio/wink/black_demo_018",
             "width": 60,
             "height": 60,
@@ -351,7 +446,12 @@
           },
           "Wink_Black_019": {
             "type": "_WinkButton",
-            "label_active": "19",
+            "label_active": {
+              "En": "19",
+              "Fr": "19",
+              "De": "19",
+              "Es": "19"
+            },
             "path": "audio/wink/black_demo_019",
             "width": 60,
             "height": 60,
@@ -369,7 +469,12 @@
           },
           "Wink_Black_020": {
             "type": "_WinkButton",
-            "label_active": "20",
+            "label_active": {
+              "En": "20",
+              "Fr": "20",
+              "De": "20",
+              "Es": "20"
+            },
             "path": "audio/wink/black_demo_020",
             "width": 60,
             "height": 60,
@@ -388,7 +493,12 @@
           },
           "Wink_Black_021": {
             "type": "_WinkButton",
-            "label_active": "21",
+            "label_active": {
+              "En": "21",
+              "Fr": "21",
+              "De": "21",
+              "Es": "21"
+            },
             "path": "audio/wink/black_demo_021",
             "width": 60,
             "height": 60,
@@ -406,7 +516,12 @@
           },
           "Wink_Black_022": {
             "type": "_WinkButton",
-            "label_active": "22",
+            "label_active": {
+              "En": "22",
+              "Fr": "22",
+              "De": "22",
+              "Es": "22"
+            },
             "path": "audio/wink/black_demo_022",
             "width": 60,
             "height": 60,
@@ -425,7 +540,12 @@
           },
           "Wink_Black_023": {
             "type": "_WinkButton",
-            "label_active": "23",
+            "label_active": {
+              "En": "23",
+              "Fr": "23",
+              "De": "23",
+              "Es": "23"
+            },
             "path": "audio/wink/black_demo_023",
             "width": 60,
             "height": 60,
@@ -443,7 +563,12 @@
           },
           "Wink_Black_024": {
             "type": "_WinkButton",
-            "label_active": "24",
+            "label_active": {
+              "En": "24",
+              "Fr": "24",
+              "De": "24",
+              "Es": "24"
+            },
             "path": "audio/wink/black_demo_024",
             "width": 60,
             "height": 60,
@@ -462,7 +587,12 @@
           },
           "Wink_Black_025": {
             "type": "_WinkButton",
-            "label_active": "25",
+            "label_active": {
+              "En": "25",
+              "Fr": "25",
+              "De": "25",
+              "Es": "25"
+            },
             "path": "audio/wink/black_demo_025",
             "width": 60,
             "height": 60,
@@ -480,7 +610,12 @@
           },
           "Wink_Black_026": {
             "type": "_WinkButton",
-            "label_active": "26",
+            "label_active": {
+              "En": "26",
+              "Fr": "26",
+              "De": "26",
+              "Es": "26"
+            },
             "path": "audio/wink/black_demo_026",
             "width": 60,
             "height": 60,
@@ -499,7 +634,12 @@
           },
           "Wink_Black_027": {
             "type": "_WinkButton",
-            "label_active": "27",
+            "label_active": {
+              "En": "27",
+              "Fr": "27",
+              "De": "27",
+              "Es": "27"
+            },
             "path": "audio/wink/black_demo_027",
             "width": 60,
             "height": 60,
@@ -517,7 +657,12 @@
           },
           "Wink_Black_028": {
             "type": "_WinkButton",
-            "label_active": "28",
+            "label_active": {
+              "En": "28",
+              "Fr": "28",
+              "De": "28",
+              "Es": "28"
+            },
             "path": "audio/wink/black_demo_028",
             "width": 60,
             "height": 60,
@@ -536,7 +681,12 @@
           },
           "Wink_Black_029": {
             "type": "_WinkButton",
-            "label_active": "29",
+            "label_active": {
+              "En": "29",
+              "Fr": "29",
+              "De": "29",
+              "Es": "29"
+            },
             "path": "audio/wink/black_demo_029",
             "width": 60,
             "height": 60,
@@ -554,7 +704,12 @@
           },
           "Wink_Black_030": {
             "type": "_WinkButton",
-            "label_active": "30",
+            "label_active": {
+              "En": "30",
+              "Fr": "30",
+              "De": "30",
+              "Es": "30"
+            },
             "path": "audio/wink/black_demo_030",
             "width": 60,
             "height": 60,
@@ -573,7 +728,12 @@
           },
           "Wink_Black_031": {
             "type": "_WinkButton",
-            "label_active": "31",
+            "label_active": {
+              "En": "31",
+              "Fr": "31",
+              "De": "31",
+              "Es": "31"
+            },
             "path": "audio/wink/black_demo_031",
             "width": 60,
             "height": 60,
@@ -591,7 +751,12 @@
           },
           "Wink_Black_032": {
             "type": "_WinkButton",
-            "label_active": "32",
+            "label_active": {
+              "En": "32",
+              "Fr": "32",
+              "De": "32",
+              "Es": "32"
+            },
             "path": "audio/wink/black_demo_032",
             "width": 60,
             "height": 60,
@@ -610,7 +775,12 @@
           },
           "Wink_Black_033": {
             "type": "_WinkButton",
-            "label_active": "33",
+            "label_active": {
+              "En": "33",
+              "Fr": "33",
+              "De": "33",
+              "Es": "33"
+            },
             "path": "audio/wink/black_demo_033",
             "width": 60,
             "height": 60,
@@ -628,7 +798,12 @@
           },
           "Wink_Black_034": {
             "type": "_WinkButton",
-            "label_active": "34",
+            "label_active": {
+              "En": "34",
+              "Fr": "34",
+              "De": "34",
+              "Es": "34"
+            },
             "path": "audio/wink/black_demo_034",
             "width": 60,
             "height": 60,
@@ -647,7 +822,12 @@
           },
           "Wink_Black_035": {
             "type": "_WinkButton",
-            "label_active": "35",
+            "label_active": {
+              "En": "35",
+              "Fr": "35",
+              "De": "35",
+              "Es": "35"
+            },
             "path": "audio/wink/black_demo_035",
             "width": 60,
             "height": 60,
@@ -665,7 +845,12 @@
           },
           "Wink_Black_036": {
             "type": "_WinkButton",
-            "label_active": "36",
+            "label_active": {
+              "En": "36",
+              "Fr": "36",
+              "De": "36",
+              "Es": "36"
+            },
             "path": "audio/wink/black_demo_036",
             "width": 60,
             "height": 60,
@@ -684,7 +869,12 @@
           },
           "Wink_Black_037": {
             "type": "_WinkButton",
-            "label_active": "37",
+            "label_active": {
+              "En": "37",
+              "Fr": "37",
+              "De": "37",
+              "Es": "37"
+            },
             "path": "audio/wink/black_demo_037",
             "width": 60,
             "height": 60,
@@ -702,7 +892,12 @@
           },
           "Wink_Black_038": {
             "type": "_WinkButton",
-            "label_active": "38",
+            "label_active": {
+              "En": "38",
+              "Fr": "38",
+              "De": "38",
+              "Es": "38"
+            },
             "path": "audio/wink/black_demo_038",
             "width": 60,
             "height": 60,
@@ -721,7 +916,12 @@
           },
           "Wink_Black_039": {
             "type": "_WinkButton",
-            "label_active": "39",
+            "label_active": {
+              "En": "39",
+              "Fr": "39",
+              "De": "39",
+              "Es": "39"
+            },
             "path": "audio/wink/black_demo_039",
             "width": 60,
             "height": 60,
@@ -739,7 +939,12 @@
           },
           "Wink_Black_040": {
             "type": "_WinkButton",
-            "label_active": "40",
+            "label_active": {
+              "En": "40",
+              "Fr": "40",
+              "De": "40",
+              "Es": "40"
+            },
             "path": "audio/wink/black_demo_040",
             "width": 60,
             "height": 60,
@@ -758,7 +963,12 @@
           },
           "Wink_Black_041": {
             "type": "_WinkButton",
-            "label_active": "41",
+            "label_active": {
+              "En": "41",
+              "Fr": "41",
+              "De": "41",
+              "Es": "41"
+            },
             "path": "audio/wink/black_demo_041",
             "width": 60,
             "height": 60,
@@ -776,7 +986,12 @@
           },
           "Wink_Black_042": {
             "type": "_WinkButton",
-            "label_active": "42",
+            "label_active": {
+              "En": "42",
+              "Fr": "42",
+              "De": "42",
+              "Es": "42"
+            },
             "path": "audio/wink/black_demo_042",
             "width": 60,
             "height": 60,
@@ -795,7 +1010,12 @@
           },
           "Wink_Black_043": {
             "type": "_WinkButton",
-            "label_active": "43",
+            "label_active": {
+              "En": "43",
+              "Fr": "43",
+              "De": "43",
+              "Es": "43"
+            },
             "path": "audio/wink/black_demo_043",
             "width": 60,
             "height": 60,
@@ -813,7 +1033,12 @@
           },
           "Wink_Black_044": {
             "type": "_WinkButton",
-            "label_active": "44",
+            "label_active": {
+              "En": "44",
+              "Fr": "44",
+              "De": "44",
+              "Es": "44"
+            },
             "path": "audio/wink/black_demo_044",
             "width": 60,
             "height": 60,
@@ -832,7 +1057,12 @@
           },
           "Wink_Black_045": {
             "type": "_WinkButton",
-            "label_active": "45",
+            "label_active": {
+              "En": "45",
+              "Fr": "45",
+              "De": "45",
+              "Es": "45"
+            },
             "path": "audio/wink/black_demo_045",
             "width": 60,
             "height": 60,
@@ -850,7 +1080,12 @@
           },
           "Wink_Black_046": {
             "type": "_WinkButton",
-            "label_active": "46",
+            "label_active": {
+              "En": "46",
+              "Fr": "46",
+              "De": "46",
+              "Es": "46"
+            },
             "path": "audio/wink/black_demo_046",
             "width": 60,
             "height": 60,
@@ -869,7 +1104,12 @@
           },
           "Wink_Black_047": {
             "type": "_WinkButton",
-            "label_active": "47",
+            "label_active": {
+              "En": "47",
+              "Fr": "47",
+              "De": "47",
+              "Es": "47"
+            },
             "path": "audio/wink/black_demo_047",
             "width": 60,
             "height": 60,
@@ -887,7 +1127,12 @@
           },
           "Wink_Black_048": {
             "type": "_WinkButton",
-            "label_active": "48",
+            "label_active": {
+              "En": "48",
+              "Fr": "48",
+              "De": "48",
+              "Es": "48"
+            },
             "path": "audio/wink/black_demo_048",
             "width": 60,
             "height": 60,
@@ -906,7 +1151,12 @@
           },
           "Wink_Black_049": {
             "type": "_WinkButton",
-            "label_active": "49",
+            "label_active": {
+              "En": "49",
+              "Fr": "49",
+              "De": "49",
+              "Es": "49"
+            },
             "path": "audio/wink/black_demo_049",
             "width": 60,
             "height": 60,
@@ -924,7 +1174,12 @@
           },
           "Wink_Black_050": {
             "type": "_WinkButton",
-            "label_active": "50",
+            "label_active": {
+              "En": "50",
+              "Fr": "50",
+              "De": "50",
+              "Es": "50"
+            },
             "path": "audio/wink/black_demo_050",
             "width": 60,
             "height": 60,
@@ -943,7 +1198,12 @@
           },
           "Wink_Black_051": {
             "type": "_WinkButton",
-            "label_active": "51",
+            "label_active": {
+              "En": "51",
+              "Fr": "51",
+              "De": "51",
+              "Es": "51"
+            },
             "path": "audio/wink/black_demo_051",
             "width": 60,
             "height": 60,
@@ -961,7 +1221,12 @@
           },
           "Wink_Black_052": {
             "type": "_WinkButton",
-            "label_active": "52",
+            "label_active": {
+              "En": "52",
+              "Fr": "52",
+              "De": "52",
+              "Es": "52"
+            },
             "path": "audio/wink/black_demo_052",
             "width": 60,
             "height": 60,
@@ -980,7 +1245,12 @@
           },
           "Wink_Black_053": {
             "type": "_WinkButton",
-            "label_active": "53",
+            "label_active": {
+              "En": "53",
+              "Fr": "53",
+              "De": "53",
+              "Es": "53"
+            },
             "path": "audio/wink/black_demo_053",
             "width": 60,
             "height": 60,
@@ -998,7 +1268,12 @@
           },
           "Wink_Black_054": {
             "type": "_WinkButton",
-            "label_active": "54",
+            "label_active": {
+              "En": "54",
+              "Fr": "54",
+              "De": "54",
+              "Es": "54"
+            },
             "path": "audio/wink/black_demo_054",
             "width": 60,
             "height": 60,
@@ -1017,7 +1292,12 @@
           },
           "Wink_Black_055": {
             "type": "_WinkButton",
-            "label_active": "55",
+            "label_active": {
+              "En": "55",
+              "Fr": "55",
+              "De": "55",
+              "Es": "55"
+            },
             "path": "audio/wink/black_demo_055",
             "width": 60,
             "height": 60,
@@ -1035,7 +1315,12 @@
           },
           "Wink_Black_056": {
             "type": "_WinkButton",
-            "label_active": "56",
+            "label_active": {
+              "En": "56",
+              "Fr": "56",
+              "De": "56",
+              "Es": "56"
+            },
             "path": "audio/wink/black_demo_056",
             "width": 60,
             "height": 60,
@@ -1054,7 +1339,12 @@
           },
           "Wink_Black_057": {
             "type": "_WinkButton",
-            "label_active": "57",
+            "label_active": {
+              "En": "57",
+              "Fr": "57",
+              "De": "57",
+              "Es": "57"
+            },
             "path": "audio/wink/black_demo_057",
             "width": 60,
             "height": 60,
@@ -1072,7 +1362,12 @@
           },
           "Wink_Black_058": {
             "type": "_WinkButton",
-            "label_active": "58",
+            "label_active": {
+              "En": "58",
+              "Fr": "58",
+              "De": "58",
+              "Es": "58"
+            },
             "path": "audio/wink/black_demo_058",
             "width": 60,
             "height": 60,
@@ -1091,7 +1386,12 @@
           },
           "Wink_Black_059": {
             "type": "_WinkButton",
-            "label_active": "59",
+            "label_active": {
+              "En": "59",
+              "Fr": "59",
+              "De": "59",
+              "Es": "59"
+            },
             "path": "audio/wink/black_demo_059",
             "width": 60,
             "height": 60,
@@ -1109,7 +1409,12 @@
           },
           "Wink_Black_060": {
             "type": "_WinkButton",
-            "label_active": "60",
+            "label_active": {
+              "En": "60",
+              "Fr": "60",
+              "De": "60",
+              "Es": "60"
+            },
             "path": "audio/wink/black_demo_060",
             "width": 60,
             "height": 60,
@@ -1128,7 +1433,12 @@
           },
           "Wink_Black_061": {
             "type": "_WinkButton",
-            "label_active": "61",
+            "label_active": {
+              "En": "61",
+              "Fr": "61",
+              "De": "61",
+              "Es": "61"
+            },
             "path": "audio/wink/black_demo_061",
             "width": 60,
             "height": 60,
@@ -1146,7 +1456,12 @@
           },
           "Wink_Black_062": {
             "type": "_WinkButton",
-            "label_active": "62",
+            "label_active": {
+              "En": "62",
+              "Fr": "62",
+              "De": "62",
+              "Es": "62"
+            },
             "path": "audio/wink/black_demo_062",
             "width": 60,
             "height": 60,
@@ -1165,7 +1480,12 @@
           },
           "Wink_Black_063": {
             "type": "_WinkButton",
-            "label_active": "63",
+            "label_active": {
+              "En": "63",
+              "Fr": "63",
+              "De": "63",
+              "Es": "63"
+            },
             "path": "audio/wink/black_demo_063",
             "width": 60,
             "height": 60,
@@ -1183,7 +1503,12 @@
           },
           "Wink_Black_064": {
             "type": "_WinkButton",
-            "label_active": "64",
+            "label_active": {
+              "En": "64",
+              "Fr": "64",
+              "De": "64",
+              "Es": "64"
+            },
             "path": "audio/wink/black_demo_064",
             "width": 60,
             "height": 60,
@@ -1202,7 +1527,12 @@
           },
           "Wink_Black_065": {
             "type": "_WinkButton",
-            "label_active": "65",
+            "label_active": {
+              "En": "65",
+              "Fr": "65",
+              "De": "65",
+              "Es": "65"
+            },
             "path": "audio/wink/black_demo_065",
             "width": 60,
             "height": 60,
@@ -1220,7 +1550,12 @@
           },
           "Wink_Black_066": {
             "type": "_WinkButton",
-            "label_active": "66",
+            "label_active": {
+              "En": "66",
+              "Fr": "66",
+              "De": "66",
+              "Es": "66"
+            },
             "path": "audio/wink/black_demo_066",
             "width": 60,
             "height": 60,
@@ -1239,7 +1574,12 @@
           },
           "Wink_Black_067": {
             "type": "_WinkButton",
-            "label_active": "67",
+            "label_active": {
+              "En": "67",
+              "Fr": "67",
+              "De": "67",
+              "Es": "67"
+            },
             "path": "audio/wink/black_demo_067",
             "width": 60,
             "height": 60,
@@ -1257,7 +1597,12 @@
           },
           "Wink_Black_068": {
             "type": "_WinkButton",
-            "label_active": "68",
+            "label_active": {
+              "En": "68",
+              "Fr": "68",
+              "De": "68",
+              "Es": "68"
+            },
             "path": "audio/wink/black_demo_068",
             "width": 60,
             "height": 60,
@@ -1276,7 +1621,12 @@
           },
           "Wink_Black_069": {
             "type": "_WinkButton",
-            "label_active": "69",
+            "label_active": {
+              "En": "69",
+              "Fr": "69",
+              "De": "69",
+              "Es": "69"
+            },
             "path": "audio/wink/black_demo_069",
             "width": 60,
             "height": 60,
@@ -1294,7 +1644,12 @@
           },
           "Wink_Black_070": {
             "type": "_WinkButton",
-            "label_active": "70",
+            "label_active": {
+              "En": "70",
+              "Fr": "70",
+              "De": "70",
+              "Es": "70"
+            },
             "path": "audio/wink/black_demo_070",
             "width": 60,
             "height": 60,
@@ -1313,7 +1668,12 @@
           },
           "Wink_Black_071": {
             "type": "_WinkButton",
-            "label_active": "71",
+            "label_active": {
+              "En": "71",
+              "Fr": "71",
+              "De": "71",
+              "Es": "71"
+            },
             "path": "audio/wink/black_demo_071",
             "width": 60,
             "height": 60,
@@ -1331,7 +1691,12 @@
           },
           "Wink_Black_072": {
             "type": "_WinkButton",
-            "label_active": "72",
+            "label_active": {
+              "En": "72",
+              "Fr": "72",
+              "De": "72",
+              "Es": "72"
+            },
             "path": "audio/wink/black_demo_072",
             "width": 60,
             "height": 60,
@@ -1350,7 +1715,12 @@
           },
           "Wink_Black_073": {
             "type": "_WinkButton",
-            "label_active": "73",
+            "label_active": {
+              "En": "73",
+              "Fr": "73",
+              "De": "73",
+              "Es": "73"
+            },
             "path": "audio/wink/black_demo_073",
             "width": 60,
             "height": 60,
@@ -1368,7 +1738,12 @@
           },
           "Wink_Black_074": {
             "type": "_WinkButton",
-            "label_active": "74",
+            "label_active": {
+              "En": "74",
+              "Fr": "74",
+              "De": "74",
+              "Es": "74"
+            },
             "path": "audio/wink/black_demo_074",
             "width": 60,
             "height": 60,
@@ -1387,7 +1762,12 @@
           },
           "Wink_Black_075": {
             "type": "_WinkButton",
-            "label_active": "75",
+            "label_active": {
+              "En": "75",
+              "Fr": "75",
+              "De": "75",
+              "Es": "75"
+            },
             "path": "audio/wink/black_demo_075",
             "width": 60,
             "height": 60,
@@ -1405,7 +1785,12 @@
           },
           "Wink_Black_076": {
             "type": "_WinkButton",
-            "label_active": "76",
+            "label_active": {
+              "En": "76",
+              "Fr": "76",
+              "De": "76",
+              "Es": "76"
+            },
             "path": "audio/wink/black_demo_076",
             "width": 60,
             "height": 60,
@@ -1424,7 +1809,12 @@
           },
           "Wink_Black_077": {
             "type": "_WinkButton",
-            "label_active": "77",
+            "label_active": {
+              "En": "77",
+              "Fr": "77",
+              "De": "77",
+              "Es": "77"
+            },
             "path": "audio/wink/black_demo_077",
             "width": 60,
             "height": 60,
@@ -1442,7 +1832,12 @@
           },
           "Wink_Black_078": {
             "type": "_WinkButton",
-            "label_active": "78",
+            "label_active": {
+              "En": "78",
+              "Fr": "78",
+              "De": "78",
+              "Es": "78"
+            },
             "path": "audio/wink/black_demo_078",
             "width": 60,
             "height": 60,
@@ -1461,7 +1856,12 @@
           },
           "Wink_Black_079": {
             "type": "_WinkButton",
-            "label_active": "79",
+            "label_active": {
+              "En": "79",
+              "Fr": "79",
+              "De": "79",
+              "Es": "79"
+            },
             "path": "audio/wink/black_demo_079",
             "width": 60,
             "height": 60,
@@ -1479,7 +1879,12 @@
           },
           "Wink_Black_080": {
             "type": "_WinkButton",
-            "label_active": "80",
+            "label_active": {
+              "En": "80",
+              "Fr": "80",
+              "De": "80",
+              "Es": "80"
+            },
             "path": "audio/wink/black_demo_080",
             "width": 60,
             "height": 60,
@@ -1498,7 +1903,12 @@
           },
           "Wink_Black_081": {
             "type": "_WinkButton",
-            "label_active": "81",
+            "label_active": {
+              "En": "81",
+              "Fr": "81",
+              "De": "81",
+              "Es": "81"
+            },
             "path": "audio/wink/black_demo_081",
             "width": 60,
             "height": 60,
@@ -1516,7 +1926,12 @@
           },
           "Wink_Black_082": {
             "type": "_WinkButton",
-            "label_active": "82",
+            "label_active": {
+              "En": "82",
+              "Fr": "82",
+              "De": "82",
+              "Es": "82"
+            },
             "path": "audio/wink/black_demo_082",
             "width": 60,
             "height": 60,
@@ -1535,7 +1950,12 @@
           },
           "Wink_Black_083": {
             "type": "_WinkButton",
-            "label_active": "83",
+            "label_active": {
+              "En": "83",
+              "Fr": "83",
+              "De": "83",
+              "Es": "83"
+            },
             "path": "audio/wink/black_demo_083",
             "width": 60,
             "height": 60,
@@ -1553,7 +1973,12 @@
           },
           "Wink_Black_084": {
             "type": "_WinkButton",
-            "label_active": "84",
+            "label_active": {
+              "En": "84",
+              "Fr": "84",
+              "De": "84",
+              "Es": "84"
+            },
             "path": "audio/wink/black_demo_084",
             "width": 60,
             "height": 60,
@@ -1572,7 +1997,12 @@
           },
           "Wink_Black_085": {
             "type": "_WinkButton",
-            "label_active": "85",
+            "label_active": {
+              "En": "85",
+              "Fr": "85",
+              "De": "85",
+              "Es": "85"
+            },
             "path": "audio/wink/black_demo_085",
             "width": 60,
             "height": 60,
@@ -1590,7 +2020,12 @@
           },
           "Wink_Black_086": {
             "type": "_WinkButton",
-            "label_active": "86",
+            "label_active": {
+              "En": "86",
+              "Fr": "86",
+              "De": "86",
+              "Es": "86"
+            },
             "path": "audio/wink/black_demo_086",
             "width": 60,
             "height": 60,
@@ -1609,7 +2044,12 @@
           },
           "Wink_Black_087": {
             "type": "_WinkButton",
-            "label_active": "87",
+            "label_active": {
+              "En": "87",
+              "Fr": "87",
+              "De": "87",
+              "Es": "87"
+            },
             "path": "audio/wink/black_demo_087",
             "width": 60,
             "height": 60,
@@ -1627,7 +2067,12 @@
           },
           "Wink_Black_088": {
             "type": "_WinkButton",
-            "label_active": "88",
+            "label_active": {
+              "En": "88",
+              "Fr": "88",
+              "De": "88",
+              "Es": "88"
+            },
             "path": "audio/wink/black_demo_088",
             "width": 60,
             "height": 60,
@@ -1646,7 +2091,12 @@
           },
           "Wink_Black_089": {
             "type": "_WinkButton",
-            "label_active": "89",
+            "label_active": {
+              "En": "89",
+              "Fr": "89",
+              "De": "89",
+              "Es": "89"
+            },
             "path": "audio/wink/black_demo_089",
             "width": 60,
             "height": 60,
@@ -1664,7 +2114,12 @@
           },
           "Wink_Black_090": {
             "type": "_WinkButton",
-            "label_active": "90",
+            "label_active": {
+              "En": "90",
+              "Fr": "90",
+              "De": "90",
+              "Es": "90"
+            },
             "path": "audio/wink/black_demo_090",
             "width": 60,
             "height": 60,
@@ -1683,7 +2138,12 @@
           },
           "Wink_Black_091": {
             "type": "_WinkButton",
-            "label_active": "91",
+            "label_active": {
+              "En": "91",
+              "Fr": "91",
+              "De": "91",
+              "Es": "91"
+            },
             "path": "audio/wink/black_demo_091",
             "width": 60,
             "height": 60,
@@ -1701,7 +2161,12 @@
           },
           "Wink_Black_092": {
             "type": "_WinkButton",
-            "label_active": "92",
+            "label_active": {
+              "En": "92",
+              "Fr": "92",
+              "De": "92",
+              "Es": "92"
+            },
             "path": "audio/wink/black_demo_092",
             "width": 60,
             "height": 60,
@@ -1720,7 +2185,12 @@
           },
           "Wink_Black_093": {
             "type": "_WinkButton",
-            "label_active": "93",
+            "label_active": {
+              "En": "93",
+              "Fr": "93",
+              "De": "93",
+              "Es": "93"
+            },
             "path": "audio/wink/black_demo_093",
             "width": 60,
             "height": 60,
@@ -1738,7 +2208,12 @@
           },
           "Wink_Black_094": {
             "type": "_WinkButton",
-            "label_active": "94",
+            "label_active": {
+              "En": "94",
+              "Fr": "94",
+              "De": "94",
+              "Es": "94"
+            },
             "path": "audio/wink/black_demo_094",
             "width": 60,
             "height": 60,
@@ -1757,7 +2232,12 @@
           },
           "Wink_Black_095": {
             "type": "_WinkButton",
-            "label_active": "95",
+            "label_active": {
+              "En": "95",
+              "Fr": "95",
+              "De": "95",
+              "Es": "95"
+            },
             "path": "audio/wink/black_demo_095",
             "width": 60,
             "height": 60,
@@ -1775,7 +2255,12 @@
           },
           "Wink_Black_096": {
             "type": "_WinkButton",
-            "label_active": "96",
+            "label_active": {
+              "En": "96",
+              "Fr": "96",
+              "De": "96",
+              "Es": "96"
+            },
             "path": "audio/wink/black_demo_096",
             "width": 60,
             "height": 60,
@@ -1794,7 +2279,12 @@
           },
           "Wink_Black_097": {
             "type": "_WinkButton",
-            "label_active": "97",
+            "label_active": {
+              "En": "97",
+              "Fr": "97",
+              "De": "97",
+              "Es": "97"
+            },
             "path": "audio/wink/black_demo_097",
             "width": 60,
             "height": 60,
@@ -1812,7 +2302,12 @@
           },
           "Wink_Black_098": {
             "type": "_WinkButton",
-            "label_active": "98",
+            "label_active": {
+              "En": "98",
+              "Fr": "98",
+              "De": "98",
+              "Es": "98"
+            },
             "path": "audio/wink/black_demo_098",
             "width": 60,
             "height": 60,
@@ -1831,7 +2326,12 @@
           },
           "Wink_Black_099": {
             "type": "_WinkButton",
-            "label_active": "99",
+            "label_active": {
+              "En": "99",
+              "Fr": "99",
+              "De": "99",
+              "Es": "99"
+            },
             "path": "audio/wink/black_demo_099",
             "width": 60,
             "height": 60,
@@ -1849,7 +2349,12 @@
           },
           "Wink_Black_100": {
             "type": "_WinkButton",
-            "label_active": "100",
+            "label_active": {
+              "En": "100",
+              "Fr": "100",
+              "De": "100",
+              "Es": "100"
+            },
             "path": "audio/wink/black_demo_100",
             "width": 60,
             "height": 60,

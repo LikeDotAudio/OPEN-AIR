@@ -13,7 +13,12 @@
     "blocks": {
       "Averaging_Meters_Bar": {
         "type": "OcaBlock",
-        "description": "I. The Averaging Meters (Loudness) - Horizontal Bar",
+        "description": {
+          "En": "I. The Averaging Meters (Loudness) - Horizontal Bar",
+          "Fr": "I. The Averaging Meters (Loudness) - Horizontal Bar",
+          "De": "I. The Averaging Meters (Loudness) - Horizontal Bar",
+          "Es": "I. The Averaging Meters (Loudness) - Horizontal Bar"
+        },
         "layout_columns": 2,
         "column_sizing": [
           {
@@ -28,7 +33,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "Standard VU",
+            "label": {
+              "En": "Standard VU",
+              "Fr": "Standard VU",
+              "De": "Standard VU",
+              "Es": "Estándar VU"
+            },
             "notes": "Approximates 'perceived loudness'. 0 VU = +4 dBu.",
             "geometry": {
               "width": 300,
@@ -67,7 +77,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "RMS (Calculated)",
+            "label": {
+              "En": "RMS (Calculated)",
+              "Fr": "RMS (Calculated)",
+              "De": "RMS (Calculated)",
+              "Es": "RMS (Calculated)"
+            },
             "notes": "Mathematical average power.",
             "geometry": {
               "width": 300,
@@ -105,7 +120,12 @@
       },
       "Protection_Meters_Bar": {
         "type": "OcaBlock",
-        "description": "II. The Protection Meters (Quasi-Peak) - Horizontal Bar",
+        "description": {
+          "En": "II. The Protection Meters (Quasi-Peak) - Horizontal Bar",
+          "Fr": "II. The Protection Meters (Quasi-Peak) - Horizontal Bar",
+          "De": "II. The Protection Meters (Quasi-Peak) - Horizontal Bar",
+          "Es": "II. The Protection Meters (Quasi-Peak) - Horizontal Bar"
+        },
         "layout_columns": 2,
         "column_sizing": [
           {
@@ -120,7 +140,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "PPM Type I (DIN)",
+            "label": {
+              "En": "PPM Type I (DIN)",
+              "Fr": "PPM Type I (DIN)",
+              "De": "PPM Type I (DIN)",
+              "Es": "PPM Type I (DIN)"
+            },
             "notes": "Fast attack (10ms), Fast decay (1.5s).",
             "geometry": {
               "width": 300,
@@ -158,7 +183,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "PPM Type II (BBC)",
+            "label": {
+              "En": "PPM Type II (BBC)",
+              "Fr": "PPM Type II (BBC)",
+              "De": "PPM Type II (BBC)",
+              "Es": "PPM Type II (BBC)"
+            },
             "notes": "Fast attack (10ms), Slow decay (2.8s).",
             "geometry": {
               "width": 300,
@@ -196,7 +226,12 @@
       },
       "Digital_Meters_Bar": {
         "type": "OcaBlock",
-        "description": "III. The Digital Meters - Horizontal Bar",
+        "description": {
+          "En": "III. The Digital Meters - Horizontal Bar",
+          "Fr": "III. The Digital Meters - Horizontal Bar",
+          "De": "III. The Digital Meters - Horizontal Bar",
+          "Es": "III. The Digital Meters - Horizontal Bar"
+        },
         "layout_columns": 2,
         "column_sizing": [
           {
@@ -211,7 +246,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "True Peak (dBTP)",
+            "label": {
+              "En": "True Peak (dBTP)",
+              "Fr": "True Peak (dBTP)",
+              "De": "True Peak (dBTP)",
+              "Es": "True Peak (dBTP)"
+            },
             "notes": "Instant Attack, Peak Hold. 'God View'.",
             "geometry": {
               "width": 300,
@@ -250,7 +290,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "LUFS Momentary",
+            "label": {
+              "En": "LUFS Momentary",
+              "Fr": "LUFS Momentary",
+              "De": "LUFS Momentary",
+              "Es": "LUFS Momentary"
+            },
             "notes": "400ms sliding window.",
             "geometry": {
               "width": 300,
@@ -288,7 +333,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "LUFS Short-Term",
+            "label": {
+              "En": "LUFS Short-Term",
+              "Fr": "LUFS Short-Term",
+              "De": "LUFS Short-Term",
+              "Es": "LUFS Short-Term"
+            },
             "notes": "3s sliding window.",
             "geometry": {
               "width": 300,
@@ -326,7 +376,12 @@
       },
       "Hardware_Scales_1_Bar": {
         "type": "OcaBlock",
-        "description": "II. Hardware Scale Markings (Part 1) - Horizontal Bar",
+        "description": {
+          "En": "II. Hardware Scale Markings (Part 1) - Horizontal Bar",
+          "Fr": "II. Hardware Scale Markings (Part 1) - Horizontal Bar",
+          "De": "II. Hardware Scale Markings (Part 1) - Horizontal Bar",
+          "Es": "II. Hardware Scale Markings (Part 1) - Horizontal Bar"
+        },
         "layout_columns": 2,
         "column_sizing": [
           {
@@ -341,7 +396,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "1. Standard BBC",
+            "label": {
+              "En": "1. Standard BBC",
+              "Fr": "1. Standard BBC",
+              "De": "1. Standard BBC",
+              "Es": "1. Estándar BBC"
+            },
             "notes": "Mark '4' is reference.",
             "geometry": {
               "width": 300,
@@ -381,7 +441,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "2. ABC - West",
+            "label": {
+              "En": "2. ABC - West",
+              "Fr": "2. ABC - West",
+              "De": "2. ABC - West",
+              "Es": "2. ABC - West"
+            },
             "notes": "Ref -8 ('R'). Yellow Caution Strip (0 to +6).",
             "geometry": {
               "width": 300,
@@ -415,7 +480,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "3. ABC - East",
+            "label": {
+              "En": "3. ABC - East",
+              "Fr": "3. ABC - East",
+              "De": "3. ABC - East",
+              "Es": "3. ABC - East"
+            },
             "notes": "Ref -8.",
             "geometry": {
               "width": 300,
@@ -442,7 +512,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "4. APK (Canada)",
+            "label": {
+              "En": "4. APK (Canada)",
+              "Fr": "4. APK (Canada)",
+              "De": "4. APK (Canada)",
+              "Es": "4. APK (Canada)"
+            },
             "notes": "Ref +8. Yellow Strip (+16 to +24).",
             "geometry": {
               "width": 300,
@@ -472,7 +547,12 @@
       },
       "Hardware_Scales_2_Bar": {
         "type": "OcaBlock",
-        "description": "II. Hardware Scale Markings (Part 2) - Horizontal Bar",
+        "description": {
+          "En": "II. Hardware Scale Markings (Part 2) - Horizontal Bar",
+          "Fr": "II. Hardware Scale Markings (Part 2) - Horizontal Bar",
+          "De": "II. Hardware Scale Markings (Part 2) - Horizontal Bar",
+          "Es": "II. Hardware Scale Markings (Part 2) - Horizontal Bar"
+        },
         "layout_columns": 2,
         "column_sizing": [
           {
@@ -487,7 +567,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "5. dBu Scale",
+            "label": {
+              "En": "5. dBu Scale",
+              "Fr": "5. dBu Scale",
+              "De": "5. dBu Scale",
+              "Es": "5. dBu Scale"
+            },
             "notes": "Ref +4 ('REF'). Yellow Strip (+12 to +20).",
             "geometry": {
               "width": 300,
@@ -520,7 +605,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "6. Center Zero",
+            "label": {
+              "En": "6. Center Zero",
+              "Fr": "6. Centre Zero",
+              "De": "6. Zentrum Zero",
+              "Es": "6. Centro Zero"
+            },
             "notes": "Center 0. Symmetrical.",
             "geometry": {
               "width": 300,
@@ -550,7 +640,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "7. Test Scale A",
+            "label": {
+              "En": "7. Test Scale A",
+              "Fr": "7. Test Scale A",
+              "De": "7. Test Scale A",
+              "Es": "7. Test Scale A"
+            },
             "notes": "Marked 'TEST' above zero.",
             "geometry": {
               "width": 300,
@@ -580,7 +675,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "8. Test Scale B",
+            "label": {
+              "En": "8. Test Scale B",
+              "Fr": "8. Test Scale B",
+              "De": "8. Test Scale B",
+              "Es": "8. Test Scale B"
+            },
             "notes": "Ref -8. Marked 'TEST'.",
             "geometry": {
               "width": 300,
@@ -613,7 +713,12 @@
       },
       "Vintage_Aesthetics_Bar": {
         "type": "OcaBlock",
-        "description": "VI. Vintage Aesthetics (Bar Graph Interpretations)",
+        "description": {
+          "En": "VI. Vintage Aesthetics (Bar Graph Interpretations)",
+          "Fr": "VI. Vintage Aesthetics (Bar Graph Interpretations)",
+          "De": "VI. Vintage Aesthetics (Bar Graph Interpretations)",
+          "Es": "VI. Vintage Aesthetics (Bar Graph Interpretations)"
+        },
         "layout_columns": 2,
         "column_sizing": [
           {
@@ -628,7 +733,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "New Old Stock",
+            "label": {
+              "En": "New Old Stock",
+              "Fr": "New Old Stock",
+              "De": "New Old Stock",
+              "Es": "New Old Stock"
+            },
             "notes": "Parchment background (#F5E6C4). Black Bar.",
             "geometry": {
               "width": 300,
@@ -661,7 +771,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "Vintage Aged",
+            "label": {
+              "En": "Vintage Aged",
+              "Fr": "Vintage Aged",
+              "De": "Vintage Aged",
+              "Es": "Vintage Aged"
+            },
             "notes": "Darkened Parchment (#E8D5A8). Black Bar.",
             "geometry": {
               "width": 300,
@@ -694,7 +809,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "Tungsten (Lit)",
+            "label": {
+              "En": "Tungsten (Lit)",
+              "Fr": "Tungsten (Lit)",
+              "De": "Tungsten (Lit)",
+              "Es": "Tungsten (Lit)"
+            },
             "notes": "Amber Glow (#FFC680). Black Bar.",
             "geometry": {
               "width": 300,
@@ -727,7 +847,12 @@
             "type": "_BarGraph",
             "show_grid": true,
             "sub_ticks": 4,
-            "label": "Bakelite (Dark)",
+            "label": {
+              "En": "Bakelite (Dark)",
+              "Fr": "Bakelite (Dark)",
+              "De": "Bakelite (Dark)",
+              "Es": "Bakelite (Dark)"
+            },
             "notes": "Dark Housing (#2B2B2B). Light Bar.",
             "geometry": {
               "width": 300,

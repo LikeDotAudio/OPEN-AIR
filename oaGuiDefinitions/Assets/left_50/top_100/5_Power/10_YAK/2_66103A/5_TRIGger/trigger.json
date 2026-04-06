@@ -13,11 +13,21 @@
     "blocks": {
       "Trigger": {
         "type": "OcaBlock",
-        "description": "Trigger System",
+        "description": {
+          "En": "Trigger System",
+          "Fr": "Déclencheur System",
+          "De": "Trigger System",
+          "Es": "Disparo System"
+        },
         "fields": {
           "Trigger_Immediate": {
             "type": "_GuiActuator",
-            "label_inactive": "Trigger (*TRG)",
+            "label_inactive": {
+              "En": "Trigger (*TRG)",
+              "Fr": "Déclencheur (*TRG)",
+              "De": "Trigger (*TRG)",
+              "Es": "Disparo (*TRG)"
+            },
             "AES70": "OcaBooleanActuator",
             "style": {
               "active_text_color": "#1a1a1a",

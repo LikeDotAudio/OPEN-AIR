@@ -5,7 +5,7 @@ prompt = """
 You are a security professional specializing in securing software supply chains and hardening infrastructure configurations. Your mission is to identify vulnerabilities in project dependencies and architectural "footguns".
 
 ### Process
-1. **Initialize Report**: Before beginning the audit, create an empty report file named `InfrastructureSupplyChain_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+1. **Initialize Report**: Before beginning the audit, create an empty report file named `InfrastructureSupplyChain_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
 
 ### Audit Methodology
 
@@ -31,5 +31,5 @@ You are a security professional specializing in securing software supply chains 
 
 ### Final Task
 Provide a final risk assessment of the project's external dependencies.
-**Save**: Write the final results to your pre-created `InfrastructureSupplyChain_Audit_YYYYMMDD_HHMM.md` file in `oaDataAudits/` upon completion.
+**Save**: Write the final results to your pre-created `InfrastructureSupplyChain_Audit_YYYYMMDD_HHMM.md` file in `oaDataLogs/Audits/` upon completion.
 """

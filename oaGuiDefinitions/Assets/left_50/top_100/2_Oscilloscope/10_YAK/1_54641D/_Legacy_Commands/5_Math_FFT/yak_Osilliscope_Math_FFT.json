@@ -13,11 +13,21 @@
     "blocks": {
       "nab": {
         "type": "OcaBlock",
-        "description": "Math Measurements",
+        "description": {
+          "En": "Math Measurements",
+          "Fr": "Math Mesurerments",
+          "De": "Math Messenments",
+          "Es": "Math Medidaments"
+        },
         "fields": {
           "Read_Math_Stats": {
             "type": "OcaBlock",
-            "description": "Read statistics for the active Math function",
+            "description": {
+              "En": "Read statistics for the active Math function",
+              "Fr": "Read statistics for the active Math function",
+              "De": "Read statistics for the active Math function",
+              "Es": "Read statistics for the active Math function"
+            },
             "fields": {
               "Get_Math_Statistics": {
                 "type": "OcaBlock",
@@ -46,30 +56,55 @@
                   },
                   "Outputs": {
                     "type": "OcaBlock",
-                    "description": "Measured Math Statistics",
+                    "description": {
+                      "En": "Measured Math Statistics",
+                      "Fr": "Mesurerd Math Statistics",
+                      "De": "Messend Math Statistics",
+                      "Es": "Medidad Math Statistics"
+                    },
                     "fields": {
                       "math_vpp": {
                         "value": "Math Vpp",
                         "type": "_GuiValue",
-                        "label": "Vpp",
+                        "label": {
+                          "En": "Vpp",
+                          "Fr": "Vpp",
+                          "De": "Vss",
+                          "Es": "Vpp"
+                        },
                         "units": "V"
                       },
                       "math_vmax": {
                         "value": "Math Vmax",
                         "type": "_GuiValue",
-                        "label": "Vmax",
+                        "label": {
+                          "En": "Vmax",
+                          "Fr": "Vmax",
+                          "De": "Vmax",
+                          "Es": "Vmax"
+                        },
                         "units": "V"
                       },
                       "math_vmin": {
                         "value": "Math Vmin",
                         "type": "_GuiValue",
-                        "label": "Vmin",
+                        "label": {
+                          "En": "Vmin",
+                          "Fr": "Vmin",
+                          "De": "Vmin",
+                          "Es": "Vmin"
+                        },
                         "units": "V"
                       },
                       "math_avg": {
                         "value": "Math Avg",
                         "type": "_GuiValue",
-                        "label": "Avg",
+                        "label": {
+                          "En": "Avg",
+                          "Fr": "Moy",
+                          "De": "Mittel",
+                          "Es": "Prom"
+                        },
                         "units": "V"
                       }
                     }
@@ -82,11 +117,21 @@
       },
       "set": {
         "type": "OcaBlock",
-        "description": "Math Configuration",
+        "description": {
+          "En": "Math Configuration",
+          "Fr": "Math Configuration",
+          "De": "Math Konfiguration",
+          "Es": "Math Configuración"
+        },
         "fields": {
           "Math_Operation": {
             "type": "OcaBlock",
-            "description": "Select Operation",
+            "description": {
+              "En": "Select Operation",
+              "Fr": "Sélect. Operation",
+              "De": "Auswahl Operation",
+              "Es": "Selec. Operation"
+            },
             "fields": {
               "Set_Operation": {
                 "type": "OcaBlock",
@@ -115,13 +160,28 @@
                   },
                   "Input": {
                     "type": "OcaBlock",
-                    "description": "Math Operation Input",
+                    "description": {
+                      "En": "Math Operation Input",
+                      "Fr": "Math Operation Entrée",
+                      "De": "Math Operation Eingang",
+                      "Es": "Math Operation Entrada"
+                    },
                     "fields": {
                       "operation": {
                         "value": "FFT",
                         "type": "_GuiValue",
-                        "label": "Op",
-                        "description": "ADD, SUBTract, MULTiply, INTegrate, DIFFerentiate, FFT"
+                        "label": {
+                          "En": "Op",
+                          "Fr": "Op",
+                          "De": "Op",
+                          "Es": "Op"
+                        },
+                        "description": {
+                          "En": "ADD, SUBTract, MULTiply, INTegrate, DIFFerentiate, FFT",
+                          "Fr": "ADD, SUBTract, MULTiply, INTegrate, DIFFerentiate, FFT",
+                          "De": "ADD, SUBTract, MULTiply, INTegrate, DIFFerentiate, FFT",
+                          "Es": "ADD, SUBTract, MULTiply, INTegrate, DIFFerentiate, FFT"
+                        }
                       }
                     }
                   }
@@ -131,7 +191,12 @@
           },
           "Math_Source_Control": {
             "type": "OcaBlock",
-            "description": "Source Selection",
+            "description": {
+              "En": "Source Selection",
+              "Fr": "Source Sélectionnerion",
+              "De": "Source Auswählenion",
+              "Es": "Source Seleccionarion"
+            },
             "fields": {
               "Set_Source_CH1": {
                 "type": "OcaBlock",
@@ -191,7 +256,12 @@
           },
           "Math_Vertical": {
             "type": "OcaBlock",
-            "description": "Vertical Scale & Offset",
+            "description": {
+              "En": "Vertical Scale & Offset",
+              "Fr": "Vertical Échelle & Décalage",
+              "De": "Vertical Skala & Versatz",
+              "Es": "Vertical Escala & Compensación"
+            },
             "fields": {
               "Set_Range": {
                 "type": "OcaBlock",
@@ -220,14 +290,29 @@
                   },
                   "Input": {
                     "type": "OcaBlock",
-                    "description": "Math Range Input",
+                    "description": {
+                      "En": "Math Range Input",
+                      "Fr": "Math Plage Entrée",
+                      "De": "Math Bereich Eingang",
+                      "Es": "Math Rango Entrada"
+                    },
                     "fields": {
                       "range": {
                         "value": "10.0",
                         "type": "_GuiValue",
-                        "label": "Range",
+                        "label": {
+                          "En": "Range",
+                          "Fr": "Plage",
+                          "De": "Bereich",
+                          "Es": "Rango"
+                        },
                         "units": "V",
-                        "description": "Full scale value"
+                        "description": {
+                          "En": "Full scale value",
+                          "Fr": "Full scale value",
+                          "De": "Full scale value",
+                          "Es": "Full scale value"
+                        }
                       }
                     }
                   }
@@ -260,14 +345,29 @@
                   },
                   "Input": {
                     "type": "OcaBlock",
-                    "description": "Math Offset Input",
+                    "description": {
+                      "En": "Math Offset Input",
+                      "Fr": "Math Décalage Entrée",
+                      "De": "Math Versatz Eingang",
+                      "Es": "Math Compensación Entrada"
+                    },
                     "fields": {
                       "offset": {
                         "value": "0.0",
                         "type": "_GuiValue",
-                        "label": "Offset",
+                        "label": {
+                          "En": "Offset",
+                          "Fr": "Décalage",
+                          "De": "Versatz",
+                          "Es": "Compensación"
+                        },
                         "units": "V",
-                        "description": "Offset value"
+                        "description": {
+                          "En": "Offset value",
+                          "Fr": "Décalage value",
+                          "De": "Versatz value",
+                          "Es": "Compensación value"
+                        }
                       }
                     }
                   }
@@ -277,7 +377,12 @@
           },
           "FFT_Settings": {
             "type": "OcaBlock",
-            "description": "FFT Specific Configuration",
+            "description": {
+              "En": "FFT Specific Configuration",
+              "Fr": "FFT Specific Configuration",
+              "De": "FFT Specific Konfiguration",
+              "Es": "FFT Specific Configuración"
+            },
             "fields": {
               "Set_Window_RECTangular": {
                 "type": "OcaBlock",
@@ -306,13 +411,28 @@
                   },
                   "Input": {
                     "type": "OcaBlock",
-                    "description": "FFT Window Type Input",
+                    "description": {
+                      "En": "FFT Window Type Input",
+                      "Fr": "FFT Window Type Entrée",
+                      "De": "FFT Window Typ Eingang",
+                      "Es": "FFT Window Tipo Entrada"
+                    },
                     "fields": {
                       "window": {
                         "value": "RECTangular",
                         "type": "_GuiValue",
-                        "label": "Window",
-                        "description": "RECTangular"
+                        "label": {
+                          "En": "Window",
+                          "Fr": "Window",
+                          "De": "Window",
+                          "Es": "Window"
+                        },
+                        "description": {
+                          "En": "RECTangular",
+                          "Fr": "RECTangular",
+                          "De": "RECTangular",
+                          "Es": "RECTangular"
+                        }
                       }
                     }
                   }
@@ -345,13 +465,28 @@
                   },
                   "Input": {
                     "type": "OcaBlock",
-                    "description": "FFT Window Type Input",
+                    "description": {
+                      "En": "FFT Window Type Input",
+                      "Fr": "FFT Window Type Entrée",
+                      "De": "FFT Window Typ Eingang",
+                      "Es": "FFT Window Tipo Entrada"
+                    },
                     "fields": {
                       "window": {
                         "value": "HANNing",
                         "type": "_GuiValue",
-                        "label": "Window",
-                        "description": "HANNing"
+                        "label": {
+                          "En": "Window",
+                          "Fr": "Window",
+                          "De": "Window",
+                          "Es": "Window"
+                        },
+                        "description": {
+                          "En": "HANNing",
+                          "Fr": "HANNing",
+                          "De": "HANNing",
+                          "Es": "HANNing"
+                        }
                       }
                     }
                   }
@@ -384,13 +519,28 @@
                   },
                   "Input": {
                     "type": "OcaBlock",
-                    "description": "FFT Window Type Input",
+                    "description": {
+                      "En": "FFT Window Type Input",
+                      "Fr": "FFT Window Type Entrée",
+                      "De": "FFT Window Typ Eingang",
+                      "Es": "FFT Window Tipo Entrada"
+                    },
                     "fields": {
                       "window": {
                         "value": "FLATtop",
                         "type": "_GuiValue",
-                        "label": "Window",
-                        "description": "FLATtop"
+                        "label": {
+                          "En": "Window",
+                          "Fr": "Window",
+                          "De": "Window",
+                          "Es": "Window"
+                        },
+                        "description": {
+                          "En": "FLATtop",
+                          "Fr": "FLATtop",
+                          "De": "FLATtop",
+                          "Es": "FLATtop"
+                        }
                       }
                     }
                   }
@@ -423,14 +573,29 @@
                   },
                   "Input": {
                     "type": "OcaBlock",
-                    "description": "FFT Center Frequency Input",
+                    "description": {
+                      "En": "FFT Center Frequency Input",
+                      "Fr": "FFT Centre Fréquence Entrée",
+                      "De": "FFT Mitte Frequenz Eingang",
+                      "Es": "FFT Centro Frecuencia Entrada"
+                    },
                     "fields": {
                       "frequency": {
                         "value": "100000",
                         "type": "_GuiValue",
-                        "label": "Center",
+                        "label": {
+                          "En": "Center",
+                          "Fr": "Centre",
+                          "De": "Mitte",
+                          "Es": "Centro"
+                        },
                         "units": "Hz",
-                        "description": "Center Freq in Hz"
+                        "description": {
+                          "En": "Center Freq in Hz",
+                          "Fr": "Fréq centrale en Hz",
+                          "De": "Mittenfreq in Hz",
+                          "Es": "Frec central en Hz"
+                        }
                       }
                     }
                   }
@@ -463,14 +628,29 @@
                   },
                   "Input": {
                     "type": "OcaBlock",
-                    "description": "FFT Span Input",
+                    "description": {
+                      "En": "FFT Span Input",
+                      "Fr": "FFT Portée Entrée",
+                      "De": "FFT Spanne Eingang",
+                      "Es": "FFT Intervalo Entrada"
+                    },
                     "fields": {
                       "span": {
                         "value": "50000",
                         "type": "_GuiValue",
-                        "label": "Span",
+                        "label": {
+                          "En": "Span",
+                          "Fr": "Étendue",
+                          "De": "Spanne",
+                          "Es": "Intervalo"
+                        },
                         "units": "Hz",
-                        "description": "Span in Hz"
+                        "description": {
+                          "En": "Span in Hz",
+                          "Fr": "Portée in Hz",
+                          "De": "Spanne in Hz",
+                          "Es": "Intervalo in Hz"
+                        }
                       }
                     }
                   }
@@ -503,14 +683,29 @@
                   },
                   "Input": {
                     "type": "OcaBlock",
-                    "description": "FFT Scale Input",
+                    "description": {
+                      "En": "FFT Scale Input",
+                      "Fr": "FFT Échelle Entrée",
+                      "De": "FFT Skala Eingang",
+                      "Es": "FFT Escala Entrada"
+                    },
                     "fields": {
                       "scale": {
                         "value": "10",
                         "type": "_GuiValue",
-                        "label": "Scale",
+                        "label": {
+                          "En": "Scale",
+                          "Fr": "Échelle",
+                          "De": "Skala",
+                          "Es": "Escala"
+                        },
                         "units": "dB/div",
-                        "description": "dB per division"
+                        "description": {
+                          "En": "dB per division",
+                          "Fr": "dB per division",
+                          "De": "dB per division",
+                          "Es": "dB per division"
+                        }
                       }
                     }
                   }
@@ -522,15 +717,30 @@
       },
       "Do": {
         "type": "OcaBlock",
-        "description": "Actions and Toggles",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
         "fields": {
           "Math_Display_Control": {
             "type": "OcaBlock",
-            "description": "Math Display Controls",
+            "description": {
+              "En": "Math Display Controls",
+              "Fr": "Commandes d'affichage mathématique",
+              "De": "Math-Anzeigesteuerungen",
+              "Es": "Controles de visualización matemática"
+            },
             "fields": {
               "Do_Math_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": "Math ON",
+                "label_inactive": {
+                  "En": "Math ON",
+                  "Fr": "Math ON",
+                  "De": "Math EIN",
+                  "Es": "Math ENC"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -551,7 +761,12 @@
               },
               "Do_Math_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": "Math OFF",
+                "label_inactive": {
+                  "En": "Math OFF",
+                  "Fr": "Math OFF",
+                  "De": "Math AUS",
+                  "Es": "Math DES"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",

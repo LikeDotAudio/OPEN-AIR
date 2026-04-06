@@ -13,11 +13,21 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": "Visit Project Homepage",
+        "label_active": {
+          "En": "Visit Project Homepage",
+          "Fr": "Visit Project Homepage",
+          "De": "Visit Project Homepage",
+          "Es": "Visit Project Homepage"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartLink",
-            "label": "Visit Project Homepage",
+            "label": {
+              "En": "Visit Project Homepage",
+              "Fr": "Visit Project Homepage",
+              "De": "Visit Project Homepage",
+              "Es": "Visit Project Homepage"
+            },
             "notes": "Link to the main project website.",
             "geometry": {
               "sticky": "ew",
@@ -33,11 +43,21 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": "Read Documentation",
+        "label_active": {
+          "En": "Read Documentation",
+          "Fr": "Read Documentation",
+          "De": "Read Documentation",
+          "Es": "Read Documentation"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartLink",
-            "label": "Read Documentation",
+            "label": {
+              "En": "Read Documentation",
+              "Fr": "Read Documentation",
+              "De": "Read Documentation",
+              "Es": "Read Documentation"
+            },
             "notes": "Link to the online documentation.",
             "interaction": {
               "url": "https://docs.example.com/guide"
@@ -47,11 +67,21 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": "Contact Support",
+        "label_active": {
+          "En": "Contact Support",
+          "Fr": "Contact Support",
+          "De": "Contact Support",
+          "Es": "Contact Support"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartLink",
-            "label": "Contact Support",
+            "label": {
+              "En": "Contact Support",
+              "Fr": "Contact Support",
+              "De": "Contact Support",
+              "Es": "Contact Support"
+            },
             "notes": "Link to the customer support page.",
             "interaction": {
               "url": "https://support.example.com"
@@ -61,11 +91,21 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": "View Source Code",
+        "label_active": {
+          "En": "View Source Code",
+          "Fr": "View Source Code",
+          "De": "View Source Code",
+          "Es": "View Source Code"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartLink",
-            "label": "View Source Code",
+            "label": {
+              "En": "View Source Code",
+              "Fr": "View Source Code",
+              "De": "View Source Code",
+              "Es": "View Source Code"
+            },
             "notes": "Link to the GitHub repository.",
             "geometry": {
               "sticky": "ew",
@@ -81,11 +121,21 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": "Latest Blog Post",
+        "label_active": {
+          "En": "Latest Blog Post",
+          "Fr": "Latest Blog Post",
+          "De": "Latest Blog Post",
+          "Es": "Latest Blog Post"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartLink",
-            "label": "Latest Blog Post",
+            "label": {
+              "En": "Latest Blog Post",
+              "Fr": "Latest Blog Post",
+              "De": "Latest Blog Post",
+              "Es": "Latest Blog Post"
+            },
             "notes": "Link to a relevant blog post.",
             "interaction": {
               "url": "https://www.like.audio/blog/latest"

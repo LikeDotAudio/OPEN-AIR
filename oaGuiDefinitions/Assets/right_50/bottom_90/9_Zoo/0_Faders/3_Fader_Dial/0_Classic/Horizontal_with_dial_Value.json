@@ -13,7 +13,12 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": "Frequency",
+        "label_active": {
+          "En": "Frequency",
+          "Fr": "Fréquence",
+          "De": "Frequenz",
+          "Es": "Frecuencia"
+        },
         "fields": {
           "examplefields": {
             "type": "_Horizontal_with_dial_Value",
@@ -22,7 +27,12 @@
               10,
               10
             ],
-            "label_active": "Frequency",
+            "label_active": {
+              "En": "Frequency",
+              "Fr": "Fréquence",
+              "De": "Frequenz",
+              "Es": "Frecuencia"
+            },
             "layout": {
               "width": 600,
               "height": 80,
@@ -56,7 +66,12 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": "Master Vol",
+        "label_active": {
+          "En": "Master Vol",
+          "Fr": "Vol Master",
+          "De": "Master Vol",
+          "Es": "Vol Maestro"
+        },
         "fields": {
           "examplefields": {
             "type": "_Horizontal_with_dial_Value",
@@ -65,7 +80,12 @@
               10,
               10
             ],
-            "label_active": "Master Vol",
+            "label_active": {
+              "En": "Master Vol",
+              "Fr": "Vol Master",
+              "De": "Master Vol",
+              "Es": "Vol Maestro"
+            },
             "layout": {
               "width": 600,
               "height": 100,
@@ -92,7 +112,12 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": "Delay",
+        "label_active": {
+          "En": "Delay",
+          "Fr": "Delay",
+          "De": "Delay",
+          "Es": "Delay"
+        },
         "fields": {
           "examplefields": {
             "type": "_Horizontal_with_dial_Value",
@@ -101,7 +126,12 @@
               10,
               10
             ],
-            "label_active": "Delay",
+            "label_active": {
+              "En": "Delay",
+              "Fr": "Delay",
+              "De": "Delay",
+              "Es": "Delay"
+            },
             "layout": {
               "width": 600,
               "height": 120,
@@ -128,7 +158,12 @@
       },
       "element4": {
         "type": "OcaBlock",
-        "label_active": "Decay",
+        "label_active": {
+          "En": "Decay",
+          "Fr": "Decay",
+          "De": "Decay",
+          "Es": "Decay"
+        },
         "fields": {
           "examplefields": {
             "type": "_Horizontal_with_dial_Value",
@@ -137,7 +172,12 @@
               10,
               10
             ],
-            "label_active": "Decay",
+            "label_active": {
+              "En": "Decay",
+              "Fr": "Decay",
+              "De": "Decay",
+              "Es": "Decay"
+            },
             "layout": {
               "width": 600,
               "height": 70,
@@ -159,7 +199,12 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": "Pitch Shift",
+        "label_active": {
+          "En": "Pitch Shift",
+          "Fr": "Pitch Shift",
+          "De": "Pitch Shift",
+          "Es": "Pitch Shift"
+        },
         "fields": {
           "examplefields": {
             "type": "_Horizontal_with_dial_Value",
@@ -168,7 +213,12 @@
               10,
               10
             ],
-            "label_active": "Pitch Shift",
+            "label_active": {
+              "En": "Pitch Shift",
+              "Fr": "Pitch Shift",
+              "De": "Pitch Shift",
+              "Es": "Pitch Shift"
+            },
             "layout": {
               "width": 600,
               "height": 90,

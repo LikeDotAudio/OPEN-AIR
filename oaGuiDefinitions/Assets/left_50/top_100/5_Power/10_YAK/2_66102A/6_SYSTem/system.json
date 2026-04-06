@@ -13,7 +13,12 @@
     "blocks": {
       "System": {
         "type": "OcaBlock",
-        "description": "System Utilities",
+        "description": {
+          "En": "System Utilities",
+          "Fr": "Système Utilities",
+          "De": "System Utilities",
+          "Es": "Sistema Utilities"
+        },
         "fields": {
           "Read_Error": {
             "type": "OcaBlock",
@@ -46,7 +51,12 @@
                   "error_msg": {
                     "value": "Error Message",
                     "type": "_GuiValue",
-                    "label": "Error",
+                    "label": {
+                      "En": "Error",
+                      "Fr": "Erreur",
+                      "De": "Fehler",
+                      "Es": "Error"
+                    },
                     "units": ""
                   }
                 }

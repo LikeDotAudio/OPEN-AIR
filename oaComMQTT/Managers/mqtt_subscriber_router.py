@@ -11,7 +11,7 @@ from loguru import logger
 import inspect
 from oaLogging.Methods.matrix_gate import matrix_log
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from ..Core.mqtt_message import MqttMessage
 from ..Core.mqtt_router import MqttRouter
 

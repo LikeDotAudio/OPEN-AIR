@@ -13,11 +13,21 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": "Set Point",
+        "label_active": {
+          "En": "Set Point",
+          "Fr": "Set Point",
+          "De": "Set Point",
+          "Es": "Set Point"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartValue",
-            "label": "Set Point",
+            "label": {
+              "En": "Set Point",
+              "Fr": "Set Point",
+              "De": "Set Point",
+              "Es": "Set Point"
+            },
             "notes": "An editable box for setting a numerical value with units.",
             "geometry": {
               "width": 150,
@@ -29,7 +39,7 @@
             "domain": {
               "primary": {
                 "value_default": "25.0",
-                "units": "\u00b0C"
+                "units": "°C"
               }
             },
             "interaction": {
@@ -41,11 +51,21 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": "Name",
+        "label_active": {
+          "En": "Name",
+          "Fr": "Name",
+          "De": "Name",
+          "Es": "Name"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartValue",
-            "label": "Name",
+            "label": {
+              "En": "Name",
+              "Fr": "Name",
+              "De": "Name",
+              "Es": "Name"
+            },
             "notes": "An editable box for entering text, no units.",
             "geometry": {
               "width": 200,
@@ -67,11 +87,21 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": "IP Address",
+        "label_active": {
+          "En": "IP Address",
+          "Fr": "IP Address",
+          "De": "IP Address",
+          "Es": "IP Address"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartValue",
-            "label": "IP Address",
+            "label": {
+              "En": "IP Address",
+              "Fr": "IP Address",
+              "De": "IP Address",
+              "Es": "IP Address"
+            },
             "notes": "Input field specifically for IP addresses.",
             "geometry": {
               "width": 180,
@@ -92,11 +122,21 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": "Delay",
+        "label_active": {
+          "En": "Delay",
+          "Fr": "Delay",
+          "De": "Delay",
+          "Es": "Delay"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartValue",
-            "label": "Delay",
+            "label": {
+              "En": "Delay",
+              "Fr": "Delay",
+              "De": "Delay",
+              "Es": "Delay"
+            },
             "notes": "Compact input for a small numerical value.",
             "geometry": {
               "width": 120,
@@ -118,11 +158,21 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": "Password",
+        "label_active": {
+          "En": "Password",
+          "Fr": "Password",
+          "De": "Password",
+          "Es": "Password"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartValue",
-            "label": "Password",
+            "label": {
+              "En": "Password",
+              "Fr": "Password",
+              "De": "Password",
+              "Es": "Password"
+            },
             "notes": "Example of a value box for sensitive input (visual only).",
             "geometry": {
               "width": 170,

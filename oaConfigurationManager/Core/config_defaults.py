@@ -1,0 +1,85 @@
+# Core/config_defaults.py
+# Author: Anthony Peter Kuzub
+# Version: 1.0.0
+#
+# Description: Brief summary of purpose
+
+class ConfigDefaults:
+    """Standardized default values for the OPEN-AIR configuration schema."""
+    
+    # Versioning
+    CURRENT_VERSION = "unknown"
+    
+    # Debugging
+    ENABLE_DEBUG_MODE = False
+    ENABLE_DEBUG_SCREEN = False
+    ENABLE_LOG_TO_FILE = True
+    
+    # UI Layout
+    UI_LAYOUT_SPLIT_EQUAL = 50
+    UI_LAYOUT_FULL_WEIGHT = 100
+    SHOW_RELOAD_BUTTON = True 
+    RELOAD_CONFIG_DISPLAYED = False 
+    
+    # System
+    MISSION_CRITICAL_MODE = False
+    SYSTEM_LANGUAGE = "En"
+    
+    # MQTT
+    MQTT_BROKER_ADDRESS = "localhost"
+    MQTT_BROKER_PORT = 1883
+    MQTT_USERNAME = None
+    MQTT_PASSWORD = None
+    MQTT_RETAIN_BEHAVIOR = False 
+    MQTT_BASE_TOPIC = "OPEN-AIR" 
+
+    # Font Settings
+    DEFAULT_FONT_FAMILY = "Helvetica"
+    DEFAULT_FONT_SIZE = 10
+    HEADER_FONT_FAMILY = "Helvetica"
+    HEADER_FONT_SIZE = 12
+
+    # Scan Settings
+    SCAN_GATEWAYS = True
+    SCAN_USB = True
+    SCAN_IP_DIRECT = True
+    SCAN_AES70 = True
+    SCAN_OSC = True
+    SCAN_SNMP = True
+    SCAN_MIDI = True
+
+    # VISA Settings
+    VISA_PROBE_PROTOCOL = "http"
+    VISA_PROBE_PATH = "html/instrumentspage.html"
+
+    # SNMP Settings
+    SNMP_PORT = 161
+
+    # OSC Settings
+    OSC_RX_PORT = 8000
+    OSC_TX_PORT = 9000
+    OSC_REMOTE_IP = "127.0.0.1"
+
+    # REST Settings
+    REST_HOST = "0.0.0.0"
+    REST_PORT = 8000
+    REST_CORS_ORIGINS = "*"
+
+    # Debug Matrix Defaults
+    DEBUG_MATRIX = {
+        "MASTER_DEBUG_ENABLE": False,
+        "SYS_COMMS": False,
+        "SYS_GUI": False,
+        "SYS_DATA": False,
+        "SYS_ROUTER": False,
+        "SYS_CORE": False,
+        "ELEMENT_MQTT": False,
+        "ELEMENT_SNMP": False,
+        "ELEMENT_MIDI": False,
+        "ELEMENT_OSC": False,
+        "ELEMENT_AES70": False,
+        "ELEMENT_REST": False,
+        "ELEMENT_GUI_BUILDER": False
+    }
+    MUTE_FUNCTIONS = ""
+    FORCE_FUNCTIONS = ""

@@ -14,7 +14,12 @@
       "fields": {
         "Meter_1": {
           "type": "_NeedleVUMeter",
-          "label": "Hex 1",
+          "label": {
+            "En": "Hex 1",
+            "Fr": "Hex 1",
+            "De": "Hex 1",
+            "Es": "Hex 1"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -37,7 +42,12 @@
               "overlay_style": "dome"
             }
           },
-          "label_active": "Hex 1",
+          "label_active": {
+            "En": "Hex 1",
+            "Fr": "Hex 1",
+            "De": "Hex 1",
+            "Es": "Hex 1"
+          },
           "width": 250,
           "height": 250,
           "Orientation": "vertical",
@@ -57,7 +67,12 @@
         },
         "Meter_2": {
           "type": "_NeedleVUMeter",
-          "label": "Super_Gem 2",
+          "label": {
+            "En": "Super_Gem 2",
+            "Fr": "Super_Gem 2",
+            "De": "Super_Gem 2",
+            "Es": "Super_Gem 2"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -80,7 +95,12 @@
               "overlay_style": "aperture_mask"
             }
           },
-          "label_active": "Super_Gem 2",
+          "label_active": {
+            "En": "Super_Gem 2",
+            "Fr": "Super_Gem 2",
+            "De": "Super_Gem 2",
+            "Es": "Super_Gem 2"
+          },
           "width": 250,
           "height": 250,
           "Orientation": "vertical",

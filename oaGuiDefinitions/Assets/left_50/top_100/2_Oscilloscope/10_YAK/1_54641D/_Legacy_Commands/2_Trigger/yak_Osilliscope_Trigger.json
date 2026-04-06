@@ -13,11 +13,21 @@
     "blocks": {
       "rig": {
         "type": "OcaBlock",
-        "description": "Scope Configuration",
+        "description": {
+          "En": "Scope Configuration",
+          "Fr": "Scope Configuration",
+          "De": "Scope Konfiguration",
+          "Es": "Scope Configuración"
+        },
         "fields": {
           "Acquisition_Setup": {
             "type": "OcaBlock",
-            "description": "Acquire Mode & Averaging",
+            "description": {
+              "En": "Acquire Mode & Averaging",
+              "Fr": "Acquire Mode & Moyennage",
+              "De": "Acquire Modus & Mittelung",
+              "Es": "Acquire Modo & Promediado"
+            },
             "fields": {
               "Set_Acquire_Mode_NORMal": {
                 "type": "OcaBlock",
@@ -50,8 +60,18 @@
                       "type": {
                         "value": "NORMal",
                         "type": "_GuiValue",
-                        "label": "Type",
-                        "description": "NORMal, AVERage, PEAK, HRESolution"
+                        "label": {
+                          "En": "Type",
+                          "Fr": "Type",
+                          "De": "Typ",
+                          "Es": "Tipo"
+                        },
+                        "description": {
+                          "En": "NORMal, AVERage, PEAK, HRESolution",
+                          "Fr": "NORMal, AVERage, PEAK, HRESolution",
+                          "De": "NORMal, AVERage, PEAK, HRESolution",
+                          "Es": "NORMal, AVERage, PEAK, HRESolution"
+                        }
                       }
                     }
                   }
@@ -88,8 +108,18 @@
                       "type": {
                         "value": "AVERage",
                         "type": "_GuiValue",
-                        "label": "Type",
-                        "description": "NORMal, AVERage, PEAK, HRESolution"
+                        "label": {
+                          "En": "Type",
+                          "Fr": "Type",
+                          "De": "Typ",
+                          "Es": "Tipo"
+                        },
+                        "description": {
+                          "En": "NORMal, AVERage, PEAK, HRESolution",
+                          "Fr": "NORMal, AVERage, PEAK, HRESolution",
+                          "De": "NORMal, AVERage, PEAK, HRESolution",
+                          "Es": "NORMal, AVERage, PEAK, HRESolution"
+                        }
                       }
                     }
                   }
@@ -126,8 +156,18 @@
                       "type": {
                         "value": "PEAK",
                         "type": "_GuiValue",
-                        "label": "Type",
-                        "description": "NORMal, AVERage, PEAK, HRESolution"
+                        "label": {
+                          "En": "Type",
+                          "Fr": "Type",
+                          "De": "Typ",
+                          "Es": "Tipo"
+                        },
+                        "description": {
+                          "En": "NORMal, AVERage, PEAK, HRESolution",
+                          "Fr": "NORMal, AVERage, PEAK, HRESolution",
+                          "De": "NORMal, AVERage, PEAK, HRESolution",
+                          "Es": "NORMal, AVERage, PEAK, HRESolution"
+                        }
                       }
                     }
                   }
@@ -164,8 +204,18 @@
                       "type": {
                         "value": "HRESolution",
                         "type": "_GuiValue",
-                        "label": "Type",
-                        "description": "NORMal, AVERage, PEAK, HRESolution"
+                        "label": {
+                          "En": "Type",
+                          "Fr": "Type",
+                          "De": "Typ",
+                          "Es": "Tipo"
+                        },
+                        "description": {
+                          "En": "NORMal, AVERage, PEAK, HRESolution",
+                          "Fr": "NORMal, AVERage, PEAK, HRESolution",
+                          "De": "NORMal, AVERage, PEAK, HRESolution",
+                          "Es": "NORMal, AVERage, PEAK, HRESolution"
+                        }
                       }
                     }
                   }
@@ -202,8 +252,18 @@
                       "count": {
                         "value": "8",
                         "type": "_GuiValue",
-                        "label": "Count",
-                        "description": "2 to 65536"
+                        "label": {
+                          "En": "Count",
+                          "Fr": "Count",
+                          "De": "Count",
+                          "Es": "Count"
+                        },
+                        "description": {
+                          "En": "2 to 65536",
+                          "Fr": "2 to 65536",
+                          "De": "2 to 65536",
+                          "Es": "2 to 65536"
+                        }
                       }
                     }
                   }
@@ -213,7 +273,12 @@
           },
           "Trigger_Setup": {
             "type": "OcaBlock",
-            "description": "Trigger Configuration",
+            "description": {
+              "En": "Trigger Configuration",
+              "Fr": "Déclencheur Configuration",
+              "De": "Trigger Konfiguration",
+              "Es": "Disparo Configuration"
+            },
             "fields": {
               "Set_Trigger_Mode": {
                 "type": "OcaBlock",
@@ -246,8 +311,18 @@
                       "mode": {
                         "value": "EDGE",
                         "type": "_GuiValue",
-                        "label": "Mode",
-                        "description": "EDGE, GLITch, PATTern, TV, DELay"
+                        "label": {
+                          "En": "Mode",
+                          "Fr": "Mode",
+                          "De": "Modus",
+                          "Es": "Modo"
+                        },
+                        "description": {
+                          "En": "EDGE, GLITch, PATTern, TV, DELay",
+                          "Fr": "EDGE, GLITch, PATTern, TV, DELay",
+                          "De": "EDGE, GLITch, PATTern, TV, DELay",
+                          "Es": "EDGE, GLITch, PATTern, TV, DELay"
+                        }
                       }
                     }
                   }
@@ -284,8 +359,18 @@
                       "sweep": {
                         "value": "AUTO",
                         "type": "_GuiValue",
-                        "label": "Sweep",
-                        "description": "AUTO or NORMal"
+                        "label": {
+                          "En": "Sweep",
+                          "Fr": "Sweep",
+                          "De": "Sweep",
+                          "Es": "Sweep"
+                        },
+                        "description": {
+                          "En": "AUTO or NORMal",
+                          "Fr": "AUTO ou NORMAL",
+                          "De": "AUTO oder NORMAL",
+                          "Es": "AUTO o NORMAL"
+                        }
                       }
                     }
                   }
@@ -322,8 +407,18 @@
                       "source": {
                         "value": "CHAN1",
                         "type": "_GuiValue",
-                        "label": "Source",
-                        "description": "CHAN1, CHAN2, EXT, LINE"
+                        "label": {
+                          "En": "Source",
+                          "Fr": "Source",
+                          "De": "Quelle",
+                          "Es": "Fuente"
+                        },
+                        "description": {
+                          "En": "CHAN1, CHAN2, EXT, LINE",
+                          "Fr": "CAN1, CAN2, EXT, LIGNE",
+                          "De": "KAN1, KAN2, EXT, LINE",
+                          "Es": "CAN1, CAN2, EXT, LÍNEA"
+                        }
                       }
                     }
                   }
@@ -356,8 +451,18 @@
                     "source": {
                       "value": "CHAN1",
                       "type": "_GuiValue",
-                      "label": "Source",
-                      "description": "CHAN1, CHAN2, EXT, LINE"
+                      "label": {
+                        "En": "Source",
+                        "Fr": "Source",
+                        "De": "Quelle",
+                        "Es": "Fuente"
+                      },
+                      "description": {
+                        "En": "CHAN1, CHAN2, EXT, LINE",
+                        "Fr": "CAN1, CAN2, EXT, LIGNE",
+                        "De": "KAN1, KAN2, EXT, LINE",
+                        "Es": "CAN1, CAN2, EXT, LÍNEA"
+                      }
                     }
                   }
                 }
@@ -393,8 +498,18 @@
                       "source": {
                         "value": "CHAN2",
                         "type": "_GuiValue",
-                        "label": "Source",
-                        "description": "CHAN1, CHAN2, EXT, LINE"
+                        "label": {
+                          "En": "Source",
+                          "Fr": "Source",
+                          "De": "Quelle",
+                          "Es": "Fuente"
+                        },
+                        "description": {
+                          "En": "CHAN1, CHAN2, EXT, LINE",
+                          "Fr": "CAN1, CAN2, EXT, LIGNE",
+                          "De": "KAN1, KAN2, EXT, LINE",
+                          "Es": "CAN1, CAN2, EXT, LÍNEA"
+                        }
                       }
                     }
                   }
@@ -431,8 +546,18 @@
                       "source": {
                         "value": "EXT",
                         "type": "_GuiValue",
-                        "label": "Source",
-                        "description": "CHAN1, CHAN2, EXT, LINE"
+                        "label": {
+                          "En": "Source",
+                          "Fr": "Source",
+                          "De": "Quelle",
+                          "Es": "Fuente"
+                        },
+                        "description": {
+                          "En": "CHAN1, CHAN2, EXT, LINE",
+                          "Fr": "CAN1, CAN2, EXT, LIGNE",
+                          "De": "KAN1, KAN2, EXT, LINE",
+                          "Es": "CAN1, CAN2, EXT, LÍNEA"
+                        }
                       }
                     }
                   }
@@ -469,9 +594,19 @@
                       "level": {
                         "value": "0.0",
                         "type": "_GuiValue",
-                        "label": "Level",
+                        "label": {
+                          "En": "Level",
+                          "Fr": "Niveau",
+                          "De": "Pegel",
+                          "Es": "Nivel"
+                        },
                         "units": "V",
-                        "description": "Level in Volts"
+                        "description": {
+                          "En": "Level in Volts",
+                          "Fr": "Niveau in Volts",
+                          "De": "Pegel in Volts",
+                          "Es": "Nivel in Volts"
+                        }
                       }
                     }
                   }

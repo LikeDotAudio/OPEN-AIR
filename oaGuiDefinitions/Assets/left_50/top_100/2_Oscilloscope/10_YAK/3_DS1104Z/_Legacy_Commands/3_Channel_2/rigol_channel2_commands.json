@@ -12,11 +12,21 @@
     "blocks": {
       "nab": {
         "type": "OcaBlock",
-        "description": "Rigol Measurements",
+        "description": {
+          "En": "Rigol Measurements",
+          "Fr": "Mesures Rigol",
+          "De": "Rigol-Messungen",
+          "Es": "Mediciones de Rigol"
+        },
         "fields": {
           "Measurements_CH2": {
             "type": "OcaBlock",
-            "description": "Channel 2 Stats",
+            "description": {
+              "En": "Channel 2 Stats",
+              "Fr": "Canal 2",
+              "De": "Kanal 2",
+              "Es": "Canal 2"
+            },
             "fields": {
               "Get_Stats_CH2": {
                 "type": "OcaBlock",
@@ -72,11 +82,21 @@
       },
       "rig": {
         "type": "OcaBlock",
-        "description": "Scope Configuration",
+        "description": {
+          "En": "Scope Configuration",
+          "Fr": "Scope Configuration",
+          "De": "Scope Konfiguration",
+          "Es": "Scope Configuración"
+        },
         "fields": {
           "Config_CH2": {
             "type": "OcaBlock",
-            "description": "Channel 2 Vertical",
+            "description": {
+              "En": "Channel 2 Vertical",
+              "Fr": "Canal 2 Vertical",
+              "De": "Kanal 2 Vertikal",
+              "Es": "Canal 2 Vertical"
+            },
             "fields": {
               "CH2_Scale": {
                 "type": "OcaBlock",
@@ -253,7 +273,12 @@
                       "limit": {
                         "value": "20M",
                         "type": "_Value",
-                        "description": "20M or OFF"
+                        "description": {
+                          "En": "20M or OFF",
+                          "Fr": "20M or OFF",
+                          "De": "20M or OFF",
+                          "Es": "20M or OFF"
+                        }
                       }
                     }
                   }
@@ -265,14 +290,24 @@
       },
       "Do": {
         "type": "OcaBlock",
-        "description": "Actions and Toggles",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
         "fields": {
           "Channel_Display_Control": {
             "type": "OcaBlock",
             "fields": {
               "CH2_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": "CH2 ON",
+                "label_inactive": {
+                  "En": "CH2 ON",
+                  "Fr": "CH 2",
+                  "De": "CH 2",
+                  "Es": "CH 2"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -292,7 +327,12 @@
               },
               "CH2_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": "CH2 OFF",
+                "label_inactive": {
+                  "En": "CH2 OFF",
+                  "Fr": "CH 2",
+                  "De": "CH 2",
+                  "Es": "CH 2"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",

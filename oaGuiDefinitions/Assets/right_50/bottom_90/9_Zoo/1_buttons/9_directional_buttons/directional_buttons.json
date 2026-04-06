@@ -13,11 +13,21 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": "Navigation",
+        "label_active": {
+          "En": "Navigation",
+          "Fr": "Navigation",
+          "De": "Navigation",
+          "Es": "Navigation"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartNav",
-            "label": "Navigation",
+            "label": {
+              "En": "Navigation",
+              "Fr": "Navigation",
+              "De": "Navigation",
+              "Es": "Navigation"
+            },
             "notes": "Standard directional buttons for navigation.",
             "interaction": {
               "is_read_only": false
@@ -27,11 +37,21 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": "Camera Movement",
+        "label_active": {
+          "En": "Camera Movement",
+          "Fr": "Camera Movement",
+          "De": "Camera Movement",
+          "Es": "Camera Movement"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartNav",
-            "label": "Camera Movement",
+            "label": {
+              "En": "Camera Movement",
+              "Fr": "Camera Movement",
+              "De": "Camera Movement",
+              "Es": "Camera Movement"
+            },
             "notes": "Controls for moving a camera (up, down, left, right).",
             "interaction": {
               "is_read_only": false
@@ -41,11 +61,21 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": "Robot Controls",
+        "label_active": {
+          "En": "Robot Controls",
+          "Fr": "Robot Controls",
+          "De": "Robot Controls",
+          "Es": "Robot Controls"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartNav",
-            "label": "Robot Controls",
+            "label": {
+              "En": "Robot Controls",
+              "Fr": "Robot Controls",
+              "De": "Robot Controls",
+              "Es": "Robot Controls"
+            },
             "notes": "Used to control the movement of a robot.",
             "interaction": {
               "is_read_only": false
@@ -55,11 +85,21 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": "Cursor",
+        "label_active": {
+          "En": "Cursor",
+          "Fr": "Cursor",
+          "De": "Cursor",
+          "Es": "Cursor"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartNav",
-            "label": "Cursor",
+            "label": {
+              "En": "Cursor",
+              "Fr": "Cursor",
+              "De": "Cursor",
+              "Es": "Cursor"
+            },
             "notes": "Generic directional buttons for cursor movement.",
             "interaction": {
               "is_read_only": false
@@ -69,11 +109,21 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": "Focus Adjust",
+        "label_active": {
+          "En": "Focus Adjust",
+          "Fr": "Focus Adjust",
+          "De": "Focus Adjust",
+          "Es": "Focus Adjust"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartNav",
-            "label": "Focus Adjust",
+            "label": {
+              "En": "Focus Adjust",
+              "Fr": "Focus Adjust",
+              "De": "Focus Adjust",
+              "Es": "Focus Adjust"
+            },
             "notes": "Buttons for adjusting focus in optical systems.",
             "interaction": {
               "is_read_only": false

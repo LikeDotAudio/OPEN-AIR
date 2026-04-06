@@ -151,7 +151,8 @@ class MqttAsyncWorker:
         # ⚡ PROTOCOL ALIGNMENT: aiomqtt expects str, bytes, or None
         if isinstance(payload, (dict, list)):
             import orjson
-            payload = orjson.dumps(payload)
+            # 🛡️ ROBUSTNESS: Use default=str to handle pathlib.Path and other non-JSON types
+            payload = orjson.dumps(payload, default=str)
         elif isinstance(payload, bytes):
             pass
         elif payload is not None and not isinstance(payload, str):

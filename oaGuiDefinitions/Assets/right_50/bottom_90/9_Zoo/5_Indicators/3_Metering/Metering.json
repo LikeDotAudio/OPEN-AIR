@@ -13,7 +13,12 @@
     "blocks": {
       "elements": {
         "type": "OcaBlock",
-        "label_active": "Download Progress",
+        "label_active": {
+          "En": "Download Progress",
+          "Fr": "Download Progress",
+          "De": "Download Progress",
+          "Es": "Download Progress"
+        },
         "fields": {
           "examplefields": {
             "horizontal_magnitude_meter": {

@@ -13,7 +13,12 @@
     "blocks": {
       "Table": {
         "type": "OcaTable",
-        "description": "Discovered Devices",
+        "description": {
+          "En": "Discovered Devices",
+          "Fr": "Discovered Devices",
+          "De": "Discovered Devices",
+          "Es": "Discovered Devices"
+        },
         "headers": [
           "type",
           "resource_string",

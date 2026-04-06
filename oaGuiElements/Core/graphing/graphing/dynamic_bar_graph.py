@@ -1,4 +1,5 @@
 # graphing/dynamic_bar_graph.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -15,7 +16,7 @@ from typing import Dict, Any, List
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
@@ -111,7 +112,7 @@ class DynamicBarGraph(GraphPlotter):
             list(self.x_data[dataset_id]),
             list(self.y_data[dataset_id]),
             color=style.get("line_color", "cyan"),
-            label=ds_config.get("label", dataset_id),
+            label=ds_get_text(config.get("label"), dataset_id),
             alpha=0.7
         )
         

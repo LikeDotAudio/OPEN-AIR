@@ -14,7 +14,12 @@
       "fields": {
         "Meter_1": {
           "type": "_NeedleVUMeter",
-          "label": "Squircle 1",
+          "label": {
+            "En": "Squircle 1",
+            "Fr": "Squircle 1",
+            "De": "Squircle 1",
+            "Es": "Squircle 1"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -40,7 +45,12 @@
         },
         "Meter_2": {
           "type": "_NeedleVUMeter",
-          "label": "Super_Gem 2",
+          "label": {
+            "En": "Super_Gem 2",
+            "Fr": "Super_Gem 2",
+            "De": "Super_Gem 2",
+            "Es": "Super_Gem 2"
+          },
           "geometry": {
             "width": 400,
             "height": 200
@@ -66,7 +76,12 @@
         },
         "Meter_3": {
           "type": "_NeedleVUMeter",
-          "label": "Squircle 3",
+          "label": {
+            "En": "Squircle 3",
+            "Fr": "Squircle 3",
+            "De": "Squircle 3",
+            "Es": "Squircle 3"
+          },
           "geometry": {
             "width": 400,
             "height": 200

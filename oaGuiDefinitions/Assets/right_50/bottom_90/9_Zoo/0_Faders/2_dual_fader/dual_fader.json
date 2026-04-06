@@ -13,7 +13,12 @@
     "blocks": {
       "dual_fader_h": {
         "type": "_CustomDualHorizontalFader",
-        "label": "Horizontal Dual Fader",
+        "label": {
+          "En": "Horizontal Dual Fader",
+          "Fr": "Horizontal Dual Fader",
+          "De": "Horizontal Dual Fader",
+          "Es": "Horizontal Dual Fader"
+        },
         "notes": "Standard horizontal configuration",
         "geometry": {
           "width": 400,
@@ -53,7 +58,12 @@
       },
       "dual_fader_v": {
         "type": "_CustomDualVerticalFader",
-        "label": "Vertical Dual Fader",
+        "label": {
+          "En": "Vertical Dual Fader",
+          "Fr": "Vertical Dual Fader",
+          "De": "Vertikal Dual Fader",
+          "Es": "Vertical Dual Fader"
+        },
         "notes": "Standard vertical configuration",
         "geometry": {
           "width": 100,
@@ -93,7 +103,12 @@
       },
       "frequency_bounds_h": {
         "type": "_CustomDualHorizontalFader",
-        "label": "Frequency Bounds (Hz) - H",
+        "label": {
+          "En": "Frequency Bounds (Hz) - H",
+          "Fr": "Fréquence Bounds (Hz) - H",
+          "De": "Frequenz Bounds (Hz) - H",
+          "Es": "Frecuencia Bounds (Hz) - H"
+        },
         "notes": "Horizontal frequency range selector",
         "geometry": {
           "width": 500,
@@ -131,7 +146,12 @@
       },
       "stereo_balance_v": {
         "type": "_CustomDualVerticalFader",
-        "label": "Stereo Width Control - V",
+        "label": {
+          "En": "Stereo Width Control - V",
+          "Fr": "Stereo Largeur Control - V",
+          "De": "Stereo Breite Control - V",
+          "Es": "Stereo Ancho Control - V"
+        },
         "notes": "Vertical balance/width control",
         "geometry": {
           "width": 120,
@@ -172,7 +192,12 @@
       },
       "pan_control_h": {
         "type": "_CustomDualHorizontalFader",
-        "label": "Stereo Pan Control - H",
+        "label": {
+          "En": "Stereo Pan Control - H",
+          "Fr": "Stereo Panoramique Control - H",
+          "De": "Stereo Panorama Control - H",
+          "Es": "Stereo Panorámico Control - H"
+        },
         "notes": "Horizontal pan control",
         "geometry": {
           "width": 450,

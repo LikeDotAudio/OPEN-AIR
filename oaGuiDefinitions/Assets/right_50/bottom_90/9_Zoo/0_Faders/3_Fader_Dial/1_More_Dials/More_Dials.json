@@ -13,7 +13,12 @@
     "blocks": {
       "Dial_Expansion": {
         "type": "OcaBlock",
-        "description": "20 Exhaustive Horizontal + Dial Variations showing FULL Randomness and Capabilities",
+        "description": {
+          "En": "20 Exhaustive Horizontal + Dial Variations showing FULL Randomness and Capabilities",
+          "Fr": "20 Exhaustive Horizontal + Dial Variations showing FULL Aléatoire and Capacités",
+          "De": "20 Exhaustive Horizontal + Dial Variationen showing FULL Zufälligkeit and Fähigkeiten",
+          "Es": "20 Exhaustive Horizontal + Dial Variaciones showing FULL Aleatoriedad and Capacidades"
+        },
         "layout_columns": 1,
         "fields": {
           "dial_1": {
@@ -26,7 +31,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Vintage Voltage",
+            "label_active": {
+              "En": "Vintage Voltage",
+              "Fr": "Vintage Voltage",
+              "De": "Vintage Voltage",
+              "Es": "Vintage Voltage"
+            },
             "min": 0,
             "max": 10,
             "value": 5,
@@ -64,7 +74,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Industrial Current",
+            "label_active": {
+              "En": "Industrial Current",
+              "Fr": "Industriel Current",
+              "De": "Industriell Current",
+              "Es": "Industrial Current"
+            },
             "min": 0,
             "max": 50,
             "value": 12,
@@ -98,7 +113,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Modern Power",
+            "label_active": {
+              "En": "Modern Power",
+              "Fr": "Moderne Power",
+              "De": "Modern Power",
+              "Es": "Moderno Power"
+            },
             "min": 0,
             "max": 5000,
             "value": 1500,
@@ -127,7 +147,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Ghost Tuning",
+            "label_active": {
+              "En": "Ghost Tuning",
+              "Fr": "Ghost Tuning",
+              "De": "Ghost Tuning",
+              "Es": "Ghost Tuning"
+            },
             "min": 88,
             "max": 108,
             "value": 94.5,
@@ -162,7 +187,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "High-Res Bias",
+            "label_active": {
+              "En": "High-Res Bias",
+              "Fr": "High-Res Bias",
+              "De": "High-Res Bias",
+              "Es": "High-Res Bias"
+            },
             "min": -5,
             "max": 5,
             "value": 0.123,
@@ -195,7 +225,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Log Harmonic",
+            "label_active": {
+              "En": "Log Harmonic",
+              "Fr": "Log Harmonic",
+              "De": "Log Harmonic",
+              "Es": "Log Harmonic"
+            },
             "min": 20,
             "max": 20000,
             "value": 440,
@@ -225,7 +260,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Deep Space",
+            "label_active": {
+              "En": "Deep Space",
+              "Fr": "Deep Space",
+              "De": "Deep Space",
+              "Es": "Deep Space"
+            },
             "min": 0,
             "max": 1,
             "value": 0.005,
@@ -255,7 +295,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Ruby Gain",
+            "label_active": {
+              "En": "Ruby Gain",
+              "Fr": "Ruby Gain",
+              "De": "Ruby Verstärkung",
+              "Es": "Ruby Ganancia"
+            },
             "min": -100,
             "max": 12,
             "value": -12,
@@ -285,7 +330,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Emerald Phase",
+            "label_active": {
+              "En": "Emerald Phase",
+              "Fr": "Emerald Phase",
+              "De": "Emerald Phase",
+              "Es": "Emerald Fase"
+            },
             "min": -180,
             "max": 180,
             "value": 90,
@@ -315,7 +365,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Big Knob",
+            "label_active": {
+              "En": "Big Knob",
+              "Fr": "Big Knob",
+              "De": "Big Knob",
+              "Es": "Big Knob"
+            },
             "min": 0,
             "max": 100,
             "value": 50,
@@ -343,7 +398,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Tiny Precision",
+            "label_active": {
+              "En": "Tiny Precision",
+              "Fr": "Tiny Precision",
+              "De": "Tiny Precision",
+              "Es": "Tiny Precision"
+            },
             "min": 0,
             "max": 1,
             "value": 0.5,
@@ -370,7 +430,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Stealth Black",
+            "label_active": {
+              "En": "Stealth Black",
+              "Fr": "Stealth Black",
+              "De": "Stealth Black",
+              "Es": "Stealth Black"
+            },
             "min": 0,
             "max": 100,
             "value": 20,
@@ -405,7 +470,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Gold Standard",
+            "label_active": {
+              "En": "Gold Standard",
+              "Fr": "Gold Standard",
+              "De": "Gold Standard",
+              "Es": "Gold Estándar"
+            },
             "min": 0,
             "max": 1000,
             "value": 777,
@@ -434,7 +504,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Oceanic Depth",
+            "label_active": {
+              "En": "Oceanic Depth",
+              "Fr": "Oceanic Profondeur",
+              "De": "Oceanic Tiefe",
+              "Es": "Oceanic Profundidad"
+            },
             "min": 0,
             "max": 11000,
             "value": 3000,
@@ -463,7 +538,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Cyberpunk",
+            "label_active": {
+              "En": "Cyberpunk",
+              "Fr": "Cyberpunk",
+              "De": "Cyberpunk",
+              "Es": "Cyberpunk"
+            },
             "min": 0,
             "max": 100,
             "value": 80,
@@ -492,7 +572,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Log Temp",
+            "label_active": {
+              "En": "Log Temp",
+              "Fr": "Log Temp",
+              "De": "Log Temp",
+              "Es": "Log Temp"
+            },
             "min": 1,
             "max": 6000,
             "value": 5778,
@@ -521,7 +606,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Binary",
+            "label_active": {
+              "En": "Binary",
+              "Fr": "Binary",
+              "De": "Binary",
+              "Es": "Binary"
+            },
             "min": 0,
             "max": 1,
             "value": 0,
@@ -550,7 +640,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Wide Track",
+            "label_active": {
+              "En": "Wide Track",
+              "Fr": "Wide Track",
+              "De": "Wide Track",
+              "Es": "Wide Track"
+            },
             "min": 0,
             "max": 100,
             "value": 50,
@@ -577,7 +672,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "Panner",
+            "label_active": {
+              "En": "Panner",
+              "Fr": "Panner",
+              "De": "Panner",
+              "Es": "Panner"
+            },
             "min": -100,
             "max": 100,
             "value": 0,
@@ -606,7 +706,12 @@
             "layout": {
               "width": 600
             },
-            "label_active": "The End",
+            "label_active": {
+              "En": "The End",
+              "Fr": "The End",
+              "De": "The End",
+              "Es": "The End"
+            },
             "min": 0,
             "max": 1,
             "value": 1,

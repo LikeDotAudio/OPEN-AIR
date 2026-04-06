@@ -13,7 +13,12 @@
     "blocks": {
       "Knob_Zoo_Drive": {
         "type": "OcaBlock",
-        "description": "Drive/Distortion Knob Variations (8 Demos)",
+        "description": {
+          "En": "Drive/Distortion Knob Variations (8 Demos)",
+          "Fr": "Drive/Distortion Knob Variations (8 Demos)",
+          "De": "Drive/Distortion Knob Variationen (8 Demos)",
+          "Es": "Drive/Distortion Knob Variaciones (8 Demos)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -32,7 +37,12 @@
         "fields": {
           "knob_drv1": {
             "type": "_SmartKnob",
-            "label": "Gain",
+            "label": {
+              "En": "Gain",
+              "Fr": "Gain",
+              "De": "Verstärkung",
+              "Es": "Ganancia"
+            },
             "notes": "Massive Red Gain.",
             "geometry": {
               "width": 200,
@@ -86,7 +96,12 @@
           },
           "knob_drv2": {
             "type": "_SmartKnob",
-            "label": "Tone",
+            "label": {
+              "En": "Tone",
+              "Fr": "Tone",
+              "De": "Tone",
+              "Es": "Tone"
+            },
             "notes": "Yellow Tone.",
             "geometry": {
               "width": 200,
@@ -140,7 +155,12 @@
           },
           "knob_drv3": {
             "type": "_SmartKnob",
-            "label": "Presence",
+            "label": {
+              "En": "Presence",
+              "Fr": "Presence",
+              "De": "Presence",
+              "Es": "Presence"
+            },
             "notes": "Blue Presence.",
             "geometry": {
               "width": 200,
@@ -194,7 +214,12 @@
           },
           "knob_drv4": {
             "type": "_SmartKnob",
-            "label": "Bias",
+            "label": {
+              "En": "Bias",
+              "Fr": "Bias",
+              "De": "Bias",
+              "Es": "Bias"
+            },
             "notes": "Grey Bias.",
             "geometry": {
               "width": 200,
@@ -248,7 +273,12 @@
           },
           "knob_drv5": {
             "type": "_SmartKnob",
-            "label": "Fuzz",
+            "label": {
+              "En": "Fuzz",
+              "Fr": "Fuzz",
+              "De": "Fuzz",
+              "Es": "Fuzz"
+            },
             "notes": "Purple Fuzz.",
             "geometry": {
               "width": 200,
@@ -302,7 +332,12 @@
           },
           "knob_drv6": {
             "type": "_SmartKnob",
-            "label": "Crunch",
+            "label": {
+              "En": "Crunch",
+              "Fr": "Crunch",
+              "De": "Crunch",
+              "Es": "Crunch"
+            },
             "notes": "Orange Crunch.",
             "geometry": {
               "width": 200,
@@ -356,7 +391,12 @@
           },
           "knob_drv7": {
             "type": "_SmartKnob",
-            "label": "Post",
+            "label": {
+              "En": "Post",
+              "Fr": "Post",
+              "De": "Post",
+              "Es": "Post"
+            },
             "notes": "Green Post-Gain.",
             "geometry": {
               "width": 200,
@@ -410,7 +450,12 @@
           },
           "knob_drv8": {
             "type": "_SmartKnob",
-            "label": "Mix",
+            "label": {
+              "En": "Mix",
+              "Fr": "Mix",
+              "De": "Mix",
+              "Es": "Mezcla"
+            },
             "notes": "White Mix knob.",
             "geometry": {
               "width": 200,
@@ -466,7 +511,12 @@
       },
       "Knob_Zoo_Advanced": {
         "type": "OcaBlock",
-        "description": "Advanced Knob Features (Infinity, Layout, Sensitivity)",
+        "description": {
+          "En": "Advanced Knob Features (Infinity, Layout, Sensitivity)",
+          "Fr": "Avancé Knob Caractéristiques (Infinity, Layout, Sensitivity)",
+          "De": "Erweitert Knob Funktionen (Infinity, Layout, Sensitivity)",
+          "Es": "Avanzado Knob Características (Infinity, Layout, Sensitivity)"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -497,7 +547,12 @@
         "fields": {
           "knob_adv1": {
             "type": "_SmartKnob",
-            "label": "Infinite",
+            "label": {
+              "En": "Infinite",
+              "Fr": "Infinite",
+              "De": "Infinite",
+              "Es": "Infinite"
+            },
             "notes": "Wraps 0-12",
             "geometry": {
               "width": 200,
@@ -551,7 +606,12 @@
           },
           "knob_adv2": {
             "type": "_SmartKnob",
-            "label": "Fine Pitch",
+            "label": {
+              "En": "Fine Pitch",
+              "Fr": "Fine Pitch",
+              "De": "Fine Pitch",
+              "Es": "Fine Pitch"
+            },
             "notes": "Slow turn",
             "geometry": {
               "width": 200,
@@ -605,7 +665,12 @@
           },
           "knob_adv3": {
             "type": "_SmartKnob",
-            "label": "Val Top",
+            "label": {
+              "En": "Val Top",
+              "Fr": "Val Haut",
+              "De": "Val Oben",
+              "Es": "Val Arriba"
+            },
             "notes": "Value Top",
             "geometry": {
               "width": 200,
@@ -659,7 +724,12 @@
           },
           "knob_adv4": {
             "type": "_SmartKnob",
-            "label": "Val Left",
+            "label": {
+              "En": "Val Left",
+              "Fr": "Val Gauche",
+              "De": "Val Links",
+              "Es": "Val Izquierda"
+            },
             "notes": "Value Left",
             "geometry": {
               "width": 200,
@@ -713,7 +783,12 @@
           },
           "knob_adv5": {
             "type": "_SmartKnob",
-            "label": "Val Right",
+            "label": {
+              "En": "Val Right",
+              "Fr": "Val Droite",
+              "De": "Val Rechts",
+              "Es": "Val Derecha"
+            },
             "notes": "Value Right",
             "geometry": {
               "width": 200,
@@ -767,7 +842,12 @@
           },
           "knob_adv6": {
             "type": "_SmartKnob",
-            "label": "Center Val",
+            "label": {
+              "En": "Center Val",
+              "Fr": "Centre Val",
+              "De": "Zentrum Val",
+              "Es": "Centro Val"
+            },
             "notes": "Value in Center",
             "geometry": {
               "width": 200,
@@ -821,7 +901,12 @@
           },
           "knob_adv7": {
             "type": "_SmartKnob",
-            "label": "Txt Left",
+            "label": {
+              "En": "Txt Left",
+              "Fr": "Txt Gauche",
+              "De": "Txt Links",
+              "Es": "Txt Izquierda"
+            },
             "notes": "Label Left",
             "geometry": {
               "width": 200,
@@ -875,7 +960,12 @@
           },
           "knob_adv8": {
             "type": "_SmartKnob",
-            "label": "Txt Right",
+            "label": {
+              "En": "Txt Right",
+              "Fr": "Txt Droite",
+              "De": "Txt Rechts",
+              "Es": "Txt Derecha"
+            },
             "notes": "Label Right",
             "geometry": {
               "width": 200,
@@ -930,7 +1020,12 @@
         },
         "Knob_Zoo_Pan": {
           "type": "OcaBlock",
-          "description": "Pan/Spatial Knob Variations",
+          "description": {
+            "En": "Pan/Spatial Knob Variations",
+            "Fr": "Pan/Spatial Knob Variations",
+            "De": "Pan/Spatial Knob Variationen",
+            "Es": "Pan/Spatial Knob Variaciones"
+          },
           "layout_columns": 8,
           "column_sizing": [
             {
@@ -961,7 +1056,12 @@
           "fields": {
             "knob_pan1": {
               "type": "_SmartKnob",
-              "label": "Pan L",
+              "label": {
+                "En": "Pan L",
+                "Fr": "Panoramique L",
+                "De": "Panorama L",
+                "Es": "Panorámico L"
+              },
               "notes": "Left bias Pink",
               "geometry": {
                 "width": 200,
@@ -994,7 +1094,12 @@
             },
             "knob_pan2": {
               "type": "_SmartKnob",
-              "label": "Pan R",
+              "label": {
+                "En": "Pan R",
+                "Fr": "Panoramique R",
+                "De": "Panorama R",
+                "Es": "Panorámico R"
+              },
               "notes": "Right bias Blue",
               "geometry": {
                 "width": 200,
@@ -1027,7 +1132,12 @@
             },
             "knob_pan3": {
               "type": "_SmartKnob",
-              "label": "Width",
+              "label": {
+                "En": "Width",
+                "Fr": "Largeur",
+                "De": "Breite",
+                "Es": "Ancho"
+              },
               "notes": "Stereo Width",
               "geometry": {
                 "width": 200,
@@ -1060,7 +1170,12 @@
             },
             "knob_pan4": {
               "type": "_SmartKnob",
-              "label": "Balance",
+              "label": {
+                "En": "Balance",
+                "Fr": "Balance",
+                "De": "Balance",
+                "Es": "Balance"
+              },
               "notes": "Deep Purple Bal",
               "geometry": {
                 "width": 200,
@@ -1093,7 +1208,12 @@
             },
             "knob_pan5": {
               "type": "_SmartKnob",
-              "label": "Spread",
+              "label": {
+                "En": "Spread",
+                "Fr": "Spread",
+                "De": "Spread",
+                "Es": "Spread"
+              },
               "notes": "Cyan Spread",
               "geometry": {
                 "width": 200,
@@ -1126,7 +1246,12 @@
             },
             "knob_pan6": {
               "type": "_SmartKnob",
-              "label": "Depth",
+              "label": {
+                "En": "Depth",
+                "Fr": "Profondeur",
+                "De": "Tiefe",
+                "Es": "Profundidad"
+              },
               "notes": "Teal Depth",
               "geometry": {
                 "width": 200,
@@ -1159,7 +1284,12 @@
             },
             "knob_pan7": {
               "type": "_SmartKnob",
-              "label": "Azimuth",
+              "label": {
+                "En": "Azimuth",
+                "Fr": "Azimuth",
+                "De": "Azimuth",
+                "Es": "Azimuth"
+              },
               "notes": "Amber Angle",
               "geometry": {
                 "width": 200,
@@ -1192,7 +1322,12 @@
             },
             "knob_pan8": {
               "type": "_SmartKnob",
-              "label": "Elevation",
+              "label": {
+                "En": "Elevation",
+                "Fr": "Elevation",
+                "De": "Elevation",
+                "Es": "Elevation"
+              },
               "notes": "Orange Elev",
               "geometry": {
                 "width": 200,

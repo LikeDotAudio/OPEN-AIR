@@ -13,7 +13,12 @@
     "blocks": {
       "Vintage_Aesthetics": {
         "type": "OcaBlock",
-        "description": "VI. Vintage Aesthetics (Large Format Showcase)",
+        "description": {
+          "En": "VI. Vintage Aesthetics (Large Format Showcase)",
+          "Fr": "VI. Vintage Aesthetics (Large Format Showcase)",
+          "De": "VI. Vintage Aesthetics (Large Format Showcase)",
+          "Es": "VI. Vintage Aesthetics (Large Format Showcase)"
+        },
         "layout_columns": 3,
         "column_sizing": [
           {
@@ -29,7 +34,12 @@
         "fields": {
           "Vintage_Hotdog_Mask": {
             "type": "_NeedleVUMeter",
-            "label": "Hotdog Style (Dome)",
+            "label": {
+              "En": "Hotdog Style (Dome)",
+              "Fr": "Hotdog Style (Dome)",
+              "De": "Hotdog Style (Dome)",
+              "Es": "Hotdog Style (Dome)"
+            },
             "geometry": {
               "width": 300,
               "height": 200
@@ -69,7 +79,12 @@
           },
           "Vintage_Gem_Dome": {
             "type": "_NeedleVUMeter",
-            "label": "The Gem (Aperture)",
+            "label": {
+              "En": "The Gem (Aperture)",
+              "Fr": "The Gem (Aperture)",
+              "De": "The Gem (Aperture)",
+              "Es": "The Gem (Aperture)"
+            },
             "geometry": {
               "width": 250,
               "height": 250
@@ -99,7 +114,12 @@
           },
           "Vintage_Super_Gem": {
             "type": "_NeedleVUMeter",
-            "label": "The Superman (Super Gem)",
+            "label": {
+              "En": "The Superman (Super Gem)",
+              "Fr": "The Superman (Super Gem)",
+              "De": "The Superman (Super Gem)",
+              "Es": "The Superman (Super Gem)"
+            },
             "geometry": {
               "width": 250,
               "height": 250
@@ -133,7 +153,12 @@
           },
           "Vintage_Hex_Dome": {
             "type": "_NeedleVUMeter",
-            "label": "The Hex (Dome)",
+            "label": {
+              "En": "The Hex (Dome)",
+              "Fr": "The Hex (Dome)",
+              "De": "The Hex (Dome)",
+              "Es": "The Hex (Dome)"
+            },
             "geometry": {
               "width": 250,
               "height": 250
@@ -162,7 +187,12 @@
           },
           "Vintage_Stop_Sign": {
             "type": "_NeedleVUMeter",
-            "label": "Stop Sign (Octagon)",
+            "label": {
+              "En": "Stop Sign (Octagon)",
+              "Fr": "Arrêter Sign (Octagon)",
+              "De": "Stop Sign (Octagon)",
+              "Es": "Parar Sign (Octagon)"
+            },
             "geometry": {
               "width": 250,
               "height": 250
@@ -191,7 +221,12 @@
           },
           "Vintage_Squectangle": {
             "type": "_NeedleVUMeter",
-            "label": "The Squectangle",
+            "label": {
+              "En": "The Squectangle",
+              "Fr": "The Squectangle",
+              "De": "The Squectangle",
+              "Es": "The Squectangle"
+            },
             "geometry": {
               "width": 300,
               "height": 250
@@ -232,7 +267,12 @@
           },
           "Vintage_Squimonde": {
             "type": "_NeedleVUMeter",
-            "label": "The Squimonde",
+            "label": {
+              "En": "The Squimonde",
+              "Fr": "The Squimonde",
+              "De": "The Squimonde",
+              "Es": "The Squimonde"
+            },
             "geometry": {
               "width": 250,
               "height": 250
@@ -262,7 +302,12 @@
           },
           "Vintage_Squircle": {
             "type": "_NeedleVUMeter",
-            "label": "The Squircle (Square)",
+            "label": {
+              "En": "The Squircle (Square)",
+              "Fr": "The Squircle (Square)",
+              "De": "The Squircle (Square)",
+              "Es": "The Squircle (Square)"
+            },
             "geometry": {
               "width": 250,
               "height": 250
@@ -292,7 +337,12 @@
           },
           "Vintage_Parking_Meter": {
             "type": "_NeedleVUMeter",
-            "label": "Parking Meter",
+            "label": {
+              "En": "Parking Meter",
+              "Fr": "Parking Meter",
+              "De": "Parking Meter",
+              "Es": "Parking Meter"
+            },
             "geometry": {
               "width": 250,
               "height": 250
@@ -323,7 +373,12 @@
           },
           "Vintage_Triangle": {
             "type": "_NeedleVUMeter",
-            "label": "The Triangle",
+            "label": {
+              "En": "The Triangle",
+              "Fr": "The Triangle",
+              "De": "The Triangle",
+              "Es": "The Triangle"
+            },
             "geometry": {
               "width": 250,
               "height": 250
@@ -354,7 +409,12 @@
           },
           "Vintage_Pyramid": {
             "type": "_NeedleVUMeter",
-            "label": "The Pyramid",
+            "label": {
+              "En": "The Pyramid",
+              "Fr": "The Pyramid",
+              "De": "The Pyramid",
+              "Es": "The Pyramid"
+            },
             "geometry": {
               "width": 250,
               "height": 250
@@ -386,7 +446,12 @@
           },
           "Vintage_Badge": {
             "type": "_NeedleVUMeter",
-            "label": "The Badge (Trapezoid)",
+            "label": {
+              "En": "The Badge (Trapezoid)",
+              "Fr": "The Badge (Trapezoid)",
+              "De": "The Badge (Trapezoid)",
+              "Es": "The Badge (Trapezoid)"
+            },
             "geometry": {
               "width": 250,
               "height": 250
@@ -415,7 +480,12 @@
           },
           "Vintage_Crest": {
             "type": "_NeedleVUMeter",
-            "label": "The Crest (Shield)",
+            "label": {
+              "En": "The Crest (Shield)",
+              "Fr": "The Crest (Shield)",
+              "De": "The Crest (Shield)",
+              "Es": "The Crest (Shield)"
+            },
             "geometry": {
               "width": 250,
               "height": 250

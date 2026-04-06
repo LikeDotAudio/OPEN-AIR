@@ -10,7 +10,7 @@ import orjson
 import os
 from pathlib import Path
 from loguru import logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaOchestration.Core.path_initializer import DATA_SPLINKS_DIR
 
 Splinker_debug_enabled = False

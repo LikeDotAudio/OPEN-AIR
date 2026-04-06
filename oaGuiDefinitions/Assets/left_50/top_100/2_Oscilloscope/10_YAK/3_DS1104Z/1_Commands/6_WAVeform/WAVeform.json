@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Waveform Data Transfer Settings",
+        "description": {
+          "En": "Waveform Data Transfer Settings",
+          "Fr": "Paramètres de transfert de données de forme d'onde",
+          "De": "Wellenform-Datentransfer-Einstellungen",
+          "Es": "Ajustes de transferencia de datos de forma de onda"
+        },
         "fields": {
           "Set_Waveform_Source": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "source": {
                     "value": "CHAN1",
                     "type": "_GuiValue",
-                    "label": "Source",
+                    "label": {
+                      "En": "Source",
+                      "Fr": "Source",
+                      "De": "Quelle",
+                      "Es": "Fuente"
+                    },
                     "units": "",
-                    "description": "CHANn"
+                    "description": {
+                      "En": "CHANn",
+                      "Fr": "CANn",
+                      "De": "KANn",
+                      "Es": "CANn"
+                    }
                   }
                 }
               }
@@ -85,9 +100,19 @@
                   "mode": {
                     "value": "NORMal",
                     "type": "_GuiValue",
-                    "label": "Mode",
+                    "label": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
                     "units": "",
-                    "description": "NORMal, MAXimum, RAW"
+                    "description": {
+                      "En": "NORMal, MAXimum, RAW",
+                      "Fr": "NORMal, MAXimum, RAW",
+                      "De": "NORMal, MAXimum, RAW",
+                      "Es": "NORMal, MAXimum, RAW"
+                    }
                   }
                 }
               }
@@ -124,9 +149,19 @@
                   "format": {
                     "value": "BYTE",
                     "type": "_GuiValue",
-                    "label": "Format",
+                    "label": {
+                      "En": "Format",
+                      "Fr": "Format",
+                      "De": "Format",
+                      "Es": "Formato"
+                    },
                     "units": "",
-                    "description": "WORD, BYTE, ASCii"
+                    "description": {
+                      "En": "WORD, BYTE, ASCii",
+                      "Fr": "WORD, BYTE, ASCii",
+                      "De": "WORD, BYTE, ASCii",
+                      "Es": "WORD, BYTE, ASCii"
+                    }
                   }
                 }
               }
@@ -136,7 +171,12 @@
       },
       "nab": {
         "type": "OcaBlock",
-        "description": "Waveform Data Readbacks",
+        "description": {
+          "En": "Waveform Data Readbacks",
+          "Fr": "Waveform Data Readbacks",
+          "De": "Waveform Data Readbacks",
+          "Es": "Waveform Data Readbacks"
+        },
         "fields": {
           "Get_Waveform_Data": {
             "type": "OcaBlock",
@@ -169,7 +209,12 @@
                   "data": {
                     "value": "Binary Block",
                     "type": "_GuiValue",
-                    "label": "Data",
+                    "label": {
+                      "En": "Data",
+                      "Fr": "Data",
+                      "De": "Data",
+                      "Es": "Data"
+                    },
                     "units": ""
                   }
                 }
@@ -178,7 +223,12 @@
           },
           "Get_Waveform_Parameters": {
             "type": "OcaBlock",
-            "description": "Scaling Parameters",
+            "description": {
+              "En": "Scaling Parameters",
+              "Fr": "Scaling Parameters",
+              "De": "Scaling Parameters",
+              "Es": "Scaling Parameters"
+            },
             "fields": {
               "Get_XInc": {
                 "type": "OcaBlock",

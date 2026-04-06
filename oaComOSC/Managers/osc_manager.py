@@ -13,7 +13,7 @@ import os
 from loguru import logger
 from oaLogging.Core.logger import OSC_LOGGER as osc_logger
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from ..Workers.osc_rx_server import OscRxServer
 from ..Workers.osc_tx_client import OscTxClient
 from oaOchestration.Methods.network_utils import get_local_ip

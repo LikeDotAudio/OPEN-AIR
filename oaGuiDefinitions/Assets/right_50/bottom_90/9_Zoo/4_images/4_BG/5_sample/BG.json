@@ -14,7 +14,12 @@
       "fields": {
         "Master_Meter": {
           "type": "_NeedleVUMeter",
-          "label": "Master Studio Output",
+          "label": {
+            "En": "Master Studio Output",
+            "Fr": "Master Studio Sortie",
+            "De": "Master Studio Ausgang",
+            "Es": "Maestro Studio Salida"
+          },
           "geometry": {
             "width": 400,
             "height": 250
@@ -37,7 +42,12 @@
               "overlay_style": "dome"
             }
           },
-          "label_active": "Master Studio Output",
+          "label_active": {
+            "En": "Master Studio Output",
+            "Fr": "Master Studio Sortie",
+            "De": "Master Studio Ausgang",
+            "Es": "Maestro Studio Salida"
+          },
           "width": 400,
           "height": 250,
           "Orientation": "vertical",

@@ -13,7 +13,12 @@
     "blocks": {
       "Knob_Combined_Demo_2": {
         "type": "OcaBlock",
-        "description": "Combined Knob Showcase (Variations, Volume, Pitch, Filter)",
+        "description": {
+          "En": "Combined Knob Showcase (Variations, Volume, Pitch, Filter)",
+          "Fr": "Combined Knob Showcase (Variations, Volume, Pitch, Filter)",
+          "De": "Combined Knob Showcase (Variations, Lautstärke, Pitch, Filter)",
+          "Es": "Combined Knob Showcase (Variations, Volumen, Pitch, Filter)"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -44,7 +49,12 @@
         "fields": {
           "knob_v1": {
             "type": "_SmartKnob",
-            "label": "Ticks On",
+            "label": {
+              "En": "Ticks On",
+              "Fr": "Ticks On",
+              "De": "Ticks An",
+              "Es": "Ticks Encendido"
+            },
             "notes": "Standard with ticks",
             "geometry": {
               "width": 120,
@@ -100,7 +110,12 @@
           },
           "knob_v2": {
             "type": "_SmartKnob",
-            "label": "No Dot",
+            "label": {
+              "En": "No Dot",
+              "Fr": "Non Dot",
+              "De": "Nein Dot",
+              "Es": "No Dot"
+            },
             "notes": "No center dot",
             "geometry": {
               "width": 120,
@@ -156,7 +171,12 @@
           },
           "knob_v3": {
             "type": "_SmartKnob",
-            "label": "Thick Crust",
+            "label": {
+              "En": "Thick Crust",
+              "Fr": "Thick Crust",
+              "De": "Thick Crust",
+              "Es": "Thick Crust"
+            },
             "notes": "10px Crust",
             "geometry": {
               "width": 120,
@@ -212,7 +232,12 @@
           },
           "knob_v4": {
             "type": "_SmartKnob",
-            "label": "Float Ptr",
+            "label": {
+              "En": "Float Ptr",
+              "Fr": "Float Ptr",
+              "De": "Float Ptr",
+              "Es": "Float Ptr"
+            },
             "notes": "Pad 15px",
             "geometry": {
               "width": 120,
@@ -270,7 +295,12 @@
           },
           "knob_v5": {
             "type": "_SmartKnob",
-            "label": "Long Ticks",
+            "label": {
+              "En": "Long Ticks",
+              "Fr": "Long Ticks",
+              "De": "Long Ticks",
+              "Es": "Long Ticks"
+            },
             "notes": "15px Ticks",
             "geometry": {
               "width": 140,
@@ -326,7 +356,12 @@
           },
           "knob_v6": {
             "type": "_SmartKnob",
-            "label": "Red Dot",
+            "label": {
+              "En": "Red Dot",
+              "Fr": "Red Dot",
+              "De": "Red Dot",
+              "Es": "Red Dot"
+            },
             "notes": "Red Center Dot",
             "geometry": {
               "width": 120,
@@ -382,7 +417,12 @@
           },
           "knob_v7": {
             "type": "_SmartKnob",
-            "label": "Minimal",
+            "label": {
+              "En": "Minimal",
+              "Fr": "Minimal",
+              "De": "Minimal",
+              "Es": "Minimal"
+            },
             "notes": "Simple",
             "geometry": {
               "width": 100,
@@ -439,7 +479,12 @@
           },
           "knob_v8": {
             "type": "_SmartKnob",
-            "label": "Maximal",
+            "label": {
+              "En": "Maximal",
+              "Fr": "Maximal",
+              "De": "Maximal",
+              "Es": "Maximal"
+            },
             "notes": "All Features",
             "geometry": {
               "width": 160,
@@ -499,7 +544,12 @@
           },
           "knob_01": {
             "type": "_SmartKnob",
-            "label": "Std Brown",
+            "label": {
+              "En": "Std Brown",
+              "Fr": "Std Brown",
+              "De": "Std Brown",
+              "Es": "Std Brown"
+            },
             "notes": "Standard size, brown",
             "geometry": {
               "width": 100,
@@ -568,7 +618,12 @@
           },
           "knob_02": {
             "type": "_SmartKnob",
-            "label": "Sm Red",
+            "label": {
+              "En": "Sm Red",
+              "Fr": "Sm Red",
+              "De": "Sm Red",
+              "Es": "Sm Red"
+            },
             "notes": "Small size, red",
             "geometry": {
               "width": 80,
@@ -643,7 +698,12 @@
           },
           "knob_03": {
             "type": "_SmartKnob",
-            "label": "Lg Blue",
+            "label": {
+              "En": "Lg Blue",
+              "Fr": "Lg Blue",
+              "De": "Lg Blue",
+              "Es": "Lg Blue"
+            },
             "notes": "Large size, blue",
             "geometry": {
               "width": 160,
@@ -710,7 +770,12 @@
           },
           "knob_04": {
             "type": "_SmartKnob",
-            "label": "Med Green",
+            "label": {
+              "En": "Med Green",
+              "Fr": "Med Green",
+              "De": "Med Green",
+              "Es": "Med Green"
+            },
             "notes": "Medium size, green",
             "geometry": {
               "width": 100,
@@ -784,7 +849,12 @@
           },
           "knob_05": {
             "type": "_SmartKnob",
-            "label": "Tiny Yel",
+            "label": {
+              "En": "Tiny Yel",
+              "Fr": "Tiny Yel",
+              "De": "Tiny Yel",
+              "Es": "Tiny Yel"
+            },
             "notes": "Tiny size, yellow",
             "geometry": {
               "width": 50,
@@ -851,7 +921,12 @@
           },
           "knob_06": {
             "type": "_SmartKnob",
-            "label": "Giant Cyn",
+            "label": {
+              "En": "Giant Cyn",
+              "Fr": "Giant Cyn",
+              "De": "Giant Cyn",
+              "Es": "Giant Cyn"
+            },
             "notes": "Giant size, cyan",
             "geometry": {
               "width": 200,
@@ -919,7 +994,12 @@
           },
           "knob_07": {
             "type": "_SmartKnob",
-            "label": "Med Mag",
+            "label": {
+              "En": "Med Mag",
+              "Fr": "Med Mag",
+              "De": "Med Mag",
+              "Es": "Med Mag"
+            },
             "notes": "Medium size, magenta",
             "geometry": {
               "width": 100,
@@ -994,7 +1074,12 @@
           },
           "knob_08": {
             "type": "_SmartKnob",
-            "label": "Lg Orange",
+            "label": {
+              "En": "Lg Orange",
+              "Fr": "Lg Orange",
+              "De": "Lg Orange",
+              "Es": "Lg Orange"
+            },
             "notes": "Large size, orange",
             "geometry": {
               "width": 160,
@@ -1060,7 +1145,12 @@
           },
           "knob_p1": {
             "type": "_SmartKnob",
-            "label": "Fine Tune",
+            "label": {
+              "En": "Fine Tune",
+              "Fr": "Fine Tune",
+              "De": "Fine Tune",
+              "Es": "Fine Tune"
+            },
             "notes": "Green center detent",
             "geometry": {
               "width": 200,
@@ -1114,7 +1204,12 @@
           },
           "knob_p2": {
             "type": "_SmartKnob",
-            "label": "Coarse",
+            "label": {
+              "En": "Coarse",
+              "Fr": "Coarse",
+              "De": "Coarse",
+              "Es": "Coarse"
+            },
             "notes": "Large blue",
             "geometry": {
               "width": 200,
@@ -1168,7 +1263,12 @@
           },
           "knob_p3": {
             "type": "_SmartKnob",
-            "label": "Octave",
+            "label": {
+              "En": "Octave",
+              "Fr": "Octave",
+              "De": "Octave",
+              "Es": "Octave"
+            },
             "notes": "Small amber",
             "geometry": {
               "width": 200,
@@ -1222,7 +1322,12 @@
           },
           "knob_p4": {
             "type": "_SmartKnob",
-            "label": "Detune",
+            "label": {
+              "En": "Detune",
+              "Fr": "Detune",
+              "De": "Detune",
+              "Es": "Detune"
+            },
             "notes": "Purple detune",
             "geometry": {
               "width": 200,
@@ -1276,7 +1381,12 @@
           },
           "knob_p5": {
             "type": "_SmartKnob",
-            "label": "LFO Amt",
+            "label": {
+              "En": "LFO Amt",
+              "Fr": "LFO Amt",
+              "De": "LFO Amt",
+              "Es": "LFO Amt"
+            },
             "notes": "Cyan LFO",
             "geometry": {
               "width": 200,
@@ -1330,7 +1440,12 @@
           },
           "knob_p6": {
             "type": "_SmartKnob",
-            "label": "Env Mod",
+            "label": {
+              "En": "Env Mod",
+              "Fr": "Env Mod",
+              "De": "Env Mod",
+              "Es": "Env Mod"
+            },
             "notes": "Deep Orange Bipolar",
             "geometry": {
               "width": 200,
@@ -1384,7 +1499,12 @@
           },
           "knob_p7": {
             "type": "_SmartKnob",
-            "label": "Key Trk",
+            "label": {
+              "En": "Key Trk",
+              "Fr": "Key Trk",
+              "De": "Key Trk",
+              "Es": "Key Trk"
+            },
             "notes": "Tiny brown",
             "geometry": {
               "width": 200,
@@ -1438,7 +1558,12 @@
           },
           "knob_p8": {
             "type": "_SmartKnob",
-            "label": "Glide",
+            "label": {
+              "En": "Glide",
+              "Fr": "Glide",
+              "De": "Glide",
+              "Es": "Glide"
+            },
             "notes": "Large grey",
             "geometry": {
               "width": 200,
@@ -1492,7 +1617,12 @@
           },
           "knob_f1": {
             "type": "_SmartKnob",
-            "label": "Cutoff",
+            "label": {
+              "En": "Cutoff",
+              "Fr": "Coupure",
+              "De": "Cutoff",
+              "Es": "Corte"
+            },
             "notes": "Giant Yellow Cutoff",
             "geometry": {
               "width": 200,
@@ -1546,7 +1676,12 @@
           },
           "knob_f2": {
             "type": "_SmartKnob",
-            "label": "Resonance",
+            "label": {
+              "En": "Resonance",
+              "Fr": "Résonance",
+              "De": "Resonanz",
+              "Es": "Resonancia"
+            },
             "notes": "Orange Res",
             "geometry": {
               "width": 200,
@@ -1600,7 +1735,12 @@
           },
           "knob_f3": {
             "type": "_SmartKnob",
-            "label": "Env Amt",
+            "label": {
+              "En": "Env Amt",
+              "Fr": "Env Amt",
+              "De": "Env Amt",
+              "Es": "Env Amt"
+            },
             "notes": "Red Envelope",
             "geometry": {
               "width": 200,
@@ -1654,7 +1794,12 @@
           },
           "knob_f4": {
             "type": "_SmartKnob",
-            "label": "Drive",
+            "label": {
+              "En": "Drive",
+              "Fr": "Drive",
+              "De": "Drive",
+              "Es": "Drive"
+            },
             "notes": "Dark Red Drive",
             "geometry": {
               "width": 200,
@@ -1708,7 +1853,12 @@
           },
           "knob_f5": {
             "type": "_SmartKnob",
-            "label": "HPF",
+            "label": {
+              "En": "HPF",
+              "Fr": "HPF",
+              "De": "HPF",
+              "Es": "HPF"
+            },
             "notes": "Light Green HPF",
             "geometry": {
               "width": 200,
@@ -1762,7 +1912,12 @@
           },
           "knob_f6": {
             "type": "_SmartKnob",
-            "label": "LPF",
+            "label": {
+              "En": "LPF",
+              "Fr": "LPF",
+              "De": "LPF",
+              "Es": "LPF"
+            },
             "notes": "Green LPF",
             "geometry": {
               "width": 200,
@@ -1816,7 +1971,12 @@
           },
           "knob_f7": {
             "type": "_SmartKnob",
-            "label": "Key Follow",
+            "label": {
+              "En": "Key Follow",
+              "Fr": "Key Follow",
+              "De": "Key Follow",
+              "Es": "Key Follow"
+            },
             "notes": "Lime Key",
             "geometry": {
               "width": 200,
@@ -1870,7 +2030,12 @@
           },
           "knob_f8": {
             "type": "_SmartKnob",
-            "label": "Vel Sens",
+            "label": {
+              "En": "Vel Sens",
+              "Fr": "Vel Sens",
+              "De": "Vel Sens",
+              "Es": "Vel Sens"
+            },
             "notes": "Teal Vel",
             "geometry": {
               "width": 200,

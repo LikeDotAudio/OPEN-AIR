@@ -13,11 +13,21 @@
     "blocks": {
       "Common": {
         "type": "OcaBlock",
-        "description": "Common Commands",
+        "description": {
+          "En": "Common Commands",
+          "Fr": "Commun Commands",
+          "De": "Allgemein Commands",
+          "Es": "Común Commands"
+        },
         "fields": {
           "System_Reset": {
             "type": "_GuiActuator",
-            "label_inactive": "Reset (*RST)",
+            "label_inactive": {
+              "En": "Reset (*RST)",
+              "Fr": "Réinitialiser (*RST)",
+              "De": "Zurücksetzen (*RST)",
+              "Es": "Reiniciar (*RST)"
+            },
             "AES70": "OcaBooleanActuator",
             "style": {
               "active_text_color": "#1a1a1a",
@@ -38,7 +48,12 @@
           },
           "Clear_Status": {
             "type": "_GuiActuator",
-            "label_inactive": "Clear (*CLS)",
+            "label_inactive": {
+              "En": "Clear (*CLS)",
+              "Fr": "Effacer (*CLS)",
+              "De": "Löschen (*CLS)",
+              "Es": "Borrar (*CLS)"
+            },
             "AES70": "OcaBooleanActuator",
             "style": {
               "active_text_color": "#1a1a1a",

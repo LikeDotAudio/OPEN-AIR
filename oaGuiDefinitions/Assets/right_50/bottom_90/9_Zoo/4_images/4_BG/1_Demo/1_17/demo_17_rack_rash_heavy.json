@@ -14,7 +14,12 @@
       "fields": {
         "Meter_1": {
           "type": "_NeedleVUMeter",
-          "label": "Trapezoid 1",
+          "label": {
+            "En": "Trapezoid 1",
+            "Fr": "Trapezoid 1",
+            "De": "Trapezoid 1",
+            "Es": "Trapezoid 1"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -37,7 +42,12 @@
               "overlay_style": "dome"
             }
           },
-          "label_active": "Trapezoid 1",
+          "label_active": {
+            "En": "Trapezoid 1",
+            "Fr": "Trapezoid 1",
+            "De": "Trapezoid 1",
+            "Es": "Trapezoid 1"
+          },
           "width": 250,
           "height": 250,
           "Orientation": "vertical",

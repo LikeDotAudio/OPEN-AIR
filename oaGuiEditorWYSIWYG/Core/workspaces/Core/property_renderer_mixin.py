@@ -35,6 +35,11 @@ class PropertyRendererMixin:
             existing_widget_info = widget_cache.get(full_path)
             existing_widget = existing_widget_info.get("widget") if existing_widget_info else None
             
+            # 🛡️ VALIDATION: If the widget has been destroyed in Tkinter, treat it as None
+            if existing_widget and not existing_widget.winfo_exists():
+                existing_widget = None
+                widget_cache.pop(full_path, None)
+            
             if isinstance(value, dict):
                 # Check if the schema type has changed for this section
                 schema_type_changed = (
@@ -77,7 +82,7 @@ class PropertyRendererMixin:
 
 
 
-    def _render_section(self, parent, key, value, full_path, is_virtual, depth, actual_data, child_container=None, widget_cache=None, level_widgets=None):
+    def _render_section(self, parent, key, value, full_path, is_virtual, depth, actual_data, child_container=None, widget_cache=None, new_widget_cache=None):
         
         h_frame = tk.Frame(parent, bg="#3a3a3a", pady=2)
         h_frame.pack(fill="x", pady=(5, 2))

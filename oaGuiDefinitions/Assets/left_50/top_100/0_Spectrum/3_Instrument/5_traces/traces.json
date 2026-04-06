@@ -14,7 +14,12 @@
       "Trace 1": {
         "type": "OcaBlock",
         "show_label": true,
-        "description": "Settings for Trace 1 Mode",
+        "description": {
+          "En": "Settings for Trace 1 Mode",
+          "Fr": "Paramètres for Trace 1 Mode",
+          "De": "Einstellungen for Trace 1 Mode",
+          "Es": "Ajustes for Trace 1 Mode"
+        },
         "layout": {
           "weight": 1
         },
@@ -39,41 +44,116 @@
             },
             "options": {
               "WRITE": {
-                "label_active": "LIVE REALTIME",
-                "label_inactive": "LIVE REALTIME",
-                "description": "Captures and displays the trace in real time, like a hyperactive surveillance camera.",
+                "label_active": {
+                  "En": "LIVE REALTIME",
+                  "Fr": "LIVE REALTIME",
+                  "De": "LIVE REALTIME",
+                  "Es": "LIVE REALTIME"
+                },
+                "label_inactive": {
+                  "En": "LIVE REALTIME",
+                  "Fr": "LIVE REALTIME",
+                  "De": "LIVE REALTIME",
+                  "Es": "LIVE REALTIME"
+                },
+                "description": {
+                  "En": "Captures and displays the trace in real time, like a hyperactive surveillance camera.",
+                  "Fr": "Capture et affiche la trace en temps réel, comme une caméra de surveillance hyperactive.",
+                  "De": "Erfasst und zeigt den Trace in Echtzeit an, wie eine hyperaktive Überwachungskamera.",
+                  "Es": "Captura y muestra la traza en tiempo real, como una cámara de vigilancia hiperactiva."
+                },
                 "value": "WRITE",
                 "units": "mode",
                 "selected": false
               },
               "MAXHOLD": {
-                "label_active": "MAX HOLD",
-                "label_inactive": "MAX HOLD",
-                "description": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                "label_active": {
+                  "En": "MAX HOLD",
+                  "Fr": "MAX HOLD",
+                  "De": "MAX HOLD",
+                  "Es": "MAX HOLD"
+                },
+                "label_inactive": {
+                  "En": "MAX HOLD",
+                  "Fr": "MAX HOLD",
+                  "De": "MAX HOLD",
+                  "Es": "MAX HOLD"
+                },
+                "description": {
+                  "En": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                  "Fr": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                  "De": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                  "Es": "Keeps the highest-level peaks on display, like a digital trophy case for signals."
+                },
                 "value": "MAXHOLD",
                 "units": "mode",
                 "selected": false
               },
               "MINHOLD": {
-                "label_active": "MIN HOLD",
-                "label_inactive": "MIN HOLD",
-                "description": "Holds onto the lowest points, great for detecting signals that vanish in the noise.",
+                "label_active": {
+                  "En": "MIN HOLD",
+                  "Fr": "MIN HOLD",
+                  "De": "MIN HOLD",
+                  "Es": "MIN HOLD"
+                },
+                "label_inactive": {
+                  "En": "MIN HOLD",
+                  "Fr": "MIN HOLD",
+                  "De": "MIN HOLD",
+                  "Es": "MIN HOLD"
+                },
+                "description": {
+                  "En": "Holds onto the lowest points, great for detecting signals that vanish in the noise.",
+                  "Fr": "Maintiens onto the lowest points, great for detecting signals that vanish in the noise.",
+                  "De": "Haltens onto the lowest points, great for detecting signals that vanish in the noise.",
+                  "Es": "Manteners onto the lowest points, great for detecting signals that vanish in the noise."
+                },
                 "value": "MINHOLD",
                 "units": "mode",
                 "selected": false
               },
               "BLANK": {
-                "label_active": "BLANK",
-                "label_inactive": "BLANK",
-                "description": "Clears the slate, preparing for a new scan. A zen state for the scanner.",
+                "label_active": {
+                  "En": "BLANK",
+                  "Fr": "BLANK",
+                  "De": "BLANK",
+                  "Es": "BLANK"
+                },
+                "label_inactive": {
+                  "En": "BLANK",
+                  "Fr": "BLANK",
+                  "De": "BLANK",
+                  "Es": "BLANK"
+                },
+                "description": {
+                  "En": "Clears the slate, preparing for a new scan. A zen state for the scanner.",
+                  "Fr": "Effacers the slate, preparing for a new scan. A zen state for the scanner.",
+                  "De": "Löschens the slate, preparing for a new scan. A zen state for the scanner.",
+                  "Es": "Borrars the slate, preparing for a new scan. A zen state for the scanner."
+                },
                 "value": "BLANK",
                 "units": "mode",
                 "selected": false
               },
               "VIEW": {
-                "label_active": "VIEW",
-                "label_inactive": "VIEW",
-                "description": "The standard mode, simply viewing the current sweep data.",
+                "label_active": {
+                  "En": "VIEW",
+                  "Fr": "VOIR",
+                  "De": "ANSEHEN",
+                  "Es": "VER"
+                },
+                "label_inactive": {
+                  "En": "VIEW",
+                  "Fr": "VOIR",
+                  "De": "ANSEHEN",
+                  "Es": "VER"
+                },
+                "description": {
+                  "En": "The standard mode, simply viewing the current sweep data.",
+                  "Fr": "The standard mode, simply viewing the current sweep data.",
+                  "De": "The standard mode, simply viewing the current sweep data.",
+                  "Es": "The standard mode, simply viewing the current sweep data."
+                },
                 "value": "VIEW",
                 "units": "mode",
                 "selected": true
@@ -85,7 +165,12 @@
       "Trace 2": {
         "type": "OcaBlock",
         "show_label": true,
-        "description": "Settings for Trace 2 Mode",
+        "description": {
+          "En": "Settings for Trace 2 Mode",
+          "Fr": "Paramètres for Trace 2 Mode",
+          "De": "Einstellungen for Trace 2 Mode",
+          "Es": "Ajustes for Trace 2 Mode"
+        },
         "layout": {
           "weight": 1
         },
@@ -110,41 +195,116 @@
             },
             "options": {
               "WRITE": {
-                "label_active": "LIVE REALTIME",
-                "label_inactive": "LIVE REALTIME",
-                "description": "Captures and displays the trace in real time, like a hyperactive surveillance camera.",
+                "label_active": {
+                  "En": "LIVE REALTIME",
+                  "Fr": "LIVE REALTIME",
+                  "De": "LIVE REALTIME",
+                  "Es": "LIVE REALTIME"
+                },
+                "label_inactive": {
+                  "En": "LIVE REALTIME",
+                  "Fr": "LIVE REALTIME",
+                  "De": "LIVE REALTIME",
+                  "Es": "LIVE REALTIME"
+                },
+                "description": {
+                  "En": "Captures and displays the trace in real time, like a hyperactive surveillance camera.",
+                  "Fr": "Capture et affiche la trace en temps réel, comme une caméra de surveillance hyperactive.",
+                  "De": "Erfasst und zeigt den Trace in Echtzeit an, wie eine hyperaktive Überwachungskamera.",
+                  "Es": "Captura y muestra la traza en tiempo real, como una cámara de vigilancia hiperactiva."
+                },
                 "value": "WRITE",
                 "units": "mode",
                 "selected": false
               },
               "MAXHOLD": {
-                "label_active": "MAX HOLD",
-                "label_inactive": "MAX HOLD",
-                "description": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                "label_active": {
+                  "En": "MAX HOLD",
+                  "Fr": "MAX HOLD",
+                  "De": "MAX HOLD",
+                  "Es": "MAX HOLD"
+                },
+                "label_inactive": {
+                  "En": "MAX HOLD",
+                  "Fr": "MAX HOLD",
+                  "De": "MAX HOLD",
+                  "Es": "MAX HOLD"
+                },
+                "description": {
+                  "En": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                  "Fr": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                  "De": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                  "Es": "Keeps the highest-level peaks on display, like a digital trophy case for signals."
+                },
                 "value": "MAXHOLD",
                 "units": "mode",
                 "selected": true
               },
               "MINHOLD": {
-                "label_active": "MIN HOLD",
-                "label_inactive": "MIN HOLD",
-                "description": "Holds onto the lowest points, great for detecting signals that vanish in the noise.",
+                "label_active": {
+                  "En": "MIN HOLD",
+                  "Fr": "MIN HOLD",
+                  "De": "MIN HOLD",
+                  "Es": "MIN HOLD"
+                },
+                "label_inactive": {
+                  "En": "MIN HOLD",
+                  "Fr": "MIN HOLD",
+                  "De": "MIN HOLD",
+                  "Es": "MIN HOLD"
+                },
+                "description": {
+                  "En": "Holds onto the lowest points, great for detecting signals that vanish in the noise.",
+                  "Fr": "Maintiens onto the lowest points, great for detecting signals that vanish in the noise.",
+                  "De": "Haltens onto the lowest points, great for detecting signals that vanish in the noise.",
+                  "Es": "Manteners onto the lowest points, great for detecting signals that vanish in the noise."
+                },
                 "value": "MINHOLD",
                 "units": "mode",
                 "selected": false
               },
               "BLANK": {
-                "label_active": "BLANK",
-                "label_inactive": "BLANK",
-                "description": "Clears the slate, preparing for a new scan. A zen state for the scanner.",
+                "label_active": {
+                  "En": "BLANK",
+                  "Fr": "BLANK",
+                  "De": "BLANK",
+                  "Es": "BLANK"
+                },
+                "label_inactive": {
+                  "En": "BLANK",
+                  "Fr": "BLANK",
+                  "De": "BLANK",
+                  "Es": "BLANK"
+                },
+                "description": {
+                  "En": "Clears the slate, preparing for a new scan. A zen state for the scanner.",
+                  "Fr": "Effacers the slate, preparing for a new scan. A zen state for the scanner.",
+                  "De": "Löschens the slate, preparing for a new scan. A zen state for the scanner.",
+                  "Es": "Borrars the slate, preparing for a new scan. A zen state for the scanner."
+                },
                 "value": "BLANK",
                 "units": "mode",
                 "selected": false
               },
               "VIEW": {
-                "label_active": "VIEW",
-                "label_inactive": "VIEW",
-                "description": "The standard mode, simply viewing the current sweep data.",
+                "label_active": {
+                  "En": "VIEW",
+                  "Fr": "VOIR",
+                  "De": "ANSEHEN",
+                  "Es": "VER"
+                },
+                "label_inactive": {
+                  "En": "VIEW",
+                  "Fr": "VOIR",
+                  "De": "ANSEHEN",
+                  "Es": "VER"
+                },
+                "description": {
+                  "En": "The standard mode, simply viewing the current sweep data.",
+                  "Fr": "The standard mode, simply viewing the current sweep data.",
+                  "De": "The standard mode, simply viewing the current sweep data.",
+                  "Es": "The standard mode, simply viewing the current sweep data."
+                },
                 "value": "VIEW",
                 "units": "mode",
                 "selected": false
@@ -156,7 +316,12 @@
       "Trace 3": {
         "type": "OcaBlock",
         "show_label": true,
-        "description": "Settings for Trace 3 Mode",
+        "description": {
+          "En": "Settings for Trace 3 Mode",
+          "Fr": "Paramètres for Trace 3 Mode",
+          "De": "Einstellungen for Trace 3 Mode",
+          "Es": "Ajustes for Trace 3 Mode"
+        },
         "layout": {
           "weight": 1
         },
@@ -181,41 +346,116 @@
             },
             "options": {
               "WRITE": {
-                "label_active": "LIVE REALTIME",
-                "label_inactive": "LIVE REALTIME",
-                "description": "Captures and displays the trace in real time, like a hyperactive surveillance camera.",
+                "label_active": {
+                  "En": "LIVE REALTIME",
+                  "Fr": "LIVE REALTIME",
+                  "De": "LIVE REALTIME",
+                  "Es": "LIVE REALTIME"
+                },
+                "label_inactive": {
+                  "En": "LIVE REALTIME",
+                  "Fr": "LIVE REALTIME",
+                  "De": "LIVE REALTIME",
+                  "Es": "LIVE REALTIME"
+                },
+                "description": {
+                  "En": "Captures and displays the trace in real time, like a hyperactive surveillance camera.",
+                  "Fr": "Capture et affiche la trace en temps réel, comme une caméra de surveillance hyperactive.",
+                  "De": "Erfasst und zeigt den Trace in Echtzeit an, wie eine hyperaktive Überwachungskamera.",
+                  "Es": "Captura y muestra la traza en tiempo real, como una cámara de vigilancia hiperactiva."
+                },
                 "value": "WRITE",
                 "units": "mode",
                 "selected": false
               },
               "MAXHOLD": {
-                "label_active": "MAX HOLD",
-                "label_inactive": "MAX HOLD",
-                "description": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                "label_active": {
+                  "En": "MAX HOLD",
+                  "Fr": "MAX HOLD",
+                  "De": "MAX HOLD",
+                  "Es": "MAX HOLD"
+                },
+                "label_inactive": {
+                  "En": "MAX HOLD",
+                  "Fr": "MAX HOLD",
+                  "De": "MAX HOLD",
+                  "Es": "MAX HOLD"
+                },
+                "description": {
+                  "En": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                  "Fr": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                  "De": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                  "Es": "Keeps the highest-level peaks on display, like a digital trophy case for signals."
+                },
                 "value": "MAXHOLD",
                 "units": "mode",
                 "selected": false
               },
               "MINHOLD": {
-                "label_active": "MIN HOLD",
-                "label_inactive": "MIN HOLD",
-                "description": "Holds onto the lowest points, great for detecting signals that vanish in the noise.",
+                "label_active": {
+                  "En": "MIN HOLD",
+                  "Fr": "MIN HOLD",
+                  "De": "MIN HOLD",
+                  "Es": "MIN HOLD"
+                },
+                "label_inactive": {
+                  "En": "MIN HOLD",
+                  "Fr": "MIN HOLD",
+                  "De": "MIN HOLD",
+                  "Es": "MIN HOLD"
+                },
+                "description": {
+                  "En": "Holds onto the lowest points, great for detecting signals that vanish in the noise.",
+                  "Fr": "Maintiens onto the lowest points, great for detecting signals that vanish in the noise.",
+                  "De": "Haltens onto the lowest points, great for detecting signals that vanish in the noise.",
+                  "Es": "Manteners onto the lowest points, great for detecting signals that vanish in the noise."
+                },
                 "value": "MINHOLD",
                 "units": "mode",
                 "selected": true
               },
               "BLANK": {
-                "label_active": "BLANK",
-                "label_inactive": "BLANK",
-                "description": "Clears the slate, preparing for a new scan. A zen state for the scanner.",
+                "label_active": {
+                  "En": "BLANK",
+                  "Fr": "BLANK",
+                  "De": "BLANK",
+                  "Es": "BLANK"
+                },
+                "label_inactive": {
+                  "En": "BLANK",
+                  "Fr": "BLANK",
+                  "De": "BLANK",
+                  "Es": "BLANK"
+                },
+                "description": {
+                  "En": "Clears the slate, preparing for a new scan. A zen state for the scanner.",
+                  "Fr": "Effacers the slate, preparing for a new scan. A zen state for the scanner.",
+                  "De": "Löschens the slate, preparing for a new scan. A zen state for the scanner.",
+                  "Es": "Borrars the slate, preparing for a new scan. A zen state for the scanner."
+                },
                 "value": "BLANK",
                 "units": "mode",
                 "selected": false
               },
               "VIEW": {
-                "label_active": "VIEW",
-                "label_inactive": "VIEW",
-                "description": "The standard mode, simply viewing the current sweep data.",
+                "label_active": {
+                  "En": "VIEW",
+                  "Fr": "VOIR",
+                  "De": "ANSEHEN",
+                  "Es": "VER"
+                },
+                "label_inactive": {
+                  "En": "VIEW",
+                  "Fr": "VOIR",
+                  "De": "ANSEHEN",
+                  "Es": "VER"
+                },
+                "description": {
+                  "En": "The standard mode, simply viewing the current sweep data.",
+                  "Fr": "The standard mode, simply viewing the current sweep data.",
+                  "De": "The standard mode, simply viewing the current sweep data.",
+                  "Es": "The standard mode, simply viewing the current sweep data."
+                },
                 "value": "VIEW",
                 "units": "mode",
                 "selected": false
@@ -227,7 +467,12 @@
       "Trace 4": {
         "type": "OcaBlock",
         "show_label": true,
-        "description": "Settings for Trace 4 Mode",
+        "description": {
+          "En": "Settings for Trace 4 Mode",
+          "Fr": "Paramètres for Trace 4 Mode",
+          "De": "Einstellungen for Trace 4 Mode",
+          "Es": "Ajustes for Trace 4 Mode"
+        },
         "layout": {
           "weight": 1
         },
@@ -252,41 +497,116 @@
             },
             "options": {
               "WRITE": {
-                "label_active": "LIVE REALTIME",
-                "label_inactive": "LIVE REALTIME",
-                "description": "Captures and displays the trace in real time, like a hyperactive surveillance camera.",
+                "label_active": {
+                  "En": "LIVE REALTIME",
+                  "Fr": "LIVE REALTIME",
+                  "De": "LIVE REALTIME",
+                  "Es": "LIVE REALTIME"
+                },
+                "label_inactive": {
+                  "En": "LIVE REALTIME",
+                  "Fr": "LIVE REALTIME",
+                  "De": "LIVE REALTIME",
+                  "Es": "LIVE REALTIME"
+                },
+                "description": {
+                  "En": "Captures and displays the trace in real time, like a hyperactive surveillance camera.",
+                  "Fr": "Capture et affiche la trace en temps réel, comme une caméra de surveillance hyperactive.",
+                  "De": "Erfasst und zeigt den Trace in Echtzeit an, wie eine hyperaktive Überwachungskamera.",
+                  "Es": "Captura y muestra la traza en tiempo real, como una cámara de vigilancia hiperactiva."
+                },
                 "value": "WRITE",
                 "units": "mode",
                 "selected": false
               },
               "MAXHOLD": {
-                "label_active": "MAX HOLD",
-                "label_inactive": "MAX HOLD",
-                "description": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                "label_active": {
+                  "En": "MAX HOLD",
+                  "Fr": "MAX HOLD",
+                  "De": "MAX HOLD",
+                  "Es": "MAX HOLD"
+                },
+                "label_inactive": {
+                  "En": "MAX HOLD",
+                  "Fr": "MAX HOLD",
+                  "De": "MAX HOLD",
+                  "Es": "MAX HOLD"
+                },
+                "description": {
+                  "En": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                  "Fr": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                  "De": "Keeps the highest-level peaks on display, like a digital trophy case for signals.",
+                  "Es": "Keeps the highest-level peaks on display, like a digital trophy case for signals."
+                },
                 "value": "MAXHOLD",
                 "units": "mode",
                 "selected": false
               },
               "MINHOLD": {
-                "label_active": "MIN HOLD",
-                "label_inactive": "MIN HOLD",
-                "description": "Holds onto the lowest points, great for detecting signals that vanish in the noise.",
+                "label_active": {
+                  "En": "MIN HOLD",
+                  "Fr": "MIN HOLD",
+                  "De": "MIN HOLD",
+                  "Es": "MIN HOLD"
+                },
+                "label_inactive": {
+                  "En": "MIN HOLD",
+                  "Fr": "MIN HOLD",
+                  "De": "MIN HOLD",
+                  "Es": "MIN HOLD"
+                },
+                "description": {
+                  "En": "Holds onto the lowest points, great for detecting signals that vanish in the noise.",
+                  "Fr": "Maintiens onto the lowest points, great for detecting signals that vanish in the noise.",
+                  "De": "Haltens onto the lowest points, great for detecting signals that vanish in the noise.",
+                  "Es": "Manteners onto the lowest points, great for detecting signals that vanish in the noise."
+                },
                 "value": "MINHOLD",
                 "units": "mode",
                 "selected": false
               },
               "BLANK": {
-                "label_active": "BLANK",
-                "label_inactive": "BLANK",
-                "description": "Clears the slate, preparing for a new scan. A zen state for the scanner.",
+                "label_active": {
+                  "En": "BLANK",
+                  "Fr": "BLANK",
+                  "De": "BLANK",
+                  "Es": "BLANK"
+                },
+                "label_inactive": {
+                  "En": "BLANK",
+                  "Fr": "BLANK",
+                  "De": "BLANK",
+                  "Es": "BLANK"
+                },
+                "description": {
+                  "En": "Clears the slate, preparing for a new scan. A zen state for the scanner.",
+                  "Fr": "Effacers the slate, preparing for a new scan. A zen state for the scanner.",
+                  "De": "Löschens the slate, preparing for a new scan. A zen state for the scanner.",
+                  "Es": "Borrars the slate, preparing for a new scan. A zen state for the scanner."
+                },
                 "value": "BLANK",
                 "units": "mode",
                 "selected": true
               },
               "VIEW": {
-                "label_active": "VIEW",
-                "label_inactive": "VIEW",
-                "description": "The standard mode, simply viewing the current sweep data.",
+                "label_active": {
+                  "En": "VIEW",
+                  "Fr": "VOIR",
+                  "De": "ANSEHEN",
+                  "Es": "VER"
+                },
+                "label_inactive": {
+                  "En": "VIEW",
+                  "Fr": "VOIR",
+                  "De": "ANSEHEN",
+                  "Es": "VER"
+                },
+                "description": {
+                  "En": "The standard mode, simply viewing the current sweep data.",
+                  "Fr": "The standard mode, simply viewing the current sweep data.",
+                  "De": "The standard mode, simply viewing the current sweep data.",
+                  "Es": "The standard mode, simply viewing the current sweep data."
+                },
                 "value": "VIEW",
                 "units": "mode",
                 "selected": false
@@ -305,7 +625,12 @@
       "Continuous": {
         "type": "OcaBlock",
         "AES70": "OcaTraceManager",
-        "description": "A block for managing the continuous sweep settings.",
+        "description": {
+          "En": "A block for managing the continuous sweep settings.",
+          "Fr": "Un bloc pour gérer les paramètres de balayage continu.",
+          "De": "Ein Block zur Verwaltung der Einstellungen für den kontinuierlichen Sweep.",
+          "Es": "Un bloque para gestionar los ajustes del barrido continuo."
+        },
         "layout": {
           "weight": 1
         },
@@ -334,15 +659,45 @@
             },
             "options": {
               "ON": {
-                "label_active": "CONTINUOUS ON",
-                "label_inactive": "CONTINUOUS ON",
-                "description": "Turns on continuous sweep mode. The scanner never rests!",
+                "label_active": {
+                  "En": "CONTINUOUS ON",
+                  "Fr": "CONTINUOUS ON",
+                  "De": "CONTINUOUS ON",
+                  "Es": "CONTINUOUS ON"
+                },
+                "label_inactive": {
+                  "En": "CONTINUOUS ON",
+                  "Fr": "CONTINUOUS ON",
+                  "De": "CONTINUOUS ON",
+                  "Es": "CONTINUOUS ON"
+                },
+                "description": {
+                  "En": "Turns on continuous sweep mode. The scanner never rests!",
+                  "Fr": "Turns on continuous sweep mode. The scanner never rests!",
+                  "De": "Turns on continuous sweep mode. The scanner never rests!",
+                  "Es": "Turns on continuous sweep mode. The scanner never rests!"
+                },
                 "selected": true
               },
               "OFF": {
-                "label_active": "CONTINUOUS OFF",
-                "label_inactive": "CONTINUOUS OFF",
-                "description": "Turns off continuous sweep mode. The scanner will perform a single sweep and then rest.",
+                "label_active": {
+                  "En": "CONTINUOUS OFF",
+                  "Fr": "CONTINUOUS OFF",
+                  "De": "CONTINUOUS OFF",
+                  "Es": "CONTINUOUS OFF"
+                },
+                "label_inactive": {
+                  "En": "CONTINUOUS OFF",
+                  "Fr": "CONTINUOUS OFF",
+                  "De": "CONTINUOUS OFF",
+                  "Es": "CONTINUOUS OFF"
+                },
+                "description": {
+                  "En": "Turns off continuous sweep mode. The scanner will perform a single sweep and then rest.",
+                  "Fr": "Désactive le mode de balayage continu. Le scanner effectuera un seul balayage puis s'arrêtera.",
+                  "De": "Schaltet den kontinuierlichen Sweep-Modus aus. Der Scanner führt einen einzelnen Sweep durch und ruht dann.",
+                  "Es": "Desactiva el modo de barrido continuo. El escáner realizará un solo barrido y luego descansará."
+                },
                 "selected": false
               }
             },
@@ -357,8 +712,18 @@
           },
           "initiate_continuous_on": {
             "type": "_GuiActuator",
-            "label_active": "CONTINUOUS INITIATED",
-            "label_inactive": "CONTINUOUS INITIATE",
+            "label_active": {
+              "En": "CONTINUOUS INITIATED",
+              "Fr": "CONTINU INITIÉ",
+              "De": "KONTINUIERLICH GESTARTET",
+              "Es": "CONTINUO INICIADO"
+            },
+            "label_inactive": {
+              "En": "CONTINUOUS INITIATE",
+              "Fr": "CONTINUOUS INITIATE",
+              "De": "CONTINUOUS INITIATE",
+              "Es": "CONTINUOUS INITIATE"
+            },
             "AES70": "OcaBooleanActuator",
             "handler": "toggle_continuous_initiate",
             "layout": {
@@ -400,7 +765,12 @@
       "Averaging": {
         "type": "OcaBlock",
         "AES70": "OcaTraceManager",
-        "description": "A block for managing trace averaging settings.",
+        "description": {
+          "En": "A block for managing trace averaging settings.",
+          "Fr": "Un bloc pour gérer les paramètres de moyenne de trace.",
+          "De": "Ein Block zum Verwalten der Trace-Mittelwerteinstellungen.",
+          "Es": "Un bloque para gestionar los ajustes de promedio de traza."
+        },
         "layout": {
           "weight": 0
         },
@@ -431,90 +801,255 @@
             },
             "options": {
               "0": {
-                "label_active": "Off",
-                "label_inactive": "Off",
-                "description": "Just a raw, single sweep. Great for seeing fast changes and fleeting events, but the noise floor is high and the trace is very jittery.",
+                "label_active": {
+                  "En": "Off",
+                  "Fr": "Désactivé",
+                  "De": "Aus",
+                  "Es": "Desactivado"
+                },
+                "label_inactive": {
+                  "En": "Off",
+                  "Fr": "Désactivé",
+                  "De": "Aus",
+                  "Es": "Desactivado"
+                },
+                "description": {
+                  "En": "Just a raw, single sweep. Great for seeing fast changes and fleeting events, but the noise floor is high and the trace is very jittery.",
+                  "Fr": "Just a raw, single sweep. Great for seeing fast changes and fleeting events, but the noise floor is high and the trace is very jittery.",
+                  "De": "Just a raw, single sweep. Great for seeing fast changes and fleeting events, but the noise floor is high and the trace is very jittery.",
+                  "Es": "Just a raw, single sweep. Great for seeing fast changes and fleeting events, but the noise floor is high and the trace is very jittery."
+                },
                 "value": "0",
                 "units": "count",
                 "selected": true
               },
               "5": {
-                "label_active": "Light Filter",
-                "label_inactive": "Light Filter",
-                "description": "A very mild smoothing of the signal, removing some of the jitter. It's like putting a slight damper on the noise, making the trace a little easier to read.",
+                "label_active": {
+                  "En": "Light Filter",
+                  "Fr": "Filtre léger",
+                  "De": "Leichter Filter",
+                  "Es": "Filtro ligero"
+                },
+                "label_inactive": {
+                  "En": "Light Filter",
+                  "Fr": "Filtre léger",
+                  "De": "Leichter Filter",
+                  "Es": "Filtro ligero"
+                },
+                "description": {
+                  "En": "A very mild smoothing of the signal, removing some of the jitter. It's like putting a slight damper on the noise, making the trace a little easier to read.",
+                  "Fr": "A very mild smoothing of the signal, removing some of the jitter. It's like putting a slight damper on the noise, making the trace a little easier to read.",
+                  "De": "A very mild smoothing of the signal, removing some of the jitter. It's like putting a slight damper on the noise, making the trace a little easier to read.",
+                  "Es": "A very mild smoothing of the signal, removing some of the jitter. It's like putting a slight damper on the noise, making the trace a little easier to read."
+                },
                 "value": "5",
                 "units": "count",
                 "selected": false
               },
               "10": {
-                "label_active": "Getting Clear",
-                "label_inactive": "Getting Clear",
-                "description": "The trace becomes noticeably less fuzzy. The random spikes of the noise floor start to settle down, revealing more consistent signals.",
+                "label_active": {
+                  "En": "Getting Clear",
+                  "Fr": "Getting Effacer",
+                  "De": "Getting Löschen",
+                  "Es": "Getting Borrar"
+                },
+                "label_inactive": {
+                  "En": "Getting Clear",
+                  "Fr": "Getting Effacer",
+                  "De": "Getting Löschen",
+                  "Es": "Getting Borrar"
+                },
+                "description": {
+                  "En": "The trace becomes noticeably less fuzzy. The random spikes of the noise floor start to settle down, revealing more consistent signals.",
+                  "Fr": "The trace becomes noticeably less fuzzy. The random spikes of the noise floor start to settle down, revealing more consistent signals.",
+                  "De": "The trace becomes noticeably less fuzzy. The random spikes of the noise floor start to settle down, revealing more consistent signals.",
+                  "Es": "The trace becomes noticeably less fuzzy. The random spikes of the noise floor start to settle down, revealing more consistent signals."
+                },
                 "value": "10",
                 "units": "count",
                 "selected": false
               },
               "25": {
-                "label_active": "The Sweet Spot",
-                "label_inactive": "The Sweet Spot",
-                "description": "A good balance of noise reduction and display speed. The noise floor is clean, and low-level, stable signals are clearly visible.",
+                "label_active": {
+                  "En": "The Sweet Spot",
+                  "Fr": "The Sweet Spot",
+                  "De": "The Sweet Spot",
+                  "Es": "The Sweet Spot"
+                },
+                "label_inactive": {
+                  "En": "The Sweet Spot",
+                  "Fr": "The Sweet Spot",
+                  "De": "The Sweet Spot",
+                  "Es": "The Sweet Spot"
+                },
+                "description": {
+                  "En": "A good balance of noise reduction and display speed. The noise floor is clean, and low-level, stable signals are clearly visible.",
+                  "Fr": "A good balance of noise reduction and display speed. The noise floor is clean, and low-level, stable signals are clearly visible.",
+                  "De": "A good balance of noise reduction and display speed. The noise floor is clean, and low-level, stable signals are clearly visible.",
+                  "Es": "A good balance of noise reduction and display speed. The noise floor is clean, and low-level, stable signals are clearly visible."
+                },
                 "value": "25",
                 "units": "count",
                 "selected": false
               },
               "50": {
-                "label_active": "Steady Hands",
-                "label_inactive": "Steady Hands",
-                "description": "The noise floor is now very stable and appears as a thin line. You're only seeing the most consistent signals and cutting out most of the random interference.",
+                "label_active": {
+                  "En": "Steady Hands",
+                  "Fr": "Mains stables",
+                  "De": "Ruhige Hände",
+                  "Es": "Manos firmes"
+                },
+                "label_inactive": {
+                  "En": "Steady Hands",
+                  "Fr": "Mains stables",
+                  "De": "Ruhige Hände",
+                  "Es": "Manos firmes"
+                },
+                "description": {
+                  "En": "The noise floor is now very stable and appears as a thin line. You're only seeing the most consistent signals and cutting out most of the random interference.",
+                  "Fr": "The noise floor is now very stable and appears as a thin line. You're only seeing the most consistent signals and cutting out most of the random interference.",
+                  "De": "The noise floor is now very stable and appears as a thin line. You're only seeing the most consistent signals and cutting out most of the random interference.",
+                  "Es": "The noise floor is now very stable and appears as a thin line. You're only seeing the most consistent signals and cutting out most of the random interference."
+                },
                 "value": "50",
                 "units": "count",
                 "selected": false
               },
               "75": {
-                "label_active": "Deep Dive",
-                "label_inactive": "Deep Dive",
-                "description": "This setting is for serious analysis. It's a highly stable trace that filters out a large portion of the ambient RF noise, allowing for precise measurements of continuous signals.",
+                "label_active": {
+                  "En": "Deep Dive",
+                  "Fr": "Deep Dive",
+                  "De": "Deep Dive",
+                  "Es": "Deep Dive"
+                },
+                "label_inactive": {
+                  "En": "Deep Dive",
+                  "Fr": "Deep Dive",
+                  "De": "Deep Dive",
+                  "Es": "Deep Dive"
+                },
+                "description": {
+                  "En": "This setting is for serious analysis. It's a highly stable trace that filters out a large portion of the ambient RF noise, allowing for precise measurements of continuous signals.",
+                  "Fr": "This setting is for serious analysis. It's a highly stable trace that filters out a large portion of the ambient RF noise, allowing for precise measurements of continuous signals.",
+                  "De": "This setting is for serious analysis. It's a highly stable trace that filters out a large portion of the ambient RF noise, allowing for precise measurements of continuous signals.",
+                  "Es": "This setting is for serious analysis. It's a highly stable trace that filters out a large portion of the ambient RF noise, allowing for precise measurements of continuous signals."
+                },
                 "value": "75",
                 "units": "count",
                 "selected": false
               },
               "100": {
-                "label_active": "Scientific Grade",
-                "label_inactive": "Scientific Grade",
-                "description": "For when only the cleanest signal will do. This high level of averaging provides a virtually noise-free display, perfect for scientific or very low-level signal detection.",
+                "label_active": {
+                  "En": "Scientific Grade",
+                  "Fr": "Qualité scientifique",
+                  "De": "Wissenschaftliche Qualität",
+                  "Es": "Grado científico"
+                },
+                "label_inactive": {
+                  "En": "Scientific Grade",
+                  "Fr": "Qualité scientifique",
+                  "De": "Wissenschaftliche Qualität",
+                  "Es": "Grado científico"
+                },
+                "description": {
+                  "En": "For when only the cleanest signal will do. This high level of averaging provides a virtually noise-free display, perfect for scientific or very low-level signal detection.",
+                  "Fr": "For when only the cleanest signal will do. This high level of averaging provides a virtually noise-free display, perfect for scientific or very low-level signal detection.",
+                  "De": "For when only the cleanest signal will do. This high level of averaging provides a virtually noise-free display, perfect for scientific or very low-level signal detection.",
+                  "Es": "For when only the cleanest signal will do. This high level of averaging provides a virtually noise-free display, perfect for scientific or very low-level signal detection."
+                },
                 "value": "100",
                 "units": "count",
                 "selected": false
               },
               "200": {
-                "label_active": "Crystal Clear",
-                "label_inactive": "Crystal Clear",
-                "description": "A deep and thorough look at the spectrum. All but the most stable signals are averaged out, offering a truly pristine view of the fundamental RF environment.",
+                "label_active": {
+                  "En": "Crystal Clear",
+                  "Fr": "Cristallin",
+                  "De": "Glasklar",
+                  "Es": "Cristalino"
+                },
+                "label_inactive": {
+                  "En": "Crystal Clear",
+                  "Fr": "Cristallin",
+                  "De": "Glasklar",
+                  "Es": "Cristalino"
+                },
+                "description": {
+                  "En": "A deep and thorough look at the spectrum. All but the most stable signals are averaged out, offering a truly pristine view of the fundamental RF environment.",
+                  "Fr": "Un regard profond et complet sur le spectre. Tous les signaux, sauf les plus stables, sont moyennés, offrant une vue vraiment pure de l'environnement RF fondamental.",
+                  "De": "Ein tiefer und gründlicher Blick auf das Spektrum. Bis auf die stabilsten Signale werden alle gemittelt, was einen wirklich unverfälschten Blick auf die grundlegende HF-Umgebung bietet.",
+                  "Es": "Una mirada profunda y exhaustiva al espectro. Todas las señales, excepto las más estables, se promedian, ofreciendo una vista verdaderamente prístina del entorno de RF fundamental."
+                },
                 "value": "200",
                 "units": "count",
                 "selected": false
               },
               "500": {
-                "label_active": "The Observer",
-                "label_inactive": "The Observer",
-                "description": "An incredibly slow and deliberate pace. This is for long-term monitoring, allowing you to see the overall shape of the spectrum with almost all noise removed.",
+                "label_active": {
+                  "En": "The Observer",
+                  "Fr": "The Observer",
+                  "De": "The Observer",
+                  "Es": "The Observer"
+                },
+                "label_inactive": {
+                  "En": "The Observer",
+                  "Fr": "The Observer",
+                  "De": "The Observer",
+                  "Es": "The Observer"
+                },
+                "description": {
+                  "En": "An incredibly slow and deliberate pace. This is for long-term monitoring, allowing you to see the overall shape of the spectrum with almost all noise removed.",
+                  "Fr": "Un rythme incroyablement lent et délibéré. Ceci est pour une surveillance à long terme, vous permettant de voir la forme globale du spectre avec presque tout le bruit supprimé.",
+                  "De": "Ein unglaublich langsames und bewusstes Tempo. Dies ist für die Langzeitüberwachung gedacht und ermöglicht es Ihnen, die Gesamtform des Spektrums zu sehen, wobei fast alle Störungen entfernt wurden.",
+                  "Es": "Un ritmo increíblemente lento y deliberado. Esto es para el monitoreo a largo plazo, permitiéndole ver la forma general del espectro con casi todo el ruido eliminado."
+                },
                 "value": "500",
                 "units": "count",
                 "selected": false
               },
               "1000": {
-                "label_active": "Meditative Mode",
-                "label_inactive": "Meditative Mode",
-                "description": "For the patient and the meticulous. This is the ultimate level of noise reduction, yielding an exceptionally smooth and stable trace for the most demanding analysis.",
+                "label_active": {
+                  "En": "Meditative Mode",
+                  "Fr": "Meditative Mode",
+                  "De": "Meditative Modus",
+                  "Es": "Meditative Modo"
+                },
+                "label_inactive": {
+                  "En": "Meditative Mode",
+                  "Fr": "Meditative Mode",
+                  "De": "Meditative Modus",
+                  "Es": "Meditative Modo"
+                },
+                "description": {
+                  "En": "For the patient and the meticulous. This is the ultimate level of noise reduction, yielding an exceptionally smooth and stable trace for the most demanding analysis.",
+                  "Fr": "For the patient and the meticulous. This is the ultimate level of noise reduction, yielding an exceptionally smooth and stable trace for the most demanding analysis.",
+                  "De": "For the patient and the meticulous. This is the ultimate level of noise reduction, yielding an exceptionally smooth and stable trace for the most demanding analysis.",
+                  "Es": "For the patient and the meticulous. This is the ultimate level of noise reduction, yielding an exceptionally smooth and stable trace for the most demanding analysis."
+                },
                 "value": "1000",
                 "units": "count",
                 "selected": false
               },
               "UNSELECTED": {
                 "value": "NONE",
-                "label_active": "None Selected",
-                "label_inactive": "None Selected",
-                "description": "No averaging option is currently selected.",
+                "label_active": {
+                  "En": "None Selected",
+                  "Fr": "Aucun sélectionné",
+                  "De": "Keine ausgewählt",
+                  "Es": "Ninguno seleccionado"
+                },
+                "label_inactive": {
+                  "En": "None Selected",
+                  "Fr": "Aucun sélectionné",
+                  "De": "Keine ausgewählt",
+                  "Es": "Ninguno seleccionado"
+                },
+                "description": {
+                  "En": "No averaging option is currently selected.",
+                  "Fr": "Aucune option de moyenne n'est sélectionnée.",
+                  "De": "Momentan ist keine Mittelwertoption ausgewählt.",
+                  "Es": "No hay ninguna opción de promedio seleccionada."
+                },
                 "units": "",
                 "selected": false
               }

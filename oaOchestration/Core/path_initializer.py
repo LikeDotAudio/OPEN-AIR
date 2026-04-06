@@ -41,17 +41,21 @@ def initialize_paths():
     instance_guid = os.environ.get("OPEN_AIR_INSTANCE_GUID", "standalone")
     temp_base_dir = GLOBAL_PROJECT_ROOT / ".pytest_cache" / "RUN" / instance_guid
 
-    DATA_RUNNING_DIR = temp_base_dir / "oaDataState"
-    DATA_LOGS_DIR = temp_base_dir / "oaDataLogs"
-    DATA_CACHE_DIR = temp_base_dir / "oaDataCache"
-    DATA_SNMP_DIR = temp_base_dir / "oaDataSNMP"
-    DATA_SPLINKS_DIR = temp_base_dir / "oaDataSplinks"
-    DATA_REPORTS_DIR = temp_base_dir / "oaReports"
+    # --- PERSISTENT DATA VAULTS ---
+    DATA_RUNNING_DIR = GLOBAL_PROJECT_ROOT / "oaDataRunningFiles"
+    DATA_LOGS_DIR = GLOBAL_PROJECT_ROOT / "oaDataLogs"
+    DATA_CACHE_DIR = GLOBAL_PROJECT_ROOT / "oaDataCache"
+    DATA_SNMP_DIR = GLOBAL_PROJECT_ROOT / "oaDataLogs" / "SNMP"
+    DATA_SPLINKS_DIR = GLOBAL_PROJECT_ROOT / "oaDataSplinks"
+    DATA_REPORTS_DIR = GLOBAL_PROJECT_ROOT / "oaDataLogs" / "Reports"
 
     # Ensure directories exist (Auto-generation)
     DATA_RUNNING_DIR.mkdir(parents=True, exist_ok=True)
-    # The other directories are created on-demand by their respective managers
-    # to keep the temp folder clean.
+    DATA_LOGS_DIR.mkdir(parents=True, exist_ok=True)
+    DATA_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    DATA_SNMP_DIR.mkdir(parents=True, exist_ok=True)
+    DATA_SPLINKS_DIR.mkdir(parents=True, exist_ok=True)
+    DATA_REPORTS_DIR.mkdir(parents=True, exist_ok=True)
     
     return GLOBAL_PROJECT_ROOT, DATA_RUNNING_DIR
 

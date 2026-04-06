@@ -14,15 +14,30 @@
       "All Marker On": {
         "type": "OcaBlock",
         "AES70": "OcaMarkerManager",
-        "description": "A block for managing global marker settings.",
+        "description": {
+          "En": "A block for managing global marker settings.",
+          "Fr": "Un bloc pour gérer les paramètres globaux des marqueurs.",
+          "De": "Ein Block zur Verwaltung globaler Marker-Einstellungen.",
+          "Es": "Un bloque para gestionar los ajustes globales de los marcadores."
+        },
         "layout": {
           "weight": 1
         },
         "fields": {
           "All_Markers_On": {
             "type": "_GuiButtonToggle",
-            "label_active": "All Markers ON",
-            "label_inactive": "All Markers ON",
+            "label_active": {
+              "En": "All Markers ON",
+              "Fr": "Tous les marqueurs ON",
+              "De": "Alle Marker EIN",
+              "Es": "Todos los marcadores ENC"
+            },
+            "label_inactive": {
+              "En": "All Markers ON",
+              "Fr": "Tous les marqueurs ON",
+              "De": "Alle Marker EIN",
+              "Es": "Todos los marcadores ENC"
+            },
             "AES70": "OcaBooleanActuator",
             "handler": "turn_all_markers_on",
             "layout": {
@@ -44,13 +59,33 @@
             },
             "options": {
               "ON": {
-                "label_active": "All Markers ON",
-                "label_inactive": "All Markers ON",
+                "label_active": {
+                  "En": "All Markers ON",
+                  "Fr": "Tous les marqueurs ON",
+                  "De": "Alle Marker EIN",
+                  "Es": "Todos los marcadores ENC"
+                },
+                "label_inactive": {
+                  "En": "All Markers ON",
+                  "Fr": "Tous les marqueurs ON",
+                  "De": "Alle Marker EIN",
+                  "Es": "Todos los marcadores ENC"
+                },
                 "selected": true
               },
               "OFF": {
-                "label_active": "All Markers OFF",
-                "label_inactive": "All Markers OFF",
+                "label_active": {
+                  "En": "All Markers OFF",
+                  "Fr": "Tous les marqueurs OFF",
+                  "De": "Alle Marker AUS",
+                  "Es": "Todos los marcadores DES"
+                },
+                "label_inactive": {
+                  "En": "All Markers OFF",
+                  "Fr": "Tous les marqueurs OFF",
+                  "De": "Alle Marker AUS",
+                  "Es": "Todos los marcadores DES"
+                },
                 "selected": false
               }
             },
@@ -74,14 +109,29 @@
       },
       "Marker 1": {
         "type": "OcaBlock",
-        "description": "Settings for Marker 1",
+        "description": {
+          "En": "Settings for Marker 1",
+          "Fr": "Paramètres for Marker 1",
+          "De": "Einstellungen for Marker 1",
+          "Es": "Ajustes for Marker 1"
+        },
         "layout": {
           "weight": 1
         },
         "fields": {
           "Active": {
-            "label_active": "Active",
-            "label_inactive": "Active",
+            "label_active": {
+              "En": "Active",
+              "Fr": "Actif",
+              "De": "Aktiv",
+              "Es": "Activo"
+            },
+            "label_inactive": {
+              "En": "Active",
+              "Fr": "Actif",
+              "De": "Aktiv",
+              "Es": "Activo"
+            },
             "type": "_GuiCheckbox",
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
@@ -100,8 +150,18 @@
             }
           },
           "X_MHz": {
-            "label_active": "X",
-            "label_inactive": "X",
+            "label_active": {
+              "En": "X",
+              "Fr": "X",
+              "De": "X",
+              "Es": "X"
+            },
+            "label_inactive": {
+              "En": "X",
+              "Fr": "X",
+              "De": "X",
+              "Es": "X"
+            },
             "type": "_Value",
             "layout": {
               "height": 30,
@@ -123,8 +183,18 @@
             "units": "MHz"
           },
           "Y_dBm": {
-            "label_active": "Y",
-            "label_inactive": "Y",
+            "label_active": {
+              "En": "Y",
+              "Fr": "Y",
+              "De": "Y",
+              "Es": "Y"
+            },
+            "label_inactive": {
+              "En": "Y",
+              "Fr": "Y",
+              "De": "Y",
+              "Es": "Y"
+            },
             "type": "_Label",
             "AES70": "OcaLevelSensor",
             "value": "-30",
@@ -141,14 +211,29 @@
       },
       "Marker 2": {
         "type": "OcaBlock",
-        "description": "Settings for Marker 2",
+        "description": {
+          "En": "Settings for Marker 2",
+          "Fr": "Paramètres for Marker 2",
+          "De": "Einstellungen for Marker 2",
+          "Es": "Ajustes for Marker 2"
+        },
         "layout": {
           "weight": 1
         },
         "fields": {
           "Active": {
-            "label_active": "Active",
-            "label_inactive": "Active",
+            "label_active": {
+              "En": "Active",
+              "Fr": "Actif",
+              "De": "Aktiv",
+              "Es": "Activo"
+            },
+            "label_inactive": {
+              "En": "Active",
+              "Fr": "Actif",
+              "De": "Aktiv",
+              "Es": "Activo"
+            },
             "type": "_GuiCheckbox",
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
@@ -167,8 +252,18 @@
             }
           },
           "X_MHz": {
-            "label_active": "X",
-            "label_inactive": "X",
+            "label_active": {
+              "En": "X",
+              "Fr": "X",
+              "De": "X",
+              "Es": "X"
+            },
+            "label_inactive": {
+              "En": "X",
+              "Fr": "X",
+              "De": "X",
+              "Es": "X"
+            },
             "type": "_Value",
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
@@ -185,8 +280,18 @@
             "units": "MHz"
           },
           "Y_dBm": {
-            "label_active": "Y",
-            "label_inactive": "Y",
+            "label_active": {
+              "En": "Y",
+              "Fr": "Y",
+              "De": "Y",
+              "Es": "Y"
+            },
+            "label_inactive": {
+              "En": "Y",
+              "Fr": "Y",
+              "De": "Y",
+              "Es": "Y"
+            },
             "type": "_Label",
             "AES70": "OcaLevelSensor",
             "value": "-30",
@@ -203,14 +308,29 @@
       },
       "Marker 3": {
         "type": "OcaBlock",
-        "description": "Settings for Marker 3",
+        "description": {
+          "En": "Settings for Marker 3",
+          "Fr": "Paramètres for Marker 3",
+          "De": "Einstellungen for Marker 3",
+          "Es": "Ajustes for Marker 3"
+        },
         "layout": {
           "weight": 1
         },
         "fields": {
           "Active": {
-            "label_active": "Active",
-            "label_inactive": "Active",
+            "label_active": {
+              "En": "Active",
+              "Fr": "Actif",
+              "De": "Aktiv",
+              "Es": "Activo"
+            },
+            "label_inactive": {
+              "En": "Active",
+              "Fr": "Actif",
+              "De": "Aktiv",
+              "Es": "Activo"
+            },
             "type": "_GuiCheckbox",
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
@@ -229,8 +349,18 @@
             }
           },
           "X_MHz": {
-            "label_active": "X",
-            "label_inactive": "X",
+            "label_active": {
+              "En": "X",
+              "Fr": "X",
+              "De": "X",
+              "Es": "X"
+            },
+            "label_inactive": {
+              "En": "X",
+              "Fr": "X",
+              "De": "X",
+              "Es": "X"
+            },
             "type": "_Value",
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
@@ -247,8 +377,18 @@
             "units": "MHz"
           },
           "Y_dBm": {
-            "label_active": "Y",
-            "label_inactive": "Y",
+            "label_active": {
+              "En": "Y",
+              "Fr": "Y",
+              "De": "Y",
+              "Es": "Y"
+            },
+            "label_inactive": {
+              "En": "Y",
+              "Fr": "Y",
+              "De": "Y",
+              "Es": "Y"
+            },
             "type": "_Label",
             "AES70": "OcaLevelSensor",
             "value": "-30",
@@ -265,14 +405,29 @@
       },
       "Marker 4": {
         "type": "OcaBlock",
-        "description": "Settings for Marker 4",
+        "description": {
+          "En": "Settings for Marker 4",
+          "Fr": "Paramètres for Marker 4",
+          "De": "Einstellungen for Marker 4",
+          "Es": "Ajustes for Marker 4"
+        },
         "layout": {
           "weight": 1
         },
         "fields": {
           "Active": {
-            "label_active": "Active",
-            "label_inactive": "Active",
+            "label_active": {
+              "En": "Active",
+              "Fr": "Actif",
+              "De": "Aktiv",
+              "Es": "Activo"
+            },
+            "label_inactive": {
+              "En": "Active",
+              "Fr": "Actif",
+              "De": "Aktiv",
+              "Es": "Activo"
+            },
             "type": "_GuiCheckbox",
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
@@ -291,8 +446,18 @@
             }
           },
           "X_MHz": {
-            "label_active": "X",
-            "label_inactive": "X",
+            "label_active": {
+              "En": "X",
+              "Fr": "X",
+              "De": "X",
+              "Es": "X"
+            },
+            "label_inactive": {
+              "En": "X",
+              "Fr": "X",
+              "De": "X",
+              "Es": "X"
+            },
             "type": "_Value",
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
@@ -309,8 +474,18 @@
             "units": "MHz"
           },
           "Y_dBm": {
-            "label_active": "Y",
-            "label_inactive": "Y",
+            "label_active": {
+              "En": "Y",
+              "Fr": "Y",
+              "De": "Y",
+              "Es": "Y"
+            },
+            "label_inactive": {
+              "En": "Y",
+              "Fr": "Y",
+              "De": "Y",
+              "Es": "Y"
+            },
             "type": "_Label",
             "AES70": "OcaLevelSensor",
             "value": "-30",
@@ -327,14 +502,29 @@
       },
       "Marker 5": {
         "type": "OcaBlock",
-        "description": "Settings for Marker 5",
+        "description": {
+          "En": "Settings for Marker 5",
+          "Fr": "Paramètres for Marker 5",
+          "De": "Einstellungen for Marker 5",
+          "Es": "Ajustes for Marker 5"
+        },
         "layout": {
           "weight": 1
         },
         "fields": {
           "Active": {
-            "label_active": "Active",
-            "label_inactive": "Active",
+            "label_active": {
+              "En": "Active",
+              "Fr": "Actif",
+              "De": "Aktiv",
+              "Es": "Activo"
+            },
+            "label_inactive": {
+              "En": "Active",
+              "Fr": "Actif",
+              "De": "Aktiv",
+              "Es": "Activo"
+            },
             "type": "_GuiCheckbox",
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
@@ -353,8 +543,18 @@
             }
           },
           "X_MHz": {
-            "label_active": "X",
-            "label_inactive": "X",
+            "label_active": {
+              "En": "X",
+              "Fr": "X",
+              "De": "X",
+              "Es": "X"
+            },
+            "label_inactive": {
+              "En": "X",
+              "Fr": "X",
+              "De": "X",
+              "Es": "X"
+            },
             "type": "_Value",
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
@@ -371,8 +571,18 @@
             "units": "MHz"
           },
           "Y_dBm": {
-            "label_active": "Y",
-            "label_inactive": "Y",
+            "label_active": {
+              "En": "Y",
+              "Fr": "Y",
+              "De": "Y",
+              "Es": "Y"
+            },
+            "label_inactive": {
+              "En": "Y",
+              "Fr": "Y",
+              "De": "Y",
+              "Es": "Y"
+            },
             "type": "_Label",
             "AES70": "OcaLevelSensor",
             "value": "-30",
@@ -389,14 +599,29 @@
       },
       "Marker 6": {
         "type": "OcaBlock",
-        "description": "Settings for Marker 6",
+        "description": {
+          "En": "Settings for Marker 6",
+          "Fr": "Paramètres pour marqueur 6",
+          "De": "Einstellungen für Marker 6",
+          "Es": "Ajustes para marcador 6"
+        },
         "layout": {
           "weight": 1
         },
         "fields": {
           "Active": {
-            "label_active": "Active",
-            "label_inactive": "Active",
+            "label_active": {
+              "En": "Active",
+              "Fr": "Actif",
+              "De": "Aktiv",
+              "Es": "Activo"
+            },
+            "label_inactive": {
+              "En": "Active",
+              "Fr": "Actif",
+              "De": "Aktiv",
+              "Es": "Activo"
+            },
             "type": "_GuiCheckbox",
             "AES70": "OcaSwitch",
             "handler": "toggle_marker_active",
@@ -415,8 +640,18 @@
             }
           },
           "X_MHz": {
-            "label_active": "X",
-            "label_inactive": "X",
+            "label_active": {
+              "En": "X",
+              "Fr": "X",
+              "De": "X",
+              "Es": "X"
+            },
+            "label_inactive": {
+              "En": "X",
+              "Fr": "X",
+              "De": "X",
+              "Es": "X"
+            },
             "type": "_Value",
             "AES70": "OcaFrequencyActuator",
             "handler": "set_marker_frequency",
@@ -433,8 +668,18 @@
             "units": "MHz"
           },
           "Y_dBm": {
-            "label_active": "Y",
-            "label_inactive": "Y",
+            "label_active": {
+              "En": "Y",
+              "Fr": "Y",
+              "De": "Y",
+              "Es": "Y"
+            },
+            "label_inactive": {
+              "En": "Y",
+              "Fr": "Y",
+              "De": "Y",
+              "Es": "Y"
+            },
             "type": "_Label",
             "AES70": "OcaLevelSensor",
             "value": "-30",

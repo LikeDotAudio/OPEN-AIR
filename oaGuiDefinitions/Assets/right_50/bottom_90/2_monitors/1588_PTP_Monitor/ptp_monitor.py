@@ -25,7 +25,7 @@ from .Core.ptp_meter_panel import PTPMeterPanel
 from .Core.ptp_dissector_engine import PTPDissectorEngine
 
 from oaPTP.Core.ptp import register_ptp_callback, unregister_ptp_callback
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 

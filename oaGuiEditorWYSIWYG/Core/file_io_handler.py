@@ -48,8 +48,18 @@ class FileIOHandler:
                 message=f"💾📁✏️ [FILE_IO] Reading file content ({path.stat().st_size} bytes)...",
                 level="debug",
             )
-            with open(path, 'rb') as f:
-                data = orjson.loads(f.read())
+            if path.stat().st_size == 0:
+                matrix_log(
+                    system="UI",
+                    element="FILE_IO",
+                    func_name=inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown",
+                    message="💾📁✏️ [FILE_IO] File is empty. Initializing with empty dict.",
+                    level="warning",
+                )
+                data = {}
+            else:
+                with open(path, 'rb') as f:
+                    data = orjson.loads(f.read())
             
             matrix_log(
                 system="UI",

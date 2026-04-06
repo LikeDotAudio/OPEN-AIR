@@ -13,11 +13,21 @@
     "blocks": {
       "nab": {
         "type": "OcaBlock",
-        "description": "DC Load Measurements",
+        "description": {
+          "En": "DC Load Measurements",
+          "Fr": "Mesures de charge CC",
+          "De": "DC-Lastmessungen",
+          "Es": "Mediciones de carga de CC"
+        },
         "fields": {
           "Primary_Metering": {
             "type": "OcaBlock",
-            "description": "Voltage, Current, Power",
+            "description": {
+              "En": "Voltage, Current, Power",
+              "Fr": "Tension, Courant, Puissance",
+              "De": "Spannung, Strom, Leistung",
+              "Es": "Voltaje, Corriente, Potencia"
+            },
             "fields": {
               "Measure_All": {
                 "type": "OcaBlock",
@@ -50,25 +60,45 @@
                       "mode": {
                         "value": "V",
                         "type": "_GuiValue",
-                        "label": "Voltage",
+                        "label": {
+                          "En": "Voltage",
+                          "Fr": "Tension",
+                          "De": "Spannung",
+                          "Es": "Voltaje"
+                        },
                         "units": "V"
                       },
                       "volts": {
                         "value": "V",
                         "type": "_GuiValue",
-                        "label": "Voltage",
+                        "label": {
+                          "En": "Voltage",
+                          "Fr": "Tension",
+                          "De": "Spannung",
+                          "Es": "Voltaje"
+                        },
                         "units": "V"
                       },
                       "amps": {
                         "value": "A",
                         "type": "_GuiValue",
-                        "label": "Current",
+                        "label": {
+                          "En": "Current",
+                          "Fr": "Courant",
+                          "De": "Strom",
+                          "Es": "Corriente"
+                        },
                         "units": "A"
                       },
                       "watts": {
                         "value": "W",
                         "type": "_GuiValue",
-                        "label": "Power",
+                        "label": {
+                          "En": "Power",
+                          "Fr": "Puissance",
+                          "De": "Leistung",
+                          "Es": "Potencia"
+                        },
                         "units": "W"
                       }
                     }
@@ -79,7 +109,12 @@
           },
           "System_Status": {
             "type": "OcaBlock",
-            "description": "Diagnostics",
+            "description": {
+              "En": "Diagnostics",
+              "Fr": "Diagnostics",
+              "De": "Diagnostics",
+              "Es": "Diagnostics"
+            },
             "fields": {
               "Status_Byte": {
                 "type": "OcaBlock",
@@ -112,7 +147,12 @@
                       "status_byte": {
                         "value": "Byte Value",
                         "type": "_GuiValue",
-                        "label": "Status",
+                        "label": {
+                          "En": "Status",
+                          "Fr": "État",
+                          "De": "Status",
+                          "Es": "Estado"
+                        },
                         "units": ""
                       }
                     }
@@ -150,7 +190,12 @@
                       "error_msg": {
                         "value": "Error Message",
                         "type": "_GuiValue",
-                        "label": "Error",
+                        "label": {
+                          "En": "Error",
+                          "Fr": "Erreur",
+                          "De": "Fehler",
+                          "Es": "Error"
+                        },
                         "units": ""
                       }
                     }
@@ -188,7 +233,12 @@
                       "idn_string": {
                         "value": "Device ID",
                         "type": "_GuiValue",
-                        "label": "ID String",
+                        "label": {
+                          "En": "ID String",
+                          "Fr": "Chaîne ID",
+                          "De": "ID-String",
+                          "Es": "Cadena de ID"
+                        },
                         "units": ""
                       }
                     }
@@ -201,15 +251,30 @@
       },
       "rig": {
         "type": "OcaBlock",
-        "description": "Load Configuration",
+        "description": {
+          "En": "Load Configuration",
+          "Fr": "Charger Configuration",
+          "De": "Laden Konfiguration",
+          "Es": "Cargar Configuración"
+        },
         "fields": {
           "Mode": {
             "type": "OcaBlock",
-            "description": "CC / CV / CR",
+            "description": {
+              "En": "CC / CV / CR",
+              "Fr": "CC / CV / CR",
+              "De": "CC / CV / CR",
+              "Es": "CC / CV / CR"
+            },
             "fields": {
               "Set_Mode_Current": {
                 "type": "_GuiActuator",
-                "label_inactive": "Mode: CC",
+                "label_inactive": {
+                  "En": "Mode: CC",
+                  "Fr": "Mode: CC",
+                  "De": "Modus: CC",
+                  "Es": "Modo: CC"
+                },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
                   "height": 30,
@@ -234,7 +299,12 @@
               },
               "Set_Mode_Voltage": {
                 "type": "_GuiActuator",
-                "label_inactive": "Mode: CV",
+                "label_inactive": {
+                  "En": "Mode: CV",
+                  "Fr": "Mode: CV",
+                  "De": "Modus: CV",
+                  "Es": "Modo: CV"
+                },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
                   "height": 30,
@@ -259,7 +329,12 @@
               },
               "Set_Mode_Resistance": {
                 "type": "_GuiActuator",
-                "label_inactive": "Mode: CR",
+                "label_inactive": {
+                  "En": "Mode: CR",
+                  "Fr": "Mode: CR",
+                  "De": "Modus: CR",
+                  "Es": "Modo: CR"
+                },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
                   "height": 30,
@@ -286,7 +361,12 @@
           },
           "Current": {
             "type": "OcaBlock",
-            "description": "Constant Current Parameters",
+            "description": {
+              "En": "Constant Current Parameters",
+              "Fr": "Constant Courant Parameters",
+              "De": "Constant Strom Parameters",
+              "Es": "Constant Corriente Parameters"
+            },
             "fields": {
               "Set_Current_Level": {
                 "type": "OcaBlock",
@@ -319,9 +399,19 @@
                       "value": {
                         "value": "1.0",
                         "type": "_GuiValue",
-                        "label": "Current",
+                        "label": {
+                          "En": "Current",
+                          "Fr": "Courant",
+                          "De": "Strom",
+                          "Es": "Corriente"
+                        },
                         "units": "A",
-                        "description": "Amps"
+                        "description": {
+                          "En": "Amps",
+                          "Fr": "Amps",
+                          "De": "Ampere",
+                          "Es": "Amperios"
+                        }
                       }
                     }
                   }
@@ -358,9 +448,19 @@
                       "value": {
                         "value": "60",
                         "type": "_GuiValue",
-                        "label": "Range",
+                        "label": {
+                          "En": "Range",
+                          "Fr": "Plage",
+                          "De": "Bereich",
+                          "Es": "Rango"
+                        },
                         "units": "A",
-                        "description": "6 or 60 A"
+                        "description": {
+                          "En": "6 or 60 A",
+                          "Fr": "6 ou 60 A",
+                          "De": "6 oder 60 A",
+                          "Es": "6 o 60 A"
+                        }
                       }
                     }
                   }
@@ -397,9 +497,19 @@
                       "value": {
                         "value": "1000",
                         "type": "_GuiValue",
-                        "label": "Slew Rate",
+                        "label": {
+                          "En": "Slew Rate",
+                          "Fr": "Slew Rate",
+                          "De": "Slew Rate",
+                          "Es": "Slew Rate"
+                        },
                         "units": "A/s",
-                        "description": "A/sec"
+                        "description": {
+                          "En": "A/sec",
+                          "Fr": "A/sec",
+                          "De": "A/Sek",
+                          "Es": "A/seg"
+                        }
                       }
                     }
                   }
@@ -409,7 +519,12 @@
           },
           "Voltage": {
             "type": "OcaBlock",
-            "description": "Constant Voltage Parameters",
+            "description": {
+              "En": "Constant Voltage Parameters",
+              "Fr": "Paramètres de tension constante",
+              "De": "Konstantspannungsparameter",
+              "Es": "Parámetros de voltaje constante"
+            },
             "fields": {
               "Set_Voltage_Level": {
                 "type": "OcaBlock",
@@ -442,9 +557,19 @@
                       "value": {
                         "value": "12.0",
                         "type": "_GuiValue",
-                        "label": "Voltage",
+                        "label": {
+                          "En": "Voltage",
+                          "Fr": "Tension",
+                          "De": "Spannung",
+                          "Es": "Voltaje"
+                        },
                         "units": "V",
-                        "description": "Volts"
+                        "description": {
+                          "En": "Volts",
+                          "Fr": "Volts",
+                          "De": "Volts",
+                          "Es": "Volts"
+                        }
                       }
                     }
                   }
@@ -481,9 +606,19 @@
                       "value": {
                         "value": "60",
                         "type": "_GuiValue",
-                        "label": "Range",
+                        "label": {
+                          "En": "Range",
+                          "Fr": "Plage",
+                          "De": "Bereich",
+                          "Es": "Rango"
+                        },
                         "units": "V",
-                        "description": "6, 60, etc"
+                        "description": {
+                          "En": "6, 60, etc",
+                          "Fr": "6, 60, etc",
+                          "De": "6, 60, etc",
+                          "Es": "6, 60, etc"
+                        }
                       }
                     }
                   }
@@ -493,7 +628,12 @@
           },
           "Resistance": {
             "type": "OcaBlock",
-            "description": "Constant Resistance Parameters",
+            "description": {
+              "En": "Constant Resistance Parameters",
+              "Fr": "Constant Résistance Parameters",
+              "De": "Constant Breitrstand Parameters",
+              "Es": "Constant Resistencia Parameters"
+            },
             "fields": {
               "Set_Resistance_Level": {
                 "type": "OcaBlock",
@@ -526,9 +666,19 @@
                       "value": {
                         "value": "100",
                         "type": "_GuiValue",
-                        "label": "Resistance",
+                        "label": {
+                          "En": "Resistance",
+                          "Fr": "Résistance",
+                          "De": "Widerstand",
+                          "Es": "Resistencia"
+                        },
                         "units": "Ohms",
-                        "description": "Ohms"
+                        "description": {
+                          "En": "Ohms",
+                          "Fr": "Ohms",
+                          "De": "Ohm",
+                          "Es": "Ohmios"
+                        }
                       }
                     }
                   }
@@ -565,9 +715,19 @@
                       "value": {
                         "value": "1000",
                         "type": "_GuiValue",
-                        "label": "Range",
+                        "label": {
+                          "En": "Range",
+                          "Fr": "Plage",
+                          "De": "Bereich",
+                          "Es": "Rango"
+                        },
                         "units": "Ohms",
-                        "description": "Range"
+                        "description": {
+                          "En": "Range",
+                          "Fr": "Plage",
+                          "De": "Bereich",
+                          "Es": "Rango"
+                        }
                       }
                     }
                   }
@@ -579,11 +739,21 @@
       },
       "set": {
         "type": "OcaBlock",
-        "description": "Transients & Limits",
+        "description": {
+          "En": "Transients & Limits",
+          "Fr": "Transitoires & Limits",
+          "De": "Transients & Limits",
+          "Es": "Transitorios & Limits"
+        },
         "fields": {
           "Transient": {
             "type": "OcaBlock",
-            "description": "Pulse & Dynamic Loading",
+            "description": {
+              "En": "Pulse & Dynamic Loading",
+              "Fr": "Chargement pulsé et dynamique",
+              "De": "Impuls- und dynamisches Laden",
+              "Es": "Carga pulsada y dinámica"
+            },
             "fields": {
               "Set_Transient_Mode": {
                 "type": "OcaBlock",
@@ -616,9 +786,19 @@
                       "mode": {
                         "value": "CONT",
                         "type": "_GuiValue",
-                        "label": "Mode",
+                        "label": {
+                          "En": "Mode",
+                          "Fr": "Mode",
+                          "De": "Modus",
+                          "Es": "Modo"
+                        },
                         "units": "",
-                        "description": "CONT, PULS, TOGG"
+                        "description": {
+                          "En": "CONT, PULS, TOGG",
+                          "Fr": "CONT, PULS, TOGG",
+                          "De": "CONT, PULS, TOGG",
+                          "Es": "CONT, PULS, TOGG"
+                        }
                       }
                     }
                   }
@@ -655,9 +835,19 @@
                       "value": {
                         "value": "0.5",
                         "type": "_GuiValue",
-                        "label": "Level A",
+                        "label": {
+                          "En": "Level A",
+                          "Fr": "Niveau A",
+                          "De": "Pegel A",
+                          "Es": "Nivel A"
+                        },
                         "units": "A",
-                        "description": "Main Level"
+                        "description": {
+                          "En": "Main Level",
+                          "Fr": "Main Niveau",
+                          "De": "Main Pegel",
+                          "Es": "Main Nivel"
+                        }
                       }
                     }
                   }
@@ -694,9 +884,19 @@
                       "value": {
                         "value": "5.0",
                         "type": "_GuiValue",
-                        "label": "Level B",
+                        "label": {
+                          "En": "Level B",
+                          "Fr": "Niveau B",
+                          "De": "Pegel B",
+                          "Es": "Nivel B"
+                        },
                         "units": "A",
-                        "description": "Transient Level"
+                        "description": {
+                          "En": "Transient Level",
+                          "Fr": "Transitoire Niveau",
+                          "De": "Transient Pegel",
+                          "Es": "Transitorio Nivel"
+                        }
                       }
                     }
                   }
@@ -733,9 +933,19 @@
                       "value": {
                         "value": "100",
                         "type": "_GuiValue",
-                        "label": "Frequency",
+                        "label": {
+                          "En": "Frequency",
+                          "Fr": "Fréquence",
+                          "De": "Frequenz",
+                          "Es": "Frecuencia"
+                        },
                         "units": "Hz",
-                        "description": "Hz"
+                        "description": {
+                          "En": "Hz",
+                          "Fr": "Hz",
+                          "De": "Hz",
+                          "Es": "Hz"
+                        }
                       }
                     }
                   }
@@ -772,9 +982,19 @@
                       "value": {
                         "value": "50",
                         "type": "_GuiValue",
-                        "label": "Duty Cycle",
+                        "label": {
+                          "En": "Duty Cycle",
+                          "Fr": "Duty Cycle",
+                          "De": "Duty Cycle",
+                          "Es": "Duty Cycle"
+                        },
                         "units": "%",
-                        "description": "Percent"
+                        "description": {
+                          "En": "Percent",
+                          "Fr": "Percent",
+                          "De": "Percent",
+                          "Es": "Percent"
+                        }
                       }
                     }
                   }
@@ -786,14 +1006,24 @@
       },
       "Do": {
         "type": "OcaBlock",
-        "description": "Actions and Toggles",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
         "fields": {
           "Input_Control": {
             "type": "OcaBlock",
             "fields": {
               "Input_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": "Input ON",
+                "label_inactive": {
+                  "En": "Input ON",
+                  "Fr": "Entrée ON",
+                  "De": "Eingang ON",
+                  "Es": "Entrada ON"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -814,7 +1044,12 @@
               },
               "Input_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": "Input OFF",
+                "label_inactive": {
+                  "En": "Input OFF",
+                  "Fr": "Entrée OFF",
+                  "De": "Eingang OFF",
+                  "Es": "Entrada OFF"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -840,7 +1075,12 @@
             "fields": {
               "Transient_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": "Trans ON",
+                "label_inactive": {
+                  "En": "Trans ON",
+                  "Fr": "Trans ON",
+                  "De": "Trans ON",
+                  "Es": "Trans ON"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -861,7 +1101,12 @@
               },
               "Transient_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": "Trans OFF",
+                "label_inactive": {
+                  "En": "Trans OFF",
+                  "Fr": "Trans DÉSACTIVÉ",
+                  "De": "Trans AUS",
+                  "Es": "Trans DESACTIVADO"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -882,7 +1127,12 @@
               },
               "Trigger": {
                 "type": "_GuiActuator",
-                "label_inactive": "Trigger (*TRG)",
+                "label_inactive": {
+                  "En": "Trigger (*TRG)",
+                  "Fr": "Déclencheur (*TRG)",
+                  "De": "Trigger (*TRG)",
+                  "Es": "Disparo (*TRG)"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -908,7 +1158,12 @@
             "fields": {
               "Clear_Protection": {
                 "type": "_GuiActuator",
-                "label_inactive": "Clear Prot",
+                "label_inactive": {
+                  "En": "Clear Prot",
+                  "Fr": "Effacer Prot",
+                  "De": "Löschen Prot",
+                  "Es": "Borrar Prot"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -929,7 +1184,12 @@
               },
               "Reset_Device": {
                 "type": "_GuiActuator",
-                "label_inactive": "Reset (*RST)",
+                "label_inactive": {
+                  "En": "Reset (*RST)",
+                  "Fr": "Réinitialiser (*RST)",
+                  "De": "Zurücksetzen (*RST)",
+                  "Es": "Reiniciar (*RST)"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -950,7 +1210,12 @@
               },
               "Clear_Status": {
                 "type": "_GuiActuator",
-                "label_inactive": "Clear (*CLS)",
+                "label_inactive": {
+                  "En": "Clear (*CLS)",
+                  "Fr": "Effacer (*CLS)",
+                  "De": "Löschen (*CLS)",
+                  "Es": "Borrar (*CLS)"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",

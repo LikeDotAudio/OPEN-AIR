@@ -26,7 +26,12 @@
       "fields": {
         "Meter_1": {
           "type": "_NeedleVUMeter",
-          "label": "Squircle 1",
+          "label": {
+            "En": "Squircle 1",
+            "Fr": "Squircle 1",
+            "De": "Squircle 1",
+            "Es": "Squircle 1"
+          },
           "geometry": {
             "width": 300,
             "height": 250
@@ -53,7 +58,12 @@
         },
         "Meter_2": {
           "type": "_NeedleVUMeter",
-          "label": "Octagon 2",
+          "label": {
+            "En": "Octagon 2",
+            "Fr": "Octagon 2",
+            "De": "Octagon 2",
+            "Es": "Octagon 2"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -80,7 +90,12 @@
         },
         "Meter_3": {
           "type": "_NeedleVUMeter",
-          "label": "Trapezoid 3",
+          "label": {
+            "En": "Trapezoid 3",
+            "Fr": "Trapezoid 3",
+            "De": "Trapezoid 3",
+            "Es": "Trapezoid 3"
+          },
           "geometry": {
             "width": 300,
             "height": 250

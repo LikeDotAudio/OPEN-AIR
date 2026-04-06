@@ -19,10 +19,10 @@ These modules provide the foundational communication and orchestration layers fo
 ├-----**oaComSNMP/**<br>
      ├----> [oaComSNMP](oaComSNMP/Documentation/README.md) — *SNMP Communication Module*<br>
      ├----> [Summary](oaComSNMP/Documentation/Summary.md) — *Narrative of Legacy Integration*<br>
-├-----**oaConfiguration/**<br>
-     ├----> [Summary](oaConfiguration/Documentation/Summary.md) — *Narrative of Control*<br>
-     ├----> [Config Builder](oaConfiguration/Documentation/config.md) — *Default Settings Generator*<br>
-     ├----> [Logging Matrix](oaConfiguration/Documentation/logging_matrix.md) — *Hierarchical Debug Control*<br>
+├-----**oaConfigurationManager/**<br>
+     ├----> [Summary](oaConfigurationManager/Documentation/Summary.md) — *Narrative of Control*<br>
+     ├----> [Config Builder](oaConfigurationManager/Documentation/config.md) — *Default Settings Generator*<br>
+     ├----> [Logging Matrix](oaConfigurationManager/Documentation/logging_matrix.md) — *Hierarchical Debug Control*<br>
 ├-----**oaTests/**<br>
      ├----> [oaTests](oaTests/Documentation/README.md) — *Validation & Maintenance Suite*<br>
      ├----> [Summary](oaTests/Documentation/Summary.md) — *Narrative of System Integrity*<br>

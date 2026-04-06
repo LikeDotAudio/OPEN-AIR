@@ -13,7 +13,7 @@ oaData*/
 oaDataAudits/
 oaDataCache/
 oaDataLogs/
-oaDataSNMP/
+oaDataLogs/SNMP/
 oaDataSplinks/
 oaDataRunningFiles/
 .pytest_cache/

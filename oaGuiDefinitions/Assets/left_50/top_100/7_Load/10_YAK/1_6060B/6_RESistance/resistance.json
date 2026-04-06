@@ -13,7 +13,12 @@
     "blocks": {
       "Resistance": {
         "type": "OcaBlock",
-        "description": "Constant Resistance Parameters",
+        "description": {
+          "En": "Constant Resistance Parameters",
+          "Fr": "Constant Résistance Parameters",
+          "De": "Constant Breitrstand Parameters",
+          "Es": "Constant Resistencia Parameters"
+        },
         "fields": {
           "Set_Resistance_Level": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "value": {
                     "value": "100",
                     "type": "_GuiValue",
-                    "label": "Resistance",
+                    "label": {
+                      "En": "Resistance",
+                      "Fr": "Résistance",
+                      "De": "Widerstand",
+                      "Es": "Resistencia"
+                    },
                     "units": "Ohms",
-                    "description": "Ohms"
+                    "description": {
+                      "En": "Ohms",
+                      "Fr": "Ohms",
+                      "De": "Ohm",
+                      "Es": "Ohmios"
+                    }
                   }
                 }
               }
@@ -85,9 +100,19 @@
                   "value": {
                     "value": "1000",
                     "type": "_GuiValue",
-                    "label": "Range",
+                    "label": {
+                      "En": "Range",
+                      "Fr": "Plage",
+                      "De": "Bereich",
+                      "Es": "Rango"
+                    },
                     "units": "Ohms",
-                    "description": "Range"
+                    "description": {
+                      "En": "Range",
+                      "Fr": "Plage",
+                      "De": "Bereich",
+                      "Es": "Rango"
+                    }
                   }
                 }
               }

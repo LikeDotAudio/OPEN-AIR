@@ -1,7 +1,12 @@
 {
   "DVB-T (UK)": {
     "name": "DVB-T (UK)",
-    "description": "Digital Video Broadcasting - Terrestrial for the United Kingdom",
+    "description": {
+      "En": "Digital Video Broadcasting - Terrestrial for the United Kingdom",
+      "Fr": "Diffusion vidéo numérique - Terrestre pour le Royaume-Uni",
+      "De": "Digital Video Broadcasting - Terrestrisch für Großbritannien",
+      "Es": "Difusión de video digital - Terrestre para el Reino Unido"
+    },
     "country": "United Kingdom",
     "region": "Europe",
     "type": "tv",

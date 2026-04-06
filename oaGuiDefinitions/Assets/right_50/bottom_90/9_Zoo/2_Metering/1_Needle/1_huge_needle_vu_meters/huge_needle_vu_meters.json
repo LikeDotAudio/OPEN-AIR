@@ -13,7 +13,12 @@
     "blocks": {
       "Large_Console_Bank": {
         "type": "OcaBlock",
-        "description": "Large Console Meters (Size 750)",
+        "description": {
+          "En": "Large Console Meters (Size 750)",
+          "Fr": "Large Console Meters (Size 750)",
+          "De": "Large Console Meters (Size 750)",
+          "Es": "Large Console Meters (Size 750)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -26,7 +31,12 @@
         "fields": {
           "Large_L": {
             "type": "_SmartMeter",
-            "label": "Master Left (Hold 200ms)",
+            "label": {
+              "En": "Master Left (Hold 200ms)",
+              "Fr": "Master Gauche (Hold 200ms)",
+              "De": "Master Links (Hold 200ms)",
+              "Es": "Maestro Izquierda (Hold 200ms)"
+            },
             "notes": "Classic console look.",
             "geometry": {
               "width": 500,
@@ -83,7 +93,12 @@
           },
           "Large_R": {
             "type": "_SmartMeter",
-            "label": "Master Right (Hold 200ms)",
+            "label": {
+              "En": "Master Right (Hold 200ms)",
+              "Fr": "Master Droite (Hold 200ms)",
+              "De": "Master Rechts (Hold 200ms)",
+              "Es": "Maestro Derecha (Hold 200ms)"
+            },
             "notes": "Matching right channel.",
             "geometry": {
               "width": 500,
@@ -142,7 +157,12 @@
       },
       "Needle_Styles_Demo": {
         "type": "OcaBlock",
-        "description": "Needle Style Variations",
+        "description": {
+          "En": "Needle Style Variations",
+          "Fr": "Aiguille Style Variations",
+          "De": "Nadel Style Variationen",
+          "Es": "Aguja Style Variaciones"
+        },
         "layout_columns": 3,
         "column_sizing": [
           {
@@ -158,7 +178,12 @@
         "fields": {
           "meter_line": {
             "type": "_SmartMeter",
-            "label": "Standard Line (White)",
+            "label": {
+              "En": "Standard Line (White)",
+              "Fr": "Standard Line (White)",
+              "De": "Standard Line (White)",
+              "Es": "Estándar Line (White)"
+            },
             "notes": "Classic line pointer.",
             "geometry": {
               "width": 250,
@@ -216,7 +241,12 @@
           },
           "meter_taper": {
             "type": "_SmartMeter",
-            "label": "Tapered Pointer (White)",
+            "label": {
+              "En": "Tapered Pointer (White)",
+              "Fr": "Tapered Pointer (White)",
+              "De": "Tapered Pointer (White)",
+              "Es": "Tapered Pointer (White)"
+            },
             "notes": "Triangle tapering from pivot.",
             "geometry": {
               "width": 250,
@@ -274,7 +304,12 @@
           },
           "meter_teardrop": {
             "type": "_SmartMeter",
-            "label": "Teardrop Pointer (White)",
+            "label": {
+              "En": "Teardrop Pointer (White)",
+              "Fr": "Teardrop Pointer (White)",
+              "De": "Teardrop Pointer (White)",
+              "Es": "Teardrop Pointer (White)"
+            },
             "notes": "Smoothed teardrop shape.",
             "geometry": {
               "width": 250,
@@ -332,7 +367,12 @@
           },
           "meter_line_cyan": {
             "type": "_SmartMeter",
-            "label": "Standard Line (White)",
+            "label": {
+              "En": "Standard Line (White)",
+              "Fr": "Standard Line (White)",
+              "De": "Standard Line (White)",
+              "Es": "Estándar Line (White)"
+            },
             "notes": "Classic line pointer.",
             "geometry": {
               "width": 250,
@@ -391,7 +431,12 @@
           },
           "meter_taper_magenta": {
             "type": "_SmartMeter",
-            "label": "Tapered Pointer (White)",
+            "label": {
+              "En": "Tapered Pointer (White)",
+              "Fr": "Tapered Pointer (White)",
+              "De": "Tapered Pointer (White)",
+              "Es": "Tapered Pointer (White)"
+            },
             "notes": "Triangle tapering from pivot.",
             "geometry": {
               "width": 250,
@@ -450,7 +495,12 @@
           },
           "meter_teardrop_yellow": {
             "type": "_SmartMeter",
-            "label": "Teardrop Pointer (White)",
+            "label": {
+              "En": "Teardrop Pointer (White)",
+              "Fr": "Teardrop Pointer (White)",
+              "De": "Teardrop Pointer (White)",
+              "Es": "Teardrop Pointer (White)"
+            },
             "notes": "Smoothed teardrop shape.",
             "geometry": {
               "width": 250,

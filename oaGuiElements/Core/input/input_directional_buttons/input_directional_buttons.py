@@ -16,12 +16,13 @@ import time
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGuiFramework.Methods.i18n_utils import get_text
 
 
 class BuilderInputDirectionalButtonsCreator(TransparencyMixin):
@@ -50,7 +51,7 @@ class BuilderInputDirectionalButtonsCreator(TransparencyMixin):
             current_function_name = "make_input_directional_buttons"
     
             # Extract only widget-specific config from config_data
-            label = config_data.get("label_active")
+            label = get_text(config_data.get('label_active'))
             config = config_data  # config_data is the config
             path = config_data.get("path")
     

@@ -1,4 +1,5 @@
 # graphing/styler.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -9,7 +10,7 @@ from oaLogging.Methods.matrix_gate import matrix_log
 import inspect
 from loguru import logger
 from oaLogging.Core.logger import builder_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 

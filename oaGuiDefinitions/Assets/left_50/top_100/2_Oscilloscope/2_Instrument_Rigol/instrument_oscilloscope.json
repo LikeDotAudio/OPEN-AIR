@@ -13,15 +13,30 @@
     "blocks": {
       "Oscilloscope_Panel": {
         "type": "OcaBlock",
-        "description": "Oscilloscope Control Panel",
+        "description": {
+          "En": "Oscilloscope Control Panel",
+          "Fr": "Oscilloscope Contrôle Panel",
+          "De": "Oszilloskop Steuerung Panel",
+          "Es": "Osciloscopio Control Panel"
+        },
         "fields": {
           "Timebase_Control": {
             "type": "OcaBlock",
-            "description": "Timebase",
+            "description": {
+              "En": "Timebase",
+              "Fr": "Tempsbase",
+              "De": "Zeitbase",
+              "Es": "Tiempobase"
+            },
             "fields": {
               "time_per_div": {
                 "type": "_TextInput",
-                "label_active": "Time/Div (s)",
+                "label_active": {
+                  "En": "Time/Div (s)",
+                  "Fr": "Temps/Div (s)",
+                  "De": "Zeit/Div (s)",
+                  "Es": "Tiempo/Div (s)"
+                },
                 "value_default": "1e-3",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -47,11 +62,21 @@
           },
           "Voltage_Control": {
             "type": "OcaBlock",
-            "description": "Channel 1 Voltage",
+            "description": {
+              "En": "Channel 1 Voltage",
+              "Fr": "Canal 1",
+              "De": "Kanal 1",
+              "Es": "Canal 1"
+            },
             "fields": {
               "voltage_per_div": {
                 "type": "_TextInput",
-                "label_active": "Volts/Div (V)",
+                "label_active": {
+                  "En": "Volts/Div (V)",
+                  "Fr": "Volts/Div (V)",
+                  "De": "Volts/Div (V)",
+                  "Es": "Volts/Div (V)"
+                },
                 "value_default": "1",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -75,7 +100,12 @@
               },
               "channel1_coupling": {
                 "type": "_GuiDropDownOption",
-                "label_active": "Coupling",
+                "label_active": {
+                  "En": "Coupling",
+                  "Fr": "Couplage",
+                  "De": "Kopplung",
+                  "Es": "Acoplamiento"
+                },
                 "options": [
                   "AC",
                   "DC",
@@ -106,11 +136,21 @@
           },
           "Trigger_Control": {
             "type": "OcaBlock",
-            "description": "Trigger",
+            "description": {
+              "En": "Trigger",
+              "Fr": "Déclencheur",
+              "De": "Trigger",
+              "Es": "Disparo"
+            },
             "fields": {
               "trigger_mode": {
                 "type": "_GuiDropDownOption",
-                "label_active": "Mode",
+                "label_active": {
+                  "En": "Mode",
+                  "Fr": "Mode",
+                  "De": "Modus",
+                  "Es": "Modo"
+                },
                 "options": [
                   "AUTO",
                   "NORMAL",
@@ -139,7 +179,12 @@
               },
               "trigger_level": {
                 "type": "_TextInput",
-                "label_active": "Level (V)",
+                "label_active": {
+                  "En": "Level (V)",
+                  "Fr": "Niveau (V)",
+                  "De": "Pegel (V)",
+                  "Es": "Nivel (V)"
+                },
                 "value_default": "0",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -165,12 +210,27 @@
           },
           "Acquisition_Control": {
             "type": "OcaBlock",
-            "description": "Acquisition",
+            "description": {
+              "En": "Acquisition",
+              "Fr": "Acquisition",
+              "De": "Erfassung",
+              "Es": "Adquisición"
+            },
             "fields": {
               "run_stop": {
                 "type": "_GuiButtonToggle",
-                "label_active": "RUN",
-                "label_inactive": "STOP",
+                "label_active": {
+                  "En": "RUN",
+                  "Fr": "EXEC",
+                  "De": "AUSFÜHREN",
+                  "Es": "EJEC"
+                },
+                "label_inactive": {
+                  "En": "STOP",
+                  "Fr": "STOP",
+                  "De": "STOP",
+                  "Es": "STOP"
+                },
                 "style": {
                   "active_text_color": "#1a1a1a",
                   "text_color": "#888888",

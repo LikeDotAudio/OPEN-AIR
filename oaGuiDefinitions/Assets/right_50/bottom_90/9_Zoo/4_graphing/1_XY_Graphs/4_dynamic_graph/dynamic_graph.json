@@ -13,16 +13,36 @@
     "blocks": {
       "elements": {
         "type": "OcaBlock",
-        "label_active": "Gui Dynamic Graph",
+        "label_active": {
+          "En": "Gui Dynamic Graph",
+          "Fr": "Gui Dynamic Graph",
+          "De": "Gui Dynamic Graph",
+          "Es": "Gui Dynamic Graph"
+        },
         "fields": {
           "dynamic_graph_examples": {
             "type": "OcaBlock",
-            "label_active": "Dynamic Graph Examples",
-            "description": "Examples of the DynamicGraph element with Zoom, Pan, and Multiple Datasets.",
+            "label_active": {
+              "En": "Dynamic Graph Examples",
+              "Fr": "Dynamic Graph Exemples",
+              "De": "Dynamic Graph Beispiele",
+              "Es": "Dynamic Graph Ejemplos"
+            },
+            "description": {
+              "En": "Examples of the DynamicGraph element with Zoom, Pan, and Multiple Datasets.",
+              "Fr": "Exemples of the DynamicGraph element with Zoom, Panoramique, and Multiple Datasets.",
+              "De": "Beispiele of the DynamicGraph element with Zoom, Panorama, and Multiple Datasets.",
+              "Es": "Ejemplos of the DynamicGraph element with Zoom, Panorámico, and Multiple Datasets."
+            },
             "fields": {
               "simple_graph": {
                 "type": "DynamicGraph",
-                "label": "Multi-Waveform (Zoom Enabled)",
+                "label": {
+                  "En": "Multi-Waveform (Zoom Enabled)",
+                  "Fr": "Multi-Waveform (Zoom Enabled)",
+                  "De": "Multi-Waveform (Zoom Enabled)",
+                  "Es": "Multi-Waveform (Zoom Enabled)"
+                },
                 "notes": "Demonstrates multiple datasets and zoom/pan.",
                 "show_title": true,
                 "layout": {
@@ -31,11 +51,21 @@
                 },
                 "axis": {
                   "x": {
-                    "label": "Time (arb)",
+                    "label": {
+                      "En": "Time (arb)",
+                      "Fr": "Heure (arb)",
+                      "De": "Zeit (arb)",
+                      "Es": "Hora (arb)"
+                    },
                     "color": "white"
                   },
                   "y": {
-                    "label": "Amplitude",
+                    "label": {
+                      "En": "Amplitude",
+                      "Fr": "Amplitude",
+                      "De": "Amplitude",
+                      "Es": "Amplitude"
+                    },
                     "color": "white"
                   },
                   "show_grid": true,
@@ -45,7 +75,12 @@
                 "datasets": [
                   {
                     "id": "ds_sine",
-                    "label": "Sine",
+                    "label": {
+                      "En": "Sine",
+                      "Fr": "Sine",
+                      "De": "Sine",
+                      "Es": "Sine"
+                    },
                     "style": {
                       "line_color": "cyan",
                       "line_width": 2
@@ -54,7 +89,12 @@
                   },
                   {
                     "id": "ds_cosine",
-                    "label": "Cosine",
+                    "label": {
+                      "En": "Cosine",
+                      "Fr": "Cosine",
+                      "De": "Cosine",
+                      "Es": "Cosine"
+                    },
                     "style": {
                       "line_color": "magenta",
                       "line_width": 2
@@ -63,7 +103,12 @@
                   },
                   {
                     "id": "ds_fast",
-                    "label": "Fast Sine",
+                    "label": {
+                      "En": "Fast Sine",
+                      "Fr": "Rapide Sine",
+                      "De": "Schnell Sine",
+                      "Es": "Rápido Sine"
+                    },
                     "style": {
                       "line_color": "yellow",
                       "line_width": 1
@@ -88,14 +133,24 @@
                 },
                 "axis": {
                   "x": {
-                    "label": "Frequency (Hz)",
+                    "label": {
+                      "En": "Frequency (Hz)",
+                      "Fr": "Fréquence (Hz)",
+                      "De": "Frequenz (Hz)",
+                      "Es": "Frecuencia (Hz)"
+                    },
                     "scale": "log",
                     "min": 20,
                     "max": 20000,
                     "color": "white"
                   },
                   "y": {
-                    "label": "Amplitude (dBm)",
+                    "label": {
+                      "En": "Amplitude (dBm)",
+                      "Fr": "Amplitude (dBm)",
+                      "De": "Amplitude (dBm)",
+                      "Es": "Amplitud (dBm)"
+                    },
                     "scale": "linear",
                     "min": -120,
                     "max": 0,
@@ -113,7 +168,12 @@
                 "datasets": [
                   {
                     "id": "trace_main",
-                    "label": "Live Trace",
+                    "label": {
+                      "En": "Live Trace",
+                      "Fr": "Live Trace",
+                      "De": "Live Trace",
+                      "Es": "Live Trace"
+                    },
                     "style": {
                       "line_color": "lime",
                       "line_width": 1.5
@@ -122,7 +182,12 @@
                   },
                   {
                     "id": "trace_interference",
-                    "label": "Interference",
+                    "label": {
+                      "En": "Interference",
+                      "Fr": "Interference",
+                      "De": "Interference",
+                      "Es": "Interference"
+                    },
                     "style": {
                       "line_color": "red",
                       "line_width": 1
@@ -131,7 +196,12 @@
                   },
                   {
                     "id": "trace_noise",
-                    "label": "Noise Floor",
+                    "label": {
+                      "En": "Noise Floor",
+                      "Fr": "Noise Floor",
+                      "De": "Noise Floor",
+                      "Es": "Noise Floor"
+                    },
                     "style": {
                       "line_color": "grey",
                       "line_width": 0.5,

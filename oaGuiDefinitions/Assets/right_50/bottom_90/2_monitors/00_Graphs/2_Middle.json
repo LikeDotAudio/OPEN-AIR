@@ -11,14 +11,24 @@
     "title": "Monitor Beta - Signal Analysis",
     "axis": {
       "x": {
-        "label": "Time (ms)",
+        "label": {
+          "En": "Time (ms)",
+          "Fr": "Temps (ms)",
+          "De": "Zeit (ms)",
+          "Es": "Tiempo (ms)"
+        },
         "scale": "linear",
         "min": 0,
         "max": 1,
         "color": "white"
       },
       "y": {
-        "label": "Amplitude (V)",
+        "label": {
+          "En": "Amplitude (V)",
+          "Fr": "Amplitude (V)",
+          "De": "Amplitude (V)",
+          "Es": "Amplitud (V)"
+        },
         "scale": "linear",
         "min": -1.5,
         "max": 1.5,
@@ -36,7 +46,12 @@
     "datasets": [
       {
         "id": "sig_a",
-        "label": "Signal Alpha",
+        "label": {
+          "En": "Signal Alpha",
+          "Fr": "Signal Alpha",
+          "De": "Signal Alpha",
+          "Es": "Señal Alpha"
+        },
         "style": {
           "line_color": "cyan",
           "line_width": 2,
@@ -46,7 +61,12 @@
       },
       {
         "id": "sig_b",
-        "label": "Signal Beta",
+        "label": {
+          "En": "Signal Beta",
+          "Fr": "Signal Bêta",
+          "De": "Signal Beta",
+          "Es": "Señal Beta"
+        },
         "style": {
           "line_color": "magenta",
           "line_width": 2,

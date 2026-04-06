@@ -13,16 +13,36 @@
     "blocks": {
       "Battery_Stress_Chamber": {
         "type": "OcaBlock",
-        "description": "Advanced Energy Depletion System",
+        "description": {
+          "En": "Advanced Energy Depletion System",
+          "Fr": "Advanced Energy Depletion Système",
+          "De": "Advanced Energy Depletion System",
+          "Es": "Advanced Energy Depletion Sistema"
+        },
         "fields": {
           "Master_Activation_Deck": {
             "type": "OcaBlock",
-            "description": "PRIMARY CONTACTORS",
+            "description": {
+              "En": "PRIMARY CONTACTORS",
+              "Fr": "PRIMARY CONTACTORS",
+              "De": "PRIMARY CONTACTORS",
+              "Es": "PRIMARY CONTACTORS"
+            },
             "fields": {
               "Master_Switch": {
                 "type": "_TrapezoidButton",
-                "label_active": "\ud83e\ude78 DRAINING ACTIVE \ud83e\ude78",
-                "label_inactive": "ENGAGE LOAD",
+                "label_active": {
+                  "En": "🩸 DRAINING ACTIVE 🩸",
+                  "Fr": "🩸 DRAINING ACTIVE 🩸",
+                  "De": "🩸 DRAINING ACTIVE 🩸",
+                  "Es": "🩸 DRAINING ACTIVE 🩸"
+                },
+                "label_inactive": {
+                  "En": "ENGAGE LOAD",
+                  "Fr": "ENGAGE LOAD",
+                  "De": "ENGAGE LOAD",
+                  "Es": "ENGAGE LOAD"
+                },
                 "state_default": false,
                 "message_details": {
                   "DC_LOAD_MODEL": {
@@ -46,8 +66,18 @@
               },
               "Mode_Toggle": {
                 "type": "_GuiButtonToggle",
-                "label_active": "CONSTANT CURRENT",
-                "label_inactive": "CONSTANT POWER",
+                "label_active": {
+                  "En": "CONSTANT CURRENT",
+                  "Fr": "COURANT CONSTANT",
+                  "De": "KONSTANTSTROM",
+                  "Es": "CORRIENTE CONSTANTE"
+                },
+                "label_inactive": {
+                  "En": "CONSTANT POWER",
+                  "Fr": "PUISSANCE CONSTANTE",
+                  "De": "KONSTANTPOTENZ",
+                  "Es": "POTENCIA CONSTANTE"
+                },
                 "style": {
                   "active_text_color": "#1a1a1a",
                   "text_color": "#888888",
@@ -85,15 +115,30 @@
           },
           "Mixing_Desk_Deck": {
             "type": "OcaBlock",
-            "description": "Load Mixing Console",
+            "description": {
+              "En": "Load Mixing Console",
+              "Fr": "Charger Mixing Console",
+              "De": "Laden Mixing Konsole",
+              "Es": "Cargar Mixing Consola"
+            },
             "fields": {
               "Base_Load_Col": {
                 "type": "OcaBlock",
-                "description": "Steady State",
+                "description": {
+                  "En": "Steady State",
+                  "Fr": "Stable State",
+                  "De": "Stabil State",
+                  "Es": "Estable State"
+                },
                 "fields": {
                   "Base_Current_Fader": {
                     "type": "_GuiVerticalFader",
-                    "label_active": "BASE LOAD (A)",
+                    "label_active": {
+                      "En": "BASE LOAD (A)",
+                      "Fr": "BASE LOAD (A)",
+                      "De": "BASE LOAD (A)",
+                      "Es": "BASE LOAD (A)"
+                    },
                     "value_default": "0.0",
                     "min": "0.0",
                     "max": "50.0",
@@ -122,11 +167,21 @@
               },
               "Transient_Load_Col": {
                 "type": "OcaBlock",
-                "description": "Dynamic Peaks",
+                "description": {
+                  "En": "Dynamic Peaks",
+                  "Fr": "Dynamic Crêtes",
+                  "De": "Dynamic Spitzenwerts",
+                  "Es": "Dynamic Picos"
+                },
                 "fields": {
                   "Transient_Fader": {
                     "type": "_GuiVerticalFader",
-                    "label_active": "PULSE PEAK (A)",
+                    "label_active": {
+                      "En": "PULSE PEAK (A)",
+                      "Fr": "PULSE PEAK (A)",
+                      "De": "PULSE PEAK (A)",
+                      "Es": "PULSE PEAK (A)"
+                    },
                     "value_default": "0.0",
                     "min": "0.0",
                     "max": "50.0",
@@ -153,8 +208,18 @@
                   },
                   "Pulse_Enable": {
                     "type": "_GuiButtonToggle",
-                    "label_active": "PULSE ON",
-                    "label_inactive": "PULSE OFF",
+                    "label_active": {
+                      "En": "PULSE ON",
+                      "Fr": "PULSE ON",
+                      "De": "PULSE ON",
+                      "Es": "PULSE ON"
+                    },
+                    "label_inactive": {
+                      "En": "PULSE OFF",
+                      "Fr": "PULSE OFF",
+                      "De": "PULSE OFF",
+                      "Es": "PULSE OFF"
+                    },
                     "style": {
                       "active_text_color": "#1a1a1a",
                       "text_color": "#888888",
@@ -194,11 +259,21 @@
           },
           "Safety_Cutoff_Deck": {
             "type": "OcaBlock",
-            "description": "Battery Protection",
+            "description": {
+              "En": "Battery Protection",
+              "Fr": "Protection de batterie",
+              "De": "Batterieschutz",
+              "Es": "Protección de batería"
+            },
             "fields": {
               "Cutoff_Voltage": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Stop Voltage (UVLO)",
+                "label_active": {
+                  "En": "Stop Voltage (UVLO)",
+                  "Fr": "Arrêter Tension (UVLO)",
+                  "De": "Stopp Spannenung (UVLO)",
+                  "Es": "Parar Voltaje (UVLO)"
+                },
                 "value_default": "3.0",
                 "min": "0.0",
                 "max": "48.0",
@@ -225,7 +300,12 @@
               },
               "Slew_Throttle": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Attack Speed (Slew)",
+                "label_active": {
+                  "En": "Attack Speed (Slew)",
+                  "Fr": "Attack Speed (Slew)",
+                  "De": "Attack Speed (Slew)",
+                  "Es": "Attack Speed (Slew)"
+                },
                 "value_default": "500",
                 "min": "10",
                 "max": "2500",
@@ -254,14 +334,24 @@
           },
           "Telemetry_Dashboard": {
             "type": "OcaBlock",
-            "description": "Drain Statistics",
+            "description": {
+              "En": "Drain Statistics",
+              "Fr": "Statistiques de consommation",
+              "De": "Entladungsstatistik",
+              "Es": "Estadísticas de drenaje"
+            },
             "fields": {
               "Capacity_Readout": {
                 "type": "OcaBlock",
                 "fields": {
                   "Ah_Counter": {
                     "type": "_GuiLabel",
-                    "label_active": "CAPACITY DRAINED",
+                    "label_active": {
+                      "En": "CAPACITY DRAINED",
+                      "Fr": "CAPACITY DRAINED",
+                      "De": "CAPACITY DRAINED",
+                      "Es": "CAPACITY DRAINED"
+                    },
                     "value_default": "0.000 Ah",
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -285,7 +375,12 @@
                   },
                   "Wh_Counter": {
                     "type": "_GuiLabel",
-                    "label_active": "ENERGY DISSIPATED",
+                    "label_active": {
+                      "En": "ENERGY DISSIPATED",
+                      "Fr": "ENERGY DISSIPATED",
+                      "De": "ENERGY DISSIPATED",
+                      "Es": "ENERGY DISSIPATED"
+                    },
                     "value_default": "0.000 Wh",
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -309,7 +404,12 @@
                   },
                   "Timer_Readout": {
                     "type": "_GuiLabel",
-                    "label_active": "ELAPSED TIME",
+                    "label_active": {
+                      "En": "ELAPSED TIME",
+                      "Fr": "ELAPSED TIME",
+                      "De": "ELAPSED TIME",
+                      "Es": "ELAPSED TIME"
+                    },
                     "value_default": "00:00:00",
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -335,8 +435,18 @@
               },
               "Discharge_Curve": {
                 "type": "_GuiGraph",
-                "label_active": "Discharge Curve (V)",
-                "description": "Battery Voltage Sag",
+                "label_active": {
+                  "En": "Discharge Curve (V)",
+                  "Fr": "Discharge Curve (V)",
+                  "De": "Discharge Curve (V)",
+                  "Es": "Discharge Curve (V)"
+                },
+                "description": {
+                  "En": "Battery Voltage Sag",
+                  "Fr": "Battery Tension Sag",
+                  "De": "Battery Spannenung Sag",
+                  "Es": "Battery Voltaje Sag"
+                },
                 "height": 180,
                 "message_details": {
                   "DC_LOAD_MODEL": {

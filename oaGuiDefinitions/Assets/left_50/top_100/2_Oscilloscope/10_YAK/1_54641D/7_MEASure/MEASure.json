@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Measurement Settings",
+        "description": {
+          "En": "Measurement Settings",
+          "Fr": "Mesurerment Paramètres",
+          "De": "Messenment Einstellungen",
+          "Es": "Medidament Ajustes"
+        },
         "fields": {
           "Set_Measure_Source": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "source": {
                     "value": "CHAN1",
                     "type": "_GuiValue",
-                    "label": "Source",
+                    "label": {
+                      "En": "Source",
+                      "Fr": "Source",
+                      "De": "Quelle",
+                      "Es": "Fuente"
+                    },
                     "units": "",
-                    "description": "CHANn, DIGn, MATH"
+                    "description": {
+                      "En": "CHANn, DIGn, MATH",
+                      "Fr": "CHANn, DIGn, MATH",
+                      "De": "CHANn, DIGn, MATH",
+                      "Es": "CHANn, DIGn, MATH"
+                    }
                   }
                 }
               }
@@ -85,9 +100,19 @@
                   "mode": {
                     "value": "PERCent",
                     "type": "_GuiValue",
-                    "label": "Mode",
+                    "label": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
                     "units": "",
-                    "description": "PERCent or ABSolute"
+                    "description": {
+                      "En": "PERCent or ABSolute",
+                      "Fr": "POURCent ou ABSolu",
+                      "De": "Prozent oder Absolut",
+                      "Es": "PORCent o ABSoluto"
+                    }
                   }
                 }
               }
@@ -97,11 +122,21 @@
       },
       "nab": {
         "type": "OcaBlock",
-        "description": "Measurements",
+        "description": {
+          "En": "Measurements",
+          "Fr": "Mesurerments",
+          "De": "Messenments",
+          "Es": "Medidaments"
+        },
         "fields": {
           "Voltage_Measurements": {
             "type": "OcaBlock",
-            "description": "Voltage",
+            "description": {
+              "En": "Voltage",
+              "Fr": "Tension",
+              "De": "Spannung",
+              "Es": "Voltaje"
+            },
             "fields": {
               "Get_Vpp": {
                 "type": "_GuiActuator",
@@ -237,7 +272,12 @@
           },
           "Time_Measurements": {
             "type": "OcaBlock",
-            "description": "Time",
+            "description": {
+              "En": "Time",
+              "Fr": "Temps",
+              "De": "Zeit",
+              "Es": "Tiempo"
+            },
             "fields": {
               "Get_Frequency": {
                 "type": "_GuiActuator",

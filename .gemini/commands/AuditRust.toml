@@ -17,7 +17,7 @@ Organize the roadmap into stages: Zero-Risk Sandbox -> Stateless Logic -> Heavy 
 
 ### Your Task:
 
-1.  **Initialize Report**: Create `Rust_Migration_Audit_YYYYMMDD.md` in `oaDataAudits/`.
+1.  **Initialize Report**: Create `Rust_Migration_Audit_YYYYMMDD.md` in `oaDataLogs/Audits/`.
 2.  **Scan**: Search for Python bottlenecks and audit existing Rust modules for `unsafe` usage and ordering risks.
 3.  **Analyze**: Categorize candidates and evaluate the safety of low-level manipulation.
 4.  **Roadmap**: Provide a detailed 6-step implementation plan for top candidates and a security review for existing Rust logic.

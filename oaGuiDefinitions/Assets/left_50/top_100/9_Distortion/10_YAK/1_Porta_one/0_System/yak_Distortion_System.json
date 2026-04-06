@@ -13,15 +13,30 @@
     "blocks": {
       "Do": {
         "type": "OcaBlock",
-        "description": "System Actions",
+        "description": {
+          "En": "System Actions",
+          "Fr": "Système Actions",
+          "De": "System Actions",
+          "Es": "Sistema Actions"
+        },
         "fields": {
           "Output_Control": {
             "type": "OcaBlock",
-            "description": "Master Generator Output",
+            "description": {
+              "En": "Master Generator Output",
+              "Fr": "Master Générateur Sortie",
+              "De": "Master Generator Ausgang",
+              "Es": "Master Generador Salida"
+            },
             "fields": {
               "Do_Output_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": "OUTPUT ON",
+                "label_inactive": {
+                  "En": "OUTPUT ON",
+                  "Fr": "OUTPUT ON",
+                  "De": "OUTPUT ON",
+                  "Es": "OUTPUT ON"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -42,7 +57,12 @@
               },
               "Do_Output_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": "OUTPUT OFF",
+                "label_inactive": {
+                  "En": "OUTPUT OFF",
+                  "Fr": "OUTPUT OFF",
+                  "De": "OUTPUT OFF",
+                  "Es": "OUTPUT OFF"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -65,11 +85,21 @@
           },
           "System_Utilities": {
             "type": "OcaBlock",
-            "description": "Global Utilities",
+            "description": {
+              "En": "Global Utilities",
+              "Fr": "Global Utilities",
+              "De": "Global Utilities",
+              "Es": "Global Utilities"
+            },
             "fields": {
               "Do_Reset": {
                 "type": "_GuiActuator",
-                "label_inactive": "RESET (*RST)",
+                "label_inactive": {
+                  "En": "RESET (*RST)",
+                  "Fr": "RESET (*RST)",
+                  "De": "RESET (*RST)",
+                  "Es": "RESET (*RST)"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -90,7 +120,12 @@
               },
               "Do_Clear_Status": {
                 "type": "_GuiActuator",
-                "label_inactive": "CLS (*CLS)",
+                "label_inactive": {
+                  "En": "CLS (*CLS)",
+                  "Fr": "CLS (*CLS)",
+                  "De": "CLS (*CLS)",
+                  "Es": "CLS (*CLS)"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -111,7 +146,12 @@
               },
               "Do_Display_Panel": {
                 "type": "_GuiActuator",
-                "label_inactive": "Display Panel",
+                "label_inactive": {
+                  "En": "Display Panel",
+                  "Fr": "Affichage Panel",
+                  "De": "Anzeige Panel",
+                  "Es": "Pantalla Panel"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",

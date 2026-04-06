@@ -12,11 +12,21 @@
     "blocks": {
       "rig": {
         "type": "OcaBlock",
-        "description": "Scope Configuration",
+        "description": {
+          "En": "Scope Configuration",
+          "Fr": "Scope Configuration",
+          "De": "Scope Konfiguration",
+          "Es": "Scope Configuración"
+        },
         "fields": {
           "Trigger_Settings": {
             "type": "OcaBlock",
-            "description": "Trigger System",
+            "description": {
+              "En": "Trigger System",
+              "Fr": "Déclencheur System",
+              "De": "Trigger System",
+              "Es": "Disparo System"
+            },
             "fields": {
               "Trigger_Source": {
                 "type": "OcaBlock",
@@ -49,7 +59,12 @@
                       "source": {
                         "value": "CHAN1",
                         "type": "_Value",
-                        "description": "CHAN1, CHAN2, CHAN3, CHAN4"
+                        "description": {
+                          "En": "CHAN1, CHAN2, CHAN3, CHAN4",
+                          "Fr": "CHAN1, CHAN2, CHAN3, CHAN4",
+                          "De": "CHAN1, CHAN2, CHAN3, CHAN4",
+                          "Es": "CHAN1, CHAN2, CHAN3, CHAN4"
+                        }
                       }
                     }
                   }
@@ -122,7 +137,12 @@
                       "sweep": {
                         "value": "AUTO",
                         "type": "_Value",
-                        "description": "AUTO or NORMal"
+                        "description": {
+                          "En": "AUTO or NORMal",
+                          "Fr": "AUTO ou NORMAL",
+                          "De": "AUTO oder NORMAL",
+                          "Es": "AUTO o NORMAL"
+                        }
                       }
                     }
                   }

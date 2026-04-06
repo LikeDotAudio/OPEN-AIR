@@ -12,11 +12,21 @@
     "blocks": {
       "nab": {
         "type": "OcaBlock",
-        "description": "Rigol Measurements",
+        "description": {
+          "En": "Rigol Measurements",
+          "Fr": "Mesures Rigol",
+          "De": "Rigol-Messungen",
+          "Es": "Mediciones de Rigol"
+        },
         "fields": {
           "Measurements_CH1": {
             "type": "OcaBlock",
-            "description": "Channel 1 Stats",
+            "description": {
+              "En": "Channel 1 Stats",
+              "Fr": "Canal 1",
+              "De": "Kanal 1",
+              "Es": "Canal 1"
+            },
             "fields": {
               "Get_Stats_CH1": {
                 "type": "OcaBlock",
@@ -72,11 +82,21 @@
       },
       "rig": {
         "type": "OcaBlock",
-        "description": "Scope Configuration",
+        "description": {
+          "En": "Scope Configuration",
+          "Fr": "Scope Configuration",
+          "De": "Scope Konfiguration",
+          "Es": "Scope Configuración"
+        },
         "fields": {
           "Config_CH1": {
             "type": "OcaBlock",
-            "description": "Channel 1 Vertical",
+            "description": {
+              "En": "Channel 1 Vertical",
+              "Fr": "Canal 1",
+              "De": "Kanal 1",
+              "Es": "Canal 1"
+            },
             "fields": {
               "CH1_Scale": {
                 "type": "OcaBlock",
@@ -181,7 +201,12 @@
                       "coupling": {
                         "value": "DC",
                         "type": "_Value",
-                        "description": "AC, DC, GND"
+                        "description": {
+                          "En": "AC, DC, GND",
+                          "Fr": "AC, DC, GND",
+                          "De": "AC, DC, GND",
+                          "Es": "CA, CC, GND"
+                        }
                       }
                     }
                   }
@@ -218,7 +243,12 @@
                       "atten": {
                         "value": "10",
                         "type": "_Value",
-                        "description": "1, 10, 100"
+                        "description": {
+                          "En": "1, 10, 100",
+                          "Fr": "1, 10, 100",
+                          "De": "1, 10, 100",
+                          "Es": "1, 10, 100"
+                        }
                       }
                     }
                   }
@@ -255,7 +285,12 @@
                       "limit": {
                         "value": "20M",
                         "type": "_Value",
-                        "description": "20M or OFF"
+                        "description": {
+                          "En": "20M or OFF",
+                          "Fr": "20M or OFF",
+                          "De": "20M or OFF",
+                          "Es": "20M or OFF"
+                        }
                       }
                     }
                   }
@@ -267,14 +302,24 @@
       },
       "Do": {
         "type": "OcaBlock",
-        "description": "Actions and Toggles",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
         "fields": {
           "Channel_Display_Control": {
             "type": "OcaBlock",
             "fields": {
               "CH1_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": "CH1 ON",
+                "label_inactive": {
+                  "En": "CH1 ON",
+                  "Fr": "CH1 ACTIVÉ",
+                  "De": "CH1 AN",
+                  "Es": "CH1 ACTIVADO"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -294,7 +339,12 @@
               },
               "CH1_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": "CH1 OFF",
+                "label_inactive": {
+                  "En": "CH1 OFF",
+                  "Fr": "CH 1",
+                  "De": "CH 1",
+                  "Es": "CH 1"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",

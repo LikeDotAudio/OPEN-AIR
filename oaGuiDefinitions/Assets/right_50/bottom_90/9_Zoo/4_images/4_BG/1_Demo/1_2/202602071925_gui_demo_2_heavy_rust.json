@@ -13,7 +13,12 @@
       "fields": {
         "Meter_1": {
           "type": "_NeedleVUMeter",
-          "label": "Gem 1",
+          "label": {
+            "En": "Gem 1",
+            "Fr": "Gem 1",
+            "De": "Gem 1",
+            "Es": "Gem 1"
+          },
           "geometry": {
             "width": 400,
             "height": 200
@@ -37,7 +42,12 @@
               "overlay_style": "aperture_mask"
             }
           },
-          "label_active": "Gem 1",
+          "label_active": {
+            "En": "Gem 1",
+            "Fr": "Gem 1",
+            "De": "Gem 1",
+            "Es": "Gem 1"
+          },
           "width": 400,
           "height": 200,
           "Orientation": "vertical",
@@ -57,7 +67,12 @@
         },
         "Meter_2": {
           "type": "_NeedleVUMeter",
-          "label": "Gem 1",
+          "label": {
+            "En": "Gem 1",
+            "Fr": "Gem 1",
+            "De": "Gem 1",
+            "Es": "Gem 1"
+          },
           "geometry": {
             "width": 400,
             "height": 200
@@ -81,7 +96,12 @@
               "overlay_style": "aperture_mask"
             }
           },
-          "label_active": "Gem 1",
+          "label_active": {
+            "En": "Gem 1",
+            "Fr": "Gem 1",
+            "De": "Gem 1",
+            "Es": "Gem 1"
+          },
           "width": 400,
           "height": 200,
           "Orientation": "vertical",

@@ -13,7 +13,12 @@
     "blocks": {
       "Source": {
         "type": "OcaBlock",
-        "description": "Configuration",
+        "description": {
+          "En": "Configuration",
+          "Fr": "Configuration",
+          "De": "Konfiguration",
+          "Es": "Configuración"
+        },
         "fields": {
           "Set_Levels": {
             "type": "OcaBlock",
@@ -46,13 +51,23 @@
                   "volt": {
                     "value": "5.0",
                     "type": "_GuiValue",
-                    "label": "Voltage",
+                    "label": {
+                      "En": "Voltage",
+                      "Fr": "Tension",
+                      "De": "Spannung",
+                      "Es": "Voltaje"
+                    },
                     "units": "V"
                   },
                   "curr": {
                     "value": "1.0",
                     "type": "_GuiValue",
-                    "label": "Current",
+                    "label": {
+                      "En": "Current",
+                      "Fr": "Courant",
+                      "De": "Strom",
+                      "Es": "Corriente"
+                    },
                     "units": "A"
                   }
                 }

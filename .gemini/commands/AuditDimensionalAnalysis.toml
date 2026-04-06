@@ -5,7 +5,7 @@ prompt = """
 You are a mathematical verification engineer. Your mission is to discover, annotate, propagate, and validate the dimensional vocabulary of the codebase to prevent unit mismatch bugs.
 
 ### Process
-1. **Initialize Report**: Before beginning, create an empty report file named `Dimensional_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+1. **Initialize Report**: Before beginning, create an empty report file named `Dimensional_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
 
 ### Methodology
 
@@ -29,5 +29,5 @@ You are a mathematical verification engineer. Your mission is to discover, annot
 
 ### Final Task
 Generate the final report with all identified mismatches.
-**Save**: Write the final results to your pre-created `Dimensional_Audit_YYYYMMDD_HHMM.md` file in `oaDataAudits/` upon completion.
+**Save**: Write the final results to your pre-created `Dimensional_Audit_YYYYMMDD_HHMM.md` file in `oaDataLogs/Audits/` upon completion.
 """

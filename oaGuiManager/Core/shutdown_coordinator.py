@@ -25,10 +25,14 @@ class ShutdownCoordinator:
             return
         self._shutdown_in_progress = True
         
+        # ⚡ USER INTENT: Log clearly that the exit was requested by the user
+        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "👋 [EXIT] User is requesting to exit application.", level="INFO")
+        
         # ⚡ DEBUG: Identify who called on_closing
-        stack = inspect.stack()
-        caller_info = "\n".join([f"  - {s.filename}:{s.lineno} in {s.function}" for s in stack[1:5]])
-        matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🖥️🎨 [UI] Initiating shutdown... Caller stack:\n{caller_info}", level="DEBUG")
+        if self.debug_enabled:
+            stack = inspect.stack()
+            caller_info = "\n".join([f"  - {s.filename}:{s.lineno} in {s.function}" for s in stack[1:5]])
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, f"🖥️🎨 [UI] Initiating shutdown... Caller stack:\n{caller_info}", level="DEBUG")
         
         self.root._shutdown = True
         
@@ -45,7 +49,12 @@ class ShutdownCoordinator:
                         logger.warning(f"⚠️ Error shutting down {name}: {e}")
             
             # After managers are signaled to stop, quit the mainloop
-            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "🖥️🎨 [UI] Managers signaled to stop. Quitting mainloop...", level="DEBUG")
+            matrix_log("UI", "GUI_MANAGER", inspect.currentframe().f_code.co_name, "🖥️🎨 [UI] Managers signaled to stop. Finalizing logout...", level="DEBUG")
+            
+            # --- FINAL LOGGING FLUSH ---
+            from oaLogging.Core.logger import shutdown_logging
+            shutdown_logging()
+            
             self.root.after(0, self.root.quit)
 
         threading.Thread(target=_stop_managers, daemon=True).start()

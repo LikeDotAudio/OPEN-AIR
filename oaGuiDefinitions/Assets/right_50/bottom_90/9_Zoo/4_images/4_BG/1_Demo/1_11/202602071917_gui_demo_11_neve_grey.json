@@ -13,7 +13,12 @@
       "fields": {
         "Meter_1": {
           "type": "_NeedleVUMeter",
-          "label": "Octagon 1",
+          "label": {
+            "En": "Octagon 1",
+            "Fr": "Octagon 1",
+            "De": "Octagon 1",
+            "Es": "Octagon 1"
+          },
           "geometry": {
             "width": 400,
             "height": 200
@@ -39,7 +44,12 @@
         },
         "Meter_2": {
           "type": "_NeedleVUMeter",
-          "label": "Hex 2",
+          "label": {
+            "En": "Hex 2",
+            "Fr": "Hex 2",
+            "De": "Hex 2",
+            "Es": "Hex 2"
+          },
           "geometry": {
             "width": 400,
             "height": 200
@@ -65,7 +75,12 @@
         },
         "Meter_3": {
           "type": "_NeedleVUMeter",
-          "label": "Hotdog 3",
+          "label": {
+            "En": "Hotdog 3",
+            "Fr": "Hotdog 3",
+            "De": "Hotdog 3",
+            "Es": "Hotdog 3"
+          },
           "geometry": {
             "width": 250,
             "height": 250

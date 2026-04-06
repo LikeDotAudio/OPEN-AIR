@@ -23,7 +23,7 @@ class InstallerGenerator:
         Generates a complete Bash Installer Script for the SNMP Manager.
         Ensures path references are absolute and robust for snmpd access.
         """
-        from oaConfiguration.FileReaders.config_reader import Config
+        from oaConfigurationManager.FileReaders.config_reader import Config
         from oaOchestration.Core.path_initializer import GLOBAL_PROJECT_ROOT
         from oaOchestration.Constants.project_paths import DATA_SNMP_DIR
         cfg = Config.get_instance()

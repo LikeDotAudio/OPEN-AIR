@@ -13,7 +13,12 @@
     "blocks": {
       "Gem_Variations": {
         "type": "OcaBlock",
-        "description": "Gem Meter Variations",
+        "description": {
+          "En": "Gem Meter Variations",
+          "Fr": "Gem Meter Variations",
+          "De": "Gem Meter Variationen",
+          "Es": "Gem Meter Variaciones"
+        },
         "layout_columns": 3,
         "column_sizing": [
           {
@@ -29,7 +34,12 @@
         "fields": {
           "Gem_1_Large": {
             "type": "_NeedleVUMeter",
-            "label": "Large Classic",
+            "label": {
+              "En": "Large Classic",
+              "Fr": "Large Classique",
+              "De": "Large Klassisch",
+              "Es": "Large Clásico"
+            },
             "geometry": {
               "width": 300,
               "height": 300
@@ -54,7 +64,12 @@
               },
               "labels": [
                 {
-                  "text": "GEMSTONE SERIES",
+                  "text": {
+                    "En": "GEMSTONE SERIES",
+                    "Fr": "GEMSTONE SERIES",
+                    "De": "GEMSTONE SERIES",
+                    "Es": "GEMSTONE SERIES"
+                  },
                   "x": 0,
                   "y": 20,
                   "size": 12,
@@ -71,7 +86,12 @@
                 }
               ]
             },
-            "label_active": "Large Classic",
+            "label_active": {
+              "En": "Large Classic",
+              "Fr": "Large Classique",
+              "De": "Large Klassisch",
+              "Es": "Large Clásico"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -100,7 +120,12 @@
           },
           "Gem_2_Medium": {
             "type": "_NeedleVUMeter",
-            "label": "Medium Blue",
+            "label": {
+              "En": "Medium Blue",
+              "Fr": "Moyen Blue",
+              "De": "Mittel Blue",
+              "Es": "Medio Blue"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -126,7 +151,12 @@
               },
               "labels": [
                 {
-                  "text": "PRECISION GEM",
+                  "text": {
+                    "En": "PRECISION GEM",
+                    "Fr": "PRECISION GEM",
+                    "De": "PRECISION GEM",
+                    "Es": "PRECISION GEM"
+                  },
                   "x": 0,
                   "y": 15,
                   "size": 10,
@@ -134,7 +164,12 @@
                 }
               ]
             },
-            "label_active": "Medium Blue",
+            "label_active": {
+              "En": "Medium Blue",
+              "Fr": "Moyen Blue",
+              "De": "Mittel Blue",
+              "Es": "Medio Blue"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -164,7 +199,12 @@
           },
           "Gem_3_Small": {
             "type": "_NeedleVUMeter",
-            "label": "Small Gold",
+            "label": {
+              "En": "Small Gold",
+              "Fr": "Small Gold",
+              "De": "Small Gold",
+              "Es": "Small Gold"
+            },
             "geometry": {
               "width": 150,
               "height": 150
@@ -189,14 +229,24 @@
               },
               "labels": [
                 {
-                  "text": "GOLD GEM",
+                  "text": {
+                    "En": "GOLD GEM",
+                    "Fr": "GOLD GEM",
+                    "De": "GOLD GEM",
+                    "Es": "GOLD GEM"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 8
                 }
               ]
             },
-            "label_active": "Small Gold",
+            "label_active": {
+              "En": "Small Gold",
+              "Fr": "Small Gold",
+              "De": "Small Gold",
+              "Es": "Small Gold"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -225,7 +275,12 @@
           },
           "Gem_4_Ruby": {
             "type": "_NeedleVUMeter",
-            "label": "Ruby Red",
+            "label": {
+              "En": "Ruby Red",
+              "Fr": "Ruby Red",
+              "De": "Ruby Red",
+              "Es": "Ruby Red"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -251,7 +306,12 @@
               },
               "labels": [
                 {
-                  "text": "RUBY VU",
+                  "text": {
+                    "En": "RUBY VU",
+                    "Fr": "RUBY VU",
+                    "De": "RUBY VU",
+                    "Es": "RUBY VU"
+                  },
                   "x": 0,
                   "y": 15,
                   "size": 10,
@@ -259,7 +319,12 @@
                 }
               ]
             },
-            "label_active": "Ruby Red",
+            "label_active": {
+              "En": "Ruby Red",
+              "Fr": "Ruby Red",
+              "De": "Ruby Red",
+              "Es": "Ruby Red"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -289,7 +354,12 @@
           },
           "Gem_5_Emerald": {
             "type": "_NeedleVUMeter",
-            "label": "Emerald Flat",
+            "label": {
+              "En": "Emerald Flat",
+              "Fr": "Emerald Flat",
+              "De": "Emerald Flat",
+              "Es": "Emerald Flat"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -315,7 +385,12 @@
               },
               "labels": [
                 {
-                  "text": "EMERALD",
+                  "text": {
+                    "En": "EMERALD",
+                    "Fr": "EMERALD",
+                    "De": "EMERALD",
+                    "Es": "EMERALD"
+                  },
                   "x": 0,
                   "y": 15,
                   "size": 10,
@@ -323,7 +398,12 @@
                 }
               ]
             },
-            "label_active": "Emerald Flat",
+            "label_active": {
+              "En": "Emerald Flat",
+              "Fr": "Emerald Flat",
+              "De": "Emerald Flat",
+              "Es": "Emerald Flat"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -353,7 +433,12 @@
           },
           "Gem_6_Sapphire": {
             "type": "_NeedleVUMeter",
-            "label": "Sapphire Deep",
+            "label": {
+              "En": "Sapphire Deep",
+              "Fr": "Sapphire Deep",
+              "De": "Sapphire Deep",
+              "Es": "Sapphire Deep"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -379,7 +464,12 @@
               },
               "labels": [
                 {
-                  "text": "SAPPHIRE",
+                  "text": {
+                    "En": "SAPPHIRE",
+                    "Fr": "SAPPHIRE",
+                    "De": "SAPPHIRE",
+                    "Es": "SAPPHIRE"
+                  },
                   "x": 0,
                   "y": 15,
                   "size": 10,
@@ -387,7 +477,12 @@
                 }
               ]
             },
-            "label_active": "Sapphire Deep",
+            "label_active": {
+              "En": "Sapphire Deep",
+              "Fr": "Sapphire Deep",
+              "De": "Sapphire Deep",
+              "Es": "Sapphire Deep"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -417,7 +512,12 @@
           },
           "Gem_7_Onyx": {
             "type": "_NeedleVUMeter",
-            "label": "Onyx Stealth",
+            "label": {
+              "En": "Onyx Stealth",
+              "Fr": "Onyx Stealth",
+              "De": "Onyx Stealth",
+              "Es": "Onyx Stealth"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -443,7 +543,12 @@
               },
               "labels": [
                 {
-                  "text": "ONYX STEALTH",
+                  "text": {
+                    "En": "ONYX STEALTH",
+                    "Fr": "ONYX STEALTH",
+                    "De": "ONYX STEALTH",
+                    "Es": "ONYX STEALTH"
+                  },
                   "x": 0,
                   "y": 15,
                   "size": 10,
@@ -451,7 +556,12 @@
                 }
               ]
             },
-            "label_active": "Onyx Stealth",
+            "label_active": {
+              "En": "Onyx Stealth",
+              "Fr": "Onyx Stealth",
+              "De": "Onyx Stealth",
+              "Es": "Onyx Stealth"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -481,7 +591,12 @@
           },
           "Gem_8_Pearl": {
             "type": "_NeedleVUMeter",
-            "label": "Pearl White",
+            "label": {
+              "En": "Pearl White",
+              "Fr": "Pearl White",
+              "De": "Pearl White",
+              "Es": "Pearl White"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -507,7 +622,12 @@
               },
               "labels": [
                 {
-                  "text": "PEARL EDITION",
+                  "text": {
+                    "En": "PEARL EDITION",
+                    "Fr": "PEARL EDITION",
+                    "De": "PEARL EDITION",
+                    "Es": "PEARL EDITION"
+                  },
                   "x": 0,
                   "y": 15,
                   "size": 10,
@@ -515,7 +635,12 @@
                 }
               ]
             },
-            "label_active": "Pearl White",
+            "label_active": {
+              "En": "Pearl White",
+              "Fr": "Pearl White",
+              "De": "Pearl White",
+              "Es": "Pearl White"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -545,7 +670,12 @@
           },
           "Gem_9_Amethyst": {
             "type": "_NeedleVUMeter",
-            "label": "Amethyst",
+            "label": {
+              "En": "Amethyst",
+              "Fr": "Amethyst",
+              "De": "Amethyst",
+              "Es": "Amethyst"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -571,7 +701,12 @@
               },
               "labels": [
                 {
-                  "text": "AMETHYST",
+                  "text": {
+                    "En": "AMETHYST",
+                    "Fr": "AMETHYST",
+                    "De": "AMETHYST",
+                    "Es": "AMETHYST"
+                  },
                   "x": 0,
                   "y": 15,
                   "size": 10,
@@ -579,7 +714,12 @@
                 }
               ]
             },
-            "label_active": "Amethyst",
+            "label_active": {
+              "En": "Amethyst",
+              "Fr": "Amethyst",
+              "De": "Amethyst",
+              "Es": "Amethyst"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",

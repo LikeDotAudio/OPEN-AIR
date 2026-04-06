@@ -14,7 +14,12 @@
       "fields": {
         "Meter_1": {
           "type": "_NeedleVUMeter",
-          "label": "Crest 1",
+          "label": {
+            "En": "Crest 1",
+            "Fr": "Crest 1",
+            "De": "Crest 1",
+            "Es": "Crest 1"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -37,7 +42,12 @@
               "overlay_style": "dome"
             }
           },
-          "label_active": "Crest 1",
+          "label_active": {
+            "En": "Crest 1",
+            "Fr": "Crest 1",
+            "De": "Crest 1",
+            "Es": "Crest 1"
+          },
           "background_color": "transparent",
           "width": 250,
           "height": 250,
@@ -58,7 +68,12 @@
         },
         "Meter_2": {
           "type": "_NeedleVUMeter",
-          "label": "Super_Gem 2",
+          "label": {
+            "En": "Super_Gem 2",
+            "Fr": "Super_Gem 2",
+            "De": "Super_Gem 2",
+            "Es": "Super_Gem 2"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -81,7 +96,12 @@
               "overlay_style": "aperture_mask"
             }
           },
-          "label_active": "Super_Gem 2",
+          "label_active": {
+            "En": "Super_Gem 2",
+            "Fr": "Super_Gem 2",
+            "De": "Super_Gem 2",
+            "Es": "Super_Gem 2"
+          },
           "background_color": "transparent",
           "width": 250,
           "height": 250,
@@ -102,7 +122,12 @@
         },
         "Meter_3": {
           "type": "_NeedleVUMeter",
-          "label": "Crest 3",
+          "label": {
+            "En": "Crest 3",
+            "Fr": "Crest 3",
+            "De": "Crest 3",
+            "Es": "Crest 3"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -125,7 +150,12 @@
               "overlay_style": "dome"
             }
           },
-          "label_active": "Crest 3",
+          "label_active": {
+            "En": "Crest 3",
+            "Fr": "Crest 3",
+            "De": "Crest 3",
+            "Es": "Crest 3"
+          },
           "background_color": "transparent",
           "width": 250,
           "height": 250,

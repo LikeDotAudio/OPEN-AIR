@@ -1,4 +1,5 @@
 # button_wink_toggler/button_wink_toggler.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -13,7 +14,7 @@ from tkinter import ttk
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
@@ -29,7 +30,7 @@ class BuilderButtonWinkTogglerCreator(BuilderButtonWinkCreator):
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
     
         # Extract config
-        label = config_data.get("label_active") or config_data.get("label", "")
+        label = get_text(get_text(config_data.get('label_active'))) or get_text(get_text(config_data.get('label')), "")
         config = config_data
         path = config_data.get("path")
 

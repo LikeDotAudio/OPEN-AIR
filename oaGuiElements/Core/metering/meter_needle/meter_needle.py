@@ -1,4 +1,5 @@
 # meter_needle/meter_needle.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
@@ -15,7 +16,7 @@ from oaLogging.Core.logger import builder_logger
 from oaLogging.Methods.matrix_gate import is_debug_allowed
 BUILDER_DEBUG = is_debug_allowed(system="UI", element="GUI_BUILDER")
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 # --- Specialized Modules ---

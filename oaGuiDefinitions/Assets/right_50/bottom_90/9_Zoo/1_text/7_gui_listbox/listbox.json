@@ -13,26 +13,51 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": "Select File",
+        "label_active": {
+          "En": "Select File",
+          "Fr": "Select File",
+          "De": "Select File",
+          "Es": "Select File"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartList",
-            "label": "Select File",
+            "label": {
+              "En": "Select File",
+              "Fr": "Select File",
+              "De": "Select File",
+              "Es": "Select File"
+            },
             "notes": "Listbox for selecting a file from a list.",
             "interaction": {
               "options": {
                 "file1": {
-                  "label_active": "document.pdf",
+                  "label_active": {
+                    "En": "document.pdf",
+                    "Fr": "document.pdf",
+                    "De": "document.pdf",
+                    "Es": "document.pdf"
+                  },
                   "value": "/path/to/document.pdf",
                   "active": "true"
                 },
                 "file2": {
-                  "label_active": "report.docx",
+                  "label_active": {
+                    "En": "report.docx",
+                    "Fr": "report.docx",
+                    "De": "report.docx",
+                    "Es": "report.docx"
+                  },
                   "value": "/path/to/report.docx",
                   "active": "true"
                 },
                 "file3": {
-                  "label_active": "image.png",
+                  "label_active": {
+                    "En": "image.png",
+                    "Fr": "image.png",
+                    "De": "image.png",
+                    "Es": "image.png"
+                  },
                   "value": "/path/to/image.png",
                   "active": "true",
                   "selected": true
@@ -44,32 +69,62 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": "Load Preset",
+        "label_active": {
+          "En": "Load Preset",
+          "Fr": "Charger Preset",
+          "De": "Laden Preset",
+          "Es": "Cargar Preset"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartList",
-            "label": "Load Preset",
+            "label": {
+              "En": "Load Preset",
+              "Fr": "Charger Preset",
+              "De": "Laden Preset",
+              "Es": "Cargar Preset"
+            },
             "notes": "Listbox for selecting audio effect presets.",
             "interaction": {
               "options": {
                 "preset1": {
-                  "label_active": "Clean Guitar",
+                  "label_active": {
+                    "En": "Clean Guitar",
+                    "Fr": "Clean Guitar",
+                    "De": "Clean Guitar",
+                    "Es": "Clean Guitar"
+                  },
                   "value": "preset_clean",
                   "active": "true"
                 },
                 "preset2": {
-                  "label_active": "Crunch Lead",
+                  "label_active": {
+                    "En": "Crunch Lead",
+                    "Fr": "Crunch Lead",
+                    "De": "Crunch Lead",
+                    "Es": "Crunch Lead"
+                  },
                   "value": "preset_crunch",
                   "active": "true"
                 },
                 "preset3": {
-                  "label_active": "Heavy Metal",
+                  "label_active": {
+                    "En": "Heavy Metal",
+                    "Fr": "Heavy Metal",
+                    "De": "Heavy Metal",
+                    "Es": "Heavy Metal"
+                  },
                   "value": "preset_metal",
                   "active": "true",
                   "selected": true
                 },
                 "preset4": {
-                  "label_active": "Ambient Pad",
+                  "label_active": {
+                    "En": "Ambient Pad",
+                    "Fr": "Ambient Pad",
+                    "De": "Ambient Pad",
+                    "Es": "Ambient Pad"
+                  },
                   "value": "preset_pad",
                   "active": "true"
                 }
@@ -80,32 +135,62 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": "Active Channels",
+        "label_active": {
+          "En": "Active Channels",
+          "Fr": "Actif Channels",
+          "De": "Aktiv Channels",
+          "Es": "Activo Channels"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartList",
-            "label": "Active Channels",
+            "label": {
+              "En": "Active Channels",
+              "Fr": "Actif Channels",
+              "De": "Aktiv Channels",
+              "Es": "Activo Channels"
+            },
             "notes": "Listbox where some channels are initially inactive.",
             "interaction": {
               "options": {
                 "ch1": {
-                  "label_active": "Channel 1",
+                  "label_active": {
+                    "En": "Channel 1",
+                    "Fr": "Canal 1",
+                    "De": "Kanal 1",
+                    "Es": "Canal 1"
+                  },
                   "value": "CH1",
                   "active": "true"
                 },
                 "ch2": {
-                  "label_active": "Channel 2",
+                  "label_active": {
+                    "En": "Channel 2",
+                    "Fr": "Canal 2",
+                    "De": "Kanal 2",
+                    "Es": "Canal 2"
+                  },
                   "value": "CH2",
                   "active": "true",
                   "selected": true
                 },
                 "ch3": {
-                  "label_active": "Channel 3",
+                  "label_active": {
+                    "En": "Channel 3",
+                    "Fr": "Canal 3",
+                    "De": "Kanal 3",
+                    "Es": "Canal 3"
+                  },
                   "value": "CH3",
                   "active": "false"
                 },
                 "ch4": {
-                  "label_active": "Channel 4",
+                  "label_active": {
+                    "En": "Channel 4",
+                    "Fr": "Canal 4",
+                    "De": "Kanal 4",
+                    "Es": "Canal 4"
+                  },
                   "value": "CH4",
                   "active": "true"
                 }
@@ -116,27 +201,52 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": "Select User",
+        "label_active": {
+          "En": "Select User",
+          "Fr": "Select User",
+          "De": "Select User",
+          "Es": "Select User"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartList",
-            "label": "Select User",
+            "label": {
+              "En": "Select User",
+              "Fr": "Select User",
+              "De": "Select User",
+              "Es": "Select User"
+            },
             "notes": "Listbox for selecting from a list of users.",
             "interaction": {
               "options": {
                 "userA": {
-                  "label_active": "Alice",
+                  "label_active": {
+                    "En": "Alice",
+                    "Fr": "Alice",
+                    "De": "Alice",
+                    "Es": "Alice"
+                  },
                   "value": "alice_id",
                   "active": "true"
                 },
                 "userB": {
-                  "label_active": "Bob",
+                  "label_active": {
+                    "En": "Bob",
+                    "Fr": "Bob",
+                    "De": "Bob",
+                    "Es": "Bob"
+                  },
                   "value": "bob_id",
                   "active": "true",
                   "selected": true
                 },
                 "userC": {
-                  "label_active": "Charlie",
+                  "label_active": {
+                    "En": "Charlie",
+                    "Fr": "Charlie",
+                    "De": "Charlie",
+                    "Es": "Charlie"
+                  },
                   "value": "charlie_id",
                   "active": "true"
                 }
@@ -147,32 +257,62 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": "Log Level",
+        "label_active": {
+          "En": "Log Level",
+          "Fr": "Log Level",
+          "De": "Log Level",
+          "Es": "Log Level"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartList",
-            "label": "Log Level",
+            "label": {
+              "En": "Log Level",
+              "Fr": "Log Level",
+              "De": "Log Level",
+              "Es": "Log Level"
+            },
             "notes": "Listbox for selecting the logging verbosity level.",
             "interaction": {
               "options": {
                 "Debug": {
-                  "label_active": "DEBUG",
+                  "label_active": {
+                    "En": "DEBUG",
+                    "Fr": "DEBUG",
+                    "De": "DEBUG",
+                    "Es": "DEBUG"
+                  },
                   "value": 0,
                   "active": "true"
                 },
                 "Info": {
-                  "label_active": "INFO",
+                  "label_active": {
+                    "En": "INFO",
+                    "Fr": "INFO",
+                    "De": "INFO",
+                    "Es": "INFO"
+                  },
                   "value": 1,
                   "active": "true",
                   "selected": true
                 },
                 "Warn": {
-                  "label_active": "WARNING",
+                  "label_active": {
+                    "En": "WARNING",
+                    "Fr": "WARNING",
+                    "De": "WARNING",
+                    "Es": "WARNING"
+                  },
                   "value": 2,
                   "active": "true"
                 },
                 "Error": {
-                  "label_active": "ERROR",
+                  "label_active": {
+                    "En": "ERROR",
+                    "Fr": "ERROR",
+                    "De": "ERROR",
+                    "Es": "ERROR"
+                  },
                   "value": 3,
                   "active": "true"
                 }

@@ -16,7 +16,7 @@ from PIL import Image
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaOchestration.Constants.project_paths import GLOBAL_PROJECT_ROOT
 
 app_constants = Config.get_instance()

@@ -5,27 +5,54 @@
     "blocks": {
       "Calibration": {
         "type": "OcaBlock",
-        "description": "Correction & Reset",
+        "description": {
+          "En": "Correction & Reset",
+          "Fr": "Correction & Réinitialiser",
+          "De": "Correction & Zurücksetzen",
+          "Es": "Correction & Reiniciar"
+        },
         "fields": {
           "Open_Corr": {
             "type": "_GuiActuator",
-            "label_inactive": "OPEN CORR",
+            "label_inactive": {
+              "En": "OPEN CORR",
+              "Fr": "OPEN CORR",
+              "De": "OPEN CORR",
+              "Es": "OPEN CORR"
+            },
             "message": ":CORR:OPEN:EXEC"
           },
           "Short_Corr": {
             "type": "_GuiActuator",
-            "label_inactive": "SHORT CORR",
+            "label_inactive": {
+              "En": "SHORT CORR",
+              "Fr": "SHORT CORR",
+              "De": "SHORT CORR",
+              "Es": "SHORT CORR"
+            },
             "message": ":CORR:SHOR:EXEC"
           },
           "Reset_Unit": {
             "type": "_GuiActuator",
-            "label_inactive": "Factory Reset",
-            "style": { "active_color": "#FF0000" },
+            "label_inactive": {
+              "En": "Factory Reset",
+              "Fr": "Factory Réinitialiser",
+              "De": "Factory Zurücksetzen",
+              "Es": "Factory Reiniciar"
+            },
+            "style": {
+              "active_color": "#FF0000"
+            },
             "message": "*RST"
           },
           "Error_Log": {
             "type": "_GuiActuator",
-            "label_inactive": "Read Error",
+            "label_inactive": {
+              "En": "Read Error",
+              "Fr": "Read Erreur",
+              "De": "Read Fehler",
+              "Es": "Read Error"
+            },
             "message": ":SYST:ERR?"
           }
         }

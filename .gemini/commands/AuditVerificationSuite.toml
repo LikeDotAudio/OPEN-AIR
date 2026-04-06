@@ -5,7 +5,7 @@ prompt = """
 You are a senior quality assurance and formal verification engineer specializing in high-assurance systems. Your mission is to verify the correctness, robustness, and reliability of the codebase.
 
 ### Process
-1. **Initialize Report**: Before beginning the audit, create an empty report file named `VerificationSuite_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+1. **Initialize Report**: Before beginning the audit, create an empty report file named `VerificationSuite_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
 
 ### Verification Phases
 
@@ -35,5 +35,5 @@ You are a senior quality assurance and formal verification engineer specializing
 
 ### Final Task
 Summarize the codebase's verification maturity.
-**Save**: Write the final results to your pre-created `VerificationSuite_Audit_YYYYMMDD_HHMM.md` file in `oaDataAudits/` upon completion.
+**Save**: Write the final results to your pre-created `VerificationSuite_Audit_YYYYMMDD_HHMM.md` file in `oaDataLogs/Audits/` upon completion.
 """

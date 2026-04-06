@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Horizontal Timebase Settings",
+        "description": {
+          "En": "Horizontal Timebase Settings",
+          "Fr": "Horizontal Tempsbase Paramètres",
+          "De": "Horizontal Zeitbase Einstellungen",
+          "Es": "Horizontal Tiempobase Ajustes"
+        },
         "fields": {
           "Set_Mode": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "mode": {
                     "value": "MAIN",
                     "type": "_GuiValue",
-                    "label": "Mode",
+                    "label": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
                     "units": "",
-                    "description": "MAIN, XY, ROLL"
+                    "description": {
+                      "En": "MAIN, XY, ROLL",
+                      "Fr": "MAIN, XY, ROLL",
+                      "De": "MAIN, XY, ROLL",
+                      "Es": "MAIN, XY, ROLL"
+                    }
                   }
                 }
               }
@@ -85,7 +100,12 @@
                   "scale": {
                     "value": "1.0e-3",
                     "type": "_GuiValue",
-                    "label": "Scale",
+                    "label": {
+                      "En": "Scale",
+                      "Fr": "Échelle",
+                      "De": "Skala",
+                      "Es": "Escala"
+                    },
                     "units": "s/div"
                   }
                 }
@@ -123,7 +143,12 @@
                   "offset": {
                     "value": "0.0",
                     "type": "_GuiValue",
-                    "label": "Delay",
+                    "label": {
+                      "En": "Delay",
+                      "Fr": "Delay",
+                      "De": "Delay",
+                      "Es": "Delay"
+                    },
                     "units": "s"
                   }
                 }

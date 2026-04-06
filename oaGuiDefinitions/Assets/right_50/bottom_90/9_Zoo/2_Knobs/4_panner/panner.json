@@ -13,7 +13,12 @@
     "blocks": {
       "Panner_Petting_Zoo": {
         "type": "OcaBlock",
-        "description": "Panner Variations (8 Demos)",
+        "description": {
+          "En": "Panner Variations (8 Demos)",
+          "Fr": "Panner Variations (8 Demos)",
+          "De": "Panner Variationen (8 Demos)",
+          "Es": "Panner Variaciones (8 Demos)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -32,7 +37,12 @@
         "fields": {
           "stereo_pan_center": {
             "type": "_SmartKnob",
-            "label": "Pan L/R",
+            "label": {
+              "En": "Pan L/R",
+              "Fr": "Panoramique L/R",
+              "De": "Panorama L/R",
+              "Es": "Panorámico L/R"
+            },
             "notes": "Standard stereo panner, centered.",
             "geometry": {
               "width": 50,
@@ -103,7 +113,12 @@
           },
           "pan_left_latching": {
             "type": "_SmartKnob",
-            "label": "Pan Left",
+            "label": {
+              "En": "Pan Left",
+              "Fr": "Panoramique Gauche",
+              "De": "Panorama Links",
+              "Es": "Panorámico Izquierda"
+            },
             "notes": "Latching left pan.",
             "geometry": {
               "width": 60,
@@ -175,7 +190,12 @@
           },
           "pan_right_momentary": {
             "type": "_SmartKnob",
-            "label": "Pan Right",
+            "label": {
+              "En": "Pan Right",
+              "Fr": "Panoramique Droite",
+              "De": "Panorama Rechts",
+              "Es": "Panorámico Derecha"
+            },
             "notes": "Momentary right pan.",
             "geometry": {
               "width": 70,
@@ -247,7 +267,12 @@
           },
           "width_latching": {
             "type": "_SmartKnob",
-            "label": "Width",
+            "label": {
+              "En": "Width",
+              "Fr": "Largeur",
+              "De": "Breite",
+              "Es": "Ancho"
+            },
             "notes": "Latching stereo width.",
             "geometry": {
               "width": 80,
@@ -319,7 +344,12 @@
           },
           "balance_momentary": {
             "type": "_SmartKnob",
-            "label": "Balance",
+            "label": {
+              "En": "Balance",
+              "Fr": "Balance",
+              "De": "Balance",
+              "Es": "Balance"
+            },
             "notes": "Momentary balance control.",
             "geometry": {
               "width": 50,
@@ -390,7 +420,12 @@
           },
           "spread_latching": {
             "type": "_SmartKnob",
-            "label": "Spread",
+            "label": {
+              "En": "Spread",
+              "Fr": "Spread",
+              "De": "Spread",
+              "Es": "Spread"
+            },
             "notes": "Latching spread control.",
             "geometry": {
               "width": 70,
@@ -461,7 +496,12 @@
           },
           "azimuth_momentary": {
             "type": "_SmartKnob",
-            "label": "Azimuth",
+            "label": {
+              "En": "Azimuth",
+              "Fr": "Azimuth",
+              "De": "Azimuth",
+              "Es": "Azimuth"
+            },
             "notes": "Momentary azimuth angle.",
             "geometry": {
               "width": 60,
@@ -528,12 +568,17 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": true,
-            "unit_text": "\u00b0",
+            "unit_text": "°",
             "latching": false
           },
           "elevation_latching": {
             "type": "_SmartKnob",
-            "label": "Elevation",
+            "label": {
+              "En": "Elevation",
+              "Fr": "Elevation",
+              "De": "Elevation",
+              "Es": "Elevation"
+            },
             "notes": "Latching elevation angle.",
             "geometry": {
               "width": 70,
@@ -600,14 +645,19 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": true,
-            "unit_text": "\u00b0",
+            "unit_text": "°",
             "latching": true
           }
         }
       },
       "Panner_Aux1_Variations": {
         "type": "OcaBlock",
-        "description": "Auxiliary Panner Variations (8 Demos)",
+        "description": {
+          "En": "Auxiliary Panner Variations (8 Demos)",
+          "Fr": "Auxiliairesiliary Panner Variations (8 Demos)",
+          "De": "Aux-Sendsiliary Panner Variationen (8 Demos)",
+          "Es": "Auxiliaresiliary Panner Variaciones (8 Demos)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -626,7 +676,12 @@
         "fields": {
           "aux1_pan_center": {
             "type": "_SmartKnob",
-            "label": "Aux 1 Pan",
+            "label": {
+              "En": "Aux 1 Pan",
+              "Fr": "Auxiliairesiliaires 1 Panoramique",
+              "De": "Aux-Sends-Sends 1 Panorama",
+              "Es": "Auxiliaresiliares 1 Panorámico"
+            },
             "notes": "Standard stereo pan, centered.",
             "geometry": {
               "width": 60,
@@ -696,7 +751,12 @@
           },
           "aux1_pan_left": {
             "type": "_SmartKnob",
-            "label": "Aux 1 L",
+            "label": {
+              "En": "Aux 1 L",
+              "Fr": "Auxiliairesiliaires 1 L",
+              "De": "Aux-Sends-Sends 1 L",
+              "Es": "Auxiliaresiliares 1 L"
+            },
             "notes": "Left-biased pan.",
             "geometry": {
               "width": 50,
@@ -766,7 +826,12 @@
           },
           "aux1_pan_right": {
             "type": "_SmartKnob",
-            "label": "Aux 1 R",
+            "label": {
+              "En": "Aux 1 R",
+              "Fr": "Auxiliairesiliaires 1 R",
+              "De": "Aux-Sends-Sends 1 R",
+              "Es": "Auxiliaresiliares 1 R"
+            },
             "notes": "Right-biased pan.",
             "geometry": {
               "width": 70,
@@ -836,7 +901,12 @@
           },
           "aux1_width_latching": {
             "type": "_SmartKnob",
-            "label": "Width",
+            "label": {
+              "En": "Width",
+              "Fr": "Largeur",
+              "De": "Breite",
+              "Es": "Ancho"
+            },
             "notes": "Latching stereo width.",
             "geometry": {
               "width": 80,
@@ -907,7 +977,12 @@
           },
           "aux1_balance_momentary": {
             "type": "_SmartKnob",
-            "label": "Balance",
+            "label": {
+              "En": "Balance",
+              "Fr": "Balance",
+              "De": "Balance",
+              "Es": "Balance"
+            },
             "notes": "Momentary balance control.",
             "geometry": {
               "width": 50,
@@ -977,7 +1052,12 @@
           },
           "aux1_spread_latching": {
             "type": "_SmartKnob",
-            "label": "Spread",
+            "label": {
+              "En": "Spread",
+              "Fr": "Spread",
+              "De": "Spread",
+              "Es": "Spread"
+            },
             "notes": "Latching spread control.",
             "geometry": {
               "width": 70,
@@ -1047,7 +1127,12 @@
           },
           "aux1_azimuth_momentary": {
             "type": "_SmartKnob",
-            "label": "Azimuth",
+            "label": {
+              "En": "Azimuth",
+              "Fr": "Azimuth",
+              "De": "Azimuth",
+              "Es": "Azimuth"
+            },
             "notes": "Momentary azimuth angle.",
             "geometry": {
               "width": 60,
@@ -1113,12 +1198,17 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": true,
-            "unit_text": "\u00b0",
+            "unit_text": "°",
             "latching": false
           },
           "aux1_elevation_latching": {
             "type": "_SmartKnob",
-            "label": "Elevation",
+            "label": {
+              "En": "Elevation",
+              "Fr": "Elevation",
+              "De": "Elevation",
+              "Es": "Elevation"
+            },
             "notes": "Latching elevation angle.",
             "geometry": {
               "width": 70,
@@ -1184,18 +1274,28 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": true,
-            "unit_text": "\u00b0",
+            "unit_text": "°",
             "latching": true
           }
         }
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": "Aux 2 Pan",
+        "label_active": {
+          "En": "Aux 2 Pan",
+          "Fr": "Auxiliairesiliaires 2 Panoramique",
+          "De": "Aux-Sends-Sends 2 Panorama",
+          "Es": "Auxiliaresiliares 2 Panorámico"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartKnob",
-            "label": "Aux 2 Pan",
+            "label": {
+              "En": "Aux 2 Pan",
+              "Fr": "Auxiliairesiliaires 2 Panoramique",
+              "De": "Aux-Sends-Sends 2 Panorama",
+              "Es": "Auxiliaresiliares 2 Panorámico"
+            },
             "notes": "Panner with a default position to the right.",
             "geometry": {
               "width": 60,
@@ -1251,7 +1351,12 @@
       },
       "Panner_Ambience_Variations": {
         "type": "OcaBlock",
-        "description": "Ambience & Spatial Panner Variations (8 Demos)",
+        "description": {
+          "En": "Ambience & Spatial Panner Variations (8 Demos)",
+          "Fr": "Ambience & Spatial Panner Variations (8 Demos)",
+          "De": "Ambience & Spatial Panner Variationen (8 Demos)",
+          "Es": "Ambience & Spatial Panner Variaciones (8 Demos)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -1270,7 +1375,12 @@
         "fields": {
           "ambience_standard_width": {
             "type": "_SmartKnob",
-            "label": "Width",
+            "label": {
+              "En": "Width",
+              "Fr": "Largeur",
+              "De": "Breite",
+              "Es": "Ancho"
+            },
             "notes": "Standard stereo width.",
             "geometry": {
               "width": 70,
@@ -1340,7 +1450,12 @@
           },
           "ambience_narrow_momentary": {
             "type": "_SmartKnob",
-            "label": "Narrow",
+            "label": {
+              "En": "Narrow",
+              "Fr": "Narrow",
+              "De": "Narrow",
+              "Es": "Narrow"
+            },
             "notes": "Narrower width control.",
             "geometry": {
               "width": 50,
@@ -1411,7 +1526,12 @@
           },
           "ambience_wide_latching": {
             "type": "_SmartKnob",
-            "label": "Wide",
+            "label": {
+              "En": "Wide",
+              "Fr": "Wide",
+              "De": "Wide",
+              "Es": "Wide"
+            },
             "notes": "Wider stereo spread.",
             "geometry": {
               "width": 80,
@@ -1482,7 +1602,12 @@
           },
           "ambience_full_momentary": {
             "type": "_SmartKnob",
-            "label": "Full",
+            "label": {
+              "En": "Full",
+              "Fr": "Complet",
+              "De": "Vollständig",
+              "Es": "Completo"
+            },
             "notes": "Full L/R pan range.",
             "geometry": {
               "width": 70,
@@ -1553,7 +1678,12 @@
           },
           "balance_latching": {
             "type": "_SmartKnob",
-            "label": "Balance",
+            "label": {
+              "En": "Balance",
+              "Fr": "Balance",
+              "De": "Balance",
+              "Es": "Balance"
+            },
             "notes": "Latching balance control.",
             "geometry": {
               "width": 50,
@@ -1623,7 +1753,12 @@
           },
           "depth_momentary": {
             "type": "_SmartKnob",
-            "label": "Depth",
+            "label": {
+              "En": "Depth",
+              "Fr": "Profondeur",
+              "De": "Tiefe",
+              "Es": "Profundidad"
+            },
             "notes": "Momentary depth control.",
             "geometry": {
               "width": 60,
@@ -1694,7 +1829,12 @@
           },
           "azimuth_latching": {
             "type": "_SmartKnob",
-            "label": "Azimuth",
+            "label": {
+              "En": "Azimuth",
+              "Fr": "Azimuth",
+              "De": "Azimuth",
+              "Es": "Azimuth"
+            },
             "notes": "Latching azimuth angle.",
             "geometry": {
               "width": 70,
@@ -1760,12 +1900,17 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": true,
-            "unit_text": "\u00b0",
+            "unit_text": "°",
             "latching": true
           },
           "elevation_momentary": {
             "type": "_SmartKnob",
-            "label": "Elevation",
+            "label": {
+              "En": "Elevation",
+              "Fr": "Elevation",
+              "De": "Elevation",
+              "Es": "Elevation"
+            },
             "notes": "Momentary elevation angle.",
             "geometry": {
               "width": 50,
@@ -1831,18 +1976,28 @@
             "tick_size": 0.2,
             "value_text_inside": true,
             "show_units": true,
-            "unit_text": "\u00b0",
+            "unit_text": "°",
             "latching": false
           }
         }
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": "FX Send",
+        "label_active": {
+          "En": "FX Send",
+          "Fr": "FX Send",
+          "De": "FX Send",
+          "Es": "FX Send"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartKnob",
-            "label": "FX Send",
+            "label": {
+              "En": "FX Send",
+              "Fr": "FX Send",
+              "De": "FX Send",
+              "Es": "FX Send"
+            },
             "notes": "Compact panner starting at its extreme left position.",
             "geometry": {
               "width": 40,

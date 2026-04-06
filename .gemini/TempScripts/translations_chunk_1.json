@@ -1,0 +1,2502 @@
+{
+  "Represents PTP time.": {
+    "Fr": "Représente le temps PTP.",
+    "De": "Repräsentiert die PTP-Zeit.",
+    "Es": "Representa el tiempo PTP."
+  },
+  "Force Trigger": {
+    "Fr": "Déclenchement forcé",
+    "De": "Trigger erzwingen",
+    "Es": "Disparo forzado"
+  },
+  "Set Video Bandwidth": {
+    "Fr": "Régler la bande passante vidéo",
+    "De": "Videobandbreite einstellen",
+    "Es": "Ajustar ancho de banda de video"
+  },
+  "Squectangle Meter Variations": {
+    "Fr": "Variations du mètre Squectangle",
+    "De": "Squectangle-Meter-Variationen",
+    "Es": "Variaciones del medidor Squectangle"
+  },
+  "B60": {
+    "Fr": "B60",
+    "De": "B60",
+    "Es": "B60"
+  },
+  "Pink 7T": {
+    "Fr": "Rose 7T",
+    "De": "Rosa 7T",
+    "Es": "Rosa 7T"
+  },
+  "Trace Data 2": {
+    "Fr": "Données de trace 2",
+    "De": "Trace-Daten 2",
+    "Es": "Datos de traza 2"
+  },
+  "Slow/Damped": {
+    "Fr": "Lent/Amorti",
+    "De": "Langsam/Gedämpft",
+    "Es": "Lento/Amortiguado"
+  },
+  "Rainbow Fader": {
+    "Fr": "Fader arc-en-ciel",
+    "De": "Regenbogen-Fader",
+    "Es": "Fader arcoíris"
+  },
+  "FROZEN": {
+    "Fr": "FIGÉ",
+    "De": "EINGEFROREN",
+    "Es": "CONGELADO"
+  },
+  "RUNNING": {
+    "Fr": "EN COURS",
+    "De": "LÄUFT",
+    "Es": "EN EJECUCIÓN"
+  },
+  "Impedance Rule": {
+    "Fr": "Règle d'impédance",
+    "De": "Impedanzregel",
+    "Es": "Regla de impedancia"
+  },
+  "Lg Blue": {
+    "Fr": "Bleu Lg",
+    "De": "Lg Blau",
+    "Es": "Azul Lg"
+  },
+  "20": {
+    "Fr": "20",
+    "De": "20",
+    "Es": "20"
+  },
+  "Poke": {
+    "Fr": "Pousser",
+    "De": "Drücken",
+    "Es": "Empujar"
+  },
+  "Channel 2": {
+    "Fr": "Canal 2",
+    "De": "Kanal 2",
+    "Es": "Canal 2"
+  },
+  "Inf Gear": {
+    "Fr": "Engrenage infini",
+    "De": "Unendliches Getriebe",
+    "Es": "Engranaje infinito"
+  },
+  "Celsius": {
+    "Fr": "Celsius",
+    "De": "Celsius",
+    "Es": "Celsius"
+  },
+  "RUBY VU": {
+    "Fr": "VU RUBIS",
+    "De": "RUBIN VU",
+    "Es": "VU RUBÍ"
+  },
+  "No averaging option is currently selected.": {
+    "Fr": "Aucune option de moyenne n'est sélectionnée.",
+    "De": "Momentan ist keine Mittelwertoption ausgewählt.",
+    "Es": "No hay ninguna opción de promedio seleccionada."
+  },
+  "Snake Ch 15 Left/Odd IN from Bus AB1": {
+    "Fr": "Snake Ch 15 G/Impair ENT de Bus AB1",
+    "De": "Snake Ch 15 L/Ungerade EIN von Bus AB1",
+    "Es": "Snake Ch 15 Izq/Impar ENT de Bus AB1"
+  },
+  "Current (A)": {
+    "Fr": "Courant (A)",
+    "De": "Strom (A)",
+    "Es": "Corriente (A)"
+  },
+  "VBW Auto State": {
+    "Fr": "État Auto VBW",
+    "De": "VBW Auto-Status",
+    "Es": "Estado Auto VBW"
+  },
+  "The End": {
+    "Fr": "Fin",
+    "De": "Das Ende",
+    "Es": "El Fin"
+  },
+  "Clean": {
+    "Fr": "Propre",
+    "De": "Sauber",
+    "Es": "Limpio"
+  },
+  "03: Bottom Text": {
+    "Fr": "03 : Texte inférieur",
+    "De": "03: Text unten",
+    "Es": "03: Texto inferior"
+  },
+  "Tilted and Reversed Meter Demos": {
+    "Fr": "Démos de mètres inclinés et inversés",
+    "De": "Demos für geneigte und umgekehrte Meter",
+    "Es": "Demos de medidores inclinados e invertidos"
+  },
+  "B93": {
+    "Fr": "B93",
+    "De": "B93",
+    "Es": "B93"
+  },
+  "Monitor 1 Left IN from Bus AB-01": {
+    "Fr": "Moniteur 1 G ENT de Bus AB-01",
+    "De": "Monitor 1 L EIN von Bus AB-01",
+    "Es": "Monitor 1 Izq ENT de Bus AB-01"
+  },
+  "Tube": {
+    "Fr": "Lampe",
+    "De": "Röhre",
+    "Es": "Válvula"
+  },
+  "Valid fields mask.": {
+    "Fr": "Masque de champs valides.",
+    "De": "Maske für gültige Felder.",
+    "Es": "Máscara de campos válidos."
+  },
+  "Drain Timeline": {
+    "Fr": "Chronologie de consommation",
+    "De": "Entladungs-Zeitachse",
+    "Es": "Línea de tiempo de drenaje"
+  },
+  "Group C": {
+    "Fr": "Groupe C",
+    "De": "Gruppe C",
+    "Es": "Gruppe C"
+  },
+  "Keys": {
+    "Fr": "Touches",
+    "De": "Tasten",
+    "Es": "Teclas"
+  },
+  "Disable Marker": {
+    "Fr": "Désactiver le marqueur",
+    "De": "Marker deaktivieren",
+    "Es": "Desactivar marcador"
+  },
+  "System Error Check": {
+    "Fr": "Vérification d'erreur système",
+    "De": "Systemfehlerprüfung",
+    "Es": "Comprobación de errores del sistema"
+  },
+  "Slate Grey": {
+    "Fr": "Gris ardoise",
+    "De": "Schiefergrau",
+    "Es": "Gris pizarra"
+  },
+  "UHF System K & L 625 lines standard for French overseas territories and former French African colonies, Africa (UHF)": {
+    "Fr": "Système UHF K & L standard 625 lignes pour les territoires français d'outre-mer et anciennes colonies françaises, Afrique (UHF)",
+    "De": "UHF-System K & L 625 Zeilen Standard für französische Überseegebiete und ehemalige französische afrikanische Kolonien, Afrika (UHF)",
+    "Es": "Sistema UHF K & L estándar de 625 líneas para los territorios franceses de ultramar y antiguas colonias francesas, África (UHF)"
+  },
+  "Drive/Distortion Knob Variations": {
+    "Fr": "Variations de bouton Drive/Distorsion",
+    "De": "Variationen der Drive/Distortion-Knöpfe",
+    "Es": "Variaciones de perilla de Drive/Distorsión"
+  },
+  "Horizontal (Timebase)": {
+    "Fr": "Horizontal (Base de temps)",
+    "De": "Horizontal (Zeitbasis)",
+    "Es": "Horizontal (Base de tiempo)"
+  },
+  "INPUT VOLTS": {
+    "Fr": "VOLTS D'ENTRÉE",
+    "De": "EINGANGSSPANNUNG",
+    "Es": "VOLTIOS DE ENTRADA"
+  },
+  "79": {
+    "Fr": "79",
+    "De": "79",
+    "Es": "79"
+  },
+  "4x4 Radio Grid": {
+    "Fr": "Grille radio 4x4",
+    "De": "4x4 Funkraster",
+    "Es": "Rejilla de radio 4x4"
+  },
+  "Snake Ch 20 Right/Even IN from Bus AB3": {
+    "Fr": "Snake Ch 20 D/Pair ENT de Bus AB3",
+    "De": "Snake Ch 20 R/Gerade EIN von Bus AB3",
+    "Es": "Snake Ch 20 Der/Par ENT de Bus AB3"
+  },
+  "Val Left": {
+    "Fr": "Val Gauche",
+    "De": "Wert Links",
+    "Es": "Val Izq"
+  },
+  "Fine Arc": {
+    "Fr": "Arc fin",
+    "De": "Feiner Bogen",
+    "Es": "Arco fino"
+  },
+  "HOT": {
+    "Fr": "CHAUD",
+    "De": "HEISS",
+    "Es": "CALIENTE"
+  },
+  "HP-xformer 2 IN": {
+    "Fr": "ENT transformateur HP 2",
+    "De": "HP-Trafo 2 EIN",
+    "Es": "ENT transformador HP 2"
+  },
+  "RIG Amplitude Commands": {
+    "Fr": "Commandes d'amplitude RIG",
+    "De": "RIG Amplitudenbefehle",
+    "Es": "Comandos de amplitud RIG"
+  },
+  "Radar 07": {
+    "Fr": "Radar 07",
+    "De": "Radar 07",
+    "Es": "Radar 07"
+  },
+  "Generic state.": {
+    "Fr": "État générique.",
+    "De": "Generischer Status.",
+    "Es": "Estado genérico."
+  },
+  "Blue 4T": {
+    "Fr": "Bleu 4T",
+    "De": "Blau 4T",
+    "Es": "Azul 4T"
+  },
+  "5. dBu Scale": {
+    "Fr": "Échelle 5. dBu",
+    "De": "5. dBu Skala",
+    "Es": "Escala 5. dBu"
+  },
+  "ENGINE 9": {
+    "Fr": "MOTEUR 9",
+    "De": "ENGINE 9",
+    "Es": "MOTOR 9"
+  },
+  "Unknown.": {
+    "Fr": "Inconnu.",
+    "De": "Unbekannt.",
+    "Es": "Desconocido."
+  },
+  "37": {
+    "Fr": "37",
+    "De": "37",
+    "Es": "37"
+  },
+  "Set Resolution Bandwidth": {
+    "Fr": "Régler la bande passante de résolution",
+    "De": "Auflösungsbandbreite einstellen",
+    "Es": "Ajustar ancho de banda de resolución"
+  },
+  "High": {
+    "Fr": "Haut",
+    "De": "Hoch",
+    "Es": "Alto"
+  },
+  "Gold Rush": {
+    "Fr": "Ruée vers l'or",
+    "De": "Goldrausch",
+    "Es": "Fiebre del oro"
+  },
+  "Edge Trigger Configuration": {
+    "Fr": "Configuration de déclenchement sur front",
+    "De": "Flankentrigger-Konfiguration",
+    "Es": "Configuración de disparo por flanco"
+  },
+  "-50 dB": {
+    "Fr": "-50 dB",
+    "De": "-50 dB",
+    "Es": "-50 dB"
+  },
+  "CH1 ON": {
+    "Fr": "CH1 ACTIVÉ",
+    "De": "CH1 AN",
+    "Es": "CH1 ACTIVADO"
+  },
+  "Min output level.": {
+    "Fr": "Niveau de sortie min.",
+    "De": "Min. Ausgangspegel.",
+    "Es": "Nivel de salida mín."
+  },
+  "Cyber Badge": {
+    "Fr": "Badge Cyber",
+    "De": "Cyber-Badge",
+    "Es": "Placa Cyber"
+  },
+  "Pair 4 L": {
+    "Fr": "Paire 4 G",
+    "De": "Paar 4 L",
+    "Es": "Par 4 Izq"
+  },
+  "Composite Motion Draggable Potentiometer Demo": {
+    "Fr": "Démo de potentiomètre déplaçable à mouvement composite",
+    "De": "Demo für zusammengesetzte bewegliche Schiebepotentiometer",
+    "Es": "Demo de potenciómetro arrastrable de movimiento compuesto"
+  },
+  "4. APK (Canada)": {
+    "Fr": "4. APK (Canada)",
+    "De": "4. APK (Kanada)",
+    "Es": "4. APK (Canadá)"
+  },
+  "Ceiling Mount": {
+    "Fr": "Montage au plafond",
+    "De": "Deckenmontage",
+    "Es": "Montaje en techo"
+  },
+  "VBW Auto ON": {
+    "Fr": "Auto VBW ACTIVÉ",
+    "De": "VBW Auto AN",
+    "Es": "Auto VBW ACTIVADO"
+  },
+  "AUDIO LEVEL": {
+    "Fr": "NIVEAU AUDIO",
+    "De": "AUDIOPEGEL",
+    "Es": "NIVEL DE AUDIO"
+  },
+  "CH 24": {
+    "Fr": "CH 24",
+    "De": "CH 24",
+    "Es": "CH 24"
+  },
+  "Vintage Analog": {
+    "Fr": "Analogique Vintage",
+    "De": "Vintage-Analog",
+    "Es": "Analógico Vintage"
+  },
+  "DC Load Measurements": {
+    "Fr": "Mesures de charge CC",
+    "De": "DC-Lastmessungen",
+    "Es": "Mediciones de carga de CC"
+  },
+  "32": {
+    "Fr": "32",
+    "De": "32",
+    "Es": "32"
+  },
+  "Tall Rects (Normal)": {
+    "Fr": "Rectangles hauts (Normal)",
+    "De": "Hohe Rechtecke (Normal)",
+    "Es": "Rectángulos altos (Normal)"
+  },
+  "B98": {
+    "Fr": "B98",
+    "De": "B98",
+    "Es": "B98"
+  },
+  "Multimeter Mode": {
+    "Fr": "Mode multimètre",
+    "De": "Multimeter-Modus",
+    "Es": "Modo multímetro"
+  },
+  "Lazy/Smooth": {
+    "Fr": "Lent/Lisse",
+    "De": "Träge/Glatt",
+    "Es": "Lento/Suave"
+  },
+  "Steady": {
+    "Fr": "Stable",
+    "De": "Stabil",
+    "Es": "Estable"
+  },
+  "STOPPED 🔴": {
+    "Fr": "ARRÊTÉ 🔴",
+    "De": "GESTOPPT 🔴",
+    "Es": "DETENIDO 🔴"
+  },
+  "Large Classic": {
+    "Fr": "Grand classique",
+    "De": "Großer Klassiker",
+    "Es": "Gran clásico"
+  },
+  "Boxy 3": {
+    "Fr": "Boxy 3",
+    "De": "Boxy 3",
+    "Es": "Cuadrado 3"
+  },
+  "HP-xformer 1 IN": {
+    "Fr": "ENT transformateur HP 1",
+    "De": "HP-Trafo 1 EIN",
+    "Es": "ENT transformador HP 1"
+  },
+  "Output": {
+    "Fr": "Sortie",
+    "De": "Ausgang",
+    "Es": "Salida"
+  },
+  "Visual rendering of Time and Frequency domains": {
+    "Fr": "Rendu visuel des domaines temporel et fréquentiel",
+    "De": "Visuelle Darstellung von Zeit- und Frequenzbereichen",
+    "Es": "Representación visual de dominios de tiempo y frecuencia"
+  },
+  "Temperature Sensor": {
+    "Fr": "Capteur de température",
+    "De": "Temperatursensor",
+    "Es": "Sensor de temperatura"
+  },
+  "BW Limit": {
+    "Fr": "Limite de bande passante",
+    "De": "Bandbreitenbegrenzung",
+    "Es": "Límite de ancho de banda"
+  },
+  "Param C": {
+    "Fr": "Param C",
+    "De": "Param C",
+    "Es": "Parám C"
+  },
+  "Application Active": {
+    "Fr": "Application active",
+    "De": "Anwendung aktiv",
+    "Es": "Aplicación activa"
+  },
+  "Maximum reading.": {
+    "Fr": "Lecture maximale.",
+    "De": "Maximalwert.",
+    "Es": "Lectura máxima."
+  },
+  "WOODGRAIN": {
+    "Fr": "GRAIN DE BOIS",
+    "De": "HOLZMASERUNG",
+    "Es": "GRANO DE MADERA"
+  },
+  "Span": {
+    "Fr": "Étendue",
+    "De": "Spanne",
+    "Es": "Intervalo"
+  },
+  "Badge Meter Variations": {
+    "Fr": "Variations de mètre Badge",
+    "De": "Badge-Meter-Variationen",
+    "Es": "Variaciones de medidor de placa"
+  },
+  "Real-Time Drain Analysis": {
+    "Fr": "Analyse de consommation en temps réel",
+    "De": "Echtzeit-Entladungsanalyse",
+    "Es": "Análisis de drenaje en temps réel"
+  },
+  "Voltage, Current, Power": {
+    "Fr": "Tension, Courant, Puissance",
+    "De": "Spannung, Strom, Leistung",
+    "Es": "Voltaje, Corriente, Potencia"
+  },
+  "CH1 Freq": {
+    "Fr": "Fréq CH1",
+    "De": "CH1 Freq",
+    "Es": "Frec CH1"
+  },
+  "Signal Generator Left OUT to Bus AB-00": {
+    "Fr": "Générateur de signal SORT G vers Bus AB-00",
+    "De": "Signalgenerator AUS L an Bus AB-00",
+    "Es": "Generador de señal SAL Izq a Bus AB-00"
+  },
+  "Marker Number": {
+    "Fr": "Numéro de marqueur",
+    "De": "Markernummer",
+    "Es": "Número de marcador"
+  },
+  "Motion Draggable Potentiometer Demo": {
+    "Fr": "Démo de potentiomètre déplaçable à mouvement",
+    "De": "Demo für bewegliche Schiebepotentiometer",
+    "Es": "Demo de potenciómetro arrastrable de movimiento"
+  },
+  "Reset Device (*RST)": {
+    "Fr": "Réinitialiser l'appareil (*RST)",
+    "De": "Gerät zurücksetzen (*RST)",
+    "Es": "Reiniciar dispositivo (*RST)"
+  },
+  "Resource ID": {
+    "Fr": "ID de ressource",
+    "De": "Ressourcen-ID",
+    "Es": "ID de recurso"
+  },
+  "Initialization Steps": {
+    "Fr": "Étapes d'initialisation",
+    "De": "Initialisierungsschritte",
+    "Es": "Pasos de inicialización"
+  },
+  "Test Patch Panel IN from Bus AB3": {
+    "Fr": "ENT panneau de brassage de test de Bus AB3",
+    "De": "Test-Patchpanel EIN von Bus AB3",
+    "Es": "ENT panel de conexiones de prueba de Bus AB3"
+  },
+  "Signal inverter.": {
+    "Fr": "Inverseur de signal.",
+    "De": "Signalinvertierer.",
+    "Es": "Inversor de señal."
+  },
+  "Blueprint Tech": {
+    "Fr": "Technologie Blueprint",
+    "De": "Blueprint-Technologie",
+    "Es": "Tecnología Blueprint"
+  },
+  "Med (Hold 500ms)": {
+    "Fr": "Moy (Maintien 500ms)",
+    "De": "Mittel (500ms Halten)",
+    "Es": "Med (Mantener 500ms)"
+  },
+  "B51": {
+    "Fr": "B51",
+    "De": "B51",
+    "Es": "B51"
+  },
+  "PERCent or ABSolute": {
+    "Fr": "POURCent ou ABSolu",
+    "De": "Prozent oder Absolut",
+    "Es": "PORCent o ABSoluto"
+  },
+  "03": {
+    "Fr": "03",
+    "De": "03",
+    "Es": "03"
+  },
+  "B92": {
+    "Fr": "B92",
+    "De": "B92",
+    "Es": "B92"
+  },
+  "Choice 4": {
+    "Fr": "Choix 4",
+    "De": "Auswahl 4",
+    "Es": "Opción 4"
+  },
+  "Preset Path": {
+    "Fr": "Chemin de préréglage",
+    "De": "Preset-Pfad",
+    "Es": "Ruta de preajuste"
+  },
+  "Var 81": {
+    "Fr": "Var 81",
+    "De": "Var 81",
+    "Es": "Var 81"
+  },
+  "MANual, MEASure, OFF": {
+    "Fr": "MANuel, MESure, DÉSACTIVÉ",
+    "De": "Manuell, Messen, Aus",
+    "Es": "MANual, MEDida, DESACTIVADO"
+  },
+  "Lock": {
+    "Fr": "Verrouiller",
+    "De": "Sperren",
+    "Es": "Bloquear"
+  },
+  "Final 8": {
+    "Fr": "Final 8",
+    "De": "Final 8",
+    "Es": "Final 8"
+  },
+  "Tri Ptr": {
+    "Fr": "Pointeur tri",
+    "De": "Tri-Zeiger",
+    "Es": "Puntero tri"
+  },
+  "Dark Gate": {
+    "Fr": "Gate sombre",
+    "De": "Dark Gate",
+    "Es": "Gate oscuro"
+  },
+  "Wink Buttons: 20 Variations of Shape, Size, and Color": {
+    "Fr": "Boutons à volet : 20 variations de forme, taille et couleur",
+    "De": "Shutter-Tasten: 20 Variationen in Form, Größe und Farbe",
+    "Es": "Botones de obturador: 20 variaciones de forma, tamaño y color"
+  },
+  "A block for managing trace averaging settings.": {
+    "Fr": "Un bloc pour gérer les paramètres de moyenne de trace.",
+    "De": "Ein Block zum Verwalten der Trace-Mittelwerteinstellungen.",
+    "Es": "Un bloque para gestionar los ajustes de promedio de traza."
+  },
+  "B34": {
+    "Fr": "B34",
+    "De": "B34",
+    "Es": "B34"
+  },
+  "Parallel Energy Depletion System": {
+    "Fr": "Système de déplétion d'énergie parallèle",
+    "De": "Paralleles Energieentladungssystem",
+    "Es": "Sistema de agotamiento de energía paralelo"
+  },
+  "6 or 60 A": {
+    "Fr": "6 ou 60 A",
+    "De": "6 oder 60 A",
+    "Es": "6 o 60 A"
+  },
+  "Variant 4": {
+    "Fr": "Variante 4",
+    "De": "Variante 4",
+    "Es": "Variante 4"
+  },
+  "An incredibly slow and deliberate pace. This is for long-term monitoring, allowing you to see the overall shape of the spectrum with almost all noise removed.": {
+    "Fr": "Un rythme incroyablement lent et délibéré. Ceci est pour une surveillance à long terme, vous permettant de voir la forme globale du spectre avec presque tout le bruit supprimé.",
+    "De": "Ein unglaublich langsames und bewusstes Tempo. Dies ist für die Langzeitüberwachung gedacht und ermöglicht es Ihnen, die Gesamtform des Spektrums zu sehen, wobei fast alle Störungen entfernt wurden.",
+    "Es": "Un ritmo increíblemente lento y deliberado. Esto es para el monitoreo a largo plazo, permitiéndole ver la forma general del espectro con casi todo el ruido eliminado."
+  },
+  "TALK": {
+    "Fr": "PARLER",
+    "De": "SPRECHEN",
+    "Es": "HABLAR"
+  },
+  "VISA Commands Path": {
+    "Fr": "Chemin des commandes VISA",
+    "De": "VISA-Befehlspfad",
+    "Es": "Ruta de comandos VISA"
+  },
+  "65": {
+    "Fr": "65",
+    "De": "65",
+    "Es": "65"
+  },
+  "10: Ultraviolet (Fast)": {
+    "Fr": "10 : Ultraviolet (Rapide)",
+    "De": "10: Ultraviolett (Schnell)",
+    "Es": "10: Ultravioleta (Rápido)"
+  },
+  "Amplitude (V)": {
+    "Fr": "Amplitude (V)",
+    "De": "Amplitude (V)",
+    "Es": "Amplitud (V)"
+  },
+  "Dynamic Pulse Testing": {
+    "Fr": "Test de pulsation dynamique",
+    "De": "Dynamische Impulsprüfung",
+    "Es": "Prueba de pulso dinámico"
+  },
+  "Sig Gen L": {
+    "Fr": "Géné Sig G",
+    "De": "Sig-Gen L",
+    "Es": "Gen Señal Izq"
+  },
+  "B49": {
+    "Fr": "B49",
+    "De": "B49",
+    "Es": "B49"
+  },
+  "Emerald H": {
+    "Fr": "Émeraude H",
+    "De": "Smaragd H",
+    "Es": "Esmeralda H"
+  },
+  "Select File": {
+    "Fr": "Choisir le fichier",
+    "De": "Datei auswählen",
+    "Es": "Seleccionar archivo"
+  },
+  "Tower": {
+    "Fr": "Tour",
+    "De": "Turm",
+    "Es": "Torre"
+  },
+  "Current Set": {
+    "Fr": "Réglage de courant",
+    "De": "Stromeinstellung",
+    "Es": "Ajuste de corriente"
+  },
+  "Captures and displays the trace in real time, like a hyperactive surveillance camera.": {
+    "Fr": "Capture et affiche la trace en temps réel, comme une caméra de surveillance hyperactive.",
+    "De": "Erfasst und zeigt den Trace in Echtzeit an, wie eine hyperaktive Überwachungskamera.",
+    "Es": "Captura y muestra la traza en tiempo real, como una cámara de vigilancia hiperactiva."
+  },
+  "More Standard VU Variations": {
+    "Fr": "Plus de variations de VU standard",
+    "De": "Weitere Standard-VU-Variationen",
+    "Es": "Más variaciones de VU estándar"
+  },
+  "Scanner Type": {
+    "Fr": "Type de scanner",
+    "De": "Scannertyp",
+    "Es": "Tipo de escáner"
+  },
+  "Ohms": {
+    "Fr": "Ohms",
+    "De": "Ohm",
+    "Es": "Ohmios"
+  },
+  "MINI-CREST": {
+    "Fr": "MINI-CRÊTE",
+    "De": "MINI-CREST",
+    "Es": "MINI-CRESTA"
+  },
+  "Abstract base class for simple setters.": {
+    "Fr": "Classe de base abstraite pour les paramètres simples.",
+    "De": "Abstrakte Basisklasse für einfache Setter.",
+    "Es": "Clase base abstracta para configuradores simples."
+  },
+  "Bias ON": {
+    "Fr": "Biais ACTIVÉ",
+    "De": "Bias AN",
+    "Es": "Polarización ACTIVADA"
+  },
+  "A block for managing and displaying high-level application settings.": {
+    "Fr": "Un bloc pour gérer et afficher les paramètres d'application de haut niveau.",
+    "De": "Ein Block zum Verwalten und Anzeigen von Anwendungseinstellungen auf hoher Ebene.",
+    "Es": "Un bloque para gestionar y mostrar los ajustes de la aplicación de alto nivel."
+  },
+  "Text description of the object's role.": {
+    "Fr": "Description textuelle du rôle de l'objet.",
+    "De": "Textbeschreibung der Rolle des Objekts.",
+    "Es": "Descripción de texto de la función del objeto."
+  },
+  "Animation Start Frame 10": {
+    "Fr": "Début animation image 10",
+    "De": "Animations-Startbild 10",
+    "Es": "Inicio de animación cuadro 10"
+  },
+  "Noise": {
+    "Fr": "Bruit",
+    "De": "Rauschen",
+    "Es": "Ruido"
+  },
+  "MASTER DATA RECORDING": {
+    "Fr": "ENREGISTREMENT DE DONNÉES MAÎTRE",
+    "De": "MASTER-DATENAUFZEICHNUNG",
+    "Es": "GRABACIÓN DE DATOS MAESTRA"
+  },
+  "ARMING...": {
+    "Fr": "ARMEMENT...",
+    "De": "SCHARFSCHALTEN...",
+    "Es": "ARMANDO..."
+  },
+  "X2": {
+    "Fr": "X2",
+    "De": "X2",
+    "Es": "X2"
+  },
+  "Power state enumeration.": {
+    "Fr": "Énumération de l'état de puissance.",
+    "De": "Aufzählung des Energiezustands.",
+    "Es": "Enumeración de estado de energía."
+  },
+  "Snake Ch 21 Left/Odd IN from Bus AB1": {
+    "Fr": "Snake Ch 21 G/Impair ENT de Bus AB1",
+    "De": "Snake Ch 21 L/Ungerade EIN von Bus AB1",
+    "Es": "Snake Ch 21 Izq/Impar ENT de Bus AB1"
+  },
+  "V1": {
+    "Fr": "V1",
+    "De": "V1",
+    "Es": "V1"
+  },
+  "Snk 3 XLR (L)": {
+    "Fr": "Snk 3 XLR (G)",
+    "De": "Snk 3 XLR (L)",
+    "Es": "Snk 3 XLR (Izq)"
+  },
+  "Gui Checkbox 04 Dark Mode": {
+    "Fr": "Case à cocher Gui 04 Mode sombre",
+    "De": "Gui-Checkbox 04 Dunkelmodus",
+    "Es": "Casilla de verificación Gui 04 Modo oscuro"
+  },
+  "B10": {
+    "Fr": "B10",
+    "De": "B10",
+    "Es": "B10"
+  },
+  "Triangle Small": {
+    "Fr": "Triangle petit",
+    "De": "Kleines Dreieck",
+    "Es": "Triángulo pequeño"
+  },
+  "NAB Marker Monitoring": {
+    "Fr": "Surveillance de marqueur NAB",
+    "De": "NAB Marker-Überwachung",
+    "Es": "Monitoreo de marcadores NAB"
+  },
+  "LOAD DISENGAGED": {
+    "Fr": "CHARGE DÉSENGAGÉE",
+    "De": "LAST GETRENNT",
+    "Es": "CARGA DESENGANCHADA"
+  },
+  "System A 405 lines standard for United Kingdom, Europe (VHF)": {
+    "Fr": "Système A 405 lignes standard pour le Royaume-Uni, Europe (VHF)",
+    "De": "System A 405 Zeilen Standard für Großbritannien, Europa (VHF)",
+    "Es": "Sistema A 405 líneas estándar para el Reino Unido, Europa (VHF)"
+  },
+  "Turns off continuous sweep mode. The scanner will perform a single sweep and then rest.": {
+    "Fr": "Désactive le mode de balayage continu. Le scanner effectuera un seul balayage puis s'arrêtera.",
+    "De": "Schaltet den kontinuierlichen Sweep-Modus aus. Der Scanner führt einen einzelnen Sweep durch und ruht dann.",
+    "Es": "Desactiva el modo de barrido continuo. El escáner realizará un solo barrido y luego descansará."
+  },
+  "Purple": {
+    "Fr": "Violet",
+    "De": "Lila",
+    "Es": "Púrpura"
+  },
+  "54": {
+    "Fr": "54",
+    "De": "54",
+    "Es": "54"
+  },
+  "FM ON": {
+    "Fr": "FM ACTIVÉE",
+    "De": "FM AN",
+    "Es": "FM ACTIVADO"
+  },
+  "19": {
+    "Fr": "19",
+    "De": "19",
+    "Es": "19"
+  },
+  "Next Gen Dual Pivot Meter Designs": {
+    "Fr": "Modèles de mètres à double pivot nouvelle génération",
+    "De": "Dual-Pivot-Meter-Designs der nächsten Generation",
+    "Es": "Diseños de medidores de doble pivote de próxima generación"
+  },
+  "Millis": {
+    "Fr": "Millis",
+    "De": "Millis",
+    "Es": "Millis"
+  },
+  "Pickup Select": {
+    "Fr": "Sélecteur de micro",
+    "De": "Tonabnehmer-Auswahl",
+    "Es": "Selector de pastilla"
+  },
+  "Over-Voltage Protection Level": {
+    "Fr": "Niveau de protection contre les surtensions",
+    "De": "Überspannungsschutzpegel",
+    "Es": "Nivel de protección contra sobretensión"
+  },
+  "SEND": {
+    "Fr": "ENVOYER",
+    "De": "SENDEN",
+    "Es": "ENVIAR"
+  },
+  "BRONZE": {
+    "Fr": "BRONZE",
+    "De": "BRONZE",
+    "Es": "BRONCE"
+  },
+  "14": {
+    "Fr": "14",
+    "De": "14",
+    "Es": "14"
+  },
+  "Off": {
+    "Fr": "Désactivé",
+    "De": "Aus",
+    "Es": "Desactivado"
+  },
+  "Left Bench Neutrik RM-1 OUT to Bus AB2": {
+    "Fr": "Banc gauche Neutrik RM-1 SORT vers Bus AB2",
+    "De": "Linke Bank Neutrik RM-1 AUS an Bus AB2",
+    "Es": "Banco izquierdo Neutrik RM-1 SAL a Bus AB2"
+  },
+  "CALIBRATING": {
+    "Fr": "ÉTALONNAGE",
+    "De": "KALIBRIERUNG",
+    "Es": "CALIBRANDO"
+  },
+  "8-Channel Passive Reactor Telemetry": {
+    "Fr": "Télémétrie de réacteur passif à 8 canaux",
+    "De": "8-Kanal-Passivreaktor-Telemetrie",
+    "Es": "Telemetría de reactor pasivo de 8 canales"
+  },
+  "Fast Ballistic": {
+    "Fr": "Balistique rapide",
+    "De": "Schnelle Ballistik",
+    "Es": "Balística rápida"
+  },
+  "CYBER": {
+    "Fr": "CYBER",
+    "De": "CYBER",
+    "Es": "CYBER"
+  },
+  "Set Sweep Time": {
+    "Fr": "Régler le temps de balayage",
+    "De": "Sweep-Zeit einstellen",
+    "Es": "Ajustar tiempo de barrido"
+  },
+  "Trans OFF": {
+    "Fr": "Trans DÉSACTIVÉ",
+    "De": "Trans AUS",
+    "Es": "Trans DESACTIVADO"
+  },
+  "Temperature sensor.": {
+    "Fr": "Capteur de température.",
+    "De": "Temperatursensor.",
+    "Es": "Sensor de temperatura."
+  },
+  "CURRENT": {
+    "Fr": "COURANT",
+    "De": "STROM",
+    "Es": "CORRIENTE"
+  },
+  "A deep and thorough look at the spectrum. All but the most stable signals are averaged out, offering a truly pristine view of the fundamental RF environment.": {
+    "Fr": "Un regard profond et complet sur le spectre. Tous les signaux, sauf les plus stables, sont moyennés, offrant une vue vraiment pure de l'environnement RF fondamental.",
+    "De": "Ein tiefer und gründlicher Blick auf das Spektrum. Bis auf die stabilsten Signale werden alle gemittelt, was einen wirklich unverfälschten Blick auf die grundlegende HF-Umgebung bietet.",
+    "Es": "Una mirada profunda y exhaustiva al espectro. Todas las señales, excepto las más estables, se promedian, ofreciendo una vista verdaderamente prístina del entorno de RF fundamental."
+  },
+  "Snake Ch 24 Right/Even IN from Bus AB3": {
+    "Fr": "Snake Ch 24 D/Pair ENT de Bus AB3",
+    "De": "Snake Ch 24 R/Gerade EIN von Bus AB3",
+    "Es": "Snake Ch 24 Der/Par ENT de Bus AB3"
+  },
+  "Signal Beta": {
+    "Fr": "Signal Bêta",
+    "De": "Signal Beta",
+    "Es": "Señal Beta"
+  },
+  "Eco Green": {
+    "Fr": "Vert éco",
+    "De": "Öko-Grün",
+    "Es": "Verde eco"
+  },
+  "Snake 1 Balanced XLR-M IN from Bus AB1": {
+    "Fr": "Snake 1 XLR-M symétrique ENT de Bus AB1",
+    "De": "Snake 1 Symmetrisch XLR-M EIN von Bus AB1",
+    "Es": "Snake 1 XLR-M balanceado ENT de Bus AB1"
+  },
+  "Send": {
+    "Fr": "Envoi",
+    "De": "Senden",
+    "Es": "Enviar"
+  },
+  "Ch2 Coupling": {
+    "Fr": "Couplage Ch2",
+    "De": "Ch2 Kopplung",
+    "Es": "Acoplamiento Ch2"
+  },
+  "Dark In": {
+    "Fr": "Entrée sombre",
+    "De": "Dark In",
+    "Es": "Entrada oscura"
+  },
+  "Left Bench AP OUT to Bus AB2": {
+    "Fr": "Banc gauche AP SORT vers Bus AB2",
+    "De": "Linke Bank AP AUS an Bus AB2",
+    "Es": "Banco izquierdo AP SAL a Bus AB2"
+  },
+  "dB": {
+    "Fr": "dB",
+    "De": "dB",
+    "Es": "dB"
+  },
+  "Ruby Pyramid": {
+    "Fr": "Pyramide rubis",
+    "De": "Rubin-Pyramide",
+    "Es": "Pirámide rubí"
+  },
+  "REC Button Variations (8 Demos)": {
+    "Fr": "Variations de bouton REC (8 démos)",
+    "De": "REC-Tasten-Variationen (8 Demos)",
+    "Es": "Variaciones de botón REC (8 demos)"
+  },
+  "Global Analyzer Functions": {
+    "Fr": "Fonctions d'analyseur globales",
+    "De": "Globale Analysatorfunktionen",
+    "Es": "Funciones globales del analizador"
+  },
+  "Monitor 3 Right IN from Bus AB-03": {
+    "Fr": "Moniteur 3 D ENT de Bus AB-03",
+    "De": "Monitor 3 R EIN von Bus AB-03",
+    "Es": "Monitor 3 Der ENT de Bus AB-03"
+  },
+  "Src2": {
+    "Fr": "Src2",
+    "De": "Src2",
+    "Es": "Src2"
+  },
+  "M_Notch_16": {
+    "Fr": "M_Notch_16",
+    "De": "M_Notch_16",
+    "Es": "M_Notch_16"
+  },
+  "Balanced Speakers IN from Bus AB1": {
+    "Fr": "Haut-parleurs symétriques ENT de Bus AB1",
+    "De": "Symmetrische Lautsprecher EIN von Bus AB1",
+    "Es": "Altavoces balanceados ENT de Bus AB1"
+  },
+  "Choice 2": {
+    "Fr": "Choix 2",
+    "De": "Auswahl 2",
+    "Es": "Opción 2"
+  },
+  "Abstract base class for all actuators.": {
+    "Fr": "Classe de base abstraite pour tous les actionneurs.",
+    "De": "Abstrakte Basisklasse für alle Aktoren.",
+    "Es": "Clase base abstracta para todos los actuadores."
+  },
+  "Thick (8)": {
+    "Fr": "Épais (8)",
+    "De": "Dick (8)",
+    "Es": "Grueso (8)"
+  },
+  "HPF": {
+    "Fr": "FPH",
+    "De": "HPF",
+    "Es": "HPF"
+  },
+  "RIG Bandwidth Commands": {
+    "Fr": "Commandes de bande passante RIG",
+    "De": "RIG Bandbreitenbefehle",
+    "Es": "Comandos de ancho de banda RIG"
+  },
+  "B12": {
+    "Fr": "B12",
+    "De": "B12",
+    "Es": "B12"
+  },
+  "Read Voltage and Current": {
+    "Fr": "Lire tension et courant",
+    "De": "Spannung und Strom lesen",
+    "Es": "Leer voltaje y corriente"
+  },
+  "Src B": {
+    "Fr": "Src B",
+    "De": "Src B",
+    "Es": "Src B"
+  },
+  "Check": {
+    "Fr": "Vérifier",
+    "De": "Prüfen",
+    "Es": "Comprobar"
+  },
+  "Dark Mon": {
+    "Fr": "Moniteur sombre",
+    "De": "Dark Mon",
+    "Es": "Monitor oscuro"
+  },
+  "MPS Metering": {
+    "Fr": "Mesure MPS",
+    "De": "MPS-Metering",
+    "Es": "Medición MPS"
+  },
+  "MODERN": {
+    "Fr": "MODERNE",
+    "De": "MODERN",
+    "Es": "MODERNO"
+  },
+  "-85 dB": {
+    "Fr": "-85 dB",
+    "De": "-85 dB",
+    "Es": "-85 dB"
+  },
+  "CH4 Scale": {
+    "Fr": "Échelle CH4",
+    "De": "CH4 Skala",
+    "Es": "Escala CH4"
+  },
+  "Voltage sensor.": {
+    "Fr": "Capteur de tension.",
+    "De": "Spannungssensor.",
+    "Es": "Sensor de voltaje."
+  },
+  "Voltage in Volts.": {
+    "Fr": "Tension en Volts.",
+    "De": "Spannung in Volt.",
+    "Es": "Voltaje en voltios."
+  },
+  "Enable state for each position.": {
+    "Fr": "État d'activation pour chaque position.",
+    "De": "Aktivierungsstatus für jede Position.",
+    "Es": "Estado de activación para cada posición."
+  },
+  "M_Num_24": {
+    "Fr": "M_Num_24",
+    "De": "M_Num_24",
+    "Es": "M_Num_24"
+  },
+  "Settings for Reference Level": {
+    "Fr": "Paramètres du niveau de référence",
+    "De": "Einstellungen für Referenzpegel",
+    "Es": "Ajustes para nivel de referencia"
+  },
+  "Debug to Terminal": {
+    "Fr": "Débogage vers terminal",
+    "De": "Debug an Terminal",
+    "Es": "Depuración a terminal"
+  },
+  "Vivid Color Spectrum": {
+    "Fr": "Spectre de couleurs vives",
+    "De": "Lebhaftes Farbspektrum",
+    "Es": "Espectro de colores vívidos"
+  },
+  "36": {
+    "Fr": "36",
+    "De": "36",
+    "Es": "36"
+  },
+  "60": {
+    "Fr": "60",
+    "De": "60",
+    "Es": "60"
+  },
+  "CHAN1, CHAN2, EXT, LINE": {
+    "Fr": "CAN1, CAN2, EXT, LIGNE",
+    "De": "KAN1, KAN2, EXT, LINE",
+    "Es": "CAN1, CAN2, EXT, LÍNEA"
+  },
+  "View Preset Files": {
+    "Fr": "Voir les fichiers de préréglage",
+    "De": "Preset-Dateien anzeigen",
+    "Es": "Ver archivos de preajuste"
+  },
+  "HALT!": {
+    "Fr": "HALTE !",
+    "De": "HALT!",
+    "Es": "¡ALTO!"
+  },
+  "Pulse & Dynamic Loading": {
+    "Fr": "Chargement pulsé et dynamique",
+    "De": "Impuls- und dynamisches Laden",
+    "Es": "Carga pulsada y dinámica"
+  },
+  "Cursor Deltas": {
+    "Fr": "Deltas de curseur",
+    "De": "Cursor-Deltas",
+    "Es": "Deltas de cursor"
+  },
+  "1 or 2": {
+    "Fr": "1 ou 2",
+    "De": "1 oder 2",
+    "Es": "1 o 2"
+  },
+  "The Pyramid": {
+    "Fr": "La pyramide",
+    "De": "Die Pyramide",
+    "Es": "La pirámide"
+  },
+  "GOLD GEM": {
+    "Fr": "GEMME D'OR",
+    "De": "GOLD GEM",
+    "Es": "GEMA DE ORO"
+  },
+  "CH 10": {
+    "Fr": "CH 10",
+    "De": "CH 10",
+    "Es": "CH 10"
+  },
+  "Microphone 2": {
+    "Fr": "Microphone 2",
+    "De": "Mikrofon 2",
+    "Es": "Micrófono 2"
+  },
+  "Comp Thr": {
+    "Fr": "Seuil Comp",
+    "De": "Comp Thr",
+    "Es": "Umbral Comp"
+  },
+  "APPLy Readbacks": {
+    "Fr": "Lectures APPLY",
+    "De": "APPLY-Rücklesewerte",
+    "Es": "Lecturas APPLY"
+  },
+  "Measurement Queries": {
+    "Fr": "Requêtes de mesure",
+    "De": "Messabfragen",
+    "Es": "Consultas de medición"
+  },
+  "Bandwidth Readbacks": {
+    "Fr": "Lectures de bande passante",
+    "De": "Bandbreiten-Rücklesewerte",
+    "Es": "Lecturas de ancho de banda"
+  },
+  "2.5 GLOW": {
+    "Fr": "2.5 LUEUR",
+    "De": "2.5 GLOW",
+    "Es": "2.5 BRILLO"
+  },
+  "Fast (Short)": {
+    "Fr": "Rapide (Court)",
+    "De": "Schnell (Kurz)",
+    "Es": "Rápido (Corto)"
+  },
+  "MINI-DOG": {
+    "Fr": "MINI-CHIEN",
+    "De": "MINI-DOG",
+    "Es": "MINI-PERRO"
+  },
+  "SCOPE IN 4": {
+    "Fr": "ENT SCOPE 4",
+    "De": "SCOPE EIN 4",
+    "Es": "ENT SCOPE 4"
+  },
+  "MASTER DISCONNECT": {
+    "Fr": "DÉCONNEXION MAÎTRE",
+    "De": "HAUPTTRENNUNG",
+    "Es": "DESCONEXIÓN MAESTRA"
+  },
+  "Settings for Marker 6": {
+    "Fr": "Paramètres pour marqueur 6",
+    "De": "Einstellungen für Marker 6",
+    "Es": "Ajustes para marcador 6"
+  },
+  "02: Ocean (Small Scale)": {
+    "Fr": "02 : Océan (Petite échelle)",
+    "De": "02: Ozean (Kleine Skala)",
+    "Es": "02: Océano (Escala pequeña)"
+  },
+  "Maroon 6": {
+    "Fr": "Marron 6",
+    "De": "Kastanienbraun 6",
+    "Es": "Granate 6"
+  },
+  "CHANn": {
+    "Fr": "CANn",
+    "De": "KANn",
+    "Es": "CANn"
+  },
+  "Power Attenuation": {
+    "Fr": "Atténuation de puissance",
+    "De": "Leistungsdämpfung",
+    "Es": "Atenuación de potencia"
+  },
+  "100 Blinky Winky Buttons": {
+    "Fr": "100 boutons Blinky Winky",
+    "De": "100 Blinky Winky Tasten",
+    "Es": "100 botones Blinky Winky"
+  },
+  "MINI-T": {
+    "Fr": "MINI-T",
+    "De": "MINI-T",
+    "Es": "MINI-T"
+  },
+  "Analog Signal Generator": {
+    "Fr": "Générateur de signal analogique",
+    "De": "Analoger Signalgenerator",
+    "Es": "Generador de señal analógica"
+  },
+  "-75 dB": {
+    "Fr": "-75 dB",
+    "De": "-75 dB",
+    "Es": "-75 dB"
+  },
+  "Final 1": {
+    "Fr": "Final 1",
+    "De": "Final 1",
+    "Es": "Final 1"
+  },
+  "Source": {
+    "Fr": "Source",
+    "De": "Quelle",
+    "Es": "Fuente"
+  },
+  "-115 dB": {
+    "Fr": "-115 dB",
+    "De": "-115 dB",
+    "Es": "-115 dB"
+  },
+  "Drain Statistics": {
+    "Fr": "Statistiques de consommation",
+    "De": "Entladungsstatistik",
+    "Es": "Estadísticas de drenaje"
+  },
+  "Dark Master FX": {
+    "Fr": "FX Maître sombre",
+    "De": "Dark Master FX",
+    "Es": "FX Maestro oscuro"
+  },
+  "Vmax": {
+    "Fr": "Vmax",
+    "De": "Vmax",
+    "Es": "Vmax"
+  },
+  "Param A": {
+    "Fr": "Param A",
+    "De": "Param A",
+    "Es": "Parám A"
+  },
+  "Unit": {
+    "Fr": "Unité",
+    "De": "Einheit",
+    "Es": "Unidad"
+  },
+  "Grid Ref": {
+    "Fr": "Réf Grille",
+    "De": "Gitter-Ref",
+    "Es": "Ref Rejilla"
+  },
+  "DANGER": {
+    "Fr": "DANGER",
+    "De": "GEFAHR",
+    "Es": "PELIGRO"
+  },
+  "30 Medium Knobs Focusing on Ticks, Dials & Thickness": {
+    "Fr": "30 boutons moyens axés sur les graduations, les cadrans et l'épaisseur",
+    "De": "30 mittlere Knöpfe mit Fokus auf Teilstriche, Skalen und Dicke",
+    "Es": "30 perillas medianas centradas en marcas, diales y grosor"
+  },
+  "Channel": {
+    "Fr": "Canal",
+    "De": "Kanal",
+    "Es": "Canal"
+  },
+  "B81": {
+    "Fr": "B81",
+    "De": "B81",
+    "Es": "B81"
+  },
+  "VOLTAGE": {
+    "Fr": "TENSION",
+    "De": "SPANNUNG",
+    "Es": "VOLTAJE"
+  },
+  "89": {
+    "Fr": "89",
+    "De": "89",
+    "Es": "89"
+  },
+  "Download Progress": {
+    "Fr": "Progression du téléchargement",
+    "De": "Download-Fortschritt",
+    "Es": "Progreso de descarga"
+  },
+  "Processing latency.": {
+    "Fr": "Latence de traitement.",
+    "De": "Verarbeitungslatenz.",
+    "Es": "Latencia de procesamiento."
+  },
+  "Var 73": {
+    "Fr": "Var 73",
+    "De": "Var 73",
+    "Es": "Var 73"
+  },
+  "Medium Silver": {
+    "Fr": "Argent moyen",
+    "De": "Mittelsilber",
+    "Es": "Plata media"
+  },
+  "Size Variations (Momentary)": {
+    "Fr": "Variations de taille (Momentané)",
+    "De": "Größenvariationen (Momentan)",
+    "Es": "Variaciones de tamaño (Momentáneo)"
+  },
+  "Global unique identifier of the class.": {
+    "Fr": "Identifiant unique global de la classe.",
+    "De": "Globaler eindeutiger Bezeichner der Klasse.",
+    "Es": "Identificador único global de la clase."
+  },
+  "PPM Type II.": {
+    "Fr": "PPM Type II.",
+    "De": "PPM Typ II.",
+    "Es": "PPM Tipo II."
+  },
+  "Link type.": {
+    "Fr": "Type de lien.",
+    "De": "Linktyp.",
+    "Es": "Tipo de enlace."
+  },
+  "Pair 1 L": {
+    "Fr": "Paire 1 G",
+    "De": "Paar 1 L",
+    "Es": "Par 1 Izq"
+  },
+  "Energy Consumption": {
+    "Fr": "Consommation d'énergie",
+    "De": "Energieverbrauch",
+    "Es": "Consumo de energía"
+  },
+  "Monitor 3 Left IN from Bus AB-01": {
+    "Fr": "Moniteur 3 G ENT de Bus AB-01",
+    "De": "Monitor 3 L EIN von Bus AB-01",
+    "Es": "Monitor 3 Izq ENT de Bus AB-01"
+  },
+  "Stats Table": {
+    "Fr": "Tableau de stats",
+    "De": "Statistik-Tabelle",
+    "Es": "Tabla de estadísticas"
+  },
+  "Steel Flat": {
+    "Fr": "Acier plat",
+    "De": "Stahl flach",
+    "Es": "Acero plano"
+  },
+  "57": {
+    "Fr": "57",
+    "De": "57",
+    "Es": "57"
+  },
+  "Galvanometer Array": {
+    "Fr": "Réseau de galvanomètres",
+    "De": "Galvanometer-Array",
+    "Es": "Matriz de galvanómetros"
+  },
+  "Opens all others in bank, then closes target.": {
+    "Fr": "Ouvre tous les autres dans la banque, puis ferme la cible.",
+    "De": "Öffnet alle anderen in der Bank und schließt dann das Ziel.",
+    "Es": "Abre todos los demás en el banco, luego cierra el objetivo."
+  },
+  "Marker 4 Frequency": {
+    "Fr": "Fréquence du marqueur 4",
+    "De": "Marker 4 Frequenz",
+    "Es": "Frecuencia del marcador 4"
+  },
+  "The property being ramped.": {
+    "Fr": "La propriété en cours de rampe.",
+    "De": "Die Eigenschaft, die hochgefahren wird.",
+    "Es": "La propiedad que se está incrementando."
+  },
+  "RISING": {
+    "Fr": "CROISSANT",
+    "De": "STEIGEND",
+    "Es": "ASCENDENTE"
+  },
+  "Microscope": {
+    "Fr": "Microscope",
+    "De": "Mikroskop",
+    "Es": "Microscopio"
+  },
+  "Knife-Edge": {
+    "Fr": "Couteau",
+    "De": "Messerkante",
+    "Es": "Filo de cuchillo"
+  },
+  "Acquisition": {
+    "Fr": "Acquisition",
+    "De": "Erfassung",
+    "Es": "Adquisición"
+  },
+  "Solid Green": {
+    "Fr": "Vert plein",
+    "De": "Vollgrün",
+    "Es": "Verde sólido"
+  },
+  "Voltage & Current over Time": {
+    "Fr": "Tension et courant au fil du temps",
+    "De": "Spannung & Strom über die Zeit",
+    "Es": "Voltaje y corriente a lo largo del tiempo"
+  },
+  "cyan": {
+    "Fr": "cyan",
+    "De": "Cyan",
+    "Es": "cián"
+  },
+  "B2": {
+    "Fr": "B2",
+    "De": "B2",
+    "Es": "B2"
+  },
+  "Digital Video Broadcasting - Terrestrial for Australia": {
+    "Fr": "Diffusion vidéo numérique - Terrestre pour l'Australie",
+    "De": "Digital Video Broadcasting - Terrestrisch für Australien",
+    "Es": "Difusión de video digital - Terrestre para Australia"
+  },
+  "Pyramid Large": {
+    "Fr": "Pyramide grande",
+    "De": "Pyramide groß",
+    "Es": "Pirámide grande"
+  },
+  "30": {
+    "Fr": "30",
+    "De": "30",
+    "Es": "30"
+  },
+  "EST. 1970": {
+    "Fr": "EST. 1970",
+    "De": "GEGR. 1970",
+    "Es": "EST. 1970"
+  },
+  "Log VISA Commands": {
+    "Fr": "Journaliser les commandes VISA",
+    "De": "VISA-Befehle protokollieren",
+    "Es": "Registrar comandos VISA"
+  },
+  "System Maintenance Controls": {
+    "Fr": "Commandes de maintenance système",
+    "De": "Systemwartungssteuerungen",
+    "Es": "Controles de mantenimiento del sistema"
+  },
+  "CHANn, AC": {
+    "Fr": "CANn, CA",
+    "De": "KANn, AC",
+    "Es": "CANn, CA"
+  },
+  "VIEW": {
+    "Fr": "VOIR",
+    "De": "ANSEHEN",
+    "Es": "VER"
+  },
+  "Var 75": {
+    "Fr": "Var 75",
+    "De": "Var 75",
+    "Es": "Var 75"
+  },
+  "68": {
+    "Fr": "68",
+    "De": "68",
+    "Es": "68"
+  },
+  "Minimum gain.": {
+    "Fr": "Gain minimal.",
+    "De": "Minimale Verstärkung.",
+    "Es": "Ganancia mínima."
+  },
+  "44.1 kHz": {
+    "Fr": "44,1 kHz",
+    "De": "44,1 kHz",
+    "Es": "44,1 kHz"
+  },
+  "Inverse": {
+    "Fr": "Inverse",
+    "De": "Invers",
+    "Es": "Inverso"
+  },
+  "Signal": {
+    "Fr": "Signal",
+    "De": "Signal",
+    "Es": "Señal"
+  },
+  "Industrial Palette (Momentary)": {
+    "Fr": "Palette industrielle (Momentané)",
+    "De": "Industriepalette (Momentan)",
+    "Es": "Paleta industrial (Momentáneo)"
+  },
+  "A narrow, focused view for getting up close and personal with signals.": {
+    "Fr": "Une vue étroite et ciblée pour se rapprocher au plus près des signaux.",
+    "De": "Eine enge, fokussierte Ansicht, um Signalen ganz nahe zu kommen.",
+    "Es": "Una vista estrecha y enfocada para acercarse a las señales."
+  },
+  "B90": {
+    "Fr": "B90",
+    "De": "B90",
+    "Es": "B90"
+  },
+  "56": {
+    "Fr": "56",
+    "De": "56",
+    "Es": "56"
+  },
+  "BURNING": {
+    "Fr": "BRÛLAGE",
+    "De": "BRENNEN",
+    "Es": "QUEMANDO"
+  },
+  "Var 84": {
+    "Fr": "Var 84",
+    "De": "Var 84",
+    "Es": "Var 84"
+  },
+  "CLOUD METER": {
+    "Fr": "MÈTRE NUAGE",
+    "De": "WOLKENMETER",
+    "Es": "MEDIDOR NUBE"
+  },
+  "No Float": {
+    "Fr": "Sans flottant",
+    "De": "Kein Float",
+    "Es": "Sin flotante"
+  },
+  "Time (ms)": {
+    "Fr": "Temps (ms)",
+    "De": "Zeit (ms)",
+    "Es": "Tiempo (ms)"
+  },
+  "Mix 2": {
+    "Fr": "Mix 2",
+    "De": "Mix 2",
+    "Es": "Mezcla 2"
+  },
+  "ANALOG PRECISION": {
+    "Fr": "PRÉCISION ANALOGIQUE",
+    "De": "ANALOGE PRÄZISION",
+    "Es": "PRECISIÓN ANALÓGICA"
+  },
+  "STD": {
+    "Fr": "STD",
+    "De": "STD",
+    "Es": "STD"
+  },
+  "Dark Main": {
+    "Fr": "Principal sombre",
+    "De": "Dark Main",
+    "Es": "Principal oscuro"
+  },
+  "Device Under Test Left IN from Bus AB-01": {
+    "Fr": "Appareil en test G ENT de Bus AB-01",
+    "De": "Prüfling L EIN von Bus AB-01",
+    "Es": "Dispositivo bajo prueba Izq ENT de Bus AB-01"
+  },
+  "Tall Danger": {
+    "Fr": "Danger haut",
+    "De": "Tall Danger",
+    "Es": "Peligro alto"
+  },
+  "Right": {
+    "Fr": "Droite",
+    "De": "Rechts",
+    "Es": "Derecha"
+  },
+  "Auto Atten ON": {
+    "Fr": "Auto Attén ACTIVÉE",
+    "De": "Auto Atten AN",
+    "Es": "Auto Aten ACTIVADA"
+  },
+  "Forest": {
+    "Fr": "Forêt",
+    "De": "Wald",
+    "Es": "Bosque"
+  },
+  "FORCE": {
+    "Fr": "FORCE",
+    "De": "KRAFT",
+    "Es": "FUERZA"
+  },
+  "Window State": {
+    "Fr": "État de fenêtre",
+    "De": "Fensterstatus",
+    "Es": "Estado de ventana"
+  },
+  "Gain": {
+    "Fr": "Gain",
+    "De": "Verstärkung",
+    "Es": "Ganancia"
+  },
+  "RMS (Calculated)": {
+    "Fr": "RMS (Calculé)",
+    "De": "RMS (Berechnet)",
+    "Es": "RMS (Calculado)"
+  },
+  "Wide Track": {
+    "Fr": "Piste large",
+    "De": "Breite Spur",
+    "Es": "Pista ancha"
+  },
+  "Frequency reading in Hz.": {
+    "Fr": "Lecture de fréquence en Hz.",
+    "De": "Frequenzanzeige in Hz.",
+    "Es": "Lectura de frecuencia en Hz."
+  },
+  "Src1": {
+    "Fr": "Src1",
+    "De": "Src1",
+    "Es": "Src1"
+  },
+  "PWR": {
+    "Fr": "PWR",
+    "De": "PWR",
+    "Es": "PWR"
+  },
+  "Acquisition Settings": {
+    "Fr": "Paramètres d'acquisition",
+    "De": "Erfassungseinstellungen",
+    "Es": "Ajustes de adquisición"
+  },
+  "SAFE": {
+    "Fr": "SÉCURISÉ",
+    "De": "SICHER",
+    "Es": "SEGURO"
+  },
+  "Choice 9": {
+    "Fr": "Choix 9",
+    "De": "Auswahl 9",
+    "Es": "Opción 9"
+  },
+  "DAC IN R": {
+    "Fr": "ENT DAC D",
+    "De": "DAC EIN R",
+    "Es": "ENT DAC Der"
+  },
+  "Short Num": {
+    "Fr": "Num court",
+    "De": "Kurze Zahl",
+    "Es": "Núm corto"
+  },
+  "The Badge (Trapezoid)": {
+    "Fr": "Le Badge (Trapèze)",
+    "De": "Das Badge (Trapez)",
+    "Es": "La placa (Trapezoide)"
+  },
+  "Pulse & Protect B": {
+    "Fr": "Pulse & Protect B",
+    "De": "Pulse & Protect B",
+    "Es": "Pulse & Protect B"
+  },
+  "Gold Highlight": {
+    "Fr": "Surlignage or",
+    "De": "Gold-Highlight",
+    "Es": "Resaltado dorado"
+  },
+  "Security Grey": {
+    "Fr": "Gris sécurité",
+    "De": "Sicherheitsgrau",
+    "Es": "Gris seguridad"
+  },
+  "Tiny Silver": {
+    "Fr": "Argent minuscule",
+    "De": "Winziges Silber",
+    "Es": "Plata diminuta"
+  },
+  "Constant Voltage Parameters": {
+    "Fr": "Paramètres de tension constante",
+    "De": "Konstantspannungsparameter",
+    "Es": "Parámetros de voltaje constante"
+  },
+  "Fader with VU Meter Examples": {
+    "Fr": "Exemples de fader avec VU-mètre",
+    "De": "Fader mit VU-Meter Beispielen",
+    "Es": "Ejemplos de fader con VU-metro"
+  },
+  "Stereo Needle Meter Demos (Varied Ballistics)": {
+    "Fr": "Démos de mètres à aiguille stéréo (balistiques variées)",
+    "De": "Stereo-Nadelmeter-Demos (verschiedene Ballistik)",
+    "Es": "Demos de medidores de aguja estéreo (balísticas variadas)"
+  },
+  "B4": {
+    "Fr": "B4",
+    "De": "B4",
+    "Es": "B4"
+  },
+  "Frequency (Hz)": {
+    "Fr": "Fréquence (Hz)",
+    "De": "Frequenz (Hz)",
+    "Es": "Frecuencia (Hz)"
+  },
+  "Thematic Animation Label": {
+    "Fr": "Étiquette d'animation thématique",
+    "De": "Thematische Animationsbeschriftung",
+    "Es": "Etiqueta de animación temática"
+  },
+  "Pair 2 R": {
+    "Fr": "Paire 2 D",
+    "De": "Paar 2 R",
+    "Es": "Par 2 Der"
+  },
+  "Link is stopped.": {
+    "Fr": "Le lien est arrêté.",
+    "De": "Verbindung ist gestoppt.",
+    "Es": "El enlace está detenido."
+  },
+  "Super Slow (No Hold)": {
+    "Fr": "Super lent (Sans maintien)",
+    "De": "Superlangsam (Kein Halten)",
+    "Es": "Súper lento (Sin mantener)"
+  },
+  "Query active configuration": {
+    "Fr": "Interroger la configuration active",
+    "De": "Aktive Konfiguration abfragen",
+    "Es": "Consultar configuración activa"
+  },
+  "Digital Video Broadcasting - Terrestrial for the United Kingdom": {
+    "Fr": "Diffusion vidéo numérique - Terrestre pour le Royaume-Uni",
+    "De": "Digital Video Broadcasting - Terrestrisch für Großbritannien",
+    "Es": "Difusión de video digital - Terrestre para el Reino Unido"
+  },
+  "The polarity state (Inverted/NonInverted).": {
+    "Fr": "L'état de polarité (Inversé/Non-inversé).",
+    "De": "Der Polaritätsstatus (Invertiert/Nicht-Invertiert).",
+    "Es": "El estado de polaridad (Invertido/No invertido)."
+  },
+  "1": {
+    "Fr": "1",
+    "De": "1",
+    "Es": "1"
+  },
+  "Clock Cycle": {
+    "Fr": "Cycle d'horloge",
+    "De": "Taktzyklus",
+    "Es": "Ciclo de reloj"
+  },
+  "B54": {
+    "Fr": "B54",
+    "De": "B54",
+    "Es": "B54"
+  },
+  "YelG 23": {
+    "Fr": "YelG 23",
+    "De": "YelG 23",
+    "Es": "YelG 23"
+  },
+  "Leftie": {
+    "Fr": "Gaucher",
+    "De": "Linkshänder",
+    "Es": "Zurdo"
+  },
+  "Global Timebase": {
+    "Fr": "Base de temps globale",
+    "De": "Globale Zeitbasis",
+    "Es": "Base de tiempo global"
+  },
+  "System Readbacks": {
+    "Fr": "Lectures système",
+    "De": "System-Rücklesewerte",
+    "Es": "Lecturas de sistema"
+  },
+  "Aesthetic Mix (Momentary)": {
+    "Fr": "Mix esthétique (Momentané)",
+    "De": "Ästhetischer Mix (Momentan)",
+    "Es": "Mezcla estética (Momentáneo)"
+  },
+  "Load Mixing B": {
+    "Fr": "Mélange de charge B",
+    "De": "Lastmischung B",
+    "Es": "Mezcla de carga B"
+  },
+  "Small Silver": {
+    "Fr": "Argent petit",
+    "De": "Kleines Silber",
+    "Es": "Plata pequeña"
+  },
+  "Thin Arc": {
+    "Fr": "Arc mince",
+    "De": "Dünner Bogen",
+    "Es": "Arco delgado"
+  },
+  "Ghost Circle": {
+    "Fr": "Cercle fantôme",
+    "De": "Geisterkreis",
+    "Es": "Círculo fantasma"
+  },
+  "Choice 7": {
+    "Fr": "Choix 7",
+    "De": "Auswahl 7",
+    "Es": "Opción 7"
+  },
+  "42": {
+    "Fr": "42",
+    "De": "42",
+    "Es": "42"
+  },
+  "Left Bench Neutrik RM-1 OUT to Bus AB0": {
+    "Fr": "Banc gauche Neutrik RM-1 SORT vers Bus AB0",
+    "De": "Linke Bank Neutrik RM-1 AUS an Bus AB0",
+    "Es": "Banco izquierdo Neutrik RM-1 SAL a Bus AB0"
+  },
+  "Pivot Crop & Mask Demo": {
+    "Fr": "Démo pivot crop & masque",
+    "De": "Pivot-Crop & Masken-Demo",
+    "Es": "Demo de recorte de pivote y máscara"
+  },
+  "Channel 3": {
+    "Fr": "Canal 3",
+    "De": "Kanal 3",
+    "Es": "Canal 3"
+  },
+  "Final 3": {
+    "Fr": "Final 3",
+    "De": "Final 3",
+    "Es": "Final 3"
+  },
+  "CONTINUOUS INITIATED": {
+    "Fr": "CONTINU INITIÉ",
+    "De": "KONTINUIERLICH GESTARTET",
+    "Es": "CONTINUO INICIADO"
+  },
+  "CHANNEL 2 (Blue)": {
+    "Fr": "CANAL 2 (Bleu)",
+    "De": "KANAL 2 (Blau)",
+    "Es": "CANAL 2 (Azul)"
+  },
+  "Standard Controls (2-Column Grid)": {
+    "Fr": "Commandes standard (Grille à 2 colonnes)",
+    "De": "Standardsteuerungen (2-Spalten-Raster)",
+    "Es": "Controles estándar (Cuadrícula de 2 columnas)"
+  },
+  "Math Display Controls": {
+    "Fr": "Commandes d'affichage mathématique",
+    "De": "Math-Anzeigesteuerungen",
+    "Es": "Controles de visualización matemática"
+  },
+  "Media & Specialty Controls (3-Column Grid)": {
+    "Fr": "Commandes média et spécialisées (Grille à 3 colonnes)",
+    "De": "Medien- & Spezialsteuerungen (3-Spalten-Raster)",
+    "Es": "Controles de medios y especialidades (Cuadrícula de 3 columnas)"
+  },
+  "The standard filter setting for most common analysis tasks. Not too much, not too little.": {
+    "Fr": "Le réglage de filtre standard pour les tâches d'analyse les plus courantes. Ni trop, ni trop peu.",
+    "De": "Die Standardfiltereinstellung für die gängigsten Analyseaufgaben. Nicht zu viel, nicht zu wenig.",
+    "Es": "El ajuste de filtro estándar para las tareas de análisis más comunes. Ni mucho, ni poco."
+  },
+  "Nuclear Core": {
+    "Fr": "Cœur nucléaire",
+    "De": "Kernkraftkern",
+    "Es": "Núcleo nuclear"
+  },
+  "Monitor 2 Right IN from Bus AB-03": {
+    "Fr": "Moniteur 2 D ENT de Bus AB-03",
+    "De": "Monitor 2 R EIN von Bus AB-03",
+    "Es": "Monitor 2 Der ENT de Bus AB-03"
+  },
+  "Wink Buttons: 20 Variations (Wink-to-Wink Color & Text)": {
+    "Fr": "Boutons à volet : 20 variations (couleur et texte de volet à volet)",
+    "De": "Shutter-Tasten: 20 Variationen (Farb- und Textwechsel)",
+    "Es": "Botones de obturador: 20 variaciones (color y texto de obturador a obturador)"
+  },
+  "For the patient scientist. You'll see things nobody else can, but it'll take a while.": {
+    "Fr": "Pour le scientifique patient. Vous verrez des choses que personne d'autre ne peut voir, mais cela prendra un certain temps.",
+    "De": "Für den geduldigen Wissenschaftler. Sie werden Dinge sehen, die sonst niemand sieht, aber es wird eine Weile dauern.",
+    "Es": "Para el científico paciente. Verás cosas que nadie más puede ver, pero llevará un tiempo."
+  },
+  "Rigol Measurements": {
+    "Fr": "Mesures Rigol",
+    "De": "Rigol-Messungen",
+    "Es": "Mediciones de Rigol"
+  },
+  "Center Txt": {
+    "Fr": "Texte centre",
+    "De": "Text zentriert",
+    "Es": "Texto centrado"
+  },
+  "Fine Pitch": {
+    "Fr": "Pas fin",
+    "De": "Feine Teilung",
+    "Es": "Paso fino"
+  },
+  "Minimalist": {
+    "Fr": "Minimaliste",
+    "De": "Minimalistisch",
+    "Es": "Minimalista"
+  },
+  "Oceanic Depth": {
+    "Fr": "Profondeur océanique",
+    "De": "Ozeantiefe",
+    "Es": "Profundidad oceánica"
+  },
+  "Snake Ch 2 Right/Even OUT to Bus AB2": {
+    "Fr": "Snake Ch 2 D/Pair SORT vers Bus AB2",
+    "De": "Snake Ch 2 R/Gerade AUS an Bus AB2",
+    "Es": "Snake Ch 2 Der/Par SAL a Bus AB2"
+  },
+  "THERMAL VU": {
+    "Fr": "VU THERMIQUE",
+    "De": "THERMISCHER VU",
+    "Es": "VU TÉRMICO"
+  },
+  "Log Scale": {
+    "Fr": "Échelle log",
+    "De": "Log-Skala",
+    "Es": "Escala logarítmica"
+  },
+  "Stability 6": {
+    "Fr": "Stabilité 6",
+    "De": "Stabilität 6",
+    "Es": "Estabilidad 6"
+  },
+  "Auto ON": {
+    "Fr": "Auto ACTIVÉ",
+    "De": "Auto AN",
+    "Es": "Auto ACTIVADO"
+  },
+  "7": {
+    "Fr": "7",
+    "De": "7",
+    "Es": "7"
+  },
+  "POSitive, NEGative": {
+    "Fr": "POSitif, NÉGatif",
+    "De": "Positiv, Negativ",
+    "Es": "POSitivo, NEGativo"
+  },
+  "Position coordinates.": {
+    "Fr": "Coordonnées de position.",
+    "De": "Positionskoordinaten.",
+    "Es": "Coordenadas de posición."
+  },
+  "Vertical Setup CH2": {
+    "Fr": "Configuration verticale CH2",
+    "De": "Vertikaleinstellung CH2",
+    "Es": "Configuración vertical CH2"
+  },
+  "Super_Gem 2": {
+    "Fr": "Super_Gem 2",
+    "De": "Super_Gem 2",
+    "Es": "Super_Gem 2"
+  },
+  "Device is disabled.": {
+    "Fr": "L'appareil est désactivé.",
+    "De": "Gerät ist deaktiviert.",
+    "Es": "El dispositivo está desactivado."
+  },
+  "B7": {
+    "Fr": "B7",
+    "De": "B7",
+    "Es": "B7"
+  },
+  "Reset (*RST)": {
+    "Fr": "Réinitialiser (*RST)",
+    "De": "Zurücksetzen (*RST)",
+    "Es": "Reiniciar (*RST)"
+  },
+  "Amber H": {
+    "Fr": "Ambre H",
+    "De": "Bernstein H",
+    "Es": "Ámbar H"
+  },
+  "Slope": {
+    "Fr": "Pente",
+    "De": "Flanke",
+    "Es": "Pendiente"
+  },
+  "R": {
+    "Fr": "D",
+    "De": "R",
+    "Es": "Der"
+  },
+  "NAB Frequency Monitoring": {
+    "Fr": "Surveillance de fréquence NAB",
+    "De": "NAB Frequenzüberwachung",
+    "Es": "Monitoreo de frecuencia NAB"
+  },
+  "Energy Dissipation Interface": {
+    "Fr": "Interface de dissipation d'énergie",
+    "De": "Energiedissipations-Schnittstelle",
+    "Es": "Interfaz de disipación de energía"
+  },
+  "Manages media clocks.": {
+    "Fr": "Gère les horloges média.",
+    "De": "Verwaltet Media-Clocks.",
+    "Es": "Gestiona relojes de medios."
+  },
+  "B66": {
+    "Fr": "B66",
+    "De": "B66",
+    "Es": "B66"
+  },
+  "Center Freq in Hz": {
+    "Fr": "Fréq centrale en Hz",
+    "De": "Mittenfreq in Hz",
+    "Es": "Frec central en Hz"
+  },
+  "Width": {
+    "Fr": "Largeur",
+    "De": "Breite",
+    "Es": "Ancho"
+  },
+  "Drive": {
+    "Fr": "Drive",
+    "De": "Drive",
+    "Es": "Drive"
+  },
+  "Time/Div": {
+    "Fr": "Temps/Div",
+    "De": "Zeit/Div",
+    "Es": "Tiempo/Div"
+  },
+  "Hat": {
+    "Fr": "Chapeau",
+    "De": "Hut",
+    "Es": "Sombrero"
+  },
+  "System D 625 lines (Original OIR) standard for Eastern Europe, North Korea, Asia (VHF)": {
+    "Fr": "Système D 625 lignes (OIR original) standard pour l'Europe de l'Est, Corée du Nord, Asie (VHF)",
+    "De": "System D 625 Zeilen (Original OIR) Standard für Osteuropa, Nordkorea, Asien (VHF)",
+    "Es": "Sistema D de 625 líneas (OIR original) estándar para Europa del Este, Corea del Norte, Asia (VHF)"
+  },
+  "Stereo Comp": {
+    "Fr": "Comp stéréo",
+    "De": "Stereo-Comp",
+    "Es": "Comp estéreo"
+  },
+  "Yellow Mellow": {
+    "Fr": "Jaune relax",
+    "De": "Zartgelb",
+    "Es": "Amarillo suave"
+  },
+  "CHAN1, CHAN2, MATH": {
+    "Fr": "CAN1, CAN2, MATH",
+    "De": "KAN1, KAN2, MATH",
+    "Es": "CAN1, CAN2, MATH"
+  },
+  "Oct Tri": {
+    "Fr": "Oct Tri",
+    "De": "Oct Tri",
+    "Es": "Oct Tri"
+  },
+  "VI. Vintage Aesthetics (Bar Graph Interpretations)": {
+    "Fr": "VI. Esthétique Vintage (interprétations de graphes à barres)",
+    "De": "VI. Vintage-Ästhetik (Balkendiagramm-Interpretationen)",
+    "Es": "VI. Estética Vintage (interpretaciones de gráficos de barras)"
+  },
+  "Map of supported rates per time source.": {
+    "Fr": "Carte des taux supportés par source de temps.",
+    "De": "Karte der unterstützten Raten pro Zeitquelle.",
+    "Es": "Mapa de tasas admitidas por fuente de tiempo."
+  },
+  "RESET": {
+    "Fr": "RÉINITIALISER",
+    "De": "ZURÜCKSETZEN",
+    "Es": "REINICIAR"
+  },
+  "Label": {
+    "Fr": "Étiquette",
+    "De": "Beschriftung",
+    "Es": "Etiqueta"
+  },
+  "Z-Theta": {
+    "Fr": "Z-Thêta",
+    "De": "Z-Theta",
+    "Es": "Z-Theta"
+  },
+  "Flanger": {
+    "Fr": "Flanger",
+    "De": "Flanger",
+    "Es": "Flanger"
+  },
+  "A flared metal waveguide, used for directing radio waves in a beam. High gain and good impedance matching.": {
+    "Fr": "Un guide d'ondes métallique évasé, utilisé pour diriger les ondes radio dans un faisceau. Gain élevé et bonne adaptation d'impédance.",
+    "De": "Ein aufgeweiteter Metallwellenleiter, der zur Ausrichtung von Funkwellen in einem Strahl verwendet wird. Hoher Gewinn und gute Impedanzanpassung.",
+    "Es": "Una guía de ondas metálica acampanada, utilizada para dirigir ondas de radio en un haz. Gran ganancia y buen acoplamiento de impedancia."
+  },
+  "PGM 1": {
+    "Fr": "PGM 1",
+    "De": "PGM 1",
+    "Es": "PGM 1"
+  },
+  "Channel 2 Vertical": {
+    "Fr": "Canal 2 Vertical",
+    "De": "Kanal 2 Vertikal",
+    "Es": "Canal 2 Vertical"
+  },
+  "Wink Buttons: Color-to-Color & Text Reveal Transitions": {
+    "Fr": "Boutons à volet : transitions de couleur à couleur et révélation de texte",
+    "De": "Shutter-Tasten: Farb-zu-Farb-Übergänge & Textenthüllung",
+    "Es": "Botones de obturador: transiciones de color a color y revelación de texto"
+  },
+  "M_Line_8": {
+    "Fr": "M_Line_8",
+    "De": "M_Line_8",
+    "Es": "M_Line_8"
+  },
+  "Dark Verb": {
+    "Fr": "Verb sombre",
+    "De": "Dark Verb",
+    "Es": "Reverb oscura"
+  },
+  "x^3": {
+    "Fr": "x^3",
+    "De": "x^3",
+    "Es": "x^3"
+  },
+  "Wide Blue": {
+    "Fr": "Bleu large",
+    "De": "Breit-Blau",
+    "Es": "Azul ancho"
+  },
+  "Pan Left": {
+    "Fr": "Pan Gauche",
+    "De": "Pan Links",
+    "Es": "Pan Izq"
+  },
+  "Math": {
+    "Fr": "Math",
+    "De": "Math",
+    "Es": "Matem"
+  },
+  "Output OFF": {
+    "Fr": "Sortie DÉSACTIVÉE",
+    "De": "Ausgang AUS",
+    "Es": "Salida DESACTIVADA"
+  },
+  "Ref": {
+    "Fr": "Réf",
+    "De": "Ref",
+    "Es": "Ref"
+  },
+  "Signal Visualization": {
+    "Fr": "Visualisation de signal",
+    "De": "Signalvisualisierung",
+    "Es": "Visualización de señal"
+  },
+  "Small Scale": {
+    "Fr": "Petite échelle",
+    "De": "Kleine Skala",
+    "Es": "Escala pequeña"
+  },
+  "Time interval in seconds.": {
+    "Fr": "Intervalle de temps en secondes.",
+    "De": "Zeitintervall in Sekunden.",
+    "Es": "Intervalo de tiempo en segundos."
+  },
+  "Trapezoid 2": {
+    "Fr": "Trapèze 2",
+    "De": "Trapez 2",
+    "Es": "Trapezoide 2"
+  },
+  "Voltage Indicator": {
+    "Fr": "Indicateur de tension",
+    "De": "Spannungsanzeiger",
+    "Es": "Indicador de voltaje"
+  },
+  "Index 5": {
+    "Fr": "Index 5",
+    "De": "Index 5",
+    "Es": "Índice 5"
+  },
+  "List of ports owned by the worker.": {
+    "Fr": "Liste des ports possédés par le worker.",
+    "De": "Liste der Ports im Besitz des Workers.",
+    "Es": "Lista de puertos propiedad del trabajador."
+  },
+  "-105 dB": {
+    "Fr": "-105 dB",
+    "De": "-105 dB",
+    "Es": "-105 dB"
+  },
+  "System Status:": {
+    "Fr": "État du système :",
+    "De": "Systemstatus:",
+    "Es": "Estado del sistema:"
+  },
+  "D Ch": {
+    "Fr": "Canal D",
+    "De": "D-Kanal",
+    "Es": "Canal D"
+  },
+  "Math Function Settings": {
+    "Fr": "Paramètres de fonction mathématique",
+    "De": "Mathematische Funktionseinstellungen",
+    "Es": "Ajustes de función matemática"
+  },
+  "SLATE PRECISION": {
+    "Fr": "PRÉCISION ARDOISE",
+    "De": "SCHIEFER-PRÄZISION",
+    "Es": "PRECISIÓN PIZARRA"
+  },
+  "Max shape parameter.": {
+    "Fr": "Paramètre de forme max.",
+    "De": "Maximaler Formparameter.",
+    "Es": "Parámetro de forma máx."
+  },
+  "PUSH": {
+    "Fr": "POUSSER",
+    "De": "DRÜCKEN",
+    "Es": "EMPUJAR"
+  },
+  "B84": {
+    "Fr": "B84",
+    "De": "B84",
+    "Es": "B84"
+  },
+  "03: Chunky Amber": {
+    "Fr": "03 : Ambre massif",
+    "De": "03: Massives Bernstein",
+    "Es": "03: Ámbar macizo"
+  },
+  "Min columns.": {
+    "Fr": "Colonnes min.",
+    "De": "Min. Spalten.",
+    "Es": "Columnas mín."
+  },
+  "#00FF00": {
+    "Fr": "#00FF00",
+    "De": "#00FF00",
+    "Es": "#00FF00"
+  },
+  "Cut": {
+    "Fr": "Couper",
+    "De": "Cut",
+    "Es": "Corte"
+  },
+  "Left Meter (180-90)": {
+    "Fr": "Mètre gauche (180-90)",
+    "De": "Linkes Meter (180-90)",
+    "Es": "Medidor izquierdo (180-90)"
+  },
+  "Var 61": {
+    "Fr": "Var 61",
+    "De": "Var 61",
+    "Es": "Var 61"
+  },
+  "Var 66": {
+    "Fr": "Var 66",
+    "De": "Var 66",
+    "Es": "Var 66"
+  },
+  "O\nF\nF": {
+    "Fr": "A\nR\nR",
+    "De": "A\nU\nS",
+    "Es": "O\nF\nF"
+  },
+  "B80": {
+    "Fr": "B80",
+    "De": "B80",
+    "Es": "B80"
+  },
+  "A8": {
+    "Fr": "A8",
+    "De": "A8",
+    "Es": "A8"
+  },
+  "PINE": {
+    "Fr": "PIN",
+    "De": "KIEFER",
+    "Es": "PINO"
+  },
+  " | ": {
+    "Fr": " | ",
+    "De": " | ",
+    "Es": " | "
+  },
+  "Mono 6T": {
+    "Fr": "Mono 6T",
+    "De": "Mono 6T",
+    "Es": "Mono 6T"
+  },
+  "Record (Momentary)": {
+    "Fr": "Enregistrer (Momentané)",
+    "De": "Aufnahme (Momentan)",
+    "Es": "Grabar (Momentáneo)"
+  },
+  "Abstract base class for classes that represent the device's application and support functions.": {
+    "Fr": "Classe de base abstraite pour les classes représentant l'application de l'appareil et les fonctions de support.",
+    "De": "Abstrakte Basisklasse für Klassen, die die Geräteanwendung und Supportfunktionen darstellen.",
+    "Es": "Clase base abstracta para clases que representan la aplicación del dispositivo y las funciones de soporte."
+  },
+  "Num Only": {
+    "Fr": "Chiffres uniquement",
+    "De": "Nur Zahlen",
+    "Es": "Solo números"
+  },
+  "Names for each position.": {
+    "Fr": "Noms pour chaque position.",
+    "De": "Namen für jede Position.",
+    "Es": "Nombres para cada posición."
+  },
+  "Max reference level.": {
+    "Fr": "Niveau de référence max.",
+    "De": "Maximaler Referenzpegel.",
+    "Es": "Nivel de referencia máx."
+  },
+  "RIGHT": {
+    "Fr": "DROITE",
+    "De": "RECHTS",
+    "Es": "DERECHA"
+  },
+  "20 Additional Horizontal Fader Variations with Modular Parameters": {
+    "Fr": "20 variations supplémentaires de faders horizontaux avec paramètres modulaires",
+    "De": "20 zusätzliche horizontale Fader-Variationen mit modularen Parametern",
+    "Es": "20 variaciones adicionales de faders horizontales con parámetros modulares"
+  },
+  "Night Mode": {
+    "Fr": "Mode nuit",
+    "De": "Nachtmodus",
+    "Es": "Modo noche"
+  },
+  "High Power (HPAs)": {
+    "Fr": "Haute puissance (HPAs)",
+    "De": "Hochleistung (HPAs)",
+    "Es": "Alta potencia (HPAs)"
+  },
+  "A block for managing antenna type selection.": {
+    "Fr": "Un bloc pour gérer la sélection du type d'antenne.",
+    "De": "Ein Block zur Verwaltung der Antennentypauswahl.",
+    "Es": "Un bloque para gestionar la selección del tipo de antena."
+  },
+  "Crunch Lead": {
+    "Fr": "Crunch Lead",
+    "De": "Crunch Lead",
+    "Es": "Crunch Lead"
+  },
+  "Gui Label 03 Count": {
+    "Fr": "Compteur Gui Label 03",
+    "De": "Gui-Label 03 Zähler",
+    "Es": "Cuenta de Gui Label 03"
+  },
+  "Ch2 Measurements": {
+    "Fr": "Mesures Ch2",
+    "De": "Ch2-Messungen",
+    "Es": "Mediciones de Ch2"
+  },
+  "Preamble": {
+    "Fr": "Préambule",
+    "De": "Präambel",
+    "Es": "Preámbulo"
+  },
+  "Wide Meters": {
+    "Fr": "Mètres larges",
+    "De": "Breite Meter",
+    "Es": "Medidores anchos"
+  },
+  "Set Resolution and Video BW": {
+    "Fr": "Régler Résolution et BP Vidéo",
+    "De": "Auflösung und Video-BW einstellen",
+    "Es": "Ajustar resolución y ancho de banda de video"
+  },
+  "Var 80": {
+    "Fr": "Var 80",
+    "De": "Var 80",
+    "Es": "Var 80"
+  },
+  "CHANn, DIGn, PODn, FUNCtion, MATH": {
+    "Fr": "CANn, DIGn, PODn, FONCtion, MATH",
+    "De": "KANn, DIGn, PODn, FUNCtion, MATH",
+    "Es": "CANn, DIGn, PODn, FUNCIÓN, MATEM"
+  },
+  "Clear (CLR)": {
+    "Fr": "Effacer (CLR)",
+    "De": "Löschen (CLR)",
+    "Es": "Borrar (CLR)"
+  },
+  "Atten": {
+    "Fr": "Attén",
+    "De": "Atten",
+    "Es": "Aten"
+  },
+  "Gem 2": {
+    "Fr": "Gemme 2",
+    "De": "Gem 2",
+    "Es": "Gema 2"
+  },
+  "NEON-TRI": {
+    "Fr": "NÉON-TRI",
+    "De": "NEON-TRI",
+    "Es": "NEÓN-TRI"
+  },
+  "-95 dB": {
+    "Fr": "-95 dB",
+    "De": "-95 dB",
+    "Es": "-95 dB"
+  },
+  "Snake Ch 4 Right/Even OUT to Bus AB2": {
+    "Fr": "Snake Ch 4 D/Pair SORT vers Bus AB2",
+    "De": "Snake Ch 4 R/Gerade AUS an Bus AB2",
+    "Es": "Snake Ch 4 Der/Par SAL a Bus AB2"
+  },
+  "FILTER": {
+    "Fr": "FILTRE",
+    "De": "FILTER",
+    "Es": "FILTRO"
+  },
+  "Stereo Mix": {
+    "Fr": "Mix stéréo",
+    "De": "Stereo-Mix",
+    "Es": "Mezcla estéreo"
+  },
+  "Computer DAC Right OUT to Bus AB-02": {
+    "Fr": "DAC ordinateur D SORT vers Bus AB-02",
+    "De": "Computer-DAC R AUS an Bus AB-02",
+    "Es": "DAC de computadora Der SAL a Bus AB-02"
+  },
+  "PULSE MODE OFF": {
+    "Fr": "MODE PULSÉ DÉSACTIVÉ",
+    "De": "IMPULSMODUS AUS",
+    "Es": "MODO PULSO DESACTIVADO"
+  },
+  "FIRE DEPT": {
+    "Fr": "POMPIERS",
+    "De": "FEUERWEHR",
+    "Es": "BOMBEROS"
+  },
+  "Indicates the progress of a file download.": {
+    "Fr": "Indique la progression du téléchargement d'un fichier.",
+    "De": "Zeigt den Fortschritt eines Dateidownloads an.",
+    "Es": "Indica el progreso de la descarga de un archivo."
+  },
+  "PEARL EDITION": {
+    "Fr": "ÉDITION PERLE",
+    "De": "PEARL EDITION",
+    "Es": "EDICIÓN PERLA"
+  },
+  "Test Signal & Timing": {
+    "Fr": "Signal de test et synchronisation",
+    "De": "Testsignal & Timing",
+    "Es": "Señal de prueba y sincronización"
+  },
+  "Inverted polarity.": {
+    "Fr": "Polarité inversée.",
+    "De": "Invertierte Polarität.",
+    "Es": "Polaridad invertida."
+  },
+  "B39": {
+    "Fr": "B39",
+    "De": "B39",
+    "Es": "B39"
+  },
+  "Time (arb)": {
+    "Fr": "Temps (arb)",
+    "De": "Zeit (arb)",
+    "Es": "Tiempo (arb)"
+  },
+  "72": {
+    "Fr": "72",
+    "De": "72",
+    "Es": "72"
+  },
+  "Waveform Data Transfer Settings": {
+    "Fr": "Paramètres de transfert de données de forme d'onde",
+    "De": "Wellenform-Datentransfer-Einstellungen",
+    "Es": "Ajustes de transferencia de datos de forma de onda"
+  }
+}

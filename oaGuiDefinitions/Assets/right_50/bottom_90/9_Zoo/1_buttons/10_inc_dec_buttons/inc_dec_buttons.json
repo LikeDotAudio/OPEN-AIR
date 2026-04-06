@@ -13,11 +13,21 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": "Count:",
+        "label_active": {
+          "En": "Count:",
+          "Fr": "Count:",
+          "De": "Count:",
+          "Es": "Count:"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartIncDec",
-            "label": "Count:",
+            "label": {
+              "En": "Count:",
+              "Fr": "Count:",
+              "De": "Count:",
+              "Es": "Count:"
+            },
             "notes": "Simple increment/decrement counter.",
             "domain": {
               "primary": {
@@ -33,11 +43,21 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": "Volume:",
+        "label_active": {
+          "En": "Volume:",
+          "Fr": "Volume:",
+          "De": "Lautstärke:",
+          "Es": "Volumen:"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartIncDec",
-            "label": "Volume:",
+            "label": {
+              "En": "Volume:",
+              "Fr": "Volume:",
+              "De": "Lautstärke:",
+              "Es": "Volumen:"
+            },
             "notes": "Adjusts volume level in steps of 5.",
             "domain": {
               "primary": {
@@ -53,11 +73,21 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": "Fine Tune:",
+        "label_active": {
+          "En": "Fine Tune:",
+          "Fr": "Fine Tune:",
+          "De": "Fine Tune:",
+          "Es": "Fine Tune:"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartIncDec",
-            "label": "Fine Tune:",
+            "label": {
+              "En": "Fine Tune:",
+              "Fr": "Fine Tune:",
+              "De": "Fine Tune:",
+              "Es": "Fine Tune:"
+            },
             "notes": "For precise adjustments with decimal steps.",
             "domain": {
               "primary": {
@@ -73,11 +103,21 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": "Channel:",
+        "label_active": {
+          "En": "Channel:",
+          "Fr": "Canal:",
+          "De": "Kanal:",
+          "Es": "Canal:"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartIncDec",
-            "label": "Channel:",
+            "label": {
+              "En": "Channel:",
+              "Fr": "Canal:",
+              "De": "Kanal:",
+              "Es": "Canal:"
+            },
             "notes": "Selects channels (integer values).",
             "domain": {
               "primary": {
@@ -93,11 +133,21 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": "Brightness:",
+        "label_active": {
+          "En": "Brightness:",
+          "Fr": "Brightness:",
+          "De": "Brightness:",
+          "Es": "Brightness:"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartIncDec",
-            "label": "Brightness:",
+            "label": {
+              "En": "Brightness:",
+              "Fr": "Brightness:",
+              "De": "Brightness:",
+              "Es": "Brightness:"
+            },
             "notes": "Controls brightness in steps of 10.",
             "domain": {
               "primary": {

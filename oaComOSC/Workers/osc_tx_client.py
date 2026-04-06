@@ -34,7 +34,7 @@ def _is_debug():
     return is_debug_allowed(system="comms", element="osc")
 
 from oaLogging.Core.logger import get_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 osc_logger = get_logger("OSC")
 

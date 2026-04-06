@@ -13,7 +13,12 @@
     "blocks": {
       "Standard_VU_More_Demos": {
         "type": "OcaBlock",
-        "description": "More Standard VU Variations",
+        "description": {
+          "En": "More Standard VU Variations",
+          "Fr": "More Standard VU Variations",
+          "De": "More Standard VU Variationen",
+          "Es": "More Estándar VU Variaciones"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -32,7 +37,12 @@
         "fields": {
           "Peak_Hold_VU": {
             "type": "_NeedleVUMeter",
-            "label": "Peak Hold (3s)",
+            "label": {
+              "En": "Peak Hold (3s)",
+              "Fr": "Peak Hold (3s)",
+              "De": "Peak Hold (3s)",
+              "Es": "Peak Hold (3s)"
+            },
             "notes": "Peak-level capture.",
             "geometry": {
               "width": 140,
@@ -96,7 +106,12 @@
           },
           "Rainbow_VU": {
             "type": "_NeedleVUMeter",
-            "label": "Rainbow Colors",
+            "label": {
+              "En": "Rainbow Colors",
+              "Fr": "Rainbow Colors",
+              "De": "Rainbow Colors",
+              "Es": "Rainbow Colors"
+            },
             "notes": "Vibrant spectral colors.",
             "geometry": {
               "width": 150,
@@ -154,7 +169,12 @@
           },
           "Vintage_VU": {
             "type": "_NeedleVUMeter",
-            "label": "Vintage Look",
+            "label": {
+              "En": "Vintage Look",
+              "Fr": "Vintage Look",
+              "De": "Vintage Look",
+              "Es": "Vintage Look"
+            },
             "notes": "Classic analog meter style.",
             "geometry": {
               "width": 160,
@@ -212,7 +232,12 @@
           },
           "Tall_Thin_VU": {
             "type": "_NeedleVUMeter",
-            "label": "Small & Masked",
+            "label": {
+              "En": "Small & Masked",
+              "Fr": "Small & Masked",
+              "De": "Small & Masked",
+              "Es": "Small & Masked"
+            },
             "notes": "Small profile meter.",
             "geometry": {
               "width": 80,
@@ -271,7 +296,12 @@
       },
       "Standard_VU_Demos_Main": {
         "type": "OcaBlock",
-        "description": "Standard VU Meter Showcase",
+        "description": {
+          "En": "Standard VU Meter Showcase",
+          "Fr": "Standard VU Meter Showcase",
+          "De": "Standard VU Meter Showcase",
+          "Es": "Estándar VU Meter Showcase"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -290,7 +320,12 @@
         "fields": {
           "Standard_VU_1": {
             "type": "_NeedleVUMeter",
-            "label": "Standard",
+            "label": {
+              "En": "Standard",
+              "Fr": "Standard",
+              "De": "Standard",
+              "Es": "Estándar"
+            },
             "notes": "Standard response, red pointer.",
             "geometry": {
               "width": 150,
@@ -347,7 +382,12 @@
           },
           "Fast_Response_VU": {
             "type": "_NeedleVUMeter",
-            "label": "Fast Response",
+            "label": {
+              "En": "Fast Response",
+              "Fr": "Rapide Response",
+              "De": "Schnell Response",
+              "Es": "Rápido Response"
+            },
             "notes": "Snappy peak-meter style.",
             "geometry": {
               "width": 120,
@@ -404,7 +444,12 @@
           },
           "Slow_Response_VU": {
             "type": "_NeedleVUMeter",
-            "label": "Slow Response",
+            "label": {
+              "En": "Slow Response",
+              "Fr": "Lent Response",
+              "De": "Langsam Response",
+              "Es": "Lento Response"
+            },
             "notes": "Vintage, heavy needle feel.",
             "geometry": {
               "width": 180,
@@ -461,7 +506,12 @@
           },
           "Wide_Range_VU": {
             "type": "_NeedleVUMeter",
-            "label": "Wide Range",
+            "label": {
+              "En": "Wide Range",
+              "Fr": "Wide Range",
+              "De": "Wide Range",
+              "Es": "Wide Range"
+            },
             "notes": "Full spectrum monitoring.",
             "geometry": {
               "width": 150,
@@ -520,7 +570,12 @@
       },
       "Large_Console_Bank": {
         "type": "OcaBlock",
-        "description": "Large Console Meters (Masked)",
+        "description": {
+          "En": "Large Console Meters (Masked)",
+          "Fr": "Large Console Meters (Masked)",
+          "De": "Large Console Meters (Masked)",
+          "Es": "Large Console Meters (Masked)"
+        },
         "layout_columns": 2,
         "column_sizing": [
           {
@@ -533,7 +588,12 @@
         "fields": {
           "Large_L": {
             "type": "_NeedleVUMeter",
-            "label": "Master Left (Hold 200ms)",
+            "label": {
+              "En": "Master Left (Hold 200ms)",
+              "Fr": "Master Gauche (Hold 200ms)",
+              "De": "Master Links (Hold 200ms)",
+              "Es": "Maestro Izquierda (Hold 200ms)"
+            },
             "notes": "Classic console look.",
             "geometry": {
               "width": 400,
@@ -592,7 +652,12 @@
           },
           "Large_R": {
             "type": "_NeedleVUMeter",
-            "label": "Master Right (Hold 200ms)",
+            "label": {
+              "En": "Master Right (Hold 200ms)",
+              "Fr": "Master Droite (Hold 200ms)",
+              "De": "Master Rechts (Hold 200ms)",
+              "Es": "Maestro Derecha (Hold 200ms)"
+            },
             "notes": "Matching right channel.",
             "geometry": {
               "width": 400,

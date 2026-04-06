@@ -13,12 +13,22 @@
     "blocks": {
       "FaderWithVU": {
         "type": "OcaBlock",
-        "label_active": "Fader with VU Meter Examples",
+        "label_active": {
+          "En": "Fader with VU Meter Examples",
+          "Fr": "Fader with VU Meter Exemples",
+          "De": "Fader with VU Meter Beispiele",
+          "Es": "Fader with VU Meter Ejemplos"
+        },
         "layout_columns": 8,
         "fields": {
           "ex1_standard": {
             "type": "_FaderWithBarGraph",
-            "label_active": "Standard",
+            "label_active": {
+              "En": "Standard",
+              "Fr": "Standard",
+              "De": "Standard",
+              "Es": "Estándar"
+            },
             "value_min": -60.0,
             "value_max": 10.0,
             "value_default": -10.0,
@@ -33,7 +43,12 @@
           },
           "ex2_custom_cap": {
             "type": "_FaderWithBarGraph",
-            "label_active": "Big Cap",
+            "label_active": {
+              "En": "Big Cap",
+              "Fr": "Big Cap",
+              "De": "Big Cap",
+              "Es": "Big Cap"
+            },
             "layout": {
               "height": 300,
               "width": 120
@@ -48,7 +63,12 @@
           },
           "ex3_slim_fader": {
             "type": "_FaderWithBarGraph",
-            "label_active": "Slim",
+            "label_active": {
+              "En": "Slim",
+              "Fr": "Slim",
+              "De": "Slim",
+              "Es": "Slim"
+            },
             "layout": {
               "height": 300,
               "width": 100
@@ -63,7 +83,12 @@
           },
           "ex4_wide_meters": {
             "type": "_FaderWithBarGraph",
-            "label_active": "Wide Meters",
+            "label_active": {
+              "En": "Wide Meters",
+              "Fr": "Wide Meters",
+              "De": "Wide Meters",
+              "Es": "Wide Meters"
+            },
             "layout": {
               "height": 300,
               "width": 140
@@ -76,7 +101,12 @@
           },
           "ex5_no_meters": {
             "type": "_FaderWithBarGraph",
-            "label_active": "No Meters",
+            "label_active": {
+              "En": "No Meters",
+              "Fr": "Non Meters",
+              "De": "Nein Meters",
+              "Es": "No Meters"
+            },
             "layout": {
               "height": 300,
               "width": 80
@@ -88,7 +118,12 @@
           },
           "ex6_discrete_ticks": {
             "type": "_FaderWithBarGraph",
-            "label_active": "Many Ticks",
+            "label_active": {
+              "En": "Many Ticks",
+              "Fr": "Many Ticks",
+              "De": "Many Ticks",
+              "Es": "Many Ticks"
+            },
             "layout": {
               "height": 300,
               "width": 120
@@ -100,7 +135,12 @@
           },
           "ex7_inverse_colors": {
             "type": "_FaderWithBarGraph",
-            "label_active": "Inverse",
+            "label_active": {
+              "En": "Inverse",
+              "Fr": "Inverse",
+              "De": "Inverse",
+              "Es": "Inverse"
+            },
             "value_default": -40,
             "left_meter_style": {
               "lower_range_colour": "blue",
@@ -121,7 +161,12 @@
           },
           "ex8_log_scale": {
             "type": "_FaderWithBarGraph",
-            "label_active": "Log Scale",
+            "label_active": {
+              "En": "Log Scale",
+              "Fr": "Log Scale",
+              "De": "Log Scale",
+              "Es": "Log Scale"
+            },
             "log_exponent": 2.0,
             "value_min": 0,
             "value_max": 1000,

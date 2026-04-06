@@ -2,11 +2,21 @@
   "Information": {
     "type": "OcaBlock",
     "AES70": "OcaApplicationManager",
-    "description": "A block for managing and displaying high-level application settings.",
+    "description": {
+      "En": "A block for managing and displaying high-level application settings.",
+      "Fr": "Un bloc pour gérer et afficher les paramètres d'application de haut niveau.",
+      "De": "Ein Block zum Verwalten und Anzeigen von Anwendungseinstellungen auf hoher Ebene.",
+      "Es": "Un bloque para gestionar y mostrar los ajustes de la aplicación de alto nivel."
+    },
     "fields": {
       "Active": {
         "type": "_GuiButtonToggle",
-        "label": "Application Active",
+        "label": {
+          "En": "Application Active",
+          "Fr": "Application active",
+          "De": "Anwendung aktiv",
+          "Es": "Aplicación activa"
+        },
         "AES70": "OcaBooleanActuator",
         "handler": "set_application_active",
         "style": {
@@ -23,38 +33,68 @@
         },
         "options": {
           "ON": {
-            "label": "Active",
+            "label": {
+              "En": "Active",
+              "Fr": "Actif",
+              "De": "Aktiv",
+              "Es": "Activo"
+            },
             "selected": true
           },
           "OFF": {
-            "label": "Inactive",
+            "label": {
+              "En": "Inactive",
+              "Fr": "Inactif",
+              "De": "Inaktiv",
+              "Es": "Inactivo"
+            },
             "selected": false
           }
         }
       },
       "geometry": {
-        "label": "Window Geometry",
+        "label": {
+          "En": "Window Geometry",
+          "Fr": "Window Geometry",
+          "De": "Window Geometry",
+          "Es": "Window Geometry"
+        },
         "type": "_Label",
         "AES70": "OcaStringSensor",
         "value": "1920x1127+1912+32",
         "units": null
       },
       "window_state": {
-        "label": "Window State",
+        "label": {
+          "En": "Window State",
+          "Fr": "État de fenêtre",
+          "De": "Fensterstatus",
+          "Es": "Estado de ventana"
+        },
         "type": "_Label",
         "AES70": "OcaStringSensor",
         "value": "zoomed",
         "units": null
       },
       "last_config_save_time": {
-        "label": "Last Config Save Time",
+        "label": {
+          "En": "Last Config Save Time",
+          "Fr": "Last Config Enregistrer Temps",
+          "De": "Last Config Speichern Zeit",
+          "Es": "Last Config Guardar Tiempo"
+        },
         "type": "_Label",
         "AES70": "OcaStringSensor",
         "value": "2025-08-23 21:33:40",
         "units": null
       },
       "paned_window_sash_position_percentage": {
-        "label": "Paned Window Sash Position",
+        "label": {
+          "En": "Paned Window Sash Position",
+          "Fr": "Paned Window Sash Position",
+          "De": "Paned Window Sash Position",
+          "Es": "Paned Window Sash Position"
+        },
         "type": "_sliderValue",
         "AES70": "OcaFloat32Actuator",
         "handler": "set_sash_position",
@@ -69,11 +109,21 @@
   "Debug": {
     "type": "OcaBlock",
     "AES70": "OcaDiagnosticManager",
-    "description": "A block for managing debug and logging settings.",
+    "description": {
+      "En": "A block for managing debug and logging settings.",
+      "Fr": "A block for managing debug and logging settings.",
+      "De": "A block for managing debug and logging settings.",
+      "Es": "A block for managing debug and logging settings."
+    },
     "fields": {
       "general_debug_enabled": {
         "type": "_GuiButtonToggle",
-        "label": "General Debug Enabled",
+        "label": {
+          "En": "General Debug Enabled",
+          "Fr": "General Débogage Activé",
+          "De": "General Debug Aktiviert",
+          "Es": "General Depuración Activado"
+        },
         "AES70": "OcaBooleanActuator",
         "handler": "toggle_general_debug",
         "style": {
@@ -90,18 +140,33 @@
         },
         "options": {
           "ON": {
-            "label": "ON",
+            "label": {
+              "En": "ON",
+              "Fr": "ON",
+              "De": "EIN",
+              "Es": "ENC"
+            },
             "selected": true
           },
           "OFF": {
-            "label": "OFF",
+            "label": {
+              "En": "OFF",
+              "Fr": "OFF",
+              "De": "AUS",
+              "Es": "DES"
+            },
             "selected": false
           }
         }
       },
       "debug_to_gui_console": {
         "type": "_GuiButtonToggle",
-        "label": "Debug to GUI Console",
+        "label": {
+          "En": "Debug to GUI Console",
+          "Fr": "Débogage to GUI Console",
+          "De": "Debug to GUI Konsole",
+          "Es": "Depuración to GUI Consola"
+        },
         "AES70": "OcaBooleanActuator",
         "handler": "toggle_debug_gui_console",
         "style": {
@@ -118,18 +183,33 @@
         },
         "options": {
           "ON": {
-            "label": "ON",
+            "label": {
+              "En": "ON",
+              "Fr": "ON",
+              "De": "EIN",
+              "Es": "ENC"
+            },
             "selected": true
           },
           "OFF": {
-            "label": "OFF",
+            "label": {
+              "En": "OFF",
+              "Fr": "OFF",
+              "De": "AUS",
+              "Es": "DES"
+            },
             "selected": false
           }
         }
       },
       "debug_enabled": {
         "type": "_GuiButtonToggle",
-        "label": "Debug to Terminal",
+        "label": {
+          "En": "Debug to Terminal",
+          "Fr": "Débogage vers terminal",
+          "De": "Debug an Terminal",
+          "Es": "Depuración a terminal"
+        },
         "AES70": "OcaBooleanActuator",
         "handler": "toggle_debug_terminal",
         "style": {
@@ -146,18 +226,33 @@
         },
         "options": {
           "ON": {
-            "label": "ON",
+            "label": {
+              "En": "ON",
+              "Fr": "ON",
+              "De": "EIN",
+              "Es": "ENC"
+            },
             "selected": false
           },
           "OFF": {
-            "label": "OFF",
+            "label": {
+              "En": "OFF",
+              "Fr": "OFF",
+              "De": "AUS",
+              "Es": "DES"
+            },
             "selected": true
           }
         }
       },
       "debug_to_file": {
         "type": "_GuiButtonToggle",
-        "label": "Debug to File",
+        "label": {
+          "En": "Debug to File",
+          "Fr": "Débogage to File",
+          "De": "Debug to File",
+          "Es": "Depuración to File"
+        },
         "AES70": "OcaBooleanActuator",
         "handler": "toggle_debug_file",
         "style": {
@@ -174,18 +269,33 @@
         },
         "options": {
           "ON": {
-            "label": "ON",
+            "label": {
+              "En": "ON",
+              "Fr": "ON",
+              "De": "EIN",
+              "Es": "ENC"
+            },
             "selected": true
           },
           "OFF": {
-            "label": "OFF",
+            "label": {
+              "En": "OFF",
+              "Fr": "OFF",
+              "De": "AUS",
+              "Es": "DES"
+            },
             "selected": false
           }
         }
       },
       "include_console_messages_to_debug_file": {
         "type": "_GuiButtonToggle",
-        "label": "Include Console in Debug File",
+        "label": {
+          "En": "Include Console in Debug File",
+          "Fr": "Include Console in Débogage File",
+          "De": "Include Konsole in Debug File",
+          "Es": "Include Consola in Depuración File"
+        },
         "AES70": "OcaBooleanActuator",
         "handler": "toggle_console_to_file",
         "style": {
@@ -202,18 +312,33 @@
         },
         "options": {
           "ON": {
-            "label": "ON",
+            "label": {
+              "En": "ON",
+              "Fr": "ON",
+              "De": "EIN",
+              "Es": "ENC"
+            },
             "selected": true
           },
           "OFF": {
-            "label": "OFF",
+            "label": {
+              "En": "OFF",
+              "Fr": "OFF",
+              "De": "AUS",
+              "Es": "DES"
+            },
             "selected": false
           }
         }
       },
       "#log_visa_commands_enabled": {
         "type": "_GuiButtonToggle",
-        "label": "Log VISA Commands",
+        "label": {
+          "En": "Log VISA Commands",
+          "Fr": "Journaliser les commandes VISA",
+          "De": "VISA-Befehle protokollieren",
+          "Es": "Registrar comandos VISA"
+        },
         "AES70": "OcaBooleanActuator",
         "handler": "toggle_visa_logging",
         "style": {
@@ -230,18 +355,33 @@
         },
         "options": {
           "ON": {
-            "label": "ON",
+            "label": {
+              "En": "ON",
+              "Fr": "ON",
+              "De": "EIN",
+              "Es": "ENC"
+            },
             "selected": false
           },
           "OFF": {
-            "label": "OFF",
+            "label": {
+              "En": "OFF",
+              "Fr": "OFF",
+              "De": "AUS",
+              "Es": "DES"
+            },
             "selected": true
           }
         }
       },
       "log_truncation_enabled": {
         "type": "_GuiButtonToggle",
-        "label": "Log Truncation",
+        "label": {
+          "En": "Log Truncation",
+          "Fr": "Log Truncation",
+          "De": "Log Truncation",
+          "Es": "Log Truncation"
+        },
         "AES70": "OcaBooleanActuator",
         "handler": "toggle_log_truncation",
         "style": {
@@ -258,18 +398,33 @@
         },
         "options": {
           "ON": {
-            "label": "ON",
+            "label": {
+              "En": "ON",
+              "Fr": "ON",
+              "De": "EIN",
+              "Es": "ENC"
+            },
             "selected": true
           },
           "OFF": {
-            "label": "OFF",
+            "label": {
+              "En": "OFF",
+              "Fr": "OFF",
+              "De": "AUS",
+              "Es": "DES"
+            },
             "selected": false
           }
         }
       },
       "include_visa_messages_to_debug_file": {
         "type": "_GuiButtonToggle",
-        "label": "Include VISA in Debug File",
+        "label": {
+          "En": "Include VISA in Debug File",
+          "Fr": "Include VISA in Débogage File",
+          "De": "Include VISA in Debug File",
+          "Es": "Include VISA in Depuración File"
+        },
         "AES70": "OcaBooleanActuator",
         "handler": "toggle_visa_to_file",
         "style": {
@@ -286,11 +441,21 @@
         },
         "options": {
           "ON": {
-            "label": "ON",
+            "label": {
+              "En": "ON",
+              "Fr": "ON",
+              "De": "EIN",
+              "Es": "ENC"
+            },
             "selected": true
           },
           "OFF": {
-            "label": "OFF",
+            "label": {
+              "En": "OFF",
+              "Fr": "OFF",
+              "De": "AUS",
+              "Es": "DES"
+            },
             "selected": false
           }
         }

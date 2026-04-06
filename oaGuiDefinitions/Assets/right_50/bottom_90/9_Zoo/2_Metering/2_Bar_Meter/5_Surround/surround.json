@@ -13,12 +13,22 @@
     "blocks": {
       "Surround_Monitoring_Station": {
         "type": "OcaBlock",
-        "description": "Stereo and Surround Monitoring",
+        "description": {
+          "En": "Stereo and Surround Monitoring",
+          "Fr": "Stereo and Surround Monitoring",
+          "De": "Stereo and Surround Monitoring",
+          "Es": "Stereo and Surround Monitoring"
+        },
         "layout_columns": 1,
         "fields": {
           "Surround_5_1_Vert": {
             "type": "OcaBlock",
-            "label_active": "5.1 Surround (Vertical + Scale)",
+            "label_active": {
+              "En": "5.1 Surround (Vertical + Scale)",
+              "Fr": "5.1 Surround (Vertical + Scale)",
+              "De": "5.1 Surround (Vertical + Scale)",
+              "Es": "5.1 Surround (Vertical + Scale)"
+            },
             "layout_columns": 6,
             "column_sizing": [
               {
@@ -43,7 +53,12 @@
             "fields": {
               "L": {
                 "type": "_SmartMeter",
-                "label": "L",
+                "label": {
+                  "En": "L",
+                  "Fr": "L",
+                  "De": "L",
+                  "Es": "L"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top",
@@ -99,7 +114,12 @@
               },
               "C": {
                 "type": "_SmartMeter",
-                "label": "C",
+                "label": {
+                  "En": "C",
+                  "Fr": "C",
+                  "De": "C",
+                  "Es": "C"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top",
@@ -154,7 +174,12 @@
               },
               "R": {
                 "type": "_SmartMeter",
-                "label": "R",
+                "label": {
+                  "En": "R",
+                  "Fr": "R",
+                  "De": "R",
+                  "Es": "R"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top",
@@ -210,7 +235,12 @@
               },
               "Ls": {
                 "type": "_SmartMeter",
-                "label": "Ls",
+                "label": {
+                  "En": "Ls",
+                  "Fr": "Ls",
+                  "De": "Ls",
+                  "Es": "Ls"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top",
@@ -265,7 +295,12 @@
               },
               "Rs": {
                 "type": "_SmartMeter",
-                "label": "Rs",
+                "label": {
+                  "En": "Rs",
+                  "Fr": "Rs",
+                  "De": "Rs",
+                  "Es": "Rs"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top",
@@ -320,7 +355,12 @@
               },
               "LFE": {
                 "type": "_SmartMeter",
-                "label": "LFE",
+                "label": {
+                  "En": "LFE",
+                  "Fr": "LFE",
+                  "De": "LFE",
+                  "Es": "LFE"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "top",
@@ -378,12 +418,22 @@
           },
           "Surround_5_1_Horiz": {
             "type": "OcaBlock",
-            "label_active": "5.1 Surround (Horizontal + Start Labels)",
+            "label_active": {
+              "En": "5.1 Surround (Horizontal + Start Labels)",
+              "Fr": "5.1 Surround (Horizontal + Start Labels)",
+              "De": "5.1 Surround (Horizontal + Start Labels)",
+              "Es": "5.1 Surround (Horizontal + Start Labels)"
+            },
             "layout_columns": 1,
             "fields": {
               "L": {
                 "type": "_SmartMeter",
-                "label": "L",
+                "label": {
+                  "En": "L",
+                  "Fr": "L",
+                  "De": "L",
+                  "Es": "L"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "left",
@@ -440,7 +490,12 @@
               },
               "C": {
                 "type": "_SmartMeter",
-                "label": "C",
+                "label": {
+                  "En": "C",
+                  "Fr": "C",
+                  "De": "C",
+                  "Es": "C"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "left",
@@ -497,7 +552,12 @@
               },
               "R": {
                 "type": "_SmartMeter",
-                "label": "R",
+                "label": {
+                  "En": "R",
+                  "Fr": "R",
+                  "De": "R",
+                  "Es": "R"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "left",
@@ -554,7 +614,12 @@
               },
               "Ls": {
                 "type": "_SmartMeter",
-                "label": "Ls",
+                "label": {
+                  "En": "Ls",
+                  "Fr": "Ls",
+                  "De": "Ls",
+                  "Es": "Ls"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "left",
@@ -611,7 +676,12 @@
               },
               "Rs": {
                 "type": "_SmartMeter",
-                "label": "Rs",
+                "label": {
+                  "En": "Rs",
+                  "Fr": "Rs",
+                  "De": "Rs",
+                  "Es": "Rs"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "left",
@@ -668,7 +738,12 @@
               },
               "LFE": {
                 "type": "_SmartMeter",
-                "label": "LFE",
+                "label": {
+                  "En": "LFE",
+                  "Fr": "LFE",
+                  "De": "LFE",
+                  "Es": "LFE"
+                },
                 "labels": {
                   "show_label": true,
                   "label_position": "left",

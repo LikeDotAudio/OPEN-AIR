@@ -1,11 +1,21 @@
 {
   "rig": {
     "type": "OcaBlock",
-    "description": "Switching Commands",
+    "description": {
+      "En": "Switching Commands",
+      "Fr": "Switching Commands",
+      "De": "Switching Commands",
+      "Es": "Switching Commands"
+    },
     "fields": {
       "Connect_Paths": {
         "type": "OcaBlock",
-        "description": "Close Relays",
+        "description": {
+          "En": "Close Relays",
+          "Fr": "Close Relays",
+          "De": "Close Relays",
+          "Es": "Close Relays"
+        },
         "fields": {
           "Close_Channels": {
             "type": "OcaBlock",
@@ -38,9 +48,19 @@
                   "channel_list": {
                     "value": "100,101",
                     "type": "_GuiValue",
-                    "label": "Channel List",
+                    "label": {
+                      "En": "Channel List",
+                      "Fr": "Canal List",
+                      "De": "Kanal List",
+                      "Es": "Canal List"
+                    },
                     "units": "",
-                    "description": "List of channels to close"
+                    "description": {
+                      "En": "List of channels to close",
+                      "Fr": "List of channels to close",
+                      "De": "List of channels to close",
+                      "Es": "List of channels to close"
+                    }
                   }
                 }
               }
@@ -50,7 +70,12 @@
       },
       "Disconnect_Paths": {
         "type": "OcaBlock",
-        "description": "Open Relays",
+        "description": {
+          "En": "Open Relays",
+          "Fr": "Open Relays",
+          "De": "Open Relays",
+          "Es": "Open Relays"
+        },
         "fields": {
           "Open_Channels": {
             "type": "OcaBlock",
@@ -83,9 +108,19 @@
                   "channel_list": {
                     "value": "100-103",
                     "type": "_GuiValue",
-                    "label": "Channel List",
+                    "label": {
+                      "En": "Channel List",
+                      "Fr": "Canal List",
+                      "De": "Kanal List",
+                      "Es": "Canal List"
+                    },
                     "units": "",
-                    "description": "List of channels to open"
+                    "description": {
+                      "En": "List of channels to open",
+                      "Fr": "List of channels to open",
+                      "De": "List of channels to open",
+                      "Es": "List of channels to open"
+                    }
                   }
                 }
               }
@@ -95,14 +130,24 @@
       },
       "Exclusive_Switching": {
         "type": "OcaBlock",
-        "description": "Break-Before-Make",
+        "description": {
+          "En": "Break-Before-Make",
+          "Fr": "Break-Before-Make",
+          "De": "Break-Before-Make",
+          "Es": "Break-Before-Make"
+        },
         "fields": {
           "Select_Channel": {
             "type": "OcaBlock",
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
-                "description": "Opens all others in bank, then closes target.",
+                "description": {
+                  "En": "Opens all others in bank, then closes target.",
+                  "Fr": "Ouvre tous les autres dans la banque, puis ferme la cible.",
+                  "De": "Öffnet alle anderen in der Bank und schließt dann das Ziel.",
+                  "Es": "Abre todos los demás en el banco, luego cierra el objetivo."
+                },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
                   "height": 30,
@@ -129,9 +174,19 @@
                   "channel": {
                     "value": "100",
                     "type": "_GuiValue",
-                    "label": "Channel",
+                    "label": {
+                      "En": "Channel",
+                      "Fr": "Canal",
+                      "De": "Kanal",
+                      "Es": "Canal"
+                    },
                     "units": "",
-                    "description": "Target Channel"
+                    "description": {
+                      "En": "Target Channel",
+                      "Fr": "Target Canal",
+                      "De": "Target Kanal",
+                      "Es": "Target Canal"
+                    }
                   }
                 }
               }
@@ -143,14 +198,24 @@
   },
   "set": {
     "type": "OcaBlock",
-    "description": "System Reset & Control",
+    "description": {
+      "En": "System Reset & Control",
+      "Fr": "Système Réinitialiser & Contrôle",
+      "De": "System Zurücksetzen & Steuerung",
+      "Es": "Sistema Reiniciar & Control"
+    },
     "fields": {
       "System_Reset": {
         "type": "OcaBlock",
         "fields": {
           "Reset_System": {
             "type": "_GuiActuator",
-            "label_inactive": "RESET System",
+            "label_inactive": {
+              "En": "RESET System",
+              "Fr": "RESET Système",
+              "De": "RESET System",
+              "Es": "RESET Sistema"
+            },
             "AES70": "OcaBooleanActuator",
             "style": {
               "active_text_color": "#1a1a1a",
@@ -174,7 +239,12 @@
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
-                "label_inactive": "Card Reset",
+                "label_inactive": {
+                  "En": "Card Reset",
+                  "Fr": "Card Réinitialiser",
+                  "De": "Card Zurücksetzen",
+                  "Es": "Card Reiniciar"
+                },
                 "AES70": "OcaBooleanActuator",
                 "layout": {
                   "height": 30,
@@ -201,9 +271,19 @@
                   "slot": {
                     "value": "100",
                     "type": "_GuiValue",
-                    "label": "Slot",
+                    "label": {
+                      "En": "Slot",
+                      "Fr": "Slot",
+                      "De": "Slot",
+                      "Es": "Slot"
+                    },
                     "units": "",
-                    "description": "Slot to reset"
+                    "description": {
+                      "En": "Slot to reset",
+                      "Fr": "Slot to reset",
+                      "De": "Slot to reset",
+                      "Es": "Slot to reset"
+                    }
                   }
                 }
               }
@@ -211,7 +291,12 @@
           },
           "Clear_State": {
             "type": "_GuiActuator",
-            "label_inactive": "Clear (CLR)",
+            "label_inactive": {
+              "En": "Clear (CLR)",
+              "Fr": "Effacer (CLR)",
+              "De": "Löschen (CLR)",
+              "Es": "Borrar (CLR)"
+            },
             "AES70": "OcaBooleanActuator",
             "style": {
               "active_text_color": "#1a1a1a",
@@ -237,11 +322,21 @@
   "Router_YAK_3235_Commands": {
     "type": "OcaBlock",
     "id": "50.100.1.10.1.1",
-    "description": "State Queries & ID",
+    "description": {
+      "En": "State Queries & ID",
+      "Fr": "State Queries & ID",
+      "De": "State Queries & ID",
+      "Es": "State Queries & ID"
+    },
     "fields": {
       "Channel_Status": {
         "type": "OcaBlock",
-        "description": "Query specific relay state",
+        "description": {
+          "En": "Query specific relay state",
+          "Fr": "Query specific relay state",
+          "De": "Query specific relay state",
+          "Es": "Query specific relay state"
+        },
         "fields": {
           "Query_Channel_State": {
             "type": "OcaBlock",
@@ -274,9 +369,19 @@
                   "channel": {
                     "value": "100",
                     "type": "_GuiValue",
-                    "label": "Channel",
+                    "label": {
+                      "En": "Channel",
+                      "Fr": "Canal",
+                      "De": "Kanal",
+                      "Es": "Canal"
+                    },
                     "units": "",
-                    "description": "Format: esnn (e=extender, s=slot, nn=channel)"
+                    "description": {
+                      "En": "Format: esnn (e=extender, s=slot, nn=channel)",
+                      "Fr": "Format: esnn (e=extender, s=slot, nn=channel)",
+                      "De": "Format: esnn (e=extender, s=slot, nn=channel)",
+                      "Es": "Formato: esnn (e=extender, s=slot, nn=channel)"
+                    }
                   }
                 }
               },
@@ -286,7 +391,12 @@
                   "state": {
                     "value": "0=Open, 1=Closed",
                     "type": "_GuiValue",
-                    "label": "State"
+                    "label": {
+                      "En": "State",
+                      "Fr": "State",
+                      "De": "State",
+                      "Es": "State"
+                    }
                   }
                 }
               }
@@ -296,7 +406,12 @@
       },
       "System_Info": {
         "type": "OcaBlock",
-        "description": "Hardware Identification",
+        "description": {
+          "En": "Hardware Identification",
+          "Fr": "Hardware Identification",
+          "De": "Hardware Identification",
+          "Es": "Hardware Identification"
+        },
         "fields": {
           "Query_Slot_ID": {
             "type": "OcaBlock",
@@ -329,9 +444,19 @@
                   "slot": {
                     "value": "100",
                     "type": "_GuiValue",
-                    "label": "Slot",
+                    "label": {
+                      "En": "Slot",
+                      "Fr": "Slot",
+                      "De": "Slot",
+                      "Es": "Slot"
+                    },
                     "units": "",
-                    "description": "Slot Number (e.g., 100)"
+                    "description": {
+                      "En": "Slot Number (e.g., 100)",
+                      "Fr": "Slot Number (e.g., 100)",
+                      "De": "Slot Number (e.g., 100)",
+                      "Es": "Slot Number (e.g., 100)"
+                    }
                   }
                 }
               },
@@ -341,7 +466,12 @@
                   "id_string": {
                     "value": "Card ID String",
                     "type": "_GuiValue",
-                    "label": "ID String"
+                    "label": {
+                      "En": "ID String",
+                      "Fr": "Chaîne ID",
+                      "De": "ID-String",
+                      "Es": "Cadena de ID"
+                    }
                   }
                 }
               }

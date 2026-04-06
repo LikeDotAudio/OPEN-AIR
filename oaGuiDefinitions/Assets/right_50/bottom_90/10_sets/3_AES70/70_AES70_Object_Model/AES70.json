@@ -2,38 +2,68 @@
   "ControlClasses": {
     "OcaRoot": {
       "classID": "1",
-      "description": "The abstract root class from which all OCA classes derive. It offers basic functionality such as locking and generalized data access.",
+      "description": {
+        "En": "The abstract root class from which all OCA classes derive. It offers basic functionality such as locking and generalized data access.",
+        "Fr": "The abstract root class from which all OCA classes derive. It offers basic functionality such as locking and generalized data access.",
+        "De": "The abstract root class from which all OCA classes derive. It offers basic functionality such as locking and generalized data access.",
+        "Es": "The abstract root class from which all OCA classes derive. It offers basic functionality such as locking and generalized data access."
+      },
       "inheritsFrom": null,
       "properties": {
         "ClassID": {
           "name": "ClassID",
           "aes70Type": "OcaClassID",
           "access": "read-only",
-          "description": "Global unique identifier of the class."
+          "description": {
+            "En": "Global unique identifier of the class.",
+            "Fr": "Identifiant unique global de la classe.",
+            "De": "Globaler eindeutiger Bezeichner der Klasse.",
+            "Es": "Identificador único global de la clase."
+          }
         },
         "ClassVersion": {
           "name": "ClassVersion",
           "aes70Type": "OcaClassVersionNumber",
           "access": "read-only",
-          "description": "Version of the class definition."
+          "description": {
+            "En": "Version of the class definition.",
+            "Fr": "Version of the class definition.",
+            "De": "Version of the class definition.",
+            "Es": "Version of the class definition."
+          }
         },
         "ObjectNumber": {
           "name": "ObjectNumber",
           "aes70Type": "OcaONo",
           "access": "read-only",
-          "description": "Unique object number (ONo) of this instance."
+          "description": {
+            "En": "Unique object number (ONo) of this instance.",
+            "Fr": "Unique object number (ONo) of this instance.",
+            "De": "Unique object number (ONo) of this instance.",
+            "Es": "Unique object number (ONo) of this instance."
+          }
         },
         "Lockable": {
           "name": "Lockable",
           "aes70Type": "OcaBoolean",
           "access": "read-only",
-          "description": "True if the object can be locked."
+          "description": {
+            "En": "True if the object can be locked.",
+            "Fr": "True if the object can be locked.",
+            "De": "True if the object can be locked.",
+            "Es": "True if the object can be locked."
+          }
         },
         "Role": {
           "name": "Role",
           "aes70Type": "OcaString",
           "access": "read-write",
-          "description": "Text description of the object's role."
+          "description": {
+            "En": "Text description of the object's role.",
+            "Fr": "Description textuelle du rôle de l'objet.",
+            "De": "Textbeschreibung der Rolle des Objekts.",
+            "Es": "Descripción de texto de la función del objeto."
+          }
         }
       },
       "methods": {
@@ -89,38 +119,68 @@
     },
     "OcaWorker": {
       "classID": "1.1",
-      "description": "Abstract base class for classes that represent the device's application and support functions.",
+      "description": {
+        "En": "Abstract base class for classes that represent the device's application and support functions.",
+        "Fr": "Classe de base abstraite pour les classes représentant l'application de l'appareil et les fonctions de support.",
+        "De": "Abstrakte Basisklasse für Klassen, die die Geräteanwendung und Supportfunktionen darstellen.",
+        "Es": "Clase base abstracta para clases que representan la aplicación del dispositivo y las funciones de soporte."
+      },
       "inheritsFrom": "OcaRoot",
       "properties": {
         "Enabled": {
           "name": "Enabled",
           "aes70Type": "OcaBoolean",
           "access": "read-write",
-          "description": "True if the worker is enabled."
+          "description": {
+            "En": "True if the worker is enabled.",
+            "Fr": "True if the worker is enabled.",
+            "De": "True if the worker is enabled.",
+            "Es": "True if the worker is enabled."
+          }
         },
         "Ports": {
           "name": "Ports",
           "aes70Type": "OcaList<OcaPort>",
           "access": "read-only",
-          "description": "List of ports owned by the worker."
+          "description": {
+            "En": "List of ports owned by the worker.",
+            "Fr": "Liste des ports possédés par le worker.",
+            "De": "Liste der Ports im Besitz des Workers.",
+            "Es": "Lista de puertos propiedad del trabajador."
+          }
         },
         "Label": {
           "name": "Label",
           "aes70Type": "OcaString",
           "access": "read-write",
-          "description": "User-readable label."
+          "description": {
+            "En": "User-readable label.",
+            "Fr": "User-readable label.",
+            "De": "User-readable label.",
+            "Es": "User-readable label."
+          }
         },
         "Owner": {
           "name": "Owner",
           "aes70Type": "OcaONo",
           "access": "read-only",
-          "description": "Object number of the owner."
+          "description": {
+            "En": "Object number of the owner.",
+            "Fr": "Object number of the owner.",
+            "De": "Object number of the owner.",
+            "Es": "Object number of the owner."
+          }
         },
         "Latency": {
           "name": "Latency",
           "aes70Type": "OcaTimeInterval",
           "access": "read-only",
-          "description": "Processing latency."
+          "description": {
+            "En": "Processing latency.",
+            "Fr": "Latence de traitement.",
+            "De": "Verarbeitungslatenz.",
+            "Es": "Latencia de procesamiento."
+          }
         }
       },
       "methods": {
@@ -253,28 +313,48 @@
     },
     "OcaActuator": {
       "classID": "1.1.1",
-      "description": "Abstract base class for all actuators.",
+      "description": {
+        "En": "Abstract base class for all actuators.",
+        "Fr": "Classe de base abstraite pour tous les actionneurs.",
+        "De": "Abstrakte Basisklasse für alle Aktoren.",
+        "Es": "Clase base abstracta para todos los actuadores."
+      },
       "inheritsFrom": "OcaWorker",
       "properties": {},
       "methods": {}
     },
     "OcaBasicActuator": {
       "classID": "1.1.1.1",
-      "description": "Abstract base class for simple setters.",
+      "description": {
+        "En": "Abstract base class for simple setters.",
+        "Fr": "Classe de base abstraite pour les paramètres simples.",
+        "De": "Abstrakte Basisklasse für einfache Setter.",
+        "Es": "Clase base abstracta para configuradores simples."
+      },
       "inheritsFrom": "OcaActuator",
       "properties": {},
       "methods": {}
     },
     "OcaMute": {
       "classID": "1.1.1.2",
-      "description": "Signal mute.",
+      "description": {
+        "En": "Signal mute.",
+        "Fr": "Signal mute.",
+        "De": "Signal mute.",
+        "Es": "Signal mute."
+      },
       "inheritsFrom": "OcaActuator",
       "properties": {
         "State": {
           "name": "State",
           "aes70Type": "OcaMuteState",
           "access": "read-write",
-          "description": "The mute state (Muted/Unmuted)."
+          "description": {
+            "En": "The mute state (Muted/Unmuted).",
+            "Fr": "The mute state (Muted/Unmuted).",
+            "De": "The mute state (Muted/Unmuted).",
+            "Es": "The mute state (Muted/Unmuted)."
+          }
         }
       },
       "methods": {
@@ -302,14 +382,24 @@
     },
     "OcaPolarity": {
       "classID": "1.1.1.3",
-      "description": "Signal inverter.",
+      "description": {
+        "En": "Signal inverter.",
+        "Fr": "Inverseur de signal.",
+        "De": "Signalinvertierer.",
+        "Es": "Inversor de señal."
+      },
       "inheritsFrom": "OcaActuator",
       "properties": {
         "State": {
           "name": "State",
           "aes70Type": "OcaPolarityState",
           "access": "read-write",
-          "description": "The polarity state (Inverted/NonInverted)."
+          "description": {
+            "En": "The polarity state (Inverted/NonInverted).",
+            "Fr": "L'état de polarité (Inversé/Non-inversé).",
+            "De": "Der Polaritätsstatus (Invertiert/Nicht-Invertiert).",
+            "Es": "El estado de polaridad (Invertido/No invertido)."
+          }
         }
       },
       "methods": {
@@ -337,14 +427,24 @@
     },
     "OcaSwitch": {
       "classID": "1.1.1.4",
-      "description": "N-position switch.",
+      "description": {
+        "En": "N-position switch.",
+        "Fr": "N-position switch.",
+        "De": "N-position switch.",
+        "Es": "N-position switch."
+      },
       "inheritsFrom": "OcaActuator",
       "properties": {
         "Position": {
           "name": "Position",
           "aes70Type": "OcaUint16",
           "access": "read-write",
-          "description": "Current switch position."
+          "description": {
+            "En": "Current switch position.",
+            "Fr": "Courant switch position.",
+            "De": "Strom switch position.",
+            "Es": "Corriente switch position."
+          }
         }
       },
       "methods": {
@@ -382,14 +482,24 @@
     },
     "OcaGain": {
       "classID": "1.1.1.5",
-      "description": "Gain or attenuation element.",
+      "description": {
+        "En": "Gain or attenuation element.",
+        "Fr": "Gain or attenuation element.",
+        "De": "Verstärkung or attenuation element.",
+        "Es": "Ganancia or attenuation element."
+      },
       "inheritsFrom": "OcaActuator",
       "properties": {
         "Gain": {
           "name": "Gain",
           "aes70Type": "OcaDB",
           "access": "read-write",
-          "description": "The gain value in dB."
+          "description": {
+            "En": "The gain value in dB.",
+            "Fr": "The gain value in dB.",
+            "De": "The gain value in dB.",
+            "Es": "The gain value in dB."
+          }
         }
       },
       "methods": {
@@ -427,14 +537,24 @@
     },
     "OcaPanBalance": {
       "classID": "1.1.1.6",
-      "description": "Pan or Balance control.",
+      "description": {
+        "En": "Pan or Balance control.",
+        "Fr": "Pan or Balance control.",
+        "De": "Pan or Balance control.",
+        "Es": "Pan or Balance control."
+      },
       "inheritsFrom": "OcaActuator",
       "properties": {
         "Position": {
           "name": "Position",
           "aes70Type": "OcaFloat32",
           "access": "read-write",
-          "description": "Pan position (-1.0 to 1.0)."
+          "description": {
+            "En": "Pan position (-1.0 to 1.0).",
+            "Fr": "Pan position (-1.0 to 1.0).",
+            "De": "Pan position (-1.0 to 1.0).",
+            "Es": "Pan position (-1.0 to 1.0)."
+          }
         }
       },
       "methods": {
@@ -472,14 +592,24 @@
     },
     "OcaDelay": {
       "classID": "1.1.1.7",
-      "description": "Signal delay.",
+      "description": {
+        "En": "Signal delay.",
+        "Fr": "Signal delay.",
+        "De": "Signal delay.",
+        "Es": "Signal delay."
+      },
       "inheritsFrom": "OcaActuator",
       "properties": {
         "DelayTime": {
           "name": "DelayTime",
           "aes70Type": "OcaTimeInterval",
           "access": "read-write",
-          "description": "Delay time in seconds."
+          "description": {
+            "En": "Delay time in seconds.",
+            "Fr": "Temps de délai en secondes.",
+            "De": "Verzögerungszeit in Sekunden.",
+            "Es": "Tiempo de retraso en segundos."
+          }
         }
       },
       "methods": {
@@ -517,28 +647,48 @@
     },
     "OcaDelayExtended": {
       "classID": "1.1.1.7.1",
-      "description": "Extended signal delay with units.",
+      "description": {
+        "En": "Extended signal delay with units.",
+        "Fr": "Extended signal delay with units.",
+        "De": "Extended signal delay with units.",
+        "Es": "Extended signal delay with units."
+      },
       "inheritsFrom": "OcaDelay",
       "properties": {
         "DelayValue": {
           "name": "DelayValue",
           "aes70Type": "OcaDelayValue",
           "access": "read-write",
-          "description": "Delay value with units."
+          "description": {
+            "En": "Delay value with units.",
+            "Fr": "Delay value with units.",
+            "De": "Delay value with units.",
+            "Es": "Delay value with units."
+          }
         }
       },
       "methods": {}
     },
     "OcaFrequencyActuator": {
       "classID": "1.1.1.8",
-      "description": "Frequency actuator.",
+      "description": {
+        "En": "Frequency actuator.",
+        "Fr": "Fréquence actuator.",
+        "De": "Frequenz actuator.",
+        "Es": "Frecuencia actuator."
+      },
       "inheritsFrom": "OcaActuator",
       "properties": {
         "Frequency": {
           "name": "Frequency",
           "aes70Type": "OcaFrequency",
           "access": "read-write",
-          "description": "Frequency in Hz."
+          "description": {
+            "En": "Frequency in Hz.",
+            "Fr": "Fréquence in Hz.",
+            "De": "Frequenz in Hz.",
+            "Es": "Frecuencia in Hz."
+          }
         }
       },
       "methods": {
@@ -576,7 +726,12 @@
     },
     "OcaFilterParametric": {
       "classID": "1.1.1.10",
-      "description": "Parametric Equalizer.",
+      "description": {
+        "En": "Parametric Equalizer.",
+        "Fr": "Parametric Equalizer.",
+        "De": "Parametric Equalizer.",
+        "Es": "Parametric Equalizer."
+      },
       "inheritsFrom": "OcaActuator",
       "properties": {
         "Frequency": {
@@ -588,7 +743,12 @@
           "name": "WidthParameter",
           "aes70Type": "OcaFloat32",
           "access": "read-write",
-          "description": "Q or Width."
+          "description": {
+            "En": "Q or Width.",
+            "Fr": "Q or Width.",
+            "De": "Q or Width.",
+            "Es": "Q or Width."
+          }
         },
         "InbandGain": {
           "name": "InbandGain",
@@ -626,14 +786,24 @@
     },
     "OcaTemperatureActuator": {
       "classID": "1.1.1.20",
-      "description": "Temperature target setting.",
+      "description": {
+        "En": "Temperature target setting.",
+        "Fr": "Temperature target setting.",
+        "De": "Temperature target setting.",
+        "Es": "Temperature target setting."
+      },
       "inheritsFrom": "OcaActuator",
       "properties": {
         "Temperature": {
           "name": "Temperature",
           "aes70Type": "OcaTemperature",
           "access": "read-write",
-          "description": "Target temperature in Celsius."
+          "description": {
+            "En": "Target temperature in Celsius.",
+            "Fr": "Target temperature in Celsius.",
+            "De": "Target temperature in Celsius.",
+            "Es": "Target temperature in Celsius."
+          }
         }
       },
       "methods": {
@@ -671,7 +841,12 @@
     },
     "OcaSensor": {
       "classID": "1.1.2",
-      "description": "Abstract base class for all sensors.",
+      "description": {
+        "En": "Abstract base class for all sensors.",
+        "Fr": "Abstract base class for all sensors.",
+        "De": "Abstract base class for all sensors.",
+        "Es": "Abstract base class for all sensors."
+      },
       "inheritsFrom": "OcaWorker",
       "properties": {
         "ReadingState": {
@@ -695,7 +870,12 @@
     },
     "OcaLevelSensor": {
       "classID": "1.1.2.2",
-      "description": "Level sensor.",
+      "description": {
+        "En": "Level sensor.",
+        "Fr": "Niveau sensor.",
+        "De": "Pegel sensor.",
+        "Es": "Nivel sensor."
+      },
       "inheritsFrom": "OcaSensor",
       "properties": {
         "Reading": {
@@ -729,14 +909,24 @@
     },
     "OcaTemperatureSensor": {
       "classID": "1.1.2.8",
-      "description": "Temperature sensor.",
+      "description": {
+        "En": "Temperature sensor.",
+        "Fr": "Capteur de température.",
+        "De": "Temperatursensor.",
+        "Es": "Sensor de temperatura."
+      },
       "inheritsFrom": "OcaSensor",
       "properties": {
         "Reading": {
           "name": "Reading",
           "aes70Type": "OcaTemperature",
           "access": "read-only",
-          "description": "Temperature reading in Celsius."
+          "description": {
+            "En": "Temperature reading in Celsius.",
+            "Fr": "Temperature reading in Celsius.",
+            "De": "Temperature reading in Celsius.",
+            "Es": "Temperature reading in Celsius."
+          }
         }
       },
       "methods": {
@@ -754,14 +944,24 @@
     },
     "OcaFrequencySensor": {
       "classID": "1.1.2.5",
-      "description": "Frequency sensor.",
+      "description": {
+        "En": "Frequency sensor.",
+        "Fr": "Fréquence sensor.",
+        "De": "Frequenz sensor.",
+        "Es": "Frecuencia sensor."
+      },
       "inheritsFrom": "OcaSensor",
       "properties": {
         "Reading": {
           "name": "Reading",
           "aes70Type": "OcaFrequency",
           "access": "read-only",
-          "description": "Frequency reading in Hz."
+          "description": {
+            "En": "Frequency reading in Hz.",
+            "Fr": "Lecture de fréquence en Hz.",
+            "De": "Frequenzanzeige in Hz.",
+            "Es": "Lectura de frecuencia en Hz."
+          }
         }
       },
       "methods": {
@@ -779,14 +979,24 @@
     },
     "OcaVoltageSensor": {
       "classID": "1.1.2.4",
-      "description": "Voltage sensor.",
+      "description": {
+        "En": "Voltage sensor.",
+        "Fr": "Capteur de tension.",
+        "De": "Spannungssensor.",
+        "Es": "Sensor de voltaje."
+      },
       "inheritsFrom": "OcaSensor",
       "properties": {
         "Reading": {
           "name": "Reading",
           "aes70Type": "OcaVoltage",
           "access": "read-only",
-          "description": "Voltage reading in Volts."
+          "description": {
+            "En": "Voltage reading in Volts.",
+            "Fr": "Lecture de tension en Volts.",
+            "De": "Spannungsmesswert in Volt.",
+            "Es": "Lectura de voltaje en Voltios."
+          }
         }
       },
       "methods": {
@@ -804,14 +1014,24 @@
     },
     "OcaCurrentSensor": {
       "classID": "1.1.2.3",
-      "description": "Current sensor.",
+      "description": {
+        "En": "Current sensor.",
+        "Fr": "Courant sensor.",
+        "De": "Strom sensor.",
+        "Es": "Corriente sensor."
+      },
       "inheritsFrom": "OcaSensor",
       "properties": {
         "Reading": {
           "name": "Reading",
           "aes70Type": "OcaCurrent",
           "access": "read-only",
-          "description": "Current reading in Amperes."
+          "description": {
+            "En": "Current reading in Amperes.",
+            "Fr": "Lecture actuelle en Ampères.",
+            "De": "Aktueller Messwert in Ampere.",
+            "Es": "Lectura actual en Amperios."
+          }
         }
       },
       "methods": {
@@ -829,7 +1049,12 @@
     },
     "OcaBlock": {
       "classID": "1.1.3",
-      "description": "Container object for other workers.",
+      "description": {
+        "En": "Container object for other workers.",
+        "Fr": "Container object for other workers.",
+        "De": "Container object for other workers.",
+        "Es": "Container object for other workers."
+      },
       "inheritsFrom": "OcaWorker",
       "properties": {
         "Members": {
@@ -878,7 +1103,12 @@
     },
     "OcaMatrix": {
       "classID": "1.1.5",
-      "description": "Coordinate-addressable array of objects.",
+      "description": {
+        "En": "Coordinate-addressable array of objects.",
+        "Fr": "Coordinate-addressable array of objects.",
+        "De": "Coordinate-addressable array of objects.",
+        "Es": "Coordinate-addressable array of objects."
+      },
       "inheritsFrom": "OcaWorker",
       "properties": {
         "xSize": {
@@ -927,7 +1157,12 @@
     },
     "OcaAgent": {
       "classID": "1.4",
-      "description": "Base class for agents (objects that perform control logic or housekeeping, not audio processing).",
+      "description": {
+        "En": "Base class for agents (objects that perform control logic or housekeeping, not audio processing).",
+        "Fr": "Base class for agents (objects that perform control logic or housekeeping, not audio processing).",
+        "De": "Base class for agents (objects that perform control logic or housekeeping, not audio processing).",
+        "Es": "Base class for agents (objects that perform control logic or housekeeping, not audio processing)."
+      },
       "inheritsFrom": "OcaRoot",
       "properties": {
         "Label": {
@@ -966,14 +1201,24 @@
     },
     "OcaManager": {
       "classID": "1.3",
-      "description": "Base class for managers (singletons).",
+      "description": {
+        "En": "Base class for managers (singletons).",
+        "Fr": "Base class for managers (singletons).",
+        "De": "Base class for managers (singletons).",
+        "Es": "Base class for managers (singletons)."
+      },
       "inheritsFrom": "OcaRoot",
       "properties": {},
       "methods": {}
     },
     "OcaDeviceManager": {
       "classID": "1.3.1",
-      "description": "Manages global device properties.",
+      "description": {
+        "En": "Manages global device properties.",
+        "Fr": "Manages global device properties.",
+        "De": "Manages global device properties.",
+        "Es": "Manages global device properties."
+      },
       "inheritsFrom": "OcaManager",
       "properties": {
         "DeviceName": {
@@ -1027,7 +1272,12 @@
     },
     "OcaMediaClockManager": {
       "classID": "1.3.6",
-      "description": "Manages media clocks.",
+      "description": {
+        "En": "Manages media clocks.",
+        "Fr": "Gère les horloges média.",
+        "De": "Verwaltet Media-Clocks.",
+        "Es": "Gestiona relojes de medios."
+      },
       "inheritsFrom": "OcaManager",
       "properties": {
         "Clocks": {
@@ -1040,7 +1290,12 @@
     },
     "OcaNetworkManager": {
       "classID": "1.3.5",
-      "description": "Manages networks.",
+      "description": {
+        "En": "Manages networks.",
+        "Fr": "Manages networks.",
+        "De": "Manages networks.",
+        "Es": "Manages networks."
+      },
       "inheritsFrom": "OcaManager",
       "properties": {
         "Networks": {
@@ -1053,7 +1308,12 @@
     },
     "OcaSignalGenerator": {
       "classID": "1.1.1.16",
-      "description": "Signal Generator.",
+      "description": {
+        "En": "Signal Generator.",
+        "Fr": "Signal Générateur.",
+        "De": "Signal Generator.",
+        "Es": "Signal Generador."
+      },
       "inheritsFrom": "OcaActuator",
       "properties": {
         "Frequency1": {
@@ -1093,239 +1353,489 @@
   "DataTypes": {
     "OcaMuteState": {
       "type": "enum",
-      "description": "Mute state enumeration.",
+      "description": {
+        "En": "Mute state enumeration.",
+        "Fr": "Mute state enumeration.",
+        "De": "Mute state enumeration.",
+        "Es": "Mute state enumeration."
+      },
       "values": {
         "Muted": {
           "value": 1,
-          "description": "Audio is muted."
+          "description": {
+            "En": "Audio is muted.",
+            "Fr": "L'audio est coupé.",
+            "De": "Audio ist stummgeschaltet.",
+            "Es": "El audio está silenciado."
+          }
         },
         "Unmuted": {
           "value": 2,
-          "description": "Audio is unmuted."
+          "description": {
+            "En": "Audio is unmuted.",
+            "Fr": "L'audio n'est pas coupé.",
+            "De": "Audio ist nicht stummgeschaltet.",
+            "Es": "El audio no está silenciado."
+          }
         }
       }
     },
     "OcaPolarityState": {
       "type": "enum",
-      "description": "Polarity state enumeration.",
+      "description": {
+        "En": "Polarity state enumeration.",
+        "Fr": "Polarity state enumeration.",
+        "De": "Polarity state enumeration.",
+        "Es": "Polarity state enumeration."
+      },
       "values": {
         "NonInverted": {
           "value": 1,
-          "description": "Normal polarity."
+          "description": {
+            "En": "Normal polarity.",
+            "Fr": "Normal polarity.",
+            "De": "Normal polarity.",
+            "Es": "Normal polarity."
+          }
         },
         "Inverted": {
           "value": 2,
-          "description": "Inverted polarity."
+          "description": {
+            "En": "Inverted polarity.",
+            "Fr": "Polarité inversée.",
+            "De": "Invertierte Polarität.",
+            "Es": "Polaridad invertida."
+          }
         }
       }
     },
     "OcaDeviceState": {
       "type": "bitset",
-      "description": "Device state flags.",
+      "description": {
+        "En": "Device state flags.",
+        "Fr": "Device state flags.",
+        "De": "Device state flags.",
+        "Es": "Device state flags."
+      },
       "values": {
         "Operational": {
           "value": 1,
-          "description": "Device is operational."
+          "description": {
+            "En": "Device is operational.",
+            "Fr": "L'appareil est opérationnel.",
+            "De": "Gerät ist betriebsbereit.",
+            "Es": "El dispositivo está operativo."
+          }
         },
         "Disabled": {
           "value": 2,
-          "description": "Device is disabled."
+          "description": {
+            "En": "Device is disabled.",
+            "Fr": "L'appareil est désactivé.",
+            "De": "Gerät ist deaktiviert.",
+            "Es": "El dispositivo está desactivado."
+          }
         },
         "Error": {
           "value": 4,
-          "description": "Device has an error."
+          "description": {
+            "En": "Device has an error.",
+            "Fr": "Device has an error.",
+            "De": "Device has an error.",
+            "Es": "Device has an error."
+          }
         },
         "Initializing": {
           "value": 8,
-          "description": "Device is initializing."
+          "description": {
+            "En": "Device is initializing.",
+            "Fr": "Device is initializing.",
+            "De": "Device is initializing.",
+            "Es": "Device is initializing."
+          }
         },
         "Updating": {
           "value": 16,
-          "description": "Device is updating."
+          "description": {
+            "En": "Device is updating.",
+            "Fr": "Device is updating.",
+            "De": "Device is updating.",
+            "Es": "Device is updating."
+          }
         }
       }
     },
     "OcaNetworkStatus": {
       "type": "enum",
-      "description": "Network interface status.",
+      "description": {
+        "En": "Network interface status.",
+        "Fr": "Network interface status.",
+        "De": "Network interface status.",
+        "Es": "Network interface status."
+      },
       "values": {
         "Unknown": {
           "value": 0,
-          "description": "Status unknown."
+          "description": {
+            "En": "Status unknown.",
+            "Fr": "État unknown.",
+            "De": "Status unknown.",
+            "Es": "Estado unknown."
+          }
         },
         "Ready": {
           "value": 1,
-          "description": "Link is ready."
+          "description": {
+            "En": "Link is ready.",
+            "Fr": "Link is ready.",
+            "De": "Link is ready.",
+            "Es": "Link is ready."
+          }
         },
         "StartingUp": {
           "value": 2,
-          "description": "Link is starting."
+          "description": {
+            "En": "Link is starting.",
+            "Fr": "Link is starting.",
+            "De": "Link is starting.",
+            "Es": "Link is starting."
+          }
         },
         "Stopped": {
           "value": 3,
-          "description": "Link is stopped."
+          "description": {
+            "En": "Link is stopped.",
+            "Fr": "Le lien est arrêté.",
+            "De": "Verbindung ist gestoppt.",
+            "Es": "El enlace está detenido."
+          }
         }
       }
     },
     "OcaPowerState": {
       "type": "enum",
-      "description": "Power state enumeration.",
+      "description": {
+        "En": "Power state enumeration.",
+        "Fr": "Énumération de l'état de puissance.",
+        "De": "Aufzählung des Energiezustands.",
+        "Es": "Enumeración de estado de energía."
+      },
       "values": {
         "None": {
           "value": 0,
-          "description": "Unknown."
+          "description": {
+            "En": "Unknown.",
+            "Fr": "Inconnu.",
+            "De": "Unbekannt.",
+            "Es": "Desconocido."
+          }
         },
         "Working": {
           "value": 1,
-          "description": "Fully powered."
+          "description": {
+            "En": "Fully powered.",
+            "Fr": "Fully powered.",
+            "De": "Fully powered.",
+            "Es": "Fully powered."
+          }
         },
         "Standby": {
           "value": 2,
-          "description": "Standby mode."
+          "description": {
+            "En": "Standby mode.",
+            "Fr": "Standby mode.",
+            "De": "Standby mode.",
+            "Es": "Standby mode."
+          }
         },
         "Off": {
           "value": 3,
-          "description": "Powered off."
+          "description": {
+            "En": "Powered off.",
+            "Fr": "Puissanceed off.",
+            "De": "Leistunged off.",
+            "Es": "Potenciaed off."
+          }
         }
       }
     },
     "OcaLevelMeterLaw": {
       "type": "enum",
-      "description": "Level meter ballistics.",
+      "description": {
+        "En": "Level meter ballistics.",
+        "Fr": "Niveau meter ballistics.",
+        "De": "Pegel meter ballistics.",
+        "Es": "Nivel meter ballistics."
+      },
       "values": {
         "VU": {
           "value": 1,
-          "description": "Volume Units."
+          "description": {
+            "En": "Volume Units.",
+            "Fr": "Volume Unités.",
+            "De": "Lautstärke Units.",
+            "Es": "Volumen Units."
+          }
         },
         "StandardVU": {
           "value": 2,
-          "description": "Standard VU."
+          "description": {
+            "En": "Standard VU.",
+            "Fr": "Standard VU.",
+            "De": "Standard VU.",
+            "Es": "Standard VU."
+          }
         },
         "PPM1": {
           "value": 3,
-          "description": "PPM Type I."
+          "description": {
+            "En": "PPM Type I.",
+            "Fr": "PPM Type I.",
+            "De": "PPM Typ I.",
+            "Es": "PPM Tipo I."
+          }
         },
         "PPM2": {
           "value": 4,
-          "description": "PPM Type II."
+          "description": {
+            "En": "PPM Type II.",
+            "Fr": "PPM Type II.",
+            "De": "PPM Typ II.",
+            "Es": "PPM Tipo II."
+          }
         },
         "LKFS": {
           "value": 5,
-          "description": "Loudness K-weighted."
+          "description": {
+            "En": "Loudness K-weighted.",
+            "Fr": "Loudness K-weighted.",
+            "De": "Loudness K-weighted.",
+            "Es": "Loudness K-weighted."
+          }
         },
         "RMS": {
           "value": 6,
-          "description": "RMS."
+          "description": {
+            "En": "RMS.",
+            "Fr": "RMS.",
+            "De": "RMS.",
+            "Es": "RMS."
+          }
         },
         "Peak": {
           "value": 7,
-          "description": "Digital Peak."
+          "description": {
+            "En": "Digital Peak.",
+            "Fr": "Digital Crête.",
+            "De": "Digital Spitzenwert.",
+            "Es": "Digital Pico."
+          }
         }
       }
     },
     "OcaNetworkStatistics": {
       "type": "struct",
-      "description": "Network stats.",
+      "description": {
+        "En": "Network stats.",
+        "Fr": "Network stats.",
+        "De": "Network stats.",
+        "Es": "Network stats."
+      },
       "properties": {
         "rxPacketErrors": {
           "name": "rxPacketErrors",
           "type": "OcaUint32",
-          "description": "Receive errors."
+          "description": {
+            "En": "Receive errors.",
+            "Fr": "Receive errors.",
+            "De": "Receive errors.",
+            "Es": "Receive errors."
+          }
         },
         "txPacketErrors": {
           "name": "txPacketErrors",
           "type": "OcaUint32",
-          "description": "Transmit errors."
+          "description": {
+            "En": "Transmit errors.",
+            "Fr": "Transmit errors.",
+            "De": "Transmit errors.",
+            "Es": "Transmit errors."
+          }
         }
       }
     },
     "OcaPositionDescriptor": {
       "type": "struct",
-      "description": "Position coordinates.",
+      "description": {
+        "En": "Position coordinates.",
+        "Fr": "Coordonnées de position.",
+        "De": "Positionskoordinaten.",
+        "Es": "Coordenadas de posición."
+      },
       "properties": {
         "CoordinateSystem": {
           "name": "CoordinateSystem",
           "type": "OcaPositionCoordinateSystem",
-          "description": "Coordinate system ID."
+          "description": {
+            "En": "Coordinate system ID.",
+            "Fr": "Coordinate system ID.",
+            "De": "Coordinate system ID.",
+            "Es": "Coordinate system ID."
+          }
         },
         "FieldFlags": {
           "name": "FieldFlags",
           "type": "OcaPositionDescriptorFieldFlags",
-          "description": "Valid fields mask."
+          "description": {
+            "En": "Valid fields mask.",
+            "Fr": "Masque de champs valides.",
+            "De": "Maske für gültige Felder.",
+            "Es": "Máscara de campos válidos."
+          }
         },
         "Values": {
           "name": "Values",
           "type": "OcaList<OcaFloat64>",
-          "description": "Coordinate values."
+          "description": {
+            "En": "Coordinate values.",
+            "Fr": "Coordinate values.",
+            "De": "Coordinate values.",
+            "Es": "Coordinate values."
+          }
         }
       }
     },
     "OcaTaskOperationalState": {
       "type": "struct",
-      "description": "Task state.",
+      "description": {
+        "En": "Task state.",
+        "Fr": "Task state.",
+        "De": "Task state.",
+        "Es": "Task state."
+      },
       "properties": {
         "Generic": {
           "name": "Generic",
           "type": "OcaTaskGenericState",
-          "description": "Generic state."
+          "description": {
+            "En": "Generic state.",
+            "Fr": "État générique.",
+            "De": "Generischer Status.",
+            "Es": "Estado genérico."
+          }
         },
         "Details": {
           "name": "Details",
           "type": "OcaList<OcaTypedBlob>",
-          "description": "Specific details."
+          "description": {
+            "En": "Specific details.",
+            "Fr": "Specific details.",
+            "De": "Specific details.",
+            "Es": "Specific details."
+          }
         }
       }
     },
     "OcaMediaClockRate": {
       "type": "struct",
-      "description": "Media clock rate.",
+      "description": {
+        "En": "Media clock rate.",
+        "Fr": "Media clock rate.",
+        "De": "Media clock rate.",
+        "Es": "Media clock rate."
+      },
       "properties": {
         "NominalRate": {
           "name": "NominalRate",
           "type": "OcaFrequency",
-          "description": "Nominal sampling rate."
+          "description": {
+            "En": "Nominal sampling rate.",
+            "Fr": "Nominal sampling rate.",
+            "De": "Nominal sampling rate.",
+            "Es": "Nominal sampling rate."
+          }
         },
         "Pull": {
           "name": "Pull",
           "type": "OcaFloat32",
-          "description": "Pull range."
+          "description": {
+            "En": "Pull range.",
+            "Fr": "Pull range.",
+            "De": "Pull range.",
+            "Es": "Pull range."
+          }
         }
       }
     },
     "OcaTimePTP": {
       "type": "alias",
       "aliasOf": "OcaTime",
-      "description": "Represents PTP time."
+      "description": {
+        "En": "Represents PTP time.",
+        "Fr": "Représente le temps PTP.",
+        "De": "Repräsentiert die PTP-Zeit.",
+        "Es": "Representa el tiempo PTP."
+      }
     },
     "OcaTimeInterval": {
       "type": "alias",
       "aliasOf": "OcaFloat64",
-      "description": "Time interval in seconds."
+      "description": {
+        "En": "Time interval in seconds.",
+        "Fr": "Intervalle de temps en secondes.",
+        "De": "Zeitintervall in Sekunden.",
+        "Es": "Intervalo de tiempo en segundos."
+      }
     },
     "OcaTemperature": {
       "type": "alias",
       "aliasOf": "OcaFloat32",
-      "description": "Temperature in degrees Celsius."
+      "description": {
+        "En": "Temperature in degrees Celsius.",
+        "Fr": "Temperature in degrees Celsius.",
+        "De": "Temperature in degrees Celsius.",
+        "Es": "Temperature in degrees Celsius."
+      }
     },
     "OcaVoltage": {
       "type": "alias",
       "aliasOf": "OcaFloat32",
-      "description": "Voltage in Volts."
+      "description": {
+        "En": "Voltage in Volts.",
+        "Fr": "Tension en Volts.",
+        "De": "Spannung in Volt.",
+        "Es": "Voltaje en voltios."
+      }
     },
     "OcaCurrent": {
       "type": "alias",
       "aliasOf": "OcaFloat32",
-      "description": "Current in Amperes."
+      "description": {
+        "En": "Current in Amperes.",
+        "Fr": "Courant en Ampères.",
+        "De": "Strom in Ampere.",
+        "Es": "Corriente en Amperios."
+      }
     },
     "OcaFrequency": {
       "type": "alias",
       "aliasOf": "OcaFloat32",
-      "description": "Frequency in Hertz."
+      "description": {
+        "En": "Frequency in Hertz.",
+        "Fr": "Fréquence in Hertz.",
+        "De": "Frequenz in Hertz.",
+        "Es": "Frecuencia in Hertz."
+      }
     },
     "OcaDB": {
       "type": "alias",
       "aliasOf": "OcaFloat32",
-      "description": "Level in decibels."
+      "description": {
+        "En": "Level in decibels.",
+        "Fr": "Niveau in decibels.",
+        "De": "Pegel in decibels.",
+        "Es": "Nivel in decibels."
+      }
     }
   },
   "ConstructionParameters": {
@@ -1334,12 +1844,22 @@
         "Lockable": {
           "name": "Lockable",
           "type": "OcaBoolean",
-          "description": "Indicates if the object can be locked."
+          "description": {
+            "En": "Indicates if the object can be locked.",
+            "Fr": "Indicates if the object can be locked.",
+            "De": "Indicates if the object can be locked.",
+            "Es": "Indicates if the object can be locked."
+          }
         },
         "Role": {
           "name": "Role",
           "type": "OcaString",
-          "description": "Text description of the object's role."
+          "description": {
+            "En": "Text description of the object's role.",
+            "Fr": "Description textuelle du rôle de l'objet.",
+            "De": "Textbeschreibung der Rolle des Objekts.",
+            "Es": "Descripción de texto de la función del objeto."
+          }
         }
       }
     },
@@ -1348,7 +1868,12 @@
         "Ports": {
           "name": "Ports",
           "type": "OcaList<OcaPort>",
-          "description": "List of input/output ports."
+          "description": {
+            "En": "List of input/output ports.",
+            "Fr": "List of input/output ports.",
+            "De": "List of input/output ports.",
+            "Es": "List of input/output ports."
+          }
         }
       }
     },
@@ -1357,7 +1882,12 @@
         "State": {
           "name": "State",
           "type": "OcaMuteState",
-          "description": "Initial mute state."
+          "description": {
+            "En": "Initial mute state.",
+            "Fr": "Initial mute state.",
+            "De": "Initial mute state.",
+            "Es": "Initial mute state."
+          }
         }
       }
     },
@@ -1366,7 +1896,12 @@
         "State": {
           "name": "State",
           "type": "OcaPolarityState",
-          "description": "Initial polarity state."
+          "description": {
+            "En": "Initial polarity state.",
+            "Fr": "Initial polarity state.",
+            "De": "Initial polarity state.",
+            "Es": "Initial polarity state."
+          }
         }
       }
     },
@@ -1375,22 +1910,42 @@
         "minPosition": {
           "name": "minPosition",
           "type": "OcaUint16",
-          "description": "Minimum switch position index."
+          "description": {
+            "En": "Minimum switch position index.",
+            "Fr": "Minimum switch position index.",
+            "De": "Minimum switch position index.",
+            "Es": "Minimum switch position index."
+          }
         },
         "maxPosition": {
           "name": "maxPosition",
           "type": "OcaUint16",
-          "description": "Maximum switch position index."
+          "description": {
+            "En": "Maximum switch position index.",
+            "Fr": "Maximum switch position index.",
+            "De": "Maximum switch position index.",
+            "Es": "Maximum switch position index."
+          }
         },
         "PositionNames": {
           "name": "PositionNames",
           "type": "OcaList<OcaString>",
-          "description": "Names for each position."
+          "description": {
+            "En": "Names for each position.",
+            "Fr": "Noms pour chaque position.",
+            "De": "Namen für jede Position.",
+            "Es": "Nombres para cada posición."
+          }
         },
         "PositionEnableds": {
           "name": "PositionEnableds",
           "type": "OcaList<OcaBoolean>",
-          "description": "Enable state for each position."
+          "description": {
+            "En": "Enable state for each position.",
+            "Fr": "État d'activation pour chaque position.",
+            "De": "Aktivierungsstatus für jede Position.",
+            "Es": "Estado de activación para cada posición."
+          }
         }
       }
     },
@@ -1399,12 +1954,22 @@
         "minGain": {
           "name": "minGain",
           "type": "OcaDB",
-          "description": "Minimum gain."
+          "description": {
+            "En": "Minimum gain.",
+            "Fr": "Gain minimal.",
+            "De": "Minimale Verstärkung.",
+            "Es": "Ganancia mínima."
+          }
         },
         "maxGain": {
           "name": "maxGain",
           "type": "OcaDB",
-          "description": "Maximum gain."
+          "description": {
+            "En": "Maximum gain.",
+            "Fr": "Maximum gain.",
+            "De": "Maximum gain.",
+            "Es": "Maximum gain."
+          }
         }
       }
     },
@@ -1413,22 +1978,42 @@
         "minPosition": {
           "name": "minPosition",
           "type": "OcaFloat32",
-          "description": "Leftmost position."
+          "description": {
+            "En": "Leftmost position.",
+            "Fr": "Leftmost position.",
+            "De": "Leftmost position.",
+            "Es": "Leftmost position."
+          }
         },
         "maxPosition": {
           "name": "maxPosition",
           "type": "OcaFloat32",
-          "description": "Rightmost position."
+          "description": {
+            "En": "Rightmost position.",
+            "Fr": "Rightmost position.",
+            "De": "Rightmost position.",
+            "Es": "Rightmost position."
+          }
         },
         "minMidpointGain": {
           "name": "minMidpointGain",
           "type": "OcaDB",
-          "description": "Minimum midpoint gain."
+          "description": {
+            "En": "Minimum midpoint gain.",
+            "Fr": "Minimum midpoint gain.",
+            "De": "Minimum midpoint gain.",
+            "Es": "Minimum midpoint gain."
+          }
         },
         "maxMidpointGain": {
           "name": "maxMidpointGain",
           "type": "OcaDB",
-          "description": "Maximum midpoint gain."
+          "description": {
+            "En": "Maximum midpoint gain.",
+            "Fr": "Maximum midpoint gain.",
+            "De": "Maximum midpoint gain.",
+            "Es": "Maximum midpoint gain."
+          }
         }
       }
     },
@@ -1437,12 +2022,22 @@
         "minDelayTime": {
           "name": "minDelayTime",
           "type": "OcaTimeInterval",
-          "description": "Minimum delay time."
+          "description": {
+            "En": "Minimum delay time.",
+            "Fr": "Minimum delay time.",
+            "De": "Minimum delay time.",
+            "Es": "Minimum delay time."
+          }
         },
         "maxDelayTime": {
           "name": "maxDelayTime",
           "type": "OcaTimeInterval",
-          "description": "Maximum delay time."
+          "description": {
+            "En": "Maximum delay time.",
+            "Fr": "Maximum delay time.",
+            "De": "Maximum delay time.",
+            "Es": "Maximum delay time."
+          }
         }
       }
     },
@@ -1451,12 +2046,22 @@
         "minFrequency": {
           "name": "minFrequency",
           "type": "OcaFrequency",
-          "description": "Minimum frequency."
+          "description": {
+            "En": "Minimum frequency.",
+            "Fr": "Minimum frequency.",
+            "De": "Minimum frequency.",
+            "Es": "Minimum frequency."
+          }
         },
         "maxFrequency": {
           "name": "maxFrequency",
           "type": "OcaFrequency",
-          "description": "Maximum frequency."
+          "description": {
+            "En": "Maximum frequency.",
+            "Fr": "Maximum frequency.",
+            "De": "Maximum frequency.",
+            "Es": "Maximum frequency."
+          }
         }
       }
     },
@@ -1465,42 +2070,82 @@
         "minInbandGain": {
           "name": "minInbandGain",
           "type": "OcaDB",
-          "description": "Min in-band gain."
+          "description": {
+            "En": "Min in-band gain.",
+            "Fr": "Min in-band gain.",
+            "De": "Min in-band gain.",
+            "Es": "Min in-band gain."
+          }
         },
         "maxInbandGain": {
           "name": "maxInbandGain",
           "type": "OcaDB",
-          "description": "Max in-band gain."
+          "description": {
+            "En": "Max in-band gain.",
+            "Fr": "Max in-band gain.",
+            "De": "Max in-band gain.",
+            "Es": "Max in-band gain."
+          }
         },
         "minFrequency": {
           "name": "minFrequency",
           "type": "OcaFrequency",
-          "description": "Min frequency."
+          "description": {
+            "En": "Min frequency.",
+            "Fr": "Min frequency.",
+            "De": "Min frequency.",
+            "Es": "Min frequency."
+          }
         },
         "maxFrequency": {
           "name": "maxFrequency",
           "type": "OcaFrequency",
-          "description": "Max frequency."
+          "description": {
+            "En": "Max frequency.",
+            "Fr": "Max frequency.",
+            "De": "Max frequency.",
+            "Es": "Max frequency."
+          }
         },
         "minWidthParameter": {
           "name": "minWidthParameter",
           "type": "OcaFloat32",
-          "description": "Min width/Q."
+          "description": {
+            "En": "Min width/Q.",
+            "Fr": "Min width/Q.",
+            "De": "Min width/Q.",
+            "Es": "Min width/Q."
+          }
         },
         "maxWidthParameter": {
           "name": "maxWidthParameter",
           "type": "OcaFloat32",
-          "description": "Max width/Q."
+          "description": {
+            "En": "Max width/Q.",
+            "Fr": "Max width/Q.",
+            "De": "Max width/Q.",
+            "Es": "Max width/Q."
+          }
         },
         "minShapeParameter": {
           "name": "minShapeParameter",
           "type": "OcaFloat32",
-          "description": "Min shape parameter."
+          "description": {
+            "En": "Min shape parameter.",
+            "Fr": "Min shape parameter.",
+            "De": "Min shape parameter.",
+            "Es": "Min shape parameter."
+          }
         },
         "maxShapeParameter": {
           "name": "maxShapeParameter",
           "type": "OcaFloat32",
-          "description": "Max shape parameter."
+          "description": {
+            "En": "Max shape parameter.",
+            "Fr": "Paramètre de forme max.",
+            "De": "Maximaler Formparameter.",
+            "Es": "Parámetro de forma máx."
+          }
         }
       }
     },
@@ -1509,22 +2154,42 @@
         "Type": {
           "name": "Type",
           "type": "OcaONo",
-          "description": "Block type or Factory ONo."
+          "description": {
+            "En": "Block type or Factory ONo.",
+            "Fr": "Block type or Factory ONo.",
+            "De": "Block type or Factory ONo.",
+            "Es": "Block type or Factory ONo."
+          }
         },
         "Members": {
           "name": "Members",
           "type": "OcaList<OcaObjectIdentification>",
-          "description": "Initial members."
+          "description": {
+            "En": "Initial members.",
+            "Fr": "Initial members.",
+            "De": "Initial members.",
+            "Es": "Initial members."
+          }
         },
         "SignalPaths": {
           "name": "SignalPaths",
           "type": "OcaMap<OcaUint16, OcaSignalPath>",
-          "description": "Initial signal paths."
+          "description": {
+            "En": "Initial signal paths.",
+            "Fr": "Initial signal paths.",
+            "De": "Initial signal paths.",
+            "Es": "Initial signal paths."
+          }
         },
         "GlobalType": {
           "name": "GlobalType",
           "type": "OcaGlobalTypeIdentifier",
-          "description": "Global type identifier."
+          "description": {
+            "En": "Global type identifier.",
+            "Fr": "Global type identifier.",
+            "De": "Global type identifier.",
+            "Es": "Global type identifier."
+          }
         }
       }
     },
@@ -1533,22 +2198,42 @@
         "minXSize": {
           "name": "minXSize",
           "type": "OcaMatrixCoordinate",
-          "description": "Min columns."
+          "description": {
+            "En": "Min columns.",
+            "Fr": "Colonnes min.",
+            "De": "Min. Spalten.",
+            "Es": "Columnas mín."
+          }
         },
         "maxXSize": {
           "name": "maxXSize",
           "type": "OcaMatrixCoordinate",
-          "description": "Max columns."
+          "description": {
+            "En": "Max columns.",
+            "Fr": "Max columns.",
+            "De": "Max columns.",
+            "Es": "Max columns."
+          }
         },
         "minYSize": {
           "name": "minYSize",
           "type": "OcaMatrixCoordinate",
-          "description": "Min rows."
+          "description": {
+            "En": "Min rows.",
+            "Fr": "Min rows.",
+            "De": "Min rows.",
+            "Es": "Min rows."
+          }
         },
         "maxYSize": {
           "name": "maxYSize",
           "type": "OcaMatrixCoordinate",
-          "description": "Max rows."
+          "description": {
+            "En": "Max rows.",
+            "Fr": "Max rows.",
+            "De": "Max rows.",
+            "Es": "Max rows."
+          }
         }
       }
     },
@@ -1557,22 +2242,42 @@
         "LinkType": {
           "name": "LinkType",
           "type": "OcaNetworkLinkType",
-          "description": "Link type."
+          "description": {
+            "En": "Link type.",
+            "Fr": "Type de lien.",
+            "De": "Linktyp.",
+            "Es": "Tipo de enlace."
+          }
         },
         "IDAdvertised": {
           "name": "IDAdvertised",
           "type": "OcaNetworkNodeID",
-          "description": "Advertised ID."
+          "description": {
+            "En": "Advertised ID.",
+            "Fr": "Advertised ID.",
+            "De": "Advertised ID.",
+            "Es": "Advertised ID."
+          }
         },
         "ControlProtocol": {
           "name": "ControlProtocol",
           "type": "OcaNetworkControlProtocol",
-          "description": "Control protocol."
+          "description": {
+            "En": "Control protocol.",
+            "Fr": "Contrôle protocol.",
+            "De": "Steuerung protocol.",
+            "Es": "Control protocol."
+          }
         },
         "MediaProtocol": {
           "name": "MediaProtocol",
           "type": "OcaNetworkMediaProtocol",
-          "description": "Media protocol."
+          "description": {
+            "En": "Media protocol.",
+            "Fr": "Media protocol.",
+            "De": "Media protocol.",
+            "Es": "Media protocol."
+          }
         }
       }
     },
@@ -1581,22 +2286,42 @@
         "OwnerNetwork": {
           "name": "OwnerNetwork",
           "type": "OcaONo",
-          "description": "Owning network ONo."
+          "description": {
+            "En": "Owning network ONo.",
+            "Fr": "Owning network ONo.",
+            "De": "Owning network ONo.",
+            "Es": "Owning network ONo."
+          }
         },
         "IDAdvertised": {
           "name": "IDAdvertised",
           "type": "OcaStreamConnectorID",
-          "description": "Advertised ID."
+          "description": {
+            "En": "Advertised ID.",
+            "Fr": "Advertised ID.",
+            "De": "Advertised ID.",
+            "Es": "Advertised ID."
+          }
         },
         "SourceOrSink": {
           "name": "SourceOrSink",
           "type": "OcaNetworkMediaSourceOrSink",
-          "description": "Direction (Source/Sink)."
+          "description": {
+            "En": "Direction (Source/Sink).",
+            "Fr": "Direction (Source/Sink).",
+            "De": "Direction (Source/Sink).",
+            "Es": "Direction (Source/Sink)."
+          }
         },
         "PinCount": {
           "name": "PinCount",
           "type": "OcaUint16",
-          "description": "Number of pins."
+          "description": {
+            "En": "Number of pins.",
+            "Fr": "Number of pins.",
+            "De": "Number of pins.",
+            "Es": "Number of pins."
+          }
         }
       }
     },
@@ -1605,22 +2330,42 @@
         "minFrequency1": {
           "name": "minFrequency1",
           "type": "OcaFrequency",
-          "description": "Min center/start frequency."
+          "description": {
+            "En": "Min center/start frequency.",
+            "Fr": "Min center/start frequency.",
+            "De": "Min center/start frequency.",
+            "Es": "Min center/start frequency."
+          }
         },
         "maxFrequency1": {
           "name": "maxFrequency1",
           "type": "OcaFrequency",
-          "description": "Max center/start frequency."
+          "description": {
+            "En": "Max center/start frequency.",
+            "Fr": "Max center/start frequency.",
+            "De": "Max center/start frequency.",
+            "Es": "Max center/start frequency."
+          }
         },
         "minLevel": {
           "name": "minLevel",
           "type": "OcaDBz",
-          "description": "Min output level."
+          "description": {
+            "En": "Min output level.",
+            "Fr": "Niveau de sortie min.",
+            "De": "Min. Ausgangspegel.",
+            "Es": "Nivel de salida mín."
+          }
         },
         "maxLevel": {
           "name": "maxLevel",
           "type": "OcaDBz",
-          "description": "Max output level."
+          "description": {
+            "En": "Max output level.",
+            "Fr": "Max output level.",
+            "De": "Max output level.",
+            "Es": "Max output level."
+          }
         }
       }
     },
@@ -1629,12 +2374,22 @@
         "minRefLevel": {
           "name": "minRefLevel",
           "type": "OcaDB",
-          "description": "Min reference level."
+          "description": {
+            "En": "Min reference level.",
+            "Fr": "Min reference level.",
+            "De": "Min reference level.",
+            "Es": "Min reference level."
+          }
         },
         "maxRefLevel": {
           "name": "maxRefLevel",
           "type": "OcaDB",
-          "description": "Max reference level."
+          "description": {
+            "En": "Max reference level.",
+            "Fr": "Niveau de référence max.",
+            "De": "Maximaler Referenzpegel.",
+            "Es": "Nivel de referencia máx."
+          }
         }
       }
     },
@@ -1643,7 +2398,12 @@
         "defaultLaw": {
           "name": "defaultLaw",
           "type": "OcaLevelMeterLaw",
-          "description": "Default meter law."
+          "description": {
+            "En": "Default meter law.",
+            "Fr": "Défaut meter law.",
+            "De": "Standard meter law.",
+            "Es": "Predeterminado meter law."
+          }
         }
       }
     },
@@ -1652,12 +2412,22 @@
         "minReading": {
           "name": "minReading",
           "type": "OcaCurrent",
-          "description": "Minimum reading."
+          "description": {
+            "En": "Minimum reading.",
+            "Fr": "Minimum reading.",
+            "De": "Minimum reading.",
+            "Es": "Minimum reading."
+          }
         },
         "maxReading": {
           "name": "maxReading",
           "type": "OcaCurrent",
-          "description": "Maximum reading."
+          "description": {
+            "En": "Maximum reading.",
+            "Fr": "Lecture maximale.",
+            "De": "Maximalwert.",
+            "Es": "Lectura máxima."
+          }
         }
       }
     },
@@ -1666,12 +2436,22 @@
         "minReading": {
           "name": "minReading",
           "type": "OcaVoltage",
-          "description": "Minimum reading."
+          "description": {
+            "En": "Minimum reading.",
+            "Fr": "Minimum reading.",
+            "De": "Minimum reading.",
+            "Es": "Minimum reading."
+          }
         },
         "maxReading": {
           "name": "maxReading",
           "type": "OcaVoltage",
-          "description": "Maximum reading."
+          "description": {
+            "En": "Maximum reading.",
+            "Fr": "Lecture maximale.",
+            "De": "Maximalwert.",
+            "Es": "Lectura máxima."
+          }
         }
       }
     },
@@ -1680,12 +2460,22 @@
         "minReading": {
           "name": "minReading",
           "type": "OcaTemperature",
-          "description": "Minimum reading."
+          "description": {
+            "En": "Minimum reading.",
+            "Fr": "Minimum reading.",
+            "De": "Minimum reading.",
+            "Es": "Minimum reading."
+          }
         },
         "maxReading": {
           "name": "maxReading",
           "type": "OcaTemperature",
-          "description": "Maximum reading."
+          "description": {
+            "En": "Maximum reading.",
+            "Fr": "Lecture maximale.",
+            "De": "Maximalwert.",
+            "Es": "Lectura máxima."
+          }
         }
       }
     },
@@ -1694,12 +2484,22 @@
         "minReading": {
           "name": "minReading",
           "type": "OcaFrequency",
-          "description": "Minimum reading."
+          "description": {
+            "En": "Minimum reading.",
+            "Fr": "Minimum reading.",
+            "De": "Minimum reading.",
+            "Es": "Minimum reading."
+          }
         },
         "maxReading": {
           "name": "maxReading",
           "type": "OcaFrequency",
-          "description": "Maximum reading."
+          "description": {
+            "En": "Maximum reading.",
+            "Fr": "Lecture maximale.",
+            "De": "Maximalwert.",
+            "Es": "Lectura máxima."
+          }
         }
       }
     },
@@ -1708,22 +2508,42 @@
         "ActuatorOrSensor": {
           "name": "ActuatorOrSensor",
           "type": "OcaBoolean",
-          "description": "True for Actuator, False for Sensor."
+          "description": {
+            "En": "True for Actuator, False for Sensor.",
+            "Fr": "True for Actuator, False for Sensor.",
+            "De": "True for Actuator, False for Sensor.",
+            "Es": "True for Actuator, False for Sensor."
+          }
         },
         "Mode": {
           "name": "Mode",
           "type": "OcaGrouperMode",
-          "description": "MasterSlave or PeerToPeer."
+          "description": {
+            "En": "MasterSlave or PeerToPeer.",
+            "Fr": "MasterSlave or PeerToPeer.",
+            "De": "MasterSlave or PeerToPeer.",
+            "Es": "MasterSlave or PeerToPeer."
+          }
         },
         "maxGroupCount": {
           "name": "maxGroupCount",
           "type": "OcaUint16",
-          "description": "Max groups."
+          "description": {
+            "En": "Max groups.",
+            "Fr": "Max groups.",
+            "De": "Max groups.",
+            "Es": "Max groups."
+          }
         },
         "maxCitizenCount": {
           "name": "maxCitizenCount",
           "type": "OcaUint16",
-          "description": "Max citizens."
+          "description": {
+            "En": "Max citizens.",
+            "Fr": "Max citizens.",
+            "De": "Max citizens.",
+            "Es": "Max citizens."
+          }
         }
       }
     },
@@ -1732,17 +2552,32 @@
         "minDuration": {
           "name": "minDuration",
           "type": "OcaTimeInterval",
-          "description": "Min ramp duration."
+          "description": {
+            "En": "Min ramp duration.",
+            "Fr": "Min ramp duration.",
+            "De": "Min ramp duration.",
+            "Es": "Min ramp duration."
+          }
         },
         "maxDuration": {
           "name": "maxDuration",
           "type": "OcaTimeInterval",
-          "description": "Max ramp duration."
+          "description": {
+            "En": "Max ramp duration.",
+            "Fr": "Max ramp duration.",
+            "De": "Max ramp duration.",
+            "Es": "Max ramp duration."
+          }
         },
         "rampedProperty": {
           "name": "rampedProperty",
           "type": "OcaProperty",
-          "description": "The property being ramped."
+          "description": {
+            "En": "The property being ramped.",
+            "Fr": "La propriété en cours de rampe.",
+            "De": "Die Eigenschaft, die hochgefahren wird.",
+            "Es": "La propiedad que se está incrementando."
+          }
         }
       }
     },
@@ -1751,27 +2586,52 @@
         "Availability": {
           "name": "Availability",
           "type": "OcaMediaClockAvailability",
-          "description": "Availability state."
+          "description": {
+            "En": "Availability state.",
+            "Fr": "Availability state.",
+            "De": "Availability state.",
+            "Es": "Availability state."
+          }
         },
         "TimeSourceONo": {
           "name": "TimeSourceONo",
           "type": "OcaONo",
-          "description": "Object Number of the driving time source."
+          "description": {
+            "En": "Object Number of the driving time source.",
+            "Fr": "Object Number of the driving time source.",
+            "De": "Object Number of the driving time source.",
+            "Es": "Object Number of the driving time source."
+          }
         },
         "Offset": {
           "name": "Offset",
           "type": "OcaTimePTP",
-          "description": "Offset from reference time."
+          "description": {
+            "En": "Offset from reference time.",
+            "Fr": "Décalage from reference time.",
+            "De": "Versatz from reference time.",
+            "Es": "Compensación from reference time."
+          }
         },
         "CurrentRate": {
           "name": "CurrentRate",
           "type": "OcaMediaClockRate",
-          "description": "Current clock rate."
+          "description": {
+            "En": "Current clock rate.",
+            "Fr": "Courant clock rate.",
+            "De": "Strom clock rate.",
+            "Es": "Corriente clock rate."
+          }
         },
         "SupportedRates": {
           "name": "SupportedRates",
           "type": "OcaMap<OcaONo, OcaList<OcaMediaClockRate>>",
-          "description": "Map of supported rates per time source."
+          "description": {
+            "En": "Map of supported rates per time source.",
+            "Fr": "Carte des taux supportés par source de temps.",
+            "De": "Karte der unterstützten Raten pro Zeitquelle.",
+            "Es": "Mapa de tasas admitidas por fuente de tiempo."
+          }
         }
       }
     },
@@ -1780,12 +2640,22 @@
         "minTemperature": {
           "name": "minTemperature",
           "type": "OcaTemperature",
-          "description": "Minimum temperature."
+          "description": {
+            "En": "Minimum temperature.",
+            "Fr": "Minimum temperature.",
+            "De": "Minimum temperature.",
+            "Es": "Minimum temperature."
+          }
         },
         "maxTemperature": {
           "name": "maxTemperature",
           "type": "OcaTemperature",
-          "description": "Maximum temperature."
+          "description": {
+            "En": "Maximum temperature.",
+            "Fr": "Maximum temperature.",
+            "De": "Maximum temperature.",
+            "Es": "Maximum temperature."
+          }
         }
       }
     }

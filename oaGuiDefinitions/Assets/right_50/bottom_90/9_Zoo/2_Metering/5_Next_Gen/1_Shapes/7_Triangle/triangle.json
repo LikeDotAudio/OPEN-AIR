@@ -13,7 +13,12 @@
     "blocks": {
       "Triangle_Variations": {
         "type": "OcaBlock",
-        "description": "Triangle (Point Down) Meter Variations",
+        "description": {
+          "En": "Triangle (Point Down) Meter Variations",
+          "Fr": "Triangle (Point Down) Meter Variations",
+          "De": "Triangle (Point Down) Meter Variationen",
+          "Es": "Triangle (Point Down) Meter Variaciones"
+        },
         "layout_columns": 3,
         "column_sizing": [
           {
@@ -29,7 +34,12 @@
         "fields": {
           "Triangle_1_Large": {
             "type": "_NeedleVUMeter",
-            "label": "Triangle Large",
+            "label": {
+              "En": "Triangle Large",
+              "Fr": "Triangle Large",
+              "De": "Triangle Large",
+              "Es": "Triangle Large"
+            },
             "geometry": {
               "width": 300,
               "height": 350
@@ -55,7 +65,12 @@
               },
               "labels": [
                 {
-                  "text": "TRIANGLE INSTRUMENTS",
+                  "text": {
+                    "En": "TRIANGLE INSTRUMENTS",
+                    "Fr": "TRIANGLE INSTRUMENTS",
+                    "De": "TRIANGLE INSTRUMENTS",
+                    "Es": "TRIANGLE INSTRUMENTS"
+                  },
                   "x": 0,
                   "y": -220,
                   "size": 14,
@@ -76,7 +91,12 @@
           },
           "Triangle_2_Medium": {
             "type": "_NeedleVUMeter",
-            "label": "Triangle Medium",
+            "label": {
+              "En": "Triangle Medium",
+              "Fr": "Triangle Moyen",
+              "De": "Triangle Mittel",
+              "Es": "Triangle Medio"
+            },
             "geometry": {
               "width": 220,
               "height": 300
@@ -101,7 +121,12 @@
               },
               "labels": [
                 {
-                  "text": "SILVER-TRI",
+                  "text": {
+                    "En": "SILVER-TRI",
+                    "Fr": "SILVER-TRI",
+                    "De": "SILVER-TRI",
+                    "Es": "SILVER-TRI"
+                  },
                   "x": 0,
                   "y": -160,
                   "size": 10,
@@ -112,7 +137,12 @@
           },
           "Triangle_3_Small": {
             "type": "_NeedleVUMeter",
-            "label": "Triangle Small",
+            "label": {
+              "En": "Triangle Small",
+              "Fr": "Triangle Small",
+              "De": "Triangle Small",
+              "Es": "Triangle Small"
+            },
             "geometry": {
               "width": 150,
               "height": 220
@@ -142,7 +172,12 @@
               },
               "labels": [
                 {
-                  "text": "MINI-T",
+                  "text": {
+                    "En": "MINI-T",
+                    "Fr": "MINI-T",
+                    "De": "MINI-T",
+                    "Es": "MINI-T"
+                  },
                   "x": 0,
                   "y": -190,
                   "size": 8
@@ -152,7 +187,12 @@
           },
           "Triangle_4_Hazard": {
             "type": "_NeedleVUMeter",
-            "label": "Hazard Triangle",
+            "label": {
+              "En": "Hazard Triangle",
+              "Fr": "Hazard Triangle",
+              "De": "Hazard Triangle",
+              "Es": "Hazard Triangle"
+            },
             "geometry": {
               "width": 220,
               "height": 300
@@ -178,7 +218,12 @@
               },
               "labels": [
                 {
-                  "text": "CAUTION: HIGH LEVEL",
+                  "text": {
+                    "En": "CAUTION: HIGH LEVEL",
+                    "Fr": "CAUTION: HIGH LEVEL",
+                    "De": "CAUTION: HIGH LEVEL",
+                    "Es": "CAUTION: HIGH LEVEL"
+                  },
                   "x": 0,
                   "y": -165,
                   "size": 10,
@@ -189,7 +234,12 @@
           },
           "Triangle_5_Ice": {
             "type": "_NeedleVUMeter",
-            "label": "Ice Triangle",
+            "label": {
+              "En": "Ice Triangle",
+              "Fr": "Ice Triangle",
+              "De": "Ice Triangle",
+              "Es": "Ice Triangle"
+            },
             "geometry": {
               "width": 220,
               "height": 300
@@ -215,7 +265,12 @@
               },
               "labels": [
                 {
-                  "text": "ICE-CORE VU",
+                  "text": {
+                    "En": "ICE-CORE VU",
+                    "Fr": "ICE-CORE VU",
+                    "De": "ICE-CORE VU",
+                    "Es": "ICE-CORE VU"
+                  },
                   "x": 0,
                   "y": -160,
                   "size": 10,
@@ -227,7 +282,12 @@
           },
           "Triangle_6_Forest": {
             "type": "_NeedleVUMeter",
-            "label": "Forest Triangle",
+            "label": {
+              "En": "Forest Triangle",
+              "Fr": "Forest Triangle",
+              "De": "Forest Triangle",
+              "Es": "Forest Triangle"
+            },
             "geometry": {
               "width": 220,
               "height": 300
@@ -253,7 +313,12 @@
               },
               "labels": [
                 {
-                  "text": "FOREST ANALOG",
+                  "text": {
+                    "En": "FOREST ANALOG",
+                    "Fr": "FOREST ANALOG",
+                    "De": "FOREST ANALOG",
+                    "Es": "FOREST ANALOG"
+                  },
                   "x": 0,
                   "y": -160,
                   "size": 10,
@@ -264,7 +329,12 @@
           },
           "Triangle_7_Neon": {
             "type": "_NeedleVUMeter",
-            "label": "Neon Triangle",
+            "label": {
+              "En": "Neon Triangle",
+              "Fr": "Neon Triangle",
+              "De": "Neon Triangle",
+              "Es": "Neon Triangle"
+            },
             "geometry": {
               "width": 220,
               "height": 300
@@ -290,7 +360,12 @@
               },
               "labels": [
                 {
-                  "text": "NEON-TRI",
+                  "text": {
+                    "En": "NEON-TRI",
+                    "Fr": "NEON-TRI",
+                    "De": "NEON-TRI",
+                    "Es": "NEON-TRI"
+                  },
                   "x": 0,
                   "y": -165,
                   "size": 12,
@@ -302,7 +377,12 @@
           },
           "Triangle_8_Slate": {
             "type": "_NeedleVUMeter",
-            "label": "Slate Triangle",
+            "label": {
+              "En": "Slate Triangle",
+              "Fr": "Slate Triangle",
+              "De": "Slate Triangle",
+              "Es": "Slate Triangle"
+            },
             "geometry": {
               "width": 220,
               "height": 300
@@ -328,7 +408,12 @@
               },
               "labels": [
                 {
-                  "text": "SLATE PRECISION",
+                  "text": {
+                    "En": "SLATE PRECISION",
+                    "Fr": "SLATE PRECISION",
+                    "De": "SLATE PRECISION",
+                    "Es": "SLATE PRECISION"
+                  },
                   "x": 0,
                   "y": -160,
                   "size": 10
@@ -338,7 +423,12 @@
           },
           "Triangle_9_Fire": {
             "type": "_NeedleVUMeter",
-            "label": "Fire Triangle",
+            "label": {
+              "En": "Fire Triangle",
+              "Fr": "Fire Triangle",
+              "De": "Fire Triangle",
+              "Es": "Fire Triangle"
+            },
             "geometry": {
               "width": 220,
               "height": 300
@@ -364,7 +454,12 @@
               },
               "labels": [
                 {
-                  "text": "THERMAL VU",
+                  "text": {
+                    "En": "THERMAL VU",
+                    "Fr": "THERMAL VU",
+                    "De": "THERMAL VU",
+                    "Es": "THERMAL VU"
+                  },
                   "x": 0,
                   "y": -170,
                   "size": 12,

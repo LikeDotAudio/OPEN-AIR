@@ -13,22 +13,42 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": "System Status:",
+        "label_active": {
+          "En": "System Status:",
+          "Fr": "System Statut:",
+          "De": "System Status:",
+          "Es": "System Estado:"
+        },
         "fields": {
           "examplefields": {
             "type": "HeaderStatusLight",
-            "label_active": "System Status:",
+            "label_active": {
+              "En": "System Status:",
+              "Fr": "System Statut:",
+              "De": "System Status:",
+              "Es": "System Estado:"
+            },
             "notes": "Standard header status light, default placement."
           }
         }
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": "Network Health:",
+        "label_active": {
+          "En": "Network Health:",
+          "Fr": "Network Health:",
+          "De": "Network Health:",
+          "Es": "Network Health:"
+        },
         "fields": {
           "examplefields": {
             "type": "HeaderStatusLight",
-            "label_active": "Network Health:",
+            "label_active": {
+              "En": "Network Health:",
+              "Fr": "Network Health:",
+              "De": "Network Health:",
+              "Es": "Network Health:"
+            },
             "layout": {
               "side": "left",
               "padx": 10,
@@ -40,11 +60,21 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": "Server Connection:",
+        "label_active": {
+          "En": "Server Connection:",
+          "Fr": "Server Connection:",
+          "De": "Server Connection:",
+          "Es": "Server Connection:"
+        },
         "fields": {
           "examplefields": {
             "type": "HeaderStatusLight",
-            "label_active": "Server Connection:",
+            "label_active": {
+              "En": "Server Connection:",
+              "Fr": "Server Connection:",
+              "De": "Server Connection:",
+              "Es": "Server Connection:"
+            },
             "layout": {
               "side": "bottom",
               "fill": "x"
@@ -55,11 +85,21 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": "Gui Header Status Light 04 Data Stream",
+        "label_active": {
+          "En": "Gui Header Status Light 04 Data Stream",
+          "Fr": "Gui Header Statut Light 04 Data Stream",
+          "De": "Gui Header Status Light 04 Data Stream",
+          "Es": "Gui Header Estado Light 04 Data Stream"
+        },
         "fields": {
           "examplefields": {
             "type": "HeaderStatusLight",
-            "label_active": "",
+            "label_active": {
+              "En": "",
+              "Fr": "",
+              "De": "",
+              "Es": ""
+            },
             "layout": {
               "side": "top"
             },
@@ -69,11 +109,21 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": "Alert Status:",
+        "label_active": {
+          "En": "Alert Status:",
+          "Fr": "Alert Statut:",
+          "De": "Alert Status:",
+          "Es": "Alert Estado:"
+        },
         "fields": {
           "examplefields": {
             "type": "HeaderStatusLight",
-            "label_active": "Alert Status:",
+            "label_active": {
+              "En": "Alert Status:",
+              "Fr": "Alert Statut:",
+              "De": "Alert Status:",
+              "Es": "Alert Estado:"
+            },
             "notes": "Status light signaling critical alerts."
           }
         }

@@ -13,7 +13,12 @@
     "blocks": {
       "Dial_Petting_Zoo": {
         "type": "OcaBlock",
-        "description": "Dial Variations (Petting Zoo)",
+        "description": {
+          "En": "Dial Variations (Petting Zoo)",
+          "Fr": "Dial Variations (Petting Zoo)",
+          "De": "Dial Variationen (Petting Zoo)",
+          "Es": "Dial Variaciones (Petting Zoo)"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -44,7 +49,12 @@
         "fields": {
           "dial_01": {
             "type": "_SmartKnob",
-            "label": "Std Combo",
+            "label": {
+              "En": "Std Combo",
+              "Fr": "Std Combo",
+              "De": "Std Combo",
+              "Es": "Std Combo"
+            },
             "notes": "Standard combo",
             "geometry": {
               "width": 50,
@@ -100,7 +110,12 @@
           },
           "dial_02": {
             "type": "_SmartKnob",
-            "label": "Pie Only",
+            "label": {
+              "En": "Pie Only",
+              "Fr": "Pie Only",
+              "De": "Pie Only",
+              "Es": "Pie Only"
+            },
             "notes": "Piechart only, red",
             "geometry": {
               "width": 50,
@@ -156,7 +171,12 @@
           },
           "dial_03": {
             "type": "_SmartKnob",
-            "label": "Ptr Only",
+            "label": {
+              "En": "Ptr Only",
+              "Fr": "Ptr Only",
+              "De": "Ptr Only",
+              "Es": "Ptr Only"
+            },
             "notes": "Pointer only, blue",
             "geometry": {
               "width": 50,
@@ -212,7 +232,12 @@
           },
           "dial_04": {
             "type": "_SmartKnob",
-            "label": "Lg Pie",
+            "label": {
+              "En": "Lg Pie",
+              "Fr": "Lg Pie",
+              "De": "Lg Pie",
+              "Es": "Lg Pie"
+            },
             "notes": "Large pie, green",
             "geometry": {
               "width": 80,
@@ -268,7 +293,12 @@
           },
           "dial_05": {
             "type": "_SmartKnob",
-            "label": "Sm Ptr",
+            "label": {
+              "En": "Sm Ptr",
+              "Fr": "Sm Ptr",
+              "De": "Sm Ptr",
+              "Es": "Sm Ptr"
+            },
             "notes": "Small pointer, yellow",
             "geometry": {
               "width": 30,
@@ -324,7 +354,12 @@
           },
           "dial_06": {
             "type": "_SmartKnob",
-            "label": "Giant Mix",
+            "label": {
+              "En": "Giant Mix",
+              "Fr": "Giant Mix",
+              "De": "Giant Mix",
+              "Es": "Giant Mezcla"
+            },
             "notes": "Giant combo, cyan",
             "geometry": {
               "width": 100,
@@ -380,7 +415,12 @@
           },
           "dial_07": {
             "type": "_SmartKnob",
-            "label": "Purple",
+            "label": {
+              "En": "Purple",
+              "Fr": "Purple",
+              "De": "Purple",
+              "Es": "Purple"
+            },
             "notes": "Medium purple",
             "geometry": {
               "width": 60,
@@ -436,7 +476,12 @@
           },
           "dial_08": {
             "type": "_SmartKnob",
-            "label": "Teal",
+            "label": {
+              "En": "Teal",
+              "Fr": "Teal",
+              "De": "Teal",
+              "Es": "Teal"
+            },
             "notes": "Medium teal pointer",
             "geometry": {
               "width": 60,
@@ -494,7 +539,12 @@
       },
       "Dial_Zoo_Index": {
         "type": "OcaBlock",
-        "description": "Index Dial Variations",
+        "description": {
+          "En": "Index Dial Variations",
+          "Fr": "Index Dial Variations",
+          "De": "Index Dial Variationen",
+          "Es": "Index Dial Variaciones"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -525,7 +575,12 @@
         "fields": {
           "dial_idx1": {
             "type": "_SmartKnob",
-            "label": "Index 1",
+            "label": {
+              "En": "Index 1",
+              "Fr": "Index 1",
+              "De": "Index 1",
+              "Es": "Index 1"
+            },
             "notes": "Blue Pointer",
             "geometry": {
               "width": 50,
@@ -581,7 +636,12 @@
           },
           "dial_idx2": {
             "type": "_SmartKnob",
-            "label": "Index 2",
+            "label": {
+              "En": "Index 2",
+              "Fr": "Index 2",
+              "De": "Index 2",
+              "Es": "Index 2"
+            },
             "notes": "Amber Pie",
             "geometry": {
               "width": 50,
@@ -637,7 +697,12 @@
           },
           "dial_idx3": {
             "type": "_SmartKnob",
-            "label": "Index 3",
+            "label": {
+              "En": "Index 3",
+              "Fr": "Index 3",
+              "De": "Index 3",
+              "Es": "Index 3"
+            },
             "notes": "Green Combo",
             "geometry": {
               "width": 50,
@@ -693,7 +758,12 @@
           },
           "dial_idx4": {
             "type": "_SmartKnob",
-            "label": "Index 4",
+            "label": {
+              "En": "Index 4",
+              "Fr": "Index 4",
+              "De": "Index 4",
+              "Es": "Index 4"
+            },
             "notes": "Small Pink",
             "geometry": {
               "width": 30,
@@ -749,7 +819,12 @@
           },
           "dial_idx5": {
             "type": "_SmartKnob",
-            "label": "Index 5",
+            "label": {
+              "En": "Index 5",
+              "Fr": "Index 5",
+              "De": "Index 5",
+              "Es": "Index 5"
+            },
             "notes": "Large Purple",
             "geometry": {
               "width": 80,
@@ -805,7 +880,12 @@
           },
           "dial_idx6": {
             "type": "_SmartKnob",
-            "label": "Index 6",
+            "label": {
+              "En": "Index 6",
+              "Fr": "Index 6",
+              "De": "Index 6",
+              "Es": "Index 6"
+            },
             "notes": "Cyan Combo",
             "geometry": {
               "width": 60,
@@ -861,7 +941,12 @@
           },
           "dial_idx7": {
             "type": "_SmartKnob",
-            "label": "Index 7",
+            "label": {
+              "En": "Index 7",
+              "Fr": "Index 7",
+              "De": "Index 7",
+              "Es": "Index 7"
+            },
             "notes": "Deep Orange",
             "geometry": {
               "width": 40,
@@ -918,7 +1003,12 @@
           },
           "dial_idx8": {
             "type": "_SmartKnob",
-            "label": "Index 8",
+            "label": {
+              "En": "Index 8",
+              "Fr": "Index 8",
+              "De": "Index 8",
+              "Es": "Index 8"
+            },
             "notes": "Brown Large",
             "geometry": {
               "width": 70,
@@ -976,7 +1066,12 @@
       },
       "Dial_Zoo_Time": {
         "type": "OcaBlock",
-        "description": "Time/Clock Dial Variations",
+        "description": {
+          "En": "Time/Clock Dial Variations",
+          "Fr": "Time/Clock Dial Variations",
+          "De": "Time/Clock Dial Variationen",
+          "Es": "Time/Clock Dial Variaciones"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -1007,7 +1102,12 @@
         "fields": {
           "dial_tm1": {
             "type": "_SmartKnob",
-            "label": "Seconds",
+            "label": {
+              "En": "Seconds",
+              "Fr": "Seconds",
+              "De": "Seconds",
+              "Es": "Seconds"
+            },
             "notes": "White Clock",
             "geometry": {
               "width": 80,
@@ -1063,7 +1163,12 @@
           },
           "dial_tm2": {
             "type": "_SmartKnob",
-            "label": "Minutes",
+            "label": {
+              "En": "Minutes",
+              "Fr": "Minutes",
+              "De": "Minutes",
+              "Es": "Minutes"
+            },
             "notes": "Grey Clock",
             "geometry": {
               "width": 80,
@@ -1119,7 +1224,12 @@
           },
           "dial_tm3": {
             "type": "_SmartKnob",
-            "label": "Millis",
+            "label": {
+              "En": "Millis",
+              "Fr": "Millis",
+              "De": "Millis",
+              "Es": "Millis"
+            },
             "notes": "Fast Red",
             "geometry": {
               "width": 40,
@@ -1176,7 +1286,12 @@
           },
           "dial_tm4": {
             "type": "_SmartKnob",
-            "label": "Delay",
+            "label": {
+              "En": "Delay",
+              "Fr": "Delay",
+              "De": "Delay",
+              "Es": "Delay"
+            },
             "notes": "Delay Blue",
             "geometry": {
               "width": 60,
@@ -1232,7 +1347,12 @@
           },
           "dial_tm5": {
             "type": "_SmartKnob",
-            "label": "Attack",
+            "label": {
+              "En": "Attack",
+              "Fr": "Attaque",
+              "De": "Attack",
+              "Es": "Ataque"
+            },
             "notes": "Fast Attack Green",
             "geometry": {
               "width": 50,
@@ -1288,7 +1408,12 @@
           },
           "dial_tm6": {
             "type": "_SmartKnob",
-            "label": "Release",
+            "label": {
+              "En": "Release",
+              "Fr": "Relâchement",
+              "De": "Release",
+              "Es": "Relajación"
+            },
             "notes": "Slow Release Orange",
             "geometry": {
               "width": 50,
@@ -1344,7 +1469,12 @@
           },
           "dial_tm7": {
             "type": "_SmartKnob",
-            "label": "Decay",
+            "label": {
+              "En": "Decay",
+              "Fr": "Decay",
+              "De": "Decay",
+              "Es": "Decay"
+            },
             "notes": "Decay Purple",
             "geometry": {
               "width": 50,
@@ -1400,7 +1530,12 @@
           },
           "dial_tm8": {
             "type": "_SmartKnob",
-            "label": "Hold",
+            "label": {
+              "En": "Hold",
+              "Fr": "Hold",
+              "De": "Hold",
+              "Es": "Hold"
+            },
             "notes": "Dark Hold",
             "geometry": {
               "width": 50,
@@ -1458,7 +1593,12 @@
       },
       "Dial_Zoo_Param": {
         "type": "OcaBlock",
-        "description": "Parameter Dial Variations",
+        "description": {
+          "En": "Parameter Dial Variations",
+          "Fr": "Parameter Dial Variations",
+          "De": "Parameter Dial Variationen",
+          "Es": "Parameter Dial Variaciones"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -1489,7 +1629,12 @@
         "fields": {
           "dial_prm1": {
             "type": "_SmartKnob",
-            "label": "Param A",
+            "label": {
+              "En": "Param A",
+              "Fr": "Param A",
+              "De": "Param A",
+              "Es": "Param A"
+            },
             "notes": "Cyan Electric",
             "geometry": {
               "width": 60,
@@ -1545,7 +1690,12 @@
           },
           "dial_prm2": {
             "type": "_SmartKnob",
-            "label": "Param B",
+            "label": {
+              "En": "Param B",
+              "Fr": "Param B",
+              "De": "Param B",
+              "Es": "Param B"
+            },
             "notes": "Red Tech",
             "geometry": {
               "width": 60,
@@ -1601,7 +1751,12 @@
           },
           "dial_prm3": {
             "type": "_SmartKnob",
-            "label": "Param C",
+            "label": {
+              "En": "Param C",
+              "Fr": "Param C",
+              "De": "Param C",
+              "Es": "Param C"
+            },
             "notes": "Lime Tech",
             "geometry": {
               "width": 60,
@@ -1657,7 +1812,12 @@
           },
           "dial_prm4": {
             "type": "_SmartKnob",
-            "label": "Mix X",
+            "label": {
+              "En": "Mix X",
+              "Fr": "Mix X",
+              "De": "Mix X",
+              "Es": "Mezcla X"
+            },
             "notes": "Purple Deep",
             "geometry": {
               "width": 50,
@@ -1713,7 +1873,12 @@
           },
           "dial_prm5": {
             "type": "_SmartKnob",
-            "label": "Mix Y",
+            "label": {
+              "En": "Mix Y",
+              "Fr": "Mix Y",
+              "De": "Mix Y",
+              "Es": "Mezcla Y"
+            },
             "notes": "Orange Blaze",
             "geometry": {
               "width": 50,
@@ -1769,7 +1934,12 @@
           },
           "dial_prm6": {
             "type": "_SmartKnob",
-            "label": "Mod 1",
+            "label": {
+              "En": "Mod 1",
+              "Fr": "Mod 1",
+              "De": "Mod 1",
+              "Es": "Mod 1"
+            },
             "notes": "Indigo",
             "geometry": {
               "width": 40,
@@ -1826,7 +1996,12 @@
           },
           "dial_prm7": {
             "type": "_SmartKnob",
-            "label": "Mod 2",
+            "label": {
+              "En": "Mod 2",
+              "Fr": "Mod 2",
+              "De": "Mod 2",
+              "Es": "Mod 2"
+            },
             "notes": "Green Bright",
             "geometry": {
               "width": 70,
@@ -1882,7 +2057,12 @@
           },
           "dial_prm8": {
             "type": "_SmartKnob",
-            "label": "Master",
+            "label": {
+              "En": "Master",
+              "Fr": "Master",
+              "De": "Master",
+              "Es": "Maestro"
+            },
             "notes": "Dark Master",
             "geometry": {
               "width": 90,
@@ -1940,7 +2120,12 @@
       },
       "Dial_Zoo_Process": {
         "type": "OcaBlock",
-        "description": "Process/Progress Dial Variations",
+        "description": {
+          "En": "Process/Progress Dial Variations",
+          "Fr": "Process/Progress Dial Variations",
+          "De": "Process/Progress Dial Variationen",
+          "Es": "Process/Progress Dial Variaciones"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -1971,7 +2156,12 @@
         "fields": {
           "dial_proc1": {
             "type": "_SmartKnob",
-            "label": "Loading",
+            "label": {
+              "En": "Loading",
+              "Fr": "Loading",
+              "De": "Loading",
+              "Es": "Loading"
+            },
             "notes": "Start",
             "geometry": {
               "width": 50,
@@ -2027,7 +2217,12 @@
           },
           "dial_proc2": {
             "type": "_SmartKnob",
-            "label": "Stage 1",
+            "label": {
+              "En": "Stage 1",
+              "Fr": "Stage 1",
+              "De": "Stage 1",
+              "Es": "Stage 1"
+            },
             "notes": "Blue Light",
             "geometry": {
               "width": 50,
@@ -2083,7 +2278,12 @@
           },
           "dial_proc3": {
             "type": "_SmartKnob",
-            "label": "Stage 2",
+            "label": {
+              "En": "Stage 2",
+              "Fr": "Stage 2",
+              "De": "Stage 2",
+              "Es": "Stage 2"
+            },
             "notes": "Blue Med",
             "geometry": {
               "width": 50,
@@ -2139,7 +2339,12 @@
           },
           "dial_proc4": {
             "type": "_SmartKnob",
-            "label": "Stage 3",
+            "label": {
+              "En": "Stage 3",
+              "Fr": "Stage 3",
+              "De": "Stage 3",
+              "Es": "Stage 3"
+            },
             "notes": "Blue Dark",
             "geometry": {
               "width": 50,
@@ -2195,7 +2400,12 @@
           },
           "dial_proc5": {
             "type": "_SmartKnob",
-            "label": "Complete",
+            "label": {
+              "En": "Complete",
+              "Fr": "Complete",
+              "De": "Complete",
+              "Es": "Complete"
+            },
             "notes": "Green Done",
             "geometry": {
               "width": 50,
@@ -2251,7 +2461,12 @@
           },
           "dial_proc6": {
             "type": "_SmartKnob",
-            "label": "Error",
+            "label": {
+              "En": "Error",
+              "Fr": "Erreur",
+              "De": "Fehler",
+              "Es": "Error"
+            },
             "notes": "Red Error",
             "geometry": {
               "width": 50,
@@ -2307,7 +2522,12 @@
           },
           "dial_proc7": {
             "type": "_SmartKnob",
-            "label": "Warning",
+            "label": {
+              "En": "Warning",
+              "Fr": "Avertissement",
+              "De": "Warnung",
+              "Es": "Advertencia"
+            },
             "notes": "Amber Warn",
             "geometry": {
               "width": 50,
@@ -2363,7 +2583,12 @@
           },
           "dial_proc8": {
             "type": "_SmartKnob",
-            "label": "Unknown",
+            "label": {
+              "En": "Unknown",
+              "Fr": "Unknown",
+              "De": "Unknown",
+              "Es": "Unknown"
+            },
             "notes": "Grey Unknown",
             "geometry": {
               "width": 50,
@@ -2421,7 +2646,12 @@
       },
       "Dial_Zoo_Advanced": {
         "type": "OcaBlock",
-        "description": "Advanced Dial Features (Infinity, Layout, Thickness)",
+        "description": {
+          "En": "Advanced Dial Features (Infinity, Layout, Thickness)",
+          "Fr": "Avancé Dial Caractéristiques (Infinity, Layout, Thickness)",
+          "De": "Erweitert Dial Funktionen (Infinity, Layout, Thickness)",
+          "Es": "Avanzado Dial Características (Infinity, Layout, Thickness)"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -2452,7 +2682,12 @@
         "fields": {
           "dial_adv1": {
             "type": "_SmartKnob",
-            "label": "Infinite",
+            "label": {
+              "En": "Infinite",
+              "Fr": "Infinite",
+              "De": "Infinite",
+              "Es": "Infinite"
+            },
             "notes": "Wraps around 0-100",
             "geometry": {
               "width": 60,
@@ -2506,7 +2741,12 @@
           },
           "dial_adv2": {
             "type": "_SmartKnob",
-            "label": "Fine Tune",
+            "label": {
+              "En": "Fine Tune",
+              "Fr": "Fine Tune",
+              "De": "Fine Tune",
+              "Es": "Fine Tune"
+            },
             "notes": "10 turns for full range",
             "geometry": {
               "width": 60,
@@ -2560,7 +2800,12 @@
           },
           "dial_adv3": {
             "type": "_SmartKnob",
-            "label": "Thick Crust",
+            "label": {
+              "En": "Thick Crust",
+              "Fr": "Thick Crust",
+              "De": "Thick Crust",
+              "Es": "Thick Crust"
+            },
             "notes": "10px Crust",
             "geometry": {
               "width": 60,
@@ -2615,7 +2860,12 @@
           },
           "dial_adv4": {
             "type": "_SmartKnob",
-            "label": "Thin Crust",
+            "label": {
+              "En": "Thin Crust",
+              "Fr": "Thin Crust",
+              "De": "Thin Crust",
+              "Es": "Thin Crust"
+            },
             "notes": "1px Crust",
             "geometry": {
               "width": 60,
@@ -2670,7 +2920,12 @@
           },
           "dial_adv5": {
             "type": "_SmartKnob",
-            "label": "Val Top",
+            "label": {
+              "En": "Val Top",
+              "Fr": "Val Haut",
+              "De": "Val Oben",
+              "Es": "Val Arriba"
+            },
             "notes": "Val Top, Text Bot",
             "geometry": {
               "width": 60,
@@ -2725,7 +2980,12 @@
           },
           "dial_adv6": {
             "type": "_SmartKnob",
-            "label": "Val Left",
+            "label": {
+              "En": "Val Left",
+              "Fr": "Val Gauche",
+              "De": "Val Links",
+              "Es": "Val Izquierda"
+            },
             "notes": "Value on Left",
             "geometry": {
               "width": 60,
@@ -2780,7 +3040,12 @@
           },
           "dial_adv7": {
             "type": "_SmartKnob",
-            "label": "Val Right",
+            "label": {
+              "En": "Val Right",
+              "Fr": "Val Droite",
+              "De": "Val Rechts",
+              "Es": "Val Derecha"
+            },
             "notes": "Value on Right",
             "geometry": {
               "width": 60,
@@ -2835,7 +3100,12 @@
           },
           "dial_adv8": {
             "type": "_SmartKnob",
-            "label": "Full Pie",
+            "label": {
+              "En": "Full Pie",
+              "Fr": "Complet Pie",
+              "De": "Vollständig Pie",
+              "Es": "Completo Pie"
+            },
             "notes": "Super thick crust",
             "geometry": {
               "width": 50,

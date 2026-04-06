@@ -22,7 +22,7 @@ import sys
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 # ⚡ OPTIMIZATION: Use static path cache
 from ..Core.path_initializer import (
     GLOBAL_PROJECT_ROOT, 
@@ -48,19 +48,18 @@ TABLES_DIR = DATA_CACHE_DIR / "Tables"
 YAKETY_YAK_REPO_PATH = DATA_RUNNING_DIR / "YAKETYYAK.json"
 PRESET_REPO_PATH = DATA_RUNNING_DIR / "PRESET.csv"
 
-# --- SNMP Temporary & State Paths ---
+# --- SNMP Temporary & State Paths (Flat Data Repository) ---
 SNMP_DATA_DIR = DATA_SNMP_DIR
 SNMP_STATE_FILE = SNMP_DATA_DIR / "openair_snmp_objects.txt"
 SNMP_SET_LOG = SNMP_DATA_DIR / "openair_snmp_set.log"
 SNMP_TEMP_MIB = SNMP_DATA_DIR / "OPENAIR-MIB.txt"
 
 # --- Persistent MIB Management ---
-SNMP_MIB_DIR = SNMP_DATA_DIR / "MIB"
-SNMP_CURRENT_MIB = SNMP_MIB_DIR / "current.mib"
+SNMP_CURRENT_MIB = SNMP_DATA_DIR / "current.mib"
+SNMP_BRIDGE_SCRIPT = SNMP_DATA_DIR / "master_snmp_bridge.sh"
 
-# Ensure SNMP directories exist immediately
+# Ensure SNMP data root exists
 SNMP_DATA_DIR.mkdir(parents=True, exist_ok=True)
-SNMP_MIB_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def get_absolute_path(relative_path: str):

@@ -1,7 +1,12 @@
 {
   "VHF (System M) North America": {
     "name": "VHF (System M) North America",
-    "description": "VHF (Band I & III) for North America (System M 525 lines)",
+    "description": {
+      "En": "VHF (Band I & III) for North America (System M 525 lines)",
+      "Fr": "VHF (Band I & III) for North America (Système M 525 lines)",
+      "De": "VHF (Band I & III) for North America (System M 525 lines)",
+      "Es": "VHF (Band I & III) for North America (Sistema M 525 lines)"
+    },
     "country": "USA, Canada, Mexico (most of North America & Caribbean)",
     "region": "North America",
     "type": "tv",
@@ -118,7 +123,12 @@
   },
   "UHF System M 525 lines (Most countries in North America & Caribbean) North America UHF": {
     "name": "UHF System M 525 lines (Most countries in North America & Caribbean) North America UHF",
-    "description": "UHF System M 525 lines standard for Most countries in North America & Caribbean, UHF",
+    "description": {
+      "En": "UHF System M 525 lines standard for Most countries in North America & Caribbean, UHF",
+      "Fr": "UHF Système M 525 lines standard for Most countries in North America & Caribbean, UHF",
+      "De": "UHF System M 525 lines standard for Most countries in North America & Caribbean, UHF",
+      "Es": "UHF Sistema M 525 lines standard for Most countries in North America & Caribbean, UHF"
+    },
     "country": "Most countries in North America & Caribbean",
     "region": "North America",
     "type": "tv",
@@ -691,7 +701,12 @@
   },
   "UHF System G/H 625 lines (Western Europe) Europe UHF": {
     "name": "UHF System G/H 625 lines (Western Europe) Europe UHF",
-    "description": "UHF System G/H 625 lines standard for Western Europe, UHF",
+    "description": {
+      "En": "UHF System G/H 625 lines standard for Western Europe, UHF",
+      "Fr": "UHF Système G/H 625 lines standard for Western Europe, UHF",
+      "De": "UHF System G/H 625 lines standard for Western Europe, UHF",
+      "Es": "UHF Sistema G/H 625 lines standard for Western Europe, UHF"
+    },
     "country": "Western Europe",
     "region": "Europe",
     "type": "tv",
@@ -1131,7 +1146,12 @@
   },
   "DVB-T/T2/DTMB/ISDB-T (Most countries in Asia) Asia UHF Digital": {
     "name": "DVB-T/T2/DTMB/ISDB-T (Most countries in Asia) Asia UHF Digital",
-    "description": "DVB-T/T2/DTMB/ISDB-T standard for Most countries in Asia, UHF Digital",
+    "description": {
+      "En": "DVB-T/T2/DTMB/ISDB-T standard for Most countries in Asia, UHF Digital",
+      "Fr": "DVB-T/T2/DTMB/ISDB-T standard for Most countries in Asia, UHF Digital",
+      "De": "DVB-T/T2/DTMB/ISDB-T standard for Most countries in Asia, UHF Digital",
+      "Es": "DVB-T/T2/DTMB/ISDB-T standard for Most countries in Asia, UHF Digital"
+    },
     "country": "Most countries in Asia",
     "region": "Asia",
     "type": "tv",

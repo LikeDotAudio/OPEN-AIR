@@ -19,7 +19,7 @@ import os
 import inspect
 import loguru
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 # Explicitly assign logger to ensure it's found as a module attribute by unittest.mock
 logger = loguru.logger

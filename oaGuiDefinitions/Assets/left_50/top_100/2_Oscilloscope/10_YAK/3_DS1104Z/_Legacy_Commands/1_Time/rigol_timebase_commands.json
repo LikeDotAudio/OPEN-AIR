@@ -12,11 +12,21 @@
     "blocks": {
       "rig": {
         "type": "OcaBlock",
-        "description": "Scope Configuration",
+        "description": {
+          "En": "Scope Configuration",
+          "Fr": "Scope Configuration",
+          "De": "Scope Konfiguration",
+          "Es": "Scope Configuración"
+        },
         "fields": {
           "Horizontal_Settings": {
             "type": "OcaBlock",
-            "description": "Timebase",
+            "description": {
+              "En": "Timebase",
+              "Fr": "Tempsbase",
+              "De": "Zeitbase",
+              "Es": "Tiempobase"
+            },
             "fields": {
               "Time_Scale": {
                 "type": "OcaBlock",

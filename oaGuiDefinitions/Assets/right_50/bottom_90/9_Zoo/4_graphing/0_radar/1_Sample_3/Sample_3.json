@@ -13,13 +13,23 @@
     "blocks": {
       "Radar_Eye_Zoo_3": {
         "type": "OcaBlock",
-        "description": "Radar Eye Sample 3 - High Speed",
+        "description": {
+          "En": "Radar Eye Sample 3 - High Speed",
+          "Fr": "Radar Eye Sample 3 - Haut Speed",
+          "De": "Radar Eye Sample 3 - Hoch Speed",
+          "Es": "Radar Eye Sample 3 - Alto Speed"
+        },
         "layout_columns": 1,
         "fields": {
           "radar_eye_3": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": "High Speed Scan",
+            "label_active": {
+              "En": "High Speed Scan",
+              "Fr": "Haut Speed Scan",
+              "De": "Hoch Speed Scan",
+              "Es": "Alto Speed Scan"
+            },
             "app_settings": {
               "title": "Fast Scan v3.0",
               "window_size": [

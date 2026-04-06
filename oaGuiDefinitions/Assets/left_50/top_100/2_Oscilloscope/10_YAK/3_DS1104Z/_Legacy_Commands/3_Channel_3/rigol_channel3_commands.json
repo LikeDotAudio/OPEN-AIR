@@ -12,11 +12,21 @@
     "blocks": {
       "nab": {
         "type": "OcaBlock",
-        "description": "Rigol Measurements",
+        "description": {
+          "En": "Rigol Measurements",
+          "Fr": "Mesures Rigol",
+          "De": "Rigol-Messungen",
+          "Es": "Mediciones de Rigol"
+        },
         "fields": {
           "Measurements_CH3": {
             "type": "OcaBlock",
-            "description": "Channel 3 Stats",
+            "description": {
+              "En": "Channel 3 Stats",
+              "Fr": "Canal 3",
+              "De": "Kanal 3",
+              "Es": "Canal 3"
+            },
             "fields": {
               "Get_Stats_CH3": {
                 "type": "_GuiActuator",
@@ -67,11 +77,21 @@
       },
       "rig": {
         "type": "OcaBlock",
-        "description": "Scope Configuration",
+        "description": {
+          "En": "Scope Configuration",
+          "Fr": "Scope Configuration",
+          "De": "Scope Konfiguration",
+          "Es": "Scope Configuración"
+        },
         "fields": {
           "Config_CH3": {
             "type": "OcaBlock",
-            "description": "Channel 3 Vertical",
+            "description": {
+              "En": "Channel 3 Vertical",
+              "Fr": "Canal 3",
+              "De": "Kanal 3",
+              "Es": "Canal 3"
+            },
             "fields": {
               "CH3_Scale": {
                 "type": "OcaBlock",
@@ -259,14 +279,24 @@
       },
       "Do": {
         "type": "OcaBlock",
-        "description": "Actions and Toggles",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
         "fields": {
           "Channel_Display_Control": {
             "type": "OcaBlock",
             "fields": {
               "CH3_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": "CH3 ON",
+                "label_inactive": {
+                  "En": "CH3 ON",
+                  "Fr": "CH 3",
+                  "De": "CH 3",
+                  "Es": "CH 3"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -286,7 +316,12 @@
               },
               "CH3_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": "CH3 OFF",
+                "label_inactive": {
+                  "En": "CH3 OFF",
+                  "Fr": "CH 3",
+                  "De": "CH 3",
+                  "Es": "CH 3"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",

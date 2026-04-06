@@ -1,4 +1,5 @@
 # integration/state_linker.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -13,7 +14,7 @@ import random
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 

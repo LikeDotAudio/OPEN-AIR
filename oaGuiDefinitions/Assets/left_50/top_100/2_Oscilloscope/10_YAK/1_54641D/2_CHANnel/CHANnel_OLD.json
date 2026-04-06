@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Analog Channel Settings",
+        "description": {
+          "En": "Analog Channel Settings",
+          "Fr": "Analog Canal Paramètres",
+          "De": "Analog Kanal Einstellungen",
+          "Es": "Analog Canal Ajustes"
+        },
         "fields": {
           "Set_Bandwidth_Limit": {
             "type": "OcaBlock",
@@ -46,15 +51,30 @@
                   "n": {
                     "value": "1",
                     "type": "_GuiValue",
-                    "label": "Ch",
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    },
                     "units": ""
                   },
                   "state": {
                     "value": "OFF",
                     "type": "_GuiValue",
-                    "label": "State",
+                    "label": {
+                      "En": "State",
+                      "Fr": "State",
+                      "De": "State",
+                      "Es": "State"
+                    },
                     "units": "",
-                    "description": "ON or OFF"
+                    "description": {
+                      "En": "ON or OFF",
+                      "Fr": "ON or OFF",
+                      "De": "ON or OFF",
+                      "Es": "ON or OFF"
+                    }
                   }
                 }
               }
@@ -91,15 +111,30 @@
                   "n": {
                     "value": "1",
                     "type": "_GuiValue",
-                    "label": "Ch",
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    },
                     "units": ""
                   },
                   "coupling": {
                     "value": "DC",
                     "type": "_GuiValue",
-                    "label": "Coupling",
+                    "label": {
+                      "En": "Coupling",
+                      "Fr": "Couplage",
+                      "De": "Kopplung",
+                      "Es": "Acoplamiento"
+                    },
                     "units": "",
-                    "description": "AC, DC, GND"
+                    "description": {
+                      "En": "AC, DC, GND",
+                      "Fr": "AC, DC, GND",
+                      "De": "AC, DC, GND",
+                      "Es": "CA, CC, GND"
+                    }
                   }
                 }
               }
@@ -136,13 +171,23 @@
                   "n": {
                     "value": "1",
                     "type": "_GuiValue",
-                    "label": "Ch",
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    },
                     "units": ""
                   },
                   "offset": {
                     "value": "0.0",
                     "type": "_GuiValue",
-                    "label": "Offset",
+                    "label": {
+                      "En": "Offset",
+                      "Fr": "Décalage",
+                      "De": "Versatz",
+                      "Es": "Compensación"
+                    },
                     "units": "V"
                   }
                 }
@@ -180,13 +225,23 @@
                   "n": {
                     "value": "1",
                     "type": "_GuiValue",
-                    "label": "Ch",
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    },
                     "units": ""
                   },
                   "range": {
                     "value": "40.0",
                     "type": "_GuiValue",
-                    "label": "Range",
+                    "label": {
+                      "En": "Range",
+                      "Fr": "Plage",
+                      "De": "Bereich",
+                      "Es": "Rango"
+                    },
                     "units": "V"
                   }
                 }
@@ -224,13 +279,23 @@
                   "n": {
                     "value": "1",
                     "type": "_GuiValue",
-                    "label": "Ch",
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    },
                     "units": ""
                   },
                   "scale": {
                     "value": "5.0",
                     "type": "_GuiValue",
-                    "label": "Scale",
+                    "label": {
+                      "En": "Scale",
+                      "Fr": "Échelle",
+                      "De": "Skala",
+                      "Es": "Escala"
+                    },
                     "units": "V/div"
                   }
                 }
@@ -268,15 +333,30 @@
                   "n": {
                     "value": "1",
                     "type": "_GuiValue",
-                    "label": "Ch",
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    },
                     "units": ""
                   },
                   "state": {
                     "value": "ON",
                     "type": "_GuiValue",
-                    "label": "State",
+                    "label": {
+                      "En": "State",
+                      "Fr": "State",
+                      "De": "State",
+                      "Es": "State"
+                    },
                     "units": "",
-                    "description": "ON or OFF"
+                    "description": {
+                      "En": "ON or OFF",
+                      "Fr": "ON or OFF",
+                      "De": "ON or OFF",
+                      "Es": "ON or OFF"
+                    }
                   }
                 }
               }
@@ -313,15 +393,30 @@
                   "n": {
                     "value": "1",
                     "type": "_GuiValue",
-                    "label": "Ch",
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    },
                     "units": ""
                   },
                   "imp": {
                     "value": "ONEMeg",
                     "type": "_GuiValue",
-                    "label": "Imp",
+                    "label": {
+                      "En": "Imp",
+                      "Fr": "Imp",
+                      "De": "Imp",
+                      "Es": "Imp"
+                    },
                     "units": "",
-                    "description": "ONEMeg or FIFTy"
+                    "description": {
+                      "En": "ONEMeg or FIFTy",
+                      "Fr": "ONEMeg or FIFTy",
+                      "De": "ONEMeg or FIFTy",
+                      "Es": "ONEMeg or FIFTy"
+                    }
                   }
                 }
               }
@@ -358,15 +453,30 @@
                   "n": {
                     "value": "1",
                     "type": "_GuiValue",
-                    "label": "Ch",
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    },
                     "units": ""
                   },
                   "atten": {
                     "value": "10",
                     "type": "_GuiValue",
-                    "label": "Atten",
+                    "label": {
+                      "En": "Atten",
+                      "Fr": "Attén",
+                      "De": "Atten",
+                      "Es": "Aten"
+                    },
                     "units": "X",
-                    "description": "1, 10, 100"
+                    "description": {
+                      "En": "1, 10, 100",
+                      "Fr": "1, 10, 100",
+                      "De": "1, 10, 100",
+                      "Es": "1, 10, 100"
+                    }
                   }
                 }
               }
@@ -403,15 +513,30 @@
                   "n": {
                     "value": "1",
                     "type": "_GuiValue",
-                    "label": "Ch",
+                    "label": {
+                      "En": "Ch",
+                      "Fr": "Ch",
+                      "De": "Ch",
+                      "Es": "Ch"
+                    },
                     "units": ""
                   },
                   "state": {
                     "value": "OFF",
                     "type": "_GuiValue",
-                    "label": "State",
+                    "label": {
+                      "En": "State",
+                      "Fr": "State",
+                      "De": "State",
+                      "Es": "State"
+                    },
                     "units": "",
-                    "description": "ON or OFF"
+                    "description": {
+                      "En": "ON or OFF",
+                      "Fr": "ON or OFF",
+                      "De": "ON or OFF",
+                      "Es": "ON or OFF"
+                    }
                   }
                 }
               }

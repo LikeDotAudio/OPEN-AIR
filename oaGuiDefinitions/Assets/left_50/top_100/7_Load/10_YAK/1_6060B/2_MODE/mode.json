@@ -13,11 +13,21 @@
     "blocks": {
       "Mode": {
         "type": "OcaBlock",
-        "description": "CC / CV / CR",
+        "description": {
+          "En": "CC / CV / CR",
+          "Fr": "CC / CV / CR",
+          "De": "CC / CV / CR",
+          "Es": "CC / CV / CR"
+        },
         "fields": {
           "Set_Mode_Current": {
             "type": "_GuiActuator",
-            "label_inactive": "Mode: CC",
+            "label_inactive": {
+              "En": "Mode: CC",
+              "Fr": "Mode: CC",
+              "De": "Modus: CC",
+              "Es": "Modo: CC"
+            },
             "AES70": "OcaBooleanActuator",
             "layout": {
               "height": 30,
@@ -42,7 +52,12 @@
           },
           "Set_Mode_Voltage": {
             "type": "_GuiActuator",
-            "label_inactive": "Mode: CV",
+            "label_inactive": {
+              "En": "Mode: CV",
+              "Fr": "Mode: CV",
+              "De": "Modus: CV",
+              "Es": "Modo: CV"
+            },
             "AES70": "OcaBooleanActuator",
             "layout": {
               "height": 30,
@@ -67,7 +82,12 @@
           },
           "Set_Mode_Resistance": {
             "type": "_GuiActuator",
-            "label_inactive": "Mode: CR",
+            "label_inactive": {
+              "En": "Mode: CR",
+              "Fr": "Mode: CR",
+              "De": "Modus: CR",
+              "Es": "Modo: CR"
+            },
             "AES70": "OcaBooleanActuator",
             "layout": {
               "height": 30,

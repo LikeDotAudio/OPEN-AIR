@@ -130,7 +130,7 @@ class BlueprintLoader:
             config (dict): The configuration branch to normalize.
             root (dict): The root of the entire tree (for cross-references).
         """
-        from oaGuiManager.Core.parser.widget_schema_normalizer import WidgetSchemaNormalizer
+        from oaGuiFramework.Core.widget_schema_normalizer import WidgetSchemaNormalizer
         if root is None: 
             root = config
         

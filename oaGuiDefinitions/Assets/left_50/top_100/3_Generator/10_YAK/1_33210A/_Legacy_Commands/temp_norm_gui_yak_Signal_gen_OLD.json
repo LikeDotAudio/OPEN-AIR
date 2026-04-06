@@ -12,16 +12,31 @@
     "blocks": {
       "Generic_Display_Block": {
         "type": "OcaBlock",
-        "description": "Dynamic Content for yak_Signal_gen",
+        "description": {
+          "En": "Dynamic Content for yak_Signal_gen",
+          "Fr": "Dynamic Content for yak_Signal_gen",
+          "De": "Dynamic Content for yak_Signal_gen",
+          "Es": "Dynamic Content for yak_Signal_gen"
+        },
         "fields": {
           "Agilent_SigGen_33220A": {
             "nab": {
               "type": "OcaBlock",
-              "description": "SigGen Readbacks",
+              "description": {
+                "En": "SigGen Readbacks",
+                "Fr": "SigGen Readbacks",
+                "De": "SigGen Readbacks",
+                "Es": "SigGen Readbacks"
+              },
               "fields": {
                 "Read_Current_Setup": {
                   "type": "OcaBlock",
-                  "description": "Query active configuration",
+                  "description": {
+                    "En": "Query active configuration",
+                    "Fr": "Interroger la configuration active",
+                    "De": "Aktive Konfiguration abfragen",
+                    "Es": "Consultar configuración activa"
+                  },
                   "fields": {
                     "Get_Apply_String": {
                       "type": "_GuiActuator",
@@ -111,11 +126,21 @@
             },
             "rig": {
               "type": "OcaBlock",
-              "description": "Waveform Configuration",
+              "description": {
+                "En": "Waveform Configuration",
+                "Fr": "Configuration de la forme d'onde",
+                "De": "Wellenform-Konfiguration",
+                "Es": "Configuración de forma de onda"
+              },
               "fields": {
                 "Quick_Setup_Apply": {
                   "type": "OcaBlock",
-                  "description": "APPLy Macro Commands",
+                  "description": {
+                    "En": "APPLy Macro Commands",
+                    "Fr": "Appliquer les commandes macro",
+                    "De": "Makrobefehle anwenden",
+                    "Es": "Aplicar comandos macro"
+                  },
                   "fields": {
                     "Apply_Sine": {
                       "type": "_GuiActuator",
@@ -143,12 +168,22 @@
                           "amp": {
                             "value": "1.0",
                             "type": "_Value",
-                            "description": "Amplitude in Vpp"
+                            "description": {
+                              "En": "Amplitude in Vpp",
+                              "Fr": "Amplitude en Vpp",
+                              "De": "Amplitude in Vss",
+                              "Es": "Amplitud in Vpp"
+                            }
                           },
                           "offset": {
                             "value": "0.0",
                             "type": "_Value",
-                            "description": "Offset in Volts"
+                            "description": {
+                              "En": "Offset in Volts",
+                              "Fr": "Décalage in Volts",
+                              "De": "Versatz in Volts",
+                              "Es": "Compensación in Volts"
+                            }
                           }
                         }
                       }
@@ -225,7 +260,12 @@
                 },
                 "Modulation_Setup": {
                   "type": "OcaBlock",
-                  "description": "AM/FM/Pulse Config",
+                  "description": {
+                    "En": "AM/FM/Pulse Config",
+                    "Fr": "Config AM/FM/Impulsion",
+                    "De": "AM/FM/Puls-Konfig",
+                    "Es": "Config AM/FM/Pulso"
+                  },
                   "fields": {
                     "Setup_AM": {
                       "type": "_GuiActuator",
@@ -249,17 +289,32 @@
                           "shape": {
                             "value": "SIN",
                             "type": "_Value",
-                            "description": "SIN, SQU, TRI, RAMP"
+                            "description": {
+                              "En": "SIN, SQU, TRI, RAMP",
+                              "Fr": "SIN, SQU, TRI, RAMP",
+                              "De": "SIN, SQU, TRI, RAMP",
+                              "Es": "SIN, SQU, TRI, RAMP"
+                            }
                           },
                           "freq": {
                             "value": "100",
                             "type": "_Value",
-                            "description": "Modulating Freq Hz"
+                            "description": {
+                              "En": "Modulating Freq Hz",
+                              "Fr": "Modulating Freq Hz",
+                              "De": "Modulating Freq Hz",
+                              "Es": "Modulating Freq Hz"
+                            }
                           },
                           "depth": {
                             "value": "50",
                             "type": "_Value",
-                            "description": "Depth %"
+                            "description": {
+                              "En": "Depth %",
+                              "Fr": "Profondeur %",
+                              "De": "Tiefe %",
+                              "Es": "Profundidad %"
+                            }
                           }
                         }
                       }
@@ -296,7 +351,12 @@
             },
             "set": {
               "type": "OcaBlock",
-              "description": "Individual Parameters",
+              "description": {
+                "En": "Individual Parameters",
+                "Fr": "Individual Parameters",
+                "De": "Individual Parameters",
+                "Es": "Individual Parameters"
+              },
               "fields": {
                 "Set_Main_Parameters": {
                   "type": "OcaBlock",
@@ -349,7 +409,12 @@
                           "amp": {
                             "value": "1.0",
                             "type": "_Value",
-                            "description": "Default unit is Vpp"
+                            "description": {
+                              "En": "Default unit is Vpp",
+                              "Fr": "L'unité par défaut est Vpp",
+                              "De": "Standardeinheit ist Vss",
+                              "Es": "La unidad predeterminada es Vpp"
+                            }
                           }
                         }
                       }
@@ -402,7 +467,12 @@
                           "shape": {
                             "value": "SIN",
                             "type": "_Value",
-                            "description": "SIN, SQU, RAMP, PULS, NOIS, DC, USER"
+                            "description": {
+                              "En": "SIN, SQU, RAMP, PULS, NOIS, DC, USER",
+                              "Fr": "SIN, SQU, RAMP, PULS, NOIS, DC, USER",
+                              "De": "SIN, SQU, RAMP, PULS, NOIS, DC, USER",
+                              "Es": "SIN, SQU, RAMP, PULS, NOIS, DC, USER"
+                            }
                           }
                         }
                       }
@@ -434,7 +504,12 @@
                           "ohms": {
                             "value": "50",
                             "type": "_Value",
-                            "description": "Ohms or INFinity"
+                            "description": {
+                              "En": "Ohms or INFinity",
+                              "Fr": "Ohms or INFinity",
+                              "De": "Ohms or INFinity",
+                              "Es": "Ohms or INFinity"
+                            }
                           }
                         }
                       }
@@ -461,7 +536,12 @@
                           "units": {
                             "value": "VPP",
                             "type": "_Value",
-                            "description": "VPP, VRMS, DBM"
+                            "description": {
+                              "En": "VPP, VRMS, DBM",
+                              "Fr": "VPP, VRMS, DBM",
+                              "De": "VPP, VRMS, DBM",
+                              "Es": "VPP, VRMS, DBM"
+                            }
                           }
                         }
                       }
@@ -472,14 +552,24 @@
             },
             "Do": {
               "type": "OcaBlock",
-              "description": "Actions and Toggles",
+              "description": {
+                "En": "Actions and Toggles",
+                "Fr": "Actions et bascules",
+                "De": "Aktionen und Umschalter",
+                "Es": "Acciones y conmutadores"
+              },
               "fields": {
                 "Output_Control": {
                   "type": "OcaBlock",
                   "fields": {
                     "Output_ON": {
                       "type": "_GuiActuator",
-                      "label_inactive": "Output ON",
+                      "label_inactive": {
+                        "En": "Output ON",
+                        "Fr": "Sortie ON",
+                        "De": "Ausgang ON",
+                        "Es": "Salida ON"
+                      },
                       "style": {
                         "active_text_color": "#1a1a1a",
                         "text_color": "#888888",
@@ -499,7 +589,12 @@
                     },
                     "Output_OFF": {
                       "type": "_GuiActuator",
-                      "label_inactive": "Output OFF",
+                      "label_inactive": {
+                        "En": "Output OFF",
+                        "Fr": "Sortie DÉSACTIVÉE",
+                        "De": "Ausgang AUS",
+                        "Es": "Salida DESACTIVADA"
+                      },
                       "style": {
                         "active_text_color": "#1a1a1a",
                         "text_color": "#888888",
@@ -519,7 +614,12 @@
                     },
                     "Sync_ON": {
                       "type": "_GuiActuator",
-                      "label_inactive": "Sync ON",
+                      "label_inactive": {
+                        "En": "Sync ON",
+                        "Fr": "Sync ON",
+                        "De": "Sync ON",
+                        "Es": "Sync ON"
+                      },
                       "style": {
                         "active_text_color": "#1a1a1a",
                         "text_color": "#888888",
@@ -539,7 +639,12 @@
                     },
                     "Sync_OFF": {
                       "type": "_GuiActuator",
-                      "label_inactive": "Sync OFF",
+                      "label_inactive": {
+                        "En": "Sync OFF",
+                        "Fr": "Sync OFF",
+                        "De": "Sync OFF",
+                        "Es": "Sync OFF"
+                      },
                       "style": {
                         "active_text_color": "#1a1a1a",
                         "text_color": "#888888",
@@ -564,7 +669,12 @@
                   "fields": {
                     "AM_State_ON": {
                       "type": "_GuiActuator",
-                      "label_inactive": "AM ON",
+                      "label_inactive": {
+                        "En": "AM ON",
+                        "Fr": "AM ON",
+                        "De": "AM EIN",
+                        "Es": "AM ENC"
+                      },
                       "style": {
                         "active_text_color": "#1a1a1a",
                         "text_color": "#888888",
@@ -583,7 +693,12 @@
                     },
                     "AM_State_OFF": {
                       "type": "_GuiActuator",
-                      "label_inactive": "AM OFF",
+                      "label_inactive": {
+                        "En": "AM OFF",
+                        "Fr": "AM OFF",
+                        "De": "AM AUS",
+                        "Es": "AM DES"
+                      },
                       "style": {
                         "active_text_color": "#1a1a1a",
                         "text_color": "#888888",
@@ -602,7 +717,12 @@
                     },
                     "FM_State_ON": {
                       "type": "_GuiActuator",
-                      "label_inactive": "FM ON",
+                      "label_inactive": {
+                        "En": "FM ON",
+                        "Fr": "FM ACTIVÉE",
+                        "De": "FM AN",
+                        "Es": "FM ACTIVADO"
+                      },
                       "style": {
                         "active_text_color": "#1a1a1a",
                         "text_color": "#888888",
@@ -621,7 +741,12 @@
                     },
                     "FM_State_OFF": {
                       "type": "_GuiActuator",
-                      "label_inactive": "FM OFF",
+                      "label_inactive": {
+                        "En": "FM OFF",
+                        "Fr": "FM OFF",
+                        "De": "FM OFF",
+                        "Es": "FM OFF"
+                      },
                       "style": {
                         "active_text_color": "#1a1a1a",
                         "text_color": "#888888",
@@ -645,7 +770,12 @@
                   "fields": {
                     "Trigger_Immediate": {
                       "type": "_GuiActuator",
-                      "label_inactive": "Trigger (*TRG)",
+                      "label_inactive": {
+                        "En": "Trigger (*TRG)",
+                        "Fr": "Déclencheur (*TRG)",
+                        "De": "Trigger (*TRG)",
+                        "Es": "Disparo (*TRG)"
+                      },
                       "style": {
                         "active_text_color": "#1a1a1a",
                         "text_color": "#888888",
@@ -664,7 +794,12 @@
                     },
                     "Reset_Device": {
                       "type": "_GuiActuator",
-                      "label_inactive": "Reset (*RST)",
+                      "label_inactive": {
+                        "En": "Reset (*RST)",
+                        "Fr": "Réinitialiser (*RST)",
+                        "De": "Zurücksetzen (*RST)",
+                        "Es": "Reiniciar (*RST)"
+                      },
                       "style": {
                         "active_text_color": "#1a1a1a",
                         "text_color": "#888888",
@@ -683,7 +818,12 @@
                     },
                     "Clear_Text": {
                       "type": "_GuiActuator",
-                      "label_inactive": "Clear Display",
+                      "label_inactive": {
+                        "En": "Clear Display",
+                        "Fr": "Effacer l'affichage",
+                        "De": "Anzeige löschen",
+                        "Es": "Borrar pantalla"
+                      },
                       "style": {
                         "active_text_color": "#1a1a1a",
                         "text_color": "#888888",

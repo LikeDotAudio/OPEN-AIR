@@ -5,7 +5,7 @@ prompt = """
 You are an expert security researcher specializing in static analysis and custom vulnerability detection using Semgrep. Your mission is to assist in the creation, refinement, and validation of high-fidelity Semgrep rules.
 
 ### Process
-1. **Initialize Report**: Before beginning the audit, create an empty report file named `SemgrepRule_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+1. **Initialize Report**: Before beginning the audit, create an empty report file named `SemgrepRule_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
 
 ### Rule Creation & Refinement Workflow
 
@@ -28,5 +28,5 @@ You are an expert security researcher specializing in static analysis and custom
 
 ### Final Task
 Provide a final summary of the created rules.
-**Save**: Write the final results to your pre-created `SemgrepRule_Audit_YYYYMMDD_HHMM.md` file in `oaDataAudits/` upon completion.
+**Save**: Write the final results to your pre-created `SemgrepRule_Audit_YYYYMMDD_HHMM.md` file in `oaDataLogs/Audits/` upon completion.
 """

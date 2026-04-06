@@ -13,7 +13,12 @@
     "blocks": {
       "nab": {
         "type": "OcaBlock",
-        "description": "MPS 8-Slot Metering",
+        "description": {
+          "En": "MPS 8-Slot Metering",
+          "Fr": "MPS 8-Slot Metering",
+          "De": "MPS 8-Slot Metering",
+          "Es": "MPS 8-Slot Metering"
+        },
         "fields": {
           "Measurements": {
             "type": "OcaBlock",
@@ -49,13 +54,23 @@
                       "volts": {
                         "value": "V",
                         "type": "_GuiValue",
-                        "label": "Voltage",
+                        "label": {
+                          "En": "Voltage",
+                          "Fr": "Tension",
+                          "De": "Spannung",
+                          "Es": "Voltaje"
+                        },
                         "units": "V"
                       },
                       "amps": {
                         "value": "A",
                         "type": "_GuiValue",
-                        "label": "Current",
+                        "label": {
+                          "En": "Current",
+                          "Fr": "Courant",
+                          "De": "Strom",
+                          "Es": "Corriente"
+                        },
                         "units": "A"
                       }
                     }
@@ -68,7 +83,12 @@
       },
       "rig": {
         "type": "OcaBlock",
-        "description": "Configuration (Volts/Amps)",
+        "description": {
+          "En": "Configuration (Volts/Amps)",
+          "Fr": "Configuration (Volts/Amps)",
+          "De": "Konfiguration (Volts/Ampere)",
+          "Es": "Configuración (Volts/Amperios)"
+        },
         "fields": {
           "Config_Slot": {
             "type": "OcaBlock",
@@ -104,13 +124,23 @@
                       "volt": {
                         "value": "5.0",
                         "type": "_GuiValue",
-                        "label": "Voltage",
+                        "label": {
+                          "En": "Voltage",
+                          "Fr": "Tension",
+                          "De": "Spannung",
+                          "Es": "Voltaje"
+                        },
                         "units": "V"
                       },
                       "curr": {
                         "value": "1.0",
                         "type": "_GuiValue",
-                        "label": "Current",
+                        "label": {
+                          "En": "Current",
+                          "Fr": "Courant",
+                          "De": "Strom",
+                          "Es": "Corriente"
+                        },
                         "units": "A"
                       }
                     }
@@ -123,18 +153,33 @@
       },
       "Do": {
         "type": "OcaBlock",
-        "description": "System Actions",
+        "description": {
+          "En": "System Actions",
+          "Fr": "Système Actions",
+          "De": "System Actions",
+          "Es": "Sistema Actions"
+        },
         "fields": {
           "Output_Toggles": {
             "type": "OcaBlock",
-            "description": "Individual Output Control",
+            "description": {
+              "En": "Individual Output Control",
+              "Fr": "Individual Sortie Contrôle",
+              "De": "Individual Ausgang Steuerung",
+              "Es": "Individual Salida Control"
+            },
             "fields": {
               "Slot_1_Controls": {
                 "type": "OcaBlock",
                 "fields": {
                   "S1_ON": {
                     "type": "_GuiActuator",
-                    "label_inactive": "ON",
+                    "label_inactive": {
+                      "En": "ON",
+                      "Fr": "ON",
+                      "De": "EIN",
+                      "Es": "ENC"
+                    },
                     "AES70": "OcaBooleanActuator",
                     "style": {
                       "active_text_color": "#1a1a1a",
@@ -154,7 +199,12 @@
                   },
                   "S1_OFF": {
                     "type": "_GuiActuator",
-                    "label_inactive": "OFF",
+                    "label_inactive": {
+                      "En": "OFF",
+                      "Fr": "OFF",
+                      "De": "AUS",
+                      "Es": "DES"
+                    },
                     "AES70": "OcaBooleanActuator",
                     "style": {
                       "active_text_color": "#1a1a1a",
@@ -181,7 +231,12 @@
             "fields": {
               "System_Reset": {
                 "type": "_GuiActuator",
-                "label_inactive": "Reset (*RST)",
+                "label_inactive": {
+                  "En": "Reset (*RST)",
+                  "Fr": "Réinitialiser (*RST)",
+                  "De": "Zurücksetzen (*RST)",
+                  "Es": "Reiniciar (*RST)"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -202,7 +257,12 @@
               },
               "Clear_Status": {
                 "type": "_GuiActuator",
-                "label_inactive": "Clear (*CLS)",
+                "label_inactive": {
+                  "En": "Clear (*CLS)",
+                  "Fr": "Effacer (*CLS)",
+                  "De": "Löschen (*CLS)",
+                  "Es": "Borrar (*CLS)"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",

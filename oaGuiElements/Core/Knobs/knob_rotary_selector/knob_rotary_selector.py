@@ -17,6 +17,7 @@ from oaGuiElements.Core.Knobs.knob.knob import CustomKnobFrame
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
+from oaGuiFramework.Methods.i18n_utils import get_text
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 
 # Core Modules for Knob Rendering
@@ -172,7 +173,7 @@ class BuilderKnobRotarySelectorCreator:
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🔬🏗️🎛️ [BUILDER] Entering make_knob_rotary_selector", level="TRACE")
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"📜📑💻 [CONFIG] Raw config received: {config_data}", level="DEBUG")
 
-        label = config_data.get("label_active")
+        label = get_text(config_data.get('label_active'))
         path = config_data.get("path")
         
         # ⚡ HARDENED INTERFACE: Extract from context if available

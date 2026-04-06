@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Trigger Settings",
+        "description": {
+          "En": "Trigger Settings",
+          "Fr": "Déclencheur Settings",
+          "De": "Trigger Einstellungen",
+          "Es": "Disparo Settings"
+        },
         "fields": {
           "Set_Mode": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "mode": {
                     "value": "EDGE",
                     "type": "_GuiValue",
-                    "label": "Mode",
+                    "label": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
                     "units": "",
-                    "description": "EDGE, PULSe, SLOPE, VIDEO, PATTern"
+                    "description": {
+                      "En": "EDGE, PULSe, SLOPE, VIDEO, PATTern",
+                      "Fr": "EDGE, PULSe, SLOPE, VIDEO, PATTern",
+                      "De": "EDGE, PULSe, SLOPE, VIDEO, PATTern",
+                      "Es": "EDGE, PULSe, SLOPE, VIDEO, PATTern"
+                    }
                   }
                 }
               }
@@ -56,7 +71,12 @@
           },
           "Edge_Trigger_Config": {
             "type": "OcaBlock",
-            "description": "Edge Trigger Configuration",
+            "description": {
+              "En": "Edge Trigger Configuration",
+              "Fr": "Configuration de déclenchement sur front",
+              "De": "Flankentrigger-Konfiguration",
+              "Es": "Configuración de disparo por flanco"
+            },
             "fields": {
               "Set_Edge_Source": {
                 "type": "OcaBlock",
@@ -89,9 +109,19 @@
                       "source": {
                         "value": "CHAN1",
                         "type": "_GuiValue",
-                        "label": "Source",
+                        "label": {
+                          "En": "Source",
+                          "Fr": "Source",
+                          "De": "Quelle",
+                          "Es": "Fuente"
+                        },
                         "units": "",
-                        "description": "CHANn, AC"
+                        "description": {
+                          "En": "CHANn, AC",
+                          "Fr": "CANn, CA",
+                          "De": "KANn, AC",
+                          "Es": "CANn, CA"
+                        }
                       }
                     }
                   }
@@ -128,9 +158,19 @@
                       "slope": {
                         "value": "POSitive",
                         "type": "_GuiValue",
-                        "label": "Slope",
+                        "label": {
+                          "En": "Slope",
+                          "Fr": "Pente",
+                          "De": "Flanke",
+                          "Es": "Pendiente"
+                        },
                         "units": "",
-                        "description": "POSitive, NEGative, RFALI"
+                        "description": {
+                          "En": "POSitive, NEGative, RFALI",
+                          "Fr": "POSitive, NEGative, RFALI",
+                          "De": "POSitive, NEGative, RFALI",
+                          "Es": "POSitive, NEGative, RFALI"
+                        }
                       }
                     }
                   }
@@ -167,7 +207,12 @@
                       "level": {
                         "value": "0.0",
                         "type": "_GuiValue",
-                        "label": "Level",
+                        "label": {
+                          "En": "Level",
+                          "Fr": "Niveau",
+                          "De": "Pegel",
+                          "Es": "Nivel"
+                        },
                         "units": "V"
                       }
                     }
@@ -210,9 +255,19 @@
                       "sweep": {
                         "value": "AUTO",
                         "type": "_GuiValue",
-                        "label": "Sweep",
+                        "label": {
+                          "En": "Sweep",
+                          "Fr": "Sweep",
+                          "De": "Sweep",
+                          "Es": "Sweep"
+                        },
                         "units": "",
-                        "description": "AUTO, NORMal, SINGle"
+                        "description": {
+                          "En": "AUTO, NORMal, SINGle",
+                          "Fr": "AUTO, NORMAL, UNIQUE",
+                          "De": "AUTO, NORMAL, EINZEL",
+                          "Es": "AUTO, NORMAL, ÚNICO"
+                        }
                       }
                     }
                   }
@@ -224,7 +279,12 @@
       },
       "nab": {
         "type": "OcaBlock",
-        "description": "Trigger Status",
+        "description": {
+          "En": "Trigger Status",
+          "Fr": "Déclencheur Status",
+          "De": "Trigger Status",
+          "Es": "Disparo Status"
+        },
         "fields": {
           "Get_Status": {
             "type": "OcaBlock",
@@ -257,7 +317,12 @@
                   "status": {
                     "value": "STOP",
                     "type": "_GuiValue",
-                    "label": "Status",
+                    "label": {
+                      "En": "Status",
+                      "Fr": "État",
+                      "De": "Status",
+                      "Es": "Estado"
+                    },
                     "units": ""
                   }
                 }

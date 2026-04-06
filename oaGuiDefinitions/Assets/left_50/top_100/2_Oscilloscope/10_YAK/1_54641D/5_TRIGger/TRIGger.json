@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Trigger Settings",
+        "description": {
+          "En": "Trigger Settings",
+          "Fr": "Déclencheur Settings",
+          "De": "Trigger Einstellungen",
+          "Es": "Disparo Settings"
+        },
         "fields": {
           "Set_Trigger_Mode": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "mode": {
                     "value": "EDGE",
                     "type": "_GuiValue",
-                    "label": "Mode",
+                    "label": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
                     "units": "",
-                    "description": "EDGE, PATTern, PULSe, TV, IIC, SPI, GLITch"
+                    "description": {
+                      "En": "EDGE, PATTern, PULSe, TV, IIC, SPI, GLITch",
+                      "Fr": "EDGE, PATTern, PULSe, TV, IIC, SPI, GLITch",
+                      "De": "EDGE, PATTern, PULSe, TV, IIC, SPI, GLITch",
+                      "Es": "EDGE, PATTern, PULSe, TV, IIC, SPI, GLITch"
+                    }
                   }
                 }
               }
@@ -85,7 +100,12 @@
                   "time": {
                     "value": "60e-9",
                     "type": "_GuiValue",
-                    "label": "Holdoff",
+                    "label": {
+                      "En": "Holdoff",
+                      "Fr": "Maintienoff",
+                      "De": "Haltenoff",
+                      "Es": "Manteneroff"
+                    },
                     "units": "s"
                   }
                 }
@@ -94,7 +114,12 @@
           },
           "Edge_Trigger_Setup": {
             "type": "OcaBlock",
-            "description": "Edge Trigger Config",
+            "description": {
+              "En": "Edge Trigger Config",
+              "Fr": "Edge Déclencheur Config",
+              "De": "Edge Trigger Config",
+              "Es": "Edge Disparo Config"
+            },
             "fields": {
               "Set_Edge_Source": {
                 "type": "OcaBlock",
@@ -127,9 +152,19 @@
                       "source": {
                         "value": "CHAN1",
                         "type": "_GuiValue",
-                        "label": "Source",
+                        "label": {
+                          "En": "Source",
+                          "Fr": "Source",
+                          "De": "Quelle",
+                          "Es": "Fuente"
+                        },
                         "units": "",
-                        "description": "CHANn, DIGn, EXT"
+                        "description": {
+                          "En": "CHANn, DIGn, EXT",
+                          "Fr": "CHANn, DIGn, EXT",
+                          "De": "CHANn, DIGn, EXT",
+                          "Es": "CHANn, DIGn, EXT"
+                        }
                       }
                     }
                   }
@@ -166,9 +201,19 @@
                       "slope": {
                         "value": "POSitive",
                         "type": "_GuiValue",
-                        "label": "Slope",
+                        "label": {
+                          "En": "Slope",
+                          "Fr": "Pente",
+                          "De": "Flanke",
+                          "Es": "Pendiente"
+                        },
                         "units": "",
-                        "description": "POSitive, NEGative"
+                        "description": {
+                          "En": "POSitive, NEGative",
+                          "Fr": "POSitif, NÉGatif",
+                          "De": "Positiv, Negativ",
+                          "Es": "POSitivo, NEGativo"
+                        }
                       }
                     }
                   }
@@ -178,7 +223,12 @@
           },
           "Glitch_Trigger_Setup": {
             "type": "OcaBlock",
-            "description": "Glitch/Pulse Width Config",
+            "description": {
+              "En": "Glitch/Pulse Width Config",
+              "Fr": "Glitch/Pulse Width Config",
+              "De": "Glitch/Pulse Width Config",
+              "Es": "Glitch/Pulse Width Config"
+            },
             "fields": {
               "Set_Glitch_Source": {
                 "type": "OcaBlock",
@@ -211,7 +261,12 @@
                       "source": {
                         "value": "CHAN1",
                         "type": "_GuiValue",
-                        "label": "Source",
+                        "label": {
+                          "En": "Source",
+                          "Fr": "Source",
+                          "De": "Quelle",
+                          "Es": "Fuente"
+                        },
                         "units": ""
                       }
                     }
@@ -249,9 +304,19 @@
                       "qual": {
                         "value": "LESSthan",
                         "type": "_GuiValue",
-                        "label": "Condition",
+                        "label": {
+                          "En": "Condition",
+                          "Fr": "Condition",
+                          "De": "Condition",
+                          "Es": "Condition"
+                        },
                         "units": "",
-                        "description": "LESSthan, GREaterthan, RANGe"
+                        "description": {
+                          "En": "LESSthan, GREaterthan, RANGe",
+                          "Fr": "LESSthan, GREaterthan, RANGe",
+                          "De": "LESSthan, GREaterthan, RANGe",
+                          "Es": "LESSthan, GREaterthan, RANGe"
+                        }
                       }
                     }
                   }
@@ -288,7 +353,12 @@
                       "time": {
                         "value": "100e-9",
                         "type": "_GuiValue",
-                        "label": "Time",
+                        "label": {
+                          "En": "Time",
+                          "Fr": "Temps",
+                          "De": "Zeit",
+                          "Es": "Tiempo"
+                        },
                         "units": "s"
                       }
                     }

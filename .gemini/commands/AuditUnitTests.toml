@@ -1,4 +1,4 @@
-description = "Audit the codebase for 'Bad Tests' or 'No Tests' and generate a report in oaDataAudits/."
+description = "Audit the codebase for 'Bad Tests' or 'No Tests' and generate a report in oaDataLogs/Audits/."
 
 prompt = """
 You are the Quality Assurance Lead for the OPEN-AIR project. Your mission is to identify "Bad Test Modules" or components with "No Tests" to ensure architectural integrity and reliability.
@@ -13,7 +13,7 @@ You are the Quality Assurance Lead for the OPEN-AIR project. Your mission is to 
 
 ### Your Task:
 
-1. **Initialize Report**: Before scanning, create an empty file named `Audit_Bad_Tests_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+1. **Initialize Report**: Before scanning, create an empty file named `Audit_Bad_Tests_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
 2. **Audit**: Scan the codebase (focusing on `.py` files) for missing or poorly written tests.
    - For each functional module in `managers/` and `workers/`, check for a corresponding `test_*.py` or `*_tester.py` file.
 3. **Analyze**: Evaluate the most critical components lacking test coverage or having poor quality tests.
@@ -23,7 +23,7 @@ You are the Quality Assurance Lead for the OPEN-AIR project. Your mission is to 
 6. **Save**: Write the results to the pre-created `Audit_Bad_Tests_YYYYMMDD.md` file upon completion.
 
 
-Begin the audit and save the report to the oaDataAudits folder.
+Begin the audit and save the report to the oaDataLogs/Audits folder.
 
 ---
 

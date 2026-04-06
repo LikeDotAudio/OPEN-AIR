@@ -17,7 +17,7 @@ BUILDER_DEBUG = is_debug_allowed(system="gui", element="gui_builder")
 
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaStyle.Core.style import DEFAULT_THEME, THEMES
@@ -25,10 +25,10 @@ from oaStyle.Core.style import DEFAULT_THEME, THEMES
 # --- 1. CORE MIXINS ---
 from oaStyle.Core.gui_style import GuiStyleMixin
 from oaGuiManager.Core.factory.gui_widget_factory import GuiWidgetFactoryMixin
-from oaGuiBuildShell.Managers.gui_mqtt import GuiMqttManagerMixin
+from oaGuiFramework.Managers.gui_mqtt import GuiMqttManagerMixin
 from oaGuiManager.FileReaders.gui_file_loader import GuiFileLoaderMixin
-from oaGuiBuildShell.Managers.gui_re import GuiRebuilderMixin
-from oaGuiBuildShell.Managers.gui_batch import GuiBatchBuilderMixin
+from oaGuiFramework.Managers.gui_re import GuiRebuilderMixin
+from oaGuiFramework.Managers.gui_batch import GuiBatchBuilderMixin
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 
 # --- EXTRACTED CORE MODULES ---

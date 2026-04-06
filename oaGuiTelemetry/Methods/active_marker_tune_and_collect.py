@@ -14,7 +14,7 @@ import time
 from loguru import logger
 
 # --- Standard Debug Logging Setup ---
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaComMQTT.Methods.mqtt_controller_util import MqttControllerUtility

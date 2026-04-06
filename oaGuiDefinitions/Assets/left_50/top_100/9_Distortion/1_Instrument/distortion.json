@@ -13,15 +13,30 @@
     "blocks": {
       "DC_Load_Panel": {
         "type": "OcaBlock",
-        "description": "DC Electronic Load Control Panel",
+        "description": {
+          "En": "DC Electronic Load Control Panel",
+          "Fr": "Panneau de contrôle de charge électronique CC",
+          "De": "Bedienfeld für elektronische DC-Last",
+          "Es": "Panel de control de carga electrónica de CC"
+        },
         "fields": {
           "Mode_Control": {
             "type": "OcaBlock",
-            "description": "Operating Mode",
+            "description": {
+              "En": "Operating Mode",
+              "Fr": "Operating Mode",
+              "De": "Operating Modus",
+              "Es": "Operating Modo"
+            },
             "fields": {
               "mode_set": {
                 "type": "_GuiDropDownOption",
-                "label_active": "Mode",
+                "label_active": {
+                  "En": "Mode",
+                  "Fr": "Mode",
+                  "De": "Modus",
+                  "Es": "Modo"
+                },
                 "options": [
                   "CC",
                   "CV",
@@ -53,11 +68,21 @@
           },
           "Value_Control": {
             "type": "OcaBlock",
-            "description": "Set Value",
+            "description": {
+              "En": "Set Value",
+              "Fr": "Set Valeur",
+              "De": "Set Wert",
+              "Es": "Set Valor"
+            },
             "fields": {
               "set_value": {
                 "type": "_TextInput",
-                "label_active": "Set Value",
+                "label_active": {
+                  "En": "Set Value",
+                  "Fr": "Set Valeur",
+                  "De": "Set Wert",
+                  "Es": "Set Valor"
+                },
                 "value_default": "1.0",
                 "message_details": {
                   "DC_LOAD_MODEL": {
@@ -83,12 +108,27 @@
           },
           "Input_Control": {
             "type": "OcaBlock",
-            "description": "Input State",
+            "description": {
+              "En": "Input State",
+              "Fr": "Entrée State",
+              "De": "Eingang State",
+              "Es": "Entrada State"
+            },
             "fields": {
               "input_enable": {
                 "type": "_GuiButtonToggle",
-                "label_active": "ON",
-                "label_inactive": "OFF",
+                "label_active": {
+                  "En": "ON",
+                  "Fr": "ON",
+                  "De": "EIN",
+                  "Es": "ENC"
+                },
+                "label_inactive": {
+                  "En": "OFF",
+                  "Fr": "OFF",
+                  "De": "AUS",
+                  "Es": "DES"
+                },
                 "style": {
                   "active_text_color": "#1a1a1a",
                   "text_color": "#888888",

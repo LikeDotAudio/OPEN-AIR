@@ -35,7 +35,7 @@ from oaComSMPTE2138.Interface import device_pb2
 # --- Standard OPEN-AIR Imports ---
 from oaLogging.Core.logger import SMPTE2138_LOGGER
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
 from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
 

@@ -32,7 +32,7 @@ def is_debug_allowed(system: str, element: str = None, func_name: str = None) ->
     
     # --- Python Fallback Logic ---
     try:
-        from oaConfiguration.Managers.LoggingManager.manager import LoggingMatrixManager
+        from oaConfigurationManager.Managers.LoggingManager.manager import LoggingMatrixManager
         manager = LoggingMatrixManager.get_instance()
         return manager.is_debug_allowed(system, element, func_name)
     except Exception:
@@ -72,7 +72,7 @@ def matrix_log(system: str, element: str = None, func_name: str = None,
         # Master Debug is off. We want INFO logs to show by default.
         # But if sys_core is EXPLICITLY False, we mute INFO too.
         try:
-            from oaConfiguration.Managers.LoggingManager.manager import LoggingMatrixManager
+            from oaConfigurationManager.Managers.LoggingManager.manager import LoggingMatrixManager
             matrix = LoggingMatrixManager.get_instance().get_matrix()
             if matrix.get(f"SYS_{system.upper()}") is False:
                 return

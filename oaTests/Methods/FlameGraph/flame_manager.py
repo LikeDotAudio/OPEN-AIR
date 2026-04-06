@@ -47,7 +47,7 @@ from oaTests.Methods.FlameGraph.flame_wall_shame import generate_wall_of_shame
 from oaTests.Methods.FlameGraph.flame_wall_pity import generate_wall_of_pity
 from oaTests.Methods.FlameGraph.flame_html import generate_final_html
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 # Global lock to prevent multiple synthesis runs

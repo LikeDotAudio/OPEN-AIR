@@ -1,7 +1,12 @@
 {
   "DVB-T (Australia)": {
     "name": "DVB-T (Australia)",
-    "description": "Digital Video Broadcasting - Terrestrial for Australia",
+    "description": {
+      "En": "Digital Video Broadcasting - Terrestrial for Australia",
+      "Fr": "Diffusion vidéo numérique - Terrestre pour l'Australie",
+      "De": "Digital Video Broadcasting - Terrestrisch für Australien",
+      "Es": "Difusión de video digital - Terrestre para Australia"
+    },
     "country": "Australia",
     "region": "Oceania",
     "type": "tv",

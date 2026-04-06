@@ -1,4 +1,5 @@
 # json_tree/json_tree.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
@@ -12,7 +13,7 @@ from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
@@ -69,7 +70,7 @@ class JsonTreeWidget(
         self.header = tk.Frame(self)
         self.header.pack(side=tk.TOP, fill=tk.X, pady=(0, 5))
         
-        label = self.config_data.get("label_active")
+        label = self.get_text(config.get("label_active"))
         if label and self.config_data.get("show_label", True):
             self.lbl = tk.Label(self.header, text=label, font=("Helvetica", 10, "bold"), fg="white")
             self.lbl.pack(side=tk.LEFT, anchor="w")

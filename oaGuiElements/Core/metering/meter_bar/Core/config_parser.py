@@ -1,4 +1,5 @@
 # Core/config_parser.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -182,7 +183,7 @@ class MeterConfig:
 
         return cls(
 
-            label=config.get("label_active", config.get("label", "")),
+            label=get_text(config.get("label_active"), get_text(config.get("label"), "")),
             path=config.get("path", ""),
             
             show_label=labels_cfg.get("show_label", config.get("show_label", True)),

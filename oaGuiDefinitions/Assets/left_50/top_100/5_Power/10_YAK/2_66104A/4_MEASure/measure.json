@@ -13,7 +13,12 @@
     "blocks": {
       "Measure": {
         "type": "OcaBlock",
-        "description": "Readback Queries",
+        "description": {
+          "En": "Readback Queries",
+          "Fr": "Readback Queries",
+          "De": "Readback Queries",
+          "Es": "Readback Queries"
+        },
         "fields": {
           "Measure_All": {
             "type": "OcaBlock",
@@ -49,13 +54,23 @@
                       "volts": {
                         "value": "V",
                         "type": "_GuiValue",
-                        "label": "Voltage",
+                        "label": {
+                          "En": "Voltage",
+                          "Fr": "Tension",
+                          "De": "Spannung",
+                          "Es": "Voltaje"
+                        },
                         "units": "V"
                       },
                       "amps": {
                         "value": "A",
                         "type": "_GuiValue",
-                        "label": "Current",
+                        "label": {
+                          "En": "Current",
+                          "Fr": "Courant",
+                          "De": "Strom",
+                          "Es": "Corriente"
+                        },
                         "units": "A"
                       }
                     }

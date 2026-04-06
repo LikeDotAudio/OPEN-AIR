@@ -13,14 +13,24 @@
     "blocks": {
       "Do": {
         "type": "OcaBlock",
-        "description": "Actions and Toggles",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
         "fields": {
           "Run_Control": {
             "type": "OcaBlock",
             "fields": {
               "Run": {
                 "type": "_GuiActuator",
-                "label_inactive": "RUN",
+                "label_inactive": {
+                  "En": "RUN",
+                  "Fr": "EXEC",
+                  "De": "AUSFÜHREN",
+                  "Es": "EJEC"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -41,7 +51,12 @@
               },
               "Stop": {
                 "type": "_GuiActuator",
-                "label_inactive": "STOP",
+                "label_inactive": {
+                  "En": "STOP",
+                  "Fr": "STOP",
+                  "De": "STOP",
+                  "Es": "STOP"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -62,7 +77,12 @@
               },
               "Single": {
                 "type": "_GuiActuator",
-                "label_inactive": "SINGLE",
+                "label_inactive": {
+                  "En": "SINGLE",
+                  "Fr": "SINGLE",
+                  "De": "SINGLE",
+                  "Es": "SINGLE"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -83,7 +103,12 @@
               },
               "Auto_Scale": {
                 "type": "_GuiActuator",
-                "label_inactive": "AUTO",
+                "label_inactive": {
+                  "En": "AUTO",
+                  "Fr": "AUTO",
+                  "De": "AUTO",
+                  "Es": "AUTO"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -109,7 +134,12 @@
             "fields": {
               "Clear": {
                 "type": "_GuiActuator",
-                "label_inactive": "Clear",
+                "label_inactive": {
+                  "En": "Clear",
+                  "Fr": "Effacer",
+                  "De": "Löschen",
+                  "Es": "Borrar"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -129,7 +159,12 @@
               },
               "Force_Trigger": {
                 "type": "_GuiActuator",
-                "label_inactive": "Force",
+                "label_inactive": {
+                  "En": "Force",
+                  "Fr": "Force",
+                  "De": "Force",
+                  "Es": "Force"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",

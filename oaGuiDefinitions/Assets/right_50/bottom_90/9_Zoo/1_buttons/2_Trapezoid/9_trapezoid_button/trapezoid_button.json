@@ -13,7 +13,12 @@
     "blocks": {
       "Trapezoid_Button_Petting_Zoo": {
         "type": "OcaBlock",
-        "description": "Trapezoid Button Showcase (8 Variations)",
+        "description": {
+          "En": "Trapezoid Button Showcase (8 Variations)",
+          "Fr": "Trapezoid Bouton Showcase (8 Variations)",
+          "De": "Trapezoid Taste Showcase (8 Variations)",
+          "Es": "Trapezoid Botón Showcase (8 Variations)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -32,7 +37,12 @@
         "fields": {
           "play_standard": {
             "type": "_TrapezoidButton",
-            "label_active": "Play",
+            "label_active": {
+              "En": "Play",
+              "Fr": "Lire",
+              "De": "Wiedergabe",
+              "Es": "Reproducir"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -49,7 +59,12 @@
           },
           "rec_latching_red": {
             "type": "_TrapezoidButton",
-            "label_active": "REC",
+            "label_active": {
+              "En": "REC",
+              "Fr": "REC",
+              "De": "REC",
+              "Es": "REC"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -66,7 +81,12 @@
           },
           "mute_large_blue": {
             "type": "_TrapezoidButton",
-            "label_active": "MUTE",
+            "label_active": {
+              "En": "MUTE",
+              "Fr": "MUTE",
+              "De": "MUTE",
+              "Es": "MUTE"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -83,7 +103,12 @@
           },
           "select_small_yellow": {
             "type": "_TrapezoidButton",
-            "label_active": "SELECT",
+            "label_active": {
+              "En": "SELECT",
+              "Fr": "SELECT",
+              "De": "SELECT",
+              "Es": "SELECT"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -101,7 +126,12 @@
           },
           "process_purple_latch": {
             "type": "_TrapezoidButton",
-            "label_active": "PROCESS",
+            "label_active": {
+              "En": "PROCESS",
+              "Fr": "PROCESS",
+              "De": "PROCESS",
+              "Es": "PROCESS"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -118,7 +148,12 @@
           },
           "fx_orange_active": {
             "type": "_TrapezoidButton",
-            "label_active": "FX",
+            "label_active": {
+              "En": "FX",
+              "Fr": "FX",
+              "De": "FX",
+              "Es": "FX"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -135,7 +170,12 @@
           },
           "mode_cyan_wide": {
             "type": "_TrapezoidButton",
-            "label_active": "MODE",
+            "label_active": {
+              "En": "MODE",
+              "Fr": "MODE",
+              "De": "MODE",
+              "Es": "MODE"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -153,7 +193,12 @@
           },
           "global_white_latch": {
             "type": "_TrapezoidButton",
-            "label_active": "GLOBAL",
+            "label_active": {
+              "En": "GLOBAL",
+              "Fr": "GLOBAL",
+              "De": "GLOBAL",
+              "Es": "GLOBAL"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -172,7 +217,12 @@
       },
       "Trapezoid_Button_REC_Variations": {
         "type": "OcaBlock",
-        "description": "REC Button Variations (8 Demos)",
+        "description": {
+          "En": "REC Button Variations (8 Demos)",
+          "Fr": "REC Bouton Variations (8 Demos)",
+          "De": "REC Taste Variationen (8 Demos)",
+          "Es": "REC Botón Variaciones (8 Demos)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -191,7 +241,12 @@
         "fields": {
           "rec_demo1": {
             "type": "_TrapezoidButton",
-            "label_active": "REC",
+            "label_active": {
+              "En": "REC",
+              "Fr": "REC",
+              "De": "REC",
+              "Es": "REC"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -208,7 +263,12 @@
           },
           "rec_demo2": {
             "type": "_TrapezoidButton",
-            "label_active": "REC",
+            "label_active": {
+              "En": "REC",
+              "Fr": "REC",
+              "De": "REC",
+              "Es": "REC"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -225,7 +285,12 @@
           },
           "rec_demo3": {
             "type": "_TrapezoidButton",
-            "label_active": "REC",
+            "label_active": {
+              "En": "REC",
+              "Fr": "REC",
+              "De": "REC",
+              "Es": "REC"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -242,7 +307,12 @@
           },
           "rec_demo4": {
             "type": "_TrapezoidButton",
-            "label_active": "REC",
+            "label_active": {
+              "En": "REC",
+              "Fr": "REC",
+              "De": "REC",
+              "Es": "REC"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -260,7 +330,12 @@
           },
           "rec_demo5": {
             "type": "_TrapezoidButton",
-            "label_active": "REC",
+            "label_active": {
+              "En": "REC",
+              "Fr": "REC",
+              "De": "REC",
+              "Es": "REC"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -278,7 +353,12 @@
           },
           "rec_demo6": {
             "type": "_TrapezoidButton",
-            "label_active": "REC",
+            "label_active": {
+              "En": "REC",
+              "Fr": "REC",
+              "De": "REC",
+              "Es": "REC"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -295,7 +375,12 @@
           },
           "rec_demo7": {
             "type": "_TrapezoidButton",
-            "label_active": "REC",
+            "label_active": {
+              "En": "REC",
+              "Fr": "REC",
+              "De": "REC",
+              "Es": "REC"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -312,7 +397,12 @@
           },
           "rec_demo8": {
             "type": "_TrapezoidButton",
-            "label_active": "REC",
+            "label_active": {
+              "En": "REC",
+              "Fr": "REC",
+              "De": "REC",
+              "Es": "REC"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -331,7 +421,12 @@
       },
       "Trapezoid_Button_MUTE_Variations": {
         "type": "OcaBlock",
-        "description": "MUTE Button Variations (8 Demos)",
+        "description": {
+          "En": "MUTE Button Variations (8 Demos)",
+          "Fr": "MUTE Bouton Variations (8 Demos)",
+          "De": "MUTE Taste Variationen (8 Demos)",
+          "Es": "MUTE Botón Variaciones (8 Demos)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -350,7 +445,12 @@
         "fields": {
           "mute_standard_latch": {
             "type": "_TrapezoidButton",
-            "label_active": "MUTE",
+            "label_active": {
+              "En": "MUTE",
+              "Fr": "MUTE",
+              "De": "MUTE",
+              "Es": "MUTE"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -367,7 +467,12 @@
           },
           "mute_momentary_red": {
             "type": "_TrapezoidButton",
-            "label_active": "MUTE",
+            "label_active": {
+              "En": "MUTE",
+              "Fr": "MUTE",
+              "De": "MUTE",
+              "Es": "MUTE"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -384,7 +489,12 @@
           },
           "solo_latching_blue": {
             "type": "_TrapezoidButton",
-            "label_active": "SOLO",
+            "label_active": {
+              "En": "SOLO",
+              "Fr": "SOLO",
+              "De": "SOLO",
+              "Es": "SOLO"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -401,7 +511,12 @@
           },
           "bypass_momentary_green": {
             "type": "_TrapezoidButton",
-            "label_active": "BYPASS",
+            "label_active": {
+              "En": "BYPASS",
+              "Fr": "BYPASS",
+              "De": "BYPASS",
+              "Es": "BYPASS"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -418,7 +533,12 @@
           },
           "effect_latching_purple": {
             "type": "_TrapezoidButton",
-            "label_active": "EFFECT",
+            "label_active": {
+              "En": "EFFECT",
+              "Fr": "EFFECT",
+              "De": "EFFECT",
+              "Es": "EFFECT"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -435,7 +555,12 @@
           },
           "power_momentary_orange": {
             "type": "_TrapezoidButton",
-            "label_active": "POWER",
+            "label_active": {
+              "En": "POWER",
+              "Fr": "POWER",
+              "De": "POWER",
+              "Es": "POWER"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -452,7 +577,12 @@
           },
           "reset_latching_cyan": {
             "type": "_TrapezoidButton",
-            "label_active": "RESET",
+            "label_active": {
+              "En": "RESET",
+              "Fr": "RESET",
+              "De": "RESET",
+              "Es": "RESET"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,
@@ -469,7 +599,12 @@
           },
           "filter_momentary_wide": {
             "type": "_TrapezoidButton",
-            "label_active": "FILTER",
+            "label_active": {
+              "En": "FILTER",
+              "Fr": "FILTER",
+              "De": "FILTER",
+              "Es": "FILTER"
+            },
             "min": 0.0,
             "max": 1.0,
             "value_default": false,

@@ -1,4 +1,5 @@
 # text_table/table_editing_sort_mixin.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.1
 #
@@ -13,7 +14,7 @@ import re
 from oaLogging.Core.logger import TABLE_LOGGER
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 

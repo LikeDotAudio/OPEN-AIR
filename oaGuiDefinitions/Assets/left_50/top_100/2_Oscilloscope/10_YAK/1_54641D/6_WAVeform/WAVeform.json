@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Waveform Data Transfer Settings",
+        "description": {
+          "En": "Waveform Data Transfer Settings",
+          "Fr": "Paramètres de transfert de données de forme d'onde",
+          "De": "Wellenform-Datentransfer-Einstellungen",
+          "Es": "Ajustes de transferencia de datos de forma de onda"
+        },
         "fields": {
           "Set_Waveform_Source": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "source": {
                     "value": "CHAN1",
                     "type": "_GuiValue",
-                    "label": "Source",
+                    "label": {
+                      "En": "Source",
+                      "Fr": "Source",
+                      "De": "Quelle",
+                      "Es": "Fuente"
+                    },
                     "units": "",
-                    "description": "CHANn, DIGn, PODn, FUNCtion, MATH"
+                    "description": {
+                      "En": "CHANn, DIGn, PODn, FUNCtion, MATH",
+                      "Fr": "CANn, DIGn, PODn, FONCtion, MATH",
+                      "De": "KANn, DIGn, PODn, FUNCtion, MATH",
+                      "Es": "CANn, DIGn, PODn, FUNCIÓN, MATEM"
+                    }
                   }
                 }
               }
@@ -85,9 +100,19 @@
                   "format": {
                     "value": "BYTE",
                     "type": "_GuiValue",
-                    "label": "Format",
+                    "label": {
+                      "En": "Format",
+                      "Fr": "Format",
+                      "De": "Format",
+                      "Es": "Formato"
+                    },
                     "units": "",
-                    "description": "ASCii, WORD, BYTE"
+                    "description": {
+                      "En": "ASCii, WORD, BYTE",
+                      "Fr": "ASCii, WORD, BYTE",
+                      "De": "ASCii, WORD, BYTE",
+                      "Es": "ASCii, WORD, BYTE"
+                    }
                   }
                 }
               }
@@ -124,9 +149,19 @@
                   "points": {
                     "value": "1000",
                     "type": "_GuiValue",
-                    "label": "Points",
+                    "label": {
+                      "En": "Points",
+                      "Fr": "Points",
+                      "De": "Punkte",
+                      "Es": "Puntos"
+                    },
                     "units": "",
-                    "description": "100, 250, 500, 1000, 2000, MAXimum"
+                    "description": {
+                      "En": "100, 250, 500, 1000, 2000, MAXimum",
+                      "Fr": "100, 250, 500, 1000, 2000, MAXimum",
+                      "De": "100, 250, 500, 1000, 2000, MAXimum",
+                      "Es": "100, 250, 500, 1000, 2000, MAXimum"
+                    }
                   }
                 }
               }
@@ -163,9 +198,19 @@
                   "order": {
                     "value": "LSBFirst",
                     "type": "_GuiValue",
-                    "label": "Order",
+                    "label": {
+                      "En": "Order",
+                      "Fr": "Order",
+                      "De": "Order",
+                      "Es": "Order"
+                    },
                     "units": "",
-                    "description": "LSBFirst or MSBFirst"
+                    "description": {
+                      "En": "LSBFirst or MSBFirst",
+                      "Fr": "LSBFirst or MSBFirst",
+                      "De": "LSBFirst or MSBFirst",
+                      "Es": "LSBFirst or MSBFirst"
+                    }
                   }
                 }
               }
@@ -202,9 +247,19 @@
                   "state": {
                     "value": "ON",
                     "type": "_GuiValue",
-                    "label": "Unsigned",
+                    "label": {
+                      "En": "Unsigned",
+                      "Fr": "Unsigned",
+                      "De": "Unsigned",
+                      "Es": "Unsigned"
+                    },
                     "units": "",
-                    "description": "ON (0-255) or OFF (-128-127)"
+                    "description": {
+                      "En": "ON (0-255) or OFF (-128-127)",
+                      "Fr": "ON (0-255) or OFF (-128-127)",
+                      "De": "ON (0-255) or OFF (-128-127)",
+                      "Es": "ON (0-255) or OFF (-128-127)"
+                    }
                   }
                 }
               }
@@ -214,7 +269,12 @@
       },
       "nab": {
         "type": "OcaBlock",
-        "description": "Waveform Data Readbacks",
+        "description": {
+          "En": "Waveform Data Readbacks",
+          "Fr": "Waveform Data Readbacks",
+          "De": "Waveform Data Readbacks",
+          "Es": "Waveform Data Readbacks"
+        },
         "fields": {
           "Get_Waveform_Data": {
             "type": "OcaBlock",
@@ -247,7 +307,12 @@
                   "data": {
                     "value": "Binary Block",
                     "type": "_GuiValue",
-                    "label": "Data",
+                    "label": {
+                      "En": "Data",
+                      "Fr": "Data",
+                      "De": "Data",
+                      "Es": "Data"
+                    },
                     "units": ""
                   }
                 }
@@ -285,7 +350,12 @@
                   "preamble": {
                     "value": "Fmt, Type, Pts, Cnt, XInc, XOrg, XRef, YInc, YOrg, YRef",
                     "type": "_GuiValue",
-                    "label": "Preamble",
+                    "label": {
+                      "En": "Preamble",
+                      "Fr": "Préambule",
+                      "De": "Präambel",
+                      "Es": "Preámbulo"
+                    },
                     "units": ""
                   }
                 }

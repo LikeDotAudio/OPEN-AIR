@@ -57,8 +57,7 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         # --- Standalone Initialization ---
         try:
             state_cache = self.config_data.get("state_cache_manager")
-            protocol_router = self.config_data.get("protocol_router") or 
-                             (getattr(self.config_data.get("app_instance"), "protocol_router", None) if self.config_data.get("app_instance") else None)
+            protocol_router = self.config_data.get("protocol_router") or (getattr(self.config_data.get("app_instance"), "protocol_router", None) if self.config_data.get("app_instance") else None)
             
             REST_MODULE.get_manager(state_cache_manager=state_cache, protocol_router=protocol_router)
             matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🌐 RestDashboard: RESTManager linked successfully.", "INFO")
@@ -162,23 +161,13 @@ class RestDashboard(tk.Frame, TransparencyMixin):
         
         help_text = tk.Text(tutorial_frame, bg="#1a1a1a", fg="#cccccc", font=("Courier", 9), bd=0, padx=10, pady=10)
         help_text.pack(fill=tk.BOTH, expand=True)
-        help_text.insert(tk.END, "OPEN-AIR REST API TUTORIAL
-", "bold")
-        help_text.insert(tk.END, "==========================
-
-")
-        help_text.insert(tk.END, "1. GETTING STATE:
-")
-        help_text.insert(tk.END, "   GET http://HOST:PORT/PATH/TO/TOPIC
-
-")
-        help_text.insert(tk.END, "2. SETTING STATE:
-")
-        help_text.insert(tk.END, "   POST http://HOST:PORT/PATH/TO/TOPIC
-")
-        help_text.insert(tk.END, "   Body: { "val": NEW_VALUE }
-
-")
+        help_text.insert(tk.END, "OPEN-AIR REST API TUTORIAL\n", "bold")
+        help_text.insert(tk.END, "==========================\n\n")
+        help_text.insert(tk.END, "1. GETTING STATE:\n")
+        help_text.insert(tk.END, "   GET http://HOST:PORT/PATH/TO/TOPIC\n\n")
+        help_text.insert(tk.END, "2. SETTING STATE:\n")
+        help_text.insert(tk.END, "   POST http://HOST:PORT/PATH/TO/TOPIC\n")
+        help_text.insert(tk.END, "   Body: { \"val\": NEW_VALUE }\n")
         help_text.tag_configure("bold", foreground="#ffffff", font=("Courier", 10, "bold"))
         help_text.configure(state="disabled")
 

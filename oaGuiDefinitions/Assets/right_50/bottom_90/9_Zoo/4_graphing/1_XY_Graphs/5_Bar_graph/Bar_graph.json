@@ -13,16 +13,36 @@
     "blocks": {
       "elements": {
         "type": "OcaBlock",
-        "label_active": "Gui Dynamic Bar Graph",
+        "label_active": {
+          "En": "Gui Dynamic Bar Graph",
+          "Fr": "Gui Dynamic Bar Graph",
+          "De": "Gui Dynamic Bar Graph",
+          "Es": "Gui Dynamic Bar Graph"
+        },
         "fields": {
           "bar_graph_examples": {
             "type": "OcaBlock",
-            "label_active": "Bar Graph Examples",
-            "description": "Examples of the DynamicBarGraph element.",
+            "label_active": {
+              "En": "Bar Graph Examples",
+              "Fr": "Bar Graph Exemples",
+              "De": "Bar Graph Beispiele",
+              "Es": "Bar Graph Ejemplos"
+            },
+            "description": {
+              "En": "Examples of the DynamicBarGraph element.",
+              "Fr": "Exemples of the DynamicBarGraph element.",
+              "De": "Beispiele of the DynamicBarGraph element.",
+              "Es": "Ejemplos of the DynamicBarGraph element."
+            },
             "fields": {
               "simple_bar_graph": {
                 "type": "DynamicBarGraph",
-                "label": "Metric Comparison",
+                "label": {
+                  "En": "Metric Comparison",
+                  "Fr": "Metric Comparison",
+                  "De": "Metric Comparison",
+                  "Es": "Metric Comparison"
+                },
                 "notes": "Demonstrates categorical data as bars.",
                 "show_title": true,
                 "title": "System Resource Usage",
@@ -32,11 +52,21 @@
                 },
                 "axis": {
                   "x": {
-                    "label": "Resource ID",
+                    "label": {
+                      "En": "Resource ID",
+                      "Fr": "Resource ID",
+                      "De": "Resource ID",
+                      "Es": "Resource ID"
+                    },
                     "color": "white"
                   },
                   "y": {
-                    "label": "Usage (%)",
+                    "label": {
+                      "En": "Usage (%)",
+                      "Fr": "Usage (%)",
+                      "De": "Usage (%)",
+                      "Es": "Usage (%)"
+                    },
                     "min": 0,
                     "max": 100,
                     "color": "cyan"
@@ -48,7 +78,12 @@
                 "datasets": [
                   {
                     "id": "ds_usage",
-                    "label": "Usage",
+                    "label": {
+                      "En": "Usage",
+                      "Fr": "Usage",
+                      "De": "Usage",
+                      "Es": "Usage"
+                    },
                     "style": {
                       "line_color": "cyan",
                       "line_width": 1

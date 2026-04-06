@@ -13,7 +13,12 @@
     "blocks": {
       "Knob_Showcase_Gear_Advanced": {
         "type": "OcaBlock",
-        "description": "50 Gear Knobs showcasing Teeth count, Monochrome styles, and varied Pointers.",
+        "description": {
+          "En": "50 Gear Knobs showcasing Teeth count, Monochrome styles, and varied Pointers.",
+          "Fr": "50 Gear Knobs showcasing Teeth count, Monochrome styles, and varied Pointers.",
+          "De": "50 Gear Knobs showcasing Teeth count, Monochrome styles, and varied Pointers.",
+          "Es": "50 Gear Knobs showcasing Teeth count, Monochrome styles, and varied Pointers."
+        },
         "layout_columns": 5,
         "column_sizing": [
           {
@@ -35,7 +40,12 @@
         "fields": {
           "gear_01": {
             "type": "_SmartKnob",
-            "label": "Mono 8T",
+            "label": {
+              "En": "Mono 8T",
+              "Fr": "Mono 8T",
+              "De": "Mono 8T",
+              "Es": "Mono 8T"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -89,7 +99,12 @@
           },
           "gear_02": {
             "type": "_SmartKnob",
-            "label": "Mono 12T",
+            "label": {
+              "En": "Mono 12T",
+              "Fr": "Mono 12T",
+              "De": "Mono 12T",
+              "Es": "Mono 12T"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -143,7 +158,12 @@
           },
           "gear_03": {
             "type": "_SmartKnob",
-            "label": "Mono 24T",
+            "label": {
+              "En": "Mono 24T",
+              "Fr": "Mono 24T",
+              "De": "Mono 24T",
+              "Es": "Mono 24T"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -197,7 +217,12 @@
           },
           "gear_04": {
             "type": "_SmartKnob",
-            "label": "Mono 6T",
+            "label": {
+              "En": "Mono 6T",
+              "Fr": "Mono 6T",
+              "De": "Mono 6T",
+              "Es": "Mono 6T"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -251,7 +276,12 @@
           },
           "gear_05": {
             "type": "_SmartKnob",
-            "label": "Mono Text",
+            "label": {
+              "En": "Mono Text",
+              "Fr": "Mono Text",
+              "De": "Mono Text",
+              "Es": "Mono Text"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -305,7 +335,12 @@
           },
           "gear_06": {
             "type": "_SmartKnob",
-            "label": "Grey 10T",
+            "label": {
+              "En": "Grey 10T",
+              "Fr": "Grey 10T",
+              "De": "Grey 10T",
+              "Es": "Grey 10T"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -359,7 +394,12 @@
           },
           "gear_07": {
             "type": "_SmartKnob",
-            "label": "Red 20T",
+            "label": {
+              "En": "Red 20T",
+              "Fr": "Red 20T",
+              "De": "Red 20T",
+              "Es": "Red 20T"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -413,7 +453,12 @@
           },
           "gear_08": {
             "type": "_SmartKnob",
-            "label": "Blue 4T",
+            "label": {
+              "En": "Blue 4T",
+              "Fr": "Blue 4T",
+              "De": "Blue 4T",
+              "Es": "Blue 4T"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -467,7 +512,12 @@
           },
           "gear_09": {
             "type": "_SmartKnob",
-            "label": "Grn 32T",
+            "label": {
+              "En": "Grn 32T",
+              "Fr": "Grn 32T",
+              "De": "Grn 32T",
+              "Es": "Grn 32T"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -521,7 +571,12 @@
           },
           "gear_10": {
             "type": "_SmartKnob",
-            "label": "Yel 5T",
+            "label": {
+              "En": "Yel 5T",
+              "Fr": "Yel 5T",
+              "De": "Yel 5T",
+              "Es": "Yel 5T"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -575,7 +630,12 @@
           },
           "gear_11": {
             "type": "_SmartKnob",
-            "label": "White 8T",
+            "label": {
+              "En": "White 8T",
+              "Fr": "White 8T",
+              "De": "White 8T",
+              "Es": "White 8T"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -629,7 +689,12 @@
           },
           "gear_12": {
             "type": "_SmartKnob",
-            "label": "Orange 12T",
+            "label": {
+              "En": "Orange 12T",
+              "Fr": "Orange 12T",
+              "De": "Orange 12T",
+              "Es": "Orange 12T"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -683,7 +748,12 @@
           },
           "gear_13": {
             "type": "_SmartKnob",
-            "label": "Purp 18T",
+            "label": {
+              "En": "Purp 18T",
+              "Fr": "Purp 18T",
+              "De": "Purp 18T",
+              "Es": "Purp 18T"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -737,7 +807,12 @@
           },
           "gear_14": {
             "type": "_SmartKnob",
-            "label": "Cyan 9T",
+            "label": {
+              "En": "Cyan 9T",
+              "Fr": "Cyan 9T",
+              "De": "Cyan 9T",
+              "Es": "Cyan 9T"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -791,7 +866,12 @@
           },
           "gear_15": {
             "type": "_SmartKnob",
-            "label": "Pink 7T",
+            "label": {
+              "En": "Pink 7T",
+              "Fr": "Pink 7T",
+              "De": "Pink 7T",
+              "Es": "Pink 7T"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -845,7 +925,12 @@
           },
           "gear_16": {
             "type": "_SmartKnob",
-            "label": "M_Line_8",
+            "label": {
+              "En": "M_Line_8",
+              "Fr": "M_Line_8",
+              "De": "M_Line_8",
+              "Es": "M_Line_8"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -899,7 +984,12 @@
           },
           "gear_17": {
             "type": "_SmartKnob",
-            "label": "M_Tri_12",
+            "label": {
+              "En": "M_Tri_12",
+              "Fr": "M_Tri_12",
+              "De": "M_Tri_12",
+              "Es": "M_Tri_12"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -953,7 +1043,12 @@
           },
           "gear_18": {
             "type": "_SmartKnob",
-            "label": "M_Notch_16",
+            "label": {
+              "En": "M_Notch_16",
+              "Fr": "M_Notch_16",
+              "De": "M_Notch_16",
+              "Es": "M_Notch_16"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1007,7 +1102,12 @@
           },
           "gear_19": {
             "type": "_SmartKnob",
-            "label": "M_Dot_20",
+            "label": {
+              "En": "M_Dot_20",
+              "Fr": "M_Dot_20",
+              "De": "M_Dot_20",
+              "Es": "M_Dot_20"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1061,7 +1161,12 @@
           },
           "gear_20": {
             "type": "_SmartKnob",
-            "label": "M_Num_24",
+            "label": {
+              "En": "M_Num_24",
+              "Fr": "M_Num_24",
+              "De": "M_Num_24",
+              "Es": "M_Num_24"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1115,7 +1220,12 @@
           },
           "gear_21": {
             "type": "_SmartKnob",
-            "label": "Tomato 8",
+            "label": {
+              "En": "Tomato 8",
+              "Fr": "Tomato 8",
+              "De": "Tomato 8",
+              "Es": "Tomato 8"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1169,7 +1279,12 @@
           },
           "gear_22": {
             "type": "_SmartKnob",
-            "label": "Olive 12",
+            "label": {
+              "En": "Olive 12",
+              "Fr": "Olive 12",
+              "De": "Olive 12",
+              "Es": "Olive 12"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1223,7 +1338,12 @@
           },
           "gear_23": {
             "type": "_SmartKnob",
-            "label": "Teal 16",
+            "label": {
+              "En": "Teal 16",
+              "Fr": "Teal 16",
+              "De": "Teal 16",
+              "Es": "Teal 16"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1277,7 +1397,12 @@
           },
           "gear_24": {
             "type": "_SmartKnob",
-            "label": "Navy 24",
+            "label": {
+              "En": "Navy 24",
+              "Fr": "Navy 24",
+              "De": "Navy 24",
+              "Es": "Navy 24"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1331,7 +1456,12 @@
           },
           "gear_25": {
             "type": "_SmartKnob",
-            "label": "Maroon 6",
+            "label": {
+              "En": "Maroon 6",
+              "Fr": "Maroon 6",
+              "De": "Maroon 6",
+              "Es": "Maroon 6"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1385,7 +1515,12 @@
           },
           "gear_26": {
             "type": "_SmartKnob",
-            "label": "Orchid 14",
+            "label": {
+              "En": "Orchid 14",
+              "Fr": "Orchid 14",
+              "De": "Orchid 14",
+              "Es": "Orchid 14"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1439,7 +1574,12 @@
           },
           "gear_27": {
             "type": "_SmartKnob",
-            "label": "Pink2 22",
+            "label": {
+              "En": "Pink2 22",
+              "Fr": "Pink2 22",
+              "De": "Pink2 22",
+              "Es": "Pink2 22"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1493,7 +1633,12 @@
           },
           "gear_28": {
             "type": "_SmartKnob",
-            "label": "SpgG 10",
+            "label": {
+              "En": "SpgG 10",
+              "Fr": "SpgG 10",
+              "De": "SpgG 10",
+              "Es": "SpgG 10"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1547,7 +1692,12 @@
           },
           "gear_29": {
             "type": "_SmartKnob",
-            "label": "FireB 30",
+            "label": {
+              "En": "FireB 30",
+              "Fr": "FireB 30",
+              "De": "FireB 30",
+              "Es": "FireB 30"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1601,7 +1751,12 @@
           },
           "gear_30": {
             "type": "_SmartKnob",
-            "label": "Dodg2 18",
+            "label": {
+              "En": "Dodg2 18",
+              "Fr": "Dodg2 18",
+              "De": "Dodg2 18",
+              "Es": "Dodg2 18"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1655,7 +1810,12 @@
           },
           "gear_31": {
             "type": "_SmartKnob",
-            "label": "Mono Inv 8",
+            "label": {
+              "En": "Mono Inv 8",
+              "Fr": "Mono Inv 8",
+              "De": "Mono Inv 8",
+              "Es": "Mono Inv 8"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1709,7 +1869,12 @@
           },
           "gear_32": {
             "type": "_SmartKnob",
-            "label": "Mono Inv 12",
+            "label": {
+              "En": "Mono Inv 12",
+              "Fr": "Mono Inv 12",
+              "De": "Mono Inv 12",
+              "Es": "Mono Inv 12"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1763,7 +1928,12 @@
           },
           "gear_33": {
             "type": "_SmartKnob",
-            "label": "Mono Inv 24",
+            "label": {
+              "En": "Mono Inv 24",
+              "Fr": "Mono Inv 24",
+              "De": "Mono Inv 24",
+              "Es": "Mono Inv 24"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1817,7 +1987,12 @@
           },
           "gear_34": {
             "type": "_SmartKnob",
-            "label": "Khaki 7",
+            "label": {
+              "En": "Khaki 7",
+              "Fr": "Khaki 7",
+              "De": "Khaki 7",
+              "Es": "Khaki 7"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1871,7 +2046,12 @@
           },
           "gear_35": {
             "type": "_SmartKnob",
-            "label": "PalT 11",
+            "label": {
+              "En": "PalT 11",
+              "Fr": "PalT 11",
+              "De": "PalT 11",
+              "Es": "PalT 11"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1925,7 +2105,12 @@
           },
           "gear_36": {
             "type": "_SmartKnob",
-            "label": "Plum 9",
+            "label": {
+              "En": "Plum 9",
+              "Fr": "Plum 9",
+              "De": "Plum 9",
+              "Es": "Plum 9"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1979,7 +2164,12 @@
           },
           "gear_37": {
             "type": "_SmartKnob",
-            "label": "PalV 13",
+            "label": {
+              "En": "PalV 13",
+              "Fr": "PalV 13",
+              "De": "PalV 13",
+              "Es": "PalV 13"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -2033,7 +2223,12 @@
           },
           "gear_38": {
             "type": "_SmartKnob",
-            "label": "MedS 15",
+            "label": {
+              "En": "MedS 15",
+              "Fr": "MedS 15",
+              "De": "MedS 15",
+              "Es": "MedS 15"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -2087,7 +2282,12 @@
           },
           "gear_39": {
             "type": "_SmartKnob",
-            "label": "DkR 17",
+            "label": {
+              "En": "DkR 17",
+              "Fr": "DkR 17",
+              "De": "DkR 17",
+              "Es": "DkR 17"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -2141,7 +2341,12 @@
           },
           "gear_40": {
             "type": "_SmartKnob",
-            "label": "StlB 19",
+            "label": {
+              "En": "StlB 19",
+              "Fr": "StlB 19",
+              "De": "StlB 19",
+              "Es": "StlB 19"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -2195,7 +2400,12 @@
           },
           "gear_41": {
             "type": "_SmartKnob",
-            "label": "Sal 21",
+            "label": {
+              "En": "Sal 21",
+              "Fr": "Sal 21",
+              "De": "Sal 21",
+              "Es": "Sal 21"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -2249,7 +2459,12 @@
           },
           "gear_42": {
             "type": "_SmartKnob",
-            "label": "YelG 23",
+            "label": {
+              "En": "YelG 23",
+              "Fr": "YelG 23",
+              "De": "YelG 23",
+              "Es": "YelG 23"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -2303,7 +2518,12 @@
           },
           "gear_43": {
             "type": "_SmartKnob",
-            "label": "MedB 25",
+            "label": {
+              "En": "MedB 25",
+              "Fr": "MedB 25",
+              "De": "MedB 25",
+              "Es": "MedB 25"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -2357,7 +2577,12 @@
           },
           "gear_44": {
             "type": "_SmartKnob",
-            "label": "Lem 27",
+            "label": {
+              "En": "Lem 27",
+              "Fr": "Lem 27",
+              "De": "Lem 27",
+              "Es": "Lem 27"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -2411,7 +2636,12 @@
           },
           "gear_45": {
             "type": "_SmartKnob",
-            "label": "LtS 29",
+            "label": {
+              "En": "LtS 29",
+              "Fr": "LtS 29",
+              "De": "LtS 29",
+              "Es": "LtS 29"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -2465,7 +2695,12 @@
           },
           "gear_46": {
             "type": "_SmartKnob",
-            "label": "DkO 31",
+            "label": {
+              "En": "DkO 31",
+              "Fr": "DkO 31",
+              "De": "DkO 31",
+              "Es": "DkO 31"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -2519,7 +2754,12 @@
           },
           "gear_47": {
             "type": "_SmartKnob",
-            "label": "MedV 33",
+            "label": {
+              "En": "MedV 33",
+              "Fr": "MedV 33",
+              "De": "MedV 33",
+              "Es": "MedV 33"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -2573,7 +2813,12 @@
           },
           "gear_48": {
             "type": "_SmartKnob",
-            "label": "For 35",
+            "label": {
+              "En": "For 35",
+              "Fr": "For 35",
+              "De": "For 35",
+              "Es": "For 35"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -2627,7 +2872,12 @@
           },
           "gear_49": {
             "type": "_SmartKnob",
-            "label": "Sie 40",
+            "label": {
+              "En": "Sie 40",
+              "Fr": "Sie 40",
+              "De": "Sie 40",
+              "Es": "Sie 40"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -2681,7 +2931,12 @@
           },
           "gear_50": {
             "type": "_SmartKnob",
-            "label": "SB2 50",
+            "label": {
+              "En": "SB2 50",
+              "Fr": "SB2 50",
+              "De": "SB2 50",
+              "Es": "SB2 50"
+            },
             "notes": "",
             "geometry": {
               "width": 200,

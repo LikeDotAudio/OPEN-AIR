@@ -13,11 +13,21 @@
     "blocks": {
       "NAB": {
         "type": "OcaBlock",
-        "description": "NAB Frequency Monitoring",
+        "description": {
+          "En": "NAB Frequency Monitoring",
+          "Fr": "Surveillance de fréquence NAB",
+          "De": "NAB Frequenzüberwachung",
+          "Es": "Monitoreo de frecuencia NAB"
+        },
         "fields": {
           "Frequency_settings": {
             "type": "OcaBlock",
-            "description": "Primary Frequency Monitoring",
+            "description": {
+              "En": "Primary Frequency Monitoring",
+              "Fr": "Primary Fréquence Monitoring",
+              "De": "Primary Frequenz Monitoring",
+              "Es": "Primary Frecuencia Monitoring"
+            },
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
@@ -69,11 +79,21 @@
       },
       "RIG_Settings": {
         "type": "OcaBlock",
-        "description": "RIG Frequency commands",
+        "description": {
+          "En": "RIG Frequency commands",
+          "Fr": "RIG Fréquence commands",
+          "De": "RIG Frequenz commands",
+          "Es": "RIG Frecuencia commands"
+        },
         "fields": {
           "freq_start_stop": {
             "type": "OcaBlock",
-            "description": "Frequency Range Commands",
+            "description": {
+              "En": "Frequency Range Commands",
+              "Fr": "Fréquence Range Commands",
+              "De": "Frequenz Range Commands",
+              "Es": "Frecuencia Range Commands"
+            },
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",

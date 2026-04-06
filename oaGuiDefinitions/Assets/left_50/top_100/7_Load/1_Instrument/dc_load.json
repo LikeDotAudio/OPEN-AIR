@@ -13,16 +13,36 @@
     "blocks": {
       "DC_Load_Station": {
         "type": "OcaBlock",
-        "description": "Energy Dissipation Interface",
+        "description": {
+          "En": "Energy Dissipation Interface",
+          "Fr": "Interface de dissipation d'énergie",
+          "De": "Energiedissipations-Schnittstelle",
+          "Es": "Interfaz de disipación de energía"
+        },
         "fields": {
           "Activation_Sector": {
             "type": "OcaBlock",
-            "description": "MAIN INPUT CONTROL",
+            "description": {
+              "En": "MAIN INPUT CONTROL",
+              "Fr": "MAIN INPUT CONTROL",
+              "De": "MAIN INPUT CONTROL",
+              "Es": "MAIN INPUT CONTROL"
+            },
             "fields": {
               "Master_Input_Switch": {
                 "type": "_TrapezoidButton",
-                "label_active": "\ud83d\udd25 LOAD ACTIVE (SINKING) \ud83d\udd25",
-                "label_inactive": "LOAD DISENGAGED",
+                "label_active": {
+                  "En": "🔥 LOAD ACTIVE (SINKING) 🔥",
+                  "Fr": "🔥 LOAD ACTIVE (SINKING) 🔥",
+                  "De": "🔥 LOAD ACTIVE (SINKING) 🔥",
+                  "Es": "🔥 LOAD ACTIVE (SINKING) 🔥"
+                },
+                "label_inactive": {
+                  "En": "LOAD DISENGAGED",
+                  "Fr": "CHARGE DÉSENGAGÉE",
+                  "De": "LAST GETRENNT",
+                  "Es": "CARGA DESENGANCHADA"
+                },
                 "state_default": false,
                 "message_details": {
                   "DC_LOAD_MODEL": {
@@ -48,11 +68,21 @@
           },
           "Telemetry_Deck": {
             "type": "OcaBlock",
-            "description": "Real-Time Drain Analysis",
+            "description": {
+              "En": "Real-Time Drain Analysis",
+              "Fr": "Analyse de consommation en temps réel",
+              "De": "Echtzeit-Entladungsanalyse",
+              "Es": "Análisis de drenaje en temps réel"
+            },
             "fields": {
               "Meter_Volts": {
                 "type": "_GuiAnalogGauge",
-                "label_active": "INPUT VOLTS",
+                "label_active": {
+                  "En": "INPUT VOLTS",
+                  "Fr": "VOLTS D'ENTRÉE",
+                  "De": "EINGANGSSPANNUNG",
+                  "Es": "VOLTIOS DE ENTRADA"
+                },
                 "min": "0",
                 "max": "100",
                 "units": "V",
@@ -78,7 +108,12 @@
               },
               "Meter_Amps": {
                 "type": "_GuiAnalogGauge",
-                "label_active": "SINK CURRENT",
+                "label_active": {
+                  "En": "SINK CURRENT",
+                  "Fr": "SINK CURRENT",
+                  "De": "SINK CURRENT",
+                  "Es": "SINK CURRENT"
+                },
                 "min": "0",
                 "max": "60",
                 "units": "A",
@@ -104,7 +139,12 @@
               },
               "Meter_Watts": {
                 "type": "_GuiAnalogGauge",
-                "label_active": "DISSIPATION",
+                "label_active": {
+                  "En": "DISSIPATION",
+                  "Fr": "DISSIPATION",
+                  "De": "DISSIPATION",
+                  "Es": "DISSIPATION"
+                },
                 "min": "0",
                 "max": "300",
                 "units": "W",
@@ -132,12 +172,27 @@
           },
           "History_Sector": {
             "type": "OcaBlock",
-            "description": "Visual Log",
+            "description": {
+              "En": "Visual Log",
+              "Fr": "Visual Log",
+              "De": "Visual Log",
+              "Es": "Visual Log"
+            },
             "fields": {
               "Load_Graph": {
                 "type": "_GuiGraph",
-                "label_active": "Drain Timeline",
-                "description": "Voltage/Current Drop over Time",
+                "label_active": {
+                  "En": "Drain Timeline",
+                  "Fr": "Chronologie de consommation",
+                  "De": "Entladungs-Zeitachse",
+                  "Es": "Línea de tiempo de drenaje"
+                },
+                "description": {
+                  "En": "Voltage/Current Drop over Time",
+                  "Fr": "Tension/Courant Drop over Temps",
+                  "De": "Spannenung/Strom Drop over Zeit",
+                  "Es": "Voltaje/Corriente Drop over Tiempo"
+                },
                 "height": 200,
                 "message_details": {
                   "DC_LOAD_MODEL": {
@@ -163,11 +218,21 @@
           },
           "Mode_Logic_Sector": {
             "type": "OcaBlock",
-            "description": "Physics Configuration",
+            "description": {
+              "En": "Physics Configuration",
+              "Fr": "Physics Configuration",
+              "De": "Physics Konfiguration",
+              "Es": "Physics Configuración"
+            },
             "fields": {
               "Mode_Selector": {
                 "type": "_GuiDropDownOption",
-                "label_active": "Operating Mode",
+                "label_active": {
+                  "En": "Operating Mode",
+                  "Fr": "Operating Mode",
+                  "De": "Operating Modus",
+                  "Es": "Operating Modo"
+                },
                 "options": [
                   "CC (Const Current)",
                   "CV (Const Volt)",
@@ -199,15 +264,30 @@
           },
           "Control_Banks": {
             "type": "OcaBlock",
-            "description": "Parameter Adjustment",
+            "description": {
+              "En": "Parameter Adjustment",
+              "Fr": "Parameter Adjustment",
+              "De": "Parameter Adjustment",
+              "Es": "Parameter Adjustment"
+            },
             "fields": {
               "CC_Controls": {
                 "type": "OcaBlock",
-                "description": "Constant Current (CC)",
+                "description": {
+                  "En": "Constant Current (CC)",
+                  "Fr": "Constant Courant (CC)",
+                  "De": "Constant Strom (CC)",
+                  "Es": "Constant Corriente (CC)"
+                },
                 "fields": {
                   "Set_Current": {
                     "type": "_GuiHorizontalKnob",
-                    "label_active": "Current Set",
+                    "label_active": {
+                      "En": "Current Set",
+                      "Fr": "Réglage de courant",
+                      "De": "Stromeinstellung",
+                      "Es": "Ajuste de corriente"
+                    },
                     "value_default": "0.0",
                     "min": "0.0",
                     "max": "60.0",
@@ -234,7 +314,12 @@
                   },
                   "Set_Slew": {
                     "type": "_GuiHorizontalKnob",
-                    "label_active": "Slew Rate",
+                    "label_active": {
+                      "En": "Slew Rate",
+                      "Fr": "Slew Rate",
+                      "De": "Slew Rate",
+                      "Es": "Slew Rate"
+                    },
                     "value_default": "1000",
                     "min": "10",
                     "max": "5000",
@@ -263,11 +348,21 @@
               },
               "CV_CR_Controls": {
                 "type": "OcaBlock",
-                "description": "CV / CR Parameters",
+                "description": {
+                  "En": "CV / CR Parameters",
+                  "Fr": "CV / CR Parameters",
+                  "De": "CV / CR Parameters",
+                  "Es": "CV / CR Parameters"
+                },
                 "fields": {
                   "Set_Voltage": {
                     "type": "_GuiHorizontalKnob",
-                    "label_active": "Voltage Set",
+                    "label_active": {
+                      "En": "Voltage Set",
+                      "Fr": "Réglage de tension",
+                      "De": "Spannungseinstellung",
+                      "Es": "Ajuste de voltaje"
+                    },
                     "value_default": "12.0",
                     "min": "0.1",
                     "max": "100.0",
@@ -294,11 +389,16 @@
                   },
                   "Set_Resistance": {
                     "type": "_GuiHorizontalKnob",
-                    "label_active": "Resistance Set",
+                    "label_active": {
+                      "En": "Resistance Set",
+                      "Fr": "Résistance Set",
+                      "De": "Breitrstand Set",
+                      "Es": "Resistencia Set"
+                    },
                     "value_default": "100",
                     "min": "0.1",
                     "max": "10000",
-                    "units": "\u03a9",
+                    "units": "Ω",
                     "message_details": {
                       "DC_LOAD_MODEL": {
                         "type": "_GuiActuator",
@@ -325,12 +425,27 @@
           },
           "Transient_Lab": {
             "type": "OcaBlock",
-            "description": "Dynamic Pulse Testing",
+            "description": {
+              "En": "Dynamic Pulse Testing",
+              "Fr": "Test de pulsation dynamique",
+              "De": "Dynamische Impulsprüfung",
+              "Es": "Prueba de pulso dinámico"
+            },
             "fields": {
               "Trans_Enable": {
                 "type": "_GuiButtonToggle",
-                "label_active": "PULSE MODE ON",
-                "label_inactive": "PULSE MODE OFF",
+                "label_active": {
+                  "En": "PULSE MODE ON",
+                  "Fr": "PULSE MODE ON",
+                  "De": "PULSE MODE ON",
+                  "Es": "PULSE MODE ON"
+                },
+                "label_inactive": {
+                  "En": "PULSE MODE OFF",
+                  "Fr": "MODE PULSÉ DÉSACTIVÉ",
+                  "De": "IMPULSMODUS AUS",
+                  "Es": "MODO PULSO DESACTIVADO"
+                },
                 "style": {
                   "active_text_color": "#1a1a1a",
                   "text_color": "#888888",
@@ -366,7 +481,12 @@
               },
               "Level_A": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Level A (Base)",
+                "label_active": {
+                  "En": "Level A (Base)",
+                  "Fr": "Niveau A (Base)",
+                  "De": "Pegel A (Base)",
+                  "Es": "Nivel A (Base)"
+                },
                 "value_default": "1.0",
                 "units": "A",
                 "message_details": {
@@ -391,7 +511,12 @@
               },
               "Level_B": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Level B (Peak)",
+                "label_active": {
+                  "En": "Level B (Peak)",
+                  "Fr": "Niveau B (Peak)",
+                  "De": "Pegel B (Peak)",
+                  "Es": "Nivel B (Peak)"
+                },
                 "value_default": "5.0",
                 "units": "A",
                 "message_details": {
@@ -416,7 +541,12 @@
               },
               "Pulse_Freq": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Frequency",
+                "label_active": {
+                  "En": "Frequency",
+                  "Fr": "Fréquence",
+                  "De": "Frequenz",
+                  "Es": "Frecuencia"
+                },
                 "value_default": "100",
                 "min": "0.1",
                 "max": "10000",
@@ -443,7 +573,12 @@
               },
               "Pulse_Duty": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Duty Cycle",
+                "label_active": {
+                  "En": "Duty Cycle",
+                  "Fr": "Duty Cycle",
+                  "De": "Duty Cycle",
+                  "Es": "Duty Cycle"
+                },
                 "value_default": "50",
                 "min": "1",
                 "max": "99",

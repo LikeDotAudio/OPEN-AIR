@@ -18,7 +18,7 @@ class TestMatrixGate(unittest.TestCase):
     def tearDown(self):
         self.rust_patch.stop()
     
-    @patch("oaConfiguration.Managers.LoggingManager.manager.LoggingMatrixManager.get_instance")
+    @patch("oaConfigurationManager.Managers.LoggingManager.manager.LoggingMatrixManager.get_instance")
     def test_is_debug_allowed_delegation(self, mock_get_manager):
         """Check: is_debug_allowed correctly delegates to the manager."""
         mock_manager = MagicMock()
@@ -33,7 +33,7 @@ class TestMatrixGate(unittest.TestCase):
     def test_failsafe_behavior(self):
         """Check: If manager is missing or broken, default to False (Silent)."""
         # Trigger an exception by patching the import or manager call
-        with patch("oaConfiguration.Managers.LoggingManager.manager.LoggingMatrixManager.get_instance", side_effect=Exception("Crash!")):
+        with patch("oaConfigurationManager.Managers.LoggingManager.manager.LoggingMatrixManager.get_instance", side_effect=Exception("Crash!")):
             result = is_debug_allowed("ANY", "THING")
             self.assertFalse(result)
 

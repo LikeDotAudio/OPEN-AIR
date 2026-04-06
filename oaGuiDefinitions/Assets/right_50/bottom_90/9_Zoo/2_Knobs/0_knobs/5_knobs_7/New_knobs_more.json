@@ -13,7 +13,12 @@
     "blocks": {
       "Knob_Showcase_Ticks_Dials": {
         "type": "OcaBlock",
-        "description": "30 Medium Knobs Focusing on Ticks, Dials & Thickness",
+        "description": {
+          "En": "30 Medium Knobs Focusing on Ticks, Dials & Thickness",
+          "Fr": "30 Moyen Knobs Focusing on Ticks, Dials & Thickness",
+          "De": "30 Mittel Knobs Focusing on Ticks, Dials & Thickness",
+          "Es": "30 Medio Knobs Focusing on Ticks, Dials & Thickness"
+        },
         "layout_columns": 6,
         "column_sizing": [
           {
@@ -38,7 +43,12 @@
         "fields": {
           "knob_tk_01": {
             "type": "_SmartKnob",
-            "label": "Num Std",
+            "label": {
+              "En": "Num Std",
+              "Fr": "Num Std",
+              "De": "Num Std",
+              "Es": "Num Std"
+            },
             "notes": "Standard Numeric",
             "geometry": {
               "width": 160,
@@ -92,7 +102,12 @@
           },
           "knob_tk_02": {
             "type": "_SmartKnob",
-            "label": "Long Ticks",
+            "label": {
+              "En": "Long Ticks",
+              "Fr": "Long Ticks",
+              "De": "Long Ticks",
+              "Es": "Long Ticks"
+            },
             "notes": "Long Simple Lines",
             "geometry": {
               "width": 160,
@@ -146,7 +161,12 @@
           },
           "knob_tk_03": {
             "type": "_SmartKnob",
-            "label": "Dot Arc",
+            "label": {
+              "En": "Dot Arc",
+              "Fr": "Dot Arc",
+              "De": "Dot Arc",
+              "Es": "Dot Arc"
+            },
             "notes": "Dot Ticks",
             "geometry": {
               "width": 160,
@@ -200,7 +220,12 @@
           },
           "knob_tk_04": {
             "type": "_SmartKnob",
-            "label": "Gear Num",
+            "label": {
+              "En": "Gear Num",
+              "Fr": "Gear Num",
+              "De": "Gear Num",
+              "Es": "Gear Num"
+            },
             "notes": "Rotating Gear + Numbers",
             "geometry": {
               "width": 180,
@@ -254,7 +279,12 @@
           },
           "knob_tk_05": {
             "type": "_SmartKnob",
-            "label": "Oct Dot",
+            "label": {
+              "En": "Oct Dot",
+              "Fr": "Oct Dot",
+              "De": "Oct Dot",
+              "Es": "Oct Dot"
+            },
             "notes": "Rotating Oct + Dots",
             "geometry": {
               "width": 160,
@@ -308,7 +338,12 @@
           },
           "knob_tk_06": {
             "type": "_SmartKnob",
-            "label": "Tri Ptr Num",
+            "label": {
+              "En": "Tri Ptr Num",
+              "Fr": "Tri Ptr Num",
+              "De": "Tri Ptr Num",
+              "Es": "Tri Ptr Num"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -362,7 +397,12 @@
           },
           "knob_tk_07": {
             "type": "_SmartKnob",
-            "label": "Notch Line",
+            "label": {
+              "En": "Notch Line",
+              "Fr": "Notch Line",
+              "De": "Notch Line",
+              "Es": "Notch Line"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -416,7 +456,12 @@
           },
           "knob_tk_08": {
             "type": "_SmartKnob",
-            "label": "Fine Num",
+            "label": {
+              "En": "Fine Num",
+              "Fr": "Fine Num",
+              "De": "Fine Num",
+              "Es": "Fine Num"
+            },
             "notes": "",
             "geometry": {
               "width": 180,
@@ -470,7 +515,12 @@
           },
           "knob_tk_09": {
             "type": "_SmartKnob",
-            "label": "Inf Dots",
+            "label": {
+              "En": "Inf Dots",
+              "Fr": "Inf Dots",
+              "De": "Inf Dots",
+              "Es": "Inf Dots"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -524,7 +574,12 @@
           },
           "knob_tk_10": {
             "type": "_SmartKnob",
-            "label": "Fat Arc",
+            "label": {
+              "En": "Fat Arc",
+              "Fr": "Fat Arc",
+              "De": "Fat Arc",
+              "Es": "Fat Arc"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -578,7 +633,12 @@
           },
           "knob_tk_11": {
             "type": "_SmartKnob",
-            "label": "Mix 1",
+            "label": {
+              "En": "Mix 1",
+              "Fr": "Mix 1",
+              "De": "Mix 1",
+              "Es": "Mezcla 1"
+            },
             "notes": "",
             "geometry": {
               "width": 180,
@@ -632,7 +692,12 @@
           },
           "knob_tk_12": {
             "type": "_SmartKnob",
-            "label": "Mix 2",
+            "label": {
+              "En": "Mix 2",
+              "Fr": "Mix 2",
+              "De": "Mix 2",
+              "Es": "Mezcla 2"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -686,7 +751,12 @@
           },
           "knob_tk_13": {
             "type": "_SmartKnob",
-            "label": "Mix 3",
+            "label": {
+              "En": "Mix 3",
+              "Fr": "Mix 3",
+              "De": "Mix 3",
+              "Es": "Mezcla 3"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -740,7 +810,12 @@
           },
           "knob_tk_14": {
             "type": "_SmartKnob",
-            "label": "Mix 4",
+            "label": {
+              "En": "Mix 4",
+              "Fr": "Mix 4",
+              "De": "Mix 4",
+              "Es": "Mezcla 4"
+            },
             "notes": "",
             "geometry": {
               "width": 180,
@@ -794,7 +869,12 @@
           },
           "knob_tk_15": {
             "type": "_SmartKnob",
-            "label": "Mix 5",
+            "label": {
+              "En": "Mix 5",
+              "Fr": "Mix 5",
+              "De": "Mix 5",
+              "Es": "Mezcla 5"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -848,7 +928,12 @@
           },
           "knob_tk_16": {
             "type": "_SmartKnob",
-            "label": "Big Num",
+            "label": {
+              "En": "Big Num",
+              "Fr": "Big Num",
+              "De": "Big Num",
+              "Es": "Big Num"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -902,7 +987,12 @@
           },
           "knob_tk_17": {
             "type": "_SmartKnob",
-            "label": "Short Num",
+            "label": {
+              "En": "Short Num",
+              "Fr": "Short Num",
+              "De": "Short Num",
+              "Es": "Short Num"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -956,7 +1046,12 @@
           },
           "knob_tk_18": {
             "type": "_SmartKnob",
-            "label": "Deep Gear",
+            "label": {
+              "En": "Deep Gear",
+              "Fr": "Deep Gear",
+              "De": "Deep Gear",
+              "Es": "Deep Gear"
+            },
             "notes": "",
             "geometry": {
               "width": 180,
@@ -1010,7 +1105,12 @@
           },
           "knob_tk_19": {
             "type": "_SmartKnob",
-            "label": "Deep Oct",
+            "label": {
+              "En": "Deep Oct",
+              "Fr": "Deep Oct",
+              "De": "Deep Oct",
+              "Es": "Deep Oct"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -1064,7 +1164,12 @@
           },
           "knob_tk_20": {
             "type": "_SmartKnob",
-            "label": "The End",
+            "label": {
+              "En": "The End",
+              "Fr": "The End",
+              "De": "The End",
+              "Es": "The End"
+            },
             "notes": "",
             "geometry": {
               "width": 200,
@@ -1118,7 +1223,12 @@
           },
           "knob_tk_21": {
             "type": "_SmartKnob",
-            "label": "Thin (1)",
+            "label": {
+              "En": "Thin (1)",
+              "Fr": "Thin (1)",
+              "De": "Thin (1)",
+              "Es": "Thin (1)"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -1172,7 +1282,12 @@
           },
           "knob_tk_22": {
             "type": "_SmartKnob",
-            "label": "Med (3)",
+            "label": {
+              "En": "Med (3)",
+              "Fr": "Med (3)",
+              "De": "Med (3)",
+              "Es": "Med (3)"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -1226,7 +1341,12 @@
           },
           "knob_tk_23": {
             "type": "_SmartKnob",
-            "label": "Std (5)",
+            "label": {
+              "En": "Std (5)",
+              "Fr": "Std (5)",
+              "De": "Std (5)",
+              "Es": "Std (5)"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -1280,7 +1400,12 @@
           },
           "knob_tk_24": {
             "type": "_SmartKnob",
-            "label": "Thick (8)",
+            "label": {
+              "En": "Thick (8)",
+              "Fr": "Thick (8)",
+              "De": "Thick (8)",
+              "Es": "Thick (8)"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -1334,7 +1459,12 @@
           },
           "knob_tk_25": {
             "type": "_SmartKnob",
-            "label": "Chunky (12)",
+            "label": {
+              "En": "Chunky (12)",
+              "Fr": "Chunky (12)",
+              "De": "Chunky (12)",
+              "Es": "Chunky (12)"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -1388,7 +1518,12 @@
           },
           "knob_tk_26": {
             "type": "_SmartKnob",
-            "label": "Massive (16)",
+            "label": {
+              "En": "Massive (16)",
+              "Fr": "Massive (16)",
+              "De": "Massive (16)",
+              "Es": "Massive (16)"
+            },
             "notes": "",
             "geometry": {
               "width": 180,
@@ -1442,7 +1577,12 @@
           },
           "knob_tk_27": {
             "type": "_SmartKnob",
-            "label": "Donut (20)",
+            "label": {
+              "En": "Donut (20)",
+              "Fr": "Donut (20)",
+              "De": "Donut (20)",
+              "Es": "Donut (20)"
+            },
             "notes": "",
             "geometry": {
               "width": 180,
@@ -1496,7 +1636,12 @@
           },
           "knob_tk_28": {
             "type": "_SmartKnob",
-            "label": "Gear Thick",
+            "label": {
+              "En": "Gear Thick",
+              "Fr": "Gear Thick",
+              "De": "Gear Thick",
+              "Es": "Gear Thick"
+            },
             "notes": "",
             "geometry": {
               "width": 180,
@@ -1550,7 +1695,12 @@
           },
           "knob_tk_29": {
             "type": "_SmartKnob",
-            "label": "Fine Arc",
+            "label": {
+              "En": "Fine Arc",
+              "Fr": "Fine Arc",
+              "De": "Fine Arc",
+              "Es": "Fine Arc"
+            },
             "notes": "",
             "geometry": {
               "width": 160,
@@ -1604,7 +1754,12 @@
           },
           "knob_tk_30": {
             "type": "_SmartKnob",
-            "label": "Max Thick",
+            "label": {
+              "En": "Max Thick",
+              "Fr": "Max Thick",
+              "De": "Max Thick",
+              "Es": "Máx Thick"
+            },
             "notes": "",
             "geometry": {
               "width": 200,

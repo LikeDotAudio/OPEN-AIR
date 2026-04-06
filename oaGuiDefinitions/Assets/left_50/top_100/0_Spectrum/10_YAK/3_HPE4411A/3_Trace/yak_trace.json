@@ -13,11 +13,21 @@
     "blocks": {
       "nab": {
         "type": "OcaBlock",
-        "description": "NAB Trace Monitoring",
+        "description": {
+          "En": "NAB Trace Monitoring",
+          "Fr": "NAB Trace Monitoring",
+          "De": "NAB Spur Monitoring",
+          "Es": "NAB Traza Monitoring"
+        },
         "fields": {
           "NAB_traces_1_2_3_N9340B": {
             "type": "OcaBlock",
-            "description": "Primary Trace Monitoring",
+            "description": {
+              "En": "Primary Trace Monitoring",
+              "Fr": "Primary Trace Monitoring",
+              "De": "Primary Spur Monitoring",
+              "Es": "Primary Traza Monitoring"
+            },
             "fields": {
               "N9340B": {
                 "type": "_GuiActuator",
@@ -44,49 +54,94 @@
               },
               "Outputs": {
                 "type": "OcaBlock",
-                "description": "Trace Settings and Data",
+                "description": {
+                  "En": "Trace Settings and Data",
+                  "Fr": "Trace Paramètres and Data",
+                  "De": "Spur Einstellungen and Data",
+                  "Es": "Traza Settings and Data"
+                },
                 "fields": {
                   "StartFreq": {
                     "value": "The starting frequency in Hz.",
                     "type": "_GuiValue",
-                    "label": "Start Frequency",
+                    "label": {
+                      "En": "Start Frequency",
+                      "Fr": "Fréquence de début",
+                      "De": "Startfrequenz",
+                      "Es": "Frecuencia de inicio"
+                    },
                     "units": "Hz"
                   },
                   "StopFreq": {
                     "value": "The stopping frequency in Hz.",
                     "type": "_GuiValue",
-                    "label": "Stop Frequency",
+                    "label": {
+                      "En": "Stop Frequency",
+                      "Fr": "Fréquence de fin",
+                      "De": "Stoppfrequenz",
+                      "Es": "Frecuencia de parada"
+                    },
                     "units": "Hz"
                   },
                   "TraceMode1": {
                     "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
-                    "label": "Trace Mode 1"
+                    "label": {
+                      "En": "Trace Mode 1",
+                      "Fr": "Trace Mode 1",
+                      "De": "Spur Modus 1",
+                      "Es": "Traza Mode 1"
+                    }
                   },
                   "TraceMode2": {
                     "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
-                    "label": "Trace Mode 2"
+                    "label": {
+                      "En": "Trace Mode 2",
+                      "Fr": "Trace Mode 2",
+                      "De": "Spur Modus 2",
+                      "Es": "Traza Mode 2"
+                    }
                   },
                   "TraceMode3": {
                     "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
-                    "label": "Trace Mode 3"
+                    "label": {
+                      "En": "Trace Mode 3",
+                      "Fr": "Trace Mode 3",
+                      "De": "Spur Modus 3",
+                      "Es": "Traza Mode 3"
+                    }
                   },
                   "TraceData1": {
                     "value": "Processed trace data.",
                     "type": "_GuiValue",
-                    "label": "Trace Data 1"
+                    "label": {
+                      "En": "Trace Data 1",
+                      "Fr": "Trace Data 1",
+                      "De": "Spur Data 1",
+                      "Es": "Traza Data 1"
+                    }
                   },
                   "TraceData2": {
                     "value": "Processed trace data.",
                     "type": "_GuiValue",
-                    "label": "Trace Data 2"
+                    "label": {
+                      "En": "Trace Data 2",
+                      "Fr": "Données de trace 2",
+                      "De": "Trace-Daten 2",
+                      "Es": "Datos de traza 2"
+                    }
                   },
                   "TraceData3": {
                     "value": "Processed trace data.",
                     "type": "_GuiValue",
-                    "label": "Trace Data 3"
+                    "label": {
+                      "En": "Trace Data 3",
+                      "Fr": "Trace Data 3",
+                      "De": "Spur Data 3",
+                      "Es": "Traza Data 3"
+                    }
                   }
                 }
               }
@@ -94,7 +149,12 @@
           },
           "NAB_traces_1_2_3_N9342CN": {
             "type": "OcaBlock",
-            "description": "Primary Trace Monitoring",
+            "description": {
+              "En": "Primary Trace Monitoring",
+              "Fr": "Primary Trace Monitoring",
+              "De": "Primary Spur Monitoring",
+              "Es": "Primary Traza Monitoring"
+            },
             "fields": {
               "N9342CN": {
                 "type": "_GuiActuator",
@@ -121,49 +181,94 @@
               },
               "Outputs": {
                 "type": "OcaBlock",
-                "description": "Trace Settings and Data",
+                "description": {
+                  "En": "Trace Settings and Data",
+                  "Fr": "Trace Paramètres and Data",
+                  "De": "Spur Einstellungen and Data",
+                  "Es": "Traza Settings and Data"
+                },
                 "fields": {
                   "StartFreq": {
                     "value": "The starting frequency in Hz.",
                     "type": "_GuiValue",
-                    "label": "Start Frequency",
+                    "label": {
+                      "En": "Start Frequency",
+                      "Fr": "Fréquence de début",
+                      "De": "Startfrequenz",
+                      "Es": "Frecuencia de inicio"
+                    },
                     "units": "Hz"
                   },
                   "StopFreq": {
                     "value": "The stopping frequency in Hz.",
                     "type": "_GuiValue",
-                    "label": "Stop Frequency",
+                    "label": {
+                      "En": "Stop Frequency",
+                      "Fr": "Fréquence de fin",
+                      "De": "Stoppfrequenz",
+                      "Es": "Frecuencia de parada"
+                    },
                     "units": "Hz"
                   },
                   "TraceMode1": {
                     "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
-                    "label": "Trace Mode 1"
+                    "label": {
+                      "En": "Trace Mode 1",
+                      "Fr": "Trace Mode 1",
+                      "De": "Spur Modus 1",
+                      "Es": "Traza Mode 1"
+                    }
                   },
                   "TraceMode2": {
                     "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
-                    "label": "Trace Mode 2"
+                    "label": {
+                      "En": "Trace Mode 2",
+                      "Fr": "Trace Mode 2",
+                      "De": "Spur Modus 2",
+                      "Es": "Traza Mode 2"
+                    }
                   },
                   "TraceMode3": {
                     "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
-                    "label": "Trace Mode 3"
+                    "label": {
+                      "En": "Trace Mode 3",
+                      "Fr": "Trace Mode 3",
+                      "De": "Spur Modus 3",
+                      "Es": "Traza Mode 3"
+                    }
                   },
                   "TraceData1": {
                     "value": "Processed trace data.",
                     "type": "_GuiValue",
-                    "label": "Trace Data 1"
+                    "label": {
+                      "En": "Trace Data 1",
+                      "Fr": "Trace Data 1",
+                      "De": "Spur Data 1",
+                      "Es": "Traza Data 1"
+                    }
                   },
                   "TraceData2": {
                     "value": "Processed trace data.",
                     "type": "_GuiValue",
-                    "label": "Trace Data 2"
+                    "label": {
+                      "En": "Trace Data 2",
+                      "Fr": "Données de trace 2",
+                      "De": "Trace-Daten 2",
+                      "Es": "Datos de traza 2"
+                    }
                   },
                   "TraceData3": {
                     "value": "Processed trace data.",
                     "type": "_GuiValue",
-                    "label": "Trace Data 3"
+                    "label": {
+                      "En": "Trace Data 3",
+                      "Fr": "Trace Data 3",
+                      "De": "Spur Data 3",
+                      "Es": "Traza Data 3"
+                    }
                   }
                 }
               }
@@ -173,7 +278,12 @@
       },
       "get": {
         "type": "OcaBlock",
-        "description": "Trace Data Queries",
+        "description": {
+          "En": "Trace Data Queries",
+          "Fr": "Trace Data Queries",
+          "De": "Spur Data Queries",
+          "Es": "Traza Data Queries"
+        },
         "fields": {
           "Get_Trace_1_Data_N9340B": {
             "type": "OcaBlock",
@@ -207,8 +317,18 @@
                   "trace_number": {
                     "value": "1",
                     "type": "_GuiValue",
-                    "label": "Trace Number",
-                    "description": "The trace number."
+                    "label": {
+                      "En": "Trace Number",
+                      "Fr": "Trace Number",
+                      "De": "Spur Number",
+                      "Es": "Traza Number"
+                    },
+                    "description": {
+                      "En": "The trace number.",
+                      "Fr": "The trace number.",
+                      "De": "The trace number.",
+                      "Es": "The trace number."
+                    }
                   }
                 }
               },
@@ -255,8 +375,18 @@
                   "trace_number": {
                     "value": "1",
                     "type": "_GuiValue",
-                    "label": "Trace Number",
-                    "description": "The trace number."
+                    "label": {
+                      "En": "Trace Number",
+                      "Fr": "Trace Number",
+                      "De": "Spur Number",
+                      "Es": "Traza Number"
+                    },
+                    "description": {
+                      "En": "The trace number.",
+                      "Fr": "The trace number.",
+                      "De": "The trace number.",
+                      "Es": "The trace number."
+                    }
                   }
                 }
               },
@@ -303,7 +433,12 @@
                   "trace_number": {
                     "value": "2",
                     "type": "_GuiValue",
-                    "label": "Trace Number"
+                    "label": {
+                      "En": "Trace Number",
+                      "Fr": "Trace Number",
+                      "De": "Spur Number",
+                      "Es": "Traza Number"
+                    }
                   }
                 }
               },
@@ -350,7 +485,12 @@
                   "trace_number": {
                     "value": "2",
                     "type": "_GuiValue",
-                    "label": "Trace Number"
+                    "label": {
+                      "En": "Trace Number",
+                      "Fr": "Trace Number",
+                      "De": "Spur Number",
+                      "Es": "Traza Number"
+                    }
                   }
                 }
               },
@@ -397,7 +537,12 @@
                   "trace_number": {
                     "value": "3",
                     "type": "_GuiValue",
-                    "label": "Trace Number"
+                    "label": {
+                      "En": "Trace Number",
+                      "Fr": "Trace Number",
+                      "De": "Spur Number",
+                      "Es": "Traza Number"
+                    }
                   }
                 }
               },
@@ -444,7 +589,12 @@
                   "trace_number": {
                     "value": "3",
                     "type": "_GuiValue",
-                    "label": "Trace Number"
+                    "label": {
+                      "En": "Trace Number",
+                      "Fr": "Trace Number",
+                      "De": "Spur Number",
+                      "Es": "Traza Number"
+                    }
                   }
                 }
               },
@@ -491,7 +641,12 @@
                   "trace_number": {
                     "value": "4",
                     "type": "_GuiValue",
-                    "label": "Trace Number"
+                    "label": {
+                      "En": "Trace Number",
+                      "Fr": "Trace Number",
+                      "De": "Spur Number",
+                      "Es": "Traza Number"
+                    }
                   }
                 }
               },
@@ -538,7 +693,12 @@
                   "trace_number": {
                     "value": "4",
                     "type": "_GuiValue",
-                    "label": "Trace Number"
+                    "label": {
+                      "En": "Trace Number",
+                      "Fr": "Trace Number",
+                      "De": "Spur Number",
+                      "Es": "Traza Number"
+                    }
                   }
                 }
               },

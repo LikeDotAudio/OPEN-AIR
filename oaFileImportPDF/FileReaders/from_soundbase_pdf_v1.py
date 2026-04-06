@@ -15,7 +15,7 @@ import pdfplumber
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
 from loguru import logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 

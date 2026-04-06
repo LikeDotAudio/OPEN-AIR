@@ -13,14 +13,24 @@
     "blocks": {
       "Do": {
         "type": "OcaBlock",
-        "description": "System Actions",
+        "description": {
+          "En": "System Actions",
+          "Fr": "Système Actions",
+          "De": "System Actions",
+          "Es": "Sistema Actions"
+        },
         "fields": {
           "System_Actions": {
             "type": "OcaBlock",
             "fields": {
               "Trigger_Immediate": {
                 "type": "_GuiActuator",
-                "label_inactive": "Trigger (*TRG)",
+                "label_inactive": {
+                  "En": "Trigger (*TRG)",
+                  "Fr": "Déclencheur (*TRG)",
+                  "De": "Trigger (*TRG)",
+                  "Es": "Disparo (*TRG)"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -40,7 +50,12 @@
               },
               "Reset_Device": {
                 "type": "_GuiActuator",
-                "label_inactive": "Reset (*RST)",
+                "label_inactive": {
+                  "En": "Reset (*RST)",
+                  "Fr": "Réinitialiser (*RST)",
+                  "De": "Zurücksetzen (*RST)",
+                  "Es": "Reiniciar (*RST)"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -60,7 +75,12 @@
               },
               "Clear_Text": {
                 "type": "_GuiActuator",
-                "label_inactive": "Clear Display",
+                "label_inactive": {
+                  "En": "Clear Display",
+                  "Fr": "Effacer l'affichage",
+                  "De": "Anzeige löschen",
+                  "Es": "Borrar pantalla"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -84,7 +104,12 @@
       },
       "nab": {
         "type": "OcaBlock",
-        "description": "System Readbacks",
+        "description": {
+          "En": "System Readbacks",
+          "Fr": "Lectures système",
+          "De": "System-Rücklesewerte",
+          "Es": "Lecturas de sistema"
+        },
         "fields": {
           "Get_Error_Queue": {
             "type": "OcaBlock",
@@ -117,7 +142,12 @@
                   "error_msg": {
                     "value": "Error Code, Message",
                     "type": "_GuiValue",
-                    "label": "Error Message",
+                    "label": {
+                      "En": "Error Message",
+                      "Fr": "Erreur Message",
+                      "De": "Fehler Message",
+                      "Es": "Error Message"
+                    },
                     "units": ""
                   }
                 }

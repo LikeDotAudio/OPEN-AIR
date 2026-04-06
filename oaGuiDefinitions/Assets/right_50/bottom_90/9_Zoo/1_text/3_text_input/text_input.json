@@ -13,11 +13,21 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": "Username",
+        "label_active": {
+          "En": "Username",
+          "Fr": "Username",
+          "De": "Username",
+          "Es": "Username"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartInput",
-            "label": "Username",
+            "label": {
+              "En": "Username",
+              "Fr": "Username",
+              "De": "Username",
+              "Es": "Username"
+            },
             "notes": "Standard input field for a username.",
             "geometry": {
               "sticky": "ew",
@@ -38,11 +48,21 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": "Search",
+        "label_active": {
+          "En": "Search",
+          "Fr": "Search",
+          "De": "Search",
+          "Es": "Search"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartInput",
-            "label": "Search",
+            "label": {
+              "En": "Search",
+              "Fr": "Search",
+              "De": "Search",
+              "Es": "Search"
+            },
             "notes": "Input field for entering search queries.",
             "domain": {
               "primary": {
@@ -58,11 +78,21 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": "File Path",
+        "label_active": {
+          "En": "File Path",
+          "Fr": "File Path",
+          "De": "File Path",
+          "Es": "File Path"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartInput",
-            "label": "File Path",
+            "label": {
+              "En": "File Path",
+              "Fr": "File Path",
+              "De": "File Path",
+              "Es": "File Path"
+            },
             "notes": "Input field for specifying a file path.",
             "domain": {
               "primary": {
@@ -78,11 +108,21 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": "ID",
+        "label_active": {
+          "En": "ID",
+          "Fr": "ID",
+          "De": "ID",
+          "Es": "ID"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartInput",
-            "label": "ID",
+            "label": {
+              "En": "ID",
+              "Fr": "ID",
+              "De": "ID",
+              "Es": "ID"
+            },
             "notes": "Compact input field for a short identifier.",
             "domain": {
               "primary": {
@@ -98,11 +138,21 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": "Description",
+        "label_active": {
+          "En": "Description",
+          "Fr": "Description",
+          "De": "Beschreibung",
+          "Es": "Descripción"
+        },
         "fields": {
           "examplefields": {
             "type": "_SmartInput",
-            "label": "Description",
+            "label": {
+              "En": "Description",
+              "Fr": "Description",
+              "De": "Beschreibung",
+              "Es": "Descripción"
+            },
             "notes": "Input field for a general description.",
             "geometry": {
               "sticky": "ew",

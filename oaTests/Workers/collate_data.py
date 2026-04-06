@@ -22,7 +22,7 @@ def collate_extra_tabs(project_root):
             ReportBuilder_Dependencies
         )
         
-        audit_html = ReportBuilder_Audits.build_tab(os.path.join(project_root, "oaDataAudits"))
+        audit_html = ReportBuilder_Audits.build_tab(os.path.join(project_root, "oaDataLogs/Audits"))
         changelog_html = ReportBuilder_ChangeLog.build_tab(os.path.join(project_root, "oaDataLogs", "ChangeLog"))
         error_html = ReportBuilder_ErrorLog.build_tab(os.path.join(project_root, "oaDataLogs", "Errors"))
         runlog_html = ReportBuilder_RunLog.build_tab(os.path.join(project_root, "oaDataLogs", "ApplicationRunLog"))

@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Timebase (Horizontal) Settings",
+        "description": {
+          "En": "Timebase (Horizontal) Settings",
+          "Fr": "Tempsbase (Horizontal) Paramètres",
+          "De": "Zeitbase (Horizontal) Einstellungen",
+          "Es": "Tiempobase (Horizontal) Ajustes"
+        },
         "fields": {
           "Set_Scale": {
             "type": "OcaBlock",
@@ -46,7 +51,12 @@
                   "scale": {
                     "value": "100e-6",
                     "type": "_GuiValue",
-                    "label": "Scale",
+                    "label": {
+                      "En": "Scale",
+                      "Fr": "Échelle",
+                      "De": "Skala",
+                      "Es": "Escala"
+                    },
                     "units": "s/div"
                   }
                 }
@@ -84,7 +94,12 @@
                   "pos": {
                     "value": "0.0",
                     "type": "_GuiValue",
-                    "label": "Delay",
+                    "label": {
+                      "En": "Delay",
+                      "Fr": "Delay",
+                      "De": "Delay",
+                      "Es": "Delay"
+                    },
                     "units": "s"
                   }
                 }
@@ -122,9 +137,19 @@
                   "ref": {
                     "value": "CENTer",
                     "type": "_GuiValue",
-                    "label": "Ref",
+                    "label": {
+                      "En": "Ref",
+                      "Fr": "Réf",
+                      "De": "Ref",
+                      "Es": "Ref"
+                    },
                     "units": "",
-                    "description": "LEFT, CENTer, RIGHt"
+                    "description": {
+                      "En": "LEFT, CENTer, RIGHt",
+                      "Fr": "LEFT, CENTer, RIGHt",
+                      "De": "LEFT, CENTer, RIGHt",
+                      "Es": "LEFT, CENTer, RIGHt"
+                    }
                   }
                 }
               }
@@ -161,9 +186,19 @@
                   "mode": {
                     "value": "MAIN",
                     "type": "_GuiValue",
-                    "label": "Mode",
+                    "label": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
                     "units": "",
-                    "description": "MAIN, WINDow, XY, ROLL"
+                    "description": {
+                      "En": "MAIN, WINDow, XY, ROLL",
+                      "Fr": "MAIN, WINDow, XY, ROLL",
+                      "De": "MAIN, WINDow, XY, ROLL",
+                      "Es": "MAIN, WINDow, XY, ROLL"
+                    }
                   }
                 }
               }
@@ -171,7 +206,12 @@
           },
           "Window_Mode_Settings": {
             "type": "OcaBlock",
-            "description": "Zoom Window Settings",
+            "description": {
+              "En": "Zoom Window Settings",
+              "Fr": "Paramètres de la fenêtre de zoom",
+              "De": "Zoom-Fenster-Einstellungen",
+              "Es": "Ajustes de la ventana de zoom"
+            },
             "fields": {
               "Set_Window_Scale": {
                 "type": "OcaBlock",
@@ -204,7 +244,12 @@
                       "scale": {
                         "value": "10e-6",
                         "type": "_GuiValue",
-                        "label": "Zoom Scale",
+                        "label": {
+                          "En": "Zoom Scale",
+                          "Fr": "Zoom Échelle",
+                          "De": "Zoom Skala",
+                          "Es": "Zoom Escala"
+                        },
                         "units": "s/div"
                       }
                     }
@@ -242,7 +287,12 @@
                       "pos": {
                         "value": "0.0",
                         "type": "_GuiValue",
-                        "label": "Zoom Pos",
+                        "label": {
+                          "En": "Zoom Pos",
+                          "Fr": "Zoom Pos",
+                          "De": "Zoom Pos",
+                          "Es": "Zoom Pos"
+                        },
                         "units": "s"
                       }
                     }

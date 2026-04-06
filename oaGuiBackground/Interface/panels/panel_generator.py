@@ -21,7 +21,7 @@ from .Core.layer_metal_fold import MetalFoldLayer
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
 
 # --- Standard Debug Logging Setup ---

@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "SOURce Configuration",
+        "description": {
+          "En": "SOURce Configuration",
+          "Fr": "SOURce Configuration",
+          "De": "SOURce Konfiguration",
+          "Es": "SOURce Configuración"
+        },
         "fields": {
           "Set_Frequency": {
             "type": "OcaBlock",
@@ -46,7 +51,12 @@
                   "freq": {
                     "value": "1000",
                     "type": "_GuiValue",
-                    "label": "Frequency",
+                    "label": {
+                      "En": "Frequency",
+                      "Fr": "Fréquence",
+                      "De": "Frequenz",
+                      "Es": "Frecuencia"
+                    },
                     "units": "Hz"
                   }
                 }
@@ -84,9 +94,19 @@
                   "amp": {
                     "value": "1.0",
                     "type": "_GuiValue",
-                    "label": "Amplitude",
+                    "label": {
+                      "En": "Amplitude",
+                      "Fr": "Amplitude",
+                      "De": "Amplitude",
+                      "Es": "Amplitud"
+                    },
                     "units": "Vpp",
-                    "description": "Default unit is Vpp"
+                    "description": {
+                      "En": "Default unit is Vpp",
+                      "Fr": "L'unité par défaut est Vpp",
+                      "De": "Standardeinheit ist Vss",
+                      "Es": "La unidad predeterminada es Vpp"
+                    }
                   }
                 }
               }
@@ -123,7 +143,12 @@
                   "offset": {
                     "value": "0.0",
                     "type": "_GuiValue",
-                    "label": "Offset",
+                    "label": {
+                      "En": "Offset",
+                      "Fr": "Décalage",
+                      "De": "Versatz",
+                      "Es": "Compensación"
+                    },
                     "units": "V"
                   }
                 }
@@ -161,9 +186,19 @@
                   "shape": {
                     "value": "SIN",
                     "type": "_GuiValue",
-                    "label": "Shape",
+                    "label": {
+                      "En": "Shape",
+                      "Fr": "Shape",
+                      "De": "Shape",
+                      "Es": "Shape"
+                    },
                     "units": "",
-                    "description": "SIN, SQU, RAMP, PULS, NOIS, DC, USER"
+                    "description": {
+                      "En": "SIN, SQU, RAMP, PULS, NOIS, DC, USER",
+                      "Fr": "SIN, SQU, RAMP, PULS, NOIS, DC, USER",
+                      "De": "SIN, SQU, RAMP, PULS, NOIS, DC, USER",
+                      "Es": "SIN, SQU, RAMP, PULS, NOIS, DC, USER"
+                    }
                   }
                 }
               }
@@ -200,9 +235,19 @@
                   "units": {
                     "value": "VPP",
                     "type": "_GuiValue",
-                    "label": "Units",
+                    "label": {
+                      "En": "Units",
+                      "Fr": "Unités",
+                      "De": "Einheiten",
+                      "Es": "Unidades"
+                    },
                     "units": "",
-                    "description": "VPP, VRMS, DBM"
+                    "description": {
+                      "En": "VPP, VRMS, DBM",
+                      "Fr": "VPP, VRMS, DBM",
+                      "De": "VPP, VRMS, DBM",
+                      "Es": "VPP, VRMS, DBM"
+                    }
                   }
                 }
               }

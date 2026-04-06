@@ -17,7 +17,7 @@
 import os
 import stat
 from oaLogging.Core.logger import get_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaOchestration.Constants.project_paths import SNMP_STATE_FILE, SNMP_SET_LOG
 from oaComSNMP.Constants.snmp_constants import BASE_OID
 
@@ -29,10 +29,8 @@ snmp_logger = get_logger("SNMP")
 class SNMPTreeBuilder:
     def __init__(self, base_oid=BASE_OID):
         self.base_oid = base_oid
-        from oaOchestration.Constants.project_paths import SNMP_DATA_DIR
-        self.script_dir = SNMP_DATA_DIR / "pass_scripts"
-        os.makedirs(self.script_dir, exist_ok=True)
-        self.master_script_path = self.script_dir / "master_snmp_bridge.sh"
+        from oaOchestration.Constants.project_paths import SNMP_BRIDGE_SCRIPT
+        self.master_script_path = SNMP_BRIDGE_SCRIPT
 
     def _verbose_logging_enabled(self):
         return snmp_tree_builder_verbose_logging_enabled

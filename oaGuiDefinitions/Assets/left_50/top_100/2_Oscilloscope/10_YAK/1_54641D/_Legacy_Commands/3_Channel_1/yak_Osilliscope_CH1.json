@@ -13,11 +13,21 @@
     "blocks": {
       "nab": {
         "type": "OcaBlock",
-        "description": "Oscilloscope Measurements & Status",
+        "description": {
+          "En": "Oscilloscope Measurements & Status",
+          "Fr": "Oscilloscope Mesurerments & Statut",
+          "De": "Oszilloskop Messenments & Status",
+          "Es": "Osciloscopio Medidaments & Estado"
+        },
         "fields": {
           "Read_Measurements_CH1": {
             "type": "OcaBlock",
-            "description": "Channel 1 Measurements",
+            "description": {
+              "En": "Channel 1 Measurements",
+              "Fr": "Canal 1",
+              "De": "Kanal 1",
+              "Es": "Canal 1"
+            },
             "fields": {
               "Get_Voltage_Stats_CH1": {
                 "type": "OcaBlock",
@@ -50,8 +60,18 @@
                       "source": {
                         "value": "CHANnel1",
                         "type": "_GuiValue",
-                        "label": "Source",
-                        "description": "CHAN1, CHAN2, MATH"
+                        "label": {
+                          "En": "Source",
+                          "Fr": "Source",
+                          "De": "Quelle",
+                          "Es": "Fuente"
+                        },
+                        "description": {
+                          "En": "CHAN1, CHAN2, MATH",
+                          "Fr": "CAN1, CAN2, MATH",
+                          "De": "KAN1, KAN2, MATH",
+                          "Es": "CAN1, CAN2, MATH"
+                        }
                       }
                     }
                   },
@@ -61,25 +81,45 @@
                       "vpp": {
                         "value": "Vpp Value",
                         "type": "_GuiValue",
-                        "label": "Vpp",
+                        "label": {
+                          "En": "Vpp",
+                          "Fr": "Vpp",
+                          "De": "Vss",
+                          "Es": "Vpp"
+                        },
                         "units": "V"
                       },
                       "vrms": {
                         "value": "Vrms Value",
                         "type": "_GuiValue",
-                        "label": "Vrms",
+                        "label": {
+                          "En": "Vrms",
+                          "Fr": "Vrms",
+                          "De": "Veff",
+                          "Es": "Vrms"
+                        },
                         "units": "V"
                       },
                       "vmax": {
                         "value": "Vmax Value",
                         "type": "_GuiValue",
-                        "label": "Vmax",
+                        "label": {
+                          "En": "Vmax",
+                          "Fr": "Vmax",
+                          "De": "Vmax",
+                          "Es": "Vmax"
+                        },
                         "units": "V"
                       },
                       "vmin": {
                         "value": "Vmin Value",
                         "type": "_GuiValue",
-                        "label": "Vmin",
+                        "label": {
+                          "En": "Vmin",
+                          "Fr": "Vmin",
+                          "De": "Vmin",
+                          "Es": "Vmin"
+                        },
                         "units": "V"
                       }
                     }
@@ -117,7 +157,12 @@
                       "source": {
                         "value": "CHANnel1",
                         "type": "_GuiValue",
-                        "label": "Source"
+                        "label": {
+                          "En": "Source",
+                          "Fr": "Source",
+                          "De": "Quelle",
+                          "Es": "Fuente"
+                        }
                       }
                     }
                   },
@@ -127,25 +172,45 @@
                       "frequency": {
                         "value": "Freq Value",
                         "type": "_GuiValue",
-                        "label": "Frequency",
+                        "label": {
+                          "En": "Frequency",
+                          "Fr": "Fréquence",
+                          "De": "Frequenz",
+                          "Es": "Frecuencia"
+                        },
                         "units": "Hz"
                       },
                       "period": {
                         "value": "Period Value",
                         "type": "_GuiValue",
-                        "label": "Period",
+                        "label": {
+                          "En": "Period",
+                          "Fr": "Période",
+                          "De": "Periode",
+                          "Es": "Periodo"
+                        },
                         "units": "s"
                       },
                       "duty_cycle": {
                         "value": "Duty Cycle Value",
                         "type": "_GuiValue",
-                        "label": "Duty Cycle",
+                        "label": {
+                          "En": "Duty Cycle",
+                          "Fr": "Duty Cycle",
+                          "De": "Duty Cycle",
+                          "Es": "Duty Cycle"
+                        },
                         "units": "%"
                       },
                       "rise_time": {
                         "value": "Rise Time Value",
                         "type": "_GuiValue",
-                        "label": "Rise Time",
+                        "label": {
+                          "En": "Rise Time",
+                          "Fr": "Rise Temps",
+                          "De": "Rise Zeit",
+                          "Es": "Rise Tiempo"
+                        },
                         "units": "s"
                       }
                     }
@@ -158,11 +223,21 @@
       },
       "set": {
         "type": "OcaBlock",
-        "description": "Channel Settings",
+        "description": {
+          "En": "Channel Settings",
+          "Fr": "Canal Settings",
+          "De": "Kanal Settings",
+          "Es": "Canal Settings"
+        },
         "fields": {
           "Configure_Channel_1": {
             "type": "OcaBlock",
-            "description": "Vertical Setup CH1",
+            "description": {
+              "En": "Vertical Setup CH1",
+              "Fr": "Vertical Installation CH1",
+              "De": "Vertical Einrichtung CH1",
+              "Es": "Vertical Configuración CH1"
+            },
             "fields": {
               "CH1_Scale": {
                 "type": "OcaBlock",
@@ -195,9 +270,19 @@
                       "scale": {
                         "value": "1.0",
                         "type": "_GuiValue",
-                        "label": "Scale",
+                        "label": {
+                          "En": "Scale",
+                          "Fr": "Échelle",
+                          "De": "Skala",
+                          "Es": "Escala"
+                        },
                         "units": "V/div",
-                        "description": "Volts/Div"
+                        "description": {
+                          "En": "Volts/Div",
+                          "Fr": "Volts/Div",
+                          "De": "Volts/Div",
+                          "Es": "Volts/Div"
+                        }
                       }
                     }
                   }
@@ -234,9 +319,19 @@
                       "offset": {
                         "value": "0.0",
                         "type": "_GuiValue",
-                        "label": "Offset",
+                        "label": {
+                          "En": "Offset",
+                          "Fr": "Décalage",
+                          "De": "Versatz",
+                          "Es": "Compensación"
+                        },
                         "units": "V",
-                        "description": "Volts"
+                        "description": {
+                          "En": "Volts",
+                          "Fr": "Volts",
+                          "De": "Volts",
+                          "Es": "Volts"
+                        }
                       }
                     }
                   }
@@ -273,8 +368,18 @@
                       "coupling": {
                         "value": "DC",
                         "type": "_GuiValue",
-                        "label": "Coupling",
-                        "description": "AC, DC, GND"
+                        "label": {
+                          "En": "Coupling",
+                          "Fr": "Couplage",
+                          "De": "Kopplung",
+                          "Es": "Acoplamiento"
+                        },
+                        "description": {
+                          "En": "AC, DC, GND",
+                          "Fr": "AC, DC, GND",
+                          "De": "AC, DC, GND",
+                          "Es": "CA, CC, GND"
+                        }
                       }
                     }
                   }
@@ -311,7 +416,12 @@
                       "attenuation": {
                         "value": "10",
                         "type": "_GuiValue",
-                        "label": "Probe Atten"
+                        "label": {
+                          "En": "Probe Atten",
+                          "Fr": "Probe Atten",
+                          "De": "Probe Atten",
+                          "Es": "Probe Atten"
+                        }
                       }
                     }
                   }
@@ -348,7 +458,12 @@
                       "string": {
                         "value": "\"SIG1\"",
                         "type": "_GuiValue",
-                        "label": "Label"
+                        "label": {
+                          "En": "Label",
+                          "Fr": "Étiquette",
+                          "De": "Beschriftung",
+                          "Es": "Etiqueta"
+                        }
                       }
                     }
                   }
@@ -385,8 +500,18 @@
                       "state": {
                         "value": "ON",
                         "type": "_GuiValue",
-                        "label": "BW Limit",
-                        "description": "ON or OFF"
+                        "label": {
+                          "En": "BW Limit",
+                          "Fr": "Limite de bande passante",
+                          "De": "Bandbreitenbegrenzung",
+                          "Es": "Límite de ancho de banda"
+                        },
+                        "description": {
+                          "En": "ON or OFF",
+                          "Fr": "ON or OFF",
+                          "De": "ON or OFF",
+                          "Es": "ON or OFF"
+                        }
                       }
                     }
                   }
@@ -423,8 +548,18 @@
                       "state": {
                         "value": "OFF",
                         "type": "_GuiValue",
-                        "label": "Invert",
-                        "description": "ON or OFF"
+                        "label": {
+                          "En": "Invert",
+                          "Fr": "Inverser",
+                          "De": "Invertieren",
+                          "Es": "Invertir"
+                        },
+                        "description": {
+                          "En": "ON or OFF",
+                          "Fr": "ON or OFF",
+                          "De": "ON or OFF",
+                          "Es": "ON or OFF"
+                        }
                       }
                     }
                   }
@@ -434,14 +569,24 @@
           },
           "Do": {
             "type": "OcaBlock",
-            "description": "Actions and Toggles",
+            "description": {
+              "En": "Actions and Toggles",
+              "Fr": "Actions et bascules",
+              "De": "Aktionen und Umschalter",
+              "Es": "Acciones y conmutadores"
+            },
             "fields": {
               "Display_Control": {
                 "type": "OcaBlock",
                 "fields": {
                   "Do_CH1_ON": {
                     "type": "_GuiActuator",
-                    "label_inactive": "CH1 ON",
+                    "label_inactive": {
+                      "En": "CH1 ON",
+                      "Fr": "CH1 ACTIVÉ",
+                      "De": "CH1 AN",
+                      "Es": "CH1 ACTIVADO"
+                    },
                     "AES70": "OcaBooleanActuator",
                     "style": {
                       "active_text_color": "#1a1a1a",
@@ -462,7 +607,12 @@
                   },
                   "Do_CH1_OFF": {
                     "type": "_GuiActuator",
-                    "label_inactive": "CH1 OFF",
+                    "label_inactive": {
+                      "En": "CH1 OFF",
+                      "Fr": "CH 1",
+                      "De": "CH 1",
+                      "Es": "CH 1"
+                    },
                     "AES70": "OcaBooleanActuator",
                     "style": {
                       "active_text_color": "#1a1a1a",

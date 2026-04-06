@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Measurement Settings",
+        "description": {
+          "En": "Measurement Settings",
+          "Fr": "Mesurerment Paramètres",
+          "De": "Messenment Einstellungen",
+          "Es": "Medidament Ajustes"
+        },
         "fields": {
           "Set_Measure_Source": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "source": {
                     "value": "CHAN1",
                     "type": "_GuiValue",
-                    "label": "Source",
+                    "label": {
+                      "En": "Source",
+                      "Fr": "Source",
+                      "De": "Quelle",
+                      "Es": "Fuente"
+                    },
                     "units": "",
-                    "description": "CHANn"
+                    "description": {
+                      "En": "CHANn",
+                      "Fr": "CANn",
+                      "De": "KANn",
+                      "Es": "CANn"
+                    }
                   }
                 }
               }
@@ -59,7 +74,12 @@
             "fields": {
               "Execute Command": {
                 "type": "_GuiActuator",
-                "label_inactive": "Clear All",
+                "label_inactive": {
+                  "En": "Clear All",
+                  "Fr": "Effacer All",
+                  "De": "Löschen All",
+                  "Es": "Borrar All"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -110,9 +130,19 @@
                   "state": {
                     "value": "ON",
                     "type": "_GuiValue",
-                    "label": "Stats Table",
+                    "label": {
+                      "En": "Stats Table",
+                      "Fr": "Tableau de stats",
+                      "De": "Statistik-Tabelle",
+                      "Es": "Tabla de estadísticas"
+                    },
                     "units": "",
-                    "description": "ON or OFF"
+                    "description": {
+                      "En": "ON or OFF",
+                      "Fr": "ON or OFF",
+                      "De": "ON or OFF",
+                      "Es": "ON or OFF"
+                    }
                   }
                 }
               }
@@ -122,11 +152,21 @@
       },
       "nab": {
         "type": "OcaBlock",
-        "description": "Measurement Queries",
+        "description": {
+          "En": "Measurement Queries",
+          "Fr": "Requêtes de mesure",
+          "De": "Messabfragen",
+          "Es": "Consultas de medición"
+        },
         "fields": {
           "Measure_Item": {
             "type": "OcaBlock",
-            "description": "Immediate Measurement (:MEAS:ITEM?)",
+            "description": {
+              "En": "Immediate Measurement (:MEAS:ITEM?)",
+              "Fr": "Immediate Mesurerment (:MEAS:ITEM?)",
+              "De": "Immediate Messenment (:MEAS:ITEM?)",
+              "Es": "Immediate Medidament (:MEAS:ITEM?)"
+            },
             "fields": {
               "Measure_Vpp": {
                 "type": "OcaBlock",
@@ -159,7 +199,12 @@
                       "chan": {
                         "value": "CHAN1",
                         "type": "_GuiValue",
-                        "label": "Ch",
+                        "label": {
+                          "En": "Ch",
+                          "Fr": "Ch",
+                          "De": "Ch",
+                          "Es": "Ch"
+                        },
                         "units": ""
                       }
                     }
@@ -206,7 +251,12 @@
                       "chan": {
                         "value": "CHAN1",
                         "type": "_GuiValue",
-                        "label": "Ch",
+                        "label": {
+                          "En": "Ch",
+                          "Fr": "Ch",
+                          "De": "Ch",
+                          "Es": "Ch"
+                        },
                         "units": ""
                       }
                     }

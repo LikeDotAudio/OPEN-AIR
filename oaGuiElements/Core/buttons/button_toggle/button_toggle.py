@@ -10,10 +10,11 @@ from tkinter import ttk
 import inspect
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaGuiManager.Core.factory.button_canvas_base import CanvasButton
+from oaGuiFramework.Methods.i18n_utils import get_text
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaOchestration.Methods.widget_event_binder import bind_variable_trace
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic
@@ -25,7 +26,7 @@ class ToggleButton(CanvasButton):
     Flips between two boolean states and maintains visual consistency.
     """
     def __init__(self, parent, config, path, state_mirror_engine, base_mqtt_topic, subscriber_router, builder_instance, variable=None, **kwargs):
-        self.label = config.get("label", "Toggle")
+        self.label = get_text(config.get("label"), "Toggle")
         self.path = path
         self.config_data = config
         self.state_mirror_engine = state_mirror_engine
@@ -37,8 +38,8 @@ class ToggleButton(CanvasButton):
         options_map = config.get("options", {})
         on_config = options_map.get("ON", {})
         off_config = options_map.get("OFF", {})
-        self.on_text = on_config.get("label_active", self.label if self.label else "ON")
-        self.off_text = off_config.get("label_inactive", self.label if self.label else "OFF")
+        self.on_text = get_text(on_get_text(config.get("label_active")), self.label if self.label else "ON")
+        self.off_text = get_text(off_get_text(config.get("label_inactive")), self.label if self.label else "OFF")
 
         # State Variable
         is_on_init = options_map.get("ON", {}).get("selected", False)
@@ -98,7 +99,7 @@ class BuilderButtonToggleCreator(TransparencyMixin):
         b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
         
         path, b_topic = config_data.get("path"), ctx.base_mqtt_topic_from_path
-        label = config_data.get("label", "")
+        label = get_text(config_data.get('label'), "")
 
         # Main Canvas Container (if label exists)
         if label:

@@ -11,7 +11,7 @@ import orjson
 import threading
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComMQTT.Core.mqtt_message import MqttMessage
 from oaComMQTT.Methods.delete_open_air import delete_open_air_tree
 import oaOchestration.Constants.project_paths as app_paths

@@ -5,7 +5,7 @@ prompt = """
 You are a specialized analyst focused on team health, burnout prevention, and trait alignment. Your mission is to analyze Culture Index Survey and Job graphs to identify stress and burnout risks.
 
 ### Process
-1. **Initialize Report**: Before beginning, create an empty report file named `HumanFactor_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+1. **Initialize Report**: Before beginning, create an empty report file named `HumanFactor_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
 
 ### Methodology
 
@@ -20,5 +20,5 @@ You are a specialized analyst focused on team health, burnout prevention, and tr
 
 ### Final Task
 Generate the final report with all identified burnout risks and save the results.
-**Save**: Write the final results to your pre-created `HumanFactor_Audit_YYYYMMDD_HHMM.md` file in `oaDataAudits/` upon completion.
+**Save**: Write the final results to your pre-created `HumanFactor_Audit_YYYYMMDD_HHMM.md` file in `oaDataLogs/Audits/` upon completion.
 """

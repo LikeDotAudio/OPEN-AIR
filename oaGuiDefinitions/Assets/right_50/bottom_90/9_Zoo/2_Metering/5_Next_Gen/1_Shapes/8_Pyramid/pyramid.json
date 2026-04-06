@@ -13,7 +13,12 @@
     "blocks": {
       "Pyramid_Variations": {
         "type": "OcaBlock",
-        "description": "Pyramid (Point Up) Meter Variations",
+        "description": {
+          "En": "Pyramid (Point Up) Meter Variations",
+          "Fr": "Pyramid (Point Up) Meter Variations",
+          "De": "Pyramid (Point Up) Meter Variationen",
+          "Es": "Pyramid (Point Up) Meter Variaciones"
+        },
         "layout_columns": 3,
         "column_sizing": [
           {
@@ -29,7 +34,12 @@
         "fields": {
           "Pyramid_1_Large": {
             "type": "_NeedleVUMeter",
-            "label": "Pyramid Large",
+            "label": {
+              "En": "Pyramid Large",
+              "Fr": "Pyramid Large",
+              "De": "Pyramid Large",
+              "Es": "Pyramid Large"
+            },
             "geometry": {
               "width": 300,
               "height": 300
@@ -61,7 +71,12 @@
               },
               "labels": [
                 {
-                  "text": "PYRAMID INSTRUMENTS",
+                  "text": {
+                    "En": "PYRAMID INSTRUMENTS",
+                    "Fr": "PYRAMID INSTRUMENTS",
+                    "De": "PYRAMID INSTRUMENTS",
+                    "Es": "PYRAMID INSTRUMENTS"
+                  },
                   "x": 0,
                   "y": 15,
                   "size": 12,
@@ -81,7 +96,12 @@
           },
           "Pyramid_2_Emerald": {
             "type": "_NeedleVUMeter",
-            "label": "Emerald Pyramid",
+            "label": {
+              "En": "Emerald Pyramid",
+              "Fr": "Emerald Pyramid",
+              "De": "Emerald Pyramid",
+              "Es": "Emerald Pyramid"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -114,7 +134,12 @@
               },
               "labels": [
                 {
-                  "text": "EMERALD SERIES",
+                  "text": {
+                    "En": "EMERALD SERIES",
+                    "Fr": "EMERALD SERIES",
+                    "De": "EMERALD SERIES",
+                    "Es": "EMERALD SERIES"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 10,
@@ -125,7 +150,12 @@
           },
           "Pyramid_3_Small_Flat": {
             "type": "_NeedleVUMeter",
-            "label": "Small Flat",
+            "label": {
+              "En": "Small Flat",
+              "Fr": "Small Flat",
+              "De": "Small Flat",
+              "Es": "Small Flat"
+            },
             "geometry": {
               "width": 150,
               "height": 150
@@ -157,7 +187,12 @@
               },
               "labels": [
                 {
-                  "text": "SMALL-P",
+                  "text": {
+                    "En": "SMALL-P",
+                    "Fr": "SMALL-P",
+                    "De": "SMALL-P",
+                    "Es": "SMALL-P"
+                  },
                   "x": 0,
                   "y": 10,
                   "size": 8
@@ -167,7 +202,12 @@
           },
           "Pyramid_4_Night_Mode": {
             "type": "_NeedleVUMeter",
-            "label": "Night Mode",
+            "label": {
+              "En": "Night Mode",
+              "Fr": "Night Mode",
+              "De": "Night Mode",
+              "Es": "Night Mode"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -200,7 +240,12 @@
               },
               "labels": [
                 {
-                  "text": "NIGHT CORE",
+                  "text": {
+                    "En": "NIGHT CORE",
+                    "Fr": "NIGHT CORE",
+                    "De": "NIGHT CORE",
+                    "Es": "NIGHT CORE"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 10,
@@ -211,7 +256,12 @@
           },
           "Pyramid_5_Royal": {
             "type": "_NeedleVUMeter",
-            "label": "Royal Pyramid",
+            "label": {
+              "En": "Royal Pyramid",
+              "Fr": "Royal Pyramid",
+              "De": "Royal Pyramid",
+              "Es": "Royal Pyramid"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -244,7 +294,12 @@
               },
               "labels": [
                 {
-                  "text": "ROYAL VU",
+                  "text": {
+                    "En": "ROYAL VU",
+                    "Fr": "ROYAL VU",
+                    "De": "ROYAL VU",
+                    "Es": "ROYAL VU"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 10,
@@ -255,7 +310,12 @@
           },
           "Pyramid_6_Blueprint": {
             "type": "_NeedleVUMeter",
-            "label": "Blueprint",
+            "label": {
+              "En": "Blueprint",
+              "Fr": "Blueprint",
+              "De": "Blueprint",
+              "Es": "Blueprint"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -287,7 +347,12 @@
               },
               "labels": [
                 {
-                  "text": "SCHEMATIC",
+                  "text": {
+                    "En": "SCHEMATIC",
+                    "Fr": "SCHEMATIC",
+                    "De": "SCHEMATIC",
+                    "Es": "SCHEMATIC"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 10,
@@ -298,7 +363,12 @@
           },
           "Pyramid_7_Cyber": {
             "type": "_NeedleVUMeter",
-            "label": "Cyber Pyramid",
+            "label": {
+              "En": "Cyber Pyramid",
+              "Fr": "Cyber Pyramid",
+              "De": "Cyber Pyramid",
+              "Es": "Cyber Pyramid"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -331,7 +401,12 @@
               },
               "labels": [
                 {
-                  "text": "CYBER CORE",
+                  "text": {
+                    "En": "CYBER CORE",
+                    "Fr": "CYBER CORE",
+                    "De": "CYBER CORE",
+                    "Es": "CYBER CORE"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 10,
@@ -342,7 +417,12 @@
           },
           "Pyramid_8_Classic_Cream": {
             "type": "_NeedleVUMeter",
-            "label": "Classic Cream",
+            "label": {
+              "En": "Classic Cream",
+              "Fr": "Classique Cream",
+              "De": "Klassisch Cream",
+              "Es": "Clásico Cream"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -375,7 +455,12 @@
               },
               "labels": [
                 {
-                  "text": "VINTAGE ANALOG",
+                  "text": {
+                    "En": "VINTAGE ANALOG",
+                    "Fr": "VINTAGE ANALOG",
+                    "De": "VINTAGE ANALOG",
+                    "Es": "VINTAGE ANALOG"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 10
@@ -385,7 +470,12 @@
           },
           "Pyramid_9_Ruby": {
             "type": "_NeedleVUMeter",
-            "label": "Ruby Pyramid",
+            "label": {
+              "En": "Ruby Pyramid",
+              "Fr": "Ruby Pyramid",
+              "De": "Ruby Pyramid",
+              "Es": "Ruby Pyramid"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -418,7 +508,12 @@
               },
               "labels": [
                 {
-                  "text": "RUBY-P",
+                  "text": {
+                    "En": "RUBY-P",
+                    "Fr": "RUBY-P",
+                    "De": "RUBY-P",
+                    "Es": "RUBY-P"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 10,

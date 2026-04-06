@@ -13,7 +13,12 @@
     "blocks": {
       "Experimental_Fader_Riot": {
         "type": "OcaBlock",
-        "description": "20 Columns of Experimental Fader Madness",
+        "description": {
+          "En": "20 Columns of Experimental Fader Madness",
+          "Fr": "20 Columns of Expérimental Fader Madness",
+          "De": "20 Columns of Experimentell Fader Madness",
+          "Es": "20 Columns of Experimental Fader Madness"
+        },
         "layout_columns": 20,
         "column_sizing": [
           {
@@ -80,7 +85,12 @@
         "fields": {
           "exp_1": {
             "type": "_SmartFader",
-            "label": "TITAN",
+            "label": {
+              "En": "TITAN",
+              "Fr": "TITAN",
+              "De": "TITAN",
+              "Es": "TITAN"
+            },
             "geometry": {
               "width": 200,
               "height": 600,
@@ -103,7 +113,12 @@
           },
           "exp_2": {
             "type": "_SmartFader",
-            "label": "Atom",
+            "label": {
+              "En": "Atom",
+              "Fr": "Atom",
+              "De": "Atom",
+              "Es": "Atom"
+            },
             "geometry": {
               "width": 80,
               "height": 120,
@@ -126,7 +141,12 @@
           },
           "exp_3": {
             "type": "_SmartFader",
-            "label": "Flat",
+            "label": {
+              "En": "Flat",
+              "Fr": "Flat",
+              "De": "Flat",
+              "Es": "Flat"
+            },
             "geometry": {
               "width": 250,
               "height": 200,
@@ -149,7 +169,12 @@
           },
           "exp_4": {
             "type": "_SmartFader",
-            "label": "Tower",
+            "label": {
+              "En": "Tower",
+              "Fr": "Tower",
+              "De": "Tower",
+              "Es": "Tower"
+            },
             "geometry": {
               "width": 100,
               "height": 700,
@@ -172,7 +197,12 @@
           },
           "exp_5": {
             "type": "_SmartFader",
-            "label": "Pancake",
+            "label": {
+              "En": "Pancake",
+              "Fr": "Pancake",
+              "De": "Pancake",
+              "Es": "Pancake"
+            },
             "geometry": {
               "width": 220,
               "height": 250,
@@ -195,7 +225,12 @@
           },
           "exp_6": {
             "type": "_SmartFader",
-            "label": "Ghost",
+            "label": {
+              "En": "Ghost",
+              "Fr": "Ghost",
+              "De": "Ghost",
+              "Es": "Ghost"
+            },
             "geometry": {
               "width": 100,
               "height": 300,
@@ -219,7 +254,12 @@
           },
           "exp_7": {
             "type": "_SmartFader",
-            "label": "Bifrost",
+            "label": {
+              "En": "Bifrost",
+              "Fr": "Bifrost",
+              "De": "Bifrost",
+              "Es": "Bifrost"
+            },
             "geometry": {
               "width": 80,
               "height": 300,
@@ -244,7 +284,12 @@
           },
           "exp_8": {
             "type": "_SmartFader",
-            "label": "Monolith",
+            "label": {
+              "En": "Monolith",
+              "Fr": "Monolith",
+              "De": "Monolith",
+              "Es": "Monolith"
+            },
             "geometry": {
               "width": 130,
               "height": 450,
@@ -267,7 +312,12 @@
           },
           "exp_9": {
             "type": "_SmartFader",
-            "label": "Needle",
+            "label": {
+              "En": "Needle",
+              "Fr": "Aiguille",
+              "De": "Nadel",
+              "Es": "Aguja"
+            },
             "geometry": {
               "width": 100,
               "height": 300,
@@ -290,7 +340,12 @@
           },
           "exp_10": {
             "type": "_SmartFader",
-            "label": "Chonky",
+            "label": {
+              "En": "Chonky",
+              "Fr": "Chonky",
+              "De": "Chonky",
+              "Es": "Chonky"
+            },
             "geometry": {
               "width": 250,
               "height": 350,
@@ -313,7 +368,12 @@
           },
           "exp_11": {
             "type": "_SmartFader",
-            "label": "Toxic",
+            "label": {
+              "En": "Toxic",
+              "Fr": "Toxic",
+              "De": "Toxic",
+              "Es": "Toxic"
+            },
             "geometry": {
               "width": 90,
               "height": 300,
@@ -337,7 +397,12 @@
           },
           "exp_12": {
             "type": "_SmartFader",
-            "label": "Candy",
+            "label": {
+              "En": "Candy",
+              "Fr": "Candy",
+              "De": "Candy",
+              "Es": "Candy"
+            },
             "geometry": {
               "width": 80,
               "height": 220,
@@ -360,7 +425,12 @@
           },
           "exp_13": {
             "type": "_SmartFader",
-            "label": "Deep",
+            "label": {
+              "En": "Deep",
+              "Fr": "Deep",
+              "De": "Deep",
+              "Es": "Deep"
+            },
             "geometry": {
               "width": 110,
               "height": 400,
@@ -383,7 +453,12 @@
           },
           "exp_14": {
             "type": "_SmartFader",
-            "label": "Fire",
+            "label": {
+              "En": "Fire",
+              "Fr": "Fire",
+              "De": "Fire",
+              "Es": "Fire"
+            },
             "geometry": {
               "width": 85,
               "height": 280,
@@ -406,7 +481,12 @@
           },
           "exp_15": {
             "type": "_SmartFader",
-            "label": "Ice",
+            "label": {
+              "En": "Ice",
+              "Fr": "Ice",
+              "De": "Ice",
+              "Es": "Ice"
+            },
             "geometry": {
               "width": 85,
               "height": 280,
@@ -429,7 +509,12 @@
           },
           "exp_16": {
             "type": "_SmartFader",
-            "label": "Forest",
+            "label": {
+              "En": "Forest",
+              "Fr": "Forest",
+              "De": "Forest",
+              "Es": "Forest"
+            },
             "geometry": {
               "width": 90,
               "height": 350,
@@ -452,7 +537,12 @@
           },
           "exp_17": {
             "type": "_SmartFader",
-            "label": "Volt",
+            "label": {
+              "En": "Volt",
+              "Fr": "Volt",
+              "De": "Volt",
+              "Es": "Volt"
+            },
             "geometry": {
               "width": 100,
               "height": 300,
@@ -475,7 +565,12 @@
           },
           "exp_18": {
             "type": "_SmartFader",
-            "label": "Void",
+            "label": {
+              "En": "Void",
+              "Fr": "Void",
+              "De": "Void",
+              "Es": "Void"
+            },
             "geometry": {
               "width": 120,
               "height": 380,
@@ -498,7 +593,12 @@
           },
           "exp_19": {
             "type": "_SmartFader",
-            "label": "Vapor",
+            "label": {
+              "En": "Vapor",
+              "Fr": "Vapor",
+              "De": "Vapor",
+              "Es": "Vapor"
+            },
             "geometry": {
               "width": 80,
               "height": 260,
@@ -521,7 +621,12 @@
           },
           "exp_20": {
             "type": "_SmartFader",
-            "label": "Steel",
+            "label": {
+              "En": "Steel",
+              "Fr": "Steel",
+              "De": "Steel",
+              "Es": "Steel"
+            },
             "geometry": {
               "width": 100,
               "height": 300,

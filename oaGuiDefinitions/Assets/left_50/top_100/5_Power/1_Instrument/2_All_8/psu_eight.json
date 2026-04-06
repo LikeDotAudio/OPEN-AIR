@@ -13,20 +13,40 @@
     "blocks": {
       "Octo_PSU_Monitor": {
         "type": "OcaBlock",
-        "description": "8-Channel Passive Reactor Telemetry",
+        "description": {
+          "En": "8-Channel Passive Reactor Telemetry",
+          "Fr": "Télémétrie de réacteur passif à 8 canaux",
+          "De": "8-Kanal-Passivreaktor-Telemetrie",
+          "Es": "Telemetría de reactor pasivo de 8 canales"
+        },
         "layout_columns": 8,
         "fields": {
           "Global_Logger_Deck": {
             "type": "OcaBlock",
-            "description": "MASTER DATA RECORDING",
+            "description": {
+              "En": "MASTER DATA RECORDING",
+              "Fr": "ENREGISTREMENT DE DONNÉES MAÎTRE",
+              "De": "MASTER-DATENAUFZEICHNUNG",
+              "Es": "GRABACIÓN DE DATOS MAESTRA"
+            },
             "layout": {
               "col_span": 8
             },
             "fields": {
               "Master_Log_Switch": {
                 "type": "_TrapezoidButton",
-                "label_active": "\ud83d\udcbe LOGGING ACTIVE \ud83d\udcbe",
-                "label_inactive": "START LOGGING",
+                "label_active": {
+                  "En": "💾 LOGGING ACTIVE 💾",
+                  "Fr": "💾 LOGGING ACTIVE 💾",
+                  "De": "💾 LOGGING ACTIVE 💾",
+                  "Es": "💾 LOGGING ACTIVE 💾"
+                },
+                "label_inactive": {
+                  "En": "START LOGGING",
+                  "Fr": "START LOGGING",
+                  "De": "START LOGGING",
+                  "Es": "START LOGGING"
+                },
                 "state_default": false,
                 "message_details": {
                   "PSU_MODEL": {
@@ -52,14 +72,24 @@
           },
           "Unit_1_Monitor": {
             "type": "OcaBlock",
-            "description": "CORE 1",
+            "description": {
+              "En": "CORE 1",
+              "Fr": "CORE 1",
+              "De": "CORE 1",
+              "Es": "CORE 1"
+            },
             "fields": {
               "Meters_1": {
                 "type": "OcaBlock",
                 "fields": {
                   "V1": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "V1",
+                    "label_active": {
+                      "En": "V1",
+                      "Fr": "V1",
+                      "De": "V1",
+                      "Es": "V1"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -72,7 +102,12 @@
                   },
                   "I1": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "A1",
+                    "label_active": {
+                      "En": "A1",
+                      "Fr": "A1",
+                      "De": "A1",
+                      "Es": "A1"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -85,7 +120,12 @@
                   },
                   "W1": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "W1",
+                    "label_active": {
+                      "En": "W1",
+                      "Fr": "W1",
+                      "De": "W1",
+                      "Es": "W1"
+                    },
                     "min": "0",
                     "max": "1000",
                     "units": "W",
@@ -100,7 +140,12 @@
               },
               "Graph_1": {
                 "type": "_GuiGraph",
-                "label_active": "Stability 1",
+                "label_active": {
+                  "En": "Stability 1",
+                  "Fr": "Stability 1",
+                  "De": "Stability 1",
+                  "Es": "Stability 1"
+                },
                 "height": 100,
                 "message_details": {
                   "PSU_MODEL": {
@@ -113,14 +158,24 @@
           },
           "Unit_2_Monitor": {
             "type": "OcaBlock",
-            "description": "CORE 2",
+            "description": {
+              "En": "CORE 2",
+              "Fr": "CORE 2",
+              "De": "CORE 2",
+              "Es": "CORE 2"
+            },
             "fields": {
               "Meters_2": {
                 "type": "OcaBlock",
                 "fields": {
                   "V2": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "V2",
+                    "label_active": {
+                      "En": "V2",
+                      "Fr": "V2",
+                      "De": "V2",
+                      "Es": "V2"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -133,7 +188,12 @@
                   },
                   "I2": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "A2",
+                    "label_active": {
+                      "En": "A2",
+                      "Fr": "A2",
+                      "De": "A2",
+                      "Es": "A2"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -146,7 +206,12 @@
                   },
                   "W2": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "W2",
+                    "label_active": {
+                      "En": "W2",
+                      "Fr": "W2",
+                      "De": "W2",
+                      "Es": "W2"
+                    },
                     "min": "0",
                     "max": "1000",
                     "units": "W",
@@ -161,7 +226,12 @@
               },
               "Graph_2": {
                 "type": "_GuiGraph",
-                "label_active": "Stability 2",
+                "label_active": {
+                  "En": "Stability 2",
+                  "Fr": "Stability 2",
+                  "De": "Stability 2",
+                  "Es": "Stability 2"
+                },
                 "height": 100,
                 "message_details": {
                   "PSU_MODEL": {
@@ -174,14 +244,24 @@
           },
           "Unit_3_Monitor": {
             "type": "OcaBlock",
-            "description": "CORE 3",
+            "description": {
+              "En": "CORE 3",
+              "Fr": "CORE 3",
+              "De": "CORE 3",
+              "Es": "CORE 3"
+            },
             "fields": {
               "Meters_3": {
                 "type": "OcaBlock",
                 "fields": {
                   "V3": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "V3",
+                    "label_active": {
+                      "En": "V3",
+                      "Fr": "V3",
+                      "De": "V3",
+                      "Es": "V3"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -194,7 +274,12 @@
                   },
                   "I3": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "A3",
+                    "label_active": {
+                      "En": "A3",
+                      "Fr": "A3",
+                      "De": "A3",
+                      "Es": "A3"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -207,7 +292,12 @@
                   },
                   "W3": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "W3",
+                    "label_active": {
+                      "En": "W3",
+                      "Fr": "W3",
+                      "De": "W3",
+                      "Es": "W3"
+                    },
                     "min": "0",
                     "max": "1000",
                     "units": "W",
@@ -222,7 +312,12 @@
               },
               "Graph_3": {
                 "type": "_GuiGraph",
-                "label_active": "Stability 3",
+                "label_active": {
+                  "En": "Stability 3",
+                  "Fr": "Stability 3",
+                  "De": "Stability 3",
+                  "Es": "Stability 3"
+                },
                 "height": 100,
                 "message_details": {
                   "PSU_MODEL": {
@@ -235,14 +330,24 @@
           },
           "Unit_4_Monitor": {
             "type": "OcaBlock",
-            "description": "CORE 4",
+            "description": {
+              "En": "CORE 4",
+              "Fr": "CORE 4",
+              "De": "CORE 4",
+              "Es": "CORE 4"
+            },
             "fields": {
               "Meters_4": {
                 "type": "OcaBlock",
                 "fields": {
                   "V4": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "V4",
+                    "label_active": {
+                      "En": "V4",
+                      "Fr": "V4",
+                      "De": "V4",
+                      "Es": "V4"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -255,7 +360,12 @@
                   },
                   "I4": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "A4",
+                    "label_active": {
+                      "En": "A4",
+                      "Fr": "A4",
+                      "De": "A4",
+                      "Es": "A4"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -268,7 +378,12 @@
                   },
                   "W4": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "W4",
+                    "label_active": {
+                      "En": "W4",
+                      "Fr": "W4",
+                      "De": "W4",
+                      "Es": "W4"
+                    },
                     "min": "0",
                     "max": "1000",
                     "units": "W",
@@ -283,7 +398,12 @@
               },
               "Graph_4": {
                 "type": "_GuiGraph",
-                "label_active": "Stability 4",
+                "label_active": {
+                  "En": "Stability 4",
+                  "Fr": "Stability 4",
+                  "De": "Stability 4",
+                  "Es": "Stability 4"
+                },
                 "height": 100,
                 "message_details": {
                   "PSU_MODEL": {
@@ -296,14 +416,24 @@
           },
           "Unit_5_Monitor": {
             "type": "OcaBlock",
-            "description": "CORE 5",
+            "description": {
+              "En": "CORE 5",
+              "Fr": "CORE 5",
+              "De": "CORE 5",
+              "Es": "CORE 5"
+            },
             "fields": {
               "Meters_5": {
                 "type": "OcaBlock",
                 "fields": {
                   "V5": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "V5",
+                    "label_active": {
+                      "En": "V5",
+                      "Fr": "V5",
+                      "De": "V5",
+                      "Es": "V5"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -316,7 +446,12 @@
                   },
                   "I5": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "A5",
+                    "label_active": {
+                      "En": "A5",
+                      "Fr": "A5",
+                      "De": "A5",
+                      "Es": "A5"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -329,7 +464,12 @@
                   },
                   "W5": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "W5",
+                    "label_active": {
+                      "En": "W5",
+                      "Fr": "W5",
+                      "De": "W5",
+                      "Es": "W5"
+                    },
                     "min": "0",
                     "max": "1000",
                     "units": "W",
@@ -344,7 +484,12 @@
               },
               "Graph_5": {
                 "type": "_GuiGraph",
-                "label_active": "Stability 5",
+                "label_active": {
+                  "En": "Stability 5",
+                  "Fr": "Stability 5",
+                  "De": "Stability 5",
+                  "Es": "Stability 5"
+                },
                 "height": 100,
                 "message_details": {
                   "PSU_MODEL": {
@@ -357,14 +502,24 @@
           },
           "Unit_6_Monitor": {
             "type": "OcaBlock",
-            "description": "CORE 6",
+            "description": {
+              "En": "CORE 6",
+              "Fr": "CORE 6",
+              "De": "CORE 6",
+              "Es": "CORE 6"
+            },
             "fields": {
               "Meters_6": {
                 "type": "OcaBlock",
                 "fields": {
                   "V6": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "V6",
+                    "label_active": {
+                      "En": "V6",
+                      "Fr": "V6",
+                      "De": "V6",
+                      "Es": "V6"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -377,7 +532,12 @@
                   },
                   "I6": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "A6",
+                    "label_active": {
+                      "En": "A6",
+                      "Fr": "A6",
+                      "De": "A6",
+                      "Es": "A6"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -390,7 +550,12 @@
                   },
                   "W6": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "W6",
+                    "label_active": {
+                      "En": "W6",
+                      "Fr": "W6",
+                      "De": "W6",
+                      "Es": "W6"
+                    },
                     "min": "0",
                     "max": "1000",
                     "units": "W",
@@ -405,7 +570,12 @@
               },
               "Graph_6": {
                 "type": "_GuiGraph",
-                "label_active": "Stability 6",
+                "label_active": {
+                  "En": "Stability 6",
+                  "Fr": "Stabilité 6",
+                  "De": "Stabilität 6",
+                  "Es": "Estabilidad 6"
+                },
                 "height": 100,
                 "message_details": {
                   "PSU_MODEL": {
@@ -418,14 +588,24 @@
           },
           "Unit_7_Monitor": {
             "type": "OcaBlock",
-            "description": "CORE 7",
+            "description": {
+              "En": "CORE 7",
+              "Fr": "CORE 7",
+              "De": "CORE 7",
+              "Es": "CORE 7"
+            },
             "fields": {
               "Meters_7": {
                 "type": "OcaBlock",
                 "fields": {
                   "V7": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "V7",
+                    "label_active": {
+                      "En": "V7",
+                      "Fr": "V7",
+                      "De": "V7",
+                      "Es": "V7"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -438,7 +618,12 @@
                   },
                   "I7": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "A7",
+                    "label_active": {
+                      "En": "A7",
+                      "Fr": "A7",
+                      "De": "A7",
+                      "Es": "A7"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -451,7 +636,12 @@
                   },
                   "W7": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "W7",
+                    "label_active": {
+                      "En": "W7",
+                      "Fr": "W7",
+                      "De": "W7",
+                      "Es": "W7"
+                    },
                     "min": "0",
                     "max": "1000",
                     "units": "W",
@@ -466,7 +656,12 @@
               },
               "Graph_7": {
                 "type": "_GuiGraph",
-                "label_active": "Stability 7",
+                "label_active": {
+                  "En": "Stability 7",
+                  "Fr": "Stability 7",
+                  "De": "Stability 7",
+                  "Es": "Stability 7"
+                },
                 "height": 100,
                 "message_details": {
                   "PSU_MODEL": {
@@ -479,14 +674,24 @@
           },
           "Unit_8_Monitor": {
             "type": "OcaBlock",
-            "description": "CORE 8",
+            "description": {
+              "En": "CORE 8",
+              "Fr": "CORE 8",
+              "De": "CORE 8",
+              "Es": "CORE 8"
+            },
             "fields": {
               "Meters_8": {
                 "type": "OcaBlock",
                 "fields": {
                   "V8": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "V8",
+                    "label_active": {
+                      "En": "V8",
+                      "Fr": "V8",
+                      "De": "V8",
+                      "Es": "V8"
+                    },
                     "min": "0",
                     "max": "100",
                     "units": "V",
@@ -499,7 +704,12 @@
                   },
                   "I8": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "A8",
+                    "label_active": {
+                      "En": "A8",
+                      "Fr": "A8",
+                      "De": "A8",
+                      "Es": "A8"
+                    },
                     "min": "0",
                     "max": "10",
                     "units": "A",
@@ -512,7 +722,12 @@
                   },
                   "W8": {
                     "type": "_GuiAnalogGauge",
-                    "label_active": "W8",
+                    "label_active": {
+                      "En": "W8",
+                      "Fr": "W8",
+                      "De": "W8",
+                      "Es": "W8"
+                    },
                     "min": "0",
                     "max": "1000",
                     "units": "W",
@@ -527,7 +742,12 @@
               },
               "Graph_8": {
                 "type": "_GuiGraph",
-                "label_active": "Stability 8",
+                "label_active": {
+                  "En": "Stability 8",
+                  "Fr": "Stability 8",
+                  "De": "Stability 8",
+                  "Es": "Stability 8"
+                },
                 "height": 100,
                 "message_details": {
                   "PSU_MODEL": {

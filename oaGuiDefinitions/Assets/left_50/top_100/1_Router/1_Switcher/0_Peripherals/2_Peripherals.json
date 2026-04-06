@@ -13,7 +13,12 @@
     "blocks": {
       "Card_8_Peripheral_Interface": {
         "type": "OcaBlock",
-        "description": "Card 8 - Peripheral Channel Routing",
+        "description": {
+          "En": "Card 8 - Peripheral Channel Routing",
+          "Fr": "Card 8 - Peripheral Canal Routing",
+          "De": "Card 8 - Peripheral Kanal Routing",
+          "Es": "Card 8 - Peripheral Canal Routing"
+        },
         "show_label": false,
         "layout": {
           "sticky": ""
@@ -47,33 +52,108 @@
             "options": {
               "1": {
                 "value": "801",
-                "label_active": "Comp DAC L",
-                "label_inactive": "Comp DAC L",
-                "description": "Computer DAC Left OUT to Bus AB-00"
+                "label_active": {
+                  "En": "Comp DAC L",
+                  "Fr": "Comp DAC L",
+                  "De": "Comp DAC L",
+                  "Es": "Comp DAC L"
+                },
+                "label_inactive": {
+                  "En": "Comp DAC L",
+                  "Fr": "Comp DAC L",
+                  "De": "Comp DAC L",
+                  "Es": "Comp DAC L"
+                },
+                "description": {
+                  "En": "Computer DAC Left OUT to Bus AB-00",
+                  "Fr": "Computer DAC Left OUT to Bus AB-00",
+                  "De": "Computer DAC Left OUT to Bus AB-00",
+                  "Es": "Computer DAC Left OUT to Bus AB-00"
+                }
               },
               "2": {
                 "value": "802",
-                "label_active": "Sig Gen L",
-                "label_inactive": "Sig Gen L",
-                "description": "Signal Generator Left OUT to Bus AB-00"
+                "label_active": {
+                  "En": "Sig Gen L",
+                  "Fr": "Géné Sig G",
+                  "De": "Sig-Gen L",
+                  "Es": "Gen Señal Izq"
+                },
+                "label_inactive": {
+                  "En": "Sig Gen L",
+                  "Fr": "Géné Sig G",
+                  "De": "Sig-Gen L",
+                  "Es": "Gen Señal Izq"
+                },
+                "description": {
+                  "En": "Signal Generator Left OUT to Bus AB-00",
+                  "Fr": "Générateur de signal SORT G vers Bus AB-00",
+                  "De": "Signalgenerator AUS L an Bus AB-00",
+                  "Es": "Generador de señal SAL Izq a Bus AB-00"
+                }
               },
               "3": {
                 "value": "803",
-                "label_active": "Distortion L",
-                "label_inactive": "Distortion L",
-                "description": "Distortion Analyzer Left OUT to Bus AB-00"
+                "label_active": {
+                  "En": "Distortion L",
+                  "Fr": "Distortion L",
+                  "De": "Distortion L",
+                  "Es": "Distortion L"
+                },
+                "label_inactive": {
+                  "En": "Distortion L",
+                  "Fr": "Distortion L",
+                  "De": "Distortion L",
+                  "Es": "Distortion L"
+                },
+                "description": {
+                  "En": "Distortion Analyzer Left OUT to Bus AB-00",
+                  "Fr": "Distortion Analyzer Left OUT to Bus AB-00",
+                  "De": "Distortion Analyzer Left OUT to Bus AB-00",
+                  "Es": "Distortion Analyzer Left OUT to Bus AB-00"
+                }
               },
               "4": {
                 "value": "804",
-                "label_active": "Aux IN L",
-                "label_inactive": "Aux IN L",
-                "description": "Aux Input Left OUT to Bus AB-00"
+                "label_active": {
+                  "En": "Aux IN L",
+                  "Fr": "Aux IN L",
+                  "De": "Aux IN L",
+                  "Es": "Aux IN L"
+                },
+                "label_inactive": {
+                  "En": "Aux IN L",
+                  "Fr": "Aux IN L",
+                  "De": "Aux IN L",
+                  "Es": "Aux IN L"
+                },
+                "description": {
+                  "En": "Aux Input Left OUT to Bus AB-00",
+                  "Fr": "Aux Entrée Left OUT to Bus AB-00",
+                  "De": "Aux Eingang Left OUT to Bus AB-00",
+                  "Es": "Aux Entrada Left OUT to Bus AB-00"
+                }
               },
               "5": {
                 "value": "805",
-                "label_active": "DUT OUT L",
-                "label_inactive": "DUT OUT L",
-                "description": "Device Under Test Left OUT to Bus AB-00"
+                "label_active": {
+                  "En": "DUT OUT L",
+                  "Fr": "DUT OUT L",
+                  "De": "DUT OUT L",
+                  "Es": "DUT OUT L"
+                },
+                "label_inactive": {
+                  "En": "DUT OUT L",
+                  "Fr": "DUT OUT L",
+                  "De": "DUT OUT L",
+                  "Es": "DUT OUT L"
+                },
+                "description": {
+                  "En": "Device Under Test Left OUT to Bus AB-00",
+                  "Fr": "Device Under Test Left OUT to Bus AB-00",
+                  "De": "Device Under Test Left OUT to Bus AB-00",
+                  "Es": "Device Under Test Left OUT to Bus AB-00"
+                }
               }
             },
             "selection_mode": "radio",
@@ -130,33 +210,108 @@
             "options": {
               "1": {
                 "value": "821",
-                "label_active": "Comp DAC R",
-                "label_inactive": "Comp DAC R",
-                "description": "Computer DAC Right OUT to Bus AB-02"
+                "label_active": {
+                  "En": "Comp DAC R",
+                  "Fr": "Comp DAC R",
+                  "De": "Comp DAC R",
+                  "Es": "Comp DAC R"
+                },
+                "label_inactive": {
+                  "En": "Comp DAC R",
+                  "Fr": "Comp DAC R",
+                  "De": "Comp DAC R",
+                  "Es": "Comp DAC R"
+                },
+                "description": {
+                  "En": "Computer DAC Right OUT to Bus AB-02",
+                  "Fr": "DAC ordinateur D SORT vers Bus AB-02",
+                  "De": "Computer-DAC R AUS an Bus AB-02",
+                  "Es": "DAC de computadora Der SAL a Bus AB-02"
+                }
               },
               "2": {
                 "value": "822",
-                "label_active": "Sig Gen R",
-                "label_inactive": "Sig Gen R",
-                "description": "Signal Generator Right OUT to Bus AB-02"
+                "label_active": {
+                  "En": "Sig Gen R",
+                  "Fr": "Sig Gen R",
+                  "De": "Sig Gen R",
+                  "Es": "Sig Gen R"
+                },
+                "label_inactive": {
+                  "En": "Sig Gen R",
+                  "Fr": "Sig Gen R",
+                  "De": "Sig Gen R",
+                  "Es": "Sig Gen R"
+                },
+                "description": {
+                  "En": "Signal Generator Right OUT to Bus AB-02",
+                  "Fr": "Signal Générateur Right OUT to Bus AB-02",
+                  "De": "Signal Generator Right OUT to Bus AB-02",
+                  "Es": "Signal Generador Right OUT to Bus AB-02"
+                }
               },
               "3": {
                 "value": "823",
-                "label_active": "Distortion R",
-                "label_inactive": "Distortion R",
-                "description": "Distortion Analyzer Right OUT to Bus AB-02"
+                "label_active": {
+                  "En": "Distortion R",
+                  "Fr": "Distortion R",
+                  "De": "Distortion R",
+                  "Es": "Distortion R"
+                },
+                "label_inactive": {
+                  "En": "Distortion R",
+                  "Fr": "Distortion R",
+                  "De": "Distortion R",
+                  "Es": "Distortion R"
+                },
+                "description": {
+                  "En": "Distortion Analyzer Right OUT to Bus AB-02",
+                  "Fr": "Distortion Analyzer Right OUT to Bus AB-02",
+                  "De": "Distortion Analyzer Right OUT to Bus AB-02",
+                  "Es": "Distortion Analyzer Right OUT to Bus AB-02"
+                }
               },
               "4": {
                 "value": "824",
-                "label_active": "Aux IN R",
-                "label_inactive": "Aux IN R",
-                "description": "Aux Input Right OUT to Bus AB-02"
+                "label_active": {
+                  "En": "Aux IN R",
+                  "Fr": "Aux IN R",
+                  "De": "Aux IN R",
+                  "Es": "Aux IN R"
+                },
+                "label_inactive": {
+                  "En": "Aux IN R",
+                  "Fr": "Aux IN R",
+                  "De": "Aux IN R",
+                  "Es": "Aux IN R"
+                },
+                "description": {
+                  "En": "Aux Input Right OUT to Bus AB-02",
+                  "Fr": "Aux Entrée Right OUT to Bus AB-02",
+                  "De": "Aux Eingang Right OUT to Bus AB-02",
+                  "Es": "Aux Entrada Right OUT to Bus AB-02"
+                }
               },
               "5": {
                 "value": "825",
-                "label_active": "DUT OUT R",
-                "label_inactive": "DUT OUT R",
-                "description": "Device Under Test Right OUT to Bus AB-02"
+                "label_active": {
+                  "En": "DUT OUT R",
+                  "Fr": "DUT OUT R",
+                  "De": "DUT OUT R",
+                  "Es": "DUT OUT R"
+                },
+                "label_inactive": {
+                  "En": "DUT OUT R",
+                  "Fr": "DUT OUT R",
+                  "De": "DUT OUT R",
+                  "Es": "DUT OUT R"
+                },
+                "description": {
+                  "En": "Device Under Test Right OUT to Bus AB-02",
+                  "Fr": "Device Under Test Right OUT to Bus AB-02",
+                  "De": "Device Under Test Right OUT to Bus AB-02",
+                  "Es": "Device Under Test Right OUT to Bus AB-02"
+                }
               }
             },
             "selection_mode": "radio",
@@ -213,33 +368,108 @@
             "options": {
               "1": {
                 "value": "811",
-                "label_active": "DUT In L",
-                "label_inactive": "DUT In L",
-                "description": "Device Under Test Left IN from Bus AB-01"
+                "label_active": {
+                  "En": "DUT In L",
+                  "Fr": "DUT In L",
+                  "De": "DUT In L",
+                  "Es": "DUT In L"
+                },
+                "label_inactive": {
+                  "En": "DUT In L",
+                  "Fr": "DUT In L",
+                  "De": "DUT In L",
+                  "Es": "DUT In L"
+                },
+                "description": {
+                  "En": "Device Under Test Left IN from Bus AB-01",
+                  "Fr": "Appareil en test G ENT de Bus AB-01",
+                  "De": "Prüfling L EIN von Bus AB-01",
+                  "Es": "Dispositivo bajo prueba Izq ENT de Bus AB-01"
+                }
               },
               "2": {
                 "value": "812",
-                "label_active": "DAC IN L",
-                "label_inactive": "DAC IN L",
-                "description": "DAC Left IN from Bus AB-01"
+                "label_active": {
+                  "En": "DAC IN L",
+                  "Fr": "DAC IN L",
+                  "De": "DAC IN L",
+                  "Es": "DAC IN L"
+                },
+                "label_inactive": {
+                  "En": "DAC IN L",
+                  "Fr": "DAC IN L",
+                  "De": "DAC IN L",
+                  "Es": "DAC IN L"
+                },
+                "description": {
+                  "En": "DAC Left IN from Bus AB-01",
+                  "Fr": "DAC Left IN from Bus AB-01",
+                  "De": "DAC Left IN from Bus AB-01",
+                  "Es": "DAC Left IN from Bus AB-01"
+                }
               },
               "3": {
                 "value": "813",
-                "label_active": "Monitor 1 L",
-                "label_inactive": "Monitor 1 L",
-                "description": "Monitor 1 Left IN from Bus AB-01"
+                "label_active": {
+                  "En": "Monitor 1 L",
+                  "Fr": "Monitor 1 L",
+                  "De": "Monitor 1 L",
+                  "Es": "Monitor 1 L"
+                },
+                "label_inactive": {
+                  "En": "Monitor 1 L",
+                  "Fr": "Monitor 1 L",
+                  "De": "Monitor 1 L",
+                  "Es": "Monitor 1 L"
+                },
+                "description": {
+                  "En": "Monitor 1 Left IN from Bus AB-01",
+                  "Fr": "Moniteur 1 G ENT de Bus AB-01",
+                  "De": "Monitor 1 L EIN von Bus AB-01",
+                  "Es": "Monitor 1 Izq ENT de Bus AB-01"
+                }
               },
               "4": {
                 "value": "814",
-                "label_active": "Monitor 2 L",
-                "label_inactive": "Monitor 2 L",
-                "description": "Monitor 2 Left IN from Bus AB-01"
+                "label_active": {
+                  "En": "Monitor 2 L",
+                  "Fr": "Monitor 2 L",
+                  "De": "Monitor 2 L",
+                  "Es": "Monitor 2 L"
+                },
+                "label_inactive": {
+                  "En": "Monitor 2 L",
+                  "Fr": "Monitor 2 L",
+                  "De": "Monitor 2 L",
+                  "Es": "Monitor 2 L"
+                },
+                "description": {
+                  "En": "Monitor 2 Left IN from Bus AB-01",
+                  "Fr": "Monitor 2 Left IN from Bus AB-01",
+                  "De": "Monitor 2 Left IN from Bus AB-01",
+                  "Es": "Monitor 2 Left IN from Bus AB-01"
+                }
               },
               "5": {
                 "value": "815",
-                "label_active": "Monitor 3 L",
-                "label_inactive": "Monitor 3 L",
-                "description": "Monitor 3 Left IN from Bus AB-01"
+                "label_active": {
+                  "En": "Monitor 3 L",
+                  "Fr": "Monitor 3 L",
+                  "De": "Monitor 3 L",
+                  "Es": "Monitor 3 L"
+                },
+                "label_inactive": {
+                  "En": "Monitor 3 L",
+                  "Fr": "Monitor 3 L",
+                  "De": "Monitor 3 L",
+                  "Es": "Monitor 3 L"
+                },
+                "description": {
+                  "En": "Monitor 3 Left IN from Bus AB-01",
+                  "Fr": "Moniteur 3 G ENT de Bus AB-01",
+                  "De": "Monitor 3 L EIN von Bus AB-01",
+                  "Es": "Monitor 3 Izq ENT de Bus AB-01"
+                }
               }
             },
             "selection_mode": "radio",
@@ -296,33 +526,108 @@
             "options": {
               "1": {
                 "value": "831",
-                "label_active": "DUT In R",
-                "label_inactive": "DUT In R",
-                "description": "Device Under Test Right IN from Bus AB-03"
+                "label_active": {
+                  "En": "DUT In R",
+                  "Fr": "DUT In R",
+                  "De": "DUT In R",
+                  "Es": "DUT In R"
+                },
+                "label_inactive": {
+                  "En": "DUT In R",
+                  "Fr": "DUT In R",
+                  "De": "DUT In R",
+                  "Es": "DUT In R"
+                },
+                "description": {
+                  "En": "Device Under Test Right IN from Bus AB-03",
+                  "Fr": "Device Under Test Right IN from Bus AB-03",
+                  "De": "Device Under Test Right IN from Bus AB-03",
+                  "Es": "Device Under Test Right IN from Bus AB-03"
+                }
               },
               "2": {
                 "value": "832",
-                "label_active": "DAC IN R",
-                "label_inactive": "DAC IN R",
-                "description": "DAC Right IN from Bus AB-03"
+                "label_active": {
+                  "En": "DAC IN R",
+                  "Fr": "ENT DAC D",
+                  "De": "DAC EIN R",
+                  "Es": "ENT DAC Der"
+                },
+                "label_inactive": {
+                  "En": "DAC IN R",
+                  "Fr": "ENT DAC D",
+                  "De": "DAC EIN R",
+                  "Es": "ENT DAC Der"
+                },
+                "description": {
+                  "En": "DAC Right IN from Bus AB-03",
+                  "Fr": "DAC Right IN from Bus AB-03",
+                  "De": "DAC Right IN from Bus AB-03",
+                  "Es": "DAC Right IN from Bus AB-03"
+                }
               },
               "3": {
                 "value": "833",
-                "label_active": "Monitor 1 R",
-                "label_inactive": "Monitor 1 R",
-                "description": "Monitor 1 Right IN from Bus AB-03"
+                "label_active": {
+                  "En": "Monitor 1 R",
+                  "Fr": "Monitor 1 R",
+                  "De": "Monitor 1 R",
+                  "Es": "Monitor 1 R"
+                },
+                "label_inactive": {
+                  "En": "Monitor 1 R",
+                  "Fr": "Monitor 1 R",
+                  "De": "Monitor 1 R",
+                  "Es": "Monitor 1 R"
+                },
+                "description": {
+                  "En": "Monitor 1 Right IN from Bus AB-03",
+                  "Fr": "Monitor 1 Right IN from Bus AB-03",
+                  "De": "Monitor 1 Right IN from Bus AB-03",
+                  "Es": "Monitor 1 Right IN from Bus AB-03"
+                }
               },
               "4": {
                 "value": "834",
-                "label_active": "Monitor 2 R",
-                "label_inactive": "Monitor 2 R",
-                "description": "Monitor 2 Right IN from Bus AB-03"
+                "label_active": {
+                  "En": "Monitor 2 R",
+                  "Fr": "Monitor 2 R",
+                  "De": "Monitor 2 R",
+                  "Es": "Monitor 2 R"
+                },
+                "label_inactive": {
+                  "En": "Monitor 2 R",
+                  "Fr": "Monitor 2 R",
+                  "De": "Monitor 2 R",
+                  "Es": "Monitor 2 R"
+                },
+                "description": {
+                  "En": "Monitor 2 Right IN from Bus AB-03",
+                  "Fr": "Moniteur 2 D ENT de Bus AB-03",
+                  "De": "Monitor 2 R EIN von Bus AB-03",
+                  "Es": "Monitor 2 Der ENT de Bus AB-03"
+                }
               },
               "5": {
                 "value": "835",
-                "label_active": "Monitor 3 R",
-                "label_inactive": "Monitor 3 R",
-                "description": "Monitor 3 Right IN from Bus AB-03"
+                "label_active": {
+                  "En": "Monitor 3 R",
+                  "Fr": "Monitor 3 R",
+                  "De": "Monitor 3 R",
+                  "Es": "Monitor 3 R"
+                },
+                "label_inactive": {
+                  "En": "Monitor 3 R",
+                  "Fr": "Monitor 3 R",
+                  "De": "Monitor 3 R",
+                  "Es": "Monitor 3 R"
+                },
+                "description": {
+                  "En": "Monitor 3 Right IN from Bus AB-03",
+                  "Fr": "Moniteur 3 D ENT de Bus AB-03",
+                  "De": "Monitor 3 R EIN von Bus AB-03",
+                  "Es": "Monitor 3 Der ENT de Bus AB-03"
+                }
               }
             },
             "selection_mode": "radio",

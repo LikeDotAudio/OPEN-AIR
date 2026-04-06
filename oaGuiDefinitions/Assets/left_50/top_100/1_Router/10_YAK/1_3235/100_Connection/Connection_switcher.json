@@ -2,6 +2,11 @@
   "Router_YAK_3235_Connection": {
     "type": "OcaTable",
     "id": "50.100.1.10.1.100",
-    "description": "Discovered Devices"
+    "description": {
+      "En": "Discovered Devices",
+      "Fr": "Discovered Devices",
+      "De": "Discovered Devices",
+      "Es": "Discovered Devices"
+    }
   }
 }

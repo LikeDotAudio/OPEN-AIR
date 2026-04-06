@@ -7,7 +7,7 @@
 from ..Managers.mqtt_connection import MqttConnectionManager
 import orjson
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 def start_publisher_worker():

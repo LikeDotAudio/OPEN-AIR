@@ -22,7 +22,7 @@ from typing import Optional, Callable
 from loguru import logger
 from oaLogging.Methods.matrix_gate import matrix_log
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComMQTT.Core.mqtt_message import MqttMessage
 
 app_constants = Config.get_instance()

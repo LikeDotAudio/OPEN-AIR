@@ -13,11 +13,21 @@
     "blocks": {
       "nab": {
         "type": "OcaBlock",
-        "description": "NAB Trace Monitoring",
+        "description": {
+          "En": "NAB Trace Monitoring",
+          "Fr": "NAB Trace Monitoring",
+          "De": "NAB Spur Monitoring",
+          "Es": "NAB Traza Monitoring"
+        },
         "fields": {
           "traces_1_2_3_N9340B": {
             "type": "OcaBlock",
-            "description": "Primary Trace Monitoring",
+            "description": {
+              "En": "Primary Trace Monitoring",
+              "Fr": "Primary Trace Monitoring",
+              "De": "Primary Spur Monitoring",
+              "Es": "Primary Traza Monitoring"
+            },
             "fields": {
               "N9340B": {
                 "type": "_GuiActuator",
@@ -44,52 +54,97 @@
               },
               "Outputs": {
                 "type": "OcaBlock",
-                "description": "Trace Settings and Data",
+                "description": {
+                  "En": "Trace Settings and Data",
+                  "Fr": "Trace Paramètres and Data",
+                  "De": "Spur Einstellungen and Data",
+                  "Es": "Traza Settings and Data"
+                },
                 "fields": {
                   "StartFreq": {
-                    "label": "Start Frequency (Hz)",
+                    "label": {
+                      "En": "Start Frequency (Hz)",
+                      "Fr": "Démarrer Fréquence (Hz)",
+                      "De": "Start Frequenz (Hz)",
+                      "Es": "Inicio Frecuencia (Hz)"
+                    },
                     "value": "The starting frequency in Hz.",
                     "type": "_GuiValue",
                     "units": "Hz"
                   },
                   "StopFreq": {
-                    "label": "Stop Frequency (Hz)",
+                    "label": {
+                      "En": "Stop Frequency (Hz)",
+                      "Fr": "Arrêter Fréquence (Hz)",
+                      "De": "Stopp Frequenz (Hz)",
+                      "Es": "Parar Frecuencia (Hz)"
+                    },
                     "value": "The stopping frequency in Hz.",
                     "type": "_GuiValue",
                     "units": "Hz"
                   },
                   "TraceMode1": {
-                    "label": "Trace Mode 1",
+                    "label": {
+                      "En": "Trace Mode 1",
+                      "Fr": "Trace Mode 1",
+                      "De": "Spur Modus 1",
+                      "Es": "Traza Mode 1"
+                    },
                     "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
                     "units": "mode"
                   },
                   "TraceMode2": {
-                    "label": "Trace Mode 2",
+                    "label": {
+                      "En": "Trace Mode 2",
+                      "Fr": "Trace Mode 2",
+                      "De": "Spur Modus 2",
+                      "Es": "Traza Mode 2"
+                    },
                     "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
                     "units": "mode"
                   },
                   "TraceMode3": {
-                    "label": "Trace Mode 3",
+                    "label": {
+                      "En": "Trace Mode 3",
+                      "Fr": "Trace Mode 3",
+                      "De": "Spur Modus 3",
+                      "Es": "Traza Mode 3"
+                    },
                     "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
                     "units": "mode"
                   },
                   "TraceData1": {
-                    "label": "Trace Data 1",
+                    "label": {
+                      "En": "Trace Data 1",
+                      "Fr": "Trace Data 1",
+                      "De": "Spur Data 1",
+                      "Es": "Traza Data 1"
+                    },
                     "value": "Processed trace data.",
                     "type": "_GuiValue",
                     "units": "dBm"
                   },
                   "TraceData2": {
-                    "label": "Trace Data 2",
+                    "label": {
+                      "En": "Trace Data 2",
+                      "Fr": "Données de trace 2",
+                      "De": "Trace-Daten 2",
+                      "Es": "Datos de traza 2"
+                    },
                     "value": "Processed trace data.",
                     "type": "_GuiValue",
                     "units": "dBm"
                   },
                   "TraceData3": {
-                    "label": "Trace Data 3",
+                    "label": {
+                      "En": "Trace Data 3",
+                      "Fr": "Trace Data 3",
+                      "De": "Spur Data 3",
+                      "Es": "Traza Data 3"
+                    },
                     "value": "Processed trace data.",
                     "type": "_GuiValue",
                     "units": "dBm"
@@ -100,7 +155,12 @@
           },
           "traces_1_2_3": {
             "type": "OcaBlock",
-            "description": "Primary Trace Monitoring",
+            "description": {
+              "En": "Primary Trace Monitoring",
+              "Fr": "Primary Trace Monitoring",
+              "De": "Primary Spur Monitoring",
+              "Es": "Primary Traza Monitoring"
+            },
             "fields": {
               "N9342CN": {
                 "type": "_GuiActuator",
@@ -127,52 +187,97 @@
               },
               "Outputs": {
                 "type": "OcaBlock",
-                "description": "Trace Settings and Data",
+                "description": {
+                  "En": "Trace Settings and Data",
+                  "Fr": "Trace Paramètres and Data",
+                  "De": "Spur Einstellungen and Data",
+                  "Es": "Traza Settings and Data"
+                },
                 "fields": {
                   "StartFreq": {
-                    "label": "Start Frequency (Hz)",
+                    "label": {
+                      "En": "Start Frequency (Hz)",
+                      "Fr": "Démarrer Fréquence (Hz)",
+                      "De": "Start Frequenz (Hz)",
+                      "Es": "Inicio Frecuencia (Hz)"
+                    },
                     "value": "The starting frequency in Hz.",
                     "type": "_GuiValue",
                     "units": "Hz"
                   },
                   "StopFreq": {
-                    "label": "Stop Frequency (Hz)",
+                    "label": {
+                      "En": "Stop Frequency (Hz)",
+                      "Fr": "Arrêter Fréquence (Hz)",
+                      "De": "Stopp Frequenz (Hz)",
+                      "Es": "Parar Frecuencia (Hz)"
+                    },
                     "value": "The stopping frequency in Hz.",
                     "type": "_GuiValue",
                     "units": "Hz"
                   },
                   "TraceMode1": {
-                    "label": "Trace Mode 1",
+                    "label": {
+                      "En": "Trace Mode 1",
+                      "Fr": "Trace Mode 1",
+                      "De": "Spur Modus 1",
+                      "Es": "Traza Mode 1"
+                    },
                     "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
                     "units": "mode"
                   },
                   "TraceMode2": {
-                    "label": "Trace Mode 2",
+                    "label": {
+                      "En": "Trace Mode 2",
+                      "Fr": "Trace Mode 2",
+                      "De": "Spur Modus 2",
+                      "Es": "Traza Mode 2"
+                    },
                     "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
                     "units": "mode"
                   },
                   "TraceMode3": {
-                    "label": "Trace Mode 3",
+                    "label": {
+                      "En": "Trace Mode 3",
+                      "Fr": "Trace Mode 3",
+                      "De": "Spur Modus 3",
+                      "Es": "Traza Mode 3"
+                    },
                     "value": "The trace modes for each trace.",
                     "type": "_GuiValue",
                     "units": "mode"
                   },
                   "TraceData1": {
-                    "label": "Trace Data 1",
+                    "label": {
+                      "En": "Trace Data 1",
+                      "Fr": "Trace Data 1",
+                      "De": "Spur Data 1",
+                      "Es": "Traza Data 1"
+                    },
                     "value": "Processed trace data.",
                     "type": "_GuiValue",
                     "units": "dBm"
                   },
                   "TraceData2": {
-                    "label": "Trace Data 2",
+                    "label": {
+                      "En": "Trace Data 2",
+                      "Fr": "Données de trace 2",
+                      "De": "Trace-Daten 2",
+                      "Es": "Datos de traza 2"
+                    },
                     "value": "Processed trace data.",
                     "type": "_GuiValue",
                     "units": "dBm"
                   },
                   "TraceData3": {
-                    "label": "Trace Data 3",
+                    "label": {
+                      "En": "Trace Data 3",
+                      "Fr": "Trace Data 3",
+                      "De": "Spur Data 3",
+                      "Es": "Traza Data 3"
+                    },
                     "value": "Processed trace data.",
                     "type": "_GuiValue",
                     "units": "dBm"
@@ -185,7 +290,12 @@
       },
       "get": {
         "type": "OcaBlock",
-        "description": "Trace Data Queries",
+        "description": {
+          "En": "Trace Data Queries",
+          "Fr": "Trace Data Queries",
+          "De": "Spur Data Queries",
+          "Es": "Traza Data Queries"
+        },
         "fields": {
           "Trace_1_Data": {
             "type": "OcaBlock",
@@ -219,7 +329,12 @@
                   "trace_number": {
                     "value": "1",
                     "type": "_Value",
-                    "description": "The trace number."
+                    "description": {
+                      "En": "The trace number.",
+                      "Fr": "The trace number.",
+                      "De": "The trace number.",
+                      "Es": "The trace number."
+                    }
                   }
                 }
               },
@@ -227,7 +342,12 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_data": {
-                    "label": "Trace 1 Data",
+                    "label": {
+                      "En": "Trace 1 Data",
+                      "Fr": "Trace 1 Data",
+                      "De": "Spur 1 Data",
+                      "Es": "Traza 1 Data"
+                    },
                     "value": "Processed trace data or False.",
                     "type": "_GuiValue",
                     "units": "dBm"
@@ -266,7 +386,12 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_number": {
-                    "label": "Trace Number",
+                    "label": {
+                      "En": "Trace Number",
+                      "Fr": "Trace Number",
+                      "De": "Spur Number",
+                      "Es": "Traza Number"
+                    },
                     "value": "2",
                     "type": "_GuiValue"
                   }
@@ -368,7 +493,12 @@
                 "type": "OcaBlock",
                 "fields": {
                   "trace_data": {
-                    "label": "Trace 4 Data",
+                    "label": {
+                      "En": "Trace 4 Data",
+                      "Fr": "Trace 4 Data",
+                      "De": "Spur 4 Data",
+                      "Es": "Traza 4 Data"
+                    },
                     "value": "Processed trace data.",
                     "type": "_GuiValue",
                     "units": "dBm"

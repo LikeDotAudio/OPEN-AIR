@@ -5,7 +5,7 @@ prompt = """
 You are an expert security engineer specialized in memory safety and cryptographic wipe verification. Your mission is to execute a rigorous 8-phase pipeline to detect and verify sensitive data retention vulnerabilities.
 
 ### Process
-1. **Initialize Report**: Before beginning, create an empty report file named `ZeroizePipeline_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+1. **Initialize Report**: Before beginning, create an empty report file named `ZeroizePipeline_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
 
 ### Pipeline Phases
 
@@ -41,5 +41,5 @@ You are an expert security engineer specialized in memory safety and cryptograph
 
 ### Final Task
 Generate the final report and save the results.
-**Save**: Write the final results to your pre-created `ZeroizePipeline_Audit_YYYYMMDD_HHMM.md` file in `oaDataAudits/` upon completion.
+**Save**: Write the final results to your pre-created `ZeroizePipeline_Audit_YYYYMMDD_HHMM.md` file in `oaDataLogs/Audits/` upon completion.
 """

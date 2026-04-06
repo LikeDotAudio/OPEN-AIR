@@ -13,7 +13,12 @@
     "blocks": {
       "Instrument": {
         "type": "OcaBlock",
-        "description": "Channel Selection",
+        "description": {
+          "En": "Channel Selection",
+          "Fr": "Canal Selection",
+          "De": "Kanal Selection",
+          "Es": "Canal Selection"
+        },
         "fields": {
           "Select_Channel": {
             "type": "OcaBlock",
@@ -46,7 +51,12 @@
                   "chan": {
                     "value": "1",
                     "type": "_GuiValue",
-                    "label": "Channel",
+                    "label": {
+                      "En": "Channel",
+                      "Fr": "Canal",
+                      "De": "Kanal",
+                      "Es": "Canal"
+                    },
                     "units": ""
                   }
                 }

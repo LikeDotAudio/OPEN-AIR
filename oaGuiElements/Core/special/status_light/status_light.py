@@ -1,4 +1,5 @@
 # status_light/status_light.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20250821.200641.4
 #
@@ -14,7 +15,7 @@ import orjson
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
@@ -127,7 +128,7 @@ class StatusLightWidget(tk.Frame):
         
         self.status_canvas.delete("industrial_text")
         
-        label_text = self.widget_config.get("label_active", "Fleet Status:")
+        label_text = self.widget_get_text(config.get("label_active"), "Fleet Status:")
         
         dot_size = 16
         if self.orientation == "vertical":

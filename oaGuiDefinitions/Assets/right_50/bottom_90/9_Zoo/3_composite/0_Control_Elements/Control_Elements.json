@@ -13,11 +13,21 @@
     "blocks": {
       "tutorial_intro": {
         "type": "OcaBlock",
-        "description": "Introduction",
+        "description": {
+          "En": "Introduction",
+          "Fr": "Introduction",
+          "De": "Introduction",
+          "Es": "Introduction"
+        },
         "fields": {
           "title": {
             "type": "_SmartLabel",
-            "label": "The 'Flux Capacitor' Widget Showcase",
+            "label": {
+              "En": "The 'Flux Capacitor' Widget Showcase",
+              "Fr": "The 'Flux Capacitor' Widget Showcase",
+              "De": "The 'Flux Capacitor' Widget Showcase",
+              "Es": "The 'Flux Capacitor' Widget Showcase"
+            },
             "notes": "",
             "geometry": {
               "font": 10
@@ -35,7 +45,12 @@
           },
           "desc_main": {
             "type": "_SmartLabel",
-            "label": "Now featuring Hybrid Metering (Analog + Digital) and Custom Faders!",
+            "label": {
+              "En": "Now featuring Hybrid Metering (Analog + Digital) and Custom Faders!",
+              "Fr": "Now featuring Hybrid Metering (Analog + Digital) and Personnalisé Faders!",
+              "De": "Now featuring Hybrid Metering (Analog + Digital) and Benutzerdefiniert Faders!",
+              "Es": "Now featuring Hybrid Metering (Analog + Digital) and Personalizado Faders!"
+            },
             "notes": "",
             "geometry": {
               "font": 10
@@ -55,12 +70,22 @@
       },
       "Standard_Gui_Elements": {
         "type": "OcaBlock",
-        "description": "Standard Controls (2-Column Grid)",
+        "description": {
+          "En": "Standard Controls (2-Column Grid)",
+          "Fr": "Standard Controls (2-Column Grid)",
+          "De": "Standard Controls (2-Column Grid)",
+          "Es": "Estándar Controls (2-Column Grid)"
+        },
         "layout_columns": 2,
         "fields": {
           "w01": {
             "type": "_SmartActuator",
-            "label": "Actuator",
+            "label": {
+              "En": "Actuator",
+              "Fr": "Actuator",
+              "De": "Actuator",
+              "Es": "Actuator"
+            },
             "notes": "",
             "interaction": {
               "trigger": false
@@ -68,7 +93,12 @@
           },
           "w02": {
             "type": "_SmartToggle",
-            "label": "Toggle Button with Title",
+            "label": {
+              "En": "Toggle Button with Title",
+              "Fr": "Toggle Bouton with Title",
+              "De": "Toggle Taste with Title",
+              "Es": "Toggle Botón with Title"
+            },
             "notes": "",
             "geometry": {
               "font": 10
@@ -87,11 +117,21 @@
             "interaction": {
               "options": {
                 "ON": {
-                  "label_active": "ON",
+                  "label_active": {
+                    "En": "ON",
+                    "Fr": "ON",
+                    "De": "ON",
+                    "Es": "ON"
+                  },
                   "selected": false
                 },
                 "OFF": {
-                  "label_inactive": "OFF",
+                  "label_inactive": {
+                    "En": "OFF",
+                    "Fr": "OFF",
+                    "De": "OFF",
+                    "Es": "OFF"
+                  },
                   "selected": true
                 }
               }
@@ -100,7 +140,12 @@
           },
           "w03": {
             "type": "_SmartToggler",
-            "label": "Multi-Button Toggler",
+            "label": {
+              "En": "Multi-Button Toggler",
+              "Fr": "Multi-Button Bascule",
+              "De": "Multi-Button Umschalter",
+              "Es": "Multi-Button Conmutador"
+            },
             "notes": "",
             "geometry": {
               "height": 30,
@@ -126,7 +171,12 @@
           },
           "w04": {
             "type": "_SmartCheckbox",
-            "label": "Check",
+            "label": {
+              "En": "Check",
+              "Fr": "Check",
+              "De": "Check",
+              "Es": "Check"
+            },
             "notes": "",
             "domain": {
               "primary": {
@@ -141,74 +191,179 @@
             "type": "_GuiDropDownOption",
             "AES70": "OcaSwitch",
             "handler": "set_value",
-            "label_active": "Dropdown with 10 Choices",
+            "label_active": {
+              "En": "Dropdown with 10 Choices",
+              "Fr": "Dropdown with 10 Choices",
+              "De": "Dropdown with 10 Choices",
+              "Es": "Dropdown with 10 Choices"
+            },
             "options": {
               "1": {
-                "label_active": "Choice 1",
-                "label_inactive": "Choice 1",
+                "label_active": {
+                  "En": "Choice 1",
+                  "Fr": "Choice 1",
+                  "De": "Choice 1",
+                  "Es": "Choice 1"
+                },
+                "label_inactive": {
+                  "En": "Choice 1",
+                  "Fr": "Choice 1",
+                  "De": "Choice 1",
+                  "Es": "Choice 1"
+                },
                 "value": "1",
                 "units": "text",
                 "selected": false
               },
               "2": {
-                "label_active": "Choice 2",
-                "label_inactive": "Choice 2",
+                "label_active": {
+                  "En": "Choice 2",
+                  "Fr": "Choice 2",
+                  "De": "Choice 2",
+                  "Es": "Choice 2"
+                },
+                "label_inactive": {
+                  "En": "Choice 2",
+                  "Fr": "Choice 2",
+                  "De": "Choice 2",
+                  "Es": "Choice 2"
+                },
                 "value": "2",
                 "units": "text",
                 "selected": false
               },
               "3": {
-                "label_active": "Choice 3",
-                "label_inactive": "Choice 3",
+                "label_active": {
+                  "En": "Choice 3",
+                  "Fr": "Choice 3",
+                  "De": "Choice 3",
+                  "Es": "Choice 3"
+                },
+                "label_inactive": {
+                  "En": "Choice 3",
+                  "Fr": "Choice 3",
+                  "De": "Choice 3",
+                  "Es": "Choice 3"
+                },
                 "value": "3",
                 "units": "text",
                 "selected": false
               },
               "4": {
-                "label_active": "Choice 4",
-                "label_inactive": "Choice 4",
+                "label_active": {
+                  "En": "Choice 4",
+                  "Fr": "Choice 4",
+                  "De": "Choice 4",
+                  "Es": "Choice 4"
+                },
+                "label_inactive": {
+                  "En": "Choice 4",
+                  "Fr": "Choice 4",
+                  "De": "Choice 4",
+                  "Es": "Choice 4"
+                },
                 "value": "4",
                 "units": "text",
                 "selected": false
               },
               "5": {
-                "label_active": "Choice 5",
-                "label_inactive": "Choice 5",
+                "label_active": {
+                  "En": "Choice 5",
+                  "Fr": "Choice 5",
+                  "De": "Choice 5",
+                  "Es": "Choice 5"
+                },
+                "label_inactive": {
+                  "En": "Choice 5",
+                  "Fr": "Choice 5",
+                  "De": "Choice 5",
+                  "Es": "Choice 5"
+                },
                 "value": "5",
                 "units": "text",
                 "selected": false
               },
               "6": {
-                "label_active": "Choice 6",
-                "label_inactive": "Choice 6",
+                "label_active": {
+                  "En": "Choice 6",
+                  "Fr": "Choice 6",
+                  "De": "Choice 6",
+                  "Es": "Choice 6"
+                },
+                "label_inactive": {
+                  "En": "Choice 6",
+                  "Fr": "Choice 6",
+                  "De": "Choice 6",
+                  "Es": "Choice 6"
+                },
                 "value": "6",
                 "units": "text",
                 "selected": false
               },
               "7": {
-                "label_active": "Choice 7",
-                "label_inactive": "Choice 7",
+                "label_active": {
+                  "En": "Choice 7",
+                  "Fr": "Choice 7",
+                  "De": "Choice 7",
+                  "Es": "Choice 7"
+                },
+                "label_inactive": {
+                  "En": "Choice 7",
+                  "Fr": "Choice 7",
+                  "De": "Choice 7",
+                  "Es": "Choice 7"
+                },
                 "value": "7",
                 "units": "text",
                 "selected": false
               },
               "8": {
-                "label_active": "Choice 8",
-                "label_inactive": "Choice 8",
+                "label_active": {
+                  "En": "Choice 8",
+                  "Fr": "Choice 8",
+                  "De": "Choice 8",
+                  "Es": "Choice 8"
+                },
+                "label_inactive": {
+                  "En": "Choice 8",
+                  "Fr": "Choice 8",
+                  "De": "Choice 8",
+                  "Es": "Choice 8"
+                },
                 "value": "8",
                 "units": "text",
                 "selected": false
               },
               "9": {
-                "label_active": "Choice 9",
-                "label_inactive": "Choice 9",
+                "label_active": {
+                  "En": "Choice 9",
+                  "Fr": "Choice 9",
+                  "De": "Choice 9",
+                  "Es": "Choice 9"
+                },
+                "label_inactive": {
+                  "En": "Choice 9",
+                  "Fr": "Choice 9",
+                  "De": "Choice 9",
+                  "Es": "Choice 9"
+                },
                 "value": "9",
                 "units": "text",
                 "selected": false
               },
               "10": {
-                "label_active": "Choice 10",
-                "label_inactive": "Choice 10",
+                "label_active": {
+                  "En": "Choice 10",
+                  "Fr": "Choice 10",
+                  "De": "Choice 10",
+                  "Es": "Choice 10"
+                },
+                "label_inactive": {
+                  "En": "Choice 10",
+                  "Fr": "Choice 10",
+                  "De": "Choice 10",
+                  "Es": "Choice 10"
+                },
                 "value": "10",
                 "units": "text",
                 "selected": false
@@ -217,7 +372,12 @@
           },
           "ListBox": {
             "type": "_SmartList",
-            "label": "List",
+            "label": {
+              "En": "List",
+              "Fr": "List",
+              "De": "List",
+              "Es": "List"
+            },
             "notes": "",
             "geometry": {
               "height": 60
@@ -232,7 +392,12 @@
           },
           "LabelActive": {
             "type": "_SmartInput",
-            "label": "Input",
+            "label": {
+              "En": "Input",
+              "Fr": "Entrée",
+              "De": "Eingang",
+              "Es": "Entrada"
+            },
             "notes": "",
             "geometry": {
               "font": 13
@@ -255,7 +420,12 @@
           },
           "Value": {
             "type": "_SmartValue",
-            "label": "Value",
+            "label": {
+              "En": "Value",
+              "Fr": "Valeur",
+              "De": "Wert",
+              "Es": "Valor"
+            },
             "notes": "",
             "geometry": {
               "font": 10
@@ -279,7 +449,12 @@
           },
           "Label": {
             "type": "_SmartLabel",
-            "label": "Label",
+            "label": {
+              "En": "Label",
+              "Fr": "Étiquette",
+              "De": "Beschriftung",
+              "Es": "Etiqueta"
+            },
             "notes": "",
             "geometry": {
               "font": 10
@@ -297,7 +472,12 @@
           },
           "WebLink": {
             "type": "_SmartLink",
-            "label": "Link to Like.audio",
+            "label": {
+              "En": "Link to Like.audio",
+              "Fr": "Link to Like.audio",
+              "De": "Link to Like.audio",
+              "Es": "Link to Like.audio"
+            },
             "notes": "",
             "cosmetics": {
               "colors": {},
@@ -311,7 +491,12 @@
           },
           "Progress Bar": {
             "type": "_SmartProgress",
-            "label": "Load",
+            "label": {
+              "En": "Load",
+              "Fr": "Charger",
+              "De": "Laden",
+              "Es": "Cargar"
+            },
             "notes": "",
             "domain": {
               "primary": {
@@ -330,7 +515,12 @@
           },
           "Label Active": {
             "type": "_sliderValue",
-            "label_active": "Slider",
+            "label_active": {
+              "En": "Slider",
+              "Fr": "Slider",
+              "De": "Slider",
+              "Es": "Slider"
+            },
             "value_default": 50,
             "min": 0.0,
             "max": 100.0,
@@ -347,7 +537,12 @@
           },
           "IncDecButtons": {
             "type": "_SmartIncDec",
-            "label": "Inc/Dec",
+            "label": {
+              "En": "Inc/Dec",
+              "Fr": "Inc/Dec",
+              "De": "Inc/Dec",
+              "Es": "Inc/Dec"
+            },
             "notes": "",
             "domain": {
               "primary": {
@@ -366,7 +561,12 @@
           },
           "DirectionalButtons": {
             "type": "_SmartNav",
-            "label": "Nav Pad",
+            "label": {
+              "En": "Nav Pad",
+              "Fr": "Nav Pad",
+              "De": "Nav Pad",
+              "Es": "Nav Pad"
+            },
             "notes": "",
             "cosmetics": {
               "colors": {},
@@ -382,39 +582,94 @@
             "type": "_GuiDropDownOption",
             "AES70": "OcaSwitch",
             "handler": "set_value",
-            "label_active": "Dropdown - Numbers",
+            "label_active": {
+              "En": "Dropdown - Numbers",
+              "Fr": "Dropdown - Numbers",
+              "De": "Dropdown - Numbers",
+              "Es": "Dropdown - Numbers"
+            },
             "options": {
               "1": {
-                "label_active": "10",
-                "label_inactive": "10",
+                "label_active": {
+                  "En": "10",
+                  "Fr": "10",
+                  "De": "10",
+                  "Es": "10"
+                },
+                "label_inactive": {
+                  "En": "10",
+                  "Fr": "10",
+                  "De": "10",
+                  "Es": "10"
+                },
                 "value": "10",
                 "units": "num",
                 "selected": false
               },
               "2": {
-                "label_active": "20",
-                "label_inactive": "20",
+                "label_active": {
+                  "En": "20",
+                  "Fr": "20",
+                  "De": "20",
+                  "Es": "20"
+                },
+                "label_inactive": {
+                  "En": "20",
+                  "Fr": "20",
+                  "De": "20",
+                  "Es": "20"
+                },
                 "value": "20",
                 "units": "num",
                 "selected": false
               },
               "3": {
-                "label_active": "30",
-                "label_inactive": "30",
+                "label_active": {
+                  "En": "30",
+                  "Fr": "30",
+                  "De": "30",
+                  "Es": "30"
+                },
+                "label_inactive": {
+                  "En": "30",
+                  "Fr": "30",
+                  "De": "30",
+                  "Es": "30"
+                },
                 "value": "30",
                 "units": "num",
                 "selected": false
               },
               "4": {
-                "label_active": "40",
-                "label_inactive": "40",
+                "label_active": {
+                  "En": "40",
+                  "Fr": "40",
+                  "De": "40",
+                  "Es": "40"
+                },
+                "label_inactive": {
+                  "En": "40",
+                  "Fr": "40",
+                  "De": "40",
+                  "Es": "40"
+                },
                 "value": "40",
                 "units": "num",
                 "selected": false
               },
               "5": {
-                "label_active": "50",
-                "label_inactive": "50",
+                "label_active": {
+                  "En": "50",
+                  "Fr": "50",
+                  "De": "50",
+                  "Es": "50"
+                },
+                "label_inactive": {
+                  "En": "50",
+                  "Fr": "50",
+                  "De": "50",
+                  "Es": "50"
+                },
                 "value": "50",
                 "units": "num",
                 "selected": false
@@ -425,25 +680,60 @@
             "type": "_GuiDropDownOption",
             "AES70": "OcaSwitch",
             "handler": "set_value",
-            "label_active": "Dropdown - Default Value",
+            "label_active": {
+              "En": "Dropdown - Default Value",
+              "Fr": "Dropdown - Default Valeur",
+              "De": "Dropdown - Default Wert",
+              "Es": "Dropdown - Default Valor"
+            },
             "options": {
               "1": {
-                "label_active": "Apple",
-                "label_inactive": "Apple",
+                "label_active": {
+                  "En": "Apple",
+                  "Fr": "Apple",
+                  "De": "Apple",
+                  "Es": "Apple"
+                },
+                "label_inactive": {
+                  "En": "Apple",
+                  "Fr": "Apple",
+                  "De": "Apple",
+                  "Es": "Apple"
+                },
                 "value": "1",
                 "units": "fruit",
                 "selected": false
               },
               "2": {
-                "label_active": "Banana",
-                "label_inactive": "Banana",
+                "label_active": {
+                  "En": "Banana",
+                  "Fr": "Banana",
+                  "De": "Banana",
+                  "Es": "Banana"
+                },
+                "label_inactive": {
+                  "En": "Banana",
+                  "Fr": "Banana",
+                  "De": "Banana",
+                  "Es": "Banana"
+                },
                 "value": "2",
                 "units": "fruit",
                 "selected": true
               },
               "3": {
-                "label_active": "Cherry",
-                "label_inactive": "Cherry",
+                "label_active": {
+                  "En": "Cherry",
+                  "Fr": "Cherry",
+                  "De": "Cherry",
+                  "Es": "Cherry"
+                },
+                "label_inactive": {
+                  "En": "Cherry",
+                  "Fr": "Cherry",
+                  "De": "Cherry",
+                  "Es": "Cherry"
+                },
                 "value": "3",
                 "units": "fruit",
                 "selected": false

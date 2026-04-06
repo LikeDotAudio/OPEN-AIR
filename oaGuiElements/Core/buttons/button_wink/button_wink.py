@@ -13,11 +13,12 @@ from tkinter import ttk
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGuiFramework.Methods.i18n_utils import get_text
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 
 # Core Modules
@@ -43,7 +44,7 @@ class BuilderButtonWinkCreator(TransparencyMixin):
         # 1. Extract Config
         config = extract_wink_config(config_data)
         path = config_data.get("path")
-        label = config_data.get("label_active")
+        label = get_text(config_data.get('label_active'))
         
         # ⚡ HARDENED INTERFACE: Extract from context if available
         matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, "🔗🗂️⚙️ [CONTEXT] Extracting engine and router context...", level="TRACE")

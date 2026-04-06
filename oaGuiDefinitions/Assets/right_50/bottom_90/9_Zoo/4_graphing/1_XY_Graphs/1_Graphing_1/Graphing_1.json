@@ -48,14 +48,24 @@
         "show_x_axis": true,
         "show_y_axis": true,
         "x": {
-          "label": "X-Axis",
+          "label": {
+            "En": "X-Axis",
+            "Fr": "X-Axis",
+            "De": "X-Axis",
+            "Es": "X-Axis"
+          },
           "scale": "linear",
           "color": "white",
           "min": "auto",
           "max": "auto"
         },
         "y": {
-          "label": "Y-Axis",
+          "label": {
+            "En": "Y-Axis",
+            "Fr": "Y-Axis",
+            "De": "Y-Axis",
+            "Es": "Y-Axis"
+          },
           "scale": "linear",
           "color": "white",
           "min": "auto",
@@ -99,14 +109,24 @@
         "show_x_axis": true,
         "show_y_axis": true,
         "x": {
-          "label": "X-Axis",
+          "label": {
+            "En": "X-Axis",
+            "Fr": "X-Axis",
+            "De": "X-Axis",
+            "Es": "X-Axis"
+          },
           "scale": "linear",
           "color": "white",
           "min": "auto",
           "max": "auto"
         },
         "y": {
-          "label": "Y-Axis",
+          "label": {
+            "En": "Y-Axis",
+            "Fr": "Y-Axis",
+            "De": "Y-Axis",
+            "Es": "Y-Axis"
+          },
           "scale": "linear",
           "color": "white",
           "min": "auto",
@@ -144,14 +164,24 @@
         "show_x_axis": true,
         "show_y_axis": true,
         "x": {
-          "label": "X-Axis",
+          "label": {
+            "En": "X-Axis",
+            "Fr": "X-Axis",
+            "De": "X-Axis",
+            "Es": "X-Axis"
+          },
           "scale": "linear",
           "color": "white",
           "min": "auto",
           "max": "auto"
         },
         "y": {
-          "label": "Y-Axis",
+          "label": {
+            "En": "Y-Axis",
+            "Fr": "Y-Axis",
+            "De": "Y-Axis",
+            "Es": "Y-Axis"
+          },
           "scale": "linear",
           "color": "white",
           "min": "auto",

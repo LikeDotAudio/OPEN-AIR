@@ -12,7 +12,7 @@ LOCAL_DEBUG = True
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 from oaFileImportCSV.from_csv_unknown import (

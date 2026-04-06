@@ -1,14 +1,3 @@
-import pathlib
-import os
-import sys
-current_dir = pathlib.Path(__file__).resolve().parent
-project_root = current_dir.parent
-if str(project_root) not in sys.path:
-    sys.path.insert(0, str(project_root))
-
-
-import inspect
-from oaLogging.Methods.matrix_gate import matrix_log
 # oaComSNMP/Entry.py
 #
 # The sole orchestrator and public gatekeeper for the SNMP Communication Module.
@@ -23,16 +12,23 @@ from oaLogging.Methods.matrix_gate import matrix_log
 # Source Code: https://github.com/APKaudio/
 # Feature Requests can be emailed to i @ like . audio
 #
-# Version 20260329.1045.1
+# Version 20260405.2300.1
 
-"""
-oaComSNMP/Entry.py - The sole orchestrator for the SNMP Communication Module.
-"""
-
+import pathlib
+import os
+import sys
 import threading
 import time
+import inspect
+from pathlib import Path
 
-# Ensure the root directory is in the search path for local module imports.
+# Ensure the root directory is in the search path
+current_dir = pathlib.Path(__file__).resolve().parent
+project_root = current_dir.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from oaLogging.Methods.matrix_gate import matrix_log
 from .Managers.snmp_manager import SNMPManager, BridgeContext
 from .Workers.snmp_tester import SnmpTester
 from .Methods.snmp_mib_generator import MibGenerator
@@ -48,7 +44,7 @@ def get_manager(state_cache_manager=None, mqtt_connection_manager=None, subscrib
     
     if run_bridge is None:
         try:
-            from oaConfiguration.Core.identity import IdentityManager
+            from oaConfigurationManager.Core.identity import IdentityManager
             ident = IdentityManager.initialize()
             partition = ident.get("PARTITION_ID", "STANDALONE")
             run_bridge = (partition in ["CORE", "STANDALONE"])
@@ -96,18 +92,16 @@ def status():
 def main():
     """
     Main entry point for running the SNMP Bridge as a standalone module.
-    Useful for debugging or isolated service deployment.
     """
     from oaLogging.Core.logger import SNMP_LOGGER
     from oaOchestration.Core.path_initializer import initialize_paths
-    from oaConfiguration.FileReaders.config_reader import Config
+    from oaConfigurationManager.FileReaders.config_reader import Config
     
     initialize_paths()
     cfg = Config.get_instance()
     
     matrix_log("comms", "snmp", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "🚀 [SNMP] Launching Standalone SNMP Module...", "INFO")
     
-    # In standalone mode, we might need to initialize the MQTT connection manually
     from oaComMQTT.Managers.mqtt_connection import MqttConnectionManager
     from oaComMQTT.Managers.mqtt_subscriber_router import MqttSubscriberRouter
     from oaStateCache.Core.state_cache import StateRegistry
@@ -117,13 +111,11 @@ def main():
     state_cache = StateRegistry(mqtt_conn)
     state_cache.subscriber_router = sub_router
     
-    # Start MQTT first so SNMP can use it
     mqtt_conn.connect_to_broker(
         on_message_callback=state_cache.handle_incoming_mqtt,
         subscriber_router=sub_router
     )
     
-    # Initialize the manager with our fresh services
     context = BridgeContext(
         state_cache_manager=state_cache,
         mqtt_connection_manager=mqtt_conn,
@@ -145,21 +137,6 @@ def main():
         SNMP_LOGGER.warning("👋 [SNMP] Standalone shutdown requested.")
         manager.stop()
         mqtt_conn.disconnect()
-
-if __name__ == "__main__":
-    main()
-
-__all__ = [
-    "SNMPManager",
-    "SnmpTester",
-    "MibGenerator",
-    "InstallerGenerator",
-    "get_manager",
-    "start",
-    "stop",
-    "status",
-    "main"
-]
 
 def run_tests():
     """
@@ -184,13 +161,11 @@ def run_tests():
     for test_file in test_files:
         print(f"\n--- Running: {test_file.name} ---")
         try:
-            # Get the module path relative to the project root for the test runner
-            relative_test_file_path = test_file.relative_to(Path(__file__).parent.parent.parent) # Path from OPEN-AIR root
-            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3] # Remove .py extension
+            relative_test_file_path = test_file.relative_to(project_root)
+            module_path_for_runner = str(relative_test_file_path).replace(os.sep, '.')[:-3]
 
-            # Ensure the current directory is the project root so Python can find modules
             original_cwd = os.getcwd()
-            os.chdir(Path(__file__).parent.parent.parent) 
+            os.chdir(project_root) 
 
             result = subprocess.run(
                 [sys.executable, "-m", "unittest", module_path_for_runner],
@@ -205,12 +180,12 @@ def run_tests():
             
             if result.returncode != 0:
                 all_tests_passed = False
-                print(f"❌ Test failed for {test_file.name} with exit code {result.returncode}")
+                print(f"❌ Test failed for {test_file.name}")
             else:
                 print(f"✅ Tests passed for {test_file.name}")
 
         except Exception as e:
-            print(f"❌ An error occurred while running tests for {test_file.name}: {e}")
+            print(f"❌ An error occurred: {e}")
             all_tests_passed = False
         finally:
             os.chdir(original_cwd)
@@ -219,24 +194,6 @@ def run_tests():
         print("\n🎉 All tests for oaComSNMP passed!")
     else:
         print("\n💔 Some tests for oaComSNMP failed.")
-
-if __name__ == "__main__":
-    # If no command-line arguments are provided, default to running tests.
-    # Otherwise, assume specific commands are intended (e.g., start, stop, main).
-    if len(sys.argv) > 1:
-        # If arguments are present, execute the original main logic or other commands.
-        # A more robust implementation would parse sys.argv and call specific functions.
-        # For this task, we assume any arguments mean "don't run tests".
-        print("Executing command...")
-        main() 
-    else:
-        # If no arguments, run the tests first.
-        run_tests()
-        # After tests pass, you might want to explicitly start the service if needed,
-        # or just let the script exit. For now, we'll let it exit.
-        # If you want to start the service after tests, uncomment the following lines:
-        # print("\nTests passed. Starting SNMP service...")
-        # main()
 
 __all__ = [
     "SNMPManager",
@@ -247,5 +204,12 @@ __all__ = [
     "start",
     "stop",
     "status",
-    "main"
+    "main",
+    "run_tests"
 ]
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        main() 
+    else:
+        run_tests()

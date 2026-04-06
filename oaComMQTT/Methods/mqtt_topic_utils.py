@@ -62,7 +62,11 @@ def generate_topic_path_from_filepath(file_path: Path, project_root: Path) -> st
 
 def get_topic(*args) -> str:
     """Joins non-empty arguments with '/'."""
-    return TOPIC_DELIMITER.join(str(arg) for arg in args if arg)
+    def resolve(arg):
+        if isinstance(arg, dict):
+            return str(arg.get("En", list(arg.values())[0] if arg else ""))
+        return str(arg)
+    return TOPIC_DELIMITER.join(resolve(arg) for arg in args if arg)
 
 def generate_base_topic(module_name: str) -> str:
     """Generates a standardized base topic string."""

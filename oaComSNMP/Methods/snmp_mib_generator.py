@@ -17,7 +17,7 @@
 import datetime
 import zlib
 from oaLogging.Core.logger import get_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComSNMP.Methods.snmp_utils import get_snmp_node_id, get_snmp_descriptor
 
 # --- Standard Debug Logging Setup ---

@@ -13,7 +13,12 @@
     "blocks": {
       "Super_Gem_Variations": {
         "type": "OcaBlock",
-        "description": "Super Gem (Superman) Meter Variations",
+        "description": {
+          "En": "Super Gem (Superman) Meter Variations",
+          "Fr": "Super Gem (Superman) Meter Variations",
+          "De": "Super Gem (Superman) Meter Variationen",
+          "Es": "Super Gem (Superman) Meter Variaciones"
+        },
         "layout_columns": 3,
         "column_sizing": [
           {
@@ -29,7 +34,12 @@
         "fields": {
           "SuperGem_1_Large": {
             "type": "_NeedleVUMeter",
-            "label": "Large Classic",
+            "label": {
+              "En": "Large Classic",
+              "Fr": "Large Classique",
+              "De": "Large Klassisch",
+              "Es": "Large Clásico"
+            },
             "geometry": {
               "width": 300,
               "height": 350
@@ -59,7 +69,12 @@
               },
               "labels": [
                 {
-                  "text": "SUPER GEM INSTRUMENTS",
+                  "text": {
+                    "En": "SUPER GEM INSTRUMENTS",
+                    "Fr": "SUPER GEM INSTRUMENTS",
+                    "De": "SUPER GEM INSTRUMENTS",
+                    "Es": "SUPER GEM INSTRUMENTS"
+                  },
                   "x": 0,
                   "y": -150,
                   "size": 14,
@@ -79,7 +94,12 @@
           },
           "SuperGem_2_Medium": {
             "type": "_NeedleVUMeter",
-            "label": "Medium Blue",
+            "label": {
+              "En": "Medium Blue",
+              "Fr": "Moyen Blue",
+              "De": "Mittel Blue",
+              "Es": "Medio Blue"
+            },
             "geometry": {
               "width": 220,
               "height": 300
@@ -109,7 +129,12 @@
               },
               "labels": [
                 {
-                  "text": "S-GEM SERIES",
+                  "text": {
+                    "En": "S-GEM SERIES",
+                    "Fr": "S-GEM SERIES",
+                    "De": "S-GEM SERIES",
+                    "Es": "S-GEM SERIES"
+                  },
                   "x": 0,
                   "y": -130,
                   "size": 10,
@@ -121,7 +146,12 @@
           },
           "SuperGem_3_Small": {
             "type": "_NeedleVUMeter",
-            "label": "Small Gold",
+            "label": {
+              "En": "Small Gold",
+              "Fr": "Small Gold",
+              "De": "Small Gold",
+              "Es": "Small Gold"
+            },
             "geometry": {
               "width": 150,
               "height": 220
@@ -151,7 +181,12 @@
               },
               "labels": [
                 {
-                  "text": "PRECISION GOLD",
+                  "text": {
+                    "En": "PRECISION GOLD",
+                    "Fr": "PRECISION GOLD",
+                    "De": "PRECISION GOLD",
+                    "Es": "PRECISION GOLD"
+                  },
                   "x": 0,
                   "y": -90,
                   "size": 8,
@@ -162,7 +197,12 @@
           },
           "SuperGem_4_Ruby": {
             "type": "_NeedleVUMeter",
-            "label": "Ruby Red",
+            "label": {
+              "En": "Ruby Red",
+              "Fr": "Ruby Red",
+              "De": "Ruby Red",
+              "Es": "Ruby Red"
+            },
             "geometry": {
               "width": 220,
               "height": 300
@@ -193,7 +233,12 @@
               },
               "labels": [
                 {
-                  "text": "RUBY-CORE",
+                  "text": {
+                    "En": "RUBY-CORE",
+                    "Fr": "RUBY-CORE",
+                    "De": "RUBY-CORE",
+                    "Es": "RUBY-CORE"
+                  },
                   "x": 0,
                   "y": -130,
                   "size": 12,
@@ -204,7 +249,12 @@
           },
           "SuperGem_5_Emerald": {
             "type": "_NeedleVUMeter",
-            "label": "Emerald Flat",
+            "label": {
+              "En": "Emerald Flat",
+              "Fr": "Emerald Flat",
+              "De": "Emerald Flat",
+              "Es": "Emerald Flat"
+            },
             "geometry": {
               "width": 220,
               "height": 300
@@ -234,7 +284,12 @@
               },
               "labels": [
                 {
-                  "text": "EMERALD VU",
+                  "text": {
+                    "En": "EMERALD VU",
+                    "Fr": "EMERALD VU",
+                    "De": "EMERALD VU",
+                    "Es": "EMERALD VU"
+                  },
                   "x": 0,
                   "y": -125,
                   "size": 10,
@@ -245,7 +300,12 @@
           },
           "SuperGem_6_Sapphire": {
             "type": "_NeedleVUMeter",
-            "label": "Sapphire Deep",
+            "label": {
+              "En": "Sapphire Deep",
+              "Fr": "Sapphire Deep",
+              "De": "Sapphire Deep",
+              "Es": "Sapphire Deep"
+            },
             "geometry": {
               "width": 220,
               "height": 300
@@ -276,7 +336,12 @@
               },
               "labels": [
                 {
-                  "text": "SAPPHIRE PRO",
+                  "text": {
+                    "En": "SAPPHIRE PRO",
+                    "Fr": "SAPPHIRE PRO",
+                    "De": "SAPPHIRE PRO",
+                    "Es": "SAPPHIRE PRO"
+                  },
                   "x": 0,
                   "y": -135,
                   "size": 12,
@@ -287,7 +352,12 @@
           },
           "SuperGem_7_Onyx": {
             "type": "_NeedleVUMeter",
-            "label": "Onyx Stealth",
+            "label": {
+              "En": "Onyx Stealth",
+              "Fr": "Onyx Stealth",
+              "De": "Onyx Stealth",
+              "Es": "Onyx Stealth"
+            },
             "geometry": {
               "width": 220,
               "height": 300
@@ -318,7 +388,12 @@
               },
               "labels": [
                 {
-                  "text": "STEALTH-X",
+                  "text": {
+                    "En": "STEALTH-X",
+                    "Fr": "STEALTH-X",
+                    "De": "STEALTH-X",
+                    "Es": "STEALTH-X"
+                  },
                   "x": 0,
                   "y": -130,
                   "size": 10,
@@ -329,7 +404,12 @@
           },
           "SuperGem_8_Pearl": {
             "type": "_NeedleVUMeter",
-            "label": "Pearl White",
+            "label": {
+              "En": "Pearl White",
+              "Fr": "Pearl White",
+              "De": "Pearl White",
+              "Es": "Pearl White"
+            },
             "geometry": {
               "width": 220,
               "height": 300
@@ -360,7 +440,12 @@
               },
               "labels": [
                 {
-                  "text": "PEARL EDITION",
+                  "text": {
+                    "En": "PEARL EDITION",
+                    "Fr": "PEARL EDITION",
+                    "De": "PEARL EDITION",
+                    "Es": "PEARL EDITION"
+                  },
                   "x": 0,
                   "y": -125,
                   "size": 12,
@@ -371,7 +456,12 @@
           },
           "SuperGem_9_Amethyst": {
             "type": "_NeedleVUMeter",
-            "label": "Amethyst",
+            "label": {
+              "En": "Amethyst",
+              "Fr": "Amethyst",
+              "De": "Amethyst",
+              "Es": "Amethyst"
+            },
             "geometry": {
               "width": 220,
               "height": 300
@@ -402,7 +492,12 @@
               },
               "labels": [
                 {
-                  "text": "AMETHYST VU",
+                  "text": {
+                    "En": "AMETHYST VU",
+                    "Fr": "AMETHYST VU",
+                    "De": "AMETHYST VU",
+                    "Es": "AMETHYST VU"
+                  },
                   "x": 0,
                   "y": -130,
                   "size": 12,
@@ -413,7 +508,12 @@
           },
           "SuperGem_10_Superman": {
             "type": "_NeedleVUMeter",
-            "label": "The Superman",
+            "label": {
+              "En": "The Superman",
+              "Fr": "The Superman",
+              "De": "The Superman",
+              "Es": "The Superman"
+            },
             "geometry": {
               "width": 300,
               "height": 350
@@ -447,7 +547,12 @@
               },
               "labels": [
                 {
-                  "text": "METROPOLIS INSTRUMENTS",
+                  "text": {
+                    "En": "METROPOLIS INSTRUMENTS",
+                    "Fr": "METROPOLIS INSTRUMENTS",
+                    "De": "METROPOLIS INSTRUMENTS",
+                    "Es": "METROPOLIS INSTRUMENTS"
+                  },
                   "x": 0,
                   "y": -160,
                   "size": 16,

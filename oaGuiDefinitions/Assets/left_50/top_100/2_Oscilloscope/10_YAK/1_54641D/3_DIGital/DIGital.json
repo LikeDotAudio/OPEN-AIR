@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Digital Channel (MSO) Settings",
+        "description": {
+          "En": "Digital Channel (MSO) Settings",
+          "Fr": "Digital Canal (MSO) Paramètres",
+          "De": "Digital Kanal (MSO) Einstellungen",
+          "Es": "Digital Canal (MSO) Ajustes"
+        },
         "fields": {
           "Set_Digital_Display": {
             "type": "OcaBlock",
@@ -46,16 +51,36 @@
                   "n": {
                     "value": "0",
                     "type": "_GuiValue",
-                    "label": "D Ch",
+                    "label": {
+                      "En": "D Ch",
+                      "Fr": "Canal D",
+                      "De": "D-Kanal",
+                      "Es": "Canal D"
+                    },
                     "units": "",
-                    "description": "0-15"
+                    "description": {
+                      "En": "0-15",
+                      "Fr": "0-15",
+                      "De": "0-15",
+                      "Es": "0-15"
+                    }
                   },
                   "state": {
                     "value": "ON",
                     "type": "_GuiValue",
-                    "label": "State",
+                    "label": {
+                      "En": "State",
+                      "Fr": "State",
+                      "De": "State",
+                      "Es": "State"
+                    },
                     "units": "",
-                    "description": "ON or OFF"
+                    "description": {
+                      "En": "ON or OFF",
+                      "Fr": "ON or OFF",
+                      "De": "ON or OFF",
+                      "Es": "ON or OFF"
+                    }
                   }
                 }
               }
@@ -92,14 +117,29 @@
                   "n": {
                     "value": "0",
                     "type": "_GuiValue",
-                    "label": "D Ch",
+                    "label": {
+                      "En": "D Ch",
+                      "Fr": "Canal D",
+                      "De": "D-Kanal",
+                      "Es": "Canal D"
+                    },
                     "units": "",
-                    "description": "0-15"
+                    "description": {
+                      "En": "0-15",
+                      "Fr": "0-15",
+                      "De": "0-15",
+                      "Es": "0-15"
+                    }
                   },
                   "pos": {
                     "value": "0",
                     "type": "_GuiValue",
-                    "label": "Pos",
+                    "label": {
+                      "En": "Pos",
+                      "Fr": "Pos",
+                      "De": "Pos",
+                      "Es": "Pos"
+                    },
                     "units": ""
                   }
                 }
@@ -137,14 +177,29 @@
                   "n": {
                     "value": "0",
                     "type": "_GuiValue",
-                    "label": "D Ch",
+                    "label": {
+                      "En": "D Ch",
+                      "Fr": "Canal D",
+                      "De": "D-Kanal",
+                      "Es": "Canal D"
+                    },
                     "units": "",
-                    "description": "0-15"
+                    "description": {
+                      "En": "0-15",
+                      "Fr": "0-15",
+                      "De": "0-15",
+                      "Es": "0-15"
+                    }
                   },
                   "label": {
                     "value": "CLK",
                     "type": "_GuiValue",
-                    "label": "Label",
+                    "label": {
+                      "En": "Label",
+                      "Fr": "Étiquette",
+                      "De": "Beschriftung",
+                      "Es": "Etiqueta"
+                    },
                     "units": ""
                   }
                 }
@@ -182,16 +237,36 @@
                   "n": {
                     "value": "1",
                     "type": "_GuiValue",
-                    "label": "Pod",
+                    "label": {
+                      "En": "Pod",
+                      "Fr": "Pod",
+                      "De": "Pod",
+                      "Es": "Pod"
+                    },
                     "units": "",
-                    "description": "1 or 2"
+                    "description": {
+                      "En": "1 or 2",
+                      "Fr": "1 ou 2",
+                      "De": "1 oder 2",
+                      "Es": "1 o 2"
+                    }
                   },
                   "thresh": {
                     "value": "TTL",
                     "type": "_GuiValue",
-                    "label": "Level",
+                    "label": {
+                      "En": "Level",
+                      "Fr": "Niveau",
+                      "De": "Pegel",
+                      "Es": "Nivel"
+                    },
                     "units": "",
-                    "description": "TTL, CMOS, ECL, or Voltage"
+                    "description": {
+                      "En": "TTL, CMOS, ECL, or Voltage",
+                      "Fr": "TTL, CMOS, ECL, or Tension",
+                      "De": "TTL, CMOS, ECL, or Spannenung",
+                      "Es": "TTL, CMOS, ECL, or Voltaje"
+                    }
                   }
                 }
               }

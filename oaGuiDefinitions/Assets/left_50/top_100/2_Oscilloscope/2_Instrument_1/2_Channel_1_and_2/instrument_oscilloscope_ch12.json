@@ -13,15 +13,30 @@
     "blocks": {
       "Oscilloscope_Main_Station": {
         "type": "OcaBlock",
-        "description": "Dual-Channel Flux Scope Interface",
+        "description": {
+          "En": "Dual-Channel Flux Scope Interface",
+          "Fr": "Dual-Canal Flux Scope Interface",
+          "De": "Dual-Kanal Flux Scope Interface",
+          "Es": "Dual-Canal Flux Scope Interface"
+        },
         "fields": {
           "Display_Sector": {
             "type": "OcaBlock",
-            "description": "Visual Data Stream",
+            "description": {
+              "En": "Visual Data Stream",
+              "Fr": "Visual Data Stream",
+              "De": "Visual Data Stream",
+              "Es": "Visual Data Stream"
+            },
             "fields": {
               "Device_Identity": {
                 "type": "_TextInput",
-                "label_active": "Device Name",
+                "label_active": {
+                  "En": "Device Name",
+                  "Fr": "Device Nom",
+                  "De": "Device Name",
+                  "Es": "Device Nombre"
+                },
                 "value_default": "Flux_Scope_Dual_88",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -45,8 +60,18 @@
               },
               "Main_Graph_Display": {
                 "type": "_GuiGraph",
-                "label_active": "Dual Waveform Visualization",
-                "description": "Real-time rendering of Ch1 and Ch2",
+                "label_active": {
+                  "En": "Dual Waveform Visualization",
+                  "Fr": "Dual Waveform Visualization",
+                  "De": "Dual Waveform Visualization",
+                  "Es": "Dual Waveform Visualization"
+                },
+                "description": {
+                  "En": "Real-time rendering of Ch1 and Ch2",
+                  "Fr": "Real-time rendering of Ch1 and Ch2",
+                  "De": "Real-time rendering of Ch1 and Ch2",
+                  "Es": "Real-time rendering of Ch1 and Ch2"
+                },
                 "height": 50,
                 "alpha": 0.9,
                 "message_details": {
@@ -82,12 +107,27 @@
           },
           "Vertical_Control_Deck_Ch1": {
             "type": "OcaBlock",
-            "description": "CHANNEL 1 (Yellow)",
+            "description": {
+              "En": "CHANNEL 1 (Yellow)",
+              "Fr": "Canal 1",
+              "De": "Kanal 1",
+              "Es": "Canal 1"
+            },
             "fields": {
               "Ch1_Enable": {
                 "type": "_GuiButtonToggle",
-                "label_active": "CH1 ON",
-                "label_inactive": "CH1 OFF",
+                "label_active": {
+                  "En": "CH1 ON",
+                  "Fr": "CH1 ACTIVÉ",
+                  "De": "CH1 AN",
+                  "Es": "CH1 ACTIVADO"
+                },
+                "label_inactive": {
+                  "En": "CH1 OFF",
+                  "Fr": "CH 1",
+                  "De": "CH 1",
+                  "Es": "CH 1"
+                },
                 "style": {
                   "active_text_color": "#1a1a1a",
                   "text_color": "#888888",
@@ -123,7 +163,12 @@
               },
               "Ch1_Volts_Div": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Ch1 Scale",
+                "label_active": {
+                  "En": "Ch1 Scale",
+                  "Fr": "Ch 1",
+                  "De": "Ch 1",
+                  "Es": "Ch 1"
+                },
                 "value_default": "1.0",
                 "min": "0.01",
                 "max": "100",
@@ -150,7 +195,12 @@
               },
               "Ch1_Offset": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Ch1 Offset",
+                "label_active": {
+                  "En": "Ch1 Offset",
+                  "Fr": "Ch 1",
+                  "De": "Ch 1",
+                  "Es": "Ch 1"
+                },
                 "value_default": "0.0",
                 "units": "V",
                 "message_details": {
@@ -175,12 +225,17 @@
               },
               "Ch1_Coupling": {
                 "type": "_GuiDropDownOption",
-                "label_active": "Ch1 Coupling",
+                "label_active": {
+                  "En": "Ch1 Coupling",
+                  "Fr": "Ch 1",
+                  "De": "Ch 1",
+                  "Es": "Ch 1"
+                },
                 "options": [
                   "AC",
                   "DC",
                   "GND",
-                  "50\u03a9"
+                  "50Ω"
                 ],
                 "default_option": "DC",
                 "message_details": {
@@ -207,12 +262,27 @@
           },
           "Vertical_Control_Deck_Ch2": {
             "type": "OcaBlock",
-            "description": "CHANNEL 2 (Blue)",
+            "description": {
+              "En": "CHANNEL 2 (Blue)",
+              "Fr": "CANAL 2 (Bleu)",
+              "De": "KANAL 2 (Blau)",
+              "Es": "CANAL 2 (Azul)"
+            },
             "fields": {
               "Ch2_Enable": {
                 "type": "_GuiButtonToggle",
-                "label_active": "CH2 ON",
-                "label_inactive": "CH2 OFF",
+                "label_active": {
+                  "En": "CH2 ON",
+                  "Fr": "CH 2",
+                  "De": "CH 2",
+                  "Es": "CH 2"
+                },
+                "label_inactive": {
+                  "En": "CH2 OFF",
+                  "Fr": "CH 2",
+                  "De": "CH 2",
+                  "Es": "CH 2"
+                },
                 "style": {
                   "active_text_color": "#1a1a1a",
                   "text_color": "#888888",
@@ -248,7 +318,12 @@
               },
               "Ch2_Volts_Div": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Ch2 Scale",
+                "label_active": {
+                  "En": "Ch2 Scale",
+                  "Fr": "Ch 2",
+                  "De": "Ch 2",
+                  "Es": "Ch 2"
+                },
                 "value_default": "1.0",
                 "min": "0.01",
                 "max": "100",
@@ -275,7 +350,12 @@
               },
               "Ch2_Offset": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Ch2 Offset",
+                "label_active": {
+                  "En": "Ch2 Offset",
+                  "Fr": "Ch 2",
+                  "De": "Ch 2",
+                  "Es": "Ch 2"
+                },
                 "value_default": "0.0",
                 "units": "V",
                 "message_details": {
@@ -300,12 +380,17 @@
               },
               "Ch2_Coupling": {
                 "type": "_GuiDropDownOption",
-                "label_active": "Ch2 Coupling",
+                "label_active": {
+                  "En": "Ch2 Coupling",
+                  "Fr": "Couplage Ch2",
+                  "De": "Ch2 Kopplung",
+                  "Es": "Acoplamiento Ch2"
+                },
                 "options": [
                   "AC",
                   "DC",
                   "GND",
-                  "50\u03a9"
+                  "50Ω"
                 ],
                 "default_option": "DC",
                 "message_details": {
@@ -332,11 +417,21 @@
           },
           "Horizontal_Control_Deck": {
             "type": "OcaBlock",
-            "description": "Time Continuum (Global)",
+            "description": {
+              "En": "Time Continuum (Global)",
+              "Fr": "Temps Continuum (Global)",
+              "De": "Zeit Continuum (Global)",
+              "Es": "Tiempo Continuum (Global)"
+            },
             "fields": {
               "Time_Div": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Time / Div",
+                "label_active": {
+                  "En": "Time / Div",
+                  "Fr": "Temps / Div",
+                  "De": "Zeit / Div",
+                  "Es": "Tiempo / Div"
+                },
                 "value_default": "1e-3",
                 "min": "1e-9",
                 "max": "10",
@@ -363,7 +458,12 @@
               },
               "Time_Offset": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Delay",
+                "label_active": {
+                  "En": "Delay",
+                  "Fr": "Delay",
+                  "De": "Delay",
+                  "Es": "Delay"
+                },
                 "value_default": "0.0",
                 "units": "s",
                 "message_details": {
@@ -390,11 +490,21 @@
           },
           "Trigger_Systems": {
             "type": "OcaBlock",
-            "description": "Trigger Logic",
+            "description": {
+              "En": "Trigger Logic",
+              "Fr": "Déclencheur Logic",
+              "De": "Trigger Logic",
+              "Es": "Disparo Logic"
+            },
             "fields": {
               "Trigger_Source": {
                 "type": "_GuiDropDownOption",
-                "label_active": "Source",
+                "label_active": {
+                  "En": "Source",
+                  "Fr": "Source",
+                  "De": "Quelle",
+                  "Es": "Fuente"
+                },
                 "options": [
                   "CHAN1",
                   "CHAN2",
@@ -424,7 +534,12 @@
               },
               "Trigger_Level": {
                 "type": "_GuiHorizontalKnob",
-                "label_active": "Trig Level",
+                "label_active": {
+                  "En": "Trig Level",
+                  "Fr": "Trig Niveau",
+                  "De": "Trig Pegel",
+                  "Es": "Trig Nivel"
+                },
                 "value_default": "0.5",
                 "units": "V",
                 "message_details": {
@@ -449,8 +564,18 @@
               },
               "Trigger_Edge_Toggle": {
                 "type": "_GuiButtonToggle",
-                "label_active": "RISING",
-                "label_inactive": "FALLING",
+                "label_active": {
+                  "En": "RISING",
+                  "Fr": "CROISSANT",
+                  "De": "STEIGEND",
+                  "Es": "ASCENDENTE"
+                },
+                "label_inactive": {
+                  "En": "FALLING",
+                  "Fr": "FALLING",
+                  "De": "FALLING",
+                  "Es": "FALLING"
+                },
                 "style": {
                   "active_text_color": "#1a1a1a",
                   "text_color": "#888888",
@@ -486,7 +611,12 @@
               },
               "Force_Trigger": {
                 "type": "_TrapezoidButton",
-                "label_active": "FORCE",
+                "label_active": {
+                  "En": "FORCE",
+                  "Fr": "FORCE",
+                  "De": "KRAFT",
+                  "Es": "FUERZA"
+                },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -511,12 +641,27 @@
           },
           "Acquisition_Main": {
             "type": "OcaBlock",
-            "description": "Acquisition State",
+            "description": {
+              "En": "Acquisition State",
+              "Fr": "Acquisition State",
+              "De": "Erfassung State",
+              "Es": "Adquisición State"
+            },
             "fields": {
               "Run_Stop_Toggle": {
                 "type": "_GuiButtonToggle",
-                "label_active": "RUNNING \ud83d\udfe2",
-                "label_inactive": "STOPPED \ud83d\udd34",
+                "label_active": {
+                  "En": "RUNNING 🟢",
+                  "Fr": "RUNNING 🟢",
+                  "De": "RUNNING 🟢",
+                  "Es": "RUNNING 🟢"
+                },
+                "label_inactive": {
+                  "En": "STOPPED 🔴",
+                  "Fr": "ARRÊTÉ 🔴",
+                  "De": "GESTOPPT 🔴",
+                  "Es": "DETENIDO 🔴"
+                },
                 "style": {
                   "active_text_color": "#1a1a1a",
                   "text_color": "#888888",
@@ -552,7 +697,12 @@
               },
               "Single_Shot": {
                 "type": "_GuiButton",
-                "label_active": "SINGLE SEQ",
+                "label_active": {
+                  "En": "SINGLE SEQ",
+                  "Fr": "SINGLE SEQ",
+                  "De": "SINGLE SEQ",
+                  "Es": "SINGLE SEQ"
+                },
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
                     "type": "_GuiActuator",
@@ -577,11 +727,21 @@
           },
           "Telemetry_Readout_Ch1": {
             "type": "OcaBlock",
-            "description": "Ch1 Measurements",
+            "description": {
+              "En": "Ch1 Measurements",
+              "Fr": "Ch 1",
+              "De": "Ch 1",
+              "Es": "Ch 1"
+            },
             "fields": {
               "Read_Vpp_Ch1": {
                 "type": "_GuiLabel",
-                "label_active": "CH1 Vpp",
+                "label_active": {
+                  "En": "CH1 Vpp",
+                  "Fr": "CH 1",
+                  "De": "CH 1",
+                  "Es": "CH 1"
+                },
                 "value_default": "--- V",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -605,7 +765,12 @@
               },
               "Read_Freq_Ch1": {
                 "type": "_GuiLabel",
-                "label_active": "CH1 Freq",
+                "label_active": {
+                  "En": "CH1 Freq",
+                  "Fr": "Fréq CH1",
+                  "De": "CH1 Freq",
+                  "Es": "Frec CH1"
+                },
                 "value_default": "--- Hz",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -631,11 +796,21 @@
           },
           "Telemetry_Readout_Ch2": {
             "type": "OcaBlock",
-            "description": "Ch2 Measurements",
+            "description": {
+              "En": "Ch2 Measurements",
+              "Fr": "Mesures Ch2",
+              "De": "Ch2-Messungen",
+              "Es": "Mediciones de Ch2"
+            },
             "fields": {
               "Read_Vpp_Ch2": {
                 "type": "_GuiLabel",
-                "label_active": "CH2 Vpp",
+                "label_active": {
+                  "En": "CH2 Vpp",
+                  "Fr": "CH 2",
+                  "De": "CH 2",
+                  "Es": "CH 2"
+                },
                 "value_default": "--- V",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {
@@ -659,7 +834,12 @@
               },
               "Read_Freq_Ch2": {
                 "type": "_GuiLabel",
-                "label_active": "CH2 Freq",
+                "label_active": {
+                  "En": "CH2 Freq",
+                  "Fr": "CH 2",
+                  "De": "CH 2",
+                  "Es": "CH 2"
+                },
                 "value_default": "--- Hz",
                 "message_details": {
                   "OSCILLOSCOPE_MODEL": {

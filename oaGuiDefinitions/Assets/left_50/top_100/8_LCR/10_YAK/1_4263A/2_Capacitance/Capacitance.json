@@ -5,26 +5,51 @@
     "blocks": {
       "Function_Select": {
         "type": "OcaBlock",
-        "description": "Measurement Type",
+        "description": {
+          "En": "Measurement Type",
+          "Fr": "Mesurerment Type",
+          "De": "Messenment Typ",
+          "Es": "Medidament Tipo"
+        },
         "fields": {
           "Capacitance": {
             "type": "_GuiActuator",
-            "label_inactive": "Cp-D",
+            "label_inactive": {
+              "En": "Cp-D",
+              "Fr": "Cp-D",
+              "De": "Cp-D",
+              "Es": "Cp-D"
+            },
             "message": ":FUNC:IMP:TYPE CPD"
           },
           "Inductance": {
             "type": "_GuiActuator",
-            "label_inactive": "Ls-Q",
+            "label_inactive": {
+              "En": "Ls-Q",
+              "Fr": "Ls-Q",
+              "De": "Ls-Q",
+              "Es": "Ls-Q"
+            },
             "message": ":FUNC:IMP:TYPE LSQ"
           },
           "Impedance": {
             "type": "_GuiActuator",
-            "label_inactive": "Z-Theta",
+            "label_inactive": {
+              "En": "Z-Theta",
+              "Fr": "Z-Thêta",
+              "De": "Z-Theta",
+              "Es": "Z-Theta"
+            },
             "message": ":FUNC:IMP:TYPE ZTD"
           },
           "Transformer_N": {
             "type": "_GuiActuator",
-            "label_inactive": "Turns Ratio (N)",
+            "label_inactive": {
+              "En": "Turns Ratio (N)",
+              "Fr": "Turns Ratio (N)",
+              "De": "Turns Ratio (N)",
+              "Es": "Turns Ratio (N)"
+            },
             "message": ":FUNC:TRNS:TYPE N"
           }
         }

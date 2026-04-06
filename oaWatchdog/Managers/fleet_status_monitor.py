@@ -12,7 +12,7 @@ import os
 LOCAL_DEBUG = True
 from loguru import logger
 from oaLogging.Core.logger import SYSTEM_LOGGER as sys_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComMQTT.Core.mqtt_message import MqttMessage
 
 app_constants = Config.get_instance()  # Get the singleton instance

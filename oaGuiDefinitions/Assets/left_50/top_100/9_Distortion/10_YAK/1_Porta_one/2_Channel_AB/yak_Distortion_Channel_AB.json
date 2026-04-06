@@ -13,11 +13,21 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Global Analyzer Functions",
+        "description": {
+          "En": "Global Analyzer Functions",
+          "Fr": "Fonctions d'analyseur globales",
+          "De": "Globale Analysatorfunktionen",
+          "Es": "Funciones globales del analizador"
+        },
         "fields": {
           "Function_Selection": {
             "type": "OcaBlock",
-            "description": "Select Measurement Mode",
+            "description": {
+              "En": "Select Measurement Mode",
+              "Fr": "Sélect. Measurement Mode",
+              "De": "Auswahl Measurement Mode",
+              "Es": "Selec. Measurement Mode"
+            },
             "fields": {
               "Mode_Amplitude": {
                 "type": "OcaBlock",

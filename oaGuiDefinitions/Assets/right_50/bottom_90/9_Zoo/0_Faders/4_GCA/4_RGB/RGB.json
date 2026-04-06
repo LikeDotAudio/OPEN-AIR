@@ -13,7 +13,12 @@
     "blocks": {
       "RGB_Mixer_Demo": {
         "type": "_CompositeFader",
-        "label_active": "RGB Color Mixer",
+        "label_active": {
+          "En": "RGB Color Mixer",
+          "Fr": "RGB Color Mixer",
+          "De": "RGB Color Mixer",
+          "Es": "RGB Color Mixer"
+        },
         "is_rgb": true,
         "num_channels": 3,
         "value_min": 0,

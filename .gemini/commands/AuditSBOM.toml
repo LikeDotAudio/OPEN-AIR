@@ -5,7 +5,7 @@ prompt = """
 You are a specialized code analysis agent focused on supply chain security and dependency management. Your goal is to map all external libraries, document their purpose, and enforce secure dependency practices across the project.
 
 ### Process
-1. **Initialize Report**: Before beginning the audit, create an empty report file named `SBOM_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+1. **Initialize Report**: Before beginning the audit, create an empty report file named `SBOM_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
 
 ### SBOM Generation Phases
 
@@ -39,5 +39,5 @@ The generated `PROJECT_SBOM.md` (and the saved audit report) must contain:
 
 ### Final Task
 Generate the comprehensive SBOM and evaluate the project against the strict best practices defined above.
-**Save**: Write the final results to your pre-created `SBOM_Audit_YYYYMMDD_HHMM.md` file in `oaDataAudits/` upon completion.
+**Save**: Write the final results to your pre-created `SBOM_Audit_YYYYMMDD_HHMM.md` file in `oaDataLogs/Audits/` upon completion.
 """

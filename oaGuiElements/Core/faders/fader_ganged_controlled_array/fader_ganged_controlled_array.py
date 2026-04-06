@@ -12,11 +12,12 @@ from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGuiFramework.Methods.i18n_utils import get_text
 from oaGuiManager.Core.transparency.transparency import TransparencyManager
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 
@@ -52,7 +53,7 @@ class CompositeFaderFrame(
         self.min_val = float(config.get("value_min", 0.0))
         self.max_val = float(config.get("value_max", 100.0))
         self.num_channels = int(config.get("num_channels", 4))
-        self.label = config.get("label_active", "Composite")
+        self.label = get_text(config.get("label_active"), "Composite")
         self.is_rgb = config.get("is_rgb", False)
         
         # Visual Config
@@ -120,7 +121,7 @@ class BuilderFaderGangedControlledArrayCreator(TransparencyMixin):
     
     @staticmethod
     def make(parent_widget, config_data, context=None, **kwargs):
-        label = config_data.get("label_active", "Composite")
+        label = get_text(config.get("label_active"), "Composite")
         path = config_data.get("path", "")
         
         if context:

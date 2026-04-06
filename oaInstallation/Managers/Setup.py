@@ -121,7 +121,7 @@ class SetupManager:
             snmp_mgr.tree_builder.generate_master_script()
             installer_bash = snmp_mgr.get_installer_script()
             
-            installer_path = os.path.join(getattr(self, 'project_root', PROJECT_ROOT), "oaDataSNMP", "snmp_install_tmp.sh")
+            installer_path = os.path.join(getattr(self, 'project_root', PROJECT_ROOT), "oaDataLogs", "SNMP", "snmp_install_tmp.sh")
             os.makedirs(os.path.dirname(installer_path), exist_ok=True)
             
             with open(installer_path, "w") as f:

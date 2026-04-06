@@ -13,11 +13,21 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Channel A Configuration",
+        "description": {
+          "En": "Channel A Configuration",
+          "Fr": "Canal A Configuration",
+          "De": "Kanal A Configuration",
+          "Es": "Canal A Configuration"
+        },
         "fields": {
           "Input_Selection_A": {
             "type": "OcaBlock",
-            "description": "Route signals to Analyzer A",
+            "description": {
+              "En": "Route signals to Analyzer A",
+              "Fr": "Route signals to Analyzer A",
+              "De": "Route signals to Analyzer A",
+              "Es": "Route signals to Analyzer A"
+            },
             "fields": {
               "Select_Input_Analog_A": {
                 "type": "OcaBlock",

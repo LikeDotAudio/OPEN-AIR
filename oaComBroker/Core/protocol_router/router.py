@@ -14,7 +14,7 @@ import concurrent.futures
 from .constants import LOCAL_DEBUG, app_constants
 from oaLogging.Core.logger import router_logger, logger
 from oaLogging.Methods.matrix_gate import matrix_log
-from oaConfiguration.Entry import Config
+from oaConfigurationManager.Entry import Config
 
 from oaComBroker.Methods.oaCoreRouter_rs.compiler_hook import ensure_compiled
 try:

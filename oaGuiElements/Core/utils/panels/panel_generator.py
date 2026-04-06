@@ -1,4 +1,5 @@
 # panels/panel_generator.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 1.0.0
 #
@@ -26,7 +27,7 @@ from .Core.layer_metal_fold import MetalFoldLayer
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import BUILDER_LOGGER
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaGuiManager.Core.factory.asset_cache import AssetCacheManager
 
 # Random Seed Constants

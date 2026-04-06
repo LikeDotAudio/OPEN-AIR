@@ -13,7 +13,12 @@
       "fields": {
         "Meter_1": {
           "type": "_NeedleVUMeter",
-          "label": "Super_Gem 1",
+          "label": {
+            "En": "Super_Gem 1",
+            "Fr": "Super_Gem 1",
+            "De": "Super_Gem 1",
+            "Es": "Super_Gem 1"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -39,7 +44,12 @@
         },
         "Meter_2": {
           "type": "_NeedleVUMeter",
-          "label": "Hex 2",
+          "label": {
+            "En": "Hex 2",
+            "Fr": "Hex 2",
+            "De": "Hex 2",
+            "Es": "Hex 2"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -65,7 +75,12 @@
         },
         "Meter_3": {
           "type": "_NeedleVUMeter",
-          "label": "Super_Gem 3",
+          "label": {
+            "En": "Super_Gem 3",
+            "Fr": "Super_Gem 3",
+            "De": "Super_Gem 3",
+            "Es": "Super_Gem 3"
+          },
           "geometry": {
             "width": 250,
             "height": 250

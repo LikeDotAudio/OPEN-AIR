@@ -13,7 +13,12 @@
     "blocks": {
       "Current": {
         "type": "OcaBlock",
-        "description": "Constant Current Parameters",
+        "description": {
+          "En": "Constant Current Parameters",
+          "Fr": "Constant Courant Parameters",
+          "De": "Constant Strom Parameters",
+          "Es": "Constant Corriente Parameters"
+        },
         "fields": {
           "Set_Current_Level": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "value": {
                     "value": "1.0",
                     "type": "_GuiValue",
-                    "label": "Current",
+                    "label": {
+                      "En": "Current",
+                      "Fr": "Courant",
+                      "De": "Strom",
+                      "Es": "Corriente"
+                    },
                     "units": "A",
-                    "description": "Amps"
+                    "description": {
+                      "En": "Amps",
+                      "Fr": "Amps",
+                      "De": "Ampere",
+                      "Es": "Amperios"
+                    }
                   }
                 }
               }
@@ -85,9 +100,19 @@
                   "value": {
                     "value": "60",
                     "type": "_GuiValue",
-                    "label": "Range",
+                    "label": {
+                      "En": "Range",
+                      "Fr": "Plage",
+                      "De": "Bereich",
+                      "Es": "Rango"
+                    },
                     "units": "A",
-                    "description": "6 or 60 A"
+                    "description": {
+                      "En": "6 or 60 A",
+                      "Fr": "6 ou 60 A",
+                      "De": "6 oder 60 A",
+                      "Es": "6 o 60 A"
+                    }
                   }
                 }
               }
@@ -124,9 +149,19 @@
                   "value": {
                     "value": "1000",
                     "type": "_GuiValue",
-                    "label": "Slew Rate",
+                    "label": {
+                      "En": "Slew Rate",
+                      "Fr": "Slew Rate",
+                      "De": "Slew Rate",
+                      "Es": "Slew Rate"
+                    },
                     "units": "A/s",
-                    "description": "A/sec"
+                    "description": {
+                      "En": "A/sec",
+                      "Fr": "A/sec",
+                      "De": "A/Sek",
+                      "Es": "A/seg"
+                    }
                   }
                 }
               }

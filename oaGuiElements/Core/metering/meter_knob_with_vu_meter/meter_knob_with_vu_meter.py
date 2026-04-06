@@ -1,4 +1,5 @@
 # meter_knob_with_vu_meter/meter_knob_with_vu_meter.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260115.Composite.1
 #
@@ -15,7 +16,7 @@ import math
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 
@@ -71,7 +72,7 @@ class BuilderMeterKnobWithVuMeterCreator(TransparencyMixin):
             if "knob_label_active" not in config_data:
                 knob_config["show_label"] = False
 
-            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🛠️ VUMeterKnob: Building for '{vu_config.get('label_active')}'.", level="DEBUG")
+            matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"🛠️ VUMeterKnob: Building for '{get_text(vu_config.get('label_active'), 'Unknown Label')}' active.", "DEBUG")
 
             # 2. Create VU Meter (This now returns a Canvas or transparent Frame)
             from oaGuiElements.Core.metering.meter_needle.meter_needle import BuilderMeterNeedleCreator

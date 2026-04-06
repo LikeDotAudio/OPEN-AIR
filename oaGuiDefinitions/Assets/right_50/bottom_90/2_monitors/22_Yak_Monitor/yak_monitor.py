@@ -40,7 +40,7 @@ from oaTranslator.Managers.yak_trigger_handler import register_monitor_callback,
 # --- Protocol: Integration Layer ---
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin

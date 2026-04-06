@@ -13,7 +13,12 @@
     "blocks": {
       "LTP_Freestyle_Console": {
         "type": "OcaBlock",
-        "description": "8-Channel Freestyle LTP Console with Advanced Scale and Tick Parameters",
+        "description": {
+          "En": "8-Channel Freestyle LTP Console with Advanced Scale and Tick Parameters",
+          "Fr": "8-Channel Freestyle LTP Console with Avancé Scale and Tick Paramètres",
+          "De": "8-Channel Freestyle LTP Console with Erweitert Scale and Tick Parameter",
+          "Es": "8-Channel Freestyle LTP Console with Avanzado Scale and Tick Parámetros"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -44,7 +49,12 @@
         "fields": {
           "CH1": {
             "type": "_CustomLTP",
-            "label_active": "Kick",
+            "label_active": {
+              "En": "Kick",
+              "Fr": "Kick",
+              "De": "Kick",
+              "Es": "Kick"
+            },
             "fader_config": {
               "value_min": -60.0,
               "value_max": 12.0,
@@ -73,7 +83,12 @@
           },
           "CH2": {
             "type": "_CustomLTP",
-            "label_active": "Snare",
+            "label_active": {
+              "En": "Snare",
+              "Fr": "Snare",
+              "De": "Snare",
+              "Es": "Snare"
+            },
             "fader_config": {
               "value_min": -60.0,
               "value_max": 12.0,
@@ -100,7 +115,12 @@
           },
           "CH3": {
             "type": "_CustomLTP",
-            "label_active": "Hat",
+            "label_active": {
+              "En": "Hat",
+              "Fr": "Hat",
+              "De": "Hat",
+              "Es": "Hat"
+            },
             "fader_config": {
               "value_min": -60.0,
               "value_max": 12.0,
@@ -126,7 +146,12 @@
           },
           "CH4": {
             "type": "_CustomLTP",
-            "label_active": "Toms",
+            "label_active": {
+              "En": "Toms",
+              "Fr": "Toms",
+              "De": "Toms",
+              "Es": "Toms"
+            },
             "fader_config": {
               "value_min": -60.0,
               "value_max": 12.0,
@@ -152,7 +177,12 @@
           },
           "CH5": {
             "type": "_CustomLTP",
-            "label_active": "Bass",
+            "label_active": {
+              "En": "Bass",
+              "Fr": "Bass",
+              "De": "Bass",
+              "Es": "Bass"
+            },
             "fader_config": {
               "value_min": -60.0,
               "value_max": 12.0,
@@ -176,7 +206,12 @@
           },
           "CH6": {
             "type": "_CustomLTP",
-            "label_active": "Gtr L",
+            "label_active": {
+              "En": "Gtr L",
+              "Fr": "Gtr L",
+              "De": "Gtr L",
+              "Es": "Gtr L"
+            },
             "fader_config": {
               "value_min": -60.0,
               "value_max": 12.0,
@@ -201,7 +236,12 @@
           },
           "CH7": {
             "type": "_CustomLTP",
-            "label_active": "Gtr R",
+            "label_active": {
+              "En": "Gtr R",
+              "Fr": "Gtr R",
+              "De": "Gtr R",
+              "Es": "Gtr R"
+            },
             "fader_config": {
               "value_min": -60.0,
               "value_max": 12.0,
@@ -225,7 +265,12 @@
           },
           "CH8": {
             "type": "_CustomLTP",
-            "label_active": "Vox",
+            "label_active": {
+              "En": "Vox",
+              "Fr": "Vox",
+              "De": "Vox",
+              "Es": "Vox"
+            },
             "fader_config": {
               "value_min": -60.0,
               "value_max": 12.0,
@@ -252,12 +297,22 @@
       },
       "LTP_Demo_Bottom": {
         "type": "OcaBlock",
-        "description": "Horizontal LTP Evolution",
+        "description": {
+          "En": "Horizontal LTP Evolution",
+          "Fr": "Horizontal LTP Evolution",
+          "De": "Horizontal LTP Evolution",
+          "Es": "Horizontal LTP Evolution"
+        },
         "layout_columns": 3,
         "fields": {
           "H1": {
             "type": "_CustomLTP",
-            "label_active": "Industrial Gear",
+            "label_active": {
+              "En": "Industrial Gear",
+              "Fr": "Industriel Gear",
+              "De": "Industriell Gear",
+              "Es": "Industrial Gear"
+            },
             "fader_config": {
               "value_highlight_color": "#f4902c"
             },
@@ -278,7 +333,12 @@
           },
           "H2": {
             "type": "_CustomLTP",
-            "label_active": "Sleek Octagon",
+            "label_active": {
+              "En": "Sleek Octagon",
+              "Fr": "Sleek Octagon",
+              "De": "Sleek Octagon",
+              "Es": "Sleek Octagon"
+            },
             "fader_config": {
               "value_highlight_color": "#33A1FD"
             },
@@ -298,7 +358,12 @@
           },
           "H3": {
             "type": "_CustomLTP",
-            "label_active": "Ghost Circle",
+            "label_active": {
+              "En": "Ghost Circle",
+              "Fr": "Ghost Circle",
+              "De": "Ghost Circle",
+              "Es": "Ghost Circle"
+            },
             "fader_config": {
               "value_highlight_color": "#AAAAAA"
             },

@@ -45,7 +45,7 @@ except Exception as e:
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = True
 from loguru import logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from .visa_utility_parser import VisaUtilityParser
 
 app_constants = Config.get_instance()

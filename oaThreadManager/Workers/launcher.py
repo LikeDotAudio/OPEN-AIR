@@ -28,7 +28,7 @@ from oaLogging.Core.logger import initialize_logging, set_log_directory
 from oaLogging.Managers.log_filter_engine import initialize_filter_engine
 from oaLogging.Methods.matrix_gate import matrix_log
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 # --- Core/Mandatory Imports Only ---

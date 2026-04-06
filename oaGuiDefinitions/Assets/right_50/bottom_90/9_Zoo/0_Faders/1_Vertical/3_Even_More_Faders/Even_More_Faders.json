@@ -13,7 +13,12 @@
     "blocks": {
       "Fader_Zoo_Advanced": {
         "type": "OcaBlock",
-        "description": "Advanced Custom Fader Features",
+        "description": {
+          "En": "Advanced Custom Fader Features",
+          "Fr": "Avancé Personnalisé Fader Caractéristiques",
+          "De": "Erweitert Benutzerdefiniert Fader Funktionen",
+          "Es": "Avanzado Personalizado Fader Características"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -44,7 +49,12 @@
         "fields": {
           "cf_adv1": {
             "type": "_SmartFader",
-            "label": "Dual Labels",
+            "label": {
+              "En": "Dual Labels",
+              "Fr": "Dual Labels",
+              "De": "Dual Labels",
+              "Es": "Dual Labels"
+            },
             "notes": "Red Cap, Labels Both Sides",
             "geometry": {
               "width": 80,
@@ -66,7 +76,12 @@
           },
           "cf_adv2": {
             "type": "_SmartFader",
-            "label": "Solid Green",
+            "label": {
+              "En": "Solid Green",
+              "Fr": "Solid Green",
+              "De": "Solid Green",
+              "Es": "Solid Green"
+            },
             "notes": "Green Cap, Blue Ticks",
             "geometry": {
               "width": 100,
@@ -86,7 +101,12 @@
           },
           "cf_adv3": {
             "type": "_SmartFader",
-            "label": "Solid Blue",
+            "label": {
+              "En": "Solid Blue",
+              "Fr": "Solid Blue",
+              "De": "Solid Blue",
+              "Es": "Solid Blue"
+            },
             "notes": "Blue Cap, Yellow Ticks",
             "geometry": {
               "width": 100,
@@ -107,7 +127,12 @@
           },
           "cf_adv4": {
             "type": "_SmartFader",
-            "label": "Orange Punch",
+            "label": {
+              "En": "Orange Punch",
+              "Fr": "Orange Punch",
+              "De": "Orange Punch",
+              "Es": "Orange Punch"
+            },
             "notes": "Orange Cap, White Ticks",
             "geometry": {
               "width": 100,
@@ -129,7 +154,12 @@
           },
           "cf_adv5": {
             "type": "_SmartFader",
-            "label": "Purple Haze",
+            "label": {
+              "En": "Purple Haze",
+              "Fr": "Purple Haze",
+              "De": "Purple Haze",
+              "Es": "Purple Haze"
+            },
             "notes": "Purple Cap, Cyan Ticks",
             "geometry": {
               "width": 100,
@@ -150,7 +180,12 @@
           },
           "cf_adv6": {
             "type": "_SmartFader",
-            "label": "Yellow Mellow",
+            "label": {
+              "En": "Yellow Mellow",
+              "Fr": "Yellow Mellow",
+              "De": "Yellow Mellow",
+              "Es": "Yellow Mellow"
+            },
             "notes": "Yellow Cap, Pink Ticks",
             "geometry": {
               "width": 100,
@@ -171,7 +206,12 @@
           },
           "cf_adv7": {
             "type": "_SmartFader",
-            "label": "Cyan Neon",
+            "label": {
+              "En": "Cyan Neon",
+              "Fr": "Cyan Neon",
+              "De": "Cyan Neon",
+              "Es": "Cyan Neon"
+            },
             "notes": "Cyan Cap, Red Ticks",
             "geometry": {
               "width": 100,
@@ -192,7 +232,12 @@
           },
           "cf_adv8": {
             "type": "_SmartFader",
-            "label": "White Ghost",
+            "label": {
+              "En": "White Ghost",
+              "Fr": "White Ghost",
+              "De": "White Ghost",
+              "Es": "White Ghost"
+            },
             "notes": "White Cap, Grey Ticks",
             "geometry": {
               "width": 100,
@@ -216,7 +261,12 @@
       },
       "Fader_Zoo_Advanced_Features": {
         "type": "OcaBlock",
-        "description": "Showcasing Color Modularity",
+        "description": {
+          "En": "Showcasing Color Modularity",
+          "Fr": "Showcasing Color Modularity",
+          "De": "Showcasing Color Modularity",
+          "Es": "Showcasing Color Modularity"
+        },
         "layout_columns": 6,
         "column_sizing": [
           {
@@ -241,7 +291,12 @@
         "fields": {
           "cf_feat1": {
             "type": "_SmartFader",
-            "label": "Ghost Track",
+            "label": {
+              "En": "Ghost Track",
+              "Fr": "Ghost Track",
+              "De": "Ghost Track",
+              "Es": "Ghost Track"
+            },
             "notes": "Ticks & Text Mismatch",
             "geometry": {
               "width": 80,
@@ -262,7 +317,12 @@
           },
           "cf_feat2": {
             "type": "_SmartFader",
-            "label": "Leftie",
+            "label": {
+              "En": "Leftie",
+              "Fr": "Leftie",
+              "De": "Leftie",
+              "Es": "Leftie"
+            },
             "notes": "Labels on Left",
             "geometry": {
               "width": 80,
@@ -280,7 +340,12 @@
           },
           "cf_feat3": {
             "type": "_SmartFader",
-            "label": "Gold Highlight",
+            "label": {
+              "En": "Gold Highlight",
+              "Fr": "Gold Highlight",
+              "De": "Gold Highlight",
+              "Es": "Gold Highlight"
+            },
             "notes": "Black Cap, Gold Line",
             "geometry": {
               "width": 80,
@@ -298,7 +363,12 @@
           },
           "cf_feat4": {
             "type": "_SmartFader",
-            "label": "No Float",
+            "label": {
+              "En": "No Float",
+              "Fr": "Non Float",
+              "De": "Nein Float",
+              "Es": "No Float"
+            },
             "notes": "Movement display OFF",
             "geometry": {
               "width": 80,
@@ -316,7 +386,12 @@
           },
           "cf_feat5": {
             "type": "_SmartFader",
-            "label": "Small Scale",
+            "label": {
+              "En": "Small Scale",
+              "Fr": "Small Scale",
+              "De": "Small Scale",
+              "Es": "Small Scale"
+            },
             "notes": "Mini Fader",
             "geometry": {
               "fader_cap_scale": 0.6,
@@ -334,7 +409,12 @@
           },
           "cf_feat6": {
             "type": "_SmartFader",
-            "label": "Pink Neon",
+            "label": {
+              "En": "Pink Neon",
+              "Fr": "Pink Neon",
+              "De": "Pink Neon",
+              "Es": "Pink Neon"
+            },
             "notes": "High contrast",
             "geometry": {
               "width": 80,

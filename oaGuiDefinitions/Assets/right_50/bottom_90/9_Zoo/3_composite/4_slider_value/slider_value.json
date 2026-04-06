@@ -13,11 +13,21 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": "Volume",
+        "label_active": {
+          "En": "Volume",
+          "Fr": "Volume",
+          "De": "Lautstärke",
+          "Es": "Volumen"
+        },
         "fields": {
           "examplefields": {
             "type": "_sliderValue",
-            "label_active": "Volume",
+            "label_active": {
+              "En": "Volume",
+              "Fr": "Volume",
+              "De": "Lautstärke",
+              "Es": "Volumen"
+            },
             "layout": {
               "height": 100,
               "width": 250,
@@ -34,11 +44,21 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": "Gain",
+        "label_active": {
+          "En": "Gain",
+          "Fr": "Gain",
+          "De": "Verstärkung",
+          "Es": "Ganancia"
+        },
         "fields": {
           "examplefields": {
             "type": "_sliderValue",
-            "label_active": "Gain",
+            "label_active": {
+              "En": "Gain",
+              "Fr": "Gain",
+              "De": "Verstärkung",
+              "Es": "Ganancia"
+            },
             "layout": {
               "height": 100,
               "width": 250,
@@ -56,11 +76,21 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": "Frequency",
+        "label_active": {
+          "En": "Frequency",
+          "Fr": "Fréquence",
+          "De": "Frequenz",
+          "Es": "Frecuencia"
+        },
         "fields": {
           "examplefields": {
             "type": "_sliderValue",
-            "label_active": "Frequency",
+            "label_active": {
+              "En": "Frequency",
+              "Fr": "Fréquence",
+              "De": "Frequenz",
+              "Es": "Frecuencia"
+            },
             "layout": {
               "height": 100,
               "width": 250,
@@ -78,7 +108,12 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": "Delay Time",
+        "label_active": {
+          "En": "Delay Time",
+          "Fr": "Temps de Delay",
+          "De": "Delay-Zeit",
+          "Es": "Tiempo de Delay"
+        },
         "fields": {
           "examplefields": {
             "type": "_sliderValue",
@@ -89,7 +124,12 @@
               "sticky": "ew",
               "font": 85
             },
-            "label_active": "Delay Time",
+            "label_active": {
+              "En": "Delay Time",
+              "Fr": "Temps de Delay",
+              "De": "Delay-Zeit",
+              "Es": "Tiempo de Delay"
+            },
             "min": 0.0,
             "max": 2.5,
             "value": 0.75,
@@ -101,11 +141,21 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": "Q-Factor",
+        "label_active": {
+          "En": "Q-Factor",
+          "Fr": "Facteur Q",
+          "De": "Q-Faktor",
+          "Es": "Factor Q"
+        },
         "fields": {
           "examplefields": {
             "type": "_sliderValue",
-            "label_active": "Q-Factor",
+            "label_active": {
+              "En": "Q-Factor",
+              "Fr": "Facteur Q",
+              "De": "Q-Faktor",
+              "Es": "Factor Q"
+            },
             "min": 0.1,
             "max": 10.0,
             "value": 1.5,

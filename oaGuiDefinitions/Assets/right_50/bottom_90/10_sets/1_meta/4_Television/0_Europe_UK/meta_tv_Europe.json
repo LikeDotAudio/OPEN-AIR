@@ -1,7 +1,12 @@
 {
   "System A 405 lines (United Kingdom) Europe VHF": {
     "name": "System A 405 lines (United Kingdom) Europe VHF",
-    "description": "System A 405 lines standard for United Kingdom, Europe (VHF)",
+    "description": {
+      "En": "System A 405 lines standard for United Kingdom, Europe (VHF)",
+      "Fr": "Système A 405 lignes standard pour le Royaume-Uni, Europe (VHF)",
+      "De": "System A 405 Zeilen Standard für Großbritannien, Europa (VHF)",
+      "Es": "Sistema A 405 líneas estándar para el Reino Unido, Europa (VHF)"
+    },
     "country": "United Kingdom",
     "region": "Europe",
     "type": "tv",
@@ -105,7 +110,12 @@
   },
   "System D 625 lines (Pre 1957) East Germany (former DDR) Europe VHF": {
     "name": "System D 625 lines (Pre 1957) East Germany (former DDR) Europe VHF",
-    "description": "System D 625 lines (Pre 1957) standard for East Germany (former DDR), Europe (VHF)",
+    "description": {
+      "En": "System D 625 lines (Pre 1957) standard for East Germany (former DDR), Europe (VHF)",
+      "Fr": "Système D 625 lines (Pre 1957) standard for East Germany (former DDR), Europe (VHF)",
+      "De": "System D 625 lines (Pre 1957) standard for East Germany (former DDR), Europe (VHF)",
+      "Es": "Sistema D 625 lines (Pre 1957) standard for East Germany (former DDR), Europe (VHF)"
+    },
     "country": "East Germany (former DDR)",
     "region": "Europe",
     "type": "tv",
@@ -150,7 +160,12 @@
   },
   "System B 625 lines (Western Europe) Europe VHF": {
     "name": "System B 625 lines (Western Europe) Europe VHF",
-    "description": "System B 625 lines standard for Western Europe, VHF",
+    "description": {
+      "En": "System B 625 lines standard for Western Europe, VHF",
+      "Fr": "Système B 625 lines standard for Western Europe, VHF",
+      "De": "System B 625 lines standard for Western Europe, VHF",
+      "Es": "Sistema B 625 lines standard for Western Europe, VHF"
+    },
     "country": "Western Europe",
     "region": "Europe",
     "type": "tv",
@@ -283,7 +298,12 @@
   },
   "System D 625 lines (Original OIR) Eastern Europe Europe VHF": {
     "name": "System D 625 lines (Original OIR) Eastern Europe Europe VHF",
-    "description": "System D 625 lines (Original OIR) standard for Eastern Europe, North Korea, Europe (VHF)",
+    "description": {
+      "En": "System D 625 lines (Original OIR) standard for Eastern Europe, North Korea, Europe (VHF)",
+      "Fr": "Système D 625 lines (Original OIR) standard for Eastern Europe, North Korea, Europe (VHF)",
+      "De": "System D 625 lines (Original OIR) standard for Eastern Europe, North Korea, Europe (VHF)",
+      "Es": "Sistema D 625 lines (Original OIR) standard for Eastern Europe, North Korea, Europe (VHF)"
+    },
     "country": "Eastern Europe, North Korea",
     "region": "Europe",
     "type": "tv",
@@ -387,7 +407,12 @@
   },
   "System E 819 lines (France) Europe VHF": {
     "name": "System E 819 lines (France) Europe VHF",
-    "description": "System E 819 lines standard for France, VHF",
+    "description": {
+      "En": "System E 819 lines standard for France, VHF",
+      "Fr": "Système E 819 lines standard for France, VHF",
+      "De": "System E 819 lines standard for France, VHF",
+      "Es": "Sistema E 819 lines standard for France, VHF"
+    },
     "country": "France",
     "region": "Europe",
     "type": "tv",
@@ -491,7 +516,12 @@
   },
   "VHF (System M) North America": {
     "name": "VHF (System M) North America",
-    "description": "VHF (Band I & III) for North America (System M 525 lines)",
+    "description": {
+      "En": "VHF (Band I & III) for North America (System M 525 lines)",
+      "Fr": "VHF (Band I & III) for North America (Système M 525 lines)",
+      "De": "VHF (Band I & III) for North America (System M 525 lines)",
+      "Es": "VHF (Band I & III) for North America (Sistema M 525 lines)"
+    },
     "country": "USA, Canada, Mexico (most of North America & Caribbean)",
     "region": "North America",
     "type": "tv",
@@ -608,7 +638,12 @@
   },
   "System I 625 lines (Ireland) Europe VHF": {
     "name": "System I 625 lines (Ireland) Europe VHF",
-    "description": "System I 625 lines standard for Ireland, Europe (VHF)",
+    "description": {
+      "En": "System I 625 lines standard for Ireland, Europe (VHF)",
+      "Fr": "Système I 625 lines standard for Ireland, Europe (VHF)",
+      "De": "System I 625 lines standard for Ireland, Europe (VHF)",
+      "Es": "Sistema I 625 lines standard for Ireland, Europe (VHF)"
+    },
     "country": "Ireland",
     "region": "Europe",
     "type": "tv",
@@ -691,7 +726,12 @@
   },
   "System D 625 lines (Since 1965) Eastern Europe Europe VHF": {
     "name": "System D 625 lines (Since 1965) Eastern Europe Europe VHF",
-    "description": "System D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Europe (VHF)",
+    "description": {
+      "En": "System D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Europe (VHF)",
+      "Fr": "Système D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Europe (VHF)",
+      "De": "System D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Europe (VHF)",
+      "Es": "Sistema D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Europe (VHF)"
+    },
     "country": "Eastern Europe, North Korea",
     "region": "Europe",
     "type": "tv",
@@ -788,7 +828,12 @@
   },
   "System B 625 lines (Italy) Europe VHF": {
     "name": "System B 625 lines (Italy) Europe VHF",
-    "description": "System B 625 lines standard for Italy, Europe (VHF)",
+    "description": {
+      "En": "System B 625 lines standard for Italy, Europe (VHF)",
+      "Fr": "Système B 625 lines standard for Italy, Europe (VHF)",
+      "De": "System B 625 lines standard for Italy, Europe (VHF)",
+      "Es": "Sistema B 625 lines standard for Italy, Europe (VHF)"
+    },
     "country": "Italy",
     "region": "Europe",
     "type": "tv",
@@ -871,7 +916,12 @@
   },
   "System B/G 625 lines (1957-1960) East Germany (former DDR) Europe VHF": {
     "name": "System B/G 625 lines (1957-1960) East Germany (former DDR) Europe VHF",
-    "description": "System B/G 625 lines (1957-1960) standard for East Germany (former DDR), Europe (VHF)",
+    "description": {
+      "En": "System B/G 625 lines (1957-1960) standard for East Germany (former DDR), Europe (VHF)",
+      "Fr": "Système B/G 625 lines (1957-1960) standard for East Germany (former DDR), Europe (VHF)",
+      "De": "System B/G 625 lines (1957-1960) standard for East Germany (former DDR), Europe (VHF)",
+      "Es": "Sistema B/G 625 lines (1957-1960) standard for East Germany (former DDR), Europe (VHF)"
+    },
     "country": "East Germany (former DDR)",
     "region": "Europe",
     "type": "tv",
@@ -880,24 +930,24 @@
     "start_frequency_mhz": 58.0,
     "stop_frequency_mhz": 161.0,
     "channels": {
-      "1 (1957\u20131960)": {
-        "channel": "1 (1957\u20131960)",
+      "1 (1957–1960)": {
+        "channel": "1 (1957–1960)",
         "start_frequency_mhz": 58.0,
         "stop_frequency_mhz": 65.0,
         "video_carrier_mhz": 59.25,
         "audio_carrier_mhz": 64.75,
         "notes": "Same video freq as pre-1957 Ch 2 (but 5.5 MHz sound) Overlaps western channels E3 and E4"
       },
-      "2 (1957\u20131960)": {
-        "channel": "2 (1957\u20131960)",
+      "2 (1957–1960)": {
+        "channel": "2 (1957–1960)",
         "start_frequency_mhz": 144.0,
         "stop_frequency_mhz": 151.0,
         "video_carrier_mhz": 145.25,
         "audio_carrier_mhz": 150.75,
         "notes": "Overlaps 2m Amateur radio band"
       },
-      "3 (1957\u20131960)": {
-        "channel": "3 (1957\u20131960)",
+      "3 (1957–1960)": {
+        "channel": "3 (1957–1960)",
         "start_frequency_mhz": 154.0,
         "stop_frequency_mhz": 161.0,
         "video_carrier_mhz": 155.25,
@@ -908,7 +958,12 @@
   },
   "System B/G 625 lines (Post 1960) East Germany (former DDR) Europe VHF": {
     "name": "System B/G 625 lines (Post 1960) East Germany (former DDR) Europe VHF",
-    "description": "System B/G 625 lines (Post 1960) standard for East Germany (former DDR), Europe (VHF)",
+    "description": {
+      "En": "System B/G 625 lines (Post 1960) standard for East Germany (former DDR), Europe (VHF)",
+      "Fr": "Système B/G 625 lines (Post 1960) standard for East Germany (former DDR), Europe (VHF)",
+      "De": "System B/G 625 lines (Post 1960) standard for East Germany (former DDR), Europe (VHF)",
+      "Es": "Sistema B/G 625 lines (Post 1960) standard for East Germany (former DDR), Europe (VHF)"
+    },
     "country": "East Germany (former DDR)",
     "region": "Europe",
     "type": "tv",
@@ -953,7 +1008,12 @@
   },
   "UHF System I 625 lines (United Kingdom) Europe UHF": {
     "name": "UHF System I 625 lines (United Kingdom) Europe UHF",
-    "description": "UHF System I 625 lines standard for United Kingdom, Europe (UHF)",
+    "description": {
+      "En": "UHF System I 625 lines standard for United Kingdom, Europe (UHF)",
+      "Fr": "UHF Système I 625 lines standard for Unitéed Kingdom, Europe (UHF)",
+      "De": "UHF System I 625 lines standard for Einheited Kingdom, Europe (UHF)",
+      "Es": "UHF Sistema I 625 lines standard for Unidaded Kingdom, Europe (UHF)"
+    },
     "country": "United Kingdom",
     "region": "Europe",
     "type": "tv",
@@ -1393,7 +1453,12 @@
   },
   "UHF System K & L 625 lines (France) Europe UHF": {
     "name": "UHF System K & L 625 lines (France) Europe UHF",
-    "description": "UHF System K & L 625 lines standard for France, Europe (UHF)",
+    "description": {
+      "En": "UHF System K & L 625 lines standard for France, Europe (UHF)",
+      "Fr": "UHF Système K & L 625 lines standard for France, Europe (UHF)",
+      "De": "UHF System K & L 625 lines standard for France, Europe (UHF)",
+      "Es": "UHF Sistema K & L 625 lines standard for France, Europe (UHF)"
+    },
     "country": "France",
     "region": "Europe",
     "type": "tv",
@@ -1749,7 +1814,12 @@
   },
   "DVB-T/T2/DTMB/ISDB-T (Western Europe) Europe UHF Digital": {
     "name": "DVB-T/T2/DTMB/ISDB-T (Western Europe) Europe UHF Digital",
-    "description": "DVB-T/T2/DTMB/ISDB-T standard for Western Europe, UHF Digital",
+    "description": {
+      "En": "DVB-T/T2/DTMB/ISDB-T standard for Western Europe, UHF Digital",
+      "Fr": "DVB-T/T2/DTMB/ISDB-T standard for Western Europe, UHF Digital",
+      "De": "DVB-T/T2/DTMB/ISDB-T standard for Western Europe, UHF Digital",
+      "Es": "DVB-T/T2/DTMB/ISDB-T standard for Western Europe, UHF Digital"
+    },
     "country": "Western Europe",
     "region": "Europe",
     "type": "tv",

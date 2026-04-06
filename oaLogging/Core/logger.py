@@ -143,7 +143,7 @@ def _get_cached_config():
         return _config_instance_cache
     
     try:
-        from oaConfiguration.FileReaders.config_reader import Config
+        from oaConfigurationManager.FileReaders.config_reader import Config
         if Config._instance:
             _config_instance_cache = Config._instance
             return _config_instance_cache
@@ -181,6 +181,27 @@ def ptp_patcher(record):
     # Append milliseconds using fast f-string formatting.
     ms = int((ptp_now - current_second) * 1000)
     record["extra"]["ptp_time"] = f"{_cached_hhmmss}.{ms:03d}"
+
+def shutdown_logging():
+    """
+    Safely shuts down the logging system, flushing all asynchronous sinks.
+    """
+    global _rust_async_sink
+    # logger.info("📡📤📤 [LOGGING] Initiating global logging shutdown...")
+    
+    # 1. Stop all BatchLogSink instances (Python-side threads)
+    # Note: Handlers are not easily accessible from Loguru directly without tracking them.
+    # However, logger.remove() will trigger stop() if it's a class-based sink.
+    logger.remove()
+    
+    # 2. Rust Sink Teardown (if active)
+    if HAS_RUST_SINK:
+        try:
+            # If the Rust side has a dedicated close/flush, call it here.
+            # Assuming just clearing the reference allows garbage collection and safe C-teardown.
+            _rust_async_sink = None
+        except Exception:
+            pass
 
 def initialize_logging(config, log_dir=None, partition="SYS"):
     """

@@ -13,14 +13,24 @@
     "blocks": {
       "Transient": {
         "type": "OcaBlock",
-        "description": "Pulse & Dynamic Loading",
+        "description": {
+          "En": "Pulse & Dynamic Loading",
+          "Fr": "Chargement pulsé et dynamique",
+          "De": "Impuls- und dynamisches Laden",
+          "Es": "Carga pulsada y dinámica"
+        },
         "fields": {
           "Transient_Control": {
             "type": "OcaBlock",
             "fields": {
               "Transient_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": "Trans ON",
+                "label_inactive": {
+                  "En": "Trans ON",
+                  "Fr": "Trans ON",
+                  "De": "Trans ON",
+                  "Es": "Trans ON"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -41,7 +51,12 @@
               },
               "Transient_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": "Trans OFF",
+                "label_inactive": {
+                  "En": "Trans OFF",
+                  "Fr": "Trans DÉSACTIVÉ",
+                  "De": "Trans AUS",
+                  "Es": "Trans DESACTIVADO"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -93,9 +108,19 @@
                   "mode": {
                     "value": "CONT",
                     "type": "_GuiValue",
-                    "label": "Mode",
+                    "label": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
                     "units": "",
-                    "description": "CONT, PULS, TOGG"
+                    "description": {
+                      "En": "CONT, PULS, TOGG",
+                      "Fr": "CONT, PULS, TOGG",
+                      "De": "CONT, PULS, TOGG",
+                      "Es": "CONT, PULS, TOGG"
+                    }
                   }
                 }
               }
@@ -132,9 +157,19 @@
                   "value": {
                     "value": "0.5",
                     "type": "_GuiValue",
-                    "label": "Level A",
+                    "label": {
+                      "En": "Level A",
+                      "Fr": "Niveau A",
+                      "De": "Pegel A",
+                      "Es": "Nivel A"
+                    },
                     "units": "A",
-                    "description": "Main Level"
+                    "description": {
+                      "En": "Main Level",
+                      "Fr": "Main Niveau",
+                      "De": "Main Pegel",
+                      "Es": "Main Nivel"
+                    }
                   }
                 }
               }
@@ -171,9 +206,19 @@
                   "value": {
                     "value": "5.0",
                     "type": "_GuiValue",
-                    "label": "Level B",
+                    "label": {
+                      "En": "Level B",
+                      "Fr": "Niveau B",
+                      "De": "Pegel B",
+                      "Es": "Nivel B"
+                    },
                     "units": "A",
-                    "description": "Transient Level"
+                    "description": {
+                      "En": "Transient Level",
+                      "Fr": "Transitoire Niveau",
+                      "De": "Transient Pegel",
+                      "Es": "Transitorio Nivel"
+                    }
                   }
                 }
               }
@@ -210,9 +255,19 @@
                   "value": {
                     "value": "100",
                     "type": "_GuiValue",
-                    "label": "Frequency",
+                    "label": {
+                      "En": "Frequency",
+                      "Fr": "Fréquence",
+                      "De": "Frequenz",
+                      "Es": "Frecuencia"
+                    },
                     "units": "Hz",
-                    "description": "Hz"
+                    "description": {
+                      "En": "Hz",
+                      "Fr": "Hz",
+                      "De": "Hz",
+                      "Es": "Hz"
+                    }
                   }
                 }
               }
@@ -249,9 +304,19 @@
                   "value": {
                     "value": "50",
                     "type": "_GuiValue",
-                    "label": "Duty Cycle",
+                    "label": {
+                      "En": "Duty Cycle",
+                      "Fr": "Duty Cycle",
+                      "De": "Duty Cycle",
+                      "Es": "Duty Cycle"
+                    },
                     "units": "%",
-                    "description": "Percent"
+                    "description": {
+                      "En": "Percent",
+                      "Fr": "Percent",
+                      "De": "Percent",
+                      "Es": "Percent"
+                    }
                   }
                 }
               }

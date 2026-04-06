@@ -13,7 +13,12 @@
     "blocks": {
       "Mixing_Console_25-32": {
         "type": "OcaArray",
-        "description": "8-Channel Hybrid Console",
+        "description": {
+          "En": "8-Channel Hybrid Console",
+          "Fr": "8-Canal Hybrid Console",
+          "De": "8-Kanal Hybrid Konsole",
+          "Es": "8-Canal Hybrid Consola"
+        },
         "layout_columns": 8,
         "show_label": false,
         "column_sizing": [
@@ -57,7 +62,12 @@
         },
         "blueprint": {
           "type": "OcaBlock",
-          "description": "{{description}}",
+          "description": {
+            "En": "{{description}}",
+            "Fr": "{{description}}",
+            "De": "{{description}}",
+            "Es": "{{description}}"
+          },
           "show_label": false,
           "layout": {
             "sticky": "n",
@@ -92,7 +102,12 @@
             "Summing_Groups": {
               "type": "OcaCollapsibleBlock",
               "view": "Subs",
-              "label_active": "Subs",
+              "label_active": {
+                "En": "Subs",
+                "Fr": "Sous-groupes",
+                "De": "Subgruppen",
+                "Es": "Subgrupos"
+              },
               "show_label": false,
               "layout_columns": 2,
               "layout": {
@@ -110,7 +125,12 @@
               "fields": {
                 "m1": {
                   "type": "_WinkButton",
-                  "label_active": "M1",
+                  "label_active": {
+                    "En": "M1",
+                    "Fr": "M1",
+                    "De": "M1",
+                    "Es": "M1"
+                  },
                   "font_size": 8,
                   "text_inside": "",
                   "text_closed": "",
@@ -128,7 +148,12 @@
                 },
                 "m2": {
                   "type": "_WinkButton",
-                  "label_active": "M2",
+                  "label_active": {
+                    "En": "M2",
+                    "Fr": "M2",
+                    "De": "M2",
+                    "Es": "M2"
+                  },
                   "font_size": 8,
                   "text_inside": "",
                   "text_closed": "",
@@ -146,7 +171,12 @@
                 },
                 "s1": {
                   "type": "_WinkButton",
-                  "label_active": "S1",
+                  "label_active": {
+                    "En": "S1",
+                    "Fr": "S1",
+                    "De": "S1",
+                    "Es": "S1"
+                  },
                   "font_size": 8,
                   "text_inside": "",
                   "text_closed": "",
@@ -164,7 +194,12 @@
                 },
                 "s2": {
                   "type": "_WinkButton",
-                  "label_active": "S2",
+                  "label_active": {
+                    "En": "S2",
+                    "Fr": "S2",
+                    "De": "S2",
+                    "Es": "S2"
+                  },
                   "font_size": 8,
                   "text_inside": "",
                   "text_closed": "",
@@ -182,7 +217,12 @@
                 },
                 "s3": {
                   "type": "_WinkButton",
-                  "label_active": "S3",
+                  "label_active": {
+                    "En": "S3",
+                    "Fr": "S3",
+                    "De": "S3",
+                    "Es": "S3"
+                  },
                   "font_size": 8,
                   "text_inside": "",
                   "text_closed": "",
@@ -200,7 +240,12 @@
                 },
                 "s4": {
                   "type": "_WinkButton",
-                  "label_active": "S4",
+                  "label_active": {
+                    "En": "S4",
+                    "Fr": "S4",
+                    "De": "S4",
+                    "Es": "S4"
+                  },
                   "font_size": 8,
                   "text_inside": "",
                   "text_closed": "",
@@ -221,7 +266,12 @@
             "aux_1_4": {
               "type": "OcaCollapsibleBlock",
               "view": "aux_1_4_master",
-              "description": "Aux 1-4",
+              "description": {
+                "En": "Aux 1-4",
+                "Fr": "Aux 1-4",
+                "De": "Aux 1-4",
+                "Es": "Aux 1-4"
+              },
               "show_label": false,
               "layout_columns": 1,
               "layout": {
@@ -252,7 +302,12 @@
                       "fields": {
                         "pr_po": {
                           "type": "_WinkButton",
-                          "label_active": "",
+                          "label_active": {
+                            "En": "",
+                            "Fr": "",
+                            "De": "",
+                            "Es": ""
+                          },
                           "text_inside": "PO",
                           "text_closed": "PR",
                           "color": "white",
@@ -271,7 +326,12 @@
                         },
                         "on_off": {
                           "type": "_WinkButton",
-                          "label_active": "",
+                          "label_active": {
+                            "En": "",
+                            "Fr": "",
+                            "De": "",
+                            "Es": ""
+                          },
                           "text_inside": "ON",
                           "text_closed": "",
                           "color": "#AAAAAA",
@@ -297,7 +357,12 @@
                     },
                     "knob": {
                       "type": "_SmartKnob",
-                      "label": "",
+                      "label": {
+                        "En": "",
+                        "Fr": "",
+                        "De": "",
+                        "Es": ""
+                      },
                       "notes": "Baseline",
                       "geometry": {
                         "width": 76,
@@ -390,7 +455,12 @@
                       "fields": {
                         "pr_po": {
                           "type": "_WinkButton",
-                          "label_active": "",
+                          "label_active": {
+                            "En": "",
+                            "Fr": "",
+                            "De": "",
+                            "Es": ""
+                          },
                           "text_inside": "PO",
                           "text_closed": "PR",
                           "color": "white",
@@ -409,7 +479,12 @@
                         },
                         "on_off": {
                           "type": "_WinkButton",
-                          "label_active": "",
+                          "label_active": {
+                            "En": "",
+                            "Fr": "",
+                            "De": "",
+                            "Es": ""
+                          },
                           "text_inside": "ON",
                           "text_closed": "",
                           "color": "#AAAAAA",
@@ -435,7 +510,12 @@
                     },
                     "knob": {
                       "type": "_SmartKnob",
-                      "label": "",
+                      "label": {
+                        "En": "",
+                        "Fr": "",
+                        "De": "",
+                        "Es": ""
+                      },
                       "notes": "Baseline",
                       "geometry": {
                         "width": 76,
@@ -528,7 +608,12 @@
                       "fields": {
                         "pr_po": {
                           "type": "_WinkButton",
-                          "label_active": "",
+                          "label_active": {
+                            "En": "",
+                            "Fr": "",
+                            "De": "",
+                            "Es": ""
+                          },
                           "text_inside": "PO",
                           "text_closed": "PR",
                           "color": "white",
@@ -547,7 +632,12 @@
                         },
                         "on_off": {
                           "type": "_WinkButton",
-                          "label_active": "",
+                          "label_active": {
+                            "En": "",
+                            "Fr": "",
+                            "De": "",
+                            "Es": ""
+                          },
                           "text_inside": "ON",
                           "text_closed": "",
                           "color": "#AAAAAA",
@@ -573,7 +663,12 @@
                     },
                     "knob": {
                       "type": "_SmartKnob",
-                      "label": "",
+                      "label": {
+                        "En": "",
+                        "Fr": "",
+                        "De": "",
+                        "Es": ""
+                      },
                       "notes": "Baseline",
                       "geometry": {
                         "width": 76,
@@ -666,7 +761,12 @@
                       "fields": {
                         "pr_po": {
                           "type": "_WinkButton",
-                          "label_active": "",
+                          "label_active": {
+                            "En": "",
+                            "Fr": "",
+                            "De": "",
+                            "Es": ""
+                          },
                           "text_inside": "PO",
                           "text_closed": "PR",
                           "color": "white",
@@ -685,7 +785,12 @@
                         },
                         "on_off": {
                           "type": "_WinkButton",
-                          "label_active": "",
+                          "label_active": {
+                            "En": "",
+                            "Fr": "",
+                            "De": "",
+                            "Es": ""
+                          },
                           "text_inside": "ON",
                           "text_closed": "",
                           "color": "#AAAAAA",
@@ -711,7 +816,12 @@
                     },
                     "knob": {
                       "type": "_SmartKnob",
-                      "label": "",
+                      "label": {
+                        "En": "",
+                        "Fr": "",
+                        "De": "",
+                        "Es": ""
+                      },
                       "notes": "Baseline",
                       "geometry": {
                         "width": 76,
@@ -810,7 +920,12 @@
                   "fields": {
                     "pan_toggle": {
                       "type": "_WinkButton",
-                      "label_active": "",
+                      "label_active": {
+                        "En": "",
+                        "Fr": "",
+                        "De": "",
+                        "Es": ""
+                      },
                       "text_inside": "PAN",
                       "text_closed": "PAN",
                       "color": "#AAAAAA",
@@ -825,7 +940,12 @@
                     },
                     "pfl": {
                       "type": "_WinkButton",
-                      "label_active": "",
+                      "label_active": {
+                        "En": "",
+                        "Fr": "",
+                        "De": "",
+                        "Es": ""
+                      },
                       "text_inside": "PFL",
                       "text_closed": "PFL",
                       "color": "#AAAAAA",
@@ -847,7 +967,12 @@
                 },
                 "knob": {
                   "type": "_SmartKnob",
-                  "label": "",
+                  "label": {
+                    "En": "",
+                    "Fr": "",
+                    "De": "",
+                    "Es": ""
+                  },
                   "notes": "Panner",
                   "geometry": {
                     "width": 76,
@@ -903,7 +1028,12 @@
             },
             "channel_label": {
               "type": "_GuiLabel",
-              "label_active": "{{channel_name}}",
+              "label_active": {
+                "En": "{{channel_name}}",
+                "Fr": "{{channel_name}}",
+                "De": "{{channel_name}}",
+                "Es": "{{channel_name}}"
+              },
               "layout": {
                 "pady": 0,
                 "sticky": "nsew"
@@ -927,7 +1057,12 @@
               "fields": {
                 "solo": {
                   "type": "_WinkButton",
-                  "label_active": "",
+                  "label_active": {
+                    "En": "",
+                    "Fr": "",
+                    "De": "",
+                    "Es": ""
+                  },
                   "text_inside": "S",
                   "text_closed": "",
                   "color": "yellow",
@@ -942,7 +1077,12 @@
                 },
                 "ch_on": {
                   "type": "_WinkButton",
-                  "label_active": "",
+                  "label_active": {
+                    "En": "",
+                    "Fr": "",
+                    "De": "",
+                    "Es": ""
+                  },
                   "text_inside": "CH ON",
                   "text_closed": "",
                   "color": "red",
@@ -958,7 +1098,12 @@
             },
             "fader_value": {
               "type": "_SmartValue",
-              "label": "",
+              "label": {
+                "En": "",
+                "Fr": "",
+                "De": "",
+                "Es": ""
+              },
               "notes": "An editable box for setting a numerical value with units.",
               "geometry": {
                 "width": 155,
@@ -982,7 +1127,12 @@
             },
             "fader": {
               "type": "_CustomFader",
-              "label_active": "",
+              "label_active": {
+                "En": "",
+                "Fr": "",
+                "De": "",
+                "Es": ""
+              },
               "value_default": 0,
               "reff_point": -15,
               "value_min": -100,
@@ -1018,42 +1168,82 @@
         "data": [
           {
             "id": "ch25",
-            "description": "CH 25",
+            "description": {
+              "En": "CH 25",
+              "Fr": "CH 25",
+              "De": "CH 25",
+              "Es": "CH 25"
+            },
             "channel_name": "Channel 25"
           },
           {
             "id": "ch26",
-            "description": "CH 26",
+            "description": {
+              "En": "CH 26",
+              "Fr": "CH 26",
+              "De": "CH 26",
+              "Es": "CH 26"
+            },
             "channel_name": "Channel 26"
           },
           {
             "id": "ch27",
-            "description": "CH 27",
+            "description": {
+              "En": "CH 27",
+              "Fr": "CH 27",
+              "De": "CH 27",
+              "Es": "CH 27"
+            },
             "channel_name": "Channel 27"
           },
           {
             "id": "ch28",
-            "description": "CH 28",
+            "description": {
+              "En": "CH 28",
+              "Fr": "CH 28",
+              "De": "CH 28",
+              "Es": "CH 28"
+            },
             "channel_name": "Channel 28"
           },
           {
             "id": "ch29",
-            "description": "CH 29",
+            "description": {
+              "En": "CH 29",
+              "Fr": "CH 29",
+              "De": "CH 29",
+              "Es": "CH 29"
+            },
             "channel_name": "Channel 29"
           },
           {
             "id": "ch30",
-            "description": "CH 30",
+            "description": {
+              "En": "CH 30",
+              "Fr": "CH 30",
+              "De": "CH 30",
+              "Es": "CH 30"
+            },
             "channel_name": "Channel 30"
           },
           {
             "id": "ch31",
-            "description": "CH 31",
+            "description": {
+              "En": "CH 31",
+              "Fr": "CH 31",
+              "De": "CH 31",
+              "Es": "CH 31"
+            },
             "channel_name": "Channel 31"
           },
           {
             "id": "ch32",
-            "description": "CH 32",
+            "description": {
+              "En": "CH 32",
+              "Fr": "CH 32",
+              "De": "CH 32",
+              "Es": "CH 32"
+            },
             "channel_name": "Channel 32"
           }
         ],

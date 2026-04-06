@@ -13,16 +13,36 @@
     "blocks": {
       "Dual_Entropy_Matrix": {
         "type": "OcaBlock",
-        "description": "Parallel Energy Depletion System",
+        "description": {
+          "En": "Parallel Energy Depletion System",
+          "Fr": "Système de déplétion d'énergie parallèle",
+          "De": "Paralleles Energieentladungssystem",
+          "Es": "Sistema de agotamiento de energía paralelo"
+        },
         "fields": {
           "Global_Safety_Interlock": {
             "type": "OcaBlock",
-            "description": "MASTER DISCONNECT",
+            "description": {
+              "En": "MASTER DISCONNECT",
+              "Fr": "DÉCONNEXION MAÎTRE",
+              "De": "HAUPTTRENNUNG",
+              "Es": "DESCONEXIÓN MAESTRA"
+            },
             "fields": {
               "Global_Kill_Switch": {
                 "type": "_TrapezoidButton",
-                "label_active": "\u2622\ufe0f DUAL SIPHON ACTIVE \u2622\ufe0f",
-                "label_inactive": "ENGAGE TWIN LOADS",
+                "label_active": {
+                  "En": "☢️ DUAL SIPHON ACTIVE ☢️",
+                  "Fr": "☢️ DUAL SIPHON ACTIVE ☢️",
+                  "De": "☢️ DUAL SIPHON ACTIVE ☢️",
+                  "Es": "☢️ DUAL SIPHON ACTIVE ☢️"
+                },
+                "label_inactive": {
+                  "En": "ENGAGE TWIN LOADS",
+                  "Fr": "ENGAGE TWIN LOADS",
+                  "De": "ENGAGE TWIN LOADS",
+                  "Es": "ENGAGE TWIN LOADS"
+                },
                 "state_default": false,
                 "message_details": {
                   "DC_LOAD_MODEL": {
@@ -48,14 +68,24 @@
           },
           "Chamber_Alpha_Left": {
             "type": "OcaBlock",
-            "description": "--- CHAMBER ALPHA (Unit 1) ---",
+            "description": {
+              "En": "--- CHAMBER ALPHA (Unit 1) ---",
+              "Fr": "--- CHAMBER ALPHA (Unité 1) ---",
+              "De": "--- CHAMBER ALPHA (Einheit 1) ---",
+              "Es": "--- CHAMBER ALPHA (Unidad 1) ---"
+            },
             "fields": {
               "Header_A": {
                 "type": "OcaBlock",
                 "fields": {
                   "Label_A": {
                     "type": "_TextInput",
-                    "label_active": "DUT 1 ID",
+                    "label_active": {
+                      "En": "DUT 1 ID",
+                      "Fr": "DUT 1 ID",
+                      "De": "DUT 1 ID",
+                      "Es": "DUT 1 ID"
+                    },
                     "value_default": "Batt_LiPo_Cell_1",
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -79,8 +109,18 @@
                   },
                   "Activate_A": {
                     "type": "_GuiButtonToggle",
-                    "label_active": "A: SINKING \ud83d\udd25",
-                    "label_inactive": "A: STANDBY",
+                    "label_active": {
+                      "En": "A: SINKING 🔥",
+                      "Fr": "A: SINKING 🔥",
+                      "De": "A: SINKING 🔥",
+                      "Es": "A: SINKING 🔥"
+                    },
+                    "label_inactive": {
+                      "En": "A: STANDBY",
+                      "Fr": "A: STANDBY",
+                      "De": "A: STANDBY",
+                      "Es": "A: STANDBY"
+                    },
                     "style": {
                       "active_text_color": "#1a1a1a",
                       "text_color": "#888888",
@@ -118,11 +158,21 @@
               },
               "Fader_Deck_A": {
                 "type": "OcaBlock",
-                "description": "Load Mixing A",
+                "description": {
+                  "En": "Load Mixing A",
+                  "Fr": "Charger Mixing A",
+                  "De": "Laden Mixing A",
+                  "Es": "Cargar Mixing A"
+                },
                 "fields": {
                   "Base_Fader_A": {
                     "type": "_GuiVerticalFader",
-                    "label_active": "BASE (A)",
+                    "label_active": {
+                      "En": "BASE (A)",
+                      "Fr": "BASE (A)",
+                      "De": "BASE (A)",
+                      "Es": "BASE (A)"
+                    },
                     "min": "0",
                     "max": "60",
                     "units": "A",
@@ -148,7 +198,12 @@
                   },
                   "Pulse_Fader_A": {
                     "type": "_GuiVerticalFader",
-                    "label_active": "PEAK (A)",
+                    "label_active": {
+                      "En": "PEAK (A)",
+                      "Fr": "PEAK (A)",
+                      "De": "PEAK (A)",
+                      "Es": "PEAK (A)"
+                    },
                     "min": "0",
                     "max": "60",
                     "units": "A",
@@ -176,12 +231,27 @@
               },
               "Dynamics_A": {
                 "type": "OcaBlock",
-                "description": "Pulse & Protect A",
+                "description": {
+                  "En": "Pulse & Protect A",
+                  "Fr": "Pulse & Protect A",
+                  "De": "Pulse & Protect A",
+                  "Es": "Pulse & Protect A"
+                },
                 "fields": {
                   "Pulse_Enable_A": {
                     "type": "_GuiButtonToggle",
-                    "label_active": "PULSE ON",
-                    "label_inactive": "PULSE OFF",
+                    "label_active": {
+                      "En": "PULSE ON",
+                      "Fr": "PULSE ON",
+                      "De": "PULSE ON",
+                      "Es": "PULSE ON"
+                    },
+                    "label_inactive": {
+                      "En": "PULSE OFF",
+                      "Fr": "PULSE OFF",
+                      "De": "PULSE OFF",
+                      "Es": "PULSE OFF"
+                    },
                     "style": {
                       "active_text_color": "#1a1a1a",
                       "text_color": "#888888",
@@ -217,7 +287,12 @@
                   },
                   "Cutoff_Knob_A": {
                     "type": "_GuiHorizontalKnob",
-                    "label_active": "Stop Volts",
+                    "label_active": {
+                      "En": "Stop Volts",
+                      "Fr": "Arrêter Volts",
+                      "De": "Stopp Volts",
+                      "Es": "Parar Volts"
+                    },
                     "value_default": "3.0",
                     "min": "0",
                     "max": "20",
@@ -246,11 +321,21 @@
               },
               "Telemetry_A": {
                 "type": "OcaBlock",
-                "description": "Stats A",
+                "description": {
+                  "En": "Stats A",
+                  "Fr": "Stats A",
+                  "De": "Statistiken A",
+                  "Es": "Estadísticas A"
+                },
                 "fields": {
                   "Ah_A": {
                     "type": "_GuiLabel",
-                    "label_active": "Ah Drained",
+                    "label_active": {
+                      "En": "Ah Drained",
+                      "Fr": "Ah Drained",
+                      "De": "Ah Drained",
+                      "Es": "Ah Drained"
+                    },
                     "value_default": "0.00 Ah",
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -274,7 +359,12 @@
                   },
                   "Graph_A": {
                     "type": "_GuiGraph",
-                    "label_active": "Discharge A",
+                    "label_active": {
+                      "En": "Discharge A",
+                      "Fr": "Discharge A",
+                      "De": "Discharge A",
+                      "Es": "Discharge A"
+                    },
                     "height": 120,
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -302,18 +392,33 @@
           },
           "Chamber_Separator": {
             "type": "OcaSeparator",
-            "description": " | "
+            "description": {
+              "En": " | ",
+              "Fr": " | ",
+              "De": " | ",
+              "Es": " | "
+            }
           },
           "Chamber_Beta_Right": {
             "type": "OcaBlock",
-            "description": "--- CHAMBER BETA (Unit 2) ---",
+            "description": {
+              "En": "--- CHAMBER BETA (Unit 2) ---",
+              "Fr": "--- CHAMBER BETA (Unité 2) ---",
+              "De": "--- CHAMBER BETA (Einheit 2) ---",
+              "Es": "--- CHAMBER BETA (Unidad 2) ---"
+            },
             "fields": {
               "Header_B": {
                 "type": "OcaBlock",
                 "fields": {
                   "Label_B": {
                     "type": "_TextInput",
-                    "label_active": "DUT 2 ID",
+                    "label_active": {
+                      "En": "DUT 2 ID",
+                      "Fr": "DUT 2 ID",
+                      "De": "DUT 2 ID",
+                      "Es": "DUT 2 ID"
+                    },
                     "value_default": "Batt_Lead_Acid_Old",
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -337,8 +442,18 @@
                   },
                   "Activate_B": {
                     "type": "_GuiButtonToggle",
-                    "label_active": "B: SINKING \ud83d\udd25",
-                    "label_inactive": "B: STANDBY",
+                    "label_active": {
+                      "En": "B: SINKING 🔥",
+                      "Fr": "B: SINKING 🔥",
+                      "De": "B: SINKING 🔥",
+                      "Es": "B: SINKING 🔥"
+                    },
+                    "label_inactive": {
+                      "En": "B: STANDBY",
+                      "Fr": "B: STANDBY",
+                      "De": "B: STANDBY",
+                      "Es": "B: STANDBY"
+                    },
                     "style": {
                       "active_text_color": "#1a1a1a",
                       "text_color": "#888888",
@@ -376,11 +491,21 @@
               },
               "Fader_Deck_B": {
                 "type": "OcaBlock",
-                "description": "Load Mixing B",
+                "description": {
+                  "En": "Load Mixing B",
+                  "Fr": "Mélange de charge B",
+                  "De": "Lastmischung B",
+                  "Es": "Mezcla de carga B"
+                },
                 "fields": {
                   "Base_Fader_B": {
                     "type": "_GuiVerticalFader",
-                    "label_active": "BASE (A)",
+                    "label_active": {
+                      "En": "BASE (A)",
+                      "Fr": "BASE (A)",
+                      "De": "BASE (A)",
+                      "Es": "BASE (A)"
+                    },
                     "min": "0",
                     "max": "60",
                     "units": "A",
@@ -406,7 +531,12 @@
                   },
                   "Pulse_Fader_B": {
                     "type": "_GuiVerticalFader",
-                    "label_active": "PEAK (A)",
+                    "label_active": {
+                      "En": "PEAK (A)",
+                      "Fr": "PEAK (A)",
+                      "De": "PEAK (A)",
+                      "Es": "PEAK (A)"
+                    },
                     "min": "0",
                     "max": "60",
                     "units": "A",
@@ -434,12 +564,27 @@
               },
               "Dynamics_B": {
                 "type": "OcaBlock",
-                "description": "Pulse & Protect B",
+                "description": {
+                  "En": "Pulse & Protect B",
+                  "Fr": "Pulse & Protect B",
+                  "De": "Pulse & Protect B",
+                  "Es": "Pulse & Protect B"
+                },
                 "fields": {
                   "Pulse_Enable_B": {
                     "type": "_GuiButtonToggle",
-                    "label_active": "PULSE ON",
-                    "label_inactive": "PULSE OFF",
+                    "label_active": {
+                      "En": "PULSE ON",
+                      "Fr": "PULSE ON",
+                      "De": "PULSE ON",
+                      "Es": "PULSE ON"
+                    },
+                    "label_inactive": {
+                      "En": "PULSE OFF",
+                      "Fr": "PULSE OFF",
+                      "De": "PULSE OFF",
+                      "Es": "PULSE OFF"
+                    },
                     "style": {
                       "active_text_color": "#1a1a1a",
                       "text_color": "#888888",
@@ -475,7 +620,12 @@
                   },
                   "Cutoff_Knob_B": {
                     "type": "_GuiHorizontalKnob",
-                    "label_active": "Stop Volts",
+                    "label_active": {
+                      "En": "Stop Volts",
+                      "Fr": "Arrêter Volts",
+                      "De": "Stopp Volts",
+                      "Es": "Parar Volts"
+                    },
                     "value_default": "10.5",
                     "min": "0",
                     "max": "24",
@@ -504,11 +654,21 @@
               },
               "Telemetry_B": {
                 "type": "OcaBlock",
-                "description": "Stats B",
+                "description": {
+                  "En": "Stats B",
+                  "Fr": "Stats B",
+                  "De": "Statistiken B",
+                  "Es": "Estadísticas B"
+                },
                 "fields": {
                   "Ah_B": {
                     "type": "_GuiLabel",
-                    "label_active": "Ah Drained",
+                    "label_active": {
+                      "En": "Ah Drained",
+                      "Fr": "Ah Drained",
+                      "De": "Ah Drained",
+                      "Es": "Ah Drained"
+                    },
                     "value_default": "0.00 Ah",
                     "message_details": {
                       "DC_LOAD_MODEL": {
@@ -532,7 +692,12 @@
                   },
                   "Graph_B": {
                     "type": "_GuiGraph",
-                    "label_active": "Discharge B",
+                    "label_active": {
+                      "En": "Discharge B",
+                      "Fr": "Discharge B",
+                      "De": "Discharge B",
+                      "Es": "Discharge B"
+                    },
                     "height": 120,
                     "message_details": {
                       "DC_LOAD_MODEL": {

@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Channel 4 Settings",
+        "description": {
+          "En": "Channel 4 Settings",
+          "Fr": "Canal 4",
+          "De": "Kanal 4",
+          "Es": "Canal 4"
+        },
         "fields": {
           "Set_Display": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "state": {
                     "value": "ON",
                     "type": "_GuiValue",
-                    "label": "State",
+                    "label": {
+                      "En": "State",
+                      "Fr": "State",
+                      "De": "State",
+                      "Es": "State"
+                    },
                     "units": "",
-                    "description": "ON or OFF"
+                    "description": {
+                      "En": "ON or OFF",
+                      "Fr": "ON or OFF",
+                      "De": "ON or OFF",
+                      "Es": "ON or OFF"
+                    }
                   }
                 }
               }
@@ -85,9 +100,19 @@
                   "limit": {
                     "value": "OFF",
                     "type": "_GuiValue",
-                    "label": "Limit",
+                    "label": {
+                      "En": "Limit",
+                      "Fr": "Limit",
+                      "De": "Limit",
+                      "Es": "Limit"
+                    },
                     "units": "",
-                    "description": "20M or OFF"
+                    "description": {
+                      "En": "20M or OFF",
+                      "Fr": "20M or OFF",
+                      "De": "20M or OFF",
+                      "Es": "20M or OFF"
+                    }
                   }
                 }
               }
@@ -124,9 +149,19 @@
                   "coupling": {
                     "value": "DC",
                     "type": "_GuiValue",
-                    "label": "Coupling",
+                    "label": {
+                      "En": "Coupling",
+                      "Fr": "Couplage",
+                      "De": "Kopplung",
+                      "Es": "Acoplamiento"
+                    },
                     "units": "",
-                    "description": "AC, DC, GND"
+                    "description": {
+                      "En": "AC, DC, GND",
+                      "Fr": "AC, DC, GND",
+                      "De": "AC, DC, GND",
+                      "Es": "CA, CC, GND"
+                    }
                   }
                 }
               }
@@ -163,7 +198,12 @@
                   "scale": {
                     "value": "1.0",
                     "type": "_GuiValue",
-                    "label": "Scale",
+                    "label": {
+                      "En": "Scale",
+                      "Fr": "Échelle",
+                      "De": "Skala",
+                      "Es": "Escala"
+                    },
                     "units": "V/div"
                   }
                 }
@@ -201,7 +241,12 @@
                   "offset": {
                     "value": "0.0",
                     "type": "_GuiValue",
-                    "label": "Offset",
+                    "label": {
+                      "En": "Offset",
+                      "Fr": "Décalage",
+                      "De": "Versatz",
+                      "Es": "Compensación"
+                    },
                     "units": "V"
                   }
                 }
@@ -239,9 +284,19 @@
                   "unit": {
                     "value": "VOLTs",
                     "type": "_GuiValue",
-                    "label": "Unit",
+                    "label": {
+                      "En": "Unit",
+                      "Fr": "Unité",
+                      "De": "Einheit",
+                      "Es": "Unidad"
+                    },
                     "units": "",
-                    "description": "VOLTs, WATTs, AMPs, UNKNown"
+                    "description": {
+                      "En": "VOLTs, WATTs, AMPs, UNKNown",
+                      "Fr": "VOLTs, WATTs, AMPs, UNKNown",
+                      "De": "VOLTs, WATTs, AMPs, UNKNown",
+                      "Es": "VOLTs, WATTs, AMPs, UNKNown"
+                    }
                   }
                 }
               }
@@ -278,9 +333,19 @@
                   "atten": {
                     "value": "10",
                     "type": "_GuiValue",
-                    "label": "Atten",
+                    "label": {
+                      "En": "Atten",
+                      "Fr": "Attén",
+                      "De": "Atten",
+                      "Es": "Aten"
+                    },
                     "units": "X",
-                    "description": "0.01 to 1000"
+                    "description": {
+                      "En": "0.01 to 1000",
+                      "Fr": "0.01 to 1000",
+                      "De": "0.01 to 1000",
+                      "Es": "0.01 to 1000"
+                    }
                   }
                 }
               }

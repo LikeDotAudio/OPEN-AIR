@@ -13,11 +13,21 @@
     "blocks": {
       "nab": {
         "type": "OcaBlock",
-        "description": "Rigol Measurements",
+        "description": {
+          "En": "Rigol Measurements",
+          "Fr": "Mesures Rigol",
+          "De": "Rigol-Messungen",
+          "Es": "Mediciones de Rigol"
+        },
         "fields": {
           "Measurements_CH4": {
             "type": "OcaBlock",
-            "description": "Channel 4 Stats",
+            "description": {
+              "En": "Channel 4 Stats",
+              "Fr": "Canal 4",
+              "De": "Kanal 4",
+              "Es": "Canal 4"
+            },
             "fields": {
               "Get_Stats_CH4": {
                 "type": "OcaBlock",
@@ -48,25 +58,45 @@
                     "type": "OcaBlock",
                     "fields": {
                       "Vpp": {
-                        "label": "Vpp (Volts)",
+                        "label": {
+                          "En": "Vpp (Volts)",
+                          "Fr": "Vpp (Volts)",
+                          "De": "Vpp (Volts)",
+                          "Es": "Vpp (Volts)"
+                        },
                         "value": "The peak-to-peak voltage.",
                         "type": "_GuiValue",
                         "units": "Volts"
                       },
                       "Vrms": {
-                        "label": "Vrms (Volts)",
+                        "label": {
+                          "En": "Vrms (Volts)",
+                          "Fr": "Vrms (Volts)",
+                          "De": "Veff (Volts)",
+                          "Es": "Vrms (Volts)"
+                        },
                         "value": "The root mean square voltage.",
                         "type": "_GuiValue",
                         "units": "Volts"
                       },
                       "Freq": {
-                        "label": "Frequency (Hz)",
+                        "label": {
+                          "En": "Frequency (Hz)",
+                          "Fr": "Fréquence (Hz)",
+                          "De": "Frequenz (Hz)",
+                          "Es": "Frecuencia (Hz)"
+                        },
                         "value": "The signal frequency.",
                         "type": "_GuiValue",
                         "units": "Hz"
                       },
                       "Duty": {
-                        "label": "Duty Cycle (%)",
+                        "label": {
+                          "En": "Duty Cycle (%)",
+                          "Fr": "Cycle de service (%)",
+                          "De": "Tastverhältnis (%)",
+                          "Es": "Ciclo de trabajo (%)"
+                        },
                         "value": "The duty cycle percentage.",
                         "type": "_GuiValue",
                         "units": "%"
@@ -81,11 +111,21 @@
       },
       "rig": {
         "type": "OcaBlock",
-        "description": "Scope Configuration",
+        "description": {
+          "En": "Scope Configuration",
+          "Fr": "Scope Configuration",
+          "De": "Scope Konfiguration",
+          "Es": "Scope Configuración"
+        },
         "fields": {
           "Config_CH4": {
             "type": "OcaBlock",
-            "description": "Channel 4 Vertical",
+            "description": {
+              "En": "Channel 4 Vertical",
+              "Fr": "Canal 4",
+              "De": "Kanal 4",
+              "Es": "Canal 4"
+            },
             "fields": {
               "CH4_Scale": {
                 "type": "OcaBlock",
@@ -116,7 +156,12 @@
                     "type": "OcaBlock",
                     "fields": {
                       "scale": {
-                        "label": "Scale (Volts/Div)",
+                        "label": {
+                          "En": "Scale (Volts/Div)",
+                          "Fr": "Échelle (Volts/Div)",
+                          "De": "Skala (Volts/Div)",
+                          "Es": "Escala (Volts/Div)"
+                        },
                         "value": "The current vertical scale.",
                         "type": "_GuiValue",
                         "units": "Volts/Div"
@@ -154,7 +199,12 @@
                     "type": "OcaBlock",
                     "fields": {
                       "offset": {
-                        "label": "Offset (Volts)",
+                        "label": {
+                          "En": "Offset (Volts)",
+                          "Fr": "Décalage (Volts)",
+                          "De": "Versatz (Volts)",
+                          "Es": "Compensación (Volts)"
+                        },
                         "value": "The current vertical offset.",
                         "type": "_GuiValue",
                         "units": "Volts"
@@ -192,7 +242,12 @@
                     "type": "OcaBlock",
                     "fields": {
                       "coupling": {
-                        "label": "Coupling",
+                        "label": {
+                          "En": "Coupling",
+                          "Fr": "Couplage",
+                          "De": "Kopplung",
+                          "Es": "Acoplamiento"
+                        },
                         "value": "The current coupling (AC, DC, GND).",
                         "type": "_GuiValue",
                         "units": ""
@@ -230,7 +285,12 @@
                     "type": "OcaBlock",
                     "fields": {
                       "atten": {
-                        "label": "Probe Attenuation",
+                        "label": {
+                          "En": "Probe Attenuation",
+                          "Fr": "Probe Atténuation",
+                          "De": "Probe Dämpfung",
+                          "Es": "Probe Atenuación"
+                        },
                         "value": "The current probe attenuation factor.",
                         "type": "_GuiValue",
                         "units": "X"
@@ -268,7 +328,12 @@
                     "type": "OcaBlock",
                     "fields": {
                       "limit": {
-                        "label": "Bandwidth Limit",
+                        "label": {
+                          "En": "Bandwidth Limit",
+                          "Fr": "Bande passante Limit",
+                          "De": "Bandbreite Limit",
+                          "Es": "Ancho de banda Limit"
+                        },
                         "value": "The current bandwidth limit (20M or OFF).",
                         "type": "_GuiValue",
                         "units": ""
@@ -283,14 +348,24 @@
       },
       "Do": {
         "type": "OcaBlock",
-        "description": "Actions and Toggles",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
         "fields": {
           "Run_Control": {
             "type": "OcaBlock",
             "fields": {
               "Run": {
                 "type": "_GuiActuator",
-                "label_inactive": "RUN",
+                "label_inactive": {
+                  "En": "RUN",
+                  "Fr": "EXEC",
+                  "De": "AUSFÜHREN",
+                  "Es": "EJEC"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -311,7 +386,12 @@
               },
               "Stop": {
                 "type": "_GuiActuator",
-                "label_inactive": "STOP",
+                "label_inactive": {
+                  "En": "STOP",
+                  "Fr": "STOP",
+                  "De": "STOP",
+                  "Es": "STOP"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -332,7 +412,12 @@
               },
               "Single": {
                 "type": "_GuiActuator",
-                "label_inactive": "SINGLE",
+                "label_inactive": {
+                  "En": "SINGLE",
+                  "Fr": "SINGLE",
+                  "De": "SINGLE",
+                  "Es": "SINGLE"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -353,7 +438,12 @@
               },
               "Auto_Scale": {
                 "type": "_GuiActuator",
-                "label_inactive": "AUTO",
+                "label_inactive": {
+                  "En": "AUTO",
+                  "Fr": "AUTO",
+                  "De": "AUTO",
+                  "Es": "AUTO"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -379,7 +469,12 @@
             "fields": {
               "CH4_ON": {
                 "type": "_GuiActuator",
-                "label_inactive": "CH4 ON",
+                "label_inactive": {
+                  "En": "CH4 ON",
+                  "Fr": "CH 4",
+                  "De": "CH 4",
+                  "Es": "CH 4"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -399,7 +494,12 @@
               },
               "CH4_OFF": {
                 "type": "_GuiActuator",
-                "label_inactive": "CH4 OFF",
+                "label_inactive": {
+                  "En": "CH4 OFF",
+                  "Fr": "CH 4",
+                  "De": "CH 4",
+                  "Es": "CH 4"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",

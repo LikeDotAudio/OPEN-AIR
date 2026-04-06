@@ -13,13 +13,14 @@ from tkinter import ttk
 from oaLogging.Core.logger import initialize_logging, set_log_directory
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic
 import os
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGuiFramework.Methods.i18n_utils import get_text
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 
 
@@ -39,7 +40,7 @@ class BuilderImagesProgressBarCreator(TransparencyMixin):
         current_function_name = "make_images_progress_bar"
 
         # Extract only widget-specific config from config_data
-        label = config_data.get("label_active") or config_data.get("label", "")
+        label = get_text(get_text(config_data.get('label_active'))) or get_text(get_text(config_data.get('label')), "")
         config = config_data  # config_data is the config
         path = config_data.get("path")
 

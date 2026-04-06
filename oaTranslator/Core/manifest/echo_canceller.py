@@ -5,7 +5,7 @@
 # Description: Logic to prevent infinite feedback loops via Echo Cancellation.
 
 from typing import Dict
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 

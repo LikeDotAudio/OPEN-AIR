@@ -13,11 +13,21 @@
     "blocks": {
       "elements1": {
         "type": "OcaBlock",
-        "label_active": "Instrument Connections",
+        "label_active": {
+          "En": "Instrument Connections",
+          "Fr": "Instrument Connections",
+          "De": "Instrument Connections",
+          "Es": "Instrument Connections"
+        },
         "fields": {
           "examplefields": {
             "type": "GuiTable",
-            "label_active": "Instrument Connections",
+            "label_active": {
+              "En": "Instrument Connections",
+              "Fr": "Instrument Connections",
+              "De": "Instrument Connections",
+              "Es": "Instrument Connections"
+            },
             "height": 80,
             "read_cvs": false,
             "write_cvs": false,
@@ -51,11 +61,21 @@
       },
       "elements2": {
         "type": "OcaBlock",
-        "label_active": "Process Monitoring",
+        "label_active": {
+          "En": "Process Monitoring",
+          "Fr": "Process Monitoring",
+          "De": "Process Monitoring",
+          "Es": "Process Monitoring"
+        },
         "fields": {
           "examplefields": {
             "type": "GuiTable",
-            "label_active": "Process Monitoring",
+            "label_active": {
+              "En": "Process Monitoring",
+              "Fr": "Process Monitoring",
+              "De": "Process Monitoring",
+              "Es": "Process Monitoring"
+            },
             "height": 100,
             "Sort": false,
             "headers": [
@@ -113,11 +133,21 @@
       },
       "elements3": {
         "type": "OcaBlock",
-        "label_active": "Configuration Settings",
+        "label_active": {
+          "En": "Configuration Settings",
+          "Fr": "Configuration Paramètres",
+          "De": "Configuration Einstellungen",
+          "Es": "Configuration Ajustes"
+        },
         "fields": {
           "examplefields": {
             "type": "GuiTable",
-            "label_active": "Configuration Settings",
+            "label_active": {
+              "En": "Configuration Settings",
+              "Fr": "Configuration Paramètres",
+              "De": "Configuration Einstellungen",
+              "Es": "Configuration Ajustes"
+            },
             "height": 100,
             "headers": [
               "Parameter",
@@ -129,7 +159,7 @@
               "P1": {
                 "Parameter": "Temperature Limit",
                 "Value": 75,
-                "units": "\u00b0C",
+                "units": "°C",
                 "Description": "Max operating temperature"
               },
               "P2": {
@@ -151,11 +181,21 @@
       },
       "elements4": {
         "type": "OcaBlock",
-        "label_active": "New Log Entries",
+        "label_active": {
+          "En": "New Log Entries",
+          "Fr": "New Log Entries",
+          "De": "New Log Entries",
+          "Es": "New Log Entries"
+        },
         "fields": {
           "examplefields": {
             "type": "GuiTable",
-            "label_active": "New Log Entries",
+            "label_active": {
+              "En": "New Log Entries",
+              "Fr": "New Log Entries",
+              "De": "New Log Entries",
+              "Es": "New Log Entries"
+            },
             "height": 120,
             "headers": [
               "Timestamp",
@@ -176,11 +216,21 @@
       },
       "elements5": {
         "type": "OcaBlock",
-        "label_active": "Resource Allocation",
+        "label_active": {
+          "En": "Resource Allocation",
+          "Fr": "Resource Allocation",
+          "De": "Resource Allocation",
+          "Es": "Resource Allocation"
+        },
         "fields": {
           "examplefields": {
             "type": "GuiTable",
-            "label_active": "Resource Allocation",
+            "label_active": {
+              "En": "Resource Allocation",
+              "Fr": "Resource Allocation",
+              "De": "Resource Allocation",
+              "Es": "Resource Allocation"
+            },
             "height": 70,
             "headers": [
               "Resource Name",

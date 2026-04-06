@@ -11,12 +11,13 @@ from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaGuiManager.Core.factory.button_canvas_base import CanvasButton
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
+from oaGuiFramework.Methods.i18n_utils import get_text
 
 # --- EXTRACTED CORE MODULES ---
 from .Core.actuator_interaction_mixin import ActuatorInteractionMixin
@@ -28,9 +29,9 @@ class ActuatorButton(CanvasButton, ActuatorInteractionMixin, ActuatorStateMixin)
     Inherits from CanvasButton and adds interaction/state mixins.
     """
     def __init__(self, parent, config, path, state_mirror_engine, base_mqtt_topic, subscriber_router, builder_instance, **kwargs):
-        self.label = config.get("label", "Actuator")
-        self.text_active = config.get("label_active", self.label)
-        self.text_inactive = config.get("label_inactive", self.label)
+        self.label = get_text(config.get("label"), "Actuator")
+        self.text_active = get_text(config.get("label_active"), self.label)
+        self.text_inactive = get_text(config.get("label_inactive"), self.label)
         self.path = path
         self.config_data = config
         self.state_mirror_engine = state_mirror_engine
@@ -84,24 +85,9 @@ class BuilderButtonActuatorCreator(TransparencyMixin):
         ctx = context if context else type('obj', (object,), kwargs)()
         b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
         
-        path, b_topic = config_data.get("path"), ctx.base_mqtt_topic_from_path
-        
-        button = ActuatorButton(
-            parent_widget, config_data, path, 
-            ctx.state_mirror_engine, b_topic, ctx.subscriber_router, b_inst
-        )
+        label, path = get_text(config_data.get("label")), config_data.get("path")
 
-        # Layout Application (Grid)
-        lay = config_data.get("layout", {})
-        if "row" in lay and "column" in lay:
-            button.grid(
-                row=lay["row"], column=lay["column"],
-                columnspan=lay.get("col_span", 1), rowspan=lay.get("row_span", 1),
-                padx=lay.get("padx", 5), pady=lay.get("pady", 2),
-                sticky=lay.get("sticky", "")
-            )
-
-        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🔘 [SUCCESS] The actuator '{config_data.get('label')}' has materialized!", level="SUCCESS")
+        matrix_log("UI", "GUI_ELEMENTS", inspect.currentframe().f_code.co_name, f"✅🆗🔘 [SUCCESS] The actuator '{get_text(config_data.get('label'), 'Unknown')}' has materialized!", level="SUCCESS")
         return button
 
     @staticmethod

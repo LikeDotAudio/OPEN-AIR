@@ -13,7 +13,12 @@
     "blocks": {
       "nab": {
         "type": "OcaBlock",
-        "description": "System Utilities",
+        "description": {
+          "En": "System Utilities",
+          "Fr": "Système Utilities",
+          "De": "System Utilities",
+          "Es": "Sistema Utilities"
+        },
         "fields": {
           "Get_Error": {
             "type": "OcaBlock",
@@ -46,7 +51,12 @@
                   "error": {
                     "value": "Code, Msg",
                     "type": "_GuiValue",
-                    "label": "Error",
+                    "label": {
+                      "En": "Error",
+                      "Fr": "Erreur",
+                      "De": "Fehler",
+                      "Es": "Error"
+                    },
                     "units": ""
                   }
                 }
@@ -84,7 +94,12 @@
                   "setup": {
                     "value": "Binary Block",
                     "type": "_GuiValue",
-                    "label": "Setup",
+                    "label": {
+                      "En": "Setup",
+                      "Fr": "Installation",
+                      "De": "Einrichtung",
+                      "Es": "Configuración"
+                    },
                     "units": ""
                   }
                 }
@@ -95,7 +110,12 @@
       },
       "set": {
         "type": "OcaBlock",
-        "description": "System Control",
+        "description": {
+          "En": "System Control",
+          "Fr": "Système Contrôle",
+          "De": "System Steuerung",
+          "Es": "Sistema Control"
+        },
         "fields": {
           "Lock_Front_Panel": {
             "type": "OcaBlock",
@@ -128,9 +148,19 @@
                   "state": {
                     "value": "ON",
                     "type": "_GuiValue",
-                    "label": "Lock",
+                    "label": {
+                      "En": "Lock",
+                      "Fr": "Verrouiller",
+                      "De": "Sperren",
+                      "Es": "Bloquear"
+                    },
                     "units": "",
-                    "description": "ON or OFF"
+                    "description": {
+                      "En": "ON or OFF",
+                      "Fr": "ON or OFF",
+                      "De": "ON or OFF",
+                      "Es": "ON or OFF"
+                    }
                   }
                 }
               }

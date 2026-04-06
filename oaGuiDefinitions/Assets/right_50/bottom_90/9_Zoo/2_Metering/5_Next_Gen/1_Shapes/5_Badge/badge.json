@@ -13,7 +13,12 @@
     "blocks": {
       "Badge_Variations": {
         "type": "OcaBlock",
-        "description": "Badge Meter Variations",
+        "description": {
+          "En": "Badge Meter Variations",
+          "Fr": "Badge Meter Variations",
+          "De": "Badge Meter Variationen",
+          "Es": "Badge Meter Variaciones"
+        },
         "layout_columns": 3,
         "column_sizing": [
           {
@@ -29,7 +34,12 @@
         "fields": {
           "Badge_1_Large": {
             "type": "_NeedleVUMeter",
-            "label": "Large Classic",
+            "label": {
+              "En": "Large Classic",
+              "Fr": "Large Classique",
+              "De": "Large Klassisch",
+              "Es": "Large Clásico"
+            },
             "geometry": {
               "width": 300,
               "height": 300
@@ -58,14 +68,24 @@
               },
               "labels": [
                 {
-                  "text": "BADGE",
+                  "text": {
+                    "En": "BADGE",
+                    "Fr": "BADGE",
+                    "De": "BADGE",
+                    "Es": "BADGE"
+                  },
                   "x": 0,
                   "y": -130,
                   "size": 12,
                   "weight": "bold"
                 },
                 {
-                  "text": "MODEL 100-A",
+                  "text": {
+                    "En": "MODEL 100-A",
+                    "Fr": "MODEL 100-A",
+                    "De": "MODEL 100-A",
+                    "Es": "MODEL 100-A"
+                  },
                   "x": 0,
                   "y": 15,
                   "size": 8
@@ -81,7 +101,12 @@
                 }
               ]
             },
-            "label_active": "Large Classic",
+            "label_active": {
+              "En": "Large Classic",
+              "Fr": "Large Classique",
+              "De": "Large Klassisch",
+              "Es": "Large Clásico"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -113,7 +138,12 @@
           },
           "Badge_2_Medium": {
             "type": "_NeedleVUMeter",
-            "label": "Medium Gold",
+            "label": {
+              "En": "Medium Gold",
+              "Fr": "Moyen Gold",
+              "De": "Mittel Gold",
+              "Es": "Medio Gold"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -142,14 +172,24 @@
               },
               "labels": [
                 {
-                  "text": "GOLD SERIES",
+                  "text": {
+                    "En": "GOLD SERIES",
+                    "Fr": "GOLD SERIES",
+                    "De": "GOLD SERIES",
+                    "Es": "GOLD SERIES"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 10,
                   "color": "#FFD700"
                 },
                 {
-                  "text": "AUTHENTIC",
+                  "text": {
+                    "En": "AUTHENTIC",
+                    "Fr": "AUTHENTIC",
+                    "De": "AUTHENTIC",
+                    "Es": "AUTHENTIC"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 7,
@@ -157,7 +197,12 @@
                 }
               ]
             },
-            "label_active": "Medium Gold",
+            "label_active": {
+              "En": "Medium Gold",
+              "Fr": "Moyen Gold",
+              "De": "Mittel Gold",
+              "Es": "Medio Gold"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -189,7 +234,12 @@
           },
           "Badge_3_Small": {
             "type": "_NeedleVUMeter",
-            "label": "Small Red",
+            "label": {
+              "En": "Small Red",
+              "Fr": "Small Red",
+              "De": "Small Red",
+              "Es": "Small Red"
+            },
             "geometry": {
               "width": 150,
               "height": 150
@@ -219,14 +269,24 @@
               },
               "labels": [
                 {
-                  "text": "MINI BADGE",
+                  "text": {
+                    "En": "MINI BADGE",
+                    "Fr": "MINI BADGE",
+                    "De": "MINI BADGE",
+                    "Es": "MINI BADGE"
+                  },
                   "x": 0,
                   "y": -80,
                   "size": 8,
                   "color": "red"
                 },
                 {
-                  "text": "v1.0",
+                  "text": {
+                    "En": "v1.0",
+                    "Fr": "v1.0",
+                    "De": "v1.0",
+                    "Es": "v1.0"
+                  },
                   "x": 0,
                   "y": 10,
                   "size": 6,
@@ -234,7 +294,12 @@
                 }
               ]
             },
-            "label_active": "Small Red",
+            "label_active": {
+              "En": "Small Red",
+              "Fr": "Small Red",
+              "De": "Small Red",
+              "Es": "Small Red"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -267,7 +332,12 @@
           },
           "Badge_4_Police_Blue": {
             "type": "_NeedleVUMeter",
-            "label": "Police Blue",
+            "label": {
+              "En": "Police Blue",
+              "Fr": "Police Blue",
+              "De": "Police Blue",
+              "Es": "Police Blue"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -294,14 +364,24 @@
               },
               "labels": [
                 {
-                  "text": "OFFICER VU",
+                  "text": {
+                    "En": "OFFICER VU",
+                    "Fr": "OFFICER VU",
+                    "De": "OFFICER VU",
+                    "Es": "OFFICER VU"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 10,
                   "color": "#C0C0C0"
                 },
                 {
-                  "text": "PRECINCT 5",
+                  "text": {
+                    "En": "PRECINCT 5",
+                    "Fr": "PRECINCT 5",
+                    "De": "PRECINCT 5",
+                    "Es": "PRECINCT 5"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 8,
@@ -309,7 +389,12 @@
                 }
               ]
             },
-            "label_active": "Police Blue",
+            "label_active": {
+              "En": "Police Blue",
+              "Fr": "Police Blue",
+              "De": "Police Blue",
+              "Es": "Police Blue"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -340,7 +425,12 @@
           },
           "Badge_5_Fire_Red": {
             "type": "_NeedleVUMeter",
-            "label": "Fire Red",
+            "label": {
+              "En": "Fire Red",
+              "Fr": "Fire Red",
+              "De": "Fire Red",
+              "Es": "Fire Red"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -367,14 +457,24 @@
               },
               "labels": [
                 {
-                  "text": "FIRE DEPT",
+                  "text": {
+                    "En": "FIRE DEPT",
+                    "Fr": "FIRE DEPT",
+                    "De": "FIRE DEPT",
+                    "Es": "FIRE DEPT"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 10,
                   "color": "#FFD700"
                 },
                 {
-                  "text": "ENGINE 9",
+                  "text": {
+                    "En": "ENGINE 9",
+                    "Fr": "ENGINE 9",
+                    "De": "ENGINE 9",
+                    "Es": "ENGINE 9"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 8,
@@ -382,7 +482,12 @@
                 }
               ]
             },
-            "label_active": "Fire Red",
+            "label_active": {
+              "En": "Fire Red",
+              "Fr": "Fire Red",
+              "De": "Fire Red",
+              "Es": "Fire Red"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -413,7 +518,12 @@
           },
           "Badge_6_Security_Grey": {
             "type": "_NeedleVUMeter",
-            "label": "Security Grey",
+            "label": {
+              "En": "Security Grey",
+              "Fr": "Security Grey",
+              "De": "Security Grey",
+              "Es": "Security Grey"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -440,14 +550,24 @@
               },
               "labels": [
                 {
-                  "text": "SECURITY",
+                  "text": {
+                    "En": "SECURITY",
+                    "Fr": "SECURITY",
+                    "De": "SECURITY",
+                    "Es": "SECURITY"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 10,
                   "color": "#696969"
                 },
                 {
-                  "text": "AUTHORIZED",
+                  "text": {
+                    "En": "AUTHORIZED",
+                    "Fr": "AUTHORIZED",
+                    "De": "AUTHORIZED",
+                    "Es": "AUTHORIZED"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 8,
@@ -455,7 +575,12 @@
                 }
               ]
             },
-            "label_active": "Security Grey",
+            "label_active": {
+              "En": "Security Grey",
+              "Fr": "Security Grey",
+              "De": "Security Grey",
+              "Es": "Security Grey"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -486,7 +611,12 @@
           },
           "Badge_7_Cyber_Punk": {
             "type": "_NeedleVUMeter",
-            "label": "Cyber Badge",
+            "label": {
+              "En": "Cyber Badge",
+              "Fr": "Cyber Badge",
+              "De": "Cyber Badge",
+              "Es": "Cyber Badge"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -513,14 +643,24 @@
               },
               "labels": [
                 {
-                  "text": "CYBER OPS",
+                  "text": {
+                    "En": "CYBER OPS",
+                    "Fr": "CYBER OPS",
+                    "De": "CYBER OPS",
+                    "Es": "CYBER OPS"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 10,
                   "color": "#00FF00"
                 },
                 {
-                  "text": "SYSTEM OK",
+                  "text": {
+                    "En": "SYSTEM OK",
+                    "Fr": "SYSTEM OK",
+                    "De": "SYSTEM OK",
+                    "Es": "SYSTEM OK"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 8,
@@ -528,7 +668,12 @@
                 }
               ]
             },
-            "label_active": "Cyber Badge",
+            "label_active": {
+              "En": "Cyber Badge",
+              "Fr": "Cyber Badge",
+              "De": "Cyber Badge",
+              "Es": "Cyber Badge"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -559,7 +704,12 @@
           },
           "Badge_8_Royal_Purple": {
             "type": "_NeedleVUMeter",
-            "label": "Royal Purple",
+            "label": {
+              "En": "Royal Purple",
+              "Fr": "Royal Purple",
+              "De": "Royal Purple",
+              "Es": "Royal Purple"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -586,14 +736,24 @@
               },
               "labels": [
                 {
-                  "text": "ROYAL GUARD",
+                  "text": {
+                    "En": "ROYAL GUARD",
+                    "Fr": "ROYAL GUARD",
+                    "De": "ROYAL GUARD",
+                    "Es": "ROYAL GUARD"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 10,
                   "color": "gold"
                 },
                 {
-                  "text": "ELITE",
+                  "text": {
+                    "En": "ELITE",
+                    "Fr": "ELITE",
+                    "De": "ELITE",
+                    "Es": "ELITE"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 8,
@@ -601,7 +761,12 @@
                 }
               ]
             },
-            "label_active": "Royal Purple",
+            "label_active": {
+              "En": "Royal Purple",
+              "Fr": "Royal Purple",
+              "De": "Royal Purple",
+              "Es": "Royal Purple"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -632,7 +797,12 @@
           },
           "Badge_9_Eco_Green": {
             "type": "_NeedleVUMeter",
-            "label": "Eco Green",
+            "label": {
+              "En": "Eco Green",
+              "Fr": "Eco Green",
+              "De": "Eco Green",
+              "Es": "Eco Green"
+            },
             "geometry": {
               "width": 220,
               "height": 220
@@ -659,14 +829,24 @@
               },
               "labels": [
                 {
-                  "text": "ECO MONITOR",
+                  "text": {
+                    "En": "ECO MONITOR",
+                    "Fr": "ECO MONITOR",
+                    "De": "ECO MONITOR",
+                    "Es": "ECO MONITOR"
+                  },
                   "x": 0,
                   "y": -110,
                   "size": 10,
                   "color": "#32CD32"
                 },
                 {
-                  "text": "RENEWABLE",
+                  "text": {
+                    "En": "RENEWABLE",
+                    "Fr": "RENEWABLE",
+                    "De": "RENEWABLE",
+                    "Es": "RENEWABLE"
+                  },
                   "x": 0,
                   "y": 12,
                   "size": 8,
@@ -674,7 +854,12 @@
                 }
               ]
             },
-            "label_active": "Eco Green",
+            "label_active": {
+              "En": "Eco Green",
+              "Fr": "Eco Green",
+              "De": "Eco Green",
+              "Es": "Eco Green"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",

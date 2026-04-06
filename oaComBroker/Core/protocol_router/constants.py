@@ -25,7 +25,7 @@
 # - Defines human-readable descriptions for forensic telemetry.
 # - Houses global debug gates and application constant proxies.
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaLogging.Methods.matrix_gate import is_debug_allowed
 
 # Proxy for globally loaded application settings (GUIDs, Base Topics, etc.)

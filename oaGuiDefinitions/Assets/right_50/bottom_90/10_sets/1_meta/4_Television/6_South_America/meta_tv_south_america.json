@@ -1,7 +1,12 @@
 {
   "System A 405 lines (Hong Kong) Asia VHF": {
     "name": "System A 405 lines (Hong Kong) Asia VHF",
-    "description": "System A 405 lines standard for Hong Kong, Asia (VHF)",
+    "description": {
+      "En": "System A 405 lines standard for Hong Kong, Asia (VHF)",
+      "Fr": "Système A 405 lines standard for Hong Kong, Asia (VHF)",
+      "De": "System A 405 lines standard for Hong Kong, Asia (VHF)",
+      "Es": "Sistema A 405 lines standard for Hong Kong, Asia (VHF)"
+    },
     "country": "Hong Kong",
     "region": "Asia",
     "type": "tv",
@@ -105,7 +110,12 @@
   },
   "System A 405 lines (Hong Kong) Asia VHF_1": {
     "name": "System A 405 lines (Hong Kong) Asia VHF",
-    "description": "System A 405 lines standard for Hong Kong, Asia (VHF)",
+    "description": {
+      "En": "System A 405 lines standard for Hong Kong, Asia (VHF)",
+      "Fr": "Système A 405 lines standard for Hong Kong, Asia (VHF)",
+      "De": "System A 405 lines standard for Hong Kong, Asia (VHF)",
+      "Es": "Sistema A 405 lines standard for Hong Kong, Asia (VHF)"
+    },
     "country": "Hong Kong",
     "region": "Asia",
     "type": "tv",
@@ -209,7 +219,12 @@
   },
   "System B 625 lines (Most countries in Asia) Asia VHF": {
     "name": "System B 625 lines (Most countries in Asia) Asia VHF",
-    "description": "System B 625 lines standard for Most countries in Asia, VHF",
+    "description": {
+      "En": "System B 625 lines standard for Most countries in Asia, VHF",
+      "Fr": "Système B 625 lines standard for Most countries in Asia, VHF",
+      "De": "System B 625 lines standard for Most countries in Asia, VHF",
+      "Es": "Sistema B 625 lines standard for Most countries in Asia, VHF"
+    },
     "country": "Most countries in Asia",
     "region": "Asia",
     "type": "tv",
@@ -342,7 +357,12 @@
   },
   "System D 625 lines (Original OIR) Eastern Europe, North Korea Asia VHF": {
     "name": "System D 625 lines (Original OIR) Eastern Europe, North Korea Asia VHF",
-    "description": "System D 625 lines (Original OIR) standard for Eastern Europe, North Korea, Asia (VHF)",
+    "description": {
+      "En": "System D 625 lines (Original OIR) standard for Eastern Europe, North Korea, Asia (VHF)",
+      "Fr": "Système D 625 lignes (OIR original) standard pour l'Europe de l'Est, Corée du Nord, Asie (VHF)",
+      "De": "System D 625 Zeilen (Original OIR) Standard für Osteuropa, Nordkorea, Asien (VHF)",
+      "Es": "Sistema D de 625 líneas (OIR original) estándar para Europa del Este, Corea del Norte, Asia (VHF)"
+    },
     "country": "Eastern Europe, North Korea",
     "region": "Asia",
     "type": "tv",
@@ -446,7 +466,12 @@
   },
   "System D 625 lines (Original OIR) Eastern Europe, North Korea Asia VHF_1": {
     "name": "System D 625 lines (Original OIR) Eastern Europe, North Korea Asia VHF",
-    "description": "System D 625 lines (Original OIR) standard for Eastern Europe, North Korea, Asia (VHF)",
+    "description": {
+      "En": "System D 625 lines (Original OIR) standard for Eastern Europe, North Korea, Asia (VHF)",
+      "Fr": "Système D 625 lignes (OIR original) standard pour l'Europe de l'Est, Corée du Nord, Asie (VHF)",
+      "De": "System D 625 Zeilen (Original OIR) Standard für Osteuropa, Nordkorea, Asien (VHF)",
+      "Es": "Sistema D de 625 líneas (OIR original) estándar para Europa del Este, Corea del Norte, Asia (VHF)"
+    },
     "country": "Eastern Europe, North Korea",
     "region": "Asia",
     "type": "tv",
@@ -550,7 +575,12 @@
   },
   "VHF (System M) Asia (South Korea, Taiwan, Myanmar, Philippines)": {
     "name": "VHF (System M) Asia (South Korea, Taiwan, Myanmar, Philippines)",
-    "description": "VHF (Band I & III) for South Korea, Taiwan, Myanmar, and the Philippines (System M 525 lines)",
+    "description": {
+      "En": "VHF (Band I & III) for South Korea, Taiwan, Myanmar, and the Philippines (System M 525 lines)",
+      "Fr": "VHF (Band I & III) for South Korea, Taiwan, Myanmar, and the Philippines (Système M 525 lines)",
+      "De": "VHF (Band I & III) for South Korea, Taiwan, Myanmar, and the Philippines (System M 525 lines)",
+      "Es": "VHF (Band I & III) for South Korea, Taiwan, Myanmar, and the Philippines (Sistema M 525 lines)"
+    },
     "country": "South Korea, Taiwan, Myanmar, Philippines",
     "region": "Asia",
     "type": "tv",
@@ -667,7 +697,12 @@
   },
   "System D 625 lines (Since 1965) Eastern Europe, North Korea Asia VHF": {
     "name": "System D 625 lines (Since 1965) Eastern Europe, North Korea Asia VHF",
-    "description": "System D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Asia (VHF)",
+    "description": {
+      "En": "System D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Asia (VHF)",
+      "Fr": "Système D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Asia (VHF)",
+      "De": "System D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Asia (VHF)",
+      "Es": "Sistema D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Asia (VHF)"
+    },
     "country": "Eastern Europe, North Korea",
     "region": "Asia",
     "type": "tv",
@@ -764,7 +799,12 @@
   },
   "System D 625 lines (Since 1965) Eastern Europe, North Korea Asia VHF_1": {
     "name": "System D 625 lines (Since 1965) Eastern Europe, North Korea Asia VHF",
-    "description": "System D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Asia (VHF)",
+    "description": {
+      "En": "System D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Asia (VHF)",
+      "Fr": "Système D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Asia (VHF)",
+      "De": "System D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Asia (VHF)",
+      "Es": "Sistema D 625 lines (Since 1965) standard for Eastern Europe, North Korea, Asia (VHF)"
+    },
     "country": "Eastern Europe, North Korea",
     "region": "Asia",
     "type": "tv",
@@ -861,7 +901,12 @@
   },
   "VHF (System J) Japan": {
     "name": "VHF (System J) Japan",
-    "description": "VHF (Band I & III) for Japan (System J)",
+    "description": {
+      "En": "VHF (Band I & III) for Japan (System J)",
+      "Fr": "VHF (Band I & III) for Japan (Système J)",
+      "De": "VHF (Band I & III) for Japan (System J)",
+      "Es": "VHF (Band I & III) for Japan (Sistema J)"
+    },
     "country": "Japan",
     "region": "Asia",
     "type": "tv",
@@ -970,7 +1015,12 @@
   },
   "UHF System M 525 lines (South Korea, Burma (Myanmar), Taiwan, Philippines) Asia UHF": {
     "name": "UHF System M 525 lines (South Korea, Burma (Myanmar), Taiwan, Philippines) Asia UHF",
-    "description": "UHF System M 525 lines standard for South Korea, Burma (Myanmar), Taiwan, Philippines, Asia (UHF)",
+    "description": {
+      "En": "UHF System M 525 lines standard for South Korea, Burma (Myanmar), Taiwan, Philippines, Asia (UHF)",
+      "Fr": "UHF Système M 525 lines standard for South Korea, Burma (Myanmar), Taiwan, Philippines, Asia (UHF)",
+      "De": "UHF System M 525 lines standard for South Korea, Burma (Myanmar), Taiwan, Philippines, Asia (UHF)",
+      "Es": "UHF Sistema M 525 lines standard for South Korea, Burma (Myanmar), Taiwan, Philippines, Asia (UHF)"
+    },
     "country": "South Korea, Burma (Myanmar), Taiwan, Philippines",
     "region": "Asia",
     "type": "tv",

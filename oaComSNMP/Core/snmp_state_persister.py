@@ -33,19 +33,19 @@ class SnmpStatePersister:
     This class is designed to be managed by a parent class (e.g., SNMPManager).
     """
 
-    def __init__(self, state_cache_manager, thread_lock: threading.RLock, notify_monitor_callback, run_bridge: bool, base_oid: str, oid_map_converter):
+    def __init__(self, state_provider, thread_lock: threading.RLock, notify_monitor_callback, run_bridge: bool, base_oid: str, oid_map_converter):
         """
         Initializes the state persister.
         
         Args:
-            state_cache_manager: Manager providing access to the state cache.
+            state_provider: Manager providing access to the reflected MQTT state.
             thread_lock: The RLock used by the calling manager for thread-safe access.
             notify_monitor_callback: Callback function to notify about SNMP activity.
             run_bridge: Flag indicating if the SNMP bridge is active.
             base_oid: The base OID for SNMP data.
             oid_map_converter: The converter instance providing the OID map.
         """
-        self.state_cache_manager = state_cache_manager
+        self.state_provider = state_provider
         self._state_lock = thread_lock # Use the provided lock for external state access
         self._notify_monitor = notify_monitor_callback
         self.run_bridge = run_bridge
@@ -85,25 +85,26 @@ class SnmpStatePersister:
         """The main loop for periodically saving SNMP state to a file."""
         while self._running:
             try:
-                if not self.state_cache_manager:
+                if not self.state_provider:
                     # Non-matrix log for critical misconfiguration
-                    snmp_logger.warning("SnmpStatePersister: State cache manager is not available. Skipping persistence.")
+                    snmp_logger.warning("SnmpStatePersister: State provider is not available. Skipping persistence.")
                     time.sleep(STATE_SYNC_INTERVAL)
                     continue
 
                 # Safely get OID map data for processing from the converter
                 oid_map_data = []
-                cache_snapshot = {}
+                state_snapshot = {}
 
                 # Accessing state and converter requires the lock
                 with self._state_lock: # Use the lock provided by the manager
-                    cache_snapshot = self.state_cache_manager.rust_cache.to_dict()
-                    if not cache_snapshot: # Skip if cache is empty
+                    # ⚡ REFLECTION: Get the MQTT state from the provider instead of the global cache
+                    state_snapshot = getattr(self.state_provider, "get_mqtt_state", lambda: {})()
+                    if not state_snapshot: # Skip if state is empty
                         time.sleep(STATE_SYNC_INTERVAL)
                         continue
 
                     # 2. ⚡ REFRESH: Rebuild the OID map from this specific snapshot
-                    self.oid_map_converter.build_oid_map(cache_snapshot=cache_snapshot)
+                    self.oid_map_converter.build_oid_map(state_snapshot=state_snapshot)
 
                     # 3. Extract the items for iteration outside the lock
                     oid_map_data = list(self.oid_map_converter.oid_map.items())
@@ -114,10 +115,11 @@ class SnmpStatePersister:
                 for oid, data in sorted_items:
                     topic = data['topic']
                     # Use the snapshot we took inside the lock for consistency
-                    payload = cache_snapshot.get(topic, {}) 
+                    payload = state_snapshot.get(topic, {}) 
  # Get payload for filtering if needed
 
                     # ⚡ ANTI-FEEDBACK SPEC: The Golden Rule for Transports
+                    # Payloads from ProtocolRouter already have these normalized fields
                     msg_type = payload.get("msg_type")
                     origin_source = payload.get("origin_source")
                     is_settled = payload.get("is_settled", False)

@@ -13,11 +13,21 @@
     "blocks": {
       "rig": {
         "type": "OcaBlock",
-        "description": "Analog Signal Generator",
+        "description": {
+          "En": "Analog Signal Generator",
+          "Fr": "Générateur de signal analogique",
+          "De": "Analoger Signalgenerator",
+          "Es": "Generador de señal analógica"
+        },
         "fields": {
           "Generator_Waveforms": {
             "type": "OcaBlock",
-            "description": "Select Waveform Shape",
+            "description": {
+              "En": "Select Waveform Shape",
+              "Fr": "Sélect. Waveform Shape",
+              "De": "Auswahl Waveform Shape",
+              "Es": "Selec. Waveform Shape"
+            },
             "fields": {
               "Set_Wave_Sine": {
                 "type": "OcaBlock",
@@ -104,7 +114,12 @@
           },
           "Generator_Parameters": {
             "type": "OcaBlock",
-            "description": "Set Signal Parameters",
+            "description": {
+              "En": "Set Signal Parameters",
+              "Fr": "Set Signal Parameters",
+              "De": "Set Signal Parameters",
+              "Es": "Set Signal Parameters"
+            },
             "fields": {
               "Set_Amplitude": {
                 "type": "OcaBlock",
@@ -137,7 +152,12 @@
                       "amp": {
                         "value": "1.0 V",
                         "type": "_Value",
-                        "description": "e.g., 1.0 V, 0 DBV"
+                        "description": {
+                          "En": "e.g., 1.0 V, 0 DBV",
+                          "Fr": "e.g., 1.0 V, 0 DBV",
+                          "De": "e.g., 1.0 V, 0 DBV",
+                          "Es": "e.g., 1.0 V, 0 DBV"
+                        }
                       }
                     }
                   }
@@ -174,7 +194,12 @@
                       "freq": {
                         "value": "1000 HZ",
                         "type": "_Value",
-                        "description": "Frequency in Hz"
+                        "description": {
+                          "En": "Frequency in Hz",
+                          "Fr": "Fréquence in Hz",
+                          "De": "Frequenz in Hz",
+                          "Es": "Frecuencia in Hz"
+                        }
                       }
                     }
                   }

@@ -25,10 +25,10 @@ The following patterns are excluded from functional analysis and context, as def
 - `.git/` (Version control)
 - `.vscode/` (IDE settings)
 - oaData*/ (All Open-Air Data directories)
-- oaDataAudits/
+- oaDataLogs/Audits/
 - oaDataCache/
 - oaDataLogs/
-- oaDataSNMP/
+- oaDataLogs/SNMP/
 - oaDataSplinks/
 - oaDataRunningFiles/
 - .pytest_cache/

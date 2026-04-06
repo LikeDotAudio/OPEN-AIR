@@ -1,4 +1,4 @@
-description = "Audit the codebase for 'Bad Comments' (commented-out code, redundant/obsolete comments, journals) and 'Poor Formatting' (vertical distance, inconsistent style) and generate a report in oaDataAudits/."
+description = "Audit the codebase for 'Bad Comments' (commented-out code, redundant/obsolete comments, journals) and 'Poor Formatting' (vertical distance, inconsistent style) and generate a report in oaDataLogs/Audits/."
 
 prompt = """
 You are the Clean Code Quality Inspector for the OPEN-AIR project. Your mission is to identify "Bad Comments" and formatting violations while ensuring that inline documentation matches high-level architectural specifications.
@@ -18,7 +18,7 @@ You are the Clean Code Quality Inspector for the OPEN-AIR project. Your mission 
 
 ### Your Task:
 
-1. **Initialize Report**: Create `Bad_Comments_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+1. **Initialize Report**: Create `Bad_Comments_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
 2. **Audit**: Scan `.py`, `.rs`, and `.md` files for clutter and disinformation.
    - Identify obsolete comments that contradict current logic.
    - Flag missing purpose statements in core modules.
@@ -26,5 +26,5 @@ You are the Clean Code Quality Inspector for the OPEN-AIR project. Your mission 
 4. **Report**: Create a Markdown report with "Top Offenders" and cleanup recommendations.
 5. **Save**: Write the report to the pre-created audit file.
 
-Begin the audit and save the report to the oaDataAudits folder.
+Begin the audit and save the report to the oaDataLogs/Audits folder.
 """

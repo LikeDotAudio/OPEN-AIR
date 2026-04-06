@@ -1,4 +1,4 @@
-description = "Audit the codebase for 'Bad Concurrency/Threading' (unprotected shared data, large critical sections, mixed threading/business logic) and generate a report in oaDataAudits/."
+description = "Audit the codebase for 'Bad Concurrency/Threading' (unprotected shared data, large critical sections, mixed threading/business logic) and generate a report in oaDataLogs/Audits/."
 
 prompt = """
 You are the Concurrency Expert for the OPEN-AIR project. Your mission is to identify "Threading Risks" and "Synchronization Inefficiencies" that lead to sporadic, hard-to-repeat bugs and performance bottlenecks.
@@ -12,7 +12,7 @@ You are the Concurrency Expert for the OPEN-AIR project. Your mission is to iden
 
 ### Your Task:
 
-1. **Initialize Report**: Before scanning, create an empty file named `Bad_Threading_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+1. **Initialize Report**: Before scanning, create an empty file named `Bad_Threading_Audit_YYYYMMDD.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
 2. **Audit**: Scan the codebase (focusing on `managers/` and `workers/`) for threading violations.
    - Use `grep_search` to find imports of `threading`, `multiprocessing`, `asyncio`, and `queue`.
    - Identify classes that mix business logic with thread orchestration.
@@ -27,5 +27,5 @@ The report should include:
 - A list of "Top Offenders" (classes with mixed responsibilities, oversized locks, or high shared-data risk).
 - Specific refactoring recommendations (e.g., "Use a thread-safe Queue instead of a locked list").
 
-Begin the audit and save the report to the oaDataAudits folder.
+Begin the audit and save the report to the oaDataLogs/Audits folder.
 """

@@ -13,23 +13,43 @@
     "blocks": {
       "media_and_specialty": {
         "type": "OcaBlock",
-        "description": "Media & Specialty Controls (3-Column Grid)",
+        "description": {
+          "En": "Media & Specialty Controls (3-Column Grid)",
+          "Fr": "Media & Specialty Controls (3-Column Grid)",
+          "De": "Media & Specialty Controls (3-Column Grid)",
+          "Es": "Media & Specialty Controls (3-Column Grid)"
+        },
         "layout_columns": 1,
         "fields": {
           "buttons_panel": {
             "type": "OcaBlock",
-            "description": "Trapezoid Buttons",
+            "description": {
+              "En": "Trapezoid Buttons",
+              "Fr": "Trapezoid Buttons",
+              "De": "Trapezoid Buttons",
+              "Es": "Trapezoid Buttons"
+            },
             "fields": {
               "trap_button_red": {
                 "type": "_TrapezoidButton",
-                "label_active": "MOMENTARY",
+                "label_active": {
+                  "En": "MOMENTARY",
+                  "Fr": "MOMENTARY",
+                  "De": "MOMENTARY",
+                  "Es": "MOMENTARY"
+                },
                 "color": "#8B0000",
                 "led_color": "#FF4500",
                 "latching": false
               },
               "trap_button_green": {
                 "type": "_TrapezoidButton",
-                "label_active": "LATCHING",
+                "label_active": {
+                  "En": "LATCHING",
+                  "Fr": "LATCHING",
+                  "De": "LATCHING",
+                  "Es": "LATCHING"
+                },
                 "color": "#006400",
                 "led_color": "#00FF00",
                 "latching": true,
@@ -37,14 +57,24 @@
               },
               "trap_button_white_blue": {
                 "type": "_TrapezoidButton",
-                "label_active": "White/Blue",
+                "label_active": {
+                  "En": "White/Blue",
+                  "Fr": "White/Blue",
+                  "De": "White/Blue",
+                  "Es": "White/Blue"
+                },
                 "color": "#E5E4E2",
                 "led_color": "#0000FF",
                 "latching": true
               },
               "trap_button_large": {
                 "type": "_TrapezoidButton",
-                "label_active": "Large",
+                "label_active": {
+                  "En": "Large",
+                  "Fr": "Large",
+                  "De": "Large",
+                  "Es": "Large"
+                },
                 "color": "#4B0082",
                 "led_color": "#9370DB",
                 "latching": true,
@@ -53,7 +83,12 @@
               },
               "trap_button_small": {
                 "type": "_TrapezoidButton",
-                "label_active": "Small",
+                "label_active": {
+                  "En": "Small",
+                  "Fr": "Small",
+                  "De": "Small",
+                  "Es": "Small"
+                },
                 "color": "#556B2F",
                 "led_color": "#ADFF2F",
                 "latching": true,
@@ -62,12 +97,22 @@
               },
               "momentary_grid": {
                 "type": "OcaBlock",
-                "description": "4x4 Momentary Grid",
+                "description": {
+                  "En": "4x4 Momentary Grid",
+                  "Fr": "4x4 Momentary Grid",
+                  "De": "4x4 Momentary Grid",
+                  "Es": "4x4 Momentary Grid"
+                },
                 "layout_columns": 4,
                 "fields": {
                   "btn_m_1": {
                     "type": "_TrapezoidButton",
-                    "label_active": "1",
+                    "label_active": {
+                      "En": "1",
+                      "Fr": "1",
+                      "De": "1",
+                      "Es": "1"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -76,7 +121,12 @@
                   },
                   "btn_m_2": {
                     "type": "_TrapezoidButton",
-                    "label_active": "2",
+                    "label_active": {
+                      "En": "2",
+                      "Fr": "2",
+                      "De": "2",
+                      "Es": "2"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -85,7 +135,12 @@
                   },
                   "btn_m_3": {
                     "type": "_TrapezoidButton",
-                    "label_active": "3",
+                    "label_active": {
+                      "En": "3",
+                      "Fr": "3",
+                      "De": "3",
+                      "Es": "3"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -94,7 +149,12 @@
                   },
                   "btn_m_4": {
                     "type": "_TrapezoidButton",
-                    "label_active": "4",
+                    "label_active": {
+                      "En": "4",
+                      "Fr": "4",
+                      "De": "4",
+                      "Es": "4"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -103,7 +163,12 @@
                   },
                   "btn_m_5": {
                     "type": "_TrapezoidButton",
-                    "label_active": "5",
+                    "label_active": {
+                      "En": "5",
+                      "Fr": "5",
+                      "De": "5",
+                      "Es": "5"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -112,7 +177,12 @@
                   },
                   "btn_m_6": {
                     "type": "_TrapezoidButton",
-                    "label_active": "6",
+                    "label_active": {
+                      "En": "6",
+                      "Fr": "6",
+                      "De": "6",
+                      "Es": "6"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -121,7 +191,12 @@
                   },
                   "btn_m_7": {
                     "type": "_TrapezoidButton",
-                    "label_active": "7",
+                    "label_active": {
+                      "En": "7",
+                      "Fr": "7",
+                      "De": "7",
+                      "Es": "7"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -130,7 +205,12 @@
                   },
                   "btn_m_8": {
                     "type": "_TrapezoidButton",
-                    "label_active": "8",
+                    "label_active": {
+                      "En": "8",
+                      "Fr": "8",
+                      "De": "8",
+                      "Es": "8"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -139,7 +219,12 @@
                   },
                   "btn_m_9": {
                     "type": "_TrapezoidButton",
-                    "label_active": "9",
+                    "label_active": {
+                      "En": "9",
+                      "Fr": "9",
+                      "De": "9",
+                      "Es": "9"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -148,7 +233,12 @@
                   },
                   "btn_m_10": {
                     "type": "_TrapezoidButton",
-                    "label_active": "10",
+                    "label_active": {
+                      "En": "10",
+                      "Fr": "10",
+                      "De": "10",
+                      "Es": "10"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -157,7 +247,12 @@
                   },
                   "btn_m_11": {
                     "type": "_TrapezoidButton",
-                    "label_active": "11",
+                    "label_active": {
+                      "En": "11",
+                      "Fr": "11",
+                      "De": "11",
+                      "Es": "11"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -166,7 +261,12 @@
                   },
                   "btn_m_12": {
                     "type": "_TrapezoidButton",
-                    "label_active": "12",
+                    "label_active": {
+                      "En": "12",
+                      "Fr": "12",
+                      "De": "12",
+                      "Es": "12"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -175,7 +275,12 @@
                   },
                   "btn_m_13": {
                     "type": "_TrapezoidButton",
-                    "label_active": "13",
+                    "label_active": {
+                      "En": "13",
+                      "Fr": "13",
+                      "De": "13",
+                      "Es": "13"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -184,7 +289,12 @@
                   },
                   "btn_m_14": {
                     "type": "_TrapezoidButton",
-                    "label_active": "14",
+                    "label_active": {
+                      "En": "14",
+                      "Fr": "14",
+                      "De": "14",
+                      "Es": "14"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -193,7 +303,12 @@
                   },
                   "btn_m_15": {
                     "type": "_TrapezoidButton",
-                    "label_active": "15",
+                    "label_active": {
+                      "En": "15",
+                      "Fr": "15",
+                      "De": "15",
+                      "Es": "15"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -202,7 +317,12 @@
                   },
                   "btn_m_16": {
                     "type": "_TrapezoidButton",
-                    "label_active": "16",
+                    "label_active": {
+                      "En": "16",
+                      "Fr": "16",
+                      "De": "16",
+                      "Es": "16"
+                    },
                     "color": "#1A1A1A",
                     "led_color": "#FF0000",
                     "latching": false,
@@ -213,12 +333,22 @@
               },
               "latching_grid_red": {
                 "type": "OcaBlock",
-                "description": "4x4 Latching Grid (Red)",
+                "description": {
+                  "En": "4x4 Latching Grid (Red)",
+                  "Fr": "4x4 Latching Grid (Red)",
+                  "De": "4x4 Latching Grid (Red)",
+                  "Es": "4x4 Latching Grid (Red)"
+                },
                 "layout_columns": 4,
                 "fields": {
                   "btn_l_1": {
                     "type": "_TrapezoidButton",
-                    "label_active": "1",
+                    "label_active": {
+                      "En": "1",
+                      "Fr": "1",
+                      "De": "1",
+                      "Es": "1"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -227,7 +357,12 @@
                   },
                   "btn_l_2": {
                     "type": "_TrapezoidButton",
-                    "label_active": "2",
+                    "label_active": {
+                      "En": "2",
+                      "Fr": "2",
+                      "De": "2",
+                      "Es": "2"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -236,7 +371,12 @@
                   },
                   "btn_l_3": {
                     "type": "_TrapezoidButton",
-                    "label_active": "3",
+                    "label_active": {
+                      "En": "3",
+                      "Fr": "3",
+                      "De": "3",
+                      "Es": "3"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -245,7 +385,12 @@
                   },
                   "btn_l_4": {
                     "type": "_TrapezoidButton",
-                    "label_active": "4",
+                    "label_active": {
+                      "En": "4",
+                      "Fr": "4",
+                      "De": "4",
+                      "Es": "4"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -254,7 +399,12 @@
                   },
                   "btn_l_5": {
                     "type": "_TrapezoidButton",
-                    "label_active": "5",
+                    "label_active": {
+                      "En": "5",
+                      "Fr": "5",
+                      "De": "5",
+                      "Es": "5"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -263,7 +413,12 @@
                   },
                   "btn_l_6": {
                     "type": "_TrapezoidButton",
-                    "label_active": "6",
+                    "label_active": {
+                      "En": "6",
+                      "Fr": "6",
+                      "De": "6",
+                      "Es": "6"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -272,7 +427,12 @@
                   },
                   "btn_l_7": {
                     "type": "_TrapezoidButton",
-                    "label_active": "7",
+                    "label_active": {
+                      "En": "7",
+                      "Fr": "7",
+                      "De": "7",
+                      "Es": "7"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -281,7 +441,12 @@
                   },
                   "btn_l_8": {
                     "type": "_TrapezoidButton",
-                    "label_active": "8",
+                    "label_active": {
+                      "En": "8",
+                      "Fr": "8",
+                      "De": "8",
+                      "Es": "8"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -290,7 +455,12 @@
                   },
                   "btn_l_9": {
                     "type": "_TrapezoidButton",
-                    "label_active": "9",
+                    "label_active": {
+                      "En": "9",
+                      "Fr": "9",
+                      "De": "9",
+                      "Es": "9"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -299,7 +469,12 @@
                   },
                   "btn_l_10": {
                     "type": "_TrapezoidButton",
-                    "label_active": "10",
+                    "label_active": {
+                      "En": "10",
+                      "Fr": "10",
+                      "De": "10",
+                      "Es": "10"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -308,7 +483,12 @@
                   },
                   "btn_l_11": {
                     "type": "_TrapezoidButton",
-                    "label_active": "11",
+                    "label_active": {
+                      "En": "11",
+                      "Fr": "11",
+                      "De": "11",
+                      "Es": "11"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -317,7 +497,12 @@
                   },
                   "btn_l_12": {
                     "type": "_TrapezoidButton",
-                    "label_active": "12",
+                    "label_active": {
+                      "En": "12",
+                      "Fr": "12",
+                      "De": "12",
+                      "Es": "12"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -326,7 +511,12 @@
                   },
                   "btn_l_13": {
                     "type": "_TrapezoidButton",
-                    "label_active": "13",
+                    "label_active": {
+                      "En": "13",
+                      "Fr": "13",
+                      "De": "13",
+                      "Es": "13"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -335,7 +525,12 @@
                   },
                   "btn_l_14": {
                     "type": "_TrapezoidButton",
-                    "label_active": "14",
+                    "label_active": {
+                      "En": "14",
+                      "Fr": "14",
+                      "De": "14",
+                      "Es": "14"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -344,7 +539,12 @@
                   },
                   "btn_l_15": {
                     "type": "_TrapezoidButton",
-                    "label_active": "15",
+                    "label_active": {
+                      "En": "15",
+                      "Fr": "15",
+                      "De": "15",
+                      "Es": "15"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -353,7 +553,12 @@
                   },
                   "btn_l_16": {
                     "type": "_TrapezoidButton",
-                    "label_active": "16",
+                    "label_active": {
+                      "En": "16",
+                      "Fr": "16",
+                      "De": "16",
+                      "Es": "16"
+                    },
                     "color": "#8B0000",
                     "led_color": "#000000",
                     "latching": true,
@@ -364,7 +569,12 @@
               },
               "toggler_grid_radio": {
                 "type": "_TrapezoidButtonToggler",
-                "label_active": "4x4 Radio Grid",
+                "label_active": {
+                  "En": "4x4 Radio Grid",
+                  "Fr": "4x4 Radio Grid",
+                  "De": "4x4 Radio Grid",
+                  "Es": "4x4 Radio Grid"
+                },
                 "layout_columns": 4,
                 "value_default": "btn_t_1",
                 "color": "#00008B",
@@ -373,52 +583,132 @@
                 "height": 30,
                 "options": {
                   "btn_t_1": {
-                    "label_active": "1"
+                    "label_active": {
+                      "En": "1",
+                      "Fr": "1",
+                      "De": "1",
+                      "Es": "1"
+                    }
                   },
                   "btn_t_2": {
-                    "label_active": "2"
+                    "label_active": {
+                      "En": "2",
+                      "Fr": "2",
+                      "De": "2",
+                      "Es": "2"
+                    }
                   },
                   "btn_t_3": {
-                    "label_active": "3"
+                    "label_active": {
+                      "En": "3",
+                      "Fr": "3",
+                      "De": "3",
+                      "Es": "3"
+                    }
                   },
                   "btn_t_4": {
-                    "label_active": "4"
+                    "label_active": {
+                      "En": "4",
+                      "Fr": "4",
+                      "De": "4",
+                      "Es": "4"
+                    }
                   },
                   "btn_t_5": {
-                    "label_active": "5"
+                    "label_active": {
+                      "En": "5",
+                      "Fr": "5",
+                      "De": "5",
+                      "Es": "5"
+                    }
                   },
                   "btn_t_6": {
-                    "label_active": "6"
+                    "label_active": {
+                      "En": "6",
+                      "Fr": "6",
+                      "De": "6",
+                      "Es": "6"
+                    }
                   },
                   "btn_t_7": {
-                    "label_active": "7"
+                    "label_active": {
+                      "En": "7",
+                      "Fr": "7",
+                      "De": "7",
+                      "Es": "7"
+                    }
                   },
                   "btn_t_8": {
-                    "label_active": "8"
+                    "label_active": {
+                      "En": "8",
+                      "Fr": "8",
+                      "De": "8",
+                      "Es": "8"
+                    }
                   },
                   "btn_t_9": {
-                    "label_active": "9"
+                    "label_active": {
+                      "En": "9",
+                      "Fr": "9",
+                      "De": "9",
+                      "Es": "9"
+                    }
                   },
                   "btn_t_10": {
-                    "label_active": "10"
+                    "label_active": {
+                      "En": "10",
+                      "Fr": "10",
+                      "De": "10",
+                      "Es": "10"
+                    }
                   },
                   "btn_t_11": {
-                    "label_active": "11"
+                    "label_active": {
+                      "En": "11",
+                      "Fr": "11",
+                      "De": "11",
+                      "Es": "11"
+                    }
                   },
                   "btn_t_12": {
-                    "label_active": "12"
+                    "label_active": {
+                      "En": "12",
+                      "Fr": "12",
+                      "De": "12",
+                      "Es": "12"
+                    }
                   },
                   "btn_t_13": {
-                    "label_active": "13"
+                    "label_active": {
+                      "En": "13",
+                      "Fr": "13",
+                      "De": "13",
+                      "Es": "13"
+                    }
                   },
                   "btn_t_14": {
-                    "label_active": "14"
+                    "label_active": {
+                      "En": "14",
+                      "Fr": "14",
+                      "De": "14",
+                      "Es": "14"
+                    }
                   },
                   "btn_t_15": {
-                    "label_active": "15"
+                    "label_active": {
+                      "En": "15",
+                      "Fr": "15",
+                      "De": "15",
+                      "Es": "15"
+                    }
                   },
                   "btn_t_16": {
-                    "label_active": "16"
+                    "label_active": {
+                      "En": "16",
+                      "Fr": "16",
+                      "De": "16",
+                      "Es": "16"
+                    }
                   }
                 }
               }

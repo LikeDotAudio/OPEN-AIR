@@ -13,11 +13,21 @@
     "blocks": {
       "rig": {
         "type": "OcaBlock",
-        "description": "APPLy Subsystem",
+        "description": {
+          "En": "APPLy Subsystem",
+          "Fr": "Appliquer le sous-système",
+          "De": "Subsystem anwenden",
+          "Es": "Aplicar subsistema"
+        },
         "fields": {
           "Quick_Setup_Apply": {
             "type": "OcaBlock",
-            "description": "APPLy Macro Commands",
+            "description": {
+              "En": "APPLy Macro Commands",
+              "Fr": "Appliquer les commandes macro",
+              "De": "Makrobefehle anwenden",
+              "Es": "Aplicar comandos macro"
+            },
             "fields": {
               "Apply_Sine": {
                 "type": "OcaBlock",
@@ -50,22 +60,47 @@
                       "freq": {
                         "value": "1000",
                         "type": "_GuiValue",
-                        "label": "Frequency",
+                        "label": {
+                          "En": "Frequency",
+                          "Fr": "Fréquence",
+                          "De": "Frequenz",
+                          "Es": "Frecuencia"
+                        },
                         "units": "Hz"
                       },
                       "amp": {
                         "value": "1.0",
                         "type": "_GuiValue",
-                        "label": "Amplitude",
+                        "label": {
+                          "En": "Amplitude",
+                          "Fr": "Amplitude",
+                          "De": "Amplitude",
+                          "Es": "Amplitud"
+                        },
                         "units": "Vpp",
-                        "description": "Amplitude in Vpp"
+                        "description": {
+                          "En": "Amplitude in Vpp",
+                          "Fr": "Amplitude en Vpp",
+                          "De": "Amplitude in Vss",
+                          "Es": "Amplitud in Vpp"
+                        }
                       },
                       "offset": {
                         "value": "0.0",
                         "type": "_GuiValue",
-                        "label": "Offset",
+                        "label": {
+                          "En": "Offset",
+                          "Fr": "Décalage",
+                          "De": "Versatz",
+                          "Es": "Compensación"
+                        },
                         "units": "V",
-                        "description": "Offset in Volts"
+                        "description": {
+                          "En": "Offset in Volts",
+                          "Fr": "Décalage in Volts",
+                          "De": "Versatz in Volts",
+                          "Es": "Compensación in Volts"
+                        }
                       }
                     }
                   }
@@ -102,19 +137,34 @@
                       "freq": {
                         "value": "1000",
                         "type": "_GuiValue",
-                        "label": "Frequency",
+                        "label": {
+                          "En": "Frequency",
+                          "Fr": "Fréquence",
+                          "De": "Frequenz",
+                          "Es": "Frecuencia"
+                        },
                         "units": "Hz"
                       },
                       "amp": {
                         "value": "1.0",
                         "type": "_GuiValue",
-                        "label": "Amplitude",
+                        "label": {
+                          "En": "Amplitude",
+                          "Fr": "Amplitude",
+                          "De": "Amplitude",
+                          "Es": "Amplitud"
+                        },
                         "units": "Vpp"
                       },
                       "offset": {
                         "value": "0.0",
                         "type": "_GuiValue",
-                        "label": "Offset",
+                        "label": {
+                          "En": "Offset",
+                          "Fr": "Décalage",
+                          "De": "Versatz",
+                          "Es": "Compensación"
+                        },
                         "units": "V"
                       }
                     }
@@ -152,19 +202,34 @@
                       "freq": {
                         "value": "1000",
                         "type": "_GuiValue",
-                        "label": "Frequency",
+                        "label": {
+                          "En": "Frequency",
+                          "Fr": "Fréquence",
+                          "De": "Frequenz",
+                          "Es": "Frecuencia"
+                        },
                         "units": "Hz"
                       },
                       "amp": {
                         "value": "1.0",
                         "type": "_GuiValue",
-                        "label": "Amplitude",
+                        "label": {
+                          "En": "Amplitude",
+                          "Fr": "Amplitude",
+                          "De": "Amplitude",
+                          "Es": "Amplitud"
+                        },
                         "units": "Vpp"
                       },
                       "offset": {
                         "value": "0.0",
                         "type": "_GuiValue",
-                        "label": "Offset",
+                        "label": {
+                          "En": "Offset",
+                          "Fr": "Décalage",
+                          "De": "Versatz",
+                          "Es": "Compensación"
+                        },
                         "units": "V"
                       }
                     }
@@ -177,7 +242,12 @@
       },
       "nab": {
         "type": "OcaBlock",
-        "description": "APPLy Readbacks",
+        "description": {
+          "En": "APPLy Readbacks",
+          "Fr": "Lectures APPLY",
+          "De": "APPLY-Rücklesewerte",
+          "Es": "Lecturas APPLY"
+        },
         "fields": {
           "Get_Apply_String": {
             "type": "OcaBlock",
@@ -210,7 +280,12 @@
                   "config_string": {
                     "value": "\"SIN 1000, 3.0, 0.0\"",
                     "type": "_GuiValue",
-                    "label": "Config String",
+                    "label": {
+                      "En": "Config String",
+                      "Fr": "Config String",
+                      "De": "Config String",
+                      "Es": "Config String"
+                    },
                     "units": ""
                   }
                 }

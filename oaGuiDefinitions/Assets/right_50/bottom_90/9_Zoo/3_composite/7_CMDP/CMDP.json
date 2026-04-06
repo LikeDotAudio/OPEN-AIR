@@ -13,7 +13,12 @@
     "blocks": {
       "mdp_demo": {
         "type": "OcaBlock",
-        "description": "Composite Motion Draggable Potentiometer Demo",
+        "description": {
+          "En": "Composite Motion Draggable Potentiometer Demo",
+          "Fr": "Composite Motion Draggable Potentiometer Démo",
+          "De": "Composite Motion Draggable Potentiometer Demo",
+          "Es": "Composite Motion Draggable Potentiometer Demo"
+        },
         "show_label": false,
         "layout": {
           "sticky": "nsew",
@@ -22,7 +27,12 @@
         "fields": {
           "cmdp_1": {
             "type": "_CMDP",
-            "label_active": "CMDP 1",
+            "label_active": {
+              "En": "CMDP 1",
+              "Fr": "CMDP 1",
+              "De": "CMDP 1",
+              "Es": "CMDP 1"
+            },
             "path": "audio/cmdp/1",
             "layout": {
               "sticky": "nsew",

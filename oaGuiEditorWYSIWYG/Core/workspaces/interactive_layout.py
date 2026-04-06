@@ -27,18 +27,19 @@ class InteractiveLayout(tk.Frame):
         super().__init__(parent, bg="#1a1a1a", *args, **kwargs)
         matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", "InteractiveLayout: Initializing workspace...", "DEBUG")
         
-        # Display Toggles
-        self.show_structure = tk.BooleanVar(value=True)
-        self.show_blocks = tk.BooleanVar(value=True)
-        self.show_columns = tk.BooleanVar(value=True)
-        self.show_sizing = tk.BooleanVar(value=True)
-        self.show_sticky = tk.BooleanVar(value=True)
-        self.show_alignment = tk.BooleanVar(value=True)
-        self.show_colors = tk.BooleanVar(value=True)
+        # Display Toggles - Defaulting all to False per user request
+        self.show_structure = tk.BooleanVar(value=False)
+        self.show_blocks = tk.BooleanVar(value=False)
+        self.show_columns = tk.BooleanVar(value=False)
+        self.show_sizing = tk.BooleanVar(value=False)
+        self.show_sticky = tk.BooleanVar(value=False)
+        self.show_alignment = tk.BooleanVar(value=False)
+        self.show_colors = tk.BooleanVar(value=False)
         
-        self.render_tier_var = tk.StringVar(value="High-Res") # Default value
-        self.auto_rebuild_var = tk.BooleanVar(value=True) # Default to auto-rebuild
-        self.show_background_var = tk.BooleanVar(value=True) # Toggle for background visibility
+        self.render_tier_var = tk.StringVar(value="Fast") # Default value to Fast per user request
+        self.auto_rebuild_var = tk.BooleanVar(value=False) # Default to manual rebuild per user request
+        self.show_background_var = tk.BooleanVar(value=False) # Toggle for background visibility - Default Off
+        self.superficial_pad_var = tk.IntVar(value=0) # Superficial padding for editor spacing
         
         self.focused_path = None
         self.pending_changes = 0
@@ -146,6 +147,15 @@ class InteractiveLayout(tk.Frame):
         self.auto_rebuild_cb = ttk.Checkbutton(header, text="Auto-Rebuild", variable=self.auto_rebuild_var, command=self._toggle_auto_rebuild, onvalue=True, offvalue=False)
         self.auto_rebuild_cb.pack(side="left", padx=10)
 
+        # --- New PAD Control ---
+        pad_frame = tk.Frame(header, bg="#333333")
+        pad_frame.pack(side="left", padx=10)
+        tk.Label(pad_frame, text="PAD:", bg="#333333", fg="#aaaaaa", font=("Arial", 8, "bold")).pack(side="left", padx=2)
+        self.pad_spin = tk.Spinbox(pad_frame, from_=0, to=10, width=3, textvariable=self.superficial_pad_var, 
+                                   command=self._manual_rebuild, bg="#222222", fg="#00ff00", bd=0)
+        self.pad_spin.pack(side="left", padx=2)
+        self.pad_spin.bind("<Return>", lambda e: self._manual_rebuild())
+
         # --- New Background Visibility Toggle ---
         self.background_visibility_cb = ttk.Checkbutton(header, text="Background", variable=self.show_background_var, command=self._toggle_background_visibility, onvalue=True, offvalue=False)
         self.background_visibility_cb.pack(side="left", padx=10)
@@ -201,7 +211,11 @@ class InteractiveLayout(tk.Frame):
         if not self.winfo_exists() or not hasattr(self, 'render_area'): return
         if json_data is None: json_data = state_manager.get_state()
         
-        self.preview_builder = self.preview_engine.refresh(json_data)
+        # Determine internal tier
+        render_tier_map = {"High-Res": "high_res", "Fast": "fast", "Ghost": "ghost"}
+        internal_tier = render_tier_map.get(self.render_tier_var.get(), "fast")
+
+        self.preview_builder = self.preview_engine.refresh(json_data, render_tier=internal_tier, superficial_pad=self.superficial_pad_var.get())
         # Raise the event blocker canvas above the newly rendered preview_builder
         if self.overlay_mgr.event_blocker_canvas:
             self.tk.call('raise', self.overlay_mgr.event_blocker_canvas._w)

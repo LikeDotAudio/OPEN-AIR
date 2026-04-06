@@ -11,11 +11,12 @@ from loguru import logger
 
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGuiFramework.Methods.i18n_utils import get_text
 from oaGuiManager.Core.factory.widget_registry import WidgetRegistry
 
 # --- EXTRACTED CORE MODULES ---
@@ -110,7 +111,7 @@ class BuilderButtonTrapezoidCreator(TransparencyMixin):
 
     def make_button_trapezoid(self, parent_widget, config_data, context=None, **kwargs):
         """Creates a trapezoidal button widget."""
-        label = config_data.get("label_active") or config_data.get("label", "")
+        label = get_text(get_text(config_data.get('label_active'))) or get_text(get_text(config_data.get('label')), "")
         button_text = config_data.get("button_text", "")
         if button_text: config_data["button_text"] = button_text[:3]
         

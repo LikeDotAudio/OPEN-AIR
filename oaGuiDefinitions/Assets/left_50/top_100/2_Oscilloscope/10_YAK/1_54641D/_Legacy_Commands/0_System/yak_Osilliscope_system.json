@@ -13,11 +13,21 @@
     "blocks": {
       "nab": {
         "type": "OcaBlock",
-        "description": "Oscilloscope Measurements & Status",
+        "description": {
+          "En": "Oscilloscope Measurements & Status",
+          "Fr": "Oscilloscope Mesurerments & Statut",
+          "De": "Oszilloskop Messenments & Status",
+          "Es": "Osciloscopio Medidaments & Estado"
+        },
         "fields": {
           "System_Health": {
             "type": "OcaBlock",
-            "description": "Errors and ID",
+            "description": {
+              "En": "Errors and ID",
+              "Fr": "Erreurs and ID",
+              "De": "Fehlers and ID",
+              "Es": "Errors and ID"
+            },
             "fields": {
               "Read_IDN": {
                 "type": "OcaBlock",
@@ -50,7 +60,12 @@
                       "idn_string": {
                         "value": "Device ID",
                         "type": "_GuiValue",
-                        "label": "ID String",
+                        "label": {
+                          "En": "ID String",
+                          "Fr": "Chaîne ID",
+                          "De": "ID-String",
+                          "Es": "Cadena de ID"
+                        },
                         "units": ""
                       }
                     }
@@ -88,7 +103,12 @@
                       "error_msg": {
                         "value": "Error Message",
                         "type": "_GuiValue",
-                        "label": "Error Message",
+                        "label": {
+                          "En": "Error Message",
+                          "Fr": "Erreur Message",
+                          "De": "Fehler Message",
+                          "Es": "Error Message"
+                        },
                         "units": ""
                       }
                     }
@@ -101,14 +121,24 @@
       },
       "Do": {
         "type": "OcaBlock",
-        "description": "Actions and Toggles",
+        "description": {
+          "En": "Actions and Toggles",
+          "Fr": "Actions et bascules",
+          "De": "Aktionen und Umschalter",
+          "Es": "Acciones y conmutadores"
+        },
         "fields": {
           "Run_Control": {
             "type": "OcaBlock",
             "fields": {
               "Do_Run": {
                 "type": "_GuiActuator",
-                "label_inactive": "RUN",
+                "label_inactive": {
+                  "En": "RUN",
+                  "Fr": "EXEC",
+                  "De": "AUSFÜHREN",
+                  "Es": "EJEC"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -129,7 +159,12 @@
               },
               "Do_Stop": {
                 "type": "_GuiActuator",
-                "label_inactive": "STOP",
+                "label_inactive": {
+                  "En": "STOP",
+                  "Fr": "STOP",
+                  "De": "STOP",
+                  "Es": "STOP"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -150,7 +185,12 @@
               },
               "Do_Single": {
                 "type": "_GuiActuator",
-                "label_inactive": "SINGLE",
+                "label_inactive": {
+                  "En": "SINGLE",
+                  "Fr": "SINGLE",
+                  "De": "SINGLE",
+                  "Es": "SINGLE"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -171,7 +211,12 @@
               },
               "Do_Autoscale": {
                 "type": "_GuiActuator",
-                "label_inactive": "AUTOSCALE",
+                "label_inactive": {
+                  "En": "AUTOSCALE",
+                  "Fr": "ÉCHELLE AUTO",
+                  "De": "AUTOSCALE",
+                  "Es": "ESCALA AUTO"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -197,7 +242,12 @@
             "fields": {
               "Do_Clear_Display": {
                 "type": "_GuiActuator",
-                "label_inactive": "Clear Display",
+                "label_inactive": {
+                  "En": "Clear Display",
+                  "Fr": "Effacer l'affichage",
+                  "De": "Anzeige löschen",
+                  "Es": "Borrar pantalla"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -223,7 +273,12 @@
             "fields": {
               "Do_Clear_Status": {
                 "type": "_GuiActuator",
-                "label_inactive": "CLS",
+                "label_inactive": {
+                  "En": "CLS",
+                  "Fr": "CLS",
+                  "De": "CLS",
+                  "Es": "CLS"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -244,7 +299,12 @@
               },
               "Do_Reset": {
                 "type": "_GuiActuator",
-                "label_inactive": "Reset (*RST)",
+                "label_inactive": {
+                  "En": "Reset (*RST)",
+                  "Fr": "Réinitialiser (*RST)",
+                  "De": "Zurücksetzen (*RST)",
+                  "Es": "Reiniciar (*RST)"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",

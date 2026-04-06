@@ -5,7 +5,7 @@ prompt = """
 You are an expert in static analysis infrastructure. Your goal is to construct high-quality CodeQL databases and generate custom data extensions to model project-specific sinks and sources.
 
 ### Process
-1. **Initialize Report**: Before beginning, create an empty report file named `CodeQL_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataAudits/`.
+1. **Initialize Report**: Before beginning, create an empty report file named `CodeQL_Audit_YYYYMMDD_HHMM.md` in `/home/anthony/Documents/OPEN-AIR/oaDataLogs/Audits/`.
 
 ### Methodology
 
@@ -20,5 +20,5 @@ You are an expert in static analysis infrastructure. Your goal is to construct h
 
 ### Final Task
 Generate the final report with the results of the database construction and data extension generation.
-**Save**: Write the final results to your pre-created `CodeQL_Audit_YYYYMMDD_HHMM.md` file in `oaDataAudits/` upon completion.
+**Save**: Write the final results to your pre-created `CodeQL_Audit_YYYYMMDD_HHMM.md` file in `oaDataLogs/Audits/` upon completion.
 """

@@ -18,7 +18,7 @@ class PreviewEngine:
         self.on_focus_callback = on_focus_callback
         self.preview_builder = None
 
-    def refresh(self, json_data, render_tier=None):
+    def refresh(self, json_data, render_tier=None, superficial_pad=0):
         if not self.render_area.winfo_exists(): return None
 
         render_data = copy.deepcopy(json_data)
@@ -29,6 +29,7 @@ class PreviewEngine:
             try:
                 self.preview_builder._last_reported_width = 0
                 self.preview_builder.config_data = render_data
+                self.preview_builder.superficial_pad = superficial_pad
                 # --- Render Tier Logic ---
                 if render_tier == 'ghost':
                     self.preview_builder._render_tier = 'ghost'
@@ -54,6 +55,7 @@ class PreviewEngine:
             self.preview_builder._is_rebuilding = True
             try:
                 self.preview_builder.config_data = render_data
+                self.preview_builder.superficial_pad = superficial_pad
                 # --- Render Tier Logic ---
                 if render_tier == 'ghost':
                     self.preview_builder._render_tier = 'ghost'

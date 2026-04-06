@@ -6,7 +6,7 @@
 
 import time
 from loguru import logger
-from oaConfiguration.Entry import Config
+from oaConfigurationManager.Entry import Config
 
 try:
     from oameteringengine_rs import BallisticsEngine as RustBallisticsEngine

@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Cursor Settings",
+        "description": {
+          "En": "Cursor Settings",
+          "Fr": "Paramètres du curseur",
+          "De": "Cursoreinstellungen",
+          "Es": "Ajustes del cursor"
+        },
         "fields": {
           "Set_Marker_Mode": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "mode": {
                     "value": "MANual",
                     "type": "_GuiValue",
-                    "label": "Mode",
+                    "label": {
+                      "En": "Mode",
+                      "Fr": "Mode",
+                      "De": "Modus",
+                      "Es": "Modo"
+                    },
                     "units": "",
-                    "description": "MANual, MEASure, OFF"
+                    "description": {
+                      "En": "MANual, MEASure, OFF",
+                      "Fr": "MANuel, MESure, DÉSACTIVÉ",
+                      "De": "Manuell, Messen, Aus",
+                      "Es": "MANual, MEDida, DESACTIVADO"
+                    }
                   }
                 }
               }
@@ -56,7 +71,12 @@
           },
           "Set_X_Markers": {
             "type": "OcaBlock",
-            "description": "Time/Frequency Markers",
+            "description": {
+              "En": "Time/Frequency Markers",
+              "Fr": "Temps/Fréquence Marqueurs",
+              "De": "Zeit/Frequenz Markers",
+              "Es": "Tiempo/Frecuencia Marcadors"
+            },
             "fields": {
               "Set_X1": {
                 "type": "OcaBlock",
@@ -84,7 +104,12 @@
                       "pos": {
                         "value": "0.0",
                         "type": "_GuiValue",
-                        "label": "X1",
+                        "label": {
+                          "En": "X1",
+                          "Fr": "X1",
+                          "De": "X1",
+                          "Es": "X1"
+                        },
                         "units": "s"
                       }
                     }
@@ -117,7 +142,12 @@
                       "pos": {
                         "value": "100e-6",
                         "type": "_GuiValue",
-                        "label": "X2",
+                        "label": {
+                          "En": "X2",
+                          "Fr": "X2",
+                          "De": "X2",
+                          "Es": "X2"
+                        },
                         "units": "s"
                       }
                     }
@@ -128,7 +158,12 @@
           },
           "Set_Y_Markers": {
             "type": "OcaBlock",
-            "description": "Voltage Markers",
+            "description": {
+              "En": "Voltage Markers",
+              "Fr": "Tension Marqueurs",
+              "De": "Spannenung Markers",
+              "Es": "Voltaje Marcadors"
+            },
             "fields": {
               "Set_Y1": {
                 "type": "OcaBlock",
@@ -156,7 +191,12 @@
                       "lev": {
                         "value": "0.0",
                         "type": "_GuiValue",
-                        "label": "Y1",
+                        "label": {
+                          "En": "Y1",
+                          "Fr": "Y1",
+                          "De": "Y1",
+                          "Es": "Y1"
+                        },
                         "units": "V"
                       }
                     }
@@ -189,7 +229,12 @@
                       "lev": {
                         "value": "1.0",
                         "type": "_GuiValue",
-                        "label": "Y2",
+                        "label": {
+                          "En": "Y2",
+                          "Fr": "Y2",
+                          "De": "Y2",
+                          "Es": "Y2"
+                        },
                         "units": "V"
                       }
                     }
@@ -202,7 +247,12 @@
       },
       "nab": {
         "type": "OcaBlock",
-        "description": "Cursor Deltas",
+        "description": {
+          "En": "Cursor Deltas",
+          "Fr": "Deltas de curseur",
+          "De": "Cursor-Deltas",
+          "Es": "Deltas de cursor"
+        },
         "fields": {
           "Get_X_Delta": {
             "type": "OcaBlock",

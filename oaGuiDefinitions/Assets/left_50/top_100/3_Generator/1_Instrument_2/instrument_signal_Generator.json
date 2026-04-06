@@ -13,15 +13,30 @@
     "blocks": {
       "Signal_Generator_Panel": {
         "type": "OcaBlock",
-        "description": "Signal Generator Control Panel",
+        "description": {
+          "En": "Signal Generator Control Panel",
+          "Fr": "Signal Générateur Contrôle Panel",
+          "De": "Signal Generator Steuerung Panel",
+          "Es": "Signal Generador Control Panel"
+        },
         "fields": {
           "Frequency_Control": {
             "type": "OcaBlock",
-            "description": "Frequency",
+            "description": {
+              "En": "Frequency",
+              "Fr": "Fréquence",
+              "De": "Frequenz",
+              "Es": "Frecuencia"
+            },
             "fields": {
               "frequency_value": {
                 "type": "_TextInput",
-                "label_active": "Frequency (Hz)",
+                "label_active": {
+                  "En": "Frequency (Hz)",
+                  "Fr": "Fréquence (Hz)",
+                  "De": "Frequenz (Hz)",
+                  "Es": "Frecuencia (Hz)"
+                },
                 "value_default": "1e6",
                 "message_details": {
                   "SIGNAL_GENERATOR_MODEL": {
@@ -47,11 +62,21 @@
           },
           "Amplitude_Control": {
             "type": "OcaBlock",
-            "description": "Amplitude",
+            "description": {
+              "En": "Amplitude",
+              "Fr": "Amplitude",
+              "De": "Amplitude",
+              "Es": "Amplitud"
+            },
             "fields": {
               "amplitude_value": {
                 "type": "_TextInput",
-                "label_active": "Amplitude (dBm)",
+                "label_active": {
+                  "En": "Amplitude (dBm)",
+                  "Fr": "Amplitude (dBm)",
+                  "De": "Amplitude (dBm)",
+                  "Es": "Amplitud (dBm)"
+                },
                 "value_default": "0",
                 "message_details": {
                   "SIGNAL_GENERATOR_MODEL": {
@@ -77,12 +102,27 @@
           },
           "Output_Control": {
             "type": "OcaBlock",
-            "description": "Output",
+            "description": {
+              "En": "Output",
+              "Fr": "Sortie",
+              "De": "Ausgang",
+              "Es": "Salida"
+            },
             "fields": {
               "output_state": {
                 "type": "_GuiButtonToggle",
-                "label_active": "ON",
-                "label_inactive": "OFF",
+                "label_active": {
+                  "En": "ON",
+                  "Fr": "ON",
+                  "De": "EIN",
+                  "Es": "ENC"
+                },
+                "label_inactive": {
+                  "En": "OFF",
+                  "Fr": "OFF",
+                  "De": "AUS",
+                  "Es": "DES"
+                },
                 "style": {
                   "active_text_color": "#1a1a1a",
                   "text_color": "#888888",

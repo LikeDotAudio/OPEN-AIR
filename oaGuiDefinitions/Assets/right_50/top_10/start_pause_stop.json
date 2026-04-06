@@ -10,7 +10,12 @@
         "fields": {
           "Pause": {
             "handler": "pause_button_clicked",
-            "label": "Pause",
+            "label": {
+              "En": "Pause",
+              "Fr": "Pause",
+              "De": "Pause",
+              "Es": "Pausa"
+            },
             "layout": {
               "height": 40,
               "width": 80
@@ -22,7 +27,12 @@
           },
           "Start": {
             "handler": "start_button_clicked",
-            "label": "Start",
+            "label": {
+              "En": "Start",
+              "Fr": "Démarrer",
+              "De": "Start",
+              "Es": "Inicio"
+            },
             "layout": {
               "height": 40,
               "width": 80
@@ -34,7 +44,12 @@
           },
           "Stop": {
             "handler": "stop_button_clicked",
-            "label": "Stop",
+            "label": {
+              "En": "Stop",
+              "Fr": "Arrêter",
+              "De": "Stopp",
+              "Es": "Parar"
+            },
             "layout": {
               "height": 40,
               "width": 80
@@ -48,7 +63,12 @@
         "type": "OcaBlock"
       }
     },
-    "description": "Root container locked to window edges with smart auto-scrolling.",
+    "description": {
+      "En": "Root container locked to window edges with smart auto-scrolling.",
+      "Fr": "Conteneur racine verrouillé sur les bords de la fenêtre avec défilement automatique intelligent.",
+      "De": "Root-Container an Fensterrändern fixiert mit intelligentem automatischem Scrollen.",
+      "Es": "Contenedor raíz bloqueado en los bordes de la ventana con desplazamiento automático inteligente."
+    },
     "geometry": {
       "anchor": "NSEW"
     },

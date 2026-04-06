@@ -13,17 +13,37 @@
     "blocks": {
       "elements": {
         "type": "OcaBlock",
-        "label_active": "Gui Dynamic Graph",
+        "label_active": {
+          "En": "Gui Dynamic Graph",
+          "Fr": "Gui Dynamic Graph",
+          "De": "Gui Dynamic Graph",
+          "Es": "Gui Dynamic Graph"
+        },
         "fields": {
           "dynamic_graph_examples": {
             "type": "OcaBlock",
-            "label_active": "Dynamic Graph Examples",
-            "description": "Examples of the DynamicGraph element with Zoom, Pan, and Multiple Datasets.",
+            "label_active": {
+              "En": "Dynamic Graph Examples",
+              "Fr": "Dynamic Graph Exemples",
+              "De": "Dynamic Graph Beispiele",
+              "Es": "Dynamic Graph Ejemplos"
+            },
+            "description": {
+              "En": "Examples of the DynamicGraph element with Zoom, Pan, and Multiple Datasets.",
+              "Fr": "Exemples of the DynamicGraph element with Zoom, Panoramique, and Multiple Datasets.",
+              "De": "Beispiele of the DynamicGraph element with Zoom, Panorama, and Multiple Datasets.",
+              "Es": "Ejemplos of the DynamicGraph element with Zoom, Panorámico, and Multiple Datasets."
+            },
             "fields": {
               "log_demo_graph": {
                 "type": "DynamicGraph",
                 "id": "log_demo_plot",
-                "label": "Logarithmic Scales Demo",
+                "label": {
+                  "En": "Logarithmic Scales Demo",
+                  "Fr": "Logarithmic Scales Démo",
+                  "De": "Logarithmic Scales Demo",
+                  "Es": "Logarithmic Scales Demo"
+                },
                 "show_title": true,
                 "title": "Exponential & Power Law (Log-Log)",
                 "initial_markers": "x,5,green,2,Target\ny,100,orange,1,Limit",
@@ -33,14 +53,24 @@
                 },
                 "axis": {
                   "x": {
-                    "label": "Input Value (Log Scale)",
+                    "label": {
+                      "En": "Input Value (Log Scale)",
+                      "Fr": "Entrée Valeur (Log Scale)",
+                      "De": "Eingang Wert (Log Scale)",
+                      "Es": "Entrada Valor (Log Scale)"
+                    },
                     "scale": "log",
                     "color": "cyan",
                     "min": "auto",
                     "max": "auto"
                   },
                   "y": {
-                    "label": "Output Value (Log Scale)",
+                    "label": {
+                      "En": "Output Value (Log Scale)",
+                      "Fr": "Sortie Valeur (Log Scale)",
+                      "De": "Ausgang Wert (Log Scale)",
+                      "Es": "Salida Valor (Log Scale)"
+                    },
                     "scale": "log",
                     "color": "magenta",
                     "min": "auto",
@@ -53,7 +83,12 @@
                 "datasets": [
                   {
                     "id": "exp_growth",
-                    "label": "e^x",
+                    "label": {
+                      "En": "e^x",
+                      "Fr": "e^x",
+                      "De": "e^x",
+                      "Es": "e^x"
+                    },
                     "style": {
                       "line_color": "cyan",
                       "line_width": 2
@@ -62,7 +97,12 @@
                   },
                   {
                     "id": "power_law",
-                    "label": "x^3",
+                    "label": {
+                      "En": "x^3",
+                      "Fr": "x^3",
+                      "De": "x^3",
+                      "Es": "x^3"
+                    },
                     "style": {
                       "line_color": "magenta",
                       "line_width": 2
@@ -79,7 +119,12 @@
               "high_density_graph": {
                 "type": "DynamicGraph",
                 "id": "high_density_plot",
-                "label": "High Density Data",
+                "label": {
+                  "En": "High Density Data",
+                  "Fr": "Haut Density Data",
+                  "De": "Hoch Density Data",
+                  "Es": "Alto Density Data"
+                },
                 "show_title": true,
                 "title": "Noisy Signal (100 points)",
                 "initial_markers": "y,0.5,red,1,Threshold",
@@ -88,12 +133,22 @@
                 },
                 "axis": {
                   "x": {
-                    "label": "Time (ms)",
+                    "label": {
+                      "En": "Time (ms)",
+                      "Fr": "Heure (ms)",
+                      "De": "Zeit (ms)",
+                      "Es": "Hora (ms)"
+                    },
                     "scale": "linear",
                     "color": "white"
                   },
                   "y": {
-                    "label": "Voltage (mV)",
+                    "label": {
+                      "En": "Voltage (mV)",
+                      "Fr": "Voltage (mV)",
+                      "De": "Voltage (mV)",
+                      "Es": "Voltage (mV)"
+                    },
                     "scale": "linear",
                     "min": -1.5,
                     "max": 1.5,
@@ -106,7 +161,12 @@
                 "datasets": [
                   {
                     "id": "noisy_sine",
-                    "label": "Noisy Sine",
+                    "label": {
+                      "En": "Noisy Sine",
+                      "Fr": "Noisy Sine",
+                      "De": "Noisy Sine",
+                      "Es": "Noisy Sine"
+                    },
                     "style": {
                       "line_color": "yellow",
                       "line_width": 1
@@ -123,7 +183,12 @@
               "step_graph": {
                 "type": "DynamicGraph",
                 "id": "step_plot",
-                "label": "Discrete Data Demo",
+                "label": {
+                  "En": "Discrete Data Demo",
+                  "Fr": "Discrete Data Démo",
+                  "De": "Discrete Data Demo",
+                  "Es": "Discrete Data Demo"
+                },
                 "show_title": true,
                 "title": "Digital Logic Levels",
                 "layout": {
@@ -131,12 +196,22 @@
                 },
                 "axis": {
                   "x": {
-                    "label": "Clock Cycle",
+                    "label": {
+                      "En": "Clock Cycle",
+                      "Fr": "Clock Cycle",
+                      "De": "Clock Cycle",
+                      "Es": "Clock Cycle"
+                    },
                     "scale": "linear",
                     "color": "white"
                   },
                   "y": {
-                    "label": "Logic Level",
+                    "label": {
+                      "En": "Logic Level",
+                      "Fr": "Logic Level",
+                      "De": "Logic Level",
+                      "Es": "Logic Level"
+                    },
                     "scale": "linear",
                     "min": -0.5,
                     "max": 1.5,
@@ -149,7 +224,12 @@
                 "datasets": [
                   {
                     "id": "logic_signal",
-                    "label": "Data Line",
+                    "label": {
+                      "En": "Data Line",
+                      "Fr": "Data Line",
+                      "De": "Data Line",
+                      "Es": "Data Line"
+                    },
                     "style": {
                       "line_color": "lime",
                       "line_width": 2

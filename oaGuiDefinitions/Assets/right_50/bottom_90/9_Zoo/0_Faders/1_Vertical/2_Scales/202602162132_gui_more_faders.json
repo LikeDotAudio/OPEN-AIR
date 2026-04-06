@@ -12,7 +12,12 @@
     "blocks": {
       "Fader_Zoo_MainVol": {
         "type": "OcaBlock",
-        "description": "Main Volume Fader Variations",
+        "description": {
+          "En": "Main Volume Fader Variations",
+          "Fr": "Main Volume Fader Variations",
+          "De": "Main Lautstärke Fader Variationen",
+          "Es": "Main Volumen Fader Variaciones"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -43,7 +48,12 @@
         "fields": {
           "cf_vol1": {
             "type": "_SmartFader",
-            "label": "Dark Standard",
+            "label": {
+              "En": "Dark Standard",
+              "Fr": "Dark Standard",
+              "De": "Dark Standard",
+              "Es": "Dark Estándar"
+            },
             "notes": "Dark Fader Cap",
             "geometry": {
               "width": 60,
@@ -89,7 +99,12 @@
           },
           "cf_vol2": {
             "type": "_SmartFader",
-            "label": "Thick Ticks",
+            "label": {
+              "En": "Thick Ticks",
+              "Fr": "Thick Ticks",
+              "De": "Thick Ticks",
+              "Es": "Thick Ticks"
+            },
             "notes": "Red Thick Ticks",
             "geometry": {
               "width": 60,
@@ -135,7 +150,12 @@
           },
           "cf_vol3": {
             "type": "_SmartFader",
-            "label": "Percent",
+            "label": {
+              "En": "Percent",
+              "Fr": "Percent",
+              "De": "Percent",
+              "Es": "Percent"
+            },
             "notes": "Blue Percent",
             "geometry": {
               "width": 60,
@@ -178,7 +198,12 @@
           },
           "cf_vol4": {
             "type": "_SmartFader",
-            "label": "Voltage",
+            "label": {
+              "En": "Voltage",
+              "Fr": "Voltage",
+              "De": "Voltage",
+              "Es": "Voltage"
+            },
             "notes": "Purple Voltage",
             "geometry": {
               "width": 60,
@@ -223,7 +248,12 @@
           },
           "cf_vol5": {
             "type": "_SmartFader",
-            "label": "No Units",
+            "label": {
+              "En": "No Units",
+              "Fr": "Non Unités",
+              "De": "Nein Einheiten",
+              "Es": "No Unidades"
+            },
             "notes": "MIDI 0-127",
             "geometry": {
               "width": 60,
@@ -265,7 +295,12 @@
           },
           "cf_vol6": {
             "type": "_SmartFader",
-            "label": "Fine Ticks",
+            "label": {
+              "En": "Fine Ticks",
+              "Fr": "Fine Ticks",
+              "De": "Fine Ticks",
+              "Es": "Fine Ticks"
+            },
             "notes": "Long Green Ticks",
             "geometry": {
               "width": 60,
@@ -313,7 +348,12 @@
           },
           "cf_vol7": {
             "type": "_SmartFader",
-            "label": "Hertz",
+            "label": {
+              "En": "Hertz",
+              "Fr": "Hertz",
+              "De": "Hertz",
+              "Es": "Hertz"
+            },
             "notes": "Log Scale Hz",
             "geometry": {
               "width": 60,
@@ -362,7 +402,12 @@
           },
           "cf_vol8": {
             "type": "_SmartFader",
-            "label": "Dark Ghost",
+            "label": {
+              "En": "Dark Ghost",
+              "Fr": "Dark Ghost",
+              "De": "Dark Ghost",
+              "Es": "Dark Ghost"
+            },
             "notes": "Almost Black Cap",
             "geometry": {
               "width": 60,
@@ -408,7 +453,12 @@
       },
       "Fader_Zoo_ChanGain": {
         "type": "OcaBlock",
-        "description": "Channel Gain Fader Variations",
+        "description": {
+          "En": "Channel Gain Fader Variations",
+          "Fr": "Canal Gain Fader Variations",
+          "De": "Kanal Verstärkung Fader Variationen",
+          "Es": "Canal Ganancia Fader Variaciones"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -439,7 +489,12 @@
         "fields": {
           "cf_gain1": {
             "type": "_SmartFader",
-            "label": "Dark Pre",
+            "label": {
+              "En": "Dark Pre",
+              "Fr": "Dark Pre",
+              "De": "Dark Pre",
+              "Es": "Dark Pre"
+            },
             "notes": "Dark Fader Cap",
             "geometry": {
               "width": 50,
@@ -484,7 +539,12 @@
           },
           "cf_gain2": {
             "type": "_SmartFader",
-            "label": "Trim",
+            "label": {
+              "En": "Trim",
+              "Fr": "Trim",
+              "De": "Trim",
+              "Es": "Trim"
+            },
             "notes": "Pink Trim",
             "geometry": {
               "width": 50,
@@ -527,7 +587,12 @@
           },
           "cf_gain3": {
             "type": "_SmartFader",
-            "label": "Drive",
+            "label": {
+              "En": "Drive",
+              "Fr": "Drive",
+              "De": "Drive",
+              "Es": "Drive"
+            },
             "notes": "Thick Purple",
             "geometry": {
               "width": 50,
@@ -572,7 +637,12 @@
           },
           "cf_gain4": {
             "type": "_SmartFader",
-            "label": "Level",
+            "label": {
+              "En": "Level",
+              "Fr": "Level",
+              "De": "Level",
+              "Es": "Level"
+            },
             "notes": "Deep Purple",
             "geometry": {
               "width": 50,
@@ -615,7 +685,12 @@
           },
           "cf_gain5": {
             "type": "_SmartFader",
-            "label": "Aux 1",
+            "label": {
+              "En": "Aux 1",
+              "Fr": "Auxiliaire 1",
+              "De": "Aux-Send 1",
+              "Es": "Auxiliar 1"
+            },
             "notes": "Indigo",
             "geometry": {
               "width": 50,
@@ -661,7 +736,12 @@
           },
           "cf_gain6": {
             "type": "_SmartFader",
-            "label": "Aux 2",
+            "label": {
+              "En": "Aux 2",
+              "Fr": "Auxiliaire 2",
+              "De": "Aux-Send 2",
+              "Es": "Auxiliar 2"
+            },
             "notes": "Blue",
             "geometry": {
               "width": 50,
@@ -707,7 +787,12 @@
           },
           "cf_gain7": {
             "type": "_SmartFader",
-            "label": "FX Send",
+            "label": {
+              "En": "FX Send",
+              "Fr": "FX Send",
+              "De": "FX Send",
+              "Es": "FX Send"
+            },
             "notes": "Light Blue",
             "geometry": {
               "width": 50,
@@ -753,7 +838,12 @@
           },
           "cf_gain8": {
             "type": "_SmartFader",
-            "label": "Dark Mon",
+            "label": {
+              "En": "Dark Mon",
+              "Fr": "Dark Mon",
+              "De": "Dark Mon",
+              "Es": "Dark Mon"
+            },
             "notes": "Dark Fader Cap",
             "geometry": {
               "width": 50,
@@ -800,7 +890,12 @@
       },
       "Fader_Zoo_FX": {
         "type": "OcaBlock",
-        "description": "Effect Send Fader Variations",
+        "description": {
+          "En": "Effect Send Fader Variations",
+          "Fr": "Effect Send Fader Variations",
+          "De": "Effect Send Fader Variationen",
+          "Es": "Effect Send Fader Variaciones"
+        },
         "layout_columns": 8,
         "column_sizing": [
           {
@@ -831,7 +926,12 @@
         "fields": {
           "cf_fx1": {
             "type": "_SmartFader",
-            "label": "Dark Verb",
+            "label": {
+              "En": "Dark Verb",
+              "Fr": "Dark Verb",
+              "De": "Dark Verb",
+              "Es": "Dark Verb"
+            },
             "notes": "Dark Fader Cap",
             "geometry": {
               "width": 45,
@@ -874,7 +974,12 @@
           },
           "cf_fx2": {
             "type": "_SmartFader",
-            "label": "Delay",
+            "label": {
+              "En": "Delay",
+              "Fr": "Delay",
+              "De": "Delay",
+              "Es": "Delay"
+            },
             "notes": "Green ms",
             "geometry": {
               "width": 45,
@@ -917,7 +1022,12 @@
           },
           "cf_fx3": {
             "type": "_SmartFader",
-            "label": "Feedback",
+            "label": {
+              "En": "Feedback",
+              "Fr": "Feedback",
+              "De": "Feedback",
+              "Es": "Realimentación"
+            },
             "notes": "Light Green",
             "geometry": {
               "width": 45,
@@ -961,7 +1071,12 @@
           },
           "cf_fx4": {
             "type": "_SmartFader",
-            "label": "Rate",
+            "label": {
+              "En": "Rate",
+              "Fr": "Rate",
+              "De": "Rate",
+              "Es": "Rate"
+            },
             "notes": "Lime Hz",
             "geometry": {
               "width": 45,
@@ -1004,7 +1119,12 @@
           },
           "cf_fx5": {
             "type": "_SmartFader",
-            "label": "Depth",
+            "label": {
+              "En": "Depth",
+              "Fr": "Profondeur",
+              "De": "Tiefe",
+              "Es": "Profundidad"
+            },
             "notes": "Yellow",
             "geometry": {
               "width": 45,
@@ -1047,7 +1167,12 @@
           },
           "cf_fx6": {
             "type": "_SmartFader",
-            "label": "Mix",
+            "label": {
+              "En": "Mix",
+              "Fr": "Mix",
+              "De": "Mix",
+              "Es": "Mezcla"
+            },
             "notes": "Amber Mix",
             "geometry": {
               "width": 45,
@@ -1090,7 +1215,12 @@
           },
           "cf_fx7": {
             "type": "_SmartFader",
-            "label": "Width",
+            "label": {
+              "En": "Width",
+              "Fr": "Largeur",
+              "De": "Breite",
+              "Es": "Ancho"
+            },
             "notes": "Orange Width",
             "geometry": {
               "width": 45,
@@ -1133,7 +1263,12 @@
           },
           "cf_fx8": {
             "type": "_SmartFader",
-            "label": "Dark Master FX",
+            "label": {
+              "En": "Dark Master FX",
+              "Fr": "Dark Master FX",
+              "De": "Dark Master FX",
+              "Es": "Dark Maestro FX"
+            },
             "notes": "Deep Black Cap",
             "geometry": {
               "width": 45,

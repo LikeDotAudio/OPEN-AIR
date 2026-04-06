@@ -13,11 +13,21 @@
     "blocks": {
       "rig": {
         "type": "OcaBlock",
-        "description": "Scope Configuration",
+        "description": {
+          "En": "Scope Configuration",
+          "Fr": "Scope Configuration",
+          "De": "Scope Konfiguration",
+          "Es": "Scope Configuración"
+        },
         "fields": {
           "Trigger_Settings": {
             "type": "OcaBlock",
-            "description": "Trigger System",
+            "description": {
+              "En": "Trigger System",
+              "Fr": "Déclencheur System",
+              "De": "Trigger System",
+              "Es": "Disparo System"
+            },
             "fields": {
               "Trigger_Source": {
                 "type": "OcaBlock",
@@ -50,8 +60,18 @@
                       "source": {
                         "value": "CHAN1",
                         "type": "_GuiValue",
-                        "label": "Source",
-                        "description": "CHAN1, CHAN2, CHAN3, CHAN4"
+                        "label": {
+                          "En": "Source",
+                          "Fr": "Source",
+                          "De": "Quelle",
+                          "Es": "Fuente"
+                        },
+                        "description": {
+                          "En": "CHAN1, CHAN2, CHAN3, CHAN4",
+                          "Fr": "CHAN1, CHAN2, CHAN3, CHAN4",
+                          "De": "CHAN1, CHAN2, CHAN3, CHAN4",
+                          "Es": "CHAN1, CHAN2, CHAN3, CHAN4"
+                        }
                       }
                     }
                   }
@@ -88,7 +108,12 @@
                       "level": {
                         "value": "0.0",
                         "type": "_GuiValue",
-                        "label": "Level",
+                        "label": {
+                          "En": "Level",
+                          "Fr": "Niveau",
+                          "De": "Pegel",
+                          "Es": "Nivel"
+                        },
                         "units": "V"
                       }
                     }
@@ -126,8 +151,18 @@
                       "sweep": {
                         "value": "AUTO",
                         "type": "_GuiValue",
-                        "label": "Sweep",
-                        "description": "AUTO or NORMal"
+                        "label": {
+                          "En": "Sweep",
+                          "Fr": "Sweep",
+                          "De": "Sweep",
+                          "Es": "Sweep"
+                        },
+                        "description": {
+                          "En": "AUTO or NORMal",
+                          "Fr": "AUTO ou NORMAL",
+                          "De": "AUTO oder NORMAL",
+                          "Es": "AUTO o NORMAL"
+                        }
                       }
                     }
                   }

@@ -16,13 +16,14 @@ import inspect
 from oaLogging.Core.logger import initialize_logging, set_log_directory, builder_logger
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()  # Get the singleton instance
 
 from oaOchestration.Methods.widget_event_binder import bind_variable_trace
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
+from oaGuiFramework.Methods.i18n_utils import get_text
 
 # --- Global Scope Variables ---
 current_file = f"{os.path.basename(__file__)}"
@@ -62,7 +63,7 @@ class BuilderTextValueBoxCreator(TransparencyMixin):
         current_function_name = inspect.currentframe().f_code.co_name
 
         # Extract config
-        label = config_data.get("label_active") or config_data.get("label", "")
+        label = get_text(get_text(config_data.get('label_active'))) or get_text(get_text(config_data.get('label')), "")
         config = config_data
         path = config_data.get("path")
         units = config_data.get("units") or config_data.get("unit", "")

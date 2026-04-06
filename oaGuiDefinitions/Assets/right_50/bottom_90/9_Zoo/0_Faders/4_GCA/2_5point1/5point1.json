@@ -13,11 +13,21 @@
     "blocks": {
       "5 point One": {
         "type": "OcaBlock",
-        "description": "Composite Smart-Fader Demos",
+        "description": {
+          "En": "Composite Smart-Fader Demos",
+          "Fr": "Composite Smart-Fader Demos",
+          "De": "Composite Smart-Fader Demos",
+          "Es": "Composite Smart-Fader Demos"
+        },
         "fields": {
           "composite_drums": {
             "type": "_CompositeFader",
-            "label_active": "Drum Group",
+            "label_active": {
+              "En": "Drum Group",
+              "Fr": "Drum Group",
+              "De": "Drum Group",
+              "Es": "Drum Group"
+            },
             "value_min": -60.0,
             "value_max": 6.0,
             "num_channels": 5,
@@ -29,23 +39,48 @@
             "channels": [
               {
                 "default": -12.0,
-                "label": "lSUR"
+                "label": {
+                  "En": "lSUR",
+                  "Fr": "lSUR",
+                  "De": "lSUR",
+                  "Es": "lSUR"
+                }
               },
               {
                 "default": -5.0,
-                "label": "LEFT"
+                "label": {
+                  "En": "LEFT",
+                  "Fr": "LEFT",
+                  "De": "LEFT",
+                  "Es": "LEFT"
+                }
               },
               {
                 "default": -10.0,
-                "label": "CENTER"
+                "label": {
+                  "En": "CENTER",
+                  "Fr": "CENTER",
+                  "De": "CENTER",
+                  "Es": "CENTER"
+                }
               },
               {
                 "default": -15.0,
-                "label": "RIGHT"
+                "label": {
+                  "En": "RIGHT",
+                  "Fr": "RIGHT",
+                  "De": "RIGHT",
+                  "Es": "RIGHT"
+                }
               },
               {
                 "default": -12.0,
-                "label": "rSUR"
+                "label": {
+                  "En": "rSUR",
+                  "Fr": "rSUR",
+                  "De": "rSUR",
+                  "Es": "rSUR"
+                }
               }
             ],
             "active_text_color": "#1a1a1a",

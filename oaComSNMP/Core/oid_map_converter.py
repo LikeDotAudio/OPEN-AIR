@@ -33,40 +33,29 @@ class OidMapConverter:
     Responsible for converting MQTT topics and payload data into an SNMP OID map.
     """
 
-    def __init__(self, base_oid: str, state_cache_manager, thread_lock: threading.RLock):
+    def __init__(self, base_oid: str, thread_lock: threading.RLock):
         """
         Initializes the converter.
         
         Args:
             base_oid: The base OID for SNMP data.
-            state_cache_manager: The manager providing access to the state cache.
             thread_lock: The RLock used by the calling manager for thread-safe access.
         """
         self.base_oid = base_oid
-        self.state_cache_manager = state_cache_manager
         self._state_lock = thread_lock # Use the provided lock for external state access
         self.oid_map = {}
         
-    def build_oid_map(self, cache_snapshot=None):
+    def build_oid_map(self, state_snapshot: dict):
         """
-        Updates the internal OID map from the state cache by processing MQTT topics.
+        Updates the internal OID map from a state snapshot (MQTT topics/payloads).
         This method is designed to be called in a thread-safe context by the caller.
-        It assumes the caller has acquired the necessary lock before calling.
         """
-        if not self.state_cache_manager:
-            snmp_logger.warning("OidMapConverter: State cache manager is not available.")
-            return {}
-        
-        # Use provided snapshot or create one if not provided (caller MUST have lock)
-        if cache_snapshot is None:
-            cache_snapshot = self.state_cache_manager.rust_cache.to_dict()
-
         new_oid_map = {}
         
         matrix_log("comms", "snmp", "build_oid_map", 
-                   f"OidMapConverter: Updating OID map. Cache size: {len(cache_snapshot)}", "DEBUG")
+                   f"OidMapConverter: Updating OID map. Input size: {len(state_snapshot)}", "DEBUG")
 
-        for topic, payload in cache_snapshot.items():
+        for topic, payload in state_snapshot.items():
             # ⚡ FILTER: Skip System control/status, Router, and large Blobs
             if any(x in topic for x in ["/System/", "/Control/", "/Status/", "/Router/"]):
                 continue

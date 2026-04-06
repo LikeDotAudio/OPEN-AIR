@@ -47,8 +47,12 @@ def main():
 
     # Load Initial Data
     try:
-        with open(json_filepath, 'rb') as f:
-            config_data = orjson.loads(f.read())
+        if json_filepath.stat().st_size == 0:
+            matrix_log("ui", "gui_builder", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"Standalone Builder: File is empty, initializing with empty dict: {json_filepath}", "WARNING")
+            config_data = {}
+        else:
+            with open(json_filepath, 'rb') as f:
+                config_data = orjson.loads(f.read())
     except Exception as e:
         logger.exception("Standalone Builder: Failed to read JSON")
         sys.exit(1)
@@ -60,7 +64,7 @@ def main():
         try:
             # LOCAL IMPORT: Avoid dependency requirement if not testing
             import paho.mqtt.client as mqtt
-            from oaConfiguration.FileReaders.config_reader import Config
+            from oaConfigurationManager.FileReaders.config_reader import Config
             
             app_config = Config.get_instance()
             broker = getattr(app_config, "MQTT_BROKER_ADDRESS", "localhost")

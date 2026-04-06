@@ -13,7 +13,12 @@
     "blocks": {
       "Trapezoid_Toggler_Demos": {
         "type": "OcaBlock",
-        "description": "Trapezoid Toggler Showcase (10 Demos)",
+        "description": {
+          "En": "Trapezoid Toggler Showcase (10 Demos)",
+          "Fr": "Trapezoid Bascule Showcase (10 Demos)",
+          "De": "Trapezoid Umschalter Showcase (10 Demos)",
+          "Es": "Trapezoid Conmutador Showcase (10 Demos)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -32,7 +37,12 @@
         "fields": {
           "toggler_input_mic": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Input",
+            "label_active": {
+              "En": "Input",
+              "Fr": "Entrée",
+              "De": "Eingang",
+              "Es": "Entrada"
+            },
             "options": [
               "Mic",
               "Line",
@@ -52,7 +62,12 @@
           },
           "toggler_mode_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Mode",
+            "label_active": {
+              "En": "Mode",
+              "Fr": "Mode",
+              "De": "Mode",
+              "Es": "Mode"
+            },
             "options": [
               "Normal",
               "Wide",
@@ -72,7 +87,12 @@
           },
           "toggler_eq_band_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "EQ Band",
+            "label_active": {
+              "En": "EQ Band",
+              "Fr": "Bande EQ",
+              "De": "EQ-Band",
+              "Es": "Banda EQ"
+            },
             "options": [
               "LF",
               "MF",
@@ -93,7 +113,12 @@
           },
           "toggler_preamp_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Preamp",
+            "label_active": {
+              "En": "Preamp",
+              "Fr": "Preamp",
+              "De": "Preamp",
+              "Es": "Preamp"
+            },
             "options": [
               "Tube",
               "Solid State",
@@ -113,7 +138,12 @@
           },
           "toggler_channel_group_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Group",
+            "label_active": {
+              "En": "Group",
+              "Fr": "Group",
+              "De": "Group",
+              "Es": "Group"
+            },
             "options": [
               "A",
               "B",
@@ -134,7 +164,12 @@
           },
           "toggler_effect_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Effect",
+            "label_active": {
+              "En": "Effect",
+              "Fr": "Effect",
+              "De": "Effect",
+              "Es": "Effect"
+            },
             "options": [
               "Off",
               "On",
@@ -154,7 +189,12 @@
           },
           "toggler_output_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Output",
+            "label_active": {
+              "En": "Output",
+              "Fr": "Sortie",
+              "De": "Ausgang",
+              "Es": "Salida"
+            },
             "options": [
               "Main",
               "Aux",
@@ -174,7 +214,12 @@
           },
           "toggler_source_wide": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Source",
+            "label_active": {
+              "En": "Source",
+              "Fr": "Source",
+              "De": "Source",
+              "Es": "Source"
+            },
             "options": [
               "A",
               "B",
@@ -198,7 +243,12 @@
           },
           "toggler_gate_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Gate",
+            "label_active": {
+              "En": "Gate",
+              "Fr": "Porte",
+              "De": "Gate",
+              "Es": "Puerta"
+            },
             "options": [
               "Off",
               "On",
@@ -218,7 +268,12 @@
           },
           "toggler_phase_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Phase",
+            "label_active": {
+              "En": "Phase",
+              "Fr": "Phase",
+              "De": "Phase",
+              "Es": "Fase"
+            },
             "options": [
               "Normal",
               "Invert"
@@ -239,7 +294,12 @@
       },
       "Trapezoid_Toggler_Demos_2": {
         "type": "OcaBlock",
-        "description": "Trapezoid Toggler Showcase (10 Demos)",
+        "description": {
+          "En": "Trapezoid Toggler Showcase (10 Demos)",
+          "Fr": "Trapezoid Bascule Showcase (10 Demos)",
+          "De": "Trapezoid Umschalter Showcase (10 Demos)",
+          "Es": "Trapezoid Conmutador Showcase (10 Demos)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -258,7 +318,12 @@
         "fields": {
           "toggler_mode_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Mode",
+            "label_active": {
+              "En": "Mode",
+              "Fr": "Mode",
+              "De": "Mode",
+              "Es": "Mode"
+            },
             "options": [
               "Normal",
               "Wide",
@@ -278,7 +343,12 @@
           },
           "toggler_type_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Type",
+            "label_active": {
+              "En": "Type",
+              "Fr": "Type",
+              "De": "Type",
+              "Es": "Type"
+            },
             "options": [
               "A",
               "B",
@@ -298,7 +368,12 @@
           },
           "toggler_input_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Input",
+            "label_active": {
+              "En": "Input",
+              "Fr": "Entrée",
+              "De": "Eingang",
+              "Es": "Entrada"
+            },
             "options": [
               "Mic",
               "Line",
@@ -318,7 +393,12 @@
           },
           "toggler_eq_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "EQ",
+            "label_active": {
+              "En": "EQ",
+              "Fr": "EQ",
+              "De": "EQ",
+              "Es": "EQ"
+            },
             "options": [
               "LF",
               "MF",
@@ -338,7 +418,12 @@
           },
           "toggler_preamp_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Preamp",
+            "label_active": {
+              "En": "Preamp",
+              "Fr": "Preamp",
+              "De": "Preamp",
+              "Es": "Preamp"
+            },
             "options": [
               "Tube",
               "SS",
@@ -358,7 +443,12 @@
           },
           "toggler_channel_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Channel",
+            "label_active": {
+              "En": "Channel",
+              "Fr": "Canal",
+              "De": "Kanal",
+              "Es": "Canal"
+            },
             "options": [
               "1-4",
               "5-8",
@@ -378,7 +468,12 @@
           },
           "toggler_effect_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Effect",
+            "label_active": {
+              "En": "Effect",
+              "Fr": "Effect",
+              "De": "Effect",
+              "Es": "Effect"
+            },
             "options": [
               "Off",
               "On",
@@ -398,7 +493,12 @@
           },
           "toggler_output_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Output",
+            "label_active": {
+              "En": "Output",
+              "Fr": "Sortie",
+              "De": "Ausgang",
+              "Es": "Salida"
+            },
             "options": [
               "Main",
               "Aux",
@@ -418,7 +518,12 @@
           },
           "toggler_gate_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Gate",
+            "label_active": {
+              "En": "Gate",
+              "Fr": "Porte",
+              "De": "Gate",
+              "Es": "Puerta"
+            },
             "options": [
               "Off",
               "On",
@@ -438,7 +543,12 @@
           },
           "toggler_phase_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Phase",
+            "label_active": {
+              "En": "Phase",
+              "Fr": "Phase",
+              "De": "Phase",
+              "Es": "Fase"
+            },
             "options": [
               "Normal",
               "Invert"
@@ -459,7 +569,12 @@
       },
       "Trapezoid_Toggler_EQ_Variations": {
         "type": "OcaBlock",
-        "description": "EQ Band Toggler Showcase (10 Demos)",
+        "description": {
+          "En": "EQ Band Toggler Showcase (10 Demos)",
+          "Fr": "EQ Band Bascule Showcase (10 Demos)",
+          "De": "EQ Band Umschalter Showcase (10 Demos)",
+          "Es": "EQ Band Conmutador Showcase (10 Demos)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -478,7 +593,12 @@
         "fields": {
           "eq_lf_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "LF Band",
+            "label_active": {
+              "En": "LF Band",
+              "Fr": "Bande LF",
+              "De": "LF-Band",
+              "Es": "Banda LF"
+            },
             "options": [
               "Flat",
               "Boost",
@@ -498,7 +618,12 @@
           },
           "eq_mf_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "MF Band",
+            "label_active": {
+              "En": "MF Band",
+              "Fr": "Bande MF",
+              "De": "MF-Band",
+              "Es": "Banda MF"
+            },
             "options": [
               "Flat",
               "Boost",
@@ -518,7 +643,12 @@
           },
           "eq_hf_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "HF Band",
+            "label_active": {
+              "En": "HF Band",
+              "Fr": "Bande HF",
+              "De": "HF-Band",
+              "Es": "Banda HF"
+            },
             "options": [
               "Flat",
               "Boost",
@@ -538,7 +668,12 @@
           },
           "filter_hpf_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "HPF",
+            "label_active": {
+              "En": "HPF",
+              "Fr": "HPF",
+              "De": "HPF",
+              "Es": "HPF"
+            },
             "options": [
               "Off",
               "On"
@@ -557,7 +692,12 @@
           },
           "filter_lpf_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "LPF",
+            "label_active": {
+              "En": "LPF",
+              "Fr": "LPF",
+              "De": "LPF",
+              "Es": "LPF"
+            },
             "options": [
               "Off",
               "On"
@@ -576,7 +716,12 @@
           },
           "filter_bpf_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "BPF",
+            "label_active": {
+              "En": "BPF",
+              "Fr": "BPF",
+              "De": "BPF",
+              "Es": "BPF"
+            },
             "options": [
               "Off",
               "On"
@@ -595,7 +740,12 @@
           },
           "slope_latching_orange": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Slope",
+            "label_active": {
+              "En": "Slope",
+              "Fr": "Slope",
+              "De": "Slope",
+              "Es": "Slope"
+            },
             "options": [
               "12dB",
               "24dB",
@@ -615,7 +765,12 @@
           },
           "q_momentary_grey": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Q",
+            "label_active": {
+              "En": "Q",
+              "Fr": "Q",
+              "De": "Q",
+              "Es": "Q"
+            },
             "options": [
               "Narrow",
               "Wide"
@@ -634,7 +789,12 @@
           },
           "resonance_latching_teal": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Res",
+            "label_active": {
+              "En": "Res",
+              "Fr": "Res",
+              "De": "Res",
+              "Es": "Res"
+            },
             "options": [
               "Low",
               "Med",
@@ -654,7 +814,12 @@
           },
           "gain_momentary_purple": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Gain",
+            "label_active": {
+              "En": "Gain",
+              "Fr": "Gain",
+              "De": "Verstärkung",
+              "Es": "Ganancia"
+            },
             "options": [
               "Boost",
               "Cut",
@@ -676,7 +841,12 @@
       },
       "Trapezoid_Toggler_Preamp_Variations": {
         "type": "OcaBlock",
-        "description": "Preamp Type Toggler Showcase (10 Demos)",
+        "description": {
+          "En": "Preamp Type Toggler Showcase (10 Demos)",
+          "Fr": "Preamp Type Bascule Showcase (10 Demos)",
+          "De": "Preamp Type Umschalter Showcase (10 Demos)",
+          "Es": "Preamp Type Conmutador Showcase (10 Demos)"
+        },
         "layout_columns": 4,
         "column_sizing": [
           {
@@ -695,7 +865,12 @@
         "fields": {
           "preamp_tube_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Tube",
+            "label_active": {
+              "En": "Tube",
+              "Fr": "Tube",
+              "De": "Tube",
+              "Es": "Tube"
+            },
             "options": [
               "Tube",
               "SS",
@@ -715,7 +890,12 @@
           },
           "preamp_ss_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "SS",
+            "label_active": {
+              "En": "SS",
+              "Fr": "SS",
+              "De": "SS",
+              "Es": "SS"
+            },
             "options": [
               "Tube",
               "SS",
@@ -735,7 +915,12 @@
           },
           "preamp_fet_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "FET",
+            "label_active": {
+              "En": "FET",
+              "Fr": "FET",
+              "De": "FET",
+              "Es": "FET"
+            },
             "options": [
               "Tube",
               "SS",
@@ -755,7 +940,12 @@
           },
           "preamp_opamp_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "OpAmp",
+            "label_active": {
+              "En": "OpAmp",
+              "Fr": "OpAmp",
+              "De": "OpAmp",
+              "Es": "OpAmp"
+            },
             "options": [
               "OpAmp",
               "Discrete"
@@ -774,7 +964,12 @@
           },
           "preamp_discrete_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Discrete",
+            "label_active": {
+              "En": "Discrete",
+              "Fr": "Discrete",
+              "De": "Discrete",
+              "Es": "Discrete"
+            },
             "options": [
               "OpAmp",
               "Discrete"
@@ -793,7 +988,12 @@
           },
           "preamp_vintage_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Vintage",
+            "label_active": {
+              "En": "Vintage",
+              "Fr": "Vintage",
+              "De": "Vintage",
+              "Es": "Vintage"
+            },
             "options": [
               "Vintage",
               "Modern"
@@ -812,7 +1012,12 @@
           },
           "preamp_modern_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Modern",
+            "label_active": {
+              "En": "Modern",
+              "Fr": "Moderne",
+              "De": "Modern",
+              "Es": "Moderno"
+            },
             "options": [
               "Vintage",
               "Modern"
@@ -831,7 +1036,12 @@
           },
           "preamp_clean_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Clean",
+            "label_active": {
+              "En": "Clean",
+              "Fr": "Clean",
+              "De": "Clean",
+              "Es": "Clean"
+            },
             "options": [
               "Clean",
               "Dirty"
@@ -850,7 +1060,12 @@
           },
           "preamp_boost_latching": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Boost",
+            "label_active": {
+              "En": "Boost",
+              "Fr": "Boost",
+              "De": "Boost",
+              "Es": "Boost"
+            },
             "options": [
               "Boost",
               "Cut"
@@ -869,7 +1084,12 @@
           },
           "preamp_cut_momentary": {
             "type": "_TrapezoidButtonToggler",
-            "label_active": "Cut",
+            "label_active": {
+              "En": "Cut",
+              "Fr": "Cut",
+              "De": "Cut",
+              "Es": "Cut"
+            },
             "options": [
               "Boost",
               "Cut"
@@ -891,7 +1111,12 @@
       "Trapezoid_Toggler_Channel_Variations": {
         "Trapezoid_Toggler_Channel_Variations": {
           "type": "OcaBlock",
-          "description": "Channel Group Toggler Showcase (10 Demos)",
+          "description": {
+            "En": "Channel Group Toggler Showcase (10 Demos)",
+            "Fr": "Canal Group Bascule Showcase (10 Demos)",
+            "De": "Kanal Group Umschalter Showcase (10 Demos)",
+            "Es": "Canal Group Conmutador Showcase (10 Demos)"
+          },
           "layout_columns": 4,
           "column_sizing": [
             {
@@ -910,7 +1135,12 @@
           "fields": {
             "group_a_latching": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": "Group A",
+              "label_active": {
+                "En": "Group A",
+                "Fr": "Group A",
+                "De": "Group A",
+                "Es": "Group A"
+              },
               "options": [
                 "A",
                 "B",
@@ -930,7 +1160,12 @@
             },
             "group_b_momentary": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": "Group B",
+              "label_active": {
+                "En": "Group B",
+                "Fr": "Group B",
+                "De": "Group B",
+                "Es": "Group B"
+              },
               "options": [
                 "A",
                 "B",
@@ -950,7 +1185,12 @@
             },
             "group_c_latching": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": "Group C",
+              "label_active": {
+                "En": "Group C",
+                "Fr": "Group C",
+                "De": "Group C",
+                "Es": "Group C"
+              },
               "options": [
                 "A",
                 "B",
@@ -970,7 +1210,12 @@
             },
             "all_momentary": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": "All",
+              "label_active": {
+                "En": "All",
+                "Fr": "All",
+                "De": "All",
+                "Es": "All"
+              },
               "options": [
                 "On",
                 "Off"
@@ -989,7 +1234,12 @@
             },
             "none_latching": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": "None",
+              "label_active": {
+                "En": "None",
+                "Fr": "None",
+                "De": "None",
+                "Es": "None"
+              },
               "options": [
                 "On",
                 "Off"
@@ -1008,7 +1258,12 @@
             },
             "sub_mix_momentary": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": "Sub Mix",
+              "label_active": {
+                "En": "Sub Mix",
+                "Fr": "Sub Mix",
+                "De": "Sub Mix",
+                "Es": "Sub Mezcla"
+              },
               "options": [
                 "On",
                 "Off"
@@ -1027,7 +1282,12 @@
             },
             "main_latching": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": "Main",
+              "label_active": {
+                "En": "Main",
+                "Fr": "Main",
+                "De": "Main",
+                "Es": "Main"
+              },
               "options": [
                 "On",
                 "Off"
@@ -1046,7 +1306,12 @@
             },
             "bus1_momentary": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": "Bus 1",
+              "label_active": {
+                "En": "Bus 1",
+                "Fr": "Bus 1",
+                "De": "Bus 1",
+                "Es": "Bús 1"
+              },
               "options": [
                 "Active",
                 "Inactive"
@@ -1065,7 +1330,12 @@
             },
             "bus2_latching": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": "Bus 2",
+              "label_active": {
+                "En": "Bus 2",
+                "Fr": "Bus 2",
+                "De": "Bus 2",
+                "Es": "Bús 2"
+              },
               "options": [
                 "Active",
                 "Inactive"
@@ -1084,7 +1354,12 @@
             },
             "bus3_momentary_wide": {
               "type": "_TrapezoidButtonToggler",
-              "label_active": "Bus 3",
+              "label_active": {
+                "En": "Bus 3",
+                "Fr": "Bus 3",
+                "De": "Bus 3",
+                "Es": "Bús 3"
+              },
               "options": [
                 "Active",
                 "Inactive"

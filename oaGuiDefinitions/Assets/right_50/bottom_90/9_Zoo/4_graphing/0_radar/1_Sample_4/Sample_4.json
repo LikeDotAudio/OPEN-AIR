@@ -13,13 +13,23 @@
     "blocks": {
       "Radar_Eye_Zoo_4": {
         "type": "OcaBlock",
-        "description": "Radar Eye Sample 4 - 12 Mini Radars",
+        "description": {
+          "En": "Radar Eye Sample 4 - 12 Mini Radars",
+          "Fr": "Radar Eye Sample 4 - 12 Mini Radars",
+          "De": "Radar Eye Sample 4 - 12 Mini Radars",
+          "Es": "Radar Eye Sample 4 - 12 Mini Radars"
+        },
         "layout_columns": 4,
         "fields": {
           "radar_01": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": "Radar 01",
+            "label_active": {
+              "En": "Radar 01",
+              "Fr": "Radar 01",
+              "De": "Radar 01",
+              "Es": "Radar 01"
+            },
             "app_settings": {
               "title": "Mini",
               "window_size": [
@@ -75,7 +85,12 @@
           "radar_02": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": "Radar 02",
+            "label_active": {
+              "En": "Radar 02",
+              "Fr": "Radar 02",
+              "De": "Radar 02",
+              "Es": "Radar 02"
+            },
             "app_settings": {
               "title": "Mini",
               "window_size": [
@@ -131,7 +146,12 @@
           "radar_03": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": "Radar 03",
+            "label_active": {
+              "En": "Radar 03",
+              "Fr": "Radar 03",
+              "De": "Radar 03",
+              "Es": "Radar 03"
+            },
             "app_settings": {
               "title": "Mini",
               "window_size": [
@@ -187,7 +207,12 @@
           "radar_04": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": "Radar 04",
+            "label_active": {
+              "En": "Radar 04",
+              "Fr": "Radar 04",
+              "De": "Radar 04",
+              "Es": "Radar 04"
+            },
             "app_settings": {
               "title": "Mini",
               "window_size": [
@@ -243,7 +268,12 @@
           "radar_05": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": "Radar 05",
+            "label_active": {
+              "En": "Radar 05",
+              "Fr": "Radar 05",
+              "De": "Radar 05",
+              "Es": "Radar 05"
+            },
             "app_settings": {
               "title": "Mini",
               "window_size": [
@@ -299,7 +329,12 @@
           "radar_06": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": "Radar 06",
+            "label_active": {
+              "En": "Radar 06",
+              "Fr": "Radar 06",
+              "De": "Radar 06",
+              "Es": "Radar 06"
+            },
             "app_settings": {
               "title": "Mini",
               "window_size": [
@@ -355,7 +390,12 @@
           "radar_07": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": "Radar 07",
+            "label_active": {
+              "En": "Radar 07",
+              "Fr": "Radar 07",
+              "De": "Radar 07",
+              "Es": "Radar 07"
+            },
             "app_settings": {
               "title": "Mini",
               "window_size": [
@@ -411,7 +451,12 @@
           "radar_08": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": "Radar 08",
+            "label_active": {
+              "En": "Radar 08",
+              "Fr": "Radar 08",
+              "De": "Radar 08",
+              "Es": "Radar 08"
+            },
             "app_settings": {
               "title": "Mini",
               "window_size": [
@@ -467,7 +512,12 @@
           "radar_09": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": "Radar 09",
+            "label_active": {
+              "En": "Radar 09",
+              "Fr": "Radar 09",
+              "De": "Radar 09",
+              "Es": "Radar 09"
+            },
             "app_settings": {
               "title": "Mini",
               "window_size": [
@@ -523,7 +573,12 @@
           "radar_10": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": "Radar 10",
+            "label_active": {
+              "En": "Radar 10",
+              "Fr": "Radar 10",
+              "De": "Radar 10",
+              "Es": "Radar 10"
+            },
             "app_settings": {
               "title": "Mini",
               "window_size": [
@@ -579,7 +634,12 @@
           "radar_11": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": "Radar 11",
+            "label_active": {
+              "En": "Radar 11",
+              "Fr": "Radar 11",
+              "De": "Radar 11",
+              "Es": "Radar 11"
+            },
             "app_settings": {
               "title": "Mini",
               "window_size": [
@@ -635,7 +695,12 @@
           "radar_12": {
             "type": "_Radar",
             "transparent": true,
-            "label_active": "Radar 12",
+            "label_active": {
+              "En": "Radar 12",
+              "Fr": "Radar 12",
+              "De": "Radar 12",
+              "Es": "Radar 12"
+            },
             "app_settings": {
               "title": "Mini",
               "window_size": [

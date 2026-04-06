@@ -4,7 +4,7 @@
 #
 # Description: Shared constants and defaults for the REST module.
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaOchestration.Methods.network_utils import get_local_ip
 
 app_constants = Config.get_instance()

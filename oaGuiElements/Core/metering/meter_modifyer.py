@@ -1,4 +1,5 @@
 # oaGuiElements/Core/metering/meter_modifyer.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260322.1130.1
 #

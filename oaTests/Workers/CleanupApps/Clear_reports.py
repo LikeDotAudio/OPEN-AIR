@@ -23,9 +23,10 @@ logger = logging.getLogger("ReportCleanup")
 
 def cleanup_reports():
     """
-    Purges all files from the oaReports directory except for the most recently modified one.
+    Purges all files from the DATA_REPORTS_DIR directory except for the most recently modified one.
     """
-    target = os.path.join(project_root, "oaReports")
+    from oaOchestration.Core.path_initializer import DATA_REPORTS_DIR
+    target = str(DATA_REPORTS_DIR)
     
     matrix_log("core", "system", inspect.currentframe().f_code.co_name if "inspect" in globals() else "unknown", f"📡📤📤 [CLEAR_REPORTS] Starting Reports cleanup...", "INFO")
     

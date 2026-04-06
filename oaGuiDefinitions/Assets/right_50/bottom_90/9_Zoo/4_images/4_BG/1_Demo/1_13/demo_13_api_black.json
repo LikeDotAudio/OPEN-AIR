@@ -14,7 +14,12 @@
       "fields": {
         "Meter_1": {
           "type": "_NeedleVUMeter",
-          "label": "Squircle 1",
+          "label": {
+            "En": "Squircle 1",
+            "Fr": "Squircle 1",
+            "De": "Squircle 1",
+            "Es": "Squircle 1"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -41,7 +46,12 @@
         },
         "Meter_2": {
           "type": "_NeedleVUMeter",
-          "label": "Crest 2",
+          "label": {
+            "En": "Crest 2",
+            "Fr": "Crest 2",
+            "De": "Crest 2",
+            "Es": "Crest 2"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -68,7 +78,12 @@
         },
         "Meter_3": {
           "type": "_NeedleVUMeter",
-          "label": "Trapezoid 3",
+          "label": {
+            "En": "Trapezoid 3",
+            "Fr": "Trapezoid 3",
+            "De": "Trapezoid 3",
+            "Es": "Trapezoid 3"
+          },
           "geometry": {
             "width": 250,
             "height": 250

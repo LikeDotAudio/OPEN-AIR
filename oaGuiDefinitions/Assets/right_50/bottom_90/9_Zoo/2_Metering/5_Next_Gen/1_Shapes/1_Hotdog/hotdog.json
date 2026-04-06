@@ -13,7 +13,12 @@
     "blocks": {
       "Hotdog_Variations": {
         "type": "OcaBlock",
-        "description": "Hotdog Meter Variations",
+        "description": {
+          "En": "Hotdog Meter Variations",
+          "Fr": "Hotdog Meter Variations",
+          "De": "Hotdog Meter Variationen",
+          "Es": "Hotdog Meter Variaciones"
+        },
         "layout_columns": 3,
         "column_sizing": [
           {
@@ -29,7 +34,12 @@
         "fields": {
           "Hotdog_1_Large": {
             "type": "_NeedleVUMeter",
-            "label": "Large Classic",
+            "label": {
+              "En": "Large Classic",
+              "Fr": "Large Classique",
+              "De": "Large Klassisch",
+              "Es": "Large Clásico"
+            },
             "geometry": {
               "width": 300,
               "height": 200
@@ -57,7 +67,12 @@
               },
               "labels": [
                 {
-                  "text": "VU METER",
+                  "text": {
+                    "En": "VU METER",
+                    "Fr": "VU METER",
+                    "De": "VU METER",
+                    "Es": "VU METER"
+                  },
                   "x": 0,
                   "y": -45,
                   "size": 12,
@@ -74,7 +89,12 @@
                 }
               ]
             },
-            "label_active": "Large Classic",
+            "label_active": {
+              "En": "Large Classic",
+              "Fr": "Large Classique",
+              "De": "Large Klassisch",
+              "Es": "Large Clásico"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -105,7 +125,12 @@
           },
           "Hotdog_2_Medium": {
             "type": "_NeedleVUMeter",
-            "label": "Medium Gold",
+            "label": {
+              "En": "Medium Gold",
+              "Fr": "Moyen Gold",
+              "De": "Mittel Gold",
+              "Es": "Medio Gold"
+            },
             "geometry": {
               "width": 250,
               "height": 160
@@ -133,7 +158,12 @@
               },
               "labels": [
                 {
-                  "text": "AUDIO LEVEL",
+                  "text": {
+                    "En": "AUDIO LEVEL",
+                    "Fr": "AUDIO LEVEL",
+                    "De": "AUDIO LEVEL",
+                    "Es": "AUDIO LEVEL"
+                  },
                   "x": 0,
                   "y": -35,
                   "size": 10,
@@ -141,7 +171,12 @@
                 }
               ]
             },
-            "label_active": "Medium Gold",
+            "label_active": {
+              "En": "Medium Gold",
+              "Fr": "Moyen Gold",
+              "De": "Mittel Gold",
+              "Es": "Medio Gold"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -172,7 +207,12 @@
           },
           "Hotdog_3_Small": {
             "type": "_NeedleVUMeter",
-            "label": "Small Silver",
+            "label": {
+              "En": "Small Silver",
+              "Fr": "Small Silver",
+              "De": "Small Silver",
+              "Es": "Small Silver"
+            },
             "geometry": {
               "width": 180,
               "height": 120
@@ -201,14 +241,24 @@
               },
               "labels": [
                 {
-                  "text": "MINI-DOG",
+                  "text": {
+                    "En": "MINI-DOG",
+                    "Fr": "MINI-DOG",
+                    "De": "MINI-DOG",
+                    "Es": "MINI-DOG"
+                  },
                   "x": 0,
                   "y": -25,
                   "size": 8
                 }
               ]
             },
-            "label_active": "Small Silver",
+            "label_active": {
+              "En": "Small Silver",
+              "Fr": "Small Silver",
+              "De": "Small Silver",
+              "Es": "Small Silver"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -240,7 +290,12 @@
           },
           "Hotdog_4_Night_Mode": {
             "type": "_NeedleVUMeter",
-            "label": "Night Mode",
+            "label": {
+              "En": "Night Mode",
+              "Fr": "Night Mode",
+              "De": "Night Mode",
+              "Es": "Night Mode"
+            },
             "geometry": {
               "width": 250,
               "height": 160
@@ -266,7 +321,12 @@
               },
               "labels": [
                 {
-                  "text": "LUMINESCENT",
+                  "text": {
+                    "En": "LUMINESCENT",
+                    "Fr": "LUMINESCENT",
+                    "De": "LUMINESCENT",
+                    "Es": "LUMINESCENT"
+                  },
                   "x": 0,
                   "y": -35,
                   "size": 10,
@@ -274,7 +334,12 @@
                 }
               ]
             },
-            "label_active": "Night Mode",
+            "label_active": {
+              "En": "Night Mode",
+              "Fr": "Night Mode",
+              "De": "Night Mode",
+              "Es": "Night Mode"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -304,7 +369,12 @@
           },
           "Hotdog_5_Flat": {
             "type": "_NeedleVUMeter",
-            "label": "Flat Blue",
+            "label": {
+              "En": "Flat Blue",
+              "Fr": "Flat Blue",
+              "De": "Flat Blue",
+              "Es": "Flat Blue"
+            },
             "geometry": {
               "width": 250,
               "height": 160
@@ -330,7 +400,12 @@
               },
               "labels": [
                 {
-                  "text": "FLAT DESIGN",
+                  "text": {
+                    "En": "FLAT DESIGN",
+                    "Fr": "FLAT DESIGN",
+                    "De": "FLAT DESIGN",
+                    "Es": "FLAT DESIGN"
+                  },
                   "x": 0,
                   "y": -35,
                   "size": 10,
@@ -338,7 +413,12 @@
                 }
               ]
             },
-            "label_active": "Flat Blue",
+            "label_active": {
+              "En": "Flat Blue",
+              "Fr": "Flat Blue",
+              "De": "Flat Blue",
+              "Es": "Flat Blue"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -368,7 +448,12 @@
           },
           "Hotdog_6_Luxury": {
             "type": "_NeedleVUMeter",
-            "label": "Luxury Gold",
+            "label": {
+              "En": "Luxury Gold",
+              "Fr": "Luxury Gold",
+              "De": "Luxury Gold",
+              "Es": "Luxury Gold"
+            },
             "geometry": {
               "width": 250,
               "height": 160
@@ -394,7 +479,12 @@
               },
               "labels": [
                 {
-                  "text": "PRESTIGE",
+                  "text": {
+                    "En": "PRESTIGE",
+                    "Fr": "PRESTIGE",
+                    "De": "PRESTIGE",
+                    "Es": "PRESTIGE"
+                  },
                   "x": 0,
                   "y": -40,
                   "size": 12,
@@ -402,7 +492,12 @@
                 }
               ]
             },
-            "label_active": "Luxury Gold",
+            "label_active": {
+              "En": "Luxury Gold",
+              "Fr": "Luxury Gold",
+              "De": "Luxury Gold",
+              "Es": "Luxury Gold"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -432,7 +527,12 @@
           },
           "Hotdog_7_Cyber": {
             "type": "_NeedleVUMeter",
-            "label": "Cyber Neon",
+            "label": {
+              "En": "Cyber Neon",
+              "Fr": "Cyber Neon",
+              "De": "Cyber Neon",
+              "Es": "Cyber Neon"
+            },
             "geometry": {
               "width": 250,
               "height": 160
@@ -458,7 +558,12 @@
               },
               "labels": [
                 {
-                  "text": "CYBERPUNK",
+                  "text": {
+                    "En": "CYBERPUNK",
+                    "Fr": "CYBERPUNK",
+                    "De": "CYBERPUNK",
+                    "Es": "CYBERPUNK"
+                  },
                   "x": 0,
                   "y": -35,
                   "size": 12,
@@ -467,7 +572,12 @@
                 }
               ]
             },
-            "label_active": "Cyber Neon",
+            "label_active": {
+              "En": "Cyber Neon",
+              "Fr": "Cyber Neon",
+              "De": "Cyber Neon",
+              "Es": "Cyber Neon"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -497,7 +607,12 @@
           },
           "Hotdog_8_Vintage": {
             "type": "_NeedleVUMeter",
-            "label": "Vintage Cream",
+            "label": {
+              "En": "Vintage Cream",
+              "Fr": "Vintage Cream",
+              "De": "Vintage Cream",
+              "Es": "Vintage Cream"
+            },
             "geometry": {
               "width": 250,
               "height": 160
@@ -523,7 +638,12 @@
               },
               "labels": [
                 {
-                  "text": "EST. 1970",
+                  "text": {
+                    "En": "EST. 1970",
+                    "Fr": "EST. 1970",
+                    "De": "EST. 1970",
+                    "Es": "EST. 1970"
+                  },
                   "x": 0,
                   "y": -35,
                   "size": 10,
@@ -531,7 +651,12 @@
                 }
               ]
             },
-            "label_active": "Vintage Cream",
+            "label_active": {
+              "En": "Vintage Cream",
+              "Fr": "Vintage Cream",
+              "De": "Vintage Cream",
+              "Es": "Vintage Cream"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",
@@ -561,7 +686,12 @@
           },
           "Hotdog_9_Blueprint": {
             "type": "_NeedleVUMeter",
-            "label": "Blueprint",
+            "label": {
+              "En": "Blueprint",
+              "Fr": "Blueprint",
+              "De": "Blueprint",
+              "Es": "Blueprint"
+            },
             "geometry": {
               "width": 250,
               "height": 160
@@ -587,7 +717,12 @@
               },
               "labels": [
                 {
-                  "text": "CAD DRAWING",
+                  "text": {
+                    "En": "CAD DRAWING",
+                    "Fr": "CAD DRAWING",
+                    "De": "CAD DRAWING",
+                    "Es": "CAD DRAWING"
+                  },
                   "x": 0,
                   "y": -35,
                   "size": 10,
@@ -595,7 +730,12 @@
                 }
               ]
             },
-            "label_active": "Blueprint",
+            "label_active": {
+              "En": "Blueprint",
+              "Fr": "Blueprint",
+              "De": "Blueprint",
+              "Es": "Blueprint"
+            },
             "active_text_color": "#1a1a1a",
             "text_color": "#888888",
             "active_font_style": "bold",

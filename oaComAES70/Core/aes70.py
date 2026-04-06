@@ -9,7 +9,7 @@ import time
 # --- Standard Debug Logging Setup ---
 LOCAL_DEBUG = False
 from oaLogging.Core.logger import get_logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaComAES70.Methods.aes70_parser import OcaParser
 
 app_constants = Config.get_instance()

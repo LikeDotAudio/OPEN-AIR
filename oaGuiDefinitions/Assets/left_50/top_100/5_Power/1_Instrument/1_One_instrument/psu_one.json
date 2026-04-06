@@ -13,16 +13,36 @@
     "blocks": {
       "PSU_Reactor_Interface": {
         "type": "OcaBlock",
-        "description": "High-Voltage Analog Injection System",
+        "description": {
+          "En": "High-Voltage Analog Injection System",
+          "Fr": "High-Tension Analog Injection Système",
+          "De": "High-Spannenung Analog Injection System",
+          "Es": "High-Voltaje Analog Injection Sistema"
+        },
         "fields": {
           "Top_Level_Interlock": {
             "type": "OcaBlock",
-            "description": "MAIN POWER BUS",
+            "description": {
+              "En": "MAIN POWER BUS",
+              "Fr": "MAIN POWER BUS",
+              "De": "MAIN POWER BUS",
+              "Es": "MAIN POWER BUS"
+            },
             "fields": {
               "Master_Output_Switch": {
                 "type": "_TrapezoidButton",
-                "label_active": "\u2622\ufe0f MAIN BUS: ACTIVE \u2622\ufe0f",
-                "label_inactive": "MAIN BUS: DISENGAGED",
+                "label_active": {
+                  "En": "☢️ MAIN BUS: ACTIVE ☢️",
+                  "Fr": "☢️ MAIN BUS: ACTIVE ☢️",
+                  "De": "☢️ MAIN BUS: ACTIVE ☢️",
+                  "Es": "☢️ MAIN BUS: ACTIVE ☢️"
+                },
+                "label_inactive": {
+                  "En": "MAIN BUS: DISENGAGED",
+                  "Fr": "MAIN BUS: DISENGAGED",
+                  "De": "MAIN BUS: DISENGAGED",
+                  "Es": "MAIN BUS: DISENGAGED"
+                },
                 "state_default": false,
                 "message_details": {
                   "PSU_MODEL": {
@@ -48,16 +68,31 @@
           },
           "Analog_Telemetry_Deck": {
             "type": "OcaBlock",
-            "description": "Galvanometer Array",
+            "description": {
+              "En": "Galvanometer Array",
+              "Fr": "Réseau de galvanomètres",
+              "De": "Galvanometer-Array",
+              "Es": "Matriz de galvanómetros"
+            },
             "fields": {
               "Meter_Voltage": {
                 "type": "_GuiAnalogGauge",
-                "label_active": "VOLTAGE",
+                "label_active": {
+                  "En": "VOLTAGE",
+                  "Fr": "TENSION",
+                  "De": "SPANNUNG",
+                  "Es": "VOLTAJE"
+                },
                 "value_default": "0",
                 "min": "0",
                 "max": "100",
                 "units": "V",
-                "description": "Potential Difference",
+                "description": {
+                  "En": "Potential Difference",
+                  "Fr": "Potential Difference",
+                  "De": "Potential Difference",
+                  "Es": "Potential Difference"
+                },
                 "message_details": {
                   "PSU_MODEL": {
                     "type": "_GuiActuator",
@@ -80,12 +115,22 @@
               },
               "Meter_Current": {
                 "type": "_GuiAnalogGauge",
-                "label_active": "CURRENT",
+                "label_active": {
+                  "En": "CURRENT",
+                  "Fr": "COURANT",
+                  "De": "STROM",
+                  "Es": "CORRIENTE"
+                },
                 "value_default": "0",
                 "min": "0",
                 "max": "10",
                 "units": "A",
-                "description": "Electron Flow",
+                "description": {
+                  "En": "Electron Flow",
+                  "Fr": "Electron Flow",
+                  "De": "Electron Flow",
+                  "Es": "Electron Flow"
+                },
                 "message_details": {
                   "PSU_MODEL": {
                     "type": "_GuiActuator",
@@ -108,12 +153,22 @@
               },
               "Meter_Power": {
                 "type": "_GuiAnalogGauge",
-                "label_active": "TOTAL POWER",
+                "label_active": {
+                  "En": "TOTAL POWER",
+                  "Fr": "TOTAL POWER",
+                  "De": "TOTAL POWER",
+                  "Es": "TOTAL POWER"
+                },
                 "value_default": "0",
                 "min": "0",
                 "max": "1000",
                 "units": "W",
-                "description": "Energy Consumption",
+                "description": {
+                  "En": "Energy Consumption",
+                  "Fr": "Consommation d'énergie",
+                  "De": "Energieverbrauch",
+                  "Es": "Consumo de energía"
+                },
                 "message_details": {
                   "PSU_MODEL": {
                     "type": "_GuiActuator",
@@ -138,12 +193,27 @@
           },
           "Visual_History_Sector": {
             "type": "OcaBlock",
-            "description": "Temporal Log",
+            "description": {
+              "En": "Temporal Log",
+              "Fr": "Temporal Log",
+              "De": "Temporal Log",
+              "Es": "Temporal Log"
+            },
             "fields": {
               "Power_History": {
                 "type": "_GuiGraph",
-                "label_active": "Stability Matrix",
-                "description": "Voltage & Current over Time",
+                "label_active": {
+                  "En": "Stability Matrix",
+                  "Fr": "Stability Matrix",
+                  "De": "Stability Matrix",
+                  "Es": "Stability Matrix"
+                },
+                "description": {
+                  "En": "Voltage & Current over Time",
+                  "Fr": "Tension et courant au fil du temps",
+                  "De": "Spannung & Strom über die Zeit",
+                  "Es": "Voltaje y corriente a lo largo del tiempo"
+                },
                 "height": 200,
                 "message_details": {
                   "PSU_MODEL": {
@@ -169,11 +239,21 @@
           },
           "Reactor_Control_Rods": {
             "type": "OcaBlock",
-            "description": "Manual Regulation",
+            "description": {
+              "En": "Manual Regulation",
+              "Fr": "Manuel Regulation",
+              "De": "Manuell Regulation",
+              "Es": "Manual Regulation"
+            },
             "fields": {
               "Voltage_Fader": {
                 "type": "_GuiVerticalFader",
-                "label_active": "SET VOLTS (V)",
+                "label_active": {
+                  "En": "SET VOLTS (V)",
+                  "Fr": "SET VOLTS (V)",
+                  "De": "SET VOLTS (V)",
+                  "Es": "SET VOLTS (V)"
+                },
                 "value_default": "5.0",
                 "min": "0.0",
                 "max": "100.0",
@@ -200,7 +280,12 @@
               },
               "Current_Fader": {
                 "type": "_GuiVerticalFader",
-                "label_active": "LIMIT AMPS (A)",
+                "label_active": {
+                  "En": "LIMIT AMPS (A)",
+                  "Fr": "LIMIT AMPS (A)",
+                  "De": "LIMIT AMPS (A)",
+                  "Es": "LIMIT AMPS (A)"
+                },
                 "value_default": "0.1",
                 "min": "0.0",
                 "max": "10.0",

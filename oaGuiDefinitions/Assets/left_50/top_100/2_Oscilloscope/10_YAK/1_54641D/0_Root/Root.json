@@ -13,14 +13,24 @@
     "blocks": {
       "Do": {
         "type": "OcaBlock",
-        "description": "Root Action Commands",
+        "description": {
+          "En": "Root Action Commands",
+          "Fr": "Root Action Commands",
+          "De": "Root Action Commands",
+          "Es": "Root Action Commands"
+        },
         "fields": {
           "Run_Stop_Control": {
             "type": "OcaBlock",
             "fields": {
               "Run": {
                 "type": "_GuiActuator",
-                "label_inactive": "RUN",
+                "label_inactive": {
+                  "En": "RUN",
+                  "Fr": "EXEC",
+                  "De": "AUSFÜHREN",
+                  "Es": "EJEC"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -40,7 +50,12 @@
               },
               "Stop": {
                 "type": "_GuiActuator",
-                "label_inactive": "STOP",
+                "label_inactive": {
+                  "En": "STOP",
+                  "Fr": "STOP",
+                  "De": "STOP",
+                  "Es": "STOP"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -60,7 +75,12 @@
               },
               "Single": {
                 "type": "_GuiActuator",
-                "label_inactive": "SINGLE",
+                "label_inactive": {
+                  "En": "SINGLE",
+                  "Fr": "SINGLE",
+                  "De": "SINGLE",
+                  "Es": "SINGLE"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -80,7 +100,12 @@
               },
               "Autoscale": {
                 "type": "_GuiActuator",
-                "label_inactive": "AUTOSCALE",
+                "label_inactive": {
+                  "En": "AUTOSCALE",
+                  "Fr": "ÉCHELLE AUTO",
+                  "De": "AUTOSCALE",
+                  "Es": "ESCALA AUTO"
+                },
                 "AES70": "OcaBooleanActuator",
                 "style": {
                   "active_text_color": "#1a1a1a",
@@ -134,7 +159,12 @@
                       "channel": {
                         "value": "CHAN1",
                         "type": "_GuiValue",
-                        "label": "Channel",
+                        "label": {
+                          "En": "Channel",
+                          "Fr": "Canal",
+                          "De": "Kanal",
+                          "Es": "Canal"
+                        },
                         "units": ""
                       }
                     }

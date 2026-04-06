@@ -10,10 +10,11 @@ from tkinter import ttk
 import inspect
 from loguru import logger
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaGuiManager.Core.factory.button_canvas_base import CanvasButton
+from oaGuiFramework.Methods.i18n_utils import get_text
 from oaGuiManager.Core.transparency.transparency_mixin import TransparencyMixin
 from oaOchestration.Methods.widget_event_binder import bind_variable_trace
 from oaComMQTT.Methods.mqtt_topic_utils import get_topic
@@ -37,8 +38,16 @@ class TogglerButton(CanvasButton):
         val, units = self.option_data.get("value"), self.option_data.get("units")
         if val is not None or units is not None:
             suffix = f"\n({val if val else ''}{units if units else ''})"
-            self.on_text += suffix
-            self.off_text += suffix
+            # ⚡ I18N SUPPORT: Apply suffix to each language in the dict, or the flat string
+            if isinstance(self.on_text, dict):
+                self.on_text = {lang: str(txt) + suffix for lang, txt in self.on_text.items()}
+            else:
+                self.on_text = str(self.on_text) + suffix
+                
+            if isinstance(self.off_text, dict):
+                self.off_text = {lang: str(txt) + suffix for lang, txt in self.off_text.items()}
+            else:
+                self.off_text = str(self.off_text) + suffix
 
         # Layout configuration
         layout = config.get("layout", {})
@@ -85,7 +94,7 @@ class BuilderButtonTogglerCreator(TransparencyMixin):
         b_inst = ctx.builder_instance if hasattr(ctx, 'builder_instance') else ctx.app_instance
         
         path, b_topic = config_data.get("path"), ctx.base_mqtt_topic_from_path
-        label = config_data.get("label", "")
+        label = get_text(config_data.get('label'), "")
 
         # 1. Main Canvas Container
         group_canvas = tk.Canvas(parent_widget, bd=0, highlightthickness=0, relief="flat")

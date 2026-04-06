@@ -1,7 +1,12 @@
 {
   "ATSC (USA)": {
     "name": "ATSC (USA)",
-    "description": "Advanced Television Systems Committee standard for the United States",
+    "description": {
+      "En": "Advanced Television Systems Committee standard for the United States",
+      "Fr": "Advanced Télévision Systèmes Committee standard for the Unitéed States",
+      "De": "Advanced Fernsehen Systems Committee standard for the Einheited States",
+      "Es": "Advanced Televisión Sistemas Committee standard for the Unidaded States"
+    },
     "country": "United States",
     "region": "North America",
     "type": "tv",

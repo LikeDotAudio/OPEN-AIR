@@ -24,7 +24,7 @@ import zipfile
 import numpy as np
 from loguru import logger
 from oaLogging.Methods.matrix_gate import is_debug_allowed, matrix_log
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()
 

@@ -13,40 +13,70 @@
     "blocks": {
       "Horizontal_Fader_Expansion": {
         "type": "OcaBlock",
-        "description": "20 Additional Horizontal Fader Variations with Modular Parameters",
+        "description": {
+          "En": "20 Additional Horizontal Fader Variations with Modular Parameters",
+          "Fr": "20 Additionnel Horizontal Fader Variations with Modulaire Paramètres",
+          "De": "20 Zusätzlich Horizontal Fader Variationen with Modular Parameter",
+          "Es": "20 Adicional Horizontal Fader Variaciones with Modular Parámetros"
+        },
         "layout_columns": 4,
         "fields": {
           "hf_1": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Ruby H",
+            "label_active": {
+              "En": "Ruby H",
+              "Fr": "Ruby H",
+              "De": "Ruby H",
+              "Es": "Ruby H"
+            },
             "cap_color": "#E0115F",
             "cap_width": 40,
             "cap_height": 30
           },
           "hf_2": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Emerald H",
+            "label_active": {
+              "En": "Emerald H",
+              "Fr": "Emerald H",
+              "De": "Emerald H",
+              "Es": "Emerald H"
+            },
             "cap_color": "#50C878",
             "cap_width": 50,
             "cap_height": 25
           },
           "hf_3": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Sapphire H",
+            "label_active": {
+              "En": "Sapphire H",
+              "Fr": "Sapphire H",
+              "De": "Sapphire H",
+              "Es": "Sapphire H"
+            },
             "cap_color": "#0F52BA",
             "cap_width": 30,
             "cap_height": 45
           },
           "hf_4": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Amber H",
+            "label_active": {
+              "En": "Amber H",
+              "Fr": "Amber H",
+              "De": "Amber H",
+              "Es": "Amber H"
+            },
             "cap_color": "#FFBF00",
             "cap_width": 60,
             "cap_height": 20
           },
           "hf_5": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Titan H",
+            "label_active": {
+              "En": "Titan H",
+              "Fr": "Titan H",
+              "De": "Titan H",
+              "Es": "Titan H"
+            },
             "layout": {
               "W": 300,
               "H": 120
@@ -57,7 +87,12 @@
           },
           "hf_6": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Nano H",
+            "label_active": {
+              "En": "Nano H",
+              "Fr": "Nano H",
+              "De": "Nano H",
+              "Es": "Nano H"
+            },
             "layout": {
               "W": 150,
               "H": 60
@@ -68,45 +103,80 @@
           },
           "hf_7": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Neon Lime",
+            "label_active": {
+              "En": "Neon Lime",
+              "Fr": "Neon Lime",
+              "De": "Neon Lime",
+              "Es": "Neon Lime"
+            },
             "cap_color": "#32CD32",
             "value_highlight_color": "#32CD32"
           },
           "hf_8": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Neon Pink",
+            "label_active": {
+              "En": "Neon Pink",
+              "Fr": "Neon Pink",
+              "De": "Neon Pink",
+              "Es": "Neon Pink"
+            },
             "cap_color": "#FF69B4",
             "value_highlight_color": "#FF69B4"
           },
           "hf_9": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Wide Cap",
+            "label_active": {
+              "En": "Wide Cap",
+              "Fr": "Wide Cap",
+              "De": "Wide Cap",
+              "Es": "Wide Cap"
+            },
             "cap_width": 80,
             "cap_height": 20,
             "cap_color": "#33A1FD"
           },
           "hf_10": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Tall Cap",
+            "label_active": {
+              "En": "Tall Cap",
+              "Fr": "Tall Cap",
+              "De": "Tall Cap",
+              "Es": "Tall Cap"
+            },
             "cap_width": 20,
             "cap_height": 60,
             "cap_color": "#00E676"
           },
           "hf_11": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Blue Ghost",
+            "label_active": {
+              "En": "Blue Ghost",
+              "Fr": "Blue Ghost",
+              "De": "Blue Ghost",
+              "Es": "Blue Ghost"
+            },
             "cap_color": "#111111",
             "cap_highlight_color": "#0000FF"
           },
           "hf_12": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Red Ghost",
+            "label_active": {
+              "En": "Red Ghost",
+              "Fr": "Red Ghost",
+              "De": "Red Ghost",
+              "Es": "Red Ghost"
+            },
             "cap_color": "#111111",
             "cap_highlight_color": "#FF0000"
           },
           "hf_13": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Slim H",
+            "label_active": {
+              "En": "Slim H",
+              "Fr": "Slim H",
+              "De": "Slim H",
+              "Es": "Slim H"
+            },
             "layout": {
               "H": 50
             },
@@ -116,7 +186,12 @@
           },
           "hf_14": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Boxy H",
+            "label_active": {
+              "En": "Boxy H",
+              "Fr": "Boxy H",
+              "De": "Boxy H",
+              "Es": "Boxy H"
+            },
             "layout": {
               "W": 200,
               "H": 150
@@ -127,37 +202,67 @@
           },
           "hf_15": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Vapor H",
+            "label_active": {
+              "En": "Vapor H",
+              "Fr": "Vapor H",
+              "De": "Vapor H",
+              "Es": "Vapor H"
+            },
             "cap_color": "#FF00FF",
             "cap_highlight_color": "#00FFFF"
           },
           "hf_16": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Forest H",
+            "label_active": {
+              "En": "Forest H",
+              "Fr": "Forest H",
+              "De": "Forest H",
+              "Es": "Forest H"
+            },
             "cap_color": "#006400",
             "tick_color": "#90EE90"
           },
           "hf_17": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Fire H",
+            "label_active": {
+              "En": "Fire H",
+              "Fr": "Fire H",
+              "De": "Fire H",
+              "Es": "Fire H"
+            },
             "cap_color": "#B22222",
             "cap_highlight_color": "#FFD700"
           },
           "hf_18": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Ice H",
+            "label_active": {
+              "En": "Ice H",
+              "Fr": "Ice H",
+              "De": "Ice H",
+              "Es": "Ice H"
+            },
             "cap_color": "#E0FFFF",
             "cap_highlight_color": "#4682B4"
           },
           "hf_19": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Gold H",
+            "label_active": {
+              "En": "Gold H",
+              "Fr": "Gold H",
+              "De": "Gold H",
+              "Es": "Gold H"
+            },
             "cap_color": "#FFD700",
             "fader_cap_scale": 1.2
           },
           "hf_20": {
             "type": "_CustomHorizontalFader",
-            "label_active": "Shadow H",
+            "label_active": {
+              "En": "Shadow H",
+              "Fr": "Shadow H",
+              "De": "Shadow H",
+              "Es": "Shadow H"
+            },
             "cap_color": "#333333",
             "tick_interval": 5
           }

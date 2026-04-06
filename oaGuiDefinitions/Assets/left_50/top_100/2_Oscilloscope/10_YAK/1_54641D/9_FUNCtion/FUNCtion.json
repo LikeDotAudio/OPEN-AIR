@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Math Function Settings",
+        "description": {
+          "En": "Math Function Settings",
+          "Fr": "Paramètres de fonction mathématique",
+          "De": "Mathematische Funktionseinstellungen",
+          "Es": "Ajustes de función matemática"
+        },
         "fields": {
           "Set_Function_Operation": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "op": {
                     "value": "ADD",
                     "type": "_GuiValue",
-                    "label": "Op",
+                    "label": {
+                      "En": "Op",
+                      "Fr": "Op",
+                      "De": "Op",
+                      "Es": "Op"
+                    },
                     "units": "",
-                    "description": "ADD, SUBTract, MULTiply, FFT, INTegrate"
+                    "description": {
+                      "En": "ADD, SUBTract, MULTiply, FFT, INTegrate",
+                      "Fr": "ADD, SUBTract, MULTiply, FFT, INTegrate",
+                      "De": "ADD, SUBTract, MULTiply, FFT, INTegrate",
+                      "Es": "ADD, SUBTract, MULTiply, FFT, INTegrate"
+                    }
                   }
                 }
               }
@@ -83,7 +98,12 @@
                       "src": {
                         "value": "CHAN1",
                         "type": "_GuiValue",
-                        "label": "Src1"
+                        "label": {
+                          "En": "Src1",
+                          "Fr": "Src1",
+                          "De": "Src1",
+                          "Es": "Src1"
+                        }
                       }
                     }
                   }
@@ -115,7 +135,12 @@
                       "src": {
                         "value": "CHAN2",
                         "type": "_GuiValue",
-                        "label": "Src2"
+                        "label": {
+                          "En": "Src2",
+                          "Fr": "Src2",
+                          "De": "Src2",
+                          "Es": "Src2"
+                        }
                       }
                     }
                   }

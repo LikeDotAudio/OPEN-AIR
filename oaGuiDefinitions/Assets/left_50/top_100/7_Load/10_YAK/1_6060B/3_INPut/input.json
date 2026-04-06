@@ -13,11 +13,21 @@
     "blocks": {
       "Input": {
         "type": "OcaBlock",
-        "description": "Input Control",
+        "description": {
+          "En": "Input Control",
+          "Fr": "Entrée Control",
+          "De": "Eingang Control",
+          "Es": "Entrada Control"
+        },
         "fields": {
           "Input_ON": {
             "type": "_GuiActuator",
-            "label_inactive": "Input ON",
+            "label_inactive": {
+              "En": "Input ON",
+              "Fr": "Entrée ON",
+              "De": "Eingang ON",
+              "Es": "Entrada ON"
+            },
             "AES70": "OcaBooleanActuator",
             "style": {
               "active_text_color": "#1a1a1a",
@@ -38,7 +48,12 @@
           },
           "Input_OFF": {
             "type": "_GuiActuator",
-            "label_inactive": "Input OFF",
+            "label_inactive": {
+              "En": "Input OFF",
+              "Fr": "Entrée OFF",
+              "De": "Eingang OFF",
+              "Es": "Entrada OFF"
+            },
             "AES70": "OcaBooleanActuator",
             "style": {
               "active_text_color": "#1a1a1a",
@@ -59,7 +74,12 @@
           },
           "Clear_Protection": {
             "type": "_GuiActuator",
-            "label_inactive": "Clear Prot",
+            "label_inactive": {
+              "En": "Clear Prot",
+              "Fr": "Effacer Prot",
+              "De": "Löschen Prot",
+              "Es": "Borrar Prot"
+            },
             "AES70": "OcaBooleanActuator",
             "style": {
               "active_text_color": "#1a1a1a",

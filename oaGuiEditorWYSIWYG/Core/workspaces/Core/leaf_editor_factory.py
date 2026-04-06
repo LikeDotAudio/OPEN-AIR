@@ -60,12 +60,14 @@ class LeafEditorFactory:
             state_manager.update_state(current_value, path=self.full_path, source=self.source)
 
         def set_value(self, new_value):
+            if not self.winfo_exists() or not self.entry.winfo_exists(): return
             if isinstance(new_value, str):
                 self.entry.delete(0, tk.END)
                 self.entry.insert(0, new_value)
                 bg_color = new_value.lower()
                 if not bg_color.startswith("#"): bg_color = "#2b2b2b"
-                self.swatch.config(bg=bg_color)
+                if self.swatch.winfo_exists():
+                    self.swatch.config(bg=bg_color)
             # Add validation or error handling for invalid new_value types
 
     @staticmethod
@@ -135,6 +137,7 @@ class LeafEditorFactory:
             pass
 
         def set_value(self, new_value):
+            if not self.winfo_exists() or not self.entry.winfo_exists(): return
             if self.is_numeric:
                 if isinstance(new_value, float):
                     formatted_value = f"{new_value:.3f}".rstrip('0').rstrip('.')

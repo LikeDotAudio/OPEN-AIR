@@ -10,7 +10,7 @@ current_version_hash = 20250810 * 134500 * 1  # Example hash, adjust as needed
 import csv
 import os
 import inspect  # Import inspect module
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 
 app_constants = Config.get_instance()  # Get the singleton instance
 # Updated imports for new logging functions

@@ -13,7 +13,12 @@
     "blocks": {
       "set": {
         "type": "OcaBlock",
-        "description": "Acquisition Settings",
+        "description": {
+          "En": "Acquisition Settings",
+          "Fr": "Paramètres d'acquisition",
+          "De": "Erfassungseinstellungen",
+          "Es": "Ajustes de adquisición"
+        },
         "fields": {
           "Set_Acquire_Type": {
             "type": "OcaBlock",
@@ -46,9 +51,19 @@
                   "type": {
                     "value": "NORMal",
                     "type": "_GuiValue",
-                    "label": "Type",
+                    "label": {
+                      "En": "Type",
+                      "Fr": "Type",
+                      "De": "Typ",
+                      "Es": "Tipo"
+                    },
                     "units": "",
-                    "description": "NORMal, AVERage, PEAK"
+                    "description": {
+                      "En": "NORMal, AVERage, PEAK",
+                      "Fr": "NORMal, AVERage, PEAK",
+                      "De": "NORMal, AVERage, PEAK",
+                      "Es": "NORMal, AVERage, PEAK"
+                    }
                   }
                 }
               }
@@ -85,7 +100,12 @@
                   "count": {
                     "value": "8",
                     "type": "_GuiValue",
-                    "label": "Count",
+                    "label": {
+                      "En": "Count",
+                      "Fr": "Count",
+                      "De": "Count",
+                      "Es": "Count"
+                    },
                     "units": ""
                   }
                 }
@@ -123,9 +143,19 @@
                   "points": {
                     "value": "MAXimum",
                     "type": "_GuiValue",
-                    "label": "Points",
+                    "label": {
+                      "En": "Points",
+                      "Fr": "Points",
+                      "De": "Punkte",
+                      "Es": "Puntos"
+                    },
                     "units": "",
-                    "description": "100, 250, 500, 1000, 2000, MAXimum"
+                    "description": {
+                      "En": "100, 250, 500, 1000, 2000, MAXimum",
+                      "Fr": "100, 250, 500, 1000, 2000, MAXimum",
+                      "De": "100, 250, 500, 1000, 2000, MAXimum",
+                      "Es": "100, 250, 500, 1000, 2000, MAXimum"
+                    }
                   }
                 }
               }
@@ -135,7 +165,12 @@
       },
       "nab": {
         "type": "OcaBlock",
-        "description": "Acquisition Readbacks",
+        "description": {
+          "En": "Acquisition Readbacks",
+          "Fr": "Acquisition Readbacks",
+          "De": "Erfassung Readbacks",
+          "Es": "Adquisición Readbacks"
+        },
         "fields": {
           "Get_Sample_Rate": {
             "type": "OcaBlock",
@@ -168,7 +203,12 @@
                   "srate": {
                     "value": "Hz",
                     "type": "_GuiValue",
-                    "label": "Sample Rate",
+                    "label": {
+                      "En": "Sample Rate",
+                      "Fr": "Taux d'échantillonnage",
+                      "De": "Abtastrate",
+                      "Es": "Frecuencia de muestreo"
+                    },
                     "units": "Hz"
                   }
                 }

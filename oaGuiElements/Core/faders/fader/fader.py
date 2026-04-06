@@ -1,4 +1,5 @@
 # fader/fader.py
+from oaGuiFramework.Methods.i18n_utils import get_text
 # Author: Anthony Peter Kuzub
 # Version: 20260315.Modular.1
 #
@@ -14,7 +15,7 @@ import os
 # --- Standard Debug Logging Setup ---
 from oaLogging.Core.logger import builder_logger
 from loguru import logger
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 app_constants = Config.get_instance()
 
 from oaStyle.Core.style import THEMES, DEFAULT_THEME
@@ -53,7 +54,7 @@ class CustomFaderFrame(
         self.show_value = bool(config.get("show_value", True))
         self.show_units = bool(config.get("show_units", False))
         self.label_color = config.get("label_color", "white")
-        self.label_text = config.get("label_active", "")
+        self.label_text = get_text(config.get("label_active"), "")
         self.unit_text, self.unit_position = config.get("unit_text", ""), config.get("unit_position", "right") 
         
         self.tick_size = float(config.get("tick_size", f_style.get("tick_size", 0.35)))

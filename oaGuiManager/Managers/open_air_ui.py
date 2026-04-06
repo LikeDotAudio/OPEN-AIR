@@ -26,10 +26,10 @@ project_root = current_dir.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from oaConfiguration.FileReaders.config_reader import Config
+from oaConfigurationManager.FileReaders.config_reader import Config
 from oaLogging.Core.logger import set_log_directory
 from oaOchestration.Core.path_initializer import initialize_paths, DATA_LOGS_DIR
-from oaConfiguration.Methods.console_encoder import configure_console_encoding
+from oaConfigurationManager.Methods.console_encoder import configure_console_encoding
 from oaGuiSplashScreen.Methods.splash_screen import SplashScreen
 from oaLogging.Methods.matrix_gate import matrix_log
 import inspect

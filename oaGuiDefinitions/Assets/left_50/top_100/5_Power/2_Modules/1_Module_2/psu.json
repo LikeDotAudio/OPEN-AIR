@@ -13,15 +13,30 @@
     "blocks": {
       "PSU_Panel": {
         "type": "OcaBlock",
-        "description": "Power Supply Unit Control Panel",
+        "description": {
+          "En": "Power Supply Unit Control Panel",
+          "Fr": "Puissance Supply Unité Contrôle Panel",
+          "De": "Leistung Supply Einheit Steuerung Panel",
+          "Es": "Potencia Supply Unidad Control Panel"
+        },
         "fields": {
           "Voltage_Control": {
             "type": "OcaBlock",
-            "description": "Voltage Output",
+            "description": {
+              "En": "Voltage Output",
+              "Fr": "Tension Sortie",
+              "De": "Spannenung Ausgang",
+              "Es": "Voltaje Salida"
+            },
             "fields": {
               "voltage_set": {
                 "type": "_TextInput",
-                "label_active": "Voltage (V)",
+                "label_active": {
+                  "En": "Voltage (V)",
+                  "Fr": "Tension (V)",
+                  "De": "Spannenung (V)",
+                  "Es": "Voltaje (V)"
+                },
                 "value_default": "5.0",
                 "message_details": {
                   "PSU_MODEL": {
@@ -47,11 +62,21 @@
           },
           "Current_Control": {
             "type": "OcaBlock",
-            "description": "Current Limit",
+            "description": {
+              "En": "Current Limit",
+              "Fr": "Limite de courant",
+              "De": "Strombegrenzung",
+              "Es": "Límite de corriente"
+            },
             "fields": {
               "current_set": {
                 "type": "_TextInput",
-                "label_active": "Current (A)",
+                "label_active": {
+                  "En": "Current (A)",
+                  "Fr": "Courant (A)",
+                  "De": "Strom (A)",
+                  "Es": "Corriente (A)"
+                },
                 "value_default": "0.1",
                 "message_details": {
                   "PSU_MODEL": {
@@ -77,12 +102,27 @@
           },
           "Output_Control": {
             "type": "OcaBlock",
-            "description": "Output State",
+            "description": {
+              "En": "Output State",
+              "Fr": "Sortie State",
+              "De": "Ausgang State",
+              "Es": "Salida State"
+            },
             "fields": {
               "output_enable": {
                 "type": "_GuiButtonToggle",
-                "label_active": "ON",
-                "label_inactive": "OFF",
+                "label_active": {
+                  "En": "ON",
+                  "Fr": "ON",
+                  "De": "EIN",
+                  "Es": "ENC"
+                },
+                "label_inactive": {
+                  "En": "OFF",
+                  "Fr": "OFF",
+                  "De": "AUS",
+                  "Es": "DES"
+                },
                 "style": {
                   "active_text_color": "#1a1a1a",
                   "text_color": "#888888",

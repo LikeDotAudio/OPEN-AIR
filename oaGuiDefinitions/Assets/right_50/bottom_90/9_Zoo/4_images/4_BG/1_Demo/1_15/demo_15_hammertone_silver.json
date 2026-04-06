@@ -14,7 +14,12 @@
       "fields": {
         "Meter_1": {
           "type": "_NeedleVUMeter",
-          "label": "Super_Gem 1",
+          "label": {
+            "En": "Super_Gem 1",
+            "Fr": "Super_Gem 1",
+            "De": "Super_Gem 1",
+            "Es": "Super_Gem 1"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -37,7 +42,12 @@
               "overlay_style": "aperture_mask"
             }
           },
-          "label_active": "Super_Gem 1",
+          "label_active": {
+            "En": "Super_Gem 1",
+            "Fr": "Super_Gem 1",
+            "De": "Super_Gem 1",
+            "Es": "Super_Gem 1"
+          },
           "width": 250,
           "height": 250,
           "Orientation": "vertical",
@@ -57,7 +67,12 @@
         },
         "Meter_2": {
           "type": "_NeedleVUMeter",
-          "label": "Gem 2",
+          "label": {
+            "En": "Gem 2",
+            "Fr": "Gem 2",
+            "De": "Gem 2",
+            "Es": "Gem 2"
+          },
           "geometry": {
             "width": 250,
             "height": 250
@@ -80,7 +95,12 @@
               "overlay_style": "aperture_mask"
             }
           },
-          "label_active": "Gem 2",
+          "label_active": {
+            "En": "Gem 2",
+            "Fr": "Gem 2",
+            "De": "Gem 2",
+            "Es": "Gem 2"
+          },
           "width": 250,
           "height": 250,
           "Orientation": "vertical",
@@ -100,7 +120,12 @@
         },
         "Meter_3": {
           "type": "_NeedleVUMeter",
-          "label": "Gem 3",
+          "label": {
+            "En": "Gem 3",
+            "Fr": "Gem 3",
+            "De": "Gem 3",
+            "Es": "Gem 3"
+          },
           "geometry": {
             "width": 300,
             "height": 250
@@ -123,7 +148,12 @@
               "overlay_style": "aperture_mask"
             }
           },
-          "label_active": "Gem 3",
+          "label_active": {
+            "En": "Gem 3",
+            "Fr": "Gem 3",
+            "De": "Gem 3",
+            "Es": "Gem 3"
+          },
           "width": 350,
           "height": 200,
           "Orientation": "vertical",

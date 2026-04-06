@@ -13,7 +13,12 @@
     "blocks": {
       "NextGen_Dual_Pivots": {
         "type": "OcaBlock",
-        "description": "Next Gen Dual Pivot Meter Designs",
+        "description": {
+          "En": "Next Gen Dual Pivot Meter Designs",
+          "Fr": "Suivant Gen Dual Pivot Meter Designs",
+          "De": "Weiter Gen Dual Pivot Meter Designs",
+          "Es": "Siguiente Gen Dual Pivot Meter Designs"
+        },
         "layout_columns": 1,
         "column_sizing": [
           {
@@ -23,7 +28,12 @@
         "fields": {
           "stereo_diamond_meter": {
             "type": "_SmartMeter",
-            "label": "Horizontal Stereo Diamond",
+            "label": {
+              "En": "Horizontal Stereo Diamond",
+              "Fr": "Horizontal Stereo Diamond",
+              "De": "Horizontal Stereo Diamond",
+              "Es": "Horizontal Stereo Diamond"
+            },
             "notes": "Mirrored opposing mechanical entities in a unified geometric housing.",
             "geometry": {
               "width": 500,
@@ -71,7 +81,12 @@
           },
           "intersecting_overlay_meter": {
             "type": "_SmartMeter",
-            "label": "Intersecting Overlay",
+            "label": {
+              "En": "Intersecting Overlay",
+              "Fr": "Intersecting Overlay",
+              "De": "Intersecting Overlay",
+              "Es": "Intersecting Overlay"
+            },
             "notes": "Scissors action needles with opposing top-left and bottom-right pivots.",
             "geometry": {
               "width": 500,
